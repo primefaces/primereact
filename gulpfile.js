@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     
 gulp.task('build-css', function() {
 	gulp.src([
-        'src/components/common/common.css',
+        'src/components/common/Common.css',
 		'src/components/**/*.css'
     ])
 	.pipe(concat('primeng.css'))
@@ -18,7 +18,7 @@ gulp.task('build-css', function() {
 
 gulp.task('build-css-prod', function() {
     gulp.src([
-        'src/components/common/common.css',
+        'src/components/common/Common.css',
 		'src/components/**/*.css'
     ])
 	.pipe(concat('primeng.css'))
