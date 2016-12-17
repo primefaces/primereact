@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
 
+export class TabPanel extends Component {
+    
+    render() {        
+        return <div>{this.props.children}</div>;
+    }
+}
+
 export class TabView extends Component {
     
     constructor() {
@@ -25,7 +32,7 @@ export class TabView extends Component {
         return (
             <div className="ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-top">
                 <ul className="ui-tabview-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-                    {this.props.children.map((tab,i) => {
+                    {React.Children.map(this.props.children, (tab,i) => {
                             return <li className={this.getTabHeaderClass(i)} role="tab">
                                 <a href="#" onClick={(e) => this.onTabClick(e,i)}>
                                     <span className="ui-tabview-title">{tab.props.header}</span>
@@ -35,11 +42,12 @@ export class TabView extends Component {
                     }
                 </ul>
                 <div className="ui-tabview-panels">
-                    {this.props.children.map((tab,i) =>
-                        <div className="ui-tabview-panel ui-widget-content" style={this.state.activeIndex === i ? {display:'block'} : {display:'none'}}>
+                    {React.Children.map(this.props.children, (tab,i) => {
+                        return <div className="ui-tabview-panel ui-widget-content" style={this.state.activeIndex === i ? {display:'block'} : {display:'none'}}>
                             {tab}
                         </div>
-                    )}
+                    })
+                }
                 </div>
             </div>
         );

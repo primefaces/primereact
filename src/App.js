@@ -3,8 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {InputText} from './components/inputtext/InputText';
 import {Panel} from './components/panel/Panel';
-import {TabPanel} from './components/tabview/TabPanel';
-import {TabView} from './components/tabview/TabView';
+import {TabPanel,TabView} from './components/tabview/TabView';
 
 class App extends Component {
     
@@ -17,10 +16,20 @@ class App extends Component {
         </div>
         <div className="Content">
             <h2>InputText</h2>
-            <InputText />
+            <InputText placeholder="Prime"/>
             
             <h2>Panel</h2>            
             <Panel header="Godfather">
+                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding. 
+                His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business. 
+                Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head 
+                of the family, kind and benevolent to those who give respect, 
+                but given to ruthless violence whenever anything stands against the good of the family.
+            </Panel>
+            
+            <br />
+            
+            <Panel header={<div><span>Custom Content</span><button type="button" className="ui-button ui-state-default ui-button-text-only ui-corner-all" style={{float:'right'}}><span className="ui-button-text">Close</span></button></div>}>
                 The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding. 
                 His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business. 
                 Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head 
