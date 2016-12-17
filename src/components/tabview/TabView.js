@@ -15,9 +15,10 @@ export class TabView extends Component {
         this.getTabHeaderClass = this.getTabHeaderClass.bind(this);
     }
     
-    onTabClick(event, index) {
-        this.setState({activeIndex:index});
-        event.preventDefault();
+    onTabClick(e, i) {
+        this.setState({activeIndex:i});
+        this.props.onTabChange({originalEvent: e, index: i});
+        e.preventDefault();
     }
     
     getTabHeaderClass(index) {

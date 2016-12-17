@@ -6,6 +6,16 @@ import {Panel} from './components/panel/Panel';
 import {TabPanel,TabView} from './components/tabview/TabView';
 
 class App extends Component {
+        
+    constructor() {
+        super();
+
+        this.handleTabChange = this.handleTabChange.bind(this);
+    }
+        
+  handleTabChange(e) {
+      console.log('Tab Changed ' + e.index);
+  }
     
   render() {
     return (
@@ -38,7 +48,7 @@ class App extends Component {
             </Panel>
             
             <h2>TabView</h2>            
-            <TabView>
+            <TabView onTabChange={this.handleTabChange}>
                 <TabPanel header="Godfather I">
                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding. 
                     His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business. 
