@@ -14,7 +14,7 @@ export class InputTextDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
+                    <h3>Basic</h3>
                     <InputText />
 
                     <h3>Disabled</h3>

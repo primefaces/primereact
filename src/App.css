@@ -441,15 +441,18 @@ input.searchInput {
     background-color: #FFFFFF;
     overflow: visible;
 }
-.implementation > h3 {
+.implementation h3:first-child {
+    margin-top: 0px !important;
+}
+.implementation h3 {
     margin-top: 30px;
     color: #5C666A;
 }
-.implementation h3.first {
-    margin-top: 0px !important;
-}
 .implementation h4 {
     color: #5C666A;
+}
+.implementation.button-demo button {
+    margin-right: .25em;
 }
 
 .SubSubMenu {

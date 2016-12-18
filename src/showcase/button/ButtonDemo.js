@@ -23,9 +23,9 @@ export class ButtonDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <Button label="Click" onClick={this.increment}/>
+                    <Button label="Click" onClick={this.increment} />
                     <Button label="Click" icon="fa-check" onClick={this.increment}/>
                     <Button label="Click" icon="fa-check" iconPos="right" onClick={this.increment}/>
                     <Button icon="fa-check" onClick={this.increment}/>
