@@ -18,16 +18,24 @@
                         </span>
 
                         <a>
-                            <img src="showcase/resources/images/mono/input.svg"></img>
+                            <img alt="input" src="showcase/resources/images/mono/input.svg"></img>
                             <span>Input</span>
                         </a>
                         <div>
                             <Link to="/inputtext">&#9679; InputText</Link>
                         </div>
 
+                         <a>
+                            <img alt="button" src="showcase/resources/images/mono/button.svg"></img>
+                            <span>Button</span>
+                        </a>
+                        <div>
+                            <Link to="/button">&#9679; Button</Link>
+                        </div>
+
                         <a>
-                            <img src="showcase/resources/images/mono/panel.svg"></img>
-                            <span>Panels</span>
+                            <img alt="button" src="showcase/resources/images/mono/panel.svg"></img>
+                            <span>Panel</span>
                         </a>
                         <div>
                             <Link to="/panel">&#9679; Panel</Link>
@@ -47,7 +55,7 @@
                             </a>
 
                             <span className="topbar-link" id="themeSwitcher">
-                                <img src="showcase/resources/images/themeswitcher.svg" />
+                                <img alt="themeswitcher" src="showcase/resources/images/themeswitcher.svg" />
                                 <span>Themes</span>
                                 <div id="GlobalThemeSwitcher">
                                     <span>Premium Templates</span>
@@ -79,7 +87,7 @@
                             </a>
 
                             <div className="mobile-logo">
-                                <img src="showcase/resources/images/primeng-sidebar.svg" />
+                                <img alt="mobile-logo" src="showcase/resources/images/primeng-sidebar.svg" />
                             </div>
                         </div>
 
