@@ -26,7 +26,8 @@ export class InputTextDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <InputText />
+                    <InputText onChange={(e) => this.setState({value: e.target.value})}/>
+                    <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
 
                     <h3>Disabled</h3>
                     <InputText disabled={this.state.disabled} style={{marginRight:'.25em'}}/>
