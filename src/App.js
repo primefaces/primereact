@@ -24,6 +24,7 @@
                         </a>
                         <div>
                             <Link to="/inputtext">&#9679; InputText</Link>
+                            <Link to="/inputtextarea">&#9679; InputTextarea</Link>
                         </div>
 
                          <a>
