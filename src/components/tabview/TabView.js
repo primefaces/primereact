@@ -7,6 +7,14 @@ export class TabPanel extends Component {
     }
 }
 
+TabPanel.defaultProps = {
+    header: null
+}
+
+TabPanel.propTypes = {
+    header: React.PropTypes.string
+};
+
 export class TabView extends Component {
     
     constructor() {
@@ -54,3 +62,11 @@ export class TabView extends Component {
         );
     }
 }
+
+TabView.defaultProps = {
+    activeIndex: null
+}
+
+TabView.propTypes = {
+    activeIndex: React.PropTypes.number
+};

@@ -12,4 +12,6 @@ export class InputText extends Component {
     }
 }
 
-InputText.defaultProps = {}
+InputText.defaultProps = {};
+
+InputText.propTypes = {};

@@ -34,3 +34,9 @@ Button.defaultProps = {
     icon: null,
     iconPos: 'left'
 }
+
+Button.propTypes = {
+    label: React.PropTypes.string,
+    icon: React.PropTypes.string,
+    iconPos: React.PropTypes.string
+};

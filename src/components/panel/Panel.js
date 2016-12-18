@@ -17,3 +17,11 @@ export class Panel extends Component {
         );
     }
 }
+
+Panel.defaultProps = {
+    header: null
+}
+
+Panel.propTypes = {
+    header: React.PropTypes.any
+};
