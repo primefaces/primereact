@@ -13,11 +13,14 @@ body {
 }
 
 #layout-sidebar {
-    float: left;
+    position: fixed;
+    left: 0;
+    top: 0;
     background-color: #313b3f;
     border-right: solid 1px #151d21;
     overflow: hidden;
-    width: 299px;
+    width: 300px;
+    box-sizing: border-box;
 }
 
 .layout-logo {

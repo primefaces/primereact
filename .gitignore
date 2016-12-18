@@ -2,3 +2,4 @@ node_modules
 resources/*.css
 public/resources
 .vscode
+.DS_Store

@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
+import {Button} from '../../components/button/Button';
 
 export class InputTextDemo extends Component {
         
+    constructor() {
+        super();
+        this.state = {};
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState({disabled: !this.state.disabled});
+    }
+
     render() {
         return (
             <div>
@@ -18,9 +29,9 @@ export class InputTextDemo extends Component {
                     <InputText />
 
                     <h3>Disabled</h3>
-                    <InputText disabled="disabled"/>
+                    <InputText disabled={this.state.disabled} style={{marginRight:'.25em'}}/>
 
-                    <button type="button" label="Toggle"></button>
+                    <Button label="Toggle" onClick={this.toggle}/>
                 </div>
             </div>
         )
