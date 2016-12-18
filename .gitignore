@@ -1,5 +1,4 @@
 node_modules
-resources/*.css
-public/resources
+public/resources/*.css
 .vscode
 .DS_Store
