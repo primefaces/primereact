@@ -11,11 +11,11 @@ export class ListboxDemo extends Component {
     }
 
     onCityChange(e) {
-        this.setState({cityValue: e.value, cityIndex: e.index});
+        this.setState({city: e.value});
     }
 
     onCarChange(e) {
-        this.setState({carValue: e.value, carIndex: e.index});
+        this.setState({car: e.value});
     }
 
     carTemplate(option) {
@@ -31,11 +31,11 @@ export class ListboxDemo extends Component {
 
     render() {
         var cities = [
-            {label: 'New York', value: 0},
-            {label: 'Rome', value: 1},
-            {label: 'London', value: 2},
-            {label: 'Istanbul', value: 3},
-            {label: 'Paris', value: 4}
+            {label: 'New York', value: 'New York'},
+            {label: 'Rome', value: 'Rome'},
+            {label: 'London', value: 'London'},
+            {label: 'Istanbul', value: 'Istanbul'},
+            {label: 'Paris', value: 'Paris'},
         ];
 
         var cars = [
@@ -61,12 +61,12 @@ export class ListboxDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Listbox options={cities} onChange={this.onCityChange} />
-                    <div style={{marginTop: '.5em'}}>{this.state.cityValue >= 0 ? 'Selected City: ' + cities[this.state.cityIndex].label : 'No city selected'}</div>
+                    <Listbox value={this.state.city} options={cities} onChange={this.onCityChange} />
+                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Listbox options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
-                    <div style={{marginTop: '.5em'}}>{this.state.carValue ? 'Selected Car: ' + cars[this.state.carIndex].label : 'No car selected'}</div>
+                    <Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
+                    <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
                 </div>
             </div>
         );

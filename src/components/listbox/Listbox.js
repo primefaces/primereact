@@ -21,8 +21,10 @@ export class Listbox extends Component {
             <div className={styleClass} style={this.props.style}>
                 <ul className="ui-listbox-list">
                     {this.props.options && this.props.options.map((option, index) => {
-                        var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label;
-                        var listItem = <li className="ui-listbox-item ui-corner-all" key={option.value}
+                        var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label,
+                        selected = this.props.value != null && this.props.value === option.value,
+                        listItemStyleClass = classNames('ui-listbox-item ui-corner-all',{'ui-state-highlight': selected}),
+                        listItem = <li className={listItemStyleClass} key={option.value}
                                         onClick={(event) => this.onOptionClick(event, option, index)}>
                                         {listItemContent}
                                     </li>;
@@ -35,6 +37,7 @@ export class Listbox extends Component {
 }
 
 Listbox.defaultProps = {
+    value: null,
     options: null,
     onChange: null,
     itemTemplate: null,
@@ -43,6 +46,7 @@ Listbox.defaultProps = {
 };
 
 Listbox.propTypes = {
+    value: React.PropTypes.object,
     options: React.PropTypes.array,
     onChange: React.PropTypes.func,
     itemTemplate: React.PropTypes.func,
