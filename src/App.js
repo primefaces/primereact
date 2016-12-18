@@ -1,4 +1,5 @@
     import React, {Component} from 'react';
+    import {Link} from 'react-router';
     import './App.css';
 
     class App extends Component {
@@ -25,7 +26,7 @@
                             <span>Input</span>
                         </a>
                         <div>
-                            <a href="#inputtext">&#9679; InputText</a>
+                            <Link to="/inputtext">&#9679; InputText</Link>
                         </div>
                     </div>
 
@@ -78,7 +79,7 @@
                         </div>
 
                         <div>
-                            Content Goes Here
+                            {this.props.children}
                         </div>
 
                         <div className="content-section footer clearfix">

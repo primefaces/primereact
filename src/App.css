@@ -140,15 +140,16 @@ body {
     background-color: #f5f7f8;
 }
 
-.content-section:first-of-type > div > span {
-    line-height: 1.5em;
-} 
-
-.feature-title {
+.feature-intro h1 {
     font-size: 30px;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
     display: block;
     color: #fca752;
+}
+
+.feature-intro p {
+    margin: 0;
+    line-height: 1.5em;
 }
 
 #topbar {
