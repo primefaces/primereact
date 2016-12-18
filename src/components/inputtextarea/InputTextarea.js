@@ -33,10 +33,10 @@ export class InputTextarea extends Component {
         lines = this.textareaElement.value.split('\n');
 
         for(let i = lines.length-1; i >= 0 ; --i) {
-            linesCount += Math.floor((lines[i].length / parseInt(this.props.cols)) + 1);
+            linesCount += Math.floor((lines[i].length / parseInt(this.props.cols, 10)) + 1);
         }
 
-        this.textareaElement.rows = (linesCount >= parseInt(this.props.rows)) ? (linesCount + 1) : parseInt(this.props.rows);
+        this.textareaElement.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
     }
 
     render() {
