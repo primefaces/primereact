@@ -1,6 +1,7 @@
     import React, {Component} from 'react';
     import {Link} from 'react-router';
     import './App.css';
+    import 'font-awesome/css/font-awesome.css';
 
     class App extends Component {
             
