@@ -7,10 +7,26 @@ export class ListboxDemo extends Component {
         super();
         this.state = {};
         this.onCityChange = this.onCityChange.bind(this);
+        this.onCarChange = this.onCarChange.bind(this);
     }
 
     onCityChange(e) {
         this.setState({cityValue: e.value, cityIndex: e.index});
+    }
+
+    onCarChange(e) {
+        this.setState({carValue: e.value, carIndex: e.index});
+    }
+
+    carTemplate(option) {
+        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+
+        return (
+            <div className="ui-helper-clearfix">
+                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} />
+                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
+            </div>
+        );
     }
 
     render() {
@@ -21,7 +37,19 @@ export class ListboxDemo extends Component {
             {label: 'Istanbul', value: 3},
             {label: 'Paris', value: 4}
         ];
-        
+
+        var cars = [
+            {label: 'Audi', value: 'Audi'},
+            {label: 'BMW', value: 'BMW'},
+            {label: 'Fiat', value: 'Fiat'},
+            {label: 'Honda', value: 'Honda'},
+            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Mercedes', value: 'Mercedes'},
+            {label: 'Renault', value: 'Renault'},
+            {label: 'VW', value: 'VW'},
+            {label: 'Volvo', value: 'Volvo'}
+        ];
+
         return (
             <div>
                 <div className="content-section">
@@ -33,8 +61,12 @@ export class ListboxDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Listbox options={cities} onChange={this.onCityChange}/>
-                    <div>{this.state.cityValue >= 0 ? 'Selected City: ' + cities[this.state.cityIndex].label : 'No city selected'}</div>
+                    <Listbox options={cities} onChange={this.onCityChange} />
+                    <div style={{marginTop: '.5em'}}>{this.state.cityValue >= 0 ? 'Selected City: ' + cities[this.state.cityIndex].label : 'No city selected'}</div>
+
+                    <h3>Advanced</h3>
+                    <Listbox options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
+                    <div style={{marginTop: '.5em'}}>{this.state.carValue ? 'Selected Car: ' + cars[this.state.carIndex].label : 'No car selected'}</div>
                 </div>
             </div>
         );

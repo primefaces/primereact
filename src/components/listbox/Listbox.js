@@ -18,13 +18,15 @@ export class Listbox extends Component {
         });
 
         return (
-            <div className={styleClass}>
+            <div className={styleClass} style={this.props.style}>
                 <ul className="ui-listbox-list">
                     {this.props.options && this.props.options.map((option, index) => {
-                        return <li className="ui-listbox-item ui-corner-all" key={option.value}
-                                onClick={(event) => this.onOptionClick(event, option, index)}>
-                            {option.label}
-                        </li>
+                        var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label;
+                        var listItem = <li className="ui-listbox-item ui-corner-all" key={option.value}
+                                        onClick={(event) => this.onOptionClick(event, option, index)}>
+                                        {listItemContent}
+                                    </li>;
+                        return listItem;
                     })}
                 </ul>
             </div>
@@ -34,10 +36,16 @@ export class Listbox extends Component {
 
 Listbox.defaultProps = {
     options: null,
-    onChange: null
+    onChange: null,
+    itemTemplate: null,
+    style: null,
+    className: null
 };
 
 Listbox.propTypes = {
     options: React.PropTypes.array,
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    itemTemplate: React.PropTypes.func,
+    style: React.PropTypes.object,
+    className: React.PropTypes.string
 };
