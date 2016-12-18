@@ -4,10 +4,6 @@
 
     class App extends Component {
             
-        constructor() {
-            super();
-        }
-
         render() {
             return (
                 <div className="layout-wrapper">
@@ -27,6 +23,15 @@
                         </a>
                         <div>
                             <Link to="/inputtext">&#9679; InputText</Link>
+                        </div>
+
+                        <a>
+                            <img src="showcase/resources/images/mono/panel.svg"></img>
+                            <span>Panels</span>
+                        </a>
+                        <div>
+                            <Link to="/panel">&#9679; Panel</Link>
+                            <Link to="/tabview">&#9679; TabView</Link>
                         </div>
                     </div>
 

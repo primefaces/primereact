@@ -24,17 +24,17 @@
     font-size: 100%;
     list-style: none;
 }
+
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
-    content: "";
+    content: " ";
     display: table;
 }
+
 .ui-helper-clearfix:after {
     clear: both;
 }
-.ui-helper-clearfix {
-    zoom: 1;
-}
+
 .ui-helper-zfix {
     width: 100%;
     height: 100%;
