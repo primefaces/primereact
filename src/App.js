@@ -1,80 +1,99 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {InputText} from './components/inputtext/InputText';
-import {Panel} from './components/panel/Panel';
-import {TabPanel,TabView} from './components/tabview/TabView';
+    import React, {Component} from 'react';
+    import './App.css';
 
-class App extends Component {
-        
-    constructor() {
-        super();
+    class App extends Component {
+            
+        constructor() {
+            super();
+        }
 
-        this.handleTabChange = this.handleTabChange.bind(this);
-    }
-        
-  handleTabChange(e) {
-      console.log('Tab Changed ' + e.index);
-  }
+        render() {
+            return (
+                <div className="layout-wrapper">
+                    <div id="layout-sidebar">
+                        <span className="layout-logo">
+                            <a href="#" className="sidebar-logo">
+                                <img alt="logo" src="showcase/resources/images/logo.png" />
+                            </a>
+                            <a href="#" id="menu-button-mobile">
+                                <img alt="logo" src="showcase/resources/images/menuicon.svg"/>
+                            </a>
+                        </span>
+
+                        <a>
+                            <img src="showcase/resources/images/mono/input.svg"></img>
+                            <span>Input</span>
+                        </a>
+                        <div>
+                            <a href="#inputtext">&#9679; InputText</a>
+                        </div>
+                    </div>
+
+                    <div id="layout-content">
+                        <div id="topbar">
+                            <a href="#" id="menu-button">
+                                <img alt="logo" src="showcase/resources/images/menuicon.svg"/>
+                            </a>
+
+                            <a href="http://forum.primefaces.org/viewforum.php?f=35" className="topbar-link">
+                                <img alt="mockosx" src="showcase/resources/images/community.svg" />
+                                <span>Forum</span>
+                            </a>
+
+                            <span className="topbar-link" id="themeSwitcher">
+                                <img src="showcase/resources/images/themeswitcher.svg" />
+                                <span>Themes</span>
+                                <div id="GlobalThemeSwitcher">
+                                    <span>Premium Templates</span>
+                                    <a href="http://www.primefaces.org/layouts/ultima-ng"><img src="showcase/resources/images/themeswitcher-ultima.png" alt="Ultima Template" /><span className="ui-text">Ultima</span></a>
+                                    <a href="http://www.primefaces.org/layouts/omega-ng"><img src="showcase/resources/images/themeswitcher-omega.png" alt="Omega Template" /><span className="ui-text">Omega</span></a>
+                                    <span>Free Themes</span>
+                                    <a href="#" data-theme="omega" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-omega"></span><span className="ui-text">Omega</span></a>
+                                    <a href="#" data-theme="bootstrap" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-bootstrap"></span><span className="ui-text">Bootstrap</span></a>
+                                    <a href="#" data-theme="aristo" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-aristo"></span><span className="ui-text">Aristo</span></a>
+                                    <a href="#" data-theme="cupertino" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-cupertino"></span><span className="ui-text">Cupertino</span></a>
+                                    <a href="#" data-theme="cruze" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-cruze"></span><span className="ui-text">Cruze</span></a>
+                                    <a href="#" data-theme="darkness" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-ui-darkness"></span><span className="ui-text">Darkness</span></a>
+                                    <a href="#" data-theme="delta" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-delta"></span><span className="ui-text">Delta</span></a>
+                                    <a href="#" data-theme="flick" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-flick"></span><span className="ui-text">Flick</span></a>
+                                    <a href="#" data-theme="home" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-home"></span><span className="ui-text">Home</span></a>
+                                    <a href="#" data-theme="lightness" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-ui-lightness"></span><span className="ui-text">Lightness</span></a>
+                                    <a href="#" data-theme="pepper-grinder" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-pepper-grinder"></span><span className="ui-text">Pepper-Grinder</span></a>
+                                    <a href="#" data-theme="redmond" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-redmond"></span><span className="ui-text">Redmond</span></a>
+                                    <a href="#" data-theme="rocket" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-rocket"></span><span className="ui-text">Rocket</span></a>
+                                    <a href="#" data-theme="south-street" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-south-street"></span><span className="ui-text">South-Street</span></a>
+                                    <a href="#" data-theme="start" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-start"></span><span className="ui-text">Start</span></a>
+                                    <a href="#" data-theme="trontastic" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-trontastic"></span><span className="ui-text">Trontastic</span></a>
+                                </div>
+                            </span>
+                            
+                            <a href="setup.html" className="topbar-link">
+                                <img alt="mockosx" src="showcase/resources/images/setup.svg" />
+                                <span>Setup</span>
+                            </a>
+
+                            <div className="mobile-logo">
+                                <img src="showcase/resources/images/primeng-sidebar.svg" />
+                            </div>
+                        </div>
+
+                        <div>
+                            Content Goes Here
+                        </div>
+
+                        <div className="content-section footer clearfix">
+                            <span><a href="http://www.primetek.com.tr">PrimeTek</a>, Copyright &copy; 2016</span>
+                            <span>All rights reserved</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            );
+        }
+            
     
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to PrimeReact</h2>
-        </div>
-        <div className="Content">
-            <h2>InputText</h2>
-            <InputText placeholder="Prime"/>
-            
-            <h2>Panel</h2>            
-            <Panel header="Godfather">
-                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding. 
-                His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business. 
-                Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head 
-                of the family, kind and benevolent to those who give respect, 
-                but given to ruthless violence whenever anything stands against the good of the family.
-            </Panel>
-            
-            <br />
-            
-            <Panel header={<div><span>Custom Content</span><button type="button" className="ui-button ui-state-default ui-button-text-only ui-corner-all" style={{float:'right'}}><span className="ui-button-text">Close</span></button></div>}>
-                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding. 
-                His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business. 
-                Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head 
-                of the family, kind and benevolent to those who give respect, 
-                but given to ruthless violence whenever anything stands against the good of the family.
-            </Panel>
-            
-            <h2>TabView</h2>            
-            <TabView onTabChange={this.handleTabChange}>
-                <TabPanel header="Godfather I">
-                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding. 
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business. 
-                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head 
-                    of the family, kind and benevolent to those who give respect, 
-                    but given to ruthless violence whenever anything stands against the good of the family.
-                </TabPanel>
-                <TabPanel header="Godfather II">
-                    Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young 
-                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of 
-                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. 
-                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand 
-                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
-                </TabPanel>
-                <TabPanel header="Godfather III">
-                    After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this 
-                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, 
-                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
-                </TabPanel>
-                
-            </TabView>
-        </div>
-      </div>
-    );
-  }
-  
-}
+    
+    }
 
-export default App;
+    export default App;
