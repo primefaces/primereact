@@ -899,3 +899,10 @@ pre {
     width: 38px;
     text-align: center;
 }
+
+/* Demos */
+.grid-demo .ui-g div {
+    background-color: #ededed;
+    text-align: center;
+    border: 1px solid #fafafa;
+}
