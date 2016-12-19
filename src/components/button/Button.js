@@ -12,6 +12,11 @@ export class Button extends Component {
                 'ui-state-disabled': this.props.disabled
         }),
         iconStyleClass = null;
+
+        var buttonProps = Object.assign({}, this.props);
+        delete buttonProps.iconPos;
+        delete buttonProps.icon;
+        delete buttonProps.label;
         
         if(this.props.icon) {
             iconStyleClass = classNames(this.props.icon, 'ui-c fa fa-fw', {
@@ -21,7 +26,7 @@ export class Button extends Component {
         }
 
         return (
-            <button {...this.props} type="button" className={styleClass}>
+            <button {...buttonProps} type="button" className={styleClass}>
                 {this.props.icon && <span className={iconStyleClass}></span>}
                 <span className="ui-button-text ui-c">{this.props.label||'ui-button'}</span>
             </button>
