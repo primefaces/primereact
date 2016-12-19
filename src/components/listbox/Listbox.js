@@ -46,7 +46,7 @@ Listbox.defaultProps = {
 };
 
 Listbox.propTypes = {
-    value: React.PropTypes.object,
+    value: React.PropTypes.any,
     options: React.PropTypes.array,
     onChange: React.PropTypes.func,
     itemTemplate: React.PropTypes.func,
