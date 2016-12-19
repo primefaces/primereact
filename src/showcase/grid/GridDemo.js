@@ -124,10 +124,10 @@ export class GridDemo extends Component {
                                 </div>
                                 
                                 <div className="ui-g">
-                                    <div className="ui-g-6 ui-md-3"><img src="showcase/resources/demo/images/galleria/galleria1.jpg" style={{width:'100%'}} /></div>  
-                                    <div className="ui-g-6 ui-md-3"><img src="showcase/resources/demo/images/galleria/galleria2.jpg" style={{width:'100%'}} /></div> 
-                                    <div className="ui-g-6 ui-md-3"><img src="showcase/resources/demo/images/galleria/galleria3.jpg" style={{width:'100%'}} /></div>    
-                                    <div className="ui-g-6 ui-md-3"><img src="showcase/resources/demo/images/galleria/galleria4.jpg" style={{width:'100%'}} /></div>      
+                                    <div className="ui-g-6 ui-md-3"><img alt="Galleria 1" src="showcase/resources/demo/images/galleria/galleria1.jpg" style={{width:'100%'}} /></div>  
+                                    <div className="ui-g-6 ui-md-3"><img alt="Galleria 2" src="showcase/resources/demo/images/galleria/galleria2.jpg" style={{width:'100%'}} /></div> 
+                                    <div className="ui-g-6 ui-md-3"><img alt="Galleria 3" src="showcase/resources/demo/images/galleria/galleria3.jpg" style={{width:'100%'}} /></div>    
+                                    <div className="ui-g-6 ui-md-3"><img alt="Galleria 4" src="showcase/resources/demo/images/galleria/galleria4.jpg" style={{width:'100%'}} /></div>      
                                 </div>
                                 
                                 <div className="ui-g">

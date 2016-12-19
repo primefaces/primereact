@@ -43,6 +43,7 @@
                             <span>Panel</span>
                         </a>
                         <div>
+                            <Link to="/accordion">&#9679; Accordion</Link>
                             <Link to="/fieldset">&#9679; Fieldset</Link>
                             <Link to="/grid">&#9679; Grid</Link>
                             <Link to="/panel">&#9679; Panel</Link>
@@ -69,22 +70,22 @@
                                     <a href="http://www.primefaces.org/layouts/ultima-ng"><img src="showcase/resources/images/themeswitcher-ultima.png" alt="Ultima Template" /><span className="ui-text">Ultima</span></a>
                                     <a href="http://www.primefaces.org/layouts/omega-ng"><img src="showcase/resources/images/themeswitcher-omega.png" alt="Omega Template" /><span className="ui-text">Omega</span></a>
                                     <span>Free Themes</span>
-                                    <a href="#" data-theme="omega" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-omega"></span><span className="ui-text">Omega</span></a>
-                                    <a href="#" data-theme="bootstrap" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-bootstrap"></span><span className="ui-text">Bootstrap</span></a>
-                                    <a href="#" data-theme="aristo" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-aristo"></span><span className="ui-text">Aristo</span></a>
-                                    <a href="#" data-theme="cupertino" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-cupertino"></span><span className="ui-text">Cupertino</span></a>
-                                    <a href="#" data-theme="cruze" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-cruze"></span><span className="ui-text">Cruze</span></a>
-                                    <a href="#" data-theme="darkness" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-ui-darkness"></span><span className="ui-text">Darkness</span></a>
-                                    <a href="#" data-theme="delta" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-delta"></span><span className="ui-text">Delta</span></a>
-                                    <a href="#" data-theme="flick" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-flick"></span><span className="ui-text">Flick</span></a>
-                                    <a href="#" data-theme="home" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-home"></span><span className="ui-text">Home</span></a>
-                                    <a href="#" data-theme="lightness" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-ui-lightness"></span><span className="ui-text">Lightness</span></a>
-                                    <a href="#" data-theme="pepper-grinder" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-pepper-grinder"></span><span className="ui-text">Pepper-Grinder</span></a>
-                                    <a href="#" data-theme="redmond" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-redmond"></span><span className="ui-text">Redmond</span></a>
-                                    <a href="#" data-theme="rocket" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-rocket"></span><span className="ui-text">Rocket</span></a>
-                                    <a href="#" data-theme="south-street" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-south-street"></span><span className="ui-text">South-Street</span></a>
-                                    <a href="#" data-theme="start" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-start"></span><span className="ui-text">Start</span></a>
-                                    <a href="#" data-theme="trontastic" onclick="DemoApp.changeTheme(event, this)"><span className="ui-theme ui-theme-trontastic"></span><span className="ui-text">Trontastic</span></a>
+                                    <a href="#" data-theme="omega"><span className="ui-theme ui-theme-omega"></span><span className="ui-text">Omega</span></a>
+                                    <a href="#" data-theme="bootstrap"><span className="ui-theme ui-theme-bootstrap"></span><span className="ui-text">Bootstrap</span></a>
+                                    <a href="#" data-theme="aristo"><span className="ui-theme ui-theme-aristo"></span><span className="ui-text">Aristo</span></a>
+                                    <a href="#" data-theme="cupertino"><span className="ui-theme ui-theme-cupertino"></span><span className="ui-text">Cupertino</span></a>
+                                    <a href="#" data-theme="cruze"><span className="ui-theme ui-theme-cruze"></span><span className="ui-text">Cruze</span></a>
+                                    <a href="#" data-theme="darkness"><span className="ui-theme ui-theme-ui-darkness"></span><span className="ui-text">Darkness</span></a>
+                                    <a href="#" data-theme="delta"><span className="ui-theme ui-theme-delta"></span><span className="ui-text">Delta</span></a>
+                                    <a href="#" data-theme="flick"><span className="ui-theme ui-theme-flick"></span><span className="ui-text">Flick</span></a>
+                                    <a href="#" data-theme="home"><span className="ui-theme ui-theme-home"></span><span className="ui-text">Home</span></a>
+                                    <a href="#" data-theme="lightness"><span className="ui-theme ui-theme-ui-lightness"></span><span className="ui-text">Lightness</span></a>
+                                    <a href="#" data-theme="pepper-grinder"><span className="ui-theme ui-theme-pepper-grinder"></span><span className="ui-text">Pepper-Grinder</span></a>
+                                    <a href="#" data-theme="redmond"><span className="ui-theme ui-theme-redmond"></span><span className="ui-text">Redmond</span></a>
+                                    <a href="#" data-theme="rocket"><span className="ui-theme ui-theme-rocket"></span><span className="ui-text">Rocket</span></a>
+                                    <a href="#" data-theme="south-street"><span className="ui-theme ui-theme-south-street"></span><span className="ui-text">South-Street</span></a>
+                                    <a href="#" data-theme="start"><span className="ui-theme ui-theme-start"></span><span className="ui-text">Start</span></a>
+                                    <a href="#" data-theme="trontastic"><span className="ui-theme ui-theme-trontastic"></span><span className="ui-text">Trontastic</span></a>
                                 </div>
                             </span>
                             
