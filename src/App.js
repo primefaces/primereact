@@ -43,6 +43,7 @@
                             <span>Panel</span>
                         </a>
                         <div>
+                            <Link to="/fieldset">&#9679; Fieldset</Link>
                             <Link to="/panel">&#9679; Panel</Link>
                             <Link to="/tabview">&#9679; TabView</Link>
                         </div>
