@@ -28,14 +28,14 @@ export class Button extends Component {
         return (
             <button {...buttonProps} type="button" className={styleClass}>
                 {this.props.icon && <span className={iconStyleClass}></span>}
-                <span className="ui-button-text ui-c">{this.props.label||'ui-button'}</span>
+                <span className="ui-button-text ui-c">{this.props.label}</span>
             </button>
         );
     }
 }
 
 Button.defaultProps = {
-    label: null,
+    label: 'ui-button',
     icon: null,
     iconPos: 'left'
 }
