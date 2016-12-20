@@ -20,18 +20,10 @@ export class ToggleButton extends Component {
             'ui-state-active': this.state.checked,
             'ui-state-disabled': this.props.disabled
         }),
-        onIconStyleClass = null,
-        offIconStyleClass = null;
+        iconStyleClass = null;
 
-        if(this.props.onIcon) {
-            onIconStyleClass = classNames('ui-c fa fa-fw' , this.props.onIcon , {
-                'ui-button-icon-only': (this.props.onIcon && this.props.offIcon) && (!this.props.onLabel || !this.props.offLabel),
-                'ui-button-icon-left': (this.props.onIcon && this.props.offIcon)
-            });
-        }
-
-        if(this.props.offIcon) {
-            offIconStyleClass = classNames('ui-c fa fa-fw' , this.props.offIcon , {
+        if(this.props.onIcon || this.props.offIcon) {
+            iconStyleClass = classNames('ui-c fa fa-fw' , this.state.checked ? this.props.onIcon : this.props.offIcon , {
                 'ui-button-icon-only': (this.props.onIcon && this.props.offIcon) && (!this.props.onLabel || !this.props.offLabel),
                 'ui-button-icon-left': (this.props.onIcon && this.props.offIcon)
             });
@@ -42,7 +34,7 @@ export class ToggleButton extends Component {
                 <div className="ui-helper-hidden-accessible">
                     <input type="checkbox"/>
                 </div>
-                {(this.props.onIcon && this.props.offIcon) && <span className={this.state.checked ? onIconStyleClass : offIconStyleClass}></span>}
+                {(this.props.onIcon && this.props.offIcon) && <span className={iconStyleClass}></span>}
                 <span className="ui-button-text ui-unselectable-text">{this.state.checked ? this.props.onLabel : this.props.offLabel}</span>
             </div>
         );
