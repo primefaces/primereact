@@ -2,3 +2,4 @@ node_modules
 public/resources/*.css
 .vscode
 .DS_Store
+.idea
