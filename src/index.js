@@ -12,6 +12,7 @@ import {ListboxDemo} from './showcase/listbox/ListboxDemo';
 import {PanelDemo} from './showcase/panel/PanelDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
 import {TabViewDemo} from './showcase/tabview/TabViewDemo';
+import {ToggleButtonDemo} from './showcase/togglebutton/ToggleButtonDemo';
 import {Router, Route,browserHistory} from 'react-router';
 
 ReactDOM.render(
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route path="/panel" component={PanelDemo} />
             <Route path="/radiobutton" component={RadioButtonDemo} />
             <Route path="/tabview" component={TabViewDemo} />
+            <Route path="/togglebutton" component={ToggleButtonDemo} />
         </Route>
     </Router>,
     document.getElementById('root')

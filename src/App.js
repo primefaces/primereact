@@ -28,6 +28,7 @@
                             <Link to="/inputtextarea">&#9679; InputTextarea</Link>
                             <Link to="/listbox">&#9679; Listbox</Link>
                             <Link to="/radiobutton">&#9679; RadioButton</Link>
+                            <Link to="/togglebutton">&#9679; ToggleButton</Link>
                         </div>
 
                          <a>
