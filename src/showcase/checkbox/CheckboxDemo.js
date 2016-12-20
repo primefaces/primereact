@@ -10,7 +10,6 @@ export class CheckboxDemo extends Component {
     }
 
     onCityChange(e) {
-        console.log(e);
         var selectedCities = [...this.state.cities];
         if(e.checked)
             selectedCities.push(e.value);
