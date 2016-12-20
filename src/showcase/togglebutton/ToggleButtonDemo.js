@@ -3,7 +3,6 @@ import {ToggleButton} from '../../components/togglebutton/ToggleButton';
 
 export class ToggleButtonDemo extends Component {
     render() {
-        var checked1 = false;
         return (
             <div>
                 <div className="content-section">
