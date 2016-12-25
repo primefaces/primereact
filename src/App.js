@@ -31,7 +31,7 @@
                             <Link to="/togglebutton">&#9679; ToggleButton</Link>
                         </div>
 
-                         <a>
+                        <a>
                             <img alt="button" src="showcase/resources/images/mono/button.svg"></img>
                             <span>Button</span>
                         </a>
@@ -50,8 +50,16 @@
                             <Link to="/panel">&#9679; Panel</Link>
                             <Link to="/tabview">&#9679; TabView</Link>
                         </div>
-                    </div>
 
+                         <a>
+                            <img alt="button" src="showcase/resources/images/mono/overlay.svg"></img>
+                            <span>Overlay</span>
+                        </a>
+                        <div>
+                            <Link to="/dialog">&#9679; Dialog</Link>
+                        </div>
+                    </div>
+                    
                     <div id="layout-content">
                         <div id="topbar">
                             <a href="#" id="menu-button">
