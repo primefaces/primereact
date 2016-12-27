@@ -1,6 +1,6 @@
 export default class DomHandler {
     
-    getOuterWidth(el, margin) {
+    static getOuterWidth(el, margin) {
         let width = el.offsetWidth;
 
         if (margin) {
@@ -11,7 +11,7 @@ export default class DomHandler {
         return width;
     }
 
-    getOuterHeight(el, margin) {
+    static getOuterHeight(el, margin) {
         let height = el.offsetHeight;
 
         if (margin) {
@@ -22,7 +22,7 @@ export default class DomHandler {
         return height;
     }
 
-    getViewport() {
+    static getViewport() {
         let win = window,
             d = document,
             e = d.documentElement,
@@ -31,5 +31,26 @@ export default class DomHandler {
             h = win.innerHeight || e.clientHeight || g.clientHeight;
 
         return {width: w, height: h};
+    }
+
+    static getZindex() {
+        this.zindex = this.zindex||1000;
+        return this.zindex++;
+    }
+
+    static addMultipleClasses(element, className) {
+        if (element.classList) {
+            let styles = className.split(' ');
+            for (let i = 0; i < styles.length; i++) {
+                element.classList.add(styles[i]);
+            }
+
+        }
+        else {
+            let styles = className.split(' ');
+            for (let i = 0; i < styles.length; i++) {
+                element.className += ' ' + styles[i];
+            }
+        }
     }
 }
