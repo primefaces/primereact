@@ -9,28 +9,41 @@ export class Dialog extends Component {
         this.state = {visible: props.visible};
         this.positionInitialized = false;
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.initDrag = this.initDrag.bind(this);
+        this.endDrag = this.endDrag.bind(this);
+        this.moveOnTop = this.moveOnTop.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillUpdate(nextProps) {
         if(this.state.visible !== nextProps.visible) {
             if(nextProps.visible)
-                this.preShow();
+                this.onShow();
             else
-                this.hide();
+                this.onHide();
+
+            this.setState({visible: nextProps.visible});
         }
-        this.setState({visible: nextProps.visible});
     }
 
     componentDidMount() {
-        if(this.state.visible && !this.positionInitialized) {
-            this.initializePosition();
+        if(this.state.visible) {
+            this.onShow();
+        }
+
+        if(this.props.draggable) {
+            this.documentDragListener = this.onDrag.bind(this);
+            document.addEventListener('mousemove', this.documentDragListener);
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if(this.props.onShow && this.state.visible && prevProps !== this.state.visible) {
-            this.props.onShow();
+    componentWillUnmount() {
+        if(this.documentDragListener) {
+            document.removeEventListener('mousemove', this.documentDragListener);
         }
+    }
+
+    onDocumentClick() {
+        console.log(this);
     }
 
     initializePosition() {
@@ -38,7 +51,7 @@ export class Dialog extends Component {
         this.positionInitialized = true;
     }
 
-    preShow() {
+    onShow() {
         if(!this.positionInitialized) {
             this.initializePosition();
         }
@@ -46,11 +59,21 @@ export class Dialog extends Component {
         if(this.props.modal) {
             this.enableModality();
         }
+
+        if(this.props.onShow) {
+            this.props.onShow();
+        }
     }
 
     onCloseClick(event) {
         this.hide();
         event.preventDefault();
+    }
+
+    onHide() {
+        if(this.props.modal) {
+            this.disableModality();
+        }
     }
 
     hide() {
@@ -100,6 +123,39 @@ export class Dialog extends Component {
         }
     }
 
+    initDrag(event) {
+        if(this.props.draggable) {
+            this.dragging = true;
+            this.lastPageX = event.pageX;
+            this.lastPageY = event.pageY;
+        }
+    }
+
+    onDrag(event) {
+        if(this.dragging) {
+            var deltaX = event.pageX - this.lastPageX;
+            var deltaY = event.pageY - this.lastPageY;
+            var leftPos = parseFloat(this.container.style.left);
+            var topPos = parseFloat(this.container.style.top);
+
+            this.container.style.left = leftPos + deltaX + 'px';
+            this.container.style.top = topPos + deltaY + 'px';
+            
+            this.lastPageX = event.pageX;
+            this.lastPageY = event.pageY;
+        }
+    }
+
+    endDrag(event) {
+        if(this.props.draggable) {
+            this.dragging = false;
+        }
+    }
+
+    moveOnTop() {
+        this.container.style.zIndex = DomHandler.getZindex();
+    }
+
     render() {
         var styleClass = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
         var style = {
@@ -110,8 +166,8 @@ export class Dialog extends Component {
         };
 
         return (
-            <div className={styleClass} style={style} ref={(el) => {this.container = el;}}>
-                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top">
+            <div className={styleClass} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
+                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
                      <span className="ui-dialog-title">{this.props.header}</span>
                      <a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onCloseClick}>
                         <span className="fa fa-fw fa-close"></span>
@@ -135,7 +191,8 @@ Dialog.defaultProps = {
     height: 'auto',
     modal: false,
     onHide: null,
-    onShow: null
+    onShow: null,
+    draggable: true
 }
 
 Dialog.propTypes = {
@@ -145,5 +202,6 @@ Dialog.propTypes = {
     height: React.PropTypes.string,
     modal: React.PropTypes.bool,
     onHide: React.PropTypes.func,
-    onShow: React.PropTypes.func
+    onShow: React.PropTypes.func,
+    draggable: React.PropTypes.bool
 };
