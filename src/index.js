@@ -5,6 +5,7 @@ import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
 import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
 import {DialogDemo} from './showcase/dialog/DialogDemo';
+import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
 import {GridDemo} from './showcase/grid/GridDemo';
 import {InputTextDemo} from './showcase/inputtext/InputTextDemo';
@@ -24,6 +25,7 @@ ReactDOM.render(
             <Route path="/button" component={ButtonDemo} />
             <Route path="/checkbox" component={CheckboxDemo} />
             <Route path="/dialog" component={DialogDemo} />
+            <Route path="/dropdown" component={DropdownDemo} />
             <Route path="/grid" component={GridDemo} />
             <Route path="/fieldset" component={FieldsetDemo} />
             <Route path="/inputtext" component={InputTextDemo} />

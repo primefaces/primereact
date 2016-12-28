@@ -53,4 +53,56 @@ export default class DomHandler {
             }
         }
     }
+
+    static relativePosition(element, target) {
+        var elementDimensions = element.offsetParent ? { width: element.outerWidth, height: element.outerHeight } : this.getHiddenElementDimensions(element);
+        var targetHeight = target.offsetHeight;
+        var targetWidth = target.offsetWidth;
+        var targetOffset = target.getBoundingClientRect();
+        var viewport = this.getViewport();
+        var top, left;
+
+        if ((targetOffset.top + targetHeight + elementDimensions.height) > viewport.height)
+            top = -1 * (elementDimensions.height);
+        else
+            top = targetHeight;
+
+        if ((targetOffset.left + elementDimensions.width) > viewport.width)
+            left = targetWidth - elementDimensions.width;
+        else
+            left = 0;
+
+        element.style.top = top + 'px';
+        element.style.left = left + 'px';
+    }
+
+    static getHiddenElementDimensions(element) {
+        var dimensions = {};
+        element.style.visibility = 'hidden';
+        element.style.display = 'block';
+        dimensions.width = element.offsetWidth;
+        dimensions.height = element.offsetHeight;
+        element.style.display = 'none';
+        element.style.visibility = 'visible';
+
+        return dimensions;
+    }
+
+    static fadeIn(element, duration) {
+        element.style.opacity = 0;
+
+        var last = +new Date();
+        var opacity = 0;
+        var tick = function () {
+            opacity = +element.style.opacity + (new Date().getTime() - last) / duration;
+            element.style.opacity = opacity;
+            last = +new Date();
+
+            if (+opacity < 1) {
+                (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+            }
+        };
+
+        tick();
+    }
 }

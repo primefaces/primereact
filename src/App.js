@@ -24,6 +24,7 @@
                         </a>
                         <div>
                             <Link to="/checkbox">&#9679; Checkbox</Link>
+                            <Link to="/dropdown">&#9679; Dropdown</Link>
                             <Link to="/inputtext">&#9679; InputText</Link>
                             <Link to="/inputtextarea">&#9679; InputTextarea</Link>
                             <Link to="/listbox">&#9679; Listbox</Link>
