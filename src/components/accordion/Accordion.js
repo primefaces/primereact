@@ -10,8 +10,7 @@ AccordionTab.defaultProps = {
 }
 
 AccordionTab.propTypes = {
-    header: React.PropTypes.string,
-    selected: React.PropTypes.bool
+    header: React.PropTypes.string
 };
 
 export class Accordion extends Component {
