@@ -47,7 +47,7 @@ Fieldset.defaultProps = {
     toggleable: false,
     collapsed: false,
     onExpand: null,
-    onCollapsed: null
+    onCollapse: null
 }
 
 Fieldset.propTypes = {
