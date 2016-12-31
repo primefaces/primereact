@@ -1,10 +1,21 @@
     import React, {Component} from 'react';
     import {Link} from 'react-router';
+    import classNames from 'classnames';
     import './App.css';
     import 'font-awesome/css/font-awesome.css';
 
     class App extends Component {
             
+        constructor() {
+            super();
+            this.state = {activeMenu: -1};
+        }
+
+        openMenu(event,val) {
+            this.setState({activeMenu: val});
+            event.preventDefault();
+        }
+
         render() {
             return (
                 <div className="layout-wrapper">
@@ -18,11 +29,11 @@
                             </a>
                         </span>
 
-                        <a>
+                        <a href="#" onClick={(event) => this.openMenu(event,0)} className={classNames({'active-menuitem': this.state.activeMenu === 0})}>
                             <img alt="input" src="showcase/resources/images/mono/input.svg"></img>
                             <span>Input</span>
                         </a>
-                        <div>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 0, 'submenu-visible': this.state.activeMenu === 0})}>
                             <Link to="/checkbox">&#9679; Checkbox</Link>
                             <Link to="/dropdown">&#9679; Dropdown</Link>
                             <Link to="/inputtext">&#9679; InputText</Link>
@@ -34,19 +45,19 @@
                             <Link to="/selectbutton">&#9679; SelectButton</Link>
                         </div>
 
-                        <a>
+                        <a href="#" onClick={(event) => this.openMenu(event,1)}  className={classNames({'active-menuitem': this.state.activeMenu === 1})}>
                             <img alt="button" src="showcase/resources/images/mono/button.svg"></img>
                             <span>Button</span>
                         </a>
-                        <div>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 1, 'submenu-visible': this.state.activeMenu === 1})}>
                             <Link to="/button">&#9679; Button</Link>
                         </div>
 
-                        <a>
+                         <a href="#" onClick={(event) => this.openMenu(event,2)} className={classNames({'active-menuitem': this.state.activeMenu === 2})}>
                             <img alt="button" src="showcase/resources/images/mono/panel.svg"></img>
                             <span>Panel</span>
                         </a>
-                        <div>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 2})}>
                             <Link to="/accordion">&#9679; Accordion</Link>
                             <Link to="/fieldset">&#9679; Fieldset</Link>
                             <Link to="/grid">&#9679; Grid</Link>
@@ -54,11 +65,11 @@
                             <Link to="/tabview">&#9679; TabView</Link>
                         </div>
 
-                         <a>
+                        <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>
                             <img alt="button" src="showcase/resources/images/mono/overlay.svg"></img>
                             <span>Overlay</span>
                         </a>
-                        <div>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 3, 'submenu-visible': this.state.activeMenu === 3})}>
                             <Link to="/dialog">&#9679; Dialog</Link>
                         </div>
                     </div>
