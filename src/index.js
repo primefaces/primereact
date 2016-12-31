@@ -11,6 +11,7 @@ import {GridDemo} from './showcase/grid/GridDemo';
 import {InputTextDemo} from './showcase/inputtext/InputTextDemo';
 import {InputTextareaDemo} from './showcase/inputtextarea/InputTextareaDemo';
 import {ListboxDemo} from './showcase/listbox/ListboxDemo';
+import {MultiSelectDemo} from './showcase/multiselect/MultiSelectDemo';
 import {PanelDemo} from './showcase/panel/PanelDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
 import {TabViewDemo} from './showcase/tabview/TabViewDemo';
@@ -31,6 +32,7 @@ ReactDOM.render(
             <Route path="/inputtext" component={InputTextDemo} />
             <Route path="/inputtextarea" component={InputTextareaDemo} />
             <Route path="/listbox" component={ListboxDemo} />
+            <Route path="/multiselect" component={MultiSelectDemo} />
             <Route path="/panel" component={PanelDemo} />
             <Route path="/radiobutton" component={RadioButtonDemo} />
             <Route path="/tabview" component={TabViewDemo} />
