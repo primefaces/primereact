@@ -23,11 +23,12 @@ export class Growl extends Component {
         event.preventDefault();
     }
 
-    remove(event, msg, index) {       
-        DomHandler.fadeOut(event.target.parentElement.parentElement, 250);
+    remove(event, msg, index) {
+        var element = event.target.parentElement.parentElement;
+        DomHandler.fadeOut(element, 250);
         setTimeout(() => {
             this.removed = true;
-            var msgs = this.state.messages;
+            var msgs = [...this.state.messages];
             msgs.splice(index, 1);
             this.setState({messages: msgs});
         }, 250);
@@ -39,7 +40,7 @@ export class Growl extends Component {
 
     componentDidUpdate() {
         if(!this.removed) {
-             DomHandler.fadeIn(this.container, 250);
+            DomHandler.fadeIn(this.container, 250);
         }
         this.removed = false;
     }
