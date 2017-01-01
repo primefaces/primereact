@@ -5,11 +5,16 @@ export class Messages extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {messages:this.props.value};
         this.clear = this.clear.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({messages:nextProps.value});
+    }
+
     clear(event) {
-        this.container.style.display = 'none';
+        this.setState({messages:[]});
         if(this.props.onClear) {
             this.props.onClear();
         }
@@ -17,8 +22,8 @@ export class Messages extends Component {
     }
 
     render() {
-        if(this.props.value && this.props.value.length) {
-            var firstMessage = this.props.value[0];
+        if(this.state.messages && this.state.messages.length) {
+            var firstMessage = this.state.messages[0];
             var severity = firstMessage.severity||'info';
 
             var className = classNames('ui-messages ui-widget ui-corner-all', {
@@ -46,7 +51,7 @@ export class Messages extends Component {
                       {closeIcon}
                       <span className={icon}></span>
                       <ul>
-                        {this.props.value.map((msg) => {
+                        {this.state.messages.map((msg) => {
                           return <li key={msg.summary + msg.detail}>
                                     <span className="ui-messages-summary">{msg.summary}</span>
                                     <span className="ui-messages-detail">{msg.detail}</span>

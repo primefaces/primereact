@@ -12,7 +12,6 @@ export class MessagesDemo extends Component {
         this.showWarn = this.showWarn.bind(this);
         this.showError = this.showError.bind(this);
         this.showMultiple = this.showMultiple.bind(this);
-        this.clear = this.clear.bind(this);
     }
 
     showSuccess() {
@@ -39,10 +38,6 @@ export class MessagesDemo extends Component {
         ]});
     }
 
-    clear() {
-        this.setState({messages:[]});
-    }
-
     render() {
         return (
             <div>
@@ -54,7 +49,7 @@ export class MessagesDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Messages value={this.state.messages} onClear={this.clear}></Messages>
+                    <Messages value={this.state.messages}></Messages>
 
                     <div>
                         <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
