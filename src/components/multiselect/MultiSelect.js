@@ -101,10 +101,10 @@ export class MultiSelect extends Component {
         if(this.props.value && this.props.value.length) {
             label = '';
             for(let i = 0; i < this.props.value.length; i++) {
-                if(i != 0) {
-                    label = label + ',';
+                if(i !== 0) {
+                    label += ',';
                 }
-                label = label + this.findLabelByValue(this.props.value[i]);
+                label += this.findLabelByValue(this.props.value[i]);
             }
         }
         else {
@@ -118,7 +118,7 @@ export class MultiSelect extends Component {
         var label = null;
         for(var i = 0; i < this.props.options.length; i++) {
             var option = this.props.options[i];
-            if(option.value == val) {
+            if(option.value === val) {
                 label = option.label;
                 break; 
             }

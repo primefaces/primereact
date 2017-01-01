@@ -127,7 +127,7 @@ export default class DomHandler {
             gap = interval / duration;
 
         let fading = setInterval(() => {
-            opacity = opacity - gap;
+            opacity -= gap;
 
             if (opacity <= 0) {
                 opacity = 0;
