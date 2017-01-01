@@ -8,6 +8,7 @@ import {DialogDemo} from './showcase/dialog/DialogDemo';
 import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
 import {GridDemo} from './showcase/grid/GridDemo';
+import {GrowlDemo} from './showcase/growl/GrowlDemo';
 import {InputTextDemo} from './showcase/inputtext/InputTextDemo';
 import {InputTextareaDemo} from './showcase/inputtextarea/InputTextareaDemo';
 import {ListboxDemo} from './showcase/listbox/ListboxDemo';
@@ -29,6 +30,7 @@ ReactDOM.render(
             <Route path="/dialog" component={DialogDemo} />
             <Route path="/dropdown" component={DropdownDemo} />
             <Route path="/grid" component={GridDemo} />
+            <Route path="/growl" component={GrowlDemo} />
             <Route path="/fieldset" component={FieldsetDemo} />
             <Route path="/inputtext" component={InputTextDemo} />
             <Route path="/inputtextarea" component={InputTextareaDemo} />

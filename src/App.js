@@ -79,6 +79,7 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 4})}>
                             <Link to="/messages">&#9679; Messages</Link>
+                            <Link to="/growl">&#9679; Growl</Link>
                         </div>
                     </div>
                     

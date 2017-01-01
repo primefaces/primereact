@@ -40,9 +40,8 @@ export class Messages extends Component {
                 'fa-check': severity === 'success',
             });
 
-            var closeIcon;
             if(this.props.closable) {
-                closeIcon = <a href="#" className="ui-messages-close" onClick={this.clear}>
+                var closeIcon = <a href="#" className="ui-messages-close" onClick={this.clear}>
                                 <i className="fa fa-close"></i>
                             </a>;
             }
@@ -67,7 +66,7 @@ export class Messages extends Component {
 }
 
 Messages.defaultProps = {
-    closable: true,
+    closable: false,
     className: null,
     style: null,
     onClear: null

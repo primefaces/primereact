@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Messages} from '../../components/messages/Messages';
+import {Growl} from '../../components/growl/Growl';
 import {Button} from '../../components/button/Button';
 
-export class MessagesDemo extends Component {
+export class GrowlDemo extends Component {
         
     constructor() {
         super();
@@ -12,7 +12,6 @@ export class MessagesDemo extends Component {
         this.showWarn = this.showWarn.bind(this);
         this.showError = this.showError.bind(this);
         this.showMultiple = this.showMultiple.bind(this);
-        this.clear = this.clear.bind(this);
     }
 
     showSuccess() {
@@ -39,22 +38,18 @@ export class MessagesDemo extends Component {
         ]});
     }
 
-    clear() {
-        this.setState({messages:[]});
-    }
-
     render() {
         return (
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>Messages</h1>
-                        <p>Messages is used to display messages inline.</p>
+                        <h1>Growl</h1>
+                        <p>Growl is used to display messages in an overlay.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <Messages value={this.state.messages}></Messages>
+                    <Growl value={this.state.messages}></Growl>
 
                     <div>
                         <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
@@ -62,7 +57,6 @@ export class MessagesDemo extends Component {
                         <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         <Button onClick={this.showMultiple} label="Multiple" />
-                        <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
                     </div>
                 </div>
             </div>
