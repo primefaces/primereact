@@ -53,7 +53,7 @@
                             <Link to="/button">&#9679; Button</Link>
                         </div>
 
-                         <a href="#" onClick={(event) => this.openMenu(event,2)} className={classNames({'active-menuitem': this.state.activeMenu === 2})}>
+                        <a href="#" onClick={(event) => this.openMenu(event,2)} className={classNames({'active-menuitem': this.state.activeMenu === 2})}>
                             <img alt="button" src="showcase/resources/images/mono/panel.svg"></img>
                             <span>Panel</span>
                         </a>
@@ -71,6 +71,14 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 3, 'submenu-visible': this.state.activeMenu === 3})}>
                             <Link to="/dialog">&#9679; Dialog</Link>
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,4)} className={classNames({'active-menuitem': this.state.activeMenu === 4})}>
+                            <img alt="button" src="showcase/resources/images/mono/message.svg"></img>
+                            <span>Messages</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 4})}>
+                            <Link to="/messages">&#9679; Messages</Link>
                         </div>
                     </div>
                     
