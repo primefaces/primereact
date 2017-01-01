@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
 export class Growl extends Component {
@@ -18,54 +19,69 @@ export class Growl extends Component {
         if(this.props.onClear) {
             this.props.onClear();
         }
+        this.removed = true;
         event.preventDefault();
     }
 
-    remove(event, msg, index) {
-        var msgs = this.state.messages;
-        msgs.splice(index, 1);
-        this.setState({messages: msgs});
+    remove(event, msg, index) {       
+        DomHandler.fadeOut(event.target.parentElement.parentElement, 250);
+        setTimeout(() => {
+            this.removed = true;
+            var msgs = this.state.messages;
+            msgs.splice(index, 1);
+            this.setState({messages: msgs});
+        }, 250);
+    }
+
+    componentDidMount() {
+        DomHandler.fadeIn(this.container, 250);
+    }
+
+    componentDidUpdate() {
+        if(!this.removed) {
+             DomHandler.fadeIn(this.container, 250);
+        }
+        this.removed = false;
     }
 
     render() {
-        if(this.state.messages && this.state.messages.length) {
-            var className = classNames('ui-growl ui-widget', this.props.className);
+        var className = classNames('ui-growl ui-widget', this.props.className);
 
-            return (
-                <div className={className} ref={(el) => {this.container = el;}} style={this.props.style}>
-                    {this.state.messages.map((msg, index) => {
-                        var severity = msg.severity;
-                        var messageClassName = classNames('ui-growl-item-container ui-state-highlight ui-corner-all ui-shadow', {
-                            'ui-growl-message-info': severity === 'info',
-                            'ui-growl-message-warn': severity === 'warn',
-                            'ui-growl-message-error': severity === 'error',
-                            'ui-growl-message-success': severity === 'success'
-                        });
+        if(this.state.messages) {
+            var messageItems = this.state.messages.map((msg, index) => {
+            var severity = msg.severity;
+            var messageClassName = classNames('ui-growl-item-container ui-state-highlight ui-corner-all ui-shadow', {
+                'ui-growl-message-info': severity === 'info',
+                'ui-growl-message-warn': severity === 'warn',
+                'ui-growl-message-error': severity === 'error',
+                'ui-growl-message-success': severity === 'success'
+            });
 
-                        var iconClassName = classNames('ui-growl-image fa fa-2x', {
-                            'fa-info': severity === 'info',
-                            'fa-warning': severity === 'warn',
-                            'fa-close': severity === 'error',
-                            'fa-check': severity === 'success'
-                        });
-
-                        return <div className={messageClassName} aria-live="polite" key={msg.summary + msg.detail}>
-                                    <div className="ui-growl-item ui-helper-clearfix">
-                                        <div className="ui-growl-icon-close fa fa-close" onClick={(event) => this.remove(event, msg, index)}></div>
-                                        <span className={iconClassName}></span>
-                                        <div className="ui-growl-message">
-                                            <span className="ui-growl-title">{msg.summary}</span>
-                                            <p>{msg.detail}</p>
-                                        </div>
-                                    </div>
-                               </div>;
-                    })}
-                </div>
-            );
+            var iconClassName = classNames('ui-growl-image fa fa-2x', {
+                'fa-info': severity === 'info',
+                'fa-warning': severity === 'warn',
+                'fa-close': severity === 'error',
+                'fa-check': severity === 'success'
+            });
+            
+            return <div className={messageClassName} aria-live="polite" key={msg.summary + msg.detail}>
+                        <div className="ui-growl-item ui-helper-clearfix">
+                            <div className="ui-growl-icon-close fa fa-close" onClick={(event) => this.remove(event, msg, index)}></div>
+                            <span className={iconClassName}></span>
+                            <div className="ui-growl-message">
+                                <span className="ui-growl-title">{msg.summary}</span>
+                                <p>{msg.detail}</p>
+                            </div>
+                        </div>
+                    </div>;
+            });
         }
-        else {
-            return null;
-        }   
+
+        return (
+            <div className={className} ref={(el) => {this.container = el;}} style={this.props.style}>
+                {messageItems}
+            </div>
+        );   
     }
 }
 

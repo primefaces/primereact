@@ -119,4 +119,22 @@ export default class DomHandler {
 
         tick();
     }
+
+    static fadeOut(element, ms) {
+        var opacity = 1,
+            interval = 50,
+            duration = ms,
+            gap = interval / duration;
+
+        let fading = setInterval(() => {
+            opacity = opacity - gap;
+
+            if (opacity <= 0) {
+                opacity = 0;
+                clearInterval(fading);
+            }
+            
+            element.style.opacity = opacity;
+        }, interval);
+    }
 }
