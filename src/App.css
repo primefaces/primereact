@@ -27,9 +27,10 @@ body {
 }
 
 .layout-logo {
-    height: 72px;
+    box-sizing: border-box;
+    height: 104px;
     display: block;
-    padding: 10px 0 15px 0;
+    padding: 15px 0;
     z-index: 997;
     background-color: #f6f6f6;
     text-align: center;
@@ -173,10 +174,7 @@ body {
     width: 80px;
     text-align: center;
     padding: 10px 5px;
-    border-radius: 5px;
     font-size: 12px;
-    -webkit-border-radius: 5px;
-    background-color: rgb(246, 249, 251);
     margin-left: 5px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -185,18 +183,19 @@ body {
     transition: all 0.5s ease;
     overflow: hidden;
     color:#313b3f;
+    border-bottom: 1px solid transparent;
 }
 .topbar-link:hover {
-    background-color: rgba(255, 255, 255, 0.8);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    border-color: #eaeaea;
+    cursor: pointer;
 }
 .topbar-link img {
-    width: 80%;
-    height: 30px;
+    height: 50px;
 }
 /*
 .PFGrayText {

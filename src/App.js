@@ -75,10 +75,18 @@
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event,4)} className={classNames({'active-menuitem': this.state.activeMenu === 4})}>
+                            <img alt="button" src="showcase/resources/images/mono/file.svg"></img>
+                            <span>File</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 4, 'submenu-visible': this.state.activeMenu === 4})}>
+                            <Link to="/fileupload">&#9679; Upload</Link>
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,5)} className={classNames({'active-menuitem': this.state.activeMenu === 5})}>
                             <img alt="button" src="showcase/resources/images/mono/message.svg"></img>
                             <span>Messages</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 4, 'submenu-visible': this.state.activeMenu === 4})}>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 5, 'submenu-visible': this.state.activeMenu === 5})}>
                             <Link to="/messages">&#9679; Messages</Link>
                             <Link to="/growl">&#9679; Growl</Link>
                         </div>
@@ -91,13 +99,11 @@
                             </a>
 
                             <a href="http://forum.primefaces.org/viewforum.php?f=35" className="topbar-link">
-                                <img alt="mockosx" src="showcase/resources/images/community.svg" />
-                                <span>Forum</span>
+                                <img alt="mockosx" src="showcase/resources/images/forum.png" />
                             </a>
 
                             <span className="topbar-link" id="themeSwitcher">
-                                <img alt="themeswitcher" src="showcase/resources/images/themeswitcher.svg" />
-                                <span>Themes</span>
+                                <img alt="themeswitcher" src="showcase/resources/images/themes.png" />
                                 <div id="GlobalThemeSwitcher">
                                     <span>Premium Templates</span>
                                     <a href="http://www.primefaces.org/layouts/ultima-ng"><img src="showcase/resources/images/themeswitcher-ultima.png" alt="Ultima Template" /><span className="ui-text">Ultima</span></a>
@@ -123,8 +129,7 @@
                             </span>
                             
                             <a href="setup.html" className="topbar-link">
-                                <img alt="mockosx" src="showcase/resources/images/setup.svg" />
-                                <span>Setup</span>
+                                <img alt="mockosx" src="showcase/resources/images/setup.png" />
                             </a>
 
                             <div className="mobile-logo">
@@ -137,7 +142,7 @@
                         </div>
 
                         <div className="content-section footer clearfix">
-                            <span><a href="http://www.primetek.com.tr">PrimeTek</a>, Copyright &copy; 2016</span>
+                            <span><a href="http://www.primetek.com.tr">PrimeTek</a>, Copyright &copy; 2017</span>
                             <span>All rights reserved</span>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
 import {DialogDemo} from './showcase/dialog/DialogDemo';
 import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
+import {FileUploadDemo} from './showcase/fileupload/FileUploadDemo';
 import {GridDemo} from './showcase/grid/GridDemo';
 import {GrowlDemo} from './showcase/growl/GrowlDemo';
 import {InputTextDemo} from './showcase/inputtext/InputTextDemo';
@@ -33,6 +34,7 @@ ReactDOM.render(
             <Route path="/grid" component={GridDemo} />
             <Route path="/growl" component={GrowlDemo} />
             <Route path="/fieldset" component={FieldsetDemo} />
+            <Route path="/fileupload" component={FileUploadDemo} />
             <Route path="/inputtext" component={InputTextDemo} />
             <Route path="/inputtextarea" component={InputTextareaDemo} />
             <Route path="/listbox" component={ListboxDemo} />

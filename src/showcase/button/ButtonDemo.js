@@ -19,7 +19,7 @@ export class ButtonDemo extends Component {
                 <div className="content-section">
                     <div className="feature-intro">
                         <h1>Button</h1>
-                        <p>Button is an extension to standard input element with icons and theming..</p>
+                        <p>Button is an extension to standard input element with icons and theming.</p>
                     </div>
                 </div>
 
