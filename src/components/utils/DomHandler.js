@@ -1,5 +1,21 @@
 export default class DomHandler {
     
+    static innerWidth(el) {
+        let width = el.offsetWidth;
+        let style = getComputedStyle(el);
+
+        width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        return width;
+    }
+
+    static width(el) {
+        let width = el.offsetWidth;
+        let style = getComputedStyle(el);
+
+        width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        return width;
+    }
+
     static getOuterWidth(el, margin) {
         let width = el.offsetWidth;
 

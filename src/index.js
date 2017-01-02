@@ -19,6 +19,7 @@ import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
 import {TabViewDemo} from './showcase/tabview/TabViewDemo';
 import {ToggleButtonDemo} from './showcase/togglebutton/ToggleButtonDemo';
 import {SelectButtonDemo} from './showcase/selectbutton/SelectButtonDemo';
+import {InputSwitchDemo} from './showcase/inputswitch/InputSwitchDemo';
 import {Router, Route,browserHistory} from 'react-router';
 
 ReactDOM.render(
@@ -42,6 +43,7 @@ ReactDOM.render(
             <Route path="/tabview" component={TabViewDemo} />
             <Route path="/togglebutton" component={ToggleButtonDemo} />
             <Route path="/selectbutton" component={SelectButtonDemo} />
+            <Route path="/inputswitch" component={InputSwitchDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
