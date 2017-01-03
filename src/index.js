@@ -17,7 +17,6 @@ import {ListboxDemo} from './showcase/listbox/ListboxDemo';
 import {MessagesDemo} from './showcase/messages/MessagesDemo';
 import {MultiSelectDemo} from './showcase/multiselect/MultiSelectDemo';
 import {PanelDemo} from './showcase/panel/PanelDemo';
-import {PieChartDemo} from './showcase/chart/PieChartDemo';
 import {ProgressBarDemo} from './showcase/progressbar/ProgressBarDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
 import {TabViewDemo} from './showcase/tabview/TabViewDemo';
@@ -25,6 +24,12 @@ import {ToggleButtonDemo} from './showcase/togglebutton/ToggleButtonDemo';
 import {SelectButtonDemo} from './showcase/selectbutton/SelectButtonDemo';
 import {InputSwitchDemo} from './showcase/inputswitch/InputSwitchDemo';
 import {SliderDemo} from './showcase/slider/SliderDemo';
+import {PieChartDemo} from './showcase/chart/PieChartDemo';
+import {BarChartDemo} from './showcase/chart/BarChartDemo';
+import {LineChartDemo} from './showcase/chart/LineChartDemo';
+import {DoughnutChartDemo} from './showcase/chart/DoughnutChartDemo';
+import {RadarChartDemo} from './showcase/chart/RadarChartDemo';
+import {PolarAreaChartDemo} from './showcase/chart/PolarAreaChartDemo';
 import {Router, Route,browserHistory} from 'react-router';
 
 ReactDOM.render(
@@ -46,7 +51,6 @@ ReactDOM.render(
             <Route path="/messages" component={MessagesDemo} />
             <Route path="/multiselect" component={MultiSelectDemo} />
             <Route path="/panel" component={PanelDemo} />
-            <Route path="/piechart" component={PieChartDemo} />
             <Route path="/progressbar" component={ProgressBarDemo} />
             <Route path="/radiobutton" component={RadioButtonDemo} />
             <Route path="/tabview" component={TabViewDemo} />
@@ -54,6 +58,12 @@ ReactDOM.render(
             <Route path="/selectbutton" component={SelectButtonDemo} />
             <Route path="/inputswitch" component={InputSwitchDemo} />
             <Route path="/slider" component={SliderDemo} />
+            <Route path="/piechart" component={PieChartDemo} />
+            <Route path="/doughnutchart" component={DoughnutChartDemo} />
+            <Route path="/linechart" component={LineChartDemo} />
+            <Route path="/barchart" component={BarChartDemo} />
+            <Route path="/polarareachart" component={PolarAreaChartDemo} />
+            <Route path="/radarchart" component={RadarChartDemo} />
         </Route>
     </Router>,
     document.getElementById('root')

@@ -5,7 +5,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f6f6f6;
-    font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", "Open Sans", Arial, Helvetica, sans-serif;
     font-weight: normal;
     color: #6b6b6b;
     -webkit-font-smoothing: antialiased;
@@ -21,9 +21,9 @@ body {
     overflow: hidden;
     width: 300px;
     box-sizing: border-box;
-    -moz-box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
-    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .layout-logo {

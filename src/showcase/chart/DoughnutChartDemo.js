@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Chart} from '../../components/chart/Chart';
 
-export class PieChartDemo extends Component {
+export class DoughnutChartDemo extends Component {
+
     render() {
         var data = {
             labels: ['A','B','C'],
@@ -25,15 +26,15 @@ export class PieChartDemo extends Component {
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>PieChart</h1>
-                        <p>A pie chart is a circular statistical graphic, which is divided into slices to illustrate numerical proportion.</p>
+                        <h1>DoughnutChart</h1>
+                        <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-8">
-                            <Chart type="pie" data={data} />
+                            <Chart type="doughnut" data={data} />
                         </div>
                     </div>
                 </div>

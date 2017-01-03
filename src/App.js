@@ -90,6 +90,11 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 5, 'submenu-visible': this.state.activeMenu === 5})}>
                             <Link to="/piechart">&#9679; Pie</Link>
+                            <Link to="/doughnutchart">&#9679; Doughnut</Link>
+                            <Link to="/barchart">&#9679; Bar</Link>
+                            <Link to="/linechart">&#9679; Line</Link>
+                            <Link to="/polarareachart">&#9679; PolarArea</Link>
+                            <Link to="/radarchart">&#9679; Radar</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event,6)} className={classNames({'active-menuitem': this.state.activeMenu === 6})}>
