@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from '../button/Button';
 import {Messages} from '../messages/Messages';
+import {ProgressBar} from '../progressbar/ProgressBar';
 import classNames from 'classnames';
 
 export class FileUpload extends Component {
@@ -99,15 +100,15 @@ export class FileUpload extends Component {
             formData.append(this.props.name, file, file.name);
         }
 
-        /*xhr.upload.addEventListener('progress', (event) => {
+        xhr.upload.addEventListener('progress', (event) => {
             if(event.lengthComputable) {
-              this.progress = Math.round((e.loaded * 100) / e.total);
+              this.setState({progress: Math.round((event.loaded * 100) / event.total)});
             }
-          }, false);*/
+          }, false);
 
         xhr.onreadystatechange = () => {
             if(xhr.readyState === 4) {
-                this.progress = 0;
+               this.setState({progress: 0});
                 
                 if(xhr.status >= 200 && xhr.status < 300) {
                     if(this.props.onUpload)
@@ -171,7 +172,10 @@ export class FileUpload extends Component {
                                     })
                                 }
                             </div>;
+
+            var progressBar = <ProgressBar value={this.state.progress} showValue={false} />;
         }
+        
 
         return (
             <div className={className} style={this.props.style}>
@@ -181,6 +185,7 @@ export class FileUpload extends Component {
                     {cancelButton}
                 </div>
                 <div className="ui-fileupload-content ui-widget-content ui-corner-bottom">
+                    {progressBar}
                     <Messages value={this.state.msgs} />
                     {filesList}
                 </div>
