@@ -44,6 +44,7 @@
                             <Link to="/togglebutton">&#9679; ToggleButton</Link>
                             <Link to="/selectbutton">&#9679; SelectButton</Link>
                             <Link to="/inputswitch">&#9679; InputSwitch</Link>
+                            <Link to="/slider">&#9679; Slider</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event,1)}  className={classNames({'active-menuitem': this.state.activeMenu === 1})}>

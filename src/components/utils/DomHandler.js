@@ -16,6 +16,16 @@ export default class DomHandler {
         return width;
     }
 
+    static getWindowScrollTop() {
+        let doc = document.documentElement;
+        return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+    }
+
+    static getWindowScrollLeft() {
+        let doc = document.documentElement;
+        return (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+    }
+
     static getOuterWidth(el, margin) {
         let width = el.offsetWidth;
 
@@ -82,6 +92,13 @@ export default class DomHandler {
             element.classList.remove(className);
         else
             element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+
+    static hasClass(element, className) {
+        if (element.classList)
+            return element.classList.contains(className);
+        else
+            return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
     }
 
     static relativePosition(element, target) {
