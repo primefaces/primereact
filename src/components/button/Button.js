@@ -29,6 +29,7 @@ export class Button extends Component {
             <button {...buttonProps} type="button" className={styleClass}>
                 {this.props.icon && <span className={iconStyleClass}></span>}
                 <span className="ui-button-text ui-c">{this.props.label || 'ui-button'}</span>
+                {this.props.children}
             </button>
         );
     }

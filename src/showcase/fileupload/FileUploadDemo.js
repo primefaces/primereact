@@ -7,6 +7,11 @@ export class FileUploadDemo extends Component {
     constructor() {
         super();
         this.state = {};
+        this.onUpload = this.onUpload.bind(this);
+    }
+
+    onUpload(event) {
+
     }
 
     render() {
@@ -20,7 +25,10 @@ export class FileUploadDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    
+                    <Growl value={this.state.msgs} />
+
+                    <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
+                                multiple={true} accept="image/*" maxFileSize={1000000}></FileUpload>
                 </div>
             </div>
         )
