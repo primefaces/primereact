@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from '../button/Button';
 import {Messages} from '../messages/Messages';
 import {ProgressBar} from '../progressbar/ProgressBar';
+import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
 export class FileUpload extends Component {
@@ -13,6 +14,10 @@ export class FileUpload extends Component {
         this.clear = this.clear.bind(this);
         this.onChooseClick = this.onChooseClick.bind(this);
         this.onFileSelect = this.onFileSelect.bind(this);
+        this.onDragEnter = this.onDragEnter.bind(this);
+        this.onDragOver = this.onDragOver.bind(this);
+        this.onDragLeave = this.onDragLeave.bind(this);
+        this.onDrop = this.onDrop.bind(this);
     }
 
     hasFiles() {
@@ -143,6 +148,37 @@ export class FileUpload extends Component {
         }
     }
 
+    onDragEnter(event) {
+        if(!this.props.disabled) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }
+    
+    onDragOver(event) {
+        if(!this.props.disabled) {
+            DomHandler.addClass(this.content, 'ui-fileupload-highlight');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }
+    
+    onDragLeave(event) {
+        if(!this.props.disabled) {
+            DomHandler.removeClass(this.content, 'ui-fileupload-highlight');
+        }
+    }
+    
+    onDrop(event) {
+        if(!this.props.disabled) {
+            DomHandler.removeClass(this.content, 'ui-fileupload-highlight');
+            event.stopPropagation();
+            event.preventDefault();
+            
+            this.onFileSelect(event);
+        }
+    }
+
     render() {
         var className = classNames('ui-fileupload ui-widget', this.props.className);
         var chooseButton = <Button label={this.props.chooseLabel} icon="fa-plus" className="ui-fileupload-choose" onClick={this.onChooseClick} disabled={this.props.disabled}>
@@ -184,7 +220,8 @@ export class FileUpload extends Component {
                     {uploadButton}
                     {cancelButton}
                 </div>
-                <div className="ui-fileupload-content ui-widget-content ui-corner-bottom">
+                <div className="ui-fileupload-content ui-widget-content ui-corner-bottom" onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}
+                    ref={(el) => {this.content = el;}}>
                     {progressBar}
                     <Messages value={this.state.msgs} />
                     {filesList}
