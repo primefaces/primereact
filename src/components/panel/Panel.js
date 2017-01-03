@@ -62,6 +62,7 @@ Panel.propTypes = {
     header: React.PropTypes.any,
     toggleable: React.PropTypes.bool,
     style: React.PropTypes.object,
+    className: React.PropTypes.string,
     collapsed: React.PropTypes.bool,
     onExpand: React.PropTypes.func,
     onCollapse: React.PropTypes.func

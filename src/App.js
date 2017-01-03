@@ -90,6 +90,14 @@
                             <Link to="/messages">&#9679; Messages</Link>
                             <Link to="/growl">&#9679; Growl</Link>
                         </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,6)} className={classNames({'active-menuitem': this.state.activeMenu === 6})}>
+                            <img alt="button" src="showcase/resources/images/mono/misc.svg"></img>
+                            <span>Misc</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6})}>
+                            <Link to="/progressbar">&#9679; ProgressBar</Link>
+                        </div>
                     </div>
                     
                     <div id="layout-content">
