@@ -17,6 +17,7 @@ import {ListboxDemo} from './showcase/listbox/ListboxDemo';
 import {MessagesDemo} from './showcase/messages/MessagesDemo';
 import {MultiSelectDemo} from './showcase/multiselect/MultiSelectDemo';
 import {PanelDemo} from './showcase/panel/PanelDemo';
+import {PieChartDemo} from './showcase/chart/PieChartDemo';
 import {ProgressBarDemo} from './showcase/progressbar/ProgressBarDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
 import {TabViewDemo} from './showcase/tabview/TabViewDemo';
@@ -45,6 +46,7 @@ ReactDOM.render(
             <Route path="/messages" component={MessagesDemo} />
             <Route path="/multiselect" component={MultiSelectDemo} />
             <Route path="/panel" component={PanelDemo} />
+            <Route path="/piechart" component={PieChartDemo} />
             <Route path="/progressbar" component={ProgressBarDemo} />
             <Route path="/radiobutton" component={RadioButtonDemo} />
             <Route path="/tabview" component={TabViewDemo} />
