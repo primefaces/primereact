@@ -4,6 +4,7 @@ import App from './App';
 import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
 import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
+import {ChipsDemo} from './showcase/chips/ChipsDemo';
 import {DialogDemo} from './showcase/dialog/DialogDemo';
 import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
@@ -31,6 +32,7 @@ ReactDOM.render(
             <Route path="/accordion" component={AccordionDemo} />
             <Route path="/button" component={ButtonDemo} />
             <Route path="/checkbox" component={CheckboxDemo} />
+            <Route path="/chips" component={ChipsDemo} />
             <Route path="/dialog" component={DialogDemo} />
             <Route path="/dropdown" component={DropdownDemo} />
             <Route path="/grid" component={GridDemo} />

@@ -35,6 +35,7 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 0, 'submenu-visible': this.state.activeMenu === 0})}>
                             <Link to="/checkbox">&#9679; Checkbox</Link>
+                            <Link to="/chips">&#9679; Chips</Link>
                             <Link to="/dropdown">&#9679; Dropdown</Link>
                             <Link to="/inputtext">&#9679; InputText</Link>
                             <Link to="/inputtextarea">&#9679; InputTextarea</Link>
