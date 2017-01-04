@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 
-export class CodeHighlighter extends Component {
+export class CodeHighlight extends Component {
+
+    static defaultProps = {
+        className: null
+    }
+    
+    static propTypes = {
+        className: React.PropTypes.string
+    }
 
     componentDidMount() {
         window.Prism.highlightElement(this.code);
@@ -15,8 +23,4 @@ export class CodeHighlighter extends Component {
             </pre>
         );
     }
-}
-
-CodeHighlighter.defaultProps = {
-    className: null
 }

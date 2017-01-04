@@ -114,7 +114,7 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
                             <Link to="/progressbar">&#9679; ProgressBar</Link>
-                            <Link to="/codehighlighter">&#9679; CodeHighlighter</Link>
+                            <Link to="/codehighlight">&#9679; CodeHighlight</Link>
                         </div>
                     </div>
                     
