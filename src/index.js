@@ -24,6 +24,7 @@ import {ToggleButtonDemo} from './showcase/togglebutton/ToggleButtonDemo';
 import {SelectButtonDemo} from './showcase/selectbutton/SelectButtonDemo';
 import {InputSwitchDemo} from './showcase/inputswitch/InputSwitchDemo';
 import {SliderDemo} from './showcase/slider/SliderDemo';
+import {SpinnerDemo} from './showcase/spinner/SpinnerDemo';
 import {PieChartDemo} from './showcase/chart/PieChartDemo';
 import {BarChartDemo} from './showcase/chart/BarChartDemo';
 import {LineChartDemo} from './showcase/chart/LineChartDemo';
@@ -58,6 +59,7 @@ ReactDOM.render(
             <Route path="/selectbutton" component={SelectButtonDemo} />
             <Route path="/inputswitch" component={InputSwitchDemo} />
             <Route path="/slider" component={SliderDemo} />
+            <Route path="/spinner" component={SpinnerDemo} />
             <Route path="/piechart" component={PieChartDemo} />
             <Route path="/doughnutchart" component={DoughnutChartDemo} />
             <Route path="/linechart" component={LineChartDemo} />
