@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import {InputText} from '../inputtext/InputText';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
 
@@ -108,25 +110,32 @@ export class Chips extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-inputtext ui-state-default ui-corner-all', {
-                'ui-state-disabled': this.props.disabled
+        var listClassName = classNames('ui-inputtext ui-state-default ui-corner-all', {
+            'ui-state-disabled': this.props.disabled
         });
+
+        if(this.state.values) {
+            var items = this.state.values.map((value , index) => {
+                            var customContent = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
+                            var item = <li className="ui-chips-token ui-state-highlight ui-corner-all" key={index}>
+                                <span className="ui-chips-token-icon fa fa-fw fa-close" onClick={(event) => this.removeItem(event, index)}></span>
+                                <span className="ui-chips-token-label">{this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) : customContent}</span>
+                            </li>;
+                            return item;
+                        });
+        }
+
+        var inputToken = <li className="ui-chips-input-token">
+                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} type="text" disabled={this.props.disabled||this.maxedOut()} 
+                                        onKeyDown={(event) => this.onKeydown(event)} />
+                        </li>;
 
         return (
             <div>
                 <div className={classNames('ui-chips ui-widget', this.props.className)} style={this.props.style}>
-                    <ul className={styleClass} onClick={this.inputFocus}>
-                        {this.state.values && this.state.values.map((item , index) => {
-                            var customContent = this.props.itemTemplate ? this.props.itemTemplate(item) : item;
-                            var chipsItem = <li className="ui-chips-token ui-state-highlight ui-corner-all" key={index}>
-                                <span className="ui-chips-token-icon fa fa-fw fa-close" onClick={(event) => this.removeItem(event, index)}></span>
-                                <span className="ui-chips-token-label">{this.props.field ? ObjectUtils.resolveFieldData(item, this.props.field) : customContent}</span>
-                            </li>;
-                            return chipsItem;
-                        })}
-                        <li className="ui-chips-input-token">
-                            <input ref={(el) => this.inputEL = el} type="text" disabled={this.props.disabled || this.maxedOut()} onKeyDown={(event) => this.onKeydown(event)}/>
-                        </li>
+                    <ul className={listClassName} onClick={this.inputFocus}>
+                        {items}
+                        {inputToken}
                     </ul>
                 </div>
             </div>
