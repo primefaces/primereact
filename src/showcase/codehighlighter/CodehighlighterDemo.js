@@ -13,7 +13,7 @@ export class CodeHighlighterDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation ui-helper-hidden" style={{display:'none'}}>
+                <div className="content-section implementation">
                     <CodeHighlighter className="language-css">
 {`
 .ui-datatable table {
