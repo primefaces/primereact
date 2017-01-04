@@ -3,6 +3,7 @@
     import classNames from 'classnames';
     import './App.css';
     import 'font-awesome/css/font-awesome.css';
+    import 'prismjs/themes/prism-coy.css';
 
     class App extends Component {
             
@@ -113,6 +114,7 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 7})}>
                             <Link to="/progressbar">&#9679; ProgressBar</Link>
+                            <Link to="/codehighlighter">&#9679; CodeHighlighter</Link>
                         </div>
                     </div>
                     
