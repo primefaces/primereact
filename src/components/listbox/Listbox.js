@@ -3,6 +3,24 @@ import classNames from 'classnames';
 
 export class Listbox extends Component {
     
+    static defaultProps = {
+        value: null,
+        options: null,
+        onChange: null,
+        itemTemplate: null,
+        style: null,
+        className: null
+    }
+    
+    static propTypes = {
+        value: React.PropTypes.any,
+        options: React.PropTypes.array,
+        onChange: React.PropTypes.func,
+        itemTemplate: React.PropTypes.func,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string
+    };
+    
     onOptionClick(event, option, index) {
         this.props.onChange({
             originalEvent: event,
@@ -35,21 +53,3 @@ export class Listbox extends Component {
         );
     }
 }
-
-Listbox.defaultProps = {
-    value: null,
-    options: null,
-    onChange: null,
-    itemTemplate: null,
-    style: null,
-    className: null
-};
-
-Listbox.propTypes = {
-    value: React.PropTypes.any,
-    options: React.PropTypes.array,
-    onChange: React.PropTypes.func,
-    itemTemplate: React.PropTypes.func,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string
-};
