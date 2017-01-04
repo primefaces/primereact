@@ -3,6 +3,7 @@
     import classNames from 'classnames';
     import './App.css';
     import 'font-awesome/css/font-awesome.css';
+    import 'prismjs/themes/prism-coy.css';
 
     class App extends Component {
             
@@ -46,6 +47,7 @@
                             <Link to="/selectbutton">&#9679; SelectButton</Link>
                             <Link to="/inputswitch">&#9679; InputSwitch</Link>
                             <Link to="/slider">&#9679; Slider</Link>
+                            <Link to="/spinner">&#9679; Spinner</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event,1)}  className={classNames({'active-menuitem': this.state.activeMenu === 1})}>
@@ -112,6 +114,7 @@
                         </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
                             <Link to="/progressbar">&#9679; ProgressBar</Link>
+                            <Link to="/codehighlighter">&#9679; CodeHighlighter</Link>
                         </div>
                     </div>
                     

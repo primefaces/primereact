@@ -5,6 +5,7 @@ import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
 import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
 import {ChipsDemo} from './showcase/chips/ChipsDemo';
+import {CodehighlighterDemo} from './showcase/codehighlighter/CodehighlighterDemo';
 import {DialogDemo} from './showcase/dialog/DialogDemo';
 import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
@@ -24,6 +25,7 @@ import {ToggleButtonDemo} from './showcase/togglebutton/ToggleButtonDemo';
 import {SelectButtonDemo} from './showcase/selectbutton/SelectButtonDemo';
 import {InputSwitchDemo} from './showcase/inputswitch/InputSwitchDemo';
 import {SliderDemo} from './showcase/slider/SliderDemo';
+import {SpinnerDemo} from './showcase/spinner/SpinnerDemo';
 import {PieChartDemo} from './showcase/chart/PieChartDemo';
 import {BarChartDemo} from './showcase/chart/BarChartDemo';
 import {LineChartDemo} from './showcase/chart/LineChartDemo';
@@ -39,6 +41,7 @@ ReactDOM.render(
             <Route path="/button" component={ButtonDemo} />
             <Route path="/checkbox" component={CheckboxDemo} />
             <Route path="/chips" component={ChipsDemo} />
+            <Route path="/codehighlighter" component={CodehighlighterDemo} />
             <Route path="/dialog" component={DialogDemo} />
             <Route path="/dropdown" component={DropdownDemo} />
             <Route path="/grid" component={GridDemo} />
@@ -58,6 +61,7 @@ ReactDOM.render(
             <Route path="/selectbutton" component={SelectButtonDemo} />
             <Route path="/inputswitch" component={InputSwitchDemo} />
             <Route path="/slider" component={SliderDemo} />
+            <Route path="/spinner" component={SpinnerDemo} />
             <Route path="/piechart" component={PieChartDemo} />
             <Route path="/doughnutchart" component={DoughnutChartDemo} />
             <Route path="/linechart" component={LineChartDemo} />

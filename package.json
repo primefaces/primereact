@@ -16,6 +16,7 @@
     "chart.js": "^2.4.0",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
+    "prismjs": "^1.6.0",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-dom": "^15.4.1",
