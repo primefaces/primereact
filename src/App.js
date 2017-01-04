@@ -110,7 +110,7 @@
                             <img alt="button" src="showcase/resources/images/mono/misc.svg"></img>
                             <span>Misc</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 7})}>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
                             <Link to="/progressbar">&#9679; ProgressBar</Link>
                         </div>
                     </div>
