@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import prismjs from 'prismjs/prism.js';
 
-export class Codehighlighter extends Component {
+export class CodeHighlighter extends Component {
 
     componentDidMount() {
         prismjs.highlightElement(this.code);
@@ -26,7 +26,7 @@ export class Codehighlighter extends Component {
     }
 }
 
-Codehighlighter.defaultProps = {
+CodeHighlighter.defaultProps = {
     children: null,
     className: null
 }

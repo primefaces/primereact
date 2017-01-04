@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Codehighlighter} from '../../components/codehighlighter/Codehighlighter';
+import {CodeHighlighter} from '../../components/codehighlighter/CodeHighlighter';
 
-export class CodehighlighterDemo extends Component {
+export class CodeHighlighterDemo extends Component {
     render() {
         
         return (
@@ -14,15 +14,15 @@ export class CodehighlighterDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Codehighlighter className="language-css">
+                    <CodeHighlighter className="language-css">
                         .ui-datatable table &#123;
                             border-collapse:collapse;
                             width: 100%;
                             table-layout: fixed;
                         &#125;
-                    </Codehighlighter>
+                    </CodeHighlighter>
 
-                    <Codehighlighter className="language-markup">
+                    <CodeHighlighter className="language-markup">
                         &lt;div id="pm" style="width:300px"&gt;
                         &lt;div&gt;
                         &lt;div&gt;&lt;a data-icon="fa-file-o"&gt;File&lt;/a&gt;&lt;/div&gt;
@@ -40,7 +40,7 @@ export class CodehighlighterDemo extends Component {
                         &lt;/div&gt;
                         &lt;/div&gt;
                         &lt;/div&gt;
-                    </Codehighlighter>
+                    </CodeHighlighter>
                 </div>
             </div>
         );
