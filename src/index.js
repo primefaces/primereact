@@ -5,7 +5,7 @@ import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
 import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
 import {ChipsDemo} from './showcase/chips/ChipsDemo';
-import {CodeHighlighterDemo} from './showcase/codehighlighter/CodeHighlighterDemo';
+import {CodeHighlightDemo} from './showcase/codehighlight/CodeHighlightDemo';
 import {DialogDemo} from './showcase/dialog/DialogDemo';
 import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
@@ -17,6 +17,7 @@ import {InputTextareaDemo} from './showcase/inputtextarea/InputTextareaDemo';
 import {ListboxDemo} from './showcase/listbox/ListboxDemo';
 import {MessagesDemo} from './showcase/messages/MessagesDemo';
 import {MultiSelectDemo} from './showcase/multiselect/MultiSelectDemo';
+import {OverlayPanelDemo} from './showcase/overlaypanel/OverlayPanelDemo';
 import {PanelDemo} from './showcase/panel/PanelDemo';
 import {ProgressBarDemo} from './showcase/progressbar/ProgressBarDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
@@ -41,7 +42,7 @@ ReactDOM.render(
             <Route path="/button" component={ButtonDemo} />
             <Route path="/checkbox" component={CheckboxDemo} />
             <Route path="/chips" component={ChipsDemo} />
-            <Route path="/codehighlighter" component={CodeHighlighterDemo} />
+            <Route path="/codehighlight" component={CodeHighlightDemo} />
             <Route path="/dialog" component={DialogDemo} />
             <Route path="/dropdown" component={DropdownDemo} />
             <Route path="/grid" component={GridDemo} />
@@ -53,6 +54,7 @@ ReactDOM.render(
             <Route path="/listbox" component={ListboxDemo} />
             <Route path="/messages" component={MessagesDemo} />
             <Route path="/multiselect" component={MultiSelectDemo} />
+            <Route path="/overlaypanel" component={OverlayPanelDemo} />
             <Route path="/panel" component={PanelDemo} />
             <Route path="/progressbar" component={ProgressBarDemo} />
             <Route path="/radiobutton" component={RadioButtonDemo} />

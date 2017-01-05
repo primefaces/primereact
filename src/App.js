@@ -58,11 +58,19 @@
                             <Link to="/button">&#9679; Button</Link>
                         </div>
 
-                        <a href="#" onClick={(event) => this.openMenu(event,2)} className={classNames({'active-menuitem': this.state.activeMenu === 2})}>
+                        <a href="#" onClick={(event) => this.openMenu(event,2)}  className={classNames({'active-menuitem': this.state.activeMenu === 2})}>
+                            <img alt="button" src="showcase/resources/images/mono/data.svg"></img>
+                            <span>Data</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 2})}>
+                            
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>
                             <img alt="button" src="showcase/resources/images/mono/panel.svg"></img>
                             <span>Panel</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 2})}>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 3, 'submenu-visible': this.state.activeMenu === 3})}>
                             <Link to="/accordion">&#9679; Accordion</Link>
                             <Link to="/fieldset">&#9679; Fieldset</Link>
                             <Link to="/grid">&#9679; Grid</Link>
@@ -70,27 +78,36 @@
                             <Link to="/tabview">&#9679; TabView</Link>
                         </div>
 
-                        <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>
+                        <a href="#" onClick={(event) => this.openMenu(event,4)} className={classNames({'active-menuitem': this.state.activeMenu === 4})}>
                             <img alt="button" src="showcase/resources/images/mono/overlay.svg"></img>
                             <span>Overlay</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 3, 'submenu-visible': this.state.activeMenu === 3})}>
-                            <Link to="/dialog">&#9679; Dialog</Link>
-                        </div>
-
-                        <a href="#" onClick={(event) => this.openMenu(event,4)} className={classNames({'active-menuitem': this.state.activeMenu === 4})}>
-                            <img alt="button" src="showcase/resources/images/mono/file.svg"></img>
-                            <span>File</span>
-                        </a>
                         <div className={classNames({'submenu-hidden': this.state.activeMenu !== 4, 'submenu-visible': this.state.activeMenu === 4})}>
-                            <Link to="/fileupload">&#9679; Upload</Link>
+                            <Link to="/dialog">&#9679; Dialog</Link>
+                            <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event,5)} className={classNames({'active-menuitem': this.state.activeMenu === 5})}>
+                            <img alt="button" src="showcase/resources/images/mono/file.svg"></img>
+                            <span>File</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 5, 'submenu-visible': this.state.activeMenu === 5})}>
+                            <Link to="/fileupload">&#9679; Upload</Link>
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,6)}  className={classNames({'active-menuitem': this.state.activeMenu === 6})}>
+                            <img alt="button" src="showcase/resources/images/mono/menu.svg"></img>
+                            <span>Menu</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6})}>
+                            
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,7)} className={classNames({'active-menuitem': this.state.activeMenu === 7})}>
                             <img alt="button" src="showcase/resources/images/mono/charts.svg"></img>
                             <span>Chart</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 5, 'submenu-visible': this.state.activeMenu === 5})}>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
                             <Link to="/piechart">&#9679; Pie</Link>
                             <Link to="/doughnutchart">&#9679; Doughnut</Link>
                             <Link to="/barchart">&#9679; Bar</Link>
@@ -99,22 +116,38 @@
                             <Link to="/radarchart">&#9679; Radar</Link>
                         </div>
 
-                        <a href="#" onClick={(event) => this.openMenu(event,6)} className={classNames({'active-menuitem': this.state.activeMenu === 6})}>
+                        <a href="#" onClick={(event) => this.openMenu(event,8)} className={classNames({'active-menuitem': this.state.activeMenu === 8})}>
                             <img alt="button" src="showcase/resources/images/mono/message.svg"></img>
                             <span>Messages</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6})}>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 8, 'submenu-visible': this.state.activeMenu === 8})}>
                             <Link to="/messages">&#9679; Messages</Link>
                             <Link to="/growl">&#9679; Growl</Link>
                         </div>
 
-                        <a href="#" onClick={(event) => this.openMenu(event,7)} className={classNames({'active-menuitem': this.state.activeMenu === 7})}>
+                        <a href="#" onClick={(event) => this.openMenu(event,9)}  className={classNames({'active-menuitem': this.state.activeMenu === 9})}>
+                            <img alt="button" src="showcase/resources/images/mono/multimedia.svg"></img>
+                            <span>Multimedia</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 9, 'submenu-visible': this.state.activeMenu === 9})}>
+                            
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,10)}  className={classNames({'active-menuitem': this.state.activeMenu === 10})}>
+                            <img alt="button" src="showcase/resources/images/mono/dragdrop.svg"></img>
+                            <span>DragDrop</span>
+                        </a>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 10, 'submenu-visible': this.state.activeMenu === 10})}>
+                            
+                        </div>
+
+                        <a href="#" onClick={(event) => this.openMenu(event,11)} className={classNames({'active-menuitem': this.state.activeMenu === 11})}>
                             <img alt="button" src="showcase/resources/images/mono/misc.svg"></img>
                             <span>Misc</span>
                         </a>
-                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
+                        <div className={classNames({'submenu-hidden': this.state.activeMenu !== 11, 'submenu-visible': this.state.activeMenu === 11})}>
                             <Link to="/progressbar">&#9679; ProgressBar</Link>
-                            <Link to="/codehighlighter">&#9679; CodeHighlighter</Link>
+                            <Link to="/codehighlight">&#9679; CodeHighlight</Link>
                         </div>
                     </div>
                     

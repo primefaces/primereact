@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 
-export class CodeHighlighter extends Component {
+export class CodeHighlight extends Component {
+
+    static defaultProps = {
+        className: null
+    }
+    
+    static propTypes = {
+        className: React.PropTypes.string
+    }
 
     static defaultProps = {
         className: null

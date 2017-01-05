@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {CodeHighlighter} from '../../components/codehighlighter/CodeHighlighter';
+import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
-export class CodeHighlighterDemo extends Component {
+export class CodeHighlightDemo extends Component {
     render() {
         
         return (
@@ -15,7 +15,7 @@ export class CodeHighlighterDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3 className="first">CSS</h3>
-                    <CodeHighlighter className="language-css">
+                    <CodeHighlight className="language-css">
 {`
 .ui-datatable table {
     border-collapse:collapse;
@@ -24,10 +24,10 @@ export class CodeHighlighterDemo extends Component {
 }
 
 `}
-                    </CodeHighlighter>
+                    </CodeHighlight>
 
                     <h3>HTML</h3>
-                    <CodeHighlighter className="language-markup">
+                    <CodeHighlight className="language-markup">
 {`
 <div class="content-section">
     <div>
@@ -52,10 +52,10 @@ export class CodeHighlighterDemo extends Component {
 </div>
 
 `}
-                    </CodeHighlighter>
+                    </CodeHighlight>
 
                     <h3>JavaScript</h3>
-                    <CodeHighlighter className="language-javascript">
+                    <CodeHighlight className="language-javascript">
 {`
 resolveFieldData(data, field) {
     if(data && field) {
@@ -77,7 +77,7 @@ resolveFieldData(data, field) {
 }
 
 `}
-                    </CodeHighlighter>
+                    </CodeHighlight>
                 </div>
             </div>
         );

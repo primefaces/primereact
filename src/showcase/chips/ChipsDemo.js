@@ -4,26 +4,12 @@ import {Chips} from '../../components/chips/Chips';
 export class ChipsDemo extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        this.updateInputValueBasic = this.updateInputValueBasic.bind(this);
-        this.updateInputValueAdvanced = this.updateInputValueAdvanced.bind(this);
-    }
-
-    updateInputValueBasic(e) {
-        var newArray = [];
-        newArray.push(e.value);
-        this.setState({ inputValueBasic: newArray});
-    }
-
-     updateInputValueAdvanced(e) {
-        var newArray = [];
-        newArray.push(e.value);
-        this.setState({ inputValueAdvanced: newArray});
+        this.state = {basicValues: [], advancedValues: []};
     }
 
     customTemplate(item) {
         return (
-            <div className="ui-helper-clearfix">
+            <div>
                 <span>{item} - (active) </span>
                 <i className="fa fa-user"></i>
             </div>
@@ -42,10 +28,10 @@ export class ChipsDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Chips value={this.state.inputValueBasic} onAdd={this.updateInputValueBasic} ></Chips>
+                    <Chips value={this.state.basicValues}></Chips>
 
                     <h3>Advanced</h3>
-                    <Chips value={this.state.inputValueAdvanced} max={5} onAdd={this.updateInputValueAdvanced} itemTemplate={this.customTemplate}></Chips>
+                    <Chips value={this.state.advancedValues} max={5} itemTemplate={this.customTemplate}></Chips>
                 </div>
             </div>
         )
