@@ -13,6 +13,7 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "del": "^2.2.0",
+    "enzyme": "^2.7.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-flatten": "^0.2.0",
@@ -21,6 +22,9 @@
     "gulp-uglifycss": "^1.0.6",
     "react-scripts": "0.9.5",
     "axios": "^0.15.3",
+    "react-addons-test-utils": "^15.4.1"
+  },
+  "dependencies": {
     "chart.js": "^2.4.0",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
