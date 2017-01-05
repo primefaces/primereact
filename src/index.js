@@ -23,6 +23,7 @@ import {ProgressBarDemo} from './showcase/progressbar/ProgressBarDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
 import {TabViewDemo} from './showcase/tabview/TabViewDemo';
 import {ToggleButtonDemo} from './showcase/togglebutton/ToggleButtonDemo';
+import {TriStateCheckboxDemo} from './showcase/tristatecheckbox/TriStateCheckboxDemo';
 import {SelectButtonDemo} from './showcase/selectbutton/SelectButtonDemo';
 import {InputSwitchDemo} from './showcase/inputswitch/InputSwitchDemo';
 import {SliderDemo} from './showcase/slider/SliderDemo';
@@ -60,6 +61,7 @@ ReactDOM.render(
             <Route path="/radiobutton" component={RadioButtonDemo} />
             <Route path="/tabview" component={TabViewDemo} />
             <Route path="/togglebutton" component={ToggleButtonDemo} />
+            <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
             <Route path="/selectbutton" component={SelectButtonDemo} />
             <Route path="/inputswitch" component={InputSwitchDemo} />
             <Route path="/slider" component={SliderDemo} />
