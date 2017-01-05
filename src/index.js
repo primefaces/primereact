@@ -17,6 +17,7 @@ import {InputTextareaDemo} from './showcase/inputtextarea/InputTextareaDemo';
 import {ListboxDemo} from './showcase/listbox/ListboxDemo';
 import {MessagesDemo} from './showcase/messages/MessagesDemo';
 import {MultiSelectDemo} from './showcase/multiselect/MultiSelectDemo';
+import {OverlayPanelDemo} from './showcase/overlaypanel/OverlayPanelDemo';
 import {PanelDemo} from './showcase/panel/PanelDemo';
 import {ProgressBarDemo} from './showcase/progressbar/ProgressBarDemo';
 import {RadioButtonDemo} from './showcase/radiobutton/RadioButtonDemo';
@@ -53,6 +54,7 @@ ReactDOM.render(
             <Route path="/listbox" component={ListboxDemo} />
             <Route path="/messages" component={MessagesDemo} />
             <Route path="/multiselect" component={MultiSelectDemo} />
+            <Route path="/overlaypanel" component={OverlayPanelDemo} />
             <Route path="/panel" component={PanelDemo} />
             <Route path="/progressbar" component={ProgressBarDemo} />
             <Route path="/radiobutton" component={RadioButtonDemo} />

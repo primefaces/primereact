@@ -101,6 +101,32 @@ export default class DomHandler {
             return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
     }
 
+    static absolutePosition(element, target) {
+        let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element)
+        let elementOuterHeight = elementDimensions.height;
+        let elementOuterWidth = elementDimensions.width;
+        let targetOuterHeight = target.offsetHeight;
+        let targetOuterWidth = target.offsetWidth;
+        let targetOffset = target.getBoundingClientRect();
+        let windowScrollTop = this.getWindowScrollTop();
+        let windowScrollLeft = this.getWindowScrollLeft();
+        let viewport = this.getViewport();
+        let top, left;
+
+        if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height)
+            top = targetOffset.top + windowScrollTop - elementOuterHeight;
+        else
+            top = targetOuterHeight + targetOffset.top + windowScrollTop;
+
+        if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width)
+            left = targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth;
+        else
+            left = targetOffset.left + windowScrollLeft;
+
+        element.style.top = top + 'px';
+        element.style.left = left + 'px';
+    }
+
     static relativePosition(element, target) {
         var elementDimensions = element.offsetParent ? { width: element.outerWidth, height: element.outerHeight } : this.getHiddenElementDimensions(element);
         var targetHeight = target.offsetHeight;
