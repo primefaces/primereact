@@ -11,4 +11,24 @@ describe('Button', () => {
         expect(button.text()).toEqual('A Button');
 
     });
+
+    it('should invoke the click handler on click', () => {
+
+        let done = false;
+
+        const handler = () => {
+            done = true;
+        };
+
+        const button = shallow(
+            <Button onClick={handler} />
+        );
+        
+        expect(done).toBeFalsy();
+
+        button.simulate('click');
+
+        expect(done).toBeTruthy();
+
+    });
 });
