@@ -19,7 +19,7 @@ export class TriStateCheckboxDemo extends Component {
                 <div className="content-section">
                     <div className="feature-intro">
                         <h1>TriStateCheckbox</h1>
-                        <p>Checkbox is an extension to standard checkbox element with skinning capabilities.</p>
+                        <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
                     </div>
                 </div>
 
