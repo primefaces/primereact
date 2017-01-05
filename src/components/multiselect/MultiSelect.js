@@ -3,6 +3,26 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
 export class MultiSelect extends Component {
+    
+    static defaultProps = {
+        value: null,
+        options: null,
+        onChange: null,
+        style: null,
+        className: null,
+        scrollHeight: '200px',
+        defaultLabel: 'Choose'
+    };
+
+    static propTypes = {
+        value: React.PropTypes.any,
+        options: React.PropTypes.array,
+        onChange: React.PropTypes.func,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        scrollHeight: React.PropTypes.string,
+        defaultLabel: React.PropTypes.string
+    };
 
     constructor(props) {
         super(props);
@@ -178,23 +198,3 @@ export class MultiSelect extends Component {
         );
     }
 }
-
-MultiSelect.defaultProps = {
-    value: null,
-    options: null,
-    onChange: null,
-    style: null,
-    className: null,
-    scrollHeight: '200px',
-    defaultLabel: 'Choose'
-};
-
-MultiSelect.propTypes = {
-    value: React.PropTypes.any,
-    options: React.PropTypes.array,
-    onChange: React.PropTypes.func,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    scrollHeight: React.PropTypes.string,
-    defaultLabel: React.PropTypes.string
-};

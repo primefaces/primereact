@@ -3,6 +3,28 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
 export class Dialog extends Component {
+
+    static defaultProps = {
+        header: null,
+        visible: false,
+        width: 'auto',
+        height: 'auto',
+        modal: false,
+        onHide: null,
+        onShow: null,
+        draggable: true
+    }
+
+    static propTypes = {
+        header: React.PropTypes.any,
+        visible: React.PropTypes.bool,
+        width: React.PropTypes.string,
+        height: React.PropTypes.string,
+        modal: React.PropTypes.bool,
+        onHide: React.PropTypes.func,
+        onShow: React.PropTypes.func,
+        draggable: React.PropTypes.bool
+    };
     
     constructor(props) {
         super(props);
@@ -183,25 +205,3 @@ export class Dialog extends Component {
         );
     }
 }
-
-Dialog.defaultProps = {
-    header: null,
-    visible: false,
-    width: 'auto',
-    height: 'auto',
-    modal: false,
-    onHide: null,
-    onShow: null,
-    draggable: true
-}
-
-Dialog.propTypes = {
-    header: React.PropTypes.any,
-    visible: React.PropTypes.bool,
-    width: React.PropTypes.string,
-    height: React.PropTypes.string,
-    modal: React.PropTypes.bool,
-    onHide: React.PropTypes.func,
-    onShow: React.PropTypes.func,
-    draggable: React.PropTypes.bool
-};

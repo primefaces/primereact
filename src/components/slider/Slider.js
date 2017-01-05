@@ -3,6 +3,29 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames'
 
 export class Slider extends Component {
+
+    static defaultProps = {
+        animate: false,
+        min: 0,
+        max: 100,
+        orientation: "horizontal",
+        step: null,
+        range: false,
+        style: null,
+        className: null
+    }
+
+    static propsTypes = {
+        animate: PropTypes.bool,
+        min: PropTypes.number,
+        max: PropTypes.number,
+        orientation: PropTypes.string,
+        step: PropTypes.number,
+        range: PropTypes.bool,
+        style: PropTypes.string,
+        className: PropTypes.string,
+    }
+
     constructor(props) {
         super(props);
         this.state = {};
@@ -257,26 +280,4 @@ export class Slider extends Component {
         );
     }
 
-}
-
-Slider.defaultProps = {
-    animate: false,
-    min: 0,
-    max: 100,
-    orientation: "horizontal",
-    step: null,
-    range: false,
-    style: null,
-    className: null
-}
-
-Slider.propsTypes = {
-    animate: PropTypes.bool,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    orientation: PropTypes.string,
-    step: PropTypes.number,
-    range: PropTypes.bool,
-    style: PropTypes.string,
-    className: PropTypes.string,
 }

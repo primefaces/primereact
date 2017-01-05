@@ -3,6 +3,20 @@ import classNames from 'classnames';
 
 export class Messages extends Component {
 
+    static defaultProps = {
+        closable: false,
+        className: null,
+        style: null,
+        onClear: null
+    }
+
+    static propTypes = {
+        closable: React.PropTypes.bool,
+        className: React.PropTypes.string,
+        style: React.PropTypes.object,
+        onClear: React.PropTypes.func
+    };
+
     constructor(props) {
         super(props);
         this.state = {messages:this.props.value};
@@ -64,17 +78,3 @@ export class Messages extends Component {
         }   
     }
 }
-
-Messages.defaultProps = {
-    closable: false,
-    className: null,
-    style: null,
-    onClear: null
-}
-
-Messages.propTypes = {
-    closable: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    onClear: React.PropTypes.func
-};

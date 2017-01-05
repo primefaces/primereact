@@ -2,6 +2,26 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 
 export class Panel extends Component {
+
+    static defaultProps = {
+        header: null,
+        toggleable: false,
+        style: null,
+        className: null,
+        collapsed: false,
+        onExpand: null,
+        onCollapse: null
+    }
+
+    static propTypes = {
+        header: React.PropTypes.any,
+        toggleable: React.PropTypes.bool,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        collapsed: React.PropTypes.bool,
+        onExpand: React.PropTypes.func,
+        onCollapse: React.PropTypes.func
+    };
     
     constructor(props) {
         super(props);
@@ -47,23 +67,3 @@ export class Panel extends Component {
         );
     }
 }
-
-Panel.defaultProps = {
-    header: null,
-    toggleable: false,
-    style: null,
-    className: null,
-    collapsed: false,
-    onExpand: null,
-    onCollapse: null
-}
-
-Panel.propTypes = {
-    header: React.PropTypes.any,
-    toggleable: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    collapsed: React.PropTypes.bool,
-    onExpand: React.PropTypes.func,
-    onCollapse: React.PropTypes.func
-};

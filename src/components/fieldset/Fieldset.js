@@ -2,6 +2,26 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 
 export class Fieldset extends Component {
+
+    static defaultProps = {
+        legend: null,
+        className: null,
+        style: null,
+        toggleable: false,
+        collapsed: false,
+        onExpand: null,
+        onCollapse: null
+    }
+
+    static propTypes = {
+        legend: React.PropTypes.any,
+        className: React.PropTypes.string,
+        style: React.PropTypes.object,
+        toggleable: React.PropTypes.bool,
+        collapsed: React.PropTypes.bool,
+        onExpand: React.PropTypes.func,
+        onCollapse: React.PropTypes.func
+    };
     
     constructor(props) {
         super(props);
@@ -39,23 +59,3 @@ export class Fieldset extends Component {
         );
     }
 }
-
-Fieldset.defaultProps = {
-    legend: null,
-    className: null,
-    style: null,
-    toggleable: false,
-    collapsed: false,
-    onExpand: null,
-    onCollapse: null
-}
-
-Fieldset.propTypes = {
-    legend: React.PropTypes.any,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    toggleable: React.PropTypes.bool,
-    collapsed: React.PropTypes.bool,
-    onExpand: React.PropTypes.func,
-    onCollapse: React.PropTypes.func
-};

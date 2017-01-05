@@ -14,6 +14,24 @@ AccordionTab.propTypes = {
 };
 
 export class Accordion extends Component {
+
+    static defaultProps = {
+        activeIndex: null,
+        className: null,
+        style: null,
+        multiple: false,
+        onTabOpen: null,
+        onTabClose: null
+    }
+
+    static propTypes = {
+        activeIndex: React.PropTypes.any,
+        className: React.PropTypes.string,
+        style: React.PropTypes.object,
+        multiple: React.PropTypes.bool,
+        onTabOpen: React.PropTypes.func,
+        onTabClose: React.PropTypes.func
+    };
     
     constructor() {
         super();
@@ -75,21 +93,3 @@ export class Accordion extends Component {
         );
     }
 }
-
-Accordion.defaultProps = {
-    activeIndex: null,
-    className: null,
-    style: null,
-    multiple: false,
-    onTabOpen: null,
-    onTabClose: null
-}
-
-Accordion.propTypes = {
-    activeIndex: React.PropTypes.any,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    multiple: React.PropTypes.bool,
-    onTabOpen: React.PropTypes.func,
-    onTabClose: React.PropTypes.func
-};

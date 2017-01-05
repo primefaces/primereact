@@ -3,6 +3,25 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames'
 
 export class InputSwitch extends Component {
+
+    static defaultProps = {
+        offLabel: "Off",
+        onLabel: "On",
+        style: null,
+        className: null,
+        checked: false,
+        onChange: null
+    }
+
+    static propsTypes = {
+        offLabel: PropTypes.string,
+        onLabel: PropTypes.string,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        checked: React.PropTypes.bool,
+        onChange: React.PropTypes.func
+    }
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -103,22 +122,4 @@ export class InputSwitch extends Component {
         );
     }
 
-}
-
-InputSwitch.defaultProps = {
-    offLabel: "Off",
-    onLabel: "On",
-    style: null,
-    className: null,
-    checked: false,
-    onChange: null
-}
-
-InputSwitch.propsTypes = {
-    offLabel: PropTypes.string,
-    onLabel: PropTypes.string,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    checked: React.PropTypes.bool,
-    onChange: React.PropTypes.func
 }

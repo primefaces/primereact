@@ -2,6 +2,18 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 
 export class Button extends Component {
+
+    static defaultProps = {
+        label: null,
+        icon: null,
+        iconPos: 'left'
+    }
+
+    static propTypes = {
+        label: React.PropTypes.string,
+        icon: React.PropTypes.string,
+        iconPos: React.PropTypes.string
+    };
     
     render() {
         var styleClass = classNames('ui-button ui-widget ui-state-default ui-corner-all', this.props.className, {
@@ -34,15 +46,3 @@ export class Button extends Component {
         );
     }
 }
-
-Button.defaultProps = {
-    label: null,
-    icon: null,
-    iconPos: 'left'
-}
-
-Button.propTypes = {
-    label: React.PropTypes.string,
-    icon: React.PropTypes.string,
-    iconPos: React.PropTypes.string
-};

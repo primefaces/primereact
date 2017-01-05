@@ -3,6 +3,22 @@ import classNames from 'classnames';
 
 export class ProgressBar extends Component {
 
+    static defaultProps = {
+        value: null,
+        showValue: true,
+        unit: '%',
+        style: null,
+        className: null
+    }
+
+    static propTypes = {
+        value: React.PropTypes.number,
+        showValue: React.PropTypes.bool,
+        unit: React.PropTypes.string,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+    };
+
     render() {
         var className = classNames('ui-progressbar ui-widget ui-widget-content ui-corner-all', this.props.className);
         if(this.props.showValue) {
@@ -18,19 +34,3 @@ export class ProgressBar extends Component {
     }
 
 }
-
-ProgressBar.defaultProps = {
-    value: null,
-    showValue: true,
-    unit: '%',
-    style: null,
-    className: null
-}
-
-ProgressBar.propTypes = {
-    value: React.PropTypes.number,
-    showValue: React.PropTypes.bool,
-    unit: React.PropTypes.string,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-};

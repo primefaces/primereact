@@ -5,6 +5,34 @@ import classNames from 'classnames';
 
 export class Spinner extends Component {
 
+    static defaultProps = {
+        step: 1,
+        min: null,
+        max: null,
+        disabled: false,
+        readonly: false,
+        maxlength: null,
+        size: null,
+        decimalSeparator: '.',
+        thousandSeparator: ',',
+        style: null,
+        className: null
+    }
+
+    static propsTypes = {
+        step: PropTypes.number,
+        min: PropTypes.number,
+        max: PropTypes.number,
+        disabled: PropTypes.bool,
+        readonly: PropTypes.bool,
+        maxlength: PropTypes.number,
+        size: PropTypes.number,
+        decimalSeparator: PropTypes.string,
+        thousandSeparator: PropTypes.string,
+        style: PropTypes.string,
+        className: PropTypes.string,
+    }
+
     constructor(props) {
         super(props);
 
@@ -245,32 +273,4 @@ export class Spinner extends Component {
             </span>
         );
     }
-}
-
-Spinner.defaultProps = {
-    step: 1,
-    min: null,
-    max: null,
-    disabled: false,
-    readonly: false,
-    maxlength: null,
-    size: null,
-    decimalSeparator: '.',
-    thousandSeparator: ',',
-    style: null,
-    className: null
-}
-
-Spinner.propsTypes = {
-    step: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    disabled: PropTypes.bool,
-    readonly: PropTypes.bool,
-    maxlength: PropTypes.number,
-    size: PropTypes.number,
-    decimalSeparator: PropTypes.string,
-    thousandSeparator: PropTypes.string,
-    style: PropTypes.string,
-    className: PropTypes.string,
 }

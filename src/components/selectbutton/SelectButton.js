@@ -3,6 +3,28 @@ import classNames from 'classnames';
 
 export class SelectButton extends Component {
 
+    static defaultProps = {
+        activeIndex: null,
+        options: null,
+        tabindex: null,
+        multiple: null,
+        disabled: null,
+        style: null,
+        className: null,
+        onChange: null
+    };
+
+    static propTypes = {
+        activeIndex: React.PropTypes.any,
+        options: React.PropTypes.array,
+        tabindex: React.PropTypes.number,
+        multiple: React.PropTypes.bool,
+        disabled: React.PropTypes.bool,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        onChange: React.PropTypes.func
+    };
+
     constructor(props) {
         super(props);
         this.state = {};
@@ -64,25 +86,3 @@ export class SelectButton extends Component {
         );
     }
 }
-
-SelectButton.defaultProps = {
-    activeIndex: null,
-    options: null,
-    tabindex: null,
-    multiple: null,
-    disabled: null,
-    style: null,
-    className: null,
-    onChange: null
-};
-
-SelectButton.propTypes = {
-    activeIndex: React.PropTypes.any,
-    options: React.PropTypes.array,
-    tabindex: React.PropTypes.number,
-    multiple: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    onChange: React.PropTypes.func
-};

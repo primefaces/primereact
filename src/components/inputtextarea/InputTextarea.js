@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 
 export class InputTextarea extends Component {
+
+    static defaultProps = {
+        autoResize: false
+    };
+
+    static propTypes = {
+        autoResize: React.PropTypes.bool
+    };
     
     constructor() {
         super();
@@ -50,11 +58,3 @@ export class InputTextarea extends Component {
         return <textarea {...textareaProps} className={styleClass} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp}>{this.props.value}</textarea>;
     }
 }
-
-InputTextarea.defaultProps = {
-    autoResize: false
-};
-
-InputTextarea.propTypes = {
-    autoResize: React.PropTypes.bool
-};

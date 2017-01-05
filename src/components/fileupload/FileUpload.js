@@ -6,6 +6,54 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
 export class FileUpload extends Component {
+
+    static defaultProps = {
+        name: null,
+        url: null,
+        multiple: false,
+        accept: null,
+        disabled: false,
+        auto: false,
+        maxFileSize: null,
+        invalidFileSizeMessageSummary: '{0}: Invalid file size, ',
+        invalidFileSizeMessageDetail: 'maximum upload size is {0}.',
+        style: null,
+        className: null,
+        previewWidth: 50,
+        chooseLabel: 'Choose',
+        uploadLabel: 'Upload',
+        cancelLabel: 'Cancel',
+        onBeforeUpload: null,
+        onBeforeSend: null,
+        onUpload: null,
+        onError: null,
+        onClear: null,
+        onSelect: null
+    }
+
+    static propTypes = {
+        name: React.PropTypes.string,
+        url: React.PropTypes.string,
+        multiple: React.PropTypes.bool,
+        accept: React.PropTypes.string,
+        disabled: React.PropTypes.bool,
+        auto: React.PropTypes.bool,
+        maxFileSize: React.PropTypes.number,
+        invalidFileSizeMessageSummary: React.PropTypes.string,
+        invalidFileSizeMessageDetail: React.PropTypes.string,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        previewWidth: React.PropTypes.number,
+        chooseLabel: React.PropTypes.string,
+        uploadLabel: React.PropTypes.string,
+        cancelLabel: React.PropTypes.string,
+        onBeforeUpload: React.PropTypes.func,
+        onBeforeSend: React.PropTypes.func,
+        onUpload: React.PropTypes.func,
+        onError: React.PropTypes.func,
+        onClear: React.PropTypes.func,
+        onSelect: React.PropTypes.func
+    };
     
     constructor(props) {
         super(props);
@@ -230,51 +278,3 @@ export class FileUpload extends Component {
         );
     }
 }
-
-FileUpload.defaultProps = {
-    name: null,
-    url: null,
-    multiple: false,
-    accept: null,
-    disabled: false,
-    auto: false,
-    maxFileSize: null,
-    invalidFileSizeMessageSummary: '{0}: Invalid file size, ',
-    invalidFileSizeMessageDetail: 'maximum upload size is {0}.',
-    style: null,
-    className: null,
-    previewWidth: 50,
-    chooseLabel: 'Choose',
-    uploadLabel: 'Upload',
-    cancelLabel: 'Cancel',
-    onBeforeUpload: null,
-    onBeforeSend: null,
-    onUpload: null,
-    onError: null,
-    onClear: null,
-    onSelect: null
-}
-
-FileUpload.propTypes = {
-    name: React.PropTypes.string,
-    url: React.PropTypes.string,
-    multiple: React.PropTypes.bool,
-    accept: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    auto: React.PropTypes.bool,
-    maxFileSize: React.PropTypes.number,
-    invalidFileSizeMessageSummary: React.PropTypes.string,
-    invalidFileSizeMessageDetail: React.PropTypes.string,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    previewWidth: React.PropTypes.number,
-    chooseLabel: React.PropTypes.string,
-    uploadLabel: React.PropTypes.string,
-    cancelLabel: React.PropTypes.string,
-    onBeforeUpload: React.PropTypes.func,
-    onBeforeSend: React.PropTypes.func,
-    onUpload: React.PropTypes.func,
-    onError: React.PropTypes.func,
-    onClear: React.PropTypes.func,
-    onSelect: React.PropTypes.func
-};

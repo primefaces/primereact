@@ -3,6 +3,28 @@ import classNames from 'classnames';
 
 export class ToggleButton extends Component {
 
+    static defaultProps = {
+        onIcon: null,
+        offIcon: null,
+        onLabel: 'Yes',
+        offLabel: 'No',
+        style: null,
+        className: null,
+        checked: false,
+        onChange: null
+    };
+
+    static propTypes = {
+        onIcon: React.PropTypes.string,
+        offIcon: React.PropTypes.string,
+        onLabel: React.PropTypes.string,
+        offLabel: React.PropTypes.string,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        checked: React.PropTypes.bool,
+        onChange: React.PropTypes.func
+    };
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -44,25 +66,3 @@ export class ToggleButton extends Component {
         );
     }
 }
-
-ToggleButton.defaultProps = {
-    onIcon: null,
-    offIcon: null,
-    onLabel: 'Yes',
-    offLabel: 'No',
-    style: null,
-    className: null,
-    checked: false,
-    onChange: null
-};
-
-ToggleButton.propTypes = {
-    onIcon: React.PropTypes.string,
-    offIcon: React.PropTypes.string,
-    onLabel: React.PropTypes.string,
-    offLabel: React.PropTypes.string,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    checked: React.PropTypes.bool,
-    onChange: React.PropTypes.func
-};

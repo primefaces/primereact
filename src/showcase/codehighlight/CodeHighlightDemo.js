@@ -8,8 +8,8 @@ export class CodeHighlightDemo extends Component {
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>CodeHighlighter</h1>
-                        <p>Chips is used to enter multiple values on an inputfield.</p>
+                        <h1>CodeHighlight</h1>
+                        <p>CodeHighlight is used for highlighting code blocks using PrismJS</p>
                     </div>
                 </div>
 

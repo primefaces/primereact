@@ -2,6 +2,20 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 
 export class Checkbox extends Component {
+
+    static defaultProps = {
+        label: null,
+        value: null,
+        onChange: null,
+        checked: false
+    };
+
+    static propTypes = {
+        label: React.PropTypes.string,
+        value: React.PropTypes.any,
+        onChange: React.PropTypes.func,
+        checked: React.PropTypes.bool
+    };
     
     constructor() {
         super();
@@ -38,17 +52,3 @@ export class Checkbox extends Component {
         )
     }
 }
-
-Checkbox.defaultProps = {
-    label: null,
-    value: null,
-    onChange: null,
-    checked: false
-};
-
-Checkbox.propTypes = {
-    label: React.PropTypes.string,
-    value: React.PropTypes.any,
-    onChange: React.PropTypes.func,
-    checked: React.PropTypes.bool
-};

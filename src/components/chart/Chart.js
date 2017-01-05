@@ -3,6 +3,26 @@ import ChartJS from 'chart.js/src/chart.js';
 
 export class Chart extends Component {
 
+    static defaultProps = {
+        type: null,
+        data: null,
+        options: null,
+        width: null,
+        height: null,
+        style: null,
+        className: null
+    }
+
+    static propTypes = {
+        type: React.PropTypes.string,
+        data: React.PropTypes.object,
+        options: React.PropTypes.object,
+        width: React.PropTypes.string,
+        height: React.PropTypes.string,
+        style: React.PropTypes.string,
+        className: React.PropTypes.string
+    };
+
     componentDidMount() {
         this.chart = new ChartJS(this.canvas, {
             type: this.props.type,
@@ -19,23 +39,3 @@ export class Chart extends Component {
         );
     }
 }
-
-Chart.defaultProps = {
-    type: null,
-    data: null,
-    options: null,
-    width: null,
-    height: null,
-    style: null,
-    className: null
-}
-
-Chart.propTypes = {
-    type: React.PropTypes.string,
-    data: React.PropTypes.object,
-    options: React.PropTypes.object,
-    width: React.PropTypes.string,
-    height: React.PropTypes.string,
-    style: React.PropTypes.string,
-    className: React.PropTypes.string
-};

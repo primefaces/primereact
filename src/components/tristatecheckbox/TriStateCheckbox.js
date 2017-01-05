@@ -7,12 +7,16 @@ export class TriStateCheckbox extends Component {
         value: null,
         onChange: null
     };
+
+    static propTypes = {
+        value: React.PropTypes.bool,
+        onChange: React.PropTypes.func
+    }
     
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
     }
-    
 
     onClick(event) {
         this.toggle(event);

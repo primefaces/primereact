@@ -4,6 +4,28 @@ import classNames from 'classnames';
 
 export class Dropdown extends Component {
 
+    static defaultProps = {
+        value: null,
+        options: null,
+        onChange: null,
+        itemTemplate: null,
+        style: null,
+        className: null,
+        autoWidth: true,
+        scrollHeight: '200px'
+    };
+
+    static propTypes = {
+        value: React.PropTypes.any,
+        options: React.PropTypes.array,
+        onChange: React.PropTypes.func,
+        itemTemplate: React.PropTypes.func,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string,
+        autoWidth: React.PropTypes.bool,
+        scrollHeight: React.PropTypes.string
+    };
+
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
@@ -142,25 +164,3 @@ export class Dropdown extends Component {
         );
     }
 }
-
-Dropdown.defaultProps = {
-    value: null,
-    options: null,
-    onChange: null,
-    itemTemplate: null,
-    style: null,
-    className: null,
-    autoWidth: true,
-    scrollHeight: '200px'
-};
-
-Dropdown.propTypes = {
-    value: React.PropTypes.any,
-    options: React.PropTypes.array,
-    onChange: React.PropTypes.func,
-    itemTemplate: React.PropTypes.func,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string,
-    autoWidth: React.PropTypes.bool,
-    scrollHeight: React.PropTypes.string
-};
