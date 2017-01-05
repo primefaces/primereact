@@ -5,7 +5,7 @@ export class TriStateCheckboxDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {value: null};
         this.onStateChange = this.onStateChange.bind(this);
     }
 
@@ -24,7 +24,7 @@ export class TriStateCheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Value: {this.state.value && this.state.value ? 'true' : 'false'} </h3>
+                    <h3 className="first">Value: {this.state.value + ''} </h3>
                     <TriStateCheckbox onChange={this.onStateChange} value={this.state.value}></TriStateCheckbox>
                 </div>
             </div>
