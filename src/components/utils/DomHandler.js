@@ -196,4 +196,8 @@ export default class DomHandler {
             element.style.opacity = opacity;
         }, interval);
     }
+
+    static getUserAgent() {
+        return navigator.userAgent;
+    }
 }

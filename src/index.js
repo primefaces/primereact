@@ -28,6 +28,7 @@ import {SelectButtonDemo} from './showcase/selectbutton/SelectButtonDemo';
 import {InputSwitchDemo} from './showcase/inputswitch/InputSwitchDemo';
 import {SliderDemo} from './showcase/slider/SliderDemo';
 import {SpinnerDemo} from './showcase/spinner/SpinnerDemo';
+import {InputMaskDemo} from './showcase/inputmask/InputMaskDemo';
 import {PieChartDemo} from './showcase/chart/PieChartDemo';
 import {BarChartDemo} from './showcase/chart/BarChartDemo';
 import {LineChartDemo} from './showcase/chart/LineChartDemo';
@@ -64,6 +65,7 @@ ReactDOM.render(
             <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
             <Route path="/selectbutton" component={SelectButtonDemo} />
             <Route path="/inputswitch" component={InputSwitchDemo} />
+            <Route path="/inputmask" component={InputMaskDemo} />
             <Route path="/slider" component={SliderDemo} />
             <Route path="/spinner" component={SpinnerDemo} />
             <Route path="/piechart" component={PieChartDemo} />
