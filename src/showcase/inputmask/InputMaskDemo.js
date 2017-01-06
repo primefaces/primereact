@@ -53,6 +53,7 @@ export class InputMaskDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Basic: {this.state.val1}</span>
+                            <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={this.onChangeBasic}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
