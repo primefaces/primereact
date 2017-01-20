@@ -148,10 +148,13 @@ body {
 }
 
 #layout-content .homepage-btn {
-    display: inline-block;
+    display: block;
     padding: 16px;
     width: 300px;
     font-size: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border-right: 3px;
 }
 
 #layout-content .download-btn {
