@@ -40,7 +40,7 @@ body {
     height: 70px;
 }
 
-#layout-sidebar > a {
+#layout-sidebar .layout-menu > a {
     width: 100%;
     height: 50px;
     display: block;
@@ -53,7 +53,7 @@ body {
     color: #6b6b6b;
 }
 
-#layout-sidebar> a.active-menuitem {
+#layout-sidebar .layout-menu > a.active-menuitem {
     background-color: #f6f6f6;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -62,7 +62,7 @@ body {
     transition: all 0.5s ease;
 }
 
-#layout-sidebar > a:not(.active-menuitem):hover {
+#layout-sidebar .layout-menu > a:not(.active-menuitem):hover {
     background-color: #d8d8dd;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -71,25 +71,25 @@ body {
     transition: all 0.5s ease;
 }
 
-#layout-sidebar > a img {
+#layout-sidebar .layout-menu > a img {
     width: 20px;
     height: auto;
     float: left;
 }
 
-#layout-sidebar > a span {
+#layout-sidebar .layout-menu > a span {
     font-size: 16px;
     margin: 0px 0px 0px 30px;
     display: block;
 }
 
-#layout-sidebar > div {
+#layout-sidebar .layout-menu > div {
     width: auto;
     padding: 20px 15px;
     overflow: hidden;
 }
 
-#layout-sidebar > div.submenu-hidden {
+#layout-sidebar .layout-menu > div.submenu-hidden {
     overflow: hidden;
     max-height: 0;
     padding-top: 0;
@@ -106,7 +106,7 @@ body {
     transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-#layout-sidebar > div.submenu-visible {
+#layout-sidebar .layout-menu > div.submenu-visible {
     -moz-transition-duration: 0.3s;
     -webkit-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
@@ -118,7 +118,7 @@ body {
     max-height: 500px;
 }
 
-#layout-sidebar > div a {
+#layout-sidebar .layout-menu > div a {
     width: 50%;
     float: left;
     padding: 6px;
@@ -133,13 +133,85 @@ body {
     transition: background-color .3s;
 }
 
-#layout-sidebar > div a:hover {
+#layout-sidebar .layout-menu > div a:hover {
     background-color: #d8d8dd;
 }
 
 #layout-content {
     margin-left: 300px;
     background-color: #FFFFFF;
+}
+
+#layout-content .homepage {
+    background-color: #E6EEEF;
+    padding: 30px;
+}
+
+#layout-content .homepage-btn {
+    display: inline-block;
+    padding: 16px;
+    width: 300px;
+    font-size: 20px;
+}
+
+#layout-content .download-btn {
+    background-color: #fbd17b;
+    color: #b27800;
+}
+
+#layout-content .twitter-btn {
+    background-color: #6b6b6b;
+    color: #ffffff;
+}
+
+#layout-content .github-btn {
+    background-color: #2b9bb9;
+    color: #ffffff;
+}
+
+#layout-content .homepage-btn i {
+    float: right;
+    font-size: 24px;
+}
+
+#layout-content .homepage p {
+    padding-right: 16px;
+    line-height: 1.5;
+}
+
+#layout-content .homepage h1 {
+    color: #6b6b6b;
+    font-weight: bold;
+}
+
+#layout-content .homepage .homepage-widgets {
+    text-align: center;
+    margin-top: 32px;
+}
+
+
+#layout-content .homepage .homepage-widgets > div {
+    padding: 16px;
+}
+
+#layout-content .homepage .homepage-widgets h3 {
+    color: #2b9bb9;
+}
+
+#layout-content .homepage .homepage-widgets ul {
+    list-style: none;
+    margin: 0 0 40px 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#layout-content .homepage h1 span {
+    color: #2b9bb9;
+}
+
+#layout-content .homepage {
+    color: #6b6b6b;
 }
 
 .content-section {
@@ -258,6 +330,7 @@ body {
 .footer {
     font-size: 14px;
     color: #84939f;
+    border-top: 1px solid #dde3e6;
 }
 .footer span:last-child {
     float: right;
