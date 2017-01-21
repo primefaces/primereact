@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
 export class ButtonDemo extends Component {
         
@@ -57,50 +58,53 @@ class ButtonDemoDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<pre>
-<code className="language-typescript" pCode>
-import &#123;ButtonModule&#125; from 'primeng/primeng';
-</code>
-</pre>
+<CodeHighlight className="language-javascript">
+{`
+import {Button} from 'primereact';
+
+`}
+</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Button is applied to a button element with pButton directive. Text of the button is defined using label property.</p>
-                        
-<pre>
-<code className="language-markup" pCode>
-&lt;button pButton type="button" label="Click"&gt;&lt;/button&gt;
-</code>
-</pre>
+                        <p>Button is created using the Button element.</p>    
+<CodeHighlight className="language-markup">
+{`
+<Button />
 
-                        <h3>Events</h3>
-                        <p>Events are defined using standard notation.</p>
-                        
-<pre>
-<code className="language-markup" pCode>
-&lt;button pButton type="button" (click)="onclick()" label="Click"&gt;&lt;/button&gt;
-</code>
-</pre>
+`}
+</CodeHighlight>
 
-<pre>
-<code className="language-typescript" pCode>
-export class Model &#123;
+                        <h3>Label</h3>
+                        <p>Use label property to define the text of the button.</p>    
+<CodeHighlight className="language-markup">
+{`
+<Button />
 
-    onclick() &#123;
-        //execute action
-    &#125;
-
-&#125;
-</code>
-</pre>
+`}
+</CodeHighlight>
 
                         <h3>Icons</h3>
                         <p>Icon on a button is specified with icon attribute and position is customized using iconPos attribute. Default
                         icon position is left. To display only an icon, leave label as undefined.</p>
-<pre>
-<code className="language-markup" pCode>
-&lt;button pButton type="button" icon="fa-check" iconPos="left"&gt;&lt;/button&gt;
-</code>
-</pre>
+<CodeHighlight className="language-markup">
+{`
+<Button label="Click" icon="fa-check" />
+<Button label="Click" icon="fa-check" iconPos="right"/>
+<Button icon="fa-check" iconPos="right"/>
+
+`}
+</CodeHighlight>
+
+                        <h3>Events</h3>
+                        <p>Events are defined using standard notation.</p>
+<CodeHighlight className="language-markup">
+{`
+<Button label="Click" onClick={this.handleClick} />
+
+`}
+</CodeHighlight>
+
+
 
                         <h3>Severity</h3>
                         <p>Different color options are available to define severity levels.</p>
@@ -112,11 +116,17 @@ export class Model &#123;
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
-<pre>
-<code className="language-markup" pCode>
-&lt;button pButton type="button" className="ui-button-info"&gt;&lt;/button&gt;
-</code>
-</pre>
+<CodeHighlight className="language-markup">
+{`
+<Button label="Primary" />
+<Button label="Secondary" className="ui-button-secondary"/>
+<Button label="Success" className="ui-button-success"/>
+<Button label="Info" className="ui-button-info"/>
+<Button label="Warning" className="ui-button-warning"/>
+<Button label="Danger" className="ui-button-danger"/>
+
+`}
+</CodeHighlight>
 
                         <h3>Attributes</h3>
                         <div className="doc-tablewrapper">
@@ -184,34 +194,54 @@ export class Model &#123;
                     </TabPanel>
 
                     <TabPanel header="Source">
-<pre>
-<code className="language-markup" pCode ngNonBindable>
-&lt;button pButton type="text" (click)="count()" label="Click"&gt;&lt;/button&gt;
+<CodeHighlight className="language-javascript">
+{`
+export class ButtonDemo extends Component {
+        
+    constructor() {
+        super();
+        this.state = {count: 0};
+        this.increment = this.increment.bind(this);
+    }
 
-&lt;button pButton type="text" (click)="count()" icon="fa-check" label="Click"&gt;&lt;/button&gt;
+    increment() {
+        this.setState({count: this.state.count + 1});
+    }
 
-&lt;button pButton type="text" (click)="count()" icon="fa-check" iconPos="right" label="Click"&gt;&lt;/button&gt;
+    render() {
+        return (
+            <div>
+                <div className="content-section">
+                    <div className="feature-intro">
+                        <h1>Button</h1>
+                        <p>Button is an extension to standard input element with icons and theming.</p>
+                    </div>
+                </div>
 
-&lt;button pButton type="text" (click)="count()" icon="fa-check"&gt;&lt;/button&gt;
+                <div className="content-section implementation button-demo">
+                    <h3 className="first">Basic</h3>
+                    <Button label="Click" onClick={this.increment} />
+                    <Button label="Click" icon="fa-check" onClick={this.increment}/>
+                    <Button label="Click" icon="fa-check" iconPos="right" onClick={this.increment}/>
+                    <Button icon="fa-check" onClick={this.increment}/>
+                    <Button label="Click" disabled="disabled" onClick={this.increment}/>
 
-&lt;button pButton type="text" (click)="count()" icon="fa-check" [disabled]="true" label="Disabled"&gt;&lt;/button&gt;
+                    <h3>Severities</h3>
+                    <Button label="Primary" onClick={this.increment} />
+                    <Button label="Secondary" onClick={this.increment} className="ui-button-secondary"/>
+                    <Button label="Success" onClick={this.increment} className="ui-button-success"/>
+                    <Button label="Info" onClick={this.increment} className="ui-button-info"/>
+                    <Button label="Warning" onClick={this.increment} className="ui-button-warning"/>
+                    <Button label="Danger" onClick={this.increment} className="ui-button-danger"/>
 
-Number of clicks: &#123;clicks&#125;
-</code>
-</pre>
-
-<pre>
-<code className="language-typescript" pCode>
-export class ButtonDemo &#123;
-
-    clicks: number = 0;
-
-    count() &#123;
-        this.clicks++;
-    &#125;
-&#125;
-</code>
-</pre>
+                    <p>Number of Clicks: {this.state.count}</p>
+                </div>
+            </div>
+        )
+    }
+}
+`}
+</CodeHighlight>
                     </TabPanel>
                 </TabView >
             </div>

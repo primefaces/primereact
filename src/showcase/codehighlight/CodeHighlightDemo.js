@@ -29,26 +29,11 @@ export class CodeHighlightDemo extends Component {
                     <h3>HTML</h3>
                     <CodeHighlight className="language-markup">
 {`
-<div class="content-section">
-    <div>
-        <span class="feature-title">DataTable</span>
-        <span>DataTable displays data in tabular format.</span>
+<div className="content-section">
+    <div className="feature-intro">
+        <h1>CodeHighlight</h1>
+        <p>CodeHighlight is used for highlighting code blocks using PrismJS</p>
     </div>
-</div>
-
-<div class="content-section implementation">
-    <h3 class="first">Basic</h3>
-    <p-dataTable [value]="cars">
-        <p-column field="vin" header="Vin"></p-column>
-        <p-column field="year" header="Year"></p-column>
-        <p-column field="brand" header="Brand"></p-column>
-        <p-column field="color" header="Color"></p-column>
-    </p-dataTable>
-    
-    <h3>Dynamic Columns</h3>
-    <p-dataTable [value]="cars">
-        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
-    </p-dataTable>
 </div>
 
 `}
