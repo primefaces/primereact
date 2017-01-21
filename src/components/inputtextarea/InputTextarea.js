@@ -55,6 +55,6 @@ export class InputTextarea extends Component {
         var textareaProps = Object.assign({}, this.props);
         delete textareaProps.autoResize;
 
-        return <textarea {...textareaProps} className={styleClass} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp}>{this.props.value}</textarea>;
+        return <textarea {...textareaProps} className={styleClass} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp}></textarea>;
     }
 }

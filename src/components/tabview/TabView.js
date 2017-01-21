@@ -33,7 +33,9 @@ export class TabView extends Component {
     
     onTabClick(e, i) {
         this.setState({activeIndex:i});
-        this.props.onTabChange({originalEvent: e, index: i});
+        if(this.props.onTabChange) {
+            this.props.onTabChange({originalEvent: e, index: i});
+        }
         e.preventDefault();
     }
     
