@@ -56,7 +56,7 @@ class ButtonDoc extends Component {
     render() {
         return (
             <div className="content-section source">
-                <TabView effect="fade">
+                <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">

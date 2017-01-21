@@ -635,6 +635,9 @@ input.searchInput {
     color: #5C666A !important;
     background: #F5F6F7;
 }
+.source .ui-tabview .ui-tabview-panels .ui-tabview-panel {
+    padding: 15px 30px;
+}
 .source .ui-tabview.ui-tabview-top > .ui-tabview-nav li {
     top: 0px !important;
 }
