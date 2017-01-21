@@ -1,9 +1,9 @@
     import React, {Component} from 'react';
     import {Link} from 'react-router';
     import classNames from 'classnames';
-    import './App.css';
     import 'font-awesome/css/font-awesome.css';
     import 'prismjs/themes/prism-coy.css';
+    import './App.css';
 
     class Home extends Component {
         render() {

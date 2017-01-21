@@ -965,6 +965,13 @@ pre {
     color: #404C51;
     margin: 10px 0px;
 }
+pre[class*="language-"] {
+    border-left-color: #56BCD7 !important;
+    -moz-box-shadow: -1px 0px 0px 0px #56BCD7, 0px 0px 0px 1px #dfdfdf !important;
+    -webkit-box-shadow: -1px 0px 0px 0px #56BCD7, 0px 0px 0px 1px #dfdfdf !important;
+    box-shadow: -1px 0px 0px 0px #56BCD7, 0px 0px 0px 1px #dfdfdf !important;
+}
+
 .ui-tabview-left > .ui-tabview-nav {
     height: 150px;
 }
