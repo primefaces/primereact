@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
@@ -44,13 +45,13 @@ export class ButtonDemo extends Component {
                     <p>Number of Clicks: {this.state.count}</p>
                 </div>
 
-                <ButtonDemoDoc />
+                <ButtonDoc />
             </div>
         )
     }
 }
 
-class ButtonDemoDoc extends Component {
+class ButtonDoc extends Component {
 
     render() {
         return (
@@ -163,7 +164,7 @@ import {Button} from 'primereact';
                         </div>
 
                         <h3>Styling</h3>
-                        <p>Following is the list of structural style classes, for theming classes visit.</p>
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">&#9679; theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
