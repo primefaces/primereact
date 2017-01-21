@@ -108,7 +108,7 @@ import {InputTextarea} from 'primereact';
                         </div>
 
                         <h3>Styling</h3>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">&#9679; theming</Link> page.</p>
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -161,8 +161,6 @@ render() {
                 <h3>AutoResize</h3>
                 <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
             </div>
-
-            <InputTextareaDoc />
         </div>
     )
 }

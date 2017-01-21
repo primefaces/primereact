@@ -281,7 +281,7 @@ render() {
                         </div>
 
                         <h3>Styling</h3>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">&#9679; theming</Link> page.</p>
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
