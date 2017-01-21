@@ -79,7 +79,7 @@ import {Button} from 'primereact';
                         <p>Use label property to define the text of the button.</p>    
 <CodeHighlight className="language-markup">
 {`
-<Button />
+<Button label="Save"/>
 
 `}
 </CodeHighlight>
