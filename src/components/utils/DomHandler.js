@@ -200,4 +200,13 @@ export default class DomHandler {
     static getUserAgent() {
         return navigator.userAgent;
     }
+
+    static appendChild(element, target) {
+        if(this.isElement(target))
+            target.appendChild(element);
+        else if(target.el && target.el.nativeElement)
+            target.el.nativeElement.appendChild(element);
+        else
+            throw new Error('Cannot append ' + target + ' to ' + element);
+    }
 }

@@ -139,6 +139,7 @@
                         <Link to="/spinner">&#9679; Spinner</Link>
                         <Link to="/tristatecheckbox">&#9679; TriStateCheckbox</Link>
                         <Link to="/inputmask">&#9679; InputMask</Link>
+                        <Link to="/calendar">&#9679; Calendar</Link>
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,1)}  className={classNames({'active-menuitem': this.state.activeMenu === 1})}>
