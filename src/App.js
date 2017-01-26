@@ -155,7 +155,7 @@
                         <span>Data</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 2})}>
-                        
+                        <Link to="/paginator">&#9679; Paginator</Link>
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>
