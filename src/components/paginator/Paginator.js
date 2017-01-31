@@ -137,6 +137,8 @@ export class Paginator extends Component {
         this._first = nextProps.first;
         this._totalRecords = nextProps.totalRecords;
         this._rows = nextProps.rows;
+
+        this.updatePageLinks();
     }
 
     render() {
