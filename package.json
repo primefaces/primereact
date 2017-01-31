@@ -13,6 +13,7 @@
     "gulp-uglifycss": "^1.0.6"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "chart.js": "^2.4.0",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
