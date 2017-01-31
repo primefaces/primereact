@@ -38,6 +38,7 @@ import {RadarChartDemo} from './showcase/chart/RadarChartDemo';
 import {PolarAreaChartDemo} from './showcase/chart/PolarAreaChartDemo';
 import {PaginatorDemo} from './showcase/paginator/PaginatorDemo';
 import {DataListDemo} from './showcase/datalist/DataListDemo';
+import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {Router, Route,browserHistory} from 'react-router';
 
 ReactDOM.render(
@@ -80,6 +81,7 @@ ReactDOM.render(
             <Route path="/radarchart" component={RadarChartDemo} />
             <Route path="/paginator" component={PaginatorDemo} />
             <Route path="/datalist" component={DataListDemo} />
+            <Route path="/datagrid" component={DataGridDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
