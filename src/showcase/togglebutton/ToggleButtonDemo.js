@@ -181,7 +181,7 @@ render() {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: browser event <br />
-                                evebt.checked: boolean value to represent checked state.</td>
+                                event.checked: boolean value to represent checked state.</td>
                             <td>Callback to invoke on state change.</td>
                         </tr>
                     </tbody>
