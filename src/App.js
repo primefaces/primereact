@@ -13,8 +13,8 @@
                         <div className="ui-g-12">
                             <h1 className="homepage-title">PRIME<span>REACT</span></h1>
 
-                            <p>PrimeReact is a collection of rich UI components for Angular 2. PrimeNG is a sibling of the popular 
-                            JavaServer Faces Component Suite, PrimeFaces. All widgets are open source and free to use under MIT License.</p>
+                            <p>PrimeReact is a collection of rich UI components for React. PrimeReact is a sibling of the popular 
+                            PrimeNG (Angular) and PrimeFaces (JSF) components suites. All widgets are open source and free to use under MIT License.</p>
 
                             <p>PrimeReact is developed by <a href="http://www.primetek.com.tr">PrimeTek Informatics</a>, a company with years of expertise in developing open source UI components. For project news and updates, follow us on twitter.</p>
                         
@@ -64,7 +64,9 @@
                                     <img src="showcase/resources/images/icon-productivity.svg" alt="Producitivity" />
                                     <h3>PRODUCTIVITY</h3>
                                     <ul>
-                                        <li>Spin-off from PrimeFaces and PrimeNG</li>
+                                        <li>Simple</li>
+                                        <li>Lightweight</li>
+                                        <li>Powerful</li>
                                     </ul>
                                 </div>
 

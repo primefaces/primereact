@@ -58,23 +58,17 @@ export class MultiSelect extends Component {
     onOptionClick(event, option, index) {
         this.optionClick = true;
         var model = this.props.value ? this.props.value.slice() : [];
-        var type = null;
         var indexInValue = this.findIndexInValue(option);
 
-        if(this.isSelected(option)) {
+        if(this.isSelected(option))
             model.splice(indexInValue, 1);
-            type = -1;
-        }
-        else {
+        else
             model.push(option.value);
-            type = 1;
-        }
 
         this.props.onChange({
             originalEvent: event,
             value: model,
-            index: index,
-            type: type
+            index: index
         });
 
         event.preventDefault();
