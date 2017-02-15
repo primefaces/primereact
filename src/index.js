@@ -40,6 +40,7 @@ import {PaginatorDemo} from './showcase/paginator/PaginatorDemo';
 import {DataListDemo} from './showcase/datalist/DataListDemo';
 import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
+import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {Router, Route,browserHistory} from 'react-router';
 
 ReactDOM.render(
@@ -84,6 +85,7 @@ ReactDOM.render(
             <Route path="/datalist" component={DataListDemo} />
             <Route path="/datagrid" component={DataGridDemo} />
             <Route path="/orderlist" component={OrderListDemo} />
+            <Route path="/picklist" component={PickListDemo} />
         </Route>
     </Router>,
     document.getElementById('root')

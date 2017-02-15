@@ -161,6 +161,7 @@
                         <Link to="/datalist">&#9679; DataList</Link>
                         <Link to="/datagrid">&#9679; DataGrid</Link>
                         <Link to="/orderlist">&#9679; OrderList</Link>
+                        <Link to="/picklist">&#9679; PickList</Link>
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>
