@@ -107,7 +107,7 @@ export class OverlayPanel extends Component {
         var className = classNames('ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
         if(this.props.showCloseIcon) {
             var closeIcon = <a href="#" className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
-                                <span class="fa fa-fw fa-close"></span>
+                                <span className="fa fa-fw fa-close"></span>
                             </a>;
         }
 
