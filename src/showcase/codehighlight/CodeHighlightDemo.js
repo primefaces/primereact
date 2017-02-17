@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
 
 export class CodeHighlightDemo extends Component {
     render() {
@@ -64,6 +66,49 @@ resolveFieldData(data, field) {
 `}
                     </CodeHighlight>
                 </div>
+                <CodeHighlightDoc></CodeHighlightDoc>
+            </div>
+        );
+    }
+}
+
+export class CodeHighlightDoc extends Component {
+    
+    render() {
+        return (
+            <div className="content-section source">
+                <TabView>
+                    <TabPanel header="Documentation">
+                        <h3>Import</h3>
+<CodeHighlight className="language-javascript">
+{`
+import {CodeHighlight} from 'primereact';
+
+`}
+</CodeHighlight>
+
+            <h3>Getting Started</h3>
+            <p>CodeHighlighter is applied CodeHighlight element.
+               The CodeHiglight element should have a className having language- prefix to specify the
+               language to highlight. See Prismjs docs for the list of available languages.
+               An example block with css code would be as follows.</p>
+<CodeHighlight className="language-css">
+{`
+.ui-datatable table {
+    border-collapse:collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+`}
+</CodeHighlight>
+            <div className="doc-tablewrapper">
+                <h3>Dependencies</h3>
+                <p>None.</p>
+            </div>
+            
+            </TabPanel>
+                </TabView>
             </div>
         );
     }
