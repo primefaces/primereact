@@ -57,7 +57,7 @@ import {OverlayPanel} from 'primereact';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>OverlayPanel is defined using OverlayPanel element and is displayed using the show or toggle method of ref attribute.</p>
+            <p>OverlayPanel is defined using OverlayPanel element and accessed via its reference.</p>
 <CodeHighlight className="language-markup">
 {`
 <Button type="button" label="Basic" onClick={this.onClick} />
