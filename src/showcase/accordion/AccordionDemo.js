@@ -217,7 +217,7 @@ import {Accordion} from 'primereact';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-accordiın</td>
+                            <td>ui-accordion</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
