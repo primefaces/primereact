@@ -133,36 +133,41 @@ import {InputTextarea} from 'primereact';
                     <TabPanel header="Source">
 <CodeHighlight className="language-javascript">
 {`
-constructor() {
-    super();
-    this.state = {value: 'Welcome to Prime!'};
-    this.handleChange = this.handleChange.bind(this);
-}
+export class InputTextareaDemo extends Component {
+        
+    constructor() {
+        super();
+        this.state = {value: 'Welcome to Prime!'};
+        this.handleChange = this.handleChange.bind(this);
+    }
 
-handleChange(e) {
-    this.setState({value: e.target.value});
-}
+    handleChange(e) {
+        this.setState({value: e.target.value});
+    }
 
-render() {
-    return (
-        <div>
-            <div className="content-section">
-                <div className="feature-intro">
-                    <h1>InputTextarea</h1>
-                    <p>Inputtextarea add styling and autoResize functionality to standard textarea element.</p>
+    render() {
+        return (
+            <div>
+                <div className="content-section">
+                    <div className="feature-intro">
+                        <h1>InputTextarea</h1>
+                        <p>Inputtextarea add styling and autoResize functionality to standard textarea element.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div className="content-section implementation">
-                <h3>Default</h3>
-                <InputTextarea value={this.state.value} onChange={this.handleChange} rows={5} cols={30}></InputTextarea>
-                <div>{this.state.value}</div>
+                <div className="content-section implementation">
+                    <h3>Default</h3>
+                    <InputTextarea value={this.state.value} onChange={this.handleChange} rows={5} cols={30}></InputTextarea>
+                    <div>{this.state.value}</div>
 
-                <h3>AutoResize</h3>
-                <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
+                    <h3>AutoResize</h3>
+                    <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
+                </div>
+
+                <InputTextareaDoc />
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 `}
