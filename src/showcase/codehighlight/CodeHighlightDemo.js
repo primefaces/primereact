@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 
