@@ -192,7 +192,7 @@ showMultiple() {
                             <td>closable</td>
                             <td>boolean</td>
                             <td>true</td>
-                            <td>Defines if growl box can be closed by the click icon..</td>
+                            <td>Defines if growl box can be closed by the click icon.</td>
                         </tr>
                         <tr>
                             <td>style</td>
