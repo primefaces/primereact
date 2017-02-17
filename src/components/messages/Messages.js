@@ -4,7 +4,7 @@ import classNames from 'classnames';
 export class Messages extends Component {
 
     static defaultProps = {
-        closable: false,
+        closable: true,
         className: null,
         style: null,
         onClear: null
