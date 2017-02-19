@@ -25,6 +25,12 @@ export class ProgressBarDemo extends Component {
         }, 2000);
     }
 
+    componentWillUnmount () {
+        this.interval && clearInterval(this.interval);
+        this.interval = false;
+    }
+
+
     render() {
         return (
             <div>
