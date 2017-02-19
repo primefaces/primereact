@@ -206,6 +206,7 @@
                         <span>Chart</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
+                        <Link to="/chartdemo">&#9679; ChartModel</Link>
                         <Link to="/piechart">&#9679; Pie</Link>
                         <Link to="/doughnutchart">&#9679; Doughnut</Link>
                         <Link to="/barchart">&#9679; Bar</Link>

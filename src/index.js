@@ -30,6 +30,7 @@ import {SliderDemo} from './showcase/slider/SliderDemo';
 import {SpinnerDemo} from './showcase/spinner/SpinnerDemo';
 import {InputMaskDemo} from './showcase/inputmask/InputMaskDemo';
 import {CalendarDemo} from './showcase/calendar/CalendarDemo';
+import {ChartDemo} from './showcase/chart/ChartDemo';
 import {PieChartDemo} from './showcase/chart/PieChartDemo';
 import {BarChartDemo} from './showcase/chart/BarChartDemo';
 import {LineChartDemo} from './showcase/chart/LineChartDemo';
@@ -75,6 +76,7 @@ ReactDOM.render(
             <Route path="/slider" component={SliderDemo} />
             <Route path="/spinner" component={SpinnerDemo} />
             <Route path="/calendar" component={CalendarDemo} />
+            <Route path="/chartdemo" component={ChartDemo} />
             <Route path="/piechart" component={PieChartDemo} />
             <Route path="/doughnutchart" component={DoughnutChartDemo} />
             <Route path="/linechart" component={LineChartDemo} />
