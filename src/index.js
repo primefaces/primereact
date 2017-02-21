@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {AccordionDemo} from './showcase/accordion/AccordionDemo';
+import {AutoCompleteDemo} from './showcase/autocomplete/AutoCompleteDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
 import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
 import {ChipsDemo} from './showcase/chips/ChipsDemo';
@@ -48,6 +49,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <Route path="/accordion" component={AccordionDemo} />
+            <Route path="/autocomplete" component={AutoCompleteDemo} />
             <Route path="/button" component={ButtonDemo} />
             <Route path="/checkbox" component={CheckboxDemo} />
             <Route path="/chips" component={ChipsDemo} />
