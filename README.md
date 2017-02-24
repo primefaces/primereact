@@ -11,4 +11,5 @@ After the yarn installation just type `yarn` in the root project to install all 
 
 ## Start
 
+    gulp build
     npm start
