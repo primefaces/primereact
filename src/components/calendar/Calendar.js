@@ -8,6 +8,7 @@ import classNames from 'classnames';
 export class Calendar extends Component {
 
     static defaultProps = {
+        value: null,
         defaultDate: null,
         style: null,
         styleClass: null,
@@ -54,6 +55,7 @@ export class Calendar extends Component {
     }
 
     static propsTypes = {
+        value: PropTypes.any,
         defaultDate: PropTypes.instanceOf(Date),
         style: PropTypes.string,
         styleClass: PropTypes.string,
@@ -1044,6 +1046,8 @@ export class Calendar extends Component {
             else
                 DomHandler.appendChild(this.overlay, this.props.appendTo);
         }
+
+        this.writeValue(this.props.value);
     }
     
 
