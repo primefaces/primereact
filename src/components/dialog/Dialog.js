@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
+export class Footer extends Component {    
+    render() {
+        return (<div>{this.props.children}</div>);
+    }
+}
+
 export class Dialog extends Component {
 
     static defaultProps = {
@@ -187,6 +193,13 @@ export class Dialog extends Component {
             zIndex: DomHandler.getZindex()
         };
 
+        var content =  React.Children.map(this.props.children, (element, i) => {
+                return (element && element.type !== Footer) && (<div className="ui-dialog-content ui-widget-content">{element}</div>);
+            }),
+            footer = React.Children.map(this.props.children, (element, i) => {
+                return (element && element.type === Footer) && <Footer> {element.props.children}</Footer>
+            });
+
         return (
             <div className={styleClass} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
                 <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
@@ -195,12 +208,8 @@ export class Dialog extends Component {
                         <span className="fa fa-fw fa-close"></span>
                     </a>
                 </div>
-                <div className="ui-dialog-content ui-widget-content">
-                    {this.props.children}    
-                </div>
-                {this.props.footer && <div className="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    this.props.footer
-                </div>}
+                {content}
+                {footer}
             </div>
         );
     }
