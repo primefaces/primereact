@@ -25,6 +25,10 @@
     overflow: auto;
 }
 
+.ui-autocomplete .ui-autocomplete-panel {
+    min-width: 100%;
+}
+
 .ui-autocomplete-panel .ui-autocomplete-list {
     padding: 0.4em;
     border: 0 none;

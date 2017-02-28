@@ -10,10 +10,19 @@ export class AutoCompleteDemo extends Component {
         super();
         this.state = {};
         this.onValue1Change = this.onValue1Change.bind(this);
+        this.filter = this.filter.bind(this);
     }
 
     onValue1Change(e) {
-        this.setState({value1: e.value});
+        this.setState({value1: e.value, suggestions: null});
+    }
+
+    filter(event) {
+        var brands = ['Audi','BMW','Chevrolet','Ford','Jaguar','Mercedes','Porsche','Skoda','Seat','Volkswagen','Volvo'];
+        var results = brands.filter((brand) => {
+            return brand.toLowerCase().startsWith(event.query);
+        });
+        this.setState({suggestions:results});
     }
 
     render() {
@@ -28,7 +37,7 @@ export class AutoCompleteDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <AutoComplete value={this.state.value1} onChange={this.onValue1Change} />
+                    <AutoComplete value={this.state.value1} completeMethod={this.filter} onChange={this.onValue1Change} suggestions={this.state.suggestions}/>
                 </div>
 
                 <AutoCompleteDoc />
