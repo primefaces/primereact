@@ -119,6 +119,12 @@ onCityChange(e) {
                                     <td>null</td>
                                     <td>Label of the radiobutton.</td>
                                 </tr>
+                                <tr>
+                                    <td>checked</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Specifies whether a radio button should be checked or not.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
