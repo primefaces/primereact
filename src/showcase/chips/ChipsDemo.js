@@ -124,6 +124,12 @@ customTemplate(item) {
                             <td>Maximum number of entries allowed.</td>
                         </tr>
                         <tr>
+                            <td>value</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Value of the chips.</td>
+                        </tr>
+                        <tr>
                             <td>disabled</td>
                             <td>boolean</td>
                             <td>false</td>
