@@ -165,6 +165,12 @@ onReorderCars(e) {
                             <td>null</td>
                             <td>Style class of the element.</td>
                         </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
