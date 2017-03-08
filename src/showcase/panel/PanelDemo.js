@@ -138,13 +138,13 @@ import {Panel} from 'primereact';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onExpand</td>
+                            <td>onCollapse</td>
                             <td>event.originalEvent: browser event
                             </td>
                             <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
                         </tr>
                         <tr>
-                            <td>onCollapse</td>
+                            <td>onExpand</td>
                             <td>event.originalEvent: browser event
                             </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
