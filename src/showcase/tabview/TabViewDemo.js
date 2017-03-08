@@ -88,7 +88,7 @@ import {TabView,TabPanel} from 'primereact';
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Attributes For TabView</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -101,22 +101,32 @@ import {TabView,TabPanel} from 'primereact';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>multiple</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When enabled, multiple tabs can be activated at the same time.</td>
+                            <td>activeIndex</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Active index of the TabView.</td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Attributes For TabPanel</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <td>style</td>
+                            <td>header</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
+                            <td>Orientation of tab headers.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -134,18 +144,11 @@ import {TabView,TabPanel} from 'primereact';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onTabClose</td>
+                            <td>onTabChange</td>
                             <td>event.originalEvent: Click object  <br/>
                                 event.index: Index of the tab 
                             </td>
-                            <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
-                        </tr>
-                        <tr>
-                            <td>onTabOpen</td>
-                            <td>event.originalEvent: Click object  <br/>
-                                event.index: Index of the tab 
-                            </td>
-                            <td>Callback to invoke when a tab gets expanded.</td>
+                            <td>Callback to invoke when an active tab is changed.</td>
                         </tr>
                     </tbody>
                 </table>
