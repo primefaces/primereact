@@ -151,6 +151,12 @@ onOptionChange(e) {
                            <td>null</td>
                            <td>Index of the element in tabbing order.</td>
                          </tr>
+                         <tr>
+                           <td>activeIndex</td>
+                           <td>any</td>
+                           <td>null</td>
+                           <td>Active Index of the element.</td>
+                         </tr>
                     </tbody>
                 </table>
             </div>
