@@ -222,11 +222,9 @@ showMultiple() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onChange</td>
-                            <td>event.originalEvent: Original event <br />
-                                event.value: Value of the checkbox <br />
-                                event.checked: Checked state as a boolean.</td>
-                            <td>Callback to invoke on value change</td>
+                            <td>onClear</td>
+                            <td>-</td>
+                            <td>Callback to invoke when clear icon is clicked</td>
                         </tr>
                     </tbody>
                 </table>
