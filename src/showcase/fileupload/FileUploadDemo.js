@@ -162,6 +162,12 @@ onUpload(event) {
                             <td>Disables the upload functionality.</td>
                         </tr>
                         <tr>
+                            <td>auto</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, upload begins automatically after selection is completed.</td>
+                        </tr>
+                        <tr>
                             <td>maxFileSize</td>
                             <td>number</td>
                             <td>null</td>
