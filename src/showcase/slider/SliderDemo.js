@@ -178,6 +178,12 @@ onChangeSlider1(e) {
                            <td>false</td>
                            <td>When speficed, allows two boundary values to be picked.</td>
                          </tr>
+                         <tr>
+                            <td>orientation</td>
+                            <td>string</td>
+                            <td>horizontal</td>
+                            <td>Orientation of the slider, valid values are horizontal and vertical.</td>
+                          </tr>
                         <tr>
                             <td>style</td>
                             <td>string</td>
