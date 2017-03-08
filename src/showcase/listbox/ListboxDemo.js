@@ -196,6 +196,12 @@ carTemplate(option) {
                             <td>null</td>
                             <td>Selected value to display.</td>
                         </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -214,7 +220,9 @@ carTemplate(option) {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: Browser event <br/>
-                                event.value: single value or an array of values that are selected</td>
+                                event.value: single value or an array of values that are selected <br/>
+                                index: index
+                                </td>
                             <td>Callback to invoke when value of listbox changes.</td>
                         </tr>
                     </tbody>
