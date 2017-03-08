@@ -152,17 +152,11 @@ render() {
                             <td>Style class of the element.</td>
                         </tr>
                         <tr>
-                            <td>disabled</td>
+                            <td>checked</td>
                             <td>boolean</td>
                             <td>false</td>
-                            <td>When present, it specifies that the element should be disabled.</td>
+                            <td>Specifies whether a togglebutton should be checked or not.</td>
                         </tr>
-                         <tr>
-                           <td>tabindex</td>
-                           <td>number</td>
-                           <td>null</td>
-                           <td>Index of the element in tabbing order.</td>
-                         </tr>
                     </tbody>
                 </table>
             </div>
