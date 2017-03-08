@@ -247,6 +247,12 @@ import {DataGrid, Header, Footer} from 'primereact';
                             <td>bottom</td>
                             <td>Position of the paginator, options are "top","bottom" or "both".</td>
                         </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
