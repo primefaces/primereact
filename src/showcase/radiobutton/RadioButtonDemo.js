@@ -123,7 +123,7 @@ onCityChange(e) {
                                     <td>checked</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>Specifies whether a radio button should be checked or not.</td>
+                                    <td>Specifies whether a radiobutton should be checked or not.</td>
                                 </tr>
                             </tbody>
                         </table>

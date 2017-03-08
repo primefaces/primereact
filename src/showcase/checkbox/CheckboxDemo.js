@@ -142,6 +142,12 @@ onCityChange(e) {
                                     <td>null</td>
                                     <td>Label of the checkbox.</td>
                                 </tr>
+                                <tr>
+                                    <td>checked</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Specifies whether a checkbox should be checked or not.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
