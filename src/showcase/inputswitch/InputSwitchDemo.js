@@ -137,6 +137,12 @@ onChangeBasic(e) {
                            <td>null</td>
                            <td>Index of the element in tabbing order.</td>
                          </tr>
+                         <tr>
+                             <td>checked</td>
+                             <td>boolean</td>
+                             <td>false</td>
+                             <td>Specifies whether a inputswitch should be checked or not.</td>
+                         </tr>
                     </tbody>
                 </table>
             </div>
