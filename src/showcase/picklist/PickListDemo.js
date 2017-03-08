@@ -188,6 +188,12 @@ componentDidMount() {
                             <td>true</td>
                             <td>Whether to show buttons of target list.</td>
                         </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
