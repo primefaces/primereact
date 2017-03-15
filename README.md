@@ -1,7 +1,7 @@
 # PrimeReact
 UI Components for React
 
-![alt text](http://www.primefaces.org/images/primereact.png "PrimeReact")
+![alt text](https://www.primefaces.org/wp-content/uploads/2017/03/primereact-logo.png "PrimeReact")
 
 ## Setup
 
