@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ObjectUtils from '../utils/ObjectUtils';
 import jQuery from "jquery";
+import FullCalendar from "fullcalendar";
 
 export class Schedule extends Component {
 
@@ -116,6 +117,7 @@ export class Schedule extends Component {
 
     constructor(props) {
         super(props);
+        debugger;
     }
 
     gotoDate(date) {

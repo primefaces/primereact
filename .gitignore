@@ -1,5 +1,8 @@
 node_modules
-public/resources/*.css
+!public/resources/themes/bootstrap/theme.css
+public/resources/**/*.css
+public/resources/**/*.map
 .vscode
 .DS_Store
 .idea
+.sass-cache
