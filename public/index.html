@@ -3,19 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="%PUBLIC_URL%/resources/themes/omega/theme.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/resources/primeng.min.css">
-    <script src="%PUBLIC_URL%/showcase/resources/script/prism.js" data-manual></script>
-    <!--
-      Notice the use of %PUBLIC_URL% in the tag above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <link rel="shortcut icon" href="public/favicon.ico">
+    <link rel="stylesheet" href="public/resources/themes/omega/theme.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
+    <link rel="stylesheet" href="public/resources/primeng.min.css">
+    <script src="public/showcase/resources/script/prism.js" data-manual></script>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <!-- Schedule -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+
     <title>PrimeReact</title>
   </head>
   <body>
@@ -30,5 +28,6 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
+    <script src="bundle.js"></script>
   </body>
 </html>

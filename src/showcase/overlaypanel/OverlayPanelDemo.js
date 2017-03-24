@@ -32,7 +32,7 @@ export class OverlayPanelDemo extends Component {
                     <Button type="button" label="Basic" onClick={this.onClick} />
 
                     <OverlayPanel ref={(el) => {this.op = el;}}>
-                        <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+                        <img src="public/showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
                 <OverlayPanelDoc></OverlayPanelDoc>
@@ -63,7 +63,7 @@ import {OverlayPanel} from 'primereact';
 <Button type="button" label="Basic" onClick={this.onClick} />
 
 <OverlayPanel ref={(el) => {this.op = el;}}>
-    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+    <img src="public/showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
 </OverlayPanel>
 
 `}
@@ -89,7 +89,7 @@ onClick(event) {
 <CodeHighlight className="language-markup">
 {`
 <OverlayPanel ref={(el) => {this.op = el;}} showCloseIcon={true} dismissable={true}>
-    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+    <img src="public/showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
 </OverlayPanel>
 
 `}
@@ -203,7 +203,7 @@ export class OverlayPanelDemo extends Component {
                     <Button type="button" label="Basic" onClick={this.onClick} />
 
                     <OverlayPanel ref={(el) => {this.op = el;}}>
-                        <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+                        <img src="public/showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
                 <OverlayPanelDoc></OverlayPanelDoc>

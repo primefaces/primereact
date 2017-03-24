@@ -27,7 +27,7 @@ export class DataGridDemo extends Component {
         return (
             <div style={{ padding: '3px' }} className="ui-g-12 ui-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={`showcase/resources/demo/images/car/${car.brand}.gif`} alt={car.brand} />
+                    <img src={`public/showcase/resources/demo/images/car/${car.brand}.gif`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
                     <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
@@ -60,7 +60,7 @@ export class DataGridDemo extends Component {
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
-                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand} /></div>
+                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={`public/showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand} /></div>
                                 </div>
                                 <div className="ui-grid-row">
                                     <div className="ui-grid-col-4">Vin: </div>
@@ -338,7 +338,7 @@ export class DataGridDemo extends Component {
         return (
             <div style={{ padding: '3px' }} className="ui-g-12 ui-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.gif\`} alt={car.brand} />
+                    <img src={\`public/showcase/resources/demo/images/car/\${car.brand}.gif\`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
                     <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
@@ -371,7 +371,7 @@ export class DataGridDemo extends Component {
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
-                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand} /></div>
+                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={\`public/showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand} /></div>
                                 </div>
                                 <div className="ui-grid-row">
                                     <div className="ui-grid-col-4">Vin: </div>

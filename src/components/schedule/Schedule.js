@@ -1,0 +1,346 @@
+import React, { Component, PropTypes } from 'react';
+import ObjectUtils from '../utils/ObjectUtils';
+import jQuery from "jquery";
+
+export class Schedule extends Component {
+
+    static defaultProps = {
+        events: [],
+        header: null,
+        style: null,
+        styleClass: null,
+        isRTL: false,
+        weekends: true,
+        hiddenDays: [],
+        fixedWeekCount: true,
+        weekNumbers: false,
+        businessHours: false,
+        height: null,
+        contentHeight: null,
+        aspectRatio: 1.35,
+        eventLimit: false,
+        defaultDate: null,
+        editable: false,
+        droppable: false,
+        eventStartEditable: true,
+        eventDurationEditable: true,
+        defaultView: 'month',
+        allDaySlot: true,
+        allDayText: 'all-day',
+        slotDuration: '00:30:00',
+        slotLabelInterval: null,
+        snapDuration: null,
+        scrollTime: '06:00:00',
+        minTime: '00:00:00',
+        maxTime: '24:00:00',
+        slotEventOverlap: true,
+        nowIndicator: false,
+        dragRevertDuration: 500,
+        dragOpacity: 0.75,
+        dragScroll: true,
+        eventOverlap: true,
+        eventConstraint: null,
+        eventRender: null,
+        dayRender: null,
+        locale: null,
+        timezone: false,
+        options: null,
+        onDayClick: null,
+        onEventClick: null,
+        onEventMouseover: null,
+        onEventMouseout: null,
+        onEventDragStart: null,
+        onEventDragStop: null,
+        onEventDrop: null,
+        onEventResizeStart: null,
+        onEventResizeStop: null,
+        onEventResize: null,
+        onViewRender: null,
+        onDrop: null
+    }
+
+    static propsTypes = {
+        events: PropTypes.array,
+        header: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+        style: PropTypes.string,
+        styleClass: PropTypes.string,
+        isRTL: PropTypes.bool,
+        weekends: PropTypes.bool,
+        hiddenDays: PropTypes.array,
+        fixedWeekCount: PropTypes.bool,
+        weekNumbers: PropTypes.bool,
+        businessHours: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+        height: PropTypes.oneOfType([PropTypes.number, PropTypes.func, PropTypes.string]),
+        contentHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func, PropTypes.string]),
+        aspectRatio: PropTypes.number,
+        eventLimit: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+        defaultDate: PropTypes.any,
+        editable: PropTypes.bool,
+        droppable: PropTypes.bool,
+        eventStartEditable: PropTypes.bool,
+        eventDurationEditable: PropTypes.bool,
+        defaultView: PropTypes.string,
+        allDaySlot: PropTypes.bool,
+        allDayText: PropTypes.string,
+        slotDuration: PropTypes.any,
+        slotLabelInterval: PropTypes.any,
+        snapDuration: PropTypes.any,
+        scrollTime: PropTypes.any,
+        minTime: PropTypes.any,
+        maxTime: PropTypes.any,
+        slotEventOverlap: PropTypes.bool,
+        nowIndicator: PropTypes.bool,
+        dragRevertDuration: PropTypes.number,
+        dragOpacity: PropTypes.number,
+        dragScroll: PropTypes.bool,
+        eventOverlap: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+        eventConstraint: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        eventRender: PropTypes.func,
+        dayRender: PropTypes.func,
+        locale: PropTypes.object,
+        timezone: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+        options: PropTypes.object,
+        onDayClick: PropTypes.func,
+        onEventClick: PropTypes.func,
+        onEventMouseover: PropTypes.func,
+        onEventMouseout: PropTypes.func,
+        onEventDragStart: PropTypes.func,
+        onEventDragStop: PropTypes.func,
+        onEventDrop: PropTypes.func,
+        onEventResizeStart: PropTypes.func,
+        onEventResizeStop: PropTypes.func,
+        onEventResize: PropTypes.func,
+        onViewRender: PropTypes.func,
+        onDrop: PropTypes.func
+    }
+
+    constructor(props) {
+        super(props);
+    }
+
+    gotoDate(date) {
+        this.schedule.fullCalendar('gotoDate', date);
+    }
+    
+    prev() {
+        this.schedule.fullCalendar('prev');
+    }
+    
+    next() {
+        this.schedule.fullCalendar('next');
+    }
+    
+    prevYear() {
+        this.schedule.fullCalendar('prevYear');
+    }
+    
+    nextYear() {
+        this.schedule.fullCalendar('nextYear');
+    }
+    
+    today() {
+        this.schedule.fullCalendar('today');
+    }
+    
+    incrementDate(duration) {
+        this.schedule.fullCalendar('incrementDate', duration);
+    }
+     
+    changeView(viewName) {
+        this.schedule.fullCalendar('changeView', viewName);   
+    }
+    
+    getDate() {
+        return this.schedule.fullCalendar('getDate');
+    }
+
+    componentDidMount() {
+        var $this = this;
+        this.config = {
+            theme: true,
+            header: this.props.header,
+            isRTL: this.props.rtl,
+            weekends: this.props.weekends,
+            hiddenDays: this.props.hiddenDays,
+            fixedWeekCount: this.props.fixedWeekCount,
+            weekNumbers: this.props.weekNumbers,
+            businessHours: this.props.businessHours,
+            height: this.props.height,
+            contentHeight: this.props.contentHeight,
+            aspectRatio: this.props.aspectRatio,
+            eventLimit: this.props.eventLimit,
+            defaultDate: this.props.defaultDate,
+            timezone: this.props.timezone,
+            editable: this.props.editable,
+            droppable: this.props.droppable,
+            eventStartEditable: this.props.eventStartEditable,
+            eventDurationEditable: this.props.eventDurationEditable,
+            defaultView: this.props.defaultView,
+            allDaySlot: this.props.allDaySlot,
+            allDayText: this.props.allDayText,
+            slotDuration: this.props.slotDuration,
+            slotLabelInterval: this.props.slotLabelInterval,
+            snapDuration: this.props.snapDuration,
+            scrollTime: this.props.scrollTime,
+            minTime: this.props.minTime,
+            maxTime: this.props.maxTime,
+            slotEventOverlap: this.props.slotEventOverlap,
+            nowIndicator: this.props.nowIndicator,
+            dragRevertDuration: this.props.dragRevertDuration,
+            dragOpacity: this.props.dragOpacity,
+            dragScroll: this.props.dragScroll,
+            eventOverlap: this.props.eventOverlap,
+            eventConstraint: this.props.eventConstraint,
+            eventRender: this.props.eventRender,
+            dayRender: this.props.dayRender,
+            dayClick: (date, jsEvent, view) => {
+                if(this.props.onDayClick) {
+                    this.props.onDayClick({
+                        'date': date,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            drop: (date, jsEvent, ui, resourceId) => {
+                if(this.props.onDrop) {
+                    this.props.onDrop({
+                        'date': date,
+                        'jsEvent': jsEvent,
+                        'resourceId': resourceId
+                    });
+                }
+            },
+            eventClick: (calEvent, jsEvent, view) => {
+                if(this.props.onEventClick) {
+                    this.props.onEventClick({
+                        'calEvent': calEvent,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventMouseover: (calEvent, jsEvent, view) => {
+                if(this.props.onEventMouseover) {
+                    this.props.onEventMouseover({
+                        'calEvent': calEvent,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventMouseout: (calEvent, jsEvent, view) => {
+                if(this.props.onEventMouseout) {
+                    this.props.onEventMouseout({
+                        'calEvent': calEvent,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventDragStart: (event, jsEvent, ui, view) => {
+                if(this.props.onEventDragStart) {
+                    this.props.onEventDragStart({
+                        'event': event,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventDragStop: (event, jsEvent, ui, view) => {
+                if(this.props.onEventDragStop) {
+                    this.props.onEventDragStop({
+                        'event': event,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventDrop: (event, delta, revertFunc, jsEvent, ui, view) => {
+                if(this.props.onEventDrop) {
+                    this.props.onEventDrop({
+                        'event': event,
+                        'delta': delta,
+                        'revertFunc': revertFunc,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventResizeStart: (event, jsEvent, ui, view) => {
+                if(this.props.onEventResizeStart) {
+                    this.props.onEventResizeStart({
+                        'event': event,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventResizeStop: (event, jsEvent, ui, view) => {
+                if(this.props.onEventResizeStop) {
+                    this.props.onEventResizeStop({
+                        'event': event,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            eventResize: (event, delta, revertFunc, jsEvent, ui, view) => {
+                if(this.props.onEventResize) {
+                    this.props.onEventResize({
+                        'event': event,
+                        'delta': delta,
+                        'revertFunc': revertFunc,
+                        'jsEvent': jsEvent,
+                        'view': view
+                    });
+                }
+            },
+            viewRender: (view, element) => {
+                if(this.props.onViewRender) {
+                    this.props.onViewRender({
+                        'view': view,
+                        'element': element
+                    });
+                }
+            }
+        };
+
+        if (this.props.locale) {
+            for (let prop in this.props.locale) {
+                this.config[prop] = this.props.locale[prop];
+            }
+        }
+
+        if (this.props.options) {
+            for (let prop in this.props.options) {
+                this.config[prop] = this.props.options[prop];
+            }
+        }
+
+        this.schedule = jQuery(this.scheduleEl);
+        this.schedule.fullCalendar(this.config);
+        this.events = [...this.props.events];
+        this.schedule.fullCalendar('addEventSource', this.events);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        if(!ObjectUtils.equals(nextProps.events, this.events)) {
+            this.events = [...nextProps.events];
+            this.schedule.fullCalendar('removeEventSources');
+            this.schedule.fullCalendar('addEventSource', this.events);
+        }
+    }
+
+    componentWillUnmount() {
+        jQuery(this.scheduleEl).fullCalendar('destroy');
+    }
+    
+    render() {
+        return <div ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.styleClass}></div>;
+    }
+}

@@ -3,7 +3,7 @@ import axios from 'axios'
 export class CarService {
     
     getCarsSmall(_this) {
-        axios.get('showcase/resources/demo/data/cars-small.json')
+        axios.get('public/showcase/resources/demo/data/cars-small.json')
             .then(res => res.data.data)
             .then(data => { 
                 _this.setState({ cars: data });
@@ -12,7 +12,7 @@ export class CarService {
     }
 
     getCarsMedium(_this) {
-        axios.get('showcase/resources/demo/data/cars-medium.json')
+        axios.get('public/showcase/resources/demo/data/cars-medium.json')
             .then(res => res.data.data)
             .then(data => { 
                 _this.setState({ cars: data });
@@ -21,7 +21,7 @@ export class CarService {
     }
 
     getCarsLarge(_this) {
-        axios.get('showcase/resources/demo/data/cars-large.json')
+        axios.get('public/showcase/resources/demo/data/cars-large.json')
             .then(res => res.data.data)
             .then(data => { 
                 _this.setState({ cars: data });

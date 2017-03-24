@@ -1,28 +1,75 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router';
-import {AutoComplete} from '../../components/autocomplete/AutoComplete';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import { AutoComplete } from '../../components/autocomplete/AutoComplete';
+import { CountryService } from '../service/CountryService';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { CodeHighlight } from '../../components/codehighlight/CodeHighlight';
 
 export class AutoCompleteDemo extends Component {
-        
+
     constructor() {
         super();
-        this.state = {};
-        this.onValue1Change = this.onValue1Change.bind(this);
-        this.filter = this.filter.bind(this);
+        this.state = {brand: "Ford", countries: [{"name": "Algeria", "code": "DZ"},{"name": "Turkey", "code": "TR"}], countriesData: [] };
+        this.countryservice = new CountryService();
     }
 
-    onValue1Change(e) {
-        this.setState({value1: e.value, suggestions: null});
+    componentDidMount() {
+        this.setState({ countriesData: this.countryservice.getCountries(this) });
+        this.brands = ['Audi', 'BMW', 'Fiat', 'Ford', 'Honda', 'Jaguar', 'Mercedes', 'Renault', 'Volvo'];
     }
 
-    filter(event) {
-        var brands = ['Audi','BMW','Chevrolet','Ford','Jaguar','Mercedes','Porsche','Skoda','Seat','Volkswagen','Volvo'];
-        var results = brands.filter((brand) => {
-            return brand.toLowerCase().startsWith(event.query);
+    onCountryValueChange(e) {
+        this.setState({ country: e.value, filteredCountriesSingle: null });
+    }
+
+    onBrandValueChange(e) {
+        this.setState({ brand: e.value, filteredBrands: null });
+    }
+
+    onCountriesValueChange(e) {
+        this.setState({ countries: e.value, filteredCountriesMultiple: null });
+    }
+
+    filterCountrySingle(event) {
+        var results = this.state.countriesData.filter((country) => {
+            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
         });
-        this.setState({suggestions:results});
+        this.setState({ filteredCountriesSingle: results });
+    }
+
+    filterBrands(event) {
+        var results = this.brands.filter((brand) => {
+            return brand.toLowerCase().startsWith(event.query.toLowerCase());
+        });
+        this.setState({ filteredBrands: results });
+    }
+
+    filterCountryMultiple(event) {
+        var results = this.state.countriesData.filter((country) => {
+            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+        });
+        this.setState({ filteredCountriesMultiple: results });
+    }
+
+    itemTemplate(brand) {
+        if (!brand) {
+            return;
+        }
+
+        return (<div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
+            <img src={`public/showcase/resources/demo/images/car/${brand}.gif`} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
+            <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
+        </div>)
+    }
+
+    handleDropdownClick() {
+        this.setState({ filteredBrands: [] });
+        
+        //mimic remote call
+        setTimeout(() => {
+            this.setState({ filteredBrands: this.brands });
+        }, 100)
+        
     }
 
     render() {
@@ -36,8 +83,22 @@ export class AutoCompleteDemo extends Component {
                 </div>
 
                 <div className="content-section implementation button-demo">
-                    <h3 className="first">Basic</h3>
-                    <AutoComplete value={this.state.value1} completeMethod={this.filter} onChange={this.onValue1Change} suggestions={this.state.suggestions}/>
+                    <h3>Basic</h3>
+                    <AutoComplete value={this.state.country} appendTo="body" suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle.bind(this)} field="name"
+                        size={30} placeholder="Countries" minLength={1} onChange={this.onCountryValueChange.bind(this)} />
+                    <span style={{ marginLeft: '10px' }}>Country: {this.state.country ? this.state.country.name || this.state.country : 'none'}</span>
+
+                    <h3>Advanced</h3>
+                    <AutoComplete value={this.state.brand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands.bind(this)} size={30} minLength={1}
+                        placeholder="Hint: type 'v' or 'f'" dropdown={true} onDropdownClick={this.handleDropdownClick.bind(this)} itemTemplate={this.itemTemplate.bind(this)} onChange={this.onBrandValueChange.bind(this)} />
+                    <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
+
+                    <h3>Multiple</h3>
+                    <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple.bind(this)}
+                        minLength={1} placeholder="Countries" field="name" multiple={true} onChange={this.onCountriesValueChange.bind(this)} />
+                    <ul>
+                        {this.state.countries && this.state.countries.map((c, index) => <li key={index}>{c.name}</li>)}
+                    </ul>
                 </div>
 
                 <AutoCompleteDoc />
@@ -54,57 +115,57 @@ class AutoCompleteDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight className="language-javascript">
+                            {`
 import {Button} from 'primereact';
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Button is created using the Button element.</p>    
-<CodeHighlight className="language-markup">
-{`
+                        <p>Button is created using the Button element.</p>
+                        <CodeHighlight className="language-markup">
+                            {`
 <Button />
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Label</h3>
-                        <p>Use label property to define the text of the button.</p>    
-<CodeHighlight className="language-markup">
-{`
+                        <p>Use label property to define the text of the button.</p>
+                        <CodeHighlight className="language-markup">
+                            {`
 <Button label="Save"/>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Icons</h3>
                         <p>Icon on a button is specified with icon attribute and position is customized using iconPos attribute. Default
                         icon position is left. To display only an icon, leave label as undefined.</p>
-<CodeHighlight className="language-markup">
-{`
+                        <CodeHighlight className="language-markup">
+                            {`
 <Button label="Click" icon="fa-check" />
 <Button label="Click" icon="fa-check" iconPos="right"/>
 <Button icon="fa-check" iconPos="right"/>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Events</h3>
                         <p>Events are defined using standard notation.</p>
-<CodeHighlight className="language-markup">
-{`
+                        <CodeHighlight className="language-markup">
+                            {`
 <Button label="Click" onClick={this.handleClick} />
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
 
 
                         <h3>Severity</h3>
                         <p>Different color options are available to define severity levels.</p>
-                        
+
                         <ul>
                             <li>.ui-button-secondary</li>
                             <li>.ui-button-success</li>
@@ -112,8 +173,8 @@ import {Button} from 'primereact';
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
-<CodeHighlight className="language-markup">
-{`
+                        <CodeHighlight className="language-markup">
+                            {`
 <Button label="Primary" />
 <Button label="Secondary" className="ui-button-secondary"/>
 <Button label="Success" className="ui-button-success"/>
@@ -122,7 +183,7 @@ import {Button} from 'primereact';
 <Button label="Danger" className="ui-button-danger"/>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Attributes</h3>
                         <div className="doc-tablewrapper">
@@ -190,8 +251,8 @@ import {Button} from 'primereact';
                     </TabPanel>
 
                     <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight className="language-javascript">
+                            {`
 export class ButtonDemo extends Component {
         
     constructor() {
@@ -237,7 +298,7 @@ export class ButtonDemo extends Component {
     }
 }
 `}
-</CodeHighlight>
+                        </CodeHighlight>
                     </TabPanel>
                 </TabView >
             </div>
