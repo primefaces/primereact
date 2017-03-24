@@ -1,7 +1,7 @@
 node_modules
-!public/resources/themes/bootstrap/theme.css
 public/resources/**/*.css
 public/resources/**/*.map
+!public/resources/themes/bootstrap/theme.css
 .vscode
 .DS_Store
 .idea
