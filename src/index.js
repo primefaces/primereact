@@ -44,10 +44,10 @@ import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
-import {Router, Route,browserHistory} from 'react-router';
+import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
         <Route path="/" component={App}>
             <Route path="/accordion" component={AccordionDemo} />
             <Route path="/autocomplete" component={AutoCompleteDemo} />

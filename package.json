@@ -2,6 +2,7 @@
   "name": "prime-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://www.primefaces.org/primereact",
   "devDependencies": {
     "axios": "^0.15.3",
     "del": "^2.2.0",
