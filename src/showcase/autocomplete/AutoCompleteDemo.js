@@ -9,7 +9,7 @@ export class AutoCompleteDemo extends Component {
 
     constructor() {
         super();
-        this.state = {brand: "Ford", countries: [{"name": "Algeria", "code": "DZ"},{"name": "Turkey", "code": "TR"}], countriesData: [] };
+        this.state = { countriesData: [] };
         this.countryservice = new CountryService();
     }
 
@@ -57,7 +57,7 @@ export class AutoCompleteDemo extends Component {
         }
 
         return (<div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
-            <img src={`public/showcase/resources/demo/images/car/${brand}.gif`} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
+            <img src={`showcase/resources/demo/images/car/${brand}.gif`} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
             <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
         </div>)
     }
@@ -84,7 +84,7 @@ export class AutoCompleteDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3>Basic</h3>
-                    <AutoComplete value={this.state.country} appendTo="body" suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle.bind(this)} field="name"
+                    <AutoComplete value={this.state.country} suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle.bind(this)} field="name"
                         size={30} placeholder="Countries" minLength={1} onChange={this.onCountryValueChange.bind(this)} />
                     <span style={{ marginLeft: '10px' }}>Country: {this.state.country ? this.state.country.name || this.state.country : 'none'}</span>
 

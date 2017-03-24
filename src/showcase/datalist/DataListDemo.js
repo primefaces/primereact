@@ -23,7 +23,7 @@ export class DataListDemo extends Component {
             return;
         }
 
-        var src = "public/showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -77,7 +77,7 @@ export class DataListDemo extends Component {
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`public/showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>
@@ -351,7 +351,7 @@ export class DataListDemo extends Component {
             return;
         }
 
-        var src = "public/showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -405,7 +405,7 @@ export class DataListDemo extends Component {
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`public/showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>

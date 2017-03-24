@@ -24,7 +24,7 @@ export class PickListDemo extends Component {
 
         return (
             <div className="ui-helper-clearfix">
-                <img src={`public/showcase/resources/demo/images/car/${car.brand}.gif`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
+                <img src={`showcase/resources/demo/images/car/${car.brand}.gif`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );
@@ -293,7 +293,7 @@ export class PickListDemo extends Component {
 
         return (
             <div className="ui-helper-clearfix">
-                <img src={\`public/showcase/resources/demo/images/car/\${car.brand}.gif\`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
+                <img src={\`showcase/resources/demo/images/car/\${car.brand}.gif\`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );
