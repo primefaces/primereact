@@ -43,7 +43,7 @@
                         <div className="ui-g-12 homepage-widgets">
                             <div className="ui-g">
                                 <div className="ui-g-12 ui-md-4">
-                                    <img src="%PUBLIC_URL%/showcase/resources/images/icon-ui.svg" alt="Prime UI" />
+                                    <img src="/showcase/resources/images/icon-ui.svg" alt="Prime UI" />
                                     <h3>PRIME UI</h3>
                                     <ul>
                                         <li>Spin-off from PrimeFaces and PrimeNG</li>
@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div className="ui-g-12 ui-md-4">
-                                    <img src="%PUBLIC_URL%/showcase/resources/images/icon-widgets.svg" alt="Widgets" />
+                                    <img src="/showcase/resources/images/icon-widgets.svg" alt="Widgets" />
                                     <h3>WIDGETS</h3>
                                     <ul>
                                         <li>25+ Components</li>
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div className="ui-g-12 ui-md-4">
-                                    <img src="%PUBLIC_URL%/showcase/resources/images/icon-productivity.svg" alt="Producitivity" />
+                                    <img src="/showcase/resources/images/icon-productivity.svg" alt="Producitivity" />
                                     <h3>PRODUCTIVITY</h3>
                                     <ul>
                                         <li>Simple</li>
@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div className="ui-g-12 ui-md-4">
-                                    <img src="%PUBLIC_URL%/showcase/resources/images/icon-mobile.svg" alt="Mobile" />
+                                    <img src="/showcase/resources/images/icon-mobile.svg" alt="Mobile" />
                                     <h3>MOBILE</h3>
                                     <ul>
                                         <li>Responsive</li>
@@ -81,7 +81,7 @@
                                 </div>
 
                                 <div className="ui-g-12 ui-md-4">
-                                    <img src="%PUBLIC_URL%/showcase/resources/images/icon-community.svg" alt="Community" />
+                                    <img src="/showcase/resources/images/icon-community.svg" alt="Community" />
                                     <h3>COMMUNITY</h3>
                                     <ul>
                                         <li>Active</li>
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div className="ui-g-12 ui-md-4">
-                                    <img src="%PUBLIC_URL%/showcase/resources/images/icon-themes.svg" alt="Themes" />
+                                    <img src="/showcase/resources/images/icon-themes.svg" alt="Themes" />
                                     <h3>THEMES</h3>
                                     <ul>
                                         <li>Free Themes</li>
@@ -122,7 +122,7 @@
             return (
                 <div className="layout-menu">
                     <a href="#" onClick={(event) => this.openMenu(event,0)} className={classNames({'active-menuitem': this.state.activeMenu === 0})}>
-                        <img alt="input" src="%PUBLIC_URL%/showcase/resources/images/mono/input.svg"></img>
+                        <img alt="input" src="/showcase/resources/images/mono/input.svg"></img>
                         <span>Input</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 0, 'submenu-visible': this.state.activeMenu === 0})}>
@@ -146,7 +146,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,1)}  className={classNames({'active-menuitem': this.state.activeMenu === 1})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/button.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/button.svg"></img>
                         <span>Button</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 1, 'submenu-visible': this.state.activeMenu === 1})}>
@@ -154,7 +154,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,2)}  className={classNames({'active-menuitem': this.state.activeMenu === 2})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/data.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/data.svg"></img>
                         <span>Data</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 2})}>
@@ -167,7 +167,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/panel.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/panel.svg"></img>
                         <span>Panel</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 3, 'submenu-visible': this.state.activeMenu === 3})}>
@@ -179,7 +179,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,4)} className={classNames({'active-menuitem': this.state.activeMenu === 4})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/overlay.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/overlay.svg"></img>
                         <span>Overlay</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 4, 'submenu-visible': this.state.activeMenu === 4})}>
@@ -188,7 +188,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,5)} className={classNames({'active-menuitem': this.state.activeMenu === 5})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/file.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/file.svg"></img>
                         <span>File</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 5, 'submenu-visible': this.state.activeMenu === 5})}>
@@ -196,7 +196,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,6)}  className={classNames({'active-menuitem': this.state.activeMenu === 6})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/menu.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/menu.svg"></img>
                         <span>Menu</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6})}>
@@ -204,7 +204,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,7)} className={classNames({'active-menuitem': this.state.activeMenu === 7})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/charts.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/charts.svg"></img>
                         <span>Chart</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 7, 'submenu-visible': this.state.activeMenu === 7})}>
@@ -218,7 +218,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,8)} className={classNames({'active-menuitem': this.state.activeMenu === 8})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/message.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/message.svg"></img>
                         <span>Messages</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 8, 'submenu-visible': this.state.activeMenu === 8})}>
@@ -227,7 +227,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,9)}  className={classNames({'active-menuitem': this.state.activeMenu === 9})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/multimedia.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/multimedia.svg"></img>
                         <span>Multimedia</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 9, 'submenu-visible': this.state.activeMenu === 9})}>
@@ -235,7 +235,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,10)}  className={classNames({'active-menuitem': this.state.activeMenu === 10})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/dragdrop.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/dragdrop.svg"></img>
                         <span>DragDrop</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 10, 'submenu-visible': this.state.activeMenu === 10})}>
@@ -243,7 +243,7 @@
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,11)} className={classNames({'active-menuitem': this.state.activeMenu === 11})}>
-                        <img alt="button" src="%PUBLIC_URL%/showcase/resources/images/mono/misc.svg"></img>
+                        <img alt="button" src="/showcase/resources/images/mono/misc.svg"></img>
                         <span>Misc</span>
                     </a>
                     <div className={classNames({'submenu-hidden': this.state.activeMenu !== 11, 'submenu-visible': this.state.activeMenu === 11})}>
@@ -263,10 +263,10 @@
                     <div id="layout-sidebar">
                         <span className="layout-logo">
                             <a href="#" className="sidebar-logo">
-                                <img alt="logo" src="%PUBLIC_URL%/showcase/resources/images/logo.png" />
+                                <img alt="logo" src="/showcase/resources/images/logo.png" />
                             </a>
                             <a href="#" id="menu-button-mobile">
-                                <img alt="logo" src="%PUBLIC_URL%/showcase/resources/images/menuicon.svg"/>
+                                <img alt="logo" src="/showcase/resources/images/menuicon.svg"/>
                             </a>
                         </span>
 
@@ -276,15 +276,15 @@
                     <div id="layout-content">
                         <div id="topbar">
                             <a href="#" id="menu-button">
-                                <img alt="logo" src="%PUBLIC_URL%/showcase/resources/images/menuicon.svg"/>
+                                <img alt="logo" src="/showcase/resources/images/menuicon.svg"/>
                             </a>
 
                             <a href="http://forum.primefaces.org/viewforum.php?f=35" className="topbar-link">
-                                <img alt="mockosx" src="%PUBLIC_URL%/showcase/resources/images/forum.png" />
+                                <img alt="mockosx" src="/showcase/resources/images/forum.png" />
                             </a>
 
                             <span className="topbar-link" id="themeSwitcher">
-                                <img alt="themeswitcher" src="%PUBLIC_URL%/showcase/resources/images/themes.png" />
+                                <img alt="themeswitcher" src="/showcase/resources/images/themes.png" />
                                 <div id="GlobalThemeSwitcher">
                                     <span>Premium Templates</span>
                                     <a href="http://www.primefaces.org/layouts/ultima-ng"><span className="ui-text">Ultima</span></a>
@@ -310,7 +310,7 @@
                             </span>
                             
                             <a href="setup.html" className="topbar-link">
-                                <img alt="mockosx" src="%PUBLIC_URL%/showcase/resources/images/setup.png" />
+                                <img alt="mockosx" src="/showcase/resources/images/setup.png" />
                             </a>
                         </div>
 
