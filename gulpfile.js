@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     flatten = require('gulp-flatten');
     
 gulp.task('build-css', function() {
-	gulp.src([
+	return gulp.src([
         'src/components/common/Common.css',
 		'src/components/**/*.css'
     ])
@@ -17,7 +17,7 @@ gulp.task('build-css', function() {
 });
 
 gulp.task('build-css-prod', function() {
-    gulp.src([
+    return gulp.src([
         'src/components/common/Common.css',
 		'src/components/**/*.css'
     ])
@@ -37,10 +37,17 @@ gulp.task('build-css-prod', function() {
 
 //Cleaning previous gulp tasks from project
 gulp.task('clean', function() {
-    del(['public/resources/primeng.css','public/resources/primeng.min.css'/*,'resources/images'*/]);
+    return del(['public/resources/primeng.css','public/resources/primeng.min.css'/*,'resources/images'*/]);
 });
 
 //Building project with run sequence
 gulp.task('build', ['clean','build-css-prod' /*,'images'*/]);
+
+gulp.task('prepublish', ['clean','build-css-prod'], function() {
+    gulp.src([
+        'public/resources/**/*',
+    ])
+	.pipe(gulp.dest('resources'));
+});
 
         

@@ -6,3 +6,5 @@ public/resources/**/*.map
 .DS_Store
 .idea
 .sass-cache
+resources
+components
