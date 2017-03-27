@@ -98,10 +98,6 @@ export class AutoComplete extends Component {
             this.suggestions = null;
             clearTimeout(this.timeout);
         }
-
-        if(!this.state.panelVisible) {
-            //this.show();
-        }
     }
     
     search(event, query) {
@@ -191,7 +187,6 @@ export class AutoComplete extends Component {
             originalEvent: e,
             value: this.value
         });
-        //this.setState({value: this.value});
     }
         
     onKeydown(event) {
@@ -392,6 +387,7 @@ export class AutoComplete extends Component {
             this.suggestions = newSuggestions;
             if(this.suggestions && this.suggestions.length) {
                 this.show();
+                this.align();
             }
         } 
     }
@@ -423,7 +419,7 @@ export class AutoComplete extends Component {
                 /*'ui-state-focus': focus*/
             }),
             multipleContainer = (
-                <ul className={multipleContainerClass}>
+                <ul ref={(el) => {this.multipleContainerEl = el}} className={multipleContainerClass}>
                     { 
                         this.value && this.value.map((val, index) => {
                             var itemContainer = this.props.selectedItemTemplate ? this.props.selectedItemTemplate(val) : (<span className="ui-autocomplete-token-label">{this.props.field ? ObjectUtils.resolveFieldData(val, this.props.field) : val}</span>);
@@ -474,7 +470,7 @@ export class AutoComplete extends Component {
                 {dropdownButton}
 
                 <div className="ui-autocomplete-panel ui-widget-content ui-corner-all ui-shadow" style={{display: hasSuggestions ? 'block': 'none', width: this.props.appendTo ? 'auto' : '100%', maxHeight: this.props.scrollHeight}}>
-                    { this.state.panelVisible && (<ul ref={(el) => {this.multipleContainerEl = el}} className="ui-autocomplete-items ui-autocomplete-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
+                    { this.state.panelVisible && (<ul className="ui-autocomplete-items ui-autocomplete-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                             {suggestions}
                         </ul>)
                     }
