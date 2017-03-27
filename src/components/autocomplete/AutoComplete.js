@@ -77,7 +77,6 @@ export class AutoComplete extends Component {
         let value = event.target.value;
         if(!this.props.multiple) {
             this.value = value;
-            //this.setState({value: this.value});
         }
 
         if(value.length === 0) {
@@ -120,7 +119,6 @@ export class AutoComplete extends Component {
             this.value = this.value||[];
             if(!this.isSelected(option)) {
                 this.value.push(option);
-                //this.setState({value: this.value});
             }
         }
         else {
@@ -416,7 +414,6 @@ export class AutoComplete extends Component {
         if(this.props.multiple) {
             var multipleContainerClass = classNames("ui-autocomplete-multiple-container ui-widget ui-inputtext ui-state-default ui-corner-all", {
                 'ui-state-disabled': this.props.disabled
-                /*'ui-state-focus': focus*/
             }),
             multipleContainer = (
                 <ul ref={(el) => {this.multipleContainerEl = el}} className={multipleContainerClass}>
