@@ -117,7 +117,6 @@ export class Schedule extends Component {
 
     constructor(props) {
         super(props);
-        debugger;
     }
 
     gotoDate(date) {
@@ -157,7 +156,6 @@ export class Schedule extends Component {
     }
 
     componentDidMount() {
-        var $this = this;
         this.config = {
             theme: true,
             header: this.props.header,

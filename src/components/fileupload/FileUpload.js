@@ -242,7 +242,7 @@ export class FileUpload extends Component {
             var filesList = <div className="ui-fileupload-files">
                                 {
                                     this.state.files.map((file,index) => {
-                                        var preview = this.isImage(file) ? <div><img role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
+                                        var preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
                                         var fileName = <div>{file.name}</div>;
                                         var size = <div>{this.formatSize(file.size)}</div>;
                                         var removeButton = <div><Button type="button" icon="fa-close" onClick={(event) => this.remove(index)} /></div>
