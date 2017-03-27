@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ObjectUtils from '../utils/ObjectUtils';
 import jQuery from "jquery";
-import FullCalendar from "fullcalendar";
+import "fullcalendar";
 
 export class Schedule extends Component {
 
@@ -113,10 +113,6 @@ export class Schedule extends Component {
         onEventResize: PropTypes.func,
         onViewRender: PropTypes.func,
         onDrop: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
     }
 
     gotoDate(date) {

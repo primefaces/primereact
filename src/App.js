@@ -1,6 +1,7 @@
     import React, {Component} from 'react';
     import {Link} from 'react-router';
     import classNames from 'classnames';
+    import 'fullcalendar/dist/fullcalendar.css';
     import 'font-awesome/css/font-awesome.css';
     import 'prismjs/themes/prism-coy.css';
     import './App.css';

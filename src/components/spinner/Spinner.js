@@ -145,7 +145,7 @@ export class Spinner extends Component {
 
     onInputKeyPress(event) {
         let inputChar = String.fromCharCode(event.charCode);
-        let keyPattern = /[0-9\+\-]/;
+        let keyPattern = /[0-9+-]/;
         if (!keyPattern.test(inputChar) && inputChar !== this.props.decimalSeparator) {
             event.preventDefault();
         }

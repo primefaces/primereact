@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -480,8 +479,6 @@ export class AutoCompleteDemo extends Component {
                         {this.state.countries && this.state.countries.map((c, index) => <li key={index}>{c.name}</li>)}
                     </ul>
                 </div>
-
-                <AutoCompleteDoc />
             </div>
         )
     }

@@ -201,9 +201,9 @@ export class AutoComplete extends Component {
             switch(event.which) {
                 //down
                 case 40:
-                    if(highlightItemIndex != -1) {
+                    if(highlightItemIndex !== -1) {
                         var nextItemIndex = highlightItemIndex + 1;
-                        if(nextItemIndex != (this.suggestions.length)) {
+                        if(nextItemIndex !== (this.suggestions.length)) {
                             this.highlightOption = this.suggestions[nextItemIndex];
                             this.highlightOptionChanged = true;
                         }
@@ -248,6 +248,10 @@ export class AutoComplete extends Component {
                     }
                     this.hide();
                 break;
+
+                default: 
+                break;
+                
             }
         } else {
             if(event.which === 40 && this.suggestions) {
@@ -274,6 +278,9 @@ export class AutoComplete extends Component {
                             value: this.value
                         });
                     }
+                break;
+
+                default: 
                 break;
             }
         }
@@ -451,7 +458,7 @@ export class AutoComplete extends Component {
         if(this.suggestions) {
             var suggestions = this.suggestions.map((suggestion, index) => {
                 var itemClass = classNames('ui-autocomplete-list-item ui-corner-all', {
-                    'ui-state-highlight': (this.state.highlightOption==suggestion)
+                    'ui-state-highlight': (this.state.highlightOption===suggestion)
                 }), 
                 itemContent = this.props.itemTemplate ? this.props.itemTemplate(suggestion) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field): suggestion;
                 return <li className={itemClass} onClick={(event) => this.selectItem(event, suggestion)} key={index + '_item'} onMouseEnter={(e) => this.onMouseEnterForItem(suggestion)} onMouseLeave={this.onMouseLeaveForItem.bind(this)}>{itemContent}</li>;
