@@ -43,7 +43,8 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
 </CodeHighlight>
                 
                 <h3>Dependencies</h3>
-                <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies. In addition, components require font-awesome for icons.</p>
+                <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies. In addition, components require font-awesome for icons and 
+                    <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes.</p>
 
                 <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
 <CodeHighlight className="language-javascript">
