@@ -266,6 +266,7 @@
             this.changeTheme = this.changeTheme.bind(this);
             this.openMenu = this.openMenu.bind(this);
             this.closeMenu = this.closeMenu.bind(this);
+            this.onSidebarClick = this.onSidebarClick.bind(this);
         }
         
         changeTheme(event) {
@@ -289,13 +290,19 @@
             this.setState({mobileMenuActive:false});
             event.preventDefault();
         }
+        
+        onSidebarClick(event) {
+            if(event.target.nodeName === 'A') {
+                this.closeMenu(event);
+            }
+        }
             
         render() {
             var layoutClass = classNames('layout-wrapper', {'active': this.state.mobileMenuActive});
             
             return (
                 <div className={layoutClass}>
-                    <div id="layout-sidebar">
+                    <div id="layout-sidebar" onClick={this.onSidebarClick}>
                         <span className="layout-logo">
                             <a href="#" className="sidebar-logo">
                                 <img alt="logo" src="showcase/resources/images/logo.png" />
