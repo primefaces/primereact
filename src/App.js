@@ -287,9 +287,6 @@
                             <span className="topbar-link" id="themeSwitcher">
                                 <img alt="themeswitcher" src="showcase/resources/images/themes.png" />
                                 <div id="GlobalThemeSwitcher">
-                                    <span>Premium Templates</span>
-                                    <a href="http://www.primefaces.org/layouts/ultima-ng"><span className="ui-text">Ultima</span></a>
-                                    <a href="http://www.primefaces.org/layouts/omega-ng"><span className="ui-text">Omega</span></a>
                                     <span>Free Themes</span>
                                     <a href="#" data-theme="omega"><span className="ui-theme ui-theme-omega"></span><span className="ui-text">Omega</span></a>
                                     <a href="#" data-theme="bootstrap"><span className="ui-theme ui-theme-bootstrap"></span><span className="ui-text">Bootstrap</span></a>
@@ -310,9 +307,9 @@
                                 </div>
                             </span>
                             
-                            <a href="setup.html" className="topbar-link">
+                            <Link to="/setup" className="topbar-link">
                                 <img alt="mockosx" src="showcase/resources/images/setup.png" />
-                            </a>
+                            </Link>
                         </div>
 
                         <div>
