@@ -292,7 +292,7 @@
         }
         
         onSidebarClick(event) {
-            if(event.target.nodeName === 'A') {
+            if(event.target.nodeName === 'A' && event.target.parentNode.className.indexOf('layout-menu') === -1) {
                 this.closeMenu(event);
             }
         }
