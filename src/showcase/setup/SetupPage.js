@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
 export class SetupPage extends Component {
@@ -90,8 +89,6 @@ import 'font-awesome/css/font-awesome.css';
                 
                 <h3>Quickstart</h3>
                 <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart">github</a>.</p>
-
-
                 </div>            
             </div>
         );

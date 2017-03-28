@@ -18,7 +18,7 @@ body {
     left: 0;
     top: 0;
     background-color: #f6f6f6;
-    overflow: hidden;
+    overflow: auto;
     width: 300px;
     box-sizing: border-box;
     -moz-box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
@@ -339,8 +339,12 @@ body {
     float: right;
 }
 
+#themeswitcher:hover > div {
+    display: block;
+}
+
 /** ThemeSwitcher **/
-#GlobalThemeSwitcher {
+#themeswitcher > div {
     display: none;
     text-align: left;
     width: 200px;
@@ -358,7 +362,7 @@ body {
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
     margin-left: -60px;
 }
-#GlobalThemeSwitcher  a {
+#themeswitcher > div  a {
     display: block;
     padding: 10px;
     border-bottom: solid 1px #dde3e7;
@@ -366,10 +370,10 @@ body {
     color: #87939B;
     overflow: hidden;
 }
-#GlobalThemeSwitcher  a:hover {
+#themeswitcher > div a:hover {
     color: #fdd106;
 }
-#GlobalThemeSwitcher  a span.ui-theme {
+#themeswitcher > div  a span.ui-theme {
     width: 30px;
     height: 27px;
     float: left;
@@ -378,18 +382,18 @@ body {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
-#GlobalThemeSwitcher  a img {
+#themeswitcher > div  a img {
     float: left;
     width: 30px;
     height: 27px;
 }
-#GlobalThemeSwitcher  a span.ui-text {
+#themeswitcher > div  a span.ui-text {
     display: inline-block;
     margin-top: 7px;
     margin-left: 10px;
     font-size: 14px;
 }
-#GlobalThemeSwitcher  > span {
+#themeswitcher > div  > span {
     font-size: 18px;
     display: inline-block;
     margin: 20px 0 0 9px;

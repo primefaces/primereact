@@ -7,6 +7,7 @@
     import './App.css';
 
     class Home extends Component {
+        
         render() {
             return (
                 <div className="homepage">
@@ -196,11 +197,11 @@
                         <Link to="/fileupload">&#9679; Upload</Link>
                     </div>
 
-                    <a href="#" onClick={(event) => this.openMenu(event,6)}  className={classNames({'active-menuitem': this.state.activeMenu === 6})}>
+                    <a href="#" onClick={(event) => this.openMenu(event,6)}  className={classNames({'active-menuitem': this.state.activeMenu === 6})} style={{display:'none'}}>
                         <img alt="button" src="showcase/resources/images/mono/menu.svg"></img>
                         <span>Menu</span>
                     </a>
-                    <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6})}>
+                    <div className={classNames({'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6})} style={{display:'none'}}>
                         
                     </div>
 
@@ -227,19 +228,19 @@
                         <Link to="/growl">&#9679; Growl</Link>
                     </div>
 
-                    <a href="#" onClick={(event) => this.openMenu(event,9)}  className={classNames({'active-menuitem': this.state.activeMenu === 9})}>
+                    <a href="#" onClick={(event) => this.openMenu(event,9)}  className={classNames({'active-menuitem': this.state.activeMenu === 9})} style={{display:'none'}}>
                         <img alt="button" src="showcase/resources/images/mono/multimedia.svg"></img>
                         <span>Multimedia</span>
                     </a>
-                    <div className={classNames({'submenu-hidden': this.state.activeMenu !== 9, 'submenu-visible': this.state.activeMenu === 9})}>
+                    <div className={classNames({'submenu-hidden': this.state.activeMenu !== 9, 'submenu-visible': this.state.activeMenu === 9})} style={{display:'none'}}>
                         
                     </div>
 
-                    <a href="#" onClick={(event) => this.openMenu(event,10)}  className={classNames({'active-menuitem': this.state.activeMenu === 10})}>
+                    <a href="#" onClick={(event) => this.openMenu(event,10)}  className={classNames({'active-menuitem': this.state.activeMenu === 10})} style={{display:'none'}}>
                         <img alt="button" src="showcase/resources/images/mono/dragdrop.svg"></img>
                         <span>DragDrop</span>
                     </a>
-                    <div className={classNames({'submenu-hidden': this.state.activeMenu !== 10, 'submenu-visible': this.state.activeMenu === 10})}>
+                    <div className={classNames({'submenu-hidden': this.state.activeMenu !== 10, 'submenu-visible': this.state.activeMenu === 10})} style={{display:'none'}}>
                         
                     </div>
 
@@ -257,6 +258,22 @@
     }
 
     class App extends Component {
+        
+        constructor() {
+            super();
+            this.theme = 'omega';
+            this.changeTheme = this.changeTheme.bind(this);
+        }
+        
+        changeTheme(event) {
+            var theme = event.currentTarget.dataset.theme;
+            var themeElement = document.getElementById('theme-link');
+            var oldThemeURL = themeElement.getAttribute('href');
+            var newThemeURL = oldThemeURL.replace(this.theme, theme);
+            this.theme = theme;
+            themeElement.setAttribute('href', newThemeURL);
+            event.preventDefault();
+        }
             
         render() {
             return (
@@ -280,30 +297,31 @@
                                 <img alt="logo" src="showcase/resources/images/menuicon.svg"/>
                             </a>
 
-                            <a href="http://forum.primefaces.org/viewforum.php?f=35" className="topbar-link">
+                            <a href="http://forum.primefaces.org/viewforum.php?f=57" className="topbar-link">
                                 <img alt="mockosx" src="showcase/resources/images/forum.png" />
                             </a>
 
-                            <span className="topbar-link" id="themeSwitcher">
+                            <span id="themeswitcher" className="topbar-link">
                                 <img alt="themeswitcher" src="showcase/resources/images/themes.png" />
-                                <div id="GlobalThemeSwitcher">
-                                    <span>Free Themes</span>
-                                    <a href="#" data-theme="omega"><span className="ui-theme ui-theme-omega"></span><span className="ui-text">Omega</span></a>
-                                    <a href="#" data-theme="bootstrap"><span className="ui-theme ui-theme-bootstrap"></span><span className="ui-text">Bootstrap</span></a>
-                                    <a href="#" data-theme="aristo"><span className="ui-theme ui-theme-aristo"></span><span className="ui-text">Aristo</span></a>
-                                    <a href="#" data-theme="cupertino"><span className="ui-theme ui-theme-cupertino"></span><span className="ui-text">Cupertino</span></a>
-                                    <a href="#" data-theme="cruze"><span className="ui-theme ui-theme-cruze"></span><span className="ui-text">Cruze</span></a>
-                                    <a href="#" data-theme="darkness"><span className="ui-theme ui-theme-ui-darkness"></span><span className="ui-text">Darkness</span></a>
-                                    <a href="#" data-theme="delta"><span className="ui-theme ui-theme-delta"></span><span className="ui-text">Delta</span></a>
-                                    <a href="#" data-theme="flick"><span className="ui-theme ui-theme-flick"></span><span className="ui-text">Flick</span></a>
-                                    <a href="#" data-theme="home"><span className="ui-theme ui-theme-home"></span><span className="ui-text">Home</span></a>
-                                    <a href="#" data-theme="lightness"><span className="ui-theme ui-theme-ui-lightness"></span><span className="ui-text">Lightness</span></a>
-                                    <a href="#" data-theme="pepper-grinder"><span className="ui-theme ui-theme-pepper-grinder"></span><span className="ui-text">Pepper-Grinder</span></a>
-                                    <a href="#" data-theme="redmond"><span className="ui-theme ui-theme-redmond"></span><span className="ui-text">Redmond</span></a>
-                                    <a href="#" data-theme="rocket"><span className="ui-theme ui-theme-rocket"></span><span className="ui-text">Rocket</span></a>
-                                    <a href="#" data-theme="south-street"><span className="ui-theme ui-theme-south-street"></span><span className="ui-text">South-Street</span></a>
-                                    <a href="#" data-theme="start"><span className="ui-theme ui-theme-start"></span><span className="ui-text">Start</span></a>
-                                    <a href="#" data-theme="trontastic"><span className="ui-theme ui-theme-trontastic"></span><span className="ui-text">Trontastic</span></a>
+                                <div>
+                                    <span>Themes</span>
+                                    <a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a>
+                                    <a href="#" data-theme="bootstrap" onClick={this.changeTheme}><span className="ui-text">Bootstrap</span></a>
+                                    <a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a>
+                                    <a href="#" data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a>
+                                    <a href="#" data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a>
+                                    <a href="#" data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a>
+                                    <a href="#" data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a>
+                                    <a href="#" data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a>
+                                    <a href="#" data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a>
+                                    <a href="#" data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a>
+                                    <a href="#" data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a>
+                                    <a href="#" data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a>
+                                    <a href="#" data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a>
+                                    <a href="#" data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a>
+                                    <a href="#" data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a>
+                                    <a href="#" data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a>
+                                    <a href="#" data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a>
                                 </div>
                             </span>
                             
