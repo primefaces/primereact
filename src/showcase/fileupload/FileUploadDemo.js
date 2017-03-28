@@ -30,7 +30,7 @@ export class FileUploadDemo extends Component {
                 <div className="content-section implementation">
                     <Growl value={this.state.msgs} />
 
-                    <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
+                    <FileUpload name="demo[]" url="upload.php" onUpload={this.onUpload} 
                                 multiple={true} accept="image/*" maxFileSize={1000000}></FileUpload>
                 </div>
                 <FileUploadDoc></FileUploadDoc>
