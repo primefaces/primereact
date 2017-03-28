@@ -8,3 +8,4 @@ public/resources/**/*.map
 .sass-cache
 resources
 components
+index.js

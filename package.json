@@ -36,8 +36,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "compile": "babel src/components --out-dir components --presets es2015,react,stage-0",
+    "compile-shorthand": "babel src/primereact.js --out-file index.js --presets es2015,react,stage-0",
+    "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0",
     "build-resources": "gulp prepublish",
-    "prepublish": "npm run build-resources && npm run compile"
+    "prepublish": "npm run build-resources && npm run compile-shorthand && npm run compile-components"
   }
 }
