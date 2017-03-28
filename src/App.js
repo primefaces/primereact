@@ -22,19 +22,19 @@
                         
                             <div className="ui-g">
                                 <div className="ui-g-12 ui-md-4">
-                                    <a href="" className="homepage-btn download-btn">
+                                    <a href="https://www.npmjs.com/package/primereact" className="homepage-btn download-btn">
                                         Download
                                         <i className="fa fa-caret-down" />
                                     </a>
                                 </div>
                                 <div className="ui-g-12 ui-md-4">
-                                    <a href="" className="homepage-btn github-btn">
+                                    <a href="https://github.com/primefaces/primereact" className="homepage-btn github-btn">
                                         View On GitHub
                                         <i className="fa fa-github" />
                                     </a>
                                 </div>
                                 <div className="ui-g-12 ui-md-4">
-                                    <a href="" className="homepage-btn twitter-btn">
+                                    <a href="https://www.twitter.com/prime_ng" className="homepage-btn twitter-btn">
                                         Twitter
                                         <i className="fa fa-twitter" />
                                     </a>
@@ -48,7 +48,7 @@
                                     <img src="showcase/resources/images/icon-ui.svg" alt="Prime UI" />
                                     <h3>PRIME UI</h3>
                                     <ul>
-                                        <li>Spin-off from PrimeFaces and PrimeNG</li>
+                                        <li>Spin-off from PrimeFaces, PrimeNG and PrimeUI</li>
                                     </ul>
                                 </div>
 
@@ -56,7 +56,7 @@
                                     <img src="showcase/resources/images/icon-widgets.svg" alt="Widgets" />
                                     <h3>WIDGETS</h3>
                                     <ul>
-                                        <li>25+ Components</li>
+                                        <li>40+ Components</li>
                                         <li>Easy to Use</li>
                                         <li>Accessible</li>
                                     </ul>
@@ -142,7 +142,7 @@
                         <Link to="/inputswitch">&#9679; InputSwitch</Link>
                         <Link to="/slider">&#9679; Slider</Link>
                         <Link to="/spinner">&#9679; Spinner</Link>
-                        <Link to="/tristatecheckbox">&#9679; TriStateCheckbox</Link>
+                        <Link to="/tristatecheckbox">&#9679; TriState</Link>
                         <Link to="/inputmask">&#9679; InputMask</Link>
                         <Link to="/calendar">&#9679; Calendar</Link>
                     </div>
@@ -261,8 +261,11 @@
         
         constructor() {
             super();
+            this.state = {};
             this.theme = 'omega';
             this.changeTheme = this.changeTheme.bind(this);
+            this.openMenu = this.openMenu.bind(this);
+            this.closeMenu = this.closeMenu.bind(this);
         }
         
         changeTheme(event) {
@@ -274,16 +277,30 @@
             themeElement.setAttribute('href', newThemeURL);
             event.preventDefault();
         }
+        
+        openMenu(event) {
+            document.body.style.overflow = 'hidden';
+            this.setState({mobileMenuActive:true});
+            event.preventDefault();
+        }
+        
+        closeMenu(event) {
+            document.body.style.overflow = 'auto';
+            this.setState({mobileMenuActive:false});
+            event.preventDefault();
+        }
             
         render() {
+            var layoutClass = classNames('layout-wrapper', {'active': this.state.mobileMenuActive});
+            
             return (
-                <div className="layout-wrapper">
+                <div className={layoutClass}>
                     <div id="layout-sidebar">
                         <span className="layout-logo">
                             <a href="#" className="sidebar-logo">
                                 <img alt="logo" src="showcase/resources/images/logo.png" />
                             </a>
-                            <a href="#" id="menu-button-mobile">
+                            <a href="#" id="menu-button-mobile" onClick={this.closeMenu}>
                                 <img alt="logo" src="showcase/resources/images/menuicon.svg"/>
                             </a>
                         </span>
@@ -293,7 +310,7 @@
                     
                     <div id="layout-content">
                         <div id="topbar">
-                            <a href="#" id="menu-button">
+                            <a href="#" id="menu-button" onClick={this.openMenu}>
                                 <img alt="logo" src="showcase/resources/images/menuicon.svg"/>
                             </a>
 

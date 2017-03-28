@@ -18,7 +18,8 @@ body {
     left: 0;
     top: 0;
     background-color: #f6f6f6;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 300px;
     box-sizing: border-box;
     -moz-box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
@@ -32,12 +33,17 @@ body {
     display: block;
     padding: 15px 0;
     z-index: 997;
+    width: 315px;
     background-color: #f6f6f6;
     text-align: center;
 }
 
 .layout-logo img {
     height: 70px;
+}
+
+#layout-sidebar .layout-menu {
+    width: 315px;
 }
 
 #layout-sidebar .layout-menu > a {
@@ -85,7 +91,7 @@ body {
 
 #layout-sidebar .layout-menu > div {
     width: auto;
-    padding: 20px 15px;
+    padding: 20px 10px;
     overflow: hidden;
 }
 
@@ -121,7 +127,7 @@ body {
 #layout-sidebar .layout-menu > div a {
     width: 50%;
     float: left;
-    padding: 6px;
+    padding: 6px 3px;
     box-sizing: border-box;
     cursor: pointer;
     border-radius: 4homepapx;
@@ -155,6 +161,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     border-right: 3px;
+    transition: background-color .3s;
 }
 
 #layout-content .download-btn {
@@ -162,14 +169,28 @@ body {
     color: #b27800;
 }
 
+#layout-content .download-btn:hover {
+    background-color: #fcdea2;
+}
+
 #layout-content .twitter-btn {
-    background-color: #6b6b6b;
+    background-color: #2b9bb9;
     color: #ffffff;
 }
 
+#layout-content .twitter-btn:hover {
+    background-color: #55afc7;
+}
+
 #layout-content .github-btn {
-    background-color: #2b9bb9;
+    background-color: #6b6b6b;
     color: #ffffff;
+    
+}
+
+#layout-content .github-btn:hover {
+    background-color: #888888;
+    
 }
 
 #layout-content .homepage-btn i {
@@ -292,12 +313,11 @@ body {
     border-radius: 5px;
     display: none;
 }
-#menu-button.active,
 #menu-button:hover,
 #menu-button:focus,
 #menu-button-mobile:hover,
 #menu-button-mobile:focus {
-    background-color: #2F88E0;
+    background-color: #55afc7;
 }
 #menu-button img,
 #menu-button-mobile img {
@@ -689,16 +709,24 @@ input.searchInput {
         overflow-y: auto;
         z-index: 999;
     }
-    #layout-sidebar.active {
+    
+    .layout-wrapper.active #layout-sidebar {
         display: block;
         width: 100%;
         height: 100%;
         overflow-y: auto;
         z-index: 999;
     }
+    .layout-wrapper.active #layout-sidebar .layout-menu {
+        width: 100%;
+    }
+    .layout-wrapper.active #layout-sidebar .layout-logo {
+        width: 100%;
+        background-color: #2b9bb9;
+    }
     .layout-logo {
         padding: 15px;
-        height: 68px;
+        height: 74px;
         box-sizing: border-box;
     }
     .layout-logo .sidebar-logo {
@@ -717,18 +745,12 @@ input.searchInput {
         position: relative;
         z-index: 1000;
     }
-    #menu-button.active {
+    .layout-wrapper.active #menu-button {
         display: none;
     }
-    #menu-button-mobile.active {
+    .layout-wrapper.active #menu-button-mobile {
         display: inline-block;
-        background-color: #1976D2;
-    }
-    #menu-button:hover,
-    #menu-button:focus,
-    #menu-button-mobile:hover,
-    #menu-button-mobile:focus {
-        background-color: #2F88E0;
+        background-color: #55afc7;
     }
 
     .ui-tabview.ui-tabview-top > .ui-tabview-nav li {
