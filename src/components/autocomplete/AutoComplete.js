@@ -413,7 +413,8 @@ export class AutoComplete extends Component {
 
         if(this.props.multiple) {
             var multipleContainerClass = classNames("ui-autocomplete-multiple-container ui-widget ui-inputtext ui-state-default ui-corner-all", {
-                'ui-state-disabled': this.props.disabled
+                'ui-state-disabled': this.props.disabled,
+                'ui-state-focus': this.focus
             }),
             multipleContainer = (
                 <ul ref={(el) => {this.multipleContainerEl = el}} className={multipleContainerClass}>
