@@ -26,6 +26,7 @@ export class MultiSelect extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {focus: false};
         this.onClick = this.onClick.bind(this);
     }
 
@@ -140,9 +141,18 @@ export class MultiSelect extends Component {
         return label;
     }
 
+    onFocus(event) {
+        this.setState({focus: true});
+    }
+    
+    onBlur(event) {
+        this.setState({focus: false});
+    }
+
     render() {
         var styleClass = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
-            'ui-state-disabled': this.props.disabled
+            'ui-state-disabled': this.props.disabled,
+            'ui-state-focus': this.state.focus
         });
 
         var label = this.getLabel();
@@ -173,7 +183,7 @@ export class MultiSelect extends Component {
         return (
             <div className={styleClass} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
-                    <input readOnly type="text" />
+                    <input readOnly type="text" onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
                 </div>
                 <div className="ui-multiselect-label-container" title="Choose">
                     <label className="ui-multiselect-label ui-corner-all">{label}</label>
