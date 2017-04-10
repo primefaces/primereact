@@ -70,7 +70,7 @@ export class AutoComplete extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {panelVisible: false};
+        this.state = {panelVisible: false, focus: false};
     }
 
     onInput(event) {
@@ -142,7 +142,7 @@ export class AutoComplete extends Component {
     }
     
     show() {
-        if(!this.state.panelVisible && (this.focus||this.dropdownFocus)) {
+        if(!this.state.panelVisible && (this.state.focus||this.dropdownFocus)) {
             
             this.setState({panelVisible: true});
             this.panel.style.zIndex = DomHandler.getZindex();
@@ -280,7 +280,7 @@ export class AutoComplete extends Component {
     }
     
     onInputFocus(event) {
-        this.focus = true;
+        this.setState({focus: true});
         if(this.props.onFocus) {
             this.props.onFocus({
                 originalEvent: event
@@ -303,7 +303,7 @@ export class AutoComplete extends Component {
     }
     
     onBlur() {
-        this.focus = false;
+        this.setState({focus: false});
     }
     
     onDropdownFocus() {
@@ -381,7 +381,7 @@ export class AutoComplete extends Component {
 
     componentWillReceiveProps(nextProps) {
         var newSuggestions = nextProps.suggestions;
-        if (newSuggestions && this.focus) {
+        if (newSuggestions && this.state.focus) {
             this.suggestions = newSuggestions;
             if(this.suggestions && this.suggestions.length) {
                 this.show();
@@ -413,7 +413,8 @@ export class AutoComplete extends Component {
 
         if(this.props.multiple) {
             var multipleContainerClass = classNames("ui-autocomplete-multiple-container ui-widget ui-inputtext ui-state-default ui-corner-all", {
-                'ui-state-disabled': this.props.disabled
+                'ui-state-disabled': this.props.disabled,
+                'ui-state-focus': this.state.focus
             }),
             multipleContainer = (
                 <ul ref={(el) => {this.multipleContainerEl = el}} className={multipleContainerClass}>
