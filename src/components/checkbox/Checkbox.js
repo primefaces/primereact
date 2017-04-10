@@ -47,7 +47,7 @@ export class Checkbox extends Component {
                         <span className={iconClass}></span>
                     </div>
                 </div>
-                {this.props.label && <label className="ui-chkbox-label">{this.props.label}</label>}
+                {this.props.label && <label className="ui-chkbox-label" onClick={this.onClick}>{this.props.label}</label>}
             </div>
         )
     }
