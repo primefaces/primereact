@@ -34,7 +34,7 @@ export class Chips extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {values : props.value};
+        this.state = {values : props.value, focus: false};
         this.inputFocus = this.inputFocus.bind(this);
     }
 
@@ -109,9 +109,18 @@ export class Chips extends Component {
         this.inputEL.focus();
     }
 
+    onFocus() {
+        this.setState({focus: true});
+    }
+    
+    onBlur() {
+        this.setState({focus: false});
+    }
+
     render() {
         var listClassName = classNames('ui-inputtext ui-state-default ui-corner-all', {
-            'ui-state-disabled': this.props.disabled
+            'ui-state-disabled': this.props.disabled,
+            'ui-state-focus': this.state.focus
         });
 
         if(this.state.values) {
@@ -127,7 +136,7 @@ export class Chips extends Component {
 
         var inputToken = <li className="ui-chips-input-token">
                             <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} type="text" disabled={this.props.disabled||this.maxedOut()} 
-                                        onKeyDown={(event) => this.onKeydown(event)} />
+                                        onKeyDown={(event) => this.onKeydown(event)} onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
                         </li>;
 
         return (
