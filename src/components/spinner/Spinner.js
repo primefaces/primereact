@@ -246,10 +246,10 @@ export class Spinner extends Component {
     render() {
 
         var styleClass = classNames("ui-spinner ui-widget ui-corner-all"),
-        upButtonClass = classNames("ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only", {
+        upButtonClass = classNames("ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default", {
             'ui-state-disabled': this.props.disabled
         }),
-        downButtonClass = classNames("ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only", {
+        downButtonClass = classNames("ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default", {
             'ui-state-disabled': this.props.disabled
         });
 
@@ -257,13 +257,13 @@ export class Spinner extends Component {
                                 size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly}
                                 onKeyDown={this.onInputKeydown.bind(this)} onKeyUp={(e) => this.onInput(e, this.inputEl.value)} onKeyPress={this.onInputKeyPress.bind(this)} onBlur={this.onBlur.bind(this)} onChange={this.handleChange.bind(this)} onFocus={this.onFocus.bind(this)} />;
 
-        var upButton = <a className={upButtonClass} onMouseLeave={this.onUpButtonMouseleave.bind(this)} onMouseDown={(e) => this.onUpButtonMousedown(e, this.inputEl)} onMouseUp={this.onUpButtonMouseup.bind(this)}>
+        var upButton = <button className={upButtonClass} onMouseLeave={this.onUpButtonMouseleave.bind(this)} onMouseDown={(e) => this.onUpButtonMousedown(e, this.inputEl)} onMouseUp={this.onUpButtonMouseup.bind(this)} disabled={this.props.disabled}>
                           <span className="fa fa-caret-up"></span>
-                       </a>;
+                       </button>;
 
-        var downButton = <a className={downButtonClass} onMouseLeave={this.onDownButtonMouseleave.bind(this)} onMouseDown={(e) => this.onDownButtonMousedown(e, this.inputEl)} onMouseUp={this.onDownButtonMouseup.bind(this)}>
+        var downButton = <button className={downButtonClass} onMouseLeave={this.onDownButtonMouseleave.bind(this)} onMouseDown={(e) => this.onDownButtonMousedown(e, this.inputEl)} onMouseUp={this.onDownButtonMouseup.bind(this)} disabled={this.props.disabled}>
                             <span className="fa fa-caret-down"></span>
-                         </a>;
+                         </button>;
 
         return (
             <span className={styleClass} style={this.props.style}>
