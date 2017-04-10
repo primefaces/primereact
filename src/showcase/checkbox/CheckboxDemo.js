@@ -44,7 +44,7 @@ export class CheckboxDemo extends Component {
                             <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
                         </div>
                     </div>
-                    Selected Cities : {this.state.cities.map((city) => <span key={city}>{city}</span>)}
+                    Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}
                 </div>
 
                 <CheckboxDoc />
