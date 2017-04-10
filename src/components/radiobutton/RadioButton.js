@@ -22,6 +22,11 @@ export class RadioButton extends Component {
         this.onClick = this.onClick.bind(this);
     }
 
+    select(e) {
+        this.input.checked = true;
+        this.onClick(e);
+    }
+
     onClick(e) {
         if(this.props.onChange) {
             this.props.onChange({
@@ -40,14 +45,14 @@ export class RadioButton extends Component {
             <div className={classNames('ui-radiobutton-container', this.props.className)}>
                 <div className='ui-radiobutton ui-widget'>
                     <div className="ui-helper-hidden-accessible">
-                        <input type="radio" />
+                        <input ref={(el) => this.input = el} type="radio" />
                     </div>
                     <div className={boxClass}
                         onClick={this.onClick}>
                         <span className={iconClass}></span>
                     </div>
                 </div>
-                {this.props.label && <label className="ui-radiobutton-label">{this.props.label}</label>}
+                {this.props.label && <label className="ui-radiobutton-label" onClick={this.select.bind(this)}>{this.props.label}</label>}
             </div>
         )
     }
