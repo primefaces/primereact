@@ -77,9 +77,9 @@ export class Accordion extends Component {
 
                     return (
                         <div key={tab.props.header} className="ui-accordion-tab">
-                            <div className="ui-accordion-header ui-state-default ui-corner-all" key={tab.props.header}>
+                            <div className="ui-accordion-header ui-state-default ui-corner-all" key={tab.props.header} onClick={(e) => this.onTabClick(e, i)}>
                                 <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
-                                <a href="#" onClick={(e) => this.onTabClick(e, i)}>{tab.props.header}</a>
+                                <a href="#">{tab.props.header}</a>
                             </div>
                             <div className="ui-accordion-content-wrapper" style={{display: selected ? 'block': 'none'}}>
                                 <div className="ui-accordion-content ui-widget-content">
