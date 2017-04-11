@@ -28,6 +28,7 @@ export class Dropdown extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {focus: false};
         this.onClick = this.onClick.bind(this);
     }
 
@@ -114,9 +115,18 @@ export class Dropdown extends Component {
         this.panel.style.display = 'none';
     }
 
+    onInputFocus(event) {
+        this.setState({focus: true});
+    }
+    
+    onInputBlur(event) {
+        this.setState({focus: false});
+    }
+
     render() {
         var styleClass = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all', this.props.className, {
-            'ui-state-disabled': this.props.disabled
+            'ui-state-disabled': this.props.disabled,
+            'ui-state-focus': this.state.focus
         });
 
         var selectedOption = this.findSelectedOption();
@@ -147,7 +157,7 @@ export class Dropdown extends Component {
                     <select tabIndex="-1" ref={(el) => {this.selectElement = el;}}>{optionElements}</select>
                 </div>
                 <div className="ui-helper-hidden-accessible">
-                    <input readOnly type="text" />
+                    <input readOnly type="text" onFocus={this.onInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
                 </div>
                 <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>
                 <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
