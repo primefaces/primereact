@@ -14,7 +14,7 @@ export class Button extends Component {
         icon: React.PropTypes.string,
         iconPos: React.PropTypes.string
     };
-    
+
     render() {
         var styleClass = classNames('ui-button ui-widget ui-state-default ui-corner-all', this.props.className, {
                 'ui-button-text-only': !this.props.icon && this.props.label,
@@ -29,7 +29,11 @@ export class Button extends Component {
         delete buttonProps.iconPos;
         delete buttonProps.icon;
         delete buttonProps.label;
-        
+
+        if (buttonProps.type !== 'submit' && buttonProps.type !== 'reset') {
+          buttonProps.type = 'button'
+        }
+
         if(this.props.icon) {
             iconStyleClass = classNames(this.props.icon, 'ui-c fa fa-fw', {
                 'ui-button-icon-left': this.props.iconPos !== 'right',
@@ -38,7 +42,7 @@ export class Button extends Component {
         }
 
         return (
-            <button {...buttonProps} type="button" className={styleClass}>
+            <button {...buttonProps} className={styleClass}>
                 {this.props.icon && <span className={iconStyleClass}></span>}
                 <span className="ui-button-text ui-c">{this.props.label || 'ui-button'}</span>
                 {this.props.children}
