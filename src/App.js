@@ -166,6 +166,7 @@
                         <Link to="/orderlist">&#9679; OrderList</Link>
                         <Link to="/picklist">&#9679; PickList</Link>
                         <Link to="/schedule">&#9679; Schedule</Link>
+                        <Link to="/tree">&#9679; Tree</Link>
                     </div>
 
                     <a href="#" onClick={(event) => this.openMenu(event,3)} className={classNames({'active-menuitem': this.state.activeMenu === 3})}>

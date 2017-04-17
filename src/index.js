@@ -44,6 +44,7 @@ import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
+import {TreeDemo} from './showcase/tree/TreeDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {Router,Route,hashHistory} from 'react-router';
 
@@ -93,6 +94,7 @@ ReactDOM.render(
             <Route path="/orderlist" component={OrderListDemo} />
             <Route path="/picklist" component={PickListDemo} />
             <Route path="/schedule" component={ScheduleDemo} />
+            <Route path="/tree" component={TreeDemo} />
             <Route path="/setup" component={SetupPage} />
         </Route>
     </Router>,
