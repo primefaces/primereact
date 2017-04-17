@@ -81,7 +81,7 @@ export class AutoCompleteDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation button-demo">
+                <div className="content-section implementation">
                     <h3>Basic</h3>
                     <AutoComplete value={this.state.country} suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle.bind(this)} field="name"
                         size={30} placeholder="Countries" minLength={1} onChange={this.onCountryValueChange.bind(this)} />
