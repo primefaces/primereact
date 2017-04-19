@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class InputTextarea extends Component {
@@ -8,7 +9,7 @@ export class InputTextarea extends Component {
     };
 
     static propTypes = {
-        autoResize: React.PropTypes.bool
+        autoResize: PropTypes.bool
     };
     
     constructor() {

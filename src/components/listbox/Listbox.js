@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class Listbox extends Component {
@@ -13,12 +14,12 @@ export class Listbox extends Component {
     }
     
     static propTypes = {
-        value: React.PropTypes.any,
-        options: React.PropTypes.array,
-        onChange: React.PropTypes.func,
-        itemTemplate: React.PropTypes.func,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string
+        value: PropTypes.any,
+        options: PropTypes.array,
+        onChange: PropTypes.func,
+        itemTemplate: PropTypes.func,
+        style: PropTypes.object,
+        className: PropTypes.string
     };
     
     onOptionClick(event, option, index) {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -20,16 +21,16 @@ export class Chips extends Component {
     }
 
     static propTypes = {
-        placeholder: React.PropTypes.string,
-        value: React.PropTypes.array,
-        field: React.PropTypes.string,
-        max: React.PropTypes.number,
-        disabled: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        onAdd: React.PropTypes.func,
-        onRemove: React.PropTypes.func,
-        itemTemplate: React.PropTypes.func
+        placeholder: PropTypes.string,
+        value: PropTypes.array,
+        field: PropTypes.string,
+        max: PropTypes.number,
+        disabled: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        onAdd: PropTypes.func,
+        onRemove: PropTypes.func,
+        itemTemplate: PropTypes.func
     }
 
     constructor(props) {

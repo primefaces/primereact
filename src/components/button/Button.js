@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class Button extends Component {
@@ -10,9 +11,9 @@ export class Button extends Component {
     }
 
     static propTypes = {
-        label: React.PropTypes.string,
-        icon: React.PropTypes.string,
-        iconPos: React.PropTypes.string
+        label: PropTypes.string,
+        icon: PropTypes.string,
+        iconPos: PropTypes.string
     };
 
     render() {

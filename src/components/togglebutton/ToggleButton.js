@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class ToggleButton extends Component {
@@ -15,14 +16,14 @@ export class ToggleButton extends Component {
     };
 
     static propTypes = {
-        onIcon: React.PropTypes.string,
-        offIcon: React.PropTypes.string,
-        onLabel: React.PropTypes.string,
-        offLabel: React.PropTypes.string,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        checked: React.PropTypes.bool,
-        onChange: React.PropTypes.func
+        onIcon: PropTypes.string,
+        offIcon: PropTypes.string,
+        onLabel: PropTypes.string,
+        offLabel: PropTypes.string,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        checked: PropTypes.bool,
+        onChange: PropTypes.func
     };
 
     constructor(props) {

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames'
 
@@ -16,10 +17,10 @@ export class InputSwitch extends Component {
     static propsTypes = {
         offLabel: PropTypes.string,
         onLabel: PropTypes.string,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        checked: React.PropTypes.bool,
-        onChange: React.PropTypes.func
+        style: PropTypes.object,
+        className: PropTypes.string,
+        checked: PropTypes.bool,
+        onChange: PropTypes.func
     }
 
     constructor(props) {

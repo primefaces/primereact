@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class Checkbox extends Component {
@@ -11,10 +12,10 @@ export class Checkbox extends Component {
     };
 
     static propTypes = {
-        label: React.PropTypes.string,
-        value: React.PropTypes.any,
-        onChange: React.PropTypes.func,
-        checked: React.PropTypes.bool
+        label: PropTypes.string,
+        value: PropTypes.any,
+        onChange: PropTypes.func,
+        checked: PropTypes.bool
     };
     
     constructor() {

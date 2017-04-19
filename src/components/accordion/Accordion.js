@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class AccordionTab extends Component {
@@ -10,7 +11,7 @@ AccordionTab.defaultProps = {
 }
 
 AccordionTab.propTypes = {
-    header: React.PropTypes.string
+    header: PropTypes.string
 };
 
 export class Accordion extends Component {
@@ -25,12 +26,12 @@ export class Accordion extends Component {
     }
 
     static propTypes = {
-        activeIndex: React.PropTypes.any,
-        className: React.PropTypes.string,
-        style: React.PropTypes.object,
-        multiple: React.PropTypes.bool,
-        onTabOpen: React.PropTypes.func,
-        onTabClose: React.PropTypes.func
+        activeIndex: PropTypes.any,
+        className: PropTypes.string,
+        style: PropTypes.object,
+        multiple: PropTypes.bool,
+        onTabOpen: PropTypes.func,
+        onTabClose: PropTypes.func
     };
     
     constructor() {

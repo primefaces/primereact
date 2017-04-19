@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class Fieldset extends Component {
@@ -14,13 +15,13 @@ export class Fieldset extends Component {
     }
 
     static propTypes = {
-        legend: React.PropTypes.any,
-        className: React.PropTypes.string,
-        style: React.PropTypes.object,
-        toggleable: React.PropTypes.bool,
-        collapsed: React.PropTypes.bool,
-        onExpand: React.PropTypes.func,
-        onCollapse: React.PropTypes.func
+        legend: PropTypes.any,
+        className: PropTypes.string,
+        style: PropTypes.object,
+        toggleable: PropTypes.bool,
+        collapsed: PropTypes.bool,
+        onExpand: PropTypes.func,
+        onCollapse: PropTypes.func
     };
     
     constructor(props) {

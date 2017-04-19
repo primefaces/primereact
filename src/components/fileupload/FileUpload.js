@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Button} from '../button/Button';
 import {Messages} from '../messages/Messages';
 import {ProgressBar} from '../progressbar/ProgressBar';
@@ -32,27 +33,27 @@ export class FileUpload extends Component {
     }
 
     static propTypes = {
-        name: React.PropTypes.string,
-        url: React.PropTypes.string,
-        multiple: React.PropTypes.bool,
-        accept: React.PropTypes.string,
-        disabled: React.PropTypes.bool,
-        auto: React.PropTypes.bool,
-        maxFileSize: React.PropTypes.number,
-        invalidFileSizeMessageSummary: React.PropTypes.string,
-        invalidFileSizeMessageDetail: React.PropTypes.string,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        previewWidth: React.PropTypes.number,
-        chooseLabel: React.PropTypes.string,
-        uploadLabel: React.PropTypes.string,
-        cancelLabel: React.PropTypes.string,
-        onBeforeUpload: React.PropTypes.func,
-        onBeforeSend: React.PropTypes.func,
-        onUpload: React.PropTypes.func,
-        onError: React.PropTypes.func,
-        onClear: React.PropTypes.func,
-        onSelect: React.PropTypes.func
+        name: PropTypes.string,
+        url: PropTypes.string,
+        multiple: PropTypes.bool,
+        accept: PropTypes.string,
+        disabled: PropTypes.bool,
+        auto: PropTypes.bool,
+        maxFileSize: PropTypes.number,
+        invalidFileSizeMessageSummary: PropTypes.string,
+        invalidFileSizeMessageDetail: PropTypes.string,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        previewWidth: PropTypes.number,
+        chooseLabel: PropTypes.string,
+        uploadLabel: PropTypes.string,
+        cancelLabel: PropTypes.string,
+        onBeforeUpload: PropTypes.func,
+        onBeforeSend: PropTypes.func,
+        onUpload: PropTypes.func,
+        onError: PropTypes.func,
+        onClear: PropTypes.func,
+        onSelect: PropTypes.func
     };
     
     constructor(props) {

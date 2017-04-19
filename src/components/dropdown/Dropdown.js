@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
@@ -16,14 +17,14 @@ export class Dropdown extends Component {
     };
 
     static propTypes = {
-        value: React.PropTypes.any,
-        options: React.PropTypes.array,
-        onChange: React.PropTypes.func,
-        itemTemplate: React.PropTypes.func,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        autoWidth: React.PropTypes.bool,
-        scrollHeight: React.PropTypes.string
+        value: PropTypes.any,
+        options: PropTypes.array,
+        onChange: PropTypes.func,
+        itemTemplate: PropTypes.func,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        autoWidth: PropTypes.bool,
+        scrollHeight: PropTypes.string
     };
 
     constructor(props) {

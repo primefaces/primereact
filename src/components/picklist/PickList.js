@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import { Button } from '../button/Button'
 import DomHandler from '../utils/DomHandler'
 import classNames from 'classnames'

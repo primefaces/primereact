@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ChartJS from 'chart.js/src/chart.js';
 
 export class Chart extends Component {
@@ -14,13 +15,13 @@ export class Chart extends Component {
     }
 
     static propTypes = {
-        type: React.PropTypes.string,
-        data: React.PropTypes.object,
-        options: React.PropTypes.object,
-        width: React.PropTypes.string,
-        height: React.PropTypes.string,
-        style: React.PropTypes.string,
-        className: React.PropTypes.string
+        type: PropTypes.string,
+        data: PropTypes.object,
+        options: PropTypes.object,
+        width: PropTypes.string,
+        height: PropTypes.string,
+        style: PropTypes.string,
+        className: PropTypes.string
     };
 
     componentDidMount() {

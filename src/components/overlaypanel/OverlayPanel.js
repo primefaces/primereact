@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
@@ -13,11 +14,11 @@ export class OverlayPanel extends Component {
     }
 
     static propTypes = {
-        dismissable: React.PropTypes.bool,
-        showCloseIcon: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        appendTo: React.PropTypes.any
+        dismissable: PropTypes.bool,
+        showCloseIcon: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        appendTo: PropTypes.any
     }
 
     constructor(props) {

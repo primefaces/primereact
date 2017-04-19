@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
@@ -22,14 +23,14 @@ export class Dialog extends Component {
     }
 
     static propTypes = {
-        header: React.PropTypes.any,
-        visible: React.PropTypes.bool,
-        width: React.PropTypes.string,
-        height: React.PropTypes.string,
-        modal: React.PropTypes.bool,
-        onHide: React.PropTypes.func,
-        onShow: React.PropTypes.func,
-        draggable: React.PropTypes.bool
+        header: PropTypes.any,
+        visible: PropTypes.bool,
+        width: PropTypes.string,
+        height: PropTypes.string,
+        modal: PropTypes.bool,
+        onHide: PropTypes.func,
+        onShow: PropTypes.func,
+        draggable: PropTypes.bool
     };
     
     constructor(props) {

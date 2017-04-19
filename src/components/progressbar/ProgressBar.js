@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class ProgressBar extends Component {
@@ -12,11 +13,11 @@ export class ProgressBar extends Component {
     }
 
     static propTypes = {
-        value: React.PropTypes.number,
-        showValue: React.PropTypes.bool,
-        unit: React.PropTypes.string,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
+        value: PropTypes.number,
+        showValue: PropTypes.bool,
+        unit: PropTypes.string,
+        style: PropTypes.object,
+        className: PropTypes.string,
     };
 
     render() {

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
@@ -30,7 +31,7 @@ export class Spinner extends Component {
         decimalSeparator: PropTypes.string,
         thousandSeparator: PropTypes.string,
         style: PropTypes.string,
-        className: PropTypes.string,
+        className: PropTypes.string
     }
 
     constructor(props) {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export class CodeHighlight extends Component {
 
@@ -7,15 +8,7 @@ export class CodeHighlight extends Component {
     }
     
     static propTypes = {
-        className: React.PropTypes.string
-    }
-
-    static defaultProps = {
-        className: null
-    }
-
-    static propTypes = {
-        className: React.PropTypes.string
+        className: PropTypes.string
     }
 
     componentDidMount() {

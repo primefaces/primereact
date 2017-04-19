@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class TriStateCheckbox extends Component {
@@ -9,8 +10,8 @@ export class TriStateCheckbox extends Component {
     };
 
     static propTypes = {
-        value: React.PropTypes.bool,
-        onChange: React.PropTypes.func
+        value: PropTypes.bool,
+        onChange: PropTypes.func
     }
     
     constructor(props) {

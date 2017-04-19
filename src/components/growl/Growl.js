@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
@@ -12,10 +13,10 @@ export class Growl extends Component {
     }
 
     static propTypes = {
-        closable: React.PropTypes.bool,
-        className: React.PropTypes.string,
-        style: React.PropTypes.object,
-        onClear: React.PropTypes.func
+        closable: PropTypes.bool,
+        className: PropTypes.string,
+        style: PropTypes.object,
+        onClear: PropTypes.func
     };
 
     constructor(props) {

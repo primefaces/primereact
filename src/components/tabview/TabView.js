@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export class TabPanel extends Component {
     
@@ -12,7 +13,7 @@ TabPanel.defaultProps = {
 }
 
 TabPanel.propTypes = {
-    header: React.PropTypes.string
+    header: PropTypes.string
 };
 
 export class TabView extends Component {
@@ -22,7 +23,7 @@ export class TabView extends Component {
     }
 
     static propTypes = {
-        activeIndex: React.PropTypes.number
+        activeIndex: PropTypes.number
     };
     
     constructor() {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class SelectButton extends Component {
@@ -15,14 +16,14 @@ export class SelectButton extends Component {
     };
 
     static propTypes = {
-        activeIndex: React.PropTypes.any,
-        options: React.PropTypes.array,
-        tabindex: React.PropTypes.number,
-        multiple: React.PropTypes.bool,
-        disabled: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        onChange: React.PropTypes.func
+        activeIndex: PropTypes.any,
+        options: PropTypes.array,
+        tabindex: PropTypes.number,
+        multiple: PropTypes.bool,
+        disabled: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        onChange: PropTypes.func
     };
 
     constructor(props) {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class Panel extends Component {
@@ -14,13 +15,13 @@ export class Panel extends Component {
     }
 
     static propTypes = {
-        header: React.PropTypes.any,
-        toggleable: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        collapsed: React.PropTypes.bool,
-        onExpand: React.PropTypes.func,
-        onCollapse: React.PropTypes.func
+        header: PropTypes.any,
+        toggleable: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        collapsed: PropTypes.bool,
+        onExpand: PropTypes.func,
+        onCollapse: PropTypes.func
     };
     
     constructor(props) {
