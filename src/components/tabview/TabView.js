@@ -48,6 +48,18 @@ export class TabView extends Component {
         return styleClass;
     }
     
+    componentWillMount() {
+        if (this.props.activeIndex) {
+			this.setState({activeIndex: this.props.activeIndex});
+		}
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeIndex !== this.props.activeIndex) {
+            this.setState({activeIndex: nextProps.activeIndex});
+        }
+    }
+
     render() {
         return (
             <div className="ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-top">
