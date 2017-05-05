@@ -154,7 +154,7 @@ constructor() {
 `}
 </CodeHighlight>
 
-            <h3>SlothChar</h3>
+            <h3>SlotChar</h3>
             <p>Underscore is the default placeholder for a mask and this can be customized using slotChart option.</p>
 <CodeHighlight className="language-markup">
 {`
