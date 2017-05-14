@@ -48,7 +48,7 @@ export class Dropdown extends Component {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
         }
-    }
+    }    
 
     onDocumentClick() {
         if(!this.selfClick&&!this.itemClick) {
@@ -67,11 +67,13 @@ export class Dropdown extends Component {
     }
 
     selectItem(event, option, index) {
-        this.props.onChange({
-            originalEvent: event,
-            value: option.value,
-            index: index
-        });
+        if(!DomHandler.hasClass(event.target,'ui-state-highlight')) {
+            this.props.onChange({
+                originalEvent: event,
+                value: option.value,
+                index: index
+            });
+        }
     }
 
     onClick() {
