@@ -17,14 +17,24 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    background-color: #f6f6f6;
-    overflow-x: hidden;
-    overflow-y: auto;
     width: 300px;
+    background-color: #f6f6f6;
     box-sizing: border-box;
     -moz-box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#layout-sidebar .nano > .nano-content .layout-menu {
+    padding-bottom: 120px;
+}
+
+#layout-sidebar .nano > .nano-pane {
+    background-color: transparent;
+}
+
+#layout-sidebar .nano > .nano-pane .nano-slider {
+    background-color: #aaaaaa;
 }
 
 .layout-logo {
@@ -33,17 +43,12 @@ body {
     display: block;
     padding: 15px 0;
     z-index: 997;
-    width: 315px;
     background-color: #f6f6f6;
     text-align: center;
 }
 
 .layout-logo img {
     height: 70px;
-}
-
-#layout-sidebar .layout-menu {
-    width: 315px;
 }
 
 #layout-sidebar .layout-menu > a {
