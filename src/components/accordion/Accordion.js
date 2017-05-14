@@ -69,6 +69,18 @@ export class Accordion extends Component {
     isSelected(i) {
         return this.props.multiple ? this.state.activeIndex && this.state.activeIndex.includes(i) : this.state.activeIndex === i;
     }
+
+    componentWillMount() {
+        if (this.props.activeIndex) {
+ 		    this.setState({activeIndex: this.props.activeIndex});
+ 		}
+    }
+ 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeIndex !== this.props.activeIndex) {
+            this.setState({activeIndex: nextProps.activeIndex});
+        }
+    }
         
     render() {
         return (
