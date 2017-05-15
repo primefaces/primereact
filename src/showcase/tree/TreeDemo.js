@@ -7,7 +7,7 @@ export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [], selectedFile3: null };
     }
 
     onSelectionChange(e) {
@@ -20,6 +20,10 @@ export class TreeDemo extends Component {
 
     onCheckboxSelectionChange(e) {
         this.setState({ selectedFiles2: e.selection });
+    }
+
+    onHorizontalSelectionChange(e) {
+        this.setState({ selectedFile3: e.selection });
     }
 
     render() {
@@ -72,6 +76,11 @@ export class TreeDemo extends Component {
             }
         ];
 
+        var horizontalTreeData = [{
+            label: 'Root',
+            children: data
+        }];
+
         return (
             <div>
                 <div className="content-section">
@@ -110,6 +119,10 @@ export class TreeDemo extends Component {
                             })
                         }
                     </div>
+
+                    <h3>Horizontal Tree</h3>
+                    <Tree value={horizontalTreeData} layout="horizontal" selectionMode="single" selectionChange={this.onHorizontalSelectionChange.bind(this)}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile3 && this.state.selectedFile3.label}</div>
                 </div>
 
                 <TreeDoc />
@@ -295,6 +308,32 @@ render() {
 `}
 </CodeHighlight>
 
+            <h3>Horizontal Orientation</h3>
+            <p>Horizontal mode is the alternative option for orientation.</p>
+<CodeHighlight className="language-markup">
+{`
+<Tree value={horizontalTreeData} layout="horizontal" />
+
+`}
+</CodeHighlight>
+
+<CodeHighlight className="language-javascript">
+{`
+
+render() {
+        var data = // data array
+
+        var horizontalTreeData = [{
+            label: 'Root',
+            children: data
+        }];
+
+        return <Tree value={horizontalTreeData} layout="horizontal"/>
+    }
+
+`}
+</CodeHighlight>
+
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -324,6 +363,12 @@ render() {
                             <td>any</td>
                             <td>null</td>
                             <td>A single treenode instance or an array to refer to the selections.</td>
+                        </tr>
+                        <tr>
+                            <td>layout</td>
+                            <td>string</td>
+                            <td>vertical</td>
+                            <td>Defines the orientation of the tree, valid values are 'vertical' and 'horizontal'.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -415,6 +460,10 @@ render() {
                             <td>Main container element</td>
                         </tr>
                         <tr>
+                            <td>ui-tree-horizontal</td>
+                            <td>Main container element in horizontal mode</td>
+                        </tr>
+                        <tr>
                             <td>ui-tree-container</td>
                             <td>Container of nodes</td>
                         </tr>
@@ -458,7 +507,7 @@ export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [], selectedFile3: null };
     }
 
     onSelectionChange(e) {
@@ -471,6 +520,10 @@ export class TreeDemo extends Component {
 
     onCheckboxSelectionChange(e) {
         this.setState({ selectedFiles2: e.selection });
+    }
+
+    onHorizontalSelectionChange(e) {
+        this.setState({ selectedFile3: e.selection });
     }
 
     render() {
@@ -523,6 +576,11 @@ export class TreeDemo extends Component {
             }
         ];
 
+        var horizontalTreeData = [{
+            label: 'Root',
+            children: data
+        }];
+
         return (
             <div>
                 <div className="content-section">
@@ -561,6 +619,10 @@ export class TreeDemo extends Component {
                             })
                         }
                     </div>
+
+                    <h3>Horizontal Tree</h3>
+                    <Tree value={horizontalTreeData} layout="horizontal" selectionMode="single" selectionChange={this.onHorizontalSelectionChange.bind(this)}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile3 && this.state.selectedFile3.label}</div>
                 </div>
 
                 <TreeDoc />

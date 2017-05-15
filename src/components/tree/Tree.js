@@ -8,14 +8,16 @@ export class TreeNode extends Component {
         node: null,
         index: null,
         tree: null,
-        parentNode: null
+        parentNode: null,
+        root: null
     }
 
     static propsTypes = {
         node: PropTypes.any,
         index: PropTypes.string,
         tree: PropTypes.any,
-        parentNode: PropTypes.any
+        parentNode: PropTypes.any,
+        root: PropTypes.bool
     }
 
     constructor(props) {
@@ -57,7 +59,7 @@ export class TreeNode extends Component {
         return this.tree.isSelected(this.node);
     }
 
-    render() {
+    renderVerticalTree() {
         var nodeClass = classNames('ui-treenode', this.node.styleClass, {
             'ui-treenode-leaf': this.isLeaf(this.node)
         });
@@ -102,7 +104,7 @@ export class TreeNode extends Component {
         var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }}>
             {
                 this.node.children && this.node.children.map((child, i) => {
-                    return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} tree={this.tree} parentNode={this.node}/>)
+                    return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} tree={this.tree} parentNode={this.node} />)
                 })
             }
         </ul>);
@@ -111,6 +113,88 @@ export class TreeNode extends Component {
             {nodeContent}
             {nodeChildren}
         </li>);
+    }
+
+    renderHorizontalTree() {
+        var isFirstChild = String(this.props.index).slice(-1) === "0",
+            isLastChild = this.node.parent && String(this.props.index).slice(-1) === String(this.node.parent.children.length - 1);
+
+        var connector = (!this.props.root && <td className="ui-treenode-connector">
+            <table className="ui-treenode-connector-table">
+                <tbody>
+                    <tr>
+                        <td className={!isFirstChild ? "ui-treenode-connector-line" : ""}></td>
+                    </tr>
+                    <tr>
+                        <td className={!isLastChild ? "ui-treenode-connector-line" : ""}></td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>);
+
+        var nodeClass = classNames('ui-treenode', this.node.styleClass, {
+            'ui-treenode-collapsed': !this.state.expanded
+        });
+
+        var label = (<span className="ui-treenode-label ui-corner-all">
+            <span>{this.node.label}</span>
+        </span>);
+
+        var togglerClass = classNames('ui-tree-toggler fa fa-fw', {
+            'fa-plus': !this.state.expanded,
+            'fa-minus': this.state.expanded
+        });
+
+        var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
+            iconClass = this.getIcon();
+
+        var nodeContentClass = classNames('ui-treenode-content ui-state-default ui-corner-all', {
+            'ui-treenode-selectable': this.tree.props.selectionMode && this.node.selectable !== false,
+            'ui-state-highlight': this.isSelected()
+        }),
+            nodeContent = (
+                <td className={nodeClass}>
+                    <div className={nodeContentClass} onClick={this.onNodeClick.bind(this)} onTouchEnd={this.onNodeTouchEnd.bind(this)}>
+                        {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle.bind(this)}></span>}
+                        {hasIcon && <span className={iconClass}></span>}
+                        {label}
+                    </div>
+                </td>
+            );
+
+        var nodeChildren = (this.node.children && this.state.expanded) && (<td className="ui-treenode-children-container" style={{ 'display': this.state.expanded ? 'table-cell' : 'none' }}>
+            <div className="ui-treenode-children">
+                {
+                    this.node.children && this.node.children.map((child, i) => {
+                        return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} tree={this.tree} parentNode={this.node} />)
+                    })
+                }
+            </div>
+        </td>);
+
+        var tbody = (<tbody>
+            <tr>
+                {connector}
+                {nodeContent}
+                {nodeChildren}
+            </tr>
+        </tbody>);
+
+        if (this.props.root) {
+            return tbody;
+        }
+        else {
+            return (<table>{tbody}</table>);
+        }
+    }
+
+    render() {
+        if (this.tree.isHorizontal()) {
+            return this.renderHorizontalTree();
+        }
+        else {
+            return this.renderVerticalTree();
+        }
     }
 }
 
@@ -121,6 +205,7 @@ export class Tree extends Component {
         selectionMode: null,
         selection: null,
         selectionChange: null,
+        layout: 'vertical',
         onNodeSelect: null,
         onNodeUnselect: null,
         onNodeExpand: null,
@@ -137,6 +222,7 @@ export class Tree extends Component {
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
         selectionChange: PropTypes.func.isRequired,
+        layout: PropTypes.string,
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func,
         onNodeExpand: PropTypes.func,
@@ -173,57 +259,57 @@ export class Tree extends Component {
     }
 
     propagateUp(node, select) {
-        if(node.children && node.children.length) {
+        if (node.children && node.children.length) {
             var selectedCount = 0;
             var childPartialSelected = false;
-            for(var child of node.children) {
-                if(this.isSelected(child)) {
+            for (var child of node.children) {
+                if (this.isSelected(child)) {
                     selectedCount++;
                 }
-                else if(child.partialSelected) {
+                else if (child.partialSelected) {
                     childPartialSelected = true;
                 }
             }
-            
-            if(select && selectedCount === node.children.length) {
-                this.selection = [...this.selection||[],node];
+
+            if (select && selectedCount === node.children.length) {
+                this.selection = [...this.selection || [], node];
                 node.partialSelected = false;
             }
-            else {                
-                if(!select) {
+            else {
+                if (!select) {
                     var index = this.findIndexInSelection(node);
-                    if(index >= 0) {
-                        this.selection = this.selection.filter((val,i) => i!==index);
+                    if (index >= 0) {
+                        this.selection = this.selection.filter((val, i) => i !== index);
                     }
                 }
-                
-                if(childPartialSelected || (selectedCount > 0 && selectedCount !== node.children.length))
+
+                if (childPartialSelected || (selectedCount > 0 && selectedCount !== node.children.length))
                     node.partialSelected = true;
                 else
                     node.partialSelected = false;
             }
         }
-                
+
         var parent = node.parent;
-        if(parent) {
+        if (parent) {
             this.propagateUp(parent, select);
         }
     }
-    
+
     propagateDown(node, select) {
         var index = this.findIndexInSelection(node);
-        
-        if(select && index === -1) {
-            this.selection = [...this.selection||[],node];
+
+        if (select && index === -1) {
+            this.selection = [...this.selection || [], node];
         }
-        else if(!select && index > -1) {
-            this.selection = this.selection.filter((val,i) => i!==index);
+        else if (!select && index > -1) {
+            this.selection = this.selection.filter((val, i) => i !== index);
         }
-        
+
         node.partialSelected = false;
-        
-        if(node.children && node.children.length) {
-            for(var child of node.children) {
+
+        if (node.children && node.children.length) {
+            for (var child of node.children) {
                 this.propagateDown(child, select);
             }
         }
@@ -271,10 +357,10 @@ export class Tree extends Component {
                         selection: this.selection
                     });
 
-                    if(this.props.onNodeUnselect) {
-                        this.props.onNodeUnselect({ 
-                            originalEvent: event, 
-                            node: node 
+                    if (this.props.onNodeUnselect) {
+                        this.props.onNodeUnselect({
+                            originalEvent: event,
+                            node: node
                         });
                     }
                 }
@@ -293,10 +379,10 @@ export class Tree extends Component {
                         selection: this.selection
                     });
 
-                    if(this.props.onNodeSelect) {
-                        this.props.onNodeSelect({ 
-                            originalEvent: event, 
-                            node: node 
+                    if (this.props.onNodeSelect) {
+                        this.props.onNodeSelect({
+                            originalEvent: event,
+                            node: node
                         });
                     }
                 }
@@ -323,10 +409,10 @@ export class Tree extends Component {
                             });
                         }
 
-                        if(this.props.onNodeUnselect) {
-                            this.props.onNodeUnselect({ 
-                                originalEvent: event, 
-                                node: node 
+                        if (this.props.onNodeUnselect) {
+                            this.props.onNodeUnselect({
+                                originalEvent: event,
+                                node: node
                             });
                         }
                     }
@@ -347,10 +433,10 @@ export class Tree extends Component {
                             });
                         }
 
-                        if(this.props.onNodeSelect) {
-                            this.props.onNodeSelect({ 
-                                originalEvent: event, 
-                                node: node 
+                        if (this.props.onNodeSelect) {
+                            this.props.onNodeSelect({
+                                originalEvent: event,
+                                node: node
                             });
                         }
                     }
@@ -359,19 +445,19 @@ export class Tree extends Component {
                     if (this.isSingleSelectionMode()) {
                         if (selected) {
                             this.selection = null;
-                            if(this.props.onNodeUnselect) {
-                                this.props.onNodeUnselect({ 
-                                    originalEvent: event, 
-                                    node: node 
+                            if (this.props.onNodeUnselect) {
+                                this.props.onNodeUnselect({
+                                    originalEvent: event,
+                                    node: node
                                 });
                             }
                         }
                         else {
                             this.selection = node;
-                            if(this.props.onNodeSelect) {
-                                this.props.onNodeSelect({ 
-                                    originalEvent: event, 
-                                    node: node 
+                            if (this.props.onNodeSelect) {
+                                this.props.onNodeSelect({
+                                    originalEvent: event,
+                                    node: node
                                 });
                             }
                         }
@@ -379,19 +465,19 @@ export class Tree extends Component {
                     else {
                         if (selected) {
                             this.selection = this.selection.filter((val, i) => i !== index);
-                            if(this.props.onNodeUnselect) {
-                                this.props.onNodeUnselect({ 
-                                    originalEvent: event, 
-                                    node: node 
+                            if (this.props.onNodeUnselect) {
+                                this.props.onNodeUnselect({
+                                    originalEvent: event,
+                                    node: node
                                 });
                             }
                         }
                         else {
                             this.selection = [...this.selection || [], node];
-                            if(this.props.onNodeSelect) {
-                                this.props.onNodeSelect({ 
-                                    originalEvent: event, 
-                                    node: node 
+                            if (this.props.onNodeSelect) {
+                                this.props.onNodeSelect({
+                                    originalEvent: event,
+                                    node: node
                                 });
                             }
                         }
@@ -411,21 +497,37 @@ export class Tree extends Component {
     onNodeTouchEnd() {
         this.nodeTouched = true;
     }
-    
+
+    isHorizontal() {
+        return this.props.layout === 'horizontal';
+    }
+
     render() {
         var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.styleClass, {
-            'ui-tree-selectable': this.props.selectionMode
+            'ui-tree-selectable': this.props.selectionMode,
+            'ui-tree-horizontal': this.isHorizontal()
         });
+
+        var container;
+        if (this.isHorizontal()) {
+            container = this.props.value && this.props.value[0] && (
+                <table>
+                    <TreeNode node={this.props.value[0]} root={true} index={0} tree={this}></TreeNode>
+                </table>)
+        }
+        else {
+            container = (<ul className="ui-tree-container">
+                {
+                    this.props.value && this.props.value.map((node, index) => {
+                        return (<TreeNode key={index} node={node} index={index} tree={this} parentNode={this.props.value} />)
+                    })
+                }
+            </ul>);
+        }
 
         return (
             <div className={treeClass} style={this.props.style}>
-                <ul className="ui-tree-container">
-                    {
-                        this.props.value && this.props.value.map((node, index) => {
-                            return (<TreeNode key={index} node={node} index={index} tree={this} parentNode={this.props.value}/>)
-                        })
-                    }
-                </ul>
+                {container}
             </div>
         );
     }
