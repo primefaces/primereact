@@ -265,6 +265,7 @@ class AppMenu extends Component {
                         </a>
                         <div className={classNames({ 'submenu-hidden': this.state.activeMenu !== 11, 'submenu-visible': this.state.activeMenu === 11 })}>
                             <Link to="/progressbar">&#9679; ProgressBar</Link>
+                            <Link to="/captcha">&#9679; Captcha</Link>
                             <Link to="/codehighlight">&#9679; CodeHighlight</Link>
                         </div>
                     </div>
