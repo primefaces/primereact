@@ -33,6 +33,8 @@ export class Slider extends Component {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onBarClick = this.onBarClick.bind(this);
         this.endDrag = this.endDrag.bind(this);
+        this.onTouchStart = this.onTouchStart.bind(this);
+        this.onTouchMove = this.onTouchMove.bind(this);
         this.handleValues = [];
     }
 
@@ -63,6 +65,10 @@ export class Slider extends Component {
 
     handleChange(event) {
         let handleValue = this.calculateHandleValue(event);
+        this.setValueFromHandle(event, handleValue);
+    }
+
+    setValueFromHandle(event, handleValue) {
         let newValue = this.getValueFromHandle(handleValue);
 
         if (this.props.range) {
@@ -205,6 +211,42 @@ export class Slider extends Component {
         }
     }
 
+    onTouchStart(event, index) {
+        var touchobj = event.changedTouches[0];
+        this.startHandleValue = (this.props.range) ? this.handleValues[index] : this.handleValue;
+        this.dragging = true;
+        this.handleIndex = index;
+
+        if (this.props.orientation === 'horizontal') {
+            this.startx = parseInt(touchobj.clientX, 10);
+            this.barWidth = this.container.offsetWidth;
+        }
+        else {
+            this.starty = parseInt(touchobj.clientY, 10);
+            this.barHeight = this.container.offsetHeight;
+        }
+
+
+        event.preventDefault();
+    }
+
+    onTouchMove(event, index) {
+        var touchobj = event.changedTouches[0],
+        handleValue = 0;
+
+        if (this.props.orientation === 'horizontal') {
+            handleValue = Math.floor(((parseInt(touchobj.clientX, 10) - this.startx) * 100) / (this.barWidth)) + this.startHandleValue;
+        }
+        else {
+            handleValue = Math.floor(((this.starty - parseInt(touchobj.clientY, 10)) * 100) / (this.barHeight))  + this.startHandleValue;
+        }
+
+        event.target.style.transition = "none";
+        this.setValueFromHandle(event, handleValue);
+
+        event.preventDefault();
+    }
+
     componentWillMount() {
         if (this.props.range)
             this.values = this.props.value || [0, 0];
@@ -262,11 +304,11 @@ export class Slider extends Component {
             });
 
             var middleRange = <span className="ui-slider-range ui-widget-header ui-corner-all" style={{ 'left': this.state.handleValues[0] + '%', width: (this.state.handleValues[1] - this.state.handleValues[0] + '%') }}></span>
-            var leftHandle = <span onMouseDown={(e) => this.onMouseDown(e, 0)} className={leftHandleClass} style={{ 'left': this.state.handleValues[0] + '%' }}></span>
-            var rightHandle = <span onMouseDown={(e) => this.onMouseDown(e, 1)} className={rightHandleClass} style={{ 'left': this.state.handleValues[1] + '%' }}></span>
+            var leftHandle = <span onMouseDown={(e) => this.onMouseDown(e, 0)} onTouchStart={(e) => this.onTouchStart(e, 0)} onTouchMove={(e) => this.onTouchMove(e, 0)} className={leftHandleClass} style={{ 'left': this.state.handleValues[0] + '%' }}></span>
+            var rightHandle = <span onMouseDown={(e) => this.onMouseDown(e, 1)} onTouchStart={(e) => this.onTouchStart(e, 1)} onTouchMove={(e) => this.onTouchMove(e, 1)} className={rightHandleClass} style={{ 'left': this.state.handleValues[1] + '%' }}></span>
         }
         else {
-            var handle = <span className="ui-slider-handle ui-state-default ui-corner-all" onMouseDown={this.onMouseDown}
+            var handle = <span className="ui-slider-handle ui-state-default ui-corner-all" onMouseDown={this.onMouseDown} onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove}
                         style={{ 'left': this.props.orientation === 'horizontal' ? this.state.handleValue + '%' : null, 'bottom': this.props.orientation === 'vertical' ? this.state.handleValue + '%' : null }}></span>
         }
 
