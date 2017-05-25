@@ -25,13 +25,6 @@ npm install primereact --save
 
 
                 <h3>Import</h3>
-                <p>UI components are configured as modules, once PrimeReact is downloaded and configured, modules and apis can be imported from 'primereact' shorthand in your application code.</p>
-<CodeHighlight className="language-javascript">
-{`
-import {Accordion,AccordionTab} from 'primereact';
-
-`}
-</CodeHighlight>
 
                 <p>Importing from primereact will load all other components as well, to only import a specific component pattern would result in a smaller bundle size.</p>
 <CodeHighlight className="language-javascript">

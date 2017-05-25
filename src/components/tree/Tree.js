@@ -94,7 +94,7 @@ export class TreeNode extends Component {
         }),
             nodeContent = (
                 <div className={nodeContentClass} onClick={this.onNodeClick.bind(this)} onTouchEnd={this.onNodeTouchEnd.bind(this)}>
-                    {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle.bind(this)}></span>}
+                    <span className={togglerClass} onClick={this.toggle.bind(this)}></span>
                     {checkbox}
                     {hasIcon && <span className={iconClass}></span>}
                     {label}
@@ -155,7 +155,7 @@ export class TreeNode extends Component {
             nodeContent = (
                 <td className={nodeClass}>
                     <div className={nodeContentClass} onClick={this.onNodeClick.bind(this)} onTouchEnd={this.onNodeTouchEnd.bind(this)}>
-                        <span className={togglerClass} onClick={this.toggle.bind(this)}></span>
+                        {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle.bind(this)}></span>}
                         {hasIcon && <span className={iconClass}></span>}
                         {label}
                     </div>
