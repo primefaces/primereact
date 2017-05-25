@@ -42,7 +42,7 @@ gulp.task('clean', function() {
 //Building project with run sequence
 gulp.task('build', ['clean','build-css-prod','images']);
 
-gulp.task('prepublish', ['clean','build-css-prod'], function() {
+gulp.task('prepublish', ['clean','build'], function() {
     gulp.src([
         'public/resources/**/*',
     ])
