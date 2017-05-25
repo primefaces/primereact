@@ -20,9 +20,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.3",
     "gulp-uglifycss": "^1.0.6",
-    "react-scripts": "0.9.5"
-  },
-  "dependencies": {
+    "react-scripts": "0.9.5",
     "axios": "^0.15.3",
     "chart.js": "^2.4.0",
     "classnames": "^2.2.5",
@@ -43,7 +41,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "compile-shorthand": "babel src/primereact.js --out-file index.js --presets es2015,react,stage-0",
     "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0",
     "build-resources": "gulp prepublish",
     "prepublish": "npm run build-resources && npm run compile-shorthand && npm run compile-components"
