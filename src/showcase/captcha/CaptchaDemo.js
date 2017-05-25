@@ -28,7 +28,7 @@ export class CaptchaDemo extends Component {
                 <div className="content-section implementation button-demo">
                     <Growl value={this.state.message}></Growl>
 
-                    <Captcha siteKey="6LcUcyEUAAAAAGfRdVWWuX9bh8roD-lEqx2onu6g" onResponse={this.showResponse.bind(this)}></Captcha>
+                    <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse.bind(this)}></Captcha>
                 </div>
 
                 <CaptchaDoc />

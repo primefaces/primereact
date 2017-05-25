@@ -79,7 +79,7 @@ export class AccordionDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Accordion} from 'primereact';
+import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
 
 `}
 </CodeHighlight>

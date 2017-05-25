@@ -146,7 +146,7 @@ export class CalendarDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {CalendarDoc} from 'primereact';
+import {Calendar} from 'primereact/components/calendar/Calendar';
 
 `}
 </CodeHighlight>
