@@ -28,20 +28,19 @@ gulp.task('build-css-prod', function() {
 	.pipe(gulp.dest('public/resources'));
 });
 
-//Building images
-//gulp.task('images', function() {
-//    return gulp.src(['src/components/**/images/*.png', 'src/components/**/images/*.gif'])
-//        .pipe(flatten())
-//        .pipe(gulp.dest('resources/images'));
-//});
+gulp.task('images', function() {
+    return gulp.src(['src/components/**/images/*.png', 'src/components/**/images/*.gif'])
+        .pipe(flatten())
+        .pipe(gulp.dest('public/resources/images'));
+});
 
 //Cleaning previous gulp tasks from project
 gulp.task('clean', function() {
-    return del(['public/resources/primeng.css','public/resources/primeng.min.css'/*,'resources/images'*/]);
+    return del(['public/resources/images/','public/resources/primeng.css','public/resources/primeng.min.css']);
 });
 
 //Building project with run sequence
-gulp.task('build', ['clean','build-css-prod' /*,'images'*/]);
+gulp.task('build', ['clean','build-css-prod','images']);
 
 gulp.task('prepublish', ['clean','build-css-prod'], function() {
     gulp.src([
