@@ -58,7 +58,7 @@ export class DialogDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Dialog} from 'primereact';
+import {Dialog} from 'primereact/components/dialog/Dialog';
 
 `}
 </CodeHighlight>

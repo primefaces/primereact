@@ -46,7 +46,7 @@ class TriStateCheckboxDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {TriStateCheckbox} from 'primereact';
+import {TriStateCheckbox} from 'primereact/components/tristatecheckbox/TriStateCheckbox';
 
 `}
 </CodeHighlight>

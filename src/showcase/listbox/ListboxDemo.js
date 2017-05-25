@@ -88,7 +88,7 @@ class ListboxDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Listbox} from 'primereact';
+import {Listbox} from 'primereact/components/listbox/Listbox';
 
 `}
 </CodeHighlight>

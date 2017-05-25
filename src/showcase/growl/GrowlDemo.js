@@ -78,7 +78,7 @@ export class GrowlDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Growl} from 'primereact';
+import {Growl} from 'primereact/components/growl/Growl';
 
 `}
 </CodeHighlight>

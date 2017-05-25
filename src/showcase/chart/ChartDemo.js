@@ -30,7 +30,7 @@ class ChartDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Chart} from 'primereact';
+import {Chart} from 'primereact/components/chart/Chart';
 
 `}
 </CodeHighlight>

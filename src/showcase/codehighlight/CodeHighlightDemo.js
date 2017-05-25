@@ -81,7 +81,7 @@ export class CodeHighlightDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {CodeHighlight} from 'primereact';
+import {CodeHighlight} from 'primereact/components/codehighlight/CodeHighlight';
 
 `}
 </CodeHighlight>

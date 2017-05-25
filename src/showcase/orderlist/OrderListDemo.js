@@ -78,7 +78,7 @@ export class OrderListDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {OrderList} from 'primereact';
+import {OrderList} from 'primereact/components/orderlist/OrderList';
 
 `}
 </CodeHighlight>

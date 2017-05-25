@@ -47,7 +47,7 @@ export class PanelDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Panel} from 'primereact';
+import {Panel} from 'primereact/components/panel/Panel';
 
 `}
 </CodeHighlight>

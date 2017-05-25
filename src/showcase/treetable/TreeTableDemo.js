@@ -180,7 +180,7 @@ export class TreeTableDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {TreeTable} from 'primereact';
+import {TreeTable} from 'primereact/components/treetable/TreeTable';
 
 `}
 </CodeHighlight>
@@ -405,7 +405,7 @@ render() {
 
 <CodeHighlight className="language-javascript">
 {`
-import {TreeTable, Column} from 'primereact';
+import {TreeTable, Column} from 'primereact/components/treetable/TreeTable';
 
 `}
 </CodeHighlight>
@@ -421,7 +421,7 @@ import {TreeTable, Column} from 'primereact';
                         <p>Header and Footer are the two sections aka facets that are capable of displaying custom content.</p>
 <CodeHighlight className="language-javascript">
 {`
-import {TreeTable, Column, Header, Footer} from 'primereact';
+import {TreeTable, Column, Header, Footer} from 'primereact/components/treetable/TreeTable';
 
 `}
                         </CodeHighlight>

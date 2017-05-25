@@ -54,7 +54,7 @@ class InputTextDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {InputText} from 'primereact';
+import {InputText} from 'primereact/components/inputtext/InputText';
 
 `}
 </CodeHighlight>

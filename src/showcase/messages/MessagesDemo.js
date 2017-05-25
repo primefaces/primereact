@@ -84,7 +84,7 @@ export class MessagesDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Messages} from 'primereact';
+import {Messages} from 'primereact/components/messages/Messages';
 
 `}
 </CodeHighlight>

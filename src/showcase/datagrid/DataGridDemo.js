@@ -98,7 +98,7 @@ export class DataGridDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {DataGrid} from 'primereact';
+import {DataGrid} from 'primereact/components/datagrid/DataGrid';
 
 `}
 </CodeHighlight>
@@ -143,7 +143,7 @@ componentDidMount() {
             <p>Header and Footer are the two sections aka facets that are capable of displaying custom content.</p>
 <CodeHighlight className="language-javascript">
 {`
-import {DataGrid, Header, Footer} from 'primereact';
+import {DataGrid, Header, Footer} from 'primereact/components/datagrid/DataGrid';
 
 `}
 </CodeHighlight>

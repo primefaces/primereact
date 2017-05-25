@@ -63,7 +63,7 @@ class CheckboxDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Checkbox} from 'primereact';
+import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
 `}
 </CodeHighlight>

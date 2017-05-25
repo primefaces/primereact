@@ -53,7 +53,7 @@ class ChipsDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Chips} from 'primereact';
+import {Chips} from 'primereact/components/chips/Chips';
 
 `}
 </CodeHighlight>

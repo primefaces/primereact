@@ -59,7 +59,7 @@ export class MultiSelectDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {MultiSelect} from 'primereact';
+import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 
 `}
 </CodeHighlight>

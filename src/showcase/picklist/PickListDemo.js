@@ -61,7 +61,7 @@ export class PickListDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {PickList} from 'primereact';
+import {PickList} from 'primereact/components/picklist/PickList';
 
 `}
 </CodeHighlight>

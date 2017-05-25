@@ -64,7 +64,7 @@ class SelectButtonDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {SelectButton} from 'primereact';
+import {SelectButton} from 'primereact/components/selectbutton/SelectButton';
 
 `}
 </CodeHighlight>

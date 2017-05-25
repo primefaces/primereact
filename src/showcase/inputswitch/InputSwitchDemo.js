@@ -56,7 +56,7 @@ class InputSwitchDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {InputSwitch} from 'primereact';
+import {InputSwitch} from 'primereact/components/inputswitch/InputSwitch';
 
 `}
 </CodeHighlight>

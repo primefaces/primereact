@@ -51,7 +51,7 @@ class InputTextareaDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {InputTextarea} from 'primereact';
+import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
 
 `}
 </CodeHighlight>

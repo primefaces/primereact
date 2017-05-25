@@ -49,7 +49,7 @@ export class FieldsetDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Fieldset} from 'primereact';
+import {Fieldset} from 'primereact/components/fieldset/Fieldset';
 
 `}
 </CodeHighlight>

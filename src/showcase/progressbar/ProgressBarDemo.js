@@ -66,7 +66,7 @@ export class ProgressBarDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {ProgressBar} from 'primereact';
+import {ProgressBar} from 'primereact/components/progressbar/ProgressBar';
 
 `}
 </CodeHighlight>
