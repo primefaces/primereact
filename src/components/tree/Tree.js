@@ -101,7 +101,7 @@ export class TreeNode extends Component {
                 </div>
             );
 
-        var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }}>
+        var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }} className="ui-treenode-children">
             {
                 this.node.children && this.node.children.map((child, i) => {
                     return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} tree={this.tree} parentNode={this.node} />)
@@ -155,7 +155,7 @@ export class TreeNode extends Component {
             nodeContent = (
                 <td className={nodeClass}>
                     <div className={nodeContentClass} onClick={this.onNodeClick.bind(this)} onTouchEnd={this.onNodeTouchEnd.bind(this)}>
-                        {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle.bind(this)}></span>}
+                        <span className={togglerClass} onClick={this.toggle.bind(this)}></span>
                         {hasIcon && <span className={iconClass}></span>}
                         {label}
                     </div>
