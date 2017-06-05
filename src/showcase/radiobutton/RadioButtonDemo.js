@@ -62,7 +62,7 @@ import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Checkbox is used as a controlled input with checked and onChange properties.</p>
+                        <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
 <CodeHighlight className="language-markup">
 {`
 <RadioButton value="val1" onChange={this.onChange} checked={this.state.checked} />
