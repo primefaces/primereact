@@ -47,6 +47,7 @@ import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
 import {TreeDemo} from './showcase/tree/TreeDemo';
 import {TreeTableDemo} from './showcase/treetable/TreeTableDemo';
 import {CaptchaDemo} from './showcase/captcha/CaptchaDemo';
+import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {Router,Route,hashHistory} from 'react-router';
 
@@ -99,6 +100,7 @@ ReactDOM.render(
             <Route path="/tree" component={TreeDemo} />
             <Route path="/treetable" component={TreeTableDemo} />
             <Route path="/captcha" component={CaptchaDemo} />
+            <Route path="/colorpicker" component={ColorPickerDemo} />
             <Route path="/setup" component={SetupPage} />
         </Route>
     </Router>,
