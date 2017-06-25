@@ -49,6 +49,7 @@ import {TreeTableDemo} from './showcase/treetable/TreeTableDemo';
 import {CaptchaDemo} from './showcase/captcha/CaptchaDemo';
 import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
+import {RatingDemo} from './showcase/rating/RatingDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -101,6 +102,7 @@ ReactDOM.render(
             <Route path="/treetable" component={TreeTableDemo} />
             <Route path="/captcha" component={CaptchaDemo} />
             <Route path="/colorpicker" component={ColorPickerDemo} />
+            <Route path="/rating" component={RatingDemo} />
             <Route path="/setup" component={SetupPage} />
         </Route>
     </Router>,
