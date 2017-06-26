@@ -50,6 +50,10 @@ import {CaptchaDemo} from './showcase/captcha/CaptchaDemo';
 import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {RatingDemo} from './showcase/rating/RatingDemo';
+import {DataScrollerDemo} from './showcase/datascroller/DataScrollerDemo';
+import {DataScrollerInlineDemo} from './showcase/datascroller/DataScrollerInlineDemo';
+import {DataScrollerLoaderDemo} from './showcase/datascroller/DataScrollerLoaderDemo';
+import {DataScrollerInfiniteDemo} from './showcase/datascroller/DataScrollerInfiniteDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -103,6 +107,10 @@ ReactDOM.render(
             <Route path="/captcha" component={CaptchaDemo} />
             <Route path="/colorpicker" component={ColorPickerDemo} />
             <Route path="/rating" component={RatingDemo} />
+            <Route path="/datascroller" component={DataScrollerDemo} />
+            <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
+            <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
+            <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
             <Route path="/setup" component={SetupPage} />
         </Route>
     </Router>,
