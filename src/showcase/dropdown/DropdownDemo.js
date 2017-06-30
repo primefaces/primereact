@@ -48,7 +48,6 @@ export class DropdownDemo extends Component {
         ];
 
         var cars = [
-            {label: 'Select Car', value: null},
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -75,7 +74,8 @@ export class DropdownDemo extends Component {
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}}/>
+                    <Dropdown value={this.state.car} options={cars} filter={true} onChange={this.onCarChange} itemTemplate={this.carTemplate}
+                              style={{width:'150px'}} filterPlaceholder="Select Car"/>
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
                 </div>
 

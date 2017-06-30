@@ -14,7 +14,9 @@ export class Dropdown extends Component {
         style: null,
         className: null,
         autoWidth: true,
-        scrollHeight: '200px'
+        scrollHeight: '200px',
+        filter:false,
+        filterPlaceholder:null
     };
 
     static propTypes = {
@@ -25,7 +27,9 @@ export class Dropdown extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         autoWidth: PropTypes.bool,
-        scrollHeight: PropTypes.string
+        scrollHeight: PropTypes.string,
+        filter:PropTypes.bool,
+        filterPlaceholder: PropTypes.string
     };
 
     constructor(props) {
@@ -52,10 +56,10 @@ export class Dropdown extends Component {
     }
 
     onDocumentClick() {
-        if(!this.selfClick&&!this.itemClick) {
+        if(!this.selfClick&&!this.itemClick && !this.filterClick) {
             this.hide();
         }
-
+        this.filterClick=false;
         this.selfClick = false;
         this.optionClick = false;
     }
@@ -70,16 +74,14 @@ export class Dropdown extends Component {
     }
 
     selectItem(event, option, index) {
-        //if(!DomHandler.hasClass(event.target,'ui-state-highlight')) {
         this.props.onChange({
             originalEvent: event,
             value: option.value,
             index: index
         });
-        // }
     }
 
-    onClick() {
+    onClick(event) {
         if(this.props.disabled) {
             return;
         }
@@ -87,11 +89,22 @@ export class Dropdown extends Component {
         this.selfClick = true;
 
         if(!this.optionClick) {
-            this.input.focus();
-            if(this.panel.offsetParent)
+            if(this.props.filter){
+                this.filterInput.focus();
+            }
+
+            if(this.panel.offsetParent){
+                this.input.focus();
                 this.hide();
-            else
+            }
+            else {
                 this.show();
+                if (this.props.filter) {
+                    setTimeout(() => {
+                        this.filterInput.focus();
+                    }, 200);
+                }
+            }
         }
     }
 
@@ -137,6 +150,7 @@ export class Dropdown extends Component {
     onMouseLeaveForItem() {
         this.setState({highlightOption: null});
     }
+
     findOptionIndex(option) {
         let index = 0;
         if(this.props.options) {
@@ -216,10 +230,26 @@ export class Dropdown extends Component {
                 }
                 event.preventDefault();
                 break;
-
         }
         this.setState({highlightOption: this.highlightOption});
     }
+
+    onFilter(event) {
+        let inputValue= event.target.value.toLowerCase();
+        if(inputValue && inputValue.length) {
+           this.setState({filteredOption: this.props.options.filter((search)=>{return search.label.toLowerCase().search(inputValue) !==-1;})});
+        }
+        if(inputValue===""){
+            this.setState({filteredOption: this.props.options})
+        }
+
+    }
+
+    onFilterInputClick(event){
+        this.filterClick=true;
+        event.stopPropagation();
+    }
+
 
     render() {
         var styleClass = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all', this.props.className, {
@@ -230,10 +260,15 @@ export class Dropdown extends Component {
         var selectedOption = this.findSelectedOption();
         var label = selectedOption ? selectedOption.label : (this.props.options ? this.props.options[0].label : null);
         var listItems, optionElements;
+        var filterInput, search,filter;
 
         if(this.props.options) {
-            listItems = this.props.options.map((option, index) => {
-                var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label;
+
+            var listItemContent;
+            var optionMap=this.state.filteredOption?this.state.filteredOption:this.props.options;
+
+            listItems = optionMap.map((option, index) => {
+                listItemContent =this.props.itemTemplate ? this.props.itemTemplate(option) : option.label;
                 var selected = (this.props.value != null && this.props.value === option.value) || (this.props.value == null && index === 0);
                 var listItemStyleClass = classNames('ui-dropdown-item ui-corner-all', {'ui-state-highlight': selected || this.state.highlightOption === option});
                 var listItem = <li className={listItemStyleClass} key={option.value} onClick={(event) => this.onOptionClick(event, option)}
@@ -242,11 +277,20 @@ export class Dropdown extends Component {
                 </li>;
 
                 return listItem;
-            });
+            })
 
             optionElements = this.props.options.map((option, index) => {
                 return <option value={option.value} key={option.value}>{option.label}</option>;
             });
+        }
+
+        if(this.props.filter){
+            search=<span className="fa fa-search"></span>
+            filterInput= <input type="text" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
+                                ref={(el) => {this.filterInput = el;}} onChange={(event) => this.onFilter(event)}
+                                onClick={this.onFilterInputClick.bind(this)} placeholder={this.props.filterPlaceholder}
+                                onFocus={this.onInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
+           filter=<div className="ui-dropdown-filter-container" >{filterInput}{search}</div>
         }
 
         return (
@@ -263,6 +307,7 @@ export class Dropdown extends Component {
                 </div>
                 <div className="ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" ref={(el) => {this.panel = el;}}>
                     <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
+                        {filter}
                         <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                             {listItems}
                         </ul>
