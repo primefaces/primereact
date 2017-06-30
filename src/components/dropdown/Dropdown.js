@@ -16,7 +16,10 @@ export class Dropdown extends Component {
         autoWidth: true,
         scrollHeight: '200px',
         filter:false,
-        filterPlaceholder:null
+        filterBy:null,
+        filterPlaceholder:null,
+        editable:false,
+        placeholder:null
     };
 
     static propTypes = {
@@ -29,7 +32,10 @@ export class Dropdown extends Component {
         autoWidth: PropTypes.bool,
         scrollHeight: PropTypes.string,
         filter:PropTypes.bool,
-        filterPlaceholder: PropTypes.string
+        filterBy: PropTypes.string,
+        filterPlaceholder: PropTypes.string,
+        editable:PropTypes.bool,
+        placeholder: PropTypes.string
     };
 
     constructor(props) {
@@ -129,6 +135,7 @@ export class Dropdown extends Component {
             DomHandler.fadeIn(this.panel, 250);
             this.panel.style.display = 'block';
         }
+        this.input.focus();
     }
 
     hide() {
@@ -230,19 +237,28 @@ export class Dropdown extends Component {
                 }
                 event.preventDefault();
                 break;
+            default:
+                break;
         }
         this.setState({highlightOption: this.highlightOption});
     }
-
     onFilter(event) {
-        let inputValue= event.target.value.toLowerCase();
+        var inputValue = event.target.value.toLowerCase();
         if(inputValue && inputValue.length) {
-           this.setState({filteredOption: this.props.options.filter((search)=>{return search.label.toLowerCase().search(inputValue) !==-1;})});
+            this.filterValue = inputValue;
+            this.activateFilter();
         }
-        if(inputValue===""){
+        else {
+            this.filterValue = null;
             this.setState({filteredOption: this.props.options})
         }
+    }
 
+    activateFilter() {
+        var searchFields = this.props.filterBy.split(',');
+        if(this.props.options && this.props.options.length) {
+            this.setState({filteredOption: ObjectUtils.filter(this.props.options, searchFields, this.filterValue)})
+        }
     }
 
     onFilterInputClick(event){
@@ -250,6 +266,23 @@ export class Dropdown extends Component {
         event.stopPropagation();
     }
 
+    onEditableInputFocus(event) {
+        this.setState({focus:true});
+        this.hide();
+    }
+
+    onEditableInputClick(event) {
+        this.optionClick = false;
+        event.stopPropagation();
+    }
+
+    onEditable(event){
+        this.editValue=event.target.value;
+        this.props.onChange({
+            originalEvent: event,
+            value: this.editValue
+        });
+    }
 
     render() {
         var styleClass = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all', this.props.className, {
@@ -260,7 +293,8 @@ export class Dropdown extends Component {
         var selectedOption = this.findSelectedOption();
         var label = selectedOption ? selectedOption.label : (this.props.options ? this.props.options[0].label : null);
         var listItems, optionElements;
-        var filterInput, search,filter;
+        var filterInput,filter;
+        var editable;
 
         if(this.props.options) {
 
@@ -285,12 +319,19 @@ export class Dropdown extends Component {
         }
 
         if(this.props.filter){
-            search=<span className="fa fa-search"></span>
             filterInput= <input type="text" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
                                 ref={(el) => {this.filterInput = el;}} onChange={(event) => this.onFilter(event)}
                                 onClick={this.onFilterInputClick.bind(this)} placeholder={this.props.filterPlaceholder}
                                 onFocus={this.onInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
-           filter=<div className="ui-dropdown-filter-container" >{filterInput}{search}</div>
+            filter=<div className="ui-dropdown-filter-container" >{filterInput}<span className="fa fa-search" ></span></div>
+        }
+
+        if(this.props.editable){
+            editable=<input type="text" className="ui-dropdown-label ui-inputtext ui-corner-all"
+                            value={selectedOption ? selectedOption.label:this.editValue?this.editValue:""}
+                            ref={(el) => {this.editableInput = el;}} onChange={(event) => this.onEditable(event)}
+                            onClick={this.onEditableInputClick.bind(this)} placeholder={this.props.placeholder}
+                            onFocus={this.onEditableInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)} />
         }
 
         return (
@@ -299,15 +340,17 @@ export class Dropdown extends Component {
                     <select tabIndex="-1" ref={(el) => {this.selectElement = el;}}>{optionElements}</select>
                 </div>
                 <div className="ui-helper-hidden-accessible">
-                    <input readOnly ref={(el) => {this.input = el;}} type="text" onFocus={this.onInputFocus.bind(this)} onKeyDown={this.onKeydown.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
+                    <input readOnly ref={(el) => {this.input = el;}} type="text" onFocus={this.onInputFocus.bind(this)}
+                           onKeyDown={this.onKeydown.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
                 </div>
-                <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>
+                {editable}
+                {!this.props.editable && <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>}
                 <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
                     <span className="fa fa-fw fa-caret-down ui-c"></span>
                 </div>
                 <div className="ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" ref={(el) => {this.panel = el;}}>
+                    {filter}
                     <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
-                        {filter}
                         <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                             {listItems}
                         </ul>
