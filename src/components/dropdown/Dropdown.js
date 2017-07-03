@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
 
 export class Dropdown extends Component {
@@ -13,7 +14,12 @@ export class Dropdown extends Component {
         style: null,
         className: null,
         autoWidth: true,
-        scrollHeight: '200px'
+        scrollHeight: '200px',
+        filter:false,
+        filterBy:null,
+        filterPlaceholder:null,
+        editable:false,
+        placeholder:null
     };
 
     static propTypes = {
@@ -24,7 +30,12 @@ export class Dropdown extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         autoWidth: PropTypes.bool,
-        scrollHeight: PropTypes.string
+        scrollHeight: PropTypes.string,
+        filter:PropTypes.bool,
+        filterBy: PropTypes.string,
+        filterPlaceholder: PropTypes.string,
+        editable:PropTypes.bool,
+        placeholder: PropTypes.string
     };
 
     constructor(props) {
@@ -48,35 +59,35 @@ export class Dropdown extends Component {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
         }
-    }    
+    }
 
     onDocumentClick() {
-        if(!this.selfClick&&!this.itemClick) {
+        if(!this.selfClick&&!this.itemClick && !this.filterClick) {
             this.hide();
         }
-            
+        this.filterClick=false;
         this.selfClick = false;
         this.optionClick = false;
     }
 
     onOptionClick(event, option, index) {
         this.optionClick = true;
-        this.selectItem(event, option, index);           
+        this.highlightOption=option;
+        this.selectItem(event, option, index);
         this.hide();
+        this.input.focus();
         event.preventDefault();
     }
 
     selectItem(event, option, index) {
-        if(!DomHandler.hasClass(event.target,'ui-state-highlight')) {
-            this.props.onChange({
-                originalEvent: event,
-                value: option.value,
-                index: index
-            });
-        }
+        this.props.onChange({
+            originalEvent: event,
+            value: option.value,
+            index: index
+        });
     }
 
-    onClick() {
+    onClick(event) {
         if(this.props.disabled) {
             return;
         }
@@ -84,10 +95,22 @@ export class Dropdown extends Component {
         this.selfClick = true;
 
         if(!this.optionClick) {
-            if(this.panel.offsetParent)
+            if(this.props.filter){
+                this.filterInput.focus();
+            }
+
+            if(this.panel.offsetParent){
+                this.input.focus();
                 this.hide();
-            else
+            }
+            else {
                 this.show();
+                if (this.props.filter) {
+                    setTimeout(() => {
+                        this.filterInput.focus();
+                    }, 200);
+                }
+            }
         }
     }
 
@@ -101,7 +124,7 @@ export class Dropdown extends Component {
                 }
             }
         }
-        
+
         return selectedOption;
     }
 
@@ -112,6 +135,7 @@ export class Dropdown extends Component {
             DomHandler.fadeIn(this.panel, 250);
             this.panel.style.display = 'block';
         }
+        this.input.focus();
     }
 
     hide() {
@@ -121,9 +145,143 @@ export class Dropdown extends Component {
     onInputFocus(event) {
         this.setState({focus: true});
     }
-    
+
     onInputBlur(event) {
         this.setState({focus: false});
+    }
+
+    onMouseEnterForItem(option) {
+        this.setState({highlightOption: option});
+    }
+
+    onMouseLeaveForItem() {
+        this.setState({highlightOption: null});
+    }
+
+    findOptionIndex(option) {
+        let index = 0;
+        if(this.props.options) {
+            for(let i = 0; i < this.props.options.length; i++) {
+                if(ObjectUtils.equals(option, this.props.options[i])) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    onKeydown(event) {
+        let highlightItemIndex =this.highlightOption? this.findOptionIndex(this.highlightOption):0;
+
+        switch(event.which) {
+            //down
+            case 40:
+                if( event.altKey ){
+                    this.show();
+                }
+                else{
+                    if (highlightItemIndex !== -1) {
+                        var nextItemIndex = highlightItemIndex + 1;
+                        if (nextItemIndex !== (this.props.options.length)) {
+                            this.highlightOption = this.props.options[nextItemIndex];
+                            this.highlightOptionChanged = true;
+                        }
+
+                        this.selectItem(event, this.highlightOption);
+                    }
+                    else {
+                        this.highlightOption = this.props.options[0];
+                    }
+                }
+                event.preventDefault();
+                break;
+
+            //up
+            case 38:
+                if(highlightItemIndex > 0) {
+                    let prevItemIndex = highlightItemIndex - 1;
+                    this.highlightOption = this.props.options[prevItemIndex];
+                    this.highlightOptionChanged = true;
+                    this.selectItem(event, this.highlightOption);
+                }
+
+                event.preventDefault();
+                break;
+
+            //enter
+            case 13:
+                if(this.highlightOption) {
+                    this.selectItem(event, this.highlightOption);
+                    this.hide();
+                }
+                event.preventDefault();
+                break;
+
+            //escape
+            case 27:
+                this.hide();
+                event.preventDefault();
+                break;
+
+            //space
+            case 32:
+                if(this.panel.style.display==='block') {
+                    if (this.highlightOption) {
+                        this.selectItem(event, this.highlightOption);
+                        this.hide();
+                    }
+                }
+                else{
+                    this.show();
+                }
+                event.preventDefault();
+                break;
+            default:
+                break;
+        }
+        this.setState({highlightOption: this.highlightOption});
+    }
+    onFilter(event) {
+        var inputValue = event.target.value.toLowerCase();
+        if(inputValue && inputValue.length) {
+            this.filterValue = inputValue;
+            this.activateFilter();
+        }
+        else {
+            this.filterValue = null;
+            this.setState({filteredOption: this.props.options})
+        }
+    }
+
+    activateFilter() {
+        var searchFields = this.props.filterBy.split(',');
+        if(this.props.options && this.props.options.length) {
+            this.setState({filteredOption: ObjectUtils.filter(this.props.options, searchFields, this.filterValue)})
+        }
+    }
+
+    onFilterInputClick(event){
+        this.filterClick=true;
+        event.stopPropagation();
+    }
+
+    onEditableInputFocus(event) {
+        this.setState({focus:true});
+        this.hide();
+    }
+
+    onEditableInputClick(event) {
+        this.optionClick = false;
+        event.stopPropagation();
+    }
+
+    onEditable(event){
+        this.editValue=event.target.value;
+        this.props.onChange({
+            originalEvent: event,
+            value: this.editValue
+        });
     }
 
     render() {
@@ -135,23 +293,45 @@ export class Dropdown extends Component {
         var selectedOption = this.findSelectedOption();
         var label = selectedOption ? selectedOption.label : (this.props.options ? this.props.options[0].label : null);
         var listItems, optionElements;
+        var filterInput,filter;
+        var editable;
 
         if(this.props.options) {
-            listItems = this.props.options.map((option, index) => {
-                    var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label;
-                    var selected = (this.props.value != null && this.props.value === option.value) || (this.props.value == null && index === 0);
-                    var listItemStyleClass = classNames('ui-dropdown-item ui-corner-all', {'ui-state-highlight': selected});
-                    var listItem = <li className={listItemStyleClass} key={option.value}
-                                onClick={(event) => this.onOptionClick(event, option)}>
-                                {listItemContent}
-                            </li>;
 
-                    return listItem;
-                });
+            var listItemContent;
+            var optionMap=this.state.filteredOption?this.state.filteredOption:this.props.options;
+
+            listItems = optionMap.map((option, index) => {
+                listItemContent =this.props.itemTemplate ? this.props.itemTemplate(option) : option.label;
+                var selected = (this.props.value != null && this.props.value === option.value) || (this.props.value == null && index === 0);
+                var listItemStyleClass = classNames('ui-dropdown-item ui-corner-all', {'ui-state-highlight': selected || this.state.highlightOption === option});
+                var listItem = <li className={listItemStyleClass} key={option.value} onClick={(event) => this.onOptionClick(event, option)}
+                                   onMouseEnter={(e) => this.onMouseEnterForItem(option)} onMouseLeave={this.onMouseLeaveForItem.bind(this)}>
+                    {listItemContent}
+                </li>;
+
+                return listItem;
+            })
 
             optionElements = this.props.options.map((option, index) => {
                 return <option value={option.value} key={option.value}>{option.label}</option>;
             });
+        }
+
+        if(this.props.filter){
+            filterInput= <input type="text" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
+                                ref={(el) => {this.filterInput = el;}} onChange={(event) => this.onFilter(event)}
+                                onClick={this.onFilterInputClick.bind(this)} placeholder={this.props.filterPlaceholder}
+                                onFocus={this.onInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
+            filter=<div className="ui-dropdown-filter-container" >{filterInput}<span className="fa fa-search" ></span></div>
+        }
+
+        if(this.props.editable){
+            editable=<input type="text" className="ui-dropdown-label ui-inputtext ui-corner-all"
+                            value={selectedOption ? selectedOption.label:this.editValue?this.editValue:""}
+                            ref={(el) => {this.editableInput = el;}} onChange={(event) => this.onEditable(event)}
+                            onClick={this.onEditableInputClick.bind(this)} placeholder={this.props.placeholder}
+                            onFocus={this.onEditableInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)} />
         }
 
         return (
@@ -160,16 +340,19 @@ export class Dropdown extends Component {
                     <select tabIndex="-1" ref={(el) => {this.selectElement = el;}}>{optionElements}</select>
                 </div>
                 <div className="ui-helper-hidden-accessible">
-                    <input readOnly type="text" onFocus={this.onInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
+                    <input readOnly ref={(el) => {this.input = el;}} type="text" onFocus={this.onInputFocus.bind(this)}
+                           onKeyDown={this.onKeydown.bind(this)} onBlur={this.onInputBlur.bind(this)}/>
                 </div>
-                <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>
+                {editable}
+                {!this.props.editable && <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>}
                 <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
                     <span className="fa fa-fw fa-caret-down ui-c"></span>
                 </div>
                 <div className="ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" ref={(el) => {this.panel = el;}}>
+                    {filter}
                     <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
                         <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                            {listItems}  
+                            {listItems}
                         </ul>
                     </div>
                 </div>
