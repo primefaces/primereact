@@ -59,6 +59,14 @@ export class Rating extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        var newValue = nextProps.value;
+
+        if (newValue !== this.state.value) {
+            this.setState({value: newValue});
+        } 
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         if(nextState.value === this.state.value) {
             return false;
