@@ -28,11 +28,14 @@ export class Rating extends Component {
     rate(event, i){
         if(!this.props.readonly&&!this.props.disabled) {
             var _value = (i + 1);
-            this.props.onChange({
-                originalEvent: event,
-                value: _value
-            });
-            this.setState({value: _value});
+
+            if(_value !== this.state.value) {
+                this.props.onChange({
+                    originalEvent: event,
+                    value: _value
+                });
+                this.setState({value: _value});
+            }
         }
         event.preventDefault();        
     }
@@ -56,11 +59,12 @@ export class Rating extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        var newValue = nextProps.value;
-        if (newValue !== this.state.value) {
-            this.setState({value: newValue});
-        } 
+    shouldComponentUpdate(nextProps, nextState) {
+        if(nextState.value === this.state.value) {
+            return false;
+        }
+
+        return true;
     }
 
     render() {
