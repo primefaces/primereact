@@ -49,6 +49,7 @@ import {TreeTableDemo} from './showcase/treetable/TreeTableDemo';
 import {CaptchaDemo} from './showcase/captcha/CaptchaDemo';
 import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
 import {PasswordDemo} from './showcase/password/PasswordDemo';
+import {ToolbarDemo} from './showcase/toolbar/ToolbarDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {Router,Route,hashHistory} from 'react-router';
 
@@ -104,6 +105,7 @@ ReactDOM.render(
             <Route path="/colorpicker" component={ColorPickerDemo} />
             <Route path="/setup" component={SetupPage} />
             <Route path="/password" component={PasswordDemo} />
+            <Route path="/toolbar" component={ToolbarDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
