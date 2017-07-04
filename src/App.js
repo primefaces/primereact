@@ -159,6 +159,7 @@ class AppMenu extends Component {
                             <Link to="/inputmask">&#9679; InputMask</Link>
                             <Link to="/calendar">&#9679; Calendar</Link>
                             <Link to="/colorpicker">&#9679; ColorPicker</Link>
+                            <Link to="/password">&#9679; Password</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
