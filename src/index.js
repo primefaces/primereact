@@ -50,6 +50,7 @@ import {CaptchaDemo} from './showcase/captcha/CaptchaDemo';
 import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
 import {PasswordDemo} from './showcase/password/PasswordDemo';
 import {ToolbarDemo} from './showcase/toolbar/ToolbarDemo';
+import {TooltipDemo} from './showcase/tooltip/TooltipDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {Router,Route,hashHistory} from 'react-router';
 
@@ -106,6 +107,7 @@ ReactDOM.render(
             <Route path="/setup" component={SetupPage} />
             <Route path="/password" component={PasswordDemo} />
             <Route path="/toolbar" component={ToolbarDemo} />
+            <Route path="/tooltip" component={TooltipDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
