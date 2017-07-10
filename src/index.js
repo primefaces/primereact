@@ -51,6 +51,7 @@ import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
 import {PasswordDemo} from './showcase/password/PasswordDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {RatingDemo} from './showcase/rating/RatingDemo';
+import {ToolbarDemo} from './showcase/toolbar/ToolbarDemo';
 import {DataScrollerDemo} from './showcase/datascroller/DataScrollerDemo';
 import {DataScrollerInlineDemo} from './showcase/datascroller/DataScrollerInlineDemo';
 import {DataScrollerLoaderDemo} from './showcase/datascroller/DataScrollerLoaderDemo';
@@ -108,6 +109,7 @@ ReactDOM.render(
             <Route path="/captcha" component={CaptchaDemo} />
             <Route path="/colorpicker" component={ColorPickerDemo} />
             <Route path="/password" component={PasswordDemo} />
+            <Route path="/toolbar" component={ToolbarDemo} />
             <Route path="/rating" component={RatingDemo} />
             <Route path="/datascroller" component={DataScrollerDemo} />
             <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />

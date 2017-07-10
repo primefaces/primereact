@@ -197,6 +197,7 @@ class AppMenu extends Component {
                             <Link to="/grid">&#9679; Grid</Link>
                             <Link to="/panel">&#9679; Panel</Link>
                             <Link to="/tabview">&#9679; TabView</Link>
+                            <Link to="/toolbar">&#9679; Toolbar</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
