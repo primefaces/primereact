@@ -7,5 +7,4 @@ public/resources/**/*.map
 .idea
 .sass-cache
 resources
-components
 index.js
