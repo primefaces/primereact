@@ -48,6 +48,7 @@ import {TreeDemo} from './showcase/tree/TreeDemo';
 import {TreeTableDemo} from './showcase/treetable/TreeTableDemo';
 import {CaptchaDemo} from './showcase/captcha/CaptchaDemo';
 import {ColorPickerDemo} from './showcase/colorpicker/ColorPickerDemo';
+import {PasswordDemo} from './showcase/password/PasswordDemo';
 import {SetupPage} from './showcase/setup/SetupPage';
 import {RatingDemo} from './showcase/rating/RatingDemo';
 import {DataScrollerDemo} from './showcase/datascroller/DataScrollerDemo';
@@ -106,6 +107,7 @@ ReactDOM.render(
             <Route path="/treetable" component={TreeTableDemo} />
             <Route path="/captcha" component={CaptchaDemo} />
             <Route path="/colorpicker" component={ColorPickerDemo} />
+            <Route path="/password" component={PasswordDemo} />
             <Route path="/rating" component={RatingDemo} />
             <Route path="/datascroller" component={DataScrollerDemo} />
             <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
