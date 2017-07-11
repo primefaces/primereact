@@ -5,12 +5,14 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
 export class DropdownDemo extends Component {
-        
+
+
     constructor() {
         super();
         this.state = {};
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
+        this.onCarChange2 = this.onCarChange2.bind(this);
     }
 
     onCityChange(e) {
@@ -19,6 +21,10 @@ export class DropdownDemo extends Component {
 
     onCarChange(e) {
         this.setState({car: e.value});
+    }
+
+    onCarChange2(e) {
+        this.setState({car2: e.value});
     }
 
     carTemplate(option) {
@@ -48,7 +54,6 @@ export class DropdownDemo extends Component {
         ];
 
         var cars = [
-            {label: 'Select Car', value: null},
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -74,9 +79,15 @@ export class DropdownDemo extends Component {
                     <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
 
-                    <h3>Advanced</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}}/>
+                    <h3>Editable</h3>
+                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
+                              style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
+
+                    <h3>Advanced</h3>
+                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}}
+                              filter={true} filterPlaceholder="Select Car" filterBy="label,value"/>
+                    <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
 
                 <DropdownDoc />
@@ -84,7 +95,6 @@ export class DropdownDemo extends Component {
         );
     }
 }
-
 class DropdownDoc extends Component {
 
     render() {
