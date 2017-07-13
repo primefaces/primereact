@@ -330,7 +330,7 @@ export class Dropdown extends Component {
                 var selected = (this.props.value !== null && this.props.value === option.value) || (this.props.value === null && index === 0);
                 var listItemStyleClass = classNames('ui-dropdown-item ui-corner-all', {'ui-state-highlight': selected || this.state.highlightOption === option});
                 var listItem = <li className={listItemStyleClass} key={option.value} onClick={(event) => this.onOptionClick(event, option)}
-                >
+                                   >
                     {listItemContent}
                 </li>;
 
