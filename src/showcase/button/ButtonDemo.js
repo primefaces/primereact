@@ -13,7 +13,9 @@ export class ButtonDemo extends Component {
     }
 
     increment() {
-        this.setState({count: this.state.count + 1});
+        this.setState((prevState, props) => ({
+            count: prevState.count + 1
+        }));
     }
 
     render() {
@@ -206,7 +208,9 @@ export class ButtonDemo extends Component {
     }
 
     increment() {
-        this.setState({count: this.state.count + 1});
+        this.setState((prevState, props) => ({
+            count: prevState.count + 1
+        }));
     }
 
     render() {
