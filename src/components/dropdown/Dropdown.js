@@ -18,6 +18,7 @@ export class Dropdown extends Component {
         filter:false,
         filterBy:null,
         filterPlaceholder:null,
+        editable:false,
         placeholder:null
     };
 
@@ -33,6 +34,7 @@ export class Dropdown extends Component {
         filter:PropTypes.bool,
         filterBy: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        editable:PropTypes.bool,
         placeholder: PropTypes.string
     };
 
@@ -44,6 +46,8 @@ export class Dropdown extends Component {
         this.onInputBlur=this.onInputBlur.bind(this);
         this.onInputFocus=this.onInputFocus.bind(this);
         this.onKeydown=this.onKeydown.bind(this);
+        this.onEditableInputClick=this.onEditableInputClick.bind(this);
+        this.onEditableInputFocus=this.onEditableInputFocus.bind(this);
     }
 
     componentDidMount() {
@@ -286,6 +290,23 @@ export class Dropdown extends Component {
             this.documentClickListener = null;
         }
     }
+    onEditableInputFocus(event) {
+        this.setState({focus:true});
+        this.hide();
+    }
+
+    onEditableInputClick(event) {
+        this.optionClick = false;
+        event.stopPropagation();
+    }
+
+    onEditable(event){
+        this.editValue=event.target.value;
+        this.props.onChange({
+            originalEvent: event,
+            value: this.editValue
+        });
+    }
 
     render() {
         var styleClass = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all', this.props.className, {
@@ -297,6 +318,7 @@ export class Dropdown extends Component {
         var label = selectedOption ? selectedOption.label : (this.props.options ? this.props.options[0].label : null);
         var listItems, optionElements;
         var filterInput,filter;
+        var editable;
 
         if(this.props.options) {
 
@@ -327,6 +349,12 @@ export class Dropdown extends Component {
             filter=<div className="ui-dropdown-filter-container" onChange={(event) => this.onFilter(event)}
                         onClick={this.onFilterInputClick} >{filterInput}<span className="fa fa-search" ></span></div>
         }
+        if(this.props.editable){
+            editable=<input type="text" className="ui-dropdown-label ui-inputtext ui-corner-all" value={selectedOption ? selectedOption.label:this.editValue?this.editValue:""}
+                            ref={(el) => {this.editableInput = el;}} onChange={(event) => this.onEditable(event)}
+                            onClick={this.onEditableInputClick} placeholder={this.props.placeholder}
+                            onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} />
+        }
 
         return (
             <div className={styleClass} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
@@ -337,7 +365,8 @@ export class Dropdown extends Component {
                     <input readOnly ref={(el) => {this.input = el;}} type="text" onFocus={this.onInputFocus}
                            onKeyDown={this.onKeydown} onBlur={this.onInputBlur}/>
                 </div>
-                <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>
+                {editable}
+                {!this.props.editable && <label className="ui-dropdown-label ui-inputtext ui-corner-all">{label}</label>}
                 <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
                     <span className="fa fa-fw fa-caret-down ui-c"></span>
                 </div>

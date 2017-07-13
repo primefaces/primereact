@@ -10,11 +10,16 @@ export class DropdownDemo extends Component {
         super();
         this.state = {};
         this.onCityChange = this.onCityChange.bind(this);
+        this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
     }
 
     onCityChange(e) {
         this.setState({city: e.value});
+    }
+
+    onCarChange(e) {
+        this.setState({car: e.value});
     }
 
     onCarChange2(e) {
@@ -72,6 +77,11 @@ export class DropdownDemo extends Component {
                     <h3>Basic</h3>
                     <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
+
+                    <h3>Editable</h3>
+                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
+                              style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>
+                    <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
                     <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}}
@@ -284,6 +294,12 @@ render() {
                                     <td>Placeholder text to show when filter input is empty.</td>
                                 </tr>
                                 <tr>
+                                    <td>editable</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, custom value instead of predefined options can be entered using the editable input field.</td>
+                                </tr>
+                                <tr>
                                     <td>placeholder</td>
                                     <td>string</td>
                                     <td>null</td>
@@ -450,6 +466,10 @@ export class DropdownDemo extends Component {
                     <h3>Basic</h3>
                     <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
+
+                    <h3>Editable</h3>
+                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>
+                    <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
                     <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value"/>
