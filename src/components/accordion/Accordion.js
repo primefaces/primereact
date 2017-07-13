@@ -4,15 +4,14 @@ import classNames from 'classnames';
 
 export class AccordionTab extends Component {
     
+    static defaultProps = {
+        header: null
+    }
+    
+    static propTypes = {
+        header: PropTypes.string
+    }
 }
-
-AccordionTab.defaultProps = {
-    header: null
-}
-
-AccordionTab.propTypes = {
-    header: PropTypes.string
-};
 
 export class Accordion extends Component {
 
@@ -34,9 +33,9 @@ export class Accordion extends Component {
         onTabClose: PropTypes.func
     };
     
-    constructor() {
-        super();
-        this.state = {};
+    constructor(props) {
+        super(props);
+        this.state = {activeIndex: props.activeIndex};
     }
     
     onTabClick(e, i) {
@@ -47,7 +46,7 @@ export class Accordion extends Component {
             if(selected)
                 indexes = indexes.filter(index => index !== i);
             else
-                indexes.push(i);
+                indexes = [...indexes,i];
 
             this.setState({activeIndex: indexes});
         }
@@ -69,39 +68,38 @@ export class Accordion extends Component {
     isSelected(i) {
         return this.props.multiple ? this.state.activeIndex && this.state.activeIndex.includes(i) : this.state.activeIndex === i;
     }
-
-    componentWillMount() {
-        if (this.props.activeIndex) {
- 		    this.setState({activeIndex: this.props.activeIndex});
- 		}
-    }
  
     componentWillReceiveProps(nextProps) {
-        if (nextProps.activeIndex !== this.props.activeIndex) {
-            this.setState({activeIndex: nextProps.activeIndex});
-        }
+        this.setState({activeIndex: nextProps.activeIndex});
     }
         
     render() {
+        var tabs = null;
+        
+        if(this.props.children)
+            tabs = this.props.children.map((tab,i) => {
+                var selected = this.isSelected(i);
+                var tabHeader = <div className="ui-accordion-header ui-state-default ui-corner-all" key={tab.props.header} onClick={(e) => this.onTabClick(e, i)}>
+                    <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
+                    <a href="#">{tab.props.header}</a>
+                </div>;
+                var tabContent = <div className="ui-accordion-content-wrapper" style={{display: selected ? 'block': 'none'}}>
+                    <div className="ui-accordion-content ui-widget-content">
+                        {tab.props.children}
+                    </div>
+                </div>;
+
+                return (
+                    <div key={tab.props.header} className="ui-accordion-tab">
+                        {tabHeader}
+                        {tabContent}
+                    </div>
+                );
+            })
+        
         return (
             <div className={classNames('ui-accordion ui-widget ui-helper-reset', this.props.className)} style={this.props.style}>
-                {this.props.children && this.props.children.map((tab,i) => {
-                    var selected = this.isSelected(i);
-
-                    return (
-                        <div key={tab.props.header} className="ui-accordion-tab">
-                            <div className="ui-accordion-header ui-state-default ui-corner-all" key={tab.props.header} onClick={(e) => this.onTabClick(e, i)}>
-                                <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
-                                <a href="#">{tab.props.header}</a>
-                            </div>
-                            <div className="ui-accordion-content-wrapper" style={{display: selected ? 'block': 'none'}}>
-                                <div className="ui-accordion-content ui-widget-content">
-                                    {tab.props.children}
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+                {tabs}
             </div>
         );
     }
