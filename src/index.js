@@ -57,6 +57,7 @@ import {DataScrollerDemo} from './showcase/datascroller/DataScrollerDemo';
 import {DataScrollerInlineDemo} from './showcase/datascroller/DataScrollerInlineDemo';
 import {DataScrollerLoaderDemo} from './showcase/datascroller/DataScrollerLoaderDemo';
 import {DataScrollerInfiniteDemo} from './showcase/datascroller/DataScrollerInfiniteDemo';
+import {MenuDemo} from './showcase/menu/MenuDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -117,6 +118,7 @@ ReactDOM.render(
             <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
             <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
             <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
+            <Route path="/menu" component={MenuDemo} />
             <Route path="/setup" component={SetupPage} />
         </Route>
     </Router>,

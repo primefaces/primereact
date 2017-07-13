@@ -27,19 +27,19 @@ class Home extends Component {
                             <div className="ui-g-12 ui-md-4">
                                 <a href="https://www.npmjs.com/package/primereact" className="homepage-btn download-btn">
                                     Download
-                                        <i className="fa fa-caret-down" />
+                                    <i className="fa fa-caret-down" />
                                 </a>
                             </div>
                             <div className="ui-g-12 ui-md-4">
                                 <a href="https://github.com/primefaces/primereact" className="homepage-btn github-btn">
                                     View On GitHub
-                                        <i className="fa fa-github" />
+                                    <i className="fa fa-github" />
                                 </a>
                             </div>
                             <div className="ui-g-12 ui-md-4">
                                 <a href="https://www.twitter.com/prime_ng" className="homepage-btn twitter-btn">
                                     Twitter
-                                        <i className="fa fa-twitter" />
+                                    <i className="fa fa-twitter" />
                                 </a>
                             </div>
                         </div>
@@ -218,12 +218,12 @@ class AppMenu extends Component {
                             <Link to="/fileupload">&#9679; Upload</Link>
                         </div>
 
-                        <a href="#" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })} style={{ display: 'none' }}>
+                        <a href="#" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
                             <img alt="button" src="showcase/resources/images/mono/menu.svg"></img>
                             <span>Menu</span>
                         </a>
-                        <div className={classNames({ 'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6 })} style={{ display: 'none' }}>
-
+                        <div className={classNames({ 'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6 })}>
+                            <Link to="/menu">&#9679; Menu</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
