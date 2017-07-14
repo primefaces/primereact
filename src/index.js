@@ -4,6 +4,7 @@ import App from './App';
 import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {AutoCompleteDemo} from './showcase/autocomplete/AutoCompleteDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
+import {SplitButtonDemo} from './showcase/splitbutton/SplitButtonDemo';
 import {CheckboxDemo} from './showcase/checkbox/CheckboxDemo';
 import {ChipsDemo} from './showcase/chips/ChipsDemo';
 import {CodeHighlightDemo} from './showcase/codehighlight/CodeHighlightDemo';
@@ -120,6 +121,7 @@ ReactDOM.render(
             <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
             <Route path="/menu" component={MenuDemo} />
             <Route path="/setup" component={SetupPage} />
+            <Route path="/splitbutton" component={SplitButtonDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
