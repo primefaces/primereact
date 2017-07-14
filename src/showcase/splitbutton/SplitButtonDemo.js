@@ -41,7 +41,7 @@ export class SplitButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation splitbutton-demo">
-                    <Growl value={this.state.messages}></Growl>
+                    
                 
                     <h3 className="first">Basic</h3>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items}></SplitButton>
@@ -52,6 +52,8 @@ export class SplitButtonDemo extends Component {
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-info"></SplitButton>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-warning"></SplitButton>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-danger"></SplitButton>
+                
+                    <Growl value={this.state.messages}></Growl>
                 </div>
 
                 <SplitButtonDoc />
