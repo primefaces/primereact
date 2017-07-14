@@ -72,7 +72,9 @@ export class SplitButton extends Component {
     }
     
     onDropdownButtonClick(event) {
-        this.dropdownClick = true;
+        if(this.documentClickListener) {
+            this.dropdownClick = true;
+        }
 
         if(this.panelEl.offsetParent)
             this.hide();
@@ -96,8 +98,6 @@ export class SplitButton extends Component {
     bindDocumentListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = () => {
-                console.log('doc click');
-                
                 if(this.dropdownClick)
                     this.dropdownClick = false;
                 else
