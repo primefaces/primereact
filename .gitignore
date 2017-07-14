@@ -1,11 +1,12 @@
 node_modules
 public/resources/**/*.css
 public/resources/**/*.map
+public/resources/images/
 !public/resources/themes/bootstrap/theme.css
 .vscode
 .DS_Store
 .idea
 .sass-cache
-resources
-components
+.resources
+.components
 index.js

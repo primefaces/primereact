@@ -24,6 +24,10 @@ export class SplitButtonDemo extends Component {
                 window.location.hash="/fileupload"
             }}
         ];
+        
+        setTimeout(() => {
+            this.setState({messages:[{severity: 'success', summary: 'Refresh', detail: 'Data Saved'}]});
+        }, 5000);
     }
     
     save() {
