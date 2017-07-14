@@ -565,6 +565,9 @@ input.searchInput {
 .implementation.button-demo button {
     margin-right: .25em;
 }
+.implementation.splitbutton-demo .ui-splitbutton {
+    margin-right: .5em;
+}
 
 .SubSubMenu {
     padding: 15px 30px;

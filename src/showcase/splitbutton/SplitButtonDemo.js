@@ -24,10 +24,6 @@ export class SplitButtonDemo extends Component {
                 window.location.hash="/fileupload"
             }}
         ];
-        
-        setTimeout(() => {
-            this.setState({messages:[{severity: 'success', summary: 'Refresh', detail: 'Data Saved'}]});
-        }, 5000);
     }
     
     save() {
@@ -44,10 +40,18 @@ export class SplitButtonDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation splitbutton-demo">
                     <Growl value={this.state.messages}></Growl>
                 
+                    <h3 className="first">Basic</h3>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items}></SplitButton>
+
+                    <h3>Severities</h3>
+                    <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-secondary"></SplitButton>
+                    <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-success"></SplitButton>
+                    <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-info"></SplitButton>
+                    <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-warning"></SplitButton>
+                    <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-danger"></SplitButton>
                 </div>
 
                 <SplitButtonDoc />

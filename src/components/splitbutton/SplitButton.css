@@ -29,3 +29,7 @@
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
 }
+
+.ui-splitbutton.ui-button-secondary .ui-button.ui-state-default:first-child {
+    border-right: 0 none;
+}

@@ -48,8 +48,10 @@ export class SplitButton extends Component {
         onClick: null,
         model: null,
         disabled: null,
+        style: null,
+        className: null,
         menuStyle: null,
-        menuStyleClass: null
+        menuClassName: null
     }
 
     static propsTypes = {
@@ -58,41 +60,68 @@ export class SplitButton extends Component {
         onClick: PropTypes.func,
         model: PropTypes.array,
         disabled: PropTypes.bool,
+        style: PropTypes.string,
+        className: PropTypes.string,
         menuStyle: PropTypes.string,
-        menuStyleClass: PropTypes.string
+        menuClassName: PropTypes.string
     }
 
     constructor(props) {
         super(props);
         this.onDropdownButtonClick = this.onDropdownButtonClick.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
     }
     
     onDropdownButtonClick(event) {
+        this.dropdownClick = true;
+
         if(this.panelEl.offsetParent)
             this.hide();
         else
             this.show();
     }
-    
-    onPanelClick() {
-        this.hide();
-    }
-    
+        
     show() {
         this.panelEl.style.zIndex = DomHandler.getZindex();
         DomHandler.relativePosition(this.panelEl, this.containerEl);
         DomHandler.fadeIn(this.panelEl, 250);
         this.panelEl.style.display = 'block';
+        this.bindDocumentListener();
     }
     
     hide() {
         this.panelEl.style.display = 'none';
+        this.unbindDocumentListener();
+    }
+
+    bindDocumentListener() {
+        if(!this.documentClickListener) {
+            this.documentClickListener = () => {
+                console.log('doc click');
+                
+                if(this.dropdownClick)
+                    this.dropdownClick = false;
+                else
+                    this.hide();
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    unbindDocumentListener() {
+        if(this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentListener();
     }
     
     render() {
-        var styleClass = classNames('ui-splitbutton ui-buttonset ui-widget', {'ui-state-disabled': this.props.disabled});
-        var menuStyleClass = classNames('ui-menu ui-menu-dynamic ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-shadow', this.props.menuStyleClass);
+        var className = classNames('ui-splitbutton ui-buttonset ui-widget', this.props.className, {'ui-state-disabled': this.props.disabled});
+        var menuClassName = classNames('ui-menu ui-menu-dynamic ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-shadow', this.props.menuClassName);
         if(this.props.model) {
             var items = this.props.model.map((menuitem, index) => {
                 return <SplitButtonItem menuitem={menuitem} key={index}/>
@@ -100,10 +129,10 @@ export class SplitButton extends Component {
         }
         
         return (
-            <div className={styleClass} style={this.props.style}  ref={(el) => { this.containerEl = el; }}>
+            <div className={className} style={this.props.style}  ref={(el) => { this.containerEl = el; }}>
                 <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-left"></Button>
                 <Button type="button" className="ui-splitbutton-menubutton" icon="fa-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-right"></Button>
-                <div className={menuStyleClass} style={this.props.menuStyle} ref={(el) => { this.panelEl = el; }} onClick={this.onPanelClick}>
+                <div className={menuClassName} style={this.props.menuStyle} ref={(el) => { this.panelEl = el; }}>
                     <ul className="ui-menu-list ui-helper-reset">
                         {items}    
                     </ul>
