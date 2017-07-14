@@ -36,7 +36,7 @@ export class MenuItem extends Component{
         }
         else{
             return (
-                <a className={styleClass} target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
+                <a className={styleClass} href="#" target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
                     {this.item.icon?<span className={iconClass}></span>:null}
                     <span className="ui-menuitem-text">{this.item.label}</span>
                 </a>
