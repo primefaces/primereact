@@ -332,6 +332,10 @@ loadData(event) {
             </TabPanel>
 
             <TabPanel header="Source">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datascroller" className="btn-viewsource" target="_blank">
+                    <i className="fa fa-github"></i>
+                    <span>View on GitHub</span>
+                </a>
 <CodeHighlight className="language-javascript">
 {`
 export class DataScrollerDemo extends Component {

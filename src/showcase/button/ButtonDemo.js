@@ -197,6 +197,12 @@ import {Button} from 'primereact/components/button/Button';
                     </TabPanel>
 
                     <TabPanel header="Source">
+
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/button" className="btn-viewsource" target="_blank">
+                            <i className="fa fa-github"></i>
+                            <span>View on GitHub</span>
+                        </a>
+
 <CodeHighlight className="language-javascript">
 {`
 export class ButtonDemo extends Component {
