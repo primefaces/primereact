@@ -7,17 +7,19 @@ export class Button extends Component {
     static defaultProps = {
         label: null,
         icon: null,
-        iconPos: 'left'
+        iconPos: 'left',
+        cornerStyleClass: 'ui-corner-all'
     }
 
     static propTypes = {
         label: PropTypes.string,
         icon: PropTypes.string,
-        iconPos: PropTypes.string
+        iconPos: PropTypes.string,
+        cornerStyleClass: PropTypes.string
     };
 
     render() {
-        var styleClass = classNames('ui-button ui-widget ui-state-default ui-corner-all', this.props.className, {
+        var styleClass = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
                 'ui-button-text-only': !this.props.icon && this.props.label,
                 'ui-button-icon-only': this.props.icon && !this.props.label,
                 'ui-button-text-icon-left': this.props.icon && this.props.iconPos === 'left',
@@ -30,6 +32,7 @@ export class Button extends Component {
         delete buttonProps.iconPos;
         delete buttonProps.icon;
         delete buttonProps.label;
+        delete buttonProps.cornerStyleClass;
 
         if(this.props.icon) {
             iconStyleClass = classNames(this.props.icon, 'ui-c fa fa-fw', {
