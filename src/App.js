@@ -224,6 +224,7 @@ class AppMenu extends Component {
                         </a>
                         <div className={classNames({ 'submenu-hidden': this.state.activeMenu !== 6, 'submenu-visible': this.state.activeMenu === 6 })}>
                             <Link to="/menu">&#9679; Menu</Link>
+                            <Link to="/tabmenu">&#9679; TabMenu</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
