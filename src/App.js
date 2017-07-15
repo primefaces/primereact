@@ -177,15 +177,16 @@ class AppMenu extends Component {
                             <span>Data</span>
                         </a>
                         <div className={classNames({ 'submenu-hidden': this.state.activeMenu !== 2, 'submenu-visible': this.state.activeMenu === 2 })}>
-                            <Link to="/paginator">&#9679; Paginator</Link>
-                            <Link to="/datalist">&#9679; DataList</Link>
                             <Link to="/datagrid">&#9679; DataGrid</Link>
-                            <Link to="/orderlist">&#9679; OrderList</Link>
+                            <Link to="/datalist">&#9679; DataList</Link>
+                            <Link to="/datatable">&#9679; DataTable</Link>
+                            <Link to="/datascroller">&#9679; DataScroller</Link>
+                            <Link to="/paginator">&#9679; Paginator</Link>
                             <Link to="/picklist">&#9679; PickList</Link>
+                            <Link to="/orderlist">&#9679; OrderList</Link>
                             <Link to="/schedule">&#9679; Schedule</Link>
                             <Link to="/tree">&#9679; Tree</Link>
                             <Link to="/treetable">&#9679; TreeTable</Link>
-                            <Link to="/datascroller">&#9679; DataScroller</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>

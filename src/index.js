@@ -42,6 +42,7 @@ import {PolarAreaChartDemo} from './showcase/chart/PolarAreaChartDemo';
 import {PaginatorDemo} from './showcase/paginator/PaginatorDemo';
 import {DataListDemo} from './showcase/datalist/DataListDemo';
 import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
+import {DataTableDemo} from './showcase/datatable/DataTableDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
@@ -105,6 +106,7 @@ ReactDOM.render(
             <Route path="/paginator" component={PaginatorDemo} />
             <Route path="/datalist" component={DataListDemo} />
             <Route path="/datagrid" component={DataGridDemo} />
+            <Route path="/datatable" component={DataTableDemo} />
             <Route path="/orderlist" component={OrderListDemo} />
             <Route path="/picklist" component={PickListDemo} />
             <Route path="/schedule" component={ScheduleDemo} />
