@@ -103,14 +103,14 @@ export class DataTable extends Component {
         first: 0,
         rows: 0,
         totalRecords: 0,
-        lazy: false
+        lazy: false,
     }
 
     static propTypes = {
         value: PropTypes.array,
         header: PropTypes.any,
         footer: PropTypes.any,
-        style: PropTypes.any,
+        style: PropTypes.object,
         className: PropTypes.string,
         tableStyle: PropTypes.any,
         tableClassName: PropTypes.string,
@@ -120,7 +120,7 @@ export class DataTable extends Component {
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
-        lazy: PropTypes.bool
+        lazy: PropTypes.bool,
     };
 
     constructor(props) {
@@ -133,7 +133,6 @@ export class DataTable extends Component {
     }
 
     onPageChange(event) {
-        console.log(event.first);
         this.setState({first: event.first, rows: event.rows});
     }
 
@@ -152,9 +151,12 @@ export class DataTable extends Component {
         var className = classNames('ui-datatable ui-widget', this.props.className);
         var paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
         var paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
+        var headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
+        var footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
 
         return (
             <div className={className} style={this.props.style}>
+                {headerFacet}
                 {paginatorTop}
                 <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName}>
@@ -163,6 +165,7 @@ export class DataTable extends Component {
                     </table>
                 </div>
                 {paginatorBottom}
+                {footerFacet}
             </div>
         );
     }

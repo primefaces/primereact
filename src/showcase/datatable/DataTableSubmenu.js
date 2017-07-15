@@ -8,6 +8,7 @@ export class DataTableSubmenu extends Component {
             <div className="content-section SubSubMenu ui-helper-clearfix">
                 <ul>
                     <li><Link to="/datatable">&#9679; Basic</Link></li>
+                    <li><Link to="/datatable/facets">&#9679; Facets</Link></li>
                     <li><Link to="/datatable/paginator">&#9679; Paginator</Link></li>
                 </ul>
             </div>
