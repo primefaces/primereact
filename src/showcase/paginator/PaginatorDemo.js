@@ -6,6 +6,19 @@ import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
 export class PaginatorDemo extends Component {
 
+    constructor() {
+        super();
+        this.state = {first: 0, rows: 10};
+        this.onPageChange = this.onPageChange.bind(this);
+    }
+
+    onPageChange(event) {
+        this.setState({
+            first: event.first,
+            rows: event.rows
+        });
+    }
+
     render() {
         return (
             <div>
@@ -17,8 +30,9 @@ export class PaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Paginator rows={10} totalRecords={120} rowsPerPageOptions={[10,20,30]}></Paginator>
+                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
                 </div>
+
                 <PaginatorDoc></PaginatorDoc>
             </div>
         );
@@ -41,10 +55,12 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Paginator is defined using Paginator element.</p>
+            <p>Paginator is defined using Paginator element, as it does not keep any internal state, usage is very similar to a controlled form components where a binding to the first 
+                    property along with a page change callback are required.</p>
+
 <CodeHighlight className="language-markup">
 {`
-<Paginator></Paginator>
+<Paginator first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
 
 `}
 </CodeHighlight>
@@ -53,19 +69,22 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
             <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
 <CodeHighlight className="language-markup">
 {`
-<Paginator rows={10} totalRecords={120}></Paginator>
+<Paginator rows={10} totalRecords={120} first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
 
 `}
 </CodeHighlight>
 
              <h3>Rows Per Page</h3>
-            <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values.</p>
+            <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case, 
+                rows property should also be updated
+            </p>
 <CodeHighlight className="language-markup">
 {`
-<Paginator rows={10} totalRecords={120} rowsPerPageOptions={[10,20,30]}></Paginator>
+<Paginator rows={10} totalRecords={120} rowsPerPageOptions={[10,20,30]} first={this.state.first} onPageChange={(e) => this.setState({first: e.first, rows: e.first})}></Paginator>
 
 `}
 </CodeHighlight>
+
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -210,6 +229,19 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
 {`
 export class PaginatorDemo extends Component {
 
+    constructor() {
+        super();
+        this.state = {first: 0, rows: 10};
+        this.onPageChange = this.onPageChange.bind(this);
+    }
+
+    onPageChange(event) {
+        this.setState({
+            first: event.first,
+            rows: event.rows
+        });
+    }
+
     render() {
         return (
             <div>
@@ -221,9 +253,9 @@ export class PaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Paginator rows={10} totalRecords={120} rowsPerPageOptions={[10,20,30]}></Paginator>
+                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
                 </div>
-                <PaginatorDoc></PaginatorDoc>
+
             </div>
         );
     }
