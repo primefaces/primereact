@@ -7,11 +7,18 @@ import ObjectUtils from '../utils/ObjectUtils';
 class HeaderCell extends Component {
 
     render() {
-        var className = classNames('ui-state-default ui-unselectable-text', this.props.className);
+        var className = classNames('ui-state-default ui-unselectable-text', 
+                    {'ui-sortable-column': this.props.sortable}, this.props.className);
+
+        if(this.props.sortable) {
+            var sortIconClassName = classNames('ui-sortable-column-icon fa fa-fw fa-sort');
+            var sortIcon = <span className={sortIconClassName}></span>;
+        }
 
         return (
             <th className={className} style={this.props.style}>
                <span className="ui-column-title">{this.props.header}</span>
+               {sortIcon}
             </th>
         );
     }
