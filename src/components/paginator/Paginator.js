@@ -152,8 +152,13 @@ export class Paginator extends Component {
     }
 
     createRowsPerPageDropdown() {
-        var options = this.props.rowsPerPageOptions.map((opt, i) => <option key={opt} value={opt}>{opt}</option>);
-        return <select className="ui-paginator-rpp-options ui-widget ui-state-default" onChange={this.onRowsChange.bind(this)}>{options}</select>;
+        if(this.props.rowsPerPageOptions) {
+             var options = this.props.rowsPerPageOptions.map((opt, i) => <option key={opt} value={opt}>{opt}</option>);
+            return <select className="ui-paginator-rpp-options ui-widget ui-state-default" onChange={this.onRowsChange.bind(this)}>{options}</select>;
+        }
+        else {
+            return null;
+        }
     }
 
     render() {

@@ -7,7 +7,7 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 
-export class DataTableDemo extends Component {
+export class DataTablePaginatorDemo extends Component {
 
     constructor() {
         super();
@@ -15,49 +15,31 @@ export class DataTableDemo extends Component {
             cars: []
         };
         this.carservice = new CarService();
-
-        this.cols = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
     }
 
     componentDidMount() {
-        this.setState({cars: this.carservice.getCarsSmall(this)});
+        this.setState({cars: this.carservice.getCarsLarge(this)});
     }
 
     render() {
-        var dynamicColumns = this.cols.map((col,i) => {
-            return <Column key={col.field} field={col.field} header={col.header} />;
-        });
-
         return (
             <div>
                 <DataTableSubmenu />
 
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>DataTable</h1>
-                        <p>DataList displays data in tabular format.</p>
+                        <h1>DataTable - Paginator</h1>
+                        <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <DataTable value={this.state.cars}>
+                    <DataTable value={this.state.cars} paginator={true} rows={10}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
-
-                    <h3>Dynamic Columns</h3>
-                    <DataTable value={this.state.cars}>
-                        {dynamicColumns}
-                    </DataTable>
-
                 </div>
 
                 <DataTableDoc></DataTableDoc>
