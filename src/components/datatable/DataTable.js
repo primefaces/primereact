@@ -25,7 +25,9 @@ export class DataTable extends Component {
         lazy: false,
         sortField: null,
         sortOrder: 1,
-        sortMode: 'single'
+        sortMode: 'single',
+        onSort: null,
+        onPage: null
     }
 
     static propTypes = {
@@ -46,7 +48,9 @@ export class DataTable extends Component {
         sortField: PropTypes.string,
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
-        sortMode: PropTypes.string
+        sortMode: PropTypes.string,
+        onSort: PropTypes.func,
+        onPage: PropTypes.func
     };
 
     constructor(props) {
@@ -64,6 +68,9 @@ export class DataTable extends Component {
 
     onPageChange(event) {
         this.setState({first: event.first, rows: event.rows});
+        if(this.props.onPage) {
+            this.props.onPage(event);
+        }
     }
 
     getTotalRecords() {
@@ -78,10 +85,20 @@ export class DataTable extends Component {
     }
 
     onSort(event) {
+        var sortField = event.sortField;
+        var sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
+
         this.setState({
-            sortField: event.sortField,
-            sortOrder: (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1
+            sortField: sortField,
+            sortOrder: sortOrder
         });
+
+         if(this.props.onPage) {
+            this.props.onSort({
+                sortField: sortField,
+                sortOrder: sortOrder
+            });
+        }
     }
 
     sortSingle(data, sortField, sortOrder) {
