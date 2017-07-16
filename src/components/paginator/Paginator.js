@@ -108,7 +108,7 @@ export class Paginator extends Component {
     }
 
     onPageLinkClick(event, pageLink) {
-        this.changeState(pageLink * this.props.rows, this.props.rows);
+        this.changeState((pageLink - 1) * this.props.rows, this.props.rows);
         event.preventDefault();
     }
 
