@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {Paginator} from '../paginator/Paginator';
+import {Column} from '../column/Column';
 import {TableHeader} from './TableHeader';
 import {TableBody} from './TableBody';
+import {TableFooter} from './TableFooter';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class DataTable extends Component {
@@ -33,6 +35,8 @@ export class DataTable extends Component {
         compareSelectionBy: 'deepEquals',
         dataKey: null,
         metaKeySelection: true,
+        headerColumnGroup: null,
+        footerColumnGroup: null,
         onSort: null,
         onPage: null,
         onLazyLoad: null,
@@ -66,6 +70,8 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
+        headerColumnGroup: PropTypes.object,
+        footerColumnGroup: PropTypes.object,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
         onLazyLoad: PropTypes.func,
@@ -271,7 +277,8 @@ export class DataTable extends Component {
                 {paginatorTop}
                 <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName}>
-                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta}>{this.props.children}</TableHeader>
+                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}>{this.props.children}</TableHeader>
+                        <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter>
                         <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}>{this.props.children}</TableBody>

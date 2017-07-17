@@ -50,7 +50,8 @@ export class HeaderCell extends Component {
         }
 
         return (
-            <th className={className} style={this.props.style} onClick={this.onClick}>
+            <th className={className} style={this.props.style} onClick={this.onClick} 
+                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
                <span className="ui-column-title">{this.props.header}</span>
                <span className={sortIconClassName}></span>
             </th>

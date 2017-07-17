@@ -13,6 +13,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/sort">&#9679; Sort</Link></li>
                     <li><Link to="/datatable/selection">&#9679; Selection</Link></li>
                     <li><Link to="/datatable/lazy">&#9679; Lazy</Link></li>
+                    <li><Link to="/datatable/colgroup">&#9679; ColGroup</Link></li>
                 </ul>
             </div>
         );

@@ -12,18 +12,28 @@ export class TableHeader extends Component {
         this.props.onSort(e);
     }
 
+    createHeaderCells(root, column, i) {
+        return root.props.children.map((column,i) => {
+            return <HeaderCell key={i} {...column.props} onSort={this.onSort} 
+                        sortField={this.props.sortField} sortOrder={this.props.sortOrder} 
+                        multiSortMeta={this.props.multiSortMeta} />;
+        });
+    }
+
     render() {
-        var columnHeaders = this.props.children.map((column,i) => {
-                                return <HeaderCell key={i} {...column.props} onSort={this.onSort} 
-                                        sortField={this.props.sortField} sortOrder={this.props.sortOrder} 
-                                        multiSortMeta={this.props.multiSortMeta} />;
-                            });
+        let content;
+        if(this.props.columnGroup) {
+            content = this.props.columnGroup.props.children.map((row, i) => {
+                return <tr key={i} className="ui-state-default">{this.createHeaderCells(row)}</tr>;
+            });
+        }
+        else {
+            content = <tr className="ui-state-default">{this.createHeaderCells(this)}</tr>;
+        }
 
         return (
             <thead className="ui-datatable-thead">
-                <tr className="ui-state-default">
-                    {columnHeaders}
-                </tr>
+                {content}
             </thead>
         );
     }

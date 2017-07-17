@@ -32,8 +32,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa-search"></Button>
-            <Button type="button" icon="fa-edit"></Button>
+            <Button type="button" icon="fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa-edit" className="ui-button-warning"></Button>
         </div>;
     }
 
