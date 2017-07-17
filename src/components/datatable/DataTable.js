@@ -263,6 +263,29 @@ export class DataTable extends Component {
         }
     }
 
+    hasFooter() {
+        if(this.props.children) {
+            if(this.props.footerColumnGroup) {
+                return true;
+            }
+            else {
+                if(this.props.children instanceof Array) {
+                    for(let i = 0; i < this.props.children.length; i++) {
+                        if(this.props.children[i].footer) {
+                            return true;
+                        }
+                    }
+                }
+                else {
+                    return this.props.children.footer !== null;
+                }
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
     render() {
         let value = this.processData();
         let className = classNames('ui-datatable ui-widget', this.props.className);
@@ -278,7 +301,7 @@ export class DataTable extends Component {
                 <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName}>
                         <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}>{this.props.children}</TableHeader>
-                        <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter>
+                        {this.hasFooter() && <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter>}
                         <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}>{this.props.children}</TableBody>
