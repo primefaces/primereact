@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {TabMenu} from '../../components/tabmenu/TabMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {BreadCrumb} from '../../components/breadcrumb/BreadCrumb';
 
-export class TabMenuDemo extends Component {
+export class BreadcrumbDemo extends Component {
 
     constructor() {
         super();
@@ -13,32 +13,34 @@ export class TabMenuDemo extends Component {
 
     render() {
         var items=[
-            {label: 'Stats', icon: 'fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa-calendar'},
-            {label: 'Documentation', icon: 'fa-book'},
-            {label: 'Support', icon: 'fa-support'},
-            {label: 'Social', icon: 'fa-twitter'}
+            {label:'Categories'},
+            {label:'Sports'},
+            {label:'Football'},
+            {label:'Countries'},
+            {label:'Spain'},
+            {label:'F.C. Barcelona'},
+            {label:'Squad'},
+            {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
         ];
         return (
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>TabMenu</h1>
-                        <p>Menu is a navigation/command component that displays items as tab headers.</p>
+                        <h1>Breadcrumb</h1>
+                        <p>Breadcrumb provides contextual information about page hierarchy.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <TabMenu model={items}/>
+                    <BreadCrumb model={items}/>
                 </div>
 
-                <TabMenuDoc/>
+                <BreadCrumbDoc/>
 
             </div>
         );
     }
 }
-
-class TabMenuDoc extends Component {
+class BreadCrumbDoc extends Component {
     render() {
         return (
             <div className="content-section source">
@@ -47,41 +49,18 @@ class TabMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {TabMenu} from 'primereact/components/tabmenu/TabMenu';
+import {Breadcrumb} from 'primereact/components/breadcrumb/Breadcrumb';
 
 `}</CodeHighlight>
-                        <h3>MenuModel API</h3>
-                        <p>TabMenu uses the common menumodel api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>TabMenu requires a collection of menuitems as its model.</p>
+                        <p>Component is defined using the Password element .</p>
                         <CodeHighlight className="language-markup">
                             {`
-<TabMenu model={items}/>
+<BreadCrumb model={items}/>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="language-markup">
-                            {`
-var items=[
-            {label: 'Stats', icon: 'fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa-calendar'},
-            {label: 'Documentation', icon: 'fa-book'},
-            {label: 'Support', icon: 'fa-support'},
-            {label: 'Social', icon: 'fa-twitter'}
-        ];
-
-`}
-                        </CodeHighlight>
-                        <h3>ActiveItem</h3>
-                        <p>By default, first item is activated, use activeItem property to choose the initial active item.</p>
-                        <CodeHighlight className="language-markup">
-                            {`
-<TabMenu model={items} activeItem={items[2]}/>
-
-`}
-                        </CodeHighlight>
-
                         <h3>Attributes</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -101,10 +80,10 @@ var items=[
                                     <td>An array of menuitems.</td>
                                 </tr>
                                 <tr>
-                                    <td>activeItem</td>
+                                    <td>home</td>
                                     <td>MenuItem</td>
                                     <td>null</td>
-                                    <td>Defines the default active menuitem</td>
+                                    <td>MenuItem configuration for the home icon.</td>
                                 </tr>
                                 <tr>
                                     <td>style</td>
@@ -133,28 +112,20 @@ var items=[
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>ui-tabmenu</td>
+                                    <td>ui-breadcrumb</td>
                                     <td>Container element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-tabmenu-nav</td>
-                                    <td>List element of headers.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-tabmenuitem</td>
+                                    <td>ui-menuitem</td>
                                     <td>Menuitem element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem-link</td>
-                                    <td>Link inside a menuitem.</td>
                                 </tr>
                                 <tr>
                                     <td>ui-menuitem-text</td>
                                     <td>Label of a menuitem.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-menuitem-icon</td>
-                                    <td>Icon of a menuitem.</td>
+                                    <td>ui-breadcrumb-chevron</td>
+                                    <td>Chevron element.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -165,13 +136,13 @@ var items=[
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/tabmenu" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/breadcrumb" className="btn-viewsource" target="_blank">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
-export class TabMenuDemo extends Component {
+export class BreadcrumbDemo extends Component {
 
     constructor() {
         super();
@@ -180,25 +151,28 @@ export class TabMenuDemo extends Component {
 
     render() {
         var items=[
-            {label: 'Stats', icon: 'fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa-calendar'},
-            {label: 'Documentation', icon: 'fa-book'},
-            {label: 'Support', icon: 'fa-support'},
-            {label: 'Social', icon: 'fa-twitter'}
+            {label:'Categories'},
+            {label:'Sports'},
+            {label:'Football'},
+            {label:'Countries'},
+            {label:'Spain'},
+            {label:'F.C. Barcelona'},
+            {label:'Squad'},
+            {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
         ];
         return (
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>TabMenu</h1>
-                        <p>Menu is a navigation/command component that displays items as tab headers.</p>
+                        <h1>Breadcrumb</h1>
+                        <p>Breadcrumb provides contextual information about page hierarchy.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <TabMenu model={items}/>
+                    <BreadCrumb model={items}/>
                 </div>
 
-                <TabMenuDoc/>
+                <BreadCrumbDoc/>
 
             </div>
         );

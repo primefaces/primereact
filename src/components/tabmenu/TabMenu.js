@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {MenuItem} from '../menu/Menu';
+import {MenuItem} from '../menu/MenuItem'
 
 export class TabMenu extends Component {
 
