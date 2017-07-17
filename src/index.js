@@ -64,6 +64,7 @@ import {DataScrollerLoaderDemo} from './showcase/datascroller/DataScrollerLoader
 import {DataScrollerInfiniteDemo} from './showcase/datascroller/DataScrollerInfiniteDemo';
 import {MenuDemo} from './showcase/menu/MenuDemo';
 import {TabMenuDemo} from './showcase/tabmenu/TabMenuDemo';
+import {BreadcrumbDemo} from './showcase/breadcrumb/BreadcrumbDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -130,6 +131,7 @@ ReactDOM.render(
             <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
             <Route path="/menu" component={MenuDemo} />
             <Route path="/tabmenu" component={TabMenuDemo} />
+            <Route path="/breadcrumb" component={BreadcrumbDemo} />
             <Route path="/setup" component={SetupPage} />
             <Route path="/splitbutton" component={SplitButtonDemo} />
         </Route>
