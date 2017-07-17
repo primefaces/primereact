@@ -27,7 +27,8 @@ export class DataTable extends Component {
         sortOrder: 1,
         sortMode: 'single',
         onSort: null,
-        onPage: null
+        onPage: null,
+        onLazyLoad: null
     }
 
     static propTypes = {
@@ -50,7 +51,8 @@ export class DataTable extends Component {
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
         onSort: PropTypes.func,
-        onPage: PropTypes.func
+        onPage: PropTypes.func,
+        onLazyLoad: PropTypes.func
     };
 
     constructor(props) {
@@ -68,6 +70,16 @@ export class DataTable extends Component {
 
     onPageChange(event) {
         this.setState({first: event.first, rows: event.rows});
+
+        if(this.props.lazy) {
+            this.props.onLazyLoad({
+                first: event.first,
+                rows: event.rows,
+                sortField: this.state.sortField,
+                sortOrder: this.state.sortOrder
+            });
+        }
+
         if(this.props.onPage) {
             this.props.onPage(event);
         }
@@ -90,10 +102,11 @@ export class DataTable extends Component {
 
         this.setState({
             sortField: sortField,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            first: 0
         });
 
-         if(this.props.onPage) {
+         if(this.props.onSort) {
             this.props.onSort({
                 sortField: sortField,
                 sortOrder: sortOrder
@@ -131,23 +144,32 @@ export class DataTable extends Component {
 
     processData() {
         var data = this.props.value;
-        if(this.state.sortField || this.state.multiSortMeta) {
-            if(this.props.sortMode === 'single')
-                data = this.sortSingle(data, this.state.sortField, this.state.sortOrder);
-            else if(this.props.sortMode === 'multiple')
-                data = this.sortMultiple(data, this.state.multiSortMeta);
+        if(!this.props.lazy) {
+            if(this.state.sortField || this.state.multiSortMeta) {
+                if(this.props.sortMode === 'single')
+                    data = this.sortSingle(data, this.state.sortField, this.state.sortOrder);
+                else if(this.props.sortMode === 'multiple')
+                    data = this.sortMultiple(data, this.state.multiSortMeta);
+            }
         }
 
         return data;
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.props.lazy && nextProps.value === this.props.value)
+            return false;
+        else
+            return true;
+    }
+
     render() {
+        var value = this.processData();
         var className = classNames('ui-datatable ui-widget', this.props.className);
         var paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
         var paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
         var headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
         var footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
-        var value = this.processData();
 
         return (
             <div className={className} style={this.props.style}>
