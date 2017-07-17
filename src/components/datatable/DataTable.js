@@ -100,13 +100,34 @@ export class DataTable extends Component {
         var sortField = event.sortField;
         var sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
 
+        if(this.props.sortMode === 'multiple') {
+            var metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
+            var multiSortMeta = this.state.multiSortMeta;
+            if(!multiSortMeta || !metaKey) {
+                multiSortMeta = [];
+            }
+
+            this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
+        }
+
         this.setState({
             sortField: sortField,
             sortOrder: sortOrder,
-            first: 0
+            first: 0,
+            multiSortMeta: multiSortMeta
         });
 
-         if(this.props.onSort) {
+        if(this.props.lazy) {
+            this.props.onLazyLoad({
+                first: this.state.first,
+                rows: this.state.rows,
+                sortField: sortField,
+                sortOrder: sortOrder,
+                multiSortMeta: multiSortMeta
+            });
+        }
+
+        if(this.props.onSort) {
             this.props.onSort({
                 sortField: sortField,
                 sortOrder: sortOrder
@@ -114,7 +135,22 @@ export class DataTable extends Component {
         }
     }
 
-    sortSingle(data, sortField, sortOrder) {
+    addSortMeta(meta, multiSortMeta) {
+        var index = -1;
+        for(var i = 0; i < multiSortMeta.length; i++) {
+            if(multiSortMeta[i].field === meta.field) {
+                index = i;
+                break;
+            }
+        }
+
+        if(index >= 0)
+            multiSortMeta[index] = meta;
+        else
+            multiSortMeta.push(meta);
+    }
+
+    sortSingle(data) {
         var value = [...data];
         value.sort((data1, data2) => {
                 var value1 = ObjectUtils.resolveFieldData(data1, this.state.sortField);
@@ -138,8 +174,34 @@ export class DataTable extends Component {
         return value;
     }
 
-    sortMultiple(data, multiSortMeta) {
-        
+    sortMultiple(data) {
+         var value = [...data];
+         value.sort((data1, data2) => {
+            return this.multisortField(data1, data2, this.state.multiSortMeta, 0);
+         });
+
+         return value;
+    }
+
+    multisortField(data1, data2, multiSortMeta, index) {
+        var value1 = ObjectUtils.resolveFieldData(data1, this.state.multiSortMeta[index].field);
+        var value2 = ObjectUtils.resolveFieldData(data2, this.state.multiSortMeta[index].field);
+        var result = null;
+
+        if (typeof value1 == 'string' || value1 instanceof String) {
+            if (value1.localeCompare && (value1 != value2)) {
+                return (this.state.multiSortMeta[index].order * value1.localeCompare(value2));
+            }
+        }
+        else {
+            result = (value1 < value2) ? -1 : 1;
+        }
+
+        if(value1 == value2)  {
+            return (this.state.multiSortMeta.length - 1) > (index) ? (this.multisortField(data1, data2, this.state.multiSortMeta, index + 1)) : 0;
+        }
+
+        return (this.state.multiSortMeta[index].order * result);
     }
 
     processData() {
@@ -147,9 +209,9 @@ export class DataTable extends Component {
         if(!this.props.lazy) {
             if(this.state.sortField || this.state.multiSortMeta) {
                 if(this.props.sortMode === 'single')
-                    data = this.sortSingle(data, this.state.sortField, this.state.sortOrder);
+                    data = this.sortSingle(data);
                 else if(this.props.sortMode === 'multiple')
-                    data = this.sortMultiple(data, this.state.multiSortMeta);
+                    data = this.sortMultiple(data);
             }
         }
 
@@ -177,7 +239,7 @@ export class DataTable extends Component {
                 {paginatorTop}
                 <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName}>
-                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder}>{this.props.children}</TableHeader>
+                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta}>{this.props.children}</TableHeader>
                         <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy}>{this.props.children}</TableBody>
                     </table>
                 </div>

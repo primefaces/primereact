@@ -15,7 +15,8 @@ export class TableHeader extends Component {
     render() {
         var columnHeaders = this.props.children.map((column,i) => {
                                 return <HeaderCell key={i} {...column.props} onSort={this.onSort} 
-                                        sortField={this.props.sortField} sortOrder={this.props.sortOrder} />;
+                                        sortField={this.props.sortField} sortOrder={this.props.sortOrder} 
+                                        multiSortMeta={this.props.multiSortMeta} />;
                             });
 
         return (
