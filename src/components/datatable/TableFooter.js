@@ -4,7 +4,9 @@ import {FooterCell} from './FooterCell';
 export class TableFooter extends Component {
 
     createFooterCells(root, column, i) {
-        return root.props.children.map((column,i) => {
+        let children = React.Children.toArray(root.props.children);
+
+        return React.Children.map(children, (column,i) => {
             return <FooterCell key={i} {...column.props} />;
         });
     }

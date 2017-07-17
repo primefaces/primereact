@@ -13,7 +13,9 @@ export class TableHeader extends Component {
     }
 
     createHeaderCells(root, column, i) {
-        return root.props.children.map((column,i) => {
+        let children = React.Children.toArray(root.props.children);
+        
+        return React.Children.map(children, (column, i) => {
             return <HeaderCell key={i} {...column.props} onSort={this.onSort} 
                         sortField={this.props.sortField} sortOrder={this.props.sortOrder} 
                         multiSortMeta={this.props.multiSortMeta} />;
