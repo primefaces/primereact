@@ -9,10 +9,12 @@ export class HeaderCell extends Component {
     }
 
     onClick(e) {
-        this.props.onSort({
-            originalEvent: e,
-            sortField: this.props.field
-        });
+        if(this.props.sortable) {
+            this.props.onSort({
+                originalEvent: e,
+                sortField: this.props.field
+            });
+        }
     }
 
     getMultiSortMetaData() {
@@ -38,7 +40,7 @@ export class HeaderCell extends Component {
         else if(multipleSorted) 
             sortOrder = multiSortMetaData.order;
 
-        var sorted = (singleSorted || multipleSorted);
+        var sorted = this.props.sortable && (singleSorted || multipleSorted);
         var className = classNames('ui-state-default ui-unselectable-text', 
                     {'ui-sortable-column': this.props.sortable, 'ui-state-active': sorted}, this.props.className);
 

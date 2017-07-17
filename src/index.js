@@ -44,7 +44,7 @@ import {DataListDemo} from './showcase/datalist/DataListDemo';
 import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {DataTableDemo} from './showcase/datatable/DataTableDemo';
 import {DataTableLazyDemo} from './showcase/datatable/DataTableLazyDemo';
-import {DataTableFacetsDemo} from './showcase/datatable/DataTableFacetsDemo';
+import {DataTableTemplatingDemo} from './showcase/datatable/DataTableTemplatingDemo';
 import {DataTablePaginatorDemo} from './showcase/datatable/DataTablePaginatorDemo';
 import {DataTableSortDemo} from './showcase/datatable/DataTableSortDemo';
 import {DataTableSelectionDemo} from './showcase/datatable/DataTableSelectionDemo';
@@ -113,7 +113,7 @@ ReactDOM.render(
             <Route path="/datalist" component={DataListDemo} />
             <Route path="/datagrid" component={DataGridDemo} />
             <Route path="/datatable" component={DataTableDemo} />
-            <Route path="/datatable/facets" component={DataTableFacetsDemo} />
+            <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
             <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
             <Route path="/datatable/sort" component={DataTableSortDemo} />
             <Route path="/datatable/lazy" component={DataTableLazyDemo} />
