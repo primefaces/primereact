@@ -225,6 +225,18 @@ export class DataTable extends Component {
             return true;
     }
 
+    componentDidMount() {
+        if(this.props.lazy) {
+            this.props.onLazyLoad({
+                first: this.props.first,
+                rows: this.props.rows,
+                sortField: this.props.sortField,
+                sortOrder: this.props.sortOrder,
+                multiSortMeta: this.props.multiSortField
+            });
+        }
+    }
+
     render() {
         var value = this.processData();
         var className = classNames('ui-datatable ui-widget', this.props.className);

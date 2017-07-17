@@ -21,10 +21,7 @@ export class DataTableLazyDemo extends Component {
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => {
             this.datasource = data;
-            this.setState({
-                cars: this.datasource.slice(0, 10),
-                totalRecords: this.datasource.length
-            });
+            this.setState({totalRecords: data.length});
         });
     }
     
