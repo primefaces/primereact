@@ -11,6 +11,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/facets">&#9679; Facets</Link></li>
                     <li><Link to="/datatable/paginator">&#9679; Paginator</Link></li>
                     <li><Link to="/datatable/sort">&#9679; Sort</Link></li>
+                    <li><Link to="/datatable/selection">&#9679; Selection</Link></li>
                     <li><Link to="/datatable/lazy">&#9679; Lazy</Link></li>
                 </ul>
             </div>

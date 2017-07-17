@@ -25,10 +25,20 @@ export class DataTable extends Component {
         lazy: false,
         sortField: null,
         sortOrder: 1,
+        multiSortMeta: null,
         sortMode: 'single',
+        selectionMode: null,
+        selection: null,
+        onSelectionChange: null,
+        compareSelectionBy: 'deepEquals',
+        dataKey: null,
+        metaKeySelection: true,
         onSort: null,
         onPage: null,
-        onLazyLoad: null
+        onLazyLoad: null,
+        onRowClick: null,
+        onRowSelect: null,
+        onRowUnselect: null
     }
 
     static propTypes = {
@@ -50,9 +60,18 @@ export class DataTable extends Component {
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
+        selectionMode: PropTypes.string,
+        selection: PropTypes.any,
+        onSelectionChange: PropTypes.func,
+        compareSelectionBy: PropTypes.string,
+        dataKey: PropTypes.string,
+        metaKeySelection: PropTypes.bool,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
-        onLazyLoad: PropTypes.func
+        onLazyLoad: PropTypes.func,
+        onRowClick: PropTypes.func,
+        onRowSelect: PropTypes.func,
+        onRowUnselect: PropTypes.func
     };
 
     constructor(props) {
@@ -90,19 +109,20 @@ export class DataTable extends Component {
     }
 
     createPaginator(position) {
-        var className = 'ui-paginator-' + position;
+        let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className}
                     totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} />;
     }
 
     onSort(event) {
-        var sortField = event.sortField;
-        var sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
+        let sortField = event.sortField;
+        let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
+        let multiSortMeta;
 
         if(this.props.sortMode === 'multiple') {
-            var metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
-            var multiSortMeta = this.state.multiSortMeta;
+            let metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
+            multiSortMeta = this.state.multiSortMeta;
             if(!multiSortMeta || !metaKey) {
                 multiSortMeta = [];
             }
@@ -136,8 +156,8 @@ export class DataTable extends Component {
     }
 
     addSortMeta(meta, multiSortMeta) {
-        var index = -1;
-        for(var i = 0; i < multiSortMeta.length; i++) {
+        let index = -1;
+        for(let i = 0; i < multiSortMeta.length; i++) {
             if(multiSortMeta[i].field === meta.field) {
                 index = i;
                 break;
@@ -151,11 +171,11 @@ export class DataTable extends Component {
     }
 
     sortSingle(data) {
-        var value = [...data];
+        let value = [...data];
         value.sort((data1, data2) => {
-                var value1 = ObjectUtils.resolveFieldData(data1, this.state.sortField);
-                var value2 = ObjectUtils.resolveFieldData(data2, this.state.sortField);
-                var result = null;
+                let value1 = ObjectUtils.resolveFieldData(data1, this.state.sortField);
+                let value2 = ObjectUtils.resolveFieldData(data2, this.state.sortField);
+                let result = null;
 
                 if (value1 == null && value2 != null)
                     result = -1;
@@ -175,7 +195,7 @@ export class DataTable extends Component {
     }
 
     sortMultiple(data) {
-         var value = [...data];
+         let value = [...data];
          value.sort((data1, data2) => {
             return this.multisortField(data1, data2, this.state.multiSortMeta, 0);
          });
@@ -184,12 +204,12 @@ export class DataTable extends Component {
     }
 
     multisortField(data1, data2, multiSortMeta, index) {
-        var value1 = ObjectUtils.resolveFieldData(data1, this.state.multiSortMeta[index].field);
-        var value2 = ObjectUtils.resolveFieldData(data2, this.state.multiSortMeta[index].field);
-        var result = null;
+        let value1 = ObjectUtils.resolveFieldData(data1, this.state.multiSortMeta[index].field);
+        let value2 = ObjectUtils.resolveFieldData(data2, this.state.multiSortMeta[index].field);
+        let result = null;
 
-        if (typeof value1 == 'string' || value1 instanceof String) {
-            if (value1.localeCompare && (value1 != value2)) {
+        if (typeof value1 === 'string' || value1 instanceof String) {
+            if (value1.localeCompare && (value1 !== value2)) {
                 return (this.state.multiSortMeta[index].order * value1.localeCompare(value2));
             }
         }
@@ -197,7 +217,7 @@ export class DataTable extends Component {
             result = (value1 < value2) ? -1 : 1;
         }
 
-        if(value1 == value2)  {
+        if(value1 === value2)  {
             return (this.state.multiSortMeta.length - 1) > (index) ? (this.multisortField(data1, data2, this.state.multiSortMeta, index + 1)) : 0;
         }
 
@@ -205,7 +225,7 @@ export class DataTable extends Component {
     }
 
     processData() {
-        var data = this.props.value;
+        let data = this.props.value;
         if(!this.props.lazy) {
             if(this.state.sortField || this.state.multiSortMeta) {
                 if(this.props.sortMode === 'single')
@@ -238,12 +258,12 @@ export class DataTable extends Component {
     }
 
     render() {
-        var value = this.processData();
-        var className = classNames('ui-datatable ui-widget', this.props.className);
-        var paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
-        var paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
-        var headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
-        var footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
+        let value = this.processData();
+        let className = classNames('ui-datatable ui-widget', this.props.className);
+        let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
+        let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
+        let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
+        let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
 
         return (
             <div className={className} style={this.props.style}>
@@ -252,7 +272,9 @@ export class DataTable extends Component {
                 <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName}>
                         <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta}>{this.props.children}</TableHeader>
-                        <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy}>{this.props.children}</TableBody>
+                        <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+                                selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
+                                onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}>{this.props.children}</TableBody>
                     </table>
                 </div>
                 {paginatorBottom}
