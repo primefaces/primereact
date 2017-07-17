@@ -18,7 +18,7 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({cars: this.carservice.getCarsLarge(this)});
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     render() {

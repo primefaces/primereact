@@ -19,7 +19,7 @@ export class DataTableFacetsDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({cars: this.carservice.getCarsSmall(this)});
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     render() {
