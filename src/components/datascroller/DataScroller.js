@@ -3,26 +3,6 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
-export class Header extends Component {
-    render() {
-        return (
-            <div className="ui-datascroller-header ui-widget-header ui-corner-top">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
-export class Footer extends Component {
-    render() {
-        return (
-            <div className="ui-datascroller-footer ui-widget-header ui-corner-bottom">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
 export class DataScroller extends Component {
     static defaultProps = {
         value:	null,
@@ -34,7 +14,9 @@ export class DataScroller extends Component {
         style:	null,
         styleClass: null,
         onLazyLoad: null,
-        itemTemplate: null
+        itemTemplate: null,
+        header:null,
+        footer:null
     }
 
     static propsTypes = {
@@ -47,7 +29,9 @@ export class DataScroller extends Component {
         style: PropTypes.string,
         styleClass: PropTypes.string,
         onLazyLoad: PropTypes.func,
-        itemTemplate: PropTypes.func
+        itemTemplate: PropTypes.func,
+        header:PropTypes.string,
+        footer:PropTypes.string
     }
 
     constructor(props) {
@@ -207,12 +191,8 @@ export class DataScroller extends Component {
             'ui-datascroller-inline': this.props.inline
         });
 
-        var header = React.Children.map(this.props.children, (element, i) => {
-                return (element && element.type === Header) && <Header> {element.props.children}</Header>
-            }),
-            footer = React.Children.map(this.props.children, (element, i) => {
-                return (element && element.type === Footer) && <Footer> {element.props.children}</Footer>
-            }),
+        var header =this.props.header && <div className="ui-datascroller-header ui-widget-header ui-corner-top"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="ui-datascroller-footer ui-widget-header ui-corner-bottom"> {this.props.footer} </div>,
             content = (
                 <div ref={(el) => this.contentElement = ReactDOM.findDOMNode(el)} className="ui-datascroller-content ui-widget-content" style={{'maxHeight': this.props.scrollHeight}}>
                     <ul className="ui-datascroller-list">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DataScroller, Header } from '../../components/datascroller/DataScroller';
+import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Growl } from '../../components/growl/Growl';
 import { CarService } from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -27,7 +27,7 @@ export class DataScrollerInfiniteDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsSmall(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -35,7 +35,7 @@ export class DataScrollerInfiniteDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -84,11 +84,7 @@ export class DataScrollerInfiniteDemo extends Component {
                 <div className="content-section implementation">
                     <Growl value={this.state.messages}></Growl>
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)}>
-                        <Header>
-                            Scroll Down to to Load More
-                        </Header>
-                    </DataScroller>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)} header="Scroll Down to to Load More"/>
                 </div>
             </div>
         );
@@ -125,7 +121,7 @@ export class DataScrollerInfiniteDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsSmall(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -133,7 +129,7 @@ export class DataScrollerInfiniteDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -181,11 +177,7 @@ export class DataScrollerInfiniteDemo extends Component {
                 <div className="content-section implementation">
                     <Growl value={this.state.messages}></Growl>
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)}>
-                        <Header>
-                            Scroll Down to to Load More
-                        </Header>
-                    </DataScroller>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)} header="Scroll Down to to Load More"/>
                 </div>
             </div>
         );

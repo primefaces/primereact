@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
-import { DataGrid, Header } from '../../components/datagrid/DataGrid';
+import { DataGrid } from '../../components/datagrid/DataGrid';
 import { Dialog } from '../../components/dialog/Dialog';
 import { Panel } from '../../components/panel/Panel';
 import { CarService } from '../service/CarService';
@@ -16,7 +16,7 @@ export class DataGridDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsLarge(this) });
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -27,7 +27,7 @@ export class DataGridDemo extends Component {
         return (
             <div style={{ padding: '3px' }} className="ui-g-12 ui-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={`showcase/resources/demo/images/car/${car.brand}.gif`} alt={car.brand} />
+                    <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
                     <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
@@ -50,17 +50,13 @@ export class DataGridDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
 
-                    <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20}>
-                        <Header>
-                            List of Cars
-                        </Header>
-                    </DataGrid>
+                    <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header='List of Cars'/>
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
-                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand} /></div>
+                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} /></div>
                                 </div>
                                 <div className="ui-grid-row">
                                     <div className="ui-grid-col-4">Vin: </div>
@@ -125,7 +121,7 @@ constructor() {
 }
 
 componentDidMount() {
-    this.setState({ cars: this.carservice.getCarsLarge(this) });
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
 }
 
 `}
@@ -139,35 +135,11 @@ componentDidMount() {
 `}
 </CodeHighlight>
 
-             <h3>Facets</h3>
-            <p>Header and Footer are the two sections aka facets that are capable of displaying custom content.</p>
-<CodeHighlight className="language-javascript">
-{`
-import {DataGrid, Header, Footer} from 'primereact/components/datagrid/DataGrid';
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-markup">
-{`
-<DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={20}>
-    <Header>
-        List of Cars
-    </Header>
-</DataGrid>
-
-`}
-</CodeHighlight>
-
             <h3>Paginator</h3>
             <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
 <CodeHighlight className="language-markup">
 {`
-<DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20}>
-    <Header>
-        List of Cars
-    </Header>
-</DataGrid>
+<DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header="List of Cars"/>
 
 `}
 </CodeHighlight>
@@ -253,6 +225,18 @@ import {DataGrid, Header, Footer} from 'primereact/components/datagrid/DataGrid'
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
                         </tr>
+                        <tr>
+                            <td>header</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Label of header.</td>
+                        </tr>
+                        <tr>
+                            <td>footer</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Label of footer.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -331,7 +315,7 @@ export class DataGridDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsLarge(this) });
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -342,7 +326,7 @@ export class DataGridDemo extends Component {
         return (
             <div style={{ padding: '3px' }} className="ui-g-12 ui-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.gif\`} alt={car.brand} />
+                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
                     <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
@@ -365,17 +349,14 @@ export class DataGridDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
 
-                    <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20}>
-                        <Header>
-                            List of Cars
-                        </Header>
-                    </DataGrid>
+                    <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header='List of Cars'/>
+
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
-                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand} /></div>
+                                    <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand} /></div>
                                 </div>
                                 <div className="ui-grid-row">
                                     <div className="ui-grid-col-4">Vin: </div>

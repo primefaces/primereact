@@ -31,7 +31,7 @@ export class DropdownDemo extends Component {
             return option.label;
         }
         else {
-            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="ui-helper-clearfix">
@@ -190,7 +190,7 @@ carTemplate(option) {
         return option.label;
     }
     else {
-        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="ui-helper-clearfix">
@@ -424,7 +424,7 @@ export class DropdownDemo extends Component {
             return option.label;
         }
         else {
-            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="ui-helper-clearfix">

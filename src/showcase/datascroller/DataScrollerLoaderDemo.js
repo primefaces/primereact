@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DataScroller, Header, Footer } from '../../components/datascroller/DataScroller';
+import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Button } from '../../components/button/Button';
 import { Dialog } from '../../components/dialog/Dialog';
 import { CarService } from '../service/CarService';
@@ -16,7 +16,7 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsMedium(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -24,7 +24,7 @@ export class DataScrollerLoaderDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -69,20 +69,14 @@ export class DataScrollerLoaderDemo extends Component {
 
                 <div className="content-section implementation">
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton}>
-                        <Header>
-                            Click Load Button at Footer to Load More
-                        </Header>
-                        <Footer>
-                            <Button ref={(el) => this.loadButton = el} type="text" icon="fa-refresh" label="Load" />
-                        </Footer>
-                    </DataScroller>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton} footer="Load" header="Click Load Button at Footer to Load More"/>
+                    <Button ref={(el) => this.loadButton = el} type="text" icon="fa-refresh" label="Load" />
 
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+                <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>
@@ -128,7 +122,7 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsMedium(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -136,7 +130,7 @@ export class DataScrollerLoaderDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -181,20 +175,15 @@ export class DataScrollerLoaderDemo extends Component {
 
                 <div className="content-section implementation">
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton}>
-                        <Header>
-                            Click Load Button at Footer to Load More
-                        </Header>
-                        <Footer>
-                            <Button ref={(el) => this.loadButton = el} type="text" icon="fa-refresh" label="Load" />
-                        </Footer>
-                    </DataScroller>
+
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton} footer="Load" header="Click Load Button at Footer to Load More"/>
+                    <Button ref={(el) => this.loadButton = el} type="text" icon="fa-refresh" label="Load" />
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>
