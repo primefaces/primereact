@@ -9,24 +9,49 @@ export class HeaderCell extends Component {
     }
 
     onClick(e) {
-        this.props.onSort({
-            originalEvent: e,
-            sortField: this.props.field
-        });
+        if(this.props.sortable) {
+            this.props.onSort({
+                originalEvent: e,
+                sortField: this.props.field
+            });
+        }
+    }
+
+    getMultiSortMetaData() {
+        if(this.props.multiSortMeta) {
+            for(var i = 0; i < this.props.multiSortMeta.length; i++) {
+                if(this.props.multiSortMeta[i].field === this.props.field) {
+                    return this.props.multiSortMeta[i];
+                }
+            }
+        }
+
+        return null;
     }
 
     render() {
-        var sorted = this.props.sortField === this.props.field;
+        var multiSortMetaData = this.getMultiSortMetaData();
+        var singleSorted = (this.props.field === this.props.sortField);
+        var multipleSorted = multiSortMetaData !== null;
+        var sortOrder = 0;
+
+        if(singleSorted) 
+            sortOrder = this.props.sortOrder;
+        else if(multipleSorted) 
+            sortOrder = multiSortMetaData.order;
+
+        var sorted = this.props.sortable && (singleSorted || multipleSorted);
         var className = classNames('ui-state-default ui-unselectable-text', 
                     {'ui-sortable-column': this.props.sortable, 'ui-state-active': sorted}, this.props.className);
 
         if(this.props.sortable) {
-            var sortIcon = sorted ? this.props.sortOrder < 0 ? 'fa-sort-desc' : 'fa-sort-asc': 'fa-sort';
+            var sortIcon = sorted ? sortOrder < 0 ? 'fa-sort-desc' : 'fa-sort-asc': 'fa-sort';
             var sortIconClassName = classNames('ui-sortable-column-icon fa fa-fw', sortIcon);
         }
 
         return (
-            <th className={className} style={this.props.style} onClick={this.onClick}>
+            <th className={className} style={this.props.style} onClick={this.onClick} 
+                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
                <span className="ui-column-title">{this.props.header}</span>
                <span className={sortIconClassName}></span>
             </th>

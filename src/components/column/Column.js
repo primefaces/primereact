@@ -9,7 +9,9 @@ export class Column extends Component {
         footer: null,
         sortable: false,
         style: null,
-        className: null
+        className: null,
+        rowSpan: null,
+        colSpan: null
     }
 
     static propsTypes = {
@@ -18,6 +20,8 @@ export class Column extends Component {
         footer: PropTypes.string,
         sortable: PropTypes.bool,
         style: PropTypes.object,
-        className: PropTypes.string
+        className: PropTypes.string,
+        rowSpan: PropTypes.number,
+        colSpan: PropTypes.number
     }
 }

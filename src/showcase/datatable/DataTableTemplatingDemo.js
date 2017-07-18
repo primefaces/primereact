@@ -8,7 +8,7 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 
-export class DataTableFacetsDemo extends Component {
+export class DataTableTemplatingDemo extends Component {
 
     constructor() {
         super();
@@ -16,6 +16,25 @@ export class DataTableFacetsDemo extends Component {
             cars: []
         };
         this.carservice = new CarService();
+        this.brandTemplate = this.brandTemplate.bind(this);
+        this.colorTemplate = this.colorTemplate.bind(this);
+        this.actionTemplate = this.actionTemplate.bind(this);
+    }
+
+    colorTemplate(rowData, column) {
+        return <span style={{color: rowData['color']}}>{rowData['color']}</span>;
+    }
+
+    brandTemplate(rowData, column) {
+        var src = "showcase/resources/demo/images/car/" + rowData.brand + ".gif";
+        return <img src={src} />;
+    }
+
+    actionTemplate(rowData, column) {
+        return <div>
+            <Button type="button" icon="fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa-edit" className="ui-button-warning"></Button>
+        </div>;
     }
 
     componentDidMount() {
@@ -33,8 +52,8 @@ export class DataTableFacetsDemo extends Component {
 
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>DataTable - Facets</h1>
-                        <p>DataTable provides header and footer sections.</p>
+                        <h1>DataTable - Templating</h1>
+                        <p>Custom content at header, body and footer sections are supported via templating.</p>
                     </div>
                 </div>
 
@@ -42,8 +61,9 @@ export class DataTableFacetsDemo extends Component {
                     <DataTable value={this.state.cars} header={header} footer={footer}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
+                        <Column field="brand" header="Brand" bodyTemplate={this.brandTemplate} style={{textAlign:'center'}}/>
+                        <Column field="color" header="Color" bodyTemplate={this.colorTemplate} />
+                        <Column bodyTemplate={this.actionTemplate} style={{textAlign:'center', width: '6em'}}/>
                     </DataTable>
                 </div>
             </div>
