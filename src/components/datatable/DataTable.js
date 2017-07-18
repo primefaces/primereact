@@ -45,7 +45,9 @@ export class DataTable extends Component {
         onLazyLoad: null,
         onRowClick: null,
         onRowSelect: null,
-        onRowUnselect: null
+        onRowUnselect: null,
+        onRowExpand: null,
+        onRowCollapse: null
     }
 
     static propTypes = {
@@ -83,7 +85,9 @@ export class DataTable extends Component {
         onLazyLoad: PropTypes.func,
         onRowClick: PropTypes.func,
         onRowSelect: PropTypes.func,
-        onRowUnselect: PropTypes.func
+        onRowUnselect: PropTypes.func,
+        onRowExpand: PropTypes.func,
+        onRowCollapse: PropTypes.func
     };
 
     constructor(props) {
@@ -311,7 +315,10 @@ export class DataTable extends Component {
                         <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
-                                expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}>{this.props.children}</TableBody>
+                                expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
+                                onRowExpand={this.props.onRowExpand} onRowExpand={this.props.onRowExpand}>
+                                    {this.props.children}
+                                </TableBody>
                     </table>
                 </div>
                 {paginatorBottom}
