@@ -10,6 +10,7 @@ export class TableBody extends Component {
         super(props);
         this.onRowClick = this.onRowClick.bind(this);
         this.onRowTouchEnd = this.onRowTouchEnd.bind(this);
+        this.onRowToggle = this.onRowToggle.bind(this);
     }
 
     onRowClick(event) {
@@ -152,6 +153,48 @@ export class TableBody extends Component {
         return index;
     }
 
+    onRowToggle(event) {
+        let expandedRowIndex = this.findExpandedRowIndex(event.data);
+        let expandedRows = this.props.expandedRows ? [...this.props.expandedRows] : [];
+
+        if(expandedRowIndex !== -1) {
+            expandedRows = expandedRows.filter((val,i) => i !== expandedRowIndex);
+
+            if(this.props.onRowCollapse) {
+                this.props.onRowCollapse(event.data);
+            }
+        }
+        else {
+            expandedRows.push(event.data);
+           
+
+            if(this.props.onRowExpand) {
+                this.props.onRowExpand(event.data);
+            }
+        }
+
+        this.props.onRowToggle({
+            data: expandedRows
+        });
+    }
+
+    findExpandedRowIndex(row) {
+        let index = -1;
+        if(this.props.expandedRows) {
+            for(let i = 0; i < this.props.expandedRows.length; i++) {
+                if(this.props.expandedRows[i] == row) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    isRowExpanded(row) {
+        return this.findExpandedRowIndex(row) != -1;
+    }
+
     render() {
         let className = classNames('ui-datatable-data ui-widget-content', {'ui-datatable-hoverable-rows': this.props.selectionMode});
         let rows;
@@ -166,8 +209,20 @@ export class TableBody extends Component {
                     break;
                 }
 
+                
+                let rowData = this.props.value[i];
+                let expanded = this.isRowExpanded(rowData);
                 let rowClassName = this.props.selectionMode ? classNames({'ui-state-highlight': this.isSelected(this.props.value[i])}) : null;
-                rows.push(<BodyRow key={i} rowData={this.props.value[i]} rowIndex={i} onClick={this.onRowClick} onTouchEnd={this.onRowTouchEnd} className={rowClassName}>{this.props.children}</BodyRow>);
+                let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onTouchEnd={this.onRowTouchEnd} 
+                            className={rowClassName} onRowToggle={this.onRowToggle} expanded={expanded}>{this.props.children}</BodyRow>
+
+                rows.push(bodyRow);
+
+                if(expanded) {
+                    let expandedRowContent = this.props.rowExpansionTemplate(rowData);
+                    let expandedRow = <tr className="ui-widget-content" key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
+                    rows.push(expandedRow);
+                }
             }
         }
 

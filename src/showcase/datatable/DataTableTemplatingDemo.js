@@ -26,7 +26,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     brandTemplate(rowData, column) {
-        var src = "showcase/resources/demo/images/car/" + rowData.brand + ".gif";
+        var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
         return <img src={src} />;
     }
 
