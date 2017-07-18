@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
-import { DataList, Header } from '../../components/datalist/DataList';
+import { DataList } from '../../components/datalist/DataList';
 import { Dialog } from '../../components/dialog/Dialog';
 import { CarService } from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -15,7 +15,7 @@ export class DataListDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsLarge(this) });
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -23,7 +23,7 @@ export class DataListDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -67,17 +67,13 @@ export class DataListDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
 
-                    <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5}>
-                        <Header>
-                            List of Cars
-                        </Header>
-                    </DataList>
+                    <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5} header="List of Cars"/>
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>
@@ -141,7 +137,7 @@ constructor() {
 }
 
 componentDidMount() {
-    this.setState({ cars: this.carservice.getCarsLarge(this) });
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
 }
 
 `}
@@ -155,35 +151,11 @@ componentDidMount() {
 `}
 </CodeHighlight>
 
-             <h3>Facets</h3>
-            <p>Header and Footer are the two sections aka facets that are capable of displaying custom content.</p>
-<CodeHighlight className="language-javascript">
-{`
-import {DataList, Header, Footer} from 'primereact/components/datalist/DataList';
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-markup">
-{`
-<DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)}}>
-    <Header>
-        List of Cars
-    </Header>
-</DataList>
-
-`}
-</CodeHighlight>
-
             <h3>Paginator</h3>
             <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
 <CodeHighlight className="language-markup">
 {`
-<DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5}>
-    <Header>
-        List of Cars
-    </Header>
-</DataList>
+<DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5} header="List of Cars"/>
 
 `}
 </CodeHighlight>
@@ -216,6 +188,12 @@ import {DataList, Header, Footer} from 'primereact/components/datalist/DataList'
                             <td>boolean</td>
                             <td>false</td>
                             <td>When specified as true, enables the pagination.</td>
+                        </tr>
+                        <tr>
+                            <td>first</td>
+                            <td>number</td>
+                            <td>0</td>
+                            <td>Number of page to display first data item.</td>
                         </tr>
                         <tr>
                             <td>totalRecords</td>
@@ -264,6 +242,18 @@ import {DataList, Header, Footer} from 'primereact/components/datalist/DataList'
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
+                        <tr>
+                            <td>header</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Label of header.</td>
+                        </tr>
+                        <tr>
+                            <td>footer</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Label of footer.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -347,7 +337,7 @@ export class DataListDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsLarge(this) });
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -355,7 +345,7 @@ export class DataListDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -399,17 +389,14 @@ export class DataListDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
 
-                    <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5}>
-                        <Header>
-                            List of Cars
-                        </Header>
-                    </DataList>
+                    <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5} header="List of Cars"/>
+
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>

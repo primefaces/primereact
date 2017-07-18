@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DataScroller, Header } from '../../components/datascroller/DataScroller';
+import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Dialog } from '../../components/dialog/Dialog';
 import { CarService } from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -15,7 +15,7 @@ export class DataScrollerInlineDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsMedium(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -23,7 +23,7 @@ export class DataScrollerInlineDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -68,17 +68,13 @@ export class DataScrollerInlineDemo extends Component {
 
                 <div className="content-section implementation">
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px">
-                        <Header>
-                            Scroll Down to Load More
-                        </Header>
-                    </DataScroller>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More"/>
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}-big.gif`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>
@@ -124,7 +120,7 @@ export class DataScrollerInlineDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsMedium(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -132,7 +128,7 @@ export class DataScrollerInlineDemo extends Component {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + "-big.gif";
+        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
@@ -177,17 +173,13 @@ export class DataScrollerInlineDemo extends Component {
 
                 <div className="content-section implementation">
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px">
-                        <Header>
-                            Scroll Down to Load More
-                        </Header>
-                    </DataScroller>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More"/>
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}-big.gif\`} alt={this.state.selectedCar.brand}/></div>
+                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand}/></div>
                                     </div>
                                     <div className="ui-grid-row">
                                         <div className="ui-grid-col-4">Vin: </div>

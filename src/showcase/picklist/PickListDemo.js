@@ -14,7 +14,7 @@ export class PickListDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsSmall(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
@@ -24,7 +24,7 @@ export class PickListDemo extends Component {
 
         return (
             <div className="ui-helper-clearfix">
-                <img src={`showcase/resources/demo/images/car/${car.brand}.gif`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
+                <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px',width:48 }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );
@@ -86,7 +86,7 @@ constructor() {
 }
 
 componentDidMount() {
-    this.setState({ cars: this.carservice.getCarsSmall(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
 }
 
 `}
@@ -297,7 +297,7 @@ export class PickListDemo extends Component {
 
         return (
             <div className="ui-helper-clearfix">
-                <img src={\`showcase/resources/demo/images/car/\${car.brand}.gif\`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
+                <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );

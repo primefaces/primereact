@@ -22,11 +22,11 @@ export class ListboxDemo extends Component {
     }
 
     carTemplate(option) {
-        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="ui-helper-clearfix">
-                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} />
+                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
                 <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
             </div>
         );
@@ -142,7 +142,7 @@ render () {
 <CodeHighlight className="language-markup">
 {`
 carTemplate(option) {
-    var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+    var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
     return (
         <div className="ui-helper-clearfix">
@@ -289,7 +289,7 @@ export class ListboxDemo extends Component {
     }
 
     carTemplate(option) {
-        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.gif';
+        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="ui-helper-clearfix">

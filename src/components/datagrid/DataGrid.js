@@ -4,31 +4,12 @@ import ReactDOM from 'react-dom';
 import { Paginator } from '../paginator/Paginator';
 import classNames from 'classnames'
 
-export class Header extends Component {
-    render() {
-        return (
-            <div className="ui-datagrid-header ui-widget-header ui-corner-top">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
-export class Footer extends Component {
-    render() {
-        return (
-            <div className="ui-datagrid-footer ui-widget-header ui-corner-top">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
 export class DataGrid extends Component {
 
     static defaultProps = {
         value: null,
         rows: null,
+        first:0,
         paginator: false,
         totalRecords: null,
         pageLinks: 5,
@@ -38,12 +19,15 @@ export class DataGrid extends Component {
         styleClass: null,
         paginatorPosition: "bottom",
         onLazyLoad: null,
-        itemTemplate: null
+        itemTemplate: null,
+        header:null,
+        footer:null
     }
 
     static propsTypes = {
         value: PropTypes.array,
         rows: PropTypes.number,
+        first:PropTypes.number,
         paginator: PropTypes.bool,
         totalRecords: PropTypes.number,
         pageLinks: PropTypes.number,
@@ -53,127 +37,80 @@ export class DataGrid extends Component {
         styleClass: PropTypes.string,
         paginatorPosition: PropTypes.string,
         onLazyLoad: PropTypes.func,
-        itemTemplate: PropTypes.func
+        itemTemplate: PropTypes.func,
+        header:PropTypes.string,
+        footer:PropTypes.string
     }
 
     constructor(props) {
         super(props);
-        this.state = {};
-        this._first = 0;
-        this._totalRecords = this.props.totalRecords;
-        this._page = 0;
-        this.value = this.props.value;
+        this.state = {first:props.first,rows:props.rows};
+        this.onPageChange=this.onPageChange.bind(this)
     }
 
-    updatePaginator() {
-        //total records
-        this._totalRecords = this.props.lazy ? this._totalRecords : (this.value ? this.value.length : 0);
 
-        //first
-        if (this._totalRecords && this._first >= this._totalRecords) {
-            let numberOfPages = Math.ceil(this._totalRecords / this.rows);
-            this._first = Math.max((numberOfPages - 1) * this.props.rows, 0);
-        }
+    getTotalRecords() {
+
+        return this.props.value ? this.props.lazy ? this.props.totalRecords : this.props.value.length : 0;
     }
 
-    paginate(event) {
-        this._first = event.state.first;
-        this._rows = event.state.rows;
+    createPaginator(position) {
+        var className = 'ui-paginator-' + position;
 
-        if (this.props.lazy) {
-            if(this.props.onLazyLoad) {
-                this.props.onLazyLoad(this.createLazyLoadMetadata())
-            }
-        }
-        else {
-            this.updateDataToRender(this.value);
-        }
+        return <Paginator first={this.state.first} rows={this.state.rows} className={className}
+                          totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} />;
     }
 
-    updateDataToRender(datasource) {
-        if (this.props.paginator && datasource) {
-            this.dataToRender = [];
-            let startIndex = this.props.lazy ? 0 : this._first;
-            for (let i = startIndex; i < (startIndex + this.props.rows); i++) {
-                if (i >= datasource.length) {
-                    break;
-                }
+    onPageChange(event) {
+        this.setState({first:event.first,rows:event.rows});
 
-                this.dataToRender.push(datasource[i]);
-            }
-        }
-        else {
-            this.dataToRender = datasource;
-        }
-
-        this.setState({ dataToRender: this.dataToRender });
-    }
-
-    isEmpty() {
-        return !this.dataToRender || (this.dataToRender.length === 0);
-    }
-
-    createLazyLoadMetadata() {
-        return {
-            first: this._first,
-            rows: this._rows
-        };
-    }
-
-    getBlockableElement() {
-        return this.dataGridEl;
-    }
-
-    updateComponent() {
-        if (this.props.paginator) {
-            this.updatePaginator();
-        }
-        this.updateDataToRender(this.value);
-    }
-
-    componentWillMount() {
-        this.updateComponent();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        var newValue = nextProps.value;
-        if (newValue) {
-            this.value = newValue;
-            
-            this.updateComponent();
-        } 
-    }
-
-    componentDidMount() {
         if (this.props.lazy) {
             if(this.props.onLazyLoad) {
                 this.props.onLazyLoad({
-                    first: this._first,
-                    rows: this._rows
-                });
+                    first: event.first,
+                    rows: event.rows
+                })
             }
         }
     }
 
+    processData() {
+        let dataToRender =  [];
+        if (this.props.paginator && this.props.value) {
+            let startIndex = this.props.lazy ? 0 : this.state.first;
+            for (let i = startIndex; i < (startIndex + this.props.rows); i++) {
+                if (i >= this.props.value.length) {
+                    break;
+                }
+                dataToRender.push(this.props.value[i]);
+            }
+        }
+        else{
+            dataToRender=this.props.value;
+        }
+        return dataToRender;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.props.lazy && nextProps.value === this.props.value)
+            return false;
+        else
+            return true;
+    }
+
     render() {
+        let value=this.processData();
         var styleClass = classNames('ui-datagrid ui-widget', this.props.styleClass);
 
-        var paginator = (<Paginator rows={this.props.rows} first={this._first} totalRecords={this._totalRecords} pageLinkSize={this.props.pageLinks}
-            styleClass="ui-paginator-bottom" rowsPerPageOptions={this.props.rowsPerPageOptions} onPageChange={this.paginate.bind(this)} />),
-            topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) && paginator,
-            bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && paginator;
+        var topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) && this.createPaginator('top'),
+            bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
 
-        var header = React.Children.map(this.props.children, (element, i) => {
-                return (element && element.type === Header) && <Header> {element.props.children}</Header>
-            }),
-            footer = React.Children.map(this.props.children, (element, i) => {
-                return (element && element.type === Footer) && <Footer> {element.props.children}</Footer>
-            }),
+        var header =this.props.header && <div className="ui-datagrid-header ui-widget-header ui-corner-top"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="ui-datagrid-footer ui-widget-header ui-corner-top"> {this.props.footer}</div>,
             content = (
                 <div className="ui-datagrid-content ui-widget-content">
                     <div className="ui-g">
                     {
-                        this.state.dataToRender && this.state.dataToRender.map((val, i) => {
+                        value && value.map((val, i) => {
                             return this.props.itemTemplate ? React.cloneElement(this.props.itemTemplate(val), {key : i + '_datagriditem'}) : <div className="ui-g-12" key={i + '_datagriditem'}>val</div>;
                         })
                     }
