@@ -49,6 +49,7 @@ import {DataTablePaginatorDemo} from './showcase/datatable/DataTablePaginatorDem
 import {DataTableSortDemo} from './showcase/datatable/DataTableSortDemo';
 import {DataTableSelectionDemo} from './showcase/datatable/DataTableSelectionDemo';
 import {DataTableColGroupDemo} from './showcase/datatable/DataTableColGroupDemo';
+import {DataTableRowExpansionDemo} from './showcase/datatable/DataTableRowExpansionDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
@@ -121,6 +122,7 @@ ReactDOM.render(
             <Route path="/datatable/lazy" component={DataTableLazyDemo} />
             <Route path="/datatable/selection" component={DataTableSelectionDemo} />
             <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
+            <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
             <Route path="/orderlist" component={OrderListDemo} />
             <Route path="/picklist" component={PickListDemo} />
             <Route path="/schedule" component={ScheduleDemo} />

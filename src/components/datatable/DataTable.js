@@ -37,12 +37,17 @@ export class DataTable extends Component {
         metaKeySelection: true,
         headerColumnGroup: null,
         footerColumnGroup: null,
+        rowExpansionTemplate: null,
+        expandedRows: null,
+        onRowToggle: null,
         onSort: null,
         onPage: null,
         onLazyLoad: null,
         onRowClick: null,
         onRowSelect: null,
-        onRowUnselect: null
+        onRowUnselect: null,
+        onRowExpand: null,
+        onRowCollapse: null
     }
 
     static propTypes = {
@@ -72,12 +77,17 @@ export class DataTable extends Component {
         metaKeySelection: PropTypes.bool,
         headerColumnGroup: PropTypes.object,
         footerColumnGroup: PropTypes.object,
+        rowExpansionTemplate: PropTypes.func,
+        expandedRows: PropTypes.array,
+        onRowToggle: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
         onLazyLoad: PropTypes.func,
         onRowClick: PropTypes.func,
         onRowSelect: PropTypes.func,
-        onRowUnselect: PropTypes.func
+        onRowUnselect: PropTypes.func,
+        onRowExpand: PropTypes.func,
+        onRowCollapse: PropTypes.func
     };
 
     constructor(props) {
@@ -304,7 +314,11 @@ export class DataTable extends Component {
                         {this.hasFooter() && <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter>}
                         <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
-                                onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}>{this.props.children}</TableBody>
+                                onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                                expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
+                                onRowExpand={this.props.onRowExpand} onRowExpand={this.props.onRowExpand}>
+                                    {this.props.children}
+                                </TableBody>
                     </table>
                 </div>
                 {paginatorBottom}
