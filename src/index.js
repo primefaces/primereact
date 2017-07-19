@@ -68,6 +68,7 @@ import {DataScrollerInfiniteDemo} from './showcase/datascroller/DataScrollerInfi
 import {MenuDemo} from './showcase/menu/MenuDemo';
 import {TabMenuDemo} from './showcase/tabmenu/TabMenuDemo';
 import {BreadcrumbDemo} from './showcase/breadcrumb/BreadcrumbDemo';
+import {TieredMenuDemo} from './showcase/tieredmenu/TieredMenuDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -138,6 +139,7 @@ ReactDOM.render(
             <Route path="/menu" component={MenuDemo} />
             <Route path="/tabmenu" component={TabMenuDemo} />
             <Route path="/breadcrumb" component={BreadcrumbDemo} />
+            <Route path="/tieredmenu" component={TieredMenuDemo} />
             <Route path="/setup" component={SetupPage} />
             <Route path="/splitbutton" component={SplitButtonDemo} />
         </Route>
