@@ -59,6 +59,15 @@ export default class DomHandler {
         return {width: w, height: h};
     }
 
+    static getOffset(el) {
+        var rect = el.getBoundingClientRect();
+
+        return {
+            top: rect.top + document.body.scrollTop,
+            left: rect.left + document.body.scrollLeft
+        };
+    }
+
     static getZindex() {
         this.zindex = this.zindex||1000;
         return this.zindex++;
@@ -99,6 +108,32 @@ export default class DomHandler {
             return element.classList.contains(className);
         else
             return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
+    }
+
+    static find(element, selector) {
+        return element.querySelectorAll(selector);
+    }
+
+    static findSingle(element, selector) {
+        return element.querySelector(selector);
+    }
+
+    static getHeight(el) {
+        let height = el.offsetHeight;
+        let style = getComputedStyle(el);
+
+        height -= parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+
+        return height;
+    }
+
+    static getWidth(el) {
+        let width = el.offsetWidth;
+        let style = getComputedStyle(el);
+
+        width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+
+        return width;
     }
 
     static absolutePosition(element, target) {

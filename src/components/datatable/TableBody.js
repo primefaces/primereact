@@ -208,7 +208,6 @@ export class TableBody extends Component {
                 if(i >= this.props.value.length) {
                     break;
                 }
-
                 
                 let rowData = this.props.value[i];
                 let expanded = this.isRowExpanded(rowData);
