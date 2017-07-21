@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {TieredMenu} from '../../components/tieredmenu/TieredMenu';
+import {Menubar} from '../../components/menubar/Menubar';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {InputText} from "../../components/inputtext/InputText";
 
-export class TieredMenuDemo extends Component {
+export class MenubarDemo extends Component {
 
     constructor() {
         super();
@@ -83,7 +84,6 @@ export class TieredMenuDemo extends Component {
                     }
                 ]
             },
-            {separator:true},
             {
                 label: 'Quit', icon: 'fa-minus'
             }];
@@ -91,27 +91,25 @@ export class TieredMenuDemo extends Component {
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>Tiered Menu</h1>
-                        <p>TieredMenu displays submenus in nested overlays.</p>
+                        <h1>Menubar</h1>
+                        <p>Menubar is an horizontal menu components with support for nested submenus.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
-                    <TieredMenu model={items}/>
-
-                    <h3>Popup</h3>
-                    <TieredMenu model={items} popup={true} ref={el=>this.menu=el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
+                    <Menubar model={items}>
+                        <InputText placeholder="Search" type="text"/>
+                        <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
+                    </Menubar>
                 </div>
 
-                <TieredMenuDoc/>
+                <MenubarDoc/>
 
             </div>
         );
     }
 }
 
-class TieredMenuDoc extends Component {
+class MenubarDoc extends Component {
     render() {
         return (
             <div className="content-section source">
@@ -120,17 +118,107 @@ class TieredMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
+import {Menubar} from 'primereact/components/menubar/Menubar';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>
-                        <p>TieredMenu uses the common menu item api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
+                        <p>Menubar uses the common menu item api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>Component is defined using the TieredMenu element .</p>
+                        <p>Menubar requires nested menuitems as its model.</p>
+                        <CodeHighlight className="language-javascript">
+                            {`
+<Menubar model={items}/>
+
+`}</CodeHighlight>
+                        <CodeHighlight className="language-javascript">
+                            {`
+var items=[
+    {
+        label: 'File',
+        icon: 'fa-file-o',
+        items: [{
+            label: 'New',
+            icon: 'fa-plus',
+            items: [
+                {label: 'Project'},
+                {label: 'Other'},
+            ]
+        },
+            {label: 'Open'},
+            {separator:true},
+            {label: 'Quit'}
+        ]
+    },
+    {
+        label: 'Edit',
+        icon: 'fa-edit',
+        items: [
+            {label: 'Undo', icon: 'fa-mail-forward'},
+            {label: 'Redo', icon: 'fa-mail-reply'}
+        ]
+    },
+    {
+        label: 'Help',
+        icon: 'fa-question',
+        items: [
+            {
+                label: 'Contents'
+            },
+            {
+                label: 'Search',
+                icon: 'fa-search',
+                items: [
+                    {
+                        label: 'Text',
+                        items: [
+                            {
+                                label: 'Workspace'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'File'
+                    }
+                ]}
+        ]
+    },
+    {
+        label: 'Actions',
+        icon: 'fa-gear',
+        items: [
+            {
+                label: 'Edit',
+                icon: 'fa-refresh',
+                items: [
+                    {label: 'Save', icon: 'fa-save'},
+                    {label: 'Update', icon: 'fa-save'},
+                ]
+            },
+            {
+                label: 'Other',
+                icon: 'fa-phone',
+                items: [
+                    {label: 'Delete', icon: 'fa-minus'}
+                ]
+            }
+        ]
+    },
+    {
+        label: 'Quit', icon: 'fa-minus'
+    }
+];
+
+`}</CodeHighlight>
+
+                        <h3>Custom Content</h3>
+                        <p>Custom content can be placed between Menubar tags.</p>
                         <CodeHighlight className="language-markup">
                             {`
-<TieredMenu model={items}/>
+<Menubar model={items}>
+    <InputText placeholder="Search" type="text"/>
+    <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
+</Menubar>
 
 `}
                         </CodeHighlight>
@@ -145,19 +233,12 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
                                     <th>Description</th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
                                 <tr>
                                     <td>model</td>
                                     <td>array</td>
                                     <td>null</td>
                                     <td>An array of menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>popup</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>Defines if menu would displayed as a popup.</td>
                                 </tr>
                                 <tr>
                                     <td>style</td>
@@ -170,35 +251,6 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Style class of the component.</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <h3>Methods</h3>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>toggle</td>
-                                    <td>event: browser event</td>
-                                    <td>Toggles the visibility of the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>show</td>
-                                    <td>event: browser event</td>
-                                    <td>Displays the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>hide</td>
-                                    <td>-</td>
-                                    <td>Hides the popup menu.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -216,7 +268,7 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>ui-tieredmenu</td>
+                                    <td>ui-menubar</td>
                                     <td>Container element.</td>
                                 </tr>
                                 <tr>
@@ -248,13 +300,13 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/tieredmenu" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/menubar" className="btn-viewsource" target="_blank">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
-export class TieredMenuDemo extends Component {
+export class MenubarDemo extends Component {
 
     constructor() {
         super();
@@ -332,7 +384,6 @@ export class TieredMenuDemo extends Component {
                     }
                 ]
             },
-            {separator:true},
             {
                 label: 'Quit', icon: 'fa-minus'
             }];
@@ -340,20 +391,18 @@ export class TieredMenuDemo extends Component {
             <div>
                 <div className="content-section">
                     <div className="feature-intro">
-                        <h1>Tiered Menu</h1>
-                        <p>TieredMenu displays submenus in nested overlays.</p>
+                        <h1>Menubar</h1>
+                        <p>Menubar is an horizontal menu components with support for nested submenus.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
-                    <TieredMenu model={items}/>
-
-                    <h3>Popup</h3>
-                    <TieredMenu model={items} popup={true} ref={el=>this.menu=el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
+                    <Menubar model={items}>
+                        <InputText placeholder="Search" type="text"/>
+                        <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
+                    </Menubar>
                 </div>
 
-                <TieredMenuDoc/>
+                <MenubarDoc/>
 
             </div>
         );

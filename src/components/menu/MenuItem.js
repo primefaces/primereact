@@ -7,14 +7,16 @@ export class MenuItem extends Component{
         index:null,
         items:null,
         menu:null,
-        parentMenu:null
+        parentMenu:null,
+        root:false,
     };
 
     static propTypes = {
         index:PropTypes.number,
         items:PropTypes.any,
         menu:PropTypes.any,
-        parentMenu:PropTypes.string
+        parentMenu:PropTypes.string,
+        root:PropTypes.bool
     };
 
     constructor(props) {
@@ -25,14 +27,16 @@ export class MenuItem extends Component{
     }
 
     render() {
-        var styleClass=classNames('ui-menuitem-link ui-corner-all',{'ui-state-disabled':this.item.disabled})
-        var iconClass=classNames('ui-menuitem-icon fa fa-fw',this.item.icon?this.item.icon:null)
+        var styleClass=classNames('ui-menuitem-link ui-corner-all',{'ui-state-disabled':this.item.disabled});
+        var iconClass=classNames('ui-menuitem-icon fa fa-fw',this.item.icon?this.item.icon:null);
+        var rootClass=classNames('ui-submenu-icon fa fa-fw',{' fa-caret-down':this.props.root},{' fa-caret-right':!this.props.root})
         if(this.item.url){
             return (
                 <a href={this.item.url || '#'} className={styleClass} target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
                     {this.item.items && this.props.parentMenu==='TieredMenu' && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
+                    {this.item.items && this.props.parentMenu==='Menubar' && <span className={rootClass}></span>}
                 </a>
             );
         }
@@ -42,6 +46,7 @@ export class MenuItem extends Component{
                     {this.item.items && this.props.parentMenu==='TieredMenu' && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
+                    {this.item.items && this.props.parentMenu==='Menubar' && <span className={rootClass}></span>}
                 </a>
             );
         }
