@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {CarService} from '../service/CarService';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 
 export class DataTableRowExpansionDemo extends Component {
@@ -27,7 +24,7 @@ export class DataTableRowExpansionDemo extends Component {
 
         return  <div className="ui-g ui-fluid">
                     <div className="ui-g-12 ui-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
-                        <img src={src} />
+                        <img src={src} alt={data.brand}/>
                     </div>
                      <div className="ui-g-12 ui-md-9">
                        <div className="ui-g">

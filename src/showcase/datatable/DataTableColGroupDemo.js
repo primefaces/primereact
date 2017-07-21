@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {ColumnGroup} from '../../components/columngroup/ColumnGroup';
 import {Row} from '../../components/row/Row';
-import {CarService} from '../service/CarService';
-import {Button} from '../../components/button/Button';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 
 export class DataTableColGroupDemo extends Component {

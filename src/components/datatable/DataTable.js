@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {Paginator} from '../paginator/Paginator';
-import {Column} from '../column/Column';
 import {TableHeader} from './TableHeader';
 import {TableBody} from './TableBody';
 import {TableFooter} from './TableFooter';
@@ -318,7 +317,7 @@ export class DataTable extends Component {
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                                 expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                                onRowExpand={this.props.onRowExpand} onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
+                                onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
                                     {this.props.children}
                                 </TableBody>
                     </table>

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {CarService} from '../service/CarService';
 import {Button} from '../../components/button/Button';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 
 export class DataTableTemplatingDemo extends Component {
@@ -27,7 +24,7 @@ export class DataTableTemplatingDemo extends Component {
 
     brandTemplate(rowData, column) {
         var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} />;
+        return <img src={src} alt={rowData.brand}/>;
     }
 
     actionTemplate(rowData, column) {

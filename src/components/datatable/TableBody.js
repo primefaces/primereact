@@ -182,7 +182,7 @@ export class TableBody extends Component {
         let index = -1;
         if(this.props.expandedRows) {
             for(let i = 0; i < this.props.expandedRows.length; i++) {
-                if(this.props.expandedRows[i] == row) {
+                if(this.props.expandedRows[i] === row) {
                     index = i;
                     break;
                 }
@@ -192,7 +192,7 @@ export class TableBody extends Component {
     }
 
     isRowExpanded(row) {
-        return this.findExpandedRowIndex(row) != -1;
+        return this.findExpandedRowIndex(row) !== -1;
     }
 
     render() {
