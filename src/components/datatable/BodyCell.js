@@ -20,7 +20,8 @@ export class BodyCell extends Component {
     } 
 
     render() {
-        let content;
+        let content, header;
+
         if(this.props.expander) {
             let iconClassName = classNames('ui-row-toggler fa fa-fw ui-clickable', {'fa-chevron-circle-down': this.props.expanded, 'fa-chevron-circle-right': !this.props.expanded});
             content = <a href="#" onClick={this.onExpanderClick}>
@@ -33,9 +34,14 @@ export class BodyCell extends Component {
             else
                 content = ObjectUtils.resolveFieldData(this.props.rowData, this.props.field);
         }
+
+        if(this.props.responsive) {
+            header = <span className="ui-column-title">{this.props.header}</span>;
+        }
        
         return (
             <td className={this.props.className} style={this.props.style}>
+                {header}
                <span className="ui-cell-data">{content}</span>
             </td>
         );

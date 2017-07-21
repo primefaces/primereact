@@ -39,6 +39,7 @@ export class DataTable extends Component {
         footerColumnGroup: null,
         rowExpansionTemplate: null,
         expandedRows: null,
+        responsive: false,
         onRowToggle: null,
         onSort: null,
         onPage: null,
@@ -79,6 +80,7 @@ export class DataTable extends Component {
         footerColumnGroup: PropTypes.object,
         rowExpansionTemplate: PropTypes.func,
         expandedRows: PropTypes.array,
+        responsive: PropTypes.bool,
         onRowToggle: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -298,7 +300,7 @@ export class DataTable extends Component {
 
     render() {
         let value = this.processData();
-        let className = classNames('ui-datatable ui-widget', this.props.className);
+        let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
@@ -316,7 +318,7 @@ export class DataTable extends Component {
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                                 expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                                onRowExpand={this.props.onRowExpand} onRowExpand={this.props.onRowExpand}>
+                                onRowExpand={this.props.onRowExpand} onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
                                     {this.props.children}
                                 </TableBody>
                     </table>
