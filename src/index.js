@@ -74,6 +74,7 @@ import {BreadcrumbDemo} from './showcase/breadcrumb/BreadcrumbDemo';
 import {TieredMenuDemo} from './showcase/tieredmenu/TieredMenuDemo';
 import {MenubarDemo} from './showcase/menubar/MenubarDemo';
 import {ContextMenuDemo} from './showcase/contextmenu/ContextMenuDemo';
+import {OrganizationChartDemo} from './showcase/organizationchart/OrganizationChartDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -152,6 +153,7 @@ ReactDOM.render(
             <Route path="/contextmenu" component={ContextMenuDemo} />
             <Route path="/setup" component={SetupPage} />
             <Route path="/splitbutton" component={SplitButtonDemo} />
+            <Route path="/organizationchart" component={OrganizationChartDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
