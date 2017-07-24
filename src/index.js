@@ -71,6 +71,7 @@ import {TabMenuDemo} from './showcase/tabmenu/TabMenuDemo';
 import {BreadcrumbDemo} from './showcase/breadcrumb/BreadcrumbDemo';
 import {TieredMenuDemo} from './showcase/tieredmenu/TieredMenuDemo';
 import {MenubarDemo} from './showcase/menubar/MenubarDemo';
+import {ContextMenuDemo} from './showcase/contextmenu/ContextMenuDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -144,6 +145,7 @@ ReactDOM.render(
             <Route path="/breadcrumb" component={BreadcrumbDemo} />
             <Route path="/tieredmenu" component={TieredMenuDemo} />
             <Route path="/menubar" component={MenubarDemo} />
+            <Route path="/contextmenu" component={ContextMenuDemo} />
             <Route path="/setup" component={SetupPage} />
             <Route path="/splitbutton" component={SplitButtonDemo} />
         </Route>

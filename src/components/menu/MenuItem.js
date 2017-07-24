@@ -33,7 +33,7 @@ export class MenuItem extends Component{
         if(this.item.url){
             return (
                 <a href={this.item.url || '#'} className={styleClass} target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
-                    {this.item.items && this.props.parentMenu==='TieredMenu' && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
+                    {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
                     {this.item.items && this.props.parentMenu==='Menubar' && <span className={rootClass}></span>}
@@ -43,7 +43,7 @@ export class MenuItem extends Component{
         else{
             return (
                 <a className={styleClass} href="#" target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
-                    {this.item.items && this.props.parentMenu==='TieredMenu' && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
+                    {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
                     {this.item.items && this.props.parentMenu==='Menubar' && <span className={rootClass}></span>}

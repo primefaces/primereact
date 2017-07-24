@@ -230,6 +230,7 @@ class AppMenu extends Component {
                             <Link to="/breadcrumb">&#9679; Breadcrumb</Link>
                             <Link to="/tieredmenu">&#9679; TieredMenu</Link>
                             <Link to="/menubar">&#9679; Menubar</Link>
+                            <Link to="/contextmenu">&#9679; ContextMenu</Link>
                         </div>
 
                         <a href="#" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>

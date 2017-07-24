@@ -148,6 +148,25 @@ export default class DomHandler {
         element.style.top = top + 'px';
         element.style.left = left + 'px';
     }
+    static getHiddenElementOuterHeight(element) {
+        element.style.visibility = 'hidden';
+        element.style.display = 'block';
+        let elementHeight = element.offsetHeight;
+        element.style.display = 'none';
+        element.style.visibility = 'visible';
+
+        return elementHeight;
+    }
+
+    static getHiddenElementOuterWidth(element) {
+        element.style.visibility = 'hidden';
+        element.style.display = 'block';
+        let elementWidth = element.offsetWidth;
+        element.style.display = 'none';
+        element.style.visibility = 'visible';
+
+        return elementWidth;
+    }
 
     static getHiddenElementDimensions(element) {
         var dimensions = {};
