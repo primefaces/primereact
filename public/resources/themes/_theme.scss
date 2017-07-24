@@ -65,6 +65,8 @@
     filter:Alpha(Opacity=50); 
 }
 
+.ui-widget-header .ui-state-default,
+.ui-widget-content .ui-state-default,
 .ui-state-default { 
     border: $stateDefaultBorderWidth solid $stateDefaultBorderColor; 
     background: $stateDefaultBgColor; 
@@ -75,6 +77,8 @@
     }
 }
 
+.ui-widget-header .ui-state-active,
+.ui-widget-content .ui-state-active,
 .ui-state-active {
     border-color: $stateActiveBorderColor;
     background: $stateActiveBgColor; 
@@ -85,6 +89,8 @@
     }
 }
 
+.ui-widget-header .ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
 .ui-state-highlight  {
     border-color: $stateHighlightBorderColor;
     background: $stateHighlightBgColor;
@@ -95,6 +101,8 @@
     }
 }
 
+.ui-widget-header .ui-state-focus,
+.ui-widget-content .ui-state-focus,
 .ui-state-focus {
     border-color: $stateFocusBorderColor;
     background: $stateFocusBgColor;
@@ -105,6 +113,8 @@
     }
 }
 
+.ui-widget-header .ui-state-error,
+.ui-widget-content .ui-state-error,
 .ui-state-error {
     border-color: $stateErrorBorderColor;
     background: $stateErrorBgColor;
@@ -154,7 +164,6 @@
         
         &.ui-state-focus {
             border-color: $stateFocusBorderColor;
-            
         }
     }
 }
@@ -172,15 +181,12 @@
 }
 
 .ui-button:focus,
-.ui-button:enabled:hover,
-.ui-button.ui-state-focus,
-.ui-button:not(.ui-state-disabled):hover {
+.ui-button:enabled:hover {
     outline: 0 none;
     @include hover-element();
 }
 
-.ui-button:enabled:active,
-.ui-button.ui-state-active {
+.ui-button:enabled:active {
     border-color: $stateActiveBorderColor;
     background: $stateActiveBgColor; 
     color: $stateActiveTextColor;
@@ -214,14 +220,6 @@
     &:not(.ui-state-disabled) {
         .ui-listbox-item:not(.ui-state-highlight):hover {
             @include hover-element();
-        }
-    }
-    
-    &.ui-state-disabled {
-        .ui-chkbox-box:not(.ui-state-active):hover {
-            border-color: $stateDefaultBorderColor; 
-            background: $stateDefaultBgColor; 
-            color: $stateDefaultTextColor;
         }
     }
 }
@@ -297,25 +295,6 @@
     .ui-picklist-item:not(.ui-state-highlight):hover {
         @include hover-element();
     }
-    
-    .ui-picklist-droppoint-highlight {
-        border-color: $stateHighlightBorderColor;
-        background: $stateHighlightBgColor;
-        color: darken($contentTextColor,1%);
-        
-        a {
-            color: darken($contentTextColor,1%);
-        }
-    }
-    
-    .ui-picklist-highlight {
-        border-color: $stateHighlightBorderColor;
-        color: darken($contentTextColor,1%);
-        
-        a {
-            color: darken($contentTextColor,1%);
-        }
-    }
 }
 
 .ui-tree {
@@ -354,14 +333,6 @@
     .ui-treetable-row.ui-treetable-row-selectable:not(.ui-state-highlight):hover {
         background: $stateHoverBgColor;
         color: $stateHoverTextColor;
-    }
-}
-
-.ui-organizationchart {
-    .ui-organizationchart-node-content {
-        &.ui-organizationchart-selectable-node:not(.ui-state-highlight):hover {
-            @include hover-element();
-        }
     }
 }
 
@@ -463,7 +434,6 @@
     .ui-panelmenu-header {
         &:not(.ui-state-active):hover {
             @include hover-element();
-            border-color: $stateDefaultBorderColor;
             
             a {
                 color: $stateHoverTextColor;
@@ -532,32 +502,6 @@
         color: $inputTextColor;
     }
 }
-
-.ui-organizationchart {
-    .ui-organizationchart-line-down {
-        background-color: darken($contentBorderColor, 10%);
-    }
-    
-    .ui-organizationchart-line-left {
-        border-right: 1px solid darken($contentBorderColor, 10%);
-    }
-    
-    .ui-organizationchart-line-right {
-        
-    }
-    
-    .ui-organizationchart-line-top {
-        border-top: 1px solid darken($contentBorderColor, 10%);
-    }
-    
-    .ui-organizationchart-node-content {
-        border-color: darken($contentBorderColor, 10%);
-    }
-    
-    .ui-organizationchart-node-content .ui-node-toggler {
-        color: darken($contentBorderColor, 10%);
-    }
-} 
 
 /* Validation */
 .ui-inputtext.ng-dirty.ng-invalid,

@@ -146,7 +146,7 @@ $invalidInputBorderColor: #f44336;
 .ui-spinner:not(.ui-state-disabled) .ui-spinner-button:enabled:active {
     border: 1px solid #156090;
     background: #186ba0;
-    color: #ffffff;
+    color: #ffffff,
 }
 
 .ui-slider { position: relative; text-align: left; background: #838688; border: none; -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6) inset; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6) inset; box-shadow: 0 1px 3px rgba(0,0,0,0.6) inset;}
@@ -155,13 +155,13 @@ $invalidInputBorderColor: #f44336;
 .ui-slider .ui-slider-handle.ui-state-active { background-position: -17px 0; }
 
 .ui-slider-horizontal { height: 6px; }
-.ui-slider-horizontal .ui-slider-handle { top: -2px !important; margin-left: -.6em; }
+.ui-slider-horizontal .ui-slider-handle { top: -3px !important; margin-left: -.6em; }
 .ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
 .ui-slider-horizontal .ui-slider-range-min { left: 0; }
 .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
 .ui-slider-vertical { width: .8em; height: 100px; }
-.ui-slider-vertical .ui-slider-handle { left: -.1em !important; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-handle { left: -.2em !important; margin-left: 0; margin-bottom: -.6em; }
 .ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
 .ui-slider-vertical .ui-slider-range-max { top: 0; }
@@ -175,9 +175,8 @@ $invalidInputBorderColor: #f44336;
 	color: #222222;
 }
 
-.ui-widget-header .ui-button,		
+.ui-widget-header .ui-button,
 .ui-widget-content .ui-button,
-.ui-widget.ui-button,
 .ui-button {
 	border: 1px solid #2399e5;
 	color: #FFFFFF;
@@ -187,8 +186,6 @@ $invalidInputBorderColor: #f44336;
     transition: background-color .2s;
     
     &:enabled:hover,
-    &.ui-state-focus,
-    &:not(.ui-state-disabled):hover,
     &:focus {
         border: 1px solid #1f89ce;
     	background: #1f89ce;
@@ -196,11 +193,10 @@ $invalidInputBorderColor: #f44336;
         color: #ffffff;
     }
     
-    &:enabled:active,
-    &:not(.ui-state-disabled):active {
+    &:enabled:active {
         border: 1px solid #156090;
     	background: #186ba0;
-        color: #ffffff;
+        color: #ffffff,
     }
 }
 
@@ -344,11 +340,11 @@ $invalidInputBorderColor: #f44336;
    color: #212121;
 }
 
-.ui-togglebutton.ui-button.ui-state-focus,
-.ui-selectbutton .ui-button.ui-state-focus.ui-state-active  {
+.ui-togglebutton.ui-button.ui-state-focus {
     -moz-box-shadow: 0px 0px 5px #1f89ce;
 	-webkit-box-shadow: 0px 0px 5px #1f89ce;
 	box-shadow: 0px 0px 5px #1f89ce;
+    background: #ffffff; 
 }
 
 .ui-togglebutton.ui-button.ui-state-active,
