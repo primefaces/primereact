@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {Paginator} from '../paginator/Paginator';
-import {Column} from '../column/Column';
 import {TableHeader} from './TableHeader';
 import {TableBody} from './TableBody';
 import {TableFooter} from './TableFooter';
 import ObjectUtils from '../utils/ObjectUtils';
+import DomHandler from '../utils/DomHandler';
 
 export class DataTable extends Component {
 
@@ -39,7 +40,11 @@ export class DataTable extends Component {
         footerColumnGroup: null,
         rowExpansionTemplate: null,
         expandedRows: null,
+        responsive: false,
         onRowToggle: null,
+        resizableColumns: false,
+        columnResizeMode: 'fit',
+        onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
         onLazyLoad: null,
@@ -80,6 +85,10 @@ export class DataTable extends Component {
         rowExpansionTemplate: PropTypes.func,
         expandedRows: PropTypes.array,
         onRowToggle: PropTypes.func,
+        responsive: PropTypes.bool,
+        resizableColumns: PropTypes.bool,
+        columnResizeMode: PropTypes.string,
+        onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
         onLazyLoad: PropTypes.func,
@@ -101,6 +110,7 @@ export class DataTable extends Component {
         };
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
+        this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
     }
 
     onPageChange(event) {
@@ -240,20 +250,6 @@ export class DataTable extends Component {
         return (this.state.multiSortMeta[index].order * result);
     }
 
-    processData() {
-        let data = this.props.value;
-        if(!this.props.lazy) {
-            if(this.state.sortField || this.state.multiSortMeta) {
-                if(this.props.sortMode === 'single')
-                    data = this.sortSingle(data);
-                else if(this.props.sortMode === 'multiple')
-                    data = this.sortMultiple(data);
-            }
-        }
-
-        return data;
-    }
-
     shouldComponentUpdate(nextProps, nextState) {
         if(this.props.lazy && nextProps.value === this.props.value)
             return false;
@@ -271,6 +267,19 @@ export class DataTable extends Component {
                 multiSortMeta: this.props.multiSortField
             });
         }
+    }
+
+    componentDidUpdate() {
+        if(this.props.resizableColumns) {
+            this.fixColumnWidths();
+        }
+    }
+
+    fixColumnWidths() {
+        let columns = DomHandler.find(this.container, 'th.ui-resizable-column');
+        columns.forEach((col) => {
+            col.style.width = col.offsetWidth + 'px';
+        });
     }
 
     hasFooter() {
@@ -296,33 +305,154 @@ export class DataTable extends Component {
         }
     }
 
+
+    onColumnResizeStart(event) {
+        this.fixColumnWidths();
+        let containerLeft = DomHandler.getOffset(this.container).left;
+        this.resizeColumn = event.columnEl;
+        this.columnResizing = true;
+        this.lastResizerHelperX = (event.originalEvent.pageX - containerLeft + this.container.scrollLeft);
+
+        this.bindColumnResizeEvents();
+    }
+
+    onColumnResize(event) {
+        let containerLeft = DomHandler.getOffset(this.container).left;
+        DomHandler.addClass(this.container, 'ui-unselectable-text');
+        this.resizerHelper.style.height = this.container.offsetHeight + 'px';
+        this.resizerHelper.style.top = 0 + 'px';
+        this.resizerHelper.style.left = (event.pageX - containerLeft + this.container.scrollLeft) + 'px';
+        
+        this.resizerHelper.style.display = 'block';
+    }
+
+    onColumnResizeEnd(event) {
+        let delta = this.resizerHelper.offsetLeft - this.lastResizerHelperX;
+        let columnWidth = this.resizeColumn.offsetWidth;
+        let newColumnWidth = columnWidth + delta;
+        let minWidth = this.resizeColumn.style.minWidth||15;
+
+        if(columnWidth + delta > parseInt(minWidth, 10)) {
+            if(this.props.columnResizeMode === 'fit') {
+                let nextColumn = this.resizeColumn.nextElementSibling;
+                let nextColumnWidth = nextColumn.offsetWidth - delta;
+                
+                if(newColumnWidth > 15 && nextColumnWidth > 15) {
+                    this.resizeColumn.style.width = newColumnWidth + 'px';
+                    if(nextColumn) {
+                        nextColumn.style.width = nextColumnWidth + 'px';
+                    }
+                    
+                    /*if(this.scrollable) {
+                        let colGroup = this.domHandler.findSingle(this.el.nativeElement, 'colgroup.ui-datatable-scrollable-colgroup');
+                        let resizeColumnIndex = this.domHandler.index(this.resizeColumn);
+                        colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
+                        
+                        if(nextColumn) {
+                            colGroup.children[resizeColumnIndex + 1].style.width = nextColumnWidth + 'px';
+                        }
+                    }*/
+                }
+            }
+            else if(this.props.columnResizeMode === 'expand') {
+                this.table.style.width = this.table.offsetWidth + delta + 'px';
+                this.resizeColumn.style.width = newColumnWidth + 'px';
+                let containerWidth = this.table.style.width;
+                
+                if(this.scrollable) {
+                    /*this.domHandler.findSingle(this.el.nativeElement, '.ui-datatable-scrollable-header-box').children[0].style.width = containerWidth;
+                    let colGroup = this.domHandler.findSingle(this.el.nativeElement, 'colgroup.ui-datatable-scrollable-colgroup');
+                    let resizeColumnIndex = this.domHandler.index(this.resizeColumn);
+                    colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';*/
+                }
+                else {
+                    this.container.style.width = containerWidth;
+                }
+            }    
+            
+            if(this.props.onColumnResizeEnd) {
+                this.props.onColumnResizeEnd({
+                    element: this.resizeColumn,
+                    delta: delta
+                });
+            }
+        }
+                
+        this.resizerHelper.style.display = 'none';
+        this.resizeColumn = null;
+        DomHandler.removeClass(this.container, 'ui-unselectable-text');
+
+        this.unbindColumnResizeEvents();
+    }
+
+    bindColumnResizeEvents() {
+        this.documentColumnResizeListener = document.addEventListener('mousemove', (event) => {
+            if(this.columnResizing) {
+                this.onColumnResize(event);
+            }
+        });
+        
+        this.documentColumnResizeEndListener = document.addEventListener('mouseup', (event) => {
+            if(this.columnResizing) {
+                this.columnResizing = false;
+                this.onColumnResizeEnd(event);
+            }
+        });
+    }
+
+    unbindColumnResizeEvents() {
+        document.removeEventListener('document', this.documentColumnResizeListener);
+        document.removeEventListener('document', this.documentColumnResizeEndListener);
+    }
+
+    processData() {
+        let data = this.props.value;
+        if(!this.props.lazy) {
+            if(this.state.sortField || this.state.multiSortMeta) {
+                if(this.props.sortMode === 'single')
+                    data = this.sortSingle(data);
+                else if(this.props.sortMode === 'multiple')
+                    data = this.sortMultiple(data);
+            }
+        }
+
+        return data;
+    }
+
     render() {
         let value = this.processData();
-        let className = classNames('ui-datatable ui-widget', this.props.className);
+        let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
+        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>
 
         return (
-            <div className={className} style={this.props.style}>
+            <div className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
                 {headerFacet}
                 {paginatorTop}
                 <div className="ui-datatable-tablewrapper">
-                    <table style={this.props.tableStyle} className={this.props.tableClassName}>
-                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}>{this.props.children}</TableHeader>
+                    <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
+                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart}>
+                            {this.props.children}
+                        </TableHeader>
+                        
                         {this.hasFooter() && <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter>}
-                        <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+
+                        <TableBody ref={(el) => {this.tbody = ReactDOM.findDOMNode(el)}} value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                                 expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                                onRowExpand={this.props.onRowExpand} onRowExpand={this.props.onRowExpand}>
-                                    {this.props.children}
-                                </TableBody>
+                                onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
+                                {this.props.children}
+                        </TableBody>
                     </table>
                 </div>
                 {paginatorBottom}
                 {footerFacet}
+                {resizeHelper}
             </div>
         );
     }

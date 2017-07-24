@@ -50,6 +50,8 @@ import {DataTableSortDemo} from './showcase/datatable/DataTableSortDemo';
 import {DataTableSelectionDemo} from './showcase/datatable/DataTableSelectionDemo';
 import {DataTableColGroupDemo} from './showcase/datatable/DataTableColGroupDemo';
 import {DataTableRowExpansionDemo} from './showcase/datatable/DataTableRowExpansionDemo';
+import {DataTableColResizeDemo} from './showcase/datatable/DataTableColResizeDemo';
+import {DataTableResponsiveDemo} from './showcase/datatable/DataTableResponsiveDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
@@ -125,6 +127,8 @@ ReactDOM.render(
             <Route path="/datatable/selection" component={DataTableSelectionDemo} />
             <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
             <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
+            <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
+            <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
             <Route path="/orderlist" component={OrderListDemo} />
             <Route path="/picklist" component={PickListDemo} />
             <Route path="/schedule" component={ScheduleDemo} />

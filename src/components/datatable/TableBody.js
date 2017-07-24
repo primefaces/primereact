@@ -182,7 +182,7 @@ export class TableBody extends Component {
         let index = -1;
         if(this.props.expandedRows) {
             for(let i = 0; i < this.props.expandedRows.length; i++) {
-                if(this.props.expandedRows[i] == row) {
+                if(this.props.expandedRows[i] === row) {
                     index = i;
                     break;
                 }
@@ -192,7 +192,7 @@ export class TableBody extends Component {
     }
 
     isRowExpanded(row) {
-        return this.findExpandedRowIndex(row) != -1;
+        return this.findExpandedRowIndex(row) !== -1;
     }
 
     render() {
@@ -208,13 +208,12 @@ export class TableBody extends Component {
                 if(i >= this.props.value.length) {
                     break;
                 }
-
                 
                 let rowData = this.props.value[i];
                 let expanded = this.isRowExpanded(rowData);
                 let rowClassName = this.props.selectionMode ? classNames({'ui-state-highlight': this.isSelected(this.props.value[i])}) : null;
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onTouchEnd={this.onRowTouchEnd} 
-                            className={rowClassName} onRowToggle={this.onRowToggle} expanded={expanded}>{this.props.children}</BodyRow>
+                            className={rowClassName} onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);
 

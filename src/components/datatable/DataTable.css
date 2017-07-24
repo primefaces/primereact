@@ -178,7 +178,7 @@
 
 .ui-datatable-resizable {
     padding-bottom: 1px;     /*fix for webkit overlow*/
-    overflow:auto;
+    overflow: auto;
 }
 
 .ui-datatable-resizable thead th,

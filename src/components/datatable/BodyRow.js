@@ -30,7 +30,7 @@ export class BodyRow extends Component {
         let columns = React.Children.toArray(this.props.children);
         let className = classNames('ui-widget-content', {'ui-datatable-odd': (this.props.rowIndex % 2 === 1)}, this.props.className);
         let cells = React.Children.map(columns, (column, i) => {
-                        return <BodyCell key={i} {...column.props} rowData={this.props.rowData} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}/>;
+                        return <BodyCell key={i} {...column.props} rowData={this.props.rowData} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} responsive={this.props.responsive}/>;
                     });
 
         return (
