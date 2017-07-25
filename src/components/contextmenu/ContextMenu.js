@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {NestedMenu} from "../nestedmenu/NestedMenu";
@@ -127,9 +126,9 @@ export class ContextMenu extends Component {
         var divClass=classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow',
             this.props.styleClass);
         var ulClass=classNames('ui-menu-list ui-helper-reset');
-        var styleClass={};
+        var menuStyle=Object.assign({display:this.state.visible?'block':'none'},this.props.style)
         return (
-            <div className={divClass} style={{display:this.state.visible?'block':'none'&& this.props.style}} ref={el=>this.container=el} >
+            <div className={divClass} style={menuStyle} ref={el=>this.container=el} >
                 <NestedMenu styleClass={ulClass} items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
             </div>
         );
