@@ -18,8 +18,8 @@ class Home extends Component {
                     <div className="ui-g-12">
                         <h1 className="homepage-title">PRIME<span>REACT</span></h1>
 
-                        <p>PrimeReact is a collection of rich UI components for React. PrimeReact is a sibling of the popular
-                            <a href="https://www.primefaces.org/primeng">PrimeNG</a> (Angular) and <a href="https://www.primefaces.org/showcase">PrimeFaces</a> (JSF) components suites. All widgets are open source and free to use under MIT License.</p>
+                        <p>PrimeReact is a collection of rich UI components for React. 
+                            PrimeReact is a sibling of the popular <a href="https://www.primefaces.org/primeng">PrimeNG</a> (Angular) and <a href="https://www.primefaces.org/showcase">PrimeFaces</a> (JSF) components suites. All widgets are open source and free to use under MIT License.</p>
 
                         <p>PrimeReact is developed by <a href="http://www.primetek.com.tr">PrimeTek Informatics</a>, a company with years of expertise in developing open source UI components. For project news and updates, follow us on twitter.</p>
 
