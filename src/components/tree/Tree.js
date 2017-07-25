@@ -7,25 +7,33 @@ export class TreeNode extends Component {
     static defaultProps = {
         node: null,
         index: null,
-        tree: null,
         parentNode: null,
-        root: null
+        root: false,
+        isHorizontal: false,
+        selectionMode: null,
+        onNodeTouchEnd: null,
+        onNodeClick: null,
+        isSelected: null
     }
 
     static propsTypes = {
         node: PropTypes.any,
         index: PropTypes.string,
-        tree: PropTypes.any,
         parentNode: PropTypes.any,
-        root: PropTypes.bool
+        root: PropTypes.bool,
+        isHorizontal: PropTypes.bool,
+        selectionMode: PropTypes.string,
+        onNodeTouchEnd: PropTypes.func,
+        onNodeClick: PropTypes.func,
+        isSelected: PropTypes.func
     }
 
     constructor(props) {
         super(props);
         this.node = this.props.node;
         this.node.parent = this.props.parentNode;
-        this.tree = this.props.tree;
         this.state = { expanded: this.node.expanded };
+        this.toggle = this.toggle.bind(this);
     }
 
     getIcon() {
@@ -47,24 +55,12 @@ export class TreeNode extends Component {
         this.setState({ expanded: !this.state.expanded });
     }
 
-    onNodeClick(event) {
-        this.tree.onNodeClick(event, this.node);
-    }
-
-    onNodeTouchEnd() {
-        this.tree.onNodeTouchEnd();
-    }
-
-    isSelected() {
-        return this.tree.isSelected(this.node);
-    }
-
     renderVerticalTree() {
         var nodeClass = classNames('ui-treenode', this.node.styleClass, {
             'ui-treenode-leaf': this.isLeaf(this.node)
         });
 
-        var labelClass = classNames('ui-treenode-label ui-corner-all', { 'ui-state-highlight': this.isSelected() }),
+        var labelClass = classNames('ui-treenode-label ui-corner-all', { 'ui-state-highlight': this.props.isSelected(this.node) }),
             label = (<span className={labelClass}>
                 <span>{this.node.label}</span>
             </span>);
@@ -77,9 +73,9 @@ export class TreeNode extends Component {
         var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
             iconClass = this.getIcon();
 
-        if (this.tree.props.selectionMode === 'checkbox') {
+        if (this.props.selectionMode === 'checkbox') {
             var checkboxIconClass = classNames('ui-chkbox-icon ui-c fa', {
-                'fa-check': this.isSelected(),
+                'fa-check': this.props.isSelected(this.node),
                 'fa-minus': this.node.partialSelected
             }),
                 checkbox = (<div className="ui-chkbox">
@@ -90,11 +86,11 @@ export class TreeNode extends Component {
         }
 
         var nodeContentClass = classNames('ui-treenode-content', {
-            'ui-treenode-selectable': this.tree.props.selectionMode && this.node.selectable !== false
+            'ui-treenode-selectable': this.props.selectionMode && this.node.selectable !== false
         }),
             nodeContent = (
-                <div className={nodeContentClass} onClick={this.onNodeClick.bind(this)} onTouchEnd={this.onNodeTouchEnd.bind(this)}>
-                    <span className={togglerClass} onClick={this.toggle.bind(this)}></span>
+                <div className={nodeContentClass} onClick={(e) => this.props.onNodeClick(e, this.node)} onTouchEnd={this.props.onNodeTouchEnd}>
+                    <span className={togglerClass} onClick={this.toggle}></span>
                     {checkbox}
                     {hasIcon && <span className={iconClass}></span>}
                     {label}
@@ -104,7 +100,8 @@ export class TreeNode extends Component {
         var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }} className="ui-treenode-children">
             {
                 this.node.children && this.node.children.map((child, i) => {
-                    return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} tree={this.tree} parentNode={this.node} />)
+                    return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
+                        onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={false}/>)
                 })
             }
         </ul>);
@@ -149,13 +146,13 @@ export class TreeNode extends Component {
             iconClass = this.getIcon();
 
         var nodeContentClass = classNames('ui-treenode-content ui-state-default ui-corner-all', {
-            'ui-treenode-selectable': this.tree.props.selectionMode && this.node.selectable !== false,
-            'ui-state-highlight': this.isSelected()
+            'ui-treenode-selectable': this.props.selectionMode && this.node.selectable !== false,
+            'ui-state-highlight': this.props.isSelected(this.node)
         }),
             nodeContent = (
                 <td className={nodeClass}>
-                    <div className={nodeContentClass} onClick={this.onNodeClick.bind(this)} onTouchEnd={this.onNodeTouchEnd.bind(this)}>
-                        {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle.bind(this)}></span>}
+                    <div className={nodeContentClass} onClick={(e) => this.props.onNodeClick(e, this.node)} onTouchEnd={this.props.onNodeTouchEnd}>
+                        {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle}></span>}
                         {hasIcon && <span className={iconClass}></span>}
                         {label}
                     </div>
@@ -166,7 +163,8 @@ export class TreeNode extends Component {
             <div className="ui-treenode-children">
                 {
                     this.node.children && this.node.children.map((child, i) => {
-                        return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} tree={this.tree} parentNode={this.node} />)
+                        return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
+                            onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={true}/>)
                     })
                 }
             </div>
@@ -189,7 +187,7 @@ export class TreeNode extends Component {
     }
 
     render() {
-        if (this.tree.isHorizontal()) {
+        if (this.props.isHorizontal) {
             return this.renderHorizontalTree();
         }
         else {
@@ -232,6 +230,13 @@ export class Tree extends Component {
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool
+    }
+
+    constructor(props) {
+        super(props);
+        this.onNodeTouchEnd = this.onNodeTouchEnd.bind(this);
+        this.onNodeClick = this.onNodeClick.bind(this);
+        this.isSelected = this.isSelected.bind(this);
     }
 
     isSelected(node) {
@@ -512,14 +517,16 @@ export class Tree extends Component {
         if (this.isHorizontal()) {
             container = this.props.value && this.props.value[0] && (
                 <table>
-                    <TreeNode node={this.props.value[0]} root={true} index={0} tree={this}></TreeNode>
+                    <TreeNode node={this.props.value[0]} root={true} index={0} isHorizontal={true} selectionMode={this.props.selectionMode} 
+                        onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected}></TreeNode>
                 </table>)
         }
         else {
             container = (<ul className="ui-tree-container">
                 {
                     this.props.value && this.props.value.map((node, index) => {
-                        return (<TreeNode key={index} node={node} index={index} tree={this} parentNode={this.props.value} />)
+                        return (<TreeNode key={'node_' + index} node={node} index={index} parentNode={this.props.value} isHorizontal={false} selectionMode={this.props.selectionMode}
+                            onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected}/>)
                     })
                 }
             </ul>);
