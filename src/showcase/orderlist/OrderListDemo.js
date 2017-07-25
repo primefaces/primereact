@@ -47,7 +47,7 @@ export class OrderListDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-6">
-                            <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
+                            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
                         </div>
                         <div className="ui-g-12 ui-md-6">
                             <ul>
@@ -104,6 +104,15 @@ constructor() {
 onReorderCars(e) {
     this.setState({ cars: e.value });
 }
+
+`}
+</CodeHighlight>
+
+            <h3>DragDrop</h3>
+            <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflict with other drag drop events on view.</p>
+<CodeHighlight className="language-markup">
+{`
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onReorder={this.onReorderCars.bind(this)}></OrderList>
 
 `}
 </CodeHighlight>
@@ -170,6 +179,18 @@ onReorderCars(e) {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
+                        <tr>
+                            <td>dragdrop</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to enable dragdrop based reordering.</td>
+                        </tr>
+                        <tr>
+                            <td>dragdropScope</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Unique key of drag drop events to avoid conflict with other drag drop events on the page.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -276,7 +297,7 @@ export class OrderListDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-6">
-                            <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
+                            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
                         </div>
                         <div className="ui-g-12 ui-md-6">
                             <ul>

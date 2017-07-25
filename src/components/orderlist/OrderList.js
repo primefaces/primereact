@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames'
 
 export class OrderList extends Component {
@@ -13,6 +14,8 @@ export class OrderList extends Component {
         styleClass: null,
         listStyle: null,
         responsive: false,
+        dragdrop: false,
+        dragdropScope: null,
         onReorder: null,
         itemTemplate: null
     }
@@ -24,6 +27,8 @@ export class OrderList extends Component {
         styleClass: PropTypes.string,
         listStyle: PropTypes.string,
         responsive: PropTypes.bool,
+        dragdrop: PropTypes.func,
+        dragdropScope: PropTypes.string,
         onReorder: PropTypes.func,
         itemTemplate: PropTypes.func
     }
@@ -31,6 +36,13 @@ export class OrderList extends Component {
     constructor(props) {
         super(props);
         this.state = {values: this.props.value, selectedItems: []};
+        this.onDragOver = this.onDragOver.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.onDragLeave = this.onDragLeave.bind(this);
+        this.onDragStart = this.onDragStart.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.onItemTouchEnd = this.onItemTouchEnd.bind(this);
+        this.onListMouseMove = this.onListMouseMove.bind(this);
     }
 
     onItemClick(event, item) {
@@ -47,6 +59,14 @@ export class OrderList extends Component {
         }
 
         this.setState({selectedItems: this.selectedItems});
+    }
+
+    isItemVisible(item){
+        return true;
+    }
+    
+    onItemTouchEnd(event) {
+        this.itemTouched = true;
     }
 
     isSelected(item) {
@@ -180,6 +200,59 @@ export class OrderList extends Component {
         }
     }
 
+    onDragStart(event, index) {
+        this.dragging = true;
+        this.draggedItemIndex = index;
+        if(this.props.dragdropScope) {
+            event.dataTransfer.setData("text", this.props.dragdropScope);
+        }
+    }
+    
+    onDragOver(event, index) {
+        if(this.draggedItemIndex !== index && this.draggedItemIndex + 1 !== index) {
+            this.dragOverItemIndex = index;
+            DomHandler.addClass(event.target, 'ui-state-highlight');
+            event.preventDefault();
+        }
+    }
+    
+    onDragLeave(event, index) {
+        this.dragOverItemIndex = null;
+        DomHandler.removeClass(event.target, 'ui-state-highlight');
+    }
+    
+    onDrop(event, index) {
+        let dropIndex = (this.draggedItemIndex > index) ? index : (index === 0) ? 0 : index - 1,
+            _value = [...this.state.values];
+        ObjectUtils.reorderArray(_value, this.draggedItemIndex, dropIndex);
+        this.setState({values: _value});
+        this.dragOverItemIndex = null;
+        DomHandler.removeClass(event.target, 'ui-state-highlight');
+
+        if(this.props.onReorder) {
+            this.props.onReorder({
+                originalEvent: event,
+                value: _value
+            })
+        }
+    }
+    
+    onDragEnd(event) {
+        this.dragging = false;
+    }
+    
+    onListMouseMove(event) {
+        if(this.dragging) {
+            let offsetY = this.listContainer.getBoundingClientRect().top + document.body.scrollTop;
+            let bottomDiff = (offsetY + this.listContainer.clientHeight) - event.pageY;
+            let topDiff = (event.pageY - offsetY);
+            if(bottomDiff < 25 && bottomDiff > 0)
+                this.listContainer.scrollTop += 15;
+            else if(topDiff < 25 && topDiff > 0)
+                this.listContainer.scrollTop -= 15;
+        }
+    }
+
     updateScrollView() {
         if(this.movedUp||this.movedDown) {
             let listItems = this.listContainer.getElementsByClassName('ui-state-highlight');
@@ -228,10 +301,11 @@ export class OrderList extends Component {
             </div>
         );
 
-        var content = (
+        var valuesLength = this.state.values && this.state.values.length, 
+        content = (
             <div className="ui-grid-col-10">
                 {this.props.header && <div className="ui-orderlist-caption ui-widget-header ui-corner-top">{this.props.header}</div>}
-                <ul ref={(el) => this.listContainer = el} className="ui-widget-content ui-orderlist-list ui-corner-bottom" style={this.props.listStyle}>
+                <ul ref={(el) => this.listContainer = el} className="ui-widget-content ui-orderlist-list ui-corner-bottom" style={this.props.listStyle} onDragOver={this.onListMouseMove}>
                     {
                         this.state.values && this.state.values.map((item, i) => {
                             
@@ -240,11 +314,14 @@ export class OrderList extends Component {
                                 'ui-state-highlight': this.isSelected(item)
                             });
 
-                            return (
-                                <li key={i + '_orderlistitem'} className={listStyleClass} onClick={(e) => this.onItemClick(e, item)}>
+                            return [
+                                this.props.dragdrop && this.isItemVisible(item) && <li className="ui-orderlist-droppoint" onDragOver={(e) => this.onDragOver(e, i)} onDrop={(e) => this.onDrop(e, i)} onDragLeave={this.onDragLeave}></li>
+                                ,<li key={i + '_orderlistitem'} className={listStyleClass} onClick={(e) => this.onItemClick(e, item)} draggable={this.props.dragdrop} onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} onTouchEnd={this.onItemTouchEnd}>
                                     {listItemContent}
                                 </li>
-                            )
+                                ,this.props.dragdrop && valuesLength === (i + 1) && <li className="ui-orderlist-droppoint" onDragOver={(e) => this.onDragOver(e, i + 1)} onDrop={(e) => this.onDrop(e, i + 1)} onDragLeave={this.onDragLeave}></li>
+                            ]
+                            
                         })
                     }
                 </ul>
