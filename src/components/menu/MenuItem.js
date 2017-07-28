@@ -27,7 +27,8 @@ export class MenuItem extends Component{
     }
 
     render() {
-        var styleClass=classNames('ui-menuitem-link ui-corner-all',{'ui-state-disabled':this.item.disabled});
+        var styleClass=classNames('ui-menuitem-link ui-corner-all',{'ui-state-disabled':this.item.disabled},
+            {'ui-menuitem-link-parent':this.item.items && this.props.parentMenu==='SlideMenu'});
         var iconClass=classNames('ui-menuitem-icon fa fa-fw',this.item.icon?this.item.icon:null);
         var rootClass=classNames('ui-submenu-icon fa fa-fw',{' fa-caret-down':this.props.root},{' fa-caret-right':!this.props.root})
         if(this.item.url){
