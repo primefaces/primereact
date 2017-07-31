@@ -90,7 +90,8 @@ export class PanelMenuItem extends Component{
                         </a>
                     }
                 </div>
-                {this.item.items && <div className={subPanel} style={{height:!this.state.expanded?'0px':'auto'}} >
+                {this.item.items && <div className={subPanel} style={{height:!this.state.expanded?'0px':'auto',
+                    transitionTimingFunction:'cubic-bezier(0.86, 0, 0.07, 1)',transitionDuration:'400ms'}} >
                     <div className="ui-panelmenu-content ui-widget-content">
                         <SubItem item={this.item} expanded={true}/>
                     </div>
@@ -117,7 +118,8 @@ class SubItem extends Component{
 
     render(){
         return(
-            <ul className="ui-menu-list ui-helper-reset" style={{height:this.props.expanded?'auto':'0px'}}>
+            <ul className="ui-menu-list ui-helper-reset" style={{height:this.props.expanded?'auto':'0px',
+                transitionTimingFunction:'cubic-bezier(0.86, 0, 0.07, 1)',transitionDuration:'400ms'}}>
                 {this.item.items && this.item.items.map((child,index)=>{
                     return <Item child={child} tabIndex={this.item.expanded} index={index} key={index}/>;
                 })}

@@ -52,7 +52,7 @@ export class TabMenu extends Component {
             var listClass=classNames('ui-tabmenuitem ui-state-default ui-corner-top',{'ui-state-disabled':item.disabled},
                 {'ui-tabmenuitem-hasicon':item.icon},{'ui-state-active':this.state.activeItem===item})
             var list=<li className={listClass} key={'tabmenuItem_' + index}>
-                <MenuItem index={index} items={item} menu={this}/>
+                <MenuItem index={index} items={item} onItemClick={event=>this.itemClick(event,item)}/>
             </li>
                 return list;
             })

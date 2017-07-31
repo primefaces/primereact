@@ -120,7 +120,7 @@ export class Menu extends Component {
                     {submenu.items && submenu.items.map((item,indexItem)=>{
                       var menu=<li className={item.separator?'ui-menu-separator ui-widget-content':'ui-menuitem ui-widget ui-corner-all'}
                                        key={indexItem}>
-                          <MenuItem items={item} index={indexItem} menu={this}/>
+                          <MenuItem items={item} index={indexItem} onItemClick={event=>this.itemClick(event,item)}/>
                       </li>
                         return menu;
                     })}</div>
@@ -130,7 +130,7 @@ export class Menu extends Component {
             itemMenu=this.props.model && this.props.model.map((item,index)=>{
                 var menu=<li className={item.separator?'ui-menu-separator ui-widget-content':'ui-menuitem ui-widget ui-corner-all'}
                              key={index}>
-                    <MenuItem items={item} index={index} menu={this} />
+                    <MenuItem items={item} index={index} onItemClick={event=>this.itemClick(event,item)}/>
                 </li>
                     return menu
                 })

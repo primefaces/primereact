@@ -74,7 +74,7 @@ export class NestedMenuItem extends Component{
                 this.sublist.style.display='none';
             }}>
 
-                <MenuItem items={this.props.item} menu={this} root={this.props.root}  parentMenu={this.props.parentMenu} />
+                <MenuItem items={this.props.item} onItemClick={event=>this.itemClick(event,this.props.item)} root={this.props.root}  parentMenu={this.props.parentMenu} />
 
                 {this.props.item.items?
                     <NestedMenu styleClass={'ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-child ui-shadow'} index={this.props.index}

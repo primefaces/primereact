@@ -6,15 +6,15 @@ export class MenuItem extends Component{
     static defaultProps = {
         index:null,
         items:null,
-        menu:null,
+        onItemClick:null,
         parentMenu:null,
         root:false,
     };
 
     static propTypes = {
-        index:PropTypes.number,
+        index:PropTypes.any,
         items:PropTypes.any,
-        menu:PropTypes.any,
+        onItemClick:PropTypes.func,
         parentMenu:PropTypes.string,
         root:PropTypes.bool
     };
@@ -23,7 +23,6 @@ export class MenuItem extends Component{
         super(props);
         this.state = {};
         this.item=this.props.items;
-        this.menu=this.props.menu
     }
 
     render() {
@@ -33,7 +32,7 @@ export class MenuItem extends Component{
         var rootClass=classNames('ui-submenu-icon fa fa-fw',{' fa-caret-down':this.props.root},{' fa-caret-right':!this.props.root})
         if(this.item.url){
             return (
-                <a href={this.item.url || '#'} className={styleClass} target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
+                <a href={this.item.url || '#'} className={styleClass} target={this.item.target} onClick={this.props.onItemClick}>
                     {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
@@ -43,7 +42,7 @@ export class MenuItem extends Component{
         }
         else{
             return (
-                <a className={styleClass} href="#" target={this.item.target} onClick={event=>this.menu.itemClick(event,this.item)}>
+                <a className={styleClass} href="#" target={this.item.target} onClick={this.props.onItemClick}>
                     {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>

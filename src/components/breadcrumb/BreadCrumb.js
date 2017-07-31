@@ -78,7 +78,7 @@ export class BreadCrumb extends Component {
         menu=this.props.model && this.props.model.map((item,index)=>{
             var menuItem=<span key={index}>
                 <li role="menuitem">
-                    <MenuItem items={item} index={index} menu={this} />
+                    <MenuItem items={item} index={index} onItemClick={event=>this.itemClick(event,item)} />
                 </li>
                 {this.props.model.length-1!==index && <li className="ui-breadcrumb-chevron fa fa-chevron-right" style={{marginLeft:4,marginRight:4}}></li>}
             </span>
