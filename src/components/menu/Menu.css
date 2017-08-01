@@ -184,7 +184,7 @@
     vertical-align: middle;
 }
 
-.ui-slidemenu .ui-slidemenuitem-active > .ui-submenu > ul {
+.ui-slidemenu .ui-slidemenuitem-active > ul {
     display: block !important;
 }
 

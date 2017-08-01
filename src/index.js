@@ -77,6 +77,7 @@ import {ContextMenuDemo} from './showcase/contextmenu/ContextMenuDemo';
 import {PanelMenuDemo} from './showcase/panelmenu/PanelMenuDemo';
 import {StepsDemo} from './showcase/steps/StepsDemo';
 import {MegaMenuDemo} from './showcase/megamenu/MegaMenuDemo';
+import {SlideMenuDemo} from './showcase/slidemenu/SlideMenuDemo';
 import {OrganizationChartDemo} from './showcase/organizationchart/OrganizationChartDemo';
 import {Router,Route,hashHistory} from 'react-router';
 
@@ -155,6 +156,7 @@ ReactDOM.render(
             <Route path="/menubar" component={MenubarDemo} />
             <Route path="/contextmenu" component={ContextMenuDemo} />
             <Route path="/panelmenu" component={PanelMenuDemo} />
+            <Route path="/slidemenu" component={SlideMenuDemo} />
             <Route path="/steps" component={StepsDemo} />
             <Route path="/megamenu" component={MegaMenuDemo} />
             <Route path="/setup" component={SetupPage} />
