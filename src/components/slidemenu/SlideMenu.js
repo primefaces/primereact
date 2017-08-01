@@ -199,9 +199,9 @@ export class SlideMenu extends Component {
     }
 
     componentDidMount() {
-        this.slideMenuContent.style.height = this.props.viewportHeight - DomHandler.getHiddenElementOuterHeight(this.backward) + 'px';
-
         if(this.props.popup) {
+            this.slideMenuContent.style.height = this.props.viewportHeight - DomHandler.getHiddenElementOuterHeight(this.backward) + 'px';
+
             this.documentClickListener = () => {
                 if(!this.preventDocumentDefault) {
                     this.hide();
@@ -211,6 +211,9 @@ export class SlideMenu extends Component {
 
             document.addEventListener('click', this.documentClickListener);     
         } 
+        else {
+            this.slideMenuContent.style.height = this.props.viewportHeight + 'px';
+        }
     }
 
     componentWillUnmount() {

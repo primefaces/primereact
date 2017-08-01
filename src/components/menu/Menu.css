@@ -188,6 +188,10 @@
     display: block !important;
 }
 
+.ui-slidemenu {
+    width: 12em;
+}
+
 /** MegaMenu **/
 .ui-megamenu .ui-g {
     flex-wrap: nowrap;
