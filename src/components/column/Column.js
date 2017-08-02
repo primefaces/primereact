@@ -9,7 +9,7 @@ export class Column extends Component {
         footer: null,
         sortable: false,
         filter: false,
-        filterMatchMode: null,
+        filterMatchMode: 'startsWith',
         filterElement: null,
         style: null,
         className: null,

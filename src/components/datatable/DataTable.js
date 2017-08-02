@@ -257,7 +257,7 @@ export class DataTable extends Component {
     onFilter(event) {
         let filterMetadata = this.state.filters||{};
         if(!this.isFilterBlank(event.value))
-            filterMetadata[event.field] = {value: event.value, matchMode: event.matchMode};
+            filterMetadata[event.field] = {value: event.value};
         else if(filterMetadata[event.field])
             delete filterMetadata[event.field];
 
@@ -465,7 +465,7 @@ export class DataTable extends Component {
                 if(filterMeta) {
                     let filterValue = filterMeta.value;
                     let filterField = col.props.field;
-                    let filterMatchMode = filterMeta.matchMode||'startsWith';
+                    let filterMatchMode = col.props.filterMatchMode;
                     let dataFieldValue = ObjectUtils.resolveFieldData(value[i], filterField);
                     let filterConstraint = ObjectUtils.filterConstraints[filterMatchMode];
 
