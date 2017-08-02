@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="66px" height="66px" viewBox="0 0 66 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>0BFFA853-EECE-4497-BF7E-ED7E53E6F424</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PrimeReact-Showcase---Homepage" transform="translate(-477.000000, -591.000000)">
+            <g id="homepage" transform="translate(301.000000, 70.000000)">
+                <g id="features" transform="translate(20.000000, 350.000000)">
+                    <g id="info-box" transform="translate(92.000000, 171.000000)">
+                        <g id="components">
+                            <g id="icon-component" transform="translate(64.000000, 0.000000)">
+                                <g id="icon-components" transform="translate(0.282053, 0.883341)">
+                                    <path d="M39.8478261,0 L25.1521739,0 C11.3043478,0 0,11.3043478 0,25.1521739 L0,39.8478261 C0,53.6956522 11.3043478,65 25.1521739,65 L39.8478261,65 C53.6956522,65 65,53.6956522 65,39.8478261 L65,25.1521739 C65,11.3043478 53.6956522,0 39.8478261,0 Z M63.5869565,39.8478261 C63.5869565,52.9184783 52.9184783,63.5869565 39.8478261,63.5869565 L25.1521739,63.5869565 C12.0815217,63.5869565 1.41304348,52.9184783 1.41304348,39.8478261 L1.41304348,25.1521739 C1.41304348,12.0815217 12.0815217,1.41304348 25.1521739,1.41304348 L39.8478261,1.41304348 C52.9184783,1.41304348 63.5869565,12.0815217 63.5869565,25.1521739 L63.5869565,39.8478261 Z M59.3478261,39.5652174 C59.3478261,50.4456522 50.4456522,59.3478261 39.5652174,59.3478261 L25.4347826,59.3478261 C14.5543478,59.3478261 5.65217391,50.4456522 5.65217391,39.5652174 L5.65217391,25.4347826 C5.65217391,14.5543478 14.5543478,5.65217391 25.4347826,5.65217391 L39.5652174,5.65217391 C50.4456522,5.65217391 59.3478261,14.5543478 59.3478261,25.4347826 L59.3478261,39.5652174 Z" id="Shape" fill="#222222" fill-rule="nonzero"></path>
+                                    <polygon id="Shape" fill="#FFFFFF" points="40.7192497 24.0280492 40.7192497 25.7679291 46.1240507 25.7679291 46.1240507 43.0439262 19.9322182 43.0439262 19.9322182 25.7679291 23.0456331 25.7679291 23.0456331 24.0280492 18 24.0280492 18 44.7856838 48.0558933 44.7856838 48.0558933 24.0280492"></polygon>
+                                    <rect id="Rectangle-path" fill="#FFFFFF" x="32.7333989" y="23.0050764" width="5.95632665" height="5.81900259"></rect>
+                                    <rect id="Rectangle-path" fill="#FFFFFF" x="34.2673765" y="29.5417372" width="9.73998791" height="9.51394718"></rect>
+                                    <rect id="Rectangle-path" fill="#FFFFFF" x="26.3307422" y="20.0769858" width="5.00017354" height="5.17307264"></rect>
+                                    <rect id="Rectangle-path" fill="#FFFFFF" x="28.2182523" y="31.3157913" width="3.33132007" height="3.25443539"></rect>
+                                    <rect id="Rectangle-path" fill="#FFFFFF" x="24.8854294" y="27.3549639" width="2.61035433" height="2.55067219"></rect>
+                                    <rect id="Rectangle-path" fill="#FFFFFF" x="24.8756613" y="35.9293083" width="2.31580658" height="2.26338358"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
