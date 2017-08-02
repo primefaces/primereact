@@ -44,6 +44,7 @@ export class DataTable extends Component {
         onRowToggle: null,
         resizableColumns: false,
         filters: null,
+        globalFilter: null,
         columnResizeMode: 'fit',
         onColumnResizeEnd: null,
         onSort: null,
@@ -89,7 +90,8 @@ export class DataTable extends Component {
         onRowToggle: PropTypes.func,
         responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,
-        filters: PropTypes.array,
+        filters: PropTypes.object,
+        globalFilter: PropTypes.any,
         columnResizeMode: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
@@ -253,7 +255,7 @@ export class DataTable extends Component {
     }
 
     onFilter(event) {
-        let filterMetadata = this.state.filters ? [...this.state.filters] : [];
+        let filterMetadata = this.state.filters||{};
         if(!this.isFilterBlank(event.value))
             filterMetadata[event.field] = {value: event.value, matchMode: event.matchMode};
         else if(filterMetadata[event.field])
@@ -265,7 +267,7 @@ export class DataTable extends Component {
         });
 
         if(this.props.onFilter) {
-            this.props.onFilter.emit({
+            this.props.onFilter({
                 filters: filterMetadata
             });
         }
@@ -304,6 +306,17 @@ export class DataTable extends Component {
         if(this.props.resizableColumns) {
             this.fixColumnWidths();
         }
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            first: props.first,
+            rows: props.rows,
+            sortField: props.sortField,
+            sortOrder: props.sortOrder,
+            multiSortMeta: props.multiSortMeta,
+            filters: props.filters
+        });
     }
 
     fixColumnWidths() {
@@ -446,13 +459,13 @@ export class DataTable extends Component {
 
             for(let j = 0; j < columns.length; j++) {
                 let col = columns[j];
-                let filterMeta = this.state.filters[col.props.field];
+                let filterMeta = this.state.filters ? this.state.filters[col.props.field] : null;
 
                 //local
                 if(filterMeta) {
                     let filterValue = filterMeta.value;
                     let filterField = col.props.field;
-                    let filterMatchMode = filterMeta.matchMode;
+                    let filterMatchMode = filterMeta.matchMode||'startsWith';
                     let dataFieldValue = ObjectUtils.resolveFieldData(value[i], filterField);
                     let filterConstraint = ObjectUtils.filterConstraints[filterMatchMode];
 
@@ -465,15 +478,14 @@ export class DataTable extends Component {
                     }
                 }
 
-                //TODO
                 //global
-                if(this.globalFilter && !globalMatch) {
-                    globalMatch = this.filterConstraints['contains'](this.resolveFieldData(this.value[i], col.props.field), this.globalFilter.value);
+                if(this.props.globalFilter && !globalMatch) {
+                    globalMatch = ObjectUtils.filterConstraints['contains'](ObjectUtils.resolveFieldData(value[i], col.props.field), this.props.globalFilter);
                 }
             }
 
             let matches = localMatch;
-            if(this.globalFilter) {
+            if(this.props.globalFilter) {
                 matches = localMatch&&globalMatch;
             }
 
@@ -492,15 +504,17 @@ export class DataTable extends Component {
     processData() {
         let data = this.props.value;
         if(!this.props.lazy) {
-            if(this.state.sortField || this.state.multiSortMeta) {
-                if(this.props.sortMode === 'single')
-                    data = this.sortSingle(data);
-                else if(this.props.sortMode === 'multiple')
-                    data = this.sortMultiple(data);
-            }
+            if(data && data.length) {
+                if(this.state.sortField || this.state.multiSortMeta) {
+                    if(this.props.sortMode === 'single')
+                        data = this.sortSingle(data);
+                    else if(this.props.sortMode === 'multiple')
+                        data = this.sortMultiple(data);
+                }
 
-            if(this.state.filters) {
-                data = this.filter(data);
+                if(this.state.filters || this.props.globalFilter) {
+                    data = this.filter(data);
+                }
             }
         }
 

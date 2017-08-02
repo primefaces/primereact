@@ -81,7 +81,7 @@ export class HeaderCell extends Component {
         }
 
         if(this.props.filter) {
-            var filterElement = <InputText onInput={this.onFilterInput} className="ui-column-filter" />;
+            var filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} className="ui-column-filter" />;
         }
 
         return (
