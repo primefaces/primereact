@@ -43,10 +43,12 @@ export class DataTable extends Component {
         responsive: false,
         onRowToggle: null,
         resizableColumns: false,
+        filters: null,
         columnResizeMode: 'fit',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
+        onFilter: null,
         onLazyLoad: null,
         onRowClick: null,
         onRowSelect: null,
@@ -87,10 +89,12 @@ export class DataTable extends Component {
         onRowToggle: PropTypes.func,
         responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,
+        filters: PropTypes.array,
         columnResizeMode: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
+        onFilter: PropTypes.func,
         onLazyLoad: PropTypes.func,
         onRowClick: PropTypes.func,
         onRowSelect: PropTypes.func,
@@ -106,10 +110,12 @@ export class DataTable extends Component {
             rows: props.rows,
             sortField: props.sortField,
             sortOrder: props.sortOrder,
-            multiSortMeta: props.multiSortMeta
+            multiSortMeta: props.multiSortMeta,
+            filters: props.filters
         };
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
+        this.onFilter = this.onFilter.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
     }
 
@@ -130,15 +136,11 @@ export class DataTable extends Component {
         }
     }
 
-    getTotalRecords() {
-        return this.props.value ? this.props.lazy ? this.props.totalRecords : this.props.value.length : 0;
-    }
-
-    createPaginator(position) {
+    createPaginator(position, totalRecords) {
         let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className}
-                    totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} />;
+                    totalRecords={totalRecords} onPageChange={this.onPageChange} />;
     }
 
     onSort(event) {
@@ -248,6 +250,35 @@ export class DataTable extends Component {
         }
 
         return (this.state.multiSortMeta[index].order * result);
+    }
+
+    onFilter(event) {
+        let filterMetadata = this.state.filters ? [...this.state.filters] : [];
+        if(!this.isFilterBlank(event.value))
+            filterMetadata[event.field] = {value: event.value, matchMode: event.matchMode};
+        else if(filterMetadata[event.field])
+            delete filterMetadata[event.field];
+
+        this.setState({
+            first: 0,
+            filters: filterMetadata
+        });
+
+        if(this.props.onFilter) {
+            this.props.onFilter.emit({
+                filters: filterMetadata
+            });
+        }
+    }
+
+    isFilterBlank(filter) {
+        if(filter !== null && filter !== undefined) {
+            if((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0))
+                return true;
+            else
+                return false;
+        } 
+        return true;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -405,6 +436,59 @@ export class DataTable extends Component {
         document.removeEventListener('document', this.documentColumnResizeEndListener);
     }
 
+    filter(value) {
+        let filteredValue = [];
+        let columns = React.Children.toArray(this.props.children);
+
+        for(let i = 0; i < value.length; i++) {
+            let localMatch = true;
+            let globalMatch = false;
+
+            for(let j = 0; j < columns.length; j++) {
+                let col = columns[j];
+                let filterMeta = this.state.filters[col.props.field];
+
+                //local
+                if(filterMeta) {
+                    let filterValue = filterMeta.value;
+                    let filterField = col.props.field;
+                    let filterMatchMode = filterMeta.matchMode;
+                    let dataFieldValue = ObjectUtils.resolveFieldData(value[i], filterField);
+                    let filterConstraint = ObjectUtils.filterConstraints[filterMatchMode];
+
+                    if(!filterConstraint(dataFieldValue, filterValue)) {
+                        localMatch = false;
+                    }
+
+                    if(!localMatch) {
+                        break;
+                    }
+                }
+
+                //TODO
+                //global
+                if(this.globalFilter && !globalMatch) {
+                    globalMatch = this.filterConstraints['contains'](this.resolveFieldData(this.value[i], col.props.field), this.globalFilter.value);
+                }
+            }
+
+            let matches = localMatch;
+            if(this.globalFilter) {
+                matches = localMatch&&globalMatch;
+            }
+
+            if(matches) {
+                filteredValue.push(value[i]);
+            }
+        }
+
+        if(filteredValue.length === value.length) {
+            filteredValue = value;
+        }
+
+        return filteredValue;
+    }
+
     processData() {
         let data = this.props.value;
         if(!this.props.lazy) {
@@ -414,6 +498,10 @@ export class DataTable extends Component {
                 else if(this.props.sortMode === 'multiple')
                     data = this.sortMultiple(data);
             }
+
+            if(this.state.filters) {
+                data = this.filter(data);
+            }
         }
 
         return data;
@@ -421,9 +509,10 @@ export class DataTable extends Component {
 
     render() {
         let value = this.processData();
+        let totalRecords = this.props.lazy ? this.props.totalRecords : value ? value.length : 0;
         let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns}, this.props.className);
-        let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top');
-        let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom');
+        let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
+        let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
         let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>
@@ -435,7 +524,8 @@ export class DataTable extends Component {
                 <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
                         <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart}>
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart}
+                            onFilter={this.onFilter}>
                             {this.props.children}
                         </TableHeader>
                         

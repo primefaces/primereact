@@ -786,3 +786,21 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+.source .btn-viewsource {
+    background-color: #444444;
+    padding: .5em;
+    border-radius: 2px;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 1em;
+    display: inline-block;
+    transition: background-color .3s;
+}
+.source .btn-viewsource i {
+    margin-right: .25em;
+}
+
+.source .btn-viewsource:hover {
+    background-color: #595959;
+}

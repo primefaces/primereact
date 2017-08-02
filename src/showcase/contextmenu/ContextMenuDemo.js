@@ -6,11 +6,6 @@ import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
 export class ContextMenuDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
         var items1=[
             {
@@ -87,7 +82,18 @@ export class ContextMenuDemo extends Component {
             {
                 label: 'Quit', icon: 'fa-minus'
             }
-            ];
+        ],
+        items2 = [
+                {
+                    label: 'Next',
+                    icon: 'fa-chevron-right'
+                },
+                {
+                    label: 'Prev',
+                    icon: 'fa-chevron-left'
+                }
+        ];
+        
         return (
             <div>
                 <div className="content-section">
@@ -98,6 +104,9 @@ export class ContextMenuDemo extends Component {
                 </div>
                 <div className="content-section implementation">
                     <ContextMenu global={true} model={items1}/>
+                    
+                    <ContextMenu target="contextImg" model={items2}></ContextMenu>
+                    <img id="contextImg" src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}}/>
                 </div>
 
                 <ContextMenuDoc/>
@@ -134,38 +143,50 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>model</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>global</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>Attaches the menu to document instead of a particular item.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>styleClass</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the component.</td>
-                                </tr>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of menuitems.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>global</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Attaches the menu to document instead of a particular item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>styleClass</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>target</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>The id of the element to attach the context menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -251,12 +272,7 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
                         <CodeHighlight className="language-javascript">
                             {`
 export class ContextMenuDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {};
-    }
-
+    
     render() {
         var items1=[
             {
@@ -333,7 +349,18 @@ export class ContextMenuDemo extends Component {
             {
                 label: 'Quit', icon: 'fa-minus'
             }
-            ];
+        ],
+        items2 = [
+                {
+                    label: 'Next',
+                    icon: 'fa-chevron-right'
+                },
+                {
+                    label: 'Prev',
+                    icon: 'fa-chevron-left'
+                }
+        ];
+        
         return (
             <div>
                 <div className="content-section">
@@ -344,6 +371,9 @@ export class ContextMenuDemo extends Component {
                 </div>
                 <div className="content-section implementation">
                     <ContextMenu global={true} model={items1}/>
+                    
+                    <ContextMenu target="contextImg" model={items2}></ContextMenu>
+                    <img id="contextImg" src="showcase/resources/images/logo.png" alt="Logo"  style={{width: '80px'}}/>
                 </div>
 
                 <ContextMenuDoc/>

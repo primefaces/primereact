@@ -6,28 +6,28 @@ import {NestedMenu} from "../nestedmenu/NestedMenu";
 
 export class ContextMenu extends Component {
     static defaultProps = {
-        model:null,
+        model: null,
         style: null,
         styleClass: null,
-        global:false,
-        target:null
+        global: false,
+        target: null,
+        appendTo: null
     }
 
     static propsTypes = {
-        model:PropTypes.array,
+        model: PropTypes.array,
         style: PropTypes.string,
         styleClass: PropTypes.string,
-        global:PropTypes.bool,
-        target:PropTypes.any
+        global: PropTypes.bool,
+        target: PropTypes.any,
+        appendTo: PropTypes.any
     }
 
     constructor(props) {
         super(props);
         this.state = {visible:false};
     }
-    componentDidMount(){
-        this.bindDocumentListener();
-    }
+    
     toggle(event){
         if(this.state.visible)
             this.hide(event);
@@ -39,68 +39,76 @@ export class ContextMenu extends Component {
         this.position(event);
         this.setState({visible:true});
         DomHandler.fadeIn(this.container, 250);
-        this.bindDocumentListener();
 
         if(event) {
             event.preventDefault();
         }
     }
+    
     hide(event) {
         this.setState({visible:false})
-        this.unbindDocumentListener();
     }
+    
     position(event) {
-    if(event) {
-        let left = event.pageX + 1;
-        let top = event.pageY + 1;
-        let width = this.container.offsetParent ? this.container.offsetWidth: DomHandler.getHiddenElementOuterWidth(this.container);
-        let height = this.container.offsetParent ? this.container.offsetHeight: DomHandler.getHiddenElementOuterHeight(this.container);
-        let viewport = DomHandler.getViewport();
+        if(event) {
+            let left = event.pageX + 1;
+            let top = event.pageY + 1;
+            let width = this.container.offsetParent ? this.container.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.container);
+            let height = this.container.offsetParent ? this.container.offsetHeight : DomHandler.getHiddenElementOuterHeight(this.container);
+            let viewport = DomHandler.getViewport();
 
-        //flip
-        if(left + width - document.body.scrollLeft > viewport.width) {
-            left -= width;
+            //flip
+            if(left + width - document.body.scrollLeft > viewport.width) {
+                left -= width;
+            }
+
+            //flip
+            if(top + height - document.body.scrollTop > viewport.height) {
+                top -= height;
+            }
+
+            //fit
+            if(left < document.body.scrollLeft) {
+                left = document.body.scrollLeft;
+            }
+
+            //fit
+            if(top < document.body.scrollTop) {
+                top = document.body.scrollTop;
+            }
+
+            this.container.style.left = left + 'px';
+            this.container.style.top = top + 'px';
         }
-
-        //flip
-        if(top + height - document.body.scrollTop > viewport.height) {
-            top -= height;
-        }
-
-        //fit
-        if(left < document.body.scrollLeft) {
-            left = document.body.scrollLeft;
-        }
-
-        //fit
-        if(top < document.body.scrollTop) {
-            top = document.body.scrollTop;
-        }
-
-        this.container.style.left = left + 'px';
-        this.container.style.top = top + 'px';
     }
-}
+    
     bindDocumentListener() {
         this.documentClickListener = () => {
             this.hide();
         };
-        document.addEventListener('click', this.documentClickListener);
-
+        document.addEventListener('click', this.documentClickListener, false);
+        
+        var documentEvent = document.createEvent('HTMLEvents');
+        documentEvent.initEvent('click', true, false);
+        
         if(this.props.global){
-            this.rightClickListener=(event)=>{
-                this.show(event);
-                event.preventDefault();}
-                document.addEventListener('contextmenu',this.rightClickListener)
-        }
-        /*if(this.props.target){
-            this.rightClickListener=(event)=>{
+            this.rightClickListener = (event) => {
+                document.dispatchEvent(documentEvent);
                 this.show(event);
                 event.preventDefault();
-                event.stopPropagation();
             }
-            this.props.target.addEventListener('contextmenu',this.rightClickListener)
-        }*/
+            document.addEventListener('contextmenu', this.rightClickListener);
+        }
+        else if(this.props.target){
+            this.rightClickListener = (event) => {
+                document.dispatchEvent(documentEvent);
+                this.show(event);
+                event.preventDefault();
+                event.stopPropagation();                
+            }
+            
+            document.getElementById(this.props.target).addEventListener('contextmenu', this.rightClickListener);
+        }
 
     }
 
@@ -109,27 +117,36 @@ export class ContextMenu extends Component {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
-        if(this.rightClickListener && this.props.global) {
-            document.removeEventListener('contextmenu', this.documentClickListener);
+
+        if(this.rightClickListener) {
+            document.removeEventListener('contextmenu', this.rightClickListener);
             this.rightClickListener = null;
         }
-       /* if(this.rightClickListener && this.props.target) {
-            this.props.target.removeEventListener('contextmenu', this.documentClickListener);
-            this.rightClickListener = null;
-        }*/
+    }
+    
+    componentDidMount(){
+        this.bindDocumentListener();
+        
+        if(this.props.appendTo) {
+            if(this.props.appendTo === 'body')
+                document.body.appendChild(this.container);
+            else
+                DomHandler.appendChild(this.container, this.props.appendTo);
+        }
     }
 
     componentWillUnmount() {
         this.unbindDocumentListener();
     }
+    
     render() {
-        var divClass=classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow',
-            this.props.styleClass);
-        var ulClass=classNames('ui-menu-list ui-helper-reset');
-        var menuStyle=Object.assign({display:this.state.visible?'block':'none'},this.props.style)
+        var contextMenuClass = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', this.props.styleClass),
+        listClass = classNames('ui-menu-list ui-helper-reset'),
+        menuStyle = Object.assign({display: this.state.visible ? 'block' : 'none'},this.props.style);
+        
         return (
-            <div className={divClass} style={menuStyle} ref={el=>this.container=el} >
-                <NestedMenu styleClass={ulClass} items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
+            <div className={contextMenuClass} style={menuStyle} ref={el=>this.container=el} >
+                <NestedMenu styleClass={listClass} items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
             </div>
         );
     }
