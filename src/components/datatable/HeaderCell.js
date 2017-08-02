@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
 
 export class HeaderCell extends Component {
@@ -6,6 +7,7 @@ export class HeaderCell extends Component {
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.onFilterInput = this.onFilterInput.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
     }
 
@@ -15,6 +17,24 @@ export class HeaderCell extends Component {
                 originalEvent: e,
                 sortField: this.props.field
             });
+        }
+    }
+
+    onFilterInput(e) {
+        if(this.props.filter && this.props.onFilter) {
+            if(this.filterTimeout) {
+                clearTimeout(this.filterTimeout);
+            }
+
+            let filterValue = e.target.value;
+            this.filterTimeout = setTimeout(() => {
+                this.props.onFilter({
+                    value: filterValue,
+                    field: this.props.field,
+                    matchMode: this.props.filterMatchMode
+                });
+                this.filterTimeout = null;            
+            }, this.filterDelay);
         }
     }
 
@@ -60,12 +80,17 @@ export class HeaderCell extends Component {
             var sortIconClassName = classNames('ui-sortable-column-icon fa fa-fw', sortIcon);
         }
 
+        if(this.props.filter) {
+            var filterElement = <InputText onInput={this.onFilterInput} className="ui-column-filter" />;
+        }
+
         return (
             <th className={className} style={this.props.style} onClick={this.onClick} 
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
                 {resizer}
                <span className="ui-column-title">{this.props.header}</span>
                <span className={sortIconClassName}></span>
+                {filterElement}
             </th>
         );
     }
