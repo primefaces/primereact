@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import {RowRadioButton} from './RowRadioButton';
+import {RowCheckbox} from './RowCheckbox';
 
 export class BodyCell extends Component {
 
@@ -28,6 +30,12 @@ export class BodyCell extends Component {
                         <span className={iconClassName}></span>
                       </a>;
         }
+        else if(this.props.selectionMode) {
+            if(this.props.selectionMode === 'single')
+                content = <RowRadioButton />;
+            else
+                content = <RowCheckbox />;
+        }
         else {
             if(this.props.bodyTemplate)
                 content = this.props.bodyTemplate(this.props.rowData, this.props);
@@ -42,7 +50,7 @@ export class BodyCell extends Component {
         return (
             <td className={this.props.className} style={this.props.style}>
                 {header}
-               <span className="ui-cell-data">{content}</span>
+                <span className="ui-cell-data">{content}</span>
             </td>
         );
     }

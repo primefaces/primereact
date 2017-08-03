@@ -296,7 +296,7 @@ html {
     cursor: pointer;
     border-radius: 4px;
     -webkit-border-radius: 4px;
-    font-size: 14px;
+    
     color: #7a8687;
 }
 
@@ -369,7 +369,7 @@ html {
 }
 
 .layout-footer {
-    font-size: 14px;
+    
     color: #84939f;
 }
 
@@ -396,7 +396,7 @@ html {
     font-size: 16px;
 }
 .implementation > div {
-    font-size: 14px;
+    
     color: #484848;
 }
 .implementation > h3:first-child {
@@ -492,7 +492,7 @@ html {
     color: #fff !important;
     font-weight: normal !important;
     text-shadow: none ;
-    font-size: 14px;
+    
     height: inherit;
     background-color: #00829b;
 }
@@ -500,7 +500,7 @@ html {
     color: #6b6b6b !important;
     background: #f9ffff !important;
     font-weight: normal !important;
-    font-size: 14px;
+    
 }
 .source .ui-tabview .ui-tabview-nav li.ui-state-hover {
     box-shadow: none !important;;
@@ -531,14 +531,14 @@ html {
     background-color: #d7f9ff;
     font-weight: bold;
     padding: 8px 20px 7px;
-    font-size: 14px;
+    
     text-align: left;
 }
 .doc-table tbody td {
     color:  #484848;
     padding: 8px 20px;
     border: 1px solid #E5EBF0;
-    font-size: 14px;
+    
     opacity: .90;
 }
 .doc-table tbody tr:nth-child(even) {
@@ -661,7 +661,7 @@ pre {
     white-space: -o-pre-wrap;
     word-wrap: break-word;
     font-family: Courier, 'New Courier', monospace;
-    font-size: 14px;
+    
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -856,7 +856,7 @@ a {
 
 .home .features .ui-g p {
     color: #20272a;
-    font-size: 14px;
+    
     margin-bottom: 30px;
 }
 
@@ -909,7 +909,7 @@ a {
 }
 
 .home .prosupport p {
-    font-size: 14px;
+    
     line-height: 22px;
 }
 .home .prosupport h3 {
@@ -941,7 +941,7 @@ a {
 }
 
 .home .testimonials p {
-    font-size: 14px;
+    
     line-height: 1.5;
 }
 

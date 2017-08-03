@@ -71,6 +71,29 @@ export class DataTableSelectionDemo extends Component {
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
+
+                    <h3>RadioButton</h3>
+                    <p>Single selection can also be handled using radio buttons by enabling the selectionMode property of column as "single".</p>
+                    <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCar2)}
+                        selection={this.state.selectedCar2} onSelectionChange={(e) => this.setState({selectedCar2: e.data})}>
+                        <Column selectionMode="single" style={{width:'2em'}}/>
+                        <Column field="vin" header="Vin" />
+                        <Column field="year" header="Year" />
+                        <Column field="brand" header="Brand" />
+                        <Column field="color" header="Color" />
+                    </DataTable>
+
+                    <h3>Checkbox</h3>
+                    <p>Multiple selection can also be handled using checkboxes by enabling the selectionMode property of column as "multiple".</p>
+                    <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCar2)}
+                        selection={this.state.selectedCar2} onSelectionChange={(e) => this.setState({selectedCar2: e.data})}>
+                        <Column selectionMode="multiple" style={{width:'2em'}}/>
+                        <Column field="vin" header="Vin" />
+                        <Column field="year" header="Year" />
+                        <Column field="brand" header="Brand" />
+                        <Column field="color" header="Color" />
+                    </DataTable>
+
                 </div>
             </div>
         );
