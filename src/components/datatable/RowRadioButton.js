@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ObjectUtils from '../utils/ObjectUtils';
 
 export class RowRadioButton extends Component {
 

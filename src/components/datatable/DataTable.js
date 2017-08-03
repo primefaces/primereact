@@ -132,6 +132,7 @@ export class DataTable extends Component {
         this.onSort = this.onSort.bind(this);
         this.onFilter = this.onFilter.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
+        this.onHeaderCheckboxClick = this.onHeaderCheckboxClick.bind(this);
     }
 
     onPageChange(event) {
@@ -516,6 +517,17 @@ export class DataTable extends Component {
         }
     }
 
+    onHeaderCheckboxClick(event) {
+        let selection;
+
+        if(!event.checked)
+            selection = [...this.props.value];
+        else
+            selection = [];
+
+        this.props.onSelectionChange({originalEvent: event, data: selection});
+    }
+
     filter(value) {
         let filteredValue = [];
         let columns = React.Children.toArray(this.props.children);
@@ -588,6 +600,10 @@ export class DataTable extends Component {
         return data;
     }
 
+    isAllSelected() {
+        return this.props.selection && this.props.value && this.props.selection.length === this.props.value.length;
+    }
+
     getFrozenColumns() {
         let frozenColumns = null;
         if(this.props.children && this.props.children.length) {
@@ -618,7 +634,8 @@ export class DataTable extends Component {
 
     createTableHeader(columns) {
         return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter}>
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
+                            onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}>
                             {columns}
                           </TableHeader>;
     }

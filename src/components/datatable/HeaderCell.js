@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
+import {RowCheckbox} from './RowCheckbox';
 
 export class HeaderCell extends Component {
 
@@ -64,6 +65,7 @@ export class HeaderCell extends Component {
         let multipleSorted = multiSortMetaData !== null;
         let sortOrder = 0;
         let resizer = this.props.resizableColumns && <span className="ui-column-resizer ui-clickable" onMouseDown={this.onMouseDown}></span>;
+        let sortIconElement, filterElement, headerCheckbox;
 
         if(singleSorted) 
             sortOrder = this.props.sortOrder;
@@ -72,24 +74,32 @@ export class HeaderCell extends Component {
 
         let sorted = this.props.sortable && (singleSorted || multipleSorted);
         let className = classNames('ui-state-default ui-unselectable-text', 
-                        {'ui-sortable-column': this.props.sortable, 'ui-state-active': sorted, 'ui-resizable-column': this.props.resizableColumns}, this.props.className);
+                        {'ui-sortable-column': this.props.sortable, 
+                        'ui-state-active': sorted, 
+                        'ui-resizable-column': this.props.resizableColumns,
+                        'ui-selection-column': this.props.selectionMode}, this.props.className);
 
         if(this.props.sortable) {
             var sortIcon = sorted ? sortOrder < 0 ? 'fa-sort-desc' : 'fa-sort-asc': 'fa-sort';
-            var sortIconClassName = classNames('ui-sortable-column-icon fa fa-fw', sortIcon);
+            sortIconElement = <span className={classNames('ui-sortable-column-icon fa fa-fw', sortIcon)}></span>;
         }
 
         if(this.props.filter) {
-            var filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} className="ui-column-filter" />;
+            filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} className="ui-column-filter" />;
+        }
+
+        if(this.props.selectionMode) {
+            headerCheckbox = <RowCheckbox onClick={this.props.onHeaderCheckboxClick} selected={this.props.headerCheckboxSelected}/>;
         }
 
         return (
             <th className={className} style={this.props.style} onClick={this.onClick} 
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
                 {resizer}
-               <span className="ui-column-title">{this.props.header}</span>
-               <span className={sortIconClassName}></span>
+                <span className="ui-column-title">{this.props.header}</span>
+                {sortIconElement}
                 {filterElement}
+                {headerCheckbox}
             </th>
         );
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ObjectUtils from '../utils/ObjectUtils';
 
 export class RowCheckbox extends Component {
 
@@ -24,7 +23,8 @@ export class RowCheckbox extends Component {
         if(this.props.onClick) {
             this.props.onClick({
                 originalEvent: event,
-                data: this.props.rowData
+                data: this.props.rowData,
+                checked: this.props.selected
             })
         }
     }
