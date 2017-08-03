@@ -16,9 +16,10 @@ class Home extends Component {
                     <h1>Your Favorite UI Framework</h1>
                     <h2>for React</h2>
 
-                    <Link to="/setup">
-                        <img alt="button" src="showcase/resources/images/home/button-start.png"/>
-                    </Link>
+                    <a className="home-button" href="/#/setup">
+                        Get Started
+                    </a>
+
                 </div>
                 <div className="features">
                     <h3>Why Use PrimeReact?</h3>
@@ -89,9 +90,9 @@ class Home extends Component {
                             <h3>PrimeReact PRO Support</h3>
                             <p>With PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
                             <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
-                            <Link to="/setup">
-                                <img alt="button" src="showcase/resources/images/home/button-download.png"/>
-                            </Link>
+                            <a className="home-button2" href="/#/setup">
+                                Get a Quote
+                            </a>
                         </div>
                         <div className="ui-g-12 ui-md-6">
                             <img alt="PRO" src="showcase/resources/images/home/icon-pro.svg"></img>

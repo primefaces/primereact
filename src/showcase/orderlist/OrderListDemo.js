@@ -37,7 +37,7 @@ export class OrderListDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>OrderList</h1>
                         <p>OrderList is used to sort a collection. When the position of an item changes, the backend array is updated as well.</p>

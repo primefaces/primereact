@@ -60,7 +60,7 @@ export class DataScrollerLoaderDemo extends Component {
             <div>
                 <DataScrollerSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller - Loader</h1>
                         <p>Instead of scrolling, click event of an element can be used to load data.</p>

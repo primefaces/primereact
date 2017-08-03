@@ -33,7 +33,7 @@ export class DataTableSelectionDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable</h1>
                         <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property and onRowSelect-onRowUnselect 

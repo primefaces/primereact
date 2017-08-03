@@ -32,7 +32,7 @@ export class SelectButtonDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>SelectButton</h1>
                         <p>SelectButton is used to select a boolean value using a button.</p>

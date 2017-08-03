@@ -83,7 +83,7 @@ export class TreeDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree</h1>
                         <p>Tree is used to display hierarchical data.</p>

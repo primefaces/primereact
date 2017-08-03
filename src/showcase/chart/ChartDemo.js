@@ -6,10 +6,10 @@ export class ChartDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Charts</h1>
-                        <p>Chart components are based on <a href="http://www.chartjs.org/">Charts.js</a> 2.1.x, an open source HTML5 based charting library.</p>
+                        <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Charts.js</a> 2.1.x, an open source HTML5 based charting library.</p>
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@ export class AccordionDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Accordion</h1>
                         <p>Accordion groups a collection of contents in tabs.</p>

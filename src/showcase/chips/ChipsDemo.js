@@ -22,7 +22,7 @@ export class ChipsDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Chips</h1>
                         <p>Chips is used to enter multiple values on an inputfield.</p>

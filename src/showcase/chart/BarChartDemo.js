@@ -23,7 +23,7 @@ export class BarChartDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>BarChart</h1>
                         <p>A bar chart or bar graph is a chart that presents Grouped data with rectangular bars with lengths proportional to the values that they represent.</p>

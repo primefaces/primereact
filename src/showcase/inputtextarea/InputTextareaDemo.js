@@ -19,7 +19,7 @@ export class InputTextareaDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>InputTextarea</h1>
                         <p>Inputtextarea add styling and autoResize functionality to standard textarea element.</p>

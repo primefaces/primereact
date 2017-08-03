@@ -19,7 +19,7 @@ export class TriStateCheckboxDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TriStateCheckbox</h1>
                         <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>

@@ -78,7 +78,7 @@ export class DataTableFilterDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Filter</h1>
                         <p>Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode 

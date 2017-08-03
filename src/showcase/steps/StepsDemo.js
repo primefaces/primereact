@@ -42,7 +42,7 @@ export class StepsDemo extends Component {
         ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Steps</h1>
                         <p>Steps components is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>

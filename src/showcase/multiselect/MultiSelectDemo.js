@@ -31,7 +31,7 @@ export class MultiSelectDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>

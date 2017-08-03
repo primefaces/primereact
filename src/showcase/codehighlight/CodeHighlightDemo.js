@@ -7,7 +7,7 @@ export class CodeHighlightDemo extends Component {
         
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>CodeHighlight</h1>
                         <p>CodeHighlight is used for highlighting code blocks using PrismJS</p>

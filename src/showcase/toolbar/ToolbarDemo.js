@@ -15,7 +15,7 @@ export class ToolbarDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Toolbar</h1>
                         <p>Toolbar is a grouping component for buttons and other content.</p>

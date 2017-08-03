@@ -66,7 +66,7 @@ export class DropdownDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>

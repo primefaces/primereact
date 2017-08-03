@@ -23,7 +23,7 @@ export class DataTablePaginatorDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Paginator</h1>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>

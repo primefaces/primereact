@@ -19,7 +19,7 @@ export class OverlayPanelDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>OverlayPanel</h1>
                         <p>OverlayPanel is a container component that can overlay other components on page.</p>

@@ -59,7 +59,7 @@ export class DataScrollerInlineDemo extends Component {
             <div>
                 <DataScrollerSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller - Inline</h1>
                         <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>

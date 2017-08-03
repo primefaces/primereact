@@ -44,7 +44,7 @@ export class DataTableLazyDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Lazy</h1>
                         <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. Sample belows imitates 

@@ -34,7 +34,7 @@ export class ProgressBarDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ProgressBar</h1>
                         <p>ProgressBar is a process status indicator</p>

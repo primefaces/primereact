@@ -84,7 +84,7 @@ export class ScheduleDemo extends Component {
 
 		return (
 			<div>
-				<div className="content-section">
+				<div className="content-section introduction">
 					<div className="feature-intro">
 						<h1>Schedule</h1>
 						<p>Schedule is an event calendar based on FullCalendar.</p>

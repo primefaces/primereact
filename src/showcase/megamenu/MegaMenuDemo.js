@@ -127,7 +127,7 @@ export class MegaMenuDemo extends Component {
         ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>MegaMenu</h1>
                         <p>MegaMenu displays submenus of root items together.</p>

@@ -24,7 +24,7 @@ export class ToggleButtonDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ToggleButton</h1>
                         <p>ToggleButton is used to select a boolean value using a button.</p>

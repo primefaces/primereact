@@ -49,7 +49,7 @@ export class MessagesDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Messages</h1>
                         <p>Messages is used to display messages inline.</p>

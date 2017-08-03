@@ -37,7 +37,7 @@ export class DataTableDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable</h1>
                         <p>DataList displays data in tabular format.</p>

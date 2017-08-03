@@ -57,7 +57,7 @@ export class DataListDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataList</h1>
                         <p>DataList displays data in list layout.</p>

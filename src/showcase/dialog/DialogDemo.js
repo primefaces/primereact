@@ -25,7 +25,7 @@ export class DialogDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Dialog</h1>
                         <p>Dialog is a container to display content in an overlay window.</p>

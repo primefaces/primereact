@@ -24,7 +24,7 @@ export class BreadcrumbDemo extends Component {
         ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Breadcrumb</h1>
                         <p>Breadcrumb provides contextual information about page hierarchy.</p>

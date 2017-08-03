@@ -33,7 +33,7 @@ export class SplitButtonDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>SplitButton</h1>
                         <p>SplitButton groups a set of commands in an overlay with a default command.</p>

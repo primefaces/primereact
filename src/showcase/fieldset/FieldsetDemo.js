@@ -9,7 +9,7 @@ export class FieldsetDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Fieldset</h1>
                         <p>Fieldset is a grouping component with a content toggle feature.</p>

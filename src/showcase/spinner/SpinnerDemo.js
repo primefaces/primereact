@@ -30,7 +30,7 @@ export class SpinnerDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Spinner</h1>
                         <p>Spinner is an input component to provide a numerical input.</p>

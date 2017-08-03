@@ -89,7 +89,7 @@ export class TieredMenuDemo extends Component {
             }];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tiered Menu</h1>
                         <p>TieredMenu displays submenus in nested overlays.</p>

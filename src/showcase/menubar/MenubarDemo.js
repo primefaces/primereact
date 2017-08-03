@@ -89,7 +89,7 @@ export class MenubarDemo extends Component {
             }];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Menubar</h1>
                         <p>Menubar is an horizontal menu components with support for nested submenus.</p>

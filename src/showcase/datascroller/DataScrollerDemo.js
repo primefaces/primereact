@@ -59,7 +59,7 @@ export class DataScrollerDemo extends Component {
             <div>
                 <DataScrollerSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller</h1>
                         <p>DataScroller displays data with on demand loading using scroll.</p>

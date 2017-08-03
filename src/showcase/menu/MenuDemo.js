@@ -24,7 +24,7 @@ export class MenuDemo extends Component {
             }];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Menu</h1>
                         <p>Menu is a navigation/command component that supports dynamic and static positioning.</p>

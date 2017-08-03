@@ -133,7 +133,7 @@ export class OrganizationChartDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>OrganizationChart</h1>
                         <p>OrganizationChart visualized hierarchical organization data.</p>

@@ -7,7 +7,7 @@ export class GridDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Grid CSS</h1>
                         <p>Grid CSS is a lightweight responsive and fluid layout utility optimized for mobile devices, tablets and desktops. 

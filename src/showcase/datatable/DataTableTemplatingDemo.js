@@ -47,7 +47,7 @@ export class DataTableTemplatingDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Templating</h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>

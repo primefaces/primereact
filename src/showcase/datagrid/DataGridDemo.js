@@ -40,7 +40,7 @@ export class DataGridDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataGrid</h1>
                         <p>DataGrid displays data in grid format.</p>

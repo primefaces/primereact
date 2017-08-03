@@ -22,7 +22,7 @@ export class PaginatorDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Paginator</h1>
                         <p>Paginator is a generic widget to display content in paged format.</p>

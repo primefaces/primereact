@@ -53,7 +53,7 @@ export class SliderDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Slider</h1>
                         <p>Slider is a component to provide input using dragging of a handle.</p>

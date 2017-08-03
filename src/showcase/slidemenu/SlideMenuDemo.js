@@ -96,7 +96,7 @@ export class SlideMenuDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Slide Menu</h1>
                         <p>SlideMenu displays submenus with slide animation.</p>

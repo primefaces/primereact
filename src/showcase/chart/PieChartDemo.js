@@ -23,7 +23,7 @@ export class PieChartDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>PieChart</h1>
                         <p>A pie chart is a circular statistical graphic, which is divided into slices to illustrate numerical proportion.</p>

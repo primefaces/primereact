@@ -106,7 +106,7 @@ export class TreeTableDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable</h1>
                         <p>TreeTable is used to display hierarchical data in tabular format.</p>

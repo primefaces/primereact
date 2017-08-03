@@ -76,9 +76,6 @@ html {
     width: 166px;
     height: 41px;
     object-fit: contain;
-    font-size: 34px;
-    text-align: left;
-    color: #ffffff;
 }
 #layout-topbar .logo img:first-child {
     width: 40px;
@@ -189,7 +186,7 @@ html {
     width: 300px;
 	-moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
 	-webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
-	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 #layout-sidebar .layout-menu > a {
@@ -315,7 +312,7 @@ html {
 #layout-content {
     margin-left: 300px;
     padding-top: 70px;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
 }
 
 .layout-mask {
@@ -338,8 +335,23 @@ html {
 }
 
 .content-section.introduction {
-    background-image: linear-gradient(to left, #2bc0ec, #1b81d7);
+    padding: 38px 20px 38px 20px;
+    background-image: linear-gradient(to right, #008fba, #03c4e8);
     color: #ffffff;
+}
+
+.feature-intro h1 {
+    font-size: 28px;
+    margin: 0 0 12px 0;
+    display: block;
+    text-align: left;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.feature-intro p {
+    margin: 0;
+    line-height: 1.5em;
 }
 
 .content-section:first-of-type > div > span {
@@ -372,18 +384,26 @@ html {
 
 /* Demos */
 .implementation {
+    padding: 42px 29px 42px 29px;
     background-color: #FFFFFF;
-    overflow: visible;
+    border: solid 1px #eaeaea;
+    text-align: left;
 }
 .implementation > h3 {
+    font-weight: bold;
     margin-top: 30px;
-    color: #5C666A;
+    color: #222222;
+    font-size: 16px;
 }
-.implementation h3.first {
+.implementation > div {
+    font-size: 14px;
+    color: #484848;
+}
+.implementation > h3:first-child {
     margin-top: 0px !important;
 }
 .implementation h4 {
-    color: #5C666A;
+    color: #484848;
 }
 
 .SubSubMenu {
@@ -404,54 +424,40 @@ html {
     color: #229be0
 }
 
-/* Documentation Section */
-.documentation .ui-tabview-panel {
-    color: #404C51 !important;
+/* Source Section */
+.source {
+    padding: 37px 40px 37px 40px;
 }
-.documentation h3 {
+.source h3 {
+    color:  #484848;
     margin-top: 25px;
     margin-bottom: 0px;
     font-size: 24px;
     font-weight: normal;
 }
-.documentation h4 {
+.source h4 {
+    color:  #484848;
     margin-top: 25px;
     margin-bottom: 0px;
     font-size: 20px;
     font-weight: normal;
 }
-.documentation p {
+.source p {
+    color:  #484848;
     font-size: 16px;
     line-height: 24px;
     margin: 10px 0;
     opacity: .90;
 }
-.documentation .doc-tablewrapper {
+.source .doc-tablewrapper {
     margin: 10px 0;
 }
-.documentation a {
-    color: #0273D4;
-}
-.documentation .btn-viewsource {
-    background-color: #444444;
-    padding: .5em;
-    border-radius: 2px;
-    color: #ffffff;
-    font-weight: bold;
-    margin-bottom: 1em;
-    display: inline-block;
-    transition: background-color .3s;
-}
-.documentation .btn-viewsource i {
-    margin-right: .25em;
-}
-
-.documentation .btn-viewsource:hover {
-    background-color: #595959;
+.source a {
+    color: #03c4e8;
 }
 
 /* Tabs Source */
-.documentation .ui-tabview {
+.source .ui-tabview {
     background: none;
     border: 0 none;
     color: #5C666A;
@@ -460,51 +466,57 @@ html {
     -webkit-border-radius: 4px !important;
     border-radius: 4px !important;
 }
-.documentation .ui-tabview .ui-tabview-nav {
-    background: #1976D2 !important;;
-    margin-bottom: -1px;
-    padding: 3px 3px 0px 3px !important;
-    border-top-right-radius: 4px !important;
-    border-top-left-radius: 4px !important;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
+.source .ui-tabview .ui-tabview-nav {
+    height: 35px;
+    border-radius: 3px;
+    background-color: #03c4e8;
+    padding: 4px 4px 0px 4px;
 }
-.documentation .ui-tabview .ui-tabview-nav li,
-.documentation .ui-tabview .ui-tabview-nav li.ui-state-hover {
-    border: 0px none !important;
-    background: #3F94E9 !important;;
-    border-color: #3F94E9 !important;;
+.source .ui-tabview .ui-tabview-nav li,
+.source .ui-tabview .ui-tabview-nav li.ui-state-hover {
+    margin-right: 4px;
+    height: 31px;
     box-shadow: none !important;
-    border-top-right-radius: 4px !important;
-    border-top-left-radius: 4px !important;
 }
-.documentation .ui-tabview .ui-tabview-nav li a {
-    padding: .5em 1em !important;
+.source .ui-tabview .ui-tabview-nav li a {
+    padding-top: 8px;
 }
-.documentation .ui-tabview .ui-tabview-nav li.tab-doc {
+.source .ui-tabview .ui-tabview-nav li.tab-doc {
     margin-right: 0;
 }
-.documentation .ui-tabview .ui-tabview-nav li.ui-state-default a {
+.source .ui-tabview .ui-tabview-nav li.ui-state-default {
+    border:none;
+}
+.source .ui-tabview .ui-tabview-nav li.ui-state-default a {
+    border-radius: 3px 3px 0 0;
     color: #fff !important;
     font-weight: normal !important;
     text-shadow: none ;
+    font-size: 14px;
+    height: inherit;
+    background-color: #00829b;
 }
-.documentation .ui-tabview .ui-tabview-nav li.ui-state-active a {
-    color: #5C666A !important;
+.source .ui-tabview .ui-tabview-nav li.ui-state-active a {
+    color: #6b6b6b !important;
+    background: #f9ffff !important;
     font-weight: normal !important;
+    font-size: 14px;
 }
-.documentation .ui-tabview .ui-tabview-nav li.ui-state-hover {
+.source .ui-tabview .ui-tabview-nav li.ui-state-hover {
     box-shadow: none !important;;
 }
-.documentation .ui-tabview .ui-tabview-nav li.ui-tabview-selected {
-    background: #F5F6F7 !important;
+.source .ui-tabview .ui-tabview-nav li.ui-tabview-selected {
+    background: #f9ffff !important;
 }
-.documentation .ui-tabview .ui-tabview-panels {
+.source .ui-tabview .ui-tabview-panels {
     border-top: 1px solid #F5F6F7 !important;;
     color: #5C666A !important;
     background: #F5F6F7;
 }
-.documentation .ui-tabview.ui-tabview-top > .ui-tabview-nav li {
+.source .ui-tabview .ui-tabview-panels .ui-tabview-panel {
+    padding: 0px;
+}
+.source .ui-tabview.ui-tabview-top > .ui-tabview-nav li {
     top: 0px !important;
 }
 
@@ -512,27 +524,28 @@ html {
 .doc-table {
     border-collapse: collapse;
     width: 100%;
+    border: solid 1px #d0dee0;
 }
 .doc-table th {
-    background-color: #dae8ef;
-    color: #404C51;
-    border: solid 1px #C1D5DF;
-    padding: 5px;
-    font-size: 16px;
+    color:  #484848;
+    background-color: #d7f9ff;
+    font-weight: bold;
+    padding: 8px 20px 7px;
+    font-size: 14px;
     text-align: left;
 }
 .doc-table tbody td {
-    color: #404C51;
-    padding: 4px 10px;
+    color:  #484848;
+    padding: 8px 20px;
     border: 1px solid #E5EBF0;
-    font-size: 15px;
+    font-size: 14px;
     opacity: .90;
 }
 .doc-table tbody tr:nth-child(even) {
-    background-color: #FBFCFD;
+    background-color: #f3fbfc;
 }
 .doc-table tbody tr:nth-child(odd) {
-    background-color: #F3F6F9;
+    background-color: #ffffff;
 }
 
 @media screen and (max-width: 64em) {
@@ -548,14 +561,16 @@ html {
         margin: 7px 0 7px 0;
     }
     #layout-topbar .logo img:first-child {
-        width: 30px;
+        width: 34px;
         height:38px;
         margin-right: 5px;
     }
     #layout-topbar .logo img:last-child {
         width: 150px;
     }
-    
+    .content-section {
+        padding: 14px 24px;
+    }
     .topbar-menu {
         background-color: #363c3f; 
         float: none;
@@ -588,7 +603,7 @@ html {
     
     #layout-content {
         margin-left: 0;
-        padding-top: 100px;
+        padding-top: 99px;
     }
     
     .topbar-menu > li.topbar-menu-themes > ul {
@@ -738,6 +753,37 @@ a {
 /* Introduction */
 .home p {
     line-height: 22px;
+}
+.home-button {
+    width: 112px;
+    height: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+    background-color: #03C4E8;
+    padding: 10px 24px 9px 24px;
+    border-radius: 3px;
+    transition: background-color .3s;
+}
+
+.home-button:hover {
+    background-color: #029cb9;
+}
+
+.home-button2 {
+    width: 112px;
+    height: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+    background-color: #E8037D;
+    padding: 10px 24px 9px 24px;
+    border-radius: 3px;
+    transition: background-color .3s;
+}
+
+.home-button2:hover {
+    background-color: #b90264;
 }
 
 .home .introduction {

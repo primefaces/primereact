@@ -25,7 +25,7 @@ export class RatingDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Rating</h1>
                         <p>Rating components is a star based selection input.</p>

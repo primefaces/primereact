@@ -29,7 +29,7 @@ export class LightboxDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Lightbox</h1>
                         <p>LightBox is a modal overlay component to display images, videos, inline html content and iframes.</p>

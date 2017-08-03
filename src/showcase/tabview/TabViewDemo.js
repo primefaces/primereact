@@ -8,7 +8,7 @@ export class TabViewDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TabView</h1>
                         <p>TabView is a container component to group content with tabs.</p>

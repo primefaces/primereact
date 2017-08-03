@@ -6,7 +6,7 @@ export class SetupPage extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Setup</h1>
                         <p>PrimeReact is a rich set of open source native components for React.</p>

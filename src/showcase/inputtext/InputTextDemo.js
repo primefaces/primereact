@@ -20,7 +20,7 @@ export class InputTextDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>InputText</h1>
                         <p>InputText is an extension to standard input element with theming.</p>

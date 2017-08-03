@@ -9,7 +9,7 @@ export class PanelDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Panel</h1>
                         <p>Panel is a grouping component providing with content toggle feature.</p>

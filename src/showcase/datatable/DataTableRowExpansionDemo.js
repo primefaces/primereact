@@ -49,7 +49,7 @@ export class DataTableRowExpansionDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Row Expansion</h1>
                         <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template..</p>

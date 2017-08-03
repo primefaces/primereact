@@ -33,7 +33,7 @@ export class PickListDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>PickList</h1>
                         <p>PickList is used to reorder items between differents lists.</p>

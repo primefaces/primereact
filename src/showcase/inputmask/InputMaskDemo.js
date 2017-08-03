@@ -45,7 +45,7 @@ export class InputMaskDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>InputMask</h1>
                         <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>

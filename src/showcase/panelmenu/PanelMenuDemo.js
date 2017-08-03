@@ -86,7 +86,7 @@ export class PanelMenuDemo extends Component {
         ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>PanelMenu</h1>
                         <p>PanelMenu is a hybrid of accordion-tree components.</p>

@@ -55,7 +55,7 @@ export class ListboxDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Listbox</h1>
                         <p>Listbox is used to select one or more values from a list of items.</p>

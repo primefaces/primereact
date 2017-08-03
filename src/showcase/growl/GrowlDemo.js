@@ -44,7 +44,7 @@ export class GrowlDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Growl</h1>
                         <p>Growl is used to display messages in an overlay.</p>

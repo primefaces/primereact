@@ -19,7 +19,7 @@ export class RadioButtonDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>RadioButton</h1>
                         <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>

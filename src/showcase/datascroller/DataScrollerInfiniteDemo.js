@@ -71,7 +71,7 @@ export class DataScrollerInfiniteDemo extends Component {
             <div>
                 <DataScrollerSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller - Infinite</h1>
                         <p>DataScroller supports lazy loading so that each scroll event fetches new chunk of data from a remote datasource. This example generates the new records on-the-fly and scrolling is infinite.

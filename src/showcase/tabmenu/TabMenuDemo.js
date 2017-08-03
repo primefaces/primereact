@@ -21,7 +21,7 @@ export class TabMenuDemo extends Component {
         ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TabMenu</h1>
                         <p>Menu is a navigation/command component that displays items as tab headers.</p>

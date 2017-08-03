@@ -82,7 +82,7 @@ export class CalendarDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Calendar</h1>
                         <p>Calendar is an input component to select a date.</p>

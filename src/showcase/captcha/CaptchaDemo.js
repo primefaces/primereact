@@ -18,7 +18,7 @@ export class CaptchaDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Captcha</h1>
                         <p>Captcha is a form validation component based on Recaptcha.</p>
