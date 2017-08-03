@@ -67,6 +67,9 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="whouses">
+                    <h3>Key Users</h3>
+                    <p>Open source products of <a href="http://www.primetek.com.tr">PrimeTek</a> are used all around the world by 1M+ developers in corporations, government and educational
+                        institutions.</p>
                     <div className="ui-g">
                         <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/fox.svg"></img></div>
                         <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/airbus.svg"></img></div>

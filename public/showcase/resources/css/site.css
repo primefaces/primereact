@@ -689,6 +689,10 @@ pre {
 .whouses img {
     width: 100%;
 }
+.whouses p >a {
+    font-weight: bold;
+    color: #03c4e8;
+}
 
 .ui-growl {
     top: 100px;
