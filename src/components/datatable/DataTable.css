@@ -290,7 +290,7 @@
     overflow: hidden;
 }
 
-.ui-datatable-unfrozen-view {
+.ui-datatable-frozen-view + .ui-datatable-scrollable-view {
     position: absolute;
     top: 0px;
 }

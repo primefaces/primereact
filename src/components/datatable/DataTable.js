@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {Paginator} from '../paginator/Paginator';
@@ -47,8 +46,9 @@ export class DataTable extends Component {
         filters: null,
         globalFilter: null,
         scrollable: false,
-        scrollWidth: null,
         scrollHeight: null,
+        frozenWidth: null,
+        unfrozenWidth: null,
         columnResizeMode: 'fit',
         onColumnResizeEnd: null,
         onSort: null,
@@ -100,6 +100,8 @@ export class DataTable extends Component {
         scrollable: PropTypes.bool,
         scrollWidth: PropTypes.string,
         scrollHeight: PropTypes.string,
+        frozenWidth: PropTypes.string,
+        unfrozenWidth: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -528,6 +530,63 @@ export class DataTable extends Component {
         return data;
     }
 
+    getFrozenColumns() {
+        let frozenColumns = null;
+        if(this.props.children && this.props.children.length) {
+            for(let col of this.props.children) {
+                if(col.props.frozen) {
+                    frozenColumns = frozenColumns||[];
+                    frozenColumns.push(col);
+                }
+            }
+        }
+
+        return frozenColumns;
+    }
+
+    getScrollableColumns() {
+        let columns = null;
+        if(this.props.children && this.props.children.length) {
+            for(let col of this.props.children) {
+                if(!col.props.frozen) {
+                    columns = columns||[];
+                    columns.push(col);
+                }
+            }
+        }
+
+        return columns;
+    }
+
+    createTableHeader(columns) {
+        return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter}>
+                            {columns}
+                          </TableHeader>;
+    }
+
+    createTableBody(value, columns) {
+        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
+                        onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                        expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
+                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
+                        {columns}
+                </TableBody>;
+    }
+
+    createTableFooter(columns) {
+        if(this.hasFooter())
+            return <TableFooter columnGroup={this.props.footerColumnGroup}>{columns}</TableFooter>;
+        else
+            return null;
+    }
+
+    createScrollableView(value, columns, frozen) {
+        return <ScrollableView header={this.createTableHeader(columns)} body={this.createTableBody(value, this.props.children)} footer={this.createTableFooter(this.props.children)} 
+                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}></ScrollableView>
+    }
+
     render() {
         let value = this.processData();
         let totalRecords = this.props.lazy ? this.props.totalRecords : value ? value.length : 0;
@@ -536,31 +595,29 @@ export class DataTable extends Component {
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
-        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>
+        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>;
         let tableContent = null;
 
-        let tableHeader = <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart}
-                            onFilter={this.onFilter}>
-                            {this.props.children}
-                          </TableHeader>;
-
-        let tableBody = <TableBody ref={(el) => {this.tbody = ReactDOM.findDOMNode(el)}} value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
-                                selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
-                                onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
-                                expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                                onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
-                                {this.props.children}
-                        </TableBody>;
-        
-        let tableFooter = this.hasFooter() ? <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter> : null;
-
         if(this.props.scrollable) {
-            tableContent = <div className="ui-datatable-scrollable-wrapper ui-helper-clearfix">
-                               <ScrollableView header={tableHeader} body={tableBody} footer={tableFooter} scrollHeight={this.props.scrollHeight} scrollWidth={this.props.scrollWidth}></ScrollableView>
-                           </div>;
+            let frozenColumns = this.getFrozenColumns();
+            let scrollableColumns = frozenColumns ? this.getScrollableColumns() : this.props.children;
+            let frozenView, scrollableView;
+            if(frozenColumns) {
+                frozenView = this.createScrollableView(value, frozenColumns, true);
+            }
+
+            scrollableView = this.createScrollableView(value, scrollableColumns, false);
+
+            tableContent = <div className="ui-datatable-scrollable-wrapper">
+                {frozenView}
+                {scrollableView}
+            </div>;
         }
         else {
+            let tableHeader = this.createTableHeader(this.props.children);
+            let tableBody = this.createTableBody(value, this.props.children);
+            let tableFooter = this.createTableFooter(this.props.children);
+
             tableContent = <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
                         {tableHeader}                        

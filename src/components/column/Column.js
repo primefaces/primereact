@@ -15,7 +15,8 @@ export class Column extends Component {
         className: null,
         rowSpan: null,
         colSpan: null,
-        expander: false
+        expander: false,
+        frozen: false
     }
 
     static propsTypes = {
@@ -30,6 +31,7 @@ export class Column extends Component {
         className: PropTypes.string,
         rowSpan: PropTypes.number,
         colSpan: PropTypes.number,
-        expander: PropTypes.bool
+        expander: PropTypes.bool,
+        frozen: PropTypes.bool
     }
 }
