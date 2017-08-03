@@ -36,6 +36,13 @@ export class DataTableScrollDemo extends Component {
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
+
+                    <DataTable header="Vertical" value={this.state.cars1} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
+                        <Column field="vin" header="Vin" style={{width:'250px'}} />
+                        <Column field="year" header="Year" style={{width:'250px'}} />
+                        <Column field="brand" header="Brand" style={{width:'250px'}} />
+                        <Column field="color" header="Color" style={{width:'250px'}} />
+                    </DataTable>
                 </div>
             </div>
         );
