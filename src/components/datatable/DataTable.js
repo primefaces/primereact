@@ -49,6 +49,8 @@ export class DataTable extends Component {
         scrollHeight: null,
         frozenWidth: null,
         unfrozenWidth: null,
+        csvSeparator: ',',
+        exportFilename: 'download',
         columnResizeMode: 'fit',
         onColumnResizeEnd: null,
         onSort: null,
@@ -102,6 +104,8 @@ export class DataTable extends Component {
         scrollHeight: PropTypes.string,
         frozenWidth: PropTypes.string,
         unfrozenWidth: PropTypes.string,
+        csvSeparator: PropTypes.string,
+        exportFilename: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -456,6 +460,60 @@ export class DataTable extends Component {
     unbindColumnResizeEvents() {
         document.removeEventListener('document', this.documentColumnResizeListener);
         document.removeEventListener('document', this.documentColumnResizeEndListener);
+    }
+
+    exportCSV() {
+        let data = this.props.value;
+        let csv = '\ufeff';
+        let columns = React.Children.toArray(this.props.children);
+        
+        //headers
+        for(let i = 0; i < columns.length; i++) {
+            if(columns[i].field) {
+                csv += '"' + (columns[i].props.header || columns[i].props.field) + '"';
+                
+                if(i < (columns.length - 1)) {
+                    csv += this.props.csvSeparator;
+                }
+            }
+        }
+        
+        //body        
+        data.forEach((record, i) => {
+            csv += '\n';
+            for(let i = 0; i < columns.length; i++) {
+                if(columns[i].props.field) {
+                    csv += '"' + ObjectUtils.resolveFieldData(record, columns[i].props.field) + '"';
+                    
+                    if(i < (columns.length - 1)) {
+                        csv += this.props.csvSeparator;
+                    }
+                }
+            }
+        });
+        
+        let blob = new Blob([csv],{
+            type: 'text/csv;charset=utf-8;'
+        });
+        
+        if(window.navigator.msSaveOrOpenBlob) {
+            navigator.msSaveOrOpenBlob(blob, this.exportFilename + '.csv');
+        }
+        else {
+            let link = document.createElement("a");
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            if(link.download !== undefined) {
+                link.setAttribute('href', URL.createObjectURL(blob));
+                link.setAttribute('download', this.props.exportFilename + '.csv');
+                link.click();
+            }
+            else {
+                csv = 'data:text/csv;charset=utf-8,' + csv;
+                window.open(encodeURI(csv));
+            }
+            document.body.removeChild(link);
+        }
     }
 
     filter(value) {

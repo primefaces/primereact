@@ -19,6 +19,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/rowexpand">&#9679; Expand</Link></li>
                     <li><Link to="/datatable/responsive">&#9679; Responsive</Link></li>
                     <li><Link to="/datatable/colresize">&#9679; ColResize</Link></li>
+                    <li><Link to="/datatable/export">&#9679; Export</Link></li>
                 </ul>
             </div>
         );
