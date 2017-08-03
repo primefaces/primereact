@@ -44,10 +44,13 @@ import {DataListDemo} from './showcase/datalist/DataListDemo';
 import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {DataTableDemo} from './showcase/datatable/DataTableDemo';
 import {DataTableLazyDemo} from './showcase/datatable/DataTableLazyDemo';
+import {DataTableExportDemo} from './showcase/datatable/DataTableExportDemo';
 import {DataTableTemplatingDemo} from './showcase/datatable/DataTableTemplatingDemo';
 import {DataTablePaginatorDemo} from './showcase/datatable/DataTablePaginatorDemo';
 import {DataTableSortDemo} from './showcase/datatable/DataTableSortDemo';
 import {DataTableFilterDemo} from './showcase/datatable/DataTableFilterDemo';
+import {DataTableColTogglerDemo} from './showcase/datatable/DataTableColTogglerDemo';
+import {DataTableScrollDemo} from './showcase/datatable/DataTableScrollDemo';
 import {DataTableSelectionDemo} from './showcase/datatable/DataTableSelectionDemo';
 import {DataTableColGroupDemo} from './showcase/datatable/DataTableColGroupDemo';
 import {DataTableRowExpansionDemo} from './showcase/datatable/DataTableRowExpansionDemo';
@@ -130,12 +133,15 @@ ReactDOM.render(
             <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
             <Route path="/datatable/sort" component={DataTableSortDemo} />
             <Route path="/datatable/filter" component={DataTableFilterDemo} />
+            <Route path="/datatable/scroll" component={DataTableScrollDemo} />
             <Route path="/datatable/lazy" component={DataTableLazyDemo} />
             <Route path="/datatable/selection" component={DataTableSelectionDemo} />
             <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
+            <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
             <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
             <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
             <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
+            <Route path="/datatable/export" component={DataTableExportDemo} />
             <Route path="/orderlist" component={OrderListDemo} />
             <Route path="/picklist" component={PickListDemo} />
             <Route path="/schedule" component={ScheduleDemo} />

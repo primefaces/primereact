@@ -165,7 +165,7 @@ export class MultiSelect extends Component {
                     var listItemStyleClass = classNames('ui-multiselect-item ui-corner-all', {'ui-state-highlight': selected});
                     var checkboxStyleClass = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': selected});
                     var checkboxIcon = classNames('ui-chkbox-icon ui-c', {'fa fa-check': selected});
-                    var listItem = <li className={listItemStyleClass} key={option.value} onClick={(event) => this.onOptionClick(event, option, index)}>
+                    var listItem = <li className={listItemStyleClass} key={option.label} onClick={(event) => this.onOptionClick(event, option, index)}>
                                         <div className="ui-chkbox ui-widget">
                                             <div className="ui-helper-hidden-accessible">
                                                 <input readOnly="readonly" type="checkbox" />
