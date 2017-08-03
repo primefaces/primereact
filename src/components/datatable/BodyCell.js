@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import {RowRadioButton} from './RowRadioButton';
@@ -18,11 +19,11 @@ export class BodyCell extends Component {
                 data: this.props.rowData
             });
         }
-        event.preventDefault();
-    } 
+    }
 
     render() {
         let content, header;
+        let cellClassName = classNames(this.props.className, {'ui-selection-column': this.props.selectionMode});
 
         if(this.props.expander) {
             let iconClassName = classNames('ui-row-toggler fa fa-fw ui-clickable', {'fa-chevron-circle-down': this.props.expanded, 'fa-chevron-circle-right': !this.props.expanded});
@@ -32,9 +33,9 @@ export class BodyCell extends Component {
         }
         else if(this.props.selectionMode) {
             if(this.props.selectionMode === 'single')
-                content = <RowRadioButton />;
+                content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
             else
-                content = <RowCheckbox />;
+                content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
         }
         else {
             if(this.props.bodyTemplate)
@@ -48,7 +49,7 @@ export class BodyCell extends Component {
         }
        
         return (
-            <td className={this.props.className} style={this.props.style}>
+            <td className={cellClassName} style={this.props.style}>
                 {header}
                 <span className="ui-cell-data">{content}</span>
             </td>

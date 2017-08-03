@@ -11,6 +11,8 @@ export class TableBody extends Component {
         this.onRowClick = this.onRowClick.bind(this);
         this.onRowTouchEnd = this.onRowTouchEnd.bind(this);
         this.onRowToggle = this.onRowToggle.bind(this);
+        this.onRadioClick = this.onRadioClick.bind(this);
+        this.onCheckboxClick = this.onCheckboxClick.bind(this);
     }
 
     onRowClick(event) {
@@ -94,7 +96,6 @@ export class TableBody extends Component {
                             if(this.props.onRowSelect) {
                                 this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                             }
-
                         }
                         else {
                             selection = [...this.props.selection||[], rowData];
@@ -114,6 +115,47 @@ export class TableBody extends Component {
 
     onRowTouchEnd(event) {
         this.rowTouched = true;
+    }
+
+    onRadioClick(event) {
+        let rowData = event.data;
+        let selection;
+
+        if(this.isSelected(rowData)) {
+            selection = null;
+            if(this.props.onRowUnselect) {
+                this.onRowUnselect.emit({originalEvent: event.originalEvent, data: rowData, type: 'radio'});
+            }
+        }
+        else {
+            selection = rowData;
+            if(this.props.onRowSelect) {
+                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'radio'});
+            }
+        }
+
+        this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
+    }
+
+    onCheckboxClick(event) {
+        let rowData = event.data;
+        let selection;
+
+        if(this.isSelected(rowData)) {
+            let selectionIndex = this.findIndexInSelection(rowData);
+            selection = this.props.selection.filter((val,i) => i !== selectionIndex);
+            if(this.props.onRowSelect) {
+                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
+            }
+        }
+        else {
+            selection = [...this.props.selection||[], rowData];
+            if(this.props.onRowSelect) {
+                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
+            }
+        }
+
+        this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
     }
 
     isSingleSelectionMode() {
@@ -195,9 +237,29 @@ export class TableBody extends Component {
         return this.findExpandedRowIndex(row) !== -1;
     }
 
+    isSelectionEnabled() {
+        if(this.props.selectionMode) {
+            return true;
+        }
+        else {
+            if(Array.isArray(this.props.children)) {
+                for(let col of this.props.children) {
+                    if(col.props.selectionMode)
+                       return true;
+                }
+            }
+            else {
+                return this.props.children.selectionMode != null;
+            }
+        }
+
+        return false;
+    }
+
     render() {
         let className = classNames('ui-datatable-data ui-widget-content', {'ui-datatable-hoverable-rows': this.props.selectionMode});
         let rows;
+        let selectionEnabled = this.isSelectionEnabled();
 
         if(this.props.value && this.props.value.length) {
             rows = [];
@@ -211,9 +273,11 @@ export class TableBody extends Component {
                 
                 let rowData = this.props.value[i];
                 let expanded = this.isRowExpanded(rowData);
-                let rowClassName = this.props.selectionMode ? classNames({'ui-state-highlight': this.isSelected(this.props.value[i])}) : null;
+                let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
+
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onTouchEnd={this.onRowTouchEnd} 
-                            className={rowClassName} onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}>{this.props.children}</BodyRow>
+                            onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
+                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);
 
