@@ -6,6 +6,7 @@ import {Paginator} from '../paginator/Paginator';
 import {TableHeader} from './TableHeader';
 import {TableBody} from './TableBody';
 import {TableFooter} from './TableFooter';
+import {ScrollableView} from './ScrollableView';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 
@@ -45,6 +46,9 @@ export class DataTable extends Component {
         resizableColumns: false,
         filters: null,
         globalFilter: null,
+        scrollable: false,
+        scrollWidth: null,
+        scrollHeight: null,
         columnResizeMode: 'fit',
         onColumnResizeEnd: null,
         onSort: null,
@@ -93,6 +97,9 @@ export class DataTable extends Component {
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
         columnResizeMode: PropTypes.string,
+        scrollable: PropTypes.bool,
+        scrollWidth: PropTypes.string,
+        scrollHeight: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -524,36 +531,50 @@ export class DataTable extends Component {
     render() {
         let value = this.processData();
         let totalRecords = this.props.lazy ? this.props.totalRecords : value ? value.length : 0;
-        let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns}, this.props.className);
+        let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 'ui-datatable-scrollable': this.props.scrollable}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
         let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>
+        let tableContent = null;
 
-        return (
-            <div className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
-                {headerFacet}
-                {paginatorTop}
-                <div className="ui-datatable-tablewrapper">
-                    <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
-                        <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
+        let tableHeader = <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart}
                             onFilter={this.onFilter}>
                             {this.props.children}
-                        </TableHeader>
-                        
-                        {this.hasFooter() && <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter>}
+                          </TableHeader>;
 
-                        <TableBody ref={(el) => {this.tbody = ReactDOM.findDOMNode(el)}} value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+        let tableBody = <TableBody ref={(el) => {this.tbody = ReactDOM.findDOMNode(el)}} value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
                                 selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                                 onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                                 expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                                 onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
                                 {this.props.children}
-                        </TableBody>
+                        </TableBody>;
+        
+        let tableFooter = this.hasFooter() ? <TableFooter columnGroup={this.props.footerColumnGroup}>{this.props.children}</TableFooter> : null;
+
+        if(this.props.scrollable) {
+            tableContent = <div className="ui-datatable-scrollable-wrapper ui-helper-clearfix">
+                               <ScrollableView header={tableHeader} body={tableBody} footer={tableFooter} scrollHeight={this.props.scrollHeight} scrollWidth={this.props.scrollWidth}></ScrollableView>
+                           </div>;
+        }
+        else {
+            tableContent = <div className="ui-datatable-tablewrapper">
+                    <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
+                        {tableHeader}                        
+                        {tableFooter}
+                        {tableBody}
                     </table>
-                </div>
+                </div>;
+        }
+
+        return (
+            <div className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
+                {headerFacet}
+                {paginatorTop}
+                {tableContent}
                 {paginatorBottom}
                 {footerFacet}
                 {resizeHelper}

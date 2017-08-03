@@ -14,6 +14,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/filter">&#9679; Filter</Link></li>
                     <li><Link to="/datatable/selection">&#9679; Selection</Link></li>
                     <li><Link to="/datatable/lazy">&#9679; Lazy</Link></li>
+                    <li><Link to="/datatable/scroll">&#9679; Scroll</Link></li>
                     <li><Link to="/datatable/colgroup">&#9679; ColGroup</Link></li>
                     <li><Link to="/datatable/rowexpand">&#9679; Expand</Link></li>
                     <li><Link to="/datatable/responsive">&#9679; Responsive</Link></li>

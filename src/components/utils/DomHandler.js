@@ -284,7 +284,7 @@ export default class DomHandler {
         }
     }
 
-    clearSelection() {
+    static clearSelection() {
         if(window.getSelection) {
             if(window.getSelection().empty) {
                 window.getSelection().empty();
@@ -299,5 +299,21 @@ export default class DomHandler {
                 //ignore IE bug
             }
         }
+    }
+
+    static calculateScrollbarWidth() {
+        if(this.calculatedScrollbarWidth != null)
+            return this.calculatedScrollbarWidth;
+        
+        let scrollDiv = document.createElement("div");
+        scrollDiv.className = "ui-scrollbar-measure";
+        document.body.appendChild(scrollDiv);
+
+        let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        document.body.removeChild(scrollDiv);
+
+        this.calculatedScrollbarWidth = scrollbarWidth;
+        
+        return scrollbarWidth;
     }
 }
