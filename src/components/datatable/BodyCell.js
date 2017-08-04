@@ -37,8 +37,8 @@ export class BodyCell extends Component {
                 content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
         }
         else {
-            if(this.props.bodyTemplate)
-                content = this.props.bodyTemplate(this.props.rowData, this.props);
+            if(this.props.body)
+                content = this.props.body(this.props.rowData, this.props);
             else
                 content = ObjectUtils.resolveFieldData(this.props.rowData, this.props.field);
         }
