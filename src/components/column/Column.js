@@ -5,35 +5,49 @@ export class Column extends Component {
 
     static defaultProps = {
         field: null,
+        sortField: null,
         header: null,
+        body: null,
         footer: null,
         sortable: false,
+        sortFunction: null,
         filter: false,
         filterMatchMode: 'startsWith',
+        filterPlaceholder: null,
+        filterType: 'text',
+        filterMaxLength: null,
         filterElement: null,
         style: null,
         className: null,
-        rowSpan: null,
-        colSpan: null,
+        hidden: false,
         expander: false,
         frozen: false,
-        selectionMode: null
+        selectionMode: null,
+        colSpan: null,
+        rowSpan: null
     }
 
     static propsTypes = {
         field: PropTypes.string,
-        header: PropTypes.string,
-        footer: PropTypes.string,
+        sortField: PropTypes.string,
+        header: PropTypes.any,
+        body: PropTypes.any,
+        footer: PropTypes.any,
         sortable: PropTypes.bool,
+        sortFunction: PropTypes.func,
         filter: PropTypes.bool,
         filterMatchMode: PropTypes.string,
+        filterPlaceholder: PropTypes.string,
+        filterType: PropTypes.string,
+        filterMaxLength: PropTypes.number,
         filterElement: PropTypes.object,
         style: PropTypes.object,
         className: PropTypes.string,
-        rowSpan: PropTypes.number,
-        colSpan: PropTypes.number,
+        hidden: PropTypes.bool,
         expander: PropTypes.bool,
         frozen: PropTypes.bool,
-        selectionMode: PropTypes.string
+        selectionMode: PropTypes.string,
+        colSpan: PropTypes.number,
+        rowSpan: PropTypes.number
     }
 }

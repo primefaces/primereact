@@ -43,6 +43,7 @@ export class DataTable extends Component {
         responsive: false,
         onRowToggle: null,
         resizableColumns: false,
+        columnResizeMode: 'fit',
         filters: null,
         globalFilter: null,
         scrollable: false,
@@ -51,7 +52,6 @@ export class DataTable extends Component {
         unfrozenWidth: null,
         csvSeparator: ',',
         exportFilename: 'download',
-        columnResizeMode: 'fit',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -96,9 +96,9 @@ export class DataTable extends Component {
         onRowToggle: PropTypes.func,
         responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,
+        columnResizeMode: PropTypes.string,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
-        columnResizeMode: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollWidth: PropTypes.string,
         scrollHeight: PropTypes.string,
@@ -194,7 +194,8 @@ export class DataTable extends Component {
         if(this.props.onSort) {
             this.props.onSort({
                 sortField: sortField,
-                sortOrder: sortOrder
+                sortOrder: sortOrder,
+                multiSortMeta: multiSortMeta
             });
         }
     }

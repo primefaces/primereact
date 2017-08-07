@@ -22,7 +22,7 @@ export class TableBody extends Component {
         }
 
         if(this.props.onRowClick) {
-            this.onRowClick.next(event);
+            this.props.onRowClick(event);
         }
 
         if(this.props.selectionMode) {

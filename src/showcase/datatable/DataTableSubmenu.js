@@ -25,5 +25,4 @@ export class DataTableSubmenu extends Component {
             </div>
         );
     }
-
 }
