@@ -90,7 +90,7 @@ class Home extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-6">
                             <h3>PrimeReact PRO Support</h3>
-                            <p>With PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
+                            <p>With PrimeReact PRO, it is easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
                             <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
                             <a className="home-button2" href="/#/setup">
                                 Get a Quote
@@ -347,11 +347,7 @@ class App extends Component {
                         <li className="topbar-menu-themes">
                             <a href="#">THEMES</a>
                             <ul>
-                                <li className="topbar-submenu-header">THEMING</li>
-                                <li><a href="#">Guide</a></li>
-                                <li className="topbar-submenu-header">PREMIUM</li>
-                                <li></li>
-                                <li className="topbar-submenu-header" style={{marginTop:'16px'}}>FREE</li>
+                                <li className="topbar-submenu-header" style={{marginTop:'16px'}}>Themes</li>
                                 <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
                                 <li><a href="#" data-theme="bootstrap" onClick={this.changeTheme}><span className="ui-text">Bootstrap</span></a></li>
                                 <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
