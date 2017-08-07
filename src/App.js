@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
 import 'prismjs/themes/prism-coy.css';
-import './App.css';
+import './sass/App.css';
 
 class Home extends Component {
 
