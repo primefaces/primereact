@@ -6,7 +6,9 @@
 .DS_Store
 /vscode
 /idea
-/sass-cache
+/.sass-cache
 /resources
 /components
+/src/sass/App.css
+/src/sass/App.css.map
 index.js
