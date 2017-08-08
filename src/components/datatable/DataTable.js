@@ -30,6 +30,7 @@ export class DataTable extends Component {
         sortOrder: 1,
         multiSortMeta: null,
         sortMode: 'single',
+        emptyMessage: "No records found",
         selectionMode: null,
         selection: null,
         onSelectionChange: null,
@@ -83,6 +84,7 @@ export class DataTable extends Component {
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
+        emptyMessage: PropTypes.string,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
@@ -646,7 +648,7 @@ export class DataTable extends Component {
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive}>
+                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage}>
                         {columns}
                 </TableBody>;
     }

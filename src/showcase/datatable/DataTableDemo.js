@@ -285,12 +285,6 @@ export class DataTableDemo extends Component {
                             <td>Style class of the column.</td>
                         </tr>
                         <tr>
-                            <td>hidden</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Controls visiblity of the column.</td>
-                        </tr>
-                        <tr>
                             <td>expander</td>
                             <td>boolean</td>
                             <td>false</td>
@@ -1196,6 +1190,12 @@ export class DataTableLazyDemo extends Component {
                             <td>string</td>
                             <td>single</td>
                             <td>Defines whether sorting works on single column or on multiple columns.</td>
+                        </tr>
+                        <tr>
+                            <td>emptyMessage</td>
+                            <td>string</td>
+                            <td>No records found</td>
+                            <td>Text to display when there is no data.</td>
                         </tr>
                         <tr>
                             <td>selectionMode</td>

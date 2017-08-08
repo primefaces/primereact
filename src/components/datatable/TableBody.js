@@ -288,6 +288,9 @@ export class TableBody extends Component {
                 }
             }
         }
+        else {
+            rows = <tr className="ui-widget-content ui-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr>;
+        }
 
         return (
             <tbody className={className}>
