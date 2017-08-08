@@ -6,7 +6,7 @@ import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 import {Button} from "../../components/button/Button";
-import {Dialog, Footer} from "../../components/dialog/Dialog";
+import {Dialog} from "../../components/dialog/Dialog";
 import {InputText} from "../../components/inputtext/InputText";
 
 export class DataTableCrudDemo extends Component {
@@ -49,11 +49,15 @@ export class DataTableCrudDemo extends Component {
     findSelectedCarIndex() {
         return this.state.cars.indexOf(this.car);
     }
+
     render() {
         var header = <div className="ui-helper-clearfix" style={{lineHeight:'1.87em'}}>CRUD for Cars </div>;
         var footer = <div className="ui-helper-clearfix" style={{width:'100%'}}>
             <Button style={{float:'left'}} icon="fa-plus" label="Add" onClick={()=>this.setState({selectedCar:{brand:'',year:'',vin:'',color:''},newCar:true,displayDialog:true})}/>
         </div>;
+        var dialogFooter=<div className="ui-dialog-buttonpane ui-helper-clearfix">
+                <Button icon="fa-close" label="Delete" onClick={this.delete}/><Button label="Save" icon="fa-check" onClick={this.save}/>
+            </div>;
 
         return (
             <div>
@@ -75,7 +79,7 @@ export class DataTableCrudDemo extends Component {
                         <Column field="color" header="Color" sortable={true} />
                     </DataTable>
                 </div>
-                <Dialog visible={this.state.displayDialog} header="Car Details" modal={true} >
+                <Dialog visible={this.state.displayDialog} header="Car Details" modal={true} footer={dialogFooter} >
                     <div className="ui-grid ui-grid-responsive ui-fluid">
                         <div className="ui-grid-row">
                             <div className="ui-grid-col-4" style={{padding:'4px 10px'}}><label htmlFor="vin">Vin</label></div>
@@ -106,10 +110,6 @@ export class DataTableCrudDemo extends Component {
                             </div>
                         </div>
                     </div>
-                    <Footer>
-                        <div className="ui-dialog-buttonpane ui-helper-clearfix">
-                            <Button icon="fa-close" label="Delete" onClick={this.delete}/><Button label="Save" icon="fa-check" onClick={this.save}/>
-                        </div></Footer>
                 </Dialog>
 
                 <DataTableCrudDoc/>
@@ -161,17 +161,22 @@ export class DataTableCrudDemo extends Component {
 
     delete() {
         let index = this.findSelectedCarIndex();
-        this.setState({cars:this.state.cars.filter((val,i) => i!=index),selectedCar:{brand:'',year:'',vin:'',color:''},displayDialog:false,newCar:false})
+        this.setState({cars:this.state.cars.filter((val,i) => i!==index),selectedCar:{brand:'',year:'',vin:'',color:''},displayDialog:false,newCar:false})
         this.car=null;
     }
+
     findSelectedCarIndex() {
         return this.state.cars.indexOf(this.car);
     }
+
     render() {
         var header = <div className="ui-helper-clearfix" style={{lineHeight:'1.87em'}}>CRUD for Cars </div>;
         var footer = <div className="ui-helper-clearfix" style={{width:'100%'}}>
             <Button style={{float:'left'}} icon="fa-plus" label="Add" onClick={()=>this.setState({selectedCar:{brand:'',year:'',vin:'',color:''},newCar:true,displayDialog:true})}/>
         </div>;
+        var dialogFooter=<div className="ui-dialog-buttonpane ui-helper-clearfix">
+                <Button icon="fa-close" label="Delete" onClick={this.delete}/><Button label="Save" icon="fa-check" onClick={this.save}/>
+            </div>;
 
         return (
             <div>
@@ -193,40 +198,34 @@ export class DataTableCrudDemo extends Component {
                         <Column field="color" header="Color" sortable={true} />
                     </DataTable>
                 </div>
-                <Dialog visible={this.state.displayDialog} header="Car Details" modal={true}>
+                <Dialog visible={this.state.displayDialog} header="Car Details" modal={true} footer={dialogFooter} >
                     <div className="ui-grid ui-grid-responsive ui-fluid">
                         <div className="ui-grid-row">
                             <div className="ui-grid-col-4"><label htmlFor="vin">Vin</label></div>
-                            <div className="ui-grid-col-8">
+                            <div className="ui-grid-col-8" >
                                 <InputText id="vin" onChange={e=>this.setState({selectedCar:{vin:e.target.value,year:this.state.selectedCar.year ,brand:this.state.selectedCar.brand ,color:this.state.selectedCar.color }})} value={this.state.selectedCar.vin}/>
                             </div>
                         </div>
                         <div className="ui-grid-row">
-                            <div className="ui-grid-col-4"><label htmlFor="year">Year</label></div>
-                            <div className="ui-grid-col-8">
+                            <div className="ui-grid-col-4" ><label htmlFor="year">Year</label></div>
+                            <div className="ui-grid-col-8" >
                                 <InputText id="year" onChange={e=>this.setState({selectedCar:{year:e.target.value,vin:this.state.selectedCar.vin ,brand:this.state.selectedCar.brand ,color:this.state.selectedCar.color }})} value={this.state.selectedCar.year}/>
                             </div>
                         </div>
                         <div className="ui-grid-row">
-                            <div className="ui-grid-col-4"><label htmlFor="brand">Brand</label></div>
-                            <div className="ui-grid-col-8">
+                            <div className="ui-grid-col-4" ><label htmlFor="brand">Brand</label></div>
+                            <div className="ui-grid-col-8" >
                                 <InputText id="brand" onChange={e=>this.setState({selectedCar:{brand:e.target.value,year:this.state.selectedCar.year ,vin:this.state.selectedCar.vin ,color:this.state.selectedCar.color }})} value={this.state.selectedCar.brand}/>
                             </div>
                         </div>
                         <div className="ui-grid-row">
-                            <div className="ui-grid-col-4"><label htmlFor="color" >Color</label></div>
-                            <div className="ui-grid-col-8">
+                            <div className="ui-grid-col-4" ><label htmlFor="color" >Color</label></div>
+                            <div className="ui-grid-col-8" >
                                 <InputText id="color" onChange={e=>this.setState({selectedCar:{color:e.target.value,year:this.state.selectedCar.year ,brand:this.state.selectedCar.brand ,vin:this.state.selectedCar.vin }})} value={this.state.selectedCar.color}/>
                             </div>
                         </div>
                     </div>
-                    <Footer>
-                        <div className="ui-dialog-buttonpane ui-helper-clearfix">
-                            <Button icon="fa-close" label="Delete" onClick={this.delete}/><Button label="Save" icon="fa-check" onClick={this.save}/>
-                        </div></Footer>
                 </Dialog>
-
-                <DataTableCrudDoc/>
 
             </div>
         );
