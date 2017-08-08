@@ -26,28 +26,24 @@ export class DataListDemo extends Component {
         var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
-                <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
-                    <div className="ui-grid-col-9">
-                        <div className="ui-grid ui-grid-responsive ui-fluid">
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Vin: </div>
-                                <div className="ui-grid-col-10">{car.vin}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Year: </div>
-                                <div className="ui-grid-col-10">{car.year}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Brand: </div>
-                                <div className="ui-grid-col-10">{car.brand}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Color: </div>
-                                <div className="ui-grid-col-10">{car.color}</div>
-                            </div>
-                        </div>
+            <div className="ui-g ui-fluid car-item">
+                <div className="ui-g-12 ui-md-3">
+                    <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></i>
+                    <img src={src} alt={car.brand} />
+                </div>
+                <div className="ui-g-12 ui-md-9 car-details">
+                    <div className="ui-g">
+                        <div className="ui-g-2 ui-sm-6">Vin: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                        
+                        <div className="ui-g-2 ui-sm-6">Year: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        
+                        <div className="ui-g-2 ui-sm-6">Brand: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        
+                        <div className="ui-g-2 ui-sm-6">Color: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -55,6 +51,25 @@ export class DataListDemo extends Component {
     }
 
     render() {
+        let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+            <div className="ui-g car-item" style={{padding: 0, textAlign: 'center'}}>
+                    <div className="ui-g-12">
+                        <img src={'showcase/resources/demo/images/car/' + this.state.selectedCar.brand + '.png'} alt={this.state.selectedCar.brand}/>
+                    </div>
+                    <div className="ui-g-4">Vin: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.vin}</div>
+                    
+                    <div className="ui-g-4">Year: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.year}</div>
+                    
+                    <div className="ui-g-4">Brand: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.brand}</div>
+                    
+                    <div className="ui-g-4">Color: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.color}</div>
+            </div>
+        </Dialog>;
+        
         return (
             <div>
                 <div className="content-section introduction">
@@ -64,36 +79,12 @@ export class DataListDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation datalist-demo">
                     <h3>Basic</h3>
 
                     <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5} header="List of Cars"/>
-
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
-                        {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand}/></div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Vin: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.vin }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Year: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.year }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Brand: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.brand }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Color: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.color }</div>
-                                    </div>
-                            </div>)
-                        }
-                    </Dialog>
+                    {selectedCarDialog}
+                    
                 </div>
                 <DataListDoc></DataListDoc>
             </div>
@@ -328,6 +319,12 @@ componentDidMount() {
                 </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, { Component } from 'react';
+import {Link} from 'react-router';
+import { DataList } from 'primereact/components/datalist/DataList';
+import { Dialog } from 'primereact/components/dialog/Dialog';
+import { CarService } from '../service/CarService';
+
 export class DataListDemo extends Component {
 
     constructor() {
@@ -348,28 +345,24 @@ export class DataListDemo extends Component {
         var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
-                <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
-                    <div className="ui-grid-col-9">
-                        <div className="ui-grid ui-grid-responsive ui-fluid">
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Vin: </div>
-                                <div className="ui-grid-col-10">{car.vin}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Year: </div>
-                                <div className="ui-grid-col-10">{car.year}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Brand: </div>
-                                <div className="ui-grid-col-10">{car.brand}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Color: </div>
-                                <div className="ui-grid-col-10">{car.color}</div>
-                            </div>
-                        </div>
+            <div className="ui-g ui-fluid car-item">
+                <div className="ui-g-12 ui-md-3">
+                    <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></i>
+                    <img src={src} alt={car.brand} />
+                </div>
+                <div className="ui-g-12 ui-md-9 car-details">
+                    <div className="ui-g">
+                        <div className="ui-g-2 ui-sm-6">Vin: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                        
+                        <div className="ui-g-2 ui-sm-6">Year: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        
+                        <div className="ui-g-2 ui-sm-6">Brand: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        
+                        <div className="ui-g-2 ui-sm-6">Color: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -377,48 +370,41 @@ export class DataListDemo extends Component {
     }
 
     render() {
+        let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+            <div className="ui-g car-item" style={{padding: 0, textAlign: 'center'}}>
+                    <div className="ui-g-12">
+                        <img src={'showcase/resources/demo/images/car/' + this.state.selectedCar.brand + '.png'} alt={this.state.selectedCar.brand}/>
+                    </div>
+                    <div className="ui-g-4">Vin: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.vin}</div>
+                    
+                    <div className="ui-g-4">Year: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.year}</div>
+                    
+                    <div className="ui-g-4">Brand: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.brand}</div>
+                    
+                    <div className="ui-g-4">Color: </div>
+                    <div className="ui-g-8">{this.state.selectedCar.color}</div>
+            </div>
+        </Dialog>;
+        
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataList</h1>
                         <p>DataList displays data in list layout.</p>
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation datalist-demo">
                     <h3>Basic</h3>
 
                     <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5} header="List of Cars"/>
-
-
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
-                        {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand}/></div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Vin: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.vin }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Year: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.year }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Brand: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.brand }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Color: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.color }</div>
-                                    </div>
-                            </div>)
-                        }
-                    </Dialog>
+                    {selectedCarDialog}
+                    
                 </div>
-                <DataListDoc></DataListDoc>
             </div>
         );
     }

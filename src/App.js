@@ -127,26 +127,28 @@ class AppMenu extends Component {
                     <span>Input</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 0, 'submenushow': this.state.activeMenu === 0 })}>
-                    <Link to="/autocomplete">&#9679; AutoComplete</Link>
-                    <Link to="/checkbox">&#9679; Checkbox</Link>
-                    <Link to="/chips">&#9679; Chips</Link>
-                    <Link to="/dropdown">&#9679; Dropdown</Link>
-                    <Link to="/inputtext">&#9679; InputText</Link>
-                    <Link to="/inputtextarea">&#9679; InputTextarea</Link>
-                    <Link to="/listbox">&#9679; Listbox</Link>
-                    <Link to="/multiselect">&#9679; MultiSelect</Link>
-                    <Link to="/radiobutton">&#9679; RadioButton</Link>
-                    <Link to="/togglebutton">&#9679; ToggleButton</Link>
-                    <Link to="/selectbutton">&#9679; SelectButton</Link>
-                    <Link to="/inputswitch">&#9679; InputSwitch</Link>
-                    <Link to="/slider">&#9679; Slider</Link>
-                    <Link to="/spinner">&#9679; Spinner</Link>
-                    <Link to="/tristatecheckbox">&#9679; TriState</Link>
-                    <Link to="/inputmask">&#9679; InputMask</Link>
-                    <Link to="/calendar">&#9679; Calendar</Link>
-                    <Link to="/colorpicker">&#9679; ColorPicker</Link>
-                    <Link to="/rating">&#9679; Rating</Link>
-                    <Link to="/password">&#9679; Password</Link>
+                    <div>
+                        <Link to="/autocomplete">&#9679; AutoComplete</Link>
+                        <Link to="/checkbox">&#9679; Checkbox</Link>
+                        <Link to="/chips">&#9679; Chips</Link>
+                        <Link to="/dropdown">&#9679; Dropdown</Link>
+                        <Link to="/inputtext">&#9679; InputText</Link>
+                        <Link to="/inputtextarea">&#9679; InputTextarea</Link>
+                        <Link to="/listbox">&#9679; Listbox</Link>
+                        <Link to="/multiselect">&#9679; MultiSelect</Link>
+                        <Link to="/radiobutton">&#9679; RadioButton</Link>
+                        <Link to="/togglebutton">&#9679; ToggleButton</Link>
+                        <Link to="/selectbutton">&#9679; SelectButton</Link>
+                        <Link to="/inputswitch">&#9679; InputSwitch</Link>
+                        <Link to="/slider">&#9679; Slider</Link>
+                        <Link to="/spinner">&#9679; Spinner</Link>
+                        <Link to="/tristatecheckbox">&#9679; TriState</Link>
+                        <Link to="/inputmask">&#9679; InputMask</Link>
+                        <Link to="/calendar">&#9679; Calendar</Link>
+                        <Link to="/colorpicker">&#9679; ColorPicker</Link>
+                        <Link to="/rating">&#9679; Rating</Link>
+                        <Link to="/password">&#9679; Password</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
@@ -155,8 +157,10 @@ class AppMenu extends Component {
                     <span>Button</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 1, 'submenushow': this.state.activeMenu === 1 })}>
-                    <Link to="/button">&#9679; Button</Link>
-                    <Link to="/splitbutton">&#9679; SplitButton</Link>
+                    <div>
+                        <Link to="/button">&#9679; Button</Link>
+                        <Link to="/splitbutton">&#9679; SplitButton</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
@@ -165,17 +169,19 @@ class AppMenu extends Component {
                     <span>Data</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 2, 'submenushow': this.state.activeMenu === 2 })}>
-                    <Link to="/datagrid">&#9679; DataGrid</Link>
-                    <Link to="/datalist">&#9679; DataList</Link>
-                    <Link to="/datatable">&#9679; DataTable</Link>
-                    <Link to="/datascroller">&#9679; DataScroller</Link>
-                    <Link to="/paginator">&#9679; Paginator</Link>
-                    <Link to="/picklist">&#9679; PickList</Link>
-                    <Link to="/orderlist">&#9679; OrderList</Link>
-                    <Link to="/schedule">&#9679; Schedule</Link>
-                    <Link to="/tree">&#9679; Tree</Link>
-                    <Link to="/treetable">&#9679; TreeTable</Link>
-                    <Link to="/organizationchart">&#9679; Org Chart</Link>
+                    <div>
+                        <Link to="/datagrid">&#9679; DataGrid</Link>
+                        <Link to="/datalist">&#9679; DataList</Link>
+                        <Link to="/datatable">&#9679; DataTable</Link>
+                        <Link to="/datascroller">&#9679; DataScroller</Link>
+                        <Link to="/paginator">&#9679; Paginator</Link>
+                        <Link to="/picklist">&#9679; PickList</Link>
+                        <Link to="/orderlist">&#9679; OrderList</Link>
+                        <Link to="/schedule">&#9679; Schedule</Link>
+                        <Link to="/tree">&#9679; Tree</Link>
+                        <Link to="/treetable">&#9679; TreeTable</Link>
+                        <Link to="/organizationchart">&#9679; Org Chart</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
@@ -184,12 +190,14 @@ class AppMenu extends Component {
                     <span>Panel</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 3, 'submenushow': this.state.activeMenu === 3 })}>
-                    <Link to="/accordion">&#9679; Accordion</Link>
-                    <Link to="/fieldset">&#9679; Fieldset</Link>
-                    <Link to="/grid">&#9679; Grid</Link>
-                    <Link to="/panel">&#9679; Panel</Link>
-                    <Link to="/tabview">&#9679; TabView</Link>
-                    <Link to="/toolbar">&#9679; Toolbar</Link>
+                    <div>
+                        <Link to="/accordion">&#9679; Accordion</Link>
+                        <Link to="/fieldset">&#9679; Fieldset</Link>
+                        <Link to="/grid">&#9679; Grid</Link>
+                        <Link to="/panel">&#9679; Panel</Link>
+                        <Link to="/tabview">&#9679; TabView</Link>
+                        <Link to="/toolbar">&#9679; Toolbar</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
@@ -198,9 +206,11 @@ class AppMenu extends Component {
                     <span>Overlay</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 4, 'submenushow': this.state.activeMenu === 4 })}>
-                    <Link to="/dialog">&#9679; Dialog</Link>
-                    <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
-                    <Link to="/lightbox">&#9679; Lightbox</Link>
+                    <div>
+                        <Link to="/dialog">&#9679; Dialog</Link>
+                        <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
+                        <Link to="/lightbox">&#9679; Lightbox</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
@@ -209,7 +219,9 @@ class AppMenu extends Component {
                     <span>File</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 5, 'submenushow': this.state.activeMenu === 5 })}>
-                    <Link to="/fileupload">&#9679; Upload</Link>
+                    <div>
+                        <Link to="/fileupload">&#9679; Upload</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
@@ -218,16 +230,18 @@ class AppMenu extends Component {
                     <span>Menu</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 6, 'submenushow': this.state.activeMenu === 6 })}>
-                    <Link to="/menu">&#9679; Menu</Link>
-                    <Link to="/tabmenu">&#9679; TabMenu</Link>
-                    <Link to="/breadcrumb">&#9679; Breadcrumb</Link>
-                    <Link to="/tieredmenu">&#9679; TieredMenu</Link>
-                    <Link to="/menubar">&#9679; Menubar</Link>
-                    <Link to="/contextmenu">&#9679; ContextMenu</Link>
-                    <Link to="/panelmenu">&#9679; PanelMenu</Link>
-                    <Link to="/steps">&#9679; Steps</Link>
-                    <Link to="/megamenu">&#9679; MegaMenu</Link>
-                    <Link to="/slidemenu">&#9679; SlideMenu</Link>
+                    <div>
+                        <Link to="/menu">&#9679; Menu</Link>
+                        <Link to="/tabmenu">&#9679; TabMenu</Link>
+                        <Link to="/breadcrumb">&#9679; Breadcrumb</Link>
+                        <Link to="/tieredmenu">&#9679; TieredMenu</Link>
+                        <Link to="/menubar">&#9679; Menubar</Link>
+                        <Link to="/contextmenu">&#9679; ContextMenu</Link>
+                        <Link to="/panelmenu">&#9679; PanelMenu</Link>
+                        <Link to="/steps">&#9679; Steps</Link>
+                        <Link to="/megamenu">&#9679; MegaMenu</Link>
+                        <Link to="/slidemenu">&#9679; SlideMenu</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
@@ -236,13 +250,15 @@ class AppMenu extends Component {
                     <span>Chart</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 7, 'submenushow': this.state.activeMenu === 7 })}>
-                    <Link to="/chartdemo">&#9679; ChartModel</Link>
-                    <Link to="/piechart">&#9679; Pie</Link>
-                    <Link to="/doughnutchart">&#9679; Doughnut</Link>
-                    <Link to="/barchart">&#9679; Bar</Link>
-                    <Link to="/linechart">&#9679; Line</Link>
-                    <Link to="/polarareachart">&#9679; PolarArea</Link>
-                    <Link to="/radarchart">&#9679; Radar</Link>
+                    <div>
+                        <Link to="/chartdemo">&#9679; ChartModel</Link>
+                        <Link to="/piechart">&#9679; Pie</Link>
+                        <Link to="/doughnutchart">&#9679; Doughnut</Link>
+                        <Link to="/barchart">&#9679; Bar</Link>
+                        <Link to="/linechart">&#9679; Line</Link>
+                        <Link to="/polarareachart">&#9679; PolarArea</Link>
+                        <Link to="/radarchart">&#9679; Radar</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
@@ -251,8 +267,10 @@ class AppMenu extends Component {
                     <span>Messages</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 8, 'submenushow': this.state.activeMenu === 8 })}>
-                    <Link to="/messages">&#9679; Messages</Link>
-                    <Link to="/growl">&#9679; Growl</Link>
+                    <div>
+                        <Link to="/messages">&#9679; Messages</Link>
+                        <Link to="/growl">&#9679; Growl</Link>
+                    </div>
                 </div>
 
                 <a href="#" id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
@@ -279,9 +297,11 @@ class AppMenu extends Component {
                     <span>Misc</span>
                 </a>
                 <div className={classNames({ 'submenuhide': this.state.activeMenu !== 11, 'submenushow': this.state.activeMenu === 11 })}>
-                    <Link to="/progressbar">&#9679; ProgressBar</Link>
-                    <Link to="/captcha">&#9679; Captcha</Link>
-                    <Link to="/codehighlight">&#9679; CodeHighlight</Link>
+                    <div>
+                        <Link to="/progressbar">&#9679; ProgressBar</Link>
+                        <Link to="/captcha">&#9679; Captcha</Link>
+                        <Link to="/codehighlight">&#9679; CodeHighlight</Link>
+                    </div>
                 </div>
             </div>
         );

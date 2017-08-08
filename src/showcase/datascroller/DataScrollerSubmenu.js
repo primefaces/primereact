@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 export class DataScrollerSubmenu extends Component {
     render() {
         return (
-            <div id="datatable-submenu" className="content-section SubSubMenu ui-helper-clearfix">
+            <div className="content-section submenu ui-helper-clearfix">
                 <ul>
                     <li><Link to="/datascroller">&#9679; Window</Link></li>
                     <li><Link to="/datascroller/inline">&#9679; Inline</Link></li>
