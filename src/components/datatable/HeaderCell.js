@@ -85,7 +85,8 @@ export class HeaderCell extends Component {
         }
 
         if(this.props.filter) {
-            filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} className="ui-column-filter" />;
+            filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType}
+                        className="ui-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
         }
 
         if(this.props.selectionMode) {
