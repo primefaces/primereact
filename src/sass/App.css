@@ -634,3 +634,26 @@ a {
   to {
     opacity: 1;
     transform: none; } }
+/* Demos */
+.datalist-demo .car-item {
+  padding: 1.5em;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 20px;
+  border-bottom: 1px solid #D5D5D5; }
+  .datalist-demo .car-item i {
+    cursor: pointer;
+    float: left;
+    margin-top: 40px;
+    margin-right: 20px; }
+.datalist-demo .ui-g > div {
+  padding: .4em; }
+.datalist-demo .ui-g .ui-g-10, .datalist-demo .ui-g .ui-g-8 {
+  font-weight: bold; }
+
+@media (max-width: 40em) {
+  .datalist-demo .car-item {
+    text-align: center; }
+    .datalist-demo .car-item i {
+      float: none;
+      display: inline-block;
+      vertical-align: top; } }

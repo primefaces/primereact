@@ -71,10 +71,6 @@ export class Dialog extends Component {
         }
     }
 
-    onDocumentClick() {
-        console.log(this);
-    }
-
     initializePosition() {
         this.center();
         this.positionInitialized = true;
