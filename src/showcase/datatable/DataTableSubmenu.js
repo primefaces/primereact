@@ -21,6 +21,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/colresize">&#9679; ColResize</Link></li>
                     <li><Link to="/datatable/coltoggle">&#9679; ColToggle</Link></li>
                     <li><Link to="/datatable/export">&#9679; Export</Link></li>
+                    <li><Link to="/datatable/crud">&#9679; Crud</Link></li>
                 </ul>
             </div>
         );

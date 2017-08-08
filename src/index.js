@@ -45,6 +45,7 @@ import {DataGridDemo} from './showcase/datagrid/DataGridDemo';
 import {DataTableDemo} from './showcase/datatable/DataTableDemo';
 import {DataTableLazyDemo} from './showcase/datatable/DataTableLazyDemo';
 import {DataTableExportDemo} from './showcase/datatable/DataTableExportDemo';
+import {DataTableCrudDemo} from './showcase/datatable/DataTableCrudDemo';
 import {DataTableTemplatingDemo} from './showcase/datatable/DataTableTemplatingDemo';
 import {DataTablePaginatorDemo} from './showcase/datatable/DataTablePaginatorDemo';
 import {DataTableSortDemo} from './showcase/datatable/DataTableSortDemo';
@@ -142,6 +143,7 @@ ReactDOM.render(
             <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
             <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
             <Route path="/datatable/export" component={DataTableExportDemo} />
+            <Route path="/datatable/crud" component={DataTableCrudDemo} />
             <Route path="/orderlist" component={OrderListDemo} />
             <Route path="/picklist" component={PickListDemo} />
             <Route path="/schedule" component={ScheduleDemo} />
