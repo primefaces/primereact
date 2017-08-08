@@ -812,6 +812,72 @@ export class DataTableSelectionDemo extends Component {
 `}
 </CodeHighlight>
 
+            <h3>ContextMenu</h3>
+            <p>DataTable provides exclusive integration with ContextMenu by binding the reference of a menu to the contextMenu property.</p>
+<CodeHighlight className="language-javascript">
+{`
+export class DataTableContextMenuDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {};
+        this.carservice = new CarService();
+        this.viewCar = this.viewCar.bind(this);
+        this.deleteCar = this.deleteCar.bind(this);
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+    }
+
+    viewCar(car) {
+        this.setState({
+            messages: [
+                {severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand}
+            ]
+        });
+    }
+
+    deleteCar(car) {
+        let carsList = [...this.state.cars];
+        carsList = carsList.filter((c) => c.vin !== car.vin);
+
+        this.setState({
+            cars: carsList,
+            messages: [
+                {severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand}
+            ]
+        });
+    }
+
+    render() {
+        let items = [
+            {label: 'View', icon: 'fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
+        ];
+
+        return (
+            <div>
+                <Growl value={this.state.messages}></Growl>
+
+                <ContextMenu model={items} ref={el => this.cm = el}/>
+
+                <DataTable value={this.state.cars} contextMenu={this.cm} selectionMode="single" header="Right Click"
+                    selection={this.state.selectedCar} onSelectionChange={(e) => this.setState({selectedCar: e.data})}>
+                    <Column field="vin" header="Vin" />
+                    <Column field="year" header="Year" />
+                    <Column field="brand" header="Brand" />
+                    <Column field="color" header="Color" />
+                </DataTable>
+            </div>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
+
+
             <h3>Expandable Rows</h3>
             <p>Row expansion allows displaying detailed content for a particular row. To use this feature, add an expander column, define a rowExpansionTemplate as a function to return the expanded content and bind to
                 expandedRows property to read the expanded rows along with the onRowToggle property to update them.</p>

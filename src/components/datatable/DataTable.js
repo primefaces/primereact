@@ -53,6 +53,7 @@ export class DataTable extends Component {
         unfrozenWidth: null,
         csvSeparator: ',',
         exportFilename: 'download',
+        contextMenu: null,
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -62,7 +63,8 @@ export class DataTable extends Component {
         onRowSelect: null,
         onRowUnselect: null,
         onRowExpand: null,
-        onRowCollapse: null
+        onRowCollapse: null,
+        onContextMenuSelect: null
     }
 
     static propTypes = {
@@ -108,6 +110,7 @@ export class DataTable extends Component {
         unfrozenWidth: PropTypes.string,
         csvSeparator: PropTypes.string,
         exportFilename: PropTypes.string,
+        contextMenu: PropTypes.any,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -117,7 +120,8 @@ export class DataTable extends Component {
         onRowSelect: PropTypes.func,
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
-        onRowCollapse: PropTypes.func
+        onRowCollapse: PropTypes.func,
+        onContextMenuSelect: PropTypes.func
     };
 
     constructor(props) {
@@ -648,7 +652,8 @@ export class DataTable extends Component {
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage}>
+                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
+                        contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect}>
                         {columns}
                 </TableBody>;
     }

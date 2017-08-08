@@ -37,7 +37,7 @@ export class DataTableSelectionDemo extends Component {
 
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>DataTable</h1>
+                        <h1>DataTable - Selection</h1>
                         <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property and onRowSelect-onRowUnselect 
                             events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.</p>
                     </div>

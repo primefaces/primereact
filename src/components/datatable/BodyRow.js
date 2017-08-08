@@ -8,6 +8,7 @@ export class BodyRow extends Component {
         super(props);
         this.onClick = this.onClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
+        this.onRightClick = this.onRightClick.bind(this);
     }
 
     onClick(event) {
@@ -26,6 +27,16 @@ export class BodyRow extends Component {
         }
     }
 
+    onRightClick(event) {
+        if(this.props.onRightClick) {
+            this.props.onRightClick({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
+    }
+
     render() {
         let columns = React.Children.toArray(this.props.children);
         let className = classNames('ui-widget-content', {'ui-state-highlight': this.props.selected, 'ui-datatable-odd': (this.props.rowIndex % 2 === 1)}, this.props.className);
@@ -35,7 +46,7 @@ export class BodyRow extends Component {
                     });
 
         return (
-            <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd}>
+            <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick}>
                 {cells}
             </tr>
         );

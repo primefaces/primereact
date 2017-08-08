@@ -56,6 +56,7 @@ import {DataTableSelectionDemo} from './showcase/datatable/DataTableSelectionDem
 import {DataTableColGroupDemo} from './showcase/datatable/DataTableColGroupDemo';
 import {DataTableRowExpansionDemo} from './showcase/datatable/DataTableRowExpansionDemo';
 import {DataTableColResizeDemo} from './showcase/datatable/DataTableColResizeDemo';
+import {DataTableContextMenuDemo} from './showcase/datatable/DataTableContextMenuDemo';
 import {DataTableResponsiveDemo} from './showcase/datatable/DataTableResponsiveDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
@@ -139,6 +140,7 @@ ReactDOM.render(
             <Route path="/datatable/lazy" component={DataTableLazyDemo} />
             <Route path="/datatable/selection" component={DataTableSelectionDemo} />
             <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
+            <Route path="/datatable/contextmenu" component={DataTableContextMenuDemo} />
             <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
             <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
             <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
