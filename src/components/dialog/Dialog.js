@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
-export class Footer extends Component {    
-    render() {
-        return (<div>{this.props.children}</div>);
-    }
-}
-
 export class Dialog extends Component {
 
     static defaultProps = {
         header: null,
+        footer: null,
         visible: false,
         width: 'auto',
         height: 'auto',
@@ -24,6 +19,7 @@ export class Dialog extends Component {
 
     static propTypes = {
         header: PropTypes.any,
+        footer: PropTypes.any,
         visible: PropTypes.bool,
         width: PropTypes.string,
         height: PropTypes.string,
@@ -36,22 +32,23 @@ export class Dialog extends Component {
     constructor(props) {
         super(props);
         this.state = {visible: props.visible};
-        this.positionInitialized = false;
         this.onCloseClick = this.onCloseClick.bind(this);
         this.initDrag = this.initDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
         this.moveOnTop = this.moveOnTop.bind(this);
     }
 
-    componentWillUpdate(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if(this.state.visible !== nextProps.visible) {
-            if(nextProps.visible)
-                this.onShow();
-            else
-                this.onHide();
-
             this.setState({visible: nextProps.visible});
         }
+    }
+
+    componentDidUpdate(prevProps, prevState) {        
+        if(this.state.visible)
+            this.onShow();
+        else
+            this.onHide();
     }
 
     componentDidMount() {
@@ -71,15 +68,9 @@ export class Dialog extends Component {
         }
     }
 
-    initializePosition() {
-        this.center();
-        this.positionInitialized = true;
-    }
-
     onShow() {
-        if(!this.positionInitialized) {
-            this.initializePosition();
-        }
+        this.center();
+        DomHandler.fadeIn(this.container, 250);
 
         if(this.props.modal) {
             this.enableModality();
@@ -88,6 +79,8 @@ export class Dialog extends Component {
         if(this.props.onShow) {
             this.props.onShow();
         }
+
+        this.container.style.zIndex = DomHandler.getZindex();
     }
 
     onCloseClick(event) {
@@ -181,21 +174,14 @@ export class Dialog extends Component {
         this.container.style.zIndex = DomHandler.getZindex();
     }
 
-    render() {
-        var styleClass = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
-        var style = {
+    render() {        
+        let styleClass = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        let style = {
             display: this.state.visible ? 'block': 'none',
             width: this.props.width,
-            auto: this.props.auto,
-            zIndex: DomHandler.getZindex()
+            height: this.props.height
         };
-
-        var content =  React.Children.map(this.props.children, (element, i) => {
-                return (element && element.type !== Footer) && (<div className="ui-dialog-content ui-widget-content">{element}</div>);
-            }),
-            footer = React.Children.map(this.props.children, (element, i) => {
-                return (element && element.type === Footer) && <Footer> {element.props.children}</Footer>
-            });
+        let footer = this.props.footer && <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>;
 
         return (
             <div className={styleClass} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
@@ -205,7 +191,9 @@ export class Dialog extends Component {
                         <span className="fa fa-fw fa-close"></span>
                     </a>
                 </div>
-                {content}
+                <div className="ui-dialog-content ui-widget-content">
+                    {this.props.children}
+                </div>
                 {footer}
             </div>
         );

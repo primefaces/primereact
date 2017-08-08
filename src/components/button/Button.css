@@ -3,7 +3,7 @@
     display: inline-block; 
     position: relative; 
     padding: 0; 
-    margin-right: .1em; 
+    margin-right: .25em; 
     text-decoration: none !important; 
     cursor: pointer; 
     text-align: center; 
@@ -79,6 +79,12 @@ button.ui-button::-moz-focus-inner {
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
+}
+
+.ui-fluid .ui-button-text-icon-left .ui-button-text,
+.ui-fluid .ui-button-text-icon-right .ui-button-text {
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 /** ButtonSet **/

@@ -23,6 +23,11 @@ export class DialogDemo extends Component {
     }
 
     render() {
+        let footer = <div>
+            <Button label="Yes" icon="fa-check" onClick={this.onHide} />
+            <Button label="No" icon="fa-close" onClick={this.onHide} />
+        </div>;
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -33,7 +38,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -106,9 +111,15 @@ onClick(event) {
                     <tbody>
                         <tr>
                             <td>header</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Title text of the dialog.</td>
+                            <td>Title content of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>footer</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Footer content of the dialog.</td>
                         </tr>
                         <tr>
                             <td>visible</td>
@@ -118,13 +129,13 @@ onClick(event) {
                         </tr>
                         <tr>
                             <td>width</td>
-                            <td>int</td>
-                            <td>300</td>
+                            <td>string</td>
+                            <td>auto</td>
                             <td>Width of the dialog.</td>
                         </tr>
                         <tr>
                             <td>height</td>
-                            <td>int</td>
+                            <td>string</td>
                             <td>auto</td>
                             <td>Height of the dialog.</td>
                         </tr>
@@ -232,6 +243,13 @@ onClick(event) {
                 </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {Dialog} from 'primereact/components/dialog/Dialog';
+import {Button} from 'primereact/components/button/Button';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+
 export class DialogDemo extends Component {
         
     constructor() {
@@ -250,9 +268,14 @@ export class DialogDemo extends Component {
     }
 
     render() {
+        let footer = <div>
+            <Button label="Yes" icon="fa-check" onClick={this.onHide} />
+            <Button label="No" icon="fa-close" onClick={this.onHide} />
+        </div>;
+
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Dialog</h1>
                         <p>Dialog is a container to display content in an overlay window.</p>
@@ -260,7 +283,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -269,7 +292,6 @@ export class DialogDemo extends Component {
 
                     <Button label="Show" icon="fa-external-link-square" onClick={this.onClick} />
                 </div>
-                <DialogDoc></DialogDoc>
             </div>
         )
     }
