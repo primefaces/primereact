@@ -97,6 +97,21 @@ onClick(event) {
 `}
 </CodeHighlight>
 
+            <h3>Header and Footer</h3>
+            <p>Header and Footer sections are defined using properties with the same name that accepts simple strings of JSX for custom content.</p>
+<CodeHighlight className="language-markup">
+{`
+let footer = <div>
+                <Button label="Yes" icon="fa-check" />
+                <Button label="No" icon="fa-close" />
+            </div>;
+
+<Dialog header="Header Text" footer={footer} visible={this.state.visible} width="350px" modal={true}>
+</Dialog>
+
+`}
+</CodeHighlight>
+
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
