@@ -84,6 +84,7 @@ import {StepsDemo} from './showcase/steps/StepsDemo';
 import {MegaMenuDemo} from './showcase/megamenu/MegaMenuDemo';
 import {SlideMenuDemo} from './showcase/slidemenu/SlideMenuDemo';
 import {OrganizationChartDemo} from './showcase/organizationchart/OrganizationChartDemo';
+import {ThemingPage} from "./showcase/theming/ThemingPage"
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -172,6 +173,7 @@ ReactDOM.render(
             <Route path="/setup" component={SetupPage} />
             <Route path="/splitbutton" component={SplitButtonDemo} />
             <Route path="/organizationchart" component={OrganizationChartDemo} />
+            <Route path="/theming" component={ThemingPage} />
         </Route>
     </Router>,
     document.getElementById('root')
