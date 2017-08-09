@@ -9,6 +9,7 @@ export class TableBody extends Component {
     constructor(props) {
         super(props);
         this.onRowClick = this.onRowClick.bind(this);
+        this.onRowRightClick = this.onRowRightClick.bind(this);
         this.onRowTouchEnd = this.onRowTouchEnd.bind(this);
         this.onRowToggle = this.onRowToggle.bind(this);
         this.onRadioClick = this.onRadioClick.bind(this);
@@ -31,7 +32,7 @@ export class TableBody extends Component {
 
             if(this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
                 DomHandler.clearSelection();
-                //shift key
+                //todo: shift key
             }
             else {
                 let selected = this.isSelected(rowData);
@@ -53,7 +54,7 @@ export class TableBody extends Component {
                         }
                         
                         if(this.props.onRowUnselect) {
-                            this.onRowUnselect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                            this.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                         }
                     }
                     else {
@@ -70,7 +71,7 @@ export class TableBody extends Component {
                         }
 
                         if(this.props.onRowSelect) {
-                            this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                            this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                         }
                     }
                 }
@@ -79,13 +80,13 @@ export class TableBody extends Component {
                         if(selected) {
                             selection = null;
                             if(this.props.onRowUnselect) {
-                                this.onRowUnselect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                                this.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                             }
                         }
                         else {
                             selection = rowData;
                             if(this.props.onRowSelect) {
-                                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                             }
                         }
                     }
@@ -94,13 +95,13 @@ export class TableBody extends Component {
                             let selectionIndex = this.findIndexInSelection(rowData);
                             selection = this.props.selection.filter((val,i) => i !== selectionIndex);
                             if(this.props.onRowSelect) {
-                                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                             }
                         }
                         else {
                             selection = [...this.props.selection||[], rowData];
                             if(this.props.onRowSelect) {
-                                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                             }
                         }
                     }
@@ -117,6 +118,31 @@ export class TableBody extends Component {
         this.rowTouched = true;
     }
 
+    onRowRightClick(event) {
+        if(this.props.contextMenu) {
+            let selectionIndex = this.findIndexInSelection(event.data);
+            let selected = selectionIndex !== -1;
+            let selection;
+
+            if(!selected) {
+                 if(this.isSingleSelectionMode()) {
+                    selection = event.data;
+                 }
+                 else if(this.isMultipleSelectionMode()) {
+                    selection = [event.data];
+                 }
+
+                 this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
+            }
+
+            this.props.contextMenu.show(event.originalEvent);
+            if(this.props.onContextMenuSelect) {
+                this.props.onContextMenuSelect({originalEvent: event.originalEvent, data: event.data});
+            }
+            event.originalEvent.preventDefault();
+        }
+    }
+
     onRadioClick(event) {
         let rowData = event.data;
         let selection;
@@ -124,13 +150,13 @@ export class TableBody extends Component {
         if(this.isSelected(rowData)) {
             selection = null;
             if(this.props.onRowUnselect) {
-                this.onRowUnselect.emit({originalEvent: event.originalEvent, data: rowData, type: 'radio'});
+                this.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'radio'});
             }
         }
         else {
             selection = rowData;
             if(this.props.onRowSelect) {
-                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'radio'});
+                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'radio'});
             }
         }
 
@@ -145,13 +171,13 @@ export class TableBody extends Component {
             let selectionIndex = this.findIndexInSelection(rowData);
             selection = this.props.selection.filter((val,i) => i !== selectionIndex);
             if(this.props.onRowSelect) {
-                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
+                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
             }
         }
         else {
             selection = [...this.props.selection||[], rowData];
             if(this.props.onRowSelect) {
-                this.props.onRowSelect.emit({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
+                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
             }
         }
 
@@ -275,7 +301,7 @@ export class TableBody extends Component {
                 let expanded = this.isRowExpanded(rowData);
                 let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
 
-                let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onTouchEnd={this.onRowTouchEnd} 
+                let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}>{this.props.children}</BodyRow>
 

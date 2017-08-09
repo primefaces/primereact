@@ -28,8 +28,8 @@ export class ContextMenu extends Component {
         this.state = {visible:false};
     }
     
-    toggle(event){
-        if(this.state.visible)
+    toggle(event) {
+        if(this.container.offsetParent)
             this.hide(event);
         else
             this.show(event);
@@ -37,16 +37,16 @@ export class ContextMenu extends Component {
 
     show(event) {
         this.position(event);
-        this.setState({visible:true});
         DomHandler.fadeIn(this.container, 250);
+        this.container.style.display = 'block';
 
         if(event) {
             event.preventDefault();
         }
     }
     
-    hide(event) {
-        this.setState({visible:false})
+    hide() {
+        this.container.style.display = 'none';
     }
     
     position(event) {
@@ -99,7 +99,7 @@ export class ContextMenu extends Component {
             }
             document.addEventListener('contextmenu', this.rightClickListener);
         }
-        else if(this.props.target){
+        else if(this.props.target) {
             this.rightClickListener = (event) => {
                 document.dispatchEvent(documentEvent);
                 this.show(event);
@@ -140,13 +140,11 @@ export class ContextMenu extends Component {
     }
     
     render() {
-        var contextMenuClass = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', this.props.styleClass),
-        listClass = classNames('ui-menu-list ui-helper-reset'),
-        menuStyle = Object.assign({display: this.state.visible ? 'block' : 'none'},this.props.style);
+        let contextMenuClass = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', this.props.styleClass);
         
         return (
-            <div className={contextMenuClass} style={menuStyle} ref={el=>this.container=el} >
-                <NestedMenu styleClass={listClass} items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
+            <div className={contextMenuClass} style={this.props.style} ref={el => this.container = el}>
+                <NestedMenu styleClass="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
             </div>
         );
     }
