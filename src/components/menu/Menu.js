@@ -28,22 +28,6 @@ export class Menu extends Component {
         super();
         this.state = {};
     }
-    componentDidMount(){
-        if(this.props.popup){
-            document.body.appendChild(this.container);
-            this.documentClickListener=document.addEventListener('click',(event)=>{
-                if(!this.preventDocumentDefault) {
-                    this.hide(event);
-                }
-                this.preventDocumentDefault = false;
-            })
-        }
-        window.addEventListener('resize',()=>{
-            if(this.onResizeTarget && this.container.offsetParent) {
-                DomHandler.absolutePosition(this.container, this.onResizeTarget);
-            }
-        })
-    }
     hasSubMenu(){
         if(this.props.model){
             for(var items of this.props.model){
@@ -75,12 +59,14 @@ export class Menu extends Component {
         }
     }
     toggle(event){
+        if(this.documentClickListener) {
+            this.dropdownClick = true;
+        }
         if(this.container.offsetParent)
             this.hide(event);
         else
             this.show(event);
 
-        this.preventDocumentDefault = true;
     }
 
     show(event) {
@@ -89,7 +75,7 @@ export class Menu extends Component {
         this.container.style.display = 'block';
         DomHandler.absolutePosition(this.container, target);
         DomHandler.fadeIn(this.container, 250);
-        this.preventDocumentDefault = true;
+        this.bindDocumentListener();
         if(this.props.onShow){
             this.props.onShow({
                 originalEvent:event
@@ -104,6 +90,36 @@ export class Menu extends Component {
                 originalEvent:event
             })
         }
+        this.unbindDocumentListener();
+    }
+    bindDocumentListener() {
+        if(!this.documentClickListener) {
+            this.documentClickListener = () => {
+                if(this.dropdownClick)
+                    this.dropdownClick = false;
+                else
+                    this.hide();
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+
+        window.addEventListener('resize',()=>{
+            if(this.onResizeTarget && this.container.offsetParent) {
+                DomHandler.absolutePosition(this.container, this.onResizeTarget);
+            }
+        })
+    }
+
+    unbindDocumentListener() {
+        if(this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentListener();
     }
 
     render() {

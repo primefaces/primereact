@@ -371,8 +371,7 @@ class App extends Component {
                         <i className="fa fa-bars"></i>
                     </a>
                     <a href="#" className="logo">
-                        <img alt="logo" src="showcase/resources/images/logo-draft@2x.png" />
-                        <img alt="logo" src="showcase/resources/images/primereact.png" />
+                        <img alt="logo" src="showcase/resources/images/primereact-logo-v2.2.png" />
                     </a>
 
                     <ul className="topbar-menu">

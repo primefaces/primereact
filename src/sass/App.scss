@@ -89,16 +89,7 @@ body {
         display: inline-block;
 
         img{
-            &:last-child {
-                width: 166px;
-                height: 41px;
-                object-fit: contain;
-            }
-            &:first-child {
-                width: 40px;
-                height: 44px;
-                margin-right: 10px;
-            }
+            width: 100%;
         }
     }
     
@@ -838,7 +829,7 @@ body {
 
     #layout-content {
         margin-left: 0;
-        padding-top: 99px;
+        padding-top: 96px;
         
         .content-section {
             &.submenu ul li {
@@ -948,9 +939,7 @@ a{
 .datalist-demo {
     .car-item {
         padding: 1.5em;
-        border-bottom: 1px solid #d9d9d9;
         padding: 20px;
-        border-bottom: 1px solid #D5D5D5;
         
         i {
             cursor: pointer;

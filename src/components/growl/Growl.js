@@ -50,6 +50,7 @@ export class Growl extends Component {
     }
 
     componentDidMount() {
+        this.container.style.zIndex=DomHandler.getZindex();
         DomHandler.fadeIn(this.container, 250);
     }
 
