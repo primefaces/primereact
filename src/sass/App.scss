@@ -207,8 +207,6 @@ body {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
     .layout-menu {
-        overflow: auto;
-        height: calc(100% - 70px);
 
         > a {
             width: 100%;
@@ -311,6 +309,22 @@ body {
                 &:hover {
                     background-color: #eeeeee;
                 }
+            }
+        }
+    }
+
+    .nano {
+        > .nano-content {
+            .layout-menu {
+                padding-bottom: 120px;
+            }
+        }
+
+        > .nano-pane {
+            background-color: transparent;
+
+            .nano-slider {
+                background-color: #aaaaaa;
             }
         }
     }
