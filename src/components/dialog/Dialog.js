@@ -41,14 +41,20 @@ export class Dialog extends Component {
     componentWillReceiveProps(nextProps) {
         if(this.state.visible !== nextProps.visible) {
             this.setState({visible: nextProps.visible});
+            if (nextProps.visible)
+                this.onShow();
+            else
+                this.onHide();
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {        
-        if(this.state.visible)
-            this.onShow();
-        else
-            this.onHide();
+    componentDidUpdate(prevProps, prevState) {
+       if(this.props.visible !== prevProps.visible) {
+           if(this.state.visible)
+               this.onShow();
+           else
+               this.onHide();
+       }
     }
 
     componentDidMount() {
@@ -174,7 +180,7 @@ export class Dialog extends Component {
         this.container.style.zIndex = DomHandler.getZindex();
     }
 
-    render() {        
+    render() {
         let styleClass = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
         let style = {
             display: this.state.visible ? 'block': 'none',
