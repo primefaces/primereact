@@ -315,11 +315,11 @@ export class OrderList extends Component {
                             });
 
                             return [
-                                this.props.dragdrop && this.isItemVisible(item) && <li className="ui-orderlist-droppoint" onDragOver={(e) => this.onDragOver(e, i)} onDrop={(e) => this.onDrop(e, i)} onDragLeave={this.onDragLeave}></li>
+                                this.props.dragdrop && this.isItemVisible(item) && <li key={i + '_orderlistfirstdroppoint'} className="ui-orderlist-droppoint" onDragOver={(e) => this.onDragOver(e, i)} onDrop={(e) => this.onDrop(e, i)} onDragLeave={this.onDragLeave}></li>
                                 ,<li key={i + '_orderlistitem'} className={listStyleClass} onClick={(e) => this.onItemClick(e, item)} draggable={this.props.dragdrop} onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} onTouchEnd={this.onItemTouchEnd}>
                                     {listItemContent}
                                 </li>
-                                ,this.props.dragdrop && valuesLength === (i + 1) && <li className="ui-orderlist-droppoint" onDragOver={(e) => this.onDragOver(e, i + 1)} onDrop={(e) => this.onDrop(e, i + 1)} onDragLeave={this.onDragLeave}></li>
+                                ,this.props.dragdrop && valuesLength === (i + 1) && <li key={i + '_orderlistdroppoint'} className="ui-orderlist-droppoint" onDragOver={(e) => this.onDragOver(e, i + 1)} onDrop={(e) => this.onDrop(e, i + 1)} onDragLeave={this.onDragLeave}></li>
                             ]
                             
                         })
