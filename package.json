@@ -42,6 +42,6 @@
     "eject": "react-scripts eject",
     "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0",
     "build-resources": "gulp prepublish",
-    "prepublish": "npm run build-resources && npm run compile-components"
+    "prepublishOnly": "npm run build-resources && npm run compile-components"
   }
 }
