@@ -4,7 +4,9 @@
 /public/resources/images/
 !public/resources/themes/bootstrap/theme.css
 .DS_Store
+/build
 /vscode
+/.vscode
 /idea
 /.idea
 /.sass-cache
