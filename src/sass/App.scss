@@ -89,7 +89,7 @@ body {
         display: inline-block;
 
         img{
-            width: 100%;
+            width: 210px;
         }
     }
     
@@ -781,15 +781,7 @@ body {
             margin: 7px 0 7px 0;
 
             img{
-                &:first-child {
-                    width: 34px;
-                    height: 38px;
-                    margin-right: 5px;
-                }
-                
-                &:last-child {
-                    width: 150px;
-                }
+                width: 180px;
             }
         }
         
