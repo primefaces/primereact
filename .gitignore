@@ -6,6 +6,7 @@
 .DS_Store
 /vscode
 /idea
+/.idea
 /.sass-cache
 /resources
 /components
