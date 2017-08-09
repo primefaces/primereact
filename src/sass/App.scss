@@ -326,7 +326,7 @@ body {
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 99px;
+    top: 98px;
     left: 0;
     background-color: #4c5254;
     opacity: .7;
@@ -601,27 +601,29 @@ body {
     /* Introduction */
     .introduction {
         background-color: #1976d2;
-        background: url('../../public/showcase/resources/images/primereact-slider-bg.jpg');
+        background: url('../../public/showcase/resources/images/primereact-slider-bg.png');
         background-repeat: no-repeat;
         background-size: cover;
-        color: #ffffff;
-        padding: 80px 30px 80px 50px;
+        color: #20272a;
+        padding: 80px 30px 100px 50px;
 
         h1 {
             font-weight: normal;
             margin-bottom: 5px;
+            font-size: 24px;
         }
 
         h2 {
             font-weight: bold;
             margin-bottom: 40px;
             margin-top: 0;
+            font-size: 24px;
         }
 
         .home-button {
             width: 112px;
             height: 24px;
-            font-weight: 500;
+            font-weight: bold;
             text-align: center;
             color: #ffffff;
             background-color: #03C4E8;
@@ -754,7 +756,7 @@ body {
         .home-button2 {
             width: 112px;
             height: 24px;
-            font-weight: 500;
+            font-weight: bold;
             text-align: center;
             color: #ffffff;
             background-color: #E8037D;
@@ -809,7 +811,7 @@ body {
 
 
     #layout-sidebar {
-        top: 100px;
+        top: 98px;
         left: -300px;
         transition: left .3s;
         z-index: 999998;

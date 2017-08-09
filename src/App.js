@@ -16,7 +16,7 @@ class Home extends Component {
             <div className="home">
                 <div className="introduction">
                     <h1>Your Favorite UI Framework</h1>
-                    <h2>for React</h2>
+                    <h2>for REACT</h2>
 
                     <a className="home-button" href="/#/setup">
                         Get Started
