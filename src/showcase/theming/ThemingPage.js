@@ -73,7 +73,7 @@ export class ThemingPage extends Component {
                     <p>For example Panel component’s header section has the "ui-panel-titlebar" structural class, to change the color of a panel header you don’t need to about this class as "ui-widget-header" defines colors for panel header.</p>
 
                     <h3>Free Themes</h3>
-                    <p>16 free themes are available for PrimeReact, these include the themeroller themes, twitter bootstrap theme and our custom themes. ThemeSwitcher on the top right section
+                    <p>17 free themes are available for PrimeReact, these include the themeroller themes, twitter bootstrap theme and our custom themes. ThemeSwitcher on the top right section
                         of the page dynamically changes the theme at demo pages. Themes are distributed along with PrimeReact itself. In addition, <a href="https://jqueryui.com/themeroller/">online ThemeRoller</a> designer allows you to create a PrimeReact theme.</p>
 
                     <p>Font-size of free themes use em to define the font size of the widgets using .ui-widget class. This is 1em by default and it is suggested to define a base font-size at the body element of your application to adjust the size of

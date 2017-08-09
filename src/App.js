@@ -386,7 +386,6 @@ class App extends Component {
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
                                 <li className="topbar-submenu-header">THEMES</li>
                                 <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
-                                <li><a href="#" data-theme="bootstrap" onClick={this.changeTheme}><span className="ui-text">Bootstrap</span></a></li>
                                 <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
                                 <li><a href="#" data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
                                 <li><a href="#" data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
