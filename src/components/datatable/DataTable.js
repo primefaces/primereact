@@ -22,9 +22,9 @@ export class DataTable extends Component {
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
-        first: 0,
-        rows: 0,
-        totalRecords: 0,
+        first: null,
+        rows: null,
+        totalRecords: null,
         lazy: false,
         sortField: null,
         sortOrder: 1,
@@ -134,6 +134,7 @@ export class DataTable extends Component {
             multiSortMeta: props.multiSortMeta,
             filters: props.filters
         };
+
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
         this.onFilter = this.onFilter.bind(this);
@@ -331,12 +332,12 @@ export class DataTable extends Component {
 
     componentWillReceiveProps(props) {
         this.setState({
-            first: props.first,
-            rows: props.rows,
-            sortField: props.sortField,
-            sortOrder: props.sortOrder,
-            multiSortMeta: props.multiSortMeta,
-            filters: props.filters
+            first: props.first != null ? props.first : this.state.first,
+            rows: props.rows != null ? props.rows : this.state.rows,
+            sortField: props.sortField||this.state.sortField,
+            sortOrder: props.sortOrder||this.state.sortOrder,
+            multiSortMeta: props.multiSortMeta||this.state.multiSortMeta,
+            filters: props.filters||this.state.filters
         });
     }
 

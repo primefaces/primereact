@@ -285,12 +285,14 @@ export class TableBody extends Component {
     render() {
         let className = classNames('ui-datatable-data ui-widget-content', {'ui-datatable-hoverable-rows': this.props.selectionMode});
         let rows;
+        let rpp = this.props.rows||0;
+        let first = this.props.first||0;
         let selectionEnabled = this.isSelectionEnabled();
 
         if(this.props.value && this.props.value.length) {
             rows = [];
-            let startIndex = this.props.lazy ? 0 : this.props.first;
-            let endIndex = startIndex + this.props.rows||this.props.value.length;
+            let startIndex = this.props.lazy ? 0 : first;
+            let endIndex = startIndex + rpp||this.props.value.length;
 
             for(let i = startIndex; i < endIndex; i++) {
                 if(i >= this.props.value.length) {
