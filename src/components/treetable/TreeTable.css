@@ -1,3 +1,7 @@
+.ui-treetable {
+    position: relative;
+}
+
 .ui-treetable table {
 	border-collapse:collapse;
     width: 100%;

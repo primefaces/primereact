@@ -13,6 +13,7 @@
 }
 
 .ui-growl-item {
+	position: relative;
 	display: block;
 	padding: .5em 1em;
 }

@@ -2,6 +2,7 @@
     position: relative;
     display: inline-block;
     zoom: 1;
+    margin-right: .5em;
 }
 
 .ui-splitbutton .ui-button.ui-splitbutton-menubutton {

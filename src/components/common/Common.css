@@ -1,4 +1,4 @@
-.ui-widget * {
+.ui-widget, .ui-widget * {
     box-sizing: border-box;
 }
 .ui-helper-hidden {
@@ -14,6 +14,10 @@
     position: absolute;
     width: 1px;
 }
+.ui-helper-hidden-accessible input,
+.ui-helper-hidden-accessible select {
+    transform: scale(0);
+}
 .ui-helper-reset {
     margin: 0;
     padding: 0;
@@ -24,17 +28,17 @@
     font-size: 100%;
     list-style: none;
 }
-
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
     content: " ";
     display: table;
 }
-
 .ui-helper-clearfix:after {
     clear: both;
 }
-
+.ui-helper-clearfix {
+    zoom: 1;
+}
 .ui-helper-zfix {
     width: 100%;
     height: 100%;
@@ -149,4 +153,7 @@
     overflow: scroll;
     position: absolute;
     top: -9999px;
+}
+.ui-overflow-hidden {
+    overflow: hidden;
 }

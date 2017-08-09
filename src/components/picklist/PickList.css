@@ -38,7 +38,7 @@
 
 .ui-picklist .ui-picklist-caption {
     text-align: center;
-	padding: .5em .75em;
+    padding: .5em .75em;
     border-bottom:0 none;
 }
 
@@ -47,22 +47,23 @@
     border-collapse:collapse;
 }
 
-.ui-picklist .ui-picklist-filter {
-    padding-right: 1em;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 .ui-picklist .ui-picklist-filter-container {
     position: relative;
-    margin: 0;
-    padding: 0;
+    width: 100%;
+    padding: .5em .6em;
+    border-bottom: 0 none;
+}
+
+.ui-picklist .ui-picklist-filter-container .ui-picklist-filter {
+    text-indent: 1.1em;
+    width: 100%;
 }
 
 .ui-picklist .ui-picklist-filter-container .fa {
     position: absolute;
-    top: .25em;
-    right: .125em;
+    top: 50%;
+    left: 1em;
+    margin-top: -.6em;
 }
 
 .ui-picklist {
@@ -108,6 +109,16 @@
     z-index: 1;
 }
 
+.ui-picklist .ui-picklist-droppoint {
+    height: 6px;
+    list-style-type: none;
+}
+
+.ui-picklist .ui-picklist-list .ui-picklist-droppoint-empty {
+    height: 100%;
+    list-style-type: none;
+}
+
 .ui-picklist-list.ui-picklist-source,
 .ui-picklist-list.ui-picklist-target {
     outline: none;
@@ -141,50 +152,50 @@
 .ui-picklist.ui-picklist-responsive .ui-picklist-list {
     width: auto;
 }
-        
+
 /* Responsive */
 @media (max-width: 40em) {
     .ui-picklist.ui-picklist-responsive {
         display: block;
     }
-    
+
     .ui-picklist.ui-picklist-responsive > div {
         display: block;
         width: 100% !important;
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-buttons {
         text-align: center;
         height: auto;
         padding: .4em 0;
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-buttons button {
         display: inline;
         width: 20%;
         margin-bottom: 0;
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-source-controls.ui-picklist-buttons {
         padding-bottom: .4em;
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-target-controls.ui-picklist-buttons {
         padding-top: .4em;
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .fa-angle-right:before {
         content: "\f107";
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .fa-angle-double-right:before {
         content: "\f103";
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .fa-angle-left:before {
         content: "\f106";
     }
-    
+
     .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .fa-angle-double-left:before {
         content: "\f102";
     }

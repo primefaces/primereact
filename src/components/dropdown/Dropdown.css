@@ -2,6 +2,7 @@
     display: inline-block;
     position: relative;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .ui-dropdown .ui-dropdown-trigger {
@@ -18,7 +19,7 @@
 }
 
 .ui-dropdown .ui-dropdown-trigger .fa {
-    margin-top: .4em;
+    margin-top: .3em;
     margin-left: -.125em;
 }
 
@@ -83,6 +84,7 @@
 
 .ui-dropdown-panel .ui-dropdown-filter {
     width: 100%;
+    box-sizing: border-box;
     padding-right: 1.5em;
 }
 

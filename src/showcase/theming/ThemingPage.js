@@ -83,6 +83,7 @@ export class ThemingPage extends Component {
                     <p>PrimeReact also supports sass based, fully customizable.</p>
 
                 </div>
-            </div>);
+            </div>
+        );
     }
 }

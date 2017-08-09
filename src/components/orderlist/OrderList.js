@@ -283,8 +283,8 @@ export class OrderList extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-orderlist ui-grid ui-widget', this.props.styleClass, {
-            'ui-grid-responsive': this.props.responsive
+        var styleClass = classNames('ui-orderlist ui-widget', this.props.styleClass, {
+            'ui-orderlist-responsive': this.props.responsive
         });
 
         var upButton = <Button type="button" icon="fa-angle-up" onClick={(e) => this.moveUp(e, this.listContainer)}></Button>,
@@ -293,7 +293,7 @@ export class OrderList extends Component {
             bottomButton = <Button type="button" icon="fa-angle-double-down" onClick={(e) => this.moveBottom(e, this.listContainer)}></Button>;
 
         var controls = (
-            <div className="ui-orderlist-controls ui-grid-col-2">
+            <div className="ui-orderlist-controls">
                 {upButton}
                 {topButton}
                 {downButton}
@@ -303,7 +303,7 @@ export class OrderList extends Component {
 
         var valuesLength = this.state.values && this.state.values.length, 
         content = (
-            <div className="ui-grid-col-10">
+            <div className="ui-orderlist-list-container">
                 {this.props.header && <div className="ui-orderlist-caption ui-widget-header ui-corner-top">{this.props.header}</div>}
                 <ul ref={(el) => this.listContainer = el} className="ui-widget-content ui-orderlist-list ui-corner-bottom" style={this.props.listStyle} onDragOver={this.onListMouseMove}>
                     {
@@ -330,10 +330,8 @@ export class OrderList extends Component {
 
         return (
             <div className={styleClass} style={this.props.style}>
-                <div className="ui-grid-row">
-                    {controls}
-                    {content}
-                </div>
+                {controls}
+                {content}
             </div>
         );
     }

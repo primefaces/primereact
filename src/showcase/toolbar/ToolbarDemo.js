@@ -26,12 +26,12 @@ export class ToolbarDemo extends Component {
                         <div className="ui-toolbar-group-left">
                             <Button label="New" icon="fa-plus"/>
                             <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
-                            <i className="fa fa-bars"></i>
+                            <i className="fa fa-bars" style={{marginRight:'.25em'}}></i>
                             <Button label="Save" icon="fa-check" className="ui-button-warning"/>
                         </div>
                         <div className="ui-toolbar-group-right">
                             <Button icon="fa-search"/>
-                            <i className="fa fa-bars"></i>
+                            <i className="fa fa-bars" style={{marginRight:'.25em'}}></i>
                             <Button icon="fa-refresh"/>
                             <Button icon="fa-trash" className="ui-button-danger"/>
                         </div>

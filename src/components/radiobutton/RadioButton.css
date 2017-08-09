@@ -2,12 +2,11 @@
     vertical-align: middle;
     display: inline-block;
 }
-
 .ui-radiobutton {
-    display: inline-block;
+    display:inline-block;
     cursor: pointer;
     vertical-align: middle;
-    margin-right: .5em;
+    margin-right: .25em;
 }
 
 .ui-radiobutton .ui-radiobutton-box {
@@ -22,6 +21,7 @@
 
 .ui-radiobutton .ui-radiobutton-icon {
     display: block;
-    font-size: .6em;
+    font-size: .5em;
     line-height: inherit;
+    margin-top: -1px;
 }

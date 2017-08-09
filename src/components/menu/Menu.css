@@ -188,10 +188,6 @@
     display: block !important;
 }
 
-.ui-slidemenu {
-    width: 12em;
-}
-
 /** MegaMenu **/
 .ui-megamenu .ui-g {
     flex-wrap: nowrap;
@@ -239,6 +235,7 @@
 .ui-panelmenu .ui-panelmenu-header a {
     display: block;
     padding: .25em .5em;
+    text-decoration: none;
 }
 
 .ui-panelmenu span {
