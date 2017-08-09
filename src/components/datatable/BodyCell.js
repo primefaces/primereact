@@ -18,6 +18,8 @@ export class BodyCell extends Component {
                 data: this.props.rowData
             });
         }
+        
+        event.preventDefault();
     }
 
     render() {
