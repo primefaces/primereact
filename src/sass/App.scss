@@ -940,6 +940,7 @@ a{
     .car-item {
         padding: 1.5em;
         padding: 20px;
+        border-bottom: 1px solid #cccccc;
         
         i {
             cursor: pointer;
@@ -948,7 +949,13 @@ a{
             margin-right: 20px;
         }
     }
-            
+         
+    li:last-child {
+        .car-item {
+            border-bottom: 0 none;
+        }
+    }
+
     .ui-g > div {
         padding: .4em;
     }
