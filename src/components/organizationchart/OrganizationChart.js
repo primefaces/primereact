@@ -88,7 +88,7 @@ export class OrganizationChartNode extends Component {
                         let leftClass = classNames('ui-organizationchart-line-left', {'ui-organizationchart-line-top': index !== 0}),
                         rightClass = classNames('ui-organizationchart-line-right', {'ui-organizationchart-line-top': index !== nodeChildLength - 1});
 
-                        return [<td className={leftClass}>&nbsp;</td>, <td className={rightClass}>&nbsp;</td>];
+                        return [<td key={index + '_lineleft'} className={leftClass}>&nbsp;</td>, <td key={index + '_lineright'} className={rightClass}>&nbsp;</td>];
                     })
                 }
             </tr>),
