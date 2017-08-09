@@ -89,7 +89,7 @@ export class HeaderCell extends Component {
                         className="ui-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
         }
 
-        if(this.props.selectionMode) {
+        if(this.props.selectionMode === 'multiple') {
             headerCheckbox = <RowCheckbox onClick={this.props.onHeaderCheckboxClick} selected={this.props.headerCheckboxSelected}/>;
         }
 
