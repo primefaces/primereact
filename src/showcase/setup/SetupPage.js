@@ -42,8 +42,8 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                 <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
 <CodeHighlight className="language-javascript">
 {`
-primeng/resources/themes/omega/theme.css
-primeng/resources/primeng.min.css
+primereact/resources/themes/omega/theme.css
+primereact/resources/primereact.min.css
 
 `}
 </CodeHighlight>
@@ -51,7 +51,7 @@ primeng/resources/primeng.min.css
                <p>If you are using webpack with a css loader you may also import them to your main application component.</p>
 <CodeHighlight className="language-javascript">
 {`
-import 'primereact/resources/primeng.min.css';
+import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
 

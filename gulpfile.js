@@ -12,7 +12,7 @@ gulp.task('build-css', function() {
         'src/components/common/Common.css',
 		'src/components/**/*.css'
     ])
-	.pipe(concat('primeng.css'))
+	.pipe(concat('primereact.css'))
 	.pipe(gulp.dest('public/resources'));
 });
 
@@ -21,10 +21,10 @@ gulp.task('build-css-prod', function() {
         'src/components/common/Common.css',
 		'src/components/**/*.css'
     ])
-	.pipe(concat('primeng.css'))
+	.pipe(concat('primereact.css'))
 	.pipe(gulp.dest('public/resources'))
     .pipe(uglifycss({"uglyComments": true}))
-    .pipe(rename('primeng.min.css'))
+    .pipe(rename('primereact.min.css'))
 	.pipe(gulp.dest('public/resources'));
 });
 
@@ -36,7 +36,7 @@ gulp.task('images', function() {
 
 //Cleaning previous gulp tasks from project
 gulp.task('clean', function() {
-    return del(['public/resources/images/','public/resources/primeng.css','public/resources/primeng.min.css']);
+    return del(['public/resources/images/','public/resources/primereact.css','public/resources/primereact.min.css']);
 });
 
 //Building project with run sequence
