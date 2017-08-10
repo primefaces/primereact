@@ -38,15 +38,16 @@ export class Checkbox extends Component {
         iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.checked});
         
         return (
-            <div className={classNames('ui-chkbox ui-widget', this.props.className)}>
-                <div className="ui-helper-hidden-accessible">
-                    <input type="checkbox" />
+            <div className={classNames('ui-chkbox-container', this.props.className)}>
+                <div className='ui-chkbox ui-widget'>
+                    <div className="ui-helper-hidden-accessible">
+                        <input type="checkbox" />
+                    </div>
+                    <div className={boxClass} onClick={this.onClick}>
+                       <span className={iconClass}></span>
+                    </div>
                 </div>
-                <div className={boxClass}
-                    onClick={this.onClick}>
-                    <span className={iconClass}></span>
-                </div>
-                { this.props.label && <label className="ui-chkbox-label" onClick={this.onClick}>{this.props.label}</label>}
+                {this.props.label && <label className="ui-chkbox-label" onClick={this.onClick}>{this.props.label}</label>}
             </div>
         )
     }

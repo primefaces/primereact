@@ -86,6 +86,7 @@ import {MegaMenuDemo} from './showcase/megamenu/MegaMenuDemo';
 import {SlideMenuDemo} from './showcase/slidemenu/SlideMenuDemo';
 import {OrganizationChartDemo} from './showcase/organizationchart/OrganizationChartDemo';
 import {ThemingPage} from "./showcase/theming/ThemingPage"
+import {InputGroupDemo} from "./showcase/inputgroup/InputGroupDemo";
 import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
@@ -176,6 +177,7 @@ ReactDOM.render(
             <Route path="/splitbutton" component={SplitButtonDemo} />
             <Route path="/organizationchart" component={OrganizationChartDemo} />
             <Route path="/theming" component={ThemingPage} />
+            <Route path="/inputgroup" component={InputGroupDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
