@@ -1,6 +1,6 @@
 {
   "name": "primereact",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "homepage": "https://www.primefaces.org/primereact",
   "repository": {
     "type": "git",
@@ -41,7 +41,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0",
-    "build-resources": "gulp prepublish",
-    "prepublishOnly": "npm run build-resources && npm run compile-components"
+    "build-resources": "gulp prepublish"
   }
 }
