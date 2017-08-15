@@ -5,18 +5,26 @@ import classNames from 'classnames';
 export class InputTextarea extends Component {
 
     static defaultProps = {
-        autoResize: false
+        autoResize: false,
+        onInput: null
     };
 
     static propTypes = {
-        autoResize: PropTypes.bool
+        autoResize: PropTypes.bool,
+        onInput: PropTypes.func
     };
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
+        this.onInput = this.onInput.bind(this);
+        this.state = {filled: false};
+
+        this.textareaProps = Object.assign({}, this.props);
+        delete this.textareaProps.autoResize;
+        delete this.textareaProps.onInput;
     }
 
     onFocus(e) {
@@ -48,14 +56,45 @@ export class InputTextarea extends Component {
         this.textareaElement.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
     }
 
+    onInput(e) {
+        if(this.props.onInput) {
+            this.props.onInput();
+        }
+
+        this.updateFilledState(e);
+    }
+
+    updateFilledState(e) {
+        let _filled = (e.target.value && e.target.value.length) ? true : false;
+        this.setState({filled: _filled});
+    }
+    
+    componentDidMount() {
+        let _value =  this.textareaProps.value||this.textareaProps.defaultValue,
+        _filled = (_value && _value.length) ? true : false;
+        
+        this.setState({filled: _filled});
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.hasOwnProperty('value')) {
+            this.textareaProps.value = nextProps.value;
+        }
+    }   
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.filled === nextState.filled && !this.textareaProps.value) {
+            return false;
+        }
+        return true;
+    }
+
     render() {
         var styleClass = classNames('ui-inputtext ui-corner-all ui-state-default ui-widget', this.props.className, {
-            'ui-state-disabled': this.props.disabled
+            'ui-state-disabled': this.props.disabled,
+            'ui-state-filled': this.state.filled
         });
 
-        var textareaProps = Object.assign({}, this.props);
-        delete textareaProps.autoResize;
-
-        return <textarea {...textareaProps} className={styleClass} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp}></textarea>;
+        return <textarea {...this.textareaProps} className={styleClass} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>;
     }
 }

@@ -6,11 +6,6 @@ import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
 
 export class PasswordDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
         return (
             <div>
@@ -136,11 +131,6 @@ import {Password} from 'primereact/components/password/Password';
                         <CodeHighlight className="language-javascript">
                             {`
 export class PasswordDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {};
-    }
 
     render() {
         return (

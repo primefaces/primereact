@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
- import PropTypes from 'prop-types';
- import DomHandler from '../utils/DomHandler';
+import ReactDOM from 'react-dom';
+import {InputText} from '../inputtext/InputText';
+import PropTypes from 'prop-types';
+import DomHandler from '../utils/DomHandler';
  
- export class Password extends Component {
+export class Password extends Component {
  
-     static defaultProps = {
-        value: null,
+    static defaultProps = {
         promptLabel:'Please enter a password',
         weakLabel:'Weak',
         mediumLabel:'Medium',
         strongLabel:'Strong',
-        feedback:true,
+        feedback:true
     };
 
     static propTypes = {
-        value: PropTypes.any,
         promptLabel:PropTypes.string,
         weakLabel:PropTypes.string,
         mediumLabel:PropTypes.string,
@@ -24,28 +24,27 @@ import React, {Component} from 'react';
 
     constructor(props) {
         super(props);
-        this.state = {hidden:true};
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onKeyup = this.onKeyup.bind(this);
     }
 
-    onInputFocus(event) {
-        if(this.props.feedback) {
-            this.panel.style.zIndex = DomHandler.getZindex();
-            DomHandler.removeClass(this.panel, 'ui-helper-hidden');
-            DomHandler.absolutePosition(this.panel, this.container);
-            DomHandler.fadeIn(this.panel, 250);
-            if(event.target.value.length===0)
-                this.info.textContent = this.props.promptLabel;
-        }
+    onFocus(e) {
+        let zIndex = DomHandler.getZindex();
+        this.panel.style.zIndex = String(++zIndex);
+        DomHandler.removeClass(this.panel, 'ui-helper-hidden');
+        DomHandler.absolutePosition(this.panel, this.inputEl);
+        DomHandler.fadeIn(this.panel, 250);
     }
-
-    onInputBlur(event) {
+  
+    onBlur(e) {        
         DomHandler.addClass(this.panel, 'ui-helper-hidden');
     }
 
-    onKeyup(event) {
-        let value = event.target.value,
-            label = null,
-            meterPos = null;
+    onKeyup(e) {
+        let value = e.target.value,
+        label = null,
+        meterPos = null;
 
         if(value.length === 0) {
             label = this.props.promptLabel;
@@ -61,7 +60,7 @@ import React, {Component} from 'react';
             else if(score >= 30 && score < 80) {
                 label = this.props.mediumLabel;
                 meterPos = '0px -20px';
-            }
+            } 
             else if(score >= 80) {
                 label = this.props.strongLabel;
                 meterPos = '0px -30px';
@@ -71,7 +70,7 @@ import React, {Component} from 'react';
         this.meter.style.backgroundPosition = meterPos;
         this.info.textContent = label;
     }
-
+    
     testStrength(str) {
         let grade = 0;
         let val;
@@ -92,7 +91,7 @@ import React, {Component} from 'react';
 
         return grade > 100 ? 100 : grade;
     }
-
+    
     normalize(x, y) {
         let diff = x - y;
 
@@ -102,20 +101,35 @@ import React, {Component} from 'react';
             return 1 + 0.5 * (x / (x + y/4));
     }
 
-    render() {
-        let password= <input type="password" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
-                             onFocus={this.onInputFocus.bind(this)} onBlur={this.onInputBlur.bind(this)}
-                             onChange={this.onKeyup.bind(this)}  ref={(el) => {this.container = el;}} />
+    componentDidMount() {
+        this.panel = document.createElement('div');
+        this.panel.className = 'ui-password-panel ui-widget ui-state-highlight ui-corner-all ui-helper-hidden ui-password-panel-overlay';
+        this.meter = document.createElement('div');
+        this.meter.className = 'ui-password-meter';
+        this.info = document.createElement('div');
+        this.info.className = 'ui-password-info';
+        this.info.textContent = this.props.promptLabel;
+        
+        if(this.props.feedback) {
+            this.panel.appendChild(this.meter);
+            this.panel.appendChild(this.info);
+            document.body.appendChild(this.panel);
+        }
+    }
 
-        return (
-            <div className='ui-inputtext ui-corner-all ui-widget ui-state-filled'>
-                {password}
-                <div className={'ui-password-panel ui-widget ui-state-highlight ui-password-panel-overlay ui-helper-hidden'}
-                     ref={(el) => {this.panel = el;}}>
-                    <div className='ui-password-meter' ref={(el) => {this.meter = el;}}/>
-                    <div className='ui-password-info' ref={(el) => {this.info = el;}}/>
-                </div>
-            </div>
-        );
+    componentWillUnmount() {
+        if (!this.props.feedback)
+            return;
+            
+        this.panel.removeChild(this.meter);
+        this.panel.removeChild(this.info);
+        document.body.removeChild(this.panel);
+        this.panel = null;
+        this.meter = null;
+        this.info = null;
+    }
+
+    render() {
+        return <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />;
     }
 } 
