@@ -84,7 +84,6 @@ export class Editor extends Component {
             this.value = nextProps.value;
             var sel = this.quill.getSelection();
             if (sel) {
-                // Validate bounds before applying.
                 var length = this.quill.getLength();
                 sel.index = Math.max(0, Math.min(sel.index, length-1));
                 sel.length = Math.max(0, Math.min(sel.length, (length-1) - sel.index));
