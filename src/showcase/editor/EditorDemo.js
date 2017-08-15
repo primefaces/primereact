@@ -1,0 +1,299 @@
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {Editor} from "../../components/editor/Editor";
+import {Button} from "../../components/button/Button";
+
+export class EditorDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            text1 :'<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>',
+            text2 : ''
+        };
+    }
+
+    render() {
+        var header =
+            <span className="ql-formats">
+                <button className="ql-bold" aria-label="Bold"></button>
+                <button className="ql-italic" aria-label="Italic"></button>
+                <button className="ql-underline" aria-label="Underline"></button>
+            </span>;
+
+        return (
+            <div>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>Editor</h1>
+                        <p>Editor is rich text editor component based on Quill.</p>
+                    </div>
+                </div>
+
+                <div className="content-section implementation">
+                    <h3 className="first">Default</h3>
+                    <Editor style={{height:'320px'}} value={this.state.text1} onTextChange={(e)=>this.setState({text1:e.htmlValue})}/>
+                    <p>Value: {this.state.text1 ||'empty'}</p>
+                    <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text1:''})}/>
+
+                    <hr/>
+
+                    <h3 className="first">Custom Toolbar</h3>
+                    <Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
+                    <p>Value: {this.state.text2 ||'empty'}</p>
+                    <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text2:''})}/>
+                </div>
+
+                <EditorDoc/>
+
+            </div>
+        );
+    }
+}
+
+class EditorDoc extends Component {
+
+    render() {
+        return (
+            <div className="content-section source">
+                <TabView effect="fade">
+                    <TabPanel header="Documentation">
+                        <h3>Import</h3>
+                        <CodeHighlight className="language-javascript">
+                            {`
+import {Editor} from 'primereact/components/editor/Editor';
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Getting Started</h3>
+                        <p></p>
+                        <CodeHighlight className="language-markup">
+                            {`
+<Editor style={{height:'320px'}} value={this.state.text1}/>
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Toolbar</h3>
+                        <p>Editor provides a default toolbar with common options, to customize it define your elements inside the header element. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
+
+                        <CodeHighlight className="language-javascript">
+                            {`
+var header =
+    <span className="ql-formats">
+        <button className="ql-bold" aria-label="Bold"></button>
+        <button className="ql-italic" aria-label="Italic"></button>
+        <button className="ql-underline" aria-label="Underline"></button>
+    </span>;
+
+<Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Attributes</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Value of the content.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Style and modules of the toolbar.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the container.</td>
+                                </tr>
+                                <tr>
+                                    <td>styleClass</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the container.</td>
+                                </tr>
+                                <tr>
+                                    <td>placeholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Placeholder text to show when editor is empty.</td>
+                                </tr>
+                                <tr>
+                                    <td>readonly</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to instantiate the editor to read-only mode.</td>
+                                </tr>
+                                <tr>
+                                    <td>formats</td>
+                                    <td>string[]</td>
+                                    <td>null</td>
+                                    <td>Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Events</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>onTextChange</td>
+                                    <td>event.delta: Representation of the change.<br/>
+                                        event.source: Source of change. Will be either "user" or "api".<br/>
+                                        event.htmlValue: Current value as html.<br/>
+                                        event.textValue: Current value as text.<br/></td>
+                                    <td>Callback to invoke when text of editor changes.</td>
+                                </tr>
+                                <tr>
+                                    <td>onSelectionChange</td>
+                                    <td>event.range: Object with index and length keys indicating where the selection exists.<br/>
+                                        event.oldRange: Object with index and length keys indicating where the previous selection was..<br/>
+                                        event.source: Source of change. Will be either "user" or "api".</td>
+                                    <td>Callback to invoke when selected text of editor changes.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>Refer to <a href="http://beta.quilljs.com/docs/api/#events">Quill documentation</a> for more information.</p>
+
+                        <h3>Styling</h3>
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>ui-editor-container</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>ui-editor-toolbar</td>
+                                    <td>Toolbar of the editor</td>
+                                </tr>
+                                <tr>
+                                    <td>ui-editor-content</td>
+                                    <td>Editable area</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <h3>Dependencies</h3>
+                        <p><a href="http://quilljs.com">Quill</a> Editor 1.0.</p>
+                        <p>Resources of quill needs to be added to your application. Example setup with CLI is as follows;</p>
+                        <CodeHighlight className="language-javascript">
+                            {`
+npm install quill --save
+
+`}
+                            </CodeHighlight>
+
+                        <p>Add Quill to dependencies in package.json</p>
+                        <CodeHighlight className="language-javascript">
+                            {`
+"dependencies": {
+    "quill": "^1.3.1"
+}
+
+`}
+                        </CodeHighlight>
+                    </TabPanel>
+
+                    <TabPanel header="Source">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/editor" className="btn-viewsource" target="_blank">
+                            <i className="fa fa-github"></i>
+                            <span>View on GitHub</span>
+                        </a>
+                        <CodeHighlight className="language-javascript">
+                            {`
+export class EditorDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            text1 :'<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>',
+            text2 : ''
+        };
+    }
+
+    render() {
+        var header =
+            <span className="ql-formats">
+                <button className="ql-bold" aria-label="Bold"></button>
+                <button className="ql-italic" aria-label="Italic"></button>
+                <button className="ql-underline" aria-label="Underline"></button>
+            </span>;
+
+        return (
+            <div>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>Editor</h1>
+                        <p>Editor is rich text editor component based on Quill.</p>
+                    </div>
+                </div>
+
+                <div className="content-section implementation">
+                    <h3 className="first">Default</h3>
+                    <Editor style={{height:'320px'}} value={this.state.text1} onTextChange={(e)=>this.setState({text1:e.htmlValue})}/>
+                    <p>Value: {this.state.text1 ||'empty'}</p>
+                    <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text1:''})}/>
+
+                    <hr/>
+
+                    <h3 className="first">Custom Toolbar</h3>
+                    <Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
+                    <p>Value: {this.state.text2 ||'empty'}</p>
+                    <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text2:''})}/>
+                </div>
+
+                <EditorDoc/>
+
+            </div>
+        );
+    }
+}
+
+`}
+                        </CodeHighlight>
+                    </TabPanel>
+                </TabView>
+            </div>
+        )
+    }
+}

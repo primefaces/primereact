@@ -160,6 +160,7 @@ class AppMenu extends Component {
                                 <Link to="/rating">&#9679; Rating</Link>
                                 <Link to="/password">&#9679; Password</Link>
                                 <Link to="/inputgroup">&#9679; InputGroup</Link>
+                                <Link to="/editor">&#9679; Editor</Link>
                             </div>
                         </div>
 
