@@ -21,7 +21,7 @@ export class Editor extends Component {
 
     static propsTypes = {
         value: PropTypes.string,
-        style: PropTypes.object,
+        style: PropTypes.string,
         styleClass: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
@@ -82,24 +82,24 @@ export class Editor extends Component {
     componentWillReceiveProps(nextProps, nextState) {
         if(nextProps.value !== this.value) {
             this.value = nextProps.value;
-            var sel = this.quill.getSelection();
-            if (sel) {
+            let sel = this.quill.getSelection();
+            if(sel) {
                 var length = this.quill.getLength();
                 sel.index = Math.max(0, Math.min(sel.index, length-1));
                 sel.length = Math.max(0, Math.min(sel.length, (length-1) - sel.index));
             }
             this.quill.setSelection(sel);
 
-            if(this.value === '' || this.value === null ) {
+            if(this.value === '' || this.value === null) {
                 this.editorElement.children[0].innerHTML = null;
             }
         }
     }
 
     render() {
-        var containerClass = classNames('ui-widget ui-editor-container ui-corner-all', this.props.styleClass);
+        let containerClass = classNames('ui-widget ui-editor-container ui-corner-all', this.props.styleClass);
 
-        var toolbarHeader = null;
+        let toolbarHeader = null;
         if (this.props.headerTemplate) {
             toolbarHeader = (
                 <div ref={(el) => this.toolbarElement = el} className="ui-editor-toolbar ui-widget-header ui-corner-top">
@@ -153,7 +153,7 @@ export class Editor extends Component {
             );
         }
 
-        var content = (<div ref={(el) => this.editorElement = el} className="ui-editor-content" style={this.props.style}></div>)
+        let content = (<div ref={(el) => this.editorElement = el} className="ui-editor-content" style={this.props.style}></div>)
 
         return (
             <div className={containerClass}>

@@ -16,12 +16,11 @@ export class EditorDemo extends Component {
     }
 
     render() {
-        var header =
-            <span className="ql-formats">
-                <button className="ql-bold" aria-label="Bold"></button>
-                <button className="ql-italic" aria-label="Italic"></button>
-                <button className="ql-underline" aria-label="Underline"></button>
-            </span>;
+        let header = <span className="ql-formats">
+                        <button className="ql-bold" aria-label="Bold"></button>
+                        <button className="ql-italic" aria-label="Italic"></button>
+                        <button className="ql-underline" aria-label="Underline"></button>
+                     </span>;
 
         return (
             <div>
@@ -36,14 +35,14 @@ export class EditorDemo extends Component {
                     <h3 className="first">Default</h3>
                     <Editor style={{height:'320px'}} value={this.state.text1} onTextChange={(e)=>this.setState({text1:e.htmlValue})}/>
                     <p>Value: {this.state.text1 ||'empty'}</p>
-                    <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text1:''})}/>
+                    <Button label="Clear" icon="fa-close" onClick={()=> this.setState({text1:''})}/>
 
                     <hr/>
 
                     <h3 className="first">Custom Toolbar</h3>
                     <Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
                     <p>Value: {this.state.text2 ||'empty'}</p>
-                    <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text2:''})}/>
+                    <Button label="Clear" icon="fa-close" onClick={() => this.setState({text2:''})}/>
                 </div>
 
                 <EditorDoc/>
