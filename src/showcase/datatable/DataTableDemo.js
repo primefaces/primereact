@@ -1005,7 +1005,7 @@ export class DataTableExportDemo extends Component {
 </CodeHighlight>
 
             <h3>Scrolling</h3>
-            <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns. Scrollable DataTable is enabled using scrollable property and scrollHeight to define the viewport height.</p>
+            <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using scrollable property and scrollHeight to define the viewport height.</p>
 <CodeHighlight className="language-markup">
 {`
 <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px">
@@ -1021,12 +1021,12 @@ export class DataTableExportDemo extends Component {
             <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
 <CodeHighlight className="language-markup">
 {`
-    <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
-        <Column field="vin" header="Vin" style={{width:'250px'}} />
-        <Column field="year" header="Year" style={{width:'250px'}} />
-        <Column field="brand" header="Brand" style={{width:'250px'}} />
-        <Column field="color" header="Color" style={{width:'250px'}} />
-    </DataTable>
+<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
+    <Column field="vin" header="Vin" style={{width:'250px'}} />
+    <Column field="year" header="Year" style={{width:'250px'}} />
+    <Column field="brand" header="Brand" style={{width:'250px'}} />
+    <Column field="color" header="Color" style={{width:'250px'}} />
+</DataTable>
 
 `}
 </CodeHighlight> 
@@ -1035,21 +1035,35 @@ export class DataTableExportDemo extends Component {
                 total of these values should equal to the width of the DataTable itself.</p>
 <CodeHighlight className="language-markup">
 {`
-    <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
-        <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
-            <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
-            <Column field="year" header="Year" style={{width:'250px'}} />
-            <Column field="brand" header="Brand" style={{width:'250px'}} />
-            <Column field="color" header="Color" style={{width:'250px'}} />
-            <Column field="owner" header="Owner" style={{width:'250px'}} />
-            <Column field="tyre" header="Tyre" style={{width:'250px'}} />
-            <Column field="capacity" header="Capacity" style={{width:'250px'}} />
-            <Column field="engine" header="Engine" style={{width:'250px'}} />
-        </DataTable>
+<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
+    <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+        <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
+        <Column field="year" header="Year" style={{width:'250px'}} />
+        <Column field="brand" header="Brand" style={{width:'250px'}} />
+        <Column field="color" header="Color" style={{width:'250px'}} />
+        <Column field="owner" header="Owner" style={{width:'250px'}} />
+        <Column field="tyre" header="Tyre" style={{width:'250px'}} />
+        <Column field="capacity" header="Capacity" style={{width:'250px'}} />
+        <Column field="engine" header="Engine" style={{width:'250px'}} />
     </DataTable>
+</DataTable>
 
 `}
 </CodeHighlight> 
+
+            <p>One or more rows can be displayed as fixed using the frozenValue property.</p>
+<CodeHighlight className="language-markup">
+{`
+<DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
+    <Column field="vin" header="Vin" />
+    <Column field="year" header="Year" />
+    <Column field="brand" header="Brand" />
+    <Column field="color" header="Color" />
+</DataTable>
+
+`}
+</CodeHighlight>         
+            
 
             <h3>Lazy Loading</h3>
             <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. To implement lazy loading, 

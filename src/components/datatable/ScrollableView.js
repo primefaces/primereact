@@ -11,7 +11,8 @@ export class ScrollableView extends Component {
         footer: null,
         frozen: null,
         frozenWidth: null,
-        unfrozenWidth: null
+        unfrozenWidth: null,
+        frozenBody: null
      }
 
     static propTypes = {
@@ -20,7 +21,8 @@ export class ScrollableView extends Component {
         footer: PropTypes.element,
         frozen: PropTypes.bool,
         frozenWidth: PropTypes.string,
-        unfrozenWidth: PropTypes.string
+        unfrozenWidth: PropTypes.string,
+        frozenBody: PropTypes.element
     }
 
     constructor(props) {
@@ -87,6 +89,7 @@ export class ScrollableView extends Component {
                     <div className="ui-datatable-scrollable-header-box" ref={(el) => { this.scrollHeaderBox = el; }}>
                         <table>
                             {this.props.header}
+                            {this.props.frozenBody}
                         </table>
                     </div>
                 </div>

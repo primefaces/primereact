@@ -51,6 +51,7 @@ export class DataTable extends Component {
         scrollHeight: null,
         frozenWidth: null,
         unfrozenWidth: null,
+        frozenValue: null,
         csvSeparator: ',',
         exportFilename: 'download',
         contextMenu: null,
@@ -108,6 +109,7 @@ export class DataTable extends Component {
         scrollHeight: PropTypes.string,
         frozenWidth: PropTypes.string,
         unfrozenWidth: PropTypes.string,
+        frozenValue: PropTypes.array,
         csvSeparator: PropTypes.string,
         exportFilename: PropTypes.string,
         contextMenu: PropTypes.any,
@@ -667,7 +669,7 @@ export class DataTable extends Component {
     }
 
     createScrollableView(value, columns, frozen) {
-        return <ScrollableView header={this.createTableHeader(columns)} body={this.createTableBody(value, this.props.children)} footer={this.createTableFooter(this.props.children)} 
+        return <ScrollableView header={this.createTableHeader(columns)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns)} 
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}></ScrollableView>
     }
 
