@@ -1,4 +1,3 @@
-
 .ui-chkbox {
     display: inline-flex;
     cursor: pointer;
@@ -17,7 +16,6 @@
 }
 
 .ui-chkbox .ui-chkbox-icon {
-    line-height: inherit;
     display: block;
 }
 
