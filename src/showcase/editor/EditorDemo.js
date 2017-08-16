@@ -79,7 +79,7 @@ import {Editor} from 'primereact/components/editor/Editor';
                         <h3>Toolbar</h3>
                         <p>Editor provides a default toolbar with common options, to customize it define your elements inside the header element. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="language-markup">
                             {`
 var header =
     <span className="ql-formats">
@@ -213,24 +213,14 @@ var header =
 
 
                         <h3>Dependencies</h3>
-                        <p><a href="http://quilljs.com">Quill</a> Editor 1.0.</p>
-                        <p>Resources of quill needs to be added to your application. Example setup with CLI is as follows;</p>
+                        <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>
+                        <p>Resources of quill needs to be added to your application.</p>
                         <CodeHighlight className="language-javascript">
                             {`
 npm install quill --save
 
 `}
                             </CodeHighlight>
-
-                        <p>Add Quill to dependencies in package.json</p>
-                        <CodeHighlight className="language-javascript">
-                            {`
-"dependencies": {
-    "quill": "^1.3.1"
-}
-
-`}
-                        </CodeHighlight>
                     </TabPanel>
 
                     <TabPanel header="Source">
@@ -240,6 +230,10 @@ npm install quill --save
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Editor} from "primereact/components/editor/Editor";
+import {Button} from "primereact/components/button/Button";
+                                
 export class EditorDemo extends Component {
 
     constructor() {
@@ -280,8 +274,6 @@ export class EditorDemo extends Component {
                     <p>Value: {this.state.text2 ||'empty'}</p>
                     <Button label="Clear" icon="fa-close" onClick={ ()=> this.setState({text2:''})}/>
                 </div>
-
-                <EditorDoc/>
 
             </div>
         );
