@@ -201,6 +201,12 @@ import {TreeTable} from 'primereact/components/treetable/TreeTable';
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
                                         <td>label</td>
                                         <td>string</td>
                                         <td>null</td>
