@@ -6,6 +6,7 @@ import {NestedMenu} from "../nestedmenu/NestedMenu";
 
 export class ContextMenu extends Component {
     static defaultProps = {
+        id: null,
         model: null,
         style: null,
         className: null,
@@ -15,6 +16,7 @@ export class ContextMenu extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         model: PropTypes.array,
         style: PropTypes.string,
         className: PropTypes.string,
@@ -143,7 +145,7 @@ export class ContextMenu extends Component {
         let contextMenuClass = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', this.props.className);
         
         return (
-            <div className={contextMenuClass} style={this.props.style} ref={el => this.container = el}>
+            <div id={this.props.id} className={contextMenuClass} style={this.props.style} ref={el => this.container = el}>
                 <NestedMenu className="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
             </div>
         );

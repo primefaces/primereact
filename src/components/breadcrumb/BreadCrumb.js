@@ -6,6 +6,7 @@ import {MenuItem} from '../menu/MenuItem'
 export class BreadCrumb extends Component {
 
     static defaultProps = {
+        id: null,
         model:null,
         home:null,
         style:null,
@@ -13,6 +14,7 @@ export class BreadCrumb extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         model:PropTypes.array,
         home:PropTypes.any,
         style:PropTypes.object,
@@ -86,7 +88,7 @@ export class BreadCrumb extends Component {
         })
 
         return (
-            <div className={className} style={this.props.style} ref={el=>this.container=el}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={el=>this.container=el}>
                 <ul>
                     {home}
                     {right}

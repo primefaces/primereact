@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class ToggleButton extends Component {
 
     static defaultProps = {
+        id: null,
         onIcon: null,
         offIcon: null,
         onLabel: 'Yes',
@@ -16,6 +17,7 @@ export class ToggleButton extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         onIcon: PropTypes.string,
         offIcon: PropTypes.string,
         onLabel: PropTypes.string,
@@ -57,7 +59,7 @@ export class ToggleButton extends Component {
         }
 
         return (
-           <div className={className} style={this.props.style} onClick={this.toggle}>
+           <div id={this.props.id} className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="ui-helper-hidden-accessible">
                     <input type="checkbox"/>
                 </div>

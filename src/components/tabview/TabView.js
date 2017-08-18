@@ -3,26 +3,28 @@ import PropTypes from 'prop-types';
 
 export class TabPanel extends Component {
     
+    static defaultProps = {
+        header: null
+    }
+
+    static propTypes = {
+        header: PropTypes.string
+    };
+
     render() {        
         return <div>{this.props.children}</div>;
     }
 }
 
-TabPanel.defaultProps = {
-    header: null
-}
-
-TabPanel.propTypes = {
-    header: PropTypes.string
-};
-
 export class TabView extends Component {
 
     static defaultProps = {
+        id: null,
         activeIndex: null
     }
 
     static propTypes = {
+        id: PropTypes.string,
         activeIndex: PropTypes.number
     };
     
@@ -62,7 +64,7 @@ export class TabView extends Component {
 
     render() {
         return (
-            <div className="ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-top">
+            <div id={this.props.id} className="ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-top">
                 <ul className="ui-tabview-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
                     {React.Children.map(this.props.children, (tab,i) => {
                             return <li className={this.getTabHeaderClass(i)} role="tab">

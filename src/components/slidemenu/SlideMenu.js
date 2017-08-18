@@ -118,6 +118,7 @@ export class SlideMenuSub extends Component {
 
 export class SlideMenu extends Component {
     static defaultProps = {
+        id: null,
         model: null,
         popup: false,
         style: null,
@@ -130,6 +131,7 @@ export class SlideMenu extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         model: PropTypes.array,
         popup: PropTypes.bool,
         style: PropTypes.string,
@@ -227,7 +229,7 @@ export class SlideMenu extends Component {
             'ui-menu-dynamic ui-shadow': this.props.popup
         });
         return (
-            <div ref={(el) => this.container = el} className={menuClass} style={this.props.style} onClick={this.onClick}>
+            <div id={this.props.id} ref={(el) => this.container = el} className={menuClass} style={this.props.style} onClick={this.onClick}>
                 <div className="ui-slidemenu-wrapper" style={{'height': this.props.viewportHeight + 'px'}}>
                     <div ref={(el) => this.slideMenuContent = el} className="ui-slidemenu-content">
                         <SlideMenuSub ref={(el) => this.rootSlideMenuSub = ReactDOM.findDOMNode(el)} onMenuItemClick={this.onMenuItemClick} item={this.props.model} slideMenuLeft={0} root={true} menuWidth={this.props.menuWidth} 

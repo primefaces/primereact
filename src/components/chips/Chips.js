@@ -8,6 +8,7 @@ import classNames from 'classnames';
 export class Chips extends Component {
 
     static defaultProps = {
+        id: null,
         placeholder: null,
         value: [],
         field: null,
@@ -21,6 +22,7 @@ export class Chips extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         placeholder: PropTypes.string,
         value: PropTypes.array,
         field: PropTypes.string,
@@ -141,7 +143,7 @@ export class Chips extends Component {
                         </li>;
 
         return (
-            <div>
+            <div id={this.props.id}>
                 <div className={classNames('ui-chips ui-widget', this.props.className)} style={this.props.style}>
                     <ul className={listClassName} onClick={this.inputFocus}>
                         {items}

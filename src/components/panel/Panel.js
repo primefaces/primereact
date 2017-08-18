@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Panel extends Component {
 
     static defaultProps = {
+        id: null,
         header: null,
         toggleable: false,
         style: null,
@@ -15,6 +16,7 @@ export class Panel extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         header: PropTypes.any,
         toggleable: PropTypes.bool,
         style: PropTypes.object,
@@ -54,7 +56,7 @@ export class Panel extends Component {
         }
         
         return (
-            <div className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 {this.props.header != null && <div className="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
                     <span className="ui-panel-title">{this.props.header}</span>
                     {toggleIcon}

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 export class MultiSelect extends Component {
     
     static defaultProps = {
+        id: null,
         value: null,
         options: null,
         onChange: null,
@@ -16,6 +17,7 @@ export class MultiSelect extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         onChange: PropTypes.func,
@@ -182,7 +184,7 @@ export class MultiSelect extends Component {
         }
 
         return (
-            <div className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
+            <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
                 </div>

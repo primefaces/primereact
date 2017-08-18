@@ -7,6 +7,7 @@ import classNames from 'classnames'
 export class DataList extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         rows: null,
         first:0,
@@ -25,6 +26,7 @@ export class DataList extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.array,
         rows: PropTypes.number,
         first:PropTypes.number,
@@ -121,7 +123,7 @@ export class DataList extends Component {
             );
 
         return (
-            <div ref={(el) => this.dataListEl = ReactDOM.findDOMNode(el)} style={this.props.style} className={className}>
+            <div id={this.props.id} ref={(el) => this.dataListEl = ReactDOM.findDOMNode(el)} style={this.props.style} className={className}>
                 {header}
                 {topPaginator}
                 {content}

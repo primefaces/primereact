@@ -43,6 +43,7 @@ export class SplitButtonItem extends Component {
 export class SplitButton extends Component {
 
     static defaultProps = {
+        id: null,
         label: null,
         icon: null,
         onClick: null,
@@ -55,6 +56,7 @@ export class SplitButton extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         label: PropTypes.string,
         icon: PropTypes.string,
         onClick: PropTypes.func,
@@ -129,7 +131,7 @@ export class SplitButton extends Component {
         }
         
         return (
-            <div className={className} style={this.props.style}  ref={(el) => { this.containerEl = el; }}>
+            <div id={this.props.id} className={className} style={this.props.style}  ref={(el) => { this.containerEl = el; }}>
                 <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-left"></Button>
                 <Button type="button" className="ui-splitbutton-menubutton" icon="fa-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-right"></Button>
                 <div className={menuClassName} style={this.props.menuStyle} ref={(el) => { this.panelEl = el; }}>

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Checkbox extends Component {
 
     static defaultProps = {
+        id: null,
         label: null,
         value: null,
         onChange: null,
@@ -12,6 +13,7 @@ export class Checkbox extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         label: PropTypes.string,
         value: PropTypes.any,
         onChange: PropTypes.func,
@@ -38,7 +40,7 @@ export class Checkbox extends Component {
         iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.checked});
         
         return (
-            <div className={classNames('ui-chkbox-container', this.props.className)}>
+            <div id={this.props.id} className={classNames('ui-chkbox-container', this.props.className)}>
                 <div className='ui-chkbox ui-widget'>
                     <div className="ui-helper-hidden-accessible">
                         <input type="checkbox" />

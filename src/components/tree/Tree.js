@@ -199,6 +199,7 @@ export class TreeNode extends Component {
 export class Tree extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         selectionMode: null,
         selection: null,
@@ -216,6 +217,7 @@ export class Tree extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.any.isRequired,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
@@ -533,7 +535,7 @@ export class Tree extends Component {
         }
 
         return (
-            <div className={treeClass} style={this.props.style}>
+            <div id={this.props.id} className={treeClass} style={this.props.style}>
                 {container}
             </div>
         );

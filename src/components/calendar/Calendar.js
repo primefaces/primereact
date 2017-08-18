@@ -9,6 +9,7 @@ import classNames from 'classnames';
 export class Calendar extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         defaultDate: null,
         style: null,
@@ -56,6 +57,7 @@ export class Calendar extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         defaultDate: PropTypes.instanceOf(Date),
         style: PropTypes.string,
@@ -1215,7 +1217,7 @@ export class Calendar extends Component {
 
 
         return (
-            <span className={containerStyleClass} style={this.props.style}>
+            <span id={this.props.id} className={containerStyleClass} style={this.props.style}>
                 {inputElement}
                 {buttonElement}
 

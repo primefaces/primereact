@@ -7,6 +7,7 @@ import DomHandler from '../utils/DomHandler';
 export class Password extends Component {
  
     static defaultProps = {
+        id: null,
         promptLabel:'Please enter a password',
         weakLabel:'Weak',
         mediumLabel:'Medium',
@@ -15,6 +16,7 @@ export class Password extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         promptLabel:PropTypes.string,
         weakLabel:PropTypes.string,
         mediumLabel:PropTypes.string,
@@ -130,6 +132,6 @@ export class Password extends Component {
     }
 
     render() {
-        return <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />;
+        return <InputText id={this.props.id} ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />;
     }
 } 

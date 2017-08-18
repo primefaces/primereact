@@ -12,6 +12,7 @@ import DomHandler from '../utils/DomHandler';
 export class DataTable extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         header: null,
         footer: null,
@@ -69,6 +70,7 @@ export class DataTable extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         value: PropTypes.array,
         header: PropTypes.any,
         footer: PropTypes.any,
@@ -714,7 +716,7 @@ export class DataTable extends Component {
         }
 
         return (
-            <div className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
                 {headerFacet}
                 {paginatorTop}
                 {tableContent}

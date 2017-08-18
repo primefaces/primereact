@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Fieldset extends Component {
 
     static defaultProps = {
+        id: null,
         legend: null,
         className: null,
         style: null,
@@ -15,6 +16,7 @@ export class Fieldset extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         legend: PropTypes.any,
         className: PropTypes.string,
         style: PropTypes.object,
@@ -46,7 +48,7 @@ export class Fieldset extends Component {
         var className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
 
         return (
-            <fieldset className={className} style={this.props.style}>
+            <fieldset id={this.props.id} className={className} style={this.props.style}>
                 <legend className="ui-fieldset-legend ui-corner-all ui-state-default ui-unselectable-text" onClick={this.toggle}>
                     {this.props.toggleable && <span className={classNames('ui-fieldset-toggler fa fa-fw', {'fa-plus': this.state.collapsed, 'fa-minus': !this.state.collapsed})}></span>}
                     {this.props.legend}

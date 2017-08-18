@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class RadioButton extends Component {
 
     static defaultProps = {
+        id: null,
         label: null,
         value: null,
         onChange: null,
@@ -12,6 +13,7 @@ export class RadioButton extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         label: PropTypes.string,
         value: PropTypes.any,
         onChange: PropTypes.func,
@@ -43,7 +45,7 @@ export class RadioButton extends Component {
         iconClass = classNames('ui-radiobutton-icon ui-c', {'fa fa-circle': this.props.checked});
         
         return (
-            <div className={classNames('ui-radiobutton-container', this.props.className)}>
+            <div id={this.props.id} className={classNames('ui-radiobutton-container', this.props.className)}>
                 <div className='ui-radiobutton ui-widget'>
                     <div className="ui-helper-hidden-accessible">
                         <input ref={(el) => this.input = el} type="radio" />

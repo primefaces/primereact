@@ -5,12 +5,14 @@ import {NestedMenu} from "../nestedmenu/NestedMenu";
 
 export class Menubar extends Component{
     static defaultProps = {
+        id: null,
         model:null,
         style:null,
         className:null,
     };
 
     static propTypes = {
+        id: PropTypes.string,
         model:PropTypes.array,
         style:PropTypes.object,
         className:PropTypes.string,
@@ -26,7 +28,7 @@ export class Menubar extends Component{
         var ulClass=classNames('ui-menu-list ui-menubar-root-list ui-helper-clearfix');
 
         return(
-            <div className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 <NestedMenu className={ulClass} items={this.props.model} parentMenu="Menubar" root={true} index={0}>{this.props.children}</NestedMenu>
             </div>
         );

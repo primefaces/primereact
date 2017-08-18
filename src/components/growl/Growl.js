@@ -6,6 +6,7 @@ import classNames from 'classnames';
 export class Growl extends Component {
 
     static defaultProps = {
+        id: null,
         closable: true,
         className: null,
         style: null,
@@ -13,6 +14,7 @@ export class Growl extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         closable: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
@@ -95,7 +97,7 @@ export class Growl extends Component {
         }
 
         return (
-            <div className={className} ref={(el) => {this.container = el;}} style={this.props.style}>
+            <div id={this.props.id} className={className} ref={(el) => {this.container = el;}} style={this.props.style}>
                 {messageItems}
             </div>
         );   

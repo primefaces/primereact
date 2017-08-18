@@ -9,6 +9,7 @@ import classNames from 'classnames';
 export class FileUpload extends Component {
 
     static defaultProps = {
+        id: null,
         name: null,
         url: null,
         multiple: false,
@@ -33,6 +34,7 @@ export class FileUpload extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         name: PropTypes.string,
         url: PropTypes.string,
         multiple: PropTypes.bool,
@@ -263,7 +265,7 @@ export class FileUpload extends Component {
         
 
         return (
-            <div className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 <div className="ui-fileupload-buttonbar ui-widget-header ui-corner-top">
                     {chooseButton}
                     {uploadButton}

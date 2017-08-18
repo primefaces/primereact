@@ -6,6 +6,7 @@ import classNames from 'classnames'
 export class Slider extends Component {
 
     static defaultProps = {
+        id: null,
         animate: false,
         min: 0,
         max: 100,
@@ -17,6 +18,7 @@ export class Slider extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         animate: PropTypes.bool,
         min: PropTypes.number,
         max: PropTypes.number,
@@ -313,7 +315,7 @@ export class Slider extends Component {
         }
 
         return (
-            <div ref={(el) => { this.container = el } } style={this.props.style} className={className} onClick={this.onBarClick}>
+            <div id={this.props.id} ref={(el) => { this.container = el } } style={this.props.style} className={className} onClick={this.onBarClick}>
                 {handle}
                 {middleRange}
                 {verticalRange}

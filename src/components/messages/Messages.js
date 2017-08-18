@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Messages extends Component {
 
     static defaultProps = {
+        id: null,
         closable: true,
         className: null,
         style: null,
@@ -12,6 +13,7 @@ export class Messages extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         closable: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
@@ -61,7 +63,7 @@ export class Messages extends Component {
                             </a>;
             }
 
-            return <div className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
+            return <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
                       {closeIcon}
                       <span className={icon}></span>
                       <ul>

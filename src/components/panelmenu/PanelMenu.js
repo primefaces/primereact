@@ -194,12 +194,14 @@ export class PanelMenuHeaderItems extends Component {
 export class PanelMenu extends Component {
     
     static defaultProps = {
+        id: null,
         model: null,
         style: null,
         className: null
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         model: PropTypes.array,
         style: PropTypes.string,
         className: PropTypes.string
@@ -217,7 +219,7 @@ export class PanelMenu extends Component {
             });
         }
         
-        return (<div className={className} style={this.props.style}>
+        return (<div id={this.props.id} className={className} style={this.props.style}>
                     {panel}
                 </div>)
     }

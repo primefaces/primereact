@@ -6,6 +6,7 @@ import classNames from 'classnames';
 export class Dialog extends Component {
 
     static defaultProps = {
+        id: null,
         header: null,
         footer: null,
         visible: false,
@@ -18,6 +19,7 @@ export class Dialog extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         header: PropTypes.any,
         footer: PropTypes.any,
         visible: PropTypes.bool,
@@ -190,7 +192,7 @@ export class Dialog extends Component {
         let footer = this.props.footer && <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>;
 
         return (
-            <div className={className} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
+            <div id={this.props.id} className={className} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
                 <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
                      <span className="ui-dialog-title">{this.props.header}</span>
                      <a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onCloseClick}>

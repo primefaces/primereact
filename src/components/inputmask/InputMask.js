@@ -7,6 +7,7 @@ import { InputText } from '../inputtext/InputText';
 export class InputMask extends Component {
 
     static defaultProps = {
+        id: null,
         type: 'text',
         mask: null,
         slotChar: '_',
@@ -25,6 +26,7 @@ export class InputMask extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         type: PropTypes.string,
         mask: PropTypes.string,
         slotChar: PropTypes.string,
@@ -500,7 +502,7 @@ export class InputMask extends Component {
 
     render() {
         return (
-            <InputText ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
+            <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
                 onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onKeyPress={this.onKeyPress.bind(this)}
                 onInput={this.onInput.bind(this)} onPaste={this.handleInputChange.bind(this)} />

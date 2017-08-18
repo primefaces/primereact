@@ -6,6 +6,7 @@ import {MenuItem} from '../menu/MenuItem'
 export class TabMenu extends Component {
 
     static defaultProps = {
+        id: null,
         model:null,
         activeItem:null,
         style:null,
@@ -13,6 +14,7 @@ export class TabMenu extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         model:PropTypes.array,
         activeItem:PropTypes.any,
         style:PropTypes.any,
@@ -58,7 +60,7 @@ export class TabMenu extends Component {
             })
 
         return (
-            <div className={tabMenuClass} style={this.props.style} ref={el=>this.container=el}>
+            <div id={this.props.id} className={tabMenuClass} style={this.props.style} ref={el=>this.container=el}>
                 <ul className="ui-tabmenu-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
                     {item}
                 </ul>

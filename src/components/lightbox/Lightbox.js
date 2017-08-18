@@ -6,6 +6,7 @@ import classNames from 'classnames';
 export class Lightbox extends Component {
 
     static defaultProps = {
+        id: null,
         images:null,
         type:'images',
         style:null,
@@ -15,6 +16,7 @@ export class Lightbox extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         images:PropTypes.array,
         type:PropTypes.string,
         style:PropTypes.object,
@@ -178,7 +180,8 @@ export class Lightbox extends Component {
                 </span>
             )
         }
-        return (<div>
+        return (
+            <div id={this.props.id}>
                 {images}
                 {contentText}
                 <div className="ui-lightbox ui-widget ui-helper-hidden ui-corner-all ui-shadow"

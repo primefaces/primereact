@@ -6,6 +6,7 @@ import {MenuItem} from "../menu/MenuItem";
 
 export class MegaMenu extends Component {
     static defaultProps = {
+        id: null,
         model:null,
         style: null,
         className: null,
@@ -13,6 +14,7 @@ export class MegaMenu extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         model:PropTypes.array,
         style: PropTypes.string,
         className: PropTypes.string,
@@ -139,7 +141,7 @@ export class MegaMenu extends Component {
         })
 
         return (
-            <div className={divClass} style={this.props.style} ref={el=>this.container=el} >
+            <div id={this.props.id} className={divClass} style={this.props.style} ref={el=>this.container=el} >
                 <ul className="ui-menu-list ui-helper-reset ui-menubar-root-list">
                     {menuItems}
                     {horizontalChild}

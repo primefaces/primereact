@@ -10,6 +10,7 @@ import classNames from 'classnames';
 export class AutoComplete extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         suggestions: null,
         field: null,
@@ -40,6 +41,7 @@ export class AutoComplete extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         suggestions: PropTypes.array,
         field: PropTypes.string,
@@ -463,7 +465,7 @@ export class AutoComplete extends Component {
         var hasSuggestions = this.suggestions && this.suggestions.length;
 
         return (
-            <span className={className} style={this.props.style} ref={(el) => {this.autoComplete = ReactDOM.findDOMNode(el)}}>
+            <span id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.autoComplete = ReactDOM.findDOMNode(el)}}>
                 {input}
                 {multipleContainer}
                 {dropdownButton}

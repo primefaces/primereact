@@ -5,6 +5,7 @@ import ChartJS from 'chart.js/src/chart.js';
 export class Chart extends Component {
 
     static defaultProps = {
+        id: null,
         type: null,
         data: null,
         options: null,
@@ -15,6 +16,7 @@ export class Chart extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         type: PropTypes.string,
         data: PropTypes.object,
         options: PropTypes.object,
@@ -34,7 +36,7 @@ export class Chart extends Component {
 
     render() {
         return (
-            <div style={this.props.style} className={this.props.className}>
+            <div id={this.props.id} style={this.props.style} className={this.props.className}>
                 <canvas width={this.props.width} height={this.props.height} ref={(el) => {this.canvas = el;}}></canvas>
             </div>
         );

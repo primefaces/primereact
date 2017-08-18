@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Steps extends Component {
 
     static defaultProps = {
+        id: null,
         model: null,
         activeIndex:0,
         readOnly:true,
@@ -14,6 +15,7 @@ export class Steps extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         model: PropTypes.array,
         activeIndex:PropTypes.number,
         readOnly:PropTypes.bool,
@@ -53,7 +55,7 @@ export class Steps extends Component {
     render() {
         let divClass=classNames('ui-steps ui-widget ui-helper-clearfix',this.props.className,{'ui-steps-readonly':this.props.readonly});
         return (
-            <div className={divClass} style={this.props.style}>
+            <div id={this.props.id} className={divClass} style={this.props.style}>
                 <ul role="tablist">
                     {this.props.model && this.props.model.map((item,index)=>{
                         let liClass=classNames('ui-steps-item',{'ui-state-highlight':(index === this.props.activeIndex),'ui-state-default':(index !== this.props.activeIndex),

@@ -7,6 +7,7 @@ import classNames from 'classnames';
 export class Spinner extends Component {
 
     static defaultProps = {
+        id: null,
         step: 1,
         min: null,
         max: null,
@@ -21,6 +22,7 @@ export class Spinner extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         step: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
@@ -267,7 +269,7 @@ export class Spinner extends Component {
                          </button>;
 
         return (
-            <span className={className} style={this.props.style}>
+            <span id={this.props.id} className={className} style={this.props.style}>
                 {inputElement}
                 {upButton}
                 {downButton}

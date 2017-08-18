@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export class Captcha extends Component {
 
     static defaultProps = {
+        id: null,
         sitekey: null,
         theme: "light",
         type: "image",
@@ -16,6 +17,7 @@ export class Captcha extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         sitekey: PropTypes.string,
         theme: PropTypes.string,
         type: PropTypes.string,
@@ -101,6 +103,6 @@ export class Captcha extends Component {
     }
 
     render() {
-        return <div ref={(el) => this.targetEL = ReactDOM.findDOMNode(el)}></div>
+        return <div id={this.props.id} ref={(el) => this.targetEL = ReactDOM.findDOMNode(el)}></div>
     }
 }

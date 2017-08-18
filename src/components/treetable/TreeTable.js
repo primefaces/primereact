@@ -185,6 +185,7 @@ export class UITreeRow extends Component {
 
 export class TreeTable extends Component {
     static defaultProps = {
+        id: null,
         value: null,
         labelExpand: "Expand",
         labelCollapse: "Collapse",
@@ -201,6 +202,7 @@ export class TreeTable extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         labelExpand: PropTypes.string,
         labelCollapse: PropTypes.string,
@@ -534,16 +536,17 @@ export class TreeTable extends Component {
                 return (<UITreeRow key={'row_' + index} node={node} index={index} level={0} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this} parentNode={this.props.value} />)
             });
 
-        return (<div className={treeTableClass} style={this.props.style}>
-            {header}
-            <div className="ui-treetable-tablewrapper">
-                <table className="ui-widget-content">
-                    {thead}
-                    {tfoot}
-                    {tbody}
-                </table>
-            </div>
-            {footer}
-        </div>);
+        return (
+            <div id={this.props.id} className={treeTableClass} style={this.props.style}>
+                {header}
+                <div className="ui-treetable-tablewrapper">
+                    <table className="ui-widget-content">
+                        {thead}
+                        {tfoot}
+                        {tbody}
+                    </table>
+                </div>
+                {footer}
+            </div>);
     }
 }

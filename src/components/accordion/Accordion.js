@@ -16,6 +16,7 @@ export class AccordionTab extends Component {
 export class Accordion extends Component {
 
     static defaultProps = {
+        id: null,
         activeIndex: null,
         className: null,
         style: null,
@@ -25,6 +26,7 @@ export class Accordion extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         activeIndex: PropTypes.any,
         className: PropTypes.string,
         style: PropTypes.object,
@@ -105,7 +107,7 @@ export class Accordion extends Component {
             })
         
         return (
-            <div className={classNames('ui-accordion ui-widget ui-helper-reset', this.props.className)} style={this.props.style}>
+            <div id={this.props.id} className={classNames('ui-accordion ui-widget ui-helper-reset', this.props.className)} style={this.props.style}>
                 {tabs}
             </div>
         );

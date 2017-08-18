@@ -121,6 +121,7 @@ export class OrganizationChartNode extends Component {
 export class OrganizationChart extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         style: null,
         className: null,
@@ -133,6 +134,7 @@ export class OrganizationChart extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         style: PropTypes.string,
         className: PropTypes.string,
@@ -227,7 +229,7 @@ export class OrganizationChart extends Component {
     render() {
         var className = classNames('ui-organizationchart ui-widget', this.props.className);
         return (
-            <div style={this.props.style} className={className}>
+            <div id={this.props.id} style={this.props.style} className={className}>
                 <OrganizationChartNode node={this.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}
                         onNodeClick={this.onNodeClick} isSelected={this.isSelected}/>
             </div>

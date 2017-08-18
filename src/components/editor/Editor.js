@@ -8,6 +8,7 @@ import 'quill/dist/quill.bubble.css';
 export class Editor extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         style: null,
         className: null,
@@ -20,6 +21,7 @@ export class Editor extends Component {
     };
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.string,
         style: PropTypes.string,
         className: PropTypes.string,
@@ -156,7 +158,7 @@ export class Editor extends Component {
         let content = (<div ref={(el) => this.editorElement = el} className="ui-editor-content" style={this.props.style}></div>)
 
         return (
-            <div className={containerClass}>
+            <div id={this.props.id} className={containerClass}>
                 {toolbarHeader}
                 {content}
             </div>

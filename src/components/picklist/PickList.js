@@ -7,6 +7,7 @@ import classNames from 'classnames'
 export class PickList extends Component {
 
     static defaultProps = {
+        id: null,
         source: null,
         target: null,
         sourceHeader: null,
@@ -24,6 +25,7 @@ export class PickList extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         source: PropTypes.array,
         target: PropTypes.array,
         sourceHeader: PropTypes.string,
@@ -435,7 +437,7 @@ export class PickList extends Component {
         }
 
         return (
-            <div className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 {sourceControls}
                 {sourceWrapper}
                 {moveButtonsContent}

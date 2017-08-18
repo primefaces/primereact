@@ -7,6 +7,7 @@ import {MenuItem} from './MenuItem'
 export class Menu extends Component {
 
     static defaultProps = {
+        id: null,
         model:null,
         popup:false,
         style:null,
@@ -16,6 +17,7 @@ export class Menu extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         model:PropTypes.array,
         popup:PropTypes.bool,
         style:PropTypes.object,
@@ -153,7 +155,7 @@ export class Menu extends Component {
         }
 
         return (
-            <div className={className} style={this.props.style} ref={el=>this.container=el} onClick={()=>this.preventDocumentDefault=true}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={el=>this.container=el} onClick={()=>this.preventDocumentDefault=true}>
                 <ul className="ui-menu-list ui-helper-reset">
                     {itemSubMenu}
                     {itemMenu}

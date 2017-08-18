@@ -8,6 +8,7 @@ import classNames from 'classnames'
 export class OrderList extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         header: null,
         style: null,
@@ -21,6 +22,7 @@ export class OrderList extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.array,
         header: PropTypes.string,
         style: PropTypes.string,
@@ -329,7 +331,7 @@ export class OrderList extends Component {
         );
 
         return (
-            <div className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 {controls}
                 {content}
             </div>

@@ -5,11 +5,13 @@ import classNames from 'classnames';
 export class TriStateCheckbox extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         onChange: null
     };
 
     static propTypes = {
+        id: PropTypes.string,
         value: PropTypes.bool,
         onChange: PropTypes.func
     }
@@ -46,7 +48,7 @@ export class TriStateCheckbox extends Component {
         iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.value === true, 'fa fa-close': this.props.value === false});
 
         return (
-                <div className='ui-chkbox ui-tristatechkbox ui-widget'>
+                <div id={this.props.id} className='ui-chkbox ui-tristatechkbox ui-widget'>
                     <div className="ui-helper-hidden-accessible">
                         <input ref={(el) => this.inputEL = el} type="checkbox" readOnly/>
                     </div>

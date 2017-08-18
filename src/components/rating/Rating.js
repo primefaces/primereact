@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Rating extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         disabled: false,
         readonly: false,
@@ -13,6 +14,7 @@ export class Rating extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.string,
         disabled: PropTypes.bool,
         readonly: PropTypes.bool,
@@ -96,7 +98,7 @@ export class Rating extends Component {
             );
         });
 
-        return (<div className={ratingClass}>
+        return (<div id={this.props.id} className={ratingClass}>
             {cancel}
             {stars}
         </div>);

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class Listbox extends Component {
     
     static defaultProps = {
+        id: null,
         value: null,
         options: null,
         onChange: null,
@@ -14,6 +15,7 @@ export class Listbox extends Component {
     }
     
     static propTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         onChange: PropTypes.func,
@@ -37,7 +39,7 @@ export class Listbox extends Component {
         });
 
         return (
-            <div className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 <ul className="ui-listbox-list">
                     {this.props.options && this.props.options.map((option, index) => {
                         var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label,

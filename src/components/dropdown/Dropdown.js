@@ -7,6 +7,7 @@ import classNames from 'classnames';
 export class Dropdown extends Component {
 
     static defaultProps = {
+        id: null,
         value: null,
         options: null,
         onChange: null,
@@ -23,6 +24,7 @@ export class Dropdown extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         onChange: PropTypes.func,
@@ -357,7 +359,7 @@ export class Dropdown extends Component {
         }
 
         return (
-            <div className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
+            <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
                     <select tabIndex="-1" ref={(el) => {this.selectElement = el;}}>{optionElements}</select>
                 </div>

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 export class DataScroller extends Component {
     static defaultProps = {
+        id: null,
         value:	null,
         rows: 0,
         inline:	false,
@@ -20,6 +21,7 @@ export class DataScroller extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         value: PropTypes.array,
         rows: PropTypes.number,
         inline: PropTypes.bool,
@@ -209,7 +211,7 @@ export class DataScroller extends Component {
             );
 
         return (
-            <div className={className}>
+            <div id={this.props.id} className={className}>
                 {header}
                 {content}
                 {footer}

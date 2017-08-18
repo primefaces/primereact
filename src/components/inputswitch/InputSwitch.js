@@ -6,6 +6,7 @@ import classNames from 'classnames'
 export class InputSwitch extends Component {
 
     static defaultProps = {
+        id: null,
         offLabel: "Off",
         onLabel: "On",
         style: null,
@@ -15,6 +16,7 @@ export class InputSwitch extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         offLabel: PropTypes.string,
         onLabel: PropTypes.string,
         style: PropTypes.object,
@@ -108,7 +110,7 @@ export class InputSwitch extends Component {
         });
 
         return (
-            <div ref={(el) => {this.container = el;}} className={className} style={this.props.style} onClick={this.toggle}>
+            <div id={this.props.id} ref={(el) => {this.container = el;}} className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="ui-inputswitch-off">
                     <span className="ui-inputswitch-offlabel">{this.props.offLabel}</span>
                 </div>

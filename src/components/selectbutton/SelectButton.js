@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export class SelectButton extends Component {
 
     static defaultProps = {
+        id: null,
         activeIndex: null,
         options: null,
         tabindex: null,
@@ -16,6 +17,7 @@ export class SelectButton extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         activeIndex: PropTypes.any,
         options: PropTypes.array,
         tabindex: PropTypes.number,
@@ -69,7 +71,7 @@ export class SelectButton extends Component {
         var className = classNames('ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-3', this.props.className);
 
         return (
-            <div>
+            <div id={this.props.id}>
                 <div className={className} style={this.props.style}>
                     {this.props.options.map((option, index) => {
                         var selected = this.isSelected(index);

@@ -7,6 +7,7 @@ import "fullcalendar";
 export class Schedule extends Component {
 
     static defaultProps = {
+        id: null,
         events: [],
         header: null,
         style: null,
@@ -62,6 +63,7 @@ export class Schedule extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         events: PropTypes.array,
         header: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
         style: PropTypes.string,
@@ -338,6 +340,6 @@ export class Schedule extends Component {
     }
     
     render() {
-        return <div ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.className}></div>;
+        return <div id={this.props.id} ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.className}></div>;
     }
 }

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 export class ColorPicker extends Component {
     static defaultProps = {
+        id: null,
         style: null,
         className: null,
         inline: false,
@@ -18,6 +19,7 @@ export class ColorPicker extends Component {
     }
 
     static propsTypes = {
+        id: PropTypes.string,
         style: PropTypes.string,
         className: PropTypes.string,
         inline: PropTypes.bool,
@@ -467,7 +469,7 @@ export class ColorPicker extends Component {
         );
 
         return (
-            <div style={this.props.style} className={className}>
+            <div id={this.props.id} style={this.props.style} className={className}>
                 {input}
                 {panel}
             </div>

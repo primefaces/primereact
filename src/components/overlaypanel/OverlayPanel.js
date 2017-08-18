@@ -6,6 +6,7 @@ import DomHandler from '../utils/DomHandler';
 export class OverlayPanel extends Component {
     
     static defaultProps = {
+        id: null,
         dismissable: true,
         showCloseIcon: false,
         style: null,
@@ -14,6 +15,7 @@ export class OverlayPanel extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         dismissable: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
         style: PropTypes.object,
@@ -113,7 +115,7 @@ export class OverlayPanel extends Component {
         }
 
         return (
-            <div className={className} style={this.props.style} onClick={this.onPanelClick} ref={(el) => {this.container = el;}}>
+            <div id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick} ref={(el) => {this.container = el;}}>
                 <div className="ui-overlaypanel-content">
                     {this.props.children}
                 </div>
