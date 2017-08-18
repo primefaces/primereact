@@ -246,7 +246,7 @@ export class Spinner extends Component {
 
     render() {
 
-        var styleClass = classNames("ui-spinner ui-widget ui-corner-all"),
+        var className = classNames("ui-spinner ui-widget ui-corner-all"),
         upButtonClass = classNames("ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default", {
             'ui-state-disabled': this.props.disabled
         }),
@@ -267,7 +267,7 @@ export class Spinner extends Component {
                          </button>;
 
         return (
-            <span className={styleClass} style={this.props.style}>
+            <span className={className} style={this.props.style}>
                 {inputElement}
                 {upButton}
                 {downButton}

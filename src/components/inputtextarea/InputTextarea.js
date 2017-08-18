@@ -90,11 +90,11 @@ export class InputTextarea extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-inputtext ui-corner-all ui-state-default ui-widget', this.props.className, {
+        var className = classNames('ui-inputtext ui-corner-all ui-state-default ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled,
             'ui-state-filled': this.state.filled
         });
 
-        return <textarea {...this.textareaProps} className={styleClass} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>;
+        return <textarea {...this.textareaProps} className={className} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>;
     }
 }

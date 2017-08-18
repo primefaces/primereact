@@ -56,7 +56,7 @@ export class TreeNode extends Component {
     }
 
     renderVerticalTree() {
-        var nodeClass = classNames('ui-treenode', this.node.styleClass, {
+        var nodeClass = classNames('ui-treenode', this.node.className, {
             'ui-treenode-leaf': this.isLeaf(this.node)
         });
 
@@ -129,7 +129,7 @@ export class TreeNode extends Component {
             </table>
         </td>);
 
-        var nodeClass = classNames('ui-treenode', this.node.styleClass, {
+        var nodeClass = classNames('ui-treenode', this.node.className, {
             'ui-treenode-collapsed': !this.state.expanded
         });
 
@@ -209,7 +209,7 @@ export class Tree extends Component {
         onNodeExpand: null,
         onNodeCollapse: null,
         style: null,
-        styleClass: null,
+        className: null,
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true
@@ -226,7 +226,7 @@ export class Tree extends Component {
         onNodeExpand: PropTypes.func,
         onNodeCollapse: PropTypes.func,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool
@@ -508,7 +508,7 @@ export class Tree extends Component {
     }
 
     render() {
-        var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.styleClass, {
+        var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-tree-selectable': this.props.selectionMode,
             'ui-tree-horizontal': this.isHorizontal()
         });

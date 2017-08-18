@@ -12,7 +12,7 @@ export class DataScroller extends Component {
         loader:	null,
         buffer: 0.9,
         style:	null,
-        styleClass: null,
+        className: null,
         onLazyLoad: null,
         itemTemplate: null,
         header:null,
@@ -27,7 +27,7 @@ export class DataScroller extends Component {
         loader: PropTypes.any,
         buffer: PropTypes.number,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
         header:PropTypes.string,
@@ -187,7 +187,7 @@ export class DataScroller extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-datascroller ui-widget', this.props.styleClass, {
+        var className = classNames('ui-datascroller ui-widget', this.props.className, {
             'ui-datascroller-inline': this.props.inline
         });
 
@@ -209,7 +209,7 @@ export class DataScroller extends Component {
             );
 
         return (
-            <div className={styleClass}>
+            <div className={className}>
                 {header}
                 {content}
                 {footer}

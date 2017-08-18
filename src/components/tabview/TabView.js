@@ -41,11 +41,11 @@ export class TabView extends Component {
     }
     
     getTabHeaderClass(index) {
-        var styleClass = 'ui-state-default ui-corner-top';
+        var className = 'ui-state-default ui-corner-top';
         if(index === this.state.activeIndex) {
-            styleClass += ' ui-tabview-selected ui-state-active';
+            className += ' ui-tabview-selected ui-state-active';
         }
-        return styleClass;
+        return className;
     }
     
     componentWillMount() {

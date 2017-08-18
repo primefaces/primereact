@@ -56,7 +56,7 @@ export class OrganizationChartNode extends Component {
 
     render() {
         var colspan = this.getColspan();
-        let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.styleClass, {
+        let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.className, {
                 'ui-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
                 'ui-state-highlight': this.isSelected()
             }),
@@ -123,7 +123,7 @@ export class OrganizationChart extends Component {
     static defaultProps = {
         value: null,
         style: null,
-        styleClass: null,
+        className: null,
         selectionMode: null,
         selection: null,
         nodeTemplate: null,
@@ -135,7 +135,7 @@ export class OrganizationChart extends Component {
     static propsTypes = {
         value: PropTypes.any,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
         nodeTemplate: PropTypes.any,
@@ -225,9 +225,9 @@ export class OrganizationChart extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-organizationchart ui-widget', this.props.styleClass);
+        var className = classNames('ui-organizationchart ui-widget', this.props.className);
         return (
-            <div style={this.props.style} className={styleClass}>
+            <div style={this.props.style} className={className}>
                 <OrganizationChartNode node={this.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}
                         onNodeClick={this.onNodeClick} isSelected={this.isSelected}/>
             </div>

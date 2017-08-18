@@ -9,14 +9,14 @@ export class TieredMenu extends Component{
         model:null,
         popup:false,
         style:null,
-        styleClass:null,
+        className:null,
     };
 
     static propTypes = {
         model:PropTypes.array,
         popup:PropTypes.bool,
         style:PropTypes.object,
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
     };
 
     constructor(props) {
@@ -73,12 +73,12 @@ export class TieredMenu extends Component{
     render() {
 
         var divClass=classNames('ui-tieredmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix',
-            this.props.styleClass,{'ui-menu-dynamic ui-shadow':this.props.popup});
+            this.props.className,{'ui-menu-dynamic ui-shadow':this.props.popup});
         var ulClass=classNames('ui-menu-list ui-helper-reset');
 
         return(
             <div className={divClass} style={this.props.style} ref={el=>this.container=el}>
-                <NestedMenu styleClass={ulClass} items={this.props.model} root={true} parentMenu="TieredMenu" index={0}/>
+                <NestedMenu className={ulClass} items={this.props.model} root={true} parentMenu="TieredMenu" index={0}/>
             </div>
         );
     }

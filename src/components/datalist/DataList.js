@@ -16,7 +16,7 @@ export class DataList extends Component {
         rowsPerPageOptions: null,
         lazy: false,
         style: null,
-        styleClass: null,
+        className: null,
         paginatorPosition: "bottom",
         onLazyLoad: null,
         itemTemplate: null,
@@ -34,7 +34,7 @@ export class DataList extends Component {
         rowsPerPageOptions: PropTypes.array,
         lazy: PropTypes.bool,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         paginatorPosition: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
@@ -98,7 +98,7 @@ export class DataList extends Component {
 
     render() {
         let value =this.processData();
-        var styleClass = classNames('ui-datalist ui-widget', this.props.styleClass);
+        var className = classNames('ui-datalist ui-widget', this.props.className);
 
         var topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) &&  this.createPaginator('top'),
             bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
@@ -121,7 +121,7 @@ export class DataList extends Component {
             );
 
         return (
-            <div ref={(el) => this.dataListEl = ReactDOM.findDOMNode(el)} style={this.props.style} className={styleClass}>
+            <div ref={(el) => this.dataListEl = ReactDOM.findDOMNode(el)} style={this.props.style} className={className}>
                 {header}
                 {topPaginator}
                 {content}

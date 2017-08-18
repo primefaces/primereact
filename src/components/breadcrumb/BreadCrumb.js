@@ -9,14 +9,14 @@ export class BreadCrumb extends Component {
         model:null,
         home:null,
         style:null,
-        styleClass:null
+        className:null
     };
 
     static propTypes = {
         model:PropTypes.array,
         home:PropTypes.any,
         style:PropTypes.object,
-        styleClass:PropTypes.string
+        className:PropTypes.string
     };
 
     constructor() {
@@ -51,7 +51,7 @@ export class BreadCrumb extends Component {
     }
 
     render() {
-        var styleClass=classNames('ui-breadcrumb ui-widget ui-widget-header ui-helper-clearfix ui-corner-all',this.props.styleClass);
+        var className=classNames('ui-breadcrumb ui-widget ui-widget-header ui-helper-clearfix ui-corner-all',this.props.className);
         var homeClass=classNames('ui-menuitem-link',{'ui-state-disabled':this.props.home && this.props.home.disabled})
 
         var home,right,menu;
@@ -86,7 +86,7 @@ export class BreadCrumb extends Component {
         })
 
         return (
-            <div className={styleClass} style={this.props.style} ref={el=>this.container=el}>
+            <div className={className} style={this.props.style} ref={el=>this.container=el}>
                 <ul>
                     {home}
                     {right}

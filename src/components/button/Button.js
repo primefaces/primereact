@@ -19,7 +19,7 @@ export class Button extends Component {
     };
 
     render() {
-        var styleClass = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
+        var className = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
                 'ui-button-text-only': !this.props.icon && this.props.label,
                 'ui-button-icon-only': this.props.icon && !this.props.label,
                 'ui-button-text-icon-left': this.props.icon && this.props.iconPos === 'left',
@@ -42,7 +42,7 @@ export class Button extends Component {
         }
 
         return (
-            <button {...buttonProps} className={styleClass}>
+            <button {...buttonProps} className={className}>
                 {this.props.icon && <span className={iconStyleClass}></span>}
                 <span className="ui-button-text ui-c">{this.props.label||'ui-btn'}</span>
                 {this.props.children}

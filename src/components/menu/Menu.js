@@ -10,7 +10,7 @@ export class Menu extends Component {
         model:null,
         popup:false,
         style:null,
-        styleClass:null,
+        className:null,
         onShow:null,
         onHide:null
     };
@@ -19,7 +19,7 @@ export class Menu extends Component {
         model:PropTypes.array,
         popup:PropTypes.bool,
         style:PropTypes.object,
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
         onShow:PropTypes.func,
         onHide:PropTypes.func
     };
@@ -123,7 +123,7 @@ export class Menu extends Component {
     }
 
     render() {
-        var styleClass=classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix',this.props.styleClass,
+        var className=classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix',this.props.className,
             {'ui-menu-dynamic ui-shadow':this.props.popup})
         var itemSubMenu,itemMenu;
 
@@ -153,7 +153,7 @@ export class Menu extends Component {
         }
 
         return (
-            <div className={styleClass} style={this.props.style} ref={el=>this.container=el} onClick={()=>this.preventDocumentDefault=true}>
+            <div className={className} style={this.props.style} ref={el=>this.container=el} onClick={()=>this.preventDocumentDefault=true}>
                 <ul className="ui-menu-list ui-helper-reset">
                     {itemSubMenu}
                     {itemMenu}

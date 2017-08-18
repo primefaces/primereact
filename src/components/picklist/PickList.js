@@ -12,7 +12,7 @@ export class PickList extends Component {
         sourceHeader: null,
         targetHeader: null,
         style: null,
-        styleClass: null,
+        className: null,
         sourceStyle: null,
         targetStyle: null,
         responsive: false,
@@ -29,7 +29,7 @@ export class PickList extends Component {
         sourceHeader: PropTypes.string,
         targetHeader: PropTypes.string,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         sourceStyle: PropTypes.string,
         targetStyle: PropTypes.string,
         responsive: PropTypes.bool,
@@ -327,7 +327,7 @@ export class PickList extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-picklist ui-widget ui-helper-clearfix', this.props.styleClass, {
+        var className = classNames('ui-picklist ui-widget ui-helper-clearfix', this.props.className, {
             'ui-picklist-responsive': this.props.responsive
         });
 
@@ -435,7 +435,7 @@ export class PickList extends Component {
         }
 
         return (
-            <div className={styleClass} style={this.props.style}>
+            <div className={className} style={this.props.style}>
                 {sourceControls}
                 {sourceWrapper}
                 {moveButtonsContent}

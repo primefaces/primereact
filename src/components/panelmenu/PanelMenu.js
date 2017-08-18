@@ -80,7 +80,7 @@ export class PanelMenuItem extends Component {
             return <li key={'separator_' + this.props.index} className="ui-menu-separator ui-widget-content" />
         }
         else {
-            let menuitemClass = classNames('ui-menuitem ui-corner-all', this.child.styleClass, {
+            let menuitemClass = classNames('ui-menuitem ui-corner-all', this.child.className, {
                 'ui-menu-parent': this.child.items
             }),
             menuitemLinkClass = classNames('ui-menuitem-link ui-corner-all', {
@@ -152,7 +152,7 @@ export class PanelMenuHeaderItems extends Component {
     }
 
     render() {
-        let panelMenuHeaderClass = classNames('ui-widget ui-panelmenu-header ui-state-default', this.item.styleClass, {
+        let panelMenuHeaderClass = classNames('ui-widget ui-panelmenu-header ui-state-default', this.item.className, {
             'ui-corner-top': this.props.first,
             'ui-corner-bottom': this.props.last&&!this.state.expanded,
             'ui-state-active': this.state.expanded,
@@ -196,17 +196,17 @@ export class PanelMenu extends Component {
     static defaultProps = {
         model: null,
         style: null,
-        styleClass: null
+        className: null
     }
 
     static propsTypes = {
         model: PropTypes.array,
         style: PropTypes.string,
-        styleClass: PropTypes.string
+        className: PropTypes.string
     }
 
     render() {
-        let styleClass = classNames('ui-panelmenu ui-widget', this.props.styleClass),
+        let className = classNames('ui-panelmenu ui-widget', this.props.className),
             panel = null;
 
         if(this.props.model) {
@@ -217,7 +217,7 @@ export class PanelMenu extends Component {
             });
         }
         
-        return (<div className={styleClass} style={this.props.style}>
+        return (<div className={className} style={this.props.style}>
                     {panel}
                 </div>)
     }

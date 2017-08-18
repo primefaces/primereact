@@ -13,7 +13,7 @@ export class InputMask extends Component {
         autoClear: true,
         unmask: false,
         style: null,
-        styleClass: null,
+        className: null,
         placeholder: null,
         size: null,
         maxlength: null,
@@ -31,7 +31,7 @@ export class InputMask extends Component {
         autoClear: PropTypes.bool,
         unmask: PropTypes.bool,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         placeholder: PropTypes.string,
         size: PropTypes.number,
         maxlength: PropTypes.number,
@@ -500,7 +500,7 @@ export class InputMask extends Component {
 
     render() {
         return (
-            <InputText ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.styleClass} placeholder={this.props.placeholder}
+            <InputText ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
                 onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onKeyPress={this.onKeyPress.bind(this)}
                 onInput={this.onInput.bind(this)} onPaste={this.handleInputChange.bind(this)} />

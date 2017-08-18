@@ -57,7 +57,7 @@ export class StepsDemo extends Component {
                     <Steps model={items} activeIndex={this.state.activeIndex} readOnly={false}/>
 
                     <h3>Custom Style</h3>
-                    <Steps model={items} styleClass="steps-custom"/>
+                    <Steps model={items} className="steps-custom"/>
                 </div>
 
                 <StepsDoc/>
@@ -136,7 +136,7 @@ import {Steps} from 'primereact/components/steps/Steps';
                                     <td>Inline style of the component.</td>
                                 </tr>
                                 <tr>
-                                    <td>styleClass</td>
+                                    <td>className</td>
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Style class of the component.</td>
@@ -290,7 +290,7 @@ export class StepsDemo extends Component {
                     <Steps model={items} activeIndex={this.state.activeIndex} readOnly={false}/>
 
                     <h3>Custom Style</h3>
-                    <Steps model={items} styleClass="steps-custom"/>
+                    <Steps model={items} className="steps-custom"/>
                 </div>
 
                 <StepsDoc/>

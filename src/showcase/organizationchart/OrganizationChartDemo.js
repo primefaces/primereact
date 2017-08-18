@@ -36,66 +36,66 @@ export class OrganizationChartDemo extends Component {
         var data1 = [{
             label: 'CEO',
             type: 'person',
-            styleClass: 'ui-person',
+            className: 'ui-person',
             expanded: true,
             data: {name:'Walter White', 'avatar': 'walter.jpg'},
             children: [
                 {
                     label: 'CFO',
                     type: 'person',
-                    styleClass: 'ui-person',
+                    className: 'ui-person',
                     expanded: true,
                     data: {name:'Saul Goodman', 'avatar': 'saul.jpg'},
                     children:[{
                         label: 'Tax',
-                        styleClass: 'department-cfo'
+                        className: 'department-cfo'
                     },
                     {
                         label: 'Legal',
-                        styleClass: 'department-cfo'
+                        className: 'department-cfo'
                     }],
                 },
                 {
                     label: 'COO',
                     type: 'person',
-                    styleClass: 'ui-person',
+                    className: 'ui-person',
                     expanded: true,
                     data: {name:'Mike E.', 'avatar': 'mike.jpg'},
                     children:[{
                         label: 'Operations',
-                        styleClass: 'department-coo'
+                        className: 'department-coo'
                     }]
                 },
                 {
                     label: 'CTO',
                     type: 'person',
-                    styleClass: 'ui-person',
+                    className: 'ui-person',
                     expanded: true,
                     data: {name:'Jesse Pinkman', 'avatar': 'jesse.jpg'},
                     children:[{
                         label: 'Development',
-                        styleClass: 'department-cto',
+                        className: 'department-cto',
                         expanded: true,
                         children:[{
                             label: 'Analysis',
-                            styleClass: 'department-cto'
+                            className: 'department-cto'
                         },
                         {
                             label: 'Front End',
-                            styleClass: 'department-cto'
+                            className: 'department-cto'
                         },
                         {
                             label: 'Back End',
-                            styleClass: 'department-cto'
+                            className: 'department-cto'
                         }]
                     },
                     {
                         label: 'QA',
-                        styleClass: 'department-cto'
+                        className: 'department-cto'
                     },
                     {
                         label: 'R&D',
-                        styleClass: 'department-cto'
+                        className: 'department-cto'
                     }]
                 }
             ]
@@ -143,7 +143,7 @@ export class OrganizationChartDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Advanced</h3>
                     <p>Organization with advanced customization.</p>
-                    <OrganizationChart value={data1} nodeTemplate={this.nodeTemplate.bind(this)} selectionMode="multiple" selectionChange={this.onSelectionChange} styleClass="company"></OrganizationChart>
+                    <OrganizationChart value={data1} nodeTemplate={this.nodeTemplate.bind(this)} selectionMode="multiple" selectionChange={this.onSelectionChange} className="company"></OrganizationChart>
                     <ul>
                     {
                         this.state.selections && this.state.selections.map((item, index) => {
@@ -328,7 +328,7 @@ onSelectionChange(_selections) {
                                 <td>Inline style of the component.</td>
                             </tr>
                             <tr>
-                                <td>styleClass</td>
+                                <td>className</td>
                                 <td>string</td>
                                 <td>null</td>
                                 <td>Style class of the component.</td>
@@ -468,66 +468,66 @@ export class OverlayPanelDemo extends Component {
         var data1 = [{
             label: 'CEO',
             type: 'person',
-            styleClass: 'ui-person',
+            className: 'ui-person',
             expanded: true,
             data: {name:'Walter White', 'avatar': 'walter.jpg'},
             children: [
                 {
                     label: 'CFO',
                     type: 'person',
-                    styleClass: 'ui-person',
+                    className: 'ui-person',
                     expanded: true,
                     data: {name:'Saul Goodman', 'avatar': 'saul.jpg'},
                     children:[{
                         label: 'Tax',
-                        styleClass: 'department-cfo'
+                        className: 'department-cfo'
                     },
                     {
                         label: 'Legal',
-                        styleClass: 'department-cfo'
+                        className: 'department-cfo'
                     }],
                 },
                 {
                     label: 'COO',
                     type: 'person',
-                    styleClass: 'ui-person',
+                    className: 'ui-person',
                     expanded: true,
                     data: {name:'Mike E.', 'avatar': 'mike.jpg'},
                     children:[{
                         label: 'Operations',
-                        styleClass: 'department-coo'
+                        className: 'department-coo'
                     }]
                 },
                 {
                     label: 'CTO',
                     type: 'person',
-                    styleClass: 'ui-person',
+                    className: 'ui-person',
                     expanded: true,
                     data: {name:'Jesse Pinkman', 'avatar': 'jesse.jpg'},
                     children:[{
                         label: 'Development',
-                        styleClass: 'department-cto',
+                        className: 'department-cto',
                         expanded: true,
                         children:[{
                             label: 'Analysis',
-                            styleClass: 'department-cto'
+                            className: 'department-cto'
                         },
                         {
                             label: 'Front End',
-                            styleClass: 'department-cto'
+                            className: 'department-cto'
                         },
                         {
                             label: 'Back End',
-                            styleClass: 'department-cto'
+                            className: 'department-cto'
                         }]
                     },
                     {
                         label: 'QA',
-                        styleClass: 'department-cto'
+                        className: 'department-cto'
                     },
                     {
                         label: 'R&D',
-                        styleClass: 'department-cto'
+                        className: 'department-cto'
                     }]
                 }
             ]
@@ -575,7 +575,7 @@ export class OverlayPanelDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Advanced</h3>
                     <p>Organization with advanced customization.</p>
-                    <OrganizationChart value={data1} nodeTemplate={this.nodeTemplate.bind(this)} selectionMode="multiple" selectionChange={this.onSelectionChange} styleClass="company"></OrganizationChart>
+                    <OrganizationChart value={data1} nodeTemplate={this.nodeTemplate.bind(this)} selectionMode="multiple" selectionChange={this.onSelectionChange} className="company"></OrganizationChart>
                     <ul>
                     {
                         this.state.selections && this.state.selections.map((item, index) => {

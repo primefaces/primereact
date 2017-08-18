@@ -10,7 +10,7 @@ export class Schedule extends Component {
         events: [],
         header: null,
         style: null,
-        styleClass: null,
+        className: null,
         isRTL: false,
         weekends: true,
         hiddenDays: [],
@@ -65,7 +65,7 @@ export class Schedule extends Component {
         events: PropTypes.array,
         header: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         isRTL: PropTypes.bool,
         weekends: PropTypes.bool,
         hiddenDays: PropTypes.array,
@@ -338,6 +338,6 @@ export class Schedule extends Component {
     }
     
     render() {
-        return <div ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.styleClass}></div>;
+        return <div ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.className}></div>;
     }
 }

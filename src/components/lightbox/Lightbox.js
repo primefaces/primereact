@@ -9,7 +9,7 @@ export class Lightbox extends Component {
         images:null,
         type:'images',
         style:null,
-        styleClass:null,
+        className:null,
         easing:'ease-out',
         effectDuration:'500ms'
     };
@@ -18,7 +18,7 @@ export class Lightbox extends Component {
         images:PropTypes.array,
         type:PropTypes.string,
         style:PropTypes.object,
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
         easing:PropTypes.string,
         effectDuration:PropTypes.string
     };
@@ -156,7 +156,7 @@ export class Lightbox extends Component {
         var contentClass=classNames('ui-lightbox-content ui-corner-all',{'ui-lightbox-loading':this.state.loading})
 
         if(this.props.type==='images'){
-            images=<div style={this.props.style} className={this.props.styleClass}>{
+            images=<div style={this.props.style} className={this.props.className}>{
                 this.props.images && this.props.images.map((image,index)=>{
                     var imageItem=
                         <a href={image.source} onClick={event=>this.onImageClick(event,image,index)} key={index} ref={el=>this.image=el} style={{marginLeft:4}}>
@@ -168,7 +168,7 @@ export class Lightbox extends Component {
         }
         if(this.props.type==='content'){
             contentText=this.props.children && this.props.children.map((child,index)=>
-                child.type==='a'&&<span style={this.props.style} className={this.props.styleClass}
+                child.type==='a'&&<span style={this.props.style} className={this.props.className}
                                                         onClick={this.onLinkClick.bind(this)} key={index}>
                         {child}
                 </span>)

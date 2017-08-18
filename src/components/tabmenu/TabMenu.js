@@ -9,14 +9,14 @@ export class TabMenu extends Component {
         model:null,
         activeItem:null,
         style:null,
-        styleClass:null,
+        className:null,
     };
 
     static propTypes = {
         model:PropTypes.array,
         activeItem:PropTypes.any,
         style:PropTypes.any,
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
     };
 
 
@@ -46,7 +46,7 @@ export class TabMenu extends Component {
     }
 
     render() {
-        var tabMenuClass=classNames('ui-tabmenu ui-widget ui-widget-content ui-corner-all',this.props.styleClass);
+        var tabMenuClass=classNames('ui-tabmenu ui-widget ui-widget-content ui-corner-all',this.props.className);
 
         var item=this.props.model && this.props.model.map((item,index)=>{
             var listClass=classNames('ui-tabmenuitem ui-state-default ui-corner-top',{'ui-state-disabled':item.disabled},

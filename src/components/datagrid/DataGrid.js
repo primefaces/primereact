@@ -16,7 +16,7 @@ export class DataGrid extends Component {
         rowsPerPageOptions: null,
         lazy: false,
         style: null,
-        styleClass: null,
+        className: null,
         paginatorPosition: "bottom",
         onLazyLoad: null,
         itemTemplate: null,
@@ -34,7 +34,7 @@ export class DataGrid extends Component {
         rowsPerPageOptions: PropTypes.array,
         lazy: PropTypes.bool,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         paginatorPosition: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
@@ -99,7 +99,7 @@ export class DataGrid extends Component {
 
     render() {
         let value=this.processData();
-        var styleClass = classNames('ui-datagrid ui-widget', this.props.styleClass);
+        var className = classNames('ui-datagrid ui-widget', this.props.className);
 
         var topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) && this.createPaginator('top'),
             bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
@@ -119,7 +119,7 @@ export class DataGrid extends Component {
             );
 
         return (
-            <div ref={(el) => this.dataGridEl = ReactDOM.findDOMNode(el)} style={this.props.style} className={styleClass}>
+            <div ref={(el) => this.dataGridEl = ReactDOM.findDOMNode(el)} style={this.props.style} className={className}>
                 {header}
                 {topPaginator}
                 {content}

@@ -77,7 +77,7 @@ export class NestedMenuItem extends Component{
                 <MenuItem items={this.props.item} onItemClick={event=>this.itemClick(event,this.props.item)} root={this.props.root}  parentMenu={this.props.parentMenu} />
 
                 {this.props.item.items?
-                    <NestedMenu styleClass={'ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-child ui-shadow'} index={this.props.index}
+                    <NestedMenu className={'ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-child ui-shadow'} index={this.props.index}
                                 items={this.props.item.items} menu={this} parentMenu={this.props.parentMenu} root={false}/>:null}
 
             </li>

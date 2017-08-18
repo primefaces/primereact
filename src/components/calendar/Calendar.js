@@ -12,7 +12,7 @@ export class Calendar extends Component {
         value: null,
         defaultDate: null,
         style: null,
-        styleClass: null,
+        className: null,
         inputStyle: null,
         inputStyleClass: null,
         placeholder: null,
@@ -59,7 +59,7 @@ export class Calendar extends Component {
         value: PropTypes.any,
         defaultDate: PropTypes.instanceOf(Date),
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         inputStyle: PropTypes.string,
         inputStyleClass: PropTypes.string,
         placeholder: PropTypes.string,
@@ -1054,7 +1054,7 @@ export class Calendar extends Component {
 
     render() {
 
-        var containerStyleClass = classNames('ui-calendar', this.props.styleClass, {
+        var containerStyleClass = classNames('ui-calendar', this.props.className, {
             'ui-calendar-w-btn': this.props.showIcon
         });
 

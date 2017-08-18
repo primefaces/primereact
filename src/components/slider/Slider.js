@@ -287,7 +287,7 @@ export class Slider extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-slider ui-widget ui-widget-content ui-corner-all', this.props.className, {
+        var className = classNames('ui-slider ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-state-disabled': this.props.disabled,
             'ui-slider-horizontal': this.props.orientation === 'horizontal',
             'ui-slider-vertical': this.props.orientation === 'vertical',
@@ -313,7 +313,7 @@ export class Slider extends Component {
         }
 
         return (
-            <div ref={(el) => { this.container = el } } style={this.props.style} className={styleClass} onClick={this.onBarClick}>
+            <div ref={(el) => { this.container = el } } style={this.props.style} className={className} onClick={this.onBarClick}>
                 {handle}
                 {middleRange}
                 {verticalRange}

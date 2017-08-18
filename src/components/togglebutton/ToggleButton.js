@@ -41,7 +41,7 @@ export class ToggleButton extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-button ui-togglebutton ui-widget ui-state-default ui-corner-all', this.props.className, {
+        var className = classNames('ui-button ui-togglebutton ui-widget ui-state-default ui-corner-all', this.props.className, {
             'ui-button-text-icon-left': (this.props.onIcon && this.props.offIcon),
             'ui-button-text-only': (!this.props.onIcon && !this.props.offIcon) && (this.props.onLabel || this.props.offLabel),
             'ui-state-active': this.props.checked,
@@ -57,7 +57,7 @@ export class ToggleButton extends Component {
         }
 
         return (
-           <div className={styleClass} style={this.props.style} onClick={this.toggle}>
+           <div className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="ui-helper-hidden-accessible">
                     <input type="checkbox"/>
                 </div>

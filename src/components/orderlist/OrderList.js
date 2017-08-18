@@ -11,7 +11,7 @@ export class OrderList extends Component {
         value: null,
         header: null,
         style: null,
-        styleClass: null,
+        className: null,
         listStyle: null,
         responsive: false,
         dragdrop: false,
@@ -24,7 +24,7 @@ export class OrderList extends Component {
         value: PropTypes.array,
         header: PropTypes.string,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         listStyle: PropTypes.string,
         responsive: PropTypes.bool,
         dragdrop: PropTypes.func,
@@ -283,7 +283,7 @@ export class OrderList extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-orderlist ui-widget', this.props.styleClass, {
+        var className = classNames('ui-orderlist ui-widget', this.props.className, {
             'ui-orderlist-responsive': this.props.responsive
         });
 
@@ -329,7 +329,7 @@ export class OrderList extends Component {
         );
 
         return (
-            <div className={styleClass} style={this.props.style}>
+            <div className={className} style={this.props.style}>
                 {controls}
                 {content}
             </div>

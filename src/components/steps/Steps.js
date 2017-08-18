@@ -9,7 +9,7 @@ export class Steps extends Component {
         activeIndex:0,
         readOnly:true,
         style:null,
-        styleClass:null,
+        className:null,
         activeIndexChange:null
     };
 
@@ -18,7 +18,7 @@ export class Steps extends Component {
         activeIndex:PropTypes.number,
         readOnly:PropTypes.bool,
         style:PropTypes.object,
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
         activeIndexChange:PropTypes.func
     };
 
@@ -51,7 +51,7 @@ export class Steps extends Component {
     }
 
     render() {
-        let divClass=classNames('ui-steps ui-widget ui-helper-clearfix',this.props.styleClass,{'ui-steps-readonly':this.props.readonly});
+        let divClass=classNames('ui-steps ui-widget ui-helper-clearfix',this.props.className,{'ui-steps-readonly':this.props.readonly});
         return (
             <div className={divClass} style={this.props.style}>
                 <ul role="tablist">

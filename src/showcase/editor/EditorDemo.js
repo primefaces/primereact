@@ -124,7 +124,7 @@ var header =
                                     <td>Inline style of the container.</td>
                                 </tr>
                                 <tr>
-                                    <td>styleClass</td>
+                                    <td>className</td>
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Style class of the container.</td>

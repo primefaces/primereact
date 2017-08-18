@@ -8,14 +8,14 @@ export class MegaMenu extends Component {
     static defaultProps = {
         model:null,
         style: null,
-        styleClass: null,
+        className: null,
         orientation:'horizontal'
     }
 
     static propsTypes = {
         model:PropTypes.array,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         orientation:PropTypes.string
     }
 
@@ -94,7 +94,7 @@ export class MegaMenu extends Component {
     }
     render() {
         var divClass=classNames('ui-menu ui-menubar ui-megamenu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix',
-            this.props.styleClass,{'ui-megamenu-vertical': this.props.orientation === 'vertical'});
+            this.props.className,{'ui-megamenu-vertical': this.props.orientation === 'vertical'});
         var horizontalChild,menuItems;
         if(this.props.orientation==='horizontal'){
             horizontalChild=<li className="ui-menuitem ui-menuitem-custom ui-widget ui-corner-all">

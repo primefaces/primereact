@@ -121,7 +121,7 @@ export class SlideMenu extends Component {
         model: null,
         popup: false,
         style: null,
-        styleClass: null,
+        className: null,
         easing: 'ease-out',
         effectDuration: 250,
         backLabel: 'Back',
@@ -133,7 +133,7 @@ export class SlideMenu extends Component {
         model: PropTypes.array,
         popup: PropTypes.bool,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         easing: PropTypes.string,
         effectDuration: PropTypes.number,
         backLabel: PropTypes.string,
@@ -223,7 +223,7 @@ export class SlideMenu extends Component {
     }
     
     render() {
-        var menuClass = classNames('ui-menu ui-slidemenu ui-widget ui-widget-content ui-corner-all', this.props.styleClass, {
+        var menuClass = classNames('ui-menu ui-slidemenu ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-menu-dynamic ui-shadow': this.props.popup
         });
         return (

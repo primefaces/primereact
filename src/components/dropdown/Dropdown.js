@@ -309,7 +309,7 @@ export class Dropdown extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all', this.props.className, {
+        var className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all', this.props.className, {
             'ui-state-disabled': this.props.disabled,
             'ui-state-focus': this.state.focus
         });
@@ -357,7 +357,7 @@ export class Dropdown extends Component {
         }
 
         return (
-            <div className={styleClass} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
+            <div className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
                     <select tabIndex="-1" ref={(el) => {this.selectElement = el;}}>{optionElements}</select>
                 </div>

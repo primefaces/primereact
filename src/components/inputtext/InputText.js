@@ -55,11 +55,11 @@ export class InputText extends Component {
     }
     
     render() {
-        var styleClass = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
+        var className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled,
             'ui-state-filled': this.state.filled
         });
 
-        return <input {...this.inputProps} className={styleClass} onInput={this.onInput}/>;
+        return <input {...this.inputProps} className={className} onInput={this.onInput}/>;
     }
 }

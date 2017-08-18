@@ -128,12 +128,12 @@ export class Paginator extends Component {
     }
 
     createPaginatorElement(className, callback, disabled, icon) {
-        var styleClass = classNames(className, 'ui-paginator-element ui-state-default ui-corner-all', {
+        var paginatorClassName = classNames(className, 'ui-paginator-element ui-state-default ui-corner-all', {
             'ui-state-disabled': disabled
         });
         var iconClassName = classNames('fa', icon);
 
-        return <a href="#" className={styleClass} onClick={callback} tabIndex={disabled ? -1 : null}>
+        return <a href="#" className={paginatorClassName} onClick={callback} tabIndex={disabled ? -1 : null}>
                     <span className={iconClassName}></span>
                </a>;
     }

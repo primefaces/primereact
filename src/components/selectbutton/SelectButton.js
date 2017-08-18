@@ -66,11 +66,11 @@ export class SelectButton extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-3', this.props.className);
+        var className = classNames('ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-3', this.props.className);
 
         return (
             <div>
-                <div className={styleClass} style={this.props.style}>
+                <div className={className} style={this.props.style}>
                     {this.props.options.map((option, index) => {
                         var selected = this.isSelected(index);
                         var innerStyleClass = classNames('ui-button ui-widget ui-state-default ui-button-text-only', {

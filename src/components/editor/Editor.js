@@ -10,7 +10,7 @@ export class Editor extends Component {
     static defaultProps = {
         value: null,
         style: null,
-        styleClass: null,
+        className: null,
         placeholder: null,
         readonly: false,
         formats: null,
@@ -22,7 +22,7 @@ export class Editor extends Component {
     static propsTypes = {
         value: PropTypes.string,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
         formats: PropTypes.array,
@@ -97,7 +97,7 @@ export class Editor extends Component {
     }
 
     render() {
-        let containerClass = classNames('ui-widget ui-editor-container ui-corner-all', this.props.styleClass);
+        let containerClass = classNames('ui-widget ui-editor-container ui-corner-all', this.props.className);
 
         let toolbarHeader = null;
         if (this.props.headerTemplate) {

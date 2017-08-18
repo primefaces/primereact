@@ -32,12 +32,12 @@ export class Listbox extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all', this.props.className, {
+        var className = classNames('ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-state-disabled': this.props.disabled
         });
 
         return (
-            <div className={styleClass} style={this.props.style}>
+            <div className={className} style={this.props.style}>
                 <ul className="ui-listbox-list">
                     {this.props.options && this.props.options.map((option, index) => {
                         var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(option) : option.label,

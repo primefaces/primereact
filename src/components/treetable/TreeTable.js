@@ -28,14 +28,14 @@ export class Column extends Component {
         field: null,
         header: null,
         style: null,
-        styleClass: null
+        className: null
     }
 
     static propsTypes = {
         field: PropTypes.any,
         header: PropTypes.any,
         style: PropTypes.string,
-        styleClass: PropTypes.string
+        className: PropTypes.string
     }
 }
 
@@ -159,7 +159,7 @@ export class UITreeRow extends Component {
                             var rowData = (<span>{ObjectUtils.resolveFieldData(this.node.data, col.props.field)}</span>);
 
                             return (
-                                <td key={'col_' + i} style={col.props.style} className={col.props.styleClass} onClick={this.onRowClick.bind(this)} onTouchEnd={this.onRowTouchEnd.bind(this)}>
+                                <td key={'col_' + i} style={col.props.style} className={col.props.className} onClick={this.onRowClick.bind(this)} onTouchEnd={this.onRowTouchEnd.bind(this)}>
                                     {toggler}
                                     {checkbox}
                                     {rowData}
@@ -192,7 +192,7 @@ export class TreeTable extends Component {
         selection: null,
         selectionChange: null,
         style: null,
-        styleClass: null,
+        className: null,
         metaKeySelection: true,
         onNodeSelect: null,
         onNodeUnselect: null,
@@ -208,7 +208,7 @@ export class TreeTable extends Component {
         selection: PropTypes.any,
         selectionChange: PropTypes.func.isRequired,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func,
@@ -488,7 +488,7 @@ export class TreeTable extends Component {
                 return element;
         });
 
-        var treeTableClass = classNames('ui-treetable ui-widget', this.props.styleClass);
+        var treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
 
         var header = React.Children.map(this.props.children, (element, i) => {
             if (element && element.type === Header)
@@ -504,7 +504,7 @@ export class TreeTable extends Component {
                 <tr>
                     {
                         this.columns && this.columns.map((col, i) => {
-                            var colStyleClass = classNames('ui-state-default ui-unselectable-text', col.props.styleClass);
+                            var colStyleClass = classNames('ui-state-default ui-unselectable-text', col.props.className);
 
                             return (<th key={'headerCol_' + i} className={colStyleClass} style={col.props.style}>
 
@@ -520,7 +520,7 @@ export class TreeTable extends Component {
                     <tr>
                         {
                             this.columns && this.columns.map((col, i) => {
-                                var colStyleClass = classNames('ui-state-default', col.props.styleClass);
+                                var colStyleClass = classNames('ui-state-default', col.props.className);
 
                                 return (<td key={'footerCol_' + i} className={colStyleClass} style={col.props.style}>
                                     <span className="ui-column-footer">{col.props.footer}</span>

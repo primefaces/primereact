@@ -43,10 +43,10 @@ export class Fieldset extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
+        var className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
 
         return (
-            <fieldset className={styleClass} style={this.props.style}>
+            <fieldset className={className} style={this.props.style}>
                 <legend className="ui-fieldset-legend ui-corner-all ui-state-default ui-unselectable-text" onClick={this.toggle}>
                     {this.props.toggleable && <span className={classNames('ui-fieldset-toggler fa fa-fw', {'fa-plus': this.state.collapsed, 'fa-minus': !this.state.collapsed})}></span>}
                     {this.props.legend}

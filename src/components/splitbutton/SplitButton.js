@@ -25,13 +25,13 @@ export class SplitButtonItem extends Component {
     }
     
     render() {
-        var styleClass = classNames('ui-menuitem-link ui-corner-all', {'ui-state-disabled': this.props.menuitem.disabled});
+        var className = classNames('ui-menuitem-link ui-corner-all', {'ui-state-disabled': this.props.menuitem.disabled});
         var icon = this.props.menuitem.icon ? <span className={classNames('ui-menuitem-icon fa fa-fw', this.props.menuitem.icon)}></span> : null;
         var label = <span className="ui-menuitem-text">{this.props.menuitem.label}</span>;
         
         return (
             <li className="ui-menuitem ui-widget ui-corner-all" role="menuitem">
-                <a href={this.props.menuitem.url||'#'} className={styleClass} target={this.props.menuitem.target} onClick={this.onClick}>
+                <a href={this.props.menuitem.url||'#'} className={className} target={this.props.menuitem.target} onClick={this.onClick}>
                     {icon}
                     {label}
                 </a>

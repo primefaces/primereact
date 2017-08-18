@@ -19,7 +19,7 @@ export class AutoComplete extends Component {
         minLength: 1,
         delay: 300,
         style: null,
-        styleClass: null,
+        className: null,
         inputStyle: null,
         inputStyleClass: null,
         placeholder: null,
@@ -49,7 +49,7 @@ export class AutoComplete extends Component {
         minLength: PropTypes.number,
         delay: PropTypes.number,
         style: PropTypes.object,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         inputStyle: PropTypes.object,
         inputStyleClass: PropTypes.string,
         placeholder: PropTypes.string,
@@ -407,7 +407,7 @@ export class AutoComplete extends Component {
     }
     
     render() {
-        var styleClass = classNames('ui-autocomplete ui-widget', this.props.styleClass, {
+        var className = classNames('ui-autocomplete ui-widget', this.props.className, {
             'ui-autocomplete-dd': this.props.dropdown,
             'ui-autocomplete-multiple': this.props.multiple
         });
@@ -463,7 +463,7 @@ export class AutoComplete extends Component {
         var hasSuggestions = this.suggestions && this.suggestions.length;
 
         return (
-            <span className={styleClass} style={this.props.style} ref={(el) => {this.autoComplete = ReactDOM.findDOMNode(el)}}>
+            <span className={className} style={this.props.style} ref={(el) => {this.autoComplete = ReactDOM.findDOMNode(el)}}>
                 {input}
                 {multipleContainer}
                 {dropdownButton}

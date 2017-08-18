@@ -4,7 +4,7 @@ import {NestedMenuItem} from './NestedMenuItem'
 
 export class NestedMenu extends Component{
     static defaultProps = {
-        styleClass:null,
+        className:null,
         style:null,
         items:null,
         parentMenu:null,
@@ -13,7 +13,7 @@ export class NestedMenu extends Component{
     };
 
     static propTypes = {
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
         style:PropTypes.object,
         items:PropTypes.any,
         parentMenu:PropTypes.string,
@@ -27,7 +27,7 @@ export class NestedMenu extends Component{
     }
     render() {
         return(
-            <ul className={this.props.styleClass} style={this.props.style}>
+            <ul className={this.props.className} style={this.props.style}>
                 {this.props.items && this.props.items.map((item,index)=>
                     <NestedMenuItem key={this.props.index+'_'+index} item={item} root={this.props.root} index={this.props.index+'_'+index}
                                     menu={this} parentMenu={this.props.parentMenu}/>)}

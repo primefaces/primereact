@@ -8,7 +8,7 @@ export class ContextMenu extends Component {
     static defaultProps = {
         model: null,
         style: null,
-        styleClass: null,
+        className: null,
         global: false,
         target: null,
         appendTo: null
@@ -17,7 +17,7 @@ export class ContextMenu extends Component {
     static propsTypes = {
         model: PropTypes.array,
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         global: PropTypes.bool,
         target: PropTypes.any,
         appendTo: PropTypes.any
@@ -140,11 +140,11 @@ export class ContextMenu extends Component {
     }
     
     render() {
-        let contextMenuClass = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', this.props.styleClass);
+        let contextMenuClass = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', this.props.className);
         
         return (
             <div className={contextMenuClass} style={this.props.style} ref={el => this.container = el}>
-                <NestedMenu styleClass="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
+                <NestedMenu className="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
             </div>
         );
     }

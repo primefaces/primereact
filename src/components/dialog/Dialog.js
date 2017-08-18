@@ -181,7 +181,7 @@ export class Dialog extends Component {
     }
 
     render() {
-        let styleClass = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        let className = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
         let style = {
             display: this.state.visible ? 'block': 'none',
             width: this.props.width,
@@ -190,7 +190,7 @@ export class Dialog extends Component {
         let footer = this.props.footer && <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>;
 
         return (
-            <div className={styleClass} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
+            <div className={className} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
                 <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
                      <span className="ui-dialog-title">{this.props.header}</span>
                      <a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onCloseClick}>

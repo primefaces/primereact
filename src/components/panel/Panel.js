@@ -45,7 +45,7 @@ export class Panel extends Component {
 
     render() {
         var toggleIcon = null;
-        var styleClass = classNames('ui-panel ui-widget ui-widget-content ui-corner-all', this.props.className);
+        var className = classNames('ui-panel ui-widget ui-widget-content ui-corner-all', this.props.className);
         
         if(this.props.toggleable) {
             toggleIcon = <a className="ui-panel-titlebar-icon ui-panel-titlebar-toggler ui-corner-all ui-state-default" href="#" onClick={this.toggle}>
@@ -54,7 +54,7 @@ export class Panel extends Component {
         }
         
         return (
-            <div className={styleClass} style={this.props.style}>
+            <div className={className} style={this.props.style}>
                 {this.props.header != null && <div className="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
                     <span className="ui-panel-title">{this.props.header}</span>
                     {toggleIcon}

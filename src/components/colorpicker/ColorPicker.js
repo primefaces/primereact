@@ -7,7 +7,7 @@ import classNames from 'classnames';
 export class ColorPicker extends Component {
     static defaultProps = {
         style: null,
-        styleClass: null,
+        className: null,
         inline: false,
         format: "hex",
         appendTo: null,
@@ -19,7 +19,7 @@ export class ColorPicker extends Component {
 
     static propsTypes = {
         style: PropTypes.string,
-        styleClass: PropTypes.string,
+        className: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
         appendTo: PropTypes.string,
@@ -427,7 +427,7 @@ export class ColorPicker extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-colorpicker ui-widget', this.props.styleClass, {
+        var className = classNames('ui-colorpicker ui-widget', this.props.className, {
             'ui-colorpicker-overlay':!this.props.inline,
             'ui-colorpicker-dragging': this.colorDragging||this.hueDragging
         });
@@ -467,7 +467,7 @@ export class ColorPicker extends Component {
         );
 
         return (
-            <div style={this.props.style} className={styleClass}>
+            <div style={this.props.style} className={className}>
                 {input}
                 {panel}
             </div>

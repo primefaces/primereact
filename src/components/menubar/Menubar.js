@@ -7,13 +7,13 @@ export class Menubar extends Component{
     static defaultProps = {
         model:null,
         style:null,
-        styleClass:null,
+        className:null,
     };
 
     static propTypes = {
         model:PropTypes.array,
         style:PropTypes.object,
-        styleClass:PropTypes.string,
+        className:PropTypes.string,
     };
 
     constructor(props) {
@@ -22,12 +22,12 @@ export class Menubar extends Component{
     }
     render() {
 
-        var styleClass=classNames('ui-menubar ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.styleClass);
+        var className=classNames('ui-menubar ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.className);
         var ulClass=classNames('ui-menu-list ui-menubar-root-list ui-helper-clearfix');
 
         return(
-            <div className={styleClass} style={this.props.style}>
-                <NestedMenu styleClass={ulClass} items={this.props.model} parentMenu="Menubar" root={true} index={0}>{this.props.children}</NestedMenu>
+            <div className={className} style={this.props.style}>
+                <NestedMenu className={ulClass} items={this.props.model} parentMenu="Menubar" root={true} index={0}>{this.props.children}</NestedMenu>
             </div>
         );
     }

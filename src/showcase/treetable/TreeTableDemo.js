@@ -249,7 +249,7 @@ import {TreeTable} from 'primereact/components/treetable/TreeTable';
                                         <td>Inline style of the node.</td>
                                     </tr>
                                     <tr>
-                                        <td>styleClass</td>
+                                        <td>className</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the node.</td>
@@ -394,7 +394,7 @@ render() {
                                         <td>Inline style of the column.</td>
                                     </tr>
                                     <tr>
-                                        <td>styleClass</td>
+                                        <td>className</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the column.</td>
@@ -488,7 +488,7 @@ import {TreeTable, Column, Header, Footer} from 'primereact/components/treetable
                                         <td>Inline style of the component.</td>
                                     </tr>
                                     <tr>
-                                        <td>styleClass</td>
+                                        <td>className</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the component.</td>

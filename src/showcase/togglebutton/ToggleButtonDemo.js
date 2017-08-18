@@ -146,7 +146,7 @@ render() {
                             <td>Inline style of the element.</td>
                         </tr>
                         <tr>
-                            <td>styleClass</td>
+                            <td>className</td>
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>

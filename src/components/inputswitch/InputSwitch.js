@@ -102,13 +102,13 @@ export class InputSwitch extends Component {
     }
 
     render() {
-        var styleClass = classNames('ui-inputswitch ui-widget ui-widget-content ui-corner-all', this.props.className, {
+        var className = classNames('ui-inputswitch ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-inputswitch-checked': this.props.checked,
             'ui-state-disabled': this.props.disabled
         });
 
         return (
-            <div ref={(el) => {this.container = el;}} className={styleClass} style={this.props.style} onClick={this.toggle}>
+            <div ref={(el) => {this.container = el;}} className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="ui-inputswitch-off">
                     <span className="ui-inputswitch-offlabel">{this.props.offLabel}</span>
                 </div>
