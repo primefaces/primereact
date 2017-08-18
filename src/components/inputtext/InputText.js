@@ -47,13 +47,6 @@ export class InputText extends Component {
         }
     }   
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.filled === nextState.filled && !this.inputProps.value) {
-            return false;
-        }
-        return true;
-    }
-    
     render() {
         var className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled,
