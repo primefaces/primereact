@@ -82,13 +82,6 @@ export class InputTextarea extends Component {
         }
     }   
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.filled === nextState.filled && !this.textareaProps.value) {
-            return false;
-        }
-        return true;
-    }
-
     render() {
         var className = classNames('ui-inputtext ui-corner-all ui-state-default ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled,
