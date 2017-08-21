@@ -22,8 +22,8 @@ export class Button extends Component {
         var className = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
                 'ui-button-text-only': !this.props.icon && this.props.label,
                 'ui-button-icon-only': this.props.icon && !this.props.label,
-                'ui-button-text-icon-left': this.props.icon && this.props.iconPos === 'left',
-                'ui-button-text-icon-right': this.props.icon && this.props.iconPos === 'right',
+                'ui-button-text-icon-left': this.props.label && this.props.icon && this.props.iconPos === 'left',
+                'ui-button-text-icon-right': this.props.label && this.props.icon && this.props.iconPos === 'right',
                 'ui-state-disabled': this.props.disabled
         }),
         iconStyleClass = null;
