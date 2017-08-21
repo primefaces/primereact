@@ -24,10 +24,10 @@ export class ToolbarDemo extends Component {
                 <div className="content-section implementation">
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
-                            <Button label="New" icon="fa-plus" iconPos="left"/>
-                            <Button label="Open" icon="fa-folder-open" className="ui-button-success" iconPos="left"/>
+                            <Button label="New" icon="fa-plus"/>
+                            <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
                             <i className="fa fa-bars" style={{marginRight:'.25em'}}></i>
-                            <Button label="Save" icon="fa-check" className="ui-button-warning" iconPos="left"/>
+                            <Button label="Save" icon="fa-check" className="ui-button-warning"/>
                         </div>
                         <div className="ui-toolbar-group-right">
                             <Button icon="fa-search"/>
@@ -64,10 +64,10 @@ import {Toolbar} from 'primereact/components/toolbar/Toolbar';
                             {`
 <Toolbar>
     <div className="ui-toolbar-group-left">
-        <Button label="New" icon="fa-plus" iconPos="left"/>
-        <Button label="Open" icon="fa-folder-open" className="ui-button-success" iconPos="left"/>
+        <Button label="New" icon="fa-plus"/>
+        <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
         <i className="fa fa-bars"></i>
-        <Button label="Save" icon="fa-check" className="ui-button-warning" iconPos="left"/>
+        <Button label="Save" icon="fa-check" className="ui-button-warning"/>
     </div>
     <div className="ui-toolbar-group-right">
         <Button icon="fa-search"/>
@@ -169,10 +169,10 @@ export class ToolbarDemo extends Component {
                 <div className="content-section implementation">
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
-                            <Button label="New" icon="fa-plus" iconPos="left"/>
-                            <Button label="Open" icon="fa-folder-open" className="ui-button-success" iconPos="left"/>
+                            <Button label="New" icon="fa-plus"/>
+                            <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
                             <i className="fa fa-bars"></i>
-                            <Button label="Save" icon="fa-check" className="ui-button-warning" iconPos="left"/>
+                            <Button label="Save" icon="fa-check" className="ui-button-warning"/>
                         </div>
                         <div className="ui-toolbar-group-right">
                             <Button icon="fa-search"/>

@@ -232,13 +232,13 @@ export class FileUpload extends Component {
 
     render() {
         var className = classNames('ui-fileupload ui-widget', this.props.className);
-        var chooseButton = <Button iconPos="left" label={this.props.chooseLabel} icon="fa-plus" className="ui-fileupload-choose" onClick={this.onChooseClick} disabled={this.props.disabled}>
+        var chooseButton = <Button label={this.props.chooseLabel} icon="fa-plus" className="ui-fileupload-choose" onClick={this.onChooseClick} disabled={this.props.disabled}>
                                 <input type="file" onChange={this.onFileSelect} multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} ref={(el) => {this.fileInput = el;}}/>
                             </Button>;
 
         if(!this.props.auto) {
-            var uploadButton = <Button iconPos="left" label={this.props.uploadLabel} icon="fa-upload" onClick={this.upload} disabled={this.props.disabled} />;
-            var cancelButton = <Button iconPos="left" label={this.props.cancelLabel }icon="fa-close" onClick={this.clear} disabled={this.props.disabled} />;
+            var uploadButton = <Button label={this.props.uploadLabel} icon="fa-upload" onClick={this.upload} disabled={this.props.disabled} />;
+            var cancelButton = <Button label={this.props.cancelLabel }icon="fa-close" onClick={this.clear} disabled={this.props.disabled} />;
         }
 
         if(this.hasFiles()) {

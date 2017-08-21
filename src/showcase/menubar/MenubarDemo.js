@@ -98,7 +98,7 @@ export class MenubarDemo extends Component {
                 <div className="content-section implementation">
                     <Menubar model={items}>
                         <InputText placeholder="Search" type="text"/>
-                        <Button label="Logout" icon="fa-sign-out" iconPos="left" style={{marginLeft:4}}/>
+                        <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
                     </Menubar>
                 </div>
 

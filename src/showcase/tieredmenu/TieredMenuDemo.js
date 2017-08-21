@@ -101,7 +101,7 @@ export class TieredMenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <TieredMenu model={items} popup={true} ref={el=>this.menu=el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)} iconPos="left"/>
+                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
                 </div>
 
                 <TieredMenuDoc/>
@@ -356,7 +356,7 @@ export class TieredMenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <TieredMenu model={items} popup={true} ref={el=>this.menu=el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)} iconPos="left"/>
+                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
                 </div>
 
                 <TieredMenuDoc/>

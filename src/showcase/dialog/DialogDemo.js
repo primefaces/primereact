@@ -24,8 +24,8 @@ export class DialogDemo extends Component {
 
     render() {
         let footer = <div>
-            <Button label="Yes" icon="fa-check" onClick={this.onHide} iconPos="left" />
-            <Button label="No" icon="fa-close" onClick={this.onHide} iconPos="left" />
+            <Button label="Yes" icon="fa-check" onClick={this.onHide} />
+            <Button label="No" icon="fa-close" onClick={this.onHide} />
         </div>;
 
         return (
@@ -45,7 +45,7 @@ export class DialogDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
 
-                    <Button label="Show" icon="fa-external-link-square" onClick={this.onClick} iconPos="left" />
+                    <Button label="Show" icon="fa-external-link-square" onClick={this.onClick} />
                 </div>
                 <DialogDoc></DialogDoc>
             </div>

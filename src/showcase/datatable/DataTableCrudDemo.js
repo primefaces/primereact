@@ -74,12 +74,12 @@ export class DataTableCrudDemo extends Component {
         let header = <div className="ui-helper-clearfix" style={{lineHeight:'1.87em'}}>CRUD for Cars </div>;
 
         let footer = <div className="ui-helper-clearfix" style={{width:'100%'}}>
-            <Button iconPos="left" style={{float:'left'}} icon="fa-plus" label="Add" onClick={this.addNew}/>
+            <Button style={{float:'left'}} icon="fa-plus" label="Add" onClick={this.addNew}/>
         </div>;
 
         let dialogFooter = <div className="ui-dialog-buttonpane ui-helper-clearfix">
-                <Button iconPos="left" icon="fa-close" label="Delete" onClick={this.delete}/>
-                <Button iconPos="left" label="Save" icon="fa-check" onClick={this.save}/>
+                <Button icon="fa-close" label="Delete" onClick={this.delete}/>
+                <Button label="Save" icon="fa-check" onClick={this.save}/>
             </div>;
 
         return (
