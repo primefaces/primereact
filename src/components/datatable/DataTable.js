@@ -28,7 +28,7 @@ export class DataTable extends Component {
         totalRecords: null,
         lazy: false,
         sortField: null,
-        sortOrder: 1,
+        sortOrder: null,
         multiSortMeta: null,
         sortMode: 'single',
         emptyMessage: "No records found",
