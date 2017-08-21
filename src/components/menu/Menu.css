@@ -52,6 +52,7 @@
 .ui-menu .ui-menuitem-link .ui-menuitem-icon {
     display: inline-block;
     vertical-align: middle;
+    margin-right: .25em;
 }
 
 .ui-menu .ui-menuitem-text {

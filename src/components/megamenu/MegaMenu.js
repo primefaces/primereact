@@ -113,7 +113,7 @@ export class MegaMenu extends Component {
             <li  onMouseEnter={event=>this.onItemMouseEnter(event,category)} onMouseLeave={event=>this.onItemMouseLeave(event,category)}
                 className={liClass} ref={el=>this.item=el} key={index}>
                 <a className={aClass}>
-                    <span className={spanClass} style={{marginRight:4}}></span>
+                    <span className={spanClass}></span>
                     <span className="ui-menuitem-text">{category.label}</span>
                     <span className={submenuClass}></span>
                 </a>
