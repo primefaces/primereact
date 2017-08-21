@@ -304,17 +304,21 @@ export class Tooltip extends Component {
     }
 
     bindMouseEvents(selector) {
-        let el = document.querySelector(selector);
-        if(!el) 
+        let elements = document.querySelectorAll(selector);
+        if(!elements) 
             return;
 
         if(this.props.tooltipEvent === 'hover') {
-            el.addEventListener("mouseenter", (e) => {this.element = el;  this.onMouseEnter(e);});
-            el.addEventListener("mouseleave", (e) => this.onMouseLeave(e));
+            elements.forEach((el, index) => {
+                el.addEventListener("mouseenter", (e) => {this.element = el;  this.onMouseEnter(e);});
+                el.addEventListener("mouseleave", (e) => this.onMouseLeave(e));
+            });
         }
         else if(this.props.tooltipEvent === 'focus') {
-            el.addEventListener("focus", (e) => {this.element = el; this.onFocus(e);});
-            el.addEventListener("blur", (e) => this.onBlur(e));
+            elements.forEach((el, index) => {
+                el.addEventListener("focus", (e) => {this.element = el; this.onFocus(e);});
+                el.addEventListener("blur", (e) => this.onBlur(e));
+            });
         }
     }
 
@@ -330,11 +334,11 @@ export class Tooltip extends Component {
             this.bindMouseEvents(selectors);
         }
             
-        window.removeEventListener('load', this.handleLoad);
+        document.body.removeEventListener('mouseover', this.handleLoad);
     }
 
     componentDidMount() {
-       window.addEventListener('load', this.handleLoad);
+        document.body.addEventListener('mouseover', this.handleLoad);
     }
 
     componentWillUnmount() {
