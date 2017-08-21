@@ -2,22 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
-
-export class Column extends Component {
-    static defaultProps = {
-        field: null,
-        header: null,
-        style: null,
-        className: null
-    }
-
-    static propsTypes = {
-        field: PropTypes.any,
-        header: PropTypes.any,
-        style: PropTypes.string,
-        className: PropTypes.string
-    }
-}
+import {Column} from "../column/Column"
 
 export class UITreeRow extends Component {
 

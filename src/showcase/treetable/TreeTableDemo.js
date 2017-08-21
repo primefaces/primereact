@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { TreeTable, Column } from '../../components/treetable/TreeTable';
+import { TreeTable } from '../../components/treetable/TreeTable';
+import {Column} from "../../components/column/Column";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../../components/codehighlight/CodeHighlight';
 
@@ -407,7 +408,7 @@ render() {
 
 <CodeHighlight className="language-javascript">
 {`
-import {TreeTable, Column} from 'primereact/components/treetable/TreeTable';
+import {Column} from 'primereact/components/column/Column';
 
 `}
 </CodeHighlight>
