@@ -7,7 +7,7 @@ export class Button extends Component {
     static defaultProps = {
         label: null,
         icon: null,
-        iconPos: 'left',
+        iconPos: '',
         cornerStyleClass: 'ui-corner-all'
     }
 
