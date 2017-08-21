@@ -166,7 +166,7 @@ export class PanelMenuHeaderItems extends Component {
         menuitemIconClass = classNames('ui-menuitem-icon fa', this.item.icon);
 
         let panelMenuIcon = this.item.items && <span className={panelMenuIconClass} />,
-            menuitemIcon = this.item.index && <span className={menuitemIconClass} />,
+            menuitemIcon = this.item.icon && <span className={menuitemIconClass} />,
             menuitemText = <span className="ui-menuitem-text">{this.item.label}</span>;
 
         let panelMenuContentWrapperClass = classNames('ui-panelmenu-content-wrapper', {
