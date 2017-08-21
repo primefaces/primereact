@@ -223,6 +223,7 @@ class AppMenu extends Component {
                                 <Link to="/dialog">&#9679; Dialog</Link>
                                 <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
                                 <Link to="/lightbox">&#9679; Lightbox</Link>
+                                <Link to="/tooltip">&#9679; Tooltip</Link>
                             </div>
                         </div>
 
