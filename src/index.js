@@ -87,8 +87,9 @@ import {SlideMenuDemo} from './showcase/slidemenu/SlideMenuDemo';
 import {OrganizationChartDemo} from './showcase/organizationchart/OrganizationChartDemo';
 import {ThemingPage} from "./showcase/theming/ThemingPage"
 import {InputGroupDemo} from "./showcase/inputgroup/InputGroupDemo";
-import {Router,Route,hashHistory} from 'react-router';
 import {EditorDemo} from "./showcase/editor/EditorDemo";
+import {TooltipDemo} from "./showcase/tooltip/TooltipDemo";
+import {Router,Route,hashHistory} from 'react-router';
 
 ReactDOM.render(
     <Router history={hashHistory}>
@@ -180,6 +181,7 @@ ReactDOM.render(
             <Route path="/theming" component={ThemingPage} />
             <Route path="/inputgroup" component={InputGroupDemo} />
             <Route path="/editor" component={EditorDemo} />
+            <Route path="/tooltip" component={TooltipDemo} />
         </Route>
     </Router>,
     document.getElementById('root')
