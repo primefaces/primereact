@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TreeTable, Column, Header } from '../../components/treetable/TreeTable';
+import { TreeTable, Column } from '../../components/treetable/TreeTable';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../../components/codehighlight/CodeHighlight';
 
@@ -115,16 +115,14 @@ export class TreeTableDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <TreeTable value={data}>
-                        <Header>Basic</Header>
+                    <TreeTable value={data} header="Basic">
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Single Selection</h3>
-                    <TreeTable value={data} selectionMode="single" selectionChange={this.onSelectionChange.bind(this)}>
-                        <Header>Single Selection</Header>
+                    <TreeTable value={data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange.bind(this)}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -132,8 +130,7 @@ export class TreeTableDemo extends Component {
                     <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={data} selectionMode="multiple" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}>
-                        <Header>Multiple Selection with MetaKey</Header>
+                    <TreeTable value={data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -148,8 +145,7 @@ export class TreeTableDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={data} selectionMode="checkbox" selectionChange={this.onCheckboxSelectionChange.bind(this)}>
-                        <Header>Checkbox Selection</Header>
+                    <TreeTable value={data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange.bind(this)}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -423,28 +419,6 @@ import {TreeTable, Column} from 'primereact/components/treetable/TreeTable';
 `}
 </CodeHighlight>
 
-                        <h3>Facets</h3>
-                        <p>Header and Footer are the two sections aka facets that are capable of displaying custom content.</p>
-<CodeHighlight className="language-javascript">
-{`
-import {TreeTable, Column, Header, Footer} from 'primereact/components/treetable/TreeTable';
-
-`}
-                        </CodeHighlight>
-
-                        <CodeHighlight className="language-markup">
-{`
-<TreeTable value={data}>
-    <Header>Basic</Header>
-    <Column field="name" header="Name"></Column>
-    <Column field="size" header="Size"></Column>
-    <Column field="type" header="Type"></Column>
-    <Footer>Choose from list</Footer>
-</TreeTable>
-
-`}
-</CodeHighlight>
-
                         <h3>Attributes</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -505,6 +479,18 @@ import {TreeTable, Column, Header, Footer} from 'primereact/components/treetable
                                         <td>true</td>
                                         <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
                             can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>header</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Label of header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Label of footer.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -710,16 +696,14 @@ export class TreeTableDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <TreeTable value={data}>
-                        <Header>Basic</Header>
+                    <TreeTable value={data} header="Basic">
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Single Selection</h3>
-                    <TreeTable value={data} selectionMode="single" selectionChange={this.onSelectionChange.bind(this)}>
-                        <Header>Single Selection</Header>
+                    <TreeTable value={data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange.bind(this)}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -727,8 +711,7 @@ export class TreeTableDemo extends Component {
                     <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={data} selectionMode="multiple" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}>
-                        <Header>Multiple Selection with MetaKey</Header>
+                    <TreeTable value={data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -743,8 +726,7 @@ export class TreeTableDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={data} selectionMode="checkbox" selectionChange={this.onCheckboxSelectionChange.bind(this)}>
-                        <Header>Checkbox Selection</Header>
+                    <TreeTable value={data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange.bind(this)}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>

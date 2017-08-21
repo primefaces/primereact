@@ -3,26 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 
-export class Header extends Component {
-    render() {
-        return (
-            <div className="ui-treetable-header ui-widget-header">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
-export class Footer extends Component {
-    render() {
-        return (
-            <div className="ui-treetable-footer ui-widget-header">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
 export class Column extends Component {
     static defaultProps = {
         field: null,
@@ -195,6 +175,8 @@ export class TreeTable extends Component {
         style: null,
         className: null,
         metaKeySelection: true,
+        header: '',
+        footer: '',
         onNodeSelect: null,
         onNodeUnselect: null,
         onNodeExpand: null,
@@ -212,6 +194,8 @@ export class TreeTable extends Component {
         style: PropTypes.string,
         className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
+        header: PropTypes.string,
+        footer: PropTypes.string,
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func,
         onNodeExpand: PropTypes.func,
@@ -492,14 +476,13 @@ export class TreeTable extends Component {
 
         var treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
 
-        var header = React.Children.map(this.props.children, (element, i) => {
-            if (element && element.type === Header)
-                return (<Header> {element.props.children}</Header>);
-        }),
-            footer = React.Children.map(this.props.children, (element, i) => {
-                if (element && element.type === Footer)
-                    return (<Footer> {element.props.children}</Footer>);
-            });
+        var header =
+            this.props.header && <div className="ui-treetable-header ui-widget-header">
+                    {this.props.header}
+                </div>,
+            footer = this.props.footer && <div className="ui-treetable-footer ui-widget-header">
+                {this.props.footer}
+            </div>;
 
         var thead = (
             <thead>
