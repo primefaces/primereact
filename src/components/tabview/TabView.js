@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 export class TabPanel extends Component {
     
     static defaultProps = {
-        header: null
+        header: null,
+        leftIcon:null,
+        rightIcon: null
     }
 
     static propTypes = {
-        header: PropTypes.string
+        header: PropTypes.string,
+        leftIcon: PropTypes.string,
+        rightIcon: PropTypes.string
     };
 
     render() {        
@@ -20,7 +25,7 @@ export class TabView extends Component {
 
     static defaultProps = {
         id: null,
-        activeIndex: null
+        activeIndex: null,
     }
 
     static propTypes = {
@@ -69,7 +74,9 @@ export class TabView extends Component {
                     {React.Children.map(this.props.children, (tab,i) => {
                             return <li className={this.getTabHeaderClass(i)} role="tab">
                                 <a href="#" onClick={(e) => this.onTabClick(e,i)}>
+                                    {tab.props.leftIcon && <span style={{marginRight:4}} className={classNames('ui-tabview-left-icon fa ',tab.props.leftIcon) }></span>}
                                     <span className="ui-tabview-title">{tab.props.header}</span>
+                                    {tab.props.rightIcon && <span style={{marginLeft:4}} className={classNames('ui-tabview-right-icon fa ',tab.props.rightIcon) }></span>}
                                 </a>
                             </li>
                         })

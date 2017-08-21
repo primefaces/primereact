@@ -109,7 +109,7 @@ export class SlideMenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
-                    <Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick}></Button>
+                    <Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick} iconPos="left"></Button>
                 </div>
 
                 <SlideMenuDoc />
@@ -191,7 +191,7 @@ export class SlideMenuDemo extends Component {
 <CodeHighlight className="language-markup">
 {`
 <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
-<Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick}></Button>
+<Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick} iconPos="left"></Button>
 
 `}
 </CodeHighlight>
@@ -478,7 +478,7 @@ export class SlideMenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
-                    <Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick}></Button>
+                    <Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick} iconPos="left"></Button>
                 </div>
             </div>
         )

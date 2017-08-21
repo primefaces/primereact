@@ -65,7 +65,7 @@ export class MessagesDemo extends Component {
                         <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         <Button onClick={this.showMultiple} label="Multiple" />
-                        <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
+                        <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear" iconPos="left"/>
                     </div>
                 </div>
                 <MessagesDoc></MessagesDoc>
