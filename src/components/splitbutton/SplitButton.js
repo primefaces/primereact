@@ -20,7 +20,9 @@ export class SplitButtonItem extends Component {
     }
     
     onClick(e) {
-        this.props.menuitem.command({originalEvent: e, item:this.props.menuitem}); 
+        if(this.props.menuitem.command) {
+            this.props.menuitem.command({originalEvent: e, item: this.props.menuitem});
+        }
         e.preventDefault();
     }
     
