@@ -39,7 +39,7 @@ export class TooltipDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tooltip</h1>
                         <p>Tooltip provides advisory information for a component.</p>
