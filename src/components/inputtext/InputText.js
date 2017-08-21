@@ -23,7 +23,7 @@ export class InputText extends Component {
 
     onInput(e) {
         if(this.props.onInput) {
-            this.props.onInput();
+            this.props.onInput(e);
         }
 
         this.updateFilledState(e);
