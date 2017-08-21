@@ -31,7 +31,7 @@ export class ButtonDemo extends Component {
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
                     <Button label="Click" onClick={this.increment} />
-                    <Button label="Click" icon="fa-check" onClick={this.increment} iconPos="left"/>
+                    <Button label="Click" icon="fa-check" onClick={this.increment}/>
                     <Button label="Click" icon="fa-check" iconPos="right" onClick={this.increment}/>
                     <Button icon="fa-check" onClick={this.increment}/>
                     <Button label="Click" disabled="disabled" onClick={this.increment}/>
@@ -164,7 +164,7 @@ import {Button} from 'primereact/components/button/Button';
                                     <tr>
                                         <td>iconPos</td>
                                         <td>string</td>
-                                        <td>null</td>
+                                        <td>left</td>
                                         <td>Position of the icon, valid values are "left" and "right".</td>
                                     </tr>
                                 </tbody>

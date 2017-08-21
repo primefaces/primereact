@@ -75,6 +75,32 @@ export class AutoComplete extends Component {
         super(props);
         this.state = {panelVisible: false, focus: false};
     }
+
+    onInput(event) {
+        let value = event.target.value;
+        if(!this.props.multiple) {
+            this.value = value;
+        }
+
+        if(value.length === 0) {
+           this.hide();
+        }
+
+        if(value.length >= this.props.minLength) {
+            //Cancel the search request if user types within the timeout
+            if(this.timeout) {
+                clearTimeout(this.timeout);
+            }
+
+            this.timeout = setTimeout(() => {
+                this.search(event, value);
+            }, this.props.delay);
+        }
+        else {
+            this.suggestions = null;
+            clearTimeout(this.timeout);
+        }
+    }
     
     search(event, query) {
         //allow empty string but not undefined or null
@@ -277,31 +303,6 @@ export class AutoComplete extends Component {
                 query: event.target.value
             });
         }
-
-
-        let value = event.target.value;
-        if(!this.props.multiple) {
-            this.value = value;
-        }
-
-        if(value.length === 0) {
-            this.hide();
-        }
-
-        if(value.length >= this.props.minLength) {
-            //Cancel the search request if user types within the timeout
-            if(this.timeout) {
-                clearTimeout(this.timeout);
-            }
-
-            this.timeout = setTimeout(() => {
-                this.search(event, value);
-            }, this.props.delay);
-        }
-        else {
-            this.suggestions = null;
-            clearTimeout(this.timeout);
-        }
     }
     
     onBlur() {
@@ -431,9 +432,8 @@ export class AutoComplete extends Component {
                     }
                  
                     <li className="ui-autocomplete-input-token">
-                        <InputText ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
-                                   tabIndex={this.props.tabindex}  onChange={this.onInputChange.bind(this)} autoComplete="off"
-                                   onKeyDown={this.onKeydown.bind(this)} onFocus={this.onInputFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
+                        <InputText ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder} tabIndex={this.props.tabindex} onInput={this.onInput.bind(this)} 
+                            onKeyDown={this.onKeydown.bind(this)} onFocus={this.onInputFocus.bind(this)} onBlur={this.onBlur.bind(this)} autoComplete="off" />
                     </li>
                 </ul>
             );
@@ -443,7 +443,7 @@ export class AutoComplete extends Component {
                 'ui-autocomplete-dd-input': this.props.dropdown
             }),
             input = (<InputText ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}}  type="text" className={inputClass} style={this.props.inputStyle} autoComplete="off" 
-                         onKeyDown={this.onKeydown.bind(this)} onFocus={this.onInputFocus.bind(this)} onChange={this.onInputChange.bind(this)}
+                         onInput={this.onInput.bind(this)} onKeyDown={this.onKeydown.bind(this)} onFocus={this.onInputFocus.bind(this)} onChange={this.onInputChange.bind(this)}
                          onBlur={this.onBlur.bind(this)} placeholder={this.props.placeholder} size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
                          readOnly={this.props.readonly} disabled={this.props.disabled} />);
             

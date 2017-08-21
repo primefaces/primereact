@@ -95,9 +95,9 @@ export class AutoCompleteDemo extends Component {
                     <h3>Multiple</h3>
                     <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple.bind(this)}
                         minLength={1} placeholder="Countries" field="name" multiple={true} onChange={this.onCountriesValueChange.bind(this)} />
-                    {Array.isArray(this.state.countries) && <ul>
+                    <ul>
                         {this.state.countries && this.state.countries.map((c, index) => <li key={index}>{c.name}</li>)}
-                    </ul>}
+                    </ul>
                 </div>
 
                 <AutoCompleteDoc />
