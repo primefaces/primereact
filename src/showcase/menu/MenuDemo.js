@@ -37,7 +37,7 @@ export class MenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <Menu model={items} popup={true} ref={el=>this.menu=el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
+                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)} iconPos="left"/>
                 </div>
 
                 <MenuDoc/>
@@ -163,7 +163,7 @@ render() {
                         <CodeHighlight className="language-markup">
                             {`
 <Menu model={items} popup={true} ref={el=>this.menu=el} />
-<Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
+<Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}  iconPos="left"/>
 
 `}
                         </CodeHighlight>
@@ -347,7 +347,7 @@ export class MenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <Menu model={items} popup={true} ref={el=>this.menu=el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
+                    <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)} iconPos="left"/>
                 </div>
 
                 <MenuDoc/>
