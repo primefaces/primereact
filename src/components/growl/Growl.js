@@ -77,7 +77,7 @@ export class Growl extends Component {
             });
 
             var iconClassName = classNames('ui-growl-image fa fa-2x', {
-                'fa-info': severity === 'info',
+                'fa-info-circle': severity === 'info',
                 'fa-warning': severity === 'warn',
                 'fa-close': severity === 'error',
                 'fa-check': severity === 'success'

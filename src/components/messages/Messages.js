@@ -51,7 +51,7 @@ export class Messages extends Component {
             });
 
             var icon = classNames('ui-messages-icon fa fa-fw fa-2x', {
-                'fa-info': severity === 'info',
+                'fa-info-circle': severity === 'info',
                 'fa-warning': severity === 'warn',
                 'fa-close': severity === 'error',
                 'fa-check': severity === 'success',
