@@ -63,7 +63,6 @@ export class FileUpload extends Component {
         this.state = {files:[], msgs: []};
         this.upload = this.upload.bind(this);
         this.clear = this.clear.bind(this);
-        this.onChooseClick = this.onChooseClick.bind(this);
         this.onFileSelect = this.onFileSelect.bind(this);
         this.onDragEnter = this.onDragEnter.bind(this);
         this.onDragOver = this.onDragOver.bind(this);
@@ -95,11 +94,6 @@ export class FileUpload extends Component {
         i = Math.floor(Math.log(bytes) / Math.log(k));
         
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    }
-
-    onChooseClick(event) {
-        this.fileInput.value = null;
-        this.fileInput.click();
     }
 
     onFileSelect(event) {
@@ -232,8 +226,8 @@ export class FileUpload extends Component {
 
     render() {
         var className = classNames('ui-fileupload ui-widget', this.props.className);
-        var chooseButton = <Button label={this.props.chooseLabel} icon="fa-plus" className="ui-fileupload-choose" onClick={this.onChooseClick} disabled={this.props.disabled}>
-                                <input type="file" onChange={this.onFileSelect} multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} ref={(el) => {this.fileInput = el;}}/>
+        var chooseButton = <Button label={this.props.chooseLabel} icon="fa-plus" className="ui-fileupload-choose" disabled={this.props.disabled}>
+                                <input type="file" onChange={this.onFileSelect} multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}/>
                             </Button>;
 
         if(!this.props.auto) {
