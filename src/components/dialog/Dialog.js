@@ -112,6 +112,11 @@ export class Dialog extends Component {
         }
     }
 
+    show() {
+        this.setState({visible: true});
+        this.onShow();
+    }
+
     center() {
         var elementWidth = DomHandler.getOuterWidth(this.container);
         var elementHeight = DomHandler.getOuterHeight(this.container);
