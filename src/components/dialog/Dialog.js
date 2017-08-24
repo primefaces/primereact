@@ -26,7 +26,7 @@ export class Dialog extends Component {
         width: PropTypes.string,
         height: PropTypes.string,
         modal: PropTypes.bool,
-        onHide: PropTypes.func,
+        onHide: PropTypes.func.isRequired,
         onShow: PropTypes.func,
         draggable: PropTypes.bool
     };
@@ -105,9 +105,7 @@ export class Dialog extends Component {
     hide() {
         this.setState({visible:false});
 
-        if(this.props.onHide) {
-            this.props.onHide();
-        }
+        this.props.onHide();        
 
         if(this.props.modal) {
             this.disableModality();
