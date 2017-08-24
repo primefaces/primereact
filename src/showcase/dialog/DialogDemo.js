@@ -38,7 +38,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} onHide={this.onHide}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -69,10 +69,10 @@ import {Dialog} from 'primereact/components/dialog/Dialog';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Dialog is used as a container and visibility is controlled with visible property.</p>
+            <p>Dialog is used as a container and visibility is controlled with visible property. "onHide" event is required to update user's state.</p>
 <CodeHighlight className="language-markup">
 {`
-<Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true}>
+<Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -89,10 +89,15 @@ constructor() {
     super();
     this.state = {visible: false};
     this.onClick = this.onClick.bind(this);
+    this.onHide = this.onHide.bind(this);
 }
 
 onClick(event) {
     this.setState({visible: true});
+}
+
+onHide(event) {
+    this.setState({visible: false});
 }
 `}
 </CodeHighlight>
@@ -106,7 +111,7 @@ let footer = <div>
                 <Button label="No" icon="fa-close" />
             </div>;
 
-<Dialog header="Header Text" footer={footer} visible={this.state.visible} width="350px" modal={true}>
+<Dialog header="Header Text" footer={footer} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
 </Dialog>
 
 `}
@@ -202,7 +207,7 @@ let footer = <div>
                         <tr>
                             <td>onHide</td>
                             <td>event: Event object</td>
-                            <td>Callback to invoke when dialog is hidden.</td>
+                            <td>Callback to invoke when dialog is hidden (Required).</td>
                         </tr>
                         <tr>
                             <td>onShow</td>
@@ -304,7 +309,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} onHide={this.onHide}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
