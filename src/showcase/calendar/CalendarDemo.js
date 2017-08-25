@@ -144,7 +144,7 @@ export class CalendarDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Calendar} from 'primereact/components/calendar/Calendar';
 
@@ -153,13 +153,13 @@ import {Calendar} from 'primereact/components/calendar/Calendar';
 
             <h3>Getting Started</h3>
             <p>Calendar requires an onChange event to provide the selected value.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Calendar tabindex="0" onChange={this.onChangeBasic}></Calendar>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -177,7 +177,7 @@ onChangeBasic(e) {
             <h3>Popup and Inline</h3>
             <p>Calendar is displayed in a popup by default and inline property needs to be enabled for inline mode.</p>
                
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html jsx">
 {`
 <Calendar inline="true" onChange={this.onChangeInline}></Calendar>
 
@@ -187,7 +187,7 @@ onChangeBasic(e) {
             <h3>DateFormat</h3>
             <p>Default date format is mm/dd/yy, to customize this use dateFormat property.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html jsx">
 {`
 <Calendar dateFormat="dd/mm/yy" onChange={this.onChange}></Calendar>
 
@@ -218,7 +218,7 @@ onChangeBasic(e) {
             <h3>Time</h3>
             <p>TimePicker is enabled with showTime property and 24 (default) or 12 hour mode is configured using hourFormat option.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html jsx">
 {`
 <Calendar showTime="true" hourFormat="12" onChange={this.onChangeTime}></Calendar>
 <Calendar showTime="true" hourFormat="24" onChange={this.onChangeTime}></Calendar>
@@ -230,7 +230,7 @@ onChangeBasic(e) {
             <p>To disable entering dates manually, set readonlyInput to true and to restrict selectable dates use minDate
                 and maxDate options.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html jsx">
 {`
 <Calendar minDate={this.minDate} maxDate={this.maxDate} readonlyInput="true" onChange={this.onChangeRestrict}>
 
@@ -240,14 +240,14 @@ onChangeBasic(e) {
             <h3>Localization</h3>
             <p>Localization for different languages and formats is defined by binding the locale settings object to the locale property. Following is the default values for English.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html jsx">
 {`
 <Calendar locale={es} dateFormat="dd/mm/yy" onChange={this.onChangeSpanish}></Calendar>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="jsx">
 {`
 var es = {
     firstDayOfWeek: 1,
@@ -547,7 +547,7 @@ var es = {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class CalendarDemo extends Component {
 
