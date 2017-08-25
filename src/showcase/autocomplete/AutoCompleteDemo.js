@@ -114,7 +114,7 @@ class AutoCompleteDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
 
@@ -123,14 +123,14 @@ import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
 
                         <h3>Getting Started</h3>
                         <p>AutoComplete requires a list of suggestions and a completeMethod to query for the results.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html javascript">
                             {`
 <AutoComplete value={this.state.brand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands.bind(this)} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 constructor() {
     super();
@@ -392,7 +392,7 @@ render() {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="jsx">
                             {`
 export class AutoCompleteDemo extends Component {
 
@@ -445,7 +445,8 @@ export class AutoCompleteDemo extends Component {
             return;
         }
 
-        return (<div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
+        return (
+        <div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
             <img alt={brand} src={\`showcase/resources/demo/images/car/\${brand}.png\`} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
             <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
         </div>)
