@@ -1,27 +1,45 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import highlight from 'highlight.js';
+import './CodeHighlight.css'
+import classNames from 'classnames';
 
 export class CodeHighlight extends Component {
-
     static defaultProps = {
-        className: null
-    }
-    
+        className:null,
+        style: null
+    };
+
     static propTypes = {
-        className: PropTypes.string
-    }
+        className: PropTypes.string,
+        style: PropTypes.object
+    };
 
     componentDidMount() {
-        window.Prism.highlightElement(this.code);
+        this.highlightCode();
+    }
+
+    componentDidUpdate() {
+        highlight.initHighlighting.called = false;
+        this.highlightCode();
+    }
+
+    highlightCode() {
+        const domNode = ReactDOM.findDOMNode(this.code);
+        highlight.highlightBlock(domNode);
     }
 
     render() {
-        return (
-            <pre>
-                <code ref={(el) => this.code = el} className={this.props.className}>
-                    {this.props.children}
-                </code>
-            </pre>
-        );
+
+        let codeClass=classNames("hljs ",this.props.className);
+
+        return <pre style={this.props.style}>
+            <code ref={el=>this.code=el} className={codeClass}>
+                {this.props.children}
+            </code>
+        </pre>;
+
+
     }
 }
