@@ -47,7 +47,7 @@ class BreadCrumbDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {Breadcrumb} from 'primereact/components/breadcrumb/Breadcrumb';
 
@@ -55,7 +55,7 @@ import {Breadcrumb} from 'primereact/components/breadcrumb/Breadcrumb';
 
                         <h3>Getting Started</h3>
                         <p>Component is defined using the Password element .</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html javascript">
                             {`
 <BreadCrumb model={items}/>
 
@@ -146,7 +146,7 @@ import {Breadcrumb} from 'primereact/components/breadcrumb/Breadcrumb';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class BreadcrumbDemo extends Component {
 
