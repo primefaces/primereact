@@ -77,7 +77,7 @@ export class AccordionDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
 
@@ -86,7 +86,7 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
 
             <h3>Getting Started</h3>
             <p>Accordion element consists of one or more p-accordionTab elements. Title of the tab is defined using header attribute.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html javascript">
 {`
 <Accordion>
     <AccordionTab header="Godfather I">
@@ -115,7 +115,7 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
 
              <h3>Multiple</h3>
             <p>By default only one tab at a time can be active, enabling multiple property changes this behavior to allow multiple tabs be active at the same time.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html javascript">
 {`
 <Accordion multiple={true}>
     <AccordionTab header="Godfather I">
@@ -254,7 +254,7 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class AccordionDemo extends Component {
         
