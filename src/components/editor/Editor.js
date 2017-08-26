@@ -93,7 +93,7 @@ export class Editor extends Component {
             this.quill.setSelection(sel);
 
             if(this.value === '' || this.value === null) {
-                this.editorElement.children[0].innerHTML = null;
+                this.editorElement.children[0].innerHTML = '';
             }
         }
     }
