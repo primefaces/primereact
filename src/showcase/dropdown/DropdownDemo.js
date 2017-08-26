@@ -8,7 +8,7 @@ export class DropdownDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {city: null, car: null, car2: 'BMW'};
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
@@ -44,7 +44,6 @@ export class DropdownDemo extends Component {
 
     render() {
         var cities = [
-            {label: 'Select City', value: null},
             {label: 'New York', value: 'New York'},
             {label: 'Rome', value: 'Rome'},
             {label: 'London', value: 'London'},
@@ -75,7 +74,7 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
 
                     <h3>Editable</h3>
@@ -114,41 +113,7 @@ import {Dropdown} from 'primereact/components/dropdown/Dropdown';
                         <p>Dropdown requires a collection of options with label-value pairs and an onChange event to provide the selected value.</p>
                         <CodeHighlight className="language-markup">
                             {`
-<Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>
-
-`}
-                        </CodeHighlight>
-
-                        <CodeHighlight className="language-javascript">
-                            {`
-constructor() {
-    super();
-    this.state = {cities: []};
-    this.onCityChange = this.onCityChange.bind(this);
-}
-
-onCityChange(e) {
-    var selectedCities = [...this.state.cities];
-    if(e.checked)
-        selectedCities.push(e.value);
-    else
-        selectedCities.splice(selectedCities.indexOf(e.value), 1);
-
-    this.setState({cities: selectedCities});
-}
-
-render() {
-    var cities = [
-        {label: 'Select City', value: null},
-        {label: 'New York', value: 'New York'},
-        {label: 'Rome', value: 'Rome'},
-        {label: 'London', value: 'London'},
-        {label: 'Istanbul', value: 'Istanbul'},
-        {label: 'Paris', value: 'Paris'},
-    ];
-
-    return <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>;
-}
+<Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
 
 `}
                         </CodeHighlight>
@@ -158,7 +123,7 @@ render() {
                             label of the SelectItem and filterBy property is available to choose one or more properties of the SelectItem API.</p>
                         <CodeHighlight className="language-markup">
                             {`
-<Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value"/>
+<Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" placeholder="Select a Car"/>
 
 `}
                         </CodeHighlight>
@@ -167,7 +132,7 @@ render() {
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate fucntion that gets the SelectItem as a property and returns the content.</p>
                         <CodeHighlight className="language-markup">
                             {`
-<Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}}/>
+<Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}} placeholder="Select a Car"/>
 
 `}
                         </CodeHighlight>
@@ -177,7 +142,7 @@ render() {
 
 constructor() {
     super();
-    this.state = {};
+    this.state = {car: null};
     this.onCarChange = this.onCarChange.bind(this);
 }
 
@@ -203,7 +168,6 @@ carTemplate(option) {
 
 render() {
     var cars = [
-        {label: 'Select Car', value: null},
         {label: 'Audi', value: 'Audi'},
         {label: 'BMW', value: 'BMW'},
         {label: 'Fiat', value: 'Fiat'},
@@ -215,7 +179,7 @@ render() {
         {label: 'Volvo', value: 'Volvo'}
     ];
 
-    return <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}}/>;
+    return <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}} placeholder="Select a Car"/>;
 }
 
 `}
@@ -264,22 +228,22 @@ render() {
                                     <td>Inline style of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>className</td>
+                                    <td>panelStyle</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the overlay panel element.</td>
+                                </tr>
+                                <tr>
+                                    <td>styleClass</td>
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Style class of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>autoWidth</td>
-                                    <td>boolean</td>
-                                    <td>true</td>
-                                    <td>Calculates the width based on options width, set to false for custom width.</td>
-                                </tr>
-                                <tr>
-                                    <td>itemTemplate</td>
-                                    <td>function</td>
+                                    <td>panelStyleClass</td>
+                                    <td>string</td>
                                     <td>null</td>
-                                    <td>Function that gets the option and returns the content for it.</td>
+                                    <td>Style class of the overlay panel element.</td>
                                 </tr>
                                 <tr>
                                     <td>filter</td>
@@ -300,16 +264,64 @@ render() {
                                     <td>Placeholder text to show when filter input is empty.</td>
                                 </tr>
                                 <tr>
+                                    <td>autoWidth</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Calculates the width based on options width, set to false for custom width.</td>
+                                </tr>
+                                <tr>
+                                    <td>required</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the component should be disabled.</td>
+                                </tr>
+                                <tr>
                                     <td>editable</td>
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>When present, custom value instead of predefined options can be entered using the editable input field.</td>
                                 </tr>
                                 <tr>
+                                    <td>appendTo</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabindex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
                                     <td>placeholder</td>
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Default text to display when no option is selected.</td>
+                                </tr>
+                                <tr>
+                                    <td>dataKey</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>A property to uniquely identify a value in options.</td>
+                                </tr>
+                                <tr>
+                                    <td>lazy</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>When enabled, creates the dom for options when overlay panel gets visible.</td>
+                                </tr>
+                                <tr>
+                                    <td>autofocus</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the component should automatically get focus on load.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -407,7 +419,7 @@ export class DropdownDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {city: null, car: null, car2: 'BMW'};
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
@@ -443,7 +455,6 @@ export class DropdownDemo extends Component {
 
     render() {
         var cities = [
-            {label: 'Select City', value: null},
             {label: 'New York', value: 'New York'},
             {label: 'Rome', value: 'Rome'},
             {label: 'London', value: 'London'},
@@ -474,7 +485,7 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}}/>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
 
                     <h3>Editable</h3>
