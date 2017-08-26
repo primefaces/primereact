@@ -148,22 +148,52 @@ let footer = <div>
                             <td>Footer content of the dialog.</td>
                         </tr>
                         <tr>
-                            <td>visible</td>
+                            <td>draggable</td>
                             <td>boolean</td>
-                            <td>false</td>
-                            <td>Specifies the visibility of the dialog.</td>
+                            <td>true</td>
+                            <td>Enables dragging to change the position using header.</td>
+                        </tr>
+                        <tr>
+                            <td>resizable</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Enables resizing of the content.</td>
+                        </tr>
+                        <tr>
+                            <td>minWidth</td>
+                            <td>number</td>
+                            <td>150</td>
+                            <td>Minimum width of a resizable dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>minHeight</td>
+                            <td>number</td>
+                            <td>150</td>
+                            <td>Minimum width of a resizable dialog.</td>
                         </tr>
                         <tr>
                             <td>width</td>
-                            <td>string</td>
-                            <td>auto</td>
+                            <td>int</td>
+                            <td>300</td>
                             <td>Width of the dialog.</td>
                         </tr>
                         <tr>
                             <td>height</td>
-                            <td>string</td>
+                            <td>int</td>
                             <td>auto</td>
                             <td>Height of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>contentStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Style of the content section.</td>
+                        </tr>
+                        <tr>
+                            <td>visible</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Specifies the visibility of the dialog.</td>
                         </tr>
                         <tr>
                             <td>modal</td>
@@ -171,23 +201,71 @@ let footer = <div>
                             <td>false</td>
                             <td>Defines if background should be blocked when dialog is displayed.</td>
                         </tr>
-                         <tr>
-                            <td>draggable</td>
+                        <tr>
+                            <td>closeOnEscape</td>
                             <td>boolean</td>
                             <td>true</td>
-                            <td>Enables dragging to change the position using header.</td>
+                            <td>Specifices if pressing escape key should hide the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>dismissableMask</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Specifices if clicking the modal background should hide the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>rtl</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled dialog is displayed in RTL direction.</td>
+                        </tr>
+                        <tr>
+                            <td>closable</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Adds a close icon to the header to hide the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>responsive</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>In responsive mode, dialog adjusts itself to screen width.</td>
+                        </tr>
+                        <tr>
+                            <td>breakpoint</td>
+                            <td>number</td>
+                            <td>640</td>
+                            <td>Maximum screen width to display the dialog with 100% width in responsive mode.</td>
                         </tr>
                         <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Inline style of the element.</td>
+                            <td>Inline style of the component.</td>
                         </tr>
                         <tr>
                             <td>className</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Style class of the element.</td>
+                            <td>Style class of the component.</td>
+                        </tr>
+                        <tr>
+                            <td>showHeader</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show the header or not.</td>
+                        </tr>
+                        <tr>
+                            <td>positionLeft</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Left coordinate value of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>positionTop</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Top coordinate value of the dialog.</td>
                         </tr>
                     </tbody>
                 </table>
