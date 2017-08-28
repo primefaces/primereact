@@ -66,7 +66,8 @@ export class DataTable extends Component {
         onRowUnselect: null,
         onRowExpand: null,
         onRowCollapse: null,
-        onContextMenuSelect: null
+        onContextMenuSelect: null,
+        reorderableColumns: false
     }
 
     static propTypes = {
@@ -125,7 +126,8 @@ export class DataTable extends Component {
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
-        onContextMenuSelect: PropTypes.func
+        onContextMenuSelect: PropTypes.func,
+        reorderableColumns: PropTypes.bool
     };
 
     constructor(props) {
@@ -138,12 +140,32 @@ export class DataTable extends Component {
             multiSortMeta: props.multiSortMeta,
             filters: props.filters
         };
-
+        this.columns = React.Children.toArray(this.props.children) || [];
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
         this.onFilter = this.onFilter.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
         this.onHeaderCheckboxClick = this.onHeaderCheckboxClick.bind(this);
+        this.onHeaderMousedown = this.onHeaderMousedown.bind(this);
+        this.onColumnDragleave = this.onColumnDragleave.bind(this);
+        this.onColumnDragStart = this.onColumnDragStart.bind(this);
+        this.onColumnDragover = this.onColumnDragover.bind(this);
+        this.onColumnDrop = this.onColumnDrop.bind(this); 
+    }
+
+    onHeaderMousedown(event, header) {
+        if(this.columnResizing) return;
+
+        if(this.props.reorderableColumns) {
+            event.originalEvent.target.draggable = true;
+        }
+    }
+
+    initColumnReordering() {
+        this.reorderIndicatorUp = DomHandler.findSingle(this.container, 'span.ui-datatable-reorder-indicator-up');
+        this.reorderIndicatorDown = DomHandler.findSingle(this.container, 'span.ui-datatable-reorder-indicator-down');
+        this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
+        this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
     }
 
     onPageChange(event) {
@@ -310,10 +332,10 @@ export class DataTable extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(this.props.lazy && nextProps.value === this.props.value)
+        if(!this.dropped && this.props.lazy && nextProps.value === this.props.value)
             return false;
         else
-            return true;
+            return true;  
     }
 
     componentDidMount() {
@@ -329,6 +351,12 @@ export class DataTable extends Component {
     }
 
     componentDidUpdate() {
+        this.dropped = false;
+
+        if (this.props.reorderableColumns) {
+            this.initColumnReordering();
+        }
+        
         if(this.props.resizableColumns) {
             this.fixColumnWidths();
         }
@@ -341,7 +369,8 @@ export class DataTable extends Component {
             sortField: props.sortField||this.state.sortField,
             sortOrder: props.sortOrder||this.state.sortOrder,
             multiSortMeta: props.multiSortMeta||this.state.multiSortMeta,
-            filters: props.filters||this.state.filters
+            filters: props.filters||this.state.filters,
+            children: this.props.children
         });
     }
 
@@ -453,6 +482,106 @@ export class DataTable extends Component {
         DomHandler.removeClass(this.container, 'ui-unselectable-text');
 
         this.unbindColumnResizeEvents();
+    }
+
+    onColumnDragStart(event) {
+        if (this.columnResizing) {
+            event.preventDefault();
+            return;
+        }
+        this.draggedColumn = this.findParentHeader(event.target);
+        event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
+        this.documentColumnDragoverListener = document.addEventListener('dragover', this.onColumnDragover.bind(this));
+    }
+    
+    onColumnDragover(event) {
+        let dropHeader = this.findParentHeader(event.target);
+        if(this.props.reorderableColumns && this.draggedColumn && dropHeader) {
+            event.preventDefault();
+            let container = this.container;
+            let containerOffset = DomHandler.getOffset(container);
+            let dropHeaderOffset = DomHandler.getOffset(dropHeader);
+            
+            if(this.draggedColumn != dropHeader) {
+                let targetLeft =  dropHeaderOffset.left - containerOffset.left;
+                let targetTop =  containerOffset.top - dropHeaderOffset.top;
+                let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
+                
+                this.reorderIndicatorUp.style.top = dropHeaderOffset.top - containerOffset.top - (this.iconHeight - 1) + 'px';
+                this.reorderIndicatorDown.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
+
+                if(event.pageX > columnCenter) {
+                    this.reorderIndicatorUp.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2))+ 'px';
+                    this.dropPosition = 1;
+                }
+                else {
+                    this.reorderIndicatorUp.style.left = (targetLeft - Math.ceil(this.iconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft - Math.ceil(this.iconWidth / 2))+ 'px';
+                    this.dropPosition = -1;
+                }
+                                
+                this.reorderIndicatorUp.style.display = 'block';
+                this.reorderIndicatorDown.style.display = 'block';
+            }
+            else {
+                event.dataTransfer.dropEffect = 'none';
+            }
+        }
+    }
+    
+    onColumnDragleave = (event) => {
+        if(this.props.reorderableColumns && this.draggedColumn) {            
+            event.preventDefault();
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+            window.document.removeEventListener('dragover', this.documentColumnDragoverListener);
+        }
+    }
+    
+    onColumnDrop(event) {
+        event.preventDefault();
+        if(this.draggedColumn) {
+             let dragIndex = DomHandler.index(this.draggedColumn);
+            let dropIndex = DomHandler.index(this.findParentHeader(event.target));
+            let allowDrop = (dragIndex != dropIndex);
+            if(allowDrop && ((dropIndex - dragIndex == 1 && this.dropPosition === -1) || (dragIndex - dropIndex == 1 && this.dropPosition === 1))) {
+                allowDrop = false;
+            }
+        
+            if(allowDrop) {
+                this.columns.splice(dropIndex, 0, this.columns.splice(dragIndex, 1)[0]);
+                this.setState({children: this.columns});
+                this.dropped = true;
+                // this.onColReorder.emit({
+                //     dragIndex: dragIndex,
+                //     dropIndex: dropIndex,
+                //     columns: columns
+                // });
+            }
+            
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+            this.draggedColumn.draggable = false;
+            this.draggedColumn = null;
+            this.dropPosition = null;
+        }
+
+        window.document.removeEventListener('dragover', this.documentColumnDragoverListener);        
+    }
+
+    findParentHeader(element) {
+        if(element.nodeName == 'TH') {
+            return element;
+        }
+        else {
+            let parent = element.parentElement;
+            while(parent.nodeName != 'TH') {
+                parent = parent.parentElement;
+                if(!parent) break;
+            }
+            return parent;
+        }
     }
 
     bindColumnResizeEvents() {
@@ -647,17 +776,18 @@ export class DataTable extends Component {
     createTableHeader(columns) {
         return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
-                            onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}>
+                            onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()} onHeaderMousedown={this.onHeaderMousedown}
+                            onColumnDragStart={this.onColumnDragStart} onColumnDragleave={this.onColumnDragleave} onColumnDrop={this.onColumnDrop} reorderableColumns={this.props.reorderableColumns}>
                             {columns}
                           </TableHeader>;
     }
 
     createTableBody(value, columns) {
-        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
+                        onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage}
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect}>
                         {columns}
                 </TableBody>;
@@ -702,9 +832,9 @@ export class DataTable extends Component {
             </div>;
         }
         else {
-            let tableHeader = this.createTableHeader(this.props.children);
-            let tableBody = this.createTableBody(value, this.props.children);
-            let tableFooter = this.createTableFooter(this.props.children);
+            let tableHeader = this.createTableHeader(this.columns);
+            let tableBody = this.createTableBody(value, this.columns);
+            let tableFooter = this.createTableFooter(this.columns);
 
             tableContent = <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
@@ -723,6 +853,8 @@ export class DataTable extends Component {
                 {paginatorBottom}
                 {footerFacet}
                 {resizeHelper}
+                <span className="fa fa-arrow-down ui-datatable-reorder-indicator-up" style={{position: "absolute", display: "none"}} ref={(el) => {this.reorderIndicatorUp = el;}}></span>
+                <span className="fa fa-arrow-up ui-datatable-reorder-indicator-down" style={{position: "absolute", display: "none"}} ref={(el) => {this.reorderIndicatorDown = el;}}></span>
             </div>
         );
     }

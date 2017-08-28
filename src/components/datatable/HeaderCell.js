@@ -39,12 +39,22 @@ export class HeaderCell extends Component {
     }
 
     onMouseDown(event) {
-        if(this.props.resizableColumns && this.props.onColumnResizeStart) {
+        if (this.props.reorderableColumns && event.currentTarget.nodeName == "TH") {
+            this.props.onHeaderMousedown({
+                originalEvent: event,
+                columnEl: event.target.parentElement
+            });
+            return;
+        }
+
+        if (this.props.resizableColumns && this.props.onColumnResizeStart) {
             this.props.onColumnResizeStart({
                 originalEvent: event,
                 columnEl: event.target.parentElement
             });
         }
+
+        
     }
 
     getMultiSortMetaData() {
@@ -94,8 +104,14 @@ export class HeaderCell extends Component {
         }
 
         return (
-            <th className={className} style={this.props.style} onClick={this.onClick} 
-                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
+            <th 
+                onMouseDown={this.onMouseDown} className={className} style={this.props.style} onClick={this.onClick} 
+                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}
+
+                onDragLeave={this.props.onColumnDragleave}
+                onDragStart={this.props.onColumnDragStart} 
+                onDrop={this.props.onColumnDrop}
+                >
                 {resizer}
                 <span className="ui-column-title">{this.props.header}</span>
                 {sortIconElement}

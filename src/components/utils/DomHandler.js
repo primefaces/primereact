@@ -1,5 +1,15 @@
 export default class DomHandler {
     
+    static index(element) {
+        let children = element.parentNode.childNodes;
+        let num = 0;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i] == element) return num;
+            if (children[i].nodeType == 1) num++;
+        }
+        return -1;
+    }
+
     static innerWidth(el) {
         let width = el.offsetWidth;
         let style = getComputedStyle(el);
