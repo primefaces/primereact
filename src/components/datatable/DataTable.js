@@ -328,21 +328,19 @@ export class DataTable extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if(this.props.resizableColumns) {
             this.fixColumnWidths();
         }
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({
-            first: props.first != null ? props.first : this.state.first,
-            rows: props.rows != null ? props.rows : this.state.rows,
-            sortField: props.sortField||this.state.sortField,
-            sortOrder: props.sortOrder||this.state.sortOrder,
-            multiSortMeta: props.multiSortMeta||this.state.multiSortMeta,
-            filters: props.filters||this.state.filters
-        });
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.first !== null) { this.setState({first: nextProps.first}) }
+        if(nextProps.rows !== null) { this.setState({rows: nextProps.rows}) }
+        if(nextProps.sortField) { this.setState({sortField: nextProps.sortField}) }
+        if(nextProps.sortOrder) { this.setState({sortOrder: nextProps.sortOrder}) }
+        if(nextProps.multiSortMeta) { this.setState({multiSortMeta: nextProps.multiSortMeta}) }
+        if(nextProps.filters) { this.setState({filters: nextProps.filters}) }
     }
 
     fixColumnWidths() {
