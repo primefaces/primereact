@@ -10,7 +10,7 @@ export class EditorDemo extends Component {
     constructor() {
         super();
         this.state = {
-            text1 :'<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>',
+            text1 :'<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
             text2 : ''
         };
     }
@@ -245,7 +245,7 @@ export class EditorDemo extends Component {
     constructor() {
         super();
         this.state = {
-            text1 :'<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>',
+            text1 :'<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
             text2 : ''
         };
     }

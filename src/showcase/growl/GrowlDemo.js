@@ -35,7 +35,7 @@ export class GrowlDemo extends Component {
 
     showMultiple() {
         this.setState({messages:[
-            {severity:'info', summary:'Message 1', detail:'PrimeNG rocks'},
+            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
         ]});
@@ -148,7 +148,7 @@ showError() {
 
 showMultiple() {
     this.setState({messages:[
-        {severity:'info', summary:'Message 1', detail:'PrimeNG rocks'},
+        {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
     ]});
@@ -321,7 +321,7 @@ export class GrowlDemo extends Component {
 
     showMultiple() {
         this.setState({messages:[
-            {severity:'info', summary:'Message 1', detail:'PrimeNG rocks'},
+            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
         ]});
