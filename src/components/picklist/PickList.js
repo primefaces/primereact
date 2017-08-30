@@ -160,7 +160,7 @@ export class PickList extends Component {
         }
     }
 
-    moveRight(targetListElement) {
+    moveRight(targetListElement, event) {
         if(this.state.selectedItemsSource && this.state.selectedItemsSource.length) {
             var _target = [...this.state.target],
                 _source = [...this.state.source];
@@ -183,7 +183,7 @@ export class PickList extends Component {
         }
     }
 
-    moveAllRight() {
+    moveAllRight(event) {
         if(this.state.source) {
             var _target = [...this.state.target],
                 _source = [...this.state.source];
@@ -204,7 +204,7 @@ export class PickList extends Component {
         }
     }
 
-    moveLeft(sourceListElement) {
+    moveLeft(sourceListElement, event) {
         if(this.state.selectedItemsTarget && this.state.selectedItemsTarget.length) {
             var _target = [...this.state.target],
                 _source = [...this.state.source];
@@ -227,7 +227,7 @@ export class PickList extends Component {
         }
     }
 
-    moveAllLeft() {
+    moveAllLeft(event) {
         if(this.state.target) {
             var _target = [...this.state.target],
                 _source = [...this.state.source];
@@ -377,10 +377,10 @@ export class PickList extends Component {
             </div>
         );
 
-        var moveRightButton = <Button type="button" icon="fa-angle-right" onClick={(e) => this.moveRight(this.targetlist)}></Button>,
-            moveAllRightButton = <Button type="button" icon="fa-angle-double-right" onClick={(e) => this.moveAllRight()}></Button>,
-            moveLeftButton = <Button type="button" icon="fa-angle-left" onClick={(e) => this.moveLeft(this.sourcelist)}></Button>,
-            moveAllLeftButton = <Button type="button" icon="fa-angle-double-left" onClick={(e) => this.moveAllLeft()}></Button>,
+        var moveRightButton = <Button type="button" icon="fa-angle-right" onClick={(e) => this.moveRight(this.targetlist, e)}></Button>,
+            moveAllRightButton = <Button type="button" icon="fa-angle-double-right" onClick={(e) => this.moveAllRight(e)}></Button>,
+            moveLeftButton = <Button type="button" icon="fa-angle-left" onClick={(e) => this.moveLeft(this.sourcelist, e)}></Button>,
+            moveAllLeftButton = <Button type="button" icon="fa-angle-double-left" onClick={(e) => this.moveAllLeft(e)}></Button>,
         moveButtonsContent = (
             <div className="ui-picklist-buttons">
                 <div className="ui-picklist-buttons-cell">
