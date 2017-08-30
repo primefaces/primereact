@@ -70,7 +70,7 @@ export class DataScrollerInlineDemo extends Component {
 
                     <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More"/>
 
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
@@ -175,7 +175,7 @@ export class DataScrollerInlineDemo extends Component {
 
                     <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More"/>
 
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
                                     <div className="ui-grid-row">
