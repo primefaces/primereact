@@ -52,7 +52,7 @@ export class DataGridDemo extends Component {
 
                     <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header='List of Cars'/>
 
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
@@ -358,7 +358,7 @@ export class DataGridDemo extends Component {
                     <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header='List of Cars'/>
 
 
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
                             this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">

@@ -51,7 +51,7 @@ export class DataListDemo extends Component {
     }
 
     render() {
-        let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+        let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
             <div className="ui-g car-item" style={{padding: 0, textAlign: 'center'}}>
                     <div className="ui-g-12">
                         <img src={'showcase/resources/demo/images/car/' + this.state.selectedCar.brand + '.png'} alt={this.state.selectedCar.brand}/>
@@ -376,7 +376,7 @@ export class DataListDemo extends Component {
     }
 
     render() {
-        let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true}>
+        let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
             <div className="ui-g car-item" style={{padding: 0, textAlign: 'center'}}>
                     <div className="ui-g-12">
                         <img src={'showcase/resources/demo/images/car/' + this.state.selectedCar.brand + '.png'} alt={this.state.selectedCar.brand}/>
