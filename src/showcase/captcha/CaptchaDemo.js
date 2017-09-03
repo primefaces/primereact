@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Captcha } from '../../components/captcha/Captcha';
 import { Growl } from '../../components/growl/Growl';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../../components/codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class CaptchaDemo extends Component {
 

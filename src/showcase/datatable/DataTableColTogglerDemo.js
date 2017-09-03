@@ -5,7 +5,7 @@ import {CarService} from '../service/CarService';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class DataTableColTogglerDemo extends Component {
 

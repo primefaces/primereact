@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
 import {Tooltip} from '../../components/tooltip/Tooltip';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class TooltipDemo extends Component {
         

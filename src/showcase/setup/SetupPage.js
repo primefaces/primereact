@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class SetupPage extends Component {
 

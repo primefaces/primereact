@@ -3,7 +3,7 @@ import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Growl } from '../../components/growl/Growl';
 import { CarService } from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
 
 export class DataScrollerInfiniteDemo extends Component {

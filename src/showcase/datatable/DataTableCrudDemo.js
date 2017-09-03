@@ -4,7 +4,7 @@ import {Column} from '../../components/column/Column';
 import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {Button} from "../../components/button/Button";
 import {Dialog} from "../../components/dialog/Dialog";
 import {InputText} from "../../components/inputtext/InputText";

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../../components/codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class AutoCompleteDemo extends Component {
 

@@ -5,7 +5,7 @@ import {CarService} from '../service/CarService';
 import {Button} from '../../components/button/Button';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class DataTableTemplatingDemo extends Component {
 

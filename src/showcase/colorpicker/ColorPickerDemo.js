@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ColorPicker} from '../../components/colorpicker/ColorPicker';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class ColorPickerDemo extends Component {
         

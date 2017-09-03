@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {SplitButton} from '../../components/splitbutton/SplitButton';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class SplitButtonDemo extends Component {
         

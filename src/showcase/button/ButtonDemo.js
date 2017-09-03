@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class ButtonDemo extends Component {
         
@@ -70,7 +70,7 @@ import {Button} from 'primereact/components/button/Button';
 
                         <h3>Getting Started</h3>
                         <p>Button is created using the Button element.</p>    
-<CodeHighlight className="jsx">
+<CodeHighlight className="html">
 {`
 <Button />
 
@@ -79,7 +79,7 @@ import {Button} from 'primereact/components/button/Button';
 
                         <h3>Label</h3>
                         <p>Use label property to define the text of the button.</p>    
-<CodeHighlight className="jsx">
+<CodeHighlight className="html">
 {`
 <Button label="Save"/>
 
@@ -89,7 +89,7 @@ import {Button} from 'primereact/components/button/Button';
                         <h3>Icons</h3>
                         <p>Icon on a button is specified with icon attribute and position is customized using iconPos attribute. Default
                         icon position is left. To display only an icon, leave label as undefined.</p>
-<CodeHighlight className="jsx">
+<CodeHighlight className="html">
 {`
 <Button label="Click" icon="fa-check" />
 <Button label="Click" icon="fa-check" iconPos="right"/>
@@ -100,7 +100,7 @@ import {Button} from 'primereact/components/button/Button';
 
                         <h3>Events</h3>
                         <p>Events are defined using standard notation.</p>
-<CodeHighlight className="jsx">
+<CodeHighlight className="html">
 {`
 <Button label="Click" onClick={this.handleClick} />
 
@@ -119,7 +119,7 @@ import {Button} from 'primereact/components/button/Button';
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
-<CodeHighlight className="jsx">
+<CodeHighlight className="html">
 {`
 <Button label="Primary" />
 <Button label="Secondary" className="ui-button-secondary"/>

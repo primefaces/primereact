@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {ProgressBar} from '../../components/progressbar/ProgressBar';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class ProgressBarDemo extends Component {
 

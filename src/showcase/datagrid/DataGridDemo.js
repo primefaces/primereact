@@ -5,7 +5,7 @@ import { Dialog } from '../../components/dialog/Dialog';
 import { Panel } from '../../components/panel/Panel';
 import { CarService } from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class DataGridDemo extends Component {
 

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import { Slider } from '../../components/slider/Slider';
 import { InputText } from '../../components/inputtext/InputText';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class SliderDemo extends Component {
 

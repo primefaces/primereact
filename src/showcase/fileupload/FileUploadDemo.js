@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {Growl} from '../../components/growl/Growl';
 import {FileUpload} from '../../components/fileupload/FileUpload';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class FileUploadDemo extends Component {
         

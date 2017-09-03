@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import {Column} from "../../components/column/Column";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../../components/codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class TreeTableDemo extends Component {
 

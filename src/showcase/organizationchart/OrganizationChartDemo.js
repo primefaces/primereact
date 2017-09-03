@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {OrganizationChart} from '../../components/organizationchart/OrganizationChart';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import './OrganizationChartCustomStyle.css';
 
 export class OrganizationChartDemo extends Component {

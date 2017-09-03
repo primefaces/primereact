@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {OrderList} from '../../components/orderlist/OrderList';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class OrderListDemo extends Component {
 

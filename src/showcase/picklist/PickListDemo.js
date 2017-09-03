@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {PickList} from '../../components/picklist/PickList';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class PickListDemo extends Component {
 

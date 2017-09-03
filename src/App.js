@@ -6,7 +6,6 @@ import jQuery from "jquery";
 import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
-import 'prismjs/themes/prism-coy.css';
 import './sass/App.css';
 
 class Home extends Component {
@@ -314,7 +313,6 @@ class AppMenu extends Component {
                             <div>
                                 <Link to="/progressbar">&#9679; ProgressBar</Link>
                                 <Link to="/captcha">&#9679; Captcha</Link>
-                                <Link to="/codehighlight">&#9679; CodeHighlight</Link>
                             </div>
                         </div>
                     </div>

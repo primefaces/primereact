@@ -5,7 +5,7 @@ import {ColumnGroup} from '../../components/columngroup/ColumnGroup';
 import {Row} from '../../components/row/Row';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class DataTableColGroupDemo extends Component {
 

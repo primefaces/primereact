@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {SelectButton} from '../../components/selectbutton/SelectButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class SelectButtonDemo extends Component {
     constructor(props) {

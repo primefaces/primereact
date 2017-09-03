@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {Menubar} from '../../components/menubar/Menubar';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {InputText} from "../../components/inputtext/InputText";
 
 export class MenubarDemo extends Component {

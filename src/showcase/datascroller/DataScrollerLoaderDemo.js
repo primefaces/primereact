@@ -4,7 +4,7 @@ import { Button } from '../../components/button/Button';
 import { Dialog } from '../../components/dialog/Dialog';
 import { CarService } from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../../components/codehighlight/CodeHighlight';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
 
 export class DataScrollerLoaderDemo extends Component {
