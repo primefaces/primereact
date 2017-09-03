@@ -48,8 +48,6 @@ export class DataGridDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-
                     <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header='List of Cars'/>
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
@@ -121,7 +119,7 @@ constructor() {
 }
 
 componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
 }
 
 `}
