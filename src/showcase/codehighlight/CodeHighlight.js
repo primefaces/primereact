@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import highlight from 'highlight.js';
 import 'highlight.js/styles/vs2015.css';
-import classNames from 'classnames';
 
 export class CodeHighlight extends Component {
     
