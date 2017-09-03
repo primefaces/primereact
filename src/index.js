@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'babel-polyfill';
+import 'es6-shim';
 import App from './App';
 import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {AutoCompleteDemo} from './showcase/autocomplete/AutoCompleteDemo';
