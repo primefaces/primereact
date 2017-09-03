@@ -109,7 +109,7 @@ export class ScheduleDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Schedule} from 'primereact/components/schedule/Schedule';
 
@@ -119,14 +119,14 @@ import {Schedule} from 'primereact/components/schedule/Schedule';
             <h3>Getting Started</h3>
             <p>Schedule is based on <a href="http://fullcalendar.io/">FullCalendar</a>. For a complete documentation and samples please refer to the fullcalendar website.
             Events of schedule should be an array and defined using the events property.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Schedule events={this.events}></Schedule>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -488,7 +488,7 @@ render() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class ScheduleDemo extends Component {
 

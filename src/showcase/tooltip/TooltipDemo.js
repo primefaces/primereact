@@ -83,7 +83,7 @@ class TooltipDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Tooltip} from 'primereact/components/tooltip/Tooltip';
 
@@ -93,7 +93,7 @@ import {Tooltip} from 'primereact/components/tooltip/Tooltip';
                         <h3>Getting Started</h3>
                         <p>The "for" attribute is required to display Tooltip. It can be id of an element or selector or array containing ids/selectors.</p>
                         
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Tooltip for="#inputId" title="Enter your username" />
 <InputText id="inputId" />
@@ -104,7 +104,7 @@ import {Tooltip} from 'primereact/components/tooltip/Tooltip';
                         <h3>Position</h3>
                         <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is 
                         specified using tooltipPosition attribute.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" />
 <InputText id="inputId" />
@@ -114,7 +114,7 @@ import {Tooltip} from 'primereact/components/tooltip/Tooltip';
 
                         <h3>Events</h3>
                         <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" tooltipEvent="focus" />
 <InputText id="inputId" />
@@ -124,7 +124,7 @@ import {Tooltip} from 'primereact/components/tooltip/Tooltip';
 
                         <h3>Delay</h3>
                         <p>Tooltip is displayed or hidden instantly by default however you may add delays using showDelay and hideDelay properties which accept a number value in terms of milliseconds.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" tooltipEvent="focus" showDelay={1000} hideDelay={500} />
 <InputText id="inputId" />
@@ -266,7 +266,7 @@ import {Tooltip} from 'primereact/components/tooltip/Tooltip';
                     </TabPanel>
 
                     <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class TooltipDemo extends Component {
         

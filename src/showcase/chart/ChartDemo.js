@@ -28,7 +28,7 @@ class ChartDoc extends Component {
                 <p>Chart component is used to display a chart on page. The classname is UIChart and element tag is p-chart.</p>
 
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Chart} from 'primereact/components/chart/Chart';
 
@@ -127,14 +127,14 @@ import {Chart} from 'primereact/components/chart/Chart';
                         <h3>Data</h3>
                         <p>Data of a chart is provided using a binding to the data property, each type has its own format of data. Here is an example of a line chart.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Chart type="line" data={data} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 render() {
 var data = {
@@ -162,14 +162,14 @@ var data = {
 <p>While a series can be customized per dataset, general chart options are defined with options property. 
     Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js documentation.</p>
 
-    <CodeHighlight className="language-markup">
+    <CodeHighlight className="html">
 {`
 <Chart type="line" data={data} options={options}/>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 render() {
 var data = {

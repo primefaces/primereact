@@ -47,7 +47,7 @@ export class FileUploadDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {FileUpload} from 'primereact/components/fileupload/FileUpload';
 
@@ -56,14 +56,14 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
 
             <h3>Getting Started</h3>
             <p>FileUpload requires a url property as the upload target and a name to identify the files at backend.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
                              accept="image/*"></FileUpload>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -81,7 +81,7 @@ onUpload(event) {
             <h3>Multiple Uploads</h3>
             <p>Only one file can be selected at a time, to allow selecting multiples enable multiple option.</p>
                
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
                                 multiple={true} accept="image/*"></FileUpload>
@@ -97,7 +97,7 @@ onUpload(event) {
 
             <h3>File Size</h3>
             <p>Maximium file size can be restricted using maxFileSize property defined in bytes.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
                                 multiple={true} accept="image/*" maxFileSize={1000000}></FileUpload>
@@ -320,7 +320,7 @@ onUpload(event) {
                      <i className="fa fa-github"></i>
                      <span>View on GitHub</span>
                  </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class FileUploadDemo extends Component {
         

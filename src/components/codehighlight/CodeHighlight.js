@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import highlight from 'highlight.js';
-import './CodeHighlight.css'
+import 'highlight.js/styles/vs2015.css';
 import classNames from 'classnames';
 
 export class CodeHighlight extends Component {
+    
     static defaultProps = {
-        className:null,
+        className: null,
         style: null
     };
 
@@ -31,15 +32,10 @@ export class CodeHighlight extends Component {
     }
 
     render() {
-
-        let codeClass=classNames("hljs ",this.props.className);
-
         return <pre style={this.props.style}>
-            <code ref={el=>this.code=el} className={codeClass}>
-                {this.props.children}
-            </code>
-        </pre>;
-
-
+                <code ref={el=>this.code=el} className={this.props.className}>
+                    {this.props.children}
+                </code>
+               </pre>
     }
 }

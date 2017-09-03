@@ -110,7 +110,7 @@ class PanelMenuDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {PanelMenu} from 'primereact/components/panelmenu/PanelMenu';
 
@@ -120,14 +120,14 @@ import {PanelMenu} from 'primereact/components/panelmenu/PanelMenu';
 
                         <h3>Getting Started</h3>
                         <p>PanelMenu requires nested menuitems as its model.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <PanelMenu model={items} style={{width:'300px'}}/>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 var items=[
     {
@@ -304,7 +304,7 @@ var items=[
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class PanelMenuDemo extends Component {
 

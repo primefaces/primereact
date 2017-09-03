@@ -175,7 +175,7 @@ export class TreeTableDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {TreeTable} from 'primereact/components/treetable/TreeTable';
 
@@ -260,14 +260,14 @@ import {TreeTable} from 'primereact/components/treetable/TreeTable';
                                 </tbody>
                             </table>
                         </div>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <TreeTable value={data} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 
 render() {
@@ -406,14 +406,14 @@ render() {
                             </table>
                         </div>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Column} from 'primereact/components/column/Column';
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Column field="name" header="Name"></Column>
 
@@ -583,7 +583,7 @@ import {Column} from 'primereact/components/column/Column';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
                             {`
 export class TreeTableDemo extends Component {
 

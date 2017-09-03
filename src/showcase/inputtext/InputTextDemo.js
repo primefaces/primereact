@@ -52,7 +52,7 @@ class InputTextDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {InputText} from 'primereact/components/inputtext/InputText';
 
@@ -62,7 +62,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         <h3>Getting Started</h3>
                         <p>Component is defined using the InputText element with standard attributes of an input element.</p>
                         
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputText />
 
@@ -71,7 +71,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 
                         <h3>Controlled Input</h3>
                         <p>InputText is used as a controlled input with value and onChange properties.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputText onChange={(e) => this.setState({value: e.target.value})}/>
 
@@ -109,7 +109,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class InputTextDemo extends Component {
         

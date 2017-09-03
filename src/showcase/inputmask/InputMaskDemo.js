@@ -99,7 +99,7 @@ class InputMaskDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {InputMask} from 'primereact/components/inputmask/InputMask';
 
@@ -111,14 +111,14 @@ import {InputMask} from 'primereact/components/inputmask/InputMask';
 
 </p>
                     
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={this.onChangeBasic}></InputMask>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
         super();
@@ -147,7 +147,7 @@ constructor() {
                     * - Alpha numberic character (A-Z,a-z,0-9)
                 </li>
             </ul>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputMask mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={this.onChangeSerialNumber}></InputMask>
 
@@ -156,7 +156,7 @@ constructor() {
 
             <h3>SlotChar</h3>
             <p>Underscore is the default placeholder for a mask and this can be customized using slotChart option.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputMask mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={this.onChangeDate}></InputMask>
 
@@ -307,7 +307,7 @@ constructor() {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class InputMaskDemo extends Component {
 

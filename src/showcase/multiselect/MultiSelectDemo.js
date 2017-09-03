@@ -57,7 +57,7 @@ export class MultiSelectDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 
@@ -66,14 +66,14 @@ import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 
             <h3>Getting Started</h3>
             <p>MultiSelect requires a value, a list of options and an onChange callback.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <MultiSelect value={this.state.cars} options={cars} onChange={this.onCarChange} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -244,7 +244,7 @@ render() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class MultiSelectDemo extends Component {
         

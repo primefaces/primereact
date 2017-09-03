@@ -45,7 +45,7 @@ export class PanelDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Panel} from 'primereact/components/panel/Panel';
 
@@ -54,7 +54,7 @@ import {Panel} from 'primereact/components/panel/Panel';
 
             <h3>Getting Started</h3>
             <p>Panel is defined with Panel element.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Panel header="Godfather I">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -68,7 +68,7 @@ import {Panel} from 'primereact/components/panel/Panel';
 
              <h3>Toggleable</h3>
             <p>Content of the panel can be expanded and collapsed using toggleable option, default state is defined with collapsed option.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -204,7 +204,7 @@ import {Panel} from 'primereact/components/panel/Panel';
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class PanelDemo extends Component {
         

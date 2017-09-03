@@ -109,7 +109,7 @@ export class DataScrollerInlineDoc extends Component {
             <div className="content-section source">
                 <TabView>
                     <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class DataScrollerInlineDemo extends Component {
 

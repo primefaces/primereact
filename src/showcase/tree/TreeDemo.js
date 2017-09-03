@@ -139,7 +139,7 @@ export class TreeDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Tree} from 'primereact/components/tree/Tree';
 
@@ -242,14 +242,14 @@ import {Tree} from 'primereact/components/tree/Tree';
                     </tbody>
                 </table>
             </div>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Tree value={data} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 
 render() {
@@ -310,14 +310,14 @@ render() {
 
             <h3>Horizontal Orientation</h3>
             <p>Horizontal mode is the alternative option for orientation.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Tree value={horizontalTreeData} layout="horizontal" />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 
 render() {
@@ -511,7 +511,7 @@ render() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class TreeDemo extends Component {
 

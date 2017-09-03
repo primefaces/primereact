@@ -64,7 +64,7 @@ class SpinnerDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Spinner} from 'primereact/components/spinner/Spinner';
 
@@ -74,14 +74,14 @@ import {Spinner} from 'primereact/components/spinner/Spinner';
             <h3>Getting Started</h3>
             <p>Slider is used as a controlled input with dragging of a handle.</p>
                     
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Spinner value={this.state.value} size={30} onChange={this.onChangeBasic} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -99,7 +99,7 @@ onChangeBasic(e) {
 
             <h3>Min-Max</h3>
             <p>Boundaries are specified with min and max attributes.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Spinner value={this.state.value2} size={30} onChange={this.onChangeMinMax} min={0} max={100} />
 
@@ -108,7 +108,7 @@ onChangeBasic(e) {
 
             <h3>Step</h3>
             <p>Step factor is 1 by default and can be customized with step option.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Spinner value={this.state.value3} size={30} onChange={this.onChangeStep} step={0.25} />
 
@@ -222,13 +222,13 @@ onChangeBasic(e) {
                     </tbody>
                 </table>
             </div>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Slider style={{ width: '200px' }} onChange={this.onChangeSlider1} />
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 onChangeSlider1(e) {
     this.setState({ val1: e.value });
@@ -273,7 +273,7 @@ onChangeSlider1(e) {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class SpinnerDemo extends Component {
 

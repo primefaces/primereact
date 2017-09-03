@@ -148,7 +148,7 @@ class InputGroupDoc extends Component {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class InputGroupDemo extends Component {
 

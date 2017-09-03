@@ -54,7 +54,7 @@ class RadioButtonDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
 
@@ -63,7 +63,7 @@ import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
 
                         <h3>Getting Started</h3>
                         <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <RadioButton value="val1" onChange={this.onChange} checked={this.state.checked} />
 <RadioButton value="val2" onChange={this.onChange} checked={this.state.checked} />
@@ -71,7 +71,7 @@ import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -88,7 +88,7 @@ onCityChange(e) {
 
                     <h4>Label</h4>
                     <p>The label attribute provides a label text for the radio button. This label is also clickable and selects value.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <RadioButton label="I accept the terms" onChange={this.onChange} checked={this.state.checked} />
 
@@ -196,7 +196,7 @@ onCityChange(e) {
                         <i className="fa fa-github"></i>
                         <span>View on GitHub</span>
                     </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class RadioButtonDemo extends Component {
         

@@ -47,7 +47,7 @@ export class FieldsetDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Fieldset} from 'primereact/components/fieldset/Fieldset';
 
@@ -56,7 +56,7 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
 
             <h3>Getting Started</h3>
             <p>Fieldset is defined with Fieldset element.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Fieldset legend="Godfather I">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -70,7 +70,7 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
 
              <h3>Toggleable</h3>
             <p>Content of the fieldset can be expanded and collapsed using toggleable option, default state is defined with collapsed option.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Fieldset legend="Godfather I" toggleable={true}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -202,7 +202,7 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class FieldsetDemo extends Component {
         

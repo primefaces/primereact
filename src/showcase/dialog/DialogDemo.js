@@ -61,7 +61,7 @@ export class DialogDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Dialog} from 'primereact/components/dialog/Dialog';
 
@@ -70,7 +70,7 @@ import {Dialog} from 'primereact/components/dialog/Dialog';
 
             <h3>Getting Started</h3>
             <p>Dialog is used as a container and visibility is controlled with visible property. "onHide" event is required to update user's state.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -83,7 +83,7 @@ import {Dialog} from 'primereact/components/dialog/Dialog';
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -104,7 +104,7 @@ onHide(event) {
 
             <h3>Header and Footer</h3>
             <p>Header and Footer sections are defined using properties with the same name that accepts simple strings of JSX for custom content.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 let footer = <div>
                 <Button label="Yes" icon="fa-check" />
@@ -345,7 +345,7 @@ let footer = <div>
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router';

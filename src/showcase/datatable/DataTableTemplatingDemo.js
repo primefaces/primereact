@@ -79,7 +79,7 @@ export class DataTableTemplatingDemoDoc extends Component {
             <div className="content-section source">
                 <TabView>
                     <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import React, { Component } from 'react';
 import {DataTable} from 'primereact/components/datatable/DataTable';

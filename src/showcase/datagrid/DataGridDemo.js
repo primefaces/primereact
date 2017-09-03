@@ -92,7 +92,7 @@ export class DataGridDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {DataGrid} from 'primereact/components/datagrid/DataGrid';
 
@@ -106,13 +106,13 @@ import {DataGrid} from 'primereact/components/datagrid/DataGrid';
                and color properties are used to define an object to be displayed by the datagrid.
                Cars are loaded by a CarService that connects to a server to fetch the cars with a Promise.
             </p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <DataGrid value={this.state.cars}></DataGrid>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -128,7 +128,7 @@ componentDidMount() {
 </CodeHighlight>
 
             <p>Here is a sample DataList that displays a list of cars.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)}></DataGrid>
 
@@ -137,7 +137,7 @@ componentDidMount() {
 
             <h3>Paginator</h3>
             <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <DataGrid value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={20} header="List of Cars"/>
 
@@ -310,7 +310,7 @@ componentDidMount() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class DataGridDemo extends Component {
 

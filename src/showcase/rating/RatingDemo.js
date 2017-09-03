@@ -68,7 +68,7 @@ class RatingDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {Rating} from 'primereact/components/rating/Rating';
 
@@ -77,14 +77,14 @@ import {Rating} from 'primereact/components/rating/Rating';
 
                         <h3>Getting Started</h3>
                         <p>Rating requires onChange method.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <Rating value={this.state.val1} onChange={this.onBasicChange.bind(this)}/>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 constructor() {
     super();
@@ -211,7 +211,7 @@ render() {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class RatingDemo extends Component {
 

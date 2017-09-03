@@ -111,7 +111,7 @@ export class DataScrollerDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {DataScroller} from 'primereact/components/datascroller/DataScroller';
 
@@ -123,13 +123,13 @@ import {DataScroller} from 'primereact/components/datascroller/DataScroller';
                where each item can be accessed using the implicit variable.
             </p>
             <p>Here is a sample DataScroller that displays a list of cars where each load event adds 10 more rows if available.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10}></DataScroller>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -151,7 +151,7 @@ carTemplate(car) {
 
             <h3>Inline</h3>
             <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set inline option to true to enable this mode.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px">
     <Header>
@@ -167,7 +167,7 @@ carTemplate(car) {
              onLazyLoad callback everytime paging happens. To implement lazy loading,
             enable lazy attribute and provide a method callback using onLazyLoad that actually loads the data from a remote datasource. onLazyLoad gets an event object
             that contains information about what to load.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)}>
     <Header>
@@ -177,7 +177,7 @@ carTemplate(car) {
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 loadData(event) {
     //event.first = First row offset
@@ -330,7 +330,7 @@ loadData(event) {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class DataScrollerDemo extends Component {
 

@@ -62,7 +62,7 @@ class SelectButtonDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {SelectButton} from 'primereact/components/selectbutton/SelectButton';
 
@@ -72,14 +72,14 @@ import {SelectButton} from 'primereact/components/selectbutton/SelectButton';
             <h3>Getting Started</h3>
             <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
                     
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <SelectButton value={this.state.option} options={option} onChange={this.onOptionChange}></SelectButton>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor(props) {
     super(props);
@@ -96,7 +96,7 @@ onOptionChange(e) {
 
             <h3>Multiple</h3>
             <p>SelectButton allows selecting only one item by default and setting multiple option enables choosing more than one item. In multiple case, model property should be an array instance that is not null or undefined.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <SelectButton value={this.state.options} options={options} onChange={this.onOptionsChange} multiple={true}></SelectButton>
 
@@ -197,7 +197,7 @@ onOptionChange(e) {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class SelectButtonDemo extends Component {
     constructor(props) {

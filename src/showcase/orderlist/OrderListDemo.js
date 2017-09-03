@@ -76,7 +76,7 @@ export class OrderListDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {OrderList} from 'primereact/components/orderlist/OrderList';
 
@@ -87,13 +87,13 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
             <p>OrderList requires an array as its value and a template for its content where
                each item in the array can be accessed inside the template.
             </p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -110,7 +110,7 @@ onReorderCars(e) {
 
             <h3>DragDrop</h3>
             <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflict with other drag drop events on view.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onReorder={this.onReorderCars.bind(this)}></OrderList>
 
@@ -119,7 +119,7 @@ onReorderCars(e) {
 
             <h3>Responsive</h3>
             <p>In responsive mode, orderlist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
 
@@ -259,7 +259,7 @@ onReorderCars(e) {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class OrderListDemo extends Component {
 

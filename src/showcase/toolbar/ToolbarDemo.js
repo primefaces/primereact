@@ -52,7 +52,7 @@ class ToolbarDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {Toolbar} from 'primereact/components/toolbar/Toolbar';
 
@@ -60,7 +60,7 @@ import {Toolbar} from 'primereact/components/toolbar/Toolbar';
 
                         <h3>Getting Started</h3>
                         <p>Toolbar is a container component defined using Toolbar element. Left aligned content is placed inside a div having .ui-toolbar-group-left class and similarly .ui-toolbar-group-right for right alignment.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <Toolbar>
     <div className="ui-toolbar-group-left">
@@ -148,7 +148,7 @@ import {Toolbar} from 'primereact/components/toolbar/Toolbar';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class ToolbarDemo extends Component {
 

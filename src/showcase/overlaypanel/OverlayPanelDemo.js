@@ -49,7 +49,7 @@ export class OverlayPanelDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {OverlayPanel} from 'primereact/components/overlaypanel/OverlayPanel';
 
@@ -58,7 +58,7 @@ import {OverlayPanel} from 'primereact/components/overlaypanel/OverlayPanel';
 
             <h3>Getting Started</h3>
             <p>OverlayPanel is defined using OverlayPanel element and accessed via its reference.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Button type="button" label="Basic" onClick={this.onClick} />
 
@@ -68,7 +68,7 @@ import {OverlayPanel} from 'primereact/components/overlaypanel/OverlayPanel';
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -86,7 +86,7 @@ onClick(event) {
             <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior.
                Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
                
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <OverlayPanel ref={(el) => {this.op = el;}} showCloseIcon={true} dismissable={true}>
     <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
@@ -184,7 +184,7 @@ onClick(event) {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class OverlayPanelDemo extends Component {
         

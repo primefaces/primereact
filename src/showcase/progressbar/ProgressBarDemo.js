@@ -64,7 +64,7 @@ export class ProgressBarDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {ProgressBar} from 'primereact/components/progressbar/ProgressBar';
 
@@ -73,14 +73,14 @@ import {ProgressBar} from 'primereact/components/progressbar/ProgressBar';
 
             <h3>Getting Started</h3>
             <p>ProgressBar requires a value between 0 and 100 to display the progress.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <ProgressBar value={this.state.value1}></ProgressBar>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -192,7 +192,7 @@ componentDidMount() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class ProgressBarDemo extends Component {
 

@@ -61,7 +61,7 @@ class CheckboxDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
@@ -70,7 +70,7 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
                         <h3>Getting Started</h3>
                         <p>Checkbox is used as a controlled input with checked and onChange properties.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Checkbox onChange={this.onChange} checked={this.state.checked}></Checkbox>
 
@@ -79,7 +79,7 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
                         <h4>Multiple Values</h4>
                         <p>Multiple checkboxes can be grouped by checking against a list of values.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Checkbox value="New York" label="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
 <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
@@ -88,7 +88,7 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -111,7 +111,7 @@ onCityChange(e) {
 
                     <h4>Label</h4>
                     <p>The label attribute provides a label text next the checkbox. This label is also clickable and toggles the checked state.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Checkbox label="I accept the terms" onChange={this.onChange} checked={this.state.checked}></Checkbox>
 
@@ -219,7 +219,7 @@ onCityChange(e) {
                         <i className="fa fa-github"></i>
                         <span>View on GitHub</span>
                     </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class CheckboxDemo extends Component {
         

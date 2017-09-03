@@ -54,7 +54,7 @@ class ColorPickerDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
 
@@ -64,7 +64,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                         <h3>Getting Started</h3>
                         <p>ColorPicker is used with onChange properties.</p>
                         
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <ColorPicker onChange={(e) => this.setState({value: e.value})}/>
 
@@ -74,7 +74,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                         <h3>Formats</h3>
                         <p>Default color format to use in value binding is "hex" and other possible values are "rgb" and "hsb". Example below has 3 colorpickers having default values with different formats.</p>
                         
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <ColorPicker onChange={(e) => this.setState({value: e.value})}/>
 
@@ -242,7 +242,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class ColorPickerDemo extends Component {
         

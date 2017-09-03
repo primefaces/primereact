@@ -82,7 +82,7 @@ export class MessagesDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Messages} from 'primereact/components/messages/Messages';
 
@@ -92,7 +92,7 @@ import {Messages} from 'primereact/components/messages/Messages';
             <h3>Getting Started</h3>
             <p>A single message is specified by Message interface in PrimeReact that defines the severity, summary and detail properties.
                Messages to display are defined using the value property which should an array of Message instances.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Messages value={this.state.messages}></Messages>
 
@@ -120,7 +120,7 @@ import {Messages} from 'primereact/components/messages/Messages';
             <h3>Showing Messages</h3>
             <p>Adding messages to the array is enough to display them. Similarly removing a message from the array is also removed from the UI.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Messages value={this.state.messages}></Messages>
 
@@ -134,7 +134,7 @@ import {Messages} from 'primereact/components/messages/Messages';
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 showSuccess() {
     this.setState({messages:[{severity:'success', summary:'Success Message', detail:'Order submitted'}]});
@@ -170,7 +170,7 @@ clear() {
             <h3>Closable</h3>
             <p>Messages are closable by default resulting in a close icon being displayed on top right corner.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Messages value={this.state.messages}></Messages>
 
@@ -179,7 +179,7 @@ clear() {
 
             <p>In order to disable closable messages, set closable to false.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Messages value={this.state.messages} closable={false}></Messages>
 
@@ -307,7 +307,7 @@ clear() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class MessagesDemo extends Component {
         

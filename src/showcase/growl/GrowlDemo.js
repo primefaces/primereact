@@ -76,7 +76,7 @@ export class GrowlDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Growl} from 'primereact/components/growl/Growl';
 
@@ -87,7 +87,7 @@ import {Growl} from 'primereact/components/growl/Growl';
             <p>A single message is specified by Message interface in PrimeReact that defines the severity,
                summary and detail properties. Messages to display on growl are defined using the value
                property which should an array of Message instances.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Growl value={this.state.messages}></Growl>
 
@@ -115,7 +115,7 @@ import {Growl} from 'primereact/components/growl/Growl';
             <h3>Showing Messages</h3>
             <p>Adding messages to the array is enough to display them. Similarly removing a message from the array is also removed from the UI.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Growl value={this.state.messages}></Growl>
 
@@ -128,7 +128,7 @@ import {Growl} from 'primereact/components/growl/Growl';
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 showSuccess() {
     this.setState({messages:[{severity:'success', summary:'Success Message', detail:'Order submitted'}]});
@@ -160,7 +160,7 @@ showMultiple() {
             <h3>Closable</h3>
             <p>Growls are closable by default resulting in a close icon being displayed on top right corner.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Growl value={this.state.messages}></Growl>
 
@@ -169,7 +169,7 @@ showMultiple() {
 
             <p>In order to disable closable messages, set closable to false.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Growl value={this.state.messages} closable={false}></Growl>
 
@@ -289,7 +289,7 @@ showMultiple() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class GrowlDemo extends Component {
         

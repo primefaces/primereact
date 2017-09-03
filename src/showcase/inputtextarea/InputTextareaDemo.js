@@ -49,7 +49,7 @@ class InputTextareaDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
 
@@ -59,7 +59,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
                         <h3>Getting Started</h3>
                         <p>Textarea is defined using the InputTextarea element with standard attributes of a textarea element.</p>
                         
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputTextarea rows={5} cols={30} />
 
@@ -68,7 +68,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
 
                         <h3>Controlled Input</h3>
                         <p>Textarea is used as a controlled input with value and onChange properties.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
 
@@ -77,7 +77,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
 
                         <h3>AutoResize</h3>
                         <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <InputTextarea rows={5} cols={30} autoResize={true} />
 
@@ -135,7 +135,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class InputTextareaDemo extends Component {
         

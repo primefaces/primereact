@@ -118,7 +118,7 @@ class TieredMenuDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
 
@@ -128,7 +128,7 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
 
                         <h3>Getting Started</h3>
                         <p>Component is defined using the TieredMenu element .</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <TieredMenu model={items}/>
 
@@ -258,7 +258,7 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class TieredMenuDemo extends Component {
 

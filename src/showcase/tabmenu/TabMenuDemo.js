@@ -45,7 +45,7 @@ class TabMenuDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {TabMenu} from 'primereact/components/tabmenu/TabMenu';
 
@@ -55,13 +55,13 @@ import {TabMenu} from 'primereact/components/tabmenu/TabMenu';
 
                         <h3>Getting Started</h3>
                         <p>TabMenu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <TabMenu model={items}/>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 var items=[
             {label: 'Stats', icon: 'fa-bar-chart'},
@@ -75,7 +75,7 @@ var items=[
                         </CodeHighlight>
                         <h3>ActiveItem</h3>
                         <p>By default, first item is activated, use activeItem property to choose the initial active item.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <TabMenu model={items} activeItem={items[2]}/>
 
@@ -175,7 +175,7 @@ var items=[
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class TabMenuDemo extends Component {
 

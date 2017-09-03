@@ -55,7 +55,7 @@ class MenuDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {Menu} from 'primereact/components/menu/Menu';
 
@@ -141,7 +141,7 @@ import {Menu} from 'primereact/components/menu/Menu';
 
                         <h3>Navigation</h3>
                         <p>Navigation is specified using url property for external links and command function to invoke when an item is clicked is defined using the command property. </p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 render() {
     var items=[ {
@@ -160,7 +160,7 @@ render() {
 
                         <h3>Popup Mode</h3>
                         <p>Menu is inline by default, popup mode is also supported by enabling popup property and calling toggle method by passing the event from the anchor element.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <Menu model={items} popup={true} ref={el=>this.menu=el} />
 <Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
@@ -313,7 +313,7 @@ render() {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class MenuDemo extends Component {
 

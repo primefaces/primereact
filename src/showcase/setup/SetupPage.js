@@ -16,7 +16,7 @@ export class SetupPage extends Component {
                 <div className="content-section source">
                 <h3 style={{margin:'0'}}>Download</h3>
                 <p>PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 npm install primereact --save
 
@@ -27,7 +27,7 @@ npm install primereact --save
                 <h3>Import</h3>
 
                 <p>Importing from primereact will load all other components as well, to only import a specific component pattern would result in a smaller bundle size.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 //import {ComponentName} from 'primereact/components/componentname/componentname';
 import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
@@ -40,7 +40,7 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                     <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes.</p>
 
                 <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 primereact/resources/themes/omega/theme.css
 primereact/resources/primereact.min.css
@@ -49,7 +49,7 @@ primereact/resources/primereact.min.css
 </CodeHighlight>
 
                <p>If you are using webpack with a css loader you may also import them to your main application component.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';

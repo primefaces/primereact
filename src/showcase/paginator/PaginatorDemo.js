@@ -47,7 +47,7 @@ export class PaginatorDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Paginator} from 'primereact/components/paginator/Paginator';
 
@@ -58,7 +58,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
             <p>Paginator is defined using Paginator element, as it does not keep any internal state, usage is very similar to a controlled form components where a binding to the first 
                     property along with a page change callback are required.</p>
 
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Paginator first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
 
@@ -67,7 +67,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
 
             <h3>Rows and TotalRecords</h3>
             <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Paginator rows={10} totalRecords={120} first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
 
@@ -78,7 +78,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
             <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case, 
                 rows property should also be updated
             </p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Paginator rows={10} totalRecords={120} rowsPerPageOptions={[10,20,30]} first={this.state.first} onPageChange={(e) => this.setState({first: e.first, rows: e.first})}></Paginator>
 
@@ -225,7 +225,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class PaginatorDemo extends Component {
 

@@ -86,7 +86,7 @@ class ListboxDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {Listbox} from 'primereact/components/listbox/Listbox';
 
@@ -96,14 +96,14 @@ import {Listbox} from 'primereact/components/listbox/Listbox';
             <h3>Getting Started</h3>
             <p>Listbox requires a collection of options with label-value pairs and an onChange event to provide the selected value.</p>
                     
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Listbox value={this.state.city} options={cities} onChange={this.onCityChange} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -133,13 +133,13 @@ render () {
 
             <h3>Custom Content</h3>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate fucntion that gets the SelectItem as a property and returns the content.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 carTemplate(option) {
     var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
@@ -275,7 +275,7 @@ carTemplate(option) {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class ListboxDemo extends Component {
         

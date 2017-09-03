@@ -102,7 +102,7 @@ class DropdownDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 import {Dropdown} from 'primereact/components/dropdown/Dropdown';
 
@@ -111,7 +111,7 @@ import {Dropdown} from 'primereact/components/dropdown/Dropdown';
 
                         <h3>Getting Started</h3>
                         <p>Dropdown requires a collection of options with label-value pairs and an onChange event to provide the selected value.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
 
@@ -121,7 +121,7 @@ import {Dropdown} from 'primereact/components/dropdown/Dropdown';
                         <h3>Filtering</h3>
                         <p>Options can be filtered using an input field in the overlay by enabling the filter property. By default filtering is done against
                             label of the SelectItem and filterBy property is available to choose one or more properties of the SelectItem API.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" placeholder="Select a Car"/>
 
@@ -130,14 +130,14 @@ import {Dropdown} from 'primereact/components/dropdown/Dropdown';
 
                         <h3>Custom Content</h3>
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate fucntion that gets the SelectItem as a property and returns the content.</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight className="html">
                             {`
 <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}} placeholder="Select a Car"/>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 
 constructor() {
@@ -413,7 +413,7 @@ render() {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="javascript">
                             {`
 export class DropdownDemo extends Component {
 

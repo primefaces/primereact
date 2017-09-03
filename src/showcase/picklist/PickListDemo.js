@@ -59,7 +59,7 @@ export class PickListDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 import {PickList} from 'primereact/components/picklist/PickList';
 
@@ -71,13 +71,13 @@ import {PickList} from 'primereact/components/picklist/PickList';
                for the item content where each item in the array can be 
                accessed inside the template.
             </p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate.bind(this)} sourceStyle={{ height: '300px' }} targetStyle={{ height: '300px' }}></PickList>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 constructor() {
     super();
@@ -94,7 +94,7 @@ componentDidMount() {
 
             <h3>Responsive</h3>
             <p>In responsive mode, picklist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate.bind(this)} responsive={true} sourceStyle={{ height: '300px' }} targetStyle={{ height: '300px' }}></PickList>
 
@@ -103,7 +103,7 @@ componentDidMount() {
 
             <h3>Headers</h3>
             <p>sourceHeader and targetHeader attributes are used to define captions for the lists.</p>
-<CodeHighlight className="language-markup">
+<CodeHighlight className="html">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate.bind(this)} sourceHeader="Available" targetHeader="Selected" responsive={true} sourceStyle={{ height: '300px' }} targetStyle={{ height: '300px' }}></PickList>
 
@@ -282,7 +282,7 @@ componentDidMount() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="language-javascript">
+<CodeHighlight className="javascript">
 {`
 export class PickListDemo extends Component {
 
