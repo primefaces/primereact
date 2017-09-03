@@ -185,6 +185,10 @@ export class Calendar extends Component {
         if(this.currentMonth === 0) {
             this.currentMonth = 11;
             this.currentYear--;
+            
+            if(this.yearNavigator && this.currentYear < this.yearOptions[0]) {
+                  this.currentYear = this.yearOptions[this.yearOptions.length - 1];
+            }
         }
         else {
             this.currentMonth--;
@@ -203,6 +207,10 @@ export class Calendar extends Component {
         if(this.currentMonth === 11) {
             this.currentMonth = 0;
             this.currentYear++;
+            
+            if(this.yearNavigator && this.currentYear > this.yearOptions[this.yearOptions.length - 1]) {
+                     this.currentYear = this.yearOptions[0];
+            }    
         }
         else {
             this.currentMonth++;
