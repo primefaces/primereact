@@ -8,56 +8,20 @@ export class CalendarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeSpanish = this.onChangeSpanish.bind(this);
-        this.onChangeIcon = this.onChangeIcon.bind(this);
-        this.onChangeRestrict = this.onChangeRestrict.bind(this);
-        this.onChangeNavigators = this.onChangeNavigators.bind(this);
-        this.onChangeTime = this.onChangeTime.bind(this);
-        this.onChangeTimeOnly = this.onChangeTimeOnly.bind(this);
-        this.onChangeInline = this.onChangeInline.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({ date1: e.value });
-    }
-
-    onChangeSpanish(e) {
-        this.setState({ date2: e.value });
-    }
-
-    onChangeIcon(e) {
-        this.setState({ date3: e.value });
-    }
-
-    onChangeRestrict(e) {
-        this.setState({ date4: e.value });
-    }
-
-    onChangeNavigators(e) {
-        this.setState({ date5: e.value });
-    }
-
-    onChangeTime(e) {
-        this.setState({ date6: e.value });
-    }
-
-    onChangeTimeOnly(e) {
-        this.setState({ date7: e.value });
-    }
-
-    onChangeInline(e) {
-        this.setState({ date8: e.value });
-    }
-
-    parseLocalDateString(date) {
-        var options = { year: 'numeric', month: 'long', day: 'numeric'};
-        return date ? new Date(date).toLocaleDateString("en-US", options) : "";
+        this.state = {
+            date1: null,
+            date2: null,
+            date3: null,
+            date4: null,
+            date5: null,
+            date6: null,
+            dates1: null,
+            dates2: null
+        };
     }
 
     render() {
-        var es = {
+        let es = {
             firstDayOfWeek: 1,
             dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
             dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
@@ -73,12 +37,13 @@ export class CalendarDemo extends Component {
         let prevYear = (prevMonth === 11) ? year - 1 : year;
         let nextMonth = (month === 11) ? 0 : month + 1;
         let nextYear = (nextMonth === 0) ? year + 1 : year;
-        this.minDate = new Date();
-        this.minDate.setMonth(prevMonth);
-        this.minDate.setFullYear(prevYear);
-        this.maxDate = new Date();
-        this.maxDate.setMonth(nextMonth);
-        this.maxDate.setFullYear(nextYear);
+        
+        let minDate = new Date();
+        minDate.setMonth(prevMonth);
+        minDate.setFullYear(prevYear);
+        let maxDate = new Date();
+        maxDate.setMonth(nextMonth);
+        maxDate.setFullYear(nextYear);
 
         return (
             <div>
@@ -93,43 +58,56 @@ export class CalendarDemo extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-4">
                             <h3>Basic</h3>
-                            <Calendar tabindex="0" onChange={this.onChangeBasic}></Calendar>{this.parseLocalDateString(this.state.date1)}
+                            <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Spanish</h3>
-                            <Calendar locale={es} dateFormat="dd/mm/yy" onChange={this.onChangeSpanish}></Calendar>{this.parseLocalDateString(this.state.date2)}
+                            <Calendar value={this.state.date2} locale={es} dateFormat="dd/mm/yy" onChange={(e) => this.setState({date2: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Icon</h3>
-                            <Calendar showIcon="true" onChange={this.onChangeIcon}></Calendar><span style={{marginLeft:'35px'}}>{this.parseLocalDateString(this.state.date3)}</span>
+                            <Calendar value={this.state.date3} showIcon="true" onChange={(e) => this.setState({date3: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Restrict</h3>
-                            <Calendar minDate={this.minDate} maxDate={this.maxDate} readonlyInput="true" onChange={this.onChangeRestrict}></Calendar>{this.parseLocalDateString(this.state.date4)}
+                            <Calendar value={this.state.date4} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={(e) => this.setState({date4: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Navigators</h3>
-                            <Calendar monthNavigator="true" yearNavigator="true" yearRange="2000:2030" onChange={this.onChangeNavigators}></Calendar>{this.parseLocalDateString(this.state.date5)}
+                            <Calendar value={this.state.date5} monthNavigator="true" yearNavigator="true" yearRange="2000:2030" onChange={(e) => this.setState({date5: e.value})}></Calendar>
+                        </div>
+                        
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Multiple</h3>
+                            <Calendar value={this.state.dates1} selectionMode="multiple" onChange={(e) => this.setState({dates1: e.value})}></Calendar>
+                        </div>
+                        
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Range</h3>
+                            <Calendar value={this.state.dates2} selectionMode="range" onChange={(e) => this.setState({dates2: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Time</h3>
-                            <Calendar showTime="true" onChange={this.onChangeTime}></Calendar>{this.state.date6 && new Date(this.state.date6).toString()}
+                            <Calendar value={this.state.date6} showTime="true" onChange={(e) => this.setState({date6: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Time Only</h3>
-                            <Calendar timeOnly="true" onChange={this.onChangeTimeOnly}></Calendar>
+                            <Calendar value={this.state.date7} timeOnly="true" onChange={(e) => this.setState({date7: e.value})}></Calendar>
+                        </div>
+                                                
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Inline</h3>
+                            <Calendar value={this.state.date8} inline="true" onChange={(e) => this.setState({date8: e.value})}></Calendar>
                         </div>
                     </div>
-
-                    <h3>Inline {this.parseLocalDateString(this.state.date8)}</h3>
-                    <Calendar inline="true" onChange={this.onChangeInline}></Calendar>
                 </div>
+                
                 <CalendarDoc></CalendarDoc>
             </div>
         );
@@ -227,12 +205,12 @@ onChangeBasic(e) {
 </CodeHighlight>
 
             <h3>Date Restriction</h3>
-            <p>To disable entering dates manually, set readonlyInput to true and to restrict selectable dates use minDate
+            <p>To disable entering dates manually, set readOnlyInput to true and to restrict selectable dates use minDate
                 and maxDate options.</p>
 
 <CodeHighlight className="html jsx">
 {`
-<Calendar minDate={this.minDate} maxDate={this.maxDate} readonlyInput="true" onChange={this.onChangeRestrict}>
+<Calendar minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={this.onChangeRestrict}>
 
 `}
 </CodeHighlight>
@@ -304,7 +282,7 @@ var es = {
                             <td>Inline style of the input field.</td>
                         </tr>
                         <tr>
-                            <td>inputStyleClass</td>
+                            <td>inputClassName</td>
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the input field.</td>
@@ -370,7 +348,7 @@ var es = {
                             <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
                         </tr>
                         <tr>
-                            <td>readonlyInput</td>
+                            <td>readOnlyInput</td>
                             <td>boolean</td>
                             <td>null</td>
                             <td>When specified, prevents entering the date manually with keyboard.</td>
@@ -653,7 +631,7 @@ export class CalendarDemo extends Component {
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Restrict</h3>
-                            <Calendar minDate={this.minDate} maxDate={this.maxDate} readonlyInput="true" onChange={this.onChangeRestrict}></Calendar>{this.parseLocalDateString(this.state.date4)}
+                            <Calendar minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={this.onChangeRestrict}></Calendar>{this.parseLocalDateString(this.state.date4)}
                         </div>
 
                         <div className="ui-g-12 ui-md-4">

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { InputText } from '../inputtext/InputText';
-import { Button } from '../button/Button';
+import {InputText} from '../inputtext/InputText';
+import {Button} from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
@@ -15,22 +15,24 @@ export class Calendar extends Component {
         style: null,
         className: null,
         inputStyle: null,
-        inputStyleClass: null,
+        inputClassName: null,
         placeholder: null,
         disabled: false,
         dateFormat: "mm/dd/yy",
         inline: false,
+        selectionMode: 'single',
         showOtherMonths: true,
         selectOtherMonths: false,
         showIcon: false,
         icon: "fa-calendar",
         appendTo: null,
-        readonlyInput: false,
+        readOnlyInput: false,
         shortYearCutoff: "+10",
         minDate: null,
         maxDate: null,
         monthNavigator: false,
         yearNavigator: false,
+        maxDateCount: null,
         yearRange: null,
         showTime: false,
         hourFormat: "24",
@@ -54,6 +56,7 @@ export class Calendar extends Component {
         onFocus: null,
         onSelect: null,
         onBlur: null,
+        onChange: null
     }
 
     static propsTypes = {
@@ -63,22 +66,24 @@ export class Calendar extends Component {
         style: PropTypes.string,
         className: PropTypes.string,
         inputStyle: PropTypes.string,
-        inputStyleClass: PropTypes.string,
+        inputClassName: PropTypes.string,
         placeholder: PropTypes.string,
         disabled: PropTypes.bool,
         dateFormat: PropTypes.string,
         inline: PropTypes.bool,
+        selectionMode: PropTypes.string,
         showOtherMonths: PropTypes.bool,
         selectOtherMonths: PropTypes.bool,
         showIcon: PropTypes.bool,
         icon: PropTypes.string,
         appendTo: PropTypes.string,
-        readonlyInput: PropTypes.bool,
+        readOnlyInput: PropTypes.bool,
         shortYearCutoff: PropTypes.string,
-        minDate: PropTypes.instanceOf(Date),
-        maxDate: PropTypes.instanceOf(Date),
+        minDate: PropTypes.any,
+        maxDate: PropTypes.any,
         monthNavigator: PropTypes.bool,
         yearNavigator: PropTypes.bool,
+        maxDateCount: PropTypes.number,
         yearRange: PropTypes.string,
         showTime: PropTypes.bool,
         hourFormat: PropTypes.string,
@@ -95,38 +100,16 @@ export class Calendar extends Component {
         onFocus: PropTypes.func,
         onSelect: PropTypes.func,
         onBlur: PropTypes.func,
+        onChange: PropTypes.func
     }
 
     constructor(props) {
         super(props);
         this.state = {};
-
-        this.weekDays = [];
-    }
-
-    get minDate() {
-        return this._minDate;
-    }
-    
-    set minDate(date) {
-        this._minDate = date;
-        this.createMonth(this.currentMonth, this.currentYear);
-    }
-    
-    get maxDate() {
-        return this._maxDate;
-    }
-    
-    set maxDate(date) {
-        this._maxDate = date;
-        this.createMonth(this.currentMonth, this.currentYear);
     }
 
     createMonth(month, year) {
-        this.dates = [];
-        this.currentMonth = month;
-        this.currentYear = year;
-        this.currentMonthText = this.props.locale.monthNames[month];
+        let dates = [];
         let firstDay = this.getFirstDayOfMonthIndex(month, year);
         let daysLength = this.getDaysCountInMonth(month, year);
         let prevMonthDaysLength = this.getDaysCountInPrevMonth(month, year);
@@ -167,13 +150,44 @@ export class Calendar extends Component {
                 }
             }
             
-            this.dates.push(week);
+            dates.push(week);
         }
-        this.setState({dates: this.dates, currentMonth: this.currentMonth, currentYear: this.currentYear, currentMonthText: this.currentMonthText})
-        if(this.selectedLinkItem) {
-            DomHandler.removeClass(this.selectedLinkItem, 'ui-state-active');
-            DomHandler.removeClass(this.selectedLinkItem.parentElement, 'ui-datepicker-current-day');
+        
+        return dates;
+    }
+    
+    createWeekDays() {
+        this.weekDays = [];
+        let dayIndex = this.props.locale.firstDayOfWeek;
+        for(let i = 0; i < 7; i++) {
+            this.weekDays.push(this.props.locale.dayNamesMin[dayIndex]);
+            dayIndex = (dayIndex === 6) ? 0 : ++dayIndex;
         }
+    }
+    
+    initTime(date) {
+        this.pm = date.getHours() > 11;
+        let currentHour, currentMinute, currentSecond;
+        if(this.props.showTime) {
+            currentMinute = date.getMinutes();
+            currentSecond = date.getSeconds();
+            
+            if(this.props.hourFormat === '12')
+                currentHour = date.getHours() === 0 ? 12 : date.getHours() % 12;
+            else
+                currentHour = date.getHours();
+        }
+        else if(this.props.timeOnly) {
+            currentMinute = 0;
+            currentHour = 0;
+            currentSecond = 0;
+        }
+        
+        this.setState({
+            currentHour: currentHour,
+            currentMinute: currentMinute,
+            currentSecond: currentSecond
+        })
     }
     
     prevMonth(event) {
@@ -182,15 +196,23 @@ export class Calendar extends Component {
             return;
         }
         
-        if(this.currentMonth === 0) {
-            this.currentMonth = 11;
-            this.currentYear--;
+        let month = this.state.currentMonth;
+        let year = this.state.currentYear;
+        
+        if(month === 0) {
+            month = 11;
+            year--;
         }
         else {
-            this.currentMonth--;
+            month--;
         }
         
-        this.createMonth(this.currentMonth, this.currentYear);
+        this.setState({
+            currentMonth: month,
+            currentYear: year,
+            dates: this.createMonth(month, year)
+        });
+        
         event.preventDefault();
     }
     
@@ -200,116 +222,138 @@ export class Calendar extends Component {
             return;
         }
         
-        if(this.currentMonth === 11) {
-            this.currentMonth = 0;
-            this.currentYear++;
+        let month = this.state.currentMonth;
+        let year = this.state.currentYear;
+        
+        if(month === 11) {
+            month = 0;
+            year++;
         }
         else {
-            this.currentMonth++;
+            month++;
         }
         
-        this.createMonth(this.currentMonth, this.currentYear);
+        this.setState({
+            currentMonth: month,
+            currentYear: year,
+            dates: this.createMonth(month, year)
+        });
+        
         event.preventDefault();
     }
     
-    onDateSelect(event,dateMeta) {
+    onDateSelect(event, dateMeta) {
         if(this.props.disabled || !dateMeta.selectable) {
             event.preventDefault();
             return;
         }
         
-        if(dateMeta.otherMonth) {
-            if(this.props.selectOtherMonths)
-                this.selectDate(event,dateMeta);
+        if(this.isMultipleSelection() && this.isSelected(dateMeta)) {
+            let filteredValue = this.props.value.filter((date, i) => {
+                return !this.isDateEquals(date, dateMeta);
+            });
+            
+            this.updateModel(event, filteredValue);
         }
         else {
-             this.selectDate(event,dateMeta);
-        }
-        
-        this.dateClick = true;
-        this.updateInputfield();
-        event.preventDefault();
-    }
-    
-    updateInputfield() {
-        if(this.value) {
-            let formattedValue;
-            
-            if(this.props.timeOnly) {
-                formattedValue = this.formatTime(this.value);
-            }
-            else {
-                formattedValue = this.formatDate(this.value, this.props.dateFormat);
-                if(this.props.showTime) {
-                    formattedValue += ' ' + this.formatTime(this.value);
+            if(this.shouldSelectDate(dateMeta)) {
+                if(dateMeta.otherMonth) {
+                    if(this.selectOtherMonths) {
+                        this.currentMonth = dateMeta.month;
+                        this.currentYear = dateMeta.year;
+                        this.createMonth(this.currentMonth, this.currentYear);
+                        this.selectDate(event, dateMeta);
+                    }
+                }
+                else {
+                     this.selectDate(event, dateMeta);
                 }
             }
-            
-            this.inputFieldValue = formattedValue;
         }
-        else {
-            this.inputFieldValue = '';
+                
+        if(this.isSingleSelection()) {
+            this.hideOverlay();
         }
-
-        if(!this.props.inline) {
-            this.inputfield.value = this.inputFieldValue;
-        }
-
-        this.updateFilledState();
+        event.preventDefault();
+    }
+        
+    isSingleSelection(): boolean {
+        return this.props.selectionMode === 'single';
+    }
+    
+    isRangeSelection(): boolean {
+        return this.props.selectionMode === 'range';
+    }
+    
+    isMultipleSelection(): boolean {
+        return this.props.selectionMode === 'multiple';
+    }
+    
+    shouldSelectDate(dateMeta) {
+        if(this.isMultipleSelection())
+            return !this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length;
+        else
+            return true;
     }
     
     selectDate(event, dateMeta) {
-        if(this.selectedLinkItem) {
-            DomHandler.removeClass(this.selectedLinkItem, 'ui-state-active');
-            DomHandler.removeClass(this.selectedLinkItem.parentElement, 'ui-datepicker-current-day');
-        }
-
-        this.value = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
+        let date;
+        if(this.props.utc)
+            date = new Date(Date.UTC(dateMeta.year, dateMeta.month, dateMeta.day));
+        else
+            date = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
+            
         if(this.props.showTime) {
             if(this.props.hourFormat === '12' && this.pm && this.currentHour !== 12)
-                this.value.setHours(this.currentHour + 12);
+                date.setHours(this.currentHour + 12);
             else
-                this.value.setHours(this.currentHour);
+                date.setHours(this.currentHour);
 
-            this.value.setMinutes(this.currentMinute);
-            this.value.setSeconds(this.currentSecond);
+            date.setMinutes(this.currentMinute);
+            date.setSeconds(this.currentSecond);
         }
-
-        DomHandler.addClass(event.target, 'ui-state-active');
-        DomHandler.addClass(event.target.parentElement, 'ui-datepicker-current-day');
-        this.selectedLinkItem = event.target;
-
-        this._isValid = true;
-        this.updateModel(event);
-        if (this.props.onSelect) {
+        
+        if(this.isSingleSelection()) {
+            this.updateModel(event, date);
+        }
+        else if(this.isMultipleSelection()) {
+            this.updateModel(event, this.props.value ? [...this.props.value, date] : [date]);
+        }
+        else if(this.isRangeSelection()) {
+            if(this.props.value && this.props.value.length) {
+                let startDate = this.props.value[0];
+                let endDate = this.props.value[1];
+                
+                if(!endDate && date.getTime() > startDate.getTime()) {
+                    endDate = date;
+                }
+                else {
+                    startDate = date;
+                    endDate = null;
+                }
+                
+                this.updateModel(event, [startDate, endDate]); 
+            }
+            else {
+                this.updateModel(event, [date, null]); 
+            }
+        }
+            
+        if(this.props.onSelect) {
             this.props.onSelect({
                 originalEvent: event,
-                value: this.value
-            })
+                value: date
+            });
         }
     }
     
-    updateModel(event) {
+    updateModel(event, val) {
         if(this.props.onChange) {
             if(this.props.dataType === 'date') {
-                this.props.onChange({
-                    originalEvent: event,
-                    value: this.value
-                })
+                this.props.onChange({originalEvent: event, value: val});
             }
-            else if(this.props.dataType === 'string') {
-                if(this.timeOnly) {
-                    this.props.onChange({
-                        originalEvent: event,
-                        value: this.formatDate(this.value)
-                    })
-                }
-                else {
-                    this.props.onChange({
-                        originalEvent: event,
-                        value: this.formatDate(this.value, this.props.dateFormat)
-                    })
-                }
+            else if(this.props.dataType === 'string') {
+                this.props.onChange({originalEvent: event, value: this.formatDateTime(val)});
             }
         }
     }
@@ -367,10 +411,48 @@ export class Calendar extends Component {
     }
     
     isSelected(dateMeta) {     
-        if(this.value)
-            return this.value.getDate() === dateMeta.day && this.value.getMonth() === dateMeta.month && this.value.getFullYear() === dateMeta.year;
+        if(this.props.value) {
+            if(this.isSingleSelection()) {
+                return this.isDateEquals(this.props.value, dateMeta);
+            }
+            else if(this.isMultipleSelection()) {
+                let selected = false;
+                for(let date of this.props.value) {
+                    selected = this.isDateEquals(date, dateMeta);
+                    if(selected) {
+                        break;
+                    }
+                }
+                
+                return selected;
+            }
+            else if(this.isRangeSelection()) {
+                if(this.props.value[1])
+                    return this.isDateEquals(this.props.value[0], dateMeta) || this.isDateEquals(this.props.value[1], dateMeta) || this.isDateBetween(this.props.value[0], this.props.value[1], dateMeta);
+                else
+                    return this.isDateEquals(this.props.value[0], dateMeta)
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    
+    isDateEquals(value, dateMeta) {
+        if(value)
+            return value.getDate() === dateMeta.day && value.getMonth() === dateMeta.month && value.getFullYear() === dateMeta.year;
         else
             return false;
+    }
+    
+    isDateBetween(start, end, dateMeta) {
+        if(start && end) {
+            return start.getDate() < dateMeta.day && start.getMonth() <= dateMeta.month && start.getFullYear() <= dateMeta.year &&
+            end.getDate() > dateMeta.day && end.getMonth() >= dateMeta.month && end.getFullYear() >= dateMeta.year;
+        }
+        else {
+            return false; 
+        }
     }
     
     isToday(today, day, month, year) {     
@@ -438,45 +520,53 @@ export class Calendar extends Component {
         }
     }
     
-    onButtonClick(event,inputfield) {
-        this.closeOverlay = false;
-        
-        if(!this.overlay.offsetParent) {
-            inputfield.focus();
-            this.showOverlay(inputfield);
+    onButtonClick(event) {
+        if(!this.overlay.offsetParent || this.overlay.style.display === 'none') {
+            this.inputfield.focus();
+            this.showOverlay();
         }
-        else
-            this.closeOverlay = true;
+        else {
+            this.hideOverlay();
+        }
+        
+        this.datepickerClick = true;
     }
 
     onInputClick(event) {
-        this.closeOverlay = false;
+        this.datepickerClick = true;
     }
     
     onInputKeydown(event) {
         if(event.keyCode === 9) {
-            this.overlayVisible = false;
             this.overlay.style.display = 'none';
         }
     }
     
     onMonthDropdownChange(m) {
-        this.currentMonth = parseInt(m,10);
-        this.createMonth(this.currentMonth, this.currentYear);
+        let month = parseInt(m, 10);
+        this.setState({
+            currentMonth: month,
+            dates: this.createMonth(month, this.state.currentYear)
+        });
     }
     
     onYearDropdownChange(y) {
-        this.currentYear = parseInt(y,10);
-        this.createMonth(this.currentMonth, this.currentYear);
+        let year = parseInt(y, 10);
+        this.setState({
+            currentYear: year,
+            dates: this.createMonth(this.state.currentMonth, year)
+        });
     }
     
     incrementHour(event) {
-        let newHour = this.currentHour + this.props.stepHour;
-        if(this.props.hourFormat === '24')
-            this.currentHour = (newHour >= 24) ? (newHour - 24) : newHour;        
-        else if(this.props.hourFormat === '12')
-            this.currentHour = (newHour >= 13) ? (newHour - 12) : newHour;
+        let currentHour = this.state.currentHour;
+        let newHour = currentHour + this.props.stepHour;
         
+        if(this.props.hourFormat === '24')
+            currentHour = (newHour >= 24) ? (newHour - 24) : newHour;        
+        else if(this.props.hourFormat === '12')
+            currentHour = (newHour >= 13) ? (newHour - 12) : newHour;
+                    
         this.updateTime(event);
                 
         event.preventDefault();
@@ -531,22 +621,21 @@ export class Calendar extends Component {
     }
     
     updateTime(event) {
-        this.value = this.value||new Date();
+        let value = this.props.value ? Object.assign({}, this.props.value) : new Date();
         if(this.props.hourFormat === '12' && this.pm && this.currentHour !== 12)
-            this.value.setHours(this.currentHour + 12);
+            value.setHours(this.currentHour + 12);
         else
-            this.value.setHours(this.currentHour);
+            value.setHours(this.currentHour);
         
-        this.value.setMinutes(this.currentMinute);
-        this.value.setSeconds(this.currentSecond);
-        this.updateModel(event);
-        if (this.props.onSelect) {
+        value.setMinutes(this.currentMinute);
+        value.setSeconds(this.currentSecond);
+        this.updateModel(event, value);
+        if(this.props.onSelect) {
             this.props.onSelect({
                 originalEvent: event,
-                value: this.value
+                value: value
             })
         }
-        this.updateInputfield();
     }
     
     toggleAMPM(event) {
@@ -556,39 +645,66 @@ export class Calendar extends Component {
     }
     
     onInput(event) {
+        let val = event.target.value;   
+        
         try {
-            this.value = this.parseValueFromString(event.target.value);
+            let value = this.parseValueFromString(val);
+            this.updateModel(event, value);
             this.updateUI();
-        } 
+        }
         catch(err) {
             //invalid date
-            this.value = null;
-            this._isValid = false;
-        }
-        
-        this.updateModel(event);
-        this.updateFilledState();
+            this.updateModel(event, null);
+        }     
     }
     
     parseValueFromString(text) {
-        let dateValue;
-        let parts = text.split(' ');
+        if(!text || text.trim().length === 0) {
+            return null;
+        }
         
-        if(this.props.timeOnly) {
-            dateValue = new Date();
-            this.populateTime(dateValue, parts[0], parts[1]);
+        let value: any;
+        
+        if(this.isSingleSelection()) {
+            value = this.parseDateTime(text);
+        }
+        else if(this.isMultipleSelection()) {
+            let tokens = text.split(',');
+            value = [];
+            for(let token of tokens) {
+                value.push(this.parseDateTime(token.trim()));
+            }
+        }
+        else if(this.isRangeSelection()) {
+            let tokens = text.split(' - ');
+            value = [];
+            for(let i = 0; i < tokens.length; i++) {
+                value[i] = this.parseDateTime(tokens[i].trim());
+            }
+        }
+        
+        return value;
+    }
+    
+    parseDateTime(text): Date {
+        let date: Date;
+        let parts: string[] = text.split(' ');
+        
+        if(this.timeOnly) {
+            date = new Date();
+            this.populateTime(date, parts[0], parts[1]);
         }
         else {
-            if(this.props.showTime) {
-                dateValue = this.parseDate(parts[0], this.props.dateFormat);
-                this.populateTime(dateValue, parts[1], parts[2]);
+            if(this.showTime) {
+                date = this.parseDate(parts[0], this.dateFormat);
+                this.populateTime(date, parts[1], parts[2]);
             }
             else {
-                 dateValue = this.parseDate(text, this.props.dateFormat);
+                 date = this.parseDate(text, this.dateFormat);
             }
         }
         
-        return dateValue;
+        return date;
     }
     
     populateTime(value, timeString, ampm) {
@@ -635,30 +751,23 @@ export class Calendar extends Component {
     }
     
     onDatePickerClick(event) {
-        this.closeOverlay = this.dateClick;
+        this.datepickerClick = true;
     }
     
-    showOverlay(inputfield) {
+    showOverlay() {
         if(this.props.appendTo)
-            DomHandler.absolutePosition(this.overlay, inputfield);
+            DomHandler.absolutePosition(this.overlay, this.inputfield);
         else
-            DomHandler.relativePosition(this.overlay, inputfield);
+            DomHandler.relativePosition(this.overlay, this.inputfield);
         
-        this.overlayVisible = true;
         this.overlay.style.zIndex = String(DomHandler.getZindex());
         this.overlay.style.display = 'block';
 
         this.bindDocumentClickListener();
     }
-
-    writeValue(value) {
-        this.value = value;
-        if(this.value && typeof this.value === 'string') {
-            this.value = this.parseValueFromString(this.value);
-        }
-        
-        this.updateInputfield();
-        this.updateUI();
+    
+    hideOverlay() {
+        this.overlay.style.display = 'none';
     }
     
     // Ported from jquery-ui datepicker formatDate    
@@ -770,6 +879,23 @@ export class Calendar extends Component {
         }
         
         return output;
+    }
+    
+    formatDateTime(date) {
+        let formattedValue = null;
+        if(date) {
+            if(this.props.timeOnly) {
+                formattedValue = this.formatTime(date);
+            }
+            else {
+                formattedValue = this.formatDate(date, this.props.dateFormat);
+                if(this.props.showTime) {
+                    formattedValue += ' ' + this.formatTime(date);
+                }
+            }
+        }
+        
+        return formattedValue;
     }
     
     parseTime(value) {
@@ -964,10 +1090,6 @@ export class Calendar extends Component {
         return date;
     }
     
-    updateFilledState() {
-        this.filled = this.inputFieldValue && this.inputFieldValue !== '';
-    }
-    
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = this.docClickListener.bind(this);
@@ -976,19 +1098,49 @@ export class Calendar extends Component {
     }
     
     docClickListener() {
-        if(this.closeOverlay) {
-           this.overlayVisible = false;
-           this.overlay.style.display = 'none';
+        if(!this.datepickerClick) {
+            this.overlay.style.display = 'none';
         }
-                
-        this.closeOverlay = true;
-        this.dateClick = false;
+
+        this.datepickerClick = false;
     }
 
     unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
         }
+    }
+    
+    getInputFieldValue() {
+        let formattedValue = '';
+
+        if(this.props.value) {
+            if(this.isSingleSelection()) {
+                formattedValue = this.formatDateTime(this.props.value);
+            }
+            else if(this.isMultipleSelection()) {
+                for(let i = 0; i < this.props.value.length; i++) {
+                    let dateAsString = this.formatDateTime(this.props.value[i]);
+                    formattedValue += dateAsString;
+                    if(i !== (this.props.value.length - 1)) {
+                        formattedValue += ', ';
+                    }
+                }
+            }
+            else if(this.isRangeSelection()) {
+                if(this.props.value && this.props.value.length) {
+                    let startDate = this.props.value[0];
+                    let endDate = this.props.value[1];
+                    
+                    formattedValue = this.formatDateTime(startDate);
+                    if(endDate) {
+                        formattedValue += ' - ' + this.formatDateTime(endDate);
+                    }
+                }
+            }
+        }
+        
+        return formattedValue;
     }
         
     componentWillUnmount() {
@@ -1001,31 +1153,16 @@ export class Calendar extends Component {
 
     componentWillMount() {
         let date = this.props.defaultDate||new Date();        
-        let dayIndex = this.props.locale.firstDayOfWeek;
-        for(let i = 0; i < 7; i++) {
-            this.weekDays.push(this.props.locale.dayNamesMin[dayIndex]);
-            dayIndex = (dayIndex === 6) ? 0 : ++dayIndex;
-        }
-                
-        this.currentMonth = date.getMonth();
-        this.currentYear = date.getFullYear();
-        if(this.props.showTime) {
-            this.currentMinute = date.getMinutes();
-            this.currentSecond = date.getSeconds();
-            this.pm = date.getHours() > 11;
-            
-            if(this.props.hourFormat === '12')
-                this.currentHour = date.getHours() === 0 ? 12 : date.getHours() % 12;
-            else
-                this.currentHour = date.getHours();
-        }
-        else if(this.props.timeOnly) {
-            this.currentMinute = 0;
-            this.currentHour = 0;
-            this.currentSecond = 0;
-        }
-
-        this.createMonth(this.currentMonth, this.currentYear);
+        this.createWeekDays();
+        let month =  date.getMonth();
+        let year = date.getFullYear();
+        
+        this.setState({
+            currentMonth: month,
+            currentYear: year,
+            dates: this.createMonth(month, year)
+        });
+        this.initTime(date);
         
         this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
     		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
@@ -1049,27 +1186,27 @@ export class Calendar extends Component {
             else
                 DomHandler.appendChild(this.overlay, this.props.appendTo);
         }
-
-        this.writeValue(this.props.value);
     }
     
-
     render() {
-
         var containerStyleClass = classNames('ui-calendar', this.props.className, {
             'ui-calendar-w-btn': this.props.showIcon
         });
 
-        if (!this.props.inline) {
-            var inputElement = <InputText ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} type="text" required={this.props.required} onFocus={(e) => this.onInputFocus(this.inputfield, e)} onKeyDown={this.onInputKeydown.bind(this)} onClick={this.onInputClick.bind(this)}
-                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readonlyInput} onInput={this.onInput.bind(this)} style={this.props.inputStyle} className={this.props.inputStyleClass} placeholder={this.props.placeholder || ''} disabled={this.props.disabled} tabIndex={this.props.tabindex} />
+        if(!this.props.inline) {
+            var inputElement = <InputText value={this.getInputFieldValue()} ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} type="text" 
+                required={this.props.required} onFocus={(e) => this.onInputFocus(this.inputfield, e)} onKeyDown={this.onInputKeydown.bind(this)} onClick={this.onInputClick.bind(this)}
+                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readOnlyInput} onInput={this.onInput.bind(this)} 
+                style={this.props.inputStyle} className={this.props.inputClassName} 
+                placeholder={this.props.placeholder || ''} 
+                disabled={this.props.disabled} tabIndex={this.props.tabindex} />
 
-            if (this.props.showIcon) {
+            if(this.props.showIcon) {
                 var buttonStyleClass = classNames('ui-datepicker-trigger', {
                     'ui-state-disabled': this.props.disabled
                 });
 
-                var buttonElement = <Button type="button" icon={this.props.icon} onClick={(e) => this.onButtonClick(e, this.inputfield)}
+                var buttonElement = <Button type="button" icon={this.props.icon} onClick={(e) => this.onButtonClick(e)}
                     className={buttonStyleClass} disabled={this.props.disabled} />
             }
         }
@@ -1079,12 +1216,9 @@ export class Calendar extends Component {
             'ui-shadow': !this.props.inline,
             'ui-state-disabled': this.props.disabled,
             'ui-datepicker-timeonly': this.props.timeOnly
-        }),
-        datepickerStyle = { 'display': this.props.inline ? 'inline-block' : (this.overlayVisible ? 'block' : 'none') };
+        });
 
-        /* Datepicker */
-        if (!this.props.timeOnly) {
-            /* datepicker header */
+        if(!this.props.timeOnly) {
             var prevLink = (<a className="ui-datepicker-prev ui-corner-all" href="#" onClick={this.prevMonth.bind(this)}>
                                 <span className="fa fa-angle-left"></span>
                             </a>),
@@ -1092,7 +1226,7 @@ export class Calendar extends Component {
                                 <span className="fa fa-angle-right"></span>
                             </a>);
 
-            var currentMonthText = !this.props.monthNavigator && (<span className="ui-datepicker-month">{this.state.currentMonthText} </span>),
+            var currentMonthText = !this.props.monthNavigator && (<span className="ui-datepicker-month">{this.props.locale.monthNames[this.state.currentMonth]} </span>),
                 monthNav = this.props.monthNavigator && (<select className="ui-datepicker-month" value={this.state.currentMonth} onChange={(e) => this.onMonthDropdownChange(e.target.value)}>
                                         {this.props.locale.monthNames.map((month, i) => <option key={"month_" + i} value={i}>{month}</option>)}
                                     </select>),
@@ -1172,7 +1306,7 @@ export class Calendar extends Component {
                                 <a href="#" onClick={this.incrementHour.bind(this)}>
                                     <span className="fa fa-angle-up"></span>
                                 </a>
-                                <span style={{'display': this.currentHour < 10 ? 'inline': 'none'}}>0</span><span>{this.currentHour}</span>
+                                <span style={{'display': this.state.currentHour < 10 ? 'inline': 'none'}}>0</span><span>{this.state.currentHour}</span>
                                 <a href="#" onClick={this.decrementHour.bind(this)}>
                                     <span className="fa fa-angle-down"></span>
                                 </a>
@@ -1181,7 +1315,7 @@ export class Calendar extends Component {
                                 <a href="#" onClick={this.incrementMinute.bind(this)}>
                                     <span className="fa fa-angle-up"></span>
                                 </a>
-                                <span style={{'display': this.currentMinute < 10 ? 'inline': 'none'}}>0</span><span>{this.currentMinute}</span>
+                                <span style={{'display': this.state.currentMinute < 10 ? 'inline': 'none'}}>0</span><span>{this.state.currentMinute}</span>
                                 <a href="#" onClick={this.decrementMinute.bind(this)}>
                                     <span className="fa fa-angle-down"></span>
                                 </a>
@@ -1190,7 +1324,7 @@ export class Calendar extends Component {
                                     <a href="#" onClick={this.incrementSecond.bind(this)}>
                                         <span className="fa fa-angle-up"></span>
                                     </a>
-                                    <span style={{'display': this.currentSecond < 10 ? 'inline': 'none'}}>0</span><span>{this.currentSecond}</span>
+                                    <span style={{'display': this.state.currentSecond < 10 ? 'inline': 'none'}}>0</span><span>{this.state.currentSecond}</span>
                                     <a href="#" onClick={this.incrementSecond.bind(this)}>
                                         <span className="fa fa-angle-down"></span>
                                     </a>
@@ -1220,8 +1354,8 @@ export class Calendar extends Component {
             <span id={this.props.id} className={containerStyleClass} style={this.props.style}>
                 {inputElement}
                 {buttonElement}
-
-                <div ref={(el) => this.overlay = ReactDOM.findDOMNode(el)} className={datepickerStyleClass} style={datepickerStyle} onClick={this.onDatePickerClick.bind(this)}>
+                <div ref={(el) => this.overlay = el} className={datepickerStyleClass} 
+                    onClick={this.onDatePickerClick.bind(this)}>
                     {datepickerHeader}
                     {table}
                     {timepickerHeader}
