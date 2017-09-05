@@ -215,6 +215,16 @@ import {Calendar} from 'primereact/components/calendar/Calendar';
 `}
 </CodeHighlight>
 
+            <h3>Disable specific dates and/or days</h3>
+            <p>To disable specific dates or days, set readonlyInput to true and to restrict selectable dates use disabledDates and/or disabledDays options. DisabledDates
+            property should be an array of disabled dates and disableDays should be an array of disabled weekdays.</p>
+<CodeHighlight className="html jsx">
+{`
+<Calendar disabledDates={invalidDates}" disabledDays]={[0,6]} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+
+`}
+</CodeHighlight>
+
             <h3>Button Bar</h3>
             <p>Button bar displays today and clear buttons and enabled using showButtonBar property.</p>
 <CodeHighlight className="html jsx">
@@ -505,6 +515,18 @@ let es = {
                             <td>boolean</td>
                             <td>false</td>
                             <td>Whether to show the seconds in time picker.</td>
+                        </tr>
+                        <tr>
+                            <td>disabledDates</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Array with dates that should be disabled.</td>
+                        </tr>
+                        <tr>
+                            <td>disabledDays</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Array with weekday numbers that should be disabled.</td>
                         </tr>
                     </tbody>
                 </table>

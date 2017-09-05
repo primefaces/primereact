@@ -59,6 +59,8 @@ export class Calendar extends Component {
         stepMinute: 1,
         stepSecond: 1,
         showSeconds: false,
+        disabledDates: null,
+        disabledDays: null,
         onFocus: null,
         onSelect: null,
         onBlur: null,
@@ -109,6 +111,8 @@ export class Calendar extends Component {
         stepMinute: PropTypes.number,
         stepSecond: PropTypes.number,
         showSeconds: PropTypes.bool,
+        disabledDates: PropTypes.Array,
+        disabledDays: PropTypes.Array,
         onFocus: PropTypes.func,
         onSelect: PropTypes.func,
         onBlur: PropTypes.func,
@@ -536,6 +540,8 @@ export class Calendar extends Component {
     isSelectable(day, month, year) {
         let validMin = true;
         let validMax = true;
+        let validDate = true;
+        let validDay = true;
         
         if(this.props.minDate) {
              if(this.props.minDate.getFullYear() > year) {
@@ -569,7 +575,36 @@ export class Calendar extends Component {
              }  
         }
         
-        return validMin && validMax;
+        if(this.disabledDates) {
+           validDate = !this.isDateDisabled(day, month, year);
+        }
+       
+        if(this.disabledDays) {
+           validDay = !this.isDayDisabled(day,month,year)
+        }
+        
+        return validMin && validMax && validDate && validDay;
+    }
+    
+    isDateDisabled(day, month, year)  {
+        if(this.props.disabledDates) {
+            for(let disabledDate of this.props.disabledDates) {
+                if(disabledDate.getFullYear() === year && disabledDate.getMonth() === month && disabledDate.getDate() === day) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    isDayDisabled(day, month, year):boolean {
+        if(this.props.disabledDays) {
+            let weekday = new Date(year, month, day);
+            let weekdayNumber = weekday.getDay();
+            return this.props.disabledDays.indexOf(weekdayNumber) !== -1;
+        }
+        return false;
     }
     
     onTodayButtonClick(event) {
