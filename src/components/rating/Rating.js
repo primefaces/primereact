@@ -12,7 +12,8 @@ export class Rating extends Component {
         stars: 5,
         cancel: true,
         style: null,
-        className: null
+        className: null,
+        onChange: null
     }
 
     static propsTypes = {
@@ -23,7 +24,8 @@ export class Rating extends Component {
         stars: PropTypes.number,
         cancel: PropTypes.bool,
         style: PropTypes.object,
-        className: PropTypes.string
+        className: PropTypes.string,
+        onChange: PropTypes.func
     }
 
     constructor(props) {
