@@ -419,7 +419,9 @@ export class Calendar extends Component {
     }
     
     updateInputfield(value) {
-        this.inputfield.value = this.getInputFieldValue(value);
+        if(this.inputfield) {
+            this.inputfield.value = this.getInputFieldValue(value);
+        }
     }
     
     getFirstDayOfMonthIndex(month, year) {
