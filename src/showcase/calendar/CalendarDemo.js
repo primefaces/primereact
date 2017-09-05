@@ -267,6 +267,12 @@ let es = {
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
+                            <td>value</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Value of the calendar.</td>
+                        </tr>
+                        <tr>
                             <td>defaultDate</td>
                             <td>Date</td>
                             <td>null</td>
@@ -344,17 +350,23 @@ let es = {
                             <td>false</td>
                             <td>When enabled, displays a button with icon next to input.</td>
                         </tr>
-                         <tr>
-                            <td>showOnFocus</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>When disabled, datepicker will not be visible with input focus.</td>
-                        </tr>
                         <tr>
                             <td>icon</td>
                             <td>string</td>
                             <td>fa-calendar</td>
                             <td>Icon of the calendar button.</td>
+                        </tr>
+                        <tr>
+                            <td>utc</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to convert date to UTC on selection.</td>
+                        </tr>
+                        <tr>
+                            <td>showOnFocus</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>When disabled, datepicker will not be visible with input focus.</td>
                         </tr>
                         <tr>
                             <td>appendTo</td>
@@ -397,7 +409,13 @@ let es = {
                             <td>boolean</td>
                             <td>false</td>
                             <td>Whether the year should be rendered as a dropdown instead of text.</td>
-                        </tr>                        
+                        </tr>  
+                        <tr>
+                            <td>maxDateCount</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Maximum number of selectable dates in multiple mode.</td>
+                        </tr>                      
                         <tr>
                             <td>yearRange</td>
                             <td>string</td>
@@ -417,22 +435,40 @@ let es = {
                             <td>Specifies 12 or 24 hour format.</td>
                         </tr>
                         <tr>
-                            <td>locale</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>An object having regional configuration properties for the calendar.</td>
-                        </tr>
-                        <tr>
                             <td>timeOnly</td>
                             <td>boolean</td>
                             <td>false</td>
                             <td>Whether to display timepicker only.</td>
                         </tr>
                         <tr>
+                            <td>locale</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>An object having regional configuration properties for the calendar.</td>
+                        </tr>
+                        <tr>
                             <td>dataType</td>
                             <td>string</td>
                             <td>date</td>
                             <td>Type of the value to write back to ngModel, default is date and alternative is string.</td>
+                        </tr>
+                        <tr>
+                            <td>showButtonBar</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to display today and clear buttons at the footer</td>
+                        </tr>
+                        <tr>
+                            <td>todayButtonStyleClass</td>
+                            <td>string</td>
+                            <td>ui-secondary-button</td>
+                            <td>Style class of the today button.</td>
+                        </tr>
+                        <tr>
+                            <td>clearButtonStyleClass</td>
+                            <td>string</td>
+                            <td>ui-secondary-button</td>
+                            <td>Style class of the clear button.</td>
                         </tr>
                         <tr>
                             <td>required</td>
@@ -445,12 +481,6 @@ let es = {
                             <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
-                        </tr>
-                        <tr>
-                            <td>showSeconds</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether to show the seconds in time picker.</td>
                         </tr>
                         <tr>
                             <td>stepHour</td>
@@ -471,34 +501,10 @@ let es = {
                             <td>Seconds to change per step.</td>
                         </tr>
                         <tr>
-                            <td>utc</td>
+                            <td>showSeconds</td>
                             <td>boolean</td>
                             <td>false</td>
-                            <td>Whether to convert date to UTC on selection.</td>
-                        </tr>
-                        <tr>
-                            <td>maxDateCount</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Maximum number of selectable dates in multiple mode.</td>
-                        </tr>
-                        <tr>
-                            <td>showButtonBar</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether to display today and clear buttons at the footer</td>
-                        </tr>
-                        <tr>
-                            <td>todayButtonStyleClass</td>
-                            <td>string</td>
-                            <td>ui-secondary-button</td>
-                            <td>Style class of the today button.</td>
-                        </tr>
-                        <tr>
-                            <td>clearButtonStyleClass</td>
-                            <td>string</td>
-                            <td>ui-secondary-button</td>
-                            <td>Style class of the clear button.</td>
+                            <td>Whether to show the seconds in time picker.</td>
                         </tr>
                     </tbody>
                 </table>
