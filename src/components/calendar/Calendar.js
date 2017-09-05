@@ -122,6 +122,21 @@ export class Calendar extends Component {
         this.state = {};
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
+        this.onInputFocus = this.onInputFocus.bind(this);
+        this.onInputBlur = this.onInputBlur.bind(this);
+        this.onInputKeydown = this.onInputKeydown.bind(this);
+        this.onInputClick = this.onInputClick.bind(this);
+        this.onUserInput = this.onUserInput.bind(this);
+        this.prevMonth = this.prevMonth.bind(this);
+        this.nextMonth = this.nextMonth.bind(this);
+        this.incrementHour = this.incrementHour.bind(this);
+        this.decrementHour = this.decrementHour.bind(this);
+        this.incrementMinute = this.incrementMinute.bind(this);
+        this.decrementMinute = this.decrementMinute.bind(this);
+        this.incrementSecond = this.incrementSecond.bind(this);
+        this.decrementSecond = this.decrementSecond.bind(this);
+        this.toggleAMPM = this.toggleAMPM.bind(this);
+        this.onDatePickerClick = this.onDatePickerClick.bind(this);
     }
 
     createMonth(month, year) {
@@ -1260,8 +1275,8 @@ export class Calendar extends Component {
 
         if(!this.props.inline) {
             var inputElement = <InputText ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} defaultValue={this.getInputFieldValue(this.props.value)}  type="text" 
-                required={this.props.required} onFocus={(e) => this.onInputFocus(e)} onKeyDown={this.onInputKeydown.bind(this)} onClick={this.onInputClick.bind(this)}
-                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readOnlyInput} onInput={this.onUserInput.bind(this)} 
+                required={this.props.required} onFocus={this.onInputFocus} onKeyDown={this.onInputKeydown} onClick={this.onInputClick}
+                onBlur={this.onInputBlur} readOnly={this.props.readOnlyInput} onInput={this.onUserInput} 
                 style={this.props.inputStyle} className={this.props.inputClassName} 
                 placeholder={this.props.placeholder || ''} 
                 disabled={this.props.disabled} tabIndex={this.props.tabindex} />
@@ -1284,10 +1299,10 @@ export class Calendar extends Component {
         });
 
         if(!this.props.timeOnly) {
-            var prevLink = (<a className="ui-datepicker-prev ui-corner-all" href="#" onClick={this.prevMonth.bind(this)}>
+            var prevLink = (<a className="ui-datepicker-prev ui-corner-all" href="#" onClick={this.prevMonth}>
                                 <span className="fa fa-angle-left"></span>
                             </a>),
-                nextLink = (<a className="ui-datepicker-next ui-corner-all" href="#" onClick={this.nextMonth.bind(this)}>
+                nextLink = (<a className="ui-datepicker-next ui-corner-all" href="#" onClick={this.nextMonth}>
                                 <span className="fa fa-angle-right"></span>
                             </a>);
 
@@ -1369,38 +1384,38 @@ export class Calendar extends Component {
                             </div>);
 
             var hourPicker = (<div className="ui-hour-picker">
-                                <a href="#" onClick={this.incrementHour.bind(this)}>
+                                <a href="#" onClick={this.incrementHour}>
                                     <span className="fa fa-angle-up"></span>
                                 </a>
                                 <span style={{'display': time.hour < 10 ? 'inline': 'none'}}>0</span><span>{time.hour}</span>
-                                <a href="#" onClick={this.decrementHour.bind(this)}>
+                                <a href="#" onClick={this.decrementHour}>
                                     <span className="fa fa-angle-down"></span>
                                 </a>
                             </div>),
                 minutePicker = (<div className="ui-minute-picker">
-                                <a href="#" onClick={this.incrementMinute.bind(this)}>
+                                <a href="#" onClick={this.incrementMinute}>
                                     <span className="fa fa-angle-up"></span>
                                 </a>
                                 <span style={{'display': time.minute < 10 ? 'inline': 'none'}}>0</span><span>{time.minute}</span>
-                                <a href="#" onClick={this.decrementMinute.bind(this)}>
+                                <a href="#" onClick={this.decrementMinute}>
                                     <span className="fa fa-angle-down"></span>
                                 </a>
                             </div>),
                 secondPicker = this.props.showSeconds && (<div className="ui-second-picker">
-                                    <a href="#" onClick={this.incrementSecond.bind(this)}>
+                                    <a href="#" onClick={this.incrementSecond}>
                                         <span className="fa fa-angle-up"></span>
                                     </a>
                                     <span style={{'display': time.second < 10 ? 'inline': 'none'}}>0</span><span>{time.second}</span>
-                                    <a href="#" onClick={this.incrementSecond.bind(this)}>
+                                    <a href="#" onClick={this.incrementSecond}>
                                         <span className="fa fa-angle-down"></span>
                                     </a>
                                 </div>),
                 ampmPicker = this.props.hourFormat==='12' && (<div className="ui-ampm-picker">
-                                    <a href="#" onClick={this.toggleAMPM.bind(this)}>
+                                    <a href="#" onClick={this.toggleAMPM}>
                                         <span className="fa fa-angle-up"></span>
                                     </a>
                                     <span>{this.pm ? 'PM' : 'AM'}</span>
-                                    <a href="#" onClick={this.toggleAMPM.bind(this)}>
+                                    <a href="#" onClick={this.toggleAMPM}>
                                         <span className="fa fa-angle-down"></span>
                                     </a>
                                 </div>);
@@ -1435,7 +1450,7 @@ export class Calendar extends Component {
                 {inputElement}
                 {buttonElement}
                 <div ref={(el) => this.overlay = el} className={datepickerStyleClass} 
-                    onClick={this.onDatePickerClick.bind(this)}>
+                    onClick={this.onDatePickerClick}>
                     {datepickerHeader}
                     {table}
                     {timepicker}

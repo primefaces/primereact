@@ -170,6 +170,12 @@ onChangeBasic(e) {
 `}
 </CodeHighlight>
 
+            <h3>Selection Mode</h3>
+            <p>By default calendar allows selecting one date and multiple dates can be selected by setting selectionMode to multiple. In this
+            case calendar updates the value with an array of dates where optionally number of selectable dates can be restricted with maxDateCount property.
+            Third alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value
+            is the end date. Note that time is not currently supported in multiple and range modes.</p>
+
             <h3>DateFormat</h3>
             <p>Default date format is mm/dd/yy, to customize this use dateFormat property.</p>
 
@@ -270,6 +276,12 @@ var es = {
                             <td>Date</td>
                             <td>null</td>
                             <td>Set the date to highlight on first opening if the field is blank.</td>
+                        </tr>
+                        <tr>
+                            <td>selectionMode</td>
+                            <td>string</td>
+                            <td>single</td>
+                            <td>Defines the quantity of the selection, valid values are "single", "multiple" and "range".</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -463,6 +475,36 @@ var es = {
                             <td>1</td>
                             <td>Seconds to change per step.</td>
                         </tr>
+                        <tr>
+                            <td>utc</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to convert date to UTC on selection.</td>
+                        </tr>
+                        <tr>
+                            <td>maxDateCount</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Maximum number of selectable dates in multiple mode.</td>
+                        </tr>
+                        <tr>
+                            <td>showButtonBar</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to display today and clear buttons at the footer</td>
+                        </tr>
+                        <tr>
+                            <td>todayButtonStyleClass</td>
+                            <td>string</td>
+                            <td>ui-secondary-button</td>
+                            <td>Style class of the today button.</td>
+                        </tr>
+                        <tr>
+                            <td>clearButtonStyleClass</td>
+                            <td>string</td>
+                            <td>ui-secondary-button</td>
+                            <td>Style class of the clear button.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -479,22 +521,36 @@ var es = {
                     </thead>
                     <tbody>
                         <tr>
+                            <td>onChange</td>
+                            <td>originalEvent: Browser event <br />
+                                value: Selected value</td>
+                            <td>Callback to invoke when value changes.</td>
+                        </tr>
+                        <tr>
                             <td>onSelect</td>
-                            <td>value: Selected value
-                            </td>
+                            <td>originalEvent: Browser event <br />
+                                value: Selected value</td>
                             <td>Callback to invoke when a date is selected.</td>
                         </tr>
                         <tr>
                             <td>onBlur</td>
-                            <td>event: Blur event
-                            </td>
+                            <td>event: Blur event</td>
                             <td>Callback to invoke on blur of input field.</td>
                         </tr>
                         <tr>
                             <td>onFocus</td>
-                            <td>event: Focus event
-                            </td>
+                            <td>event: Focus event</td>
                             <td>Callback to invoke on focus of input field.</td>
+                        </tr>
+                        <tr>
+                            <td>onTodayClick</td>
+                            <td>event: Click event</td>
+                            <td>Callback to invoke when today button is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onClearClick</td>
+                            <td>event: Click event</td>
+                            <td>Callback to invoke when clear button is clicked.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -535,137 +591,126 @@ var es = {
                 </a>
 <CodeHighlight className="javascript">
 {`
-export class CalendarDemo extends Component {
+    import React, {Component} from 'react';
+    import {Link} from 'react-router';
+    import {Calendar} from 'primereact/components/calendar/Calendar';
+    import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 
-    constructor() {
-        super();
-        this.state = {};
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeSpanish = this.onChangeSpanish.bind(this);
-        this.onChangeIcon = this.onChangeIcon.bind(this);
-        this.onChangeRestrict = this.onChangeRestrict.bind(this);
-        this.onChangeNavigators = this.onChangeNavigators.bind(this);
-        this.onChangeTime = this.onChangeTime.bind(this);
-        this.onChangeTimeOnly = this.onChangeTimeOnly.bind(this);
-        this.onChangeInline = this.onChangeInline.bind(this);
-    }
+    export class CalendarDemo extends Component {
 
-    onChangeBasic(e) {
-        this.setState({ date1: e.value });
-    }
+        constructor() {
+            super();
+            this.state = {
+                date1: null,
+                date2: null,
+                date3: null,
+                date4: null,
+                date5: null,
+                date6: null,
+                date7: null,
+                date8: null,
+                date9: null,
+                dates1: null,
+                dates2: null
+            };
+        }
 
-    onChangeSpanish(e) {
-        this.setState({ date2: e.value });
-    }
+        render() {
+            let es = {
+                firstDayOfWeek: 1,
+                dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
+                dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
+                dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
+                monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+                monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+            };
 
-    onChangeIcon(e) {
-        this.setState({ date3: e.value });
-    }
+            let today = new Date();
+            let month = today.getMonth();
+            let year = today.getFullYear();
+            let prevMonth = (month === 0) ? 11 : month - 1;
+            let prevYear = (prevMonth === 11) ? year - 1 : year;
+            let nextMonth = (month === 11) ? 0 : month + 1;
+            let nextYear = (nextMonth === 0) ? year + 1 : year;
+            
+            let minDate = new Date();
+            minDate.setMonth(prevMonth);
+            minDate.setFullYear(prevYear);
+            let maxDate = new Date();
+            maxDate.setMonth(nextMonth);
+            maxDate.setFullYear(nextYear);
 
-    onChangeRestrict(e) {
-        this.setState({ date4: e.value });
-    }
-
-    onChangeNavigators(e) {
-        this.setState({ date5: e.value });
-    }
-
-    onChangeTime(e) {
-        this.setState({ date6: e.value });
-    }
-
-    onChangeTimeOnly(e) {
-        this.setState({ date7: e.value });
-    }
-
-    onChangeInline(e) {
-        this.setState({ date8: e.value });
-    }
-
-    parseLocalDateString(date) {
-        var options = { year: 'numeric', month: 'long', day: 'numeric'};
-        return date ? new Date(date).toLocaleDateString("en-US", options) : "";
-    }
-
-    render() {
-        var es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
-        };
-
-        let today = new Date();
-        let month = today.getMonth();
-        let year = today.getFullYear();
-        let prevMonth = (month === 0) ? 11 : month - 1;
-        let prevYear = (prevMonth === 11) ? year - 1 : year;
-        let nextMonth = (month === 11) ? 0 : month + 1;
-        let nextYear = (nextMonth === 0) ? year + 1 : year;
-        this.minDate = new Date();
-        this.minDate.setMonth(prevMonth);
-        this.minDate.setFullYear(prevYear);
-        this.maxDate = new Date();
-        this.maxDate.setMonth(nextMonth);
-        this.maxDate.setFullYear(nextYear);
-
-        return (
-            <div>
-                <div className="content-section">
-                    <div className="feature-intro">
-                        <h1>Calendar</h1>
-                        <p>Calendar is an input component to select a date.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Basic</h3>
-                            <Calendar tabindex="0" onChange={this.onChangeBasic}></Calendar>{this.parseLocalDateString(this.state.date1)}
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Spanish</h3>
-                            <Calendar locale={es} dateFormat="dd/mm/yy" onChange={this.onChangeSpanish}></Calendar>{this.parseLocalDateString(this.state.date2)}
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Icon</h3>
-                            <Calendar showIcon="true" onChange={this.onChangeIcon}></Calendar><span style={{marginLeft:'35px'}}>{this.parseLocalDateString(this.state.date3)}</span>
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Restrict</h3>
-                            <Calendar minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={this.onChangeRestrict}></Calendar>{this.parseLocalDateString(this.state.date4)}
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Navigators</h3>
-                            <Calendar monthNavigator="true" yearNavigator="true" yearRange="2000:2030" onChange={this.onChangeNavigators}></Calendar>{this.parseLocalDateString(this.state.date5)}
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Time</h3>
-                            <Calendar showTime="true" onChange={this.onChangeTime}></Calendar>{this.state.date6 && new Date(this.state.date6).toString()}
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Time Only</h3>
-                            <Calendar timeOnly="true" onChange={this.onChangeTimeOnly}></Calendar>
+            return (
+                <div>
+                    <div className="content-section introduction">
+                        <div className="feature-intro">
+                            <h1>Calendar</h1>
+                            <p>Calendar is an input component to select a date.</p>
                         </div>
                     </div>
 
-                    <h3>Inline {this.parseLocalDateString(this.state.date8)}</h3>
-                    <Calendar inline="true" onChange={this.onChangeInline}></Calendar>
+                    <div className="content-section implementation">
+                        <div className="ui-g">
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Basic</h3>
+                                <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
+                            </div>
+
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Spanish</h3>
+                                <Calendar value={this.state.date2} locale={es} dateFormat="dd/mm/yy" onChange={(e) => this.setState({date2: e.value})}></Calendar>
+                            </div>
+
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Icon</h3>
+                                <Calendar value={this.state.date3} showIcon="true" onChange={(e) => this.setState({date3: e.value})}></Calendar>
+                            </div>
+
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Restrict</h3>
+                                <Calendar value={this.state.date4} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={(e) => this.setState({date4: e.value})}></Calendar>
+                            </div>
+
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Navigators</h3>
+                                <Calendar value={this.state.date5} monthNavigator="true" yearNavigator="true" yearRange="2000:2030" onChange={(e) => this.setState({date5: e.value})}></Calendar>
+                            </div>
+                            
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Multiple</h3>
+                                <Calendar value={this.state.dates1} selectionMode="multiple" onChange={(e) => this.setState({dates1: e.value})}></Calendar>
+                            </div>
+                            
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Range</h3>
+                                <Calendar value={this.state.dates2} selectionMode="range" onChange={(e) => this.setState({dates2: e.value})}></Calendar>
+                            </div>
+
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Time</h3>
+                                <Calendar value={this.state.date6} showTime="true" onChange={(e) => this.setState({date6: e.value})}></Calendar>
+                            </div>
+
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Time Only</h3>
+                                <Calendar value={this.state.date7} timeOnly="true" onChange={(e) => this.setState({date7: e.value})}></Calendar>
+                            </div>
+                            
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>ButtonBar</h3>
+                                <Calendar value={this.state.date8} showButtonBar={true} onChange={(e) => this.setState({date8: e.value})}></Calendar>
+                            </div>
+                                                    
+                            <div className="ui-g-12 ui-md-4">
+                                <h3>Inline</h3>
+                                <Calendar value={this.state.date9} inline="true" onChange={(e) => this.setState({date9: e.value})}></Calendar>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <CalendarDoc></CalendarDoc>
-            </div>
-        );
+            );
+        }
     }
-}
 
 `}
 </CodeHighlight>
