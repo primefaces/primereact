@@ -83,16 +83,18 @@ export class Accordion extends Component {
                 let selected = this.isSelected(i);
                 let tabHeaderClass = classNames('ui-accordion-header ui-state-default ui-corner-all', {
                     'ui-state-active': selected
-                }),
-                tabHeader = <div className={tabHeaderClass} key={tab.props.header} onClick={(e) => this.onTabClick(e, i)}>
+                });
+                
+                let tabHeader = <div className={tabHeaderClass} key={tab.props.header} onClick={(e) => this.onTabClick(e, i)}>
                     <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
                     <a href="#">{tab.props.header}</a>
                 </div>;
                 
                 let tabContentWrapperClass = classNames('ui-accordion-content-wrapper', {
-                    'ui-accordion-content-wrapper-overflown': !selected
-                }), 
-                tabContent = <div className={tabContentWrapperClass} style={{maxHeight: selected ? '4000px' : '0px', transitionTimingFunction:'cubic-bezier(0.86, 0, 0.07, 1)',transitionDuration:'400ms'}}>
+                    'ui-helper-hidden': !selected
+                }); 
+                
+                let tabContent = <div className={tabContentWrapperClass}>
                     <div className="ui-accordion-content ui-widget-content">
                         {tab.props.children}
                     </div>
