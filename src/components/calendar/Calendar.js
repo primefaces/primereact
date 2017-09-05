@@ -165,29 +165,55 @@ export class Calendar extends Component {
         }
     }
     
-    initTime(date) {
-        this.pm = date.getHours() > 11;
-        let currentHour, currentMinute, currentSecond;
-        if(this.props.showTime) {
-            currentMinute = date.getMinutes();
-            currentSecond = date.getSeconds();
-            
-            if(this.props.hourFormat === '12')
-                currentHour = date.getHours() === 0 ? 12 : date.getHours() % 12;
+    getTime() {
+        let date;
+        if(this.props.value) {
+            if(this.isSingleSelection()) 
+                date = this.props.value;
             else
-                currentHour = date.getHours();
+                date = this.props.value.length ? this.props.value[0] : this.props.defaultDate||new Date();
         }
-        else if(this.props.timeOnly) {
-            currentMinute = 0;
-            currentHour = 0;
-            currentSecond = 0;
+        else {
+            date = this.props.defaultDate||new Date();
         }
         
-        this.setState({
-            currentHour: currentHour,
-            currentMinute: currentMinute,
-            currentSecond: currentSecond
-        })
+        this.pm = date.getHours() > 11;
+        let hour, minute, second;
+        if(this.props.showTime) {
+            minute = date.getMinutes();
+            second = date.getSeconds();
+            
+            if(this.props.hourFormat === '12')
+                hour = date.getHours() === 0 ? 12 : date.getHours() % 12;
+            else
+                hour = date.getHours();
+        }
+        else if(this.props.timeOnly) {
+            hour = 0;
+            minute = 0;
+            second = 0;
+        }
+        
+        return {
+            hour: hour,
+            minute: minute,
+            second: second
+        };
+    }
+    
+    getMonthYearDate(value) {
+        let date;
+        if(value) {
+            if(this.isSingleSelection()) 
+                date = value;
+            else
+                date = value.length ? value[0] : this.props.defaultDate||new Date();
+        }
+        else {
+            date = this.props.defaultDate||new Date();
+        }
+        
+        return date;
     }
     
     prevMonth(event) {
@@ -259,9 +285,6 @@ export class Calendar extends Component {
             if(this.shouldSelectDate(dateMeta)) {
                 if(dateMeta.otherMonth) {
                     if(this.selectOtherMonths) {
-                        this.currentMonth = dateMeta.month;
-                        this.currentYear = dateMeta.year;
-                        this.createMonth(this.currentMonth, this.currentYear);
                         this.selectDate(event, dateMeta);
                     }
                 }
@@ -298,6 +321,8 @@ export class Calendar extends Component {
     
     selectDate(event, dateMeta) {
         let date;
+        let time = this.getTime();
+        
         if(this.props.utc)
             date = new Date(Date.UTC(dateMeta.year, dateMeta.month, dateMeta.day));
         else
@@ -305,12 +330,12 @@ export class Calendar extends Component {
             
         if(this.props.showTime) {
             if(this.props.hourFormat === '12' && this.pm && this.currentHour !== 12)
-                date.setHours(this.currentHour + 12);
+                date.setHours(time.hour + 12);
             else
-                date.setHours(this.currentHour);
+                date.setHours(time.hour);
 
-            date.setMinutes(this.currentMinute);
-            date.setSeconds(this.currentSecond);
+            date.setMinutes(time.minute);
+            date.setSeconds(time.second);
         }
         
         if(this.isSingleSelection()) {
@@ -559,77 +584,91 @@ export class Calendar extends Component {
     }
     
     incrementHour(event) {
-        let currentHour = this.state.currentHour;
-        let newHour = currentHour + this.props.stepHour;
+        let time = this.getTime();
+        let hour = time.hour + this.props.stepHour;
         
         if(this.props.hourFormat === '24')
-            currentHour = (newHour >= 24) ? (newHour - 24) : newHour;        
+            hour = (hour >= 24) ? (hour - 24) : hour;        
         else if(this.props.hourFormat === '12')
-            currentHour = (newHour >= 13) ? (newHour - 12) : newHour;
+            hour = (hour >= 13) ? (hour - 12) : hour;
                     
-        this.updateTime(event);
+        time.hour = hour;    
+        this.updateTime(event, time);
                 
         event.preventDefault();
     }
     
     decrementHour(event) {
-        let newHour = this.currentHour - this.props.stepHour;
+        let time = this.getTime();
+        let hour = time.hour - this.props.stepHour;
+        
         if(this.props.hourFormat === '24')
-            this.currentHour = (newHour < 0) ? (24 + newHour) : newHour;        
+            hour = (hour < 0) ? (24 + hour) : hour;        
         else if(this.props.hourFormat === '12')
-            this.currentHour = (newHour <= 0) ? (12 + newHour) : newHour;
-            
-        this.updateTime(event);
+            hour = (hour <= 0) ? (12 + hour) : hour;
+        
+        time.hour = hour;    
+        this.updateTime(event, time);
 
         event.preventDefault();
     }
     
     incrementMinute(event) {
-        let newMinute = this.currentMinute + this.props.stepMinute;
-        this.currentMinute = (newMinute > 59) ? newMinute - 60 : newMinute;
-            
-        this.updateTime(event);
+        let time = this.getTime();
+        let minute = time.minute + this.props.stepMinute;
+        minute = (minute > 59) ? minute - 60 : minute;
+        
+        time.minute = minute;
+        this.updateTime(event, time);
                 
         event.preventDefault();
     }
     
     decrementMinute(event) {
-        let newMinute = this.currentMinute - this.props.stepMinute;
-        this.currentMinute = (newMinute < 0) ? 60 + newMinute : newMinute;
+        let time = this.getTime();
+        let minute = time.minute - this.props.stepMinute;
+        minute = (minute < 0) ? 60 + minute : minute;
             
-        this.updateTime(event);
+        time.minute = minute;
+        this.updateTime(event, time);
             
         event.preventDefault();
     }
     
     incrementSecond(event) {
-        let newSecond = this.currentSecond + this.props.stepSecond;
-        this.currentSecond = (newSecond > 59) ? newSecond - 60 : newSecond;
+        let time = this.getTime();
+        let second = time.second + this.props.stepSecond;
+        second = (second > 59) ? second - 60 : second;
             
-        this.updateTime(event);
+        time.second = second;
+        this.updateTime(event, time);
                 
         event.preventDefault();
     }
     
     decrementSecond(event) {
-        let newSecond = this.currentSecond - this.props.stepSecond;
-        this.currentSecond = (newSecond < 0) ? 60 + newSecond : newSecond;
+        let time = this.getTime();
+        let second = time.second + this.props.stepSecond;
+        second = (second < 0) ? 60 + second : second;
             
-        this.updateTime(event);
+        time.second = second;
+        this.updateTime(event, time);
             
         event.preventDefault();
     }
     
-    updateTime(event) {
-        let value = this.props.value ? Object.assign({}, this.props.value) : new Date();
-        if(this.props.hourFormat === '12' && this.pm && this.currentHour !== 12)
-            value.setHours(this.currentHour + 12);
+    updateTime(event, time) {
+        let value = this.props.value||new Date();
+        if(this.props.hourFormat === '12' && this.pm && time.hour  !== 12)
+            value.setHours(time.hour + 12);
         else
-            value.setHours(this.currentHour);
+            value.setHours(time.hour );
         
-        value.setMinutes(this.currentMinute);
-        value.setSeconds(this.currentSecond);
+        value.setMinutes(time.minute);
+        value.setSeconds(time.second);
+        
         this.updateModel(event, value);
+        
         if(this.props.onSelect) {
             this.props.onSelect({
                 originalEvent: event,
@@ -644,7 +683,7 @@ export class Calendar extends Component {
         event.preventDefault();
     }
     
-    onInput(event) {
+    onInputChange(event) {
         let val = event.target.value;   
         
         try {
@@ -767,7 +806,9 @@ export class Calendar extends Component {
     }
     
     hideOverlay() {
-        this.overlay.style.display = 'none';
+        if(!this.props.inline) {
+            this.overlay.style.display = 'none';
+        }
     }
     
     // Ported from jquery-ui datepicker formatDate    
@@ -1152,7 +1193,7 @@ export class Calendar extends Component {
     }
 
     componentWillMount() {
-        let date = this.props.defaultDate||new Date();        
+        let date = this.getMonthYearDate(this.props.value);
         this.createWeekDays();
         let month =  date.getMonth();
         let year = date.getFullYear();
@@ -1162,7 +1203,6 @@ export class Calendar extends Component {
             currentYear: year,
             dates: this.createMonth(month, year)
         });
-        this.initTime(date);
         
         this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
     		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
@@ -1179,6 +1219,20 @@ export class Calendar extends Component {
         }
     }
     
+    componentWillReceiveProps(nextProps) {
+        let date = this.getMonthYearDate(nextProps.value);
+        let month =  date.getMonth();
+        let year = date.getFullYear();
+        
+        if(month !== this.state.currentMonth || year !== this.state.currentYear) {
+            this.setState({
+                currentMonth: month,
+                currentYear: year,
+                dates: this.createMonth(month, year)
+            });
+        }
+    }
+    
     componentDidMount() {           
         if(!this.props.inline && this.props.appendTo) {
             if(this.props.appendTo === 'body')
@@ -1187,7 +1241,7 @@ export class Calendar extends Component {
                 DomHandler.appendChild(this.overlay, this.props.appendTo);
         }
     }
-    
+            
     render() {
         var containerStyleClass = classNames('ui-calendar', this.props.className, {
             'ui-calendar-w-btn': this.props.showIcon
@@ -1196,7 +1250,7 @@ export class Calendar extends Component {
         if(!this.props.inline) {
             var inputElement = <InputText value={this.getInputFieldValue()} ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} type="text" 
                 required={this.props.required} onFocus={(e) => this.onInputFocus(this.inputfield, e)} onKeyDown={this.onInputKeydown.bind(this)} onClick={this.onInputClick.bind(this)}
-                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readOnlyInput} onInput={this.onInput.bind(this)} 
+                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readOnlyInput} onChange={this.onInputChange.bind(this)} 
                 style={this.props.inputStyle} className={this.props.inputClassName} 
                 placeholder={this.props.placeholder || ''} 
                 disabled={this.props.disabled} tabIndex={this.props.tabindex} />
@@ -1292,6 +1346,7 @@ export class Calendar extends Component {
 
         /* Timepicker */
         if(this.props.showTime||this.props.timeOnly) {
+            let time = this.getTime();
             var separator = (<div className="ui-separator">
                                 <a href="#">
                                     <span className="fa fa-angle-up"></span>
@@ -1306,7 +1361,7 @@ export class Calendar extends Component {
                                 <a href="#" onClick={this.incrementHour.bind(this)}>
                                     <span className="fa fa-angle-up"></span>
                                 </a>
-                                <span style={{'display': this.state.currentHour < 10 ? 'inline': 'none'}}>0</span><span>{this.state.currentHour}</span>
+                                <span style={{'display': time.hour < 10 ? 'inline': 'none'}}>0</span><span>{time.hour}</span>
                                 <a href="#" onClick={this.decrementHour.bind(this)}>
                                     <span className="fa fa-angle-down"></span>
                                 </a>
@@ -1315,7 +1370,7 @@ export class Calendar extends Component {
                                 <a href="#" onClick={this.incrementMinute.bind(this)}>
                                     <span className="fa fa-angle-up"></span>
                                 </a>
-                                <span style={{'display': this.state.currentMinute < 10 ? 'inline': 'none'}}>0</span><span>{this.state.currentMinute}</span>
+                                <span style={{'display': time.minute < 10 ? 'inline': 'none'}}>0</span><span>{time.minute}</span>
                                 <a href="#" onClick={this.decrementMinute.bind(this)}>
                                     <span className="fa fa-angle-down"></span>
                                 </a>
@@ -1324,7 +1379,7 @@ export class Calendar extends Component {
                                     <a href="#" onClick={this.incrementSecond.bind(this)}>
                                         <span className="fa fa-angle-up"></span>
                                     </a>
-                                    <span style={{'display': this.state.currentSecond < 10 ? 'inline': 'none'}}>0</span><span>{this.state.currentSecond}</span>
+                                    <span style={{'display': time.second < 10 ? 'inline': 'none'}}>0</span><span>{time.second}</span>
                                     <a href="#" onClick={this.incrementSecond.bind(this)}>
                                         <span className="fa fa-angle-down"></span>
                                     </a>
