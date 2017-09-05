@@ -17,7 +17,7 @@ export class OrderList extends Component {
         responsive: false,
         dragdrop: false,
         dragdropScope: null,
-        onReorder: null,
+        onChange: null,
         itemTemplate: null
     }
 
@@ -31,7 +31,7 @@ export class OrderList extends Component {
         responsive: PropTypes.bool,
         dragdrop: PropTypes.func,
         dragdropScope: PropTypes.string,
-        onReorder: PropTypes.func,
+        onChange: PropTypes.func,
         itemTemplate: PropTypes.func
     }
 
@@ -116,8 +116,8 @@ export class OrderList extends Component {
             
             this.movedUp = true;
             
-            if(this.props.onReorder) {
-                this.props.onReorder({
+            if(this.props.onChange) {
+                this.props.onChange({
                     originalEvent: event,
                     value: value
                 })
@@ -145,8 +145,8 @@ export class OrderList extends Component {
                 }
             }
 
-            if(this.props.onReorder) {
-                this.props.onReorder({
+            if(this.props.onChange) {
+                this.props.onChange({
                     originalEvent: event,
                     value: value
                 })
@@ -179,8 +179,8 @@ export class OrderList extends Component {
 
             this.movedDown = true;
             
-            if(this.props.onReorder) {
-                this.props.onReorder({
+            if(this.props.onChange) {
+                this.props.onChange({
                     originalEvent: event,
                     value: value
                 })
@@ -207,8 +207,8 @@ export class OrderList extends Component {
                 }
             }
 
-            if(this.props.onReorder) {
-                this.props.onReorder({
+            if(this.props.onChange) {
+                this.props.onChange({
                     originalEvent: event,
                     value: value
                 })
@@ -246,8 +246,8 @@ export class OrderList extends Component {
         this.dragOverItemIndex = null;
         DomHandler.removeClass(event.target, 'ui-state-highlight');
 
-        if(this.props.onReorder) {
-            this.props.onReorder({
+        if(this.props.onChange) {
+            this.props.onChange({
                 originalEvent: event,
                 value: value
             })

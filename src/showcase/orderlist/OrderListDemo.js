@@ -13,9 +13,10 @@ export class OrderListDemo extends Component {
             cars: null
         };
         this.carservice = new CarService();
+        this.onCarsChange = this.onCarsChange.bind(this);
     }
 
-    onReorderCars(e) {
+    onCarsChange(e) {
         this.setState({cars: e.value});
     }
 
@@ -46,7 +47,7 @@ export class OrderListDemo extends Component {
 
                 <div className="content-section implementation">
                     <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} 
-                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
+                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onChange={this.onCarsChange}></OrderList>
                 </div>
                 
                 <OrderListDoc></OrderListDoc>
@@ -71,12 +72,12 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onReorder 
+            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onChange 
                     callback to update the value after reorder.
             </p>
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" onReorder={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -86,7 +87,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
             
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onReorder={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -95,7 +96,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
             <p>In responsive mode, orderlist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" onReorder={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -188,7 +189,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onReorder</td>
+                            <td>onChange</td>
                             <td>event.originalEvent: Browser event <br />
                                 value: Reordered list</td>
                             <td>Callback to invoke when list is reordered.</td>
@@ -251,9 +252,10 @@ export class OrderListDemo extends Component {
             cars: null
         };
         this.carservice = new CarService();
+        this.onCarsChange = this.onCarsChange.bind(this);
     }
 
-    onReorderCars(e) {
+    onCarsChange(e) {
         this.setState({cars: e.value});
     }
 
@@ -284,7 +286,7 @@ export class OrderListDemo extends Component {
 
                 <div className="content-section implementation">
                     <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} 
-                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
+                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onChange={this.onCarsChange}></OrderList>
                 </div>
 
             </div>
