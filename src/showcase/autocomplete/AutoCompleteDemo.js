@@ -179,6 +179,12 @@ render() {
                                         <td>Unique identifier of the element.</td>
                                     </tr>
                                     <tr>
+                                        <td>value</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Value of the component.</td>
+                                    </tr>
+                                    <tr>
                                         <td>suggestions</td>
                                         <td>array</td>
                                         <td>null</td>
@@ -239,7 +245,7 @@ render() {
                                         <td>Inline style of the input field.</td>
                                     </tr>
                                     <tr>
-                                        <td>inputStyleClass</td>
+                                        <td>inputClassName</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Inline style of the input field.</td>
@@ -286,6 +292,18 @@ render() {
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
+                                    <tr>
+                                        <td>itemTemplate</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Template function to return the content of a list item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectedItemTemplate</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Template function to return the content of a selected item.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -310,9 +328,20 @@ render() {
                                         <td>Callback to invoke to search for suggestions.</td>
                                     </tr>
                                     <tr>
+                                        <td>onChange</td>
+                                        <td>event: Browser event <br />
+                                            value: Value of the component</td>
+                                        <td>Callback to invoke when autocomplete value changes.</td>
+                                    </tr> 
+                                    <tr>
                                         <td>onFocus</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when autocomplete gets focus.</td>
+                                    </tr> 
+                                    <tr>
+                                        <td>onBlur</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when autocomplete loses focus.</td>
                                     </tr>                        
                                     <tr>
                                         <td>onSelect</td>

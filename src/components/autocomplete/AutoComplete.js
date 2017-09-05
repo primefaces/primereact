@@ -22,7 +22,7 @@ export class AutoComplete extends Component {
         style: null,
         className: null,
         inputStyle: null,
-        inputStyleClass: null,
+        inputClassName: null,
         placeholder: null,
         readonly: false,
         disabled: false,
@@ -30,11 +30,12 @@ export class AutoComplete extends Component {
         size: null,
         appendTo: null,
         tabindex: null,
+        completeMethod: null,
         itemTemplate: null,
         selectedItemTemplate: null,
         onChange: null,
-        completeMethod: null,
         onFocus: null,
+        onBlur: null,
         onSelect: null,
         onUnselect: null,
         onDropdownClick: null
@@ -53,7 +54,7 @@ export class AutoComplete extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         inputStyle: PropTypes.object,
-        inputStyleClass: PropTypes.string,
+        inputClassName: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -61,11 +62,12 @@ export class AutoComplete extends Component {
         size: PropTypes.number,
         appendTo: PropTypes.any,
         tabindex: PropTypes.number,
+        completeMethod: PropTypes.func,
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
         onChange: PropTypes.func,
-        completeMethod: PropTypes.func,
         onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onDropdownClick: PropTypes.func
@@ -285,9 +287,7 @@ export class AutoComplete extends Component {
     onInputFocus(event) {
         this.setState({focus: true});
         if(this.props.onFocus) {
-            this.props.onFocus({
-                originalEvent: event
-            })
+            this.props.onFocus(event);
         }
     }
 
@@ -305,8 +305,11 @@ export class AutoComplete extends Component {
         }
     }
     
-    onBlur() {
+    onBlur(event) {
         this.setState({focus: false});
+        if(this.props.onBlur) {
+            this.props.onBlur(event);
+        }
     }
     
     onDropdownFocus() {
