@@ -256,6 +256,10 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                 </a>
 <CodeHighlight className="javascript">
 {`
+import React, {Component} from 'react';
+import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
+import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+    
 export class AccordionDemo extends Component {
         
     render() {
