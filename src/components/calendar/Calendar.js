@@ -710,7 +710,7 @@ export class Calendar extends Component {
     }
     
     updateTime(event, time) {
-        let value = this.props.value||new Date();
+        let value = this.props.value ? new Date(this.props.value) : new Date();
         if(this.props.hourFormat === '12' && this.pm && time.hour  !== 12)
             value.setHours(time.hour + 12);
         else
@@ -1243,6 +1243,10 @@ export class Calendar extends Component {
                 this.yearOptions.push(i);
             }
         }
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return (nextProps.value !== this.props.value);
     }
     
     componentWillReceiveProps(nextProps) {
