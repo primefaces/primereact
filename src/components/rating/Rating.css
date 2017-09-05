@@ -1,0 +1,8 @@
+.ui-rating a {
+    margin-left: .25em;
+    cursor: pointer;
+}
+
+.ui-rating.ui-state-disabled < {
+    cursor: default;
+}

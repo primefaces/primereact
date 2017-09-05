@@ -7,19 +7,10 @@ export class RatingDemo extends Component {
 
     constructor() {
         super();
-        this.state = { val1: null, val2: undefined, val3: null, val4: 8 };
-    }
-
-    onBasicChange(event) {
-        this.setState({val1: event.value});
-    }
-
-    onMessageChange(event) {
-        this.setState({val2: event.value});
-    }
-
-    onNoCancelChange(event) {
-        this.setState({val3: event.value});
+        this.state = { 
+            val1: null, 
+            val2: null
+        };
     }
 
     render() {
@@ -33,25 +24,17 @@ export class RatingDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic {this.state.val1}</h3>
-                    <Rating value={this.state.val1} onChange={this.onBasicChange.bind(this)}/>
-                    <br />
-
-                    <h3>Message {this.state.val2}</h3>
-                    <Rating value={this.state.val2} onChange={this.onMessageChange.bind(this)} /> {this.state.val2 !== undefined && <span style={{'marginLeft': '10px'}}>{this.state.val2===null?"Rating Cancelled":"You have rated " + this.state.val2}</span>}
-                    <br />
-
-                    <h3>No Cancel {this.state.val3}</h3> 
-                    <Rating value={this.state.val3} cancel={false} onChange={this.onNoCancelChange.bind(this)} />
-                    <br />
+                    <h3 className="first">Basic {this.state.val1}</h3>
+                    <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
+    
+                    <h3>No Cancel {this.state.val2}</h3> 
+                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
                     <h3>ReadOnly</h3> 
                     <Rating value={5} readonly={true} stars={10} cancel={false} />
-                    <br />
 
                     <h3>Disabled</h3> 
-                    <Rating value={this.state.val4} disabled={true} stars={10} />
-                    <br />
+                    <Rating value={8} disabled={true} stars={10} />
                 </div>
 
                 <RatingDoc />
@@ -76,35 +59,17 @@ import {Rating} from 'primereact/components/rating/Rating';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Rating requires onChange method.</p>
+                        <p>Calendar is used a controlled input component with value and onChange properties.</p>
+                        
                         <CodeHighlight className="html">
-                            {`
-<Rating value={this.state.val1} onChange={this.onBasicChange.bind(this)}/>
+{`
+<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="javascript">
-                            {`
-constructor() {
-    super();
-    this.state = { val1: null };
-}
-
-onBasicChange(event) {
-    this.setState({val1: event.value});
-}
-
-render() {
-    return (
-        <Rating value={this.state.val1} onChange={this.onBasicChange.bind(this)}/>
-    );
-}
-
-`}
-                        </CodeHighlight>
-                            <h3>Attributes</h3>
-                            <div className="doc-tablewrapper">
+                        <h3>Attributes</h3>
+                        <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
                                     <tr>
@@ -122,16 +87,10 @@ render() {
                                         <td>Unique identifier of the element.</td>
                                     </tr>
                                     <tr>
-                                        <td>stars</td>
+                                        <td>value</td>
                                         <td>number</td>
-                                        <td>5</td>
-                                        <td>Number of stars.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>cancel</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>When specified a cancel icon is displayed to allow removing the value.</td>
+                                        <td>null</td>
+                                        <td>Value of the rating.</td>
                                     </tr>
                                     <tr>
                                         <td>disabled</td>
@@ -145,6 +104,31 @@ render() {
                                         <td>false</td>
                                         <td>When present, changing the value is not possible.</td>
                                     </tr>
+                                    <tr>
+                                        <td>stars</td>
+                                        <td>number</td>
+                                        <td>5</td>
+                                        <td>Number of stars.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>cancel</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>When specified a cancel icon is displayed to allow removing the value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>ClassName of the component.</td>
+                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -162,7 +146,7 @@ render() {
                                 <tbody>
                                     <tr>
                                         <td>onChange</td>
-                                        <td>event.originalEvent: browser event <br />
+                                        <td>event.originalEvent: Browser event <br />
                                             event.value: selected value
                                         </td>
                                         <td>Callback to invoke on rate change.</td>
@@ -213,29 +197,24 @@ render() {
                         </a>
                         <CodeHighlight className="javascript">
                             {`
+import React, {Component} from 'react';
+import {Rating} from 'primereact/components/rating/Rating'
+import {TabView, TabPanel} from 'primereact/components/tabview/TabView';
+
 export class RatingDemo extends Component {
 
     constructor() {
         super();
-        this.state = { val1: null, val2: undefined, val3: null, val4: 8 };
-    }
-
-    onBasicChange(event) {
-        this.setState({val1: event.value});
-    }
-
-    onMessageChange(event) {
-        this.setState({val2: event.value});
-    }
-
-    onNoCancelChange(event) {
-        this.setState({val3: event.value});
+        this.state = { 
+            val1: null, 
+            val2: null
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Rating</h1>
                         <p>Rating components is a star based selection input.</p>
@@ -243,30 +222,23 @@ export class RatingDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic {this.state.val1}</h3>
-                    <Rating value={this.state.val1} onChange={this.onBasicChange.bind(this)}/>
-                    <br />
-
-                    <h3>Message {this.state.val2}</h3>
-                    <Rating value={this.state.val2} onChange={this.onMessageChange.bind(this)} /> {this.state.val2 !== undefined && <span style={{'marginLeft': '10px'}}>{this.state.val2===null?"Rating Cancelled":"You have rated " + this.state.val2}</span>}
-                    <br />
-
-                    <h3>No Cancel {this.state.val3}</h3> 
-                    <Rating value={this.state.val3} cancel={false} onChange={this.onNoCancelChange.bind(this)} />
-                    <br />
+                    <h3 className="first">Basic {this.state.val1}</h3>
+                    <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
+    
+                    <h3>No Cancel {this.state.val2}</h3> 
+                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
                     <h3>ReadOnly</h3> 
                     <Rating value={5} readonly={true} stars={10} cancel={false} />
-                    <br />
 
                     <h3>Disabled</h3> 
-                    <Rating value={this.state.val4} disabled={true} stars={10} />
-                    <br />
+                    <Rating value={8} disabled={true} stars={10} />
                 </div>
             </div>
         )
     }
 }
+                                
 `}
                         </CodeHighlight>
                     </TabPanel>
