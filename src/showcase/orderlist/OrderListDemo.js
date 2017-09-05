@@ -23,11 +23,7 @@ export class OrderListDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
-    carTemplate(car) {
-        if(!car) {
-            return;
-        }
-        
+    carTemplate(car) {        
         var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
         
         return (
@@ -75,35 +71,22 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>OrderList requires an array as its value and a template for its content where
-               each item in the array can be accessed inside the template.
+            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onReorder 
+                    callback to update the value after reorder.
             </p>
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
-
-`}
-</CodeHighlight>
-<CodeHighlight className="javascript">
-{`
-constructor() {
-    super();
-    this.state = { cars: [] };
-    this.carservice = new CarService();
-}
-
-onReorderCars(e) {
-    this.setState({ cars: e.value });
-}
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" onReorder={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
 
             <h3>DragDrop</h3>
-            <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflict with other drag drop events on view.</p>
+            <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflicts with other drag drop events on view.</p>
+            
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onReorder={this.onReorderCars.bind(this)}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onReorder={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -112,7 +95,7 @@ onReorderCars(e) {
             <p>In responsive mode, orderlist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" onReorder={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -278,11 +261,7 @@ export class OrderListDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
-    carTemplate(car) {
-        if(!car) {
-            return;
-        }
-        
+    carTemplate(car) {        
         var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
         
         return (
