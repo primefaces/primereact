@@ -54,7 +54,9 @@ export class SplitButton extends Component {
         style: null,
         className: null,
         menuStyle: null,
-        menuClassName: null
+        menuClassName: null,
+        tabIndex: null,
+        disabled: false
     }
 
     static propsTypes = {
@@ -67,7 +69,9 @@ export class SplitButton extends Component {
         style: PropTypes.string,
         className: PropTypes.string,
         menuStyle: PropTypes.string,
-        menuClassName: PropTypes.string
+        menuClassName: PropTypes.string,
+        tabIndex: PropTypes.string,
+        disabled: PropTypes.bool
     }
 
     constructor(props) {
@@ -126,6 +130,7 @@ export class SplitButton extends Component {
     render() {
         var className = classNames('ui-splitbutton ui-buttonset ui-widget', this.props.className, {'ui-state-disabled': this.props.disabled});
         var menuClassName = classNames('ui-menu ui-menu-dynamic ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-shadow', this.props.menuClassName);
+        
         if(this.props.model) {
             var items = this.props.model.map((menuitem, index) => {
                 return <SplitButtonItem menuitem={menuitem} key={index}/>
@@ -134,7 +139,7 @@ export class SplitButton extends Component {
         
         return (
             <div id={this.props.id} className={className} style={this.props.style}  ref={(el) => { this.containerEl = el; }}>
-                <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-left"></Button>
+                <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-left" tabIndex={this.props.tabIndex}></Button>
                 <Button type="button" className="ui-splitbutton-menubutton" icon="fa-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-right"></Button>
                 <div className={menuClassName} style={this.props.menuStyle} ref={(el) => { this.panelEl = el; }}>
                     <ul className="ui-menu-list ui-helper-reset">
