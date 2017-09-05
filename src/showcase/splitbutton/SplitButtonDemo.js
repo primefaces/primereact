@@ -140,6 +140,12 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
                                         <td>Name of the icon.</td>
                                     </tr>
                                     <tr>
+                                        <td>model</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>MenuModel instance to define the overlay items.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>string</td>
                                         <td>null</td>
