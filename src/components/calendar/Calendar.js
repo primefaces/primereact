@@ -1246,7 +1246,7 @@ export class Calendar extends Component {
     }
     
     shouldComponentUpdate(nextProps, nextState) {
-        return (nextProps.value !== this.props.value);
+        return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear);
     }
     
     componentWillReceiveProps(nextProps) {

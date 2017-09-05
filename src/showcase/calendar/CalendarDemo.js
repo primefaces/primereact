@@ -76,7 +76,7 @@ export class CalendarDemo extends Component {
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Restrict</h3>
-                            <Calendar value={this.state.date4} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={(e) => this.setState({date4: e.value})}></Calendar>
+                            <Calendar value={this.state.date4} minDate={minDate} maxDate={maxDate} readOnlyInput={true} onChange={(e) => this.setState({date4: e.value})}></Calendar>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
@@ -206,12 +206,11 @@ import {Calendar} from 'primereact/components/calendar/Calendar';
 </CodeHighlight>
 
             <h3>Date Restriction</h3>
-            <p>To disable entering dates manually, set readOnlyInput to true and to restrict selectable dates use minDate
-                and maxDate options.</p>
+            <p>To disable entering dates manually, set readOnlyInput to true and to restrict selectable dates use minDate and maxDate options.</p>
 
 <CodeHighlight className="html jsx">
 {`
-<Calendar minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
 `}
 </CodeHighlight>
@@ -664,7 +663,7 @@ let es = {
 
                             <div className="ui-g-12 ui-md-4">
                                 <h3>Restrict</h3>
-                                <Calendar value={this.state.date4} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={(e) => this.setState({date4: e.value})}></Calendar>
+                                <Calendar value={this.state.date4} minDate={minDate} maxDate={maxDate} readOnlyInput={true} onChange={(e) => this.setState({date4: e.value})}></Calendar>
                             </div>
 
                             <div className="ui-g-12 ui-md-4">
