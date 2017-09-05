@@ -25,6 +25,7 @@ export class Calendar extends Component {
         selectOtherMonths: false,
         showIcon: false,
         icon: "fa-calendar",
+        utc: false,
         appendTo: null,
         readOnlyInput: false,
         shortYearCutoff: "+10",
@@ -42,8 +43,13 @@ export class Calendar extends Component {
             dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"],
             monthNames: [ "January","February","March","April","May","June","July","August","September","October","November","December" ],
-            monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+            monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
+            today: 'Today',
+            clear: 'Clear'
         },
+        showButtonBar: false,
+        todayButtonClassName: 'ui-button-secondary',
+        clearButtonClassName: 'ui-button-secondary',
         timeOnly: false,
         stepHour: 1,
         stepMinute: 1,
@@ -56,7 +62,9 @@ export class Calendar extends Component {
         onFocus: null,
         onSelect: null,
         onBlur: null,
-        onChange: null
+        onChange: null,
+        onTodayButtonClick: null,
+        onClearButtonClick: null
     }
 
     static propsTypes = {
@@ -76,6 +84,7 @@ export class Calendar extends Component {
         selectOtherMonths: PropTypes.bool,
         showIcon: PropTypes.bool,
         icon: PropTypes.string,
+        utc: PropTypes.bool,
         appendTo: PropTypes.string,
         readOnlyInput: PropTypes.bool,
         shortYearCutoff: PropTypes.string,
@@ -88,6 +97,9 @@ export class Calendar extends Component {
         showTime: PropTypes.bool,
         hourFormat: PropTypes.string,
         locale: PropTypes.object,
+        showButtonBar: PropTypes.bool,
+        todayButtonClassName: PropTypes.bool,
+        clearButtonClassName: PropTypes.bool,
         timeOnly: PropTypes.bool,
         stepHour: PropTypes.number,
         stepMinute: PropTypes.number,
@@ -100,12 +112,16 @@ export class Calendar extends Component {
         onFocus: PropTypes.func,
         onSelect: PropTypes.func,
         onBlur: PropTypes.func,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onTodayButtonClick: PropTypes.func,
+        onClearButtonClick: PropTypes.func,
     }
 
     constructor(props) {
         super(props);
         this.state = {};
+        this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
+        this.onClearButtonClick = this.onClearButtonClick.bind(this);
     }
 
     createMonth(month, year) {
@@ -521,6 +537,25 @@ export class Calendar extends Component {
         }
         
         return validMin && validMax;
+    }
+    
+    onTodayButtonClick(event) {
+        let date  = new Date();
+        let dateMeta = {day: date.getDate(), month: date.getMonth(), year: date.getFullYear(), today: true, selectable: true};
+        
+        this.onDateSelect(event, dateMeta);
+        
+        if(this.props.onTodayClick) {
+            this.onTodayClick(event);
+        }
+    }
+    
+    onClearButtonClick(event) {
+        this.updateModel(event, null);
+        this.hideOverlay();
+        if(this.props.onClearButtonClick) {
+            this.onClearButtonClick(event);
+        }
     }
     
     onInputFocus(inputfield, event) {
@@ -1394,7 +1429,7 @@ export class Calendar extends Component {
                                     </a>
                                 </div>);
 
-                var timepickerHeader = (<div className="ui-timepicker ui-widget-header ui-corner-all">
+                var timepicker = (<div className="ui-timepicker ui-widget-header ui-corner-all">
                                             {hourPicker}
                                             {separator}
                                             {minutePicker}
@@ -1402,6 +1437,20 @@ export class Calendar extends Component {
                                             {secondPicker}
                                             {ampmPicker}
                                         </div>);
+        }
+        
+        //buttonbar
+        if(this.props.showButtonBar) {
+            var buttonBar = <div className="ui-datepicker-buttonbar ui-widget-header">
+                                <div className="ui-g">
+                                    <div className="ui-g-6">
+                                        <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName}></Button>
+                                    </div>
+                                    <div className="ui-g-6">
+                                        <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.clearButtonClassName}></Button>
+                                    </div>
+                                </div>
+                            </div>
         }
 
 
@@ -1413,7 +1462,8 @@ export class Calendar extends Component {
                     onClick={this.onDatePickerClick.bind(this)}>
                     {datepickerHeader}
                     {table}
-                    {timepickerHeader}
+                    {timepicker}
+                    {buttonBar}
                 </div>
             </span >
         );

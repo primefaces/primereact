@@ -15,6 +15,9 @@ export class CalendarDemo extends Component {
             date4: null,
             date5: null,
             date6: null,
+            date7: null,
+            date8: null,
+            date9: null,
             dates1: null,
             dates2: null
         };
@@ -100,10 +103,15 @@ export class CalendarDemo extends Component {
                             <h3>Time Only</h3>
                             <Calendar value={this.state.date7} timeOnly="true" onChange={(e) => this.setState({date7: e.value})}></Calendar>
                         </div>
+                        
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>ButtonBar</h3>
+                            <Calendar value={this.state.date8} showButtonBar={true} onChange={(e) => this.setState({date8: e.value})}></Calendar>
+                        </div>
                                                 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Inline</h3>
-                            <Calendar value={this.state.date8} inline="true" onChange={(e) => this.setState({date8: e.value})}></Calendar>
+                            <Calendar value={this.state.date9} inline="true" onChange={(e) => this.setState({date9: e.value})}></Calendar>
                         </div>
                     </div>
                 </div>
