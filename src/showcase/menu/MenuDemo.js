@@ -62,98 +62,46 @@ import {Menu} from 'primereact/components/menu/Menu';
 `}
                         </CodeHighlight>
 
-                        <h3>Getting Started</h3>
-                        <p>Menu requires a collection of menuitems as its model.Core of the api is MenuItem class that defines various options such as the label, icon and children of an item in a menu.MenuItem provides the following properties. Note that not all of them may be utilized by the menu component.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>label</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Text of the item.</td>
-                                </tr>
-                                <tr>
-                                    <td>icon</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Icon of the item.</td>
-                                </tr>
-                                <tr>
-                                    <td>command</td>
-                                    <td>function</td>
-                                    <td>null</td>
-                                    <td>Callback to execute when item is clicked.</td>
-                                </tr>
-                                <tr>
-                                    <td>url</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>External link to navigate when item is clicked.</td>
-                                </tr>
-                                <tr>
-                                    <td>items</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of children menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>disabled</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When set as true, disables the menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>target</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Specifies where to open the linked document.</td>
-                                </tr>
-                                <tr>
-                                    <td>separator</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>Defines the item as a separator.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the menuitem.</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <h3>MenuModel API</h3>
+                        <p>Menu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel API</Link> for details.</p>
 
-                        <h3>Navigation</h3>
-                        <p>Navigation is specified using url property for external links and command function to invoke when an item is clicked is defined using the command property. </p>
+
+                        <h3>Getting Started</h3>
+                        <p>Menu requires a collection of menuitems as its model.</p>
                         <CodeHighlight className="html">
                             {`
-render() {
-    var items=[ {
-            label: 'File',
-            items: [{label: 'New', icon: 'fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                    {label: 'Open', icon: 'fa-download', url: 'http://primetek.com.tr'}]
-        }, {
-            label: 'Edit',
-            items: [{label: 'Undo', icon: 'fa-refresh',command:()=>{ window.location.hash="/"; }},
-                    {label: 'Redo', icon: 'fa-repeat'} ]
-        }];
-}
+<Menu model={items}/>
+
+`}
+                        </CodeHighlight>
+
+                        <CodeHighlight className="html">
+                            {`
+var items=[
+    {label: 'New', icon: 'fa-plus'},
+    {label: 'Open', icon: 'fa-download'},
+    {label: 'Undo', icon: 'fa-refresh'}
+];
+
+`}
+                        </CodeHighlight>
+
+                        <h3>SubMenus</h3>
+                        <p>Menu supports 1 level of nesting via subitems of an item.</p>
+                        <CodeHighlight className="html">
+                            {`
+var items=[
+    {
+        label: 'File',
+        items: [{label: 'New', icon: 'fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                {label: 'Open', icon: 'fa-download', url: 'http://primetek.com.tr'}]
+    },
+    {
+        label: 'Edit',
+        items: [{label: 'Undo', icon: 'fa-refresh',command:()=>{ window.location.hash="/"; }},
+                {label: 'Redo', icon: 'fa-repeat'} ]
+    }
+];
 
 `}
                         </CodeHighlight>

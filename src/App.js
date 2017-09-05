@@ -245,6 +245,7 @@ class AppMenu extends Component {
                         </a>
                         <div className={classNames({ 'submenuhide': this.state.activeMenu !== 6, 'submenushow': this.state.activeMenu === 6 })}>
                             <div>
+                                <Link to="/menumodel">&#9679; MenuModel</Link>
                                 <Link to="/menu">&#9679; Menu</Link>
                                 <Link to="/tabmenu">&#9679; TabMenu</Link>
                                 <Link to="/breadcrumb">&#9679; Breadcrumb</Link>

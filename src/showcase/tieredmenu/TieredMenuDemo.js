@@ -124,7 +124,7 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>
-                        <p>TieredMenu uses the common menu item api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
+                        <p>TieredMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
                         <p>Component is defined using the TieredMenu element .</p>

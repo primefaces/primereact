@@ -161,7 +161,7 @@ import {MegaMenu} from 'primereact/components/megamenu/MegaMenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>
-                        <p>MegaMenu uses the common menu item api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
+                        <p>MegaMenu uses the common menu item api to define its items, visit <Link to="/menumodel">  MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
                         <p>MegaMenu requires nested menuitems as its model where the items of a root menuitem is a two dimensional array to define columns in an overlay submenu.</p>

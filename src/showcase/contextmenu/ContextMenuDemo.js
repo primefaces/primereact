@@ -129,7 +129,7 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>
-                        <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
+                        <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
                         <p>ContextMenu requires nested menuitems as its model and in its simplest form ContextMenu is attached to the document with global setting. .</p>

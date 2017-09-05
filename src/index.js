@@ -90,6 +90,7 @@ import {InputGroupDemo} from "./showcase/inputgroup/InputGroupDemo";
 import {EditorDemo} from "./showcase/editor/EditorDemo";
 import {TooltipDemo} from "./showcase/tooltip/TooltipDemo";
 import {Router,Route,hashHistory} from 'react-router';
+import {MenuModelDemo} from "./showcase/menumodel/MenuModelDemo";
 
 ReactDOM.render(
     <Router history={hashHistory}>
@@ -164,6 +165,7 @@ ReactDOM.render(
             <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
             <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
             <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
+            <Route path="/menumodel" component={MenuModelDemo} />
             <Route path="/menu" component={MenuDemo} />
             <Route path="/tabmenu" component={TabMenuDemo} />
             <Route path="/breadcrumb" component={BreadcrumbDemo} />

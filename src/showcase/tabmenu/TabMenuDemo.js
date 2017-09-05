@@ -51,7 +51,7 @@ import {TabMenu} from 'primereact/components/tabmenu/TabMenu';
 
 `}</CodeHighlight>
                         <h3>MenuModel API</h3>
-                        <p>TabMenu uses the common menumodel api to define its items, visit <Link to="/menu"> Menu </Link> for details.</p>
+                        <p>TabMenu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
                         <p>TabMenu requires a collection of menuitems as its model.</p>
