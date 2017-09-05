@@ -9,12 +9,14 @@ export class OrderListDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [] };
+        this.state = {
+            cars: null
+        };
         this.carservice = new CarService();
     }
 
     onReorderCars(e) {
-        this.setState({ cars: e.value });
+        this.setState({cars: e.value});
     }
 
     componentDidMount() {
@@ -22,13 +24,15 @@ export class OrderListDemo extends Component {
     }
 
     carTemplate(car) {
-        if (!car) {
+        if(!car) {
             return;
         }
-
+        
+        var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        
         return (
             <div className="ui-helper-clearfix">
-                <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px',width:48 }} />
+                <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px', width:48 }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );
@@ -40,28 +44,15 @@ export class OrderListDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>OrderList</h1>
-                        <p>OrderList is used to sort a collection. When the position of an item changes, the backend array is updated as well.</p>
+                        <p>OrderList is used to sort a collection.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
-                            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
-                        </div>
-                        <div className="ui-g-12 ui-md-6">
-                            <ul>
-                                {
-                                    this.state.cars && this.state.cars.map((car, i) => {
-                                        return (
-                                            <li key={i + '_item'} style={{ listStyleType: 'none' }}>{car.brand} - {car.year} - {car.color}</li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        </div>
-                    </div>
+                    <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} 
+                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
                 </div>
+                
                 <OrderListDoc></OrderListDoc>
             </div>
         );
@@ -157,18 +148,6 @@ onReorderCars(e) {
                             <td>Text for the caption</td>
                         </tr>
                         <tr>
-                            <td>listStyle</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the list element.</td>
-                        </tr>
-                        <tr>
-                            <td>responsive</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When enabled orderlist adjusts its controls based on screen size.</td>
-                        </tr>
-                        <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
@@ -181,10 +160,16 @@ onReorderCars(e) {
                             <td>Style class of the element.</td>
                         </tr>
                         <tr>
-                            <td>itemTemplate</td>
-                            <td>function</td>
+                            <td>listStyle</td>
+                            <td>string</td>
                             <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
+                            <td>Inline style of the list element.</td>
+                        </tr>
+                        <tr>
+                            <td>responsive</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled orderlist adjusts its controls based on screen size.</td>
                         </tr>
                         <tr>
                             <td>dragdrop</td>
@@ -197,6 +182,12 @@ onReorderCars(e) {
                             <td>string</td>
                             <td>null</td>
                             <td>Unique key of drag drop events to avoid conflict with other drag drop events on the page.</td>
+                        </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>func</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -215,7 +206,8 @@ onReorderCars(e) {
                     <tbody>
                         <tr>
                             <td>onReorder</td>
-                            <td>event.first: browser eventt</td>
+                            <td>event.originalEvent: Browser event <br />
+                                value: Reordered list</td>
                             <td>Callback to invoke when list is reordered.</td>
                         </tr>
                     </tbody>
@@ -259,32 +251,43 @@ onReorderCars(e) {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
+                
 <CodeHighlight className="javascript">
 {`
+import React, { Component } from 'react';
+import {Link} from 'react-router';
+import {OrderList} from 'primereact/components/orderlist/OrderList';
+import {CarService} from '../service/CarService';
+import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+
 export class OrderListDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [] };
+        this.state = {
+            cars: null
+        };
         this.carservice = new CarService();
     }
 
     onReorderCars(e) {
-        this.setState({ cars: e.value });
+        this.setState({cars: e.value});
     }
 
     componentDidMount() {
-        this.setState({ cars: this.carservice.getCarsSmall(this) });
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
-        if (!car) {
+        if(!car) {
             return;
         }
-
+        
+        var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        
         return (
             <div className="ui-helper-clearfix">
-                <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px' }} />
+                <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px', width:48 }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );
@@ -293,37 +296,23 @@ export class OrderListDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>OrderList</h1>
-                        <p>OrderList is used to sort a collection. When the position of an item changes, the backend array is updated as well.</p>
+                        <p>OrderList is used to sort a collection.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
-                            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
-                        </div>
-                        <div className="ui-g-12 ui-md-6">
-                            <ul>
-                                {
-                                    this.state.cars && this.state.cars.map((car, i) => {
-                                        return (
-                                            <li key={i + '_item'} style={{ listStyleType: 'none' }}>{car.brand} - {car.year} - {car.color}</li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        </div>
-                    </div>
+                    <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} 
+                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onReorder={this.onReorderCars.bind(this)}></OrderList>
                 </div>
-                <OrderListDoc></OrderListDoc>
+
             </div>
         );
     }
 }
-
+    
 `}
 </CodeHighlight>
                     </TabPanel>
