@@ -338,6 +338,7 @@ export class Calendar extends Component {
     selectDate(event, dateMeta) {
         let date;
         let time = this.getTime();
+        let selectedValue;
         
         if(this.props.utc)
             date = new Date(Date.UTC(dateMeta.year, dateMeta.month, dateMeta.day));
@@ -355,10 +356,10 @@ export class Calendar extends Component {
         }
         
         if(this.isSingleSelection()) {
-            this.updateModel(event, date);
+            selectedValue = date;
         }
         else if(this.isMultipleSelection()) {
-            this.updateModel(event, this.props.value ? [...this.props.value, date] : [date]);
+            selectedValue = this.props.value ? [...this.props.value, date] : [date];
         }
         else if(this.isRangeSelection()) {
             if(this.props.value && this.props.value.length) {
@@ -373,12 +374,15 @@ export class Calendar extends Component {
                     endDate = null;
                 }
                 
-                this.updateModel(event, [startDate, endDate]); 
+                selectedValue = [startDate, endDate]; 
             }
             else {
-                this.updateModel(event, [date, null]); 
+                selectedValue = [date, null];
             }
         }
+        
+        this.updateModel(event, selectedValue);
+        this.updateInputfield(selectedValue);
             
         if(this.props.onSelect) {
             this.props.onSelect({
@@ -397,6 +401,10 @@ export class Calendar extends Component {
                 this.props.onChange({originalEvent: event, value: this.formatDateTime(val)});
             }
         }
+    }
+    
+    updateInputfield(value) {
+        this.inputfield.value = this.getInputFieldValue(value);
     }
     
     getFirstDayOfMonthIndex(month, year) {
@@ -558,25 +566,19 @@ export class Calendar extends Component {
         }
     }
     
-    onInputFocus(inputfield, event) {
-        this.focus = true;
+    onInputFocus(event) {
         if(this.props.showOnFocus) {
-            this.showOverlay(inputfield);
+            this.showOverlay();
         }
 
-        if (this.props.onFocus) {
-            this.props.onFocus({
-                originalEvent: event
-            })
+        if(this.props.onFocus) {
+            this.props.onFocus(event);
         }
     }
     
     onInputBlur(event) {
-        this.focus = false;
         if (this.props.onBlur) {
-            this.props.onBlur({
-                originalEvent: event
-            })
+            this.props.onBlur(event);
         }
     }
     
@@ -703,6 +705,7 @@ export class Calendar extends Component {
         value.setSeconds(time.second);
         
         this.updateModel(event, value);
+        this.updateInputfield(value);
         
         if(this.props.onSelect) {
             this.props.onSelect({
@@ -718,13 +721,12 @@ export class Calendar extends Component {
         event.preventDefault();
     }
     
-    onInputChange(event) {
+    onUserInput(event) {
         let val = event.target.value;   
         
         try {
             let value = this.parseValueFromString(val);
             this.updateModel(event, value);
-            this.updateUI();
         }
         catch(err) {
             //invalid date
@@ -737,7 +739,7 @@ export class Calendar extends Component {
             return null;
         }
         
-        let value: any;
+        let value;
         
         if(this.isSingleSelection()) {
             value = this.parseDateTime(text);
@@ -760,21 +762,21 @@ export class Calendar extends Component {
         return value;
     }
     
-    parseDateTime(text): Date {
-        let date: Date;
-        let parts: string[] = text.split(' ');
+    parseDateTime(text) {
+        let date;
+        let parts = text.split(' ');
         
-        if(this.timeOnly) {
+        if(this.props.timeOnly) {
             date = new Date();
             this.populateTime(date, parts[0], parts[1]);
         }
         else {
-            if(this.showTime) {
-                date = this.parseDate(parts[0], this.dateFormat);
+            if(this.props.showTime) {
+                date = this.parseDate(parts[0], this.props.dateFormat);
                 this.populateTime(date, parts[1], parts[2]);
             }
             else {
-                 date = this.parseDate(text, this.dateFormat);
+                 date = this.parseDate(text, this.props.dateFormat);
             }
         }
         
@@ -797,33 +799,7 @@ export class Calendar extends Component {
         value.setMinutes(time.minute);
         value.setSeconds(time.second);
     }
-    
-    updateUI() {
-        let val = this.value||this.props.defaultDate||new Date();
-        this.createMonth(val.getMonth(), val.getFullYear());
         
-        if(this.props.showTime||this.props.timeOnly) {
-            let hours = val.getHours();
-            
-            if(this.props.hourFormat === '12') {
-                if(hours >= 12) {
-                    this.pm = true;
-                    this.currentHour = (hours === 12) ? 12 : hours - 12;
-                }
-                else {
-                    this.pm = false;
-                    this.currentHour = (hours === 0) ? 12 : hours;
-                }
-            }
-            else {
-                this.currentHour = val.getHours();
-            }
-            
-            this.currentMinute = val.getMinutes();
-            this.currentSecond = val.getSeconds();
-        }
-    }
-    
     onDatePickerClick(event) {
         this.datepickerClick = true;
     }
@@ -1187,26 +1163,26 @@ export class Calendar extends Component {
         }
     }
     
-    getInputFieldValue() {
+    getInputFieldValue(value) {
         let formattedValue = '';
 
-        if(this.props.value) {
+        if(value) {
             if(this.isSingleSelection()) {
-                formattedValue = this.formatDateTime(this.props.value);
+                formattedValue = this.formatDateTime(value);
             }
             else if(this.isMultipleSelection()) {
-                for(let i = 0; i < this.props.value.length; i++) {
-                    let dateAsString = this.formatDateTime(this.props.value[i]);
+                for(let i = 0; i < value.length; i++) {
+                    let dateAsString = this.formatDateTime(value[i]);
                     formattedValue += dateAsString;
-                    if(i !== (this.props.value.length - 1)) {
+                    if(i !== (value.length - 1)) {
                         formattedValue += ', ';
                     }
                 }
             }
             else if(this.isRangeSelection()) {
-                if(this.props.value && this.props.value.length) {
-                    let startDate = this.props.value[0];
-                    let endDate = this.props.value[1];
+                if(value && value.length) {
+                    let startDate = value[0];
+                    let endDate = value[1];
                     
                     formattedValue = this.formatDateTime(startDate);
                     if(endDate) {
@@ -1283,9 +1259,9 @@ export class Calendar extends Component {
         });
 
         if(!this.props.inline) {
-            var inputElement = <InputText value={this.getInputFieldValue()} ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} type="text" 
-                required={this.props.required} onFocus={(e) => this.onInputFocus(this.inputfield, e)} onKeyDown={this.onInputKeydown.bind(this)} onClick={this.onInputClick.bind(this)}
-                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readOnlyInput} onChange={this.onInputChange.bind(this)} 
+            var inputElement = <InputText ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} defaultValue={this.getInputFieldValue(this.props.value)}  type="text" 
+                required={this.props.required} onFocus={(e) => this.onInputFocus(e)} onKeyDown={this.onInputKeydown.bind(this)} onClick={this.onInputClick.bind(this)}
+                onBlur={this.onInputBlur.bind(this)} readOnly={this.props.readOnlyInput} onInput={this.onUserInput.bind(this)} 
                 style={this.props.inputStyle} className={this.props.inputClassName} 
                 placeholder={this.props.placeholder || ''} 
                 disabled={this.props.disabled} tabIndex={this.props.tabindex} />
