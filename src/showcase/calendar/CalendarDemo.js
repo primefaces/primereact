@@ -138,24 +138,11 @@ import {Calendar} from 'primereact/components/calendar/Calendar';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Calendar requires an onChange event to provide the selected value.</p>
+            <p>Calendar is used a controlled input component with value and onChange properties.</p>
+            
 <CodeHighlight className="html">
 {`
-<Calendar tabindex="0" onChange={this.onChangeBasic}></Calendar>
-
-`}
-</CodeHighlight>
-<CodeHighlight className="javascript">
-{`
-constructor() {
-    super();
-    this.state = {};
-    this.onChangeBasic = this.onChangeBasic.bind(this);
-}
-
-onChangeBasic(e) {
-    this.setState({ date1: e.value });
-}
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
 `}
 </CodeHighlight>
@@ -165,7 +152,7 @@ onChangeBasic(e) {
                
 <CodeHighlight className="html jsx">
 {`
-<Calendar inline="true" onChange={this.onChangeInline}></Calendar>
+<Calendar inline={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
 `}
 </CodeHighlight>
@@ -181,7 +168,7 @@ onChangeBasic(e) {
 
 <CodeHighlight className="html jsx">
 {`
-<Calendar dateFormat="dd/mm/yy" onChange={this.onChange}></Calendar>
+<Calendar dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
 `}
 </CodeHighlight>
@@ -212,8 +199,8 @@ onChangeBasic(e) {
 
 <CodeHighlight className="html jsx">
 {`
-<Calendar showTime="true" hourFormat="12" onChange={this.onChangeTime}></Calendar>
-<Calendar showTime="true" hourFormat="24" onChange={this.onChangeTime}></Calendar>
+<Calendar showTime={true} hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
+<Calendar showTime={true} hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
 
 `}
 </CodeHighlight>
@@ -224,7 +211,16 @@ onChangeBasic(e) {
 
 <CodeHighlight className="html jsx">
 {`
-<Calendar minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" onChange={this.onChangeRestrict}>
+<Calendar minDate={this.minDate} maxDate={this.maxDate} readOnlyInput="true" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+
+`}
+</CodeHighlight>
+
+            <h3>Button Bar</h3>
+            <p>Button bar displays today and clear buttons and enabled using showButtonBar property.</p>
+<CodeHighlight className="html jsx">
+{`
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar={true}>
 
 `}
 </CodeHighlight>
@@ -234,14 +230,14 @@ onChangeBasic(e) {
 
 <CodeHighlight className="html jsx">
 {`
-<Calendar locale={es} dateFormat="dd/mm/yy" onChange={this.onChangeSpanish}></Calendar>
+<Calendar locale={es} dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="jsx">
 {`
-var es = {
+let es = {
     firstDayOfWeek: 1,
     dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
     dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
