@@ -139,27 +139,27 @@ class AppMenu extends Component {
                         <div className={classNames({ 'submenuhide': this.state.activeMenu !== 0, 'submenushow': this.state.activeMenu === 0 })}>
                             <div>
                                 <Link to="/autocomplete">&#9679; AutoComplete</Link>
+                                <Link to="/calendar">&#9679; Calendar</Link>
                                 <Link to="/checkbox">&#9679; Checkbox</Link>
+                                <Link to="/colorpicker">&#9679; ColorPicker</Link>
                                 <Link to="/chips">&#9679; Chips</Link>
                                 <Link to="/dropdown">&#9679; Dropdown</Link>
+                                <Link to="/editor">&#9679; Editor</Link>
+                                <Link to="/inputmask">&#9679; InputMask</Link>
+                                <Link to="/inputgroup">&#9679; InputGroup</Link>
+                                <Link to="/inputswitch">&#9679; InputSwitch</Link>
                                 <Link to="/inputtext">&#9679; InputText</Link>
                                 <Link to="/inputtextarea">&#9679; InputTextarea</Link>
                                 <Link to="/listbox">&#9679; Listbox</Link>
                                 <Link to="/multiselect">&#9679; MultiSelect</Link>
+                                <Link to="/password">&#9679; Password</Link>
                                 <Link to="/radiobutton">&#9679; RadioButton</Link>
-                                <Link to="/togglebutton">&#9679; ToggleButton</Link>
+                                <Link to="/rating">&#9679; Rating</Link>
                                 <Link to="/selectbutton">&#9679; SelectButton</Link>
-                                <Link to="/inputswitch">&#9679; InputSwitch</Link>
                                 <Link to="/slider">&#9679; Slider</Link>
                                 <Link to="/spinner">&#9679; Spinner</Link>
                                 <Link to="/tristatecheckbox">&#9679; TriState</Link>
-                                <Link to="/inputmask">&#9679; InputMask</Link>
-                                <Link to="/calendar">&#9679; Calendar</Link>
-                                <Link to="/colorpicker">&#9679; ColorPicker</Link>
-                                <Link to="/rating">&#9679; Rating</Link>
-                                <Link to="/password">&#9679; Password</Link>
-                                <Link to="/inputgroup">&#9679; InputGroup</Link>
-                                <Link to="/editor">&#9679; Editor</Link>
+                                <Link to="/togglebutton">&#9679; ToggleButton</Link>
                             </div>
                         </div>
 
@@ -186,13 +186,14 @@ class AppMenu extends Component {
                                 <Link to="/datalist">&#9679; DataList</Link>
                                 <Link to="/datatable">&#9679; DataTable</Link>
                                 <Link to="/datascroller">&#9679; DataScroller</Link>
+                                <Link to="/orderlist">&#9679; OrderList</Link>
+                                <Link to="/organizationchart">&#9679; Org Chart</Link>
                                 <Link to="/paginator">&#9679; Paginator</Link>
                                 <Link to="/picklist">&#9679; PickList</Link>
-                                <Link to="/orderlist">&#9679; OrderList</Link>
                                 <Link to="/schedule">&#9679; Schedule</Link>
                                 <Link to="/tree">&#9679; Tree</Link>
                                 <Link to="/treetable">&#9679; TreeTable</Link>
-                                <Link to="/organizationchart">&#9679; Org Chart</Link>
+                                
                             </div>
                         </div>
 
@@ -220,8 +221,8 @@ class AppMenu extends Component {
                         <div className={classNames({ 'submenuhide': this.state.activeMenu !== 4, 'submenushow': this.state.activeMenu === 4 })}>
                             <div>
                                 <Link to="/dialog">&#9679; Dialog</Link>
-                                <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
                                 <Link to="/lightbox">&#9679; Lightbox</Link>
+                                <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
                                 <Link to="/tooltip">&#9679; Tooltip</Link>
                             </div>
                         </div>
