@@ -259,6 +259,10 @@ export class Calendar extends Component {
         if(month === 0) {
             month = 11;
             year--;
+            
+            if(this.props.yearNavigator && year < this.props.yearOptions[0]) {
+                  year = this.props.yearOptions[this.props.yearOptions.length - 1];
+            }
         }
         else {
             month--;
@@ -285,6 +289,10 @@ export class Calendar extends Component {
         if(month === 11) {
             month = 0;
             year++;
+            
+            if(this.props.yearNavigator && year > this.props.yearOptions[this.props.yearOptions.length - 1]) {
+                 year = this.props.yearOptions[0];
+            }
         }
         else {
             month++;
