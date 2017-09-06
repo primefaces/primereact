@@ -121,6 +121,12 @@ onOptionChange(e) {
                             <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
+                        <tr>
+                            <td>activeIndex</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Active Index of the element.</td>
+                        </tr>
                          <tr>
                             <td>options</td>
                             <td>array</td>
@@ -128,10 +134,22 @@ onOptionChange(e) {
                             <td>An array of objects to display as the available options.</td>
                         </tr>
                         <tr>
+                            <td>tabindex</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
                             <td>multiple</td>
                             <td>boolean</td>
                             <td>false</td>
                             <td>When specified, allows selecting multiple values.</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the element should be disabled.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -145,24 +163,6 @@ onOptionChange(e) {
                             <td>null</td>
                             <td>Style class of the element.</td>
                         </tr>
-                        <tr>
-                            <td>disabled</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that the element should be disabled.</td>
-                        </tr>
-                         <tr>
-                           <td>tabindex</td>
-                           <td>number</td>
-                           <td>null</td>
-                           <td>Index of the element in tabbing order.</td>
-                         </tr>
-                         <tr>
-                           <td>activeIndex</td>
-                           <td>any</td>
-                           <td>null</td>
-                           <td>Active Index of the element.</td>
-                         </tr>
                     </tbody>
                 </table>
             </div>
@@ -181,7 +181,8 @@ onOptionChange(e) {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: browser event <br />
-                                event.checked: single value or an array of values that are selected.</td>
+                                event.value: single value or an array of values that are selected.</td>
+                                event.index: index of selected button  <br />
                             <td>Callback to invoke on state change.</td>
                         </tr>
                     </tbody>
