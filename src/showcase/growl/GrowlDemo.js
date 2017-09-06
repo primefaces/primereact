@@ -201,16 +201,16 @@ showMultiple() {
                             <td>Defines if growl box can be closed by the click icon.</td>
                         </tr>
                         <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
                             <td>className</td>
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of the element.</td>
                         </tr>
                     </tbody>
                 </table>
