@@ -329,8 +329,8 @@ render() {
                                     </tr>
                                     <tr>
                                         <td>onChange</td>
-                                        <td>event: Browser event <br />
-                                            value: Value of the component</td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.value: Value of the component</td>
                                         <td>Callback to invoke when autocomplete value changes.</td>
                                     </tr> 
                                     <tr>
@@ -345,16 +345,14 @@ render() {
                                     </tr>                        
                                     <tr>
                                         <td>onSelect</td>
-                                        <td>
-                                            value: Selected value
-                                        </td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.value: Value of the component</td>
                                         <td>Callback to invoke when a suggestion is selected.</td>
                                     </tr>
                                     <tr>
                                         <td>onUnselect</td>
-                                        <td>
-                                            value: Unselected value in multiple mode
-                                        </td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.value: Value of the component</td>
                                         <td>Callback to invoke when a selected value is removed.</td>
                                     </tr>
                                     <tr>
