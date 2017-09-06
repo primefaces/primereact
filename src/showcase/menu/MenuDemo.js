@@ -210,7 +210,7 @@ var items=[
                                 </tr>
                                 <tr>
                                     <td>onHide</td>
-                                    <td>-</td>
+                                    <td>event.originalEvent: browser event </td>
                                     <td>Hides the popup menu.</td>
                                 </tr>
                                 </tbody>
