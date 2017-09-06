@@ -161,16 +161,10 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
-                            <td>multiple</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When enabled, multiple tabs can be activated at the same time.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
+                            <td>activeIndex</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Inline style of the element.</td>
+                            <td>Active Index of the element.</td>
                         </tr>
                         <tr>
                             <td>className</td>
@@ -179,10 +173,16 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                             <td>Style class of the element.</td>
                         </tr>
                         <tr>
-                            <td>activeIndex</td>
-                            <td>any</td>
+                            <td>style</td>
+                            <td>string</td>
                             <td>null</td>
-                            <td>Active Index of the element.</td>
+                            <td>Inline style of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>multiple</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, multiple tabs can be activated at the same time.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -200,18 +200,18 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                     </thead>
                     <tbody>
                         <tr>
+                            <td>onTabOpen</td>
+                            <td>event.originalEvent: Click object  <br/>
+                                event.index: Index of the tab
+                            </td>
+                            <td>Callback to invoke when a tab gets expanded.</td>
+                        </tr>
+                        <tr>
                             <td>onTabClose</td>
                             <td>event.originalEvent: Click object  <br/>
                                 event.index: Index of the tab 
                             </td>
                             <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
-                        </tr>
-                        <tr>
-                            <td>onTabOpen</td>
-                            <td>event.originalEvent: Click object  <br/>
-                                event.index: Index of the tab 
-                            </td>
-                            <td>Callback to invoke when a tab gets expanded.</td>
                         </tr>
                     </tbody>
                 </table>
