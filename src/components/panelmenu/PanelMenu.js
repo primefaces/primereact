@@ -29,7 +29,7 @@ export class PanelMenuSub extends Component {
             });
         }
 
-        return (<ul className="ui-menu-list ui-helper-reset" style={{maxHeight: this.props.expanded ? '1000px' : '0px', transitionTimingFunction:'cubic-bezier(0.86, 0, 0.07, 1)',transitionDuration:'400ms'}}>
+        return (<ul className="ui-menu-list ui-helper-reset" style={{display: this.props.expanded ? 'block' : 'none'}}>
                     {menuitems}
                 </ul>);
     }
@@ -172,7 +172,7 @@ export class PanelMenuHeaderItems extends Component {
         let panelMenuContentWrapperClass = classNames('ui-panelmenu-content-wrapper', {
             'ui-panelmenu-content-wrapper-overflown': !this.state.expanded
         }),
-        panelMenuContent = this.item.items && (<div className={panelMenuContentWrapperClass} style={{maxHeight: this.state.expanded ? '1000px' : '0px', transitionTimingFunction:'cubic-bezier(0.86, 0, 0.07, 1)', transitionDuration:'400ms'}}>
+        panelMenuContent = this.item.items && (<div className={panelMenuContentWrapperClass} style={{display: this.state.expanded ? 'block' : 'none'}}>
                                     <div className="ui-panelmenu-content ui-widget-content">
                                         <PanelMenuSub item={this.item} expanded={true} />
                                     </div>
