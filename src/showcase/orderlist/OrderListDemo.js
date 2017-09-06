@@ -191,7 +191,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: Browser event <br />
-                                value: Reordered list</td>
+                                event.value: Reordered list</td>
                             <td>Callback to invoke when list is reordered.</td>
                         </tr>
                     </tbody>
