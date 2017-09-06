@@ -181,16 +181,16 @@ componentDidMount() {
                             <td>Number of rows to display per page.</td>
                         </tr>
                         <tr>
-                            <td>paginator</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When specified as true, enables the pagination.</td>
-                        </tr>
-                        <tr>
                             <td>first</td>
                             <td>number</td>
                             <td>0</td>
                             <td>Number of page to display first data item.</td>
+                        </tr>
+                        <tr>
+                            <td>paginator</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When specified as true, enables the pagination.</td>
                         </tr>
                         <tr>
                             <td>totalRecords</td>
