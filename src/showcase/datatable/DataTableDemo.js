@@ -213,16 +213,16 @@ export class DataTableDemo extends Component {
                             <td>Header text of a column or a function to return custom content.</td>
                         </tr>
                         <tr>
-                            <td>footer</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Footer text of a column or a function to return custom content.</td>
-                        </tr>
-                        <tr>
                             <td>body</td>
                             <td>any</td>
                             <td>null</td>
                             <td>Function to return the custom cell content.</td>
+                        </tr>
+                        <tr>
+                            <td>footer</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Footer text of a column or a function to return custom content.</td>
                         </tr>
                         <tr>
                             <td>sortable</td>
@@ -1176,18 +1176,6 @@ export class DataTableLazyDemo extends Component {
                             <td>Footer content of the table.</td>
                         </tr>
                         <tr>
-                            <td>headerColumnGroup</td>
-                            <td>ColumnGroup</td>
-                            <td>null</td>
-                            <td>ColumnCroup component for header.</td>
-                        </tr>
-                        <tr>
-                            <td>footer</td>
-                            <td>ColumnGroup</td>
-                            <td>null</td>
-                            <td>ColumnCroup component for footer.</td>
-                        </tr>
-                        <tr>
                             <td>style</td>
                             <td>object</td>
                             <td>null</td>
@@ -1218,16 +1206,16 @@ export class DataTableLazyDemo extends Component {
                             <td>When specified as true, enables the pagination.</td>
                         </tr>
                         <tr>
-                            <td>alwaysShowPaginator</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Whether to show it even there is only one page.</td>
-                        </tr>
-                        <tr>
                             <td>paginatorPosition</td>
                             <td>string</td>
                             <td>bottom</td>
                             <td>Position of the paginator, options are "top","bottom" or "both".</td>
+                        </tr>
+                        <tr>
+                            <td>alwaysShowPaginator</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show it even there is only one page.</td>
                         </tr>
                         <tr>
                             <td>first</td>
@@ -1302,11 +1290,29 @@ export class DataTableLazyDemo extends Component {
                             <td>Algorithm to define if a row is selected, valid values are "equals" that compares by reference and "deepEquals" that compares all fields.</td>
                         </tr>
                         <tr>
+                            <td>dataKey</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td> </td>
+                        </tr>
+                        <tr>
                             <td>metaKeySelection</td>
                             <td>boolean</td>
                             <td>true</td>
                             <td>Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
-                            can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                        </tr>
+                        <tr>
+                            <td>headerColumnGroup</td>
+                            <td>ColumnGroup</td>
+                            <td>null</td>
+                            <td>ColumnCroup component for header.</td>
+                        </tr>
+                        <tr>
+                            <td>footerColumnGroup</td>
+                            <td>ColumnGroup</td>
+                            <td>null</td>
+                            <td>ColumnCroup component for footer.</td>
                         </tr>
                         <tr>
                             <td>rowExpansionTemplate</td>
@@ -1375,6 +1381,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Width of the unfrozen part in scrollable DataTable.</td>
                         </tr>
                         <tr>
+                            <td>frozenValue</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Items of the frozen part in scrollable DataTable.</td>
+                        </tr>
+                        <tr>
                             <td>csvSeparator</td>
                             <td>string</td>
                             <td>,</td>
@@ -1385,6 +1397,12 @@ export class DataTableLazyDemo extends Component {
                             <td>string</td>
                             <td>download</td>
                             <td>Name of the exported file.</td>
+                        </tr>
+                        <tr>
+                            <td>contextMenu</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Context menu items.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1401,19 +1419,6 @@ export class DataTableLazyDemo extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>onLazyLoad</td>
-                            <td>event.first = First row offset.  <br/>
-                                event.rows = Number of rows per page. <br/>
-                                event.sortField = Field name to sort with. <br/>
-                                event.sortOrder = Sort order as number, 1 for asc and -1 for desc.<br />
-                                event.multiSortMeta = MultiSort metadata. <br/>
-                                event.filters = Array of FilterMetadata objects. <br/>
-                                event.globalFilter = Global filter value. <br/>
-                                <br/>
-                            </td>
-                            <td>Callback to invoke when paging, sorting or filtering happens in lazy mode.</td>
-                        </tr>
                         <tr>
                             <td>onSelectionChange</td>
                             <td>event.originalEvent = Original event <br/>
@@ -1454,6 +1459,19 @@ export class DataTableLazyDemo extends Component {
                             <td>Callback to invoke on filtering.</td>
                         </tr>
                         <tr>
+                            <td>onLazyLoad</td>
+                            <td>event.first = First row offset.  <br/>
+                                event.rows = Number of rows per page. <br/>
+                                event.sortField = Field name to sort with. <br/>
+                                event.sortOrder = Sort order as number, 1 for asc and -1 for desc.<br />
+                                event.multiSortMeta = MultiSort metadata. <br/>
+                                event.filters = Array of FilterMetadata objects. <br/>
+                                event.globalFilter = Global filter value. <br/>
+                                <br/>
+                            </td>
+                            <td>Callback to invoke when paging, sorting or filtering happens in lazy mode.</td>
+                        </tr>
+                        <tr>
                             <td>onRowClick</td>
                             <td>event: Browser row click event</td>
                             <td>Callback to invoke when a row is clicked.</td>
@@ -1481,6 +1499,12 @@ export class DataTableLazyDemo extends Component {
                             <td>onRowCollapse</td>
                             <td>event.data: Collapsed row data</td>
                             <td>Callback to invoke when a row is collapsed.</td>
+                        </tr>
+                        <tr>
+                            <td>onContextMenuSelect</td>
+                            <td>event.originalEvent: Original event instance. <br />
+                                event.data: Collapsed row data</td>
+                            <td>Callback to invoke when a context menu is clicked.</td>
                         </tr>
                     </tbody>
                 </table>
