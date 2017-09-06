@@ -121,18 +121,6 @@ render() {
                             <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
-                         <tr>
-                            <td>onLabel</td>
-                            <td>string</td>
-                            <td>yes</td>
-                            <td>Label for the on state.</td>
-                        </tr>
-                        <tr>
-                            <td>offLabel</td>
-                            <td>string</td>
-                            <td>no</td>
-                            <td>Label for the off state.</td>
-                        </tr>
                         <tr>
                             <td>onIcon</td>
                             <td>string</td>
@@ -144,6 +132,18 @@ render() {
                             <td>string</td>
                             <td>null</td>
                             <td>Icon for the off state.</td>
+                        </tr>
+                        <tr>
+                            <td>onLabel</td>
+                            <td>string</td>
+                            <td>yes</td>
+                            <td>Label for the on state.</td>
+                        </tr>
+                        <tr>
+                            <td>offLabel</td>
+                            <td>string</td>
+                            <td>no</td>
+                            <td>Label for the off state.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -181,7 +181,7 @@ render() {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: browser event <br />
-                                event.checked: boolean value to represent checked state.</td>
+                                event.value: boolean value to represent checked state.</td>
                             <td>Callback to invoke on state change.</td>
                         </tr>
                     </tbody>
