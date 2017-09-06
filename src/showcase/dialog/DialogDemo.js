@@ -148,6 +148,30 @@ let footer = <div>
                             <td>Footer content of the dialog.</td>
                         </tr>
                         <tr>
+                            <td>visible</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Specifies the visibility of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td>int</td>
+                            <td>300</td>
+                            <td>Width of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td>int</td>
+                            <td>auto</td>
+                            <td>Height of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>modal</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Defines if background should be blocked when dialog is displayed.</td>
+                        </tr>
+                        <tr>
                             <td>draggable</td>
                             <td>boolean</td>
                             <td>true</td>
@@ -172,34 +196,10 @@ let footer = <div>
                             <td>Minimum width of a resizable dialog.</td>
                         </tr>
                         <tr>
-                            <td>width</td>
-                            <td>int</td>
-                            <td>300</td>
-                            <td>Width of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>height</td>
-                            <td>int</td>
-                            <td>auto</td>
-                            <td>Height of the dialog.</td>
-                        </tr>
-                        <tr>
                             <td>contentStyle</td>
                             <td>object</td>
                             <td>null</td>
                             <td>Style of the content section.</td>
-                        </tr>
-                        <tr>
-                            <td>visible</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Specifies the visibility of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>modal</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Defines if background should be blocked when dialog is displayed.</td>
                         </tr>
                         <tr>
                             <td>closeOnEscape</td>
