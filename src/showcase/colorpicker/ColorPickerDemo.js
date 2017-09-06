@@ -135,16 +135,16 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                                         <td>Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Index of the element in tabbing order.</td>
-                                    </tr>
-                                    <tr>
                                         <td>disabled</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that the component should be disabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tabindex</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Index of the element in tabbing order.</td>
                                     </tr>
                                     <tr>
                                         <td>inputId</td>
