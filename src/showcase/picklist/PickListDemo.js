@@ -222,18 +222,6 @@ import {PickList} from 'primereact/components/picklist/PickList';
                             <td>Callback to invoke when items are moved from source to target.</td>
                         </tr>
                         <tr>
-                            <td>onMoveToTarget</td>
-                            <td>event.originalEvent: Browser event <br />
-                                event.value: Moved items</td>
-                            <td>Callback to invoke when items are moved from source to target.</td>
-                        </tr>
-                        <tr>
-                            <td>onMoveAllToTarget</td>
-                            <td>event.originalEvent: Browser event <br />
-                                event.value: Moved items</td>
-                            <td>Callback to invoke when all items are moved from source to target.</td>
-                        </tr>
-                        <tr>
                             <td>onMoveToSource</td>
                             <td>event.originalEvent: Browser event <br />
                                 event.value: Moved items</td>
@@ -244,6 +232,18 @@ import {PickList} from 'primereact/components/picklist/PickList';
                             <td>event.originalEvent: Browser event <br />
                                 event.value: Moved items</td>
                             <td>Callback to invoke when all items are moved from target to source.</td>
+                        </tr>
+                        <tr>
+                            <td>onMoveToTarget</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.value: Moved items</td>
+                            <td>Callback to invoke when items are moved from source to target.</td>
+                        </tr>
+                        <tr>
+                            <td>onMoveAllToTarget</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.value: Moved items</td>
+                            <td>Callback to invoke when all items are moved from source to target.</td>
                         </tr>
                     </tbody>
                 </table>
