@@ -126,12 +126,6 @@ onClick(event) {
                             <td>When enabled, displays a close icon at top right corner.</td>
                         </tr>
                         <tr>
-                            <td>appendTo</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Target element to attach the panel, valid values are "body" or a local template variable of another element.</td>
-                        </tr>
-                        <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
@@ -142,6 +136,12 @@ onClick(event) {
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>appendTo</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Target element to attach the panel, valid values are "body" or a local template variable of another element.</td>
                         </tr>
                     </tbody>
                 </table>
