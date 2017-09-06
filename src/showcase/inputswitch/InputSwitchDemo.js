@@ -113,17 +113,17 @@ onChangeBasic(e) {
                             <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
-                         <tr>
-                            <td>onLabel</td>
-                            <td>string</td>
-                            <td>On</td>
-                            <td>Label for the on state.</td>
-                        </tr>
                         <tr>
                             <td>offLabel</td>
                             <td>string</td>
                             <td>off</td>
                             <td>Label for the off state.</td>
+                        </tr>
+                         <tr>
+                            <td>onLabel</td>
+                            <td>string</td>
+                            <td>On</td>
+                            <td>Label for the on state.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -137,12 +137,6 @@ onChangeBasic(e) {
                             <td>null</td>
                             <td>Style class of the element.</td>
                         </tr>
-                         <tr>
-                           <td>tabindex</td>
-                           <td>number</td>
-                           <td>null</td>
-                           <td>Index of the element in tabbing order.</td>
-                         </tr>
                          <tr>
                              <td>checked</td>
                              <td>boolean</td>
@@ -167,7 +161,7 @@ onChangeBasic(e) {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: browser event <br />
-                                event.checked: checked state as a boolean.</td>
+                                event.value: checked state as a boolean.</td>
                             <td>Callback to invoke on state change.</td>
                         </tr>
                     </tbody>
