@@ -137,12 +137,6 @@ render() {
                             <td>An array of selectitems to display as the available options.</td>
                         </tr>
                         <tr>
-                            <td>defaultLabel</td>
-                            <td>string</td>
-                            <td>Choose</td>
-                            <td>Label to display when there are no selections.</td>
-                        </tr>
-                        <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
@@ -159,6 +153,12 @@ render() {
                             <td>string</td>
                             <td>200px</td>
                             <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
+                        </tr>
+                        <tr>
+                            <td>defaultLabel</td>
+                            <td>string</td>
+                            <td>Choose</td>
+                            <td>Label to display when there are no selections.</td>
                         </tr>
                     </tbody>
                 </table>
