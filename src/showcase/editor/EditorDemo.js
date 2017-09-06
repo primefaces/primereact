@@ -118,12 +118,6 @@ var header =
                                     <td>Value of the content.</td>
                                 </tr>
                                 <tr>
-                                    <td>headerTemplate</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Style and modules of the toolbar.</td>
-                                </tr>
-                                <tr>
                                     <td>style</td>
                                     <td>object</td>
                                     <td>null</td>
@@ -152,6 +146,12 @@ var header =
                                     <td>string[]</td>
                                     <td>null</td>
                                     <td>Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Style and modules of the toolbar.</td>
                                 </tr>
 
                                 </tbody>
