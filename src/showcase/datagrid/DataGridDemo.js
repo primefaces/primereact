@@ -176,6 +176,12 @@ componentDidMount() {
                             <td>Number of rows to display per page.</td>
                         </tr>
                         <tr>
+                            <td>first</td>
+                            <td>number</td>
+                            <td>0</td>
+                            <td>Zero-relative number of the first row to be displayed.</td>
+                        </tr>
+                        <tr>
                             <td>paginator</td>
                             <td>boolean</td>
                             <td>false</td>
