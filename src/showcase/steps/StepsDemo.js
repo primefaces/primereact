@@ -163,7 +163,8 @@ import {Steps} from 'primereact/components/steps/Steps';
                                 <tbody>
                                 <tr>
                                     <td>activeIndexChange</td>
-                                    <td>index: Index of the active step item</td>
+                                    <td>event.originalEvent: Browser event<br/>
+                                        event.index: Index of the active step item</td>
                                     <td>Callback to invoke when the new step is selected.</td>
                                 </tr>
                                 </tbody>
