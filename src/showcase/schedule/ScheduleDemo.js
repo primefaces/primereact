@@ -236,6 +236,18 @@ render() {
                             <td><a href="http://fullcalendar.io/docs/display/header/">Read more</a></td>
                         </tr>
                         <tr>
+                            <td>style</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the component.</td>
+                        </tr>
+                        <tr>
+                            <td>className</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>ClassName of the component.</td>
+                        </tr>
+                        <tr>
                             <td>isRTL</td>
                             <td>boolean</td>
                             <td><a href="http://fullcalendar.io/docs/display/isRTL/">Read more</a></td>
@@ -249,11 +261,6 @@ render() {
                             <td>hiddenDays</td>
                             <td>array</td>
                             <td><a href="http://fullcalendar.io/docs/display/hiddenDays/">Read more</a></td>
-                        </tr>
-                        <tr>
-                            <td>locale</td>
-                            <td>object</td>
-                            <td><a href="https://fullcalendar.io/docs/text/locale/">Read more</a></td>
                         </tr>
                         <tr>
                             <td>fixedWeekCount</td>
@@ -404,6 +411,11 @@ render() {
                             <td>dayRender</td>
                             <td>Function</td>
                             <td><a href="https://fullcalendar.io/docs/display/dayRender/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>locale</td>
+                            <td>object</td>
+                            <td><a href="https://fullcalendar.io/docs/text/locale/">Read more</a></td>
                         </tr>
                         <tr>
                             <td>timezone</td>
