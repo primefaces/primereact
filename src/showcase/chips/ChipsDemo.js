@@ -118,6 +118,18 @@ customTemplate(item) {
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
+                            <td>placeholder</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Advisory information to display on input.</td>
+                        </tr>
+                        <tr>
+                            <td>value</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Value of the chips.</td>
+                        </tr>
+                        <tr>
                             <td>field</td>
                             <td>string</td>
                             <td>null</td>
@@ -128,12 +140,6 @@ customTemplate(item) {
                             <td>number</td>
                             <td>null</td>
                             <td>Maximum number of entries allowed.</td>
-                        </tr>
-                        <tr>
-                            <td>value</td>
-                            <td>array</td>
-                            <td>null</td>
-                            <td>Value of the chips.</td>
                         </tr>
                         <tr>
                             <td>disabled</td>
@@ -154,17 +160,11 @@ customTemplate(item) {
                             <td>Style class of the element.</td>
                         </tr>
                         <tr>
-                            <td>placeholder</td>
-                            <td>string</td>
+                            <td>itemTemplate</td>
+                            <td>function</td>
                             <td>null</td>
-                            <td>Advisory information to display on input.</td>
+                            <td>Template function to return the content.</td>
                         </tr>
-                         <tr>
-                           <td>tabindex</td>
-                           <td>number</td>
-                           <td>null</td>
-                           <td>Index of the element in tabbing order.</td>
-                         </tr>
                     </tbody>
                 </table>
             </div>
