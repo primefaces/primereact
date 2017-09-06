@@ -327,12 +327,6 @@ var items=[
                                         <td>An array of menuitems.</td>
                                     </tr>
                                     <tr>
-                                        <td>orientation</td>
-                                        <td>string</td>
-                                        <td>horizontal</td>
-                                        <td>Defines the orientation, valid values are horizontal and vertical.</td>
-                                    </tr>
-                                    <tr>
                                         <td>style</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -343,6 +337,12 @@ var items=[
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>orientation</td>
+                                        <td>string</td>
+                                        <td>horizontal</td>
+                                        <td>Defines the orientation, valid values are horizontal and vertical.</td>
                                     </tr>
                                 </tbody>
                             </table>
