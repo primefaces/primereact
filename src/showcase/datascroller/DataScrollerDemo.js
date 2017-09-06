@@ -237,6 +237,12 @@ loadData(event) {
                             <td>Reference of the target element whose click event loads the data instead of scrolling.</td>
                         </tr>
                         <tr>
+                            <td>buffer</td>
+                            <td>number</td>
+                            <td>0.9</td>
+                            <td>Number of buffer size.</td>
+                        </tr>
+                        <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
@@ -247,6 +253,12 @@ loadData(event) {
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the component.</td>
+                        </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
                         </tr>
                         <tr>
                             <td>header</td>
