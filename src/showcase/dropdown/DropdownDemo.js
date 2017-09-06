@@ -216,10 +216,10 @@ render() {
                                     <td>An array of selectitems to display as the available options.</td>
                                 </tr>
                                 <tr>
-                                    <td>scrollHeight</td>
-                                    <td>string</td>
-                                    <td>200px</td>
-                                    <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
+                                    <td>itemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function that gets the option and returns the content for it.</td>
                                 </tr>
                                 <tr>
                                     <td>style</td>
@@ -228,22 +228,22 @@ render() {
                                     <td>Inline style of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>panelStyle</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the overlay panel element.</td>
-                                </tr>
-                                <tr>
-                                    <td>styleClass</td>
+                                    <td>className</td>
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Style class of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>panelStyleClass</td>
+                                    <td>autoWidth</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Calculates the width based on options width, set to false for custom width.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollHeight</td>
                                     <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the overlay panel element.</td>
+                                    <td>200px</td>
+                                    <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
                                 </tr>
                                 <tr>
                                     <td>filter</td>
@@ -264,10 +264,16 @@ render() {
                                     <td>Placeholder text to show when filter input is empty.</td>
                                 </tr>
                                 <tr>
-                                    <td>autoWidth</td>
+                                    <td>editable</td>
                                     <td>boolean</td>
-                                    <td>true</td>
-                                    <td>Calculates the width based on options width, set to false for custom width.</td>
+                                    <td>false</td>
+                                    <td>When present, custom value instead of predefined options can be entered using the editable input field.</td>
+                                </tr>
+                                <tr>
+                                    <td>placeholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Default text to display when no option is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>required</td>
@@ -282,12 +288,6 @@ render() {
                                     <td>When present, it specifies that the component should be disabled.</td>
                                 </tr>
                                 <tr>
-                                    <td>editable</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, custom value instead of predefined options can be entered using the editable input field.</td>
-                                </tr>
-                                <tr>
                                     <td>appendTo</td>
                                     <td>any</td>
                                     <td>null</td>
@@ -300,16 +300,10 @@ render() {
                                     <td>Index of the element in tabbing order.</td>
                                 </tr>
                                 <tr>
-                                    <td>placeholder</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Default text to display when no option is selected.</td>
-                                </tr>
-                                <tr>
-                                    <td>dataKey</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>A property to uniquely identify a value in options.</td>
+                                    <td>autofocus</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the component should automatically get focus on load.</td>
                                 </tr>
                                 <tr>
                                     <td>lazy</td>
@@ -318,10 +312,22 @@ render() {
                                     <td>When enabled, creates the dom for options when overlay panel gets visible.</td>
                                 </tr>
                                 <tr>
-                                    <td>autofocus</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, it specifies that the component should automatically get focus on load.</td>
+                                    <td>panelStyleClass</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the overlay panel element.</td>
+                                </tr>
+                                <tr>
+                                    <td>panelStyle</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the overlay panel element.</td>
+                                </tr>
+                                <tr>
+                                    <td>dataKey</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>A property to uniquely identify a value in options.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -341,8 +347,7 @@ render() {
                                 <tr>
                                     <td>onChange</td>
                                     <td>event.originalEvent: Original event <br />
-                                        event.value: Value of the checkbox <br />
-                                        event.checked: Checked state as a boolean.</td>
+                                        event.value: Value of the checkbox </td>
                                     <td>Callback to invoke on value change</td>
                                 </tr>
                                 </tbody>
