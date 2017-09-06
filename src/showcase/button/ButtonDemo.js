@@ -167,6 +167,12 @@ import {Button} from 'primereact/components/button/Button';
                                         <td>left</td>
                                         <td>Position of the icon, valid values are "left" and "right".</td>
                                     </tr>
+                                    <tr>
+                                        <td>cornerStyleClass</td>
+                                        <td>string</td>
+                                        <td>ui-corner-all</td>
+                                        <td>Classname of corner style.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
