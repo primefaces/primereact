@@ -172,6 +172,12 @@ carTemplate(option) {
                             <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
+                        <tr>
+                            <td>value</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Selected value to display.</td>
+                        </tr>
                          <tr>
                             <td>options</td>
                             <td>array</td>
@@ -179,10 +185,10 @@ carTemplate(option) {
                             <td>An array of objects to display as the available options.</td>
                         </tr>
                         <tr>
-                            <td>disabled</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that the element should be disabled.</td>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -195,18 +201,6 @@ carTemplate(option) {
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>value</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Selected value to display.</td>
-                        </tr>
-                        <tr>
-                            <td>itemTemplate</td>
-                            <td>function</td>
-                            <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -227,7 +221,7 @@ carTemplate(option) {
                             <td>onChange</td>
                             <td>event.originalEvent: Browser event <br/>
                                 event.value: single value or an array of values that are selected <br/>
-                                index: index
+                                event.index: index
                                 </td>
                             <td>Callback to invoke when value of listbox changes.</td>
                         </tr>
