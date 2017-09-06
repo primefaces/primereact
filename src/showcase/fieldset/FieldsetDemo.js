@@ -107,6 +107,18 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
                             <td>Header text of the fieldset.</td>
                         </tr>
                         <tr>
+                            <td>className</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of the element.</td>
+                        </tr>
+                        <tr>
                             <td>toggleable</td>
                             <td>boolean</td>
                             <td>false</td>
@@ -117,18 +129,6 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
                             <td>boolean</td>
                             <td>false</td>
                             <td>Defines the default visibility state of the content.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -146,16 +146,16 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onCollapse</td>
-                            <td>event.originalEvent: browser event
-                            </td>
-                            <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
-                        </tr>
-                        <tr>
                             <td>onExpand</td>
                             <td>event.originalEvent: browser event
                             </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
+                        </tr>
+                        <tr>
+                            <td>onCollapse</td>
+                            <td>event.originalEvent: browser event
+                            </td>
+                            <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
                         </tr>
                     </tbody>
                 </table>
