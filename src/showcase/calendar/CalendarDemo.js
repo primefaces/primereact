@@ -542,12 +542,11 @@ let es = {
                             <th>Description</th>
                         </tr>
                     </thead>
-                    <tbody>
+                        <tbody>
                         <tr>
-                            <td>onChange</td>
-                            <td>originalEvent: Browser event <br />
-                                value: Selected value</td>
-                            <td>Callback to invoke when value changes.</td>
+                            <td>onFocus</td>
+                            <td>event: Focus event</td>
+                            <td>Callback to invoke on focus of input field.</td>
                         </tr>
                         <tr>
                             <td>onSelect</td>
@@ -561,9 +560,10 @@ let es = {
                             <td>Callback to invoke on blur of input field.</td>
                         </tr>
                         <tr>
-                            <td>onFocus</td>
-                            <td>event: Focus event</td>
-                            <td>Callback to invoke on focus of input field.</td>
+                            <td>onChange</td>
+                            <td>originalEvent: Browser event <br />
+                                value: Selected value</td>
+                            <td>Callback to invoke when value changes.</td>
                         </tr>
                         <tr>
                             <td>onTodayClick</td>

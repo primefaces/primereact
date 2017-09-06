@@ -598,7 +598,7 @@ export class Calendar extends Component {
         return false;
     }
     
-    isDayDisabled(day, month, year):boolean {
+    isDayDisabled(day, month, year) {
         if(this.props.disabledDays) {
             let weekday = new Date(year, month, day);
             let weekdayNumber = weekday.getDay();
