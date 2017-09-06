@@ -164,12 +164,6 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
                                         <td>An array of menuitems.</td>
                                     </tr>
                                     <tr>
-                                        <td>global</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Attaches the menu to document instead of a particular item.</td>
-                                    </tr>
-                                    <tr>
                                         <td>style</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -180,6 +174,12 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>global</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Attaches the menu to document instead of a particular item.</td>
                                     </tr>
                                     <tr>
                                         <td>target</td>
