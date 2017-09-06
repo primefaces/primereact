@@ -114,16 +114,16 @@ onCityChange(e) {
                                     <td>Unique identifier of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>value</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Value of the radiobutton.</td>
-                                </tr>
-                                <tr>
                                     <td>label</td>
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Label of the radiobutton.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Value of the radiobutton.</td>
                                 </tr>
                                 <tr>
                                     <td>checked</td>
