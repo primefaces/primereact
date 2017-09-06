@@ -101,6 +101,21 @@ export default class ObjectUtils {
             value.splice(to, 0, value.splice(from, 1)[0]);
         }
     }
+    
+    static findIndexInList(value, list) {
+        let index = -1;
+        
+        if(list) {
+            for(let i = 0; i < list.length; i++) {
+                if(list[i] === value) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        
+        return index;
+    }
 
     static filterConstraints = {
 
@@ -183,5 +198,4 @@ export default class ObjectUtils {
             return false;
         }
     }
-
 }
