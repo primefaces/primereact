@@ -13,16 +13,6 @@ export class ListBoxDemo extends Component {
             cities: null,
             car: 'BMW'
         };
-        this.onCityChange = this.onCityChange.bind(this);
-        this.onCarChange = this.onCarChange.bind(this);
-    }
-
-    onCityChange(e) {
-        this.setState({city: e.value});
-    }
-
-    onCarChange(e) {
-        this.setState({car: e.value});
     }
 
     carTemplate(option) {
@@ -344,16 +334,6 @@ export class ListBoxDemo extends Component {
             cities: null,
             car: 'BMW'
         };
-        this.onCityChange = this.onCityChange.bind(this);
-        this.onCarChange = this.onCarChange.bind(this);
-    }
-
-    onCityChange(e) {
-        this.setState({city: e.value});
-    }
-
-    onCarChange(e) {
-        this.setState({car: e.value});
     }
 
     carTemplate(option) {
