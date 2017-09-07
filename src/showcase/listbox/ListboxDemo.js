@@ -8,7 +8,11 @@ export class ListboxDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            city1: null,
+            city2: null,
+            car: 'BMW'
+        };
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
     }
@@ -63,13 +67,14 @@ export class ListboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Listbox value={this.state.city} options={cities} onChange={this.onCityChange} />
-                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
+                    <h3 className="first">Single</h3>
+                    <Listbox value={this.state.city1} options={cities} onChange={(e) => this.setState({city1: e.value})} />
+                    
+                    <h3>Multiple</h3>
+                    <Listbox value={this.state.city2} options={cities} onChange={(e) => this.setState({city2: e.value})} multiple={true} />
 
                     <h3>Advanced</h3>
-                    <Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
-                    <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
+                    <Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px', width: '15em'}}/>
                 </div>
 
                 <ListboxDoc></ListboxDoc>
