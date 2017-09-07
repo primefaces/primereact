@@ -138,7 +138,8 @@ export class MultiSelect extends Component {
     }
 
     getLabel() {
-        var label;
+        let label;
+        
         if(this.props.value && this.props.value.length) {
             label = '';
             for(let i = 0; i < this.props.value.length; i++) {
