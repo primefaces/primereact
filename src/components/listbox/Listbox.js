@@ -205,7 +205,7 @@ export class ListBox extends Component {
         }
         
         if(this.props.filter) {
-            header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} />
+            header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} disabled={this.props.disabled} />
         }
         
         return (
