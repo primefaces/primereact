@@ -16,7 +16,7 @@ import {GridDemo} from './showcase/grid/GridDemo';
 import {GrowlDemo} from './showcase/growl/GrowlDemo';
 import {InputTextDemo} from './showcase/inputtext/InputTextDemo';
 import {InputTextareaDemo} from './showcase/inputtextarea/InputTextareaDemo';
-import {ListboxDemo} from './showcase/listbox/ListboxDemo';
+import {ListBoxDemo} from './showcase/listbox/ListBoxDemo';
 import {MessagesDemo} from './showcase/messages/MessagesDemo';
 import {MultiSelectDemo} from './showcase/multiselect/MultiSelectDemo';
 import {OverlayPanelDemo} from './showcase/overlaypanel/OverlayPanelDemo';
@@ -108,7 +108,7 @@ ReactDOM.render(
             <Route path="/fileupload" component={FileUploadDemo} />
             <Route path="/inputtext" component={InputTextDemo} />
             <Route path="/inputtextarea" component={InputTextareaDemo} />
-            <Route path="/listbox" component={ListboxDemo} />
+            <Route path="/listbox" component={ListBoxDemo} />
             <Route path="/messages" component={MessagesDemo} />
             <Route path="/multiselect" component={MultiSelectDemo} />
             <Route path="/overlaypanel" component={OverlayPanelDemo} />

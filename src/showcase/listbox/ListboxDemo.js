@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {Listbox} from '../../components/listbox/Listbox';
+import {ListBox} from '../../components/listbox/ListBox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
-export class ListboxDemo extends Component {
+export class ListBoxDemo extends Component {
         
     constructor() {
         super();
         this.state = {
-            city1: null,
-            city2: null,
+            city: null,
+            cities: null,
             car: 'BMW'
         };
         this.onCityChange = this.onCityChange.bind(this);
@@ -61,20 +61,21 @@ export class ListboxDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Listbox</h1>
-                        <p>Listbox is used to select one or more values from a list of items.</p>
+                        <h1>ListBox</h1>
+                        <p>ListBox is used to select one or more values from a list of items.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <h3 className="first">Single</h3>
-                    <Listbox value={this.state.city1} options={cities} onChange={(e) => this.setState({city1: e.value})} />
+                    <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
                     
                     <h3>Multiple</h3>
-                    <Listbox value={this.state.city2} options={cities} onChange={(e) => this.setState({city2: e.value})} multiple={true} />
+                    <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} />
 
                     <h3>Advanced</h3>
-                    <Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px', width: '15em'}}/>
+                    <ListBox value={this.state.car} filter={true} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} 
+                                    style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
                 </div>
 
                 <ListboxDoc></ListboxDoc>
@@ -93,58 +94,60 @@ class ListboxDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="javascript">
 {`
-import {Listbox} from 'primereact/components/listbox/Listbox';
+import {ListBox} from 'primereact/components/listbox/ListBox';
 
 `}
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Listbox requires a collection of options with label-value pairs and an onChange event to provide the selected value.</p>
+            <p>ListBox requires a collection of options with label-value pairs, a value and an onChange event to provide the selected value.</p>
                     
 <CodeHighlight className="html">
 {`
-<Listbox value={this.state.city} options={cities} onChange={this.onCityChange} />
+<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
 
 `}
 </CodeHighlight>
 
+            <p>SelectItem API represents an option using label and value properties. Value can be a string as well as an arbirary object.</p>
+
 <CodeHighlight className="javascript">
 {`
-constructor() {
-    super();
-    this.state = {};
-    this.onCityChange = this.onCityChange.bind(this);
-    this.onCarChange = this.onCarChange.bind(this);
-}
+let cities = [
+    {label: 'New York', value: 'New York'},
+    {label: 'Rome', value: 'Rome'},
+    {label: 'London', value: 'London'},
+    {label: 'Istanbul', value: 'Istanbul'},
+    {label: 'Paris', value: 'Paris'},
+];
 
-onCityChange(e) {
-    this.setState({city: e.value});
-}
+`}
+</CodeHighlight>
 
-render () {
-    var cities = [
-            {label: 'New York', value: 'New York'},
-            {label: 'Rome', value: 'Rome'},
-            {label: 'London', value: 'London'},
-            {label: 'Istanbul', value: 'Istanbul'},
-            {label: 'Paris', value: 'Paris'},
-        ];
+            <h3>Selection</h3>
+            <p>Listbox allows selection of either single or multiple items whereas checkbox option displays a checkbox to indicate multiple selection. 
+                In single case, model should be a single object reference whereas in multiple case should be an array. Multiple items can either be selected
+                using metaKey or toggled individually depending on the value of metaKeySelection property value which is true by default. On touch enabled
+                devices metaKeySelection is turned off automatically.</p>
 
-        ...
-}
+<CodeHighlight className="html">
+{`
+<Listbox value={this.state.cities} options={cities} onChange={(e) => this.setState({city: e.value})} multiple={true}/>
 
 `}
 </CodeHighlight>
 
             <h3>Custom Content</h3>
-            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate fucntion that gets the SelectItem as a property and returns the content.</p>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a property and returns the content.</p>
+
 <CodeHighlight className="html">
 {`
-<Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
+<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.carTemplate} />
 
 `}
 </CodeHighlight>
-<CodeHighlight className="html">
+
+<CodeHighlight className="javascript">
 {`
 carTemplate(option) {
     var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
@@ -159,6 +162,17 @@ carTemplate(option) {
 
 `}
 </CodeHighlight>
+
+            <h3>Filter</h3>
+            <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable filter property.</p>
+
+<CodeHighlight className="html">
+{`
+<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} filter={true} />
+
+`}
+</CodeHighlight>
+
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -202,10 +216,47 @@ carTemplate(option) {
                             <td>Inline style of the element.</td>
                         </tr>
                         <tr>
+                            <td>listStyle</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of inner list element.</td>
+                        </tr>
+                        <tr>
                             <td>className</td>
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When specified, disables the component.</td>
+                        </tr>
+                        <tr>
+                            <td>key</td>
+                            <td>boolea</td>
+                            <td>false</td>
+                            <td>A property to uniquely identify a value in options.</td>
+                        </tr>
+                        <tr>
+                            <td>multiple</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When specified, allows selecting multiple values.</td>
+                        </tr>
+                        <tr>
+                            <td>metaKeySelection</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
+                            can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                        </tr>
+                        <tr>
+                            <td>filter</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When specified, displays a filter input at header.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -225,9 +276,8 @@ carTemplate(option) {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: Browser event <br/>
-                                event.value: single value or an array of values that are selected <br/>
-                                event.index: index
-                                </td>
+                                event.value: Single value or an array of values depending on the selection mode <br/>
+                            </td>
                             <td>Callback to invoke when value of listbox changes.</td>
                         </tr>
                     </tbody>
@@ -247,19 +297,23 @@ carTemplate(option) {
                     <tbody>
                         <tr>
                             <td>ui-listbox</td>
-                            <td>Container element</td>
-                        </tr>
-                        <tr>
-                            <td>ui-listbox-list</td>
-                            <td>List container.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-listbox-item</td>
-                            <td>An item in the list.</td>
+                            <td>Main container element.</td>
                         </tr>
                         <tr>
                             <td>ui-listbox-header</td>
                             <td>Header element.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-listbox-list-wrapper</td>
+                            <td>Container of list element.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-listbox-list</td>
+                            <td>List element.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-listbox-item</td>
+                            <td>An item in the list element.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -276,11 +330,20 @@ carTemplate(option) {
             </a>
 <CodeHighlight className="javascript">
 {`
-export class ListboxDemo extends Component {
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {ListBox} from 'primereact/components/listbox/ListBox';
+import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+
+export class ListBoxDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            city: null,
+            cities: null,
+            car: 'BMW'
+        };
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
     }
@@ -298,7 +361,7 @@ export class ListboxDemo extends Component {
 
         return (
             <div className="ui-helper-clearfix">
-                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} />
+                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
                 <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
             </div>
         );
@@ -327,24 +390,15 @@ export class ListboxDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
-                    <div className="feature-intro">
-                        <h1>Listbox</h1>
-                        <p>Listbox is used to select one or more values from a list of items.</p>
-                    </div>
-                </div>
+                <h3 className="first">Single</h3>
+                <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+                
+                <h3>Multiple</h3>
+                <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} />
 
-                <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Listbox value={this.state.city} options={cities} onChange={this.onCityChange} />
-                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
-
-                    <h3>Advanced</h3>
-                    <Listbox value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{maxHeight: '250px'}}/>
-                    <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
-                </div>
-
-                <ListboxDoc></ListboxDoc>
+                <h3>Advanced</h3>
+                <ListBox value={this.state.car} filter={true} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} 
+                                style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
             </div>
         );
     }

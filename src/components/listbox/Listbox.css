@@ -1,7 +1,10 @@
 .ui-listbox {
-    overflow:auto;
     padding: .25em;
     width: 10em;
+}
+
+.ui-listbox .ui-listbox-list-wrapper {
+    overflow:auto;
 }
 
 .ui-listbox .ui-listbox-list {

@@ -2,64 +2,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import {ListBoxItem} from './ListBoxItem';
+import {ListBoxHeader} from './ListBoxHeader';
 
-export class ListboxItem extends Component {
-    
-    static defaultProps = {
-        option: null,
-        selected: false,
-        onClick: null,
-        onTouchEnd: null,
-        template: null
-    }
-    
-    static propTypes = {
-        option: PropTypes.any,
-        selected: PropTypes.bool,
-        onClick: PropTypes.func,
-        onTouchEnd: PropTypes.func,
-        template: PropTypes.func
-    }
-    
-    constructor() {
-        super();
-        this.onClick = this.onClick.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-    }
-    
-    onClick(event) {
-        if(this.props.onClick) {
-            this.props.onClick({
-                originalEvent: event,
-                option: this.props.option
-            });
-        }
-        
-        event.preventDefault();
-    }
-    
-    onTouchEnd(event) {
-        if(this.props.onTouchEnd) {
-            this.props.onTouchEnd({
-                originalEvent: event,
-                option: this.props.option
-            });
-        }
-    }
-    
-    render() {
-        let className = classNames('ui-listbox-item ui-corner-all', {'ui-state-highlight': this.props.selected});
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.option.label;
-        
-        return (
-               <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd}>
-                   {content}
-               </li>
-        );
-    }
-}
-
-export class Listbox extends Component {
+export class ListBox extends Component {
     
     static defaultProps = {
         id: null,
@@ -67,11 +13,13 @@ export class Listbox extends Component {
         options: null,
         itemTemplate: null,
         style: null,
+        listStyle: null,
         className: null,
         disabled: null,
         key: null,
         multiple: false,
         metaKeySelection: false,
+        filter: false,
         onChange: null
     }
     
@@ -81,12 +29,23 @@ export class Listbox extends Component {
         options: PropTypes.array,
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
+        listStyle: PropTypes.object,
         className: PropTypes.string,
         key: PropTypes.string,
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
-        onChange: PropTypes.func,
+        filter: PropTypes.bool,
+        onChange: PropTypes.func
     };
+    
+    constructor() {
+        super();
+        this.state = {
+            filter: ''
+        }
+        
+        this.onFilter = this.onFilter.bind(this);
+    }
     
     onOptionClick(event, option, index) {
         if(this.props.disabled) {
@@ -179,6 +138,10 @@ export class Listbox extends Component {
         }
     }
     
+    onFilter(event) {
+        this.setState({filter: event.query});
+    }
+    
     updateModel(event, value) {
         if(this.props.onChange) {
             this.props.onChange({
@@ -211,25 +174,48 @@ export class Listbox extends Component {
 
         return selected;
     }
+    
+    filter(option) {
+        let filterValue = this.state.filter.trim().toLowerCase();
+        return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+    }
+    
+    hasFilter() {
+        return this.state.filter && this.state.filter.trim().length > 0;
+    }
 
     render() {
         let className = classNames('ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-state-disabled': this.props.disabled
         });
-        let items;
+        let items = this.props.options;
+        let header;
         
         if(this.props.options) {
-            items = this.props.options.map((option, index) => {
-                return <ListboxItem key={option.label} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+            if(this.hasFilter()) {
+                items = this.props.options.filter((option) => {
+                    return this.filter(option);
+                });
+            }
+
+            items = items.map((option, index) => {
+                return <ListBoxItem key={option.label} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
                         onClick={(e) => this.onOptionClick(e, option, index)} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} />;
             });
         }
         
+        if(this.props.filter) {
+            header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} />
+        }
+        
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                <ul className="ui-listbox-list">
-                    {items}
-                </ul>
+                {header}
+                <div className="ui-listbox-list-wrapper">
+                    <ul className="ui-listbox-list" style={this.props.listStyle}>
+                        {items}
+                    </ul>
+                </div>
             </div>
         );
     }
