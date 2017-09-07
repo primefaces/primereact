@@ -64,7 +64,7 @@ export class ListBoxDemo extends Component {
                     <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} />
 
                     <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} 
+                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate} 
                                     style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
                 </div>
 
@@ -377,7 +377,7 @@ export class ListBoxDemo extends Component {
                 <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} />
 
                 <h3>Advanced</h3>
-                <ListBox value={this.state.car} filter={true} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} 
+                <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({cities: e.value})} itemTemplate={this.carTemplate} 
                                 style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
             </div>
         );

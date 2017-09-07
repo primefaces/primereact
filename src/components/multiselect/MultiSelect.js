@@ -128,7 +128,6 @@ export class MultiSelect extends Component {
                 }
             }
         }
-        console.log(index);
         
         return index;
     }

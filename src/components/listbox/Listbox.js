@@ -45,17 +45,18 @@ export class ListBox extends Component {
         }
         
         this.onFilter = this.onFilter.bind(this);
+        this.onOptionClick = this.onOptionClick.bind(this);
     }
     
-    onOptionClick(event, option, index) {
+    onOptionClick(event) {
         if(this.props.disabled) {
             return;
         }
         
         if(this.props.multiple)
-            this.onOptionClickMultiple(event, option, index);
+            this.onOptionClickMultiple(event.originalEvent, event.option);
         else
-            this.onOptionClickSingle(event, option, index);
+            this.onOptionClickSingle(event.originalEvent, event.option);
             
         this.optionTouched = false;
     }
@@ -193,14 +194,14 @@ export class ListBox extends Component {
         
         if(this.props.options) {
             if(this.hasFilter()) {
-                items = this.props.options.filter((option) => {
+                items = items.filter((option) => {
                     return this.filter(option);
                 });
             }
 
             items = items.map((option, index) => {
                 return <ListBoxItem key={option.label} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                        onClick={(e) => this.onOptionClick(e, option, index)} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} />;
+                        onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} />;
             });
         }
         
