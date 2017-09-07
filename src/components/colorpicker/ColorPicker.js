@@ -5,8 +5,10 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
 export class ColorPicker extends Component {
+    
     static defaultProps = {
         id: null,
+        value: null,
         style: null,
         className: null,
         inline: false,
@@ -20,6 +22,7 @@ export class ColorPicker extends Component {
 
     static propsTypes = {
         id: PropTypes.string,
+        value: PropTypes.any,
         style: PropTypes.string,
         className: PropTypes.string,
         inline: PropTypes.bool,
