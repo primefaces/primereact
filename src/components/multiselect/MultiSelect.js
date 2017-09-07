@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
+import {MultiSelectItem} from './MultiSelectItem';
 
 export class MultiSelect extends Component {
     
@@ -9,39 +11,42 @@ export class MultiSelect extends Component {
         id: null,
         value: null,
         options: null,
-        onChange: null,
         style: null,
         className: null,
         scrollHeight: '200px',
-        defaultLabel: 'Choose'
+        defaultLabel: 'Choose',
+        disabled: false,
+        filter: false,
+        key: null,
+        onChange: null
     };
 
     static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
-        onChange: PropTypes.func,
         style: PropTypes.object,
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
-        defaultLabel: PropTypes.string
+        defaultLabel: PropTypes.string,
+        disabled: PropTypes.bool,
+        filter: PropTypes.bool,
+        key: PropTypes.string,
+        onChange: PropTypes.func
     };
 
     constructor(props) {
         super(props);
-        this.state = {focus: false};
         this.onClick = this.onClick.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
+        this.onOptionClick = this.onOptionClick.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
 
     componentDidMount() {
         this.documentClickListener = this.onDocumentClick.bind(this);
         document.addEventListener('click', this.documentClickListener);
-
-        if(this.props.autoWidth) {
-            if(!this.props.style||(!this.props.style['width']&&!this.props.style['min-width'])) {
-                this.container.style.width = this.selectElement.offsetWidth + 32 + 'px';
-            }
-        }
     }
 
     componentWillUnmount() {
@@ -51,46 +56,52 @@ export class MultiSelect extends Component {
     }
 
     onDocumentClick() {
-        if(!this.selfClick&&!this.itemClick) {
+        if(!this.selfClick && !this.panelClick && this.panel.offsetParent) {
             this.hide();
         }
-            
+        
         this.selfClick = false;
-        this.optionClick = false;
+        this.panelClick = false;
     }
 
-    onOptionClick(event, option, index) {
-        this.optionClick = true;
-        var model = this.props.value ? this.props.value.slice() : [];
-        var indexInValue = this.findIndexInValue(option);
-
-        if(this.isSelected(option))
-            model.splice(indexInValue, 1);
+    onOptionClick(event) {
+        let optionValue = event.option.value;
+        let selectionIndex = this.findSelectionIndex(optionValue);
+        let newValue;
+        
+        if(selectionIndex !== -1)
+            newValue = this.props.value.filter((val, i) => i !== selectionIndex);
         else
-            model.push(option.value);
-
-        this.props.onChange({
-            originalEvent: event,
-            value: model,
-            index: index
-        });
-
-        event.preventDefault();
+            newValue = [...this.props.value || [], optionValue];
+        
+        if(this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event.originalEvent,
+                value: newValue
+            });
+        }
     }
 
     onClick() {
-        if(this.props.disabled) {
+        if(this.disabled) {
             return;
         }
-
-        this.selfClick = true;
-
-        if(!this.optionClick) {
-            if(this.panel.offsetParent)
+        
+        if(!this.panelClick) {
+            if(this.panel.offsetParent) {
                 this.hide();
-            else
+            }
+            else {
+                this.focusInput.focus();
                 this.show();
+            }
         }
+        
+        this.selfClick = true;
+    }
+    
+    onPanelClick() {
+        this.panelClick = true;
     }
 
     show() {
@@ -105,13 +116,25 @@ export class MultiSelect extends Component {
     hide() {
         this.panel.style.display = 'none';
     }
-
-    findIndexInValue(option) {
-        return this.props.value ? this.props.value.findIndex(val => val === option.value) : -1;
+    
+    findSelectionIndex(value) {
+        let index = -1;
+        
+        if(this.props.value) {
+            for(let i = 0; i < this.props.value.length; i++) {
+                if(ObjectUtils.equals(this.props.value[i], value, this.props.key)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        console.log(index);
+        
+        return index;
     }
 
-    isSelected(option) {
-        return this.props.value ? this.props.value.includes(option.value) : false;
+    isSelected(value) {
+        return this.findSelectionIndex(value) !== -1;
     }
 
     getLabel() {
@@ -144,49 +167,32 @@ export class MultiSelect extends Component {
         return label;
     }
 
-    onFocus(event) {
-        this.setState({focus: true});
+    onFocus() {
+        DomHandler.addClass(this.container, 'ui-state-focus');
     }
     
-    onBlur(event) {
-        this.setState({focus: false});
+    onBlur() {
+        DomHandler.removeClass(this.container, 'ui-state-focus');
     }
 
     render() {
-        var className = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
-            'ui-state-disabled': this.props.disabled,
-            'ui-state-focus': this.state.focus
+        let className = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
+            'ui-state-disabled': this.props.disabled
         });
-
-        var label = this.getLabel();
-        var listItems;;
+        let label = this.getLabel();
+        let items;
 
         if(this.props.options) {
-            listItems = this.props.options.map((option, index) => {
-                    var selected = this.isSelected(option);
-                    var listItemStyleClass = classNames('ui-multiselect-item ui-corner-all', {'ui-state-highlight': selected});
-                    var checkboxStyleClass = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': selected});
-                    var checkboxIcon = classNames('ui-chkbox-icon ui-c', {'fa fa-check': selected});
-                    var listItem = <li className={listItemStyleClass} key={option.label} onClick={(event) => this.onOptionClick(event, option, index)}>
-                                        <div className="ui-chkbox ui-widget">
-                                            <div className="ui-helper-hidden-accessible">
-                                                <input readOnly="readonly" type="checkbox" />
-                                            </div>
-                                            <div className={checkboxStyleClass}>
-                                                <span className={checkboxIcon}></span>
-                                            </div>
-                                        </div>
-                                        <label>{option.label}</label>
-                                    </li>;
-
-                    return listItem;
+            items = this.props.options.map((option) => {
+                return <MultiSelectItem key={option.label} option={option} template={this.props.itemTemplate} 
+                        selected={this.isSelected(option.value)} onClick={this.onOptionClick} />;
                 });
         }
 
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
-                    <input readOnly type="text" onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
+                    <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={(el) => {this.focusInput = el;}}/>
                 </div>
                 <div className="ui-multiselect-label-container" title="Choose">
                     <label className="ui-multiselect-label ui-corner-all">{label}</label>
@@ -194,10 +200,11 @@ export class MultiSelect extends Component {
                 <div className="ui-multiselect-trigger ui-state-default ui-corner-right">
                     <span className="fa fa-fw fa-caret-down ui-c"></span>
                 </div>
-                <div className="ui-multiselect-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" ref={(el) => {this.panel = el;}}>
+                <div className="ui-multiselect-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" 
+                    ref={(el) => this.panel = el} onClick={this.onPanelClick}>
                     <div className="ui-multiselect-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
                         <ul className="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                            {listItems}  
+                            {items}  
                         </ul>
                     </div>
                 </div>

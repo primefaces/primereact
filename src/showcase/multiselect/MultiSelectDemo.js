@@ -8,16 +8,13 @@ export class MultiSelectDemo extends Component {
         
     constructor() {
         super();
-        this.state = {cars: []};
-        this.onCarChange = this.onCarChange.bind(this);
-    }
-
-    onCarChange(e) {
-        this.setState({cars: e.value});
+        this.state = {
+            cars: []
+        };
     }
 
     render() {
-        var cars = [
+        let cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -39,8 +36,7 @@ export class MultiSelectDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <MultiSelect value={this.state.cars} options={cars} onChange={this.onCarChange} style={{width:'150px'}}/>
-                    <div style={{marginTop:'1em'}}>Selected Cars <ul>{this.state.cars.map((car) => <li key={car}>{car}</li>)}</ul></div>
+                    <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} style={{width:'12em'}} />
                 </div>
 
                 <MultiSelectDoc />

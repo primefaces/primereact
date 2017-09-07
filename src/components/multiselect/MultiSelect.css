@@ -43,10 +43,14 @@
     cursor: auto
 }
 
-.ui-multiselect .ui-multiselect-panel {
+.ui-multiselect-panel {
     padding: 0.2em;
     position: absolute;
     min-width: 10em;
+}
+
+.ui-multiselect .ui-multiselect-panel {
+    min-width: 100%;
 }
 
 .ui-multiselect-panel .ui-multiselect-items-wrapper {
