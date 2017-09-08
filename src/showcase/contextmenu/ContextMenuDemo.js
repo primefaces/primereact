@@ -191,7 +191,7 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
                                         <td>appendTo</td>
                                         <td>any</td>
                                         <td>null</td>
-                                        <td>Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element.</td>
+                                        <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
                                     </tr>
                                 </tbody>
                             </table>

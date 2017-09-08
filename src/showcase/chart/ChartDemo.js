@@ -25,7 +25,7 @@ class ChartDoc extends Component {
         return (
             <div className="content-section source">
                 <h3>Chart Component</h3>
-                <p>Chart component is used to display a chart on page. The classname is UIChart and element tag is p-chart.</p>
+                <p>Chart component is used to display a chart on page. The classname is UIChart and element tag is Chart.</p>
 
                         <h3>Import</h3>
 <CodeHighlight className="javascript">

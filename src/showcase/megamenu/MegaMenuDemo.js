@@ -291,7 +291,7 @@ var items=[
                         </CodeHighlight>
 
                         <h3>Custom Content</h3>
-                        <p>Custom content can be placed between p-megaMenu tags. Megamenu should be horizontal for custom content.</p>
+                        <p>Custom content can be placed between MegaMenu tags. Megamenu should be horizontal for custom content.</p>
                         <CodeHighlight className="html">
                             {`
 <MegaMenu model={items}>

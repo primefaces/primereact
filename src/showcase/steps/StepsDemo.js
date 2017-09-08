@@ -83,7 +83,7 @@ import {Steps} from 'primereact/components/steps/Steps';
                         <p>Steps uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>Component is defined using the Password element .</p>
+                        <p>Component is defined using the Steps element .</p>
                         <CodeHighlight className="html">
                             {`
 <Steps model={items}/>

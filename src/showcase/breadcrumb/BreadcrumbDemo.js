@@ -54,7 +54,7 @@ import {Breadcrumb} from 'primereact/components/breadcrumb/Breadcrumb';
 `}</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Component is defined using the Password element .</p>
+                        <p>Component is defined using the BreadCrumb element .</p>
                         <CodeHighlight className="html javascript">
                             {`
 <BreadCrumb model={items}/>
