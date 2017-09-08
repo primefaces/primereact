@@ -19,6 +19,7 @@ export class MultiSelect extends Component {
         disabled: false,
         filter: false,
         key: null,
+        itemTemplate: null,
         onChange: null
     };
 
@@ -33,6 +34,7 @@ export class MultiSelect extends Component {
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
         key: PropTypes.string,
+        itemTemplate: PropTypes.func,
         onChange: PropTypes.func
     };
 
@@ -40,7 +42,7 @@ export class MultiSelect extends Component {
         super(props);
         this.state = {
             filter: ''
-        }
+        };
         this.onClick = this.onClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);

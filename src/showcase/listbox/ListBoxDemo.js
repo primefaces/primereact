@@ -108,7 +108,7 @@ let cities = [
     {label: 'Rome', value: 'Rome'},
     {label: 'London', value: 'London'},
     {label: 'Istanbul', value: 'Istanbul'},
-    {label: 'Paris', value: 'Paris'},
+    {label: 'Paris', value: 'Paris'}
 ];
 
 `}

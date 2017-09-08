@@ -62,43 +62,62 @@ import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>MultiSelect requires a value, a list of options and an onChange callback.</p>
+            <p>MultiSelect requires a collection of options with label-value pairs, a value and an onChange event to provide the selected value.</p>
+        
 <CodeHighlight className="html">
 {`
-<MultiSelect value={this.state.cars} options={cars} onChange={this.onCarChange} />
+<MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} />
+
+`}
+</CodeHighlight>
+
+            <p>SelectItem API represents an option using label and value properties. Value can be a string as well as an arbirary object.</p>
+
+<CodeHighlight className="javascript">
+{`
+let cities = [
+    {label: 'New York', value: 'New York'},
+    {label: 'Rome', value: 'Rome'},
+    {label: 'London', value: 'London'},
+    {label: 'Istanbul', value: 'Istanbul'},
+    {label: 'Paris', value: 'Paris'}
+];
+
+`}
+</CodeHighlight>
+
+            <h3>Custom Content</h3>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a property and returns the content.</p>
+
+<CodeHighlight className="html">
+{`
+<MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} itemTemplate={this.carTemplate} />
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="javascript">
 {`
-constructor() {
-    super();
-    this.state = {cars: []};
-    this.onCarChange = this.onCarChange.bind(this);
-}
-
-onCarChange(e) {
-    this.setState({cars: e.value});
-}
-
-render() {
-    var cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
+carTemplate(option) {
+    var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
     return (
-        <MultiSelect value={this.state.cars} options={cars} onChange={this.onCarChange} style={{width:'150px'}}/>
+        <div className="ui-helper-clearfix">
+            <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} />
+            <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
+        </div>
     );
 }
+
+`}
+</CodeHighlight>
+
+            <h3>Filter</h3>
+            <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable filter property.</p>
+
+<CodeHighlight className="html">
+{`
+<MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} filter={true}/>
 
 `}
 </CodeHighlight>
@@ -125,7 +144,7 @@ render() {
                             <td>value</td>
                             <td>array</td>
                             <td>null</td>
-                            <td>List of selected values.</td>
+                            <td>Value of the component.</td>
                         </tr>
                         <tr>
                             <td>options</td>
@@ -157,6 +176,24 @@ render() {
                             <td>Choose</td>
                             <td>Label to display when there are no selections.</td>
                         </tr>
+                        <tr>
+                            <td>filter</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>When specified, displays an input field to filter the items on keyup.</td>
+                        </tr>
+                        <tr>
+                            <td>key</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>A property to uniquely identify a value in options.</td>
+                        </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -176,7 +213,6 @@ render() {
                             <td>onChange</td>
                             <td>event.originalEvent: Browser event<br />
                                 event.value: Current selected values<br />
-                                event.index: Index of the selected item
                             </td>
                             <td>Callback to invoke when value changes.</td>
                         </tr>
@@ -243,20 +279,22 @@ render() {
                 </a>
 <CodeHighlight className="javascript">
 {`
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
+import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+
 export class MultiSelectDemo extends Component {
         
     constructor() {
         super();
-        this.state = {cars: []};
-        this.onCarChange = this.onCarChange.bind(this);
-    }
-
-    onCarChange(e) {
-        this.setState({cars: e.value});
+        this.state = {
+            cars: []
+        };
     }
 
     render() {
-        var cars = [
+        let cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -270,7 +308,7 @@ export class MultiSelectDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>
@@ -278,11 +316,9 @@ export class MultiSelectDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <MultiSelect value={this.state.cars} options={cars} onChange={this.onCarChange} style={{width:'150px'}}/>
-                    <div style={{marginTop:'1em'}}>Selected Cars <ul>{this.state.cars.map((car) => <li key={car}>{car}</li>)}</ul></div>
+                    <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} 
+                            style={{width:'12em'}} filter={true} />
                 </div>
-
-                <MultiSelectDoc />
             </div>
         );
     }
