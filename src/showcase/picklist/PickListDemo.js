@@ -55,9 +55,9 @@ export class PickListDemo extends Component {
                     sourceHeader="Available" targetHeader="Selected" responsive={true} 
                     sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
                     onChange={this.onChange}></PickList>
-                    
-                    <button type="button" onClick={(e) => {this.setState({source: this.state.source.splice(0, 1)})}}></button>
                 </div>
+
+                <PickListDoc/>
             </div>
         );
     }

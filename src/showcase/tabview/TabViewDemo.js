@@ -60,7 +60,7 @@ import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Tabview element consists of one or more p-tabPanel elements. Header of the tab is defined using header attribute.</p>
+            <p>Tabview element consists of one or more TabPanel elements. Header of the tab is defined using header attribute.</p>
 <CodeHighlight className="html">
 {`
 <TabView>

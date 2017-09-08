@@ -92,7 +92,7 @@ export class InputMaskDemo extends Component {
 }
 
 class InputMaskDoc extends Component {
-    
+
     render() {
         return (
             <div className="content-section source">
@@ -110,7 +110,7 @@ import {InputMask} from 'primereact/components/inputmask/InputMask';
             <p>InputMask requires a value and an onChange event.
 
 </p>
-                    
+
 <CodeHighlight className="html">
 {`
 <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={this.onChangeBasic}></InputMask>
@@ -215,7 +215,7 @@ constructor() {
                            <td>unmask</td>
                            <td>boolean</td>
                            <td>false</td>
-                           <td>Defines if ngModel sets the raw unmasked value to bound value or the formatted mask value.</td>
+                           <td>Defines if model sets the raw unmasked value to bound value or the formatted mask value.</td>
                          </tr>
                          <tr>
                             <td>style</td>

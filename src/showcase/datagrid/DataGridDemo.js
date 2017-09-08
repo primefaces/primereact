@@ -102,7 +102,7 @@ import {DataGrid} from 'primereact/components/datagrid/DataGrid';
                Template should contain a div element as a wrapper with <Link to="/grid"> Grid CSS</Link> style class of your choice
                to define the grid layout.Throughout the samples, a car interface having vin, brand, year 
                and color properties are used to define an object to be displayed by the datagrid.
-               Cars are loaded by a CarService that connects to a server to fetch the cars with a Promise.
+               Cars are loaded by a CarService that connects to a server to fetch the cars with a axios.
             </p>
 <CodeHighlight className="html">
 {`

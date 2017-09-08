@@ -181,8 +181,8 @@ onOptionChange(e) {
                         <tr>
                             <td>onChange</td>
                             <td>event.originalEvent: browser event <br />
-                                event.value: single value or an array of values that are selected.</td>
-                                event.index: index of selected button  <br />
+                                event.value: single value or an array of values that are selected. <br />
+                                event.index: index of selected button </td>
                             <td>Callback to invoke on state change.</td>
                         </tr>
                     </tbody>

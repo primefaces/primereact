@@ -222,7 +222,6 @@ render() {
                         <tr>
                             <td>id</td>
                             <td>string</td>
-                            <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
@@ -238,13 +237,11 @@ render() {
                         <tr>
                             <td>style</td>
                             <td>object</td>
-                            <td>null</td>
                             <td>Inline style of the component.</td>
                         </tr>
                         <tr>
                             <td>className</td>
                             <td>string</td>
-                            <td>null</td>
                             <td>ClassName of the component.</td>
                         </tr>
                         <tr>

@@ -460,7 +460,7 @@ let es = {
                             <td>dataType</td>
                             <td>string</td>
                             <td>date</td>
-                            <td>Type of the value to write back to ngModel, default is date and alternative is string.</td>
+                            <td>Type of the value to write back to react module, default is date and alternative is string.</td>
                         </tr>
                         <tr>
                             <td>showButtonBar</td>

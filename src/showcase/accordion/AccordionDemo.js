@@ -85,7 +85,7 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Accordion element consists of one or more p-accordionTab elements. Title of the tab is defined using header attribute.</p>
+            <p>Accordion element consists of one or more AccordionTab elements. Title of the tab is defined using header attribute.</p>
 <CodeHighlight className="html javascript">
 {`
 <Accordion>

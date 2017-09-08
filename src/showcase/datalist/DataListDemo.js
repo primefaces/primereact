@@ -111,7 +111,7 @@ import {DataList} from 'primereact/components/datalist/DataList';
             <p>DataList requires a collection of items as its value and a template content to display where each
                item can be accessed using the implicit variable.Throughout the samples, a car interface having vin,
                brand, year and color properties are used to define an object to be displayed by the datalist.
-               Cars are loaded by a CarService that connects to a server to fetch the cars with a Promise.
+               Cars are loaded by a CarService that connects to a server to fetch the cars with a axios.
             </p>
 <CodeHighlight className="html">
 {`

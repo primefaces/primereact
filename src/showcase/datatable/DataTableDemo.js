@@ -82,7 +82,7 @@ import {DataTable} from 'primereact/components/datatable/DataTable';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a car interface having vin, brand, year and color properties is used to define an object to be displayed by the datatable. Cars are loaded by a CarService that connects to a server to fetch the cars with a Promise. 
+            <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a car interface having vin, brand, year and color properties is used to define an object to be displayed by the datatable. Cars are loaded by a CarService that connects to a server to fetch the cars with a axios.
                 Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
             </p>
 
