@@ -39,7 +39,7 @@ export class MultiSelectDemo extends Component {
                     <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} 
                             style={{width:'12em'}} filter={true} />
                 </div>
-
+                
                 <MultiSelectDoc />
             </div>
         );

@@ -10,12 +10,14 @@ export class MultiSelectHeader extends Component {
         filterValue: null,
         onFilter: null,
         onClose: null,
-        onToggleAll: null
+        onToggleAll: null,
+        allChecked: false
     }
     
     static propTypes = {
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
+        allChecked: PropTypes.bool,
         onFilter: PropTypes.func,
         onClose: PropTypes.func,
         onToggleAll: PropTypes.func
@@ -24,6 +26,7 @@ export class MultiSelectHeader extends Component {
     constructor() {
         super();
         this.onFilter = this.onFilter.bind(this);
+        this.onToggleAll = this.onToggleAll.bind(this);
     }
     
     onFilter(event) {
@@ -34,9 +37,21 @@ export class MultiSelectHeader extends Component {
             });
         }
     }
+    
+    onToggleAll(event) {
+        if(this.props.onToggleAll) {
+            this.props.onToggleAll({
+                originalEvent: event,
+                checked: this.props.allChecked
+            });
+        }
+    }
         
     render() {
         let filterElement;
+        let checkboxClassName = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.allChecked});
+        let checkboxIcon = classNames('ui-chkbox-icon ui-clickable', {'fa fa-check': this.props.allChecked});
+        
         if(this.props.filter) {
             filterElement = <div className="ui-multiselect-filter-container">
                                 <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
@@ -47,12 +62,12 @@ export class MultiSelectHeader extends Component {
         
         return (
                 <div className="ui-widget-header ui-corner-all ui-multiselect-header ui-helper-clearfix">
-                    <div className="ui-chkbox ui-widget" onClick={this.props.onToggleAll}>
+                    <div className="ui-chkbox ui-widget" onClick={this.onToggleAll}>
                         <div className="ui-helper-hidden-accessible">
                             <input type="checkbox" readOnly={true} />
                         </div>
-                        <div className="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
-                            <span className="ui-chkbox-icon ui-clickable"></span>
+                        <div className={checkboxClassName}>
+                            <span className={checkboxIcon}></span>
                         </div>
                     </div>
                     {filterElement}

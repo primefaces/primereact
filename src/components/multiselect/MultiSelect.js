@@ -61,12 +61,6 @@ export class MultiSelect extends Component {
         else
             newValue = [...this.props.value || [], optionValue];
         
-        if(this.props.onChange) {
-            this.props.onChange({
-                originalEvent: event.originalEvent,
-                value: newValue
-            });
-        }
     }
 
     onClick() {
@@ -90,7 +84,31 @@ export class MultiSelect extends Component {
     }
     
     onToggleAll(event) {
-        console.log('x');
+        let newValue;
+        
+        if(event.checked) {
+            newValue = [];
+        }
+        else {
+            let options = this.hasFilter() ? this.filterOptions(this.props.options) : this.props.options;
+            if(options) {
+                newValue = [];
+                for(let option of options) {
+                    newValue.push(option.value);
+                } 
+            }
+        }
+        
+        this.updateModel(event.originalEvent, newValue);
+    }
+    
+    updateModel(event, value) {
+        if(this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event,
+                value: value
+            });
+        }
     }
     
     onFilter(event) {
@@ -207,13 +225,26 @@ export class MultiSelect extends Component {
         this.panelClick = false;
     }
     
-    filter(option) {
+    filterOption(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
         return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
     }
     
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
+    }
+    
+    isAllChecked(visibleOptions) {
+        if(this.hasFilter())
+            return this.props.value && visibleOptions && visibleOptions.length&&(this.props.value.length === visibleOptions.length);
+        else
+            return this.props.value && this.props.options && (this.props.value.length === this.props.options.length);
+    } 
+    
+    filterOptions(options) {
+        return options.filter((option) => {
+            return this.filterOption(option);
+        });
     }
 
     render() {
@@ -222,12 +253,10 @@ export class MultiSelect extends Component {
         });
         let label = this.getLabel();
         let items = this.props.options;
-
+        
         if(items) {
             if(this.hasFilter()) {
-                items = items.filter((option) => {
-                    return this.filter(option);
-                });
+                items = this.filterOptions(items);
             }
             
             items = items.map((option) => {
@@ -235,7 +264,7 @@ export class MultiSelect extends Component {
                         selected={this.isSelected(option.value)} onClick={this.onOptionClick} />;
                 });
         }
-
+        
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
@@ -250,7 +279,7 @@ export class MultiSelect extends Component {
                 <div className="ui-multiselect-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" 
                     ref={(el) => this.panel = el} onClick={this.onPanelClick}>
                     <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} 
-                        onClose={this.onCloseClick} onToggleAll={this.onToggleAll} />
+                        onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)}/>
                     <div className="ui-multiselect-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
                         <ul className="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                             {items}  
