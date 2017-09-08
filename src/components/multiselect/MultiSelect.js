@@ -4,6 +4,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
 import {MultiSelectItem} from './MultiSelectItem';
+import {MultiSelectHeader} from './MultiSelectHeader';
 
 export class MultiSelect extends Component {
     
@@ -37,31 +38,17 @@ export class MultiSelect extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            filter: ''
+        }
         this.onClick = this.onClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
-    }
-
-    componentDidMount() {
-        this.documentClickListener = this.onDocumentClick.bind(this);
-        document.addEventListener('click', this.documentClickListener);
-    }
-
-    componentWillUnmount() {
-        if(this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-        }
-    }
-
-    onDocumentClick() {
-        if(!this.selfClick && !this.panelClick && this.panel.offsetParent) {
-            this.hide();
-        }
-        
-        this.selfClick = false;
-        this.panelClick = false;
+        this.onFilter = this.onFilter.bind(this);
+        this.onCloseClick = this.onCloseClick.bind(this);
+        this.onToggleAll = this.onToggleAll.bind(this);
     }
 
     onOptionClick(event) {
@@ -87,6 +74,10 @@ export class MultiSelect extends Component {
             return;
         }
         
+        if(this.documentClickListener) {
+            this.selfClick = true;
+        }
+
         if(!this.panelClick) {
             if(this.panel.offsetParent) {
                 this.hide();
@@ -96,8 +87,14 @@ export class MultiSelect extends Component {
                 this.show();
             }
         }
-        
-        this.selfClick = true;
+    }
+    
+    onToggleAll(event) {
+        console.log('x');
+    }
+    
+    onFilter(event) {
+        this.setState({filter: event.query});
     }
     
     onPanelClick() {
@@ -110,11 +107,19 @@ export class MultiSelect extends Component {
             DomHandler.relativePosition(this.panel, this.container);
             DomHandler.fadeIn(this.panel, 250);
             this.panel.style.display = 'block';
+            this.bindDocumentClickListener();
         }
     }
 
     hide() {
         this.panel.style.display = 'none';
+        this.unbindDocumentClickListener();
+    }
+    
+    onCloseClick(event) {
+        this.hide();
+        event.preventDefault();
+        event.stopPropagation();
     }
     
     findSelectionIndex(value) {
@@ -174,16 +179,58 @@ export class MultiSelect extends Component {
     onBlur() {
         DomHandler.removeClass(this.container, 'ui-state-focus');
     }
+    
+    bindDocumentClickListener() {
+        if(!this.documentClickListener) {
+            this.documentClickListener = this.onDocumentClick.bind(this);
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+    
+    unbindDocumentClickListener() {
+        if(this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
+    }
+
+    onDocumentClick() {
+        if(!this.selfClick && !this.panelClick && this.panel.offsetParent) {
+            this.hide();
+        }
+        
+        this.selfClick = false;
+        this.panelClick = false;
+    }
+    
+    filter(option) {
+        let filterValue = this.state.filter.trim().toLowerCase();
+        return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+    }
+    
+    hasFilter() {
+        return this.state.filter && this.state.filter.trim().length > 0;
+    }
 
     render() {
         let className = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
             'ui-state-disabled': this.props.disabled
         });
         let label = this.getLabel();
-        let items;
+        let items = this.props.options;
 
-        if(this.props.options) {
-            items = this.props.options.map((option) => {
+        if(items) {
+            if(this.hasFilter()) {
+                items = items.filter((option) => {
+                    return this.filter(option);
+                });
+            }
+            
+            items = items.map((option) => {
                 return <MultiSelectItem key={option.label} option={option} template={this.props.itemTemplate} 
                         selected={this.isSelected(option.value)} onClick={this.onOptionClick} />;
                 });
@@ -202,6 +249,8 @@ export class MultiSelect extends Component {
                 </div>
                 <div className="ui-multiselect-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" 
                     ref={(el) => this.panel = el} onClick={this.onPanelClick}>
+                    <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} 
+                        onClose={this.onCloseClick} onToggleAll={this.onToggleAll} />
                     <div className="ui-multiselect-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
                         <ul className="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                             {items}  

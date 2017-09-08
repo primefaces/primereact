@@ -36,7 +36,8 @@ export class MultiSelectDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} style={{width:'12em'}} />
+                    <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} 
+                            style={{width:'12em'}} filter={true} />
                 </div>
 
                 <MultiSelectDoc />
