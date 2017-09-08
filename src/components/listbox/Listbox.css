@@ -66,9 +66,3 @@
     padding: .125em .125em .125em 1.25em;
     width: 100%;
 }
-
-/* Fluid */
-.ui-fluid .ui-listbox .ui-listbox-filter-container,
-.ui-fluid .ui-listbox .ui-listbox-filter-container input {
-    width: calc(100% - 32px);
-}
