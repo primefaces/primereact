@@ -10,6 +10,7 @@
     border-bottom-left-radius: 0px;
     width: 2em;
     border-left: 0 none;
+    margin-right: 0;
 }
 
 .ui-calendar .ui-calendar-button:enabled:hover,
