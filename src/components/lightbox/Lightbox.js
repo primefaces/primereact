@@ -88,7 +88,6 @@ export class Lightbox extends Component {
     }
 
     hide(event){
-        this.setState({captionText:null});
         this.index = null;
         this.setState({currentImage:null})
         this.panel.style.left = 'auto';
@@ -106,13 +105,13 @@ export class Lightbox extends Component {
     displayImage(image){
         setTimeout(() => {
             this.setState({currentImage: image});
-            this.setState({captionText:image.title});
+            this.center();
         }, 1000);
     }
 
     prev() {
         this.setState({loading:true});
-        this.setState({captionText:null});
+        this.img.style.display = 'none';
         if(this.index > 0) {
             this.displayImage(this.props.images[--this.index]);
         }
@@ -120,7 +119,7 @@ export class Lightbox extends Component {
 
     next() {
         this.setState({loading:true});
-        this.setState({captionText:null});
+        this.img.style.display = 'none';
         if(this.index <= (this.props.images.length - 1)) {
             this.displayImage(this.props.images[++this.index]);
         }
@@ -155,7 +154,7 @@ export class Lightbox extends Component {
             {'ui-helper-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
         var rightButton=classNames('ui-state-default ui-lightbox-nav-right ui-corner-left',
             {'ui-helper-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
-        var contentClass=classNames('ui-lightbox-content ui-corner-all',{'ui-lightbox-loading':this.state.loading})
+        var containerClassName = classNames('ui-lightbox ui-widget ui-helper-hidden ui-corner-all ui-shadow', {'ui-lightbox-loading':this.state.loading});
 
         if(this.props.type==='images'){
             images=<div style={this.props.style} className={this.props.className}>{
@@ -184,16 +183,16 @@ export class Lightbox extends Component {
             <div id={this.props.id}>
                 {images}
                 {contentText}
-                <div className="ui-lightbox ui-widget ui-helper-hidden ui-corner-all ui-shadow"
+                <div className={containerClassName}
                      style={{transitionProperty:'all',transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing, display:this.state.visible?'block':'none',
                                 zIndex:this.zindex }} ref={el=>this.panel=el } onClick={()=>this.preventDocumentClickListener = true}>
                     <div className="ui-lightbox-content-wrapper">
                         <a className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev.bind(this)}>
                             <span className="fa fa-fw fa-caret-left"></span>
                         </a>
-                        <div className={contentClass} ref={el=>this.content=el}
-                             style={{transitionProperty:"'width,height'",transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing}}>
-                            <img ref={el=>this.img=el} src={this.state.currentImage ? this.state.currentImage.source : ''}
+                        <div className="ui-lightbox-content ui-corner-all" ref={el=>this.content=el}
+                             style={{transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing}}>
+                            <img ref={el => this.img = el} src={this.state.currentImage ? this.state.currentImage.source : ''}
                                  onLoad={this.onImageLoad.bind(this)} alt=""/>
                             {contentFrame}
                         </div>
@@ -201,13 +200,6 @@ export class Lightbox extends Component {
                         <a className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next.bind(this)}>
                             <span className="fa fa-fw fa-caret-right"></span>
                         </a>
-                    </div>
-                    <div className="ui-lightbox-caption ui-widget-header" style={{display:this.state.captionText ? 'block' : 'none'}}>
-                        <span className="ui-lightbox-caption-text">{this.state.captionText}</span>
-                        <a className="ui-lightbox-close ui-corner-all" href="#" onClick={event=>this.hide(event)}>
-                            <span className="fa fa-fw fa-close"></span>
-                        </a>
-                        <div style={{clear:'both'}}></div>
                     </div>
                 </div>
             </div>
