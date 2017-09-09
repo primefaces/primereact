@@ -124,16 +124,16 @@ export class FileUpload extends Component {
                     file.objectURL = window.URL.createObjectURL(file);
                 }
                 
-                this.setState({files: [...this.state.files, file]});
+                this.setState({files: [...this.state.files, file]}, () => {
+                    if(this.hasFiles() && this.props.auto) {
+                        this.upload();
+                    }
+                });
             }
         }
                 
         if(this.props.onSelect) {
             this.props.onSelect({originalEvent: event, files: this.state.files});
-        }
-        
-        if(this.hasFiles() && this.props.auto) {
-            this.upload();
         }
         
         this.clearInputElement();
