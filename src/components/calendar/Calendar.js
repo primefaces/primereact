@@ -1331,7 +1331,7 @@ export class Calendar extends Component {
                 disabled={this.props.disabled} tabIndex={this.props.tabindex} />
 
             if(this.props.showIcon) {
-                var buttonStyleClass = classNames('ui-datepicker-trigger', {
+                var buttonStyleClass = classNames('ui-datepicker-trigger ui-calendar-button', {
                     'ui-state-disabled': this.props.disabled
                 });
 
