@@ -48,14 +48,14 @@ export class FileUploadDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Advanced</h3>
-                    <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
+                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} 
                                 multiple={true} accept="image/*" maxFileSize={1000000} />
                                 
                     <h3>Basic</h3>
-                    <FileUpload mode="basic" name="demo[]" url="http://localhost:4000/upload" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
+                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
                     
                     <h3>Basic with Auto</h3>
-                    <FileUpload mode="basic" name="demo[]" url="http://localhost:4000/upload" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
                     
                     <Growl value={this.state.msgs} />
                 </div>
@@ -85,55 +85,54 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
             <p>FileUpload requires a url property as the upload target and a name to identify the files at backend.</p>
 <CodeHighlight className="html">
 {`
-<FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
-                             accept="image/*"></FileUpload>
-
-`}
-</CodeHighlight>
-<CodeHighlight className="javascript">
-{`
-constructor() {
-    super();
-    this.state = {};
-    this.onUpload = this.onUpload.bind(this);
-}
-
-onUpload(event) {
-    ....
-}
+<FileUpload name="demo" url="./upload"></FileUpload>
 
 `}
 </CodeHighlight>
 
             <h3>Multiple Uploads</h3>
-            <p>Only one file can be selected at a time, to allow selecting multiples enable multiple option.</p>
+            <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable multiple option.</p>
                
 <CodeHighlight className="html">
 {`
-<FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
-                                multiple={true} accept="image/*"></FileUpload>
+<FileUpload name="demo[]" url="./upload" multiple={true} />
 
 `}
 </CodeHighlight>
 
             <h3>DragDrop</h3>
-            <p>File selection can also be done by dragging and dropping one or more to the content section of the component.</p>
+            <p>File selection can also be done by dragging and dropping from the filesystem to the content section of the component.</p>
 
-            <h3>File Types</h3>
-            <p>Selectable file types can be restricted with accept property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
+            <h3>Auto Uploads</h3>
+            <p>When auto property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
 
-            <h3>File Size</h3>
-            <p>Maximium file size can be restricted using maxFileSize property defined in bytes.</p>
 <CodeHighlight className="html">
 {`
-<FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
-                                multiple={true} accept="image/*" maxFileSize={1000000}></FileUpload>
+<FileUpload name="demo" url="./upload" auto={true} />
 
 `}
 </CodeHighlight>
 
-            <p>In order to customize the default messages use invalidFileSizeMessageSummary and invalidFileSizeMessageDetail options. In summary {0} placeholder refers to the filename and in detail, file size.</p>
+            <h3>File Types</h3>
+            <p>Selectable file types can be restricted with accept property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
+<CodeHighlight className="html">
+{`
+<FileUpload name="demo[]" url="./upload" multiple={true} accept="image/*" />
 
+`}
+</CodeHighlight>
+
+            <h3>File Size</h3>
+            <p>Maximium file size can be restricted using maxFileSize property defined in bytes.</p>
+
+<CodeHighlight className="html">
+{`
+<FileUpload name="demo" url="./upload" maxFileSize="1000000" />
+
+`}
+</CodeHighlight>
+
+            <p>In order to customize the default messages use invalidFileSizeMessageSummary and invalidFileSizeMessageDetail options. In summary messages, {0} placeholder refers to the filename and in detail message, the file size.</p>
             <ul>
                 <li>
                     invalidFileSizeMessageSummary: '{0}: Invalid file size, '
@@ -145,6 +144,16 @@ onUpload(event) {
 
             <h3>Request Customization</h3>
             <p>XHR request to upload the files can be customized using the onBeforeUpload callback that passes the xhr instance and FormData object as event parameters.</p>
+
+            <h3>Basic UI</h3>
+            <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
+
+<CodeHighlight className="html">
+{`
+<FileUpload name="demo" url="./upload" mode="basic" />
+
+`}
+</CodeHighlight>
 
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
@@ -175,6 +184,12 @@ onUpload(event) {
                             <td>string</td>
                             <td>null</td>
                             <td>Remote url to upload the files.</td>
+                        </tr>
+                        <tr>
+                            <td>mode</td>
+                            <td>string</td>
+                            <td>advanced</td>
+                            <td>Defines the UI of the component, possible values are "advanced" and "basic".</td>
                         </tr>
                         <tr>
                             <td>multiple</td>
@@ -229,6 +244,12 @@ onUpload(event) {
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the component.</td>
+                        </tr>
+                        <tr>
+                            <td>withCredentials</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates.</td>
                         </tr>
                         <tr>
                             <td>previewWidth</td>
@@ -306,6 +327,12 @@ onUpload(event) {
                                 event.files: List of selected files.</td>
                             <td>Callback to invoke when file upload is complete.</td>
                         </tr>
+                        <tr>
+                            <td>onProgress</td>
+                            <td>event.originalEvent: Original browser event. <br />
+                                event.progress: Calculated progress value.</td>
+                            <td>Callback to invoke when files are selected.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -349,22 +376,48 @@ onUpload(event) {
                  </a>
 <CodeHighlight className="javascript">
 {`
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {Growl} from '../../components/growl/Growl';
+import {FileUpload} from '../../components/fileupload/FileUpload';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
+
 export class FileUploadDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            msgs: []
+        };
+        
         this.onUpload = this.onUpload.bind(this);
+        this.onBasicUpload = this.onBasicUpload.bind(this);
+        this.onBasicUploadAuto = this.onBasicUploadAuto.bind(this);
     }
 
     onUpload(event) {
-
+        this.setState({
+            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded'}]
+        });
+    }
+    
+    onBasicUpload(event) {
+        this.setState({
+            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'}]
+        });
+    }
+    
+    onBasicUploadAuto(event) {   
+        this.setState({
+            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'}]
+        });
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>FileUpload</h1>
                         <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
@@ -372,12 +425,18 @@ export class FileUploadDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <h3>Advanced</h3>
+                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} 
+                                multiple={true} accept="image/*" maxFileSize={1000000} />
+                                
+                    <h3>Basic</h3>
+                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
+                    
+                    <h3>Basic with Auto</h3>
+                    <FileUpload mode="basic" name="demo[]" uurl="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+                    
                     <Growl value={this.state.msgs} />
-
-                    <FileUpload name="demo[]" url="http://localhost:4000/upload" onUpload={this.onUpload} 
-                                multiple={true} accept="image/*" maxFileSize={1000000}></FileUpload>
                 </div>
-                <FileUploadDoc></FileUploadDoc>
             </div>
         )
     }
