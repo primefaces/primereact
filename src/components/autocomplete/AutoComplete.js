@@ -435,7 +435,7 @@ export class AutoComplete extends Component {
                     }
                  
                     <li className="ui-autocomplete-input-token">
-                        <InputText ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder} tabIndex={this.props.tabindex} onInput={this.onInput.bind(this)} 
+                        <input ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder} tabIndex={this.props.tabindex} onInput={this.onInput.bind(this)} 
                             onKeyDown={this.onKeydown.bind(this)} onFocus={this.onInputFocus.bind(this)} onBlur={this.onBlur.bind(this)} autoComplete="off" />
                     </li>
                 </ul>
