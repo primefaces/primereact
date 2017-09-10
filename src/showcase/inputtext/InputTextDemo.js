@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {InputText} from '../../components/inputtext/InputText';
-import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
@@ -9,8 +8,9 @@ export class InputTextDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
-        this.toggle = this.toggle.bind(this);
+        this.state = {
+            value: ''
+        };
     }
 
     toggle() {
@@ -28,14 +28,8 @@ export class InputTextDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
                     <InputText onChange={(e) => this.setState({value: e.target.value})}/>
                     <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
-
-                    <h3>Disabled</h3>
-                    <InputText disabled={this.state.disabled} style={{marginRight:'.25em'}}/>
-
-                    <Button label="Toggle" onClick={this.toggle}/>
                 </div>
 
                 <InputTextDoc />
@@ -111,18 +105,18 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         </a>
 <CodeHighlight className="javascript">
 {`
+import React, {Component} from 'react';
+import {InputText} from '../../components/inputtext/InputText';
+    
 export class InputTextDemo extends Component {
-        
+    
     constructor() {
         super();
-        this.state = {};
-        this.toggle = this.toggle.bind(this);
+        this.state = {
+            value: ''
+        };
     }
-
-    toggle() {
-        this.setState({disabled: !this.state.disabled});
-    }
-
+    
     render() {
         return (
             <div>
@@ -134,14 +128,8 @@ export class InputTextDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
                     <InputText onChange={(e) => this.setState({value: e.target.value})}/>
                     <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
-
-                    <h3>Disabled</h3>
-                    <InputText disabled={this.state.disabled} style={{marginRight:'.25em'}}/>
-
-                    <Button label="Toggle" onClick={this.toggle}/>
                 </div>
             </div>
         )
