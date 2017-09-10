@@ -169,6 +169,7 @@ body {
                         img {
                             width: 32px;
                             vertical-align: middle;
+                            margin-right: 4px;
                         }
 
                         .ui-text {
@@ -725,6 +726,23 @@ body {
                 font-weight: bold;
                 color: #03c4e8;
             }
+        }
+    }
+    
+    .templates {
+        background-color: #f5f7f8;
+        text-align: center;
+        padding: 30px;
+        border-bottom: 1px solid #c4c5c6;
+        
+        h3 {
+             font-size:24px;
+             color: #484848;
+             margin-bottom: 25px;
+        }
+        
+        img {
+            width: 100%;
         }
     }
 

@@ -85,6 +85,26 @@ class Home extends Component {
                         <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/viacom.svg"></img></div>
                     </div>
                 </div>
+                <div className="templates">
+                    <h3>Premium Application Templates for PrimeReact</h3>
+                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates 
+                        of PrimeReact and impress your users.</p>
+                    
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-6">
+                            <h4>Ultima with Material Design</h4>
+                            <a href="https://www.primefaces.org/layouts/ultima-react">
+                                <img alt="Avalon" src="showcase/resources/images/layouts/ultima-react.png" /> 
+                            </a>
+                        </div>
+                        <div className="ui-g-12 ui-md-6">
+                            <h4>Avalon with Bootstrap Styling</h4>
+                            <a href="https://www.primefaces.org/layouts/avalon-react">
+                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react.png" /> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div className="prosupport">
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-6">
@@ -384,6 +404,9 @@ class App extends Component {
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
+                                <li className="topbar-submenu-header">PREMIUM</li>
+                                <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span class="ui-text">Ultima</span></a></li>
+                                <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span class="ui-text">Avalon</span></a></li>
                                 <li className="topbar-submenu-header">THEMES</li>
                                 <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
                                 <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
