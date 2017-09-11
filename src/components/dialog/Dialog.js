@@ -47,7 +47,7 @@ export class Dialog extends Component {
         resizable: PropTypes.bool,
         minWidth: PropTypes.number,
         minHeight: PropTypes.number,
-        contentStyle: PropTypes.string,
+        contentStyle: PropTypes.object,
         closeOnEscape: PropTypes.bool,
         dismissableMask: PropTypes.bool,
         rtl: PropTypes.bool,
@@ -426,7 +426,7 @@ export class Dialog extends Component {
         return (
             <div id={this.props.id} className={className} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
                 {titleBar}
-                <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content">
+                <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
                     {this.props.children}
                 </div>
                 {footer}
