@@ -1,4 +1,4 @@
-![alt text](https://www.primefaces.org/wp-content/uploads/2017/08/primereact-transparent.png "PrimeReact")
+![alt text](https://www.primefaces.org/wp-content/uploads/2017/09/primereact-transparent-1.png "PrimeReact")
 
 # PrimeReact
 UI Components for React
