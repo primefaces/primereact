@@ -117,18 +117,19 @@ export class FileUpload extends Component {
     onFileSelect(event) {
         this.setState({msgs:[]});
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-        
         for(let file of files) {
-            if(this.validate(file)) {
-                if(this.isImage(file)) {
-                    file.objectURL = window.URL.createObjectURL(file);
-                }
-                
-                this.setState({files: [...this.state.files, file]}, () => {
-                    if(this.hasFiles() && this.props.auto) {
-                        this.upload();
+            if(this.isFileSelected(file)) {
+                if (this.validate(file)) {
+                    if (this.isImage(file)) {
+                        file.objectURL = window.URL.createObjectURL(file);
                     }
-                });
+
+                    this.setState({files: [...this.state.files, file]}, () => {
+                        if (this.hasFiles() && this.props.auto) {
+                            this.upload();
+                        }
+                    });
+                }
             }
         }
                 
@@ -141,6 +142,14 @@ export class FileUpload extends Component {
         if(this.props.mode === 'basic') {
             this.fileInput.style.display = 'none';
         }
+    }
+
+    isFileSelected(file){
+        for(let sFile of this.state.files){
+            if((sFile.name + sFile.type + sFile.size) === (file.name + file.type+file.size))
+                return false;
+        }
+        return true;
     }
 
     validate(file) {
@@ -288,7 +297,7 @@ export class FileUpload extends Component {
         
         if(this.props.mode === 'advanced') {
             let className = classNames('ui-fileupload ui-widget', this.props.className);
-            let chooseButtonClassName = classNames('ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left', {'ui-fileupload-choose-selected': this.hasFiles()});
+            let chooseButtonClassName = classNames('ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left');
             let chooseButton = <span icon="fa-plus" className={chooseButtonClassName}>
                                     <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} 
                                         multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
