@@ -49,7 +49,7 @@ class BreadCrumbDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="javascript">
                             {`
-import {Breadcrumb} from 'primereact/components/breadcrumb/Breadcrumb';
+import {Breadcrumb} from 'primereact/components/breadcrumb/BreadCrumb';
 
 `}</CodeHighlight>
 
