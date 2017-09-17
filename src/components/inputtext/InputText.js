@@ -16,9 +16,6 @@ export class InputText extends Component {
         super(props);
         this.onInput = this.onInput.bind(this);
         this.state = {filled: false};
-
-        this.inputProps = Object.assign({}, this.props);
-        delete this.inputProps.onInput;
     }
 
     onInput(e) {
@@ -35,17 +32,11 @@ export class InputText extends Component {
     }
     
     componentDidMount() {
-        let _value =  this.inputProps.value||this.inputProps.defaultValue,
+        let _value =  this.props.value||this.props.defaultValue,
         _filled = (_value && _value.length) ? true : false;
         
         this.setState({filled: _filled});
     }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.hasOwnProperty('value')) {
-            this.inputProps.value = nextProps.value;
-        }
-    }   
 
     render() {
         var className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
@@ -53,6 +44,9 @@ export class InputText extends Component {
             'ui-state-filled': this.state.filled
         });
 
-        return <input {...this.inputProps} className={className} onInput={this.onInput}/>;
+        let inputProps = Object.assign({}, this.props);
+        delete inputProps.onInput;
+
+        return <input {...inputProps} className={className} onInput={this.onInput}/>;
     }
 }
