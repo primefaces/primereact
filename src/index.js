@@ -89,101 +89,104 @@ import {ThemingPage} from "./showcase/theming/ThemingPage"
 import {InputGroupDemo} from "./showcase/inputgroup/InputGroupDemo";
 import {EditorDemo} from "./showcase/editor/EditorDemo";
 import {TooltipDemo} from "./showcase/tooltip/TooltipDemo";
-import {Router,Route,hashHistory} from 'react-router';
+import {Route,HashRouter,Switch} from 'react-router-dom';
 import {MenuModelDemo} from "./showcase/menumodel/MenuModelDemo";
 
 ReactDOM.render(
-    <Router history={hashHistory}>
-        <Route path="/" component={App}>
-            <Route path="/accordion" component={AccordionDemo} />
-            <Route path="/autocomplete" component={AutoCompleteDemo} />
-            <Route path="/button" component={ButtonDemo} />
-            <Route path="/checkbox" component={CheckboxDemo} />
-            <Route path="/chips" component={ChipsDemo} />
-            <Route path="/dialog" component={DialogDemo} />
-            <Route path="/dropdown" component={DropdownDemo} />
-            <Route path="/grid" component={GridDemo} />
-            <Route path="/growl" component={GrowlDemo} />
-            <Route path="/fieldset" component={FieldsetDemo} />
-            <Route path="/fileupload" component={FileUploadDemo} />
-            <Route path="/inputtext" component={InputTextDemo} />
-            <Route path="/inputtextarea" component={InputTextareaDemo} />
-            <Route path="/listbox" component={ListBoxDemo} />
-            <Route path="/messages" component={MessagesDemo} />
-            <Route path="/multiselect" component={MultiSelectDemo} />
-            <Route path="/overlaypanel" component={OverlayPanelDemo} />
-            <Route path="/panel" component={PanelDemo} />
-            <Route path="/progressbar" component={ProgressBarDemo} />
-            <Route path="/radiobutton" component={RadioButtonDemo} />
-            <Route path="/tabview" component={TabViewDemo} />
-            <Route path="/togglebutton" component={ToggleButtonDemo} />
-            <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
-            <Route path="/selectbutton" component={SelectButtonDemo} />
-            <Route path="/inputswitch" component={InputSwitchDemo} />
-            <Route path="/inputmask" component={InputMaskDemo} />
-            <Route path="/slider" component={SliderDemo} />
-            <Route path="/spinner" component={SpinnerDemo} />
-            <Route path="/calendar" component={CalendarDemo} />
-            <Route path="/chartdemo" component={ChartDemo} />
-            <Route path="/piechart" component={PieChartDemo} />
-            <Route path="/doughnutchart" component={DoughnutChartDemo} />
-            <Route path="/linechart" component={LineChartDemo} />
-            <Route path="/barchart" component={BarChartDemo} />
-            <Route path="/polarareachart" component={PolarAreaChartDemo} />
-            <Route path="/radarchart" component={RadarChartDemo} />
-            <Route path="/paginator" component={PaginatorDemo} />
-            <Route path="/datalist" component={DataListDemo} />
-            <Route path="/datagrid" component={DataGridDemo} />
-            <Route path="/datatable" component={DataTableDemo} />
-            <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
-            <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
-            <Route path="/datatable/sort" component={DataTableSortDemo} />
-            <Route path="/datatable/filter" component={DataTableFilterDemo} />
-            <Route path="/datatable/scroll" component={DataTableScrollDemo} />
-            <Route path="/datatable/lazy" component={DataTableLazyDemo} />
-            <Route path="/datatable/selection" component={DataTableSelectionDemo} />
-            <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
-            <Route path="/datatable/contextmenu" component={DataTableContextMenuDemo} />
-            <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
-            <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
-            <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
-            <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
-            <Route path="/datatable/export" component={DataTableExportDemo} />
-            <Route path="/datatable/crud" component={DataTableCrudDemo} />
-            <Route path="/orderlist" component={OrderListDemo} />
-            <Route path="/picklist" component={PickListDemo} />
-            <Route path="/schedule" component={ScheduleDemo} />
-            <Route path="/tree" component={TreeDemo} />
-            <Route path="/treetable" component={TreeTableDemo} />
-            <Route path="/captcha" component={CaptchaDemo} />
-            <Route path="/colorpicker" component={ColorPickerDemo} />
-            <Route path="/password" component={PasswordDemo} />
-            <Route path="/toolbar" component={ToolbarDemo} />
-            <Route path="/lightbox" component={LightboxDemo} />
-            <Route path="/rating" component={RatingDemo} />
-            <Route path="/datascroller" component={DataScrollerDemo} />
-            <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
-            <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
-            <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
-            <Route path="/menumodel" component={MenuModelDemo} />
-            <Route path="/menu" component={MenuDemo} />
-            <Route path="/tabmenu" component={TabMenuDemo} />
-            <Route path="/breadcrumb" component={BreadcrumbDemo} />
-            <Route path="/tieredmenu" component={TieredMenuDemo} />
-            <Route path="/menubar" component={MenubarDemo} />
-            <Route path="/contextmenu" component={ContextMenuDemo} />
-            <Route path="/panelmenu" component={PanelMenuDemo} />
-            <Route path="/slidemenu" component={SlideMenuDemo} />
-            <Route path="/steps" component={StepsDemo} />
-            <Route path="/megamenu" component={MegaMenuDemo} />
-            <Route path="/setup" component={SetupPage} />
-            <Route path="/splitbutton" component={SplitButtonDemo} />
-            <Route path="/organizationchart" component={OrganizationChartDemo} />
-            <Route path="/theming" component={ThemingPage} />
-            <Route path="/inputgroup" component={InputGroupDemo} />
-            <Route path="/editor" component={EditorDemo} />
-            <Route path="/tooltip" component={TooltipDemo} />
-        </Route>
-    </Router>,
+    <HashRouter>
+        <Switch>
+            <Route exact path="/" component={App}/>
+            <App>
+                <Route path="/accordion" component={AccordionDemo} />
+                <Route path="/autocomplete" component={AutoCompleteDemo} />
+                <Route path="/button" component={ButtonDemo} />
+                <Route path="/checkbox" component={CheckboxDemo} />
+                <Route path="/chips" component={ChipsDemo} />
+                <Route path="/dialog" component={DialogDemo} />
+                <Route path="/dropdown" component={DropdownDemo} />
+                <Route path="/grid" component={GridDemo} />
+                <Route path="/growl" component={GrowlDemo} />
+                <Route path="/fieldset" component={FieldsetDemo} />
+                <Route path="/fileupload" component={FileUploadDemo} />
+                <Route path="/inputtext" component={InputTextDemo} />
+                <Route path="/inputtextarea" component={InputTextareaDemo} />
+                <Route path="/listbox" component={ListBoxDemo} />
+                <Route path="/messages" component={MessagesDemo} />
+                <Route path="/multiselect" component={MultiSelectDemo} />
+                <Route path="/overlaypanel" component={OverlayPanelDemo} />
+                <Route path="/panel" component={PanelDemo} />
+                <Route path="/progressbar" component={ProgressBarDemo} />
+                <Route path="/radiobutton" component={RadioButtonDemo} />
+                <Route path="/tabview" component={TabViewDemo} />
+                <Route path="/togglebutton" component={ToggleButtonDemo} />
+                <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
+                <Route path="/selectbutton" component={SelectButtonDemo} />
+                <Route path="/inputswitch" component={InputSwitchDemo} />
+                <Route path="/inputmask" component={InputMaskDemo} />
+                <Route path="/slider" component={SliderDemo} />
+                <Route path="/spinner" component={SpinnerDemo} />
+                <Route path="/calendar" component={CalendarDemo} />
+                <Route path="/chartdemo" component={ChartDemo} />
+                <Route path="/piechart" component={PieChartDemo} />
+                <Route path="/doughnutchart" component={DoughnutChartDemo} />
+                <Route path="/linechart" component={LineChartDemo} />
+                <Route path="/barchart" component={BarChartDemo} />
+                <Route path="/polarareachart" component={PolarAreaChartDemo} />
+                <Route path="/radarchart" component={RadarChartDemo} />
+                <Route path="/paginator" component={PaginatorDemo} />
+                <Route path="/datalist" component={DataListDemo} />
+                <Route path="/datagrid" component={DataGridDemo} />
+                <Route path="/datatable" component={DataTableDemo} />
+                <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
+                <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
+                <Route path="/datatable/sort" component={DataTableSortDemo} />
+                <Route path="/datatable/filter" component={DataTableFilterDemo} />
+                <Route path="/datatable/scroll" component={DataTableScrollDemo} />
+                <Route path="/datatable/lazy" component={DataTableLazyDemo} />
+                <Route path="/datatable/selection" component={DataTableSelectionDemo} />
+                <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
+                <Route path="/datatable/contextmenu" component={DataTableContextMenuDemo} />
+                <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
+                <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
+                <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
+                <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
+                <Route path="/datatable/export" component={DataTableExportDemo} />
+                <Route path="/datatable/crud" component={DataTableCrudDemo} />
+                <Route path="/orderlist" component={OrderListDemo} />
+                <Route path="/picklist" component={PickListDemo} />
+                <Route path="/schedule" component={ScheduleDemo} />
+                <Route path="/tree" component={TreeDemo} />
+                <Route path="/treetable" component={TreeTableDemo} />
+                <Route path="/captcha" component={CaptchaDemo} />
+                <Route path="/colorpicker" component={ColorPickerDemo} />
+                <Route path="/password" component={PasswordDemo} />
+                <Route path="/toolbar" component={ToolbarDemo} />
+                <Route path="/lightbox" component={LightboxDemo} />
+                <Route path="/rating" component={RatingDemo} />
+                <Route path="/datascroller" component={DataScrollerDemo} />
+                <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
+                <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
+                <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
+                <Route path="/menumodel" component={MenuModelDemo} />
+                <Route path="/menu" component={MenuDemo} />
+                <Route path="/tabmenu" component={TabMenuDemo} />
+                <Route path="/breadcrumb" component={BreadcrumbDemo} />
+                <Route path="/tieredmenu" component={TieredMenuDemo} />
+                <Route path="/menubar" component={MenubarDemo} />
+                <Route path="/contextmenu" component={ContextMenuDemo} />
+                <Route path="/panelmenu" component={PanelMenuDemo} />
+                <Route path="/slidemenu" component={SlideMenuDemo} />
+                <Route path="/steps" component={StepsDemo} />
+                <Route path="/megamenu" component={MegaMenuDemo} />
+                <Route path="/setup" component={SetupPage} />
+                <Route path="/splitbutton" component={SplitButtonDemo} />
+                <Route path="/organizationchart" component={OrganizationChartDemo} />
+                <Route path="/theming" component={ThemingPage} />
+                <Route path="/inputgroup" component={InputGroupDemo} />
+                <Route path="/editor" component={EditorDemo} />
+                <Route path="/tooltip" component={TooltipDemo} />
+            </App>
+        </Switch>
+    </HashRouter>,
     document.getElementById('root')
 );

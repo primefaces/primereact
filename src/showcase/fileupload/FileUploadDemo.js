@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Growl} from '../../components/growl/Growl';
 import {FileUpload} from '../../components/fileupload/FileUpload';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -381,7 +381,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
 <CodeHighlight className="javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Growl} from '../../components/growl/Growl';
 import {FileUpload} from '../../components/fileupload/FileUpload';
 import {TabView,TabPanel} from '../../components/tabview/TabView';

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Dialog} from '../../components/dialog/Dialog';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -352,7 +352,7 @@ let footer = <div>
 <CodeHighlight className="javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Dialog} from 'primereact/components/dialog/Dialog';
 import {Button} from 'primereact/components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import { DataList } from '../../components/datalist/DataList';
 import { Dialog } from '../../components/dialog/Dialog';
 import { CarService } from '../service/CarService';
@@ -330,7 +330,7 @@ componentDidMount() {
 <CodeHighlight className="javascript">
 {`
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import { DataList } from 'primereact/components/datalist/DataList';
 import { Dialog } from 'primereact/components/dialog/Dialog';
 import { CarService } from '../service/CarService';

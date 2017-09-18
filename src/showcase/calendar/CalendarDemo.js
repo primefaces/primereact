@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Calendar} from '../../components/calendar/Calendar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
@@ -619,7 +619,7 @@ let es = {
 <CodeHighlight className="javascript">
 {`
     import React, {Component} from 'react';
-    import {Link} from 'react-router';
+    import {Link} from 'react-router-dom';
     import {Calendar} from 'primereact/components/calendar/Calendar';
     import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 

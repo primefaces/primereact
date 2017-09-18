@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import { DataGrid } from '../../components/datagrid/DataGrid';
 import { Dialog } from '../../components/dialog/Dialog';
 import { Panel } from '../../components/panel/Panel';

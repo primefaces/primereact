@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import { Slider } from '../../components/slider/Slider';
 import { InputText } from '../../components/inputtext/InputText';
 import {TabView,TabPanel} from '../../components/tabview/TabView';

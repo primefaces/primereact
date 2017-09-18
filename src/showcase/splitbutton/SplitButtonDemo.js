@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {SplitButton} from '../../components/splitbutton/SplitButton';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -244,7 +244,7 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 <CodeHighlight className="javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 import {Growl} from 'primereact/components/growl/Growl';
 import {TabView,TabPanel} from 'primereact/components/tabview/TabView';

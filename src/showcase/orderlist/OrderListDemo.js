@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {OrderList} from '../../components/orderlist/OrderList';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -243,7 +243,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
 <CodeHighlight className="javascript">
 {`
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {OrderList} from 'primereact/components/orderlist/OrderList';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
