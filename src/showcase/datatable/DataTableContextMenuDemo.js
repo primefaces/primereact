@@ -80,6 +80,10 @@ export class DataTableContextMenuDemo extends Component {
 }
 
 export class DataTableContextMenuDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -55,6 +55,10 @@ export class ButtonDemo extends Component {
 
 class ButtonDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

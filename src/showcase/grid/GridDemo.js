@@ -150,6 +150,10 @@ export class GridDemo extends Component {
 }
 
 export class GridDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

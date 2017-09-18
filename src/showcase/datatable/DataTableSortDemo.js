@@ -58,6 +58,10 @@ export class DataTableSortDemo extends Component {
 }
 
 export class DataTableSortDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

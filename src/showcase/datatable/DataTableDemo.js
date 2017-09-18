@@ -67,6 +67,10 @@ export class DataTableDemo extends Component {
 }
 
 export class DataTableDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

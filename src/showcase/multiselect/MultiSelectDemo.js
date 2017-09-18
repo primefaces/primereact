@@ -47,6 +47,10 @@ export class MultiSelectDemo extends Component {
 }
 
 export class MultiSelectDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

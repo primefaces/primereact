@@ -48,6 +48,10 @@ export class InputSwitchDemo extends Component {
 
 class InputSwitchDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

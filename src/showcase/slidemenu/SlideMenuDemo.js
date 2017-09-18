@@ -120,6 +120,10 @@ export class SlideMenuDemo extends Component {
 
 class SlideMenuDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

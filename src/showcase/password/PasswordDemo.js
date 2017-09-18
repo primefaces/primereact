@@ -27,6 +27,11 @@ export class PasswordDemo extends Component {
 }
 
 class PasswordDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

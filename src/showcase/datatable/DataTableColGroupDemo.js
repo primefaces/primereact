@@ -81,6 +81,10 @@ export class DataTableColGroupDemo extends Component {
 }
 
 export class DataTableColGroupDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

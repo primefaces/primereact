@@ -38,6 +38,10 @@ export class TriStateCheckboxDemo extends Component {
 
 class TriStateCheckboxDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

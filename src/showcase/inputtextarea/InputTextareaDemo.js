@@ -43,6 +43,10 @@ export class InputTextareaDemo extends Component {
 
 class InputTextareaDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

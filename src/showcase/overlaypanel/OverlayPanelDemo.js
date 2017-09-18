@@ -42,6 +42,10 @@ export class OverlayPanelDemo extends Component {
 }
 
 export class OverlayPanelDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

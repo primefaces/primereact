@@ -72,6 +72,10 @@ export class DataTableLazyDemo extends Component {
 }
 
 export class DataTableLazyDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -58,6 +58,10 @@ export class SpinnerDemo extends Component {
 
 class SpinnerDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

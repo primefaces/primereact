@@ -123,6 +123,10 @@ export class CalendarDemo extends Component {
 }
 
 export class CalendarDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -106,6 +106,10 @@ export class DataTableFilterDemo extends Component {
 }
 
 export class DataTableFilterDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

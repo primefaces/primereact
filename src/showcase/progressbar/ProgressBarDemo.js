@@ -57,6 +57,10 @@ export class ProgressBarDemo extends Component {
 }
 
 export class ProgressBarDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -46,6 +46,11 @@ export class ToolbarDemo extends Component {
 }
 
 class ToolbarDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

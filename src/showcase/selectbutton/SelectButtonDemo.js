@@ -56,6 +56,10 @@ export class SelectButtonDemo extends Component {
 
 class SelectButtonDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

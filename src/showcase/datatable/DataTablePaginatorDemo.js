@@ -48,6 +48,10 @@ export class DataTablePaginatorDemo extends Component {
 }
 
 export class DataTablePaginatorDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

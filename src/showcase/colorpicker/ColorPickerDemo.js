@@ -48,6 +48,10 @@ export class ColorPickerDemo extends Component {
 
 class ColorPickerDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

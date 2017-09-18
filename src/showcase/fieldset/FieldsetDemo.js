@@ -40,6 +40,10 @@ export class FieldsetDemo extends Component {
 }
 
 export class FieldsetDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

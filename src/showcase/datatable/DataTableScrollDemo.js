@@ -91,6 +91,10 @@ export class DataTableScrollDemo extends Component {
 }
 
 export class DataTableScrollDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

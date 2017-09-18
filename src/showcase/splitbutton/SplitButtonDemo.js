@@ -62,6 +62,10 @@ export class SplitButtonDemo extends Component {
 
 class SplitButtonDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

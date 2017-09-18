@@ -104,6 +104,10 @@ export class DataScrollerDemo extends Component {
 }
 
 export class DataScrollerDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

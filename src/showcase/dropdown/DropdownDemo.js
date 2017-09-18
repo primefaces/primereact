@@ -96,6 +96,10 @@ export class DropdownDemo extends Component {
 
 class DropdownDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

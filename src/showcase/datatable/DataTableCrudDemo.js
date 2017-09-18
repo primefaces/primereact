@@ -142,6 +142,10 @@ export class DataTableCrudDemo extends Component {
 
 export class DataTableCrudDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

@@ -104,6 +104,11 @@ export class PanelMenuDemo extends Component {
 }
 
 class PanelMenuDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

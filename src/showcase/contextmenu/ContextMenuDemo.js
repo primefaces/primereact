@@ -117,6 +117,11 @@ export class ContextMenuDemo extends Component {
 }
 
 class ContextMenuDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

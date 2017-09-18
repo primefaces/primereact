@@ -54,6 +54,10 @@ export class EditorDemo extends Component {
 
 class EditorDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

@@ -44,6 +44,10 @@ export class ChipsDemo extends Component {
 }
 
 class ChipsDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

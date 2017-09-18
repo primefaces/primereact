@@ -75,6 +75,10 @@ export class MessagesDemo extends Component {
 }
 
 export class MessagesDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

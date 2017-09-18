@@ -75,6 +75,10 @@ export class ListBoxDemo extends Component {
 }
 
 class ListboxDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

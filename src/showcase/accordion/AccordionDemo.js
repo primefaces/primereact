@@ -70,6 +70,10 @@ export class AccordionDemo extends Component {
 }
 
 export class AccordionDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -76,6 +76,10 @@ export class DataTableRowExpansionDemo extends Component {
 }
 
 export class DataTableRowExpansionDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

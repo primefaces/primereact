@@ -132,6 +132,10 @@ export class TreeDemo extends Component {
 }
 
 export class TreeDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -40,6 +40,10 @@ export class InputTextDemo extends Component {
 
 class InputTextDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

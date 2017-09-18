@@ -89,6 +89,10 @@ export class SliderDemo extends Component {
 
 class SliderDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

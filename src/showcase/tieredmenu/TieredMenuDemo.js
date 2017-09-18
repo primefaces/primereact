@@ -112,6 +112,11 @@ export class TieredMenuDemo extends Component {
 }
 
 class TieredMenuDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

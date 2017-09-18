@@ -48,6 +48,10 @@ export class DataTableResponsiveDemo extends Component {
 }
 
 export class DataTableResponsiveDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

@@ -73,6 +73,10 @@ export class DataTableTemplatingDemo extends Component {
 }
 
 export class DataTableTemplatingDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

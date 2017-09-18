@@ -55,6 +55,10 @@ export class CheckboxDemo extends Component {
 
 class CheckboxDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

@@ -58,6 +58,10 @@ export class DataTableColResizeDemo extends Component {
 }
 
 export class DataTableColResizeDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

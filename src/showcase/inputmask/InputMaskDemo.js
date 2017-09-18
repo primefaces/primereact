@@ -93,6 +93,10 @@ export class InputMaskDemo extends Component {
 
 class InputMaskDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

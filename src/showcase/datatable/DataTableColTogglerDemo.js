@@ -76,6 +76,10 @@ export class DataTableColTogglerDemo extends Component {
 }
 
 export class DataTableColTogglerDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

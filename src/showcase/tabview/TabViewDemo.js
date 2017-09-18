@@ -45,6 +45,10 @@ export class TabViewDemo extends Component {
 }
 
 export class TabViewDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

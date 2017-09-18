@@ -104,6 +104,10 @@ export class DataTableSelectionDemo extends Component {
 }
 
 export class DataTableSelectionDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

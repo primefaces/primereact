@@ -69,6 +69,10 @@ export class GrowlDemo extends Component {
 }
 
 export class GrowlDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

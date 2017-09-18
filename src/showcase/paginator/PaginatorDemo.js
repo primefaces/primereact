@@ -40,6 +40,10 @@ export class PaginatorDemo extends Component {
 }
 
 export class PaginatorDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

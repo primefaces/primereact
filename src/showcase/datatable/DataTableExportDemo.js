@@ -54,6 +54,10 @@ export class DataTableExportDemo extends Component {
 }
 
 export class DataTableExportDemoDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

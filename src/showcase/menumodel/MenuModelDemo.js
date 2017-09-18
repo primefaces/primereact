@@ -27,6 +27,10 @@ export class MenuModelDemo extends Component {
 
 class MenuModelDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

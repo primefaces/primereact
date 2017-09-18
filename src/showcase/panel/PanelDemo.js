@@ -38,6 +38,10 @@ export class PanelDemo extends Component {
 }
 
 export class PanelDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

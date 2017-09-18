@@ -48,6 +48,10 @@ export class RadioButtonDemo extends Component {
 
 class RadioButtonDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

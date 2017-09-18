@@ -54,6 +54,10 @@ export class DialogDemo extends Component {
 }
 
 export class DialogDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

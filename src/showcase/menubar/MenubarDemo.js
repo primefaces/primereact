@@ -110,6 +110,11 @@ export class MenubarDemo extends Component {
 }
 
 class MenubarDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

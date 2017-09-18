@@ -163,7 +163,11 @@ export class OrganizationChartDemo extends Component {
 }
 
 export class OrganizationChartDoc extends Component {
-    
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

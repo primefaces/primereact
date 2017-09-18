@@ -57,6 +57,10 @@ export class OrderListDemo extends Component {
 }
 
 export class OrderListDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

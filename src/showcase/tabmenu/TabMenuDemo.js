@@ -39,6 +39,11 @@ export class TabMenuDemo extends Component {
 }
 
 class TabMenuDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

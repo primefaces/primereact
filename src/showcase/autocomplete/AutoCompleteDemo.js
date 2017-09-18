@@ -108,6 +108,10 @@ export class AutoCompleteDemo extends Component {
 
 class AutoCompleteDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

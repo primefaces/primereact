@@ -67,6 +67,10 @@ export class FileUploadDemo extends Component {
 }
 
 export class FileUploadDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

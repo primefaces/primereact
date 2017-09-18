@@ -64,6 +64,10 @@ export class PickListDemo extends Component {
 }
 
 export class PickListDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

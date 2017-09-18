@@ -39,6 +39,10 @@ export class CaptchaDemo extends Component {
 
 class CaptchaDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

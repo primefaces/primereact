@@ -45,6 +45,10 @@ export class RatingDemo extends Component {
 
 class RatingDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

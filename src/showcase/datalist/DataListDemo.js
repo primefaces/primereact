@@ -93,6 +93,10 @@ export class DataListDemo extends Component {
 }
 
 export class DataListDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
     
     render() {
         return (

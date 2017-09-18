@@ -149,6 +149,11 @@ export class MegaMenuDemo extends Component {
 }
 
 class MegaMenuDoc extends Component {
+
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">

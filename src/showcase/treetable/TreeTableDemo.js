@@ -169,6 +169,10 @@ export class TreeTableDemo extends Component {
 
 export class TreeTableDoc extends Component {
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     render() {
         return (
             <div className="content-section source">
