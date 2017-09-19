@@ -45,6 +45,13 @@ export class HeaderCell extends Component {
                 columnEl: event.target.parentElement
             });
         }
+        
+        if(this.props.reorderableColumns) {
+            if(event.target.nodeName !== 'INPUT')
+                this.el.draggable = true;
+            else if(event.target.nodeName === 'INPUT')
+                this.el.draggable = false;
+        }
     }
 
     getMultiSortMetaData() {
@@ -94,8 +101,10 @@ export class HeaderCell extends Component {
         }
 
         return (
-            <th className={className} style={this.props.style} onClick={this.onClick} 
-                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
+            <th ref={(el) => this.el = el} 
+                className={className} style={this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown}
+                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}
+                onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
                 <span className="ui-column-title">{this.props.header}</span>
                 {sortIconElement}

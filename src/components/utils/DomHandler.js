@@ -72,6 +72,16 @@ export default class DomHandler {
         this.zindex = this.zindex||1000;
         return this.zindex++;
     }
+    
+    static index(element) {
+        let children = element.parentNode.childNodes;
+        let num = 0;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i] == element) return num;
+            if (children[i].nodeType == 1) num++;
+        }
+        return -1;
+    }
 
     static addMultipleClasses(element, className) {
         if (element.classList) {

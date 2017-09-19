@@ -10,7 +10,9 @@ export class TableHeader extends Component {
             return <HeaderCell key={i} {...column.props} onSort={this.props.onSort} 
                         sortField={this.props.sortField} sortOrder={this.props.sortOrder} multiSortMeta={this.props.multiSortMeta} 
                         resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart} 
-                        onFilter={this.props.onFilter} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected} />;
+                        onFilter={this.props.onFilter} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected} 
+                        reorderableColumns={this.props.reorderableColumns} onDragStart={this.props.onColumnDragStart} onDragOver={this.props.onColumnDragOver}
+                         onDragLeave={this.props.onColumnDragLeave} onDrop={this.props.onColumnDrop}/>;
         });
     }
 

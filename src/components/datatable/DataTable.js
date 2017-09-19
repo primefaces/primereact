@@ -47,6 +47,7 @@ export class DataTable extends Component {
         onRowToggle: null,
         resizableColumns: false,
         columnResizeMode: 'fit',
+        reorderableColumns: false,
         filters: null,
         globalFilter: null,
         scrollable: false,
@@ -67,7 +68,8 @@ export class DataTable extends Component {
         onRowUnselect: null,
         onRowExpand: null,
         onRowCollapse: null,
-        onContextMenuSelect: null
+        onContextMenuSelect: null,
+        onColReorder: null
     }
 
     static propTypes = {
@@ -106,6 +108,7 @@ export class DataTable extends Component {
         responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
+        reorderableColumns: PropTypes.bool,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
         scrollable: PropTypes.bool,
@@ -127,7 +130,8 @@ export class DataTable extends Component {
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
-        onContextMenuSelect: PropTypes.func
+        onContextMenuSelect: PropTypes.func,
+        onColReorder: PropTypes.func
     };
 
     constructor(props) {
@@ -146,6 +150,10 @@ export class DataTable extends Component {
         this.onFilter = this.onFilter.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
         this.onHeaderCheckboxClick = this.onHeaderCheckboxClick.bind(this);
+        this.onColumnDragStart = this.onColumnDragStart.bind(this);
+        this.onColumnDragOver = this.onColumnDragOver.bind(this);
+        this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
+        this.onColumnDrop = this.onColumnDrop.bind(this);
     }
 
     onPageChange(event) {
@@ -375,7 +383,6 @@ export class DataTable extends Component {
         }
     }
 
-
     onColumnResizeStart(event) {
         this.fixColumnWidths();
         let containerLeft = DomHandler.getOffset(this.container).left;
@@ -473,6 +480,106 @@ export class DataTable extends Component {
     unbindColumnResizeEvents() {
         document.removeEventListener('document', this.documentColumnResizeListener);
         document.removeEventListener('document', this.documentColumnResizeEndListener);
+    }
+    
+    findParentHeader(element) {
+        if(element.nodeName === 'TH') {
+            return element;
+        }
+        else {
+            let parent = element.parentElement;
+            while(parent.nodeName !== 'TH') {
+                parent = parent.parentElement;
+                if(!parent) break;
+            }
+            return parent;
+        }
+    }
+    
+    onColumnDragStart(event) {
+        if(this.columnResizing) {
+            event.preventDefault();
+            return;
+        }
+        
+        this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
+        this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
+
+        this.draggedColumn = this.findParentHeader(event.target);
+        event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
+    }
+    
+    onColumnDragOver(event) {
+        let dropHeader = this.findParentHeader(event.target);
+        if(this.props.reorderableColumns && this.draggedColumn && dropHeader) {
+            event.preventDefault();
+            let containerOffset = DomHandler.getOffset(this.container);
+            let dropHeaderOffset = DomHandler.getOffset(dropHeader);
+            
+            if(this.draggedColumn !== dropHeader) {
+                let targetLeft =  dropHeaderOffset.left - containerOffset.left;
+                //let targetTop =  containerOffset.top - dropHeaderOffset.top;
+                let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
+                
+                this.reorderIndicatorUp.style.top = dropHeaderOffset.top - containerOffset.top - (this.iconHeight - 1) + 'px';
+                this.reorderIndicatorDown.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
+
+                if(event.pageX > columnCenter) {
+                    this.reorderIndicatorUp.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2))+ 'px';
+                    this.dropPosition = 1;
+                }
+                else {
+                    this.reorderIndicatorUp.style.left = (targetLeft - Math.ceil(this.iconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft - Math.ceil(this.iconWidth / 2))+ 'px';
+                    this.dropPosition = -1;
+                }
+                                
+                this.reorderIndicatorUp.style.display = 'block';
+                this.reorderIndicatorDown.style.display = 'block';
+            }
+            else {
+                event.dataTransfer.dropEffect = 'none';
+            }
+        }
+    }
+    
+    onColumnDragLeave(event) {
+        if(this.props.reorderableColumns && this.draggedColumn) {
+            event.preventDefault();
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+        }
+    }
+    
+    onColumnDrop(event) {
+        event.preventDefault();
+        if(this.draggedColumn) {
+            let dragIndex = DomHandler.index(this.draggedColumn);
+            let dropIndex = DomHandler.index(this.findParentHeader(event.target));
+            let allowDrop = (dragIndex !== dropIndex);
+            if(allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
+                allowDrop = false;
+            }
+        
+            if(allowDrop) {
+                ObjectUtils.reorderArray(this.props.children, dragIndex, dropIndex);
+
+                if(this.props.onColReorder) {
+                    this.onColReorder.emit({
+                        dragIndex: dragIndex,
+                        dropIndex: dropIndex,
+                        columns: this.columns
+                    });
+                }
+            }
+            
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+            this.draggedColumn.draggable = false;
+            this.draggedColumn = null;
+            this.dropPosition = null;
+        }
     }
 
     exportCSV() {
@@ -647,7 +754,9 @@ export class DataTable extends Component {
     createTableHeader(columns) {
         return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
-                            onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}>
+                            onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
+                            reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} 
+                            onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop}>
                             {columns}
                           </TableHeader>;
     }
@@ -685,6 +794,8 @@ export class DataTable extends Component {
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
         let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>;
         let tableContent = null;
+        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="fa fa-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
+        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="fa fa-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
 
         if(this.props.scrollable) {
             let frozenColumns = this.getFrozenColumns();
@@ -723,6 +834,8 @@ export class DataTable extends Component {
                 {paginatorBottom}
                 {footerFacet}
                 {resizeHelper}
+                {resizeIndicatorUp}
+                {resizeIndicatorDown}
             </div>
         );
     }
