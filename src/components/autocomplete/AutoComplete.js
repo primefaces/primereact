@@ -396,7 +396,7 @@ export class AutoComplete extends Component {
         } 
 
         if(this.value !== nextProps.value) {
-            this.writeValue();
+            this.writeValue(nextProps.value);
         }
     }
 
