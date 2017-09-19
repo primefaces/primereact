@@ -88,10 +88,6 @@ export class OverlayPanel extends Component {
             this.hide();
         else
             this.show(event, currentTarget);
-        
-        if(this.props.dismissable) {
-            this.targetEvent = true;
-        }
     }
 
     show(event, target) {
@@ -106,11 +102,11 @@ export class OverlayPanel extends Component {
         this.container.style.zIndex = DomHandler.getZindex();
 
         if(this.isVisible()) {
-            this.alignPanel(target);
+            DomHandler.absolutePosition(this.container, target);
         }
         else {
             this.container.style.display = 'block';
-            this.alignPanel(target);
+            DomHandler.absolutePosition(this.container, target);
             DomHandler.fadeIn(this.container, 250);
         }
     }
@@ -120,13 +116,6 @@ export class OverlayPanel extends Component {
             this.container.style.display = 'none';
             this.unbindDocumentClickListener();
         }
-    }
-    
-    alignPanel(target) {
-        if(this.props.appendTo)
-            DomHandler.absolutePosition(this.container, target);
-        else
-            DomHandler.relativePosition(this.panel, target);
     }
 
     isVisible() {
