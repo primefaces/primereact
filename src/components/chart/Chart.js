@@ -26,12 +26,54 @@ export class Chart extends Component {
         className: PropTypes.string
     };
 
-    componentDidMount() {
+    initChart() {
         this.chart = new ChartJS(this.canvas, {
             type: this.props.type,
             data: this.props.data,
             options: this.props.options
         });
+    }
+
+    getCanvas() {
+        return this.canvas;
+    }
+    
+    getBase64Image() {
+        return this.chart.toBase64Image();
+    }
+    
+    generateLegend() {
+        if(this.chart) {
+            this.chart.generateLegend();
+        }
+    }
+    
+    refresh() {
+        if(this.chart) {
+            this.chart.update();
+        }
+    }
+    
+    reinit() {
+        if(this.chart) {
+            this.chart.destroy();
+            this.initChart();
+        }
+    }
+
+    componentDidMount() {
+        this.initChart();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        this.reinit();
+    }
+
+    componentWillUnmount() {
+        if(this.chart) {
+            this.chart.destroy();
+            this.chart = null;
+        }
     }
 
     render() {
