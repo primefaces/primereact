@@ -9,7 +9,9 @@ export class Checkbox extends Component {
         label: null,
         value: null,
         onChange: null,
-        checked: false
+        checked: false,
+        onMouseDown: null,
+        onContextMenu: null
     };
 
     static propTypes = {
@@ -17,7 +19,9 @@ export class Checkbox extends Component {
         label: PropTypes.string,
         value: PropTypes.any,
         onChange: PropTypes.func,
-        checked: PropTypes.bool
+        checked: PropTypes.bool,
+        onMouseDown: PropTypes.func,
+        onContextMenu: PropTypes.func
     };
     
     constructor() {
@@ -40,7 +44,8 @@ export class Checkbox extends Component {
         iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.checked});
         
         return (
-            <div id={this.props.id} className={classNames('ui-chkbox-container', this.props.className)}>
+            <div id={this.props.id} className={classNames('ui-chkbox-container', this.props.className)} onContextMenu={this.props.onContextMenu}
+                 onMouseDown={this.props.onMouseDown}>
                 <div className='ui-chkbox ui-widget'>
                     <div className="ui-helper-hidden-accessible">
                         <input type="checkbox" />
