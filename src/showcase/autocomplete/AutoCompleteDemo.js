@@ -367,6 +367,36 @@ render() {
                                         </td>
                                         <td>Callback to invoke to when dropdown button is clicked.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onClick</td>
+                                        <td>event: Browser event </td>
+                                        <td>Callback to invoke on click.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDblClick</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke on double click.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onMouseDown</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke to when a mouse button is pressed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onKeyUp</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke to when a key is released.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onKeyPress</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke to when a key is pressed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onContextMenu</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke on right-click.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
