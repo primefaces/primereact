@@ -394,6 +394,10 @@ export class AutoComplete extends Component {
                 this.align();
             }
         } 
+
+        if(this.value !== nextProps.value) {
+            this.writeValue();
+        }
     }
 
     componentWillUnmount() {
