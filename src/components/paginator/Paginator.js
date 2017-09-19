@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames'
+import classNames from 'classnames';
+import {FirstPageLink} from './FirstPageLink';
+import {NextPageLink} from './NextPageLink';
+import {PrevPageLink} from './PrevPageLink';
+import {LastPageLink} from './LastPageLink';
+import {PageLinks} from './PageLinks';
+import {RowsPerPageDropdown} from './RowsPerPageDropdown';
+import {CurrentPageReport} from './CurrentPageReport';
 
 export class Paginator extends Component {
 
@@ -12,6 +19,7 @@ export class Paginator extends Component {
         rowsPerPageOptions: null,
         style: null,
         className: null,
+        template: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         onPageChange: null
     }
 
@@ -23,6 +31,7 @@ export class Paginator extends Component {
         rowsPerPageOptions: PropTypes.array,
         style: PropTypes.string,
         className: PropTypes.string,
+        template: PropTypes.string,
         onPageChange: PropTypes.func
     }
     
@@ -33,6 +42,7 @@ export class Paginator extends Component {
         this.changePageToNext = this.changePageToNext.bind(this);
         this.changePageToLast = this.changePageToLast.bind(this);
         this.onRowsChange = this.onRowsChange.bind(this);
+        this.onPageLinkClick = this.onPageLinkClick.bind(this);
     }
 
     isFirstPage() {
@@ -75,7 +85,7 @@ export class Paginator extends Component {
         return pageLinks;
     }
 
-    changeState(first, rows) {
+    changePage(first, rows) {
         var pc = this.getPageCount();
         var p = Math.floor(first / rows);
 
@@ -98,86 +108,81 @@ export class Paginator extends Component {
     }
 
     changePageToFirst(event) {
-        this.changeState(0, this.props.rows);
+        this.changePage(0, this.props.rows);
         event.preventDefault();
     }
 
     changePageToPrev(event) {
-        this.changeState(this.props.first - this.props.rows, this.props.rows);
+        this.changePage(this.props.first - this.props.rows, this.props.rows);
         event.preventDefault();
     }
 
-    onPageLinkClick(event, pageLink) {
-        this.changeState((pageLink - 1) * this.props.rows, this.props.rows);
-        event.preventDefault();
+    onPageLinkClick(event) {
+        this.changePage((event.value - 1) * this.props.rows, this.props.rows);
     }
 
     changePageToNext(event) {
-        this.changeState(this.props.first + this.props.rows, this.props.rows);
+        this.changePage(this.props.first + this.props.rows, this.props.rows);
         event.preventDefault();
     }
 
     changePageToLast(event) {
-        this.changeState((this.getPageCount() - 1) * this.props.rows, this.props.rows);
+        this.changePage((this.getPageCount() - 1) * this.props.rows, this.props.rows);
         event.preventDefault();
     }
 
     onRowsChange(event) {
-        this.changeState(0, this.props.rowsPerPageOptions[event.target.selectedIndex]);
+        this.changePage(0, this.props.rowsPerPageOptions[event.target.selectedIndex]);
         event.preventDefault();
     }
 
-    createPaginatorElement(className, callback, disabled, icon) {
-        var paginatorClassName = classNames(className, 'ui-paginator-element ui-state-default ui-corner-all', {
-            'ui-state-disabled': disabled
-        });
-        var iconClassName = classNames('fa', icon);
-
-        return <a href="#" className={paginatorClassName} onClick={callback} tabIndex={disabled ? -1 : null}>
-                    <span className={iconClassName}></span>
-               </a>;
-    }
-
-    createPageLinkElements() {
-        var pageLinks = this.updatePageLinks();
-        var pageLinkElements = pageLinks.map((pageLink, i) => {
-                            var pageClassName = classNames('ui-paginator-page ui-paginator-element ui-state-default ui-corner-all', {
-                                'ui-state-active': ((pageLink - 1) === this.getPage())
-                            });
-
-                            return <a key={pageLink} href="#" className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</a>;
-                        });
-
-        return <span className="ui-paginator-pages">{pageLinkElements}</span>;
-    }
-
-    createRowsPerPageDropdown() {
-        if(this.props.rowsPerPageOptions) {
-             var options = this.props.rowsPerPageOptions.map((opt, i) => <option key={opt} value={opt}>{opt}</option>);
-            return <select className="ui-paginator-rpp-options ui-widget ui-state-default" onChange={this.onRowsChange.bind(this)}>{options}</select>;
-        }
-        else {
-            return null;
-        }
-    }
-
     render() {
-        var className = classNames('ui-paginator ui-widget ui-widget-header ui-unselectable-text', this.props.className);
-        var firstLink = this.createPaginatorElement('ui-paginator-first', this.changePageToFirst, this.isFirstPage(), 'fa-step-backward');
-        var prevLink = this.createPaginatorElement('ui-paginator-prev', this.changePageToPrev, this.isFirstPage(), 'fa-backward');
-        var nextLink = this.createPaginatorElement('ui-paginator-next', this.changePageToNext, this.isLastPage(), 'fa-forward');
-        var lastLink = this.createPaginatorElement('ui-paginator-last', this.changePageToLast, this.isLastPage(), 'fa-step-forward');
-        var pageLinks = this.createPageLinkElements();
-        var rpp = this.createRowsPerPageDropdown();
-
+        let className = classNames('ui-paginator ui-widget ui-widget-header ui-unselectable-text', this.props.className);
+        
+        let paginatorElements = this.props.template.split(' ').map((value) => {
+            let key = value.trim();
+            let element;
+            
+            switch(key) {
+                case 'FirstPageLink':
+                    element = <FirstPageLink key={key} onClick={this.changePageToFirst} disabled={this.isFirstPage()} />;
+                break;
+                
+                case 'PrevPageLink':
+                    element = <PrevPageLink key={key} onClick={this.changePageToPrev} disabled={this.isFirstPage()} />;
+                break;
+                
+                case 'NextPageLink':
+                    element = <NextPageLink key={key} onClick={this.changePageToNext} disabled={this.isLastPage()} />;
+                break;
+                
+                case 'LastPageLink':
+                    element = <LastPageLink key={key} onClick={this.changePageToLast} disabled={this.isLastPage()} />;
+                break;
+                
+                case 'PageLinks':
+                    element = <PageLinks key={key} value={this.updatePageLinks()} page={this.getPage()} onClick={this.onPageLinkClick} />;
+                break;
+                
+                case 'RowsPerPageDropdown':
+                    element = <RowsPerPageDropdown key={key} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} />;
+                break;
+                
+                case 'CurrentPageReport':
+                    element = <CurrentPageReport key={key} page={this.getPage()} pageCount={this.getPageCount()} />;
+                break;
+                
+                default:
+                    element = null;
+                break;
+            }
+            
+            return element;
+        });
+        
         return (
             <div className={className} style={this.props.style}>
-                {firstLink}
-                {prevLink}
-                {pageLinks}
-                {nextLink}
-                {lastLink}
-                {rpp}
+                {paginatorElements}
             </div>
         );
     }

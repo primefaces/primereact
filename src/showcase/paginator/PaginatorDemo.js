@@ -30,7 +30,12 @@ export class PaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <h3>Default</h3>
                     <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
+                    
+                    <h3>Custom Template</h3>
+                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}
+                        template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
                 </div>
 
                 <PaginatorDoc></PaginatorDoc>
@@ -78,7 +83,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
 `}
 </CodeHighlight>
 
-             <h3>Rows Per Page</h3>
+            <h3>Rows Per Page</h3>
             <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case, 
                 rows property should also be updated
             </p>
@@ -88,6 +93,21 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
 
 `}
 </CodeHighlight>
+
+            <h3>Template</h3>
+            <p>Paginator elements can be customized using the template property using the predefined keys, default value is 
+            "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown". Here are the available elements that
+            can be placed inside a paginator.</p>
+            
+            <ul>
+                <li>FirstPageLink</li>
+                <li>PrevPageLink</li>
+                <li>PageLinks</li>
+                <li>NextPageLink</li>
+                <li>LastPageLink</li>
+                <li>RowsPerPageDropdown</li>
+                <li>CurrentPageReport</li>
+            </ul>
 
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
@@ -142,6 +162,12 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>template</td>
+                            <td>string</td>
+                            <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                            <td>Template of the .</td>
                         </tr>
                     </tbody>
                 </table>
