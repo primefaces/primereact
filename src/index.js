@@ -136,7 +136,7 @@ ReactDOM.render(
                 <Route path="/paginator" component={PaginatorDemo} />
                 <Route path="/datalist" component={DataListDemo} />
                 <Route path="/datagrid" component={DataGridDemo} />
-                <Route path="/datatable" component={DataTableDemo} />
+                <Route exact path="/datatable" component={DataTableDemo} />
                 <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
                 <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
                 <Route path="/datatable/sort" component={DataTableSortDemo} />
@@ -163,7 +163,7 @@ ReactDOM.render(
                 <Route path="/toolbar" component={ToolbarDemo} />
                 <Route path="/lightbox" component={LightboxDemo} />
                 <Route path="/rating" component={RatingDemo} />
-                <Route path="/datascroller" component={DataScrollerDemo} />
+                <Route exact path="/datascroller" component={DataScrollerDemo} />
                 <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
                 <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
                 <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
