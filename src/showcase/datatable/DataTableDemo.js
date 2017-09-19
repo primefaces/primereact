@@ -1222,6 +1222,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Whether to show it even there is only one page.</td>
                         </tr>
                         <tr>
+                            <td>paginatorTemplate</td>
+                            <td>string</td>
+                            <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                            <td>Template of the paginator.</td>
+                        </tr>
+                        <tr>
                             <td>first</td>
                             <td>number</td>
                             <td>0</td>

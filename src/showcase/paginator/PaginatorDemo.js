@@ -167,7 +167,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
                             <td>template</td>
                             <td>string</td>
                             <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                            <td>Template of the .</td>
+                            <td>Template of the paginator.</td>
                         </tr>
                     </tbody>
                 </table>

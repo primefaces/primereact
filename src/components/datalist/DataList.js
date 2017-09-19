@@ -19,6 +19,7 @@ export class DataList extends Component {
         style: null,
         className: null,
         paginatorPosition: "bottom",
+        paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         onLazyLoad: null,
         itemTemplate: null,
         header:null,
@@ -38,6 +39,7 @@ export class DataList extends Component {
         style: PropTypes.string,
         className: PropTypes.string,
         paginatorPosition: PropTypes.string,
+        paginatorTemplate: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
         header:PropTypes.string,
@@ -59,7 +61,7 @@ export class DataList extends Component {
         var className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className}
-                          totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} />;
+                          totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}/>;
     }
 
     onPageChange(event) {

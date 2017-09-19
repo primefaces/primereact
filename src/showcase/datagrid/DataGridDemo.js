@@ -234,6 +234,12 @@ componentDidMount() {
                             <td>Position of the paginator, options are "top","bottom" or "both".</td>
                         </tr>
                         <tr>
+                            <td>paginatorTemplate</td>
+                            <td>string</td>
+                            <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                            <td>Template of the paginator.</td>
+                        </tr>
+                        <tr>
                             <td>itemTemplate</td>
                             <td>function</td>
                             <td>null</td>

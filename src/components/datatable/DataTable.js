@@ -23,6 +23,7 @@ export class DataTable extends Component {
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
+        paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         first: null,
         rows: null,
         totalRecords: null,
@@ -81,6 +82,7 @@ export class DataTable extends Component {
         paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
+        paginatorTemplate: PropTypes.string,
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
@@ -167,7 +169,7 @@ export class DataTable extends Component {
         let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className}
-                    totalRecords={totalRecords} onPageChange={this.onPageChange} />;
+                    totalRecords={totalRecords} onPageChange={this.onPageChange} template={this.props.paginatorTemplate} />;
     }
 
     onSort(event) {
