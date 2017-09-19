@@ -66,7 +66,11 @@ export class Calendar extends Component {
         onBlur: null,
         onChange: null,
         onTodayButtonClick: null,
-        onClearButtonClick: null
+        onClearButtonClick: null,
+        onMouseDown: null,
+        onKeyUp: null,
+        onKeyPress: null,
+        onContextMenu: null
     }
 
     static propsTypes = {
@@ -119,6 +123,10 @@ export class Calendar extends Component {
         onChange: PropTypes.func,
         onTodayButtonClick: PropTypes.func,
         onClearButtonClick: PropTypes.func,
+        onMouseDown: PropTypes.func,
+        onKeyUp: PropTypes.func,
+        onKeyPress: PropTypes.func,
+        onContextMenu: PropTypes.func
     }
 
     constructor(props) {
@@ -343,15 +351,15 @@ export class Calendar extends Component {
         event.preventDefault();
     }
         
-    isSingleSelection(): boolean {
+    isSingleSelection() {
         return this.props.selectionMode === 'single';
     }
     
-    isRangeSelection(): boolean {
+    isRangeSelection() {
         return this.props.selectionMode === 'range';
     }
     
-    isMultipleSelection(): boolean {
+    isMultipleSelection() {
         return this.props.selectionMode === 'multiple';
     }
     
@@ -1325,7 +1333,8 @@ export class Calendar extends Component {
         if(!this.props.inline) {
             var inputElement = <InputText ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} defaultValue={this.getInputFieldValue(this.props.value)}  type="text" 
                 required={this.props.required} onFocus={this.onInputFocus} onKeyDown={this.onInputKeydown} onClick={this.onInputClick}
-                onBlur={this.onInputBlur} readOnly={this.props.readOnlyInput} onInput={this.onUserInput} 
+                onBlur={this.onInputBlur} readOnly={this.props.readOnlyInput} onInput={this.onUserInput}
+                onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
                 style={this.props.inputStyle} className={this.props.inputClassName} 
                 placeholder={this.props.placeholder || ''} 
                 disabled={this.props.disabled} tabIndex={this.props.tabindex} />

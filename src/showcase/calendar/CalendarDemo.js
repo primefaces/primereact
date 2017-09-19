@@ -570,14 +570,34 @@ let es = {
                             <td>Callback to invoke when value changes.</td>
                         </tr>
                         <tr>
-                            <td>onTodayClick</td>
+                            <td>onTodayButtonClick</td>
                             <td>event: Click event</td>
                             <td>Callback to invoke when today button is clicked.</td>
                         </tr>
                         <tr>
-                            <td>onClearClick</td>
+                            <td>onClearButtonClick</td>
                             <td>event: Click event</td>
                             <td>Callback to invoke when clear button is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onMouseDown</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke to when a mouse button is pressed.</td>
+                        </tr>
+                        <tr>
+                            <td>onKeyUp</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke to when a key is released.</td>
+                        </tr>
+                        <tr>
+                            <td>onKeyPress</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke to when a key is pressed.</td>
+                        </tr>
+                        <tr>
+                            <td>onContextMenu</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke on right-click.</td>
                         </tr>
                     </tbody>
                 </table>
