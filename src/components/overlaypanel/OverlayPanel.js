@@ -30,22 +30,37 @@ export class OverlayPanel extends Component {
     }
 
     componentDidMount() {
-        if(this.props.dismissable) {
+        if(this.props.appendTo) {
+            if(this.props.appendTo === 'body')
+                document.body.appendChild(this.panel);
+            else
+                DomHandler.appendChild(this.panel, this.props.appendTo);
+        }
+    }
+    
+    bindDocumentClickListener() {
+        if(!this.documentClickListener) {
             this.documentClickListener = this.onDocumentClick.bind(this);
             document.addEventListener('click', this.documentClickListener);
         }
     }
-
-    componentWillUnmount() {
+    
+    unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
         }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
     }
 
     onDocumentClick() {
         if(!this.selfClick && !this.targetEvent) {
             this.hide();
         }
+        
         this.selfClick = false;
         this.targetEvent = false;
     }
@@ -69,7 +84,7 @@ export class OverlayPanel extends Component {
     toggle(event, target) {
         let currentTarget = (target||event.currentTarget||event.target);
                                 
-         if(this.isVisible())
+        if(this.isVisible())
             this.hide();
         else
             this.show(event, currentTarget);
@@ -81,17 +96,21 @@ export class OverlayPanel extends Component {
 
     show(event, target) {
         if(this.props.dismissable) {
-            this.targetEvent = true;
+            if(this.documentClickListener) {
+                this.targetEvent = true;
+            }
+            
+            this.bindDocumentClickListener();
         }
         
         this.container.style.zIndex = DomHandler.getZindex();
 
         if(this.isVisible()) {
-            DomHandler.absolutePosition(this.container, target);
+            this.alignPanel(target);
         }
         else {
             this.container.style.display = 'block';
-            DomHandler.absolutePosition(this.container, target);
+            this.alignPanel(target);
             DomHandler.fadeIn(this.container, 250);
         }
     }
@@ -99,7 +118,15 @@ export class OverlayPanel extends Component {
     hide() {
         if(this.isVisible()) {
             this.container.style.display = 'none';
+            this.unbindDocumentClickListener();
         }
+    }
+    
+    alignPanel(target) {
+        if(this.props.appendTo)
+            DomHandler.absolutePosition(this.container, target);
+        else
+            DomHandler.relativePosition(this.panel, target);
     }
 
     isVisible() {
@@ -107,15 +134,18 @@ export class OverlayPanel extends Component {
     }
 
     render() {
-        var className = classNames('ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        let className = classNames('ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        let closeIcon;
+        
         if(this.props.showCloseIcon) {
-            var closeIcon = <a href="#" className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
-                                <span className="fa fa-fw fa-close"></span>
-                            </a>;
+            closeIcon = <a href="#" className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
+                            <span className="fa fa-fw fa-close"></span>
+                        </a>;
         }
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick} ref={(el) => {this.container = el;}}>
+            <div id={this.props.id} className={className} style={this.props.style} 
+                onClick={this.onPanelClick} ref={(el) => {this.container = el}}>
                 <div className="ui-overlaypanel-content">
                     {this.props.children}
                 </div>

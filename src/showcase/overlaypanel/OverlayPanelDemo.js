@@ -35,6 +35,7 @@ export class OverlayPanelDemo extends Component {
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
+                
                 <OverlayPanelDoc></OverlayPanelDoc>
             </div>
         )
@@ -145,7 +146,7 @@ onClick(event) {
                             <td>appendTo</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Target element to attach the panel, valid values are "body" or a local template variable of another element.</td>
+                            <td>Target element to attach the panel, valid values are "body" or a ref of another element.</td>
                         </tr>
                     </tbody>
                 </table>
