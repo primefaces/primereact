@@ -29,7 +29,9 @@ export class Dropdown extends Component {
         lazy: true,
         panelStyleClass: null,
         panelStyle: null,
-        dataKey: null
+        dataKey: null,
+        onMouseDown: null,
+        onContextMenu: null
     };
 
     static propTypes = {
@@ -55,7 +57,9 @@ export class Dropdown extends Component {
         lazy: PropTypes.bool,
         panelStyleClass: PropTypes.string,
         panelStyle: PropTypes.string,
-        dataKey: PropTypes.string
+        dataKey: PropTypes.string,
+        onMouseDown: PropTypes.func,
+        onContextMenu: PropTypes.func
     };
 
     constructor(props) {
@@ -536,7 +540,8 @@ export class Dropdown extends Component {
         
 
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={styleClass} style={this.props.style} onClick={this.onMouseclick}>
+            <div id={this.props.id} ref={(el) => this.container = el} className={styleClass} style={this.props.style} onClick={this.onMouseclick}
+                 onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                 {hiddenSelectElement}
                 {hiddenInputElement}
                 {labelElement}

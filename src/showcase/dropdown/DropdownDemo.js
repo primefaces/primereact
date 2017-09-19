@@ -354,6 +354,16 @@ render() {
                                         event.value: Value of the checkbox </td>
                                     <td>Callback to invoke on value change</td>
                                 </tr>
+                                <tr>
+                                    <td>onMouseDown</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke to when a mouse button is pressed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onContextMenu</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke on right-click.</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
