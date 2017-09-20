@@ -115,7 +115,74 @@ export class Dropdown extends Component {
     }
     
     onInputKeyDown(event) {
+        let selectedItemIndex = this.findOptionIndex(this.props.value);
+
+        switch(event.which) {
+            //down
+            case 40:
+                if(!this.panel.offsetParent && event.altKey) {
+                    this.show();
+                }
+                else {
+                    if(selectedItemIndex !== -1) {
+                        let nextItemIndex = selectedItemIndex + 1;
+                        if(nextItemIndex !== (this.props.options.length)) {
+                            this.selectItem({
+                                originalEvent: event,
+                                option: this.props.options[nextItemIndex]
+                            });
+                        }
+                    }
+                    else if(this.optionsToDisplay) {
+                        this.selectItem({
+                            originalEvent: event,
+                            option: this.props.options[0]
+                        });
+                    }                    
+                }
+                
+                event.preventDefault();
+            break;
+            
+            //up
+            case 38:
+                if(selectedItemIndex > 0) {
+                    let prevItemIndex = selectedItemIndex - 1;                    
+                    this.selectItem({
+                        originalEvent: event,
+                        option: this.props.options[prevItemIndex]
+                    });
+                }
+                
+                event.preventDefault();
+            break;
+
+            //space
+            case 32:
+                if(!this.panel.offsetParent){
+                    this.show();
+                    event.preventDefault();
+                }
+            break;
+            
+            //enter
+            case 13:                                        
+                this.hide();
+                this.unbindDocumentClickListener();
+                event.preventDefault();
+            break;
+            
+            //escape and tab
+            case 27:
+            case 9:
+                this.hide();
+                this.unbindDocumentClickListener();
+            break;
+            
+            default:
+            break;
         
+        }
     }
     
     onEditableInputClick(event) {
@@ -123,8 +190,7 @@ export class Dropdown extends Component {
         this.bindDocumentClickListener();
     }
     
-    onEditableInputChange(event) {
-        let value = event.target.value;       
+    onEditableInputChange(event) {              
         this.props.onChange({
             originalEvent: event.originalEvent,
             value: event.target.value
@@ -230,7 +296,7 @@ export class Dropdown extends Component {
             });
             
             return (<div className="ui-helper-hidden-accessible">
-                        <select required={this.props.required} tabIndex="-1" aria-hidden="true">
+                        <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
                             {options}
                         </select>
                     </div>);
@@ -286,6 +352,14 @@ export class Dropdown extends Component {
                 </div>
             </div>;
     }
+    
+    componentDidMount() {
+        if(this.props.autoWidth) {
+            if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
+                this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
+            }
+        }
+    }
 
     render() {
         let className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix', this.props.className, {'ui-state-disabled': this.props.disabled});
@@ -296,7 +370,7 @@ export class Dropdown extends Component {
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
-        let panel = this.renderPanel();
+        let panel = this.renderPanel(selectedOption);
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
