@@ -434,6 +434,10 @@ export class Dropdown extends Component {
                 this.activateFilter();
             }
         }
+        if(!ObjectUtils.equals(nextProps.value, this.value)) {
+            this.value = nextProps.value;
+            this.updateSelectedOption(this.value);
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -466,7 +470,7 @@ export class Dropdown extends Component {
         let hiddenSelectElement;
         if(this.props.autoWidth) {
             hiddenSelectElement = (<div className="ui-helper-hidden-accessible">
-                                        <select required={this.props.required} name="options" tabIndex="-1">
+                                        <select required={this.props.required} name="options" tabIndex="-1" value={this.value}>
                                             {   
                                                 this.props.options && this.props.options.map((option, index) => {
                                                     return <option value={option.value} key={"option_" + option.label}>{option.label}</option>
