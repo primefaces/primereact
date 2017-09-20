@@ -77,8 +77,8 @@ export default class DomHandler {
         let children = element.parentNode.childNodes;
         let num = 0;
         for (var i = 0; i < children.length; i++) {
-            if (children[i] == element) return num;
-            if (children[i].nodeType == 1) num++;
+            if (children[i] === element) return num;
+            if (children[i].nodeType === 1) num++;
         }
         return -1;
     }

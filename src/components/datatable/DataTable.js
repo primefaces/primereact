@@ -563,8 +563,17 @@ export class DataTable extends Component {
             }
         
             if(allowDrop) {
-                ObjectUtils.reorderArray(this.props.children, dragIndex, dropIndex);
-
+                let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
+                ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
+                let columnOrder = [];
+                for(let column of columns) {
+                    columnOrder.push(column.props.columnKey||column.props.field);
+                }
+                
+                this.setState({
+                    columnOrder: columnOrder
+                });
+    
                 if(this.props.onColReorder) {
                     this.onColReorder.emit({
                         dragIndex: dragIndex,
@@ -783,9 +792,36 @@ export class DataTable extends Component {
         return <ScrollableView header={this.createTableHeader(columns)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns)} 
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}></ScrollableView>
     }
+    
+    getColumns() {
+        if(this.props.reorderableColumns && this.state.columnOrder && (this.props.children instanceof Array)) {
+            let columns = [];
+            for(let columnKey of this.state.columnOrder) {
+                columns.push(this.findColumnByKey(columnKey));
+            }
+                        
+            return columns;
+        }
+        else {
+            return this.props.children;
+        }
+    }
+    
+    findColumnByKey(key) {
+        if(this.props.children)
+        for(let i = 0; i < this.props.children.length; i++) {
+            let child = this.props.children[i];
+            if(child.props.columnKey === key || child.props.field === key) {
+                return child;
+            }
+        }
+        
+        return null;
+    }
 
     render() {
         let value = this.processData();
+        let columns = this.getColumns();
         let totalRecords = this.props.lazy ? this.props.totalRecords : value ? value.length : 0;
         let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 'ui-datatable-scrollable': this.props.scrollable}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
@@ -808,14 +844,14 @@ export class DataTable extends Component {
             scrollableView = this.createScrollableView(value, scrollableColumns, false);
 
             tableContent = <div className="ui-datatable-scrollable-wrapper">
-                {frozenView}
-                {scrollableView}
-            </div>;
+                                {frozenView}
+                                {scrollableView}
+                          </div>;
         }
         else {
-            let tableHeader = this.createTableHeader(this.props.children);
-            let tableBody = this.createTableBody(value, this.props.children);
-            let tableFooter = this.createTableFooter(this.props.children);
+            let tableHeader = this.createTableHeader(columns);
+            let tableBody = this.createTableBody(value, columns);
+            let tableFooter = this.createTableFooter(columns);
 
             tableContent = <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>

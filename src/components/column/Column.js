@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export class Column extends Component {
 
     static defaultProps = {
+        columnKey: null,
         field: null,
         sortField: null,
         header: null,
@@ -27,6 +28,7 @@ export class Column extends Component {
     }
 
     static propsTypes = {
+        columnKey: PropTypes.string,
         field: PropTypes.string,
         sortField: PropTypes.string,
         header: PropTypes.any,

@@ -199,6 +199,12 @@ export class DataTableDemo extends Component {
                     </thead>
                     <tbody>
                         <tr>
+                            <td>columnKey</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Identifier of a column if field property is not defined. Only utilized by reorderableColumns feature at the moment.</td>
+                        </tr>
+                        <tr>
                             <td>field</td>
                             <td>string</td>
                             <td>null</td>
@@ -970,6 +976,21 @@ export class DataTableRowExpansionDemo extends Component {
 `}
 </CodeHighlight>
 
+            <h3>Column Resize</h3>
+            <p>Columns can be reordered using drag drop by setting the reorderableColumns to true. onColReorder is a callback that is invoked when a column is reordered.
+            DataTable keeps the column order state internally using keys that identifies a column using the field property. If the column has no field use columnKey instead. </p>
+<CodeHighlight className="html">
+{`
+<DataTable value={this.state.cars} reorderableColumns={true}>
+    <Column field="vin" header="Vin" />
+    <Column field="year" header="Year" />
+    <Column field="brand" header="Brand" />
+    <Column field="color" header="Color" />
+</DataTable>
+
+`}
+</CodeHighlight>
+
             <h3>Data Export</h3>
             <p>DataTable can export its data in CSV format using exportCSV() method.</p>
 <CodeHighlight className="javascript">
@@ -1355,6 +1376,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Defines whether the overall table width should change on column resize, valid values are "fit" and "expand".</td>
                         </tr>
                         <tr>
+                            <td>reorderableColumns</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, columns can be reordered using drag and drop.</td>
+                        </tr>
+                        <tr>
                             <td>filters</td>
                             <td>array</td>
                             <td>null</td>
@@ -1515,6 +1542,13 @@ export class DataTableLazyDemo extends Component {
                             <td>event.originalEvent: Original event instance. <br />
                                 event.data: Collapsed row data</td>
                             <td>Callback to invoke when a context menu is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onColReorder</td>
+                            <td>event.dragIndex: Index of the dragged column <br />
+                                event.dropIndex: Index of the dropped column <br />
+                                event.columns: Columns array after reorder. <br /></td>
+                            <td>Callback to invoke when a column is reordered.</td>
                         </tr>
                     </tbody>
                 </table>
