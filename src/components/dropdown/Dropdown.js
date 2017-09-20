@@ -76,7 +76,6 @@ export class Dropdown extends Component {
         this.onEditableInputClick = this.onEditableInputClick.bind(this);
         this.onEditableInputChange = this.onEditableInputChange.bind(this);
         this.onEditableInputFocus = this.onEditableInputFocus.bind(this);
-        this.onEditableInputBlur = this.onEditableInputBlur.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
     }
     
@@ -120,19 +119,21 @@ export class Dropdown extends Component {
     }
     
     onEditableInputClick(event) {
-        
+        this.itemClick = true;
+        this.bindDocumentClickListener();
     }
     
     onEditableInputChange(event) {
-        
+        let value = event.target.value;       
+        this.props.onChange({
+            originalEvent: event.originalEvent,
+            value: event.target.value
+        });
     }
     
     onEditableInputFocus(event) {
-        
-    }
-    
-    onEditableInputBlur(event) {
-        
+        DomHandler.addClass(this.container, 'ui-state-focus');
+        this.hide();
     }
     
     onOptionClick(event) {
@@ -145,8 +146,8 @@ export class Dropdown extends Component {
     selectItem(event) {
         let selectedOption = this.findOption(this.props.value);
         
-        if(selectedOption !== event.option) {                   
-            //this.updateEditableLabel();
+        if(selectedOption !== event.option) {                
+            this.updateEditableLabel(event.option);
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: event.option.value
@@ -216,6 +217,12 @@ export class Dropdown extends Component {
         }
     }
     
+    updateEditableLabel(option): void {
+        if(this.editableInput) {
+            this.editableInput.value = (option ? option.label : this.props.value||'');
+        }
+    }
+    
     renderHiddenSelect() {
         if(this.props.autoWidth) {
             let options = this.props.options && this.props.options.map((option, i) => {
@@ -243,8 +250,10 @@ export class Dropdown extends Component {
     
     renderLabel(label) {
         if(this.props.editable) {
-            return <input type="text" className="ui-dropdown-label ui-inputtext ui-corner-all" disabled={this.props.disabled} placeholder={this.props.placeholder}
-                        onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onEditableInputBlur} />;
+            let value = label||this.props.value||'';
+            
+            return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="ui-dropdown-label ui-inputtext ui-corner-all" disabled={this.props.disabled} placeholder={this.props.placeholder}
+                        onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} />;
         }
         else {
             let className = classNames('ui-dropdown-label ui-inputtext ui-corner-all', {
