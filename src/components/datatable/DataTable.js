@@ -732,8 +732,7 @@ export class DataTable extends Component {
         return this.props.selection && this.props.value && this.props.selection.length === this.props.value.length;
     }
 
-    getFrozenColumns() {
-        let columns = React.Children.toArray(this.props.children);
+    getFrozenColumns(columns) {
         let frozenColumns = null;
         
         for(let col of columns) {
@@ -746,8 +745,7 @@ export class DataTable extends Component {
         return frozenColumns;
     }
 
-    getScrollableColumns() {
-        let columns = React.Children.toArray(this.props.children);
+    getScrollableColumns(columns) {
         let scrollableColumns = null;
         
         for(let col of columns) {
@@ -794,25 +792,28 @@ export class DataTable extends Component {
     }
     
     getColumns() {
-        if(this.props.reorderableColumns && this.state.columnOrder && (this.props.children instanceof Array)) {
-            let columns = [];
+        let columns = React.Children.toArray(this.props.children);
+        
+        if(this.props.reorderableColumns && this.state.columnOrder) {
+            let orderedColumns = [];
             for(let columnKey of this.state.columnOrder) {
-                columns.push(this.findColumnByKey(columnKey));
+                orderedColumns.push(this.findColumnByKey(columns, columnKey));
             }
                         
-            return columns;
+            return orderedColumns;
         }
         else {
-            return this.props.children;
+            return columns;
         }
     }
     
-    findColumnByKey(key) {
-        if(this.props.children)
-        for(let i = 0; i < this.props.children.length; i++) {
-            let child = this.props.children[i];
-            if(child.props.columnKey === key || child.props.field === key) {
-                return child;
+    findColumnByKey(columns, key) {
+        if(columns && columns.length) {
+            for(let i = 0; i < columns.length; i++) {
+                let child = columns[i];
+                if(child.props.columnKey === key || child.props.field === key) {
+                    return child;
+                }
             }
         }
         
@@ -834,8 +835,8 @@ export class DataTable extends Component {
         let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="fa fa-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
 
         if(this.props.scrollable) {
-            let frozenColumns = this.getFrozenColumns();
-            let scrollableColumns = frozenColumns ? this.getScrollableColumns() : this.props.children;
+            let frozenColumns = this.getFrozenColumns(columns);
+            let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
             let frozenView, scrollableView;
             if(frozenColumns) {
                 frozenView = this.createScrollableView(value, frozenColumns, true);
