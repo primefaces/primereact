@@ -374,7 +374,7 @@ export class Dropdown extends Component {
             });
         }
         
-        items = items && this.props.options.map((option, index) => {
+        items = items && items.map((option, index) => {
             return <DropdownItem key={option.label} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
                     onClick={this.onOptionClick} />;
         });
@@ -422,6 +422,12 @@ export class Dropdown extends Component {
         
         if(this.props.appendTo) {
             this.container.appendChild(this.panel);
+        }
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.filter) {
+            this.alignPanel();
         }
     }
 
