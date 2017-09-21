@@ -17,7 +17,6 @@ export class Dropdown extends Component {
         autoWidth: true,
         scrollHeight: '200px',
         filter: false,
-        filterBy: null,
         filterplaceholder: null,
         editable: false,
         placeholder:null,
@@ -26,7 +25,6 @@ export class Dropdown extends Component {
         appendTo: null,
         tabIndex: null,
         autoFocus: false,
-        lazy: true,
         panelClassName: null,
         panelStyle: null,
         dataKey: null,
@@ -46,7 +44,6 @@ export class Dropdown extends Component {
         autoWidth: PropTypes.bool,
         scrollHeight: PropTypes.string,
         filter: PropTypes.bool,
-        filterBy: PropTypes.string,
         filterplaceholder: PropTypes.string,
         editable:PropTypes.bool,
         placeholder: PropTypes.string,
@@ -67,7 +64,9 @@ export class Dropdown extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            filter: ''
+        };
         
         this.onClick = this.onClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
@@ -77,6 +76,9 @@ export class Dropdown extends Component {
         this.onEditableInputChange = this.onEditableInputChange.bind(this);
         this.onEditableInputFocus = this.onEditableInputFocus.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
+        this.onFilterInputChange = this.onFilterInputChange.bind(this);
+        this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
+        this.panelClick = this.panelClick.bind(this);
     }
     
     onClick(event) {
@@ -88,24 +90,28 @@ export class Dropdown extends Component {
             this.selfClick = true;
         }
         
-        if(!this.itemClick) {
+        if(!this.overlayClick) {
             this.focusInput.focus();
             
             if(this.panel.offsetParent) {
-                this.hide();
+                this.hide();                
             }
             else {
                 this.show();
 
-                /*if (this.filterViewChild != undefined) {
+                if (this.props.filter) {
                     setTimeout(() => {
-                        this.filterViewChild.nativeElement.focus();
+                        this.filterInput.focus();
                     }, 200);
-                }*/
+                }
             }
         }
     }
     
+    panelClick() {
+        this.overlayClick = true;
+    }   
+     
     onInputFocus(event) {
         DomHandler.addClass(this.container, 'ui-state-focus');
     }
@@ -208,6 +214,16 @@ export class Dropdown extends Component {
         this.focusInput.focus();
         this.hide();
     }
+        
+    onFilterInputChange(event) {
+        this.setState({filter: event.target.value});
+    }
+    
+    onFilterInputKeyDown(event) {
+        if(event.which === 13) {
+            event.preventDefault();
+        }
+    }
     
     selectItem(event) {
         let selectedOption = this.findOption(this.props.value);
@@ -263,13 +279,14 @@ export class Dropdown extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = () => {
-                if(!this.selfClick && !this.itemClick) {
+                if(!this.selfClick && !this.itemClick && !this.overlayClick) {
                     this.hide();
                     this.unbindDocumentClickListener();
                 }
                 
                 this.selfClick = false;
                 this.itemClick = false;
+                this.overlayClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -287,6 +304,15 @@ export class Dropdown extends Component {
         if(this.editableInput) {
             this.editableInput.value = (option ? option.label : this.props.value||'');
         }
+    }
+    
+    filter(option) {
+        let filterValue = this.state.filter.trim().toLowerCase();
+        return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+    }
+    
+    hasFilter() {
+        return this.state.filter && this.state.filter.trim().length > 0;
     }
     
     renderHiddenSelect() {
@@ -339,18 +365,41 @@ export class Dropdown extends Component {
     
     renderPanel(selectedOption) {
         let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow', this.props.panelClassName);
-        let items = this.props.options && this.props.options.map((option, index) => {
+        let items = this.props.options;
+        let filter = this.renderFilter();
+        
+        if(this.hasFilter()) {
+            items = items && items.filter((option) => {
+                return this.filter(option);
+            });
+        }
+        
+        items = items && this.props.options.map((option, index) => {
             return <DropdownItem key={option.label} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
                     onClick={this.onOptionClick} />;
         });
         
-        return <div ref={(el) => this.panel = el} className={className} style={this.props.panelStyle}>
-                <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight||'auto'}}>
-                    <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                        {items}
-                    </ul>
-                </div>
+        return <div ref={(el) => this.panel = el} className={className} style={this.props.panelStyle} onClick={this.panelClick}>
+                    {filter}
+                    <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight||'auto'}}>
+                        <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
+                            {items}
+                        </ul>
+                    </div>
             </div>;
+    }
+    
+    renderFilter() {
+        if(this.props.filter) {
+            return <div className="ui-dropdown-filter-container">
+                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
+                            onKeyDown={this.onFilterKeyDown} onChange={this.onFilterInputChange} />
+                        <span className="fa fa-search"></span>
+                   </div>;
+        }
+        else {
+            return null;
+        }
     }
     
     componentDidMount() {
@@ -358,6 +407,21 @@ export class Dropdown extends Component {
             if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
                 this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
             }
+        }
+        
+        if(this.props.appendTo) {
+            if(this.props.appendTo === 'body')
+                document.body.appendChild(this.panel);
+            else
+                DomHandler.appendChild(this.panel, this.props.appendTo);
+        }
+    }
+    
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
+        
+        if(this.props.appendTo) {
+            this.container.appendChild(this.panel);
         }
     }
 

@@ -193,146 +193,140 @@ render() {
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>value</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Value of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>options</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of selectitems to display as the available options.</td>
-                                </tr>
-                                <tr>
-                                    <td>itemTemplate</td>
-                                    <td>function</td>
-                                    <td>null</td>
-                                    <td>Function that gets the option and returns the content for it.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>autoWidth</td>
-                                    <td>boolean</td>
-                                    <td>true</td>
-                                    <td>Calculates the width based on options width, set to false for custom width.</td>
-                                </tr>
-                                <tr>
-                                    <td>scrollHeight</td>
-                                    <td>string</td>
-                                    <td>200px</td>
-                                    <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
-                                </tr>
-                                <tr>
-                                    <td>filter</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When specified, displays an input field to filter the items on keyup.</td>
-                                </tr>
-                                <tr>
-                                    <td>filterBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
-                                </tr>
-                                <tr>
-                                    <td>filterPlaceholder</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Placeholder text to show when filter input is empty.</td>
-                                </tr>
-                                <tr>
-                                    <td>editable</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, custom value instead of predefined options can be entered using the editable input field.</td>
-                                </tr>
-                                <tr>
-                                    <td>placeholder</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Default text to display when no option is selected.</td>
-                                </tr>
-                                <tr>
-                                    <td>required</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
-                                </tr>
-                                <tr>
-                                    <td>disabled</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, it specifies that the component should be disabled.</td>
-                                </tr>
-                                <tr>
-                                    <td>appendTo</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
-                                </tr>
-                                <tr>
-                                    <td>tabindex</td>
-                                    <td>number</td>
-                                    <td>null</td>
-                                    <td>Index of the element in tabbing order.</td>
-                                </tr>
-                                <tr>
-                                    <td>autofocus</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, it specifies that the component should automatically get focus on load.</td>
-                                </tr>
-                                <tr>
-                                    <td>lazy</td>
-                                    <td>boolean</td>
-                                    <td>true</td>
-                                    <td>When enabled, creates the dom for options when overlay panel gets visible.</td>
-                                </tr>
-                                <tr>
-                                    <td>panelStyleClass</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the overlay panel element.</td>
-                                </tr>
-                                <tr>
-                                    <td>panelStyle</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the overlay panel element.</td>
-                                </tr>
-                                <tr>
-                                    <td>dataKey</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>A property to uniquely identify a value in options.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>value</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Value of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>options</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of selectitems to display as the available options.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>itemTemplate</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Function that gets the option and returns the content for it.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoWidth</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Calculates the width based on options width, set to false for custom width.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>scrollHeight</td>
+                                        <td>string</td>
+                                        <td>200px</td>
+                                        <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filter</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When specified, displays an input field to filter the items on keyup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterPlaceholder</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Placeholder text to show when filter input is empty.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>editable</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, custom value instead of predefined options can be entered using the editable input field.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>placeholder</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Default text to display when no option is selected.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>required</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>disabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, it specifies that the component should be disabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tabIndex</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Index of the element in tabbing order.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoFocus</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, it specifies that the component should automatically get focus on load.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>panelClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the overlay panel element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>panelStyle</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the overlay panel element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>dataKey</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>A property to uniquely identify a value in options.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>inputId</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Identifier of the focusable input.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -348,22 +342,22 @@ render() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>onChange</td>
-                                    <td>event.originalEvent: Original event <br />
-                                        event.value: Value of the checkbox </td>
-                                    <td>Callback to invoke on value change</td>
-                                </tr>
-                                <tr>
-                                    <td>onMouseDown</td>
-                                    <td>event: Browser event</td>
-                                    <td>Callback to invoke to when a mouse button is pressed.</td>
-                                </tr>
-                                <tr>
-                                    <td>onContextMenu</td>
-                                    <td>event: Browser event</td>
-                                    <td>Callback to invoke on right-click.</td>
-                                </tr>
+                                    <tr>
+                                        <td>onChange</td>
+                                        <td>event.originalEvent: Original event <br />
+                                            event.value: Value of the checkbox </td>
+                                        <td>Callback to invoke on value change</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onMouseDown</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke to when a mouse button is pressed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onContextMenu</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke on right-click.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
