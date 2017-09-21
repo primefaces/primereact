@@ -173,7 +173,7 @@ export default class DomHandler {
     }
 
     static relativePosition(element, target) {
-        var elementDimensions = element.offsetParent ? { width: element.outerWidth, height: element.outerHeight } : this.getHiddenElementDimensions(element);
+        var elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
         var targetHeight = target.offsetHeight;
         var targetWidth = target.offsetWidth;
         var targetOffset = target.getBoundingClientRect();
