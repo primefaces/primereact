@@ -733,13 +733,13 @@ export class DataTable extends Component {
     }
 
     getFrozenColumns() {
+        let columns = React.Children.toArray(this.props.children);
         let frozenColumns = null;
-        if(this.props.children && this.props.children.length) {
-            for(let col of this.props.children) {
-                if(col.props.frozen) {
-                    frozenColumns = frozenColumns||[];
-                    frozenColumns.push(col);
-                }
+        
+        for(let col of columns) {
+            if(col.props.frozen) {
+                frozenColumns = frozenColumns||[];
+                frozenColumns.push(col);
             }
         }
 
@@ -747,17 +747,17 @@ export class DataTable extends Component {
     }
 
     getScrollableColumns() {
-        let columns = null;
-        if(this.props.children && this.props.children.length) {
-            for(let col of this.props.children) {
-                if(!col.props.frozen) {
-                    columns = columns||[];
-                    columns.push(col);
-                }
+        let columns = React.Children.toArray(this.props.children);
+        let scrollableColumns = null;
+        
+        for(let col of columns) {
+            if(!col.props.frozen) {
+                scrollableColumns = scrollableColumns||[];
+                scrollableColumns.push(col);
             }
         }
 
-        return columns;
+        return scrollableColumns;
     }
 
     createTableHeader(columns) {
