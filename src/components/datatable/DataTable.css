@@ -25,6 +25,11 @@
     border-top: 0 none;
 }
 
+.ui-datatable thead th {
+    display: flex;
+    flex-direction: column;
+}
+
 .ui-datatable thead th, .ui-datatable tfoot td {
     text-align: center;
 }
