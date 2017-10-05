@@ -157,8 +157,6 @@
 
 /* Resizable */
 .ui-datatable .ui-column-resizer {
-    display: flex;
-    flex-direction: column;
     position: absolute !important;
     top: 0;
     right: 0;
@@ -191,6 +189,11 @@
 .ui-datatable-resizable th.ui-resizable-column {
     background-clip: padding-box;
     position: relative;
+}
+
+.ui-datatable-resizable .ui-datatable-thead th.ui-resizable-column > * {
+    display: flex;
+    flex-direction: column;
 }
 
 /** Reflow **/
