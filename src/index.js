@@ -92,6 +92,7 @@ import {EditorDemo} from "./showcase/editor/EditorDemo";
 import {TooltipDemo} from "./showcase/tooltip/TooltipDemo";
 import {Route,HashRouter,Switch} from 'react-router-dom';
 import {MenuModelDemo} from "./showcase/menumodel/MenuModelDemo";
+import {SidebarDemo} from "./showcase/sidebar/SidebarDemo";
 
 ReactDOM.render(
     <HashRouter>
@@ -187,6 +188,7 @@ ReactDOM.render(
                 <Route path="/inputgroup" component={InputGroupDemo} />
                 <Route path="/editor" component={EditorDemo} />
                 <Route path="/tooltip" component={TooltipDemo} />
+                <Route path="/sidebar" component={SidebarDemo} />
             </App>
         </Switch>
     </HashRouter>,
