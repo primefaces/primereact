@@ -191,7 +191,7 @@
     position: relative;
 }
 
-.ui-datatable-resizable .ui-datatable-thead th .ui-column-field {
+.ui-datatable-thead th .ui-column-field {
     display: flex;
     align-items: center;
 }
