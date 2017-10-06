@@ -18,25 +18,25 @@ export class HeaderCell extends Component {
                 originalEvent: e,
                 sortField: this.props.field
             });
-        }
+}
+}
+
+onFilterInput(e) {
+  if(this.props.filter && this.props.onFilter) {
+    if(this.filterTimeout) {
+      clearTimeout(this.filterTimeout);
     }
 
-    onFilterInput(e) {
-        if(this.props.filter && this.props.onFilter) {
-            if(this.filterTimeout) {
-                clearTimeout(this.filterTimeout);
-            }
-
-            let filterValue = e.target.value;
-            this.filterTimeout = setTimeout(() => {
-                this.props.onFilter({
-                    value: filterValue,
-                    field: this.props.field
-                });
-                this.filterTimeout = null;            
-            }, this.filterDelay);
-        }
-    }
+    let filterValue = e.target.value;
+    this.filterTimeout = setTimeout(() => {
+      this.props.onFilter({
+        value: filterValue,
+        field: this.props.field
+      });
+      this.filterTimeout = null;
+    }, this.filterDelay);
+  }
+}
 
     onMouseDown(event) {
         if(this.props.resizableColumns && this.props.onColumnResizeStart) {
@@ -107,9 +107,11 @@ export class HeaderCell extends Component {
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
                 <span className="ui-column-title">{this.props.header}</span>
-                {sortIconElement}
-                {filterElement}
-                {headerCheckbox}
+                <div className="ui-column-field">
+                  {sortIconElement}
+                  {filterElement}
+                  {headerCheckbox}
+                </div>
             </th>
         );
     }

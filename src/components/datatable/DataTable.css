@@ -191,9 +191,9 @@
     position: relative;
 }
 
-.ui-datatable-resizable .ui-datatable-thead th.ui-resizable-column > * {
+.ui-datatable-resizable .ui-datatable-thead th .ui-column-field {
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
 
 /** Reflow **/
