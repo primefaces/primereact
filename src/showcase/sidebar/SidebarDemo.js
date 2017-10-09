@@ -8,32 +8,16 @@ export class SidebarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {visibleLeft:false,visibleRight:false,visibleTop:false,visibleBottom:false,visibleFullScreen:false};
-        this.onHideLeft = this.onHideLeft.bind(this);
-        this.onHideRight = this.onHideRight.bind(this);
-        this.onHideTop = this.onHideTop.bind(this);
-        this.onHideBottom = this.onHideBottom.bind(this);
-        this.onHideFullScreen = this.onHideFullScreen.bind(this);
-    }
-
-    onHideLeft(event){
-        this.setState({visibleLeft:false});
-    }
-    onHideRight(event){
-        this.setState({visibleRight:false});
-    }
-    onHideTop(event){
-        this.setState({visibleTop:false});
-    }
-    onHideBottom(event){
-        this.setState({visibleBottom:false});
-    }
-    onHideFullScreen(event){
-        this.setState({visibleFullScreen:false});
+        this.state = {
+            visibleLeft: false,
+            visibleRight: false,
+            visibleTop:false, 
+            visibleBottom: false,
+            visibleFullScreen:false
+        };
     }
 
     render() {
-
         return (
             <div>
                 <div className="content-section introduction">
@@ -44,36 +28,41 @@ export class SidebarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={this.onHideLeft}>
+                    <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={() => this.setState({visibleLeft: false})}>
                         <h1 style={{fontWeight:'normal'}}>Left Sidebar</h1>
-                        <Button type="button" onClick={this.onHideLeft} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideLeft} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleLeft: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleLeft: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={this.onHideRight}>
+                    
+                    <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={() => this.setState({visibleRight: false})}>
                         <h1 style={{fontWeight:'normal'}}>Right Sidebar</h1>
-                        <Button type="button" onClick={this.onHideRight} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideRight} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleRight: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleRight: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={this.onHideTop}>
+                    
+                    <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={() => this.setState({visibleTop: false})}>
                         <h1 style={{fontWeight:'normal'}}>Top Sidebar</h1>
-                        <Button type="button" onClick={this.onHideTop} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideTop} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleTop: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleTop: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={this.onHideBottom}>
+                    
+                    <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={() => this.setState({visibleBottom: false})}>
                         <h1 style={{fontWeight:'normal'}}>Bottom Sidebar</h1>
-                        <Button type="button" onClick={this.onHideBottom} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideBottom} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleBottom: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleBottom: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={this.onHideFullScreen}>
+                    
+                    <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={() => this.setState({visibleFullScreen: false})}>
                         <h1 style={{fontWeight:'normal'}}>Full Screen Sidebar</h1>
-                        <Button type="button" onClick={this.onHideFullScreen} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideFullScreen} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleFullScreen: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleFullScreen: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Button icon="fa-arrow-right" onClick={()=>this.setState({visibleLeft:true})}/>
-                    <Button icon="fa-arrow-left" onClick={()=>this.setState({visibleRight:true})}/>
-                    <Button icon="fa-arrow-down" onClick={()=>this.setState({visibleTop:true})}/>
-                    <Button icon="fa-arrow-up" onClick={()=>this.setState({visibleBottom:true})}/>
-                    <Button icon="fa-arrows-alt" onClick={()=>this.setState({visibleFullScreen:true})}/>
+                    
+                    <Button icon="fa-arrow-right" onClick={() => this.setState({visibleLeft:true})} />
+                    <Button icon="fa-arrow-left" onClick={() => this.setState({visibleRight:true})} />
+                    <Button icon="fa-arrow-down" onClick={() => this.setState({visibleTop:true})} />
+                    <Button icon="fa-arrow-up" onClick={() => this.setState({visibleBottom:true})} />
+                    <Button icon="fa-arrows-alt" onClick={() => this.setState({visibleFullScreen:true})} />
                 </div>
 
                 <SidebarDoc/>
@@ -108,11 +97,11 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                         <CodeHighlight className="html">
                             {`
 
-<Sidebar visible={this.state.visible} onHide={this.onHide}>
+<Sidebar visible={this.state.visible} onHide={ () => this.setState({visible:false}) }>
     Content
 </Sidebar>
 
-<Button icon="fa-arrow-right" onClick={()=>this.setState({visible:true})}/>
+<Button icon="fa-arrow-right" onClick={ () => this.setState({visible:true}) }/>
 
 `}
                         </CodeHighlight>
@@ -122,7 +111,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
 
                         <CodeHighlight className="javascript">
                             {`
-<Sidebar visible={this.state.visible} position="right" onHide={this.onHide}>
+<Sidebar visible={this.state.visible} position="right" onHide={ () => this.setState({visible:false}) }>
     Content
 </Sidebar>
 
@@ -133,10 +122,10 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                         <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
                         <CodeHighlight className="html">
                             {`
-<Sidebar visible={this.state.visible} position="right" style={{width:'30em'}} onHide={this.onHide}></Sidebar>
-<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-sm" onHide={this.onHide}></Sidebar>
-<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-md" onHide={this.onHide}></Sidebar>
-<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-lg" onHide={this.onHide}></Sidebar>
+<Sidebar visible={this.state.visible} position="right" style={{width:'30em'}} onHide={ () => this.setState({visible:false}) }></Sidebar>
+<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-sm" onHide={ () => this.setState({visible:false}) }</Sidebar>
+<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-md" onHide={ () => this.setState({visible:false}) }></Sidebar>
+<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-lg" onHide={ () => this.setState({visible:false}) }></Sidebar>
 
 `}
                         </CodeHighlight>
@@ -145,7 +134,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                         <p>Full screen mode allows the sidebar to cover whole screen.</p>
                         <CodeHighlight className="html">
                             {`
-<Sidebar visible={this.state.visible} fullScreen={true} onHide={this.onHide}>
+<Sidebar visible={this.state.visible} fullScreen={true} onHide={ () => this.setState({visible:false}) }>
     Content
 </Sidebar>
 
@@ -315,40 +304,24 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                         </a>
                         <CodeHighlight className="javascript">
                             {`
+import React, {Component} from 'react';
+import {Sidebar} from "primeng/components/sidebar/Sidebar";
+import {Button} from 'primeng/components/button/Button';
+
 export class SidebarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {visibleLeft:false,visibleRight:false,visibleTop:false,visibleBottom:false,visibleFullScreen:false};
-        //this.onHide = this.onHide.bind(this);
-        this.onHideLeft = this.onHideLeft.bind(this);
-        this.onHideRight = this.onHideRight.bind(this);
-        this.onHideTop = this.onHideTop.bind(this);
-        this.onHideBottom = this.onHideBottom.bind(this);
-        this.onHideFullScreen = this.onHideFullScreen.bind(this);
-    }
-
-    /*onHide(event){
-        this.setState({visibleLeft:false,visibleRight:false,visibleTop:false,visibleBottom:false,visibleFullScreen:false});
-    }*/
-    onHideLeft(event){
-        this.setState({visibleLeft:false});
-    }
-    onHideRight(event){
-        this.setState({visibleRight:false});
-    }
-    onHideTop(event){
-        this.setState({visibleTop:false});
-    }
-    onHideBottom(event){
-        this.setState({visibleBottom:false});
-    }
-    onHideFullScreen(event){
-        this.setState({visibleFullScreen:false});
+        this.state = {
+            visibleLeft: false,
+            visibleRight: false,
+            visibleTop:false, 
+            visibleBottom: false,
+            visibleFullScreen:false
+        };
     }
 
     render() {
-
         return (
             <div>
                 <div className="content-section introduction">
@@ -359,36 +332,41 @@ export class SidebarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={this.onHideLeft}>
+                    <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={() => this.setState({visibleLeft: false})}>
                         <h1 style={{fontWeight:'normal'}}>Left Sidebar</h1>
-                        <Button type="button" onClick={this.onHideLeft} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideLeft} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleLeft: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleLeft: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={this.onHideRight}>
+                    
+                    <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={() => this.setState({visibleRight: false})}>
                         <h1 style={{fontWeight:'normal'}}>Right Sidebar</h1>
-                        <Button type="button" onClick={this.onHideRight} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideRight} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleRight: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleRight: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={this.onHideTop}>
+                    
+                    <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={() => this.setState({visibleTop: false})}>
                         <h1 style={{fontWeight:'normal'}}>Top Sidebar</h1>
-                        <Button type="button" onClick={this.onHideTop} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideTop} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleTop: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleTop: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={this.onHideBottom}>
+                    
+                    <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={() => this.setState({visibleBottom: false})}>
                         <h1 style={{fontWeight:'normal'}}>Bottom Sidebar</h1>
-                        <Button type="button" onClick={this.onHideBottom} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideBottom} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleBottom: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleBottom: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={this.onHideFullScreen}>
+                    
+                    <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={() => this.setState({visibleFullScreen: false})}>
                         <h1 style={{fontWeight:'normal'}}>Full Screen Sidebar</h1>
-                        <Button type="button" onClick={this.onHideFullScreen} label="Save" className="ui-button-success"/>
-                        <Button type="button" onClick={this.onHideFullScreen} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={() => this.setState({visibleFullScreen: true})} label="Save" className="ui-button-success"/>
+                        <Button type="button" onClick={() => this.setState({visibleFullScreen: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
-                    <Button icon="fa-arrow-right" onClick={()=>this.setState({visibleLeft:true})}/>
-                    <Button icon="fa-arrow-left" onClick={()=>this.setState({visibleRight:true})}/>
-                    <Button icon="fa-arrow-down" onClick={()=>this.setState({visibleTop:true})}/>
-                    <Button icon="fa-arrow-up" onClick={()=>this.setState({visibleBottom:true})}/>
-                    <Button icon="fa-arrows-alt" onClick={()=>this.setState({visibleFullScreen:true})}/>
+                    
+                    <Button icon="fa-arrow-right" onClick={() => this.setState({visibleLeft:true})} />
+                    <Button icon="fa-arrow-left" onClick={() => this.setState({visibleRight:true})} />
+                    <Button icon="fa-arrow-down" onClick={() => this.setState({visibleTop:true})} />
+                    <Button icon="fa-arrow-up" onClick={() => this.setState({visibleBottom:true})} />
+                    <Button icon="fa-arrows-alt" onClick={() => this.setState({visibleFullScreen:true})} />
                 </div>
 
                 <SidebarDoc/>
