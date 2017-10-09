@@ -1,89 +1,114 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import ObjectUtils from '../utils/ObjectUtils';
+import {SelectButtonItem} from './SelectButtonItem';
 
 export class SelectButton extends Component {
 
     static defaultProps = {
         id: null,
-        activeIndex: null,
+        value: null,
         options: null,
         tabindex: null,
         multiple: null,
         disabled: null,
         style: null,
         className: null,
+        dataKey: null,
         onChange: null
     };
 
     static propTypes = {
         id: PropTypes.string,
-        activeIndex: PropTypes.any,
+        value: PropTypes.any,
         options: PropTypes.array,
         tabindex: PropTypes.number,
         multiple: PropTypes.bool,
         disabled: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        dataKey: PropTypes.string,
         onChange: PropTypes.func
     };
 
     constructor(props) {
         super(props);
         this.state = {};
-        this.onItemClick = this.onItemClick.bind(this);
+        this.onOptionClick = this.onOptionClick.bind(this);
     }
 
-    onItemClick(e, option, i) {
-        var selected = this.isSelected(i);
+    onOptionClick(event) {
+        if(this.props.disabled) {
+            return;
+        }
+        
+        let selected = this.isSelected(event.option);
+        let optionValue = event.option.value;
+        let newValue;
 
-        if (this.props.multiple) {
-            var indexes = this.state.activeIndex||[];
+        if(this.props.multiple) {
+            let currentValue = this.props.value ? [...this.props.value] : [];
+    
             if(selected)
-                indexes = indexes.filter(index => index !== i);
+                newValue = currentValue.filter((val) => !ObjectUtils.equals(val, optionValue, this.props.dataKey));
             else
-                indexes.push(i);
-
-            this.setState({activeIndex: indexes});
+                newValue = [...currentValue, optionValue];
         }
         else {
             if(selected)
-                this.setState({activeIndex: null});
+                newValue = null;
             else
-                this.setState({activeIndex: i});
+                newValue = optionValue;
         }
         
         if(this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
-                value: option.value,
-                index: i
+                originalEvent: event.originalEvent,
+                value: newValue
             });
-            event.preventDefault();
         }
     }
 
-    isSelected(i) {
-        return this.props.multiple ? this.state.activeIndex && this.state.activeIndex.includes(i) : this.state.activeIndex === i;
+    isSelected(option) {
+        let selected = false;
+        
+        if(this.props.multiple) {
+            if(this.props.value && this.props.value.length) {
+                for(let val of this.props.value) {
+                    if(ObjectUtils.equals(val, option.value, this.props.dataKey)) {
+                        selected = true;
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            selected = ObjectUtils.equals(this.props.value, option.value, this.props.dataKey);
+        }
+        
+        return selected;
+    }
+    
+    renderItems() {
+        if(this.props.options && this.props.options.length) {
+            return this.props.options.map((option, index) => {
+                return <SelectButtonItem key={option.label} option={option} onClick={this.onOptionClick} selected={this.isSelected(option)} />;
+            });
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
-        var className = classNames('ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-3', this.props.className);
+        let className = classNames('ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-3', this.props.className);
+        let items = this.renderItems();
 
         return (
             <div id={this.props.id}>
                 <div className={className} style={this.props.style}>
-                    {this.props.options.map((option, index) => {
-                        var selected = this.isSelected(index);
-                        var innerStyleClass = classNames('ui-button ui-widget ui-state-default ui-button-text-only', {
-                            'ui-state-active': selected,
-                            'ui-state-disabled': this.props.disabled
-                        });
-                        var buttonset = <div className={innerStyleClass} key={option.label} onClick={() => this.onItemClick(event, option, index)}>
-                            <span className="ui-button-text ui-c">{option.label}</span>
-                        </div>;
-                        return buttonset;
-                    })}
+                    {items}
                 </div>
             </div>
         );

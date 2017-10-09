@@ -4,31 +4,21 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class SelectButtonDemo extends Component {
+    
     constructor(props) {
         super(props);
-        this.state = {};
-        this.onOptionChange = this.onOptionChange.bind(this);
-        this.onOptionsChange = this.onOptionsChange.bind(this);
-    }
-
-    onOptionChange(e) {
-        this.setState({option: e.value});
-    }
-
-    onOptionsChange(e) {
-        this.setState({options: e.value});
+        this.state = {
+            value1: null,
+            value2: null
+        };
     }
     
     render() {
-        var option = [];
-        option.push({label: 'Apartment', value: 'Apartment'});
-        option.push({label: 'House', value: 'House'});
-        option.push({label: 'Studio', value: 'Studio'});
-
-        var options = [];
-        options.push({label: 'Apartment', value: 'Apartment'});
-        options.push({label: 'House', value: 'House'});
-        options.push({label: 'Studio', value: 'Studio'});
+        let options = [
+            {label: 'Apartment', value: 'Apartment'},
+            {label: 'House', value: 'House'},
+            {label: 'Studio', value: 'Studio'}
+        ];
 
         return (
             <div>
@@ -40,12 +30,13 @@ export class SelectButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <SelectButton value={this.state.option} options={option} onChange={this.onOptionChange}></SelectButton>
-                    <p>Selected Value: {this.state.option}</p>
+                    <h3>Single</h3>
+                    <SelectButton value={this.state.value1} options={options} onChange={(event) => this.setState({value1: event.value})} />
+                    <p>Selected Value: {this.state.value1}</p>
 
                     <h3>Multiple</h3>
-                    <SelectButton value={this.state.options} options={options} onChange={this.onOptionsChange} multiple={true}></SelectButton>
+                    <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(event) => this.setState({value2: event.value})} />
+                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val)}</p>
                 </div>
 
                 <SelectButtonDoc></SelectButtonDoc>
