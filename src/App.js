@@ -6,7 +6,7 @@ import jQuery from "jquery";
 import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
-import './sass/App.css';
+import './sass/App.scss';
 
 class Home extends Component {
 
