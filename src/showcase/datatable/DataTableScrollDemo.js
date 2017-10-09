@@ -35,7 +35,7 @@ export class DataTableScrollDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Scroll</h1>
                         <p>Data scrolling with fixed header is available horizontally, vertically or both. ScrollHeight and ScrollWidth values can either be fixed pixels or percentages. Certain columns can be fixed as well. 
-                            Virtual Scrolling mode is available to deal with large datasets by loading data on demand during scrolling..</p>
+                            Virtual Scrolling mode is available to deal with large datasets by loading data on demand during scrolling.</p>
                     </div>
                 </div>
 
