@@ -188,8 +188,6 @@ $inputGroupTextColor: #222222;
     transition: background-color .2s;
     
     &:enabled:hover,
-    &.ui-state-focus,
-    &:not(.ui-state-disabled):hover,
     &:focus {
         border: 1px solid #1f89ce;
     	background: #1f89ce;
@@ -197,12 +195,25 @@ $inputGroupTextColor: #222222;
         color: #ffffff;
     }
     
-    &:enabled:active,
-    &:not(.ui-state-disabled):active {
+    &:enabled:active {
         border: 1px solid #156090;
     	background: #186ba0;
         color: #ffffff;
     }
+}
+
+.ui-fileupload-choose:not(.ui-state-disabled):hover,
+.ui-fileupload-choose.ui-state-focus {
+    border: 1px solid #1f89ce;
+    background: #1f89ce;
+    outline: 0 none;
+    color: #ffffff;
+}
+
+.ui-fileupload-choose:not(.ui-state-disabled):active {
+    border: 1px solid #156090;
+    background: #186ba0;
+    color: #ffffff;
 }
 
 /* Checkbox and Radio */
@@ -545,7 +556,6 @@ $inputGroupTextColor: #222222;
 .ui-dialog.ui-widget .ui-dialog-content {
     padding: 1em 1.5em;
 }
-
 
 /* Schedule */
 .fc {

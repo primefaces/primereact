@@ -151,29 +151,33 @@
         border-color: $stateDefaultBorderColor;
         background-color: lighten($stateDefaultBorderColor, 10%);
         color: $inputGroupTextColor;
-
+        
         &:first-child {
             border-top-left-radius: $borderRadius;
             border-bottom-left-radius: $borderRadius;
         }
-
+        
         &:last-child {
             border-top-right-radius: $borderRadius;
             border-bottom-right-radius: $borderRadius;
         }
     }
-
+    
     .ui-button {
         &:first-child {
             border-top-left-radius: $borderRadius;
             border-bottom-left-radius: $borderRadius;
         }
-
+        
         &:last-child {
             border-top-right-radius: $borderRadius;
             border-bottom-right-radius: $borderRadius;
         }
     }
+}
+
+.ui-float-label input.ng-dirty.ng-invalid ~ label {
+    color: $stateErrorTextColor;
 }
 
 .ui-autocomplete {
@@ -203,14 +207,13 @@
 
 .ui-button:focus,
 .ui-button:enabled:hover,
-.ui-button.ui-state-focus,
-.ui-button:not(.ui-state-disabled):hover {
+.ui-fileupload-choose:not(.ui-state-disabled):hover {
     outline: 0 none;
     @include hover-element();
 }
 
 .ui-button:enabled:active,
-.ui-button.ui-state-active {
+.ui-fileupload-choose:not(.ui-state-disabled):active {
     border-color: $stateActiveBorderColor;
     background: $stateActiveBgColor; 
     color: $stateActiveTextColor;
@@ -292,6 +295,10 @@
 
 .ui-paginator a:not(.ui-state-disabled):not(.ui-state-active):hover {
     @include hover-element();
+}
+
+.ui-paginator a {
+    color: $stateDefaultTextColor;
 }
 
 .ui-datatable {
