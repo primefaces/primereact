@@ -60,7 +60,7 @@ export class DataTableFilterDemo extends Component {
                 {label: 'VW', value: 'VW'},
                 {label: 'Volvo', value: 'Volvo'}
             ];        
-        let brandFilter = <Dropdown style={{width: '100%'}} value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
             {label: 'White', value: 'White'},
@@ -74,7 +74,7 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
 
         return (
             <div>
@@ -90,7 +90,7 @@ export class DataTableFilterDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} header={header} 
+                    <DataTable value={this.state.cars} paginator={true} rows={10} header={header}
                         globalFilter={this.state.globalFilter} filters={this.state.filters} onFilter={this.onFilter}>
                         <Column field="vin" header="Vin" filter={true} />
                         <Column field="year" header="Year" filter={true} />
@@ -177,7 +177,7 @@ export class DataTableFilterDemo extends Component {
                 {label: 'VW', value: 'VW'},
                 {label: 'Volvo', value: 'Volvo'}
             ];        
-        let brandFilter = <Dropdown style={{width: '100%'}} value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
             {label: 'White', value: 'White'},
@@ -191,7 +191,7 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
 
         return (
             <div>
