@@ -10,7 +10,7 @@ export class SelectButton extends Component {
         id: null,
         value: null,
         options: null,
-        tabindex: null,
+        tabIndex: null,
         multiple: null,
         disabled: null,
         style: null,
@@ -23,7 +23,7 @@ export class SelectButton extends Component {
         id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.string,
         multiple: PropTypes.bool,
         disabled: PropTypes.bool,
         style: PropTypes.object,
@@ -93,7 +93,8 @@ export class SelectButton extends Component {
     renderItems() {
         if(this.props.options && this.props.options.length) {
             return this.props.options.map((option, index) => {
-                return <SelectButtonItem key={option.label} option={option} onClick={this.onOptionClick} selected={this.isSelected(option)} />;
+                return <SelectButtonItem key={option.label} option={option} onClick={this.onOptionClick}
+                            selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} />;
             });
         }
         else {
