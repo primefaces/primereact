@@ -12,6 +12,7 @@ import {DialogDemo} from './showcase/dialog/DialogDemo';
 import {DropdownDemo} from './showcase/dropdown/DropdownDemo';
 import {FieldsetDemo} from './showcase/fieldset/FieldsetDemo';
 import {FileUploadDemo} from './showcase/fileupload/FileUploadDemo';
+import {GMapDemo} from './showcase/gmap/GMapDemo';
 import {GridDemo} from './showcase/grid/GridDemo';
 import {GrowlDemo} from './showcase/growl/GrowlDemo';
 import {InputTextDemo} from './showcase/inputtext/InputTextDemo';
@@ -189,6 +190,7 @@ ReactDOM.render(
                 <Route path="/editor" component={EditorDemo} />
                 <Route path="/tooltip" component={TooltipDemo} />
                 <Route path="/sidebar" component={SidebarDemo} />
+                <Route path="/gmap" component={GMapDemo} />
             </App>
         </Switch>
     </HashRouter>,
