@@ -38,13 +38,7 @@ export class GMap extends Component {
         super(props);
         this.state = {};
     }
-    
-    componentDidMount() {
-        setTimeout(() => {
-            this.initMap();
-        }, 1000);
-    }
-    
+        
     initMap() {
         this.map = new google.maps.Map(this.container, this.props.options);
         
@@ -54,16 +48,20 @@ export class GMap extends Component {
             });
         } 
         
-        if(this.props.overlays) {
-            for(let overlay of this.props.overlays) {
-                overlay.setMap(this.map);
-                this.bindOverlayEvents(overlay);
-            }
-        }
+        this.initOverlays(this.props.overlays);
         
         this.bindMapEvent('click', this.props.onMapClick);
         this.bindMapEvent('dragend', this.props.onMapDragEnd);
         this.bindMapEvent('zoom_changed', this.props.onZoomChanged);
+    }
+    
+    initOverlays(overlays) {
+        if(overlays) {
+            for(let overlay of overlays) {
+                overlay.setMap(this.map);
+                this.bindOverlayEvents(overlay);
+            }
+        }
     }
     
     bindOverlayEvents(overlay) {
@@ -110,6 +108,24 @@ export class GMap extends Component {
     
     getMap() {
         return this.map;
+    }
+    
+    componentWillReceiveProps(nextProps, nextState) {
+        if(this.props.overlays !== nextProps.overlays) {
+            if(this.props.overlays) {
+                for(let overlay of this.props.overlays) {
+                    overlay.setMap(null);
+                }
+            }
+            
+            this.initOverlays(nextProps.overlays);
+        }
+    }
+    
+    componentDidMount() {
+        setTimeout(() => {
+            this.initMap();
+        }, 1000);
     }
     
     render() {
