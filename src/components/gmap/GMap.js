@@ -123,9 +123,7 @@ export class GMap extends Component {
     }
     
     componentDidMount() {
-        setTimeout(() => {
-            this.initMap();
-        }, 1000);
+        this.initMap();
     }
     
     render() {
