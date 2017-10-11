@@ -22,8 +22,7 @@ export class InputMask extends Component {
         disabled: false,
         readonly: false,
         name: null,
-        onComplete: null,
-        onClick: null,
+        onComplete: null
     }
 
     static propsTypes = {
@@ -42,8 +41,7 @@ export class InputMask extends Component {
         disabled: PropTypes.bool,
         readonly: PropTypes.bool,
         name: PropTypes.string,
-        onComplete: PropTypes.func,
-        onClick: PropTypes.func,
+        onComplete: PropTypes.func
     }
 
     caret(first, last) {
@@ -404,14 +402,6 @@ export class InputMask extends Component {
         }, 0);
     }
 
-  onClick(e) {
-    if(this.props.onClick) {
-      this.props.onClick();
-    } else {
-      e.stopPropagation();
-    }
-  }
-
     getUnmaskedValue() {
         let unmaskedBuffer = [];
         for (let i = 0; i < this.buffer.length; i++) {
@@ -515,7 +505,7 @@ export class InputMask extends Component {
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
                 onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onKeyPress={this.onKeyPress.bind(this)}
-                onInput={this.onInput.bind(this)} onPaste={this.handleInputChange.bind(this)} onClick={this.handleInputChange.bind(this)} />
+                onInput={this.onInput.bind(this)} onPaste={this.handleInputChange.bind(this)} />
         );
     }
 
