@@ -99,7 +99,7 @@ export class DataTableScrollDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation">                    
                     <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px">
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
@@ -107,8 +107,8 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" />
                     </DataTable>
                     
-                    <DataTable header="VirtualScroll" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
-                        rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onLazyLoad={this.onLazyLoad} style={{marginTop:'30px'}}>
+                    <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
+                        rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onLazyLoad={this.loadCarsLazy} style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -151,7 +151,7 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
                 </div>
-
+                
                 <DataTableScrollDemoDoc></DataTableScrollDemoDoc>
             </div>
         );

@@ -302,7 +302,11 @@
     left: 0px;
 }
 
-.ui-datatable .ui-datatable-virtual-table {
+.ui-datatable.ui-datatable-virtual-scrollable .ui-datatable-scrollable-table-wrapper {
+    position: relative;
+}
+
+.ui-datatable.ui-datatable-virtual-scrollable .ui-datatable-scrollable-table-wrapper > table {
     position: absolute;
     top: 0px;
     left: 0px;
