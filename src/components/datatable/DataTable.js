@@ -52,6 +52,8 @@ export class DataTable extends Component {
         globalFilter: null,
         scrollable: false,
         scrollHeight: null,
+        virtualScroll: false,
+        virtualScrollDelay: 500,
         frozenWidth: null,
         unfrozenWidth: null,
         frozenValue: null,
@@ -112,8 +114,9 @@ export class DataTable extends Component {
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
         scrollable: PropTypes.bool,
-        scrollWidth: PropTypes.string,
         scrollHeight: PropTypes.string,
+        virtualScroll: PropTypes.bool,
+        virtualScrollDelay: PropTypes.number,
         frozenWidth: PropTypes.string,
         unfrozenWidth: PropTypes.string,
         frozenValue: PropTypes.array,
@@ -154,6 +157,7 @@ export class DataTable extends Component {
         this.onColumnDragOver = this.onColumnDragOver.bind(this);
         this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
         this.onColumnDrop = this.onColumnDrop.bind(this);
+        this.onVirtualScroll = this.onVirtualScroll.bind(this);
     }
 
     onPageChange(event) {
@@ -327,7 +331,7 @@ export class DataTable extends Component {
     }
 
     componentDidMount() {
-        if(this.props.lazy) {
+        if(this.props.lazy && this.props.onLazyLoad) {
             this.props.onLazyLoad({
                 first: this.props.first,
                 rows: this.props.rows,
@@ -590,6 +594,28 @@ export class DataTable extends Component {
             this.dropPosition = null;
         }
     }
+    
+    onVirtualScroll(event) {
+        if(this.virtualScrollTimer) {
+            clearTimeout(this.virtualScrollTimer);
+        }
+        
+        this.virtualScrollTimer = setTimeout(() => {
+            let first = (event.page - 1) * this.props.rows;
+            this.setState({
+                first: first
+            });
+            
+            if(this.props.lazy) {
+                this.props.onLazyLoad({
+                    first: first,
+                    rows: this.state.rows,
+                    sortField: this.state.sortField,
+                    sortOrder: this.state.sortOrder
+                });
+            }
+        }, this.props.virtualScrollDelay);
+    }
 
     exportCSV() {
         let data = this.props.value;
@@ -788,7 +814,9 @@ export class DataTable extends Component {
 
     createScrollableView(value, columns, frozen) {
         return <ScrollableView header={this.createTableHeader(columns)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns)} 
-                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}></ScrollableView>
+                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}
+                virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={this.getTotalRecords()}
+                onVirtualScroll={this.onVirtualScroll}></ScrollableView>
     }
     
     getColumns() {
@@ -819,11 +847,15 @@ export class DataTable extends Component {
         
         return null;
     }
+    
+    getTotalRecords() {
+        return this.props.lazy ? this.props.totalRecords : this.props.value ? this.props.value.length : 0;
+    }
 
     render() {
         let value = this.processData();
         let columns = this.getColumns();
-        let totalRecords = this.props.lazy ? this.props.totalRecords : value ? value.length : 0;
+        let totalRecords = this.getTotalRecords();
         let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 'ui-datatable-scrollable': this.props.scrollable}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);

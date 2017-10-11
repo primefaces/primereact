@@ -10,20 +10,80 @@ export class DataTableScrollDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            cars: null,
+            lazyCars: null,
+            lazyTotalRecords: 0,
+            frozenCars: null
+        };
+        
         this.carservice = new CarService();
+        this.loadCarsLazy = this.loadCarsLazy.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => {
             this.setState({
-                cars1: data,
+                cars: data,
+                lazyCars: null,
+                lazyTotalRecords: 250000,
                 frozenCars: [
                     {"brand": "BMW", "year": 2013, "color": "Grey", "vin": "fh2uf23"},
                     {"brand": "Chevrolet", "year": 2011, "color": "Black", "vin": "4525g23"}
                 ]
             });
         });
+    }
+    
+    loadCarsLazy(event) {
+        //for demo purposes keep loading the same dataset 
+        //in a real production application, this data should come from server by building the query with LazyLoadEvent options 
+        setTimeout(() => {
+            this.setState({
+                lazyCars: [
+                    {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+                    {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+                    {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+                    {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+                    {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+                    {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+                    {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+                    {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+                    {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+                    {"brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s"},
+                    {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+                    {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+                    {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+                    {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+                    {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+                    {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+                    {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+                    {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+                    {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+                    {"brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s"},
+                    {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+                    {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+                    {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+                    {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+                    {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+                    {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+                    {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+                    {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+                    {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+                    {"brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s"},
+                    {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+                    {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+                    {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+                    {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+                    {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+                    {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+                    {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+                    {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+                    {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+                    {"brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s"}
+                ]
+            })   
+        }, 250);
     }
 
     render() {
@@ -40,28 +100,36 @@ export class DataTableScrollDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable header="Vertical" value={this.state.cars1} scrollable={true} scrollHeight="200px">
+                    <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px">
+                        <Column field="vin" header="Vin" />
+                        <Column field="year" header="Year" />
+                        <Column field="brand" header="Brand" />
+                        <Column field="color" header="Color" />
+                    </DataTable>
+                    
+                    <DataTable header="VirtualScroll" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
+                        rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onLazyLoad={this.onLazyLoad} style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
 
-                    <DataTable header="Horizontal and Vertical" value={this.state.cars1} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
+                    <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
                     
-                    <DataTable header="Frozen Rows" value={this.state.cars1} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
+                    <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
 
-                    <DataTable header="Frozen Columns" value={this.state.cars1} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
@@ -72,7 +140,7 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
                     
-                    <DataTable header="Frozen Rows and Columns" value={this.state.cars1} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
@@ -112,14 +180,18 @@ export class DataTableScrollDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            cars: null,
+            lazyCars: null,
+            frozenCars: null
+        };
         this.carservice = new CarService();
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => {
             this.setState({
-                cars1: data,
+                cars: data,
                 frozenCars: [
                     {"brand": "BMW", "year": 2013, "color": "Grey", "vin": "fh2uf23"},
                     {"brand": "Chevrolet", "year": 2011, "color": "Black", "vin": "4525g23"}
@@ -127,6 +199,7 @@ export class DataTableScrollDemo extends Component {
             });
         });
     }
+    
     render() {
         return (
             <div>
@@ -139,28 +212,28 @@ export class DataTableScrollDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable header="Vertical" value={this.state.cars1} scrollable={true} scrollHeight="200px">
+                    <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px">
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
 
-                    <DataTable header="Horizontal and Vertical" value={this.state.cars1} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
+                    <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
                     
-                    <DataTable header="Frozen Rows" value={this.state.cars1} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
+                    <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
 
-                    <DataTable header="Frozen Columns" value={this.state.cars1} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
@@ -171,7 +244,7 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
                     
-                    <DataTable header="Frozen Rows and Columns" value={this.state.cars1} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />

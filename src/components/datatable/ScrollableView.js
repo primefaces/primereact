@@ -12,7 +12,11 @@ export class ScrollableView extends Component {
         frozen: null,
         frozenWidth: null,
         unfrozenWidth: null,
-        frozenBody: null
+        frozenBody: null,
+        virtualScroll: false,
+        rows: null,
+        totalRecords: null,
+        onVirtualScroll: null
      }
 
     static propTypes = {
@@ -22,7 +26,11 @@ export class ScrollableView extends Component {
         frozen: PropTypes.bool,
         frozenWidth: PropTypes.string,
         unfrozenWidth: PropTypes.string,
-        frozenBody: PropTypes.element
+        frozenBody: PropTypes.element,
+        virtualScroll: PropTypes.bool,
+        rows: PropTypes.number,
+        totalRcords: PropTypes.number,
+        onVirtualScroll: PropTypes.func
     }
 
     constructor(props) {
@@ -32,15 +40,22 @@ export class ScrollableView extends Component {
     }
 
     componentDidMount() {
-        if(!this.props.frozen)
+        if(!this.props.frozen) {
             this.alignScrollBar();
-        else
+        }
+        else {
             this.scrollBody.style.paddingBottom = DomHandler.calculateScrollbarWidth() + 'px';
+        }
     }
 
     componentDidUpdate() {
         if(!this.props.frozen) {
             this.alignScrollBar();
+            
+            if(this.props.virtualScroll) {
+                this.calculateRowHeight();
+                this.virtualScrollableTableWrapper.style.height = this.props.totalRecords * this.rowHeight + 'px';
+            }
         }
     }
 
@@ -63,6 +78,24 @@ export class ScrollableView extends Component {
         if(frozenScrollBody) {
             frozenScrollBody.scrollTop = this.scrollBody.scrollTop;
         }
+        
+        if(this.props.virtualScroll) {
+            let viewport = DomHandler.getOuterHeight(this.scrollBody);
+            let tableHeight = DomHandler.getOuterHeight(this.scrollTable);
+            let pageHeight = this.rowHeight * this.props.rows;
+            let virtualTableHeight = DomHandler.getOuterHeight(this.scrollTable.parentElement);
+            let pageCount = (virtualTableHeight / pageHeight)||1;
+
+            if(this.scrollBody.scrollTop + viewport > parseFloat(this.scrollTable.style.top) + tableHeight || this.scrollBody.scrollTop < parseFloat(this.scrollTable.style.top)) {
+                let page = Math.floor((this.scrollBody.scrollTop * pageCount) / (this.scrollBody.scrollHeight)) + 1;
+                if(this.props.onVirtualScroll) {
+                    this.props.onVirtualScroll({
+                        page: page
+                    });
+                }
+                this.scrollTable.style.top = ((page - 1) * pageHeight) + 'px';
+            }
+        }
     }
 
     hasVerticalOverflow() {
@@ -75,6 +108,13 @@ export class ScrollableView extends Component {
         this.scrollHeaderBox.style.marginRight = scrollBarWidth + 'px';
         if(this.scrollFooterBox) {
             this.scrollFooterBox.style.marginRight = scrollBarWidth + 'px';
+        }
+    }
+    
+    calculateRowHeight() {
+        let row = DomHandler.findSingle(this.scrollTable, 'tr.ui-widget-content:not(.ui-datatable-emptymessage-row)');
+        if(row) {
+            this.rowHeight = DomHandler.getOuterHeight(row);
         }
     }
 
