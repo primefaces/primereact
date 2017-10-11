@@ -14,16 +14,27 @@ export class InputText extends Component {
 
     constructor(props) {
         super(props);
+        this.onClick = this.onClick.bind(this);
         this.onInput = this.onInput.bind(this);
     }
 
     onInput(e) {
+        e.stopPropagation();
+        console.log('onInput');
         if(this.props.onInput) {
             this.props.onInput(e);
         }
 
         this.updateFilledState(e.target.value);
     }
+
+  onClick(e) {
+    if(this.props.onClick) {
+      this.props.onClick();
+    } else {
+      e.stopPropagation();
+    }
+  }
 
     updateFilledState(val) {
         if(val && val.length)
@@ -46,6 +57,6 @@ export class InputText extends Component {
         let inputProps = Object.assign({}, this.props);
         delete inputProps.onInput;
 
-        return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput}/>;
+        return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onClick={this.onClick}/>;
     }
 }

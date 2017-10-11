@@ -66,7 +66,8 @@ export class MultiSelect extends Component {
         this.updateModel(event.originalEvent, newValue);
     }
 
-    onClick() {
+    onClick(e) {
+      e.stopPropagation();
         if(this.disabled) {
             return;
         }
