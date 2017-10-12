@@ -213,6 +213,7 @@ export class Dropdown extends Component {
         this.selectItem(event);
         this.focusInput.focus();
         this.hide();
+        event.stopPropagation();
     }
         
     onFilterInputChange(event) {

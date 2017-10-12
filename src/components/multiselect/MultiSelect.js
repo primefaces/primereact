@@ -64,6 +64,7 @@ export class MultiSelect extends Component {
             newValue = [...this.props.value || [], optionValue];
         
         this.updateModel(event.originalEvent, newValue);
+        event.stopPropagation();
     }
 
     onClick() {
