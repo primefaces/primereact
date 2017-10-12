@@ -40,6 +40,8 @@ export class ScrollableView extends Component {
     }
 
     componentDidMount() {
+        this.setScrollHeight();
+                
         if(!this.props.frozen) {
             this.alignScrollBar();
         }
@@ -56,6 +58,41 @@ export class ScrollableView extends Component {
                 this.calculateRowHeight();
                 this.scrollTableWrapper.style.height = this.props.totalRecords * this.rowHeight + 'px';
             }
+        }
+    }
+    
+    setScrollHeight() {
+        if(this.props.scrollHeight) {
+            if(this.props.scrollHeight.indexOf('%') !== -1) {
+                let datatableContainer = this.findDataTableContainer(this.container);
+                this.scrollBody.style.visibility = 'hidden';
+                this.scrollBody.style.height = '100px';         //temporary height to calculate static height
+                let containerHeight = DomHandler.getOuterHeight(datatableContainer);
+                let relativeHeight = DomHandler.getOuterHeight(datatableContainer.parentElement) * parseInt(this.props.scrollHeight, 10) / 100;
+                let staticHeight = containerHeight - 100;       //total height of headers, footers, paginators
+                let scrollBodyHeight = (relativeHeight - staticHeight);
+                
+                this.scrollBody.style.height = 'auto';
+                this.scrollBody.style.maxHeight = scrollBodyHeight + 'px';
+                this.scrollBody.style.visibility = 'visible';
+            }
+            else {
+                this.scrollBody.style.maxHeight = this.props.scrollHeight;
+            }
+        }
+    }
+    
+    findDataTableContainer(element) {
+        if(element) {
+            let el = element;
+            while(el && !DomHandler.hasClass(el, 'ui-datatable')) {
+                el = el.parentElement;
+            }
+
+            return el;
+        }
+        else {
+            return null;
         }
     }
 
@@ -133,7 +170,7 @@ export class ScrollableView extends Component {
                         </table>
                     </div>
                 </div>
-                <div className="ui-datatable-scrollable-body" style={{maxHeight: this.props.scrollHeight}} ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
+                <div className="ui-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
                     <div className="ui-datatable-scrollable-table-wrapper" ref={(el) => { this.scrollTableWrapper = el; }} >
                         <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
                             {this.props.body}
