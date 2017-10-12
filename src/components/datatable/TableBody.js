@@ -305,7 +305,8 @@ export class TableBody extends Component {
 
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
-                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}>{this.props.children}</BodyRow>
+                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}
+                            editable={this.props.editable}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);
 

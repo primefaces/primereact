@@ -24,7 +24,8 @@ export class Column extends Component {
         frozen: false,
         selectionMode: null,
         colSpan: null,
-        rowSpan: null
+        rowSpan: null,
+        editor: null
     }
 
     static propsTypes = {
@@ -48,6 +49,7 @@ export class Column extends Component {
         frozen: PropTypes.bool,
         selectionMode: PropTypes.string,
         colSpan: PropTypes.number,
-        rowSpan: PropTypes.number
+        rowSpan: PropTypes.number,
+        editor: PropTypes.func
     }
 }

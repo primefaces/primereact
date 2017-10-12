@@ -16,7 +16,7 @@ class Home extends Component {
                 <div className="introduction">
                     <h1>Your Favorite UI Framework</h1>
                     <h2>for REACT</h2>
-
+                    
                     <Link to="/setup" className="home-button">Get Started</Link>
                 </div>
                 <div className="features">
