@@ -10,7 +10,9 @@ export class Growl extends Component {
         closable: true,
         className: null,
         style: null,
-        onClear: null
+        baseZIndex: 0,
+        onClick: null,
+        onClose: null
     }
 
     static propTypes = {
@@ -18,42 +20,56 @@ export class Growl extends Component {
         closable: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
-        onClear: PropTypes.func
+        baseZIndex: PropTypes.number,
+        onClick: PropTypes.func,
+        onClose: PropTypes.func
     };
 
     constructor(props) {
         super(props);
-        this.state = {messages:this.props.value};
-        this.clear = this.clear.bind(this);
+        this.state = {
+            messages: this.props.value
+        };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({messages:nextProps.value});
+        this.setState({
+            messages:nextProps.value
+        });
     }
-
-    clear(event) {
-        this.setState({messages:[]});
-        if(this.props.onClear) {
-            this.props.onClear();
-        }
-        this.removed = true;
-        event.preventDefault();
-    }
-
+    
     remove(event, msg, index) {
-        var element = event.target.parentElement.parentElement;
+        let element = event.target.parentElement.parentElement;
         DomHandler.fadeOut(element, 250);
+        
         setTimeout(() => {
             this.removed = true;
-            var msgs = [...this.state.messages];
-            msgs.splice(index, 1);
-            this.setState({messages: msgs});
+            if(this.props.onClose) {
+                this.props.onClose({
+                    originalEvent: event,
+                    message: msg
+                });
+            }
+            this.setState({
+                messages: this.state.messages.filter((msg, i) => (i !== index))
+            });
         }, 250);
+    }
+    
+    onMessageClick(event, msg) {
+        if(this.props.onClick) {
+            this.props.onClick({
+                originalEvent: event,
+                message: msg
+            })
+        }
     }
 
     componentDidMount() {
-        this.container.style.zIndex=DomHandler.getZindex();
-        DomHandler.fadeIn(this.container, 250);
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.getZindex() + 1);
+        if(this.props.messages) {
+            DomHandler.fadeIn(this.container, 250);
+        }
     }
 
     componentDidUpdate() {
@@ -83,7 +99,7 @@ export class Growl extends Component {
                 'fa-check': severity === 'success'
             });
             
-            return <div className={messageClassName} aria-live="polite" key={msg.summary + msg.detail}>
+            return <div className={messageClassName} aria-live="polite" key={msg.summary + msg.detail} onClick={(event) => this.onMessageClick(event, msg)}>
                         <div className="ui-growl-item ui-helper-clearfix">
                             <div className="ui-growl-icon-close fa fa-close" onClick={(event) => this.remove(event, msg, index)}></div>
                             <span className={iconClassName}></span>

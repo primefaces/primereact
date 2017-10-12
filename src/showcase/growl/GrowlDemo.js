@@ -232,9 +232,9 @@ showMultiple() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onClear</td>
+                            <td>onRemove</td>
                             <td>-</td>
-                            <td>Callback to invoke when clear icon is clicked</td>
+                            <td>Callback to invoke when a message is removed with remove icon.</td>
                         </tr>
                     </tbody>
                 </table>
