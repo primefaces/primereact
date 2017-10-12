@@ -82,6 +82,7 @@ export class Dropdown extends Component {
     }
     
     onClick(event) {
+        event.stopPropagation();
         if(this.props.disabled) {
             return;
         }

@@ -6,12 +6,14 @@ export class InputTextarea extends Component {
 
     static defaultProps = {
         autoResize: false,
-        onInput: null
+        onInput: null,
+        onClick: null
     };
 
     static propTypes = {
         autoResize: PropTypes.bool,
-        onInput: PropTypes.func
+        onInput: PropTypes.func,
+        onClick: PropTypes.func
     };
     
     constructor(props) {
@@ -20,6 +22,7 @@ export class InputTextarea extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.onInput = this.onInput.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.state = {filled: false};
 
         this.textareaProps = Object.assign({}, this.props);
@@ -44,6 +47,14 @@ export class InputTextarea extends Component {
             this.resize();
         }
     }
+
+  onClick(e) {
+    if(this.props.onClick) {
+      this.props.onClick();
+    } else {
+      e.stopPropagation();
+    }
+  }
 
     resize () {
         let linesCount = 0,
@@ -88,6 +99,6 @@ export class InputTextarea extends Component {
             'ui-state-filled': this.state.filled
         });
 
-        return <textarea {...this.textareaProps} className={className} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>;
+        return <textarea {...this.textareaProps} className={className} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput} onClick={this.onClick}></textarea>;
     }
 }

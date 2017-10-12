@@ -67,7 +67,8 @@ export class MultiSelect extends Component {
         event.stopPropagation();
     }
 
-    onClick() {
+    onClick(e) {
+      e.stopPropagation();
         if(this.disabled) {
             return;
         }
