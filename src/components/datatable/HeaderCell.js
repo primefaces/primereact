@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
 import {RowCheckbox} from './RowCheckbox';
+import DomHandler from '../utils/DomHandler';
 
 export class HeaderCell extends Component {
 
@@ -14,10 +15,17 @@ export class HeaderCell extends Component {
 
     onClick(e) {
         if(this.props.sortable) {
-            this.props.onSort({
-                originalEvent: e,
-                sortField: this.props.field
-            });
+            let targetNode = e.target.nodeName;
+            console.log(targetNode);
+            if(targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || (DomHandler.hasClass(e.target, 'ui-clickable'))) {
+                return;
+            }
+            else {
+                this.props.onSort({
+                    originalEvent: e,
+                    sortField: this.props.field
+                });
+            }
         }
     }
 
