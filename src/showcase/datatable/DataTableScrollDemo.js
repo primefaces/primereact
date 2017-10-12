@@ -91,7 +91,7 @@ export class DataTableScrollDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Scroll</h1>
                         <p>Data scrolling with fixed header is available horizontally, vertically or both. ScrollHeight and ScrollWidth values can either be fixed pixels or percentages. Certain columns can be fixed as well. 

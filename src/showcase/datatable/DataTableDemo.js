@@ -1088,7 +1088,20 @@ export class DataTableExportDemo extends Component {
 
 `}
 </CodeHighlight>         
-            
+
+            <p>Virtual scrolling is enabled using virtualScroll property combined with lazy loading so that data is loaded on the fly during scrolling.</p>
+<CodeHighlight className="html">
+{`
+<DataTable value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
+    rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onLazyLoad={this.loadCarsLazy} style={{marginTop:'30px'}}>
+    <Column field="vin" header="Vin" />
+    <Column field="year" header="Year" />
+    <Column field="brand" header="Brand" />
+    <Column field="color" header="Color" />
+</DataTable>
+
+`}
+</CodeHighlight>  
 
             <h3>Lazy Loading</h3>
             <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. To implement lazy loading, 
@@ -1404,6 +1417,18 @@ export class DataTableLazyDemo extends Component {
                             <td>string</td>
                             <td>null</td>
                             <td>Height of the scroll viewport.</td>
+                        </tr>
+                        <tr>
+                            <td>virtualScroll</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the data should be loaded on demand during scroll.</td>
+                        </tr>
+                        <tr>
+                            <td>virtualScrollDelay</td>
+                            <td>number</td>
+                            <td>500</td>
+                            <td>Delay in virtual scroll before doing a call to lazy load.</td>
                         </tr>
                         <tr>
                             <td>frozenWidth</td>
