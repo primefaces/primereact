@@ -30,9 +30,38 @@ export class BodyCell extends Component {
             this.setState({
                 editing: true
             });
+            
+            if(this.documentEditListener)
+                this.editorClick = true;
+            else
+                this.bindDocumentEditListener();
         }
     }
     
+    bindDocumentEditListener() {
+        if(!this.documentEditListener) {
+            this.documentEditListener = (event) => {
+                if(!this.editorClick) {
+                    this.setState({
+                        editing: false
+                    });
+                    this.unbindDocumentEditListener();
+                }
+                
+                this.editorClick = false;    
+            };
+            
+            document.addEventListener('click', this.documentEditListener);
+        }
+    }
+    
+    unbindDocumentEditListener() {
+        if(this.documentEditListener) {
+            document.removeEventListener('click', this.documentEditListener);
+            this.documentEditListener = null;
+        }
+    }
+        
     componentDidUpdate() {
         if(this.container && this.props.editor) {
             let focusable = DomHandler.findSingle(this.container, 'input');
