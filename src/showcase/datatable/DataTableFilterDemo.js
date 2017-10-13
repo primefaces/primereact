@@ -94,7 +94,7 @@ export class DataTableFilterDemo extends Component {
                         globalFilter={this.state.globalFilter} filters={this.state.filters} onFilter={this.onFilter}>
                         <Column field="vin" header="Vin" filter={true} />
                         <Column field="year" header="Year" filter={true} />
-                        <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} filterMatchMode="equals" />
+                        <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} filterMatchMode="equals" sortable={true}/>
                         <Column field="color" header="Color" filter={true} filterElement={colorFilter} filterMatchMode="in" />
                     </DataTable>
                 </div>

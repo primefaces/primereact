@@ -13,6 +13,7 @@ export class BodyCell extends Component {
         this.onExpanderClick = this.onExpanderClick.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.onEditorFocus = this.onEditorFocus.bind(this);
     }
     
     onExpanderClick(event) {
@@ -27,7 +28,7 @@ export class BodyCell extends Component {
     }
     
     onKeyDown(event) {
-        if(event.which === 13) {
+        if(event.which === 13 || event.which === 9) {
             this.switchCellToViewMode();
         }
     }
@@ -43,6 +44,10 @@ export class BodyCell extends Component {
             else
                 this.bindDocumentEditListener();
         }
+    }
+    
+    onEditorFocus(event) {
+        this.onClick(event);
     }
     
     bindDocumentEditListener() {
@@ -87,10 +92,22 @@ export class BodyCell extends Component {
         
     componentDidUpdate() {
         if(this.container && this.props.editor) {
-            let focusable = DomHandler.findSingle(this.container, 'input');
-            if(focusable) {
-                focusable.focus();
+            
+
+            if(this.state.editing) {
+                let focusable = DomHandler.findSingle(this.container, 'input');
+                if(focusable) {
+                    focusable.focus();
+                }
+                
+                this.keyHelper.tabIndex = -1;
             }
+            else {
+                setTimeout(() => {
+                    this.keyHelper.removeAttribute('tabindex');
+                }, 50);
+                
+            }    
         }
     }
 
@@ -132,10 +149,11 @@ export class BodyCell extends Component {
         if(this.props.responsive) {
             header = <span className="ui-column-title">{this.props.header}</span>;
         }
-               
+                       
         return (
             <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}>
                 {header}
+                {this.props.editable && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}></a>}
                 <span className="ui-cell-data">{content}</span>
             </td>
         );
