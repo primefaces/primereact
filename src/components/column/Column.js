@@ -25,7 +25,8 @@ export class Column extends Component {
         selectionMode: null,
         colSpan: null,
         rowSpan: null,
-        editor: null
+        editor: null,
+        editorValidator: null
     }
 
     static propsTypes = {
@@ -50,6 +51,7 @@ export class Column extends Component {
         selectionMode: PropTypes.string,
         colSpan: PropTypes.number,
         rowSpan: PropTypes.number,
-        editor: PropTypes.func
+        editor: PropTypes.func,
+        editorValidator: PropTypes.func
     }
 }

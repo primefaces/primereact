@@ -43,7 +43,7 @@ export class BodyRow extends Component {
         let cells = React.Children.map(columns, (column, i) => {
                         return <BodyCell key={i} {...column.props} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} 
                                     onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected}
-                                    editable={this.props.editable}/>;
+                                    editable={this.props.editable} />;
                     });
 
         return (

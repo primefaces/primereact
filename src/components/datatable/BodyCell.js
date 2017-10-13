@@ -12,6 +12,7 @@ export class BodyCell extends Component {
         this.state = {};
         this.onExpanderClick = this.onExpanderClick.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
     
     onExpanderClick(event) {
@@ -25,6 +26,12 @@ export class BodyCell extends Component {
         event.preventDefault();
     }
     
+    onKeyDown(event) {
+        if(event.which === 13) {
+            this.switchCellToViewMode();
+        }
+    }
+    
     onClick(event) {
         if(this.props.editable) {
             this.setState({
@@ -32,7 +39,7 @@ export class BodyCell extends Component {
             });
             
             if(this.documentEditListener)
-                this.editorClick = true;
+                this.cellClick = true;
             else
                 this.bindDocumentEditListener();
         }
@@ -41,17 +48,33 @@ export class BodyCell extends Component {
     bindDocumentEditListener() {
         if(!this.documentEditListener) {
             this.documentEditListener = (event) => {
-                if(!this.editorClick) {
-                    this.setState({
-                        editing: false
-                    });
-                    this.unbindDocumentEditListener();
+                if(!this.cellClick) {
+                    this.switchCellToViewMode();
                 }
                 
-                this.editorClick = false;    
+                this.cellClick = false;
             };
             
             document.addEventListener('click', this.documentEditListener);
+        }
+    }
+    
+    closeCell() {
+        this.setState({
+            editing: false
+        });
+        this.unbindDocumentEditListener();
+    }
+    
+    switchCellToViewMode() {
+        if(this.props.editorValidator) {
+            let valid = this.props.editorValidator(this.props);
+            if(valid) {
+                this.closeCell();
+            }
+        }
+        else {
+            this.closeCell();
         }
     }
     
@@ -111,7 +134,7 @@ export class BodyCell extends Component {
         }
                
         return (
-            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick}>
+            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}>
                 {header}
                 <span className="ui-cell-data">{content}</span>
             </td>

@@ -19,6 +19,7 @@ export class DataTableEditDemo extends Component {
         this.yearEditor = this.yearEditor.bind(this);
         this.brandEditor = this.brandEditor.bind(this);
         this.colorEditor = this.colorEditor.bind(this);
+        this.requiredValidator = this.requiredValidator.bind(this);
     }
 
     componentDidMount() {
@@ -32,7 +33,7 @@ export class DataTableEditDemo extends Component {
     }
     
     vinEditor(props) {
-        return <InputText type="text" value={this.state.cars[props.rowIndex].vin} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+        return <InputText type="text" value={this.state.cars[props.rowIndex].vin} onChange={(e) => this.onEditorValueChange(props, e.target.value)} required={true} />;
     }
     
     yearEditor(props) {
@@ -45,6 +46,11 @@ export class DataTableEditDemo extends Component {
     
     colorEditor(props) {
         return <InputText type="text" value={this.state.cars[props.rowIndex].color} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+    }
+    
+    requiredValidator(props) {
+        let value = props.rowData[props.field];
+        return value && value.length > 0;
     }
 
     render() {
@@ -63,11 +69,12 @@ export class DataTableEditDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} editable={true}>
-                        <Column field="vin" header="Vin" editor={this.vinEditor}/>
+                        <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
                         <Column field="year" header="Year" editor={this.yearEditor}/>
                         <Column field="brand" header="Brand" editor={this.brandEditor}/>
                         <Column field="color" header="Color" editor={this.colorEditor}/>
                     </DataTable>
+                    
                 </div>
 
                 <DataTableEditDemoDoc></DataTableEditDemoDoc>
