@@ -3,6 +3,7 @@ import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {InputText} from '../../components/inputtext/InputText';
 import {Dropdown} from '../../components/dropdown/Dropdown';
+import {Calendar} from '../../components/calendar/Calendar';
 import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -20,6 +21,7 @@ export class DataTableEditDemo extends Component {
         this.yearEditor = this.yearEditor.bind(this);
         this.brandEditor = this.brandEditor.bind(this);
         this.colorEditor = this.colorEditor.bind(this);
+        this.saleDateEditor = this.saleDateEditor.bind(this);
         this.requiredValidator = this.requiredValidator.bind(this);
     }
 
@@ -65,6 +67,18 @@ export class DataTableEditDemo extends Component {
         return <InputText type="text" value={this.state.cars[props.rowIndex].color} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
     
+    saleDateEditor(props) {        
+        return (
+            <Calendar value={this.state.cars[props.rowIndex].saleDate}
+                    onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} />
+        );
+    }
+    
+    saleDateTemplate(rowData, column) {
+        let value = rowData['saleDate'];
+        return value ? (value.getMonth() + 1) + '/' + value.getDate() + '/' + value.getFullYear()  : '';
+    }
+    
     requiredValidator(props) {
         let value = props.rowData[props.field];
         return value && value.length > 0;
@@ -90,6 +104,7 @@ export class DataTableEditDemo extends Component {
                         <Column field="year" header="Year" editor={this.yearEditor}/>
                         <Column field="brand" header="Brand" editor={this.brandEditor}/>
                         <Column field="color" header="Color" editor={this.colorEditor}/>
+                        <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} body={this.saleDateTemplate} />
                     </DataTable>
                     
                 </div>
