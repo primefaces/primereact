@@ -61,6 +61,9 @@ export class DataTable extends Component {
         csvSeparator: ',',
         exportFilename: 'download',
         contextMenu: null,
+        rowGroupMode: null,
+        rowGroupHeaderTemplate: null,
+        rowGroupFooterTemplate: null,
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -125,6 +128,9 @@ export class DataTable extends Component {
         csvSeparator: PropTypes.string,
         exportFilename: PropTypes.string,
         contextMenu: PropTypes.any,
+        rowGroupMode: PropTypes.string,
+        rowGroupHeaderTemplate: PropTypes.func,
+        rowGroupFooterTemplate: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -803,7 +809,8 @@ export class DataTable extends Component {
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}
-                        editable={this.props.editable}>
+                        editable={this.props.editable} 
+                        groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}>
                         {columns}
                 </TableBody>;
     }

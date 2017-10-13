@@ -281,6 +281,18 @@ export class TableBody extends Component {
 
         return false;
     }
+    
+    renderRowGroupHeader(rowData, index) {
+        return (
+            <tr key={index + '_rowgroup'} className="ui-widget-header ui-rowgroup-header">
+                <td colSpan={React.Children.count(this.props.children)}>
+                    <span className="ui-rowgroup-header-name">
+                        {this.props.rowGroupHeaderTemplate(rowData)}
+                    </span>
+                </td>
+            </tr>
+        );
+    }
 
     render() {
         let className = classNames('ui-datatable-data ui-widget-content', {'ui-datatable-hoverable-rows': this.props.selectionMode});
@@ -288,6 +300,7 @@ export class TableBody extends Component {
         let rpp = this.props.rows||0;
         let first = this.props.first||0;
         let selectionEnabled = this.isSelectionEnabled();
+        let rowGroupMode = this.props.rowGroupMode;
 
         if(this.props.value && this.props.value.length) {
             rows = [];
@@ -302,6 +315,15 @@ export class TableBody extends Component {
                 let rowData = this.props.value[i];
                 let expanded = this.isRowExpanded(rowData);
                 let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
+                
+                if(rowGroupMode && rowGroupMode === 'subheader') {
+                    let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
+                    let previousRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.groupField);
+                    
+                    if(i === 0 || (currentRowFieldData !== previousRowFieldData)) {
+                        rows.push(this.renderRowGroupHeader(rowData, i));
+                    }
+                }
 
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}

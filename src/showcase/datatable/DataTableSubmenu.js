@@ -17,6 +17,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/lazy">&#9679; Lazy</Link></li>
                     <li><Link to="/datatable/scroll">&#9679; Scroll</Link></li>
                     <li><Link to="/datatable/colgroup">&#9679; ColGroup</Link></li>
+                    <li><Link to="/datatable/rowgroup">&#9679; RowGroup</Link></li>
                     <li><Link to="/datatable/rowexpand">&#9679; Expand</Link></li>
                     <li><Link to="/datatable/responsive">&#9679; Responsive</Link></li>
                     <li><Link to="/datatable/colresize">&#9679; ColResize</Link></li>
