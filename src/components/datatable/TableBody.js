@@ -284,12 +284,20 @@ export class TableBody extends Component {
     
     renderRowGroupHeader(rowData, index) {
         return (
-            <tr key={index + '_rowgroup'} className="ui-widget-header ui-rowgroup-header">
+            <tr key={index + '_rowgroupheader'} className="ui-widget-header ui-rowgroup-header">
                 <td colSpan={React.Children.count(this.props.children)}>
                     <span className="ui-rowgroup-header-name">
-                        {this.props.rowGroupHeaderTemplate(rowData)}
+                        {this.props.rowGroupHeaderTemplate(rowData, index)}
                     </span>
                 </td>
+            </tr>
+        );
+    }
+    
+    renderRowGroupFooter(rowData, index) {
+        return (
+            <tr key={index + '_rowgroupfooter'} className="ui-widget-header ui-rowgroup-footer">
+                {this.props.rowGroupFooterTemplate(rowData, index)}
             </tr>
         );
     }
@@ -301,6 +309,7 @@ export class TableBody extends Component {
         let first = this.props.first||0;
         let selectionEnabled = this.isSelectionEnabled();
         let rowGroupMode = this.props.rowGroupMode;
+        let hasSubheaderGrouping = (rowGroupMode && rowGroupMode === 'subheader');
 
         if(this.props.value && this.props.value.length) {
             rows = [];
@@ -316,7 +325,8 @@ export class TableBody extends Component {
                 let expanded = this.isRowExpanded(rowData);
                 let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
                 
-                if(rowGroupMode && rowGroupMode === 'subheader') {
+                //header row group
+                if(hasSubheaderGrouping) {
                     let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
                     let previousRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.groupField);
                     
@@ -325,6 +335,7 @@ export class TableBody extends Component {
                     }
                 }
 
+                //row content
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}
@@ -332,10 +343,21 @@ export class TableBody extends Component {
 
                 rows.push(bodyRow);
 
+                //row expansion
                 if(expanded) {
                     let expandedRowContent = this.props.rowExpansionTemplate(rowData);
                     let expandedRow = <tr className="ui-widget-content" key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
                     rows.push(expandedRow);
+                }
+                
+                //footer row group
+                if(hasSubheaderGrouping) {
+                    let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
+                    let nextRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i + 1], this.props.groupField);
+                    
+                    if((i === this.props.value.length - 1) || (currentRowFieldData !== nextRowFieldData)) {
+                        rows.push(this.renderRowGroupFooter(rowData, i));
+                    }
                 }
             }
         }

@@ -16,6 +16,7 @@ export class DataTableRowGroupDemo extends Component {
         
         this.carservice = new CarService()
         this.headerTemplate = this.headerTemplate.bind(this);
+        this.footerTemplate = this.footerTemplate.bind(this);
     }
     
     componentDidMount() {
@@ -24,6 +25,28 @@ export class DataTableRowGroupDemo extends Component {
     
     headerTemplate(data) {
         return data.brand;
+    }
+    
+    footerTemplate(data, index) {
+        return ([
+                    <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>,
+                    <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
+            ]
+        );
+    }
+    
+    calculateGroupTotal(brand) {
+        let total = 0;
+        
+        if(this.state.cars) {
+            for(let car of this.state.cars) {
+                if(car.brand === brand) {
+                    total += car.price;
+                }
+            }
+        }
+
+        return total;
     }
 
     render() {
@@ -39,9 +62,9 @@ export class DataTableRowGroupDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"     
-                        rowGroupHeaderTemplate={this.headerTemplate}>           
-                        <Column field="vin" header="Brand" />
+                    <DataTable header="SubHeader Groups" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"     
+                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>           
+                        <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="color" header="Color" />
                         <Column field="price" header="Price" />
