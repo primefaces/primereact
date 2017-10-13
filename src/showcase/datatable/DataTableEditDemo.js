@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {InputText} from '../../components/inputtext/InputText';
+import {Dropdown} from '../../components/dropdown/Dropdown';
 import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -33,7 +34,7 @@ export class DataTableEditDemo extends Component {
     }
     
     vinEditor(props) {
-        return <InputText type="text" value={this.state.cars[props.rowIndex].vin} onChange={(e) => this.onEditorValueChange(props, e.target.value)} required={true} />;
+        return <InputText type="text" value={this.state.cars[props.rowIndex].vin} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
     
     yearEditor(props) {
@@ -41,7 +42,23 @@ export class DataTableEditDemo extends Component {
     }
     
     brandEditor(props) {
-        return <InputText type="text" value={this.state.cars[props.rowIndex].brand} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+        let brands = [
+            {label: 'Audi', value: 'Audi'},
+            {label: 'BMW', value: 'BMW'},
+            {label: 'Fiat', value: 'Fiat'},
+            {label: 'Ford', value: 'Ford'},
+            {label: 'Honda', value: 'Honda'},
+            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Mercedes', value: 'Mercedes'},
+            {label: 'Renault', value: 'Renault'},
+            {label: 'VW', value: 'VW'},
+            {label: 'Volvo', value: 'Volvo'}
+        ];
+        
+        return (
+            <Dropdown value={this.state.cars[props.rowIndex].brand} options={brands} 
+                    onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
+        );
     }
     
     colorEditor(props) {
