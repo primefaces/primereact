@@ -96,14 +96,12 @@ export class DataTableEditDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Edit</h1>
-                        <p>Incell editing is enabled by setting editable property true both on datatable and columns, 
-                        when a cell is clicked edit mode is activated, clicking outside of cell or hitting the enter 
-                        key switches back to view mode after updating the value.</p>
+                        <p>Incell editing is enabled defining editor property on columns.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} editable={true}>
+                    <DataTable value={this.state.cars}>
                         <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
                         <Column field="year" header="Year" editor={this.yearEditor}/>
                         <Column field="brand" header="Brand" editor={this.brandEditor}/>

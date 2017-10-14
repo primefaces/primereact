@@ -34,7 +34,7 @@ export class BodyCell extends Component {
     }
     
     onClick(event) {
-        if(this.props.editable) {
+        if(this.props.editor) {
             this.setState({
                 editing: true
             });
@@ -152,7 +152,7 @@ export class BodyCell extends Component {
             <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan}>
                 {header}
-                {this.props.editable && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}></a>}
+                {this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}></a>}
                 <span className="ui-cell-data">{content}</span>
             </td>
         );

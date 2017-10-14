@@ -56,8 +56,7 @@ export class BodyRow extends Component {
             }
             
             let cell = <BodyCell key={i} {...column.props} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} 
-                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected}
-                        editable={this.props.editable} />;
+                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected} />;
                         
             cells.push(cell);
         }

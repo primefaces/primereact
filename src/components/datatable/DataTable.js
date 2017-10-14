@@ -48,7 +48,6 @@ export class DataTable extends Component {
         resizableColumns: false,
         columnResizeMode: 'fit',
         reorderableColumns: false,
-        editable: false,
         filters: null,
         globalFilter: null,
         scrollable: false,
@@ -115,7 +114,6 @@ export class DataTable extends Component {
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
         reorderableColumns: PropTypes.bool,
-        editable: PropTypes.bool,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
         scrollable: PropTypes.bool,
@@ -809,7 +807,6 @@ export class DataTable extends Component {
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}
-                        editable={this.props.editable} 
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.state.sortField}>
                         {columns}
