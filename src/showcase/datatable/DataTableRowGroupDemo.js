@@ -57,7 +57,7 @@ export class DataTableRowGroupDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Row Grouping</h1>
-                        <p>Rows can either be grouped by a separate grouping row or using rowspan. Additional optional features are toggleable groups and footer rows.</p>
+                        <p>Rows can either be grouped by a separate grouping row or using rowspan.</p>
                     </div>
                 </div>
 
