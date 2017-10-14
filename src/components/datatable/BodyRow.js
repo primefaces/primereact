@@ -40,12 +40,28 @@ export class BodyRow extends Component {
     render() {
         let columns = React.Children.toArray(this.props.children);
         let className = classNames('ui-widget-content', {'ui-state-highlight': this.props.selected, 'ui-datatable-even': (this.props.rowIndex % 2 === 0), 'ui-datatable-odd': (this.props.rowIndex % 2 === 1)}, this.props.className);
-        let cells = React.Children.map(columns, (column, i) => {
-                        return <BodyCell key={i} {...column.props} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} 
-                                    onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected}
-                                    editable={this.props.editable} />;
-                    });
-
+        let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
+        let cells = [];
+        
+        for(let i = 0; i < columns.length; i++) {
+            let column = columns[i];
+            let rowSpan;
+            if(hasRowSpanGrouping) {
+                if(this.props.sortField === column.props.field) {
+                    if(this.props.groupRowSpan)
+                        rowSpan = this.props.groupRowSpan;
+                    else
+                        continue;
+                }
+            }
+            
+            let cell = <BodyCell key={i} {...column.props} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} 
+                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected}
+                        editable={this.props.editable} />;
+                        
+            cells.push(cell);
+        }
+        
         return (
             <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick}>
                 {cells}

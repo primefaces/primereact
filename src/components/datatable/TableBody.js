@@ -310,6 +310,7 @@ export class TableBody extends Component {
         let selectionEnabled = this.isSelectionEnabled();
         let rowGroupMode = this.props.rowGroupMode;
         let hasSubheaderGrouping = (rowGroupMode && rowGroupMode === 'subheader');
+        let rowSpanGrouping = (rowGroupMode && rowGroupMode === 'rowspan');
 
         if(this.props.value && this.props.value.length) {
             rows = [];
@@ -324,6 +325,7 @@ export class TableBody extends Component {
                 let rowData = this.props.value[i];
                 let expanded = this.isRowExpanded(rowData);
                 let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
+                let groupRowSpan;
                 
                 //header row group
                 if(hasSubheaderGrouping) {
@@ -334,12 +336,35 @@ export class TableBody extends Component {
                         rows.push(this.renderRowGroupHeader(rowData, i));
                     }
                 }
+                
+                if(rowSpanGrouping) {                    
+                    let rowSpanIndex = i;
+                    let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.sortField);
+                    let shouldCountRowSpan = (i === 0) || ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.sortField) !== currentRowFieldData;
+                    
+                    if(shouldCountRowSpan) {
+                        let nextRowFieldData = currentRowFieldData;
+                        groupRowSpan = 0;
+                        
+                        while(currentRowFieldData === nextRowFieldData) {
+                            groupRowSpan++;
+                            let nextRowData = this.props.value[++rowSpanIndex];
+                            if(nextRowData) {
+                                nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, this.props.sortField);
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 //row content
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}
-                            editable={this.props.editable}>{this.props.children}</BodyRow>
+                            editable={this.props.editable} sortField={this.props.sortField} 
+                            rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);
 

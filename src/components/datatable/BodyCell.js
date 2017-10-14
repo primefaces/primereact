@@ -92,8 +92,6 @@ export class BodyCell extends Component {
         
     componentDidUpdate() {
         if(this.container && this.props.editor) {
-            
-
             if(this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
                 if(focusable) {
@@ -151,7 +149,8 @@ export class BodyCell extends Component {
         }
                        
         return (
-            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}>
+            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
+                rowSpan={this.props.rowSpan}>
                 {header}
                 {this.props.editable && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}></a>}
                 <span className="ui-cell-data">{content}</span>

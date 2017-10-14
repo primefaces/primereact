@@ -810,7 +810,8 @@ export class DataTable extends Component {
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}
                         editable={this.props.editable} 
-                        groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}>
+                        groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
+                        sortField={this.state.sortField}>
                         {columns}
                 </TableBody>;
     }
