@@ -318,11 +318,23 @@ export class DataTableDemo extends Component {
                             <td>null</td>
                             <td>Number of columns to span for grouping.</td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>rowSpan</td>
                             <td>number</td>
                             <td>null</td>
-                            <td>Number of rows to span for grouping..</td>
+                            <td>Number of rows to span for grouping.</td>
+                        </tr>
+                        <tr>
+                            <td>editor</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function to provide the cell editor input.</td>
+                        </tr>
+                        <tr>
+                            <td>editorValidator</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Validator function to validate the cell input value.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -822,6 +834,85 @@ export class DataTableSelectionDemo extends Component {
 `}
 </CodeHighlight>
 
+            <h3>Incell Editing</h3>
+            <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the editor property
+            that refers to a function to return an input element for the editing.</p>
+            
+<CodeHighlight className="html">
+{`
+<DataTable value={this.state.cars}>
+    <Column field="vin" header="Vin" editor={this.vinEditor} />
+    <Column field="brand" header="Brand" editor={this.brandEditor}/>
+    <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} >
+</DataTable>
+
+`}
+</CodeHighlight>
+
+<CodeHighlight className="javascript">
+{`
+onEditorValueChange(props, value) {
+    let updatedCars = [...this.state.cars];
+    updatedCars[props.rowIndex][props.field] = value;
+    this.setState({cars: updatedCars});
+}
+    
+vinEditor(props) {
+    return <InputText type="text" value={this.state.cars[props.rowIndex]['vin']} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+}
+
+brandEditor(props) {
+    let brands = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Ford', value: 'Ford'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+    
+    return (
+        <Dropdown value={this.state.cars[props.rowIndex].brand} options={brands} 
+                onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
+    );
+}
+
+saleDateEditor(props) {        
+    return (
+        <Calendar value={this.state.cars[props.rowIndex].saleDate}
+                onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} />
+    );
+}
+    
+`}
+</CodeHighlight>
+
+            <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is valid. In order
+            to decide whether to keep the cell open or not, provide a editorValidator function that validates the value.</p>
+<CodeHighlight className="html">
+{`
+<DataTable value={this.state.cars}>
+    <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
+    <Column field="brand" header="Brand" editor={this.brandEditor}/>
+    <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} >
+</DataTable>
+
+`}
+</CodeHighlight>
+            
+<CodeHighlight className="javascript">
+{`
+requiredValidator(props) {
+    let value = props.rowData[props.field];
+    return value && value.length > 0;
+}
+`}
+</CodeHighlight>
+
             <h3>ContextMenu</h3>
             <p>DataTable provides exclusive integration with ContextMenu by binding the reference of a menu to the contextMenu property.</p>
 <CodeHighlight className="javascript">
@@ -887,6 +978,7 @@ export class DataTableContextMenuDemo extends Component {
 `}
 </CodeHighlight>
 
+            
 
             <h3>Expandable Rows</h3>
             <p>Row expansion allows displaying detailed content for a particular row. To use this feature, add an expander column, define a rowExpansionTemplate as a function to return the expanded content and bind to
@@ -1028,6 +1120,83 @@ export class DataTableExportDemo extends Component {
 
 `}
 </CodeHighlight>
+
+            <h3>RowGrouping</h3>
+            <p>RowGrouping has two modes defined be the rowGroupMode property, in "subheader" option rows are grouped by a groupField and in "rowspan" mode grouping
+            is done based on the sort field. In both cases, data should be sorted initally using the properties such as sortField and sortOrder. In "subheader" mode,
+            rowGroupHeaderTemplate property should be defined to provide the content of the header and optionally rowGroupFooterTemplate is available to provide a footer
+            for the group.</p>
+            
+            <CodeHighlight className="javascript">
+            {`
+export class DataTableRowGroupDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            car: null
+        };
+        
+        this.carservice = new CarService()
+        this.headerTemplate = this.headerTemplate.bind(this);
+        this.footerTemplate = this.footerTemplate.bind(this);
+    }
+    
+    componentDidMount() {
+        this.carservice.getCarsMedium().then(data => this.setState({cars: data}));
+    }
+    
+    headerTemplate(data) {
+        return data.brand;
+    }
+    
+    footerTemplate(data, index) {
+        return ([
+                    <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>,
+                    <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
+            ]
+        );
+    }
+    
+    calculateGroupTotal(brand) {
+        let total = 0;
+        
+        if(this.state.cars) {
+            for(let car of this.state.cars) {
+                if(car.brand === brand) {
+                    total += car.price;
+                }
+            }
+        }
+
+        return total;
+    }
+
+    render() {
+        return (
+            <div>
+                <DataTable header="SubHeader" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"     
+                    rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>           
+                    <Column field="vin" header="Vin" />
+                    <Column field="year" header="Year" />
+                    <Column field="color" header="Color" />
+                    <Column field="price" header="Price" />
+                </DataTable>
+                
+                <DataTable header="RowSpan" value={this.state.cars} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupField="brand"     
+                    style={{marginTop:'30px'}}>    
+                    <Column field="brand" header="Brand" />       
+                    <Column field="year" header="Year" />
+                    <Column field="color" header="Color" />
+                    <Column field="vin" header="Vin" />
+                </DataTable>
+            </div>
+        );
+    }
+}
+
+            `}
+            </CodeHighlight>
 
             <h3>Scrolling</h3>
             <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using scrollable property and scrollHeight to define the viewport height.</p>
@@ -1466,6 +1635,24 @@ export class DataTableLazyDemo extends Component {
                             <td>null</td>
                             <td>Context menu items.</td>
                         </tr>
+                        <tr>
+                            <td>rowGroupMode</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Defines the row grouping mode, valid values are "subheader" and "rowgroup".</td>
+                        </tr>
+                        <tr>
+                            <td>rowGroupHeaderTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function to provide the content of row group header.</td>
+                        </tr>
+                        <tr>
+                            <td>rowGroupFooterTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function to provide the content of row group footer.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -1619,10 +1806,6 @@ export class DataTableLazyDemo extends Component {
                             <td>Data cell in body.</td>
                         </tr>
                         <tr>
-                            <td>ui-cell-editor</td>
-                            <td>Input element for incell editing.</td>
-                        </tr>
-                        <tr>
                             <td>ui-datatable-scrollable-header</td>
                             <td>Container of header in a scrollable table.</td>
                         </tr>
@@ -1641,6 +1824,14 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>ui-datatable-emptymessage</td>
                             <td>Cell containing the empty message.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-rowgroup-header</td>
+                            <td>Header of a rowgroup.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-rowgroup-footer</td>
+                            <td>Footer of a rowgroup.</td>
                         </tr>
                     </tbody>
                 </table>
