@@ -62,6 +62,7 @@ import {DataTableContextMenuDemo} from './showcase/datatable/DataTableContextMen
 import {DataTableResponsiveDemo} from './showcase/datatable/DataTableResponsiveDemo';
 import {DataTableEditDemo} from './showcase/datatable/DataTableEditDemo';
 import {DataTableRowGroupDemo} from './showcase/datatable/DataTableRowGroupDemo';
+import {DataTableStyleDemo} from './showcase/datatable/DataTableStyleDemo';
 import {OrderListDemo} from './showcase/orderlist/OrderListDemo';
 import {PickListDemo} from './showcase/picklist/PickListDemo';
 import {ScheduleDemo} from './showcase/schedule/ScheduleDemo';
@@ -160,6 +161,7 @@ ReactDOM.render(
                 <Route path="/datatable/edit" component={DataTableEditDemo} />
                 <Route path="/datatable/rowgroup" component={DataTableRowGroupDemo} />
                 <Route path="/datatable/crud" component={DataTableCrudDemo} />
+                <Route path="/datatable/style" component={DataTableStyleDemo} />
                 <Route path="/orderlist" component={OrderListDemo} />
                 <Route path="/picklist" component={PickListDemo} />
                 <Route path="/schedule" component={ScheduleDemo} />

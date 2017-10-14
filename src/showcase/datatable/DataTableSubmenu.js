@@ -20,6 +20,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/rowgroup">&#9679; RowGroup</Link></li>
                     <li><Link to="/datatable/rowexpand">&#9679; Expand</Link></li>
                     <li><Link to="/datatable/responsive">&#9679; Responsive</Link></li>
+                    <li><Link to="/datatable/style">&#9679; Style</Link></li>
                     <li><Link to="/datatable/colresize">&#9679; ColResize</Link></li>
                     <li><Link to="/datatable/colreorder">&#9679; ColReorder</Link></li>
                     <li><Link to="/datatable/coltoggle">&#9679; ColToggle</Link></li>

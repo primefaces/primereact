@@ -61,6 +61,7 @@ export class DataTable extends Component {
         exportFilename: 'download',
         contextMenu: null,
         rowGroupMode: null,
+        rowClassName: null,
         rowGroupHeaderTemplate: null,
         rowGroupFooterTemplate: null,
         onColumnResizeEnd: null,
@@ -127,6 +128,7 @@ export class DataTable extends Component {
         exportFilename: PropTypes.string,
         contextMenu: PropTypes.any,
         rowGroupMode: PropTypes.string,
+        rowClassName: PropTypes.func,
         rowGroupHeaderTemplate: PropTypes.func,
         rowGroupFooterTemplate: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
@@ -808,7 +810,7 @@ export class DataTable extends Component {
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.state.sortField}>
+                        sortField={this.state.sortField} rowClassName={this.props.rowClassName}>
                         {columns}
                 </TableBody>;
     }

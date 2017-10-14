@@ -39,7 +39,12 @@ export class BodyRow extends Component {
 
     render() {
         let columns = React.Children.toArray(this.props.children);
-        let className = classNames('ui-widget-content', {'ui-state-highlight': this.props.selected, 'ui-datatable-even': (this.props.rowIndex % 2 === 0), 'ui-datatable-odd': (this.props.rowIndex % 2 === 1)}, this.props.className);
+        let conditionalStyles = {'ui-state-highlight': this.props.selected, 'ui-datatable-even': (this.props.rowIndex % 2 === 0), 'ui-datatable-odd': (this.props.rowIndex % 2 === 1)};
+        if(this.props.rowClassName) {
+            let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
+            conditionalStyles = {...conditionalStyles, ...rowClassNameCondition};
+        }
+        let className = classNames('ui-widget-content', conditionalStyles);
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
         

@@ -362,7 +362,7 @@ export class TableBody extends Component {
                 //row content
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
-                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected}
+                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} rowClassName={this.props.rowClassName}
                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);

@@ -1653,6 +1653,12 @@ export class DataTableLazyDemo extends Component {
                             <td>null</td>
                             <td>Function to provide the content of row group footer.</td>
                         </tr>
+                        <tr>
+                            <td>rowClassName</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
