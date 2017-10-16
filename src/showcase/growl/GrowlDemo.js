@@ -102,18 +102,10 @@ import {Growl} from 'primereact/components/growl/Growl';
             <p>Here are the possible values for the severity of a message.</p>
             
             <ul>
-                <li>
-                    success
-                </li>
-                <li>
-                    info
-                </li>
-                <li>
-                    warn
-                </li>
-                <li>
-                    error
-                </li>
+                <li>success</li>
+                <li>info</li>
+                <li>warn</li>
+                <li>error</li>
             </ul>
             
             <h3>Showing Messages</h3>
@@ -216,6 +208,12 @@ showMultiple() {
                             <td>null</td>
                             <td>Inline style of the element.</td>
                         </tr>
+                        <tr>
+                            <td>baseZIndex</td>
+                            <td>number</td>
+                            <td>0</td>
+                            <td>Base zIndex value to use in layering.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -232,8 +230,15 @@ showMultiple() {
                     </thead>
                     <tbody>
                         <tr>
+                            <td>onClick</td>
+                            td>event.originalEvent: Original event <br />
+                               event.messages: Clicked message instance </td>
+                            <td>Callback to invoke when a message is clicked.</td>
+                        </tr>
+                        <tr>
                             <td>onRemove</td>
-                            <td>-</td>
+                            td>event.originalEvent: Original event <br />
+                               event.messages: Closed message instance </td>
                             <td>Callback to invoke when a message is removed with remove icon.</td>
                         </tr>
                     </tbody>
