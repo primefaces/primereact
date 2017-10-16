@@ -31,9 +31,14 @@
     font-weight: bold;
 }
 
+.ui-autocomplete .ui-autocomplete-panel {
+    min-width: 100%;
+}
+
 .ui-autocomplete-panel {
     position: absolute;
     overflow: auto;
+    display: none;
 }
 
 .ui-autocomplete-panel .ui-autocomplete-list {

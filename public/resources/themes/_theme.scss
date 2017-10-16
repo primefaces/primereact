@@ -8,6 +8,16 @@
     }
 }
 
+@mixin highlight-element {
+    border-color: $stateHighlightBorderColor;
+    background: $stateHighlightBgColor;
+    color: $stateHighlightTextColor;
+    
+    a {
+        color: $stateHighlightTextColor;
+    }
+}
+
 @mixin icon-override($icon) {
     background: none !important;
     display: inline-block;
@@ -190,6 +200,12 @@
             border-color: $stateFocusBorderColor;
             
         }
+    }
+}
+
+.ui-autocomplete-panel {
+    .ui-autocomplete-list-item:hover {
+        @include highlight-element();
     }
 }
 
