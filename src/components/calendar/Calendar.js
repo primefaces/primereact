@@ -151,7 +151,7 @@ export class Calendar extends Component {
         this.onDatePickerClick = this.onDatePickerClick.bind(this);
     }
 
-    createMonth(month, year) {
+    createMonth(month, year, minDate, maxDate) {
         let dates = [];
         let firstDay = this.getFirstDayOfMonthIndex(month, year);
         let daysLength = this.getDaysCountInMonth(month, year);
@@ -166,13 +166,13 @@ export class Calendar extends Component {
                 for(let j = (prevMonthDaysLength - firstDay + 1); j <= prevMonthDaysLength; j++) {
                     let prev = this.getPreviousMonthAndYear(month, year);
                     week.push({day: j, month: prev.month, year: prev.year, otherMonth: true, 
-                            today: this.isToday(today, j, prev.month, prev.year), selectable: this.isSelectable(j, prev.month, prev.year)});
+                            today: this.isToday(today, j, prev.month, prev.year), selectable: this.isSelectable(j, prev.month, prev.year, minDate, maxDate)});
                 }
                 
                 let remainingDaysLength = 7 - week.length;
                 for(let j = 0; j < remainingDaysLength; j++) {
                     week.push({day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
-                            selectable: this.isSelectable(dayNo, month, year)});
+                            selectable: this.isSelectable(dayNo, month, year, minDate, maxDate)});
                     dayNo++;
                 }
             }
@@ -182,11 +182,11 @@ export class Calendar extends Component {
                         let next = this.getNextMonthAndYear(month, year);
                         week.push({day: dayNo - daysLength, month: next.month, year: next.year, otherMonth:true, 
                                     today: this.isToday(today, dayNo - daysLength, next.month, next.year),
-                                    selectable: this.isSelectable((dayNo - daysLength), next.month, next.year)});
+                                    selectable: this.isSelectable((dayNo - daysLength), next.month, next.year, minDate, maxDate)});
                     }
                     else {
                         week.push({day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
-                             selectable: this.isSelectable(dayNo, month, year)});
+                             selectable: this.isSelectable(dayNo, month, year, minDate, maxDate)});
                     }
                     
                     dayNo++;
@@ -283,7 +283,7 @@ export class Calendar extends Component {
         this.setState({
             currentMonth: month,
             currentYear: year,
-            dates: this.createMonth(month, year)
+            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
         });
         
         event.preventDefault();
@@ -313,7 +313,7 @@ export class Calendar extends Component {
         this.setState({
             currentMonth: month,
             currentYear: year,
-            dates: this.createMonth(month, year)
+            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
         });
         
         event.preventDefault();
@@ -545,38 +545,38 @@ export class Calendar extends Component {
         return today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
     }
     
-    isSelectable(day, month, year) {
+    isSelectable(day, month, year, minDate, maxDate) {
         let validMin = true;
         let validMax = true;
         let validDate = true;
         let validDay = true;
         
-        if(this.props.minDate) {
-             if(this.props.minDate.getFullYear() > year) {
+        if(minDate) {
+             if(minDate.getFullYear() > year) {
                  validMin = false;
              }
-             else if(this.props.minDate.getFullYear() === year) {
-                 if(this.props.minDate.getMonth() > month) {
+             else if(minDate.getFullYear() === year) {
+                 if(minDate.getMonth() > month) {
                      validMin = false;
                  }
-                 else if(this.props.minDate.getMonth() === month) {
-                     if(this.props.minDate.getDate() > day) {
+                 else if(minDate.getMonth() === month) {
+                     if(minDate.getDate() > day) {
                          validMin = false;
                      }
                  }
              }  
         }
         
-        if(this.props.maxDate) {
-             if(this.props.maxDate.getFullYear() < year) {
+        if(maxDate) {
+             if(maxDate.getFullYear() < year) {
                  validMax = false;
              }
-             else if(this.props.maxDate.getFullYear() === year) {
-                 if(this.props.maxDate.getMonth() < month) {
+             else if(maxDate.getFullYear() === year) {
+                 if(maxDate.getMonth() < month) {
                      validMax = false;
                  }
-                 else if(this.props.maxDate.getMonth() === month) {
-                     if(this.props.maxDate.getDate() < day) {
+                 else if(maxDate.getMonth() === month) {
+                     if(maxDate.getDate() < day) {
                          validMax = false;
                      }
                  }
@@ -676,7 +676,7 @@ export class Calendar extends Component {
         let month = parseInt(m, 10);
         this.setState({
             currentMonth: month,
-            dates: this.createMonth(month, this.state.currentYear)
+            dates: this.createMonth(month, this.state.currentYear, this.props.minDate, this.props.maxDate)
         });
     }
     
@@ -684,7 +684,7 @@ export class Calendar extends Component {
         let year = parseInt(y, 10);
         this.setState({
             currentYear: year,
-            dates: this.createMonth(this.state.currentMonth, year)
+            dates: this.createMonth(this.state.currentMonth, year, this.props.minDate, this.props.maxDate)
         });
     }
     
@@ -1281,7 +1281,7 @@ export class Calendar extends Component {
         this.setState({
             currentMonth: month,
             currentYear: year,
-            dates: this.createMonth(month, year)
+            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
         });
         
         this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
@@ -1300,7 +1300,8 @@ export class Calendar extends Component {
     }
     
     shouldComponentUpdate(nextProps, nextState) {
-        return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear);
+        return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear)
+            || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate);
     }
     
     componentWillReceiveProps(nextProps) {
@@ -1308,11 +1309,12 @@ export class Calendar extends Component {
         let month =  date.getMonth();
         let year = date.getFullYear();
         
-        if(month !== this.state.currentMonth || year !== this.state.currentYear) {
+        if((month !== this.state.currentMonth) || (year !== this.state.currentYear) ||
+            (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate)) {
             this.setState({
                 currentMonth: month,
                 currentYear: year,
-                dates: this.createMonth(month, year)
+                dates: this.createMonth(month, year, nextProps.minDate, nextProps.maxDate)
             });
         }
     }
