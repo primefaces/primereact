@@ -19,7 +19,8 @@ export class TableHeader extends Component {
     render() {
         let content;
         if(this.props.columnGroup) {
-            content = this.props.columnGroup.props.children.map((row, i) => {
+            let rows = React.Children.toArray(this.props.columnGroup.props.children);
+            content = rows.map((row, i) => {
                 return <tr key={i} className="ui-state-default">{this.createHeaderCells(row)}</tr>;
             });
         }

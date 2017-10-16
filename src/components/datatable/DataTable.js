@@ -41,6 +41,8 @@ export class DataTable extends Component {
         metaKeySelection: true,
         headerColumnGroup: null,
         footerColumnGroup: null,
+        frozenHeaderColumnGroup: null,
+        frozenFooterColumnGroup: null,
         rowExpansionTemplate: null,
         expandedRows: null,
         responsive: false,
@@ -106,8 +108,10 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
-        headerColumnGroup: PropTypes.object,
-        footerColumnGroup: PropTypes.object,
+        headerColumnGroup: PropTypes.element,
+        footerColumnGroup: PropTypes.element,
+        frozenHeaderColumnGroup: PropTypes.element,
+        frozenFooterColumnGroup: PropTypes.element,
         rowExpansionTemplate: PropTypes.func,
         expandedRows: PropTypes.array,
         onRowToggle: PropTypes.func,
@@ -792,8 +796,8 @@ export class DataTable extends Component {
         return scrollableColumns;
     }
 
-    createTableHeader(columns) {
-        return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={this.props.headerColumnGroup}
+    createTableHeader(columns, columnGroup) {
+        return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={columnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} 
@@ -815,15 +819,15 @@ export class DataTable extends Component {
                 </TableBody>;
     }
 
-    createTableFooter(columns) {
+    createTableFooter(columns, columnGroup) {
         if(this.hasFooter())
-            return <TableFooter columnGroup={this.props.footerColumnGroup}>{columns}</TableFooter>;
+            return <TableFooter columnGroup={columnGroup}>{columns}</TableFooter>;
         else
             return null;
     }
 
-    createScrollableView(value, columns, frozen) {
-        return <ScrollableView header={this.createTableHeader(columns)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns)} 
+    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup) {
+        return <ScrollableView header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}
                 virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={this.getTotalRecords()}
                 onVirtualScroll={this.onVirtualScroll}></ScrollableView>
@@ -882,10 +886,10 @@ export class DataTable extends Component {
             let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
             let frozenView, scrollableView;
             if(frozenColumns) {
-                frozenView = this.createScrollableView(value, frozenColumns, true);
+                frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup);
             }
 
-            scrollableView = this.createScrollableView(value, scrollableColumns, false);
+            scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup);
 
             tableContent = <div className="ui-datatable-scrollable-wrapper">
                                 {frozenView}
@@ -893,9 +897,9 @@ export class DataTable extends Component {
                           </div>;
         }
         else {
-            let tableHeader = this.createTableHeader(columns);
+            let tableHeader = this.createTableHeader(columns, this.props.headerColumnGroup);
             let tableBody = this.createTableBody(value, columns);
-            let tableFooter = this.createTableFooter(columns);
+            let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
             tableContent = <div className="ui-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
