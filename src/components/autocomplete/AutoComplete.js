@@ -95,6 +95,7 @@ export class AutoComplete extends Component {
         this.onInputChange = this.onInputChange.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
+        this.onInputClick = this.onInputClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onDropdownClick = this.onDropdownClick.bind(this);
         this.onMultiContainerClick = this.onMultiContainerClick.bind(this);
@@ -139,6 +140,16 @@ export class AutoComplete extends Component {
             else {
                 this.hidePanel();
             }
+        }
+    }
+    
+    onInputClick(event) {
+        if(this.documentClickListener) {
+            this.inputClick = true;
+        }
+        
+        if(this.props.onClick) {
+            this.props.onClick(event);
         }
     }
 
@@ -196,6 +207,7 @@ export class AutoComplete extends Component {
                 this.panel.style.zIndex = DomHandler.getZindex();
                 this.panel.style.display = "block";
                 DomHandler.fadeIn(this.panel, 200);
+                this.bindDocumentClickListener();
             }
         }
     }
@@ -211,10 +223,12 @@ export class AutoComplete extends Component {
 
     hidePanel() {
         this.panel.style.display = 'none';
+        this.unbindDocumentClickListener();
     }
 
     onDropdownClick(event) {
         this.inputEl.focus();
+        this.dropdownClick = true;
         
         if(this.props.dropdownMode === 'blank')
             this.search(event, '');
@@ -352,6 +366,10 @@ export class AutoComplete extends Component {
     
     onMultiContainerClick(event) {
         this.inputEl.focus();
+        if(this.documentClickListener) {
+            this.inputClick = true;
+        }
+        
         if(this.props.onClick) {
             this.props.onClick(event);
         }
@@ -414,7 +432,7 @@ export class AutoComplete extends Component {
     }
 
     componentWillUnmount() {
-        
+        this.unbindDocumentClickListener();
     }
     
     renderSimpleAutoComplete() {
@@ -429,7 +447,7 @@ export class AutoComplete extends Component {
                         onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
                         onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onKeydown}
                         onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu} 
-                        onClick={this.props.onClick} onDoubleClick={this.props.onDblClick} />
+                        onClick={this.onInputClick} onDoubleClick={this.props.onDblClick} />
         );
     }
     
@@ -505,6 +523,32 @@ export class AutoComplete extends Component {
                 </ul>
             </div>
         );
+    }
+    
+    bindDocumentClickListener() {
+        if(!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if(event.which === 3) {
+                    return;
+                }
+                
+                if(!this.inputClick && !this.dropdownClick) {
+                    this.hidePanel();
+                }
+                    
+                this.inputClick = false;
+                this.dropdownClick = false;
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+    
+    unbindDocumentClickListener() {
+        if(this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
     }
 
     render() {
