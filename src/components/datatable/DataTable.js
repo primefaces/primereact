@@ -66,6 +66,8 @@ export class DataTable extends Component {
         rowClassName: null,
         rowGroupHeaderTemplate: null,
         rowGroupFooterTemplate: null,
+        loading: false,
+        loadingIcon: 'fa-circle-o-notch',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -135,6 +137,8 @@ export class DataTable extends Component {
         rowClassName: PropTypes.func,
         rowGroupHeaderTemplate: PropTypes.func,
         rowGroupFooterTemplate: PropTypes.func,
+        loading: PropTypes.bool,
+        loadingIcons: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -865,6 +869,19 @@ export class DataTable extends Component {
     getTotalRecords() {
         return this.props.lazy ? this.props.totalRecords : this.props.value ? this.props.value.length : 0;
     }
+    
+    renderLoader() {
+        let iconClassName = classNames('fa fa-spin fa-2x', this.props.loadingIcon);
+        
+        return (
+            <div className="ui-datatable-loader">
+                <div className="ui-datatable-loader-overlay ui-widget-overlay"></div>
+                <div className="ui-datatable-loader-content">
+                    <i className={iconClassName}></i>
+                </div>
+            </div>
+        );
+    }
 
     render() {
         let value = this.processData();
@@ -880,6 +897,11 @@ export class DataTable extends Component {
         let tableContent = null;
         let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="fa fa-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
         let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="fa fa-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
+        let loader;
+        
+        if(this.props.loading) {
+            loader = this.renderLoader();
+        }
 
         if(this.props.scrollable) {
             let frozenColumns = this.getFrozenColumns(columns);
@@ -912,6 +934,7 @@ export class DataTable extends Component {
 
         return (
             <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
+                {loader}
                 {headerFacet}
                 {paginatorTop}
                 {tableContent}

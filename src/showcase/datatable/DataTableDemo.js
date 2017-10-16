@@ -1569,6 +1569,18 @@ export class DataTableLazyDemo extends Component {
                             <td>ColumnCroup component for footer.</td>
                         </tr>
                         <tr>
+                            <td>frozenHeaderColumnGroup</td>
+                            <td>ColumnGroup</td>
+                            <td>null</td>
+                            <td>ColumnCroup component for header of frozen columns.</td>
+                        </tr>
+                        <tr>
+                            <td>frozenFooterColumnGroup</td>
+                            <td>ColumnGroup</td>
+                            <td>null</td>
+                            <td>ColumnCroup component for footer of frozen columns.</td>
+                        </tr>
+                        <tr>
                             <td>rowExpansionTemplate</td>
                             <td>func</td>
                             <td>null</td>
@@ -1699,6 +1711,18 @@ export class DataTableLazyDemo extends Component {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
+                        </tr>
+                        <tr>
+                            <td>loading</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Displays a loader to indicate data load is in progress.</td>
+                        </tr>
+                        <tr>
+                            <td>loadingIcon</td>
+                            <td>string</td>
+                            <td>fa-circle-o-notch</td>
+                            <td>The icon to show while indicating data load is in progress.</td>
                         </tr>
                     </tbody>
                 </table>

@@ -300,7 +300,13 @@
     left: 0px;
 }
 
-.ui-datatable .ui-datatable-loading {
+.ui-datatable-loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.ui-datatable-loader-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -309,7 +315,7 @@
     z-index: 1;
 }
 
-.ui-datatable .ui-datatable-loading-content {
+.ui-datatable-loader-content {
     position: absolute;
     left: 50%;
     top: 25%;
