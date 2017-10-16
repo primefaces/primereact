@@ -96,7 +96,7 @@ export class AutoComplete extends Component {
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputClick = this.onInputClick.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onDropdownClick = this.onDropdownClick.bind(this);
         this.onMultiContainerClick = this.onMultiContainerClick.bind(this);
         this.onMultiInputFocus = this.onMultiInputFocus.bind(this);
@@ -256,94 +256,93 @@ export class AutoComplete extends Component {
         }
     }
 
-    onKeyDown(event) {
-        if(this.state.panelVisible) {
-            let highlightItemIndex = this.findOptionIndex(this.state.highlightOption);
+    onInputKeyDown(event) {
+        if(this.isPanelVisible()) {
+            let highlightItem = DomHandler.findSingle(this.panel, 'li.ui-state-highlight');
 
             switch(event.which) {
                 //down
                 case 40:
-                    if(highlightItemIndex !== -1) {
-                        var nextItemIndex = highlightItemIndex + 1;
-                        if(nextItemIndex !== (this.suggestions.length)) {
-                            this.highlightOption = this.suggestions[nextItemIndex];
-                            this.highlightOptionChanged = true;
+                    if(highlightItem) {
+                        let nextElement = highlightItem.nextElementSibling;
+                        if(nextElement) {
+                            DomHandler.addClass(nextElement, 'ui-state-highlight');
+                            DomHandler.removeClass(highlightItem, 'ui-state-highlight');
+                            DomHandler.scrollInView(this.panel, nextElement);
                         }
-                    }
+                    }    
                     else {
-                        this.highlightOption = this.suggestions[0];
+                        DomHandler.addClass(this.panel.firstChild.firstChild, 'ui-state-highlight');
                     }
+                    
                     event.preventDefault();
-                    break;
+                break;
 
                 //up
                 case 38:
-                    if(highlightItemIndex > 0) {
-                        let prevItemIndex = highlightItemIndex - 1;
-                        this.highlightOption = this.suggestions[prevItemIndex];
-                        this.highlightOptionChanged = true;
+                    if(highlightItem) {
+                        let previousElement = highlightItem.previousElementSibling;
+                        if(previousElement) {
+                            DomHandler.addClass(previousElement, 'ui-state-highlight');
+                            DomHandler.removeClass(highlightItem, 'ui-state-highlight');
+                            DomHandler.scrollInView(this.panel, previousElement);
+                        }
                     }
-
+                    
                     event.preventDefault();
-                    break;
+                break;
 
-                //enter
+                //enter,tab
                 case 13:
-                    if(this.highlightOption) {
-                        this.selectItem(event, this.highlightOption);
+                    if(highlightItem) {
+                        this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
                         this.hidePanel();
                     }
+                    
                     event.preventDefault();
-                    break;
+                break;
 
                 //escape
                 case 27:
                     this.hidePanel();
                     event.preventDefault();
-                    break;
-
+                break;
 
                 //tab
                 case 9:
-                    if(this.highlightOption) {
-                        this.selectItem(event, this.highlightOption);
+                    if(highlightItem) {
+                        this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
                     }
+                    
                     this.hidePanel();
-                    break;
+                break;
 
                 default:
-                    break;
-
+                break;
             }
-        } else {
-            if(event.which === 40 && this.suggestions) {
-                this.search(event,event.target.value);
-            }
-        }
-
-        this.setState({highlightOption: this.highlightOption});
+        } 
 
         if(this.props.multiple) {
             switch(event.which) {
                 //backspace
                 case 8:
-                    if(this.value && this.value.length && !this.inputEl.value) {
-                        let removedValue = this.value.pop();
+                    if(this.props.value && this.props.value.length && !this.inputEl.value) {
+                        let removedValue = this.props.value[this.props.value.length - 1];
+                        let newValue = this.props.value.slice(0, -1);
+                        
                         if(this.props.onUnselect) {
                             this.props.onUnselect({
                                 originalEvent: event,
                                 value: removedValue
                             })
                         }
-                        this.props.onChange({
-                            originalEvent: event,
-                            value: this.value
-                        });
+                        
+                        this.updateModel(event, newValue);
                     }
-                    break;
+                break;
 
                 default:
-                    break;
+                break;
             }
         }
     }
@@ -445,7 +444,7 @@ export class AutoComplete extends Component {
                         readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
                         maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
                         onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
-                        onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onKeydown}
+                        onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
                         onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu} 
                         onClick={this.onInputClick} onDoubleClick={this.props.onDblClick} />
         );
@@ -475,7 +474,7 @@ export class AutoComplete extends Component {
             <li className="ui-autocomplete-input-token">
                 <input ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
                        autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange}
-                       onKeyUp={this.props.onKeyUp} onKeyDown={this.onKeydown} onKeyPress={this.props.onKeyPress}
+                       onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                        onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
             </li>
         );
@@ -549,6 +548,10 @@ export class AutoComplete extends Component {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
+    }
+    
+    isPanelVisible() {
+        return this.panel.offsetParent != null;
     }
 
     render() {
