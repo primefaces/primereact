@@ -469,6 +469,8 @@ export class DataTableColGroupDemo extends Component {
 `}
 </CodeHighlight>
 
+            <p>When using sorting with column groups, define sort properties like sortable at columns inside column groups not at the direct children of DataTable component.</p>
+
             <h3>Paginator</h3>
             <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. See <Link to="/paginator">&#9679; paginator</Link> component for more information.</p>
 <CodeHighlight className="javascript">
@@ -1256,7 +1258,10 @@ export class DataTableRowGroupDemo extends Component {
 </DataTable>
 
 `}
-</CodeHighlight>         
+</CodeHighlight> 
+
+            <p>When using frozen columns with column grouping, use frozenHeaderColumnGroup and frozenFooterColumnGroup properties along with
+            headerColumnGroup and footerColumnGroup.</p>
 
             <p>Virtual scrolling is enabled using virtualScroll property combined with lazy loading so that data is loaded on the fly during scrolling.</p>
 <CodeHighlight className="html">
