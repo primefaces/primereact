@@ -295,6 +295,42 @@ export class DataTableDemo extends Component {
                             <td>Style class of the column.</td>
                         </tr>
                         <tr>
+                            <td>headerStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the column.</td>
+                        </tr>
+                        <tr>
+                            <td>headerClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the column.</td>
+                        </tr>
+                        <tr>
+                            <td>bodyStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the column.</td>
+                        </tr>
+                        <tr>
+                            <td>bodyClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the column.</td>
+                        </tr>
+                        <tr>
+                            <td>footerStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the column.</td>
+                        </tr>
+                        <tr>
+                            <td>footerClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the column.</td>
+                        </tr>
+                        <tr>
                             <td>expander</td>
                             <td>boolean</td>
                             <td>false</td>

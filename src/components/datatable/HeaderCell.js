@@ -91,7 +91,7 @@ export class HeaderCell extends Component {
                         {'ui-sortable-column': this.props.sortable, 
                         'ui-state-active': sorted, 
                         'ui-resizable-column': this.props.resizableColumns,
-                        'ui-selection-column': this.props.selectionMode}, this.props.className);
+                        'ui-selection-column': this.props.selectionMode}, this.props.headerClassName||this.props.className);
 
         if(this.props.sortable) {
             var sortIcon = sorted ? sortOrder < 0 ? 'fa-sort-desc' : 'fa-sort-asc': 'fa-sort';
@@ -109,7 +109,7 @@ export class HeaderCell extends Component {
 
         return (
             <th ref={(el) => this.el = el} 
-                className={className} style={this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown}
+                className={className} style={this.props.headerStyle||this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown}
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}

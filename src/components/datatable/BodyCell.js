@@ -111,7 +111,7 @@ export class BodyCell extends Component {
 
     render() {
         let content, header;
-        let cellClassName = classNames(this.props.className, {
+        let cellClassName = classNames(this.props.headerClassName||this.props.className, {
                                 'ui-selection-column': this.props.selectionMode,
                                 'ui-editable-column': this.props.editor,
                                 'ui-cell-editing': this.state.editing
@@ -149,7 +149,7 @@ export class BodyCell extends Component {
         }
                        
         return (
-            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
+            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.bodyStyle||this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan}>
                 {header}
                 {this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}></a>}
