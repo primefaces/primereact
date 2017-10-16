@@ -790,7 +790,8 @@ export class Calendar extends Component {
     }
     
     onUserInput(event) {
-        let val = event.target.value;   
+        let val = event.target.value;  
+        this.keyboardInput = true; 
         
         try {
             let value = this.parseValueFromString(val);
@@ -1323,6 +1324,13 @@ export class Calendar extends Component {
             else
                 DomHandler.appendChild(this.overlay, this.props.appendTo);
         }
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if(this.keyboardInput)
+            this.keyboardInput = false;
+        else
+            this.updateInputfield(this.props.value);
     }
             
     render() {
