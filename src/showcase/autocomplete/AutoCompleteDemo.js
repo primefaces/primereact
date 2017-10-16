@@ -91,11 +91,11 @@ export class AutoCompleteDemo extends Component {
                     <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
 
                     <h3>Multiple</h3>
-                    <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple.bind(this)}
-                        minLength={1} placeholder="Countries" field="name" multiple={true} onChange={this.onCountriesValueChange.bind(this)} />
-                    <ul>
-                        {this.state.countries && this.state.countries.map((c, index) => <li key={index}>{c.name}</li>)}
-                    </ul>
+                    <span className="ui-fluid">
+                        <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple.bind(this)}
+                            minLength={1} placeholder="Countries" field="name" multiple={true} onChange={this.onCountriesValueChange.bind(this)} />
+                    </span>
+                    
                 </div>
 
                 <AutoCompleteDoc />
