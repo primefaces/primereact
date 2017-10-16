@@ -172,6 +172,17 @@ showMultiple() {
 `}
 </CodeHighlight>
 
+            <h3>Sticky</h3>
+            <p>Messages are cleared automatically after the timeout defined by life property. Use sticky mode to make them stay until
+            they are manually removed.</p>
+
+<CodeHighlight className="html">
+{`
+<Growl value={this.state.messages} sticky={true}></Growl>
+
+`}
+</CodeHighlight>
+
             <h3>Attributes</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -214,6 +225,18 @@ showMultiple() {
                             <td>0</td>
                             <td>Base zIndex value to use in layering.</td>
                         </tr>
+                        <tr>
+                            <td>sticky</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, makes growl messages until they are manually removed.</td>
+                        </tr>
+                        <tr>
+                            <td>life</td>
+                            <td>number</td>
+                            <td>3000</td>
+                            <td>Time to display a message in milliseconds before removing a non-sticky message.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -231,13 +254,13 @@ showMultiple() {
                     <tbody>
                         <tr>
                             <td>onClick</td>
-                            td>event.originalEvent: Original event <br />
+                            <td>event.originalEvent: Original event <br />
                                event.messages: Clicked message instance </td>
                             <td>Callback to invoke when a message is clicked.</td>
                         </tr>
                         <tr>
                             <td>onRemove</td>
-                            td>event.originalEvent: Original event <br />
+                            <td>event.originalEvent: Original event <br />
                                event.messages: Closed message instance </td>
                             <td>Callback to invoke when a message is removed with remove icon.</td>
                         </tr>

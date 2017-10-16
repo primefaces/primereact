@@ -11,6 +11,8 @@ export class Growl extends Component {
         className: null,
         style: null,
         baseZIndex: 0,
+        sticky: false,
+        life: 3000,
         onClick: null,
         onClose: null
     }
@@ -21,6 +23,8 @@ export class Growl extends Component {
         className: PropTypes.string,
         style: PropTypes.object,
         baseZIndex: PropTypes.number,
+        sticky: PropTypes.bool,
+        life: PropTypes.number,
         onClick: PropTypes.func,
         onClose: PropTypes.func
     };
@@ -31,10 +35,10 @@ export class Growl extends Component {
             messages: this.props.value
         };
     }
-
+    
     componentWillReceiveProps(nextProps) {
         this.setState({
-            messages:nextProps.value
+            messages: nextProps.value
         });
     }
     
@@ -56,6 +60,31 @@ export class Growl extends Component {
         }, 250);
     }
     
+    removeAll() {
+        if(this.state.messages && this.state.messages.length) {
+            DomHandler.fadeOut(this.container, 250);
+            
+            setTimeout(() => {                
+                this.value.forEach((msg,index) => {
+                    this.invokeOnClose(null, msg);
+                });
+                
+                this.setState({
+                    messages: null
+                });
+            }, 250);
+        }
+    }
+    
+    invokeOnClose(event, msg) {
+        if(this.props.onClose) {
+            this.props.onClose({
+                originalEvent: null,
+                message: msg
+            });
+        }
+    }
+    
     onMessageClick(event, msg) {
         if(this.props.onClick) {
             this.props.onClick({
@@ -64,21 +93,43 @@ export class Growl extends Component {
             })
         }
     }
+    
+    initTimeout() {
+        if(this.timeout) {
+            clearTimeout(this.timeout);
+        }
+        
+        this.timeout = setTimeout(() => {
+            this.removeAll();
+        }, this.props.life);
+    }
 
     componentDidMount() {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.getZindex() + 1);
-        if(this.props.messages) {
-            DomHandler.fadeIn(this.container, 250);
+        this.show();
+        
+        if(!this.props.sticky) {
+            this.initTimeout();
         }
     }
 
     componentDidUpdate() {
         if(!this.removed) {
             DomHandler.fadeIn(this.container, 250);
+            
+            if(!this.props.sticky) {
+                this.initTimeout();
+            }
         }
         this.removed = false;
     }
-
+    
+    show() {
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.getZindex() + 1);
+        if(this.state.messages) {
+            DomHandler.fadeIn(this.container, 250);
+        }
+    }
+    
     render() {
         var className = classNames('ui-growl ui-widget', this.props.className);
 
