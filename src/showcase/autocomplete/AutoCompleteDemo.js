@@ -37,10 +37,18 @@ export class AutoCompleteDemo extends Component {
     }
 
     filterBrands(event) {
-        var results = this.brands.filter((brand) => {
-            return brand.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredBrands: results });
+        let results;
+
+        if(event.query.length === 0) {
+            results = [...this.brands];
+        }
+        else {
+            results = this.brands.filter((brand) => {
+                return brand.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+        }
+        
+        this.setState({filteredBrands: results});
     }
 
     filterCountryMultiple(event) {
@@ -61,16 +69,6 @@ export class AutoCompleteDemo extends Component {
         </div>)
     }
 
-    handleDropdownClick() {
-        this.setState({ filteredBrands: [] });
-
-        //mimic remote call
-        setTimeout(() => {
-            this.setState({ filteredBrands: this.brands });
-        }, 100)
-
-    }
-
     render() {
         return (
             <div>
@@ -89,7 +87,7 @@ export class AutoCompleteDemo extends Component {
 
                     <h3>Advanced</h3>
                     <AutoComplete value={this.state.brand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands.bind(this)} size={30} minLength={1}
-                        placeholder="Hint: type 'v' or 'f'" dropdown={true} onDropdownClick={this.handleDropdownClick.bind(this)} itemTemplate={this.itemTemplate.bind(this)} onChange={this.onBrandValueChange.bind(this)} />
+                        placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={this.itemTemplate.bind(this)} onChange={this.onBrandValueChange.bind(this)} />
                     <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
 
                     <h3>Multiple</h3>
@@ -454,107 +452,8 @@ render() {
                             <span>View on GitHub</span>
                         </a>
                         <CodeHighlight className="jsx">
-                            {`
-export class AutoCompleteDemo extends Component {
+{`
 
-    constructor() {
-        super();
-        this.state = { countriesData: [] };
-        this.countryservice = new CountryService();
-    }
-
-    componentDidMount() {
-        this.setState({ countriesData: this.countryservice.getCountries(this) });
-        this.brands = ['Audi', 'BMW', 'Fiat', 'Ford', 'Honda', 'Jaguar', 'Mercedes', 'Renault', 'Volvo'];
-    }
-
-    onCountryValueChange(e) {
-        this.setState({ country: e.value, filteredCountriesSingle: null });
-    }
-
-    onBrandValueChange(e) {
-        this.setState({ brand: e.value, filteredBrands: null });
-    }
-
-    onCountriesValueChange(e) {
-        this.setState({ countries: e.value, filteredCountriesMultiple: null });
-    }
-
-    filterCountrySingle(event) {
-        var results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredCountriesSingle: results });
-    }
-
-    filterBrands(event) {
-        var results = this.brands.filter((brand) => {
-            return brand.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredBrands: results });
-    }
-
-    filterCountryMultiple(event) {
-        var results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredCountriesMultiple: results });
-    }
-
-    itemTemplate(brand) {
-        if (!brand) {
-            return;
-        }
-
-        return (
-        <div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
-            <img alt={brand} src={\`showcase/resources/demo/images/car/\${brand}.png\`} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
-            <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
-        </div>)
-    }
-
-    handleDropdownClick() {
-        this.setState({ filteredBrands: [] });
-
-        //mimic remote call
-        setTimeout(() => {
-            this.setState({ filteredBrands: this.brands });
-        }, 100)
-
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section">
-                    <div className="feature-intro">
-                        <h1>AutoComplete</h1>
-                        <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation button-demo">
-                    <h3>Basic</h3>
-                    <AutoComplete value={this.state.country} suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle.bind(this)} field="name"
-                        size={30} placeholder="Countries" minLength={1} onChange={this.onCountryValueChange.bind(this)} />
-                    <span style={{ marginLeft: '10px' }}>Country: {this.state.country ? this.state.country.name || this.state.country : 'none'}</span>
-
-                    <h3>Advanced</h3>
-                    <AutoComplete value={this.state.brand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands.bind(this)} size={30} minLength={1}
-                        placeholder="Hint: type 'v' or 'f'" dropdown={true} onDropdownClick={this.handleDropdownClick.bind(this)} itemTemplate={this.itemTemplate.bind(this)} onChange={this.onBrandValueChange.bind(this)} />
-                    <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
-
-                    <h3>Multiple</h3>
-                    <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple.bind(this)}
-                        minLength={1} placeholder="Countries" field="name" multiple={true} onChange={this.onCountriesValueChange.bind(this)} />
-                    <ul>
-                        {this.state.countries && this.state.countries.map((c, index) => <li key={index}>{c.name}</li>)}
-                    </ul>
-                </div>
-            </div>
-        )
-    }
-}
 `}
                         </CodeHighlight>
                     </TabPanel>

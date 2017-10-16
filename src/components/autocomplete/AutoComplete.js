@@ -16,6 +16,7 @@ export class AutoComplete extends Component {
         field: null,
         scrollHeight: '200px',
         dropdown: false,
+        dropdownMode: 'blank',
         multiple: false,
         minLength: 1,
         delay: 300,
@@ -55,6 +56,7 @@ export class AutoComplete extends Component {
         field: PropTypes.string,
         scrollHeight: PropTypes.string,
         dropdown: PropTypes.bool,
+        dropdownMode: PropTypes.string,
         multiple: PropTypes.bool,
         minLength: PropTypes.number,
         delay: PropTypes.number,
@@ -95,8 +97,6 @@ export class AutoComplete extends Component {
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onDropdownClick = this.onDropdownClick.bind(this);
-        this.onDropdownFocus = this.onDropdownFocus.bind(this);
-        this.onDropdownBlur = this.onDropdownBlur.bind(this);
     }
     
     shouldComponentUpdate() {
@@ -115,7 +115,7 @@ export class AutoComplete extends Component {
             clearTimeout(this.timeout);
         }
         
-        let query = event.target.value;
+        let query = event.target.value.trim();
         if(!this.props.multiple) {
             this.manualModelChange = true;
             this.props.onChange({
@@ -206,21 +206,19 @@ export class AutoComplete extends Component {
     }
 
     onDropdownClick(event) {
+        this.inputEl.focus();
+        
+        if(this.props.dropdownMode === 'blank')
+            this.search(event, '');
+        else if(this.props.dropdownMode === 'current')
+            this.search(event, this.inputEl.value);
+
         if(this.props.onDropdownClick) {
             this.props.onDropdownClick({
                 originalEvent: event,
                 query: this.inputEl.value
             });
         }
-    }
-    
-    onDropdownFocus() {
-        this.dropdownFocus = true;
-        this.inputEl.focus();
-    }
-
-    onDropdownBlur() {
-        this.dropdownFocus = false;
     }
 
     removeItem(e, itemIndex) {
@@ -441,8 +439,7 @@ export class AutoComplete extends Component {
     
     renderDropdown() {
         return (
-            <Button type="button" icon="fa-fw fa-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled}
-                    onClick={this.onDropdownClick} onFocus={this.onDropdownFocus} onBlur={this.onDropdownBlur} />
+            <Button type="button" icon="fa-fw fa-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
         );
     }
     
