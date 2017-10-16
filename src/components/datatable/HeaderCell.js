@@ -92,8 +92,11 @@ export class HeaderCell extends Component {
         }
 
         if(this.props.filter) {
-            filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType}
-                        className="ui-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
+            filterElement = <div onClick={(e)=> e.stopPropagation()}>{
+                this.props.filterElement ||
+                <InputText onInput={this.onFilterInput} type={this.props.filterType}
+                    className="ui-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />
+            }</div>;
         }
 
         if(this.props.selectionMode === 'multiple') {
