@@ -28,7 +28,7 @@ export class ContextMenu extends Component {
     
     toggle(event) {
         if(this.container.offsetParent)
-            this.hide(event);
+            this.hide();
         else
             this.show(event);
     }
