@@ -337,6 +337,7 @@ class AppMenu extends Component {
                             <div>
                                 <Link to="/progressbar">&#9679; ProgressBar</Link>
                                 <Link to="/captcha">&#9679; Captcha</Link>
+                                <Link to="/progressspinner">&#9679; ProgressSpinner</Link>
                             </div>
                         </div>
                     </div>

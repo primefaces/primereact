@@ -97,6 +97,7 @@ import {TooltipDemo} from "./showcase/tooltip/TooltipDemo";
 import {Route,HashRouter,Switch} from 'react-router-dom';
 import {MenuModelDemo} from "./showcase/menumodel/MenuModelDemo";
 import {SidebarDemo} from "./showcase/sidebar/SidebarDemo";
+import {ProgressSpinnerDemo} from "./showcase/progressspinner/ProgressSpinnerDemo";
 
 ReactDOM.render(
     <HashRouter>
@@ -197,6 +198,7 @@ ReactDOM.render(
                 <Route path="/tooltip" component={TooltipDemo} />
                 <Route path="/sidebar" component={SidebarDemo} />
                 <Route path="/gmap" component={GMapDemo} />
+                <Route path="/progressspinner" component={ProgressSpinnerDemo} />
             </App>
         </Switch>
     </HashRouter>,
