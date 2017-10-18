@@ -32,7 +32,7 @@ export class InputMask extends Component {
         slotChar: PropTypes.string,
         autoClear: PropTypes.bool,
         unmask: PropTypes.bool,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         placeholder: PropTypes.string,
         size: PropTypes.number,

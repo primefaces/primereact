@@ -25,7 +25,7 @@ export class Tooltip extends Component {
         tooltipPosition: PropTypes.string,
         tooltipEvent: PropTypes.string,
         appendTo: PropTypes.string,
-        positionStyle: PropTypes.string,
+        positionstyle: PropTypes.object,
         tooltipStyleClass: PropTypes.string,
         tooltipDisabled: PropTypes.bool,
         escape: PropTypes.bool,

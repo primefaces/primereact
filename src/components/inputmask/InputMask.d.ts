@@ -7,7 +7,7 @@ interface InputMaskProps {
     slotChar?: string;
     autoClear?: boolean;
     unmask?: boolean;
-    style?: string;
+    style?: object;
     className?: string;
     placeholder?: string;
     size?: number;

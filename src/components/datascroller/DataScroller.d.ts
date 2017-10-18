@@ -8,7 +8,7 @@ interface DataScrollerProps {
     scrollHeight?: any;
     loader?: any;
     buffer?: number;
-    style?: string;
+    style?: object;
     className?: string;
     onLazyLoad?(first: number, rows: number): void;
     itemTemplate?(): void;

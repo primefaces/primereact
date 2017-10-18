@@ -23,7 +23,7 @@ export class Editor extends Component {
     static propsTypes = {
         id: PropTypes.string,
         value: PropTypes.string,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,

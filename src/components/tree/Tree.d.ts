@@ -25,7 +25,7 @@ interface TreeProps {
     onNodeUnselect?(originalEvent: Event, node: any): void;
     onNodeExpand?(): void;
     onNodeCollapse?(): void;
-    style?: string;
+    style?: object;
     className?: string;
     metaKeySelection?: boolean;
     propagateSelectionUp?: boolean;

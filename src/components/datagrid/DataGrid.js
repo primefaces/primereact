@@ -36,7 +36,7 @@ export class DataGrid extends Component {
         pageLinks: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         lazy: PropTypes.bool,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         paginatorPosition: PropTypes.string,
         paginatorTemplate: PropTypes.string,

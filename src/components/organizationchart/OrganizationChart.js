@@ -136,7 +136,7 @@ export class OrganizationChart extends Component {
     static propsTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,

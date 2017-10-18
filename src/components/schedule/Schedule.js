@@ -66,7 +66,7 @@ export class Schedule extends Component {
         id: PropTypes.string,
         events: PropTypes.array,
         header: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         isRTL: PropTypes.bool,
         weekends: PropTypes.bool,

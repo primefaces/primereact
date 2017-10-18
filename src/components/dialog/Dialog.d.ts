@@ -21,7 +21,7 @@ interface DialogProps {
     closable?: boolean;
     responsive?: boolean;
     breakpoint?: number;
-    style?: string;
+    style?: object;
     className?: string;
     showHeader?: boolean;
     positionLeft?: number;

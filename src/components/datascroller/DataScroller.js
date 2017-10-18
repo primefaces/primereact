@@ -28,7 +28,7 @@ export class DataScroller extends Component {
         scrollHeight: PropTypes.any,
         loader: PropTypes.any,
         buffer: PropTypes.number,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,

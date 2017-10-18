@@ -25,7 +25,7 @@ export class Slider extends Component {
         orientation: PropTypes.string,
         step: PropTypes.number,
         range: PropTypes.bool,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
     }
 

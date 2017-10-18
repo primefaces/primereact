@@ -19,7 +19,7 @@ interface TreeTableProps {
     selectionMode?: string;
     selection?: any;
     selectionChange(originalEvent: Event, selection: any): void;
-    style?: string;
+    style?: object;
     className?: string;
     metaKeySelection?: boolean;
     header?: string;

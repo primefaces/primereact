@@ -20,7 +20,7 @@ interface DropdownProps {
     autoFocus?: boolean;
     lazy?: boolean;
     panelClassName?: string;
-    panelStyle?: string;
+    panelstyle?: object;
     dataKey?: string;
     inputId?: string;
     onChange?(originalEvent: Event, value: any): void;

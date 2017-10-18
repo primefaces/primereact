@@ -29,7 +29,7 @@ export class Paginator extends Component {
         first: PropTypes.number,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         template: PropTypes.string,
         onPageChange: PropTypes.func

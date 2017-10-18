@@ -6,7 +6,7 @@ interface PaginatorProps {
     first?: number;
     pageLinkSize?: number;
     rowsPerPageOptions?: Array<any>;
-    style?: string;
+    style?: object;
     className?: string;
     template?: string;
     onPageChange?(event: Event): void;

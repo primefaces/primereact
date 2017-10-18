@@ -176,7 +176,7 @@ export class TreeTable extends Component {
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
         selectionChange: PropTypes.func.isRequired,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         header: PropTypes.string,

@@ -134,7 +134,7 @@ export class SlideMenu extends Component {
         id: PropTypes.string,
         model: PropTypes.array,
         popup: PropTypes.bool,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         easing: PropTypes.string,
         effectDuration: PropTypes.number,

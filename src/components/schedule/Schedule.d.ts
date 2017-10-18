@@ -4,7 +4,7 @@ interface ScheduleProps {
     id?: string;
     events?: Array<any>;
     header?: any;
-    style?: string;
+    style?: object;
     className?: string;
     isRTL?: boolean;
     weekends?: boolean;

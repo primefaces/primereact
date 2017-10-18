@@ -203,7 +203,7 @@ export class PanelMenu extends Component {
     static propsTypes = {
         id: PropTypes.string,
         model: PropTypes.array,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string
     }
 

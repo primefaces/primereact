@@ -64,9 +64,9 @@ export class SplitButton extends Component {
         icon: PropTypes.string,
         model: PropTypes.array,
         disabled: PropTypes.bool,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
-        menuStyle: PropTypes.string,
+        menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.string,
         onClick: PropTypes.func

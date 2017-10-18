@@ -6,10 +6,10 @@ interface PickListProps {
     target?: Array<any>;
     sourceHeader?: string;
     targetHeader?: string;
-    style?: string;
+    style?: object;
     className?: string;
-    sourceStyle?: string;
-    targetStyle?: string;
+    sourcestyle?: object;
+    targetstyle?: object;
     responsive?: boolean;
     showSourceControls?: boolean;
     showTargetControls?: boolean;

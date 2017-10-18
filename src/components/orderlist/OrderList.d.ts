@@ -4,9 +4,9 @@ interface OrderListProps {
     id?: string;
     value?: Array<any>;
     header?: string;
-    style?: string;
+    style?: object;
     className?: string;
-    listStyle?: string;
+    liststyle?: object;
     responsive?: boolean;
     dragdrop?(): void;
     dragdropScope?: string;

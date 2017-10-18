@@ -7,7 +7,7 @@ interface ChartProps {
     options?: object;
     width?: string;
     height?: string;
-    style?: string;
+    style?: object;
     className?: string;
 }
 

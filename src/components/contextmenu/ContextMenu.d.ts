@@ -3,7 +3,7 @@ import React = require("react");
 interface ContextMenuProps {
     id?: string;
     model?: Array<any>;
-    style?: string;
+    style?: object;
     className?: string;
     global?: boolean;
     target?: any;

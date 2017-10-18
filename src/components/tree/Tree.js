@@ -227,7 +227,7 @@ export class Tree extends Component {
         onNodeUnselect: PropTypes.func,
         onNodeExpand: PropTypes.func,
         onNodeCollapse: PropTypes.func,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,

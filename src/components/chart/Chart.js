@@ -22,7 +22,7 @@ export class Chart extends Component {
         options: PropTypes.object,
         width: PropTypes.string,
         height: PropTypes.string,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string
     };
 

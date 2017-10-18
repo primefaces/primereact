@@ -16,7 +16,7 @@ export class OrganizationChartNode extends React.Component<OrganizationChartNode
 interface OrganizationChartProps {
     id?: string;
     value?: any;
-    style?: string;
+    style?: object;
     className?: string;
     selectionMode?: string;
     selection?: any;

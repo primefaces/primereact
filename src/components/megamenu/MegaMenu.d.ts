@@ -3,7 +3,7 @@ import React = require("react");
 interface MegaMenuProps {
     id?: string;
     model?: Array<any>;
-    style?: string;
+    style?: object;
     className: string;
     orientation: string;
 }

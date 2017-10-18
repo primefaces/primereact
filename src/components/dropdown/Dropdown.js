@@ -54,7 +54,7 @@ export class Dropdown extends Component {
         autoFocus: PropTypes.bool,
         lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
-        panelStyle: PropTypes.string,
+        panelstyle: PropTypes.object,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         onChange: PropTypes.func,

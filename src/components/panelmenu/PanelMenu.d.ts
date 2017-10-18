@@ -26,7 +26,7 @@ export class PanelMenuHeaderItems extends React.Component<PanelMenuHeaderItemsPr
 interface PanelMenuProps {
     id?: string;
     model?: Array<any>;
-    style?: string;
+    style?: object;
     className?: string;
 }
 

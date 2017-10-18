@@ -6,7 +6,7 @@ interface TooltipProps {
     tooltipPosition?: string;
     tooltipEvent?: string;
     appendTo?: string;
-    positionStyle?: string;
+    positionstyle?: object;
     tooltipStyleClass?: string;
     tooltipDisabled?: boolean;
     escape?: boolean;

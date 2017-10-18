@@ -12,9 +12,9 @@ interface SplitButtonProps {
     icon?: string;
     model?: Array<any>;
     disabled?: boolean;
-    style?: string;
+    style?: object;
     className?: string;
-    menuStyle?: string;
+    menustyle?: object;
     menuClassName?: string;
     tabIndex?: string;
     onClick?(): void;

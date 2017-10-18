@@ -10,7 +10,7 @@ interface DataListProps {
     pageLinks?: number;
     rowsPerPageOptions?: Array<any>;
     lazy?: boolean;
-    style?: string;
+    style?: object;
     className?: string;
     paginatorPosition?: string;
     paginatorTemplate?: string;

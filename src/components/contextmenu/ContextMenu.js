@@ -19,7 +19,7 @@ export class ContextMenu extends Component {
     static propsTypes = {
         id: PropTypes.string,
         model: PropTypes.array,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         global: PropTypes.bool,
         target: PropTypes.any,

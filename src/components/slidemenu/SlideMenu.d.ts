@@ -20,7 +20,7 @@ interface SlideMenuProps {
     id?: string;
     model?: Array<any>;
     popup?: boolean;
-    style?: string;
+    style?: object;
     className?: string;
     easing?: string;
     effectDuration?: number;

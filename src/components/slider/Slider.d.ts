@@ -8,7 +8,7 @@ interface SliderProps {
     orientation?: string;
     step?: number;
     range?: boolean;
-    style?: string;
+    style?: object;
     className?: string;
 }
 

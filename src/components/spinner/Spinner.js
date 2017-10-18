@@ -32,7 +32,7 @@ export class Spinner extends Component {
         size: PropTypes.number,
         decimalSeparator: PropTypes.string,
         thousandSeparator: PropTypes.string,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string
     }
 

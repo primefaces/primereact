@@ -54,7 +54,7 @@ export class Dialog extends Component {
         closable: PropTypes.bool,
         responsive: PropTypes.bool,
         breakpoint: PropTypes.number,
-        style: PropTypes.string,
+        style: PropTypes.object,
         className: PropTypes.string,
         showHeader: PropTypes.bool,
         positionLeft: PropTypes.number,
