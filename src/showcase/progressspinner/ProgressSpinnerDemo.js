@@ -12,7 +12,7 @@ export class ProgressSpinnerDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ProgressSpinner</h1>
-                        <p>ProgressSpinnerDemo is a process status indicator.</p>
+                        <p>ProgressSpinner is a process status indicator.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
