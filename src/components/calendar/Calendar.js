@@ -221,21 +221,14 @@ export class Calendar extends Component {
         }
         
         this.pm = date.getHours() > 11;
-        let hour, minute, second;
-        if(this.props.showTime) {
-            minute = date.getMinutes();
-            second = date.getSeconds();
-            
-            if(this.props.hourFormat === '12')
-                hour = date.getHours() === 0 ? 12 : date.getHours() % 12;
-            else
-                hour = date.getHours();
-        }
-        else if(this.props.timeOnly) {
-            hour = 0;
-            minute = 0;
-            second = 0;
-        }
+        let hour;
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
+        
+        if(this.props.hourFormat === '12')
+            hour = date.getHours() === 0 ? 12 : date.getHours() % 12;
+        else
+            hour = date.getHours();
         
         return {
             hour: hour,
