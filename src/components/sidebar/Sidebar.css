@@ -53,6 +53,13 @@
     transition: transform 0s;
 }
 
+.ui-sidebar-full.ui-sidebar-active {
+    animation: ui-fadein .25s;
+    -moz-animation: ui-fadein .25s; /* Firefox */
+    -webkit-animation: ui-fadein .25s; /* Safari and Chrome */
+    -o-animation: ui-fadein .25s; /* Opera */
+}
+
 .ui-sidebar-left.ui-sidebar-active,
 .ui-sidebar-right.ui-sidebar-active {
     -webkit-transform: translateX(0);
