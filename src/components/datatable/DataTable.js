@@ -594,7 +594,7 @@ export class DataTable extends Component {
                     columnOrder: columnOrder
                 });
     
-                if(this.props.onColReorder) {
+                if (this.props.onColReorder) {
                     this.props.onColReorder({
                         dragIndex: dragIndex,
                         dropIndex: dropIndex,
