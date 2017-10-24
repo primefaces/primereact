@@ -76,6 +76,13 @@ export class Chart extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps){
+        if(nextProps.data === this.props.data) {
+            return false;
+        }
+        return true;
+    }
+
     render() {
         return (
             <div id={this.props.id} style={this.props.style} className={this.props.className}>
