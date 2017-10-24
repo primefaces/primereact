@@ -1080,7 +1080,7 @@ export class DataTableRowExpansionDemo extends Component {
 
             <h3>Column Resize</h3>
             <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
-                In "expand" mode, table width also changes along with the column width. onColumnResize is a callback that passes the resized column header as a parameter.</p>
+                In "expand" mode, table width also changes along with the column width. onColumnResizeEnd is a callback that passes the resized column header as a parameter.</p>
 <CodeHighlight className="html">
 {`
 <DataTable value={this.state.cars} resizableColumns={true}>
