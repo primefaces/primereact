@@ -196,8 +196,8 @@ export class DataTable extends Component {
     createPaginator(position, totalRecords) {
         let className = 'ui-paginator-' + position;
 
-        return <Paginator first={this.state.first} rows={this.state.rows} className={className}
-                    totalRecords={totalRecords} onPageChange={this.onPageChange} template={this.props.paginatorTemplate} />;
+        return <Paginator first={this.state.first} rows={this.state.rows} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
+                          totalRecords={this.props.lazy ? totalRecords : this.processData() ? this.processData().length : totalRecords} />;
     }
 
     onSort(event) {
