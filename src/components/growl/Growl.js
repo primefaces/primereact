@@ -63,9 +63,8 @@ export class Growl extends Component {
     removeAll() {
         if(this.state.messages && this.state.messages.length) {
             DomHandler.fadeOut(this.container, 250);
-            
             setTimeout(() => {                
-                this.value.forEach((msg,index) => {
+                this.state.messages.forEach((msg,index) => {
                     this.invokeOnClose(null, msg);
                 });
                 
