@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Messages} from '../../components/messages/Messages';
+import {Message} from '../../components/message/Message';
+import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
@@ -67,6 +69,22 @@ export class MessagesDemo extends Component {
                         <Button onClick={this.showMultiple} label="Multiple" />
                         <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
                     </div>
+
+                    <h3>Inline Message CSS</h3>
+                    <p>CSS helpers to display inline messages mostly within forms.</p>
+                    <Message severity="info" text="PrimeNG Rocks"></Message>
+                    <Message severity="success" text="Record Saved"></Message>
+                    <Message severity="warn" text="Are you sure?"></Message>
+                    <Message severity="error" text="Field is required"></Message>
+
+                    <div style={{marginTop: '30px'}}>
+                        <InputText placeholder="Username" className="ng-dirty ng-invalid"/>
+                        <Message severity="error" text="Field is required"></Message>
+                    </div>
+                    <div style={{marginTop: '30px'}}>
+                        <InputText placeholder="Email" className="ng-dirty ng-invalid"/>
+                        <Message severity="error"></Message>
+                    </div>
                 </div>
                 <MessagesDoc></MessagesDoc>
             </div>
@@ -89,6 +107,7 @@ export class MessagesDoc extends Component {
 <CodeHighlight className="javascript">
 {`
 import {Messages} from 'primereact/components/messages/Messages';
+import {Message} from 'primereact/components/message/Message';
 
 `}
 </CodeHighlight>
@@ -190,7 +209,21 @@ clear() {
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+                        <h3>Message Component</h3>
+                        <p>Message component is useful in cases where messages need to be displayed related to an element such as forms. It has two property, severity and text of the message.</p>
+<CodeHighlight className="html">
+{`
+<h3>Inline Message CSS</h3>
+<p>CSS helpers to display inline messages mostly within forms.</p>
+<Message severity="info" text="PrimeNG Rocks"></Message>
+<Message severity="success" text="Record Saved"></Message>
+<Message severity="warn" text="Are you sure?"></Message>
+<Message severity="error" text="Field is required"></Message>
+
+`}
+</CodeHighlight>
+
+                        <h3>Attributes</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -374,6 +407,22 @@ export class MessagesDemo extends Component {
                         <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         <Button onClick={this.showMultiple} label="Multiple" />
                         <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
+                    </div>
+
+                    <h3>Inline Message CSS</h3>
+                    <p>CSS helpers to display inline messages mostly within forms.</p>
+                    <Message severity="info" text="PrimeNG Rocks"></Message>
+                    <Message severity="success" text="Record Saved"></Message>
+                    <Message severity="warn" text="Are you sure?"></Message>
+                    <Message severity="error" text="Field is required"></Message>
+
+                    <div style={{marginTop: '30px'}}>
+                        <InputText placeholder="Username" className="ng-dirty ng-invalid"/>
+                        <Message severity="error" text="Field is required"></Message>
+                    </div>
+                    <div style={{marginTop: '30px'}}>
+                        <InputText placeholder="Email" className="ng-dirty ng-invalid"/>
+                        <Message severity="error"></Message>
                     </div>
                 </div>
                 <MessagesDoc></MessagesDoc>
