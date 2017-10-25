@@ -49,6 +49,9 @@ export class ProgressBarDemo extends Component {
 
                     <h3>Static</h3>
                     <ProgressBar value={this.state.value2}></ProgressBar>
+
+                    <h3>Indeterminate</h3>
+                    <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
                 </div>
                 <ProgressBarDoc></ProgressBarDoc>
             </div>
@@ -76,14 +79,20 @@ import {ProgressBar} from 'primereact/components/progressbar/ProgressBar';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>ProgressBar requires a value between 0 and 100 to display the progress.</p>
+            <p>ProgressBar has two modes; "determinate" and "indeterminate". ProgressBar requires a value between 0 and 100 to display the progress.</p>
 <CodeHighlight className="html">
 {`
 <ProgressBar value={this.state.value1}></ProgressBar>
 
 `}
 </CodeHighlight>
+                        <p>Indeterminate has no such a requirement and is simple enabled using mode property.</p>
+                        <CodeHighlight className="html">
+                            {`
+<ProgressBar mode="indeterminate"></ProgressBar>
 
+`}
+                        </CodeHighlight>
 <CodeHighlight className="javascript">
 {`
 constructor() {
@@ -155,6 +164,12 @@ componentDidMount() {
                             <td>null</td>
                             <td>Style class of the element.</td>
                         </tr>
+                        <tr>
+                            <td>mode</td>
+                            <td>string</td>
+                            <td>determinate</td>
+                            <td>Defines the mode of the progress, valid values are "determinate" and "indeterminate".</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -173,6 +188,14 @@ componentDidMount() {
                         <tr>
                             <td>ui-progressbar</td>
                             <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-progressbar-determinate</td>
+                            <td>Container element of a determinate progressbar.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-progressbar-indeterminate</td>
+                            <td>Container element of an indeterminate progressbar.</td>
                         </tr>
                         <tr>
                             <td>ui-progressbar-value</td>
@@ -236,6 +259,9 @@ export class ProgressBarDemo extends Component {
 
                     <h3>Static</h3>
                     <ProgressBar value={this.state.value2}></ProgressBar>
+
+                    <h3>Indeterminate</h3>
+                    <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
                 </div>
                 <ProgressBarDoc></ProgressBarDoc>
             </div>
