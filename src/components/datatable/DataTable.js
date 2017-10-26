@@ -193,11 +193,11 @@ export class DataTable extends Component {
         }
     }
 
-    createPaginator(position, totalRecords) {
+    createPaginator(position, totalRecords, data) {
         let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                          totalRecords={this.props.lazy ? totalRecords : this.processData() ? this.processData().length : totalRecords} />;
+                          totalRecords={totalRecords} />;
     }
 
     onSort(event) {
@@ -830,10 +830,10 @@ export class DataTable extends Component {
             return null;
     }
 
-    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup) {
+    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
         return <ScrollableView header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}
-                virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={this.getTotalRecords()}
+                virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll}></ScrollableView>
     }
     
@@ -866,8 +866,8 @@ export class DataTable extends Component {
         return null;
     }
     
-    getTotalRecords() {
-        return this.props.lazy ? this.props.totalRecords : this.props.value ? this.props.value.length : 0;
+    getTotalRecords(data) {
+        return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
     }
     
     renderLoader() {
@@ -886,7 +886,7 @@ export class DataTable extends Component {
     render() {
         let value = this.processData();
         let columns = this.getColumns();
-        let totalRecords = this.getTotalRecords();
+        let totalRecords = this.getTotalRecords(value);
         let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 
                         'ui-datatable-scrollable': this.props.scrollable, 'ui-datatable-virtual-scrollable': this.props.virtualScroll}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
@@ -908,10 +908,10 @@ export class DataTable extends Component {
             let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
             let frozenView, scrollableView;
             if(frozenColumns) {
-                frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup);
+                frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
             }
 
-            scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup);
+            scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
 
             tableContent = <div className="ui-datatable-scrollable-wrapper">
                                 {frozenView}
