@@ -11,6 +11,7 @@ export class ListBox extends Component {
         id: null,
         value: null,
         options: null,
+        optionLabel: null,
         itemTemplate: null,
         style: null,
         listStyle: null,
@@ -27,6 +28,7 @@ export class ListBox extends Component {
         id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
+        optionLabel: PropTypes.string,
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
         listStyle: PropTypes.object,
@@ -85,12 +87,12 @@ export class ListBox extends Component {
                 }
             }
             else {
-                value = option.value;
+                value = this.getOptionValue(option);
                 valueChanged = true;
             }
         }
         else {
-            value = selected ? null : option.value;            
+            value = selected ? null : this.getOptionValue(option);
             valueChanged = true;
         }
 
@@ -112,13 +114,13 @@ export class ListBox extends Component {
                 if(metaKey)
                     value = this.removeOption(option);
                 else
-                    value = [option.value];
+                    value = [this.getOptionValue(option)];
                 
                 valueChanged = true;
             }
             else {
                 value = (metaKey) ? this.props.value || [] : [];
-                value = [...value, option.value];
+                value = [...value, this.getOptionValue(option)];
                 valueChanged = true;
             }
         }
@@ -126,7 +128,7 @@ export class ListBox extends Component {
             if(selected)
                 value = this.removeOption(option);
             else
-                value = [...this.props.value || [], option.value];
+                value = [...this.props.value || [], this.getOptionValue(option)];
             
             valueChanged = true;
         }
@@ -153,16 +155,17 @@ export class ListBox extends Component {
     }
     
     removeOption(option) {
-        return this.props.value.filter(val => !ObjectUtils.equals(val, option.value, this.props.key));
+        return this.props.value.filter(val => !ObjectUtils.equals(val, this.getOptionValue(option), this.props.key));
     }
     
     isSelected(option) {
         let selected = false;
+        let optionValue = this.getOptionValue(option);
 
         if(this.props.multiple) {
             if(this.props.value) {
                 for(let val of this.props.value) {
-                    if(ObjectUtils.equals(val, option.value, this.props.key)) {
+                    if(ObjectUtils.equals(val, optionValue, this.props.key)) {
                         selected = true;
                         break;
                     }
@@ -170,7 +173,7 @@ export class ListBox extends Component {
             }
         }
         else {
-            selected = ObjectUtils.equals(this.props.value, option.value, this.props.key);
+            selected = ObjectUtils.equals(this.props.value, optionValue, this.props.key);
         }
 
         return selected;
@@ -178,11 +181,21 @@ export class ListBox extends Component {
     
     filter(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
-        return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+        let optionLabel = this.getOptionLabel(option);
+        
+        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
     }
     
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
+    }
+    
+    getOptionValue(option) {
+        return this.props.optionLabel ? option : option.value;
+    }
+    
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
 
     render() {
@@ -200,7 +213,9 @@ export class ListBox extends Component {
             }
 
             items = items.map((option, index) => {
-                return <ListBoxItem key={option.label} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                let optionLabel = this.getOptionLabel(option);
+                
+                return <ListBoxItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
                         onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} />;
             });
         }

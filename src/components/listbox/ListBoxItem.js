@@ -6,6 +6,7 @@ export class ListBoxItem extends Component {
     
     static defaultProps = {
         option: null,
+        label: null,
         selected: false,
         onClick: null,
         onTouchEnd: null,
@@ -14,6 +15,7 @@ export class ListBoxItem extends Component {
     
     static propTypes = {
         option: PropTypes.any,
+        label: PropTypes.string,
         selected: PropTypes.bool,
         onClick: PropTypes.func,
         onTouchEnd: PropTypes.func,
@@ -48,7 +50,7 @@ export class ListBoxItem extends Component {
     
     render() {
         let className = classNames('ui-listbox-item ui-corner-all', {'ui-state-highlight': this.props.selected});
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.option.label;
+        let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
         
         return (
                <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd}>
