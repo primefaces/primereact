@@ -15,7 +15,7 @@ export class AccordionTab extends Component {
     
     static propTypes = {
         header: PropTypes.string,
-        disabled: PropTypes.boolean,
+        disabled: PropTypes.bool,
         headerStyle: PropTypes.object,
         headerClassName: PropTypes.string,
         contentStyle: PropTypes.object,
