@@ -8,7 +8,12 @@ export class DropdownDemo extends Component {
 
     constructor() {
         super();
-        this.state = {city: null, car: null, car2: 'BMW'};
+        this.state = {
+            city: null, 
+            car: null, 
+            car2: 'BMW'
+        };
+        
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
@@ -44,11 +49,11 @@ export class DropdownDemo extends Component {
 
     render() {
         var cities = [
-            {label: 'New York', value: 'New York'},
-            {label: 'Rome', value: 'Rome'},
-            {label: 'London', value: 'London'},
-            {label: 'Istanbul', value: 'Istanbul'},
-            {label: 'Paris', value: 'Paris'},
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
         ];
 
         var cars = [
@@ -74,8 +79,8 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
-                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City" optionLabel="name"/>
+                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
                     <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
@@ -432,7 +437,12 @@ export class DropdownDemo extends Component {
 
     constructor() {
         super();
-        this.state = {city: null, car: null, car2: 'BMW'};
+        this.state = {
+            city: null, 
+            car: null, 
+            car2: 'BMW'
+        };
+        
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
@@ -468,11 +478,11 @@ export class DropdownDemo extends Component {
 
     render() {
         var cities = [
-            {label: 'New York', value: 'New York'},
-            {label: 'Rome', value: 'Rome'},
-            {label: 'London', value: 'London'},
-            {label: 'Istanbul', value: 'Istanbul'},
-            {label: 'Paris', value: 'Paris'},
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
         ];
 
         var cars = [
@@ -499,7 +509,7 @@ export class DropdownDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
                     <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
-                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city : 'No city selected'}</div>
+                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
                     <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>

@@ -6,6 +6,7 @@ export class DropdownItem extends Component {
     
     static defaultProps = {
         option: null,
+        label: null,
         template: null,
         selected: false,
         onClick: null
@@ -13,6 +14,7 @@ export class DropdownItem extends Component {
 
     static propTypes = {
         option: PropTypes.object,
+        label: PropTypes.string,
         template: PropTypes.func,
         selected: PropTypes.bool,
         onClick: PropTypes.func
@@ -36,9 +38,9 @@ export class DropdownItem extends Component {
     render() {
         let className = classNames('ui-dropdown-item ui-corner-all', {
             'ui-state-highlight': this.props.selected,
-            'ui-dropdown-item-empty': (!this.props.option.label || this.props.option.label.length === 0)
+            'ui-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)
         });
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.option.label;
+        let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
         
         return (
             <li className={className} onClick={this.onClick}>

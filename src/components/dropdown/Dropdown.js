@@ -11,6 +11,7 @@ export class Dropdown extends Component {
         id: null,
         value: null,
         options: null,
+        optionLabel: null,
         itemTemplate: null,
         style: null,
         className: null,
@@ -38,6 +39,7 @@ export class Dropdown extends Component {
         id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
+        optionLabel: PropTypes.string,
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -233,7 +235,7 @@ export class Dropdown extends Component {
             this.updateEditableLabel(event.option);
             this.props.onChange({
                 originalEvent: event.originalEvent,
-                value: event.option.value
+                value: this.props.optionLabel ? event.option : event.option.value
             });
         } 
     }
@@ -242,7 +244,7 @@ export class Dropdown extends Component {
         let index = -1;
         if(this.props.options) {
             for(let i = 0; i < this.props.options.length; i++) {
-                let optionValue = this.props.options[i].value;
+                let optionValue = this.props.optionLabel ? this.props.options[i] : this.props.options[i].value;
                 if((value === null && optionValue == null) || ObjectUtils.equals(value, optionValue, this.props.dataKey)) {
                     index = i;
                     break;
@@ -303,13 +305,15 @@ export class Dropdown extends Component {
     
     updateEditableLabel(option): void {
         if(this.editableInput) {
-            this.editableInput.value = (option ? option.label : this.props.value||'');
+            this.editableInput.value = (option ? this.getOptionLabel(option) : this.props.value||'');
         }
     }
     
     filter(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
-        return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+        let optionLabel = this.getOptionLabel(option);
+        
+        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
     }
     
     hasFilter() {
@@ -319,7 +323,7 @@ export class Dropdown extends Component {
     renderHiddenSelect() {
         if(this.props.autoWidth) {
             let options = this.props.options && this.props.options.map((option, i) => {
-                return <option key={option.label} value={option.value}>{option.label}</option>;
+                return <option key={this.getOptionLabel(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
             });
             
             return (<div className="ui-helper-hidden-accessible">
@@ -376,7 +380,8 @@ export class Dropdown extends Component {
         }
         
         items = items && items.map((option, index) => {
-            return <DropdownItem key={option.label} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
+            let optionLabel = this.getOptionLabel(option);
+            return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
                     onClick={this.onOptionClick} />;
         });
         
@@ -401,6 +406,10 @@ export class Dropdown extends Component {
         else {
             return null;
         }
+    }
+    
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
     
     componentDidMount() {
@@ -435,7 +444,7 @@ export class Dropdown extends Component {
     render() {
         let className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix', this.props.className, {'ui-state-disabled': this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
-        let label = selectedOption ? selectedOption.label : null;
+        let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
         
         let hiddenSelect = this.renderHiddenSelect();
         let keyboardHelper = this.renderKeyboardHelper();
