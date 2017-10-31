@@ -119,10 +119,49 @@ import {Dropdown} from 'primereact/components/dropdown/Dropdown';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Dropdown requires a collection of options with label-value pairs and an onChange event to provide the selected value.</p>
+                        <p>Dropdown requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
+                        whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+                        control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
+
+
+                        <p><b>Options as SelectItems</b></p>
+                        <CodeHighlight className="javascript">
+                            {`
+var citySelectItems = [
+    {label: 'New York', value: 'NY'},
+    {label: 'Rome', value: 'RM'},
+    {label: 'London', value: 'LDN'},
+    {label: 'Istanbul', value: 'IST'},
+    {label: 'Paris', value: 'PRS'}
+];
+
+`}
+                        </CodeHighlight>
+                        
                         <CodeHighlight className="html">
                             {`
-<Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
+<Dropdown value={this.state.city} options={citySelectItems} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
+
+`}
+                        </CodeHighlight>
+                        
+                        <p><b>Options as any type</b></p>
+                        <CodeHighlight className="javascript">
+                            {`
+var cities = [
+    {name: 'New York', code: 'NY'},
+    {name: 'Rome', code: 'RM'},
+    {name: 'London', code: 'LDN'},
+    {name: 'Istanbul', code: 'IST'},
+    {name: 'Paris', code: 'PRS'}
+];
+
+`}
+                        </CodeHighlight>
+                        
+                        <CodeHighlight className="html">
+                            {`
+<Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
 
 `}
                         </CodeHighlight>
@@ -223,6 +262,12 @@ render() {
                                         <td>array</td>
                                         <td>null</td>
                                         <td>An array of selectitems to display as the available options.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionLabel</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
                                     </tr>
                                     <tr>
                                         <td>itemTemplate</td>
