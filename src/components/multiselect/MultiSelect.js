@@ -12,6 +12,7 @@ export class MultiSelect extends Component {
         id: null,
         value: null,
         options: null,
+        optionLabel: null,
         style: null,
         className: null,
         scrollHeight: '200px',
@@ -27,6 +28,7 @@ export class MultiSelect extends Component {
         id: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
+        optionLabel: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
@@ -54,7 +56,7 @@ export class MultiSelect extends Component {
     }
 
     onOptionClick(event) {
-        let optionValue = event.option.value;
+        let optionValue = this.getOptionValue(event.option);
         let selectionIndex = this.findSelectionIndex(optionValue);
         let newValue;
         
@@ -64,7 +66,6 @@ export class MultiSelect extends Component {
             newValue = [...this.props.value || [], optionValue];
         
         this.updateModel(event.originalEvent, newValue);
-        event.originalEvent.stopPropagation();
     }
 
     onClick() {
@@ -98,7 +99,7 @@ export class MultiSelect extends Component {
             if(options) {
                 newValue = [];
                 for(let option of options) {
-                    newValue.push(option.value);
+                    newValue.push(this.getOptionValue(option));
                 } 
             }
         }
@@ -136,6 +137,7 @@ export class MultiSelect extends Component {
     hide() {
         this.panel.style.display = 'none';
         this.unbindDocumentClickListener();
+        this.clearClickState();
     }
     
     onCloseClick(event) {
@@ -159,8 +161,8 @@ export class MultiSelect extends Component {
         return index;
     }
 
-    isSelected(value) {
-        return this.findSelectionIndex(value) !== -1;
+    isSelected(option) {
+        return this.findSelectionIndex(this.getOptionValue(option)) !== -1;
     }
 
     getLabel() {
@@ -183,14 +185,18 @@ export class MultiSelect extends Component {
     }
 
     findLabelByValue(val) {
-        var label = null;
-        for(var i = 0; i < this.props.options.length; i++) {
-            var option = this.props.options[i];
-            if(option.value === val) {
-                label = option.label;
+        let label = null;
+        
+        for(let i = 0; i < this.props.options.length; i++) {
+            let option = this.props.options[i];
+            let optionValue = this.getOptionValue(option);
+            
+            if(optionValue === val) {
+                label = this.getOptionLabel(option);
                 break; 
             }
         }
+        
         return label;
     }
 
@@ -225,13 +231,19 @@ export class MultiSelect extends Component {
             this.hide();
         }
         
+        this.clearClickState();
+    }
+    
+    clearClickState() {
         this.selfClick = false;
         this.panelClick = false;
     }
     
     filterOption(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
-        return option.label.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+        let optionLabel = this.getOptionLabel(option);
+        
+        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
     }
     
     hasFilter() {
@@ -250,6 +262,14 @@ export class MultiSelect extends Component {
             return this.filterOption(option);
         });
     }
+    
+    getOptionValue(option) {
+        return this.props.optionLabel ? option : option.value;
+    }
+    
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+    }
 
     render() {
         let className = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
@@ -264,8 +284,10 @@ export class MultiSelect extends Component {
             }
             
             items = items.map((option) => {
-                return <MultiSelectItem key={option.label} option={option} template={this.props.itemTemplate} 
-                        selected={this.isSelected(option.value)} onClick={this.onOptionClick} />;
+                let optionLabel = this.getOptionLabel(option);
+                
+                return <MultiSelectItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} 
+                        selected={this.isSelected(option)} onClick={this.onOptionClick} />;
                 });
         }
         

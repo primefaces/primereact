@@ -6,6 +6,7 @@ export class MultiSelectItem extends Component {
     
     static defaultProps = {
         option: null,
+        label: null,
         selected: false,
         template: null,
         onClick: null
@@ -13,6 +14,7 @@ export class MultiSelectItem extends Component {
 
     static propTypes = {
         option: PropTypes.object,
+        label: PropTypes.string,
         selected: PropTypes.bool,
         template: PropTypes.func,
         onClick: PropTypes.func
@@ -38,7 +40,7 @@ export class MultiSelectItem extends Component {
         let className = classNames('ui-multiselect-item ui-corner-all', {'ui-state-highlight': this.props.selected});
         let checkboxClassName = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.selected});
         let checkboxIcon = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.selected});
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.option.label;
+        let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
         
         return (
             <li className={className} onClick={this.onClick}>
