@@ -33,7 +33,7 @@ export class DataTablePaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10}>
+                    <DataTable value={this.state.cars} paginator={true} rows={10} rowsPerPageOptions={[5,10,20]} >
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -90,7 +90,7 @@ export class DataTablePaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10}>
+                    <DataTable value={this.state.cars} paginator={true} rows={10} rowsPerPageOptions={[5,10,20]}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />

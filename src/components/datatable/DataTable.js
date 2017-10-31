@@ -27,6 +27,7 @@ export class DataTable extends Component {
         first: null,
         rows: null,
         totalRecords: null,
+        rowsPerPageOptions: null,
         lazy: false,
         sortField: null,
         sortOrder: null,
@@ -98,6 +99,7 @@ export class DataTable extends Component {
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
+        rowsPerPageOptions: PropTypes.array,
         lazy: PropTypes.bool,
         sortField: PropTypes.string,
         sortOrder: PropTypes.number,
@@ -197,7 +199,7 @@ export class DataTable extends Component {
         let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                          totalRecords={totalRecords} />;
+                          totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions}/>;
     }
 
     onSort(event) {

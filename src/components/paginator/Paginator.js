@@ -132,8 +132,7 @@ export class Paginator extends Component {
     }
 
     onRowsChange(event) {
-        this.changePage(0, this.props.rowsPerPageOptions[event.target.selectedIndex]);
-        event.preventDefault();
+        this.changePage(0, event.value);
     }
 
     render() {
@@ -165,7 +164,7 @@ export class Paginator extends Component {
                 break;
                 
                 case 'RowsPerPageDropdown':
-                    element = <RowsPerPageDropdown key={key} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} />;
+                    element = <RowsPerPageDropdown key={key} value={this.props.rows} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} />;
                 break;
                 
                 case 'CurrentPageReport':
