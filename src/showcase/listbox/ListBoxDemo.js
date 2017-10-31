@@ -353,11 +353,11 @@ export class ListBoxDemo extends Component {
 
     render() {
         var cities = [
-            {label: 'New York', value: 'New York'},
-            {label: 'Rome', value: 'Rome'},
-            {label: 'London', value: 'London'},
-            {label: 'Istanbul', value: 'Istanbul'},
-            {label: 'Paris', value: 'Paris'},
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
         ];
 
         var cars = [
@@ -375,10 +375,10 @@ export class ListBoxDemo extends Component {
         return (
             <div>
                 <h3 className="first">Single</h3>
-                <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+                <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
                 
                 <h3>Multiple</h3>
-                <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} />
+                <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
 
                 <h3>Advanced</h3>
                 <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({cities: e.value})} itemTemplate={this.carTemplate} 

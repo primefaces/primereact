@@ -44,7 +44,7 @@ export class SelectButton extends Component {
         }
         
         let selected = this.isSelected(event.option);
-        let optionValue = event.option.value;
+        let optionValue = this.getOptionValue(event.option);
         let newValue;
 
         if(this.props.multiple) {
@@ -69,14 +69,23 @@ export class SelectButton extends Component {
             });
         }
     }
+    
+    getOptionValue(option) {
+        return this.props.optionLabel ? option : option.value;
+    }
+    
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+    }
 
     isSelected(option) {
         let selected = false;
+        let optionValue = this.getOptionValue(option);
         
         if(this.props.multiple) {
             if(this.props.value && this.props.value.length) {
                 for(let val of this.props.value) {
-                    if(ObjectUtils.equals(val, option.value, this.props.dataKey)) {
+                    if(ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
                         selected = true;
                         break;
                     }
@@ -84,7 +93,7 @@ export class SelectButton extends Component {
             }
         }
         else {
-            selected = ObjectUtils.equals(this.props.value, option.value, this.props.dataKey);
+            selected = ObjectUtils.equals(this.props.value, optionValue, this.props.dataKey);
         }
         
         return selected;
@@ -93,7 +102,9 @@ export class SelectButton extends Component {
     renderItems() {
         if(this.props.options && this.props.options.length) {
             return this.props.options.map((option, index) => {
-                return <SelectButtonItem key={option.label} option={option} onClick={this.onOptionClick}
+                let optionLabel = this.getOptionLabel(option);
+                
+                return <SelectButtonItem key={optionLabel} label={optionLabel} option={option} onClick={this.onOptionClick}
                             selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} />;
             });
         }

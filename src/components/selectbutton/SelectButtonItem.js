@@ -7,6 +7,7 @@ export class SelectButtonItem extends Component {
 
     static defaultProps = {
         option: null,
+        label: null,
         selected: null,
         tabIndex: null,
         onClick: null
@@ -14,6 +15,7 @@ export class SelectButtonItem extends Component {
 
     static propTypes = {
         option: PropTypes.object,
+        label: PropTypes.string,
         selected: PropTypes.bool,
         tabIndex: PropTypes.number,
         onClick: PropTypes.func
@@ -52,10 +54,10 @@ export class SelectButtonItem extends Component {
         
         return (
             <div ref={(el) => this.el = el} className={className} onClick={this.onClick}>
-                <span className="ui-button-text ui-c">{this.props.option.label}</span>
+                <span className="ui-button-text ui-c">{this.props.label}</span>
                 <div className="ui-helper-hidden-accessible">
                     <input type="checkbox" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} 
-                        tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.option.label}/>
+                        tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
                 </div>
             </div>
         );
