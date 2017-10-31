@@ -66,26 +66,48 @@ import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>MultiSelect requires a collection of options with label-value pairs, a value and an onChange event to provide the selected value.</p>
+            <p>MultiSelect requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
+            whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+            control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
         
-<CodeHighlight className="html">
+            <p><b>Options as SelectItems</b></p>
+            <CodeHighlight className="javascript">
 {`
-<MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} />
+var citySelectItems = [
+    {label: 'New York', value: 'NY'},
+    {label: 'Rome', value: 'RM'},
+    {label: 'London', value: 'LDN'},
+    {label: 'Istanbul', value: 'IST'},
+    {label: 'Paris', value: 'PRS'}
+];
+
+`}
+            </CodeHighlight>
+        
+            <CodeHighlight className="html">
+{`
+<MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} />
+
+`}
+            </CodeHighlight>
+
+            <p><b>Options as any type</b></p>
+<CodeHighlight className="javascript">
+{`
+var cities = [
+    {name: 'New York', code: 'NY'},
+    {name: 'Rome', code: 'RM'},
+    {name: 'London', code: 'LDN'},
+    {name: 'Istanbul', code: 'IST'},
+    {name: 'Paris', code: 'PRS'}
+];
 
 `}
 </CodeHighlight>
 
-            <p>SelectItem API represents an option using label and value properties. Value can be a string as well as an arbirary object.</p>
-
-<CodeHighlight className="javascript">
+<CodeHighlight className="html">
 {`
-let cities = [
-    {label: 'New York', value: 'New York'},
-    {label: 'Rome', value: 'Rome'},
-    {label: 'London', value: 'London'},
-    {label: 'Istanbul', value: 'Istanbul'},
-    {label: 'Paris', value: 'Paris'}
-];
+<MultiSelect optionLabel="name" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
 
 `}
 </CodeHighlight>
@@ -155,6 +177,12 @@ carTemplate(option) {
                             <td>array</td>
                             <td>null</td>
                             <td>An array of selectitems to display as the available options.</td>
+                        </tr>
+                        <tr>
+                            <td>optionLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
                         </tr>
                         <tr>
                             <td>style</td>
