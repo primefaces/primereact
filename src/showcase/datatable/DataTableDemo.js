@@ -1490,6 +1490,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Number of total records, defaults to length of value when not defined.</td>
                         </tr>
                         <tr>
+                            <td>rowsPerPageOptions</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Array of integer values to display inside rows per page dropdown.</td>
+                        </tr>
+                        <tr>
                             <td>lazy</td>
                             <td>boolean</td>
                             <td>false</td>
