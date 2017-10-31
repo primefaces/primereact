@@ -94,29 +94,51 @@ import {ListBox} from 'primereact/components/listbox/ListBox';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>ListBox requires a collection of options with label-value pairs, a value and an onChange event to provide the selected value.</p>
-                    
-<CodeHighlight className="html">
+            <p>Listbox requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
+            whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+            control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
+        
+            <p><b>Options as SelectItems</b></p>
+            <CodeHighlight className="javascript">
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
-
-`}
-</CodeHighlight>
-
-            <p>SelectItem API represents an option using label and value properties. Value can be a string as well as an arbirary object.</p>
-
-<CodeHighlight className="javascript">
-{`
-let cities = [
-    {label: 'New York', value: 'New York'},
-    {label: 'Rome', value: 'Rome'},
-    {label: 'London', value: 'London'},
-    {label: 'Istanbul', value: 'Istanbul'},
-    {label: 'Paris', value: 'Paris'}
+var citySelectItems = [
+    {label: 'New York', value: 'NY'},
+    {label: 'Rome', value: 'RM'},
+    {label: 'London', value: 'LDN'},
+    {label: 'Istanbul', value: 'IST'},
+    {label: 'Paris', value: 'PRS'}
 ];
 
 `}
-</CodeHighlight>
+            </CodeHighlight>
+
+            <CodeHighlight className="html">
+{`
+<Listbox value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})} />
+
+`}
+            </CodeHighlight>
+
+            <p><b>Options as any type</b></p>
+            <CodeHighlight className="javascript">
+{`
+var cities = [
+    {name: 'New York', code: 'NY'},
+    {name: 'Rome', code: 'RM'},
+    {name: 'London', code: 'LDN'},
+    {name: 'Istanbul', code: 'IST'},
+    {name: 'Paris', code: 'PRS'}
+];
+
+`}
+            </CodeHighlight>
+
+            <CodeHighlight className="html">
+{`
+<Listbox optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+
+`}
+            </CodeHighlight>
 
             <h3>Selection</h3>
             <p>Listbox allows selection of either single or multiple items whereas checkbox option displays a checkbox to indicate multiple selection. 
