@@ -2,6 +2,11 @@ import React = require("react");
 
 interface AccordionTabProps {
     header?: string;
+    disabled?: boolean;
+    headerStyle?: any;
+    headerClassName?: string;
+    contentStyle?: any;
+    contentClassName?: string;
 }
 
 export class AccordionTab extends React.Component<AccordionTabProps,any> {}

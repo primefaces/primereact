@@ -157,46 +157,46 @@ import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
                         </tr>
                     </tbody>
                 </table>
+            </div>
                 
-                <h3>Properties For TabView</h3>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
+            <h3>Properties For TabView</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Description</th>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Unique identifier of the element.</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>id</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Unique identifier of the element.</td>
-                            </tr>
-                            <tr>
-                                <td>activeIndex</td>
-                                <td>number</td>
-                                <td>null</td>
-                                <td>Active index of the TabView.</td>
-                            </tr>
-                            <tr>
-                                <td>style</td>
-                                <td>object</td>
-                                <td>null</td>
-                                <td>Inline style of the tabview.</td>
-                            </tr>
-                            <tr>
-                                <td>className</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Style class of the tabview.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <tr>
+                            <td>activeIndex</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Active index of the TabView.</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the tabview.</td>
+                        </tr>
+                        <tr>
+                            <td>className</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the tabview.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <h3>Events</h3>

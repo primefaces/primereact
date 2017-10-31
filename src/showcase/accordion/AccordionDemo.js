@@ -61,8 +61,10 @@ export class AccordionDemo extends Component {
                             third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
                             now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
                         </AccordionTab>
+                        <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
                     </Accordion>
                 </div>
+                
                 <AccordionDoc></AccordionDoc>
             </div>
         )
@@ -146,7 +148,59 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties For AccordionTab</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>header</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Orientation of tab headers.</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the tab is disabled.</td>
+                        </tr>
+                        <tr>
+                            <td>headerStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the tab header.</td>
+                        </tr>
+                        <tr>
+                            <td>headerClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the tab header.</td>
+                        </tr>
+                        <tr>
+                            <td>contentStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the tab content.</td>
+                        </tr>
+                        <tr>
+                            <td>contentClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the tab content.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -321,6 +375,7 @@ export class AccordionDemo extends Component {
                             third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
                             now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
                         </AccordionTab>
+                        <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
                     </Accordion>
                 </div>
                 <AccordionDoc></AccordionDoc>

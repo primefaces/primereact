@@ -5,11 +5,21 @@ import classNames from 'classnames';
 export class AccordionTab extends Component {
     
     static defaultProps = {
-        header: null
+        header: null,
+        disabled: false,
+        headerStyle: null,
+        headerClassName: null,
+        contentStyle: null,
+        contentClassName: null
     }
     
     static propTypes = {
-        header: PropTypes.string
+        header: PropTypes.string,
+        disabled: PropTypes.boolean,
+        headerStyle: PropTypes.object,
+        headerClassName: PropTypes.string,
+        contentStyle: PropTypes.object,
+        contentClassName: PropTypes.string
     }
 }
 
@@ -37,79 +47,94 @@ export class Accordion extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {activeIndex: props.activeIndex};
+        this.state = {
+            activeIndex: props.activeIndex
+        };
     }
     
-    onTabClick(e, i) {
-        var selected = this.isSelected(i);
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            activeIndex: nextProps.activeIndex
+        });
+    }
+    
+    onTabClick(event, tab, i) {
+        if(!tab.props.disabled) {
+            let selected = this.isSelected(i);
 
-        if(this.props.multiple) {
-            var indexes = this.state.activeIndex||[];
-            if(selected)
-                indexes = indexes.filter(index => index !== i);
-            else
-                indexes = [...indexes,i];
+            if(this.props.multiple) {
+                var indexes = this.state.activeIndex||[];
+                if(selected)
+                    indexes = indexes.filter(index => index !== i);
+                else
+                    indexes = [...indexes,i];
 
-            this.setState({activeIndex: indexes});
+                this.setState({activeIndex: indexes});
+            }
+            else {
+                if(selected)
+                    this.setState({activeIndex: null});
+                else
+                    this.setState({activeIndex: i});
+            }
+
+            let callback = selected ? this.props.onTabOpen : this.props.onTabClose;
+            if(callback) {
+                callback({originalEvent: event, index: i});
+            }
         }
-        else {
-            if(selected)
-                this.setState({activeIndex: null});
-            else
-                this.setState({activeIndex: i});
-        }
 
-        var callback = selected ? this.props.onTabOpen : this.props.onTabClose;
-        if(callback) {
-            callback({originalEvent: e, index: i});
-        }
-
-        e.preventDefault();
+        event.preventDefault();
     }
 
     isSelected(i) {
-        return this.props.multiple ? this.state.activeIndex && this.state.activeIndex.includes(i) : this.state.activeIndex === i;
+        return this.props.multiple ? (this.state.activeIndex && this.state.activeIndex.indexOf(i) !== -1) : this.state.activeIndex === i;
     }
- 
-    componentWillReceiveProps(nextProps) {
-        this.setState({activeIndex: nextProps.activeIndex});
-    }
-        
-    render() {
-        var tabs = null;
-        
-        if(this.props.children)
-            tabs = this.props.children.map((tab,i) => {
-                let selected = this.isSelected(i);
-                let tabHeaderClass = classNames('ui-accordion-header ui-state-default ui-corner-all', {
-                    'ui-state-active': selected
-                });
-                
-                let tabHeader = <div className={tabHeaderClass} key={tab.props.header} onClick={(e) => this.onTabClick(e, i)}>
-                    <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
-                    <a href="#">{tab.props.header}</a>
-                </div>;
-                
-                let tabContentWrapperClass = classNames('ui-accordion-content-wrapper', {
-                    'ui-helper-hidden': !selected
-                }); 
-                
-                let tabContent = <div className={tabContentWrapperClass}>
-                    <div className="ui-accordion-content ui-widget-content">
-                        {tab.props.children}
-                    </div>
-                </div>;
-
-                return (
-                    <div key={tab.props.header} className="ui-accordion-tab">
-                        {tabHeader}
-                        {tabContent}
-                    </div>
-                );
-            })
+    
+    renderTabHeader(tab, selected, index) {
+        let tabHeaderClass = classNames(tab.props.headerClassName, 'ui-accordion-header ui-state-default ui-corner-all', {'ui-state-active': selected, 'ui-state-disabled': tab.props.disabled});
         
         return (
-            <div id={this.props.id} className={classNames('ui-accordion ui-widget ui-helper-reset', this.props.className)} style={this.props.style}>
+            <div className={tabHeaderClass} style={tab.props.headerStyle} onClick={(event) => this.onTabClick(event, tab, index)}>
+                <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
+                <a href="#">{tab.props.header}</a>
+            </div>
+        );
+    }
+    
+    renderTabContent(tab, selected) {
+        let tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper', {'ui-helper-hidden': !selected}); 
+        
+        return (
+            <div className={tabContentWrapperClass} style={tab.props.contentStyle}>
+                <div className="ui-accordion-content ui-widget-content">
+                    {tab.props.children}
+                </div>
+            </div>
+        );
+    } 
+    
+    renderTab(tab, index) {
+        let selected = this.isSelected(index);
+        let tabHeader = this.renderTabHeader(tab, selected, index);
+        let tabContent = this.renderTabContent(tab, selected);
+
+        return (
+            <div key={tab.props.header} className="ui-accordion-tab">
+                {tabHeader}
+                {tabContent}
+            </div>
+        );
+    }
+         
+    render() {
+        let tabs = React.Children.map(this.props.children, (tab, index) => {
+            return this.renderTab(tab, index);
+        });
+        let className = classNames('ui-accordion ui-widget ui-helper-reset', this.props.className);
+
+        return (
+            <div id={this.props.id} className={className} style={this.props.style}>
                 {tabs}
             </div>
         );
