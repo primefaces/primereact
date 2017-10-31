@@ -91,8 +91,8 @@ export class Dropdown extends Component {
         if(this.documentClickListener) {
             this.selfClick = true;
         }
-        
-        if(!this.overlayClick) {
+                
+        if(!this.overlayClick && !this.editableInputClick) {
             this.focusInput.focus();
             
             if(this.panel.offsetParent) {
@@ -107,6 +107,10 @@ export class Dropdown extends Component {
                     }, 200);
                 }
             }
+        }
+        
+        if(this.editableInputClick) {
+            this.expeditableInputClick = false;
         }
     }
     
@@ -194,7 +198,7 @@ export class Dropdown extends Component {
     }
     
     onEditableInputClick(event) {
-        this.itemClick = true;
+        this.editableInputClick = true;
         this.bindDocumentClickListener();
     }
     
@@ -211,7 +215,6 @@ export class Dropdown extends Component {
     }
     
     onOptionClick(event) {
-        this.itemClick = true;
         this.selectItem(event);
         this.focusInput.focus();
         this.hide();
@@ -270,6 +273,8 @@ export class Dropdown extends Component {
 
     hide() {
         this.panel.style.display = 'none';
+        this.unbindDocumentClickListener();
+        this.clearClickState();
     }
     
     alignPanel() {
@@ -282,14 +287,11 @@ export class Dropdown extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = () => {
-                if(!this.selfClick && !this.itemClick && !this.overlayClick) {
+                if(!this.selfClick && !this.overlayClick) {
                     this.hide();
-                    this.unbindDocumentClickListener();
                 }
                 
-                this.selfClick = false;
-                this.itemClick = false;
-                this.overlayClick = false;
+                this.clearClickState();
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -301,6 +303,12 @@ export class Dropdown extends Component {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
+    }
+    
+    clearClickState() {
+        this.selfClick = false;
+        this.editableInputClick = false;
+        this.overlayClick = false;
     }
     
     updateEditableLabel(option): void {
