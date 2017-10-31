@@ -65,31 +65,51 @@ import {SelectButton} from 'primereact/components/selectbutton/SelectButton';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>SelectButton requires a value, collection of options with label-value pairs and an onChange event to provide the selected value.</p>
+            <p>SelectButton requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
+            whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+            control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
+                    
+            <p><b>Options as SelectItems</b></p>
+            <CodeHighlight className="javascript">
+                {`
+var citySelectItems = [
+    {label: 'New York', value: 'NY'},
+    {label: 'Rome', value: 'RM'},
+    {label: 'London', value: 'LDN'},
+    {label: 'Istanbul', value: 'IST'},
+    {label: 'Paris', value: 'PRS'}
+];
+
+`}
+            </CodeHighlight>
                     
 <CodeHighlight className="html">
 {`
-<SelectButton value={this.state.val} options={this.options} onChange={(e) => this.setState({val: event.value})}></SelectButton>
+<SelectButton value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({val: event.value})}></SelectButton>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+            <p><b>Options as any type</b></p>
+            <CodeHighlight className="javascript">
 {`
-constructor(props) {
-    super(props);
-    this.state = {
-        val: null
-    };
-    
-    this.options = [
-        {label: 'Apartment', value: 'Apartment'},
-        {label: 'House', value: 'House'},
-        {label: 'Studio', value: 'Studio'}
-    ];
-}
+var cities = [
+    {name: 'New York', code: 'NY'},
+    {name: 'Rome', code: 'RM'},
+    {name: 'London', code: 'LDN'},
+    {name: 'Istanbul', code: 'IST'},
+    {name: 'Paris', code: 'PRS'}
+];
+
 `}
 </CodeHighlight>
+                    
+            <CodeHighlight className="html">
+{`
+<SelectButton value={this.state.city} options={cities} onChange={(e) => this.setState({val: event.value})}></SelectButton>
+
+`}
+            </CodeHighlight>
 
             <h3>Multiple</h3>
             <p>SelectButton allows selecting only one item by default and setting multiple option enables choosing more than one item. In multiple case, model property should be an array.</p>
@@ -124,11 +144,17 @@ constructor(props) {
                             <td>null</td>
                             <td>Value of the component.</td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>options</td>
                             <td>array</td>
                             <td>null</td>
                             <td>An array of objects to display as the available options.</td>
+                        </tr>
+                        <tr>
+                            <td>optionLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
                         </tr>
                         <tr>
                             <td>tabIndex</td>

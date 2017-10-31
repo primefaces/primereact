@@ -220,6 +220,12 @@ carTemplate(option) {
                             <td>An array of objects to display as the available options.</td>
                         </tr>
                         <tr>
+                            <td>optionLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
+                        </tr>
+                        <tr>
                             <td>itemTemplate</td>
                             <td>function</td>
                             <td>null</td>
