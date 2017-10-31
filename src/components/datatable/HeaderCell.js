@@ -15,11 +15,8 @@ export class HeaderCell extends Component {
 
     onClick(e) {
         if(this.props.sortable) {
-            let targetNode = e.target.nodeName;
-            if(targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || (DomHandler.hasClass(e.target, 'ui-clickable'))) {
-                return;
-            }
-            else {
+            let targetNode = e.target;
+            if(DomHandler.hasClass(targetNode, 'ui-sortable-column') || DomHandler.hasClass(targetNode, 'ui-column-title') || DomHandler.hasClass(targetNode, 'ui-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
                     sortField: this.props.field
