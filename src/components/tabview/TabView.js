@@ -19,7 +19,7 @@ export class TabPanel extends Component {
         header: PropTypes.string,
         leftIcon: PropTypes.string,
         rightIcon: PropTypes.string,
-        disabled: PropTypes.boolean,
+        disabled: PropTypes.bool,
         headerStyle: PropTypes.object,
         headerClassName: PropTypes.string,
         contentStyle: PropTypes.object,
@@ -45,7 +45,7 @@ export class TabView extends Component {
     static propTypes = {
         id: PropTypes.string,
         activeIndex: PropTypes.number,
-        style: null,
+        style: PropTypes.object,
         className: PropTypes.string
     };
     
