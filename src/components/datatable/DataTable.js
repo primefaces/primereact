@@ -186,7 +186,9 @@ export class DataTable extends Component {
                 first: event.first,
                 rows: event.rows,
                 sortField: this.state.sortField,
-                sortOrder: this.state.sortOrder
+                sortOrder: this.state.sortOrder,
+                multiSortMeta: this.state.multiSortMeta,
+                filters: this.state.filters
             });
         }
 
@@ -226,11 +228,12 @@ export class DataTable extends Component {
 
         if(this.props.lazy) {
             this.props.onLazyLoad({
-                first: this.state.first,
+                first: 0,
                 rows: this.state.rows,
                 sortField: sortField,
                 sortOrder: sortOrder,
-                multiSortMeta: multiSortMeta
+                multiSortMeta: multiSortMeta,
+                filters: this.state.filters
             });
         }
 
@@ -324,6 +327,17 @@ export class DataTable extends Component {
             filters: filterMetadata
         });
 
+        if(this.props.lazy) {
+            this.props.onLazyLoad({
+                first: 0,
+                rows: this.state.rows,
+                sortField: this.state.sortField,
+                sortOrder: this.state.sortOrder,
+                multiSortMeta: this.state.multiSortMeta,
+                filters: filterMetadata
+            });
+        }
+
         if(this.props.onFilter) {
             this.props.onFilter({
                 filters: filterMetadata
@@ -355,7 +369,8 @@ export class DataTable extends Component {
                 rows: this.props.rows,
                 sortField: this.props.sortField,
                 sortOrder: this.props.sortOrder,
-                multiSortMeta: this.props.multiSortField
+                multiSortMeta: this.props.multiSortField,
+                filters: this.props.filters
             });
         }
     }
@@ -629,7 +644,9 @@ export class DataTable extends Component {
                     first: first,
                     rows: this.state.rows,
                     sortField: this.state.sortField,
-                    sortOrder: this.state.sortOrder
+                    sortOrder: this.state.sortOrder,
+                    multiSortMeta: this.state.multiSortMeta,
+                    filters: this.state.filters
                 });
             }
         }, this.props.virtualScrollDelay);
