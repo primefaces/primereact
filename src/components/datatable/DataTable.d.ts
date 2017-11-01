@@ -1,5 +1,13 @@
 import React = require("react");
 
+interface DataTableLazyLoadEvent {
+    first: number;
+    rows: number;
+    sortField: string;
+    sortOrder: number;
+    multiSortMeta: Array<any>;
+}
+
 interface DataTableProps {
     id?: string;
     value?: Array<any>;
@@ -57,7 +65,7 @@ interface DataTableProps {
     onSort?(sortField: string, sortOrder: number, multiSortMeta: Array<any>): void;
     onPage?(): void;
     onFilter?(filters: Array<any>): void;
-    onLazyLoad?(first: number, rows: number, sortField: string, sortOrder: number, multiSortMeta: Array<any>): void;
+    onLazyLoad?(event: DataTableLazyLoadEvent): void;
     onRowClick?(originalEvent: Event, data: any, index: number): void;
     onRowSelect?(originalEvent: Event, data: any, index: number): void;
     onRowUnselect?(originalEvent: Event, data: any, index: number): void;
