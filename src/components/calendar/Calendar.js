@@ -337,10 +337,11 @@ export class Calendar extends Component {
                 }
             }
         }
-                
-        if(this.isSingleSelection()) {
+
+        if(!this.props.showTime && this.isSingleSelection()) {
             this.hideOverlay();
         }
+                
         event.preventDefault();
     }
         
@@ -886,75 +887,85 @@ export class Calendar extends Component {
     
     // Ported from jquery-ui datepicker formatDate    
     formatDate(date, format) {
-        if(!date) {
-            return "";
+        if (!date) {
+            return '';
         }
 
-        let iFormat,
-        lookAhead = (match) => {
-            let matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
-            if(matches) {
+        let iFormat;
+        const lookAhead = (match) => {
+            const matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
+            if (matches) {
                 iFormat++;
             }
             return matches;
         },
-        formatNumber = (match, value, len) => {
-            let num = "" + value;
-            if(lookAhead(match)) {
-                while (num.length < len) {
-                    num = "0" + num;
+            formatNumber = (match, value, len) => {
+                let num = '' + value;
+                if (lookAhead(match)) {
+                    while (num.length < len) {
+                        num = '0' + num;
+                    }
                 }
-            }
-            return num;
-        },
-        formatName = (match, value, shortNames, longNames) => {
-            return (lookAhead(match) ? longNames[ value ] : shortNames[ value ]);
-        },
-        output = "",
-        literal = false;
+                return num;
+            },
+            formatName = (match, value, shortNames, longNames) => {
+                return (lookAhead(match) ? longNames[value] : shortNames[value]);
+            };
+        let output = '';
+        let literal = false;
 
-        if(date) {
-            for(iFormat = 0; iFormat < format.length; iFormat++) {
-                if(literal) {
-                    if(format.charAt(iFormat) === "'" && !lookAhead("'"))
+        if (date) {
+            for (iFormat = 0; iFormat < format.length; iFormat++) {
+                if (literal) {
+                    if (format.charAt(iFormat) === '\'' && !lookAhead('\'')) {
                         literal = false;
-                    else
+                    } else {
                         output += format.charAt(iFormat);
-                }
-                else {
+                    }
+                } else {
                     switch (format.charAt(iFormat)) {
-                        case "d":
-                            output += formatNumber("d", date.getDate(), 2);
+                        case 'd':
+                            output += formatNumber('d', this.props.utc ? date.getUTCDate() : date.getDate(), 2);
                             break;
-                        case "D":
-                            output += formatName("D", date.getDay(), this.props.locale.dayNamesShort, this.props.locale.dayNames);
+                        case 'D':
+                            output += formatName('D', this.props.utc ? date.getUTCDay() : date.getDay(), this.locale.dayNamesShort, this.locale.dayNames);
                             break;
-                        case "o":
-                            output += formatNumber("o",
-                                Math.round((new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
+                        case 'o':
+                            if (this.props.utc) {
+                                output += formatNumber('o',
+                                    Math.round((
+                                        new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()).getTime() -
+                                        new Date(date.getUTCFullYear(), 0, 0).getTime()) / 86400000), 3);
+                            } else {
+                                output += formatNumber('o',
+                                    Math.round((
+                                        new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() -
+                                        new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
+                            }
                             break;
-                        case "m":
-                            output += formatNumber("m", date.getMonth() + 1, 2);
+                        case 'm':
+                            output += formatNumber('m', (this.props.utc ? date.getUTCMonth() : date.getMonth()) + 1, 2);
                             break;
-                        case "M":
-                            output += formatName("M", date.getMonth(), this.props.locale.monthNamesShort, this.props.locale.monthNames);
+                        case 'M':
+                            output += formatName('M', this.props.utc ? date.getUTCMonth() : date.getMonth(), this.locale.monthNamesShort, this.locale.monthNames);
                             break;
-                        case "y":
-                            output += (lookAhead("y") ? date.getFullYear() :
-                                (date.getFullYear() % 100 < 10 ? "0" : "") + date.getFullYear() % 100);
+                        case 'y':
+                            output += (lookAhead('y') ? (this.props.utc ? date.getUTCFullYear() : date.getFullYear()) :
+                                ((this.props.utc ? date.getUTCFullYear() : date.getFullYear()) % 100 < 10 ? '0' : '') +
+                                (this.props.utc ? date.getUTCFullYear() : date.getFullYear()) % 100);
                             break;
-                        case "@":
+                        case '@':
                             output += date.getTime();
                             break;
-                        case "!":
+                        case '!':
                             output += date.getTime() * 10000 + this.ticksTo1970;
                             break;
-                        case "'":
-                            if(lookAhead("'"))
-                                output += "'";
-                            else
+                        case '\'':
+                            if (lookAhead('\'')) {
+                                output += '\'';
+                            } else {
                                 literal = true;
-
+                            }
                             break;
                         default:
                             output += format.charAt(iFormat);
@@ -1038,162 +1049,166 @@ export class Calendar extends Component {
     
     // Ported from jquery-ui datepicker parseDate 
     parseDate(value, format) {
-		if(format === null || value === null) {
+        if (format == null || value == null) {
             throw new Error("Invalid arguments");
-		}
+        }
 
-		value = (typeof value === "object" ? value.toString() : value + "");
-		if(value === "") {
-			return null;
-		}
+        value = (typeof value === "object" ? value.toString() : value + "");
+        if (value === "") {
+            return null;
+        }
 
-		let iFormat, dim, extra,
-		iValue = 0,
-		shortYearCutoff = (typeof this.props.shortYearCutoff !== "string" ? this.props.shortYearCutoff : new Date().getFullYear() % 100 + parseInt(this.props.shortYearCutoff, 10)),
-		year = -1,
-		month = -1,
-		day = -1,
-		doy = -1,
-		literal = false,
-		date,
-		lookAhead = (match) => {
-			let matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
-			if(matches) {
-				iFormat++;
-			}
-			return matches;
-		},
-		getNumber = (match) => {
-			let isDoubled = lookAhead(match),
-				size = (match === "@" ? 14 : (match === "!" ? 20 :
-				(match === "y" && isDoubled ? 4 : (match === "o" ? 3 : 2)))),
-				minSize = (match === "y" ? size : 1),
-				digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
-				num = value.substring(iValue).match(digits);
-			if(!num) {
-                throw new Error("Missing number at position " + iValue);
-			}
-			iValue += num[ 0 ].length;
-			return parseInt(num[ 0 ], 10);
-		},
-		getName = (match, shortNames, longNames) => {
-            let index = -1;
-            let arr = lookAhead(match) ? longNames : shortNames;
-            let names = [];
-            
-            for(let i = 0; i < arr.length; i++) {
-                names.push([i,arr[i]]);
+        let iFormat, dim, extra,
+            iValue = 0,
+            shortYearCutoff = (typeof this.shortYearCutoff !== "string" ? this.shortYearCutoff : new Date().getFullYear() % 100 + parseInt(this.shortYearCutoff, 10)),
+            year = -1,
+            month = -1,
+            day = -1,
+            doy = -1,
+            literal = false,
+            date,
+            lookAhead = (match) => {
+                let matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
+                if (matches) {
+                    iFormat++;
+                }
+                return matches;
+            },
+            getNumber = (match) => {
+                let isDoubled = lookAhead(match),
+                    size = (match === "@" ? 14 : (match === "!" ? 20 :
+                        (match === "y" && isDoubled ? 4 : (match === "o" ? 3 : 2)))),
+                    minSize = (match === "y" ? size : 1),
+                    digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
+                    num = value.substring(iValue).match(digits);
+                if (!num) {
+                    throw new Error("Missing number at position " + iValue);
+                }
+                iValue += num[0].length;
+                return parseInt(num[0], 10);
+            },
+            getName = (match, shortNames, longNames) => {
+                let index = -1;
+                let arr = lookAhead(match) ? longNames : shortNames;
+                let names = [];
+
+                for (let i = 0; i < arr.length; i++) {
+                    names.push([i, arr[i]]);
+                }
+                names.sort((a, b) => {
+                    return -(a[1].length - b[1].length);
+                });
+
+                for (let i = 0; i < names.length; i++) {
+                    let name = names[i][1];
+                    if (value.substr(iValue, name.length).toLowerCase() === name.toLowerCase()) {
+                        index = names[i][0];
+                        iValue += name.length;
+                        break;
+                    }
+                }
+
+                if (index !== -1) {
+                    return index + 1;
+                } else {
+                    throw new Error("Unknown name at position " + iValue);
+                }
+            },
+            checkLiteral = () => {
+                if (value.charAt(iValue) !== format.charAt(iFormat)) {
+                    throw new Error("Unexpected literal at position " + iValue);
+                }
+                iValue++;
+            };
+
+        for (iFormat = 0; iFormat < format.length; iFormat++) {
+            if (literal) {
+                if (format.charAt(iFormat) === "'" && !lookAhead("'")) {
+                    literal = false;
+                } else {
+                    checkLiteral();
+                }
+            } else {
+                switch (format.charAt(iFormat)) {
+                    case "d":
+                        day = getNumber("d");
+                        break;
+                    case "D":
+                        getName("D", this.locale.dayNamesShort, this.locale.dayNames);
+                        break;
+                    case "o":
+                        doy = getNumber("o");
+                        break;
+                    case "m":
+                        month = getNumber("m");
+                        break;
+                    case "M":
+                        month = getName("M", this.locale.monthNamesShort, this.locale.monthNames);
+                        break;
+                    case "y":
+                        year = getNumber("y");
+                        break;
+                    case "@":
+                        date = new Date(getNumber("@"));
+                        year = date.getFullYear();
+                        month = date.getMonth() + 1;
+                        day = date.getDate();
+                        break;
+                    case "!":
+                        date = new Date((getNumber("!") - this.ticksTo1970) / 10000);
+                        year = date.getFullYear();
+                        month = date.getMonth() + 1;
+                        day = date.getDate();
+                        break;
+                    case "'":
+                        if (lookAhead("'")) {
+                            checkLiteral();
+                        } else {
+                            literal = true;
+                        }
+                        break;
+                    default:
+                        checkLiteral();
+                }
             }
-            names.sort((a,b) => {
-                return -(a[ 1 ].length - b[ 1 ].length);
-            });
-            
-            for(let i = 0; i < names.length; i++) {
-                let name = names[i][1];
-                if(value.substr(iValue, name.length).toLowerCase() === name.toLowerCase()) {
-    				index = names[i][0];
-    				iValue += name.length;
-    				break;
-    			}
-            }
+        }
 
-			if(index !== -1) {
-				return index + 1;
-			} else {
-                throw new Error("Unknown name at position " + iValue);
-			}
-		},
-		checkLiteral = () => {
-			if(value.charAt(iValue) !== format.charAt(iFormat)) {
-                throw new Error("Unexpected literal at position " + iValue);
-			}
-			iValue++;
-		};
-
-		for (iFormat = 0; iFormat < format.length; iFormat++) {
-			if(literal) {
-				if(format.charAt(iFormat) === "'" && !lookAhead("'")) {
-					literal = false;
-				} else {
-					checkLiteral();
-				}
-			} else {
-				switch (format.charAt(iFormat)) {
-					case "d":
-						day = getNumber("d");
-						break;
-					case "D":
-						getName("D", this.props.locale.dayNamesShort, this.props.locale.dayNames);
-						break;
-					case "o":
-						doy = getNumber("o");
-						break;
-					case "m":
-						month = getNumber("m");
-						break;
-					case "M":
-						month = getName("M", this.props.locale.monthNamesShort, this.props.locale.monthNames);
-						break;
-					case "y":
-						year = getNumber("y");
-						break;
-					case "@":
-						date = new Date(getNumber("@"));
-						year = date.getFullYear();
-						month = date.getMonth() + 1;
-						day = date.getDate();
-						break;
-					case "!":
-						date = new Date((getNumber("!") - this.ticksTo1970) / 10000);
-						year = date.getFullYear();
-						month = date.getMonth() + 1;
-						day = date.getDate();
-						break;
-					case "'":
-						if(lookAhead("'")) {
-							checkLiteral();
-						} else {
-							literal = true;
-						}
-						break;
-					default:
-						checkLiteral();
-				}
-			}
-		}
-
-		if(iValue < value.length) {
-			extra = value.substr(iValue);
-			if(!/^\s+/.test(extra)) {
+        if (iValue < value.length) {
+            extra = value.substr(iValue);
+            if (!/^\s+/.test(extra)) {
                 throw new Error("Extra/unparsed characters found in date: " + extra);
-			}
-		}
+            }
+        }
 
-		if(year === -1) {
-			year = new Date().getFullYear();
-		} else if(year < 100) {
-			year += new Date().getFullYear() - new Date().getFullYear() % 100 +
-				(year <= shortYearCutoff ? 0 : -100);
-		}
+        if (year === -1) {
+            year = new Date().getFullYear();
+        } else if (year < 100) {
+            year += new Date().getFullYear() - new Date().getFullYear() % 100 +
+                (year <= shortYearCutoff ? 0 : -100);
+        }
 
-		if(doy > -1) {
-			month = 1;
-			day = doy;
-			do {
-				dim = this.getDaysCountInMonth(year, month - 1);
-				if(day <= dim) {
-					break;
-				}
-				month++;
-				day -= dim;
-			} while (true);
-		}
+        if (doy > -1) {
+            month = 1;
+            day = doy;
+            do {
+                dim = this.getDaysCountInMonth(year, month - 1);
+                if (day <= dim) {
+                    break;
+                }
+                month++;
+                day -= dim;
+            } while (true);
+        }
 
-		date = this.daylightSavingAdjust(new Date(year, month - 1, day));
-		if(date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
+        if (this.props.utc)
+            date = new Date(Date.UTC(year, month - 1, day));
+        else
+            date = this.daylightSavingAdjust(new Date(year, month - 1, day));
+
+        if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
             throw new Error("Invalid date"); // E.g. 31/02/00
-		}
-		return date;
+        }
+        return date;
 	}
     
     daylightSavingAdjust(date) {
