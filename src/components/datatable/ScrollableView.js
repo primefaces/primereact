@@ -59,6 +59,11 @@ export class ScrollableView extends Component {
                 this.scrollTableWrapper.style.height = this.props.totalRecords * this.rowHeight + 'px';
             }
         }
+        
+        if(this.virtualScrollCallback) {
+            this.virtualScrollCallback();
+            this.virtualScrollCallback = null;
+        }
     }
     
     setScrollHeight() {
@@ -129,8 +134,11 @@ export class ScrollableView extends Component {
                     this.props.onVirtualScroll({
                         page: page
                     });
+                    
+                    this.virtualScrollCallback = () => {
+                        this.scrollTable.style.top = ((page - 1) * pageHeight) + 'px';
+                    }
                 }
-                this.scrollTable.style.top = ((page - 1) * pageHeight) + 'px';
             }
         }
     }

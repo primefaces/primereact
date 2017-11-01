@@ -632,7 +632,7 @@ export class DataTable extends Component {
         if(this.virtualScrollTimer) {
             clearTimeout(this.virtualScrollTimer);
         }
-        
+                
         this.virtualScrollTimer = setTimeout(() => {
             let first = (event.page - 1) * this.props.rows;
             this.setState({
