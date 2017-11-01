@@ -58,12 +58,12 @@ interface DataTableProps {
     onPage?(): void;
     onFilter?(filters: Array<any>): void;
     onLazyLoad?(first: number, rows: number, sortField: string, sortOrder: number, multiSortMeta: Array<any>): void;
-    onRowClick?(): void;
-    onRowSelect?(): void;
-    onRowUnselect?(): void;
-    onRowExpand?(): void;
-    onRowCollapse?: void;
-    onContextMenuSelect?(): void;
+    onRowClick?(originalEvent: Event, data: any, index: number): void;
+    onRowSelect?(originalEvent: Event, data: any, index: number): void;
+    onRowUnselect?(originalEvent: Event, data: any, index: number): void;
+    onRowExpand?(originalEvent: Event, data: any): void;
+    onRowCollapse?(originalEvent: Event, data: any): void;
+    onContextMenuSelect?(originalEvent: Event, data: any): void;
     onColReorder?(dragIndex: number, dropIndex: number, columns: Array<any>): void;
 }
 

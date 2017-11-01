@@ -137,6 +137,12 @@ onChangeBasic(e) {
                             <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
+                        <tr>
+                            <td>value</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Value of the component.</td>
+                         </tr>
                          <tr>
                             <td>step</td>
                             <td>number</td>

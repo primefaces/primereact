@@ -1,6 +1,6 @@
 import React = require("react");
 
-interface AutoCompleteProps extends React.HTMLProps<HTMLAutoCompleteElement> {
+interface AutoCompleteProps {
     id?: string;
     value?: any;
     suggestions?: Array<any>;

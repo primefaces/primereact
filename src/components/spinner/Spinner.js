@@ -8,6 +8,7 @@ export class Spinner extends Component {
 
     static defaultProps = {
         id: null,
+        value: null,
         step: 1,
         min: null,
         max: null,
@@ -23,6 +24,7 @@ export class Spinner extends Component {
 
     static propsTypes = {
         id: PropTypes.string,
+        value: PropTypes.number,
         step: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,

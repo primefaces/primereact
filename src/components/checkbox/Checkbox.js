@@ -8,6 +8,7 @@ export class Checkbox extends Component {
         id: null,
         label: null,
         value: null,
+        name: null,
         onChange: null,
         checked: false,
         onMouseDown: null,
@@ -18,6 +19,7 @@ export class Checkbox extends Component {
         id: PropTypes.string,
         label: PropTypes.string,
         value: PropTypes.any,
+        name: PropTypes.string,
         onChange: PropTypes.func,
         checked: PropTypes.bool,
         onMouseDown: PropTypes.func,
@@ -48,7 +50,7 @@ export class Checkbox extends Component {
                  onMouseDown={this.props.onMouseDown}>
                 <div className='ui-chkbox ui-widget'>
                     <div className="ui-helper-hidden-accessible">
-                        <input type="checkbox" />
+                        <input type="checkbox" name={this.props.name}/>
                     </div>
                     <div className={boxClass} onClick={this.onClick}>
                        <span className={iconClass}></span>

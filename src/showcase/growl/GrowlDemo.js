@@ -196,6 +196,12 @@ showMultiple() {
                     </thead>
                     <tbody>
                         <tr>
+                            <td>value</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>An array of messages to display.</td>
+                        </tr>
+                        <tr>
                             <td>id</td>
                             <td>string</td>
                             <td>null</td>

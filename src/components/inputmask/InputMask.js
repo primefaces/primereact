@@ -8,6 +8,7 @@ export class InputMask extends Component {
 
     static defaultProps = {
         id: null,
+        value: null,
         type: 'text',
         mask: null,
         slotChar: '_',
@@ -27,6 +28,7 @@ export class InputMask extends Component {
 
     static propsTypes = {
         id: PropTypes.string,
+        value: PropTypes.string,
         type: PropTypes.string,
         mask: PropTypes.string,
         slotChar: PropTypes.string,

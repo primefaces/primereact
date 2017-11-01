@@ -2,6 +2,7 @@ import React = require("react");
 
 interface InputMaskProps {
     id?: string;
+    value?: string;
     type?: string;
     mask?: string;
     slotChar?: string;

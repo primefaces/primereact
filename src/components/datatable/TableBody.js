@@ -229,15 +229,14 @@ export class TableBody extends Component {
             expandedRows = expandedRows.filter((val,i) => i !== expandedRowIndex);
 
             if(this.props.onRowCollapse) {
-                this.props.onRowCollapse(event.data);
+                this.props.onRowCollapse({originalEvent: event, data: event.data});
             }
         }
         else {
             expandedRows.push(event.data);
            
-
             if(this.props.onRowExpand) {
-                this.props.onRowExpand(event.data);
+                this.props.onRowExpand({originalEvent: event, data: event.data});
             }
         }
 

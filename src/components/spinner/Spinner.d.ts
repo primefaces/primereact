@@ -2,6 +2,7 @@ import React = require("react");
 
 interface SpinnerProps {
     id?: string,
+    value?: number,
     step?: number,
     min?: number,
     max?: number,

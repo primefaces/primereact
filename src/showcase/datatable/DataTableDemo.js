@@ -1818,12 +1818,14 @@ export class DataTableLazyDemo extends Component {
                         </tr>
                         <tr>
                             <td>onRowExpand</td>
-                            <td>event.data: Expanded row data</td>
+                            <td>event.originalEvent: Original event instance. <br />
+                                event.data: Unselected row data.</td>
                             <td>Callback to invoke when a row is expanded.</td>
                         </tr>
                         <tr>
                             <td>onRowCollapse</td>
-                            <td>event.data: Collapsed row data</td>
+                            <td>event.originalEvent: Original event instance. <br />
+                                event.data: Unselected row data.</td>
                             <td>Callback to invoke when a row is collapsed.</td>
                         </tr>
                         <tr>

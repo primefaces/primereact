@@ -12,6 +12,7 @@ export class InputSwitch extends Component {
         style: null,
         className: null,
         checked: false,
+        disabled: false,
         onChange: null
     }
 
@@ -22,6 +23,7 @@ export class InputSwitch extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         checked: PropTypes.bool,
+        disabled: PropTypes.bool,
         onChange: PropTypes.func
     }
 

@@ -123,7 +123,7 @@ onChangeBasic(e) {
                             <td>off</td>
                             <td>Label for the off state.</td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>onLabel</td>
                             <td>string</td>
                             <td>On</td>
@@ -141,12 +141,18 @@ onChangeBasic(e) {
                             <td>null</td>
                             <td>Style class of the element.</td>
                         </tr>
-                         <tr>
+                        <tr>
                              <td>checked</td>
                              <td>boolean</td>
                              <td>false</td>
                              <td>Specifies whether a inputswitch should be checked or not.</td>
-                         </tr>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the component should be disabled.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

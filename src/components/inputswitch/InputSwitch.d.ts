@@ -7,6 +7,7 @@ interface InputSwitchProps {
     style?: object;
     className?: string;
     checked?: boolean;
+    disabled?: boolean;
     onChange?(originalEvent: Event, value: boolean): void;
 }
 

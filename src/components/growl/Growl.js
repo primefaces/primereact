@@ -6,6 +6,7 @@ import classNames from 'classnames';
 export class Growl extends Component {
 
     static defaultProps = {
+        value: null,
         id: null,
         closable: true,
         className: null,
@@ -18,6 +19,7 @@ export class Growl extends Component {
     }
 
     static propTypes = {
+        value: PropTypes.array,
         id: PropTypes.string,
         closable: PropTypes.bool,
         className: PropTypes.string,
