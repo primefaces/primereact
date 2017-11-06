@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
 
 export class Fieldset extends Component {
 
@@ -13,7 +14,7 @@ export class Fieldset extends Component {
         collapsed: false,
         onExpand: null,
         onCollapse: null
-    }
+    };
 
     static propTypes = {
         id: PropTypes.string,
@@ -32,20 +33,69 @@ export class Fieldset extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    toggle(e) {
-        if(this.props.toggleable) {
-            var collapsed = this.state.collapsed;
-            if(collapsed && this.onExpand)
-                this.onExpand(e);
-            else if(!collapsed && this.onCollapse)
-                this.onCollapse(e);
+    componentDidUpdate() {
+        if(this.props.toggleable && !this.state.collapsed && this.expanding) {
+            DomHandler.addClass(this.contentWrapper, 'ui-fieldset-content-wrapper-expanding');
 
-            this.setState({collapsed: !collapsed});
+            setTimeout(() => {
+                DomHandler.removeClass(this.contentWrapper, 'ui-fieldset-content-wrapper-expanding');
+                this.expanding = false;
+            }, 500);
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.collapsed !== this.state.collapsed) {
+            this.setState({
+                collapsed: nextProps.collapsed
+            });
+        }
+    }
+
+    toggle(e) {
+        if(this.props.toggleable) {
+            if(this.state.collapsed)
+                this.expand(e);
+            else
+                this.collapse(e);
+        }
+
+        e.preventDefault();
+    }
+
+    expand(event) {
+        this.setState({collapsed: false});
+        this.expanding = true;
+        if(this.props.onCollapse) {
+            this.props.onCollapse(event);
+        }
+    }
+
+    collapse(event) {
+        this.setState({collapsed: true});
+        if(this.props.onCollapse) {
+            this.props.onCollapse(event);
+        }
+    }
+
+    renderContent() {
+        let className = classNames('ui-fieldset-content-wrapper', {
+            'ui-fieldset-content-wrapper-collapsed': (this.state.collapsed && this.props.toggleable),
+            'ui-fieldset-content-wrapper-expanded': (!this.state.collapsed && this.props.toggleable)
+        });
+
+        return (
+            <div ref={(el) => this.contentWrapper = el} className={className}>
+                <div className="ui-fieldset-content">
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
+
     render() {
-        var className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
+        let content = this.renderContent();
+        let className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
 
         return (
             <fieldset id={this.props.id} className={className} style={this.props.style}>
@@ -53,11 +103,7 @@ export class Fieldset extends Component {
                     {this.props.toggleable && <span className={classNames('ui-fieldset-toggler fa fa-fw', {'fa-plus': this.state.collapsed, 'fa-minus': !this.state.collapsed})}></span>}
                     {this.props.legend}
                 </legend>
-                <div className="ui-fieldset-content-wrapper" style={{display: this.state.collapsed ? 'none' : 'block'}}>
-                     <div className="ui-fieldset-content">
-                        {this.props.children}
-                    </div>
-                </div>
+                {content}
             </fieldset>
         );
     }

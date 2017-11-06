@@ -16,4 +16,19 @@
 
 .ui-fieldset .ui-fieldset-content-wrapper-overflown {
     overflow: hidden;
-} 
+}
+
+.ui-fieldset-content-wrapper-collapsed {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+.ui-fieldset-content-wrapper-expanded {
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+}
+
+.ui-fieldset-content-wrapper-expanding {
+    overflow: hidden;
+}
