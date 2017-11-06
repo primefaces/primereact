@@ -12,7 +12,8 @@ export class Password extends Component {
         weakLabel:'Weak',
         mediumLabel:'Medium',
         strongLabel:'Strong',
-        feedback:true
+        feedback:true,
+        onChange:null
     };
 
     static propTypes = {
@@ -21,7 +22,8 @@ export class Password extends Component {
         weakLabel:PropTypes.string,
         mediumLabel:PropTypes.string,
         strongLabel:PropTypes.string,
-        feedback:PropTypes.bool
+        feedback:PropTypes.bool,
+        onChange:PropTypes.func
     };
 
     constructor(props) {
@@ -132,6 +134,6 @@ export class Password extends Component {
     }
 
     render() {
-        return <InputText id={this.props.id} ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />;
+        return <InputText id={this.props.id} ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="password" onChange={this.props.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />;
     }
 } 
