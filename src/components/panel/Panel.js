@@ -81,7 +81,7 @@ export class Panel extends Component {
         let toggleIcon = this.renderToggleIcon();
         
         return (
-            <div className="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style={{border: this.state.collapsed ? 'none' : null}}>
+            <div className="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
                 <span className="ui-panel-title">{this.props.header}</span>
                 {toggleIcon}
             </div>
@@ -92,7 +92,7 @@ export class Panel extends Component {
         let className = classNames('ui-panel-content-wrapper', {'ui-panel-content-wrapper-collapsed': this.state.collapsed, 'ui-panel-content-wrapper-expanded ui-panel-content-wrapper-expanding': !this.state.collapsed});
         
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className} style={{display: this.state.collapsed ? 'none' : 'block'}}>
+            <div ref={(el) => this.contentWrapper = el} className={className}>
                 <div className="ui-panel-content ui-widget-content">
                     {this.props.children}
                 </div>
@@ -102,7 +102,7 @@ export class Panel extends Component {
     
     render() {
         let className = classNames('ui-panel ui-widget ui-widget-content ui-corner-all', this.props.className);
-        let header = this.props.header || this.props.toggleable? this.renderHeader(): null;
+        let header = this.renderHeader();
         let content = this.renderContent();
         
         return (
