@@ -316,11 +316,23 @@ export class DataTable extends Component {
     }
 
     onFilter(event) {
-        let filterMetadata = this.state.filters||{};
-        if(!this.isFilterBlank(event.value))
-            filterMetadata[event.field] = {value: event.value};
-        else if(filterMetadata[event.field])
+        let filterMetadata = this.state.filters || {};
+        if (!this.isFilterBlank(event.value)) {
+            let columns = React.Children.toArray(this.props.children);
+            
+            let column = columns.filter(function(x) {
+                return x.props.field === event.field;
+            }).map(function(x) {
+                 return x.props;
+            })[0];
+
+            filterMetadata[event.field] = { 
+                value: event.value,
+                matchMode: column.filterMatchMode || "startsWith"
+            };
+        } else if (filterMetadata[event.field]) {
             delete filterMetadata[event.field];
+        }
 
         this.setState({
             first: 0,
