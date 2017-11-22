@@ -169,6 +169,18 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
                             <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
                             <td>Template of the paginator.</td>
                         </tr>
+                        <tr>
+                            <td>leftContent</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template instance to inject into the left side of the paginator.</td>
+                        </tr>
+                        <tr>
+                            <td>rightContent</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template instance to inject into the right side of the paginator.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

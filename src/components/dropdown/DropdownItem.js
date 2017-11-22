@@ -14,7 +14,7 @@ export class DropdownItem extends Component {
 
     static propTypes = {
         option: PropTypes.object,
-        label: PropTypes.string,
+        label: PropTypes.any,
         template: PropTypes.func,
         selected: PropTypes.bool,
         onClick: PropTypes.func

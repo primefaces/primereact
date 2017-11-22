@@ -80,7 +80,9 @@ export class DataTable extends Component {
         onRowExpand: null,
         onRowCollapse: null,
         onContextMenuSelect: null,
-        onColReorder: null
+        onColReorder: null,
+        paginatorLeft:null,
+        paginatorRight: null
     }
 
     static propTypes = {
@@ -152,7 +154,9 @@ export class DataTable extends Component {
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
         onContextMenuSelect: PropTypes.func,
-        onColReorder: PropTypes.func
+        onColReorder: PropTypes.func,
+        paginatorLeft: PropTypes.any,
+        paginatorRight: PropTypes.any
     };
 
     constructor(props) {
@@ -201,7 +205,7 @@ export class DataTable extends Component {
         let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                          totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions}/>;
+                          totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight}/>;
     }
 
     onSort(event) {
