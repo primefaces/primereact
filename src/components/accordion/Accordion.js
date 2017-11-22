@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
 
 export class AccordionTab extends Component {
     
@@ -51,7 +52,17 @@ export class Accordion extends Component {
             activeIndex: props.activeIndex
         };
     }
-    
+    componentDidUpdate() {
+        if(this.expanding) {
+            DomHandler.addClass(this.contentWrapper, 'ui-accordion-content-wrapper-expanding');
+            setTimeout(() => {
+                DomHandler.removeClass(this.contentWrapper, 'ui-accordion-content-wrapper-expanding');
+                this.expanding = false;
+            }, 500);
+        }
+    }
+
+
     componentWillReceiveProps(nextProps) {
         this.setState({
             activeIndex: nextProps.activeIndex
@@ -60,6 +71,7 @@ export class Accordion extends Component {
     
     onTabClick(event, tab, i) {
         if(!tab.props.disabled) {
+            this.expanding = true;
             let selected = this.isSelected(i);
 
             if(this.props.multiple) {
@@ -103,10 +115,12 @@ export class Accordion extends Component {
     }
     
     renderTabContent(tab, selected) {
-        let tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper', {'ui-helper-hidden': !selected}); 
+        let tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper',{
+                                    'ui-accordion-content-wrapper-collapsed': !selected,
+                                    'ui-accordion-content-wrapper-expanded': selected});
         
         return (
-            <div className={tabContentWrapperClass} style={tab.props.contentStyle}>
+            <div ref={(el) => this.contentWrapper = el} className={tabContentWrapperClass} style={tab.props.contentStyle}>
                 <div className="ui-accordion-content ui-widget-content">
                     {tab.props.children}
                 </div>

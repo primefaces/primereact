@@ -23,9 +23,8 @@
 
 .ui-accordion .ui-accordion-content { 
     padding: 1em;
-    border-top: 0; 
-    overflow: auto; 
-    zoom: 1; 
+    border-top: 0;
+    zoom: 1;
 }
 
 .ui-accordion .ui-accordion-header.ui-state-disabled, 
@@ -34,5 +33,20 @@
 }
 
 .ui-accordion-content-wrapper-overflown {
+    overflow: hidden;
+}
+
+.ui-accordion .ui-accordion-content-wrapper-collapsed {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+.ui-accordion .ui-accordion-content-wrapper-expanded {
+    max-height: 1000px;
+    transition: max-height .4s ease-in-out;
+}
+
+.ui-accordion .ui-accordion-content-wrapper-expanding {
     overflow: hidden;
 }
