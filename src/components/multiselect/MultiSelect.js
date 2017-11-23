@@ -283,10 +283,10 @@ export class MultiSelect extends Component {
                 items = this.filterOptions(items);
             }
             
-            items = items.map((option) => {
+            items = items.map((option,index) => {
                 let optionLabel = this.getOptionLabel(option);
                 
-                return <MultiSelectItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} 
+                return <MultiSelectItem key={optionLabel+'_'+index} label={optionLabel} option={option} template={this.props.itemTemplate}
                         selected={this.isSelected(option)} onClick={this.onOptionClick} />;
                 });
         }
