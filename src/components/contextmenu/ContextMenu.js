@@ -143,7 +143,7 @@ export class ContextMenu extends Component {
         
         return (
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                <NestedMenu className="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={0}/>
+                <NestedMenu className="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={Math.random()}/>
             </div>
         );
     }

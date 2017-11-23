@@ -8,10 +8,52 @@ import {InputText} from "../../components/inputtext/InputText";
 
 export class MenubarDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [
+                {
+                    label: 'Home',
+                    url: '/',
+                    disabled: true
+                },
+                {
+                    separator: true
+                },
+                {
+                    label: 'Contact',
+                    url: '/contact/'
+                }
+            ]
+        };
     }
+
+    switchDisabledState = () => {
+        this.setState({items: []});
+        let newItems = [
+            {
+                label: 'Home',
+                url: '/'
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'Contact',
+                url: '/contact/',
+                disabled: true
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'new item shown but state not switched to Kontakt',
+                url: '/new/'
+            }
+        ];
+        this.setState({items: newItems});
+    }
+
 
     render() {
         var items=[ {
@@ -96,10 +138,9 @@ export class MenubarDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <Menubar model={items}>
-                        <InputText placeholder="Search" type="text"/>
-                        <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
-                    </Menubar>
+                    <Menubar model={this.state.items}/>
+                    <br/>
+                    <Button label="Switch disabled state" onClick={this.switchDisabledState} />
                 </div>
 
                 <MenubarDoc/>
