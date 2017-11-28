@@ -58,7 +58,7 @@ interface DataTableProps {
     exportFilename?: string;
     contextMenu?: any;
     rowGroupMode?: string;
-    rowClassName?(): void;
+    rowClassName?(rowData: any): object;
     rowGroupHeaderTemplate?(): void;
     rowGroupFooterTemplate?(): void;
     onColumnResizeEnd?(element: any, delta: number): void;
