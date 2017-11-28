@@ -392,6 +392,10 @@ export class DataTable extends Component {
         if(nextProps.sortOrder) { this.setState({sortOrder: nextProps.sortOrder}) }
         if(nextProps.multiSortMeta) { this.setState({multiSortMeta: nextProps.multiSortMeta}) }
         if(nextProps.filters) { this.setState({filters: nextProps.filters}) }
+
+        if(nextProps.globalFilter !== this.props.globalFilter) {
+            this.setState({first: 0});
+        }
     }
 
     fixColumnWidths() {
