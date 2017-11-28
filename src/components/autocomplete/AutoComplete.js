@@ -160,6 +160,8 @@ export class AutoComplete extends Component {
         }
 
         if(this.props.completeMethod) {
+            this.searching = true;
+            this.showLoader();
             this.props.completeMethod({
                 originalEvent: event,
                 query: query
@@ -228,7 +230,10 @@ export class AutoComplete extends Component {
 
     onDropdownClick(event) {
         this.inputEl.focus();
-        this.dropdownClick = true;
+
+        if(this.documentClickListener) {
+            this.dropdownClick = true;
+        }
         
         if(this.props.dropdownMode === 'blank')
             this.search(event, '');
@@ -422,12 +427,24 @@ export class AutoComplete extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.suggestions && this.props.suggestions.length) {
-            this.showPanel();
+        if(this.searching) {
+            if (this.props.suggestions && this.props.suggestions.length)
+                this.showPanel();
+            else
+                this.hidePanel();
+
+            this.hideLoader();
         }
-        else {
-            this.hidePanel();
-        }
+
+        this.searching = false;
+    }
+
+    showLoader() {
+        this.loader.style.visibility = 'visible';
+    }
+
+    hideLoader() {
+        this.loader.style.visibility = 'hidden';
     }
 
     componentWillUnmount() {
@@ -501,6 +518,12 @@ export class AutoComplete extends Component {
             <Button type="button" icon="fa-fw fa-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
         );
     }
+
+    renderLoader() {
+        return (
+            <i ref={(el) => this.loader = el} className="ui-autocomplete-loader fa fa-circle-o-notch fa-spin fa-fw" style={{visibility: 'hidden'}}></i>
+        );
+    }
     
     renderPanel() {
         let items;
@@ -561,6 +584,7 @@ export class AutoComplete extends Component {
             'ui-autocomplete-dd': this.props.dropdown,
             'ui-autocomplete-multiple': this.props.multiple
         });
+        let loader = this.renderLoader();
 
         if(this.props.multiple)
             input = this.renderMultipleAutoComplete();
@@ -574,6 +598,7 @@ export class AutoComplete extends Component {
         return (
             <span ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={className} >
                 {input}
+                {loader}
                 {dropdown}
                 {panel}
             </span>

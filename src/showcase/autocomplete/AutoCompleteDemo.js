@@ -24,33 +24,39 @@ export class AutoCompleteDemo extends Component {
     }
 
     filterCountrySingle(event) {
-        var results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredCountriesSingle: results });
+        setTimeout(() => {
+            var results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+            this.setState({ filteredCountriesSingle: results });
+        }, 250);
     }
 
     filterBrands(event) {
-        let results;
+        setTimeout(() => {
+            let results;
 
-        if(event.query.length === 0) {
-            results = [...this.brands];
-        }
-        else {
-            results = this.brands.filter((brand) => {
-                return brand.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-        
-        this.setState({ filteredBrands: results });
+            if (event.query.length === 0) {
+                results = [...this.brands];
+            }
+            else {
+                results = this.brands.filter((brand) => {
+                    return brand.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
+
+            this.setState({ filteredBrands: results });
+        }, 250);
     }
 
     filterCountryMultiple(event) {
-        let results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        
-        this.setState({ filteredCountriesMultiple: results });
+        setTimeout(() => {
+            let results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+
+            this.setState({ filteredCountriesMultiple: results });
+        }, 250);
     }
 
     itemTemplate(brand) {
@@ -538,33 +544,39 @@ export class AutoCompleteDemo extends Component {
     }
 
     filterCountrySingle(event) {
-        var results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredCountriesSingle: results });
+        setTimeout(() => {
+            var results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+            this.setState({ filteredCountriesSingle: results });
+        }, 250);
     }
 
     filterBrands(event) {
-        let results;
+        setTimeout(() => {
+            let results;
 
-        if(event.query.length === 0) {
-            results = [...this.brands];
-        }
-        else {
-            results = this.brands.filter((brand) => {
-                return brand.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-        
-        this.setState({ filteredBrands: results });
+            if (event.query.length === 0) {
+                results = [...this.brands];
+            }
+            else {
+                results = this.brands.filter((brand) => {
+                    return brand.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
+
+            this.setState({ filteredBrands: results });
+        }, 250);
     }
 
     filterCountryMultiple(event) {
-        let results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        
-        this.setState({ filteredCountriesMultiple: results });
+        setTimeout(() => {
+            let results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+
+            this.setState({ filteredCountriesMultiple: results });
+        }, 250);
     }
 
     itemTemplate(brand) {
