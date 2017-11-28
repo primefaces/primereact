@@ -1348,7 +1348,7 @@ export class DataTableLazyDemo extends Component {
          * event.sortField = Field name to sort with
          * event.sortOrder = Sort order as number, 1 for asc and -1 for dec
          * event.multiSortMeta = Sort information when sort mode is multiple, a multiSortMeta object is in {field: string, order: number} format
-         * filters: FilterMetadata object having field as key and filter value, filter matchMode as value */
+         * filters: FilterMetadata object having field as key and {value: filterValue, matchMode: filterMatchMode} as the value such as filterMeta['id']= {value: 'prime', matchMode: 'equals'} */
         
         //imitate db connection over a network
         setTimeout(() => {

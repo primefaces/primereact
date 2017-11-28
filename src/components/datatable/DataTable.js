@@ -322,7 +322,7 @@ export class DataTable extends Component {
     onFilter(event) {
         let filterMetadata = this.state.filters||{};
         if(!this.isFilterBlank(event.value))
-            filterMetadata[event.field] = {value: event.value};
+            filterMetadata[event.field] = {value: event.value, matchMode: event.matchMode};
         else if(filterMetadata[event.field])
             delete filterMetadata[event.field];
 

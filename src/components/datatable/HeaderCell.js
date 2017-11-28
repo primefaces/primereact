@@ -35,7 +35,8 @@ export class HeaderCell extends Component {
             this.filterTimeout = setTimeout(() => {
                 this.props.onFilter({
                     value: filterValue,
-                    field: this.props.field
+                    field: this.props.field,
+                    matchMode: this.props.filterMatchMode
                 });
                 this.filterTimeout = null;            
             }, this.filterDelay);
