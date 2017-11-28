@@ -209,18 +209,24 @@ export class DataTable extends Component {
     }
 
     onSort(event) {
-        let sortField = event.sortField;
-        let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
-        let multiSortMeta;
+        let sortOrder = (this.state.sortField === event.sortField) ? (this.state.sortOrder === 1 ? -1 : 0) : 1;
+        let sortField = sortOrder !== 0 ? event.sortField : null;
 
-        if(this.props.sortMode === 'multiple') {
-            let metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
+        let multiSortMeta;
+        if (this.props.sortMode === 'multiple') {
+            var metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.state.multiSortMeta;
-            if(!multiSortMeta || !metaKey) {
+            if (!multiSortMeta || !metaKey) {
                 multiSortMeta = [];
             }
-
-            this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
+            
+            if (sortOrder === 0) {
+                multiSortMeta = this.removeSortMeta(event.sortField, multiSortMeta);
+            } else {
+                multiSortMeta = this.addSortMeta({ field: sortField, order: sortOrder }, multiSortMeta);
+            }
+            
+            multiSortMeta = multiSortMeta.length === 0 ? null : multiSortMeta;
         }
 
         this.setState({
@@ -251,18 +257,12 @@ export class DataTable extends Component {
     }
 
     addSortMeta(meta, multiSortMeta) {
-        let index = -1;
-        for(let i = 0; i < multiSortMeta.length; i++) {
-            if(multiSortMeta[i].field === meta.field) {
-                index = i;
-                break;
-            }
-        }
+        multiSortMeta = this.removeSortMeta(meta.field, multiSortMeta);
+        return multiSortMeta.concat([meta]);
+    }
 
-        if(index >= 0)
-            multiSortMeta[index] = meta;
-        else
-            multiSortMeta.push(meta);
+    removeSortMeta(field, multiSortMeta) {
+        return multiSortMeta.filter(function(x) { return x.field !== field });
     }
 
     sortSingle(data) {
