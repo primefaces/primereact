@@ -8,7 +8,7 @@ import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
 import './sass/App.css';
 
-export class Home extends Component {
+class Home extends Component {
 
     render() {
         return (
@@ -393,9 +393,9 @@ class App extends Component {
                     <a href="#" className="menu-button" onClick={this.openMenu}>
                         <i className="fa fa-bars"></i>
                     </a>
-                    <Link to="/" className="logo">
+                    <a href="#" className="logo">
                         <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
-                    </Link>
+                    </a>
 
                     <ul className="topbar-menu">
                         <li>
