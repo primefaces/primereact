@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'babel-polyfill';
 import App from './App';
+import {Home} from './App';
 import {AccordionDemo} from './showcase/accordion/AccordionDemo';
 import {AutoCompleteDemo} from './showcase/autocomplete/AutoCompleteDemo';
 import {ButtonDemo} from './showcase/button/ButtonDemo';
@@ -94,16 +95,16 @@ import {ThemingPage} from "./showcase/theming/ThemingPage"
 import {InputGroupDemo} from "./showcase/inputgroup/InputGroupDemo";
 import {EditorDemo} from "./showcase/editor/EditorDemo";
 import {TooltipDemo} from "./showcase/tooltip/TooltipDemo";
-import {Route,HashRouter,Switch} from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import history from './history';
 import {MenuModelDemo} from "./showcase/menumodel/MenuModelDemo";
 import {SidebarDemo} from "./showcase/sidebar/SidebarDemo";
 import {ProgressSpinnerDemo} from "./showcase/progressspinner/ProgressSpinnerDemo";
 
 ReactDOM.render(
-    <HashRouter>
-        <Switch>
-            <Route exact path="/" component={App}/>
+    <Router history={history}>
             <App>
+                <Route exact path="/" component={Home}/>
                 <Route path="/accordion" component={AccordionDemo} />
                 <Route path="/autocomplete" component={AutoCompleteDemo} />
                 <Route path="/button" component={ButtonDemo} />
@@ -200,7 +201,6 @@ ReactDOM.render(
                 <Route path="/gmap" component={GMapDemo} />
                 <Route path="/progressspinner" component={ProgressSpinnerDemo} />
             </App>
-        </Switch>
-    </HashRouter>,
+    </Router>,
     document.getElementById('root')
 );
