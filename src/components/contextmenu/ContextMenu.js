@@ -44,7 +44,9 @@ export class ContextMenu extends Component {
     }
     
     hide() {
-        this.container.style.display = 'none';
+        if(this.container) {
+            this.container.style.display = 'none';
+        }
     }
     
     position(event) {

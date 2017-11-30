@@ -119,7 +119,7 @@ export class OverlayPanel extends Component {
     }
 
     isVisible() {
-        return this.container.offsetParent;
+        return this.container && this.container.offsetParent;
     }
 
     render() {
