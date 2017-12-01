@@ -34,8 +34,14 @@ export class InputText extends Component {
     
     componentDidMount() {
         let _value =  this.props.value||this.props.defaultValue;
-        
+
         this.updateFilledState(_value);
+    }
+
+    componentWillUpdate(nextProps){
+        if(nextProps.value !== this.props.value) {
+            this.updateFilledState(nextProps.value);
+        }
     }
 
     render() {
