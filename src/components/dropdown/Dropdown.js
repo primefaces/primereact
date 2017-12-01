@@ -145,7 +145,7 @@ export class Dropdown extends Component {
                             });
                         }
                     }
-                    else if(this.optionsToDisplay) {
+                    if(selectedItemIndex === -1) {
                         this.selectItem({
                             originalEvent: event,
                             option: this.props.options[0]
@@ -407,7 +407,7 @@ export class Dropdown extends Component {
         if(this.props.filter) {
             return <div className="ui-dropdown-filter-container">
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterKeyDown} onChange={this.onFilterInputChange} />
+                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
                         <span className="fa fa-search"></span>
                    </div>;
         }
