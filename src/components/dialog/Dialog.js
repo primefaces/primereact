@@ -116,7 +116,7 @@ export class Dialog extends Component {
     show() {
         this.setState({visible: true});
         
-        let zIndex = DomHandler.getZindex() + 1;
+        let zIndex = DomHandler.getZindex() ;
         this.container.style.zIndex = String(zIndex);
         
         this.bindGlobalListeners();
@@ -190,7 +190,7 @@ export class Dialog extends Component {
     }
 
     moveOnTop() {
-        let zIndex = DomHandler.getZindex() + 1;
+        let zIndex = DomHandler.getZindex();
         this.container.style.zIndex = String(zIndex);
     }
 

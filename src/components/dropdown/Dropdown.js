@@ -264,7 +264,7 @@ export class Dropdown extends Component {
     }
     
     show() {        
-        this.panel.style.zIndex = DomHandler.getZindex() + 1;
+        this.panel.style.zIndex = DomHandler.getZindex();
         this.panel.style.display = 'block';
         this.alignPanel();
         DomHandler.fadeIn(this.panel, 250);

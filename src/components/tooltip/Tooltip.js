@@ -139,7 +139,7 @@ export class Tooltip extends Component {
             this.container.className = this.container.className + ' ' + this.props.tooltipStyleClass; 
         }
         DomHandler.fadeIn(this.container, 250);
-        this.container.style.zIndex = DomHandler.getZindex() + 1;
+        this.container.style.zIndex = DomHandler.getZindex() ;
         this.bindDocumentResizeListener();
     }
     

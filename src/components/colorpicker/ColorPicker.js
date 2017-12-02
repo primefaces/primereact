@@ -168,7 +168,7 @@ export class ColorPicker extends Component {
     }
     
     show() {
-        var zIndex = DomHandler.getZindex() + 1;
+        var zIndex = DomHandler.getZindex();
         this.panel.style.zIndex = String(zIndex);
         this.setState({panelVisible: true});
         this.shown = true;
