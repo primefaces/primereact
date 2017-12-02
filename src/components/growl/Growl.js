@@ -98,7 +98,7 @@ export class Growl extends Component {
                 <ReactCSSTransitionGroup
                     transitionName="ui-growl"
                     transitionEnterTimeout={250}
-                    transitionLeaveTimeout={250}>
+                    transitionLeaveTimeout={1000}>
                     {messages}
                 </ReactCSSTransitionGroup>
             </div>

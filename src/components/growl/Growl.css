@@ -82,10 +82,11 @@
 }
 
 .ui-growl-leave {
-  opacity: 1;
+	max-height: 250px;
 }
 
 .ui-growl-leave.ui-growl-leave-active {
-  opacity: 0.01;
-  transition: opacity 250ms ease-in;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 1s ease-in;
 }
