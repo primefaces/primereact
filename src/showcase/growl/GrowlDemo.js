@@ -41,7 +41,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         let summary = <span><i className="fa fa-check" /> <strong>PrimeReact</strong></span>;
-        let detail = <img src="showcase/resources/images/primereact-logo.png" width="250px"/> 
+        let detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px"/> 
 
         this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -325,14 +325,12 @@ this.growl.show({ life: 5000, severity: 'error', summary: 'Error Message', detai
                     <tbody>
                         <tr>
                             <td>onClick</td>
-                            <td>event.originalEvent: Original event <br />
-                               event.message: Clicked message instance </td>
+                            <td>message: Clicked message instance </td>
                             <td>Callback to invoke when a message is clicked.</td>
                         </tr>
                         <tr>
                             <td>onRemove</td>
-                            <td>event.originalEvent: Original event <br />
-                               event.message: Closed message instance </td>
+                            <td>message: Closed message instance </td>
                             <td>Callback to invoke when a message is removed.</td>
                         </tr>
                     </tbody>
@@ -437,7 +435,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         let summary = <span><i className="fa fa-check" /> <strong>PrimeReact</strong></span>;
-        let detail = <img src="showcase/resources/images/primereact-logo.png" width="250px"/> 
+        let detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px"/> 
 
         this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
     }

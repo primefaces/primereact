@@ -13,7 +13,9 @@ export class Growl extends Component {
         className: null,
         style: null,
         baseZIndex: 0,
-        position: 'topright'
+        position: 'topright',
+        onClick: null,
+        onRemove: null
     }
 
     static propTypes = {
@@ -21,7 +23,9 @@ export class Growl extends Component {
         className: PropTypes.string,
         style: PropTypes.object,
         baseZIndex: PropTypes.number,
-        position: PropTypes.string
+        position: PropTypes.string,
+        onClick: PropTypes.func,
+        onRemove: PropTypes.func
     };
 
     constructor(props) {
@@ -54,17 +58,21 @@ export class Growl extends Component {
         }
     }
     
-    onClose(event) {
-        let newMessages = this.state.messages.filter(message => message.id !== event.message.id);
+    onClose(message) {
+        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
         this.setState({
             messages: newMessages
-        })
+        });
+
+        if(this.props.onRemove) {
+            this.props.onRemove(message);
+        }
     }
 
     renderMessages() {
         if(this.state.messages && this.state.messages.length) {
             return this.state.messages.map((message, index) => {
-                return <GrowlMessage key={message.id} message={message} onClose={this.onClose} />;
+                return <GrowlMessage key={message.id} message={message} onClick={this.props.onClick} onClose={this.onClose} />;
             });
         }
         else {
