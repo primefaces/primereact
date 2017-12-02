@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {GrowlMessage} from './GrowlMessage';
+import DomHandler from '../utils/DomHandler';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 var messageIdx = 0;
@@ -55,6 +56,8 @@ export class Growl extends Component {
             this.setState({
                 messages: newMessages
             });
+
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.getZindex());
         }
     }
 

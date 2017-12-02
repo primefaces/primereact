@@ -316,7 +316,7 @@ this.growl.clear();
                             <td>baseZIndex</td>
                             <td>number</td>
                             <td>0</td>
-                            <td>Base zIndex value to use in layering.</td>
+                            <td>Base zIndex value to add to initial layering of PrimeReact components which start from 1000.</td>
                         </tr>
                         <tr>
                             <td>position</td>
