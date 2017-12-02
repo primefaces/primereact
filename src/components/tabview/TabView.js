@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class TabPanel extends Component {
     
@@ -25,12 +26,7 @@ export class TabPanel extends Component {
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string
     };
-
-    render() {        
-        return (
-            <div>{this.props.children}</div>
-        );
-    }
+    
 }
 
 export class TabView extends Component {
@@ -54,6 +50,10 @@ export class TabView extends Component {
         this.state = {
             activeIndex: 0
         };
+    }
+
+    componentWillMount() {
+        this.id = this.props.id || UniqueComponentId();
     }
     
     onTabHeaderClick(event, tab, index) {
@@ -81,10 +81,12 @@ export class TabView extends Component {
     renderTabHeader(tab, index) {
         let selected = this.state.activeIndex === index;
         let className = classNames(tab.props.headerClassName, 'ui-state-default ui-corner-top', {'ui-tabview-selected ui-state-active': selected, 'ui-state-disabled': tab.props.disabled});
-        
+        let id = this.id + '_header_' + index;
+        let ariaControls = this.id + '_content_' + index;
+
         return (
             <li className={className} role="tab" style={tab.props.headerStyle}>
-                <a href="#" onClick={(e) => this.onTabHeaderClick(e, tab, index)}>
+                <a href="#" onClick={(e) => this.onTabHeaderClick(e, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected} >
                     {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon fa', tab.props.leftIcon)}></span>}
                     <span className="ui-tabview-title">{tab.props.header}</span>
                     {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon fa', tab.props.rightIcon)}></span>}
@@ -109,10 +111,12 @@ export class TabView extends Component {
         let contents = React.Children.map(this.props.children, (tab, index) => {
             let selected = this.state.activeIndex === index;
             let className = classNames(tab.props.contentClassName, 'ui-tabview-panel ui-widget-content', {'ui-helper-hidden': !selected});
-            
+            let id = this.id + '_content_' + index;
+            let ariaLabelledBy = this.id + '_header_' + index;
+
             return (
-                <div className={className} style={tab.props.contentStyle}>
-                    {tab}
+                <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={tab.props.contentStyle}>
+                    {tab.props.children}
                 </div>
             );
         })
