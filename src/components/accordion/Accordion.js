@@ -22,6 +22,7 @@ export class AccordionTab extends Component {
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string
     }
+
 }
 
 export class Accordion extends Component {
@@ -51,17 +52,19 @@ export class Accordion extends Component {
         this.state = {
             activeIndex: props.activeIndex
         };
+        this.contentWrappers = [];
     }
+
     componentDidUpdate() {
-        if(this.expanding) {
-            DomHandler.addClass(this.contentWrapper, 'ui-accordion-content-wrapper-expanding');
+        if (this.expandingTabIndex != null && this.expandingTabIndex >= 0) {
+            let expandingTabContent = this.container.children[this.expandingTabIndex].children[1];
+            DomHandler.addClass(expandingTabContent, 'ui-accordion-content-wrapper-expanding');
             setTimeout(() => {
-                DomHandler.removeClass(this.contentWrapper, 'ui-accordion-content-wrapper-expanding');
-                this.expanding = false;
+                DomHandler.removeClass(expandingTabContent, 'ui-accordion-content-wrapper-expanding');
+                this.expandingTabIndex = null;
             }, 500);
         }
     }
-
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -71,8 +74,8 @@ export class Accordion extends Component {
     
     onTabClick(event, tab, i) {
         if(!tab.props.disabled) {
-            this.expanding = true;
             let selected = this.isSelected(i);
+            this.expandingTabIndex = selected ? null : i;
 
             if(this.props.multiple) {
                 var indexes = this.state.activeIndex||[];
@@ -108,19 +111,21 @@ export class Accordion extends Component {
         
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle} onClick={(event) => this.onTabClick(event, tab, index)}>
-                <span className={classNames('fa fa-fw', {'fa-caret-right': !selected, 'fa-caret-down': selected})}></span>
-                <a href="#">{tab.props.header}</a>
+                <a href="#">
+                    <span className={classNames('fa fa-fw', { 'fa-caret-right': !selected, 'fa-caret-down': selected })}></span>
+                    <span className="ui-accordion-header-text">{tab.props.header}</span>
+                </a>
             </div>
         );
     }
     
-    renderTabContent(tab, selected) {
+    renderTabContent(tab, selected, index) {
         let tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper',{
                                     'ui-accordion-content-wrapper-collapsed': !selected,
                                     'ui-accordion-content-wrapper-expanded': selected});
         
         return (
-            <div ref={(el) => this.contentWrapper = el} className={tabContentWrapperClass} style={tab.props.contentStyle}>
+            <div className={tabContentWrapperClass} style={tab.props.contentStyle}>
                 <div className="ui-accordion-content ui-widget-content">
                     {tab.props.children}
                 </div>
@@ -148,7 +153,7 @@ export class Accordion extends Component {
         let className = classNames('ui-accordion ui-widget ui-helper-reset', this.props.className);
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {tabs}
             </div>
         );
