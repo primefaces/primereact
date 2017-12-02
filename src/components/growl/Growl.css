@@ -52,3 +52,22 @@
 .ui-growl-message p {
 	font-weight: normal;
 }
+
+/* Animations */
+.ui-growl-enter {
+  opacity: 0.01;
+}
+
+.ui-growl-enter.ui-growl-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.ui-growl-leave {
+  opacity: 1;
+}
+
+.ui-growl-leave.ui-growl-leave-active {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+}

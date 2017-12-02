@@ -18,27 +18,27 @@ export class GrowlDemo extends Component {
     }
 
     showSuccess() {
-        this.setState({messages:[{severity:'success', summary:'Success Message', detail:'Order submitted'}]});
+        this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
     }
 
     showInfo() {
-        this.setState({messages:[{severity:'info', summary:'Info Message', detail:'PrimeReact rocks'}]});
+        this.growl.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
     }
 
     showWarn() {
-        this.setState({messages:[{severity:'warn', summary:'Warn Message', detail:'There are unsaved changes'}]});
+        this.growl.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
     }
 
     showError() {
-        this.setState({messages:[{severity:'error', summary:'Error Message', detail:'Validation failed'}]});
+        this.growl.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
     }
 
     showMultiple() {
-        this.setState({messages:[
+        this.growl.show([
             {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
-        ]});
+        ]);
     }
 
     render() {
@@ -52,7 +52,7 @@ export class GrowlDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <div>
                         <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
@@ -62,6 +62,7 @@ export class GrowlDemo extends Component {
                         <Button onClick={this.showMultiple} label="Multiple" />
                     </div>
                 </div>
+                
                 <GrowlDoc></GrowlDoc>
             </div>
         )
