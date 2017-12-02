@@ -62,26 +62,47 @@ export class GrowlDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section introduction">
+                <div className="content-section introduction growl-demo">
                     <div className="feature-intro">
                         <h1>Growl</h1>
                         <p>Growl is used to display messages in an overlay.</p>
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation ui-fluid">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
-                    <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
-                    <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
-                    <Button onClick={this.showError} label="Error" className="ui-button-danger" />
-                    <Button onClick={this.showMultiple} label="Multiple" />
-                    <Button onClick={this.showSticky} label="Sticky" />
-                    <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
-
-                    <br /><br />
-                    <Button onClick={this.clear} label="Clear" />
+                    <h3>Severities</h3>
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                        </div>
+                    </div>
+                    
+                    <h3>Customized</h3>
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showSticky} label="Sticky" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
+                        </div>
+                    </div>
+                    
+                    <h3>Remove All</h3>
+                    <Button onClick={this.clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
                 </div>
                 
                 <GrowlDoc></GrowlDoc>
@@ -478,22 +499,41 @@ export class GrowlDemo extends Component {
                         <p>Growl is used to display messages in an overlay.</p>
                     </div>
                 </div>
-
-                <div className="content-section implementation">
+   
+                <div className="content-section implementation ui-fluid">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <div>
-                        <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
-                        <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
-                        <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
-                        <Button onClick={this.showError} label="Error" className="ui-button-danger" />
-                        <Button onClick={this.showMultiple} label="Multiple" />
-                        <Button onClick={this.showSticky} label="Sticky" />
-                        <Button onClick={this.showCustom} label="Custom" className="ui-button-success"/>
-
-                        <br /><br />
-                        <Button onClick={this.clear} label="Clear" />
+                    <h3>Severities</h3>
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                        </div>
                     </div>
+                    
+                    <h3>Customized</h3>
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showSticky} label="Sticky" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
+                        </div>
+                    </div>
+                    
+                    <h3>Remove All</h3>
+                    <Button onClick={this.clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
                 </div>
             </div>
         )
