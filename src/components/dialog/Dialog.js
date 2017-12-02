@@ -394,10 +394,67 @@ export class Dialog extends Component {
 
     componentWillUnmount() {
         this.disableModality();
-        
         this.unbindGlobalListeners();
-		
 		this.unbindMaskClickListener();
+    }
+
+    renderCloseIcon() {
+        if(this.props.closable) {
+            return (
+                <a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                    <span className="fa fa-fw fa-close"></span>
+                </a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderHeader() {
+        if(this.props.showHeader) {
+            let closeIcon = this.renderCloseIcon();
+
+            return (
+                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
+                    <span id={this.id + '_label'} className="ui-dialog-title">{this.props.header}</span>
+                    {closeIcon}
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderContent() {
+        return (
+            <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
+                {this.props.children}
+            </div>
+        );
+    }
+
+    renderFooter() {
+        if(this.props.footer) {
+            return (
+                <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderResizer() {
+        if(this.props.resizable) {
+            return (
+                <div className="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style={{ 'zIndex': '90' }} onMouseDown={this.initResize}></div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
@@ -405,38 +462,25 @@ export class Dialog extends Component {
             'ui-dialog-rtl': this.props.rtl,
             'ui-dialog-draggable': this.props.draggable
         });
+
         let style = Object.assign({
             display: this.state.visible ? 'block': 'none',
             width: this.props.width,
             height: this.props.height,
             minWidth: this.props.minWidth
         }, this.props.style);
-        let ariaLabelElementId = this.id + '_label';
 
-        let titleBar;
-        if(this.props.showHeader) {
-            titleBar = (<div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
-                            <span id={ariaLabelElementId} className="ui-dialog-title">{this.props.header}</span>
-                            {
-                                this.props.closable && (<a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
-                                                            <span className="fa fa-fw fa-close"></span>
-                                                        </a>)
-                            }
-                        </div>);
-        }
-
-        let footer = this.props.footer && <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>;
-
-        let resizable = this.props.resizable && <div className="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style={{'zIndex': '90'}} onMouseDown={this.initResize}></div>
+        let header = this.renderHeader();
+        let content = this.renderContent();
+        let footer = this.renderFooter();
+        let resizer = this.renderResizer();
 
         return (
-            <div id={this.props.id} className={className} style={style} ref={(el) => { this.container = el; }} onMouseDown={this.moveOnTop} aria-labelledby={ariaLabelElementId}>
-                {titleBar}
-                <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
-                    {this.props.children}
-                </div>
+            <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} onMouseDown={this.moveOnTop} aria-labelledby={this.id + '_label'} role="dialog">
+                {header}
+                {content}
                 {footer}
-                {resizable}
+                {resizer}
             </div>
         );
     }
