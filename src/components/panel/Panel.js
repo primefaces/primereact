@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Panel extends Component {
 
@@ -33,6 +34,10 @@ export class Panel extends Component {
             collapsed: this.props.collapsed
         };
         this.toggle = this.toggle.bind(this);
+    }
+
+    componentWillMount() {
+        this.id = this.props.id || UniqueComponentId();
     }
     
     componentDidUpdate() {
@@ -82,8 +87,12 @@ export class Panel extends Component {
     
     renderToggleIcon() {
         if(this.props.toggleable) {
+            let id = this.id + '_label';
+            let ariaControls = this.id + '_content';
+
             return (
-                <a className="ui-panel-titlebar-icon ui-panel-titlebar-toggler ui-corner-all ui-state-default" href="#" onClick={this.toggle}>
+                <a className="ui-panel-titlebar-icon ui-panel-titlebar-toggler ui-corner-all ui-state-default" href="#" onClick={this.toggle}
+                    id={id} aria-controls={ariaControls} aria-expanded={!this.state.collapsed} role="tab">
                    <span className={classNames('fa fa-fw', {'fa-plus': this.state.collapsed, 'fa-minus': !this.state.collapsed})}></span>
                 </a>
             );
@@ -114,9 +123,11 @@ export class Panel extends Component {
                                     'ui-panel-content-wrapper-collapsed': (this.state.collapsed && this.props.toggleable), 
                                     'ui-panel-content-wrapper-expanded': (!this.state.collapsed && this.props.toggleable)
                                 });
+        let id = this.id + '_content';
+        let ariaLabelledBy = this.id + '_label';
         
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className}>
+            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-labelledy={ariaLabelledBy} aria-hidden={this.state.collapsed}>
                 <div className="ui-panel-content ui-widget-content">
                     {this.props.children}
                 </div>
