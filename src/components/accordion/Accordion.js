@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class AccordionTab extends Component {
     
@@ -22,7 +23,6 @@ export class AccordionTab extends Component {
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string
     }
-
 }
 
 export class Accordion extends Component {
@@ -53,6 +53,10 @@ export class Accordion extends Component {
             activeIndex: props.activeIndex
         };
         this.contentWrappers = [];
+    }
+
+    componentWillMount() {
+        this.id = this.props.id || UniqueComponentId();
     }
 
     componentDidUpdate() {
@@ -108,10 +112,12 @@ export class Accordion extends Component {
     
     renderTabHeader(tab, selected, index) {
         let tabHeaderClass = classNames(tab.props.headerClassName, 'ui-accordion-header ui-state-default ui-corner-all', {'ui-state-active': selected, 'ui-state-disabled': tab.props.disabled});
-        
+        let id = this.id + '_header_' + index;
+        let ariaControls = this.id + '_content_' + index;
+
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle} onClick={(event) => this.onTabClick(event, tab, index)}>
-                <a href="#">
+                <a href="#" id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected}>
                     <span className={classNames('fa fa-fw', { 'fa-caret-right': !selected, 'fa-caret-down': selected })}></span>
                     <span className="ui-accordion-header-text">{tab.props.header}</span>
                 </a>
@@ -123,9 +129,10 @@ export class Accordion extends Component {
         let tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper',{
                                     'ui-accordion-content-wrapper-collapsed': !selected,
                                     'ui-accordion-content-wrapper-expanded': selected});
-        
+        let id = this.id + '_content_' + index;
+
         return (
-            <div className={tabContentWrapperClass} style={tab.props.contentStyle}>
+            <div id={id} className={tabContentWrapperClass} style={tab.props.contentStyle}>
                 <div className="ui-accordion-content ui-widget-content">
                     {tab.props.children}
                 </div>
@@ -136,7 +143,7 @@ export class Accordion extends Component {
     renderTab(tab, index) {
         let selected = this.isSelected(index);
         let tabHeader = this.renderTabHeader(tab, selected, index);
-        let tabContent = this.renderTabContent(tab, selected);
+        let tabContent = this.renderTabContent(tab, selected, index);
 
         return (
             <div key={tab.props.header} className="ui-accordion-tab">
@@ -153,7 +160,7 @@ export class Accordion extends Component {
         let className = classNames('ui-accordion ui-widget ui-helper-reset', this.props.className);
 
         return (
-            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {tabs}
             </div>
         );
