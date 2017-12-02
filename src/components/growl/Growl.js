@@ -12,14 +12,16 @@ export class Growl extends Component {
         id: null,
         className: null,
         style: null,
-        baseZIndex: 0
+        baseZIndex: 0,
+        position: 'topright'
     }
 
     static propTypes = {
         id: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
-        baseZIndex: PropTypes.number
+        baseZIndex: PropTypes.number,
+        position: PropTypes.string
     };
 
     constructor(props) {
@@ -71,7 +73,7 @@ export class Growl extends Component {
     }
  
     render() {
-        let className = classNames('ui-growl ui-widget', this.props.className);
+        let className = classNames('ui-growl ui-widget ui-growl-' + this.props.position, this.props.className);
         let messages = this.renderMessages();
 
         return (

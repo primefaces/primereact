@@ -1,8 +1,26 @@
 .ui-growl {
-	position:fixed;
+  position:fixed;
+	width: 20em;
+}
+
+.ui-growl.ui-growl-topright {
 	top: 20px;
 	right: 20px;
-	width: 20em;
+}
+
+.ui-growl.ui-growl-topleft {
+	top: 20px;
+	left: 20px;
+}
+
+.ui-growl.ui-growl-bottomleft {
+	bottom: 20px;
+	left: 20px;
+}
+
+.ui-growl.ui-growl-bottomright {
+	bottom: 20px;
+	right: 20px;
 }
 
 .ui-growl-item-container {
@@ -13,7 +31,7 @@
 }
 
 .ui-growl-item {
-    position: relative;
+	position: relative;
 	display: block;
 	padding: .5em 1em;
 }

@@ -41,6 +41,17 @@ export class GrowlMessage extends Component {
         }
     }
 
+    renderCloseIcon() {
+        if(this.message.closable) {
+            return (
+                <a href="#" className="ui-growl-icon-close fa fa-close" onClick={this.close}></a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
         let className = classNames('ui-growl-item-container ui-state-highlight ui-corner-all ui-shadow', {
             'ui-growl-message-info': this.props.message.severity === 'info',
@@ -56,10 +67,12 @@ export class GrowlMessage extends Component {
             'fa-check': this.props.message.severity === 'success'
         });
 
+        let closeIcon = this.renderCloseIcon();
+
         return (
             <div ref={(el) => { this.element = el; }} className={className} aria-live="polite">
                 <div className="ui-growl-item ui-helper-clearfix">
-                    <a href="#" className="ui-growl-icon-close fa fa-close" onClick={this.close}></a>
+                    {closeIcon}
                     <span className={iconClassName}></span>
                     <div className="ui-growl-message">
                         <span className="ui-growl-title">{this.props.message.summary}</span>
