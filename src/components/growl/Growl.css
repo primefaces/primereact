@@ -82,11 +82,12 @@
 }
 
 .ui-growl-leave {
-	max-height: 250px;
+	max-height: 500px;
 }
 
 .ui-growl-leave.ui-growl-leave-active {
 	max-height: 0;
 	overflow: hidden;
-	transition: max-height 1s ease-in;
+	margin-bottom: 0;
+	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), margin-bottom 0.5s cubic-bezier(0, 1, 0, 1);
 }
