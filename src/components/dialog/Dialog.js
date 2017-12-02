@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Dialog extends Component {
 
@@ -70,6 +71,10 @@ export class Dialog extends Component {
         this.moveOnTop = this.moveOnTop.bind(this);
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
+    }
+
+    componentWillMount() {
+        this.id = this.props.id || UniqueComponentId();
     }
 
     positionOverlay() {
@@ -406,11 +411,12 @@ export class Dialog extends Component {
             height: this.props.height,
             minWidth: this.props.minWidth
         }, this.props.style);
+        let ariaLabelElementId = this.id + '_label';
 
         let titleBar;
         if(this.props.showHeader) {
             titleBar = (<div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
-                            <span className="ui-dialog-title">{this.props.header}</span>
+                            <span id={ariaLabelElementId} className="ui-dialog-title">{this.props.header}</span>
                             {
                                 this.props.closable && (<a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
                                                             <span className="fa fa-fw fa-close"></span>
@@ -424,7 +430,7 @@ export class Dialog extends Component {
         let resizable = this.props.resizable && <div className="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style={{'zIndex': '90'}} onMouseDown={this.initResize}></div>
 
         return (
-            <div id={this.props.id} className={className} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
+            <div id={this.props.id} className={className} style={style} ref={(el) => { this.container = el; }} onMouseDown={this.moveOnTop} aria-labelledby={ariaLabelElementId}>
                 {titleBar}
                 <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
                     {this.props.children}
