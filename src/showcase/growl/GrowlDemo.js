@@ -15,6 +15,8 @@ export class GrowlDemo extends Component {
         this.showWarn = this.showWarn.bind(this);
         this.showError = this.showError.bind(this);
         this.showMultiple = this.showMultiple.bind(this);
+        this.showSticky = this.showSticky.bind(this);
+        this.showCustom = this.showCustom.bind(this);
     }
 
     showSuccess() {
@@ -31,6 +33,17 @@ export class GrowlDemo extends Component {
 
     showError() {
         this.growl.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+    }
+
+    showSticky() {
+        this.growl.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+    }
+
+    showCustom() {
+        let summary = <span><i className="fa fa-check" /> <strong>PrimeReact</strong></span>;
+        let detail = <img src="showcase/resources/images/primereact-logo.png" width="250px"/> 
+
+        this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
     }
 
     showMultiple() {
@@ -60,6 +73,8 @@ export class GrowlDemo extends Component {
                         <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         <Button onClick={this.showMultiple} label="Multiple" />
+                        <Button onClick={this.showSticky} label="Sticky" />
+                        <Button onClick={this.showCustom} label="Custom" className="ui-button-success"/>
                     </div>
                 </div>
                 

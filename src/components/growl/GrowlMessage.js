@@ -21,15 +21,24 @@ export class GrowlMessage extends Component {
         this.close = this.close.bind(this);
     }
 
+    componentDidMount() {
+        if(!this.props.message.sticky) {
+            setTimeout(() => {
+                this.close(null);
+            }, this.props.message.life||3000);
+        }
+    }
+
     close(event) {
         if(this.props.onClose) {
             this.props.onClose({
-                originalEvent: event,
                 message: this.props.message
             })
         }
 
-        event.preventDefault();
+        if(event) {
+            event.preventDefault();
+        }
     }
 
     render() {
