@@ -17,6 +17,7 @@ export class GrowlDemo extends Component {
         this.showMultiple = this.showMultiple.bind(this);
         this.showSticky = this.showSticky.bind(this);
         this.showCustom = this.showCustom.bind(this);
+        this.clear = this.clear.bind(this);
     }
 
     showSuccess() {
@@ -54,6 +55,10 @@ export class GrowlDemo extends Component {
         ]);
     }
 
+    clear() {
+        this.growl.clear();
+    }
+
     render() {
         return (
             <div>
@@ -67,15 +72,16 @@ export class GrowlDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <div>
-                        <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
-                        <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
-                        <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
-                        <Button onClick={this.showError} label="Error" className="ui-button-danger" />
-                        <Button onClick={this.showMultiple} label="Multiple" />
-                        <Button onClick={this.showSticky} label="Sticky" />
-                        <Button onClick={this.showCustom} label="Custom" className="ui-button-success"/>
-                    </div>
+                    <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                    <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                    <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                    <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                    <Button onClick={this.showMultiple} label="Multiple" />
+                    <Button onClick={this.showSticky} label="Sticky" />
+                    <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
+
+                    <br /><br />
+                    <Button onClick={this.clear} label="Clear" />
                 </div>
                 
                 <GrowlDoc></GrowlDoc>
@@ -266,6 +272,16 @@ this.growl.show({ life: 5000, severity: 'error', summary: 'Error Message', detai
 `}
             </CodeHighlight>
 
+            <h3>Clearing Messages</h3>
+            <p><i>clear()</i> method removes all messages from Growl.</p>
+
+            <CodeHighlight className="html">
+                {`
+this.growl.clear();
+
+`}
+            </CodeHighlight>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -411,6 +427,7 @@ export class GrowlDemo extends Component {
         this.showMultiple = this.showMultiple.bind(this);
         this.showSticky = this.showSticky.bind(this);
         this.showCustom = this.showCustom.bind(this);
+        this.clear = this.clear.bind(this);
     }
 
     showSuccess() {
@@ -448,6 +465,10 @@ export class GrowlDemo extends Component {
         ]);
     }
 
+    clear() {
+        this.growl.clear();
+    }
+
     render() {
         return (
             <div>
@@ -469,6 +490,9 @@ export class GrowlDemo extends Component {
                         <Button onClick={this.showMultiple} label="Multiple" />
                         <Button onClick={this.showSticky} label="Sticky" />
                         <Button onClick={this.showCustom} label="Custom" className="ui-button-success"/>
+
+                        <br /><br />
+                        <Button onClick={this.clear} label="Clear" />
                     </div>
                 </div>
             </div>

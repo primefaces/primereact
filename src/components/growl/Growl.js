@@ -57,6 +57,12 @@ export class Growl extends Component {
             });
         }
     }
+
+    clear() {
+        this.setState({
+            messages: null
+        })
+    }
     
     onClose(message) {
         let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
