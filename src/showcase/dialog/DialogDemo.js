@@ -38,7 +38,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} onHide={this.onHide}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} onHide={this.onHide} appendTo={document.body}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -270,6 +270,12 @@ let footer = <div>
                             <td>number</td>
                             <td>null</td>
                             <td>Top coordinate value of the dialog.</td>
+                        </tr>
+                        <tr>
+                            <td>appendTo</td>
+                            <td>DOM element</td>
+                            <td>null</td>
+                            <td>DOM element instance where the dialog should be mounted.</td>
                         </tr>
                     </tbody>
                 </table>

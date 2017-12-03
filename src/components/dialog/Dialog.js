@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
@@ -31,7 +32,8 @@ export class Dialog extends Component {
         className: null,
         showHeader: true,
         positionLeft: -1,
-        positionTop: -1
+        positionTop: -1,
+        appendTo: null
     }
 
     static propTypes = {
@@ -59,7 +61,8 @@ export class Dialog extends Component {
         className: PropTypes.string,
         showHeader: PropTypes.bool,
         positionLeft: PropTypes.number,
-        positionTop: PropTypes.number
+        positionTop: PropTypes.number,
+        appendTo: PropTypes.object
     };
     
     constructor(props) {
@@ -475,7 +478,7 @@ export class Dialog extends Component {
         let footer = this.renderFooter();
         let resizer = this.renderResizer();
 
-        return (
+        let element = (
             <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} onMouseDown={this.moveOnTop} aria-labelledby={this.id + '_label'} role="dialog">
                 {header}
                 {content}
@@ -483,5 +486,13 @@ export class Dialog extends Component {
                 {resizer}
             </div>
         );
+
+        if(this.props.appendTo) {
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        }
+        else {
+            return element;
+        }
+        
     }
 }
