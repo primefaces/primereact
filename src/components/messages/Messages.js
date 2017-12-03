@@ -1,83 +1,88 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { UIMessage } from './UIMessage';
+
+var messageIdx = 0;
 
 export class Messages extends Component {
 
     static defaultProps = {
         id: null,
-        closable: true,
         className: null,
-        style: null,
-        onClear: null
+        style: null
     }
 
     static propTypes = {
         id: PropTypes.string,
-        closable: PropTypes.bool,
         className: PropTypes.string,
-        style: PropTypes.object,
-        onClear: PropTypes.func
+        style: PropTypes.object
     };
 
     constructor(props) {
         super(props);
-        this.state = {messages:this.props.value};
-        this.clear = this.clear.bind(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({messages:nextProps.value});
-    }
-
-    clear(event) {
-        this.setState({messages:[]});
-        if(this.props.onClear) {
-            this.props.onClear();
+        this.state = {
+            messages: null
         }
-        event.preventDefault();
+
+        this.onClose = this.onClose.bind(this);
     }
 
-    render() {
-        if(this.state.messages && this.state.messages.length) {
-            var firstMessage = this.state.messages[0];
-            var severity = firstMessage.severity||'info';
+    show(value) {
+        if (value) {
+            let newMessages;
 
-            var className = classNames('ui-messages ui-widget ui-corner-all', {
-                'ui-messages-info': severity === 'info',
-                'ui-messages-warn': severity === 'warn',
-                'ui-messages-error': severity === 'error',
-                'ui-messages-success': severity === 'success'
-            });
-
-            var icon = classNames('ui-messages-icon fa fa-fw fa-2x', {
-                'fa-info-circle': severity === 'info',
-                'fa-warning': severity === 'warn',
-                'fa-close': severity === 'error',
-                'fa-check': severity === 'success',
-            });
-
-            if(this.props.closable) {
-                var closeIcon = <a href="#" className="ui-messages-close" onClick={this.clear}>
-                                <i className="fa fa-close"></i>
-                            </a>;
+            if (Array.isArray(value)) {
+                for (let i = 0; i < value.length; i++) {
+                    value[i].id = messageIdx++;
+                    newMessages = [...this.state.messages, ...value];
+                }
+            }
+            else {
+                value.id = messageIdx++;
+                newMessages = this.state.messages ? [...this.state.messages, value] : [value];
             }
 
-            return <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
-                      {closeIcon}
-                      <span className={icon}></span>
-                      <ul>
-                        {this.state.messages.map((msg) => {
-                          return <li key={msg.summary + msg.detail}>
-                                    <span className="ui-messages-summary">{msg.summary}</span>
-                                    <span className="ui-messages-detail">{msg.detail}</span>
-                                </li>;  
-                        })}
-                      </ul>
-                   </div>;
+            this.setState({
+                messages: newMessages
+            });
+        }
+    }
+
+    clear() {
+        this.setState({
+            messages: null
+        })
+    }
+
+    onClose(message) {
+        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
+        this.setState({
+            messages: newMessages
+        });
+
+        if (this.props.onRemove) {
+            this.props.onRemove(message);
+        }
+    }
+
+    renderMessages() {
+        if (this.state.messages && this.state.messages.length) {
+            return this.state.messages.map((message, index) => {
+                return <UIMessage key={message.id} message={message} onClick={this.props.onClick} onClose={this.onClose} />;
+            });
         }
         else {
             return null;
-        }   
+        }
+    }
+
+    render() {
+        let messages = this.renderMessages();
+
+        return (
+            <div id={this.props.id} className={this.props.className} style={this.props.style}>
+                {messages}
+            </div>
+        );  
     }
 }

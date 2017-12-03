@@ -12,6 +12,7 @@ export class MessagesDemo extends Component {
     constructor() {
         super();
         this.state = {messages:null};
+
         this.showSuccess = this.showSuccess.bind(this);
         this.showInfo = this.showInfo.bind(this);
         this.showWarn = this.showWarn.bind(this);
@@ -21,31 +22,31 @@ export class MessagesDemo extends Component {
     }
 
     showSuccess() {
-        this.setState({messages:[{severity:'success', summary:'Success Message', detail:'Order submitted'}]});
+        this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
     }
 
     showInfo() {
-        this.setState({messages:[{severity:'info', summary:'Info Message', detail:'PrimeReact rocks'}]});
+        this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
     }
 
     showWarn() {
-        this.setState({messages:[{severity:'warn', summary:'Warn Message', detail:'There are unsaved changes'}]});
+        this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
     }
 
     showError() {
-        this.setState({messages:[{severity:'error', summary:'Error Message', detail:'Validation failed'}]});
+        this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
     }
 
     showMultiple() {
-        this.setState({messages:[
-            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
-            {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
-            {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
-        ]});
+        this.messages.show([
+            { severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks' },
+            { severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks' },
+            { severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks' }
+        ]);
     }
 
     clear() {
-        this.setState({messages:[]});
+        this.messages.clear();
     }
 
     render() {
@@ -54,20 +55,33 @@ export class MessagesDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Messages</h1>
-                        <p>Messages is used to display messages inline.</p>
+                        <p>Messages is used to display inline messages.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <Messages value={this.state.messages} closable={true}></Messages>
+                    <Messages ref={(el) => { this.messages = el; }}></Messages>
 
-                    <div>
-                        <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
-                        <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
-                        <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
-                        <Button onClick={this.showError} label="Error" className="ui-button-danger" />
-                        <Button onClick={this.showMultiple} label="Multiple" />
-                        <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
+                    <h3>Severities</h3>
+                    <div className="ui-g ui-fluid">
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                        </div>
+                        <div className="ui-g-12 ui-md-6">
+                            <Button onClick={this.showMultiple} label="Multiple" />
+                        </div>
+                        <div className="ui-g-12 ui-md-6">
+                            <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear"/>
+                        </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
@@ -86,6 +100,7 @@ export class MessagesDemo extends Component {
                         <Message severity="error"></Message>
                     </div>
                 </div>
+
                 <MessagesDoc></MessagesDoc>
             </div>
         )
