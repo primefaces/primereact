@@ -81,7 +81,7 @@ export class UIMessage extends Component {
     }
 
     render() {
-        let className = 'ui-messages ui-widget ui-messages-' + this.props.message.severity;
+        let className = 'ui-messages ui-widget ui-corner-all ui-messages-' + this.props.message.severity;
         let icon = classNames('ui-messages-icon fa fa-fw fa-2x', {
             'fa-info-circle': this.props.message.severity === 'info',
             'fa-warning': this.props.message.severity === 'warn',
@@ -93,9 +93,11 @@ export class UIMessage extends Component {
 
         return (
             <div ref={(el) => { this.container = el; }} className={className}>
-                {closeIcon}
-                <span className={icon}></span>
-                {messages}
+                <div className="ui-messages-wrapper">
+                    {closeIcon}
+                    <span className={icon}></span>
+                    {messages}
+                </div>
             </div>
         );
 

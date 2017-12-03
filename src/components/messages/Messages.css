@@ -1,8 +1,10 @@
 .ui-messages {
-    border: 1px solid;
-    margin: .5em 0;
-    padding: 1em 1em 1em .5em;
+    margin-bottom: .5em;
     position: relative;
+}
+
+.ui-messages .ui-messages-wrapper {
+    padding: 1em;
 }
 
 .ui-messages-icon {
@@ -62,4 +64,25 @@
     position: absolute;
     top: 5px;
     right: 5px;
+}
+
+/* Animations */
+.ui-messages-enter {
+  opacity: 0.01;
+}
+
+.ui-messages-enter.ui-messages-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.ui-messages-leave {
+    max-height: 500px;
+}
+
+.ui-messages-leave.ui-messages-leave-active {
+	max-height: 0;
+	overflow: hidden;
+	margin-bottom: 0;
+	transition: max-height 500ms cubic-bezier(0, 1, 0, 1), margin-bottom 500ms cubic-bezier(0, 1, 0, 1);
 }

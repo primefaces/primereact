@@ -18,6 +18,7 @@ export class MessagesDemo extends Component {
         this.showWarn = this.showWarn.bind(this);
         this.showError = this.showError.bind(this);
         this.showMultiple = this.showMultiple.bind(this);
+        this.showSticky = this.showSticky.bind(this);
         this.clear = this.clear.bind(this);
     }
 
@@ -35,6 +36,10 @@ export class MessagesDemo extends Component {
 
     showError() {
         this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+    }
+
+    showSticky() {
+        this.messages.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
     }
 
     showMultiple() {
@@ -76,10 +81,13 @@ export class MessagesDemo extends Component {
                         <div className="ui-g-12 ui-md-3">
                             <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         </div>
-                        <div className="ui-g-12 ui-md-6">
+                        <div className="ui-g-12 ui-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" />
                         </div>
-                        <div className="ui-g-12 ui-md-6">
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showSticky} label="Sticky" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
                             <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear"/>
                         </div>
                     </div>

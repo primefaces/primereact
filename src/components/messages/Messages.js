@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 var messageIdx = 0;
 
@@ -81,7 +82,12 @@ export class Messages extends Component {
 
         return (
             <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                {messages}
+                <ReactCSSTransitionGroup
+                    transitionName="ui-messages"
+                    transitionEnterTimeout={250}
+                    transitionLeaveTimeout={500}>
+                    {messages}
+                </ReactCSSTransitionGroup>
             </div>
         );  
     }
