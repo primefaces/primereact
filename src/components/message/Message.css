@@ -5,6 +5,10 @@
     display: inline-block;
 }
 
+.ui-message .fa {
+    margin-right: .25em;
+}
+
 .ui-fluid .ui-message {
     display: block;
 }

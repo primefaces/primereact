@@ -81,6 +81,10 @@ export class MessagesDemo extends Component {
                         <div className="ui-g-12 ui-md-3">
                             <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         </div>
+                    </div>
+
+                    <h3>Options</h3>
+                    <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" />
                         </div>
@@ -88,22 +92,32 @@ export class MessagesDemo extends Component {
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear"/>
+                            <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear" />
                         </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <Message severity="info" text="PrimeNG Rocks"></Message>
-                    <Message severity="success" text="Record Saved"></Message>
-                    <Message severity="warn" text="Are you sure?"></Message>
-                    <Message severity="error" text="Field is required"></Message>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="info" text="PrimeNG Rocks"></Message>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="success" text="Record Saved"></Message>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="warn" text="Are you sure?"></Message>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="error" text="Field is required"></Message>
+                        </div>
+                    </div>
 
-                    <div style={{marginTop: '30px'}}>
+                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Username" className="ng-dirty ng-invalid"/>
                         <Message severity="error" text="Field is required"></Message>
                     </div>
-                    <div style={{marginTop: '30px'}}>
+                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Email" className="ng-dirty ng-invalid"/>
                         <Message severity="error"></Message>
                     </div>
@@ -136,46 +150,123 @@ import {Message} from 'primereact/components/message/Message';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>A single message is specified by Message interface in PrimeReact that defines the severity, summary and detail properties.
-               Messages to display are defined using the value property which should an array of Message instances.</p>
+            <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as  severity,
+               summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
+
 <CodeHighlight className="html">
 {`
-<Messages value={this.state.messages}></Messages>
+<Messages ref={(el) => { this.messages = el; }}></Messages>
 
 `}
 </CodeHighlight>
 
+<CodeHighlight className="javascript">
+{`
+this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+
+`}
+</CodeHighlight>
+
+            <h3>Message API</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>severity</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Severity of the message.</td>
+                        </tr>
+                        <tr>
+                            <td>summary</td>
+                            <td>element</td>
+                            <td>null</td>
+                            <td>Summary content of the message.</td>
+                        </tr>
+                        <tr>
+                            <td>detail</td>
+                            <td>element</td>
+                            <td>null</td>
+                            <td>Detail content of the message.</td>
+                        </tr>
+                        <tr>
+                            <td>closable</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether the message can be closed manually using the close icon.</td>
+                        </tr>
+                        <tr>
+                            <td>sticky</td>
+                            <td>element</td>
+                            <td>null</td>
+                            <td>When enabled, message is not removed automatically.</td>
+                        </tr>
+                        <tr>
+                            <td>life</td>
+                            <td>number</td>
+                            <td>3000</td>
+                            <td>Delay in milliseconds to close the message automatically.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Events</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>onClick</td>
+                            <td>message: Clicked message instance </td>
+                            <td>Callback to invoke when a message is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onRemove</td>
+                            <td>message: Closed message instance </td>
+                            <td>Callback to invoke when a message is removed.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
             <h3>Severities</h3>
-            <p>Here are the possible values for the severity of a message.</p>
-            
+            <p>There are four possible values for the severity of a message.</p>
+
             <ul>
-                <li>
-                    success
-                </li>
-                <li>
-                    info
-                </li>
-                <li>
-                    warn
-                </li>
-                <li>
-                    error
-                </li>
+                <li>success</li>
+                <li>info</li>
+                <li>warn</li>
+                <li>error</li>
             </ul>
-            
+
             <h3>Showing Messages</h3>
-            <p>Adding messages to the array is enough to display them. Similarly removing a message from the array is also removed from the UI.</p>
+            <p>Show method accepts either a single message or an array of messages.</p>
 
 <CodeHighlight className="html">
 {`
-<Messages value={this.state.messages}></Messages>
+<Messages ref={(el) => { this.messages = el; }}></Messages>
 
 <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
 <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
 <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
 <Button onClick={this.showError} label="Error" className="ui-button-danger" />
 <Button onClick={this.showMultiple} label="Multiple" />
-<Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
 
 `}
 </CodeHighlight>
@@ -183,57 +274,70 @@ import {Message} from 'primereact/components/message/Message';
 <CodeHighlight className="javascript">
 {`
 showSuccess() {
-    this.setState({messages:[{severity:'success', summary:'Success Message', detail:'Order submitted'}]});
+    this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 }
 
 showInfo() {
-    this.setState({messages:[{severity:'info', summary:'Info Message', detail:'PrimeReact rocks'}]});
+    this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
 }
 
 showWarn() {
-    this.setState({messages:[{severity:'warn', summary:'Warn Message', detail:'There are unsaved changes'}]});
+    this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
 }
 
 showError() {
-    this.setState({messages:[{severity:'error', summary:'Error Message', detail:'Validation failed'}]});
+    this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 }
 
 showMultiple() {
-    this.setState({messages:[
+    this.messages.show([
         {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
-    ]});
-}
-
-clear() {
-    this.setState({messages:[]});
+    ]);
 }
 
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
-            <h3>Closable</h3>
-            <p>Messages are closable by default resulting in a close icon being displayed on top right corner.</p>
+                <h3>Clearing Messages</h3>
+                <p><i>clear()</i> method removes all messages.</p>
 
-<CodeHighlight className="html">
+                <CodeHighlight className="html">
 {`
-<Messages value={this.state.messages}></Messages>
+this.messages.clear();
 
 `}
 </CodeHighlight>
 
-            <p>In order to disable closable messages, set closable to false.</p>
+                <h3>Closable</h3>
+                <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
-<CodeHighlight className="html">
+                <CodeHighlight className="javascript">
 {`
-<Messages value={this.state.messages} closable={false}></Messages>
+this.messages.show({ closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+
+`}
+                </CodeHighlight>
+
+                <h3>Sticky</h3>
+                <p>Messages are cleared automatically after the timeout defined by life property which is 3 seconds by default. Use sticky mode to make them stay until
+                they are manually removed.</p>
+
+<CodeHighlight className="javascript">
+    {`
+//sticky
+this.messages.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+
+//automatically removed after 5 seconds
+this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
 `}
 </CodeHighlight>
 
-                        <h3>Message Component</h3>
-                        <p>Message component is useful in cases where messages need to be displayed related to an element such as forms. It has two property, severity and text of the message.</p>
+
+                    <h3>Message Component</h3>
+                    <p>Message component is useful in cases where messages need to be displayed related to an element such as forms. It has two property, severity and text of the message.</p>
 <CodeHighlight className="html">
 {`
 <h3>Inline Message CSS</h3>
@@ -246,7 +350,7 @@ clear() {
 `}
 </CodeHighlight>
 
-                        <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -265,12 +369,6 @@ clear() {
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
-                            <td>closable</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Defines if message box can be closed by the click icon..</td>
-                        </tr>
-                        <tr>
                             <td>className</td>
                             <td>string</td>
                             <td>null</td>
@@ -286,25 +384,7 @@ clear() {
                 </table>
             </div>
 
-            <h3>Events</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onClear</td>
-                            <td>-</td>
-                            <td>Callback to invoke when clear icon is clicked</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            
 
             <h3>Styling</h3>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
@@ -369,86 +449,127 @@ clear() {
                 </a>
 <CodeHighlight className="javascript">
 {`
+import React, {Component} from 'react';
+import {Messages} from 'primereact/components/messages/Messages';
+import {Message} from 'primereact/components/message/Message';
+import {InputText} from 'primereact/components/inputtext/InputText';
+import {Button} from 'primereact/components/button/Button';
+
 export class MessagesDemo extends Component {
         
     constructor() {
         super();
         this.state = {messages:null};
+
         this.showSuccess = this.showSuccess.bind(this);
         this.showInfo = this.showInfo.bind(this);
         this.showWarn = this.showWarn.bind(this);
         this.showError = this.showError.bind(this);
         this.showMultiple = this.showMultiple.bind(this);
+        this.showSticky = this.showSticky.bind(this);
         this.clear = this.clear.bind(this);
     }
 
     showSuccess() {
-        this.setState({messages:[{severity:'success', summary:'Success Message', detail:'Order submitted'}]});
+        this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
     }
 
     showInfo() {
-        this.setState({messages:[{severity:'info', summary:'Info Message', detail:'PrimeReact rocks'}]});
+        this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
     }
 
     showWarn() {
-        this.setState({messages:[{severity:'warn', summary:'Warn Message', detail:'There are unsaved changes'}]});
+        this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
     }
 
     showError() {
-        this.setState({messages:[{severity:'error', summary:'Error Message', detail:'Validation failed'}]});
+        this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+    }
+
+    showSticky() {
+        this.messages.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
     }
 
     showMultiple() {
-        this.setState({messages:[
-            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
-            {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
-            {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
-        ]});
+        this.messages.show([
+            { severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks' },
+            { severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks' },
+            { severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks' }
+        ]);
     }
 
     clear() {
-        this.setState({messages:[]});
+        this.messages.clear();
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Messages</h1>
-                        <p>Messages is used to display messages inline.</p>
+                        <p>Messages is used to display inline messages.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <Messages value={this.state.messages} closable={true}></Messages>
+                    <Messages ref={(el) => { this.messages = el; }}></Messages>
 
-                    <div>
-                        <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
-                        <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
-                        <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
-                        <Button onClick={this.showError} label="Error" className="ui-button-danger" />
-                        <Button onClick={this.showMultiple} label="Multiple" />
-                        <Button onClick={this.clear} icon="fa-close" style={{float:'right'}} label="Clear"/>
+                    <h3>Severities</h3>
+                    <div className="ui-g ui-fluid">
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                        </div>
+                    </div>
+
+                    <h3>Options</h3>
+                    <div className="ui-g ui-fluid">
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showMultiple} label="Multiple" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.showSticky} label="Sticky" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear" />
+                        </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <Message severity="info" text="PrimeNG Rocks"></Message>
-                    <Message severity="success" text="Record Saved"></Message>
-                    <Message severity="warn" text="Are you sure?"></Message>
-                    <Message severity="error" text="Field is required"></Message>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="info" text="PrimeNG Rocks"></Message>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="success" text="Record Saved"></Message>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="warn" text="Are you sure?"></Message>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <Message severity="error" text="Field is required"></Message>
+                        </div>
+                    </div>
 
-                    <div style={{marginTop: '30px'}}>
+                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Username" className="ng-dirty ng-invalid"/>
                         <Message severity="error" text="Field is required"></Message>
                     </div>
-                    <div style={{marginTop: '30px'}}>
+                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Email" className="ng-dirty ng-invalid"/>
                         <Message severity="error"></Message>
                     </div>
                 </div>
-                <MessagesDoc></MessagesDoc>
             </div>
         )
     }

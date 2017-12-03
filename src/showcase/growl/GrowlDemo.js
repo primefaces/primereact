@@ -88,7 +88,7 @@ export class GrowlDemo extends Component {
                         </div>
                     </div>
                     
-                    <h3>Customized</h3>
+                    <h3>Options</h3>
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
@@ -195,6 +195,31 @@ this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Orde
                             <td>number</td>
                             <td>3000</td>
                             <td>Delay in milliseconds to close the message automatically.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Events</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>onClick</td>
+                            <td>message: Clicked message instance </td>
+                            <td>Callback to invoke when a message is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onRemove</td>
+                            <td>message: Closed message instance </td>
+                            <td>Callback to invoke when a message is removed.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -349,31 +374,6 @@ this.growl.clear();
                 </table>
             </div>
 
-            <h3>Events</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onClick</td>
-                            <td>message: Clicked message instance </td>
-                            <td>Callback to invoke when a message is clicked.</td>
-                        </tr>
-                        <tr>
-                            <td>onRemove</td>
-                            <td>message: Closed message instance </td>
-                            <td>Callback to invoke when a message is removed.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
             <h3>Styling</h3>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
@@ -430,11 +430,8 @@ this.growl.clear();
 <CodeHighlight className="javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Growl} from '../../components/growl/Growl';
-import {Button} from '../../components/button/Button';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import {Growl} from 'primereact/components/growl/Growl';
+import {Button} from 'primereact/components/button/Button';
 
 export class GrowlDemo extends Component {
         
@@ -519,7 +516,7 @@ export class GrowlDemo extends Component {
                         </div>
                     </div>
                     
-                    <h3>Customized</h3>
+                    <h3>Options</h3>
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
