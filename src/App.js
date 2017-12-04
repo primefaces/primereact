@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import classNames from 'classnames';
 import 'nanoscroller';
 import jQuery from "jquery";
@@ -368,172 +368,169 @@ class App extends Component {
     render() {
 
         return (
-            <HashRouter>
-                <div className='layout-wrapper'>
-                    <div id="layout-topbar">
-                        <a href="#" className="menu-button" onClick={this.openMenu}>
-                            <i className="fa fa-bars"></i>
-                        </a>
-                        <a href="#" className="logo">
-                            <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
-                        </a>
+            <div className='layout-wrapper'>
+                <div id="layout-topbar">
+                    <a href="#" className="menu-button" onClick={this.openMenu}>
+                        <i className="fa fa-bars"></i>
+                    </a>
+                    <a href="#" className="logo">
+                        <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
+                    </a>
 
-                        <ul className="topbar-menu">
-                            <li>
-                                <Link to="/setup" > GET STARTED </Link>
-                            </li>
+                    <ul className="topbar-menu">
+                        <li>
+                            <Link to="/setup" > GET STARTED </Link>
+                        </li>
 
-                            <li className="topbar-menu-themes">
-                                <a href="#">THEMES</a>
-                                <ul>
-                                    <li className="topbar-submenu-header">THEMING</li>
-                                    <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
-                                    <li className="topbar-submenu-header">PREMIUM</li>
-                                    <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
-                                    <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
-                                    <li className="topbar-submenu-header">THEMES</li>
-                                    <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
-                                    <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
-                                    <li><a href="#" data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
-                                    <li><a href="#" data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
-                                    <li><a href="#" data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
-                                    <li><a href="#" data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
-                                    <li><a href="#" data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
-                                    <li><a href="#" data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
-                                    <li><a href="#" data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
-                                    <li><a href="#" data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
-                                    <li><a href="#" data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
-                                    <li><a href="#" data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
-                                    <li><a href="#" data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
-                                    <li><a href="#" data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
-                                    <li><a href="#" data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
-                                    <li><a href="#" data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
-                                </ul>
-                            </li>
+                        <li className="topbar-menu-themes">
+                            <a href="#">THEMES</a>
+                            <ul>
+                                <li className="topbar-submenu-header">THEMING</li>
+                                <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
+                                <li className="topbar-submenu-header">PREMIUM</li>
+                                <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
+                                <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
+                                <li className="topbar-submenu-header">THEMES</li>
+                                <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
+                                <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
+                                <li><a href="#" data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
+                                <li><a href="#" data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
+                                <li><a href="#" data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
+                                <li><a href="#" data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
+                                <li><a href="#" data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
+                                <li><a href="#" data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
+                                <li><a href="#" data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
+                                <li><a href="#" data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
+                                <li><a href="#" data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
+                                <li><a href="#" data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
+                                <li><a href="#" data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
+                                <li><a href="#" data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
+                                <li><a href="#" data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
+                                <li><a href="#" data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
+                            </ul>
+                        </li>
 
-                            <li>
-                                <a href="http://forum.primefaces.org/viewforum.php?f=57">SUPPORT</a>
-                            </li>
-                        </ul>
-                    </div>
+                        <li>
+                            <a href="http://forum.primefaces.org/viewforum.php?f=57">SUPPORT</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div id="layout-sidebar" className={classNames({ 'active': this.state.menuActive === true })} onClick={this.onSidebarClick}>
-                        <AppMenu />
-                    </div>
+                <div id="layout-sidebar" className={classNames({ 'active': this.state.menuActive === true })} onClick={this.onSidebarClick}>
+                    <AppMenu />
+                </div>
 
-                    <div className={classNames({ 'layout-mask': this.state.menuActive === true })}>
-                    </div>
+                <div className={classNames({ 'layout-mask': this.state.menuActive === true })}>
+                </div>
 
-                    <div id="layout-content">
-                        <Route exact path="/" component={HomeComponent} />
-                        <Route path="/accordion" component={AccordionDemo} />
-                        <Route path="/autocomplete" component={AutoCompleteDemo} />
-                        <Route path="/button" component={ButtonDemo} />
-                        <Route path="/checkbox" component={CheckboxDemo} />
-                        <Route path="/chips" component={ChipsDemo} />
-                        <Route path="/dialog" component={DialogDemo} />
-                        <Route path="/dropdown" component={DropdownDemo} />
-                        <Route path="/grid" component={GridDemo} />
-                        <Route path="/growl" component={GrowlDemo} />
-                        <Route path="/fieldset" component={FieldsetDemo} />
-                        <Route path="/fileupload" component={FileUploadDemo} />
-                        <Route path="/inputtext" component={InputTextDemo} />
-                        <Route path="/inputtextarea" component={InputTextareaDemo} />
-                        <Route path="/listbox" component={ListBoxDemo} />
-                        <Route path="/messages" component={MessagesDemo} />
-                        <Route path="/multiselect" component={MultiSelectDemo} />
-                        <Route path="/overlaypanel" component={OverlayPanelDemo} />
-                        <Route path="/panel" component={PanelDemo} />
-                        <Route path="/progressbar" component={ProgressBarDemo} />
-                        <Route path="/radiobutton" component={RadioButtonDemo} />
-                        <Route path="/tabview" component={TabViewDemo} />
-                        <Route path="/togglebutton" component={ToggleButtonDemo} />
-                        <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
-                        <Route path="/selectbutton" component={SelectButtonDemo} />
-                        <Route path="/inputswitch" component={InputSwitchDemo} />
-                        <Route path="/inputmask" component={InputMaskDemo} />
-                        <Route path="/slider" component={SliderDemo} />
-                        <Route path="/spinner" component={SpinnerDemo} />
-                        <Route path="/calendar" component={CalendarDemo} />
-                        <Route path="/chartdemo" component={ChartDemo} />
-                        <Route path="/piechart" component={PieChartDemo} />
-                        <Route path="/doughnutchart" component={DoughnutChartDemo} />
-                        <Route path="/linechart" component={LineChartDemo} />
-                        <Route path="/barchart" component={BarChartDemo} />
-                        <Route path="/polarareachart" component={PolarAreaChartDemo} />
-                        <Route path="/radarchart" component={RadarChartDemo} />
-                        <Route path="/paginator" component={PaginatorDemo} />
-                        <Route path="/datalist" component={DataListDemo} />
-                        <Route path="/datagrid" component={DataGridDemo} />
-                        <Route exact path="/datatable" component={DataTableDemo} />
-                        <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
-                        <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
-                        <Route path="/datatable/sort" component={DataTableSortDemo} />
-                        <Route path="/datatable/filter" component={DataTableFilterDemo} />
-                        <Route path="/datatable/scroll" component={DataTableScrollDemo} />
-                        <Route path="/datatable/lazy" component={DataTableLazyDemo} />
-                        <Route path="/datatable/selection" component={DataTableSelectionDemo} />
-                        <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
-                        <Route path="/datatable/contextmenu" component={DataTableContextMenuDemo} />
-                        <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
-                        <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
-                        <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
-                        <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
-                        <Route path="/datatable/colreorder" component={DataTableColReorderDemo} />
-                        <Route path="/datatable/export" component={DataTableExportDemo} />
-                        <Route path="/datatable/edit" component={DataTableEditDemo} />
-                        <Route path="/datatable/rowgroup" component={DataTableRowGroupDemo} />
-                        <Route path="/datatable/crud" component={DataTableCrudDemo} />
-                        <Route path="/datatable/style" component={DataTableStyleDemo} />
-                        <Route path="/orderlist" component={OrderListDemo} />
-                        <Route path="/picklist" component={PickListDemo} />
-                        <Route path="/schedule" component={ScheduleDemo} />
-                        <Route path="/tree" component={TreeDemo} />
-                        <Route path="/treetable" component={TreeTableDemo} />
-                        <Route path="/captcha" component={CaptchaDemo} />
-                        <Route path="/colorpicker" component={ColorPickerDemo} />
-                        <Route path="/password" component={PasswordDemo} />
-                        <Route path="/toolbar" component={ToolbarDemo} />
-                        <Route path="/lightbox" component={LightboxDemo} />
-                        <Route path="/rating" component={RatingDemo} />
-                        <Route exact path="/datascroller" component={DataScrollerDemo} />
-                        <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
-                        <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
-                        <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
-                        <Route path="/menumodel" component={MenuModelDemo} />
-                        <Route path="/menu" component={MenuDemo} />
-                        <Route path="/tabmenu" component={TabMenuDemo} />
-                        <Route path="/breadcrumb" component={BreadcrumbDemo} />
-                        <Route path="/tieredmenu" component={TieredMenuDemo} />
-                        <Route path="/menubar" component={MenubarDemo} />
-                        <Route path="/contextmenu" component={ContextMenuDemo} />
-                        <Route path="/panelmenu" component={PanelMenuDemo} />
-                        <Route path="/slidemenu" component={SlideMenuDemo} />
-                        <Route path="/steps" component={StepsDemo} />
-                        <Route path="/megamenu" component={MegaMenuDemo} />
-                        <Route path="/setup" component={SetupPage} />
-                        <Route path="/splitbutton" component={SplitButtonDemo} />
-                        <Route path="/organizationchart" component={OrganizationChartDemo} />
-                        <Route path="/theming" component={ThemingPage} />
-                        <Route path="/inputgroup" component={InputGroupDemo} />
-                        <Route path="/editor" component={EditorDemo} />
-                        <Route path="/tooltip" component={TooltipDemo} />
-                        <Route path="/sidebar" component={SidebarDemo} />
-                        <Route path="/gmap" component={GMapDemo} />
-                        <Route path="/progressspinner" component={ProgressSpinnerDemo} />
+                <div id="layout-content">
+                    <Route exact path="/" component={HomeComponent} />
+                    <Route path="/accordion" component={AccordionDemo} />
+                    <Route path="/autocomplete" component={AutoCompleteDemo} />
+                    <Route path="/button" component={ButtonDemo} />
+                    <Route path="/checkbox" component={CheckboxDemo} />
+                    <Route path="/chips" component={ChipsDemo} />
+                    <Route path="/dialog" component={DialogDemo} />
+                    <Route path="/dropdown" component={DropdownDemo} />
+                    <Route path="/grid" component={GridDemo} />
+                    <Route path="/growl" component={GrowlDemo} />
+                    <Route path="/fieldset" component={FieldsetDemo} />
+                    <Route path="/fileupload" component={FileUploadDemo} />
+                    <Route path="/inputtext" component={InputTextDemo} />
+                    <Route path="/inputtextarea" component={InputTextareaDemo} />
+                    <Route path="/listbox" component={ListBoxDemo} />
+                    <Route path="/messages" component={MessagesDemo} />
+                    <Route path="/multiselect" component={MultiSelectDemo} />
+                    <Route path="/overlaypanel" component={OverlayPanelDemo} />
+                    <Route path="/panel" component={PanelDemo} />
+                    <Route path="/progressbar" component={ProgressBarDemo} />
+                    <Route path="/radiobutton" component={RadioButtonDemo} />
+                    <Route path="/tabview" component={TabViewDemo} />
+                    <Route path="/togglebutton" component={ToggleButtonDemo} />
+                    <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
+                    <Route path="/selectbutton" component={SelectButtonDemo} />
+                    <Route path="/inputswitch" component={InputSwitchDemo} />
+                    <Route path="/inputmask" component={InputMaskDemo} />
+                    <Route path="/slider" component={SliderDemo} />
+                    <Route path="/spinner" component={SpinnerDemo} />
+                    <Route path="/calendar" component={CalendarDemo} />
+                    <Route path="/chartdemo" component={ChartDemo} />
+                    <Route path="/piechart" component={PieChartDemo} />
+                    <Route path="/doughnutchart" component={DoughnutChartDemo} />
+                    <Route path="/linechart" component={LineChartDemo} />
+                    <Route path="/barchart" component={BarChartDemo} />
+                    <Route path="/polarareachart" component={PolarAreaChartDemo} />
+                    <Route path="/radarchart" component={RadarChartDemo} />
+                    <Route path="/paginator" component={PaginatorDemo} />
+                    <Route path="/datalist" component={DataListDemo} />
+                    <Route path="/datagrid" component={DataGridDemo} />
+                    <Route exact path="/datatable" component={DataTableDemo} />
+                    <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
+                    <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
+                    <Route path="/datatable/sort" component={DataTableSortDemo} />
+                    <Route path="/datatable/filter" component={DataTableFilterDemo} />
+                    <Route path="/datatable/scroll" component={DataTableScrollDemo} />
+                    <Route path="/datatable/lazy" component={DataTableLazyDemo} />
+                    <Route path="/datatable/selection" component={DataTableSelectionDemo} />
+                    <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
+                    <Route path="/datatable/contextmenu" component={DataTableContextMenuDemo} />
+                    <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
+                    <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
+                    <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
+                    <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
+                    <Route path="/datatable/colreorder" component={DataTableColReorderDemo} />
+                    <Route path="/datatable/export" component={DataTableExportDemo} />
+                    <Route path="/datatable/edit" component={DataTableEditDemo} />
+                    <Route path="/datatable/rowgroup" component={DataTableRowGroupDemo} />
+                    <Route path="/datatable/crud" component={DataTableCrudDemo} />
+                    <Route path="/datatable/style" component={DataTableStyleDemo} />
+                    <Route path="/orderlist" component={OrderListDemo} />
+                    <Route path="/picklist" component={PickListDemo} />
+                    <Route path="/schedule" component={ScheduleDemo} />
+                    <Route path="/tree" component={TreeDemo} />
+                    <Route path="/treetable" component={TreeTableDemo} />
+                    <Route path="/captcha" component={CaptchaDemo} />
+                    <Route path="/colorpicker" component={ColorPickerDemo} />
+                    <Route path="/password" component={PasswordDemo} />
+                    <Route path="/toolbar" component={ToolbarDemo} />
+                    <Route path="/lightbox" component={LightboxDemo} />
+                    <Route path="/rating" component={RatingDemo} />
+                    <Route exact path="/datascroller" component={DataScrollerDemo} />
+                    <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
+                    <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
+                    <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
+                    <Route path="/menumodel" component={MenuModelDemo} />
+                    <Route path="/menu" component={MenuDemo} />
+                    <Route path="/tabmenu" component={TabMenuDemo} />
+                    <Route path="/breadcrumb" component={BreadcrumbDemo} />
+                    <Route path="/tieredmenu" component={TieredMenuDemo} />
+                    <Route path="/menubar" component={MenubarDemo} />
+                    <Route path="/contextmenu" component={ContextMenuDemo} />
+                    <Route path="/panelmenu" component={PanelMenuDemo} />
+                    <Route path="/slidemenu" component={SlideMenuDemo} />
+                    <Route path="/steps" component={StepsDemo} />
+                    <Route path="/megamenu" component={MegaMenuDemo} />
+                    <Route path="/setup" component={SetupPage} />
+                    <Route path="/splitbutton" component={SplitButtonDemo} />
+                    <Route path="/organizationchart" component={OrganizationChartDemo} />
+                    <Route path="/theming" component={ThemingPage} />
+                    <Route path="/inputgroup" component={InputGroupDemo} />
+                    <Route path="/editor" component={EditorDemo} />
+                    <Route path="/tooltip" component={TooltipDemo} />
+                    <Route path="/sidebar" component={SidebarDemo} />
+                    <Route path="/gmap" component={GMapDemo} />
+                    <Route path="/progressspinner" component={ProgressSpinnerDemo} />
 
-                        <div className="content-section layout-footer clearfix">
-                            <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>
-                            <div className="footer-links">
-                                <a href="https://github.com/primefaces/primereact"><i className=" icon-github fa fa-github-square"></i></a>
-                                <a href="https://twitter.com/primereact"><i className="icon-twitter fa fa-twitter-square"></i></a>
-                            </div>
+                    <div className="content-section layout-footer clearfix">
+                        <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>
+                        <div className="footer-links">
+                            <a href="https://github.com/primefaces/primereact"><i className=" icon-github fa fa-github-square"></i></a>
+                            <a href="https://twitter.com/primereact"><i className="icon-twitter fa fa-twitter-square"></i></a>
                         </div>
                     </div>
-
                 </div>
-            </HashRouter>
 
+            </div>
         );
     }
 }
