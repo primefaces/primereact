@@ -35,13 +35,16 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <Checkbox value="New York" label="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox id="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
                             <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
                             <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}
@@ -272,13 +275,16 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <Checkbox value="New York" label="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox id="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
                             <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
                             <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected Cities : {this.state.cities.map((city) => <span key={city}>{city}</span>)}

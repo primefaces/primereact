@@ -29,17 +29,21 @@ export class RadioButtonDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <RadioButton value="New York" label="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <RadioButton value="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <RadioButton value="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <RadioButton value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}
                 </div>
+
                 <RadioButtonDoc></RadioButtonDoc>
             </div>
         )
@@ -225,15 +229,18 @@ export class RadioButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
+                   <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <RadioButton value="New York" label="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <RadioButton value="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <RadioButton value="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <RadioButton value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}

@@ -1,6 +1,3 @@
-.ui-radiobutton-container, .ui-radiobutton-label {
-    vertical-align: middle;
-}
 .ui-radiobutton {
     display:inline-block;
     cursor: pointer;
@@ -23,4 +20,8 @@
     font-size: .5em;
     line-height: inherit;
     margin-top: -1px;
+}
+ 
+.ui-radiobutton + label {
+    vertical-align: middle;
 }
