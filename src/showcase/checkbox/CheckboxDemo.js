@@ -35,15 +35,15 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <Checkbox id="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
                             <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
                             <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
                             <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
@@ -279,17 +279,17 @@ export class CheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
+                   <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <Checkbox id="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
                             <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
                             <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
                             <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
