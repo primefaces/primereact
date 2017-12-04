@@ -7,6 +7,7 @@ export class RadioButton extends Component {
 
     static defaultProps = {
         id: null,
+        inputId: null,
         value: null,
         onChange: null,
         checked: false
@@ -14,6 +15,7 @@ export class RadioButton extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputId: PropTypes.string,
         value: PropTypes.any,
         onChange: PropTypes.func,
         checked: PropTypes.bool
@@ -57,7 +59,7 @@ export class RadioButton extends Component {
         return (
             <div className={containerClass} onClick={this.onClick}>
                 <div className="ui-helper-hidden-accessible">
-                    <input ref={(el) => this.input = el} type="radio" checked={this.props.checked}
+                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" checked={this.props.checked}
                         onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

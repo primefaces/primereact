@@ -7,6 +7,7 @@ export class Checkbox extends Component {
 
     static defaultProps = {
         id: null,
+        inputId: null,
         value: null,
         name: null,
         onChange: null,
@@ -17,6 +18,7 @@ export class Checkbox extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputId: PropTypes.string,
         value: PropTypes.any,
         name: PropTypes.string,
         onChange: PropTypes.func,
@@ -58,7 +60,7 @@ export class Checkbox extends Component {
         return (
             <div id={this.props.id} className={containerClass} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="ui-helper-hidden-accessible">
-                    <input type="checkbox" name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur}/>
+                    <input type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>
