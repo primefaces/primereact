@@ -28,8 +28,15 @@ export class InputTextDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <h3 className="first">Basic</h3>
                     <InputText onChange={(e) => this.setState({value: e.target.value})}/>
                     <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
+
+                    <h3>Floating Label</h3>
+                    <span className="ui-float-label">
+                        <InputText id="float-input" type="text" size="30" pInputText />
+                        <label for="float-input">Username</label>
+                    </span>
                 </div>
 
                 <InputTextDoc />
@@ -76,7 +83,19 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 `}
 </CodeHighlight>
 
-                        <h3>Attributes</h3>
+                        <h3>Float Label</h3>
+                        <p>A floating label is implemented by wrapping the input and the label inside a container with .ui-float-label class.</p>
+                        <CodeHighlight className="html">
+                            {`
+<span className="ui-float-label">
+    <InputText id="float-input" type="text" size="30" pInputText />
+    <label for="float-input">Username</label>
+</span>
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Properties</h3>
                         <p>InputText passes any attribute to the underlying input element.</p>
                         
                         <h3>Styling</h3>
@@ -110,7 +129,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 <CodeHighlight className="javascript">
 {`
 import React, {Component} from 'react';
-import {InputText} from '../../components/inputtext/InputText';
+import {InputText} from 'primereact/components/inputtext/InputText';
     
 export class InputTextDemo extends Component {
     
@@ -132,8 +151,15 @@ export class InputTextDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <h3 className="first">Basic</h3>
                     <InputText onChange={(e) => this.setState({value: e.target.value})}/>
                     <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
+
+                    <h3>Floating Label</h3>
+                    <span className="ui-float-label">
+                        <InputText id="float-input" type="text" size="30" pInputText />
+                        <label for="float-input">Username</label>
+                    </span>
                 </div>
             </div>
         )
