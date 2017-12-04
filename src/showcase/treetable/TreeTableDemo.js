@@ -364,7 +364,7 @@ render() {
 
                         <h3>Column Component</h3>
                         <p>TreeTable utilizes the following options defined by a column component.</p>
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -424,7 +424,7 @@ import {Column} from 'primereact/components/column/Column';
 `}
 </CodeHighlight>
 
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>

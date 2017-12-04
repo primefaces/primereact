@@ -66,7 +66,7 @@ import {Breadcrumb} from 'primereact/components/breadcrumb/BreadCrumb';
 
 `}
                         </CodeHighlight>
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>

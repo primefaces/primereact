@@ -88,7 +88,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
 `}
 </CodeHighlight>
 
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <p>InputTextarea passes any attribute to the underlying textarea element, additional attributes are as follows;</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">

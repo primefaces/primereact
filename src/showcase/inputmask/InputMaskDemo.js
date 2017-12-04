@@ -173,7 +173,7 @@ constructor() {
                a mask can be made optional by using ? symbol where anything after the question
                mark becomes optional.
             </p>
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>

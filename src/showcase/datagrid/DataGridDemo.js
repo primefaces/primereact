@@ -149,7 +149,7 @@ componentDidMount() {
             <h3>Responsive</h3>
             <p>DataGrid is responsive by default, when the screen gets smaller than a certain value, items are displayed as stacked.</p>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>

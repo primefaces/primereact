@@ -86,7 +86,7 @@ import {Fieldset} from 'primereact/components/fieldset/Fieldset';
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
