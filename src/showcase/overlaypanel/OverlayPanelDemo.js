@@ -144,9 +144,9 @@ onClick(event) {
                         </tr>
                         <tr>
                             <td>appendTo</td>
-                            <td>any</td>
+                            <td>DOM element</td>
                             <td>null</td>
-                            <td>Target element to attach the panel, valid values are "body" or a ref of another element.</td>
+                            <td>DOM element instance where the dialog should be mounted.</td>
                         </tr>
                     </tbody>
                 </table>
