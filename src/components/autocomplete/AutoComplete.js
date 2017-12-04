@@ -219,10 +219,13 @@ export class AutoComplete extends Component {
     alignPanel() {
         let target = this.props.multiple ? this.multiContainer : this.inputEl;
         
-        if(this.props.appendTo)
+        if(this.props.appendTo) {
             DomHandler.absolutePosition(this.panel.element, target);
-        else
+            this.panel.element.style.minWidth = DomHandler.getWidth(target) + 'px';
+        }
+        else {
             DomHandler.relativePosition(this.panel.element, target);
+        }
     }
 
     hidePanel() {

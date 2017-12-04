@@ -264,10 +264,13 @@ export class Dropdown extends Component {
     }
     
     alignPanel() {
-        if(this.props.appendTo)
+        if(this.props.appendTo) {
             DomHandler.absolutePosition(this.panel.element, this.container);
-        else
+            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+        }
+        else {
             DomHandler.relativePosition(this.panel.element, this.container);
+        }
     }
     
     bindDocumentClickListener() {
