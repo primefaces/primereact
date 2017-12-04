@@ -18,8 +18,7 @@ export class DropdownPanel extends Component {
         scrollHeight: null,
         selectedOption: null,
         onOptionClick: null,
-        onAfterFilter: null,
-        onClick: null
+        onAfterFilter: null
     };
 
     static propTypes = {
@@ -33,8 +32,7 @@ export class DropdownPanel extends Component {
         scrollHeight: PropTypes.string,
         selectedOption: PropTypes.object,
         onOptionClick: PropTypes.func,
-        onAfterFilter: PropTypes.func,
-        onClick: PropTypes.func
+        onAfterFilter: PropTypes.func
     };
 
     constructor(props) {
@@ -114,7 +112,7 @@ export class DropdownPanel extends Component {
         });
 
         return (
-            <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
+            <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.panelClick}>
                 {filter}
                 <div className="ui-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
                     <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
