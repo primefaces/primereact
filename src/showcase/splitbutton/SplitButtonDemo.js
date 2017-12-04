@@ -9,15 +9,14 @@ export class SplitButtonDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
         this.save = this.save.bind(this);
         
         this.items = [
             {label: 'Update', icon: 'fa-refresh', command: (e) => {
-                this.setState({messages:[{severity:'success', summary:'Updated', detail:'Data Updated'}]});
+                this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
             }},
             {label: 'Delete', icon: 'fa-close', command: (e) => {
-                this.setState({messages:[{severity:'success', summary:'Deleted', detail:'Data Deleted'}]});
+                this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
             }},
             {label: 'React Website', icon: 'fa-link', url: 'https://facebook.github.io/react/'},
             {label: 'Upload', icon: 'fa-paint-brush', command:(e) => {
@@ -27,7 +26,7 @@ export class SplitButtonDemo extends Component {
     }
     
     save() {
-        this.setState({messages:[{severity: 'success', summary: 'Success', detail: 'Data Saved'}]});
+        this.growl.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
     }
 
     render() {
@@ -41,6 +40,8 @@ export class SplitButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation splitbutton-demo">
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+
                     <h3 className="first">Basic</h3>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items}></SplitButton>
 
@@ -51,7 +52,7 @@ export class SplitButtonDemo extends Component {
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-warning"></SplitButton>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-danger"></SplitButton>
                 
-                    <Growl value={this.state.messages}></Growl>
+                   
                 </div>
 
                 <SplitButtonDoc />
@@ -185,6 +186,12 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>DOM element</td>
+                                        <td>null</td>
+                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -203,7 +210,7 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
                                     <tr>
                                         <td>onClick</td>
                                         <td>event: Browser event</td>
-                                        <td>Callback to invoke on click change.</td>
+                                        <td>Callback to invoke on main button.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -247,21 +254,19 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 import {Growl} from 'primereact/components/growl/Growl';
-import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 
 export class SplitButtonDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
         this.save = this.save.bind(this);
         
         this.items = [
             {label: 'Update', icon: 'fa-refresh', command: (e) => {
-                this.setState({messages:[{severity:'success', summary:'Updated', detail:'Data Updated'}]});
+                this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
             }},
             {label: 'Delete', icon: 'fa-close', command: (e) => {
-                this.setState({messages:[{severity:'success', summary:'Deleted', detail:'Data Deleted'}]});
+                this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
             }},
             {label: 'React Website', icon: 'fa-link', url: 'https://facebook.github.io/react/'},
             {label: 'Upload', icon: 'fa-paint-brush', command:(e) => {
@@ -271,7 +276,7 @@ export class SplitButtonDemo extends Component {
     }
     
     save() {
-        this.setState({messages:[{severity: 'success', summary: 'Success', detail: 'Data Saved'}]});
+        this.growl.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
     }
 
     render() {
@@ -285,6 +290,8 @@ export class SplitButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation splitbutton-demo">
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+
                     <h3 className="first">Basic</h3>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items}></SplitButton>
 
@@ -295,8 +302,9 @@ export class SplitButtonDemo extends Component {
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-warning"></SplitButton>
                     <SplitButton label="Save" icon="fa-check" onClick={this.save} model={this.items} className="ui-button-danger"></SplitButton>
                 
-                    <Growl value={this.state.messages}></Growl>
+                   
                 </div>
+
             </div>
         )
     }

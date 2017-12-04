@@ -3,44 +3,8 @@ import PropTypes from 'prop-types';
 import {Button} from '../button/Button';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
-
-export class SplitButtonItem extends Component {
-    
-    static defaultProps = {
-        menuitem: null
-    }
-    
-    static propsTypes = {
-        menuitem: PropTypes.any
-    }
-    
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this);
-    }
-    
-    onClick(e) {
-        if(this.props.menuitem.command) {
-            this.props.menuitem.command({originalEvent: e, item: this.props.menuitem});
-        }
-        e.preventDefault();
-    }
-    
-    render() {
-        var className = classNames('ui-menuitem-link ui-corner-all', {'ui-state-disabled': this.props.menuitem.disabled});
-        var icon = this.props.menuitem.icon ? <span className={classNames('ui-menuitem-icon fa fa-fw', this.props.menuitem.icon)}></span> : null;
-        var label = <span className="ui-menuitem-text">{this.props.menuitem.label}</span>;
-        
-        return (
-            <li className="ui-menuitem ui-widget ui-corner-all" role="menuitem">
-                <a href={this.props.menuitem.url||'#'} className={className} target={this.props.menuitem.target} onClick={this.onClick}>
-                    {icon}
-                    {label}
-                </a>
-            </li>
-        );
-    }
-}
+import { SplitButtonItem } from './SplitButtonItem';
+import { SplitButtonPanel } from './SplitButtonPanel';
 
 export class SplitButton extends Component {
 
@@ -55,7 +19,8 @@ export class SplitButton extends Component {
         menuStyle: null,
         menuClassName: null,
         tabIndex: null,
-        onClick: null
+        onClick: null,
+        appendTo: null
     }
 
     static propsTypes = {
@@ -69,11 +34,13 @@ export class SplitButton extends Component {
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.string,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        appendTo: PropTypes.object
     }
 
     constructor(props) {
         super(props);
+
         this.onDropdownButtonClick = this.onDropdownButtonClick.bind(this);
     }
     
@@ -82,23 +49,33 @@ export class SplitButton extends Component {
             this.dropdownClick = true;
         }
 
-        if(this.panelEl.offsetParent)
+        if(this.panel.element.offsetParent)
             this.hide();
         else
             this.show();
     }
         
     show() {
-        this.panelEl.style.zIndex = DomHandler.getZindex();
-        DomHandler.relativePosition(this.panelEl, this.containerEl);
-        DomHandler.fadeIn(this.panelEl, 250);
-        this.panelEl.style.display = 'block';
+        this.panel.element.style.zIndex = DomHandler.getZindex();
+        this.alignPanel();
+        DomHandler.fadeIn(this.panel.element, 250);
+        this.panel.element.style.display = 'block';
         this.bindDocumentListener();
     }
     
     hide() {
-        this.panelEl.style.display = 'none';
+        this.panel.element.style.display = 'none';
         this.unbindDocumentListener();
+    }
+
+    alignPanel() {
+        if (this.props.appendTo) {
+            DomHandler.absolutePosition(this.panel.element, this.container);
+            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+        }
+        else {
+            DomHandler.relativePosition(this.panel.element, this.container);
+        }
     }
 
     bindDocumentListener() {
@@ -124,26 +101,30 @@ export class SplitButton extends Component {
     componentWillUnmount() {
         this.unbindDocumentListener();
     }
-    
-    render() {
-        var className = classNames('ui-splitbutton ui-buttonset ui-widget', this.props.className, {'ui-state-disabled': this.props.disabled});
-        var menuClassName = classNames('ui-menu ui-menu-dynamic ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-shadow', this.props.menuClassName);
-        
-        if(this.props.model) {
-            var items = this.props.model.map((menuitem, index) => {
-                return <SplitButtonItem menuitem={menuitem} key={index}/>
+
+    renderItems() {
+        if (this.props.model) {
+            return this.props.model.map((menuitem, index) => {
+                return <SplitButtonItem menuitem={menuitem} key={index} />
             });
         }
+        else {
+            return null;
+        }
+    }
+    
+    render() {
+        let className = classNames('ui-splitbutton ui-buttonset ui-widget', this.props.className, {'ui-state-disabled': this.props.disabled});
+        let items = this.renderItems(); 
         
         return (
-            <div id={this.props.id} className={className} style={this.props.style}  ref={(el) => { this.containerEl = el; }}>
+            <div id={this.props.id} className={className} style={this.props.style}  ref={(el) => { this.container = el; }}>
                 <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-left" tabIndex={this.props.tabIndex}></Button>
                 <Button type="button" className="ui-splitbutton-menubutton" icon="fa-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-right"></Button>
-                <div className={menuClassName} style={this.props.menuStyle} ref={(el) => { this.panelEl = el; }}>
-                    <ul className="ui-menu-list ui-helper-reset">
-                        {items}    
-                    </ul>
-                </div>
+                <SplitButtonPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} 
+                                menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName}>
+                    {items}
+                </SplitButtonPanel>
             </div>
         );
     }

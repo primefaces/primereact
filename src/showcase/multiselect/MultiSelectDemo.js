@@ -226,6 +226,12 @@ carTemplate(option) {
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
                         </tr>
+                        <tr>
+                            <td>appendTo</td>
+                            <td>DOM element</td>
+                            <td>null</td>
+                            <td>DOM element instance where the dialog should be mounted.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
