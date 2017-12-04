@@ -262,11 +262,11 @@ export class Spinner extends Component {
                                 size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly}
                                 onKeyDown={this.onInputKeydown.bind(this)} onKeyUp={(e) => this.onInput(e, this.inputEl.value)} onKeyPress={this.onInputKeyPress.bind(this)} onBlur={this.onBlur.bind(this)} onChange={this.handleChange.bind(this)} onFocus={this.onFocus.bind(this)} />;
 
-        var upButton = <button className={upButtonClass} onMouseLeave={this.onUpButtonMouseleave.bind(this)} onMouseDown={(e) => this.onUpButtonMousedown(e, this.inputEl)} onMouseUp={this.onUpButtonMouseup.bind(this)} disabled={this.props.disabled}>
+        var upButton = <button type="button" className={upButtonClass} onMouseLeave={this.onUpButtonMouseleave.bind(this)} onMouseDown={(e) => this.onUpButtonMousedown(e, this.inputEl)} onMouseUp={this.onUpButtonMouseup.bind(this)} disabled={this.props.disabled}>
                           <span className="fa fa-caret-up"></span>
                        </button>;
 
-        var downButton = <button className={downButtonClass} onMouseLeave={this.onDownButtonMouseleave.bind(this)} onMouseDown={(e) => this.onDownButtonMousedown(e, this.inputEl)} onMouseUp={this.onDownButtonMouseup.bind(this)} disabled={this.props.disabled}>
+        var downButton = <button type="button" className={downButtonClass} onMouseLeave={this.onDownButtonMouseleave.bind(this)} onMouseDown={(e) => this.onDownButtonMousedown(e, this.inputEl)} onMouseUp={this.onDownButtonMouseup.bind(this)} disabled={this.props.disabled}>
                             <span className="fa fa-caret-down"></span>
                          </button>;
 
