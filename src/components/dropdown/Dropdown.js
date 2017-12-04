@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
-import {DropdownItem} from './DropdownItem';
+import { DropdownPanel } from './DropdownPanel';
+import { DropdownItem } from './DropdownItem';
 
 export class Dropdown extends Component {
 
@@ -95,7 +96,7 @@ export class Dropdown extends Component {
         if(!this.overlayClick && !this.editableInputClick) {
             this.focusInput.focus();
             
-            if(this.panel.offsetParent) {
+            if(this.panel.element.offsetParent) {
                 this.hide();                
             }
             else {
@@ -132,7 +133,7 @@ export class Dropdown extends Component {
         switch(event.which) {
             //down
             case 40:
-                if(!this.panel.offsetParent && event.altKey) {
+                if(!this.panel.element.offsetParent && event.altKey) {
                     this.show();
                 }
                 else {
@@ -171,7 +172,7 @@ export class Dropdown extends Component {
 
             //space
             case 32:
-                if(!this.panel.offsetParent){
+                if(!this.panel.element.offsetParent){
                     this.show();
                     event.preventDefault();
                 }
@@ -264,34 +265,27 @@ export class Dropdown extends Component {
     }
     
     show() {        
-        this.panel.style.zIndex = DomHandler.getZindex();
-        this.panel.style.display = 'block';
+        this.panel.element.style.zIndex = DomHandler.getZindex();
+        this.panel.element.style.display = 'block';
         this.alignPanel();
-        DomHandler.fadeIn(this.panel, 250);
+        DomHandler.fadeIn(this.panel.element, 250);
         this.bindDocumentClickListener();
     }
 
     hide() {
-        this.panel.style.display = 'none';
+        this.panel.element.style.display = 'none';
         this.unbindDocumentClickListener();
         this.clearClickState();
     }
     
     alignPanel() {
-<<<<<<< HEAD
         if(this.props.appendTo) {
             DomHandler.absolutePosition(this.panel.element, this.container);
             this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
         }
         else {
             DomHandler.relativePosition(this.panel.element, this.container);
-        }
-=======
-        if(this.props.appendTo)
-            DomHandler.absolutePosition(this.panel, this.container);
-        else
-            DomHandler.relativePosition(this.panel, this.container);
->>>>>>> parent of 7fd0974... Fixed #211
+        }            
     }
     
     bindDocumentClickListener() {
@@ -385,34 +379,28 @@ export class Dropdown extends Component {
                     <span className="fa fa-fw fa-caret-down ui-clickable"></span>
                 </div>;
     }
-    
-    renderPanel(selectedOption) {
-        let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow', this.props.panelClassName);
+
+    renderItems(selectedOption) {
         let items = this.props.options;
-        let filter = this.renderFilter();
-        
-        if(this.hasFilter()) {
+ 
+        if (items && this.hasFilter()) {
             items = items && items.filter((option) => {
                 return this.filter(option);
             });
         }
-        
-        items = items && items.map((option, index) => {
-            let optionLabel = this.getOptionLabel(option);
-            return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
+
+        if(items) {
+            return items.map((option, index) => {
+                let optionLabel = this.getOptionLabel(option);
+                return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
                     onClick={this.onOptionClick} />;
-        });
-        
-        return <div ref={(el) => this.panel = el} className={className} style={this.props.panelStyle} onClick={this.panelClick}>
-                    {filter}
-                    <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight||'auto'}}>
-                        <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                            {items}
-                        </ul>
-                    </div>
-            </div>;
+            });   
+        }
+        else {
+            return null;
+        }
     }
-    
+        
     renderFilter() {
         if(this.props.filter) {
             return <div className="ui-dropdown-filter-container">
@@ -436,21 +424,10 @@ export class Dropdown extends Component {
                 this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
             }
         }
-        
-        if(this.props.appendTo) {
-            if(this.props.appendTo === 'body')
-                document.body.appendChild(this.panel);
-            else
-                DomHandler.appendChild(this.panel, this.props.appendTo);
-        }
     }
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        
-        if(this.props.appendTo) {
-            this.container.appendChild(this.panel);
-        }
     }
     
     componentDidUpdate(prevProps, prevState) {
@@ -468,7 +445,8 @@ export class Dropdown extends Component {
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
-        let panel = this.renderPanel(selectedOption);
+        let items = this.renderItems(selectedOption);
+        let filterElement = this.renderFilter();
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
@@ -477,7 +455,11 @@ export class Dropdown extends Component {
                  {keyboardHelper}
                  {labelElement}
                  {dropdownIcon}
-                 {panel}
+                 <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} 
+                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
+                    scrollHeight={this.props.scrollHeight} onClick={this.panelClick} filter={filterElement}>
+                    {items}
+                 </DropdownPanel> 
             </div>
         );
     }
