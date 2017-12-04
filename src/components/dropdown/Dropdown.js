@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
-import {DropdownItem} from './DropdownItem';
+import {DropdownPanel} from './DropdownPanel';
 
 export class Dropdown extends Component {
 
@@ -18,7 +18,7 @@ export class Dropdown extends Component {
         autoWidth: true,
         scrollHeight: '200px',
         filter: false,
-        filterplaceholder: null,
+        filterPlaceholder: null,
         editable: false,
         placeholder:null,
         required: false,
@@ -46,7 +46,7 @@ export class Dropdown extends Component {
         autoWidth: PropTypes.bool,
         scrollHeight: PropTypes.string,
         filter: PropTypes.bool,
-        filterplaceholder: PropTypes.string,
+        filterPlaceholder: PropTypes.string,
         editable:PropTypes.bool,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
@@ -66,9 +66,6 @@ export class Dropdown extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            filter: ''
-        };
         
         this.onClick = this.onClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
@@ -78,9 +75,8 @@ export class Dropdown extends Component {
         this.onEditableInputChange = this.onEditableInputChange.bind(this);
         this.onEditableInputFocus = this.onEditableInputFocus.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
-        this.onFilterInputChange = this.onFilterInputChange.bind(this);
-        this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
         this.panelClick = this.panelClick.bind(this);
+        this.onAfterFilter = this.onAfterFilter.bind(this);
     }
     
     onClick(event) {
@@ -95,17 +91,11 @@ export class Dropdown extends Component {
         if(!this.overlayClick && !this.editableInputClick) {
             this.focusInput.focus();
             
-            if(this.panel.offsetParent) {
+            if(this.panel.element.offsetParent) {
                 this.hide();                
             }
             else {
                 this.show();
-
-                if (this.props.filter) {
-                    setTimeout(() => {
-                        this.filterInput.focus();
-                    }, 200);
-                }
             }
         }
         
@@ -132,7 +122,7 @@ export class Dropdown extends Component {
         switch(event.which) {
             //down
             case 40:
-                if(!this.panel.offsetParent && event.altKey) {
+                if(!this.panel.element.offsetParent && event.altKey) {
                     this.show();
                 }
                 else {
@@ -171,7 +161,7 @@ export class Dropdown extends Component {
 
             //space
             case 32:
-                if(!this.panel.offsetParent){
+                if(!this.panel.element.offsetParent){
                     this.show();
                     event.preventDefault();
                 }
@@ -221,16 +211,6 @@ export class Dropdown extends Component {
         event.originalEvent.stopPropagation();
     }
         
-    onFilterInputChange(event) {
-        this.setState({filter: event.target.value});
-    }
-    
-    onFilterInputKeyDown(event) {
-        if(event.which === 13) {
-            event.preventDefault();
-        }
-    }
-    
     selectItem(event) {
         let selectedOption = this.findOption(this.props.value);
         
@@ -264,24 +244,30 @@ export class Dropdown extends Component {
     }
     
     show() {        
-        this.panel.style.zIndex = DomHandler.getZindex();
-        this.panel.style.display = 'block';
+        this.panel.element.style.zIndex = DomHandler.getZindex();
+        this.panel.element.style.display = 'block';
         this.alignPanel();
-        DomHandler.fadeIn(this.panel, 250);
+        DomHandler.fadeIn(this.panel.element, 250);
         this.bindDocumentClickListener();
+
+        if (this.props.filter) {
+            setTimeout(() => {
+                this.panel.filterInput.focus();
+            }, 200);
+        }
     }
 
     hide() {
-        this.panel.style.display = 'none';
+        this.panel.element.style.display = 'none';
         this.unbindDocumentClickListener();
         this.clearClickState();
     }
     
     alignPanel() {
         if(this.props.appendTo)
-            DomHandler.absolutePosition(this.panel, this.container);
+            DomHandler.absolutePosition(this.panel.element, this.container);
         else
-            DomHandler.relativePosition(this.panel, this.container);
+            DomHandler.relativePosition(this.panel.element, this.container);
     }
     
     bindDocumentClickListener() {
@@ -311,23 +297,12 @@ export class Dropdown extends Component {
         this.overlayClick = false;
     }
     
-    updateEditableLabel(option): void {
+    updateEditableLabel(option) {
         if(this.editableInput) {
             this.editableInput.value = (option ? this.getOptionLabel(option) : this.props.value||'');
         }
     }
-    
-    filter(option) {
-        let filterValue = this.state.filter.trim().toLowerCase();
-        let optionLabel = this.getOptionLabel(option);
-        
-        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
-    }
-    
-    hasFilter() {
-        return this.state.filter && this.state.filter.trim().length > 0;
-    }
-    
+     
     renderHiddenSelect() {
         if(this.props.autoWidth) {
             let options = this.props.options && this.props.options.map((option, i) => {
@@ -375,47 +350,7 @@ export class Dropdown extends Component {
                     <span className="fa fa-fw fa-caret-down ui-clickable"></span>
                 </div>;
     }
-    
-    renderPanel(selectedOption) {
-        let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow', this.props.panelClassName);
-        let items = this.props.options;
-        let filter = this.renderFilter();
-        
-        if(this.hasFilter()) {
-            items = items && items.filter((option) => {
-                return this.filter(option);
-            });
-        }
-        
-        items = items && items.map((option, index) => {
-            let optionLabel = this.getOptionLabel(option);
-            return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
-                    onClick={this.onOptionClick} />;
-        });
-        
-        return <div ref={(el) => this.panel = el} className={className} style={this.props.panelStyle} onClick={this.panelClick}>
-                    {filter}
-                    <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight||'auto'}}>
-                        <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                            {items}
-                        </ul>
-                    </div>
-            </div>;
-    }
-    
-    renderFilter() {
-        if(this.props.filter) {
-            return <div className="ui-dropdown-filter-container">
-                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
-                        <span className="fa fa-search"></span>
-                   </div>;
-        }
-        else {
-            return null;
-        }
-    }
-    
+            
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
@@ -426,29 +361,16 @@ export class Dropdown extends Component {
                 this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
             }
         }
-        
-        if(this.props.appendTo) {
-            if(this.props.appendTo === 'body')
-                document.body.appendChild(this.panel);
-            else
-                DomHandler.appendChild(this.panel, this.props.appendTo);
-        }
     }
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        
-        if(this.props.appendTo) {
-            this.container.appendChild(this.panel);
-        }
-    }
-    
-    componentDidUpdate(prevProps, prevState) {
-        if(this.props.filter) {
-            this.alignPanel();
-        }
     }
 
+    onAfterFilter() {
+        this.alignPanel();
+    }
+    
     render() {
         let className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix', this.props.className, {'ui-state-disabled': this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
@@ -458,7 +380,6 @@ export class Dropdown extends Component {
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
-        let panel = this.renderPanel(selectedOption);
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
@@ -467,7 +388,11 @@ export class Dropdown extends Component {
                  {keyboardHelper}
                  {labelElement}
                  {dropdownIcon}
-                 {panel}
+                 <DropdownPanel ref={(el) => this.panel = el} options={this.props.options} optionLabel={this.props.optionLabel} selectedOption={selectedOption} 
+                    filter={this.props.filter} filterplaceholder={this.props.filterPlaceholder} 
+                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
+                    itemTemplate={this.props.itemTemplate} scrollHeight={this.props.scrollHeight}  
+                    onOptionClick={this.onOptionClick} onAfterFilter={this.onAfterFilter}/>
             </div>
         );
     }
