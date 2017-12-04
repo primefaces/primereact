@@ -392,7 +392,7 @@ export class Dropdown extends Component {
                     filter={this.props.filter} filterplaceholder={this.props.filterPlaceholder} 
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
                     itemTemplate={this.props.itemTemplate} scrollHeight={this.props.scrollHeight}  
-                    onOptionClick={this.onOptionClick} onAfterFilter={this.onAfterFilter}/>
+                    onOptionClick={this.onOptionClick} onAfterFilter={this.onAfterFilter} onClick={this.panelClick}/>
             </div>
         );
     }
