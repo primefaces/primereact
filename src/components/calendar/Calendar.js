@@ -646,7 +646,7 @@ export class Calendar extends Component {
     }
     
     onButtonClick(event) {
-        if(!this.overlay.element.offsetParent || this.overlay.element.style.display === 'none') {
+        if(!this.panel.element.offsetParent || this.panel.element.style.display === 'none') {
             this.inputfield.focus();
             this.showOverlay();
         }
@@ -663,7 +663,7 @@ export class Calendar extends Component {
     
     onInputKeydown(event) {
         if(event.keyCode === 9) {
-            this.overlay.element.style.display = 'none';
+            this.panel.element.style.display = 'none';
         }
     }
     
@@ -869,23 +869,23 @@ export class Calendar extends Component {
     }
     
     showOverlay() {
-        this.overlay.element.style.zIndex = String(DomHandler.getZindex());
+        this.panel.element.style.zIndex = String(DomHandler.getZindex());
         this.alignPanel();
-        DomHandler.fadeIn(this.overlay.element, 250);
-        this.overlay.element.style.display = 'block';
+        DomHandler.fadeIn(this.panel.element, 250);
+        this.panel.element.style.display = 'block';
         this.bindDocumentClickListener();
     }
 
     alignPanel() {
         if (this.props.appendTo)
-            DomHandler.absolutePosition(this.overlay.element, this.inputfield);
+            DomHandler.absolutePosition(this.panel.element, this.inputfield);
         else
-            DomHandler.relativePosition(this.overlay.element, this.inputfield);
+            DomHandler.relativePosition(this.panel.element, this.inputfield);
     }
     
     hideOverlay() {
         if(!this.props.inline) {
-            this.overlay.element.style.display = 'none';
+            this.panel.element.style.display = 'none';
         }
     }
     
@@ -1641,7 +1641,7 @@ export class Calendar extends Component {
             <span id={this.props.id} className={containerStyleClass} style={this.props.style}>
                 {inputtext}
                 {button}
-                <CalendarPanel ref={(el) => this.overlay = el} className={overlayClassName} onClick={this.onDatePickerClick}>
+                <CalendarPanel ref={(el) => this.panel = el} className={overlayClassName} onClick={this.onDatePickerClick}>
                     {datepickerHeader}
                     {datepickerTable}
                     {timepicker}
