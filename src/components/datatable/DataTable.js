@@ -465,27 +465,28 @@ export class DataTable extends Component {
                         nextColumn.style.width = nextColumnWidth + 'px';
                     }
                     
-                    /*if(this.scrollable) {
-                        let colGroup = this.domHandler.findSingle(this.el.nativeElement, 'colgroup.ui-datatable-scrollable-colgroup');
-                        let resizeColumnIndex = this.domHandler.index(this.resizeColumn);
+                    if(this.props.scrollable) {
+                        let colGroup = DomHandler.findSingle(this.container, 'colgroup.ui-datatable-scrollable-colgroup');
+                        let resizeColumnIndex = DomHandler.index(this.resizeColumn);
                         colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
                         
                         if(nextColumn) {
                             colGroup.children[resizeColumnIndex + 1].style.width = nextColumnWidth + 'px';
                         }
-                    }*/
+                    }
                 }
             }
             else if(this.props.columnResizeMode === 'expand') {
-                this.table.style.width = this.table.offsetWidth + delta + 'px';
+                let table = DomHandler.findSingle(this.container, 'tbody.ui-datatable-data').parentElement;
+                table.style.width = table.offsetWidth + delta + 'px';
                 this.resizeColumn.style.width = newColumnWidth + 'px';
-                let containerWidth = this.table.style.width;
+                let containerWidth = table.style.width;
                 
-                if(this.scrollable) {
-                    /*this.domHandler.findSingle(this.el.nativeElement, '.ui-datatable-scrollable-header-box').children[0].style.width = containerWidth;
-                    let colGroup = this.domHandler.findSingle(this.el.nativeElement, 'colgroup.ui-datatable-scrollable-colgroup');
-                    let resizeColumnIndex = this.domHandler.index(this.resizeColumn);
-                    colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';*/
+                if(this.props.scrollable) {
+                    DomHandler.findSingle(this.container, '.ui-datatable-scrollable-header-box').children[0].style.width = containerWidth;
+                    let colGroup = DomHandler.findSingle(this.container, 'colgroup.ui-datatable-scrollable-colgroup');
+                    let resizeColumnIndex = DomHandler.index(this.resizeColumn);
+                    colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
                 }
                 else {
                     this.container.style.width = containerWidth;
@@ -858,7 +859,7 @@ export class DataTable extends Component {
     }
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
-        return <ScrollableView header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
+        return <ScrollableView columns={columns} header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}
                 virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll}></ScrollableView>
