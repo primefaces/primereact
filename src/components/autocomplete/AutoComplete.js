@@ -180,7 +180,7 @@ export class AutoComplete extends Component {
             }
         }
         else {
-            this.inputEl.value = this.props.field ? ObjectUtils.resolveFieldData(option, this.props.field): option;
+            this.updateInputField(option);
             this.updateModel(event, option);
         }
 
@@ -201,6 +201,17 @@ export class AutoComplete extends Component {
                 value: value
             });
         }
+    }
+
+    formatValue(value) {
+        if(value)
+            return this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) : value;
+        else
+            return '';
+    }
+
+    updateInputField(value) {
+        this.inputEl.value = this.formatValue(value);
     }
 
     showPanel() {
@@ -435,6 +446,10 @@ export class AutoComplete extends Component {
         this.searching = false;
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.updateInputField(nextProps.value);
+    }
+
     showLoader() {
         this.loader.style.visibility = 'visible';
     }
@@ -453,7 +468,8 @@ export class AutoComplete extends Component {
         });
             
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" className={inputClassName} style={this.props.inputStyle} autoComplete="off"
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" defaultValue={this.formatValue(this.props.value)}
+                        className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                         readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
                         maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
                         onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
