@@ -5,7 +5,7 @@ import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import { CalendarOverlay } from './CalendarOverlay';
+import { CalendarPanel } from './CalendarPanel';
 
 export class Calendar extends Component {
 
@@ -1641,12 +1641,12 @@ export class Calendar extends Component {
             <span id={this.props.id} className={containerStyleClass} style={this.props.style}>
                 {inputtext}
                 {button}
-                <CalendarOverlay ref={(el) => this.overlay = el} className={overlayClassName} onClick={this.onDatePickerClick}>
+                <CalendarPanel ref={(el) => this.overlay = el} className={overlayClassName} onClick={this.onDatePickerClick}>
                     {datepickerHeader}
                     {datepickerTable}
                     {timepicker}
                     {buttonBar}
-                </CalendarOverlay>
+                </CalendarPanel>
             </span >
         );
     }

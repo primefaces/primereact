@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
-export class CalendarOverlay extends Component {
+export class CalendarPanel extends Component {
 
     static defaultProps = {
         appendTo: null,
