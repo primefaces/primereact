@@ -46,8 +46,8 @@ export class DataTable extends Component {
         frozenFooterColumnGroup: null,
         rowExpansionTemplate: null,
         expandedRows: null,
-        responsive: false,
         onRowToggle: null,
+        responsive: false,
         resizableColumns: false,
         columnResizeMode: 'fit',
         reorderableColumns: false,
@@ -838,7 +838,7 @@ export class DataTable extends Component {
     }
 
     createTableBody(value, columns) {
-        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
