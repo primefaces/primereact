@@ -457,7 +457,7 @@ export class DataTable extends Component {
         if(columnWidth + delta > parseInt(minWidth, 10)) {
             if(this.props.columnResizeMode === 'fit') {
                 let nextColumn = this.resizeColumn.nextElementSibling;
-                let nextColumnWidth = nextColumn?nextColumn.offsetWidth - delta:null;
+                let nextColumnWidth = nextColumn.offsetWidth - delta;
                 
                 if(newColumnWidth > 15 && nextColumnWidth > 15) {
                     this.resizeColumn.style.width = newColumnWidth + 'px';
