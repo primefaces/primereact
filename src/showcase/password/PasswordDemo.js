@@ -45,14 +45,15 @@ import {Password} from 'primereact/components/password/Password';
 `}</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Component is defined using the Password element .</p>
+                        <p>Password is used as a regular input component.</p>
                         <CodeHighlight className="html">
                         {`
-<Password/>
+<Password value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
 
 `}
                     </CodeHighlight>
                         <h3>Properties</h3>
+                        <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -64,42 +65,36 @@ import {Password} from 'primereact/components/password/Password';
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>promptLabel</td>
-                                    <td>string</td>
-                                    <td>Please enter a password</td>
-                                    <td>Text to prompt password entry.</td>
-                                </tr>
-                                <tr>
-                                    <td>weakLabel</td>
-                                    <td>string</td>
-                                    <td>Weak</td>
-                                    <td>Text for a weak password.</td>
-                                </tr>
-                                <tr>
-                                    <td>mediumLabel</td>
-                                    <td>string</td>
-                                    <td>Medium</td>
-                                    <td>Text for a medium password.</td>
-                                </tr>
-                                <tr>
-                                    <td>strongLabel</td>
-                                    <td>string</td>
-                                    <td>Strong</td>
-                                    <td>Text for a strong password.</td>
-                                </tr>
-                                <tr>
-                                    <td>feedback</td>
-                                    <td>boolean</td>
-                                    <td>true</td>
-                                    <td>Whether to show the strength indicator or not.</td>
-                                </tr>
+                                    <tr>
+                                        <td>promptLabel</td>
+                                        <td>string</td>
+                                        <td>Please enter a password</td>
+                                        <td>Text to prompt password entry.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>weakLabel</td>
+                                        <td>string</td>
+                                        <td>Weak</td>
+                                        <td>Text for a weak password.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>mediumLabel</td>
+                                        <td>string</td>
+                                        <td>Medium</td>
+                                        <td>Text for a medium password.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>strongLabel</td>
+                                        <td>string</td>
+                                        <td>Strong</td>
+                                        <td>Text for a strong password.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>feedback</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to show the strength indicator or not.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -141,12 +136,18 @@ import {Password} from 'primereact/components/password/Password';
                         </a>
                         <CodeHighlight className="javascript">
                             {`
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {Password} from 'primereact/components/password/Password';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
+
 export class PasswordDemo extends Component {
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Password</h1>
                         <p>Password displays strength indicator for password fields.</p>
@@ -154,10 +155,8 @@ export class PasswordDemo extends Component {
                 </div>
                 <div className="content-section implementation">
                     <h3 className="first">Password</h3>
-                    <Password/>
+                    <Password />
                 </div>
-
-                <PasswordDoc />
             </div>
         );
     }

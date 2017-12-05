@@ -7,42 +7,49 @@ import DomHandler from '../utils/DomHandler';
 export class Password extends Component {
  
     static defaultProps = {
-        id: null,
-        promptLabel:'Please enter a password',
-        weakLabel:'Weak',
-        mediumLabel:'Medium',
-        strongLabel:'Strong',
-        feedback:true,
-        onChange:null
+        promptLabel: 'Please enter a password',
+        weakLabel: 'Weak',
+        mediumLabel: 'Medium',
+        strongLabel: 'Strong',
+        feedback: true
     };
 
     static propTypes = {
-        id: PropTypes.string,
         promptLabel:PropTypes.string,
         weakLabel:PropTypes.string,
         mediumLabel:PropTypes.string,
         strongLabel:PropTypes.string,
-        feedback:PropTypes.bool,
-        onChange:PropTypes.func
+        feedback:PropTypes.bool
     };
 
     constructor(props) {
         super(props);
+
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyup = this.onKeyup.bind(this);
     }
 
     onFocus(e) {
-        let zIndex = DomHandler.getZindex();
-        this.panel.style.zIndex = String(++zIndex);
-        DomHandler.removeClass(this.panel, 'ui-helper-hidden');
+        if(!this.panel) {
+            this.createPanel();
+        }
+        this.panel.style.zIndex = String(DomHandler.getZindex());
         DomHandler.absolutePosition(this.panel, this.inputEl);
+        this.panel.style.display = 'block';
         DomHandler.fadeIn(this.panel, 250);
+
+        if(this.props.onFocus) {
+            this.props.onFocus(e);
+        }
     }
   
-    onBlur(e) {        
-        DomHandler.addClass(this.panel, 'ui-helper-hidden');
+    onBlur(e) {
+        this.panel.style.display = 'none';
+
+        if (this.props.onBlur) {
+            this.props.onBlur(e);
+        }
     }
 
     onKeyup(e) {
@@ -73,6 +80,10 @@ export class Password extends Component {
 
         this.meter.style.backgroundPosition = meterPos;
         this.info.textContent = label;
+
+        if (this.props.onKeyUp) {
+            this.props.onKeyUp(e);
+        }
     }
     
     testStrength(str) {
@@ -105,7 +116,7 @@ export class Password extends Component {
             return 1 + 0.5 * (x / (x + y/4));
     }
 
-    componentDidMount() {
+    createPanel() {
         this.panel = document.createElement('div');
         this.panel.className = 'ui-password-panel ui-widget ui-state-highlight ui-corner-all ui-helper-hidden ui-password-panel-overlay';
         this.meter = document.createElement('div');
@@ -113,27 +124,36 @@ export class Password extends Component {
         this.info = document.createElement('div');
         this.info.className = 'ui-password-info';
         this.info.textContent = this.props.promptLabel;
-        
-        if(this.props.feedback) {
-            this.panel.appendChild(this.meter);
-            this.panel.appendChild(this.info);
-            document.body.appendChild(this.panel);
-        }
+
+        this.panel.appendChild(this.meter);
+        this.panel.appendChild(this.info);
+        document.body.appendChild(this.panel);
     }
 
     componentWillUnmount() {
-        if (!this.props.feedback)
-            return;
-            
-        this.panel.removeChild(this.meter);
-        this.panel.removeChild(this.info);
-        document.body.removeChild(this.panel);
-        this.panel = null;
-        this.meter = null;
-        this.info = null;
+        if(this.panel) {
+            this.panel.removeChild(this.meter);
+            this.panel.removeChild(this.info);
+            document.body.removeChild(this.panel);
+            this.panel = null;
+            this.meter = null;
+            this.info = null;
+        }
     }
 
     render() {
-        return <InputText id={this.props.id} ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="password" onChange={this.props.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />;
+        let inputProps = Object.assign({}, this.props);
+        delete inputProps.onFocus;
+        delete inputProps.onBlur;
+        delete inputProps.onKeyUp;
+        delete inputProps.promptLabel;
+        delete inputProps.weakLabel;
+        delete inputProps.mediumLabel;
+        delete inputProps.strongLabel;
+        delete inputProps.feedback;
+
+        return (
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
+        );
     }
 } 
