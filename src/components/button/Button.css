@@ -1,10 +1,9 @@
 /* Button */
 .ui-button { 
     display: inline-block; 
-    position: relative; 
-    padding: 0; 
+    padding: .25em .5em; 
     margin-right: .25em; 
-    text-decoration: none !important; 
+    text-decoration: none ; 
     cursor: pointer; 
     text-align: center; 
     zoom: 1; 
@@ -12,54 +11,19 @@
 } 
 
 .ui-button-icon-only { 
-    width: 2em;
-} 
-
-/*button text element */
-.ui-button .ui-button-text { 
-    display: block; 
-    line-height: normal;  
-}
-
-.ui-button-text-only .ui-button-text { 
-    padding: .25em 1em; 
-}
-
-.ui-button-icon-only .ui-button-text { 
-    padding: .25em; 
-    text-indent: -9999999px; 
-}
-
-.ui-button-text-icon-left .ui-button-text { 
-    padding: .25em 1em .25em 2.1em; 
-}
-
-.ui-button-text-icon-right .ui-button-text { 
-    padding: .25em 2.1em .25em 1em; 
-}
-
-/*button icon element(s) */
-.ui-button-icon-only .fa,
-.ui-button-text-icon-left .fa,
-.ui-button-text-icon-right .fa {
-    position: absolute; 
-    top: 50%;
-    margin-top: -.5em; 
-}
-
-.ui-button-icon-only .fa {
-    top: 50%;
-    left: 50%;
-    margin-top: -.5em;
-    margin-left: -.6em;
+    padding: .25em;
 }
 
 .ui-button-icon-left {
-    left: .5em; 
+    margin-right: .25em;
 }
 
 .ui-button-icon-right {
-    right: .5em; 
+    margin-left: .25em;
+}
+
+.ui-button-icon-only .ui-button-icon {
+    margin: 0;
 }
 
 /*button sets*/
@@ -79,12 +43,6 @@ button.ui-button::-moz-focus-inner {
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
-}
-
-.ui-fluid .ui-button-text-icon-left .ui-button-text,
-.ui-fluid .ui-button-text-icon-right .ui-button-text {
-    padding-left: 1em;
-    padding-right: 1em;
 }
 
 /** ButtonSet **/

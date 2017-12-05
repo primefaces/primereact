@@ -18,33 +18,52 @@ export class Button extends Component {
         cornerStyleClass: PropTypes.string
     };
 
-    render() {
-        var className = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
-                'ui-button-text-only': !this.props.icon && this.props.label,
-                'ui-button-icon-only': this.props.icon && !this.props.label,
-                'ui-button-text-icon-left': this.props.label && this.props.icon && this.props.iconPos === 'left',
-                'ui-button-text-icon-right': this.props.label && this.props.icon && this.props.iconPos === 'right',
-                'ui-state-disabled': this.props.disabled
-        }),
-        iconStyleClass = null;
+    renderIcon() {
+        if(this.props.icon) {
+            let className = classNames(this.props.icon, 'ui-button-icon ui-c fa fa-fw', {
+                'ui-button-icon-left': this.props.iconPos !== 'right',
+                'ui-button-icon-right': this.props.iconPos === 'right'
+            });
 
-        var buttonProps = Object.assign({}, this.props);
+            return (
+                <span className={className}></span>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderLabel() {
+        if(this.props.label) {
+            return (
+                <span className="ui-button-text ui-c">{this.props.label}</span>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    render() {
+        let className = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
+                'ui-button-icon-only': this.props.icon && !this.props.label,
+                'ui-state-disabled': this.props.disabled
+        });
+        let icon = this.renderIcon();
+        let label = this.renderLabel();
+
+        let buttonProps = Object.assign({}, this.props);
         delete buttonProps.iconPos;
         delete buttonProps.icon;
         delete buttonProps.label;
         delete buttonProps.cornerStyleClass;
 
-        if(this.props.icon) {
-            iconStyleClass = classNames(this.props.icon, 'ui-c fa fa-fw', {
-                'ui-button-icon-left': this.props.iconPos !== 'right',
-                'ui-button-icon-right': this.props.iconPos === 'right'
-            });
-        }
-
         return (
             <button {...buttonProps} className={className}>
-                {this.props.icon && <span className={iconStyleClass}></span>}
-                <span className="ui-button-text ui-c">{this.props.label||'ui-btn'}</span>
+                {this.props.iconPos === 'left' && icon}
+                {label}
+                {this.props.iconPos === 'right' && icon}
                 {this.props.children}
             </button>
         );
