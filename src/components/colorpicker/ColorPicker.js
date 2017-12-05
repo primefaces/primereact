@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import {ColorPickerPanel} from './ColorPickerPanel';
 
 export class ColorPicker extends Component {
     
@@ -11,11 +11,12 @@ export class ColorPicker extends Component {
         value: null,
         style: null,
         className: null,
+        defaultColor: 'ff0000',
         inline: false,
         format: "hex",
         appendTo: null,
         disabled: false,
-        tabindex: null,
+        tabIndex: null,
         inputId: null,
         onChange: null
     }
@@ -25,11 +26,12 @@ export class ColorPicker extends Component {
         value: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
+        defaultColor: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
-        appendTo: PropTypes.string,
+        appendTo: PropTypes.object,
         disabled: PropTypes.bool,
-        tabindex: PropTypes.string,
+        tabIndex: PropTypes.string,
         inputId: PropTypes.string,
         onChange: PropTypes.func
     }
@@ -37,12 +39,9 @@ export class ColorPicker extends Component {
     constructor(props) {
         super(props);
 
-        this.selfClick = false;
-        this.colorDragging = false;
-        this.hueDragging = false;
-        this.defaultColor = 'ff0000';
-
-        this.state = {panelVisible: false};
+        this.onPanelClick = this.onPanelClick.bind(this);
+        this.onInputClick = this.onInputClick.bind(this);
+        this.onInputKeydown = this.onInputKeydown.bind(this);
     }
 
     onHueMousedown(event) {
@@ -50,16 +49,16 @@ export class ColorPicker extends Component {
             return;
         }
         
-        this.bindDocumentMousemoveListener();
-        this.bindDocumentMouseupListener();
-        
         this.hueDragging = true;
+        this.bindDocumentMouseMoveListener();
+        this.bindDocumentMouseUpListener();
         this.pickHue(event);
+        DomHandler.addClass(this.container, 'ui-colorpicker-dragging');
     }
     
     pickHue(event) {
-        let top = this.hueView.getBoundingClientRect().top + document.body.scrollTop;
-        this.value = this.validateHSB({
+        let top = this.hueView.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+        this.hsbValue = this.validateHSB({
             h: Math.floor(360 * (150 - Math.max(0, Math.min(150, (event.pageY - top)))) / 150),
             s: 100,
             b: 100
@@ -75,21 +74,21 @@ export class ColorPicker extends Component {
             return;
         }
         
-        this.bindDocumentMousemoveListener();
-        this.bindDocumentMouseupListener();
-        
         this.colorDragging = true;
+        this.bindDocumentMouseMoveListener();
+        this.bindDocumentMouseUpListener();
         this.pickColor(event);
+        DomHandler.addClass(this.container, 'ui-colorpicker-dragging');
     }
     
     pickColor(event) {
         let rect = this.colorSelector.getBoundingClientRect();
-        let top = rect.top + document.body.scrollTop;
+        let top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         let left = rect.left + document.body.scrollLeft;
         let saturation = Math.floor(100 * (Math.max(0, Math.min(150, (event.pageX - left)))) / 150);
         let brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, (event.pageY - top)))) / 150);
-        this.value = this.validateHSB({
-            h: this.value.h,
+        this.hsbValue = this.validateHSB({
+            h: this.hsbValue.h,
             s: saturation,
             b: brightness
         });
@@ -101,103 +100,105 @@ export class ColorPicker extends Component {
     updateModel() {
         switch(this.props.format) {
             case 'hex':
-                this.onModelChange(this.HSBtoHEX(this.value));
+                this.onChange(this.HSBtoHEX(this.hsbValue));
             break;
             
             case 'rgb':
-                this.onModelChange(this.HSBtoRGB(this.value));
+                this.onChange(this.HSBtoRGB(this.hsbValue));
             break;
             
             case 'hsb':
-                this.onModelChange(this.value);
+                this.onChange(this.hsbValue);
             break;
 
             default:
             break;
         }
+
+        this.selfModelUpdate = true;
     }
 
-    writeValue(value) {
-        if(value) {
-            switch(this.props.format) {
+    toHSB(value) {
+        let hsb;
+
+        if (value) {
+            switch (this.props.format) {
                 case 'hex':
-                    this.value = this.HEXtoHSB(value);
-                break;
-                
+                    hsb = this.HEXtoHSB(value);
+                    break;
+
                 case 'rgb':
-                    this.value = this.RGBtoHSB(value);
-                break;
-                
+                    hsb = this.RGBtoHSB(value);
+                    break;
+
                 case 'hsb':
-                    this.value = value;
-                break;
-                
+                    hsb = value;
+                    break;
+
                 default:
-                break;
+                    break;
             }
         }
         else {
-            this.value = this.HEXtoHSB(this.defaultColor);
+            hsb = this.HEXtoHSB(this.props.defaultColor);
         }
-        
-        this.updateColorSelector();
-        this.updateUI();
+
+        return hsb;
     }
 
-    onModelChange(value) {
+    updateHSBValue(value) {
+        this.hsbValue = this.toHSB(value);
+    }
+
+    areHSBEqual(val1, val2) {
+        return val1.h === val2.h && val1.s === val2.s && val1.b === val2.b;
+    }
+
+    onChange(value) {
         if(this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: value
             })
         }
     }
     
     updateColorSelector() {
-        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(this.value);
+        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
     }
         
     updateUI() {
-        this.colorHandle.style.left =  Math.floor(150 * this.value.s / 100) + 'px';
-        this.colorHandle.style.top =  Math.floor(150 * (100 - this.value.b) / 100) + 'px';
-        this.hueHandle.style.top = Math.floor(150 - (150 * this.value.h / 360)) + 'px';
+        this.colorHandle.style.left =  Math.floor(150 * this.hsbValue.s / 100) + 'px';
+        this.colorHandle.style.top =  Math.floor(150 * (100 - this.hsbValue.b) / 100) + 'px';
+        this.hueHandle.style.top = Math.floor(150 - (150 * this.hsbValue.h / 360)) + 'px';
         
         if(this.input) {
-            this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.value);
+            this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
         }
     }
     
     show() {
-        var zIndex = DomHandler.getZindex();
-        this.panel.style.zIndex = String(zIndex);
-        this.setState({panelVisible: true});
-        this.shown = true;
+        this.panel.element.style.zIndex = DomHandler.getZindex();
+        this.alignPanel();
+        DomHandler.fadeIn(this.panel.element, 250);
+        this.panel.element.style.display = 'block';
+        this.bindDocumentClickListener();
     }
     
     hide() {
-        this.setState({panelVisible: false});
+        this.panel.element.style.display = 'none';
         this.unbindDocumentClickListener();
     }
-    
-    onShow() {
-        this.alignPanel();
-        this.bindDocumentClickListener();
-    }
-     
-    alignPanel() {
-        if(this.appendTo)
-            DomHandler.absolutePosition(this.panel, this.input);
-        else
-            DomHandler.relativePosition(this.panel, this.input);
-    }
-    
+         
     onInputClick() {
-        this.selfClick = true;
+        if(this.documentClickListener) {
+            this.selfClick = true;
+        }
+       
         this.togglePanel();
     }
     
     togglePanel() {
-        if(!this.state.panelVisible)
+        if(!this.panel.element.offsetParent)
             this.show();
         else
             this.hide();
@@ -228,14 +229,14 @@ export class ColorPicker extends Component {
     
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
-            this.documentClickListener = this.docClickListener.bind(this);
+            this.documentClickListener = this.onDocumentClick.bind(this);
             document.addEventListener('click', this.documentClickListener);
         }    
     }
 
-    docClickListener() {
+    onDocumentClick() {
         if(!this.selfClick) {
-            this.setState({panelVisible: false});
+            this.hide();
             this.unbindDocumentClickListener();
         }
                 
@@ -249,48 +250,49 @@ export class ColorPicker extends Component {
         }
     }
     
-    bindDocumentMousemoveListener() {
-        if(!this.documentMousemoveListener) {
-            this.documentMousemoveListener = this.docMouseMoveListener.bind(this);
-            document.addEventListener('mousemove', this.documentMousemoveListener);
+    bindDocumentMouseMoveListener() {
+        if(!this.documentMouseMoveListener) {
+            this.documentMouseMoveListener = this.onDocumentMouseMove.bind(this);
+            document.addEventListener('mousemove', this.documentMouseMoveListener);
         }
     }
 
-    docMouseMoveListener() {
-        if(this.colorDragging) {
+    onDocumentMouseMove() {
+        if (this.colorDragging) {
             this.pickColor(event);
         }
-                
-        if(this.hueDragging) {
+
+        if (this.hueDragging) {
             this.pickHue(event);
         }
     }
     
-    unbindDocumentMousemoveListener() {
-        if(this.documentMousemoveListener) {
-            document.removeEventListener('mousemove', this.documentMousemoveListener);
-            this.documentMousemoveListener = null;
+    unbindDocumentMouseMoveListener() {
+        if (this.documentMouseMoveListener) {
+            document.removeEventListener('mousemove', this.documentMouseMoveListener);
+            this.documentMouseMoveListener = null;
         }
     }
     
-    bindDocumentMouseupListener() {
-        if(!this.documentMouseupListener) {
-            this.documentMouseupListener = this.docMouseUpListener.bind(this);
-            document.addEventListener('mouseup', this.documentMouseupListener);
+    bindDocumentMouseUpListener() {
+        if(!this.documentMouseUpListener) {
+            this.documentMouseUpListener = this.onDocumentMouseUp.bind(this);
+            document.addEventListener('mouseup', this.documentMouseUpListener);
         }
     }
 
-    docMouseUpListener() {
+    onDocumentMouseUp() {
         this.colorDragging = false;
         this.hueDragging = false;
-        this.unbindDocumentMousemoveListener();
-        this.unbindDocumentMouseupListener();
+        DomHandler.removeClass(this.container, 'ui-colorpicker-dragging');
+        this.unbindDocumentMouseMoveListener();
+        this.unbindDocumentMouseUpListener();
     }
     
-    unbindDocumentMouseupListener() {
-        if(this.documentMouseupListener) {
-            document.removeEventListener('mouseup', this.documentMouseupListener);
-            this.documentMouseupListener = null;
+    unbindDocumentMouseUpListener() {
+        if (this.documentMouseUpListener) {
+            document.removeEventListener('mouseup', this.documentMouseUpListener);
+            this.documentMouseUpListener = null;
         }
     }
 
@@ -416,65 +418,100 @@ export class ColorPicker extends Component {
         return this.RGBtoHEX(this.HSBtoRGB(hsb));
     }
 
-    componentDidMount() { 
-        this.writeValue(this.props.value);
+    componentWillMount() {
+        this.updateHSBValue(this.props.value);
+    }
+
+    componentDidMount() {
+        this.updateColorSelector();
+        this.updateUI();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(!this.selfModelUpdate) {
+            this.updateHSBValue(nextProps.value);
+            this.updateColorSelector();
+            this.updateUI();
+        }
+        else {
+            this.selfModelUpdate = false;
+        }
     }
     
-    componentDidUpdate(prevProps, prevState) {
-        if(this.shown) {
-            this.onShow();
-            this.shown = false;
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
+        this.unbindDocumentMouseMoveListener();
+        this.unbindDocumentMouseUpListener();
+    }
+
+    alignPanel() {
+        if (this.props.appendTo) {
+            DomHandler.absolutePosition(this.panel.element, this.container);
+            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+        }
+        else {
+            DomHandler.relativePosition(this.panel.element, this.container);
         }
     }
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
+    renderColorSelector() {
+        return (
+            <div ref={(el) => this.colorSelector = el} className="ui-colorpicker-color-selector" onMouseDown={this.onColorMousedown.bind(this)}>
+                <div className="ui-colorpicker-color">
+                    <div ref={(el) => this.colorHandle = el} className="ui-colorpicker-color-handle"></div>
+                </div>
+            </div>
+        );
+    }
+
+    renderHue() {
+        return (
+            <div ref={(el) => this.hueView = el} className="ui-colorpicker-hue" onMouseDown={this.onHueMousedown.bind(this)}>
+                <div ref={(el) => this.hueHandle = el} className="ui-colorpicker-hue-handle"></div>
+            </div>
+        );
+    }
+
+    renderContent() {
+        let colorSelector = this.renderColorSelector();
+        let hue = this.renderHue();
+
+        return (
+            <div className="ui-colorpicker-content">
+                {colorSelector}
+                {hue}
+            </div>
+        );
+    }
+
+    renderInput() {
+        if (!this.props.inline) {
+            let inputClassName = classNames('ui-colorpicker-preview ui-inputtext ui-state-default ui-corner-all', {
+                'ui-state-disabled': this.props.disabled
+            });
+
+            return (
+                <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly="readonly" id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
+                    onClick={this.onInputClick} onKeyDown={this.onInputKeydown} />
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
-        var className = classNames('ui-colorpicker ui-widget', this.props.className, {
-            'ui-colorpicker-overlay':!this.props.inline,
-            'ui-colorpicker-dragging': this.colorDragging||this.hueDragging
-        });
-
-        if(!this.props.inline) {
-            var inputClass = classNames('ui-colorpicker-preview ui-inputtext ui-state-default ui-corner-all', {
-                'ui-state-disabled': this.props.disabled
-            }),
-            input = (<input ref={(el) => this.input = ReactDOM.findDOMNode(el)} type="text" className={inputClass} readOnly="readonly" id={this.props.inputId} tabIndex={this.props.tabindex} disabled={this.props.disabled}
-                onClick={this.onInputClick.bind(this)} onKeyDown={this.onInputKeydown.bind(this)} />);
-        }
-
-        var colorSelector = (
-            <div ref={(el) => this.colorSelector = ReactDOM.findDOMNode(el)}  className="ui-colorpicker-color-selector" onMouseDown={this.onColorMousedown.bind(this)}>
-                <div className="ui-colorpicker-color">
-                    <div ref={(el) => this.colorHandle = ReactDOM.findDOMNode(el)} className="ui-colorpicker-color-handle"></div>
-                </div>
-            </div>
-        ),
-        hue = (
-            <div ref={(el) => this.hueView = ReactDOM.findDOMNode(el)} className="ui-colorpicker-hue" onMouseDown={this.onHueMousedown.bind(this)}>
-                <div ref={(el) => this.hueHandle = ReactDOM.findDOMNode(el)} className="ui-colorpicker-hue-handle"></div>
-            </div>
-        );
-
-        var panelClass = classNames('ui-colorpicker-panel ui-corner-all', {
-            'ui-colorpicker-overlay-panel ui-shadow':!this.props.inline, 
-            'ui-state-disabled': this.props.disabled
-        }), 
-        panel = (
-            <div ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClass} onClick={this.onPanelClick.bind(this)} style={{'display': (this.props.inline ? 'block' : (this.state.panelVisible ? 'block' : 'none'))}}>
-                <div className="ui-colorpicker-content">
-                    {colorSelector}
-                    {hue}
-                </div>
-            </div>
-        );
+        let className = classNames('ui-colorpicker ui-widget', this.props.className, {'ui-colorpicker-overlay': !this.props.inline});
+        let content = this.renderContent();
+        let input = this.renderInput();
 
         return (
-            <div id={this.props.id} style={this.props.style} className={className}>
+            <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={className}>
                 {input}
-                {panel}
+                <ColorPickerPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} onClick={this.onPanelClick}
+                        inline={this.props.inline} disabled={this.props.disabled}>
+                    {content}
+                </ColorPickerPanel>
             </div>
         );
     }
