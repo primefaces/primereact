@@ -114,6 +114,10 @@ export class AutoComplete extends Component {
             return true;
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.updateInputField(nextProps.value);
+    }
     
     onInputChange(event) {
         //Cancel the search request if user types within the timeout
@@ -205,7 +209,7 @@ export class AutoComplete extends Component {
 
     formatValue(value) {
         if(value)
-            return this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) : value;
+            return this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) || value : value;
         else
             return '';
     }
@@ -444,10 +448,6 @@ export class AutoComplete extends Component {
         }
 
         this.searching = false;
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.updateInputField(nextProps.value);
     }
 
     showLoader() {
