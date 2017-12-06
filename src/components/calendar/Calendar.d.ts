@@ -19,7 +19,7 @@ interface CalendarProps {
     icon: string;
     utc: boolean;
     showOnFocus: boolean;
-    appendTo: string;
+    appendTo: object;
     readOnlyInput: boolean;
     shortYearCutoff: string;
     minDate: any;

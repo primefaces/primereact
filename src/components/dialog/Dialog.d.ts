@@ -26,6 +26,7 @@ interface DialogProps {
     showHeader?: boolean;
     positionLeft?: number;
     positionTop?: number;
+    appendTo?: HTMLElement;
 }
 
 export class Dialog extends React.Component<DialogProps,any> {}

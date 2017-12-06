@@ -12,7 +12,8 @@ interface MultiSelectProps {
     filter?: boolean;
     key?: string;
     itemTemplate?(): void;
-    onChange?(originalEvent:Event; value: any): void;
+    onChange?(event: any): void;
+    appendTo?: HTMLElement;
 }
 
 export class MultiSelect extends React.Component<MultiSelectProps,any> {}

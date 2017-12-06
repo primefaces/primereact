@@ -93,7 +93,7 @@ export class Calendar extends Component {
         icon: PropTypes.string,
         utc: PropTypes.bool,
         showOnFocus: PropTypes.bool,
-        appendTo: PropTypes.string,
+        appendTo: PropTypes.object,
         readOnlyInput: PropTypes.bool,
         shortYearCutoff: PropTypes.string,
         minDate: PropTypes.any,
