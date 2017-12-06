@@ -8,7 +8,7 @@ interface RadioButtonProps {
     checked?: boolean;
     style?: object;
     className?: string;
-    onChange?(event: Event): void;
+    onChange?({originalEvent: Event, value: any, checked: boolean}): void;
 }
 
 export class RadioButton extends React.Component<RadioButtonProps,any> {}

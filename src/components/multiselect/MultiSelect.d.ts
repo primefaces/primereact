@@ -12,7 +12,7 @@ interface MultiSelectProps {
     filter?: boolean;
     key?: string;
     itemTemplate?(): void;
-    onChange?(event: any): void;
+    onChange?({originalEvent: Event, value: any}): void;
     appendTo?: HTMLElement;
 }
 

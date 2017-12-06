@@ -12,7 +12,7 @@ interface GMapProps {
     onOverlayDragStart?(): void;
     onOverlayDrag?(): void;
     onOverlayDragEnd?(): void;
-    onOverlayClick?(originalEvent: Event, overlay: any, map: any): void;
+    onOverlayClick?({originalEvent: Event, overlay: any, map: any}): void;
 }
 
 export class GMap extends React.Component<GMapProps,any> {}

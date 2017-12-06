@@ -14,11 +14,11 @@ interface PickListProps {
     showSourceControls?: boolean;
     showTargetControls?: boolean;
     itemTemplate?(): void;
-    onChange?(event: Event, source: Array<any>, target: Array<any>): void;
-    onMoveToSource?(originalEvent: Event, value: Array<any>): void;
-    onMoveAllToSource?(originalEvent: Event, value: Array<any>): void;
-    onMoveToTarget?(originalEvent: Event, value: Array<any>): void;
-    onMoveAllToTarget?(originalEvent: Event, value: Array<any>): void;
+    onChange?({event: Event, source: any, target: any}): void;
+    onMoveToSource?({originalEvent: Event, value: any}): void;
+    onMoveAllToSource?({originalEvent: Event, value: any}): void;
+    onMoveToTarget?({originalEvent: Event, value: any}): void;
+    onMoveAllToTarget?({originalEvent: Event, value: any}): void;
 }
 
 export class PickList extends React.Component<PickListProps,any> {}

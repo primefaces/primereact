@@ -19,10 +19,10 @@ interface TreeProps {
     value: any;
     selectionMode?: string;
     selection?: any;
-    selectionChange(originalEvent: Event, selection: any): void;
+    selectionChange({originalEvent: Event, selection: any}): void;
     layout?: string;
-    onNodeSelect?(originalEvent: Event, node: any): void;
-    onNodeUnselect?(originalEvent: Event, node: any): void;
+    onNodeSelect?({originalEvent: Event, node: any}): void;
+    onNodeUnselect?({originalEvent: Event, node: any}): void;
     onNodeExpand?(): void;
     onNodeCollapse?(): void;
     style?: object;

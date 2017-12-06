@@ -22,8 +22,8 @@ interface OrganizationChartProps {
     selection?: any;
     nodeTemplate?: any;
     selectionChange?(): void;
-    onNodeSelect?(originalEvent: Event, node: any): void;
-    onNodeUnselect?(originalEvent: Event, node: any): void;
+    onNodeSelect?({originalEvent: Event, node: any}): void;
+    onNodeUnselect?({originalEvent: Event, node: any}): void;
 }
 
 export class OrganizationChart extends React.Component<OrganizationChartProps,any> {}

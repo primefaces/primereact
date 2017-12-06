@@ -7,7 +7,7 @@ interface TriStateCheckboxProps {
     value?: boolean;
     style?: object;
     className?: string;
-    onChange?(originalEvent: Event, value: boolean): void;
+    onChange?({originalEvent: Event, value: boolean}): void;
 }
 
 export class TriStateCheckbox extends React.Component<TriStateCheckboxProps,any> {}
