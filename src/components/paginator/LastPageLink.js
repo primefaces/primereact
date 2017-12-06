@@ -18,7 +18,7 @@ export class LastPageLink extends Component {
         let className = classNames('ui-paginator-last ui-paginator-element ui-state-default ui-corner-all', {'ui-state-disabled': this.props.disabled});
         
         return (
-            <a href="#" className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
+            <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
                 <span className="fa fa-step-forward"></span>
             </a>
         );

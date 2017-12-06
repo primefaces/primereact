@@ -1377,7 +1377,7 @@ export class Calendar extends Component {
 
     renderDatePickerNavigatorLink(className, onClick, icon) {
         return (
-            <a className={className} href="#" onClick={onClick}>
+            <a className={className} onClick={onClick}>
                 <span className={icon}></span>
             </a>
         );
@@ -1439,11 +1439,11 @@ export class Calendar extends Component {
     renderHourPicker(time) {
         return (
             <div className="ui-hour-picker">
-                <a href="#" onClick={this.incrementHour}>
+                <a onClick={this.incrementHour}>
                     <span className="fa fa-angle-up"></span>
                 </a>
                 <span style={{ 'display': time.hour < 10 ? 'inline' : 'none' }}>0</span><span>{time.hour}</span>
-                <a href="#" onClick={this.decrementHour}>
+                <a onClick={this.decrementHour}>
                     <span className="fa fa-angle-down"></span>
                 </a>
             </div>
@@ -1453,11 +1453,11 @@ export class Calendar extends Component {
     renderMinutePicker(time) {
         return (
             <div className="ui-minute-picker">
-                <a href="#" onClick={this.incrementMinute}>
+                <a onClick={this.incrementMinute}>
                     <span className="fa fa-angle-up"></span>
                 </a>
                 <span style={{ 'display': time.minute < 10 ? 'inline' : 'none' }}>0</span><span>{time.minute}</span>
-                <a href="#" onClick={this.decrementMinute}>
+                <a onClick={this.decrementMinute}>
                     <span className="fa fa-angle-down"></span>
                 </a>
             </div>  
@@ -1468,11 +1468,11 @@ export class Calendar extends Component {
         if(this.props.showSeconds) {
             return (
                 <div className="ui-second-picker">
-                    <a href="#" onClick={this.incrementSecond}>
+                    <a onClick={this.incrementSecond}>
                         <span className="fa fa-angle-up"></span>
                     </a>
                     <span style={{ 'display': time.second < 10 ? 'inline' : 'none' }}>0</span><span>{time.second}</span>
-                    <a href="#" onClick={this.incrementSecond}>
+                    <a onClick={this.incrementSecond}>
                         <span className="fa fa-angle-down"></span>
                     </a>
                 </div>
@@ -1487,11 +1487,11 @@ export class Calendar extends Component {
     renderAmPmPicker() {
         if (this.props.hourFormat === '12') {
             return (<div className="ui-ampm-picker">
-                <a href="#" onClick={this.toggleAMPM}>
+                <a onClick={this.toggleAMPM}>
                     <span className="fa fa-angle-up"></span>
                 </a>
                 <span>{this.pm ? 'PM' : 'AM'}</span>
-                <a href="#" onClick={this.toggleAMPM}>
+                <a onClick={this.toggleAMPM}>
                     <span className="fa fa-angle-down"></span>
                 </a>
             </div>);
@@ -1504,11 +1504,11 @@ export class Calendar extends Component {
     renderTimePickerSeparator() {
         return (
             <div className="ui-separator">
-                <a href="#">
+                <a>
                     <span className="fa fa-angle-up"></span>
                 </a>
                 <span>:</span>
-                <a href="#">
+                <a>
                     <span className="fa fa-angle-down"></span>
                 </a>
             </div>
@@ -1590,7 +1590,7 @@ export class Calendar extends Component {
                             let dayLink;
                             if (!date.otherMonth || (date.otherMonth && this.props.showOtherMonths) ) {
                                 dayLink = (
-                                    <a href="#" className={dayStyleClass} onClick={(e) => this.onDateSelect(e, date)}>{date.day}</a>
+                                    <a className={dayStyleClass} onClick={(e) => this.onDateSelect(e, date)}>{date.day}</a>
                                 );
                             }
 

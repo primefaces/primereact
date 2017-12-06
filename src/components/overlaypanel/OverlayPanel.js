@@ -117,7 +117,7 @@ export class OverlayPanel extends Component {
     renderCloseIcon() {
         if(this.props.showCloseIcon) {
             return (
-                <a href="#" className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
+                <a className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
                     <span className="fa fa-fw fa-close"></span>
                 </a>
             );

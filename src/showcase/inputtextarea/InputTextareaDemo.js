@@ -135,7 +135,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputtextarea" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputtextarea" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>

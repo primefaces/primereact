@@ -54,7 +54,7 @@ export class UIMessage extends Component {
     renderCloseIcon() {
         if (this.props.message.closable !== false) {
             return (
-                <a href="#" className="ui-messages-close" onClick={this.onClose}>
+                <a className="ui-messages-close" onClick={this.onClose}>
                     <i className="fa fa-close"></i>
                 </a>
             );

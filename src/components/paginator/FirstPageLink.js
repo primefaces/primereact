@@ -18,7 +18,7 @@ export class FirstPageLink extends Component {
         let className = classNames('ui-paginator-first ui-paginator-element ui-state-default ui-corner-all', {'ui-state-disabled': this.props.disabled});
         
         return (
-            <a href="#" className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
+            <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
                 <span className="fa fa-step-backward"></span>
             </a>
         );

@@ -66,7 +66,7 @@ export class Steps extends Component {
                                     <span className="ui-steps-number">{index + 1}</span>
                                     <span className="ui-steps-title">{item.label}</span>
                                 </a>:
-                                <a href={'#'} className="ui-menuitem-link" target={item.target} onClick={event=>this.itemClick(event,item,index)}>
+                                <a className="ui-menuitem-link" target={item.target} onClick={event=>this.itemClick(event,item,index)}>
                                     <span className="ui-steps-number">{index + 1}</span>
                                     <span className="ui-steps-title">{item.label}</span>
                                 </a>

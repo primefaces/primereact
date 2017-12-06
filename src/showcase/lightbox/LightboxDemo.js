@@ -40,10 +40,10 @@ export class LightboxDemo extends Component {
                     <Lightbox type="images" images={images} />
                     <h3>Content</h3>
                     <Lightbox type="content">
-                        <a className="group" href="#">
+                        <a className="group">
                             Watch Video
                         </a>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
+                        <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>
 
@@ -219,7 +219,7 @@ var images=[
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/lightbox" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/lightbox" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
@@ -257,7 +257,7 @@ export class LightboxDemo extends Component {
                         <a className="group" href="#">
                             Watch Video
                         </a>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
+                        <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>
 

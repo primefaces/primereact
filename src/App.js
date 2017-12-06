@@ -131,7 +131,7 @@ class AppMenu extends Component {
             <div ref={(el) => this.scrollContainer = el} className="nano">
                 <div className="nano-content">
                     <div className="layout-menu">
-                        <a id="menu_input"  href="#" onClick={(event) => this.openMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
+                        <a id="menu_input"  onClick={(event) => this.openMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
                             <img alt="input" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/input.svg"></img>
                             <img alt="input" className="layout-menu-icon-active" src="showcase/resources/images/mono/input-active.svg"></img>
                             <span>Input</span>
@@ -163,7 +163,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
+                        <a id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
                             <img alt="button" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/button.svg"></img>
                             <img alt="button" className="layout-menu-icon-active" src="showcase/resources/images/mono/button-active.svg"></img>
                             <span>Button</span>
@@ -175,7 +175,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
+                        <a id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
                             <img alt="data" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/data.svg"></img>
                             <img alt="data" className="layout-menu-icon-active" src="showcase/resources/images/mono/data-active.svg"></img>
                             <span>Data</span>
@@ -198,7 +198,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
+                        <a id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
                             <img alt="panel" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/panel.svg"></img>
                             <img alt="panel" className="layout-menu-icon-active" src="showcase/resources/images/mono/panel-active.svg"></img>
                             <span>Panel</span>
@@ -214,7 +214,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
+                        <a id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
                             <img alt="overlay" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/overlay.svg"></img>
                             <img alt="overlay" className="layout-menu-icon-active" src="showcase/resources/images/mono/overlay-active.svg"></img>
                             <span>Overlay</span>
@@ -229,7 +229,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
+                        <a id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
                             <img alt="file" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/file.svg"></img>
                             <img alt="file" className="layout-menu-icon-active" src="showcase/resources/images/mono/file-active.svg"></img>
                             <span>File</span>
@@ -240,7 +240,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
+                        <a id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
                             <img alt="menu" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/menu.svg"></img>
                             <img alt="menu" className="layout-menu-icon-active" src="showcase/resources/images/mono/menu-active.svg"></img>
                             <span>Menu</span>
@@ -261,7 +261,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
+                        <a id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
                             <img alt="charts" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/charts.svg"></img>
                             <img alt="charts" className="layout-menu-icon-active" src="showcase/resources/images/mono/charts-active.svg"></img>
                             <span>Chart</span>
@@ -278,7 +278,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
+                        <a id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
                             <img alt="message" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/message.svg"></img>
                             <img alt="message" className="layout-menu-icon-active" src="showcase/resources/images/mono/message-active.svg"></img>
                             <span>Messages</span>
@@ -290,7 +290,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
+                        <a id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
                             <img alt="multimedia" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/multimedia.svg"></img>
                             <img alt="multimedia" className="layout-menu-icon-active" src="showcase/resources/images/mono/multimedia-active.svg"></img>
                             <span>Multimedia</span>
@@ -299,7 +299,7 @@ class AppMenu extends Component {
 
                         </div>
 
-                        <a href="#" id="menu_dnd" onClick={(event) => this.openMenu(event, 10)} className={classNames({ 'active-menuitem': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
+                        <a id="menu_dnd" onClick={(event) => this.openMenu(event, 10)} className={classNames({ 'active-menuitem': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
                             <img alt="dragdrop" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/dragdrop.svg"></img>
                             <img alt="dragdrop" className="layout-menu-icon-active" src="showcase/resources/images/mono/dragdrop-active.svg"></img>
                             <span>DragDrop</span>
@@ -308,7 +308,7 @@ class AppMenu extends Component {
 
                         </div>
 
-                        <a href="#" id="menu_misc" onClick={(event) => this.openMenu(event, 11)} className={classNames({ 'active-menuitem': this.state.activeMenu === 11 })}>
+                        <a id="menu_misc" onClick={(event) => this.openMenu(event, 11)} className={classNames({ 'active-menuitem': this.state.activeMenu === 11 })}>
                             <img alt="misc" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/misc.svg"></img>
                             <img alt="misc" className="layout-menu-icon-active" src="showcase/resources/images/mono/misc-active.svg"></img>
                             <span>Misc</span>
@@ -370,10 +370,10 @@ class App extends Component {
         return (
             <div className='layout-wrapper'>
                 <div id="layout-topbar">
-                    <a href="#" className="menu-button" onClick={this.openMenu}>
+                    <a className="menu-button" onClick={this.openMenu}>
                         <i className="fa fa-bars"></i>
                     </a>
-                    <a href="#" className="logo">
+                    <a className="logo">
                         <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
                     </a>
 
@@ -383,7 +383,7 @@ class App extends Component {
                         </li>
 
                         <li className="topbar-menu-themes">
-                            <a href="#">THEMES</a>
+                            <a>THEMES</a>
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
@@ -391,22 +391,22 @@ class App extends Component {
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
                                 <li className="topbar-submenu-header">THEMES</li>
-                                <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
-                                <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
-                                <li><a href="#" data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
-                                <li><a href="#" data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
-                                <li><a href="#" data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
-                                <li><a href="#" data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
-                                <li><a href="#" data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
-                                <li><a href="#" data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
-                                <li><a href="#" data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
-                                <li><a href="#" data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
-                                <li><a href="#" data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
-                                <li><a href="#" data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
-                                <li><a href="#" data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
-                                <li><a href="#" data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
-                                <li><a href="#" data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
-                                <li><a href="#" data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
+                                <li><a data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
+                                <li><a data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
+                                <li><a data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
+                                <li><a data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
+                                <li><a data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
+                                <li><a data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
+                                <li><a data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
+                                <li><a data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
+                                <li><a data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
+                                <li><a data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
+                                <li><a data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
+                                <li><a data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
+                                <li><a data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
+                                <li><a data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
+                                <li><a data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
+                                <li><a data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
                             </ul>
                         </li>
 

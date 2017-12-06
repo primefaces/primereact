@@ -33,7 +33,7 @@ export class PageLinks extends Component {
                                 'ui-state-active': ((pageLink - 1) === this.props.page)
                             });
 
-                            return <a key={pageLink} href="#" className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</a>;
+                            return <a key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</a>;
                         });
 
         return <span className="ui-paginator-pages">{elements}</span>;

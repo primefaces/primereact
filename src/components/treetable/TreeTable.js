@@ -103,7 +103,7 @@ export class UITreeRow extends Component {
                                 }),
                                     togglerStyle = { 'marginLeft': this.props.level * 16 + 'px', 'visibility': this.isLeaf() ? 'hidden' : 'visible' };
 
-                                toggler = (<a href="#" className={togglerClass} style={togglerStyle} onClick={this.toggle.bind(this)} title={this.state.expanded ? this.props.labelCollapse : this.props.labelExpand} />);
+                                toggler = (<a className={togglerClass} style={togglerStyle} onClick={this.toggle.bind(this)} title={this.state.expanded ? this.props.labelCollapse : this.props.labelExpand}><span></span></a>);
 
                                 if (this.treeTable.props.selectionMode === 'checkbox') {
                                     var checkboxIconClass = classNames('ui-chkbox-icon ui-c fa', {

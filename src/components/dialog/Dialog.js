@@ -404,7 +404,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if(this.props.closable) {
             return (
-                <a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
                     <span className="fa fa-fw fa-close"></span>
                 </a>
             );

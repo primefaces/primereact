@@ -54,7 +54,7 @@ export class GrowlMessage extends Component {
     renderCloseIcon() {
         if(this.props.message.closable !== false) {
             return (
-                <a href="#" className="ui-growl-icon-close fa fa-close" onClick={this.onClose}></a>
+                <a className="ui-growl-icon-close fa fa-close" onClick={this.onClose}><span></span></a>
             );
         }
         else {

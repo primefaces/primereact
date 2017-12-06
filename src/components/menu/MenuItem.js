@@ -42,7 +42,7 @@ export class MenuItem extends Component{
         }
         else{
             return (
-                <a className={className} href="#" target={this.item.target} onClick={this.props.onItemClick}>
+                <a className={className} target={this.item.target} onClick={this.props.onItemClick}>
                     {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
