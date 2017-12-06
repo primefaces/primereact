@@ -127,7 +127,7 @@ export class Panel extends Component {
         let ariaLabelledBy = this.id + '_label';
         
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-labelledy={ariaLabelledBy} aria-hidden={this.state.collapsed}>
+            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-labelledby={ariaLabelledBy} aria-hidden={this.state.collapsed}>
                 <div className="ui-panel-content ui-widget-content">
                     {this.props.children}
                 </div>
