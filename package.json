@@ -20,7 +20,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.3",
     "gulp-uglifycss": "^1.0.6",
-    "react-scripts": "0.9.5",
+    "react-scripts": "1.0.11",
     "axios": "^0.15.3",
     "chart.js": "2.7.1",
     "classnames": "^2.2.5",
