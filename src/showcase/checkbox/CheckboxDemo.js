@@ -150,16 +150,16 @@ onCityChange(e) {
                                     <td>Unique identifier of the inner native radiobutton.</td>
                                 </tr>
                                 <tr>
-                                    <td>label</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Label of the checkbox.</td>
-                                </tr>
-                                <tr>
                                     <td>value</td>
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Value of the checkbox.</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the checkbox element .</td>
                                 </tr>
                                 <tr>
                                     <td>checked</td>
@@ -168,10 +168,16 @@ onCityChange(e) {
                                     <td>Specifies whether a checkbox should be checked or not.</td>
                                 </tr>
                                 <tr>
-                                    <td>name</td>
+                                    <td>style</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Name of the checkbox element .</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
                                 </tr>
                             </tbody>
                         </table>

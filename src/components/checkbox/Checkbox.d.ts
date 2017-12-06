@@ -2,13 +2,15 @@ import React = require("react");
 
 interface CheckboxProps {
     id?: string;
-    label?: string;
+    inputId?: string;
     value?: any;
-    onChange?(originalEvent: Event, value: any, checked:boolean): void;
+    name?: string;
     checked?: boolean;
-    name?:string;
+    style?: object;
+    className?: string;
     onMouseDown?(): void;
     onContextMenu?(): void;
+    onChange?(event: Event): void;
 }
 
 export class Checkbox extends React.Component<CheckboxProps,any> {}

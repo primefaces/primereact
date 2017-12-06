@@ -8,21 +8,27 @@ export class RadioButton extends Component {
     static defaultProps = {
         id: null,
         inputId: null,
+        name: null,
         value: null,
-        onChange: null,
-        checked: false
+        checked: false,
+        style: null,
+        className: null,
+        onChange: null
     };
 
     static propTypes = {
         id: PropTypes.string,
         inputId: PropTypes.string,
         value: PropTypes.any,
-        onChange: PropTypes.func,
-        checked: PropTypes.bool
+        checked: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        onChange: PropTypes.func
     };
     
     constructor(props) {
         super(props);
+        
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -57,10 +63,9 @@ export class RadioButton extends Component {
         let iconClass = classNames('ui-radiobutton-icon ui-c', { 'fa fa-circle': this.props.checked });
         
         return (
-            <div className={containerClass} onClick={this.onClick}>
+            <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="ui-helper-hidden-accessible">
-                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" checked={this.props.checked}
-                        onFocus={this.onFocus} onBlur={this.onBlur}/>
+                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>

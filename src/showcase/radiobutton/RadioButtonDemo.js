@@ -128,10 +128,10 @@ onCityChange(e) {
                                     <td>Unique identifier of the inner native radiobutton.</td>
                                 </tr>
                                 <tr>
-                                    <td>label</td>
+                                    <td>name</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Label of the radiobutton.</td>
+                                    <td>Name of the checkbox element .</td>
                                 </tr>
                                 <tr>
                                     <td>value</td>
@@ -144,6 +144,18 @@ onCityChange(e) {
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>Specifies whether a radiobutton should be checked or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
                                 </tr>
                             </tbody>
                         </table>

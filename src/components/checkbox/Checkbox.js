@@ -10,8 +10,10 @@ export class Checkbox extends Component {
         inputId: null,
         value: null,
         name: null,
-        onChange: null,
         checked: false,
+        style: null,
+        className: null,
+        onChange: null,
         onMouseDown: null,
         onContextMenu: null
     };
@@ -21,14 +23,17 @@ export class Checkbox extends Component {
         inputId: PropTypes.string,
         value: PropTypes.any,
         name: PropTypes.string,
-        onChange: PropTypes.func,
         checked: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
     };
     
     constructor(props) {
         super(props);
+        
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -58,7 +63,7 @@ export class Checkbox extends Component {
         let iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.checked});
         
         return (
-            <div id={this.props.id} className={containerClass} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
+            <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="ui-helper-hidden-accessible">
                     <input type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
