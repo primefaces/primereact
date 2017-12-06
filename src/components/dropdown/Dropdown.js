@@ -126,49 +126,59 @@ export class Dropdown extends Component {
     onInputBlur(event) {
         DomHandler.removeClass(this.container, 'ui-state-focus');
     }
+
+    onUpKey(event) {
+        if (!this.panel.element.offsetParent && event.altKey) {
+            this.show();
+        }
+        else {
+            let selectedItemIndex = this.findOptionIndex(this.props.value);
+
+            if (selectedItemIndex !== -1) {
+                let nextItemIndex = selectedItemIndex + 1;
+                if (nextItemIndex !== (this.props.options.length)) {
+                    this.selectItem({
+                        originalEvent: event,
+                        option: this.props.options[nextItemIndex]
+                    });
+                }
+            }
+
+            if (selectedItemIndex === -1) {
+                this.selectItem({
+                    originalEvent: event,
+                    option: this.props.options[0]
+                });
+            }
+        }
+
+        event.preventDefault();
+    }
+
+    onDownKey(event) {
+        let selectedItemIndex = this.findOptionIndex(this.props.value);
+        
+        if (selectedItemIndex > 0) {
+            let prevItemIndex = selectedItemIndex - 1;
+            this.selectItem({
+                originalEvent: event,
+                option: this.props.options[prevItemIndex]
+            });
+        }
+
+        event.preventDefault();
+    }
     
     onInputKeyDown(event) {
-        let selectedItemIndex = this.findOptionIndex(this.props.value);
-
         switch(event.which) {
             //down
             case 40:
-                if(!this.panel.element.offsetParent && event.altKey) {
-                    this.show();
-                }
-                else {
-                    if(selectedItemIndex !== -1) {
-                        let nextItemIndex = selectedItemIndex + 1;
-                        if(nextItemIndex !== (this.props.options.length)) {
-                            this.selectItem({
-                                originalEvent: event,
-                                option: this.props.options[nextItemIndex]
-                            });
-                        }
-                    }
-                    
-                    if(selectedItemIndex === -1) {
-                        this.selectItem({
-                            originalEvent: event,
-                            option: this.props.options[0]
-                        });
-                    }                 
-                }
-                
-                event.preventDefault();
+                this.onUpKey(event);
             break;
             
             //up
             case 38:
-                if(selectedItemIndex > 0) {
-                    let prevItemIndex = selectedItemIndex - 1;                    
-                    this.selectItem({
-                        originalEvent: event,
-                        option: this.props.options[prevItemIndex]
-                    });
-                }
-                
-                event.preventDefault();
+                this.onDownKey(event);
             break;
 
             //space
@@ -195,7 +205,6 @@ export class Dropdown extends Component {
             
             default:
             break;
-        
         }
     }
     
@@ -228,8 +237,24 @@ export class Dropdown extends Component {
     }
     
     onFilterInputKeyDown(event) {
-        if(event.which === 13) {
-            event.preventDefault();
+        switch (event.which) {
+            //down
+            case 40:
+                this.onUpKey(event);
+                break;
+
+            //up
+            case 38:
+                this.onDownKey(event);
+                break;
+
+            //enter
+            case 13:
+                event.preventDefault();
+            break;
+
+            default:
+            break;
         }
     }
     
@@ -432,13 +457,15 @@ export class Dropdown extends Component {
     }
     
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.filter) {
+        if (this.props.filter) {
             this.alignPanel();
         }
 
-        if(this.panel.element.offsetParent) {
+        if (this.panel.element.offsetParent) {
             let highlightItem = DomHandler.findSingle(this.panel.element, 'li.ui-state-highlight');
-            DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
+            if (highlightItem) {
+                DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
+            }
         } 
     }
 
