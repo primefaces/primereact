@@ -116,7 +116,9 @@ export class AutoComplete extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.updateInputField(nextProps.value);
+        if(!this.props.multiple) {
+            this.updateInputField(nextProps.value);
+        }
     }
     
     onInputChange(event) {
@@ -501,7 +503,7 @@ export class AutoComplete extends Component {
     renderMultiInput() {
         return (
             <li className="ui-autocomplete-input-token">
-                <input ref={(el) => {this.inputEl = ReactDOM.findDOMNode(el)}} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
+                <input ref={(el) => this.inputEl = el} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
                        autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange}
                        onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                        onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
