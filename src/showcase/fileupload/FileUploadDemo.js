@@ -9,9 +9,6 @@ export class FileUploadDemo extends Component {
         
     constructor() {
         super();
-        this.state = {
-            msgs: []
-        };
         
         this.onUpload = this.onUpload.bind(this);
         this.onBasicUpload = this.onBasicUpload.bind(this);
@@ -19,21 +16,15 @@ export class FileUploadDemo extends Component {
     }
 
     onUpload(event) {
-        this.setState({
-            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded'}]
-        });
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
     
     onBasicUpload(event) {
-        this.setState({
-            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'}]
-        });
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
     
     onBasicUploadAuto(event) {   
-        this.setState({
-            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'}]
-        });
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     render() {
@@ -57,7 +48,7 @@ export class FileUploadDemo extends Component {
                     <h3>Basic with Auto</h3>
                     <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
                     
-                    <Growl value={this.state.msgs} />
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
                 </div>
                 
                 <FileUploadDoc></FileUploadDoc>
@@ -391,9 +382,6 @@ export class FileUploadDemo extends Component {
         
     constructor() {
         super();
-        this.state = {
-            msgs: []
-        };
         
         this.onUpload = this.onUpload.bind(this);
         this.onBasicUpload = this.onBasicUpload.bind(this);
@@ -401,21 +389,15 @@ export class FileUploadDemo extends Component {
     }
 
     onUpload(event) {
-        this.setState({
-            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded'}]
-        });
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
     
     onBasicUpload(event) {
-        this.setState({
-            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'}]
-        });
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
     
     onBasicUploadAuto(event) {   
-        this.setState({
-            msgs: [{severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'}]
-        });
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     render() {
@@ -439,7 +421,7 @@ export class FileUploadDemo extends Component {
                     <h3>Basic with Auto</h3>
                     <FileUpload mode="basic" name="demo[]" uurl="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
                     
-                    <Growl value={this.state.msgs} />
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
                 </div>
             </div>
         )

@@ -970,22 +970,16 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     viewCar(car) {
-        this.setState({
-            messages: [
-                {severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand}
-            ]
-        });
+        this.growl.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
     }
 
     deleteCar(car) {
         let carsList = [...this.state.cars];
         carsList = carsList.filter((c) => c.vin !== car.vin);
 
+        this.growl.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
         this.setState({
-            cars: carsList,
-            messages: [
-                {severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand}
-            ]
+            cars: carsList
         });
     }
 
@@ -997,7 +991,7 @@ export class DataTableContextMenuDemo extends Component {
 
         return (
             <div>
-                <Growl value={this.state.messages}></Growl>
+                <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                 <ContextMenu model={items} ref={el => this.cm = el}/>
 

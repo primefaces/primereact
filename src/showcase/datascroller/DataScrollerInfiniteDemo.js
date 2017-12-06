@@ -10,7 +10,7 @@ export class DataScrollerInfiniteDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [], messages: [] };
+        this.state = { cars: []};
         this.carservice = new CarService();
     }
 
@@ -22,7 +22,8 @@ export class DataScrollerInfiniteDemo extends Component {
             for(var i = 0; i < newArray.length; i++) {
                 _cars.push(newArray[i]);
             }
-            this.setState({ cars: _cars, messages: [{severity:'info', summary:'Data Loaded', detail:'Between ' + event.first + ' and ' + (event.first + event.rows)}]});
+            this.growl.show({severity:'info', summary:'Data Loaded', detail:'Between ' + event.first + ' and ' + (event.first + event.rows)});
+            this.setState({ cars: _cars});
         }
     }
 
@@ -82,7 +83,7 @@ export class DataScrollerInfiniteDemo extends Component {
                 <DataScrollerInfiniteDoc></DataScrollerInfiniteDoc>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)} header="Scroll Down to to Load More"/>
                 </div>
@@ -104,7 +105,7 @@ export class DataScrollerInfiniteDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [], messages: [] };
+        this.state = { cars: []};
         this.carservice = new CarService();
     }
 
@@ -116,7 +117,8 @@ export class DataScrollerInfiniteDemo extends Component {
             for(var i = 0; i < newArray.length; i++) {
                 _cars.push(newArray[i]);
             }
-            this.setState({ cars: _cars, messages: [{severity:'info', summary:'Data Loaded', detail:'Between ' + event.first + ' and ' + (event.first + event.rows)}]});
+            this.growl.show({severity:'info', summary:'Data Loaded', detail:'Between ' + event.first + ' and ' + (event.first + event.rows)});
+            this.setState({ cars: _cars});
         }
     }
 
@@ -175,7 +177,7 @@ export class DataScrollerInfiniteDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)} header="Scroll Down to to Load More"/>
                 </div>
