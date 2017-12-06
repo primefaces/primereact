@@ -65,7 +65,7 @@ export class ColorPicker extends Component {
         });
         
         this.updateColorSelector();
-        this.updateUI();
+        this.updateHue();
         this.updateModel();
     }
     
@@ -93,7 +93,8 @@ export class ColorPicker extends Component {
             b: brightness
         });
         
-        this.updateUI();
+        this.updateColorHandle();
+        this.updateInput();
         this.updateModel();
     }
     
@@ -114,8 +115,6 @@ export class ColorPicker extends Component {
             default:
             break;
         }
-
-        this.selfModelUpdate = true;
     }
 
     toHSB(value) {
@@ -165,12 +164,17 @@ export class ColorPicker extends Component {
     updateColorSelector() {
         this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
     }
-        
-    updateUI() {
-        this.colorHandle.style.left =  Math.floor(150 * this.hsbValue.s / 100) + 'px';
-        this.colorHandle.style.top =  Math.floor(150 * (100 - this.hsbValue.b) / 100) + 'px';
+
+    updateColorHandle() {
+        this.colorHandle.style.left = Math.floor(150 * this.hsbValue.s / 100) + 'px';
+        this.colorHandle.style.top = Math.floor(150 * (100 - this.hsbValue.b) / 100) + 'px';
+    }
+
+    updateHue() {
         this.hueHandle.style.top = Math.floor(150 - (150 * this.hsbValue.h / 360)) + 'px';
+    }
         
+    updateInput() {
         if(this.input) {
             this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
         }
@@ -423,25 +427,36 @@ export class ColorPicker extends Component {
     }
 
     componentDidMount() {
-        this.updateColorSelector();
         this.updateUI();
     }
 
     componentWillReceiveProps(nextProps) {
-        if(!this.selfModelUpdate) {
-            this.updateHSBValue(nextProps.value);
-            this.updateColorSelector();
-            this.updateUI();
-        }
-        else {
-            this.selfModelUpdate = false;
-        }
+        this.updateHSBValue(nextProps.value);
+    }
+
+    componentDidUpdate() {
+        this.updateUI();
     }
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindDocumentMouseMoveListener();
         this.unbindDocumentMouseUpListener();
+    }
+
+    shouldComponentUpdate(nextProps) {
+        let newValue = this.toHSB(nextProps.value);
+        let oldValue = this.hsbValue;
+        let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
+        
+        return !equals;
+    }
+
+    updateUI() {
+        this.updateColorHandle();
+        this.updateColorSelector();
+        this.updateHue();
+        this.updateInput();
     }
 
     alignPanel() {
