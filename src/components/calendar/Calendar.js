@@ -1423,17 +1423,22 @@ export class Calendar extends Component {
     }
 
     renderDatePickerHeader() {
-        let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'fa fa-angle-left');
-        let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'fa fa-angle-right');
-        let title = this.renderDatePickerTitle();
+        if(!this.props.timeOnly) {
+            let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'fa fa-angle-left');
+            let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'fa fa-angle-right');
+            let title = this.renderDatePickerTitle();
 
-        return (
-            <div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
-                {prevLink}
-                {nextLink}
-                {title}
-            </div>
-        );
+            return (
+                <div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+                    {prevLink}
+                    {nextLink}
+                    {title}
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     renderHourPicker(time) {
@@ -1472,7 +1477,7 @@ export class Calendar extends Component {
                         <span className="fa fa-angle-up"></span>
                     </a>
                     <span style={{ 'display': time.second < 10 ? 'inline' : 'none' }}>0</span><span>{time.second}</span>
-                    <a onClick={this.incrementSecond}>
+                    <a onClick={this.decrementSecond}>
                         <span className="fa fa-angle-down"></span>
                     </a>
                 </div>
@@ -1520,7 +1525,7 @@ export class Calendar extends Component {
             let time = this.getTime();
             let separator = this.renderTimePickerSeparator();
             let hourPicker = this.renderHourPicker(time);
-            let minutePicker = this.renderHourPicker(time);
+            let minutePicker = this.renderMinutePicker(time);
             let secondPicker = this.renderSecondPicker(time);
             let ampmPicker = this.renderAmPmPicker(time);
 
