@@ -146,12 +146,13 @@ export class Dropdown extends Component {
                             });
                         }
                     }
+                    
                     if(selectedItemIndex === -1) {
                         this.selectItem({
                             originalEvent: event,
                             option: this.props.options[0]
                         });
-                    }                    
+                    }                 
                 }
                 
                 event.preventDefault();
@@ -434,6 +435,11 @@ export class Dropdown extends Component {
         if(this.props.filter) {
             this.alignPanel();
         }
+
+        if(this.panel.element.offsetParent) {
+            let highlightItem = DomHandler.findSingle(this.panel.element, 'li.ui-state-highlight');
+            DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
+        } 
     }
 
     render() {

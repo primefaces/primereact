@@ -29,7 +29,7 @@ export class DropdownPanel extends Component {
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
                 {this.props.filter}
-                <div className="ui-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
+                <div ref={(el) => this.itemsWrapper = el} className="ui-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
                     <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                         {this.props.children}
                     </ul>
