@@ -154,13 +154,11 @@ export class FileUpload extends Component {
 
     validate(file) {
         if(this.props.maxFileSize && file.size > this.props.maxFileSize) {
-            var messages = this.state.msgs.slice();
-            messages.push({
-                severity: 'error', 
-                summary: this.props.invalidFileSizeMessageSummary.replace('{0}', file.name), 
-                detail: this.props.invalidFileSizeMessageDetail.replace('{0}', this.formatSize(this.props.maxFileSize))
-            });
-            this.setState({msgs:messages});
+            this.messagesUI.show({
+                    severity: 'error',
+                    summary: this.props.invalidFileSizeMessageSummary.replace('{0}', file.name),
+                    detail: this.props.invalidFileSizeMessageDetail.replace('{0}', this.formatSize(this.props.maxFileSize))
+                });
             return false;
         }
         
@@ -342,7 +340,7 @@ export class FileUpload extends Component {
                 <div ref={(el) => {this.content = el;}} className="ui-fileupload-content ui-widget-content ui-corner-bottom" 
                     onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {progressBar}
-                    <Messages value={this.state.msgs} />
+                    <Messages ref={(el) => this.messagesUI = el } />
                     {filesList}
                 </div>
             </div>
