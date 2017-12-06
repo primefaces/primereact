@@ -18,7 +18,6 @@ export class GMapDemo extends Component {
             dialogVisible: false,
             markerTitle: '',
             draggableMarker: false,
-            messages: null,
             overlays: null,
             selectedPosition: null
         };
@@ -39,7 +38,6 @@ export class GMapDemo extends Component {
     }
     
     onOverlayClick(event) {
-        let msgs = [];
         let isMarker = event.overlay.getTitle !== undefined;
         
         if(isMarker) {
@@ -49,21 +47,15 @@ export class GMapDemo extends Component {
             this.infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
             
-            msgs.push({severity:'info', summary:'Marker Selected', detail: title});
+            this.growl.show({severity:'info', summary:'Marker Selected', detail: title});
         }
         else {
-            msgs.push({severity:'info', summary:'Shape Selected', detail: ''});
-        }  
-        
-        this.setState({
-            messages: msgs
-        })      
+            this.growl.show({severity:'info', summary:'Shape Selected', detail: ''});
+        }   
     }
     
     handleDragEnd(event) {
-        this.setState({
-            messages: [{severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()}]
-        })
+        this.growl.show({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
     }
     
     addMarker() {
@@ -126,7 +118,7 @@ export class GMapDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
                 
                     <GMap overlays={this.state.overlays} options={options} style={{width: '100%', minHeight: '320px'}} onMapReady={this.onMapReady}
                         onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
@@ -455,7 +447,6 @@ export class GMapDemo extends Component {
             dialogVisible: false,
             markerTitle: '',
             draggableMarker: false,
-            messages: null,
             overlays: null,
             selectedPosition: null
         };
@@ -476,7 +467,6 @@ export class GMapDemo extends Component {
     }
     
     onOverlayClick(event) {
-        let msgs = [];
         let isMarker = event.overlay.getTitle !== undefined;
         
         if(isMarker) {
@@ -486,21 +476,15 @@ export class GMapDemo extends Component {
             this.infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
             
-            msgs.push({severity:'info', summary:'Marker Selected', detail: title});
+            this.growl.show({severity:'info', summary:'Marker Selected', detail: title});
         }
         else {
-            msgs.push({severity:'info', summary:'Shape Selected', detail: ''});
-        }  
-        
-        this.setState({
-            messages: msgs
-        })      
+            this.growl.show({severity:'info', summary:'Shape Selected', detail: ''});
+        }   
     }
     
     handleDragEnd(event) {
-        this.setState({
-            messages: [{severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()}]
-        })
+        this.growl.show({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
     }
     
     addMarker() {
@@ -563,7 +547,7 @@ export class GMapDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
                 
                     <GMap overlays={this.state.overlays} options={options} style={{width: '100%', minHeight: '320px'}} onMapReady={this.onMapReady}
                         onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
