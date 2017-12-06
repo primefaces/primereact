@@ -226,7 +226,7 @@ onChangeBasic(e) {
                     <tbody>
                         <tr>
                             <td>onChange</td>
-                            <td>event: Change event</td>
+                            <td>event.value: New value</td>
                             <td>Callback to invoke on value change.</td>
                         </tr>
                     </tbody>

@@ -81,9 +81,9 @@ export class Spinner extends Component {
         this.formatValue();
 
         this.inputEl.value = this.valueAsString;
+        
         if (this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: this.value
             })
         }
@@ -160,12 +160,13 @@ export class Spinner extends Component {
         this.value = this.parseValue(inputValue);
         this.formatValue();
         this.inputEl.value = this.valueAsString;
+
         if (this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: this.value
             })
         }
+
         this.updateFilledState();
     }
 
@@ -219,10 +220,9 @@ export class Spinner extends Component {
         }
     }
 
-    handleChange(event) {
+    handleChange() {
         if (this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: this.value
             })
         }

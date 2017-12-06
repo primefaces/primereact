@@ -257,7 +257,7 @@ export class ColorPicker extends Component {
         }
     }
 
-    onDocumentMouseMove() {
+    onDocumentMouseMove(event) {
         if (this.colorDragging) {
             this.pickColor(event);
         }
