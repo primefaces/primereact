@@ -21,8 +21,8 @@ export class RadioButton extends Component {
         checked: PropTypes.bool
     };
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);

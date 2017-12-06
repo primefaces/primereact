@@ -30,6 +30,7 @@ export class TriStateCheckboxDemo extends Component {
                     <h3 className="first">Value: {this.state.value + ''} </h3>
                     <TriStateCheckbox onChange={this.onStateChange} value={this.state.value}></TriStateCheckbox>
                 </div>
+
                 <TriStateCheckboxDoc></TriStateCheckboxDoc>
             </div>
         );
@@ -98,10 +99,34 @@ onStateChange(e) {
                                     <td>Unique identifier of the element.</td>
                                 </tr>
                                 <tr>
+                                    <td>inputId</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the native checkbox element.</td>
+                                </tr>
+                                <tr>
                                     <td>value</td>
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Value of the TriStateCheckbox.</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the checkbox element .</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
                                 </tr>
                             </tbody>
                         </table>
