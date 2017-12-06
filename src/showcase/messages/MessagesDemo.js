@@ -112,11 +112,11 @@ export class MessagesDemo extends Component {
                     </div>
 
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="ng-dirty ng-invalid"/>
+                        <InputText placeholder="Username" className="ui-state-error"/>
                         <Message severity="error" text="Field is required"></Message>
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="ng-dirty ng-invalid"/>
+                        <InputText placeholder="Email" className="ui-state-error"/>
                         <Message severity="error"></Message>
                     </div>
                 </div>
@@ -381,8 +381,6 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                     </tbody>
                 </table>
             </div>
-
-            
 
             <h3>Styling</h3>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>

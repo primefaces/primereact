@@ -9,6 +9,34 @@
     margin-right: .25em;
 }
 
+.ui-message.ui-message-icon-only .fa {
+    margin-right: 0;
+}
+
 .ui-fluid .ui-message {
     display: block;
+}
+
+.ui-message-success {
+    color: #ffffff;
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.ui-message-info {
+    color: #ffffff;
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+
+.ui-message-warn {
+    color: #ffffff;
+    background-color: #FFB300;
+    border-color: #FFB300;
+}
+
+.ui-message-error {
+    color: #ffffff;
+    background-color: #f44336;
+    border-color: #f44336;
 }

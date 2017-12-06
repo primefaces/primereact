@@ -21,12 +21,12 @@ export class Message extends Component {
     };
 
     render() {
-
         let className = classNames('ui-message ui-widget ui-corner-all', {
-            'ui-messages-info': this.props.severity === 'info',
-            'ui-messages-warn': this.props.severity === 'warn',
-            'ui-messages-error': this.props.severity === 'error',
-            'ui-messages-success': this.props.severity === 'success'
+            'ui-message-info': this.props.severity === 'info',
+            'ui-message-warn': this.props.severity === 'warn',
+            'ui-message-error': this.props.severity === 'error',
+            'ui-message-success': this.props.severity === 'success',
+            'ui-message-icon-only': !this.props.text
         });
 
         let icon = classNames('ui-message-icon fa fa-fw', {
