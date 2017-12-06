@@ -18,7 +18,7 @@ export class ProgressBarDemo extends Component {
             val += Math.floor(Math.random() * 10) + 1;
             if(val >= 100) {
                 val = 100;
-                this.setState({msgs: [{severity: 'info', summary: 'Success', detail: 'Process Completed'}]});
+                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
                 clearInterval(this.interval);
             }
             this.setState({value1: val});
@@ -42,7 +42,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.msgs}/>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <h3>Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>
@@ -106,7 +106,7 @@ componentDidMount() {
         val += Math.floor(Math.random() * 10) + 1;
         if(val >= 100) {
             val = 100;
-            this.setState({msgs: [{severity: 'info', summary: 'Success', detail: 'Process Completed'}]});
+            this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
             clearInterval(this.interval);
         }
         this.setState({value1: val});
@@ -234,7 +234,7 @@ export class ProgressBarDemo extends Component {
             val += Math.floor(Math.random() * 10) + 1;
             if(val >= 100) {
                 val = 100;
-                this.setState({msgs: [{severity: 'info', summary: 'Success', detail: 'Process Completed'}]});
+                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
                 clearInterval(this.interval);
             }
             this.setState({value1: val});
@@ -252,7 +252,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.msgs}/>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <h3>Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>

@@ -11,8 +11,6 @@ export class MessagesDemo extends Component {
         
     constructor() {
         super();
-        this.state = {messages:null};
-
         this.showSuccess = this.showSuccess.bind(this);
         this.showInfo = this.showInfo.bind(this);
         this.showWarn = this.showWarn.bind(this);
@@ -459,7 +457,6 @@ export class MessagesDemo extends Component {
         
     constructor() {
         super();
-        this.state = {messages:null};
 
         this.showSuccess = this.showSuccess.bind(this);
         this.showInfo = this.showInfo.bind(this);
