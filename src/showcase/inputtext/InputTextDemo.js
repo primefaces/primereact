@@ -34,8 +34,8 @@ export class InputTextDemo extends Component {
 
                     <h3>Floating Label</h3>
                     <span className="ui-float-label">
-                        <InputText id="float-input" type="text" size="30" pInputText />
-                        <label for="float-input">Username</label>
+                        <InputText id="float-input" type="text" size="30" />
+                        <label htmlFor="float-input">Username</label>
                     </span>
                 </div>
 
@@ -88,8 +88,8 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         <CodeHighlight className="html">
                             {`
 <span className="ui-float-label">
-    <InputText id="float-input" type="text" size="30" pInputText />
-    <label for="float-input">Username</label>
+    <InputText id="float-input" type="text" size="30" />
+    <label htmlFor="float-input">Username</label>
 </span>
 
 `}
@@ -157,8 +157,8 @@ export class InputTextDemo extends Component {
 
                     <h3>Floating Label</h3>
                     <span className="ui-float-label">
-                        <InputText id="float-input" type="text" size="30" pInputText />
-                        <label for="float-input">Username</label>
+                        <InputText id="float-input" type="text" size="30" />
+                        <label htmlFor="float-input">Username</label>
                     </span>
                 </div>
             </div>
