@@ -96,17 +96,17 @@ export class MessagesDemo extends Component {
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div class="ui-g">
-                        <div class="ui-g-12 ui-md-3">
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="info" text="PrimeNG Rocks"></Message>
                         </div>
-                        <div class="ui-g-12 ui-md-3">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="success" text="Record Saved"></Message>
                         </div>
-                        <div class="ui-g-12 ui-md-3">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="warn" text="Are you sure?"></Message>
                         </div>
-                        <div class="ui-g-12 ui-md-3">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="error" text="Field is required"></Message>
                         </div>
                     </div>
@@ -543,17 +543,17 @@ export class MessagesDemo extends Component {
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div class="ui-g">
-                        <div class="ui-g-12 ui-md-3">
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="info" text="PrimeNG Rocks"></Message>
                         </div>
-                        <div class="ui-g-12 ui-md-3">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="success" text="Record Saved"></Message>
                         </div>
-                        <div class="ui-g-12 ui-md-3">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="warn" text="Are you sure?"></Message>
                         </div>
-                        <div class="ui-g-12 ui-md-3">
+                        <div className="ui-g-12 ui-md-3">
                             <Message severity="error" text="Field is required"></Message>
                         </div>
                     </div>
