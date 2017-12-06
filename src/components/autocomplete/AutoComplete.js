@@ -312,7 +312,7 @@ export class AutoComplete extends Component {
                         if(previousElement) {
                             DomHandler.addClass(previousElement, 'ui-state-highlight');
                             DomHandler.removeClass(highlightItem, 'ui-state-highlight');
-                            DomHandler.scrollInView(this.panel, previousElement);
+                            DomHandler.scrollInView(this.panel.element, previousElement);
                         }
                     }
                     
