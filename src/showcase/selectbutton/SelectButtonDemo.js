@@ -36,7 +36,7 @@ export class SelectButtonDemo extends Component {
 
                     <h3>Multiple</h3>
                     <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(event) => this.setState({value2: event.value})} />
-                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val)}</p>
+                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val + " ")}</p>
                 </div>
 
                 <SelectButtonDoc></SelectButtonDoc>
@@ -264,7 +264,7 @@ export class SelectButtonDemo extends Component {
 
                     <h3>Multiple</h3>
                     <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(event) => this.setState({value2: event.value})} />
-                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val)}</p>
+                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val + " ")}</p>
                 </div>
             </div>
         );
