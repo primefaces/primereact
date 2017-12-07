@@ -17,7 +17,7 @@ interface InputMaskProps {
     disabled?: boolean;
     readonly?: boolean;
     name?: string;
-    onComplete?(originalEvent: Event): void;
+    onComplete?({originalEvent: Event}): void;
 }
 
 export class InputMask extends React.Component<InputMaskProps,any> {}

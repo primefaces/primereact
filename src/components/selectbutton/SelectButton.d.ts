@@ -10,7 +10,7 @@ interface SelectButtonProps {
     style?: object;
     className?: string;
     dataKey?: string;
-    onChange?(originalEvent: Event, value: any): void;
+    onChange?({originalEvent: Event, value: any}): void;
 }
 
 export class SelectButton extends React.Component<SelectButtonProps,any> {}

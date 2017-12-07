@@ -12,7 +12,7 @@ interface TooltipProps {
     escape?: boolean;
     hideDelay?: number;
     showDelay?: number;
-    onBeforeShow?(originalEvent: Event): void;
+    onBeforeShow?({originalEvent: Event}): void;
 }
 
 export class Tooltip extends React.Component<TooltipProps,any> {}

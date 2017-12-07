@@ -166,3 +166,13 @@
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"]::-webkit-file-upload-button,
+button {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}

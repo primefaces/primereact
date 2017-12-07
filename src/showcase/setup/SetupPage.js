@@ -51,7 +51,7 @@ primereact/resources/primereact.min.css
 <CodeHighlight className="javascript">
 {`
 primereact/resources/themes/omega/theme.css
-primereact/components/common/common/common.css
+primereact/components/common/common.css
 primereact/components/autocomplete/AutoComplete.css
 
 `}

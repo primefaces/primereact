@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
-import {DropdownItem} from './DropdownItem';
+import { DropdownPanel } from './DropdownPanel';
+import { DropdownItem } from './DropdownItem';
 
 export class Dropdown extends Component {
 
@@ -95,7 +96,7 @@ export class Dropdown extends Component {
         if(!this.overlayClick && !this.editableInputClick) {
             this.focusInput.focus();
             
-            if(this.panel.offsetParent) {
+            if(this.panel.element.offsetParent) {
                 this.hide();                
             }
             else {
@@ -125,53 +126,64 @@ export class Dropdown extends Component {
     onInputBlur(event) {
         DomHandler.removeClass(this.container, 'ui-state-focus');
     }
+
+    onUpKey(event) {
+        if (!this.panel.element.offsetParent && event.altKey) {
+            this.show();
+        }
+        else {
+            let selectedItemIndex = this.findOptionIndex(this.props.value);
+
+            if (selectedItemIndex !== -1) {
+                let nextItemIndex = selectedItemIndex + 1;
+                if (nextItemIndex !== (this.props.options.length)) {
+                    this.selectItem({
+                        originalEvent: event,
+                        option: this.props.options[nextItemIndex]
+                    });
+                }
+            }
+
+            if (selectedItemIndex === -1) {
+                this.selectItem({
+                    originalEvent: event,
+                    option: this.props.options[0]
+                });
+            }
+        }
+
+        event.preventDefault();
+    }
+
+    onDownKey(event) {
+        let selectedItemIndex = this.findOptionIndex(this.props.value);
+        
+        if (selectedItemIndex > 0) {
+            let prevItemIndex = selectedItemIndex - 1;
+            this.selectItem({
+                originalEvent: event,
+                option: this.props.options[prevItemIndex]
+            });
+        }
+
+        event.preventDefault();
+    }
     
     onInputKeyDown(event) {
-        let selectedItemIndex = this.findOptionIndex(this.props.value);
-
         switch(event.which) {
             //down
             case 40:
-                if(!this.panel.offsetParent && event.altKey) {
-                    this.show();
-                }
-                else {
-                    if(selectedItemIndex !== -1) {
-                        let nextItemIndex = selectedItemIndex + 1;
-                        if(nextItemIndex !== (this.props.options.length)) {
-                            this.selectItem({
-                                originalEvent: event,
-                                option: this.props.options[nextItemIndex]
-                            });
-                        }
-                    }
-                    else if(this.optionsToDisplay) {
-                        this.selectItem({
-                            originalEvent: event,
-                            option: this.props.options[0]
-                        });
-                    }                    
-                }
-                
-                event.preventDefault();
+                this.onUpKey(event);
             break;
             
             //up
             case 38:
-                if(selectedItemIndex > 0) {
-                    let prevItemIndex = selectedItemIndex - 1;                    
-                    this.selectItem({
-                        originalEvent: event,
-                        option: this.props.options[prevItemIndex]
-                    });
-                }
-                
-                event.preventDefault();
+                this.onDownKey(event);
             break;
 
             //space
             case 32:
-                if(!this.panel.offsetParent){
+                if(!this.panel.element.offsetParent){
                     this.show();
                     event.preventDefault();
                 }
@@ -193,7 +205,6 @@ export class Dropdown extends Component {
             
             default:
             break;
-        
         }
     }
     
@@ -226,8 +237,24 @@ export class Dropdown extends Component {
     }
     
     onFilterInputKeyDown(event) {
-        if(event.which === 13) {
-            event.preventDefault();
+        switch (event.which) {
+            //down
+            case 40:
+                this.onUpKey(event);
+                break;
+
+            //up
+            case 38:
+                this.onDownKey(event);
+                break;
+
+            //enter
+            case 13:
+                event.preventDefault();
+            break;
+
+            default:
+            break;
         }
     }
     
@@ -264,24 +291,27 @@ export class Dropdown extends Component {
     }
     
     show() {        
-        this.panel.style.zIndex = DomHandler.getZindex() + 1;
-        this.panel.style.display = 'block';
+        this.panel.element.style.zIndex = DomHandler.getZindex();
+        this.panel.element.style.display = 'block';
         this.alignPanel();
-        DomHandler.fadeIn(this.panel, 250);
+        DomHandler.fadeIn(this.panel.element, 250);
         this.bindDocumentClickListener();
     }
 
     hide() {
-        this.panel.style.display = 'none';
+        this.panel.element.style.display = 'none';
         this.unbindDocumentClickListener();
         this.clearClickState();
     }
     
     alignPanel() {
-        if(this.props.appendTo)
-            DomHandler.absolutePosition(this.panel, this.container);
-        else
-            DomHandler.relativePosition(this.panel, this.container);
+        if(this.props.appendTo) {
+            DomHandler.absolutePosition(this.panel.element, this.container);
+            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+        }
+        else {
+            DomHandler.relativePosition(this.panel.element, this.container);
+        }            
     }
     
     bindDocumentClickListener() {
@@ -375,39 +405,33 @@ export class Dropdown extends Component {
                     <span className="fa fa-fw fa-caret-down ui-clickable"></span>
                 </div>;
     }
-    
-    renderPanel(selectedOption) {
-        let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow', this.props.panelClassName);
+
+    renderItems(selectedOption) {
         let items = this.props.options;
-        let filter = this.renderFilter();
-        
-        if(this.hasFilter()) {
+ 
+        if (items && this.hasFilter()) {
             items = items && items.filter((option) => {
                 return this.filter(option);
             });
         }
-        
-        items = items && items.map((option, index) => {
-            let optionLabel = this.getOptionLabel(option);
-            return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
+
+        if(items) {
+            return items.map((option, index) => {
+                let optionLabel = this.getOptionLabel(option);
+                return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
                     onClick={this.onOptionClick} />;
-        });
-        
-        return <div ref={(el) => this.panel = el} className={className} style={this.props.panelStyle} onClick={this.panelClick}>
-                    {filter}
-                    <div className="ui-dropdown-items-wrapper" style={{maxHeight: this.props.scrollHeight||'auto'}}>
-                        <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                            {items}
-                        </ul>
-                    </div>
-            </div>;
+            });   
+        }
+        else {
+            return null;
+        }
     }
-    
+        
     renderFilter() {
         if(this.props.filter) {
             return <div className="ui-dropdown-filter-container">
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterKeyDown} onChange={this.onFilterInputChange} />
+                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
                         <span className="fa fa-search"></span>
                    </div>;
         }
@@ -426,27 +450,23 @@ export class Dropdown extends Component {
                 this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
             }
         }
-        
-        if(this.props.appendTo) {
-            if(this.props.appendTo === 'body')
-                document.body.appendChild(this.panel);
-            else
-                DomHandler.appendChild(this.panel, this.props.appendTo);
-        }
     }
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        
-        if(this.props.appendTo) {
-            this.container.appendChild(this.panel);
-        }
     }
     
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.filter) {
+        if (this.props.filter) {
             this.alignPanel();
         }
+
+        if (this.panel.element.offsetParent) {
+            let highlightItem = DomHandler.findSingle(this.panel.element, 'li.ui-state-highlight');
+            if (highlightItem) {
+                DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
+            }
+        } 
     }
 
     render() {
@@ -458,7 +478,8 @@ export class Dropdown extends Component {
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
-        let panel = this.renderPanel(selectedOption);
+        let items = this.renderItems(selectedOption);
+        let filterElement = this.renderFilter();
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
@@ -467,7 +488,11 @@ export class Dropdown extends Component {
                  {keyboardHelper}
                  {labelElement}
                  {dropdownIcon}
-                 {panel}
+                 <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} 
+                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
+                    scrollHeight={this.props.scrollHeight} onClick={this.panelClick} filter={filterElement}>
+                    {items}
+                 </DropdownPanel> 
             </div>
         );
     }

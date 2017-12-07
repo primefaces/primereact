@@ -21,11 +21,11 @@ interface FileUploadProps {
     cancelLabel?: string;
     onBeforeUpload?(): void;
     onBeforeSend?(): void;
-    onUpload?(xhr: XMLHttpRequest, files: Array<any>): void;
-    onError?(xhr: XMLHttpRequest, files: Array<any>): void;
+    onUpload?({xhr: XMLHttpRequest, files: any}): void;
+    onError?({xhr: XMLHttpRequest, files: any}): void;
     onClear?(): void;
-    onSelect?(originalEvent: Event, files: Array<any>): void;
-    onProgress?(originalEvent: Event, progress: any): void;
+    onSelect?({originalEvent: Event, files: any}): void;
+    onProgress?({originalEvent: Event, progress: any}): void;
 }
 
 export class FileUpload extends React.Component<FileUploadProps,any> {}

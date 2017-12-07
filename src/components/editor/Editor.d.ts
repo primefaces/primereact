@@ -9,8 +9,8 @@ interface EditorProps {
     readonly?: boolean,
     formats?: Array<any>,
     headerTemplate?: any,
-    onTextChange?(htmlValue: HTMLElement, textValue: string, delta: any, source: string): void,
-    onSelectionChange?(range: any, oldRange: any, source: string): void;
+    onTextChange?({htmlValue: HTMLElement, textValue: string, delta: any, source: string}): void,
+    onSelectionChange?({range: any, oldRange: any, source: string}): void;
 }
 
 export class Editor extends React.Component<EditorProps,any> {}

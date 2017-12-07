@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import classNames from 'classnames';
 import 'nanoscroller';
 import jQuery from "jquery";
@@ -8,122 +8,102 @@ import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
 import './sass/App.css';
 
-class Home extends Component {
-
-    render() {
-        return (
-            <div className="home">
-                <div className="introduction">
-                    <h1>Your Favorite UI Framework</h1>
-                    <h2>for REACT</h2>
-                    
-                    <Link to="/setup" className="home-button">Get Started</Link>
-                </div>
-                <div className="features">
-                    <h3>Why Use PrimeReact?</h3>
-                    <p className="features-tagline">Congratulations! 🎉 Your quest to find the UI library for React is complete.</p>
-
-                    <p className="features-description">PrimeReact is a collection of rich UI components for React. All widgets are open source and free to use under MIT License. PrimeReact is developed by PrimeTek Informatics,
-                        a vendor with years of expertise in developing open source UI solutions. For project news and updates, please <a href="https://twitter.com/primereact">follow us on twitter</a> and <a href="https://www.primefaces.org/category/primereact/">visit our blog</a>.</p>
-
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-3">
-                            <img alt="component" src="showcase/resources/images/home/icon-component.svg" />
-                            <span className="feature-name">60+ COMPONENTS</span>
-                            <p>The most complete set of native widgets featuring 60+ easy to use components for all your UI requirements.</p>
-                        </div>
-                        <div className="ui-g-12 ui-md-3">
-                            <img alt="opensource" src="showcase/resources/images/home/icon-opensource.svg" />
-                            <span className="feature-name">OPEN SOURCE</span>
-                            <p>Hosted at GitHub, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
-                        </div>
-                        <div className="ui-g-12 ui-md-3">
-                            <img alt="themes" src="showcase/resources/images/home/icon-themes.svg" />
-                            <span className="feature-name">THEMES</span>
-                            <p>Don’t get tied up in just one look&feel. Choose from a variety of options including material and flat design.</p>
-                        </div>
-                        <div className="ui-g-12 ui-md-3">
-                            <img alt="community" src="showcase/resources/images/home/icon-community.svg" />
-                            <span className="feature-name">COMMUNITY</span>
-                            <p>Join PrimeReact community to become a part of an active, vibrant and growing open source foundation.</p>
-                        </div>
-                        <div className="ui-g-12 ui-md-4">
-                            <img alt="productive" src="showcase/resources/images/home/icon-productive.svg" />
-                            <span className="feature-name">PRODUCTIVITY</span>
-                            <p>Allocate your valuable time on business logic rather than dealing with the complex user interface requirements.</p>
-                        </div>
-                        <div className="ui-g-12 ui-md-4">
-                            <img alt="mobile" src="showcase/resources/images/home/icon-mobile.svg" />
-                            <span className="feature-name">MOBILE</span>
-                            <p>Enhanced mobile user experience with  touch optimized responsive design elements.</p>
-                        </div>
-                        <div className="ui-g-12 ui-md-4">
-                            <img alt="templates" src="showcase/resources/images/home/icon-templates.svg" />
-                            <span className="feature-name">TEMPLATES</span>
-                            <p>Professionally designed highly customizable native React application templates to get started in no time. </p>
-                        </div>
-                    </div>
-                </div>
-                <div className="whouses">
-                    <h3>Key Users</h3>
-                    <p>Open source products of <a href="http://www.primetek.com.tr">PrimeTek</a> are used all around the world by 1M+ developers in Fortune 500 companies, corporations, government and educational
-                        institutions.</p>
-                    <div className="ui-g">
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/fox.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/airbus.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/bank-of-america.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/mercedes.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/ebay.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/ford.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/vw.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/unicredit.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/lufthansa.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/bmw.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/verizon.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/sap.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/amex.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/viacom.svg"></img></div>
-                    </div>
-                </div>
-                <div className="templates">
-                    <h3>Premium Application Templates for PrimeReact</h3>
-                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates 
-                        of PrimeReact and impress your users.</p>
-                    
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
-                            <h4>Ultima with Material Design</h4>
-                            <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/ultima-react.png" /> 
-                            </a>
-                        </div>
-                        <div className="ui-g-12 ui-md-6">
-                            <h4>Avalon with Bootstrap Styling</h4>
-                            <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react.png" /> 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="prosupport">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
-                            <h3>PrimeReact PRO Support</h3>
-                            <p>With PrimeReact PRO, it is easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
-                            <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
-                            <a className="home-button2" href="mailto:contact@primetek.com.tr">
-                                Get a Quote
-                            </a>
-                        </div>
-                        <div className="ui-g-12 ui-md-6">
-                            <img alt="PRO" src="showcase/resources/images/home/icon-pro.svg"></img>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+import { AccordionDemo } from './showcase/accordion/AccordionDemo';
+import { AutoCompleteDemo } from './showcase/autocomplete/AutoCompleteDemo';
+import { ButtonDemo } from './showcase/button/ButtonDemo';
+import { SplitButtonDemo } from './showcase/splitbutton/SplitButtonDemo';
+import { CheckboxDemo } from './showcase/checkbox/CheckboxDemo';
+import { ChipsDemo } from './showcase/chips/ChipsDemo';
+import { DialogDemo } from './showcase/dialog/DialogDemo';
+import { DropdownDemo } from './showcase/dropdown/DropdownDemo';
+import { FieldsetDemo } from './showcase/fieldset/FieldsetDemo';
+import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
+import { GMapDemo } from './showcase/gmap/GMapDemo';
+import { GridDemo } from './showcase/grid/GridDemo';
+import { GrowlDemo } from './showcase/growl/GrowlDemo';
+import { InputTextDemo } from './showcase/inputtext/InputTextDemo';
+import { InputTextareaDemo } from './showcase/inputtextarea/InputTextareaDemo';
+import { ListBoxDemo } from './showcase/listbox/ListBoxDemo';
+import { MessagesDemo } from './showcase/messages/MessagesDemo';
+import { MultiSelectDemo } from './showcase/multiselect/MultiSelectDemo';
+import { OverlayPanelDemo } from './showcase/overlaypanel/OverlayPanelDemo';
+import { PanelDemo } from './showcase/panel/PanelDemo';
+import { ProgressBarDemo } from './showcase/progressbar/ProgressBarDemo';
+import { RadioButtonDemo } from './showcase/radiobutton/RadioButtonDemo';
+import { TabViewDemo } from './showcase/tabview/TabViewDemo';
+import { ToggleButtonDemo } from './showcase/togglebutton/ToggleButtonDemo';
+import { TriStateCheckboxDemo } from './showcase/tristatecheckbox/TriStateCheckboxDemo';
+import { SelectButtonDemo } from './showcase/selectbutton/SelectButtonDemo';
+import { InputSwitchDemo } from './showcase/inputswitch/InputSwitchDemo';
+import { SliderDemo } from './showcase/slider/SliderDemo';
+import { SpinnerDemo } from './showcase/spinner/SpinnerDemo';
+import { InputMaskDemo } from './showcase/inputmask/InputMaskDemo';
+import { CalendarDemo } from './showcase/calendar/CalendarDemo';
+import { ChartDemo } from './showcase/chart/ChartDemo';
+import { PieChartDemo } from './showcase/chart/PieChartDemo';
+import { BarChartDemo } from './showcase/chart/BarChartDemo';
+import { LineChartDemo } from './showcase/chart/LineChartDemo';
+import { DoughnutChartDemo } from './showcase/chart/DoughnutChartDemo';
+import { RadarChartDemo } from './showcase/chart/RadarChartDemo';
+import { PolarAreaChartDemo } from './showcase/chart/PolarAreaChartDemo';
+import { PaginatorDemo } from './showcase/paginator/PaginatorDemo';
+import { DataListDemo } from './showcase/datalist/DataListDemo';
+import { DataGridDemo } from './showcase/datagrid/DataGridDemo';
+import { DataTableDemo } from './showcase/datatable/DataTableDemo';
+import { DataTableLazyDemo } from './showcase/datatable/DataTableLazyDemo';
+import { DataTableExportDemo } from './showcase/datatable/DataTableExportDemo';
+import { DataTableCrudDemo } from './showcase/datatable/DataTableCrudDemo';
+import { DataTableTemplatingDemo } from './showcase/datatable/DataTableTemplatingDemo';
+import { DataTablePaginatorDemo } from './showcase/datatable/DataTablePaginatorDemo';
+import { DataTableSortDemo } from './showcase/datatable/DataTableSortDemo';
+import { DataTableFilterDemo } from './showcase/datatable/DataTableFilterDemo';
+import { DataTableColTogglerDemo } from './showcase/datatable/DataTableColTogglerDemo';
+import { DataTableScrollDemo } from './showcase/datatable/DataTableScrollDemo';
+import { DataTableSelectionDemo } from './showcase/datatable/DataTableSelectionDemo';
+import { DataTableColGroupDemo } from './showcase/datatable/DataTableColGroupDemo';
+import { DataTableRowExpansionDemo } from './showcase/datatable/DataTableRowExpansionDemo';
+import { DataTableColResizeDemo } from './showcase/datatable/DataTableColResizeDemo';
+import { DataTableColReorderDemo } from './showcase/datatable/DataTableColReorderDemo';
+import { DataTableContextMenuDemo } from './showcase/datatable/DataTableContextMenuDemo';
+import { DataTableResponsiveDemo } from './showcase/datatable/DataTableResponsiveDemo';
+import { DataTableEditDemo } from './showcase/datatable/DataTableEditDemo';
+import { DataTableRowGroupDemo } from './showcase/datatable/DataTableRowGroupDemo';
+import { DataTableStyleDemo } from './showcase/datatable/DataTableStyleDemo';
+import { OrderListDemo } from './showcase/orderlist/OrderListDemo';
+import { PickListDemo } from './showcase/picklist/PickListDemo';
+import { ScheduleDemo } from './showcase/schedule/ScheduleDemo';
+import { TreeDemo } from './showcase/tree/TreeDemo';
+import { TreeTableDemo } from './showcase/treetable/TreeTableDemo';
+import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
+import { ColorPickerDemo } from './showcase/colorpicker/ColorPickerDemo';
+import { PasswordDemo } from './showcase/password/PasswordDemo';
+import { HomeComponent } from './showcase/home/HomeComponent';
+import { SetupPage } from './showcase/setup/SetupPage';
+import { RatingDemo } from './showcase/rating/RatingDemo';
+import { ToolbarDemo } from './showcase/toolbar/ToolbarDemo';
+import { LightboxDemo } from './showcase/lightbox/LightboxDemo';
+import { DataScrollerDemo } from './showcase/datascroller/DataScrollerDemo';
+import { DataScrollerInlineDemo } from './showcase/datascroller/DataScrollerInlineDemo';
+import { DataScrollerLoaderDemo } from './showcase/datascroller/DataScrollerLoaderDemo';
+import { DataScrollerInfiniteDemo } from './showcase/datascroller/DataScrollerInfiniteDemo';
+import { MenuDemo } from './showcase/menu/MenuDemo';
+import { TabMenuDemo } from './showcase/tabmenu/TabMenuDemo';
+import { BreadcrumbDemo } from './showcase/breadcrumb/BreadcrumbDemo';
+import { TieredMenuDemo } from './showcase/tieredmenu/TieredMenuDemo';
+import { MenubarDemo } from './showcase/menubar/MenubarDemo';
+import { ContextMenuDemo } from './showcase/contextmenu/ContextMenuDemo';
+import { PanelMenuDemo } from './showcase/panelmenu/PanelMenuDemo';
+import { StepsDemo } from './showcase/steps/StepsDemo';
+import { MegaMenuDemo } from './showcase/megamenu/MegaMenuDemo';
+import { SlideMenuDemo } from './showcase/slidemenu/SlideMenuDemo';
+import { OrganizationChartDemo } from './showcase/organizationchart/OrganizationChartDemo';
+import { ThemingPage } from "./showcase/theming/ThemingPage"
+import { InputGroupDemo } from "./showcase/inputgroup/InputGroupDemo";
+import { EditorDemo } from "./showcase/editor/EditorDemo";
+import { TooltipDemo } from "./showcase/tooltip/TooltipDemo";
+import { MenuModelDemo } from "./showcase/menumodel/MenuModelDemo";
+import { SidebarDemo } from "./showcase/sidebar/SidebarDemo";
+import { ProgressSpinnerDemo } from "./showcase/progressspinner/ProgressSpinnerDemo";
 
 class AppMenu extends Component {
 
@@ -151,7 +131,7 @@ class AppMenu extends Component {
             <div ref={(el) => this.scrollContainer = el} className="nano">
                 <div className="nano-content">
                     <div className="layout-menu">
-                        <a id="menu_input"  href="#" onClick={(event) => this.openMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
+                        <a id="menu_input"  onClick={(event) => this.openMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
                             <img alt="input" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/input.svg"></img>
                             <img alt="input" className="layout-menu-icon-active" src="showcase/resources/images/mono/input-active.svg"></img>
                             <span>Input</span>
@@ -183,7 +163,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
+                        <a id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
                             <img alt="button" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/button.svg"></img>
                             <img alt="button" className="layout-menu-icon-active" src="showcase/resources/images/mono/button-active.svg"></img>
                             <span>Button</span>
@@ -195,7 +175,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
+                        <a id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
                             <img alt="data" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/data.svg"></img>
                             <img alt="data" className="layout-menu-icon-active" src="showcase/resources/images/mono/data-active.svg"></img>
                             <span>Data</span>
@@ -218,7 +198,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
+                        <a id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
                             <img alt="panel" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/panel.svg"></img>
                             <img alt="panel" className="layout-menu-icon-active" src="showcase/resources/images/mono/panel-active.svg"></img>
                             <span>Panel</span>
@@ -234,7 +214,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
+                        <a id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
                             <img alt="overlay" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/overlay.svg"></img>
                             <img alt="overlay" className="layout-menu-icon-active" src="showcase/resources/images/mono/overlay-active.svg"></img>
                             <span>Overlay</span>
@@ -249,7 +229,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
+                        <a id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
                             <img alt="file" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/file.svg"></img>
                             <img alt="file" className="layout-menu-icon-active" src="showcase/resources/images/mono/file-active.svg"></img>
                             <span>File</span>
@@ -260,7 +240,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
+                        <a id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
                             <img alt="menu" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/menu.svg"></img>
                             <img alt="menu" className="layout-menu-icon-active" src="showcase/resources/images/mono/menu-active.svg"></img>
                             <span>Menu</span>
@@ -281,7 +261,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
+                        <a id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
                             <img alt="charts" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/charts.svg"></img>
                             <img alt="charts" className="layout-menu-icon-active" src="showcase/resources/images/mono/charts-active.svg"></img>
                             <span>Chart</span>
@@ -298,7 +278,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
+                        <a id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
                             <img alt="message" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/message.svg"></img>
                             <img alt="message" className="layout-menu-icon-active" src="showcase/resources/images/mono/message-active.svg"></img>
                             <span>Messages</span>
@@ -310,7 +290,7 @@ class AppMenu extends Component {
                             </div>
                         </div>
 
-                        <a href="#" id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
+                        <a id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
                             <img alt="multimedia" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/multimedia.svg"></img>
                             <img alt="multimedia" className="layout-menu-icon-active" src="showcase/resources/images/mono/multimedia-active.svg"></img>
                             <span>Multimedia</span>
@@ -319,7 +299,7 @@ class AppMenu extends Component {
 
                         </div>
 
-                        <a href="#" id="menu_dnd" onClick={(event) => this.openMenu(event, 10)} className={classNames({ 'active-menuitem': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
+                        <a id="menu_dnd" onClick={(event) => this.openMenu(event, 10)} className={classNames({ 'active-menuitem': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
                             <img alt="dragdrop" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/dragdrop.svg"></img>
                             <img alt="dragdrop" className="layout-menu-icon-active" src="showcase/resources/images/mono/dragdrop-active.svg"></img>
                             <span>DragDrop</span>
@@ -328,7 +308,7 @@ class AppMenu extends Component {
 
                         </div>
 
-                        <a href="#" id="menu_misc" onClick={(event) => this.openMenu(event, 11)} className={classNames({ 'active-menuitem': this.state.activeMenu === 11 })}>
+                        <a id="menu_misc" onClick={(event) => this.openMenu(event, 11)} className={classNames({ 'active-menuitem': this.state.activeMenu === 11 })}>
                             <img alt="misc" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/misc.svg"></img>
                             <img alt="misc" className="layout-menu-icon-active" src="showcase/resources/images/mono/misc-active.svg"></img>
                             <span>Misc</span>
@@ -390,10 +370,10 @@ class App extends Component {
         return (
             <div className='layout-wrapper'>
                 <div id="layout-topbar">
-                    <a href="#" className="menu-button" onClick={this.openMenu}>
+                    <a className="menu-button" onClick={this.openMenu}>
                         <i className="fa fa-bars"></i>
                     </a>
-                    <a href="#" className="logo">
+                    <a className="logo">
                         <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
                     </a>
 
@@ -403,7 +383,7 @@ class App extends Component {
                         </li>
 
                         <li className="topbar-menu-themes">
-                            <a href="#">THEMES</a>
+                            <a>THEMES</a>
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
@@ -411,22 +391,22 @@ class App extends Component {
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
                                 <li className="topbar-submenu-header">THEMES</li>
-                                <li><a href="#" data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
-                                <li><a href="#" data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
-                                <li><a href="#" data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
-                                <li><a href="#" data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
-                                <li><a href="#" data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
-                                <li><a href="#" data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
-                                <li><a href="#" data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
-                                <li><a href="#" data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
-                                <li><a href="#" data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
-                                <li><a href="#" data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
-                                <li><a href="#" data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
-                                <li><a href="#" data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
-                                <li><a href="#" data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
-                                <li><a href="#" data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
-                                <li><a href="#" data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
-                                <li><a href="#" data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
+                                <li><a data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
+                                <li><a data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
+                                <li><a data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
+                                <li><a data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
+                                <li><a data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
+                                <li><a data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
+                                <li><a data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
+                                <li><a data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
+                                <li><a data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
+                                <li><a data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
+                                <li><a data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
+                                <li><a data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
+                                <li><a data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
+                                <li><a data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
+                                <li><a data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
+                                <li><a data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
                             </ul>
                         </li>
 
@@ -444,9 +424,102 @@ class App extends Component {
                 </div>
 
                 <div id="layout-content">
-                    <div>
-                        {this.props.children || <Home />}
-                    </div>
+                    <Route exact path="/" component={HomeComponent} />
+                    <Route path="/accordion" component={AccordionDemo} />
+                    <Route path="/autocomplete" component={AutoCompleteDemo} />
+                    <Route path="/button" component={ButtonDemo} />
+                    <Route path="/checkbox" component={CheckboxDemo} />
+                    <Route path="/chips" component={ChipsDemo} />
+                    <Route path="/dialog" component={DialogDemo} />
+                    <Route path="/dropdown" component={DropdownDemo} />
+                    <Route path="/grid" component={GridDemo} />
+                    <Route path="/growl" component={GrowlDemo} />
+                    <Route path="/fieldset" component={FieldsetDemo} />
+                    <Route path="/fileupload" component={FileUploadDemo} />
+                    <Route path="/inputtext" component={InputTextDemo} />
+                    <Route path="/inputtextarea" component={InputTextareaDemo} />
+                    <Route path="/listbox" component={ListBoxDemo} />
+                    <Route path="/messages" component={MessagesDemo} />
+                    <Route path="/multiselect" component={MultiSelectDemo} />
+                    <Route path="/overlaypanel" component={OverlayPanelDemo} />
+                    <Route path="/panel" component={PanelDemo} />
+                    <Route path="/progressbar" component={ProgressBarDemo} />
+                    <Route path="/radiobutton" component={RadioButtonDemo} />
+                    <Route path="/tabview" component={TabViewDemo} />
+                    <Route path="/togglebutton" component={ToggleButtonDemo} />
+                    <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
+                    <Route path="/selectbutton" component={SelectButtonDemo} />
+                    <Route path="/inputswitch" component={InputSwitchDemo} />
+                    <Route path="/inputmask" component={InputMaskDemo} />
+                    <Route path="/slider" component={SliderDemo} />
+                    <Route path="/spinner" component={SpinnerDemo} />
+                    <Route path="/calendar" component={CalendarDemo} />
+                    <Route path="/chartdemo" component={ChartDemo} />
+                    <Route path="/piechart" component={PieChartDemo} />
+                    <Route path="/doughnutchart" component={DoughnutChartDemo} />
+                    <Route path="/linechart" component={LineChartDemo} />
+                    <Route path="/barchart" component={BarChartDemo} />
+                    <Route path="/polarareachart" component={PolarAreaChartDemo} />
+                    <Route path="/radarchart" component={RadarChartDemo} />
+                    <Route path="/paginator" component={PaginatorDemo} />
+                    <Route path="/datalist" component={DataListDemo} />
+                    <Route path="/datagrid" component={DataGridDemo} />
+                    <Route exact path="/datatable" component={DataTableDemo} />
+                    <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
+                    <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
+                    <Route path="/datatable/sort" component={DataTableSortDemo} />
+                    <Route path="/datatable/filter" component={DataTableFilterDemo} />
+                    <Route path="/datatable/scroll" component={DataTableScrollDemo} />
+                    <Route path="/datatable/lazy" component={DataTableLazyDemo} />
+                    <Route path="/datatable/selection" component={DataTableSelectionDemo} />
+                    <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />
+                    <Route path="/datatable/contextmenu" component={DataTableContextMenuDemo} />
+                    <Route path="/datatable/coltoggle" component={DataTableColTogglerDemo} />
+                    <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
+                    <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
+                    <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
+                    <Route path="/datatable/colreorder" component={DataTableColReorderDemo} />
+                    <Route path="/datatable/export" component={DataTableExportDemo} />
+                    <Route path="/datatable/edit" component={DataTableEditDemo} />
+                    <Route path="/datatable/rowgroup" component={DataTableRowGroupDemo} />
+                    <Route path="/datatable/crud" component={DataTableCrudDemo} />
+                    <Route path="/datatable/style" component={DataTableStyleDemo} />
+                    <Route path="/orderlist" component={OrderListDemo} />
+                    <Route path="/picklist" component={PickListDemo} />
+                    <Route path="/schedule" component={ScheduleDemo} />
+                    <Route path="/tree" component={TreeDemo} />
+                    <Route path="/treetable" component={TreeTableDemo} />
+                    <Route path="/captcha" component={CaptchaDemo} />
+                    <Route path="/colorpicker" component={ColorPickerDemo} />
+                    <Route path="/password" component={PasswordDemo} />
+                    <Route path="/toolbar" component={ToolbarDemo} />
+                    <Route path="/lightbox" component={LightboxDemo} />
+                    <Route path="/rating" component={RatingDemo} />
+                    <Route exact path="/datascroller" component={DataScrollerDemo} />
+                    <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
+                    <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
+                    <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
+                    <Route path="/menumodel" component={MenuModelDemo} />
+                    <Route path="/menu" component={MenuDemo} />
+                    <Route path="/tabmenu" component={TabMenuDemo} />
+                    <Route path="/breadcrumb" component={BreadcrumbDemo} />
+                    <Route path="/tieredmenu" component={TieredMenuDemo} />
+                    <Route path="/menubar" component={MenubarDemo} />
+                    <Route path="/contextmenu" component={ContextMenuDemo} />
+                    <Route path="/panelmenu" component={PanelMenuDemo} />
+                    <Route path="/slidemenu" component={SlideMenuDemo} />
+                    <Route path="/steps" component={StepsDemo} />
+                    <Route path="/megamenu" component={MegaMenuDemo} />
+                    <Route path="/setup" component={SetupPage} />
+                    <Route path="/splitbutton" component={SplitButtonDemo} />
+                    <Route path="/organizationchart" component={OrganizationChartDemo} />
+                    <Route path="/theming" component={ThemingPage} />
+                    <Route path="/inputgroup" component={InputGroupDemo} />
+                    <Route path="/editor" component={EditorDemo} />
+                    <Route path="/tooltip" component={TooltipDemo} />
+                    <Route path="/sidebar" component={SidebarDemo} />
+                    <Route path="/gmap" component={GMapDemo} />
+                    <Route path="/progressspinner" component={ProgressSpinnerDemo} />
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>
@@ -458,7 +531,6 @@ class App extends Component {
                 </div>
 
             </div>
-
         );
     }
 }

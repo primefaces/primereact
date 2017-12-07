@@ -12,7 +12,7 @@ interface ListBoxProps {
     multiple?: boolean,
     metaKeySelection?: boolean,
     filter?: boolean,
-    onChange?(originalEvent: Event, value: any): void;
+    onChange?({originalEvent: Event, value: any}): void;
 }
 
 export class ListBox extends React.Component<ListBoxProps,any> {}

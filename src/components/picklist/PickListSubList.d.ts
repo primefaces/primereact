@@ -10,7 +10,7 @@ interface PickListSubListProps {
     showControls?: boolean;
     itemTemplate?(): void;
     onItemClick?(): void;
-    onSelectionChange?(event: Event, value: Array<any>): void;
+    onSelectionChange?({event: Event, value: any}): void;
 }
 
 export class PickListSubList extends React.Component<PickListSubListProps,any> {}

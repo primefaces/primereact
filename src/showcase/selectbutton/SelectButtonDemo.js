@@ -36,7 +36,7 @@ export class SelectButtonDemo extends Component {
 
                     <h3>Multiple</h3>
                     <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(event) => this.setState({value2: event.value})} />
-                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val)}</p>
+                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val + " ")}</p>
                 </div>
 
                 <SelectButtonDoc></SelectButtonDoc>
@@ -120,7 +120,7 @@ var cities = [
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -222,7 +222,7 @@ var cities = [
         </TabPanel>
 
         <TabPanel header="Source">
-            <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/selectbutton" className="btn-viewsource" target="_blank">
+            <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/selectbutton" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
@@ -264,7 +264,7 @@ export class SelectButtonDemo extends Component {
 
                     <h3>Multiple</h3>
                     <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(event) => this.setState({value2: event.value})} />
-                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val)}</p>
+                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val + " ")}</p>
                 </div>
             </div>
         );

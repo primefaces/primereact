@@ -169,6 +169,10 @@
     border: 1px solid transparent;
 }
 
+.ui-datatable.ui-datatable-resizable .ui-datatable-thead > tr > th:last-child .ui-column-resizer {
+    display: none;
+}
+
 .ui-datatable .ui-column-resizer-helper {
     width: 1px;
     position: absolute;

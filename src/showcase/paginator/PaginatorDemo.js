@@ -8,14 +8,22 @@ export class PaginatorDemo extends Component {
 
     constructor() {
         super();
-        this.state = {first: 0, rows: 10};
+        this.state = {first: 0, rows: 10, first2: 0, rows2: 10};
         this.onPageChange = this.onPageChange.bind(this);
+        this.onPageChange2 = this.onPageChange2.bind(this);
     }
 
     onPageChange(event) {
         this.setState({
             first: event.first,
             rows: event.rows
+        });
+    }
+
+    onPageChange2(event) {
+        this.setState({
+            first2: event.first,
+            rows2: event.rows
         });
     }
 
@@ -34,7 +42,7 @@ export class PaginatorDemo extends Component {
                     <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
                     
                     <h3>Custom Template</h3>
-                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}
+                    <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
                         template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
                 </div>
 
@@ -109,7 +117,7 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
                 <li>CurrentPageReport</li>
             </ul>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -168,6 +176,18 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
                             <td>string</td>
                             <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
                             <td>Template of the paginator.</td>
+                        </tr>
+                        <tr>
+                            <td>leftContent</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template instance to inject into the left side of the paginator.</td>
+                        </tr>
+                        <tr>
+                            <td>rightContent</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template instance to inject into the right side of the paginator.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -251,45 +271,57 @@ import {Paginator} from 'primereact/components/paginator/Paginator';
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/paginator" className="btn-viewsource" target="_blank">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/paginator" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
 <CodeHighlight className="javascript">
 {`
 export class PaginatorDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {first: 0, rows: 10};
-        this.onPageChange = this.onPageChange.bind(this);
-    }
-
-    onPageChange(event) {
-        this.setState({
-            first: event.first,
-            rows: event.rows
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section">
-                    <div className="feature-intro">
-                        <h1>Paginator</h1>
-                        <p>Paginator is a generic widget to display content in paged format.</p>
+    
+        constructor() {
+            super();
+            this.state = {first: 0, rows: 10, first2: 0, rows2: 10};
+            this.onPageChange = this.onPageChange.bind(this);
+            this.onPageChange2 = this.onPageChange2.bind(this);
+        }
+    
+        onPageChange(event) {
+            this.setState({
+                first: event.first,
+                rows: event.rows
+            });
+        }
+    
+        onPageChange2(event) {
+            this.setState({
+                first2: event.first,
+                rows2: event.rows
+            });
+        }
+    
+        render() {
+            return (
+                <div>
+                    <div className="content-section introduction">
+                        <div className="feature-intro">
+                            <h1>Paginator</h1>
+                            <p>Paginator is a generic widget to display content in paged format.</p>
+                        </div>
+                    </div>
+    
+                    <div className="content-section implementation">
+                        <h3>Default</h3>
+                        <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
+                        
+                        <h3>Custom Template</h3>
+                        <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
+                            template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
                     </div>
                 </div>
-
-                <div className="content-section implementation">
-                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
-                </div>
-
-            </div>
-        );
+            );
+        }
     }
-}
 
 `}
 </CodeHighlight>

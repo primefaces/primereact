@@ -7,17 +7,10 @@ export class ColorPickerDemo extends Component {
         
     constructor() {
         super();
-        this.state = {color1: null, color2: '1976D2'};
-        this.onOverlayChange = this.onOverlayChange.bind(this);
-        this.onInlineChange = this.onInlineChange.bind(this);
-    }
-
-    onInlineChange(e) {
-        this.setState({color1: e.value});
-    }
-
-    onOverlayChange(e) {
-        this.setState({color2: e.value});
+        this.state = {
+            color1: null, 
+            color2: '1976D2'
+        };
     }
 
     render() {
@@ -32,11 +25,11 @@ export class ColorPickerDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Inline</h3>
-                    <ColorPicker inline="true" onChange={this.onInlineChange.bind(this)}></ColorPicker>
+                    <ColorPicker inline="true" value={this.state.color1} onChange={(e) => this.setState({ color1: e.value })}></ColorPicker>
                     <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + this.state.color1}}></span> {this.state.color1} </p>
                 
                     <h3>Overlay</h3>
-                    <ColorPicker value={this.state.color2} onChange={this.onOverlayChange}></ColorPicker>
+                    <ColorPicker value={this.state.color2} onChange={(e) => this.setState({ color2: e.value })}></ColorPicker>
                     <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'color':'#' + this.state.color2}}>{this.state.color2}</span></p> 
                 </div>
 
@@ -90,7 +83,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
 </CodeHighlight>
 
 
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -127,6 +120,12 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                                         <td>Style class of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>defaultColor</td>
+                                        <td>string</td>
+                                        <td>ff0000</td>
+                                        <td>Default color to display when value is null.</td>
+                                    </tr>
+                                    <tr>
                                         <td>inline</td>
                                         <td>boolean</td>
                                         <td>false</td>
@@ -140,9 +139,9 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>any</td>
+                                        <td>DOM element</td>
                                         <td>null</td>
-                                        <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
+                                        <td>DOM element instance where the dialog should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>disabled</td>
@@ -151,7 +150,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                                         <td>When present, it specifies that the component should be disabled.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
+                                        <td>tabIndex</td>
                                         <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
@@ -179,9 +178,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                                 <tbody>
                                     <tr>
                                         <td>onChange</td>
-                                        <td>event.originalEvent: Browser event<br />
-                                            event.value: Selected color
-                                        </td>
+                                        <td>event.value: Selected color</td>
                                         <td>Callback to invoke when a color is selected.</td>
                                     </tr>
                                 </tbody>
@@ -248,34 +245,29 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/colorpicker" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/colorpicker" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
 <CodeHighlight className="javascript">
 {`
+import React, {Component} from 'react';
+import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
+
 export class ColorPickerDemo extends Component {
         
     constructor() {
         super();
-        this.state = {color1: null, color2: '1976D2'};
-        
-        this.onOverlayChange = this.onOverlayChange.bind(this);
-        this.onInlineChange = this.onInlineChange.bind(this);
-    }
-
-    onInlineChange(e) {
-        this.setState({color1: e.value});
-    }
-
-    onOverlayChange(e) {
-        this.setState({color2: e.value});
+        this.state = {
+            color1: null, 
+            color2: '1976D2'
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ColorPicker</h1>
                         <p>ColorPicker is an input component to select a color.</p>
@@ -284,15 +276,13 @@ export class ColorPickerDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Inline</h3>
-                    <ColorPicker inline="true" onChange={this.onInlineChange.bind(this)}></ColorPicker>
+                    <ColorPicker inline="true" value={this.state.color1} onChange={(e) => this.setState({ color1: e.value })}></ColorPicker>
                     <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + this.state.color1}}></span> {this.state.color1} </p>
                 
                     <h3>Overlay</h3>
-                    <ColorPicker value={this.state.color2} onChange={this.onOverlayChange}></ColorPicker>
+                    <ColorPicker value={this.state.color2} onChange={(e) => this.setState({ color2: e.value })}></ColorPicker>
                     <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'color':'#' + this.state.color2}}>{this.state.color2}</span></p> 
                 </div>
-
-                <ColorPickerDoc />
             </div>
         )
     }

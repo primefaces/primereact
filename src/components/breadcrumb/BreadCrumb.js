@@ -65,7 +65,7 @@ export class BreadCrumb extends Component {
                        onClick={event=>this.itemClick(event,this.props.home)}>
                         <span className="fa fa-home"></span>
                     </a>:
-                    <a href='#' className={homeClass} target={this.props.home.target}
+                    <a className={homeClass} target={this.props.home.target}
                        onClick={event=>this.itemClick(event,this.props.home)}>
                         <span className="fa fa-home"></span>
                     </a>}

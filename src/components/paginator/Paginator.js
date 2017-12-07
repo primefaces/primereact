@@ -20,7 +20,9 @@ export class Paginator extends Component {
         style: null,
         className: null,
         template: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-        onPageChange: null
+        onPageChange: null,
+        leftContent: null,
+        rightContent: null
     }
 
     static propsTypes = {
@@ -32,7 +34,9 @@ export class Paginator extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         template: PropTypes.string,
-        onPageChange: PropTypes.func
+        onPageChange: PropTypes.func,
+        leftContent: PropTypes.any,
+        rightContent: PropTypes.any
     }
     
     constructor(props) {
@@ -178,10 +182,15 @@ export class Paginator extends Component {
             
             return element;
         });
+
+        let leftContent = this.props.leftContent && <div className="ui-paginator-left-content" >{this.props.leftContent}</div>;
+        let rightContent = this.props.rightContent && <div className="ui-paginator-right-content" >{this.props.rightContent}</div>
         
         return (
             <div className={className} style={this.props.style}>
+                {leftContent}
                 {paginatorElements}
+                {rightContent}
             </div>
         );
     }

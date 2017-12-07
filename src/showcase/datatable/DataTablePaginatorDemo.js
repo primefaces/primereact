@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import {Button} from "../../components/button/Button";
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -21,6 +22,8 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     render() {
+        let paginatorLeft = <Button icon="fa-refresh"/>;
+        let paginatorRight = <Button icon="fa-cloud-upload"/>;
         return (
             <div>
                 <DataTableSubmenu />
@@ -33,7 +36,7 @@ export class DataTablePaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} rowsPerPageOptions={[5,10,20]} >
+                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} rows={10} rowsPerPageOptions={[5,10,20]} >
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -80,6 +83,8 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     render() {
+        let paginatorLeft = <Button icon="fa-refresh"/>;
+        let paginatorRight = <Button icon="fa-cloud-upload"/>;
         return (
             <div>
                 <div className="content-section introduction">
@@ -90,7 +95,7 @@ export class DataTablePaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} rowsPerPageOptions={[5,10,20]}>
+                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} rows={10} rowsPerPageOptions={[5,10,20]}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />

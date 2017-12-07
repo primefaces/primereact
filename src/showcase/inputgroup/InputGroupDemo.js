@@ -61,7 +61,7 @@ export class InputGroupDemo extends Component {
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon">www</span>
+                                <span className="ui-inputgroup-addon">W</span>
                                 <InputText placeholder="Website"/>
                             </div>
                         </div>
@@ -148,7 +148,7 @@ class InputGroupDoc extends Component {
             <div className="content-section source">
                 <TabView effect="fade">
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputgroup" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputgroup" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
@@ -209,7 +209,7 @@ export class InputGroupDemo extends Component {
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon">www</span>
+                                <span className="ui-inputgroup-addon">W</span>
                                 <InputText placeholder="Website"/>
                             </div>
                         </div>

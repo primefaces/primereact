@@ -29,17 +29,21 @@ export class RadioButtonDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <RadioButton value="New York" label="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <RadioButton inputId="rb1" value="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <label htmlFor="rb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <RadioButton inputId="rb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <label htmlFor="rb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <RadioButton inputId="rb2" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="rb2">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}
                 </div>
+
                 <RadioButtonDoc></RadioButtonDoc>
             </div>
         )
@@ -99,7 +103,7 @@ onCityChange(e) {
 `}
 </CodeHighlight>
 
-                    <h3>Attributes</h3>
+                    <h3>Properties</h3>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -118,10 +122,16 @@ onCityChange(e) {
                                     <td>Unique identifier of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>label</td>
+                                    <td>inputId</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Label of the radiobutton.</td>
+                                    <td>Unique identifier of the inner native radiobutton.</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the checkbox element .</td>
                                 </tr>
                                 <tr>
                                     <td>value</td>
@@ -134,6 +144,18 @@ onCityChange(e) {
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>Specifies whether a radiobutton should be checked or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -196,7 +218,7 @@ onCityChange(e) {
                     <p>None.</p>
                 </TabPanel>
                 <TabPanel header="Source">
-                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/radiobutton" className="btn-viewsource" target="_blank">
+                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/radiobutton" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                         <i className="fa fa-github"></i>
                         <span>View on GitHub</span>
                     </a>
@@ -227,13 +249,16 @@ export class RadioButtonDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <RadioButton value="New York" label="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <RadioButton inputId="rb1" value="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <label htmlFor="rb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <RadioButton inputId="rb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <label htmlFor="rb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <RadioButton inputId="rb2" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="rb2">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}

@@ -80,7 +80,7 @@ export class TieredMenu extends Component{
 
         return(
             <div id={this.props.id} className={divClass} style={this.props.style} ref={el=>this.container=el}>
-                <NestedMenu className={ulClass} items={this.props.model} root={true} parentMenu="TieredMenu" index={0}/>
+                <NestedMenu className={ulClass} items={this.props.model} root={true} parentMenu="TieredMenu" index={Math.random()}/>
             </div>
         );
     }

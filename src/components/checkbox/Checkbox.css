@@ -1,13 +1,8 @@
-.ui-chkbox-container{
-    display: inline-block;
-    vertical-align: middle;
-}
-
 .ui-chkbox {
-    display: inline-flex;
+    display: inline-block;
     cursor: pointer;
     vertical-align: middle;
-    margin-right: .5em;
+    margin-right: .25em;
 }
 
 .ui-chkbox .ui-chkbox-box {
@@ -26,4 +21,8 @@
 
 .ui-chkbox-label {
     vertical-align: middle;  
+}
+
+.ui-chkbox + label {
+    vertical-align: middle;
 }

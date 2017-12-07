@@ -46,8 +46,8 @@ export class DataTable extends Component {
         frozenFooterColumnGroup: null,
         rowExpansionTemplate: null,
         expandedRows: null,
-        responsive: false,
         onRowToggle: null,
+        responsive: false,
         resizableColumns: false,
         columnResizeMode: 'fit',
         reorderableColumns: false,
@@ -80,7 +80,9 @@ export class DataTable extends Component {
         onRowExpand: null,
         onRowCollapse: null,
         onContextMenuSelect: null,
-        onColReorder: null
+        onColReorder: null,
+        paginatorLeft:null,
+        paginatorRight: null
     }
 
     static propTypes = {
@@ -152,7 +154,9 @@ export class DataTable extends Component {
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
         onContextMenuSelect: PropTypes.func,
-        onColReorder: PropTypes.func
+        onColReorder: PropTypes.func,
+        paginatorLeft: PropTypes.any,
+        paginatorRight: PropTypes.any
     };
 
     constructor(props) {
@@ -201,7 +205,7 @@ export class DataTable extends Component {
         let className = 'ui-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                          totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions}/>;
+                          totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight}/>;
     }
 
     onSort(event) {
@@ -318,7 +322,7 @@ export class DataTable extends Component {
     onFilter(event) {
         let filterMetadata = this.state.filters||{};
         if(!this.isFilterBlank(event.value))
-            filterMetadata[event.field] = {value: event.value};
+            filterMetadata[event.field] = {value: event.value, matchMode: event.matchMode};
         else if(filterMetadata[event.field])
             delete filterMetadata[event.field];
 
@@ -388,6 +392,10 @@ export class DataTable extends Component {
         if(nextProps.sortOrder) { this.setState({sortOrder: nextProps.sortOrder}) }
         if(nextProps.multiSortMeta) { this.setState({multiSortMeta: nextProps.multiSortMeta}) }
         if(nextProps.filters) { this.setState({filters: nextProps.filters}) }
+
+        if(nextProps.globalFilter !== this.props.globalFilter) {
+            this.setState({first: 0});
+        }
     }
 
     fixColumnWidths() {
@@ -457,27 +465,28 @@ export class DataTable extends Component {
                         nextColumn.style.width = nextColumnWidth + 'px';
                     }
                     
-                    /*if(this.scrollable) {
-                        let colGroup = this.domHandler.findSingle(this.el.nativeElement, 'colgroup.ui-datatable-scrollable-colgroup');
-                        let resizeColumnIndex = this.domHandler.index(this.resizeColumn);
+                    if(this.props.scrollable) {
+                        let colGroup = DomHandler.findSingle(this.container, 'colgroup.ui-datatable-scrollable-colgroup');
+                        let resizeColumnIndex = DomHandler.index(this.resizeColumn);
                         colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
                         
                         if(nextColumn) {
                             colGroup.children[resizeColumnIndex + 1].style.width = nextColumnWidth + 'px';
                         }
-                    }*/
+                    }
                 }
             }
             else if(this.props.columnResizeMode === 'expand') {
-                this.table.style.width = this.table.offsetWidth + delta + 'px';
+                let table = DomHandler.findSingle(this.container, 'tbody.ui-datatable-data').parentElement;
+                table.style.width = table.offsetWidth + delta + 'px';
                 this.resizeColumn.style.width = newColumnWidth + 'px';
-                let containerWidth = this.table.style.width;
+                let containerWidth = table.style.width;
                 
-                if(this.scrollable) {
-                    /*this.domHandler.findSingle(this.el.nativeElement, '.ui-datatable-scrollable-header-box').children[0].style.width = containerWidth;
-                    let colGroup = this.domHandler.findSingle(this.el.nativeElement, 'colgroup.ui-datatable-scrollable-colgroup');
-                    let resizeColumnIndex = this.domHandler.index(this.resizeColumn);
-                    colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';*/
+                if(this.props.scrollable) {
+                    DomHandler.findSingle(this.container, '.ui-datatable-scrollable-header-box').children[0].style.width = containerWidth;
+                    let colGroup = DomHandler.findSingle(this.container, 'colgroup.ui-datatable-scrollable-colgroup');
+                    let resizeColumnIndex = DomHandler.index(this.resizeColumn);
+                    colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
                 }
                 else {
                     this.container.style.width = containerWidth;
@@ -830,7 +839,7 @@ export class DataTable extends Component {
     }
 
     createTableBody(value, columns) {
-        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} 
+        return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
@@ -850,7 +859,7 @@ export class DataTable extends Component {
     }
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
-        return <ScrollableView header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
+        return <ScrollableView columns={columns} header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}
                 virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll}></ScrollableView>

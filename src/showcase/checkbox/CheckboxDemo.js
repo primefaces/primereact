@@ -35,13 +35,16 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <Checkbox value="New York" label="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}
@@ -122,7 +125,7 @@ onCityChange(e) {
 `}
 </CodeHighlight>
 
-                    <h3>Attributes</h3>
+                    <h3>Properties</h3>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -141,10 +144,10 @@ onCityChange(e) {
                                     <td>Unique identifier of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>label</td>
+                                    <td>inputId</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Label of the checkbox.</td>
+                                    <td>Unique identifier of the inner native radiobutton.</td>
                                 </tr>
                                 <tr>
                                     <td>value</td>
@@ -153,16 +156,28 @@ onCityChange(e) {
                                     <td>Value of the checkbox.</td>
                                 </tr>
                                 <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the checkbox element .</td>
+                                </tr>
+                                <tr>
                                     <td>checked</td>
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>Specifies whether a checkbox should be checked or not.</td>
                                 </tr>
                                 <tr>
-                                    <td>name</td>
+                                    <td>style</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Name of the checkbox element .</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -235,7 +250,7 @@ onCityChange(e) {
                     <p>None.</p>
                 </TabPanel>
                 <TabPanel header="Source">
-                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/checkbox" className="btn-viewsource" target="_blank">
+                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/checkbox" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                         <i className="fa fa-github"></i>
                         <span>View on GitHub</span>
                     </a>
@@ -270,15 +285,18 @@ export class CheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
+                   <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <Checkbox value="New York" label="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected Cities : {this.state.cities.map((city) => <span key={city}>{city}</span>)}

@@ -88,7 +88,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
 `}
 </CodeHighlight>
 
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <p>InputTextarea passes any attribute to the underlying textarea element, additional attributes are as follows;</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -135,7 +135,7 @@ import {InputTextarea} from 'primereact/components/inputtextarea/InputTextarea';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputtextarea" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputtextarea" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>

@@ -9,7 +9,7 @@ interface ToggleButtonProps {
     style?: object;
     className?: string;
     checked?: boolean;
-    onChange?(originalEvent: Event, value: boolean): void;
+    onChange?({originalEvent: Event, value: boolean}): void;
 }
 
 export class ToggleButton extends React.Component<ToggleButtonProps,any> {}

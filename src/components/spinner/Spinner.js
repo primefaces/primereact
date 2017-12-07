@@ -44,6 +44,23 @@ export class Spinner extends Component {
         if (Math.floor(this.props.step) === 0) {
             this.precision = this.props.step.toString().split(/[,]|[.]/)[1].length;
         }
+
+        this.onInputKeyUp = this.onInputKeyUp.bind(this);
+        this.onInputKeyDown = this.onInputKeyDown.bind(this);
+        this.onInputKeyPress = this.onInputKeyPress.bind(this);
+        this.onChange = this.onChange.bind(this);
+
+        this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
+        this.onUpButtonMouseDown = this.onUpButtonMouseDown.bind(this);
+        this.onUpButtonMouseUp = this.onUpButtonMouseUp.bind(this);
+        this.onUpButtonKeyDown = this.onUpButtonKeyDown.bind(this);
+        this.onUpButtonKeyUp = this.onUpButtonKeyUp.bind(this);
+
+        this.onDownButtonMouseLeave = this.onDownButtonMouseLeave.bind(this);
+        this.onDownButtonMouseDown = this.onDownButtonMouseDown.bind(this);
+        this.onDownButtonMouseUp = this.onDownButtonMouseUp.bind(this);
+        this.onDownButtonKeyDown = this.onDownButtonKeyDown.bind(this);
+        this.onDownButtonKeyUp = this.onDownButtonKeyUp.bind(this);
     }
 
     repeat(interval, dir) {
@@ -81,9 +98,9 @@ export class Spinner extends Component {
         this.formatValue();
 
         this.inputEl.value = this.valueAsString;
+        
         if (this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: this.value
             })
         }
@@ -94,30 +111,43 @@ export class Spinner extends Component {
         return String(Math.round(value * power) / power);
     }
 
-    onUpButtonMousedown(event, input) {
+    onUpButtonMouseDown(event) {
         if (!this.props.disabled) {
-            input.focus();
+            this.inputEl.focus();
             this.repeat(null, 1);
             this.updateFilledState();
             event.preventDefault();
         }
     }
 
-    onUpButtonMouseup(event) {
+    onUpButtonMouseUp(event) {
         if (!this.props.disabled) {
             this.clearTimer();
         }
     }
 
-    onUpButtonMouseleave(event) {
+    onUpButtonMouseLeave(event) {
         if (!this.props.disabled) {
             this.clearTimer();
         }
     }
 
-    onDownButtonMousedown(event, input) {
+    onUpButtonKeyUp(event) {
         if (!this.props.disabled) {
-            input.focus();
+            this.clearTimer();
+        }
+    }
+
+    onUpButtonKeyDown(event) {
+        if (event.which === 32 || event.which === 13) {
+            this.repeat(null, 1);
+            this.updateFilledState();
+        }
+    }
+
+    onDownButtonMouseDown(event, focusInput) {
+        if (!this.props.disabled) {
+            this.inputEl.focus();
             this.repeat(null, -1);
             this.updateFilledState();
             
@@ -125,19 +155,32 @@ export class Spinner extends Component {
         }
     }
 
-    onDownButtonMouseup(event) {
+    onDownButtonMouseUp(event) {
         if (!this.props.disabled) {
             this.clearTimer();
         }
     }
 
-    onDownButtonMouseleave(event) {
+    onDownButtonMouseLeave(event) {
         if (!this.props.disabled) {
             this.clearTimer();
         }
     }
 
-    onInputKeydown(event) {
+    onDownButtonKeyUp(event) {
+        if (!this.props.disabled) {
+            this.clearTimer();
+        }
+    }
+    
+    onDownButtonKeyDown(event) {
+        if(event.which === 32 || event.which === 13) {
+            this.repeat(null, -1);
+            this.updateFilledState();
+        }
+    }
+
+    onInputKeyDown(event) {
         if (event.which === 38) {
             this.spin(1);
             event.preventDefault();
@@ -156,25 +199,19 @@ export class Spinner extends Component {
         }
     }
 
-    onInput(event, inputValue) {
+    onInputKeyUp(event) {
+        let inputValue = event.target.value;
         this.value = this.parseValue(inputValue);
         this.formatValue();
         this.inputEl.value = this.valueAsString;
+
         if (this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: this.value
             })
         }
+
         this.updateFilledState();
-    }
-
-    onBlur() {
-        this.focus = false;
-    }
-
-    onFocus() {
-        this.focus = true;
     }
 
     parseValue(val) {
@@ -219,10 +256,9 @@ export class Spinner extends Component {
         }
     }
 
-    handleChange(event) {
+    onChange() {
         if (this.props.onChange) {
             this.props.onChange({
-                originalEvent: event,
                 value: this.value
             })
         }
@@ -248,27 +284,46 @@ export class Spinner extends Component {
         this.inputEl.value = this.valueAsString;
     }
 
-    render() {
+    renderInputElement() {
+        return (
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" className="ui-spinner-input"
+                size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly}
+                onKeyDown={this.onInputKeydown} onKeyUp={this.onInputKeyUp} onKeyPress={this.onInputKeyPress} 
+                onBlur={this.onInputBlur} onChange={this.onChange} onFocus={this.onInputFocus} />
+        );
+    }
 
-        var className = classNames("ui-spinner ui-widget ui-corner-all"),
-        upButtonClass = classNames("ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default", {
-            'ui-state-disabled': this.props.disabled
-        }),
-        downButtonClass = classNames("ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default", {
+    renderUpButton() {
+        let className = classNames("ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default", {
             'ui-state-disabled': this.props.disabled
         });
 
-        var inputElement = <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" className="ui-spinner-input"
-                                size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly}
-                                onKeyDown={this.onInputKeydown.bind(this)} onKeyUp={(e) => this.onInput(e, this.inputEl.value)} onKeyPress={this.onInputKeyPress.bind(this)} onBlur={this.onBlur.bind(this)} onChange={this.handleChange.bind(this)} onFocus={this.onFocus.bind(this)} />;
+        return (
+            <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
+                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled}>
+                <span className="fa fa-caret-up"></span>
+            </button>
+        );
+    }
 
-        var upButton = <button className={upButtonClass} onMouseLeave={this.onUpButtonMouseleave.bind(this)} onMouseDown={(e) => this.onUpButtonMousedown(e, this.inputEl)} onMouseUp={this.onUpButtonMouseup.bind(this)} disabled={this.props.disabled}>
-                          <span className="fa fa-caret-up"></span>
-                       </button>;
+    renderDownButton() {
+        let className = classNames("ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default", {
+            'ui-state-disabled': this.props.disabled
+        });
 
-        var downButton = <button className={downButtonClass} onMouseLeave={this.onDownButtonMouseleave.bind(this)} onMouseDown={(e) => this.onDownButtonMousedown(e, this.inputEl)} onMouseUp={this.onDownButtonMouseup.bind(this)} disabled={this.props.disabled}>
-                            <span className="fa fa-caret-down"></span>
-                         </button>;
+        return (
+            <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp} 
+                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled}>
+                <span className="fa fa-caret-down"></span>
+            </button>
+        );
+    }
+
+    render() {
+        let className = classNames("ui-spinner ui-widget ui-corner-all");
+        let inputElement = this.renderInputElement();
+        let upButton = this.renderUpButton();
+        let downButton = this.renderDownButton();
 
         return (
             <span id={this.props.id} className={className} style={this.props.style}>

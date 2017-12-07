@@ -13,7 +13,9 @@ export class TreeNode extends Component {
         selectionMode: null,
         onNodeTouchEnd: null,
         onNodeClick: null,
-        isSelected: null
+        isSelected: null,
+        onNodeExpand: null,
+        onNodeCollapse: null
     }
 
     static propsTypes = {
@@ -25,7 +27,9 @@ export class TreeNode extends Component {
         selectionMode: PropTypes.string,
         onNodeTouchEnd: PropTypes.func,
         onNodeClick: PropTypes.func,
-        isSelected: PropTypes.func
+        isSelected: PropTypes.func,
+        onNodeExpand: PropTypes.func,
+        onNodeCollapse: PropTypes.func
     }
 
     constructor(props) {
@@ -52,6 +56,13 @@ export class TreeNode extends Component {
     }
 
     toggle(event) {
+        if(this.state.expanded && this.props.onNodeCollapse) {
+            this.props.onNodeCollapse({originalEvent: event, node: this.node});
+        }
+        else if(this.props.onNodeExpand) {
+            this.props.onNodeExpand({originalEvent: event, node: this.node});
+        }
+
         this.setState({ expanded: !this.state.expanded });
     }
 
@@ -101,7 +112,7 @@ export class TreeNode extends Component {
             {
                 this.node.children && this.node.children.map((child, i) => {
                     return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
-                        onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={false}/>)
+                        onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={false} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
                 })
             }
         </ul>);
@@ -164,7 +175,7 @@ export class TreeNode extends Component {
                 {
                     this.node.children && this.node.children.map((child, i) => {
                         return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
-                            onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={true}/>)
+                            onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={true} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
                     })
                 }
             </div>
@@ -520,7 +531,7 @@ export class Tree extends Component {
             container = this.props.value && this.props.value[0] && (
                 <table>
                     <TreeNode node={this.props.value[0]} root={true} index={0} isHorizontal={true} selectionMode={this.props.selectionMode} 
-                        onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected}></TreeNode>
+                        onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}></TreeNode>
                 </table>)
         }
         else {
@@ -528,7 +539,7 @@ export class Tree extends Component {
                 {
                     this.props.value && this.props.value.map((node, index) => {
                         return (<TreeNode key={'node_' + index} node={node} index={index} parentNode={this.props.value} isHorizontal={false} selectionMode={this.props.selectionMode}
-                            onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected}/>)
+                            onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
                     })
                 }
             </ul>);

@@ -149,7 +149,7 @@ componentDidMount() {
             <h3>Responsive</h3>
             <p>DataGrid is responsive by default, when the screen gets smaller than a certain value, items are displayed as stacked.</p>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -320,7 +320,7 @@ componentDidMount() {
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datagrid" className="btn-viewsource" target="_blank">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datagrid" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>

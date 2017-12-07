@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
@@ -27,15 +28,6 @@ export class OverlayPanel extends Component {
         super(props);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
-    }
-
-    componentDidMount() {
-        if(this.props.appendTo) {
-            if(this.props.appendTo === 'body')
-                document.body.appendChild(this.panel);
-            else
-                DomHandler.appendChild(this.panel, this.props.appendTo);
-        }
     }
     
     bindDocumentClickListener() {
@@ -119,27 +111,45 @@ export class OverlayPanel extends Component {
     }
 
     isVisible() {
-        return this.container.offsetParent;
+        return this.container && this.container.offsetParent;
     }
 
-    render() {
-        let className = classNames('ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
-        let closeIcon;
-        
+    renderCloseIcon() {
         if(this.props.showCloseIcon) {
-            closeIcon = <a href="#" className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
-                            <span className="fa fa-fw fa-close"></span>
-                        </a>;
+            return (
+                <a className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
+                    <span className="fa fa-fw fa-close"></span>
+                </a>
+            );
         }
+        else {
+            return null;
+        }
+    }
+
+    renderElement() {
+        let className = classNames('ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        let closeIcon = this.renderCloseIcon();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} 
-                onClick={this.onPanelClick} ref={(el) => {this.container = el}}>
+            <div id={this.props.id} className={className} style={this.props.style}
+                onClick={this.onPanelClick} ref={(el) => { this.container = el }}>
                 <div className="ui-overlaypanel-content">
                     {this.props.children}
                 </div>
                 {closeIcon}
             </div>
         );
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        if (this.props.appendTo) {
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        }
+        else {
+            return element;
+        }
     }
 }

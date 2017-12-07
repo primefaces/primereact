@@ -29,7 +29,7 @@ export class Menubar extends Component{
 
         return(
             <div id={this.props.id} className={className} style={this.props.style}>
-                <NestedMenu className={ulClass} items={this.props.model} parentMenu="Menubar" root={true} index={0}>{this.props.children}</NestedMenu>
+                <NestedMenu className={ulClass} items={this.props.model} parentMenu="Menubar" root={true} index={Math.random()}>{this.props.children}</NestedMenu>
             </div>
         );
     }

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
-import {MultiSelectItem} from './MultiSelectItem';
-import {MultiSelectHeader} from './MultiSelectHeader';
+import { MultiSelectPanel } from './MultiSelectPanel';
+import { MultiSelectItem } from './MultiSelectItem';
+import { MultiSelectHeader } from './MultiSelectHeader';
 
 export class MultiSelect extends Component {
     
@@ -21,7 +22,8 @@ export class MultiSelect extends Component {
         filter: false,
         key: null,
         itemTemplate: null,
-        onChange: null
+        onChange: null,
+        appendTo: null
     };
 
     static propTypes = {
@@ -37,7 +39,8 @@ export class MultiSelect extends Component {
         filter: PropTypes.bool,
         key: PropTypes.string,
         itemTemplate: PropTypes.func,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        appendTo: PropTypes.object
     };
 
     constructor(props) {
@@ -45,6 +48,7 @@ export class MultiSelect extends Component {
         this.state = {
             filter: ''
         };
+
         this.onClick = this.onClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
@@ -78,7 +82,7 @@ export class MultiSelect extends Component {
         }
 
         if(!this.panelClick) {
-            if(this.panel.offsetParent) {
+            if(this.panel.element.offsetParent) {
                 this.hide();
             }
             else {
@@ -126,18 +130,28 @@ export class MultiSelect extends Component {
 
     show() {
         if(this.props.options && this.props.options.length) {
-            this.panel.style.zIndex = DomHandler.getZindex();
-            DomHandler.relativePosition(this.panel, this.container);
-            DomHandler.fadeIn(this.panel, 250);
-            this.panel.style.display = 'block';
+            this.panel.element.style.zIndex = DomHandler.getZindex();
+            this.alignPanel();
+            DomHandler.fadeIn(this.panel.element, 250);
+            this.panel.element.style.display = 'block';
             this.bindDocumentClickListener();
         }
     }
 
     hide() {
-        this.panel.style.display = 'none';
+        this.panel.element.style.display = 'none';
         this.unbindDocumentClickListener();
         this.clearClickState();
+    }
+
+    alignPanel() {
+        if (this.props.appendTo) {
+            DomHandler.absolutePosition(this.panel.element, this.container);
+            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+        }
+        else {
+            DomHandler.relativePosition(this.panel.element, this.container);
+        }            
     }
     
     onCloseClick(event) {
@@ -227,7 +241,7 @@ export class MultiSelect extends Component {
     }
 
     onDocumentClick() {
-        if(!this.selfClick && !this.panelClick && this.panel.offsetParent) {
+        if(!this.selfClick && !this.panelClick && this.panel.element.offsetParent) {
             this.hide();
         }
         
@@ -271,6 +285,13 @@ export class MultiSelect extends Component {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
 
+    renderHeader(items) {
+        return (
+            <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter}
+                onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} />
+        );
+    }
+
     render() {
         let className = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
             'ui-state-disabled': this.props.disabled
@@ -278,19 +299,21 @@ export class MultiSelect extends Component {
         let label = this.getLabel();
         let items = this.props.options;
         
-        if(items) {
-            if(this.hasFilter()) {
+        if (items) {
+            if (this.hasFilter()) {
                 items = this.filterOptions(items);
             }
-            
-            items = items.map((option) => {
+
+            items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
-                
-                return <MultiSelectItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} 
-                        selected={this.isSelected(option)} onClick={this.onOptionClick} />;
-                });
+
+                return <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} template={this.props.itemTemplate}
+                    selected={this.isSelected(option)} onClick={this.onOptionClick} />;
+            });
         }
-        
+
+        let header = this.renderHeader(items);
+
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
                 <div className="ui-helper-hidden-accessible">
@@ -302,16 +325,10 @@ export class MultiSelect extends Component {
                 <div className="ui-multiselect-trigger ui-state-default ui-corner-right">
                     <span className="fa fa-fw fa-caret-down ui-c"></span>
                 </div>
-                <div className="ui-multiselect-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow" 
-                    ref={(el) => this.panel = el} onClick={this.onPanelClick}>
-                    <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} 
-                        onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)}/>
-                    <div className="ui-multiselect-items-wrapper" style={{maxHeight: this.props.scrollHeight}}>
-                        <ul className="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
-                            {items}  
-                        </ul>
-                    </div>
-                </div>
+                <MultiSelectPanel ref={(el) => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
+                    scrollHeight={this.props.scrollHeight}>
+                    {items}
+                </MultiSelectPanel>
             </div>
         );
     }

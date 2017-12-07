@@ -1,11 +1,17 @@
-.ui-fieldset, .ui-fieldset .ui-fieldset-legend {
-    padding: 0.6em 1em;
+.ui-fieldset, 
+.ui-fieldset .ui-fieldset-legend {
+    padding: 0.5em 1em;
 }
 
 .ui-fieldset-toggleable .ui-fieldset-legend {
-    padding: 0.5em 1em 0.5em 0.5em;
+    padding: 0;
+}
+
+.ui-fieldset-toggleable .ui-fieldset-legend a {
+    padding: 0.5em 1em;
     cursor:pointer;
     white-space: nowrap;
+    display: block;
 }
 
 .ui-fieldset .ui-fieldset-toggler {
@@ -14,6 +20,21 @@
     vertical-align: middle;
 }
 
-.ui-fieldset .ui-fieldset-content-wrapper-overflown {
+.ui-fieldset .ui-fieldset-legend-text {
+    vertical-align: middle;
+}
+
+.ui-fieldset-content-wrapper-collapsed {
     overflow: hidden;
-} 
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+.ui-fieldset-content-wrapper-expanded {
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+}
+
+.ui-fieldset-content-wrapper-expanding {
+    overflow: hidden;
+}

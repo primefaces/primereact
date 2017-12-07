@@ -100,7 +100,7 @@ onClick(event) {
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -144,9 +144,9 @@ onClick(event) {
                         </tr>
                         <tr>
                             <td>appendTo</td>
-                            <td>any</td>
+                            <td>DOM element</td>
                             <td>null</td>
-                            <td>Target element to attach the panel, valid values are "body" or a ref of another element.</td>
+                            <td>DOM element instance where the dialog should be mounted.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -185,7 +185,7 @@ onClick(event) {
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/overlaypanel" className="btn-viewsource" target="_blank">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/overlaypanel" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>

@@ -6,8 +6,8 @@ interface MenuProps {
     popup?: boolean ;
     style?: object ;
     className?: string ;
-    onShow?(originalEvent: Event): void ;
-    onHide?(originalEvent: Event): void ;
+    onShow?({originalEvent: Event}): void ;
+    onHide?({originalEvent: Event}): void ;
 }
 
 export class Menu extends React.Component<MenuProps ,any> {}

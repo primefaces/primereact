@@ -18,7 +18,7 @@ export class ProgressBarDemo extends Component {
             val += Math.floor(Math.random() * 10) + 1;
             if(val >= 100) {
                 val = 100;
-                this.setState({msgs: [{severity: 'info', summary: 'Success', detail: 'Process Completed'}]});
+                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
                 clearInterval(this.interval);
             }
             this.setState({value1: val});
@@ -42,7 +42,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.msgs}/>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <h3>Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>
@@ -106,7 +106,7 @@ componentDidMount() {
         val += Math.floor(Math.random() * 10) + 1;
         if(val >= 100) {
             val = 100;
-            this.setState({msgs: [{severity: 'info', summary: 'Success', detail: 'Process Completed'}]});
+            this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
             clearInterval(this.interval);
         }
         this.setState({value1: val});
@@ -116,7 +116,7 @@ componentDidMount() {
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -215,7 +215,7 @@ componentDidMount() {
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/progressbar" className="btn-viewsource" target="_blank">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/progressbar" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
@@ -234,7 +234,7 @@ export class ProgressBarDemo extends Component {
             val += Math.floor(Math.random() * 10) + 1;
             if(val >= 100) {
                 val = 100;
-                this.setState({msgs: [{severity: 'info', summary: 'Success', detail: 'Process Completed'}]});
+                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
                 clearInterval(this.interval);
             }
             this.setState({value1: val});
@@ -252,7 +252,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl value={this.state.msgs}/>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <h3>Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>

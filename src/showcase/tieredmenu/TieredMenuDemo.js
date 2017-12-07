@@ -139,7 +139,7 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
 
 `}
                         </CodeHighlight>
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -259,7 +259,7 @@ import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/tieredmenu" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/tieredmenu" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>

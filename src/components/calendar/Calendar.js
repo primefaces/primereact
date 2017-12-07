@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {InputText} from '../inputtext/InputText';
-import {Button} from '../button/Button';
+import PropTypes from 'prop-types';
+import { InputText } from '../inputtext/InputText';
+import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import { CalendarPanel } from './CalendarPanel';
 
 export class Calendar extends Component {
 
@@ -92,7 +93,7 @@ export class Calendar extends Component {
         icon: PropTypes.string,
         utc: PropTypes.bool,
         showOnFocus: PropTypes.bool,
-        appendTo: PropTypes.string,
+        appendTo: PropTypes.object,
         readOnlyInput: PropTypes.bool,
         shortYearCutoff: PropTypes.string,
         minDate: PropTypes.any,
@@ -645,7 +646,7 @@ export class Calendar extends Component {
     }
     
     onButtonClick(event) {
-        if(!this.overlay.offsetParent || this.overlay.style.display === 'none') {
+        if(!this.panel.element.offsetParent || this.panel.element.style.display === 'none') {
             this.inputfield.focus();
             this.showOverlay();
         }
@@ -662,7 +663,7 @@ export class Calendar extends Component {
     
     onInputKeydown(event) {
         if(event.keyCode === 9) {
-            this.overlay.style.display = 'none';
+            this.panel.element.style.display = 'none';
         }
     }
     
@@ -868,20 +869,23 @@ export class Calendar extends Component {
     }
     
     showOverlay() {
-        if(this.props.appendTo)
-            DomHandler.absolutePosition(this.overlay, this.inputfield);
-        else
-            DomHandler.relativePosition(this.overlay, this.inputfield);
-        
-        this.overlay.style.zIndex = String(DomHandler.getZindex());
-        this.overlay.style.display = 'block';
-
+        this.panel.element.style.zIndex = String(DomHandler.getZindex());
+        this.alignPanel();
+        DomHandler.fadeIn(this.panel.element, 250);
+        this.panel.element.style.display = 'block';
         this.bindDocumentClickListener();
+    }
+
+    alignPanel() {
+        if (this.props.appendTo)
+            DomHandler.absolutePosition(this.panel.element, this.inputfield);
+        else
+            DomHandler.relativePosition(this.panel.element, this.inputfield);
     }
     
     hideOverlay() {
         if(!this.props.inline) {
-            this.overlay.style.display = 'none';
+            this.panel.element.style.display = 'none';
         }
     }
     
@@ -1221,14 +1225,14 @@ export class Calendar extends Component {
     
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
-            this.documentClickListener = this.docClickListener.bind(this);
+            this.documentClickListener = this.onDocumentClick.bind(this);
             document.addEventListener('click', this.documentClickListener);
         }
     }
     
-    docClickListener() {
+    onDocumentClick() {
         if(!this.datepickerClick) {
-            this.overlay.style.display = 'none';
+            this.hideOverlay();
         }
 
         this.datepickerClick = false;
@@ -1274,10 +1278,6 @@ export class Calendar extends Component {
         
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        
-        if(!this.props.inline && this.props.appendTo) {
-            this.el.nativeElement.appendChild(this.overlay);
-        }
     }
 
     componentWillMount() {
@@ -1326,212 +1326,332 @@ export class Calendar extends Component {
             });
         }
     }
-    
-    componentDidMount() {           
-        if(!this.props.inline && this.props.appendTo) {
-            if(this.props.appendTo === 'body')
-                document.body.appendChild(this.overlay);
-            else
-                DomHandler.appendChild(this.overlay, this.props.appendTo);
-        }
-    }
-    
+        
     componentDidUpdate(prevProps, prevState) {
         if(this.keyboardInput)
             this.keyboardInput = false;
         else
             this.updateInputfield(this.props.value);
     }
-            
-    render() {
-        var containerStyleClass = classNames('ui-calendar', this.props.className, {
-            'ui-calendar-w-btn': this.props.showIcon
-        });
 
-        if(!this.props.inline) {
-            var inputElement = <InputText ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} defaultValue={this.getInputFieldValue(this.props.value)}  type="text" 
-                required={this.props.required} onFocus={this.onInputFocus} onKeyDown={this.onInputKeydown} onClick={this.onInputClick}
-                onBlur={this.onInputBlur} readOnly={this.props.readOnlyInput} onInput={this.onUserInput}
-                onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
-                style={this.props.inputStyle} className={this.props.inputClassName} 
-                placeholder={this.props.placeholder || ''} 
-                disabled={this.props.disabled} tabIndex={this.props.tabindex} />
-
-            if(this.props.showIcon) {
-                var buttonStyleClass = classNames('ui-datepicker-trigger ui-calendar-button', {
-                    'ui-state-disabled': this.props.disabled
-                });
-
-                var buttonElement = <Button type="button" icon={this.props.icon} onClick={(e) => this.onButtonClick(e)}
-                    className={buttonStyleClass} disabled={this.props.disabled} />
-            }
+    renderInputText() {
+        if (!this.props.inline) {
+            return (
+                <InputText ref={(el) => this.inputfield = ReactDOM.findDOMNode(el)} defaultValue={this.getInputFieldValue(this.props.value)} type="text"
+                    required={this.props.required} onFocus={this.onInputFocus} onKeyDown={this.onInputKeydown} onClick={this.onInputClick}
+                    onBlur={this.onInputBlur} onInput={this.onUserInput}
+                    onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
+                    style={this.props.inputStyle} className={this.props.inputClassName} readOnly={this.props.readOnlyInput}
+                    placeholder={this.props.placeholder||''} disabled={this.props.disabled} tabIndex={this.props.tabindex} />
+            );
         }
+        else {
+            return null;
+        }
+    }
 
-        var datepickerStyleClass = classNames('ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all', {
+    renderButton() {
+        if (this.props.showIcon) {
+            let buttonStyleClass = classNames('ui-datepicker-trigger ui-calendar-button', {
+                'ui-state-disabled': this.props.disabled
+            });
+
+            return (
+                <Button type="button" icon={this.props.icon} onClick={(e) => this.onButtonClick(e)}
+                    className={buttonStyleClass} disabled={this.props.disabled} />
+            ); 
+        }
+        else {
+            return null;
+        } 
+    }
+
+    getOverlayClassName() {
+        return classNames('ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all', {
             'ui-datepicker-inline': this.props.inline,
             'ui-shadow': !this.props.inline,
             'ui-state-disabled': this.props.disabled,
             'ui-datepicker-timeonly': this.props.timeOnly
         });
+    }
 
-        if(!this.props.timeOnly) {
-            var prevLink = (<a className="ui-datepicker-prev ui-corner-all" href="#" onClick={this.prevMonth}>
-                                <span className="fa fa-angle-left"></span>
-                            </a>),
-                nextLink = (<a className="ui-datepicker-next ui-corner-all" href="#" onClick={this.nextMonth}>
-                                <span className="fa fa-angle-right"></span>
-                            </a>);
+    renderDatePickerNavigatorLink(className, onClick, icon) {
+        return (
+            <a className={className} onClick={onClick}>
+                <span className={icon}></span>
+            </a>
+        );
+    }
 
-            var currentMonthText = !this.props.monthNavigator && (<span className="ui-datepicker-month">{this.props.locale.monthNames[this.state.currentMonth]} </span>),
-                monthNav = this.props.monthNavigator && (<select className="ui-datepicker-month" value={this.state.currentMonth} onChange={(e) => this.onMonthDropdownChange(e.target.value)}>
-                                        {this.props.locale.monthNames.map((month, i) => <option key={"month_" + i} value={i}>{month}</option>)}
-                                    </select>),
-                yearNav = this.props.yearNavigator && (<select className="ui-datepicker-year" value={this.state.currentYear} onChange={(e) => this.onYearDropdownChange(e.target.value)}>
-                                        {this.yearOptions.map((year, i) => <option key={"year_" + i} value={year}>{year}</option>)}
-                                    </select>),
-                currentYearText = !this.props.yearNavigator && (<span className="ui-datepicker-year">{this.state.currentYear}</span>);
+    renderDatePickerTitle() {
+        let currentMonthText, currentYearText, monthNav, yearNav;
 
-            var title = (<div className="ui-datepicker-title">
-                            {currentMonthText}
-                            {monthNav}
-                            {yearNav}
-                            {currentYearText}
-                        </div>);
-
-            var datepickerHeader = (<div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
-                                        {prevLink}
-                                        {nextLink}
-                                        {title}
-                                    </div>);
-
-            /* datepicker table */
-            var $this = this,
-                thead = (<thead>
-                            <tr>
-                                {this.weekDays.map((weekDay, i) => <th key={i} scope="col"><span>{weekDay}</span></th>)}
-                            </tr>
-                        </thead>),
-                tbody = (<tbody>
-                            {this.state.dates.map(function (week, rowIndex) {
-                                    var columns = week.map(function (date, columnIndex) {
-                                        var dateStyleClass = classNames({
-                                            'ui-datepicker-other-month ui-state-disabled': date.otherMonth,
-                                            'ui-datepicker-current-day': $this.isSelected(date),
-                                            'ui-datepicker-today': date.today
-                                        });
-
-                                        var dayStyleClass = classNames('ui-state-default', {
-                                            'ui-state-active': $this.isSelected(date),
-                                            'ui-state-highlight': date.today,
-                                            'ui-state-disabled': !date.selectable
-                                        }),
-                                        dayLinks = (date.otherMonth ? $this.props.showOtherMonths : true) && (<a href="#" className={dayStyleClass} onClick={(e) => $this.onDateSelect(e, date)}>{date.day}</a>);
-
-                                        return (<td className={dateStyleClass} key={rowIndex + '_' + columnIndex}>
-                                            {dayLinks}
-                                        </td>)
-                                    })
-
-                                    return (<tr key={rowIndex}>
-                                        {columns}
-                                    </tr>)
-                                })
-                            }
-                        </tbody>);
-            
-            var table = (<table className="ui-datepicker-calendar">
-                            {thead}
-                            {tbody}
-                        </table>)
-
+        if(this.props.monthNavigator) {
+            monthNav = (
+                <select className="ui-datepicker-month" value={this.state.currentMonth} onChange={(e) => this.onMonthDropdownChange(e.target.value)}>
+                    {this.props.locale.monthNames.map((month, i) => <option key={"month_" + i} value={i}>{month}</option>)}
+                </select>
+            );
+        } 
+        else {
+            currentMonthText = (
+                <span className="ui-datepicker-month">{this.props.locale.monthNames[this.state.currentMonth]}</span>
+            );
         }
 
-        /* Timepicker */
-        if(this.props.showTime||this.props.timeOnly) {
-            let time = this.getTime();
-            var separator = (<div className="ui-separator">
-                                <a href="#">
-                                    <span className="fa fa-angle-up"></span>
-                                </a>
-                                <span>:</span>
-                                <a href="#">
-                                    <span className="fa fa-angle-down"></span>
-                                </a>
-                            </div>);
+        if (this.props.yearNavigator) {
+            yearNav = (
+                <select className="ui-datepicker-year" value={this.state.currentYear} onChange={(e) => this.onYearDropdownChange(e.target.value)}>
+                    {this.yearOptions.map((year, i) => <option key={"year_" + i} value={year}>{year}</option>)}
+                </select>
+            );
+        }
+        else {
+            currentYearText = (
+                <span className="ui-datepicker-year">{this.state.currentYear}</span>
+            );
+        }
 
-            var hourPicker = (<div className="ui-hour-picker">
-                                <a href="#" onClick={this.incrementHour}>
-                                    <span className="fa fa-angle-up"></span>
-                                </a>
-                                <span style={{'display': time.hour < 10 ? 'inline': 'none'}}>0</span><span>{time.hour}</span>
-                                <a href="#" onClick={this.decrementHour}>
-                                    <span className="fa fa-angle-down"></span>
-                                </a>
-                            </div>),
-                minutePicker = (<div className="ui-minute-picker">
-                                <a href="#" onClick={this.incrementMinute}>
-                                    <span className="fa fa-angle-up"></span>
-                                </a>
-                                <span style={{'display': time.minute < 10 ? 'inline': 'none'}}>0</span><span>{time.minute}</span>
-                                <a href="#" onClick={this.decrementMinute}>
-                                    <span className="fa fa-angle-down"></span>
-                                </a>
-                            </div>),
-                secondPicker = this.props.showSeconds && (<div className="ui-second-picker">
-                                    <a href="#" onClick={this.incrementSecond}>
-                                        <span className="fa fa-angle-up"></span>
-                                    </a>
-                                    <span style={{'display': time.second < 10 ? 'inline': 'none'}}>0</span><span>{time.second}</span>
-                                    <a href="#" onClick={this.incrementSecond}>
-                                        <span className="fa fa-angle-down"></span>
-                                    </a>
-                                </div>),
-                ampmPicker = this.props.hourFormat==='12' && (<div className="ui-ampm-picker">
-                                    <a href="#" onClick={this.toggleAMPM}>
-                                        <span className="fa fa-angle-up"></span>
-                                    </a>
-                                    <span>{this.pm ? 'PM' : 'AM'}</span>
-                                    <a href="#" onClick={this.toggleAMPM}>
-                                        <span className="fa fa-angle-down"></span>
-                                    </a>
-                                </div>);
+        return (
+            <div className="ui-datepicker-title">
+                {currentMonthText}
+                {monthNav}
+                {yearNav}
+                {currentYearText}
+            </div>
+        );
+    }
 
-                var timepicker = (<div className="ui-timepicker ui-widget-header ui-corner-all">
-                                            {hourPicker}
-                                            {separator}
-                                            {minutePicker}
-                                            {this.props.showSeconds && separator}
-                                            {secondPicker}
-                                            {ampmPicker}
-                                        </div>);
+    renderDatePickerHeader() {
+        if(!this.props.timeOnly) {
+            let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'fa fa-angle-left');
+            let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'fa fa-angle-right');
+            let title = this.renderDatePickerTitle();
+
+            return (
+                <div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+                    {prevLink}
+                    {nextLink}
+                    {title}
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderHourPicker(time) {
+        return (
+            <div className="ui-hour-picker">
+                <a onClick={this.incrementHour}>
+                    <span className="fa fa-angle-up"></span>
+                </a>
+                <span style={{ 'display': time.hour < 10 ? 'inline' : 'none' }}>0</span><span>{time.hour}</span>
+                <a onClick={this.decrementHour}>
+                    <span className="fa fa-angle-down"></span>
+                </a>
+            </div>
+        );
+    }
+
+    renderMinutePicker(time) {
+        return (
+            <div className="ui-minute-picker">
+                <a onClick={this.incrementMinute}>
+                    <span className="fa fa-angle-up"></span>
+                </a>
+                <span style={{ 'display': time.minute < 10 ? 'inline' : 'none' }}>0</span><span>{time.minute}</span>
+                <a onClick={this.decrementMinute}>
+                    <span className="fa fa-angle-down"></span>
+                </a>
+            </div>  
+        );
+    }
+
+    renderSecondPicker(time) {
+        if(this.props.showSeconds) {
+            return (
+                <div className="ui-second-picker">
+                    <a onClick={this.incrementSecond}>
+                        <span className="fa fa-angle-up"></span>
+                    </a>
+                    <span style={{ 'display': time.second < 10 ? 'inline' : 'none' }}>0</span><span>{time.second}</span>
+                    <a onClick={this.decrementSecond}>
+                        <span className="fa fa-angle-down"></span>
+                    </a>
+                </div>
+            );
+        }
+        else {
+            return null;
         }
         
-        //buttonbar
-        if(this.props.showButtonBar) {
-            var buttonBar = <div className="ui-datepicker-buttonbar ui-widget-header">
-                                <div className="ui-g">
-                                    <div className="ui-g-6">
-                                        <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName}></Button>
-                                    </div>
-                                    <div className="ui-g-6">
-                                        <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.clearButtonClassName}></Button>
-                                    </div>
-                                </div>
-                            </div>
-        }
+    }
 
+    renderAmPmPicker() {
+        if (this.props.hourFormat === '12') {
+            return (<div className="ui-ampm-picker">
+                <a onClick={this.toggleAMPM}>
+                    <span className="fa fa-angle-up"></span>
+                </a>
+                <span>{this.pm ? 'PM' : 'AM'}</span>
+                <a onClick={this.toggleAMPM}>
+                    <span className="fa fa-angle-down"></span>
+                </a>
+            </div>);
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderTimePickerSeparator() {
+        return (
+            <div className="ui-separator">
+                <a>
+                    <span className="fa fa-angle-up"></span>
+                </a>
+                <span>:</span>
+                <a>
+                    <span className="fa fa-angle-down"></span>
+                </a>
+            </div>
+        );
+    }
+
+    renderTimePicker() {
+        if (this.props.showTime || this.props.timeOnly) {
+            let time = this.getTime();
+            let separator = this.renderTimePickerSeparator();
+            let hourPicker = this.renderHourPicker(time);
+            let minutePicker = this.renderMinutePicker(time);
+            let secondPicker = this.renderSecondPicker(time);
+            let ampmPicker = this.renderAmPmPicker(time);
+
+            return (
+                <div className="ui-timepicker ui-widget-header ui-corner-all">
+                    {hourPicker}
+                    {separator}
+                    {minutePicker}
+                    {this.props.showSeconds && separator}
+                    {secondPicker}
+                    {ampmPicker}
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderButtonBar() {
+        if (this.props.showButtonBar) {
+            return (
+                <div className="ui-datepicker-buttonbar ui-widget-header">
+                    <div className="ui-g">
+                        <div className="ui-g-6">
+                            <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName}></Button>
+                        </div>
+                        <div className="ui-g-6">
+                            <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.clearButtonClassName}></Button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderDatePickerTableHeader() {
+        return (
+            <thead>
+                <tr>
+                    {this.weekDays.map((weekDay, i) => <th key={i} scope="col"><span>{weekDay}</span></th>)}
+                </tr>
+            </thead>
+        );
+    }
+
+    renderDatePickerTableBody() {
+        return (
+            <tbody>
+                {
+                    this.state.dates.map((week, rowIndex) => {
+                        let columns = week.map((date, columnIndex) => {
+                            let dateStyleClass = classNames({
+                                'ui-datepicker-other-month ui-state-disabled': date.otherMonth,
+                                'ui-datepicker-current-day': this.isSelected(date),
+                                'ui-datepicker-today': date.today
+                            });
+                            let dayStyleClass = classNames('ui-state-default', {
+                                'ui-state-active': this.isSelected(date),
+                                'ui-state-highlight': date.today,
+                                'ui-state-disabled': !date.selectable
+                            });
+                                
+                            let dayLink;
+                            if (!date.otherMonth || (date.otherMonth && this.props.showOtherMonths) ) {
+                                dayLink = (
+                                    <a className={dayStyleClass} onClick={(e) => this.onDateSelect(e, date)}>{date.day}</a>
+                                );
+                            }
+
+                            return (
+                                <td className={dateStyleClass} key={rowIndex + '_' + columnIndex}>{dayLink}</td>
+                            );
+                        })
+
+                        return (
+                            <tr key={rowIndex}>
+                                {columns}
+                            </tr>
+                        );
+                    })
+                }
+            </tbody>
+        );
+    }
+
+    renderDatePickerTable() {
+        if (!this.props.timeOnly) {
+            let thead = this.renderDatePickerTableHeader();
+            let tbody = this.renderDatePickerTableBody();
+
+            return (
+                <table className="ui-datepicker-calendar">
+                    {thead}
+                    {tbody}
+                </table>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+            
+    render() {
+        let containerStyleClass = classNames('ui-calendar', this.props.className, {'ui-calendar-w-btn': this.props.showIcon});
+        let overlayClassName = this.getOverlayClassName();
+        let inputtext = this.renderInputText();
+        let button = this.renderButton();
+        let datepickerHeader = this.renderDatePickerHeader();
+        let datepickerTable = this.renderDatePickerTable();
+        let timepicker = this.renderTimePicker();
+        let buttonBar = this.renderButtonBar();
 
         return (
             <span id={this.props.id} className={containerStyleClass} style={this.props.style}>
-                {inputElement}
-                {buttonElement}
-                <div ref={(el) => this.overlay = el} className={datepickerStyleClass} 
-                    onClick={this.onDatePickerClick}>
+                {inputtext}
+                {button}
+                <CalendarPanel ref={(el) => this.panel = el} className={overlayClassName} onClick={this.onDatePickerClick}>
                     {datepickerHeader}
-                    {table}
+                    {datepickerTable}
                     {timepicker}
                     {buttonBar}
-                </div>
+                </CalendarPanel>
             </span >
         );
     }

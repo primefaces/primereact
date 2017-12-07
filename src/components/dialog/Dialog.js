@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Dialog extends Component {
 
@@ -30,7 +32,8 @@ export class Dialog extends Component {
         className: null,
         showHeader: true,
         positionLeft: -1,
-        positionTop: -1
+        positionTop: -1,
+        appendTo: null
     }
 
     static propTypes = {
@@ -58,7 +61,8 @@ export class Dialog extends Component {
         className: PropTypes.string,
         showHeader: PropTypes.bool,
         positionLeft: PropTypes.number,
-        positionTop: PropTypes.number
+        positionTop: PropTypes.number,
+        appendTo: PropTypes.object
     };
     
     constructor(props) {
@@ -70,6 +74,10 @@ export class Dialog extends Component {
         this.moveOnTop = this.moveOnTop.bind(this);
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
+    }
+
+    componentWillMount() {
+        this.id = this.props.id || UniqueComponentId();
     }
 
     positionOverlay() {
@@ -111,7 +119,7 @@ export class Dialog extends Component {
     show() {
         this.setState({visible: true});
         
-        let zIndex = DomHandler.getZindex() + 1;
+        let zIndex = DomHandler.getZindex() ;
         this.container.style.zIndex = String(zIndex);
         
         this.bindGlobalListeners();
@@ -185,7 +193,7 @@ export class Dialog extends Component {
     }
 
     moveOnTop() {
-        let zIndex = DomHandler.getZindex() + 1;
+        let zIndex = DomHandler.getZindex();
         this.container.style.zIndex = String(zIndex);
     }
 
@@ -389,10 +397,67 @@ export class Dialog extends Component {
 
     componentWillUnmount() {
         this.disableModality();
-        
         this.unbindGlobalListeners();
-		
 		this.unbindMaskClickListener();
+    }
+
+    renderCloseIcon() {
+        if(this.props.closable) {
+            return (
+                <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                    <span className="fa fa-fw fa-close"></span>
+                </a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderHeader() {
+        if(this.props.showHeader) {
+            let closeIcon = this.renderCloseIcon();
+
+            return (
+                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
+                    <span id={this.id + '_label'} className="ui-dialog-title">{this.props.header}</span>
+                    {closeIcon}
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderContent() {
+        return (
+            <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
+                {this.props.children}
+            </div>
+        );
+    }
+
+    renderFooter() {
+        if(this.props.footer) {
+            return (
+                <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderResizer() {
+        if(this.props.resizable) {
+            return (
+                <div className="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style={{ 'zIndex': '90' }} onMouseDown={this.initResize}></div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
@@ -400,6 +465,7 @@ export class Dialog extends Component {
             'ui-dialog-rtl': this.props.rtl,
             'ui-dialog-draggable': this.props.draggable
         });
+
         let style = Object.assign({
             display: this.state.visible ? 'block': 'none',
             width: this.props.width,
@@ -407,31 +473,26 @@ export class Dialog extends Component {
             minWidth: this.props.minWidth
         }, this.props.style);
 
-        let titleBar;
-        if(this.props.showHeader) {
-            titleBar = (<div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
-                            <span className="ui-dialog-title">{this.props.header}</span>
-                            {
-                                this.props.closable && (<a href="#" role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
-                                                            <span className="fa fa-fw fa-close"></span>
-                                                        </a>)
-                            }
-                        </div>);
-        }
+        let header = this.renderHeader();
+        let content = this.renderContent();
+        let footer = this.renderFooter();
+        let resizer = this.renderResizer();
 
-        let footer = this.props.footer && <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>;
-
-        let resizable = this.props.resizable && <div className="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style={{'zIndex': '90'}} onMouseDown={this.initResize}></div>
-
-        return (
-            <div id={this.props.id} className={className} style={style} ref={(el) => {this.container = el;}} onMouseDown={this.moveOnTop}>
-                {titleBar}
-                <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
-                    {this.props.children}
-                </div>
+        let element = (
+            <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} onMouseDown={this.moveOnTop} aria-labelledby={this.id + '_label'} role="dialog">
+                {header}
+                {content}
                 {footer}
-                {resizable}
+                {resizer}
             </div>
         );
+
+        if(this.props.appendTo) {
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        }
+        else {
+            return element;
+        }
+        
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ChartJS from 'chart.js/src/chart.js';
+import classNames from 'classnames';
 
 export class Chart extends Component {
 
@@ -84,9 +85,11 @@ export class Chart extends Component {
     }
 
     render() {
+        let className = classNames('ui-chart', this.props.className);
+
         return (
-            <div id={this.props.id} style={this.props.style} className={this.props.className}>
-                <canvas width={this.props.width} height={this.props.height} ref={(el) => {this.canvas = el;}}></canvas>
+            <div id={this.props.id} style={this.props.style} className={className} width={this.props.width} height={this.props.height}>
+                <canvas ref={(el) => {this.canvas = el;}}></canvas>
             </div>
         );
     }

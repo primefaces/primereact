@@ -3,22 +3,22 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    src: url('../../public/showcase/resources/fonts/roboto-v15-latin-regular.eot');
+    src: url('../resources/fonts/roboto-v15-latin-regular.eot');
     /* IE9 Compat Modes */
 
-    src: local('Roboto'), local('Roboto-Regular'), url('../../public/showcase/resources/fonts/roboto-v15-latin-regular.eot?#iefix') format('embedded-opentype'),
+    src: local('Roboto'), local('Roboto-Regular'), url('../resources/fonts/roboto-v15-latin-regular.eot?#iefix') format('embedded-opentype'),
         /* IE6-IE8 */
 
-    url('../../public/showcase/resources/fonts/roboto-v15-latin-regular.woff2') format('woff2'),
+    url('../resources/fonts/roboto-v15-latin-regular.woff2') format('woff2'),
         /* Super Modern Browsers */
 
-    url('../../public/showcase/resources/fonts/roboto-v15-latin-regular.woff') format('woff'),
+    url('../resources/fonts/roboto-v15-latin-regular.woff') format('woff'),
         /* Modern Browsers */
 
-    url('../../public/showcase/resources/fonts/roboto-v15-latin-regular.ttf') format('truetype'),
+    url('../resources/fonts/roboto-v15-latin-regular.ttf') format('truetype'),
         /* Safari, Android, iOS */
 
-    url('../../public/showcase/resources/fonts/roboto-v15-latin-regular.svg#Roboto') format('svg');
+    url('../resources/fonts/roboto-v15-latin-regular.svg#Roboto') format('svg');
     /* Legacy iOS */
 }
 
@@ -600,7 +600,7 @@ body {
     /* Introduction */
     .introduction {
         background-color: #1976d2;
-        background: url('../../public/showcase/resources/images/primereact-slider-bg.png');
+        background: url('../resources/images/primereact-slider-bg.png');
         background-repeat: no-repeat;
         background-size: cover;
         color: #20272a;

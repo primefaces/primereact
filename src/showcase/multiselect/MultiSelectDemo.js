@@ -148,7 +148,7 @@ carTemplate(option) {
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -225,6 +225,12 @@ carTemplate(option) {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
+                        <tr>
+                            <td>appendTo</td>
+                            <td>DOM element</td>
+                            <td>null</td>
+                            <td>DOM element instance where the dialog should be mounted.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -305,7 +311,7 @@ carTemplate(option) {
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/multiselect" className="btn-viewsource" target="_blank">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/multiselect" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>

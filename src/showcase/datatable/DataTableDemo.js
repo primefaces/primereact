@@ -970,22 +970,16 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     viewCar(car) {
-        this.setState({
-            messages: [
-                {severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand}
-            ]
-        });
+        this.growl.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
     }
 
     deleteCar(car) {
         let carsList = [...this.state.cars];
         carsList = carsList.filter((c) => c.vin !== car.vin);
 
+        this.growl.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
         this.setState({
-            cars: carsList,
-            messages: [
-                {severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand}
-            ]
+            cars: carsList
         });
     }
 
@@ -997,7 +991,7 @@ export class DataTableContextMenuDemo extends Component {
 
         return (
             <div>
-                <Growl value={this.state.messages}></Growl>
+                <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                 <ContextMenu model={items} ref={el => this.cm = el}/>
 
@@ -1348,7 +1342,7 @@ export class DataTableLazyDemo extends Component {
          * event.sortField = Field name to sort with
          * event.sortOrder = Sort order as number, 1 for asc and -1 for dec
          * event.multiSortMeta = Sort information when sort mode is multiple, a multiSortMeta object is in {field: string, order: number} format
-         * filters: FilterMetadata object having field as key and filter value, filter matchMode as value */
+         * filters: FilterMetadata object having field as key and {value: filterValue, matchMode: filterMatchMode} as the value such as filterMeta['id']= {value: 'prime', matchMode: 'equals'} */
         
         //imitate db connection over a network
         setTimeout(() => {
@@ -1388,7 +1382,7 @@ export class DataTableLazyDemo extends Component {
 `}
 </CodeHighlight>
 
-            <h3>Attributes</h3>
+            <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -1923,7 +1917,7 @@ export class DataTableLazyDemo extends Component {
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datalist" className="btn-viewsource" target="_blank">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datalist" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>

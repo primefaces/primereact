@@ -25,24 +25,51 @@ export class InputTextarea extends Component {
         this.textareaProps = Object.assign({}, this.props);
         delete this.textareaProps.autoResize;
         delete this.textareaProps.onInput;
+        delete this.textareaProps.onBlur;
+        delete this.textareaProps.onKeyUp;
+        delete this.textareaProps.onInput;
     }
 
     onFocus(e) {
-        if(this.props.autoResize) {
+        if (this.props.autoResize) {
             this.resize();
+        }
+
+        if (this.props.onFocus) {
+            this.props.onFocus(e);
         }
     }
 
     onBlur(e) {
-        if(this.props.autoResize) {
+        if (this.props.autoResize) {
             this.resize();
+        }
+
+        if (this.props.onBlur) {
+            this.props.onBlur(e);
         }
     }
 
     onKeyUp(e) {
-        if(this.props.autoResize) {
+        if (this.props.autoResize) {
             this.resize();
         }
+
+        if (this.props.onKeyUp) {
+            this.props.onKeyUp(e);
+        }
+    }
+
+    onInput(e) {
+        if (this.props.onInput) {
+            this.props.onInput();
+        }
+
+        if (this.props.onInput) {
+            this.props.onInput(e);
+        }
+
+        this.updateFilledState(e);
     }
 
     resize () {
@@ -56,13 +83,7 @@ export class InputTextarea extends Component {
         this.textareaElement.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
     }
 
-    onInput(e) {
-        if(this.props.onInput) {
-            this.props.onInput();
-        }
-
-        this.updateFilledState(e);
-    }
+    
 
     updateFilledState(e) {
         let _filled = (e.target.value && e.target.value.length) ? true : false;
@@ -83,11 +104,15 @@ export class InputTextarea extends Component {
     }   
 
     render() {
-        var className = classNames('ui-inputtext ui-corner-all ui-state-default ui-widget', this.props.className, {
+        var className = classNames('ui-inputtext ui-inputtextarea ui-corner-all ui-state-default ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled,
-            'ui-state-filled': this.state.filled
+            'ui-state-filled': this.state.filled,
+            'ui-inputtextarea-resizable': this.props.autoResize
         });
 
-        return <textarea {...this.textareaProps} className={className} ref={(input) => {this.textareaElement = input;}} onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>;
+        return (
+            <textarea {...this.textareaProps} className={className} ref={(input) => {this.textareaElement = input;}} 
+                onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
+        );
     }
 }

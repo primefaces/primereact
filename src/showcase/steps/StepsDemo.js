@@ -18,25 +18,29 @@ export class StepsDemo extends Component {
             {
                 label: 'Personal',
                 command: (event) => {
-                    this.setState({activeIndex:0, messages:[{severity:'info', summary:'First Step', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
+                    this.setState({activeIndex:0});
                 }
             },
             {
                 label: 'Seat',
                 command: (event) => {
-                    this.setState({activeIndex:1, messages:[{severity:'info', summary:'Seat Selection', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                    this.setState({activeIndex:1});
                 }
             },
             {
                 label: 'Payment',
                 command: (event) => {
-                    this.setState({activeIndex:2, messages:[{severity:'info', summary:'Pay with CC', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                    this.setState({activeIndex:2});
                 }
             },
             {
                 label: 'Confirmation',
                 command: (event) => {
-                    this.setState({activeIndex:3, messages:[{severity:'info', summary:'Last Step', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                    this.setState({activeIndex:3});
                 }
             }
         ];
@@ -49,7 +53,7 @@ export class StepsDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}/>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
                     <h3>Basic</h3>
                     <Steps model={items}/>
 
@@ -104,7 +108,7 @@ import {Steps} from 'primereact/components/steps/Steps';
 
 `}
                         </CodeHighlight>
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -211,7 +215,7 @@ import {Steps} from 'primereact/components/steps/Steps';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/steps" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/steps" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
@@ -258,29 +262,29 @@ export class StepsDemo extends Component {
             {
                 label: 'Personal',
                 command: (event) => {
-                    this.state.activeIndex = 0;
-                    this.setState({messages:[{severity:'info', summary:'First Step', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
+                    this.setState({activeIndex:0});
                 }
             },
             {
                 label: 'Seat',
                 command: (event) => {
-                    this.state.activeIndex = 1;
-                    this.setState({messages:[{severity:'info', summary:'Seat Selection', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                    this.setState({activeIndex:1});
                 }
             },
             {
                 label: 'Payment',
                 command: (event) => {
-                    this.state.activeIndex = 2;
-                    this.setState({messages:[{severity:'info', summary:'Pay with CC', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                    this.setState({activeIndex:2});
                 }
             },
             {
                 label: 'Confirmation',
                 command: (event) => {
-                    this.state.activeIndex = 3;
-                    this.setState({messages:[{severity:'info', summary:'Last Step', detail: event.item.label}]});
+                    this.growl.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                    this.setState({activeIndex:3});
                 }
             }
         ];
@@ -293,7 +297,7 @@ export class StepsDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <Growl value={this.state.messages}/>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <h3>Basic</h3>
                     <Steps model={items}/>

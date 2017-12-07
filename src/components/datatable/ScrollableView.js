@@ -9,6 +9,7 @@ export class ScrollableView extends Component {
         header: null,
         body: null,
         footer: null,
+        columns: null,
         frozen: null,
         frozenWidth: null,
         unfrozenWidth: null,
@@ -23,6 +24,7 @@ export class ScrollableView extends Component {
         header: PropTypes.element,
         body: PropTypes.element,
         footer: PropTypes.element,
+        columns: PropTypes.array,
         frozen: PropTypes.bool,
         frozenWidth: PropTypes.string,
         unfrozenWidth: PropTypes.string,
@@ -163,10 +165,24 @@ export class ScrollableView extends Component {
         }
     }
 
+    renderColGroup() {
+        if(this.props.columns && this.props.columns.length) {
+            return (
+                <colgroup className="ui-datatable-scrollable-colgroup">
+                    {this.props.columns.map((col, i) => <col key={col.field + '_' + i} />)}
+                </colgroup>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
         let className = classNames('ui-datatable-scrollable-view', {'ui-datatable-frozen-view': this.props.frozen});
         let width = this.props.frozen ? this.props.frozenWidth : this.props.unfrozenWidth;
         let left = this.props.frozen ? null : this.props.frozenWidth;
+        let colGroup = this.renderColGroup();
 
         return (
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
@@ -181,6 +197,7 @@ export class ScrollableView extends Component {
                 <div className="ui-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
                     <div className="ui-datatable-scrollable-table-wrapper" ref={(el) => { this.scrollTableWrapper = el; }} >
                         <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
+                            {colGroup}
                             {this.props.body}
                         </table>
                     </div>

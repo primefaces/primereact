@@ -6,13 +6,8 @@ import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class CaptchaDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = { message: null };
-    }
-
     showResponse() {
-        this.setState({ message: [{ severity: 'info', summary: 'Success', detail: 'User Responsed' }] });
+        this.growl.show({ severity: 'info', summary: 'Success', detail: 'User Responsed' });
     }
 
     render() {
@@ -26,7 +21,7 @@ export class CaptchaDemo extends Component {
                 </div>
 
                 <div className="content-section implementation button-demo">
-                    <Growl value={this.state.message}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse.bind(this)}></Captcha>
                 </div>
@@ -85,7 +80,7 @@ showResponse(response) {
 `}
 </CodeHighlight>
 
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -204,7 +199,7 @@ showResponse(response) {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/captcha" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/captcha" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
@@ -212,13 +207,8 @@ showResponse(response) {
                             {`
 export class CaptchaDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = { message: null };
-    }
-
     showResponse() {
-        this.setState({ message: [{ severity: 'info', summary: 'Success', detail: 'User Responsed' }] });
+        this.growl.show({ severity: 'info', summary: 'Success', detail: 'User Responsed' });
     }
 
     render() {
@@ -232,7 +222,7 @@ export class CaptchaDemo extends Component {
                 </div>
 
                 <div className="content-section implementation button-demo">
-                    <Growl value={this.state.message}></Growl>
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     <Captcha siteKey="6LcUcyEUAAAAAGfRdVWWuX9bh8roD-lEqx2onu6g" onResponse={this.showResponse.bind(this)}></Captcha>
                 </div>

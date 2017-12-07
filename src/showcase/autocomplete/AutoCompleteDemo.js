@@ -24,33 +24,39 @@ export class AutoCompleteDemo extends Component {
     }
 
     filterCountrySingle(event) {
-        var results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredCountriesSingle: results });
+        setTimeout(() => {
+            var results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+            this.setState({ filteredCountriesSingle: results });
+        }, 250);
     }
 
     filterBrands(event) {
-        let results;
+        setTimeout(() => {
+            let results;
 
-        if(event.query.length === 0) {
-            results = [...this.brands];
-        }
-        else {
-            results = this.brands.filter((brand) => {
-                return brand.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-        
-        this.setState({ filteredBrands: results });
+            if (event.query.length === 0) {
+                results = [...this.brands];
+            }
+            else {
+                results = this.brands.filter((brand) => {
+                    return brand.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
+
+            this.setState({ filteredBrands: results });
+        }, 250);
     }
 
     filterCountryMultiple(event) {
-        let results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        
-        this.setState({ filteredCountriesMultiple: results });
+        setTimeout(() => {
+            let results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+
+            this.setState({ filteredCountriesMultiple: results });
+        }, 250);
     }
 
     itemTemplate(brand) {
@@ -212,7 +218,7 @@ brandTemplate(brand) {
 `}
                         </CodeHighlight>
                         
-                        <h3>Attributes</h3>
+                        <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -340,9 +346,9 @@ brandTemplate(brand) {
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>any</td>
+                                        <td>DOM element</td>
                                         <td>null</td>
-                                        <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
+                                        <td>DOM element instance where the dialog should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>tabindex</td>
@@ -508,7 +514,7 @@ brandTemplate(brand) {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/autocomplete" className="btn-viewsource" target="_blank">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/autocomplete" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
@@ -538,33 +544,39 @@ export class AutoCompleteDemo extends Component {
     }
 
     filterCountrySingle(event) {
-        var results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        this.setState({ filteredCountriesSingle: results });
+        setTimeout(() => {
+            var results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+            this.setState({ filteredCountriesSingle: results });
+        }, 250);
     }
 
     filterBrands(event) {
-        let results;
+        setTimeout(() => {
+            let results;
 
-        if(event.query.length === 0) {
-            results = [...this.brands];
-        }
-        else {
-            results = this.brands.filter((brand) => {
-                return brand.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-        
-        this.setState({ filteredBrands: results });
+            if (event.query.length === 0) {
+                results = [...this.brands];
+            }
+            else {
+                results = this.brands.filter((brand) => {
+                    return brand.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
+
+            this.setState({ filteredBrands: results });
+        }, 250);
     }
 
     filterCountryMultiple(event) {
-        let results = this.state.countriesData.filter((country) => {
-            return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        
-        this.setState({ filteredCountriesMultiple: results });
+        setTimeout(() => {
+            let results = this.state.countriesData.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+
+            this.setState({ filteredCountriesMultiple: results });
+        }, 250);
     }
 
     itemTemplate(brand) {

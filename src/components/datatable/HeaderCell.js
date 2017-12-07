@@ -11,6 +11,7 @@ export class HeaderCell extends Component {
         this.onClick = this.onClick.bind(this);
         this.onFilterInput = this.onFilterInput.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
+        this.onResizerMouseDown = this.onResizerMouseDown.bind(this);
     }
 
     onClick(e) {
@@ -35,25 +36,28 @@ export class HeaderCell extends Component {
             this.filterTimeout = setTimeout(() => {
                 this.props.onFilter({
                     value: filterValue,
-                    field: this.props.field
+                    field: this.props.field,
+                    matchMode: this.props.filterMatchMode
                 });
                 this.filterTimeout = null;            
             }, this.filterDelay);
         }
     }
 
-    onMouseDown(event) {
+    onResizerMouseDown(event) {
         if(this.props.resizableColumns && this.props.onColumnResizeStart) {
             this.props.onColumnResizeStart({
                 originalEvent: event,
                 columnEl: event.target.parentElement
             });
         }
-        
-        if(this.props.reorderableColumns) {
-            if(event.target.nodeName !== 'INPUT')
+    }
+
+    onMouseDown(event) {
+        if (this.props.reorderableColumns) {
+            if (event.target.nodeName !== 'INPUT')
                 this.el.draggable = true;
-            else if(event.target.nodeName === 'INPUT')
+            else if (event.target.nodeName === 'INPUT')
                 this.el.draggable = false;
         }
     }
@@ -75,7 +79,7 @@ export class HeaderCell extends Component {
         let singleSorted = (this.props.field === this.props.sortField);
         let multipleSorted = multiSortMetaData !== null;
         let sortOrder = 0;
-        let resizer = this.props.resizableColumns && <span className="ui-column-resizer ui-clickable" onMouseDown={this.onMouseDown}></span>;
+        let resizer = this.props.resizableColumns && <span className="ui-column-resizer ui-clickable" onMouseDown={this.onResizerMouseDown}></span>;
         let sortIconElement, filterElement, headerCheckbox;
 
         if(singleSorted) 
