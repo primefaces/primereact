@@ -22,7 +22,7 @@ interface AutoCompleteProps {
     appendTo?: any;
     tabindex?: number;
     completeMethod?(e: {originalEvent: Event, query: any}): void;
-    itemTemplate?(): void;
+    itemTemplate?(data: any): void;
     selectedItemTemplate?(): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onFocus?(event: Event): void;
