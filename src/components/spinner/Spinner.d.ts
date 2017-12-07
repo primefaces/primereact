@@ -13,7 +13,8 @@ interface SpinnerProps {
     decimalSeparator?: string,
     thousandSeparator?: string,
     style?: string,
-    className?: string
+    className?: string,
+    onChange?(e: {value: number}): void
 }
 
 export class Spinner extends React.Component<SpinnerProps,any> {}
