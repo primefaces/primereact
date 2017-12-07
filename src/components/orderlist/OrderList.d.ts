@@ -10,7 +10,7 @@ interface OrderListProps {
     responsive?: boolean;
     dragdrop?(): void;
     dragdropScope?: string;
-    onChange?({originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any}): void;
     itemTemplate?(): void;
 }
 

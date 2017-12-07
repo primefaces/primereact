@@ -3,8 +3,8 @@ import React = require("react");
 interface ListBoxItemProps {
     option?: any;
     selected?: boolean;
-    onClick?({originalEvent: Event, option: any}): void;
-    onTouchEnd?({originalEvent: Event, option: any}): void;
+    onClick?(e: {originalEvent: Event, option: any}): void;
+    onTouchEnd?(e: {originalEvent: Event, option: any}): void;
     template?(): void;
 }
 

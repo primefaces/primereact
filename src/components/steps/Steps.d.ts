@@ -7,7 +7,7 @@ interface StepsProps {
     readOnly?: boolean;
     style?: object;
     className?: string;
-    activeIndexChange?({originalEvent: Event, index: any}): void;
+    activeIndexChange?(e: {originalEvent: Event, index: any}): void;
 }
 
 export class Steps extends React.Component<StepsProps,any> {}

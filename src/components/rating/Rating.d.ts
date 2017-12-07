@@ -9,7 +9,7 @@ interface RatingProps {
     cancel?: boolean;
     style?: object;
     className?: string;
-    onChange?({originalEvent: Event, value: string}): void;
+    onChange?(e: {originalEvent: Event, value: string}): void;
 }
 
 export class Rating extends React.Component<RatingProps,any> {}

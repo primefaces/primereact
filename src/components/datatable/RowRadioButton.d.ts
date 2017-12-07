@@ -2,7 +2,7 @@ import React = require("react");
 
 interface RowRadioButtonProps {
     rowData?: object;
-    onClick?({originalEvent: Event, data: object}): void;
+    onClick?(e: {originalEvent: Event, data: object}): void;
     selected?: boolean;
 }
 

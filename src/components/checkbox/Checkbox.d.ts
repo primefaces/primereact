@@ -10,7 +10,7 @@ interface CheckboxProps {
     className?: string;
     onMouseDown?(): void;
     onContextMenu?(): void;
-    onChange?({ originalEvent: Event, value: any, checked: boolean}): void;
+    onChange?(e: { originalEvent: Event, value: any, checked: boolean}): void;
 }
 
 export class Checkbox extends React.Component<CheckboxProps,any> {}
