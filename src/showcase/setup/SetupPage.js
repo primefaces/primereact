@@ -34,11 +34,56 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
 </CodeHighlight>
                 
                     <h3>Dependencies</h3>
-                    <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies. In addition, components require font-awesome for icons 
-                        and <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes.</p>
+                    <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
+                    <p>In addition, components require font-awesome for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and <a href="https://www.npmjs.com/package/react-addons-css-transition-group">react-addons-css-transition-group</a> for animations..</p>
+<CodeHighlight className="json">
+{`
+dependencies: {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "font-awesome": "^4.7.0",
+    "classnames": "^2.2.5"
+}
+
+`}
+</CodeHighlight>
+
+                    <p>Here is the list of components with 3rd party dependencies.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Dependency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Charts</td>
+                                    <td>Charts.js 2.1.x</td>
+                                </tr>
+                                <tr>
+                                    <td>GMap</td>
+                                    <td>Google Maps</td>
+                                </tr>
+                                <tr>
+                                    <td>Editor</td>
+                                    <td>Quill.js</td>
+                                </tr>
+                                <tr>
+                                    <td>Schedule *</td>
+                                    <td>FullCalendar, jQuery and Moment.js</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p>* Schedule is being planned to be rewritten to avoid any dependency.</p>
                         
                     <h3>Styles</h3>
                     <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
+                    
 <CodeHighlight className="javascript">
 {`
 primereact/resources/themes/omega/theme.css
@@ -67,29 +112,6 @@ import 'font-awesome/css/font-awesome.css';
 `}
 </CodeHighlight>
 
-                    <p>Here is the list of components with 3rd party dependencies.</p>
-
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Component</th>
-                                    <th>Dependency</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Schedule</td>
-                                    <td>FullCalendar, jQuery and Moment.js</td>
-                                </tr>
-                                <tr>
-                                    <td>Charts</td>
-                                    <td>Charts.js 2.1.x</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
                     <h3>Quickstart</h3>
                     <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart">github</a>.</p>
                     
