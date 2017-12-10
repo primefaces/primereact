@@ -286,52 +286,58 @@ export class FileUpload extends Component {
         }
     }
     
-    componentWillUnmount() {
+    renderChooseButton() {
+        let className = classNames('ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all');
         
+        return (
+            <span icon="fa-plus" className={className}>
+                <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} 
+                    multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
+                <span className="ui-button-icon ui-button-icon-left ui-clickable fa fa-fw fa-plus"></span>
+                <span className="ui-button-text ui-clickable">{this.props.chooseLabel}</span>
+            </span>    
+        );
     }
+    
+    renderFiles() {
+        return (
+            <div className="ui-fileupload-files">
+                {
+                    this.state.files.map((file, index) => {
+                        let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
+                        let fileName = <div>{file.name}</div>;
+                        let size = <div>{this.formatSize(file.size)}</div>;
+                        let removeButton = <div><Button type="button" icon="fa-close" onClick={() => this.remove(index)} /></div>
 
-    render() {
-        var element;
+                        return <div className="ui-fileupload-row" key={file.name + file.type + file.size}>
+                                 {preview}
+                                 {fileName}
+                                 {size}
+                                 {removeButton}
+                            </div>
+                    })
+                }
+            </div>    
+        );
+    }
+    
+    renderAdvanced() {
+        let className = classNames('ui-fileupload ui-widget', this.props.className);
+        let uploadButton, cancelButton, filesList, progressBar;
+        let chooseButton = this.renderChooseButton();
+                           
+        if(!this.props.auto) {
+            uploadButton = <Button label={this.props.uploadLabel} icon="fa-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
+            cancelButton = <Button label={this.props.cancelLabel} icon="fa-close" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
+        }
+
+        if(this.hasFiles()) {
+            filesList = this.renderFiles();
+            progressBar = <ProgressBar value={this.state.progress} showValue={false} />;
+        }
         
-        if(this.props.mode === 'advanced') {
-            let className = classNames('ui-fileupload ui-widget', this.props.className);
-            let chooseButtonClassName = classNames('ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left');
-            let chooseButton = <span icon="fa-plus" className={chooseButtonClassName}>
-                                    <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} 
-                                        multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
-                                    <span className="ui-button-icon-left ui-clickable fa fa-fw fa-plus"></span>
-                                    <span className="ui-button-text ui-clickable">{this.props.chooseLabel}</span>
-                               </span>;
-           let uploadButton, cancelButton, filesList, progressBar;
-                               
-            if(!this.props.auto) {
-                uploadButton = <Button label={this.props.uploadLabel} icon="fa-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
-                cancelButton = <Button label={this.props.cancelLabel} icon="fa-close" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
-            }
-
-            if(this.hasFiles()) {
-                filesList = <div className="ui-fileupload-files">
-                                    {
-                                        this.state.files.map((file, index) => {
-                                            let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
-                                            let fileName = <div>{file.name}</div>;
-                                            let size = <div>{this.formatSize(file.size)}</div>;
-                                            let removeButton = <div><Button type="button" icon="fa-close" onClick={() => this.remove(index)} /></div>
-
-                                            return <div className="ui-fileupload-row" key={file.name + file.type + file.size}>
-                                                     {preview}
-                                                     {fileName}
-                                                     {size}
-                                                     {removeButton}
-                                                </div>
-                                        })
-                                    }
-                                </div>;
-
-                progressBar = <ProgressBar value={this.state.progress} showValue={false} />;
-            }
-            
-            element = <div id={this.props.id} className={className} style={this.props.style}>
+        return (
+            <div id={this.props.id} className={className} style={this.props.style}>
                 <div className="ui-fileupload-buttonbar ui-widget-header ui-corner-top">
                     {chooseButton}
                     {uploadButton}
@@ -344,19 +350,29 @@ export class FileUpload extends Component {
                     {filesList}
                 </div>
             </div>
+        );
+    }
+    
+    renderBasic() {
+        let buttonClassName = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left', {'ui-fileupload-choose-selected': this.hasFiles()});
+        let iconClassName = classNames('ui-button-icon-left fa', {'fa-plus': !this.hasFiles() || this.props.auto, 'fa-upload': this.hasFiles() && !this.props.auto});
+                         
+        return (
+            <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick}>
+                <span className={iconClassName}></span>
+                <span className="ui-button-text ui-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
+                <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}
+                    onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} />
+             </span>
+        );
+    }
+    
+    render() {        
+        if(this.props.mode === 'advanced') {
+            return this.renderAdvanced();
         }
         else if(this.props.mode === 'basic') {
-            let buttonClassName = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left', {'ui-fileupload-choose-selected': this.hasFiles()});
-            let iconClassName = classNames('ui-button-icon-left fa', {'fa-plus': !this.hasFiles() || this.props.auto, 'fa-upload': this.hasFiles() && !this.props.auto});
-            
-            element = <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick}>
-                        <span className={iconClassName}></span>
-                        <span className="ui-button-text ui-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
-                        <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}
-                            onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} />
-                     </span>;
+            return this.renderBasic();
         }
-        
-        return element;
     }
 }
