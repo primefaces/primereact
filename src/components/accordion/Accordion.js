@@ -71,9 +71,11 @@ export class Accordion extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            activeIndex: nextProps.activeIndex
-        });
+        if(nextProps.activeIndex != null) {
+            this.setState({
+                activeIndex: nextProps.activeIndex
+            });
+        }
     }
     
     onTabClick(event, tab, i) {
