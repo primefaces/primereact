@@ -9,10 +9,10 @@ export class Panel extends Component {
     static defaultProps = {
         id: null,
         header: null,
-        toggleable: false,
+        toggleable: null,
         style: null,
         className: null,
-        collapsed: false,
+        collapsed: null,
         onExpand: null,
         onCollapse: null
     }
@@ -52,7 +52,7 @@ export class Panel extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        if(nextProps.collapsed !== this.state.collapsed) {
+        if(nextProps.collapsed != null && nextProps.collapsed !== this.state.collapsed) {
             this.setState({
                 collapsed: nextProps.collapsed
             });
