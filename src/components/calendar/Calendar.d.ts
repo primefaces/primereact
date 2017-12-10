@@ -45,9 +45,9 @@ interface CalendarProps {
     disabledDates: Array<any>;
     disabledDays: Array<any>;
     onFocus?(event: Event): void;
-    onSelect?({originalEvent: Event, value: any}): void;
+    onSelect?(e: {originalEvent: Event, value: any}): void;
     onBlur?(event: Event): void;
-    onChange?({originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any}): void;
     onTodayButtonClick?(): void;
     onClearButtonClick?(event: Event): void;
     onMouseDown?(): void;

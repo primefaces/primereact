@@ -8,7 +8,7 @@ interface InputSwitchProps {
     className?: string;
     checked?: boolean;
     disabled?: boolean;
-    onChange?({originalEvent: Event, value: boolean}): void;
+    onChange?(e: {originalEvent: Event, value: boolean}): void;
 }
 
 export class InputSwitch extends React.Component<InputSwitchProps,any> {}

@@ -18,16 +18,16 @@ interface TreeTableProps {
     labelCollapse?: string;
     selectionMode?: string;
     selection?: any;
-    selectionChange({originalEvent: Event, selection: any}): void;
+    selectionChange(e: {originalEvent: Event, selection: any}): void;
     style?: object;
     className?: string;
     metaKeySelection?: boolean;
     header?: string;
     footer?: string;
-    onNodeSelect?({originalEvent: Event, node: any}): void;
-    onNodeUnselect?({originalEvent: Event, node: any}): void;
-    onNodeExpand?({originalEvent: Event, node: any}): void;
-    onNodeCollapse?({originalEvent: Event, node: any}): void;
+    onNodeSelect?(e: {originalEvent: Event, node: any}): void;
+    onNodeUnselect?(e: {originalEvent: Event, node: any}): void;
+    onNodeExpand?(e: {originalEvent: Event, node: any}): void;
+    onNodeCollapse?(e: {originalEvent: Event, node: any}): void;
 }
 
 export class TreeTable extends React.Component<TreeTableProps,any> {}

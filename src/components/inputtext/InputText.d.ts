@@ -1,7 +1,6 @@
 import React = require("react");
 
 interface InputTextProps extends React.HTMLProps<HTMLInputElement> {
-    onInput?(event: Event): void;
     [key: string]: any;
 }
 

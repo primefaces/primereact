@@ -32,7 +32,7 @@ interface DataTableProps {
     emptyMessage?: string;
     selectionMode?: string;
     selection?: any;
-    onSelectionChange?({originalEvent: Event, data: any}): void;
+    onSelectionChange?(e: {originalEvent: Event, data: any}): void;
     compareSelectionBy?: string;
     dataKey?: string;
     metaKeySelection?: boolean;
@@ -66,13 +66,13 @@ interface DataTableProps {
     onPage?(event: Event): void;
     onFilter?(filters: Array<any>): void;
     onLazyLoad?(event: DataTableLazyLoadEvent): void;
-    onRowClick?({originalEvent: Event, data: any, index: number}): void;
-    onRowSelect?({originalEvent: Event, data: any, index: number}): void;
-    onRowUnselect?({originalEvent: Event, data: any, index: number}): void;
-    onRowExpand?({originalEvent: Event, data: any}): void;
-    onRowCollapse?({originalEvent: Event, data: any}): void;
-    onContextMenuSelect?({originalEvent: Event, data: any}): void;
-    onColReorder?({dragIndex: number, dropIndex: number, columns: any}): void;
+    onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowSelect?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowUnselect?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowExpand?(e: {originalEvent: Event, data: any}): void;
+    onRowCollapse?(e: {originalEvent: Event, data: any}): void;
+    onContextMenuSelect?(e: {originalEvent: Event, data: any}): void;
+    onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {}

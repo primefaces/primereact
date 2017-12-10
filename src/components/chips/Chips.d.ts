@@ -9,8 +9,8 @@ interface ChipsProps {
     disabled?: boolean;
     style?: object;
     className?: string;
-    onAdd?({originalEvent: Event, value: any}): void;
-    onRemove?({originalEvent: Event, value: any}): void;
+    onAdd?(e: {originalEvent: Event, value: any}): void;
+    onRemove?(e: {originalEvent: Event, value: any}): void;
     itemTemplate?(): void;
 }
 
