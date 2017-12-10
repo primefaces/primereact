@@ -11,8 +11,8 @@ export class Fieldset extends Component {
         legend: null,
         className: null,
         style: null,
-        toggleable: false,
-        collapsed: false,
+        toggleable: null,
+        collapsed: null,
         onExpand: null,
         onCollapse: null
     };
@@ -50,7 +50,7 @@ export class Fieldset extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.collapsed !== this.state.collapsed) {
+        if(nextProps.collapsed != null && nextProps.collapsed !== this.state.collapsed) {
             this.setState({
                 collapsed: nextProps.collapsed
             });
