@@ -83,6 +83,9 @@
 	line-height: 1.8em;
 	text-align: center;
 }
+.ui-datepicker .ui-datepicker-title .ui-datepicker-month {
+    margin-right: .25em;
+}
 .ui-datepicker .ui-datepicker-title select {
 	font-size: 1em;
 	margin: .125em 0;
