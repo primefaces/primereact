@@ -15,11 +15,11 @@ export class Password extends Component {
     };
 
     static propTypes = {
-        promptLabel:PropTypes.string,
-        weakLabel:PropTypes.string,
-        mediumLabel:PropTypes.string,
+        promptLabel: PropTypes.string,
+        weakLabel: PropTypes.string,
+        mediumLabel: PropTypes.string,
         strongLabel:PropTypes.string,
-        feedback:PropTypes.bool
+        feedback: PropTypes.bool
     };
 
     constructor(props) {
@@ -31,21 +31,26 @@ export class Password extends Component {
     }
 
     onFocus(e) {
-        if(!this.panel) {
-            this.createPanel();
+        if (this.props.feedback) {
+            if (!this.panel) {
+                this.createPanel();
+            }
+            
+            this.panel.style.zIndex = String(DomHandler.getZindex());
+            DomHandler.absolutePosition(this.panel, this.inputEl);
+            this.panel.style.display = 'block';
+            DomHandler.fadeIn(this.panel, 250);
         }
-        this.panel.style.zIndex = String(DomHandler.getZindex());
-        DomHandler.absolutePosition(this.panel, this.inputEl);
-        this.panel.style.display = 'block';
-        DomHandler.fadeIn(this.panel, 250);
-
-        if(this.props.onFocus) {
+        
+        if (this.props.onFocus) {
             this.props.onFocus(e);
         }
     }
   
     onBlur(e) {
-        this.panel.style.display = 'none';
+        if (this.props.feedback) {
+            this.panel.style.display = 'none';
+        }
 
         if (this.props.onBlur) {
             this.props.onBlur(e);
@@ -53,33 +58,35 @@ export class Password extends Component {
     }
 
     onKeyup(e) {
-        let value = e.target.value,
-        label = null,
-        meterPos = null;
+        if(this.props.feedback) {
+            let value = e.target.value,
+            label = null,
+            meterPos = null;
 
-        if(value.length === 0) {
-            label = this.props.promptLabel;
-            meterPos = '0px 0px';
-        }
-        else {
-            var score = this.testStrength(value);
-
-            if(score < 30) {
-                label = this.props.weakLabel;
-                meterPos = '0px -10px';
+            if(value.length === 0) {
+                label = this.props.promptLabel;
+                meterPos = '0px 0px';
             }
-            else if(score >= 30 && score < 80) {
-                label = this.props.mediumLabel;
-                meterPos = '0px -20px';
-            } 
-            else if(score >= 80) {
-                label = this.props.strongLabel;
-                meterPos = '0px -30px';
-            }
-        }
+            else {
+                var score = this.testStrength(value);
 
-        this.meter.style.backgroundPosition = meterPos;
-        this.info.textContent = label;
+                if(score < 30) {
+                    label = this.props.weakLabel;
+                    meterPos = '0px -10px';
+                }
+                else if(score >= 30 && score < 80) {
+                    label = this.props.mediumLabel;
+                    meterPos = '0px -20px';
+                } 
+                else if(score >= 80) {
+                    label = this.props.strongLabel;
+                    meterPos = '0px -30px';
+                }
+            }
+
+            this.meter.style.backgroundPosition = meterPos;
+            this.info.textContent = label;
+        }
 
         if (this.props.onKeyUp) {
             this.props.onKeyUp(e);
@@ -131,7 +138,7 @@ export class Password extends Component {
     }
 
     componentWillUnmount() {
-        if(this.panel) {
+        if(this.feedback && this.panel) {
             this.panel.removeChild(this.meter);
             this.panel.removeChild(this.info);
             document.body.removeChild(this.panel);
