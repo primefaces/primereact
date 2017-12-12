@@ -127,7 +127,7 @@ export class AutoComplete extends Component {
             clearTimeout(this.timeout);
         }
         
-        let query = event.target.value.trim();
+        let query = event.target.value;
         if(!this.props.multiple) {
             this.manualModelChange = true;
             this.updateModel(event, query);
@@ -162,8 +162,8 @@ export class AutoComplete extends Component {
     }
 
     search(event, query) {
-        //allow empty string but not undefined or null
-        if(query === undefined || query === null) {
+        //allow empty string but not undefined or null or empty
+        if(query === undefined || query === null || query.trim().length === 0) {
             return;
         }
 
