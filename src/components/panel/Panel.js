@@ -91,7 +91,7 @@ export class Panel extends Component {
             let ariaControls = this.id + '_content';
 
             return (
-                <a className="ui-panel-titlebar-icon ui-panel-titlebar-toggler ui-corner-all ui-state-default" onClick={this.toggle}
+                <a href={'#' + ariaControls} className="ui-panel-titlebar-icon ui-panel-titlebar-toggler ui-corner-all ui-state-default" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!this.state.collapsed} role="tab">
                    <span className={classNames('fa fa-fw', {'fa-plus': this.state.collapsed, 'fa-minus': !this.state.collapsed})}></span>
                 </a>

@@ -121,7 +121,7 @@ export class Fieldset extends Component {
         return (
             <fieldset id={this.props.id} className={className} style={this.props.style}>
                 <legend className="ui-fieldset-legend ui-corner-all ui-state-default ui-unselectable-text" onClick={this.toggle}>
-                    <a aria-controls={ariaControls} aria-expanded={!this.state.collapsed} tabIndex={this.props.toggleable ? null  : -1}>
+                    <a href={'#' + ariaControls} aria-controls={ariaControls} aria-expanded={!this.state.collapsed} tabIndex={this.props.toggleable ? null  : -1}>
                         {toggleIcon}
                         <span className="ui-fieldset-legend-text">{this.props.legend}</span>
                     </a>
