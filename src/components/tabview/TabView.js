@@ -85,8 +85,8 @@ export class TabView extends Component {
         let ariaControls = this.id + '_content_' + index;
 
         return (
-            <li className={className} role="tab" style={tab.props.headerStyle}>
-                <a href={'#' + ariaControls} onClick={(e) => this.onTabHeaderClick(e, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected} >
+            <li className={className} role="presentation" style={tab.props.headerStyle}>
+                <a role="tab" href={'#' + ariaControls} onClick={(e) => this.onTabHeaderClick(e, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected} >
                     {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon fa', tab.props.leftIcon)}></span>}
                     <span className="ui-tabview-title">{tab.props.header}</span>
                     {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon fa', tab.props.rightIcon)}></span>}
@@ -115,7 +115,7 @@ export class TabView extends Component {
             let ariaLabelledBy = this.id + '_header_' + index;
 
             return (
-                <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={tab.props.contentStyle}>
+                <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={tab.props.contentStyle} role="tabpanel">
                     {tab.props.children}
                 </div>
             );
