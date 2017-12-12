@@ -28,6 +28,7 @@ import { MessagesDemo } from './showcase/messages/MessagesDemo';
 import { MultiSelectDemo } from './showcase/multiselect/MultiSelectDemo';
 import { OverlayPanelDemo } from './showcase/overlaypanel/OverlayPanelDemo';
 import { PanelDemo } from './showcase/panel/PanelDemo';
+import { ScrollPanelDemo } from './showcase/scrollpanel/ScrollPanelDemo';
 import { ProgressBarDemo } from './showcase/progressbar/ProgressBarDemo';
 import { RadioButtonDemo } from './showcase/radiobutton/RadioButtonDemo';
 import { TabViewDemo } from './showcase/tabview/TabViewDemo';
@@ -209,6 +210,7 @@ class AppMenu extends Component {
                                 <Link to="/fieldset">&#9679; Fieldset</Link>
                                 <Link to="/grid">&#9679; Grid</Link>
                                 <Link to="/panel">&#9679; Panel</Link>
+                                <Link to="/scrollpanel">&#9679; ScrollPanel</Link>
                                 <Link to="/tabview">&#9679; TabView</Link>
                                 <Link to="/toolbar">&#9679; Toolbar</Link>
                             </div>
@@ -520,6 +522,7 @@ class App extends Component {
                     <Route path="/sidebar" component={SidebarDemo} />
                     <Route path="/gmap" component={GMapDemo} />
                     <Route path="/progressspinner" component={ProgressSpinnerDemo} />
+                    <Route path="/scrollpanel" component={ScrollPanelDemo} />
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>
