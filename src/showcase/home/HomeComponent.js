@@ -84,16 +84,22 @@ export class HomeComponent extends Component {
                         of PrimeReact and impress your users.</p>
 
                     <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
-                            <h4>Ultima with Material Design</h4>
-                            <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/ultima-react.png" />
+                        <div className="ui-g-12 ui-md-4">
+                            <h4>Serenity with Material Design</h4>
+                            <a href="https://www.primefaces.org/layouts/serenity-react">
+                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.png" />
                             </a>
                         </div>
-                        <div className="ui-g-12 ui-md-6">
+                        <div className="ui-g-12 ui-md-4">
+                            <h4>Ultima with Material Design</h4>
+                            <a href="https://www.primefaces.org/layouts/ultima-react">
+                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.png" />
+                            </a>
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
                             <h4>Avalon with Bootstrap Styling</h4>
                             <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react.png" />
+                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.png" />
                             </a>
                         </div>
                     </div>
