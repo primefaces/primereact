@@ -162,8 +162,8 @@ export class AutoComplete extends Component {
     }
 
     search(event, query) {
-        //allow empty string but not undefined or null or empty
-        if(query === undefined || query === null || query.trim().length === 0) {
+        //allow empty string but not undefined or null
+        if(query === undefined || query === null ) {
             return;
         }
 
