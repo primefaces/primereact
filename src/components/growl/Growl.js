@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {GrowlMessage} from './GrowlMessage';
 import DomHandler from '../utils/DomHandler';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 var messageIdx = 0;
 
@@ -95,12 +95,11 @@ export class Growl extends Component {
 
         return (
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
-                <ReactCSSTransitionGroup
-                    transitionName="ui-growl"
-                    transitionEnterTimeout={250}
-                    transitionLeaveTimeout={500}>
+                <CSSTransition
+                    classNames="ui-messages"
+                    timeout={{ enter: 250, exit: 500, }}>
                     {messages}
-                </ReactCSSTransitionGroup>
+                </CSSTransition>
             </div>
         );  
     }

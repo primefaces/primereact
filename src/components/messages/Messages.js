@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 var messageIdx = 0;
 
@@ -68,9 +68,19 @@ export class Messages extends Component {
 
     renderMessages() {
         if (this.state.messages && this.state.messages.length) {
-            return this.state.messages.map((message, index) => {
-                return <UIMessage key={message.id} message={message} onClick={this.props.onClick} onClose={this.onClose} />;
-            });
+            let messages = (
+                <TransitionGroup>
+                    {this.state.messages.map((message, index) => 
+                        <CSSTransition key={message.id}
+                            classNames="ui-messages"
+                            timeout={{ enter: 250, exit: 500, }}>
+                            <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                        </CSSTransition>
+                    )}
+                </TransitionGroup>
+            );    
+        
+            return messages;
         }
         else {
             return null;
@@ -82,12 +92,7 @@ export class Messages extends Component {
 
         return (
             <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                <ReactCSSTransitionGroup
-                    transitionName="ui-messages"
-                    transitionEnterTimeout={250}
-                    transitionLeaveTimeout={500}>
-                    {messages}
-                </ReactCSSTransitionGroup>
+                {messages}
             </div>
         );  
     }

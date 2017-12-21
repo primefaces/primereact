@@ -76,11 +76,11 @@
   transition: opacity 250ms ease-in;
 }
 
-.ui-messages-leave {
+.ui-messages-exit {
     max-height: 500px;
 }
 
-.ui-messages-leave.ui-messages-leave-active {
+.ui-messages-exit.ui-messages-exit-active {
 	max-height: 0;
 	overflow: hidden;
 	margin-bottom: 0;
