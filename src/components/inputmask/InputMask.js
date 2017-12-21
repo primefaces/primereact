@@ -23,7 +23,8 @@ export class InputMask extends Component {
         disabled: false,
         readonly: false,
         name: null,
-        onComplete: null
+        onComplete: null,
+        onChange: null
     }
 
     static propsTypes = {
@@ -43,7 +44,8 @@ export class InputMask extends Component {
         disabled: PropTypes.bool,
         readonly: PropTypes.bool,
         name: PropTypes.string,
-        onComplete: PropTypes.func
+        onComplete: PropTypes.func,
+        onChange: PropTypes.func
     }
 
     caret(first, last) {
