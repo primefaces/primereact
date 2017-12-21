@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {GrowlMessage} from './GrowlMessage';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 var messageIdx = 0;
 
@@ -79,10 +79,18 @@ export class Growl extends Component {
     }
 
     renderMessages() {
-        if(this.state.messages && this.state.messages.length) {
-            return this.state.messages.map((message, index) => {
-                return <GrowlMessage key={message.id} message={message} onClick={this.props.onClick} onClose={this.onClose} />;
-            });
+        if (this.state.messages && this.state.messages.length) {
+            let messages = (
+                <TransitionGroup>
+                    {this.state.messages.map((message, index) =>
+                        <CSSTransition key={message.id} classNames="ui-growl" appear={true} exit={true}
+                                       timeout={{ enter: 1000, exit: 500, }}>
+                            <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                        </CSSTransition>
+                    )}
+                </TransitionGroup>
+            );
+            return messages;
         }
         else {
             return null;
@@ -95,11 +103,7 @@ export class Growl extends Component {
 
         return (
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
-                <CSSTransition
-                    classNames="ui-messages"
-                    timeout={{ enter: 250, exit: 500, }}>
-                    {messages}
-                </CSSTransition>
+                {messages}
             </div>
         );  
     }

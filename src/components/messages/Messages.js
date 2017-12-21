@@ -69,17 +69,16 @@ export class Messages extends Component {
     renderMessages() {
         if (this.state.messages && this.state.messages.length) {
             let messages = (
-                <TransitionGroup>
+                <TransitionGroup >
                     {this.state.messages.map((message, index) => 
-                        <CSSTransition key={message.id}
-                            classNames="ui-messages"
-                            timeout={{ enter: 250, exit: 500, }}>
+                        <CSSTransition key={message.id} classNames="ui-messages" appear={true} exit={true}
+                                       timeout={{ enter: 1000, exit: 500, }}>
                             <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
                         </CSSTransition>
                     )}
                 </TransitionGroup>
-            );    
-        
+            );
+
             return messages;
         }
         else {

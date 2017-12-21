@@ -72,20 +72,22 @@
 }
 
 /* Animations */
+.ui-growl-appear,
 .ui-growl-enter {
   opacity: 0.01;
 }
 
-.ui-growl-enter.ui-growl-enter-active {
+.ui-growl-appear-active,
+.ui-growl-enter-active {
   opacity: 1;
   transition: opacity 250ms ease-in;
 }
 
-.ui-growl-leave {
+.ui-growl-exit {
 	max-height: 500px;
 }
 
-.ui-growl-leave.ui-growl-leave-active {
+.ui-growl-exit.ui-growl-exit-active {
 	max-height: 0;
 	overflow: hidden;
 	margin-bottom: 0;
