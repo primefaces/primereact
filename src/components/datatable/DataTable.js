@@ -668,7 +668,7 @@ export class DataTable extends Component {
         
         //headers
         for(let i = 0; i < columns.length; i++) {
-            if(columns[i].field) {
+            if(columns[i].props.field) {
                 csv += '"' + (columns[i].props.header || columns[i].props.field) + '"';
                 
                 if(i < (columns.length - 1)) {
