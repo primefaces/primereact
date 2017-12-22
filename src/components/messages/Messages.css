@@ -67,12 +67,10 @@
 }
 
 /* Animations */
-.ui-messages-appear,
 .ui-messages-enter {
   opacity: 0.01;
 }
 
-.ui-messages-appear-active,
 .ui-messages-enter-active {
   opacity: 1;
   transition: opacity 250ms ease-in;

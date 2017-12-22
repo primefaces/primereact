@@ -35,13 +35,13 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                 
                     <h3>Dependencies</h3>
                     <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
-                    <p>In addition, components require font-awesome for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and <a href="https://www.npmjs.com/package/react-addons-css-transition-group">react-addons-css-transition-group</a> for animations..</p>
+                    <p>In addition, components require font-awesome for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and <a href="react transition group">react-transition-group</a> for animations.</p>
 <CodeHighlight className="json">
 {`
 dependencies: {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-addons-css-transition-group": "^15.6.2",
+    "react-transition-group": "^2.2.1",
     "font-awesome": "^4.7.0",
     "classnames": "^2.2.5"
 }

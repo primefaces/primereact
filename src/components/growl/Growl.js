@@ -32,7 +32,7 @@ export class Growl extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            messages: null 
+            messages: [] 
         };
 
         this.onClose = this.onClose.bind(this);
@@ -77,33 +77,20 @@ export class Growl extends Component {
             this.props.onRemove(message);
         }
     }
+ 
+    render() {
+        let className = classNames('ui-growl ui-widget ui-growl-' + this.props.position, this.props.className);
 
-    renderMessages() {
-        if (this.state.messages && this.state.messages.length) {
-            let messages = (
+        return (
+            <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
                 <TransitionGroup>
                     {this.state.messages.map((message, index) =>
-                        <CSSTransition key={message.id} classNames="ui-growl" appear={true} exit={true}
-                                       timeout={{ enter: 1000, exit: 500, }}>
+                        <CSSTransition key={message.id} classNames="ui-growl"
+                            timeout={{ enter: 250, exit: 500 }}>
                             <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
                         </CSSTransition>
                     )}
                 </TransitionGroup>
-            );
-            return messages;
-        }
-        else {
-            return null;
-        }
-    }
- 
-    render() {
-        let className = classNames('ui-growl ui-widget ui-growl-' + this.props.position, this.props.className);
-        let messages = this.renderMessages();
-
-        return (
-            <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
-                {messages}
             </div>
         );  
     }

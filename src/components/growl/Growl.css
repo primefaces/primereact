@@ -72,12 +72,10 @@
 }
 
 /* Animations */
-.ui-growl-appear,
 .ui-growl-enter {
   opacity: 0.01;
 }
 
-.ui-growl-appear-active,
 .ui-growl-enter-active {
   opacity: 1;
   transition: opacity 250ms ease-in;
