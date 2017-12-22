@@ -142,7 +142,7 @@ export class AutoComplete extends Component {
         else {
             if(query.length >= this.props.minLength) {
                 this.timeout = setTimeout(() => {
-                    this.search(event, query);
+                    this.search(event, query, 'input');
                 }, this.props.delay);
             }
             else {
@@ -161,9 +161,14 @@ export class AutoComplete extends Component {
         }
     }
 
-    search(event, query) {
+    search(event, query, source) {
         //allow empty string but not undefined or null
-        if(query === undefined || query === null ) {
+        if (query === undefined || query === null) {
+            return;
+        }
+
+        //do not search blank values on input change
+        if (source === 'input' && query.trim().length === 0) {
             return;
         }
 
@@ -258,9 +263,9 @@ export class AutoComplete extends Component {
         }
         
         if(this.props.dropdownMode === 'blank')
-            this.search(event, '');
+            this.search(event, '', 'dropdown');
         else if(this.props.dropdownMode === 'current')
-            this.search(event, this.inputEl.value);
+            this.search(event, this.inputEl.value, 'dropdown');
 
         if(this.props.onDropdownClick) {
             this.props.onDropdownClick({
