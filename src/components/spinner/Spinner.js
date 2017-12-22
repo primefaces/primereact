@@ -288,7 +288,7 @@ export class Spinner extends Component {
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" className="ui-spinner-input"
                 size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly}
-                onKeyDown={this.onInputKeydown} onKeyUp={this.onInputKeyUp} onKeyPress={this.onInputKeyPress} 
+                onKeyDown={this.onInputKeyDown} onKeyUp={this.onInputKeyUp} onKeyPress={this.onInputKeyPress} 
                 onBlur={this.onInputBlur} onChange={this.onChange} onFocus={this.onInputFocus} />
         );
     }
