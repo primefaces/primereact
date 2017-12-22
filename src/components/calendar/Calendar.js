@@ -1318,17 +1318,18 @@ export class Calendar extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        let date = this.getMonthYearDate(nextProps.value);
-        let month =  date.getMonth();
-        let year = date.getFullYear();
-        
-        if((month !== this.state.currentMonth) || (year !== this.state.currentYear) ||
-            (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate)) {
-            this.setState({
-                currentMonth: month,
-                currentYear: year,
-                dates: this.createMonth(month, year, nextProps.minDate, nextProps.maxDate)
-            });
+        if (nextProps.value !== this.props.value) {
+            let date = this.getMonthYearDate(nextProps.value);
+            let month = date.getMonth();
+            let year = date.getFullYear();
+
+            if ((month !== this.state.currentMonth) || (year !== this.state.currentYear) || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate)) {
+                this.setState({
+                    currentMonth: month,
+                    currentYear: year,
+                    dates: this.createMonth(month, year, nextProps.minDate, nextProps.maxDate)
+                });
+            }
         }
     }
         
