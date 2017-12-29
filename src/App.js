@@ -105,6 +105,7 @@ import { TooltipDemo } from "./showcase/tooltip/TooltipDemo";
 import { MenuModelDemo } from "./showcase/menumodel/MenuModelDemo";
 import { SidebarDemo } from "./showcase/sidebar/SidebarDemo";
 import { ProgressSpinnerDemo } from "./showcase/progressspinner/ProgressSpinnerDemo";
+import {CardDemo} from "./showcase/card/CardDemo";
 
 class AppMenu extends Component {
 
@@ -207,6 +208,7 @@ class AppMenu extends Component {
                         <div className={classNames({ 'submenuhide': this.state.activeMenu !== 3, 'submenushow': this.state.activeMenu === 3 })}>
                             <div>
                                 <Link to="/accordion">&#9679; Accordion</Link>
+                                <Link to="/card">&#9679; Card</Link>
                                 <Link to="/fieldset">&#9679; Fieldset</Link>
                                 <Link to="/grid">&#9679; Grid</Link>
                                 <Link to="/panel">&#9679; Panel</Link>
@@ -524,6 +526,7 @@ class App extends Component {
                     <Route path="/gmap" component={GMapDemo} />
                     <Route path="/progressspinner" component={ProgressSpinnerDemo} />
                     <Route path="/scrollpanel" component={ScrollPanelDemo} />
+                    <Route path="/card" component={CardDemo}/>
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>
