@@ -105,7 +105,8 @@ import { TooltipDemo } from "./showcase/tooltip/TooltipDemo";
 import { MenuModelDemo } from "./showcase/menumodel/MenuModelDemo";
 import { SidebarDemo } from "./showcase/sidebar/SidebarDemo";
 import { ProgressSpinnerDemo } from "./showcase/progressspinner/ProgressSpinnerDemo";
-import {CardDemo} from "./showcase/card/CardDemo";
+import { CardDemo } from "./showcase/card/CardDemo";
+import { KeyFilterDemo } from "./showcase/keyfilter/KeyFilterDemo";
 
 class AppMenu extends Component {
 
@@ -162,6 +163,7 @@ class AppMenu extends Component {
                                 <Link to="/spinner">&#9679; Spinner</Link>
                                 <Link to="/tristatecheckbox">&#9679; TriState</Link>
                                 <Link to="/togglebutton">&#9679; ToggleButton</Link>
+                                <Link to="/keyfilter">&#9679; KeyFilter</Link>
                             </div>
                         </div>
 
@@ -527,6 +529,7 @@ class App extends Component {
                     <Route path="/progressspinner" component={ProgressSpinnerDemo} />
                     <Route path="/scrollpanel" component={ScrollPanelDemo} />
                     <Route path="/card" component={CardDemo}/>
+                    <Route path="/keyfilter" component={KeyFilterDemo}/>
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>

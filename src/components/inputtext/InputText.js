@@ -1,20 +1,30 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import KeyFilter from "../keyfilter/KeyFilter";
 
 export class InputText extends Component {
 
     static defaultProps = {
-        onInput: null
+        onInput: null,
+        keyfilter: null
     };
 
     static propTypes = {
-        onInput: PropTypes.func
+        onInput: PropTypes.func,
+        keyfilter: PropTypes.any
     };
 
     constructor(props) {
         super(props);
         this.onInput = this.onInput.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
+    }
+
+    onKeyPress(event) {
+        if(this.props.keyfilter) {
+            KeyFilter.onKeyPress(event,this.props.keyfilter)
+        }
     }
 
     onInput(e) {
@@ -52,6 +62,6 @@ export class InputText extends Component {
         let inputProps = Object.assign({}, this.props);
         delete inputProps.onInput;
 
-        return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput}/>;
+        return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
 }
