@@ -24,15 +24,12 @@ export class Card extends Component {
         className: PropTypes.string
     };
 
-    constructor() {
-        super();
-        this.state = {};
-    }
     renderHeader(){
         return <div className="ui-card-header">
                     {this.props.header}
                 </div>;
     }
+    
     renderBody(){
         let title, subtitle, footer, children;
 
