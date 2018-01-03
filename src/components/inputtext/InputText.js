@@ -7,11 +7,13 @@ export class InputText extends Component {
 
     static defaultProps = {
         onInput: null,
+        onKeyPress: null,
         keyfilter: null
     };
 
     static propTypes = {
         onInput: PropTypes.func,
+        onKeyPress: PropTypes.func,
         keyfilter: PropTypes.any
     };
 
@@ -22,6 +24,10 @@ export class InputText extends Component {
     }
 
     onKeyPress(event) {
+        if(this.props.onKeyPress) {
+            this.props.onKeyPress(event);
+        }
+
         if(this.props.keyfilter) {
             KeyFilter.onKeyPress(event,this.props.keyfilter)
         }
@@ -61,6 +67,7 @@ export class InputText extends Component {
 
         let inputProps = Object.assign({}, this.props);
         delete inputProps.onInput;
+        delete inputProps.onKeyPress;
 
         return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
