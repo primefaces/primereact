@@ -8,13 +8,13 @@ export class InputText extends Component {
     static defaultProps = {
         onInput: null,
         onKeyPress: null,
-        keyFilter: null
+        keyfilter: null
     };
 
     static propTypes = {
         onInput: PropTypes.func,
         onKeyPress: PropTypes.func,
-        keyFilter: PropTypes.any
+        keyfilter: PropTypes.any
     };
 
     constructor(props) {
@@ -28,8 +28,8 @@ export class InputText extends Component {
             this.props.onKeyPress(event);
         }
 
-        if (this.props.keyFilter) {
-            KeyFilter.onKeyPress(event, this.props.keyFilter)
+        if (this.props.keyfilter) {
+            KeyFilter.onKeyPress(event, this.props.keyfilter)
         }
     }
 
