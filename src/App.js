@@ -153,6 +153,7 @@ class AppMenu extends Component {
                                 <Link to="/inputswitch">&#9679; InputSwitch</Link>
                                 <Link to="/inputtext">&#9679; InputText</Link>
                                 <Link to="/inputtextarea">&#9679; InputTextarea</Link>
+                                <Link to="/keyfilter">&#9679; KeyFilter</Link>
                                 <Link to="/listbox">&#9679; Listbox</Link>
                                 <Link to="/multiselect">&#9679; MultiSelect</Link>
                                 <Link to="/password">&#9679; Password</Link>
