@@ -8,13 +8,13 @@ export class InputText extends Component {
     static defaultProps = {
         onInput: null,
         onKeyPress: null,
-        keyfilter: null
+        keyFilter: null
     };
 
     static propTypes = {
         onInput: PropTypes.func,
         onKeyPress: PropTypes.func,
-        keyfilter: PropTypes.any
+        keyFilter: PropTypes.any
     };
 
     constructor(props) {
@@ -24,12 +24,12 @@ export class InputText extends Component {
     }
 
     onKeyPress(event) {
-        if(this.props.onKeyPress) {
+        if (this.props.onKeyPress) {
             this.props.onKeyPress(event);
         }
 
-        if(this.props.keyfilter) {
-            KeyFilter.onKeyPress(event,this.props.keyfilter)
+        if (this.props.keyFilter) {
+            KeyFilter.onKeyPress(event, this.props.keyFilter)
         }
     }
 
@@ -49,19 +49,19 @@ export class InputText extends Component {
     }
     
     componentDidMount() {
-        let _value =  this.props.value||this.props.defaultValue;
+        let _value =  this.props.value || this.props.defaultValue;
 
         this.updateFilledState(_value);
     }
 
     componentWillUpdate(nextProps){
-        if(nextProps.value !== this.props.value) {
+        if (nextProps.value !== this.props.value) {
             this.updateFilledState(nextProps.value);
         }
     }
 
     render() {
-        var className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
+        let className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled
         });
 

@@ -1,6 +1,7 @@
 import DomHandler from '../utils/DomHandler';
 
 export default class KeyFilter {
+
     /* eslint-disable */
     static DEFAULT_MASKS = {
         pint: /[\d]/,
@@ -48,7 +49,6 @@ export default class KeyFilter {
         return k === 9 || k === 13 || k === 27 || k === 16 || k === 17 ||(k >= 18 && k <= 20) ||
             (DomHandler.getBrowser().opera && !e.shiftKey && (k === 8 || (k >= 33 && k <= 35) || (k >= 36 && k <= 39) || (k >= 44 && k <= 45)));
     }
-
 
     static getKey(e) {
         let k = e.keyCode || e.charCode;

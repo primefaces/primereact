@@ -11,7 +11,7 @@ export class KeyFilterDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>KeyFilter</h1>
-                        <p>KeyFilter directive restricts user input based on a regular expression.</p>
+                        <p>KeyFilter feature restricts user input based on a regular expression.</p>
                     </div>
                 </div>
 
@@ -19,28 +19,28 @@ export class KeyFilterDemo extends Component {
                     <h3 className="first">Filtering</h3>
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter="int" placeholder="Integers"/>
+                            <InputText keyFilter="int" placeholder="Integers"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter="num" placeholder="Numbers"/>
+                            <InputText keyFilter="num" placeholder="Numbers"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter="money" placeholder="Money"/>
+                            <InputText keyFilter="money" placeholder="Money"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter="hex" placeholder="Hex"/>
+                            <InputText keyFilter="hex" placeholder="Hex"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter="alpha" placeholder="Alphabetic"/>
+                            <InputText keyFilter="alpha" placeholder="Alphabetic"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
+                            <InputText keyFilter="alphanum" placeholder="Alphanumberic"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
+                            <InputText keyFilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter={/[^\s]/} placeholder="Block space key"/>
+                            <InputText keyFilter={/[^\s]/} placeholder="Block space key"/>
                         </div>
                     </div>
                 </div>
@@ -71,17 +71,18 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>KeyFilter is applied to an input text element using keyfilter attribute whose value is either a built-in regular expression name or a custom one. Following input only accepts integers.</p>
+                        <p>KeyFilter property is integrated in input components such as InputText using the keyFilter property whose value is either a built-in regular expression name or a custom one. Following input only accepts integers.</p>
 
                         <CodeHighlight className="html">
                             {`
-<InputText keyfilter="int"/>
+<InputText keyFilter="int"/>
 
 `}
                         </CodeHighlight>
 
                         <h3>Built-in Filters</h3>
                         <p>Commonly used cases have their own built-in shortcuts.</p>
+
                         <ul>
                             <li>pint: Positive integers</li>
                             <li>int: Integers</li>
@@ -97,7 +98,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         <p>A custom filter is provided by binding a regular expression, here is an example that blocks special characters</p>
                         <CodeHighlight className="html">
                             {`
-<InputText keyfilter={/^[^#<>*!]+$/}/>
+<InputText keyFilter={/^[^#<>*!]+$/}/>
 
 `}
                         </CodeHighlight>
@@ -110,7 +111,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputtext" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/keyfilter" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
