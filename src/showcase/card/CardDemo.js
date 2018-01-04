@@ -7,13 +7,7 @@ import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class CardDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-
         let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
         let footer = <span>
                         <Button label="Save" icon="fa-check"/>
@@ -69,7 +63,7 @@ import {Card} from 'primereact/components/card/Card';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Card is defined with Card tag.</p>
+                        <p>Card is used as a container.</p>
                         <CodeHighlight className="html">
                             {`
 <Card>
@@ -89,7 +83,9 @@ import {Card} from 'primereact/components/card/Card';
 `}
                         </CodeHighlight>
 
-                        <h3>Header and Footer Content</h3>
+                        <h3>Header and Footer</h3>
+                        <p>Header and Footer sections are defined using the properties of the same name.</p>
+
                         <CodeHighlight className="html">
                             {`
 let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
@@ -209,11 +205,6 @@ let footer = <span>
                         <CodeHighlight className="javascript">
                             {`
 export class CardDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {};
-    }
 
     render() {
 
