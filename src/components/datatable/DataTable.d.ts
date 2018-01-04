@@ -38,9 +38,9 @@ interface DataTableProps {
     metaKeySelection?: boolean;
     headerColumnGroup?: object;
     footerColumnGroup?: object;
-    rowExpansionTemplate?(): void;
+    rowExpansionTemplate?(data: any): void;
     expandedRows?: Array<any>;
-    onRowToggle?(): void;
+    onRowToggle?(data: Array<any>): void;
     responsive?: boolean;
     resizableColumns?: boolean;
     columnResizeMode?: string;
