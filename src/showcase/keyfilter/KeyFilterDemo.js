@@ -71,11 +71,11 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>KeyFilter property is integrated in input components such as InputText using the keyFilter property whose value is either a built-in regular expression name or a custom one. Following input only accepts integers.</p>
+                        <p>KeyFilter property is integrated in input components such as InputText using the keyfilter property whose value is either a built-in regular expression name or a custom one. Following input only accepts integers.</p>
 
                         <CodeHighlight className="html">
                             {`
-<InputText keyFilter="int"/>
+<InputText keyfilter="int"/>
 
 `}
                         </CodeHighlight>
@@ -98,7 +98,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         <p>A custom filter is provided by binding a regular expression, here is an example that blocks special characters</p>
                         <CodeHighlight className="html">
                             {`
-<InputText keyFilter={/^[^#<>*!]+$/}/>
+<InputText keyfilter={/^[^#<>*!]+$/}/>
 
 `}
                         </CodeHighlight>
