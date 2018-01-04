@@ -201,7 +201,11 @@ export class Spinner extends Component {
 
     onInputKeyUp(event) {
         let inputValue = event.target.value;
-        this.value = this.parseValue(inputValue);
+        if (event.key === this.props.decimalSeparator || event.key === this.props === this.props.thousandSeparator)
+            this.value = inputValue;
+        else
+            this.value = this.parseValue(inputValue);
+        
         this.formatValue();
         this.inputEl.value = this.valueAsString;
 
