@@ -68,6 +68,7 @@ export class InputText extends Component {
         let inputProps = Object.assign({}, this.props);
         delete inputProps.onInput;
         delete inputProps.onKeyPress;
+        delete inputProps.keyfilter;
 
         return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
