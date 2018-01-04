@@ -1308,13 +1308,8 @@ export class Calendar extends Component {
     }
     
     shouldComponentUpdate(nextProps, nextState) {
-        if(this.props.disabled === true && nextProps.disabled === true) {
-            return false;
-        }
-        else {
-            return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear)
-                || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate);
-        }
+        return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear)
+            || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate || (nextProps.disabled !== this.props.disabled));
     }
     
     componentWillReceiveProps(nextProps) {
