@@ -1467,6 +1467,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Template of the paginator.</td>
                         </tr>
                         <tr>
+                            <td>pageLinkSize</td>
+                            <td>number</td>
+                            <td>5</td>
+                            <td>Number of page links to display.</td>
+                        </tr>
+                        <tr>
                             <td>first</td>
                             <td>number</td>
                             <td>0</td>

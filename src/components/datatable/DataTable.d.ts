@@ -73,6 +73,9 @@ interface DataTableProps {
     onRowCollapse?(e: {originalEvent: Event, data: any}): void;
     onContextMenuSelect?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
+    paginatorLeft?: any;
+    paginatorRight?: any;
+    pageLinkSize?: number;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {}
