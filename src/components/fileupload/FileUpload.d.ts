@@ -19,8 +19,8 @@ interface FileUploadProps {
     chooseLabel?: string;
     uploadLabel?: string;
     cancelLabel?: string;
-    onBeforeUpload?(): void;
-    onBeforeSend?(): void;
+    onBeforeUpload?(e: { xhr: XMLHttpRequest, formData: any }): void;
+    onBeforeSend?(e: { xhr: XMLHttpRequest, formData: any }): void;
     onUpload?(e: {xhr: XMLHttpRequest, files: any}): void;
     onError?(e: {xhr: XMLHttpRequest, files: any}): void;
     onClear?(): void;
