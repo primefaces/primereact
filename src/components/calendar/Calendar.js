@@ -329,7 +329,7 @@ export class Calendar extends Component {
         else {
             if(this.shouldSelectDate(dateMeta)) {
                 if(dateMeta.otherMonth) {
-                    if(this.selectOtherMonths) {
+                    if(this.props.selectOtherMonths) {
                         this.selectDate(event, dateMeta);
                     }
                 }
@@ -482,6 +482,7 @@ export class Calendar extends Component {
         }
         else {
             m = month + 1;
+            y = year;
         }
         
         return {'month':m,'year':y};
