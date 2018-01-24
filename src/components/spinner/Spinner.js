@@ -48,6 +48,7 @@ export class Spinner extends Component {
         this.onInputKeyUp = this.onInputKeyUp.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onInputKeyPress = this.onInputKeyPress.bind(this);
+        this.onInputBlur = this.onInputBlur.bind(this);
         this.onChange = this.onChange.bind(this);
 
         this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
@@ -109,6 +110,15 @@ export class Spinner extends Component {
     toFixed(value, precision) {
         let power = Math.pow(10, precision || 0);
         return String(Math.round(value * power) / power);
+    }
+
+    updateValue(val) {
+        if(this.precision) {
+            return this.parseValue(parseFloat(val).toFixed(this.precision));
+        }
+        else {
+            return val;
+        }
     }
 
     onUpButtonMouseDown(event) {
@@ -218,6 +228,26 @@ export class Spinner extends Component {
         this.updateFilledState();
     }
 
+    onInputBlur(event) {
+        let val = this.value;
+        if(val !== undefined && val != null) {
+            this.value = this.updateValue(val);
+        }
+
+        this.formatValue();
+        this.updateFilledState();
+
+        if(this.inputEl.value !== this.valueAsString) {
+            this.inputEl.value = this.valueAsString;
+
+            if (this.props.onChange) {
+                this.props.onChange({
+                    value: this.value
+                })
+            }
+        }
+    }
+
     parseValue(val) {
         let value;
         val = val.split(this.props.thousandSeparator).join('');
@@ -279,7 +309,11 @@ export class Spinner extends Component {
     }
 
     componentWillMount() {
-        this.value = this.props.value;
+        let val = this.props.value;
+        if(val !== undefined && val != null) {
+            this.value = this.updateValue(val);
+        }
+
         this.formatValue();
         this.updateFilledState();
     }
