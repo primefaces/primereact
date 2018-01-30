@@ -216,7 +216,12 @@ export class AutoComplete extends Component {
 
     formatValue(value) {
         if(value)
-            return this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) || value : value;
+            if (this.props.field) {
+                const resolvedFieldData = ObjectUtils.resolveFieldData(value, this.props.field);
+                return resolvedFieldData !== null ? resolvedFieldData : value;
+            }
+            else
+                return value;
         else
             return '';
     }
