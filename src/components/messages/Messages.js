@@ -51,7 +51,7 @@ export class Messages extends Component {
 
     clear() {
         this.setState({
-            messages: null
+            messages: []
         })
     }
 
