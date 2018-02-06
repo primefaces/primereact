@@ -571,6 +571,20 @@ export class DataTablePaginatorDemo extends Component {
 `}
 </CodeHighlight>
 
+            <p>Elements of the paginator can be customized using paginatorTemplate by the DataTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
+<CodeHighlight className="html">
+{`
+<DataTable value={this.state.cars} paginator={true} rows={10} first={start} 
+    paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
+    <Column field="vin" header="Vin" />
+    <Column field="year" header="Year" />
+    <Column field="brand" header="Brand" />
+    <Column field="color" header="Color" />
+</DataTable>
+
+`}
+</CodeHighlight>
+
             <h3>Sorting</h3>
             <p>Enabling sortable property at column component is enough to make a column sortable. The property to use when sorting is field by default and can be customized using sortField.</p>
 <CodeHighlight className="html">
