@@ -202,6 +202,9 @@ export class FileUpload extends Component {
                     if(this.props.onUpload) {
                         this.props.onUpload({xhr: xhr, files: this.files});
                     }
+                    if(this.props.mode === 'basic') {
+                        this.fileInput.style.display = 'none';
+                    }
                 }
                 else {
                     if(this.props.onError) {
