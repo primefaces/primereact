@@ -179,6 +179,12 @@ onCityChange(e) {
                                     <td>null</td>
                                     <td>Style class of the element.</td>
                                 </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element value cannot be altered.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

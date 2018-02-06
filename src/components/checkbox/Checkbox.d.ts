@@ -8,6 +8,7 @@ interface CheckboxProps {
     checked?: boolean;
     style?: object;
     className?: string;
+    disabled?: boolean;
     onMouseDown?(): void;
     onContextMenu?(): void;
     onChange?(e: { originalEvent: Event, value: any, checked: boolean}): void;

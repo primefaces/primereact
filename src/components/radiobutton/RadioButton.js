@@ -13,6 +13,7 @@ export class RadioButton extends Component {
         checked: false,
         style: null,
         className: null,
+        disabled: false,
         onChange: null
     };
 
@@ -23,6 +24,7 @@ export class RadioButton extends Component {
         checked: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        disabled: PropTypes.bool,
         onChange: PropTypes.func
     };
     
@@ -40,7 +42,7 @@ export class RadioButton extends Component {
     }
 
     onClick(e) {
-        if(this.props.onChange) {
+        if(!this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: e,
                 value: this.props.value,
@@ -59,13 +61,13 @@ export class RadioButton extends Component {
 
     render() {
         let containerClass = classNames('ui-radiobutton ui-widget', this.props.className);
-        let boxClass = classNames('ui-radiobutton-box ui-widget ui-corner-all ui-state-default', { 'ui-state-active': this.props.checked });
+        let boxClass = classNames('ui-radiobutton-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked,  'ui-state-disabled': this.props.disabled});
         let iconClass = classNames('ui-radiobutton-icon ui-c', { 'fa fa-circle': this.props.checked });
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="ui-helper-hidden-accessible">
-                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur}/>
+                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>

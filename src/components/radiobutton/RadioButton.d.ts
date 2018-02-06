@@ -8,6 +8,7 @@ interface RadioButtonProps {
     checked?: boolean;
     style?: object;
     className?: string;
+    disabled?: boolean;
     onChange?({originalEvent: Event, value: any, checked: boolean}): void;
 }
 
