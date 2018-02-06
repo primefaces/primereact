@@ -21,6 +21,7 @@ interface DataTableProps {
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
     paginatorTemplate?: string;
+    rowsPerPageOptions?: number[];
     first?: number;
     rows?: number;
     totalRecords?: number;
