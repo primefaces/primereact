@@ -361,7 +361,7 @@ export class Dialog extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if(event.which === 27) {
-                if(parseInt(this.container.style.zIndex, 10) === DomHandler.getZindex()) {
+                if(parseInt(this.container.style.zIndex, 10) === DomHandler.zindex) {
                     this.onClose(event);
                 }
             }
