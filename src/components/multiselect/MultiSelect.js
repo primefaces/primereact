@@ -130,7 +130,7 @@ export class MultiSelect extends Component {
 
     show() {
         if(this.props.options && this.props.options.length) {
-            this.panel.element.style.zIndex = DomHandler.getZindex();
+            this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
             this.alignPanel();
             DomHandler.fadeIn(this.panel.element, 250);
             this.panel.element.style.display = 'block';

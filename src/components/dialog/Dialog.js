@@ -119,7 +119,7 @@ export class Dialog extends Component {
     show() {
         this.setState({visible: true});
         
-        let zIndex = DomHandler.getZindex() ;
+        let zIndex = DomHandler.generateZIndex() ;
         this.container.style.zIndex = String(zIndex);
         
         this.bindGlobalListeners();
@@ -193,8 +193,7 @@ export class Dialog extends Component {
     }
 
     moveOnTop() {
-        let zIndex = DomHandler.getZindex();
-        this.container.style.zIndex = String(zIndex);
+        this.container.style.zIndex = String(DomHandler.generateZIndex());
     }
 
     onCloseMouseDown(event) {
@@ -361,7 +360,7 @@ export class Dialog extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if(event.which === 27) {
-                if(parseInt(this.container.style.zIndex, 10) === DomHandler.zindex) {
+                if(parseInt(this.container.style.zIndex, 10) === DomHandler.getCurrentZIndex()) {
                     this.onClose(event);
                 }
             }

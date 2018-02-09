@@ -56,7 +56,7 @@ export class SplitButton extends Component {
     }
         
     show() {
-        this.panel.element.style.zIndex = DomHandler.getZindex();
+        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
         this.alignPanel();
         DomHandler.fadeIn(this.panel.element, 250);
         this.panel.element.style.display = 'block';

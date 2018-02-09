@@ -41,7 +41,7 @@ export class Lightbox extends Component {
     }
 
     onImageClick(event,image,i) {
-        this.index=i;
+        this.index = i;
         this.setState({loading:true});
         this.content.style.width = 32 + 'px';
         this.content.style.height = 32 + 'px';
@@ -58,11 +58,11 @@ export class Lightbox extends Component {
     }
 
     show(){
-        this.mask=document.createElement('div');
-        this.mask.style.zIndex=DomHandler.getZindex();
+        this.mask = document.createElement('div');
+        this.mask.style.zIndex = String(DomHandler.generateZIndex());
         DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-dialog-mask');
         document.body.appendChild(this.mask);
-        this.zindex=DomHandler.getZindex();
+        this.zindex = String(DomHandler.generateZIndex());
         this.center();
         this.setState({visible:true});
     }

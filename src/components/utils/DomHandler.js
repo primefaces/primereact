@@ -68,9 +68,13 @@ export default class DomHandler {
         };
     }
 
-    static getZindex() {
+    static generateZindex() {
         this.zindex = this.zindex||999;
         return ++this.zindex;
+    }
+
+    static getCurrentZIndex() {
+        return this.zindex;
     }
     
     static index(element) {

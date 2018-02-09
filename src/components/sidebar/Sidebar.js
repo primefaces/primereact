@@ -63,7 +63,7 @@ export class Sidebar extends Component {
 
     show(){
         this.setState({visible: true});
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.getZindex());
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.enableModality();
         if(this.props.onShow) {
             this.props.onShow();

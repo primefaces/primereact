@@ -31,7 +31,7 @@ export class NestedMenuItem extends Component{
         this.setState({activeItem: menuitem});
         this.sublist=event.currentTarget.children[1];
         if(this.sublist){
-            this.sublist.style.zIndex = DomHandler.getZindex();
+            this.sublist.style.zIndex = String(DomHandler.generateZIndex());
             if(this.props.parentMenu==='TieredMenu' || (this.props.parentMenu==='Menubar' && !this.props.root) || this.props.parentMenu==='ContextMenu')
                 DomHandler.addClass(this.sublist,'ui-tieredmenu-item');
             this.sublist.style.display='block';

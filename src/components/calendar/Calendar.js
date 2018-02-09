@@ -870,7 +870,7 @@ export class Calendar extends Component {
     }
     
     showOverlay() {
-        this.panel.element.style.zIndex = String(DomHandler.getZindex());
+        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
         this.alignPanel();
         DomHandler.fadeIn(this.panel.element, 250);
         this.panel.element.style.display = 'block';

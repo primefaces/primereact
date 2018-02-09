@@ -91,7 +91,7 @@ export class OverlayPanel extends Component {
             this.bindDocumentClickListener();
         }
         
-        this.container.style.zIndex = DomHandler.getZindex();
+        this.container.style.zIndex = String(DomHandler.generateZIndex());
 
         if(this.isVisible()) {
             DomHandler.absolutePosition(this.container, target);

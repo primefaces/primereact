@@ -230,7 +230,7 @@ export class AutoComplete extends Component {
             this.alignPanel();
             
             if (this.panel && this.panel.element && !this.panel.element.offsetParent) {
-                this.panel.element.style.zIndex = DomHandler.getZindex();
+                this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
                 this.panel.element.style.display = "block";
                 DomHandler.fadeIn(this.panel.element, 200);
                 this.bindDocumentClickListener();

@@ -36,7 +36,7 @@ export class Password extends Component {
                 this.createPanel();
             }
             
-            this.panel.style.zIndex = String(DomHandler.getZindex());
+            this.panel.style.zIndex = String(DomHandler.generateZIndex());
             DomHandler.absolutePosition(this.panel, this.inputEl);
             this.panel.style.display = 'block';
             DomHandler.fadeIn(this.panel, 250);

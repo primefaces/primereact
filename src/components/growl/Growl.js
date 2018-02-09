@@ -57,7 +57,7 @@ export class Growl extends Component {
                 messages: newMessages
             });
 
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.getZindex());
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
     }
 

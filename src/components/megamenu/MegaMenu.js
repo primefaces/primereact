@@ -32,8 +32,9 @@ export class MegaMenu extends Component {
 
         this.setState({activeItem:item});
         let submenu =  event.currentTarget.children[1];
+        
         if(submenu) {
-            submenu.style.zIndex = DomHandler.getZindex();
+            submenu.style.zIndex = String(DomHandler.generateZIndex());
 
             if(this.props.orientation === 'horizontal')  {
                 submenu.style.top = DomHandler.getOuterHeight(event.currentTarget.children[0]) + 'px';
