@@ -100,6 +100,9 @@ export class FileUpload extends Component {
     
     clearInputElement() {
         this.fileInput.value = '';
+        if(this.props.mode === 'basic') {
+            this.fileInput.style.display = 'inline';
+        }
     }
 
     formatSize(bytes) {
@@ -117,8 +120,8 @@ export class FileUpload extends Component {
     onFileSelect(event) {
         this.setState({msgs:[]});
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-        for(let file of files) {
-            if(!this.isFileSelected(file)) {
+        for (let file of files) {
+            if (!this.isFileSelected(file)) {
                 if (this.validate(file)) {
                     if (this.isImage(file)) {
                         file.objectURL = window.URL.createObjectURL(file);
@@ -134,7 +137,7 @@ export class FileUpload extends Component {
         }
                 
         if(this.props.onSelect) {
-            this.props.onSelect({originalEvent: event, files: this.state.files});
+            this.props.onSelect({originalEvent: event, files: files});
         }
         
         this.clearInputElement();
@@ -145,20 +148,21 @@ export class FileUpload extends Component {
     }
 
     isFileSelected(file){
-        for(let sFile of this.state.files){
-            if((sFile.name + sFile.type + sFile.size) === (file.name + file.type+file.size))
+        for (let sFile of this.state.files){
+            if ((sFile.name + sFile.type + sFile.size) === (file.name + file.type+file.size))
                 return true;
         }
         return false;
     }
 
     validate(file) {
-        if(this.props.maxFileSize && file.size > this.props.maxFileSize) {
+        if (this.props.maxFileSize && file.size > this.props.maxFileSize) {
             this.messagesUI.show({
                     severity: 'error',
                     summary: this.props.invalidFileSizeMessageSummary.replace('{0}', file.name),
                     detail: this.props.invalidFileSizeMessageDetail.replace('{0}', this.formatSize(this.props.maxFileSize))
                 });
+
             return false;
         }
         
@@ -170,23 +174,23 @@ export class FileUpload extends Component {
         let xhr = new XMLHttpRequest();
         let formData = new FormData();
 
-        if(this.props.onBeforeUpload) {
+        if (this.props.onBeforeUpload) {
             this.props.onBeforeUpload({
                 'xhr': xhr,
                 'formData': formData 
             });
         }
 		
-        for(let file of this.state.files) {
+        for (let file of this.state.files) {
             formData.append(this.props.name, file, file.name);
         }
 
         xhr.upload.addEventListener('progress', (event) => {
-            if(event.lengthComputable) {
+            if (event.lengthComputable) {
                 this.setState({progress: Math.round((event.loaded * 100) / event.total)});
             }
             
-            if(this.props.onProgress) {
+            if (this.props.onProgress) {
                 this.props.onProgress({
                     originalEvent: event, 
                     progress: this.progress
@@ -195,16 +199,16 @@ export class FileUpload extends Component {
         });
 
         xhr.onreadystatechange = () => {
-            if(xhr.readyState === 4) {
+            if (xhr.readyState === 4) {
                this.setState({progress: 0});
                 
-                if(xhr.status >= 200 && xhr.status < 300) {
-                    if(this.props.onUpload) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    if (this.props.onUpload) {
                         this.props.onUpload({xhr: xhr, files: this.files});
                     }
                 }
                 else {
-                    if(this.props.onError) {
+                    if (this.props.onError) {
                         this.props.onError({xhr: xhr, files: this.files});
                     }
                 }
@@ -229,7 +233,7 @@ export class FileUpload extends Component {
 
     clear() {
         this.setState({files:[]});
-        if(this.props.onClear) {
+        if (this.props.onClear) {
             this.props.onClear();
         }
         this.clearInputElement();
@@ -251,7 +255,7 @@ export class FileUpload extends Component {
     }
     
     onDragOver(event) {
-        if(!this.props.disabled) {
+        if (!this.props.disabled) {
             DomHandler.addClass(this.content, 'ui-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -259,13 +263,13 @@ export class FileUpload extends Component {
     }
     
     onDragLeave(event) {
-        if(!this.props.disabled) {
+        if (!this.props.disabled) {
             DomHandler.removeClass(this.content, 'ui-fileupload-highlight');
         }
     }
     
     onDrop(event) {
-        if(!this.props.disabled) {
+        if (!this.props.disabled) {
             DomHandler.removeClass(this.content, 'ui-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -280,9 +284,8 @@ export class FileUpload extends Component {
     }
     
     onSimpleUploaderClick() {
-        if(this.hasFiles()) {
+        if (this.hasFiles()) {
             this.upload();
-            this.fileInput.style.display = 'inline';
         }
     }
     
@@ -326,12 +329,12 @@ export class FileUpload extends Component {
         let uploadButton, cancelButton, filesList, progressBar;
         let chooseButton = this.renderChooseButton();
                            
-        if(!this.props.auto) {
+        if (!this.props.auto) {
             uploadButton = <Button label={this.props.uploadLabel} icon="fa-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
             cancelButton = <Button label={this.props.cancelLabel} icon="fa-close" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
         }
 
-        if(this.hasFiles()) {
+        if (this.hasFiles()) {
             filesList = this.renderFiles();
             progressBar = <ProgressBar value={this.state.progress} showValue={false} />;
         }
@@ -368,11 +371,9 @@ export class FileUpload extends Component {
     }
     
     render() {        
-        if(this.props.mode === 'advanced') {
+        if (this.props.mode === 'advanced')
             return this.renderAdvanced();
-        }
-        else if(this.props.mode === 'basic') {
+        else if (this.props.mode === 'basic')
             return this.renderBasic();
-        }
     }
 }
