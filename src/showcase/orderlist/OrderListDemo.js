@@ -12,12 +12,9 @@ export class OrderListDemo extends Component {
         this.state = {
             cars: null
         };
-        this.carservice = new CarService();
-        this.onCarsChange = this.onCarsChange.bind(this);
-    }
 
-    onCarsChange(e) {
-        this.setState({cars: e.value});
+        this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
     }
 
     componentDidMount() {
@@ -46,8 +43,9 @@ export class OrderListDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} 
-                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onChange={this.onCarsChange}></OrderList>
+                    <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
+                        responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} 
+                        onChange={(e) => this.setState({cars: e.value})}></OrderList>
                 </div>
                 
                 <OrderListDoc></OrderListDoc>
@@ -255,12 +253,9 @@ export class OrderListDemo extends Component {
         this.state = {
             cars: null
         };
-        this.carservice = new CarService();
-        this.onCarsChange = this.onCarsChange.bind(this);
-    }
 
-    onCarsChange(e) {
-        this.setState({cars: e.value});
+        this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
     }
 
     componentDidMount() {
@@ -280,20 +275,9 @@ export class OrderListDemo extends Component {
 
     render() {
         return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>OrderList</h1>
-                        <p>OrderList is used to sort a collection.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate.bind(this)} 
-                    responsive={true} header="Responsive Cars" listStyle={{ height: '250px' }} onChange={this.onCarsChange}></OrderList>
-                </div>
-
-            </div>
+            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
+                responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} 
+                onChange={(e) => this.setState({cars: e.value})}></OrderList>
         );
     }
 }
