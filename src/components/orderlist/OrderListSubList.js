@@ -13,10 +13,6 @@ export class OrderListSubList extends Component {
         listStyle: null,
         itemTemplate: null,
         dragdrop: false,
-        onDragStart: null,
-        onDragEnd: null,
-        onDragLeave: null,
-        onDrop: null,
         onItemClick: null,
         onChange: null
     }
@@ -28,10 +24,6 @@ export class OrderListSubList extends Component {
         listStyle: PropTypes.object,
         itemTemplate: PropTypes.func,
         dragdrop: PropTypes.func,
-        onDragStart: PropTypes.func,
-        onDragEnd: PropTypes.func,
-        onDragLeave: PropTypes.func,
-        onDrop: PropTypes.func,
         onItemClick: PropTypes.func,
         onChange: PropTypes.func
     }

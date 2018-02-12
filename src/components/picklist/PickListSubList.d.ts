@@ -8,7 +8,7 @@ interface PickListSubListProps {
     listClassName?: string;
     style?: object;
     showControls?: boolean;
-    itemTemplate?(): void;
+    itemTemplate?(item: any): void;
     onItemClick?(): void;
     onSelectionChange?({event: Event, value: any}): void;
 }

@@ -4,8 +4,8 @@ interface PickListProps {
     id?: string;
     source?: Array<any>;
     target?: Array<any>;
-    sourceHeader?: string;
-    targetHeader?: string;
+    sourceHeader?: any;
+    targetHeader?: any;
     style?: object;
     className?: string;
     sourcestyle?: object;
@@ -13,7 +13,7 @@ interface PickListProps {
     responsive?: boolean;
     showSourceControls?: boolean;
     showTargetControls?: boolean;
-    itemTemplate?(): void;
+    itemTemplate?(item: any): void;
     onChange?(e: {event: Event, source: any, target: any}): void;
     onMoveToSource?(e: {originalEvent: Event, value: any}): void;
     onMoveAllToSource?(e: {originalEvent: Event, value: any}): void;

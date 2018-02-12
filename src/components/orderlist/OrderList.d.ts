@@ -3,15 +3,14 @@ import React = require("react");
 interface OrderListProps {
     id?: string;
     value?: Array<any>;
-    header?: string;
+    header?: any;
     style?: object;
     className?: string;
-    liststyle?: object;
+    listStyle?: object;
     responsive?: boolean;
-    dragdrop?(): void;
-    dragdropScope?: string;
+    dragdrop?: boolean;
     onChange?(e: {originalEvent: Event, value: any}): void;
-    itemTemplate?(): void;
+    itemTemplate?(item: any): void;
 }
 
 export class OrderList extends React.Component<OrderListProps,any> {}
