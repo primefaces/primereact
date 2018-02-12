@@ -21,11 +21,11 @@ export class RadioButton extends Component {
         id: PropTypes.string,
         inputId: PropTypes.string,
         value: PropTypes.any,
-        checked: PropTypes.bool,
+        checked: PropTypes.bool.isRequired,
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        onChange: PropTypes.func
+        onChange: PropTypes.func.isRequired
     };
     
     constructor(props) {
