@@ -63,7 +63,7 @@ export class Growl extends Component {
 
     clear() {
         this.setState({
-            messages: null
+            messages: []
         })
     }
     
