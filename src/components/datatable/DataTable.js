@@ -381,12 +381,6 @@ export class DataTable extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if(this.props.resizableColumns) {
-            this.fixColumnWidths();
-        }
-    }
-
     componentWillReceiveProps(nextProps) {
         if(nextProps.first !== null) { this.setState({first: nextProps.first}) }
         if(nextProps.rows !== null) { this.setState({rows: nextProps.rows}) }
@@ -398,13 +392,6 @@ export class DataTable extends Component {
         if(nextProps.globalFilter !== this.props.globalFilter) {
             this.setState({first: 0});
         }
-    }
-
-    fixColumnWidths() {
-        let columns = DomHandler.find(this.container, 'th.ui-resizable-column');
-        columns.forEach((col) => {
-            col.style.width = col.offsetWidth + 'px';
-        });
     }
 
     hasFooter() {
@@ -431,7 +418,6 @@ export class DataTable extends Component {
     }
 
     onColumnResizeStart(event) {
-        this.fixColumnWidths();
         let containerLeft = DomHandler.getOffset(this.container).left;
         this.resizeColumn = event.columnEl;
         this.columnResizing = true;

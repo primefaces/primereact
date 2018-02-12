@@ -1114,9 +1114,10 @@ export class DataTableRowExpansionDemo extends Component {
 `}
 </CodeHighlight>
 
-            <h3>Column Resize</h3>
+            <h3>Column Reorder</h3>
             <p>Columns can be reordered using drag drop by setting the reorderableColumns to true. onColReorder is a callback that is invoked when a column is reordered.
-            DataTable keeps the column order state internally using keys that identifies a column using the field property. If the column has no field use columnKey instead. </p>
+            DataTable keeps the column order state internally using keys that identifies a column using the field property. If the column has no field, use columnKey instead.</p>
+
 <CodeHighlight className="html">
 {`
 <DataTable value={this.state.cars} reorderableColumns={true}>
