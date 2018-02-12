@@ -9,7 +9,10 @@ export class AutoCompleteDemo extends Component {
     constructor() {
         super();
         this.state = { 
-            countriesData: [] 
+            countriesData: [],
+            filteredCountriesSingle: null,
+            filteredBrands: null,
+            filteredCountriesMultiple: null
         };
         
         this.filterCountrySingle = this.filterCountrySingle.bind(this);
@@ -529,7 +532,10 @@ export class AutoCompleteDemo extends Component {
     constructor() {
         super();
         this.state = { 
-            countriesData: [] 
+            countriesData: [],
+            filteredCountriesSingle: null,
+            filteredBrands: null,
+            filteredCountriesMultiple: null
         };
         
         this.filterCountrySingle = this.filterCountrySingle.bind(this);
