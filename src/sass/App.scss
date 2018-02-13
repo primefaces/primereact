@@ -56,7 +56,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999999;
+    z-index: 999;
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
@@ -324,7 +324,7 @@ body {
 }
 
 .layout-mask {
-    z-index: 999997;
+    z-index: 998;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -831,7 +831,7 @@ body {
         top: 98px;
         left: -300px;
         transition: left .3s;
-        z-index: 999998;
+        z-index: 999;
 
         &.active {
             left: 0;
