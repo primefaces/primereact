@@ -23,6 +23,12 @@ export class GrowlMessage extends Component {
         this.onClose = this.onClose.bind(this);
     }
 
+    componentWillUnmount() {
+        if(this.timeout) {
+            clearTimeout(this.timeout);
+        }
+    }
+
     componentDidMount() {
         if(!this.props.message.sticky) {
             this.timeout = setTimeout(() => {

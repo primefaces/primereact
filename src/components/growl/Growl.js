@@ -68,15 +68,13 @@ export class Growl extends Component {
     }
     
     onClose(message) {
-        if(this.container) {
-            let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
-            this.setState({
-                messages: newMessages
-            });
-    
-            if (this.props.onRemove) {
-                this.props.onRemove(message);
-            }
+        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
+        this.setState({
+            messages: newMessages
+        });
+
+        if (this.props.onRemove) {
+            this.props.onRemove(message);
         }
     }
  
