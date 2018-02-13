@@ -55,7 +55,8 @@
 	position: absolute;
 	top: .125em;
 	width: 1.8em;
-	height: 1.8em;
+    height: 1.8em;
+    cursor: pointer;
 }
 
 .ui-datepicker .ui-datepicker-prev {
