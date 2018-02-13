@@ -361,13 +361,6 @@ export class DataTable extends Component {
         return true;
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if(this.props.lazy && nextProps.value === this.props.value)
-            return false;
-        else
-            return true;
-    }
-
     componentDidMount() {
         if(this.props.lazy && this.props.onLazyLoad) {
             this.props.onLazyLoad({
