@@ -42,8 +42,8 @@ export class Growl extends Component {
         if (value) {
             let newMessages;
 
-            if(Array.isArray(value)) {
-                for(let i = 0; i < value.length; i++) {
+            if (Array.isArray(value)) {
+                for (let i = 0; i < value.length; i++) {
                     value[i].id = messageIdx++;
                     newMessages = [...this.state.messages, ...value];
                 }
@@ -68,13 +68,15 @@ export class Growl extends Component {
     }
     
     onClose(message) {
-        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
-        this.setState({
-            messages: newMessages
-        });
-
-        if(this.props.onRemove) {
-            this.props.onRemove(message);
+        if(this.container) {
+            let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
+            this.setState({
+                messages: newMessages
+            });
+    
+            if (this.props.onRemove) {
+                this.props.onRemove(message);
+            }
         }
     }
  
