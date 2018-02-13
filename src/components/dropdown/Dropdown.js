@@ -341,7 +341,7 @@ export class Dropdown extends Component {
         this.overlayClick = false;
     }
     
-    updateEditableLabel(option) {
+    updateEditableLabel(option): void {
         if(this.editableInput) {
             this.editableInput.value = (option ? this.getOptionLabel(option) : this.props.value||'');
         }

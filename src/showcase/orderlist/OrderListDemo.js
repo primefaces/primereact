@@ -44,7 +44,7 @@ export class OrderListDemo extends Component {
 
                 <div className="content-section implementation">
                     <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
-                        responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} filterBy={['brand']}
+                        responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} 
                         onChange={(e) => this.setState({cars: e.value})}></OrderList>
                 </div>
                 
@@ -79,27 +79,17 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
             </p>
 <CodeHighlight className="html">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
 
             <h3>DragDrop</h3>
-            <p>Items can be reordered using drag and drop by enabling dragdrop property.</p>
+            <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflicts with other drag drop events on view.</p>
             
 <CodeHighlight className="html">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onChange={(e) => this.setState({cars: e.value})}></OrderList>
-
-`}
-</CodeHighlight>
-
-            <h3>Filtering</h3>
-            <p>Items can be filtered using an input field by enabling the filterBy property that specifies the fields to use in filtering.</p>
-<CodeHighlight className="html">
-{`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Cars" onChange={(e) => this.setState({cars: e.value})}
-        filterBy={['brand', 'year']} filterPlaceholder="Filter by brand or year"></OrderList>
 
 `}
 </CodeHighlight>
@@ -174,16 +164,10 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
                             <td>Whether to enable dragdrop based reordering.</td>
                         </tr>
                         <tr>
-                            <td>filterBy</td>
-                            <td>array</td>
-                            <td>null</td>
-                            <td>When specified displays an input field to filter the items on keyup and decides which fields to search against.</td>
-                        </tr>
-                        <tr>
-                            <td>filterPlaceholder</td>
+                            <td>dragdropScope</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Placeholder text on filter input.</td>
+                            <td>Unique key of drag drop events to avoid conflict with other drag drop events on the page.</td>
                         </tr>
                         <tr>
                             <td>itemTemplate</td>
@@ -292,7 +276,7 @@ export class OrderListDemo extends Component {
     render() {
         return (
             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
-                responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} filter={true} filterBy={['brand']}
+                responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} 
                 onChange={(e) => this.setState({cars: e.value})}></OrderList>
         );
     }
