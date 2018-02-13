@@ -17,6 +17,8 @@ export class OrderList extends Component {
         listStyle: null,
         responsive: false,
         dragdrop: false,
+        filterBy: null,
+        filterPlaceholder: null,
         onChange: null,
         itemTemplate: null
     }
@@ -30,6 +32,8 @@ export class OrderList extends Component {
         listStyle: PropTypes.object,
         responsive: PropTypes.bool,
         dragdrop: PropTypes.func,
+        filterBy: PropTypes.array,
+        filterPlaceholder: PropTypes.string,
         onChange: PropTypes.func,
         itemTemplate: PropTypes.func
     }
@@ -122,7 +126,7 @@ export class OrderList extends Component {
                 <OrderListSubList ref={(el) => this.subList = el} value={this.props.value} selection={this.state.selection} onItemClick={this.onItemClick} 
                             itemTemplate={this.props.itemTemplate} header={this.props.header} listStyle={this.props.listStyle}
                             dragdrop={this.props.dragdrop} onDragStart={this.onDragStart} onDragEnter={this.onDragEnter} onDragEnd={this.onDragEnd} onDragLeave={this.onDragEnter} onDrop={this.onDrop}
-                            onChange={this.props.onChange} />
+                            onChange={this.props.onChange} filterPlaceholder={this.props.filterPlaceholder} filterBy={this.props.filterBy}/>
             </div>
         );
     }

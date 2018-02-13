@@ -9,6 +9,8 @@ interface OrderListProps {
     listStyle?: object;
     responsive?: boolean;
     dragdrop?: boolean;
+    filterBy?: string[];
+    filterPlaceholder?: string;
     onChange?(e: {originalEvent: Event, value: any}): void;
     itemTemplate?(item: any): void;
 }

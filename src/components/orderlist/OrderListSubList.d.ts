@@ -6,6 +6,8 @@ interface OrderListSubListProps {
     header?: any;
     listStyle?: object;
     dragdrop?: boolean;
+    filterBy?: string[];
+    filterPlaceholder?: string;
     onItemClick?(e: {originalEvent: Event, value: any, index: number}): void;
     itemTemplate?(item: any): void;
     onChange?(e: {originalEvent: Event, value: any}): void;

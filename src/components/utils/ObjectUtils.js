@@ -72,6 +72,7 @@ export default class ObjectUtils {
             return null;
         }
     }
+    
     static filter(value, fields, filterValue) {
         var filteredItems=[];
 

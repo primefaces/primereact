@@ -13,6 +13,8 @@ export class OrderListSubList extends Component {
         listStyle: null,
         itemTemplate: null,
         dragdrop: false,
+        filterBy: null,
+        filterPlaceholder: null,
         onItemClick: null,
         onChange: null
     }
@@ -24,17 +26,23 @@ export class OrderListSubList extends Component {
         listStyle: PropTypes.object,
         itemTemplate: PropTypes.func,
         dragdrop: PropTypes.func,
+        filterBy: PropTypes.array,
+        filterPlaceholder: PropTypes.string,
         onItemClick: PropTypes.func,
         onChange: PropTypes.func
     }
 
     constructor(props) {
         super(props);
+        this.state = {
+            filter: ''
+        }
 
         this.onDragEnd = this.onDragEnd.bind(this);
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onListMouseMove = this.onListMouseMove.bind(this);
+        this.onFilterInputChange = this.onFilterInputChange.bind(this);
     }
          
     isSelected(item) {
@@ -94,24 +102,59 @@ export class OrderListSubList extends Component {
         }
     }
 
+    onFilterInputChange(event) {
+        this.setState({
+            filter: event.target.value
+        });
+    }
+    
+    hasFilter() {
+        return this.state.filter && this.state.filter.trim().length > 0;
+    }
+
     renderDropPoint(item, index, key) {
         return (
             <li key={key} className="ui-orderlist-droppoint"
                             onDragOver={(e) => this.onDragOver(e, index + 1)} onDragLeave={this.onDragLeave} onDrop={this.onDrop}></li>
         );
     }
-        
-    render() {
-        let header = null;
-        let items = null;
-        let listClassName = classNames('ui-widget-content ui-orderlist-list', {'ui-corner-bottom': this.props.header, 'ui-corner-all': !this.props.header});
 
-        if (this.props.header) {
-            header = <div className="ui-orderlist-caption ui-widget-header ui-corner-top">{this.props.header}</div>
+    renderFilter() {
+        if (this.props.filterBy) {
+            return (
+                <div className="ui-orderlist-filter-container ui-widget-content ng-star-inserted">
+                    <input className="ui-inputtext ui-widget ui-state-default ui-corner-all" role="textbox" type="text" placeholder={this.props.filterPlaceholder}
+                        onChange={this.onFilterInputChange}></input>
+                    <span className="fa fa-search"></span>
+                </div>
+            );
         }
-        
-        if (this.props.value) {
-            items = this.props.value.map((item, i) => {
+        else {
+            return null;
+        }
+    }
+
+    renderHeader() {
+        if (this.props.header) {
+            return (
+                <div className="ui-orderlist-caption ui-widget-header ui-corner-top">{this.props.header}</div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderItems() {
+        let items = null;
+        let value = this.props.value;
+
+        if (value) {
+            if (this.hasFilter()) {
+                value = ObjectUtils.filter(value, this.props.filterBy, this.state.filter);
+            }
+
+            items = value.map((item, i) => {
                 let content = this.props.itemTemplate ? this.props.itemTemplate(item) : item;
                 let itemClassName = classNames('ui-orderlist-item', this.props.className, {'ui-state-highlight': this.isSelected(item)});
                 let key = JSON.stringify(item);
@@ -136,10 +179,20 @@ export class OrderListSubList extends Component {
                 }
             });
         }
+
+        return items;
+    }
         
+    render() {
+        let header = this.renderHeader();
+        let items = this.renderItems();
+        let filter = this.renderFilter();
+        let listClassName = classNames('ui-widget-content ui-orderlist-list', {'ui-corner-bottom': this.props.header, 'ui-corner-all': !this.props.header});
+
         return (
             <div className="ui-orderlist-list-container">
                 {header}
+                {filter}
                 <ul ref={(el) => this.listElement = el} className={listClassName} style={this.props.listStyle} onDragOver={this.onListMouseMove}>
                     {items}
                 </ul>
