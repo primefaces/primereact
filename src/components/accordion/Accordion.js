@@ -120,7 +120,7 @@ export class Accordion extends Component {
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle} onClick={(event) => this.onTabClick(event, tab, index)}>
                 <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected}>
-                    <span className={classNames('fa fa-fw', { 'fa-caret-right': !selected, 'fa-caret-down': selected })}></span>
+                    <span className={classNames('ui-accordion-toggle-icon fa fa-fw', { 'fa-caret-right': !selected, 'fa-caret-down': selected })}></span>
                     <span className="ui-accordion-header-text">{tab.props.header}</span>
                 </a>
             </div>
