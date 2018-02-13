@@ -43,6 +43,9 @@
     border-style: solid;
 }
 
+.ui-datatable-auto-layout > .ui-datatable-wrapper > table {
+    table-layout: auto;
+}
 
 .ui-datatable.ui-datatable-resizable .ui-datatable-thead > tr > th,
 .ui-datatable.ui-datatable-resizable .ui-datatable-tfoot > tr > td,
@@ -76,14 +79,12 @@
 .ui-datatable-scrollable-body {
     overflow:auto;
 }
-.ui-datatable-scrollable-header {
-    overflow: hidden;
-}
 
 .ui-datatable-scrollable .ui-datatable-scrollable-header,
 .ui-datatable-scrollable .ui-datatable-scrollable-footer {
     position: relative;
     border: 0 none;
+    overflow: hidden;
 }
 
 .ui-datatable-scrollable .ui-datatable-scrollable-header td {

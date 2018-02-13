@@ -21,6 +21,9 @@ interface DataTableProps {
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
     paginatorTemplate?: string;
+    paginatorLeft?: any;
+    paginatorRight?: any;
+    pageLinkSize?: number;
     rowsPerPageOptions?: number[];
     first?: number;
     rows?: number;
@@ -59,9 +62,12 @@ interface DataTableProps {
     exportFilename?: string;
     contextMenu?: any;
     rowGroupMode?: string;
+    autoLayout?:boolean;
     rowClassName?(rowData: any): object;
     rowGroupHeaderTemplate?(): void;
     rowGroupFooterTemplate?(): void;
+    loading?:boolean;
+    loadingIcon?:string;
     onColumnResizeEnd?({element: any, delta: number}): void;
     onSort?({sortField: string, sortOrder: number, multiSortMeta: any}): void;
     onPage?(event: Event): void;
@@ -74,9 +80,6 @@ interface DataTableProps {
     onRowCollapse?(e: {originalEvent: Event, data: any}): void;
     onContextMenuSelect?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
-    paginatorLeft?: any;
-    paginatorRight?: any;
-    pageLinkSize?: number;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {}

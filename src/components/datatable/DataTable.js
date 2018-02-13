@@ -24,6 +24,9 @@ export class DataTable extends Component {
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
+        paginatorLeft:null,
+        paginatorRight: null,
+        pageLinkSize: 5,
         first: null,
         rows: null,
         totalRecords: null,
@@ -69,6 +72,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: null,
         loading: false,
         loadingIcon: 'fa-circle-o-notch',
+        autoLayout: false,
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -80,10 +84,7 @@ export class DataTable extends Component {
         onRowExpand: null,
         onRowCollapse: null,
         onContextMenuSelect: null,
-        onColReorder: null,
-        paginatorLeft:null,
-        paginatorRight: null,
-        pageLinkSize: 5
+        onColReorder: null
     }
 
     static propTypes = {
@@ -99,6 +100,9 @@ export class DataTable extends Component {
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
         paginatorTemplate: PropTypes.string,
+        paginatorLeft: PropTypes.any,
+        paginatorRight: PropTypes.any,
+        pageLinkSize: PropTypes.number,
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
@@ -143,7 +147,7 @@ export class DataTable extends Component {
         rowGroupHeaderTemplate: PropTypes.func,
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
-        loadingIcons: PropTypes.string,
+        loadingIcon: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -156,9 +160,7 @@ export class DataTable extends Component {
         onRowCollapse: PropTypes.func,
         onContextMenuSelect: PropTypes.func,
         onColReorder: PropTypes.func,
-        paginatorLeft: PropTypes.any,
-        paginatorRight: PropTypes.any,
-        pageLinkSize: PropTypes.number
+        autoLayout: PropTypes.bool
     };
 
     constructor(props) {
@@ -897,7 +899,8 @@ export class DataTable extends Component {
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
         let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 
-                        'ui-datatable-scrollable': this.props.scrollable, 'ui-datatable-virtual-scrollable': this.props.virtualScroll}, this.props.className);
+                        'ui-datatable-scrollable': this.props.scrollable, 'ui-datatable-virtual-scrollable': this.props.virtualScroll,
+                        'ui-datatable-auto-layout': this.props.autoLayout}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;

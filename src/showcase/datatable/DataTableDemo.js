@@ -376,6 +376,11 @@ export class DataTableDemo extends Component {
                 </table>
             </div>
 
+            <h3>Table Layout</h3>
+            <p>For performance reasons, default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents
+                set <i>autoLayout</i> property to true.
+            </p>
+
             <h3>Templates</h3>
             <p>Field data of a corresponding row is displayed as the cell content by default, this can be customized using templating where current row data and column properties are passed to the body template. 
                 On the other hand, header and footer properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly DataTable itself
@@ -1482,6 +1487,18 @@ export class DataTableLazyDemo extends Component {
                             <td>Template of the paginator.</td>
                         </tr>
                         <tr>
+                            <td>paginatorLeft</td>
+                            <td>Element</td>
+                            <td>null</td>
+                            <td>Content for the left side of the paginator.</td>
+                        </tr>
+                        <tr>
+                            <td>paginatorRight</td>
+                            <td>Element</td>
+                            <td>null</td>
+                            <td>Content for the right side of the paginator.</td>
+                        </tr>
+                        <tr>
                             <td>pageLinkSize</td>
                             <td>number</td>
                             <td>5</td>
@@ -1745,6 +1762,12 @@ export class DataTableLazyDemo extends Component {
                             <td>string</td>
                             <td>fa-circle-o-notch</td>
                             <td>The icon to show while indicating data load is in progress.</td>
+                        </tr>
+                        <tr>
+                            <td>autoLayout</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the cell widths scale according to their content or not.</td>
                         </tr>
                     </tbody>
                 </table>
