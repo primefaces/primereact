@@ -47,6 +47,7 @@ export class DialogDemo extends Component {
 
                     <Button label="Show" icon="fa-external-link-square" onClick={this.onClick} />
                 </div>
+
                 <DialogDoc></DialogDoc>
             </div>
         )
@@ -276,6 +277,12 @@ let footer = <div>
                             <td>DOM element</td>
                             <td>null</td>
                             <td>DOM element instance where the dialog should be mounted.</td>
+                        </tr>
+                        <tr>
+                            <td>baseZIndex</td>
+                            <td>number</td>
+                            <td>0</td>
+                            <td>Base zIndex value to use in layering.</td>
                         </tr>
                     </tbody>
                 </table>

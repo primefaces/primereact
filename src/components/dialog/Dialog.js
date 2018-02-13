@@ -33,7 +33,8 @@ export class Dialog extends Component {
         showHeader: true,
         positionLeft: -1,
         positionTop: -1,
-        appendTo: null
+        appendTo: null,
+        baseZIndex: 0
     }
 
     static propTypes = {
@@ -62,7 +63,8 @@ export class Dialog extends Component {
         showHeader: PropTypes.bool,
         positionLeft: PropTypes.number,
         positionTop: PropTypes.number,
-        appendTo: PropTypes.object
+        appendTo: PropTypes.object,
+        baseZIndex: PropTypes.number
     };
     
     constructor(props) {
@@ -118,9 +120,7 @@ export class Dialog extends Component {
 
     show() {
         this.setState({visible: true});
-        
-        let zIndex = DomHandler.generateZIndex() ;
-        this.container.style.zIndex = String(zIndex);
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         
         this.bindGlobalListeners();
         
