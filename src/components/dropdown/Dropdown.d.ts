@@ -10,7 +10,7 @@ interface DropdownProps {
     autoWidth?: boolean;
     scrollHeight?: string;
     filter?: boolean;
-    filterplaceholder?: string;
+    filterPlaceholder?: string;
     editable?:boolean;
     placeholder?: string;
     required?: boolean;
