@@ -266,8 +266,8 @@ export class Calendar extends Component {
             month = 11;
             year--;
             
-            if(this.props.yearNavigator && year < this.props.yearOptions[0]) {
-                  year = this.props.yearOptions[this.props.yearOptions.length - 1];
+            if(this.props.yearNavigator && year < this.yearOptions[0]) {
+                  year = this.yearOptions[this.yearOptions.length - 1];
             }
         }
         else {
@@ -296,8 +296,8 @@ export class Calendar extends Component {
             month = 0;
             year++;
             
-            if(this.props.yearNavigator && year > this.props.yearOptions[this.props.yearOptions.length - 1]) {
-                 year = this.props.yearOptions[0];
+            if(this.props.yearNavigator && year > this.yearOptions[this.yearOptions.length - 1]) {
+                 year = this.yearOptions[0];
             }
         }
         else {
