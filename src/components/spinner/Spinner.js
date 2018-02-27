@@ -204,33 +204,36 @@ export class Spinner extends Component {
     onInputKeyPress(event) {
         let inputChar = String.fromCharCode(event.charCode);
         let keyPattern = /[0-9+-]/;
-        if (!keyPattern.test(inputChar) && inputChar !== this.props.decimalSeparator) {
+        if (!keyPattern.test(inputChar) && inputChar !== this.props.decimalSeparator ) {
             event.preventDefault();
         }
     }
 
     onInputKeyUp(event) {
+
         let inputValue = event.target.value;
-        if (event.key === this.props.decimalSeparator  && event.key !== this.thousandSeparator)
+        if (event.key === this.props.decimalSeparator  && event.key === this.props.thousandSeparator)
             this.value = inputValue;
         else
             this.value = this.parseValue(inputValue);
-        
+
         this.formatValue();
-        this.inputEl.value = this.valueAsString;
+        setTimeout(()=>{
+            this.inputEl.value = this.valueAsString;
+        },5000);
+
 
         if (this.props.onChange) {
             this.props.onChange({
                 value: this.value
             })
         }
-
         this.updateFilledState();
     }
 
     onInputBlur(event) {
         let val = this.value;
-        if(val !== undefined && val != null) {
+        if(val !== undefined && val !== null) {
             this.value = this.updateValue(val);
         }
 
