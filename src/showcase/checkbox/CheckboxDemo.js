@@ -39,11 +39,11 @@ export class CheckboxDemo extends Component {
                             <label htmlFor="cb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox inputId="cb2" value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
                             <label htmlFor="cb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <Checkbox inputId="cb3" value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
                             <label htmlFor="cb3">Los Angeles</label>
                         </div>
                     </div>
@@ -88,9 +88,18 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
                         <p>Multiple checkboxes can be grouped by checking against a list of values.</p>
 <CodeHighlight className="html">
 {`
-<Checkbox value="New York" label="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
-<Checkbox value="San Francisco" label="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
-<Checkbox value="Los Angeles" label="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+<div className="ui-g-12">
+    <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+    <label htmlFor="cb1">New York</label>
+</div>
+<div className="ui-g-12">
+    <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+    <label htmlFor="cb2">San Francisco</label>
+</div>
+<div className="ui-g-12">
+    <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+    <label htmlFor="cb3">Los Angeles</label>
+</div>
 
 `}
 </CodeHighlight>
@@ -112,15 +121,6 @@ onCityChange(e) {
 
     this.setState({cities: selectedCities});
 }
-
-`}
-</CodeHighlight>
-
-                    <h4>Label</h4>
-                    <p>The label attribute provides a label text next the checkbox. This label is also clickable and toggles the checked state.</p>
-<CodeHighlight className="html">
-{`
-<Checkbox label="I accept the terms" onChange={this.onChange} checked={this.state.checked}></Checkbox>
 
 `}
 </CodeHighlight>

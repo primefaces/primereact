@@ -94,15 +94,6 @@ onCityChange(e) {
 `}
 </CodeHighlight>
 
-                    <h4>Label</h4>
-                    <p>The label attribute provides a label text for the radio button. This label is also clickable and selects value.</p>
-<CodeHighlight className="html">
-{`
-<RadioButton label="I accept the terms" onChange={this.onChange} checked={this.state.checked} />
-
-`}
-</CodeHighlight>
-
                     <h3>Properties</h3>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
