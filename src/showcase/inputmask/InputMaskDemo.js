@@ -275,6 +275,12 @@ constructor() {
                             <td>false</td>
                             <td>When present, it specifies that an input field is read-only.</td>
                         </tr>
+                         <tr>
+                             <td>required</td>
+                             <td>boolean</td>
+                             <td>false</td>
+                             <td>When present, it specifies that the element must be filled out before submitting the form.</td>
+                         </tr>
                         <tr>
                             <td>name</td>
                             <td>string</td>
