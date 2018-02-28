@@ -193,7 +193,17 @@ export class Dialog extends Component {
     }
 
     moveOnTop() {
-        this.container.style.zIndex = String(DomHandler.generateZIndex());
+        let maskIndex = false;
+        for(let prop in this.props.children){
+            if(this.props.children[prop].props !== undefined){
+                let child = this.props.children[prop].props.appendTo;
+                if(child !==null || child !== undefined) {
+                    maskIndex = true;
+                }
+            }
+        }
+        if(!maskIndex)
+            this.container.style.zIndex = String(DomHandler.generateZIndex());
     }
 
     onCloseMouseDown(event) {
