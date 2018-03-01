@@ -209,6 +209,12 @@ carTemplate(option) {
                             <td>Label to display when there are no selections.</td>
                         </tr>
                         <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the component should be disabled.</td>
+                        </tr>
+                        <tr>
                             <td>filter</td>
                             <td>boolean</td>
                             <td>true</td>
