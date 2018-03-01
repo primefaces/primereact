@@ -1648,7 +1648,7 @@ export class Calendar extends Component {
             <span id={this.props.id} className={containerStyleClass} style={this.props.style}>
                 {inputtext}
                 {button}
-                <CalendarPanel ref={(el) => this.panel = el} className={overlayClassName} onClick={this.onDatePickerClick}>
+                <CalendarPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} className={overlayClassName} onClick={this.onDatePickerClick}>
                     {datepickerHeader}
                     {datepickerTable}
                     {timepicker}
