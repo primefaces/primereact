@@ -73,7 +73,7 @@ export class MultiSelect extends Component {
     }
 
     onClick() {
-        if(this.disabled) {
+        if(this.props.disabled) {
             return;
         }
         
