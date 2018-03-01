@@ -195,7 +195,7 @@ export class Dialog extends Component {
     moveOnTop() {
         let maskIndex = false;
         for(let prop in this.props.children){
-            if(this.props.children[prop].props !== undefined){
+            if(this.props.children[prop] && this.props.children[prop].props !== undefined){
                 let child = this.props.children[prop].props.appendTo;
                 if(child !==null || child !== undefined) {
                     maskIndex = true;
