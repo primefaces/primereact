@@ -564,6 +564,16 @@
     }
     
     .ui-datepicker-calendar {
+		tbody {
+			>tr {
+				.ui-datepicker-selectable-other-month {
+					a:hover {
+						@include hover-element();
+					}
+
+				}
+			}
+		}
         td:not(.ui-state-disabled) {
             a:hover {
                 @include hover-element();

@@ -1584,6 +1584,7 @@ export class Calendar extends Component {
                     this.state.dates.map((week, rowIndex) => {
                         let columns = week.map((date, columnIndex) => {
                             let dateStyleClass = classNames({
+                                'ui-datepicker-selectable-other-month': date.otherMonth && this.props.selectOtherMonths,
                                 'ui-datepicker-other-month ui-state-disabled': date.otherMonth,
                                 'ui-datepicker-current-day': this.isSelected(date),
                                 'ui-datepicker-today': date.today
