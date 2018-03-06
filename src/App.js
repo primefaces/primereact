@@ -164,7 +164,6 @@ class AppMenu extends Component {
                                 <Link to="/spinner">&#9679; Spinner</Link>
                                 <Link to="/tristatecheckbox">&#9679; TriState</Link>
                                 <Link to="/togglebutton">&#9679; ToggleButton</Link>
-                                <Link to="/keyfilter">&#9679; KeyFilter</Link>
                             </div>
                         </div>
 
