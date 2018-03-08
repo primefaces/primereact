@@ -107,6 +107,7 @@ import { SidebarDemo } from "./showcase/sidebar/SidebarDemo";
 import { ProgressSpinnerDemo } from "./showcase/progressspinner/ProgressSpinnerDemo";
 import { CardDemo } from "./showcase/card/CardDemo";
 import { KeyFilterDemo } from "./showcase/keyfilter/KeyFilterDemo";
+import { DataViewDemo } from "./showcase/dataview/DataViewDemo";
 
 class AppMenu extends Component {
 
@@ -189,6 +190,7 @@ class AppMenu extends Component {
                             <div>
                                 <Link to="/datagrid">&#9679; DataGrid</Link>
                                 <Link to="/datalist">&#9679; DataList</Link>
+                                <Link to="/dataview">&#9679; DataView</Link>
                                 <Link to="/datatable">&#9679; DataTable</Link>
                                 <Link to="/datascroller">&#9679; DataScroller</Link>
                                 <Link to="/gmap">&#9679; Google Maps</Link>
@@ -531,6 +533,7 @@ class App extends Component {
                     <Route path="/scrollpanel" component={ScrollPanelDemo} />
                     <Route path="/card" component={CardDemo}/>
                     <Route path="/keyfilter" component={KeyFilterDemo}/>
+                    <Route path="/dataview" component={DataViewDemo}/>
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>

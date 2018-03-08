@@ -1,0 +1,18 @@
+.ui-button {
+    margin-top: 3em;
+}
+
+.filter-container {
+    text-align: center;
+}
+
+@media (max-width: 40em) {
+    .car-details, .search-icon {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .filter-container {
+        text-align: left;
+    }
+}
