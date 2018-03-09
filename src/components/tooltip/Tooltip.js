@@ -309,16 +309,16 @@ export class Tooltip extends Component {
             return;
 
         if(this.props.tooltipEvent === 'hover') {
-            elements.forEach((el, index) => {
-                el.addEventListener("mouseenter", (e) => {this.element = el;  this.onMouseEnter(e);});
-                el.addEventListener("mouseleave", (e) => this.onMouseLeave(e));
-            });
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].addEventListener("mouseenter", (e) => {this.element = elements[i];  this.onMouseEnter(e);});
+                elements[i].addEventListener("mouseleave", (e) => this.onMouseLeave(e));
+            }
         }
         else if(this.props.tooltipEvent === 'focus') {
-            elements.forEach((el, index) => {
-                el.addEventListener("focus", (e) => {this.element = el; this.onFocus(e);});
-                el.addEventListener("blur", (e) => this.onBlur(e));
-            });
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].addEventListener("focus", (e) => {this.element = elements[i]; this.onFocus(e);});
+                elements[i].addEventListener("blur", (e) => this.onBlur(e));
+            }
         }
     }
 
@@ -326,9 +326,9 @@ export class Tooltip extends Component {
         var selectors = this.props.for;
         
         if(selectors instanceof Array) {
-            selectors.forEach((selector, index) => {
-                this.bindMouseEvents(selector);
-            });
+            for (var i = 0; i < selectors.length; i++) {
+                this.bindMouseEvents(selectors[i]);
+            }
         }
         else {
             this.bindMouseEvents(selectors);
