@@ -340,6 +340,15 @@
     }
 }
 
+/* Row Reorder */
+.ui-datatable .ui-datatable-data > tr.ui-datatable-dragpoint-top > td {
+    box-shadow: inset 0 2px 0 0 $stateHighlightBgColor;
+}
+
+.ui-datatable .ui-datatable-data > tr.ui-datatable-dragpoint-bottom > td {
+    box-shadow: inset 0 -2px 0 0 $stateHighlightBgColor;
+}
+
 .ui-orderlist {
     .ui-orderlist-item:not(.ui-state-highlight):hover {
         @include hover-element();

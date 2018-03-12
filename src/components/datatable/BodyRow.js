@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import {BodyCell} from './BodyCell';
+import DomHandler from '../utils/DomHandler';
 
 export class BodyRow extends Component {
 
@@ -9,6 +10,11 @@ export class BodyRow extends Component {
         this.onClick = this.onClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.onDragOver = this.onDragOver.bind(this);
+        this.onDragLeave = this.onDragLeave.bind(this);
+        this.onDrop = this.onDrop.bind(this);
     }
 
     onClick(event) {
@@ -33,6 +39,48 @@ export class BodyRow extends Component {
                 originalEvent: event,
                 data: this.props.rowData,
                 index: this.props.rowIndex
+            });
+        }
+    }
+
+    onMouseDown(event) {
+        if (DomHandler.hasClass(event.target, 'ui-table-reorderablerow-handle'))
+            event.currentTarget.draggable = true;
+        else
+            event.currentTarget.draggable = false;
+    }
+
+    onDragEnd(event) {
+        if(this.props.onDragEnd) {
+            this.props.onDragEnd(event);
+        }
+        event.currentTarget.draggable = false;
+    }
+
+    onDragOver(event) {
+        if(this.props.onDragOver) {
+            this.props.onDragOver({
+                originalEvent: event,
+                rowElement: this.container
+            });
+        }
+        event.preventDefault();
+    }
+
+    onDragLeave(event) {
+        if(this.props.onDragLeave) {
+            this.props.onDragLeave({
+                originalEvent: event,
+                rowElement: this.container
+            });
+        }
+    }
+
+    onDrop(event) {
+        if(this.props.onDrop) {
+            this.props.onDrop({
+                originalEvent: event,
+                rowElement: this.container
             });
         }
     }
@@ -67,7 +115,8 @@ export class BodyRow extends Component {
         }
         
         return (
-            <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick}>
+            <tr ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+                onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                 {cells}
             </tr>
         );

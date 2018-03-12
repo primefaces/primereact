@@ -64,7 +64,7 @@ import { DataTableSelectionDemo } from './showcase/datatable/DataTableSelectionD
 import { DataTableColGroupDemo } from './showcase/datatable/DataTableColGroupDemo';
 import { DataTableRowExpansionDemo } from './showcase/datatable/DataTableRowExpansionDemo';
 import { DataTableColResizeDemo } from './showcase/datatable/DataTableColResizeDemo';
-import { DataTableColReorderDemo } from './showcase/datatable/DataTableColReorderDemo';
+import { DataTableReorderDemo } from './showcase/datatable/DataTableReorderDemo';
 import { DataTableContextMenuDemo } from './showcase/datatable/DataTableContextMenuDemo';
 import { DataTableResponsiveDemo } from './showcase/datatable/DataTableResponsiveDemo';
 import { DataTableEditDemo } from './showcase/datatable/DataTableEditDemo';
@@ -487,7 +487,7 @@ class App extends Component {
                     <Route path="/datatable/rowexpand" component={DataTableRowExpansionDemo} />
                     <Route path="/datatable/responsive" component={DataTableResponsiveDemo} />
                     <Route path="/datatable/colresize" component={DataTableColResizeDemo} />
-                    <Route path="/datatable/colreorder" component={DataTableColReorderDemo} />
+                    <Route path="/datatable/reorder" component={DataTableReorderDemo} />
                     <Route path="/datatable/export" component={DataTableExportDemo} />
                     <Route path="/datatable/edit" component={DataTableEditDemo} />
                     <Route path="/datatable/rowgroup" component={DataTableRowGroupDemo} />

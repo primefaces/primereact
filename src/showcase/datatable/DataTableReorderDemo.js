@@ -6,7 +6,7 @@ import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
-export class DataTableColReorderDemo extends Component {
+export class DataTableReorderDemo extends Component {
 
     constructor() {
         super();
@@ -27,13 +27,14 @@ export class DataTableColReorderDemo extends Component {
 
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>DataTable - Column Reorder</h1>
-                        <p>Columns can be reordered using drag drop by setting the reorderableColumns to true. onColReorder is a callback that is invoked when a column is reordered.</p>
+                        <h1>DataTable - Reorder</h1>
+                        <p>Order of the columns and rows can be changed using drag and drop.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} reorderableColumns={true}>
+                    <DataTable value={this.state.cars} reorderableColumns={true} reorderableRows={true} onRowReorder={(e) => this.setState({cars: e.value})}>
+                        <Column reorder={true} style={{width: '2em'}} />
                         <Column columnKey="vin" field="vin" header="Vin"/>
                         <Column columnKey="year" field="year" header="Year" />
                         <Column columnKey="brand" field="brand" header="Brand" />

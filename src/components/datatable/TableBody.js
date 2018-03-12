@@ -14,6 +14,9 @@ export class TableBody extends Component {
         this.onRowToggle = this.onRowToggle.bind(this);
         this.onRadioClick = this.onRadioClick.bind(this);
         this.onCheckboxClick = this.onCheckboxClick.bind(this);
+        this.onRowDragEnd = this.onRowDragEnd.bind(this);
+        this.onRowDragLeave = this.onRowDragLeave.bind(this);
+        this.onRowDrop = this.onRowDrop.bind(this);
     }
 
     onRowClick(event) {
@@ -280,6 +283,79 @@ export class TableBody extends Component {
 
         return false;
     }
+
+    onRowDragStart(event, index) {
+        this.rowDragging = true;
+        this.draggedRowIndex = index;
+        event.dataTransfer.setData('text', 'b');    // For firefox
+    }
+
+    onRowDragEnd(event, index) {
+        this.rowDragging = false;
+        this.draggedRowIndex = null;
+        this.droppedRowIndex = null;
+    }
+
+    onRowDragOver(event, index) {
+        if (this.rowDragging && this.draggedRowIndex !== index) {
+            let rowElement = event.rowElement;
+            let rowY = DomHandler.getOffset(rowElement).top + DomHandler.getWindowScrollTop();
+            let pageY = event.originalEvent.pageY;
+            let rowMidY = rowY + DomHandler.getOuterHeight(rowElement) / 2;
+            let prevRowElement = rowElement.previousElementSibling;
+            
+            if (pageY < rowMidY) {
+                DomHandler.removeClass(rowElement, 'ui-datatable-dragpoint-bottom');
+    
+                this.droppedRowIndex = index;
+                if (prevRowElement)
+                    DomHandler.addClass(prevRowElement, 'ui-datatable-dragpoint-bottom');
+                else
+                    DomHandler.addClass(rowElement, 'ui-datatable-dragpoint-top');
+            } 
+            else {
+                if (prevRowElement)
+                    DomHandler.removeClass(prevRowElement, 'ui-datatable-dragpoint-bottom');
+                else
+                    DomHandler.addClass(rowElement, 'ui-datatable-dragpoint-top');
+    
+                this.droppedRowIndex = index + 1;
+                DomHandler.addClass(rowElement, 'ui-datatable-dragpoint-bottom');
+            }
+        }
+    }
+
+    onRowDragLeave(event) {
+        let rowElement = event.rowElement;
+        let prevRowElement = rowElement.previousElementSibling;
+        if (prevRowElement) {
+            DomHandler.removeClass(prevRowElement, 'ui-datatable-dragpoint-bottom');
+        }
+
+        DomHandler.removeClass(rowElement, 'ui-datatable-dragpoint-bottom');
+        DomHandler.removeClass(rowElement, 'ui-datatable-dragpoint-top');
+    }
+
+    onRowDrop(event) {
+        if (this.droppedRowIndex != null) {
+            let dropIndex = (this.draggedRowIndex > this.droppedRowIndex) ? this.droppedRowIndex : (this.droppedRowIndex === 0) ? 0 : this.droppedRowIndex - 1;
+            let val = [...this.props.value];
+            ObjectUtils.reorderArray(val, this.draggedRowIndex, dropIndex);
+
+            if(this.props.onRowReorder) {
+                this.props.onRowReorder({
+                    originalEvent: event,
+                    value: val,
+                    dragIndex: this.draggedRowIndex,
+                    dropIndex: this.droppedRowIndex
+                })
+            }
+        }
+        
+        //cleanup
+        this.onRowDragLeave(event);
+        this.onRowDragEnd(event);
+    }
     
     renderRowGroupHeader(rowData, index) {
         return (
@@ -362,7 +438,9 @@ export class TableBody extends Component {
                 let bodyRow = <BodyRow key={i} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} rowClassName={this.props.rowClassName}
-                            sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}>{this.props.children}</BodyRow>
+                            sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
+                            onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
+                            onDrop={this.onRowDrop}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);
 

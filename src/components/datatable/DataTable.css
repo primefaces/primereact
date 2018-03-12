@@ -330,6 +330,13 @@
     z-index: 2;
 }
 
+/* Reorder */
+.ui-datatable-reorder-indicator-up,
+.ui-datatable-reorder-indicator-down {
+    position: absolute;
+    display: none;
+}
+
 @media ( max-width: 35em ) {
     .ui-datatable-reflow thead th,
     .ui-datatable-reflow tfoot td {

@@ -84,7 +84,8 @@ export class DataTable extends Component {
         onRowExpand: null,
         onRowCollapse: null,
         onContextMenuSelect: null,
-        onColReorder: null
+        onColReorder: null,
+        onRowReorder: null
     }
 
     static propTypes = {
@@ -148,6 +149,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
+        autoLayout: PropTypes.bool,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -160,7 +162,7 @@ export class DataTable extends Component {
         onRowCollapse: PropTypes.func,
         onContextMenuSelect: PropTypes.func,
         onColReorder: PropTypes.func,
-        autoLayout: PropTypes.bool
+        onRowReorder: PropTypes.func
     };
 
     constructor(props) {
@@ -829,7 +831,7 @@ export class DataTable extends Component {
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.state.sortField} rowClassName={this.props.rowClassName}>
+                        sortField={this.state.sortField} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}>
                         {columns}
                 </TableBody>;
     }
