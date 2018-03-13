@@ -34,7 +34,9 @@ export class Dialog extends Component {
         positionLeft: -1,
         positionTop: -1,
         appendTo: null,
-        baseZIndex: 0
+        baseZIndex: 0,
+        minX: 0,
+        minY: 0
     }
 
     static propTypes = {
@@ -64,7 +66,9 @@ export class Dialog extends Component {
         positionLeft: PropTypes.number,
         positionTop: PropTypes.number,
         appendTo: PropTypes.object,
-        baseZIndex: PropTypes.number
+        baseZIndex: PropTypes.number,
+        minX: PropTypes.number,
+        minY: PropTypes.number
     };
     
     constructor(props) {
@@ -225,14 +229,20 @@ export class Dialog extends Component {
 
     onDrag(event) {
         if(this.dragging) {
-            var deltaX = event.pageX - this.lastPageX;
-            var deltaY = event.pageY - this.lastPageY;
-            var leftPos = parseFloat(this.container.style.left);
-            var topPos = parseFloat(this.container.style.top);
+            let deltaX = event.pageX - this.lastPageX;
+            let deltaY = event.pageY - this.lastPageY;
+            let leftPos = parseFloat(this.container.style.left) + deltaX;
+            let topPos = parseFloat(this.container.style.top) + deltaY;
 
-            this.container.style.left = leftPos + deltaX + 'px';
-            this.container.style.top = topPos + deltaY + 'px';
-            
+            if(leftPos >= this.props.minX) {
+                this.container.style.left = leftPos + 'px';
+            }
+
+            if(topPos >= this.props.minY) {
+                this.container.style.top = topPos + 'px';
+            }
+
+
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
         }
@@ -280,6 +290,7 @@ export class Dialog extends Component {
     bindGlobalListeners() {
         if(this.props.draggable) {
             this.bindDocumentDragListener();
+            this.bindDocumentDragEndListener();
         }
         
         if(this.props.resizable) {
@@ -297,6 +308,7 @@ export class Dialog extends Component {
     
     unbindGlobalListeners() {
         this.unbindDocumentDragListener();
+        this.unbindDocumentDragEndListener();
         this.unbindDocumentResizeListeners();
         this.unbindDocumentResponsiveListener();
         this.unbindDocumentEscapeListener();
@@ -313,6 +325,20 @@ export class Dialog extends Component {
         if(this.documentDragListener) {
             document.removeEventListener('mousemove', this.documentDragListener);
             this.documentDragListener = null;
+        }
+    }
+
+    bindDocumentDragEndListener() {
+        this.documentDragEndListener = (event) => {
+            this.endDrag(event);
+        };
+        document.addEventListener('mouseup', this.documentDragEndListener);
+    }
+
+    unbindDocumentDragEndListener() {
+        if(this.documentDragEndListener) {
+            document.removeEventListener('mouseup', this.documentDragEndListener);
+            this.documentDragEndListener = null;
         }
     }
     
@@ -428,7 +454,7 @@ export class Dialog extends Component {
             let closeIcon = this.renderCloseIcon();
 
             return (
-                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag} onMouseUp={this.endDrag}>
+                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag}>
                     <span id={this.id + '_label'} className="ui-dialog-title">{this.props.header}</span>
                     {closeIcon}
                 </div>

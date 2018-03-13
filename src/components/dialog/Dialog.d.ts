@@ -27,6 +27,9 @@ interface DialogProps {
     positionLeft?: number;
     positionTop?: number;
     appendTo?: HTMLElement;
+    baseZIndex?: number;
+    minX?: number;
+    minY?: number;
 }
 
 export class Dialog extends React.Component<DialogProps,any> {}
