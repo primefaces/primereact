@@ -187,8 +187,6 @@ class AppMenu extends Component {
                         </a>
                         <div className={classNames({ 'submenuhide': this.state.activeMenu !== 2, 'submenushow': this.state.activeMenu === 2 })}>
                             <div>
-                                <Link to="/datagrid">&#9679; DataGrid</Link>
-                                <Link to="/datalist">&#9679; DataList</Link>
                                 <Link to="/dataview">&#9679; DataView</Link>
                                 <Link to="/datatable">&#9679; DataTable</Link>
                                 <Link to="/datascroller">&#9679; DataScroller</Link>
@@ -200,7 +198,6 @@ class AppMenu extends Component {
                                 <Link to="/schedule">&#9679; Schedule</Link>
                                 <Link to="/tree">&#9679; Tree</Link>
                                 <Link to="/treetable">&#9679; TreeTable</Link>
-                                
                             </div>
                         </div>
 

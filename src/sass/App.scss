@@ -388,9 +388,11 @@ body {
                 }
             }
         }
-        
-        &.submenu {
+
+        &.content-submenu {
+            background-image: linear-gradient(to left, #20272a, #20272a);
             padding: 15px 30px;
+            border-bottom: 1px solid #1b81d7;
 
             ul {
                 margin: 0;
@@ -403,9 +405,19 @@ body {
                     float: left;
                     margin-top: 5px;
 
-                    a:hover {
-                        cursor: pointer;
-                        color: #229be0
+                    a {
+                        color: #cac6c6;
+                        display: block;
+                        width: 90%;
+                        border: 1px solid transparent;
+                        transition: border-color .1s;
+                        padding: 6px 12px;
+                        border-radius: 3px;
+
+                        &:hover {
+                            border: 1px solid #ffffff;
+                            color: #ffffff;
+                        }
                     }
                 }
             }
@@ -993,6 +1005,7 @@ pre {
         border-radius: 4px;
         -webkit-border-radius: 4px;
         font-size: 14px;
+        background-color: #20272a !important;
     }
 }
 
