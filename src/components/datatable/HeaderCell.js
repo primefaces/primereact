@@ -100,7 +100,7 @@ export class HeaderCell extends Component {
         }
 
         if(this.props.filter) {
-            filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType} defaultValue={this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : ''}
+            filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
                         className="ui-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
         }
 

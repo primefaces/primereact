@@ -686,7 +686,7 @@ mysort(event) {
 </CodeHighlight>
 
             <h3>Filtering</h3>
-            <p>Filtering is enabled by setting the filter property as true on a column. Default match mode is "startsWith" and this can be configured using filterMatchMode property that also accepts "contains", "endsWith", "equals" and "in".</p>
+            <p>Filtering is enabled by setting the filter property as true on a column. Default match mode is "startsWith" and this can be configured using filterMatchMode property that also accepts "contains", "endsWith", "equals", "notEquals" and "in".</p>
  <CodeHighlight className="html">
 {`
 <DataTable value={this.state.cars} >
@@ -813,7 +813,7 @@ export class DataTableCustomFilterDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>Filters property of the DataTable can be used to render the DataTable as filtered initially with prepopulated filters.</p>
+            <p>If you need to render the DataTable as filtered initially, use the "filters" property of the DataTable with prepopulated values.</p>
 <CodeHighlight className="javascript">
 {`
 export class DataTableDefaultFilteredDemo extends Component {
