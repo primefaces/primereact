@@ -71,4 +71,3 @@ An [example application](https://github.com/primefaces/primereact-quickstart) ba
 
 Typescript
 Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-typescript-quickstart) is available as well at github.
-If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
