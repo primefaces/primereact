@@ -48,7 +48,7 @@ export class TabView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex: 0
+            activeIndex: this.props.activeIndex || 0
         };
     }
 
