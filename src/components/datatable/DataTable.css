@@ -326,8 +326,10 @@
 .ui-datatable-loader-content {
     position: absolute;
     left: 50%;
-    top: 25%;
+    top: 50%;
     z-index: 2;
+    margin-top: -1em;
+    margin-left: -1em;
 }
 
 /* Reorder */
