@@ -732,7 +732,7 @@ export class DataTable extends Component {
             for(let j = 0; j < columns.length; j++) {
                 let col = columns[j];
                 let filterMeta = this.state.filters ? this.state.filters[col.props.field] : null;
-
+                
                 //local
                 if(filterMeta) {
                     let filterValue = filterMeta.value;
@@ -827,7 +827,7 @@ export class DataTable extends Component {
         return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={columnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
-                            reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} 
+                            reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.state.filters}
                             onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop}>
                             {columns}
                           </TableHeader>;

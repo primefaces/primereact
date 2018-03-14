@@ -814,6 +814,40 @@ export class DataTableCustomFilterDemo extends Component {
 </CodeHighlight>
 
             <p>Filters property of the DataTable can be used to render the DataTable as filtered initially with prepopulated filters.</p>
+<CodeHighlight className="javascript">
+{`
+export class DataTableDefaultFilteredDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            filters: {
+                'brand': {
+                    value: 'BMW'
+                }
+            }
+        };
+        this.carservice = new CarService();
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    }
+
+    render() {
+        return (
+            <DataTable value={this.state.cars} filters={this.state.filters}>
+                <Column field="vin" header="Vin" filter={true} />
+                <Column field="year" header="Year" filter={true} />
+                <Column field="brand" header="Brand" filter={true} />
+                <Column field="color" header="Color" filter={true}  />
+            </DataTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
 
             <p>Custom filtering is implemented by setting the filterMatchMode property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
             <CodeHighlight className="javascript">
