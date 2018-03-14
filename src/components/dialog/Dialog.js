@@ -224,6 +224,7 @@ export class Dialog extends Component {
             this.dragging = true;
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
+            DomHandler.addClass(document.body, 'ui-unselectable-text');
         }
     }
 
@@ -251,6 +252,7 @@ export class Dialog extends Component {
     endDrag(event) {
         if(this.props.draggable) {
             this.dragging = false;
+            DomHandler.removeClass(document.body, 'ui-unselectable-text');
         }
     }
 
@@ -260,6 +262,7 @@ export class Dialog extends Component {
             this.resizing = true;
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
+            DomHandler.addClass(document.body, 'ui-unselectable-text');
         }
     }
     
@@ -350,6 +353,7 @@ export class Dialog extends Component {
         this.documentResizeEndListener = (event) => {
             if(this.resizing) {
                 this.resizing = false;
+                DomHandler.removeClass(document.body, 'ui-unselectable-text');
             }
         };
 
