@@ -79,6 +79,7 @@ export class DataTable extends Component {
         onFilter: null,
         onLazyLoad: null,
         onRowClick: null,
+        onRowDoubleClick: null,
         onRowSelect: null,
         onRowUnselect: null,
         onRowExpand: null,
@@ -156,6 +157,7 @@ export class DataTable extends Component {
         onFilter: PropTypes.func,
         onLazyLoad: PropTypes.func,
         onRowClick: PropTypes.func,
+        onRowDoubleClick: PropTypes.func,
         onRowSelect: PropTypes.func,
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
@@ -826,7 +828,7 @@ export class DataTable extends Component {
     createTableBody(value, columns) {
         return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
-                        onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                        onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}

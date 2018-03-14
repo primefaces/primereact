@@ -74,6 +74,7 @@ interface DataTableProps {
     onFilter?(filters: Array<any>): void;
     onLazyLoad?(event: DataTableLazyLoadEvent): void;
     onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowDoubleClick?(e: Event): void;
     onRowSelect?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowUnselect?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowExpand?(e: {originalEvent: Event, data: any}): void;
