@@ -122,6 +122,10 @@ let footer = <div>
 `}
 </CodeHighlight>
 
+            <h3>Dynamic Content</h3>
+            <p>Dynamic content may move the dialog boundaries outside of the viewport. By default, dialog tries to reposition itself after content changes, if you'd like to disable 
+                this behavior, set autoAlign to false. Second alternative is defining max-height via contentStyle so longer content displays a scrollbar.</p>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -295,6 +299,12 @@ let footer = <div>
                             <td>number</td>
                             <td>0</td>
                             <td>Minimum value for the top coordinate of dialog in dragging.</td>
+                        </tr>
+                        <tr>
+                            <td>autoAlign</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to reposition after dynamic content changes the height of the dialog.</td>
                         </tr>
                     </tbody>
                 </table>

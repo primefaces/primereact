@@ -36,7 +36,8 @@ export class Dialog extends Component {
         appendTo: null,
         baseZIndex: 0,
         minX: 0,
-        minY: 0
+        minY: 0,
+        autoAlign: true
     }
 
     static propTypes = {
@@ -68,7 +69,8 @@ export class Dialog extends Component {
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
         minX: PropTypes.number,
-        minY: PropTypes.number
+        minY: PropTypes.number,
+        autoAlign: PropTypes.bool
     };
     
     constructor(props) {
@@ -431,6 +433,17 @@ export class Dialog extends Component {
     componentDidMount() {
         if(this.state.visible) {
             this.show();
+            this.currentHeight = DomHandler.getOuterHeight(this.container);
+        }
+    }
+
+    componentDidUpdate() {
+        if(this.props.autoAlign && this.state.visible) {
+            let height = DomHandler.getOuterHeight(this.container);
+            if(height !== this.currentHeight) {
+                this.currentHeight = height;
+                this.positionOverlay();
+            }
         }
     }
 

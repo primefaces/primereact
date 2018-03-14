@@ -30,6 +30,7 @@ interface DialogProps {
     baseZIndex?: number;
     minX?: number;
     minY?: number;
+    autoAlign?: boolean;
 }
 
 export class Dialog extends React.Component<DialogProps,any> {}
