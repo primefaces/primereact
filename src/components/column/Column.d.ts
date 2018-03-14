@@ -24,6 +24,8 @@ interface ColumnProps {
     rowSpan?: number;
     editor?(): void;
     editorValidator?(): void;
+    rowReorder?: boolean;
+    rowReorderIcon?: string;
 }
 
 export class Column extends React.Component<ColumnProps,any> {}
