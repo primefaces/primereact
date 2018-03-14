@@ -389,12 +389,12 @@ export class DataTable extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.first !== null) { this.setState({first: nextProps.first}) }
-        if(nextProps.rows !== null) { this.setState({rows: nextProps.rows}) }
-        if(nextProps.sortField) { this.setState({sortField: nextProps.sortField}) }
-        if(nextProps.sortOrder) { this.setState({sortOrder: nextProps.sortOrder}) }
-        if(nextProps.multiSortMeta) { this.setState({multiSortMeta: nextProps.multiSortMeta}) }
-        if(nextProps.filters) { this.setState({filters: nextProps.filters}) }
+        if(nextProps.first !== null && nextProps.first !== this.props.first) { this.setState({first: nextProps.first}) }
+        if(nextProps.rows !== null && nextProps.rows !== this.props.rows) { this.setState({rows: nextProps.rows}) }
+        if(nextProps.sortField && nextProps.sortField !== this.props.sortField) { this.setState({sortField: nextProps.sortField}) }
+        if(nextProps.sortOrder && nextProps.sortOrder !== this.props.sortOrder) { this.setState({sortOrder: nextProps.sortOrder}) }
+        if(nextProps.multiSortMeta && nextProps.multiSortMeta !== this.props.multiSortMeta) { this.setState({multiSortMeta: nextProps.multiSortMeta}) }
+        if(nextProps.filters && nextProps.filters !== this.props.filters) { this.setState({filters: nextProps.filters}) }
 
         if(nextProps.globalFilter !== this.props.globalFilter) {
             this.setState({first: 0});
