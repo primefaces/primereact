@@ -23,6 +23,7 @@ interface DropdownProps {
     panelstyle?: object;
     dataKey?: string;
     inputId?: string;
+    showClear?: boolean;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onMouseDown?(): void;
     onContextMenu?(): void;

@@ -31,6 +31,7 @@ export class Dropdown extends Component {
         panelStyle: null,
         dataKey: null,
         inputId: null,
+        showClear: false,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -60,6 +61,7 @@ export class Dropdown extends Component {
         panelstyle: PropTypes.object,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
+        showClear: PropTypes.bool,
         onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
@@ -82,6 +84,7 @@ export class Dropdown extends Component {
         this.onFilterInputChange = this.onFilterInputChange.bind(this);
         this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
         this.panelClick = this.panelClick.bind(this);
+        this.clear = this.clear.bind(this);
     }
     
     onClick(event) {
@@ -92,8 +95,10 @@ export class Dropdown extends Component {
         if(this.documentClickListener) {
             this.selfClick = true;
         }
+
+        let clearClick = DomHandler.hasClass(event.target, 'ui-dropdown-clear-icon');
                 
-        if(!this.overlayClick && !this.editableInputClick) {
+        if(!this.overlayClick && !this.editableInputClick && !clearClick) {
             this.focusInput.focus();
             
             if(this.panel.element.offsetParent) {
@@ -257,6 +262,14 @@ export class Dropdown extends Component {
             break;
         }
     }
+
+    clear(event) {
+        this.props.onChange({
+            originalEvent: event,
+            value: null
+        });
+        this.updateEditableLabel();
+    }
     
     selectItem(event) {
         let selectedOption = this.findOption(this.props.value);
@@ -399,6 +412,17 @@ export class Dropdown extends Component {
             return <label className={className}>{label||this.props.placeholder||'empty'}</label>;
         }
     }
+
+    renderClearIcon() {
+        if(this.props.value && this.props.showClear && !this.props.disabled) {
+            return (
+                <i className="ui-dropdown-clear-icon fa fa-close" onClick={this.clear}></i>
+            );
+        }
+        else {
+            return null;
+        }
+    }
     
     renderDropdownIcon() {
         return <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
@@ -470,7 +494,8 @@ export class Dropdown extends Component {
     }
 
     render() {
-        let className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix', this.props.className, {'ui-state-disabled': this.props.disabled});
+        let className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix', this.props.className, {'ui-state-disabled': this.props.disabled, 
+                                    'ui-dropdown-clearable': this.props.showClear && !this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
         
@@ -480,6 +505,7 @@ export class Dropdown extends Component {
         let dropdownIcon = this.renderDropdownIcon();
         let items = this.renderItems(selectedOption);
         let filterElement = this.renderFilter();
+        let clearIcon = this.renderClearIcon();
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
@@ -487,6 +513,7 @@ export class Dropdown extends Component {
                  {hiddenSelect}
                  {keyboardHelper}
                  {labelElement}
+                 {clearIcon}
                  {dropdownIcon}
                  <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} 
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
