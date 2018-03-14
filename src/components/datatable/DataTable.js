@@ -327,6 +327,14 @@ export class DataTable extends Component {
         return (this.state.multiSortMeta[index].order * result);
     }
 
+    filter(value, field, mode) {
+        this.onFilter({
+            value: value,
+            field: field,
+            matchMode: mode
+        });
+    }
+
     onFilter(event) {
         let filterMetadata = this.state.filters||{};
         if(!this.isFilterBlank(event.value))
@@ -713,7 +721,7 @@ export class DataTable extends Component {
         this.props.onSelectionChange({originalEvent: event, data: selection});
     }
 
-    filter(value) {
+    filterLocal(value) {
         let filteredValue = [];
         let columns = React.Children.toArray(this.props.children);
 
@@ -729,7 +737,7 @@ export class DataTable extends Component {
                 if(filterMeta) {
                     let filterValue = filterMeta.value;
                     let filterField = col.props.field;
-                    let filterMatchMode = col.props.filterMatchMode;
+                    let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let dataFieldValue = ObjectUtils.resolveFieldData(value[i], filterField);
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : ObjectUtils.filterConstraints[filterMatchMode];
 
@@ -777,7 +785,7 @@ export class DataTable extends Component {
                 }
 
                 if(this.state.filters || this.props.globalFilter) {
-                    data = this.filter(data);
+                    data = this.filterLocal(data);
                 }
             }
         }

@@ -716,7 +716,7 @@ export class DataTableFilterDemo extends Component {
     }
 
     render() {
-        var let = <div style={{'textAlign':'left'}}>
+        let header = <div style={{'textAlign':'left'}}>
                         <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
                         <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
                     </div>;
@@ -736,50 +736,38 @@ export class DataTableFilterDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>By default, input fields are used as filter elements and this can be customized using the filterElement property of the Column who populate the filters property of the DataTable. Note that 
-                filters property of the DataTable can also be used to filter the DataTable initially with prepopulated filters as well.
+            <p>By default, input fields are used as filter elements and this can be customized using the filterElement property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.
             </p>
 <CodeHighlight className="javascript">
 {`
-export class DataTableFilterDemo extends Component {
+export class DataTableCustomFilterDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            filters: {}
+            brand: null,
+            colors: null
         };
         this.carservice = new CarService();
         this.onBrandChange = this.onBrandChange.bind(this);
         this.onColorChange = this.onColorChange.bind(this);
-        this.onFilter = this.onFilter.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
-    onBrandChange(e) {
-        let filters = this.state.filters;
-        filters['brand'] = {value: e.value};
-        this.setState({filters: filters});
+    onBrandChange(event) {
+        this.dt.filter(event.value, 'brand', 'equals');
+        this.setState({brand: event.value});
     }
 
-    onColorChange(e) {
-        let filters = this.state.filters;
-        filters['color'] = {value: e.value};
-        this.setState({filters: filters});
-    }
-
-    onFilter(e) {
-        this.setState({filters: e.filters});
+    onColorChange(event) {
+        this.dt.filter(event.value, 'color', 'in');
+        this.setState({colors: event.value});
     }
 
     render() {
-        var header = <div style={{'textAlign':'left'}}>
-                        <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
-                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
-                    </div>;
-
         let brands = [
                 {label: 'All Brands', value: null},
                 {label: 'Audi', value: 'Audi'},
@@ -791,8 +779,10 @@ export class DataTableFilterDemo extends Component {
                 {label: 'Renault', value: 'Renault'},
                 {label: 'VW', value: 'VW'},
                 {label: 'Volvo', value: 'Volvo'}
-            ];        
-        let brandFilter = <Dropdown style={{width: '100%'}} value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
+            ];
+
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+                value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
             {label: 'White', value: 'White'},
@@ -806,15 +796,15 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
 
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} header={header} 
-                globalFilter={this.state.globalFilter} filters={this.state.filters} onFilter={this.onFilter}>
+            <DataTable ref={(el) => this.dt = el} value={this.state.cars}>
                 <Column field="vin" header="Vin" filter={true} />
                 <Column field="year" header="Year" filter={true} />
-                <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} filterMatchMode="equals" />
-                <Column field="color" header="Color" filter={true} filterElement={colorFilter} filterMatchMode="in" />
+                <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
+                <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
             </DataTable>
         );
     }
@@ -823,7 +813,7 @@ export class DataTableFilterDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>Filters property of the DataTable can also be used to filter the DataTable initially with prepopulated filters.</p>
+            <p>Filters property of the DataTable can be used to render the DataTable as filtered initially with prepopulated filters.</p>
 
             <p>Custom filtering is implemented by setting the filterMatchMode property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
             <CodeHighlight className="javascript">
@@ -846,7 +836,7 @@ export class DataTableFilterDemo extends Component {
     }
 
     render() {
-        var let = <div style={{'textAlign':'left'}}>
+        let header = <div style={{'textAlign':'left'}}>
                         <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
                         <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
                     </div>;

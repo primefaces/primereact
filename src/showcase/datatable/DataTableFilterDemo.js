@@ -14,32 +14,26 @@ export class DataTableFilterDemo extends Component {
     constructor() {
         super();
         this.state = {
-            filters: {}
+            brand: null,
+            colors: null
         };
         this.carservice = new CarService();
         this.onBrandChange = this.onBrandChange.bind(this);
         this.onColorChange = this.onColorChange.bind(this);
-        this.onFilter = this.onFilter.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
-    onBrandChange(e) {
-        let filters = this.state.filters;
-        filters['brand'] = {value: e.value};
-        this.setState({filters: filters});
+    onBrandChange(event) {
+        this.dt.filter(event.value, 'brand', 'equals');
+        this.setState({brand: event.value});
     }
 
-    onColorChange(e) {
-        let filters = this.state.filters;
-        filters['color'] = {value: e.value};
-        this.setState({filters: filters});
-    }
-
-    onFilter(e) {
-        this.setState({filters: e.filters});
+    onColorChange(event) {
+        this.dt.filter(event.value, 'color', 'in');
+        this.setState({colors: event.value});
     }
 
     render() {
@@ -59,8 +53,10 @@ export class DataTableFilterDemo extends Component {
                 {label: 'Renault', value: 'Renault'},
                 {label: 'VW', value: 'VW'},
                 {label: 'Volvo', value: 'Volvo'}
-            ];        
-        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
+            ];
+
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+                value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
             {label: 'White', value: 'White'},
@@ -74,7 +70,8 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
 
         return (
             <div>
@@ -90,12 +87,12 @@ export class DataTableFilterDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} header={header}
-                        globalFilter={this.state.globalFilter} filters={this.state.filters} onFilter={this.onFilter}>
+                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
+                        globalFilter={this.state.globalFilter}>
                         <Column field="vin" header="Vin" filter={true} />
                         <Column field="year" header="Year" filter={true} />
-                        <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} filterMatchMode="equals" sortable={true}/>
-                        <Column field="color" header="Color" filter={true} filterElement={colorFilter} filterMatchMode="in" />
+                        <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
+                        <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
                     </DataTable>
                 </div>
 
@@ -131,32 +128,26 @@ export class DataTableFilterDemo extends Component {
     constructor() {
         super();
         this.state = {
-            filters: {}
+            brand: null,
+            colors: null
         };
         this.carservice = new CarService();
         this.onBrandChange = this.onBrandChange.bind(this);
         this.onColorChange = this.onColorChange.bind(this);
-        this.onFilter = this.onFilter.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
-    onBrandChange(e) {
-        let filters = this.state.filters;
-        filters['brand'] = {value: e.value};
-        this.setState({filters: filters});
+    onBrandChange(event) {
+        this.dt.filter(event.value, 'brand', 'equals');
+        this.setState({brand: event.value});
     }
 
-    onColorChange(e) {
-        let filters = this.state.filters;
-        filters['color'] = {value: e.value};
-        this.setState({filters: filters});
-    }
-
-    onFilter(e) {
-        this.setState({filters: e.filters});
+    onColorChange(event) {
+        this.dt.filter(event.value, 'color', 'in');
+        this.setState({colors: event.value});
     }
 
     render() {
@@ -176,8 +167,10 @@ export class DataTableFilterDemo extends Component {
                 {label: 'Renault', value: 'Renault'},
                 {label: 'VW', value: 'VW'},
                 {label: 'Volvo', value: 'Volvo'}
-            ];        
-        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" value={this.state.filters.brand ? this.state.filters.brand.value: null} options={brands} onChange={this.onBrandChange}/>
+            ];
+
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+                value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
             {label: 'White', value: 'White'},
@@ -191,28 +184,33 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" value={this.state.filters.color ? this.state.filters.color.value: null} options={colors} onChange={this.onColorChange}/>
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
 
         return (
             <div>
+                <DataTableSubmenu />
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Filter</h1>
                         <p>Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode 
-                            property of column object that also accepts "contains", "endsWith", "equals" and "in". An optional global filter feature is available to search all fields with a keyword. 
-                            By default input fields are generated as filter elements and using templating any component can be used as a filter..</p>
+                            property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword. 
+                            By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} header={header} 
-                        globalFilter={this.state.globalFilter} filters={this.state.filters} onFilter={this.onFilter}>
+                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
+                        globalFilter={this.state.globalFilter}>
                         <Column field="vin" header="Vin" filter={true} />
                         <Column field="year" header="Year" filter={true} />
-                        <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} filterMatchMode="equals" />
-                        <Column field="color" header="Color" filter={true} filterElement={colorFilter} filterMatchMode="in" />
+                        <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
+                        <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
                     </DataTable>
                 </div>
+
+                <DataTableFilterDemoDoc></DataTableFilterDemoDoc>
             </div>
         );
     }
