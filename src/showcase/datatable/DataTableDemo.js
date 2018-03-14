@@ -372,6 +372,18 @@ export class DataTableDemo extends Component {
                             <td>null</td>
                             <td>Validator function to validate the cell input value.</td>
                         </tr>
+                        <tr>
+                            <td>rowReorder</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether this column displays an icon to reorder the rows.</td>
+                        </tr>
+                        <tr>
+                            <td>rowReorderIcon</td>
+                            <td>string</td>
+                            <td>fa fa-bars</td>
+                            <td>Icon of the drag handle to reorder rows.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -1130,6 +1142,23 @@ export class DataTableRowExpansionDemo extends Component {
     <Column field="year" header="Year" />
     <Column field="brand" header="Brand" />
     <Column field="color" header="Color" />
+</DataTable>
+
+`}
+</CodeHighlight>
+
+            <h3>Row Reorder</h3>
+            <p>Data can be reordered using drag drop by adding a reorder column that will display an icon as a drag handle. onRowReorder is a callback that is invoked when a column is reordered, use
+                this callback to update the new order. The reorder icon can be customized using rowReorderIcon of the column component.</p>
+
+<CodeHighlight className="html">
+{`
+<DataTable value={this.state.cars} reorderableColumns={true} onRowReorder={(e) => this.setState({cars: e.value})}>
+    <Column rowReorder={true} style={{width: '2em'}} />
+    <Column columnKey="vin" field="vin" header="Vin"/>
+    <Column columnKey="year" field="year" header="Year" />
+    <Column columnKey="brand" field="brand" header="Brand" />
+    <Column columnKey="color" field="color" header="Color" />
 </DataTable>
 
 `}

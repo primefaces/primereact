@@ -33,8 +33,8 @@ export class DataTableReorderDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} reorderableColumns={true} reorderableRows={true} onRowReorder={(e) => this.setState({cars: e.value})}>
-                        <Column reorder={true} style={{width: '2em'}} />
+                    <DataTable value={this.state.cars} reorderableColumns={true} onRowReorder={(e) => this.setState({cars: e.value})}>
+                        <Column rowReorder={true} style={{width: '2em'}} />
                         <Column columnKey="vin" field="vin" header="Vin"/>
                         <Column columnKey="year" field="year" header="Year" />
                         <Column columnKey="brand" field="brand" header="Brand" />
@@ -94,7 +94,9 @@ export class DataTableColReorderDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} reorderableColumns={true}>
+                    <DataTable value={this.state.cars} reorderableColumns={true} 
+                        reorderableRows={true} onRowReorder={(e) => this.setState({cars: e.value})}>
+                        <Column rowReorder={true} style={{width: '2em'}} />
                         <Column columnKey="vin" field="vin" header="Vin"/>
                         <Column columnKey="year" field="year" header="Year" />
                         <Column columnKey="brand" field="brand" header="Brand" />

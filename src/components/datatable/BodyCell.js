@@ -129,9 +129,11 @@ export class BodyCell extends Component {
             else
                 content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
         }
-        else if(this.props.reorder) {
+        else if(this.props.rowReorder) {
+            let reorderIcon = classNames('ui-table-reorderablerow-handle', this.props.rowReorderIcon);
+
             content = (
-                <i className="fa fa-bars ui-table-reorderablerow-handle"></i>
+                <i className={reorderIcon}></i>
             );
         }
         else {

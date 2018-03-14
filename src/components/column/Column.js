@@ -27,7 +27,8 @@ export class Column extends Component {
         rowSpan: null,
         editor: null,
         editorValidator: null,
-        reorder: false
+        rowReorder: false,
+        rowReorderIcon: 'fa fa-bars'
     }
 
     static propsTypes = {
@@ -54,6 +55,7 @@ export class Column extends Component {
         rowSpan: PropTypes.number,
         editor: PropTypes.func,
         editorValidator: PropTypes.func,
-        reorder: PropTypes.bool 
+        rowReorder: PropTypes.bool,
+        rowReorderIcon: PropTypes.string
     }
 }
