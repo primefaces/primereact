@@ -634,7 +634,6 @@ body {
 
         .home-button {
             width: 112px;
-            height: 24px;
             font-weight: bold;
             text-align: center;
             color: #ffffff;
@@ -768,6 +767,7 @@ body {
 
         p {
             line-height: 22px;
+            margin-bottom: 1em;
         }
 
         h3 {
@@ -784,7 +784,6 @@ body {
 
         .home-button2 {
             width: 112px;
-            height: 24px;
             font-weight: bold;
             text-align: center;
             color: #ffffff;
@@ -792,6 +791,7 @@ body {
             padding: 10px 24px 9px 24px;
             border-radius: 3px;
             transition: background-color .3s;
+            display: inline-block;
 
             &:hover {
                 background-color: #b90264;
