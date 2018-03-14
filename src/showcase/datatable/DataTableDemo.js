@@ -256,7 +256,7 @@ export class DataTableDemo extends Component {
                             <td>filterMatchMode</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Defines filterMatchMode; "startsWith", "contains", "endsWidth", "equals", "notEquals" and "in".</td>
+                            <td>Defines filterMatchMode; "startsWith", "contains", "endsWidth", "equals", "notEquals", "in" and "custom".</td>
                         </tr>
                         <tr>
                             <td>filterType</td>
@@ -281,6 +281,12 @@ export class DataTableDemo extends Component {
                             <td>object</td>
                             <td>null</td>
                             <td>Element for custom filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>filterFunction</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Custom filter function.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -818,6 +824,47 @@ export class DataTableFilterDemo extends Component {
 </CodeHighlight>
 
             <p>Filters property of the DataTable can also be used to filter the DataTable initially with prepopulated filters.</p>
+
+            <p>Custom filtering is implemented by setting the filterMatchMode property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
+            <CodeHighlight className="javascript">
+{`
+export class DataTableFilterDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {};
+        this.carservice = new CarService();
+        this.yearFilter = this.yearFilter.bind(this);
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    }
+
+    yearFilter(value, filter) {
+        return filter > value;
+    }
+
+    render() {
+        var let = <div style={{'textAlign':'left'}}>
+                        <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
+                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+                    </div>;
+
+        return (
+            <DataTable value={this.state.cars} paginator={true} rows={10} header={header} 
+                globalFilter={this.state.globalFilter}>
+                <Column field="vin" header="Vin" filter={true} />
+                <Column field="year" header="Year" filter={true} filterMatchMode="custom" filterFunction={this.yearFilter}/>
+                <Column field="brand" header="Brand" filter={true} />
+                <Column field="color" header="Color" filter={true}  />
+            </DataTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
 
             <h3>Selection</h3>
             <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property for reading and onSelectionChange for updating back.

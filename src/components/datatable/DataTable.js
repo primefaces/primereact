@@ -731,7 +731,7 @@ export class DataTable extends Component {
                     let filterField = col.props.field;
                     let filterMatchMode = col.props.filterMatchMode;
                     let dataFieldValue = ObjectUtils.resolveFieldData(value[i], filterField);
-                    let filterConstraint = ObjectUtils.filterConstraints[filterMatchMode];
+                    let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : ObjectUtils.filterConstraints[filterMatchMode];
 
                     if(!filterConstraint(dataFieldValue, filterValue)) {
                         localMatch = false;

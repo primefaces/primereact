@@ -84,8 +84,8 @@ export class DataTableFilterDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Filter</h1>
                         <p>Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode 
-                            property of column object that also accepts "contains", "endsWith", "equals" and "in". An optional global filter feature is available to search all fields with a keyword. 
-                            By default input fields are generated as filter elements and using templating any component can be used as a filter..</p>
+                            property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword. 
+                            By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
                     </div>
                 </div>
 

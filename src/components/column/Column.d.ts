@@ -15,6 +15,7 @@ interface ColumnProps {
     filterType?: string;
     filterMaxLength?: number;
     filterElement?: object;
+    filterFunction?(value: any, filter: any): void;
     style?: object;
     className?: string;
     expander?: boolean;
@@ -22,8 +23,8 @@ interface ColumnProps {
     selectionMode?: string;
     colSpan?: number;
     rowSpan?: number;
-    editor?(): void;
-    editorValidator?(): void;
+    editor?(props: any): void;
+    editorValidator?(props: any): booelan;
     rowReorder?: boolean;
     rowReorderIcon?: string;
 }
