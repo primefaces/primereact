@@ -56,7 +56,7 @@ export class DataTableColTogglerDemo extends Component {
             <div>
                 <DataTableSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Column Toggler</h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
