@@ -870,14 +870,8 @@ export class DataTableFilterDemo extends Component {
     }
 
     render() {
-        let header = <div style={{'textAlign':'left'}}>
-                        <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
-                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
-                    </div>;
-
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} header={header} 
-                globalFilter={this.state.globalFilter}>
+            <DataTable value={this.state.cars}>
                 <Column field="vin" header="Vin" filter={true} />
                 <Column field="year" header="Year" filter={true} filterMatchMode="custom" filterFunction={this.yearFilter}/>
                 <Column field="brand" header="Brand" filter={true} />
