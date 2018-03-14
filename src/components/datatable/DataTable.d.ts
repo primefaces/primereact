@@ -68,8 +68,8 @@ interface DataTableProps {
     rowGroupFooterTemplate?(): void;
     loading?:boolean;
     loadingIcon?:string;
-    onColumnResizeEnd?({element: any, delta: number}): void;
-    onSort?({sortField: string, sortOrder: number, multiSortMeta: any}): void;
+    onColumnResizeEnd?(e: {element: any, delta: number}): void;
+    onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
     onPage?(event: Event): void;
     onFilter?(filters: Array<any>): void;
     onLazyLoad?(event: DataTableLazyLoadEvent): void;
