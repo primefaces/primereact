@@ -13,7 +13,7 @@ export class HomeComponent extends Component {
                     <Link to="/setup" className="home-button">Get Started</Link>
                 </div>
                 <div className="features">
-                    <h3>Why Use PrimeReact?</h3>
+                    <h3>Why PrimeReact?</h3>
                     <p className="features-tagline">Congratulations! <span role="img" aria-label="celebrate">🎉</span> Your quest to find the UI library for React is complete.</p>
 
                     <p className="features-description">PrimeReact is a collection of rich UI components for React. All widgets are open source and free to use under MIT License. PrimeReact is developed by PrimeTek Informatics,
