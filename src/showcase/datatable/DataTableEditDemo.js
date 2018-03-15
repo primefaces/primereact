@@ -36,7 +36,7 @@ export class DataTableEditDemo extends Component {
     }
     
     inputTextEditor(props, field) {
-        return <InputText type="text" value={props.rowData.year} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+        return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
     
     vinEditor(props) {
@@ -103,7 +103,7 @@ export class DataTableEditDemo extends Component {
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars}>
                         <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
-                        <Column field="year" header="Year" editor={this.yearEditor} />
+                        <Column field="year" header="Year" editor={this.yearEditor}/>
                         <Column field="brand" header="Brand" editor={this.brandEditor}/>
                         <Column field="color" header="Color" editor={this.colorEditor}/>
                         <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} body={this.saleDateTemplate} />
