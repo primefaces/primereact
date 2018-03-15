@@ -66,9 +66,9 @@ export class DataView extends Component {
             sortOrder: this.props.sortOrder,
             sortField: this.props.sortField
         };
+        this.sortChange = false;
         this.onPageChange=this.onPageChange.bind(this)
     }
-
 
     getTotalRecords() {
         return this.props.value ? this.props.lazy ? this.props.totalRecords : this.props.value.length : 0;
@@ -132,6 +132,7 @@ export class DataView extends Component {
 
             });
         }
+        this.sortChange = true;
         if (this.props.lazy) {
             if(this.props.onLazyLoad) {
                 this.props.onLazyLoad({
@@ -162,50 +163,106 @@ export class DataView extends Component {
                 this.setState({totalRecords : this.filteredValue ? this.filteredValue.length : this.props.value ? this.props.value.length : 0});
             }
         }
-
     }
+
     componentWillUpdate(nextProps){
         if (this.state.sortField!==nextProps.sortField || this.state.sortOrder!==nextProps.sortOrder) {
             this.setState({sortField: nextProps.sortField, sortOrder: nextProps.sortOrder});
+            this.sortChange = false;
         }
     }
 
     componentDidUpdate(){
-        if(this.state.sortField){
+        if(this.state.sortField && !this.sortChange){
             this.sort();
         }
     }
 
-    render() {
+    renderTopPaginator(){
+        if(this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')){
+            return this.createPaginator('top')
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderBottomPaginator(){
+        if(this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) {
+            return this.createPaginator('bottom')
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderEmptyMessage(){
+        if(this.isEmpty()) {
+            return <div className="ui-widget-content ui-g-12">{this.props.emptyMessage}</div>;
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderHeader(){
+        if(this.props.header) {
+            return <div className="ui-dataview-header ui-widget-header ui-corner-top">{this.props.header}</div>;
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderFooter(){
+        if(this.props.footer) {
+            return <div className="ui-dataview-footer ui-widget-header ui-corner-bottom"> {this.props.footer}</div>;
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderContent(){
 
         let value=this.props.paginator ? ((this.filteredValue||this.props.value).slice((this.props.lazy ? 0 : this.state.first),((this.props.lazy  ? 0 : this.state.first) + this.state.rows))):
-        (this.filteredValue||this.props.value);
+            (this.filteredValue||this.props.value);
+
+        let itemClassName = classNames('ui-g-12', (this.state.layout === 'list'?'':' ui-md-3'));
+
+        let emptyMessage = this.renderEmptyMessage();
+
+        return (
+            <div className="ui-dataview-content ui-widget-content">
+                <div className="ui-g">
+                    {
+                        value && value.map((val, i) => {
+                            return this.props.itemTemplate ? React.cloneElement(this.props.itemTemplate(val,this.state.layout), {key : i + '_dataviewitem'}) : <div className={itemClassName} key={i + '_dataviewitem'}>{val}</div>;
+                        })
+                    }
+                    {emptyMessage}
+                </div>
+            </div>
+        );
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.props.lazy && nextProps.value === this.props.value)
+            return false;
+        else
+            return true;
+    }
+
+    render() {
 
         let className = classNames('ui-dataview ui-widget', {'ui-dataview-list': (this.state.layout === 'list'),
             'ui-dataview-grid': (this.state.layout === 'grid')}, this.props.className);
 
-        let topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) && this.createPaginator('top'),
-            bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
-
-        let emptyMessage =this.isEmpty() && <div className="ui-widget-content ui-g-12">{this.props.emptyMessage}</div>;
-
-
-        let itemClassName = classNames('ui-g-12', (this.state.layout === 'list'?'':' ui-md-3'));
-
-        let header = this.props.header && <div className="ui-dataview-header ui-widget-header ui-corner-top">{this.props.header}</div>,
-            footer = this.props.footer && <div className="ui-dataview-footer ui-widget-header ui-corner-bottom"> {this.props.footer}</div>,
-            content = (
-                <div className="ui-dataview-content ui-widget-content">
-                    <div className="ui-g">
-                        {
-                            value && value.map((val, i) => {
-                                return this.props.itemTemplate ? React.cloneElement(this.props.itemTemplate(val,this.state.layout), {key : i + '_dataviewitem'}) : <div className={itemClassName} key={i + '_dataviewitem'}>{val}</div>;
-                            })
-                        }
-                        {emptyMessage}
-                    </div>
-                </div>
-            );
+        let topPaginator = this.renderTopPaginator();
+        let bottomPaginator = this.renderBottomPaginator() ;
+        let header =  this.renderHeader();
+        let footer = this.renderFooter();
+        let content = this.renderContent();
 
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
