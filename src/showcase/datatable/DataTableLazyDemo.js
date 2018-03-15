@@ -23,9 +23,9 @@ export class DataTableLazyDemo extends Component {
             this.setState({totalRecords: data.length});
         });
     }
-    
 
     onLazyLoad(event) {
+        this.setState({loading: true});
         /* In a real application, make a remote request to load data using state metadata from event
          * event.first = First row offset
          * event.rows = Number of rows per page
@@ -36,7 +36,10 @@ export class DataTableLazyDemo extends Component {
         //imitate db connection over a network
         setTimeout(() => {
             if(this.datasource) {
-                this.setState({cars: this.datasource.slice(event.first, (event.first + event.rows))});
+                this.setState({
+                    cars: this.datasource.slice(event.first, (event.first + event.rows)),
+                    loading: false
+                });
             }
         }, 250);
     }
@@ -57,7 +60,7 @@ export class DataTableLazyDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} paginator={true} rows={10} totalRecords={this.state.totalRecords}
-                        lazy={true} onLazyLoad={this.onLazyLoad}>
+                        lazy={true} onLazyLoad={this.onLazyLoad} loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -107,8 +110,8 @@ export class DataTableLazyDemo extends Component {
         });
     }
     
-
     onLazyLoad(event) {
+        this.setState({loading: true});
         /* In a real application, make a remote request to load data using state metadata from event
          * event.first = First row offset
          * event.rows = Number of rows per page
@@ -119,7 +122,10 @@ export class DataTableLazyDemo extends Component {
         //imitate db connection over a network
         setTimeout(() => {
             if(this.datasource) {
-                this.setState({cars: this.datasource.slice(event.first, (event.first + event.rows))});
+                this.setState({
+                    cars: this.datasource.slice(event.first, (event.first + event.rows)),
+                    loading: false
+                });
             }
         }, 250);
     }

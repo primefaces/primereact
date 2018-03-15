@@ -21,7 +21,6 @@ export class DataTableEditDemo extends Component {
         this.yearEditor = this.yearEditor.bind(this);
         this.brandEditor = this.brandEditor.bind(this);
         this.colorEditor = this.colorEditor.bind(this);
-        this.saleDateEditor = this.saleDateEditor.bind(this);
         this.requiredValidator = this.requiredValidator.bind(this);
     }
 
@@ -70,19 +69,7 @@ export class DataTableEditDemo extends Component {
     colorEditor(props) {
         return this.inputTextEditor(props, 'color');
     }
-    
-    saleDateEditor(props) {        
-        return (
-            <Calendar value={props.value[props.rowIndex].saleDate}
-                    onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} />
-        );
-    }
-    
-    saleDateTemplate(rowData, column) {
-        let value = rowData['saleDate'];
-        return value ? (value.getMonth() + 1) + '/' + value.getDate() + '/' + value.getFullYear()  : '';
-    }
-    
+        
     requiredValidator(props) {
         let value = props.rowData[props.field];
         return value && value.length > 0;
@@ -106,7 +93,6 @@ export class DataTableEditDemo extends Component {
                         <Column field="year" header="Year" editor={this.yearEditor}/>
                         <Column field="brand" header="Brand" editor={this.brandEditor}/>
                         <Column field="color" header="Color" editor={this.colorEditor}/>
-                        <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} body={this.saleDateTemplate} />
                     </DataTable>
                     
                 </div>
@@ -151,7 +137,6 @@ export class DataTableEditDemo extends Component {
         this.yearEditor = this.yearEditor.bind(this);
         this.brandEditor = this.brandEditor.bind(this);
         this.colorEditor = this.colorEditor.bind(this);
-        this.saleDateEditor = this.saleDateEditor.bind(this);
         this.requiredValidator = this.requiredValidator.bind(this);
     }
 
@@ -200,19 +185,7 @@ export class DataTableEditDemo extends Component {
     colorEditor(props) {
         return this.inputTextEditor(props, 'color');
     }
-    
-    saleDateEditor(props) {        
-        return (
-            <Calendar value={props.value[props.rowIndex].saleDate}
-                    onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} />
-        );
-    }
-    
-    saleDateTemplate(rowData, column) {
-        let value = rowData['saleDate'];
-        return value ? (value.getMonth() + 1) + '/' + value.getDate() + '/' + value.getFullYear()  : '';
-    }
-    
+        
     requiredValidator(props) {
         let value = props.rowData[props.field];
         return value && value.length > 0;
@@ -238,7 +211,6 @@ export class DataTableEditDemo extends Component {
                         <Column field="year" header="Year" editor={this.yearEditor}/>
                         <Column field="brand" header="Brand" editor={this.brandEditor}/>
                         <Column field="color" header="Color" editor={this.colorEditor}/>
-                        <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} body={this.saleDateTemplate} />
                     </DataTable>
                 </div>
             </div>

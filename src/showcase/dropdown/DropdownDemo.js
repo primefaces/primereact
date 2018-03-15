@@ -89,7 +89,7 @@ export class DropdownDemo extends Component {
 
                     <h3>Advanced</h3>
                     <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}}
-                              filter={true} filterPlaceholder="Select Car" filterBy="label,value"/>
+                              filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
 
@@ -377,6 +377,12 @@ render() {
                                         <td>null</td>
                                         <td>Identifier of the focusable input.</td>
                                     </tr>
+                                    <tr>
+                                        <td>showClear</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, a clear icon is displayed to clear the value.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -561,7 +567,8 @@ export class DropdownDemo extends Component {
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value"/>
+                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} 
+                        style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
 

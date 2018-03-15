@@ -383,6 +383,10 @@ $inputGroupTextColor: #222222;
     box-shadow: 0px 0px 5px #1f89ce;
 }
 
+.ui-dropdown .ui-dropdown-clear-icon {
+    color: lighten($inputTextColor, 40%);
+}
+
 /* Growl */
 .ui-growl-item-container.ui-state-highlight {
     &.ui-growl-message-info {
