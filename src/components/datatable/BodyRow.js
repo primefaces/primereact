@@ -8,6 +8,7 @@ export class BodyRow extends Component {
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.onDoubleClick = this.onDoubleClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -20,6 +21,16 @@ export class BodyRow extends Component {
     onClick(event) {
         if(this.props.onClick) {
             this.props.onClick({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
+    }
+
+    onDoubleClick(event) {
+        if(this.props.onDoubleClick) {
+            this.props.onDoubleClick({
                 originalEvent: event,
                 data: this.props.rowData,
                 index: this.props.rowIndex
@@ -115,7 +126,7 @@ export class BodyRow extends Component {
         }
         
         return (
-            <tr ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.props.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+            <tr ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                 {cells}
             </tr>
