@@ -22,7 +22,7 @@ export class HomeComponent extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-3">
                             <img alt="component" src="showcase/resources/images/home/icon-component.svg" />
-                            <span className="feature-name">60+ COMPONENTS</span>
+                            <span className="feature-name">70+ COMPONENTS</span>
                             <p>The most complete set of native widgets featuring 60+ easy to use components for all your UI requirements.</p>
                         </div>
                         <div className="ui-g-12 ui-md-3">
@@ -62,20 +62,18 @@ export class HomeComponent extends Component {
                     <p>Open source products of <a href="http://www.primetek.com.tr">PrimeTek</a> are used all around the world by 1M+ developers in Fortune 500 companies, corporations, government and educational
                         institutions.</p>
                     <div className="ui-g">
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/fox.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/airbus.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/bank-of-america.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/mercedes.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/ebay.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/ford.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/vw.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/unicredit.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/lufthansa.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/bmw.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/verizon.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/sap.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/amex.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/viacom.svg"></img></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="airbus" src="showcase/resources/images/home/airbus.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="amex" src="showcase/resources/images/home/amex.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="bmw" src="showcase/resources/images/home/bmw.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="ebay" src="showcase/resources/images/home/ebay.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="ford" src="showcase/resources/images/home/ford.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="fox" src="showcase/resources/images/home/fox.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="lufthansa" src="showcase/resources/images/home/lufthansa.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="mercedes" src="showcase/resources/images/home/mercedes.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="sap" src="showcase/resources/images/home/sap.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="unicredit" src="showcase/resources/images/home/unicredit.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="verizon" src="showcase/resources/images/home/verizon.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="viacom" src="showcase/resources/images/home/viacom.svg"/></div>
                     </div>
                 </div>
                 <div className="templates">
