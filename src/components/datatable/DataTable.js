@@ -36,6 +36,7 @@ export class DataTable extends Component {
         sortOrder: null,
         multiSortMeta: null,
         sortMode: 'single',
+        allowUnsort: false,
         emptyMessage: "No records found",
         selectionMode: null,
         selection: null,
@@ -114,6 +115,7 @@ export class DataTable extends Component {
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
+        allowUnsort: PropTypes.bool,
         emptyMessage: PropTypes.string,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
@@ -218,18 +220,28 @@ export class DataTable extends Component {
 
     onSort(event) {
         let sortField = event.sortField;
-        let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
         let multiSortMeta;
+        let sortOrder;
 
         if(this.props.sortMode === 'multiple') {
-            let metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
+            let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.state.multiSortMeta;
-            if(!multiSortMeta || !metaKey) {
+            if(!multiSortMeta)
                 multiSortMeta = [];
-            }
-
-            this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
+            sortOrder = this.handleSortMeta(sortField, multiSortMeta, !metaKey);
         }
+        else {
+            sortOrder = 1;
+            if(this.state.sortField === sortField) {
+                if(this.state.sortOrder === 1)
+                    sortOrder = -1;
+                else if(this.state.sortOrder === -1)
+                    sortOrder = 0;
+            }
+        }
+
+        if(sortOrder === 0)
+            sortField = '';
 
         this.setState({
             sortField: sortField,
@@ -258,19 +270,44 @@ export class DataTable extends Component {
         }
     }
 
-    addSortMeta(meta, multiSortMeta) {
-        let index = -1;
-        for(let i = 0; i < multiSortMeta.length; i++) {
-            if(multiSortMeta[i].field === meta.field) {
-                index = i;
-                break;
+    handleSortMeta(field, multiSortMeta, removeOtherFields) {
+
+        let sortOrder;
+
+        for(let i = multiSortMeta.length - 1; i >= 0; i--) {
+            if(multiSortMeta[i].field === field) {
+
+                let meta = multiSortMeta[i];
+                if(meta.order === 1) {
+                    sortOrder = -1;
+                    meta.order = sortOrder;
+                }
+                else if(meta.order === -1) {
+                    if(this.props.allowUnsort) {
+                        sortOrder = 0;
+                        multiSortMeta.splice(i, 1);
+                    }
+                    else {
+                        sortOrder = 1;
+                        meta.order = sortOrder;
+                    }
+                }
+
+                if(!removeOtherFields)
+                    break;
+
+            }
+            else if(removeOtherFields) {
+                multiSortMeta.splice(i, 1);
             }
         }
 
-        if(index >= 0)
-            multiSortMeta[index] = meta;
-        else
-            multiSortMeta.push(meta);
+        if(typeof sortOrder !== 'number') {
+            sortOrder = 1;
+            multiSortMeta.push({field, order: sortOrder});
+        }
+
+        return sortOrder;
     }
 
     sortSingle(data) {
