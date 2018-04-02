@@ -470,9 +470,12 @@ export class Dropdown extends Component {
     
     componentDidMount() {
         if(this.props.autoWidth) {
-            if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
-                this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
-            }
+            // Added setTimeout to render it with the correct width value in hidden container components such as TabView and Accordion.
+            setTimeout(() => {
+                if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
+                    this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
+                }
+            }, 0);
         }
     }
     

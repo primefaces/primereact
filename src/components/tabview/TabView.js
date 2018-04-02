@@ -116,7 +116,7 @@ export class TabView extends Component {
 
             return (
                 <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={tab.props.contentStyle} role="tabpanel">
-                    {tab.props.children}
+                    {selected && tab.props.children}
                 </div>
             );
         })
