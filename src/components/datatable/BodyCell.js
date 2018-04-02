@@ -95,6 +95,7 @@ export class BodyCell extends Component {
             if(this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
                 if(focusable) {
+                    focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
                 

@@ -629,13 +629,22 @@ export class Calendar extends Component {
         }
     }
     
-    onInputFocus(event) {
+    onInputFocus(event) {      
+        if(this.refocus) {
+            this.refocus = false;
+            return;
+        }
+
         if(this.props.showOnFocus) {
             this.showOverlay();
         }
 
         if(this.props.onFocus) {
             this.props.onFocus(event);
+        }
+
+        if(event.target.getAttribute('data-isCellEditing')) {
+            this.refocus = true;
         }
     }
     
