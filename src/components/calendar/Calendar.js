@@ -529,8 +529,8 @@ export class Calendar extends Component {
     
     isDateBetween(start, end, dateMeta) {
         if(start && end) {
-            return start.getDate() < dateMeta.day && start.getMonth() <= dateMeta.month && start.getFullYear() <= dateMeta.year &&
-            end.getDate() > dateMeta.day && end.getMonth() >= dateMeta.month && end.getFullYear() >= dateMeta.year;
+            return ((start.getDate() < dateMeta.day && start.getMonth() === dateMeta.month && start.getFullYear() === dateMeta.year) || (start.getMonth() < dateMeta.month && start.getFullYear() <= dateMeta.year)) && 
+                   ((end.getDate() > dateMeta.day && end.getMonth() === dateMeta.month && end.getFullYear() === dateMeta.year) || (end.getMonth() > dateMeta.month && end.getFullYear() >= dateMeta.year));
         }
         else {
             return false; 
