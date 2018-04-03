@@ -657,7 +657,7 @@ export class DataTable extends Component {
     }
 
     exportCSV() {
-        let data = this.props.value;
+        let data = this.processData();
         let csv = '\ufeff';
         let columns = React.Children.toArray(this.props.children);
         
