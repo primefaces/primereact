@@ -39,7 +39,7 @@ export class Column extends Component {
         header: PropTypes.any,
         body: PropTypes.any,
         footer: PropTypes.any,
-        sortable: PropTypes.bool,
+        sortable: PropTypes.any,
         sortFunction: PropTypes.func,
         filter: PropTypes.bool,
         filterMatchMode: PropTypes.string,

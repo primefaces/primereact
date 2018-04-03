@@ -221,6 +221,9 @@ export class DataTable extends Component {
         let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
         let multiSortMeta;
 
+        this.columnSortable = event.sortable;
+        this.columnSortFunction = event.sortFunction;
+
         if(this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
             multiSortMeta = this.state.multiSortMeta;
@@ -275,7 +278,15 @@ export class DataTable extends Component {
 
     sortSingle(data) {
         let value = [...data];
-        value.sort((data1, data2) => {
+
+        if(this.columnSortable && this.columnSortable === 'custom' && this.columnSortFunction) {
+            value = this.columnSortFunction({
+                field: this.state.sortField,
+                order: this.state.sortOrder
+            });
+        }
+        else {
+            value.sort((data1, data2) => {
                 let value1 = ObjectUtils.resolveFieldData(data1, this.state.sortField);
                 let value2 = ObjectUtils.resolveFieldData(data2, this.state.sortField);
                 let result = null;
@@ -293,6 +304,7 @@ export class DataTable extends Component {
 
                 return (this.state.sortOrder * result);
             });
+        }
 
         return value;
     }

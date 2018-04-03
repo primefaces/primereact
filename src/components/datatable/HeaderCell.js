@@ -20,7 +20,9 @@ export class HeaderCell extends Component {
             if(DomHandler.hasClass(targetNode, 'ui-sortable-column') || DomHandler.hasClass(targetNode, 'ui-column-title') || DomHandler.hasClass(targetNode, 'ui-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
-                    sortField: this.props.field
+                    sortField: this.props.field,
+                    sortFunction: this.props.sortFunction,
+                    sortable: this.props.sortable
                 });
             }
         }
