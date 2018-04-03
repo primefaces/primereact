@@ -6,12 +6,16 @@ export class InputTextarea extends Component {
 
     static defaultProps = {
         autoResize: false,
-        onInput: null
+        onInput: null,
+        cols: 20,
+        rows: 2
     };
 
     static propTypes = {
         autoResize: PropTypes.bool,
-        onInput: PropTypes.func
+        onInput: PropTypes.func,
+        cols: PropTypes.number,
+        rows: PropTypes.number
     };
     
     constructor(props) {
