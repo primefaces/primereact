@@ -216,7 +216,11 @@ export class AutoComplete extends Component {
 
     formatValue(value) {
         if(value) {
-            if (this.props.field) {
+            if (this.props.selectedItemTemplate) {
+                const resolvedFieldData = this.props.selectedItemTemplate(value);
+                return resolvedFieldData ? resolvedFieldData : value;
+            } 
+            else if (this.props.field) {
                 const resolvedFieldData = ObjectUtils.resolveFieldData(value, this.props.field);
                 return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
             }
@@ -495,13 +499,10 @@ export class AutoComplete extends Component {
     renderChips() {
         if(this.props.value && this.props.value.length) {
             return this.props.value.map((val, index) => {
-                let tokenContent = this.props.selectedItemTemplate ? this.props.selectedItemTemplate(val) : 
-                    (<span className="ui-autocomplete-token-label">{this.props.field ? ObjectUtils.resolveFieldData(val, this.props.field) : val}</span>);
-                
                 return (
                     <li key={index + 'multi-item'} className="ui-autocomplete-token ui-state-highlight ui-corner-all">
                         <span className="ui-autocomplete-token-icon fa fa-fw fa-close" onClick={(e) => this.removeItem(e, index)}></span>
-                        {tokenContent}
+                        <span className="ui-autocomplete-token-label">{this.formatValue(val)}</span>
                     </li>
                 );
             });
