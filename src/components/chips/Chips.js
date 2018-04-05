@@ -138,7 +138,7 @@ export class Chips extends Component {
         }
 
         var inputToken = <li className="ui-chips-input-token">
-                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} type="text" disabled={this.props.disabled||this.maxedOut()} 
+                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" disabled={this.props.disabled||this.maxedOut()}
                                         onKeyDown={(event) => this.onKeydown(event)} onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
                         </li>;
 
