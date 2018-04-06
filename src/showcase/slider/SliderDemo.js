@@ -158,7 +158,13 @@ onChangeSlider1(e) {
                             <td>null</td>
                             <td>Unique identifier of the element.</td>
                         </tr>
-                         <tr>
+                        <tr>
+                            <td>value</td>
+                            <td>number</td>
+                            <td>0</td>
+                            <td>Value of the component.</td>
+                        </tr>
+                        <tr>
                             <td>animate</td>
                             <td>boolean</td>
                             <td>false</td>
