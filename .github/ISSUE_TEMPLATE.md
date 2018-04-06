@@ -1,10 +1,10 @@
-### There is no guarantee in receiving an immediate response in GitHub Issue Tracker, If you'd like to secure our response, you may consider *PrimeNG PRO Support* where support is provided within 4 business hours
+### There is no guarantee in receiving an immediate response in GitHub Issue Tracker, If you'd like to secure our response, you may consider *PrimeReact PRO Support* where support is provided within 4 business hours
 
 **I'm submitting a ...**  (check one with "x")
 ```
 [ ] bug report
 [ ] feature request
-[ ] support request => Please do not submit support request here, instead see http://forum.primefaces.org/viewforum.php?f=57
+[ ] support request => Please do not submit support request here, instead see https://forum.primefaces.org/viewforum.php?f=57
 ```
 
 **Plunkr Case (Bug Reports)**
