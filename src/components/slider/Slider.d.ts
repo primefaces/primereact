@@ -2,6 +2,7 @@ import React = require("react");
 
 interface SliderProps {
     id?: string;
+    value?: number;
     animate?: boolean;
     min?: number;
     max?: number;
