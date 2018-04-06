@@ -197,6 +197,12 @@ export class TreeNode extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(this.state.expanded !== nextProps.node.expanded) {
+            this.setState({expanded: nextProps.node.expanded});
+        }
+    }
+
     render() {
         if (this.props.isHorizontal) {
             return this.renderHorizontalTree();
