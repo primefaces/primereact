@@ -7,6 +7,7 @@ export class Slider extends Component {
 
     static defaultProps = {
         id: null,
+        value: null,
         animate: false,
         min: 0,
         max: 100,
@@ -19,6 +20,7 @@ export class Slider extends Component {
 
     static propsTypes = {
         id: PropTypes.string,
+        value: PropTypes.number,
         animate: PropTypes.bool,
         min: PropTypes.number,
         max: PropTypes.number,
@@ -38,6 +40,11 @@ export class Slider extends Component {
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
         this.handleValues = [];
+        this.isFloatValue = this.isFloat(this.props.value) || this.isFloat(this.props.step);
+    }
+
+    isFloat(val) {
+        return val != null && Number(val) === val && val % 1 !== 0;
     }
 
     onMouseDown(event, index) {
@@ -166,7 +173,12 @@ export class Slider extends Component {
                 }
             }
 
-            this.values[this.handleIndex] = Math.floor(value);
+            if(this.isFloatValue) {
+                this.values[this.handleIndex] = value;
+            }
+            else {
+                this.values[this.handleIndex] = Math.floor(value);
+            }
 
             if (this.props.onChange) {
                 this.props.onChange({
@@ -185,7 +197,12 @@ export class Slider extends Component {
                 this.handleValue = 100;
             }
 
-            this.value = Math.floor(val);
+            if(this.isFloatValue) {
+                this.value = val;
+            }
+            else {
+                this.value = Math.floor(val);
+            }
 
             if (this.props.onChange) {
                 this.props.onChange({
