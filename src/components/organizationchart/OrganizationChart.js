@@ -28,16 +28,24 @@ export class OrganizationChartNode extends Component {
 
     constructor(props) {
         super(props);
-        this.node = this.props.node;
-        this.state = {expanded: this.node.expanded};
+        this.state = {
+            expanded: this.props.node.expanded,
+            node: this.props.node
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.node !== nextProps.node) {
+            this.setState({node: nextProps.node});
+        }
     }
 
     getLeaf() {
-        return this.node.leaf === false ? false : !(this.node.children&&this.node.children.length);
+        return this.state.node.leaf === false ? false : !(this.state.node.children&&this.state.node.children.length);
     }
     
     getColspan() {
-        return (this.node.children && this.node.children.length) ? this.node.children.length * 2: null;
+        return (this.state.node.children && this.state.node.children.length) ? this.state.node.children.length * 2: null;
     }
 
     onNodeClick(event, node) {
@@ -51,23 +59,23 @@ export class OrganizationChartNode extends Component {
     }
     
     isSelected() {
-        return this.props.isSelected(this.node);
+        return this.props.isSelected(this.state.node);
     }
 
     render() {
         var colspan = this.getColspan();
-        let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.className, {
-                'ui-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
+        let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.state.node.className, {
+                'ui-organizationchart-selectable-node': this.props.selectionMode && this.state.node.selectable !== false,
                 'ui-state-highlight': this.isSelected()
             }),
-            nodeLabel = (this.props.nodeTemplate && this.props.nodeTemplate(this.node)) ? <div>{this.props.nodeTemplate(this.node)}</div> : <div>{this.node.label}</div>,
+            nodeLabel = (this.props.nodeTemplate && this.props.nodeTemplate(this.state.node)) ? <div>{this.props.nodeTemplate(this.state.node)}</div> : <div>{this.state.node.label}</div>,
             toggleIcon = classNames('fa ui-node-toggler-icon', {'fa-chevron-down': this.state.expanded, 'fa-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
-                    <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
+                    <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.state.node)}>
                         {nodeLabel}
                         {
-                            !this.getLeaf() && <a className="ui-node-toggler" onClick={(e) => this.toggleNode(e, this.node)}>
+                            !this.getLeaf() && <a className="ui-node-toggler" onClick={(e) => this.toggleNode(e, this.state.node)}>
                                 <i className={toggleIcon}></i>
                             </a>
                         }
@@ -81,10 +89,10 @@ export class OrganizationChartNode extends Component {
                     <div className="ui-organizationchart-line-down"></div>
                 </td>
             </tr>),
-            nodeChildLength = this.node.children && this.node.children.length,
+            nodeChildLength = this.state.node.children && this.state.node.children.length,
             linesMiddle = (<tr style={{visibility: _visibility}} className="ui-organizationchart-lines">
                 {
-                    this.node.children && this.node.children.map((item, index) => {
+                    this.state.node.children && this.state.node.children.map((item, index) => {
                         let leftClass = classNames('ui-organizationchart-line-left', {'ui-organizationchart-line-top': index !== 0}),
                         rightClass = classNames('ui-organizationchart-line-right', {'ui-organizationchart-line-top': index !== nodeChildLength - 1});
 
@@ -94,7 +102,7 @@ export class OrganizationChartNode extends Component {
             </tr>),
             childNodes = (<tr style={{visibility: _visibility}} className="ui-organizationchart-nodes">
                     {
-                        this.node.children && this.node.children.map((child, index) => {
+                        this.state.node.children && this.state.node.children.map((child, index) => {
                             return (<td key={index} colSpan="2">
                                     <OrganizationChartNode node={child} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}
                                         onNodeClick={this.props.onNodeClick} isSelected={this.props.isSelected}/>
@@ -148,9 +156,19 @@ export class OrganizationChart extends Component {
 
     constructor(props) {
         super(props);
-        this.root = this.props.value && this.props.value.length ? this.props.value[0] : null;
         this.onNodeClick = this.onNodeClick.bind(this);
         this.isSelected = this.isSelected.bind(this);
+        this.state = {root: this.getRootNode(this.props.value)};
+    }
+
+    getRootNode(value) {
+        return value && value.length ? value[0] : null;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.value !== nextProps.value) {
+            this.setState({root: this.getRootNode(nextProps.value)});
+        }
     }
 
     onNodeClick(event, node) {
@@ -230,7 +248,7 @@ export class OrganizationChart extends Component {
         var className = classNames('ui-organizationchart ui-widget', this.props.className);
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
-                <OrganizationChartNode node={this.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}
+                <OrganizationChartNode node={this.state.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}
                         onNodeClick={this.onNodeClick} isSelected={this.isSelected}/>
             </div>
         );
