@@ -82,7 +82,7 @@ export class Slider extends Component {
 
         if (this.props.range) {
             if (this.props.step) {
-                this.handleStepChange(newValue, this.values[this.handleIndex]);
+                this.handleStepChange(newValue, this.values[this.handleIndex], event);
             }
             else {
                 this.handleValues[this.handleIndex] = handleValue;
@@ -91,7 +91,7 @@ export class Slider extends Component {
         }
         else {
             if (this.props.step) {
-                this.handleStepChange(newValue, this.value);
+                this.handleStepChange(newValue, this.value, event);
             }
             else {
                 this.handleValue = handleValue;
@@ -100,17 +100,17 @@ export class Slider extends Component {
         }
     }
 
-    handleStepChange(newValue, oldValue) {
+    handleStepChange(newValue, oldValue, event) {
         let diff = (newValue - oldValue);
 
         if (diff < 0 && (-1 * diff) >= this.props.step / 2) {
             newValue = oldValue - this.props.step;
-            this.updateValue(newValue);
+            this.updateValue(newValue, event);
             this.updateHandleValue();
         }
         else if (diff > 0 && diff >= this.props.step / 2) {
             newValue = oldValue + this.props.step;
-            this.updateValue(newValue);
+            this.updateValue(newValue, event);
             this.updateHandleValue();
         }
     }
