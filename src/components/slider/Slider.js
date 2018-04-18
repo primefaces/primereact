@@ -101,17 +101,24 @@ export class Slider extends Component {
     }
 
     handleStepChange(newValue, oldValue, event) {
-        let diff = (newValue - oldValue);
+        let diff = (newValue - oldValue),
+        originalEvent = event.originalEvent; 
 
         if (diff < 0 && (-1 * diff) >= this.props.step / 2) {
             newValue = oldValue - this.props.step;
             this.updateValue(newValue, event);
-            this.updateHandleValue();
+            
+            if(originalEvent && !originalEvent.defaultPrevented) {
+                this.updateHandleValue();
+            }
         }
         else if (diff > 0 && diff >= this.props.step / 2) {
             newValue = oldValue + this.props.step;
             this.updateValue(newValue, event);
-            this.updateHandleValue();
+            
+            if(originalEvent && !originalEvent.defaultPrevented) {
+                this.updateHandleValue();
+            }
         }
     }
 
