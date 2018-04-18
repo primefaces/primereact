@@ -496,8 +496,10 @@ export class InputMask extends Component {
             }
 
             setTimeout(() => {
-                _this.writeBuffer();
-                _this.checkVal();
+                if(_this.input) {
+                    _this.writeBuffer();
+                    _this.checkVal();
+                }
             }, 10);
 
             this.focusText = this.input.value;
