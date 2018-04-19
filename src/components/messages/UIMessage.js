@@ -42,6 +42,7 @@ export class UIMessage extends Component {
 
         if (event) {
             event.preventDefault();
+            event.stopPropagation();
         }
     }
 
@@ -92,7 +93,7 @@ export class UIMessage extends Component {
         let messages = this.renderMessages();
 
         return (
-            <div ref={(el) => { this.container = el; }} className={className}>
+            <div ref={(el) => { this.container = el; }} className={className} onClick={this.onClick}>
                 <div className="ui-messages-wrapper">
                     {closeIcon}
                     <span className={icon}></span>
