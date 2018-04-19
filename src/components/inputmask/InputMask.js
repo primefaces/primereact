@@ -483,7 +483,6 @@ export class InputMask extends Component {
     }
 
     componentDidMount() {
-        var _this = this;
         this.value = this.props.value;
 
         if (this.input) {
@@ -496,9 +495,9 @@ export class InputMask extends Component {
             }
 
             setTimeout(() => {
-                if(_this.input) {
-                    _this.writeBuffer();
-                    _this.checkVal();
+                if(this.input) {
+                    this.writeBuffer();
+                    this.checkVal();
                 }
             }, 10);
 
