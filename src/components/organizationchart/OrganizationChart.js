@@ -54,6 +54,11 @@ export class OrganizationChartNode extends Component {
         return this.props.isSelected(this.node);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.node = nextProps.node;
+        this.setState({expanded: this.node.expanded});
+    }
+
     render() {
         var colspan = this.getColspan();
         let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.className, {
@@ -224,6 +229,10 @@ export class OrganizationChart extends Component {
     
     isSelected(node) {
         return this.findIndexInSelection(node) !== -1;         
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.root = nextProps.value && nextProps.value.length ? nextProps.value[0] : null;
     }
 
     render() {
