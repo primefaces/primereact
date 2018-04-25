@@ -631,7 +631,7 @@ export class DataTable extends Component {
                     this.props.onColReorder({
                         dragIndex: dragIndex,
                         dropIndex: dropIndex,
-                        columns: this.columns
+                        columns: columns
                     });
                 }
             }
