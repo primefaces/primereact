@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {TreeTableHeader} from './TreeTableHeader';
+import {TreeTableFooter} from './TreeTableFooter';
 import {UITreeRow} from './UITreeRow';
 import ObjectUtils from '../utils/ObjectUtils';
 import {Column} from "../column/Column"
@@ -45,7 +47,7 @@ export class TreeTable extends Component {
     }
 
     onRowClick(event, node) {
-        var eventTarget = (event.target);
+        let eventTarget = (event.target);
         if (eventTarget.className && eventTarget.className.indexOf('ui-treetable-toggler') === 0) {
             return;
         }
@@ -54,9 +56,9 @@ export class TreeTable extends Component {
                 return;
             }
 
-            var metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
-            var index = this.findIndexInSelection(node);
-            var selected = (index >= 0);
+            let metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
+            let index = this.findIndexInSelection(node);
+            let selected = (index >= 0);
 
             if (this.isCheckboxSelectionMode()) {
                 if (selected) {
@@ -98,7 +100,7 @@ export class TreeTable extends Component {
             }
             else {
                 if (metaSelection) {
-                    var metaKey = (event.metaKey || event.ctrlKey);
+                    let metaKey = (event.metaKey || event.ctrlKey);
 
                     if (selected && metaKey) {
                         if (this.isSingleSelectionMode()) {
@@ -206,14 +208,14 @@ export class TreeTable extends Component {
     }
 
     findIndexInSelection(node) {
-        var index = -1;
+        let index = -1;
 
         if (this.props.selectionMode && this.selection) {
             if (this.isSingleSelectionMode()) {
                 index = (ObjectUtils.equals(this.selection, node)) ? 0 : - 1;
             }
             else {
-                for (var i = 0; i < this.selection.length; i++) {
+                for (let i = 0; i < this.selection.length; i++) {
                     if (ObjectUtils.equals(this.selection[i], node)) {
                         index = i;
                         break;
@@ -227,9 +229,9 @@ export class TreeTable extends Component {
 
     propagateSelectionUp(node, select) {
         if (node.children && node.children.length) {
-            var selectedCount = 0;
-            var childPartialSelected = false;
-            for (var child of node.children) {
+            let selectedCount = 0;
+            let childPartialSelected = false;
+            for (let child of node.children) {
                 if (this.isSelected(child)) {
                     selectedCount++;
                 }
@@ -244,7 +246,7 @@ export class TreeTable extends Component {
             }
             else {
                 if (!select) {
-                    var index = this.findIndexInSelection(node);
+                    let index = this.findIndexInSelection(node);
                     if (index >= 0) {
                         this.selection = this.selection.filter((val, i) => i !== index);
                     }
@@ -257,14 +259,14 @@ export class TreeTable extends Component {
             }
         }
 
-        var parent = node.parent;
+        let parent = node.parent;
         if (parent) {
             this.propagateSelectionUp(parent, select);
         }
     }
 
     propagateSelectionDown(node, select) {
-        var index = this.findIndexInSelection(node);
+        let index = this.findIndexInSelection(node);
 
         if (select && index === -1) {
             this.selection = [...this.selection || [], node];
@@ -276,7 +278,7 @@ export class TreeTable extends Component {
         node.partialSelected = false;
 
         if (node.children && node.children.length) {
-            for (var child of node.children) {
+            for (let child of node.children) {
                 this.propagateSelectionDown(child, select);
             }
         }
@@ -300,14 +302,27 @@ export class TreeTable extends Component {
 
     hasFooter() {
         if (this.columns) {
-            var columnsArr = this.columns;
-            for (var i = 0; i < columnsArr.length; i++) {
-                if (columnsArr[i].footer) {
+            for (let i = 0; i < this.columns.length; i++) {
+                if (this.columns[i].footer) {
                     return true;
                 }
             }
         }
+
         return false;
+    }
+
+    createTreeTableHeader() {
+        return <TreeTableHeader columns={this.columns}></TreeTableHeader>;
+    }
+
+    createTreeTableFooter() {
+        if(this.hasFooter()) {
+            return <TreeTableFooter columns={this.columns}></TreeTableFooter>;
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
@@ -316,54 +331,20 @@ export class TreeTable extends Component {
                 return element;
         });
 
-        var treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
+        let treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
 
-        var header =
-            this.props.header && <div className="ui-treetable-header ui-widget-header">
-                    {this.props.header}
-                </div>,
-            footer = this.props.footer && <div className="ui-treetable-footer ui-widget-header">
-                {this.props.footer}
-            </div>;
+        let headerFacet = this.props.header && <div className="ui-treetable-header ui-widget-header">{this.props.header}</div>,
+            footerFacet = this.props.footer && <div className="ui-treetable-footer ui-widget-header">{this.props.footer}</div>;
 
-        var thead = (
-            <thead>
-                <tr>
-                    {
-                        this.columns && this.columns.map((col, i) => {
-                            var colStyleClass = classNames('ui-state-default ui-unselectable-text', col.props.className);
-
-                            return (<th key={'headerCol_' + i} className={colStyleClass} style={col.props.style}>
-
-                                <span className="ui-column-title">{col.props.header}</span>
-                            </th>);
-                        })
-                    }
-                </tr>
-            </thead>
-        ),
-            tfoot = (
-                this.hasFooter() && (<tfoot>
-                    <tr>
-                        {
-                            this.columns && this.columns.map((col, i) => {
-                                var colStyleClass = classNames('ui-state-default', col.props.className);
-
-                                return (<td key={'footerCol_' + i} className={colStyleClass} style={col.props.style}>
-                                    <span className="ui-column-footer">{col.props.footer}</span>
-                                </td>);
-                            })
-                        }
-                    </tr>
-                </tfoot>)
-            ),
+        let thead = this.createTreeTableHeader(),
+            tfoot = this.createTreeTableFooter(),
             tbody = this.props.value && this.props.value.map((node, index) => {
                 return (<UITreeRow key={'row_' + index} node={node} index={index} level={0} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this} parentNode={this.props.value} />)
             });
 
         return (
             <div id={this.props.id} className={treeTableClass} style={this.props.style}>
-                {header}
+                {headerFacet}
                 <div className="ui-treetable-tablewrapper">
                     <table className="ui-widget-content">
                         {thead}
@@ -371,7 +352,7 @@ export class TreeTable extends Component {
                         {tbody}
                     </table>
                 </div>
-                {footer}
+                {footerFacet}
             </div>);
     }
 }
