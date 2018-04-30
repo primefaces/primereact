@@ -119,6 +119,7 @@ export class FileUpload extends Component {
 
     onFileSelect(event) {
         this.setState({msgs:[]});
+        this.files = [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let file of files) {
             if (!this.isFileSelected(file)) {
@@ -126,16 +127,17 @@ export class FileUpload extends Component {
                     if (this.isImage(file)) {
                         file.objectURL = window.URL.createObjectURL(file);
                     }
-
-                    this.setState({files: [...this.state.files, file]}, () => {
-                        if (this.hasFiles() && this.props.auto) {
-                            this.upload();
-                        }
-                    });
+                    this.files.push(file);
                 }
             }
         }
-                
+
+        this.setState({files: this.files}, () => {
+            if (this.hasFiles() && this.props.auto) {
+                this.upload();
+            }
+        });
+        
         if(this.props.onSelect) {
             this.props.onSelect({originalEvent: event, files: files});
         }
@@ -370,7 +372,7 @@ export class FileUpload extends Component {
         );
     }
     
-    render() {        
+    render() {
         if (this.props.mode === 'advanced')
             return this.renderAdvanced();
         else if (this.props.mode === 'basic')
