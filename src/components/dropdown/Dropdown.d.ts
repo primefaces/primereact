@@ -4,7 +4,7 @@ interface DropdownProps {
     id?: string;
     value?: any;
     options?: Array<any>;
-    itemTemplate?(): void;
+    itemTemplate?(option:any): any;
     style?: object;
     className?: string;
     autoWidth?: boolean;

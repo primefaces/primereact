@@ -2,7 +2,7 @@ import React = require("react");
 
 interface DropdownItemProps {
     option?: object;
-    template?(): void;
+    template?(option:any): any;
     selected?: boolean;
     onClick?(e: {originalEvent: Event, option: object}): void;
 }
