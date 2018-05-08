@@ -48,7 +48,13 @@ export class Checkbox extends Component {
                 value: this.props.value,
                 checked: !this.props.checked
             });
+
+            this.input.checked = !this.props.checked;
         }
+    }
+
+    componentWillUpdate(nextProps) {
+        this.input.checked = nextProps.checked;
     }
 
     onFocus(e) {
@@ -67,7 +73,7 @@ export class Checkbox extends Component {
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="ui-helper-hidden-accessible">
-                    <input type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} />
+                    <input type="checkbox" ref={(el) => { this.input = el; }} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} />
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>
