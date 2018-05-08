@@ -108,7 +108,6 @@ export class TabView extends Component {
     }
     
     renderContent() {
-        console.log(this.state.activeIndex)
         let contents = React.Children.map(this.props.children, (tab, index) => {
             let selected = this.state.activeIndex === index;
             let className = classNames(tab.props.contentClassName, 'ui-tabview-panel ui-widget-content', {'ui-helper-hidden': !selected});
