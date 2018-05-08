@@ -70,10 +70,10 @@ export class TabView extends Component {
         event.preventDefault();
     }
          
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.activeIndex !== this.props.activeIndex) {
+    componentWillReceiveProps(nextState) {
+        if(nextState.activeIndex !== this.state.activeIndex) {
             this.setState({
-                activeIndex: nextProps.activeIndex
+                activeIndex: nextState.activeIndex
             });
         }
     }
@@ -108,6 +108,7 @@ export class TabView extends Component {
     }
     
     renderContent() {
+        console.log(this.state.activeIndex)
         let contents = React.Children.map(this.props.children, (tab, index) => {
             let selected = this.state.activeIndex === index;
             let className = classNames(tab.props.contentClassName, 'ui-tabview-panel ui-widget-content', {'ui-helper-hidden': !selected});
