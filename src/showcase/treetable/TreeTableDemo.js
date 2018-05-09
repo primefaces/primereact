@@ -10,25 +10,9 @@ export class TreeTableDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { data: [] };
 
         this.nodeservice = new NodeService();
-
-        this.onSelectionChange = this.onSelectionChange.bind(this);
-        this.onMultiMetaKeySelectionChange = this.onMultiMetaKeySelectionChange.bind(this);
-        this.onCheckboxSelectionChange = this.onCheckboxSelectionChange.bind(this);
-    }
-
-    onSelectionChange(e) {
-        this.setState({ selectedFile: e.selection });
-    }
-
-    onMultiMetaKeySelectionChange(e) {
-        this.setState({ selectedFiles1: e.selection });
-    }
-
-    onCheckboxSelectionChange(e) {
-        this.setState({ selectedFiles2: e.selection });
     }
 
     componentDidMount() {
@@ -54,44 +38,6 @@ export class TreeTableDemo extends Component {
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
-
-                    <h3>Single Selection</h3>
-                    <TreeTable value={this.state.data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
-
-                    <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={this.state.data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                    <div style={{ 'marginTop': '8px' }}>
-                        Selected Nodes:
-                            {
-                            this.state.selectedFiles1.map((obj, i) => {
-                                return <span key={i}>{i !== 0 ? "," : ""} {obj.data.name}</span>
-                            })
-                        }
-                    </div>
-
-                    <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={this.state.data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                    <div style={{ 'marginTop': '8px' }}>
-                        Selected Nodes:
-                            {
-                            this.state.selectedFiles2.map((obj, i) => {
-                                return <span key={i}>{i !== 0 ? "," : ""} {obj.data.name}</span>
-                            })
-                        }
-                    </div>
                 </div>
 
                 <TreeTableDoc />
@@ -581,25 +527,7 @@ export class TreeTableDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
-
-        this.nodeservice = new NodeService();
-
-        this.onSelectionChange = this.onSelectionChange.bind(this);
-        this.onMultiMetaKeySelectionChange = this.onMultiMetaKeySelectionChange.bind(this);
-        this.onCheckboxSelectionChange = this.onCheckboxSelectionChange.bind(this);
-    }
-
-    onSelectionChange(e) {
-        this.setState({ selectedFile: e.selection });
-    }
-
-    onMultiMetaKeySelectionChange(e) {
-        this.setState({ selectedFiles1: e.selection });
-    }
-
-    onCheckboxSelectionChange(e) {
-        this.setState({ selectedFiles2: e.selection });
+        this.state = { data: [] };
     }
 
     componentDidMount() {
@@ -626,43 +554,6 @@ export class TreeTableDemo extends Component {
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
-                    <h3>Single Selection</h3>
-                    <TreeTable value={this.state.data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
-
-                    <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={this.state.data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                    <div style={{ 'marginTop': '8px' }}>
-                        Selected Nodes:
-                            {
-                            this.state.selectedFiles1.map((obj, i) => {
-                                return <span key={i}>{i !== 0 ? "," : ""} {obj.data.name}</span>
-                            })
-                        }
-                    </div>
-
-                    <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={this.state.data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                    <div style={{ 'marginTop': '8px' }}>
-                        Selected Nodes:
-                            {
-                            this.state.selectedFiles2.map((obj, i) => {
-                                return <span key={i}>{i !== 0 ? "," : ""} {obj.data.name}</span>
-                            })
-                        }
-                    </div>
                 </div>
 
                 <TreeTableDoc />
