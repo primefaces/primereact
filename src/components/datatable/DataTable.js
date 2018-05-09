@@ -398,6 +398,8 @@ export class DataTable extends Component {
                 filters: this.props.filters
             });
         }
+
+        this.container.style.width = this.getContainerWidth();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -820,6 +822,20 @@ export class DataTable extends Component {
         }
 
         return frozenColumns;
+    }
+
+    getContainerWidth() {
+        if(this.props.scrollable) {
+            if(this.props.scrollWidth) {
+                return this.props.scrollWidth;
+            }
+            else if(this.props.frozenWidth && this.props.unfrozenWidth) {
+                return parseFloat(this.props.frozenWidth) + parseFloat(this.props.unfrozenWidth) + 'px';
+            }
+        }
+        else {
+            return this.props.style ? this.props.style.width : null;
+        }
     }
 
     getScrollableColumns(columns) {
