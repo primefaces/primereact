@@ -13,10 +13,15 @@ interface TreeTableProps {
     metaKeySelection?: boolean;
     header?: string;
     footer?: string;
+    sortField?: string;
+    sortOrder?: number;
+    multiSortMeta?: string;
+    sortMode?: string;
     onNodeSelect?(e: {originalEvent: Event, node: any}): void;
     onNodeUnselect?(e: {originalEvent: Event, node: any}): void;
     onNodeExpand?(e: {originalEvent: Event, node: any}): void;
     onNodeCollapse?(e: {originalEvent: Event, node: any}): void;
+    onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
 }
 
 export class TreeTable extends React.Component<TreeTableProps,any> {}
