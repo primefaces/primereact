@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {TreeTableHeader} from './TreeTableHeader';
-import {TreeTableFooter} from './TreeTableFooter';
-import {UITreeRow} from './UITreeRow';
+import { TreeTableHeader } from './TreeTableHeader';
+import { TreeTableFooter } from './TreeTableFooter';
+import { UITreeRow } from './UITreeRow';
 import ObjectUtils from '../utils/ObjectUtils';
-import {Column} from "../column/Column"
+import { Column } from "../column/Column"
 
 export class TreeTable extends Component {
     static defaultProps = {
@@ -21,6 +21,11 @@ export class TreeTable extends Component {
         metaKeySelection: true,
         header: '',
         footer: '',
+        sortField: null,
+        sortOrder: 1,
+        multiSortMeta: null,
+        sortMode: 'single',
+        onSort: null,
         onNodeSelect: null,
         onNodeUnselect: null,
         onNodeExpand: null,
@@ -40,10 +45,150 @@ export class TreeTable extends Component {
         metaKeySelection: PropTypes.bool,
         header: PropTypes.string,
         footer: PropTypes.string,
+        sortField: PropTypes.string,
+        sortOrder: PropTypes.number,
+        multiSortMeta: PropTypes.array,
+        sortMode: PropTypes.string,
+        onSort: PropTypes.func,
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func,
         onNodeExpand: PropTypes.func,
         onNodeCollapse: PropTypes.func
+    }
+
+    constructor(props) {
+        super(props);
+        this.value = [...this.props.value];
+
+        this.state = {
+            sortField: props.sortField,
+            sortOrder: props.sortOrder,
+            multiSortMeta: props.multiSortMeta
+        };
+
+        this.onSort = this.onSort.bind(this);
+    }
+
+    onSort(event) {
+        let sortField = event.sortField;
+        let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
+        let multiSortMeta;
+
+        this.columnSortable = event.sortable;
+        this.columnSortFunction = event.sortFunction;
+
+        if (this.props.sortMode === 'multiple') {
+            let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
+            multiSortMeta = this.state.multiSortMeta;
+            if (!multiSortMeta || !metaKey) {
+                multiSortMeta = [];
+            }
+
+            this.addSortMeta({ field: sortField, order: sortOrder }, multiSortMeta);
+        }
+
+        this.setState({
+            sortField: sortField,
+            sortOrder: sortOrder,
+            multiSortMeta: multiSortMeta
+        });
+
+        if (this.props.onSort) {
+            this.props.onSort({
+                sortField: sortField,
+                sortOrder: sortOrder,
+                multiSortMeta: multiSortMeta
+            });
+        }
+    }
+
+    addSortMeta(meta, multiSortMeta) {
+        let index = -1;
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if (multiSortMeta[i].field === meta.field) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index >= 0)
+            multiSortMeta[index] = meta;
+        else
+            multiSortMeta.push(meta);
+    }
+
+    sortSingle(value) {
+        if (this.columnSortable && this.columnSortable === 'custom' && this.columnSortFunction) {
+            value = this.columnSortFunction({
+                field: this.state.sortField,
+                order: this.state.sortOrder
+            });
+        }
+        else {
+            value.sort((data1, data2) => {
+                let value1 = ObjectUtils.resolveFieldData(data1.data, this.state.sortField);
+                let value2 = ObjectUtils.resolveFieldData(data2.data, this.state.sortField);
+                let result = null;
+
+                if (value1 == null && value2 != null)
+                    result = -1;
+                else if (value1 != null && value2 == null)
+                    result = 1;
+                else if (value1 == null && value2 == null)
+                    result = 0;
+                else if (typeof value1 === 'string' && typeof value2 === 'string')
+                    result = value1.localeCompare(value2, undefined, { numeric: true })
+                else
+                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+                return (this.state.sortOrder * result);
+            });
+        }
+
+        for(let i = 0; i < value.length; i++) {
+            let child = value[i].children;
+            if(child) {
+                this.sortSingle(child);
+            }
+        }
+
+        return value;
+    }
+
+    sortMultiple(value) {
+        value.sort((data1, data2) => {
+            return this.multisortField(data1, data2, this.state.multiSortMeta, 0);
+        });
+
+        for(let i = 0; i < value.length; i++) {
+            let child = value[i].children;
+            if(child) {
+                this.sortMultiple(child);
+            }
+        }
+
+        return value;
+    }
+
+    multisortField(data1, data2, multiSortMeta, index) {
+        let value1 = ObjectUtils.resolveFieldData(data1.data, this.state.multiSortMeta[index].field);
+        let value2 = ObjectUtils.resolveFieldData(data2.data, this.state.multiSortMeta[index].field);
+        let result = null;
+
+        if (typeof value1 === 'string' || value1 instanceof String) {
+            if (value1.localeCompare && (value1 !== value2)) {
+                return (this.state.multiSortMeta[index].order * value1.localeCompare(value2, undefined, { numeric: true }));
+            }
+        }
+        else {
+            result = (value1 < value2) ? -1 : 1;
+        }
+
+        if (value1 === value2) {
+            return (this.state.multiSortMeta.length - 1) > (index) ? (this.multisortField(data1, data2, this.state.multiSortMeta, index + 1)) : 0;
+        }
+
+        return (this.state.multiSortMeta[index].order * result);
     }
 
     onRowClick(event, node) {
@@ -312,12 +457,26 @@ export class TreeTable extends Component {
         return false;
     }
 
+    processData() {
+        let data = this.value;
+        if (data && data.length) {
+            if (this.state.sortField || this.state.multiSortMeta) {
+                if (this.props.sortMode === 'single')
+                    data = this.sortSingle(data);
+                else if (this.props.sortMode === 'multiple')
+                    data = this.sortMultiple(data);
+            }
+        }
+
+        return data;
+    }
+
     createTreeTableHeader() {
-        return <TreeTableHeader columns={this.columns}></TreeTableHeader>;
+        return <TreeTableHeader columns={this.columns} onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta}></TreeTableHeader>;
     }
 
     createTreeTableFooter() {
-        if(this.hasFooter()) {
+        if (this.hasFooter()) {
             return <TreeTableFooter columns={this.columns}></TreeTableFooter>;
         }
         else {
@@ -325,7 +484,15 @@ export class TreeTable extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.sortField !== this.props.sortField) { this.setState({ sortField: nextProps.sortField }) }
+        if (nextProps.sortOrder !== this.props.sortOrder) { this.setState({ sortOrder: nextProps.sortOrder }) }
+        if (nextProps.multiSortMeta !== this.props.multiSortMeta) { this.setState({ multiSortMeta: nextProps.multiSortMeta }) }
+        if (nextProps.value && !ObjectUtils.equalsByValue(nextProps.value, this.value)) { this.value = [...nextProps.value]; }
+    }
+
     render() {
+        let value = this.processData();
         this.columns = React.Children.map(this.props.children, (element, i) => {
             if (element && element.type === Column)
                 return element;
@@ -338,8 +505,8 @@ export class TreeTable extends Component {
 
         let thead = this.createTreeTableHeader(),
             tfoot = this.createTreeTableFooter(),
-            tbody = this.props.value && this.props.value.map((node, index) => {
-                return (<UITreeRow key={'row_' + index} node={node} index={index} level={0} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this} parentNode={this.props.value} />)
+            tbody = value && value.map((node, index) => {
+                return (<UITreeRow key={'row_' + index} node={node} index={index} level={0} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this} parentNode={value} />)
             });
 
         return (

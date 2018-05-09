@@ -37,6 +37,7 @@ export class UITreeRow extends Component {
         else if (this.treeTable.props.onNodeExpand)
             this.treeTable.props.onNodeExpand({ originalEvent: event, node: this.node });
 
+        this.node.expanded = !this.state.expanded;
         this.setState({ expanded: !this.state.expanded });
 
         event.preventDefault();
@@ -75,6 +76,12 @@ export class UITreeRow extends Component {
         else {
             return null;
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.node = nextProps.node;
+        this.node.parent = nextProps.parentNode;
+        this.setState({ expanded: this.node.expanded });
     }
 
     render() {

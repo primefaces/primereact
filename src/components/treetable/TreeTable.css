@@ -77,6 +77,19 @@
     float: left;
 }
 
+.ui-treetable .ui-sortable-column {
+    cursor: pointer;
+}
+
+.ui-treetable .ui-sortable-column-icon {
+    display: inline-block;
+    margin-left: .125em;
+}
+
+.ui-treetable tr.ui-state-highlight {
+    cursor: pointer;
+}
+
 /* PrimeReact */
 .ui-treetable td.ui-treetable-child-table-container {
     padding: 0;
