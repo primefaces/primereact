@@ -1322,7 +1322,7 @@ export class Calendar extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
+        if (nextProps.value !== this.props.value || nextProps.minDate !== this.props.minDate || nextProps.maxDate !== this.props.maxDate) {
             let date = this.getMonthYearDate(nextProps.value);
             let month = date.getMonth();
             let year = date.getFullYear();
