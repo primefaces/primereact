@@ -188,6 +188,7 @@ export class DataTable extends Component {
         this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
         this.onColumnDrop = this.onColumnDrop.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
+        this.frozenSelectionMode = null;
     }
 
     onPageChange(event) {
@@ -851,6 +852,17 @@ export class DataTable extends Component {
         return scrollableColumns;
     }
 
+    getFrozenSelectionModeInColumn(columns) {
+        if(Array.isArray(columns)) {
+            for(let col of columns) {
+                if(col.props.selectionMode)
+                   return col.props.selectionMode;
+            }
+        }
+
+        return null;
+    }
+
     createTableHeader(columns, columnGroup) {
         return <TableHeader onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta} columnGroup={columnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
@@ -863,7 +875,7 @@ export class DataTable extends Component {
 
     createTableBody(value, columns) {
         return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
@@ -956,6 +968,7 @@ export class DataTable extends Component {
         }
 
         if(this.props.scrollable) {
+            this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
             let frozenColumns = this.getFrozenColumns(columns);
             let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
             let frozenView, scrollableView;

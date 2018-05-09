@@ -266,7 +266,7 @@ export class TableBody extends Component {
     }
 
     isSelectionEnabled() {
-        if(this.props.selectionMode) {
+        if(this.props.selectionMode || this.props.frozenSelectionMode != null) {
             return true;
         }
         else {
