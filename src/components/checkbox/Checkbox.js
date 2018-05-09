@@ -24,11 +24,11 @@ export class Checkbox extends Component {
         inputId: PropTypes.string,
         value: PropTypes.any,
         name: PropTypes.string,
-        checked: PropTypes.bool.isRequired,
+        checked: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        onChange: PropTypes.func.isRequired,
+        onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
     };
