@@ -75,6 +75,7 @@ import { PickListDemo } from './showcase/picklist/PickListDemo';
 import { ScheduleDemo } from './showcase/schedule/ScheduleDemo';
 import { TreeDemo } from './showcase/tree/TreeDemo';
 import { TreeTableDemo } from './showcase/treetable/TreeTableDemo';
+import { TreeTableSortDemo } from './showcase/treetable/TreeTableSortDemo';
 import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
 import { ColorPickerDemo } from './showcase/colorpicker/ColorPickerDemo';
 import { PasswordDemo } from './showcase/password/PasswordDemo';
@@ -494,7 +495,8 @@ class App extends Component {
                     <Route path="/picklist" component={PickListDemo} />
                     <Route path="/schedule" component={ScheduleDemo} />
                     <Route path="/tree" component={TreeDemo} />
-                    <Route path="/treetable" component={TreeTableDemo} />
+                    <Route exact path="/treetable" component={TreeTableDemo} />
+                    <Route path="/treetable/sort" component={TreeTableSortDemo} />
                     <Route path="/captcha" component={CaptchaDemo} />
                     <Route path="/colorpicker" component={ColorPickerDemo} />
                     <Route path="/password" component={PasswordDemo} />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import {Column} from "../../components/column/Column";
+import { Column } from "../../components/column/Column";
+import { NodeService } from '../service/NodeService';
+import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
@@ -8,7 +10,13 @@ export class TreeTableDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { data: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+
+        this.nodeservice = new NodeService();
+
+        this.onSelectionChange = this.onSelectionChange.bind(this);
+        this.onMultiMetaKeySelectionChange = this.onMultiMetaKeySelectionChange.bind(this);
+        this.onCheckboxSelectionChange = this.onCheckboxSelectionChange.bind(this);
     }
 
     onSelectionChange(e) {
@@ -23,90 +31,15 @@ export class TreeTableDemo extends Component {
         this.setState({ selectedFiles2: e.selection });
     }
 
-    render() {
-        var data = [
-            {
-                "data": {
-                    "name": "Documents",
-                    "size": "75kb",
-                    "type": "Folder"
-                },
-                "children": [
-                    {
-                        "data": {
-                            "name": "Work",
-                            "size": "55kb",
-                            "type": "Folder"
-                        },
-                        "children": [
-                            {
-                                "data": {
-                                    "name": "Expenses.doc",
-                                    "size": "30kb",
-                                    "type": "Document"
-                                }
-                            },
-                            {
-                                "data": {
-                                    "name": "Resume.doc",
-                                    "size": "25kb",
-                                    "type": "Resume"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "data": {
-                            "name": "Home",
-                            "size": "20kb",
-                            "type": "Folder"
-                        },
-                        "children": [
-                            {
-                                "data": {
-                                    "name": "Invoices",
-                                    "size": "20kb",
-                                    "type": "Text"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "data": {
-                    "name": "Pictures",
-                    "size": "150kb",
-                    "type": "Folder"
-                },
-                "children": [
-                    {
-                        "data": {
-                            "name": "barcelona.jpg",
-                            "size": "90kb",
-                            "type": "Picture"
-                        }
-                    },
-                    {
-                        "data": {
-                            "name": "primeui.png",
-                            "size": "30kb",
-                            "type": "Picture"
-                        }
-                    },
-                    {
-                        "data": {
-                            "name": "optimus.jpg",
-                            "size": "30kb",
-                            "type": "Picture"
-                        }
-                    }
-                ]
-            }
-        ];
+    componentDidMount() {
+        this.nodeservice.getNodes().then(data => this.setState({data: data}));
+    }
 
+    render() {
         return (
             <div>
+                <TreeTableSubmenu />
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable</h1>
@@ -116,14 +49,14 @@ export class TreeTableDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <TreeTable value={data} header="Basic">
+                    <TreeTable value={this.state.data} header="Basic">
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Single Selection</h3>
-                    <TreeTable value={data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange.bind(this)}>
+                    <TreeTable value={this.state.data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -131,7 +64,7 @@ export class TreeTableDemo extends Component {
                     <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}>
+                    <TreeTable value={this.state.data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -146,7 +79,7 @@ export class TreeTableDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange.bind(this)}>
+                    <TreeTable value={this.state.data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -169,7 +102,7 @@ export class TreeTableDemo extends Component {
 
 export class TreeTableDoc extends Component {
 
-    shouldComponentUpdate(){
+    shouldComponentUpdate() {
         return false;
     }
 
@@ -179,12 +112,12 @@ export class TreeTableDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
-{`
+                        <CodeHighlight className="javascript">
+                            {`
 import {TreeTable} from 'primereact/components/treetable/TreeTable';
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>TreeTable component requires an array of TreeNode objects as its value. TreeTable requires a value, selectionChange callback(for selectable TreeTable).</p>
@@ -264,15 +197,15 @@ import {TreeTable} from 'primereact/components/treetable/TreeTable';
                                 </tbody>
                             </table>
                         </div>
-<CodeHighlight className="html">
-{`
+                        <CodeHighlight className="html">
+                            {`
 <TreeTable value={data} />
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-<CodeHighlight className="javascript">
-{`
+                        <CodeHighlight className="javascript">
+                            {`
 
 render() {
         var data = [
@@ -360,7 +293,7 @@ render() {
     }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Column Component</h3>
                         <p>TreeTable utilizes the following options defined by a column component.</p>
@@ -406,23 +339,35 @@ render() {
                                         <td>null</td>
                                         <td>Style class of the column.</td>
                                     </tr>
+                                    <tr>
+                                        <td>sortable</td>
+                                        <td>any</td>
+                                        <td>false</td>
+                                        <td>Defines if a column is sortable.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortFunction</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Sort function for custom sorting.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
-<CodeHighlight className="javascript">
-{`
+                        <CodeHighlight className="javascript">
+                            {`
 import {Column} from 'primereact/components/column/Column';
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-<CodeHighlight className="html">
-{`
+                        <CodeHighlight className="html">
+                            {`
 <Column field="name" header="Name"></Column>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
@@ -503,6 +448,30 @@ import {Column} from 'primereact/components/column/Column';
                                         <td>null</td>
                                         <td>Label of footer.</td>
                                     </tr>
+                                    <tr>
+                                        <td>sortMode</td>
+                                        <td>string</td>
+                                        <td>single</td>
+                                        <td>Defines whether sorting works on single column or on multiple columns.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortField</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the field to sort data by default.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortOrder</td>
+                                        <td>number</td>
+                                        <td>1</td>
+                                        <td>Order to sort when default sorting is enabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>multiSortMeta</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of SortMeta objects to sort the data by default in multiple sort mode.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -549,6 +518,13 @@ import {Column} from 'primereact/components/column/Column';
                                         <td>Callback to invoke when a node is selected. <br />
                                             TreeTable requires selectionChange callback (for selectable TreeTable)</td>
                                     </tr>
+                                    <tr>
+                                        <td>onSort</td>
+                                        <td>event.field: Field name of the sorted column<br />
+                                            event.order: Sort order as 1 or -1<br />
+                                            event.multisortmeta: Sort metadata in multi sort mode. See multiple sorting section for the structure of this object.</td>
+                                        <td>Callback to invoke when a column gets sorted.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -593,13 +569,25 @@ import {Column} from 'primereact/components/column/Column';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="javascript">
+                        <CodeHighlight className="javascript">
                             {`
+import React, { Component } from 'react';
+import { TreeTable } from '../../components/treetable/TreeTable';
+import { Column } from "../../components/column/Column";
+import { NodeService } from '../service/NodeService';
+import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
+
 export class TreeTableDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { data: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+
+        this.nodeservice = new NodeService();
+
+        this.onSelectionChange = this.onSelectionChange.bind(this);
+        this.onMultiMetaKeySelectionChange = this.onMultiMetaKeySelectionChange.bind(this);
+        this.onCheckboxSelectionChange = this.onCheckboxSelectionChange.bind(this);
     }
 
     onSelectionChange(e) {
@@ -614,91 +602,16 @@ export class TreeTableDemo extends Component {
         this.setState({ selectedFiles2: e.selection });
     }
 
-    render() {
-        var data = [
-            {
-                "data": {
-                    "name": "Documents",
-                    "size": "75kb",
-                    "type": "Folder"
-                },
-                "children": [
-                    {
-                        "data": {
-                            "name": "Work",
-                            "size": "55kb",
-                            "type": "Folder"
-                        },
-                        "children": [
-                            {
-                                "data": {
-                                    "name": "Expenses.doc",
-                                    "size": "30kb",
-                                    "type": "Document"
-                                }
-                            },
-                            {
-                                "data": {
-                                    "name": "Resume.doc",
-                                    "size": "25kb",
-                                    "type": "Resume"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "data": {
-                            "name": "Home",
-                            "size": "20kb",
-                            "type": "Folder"
-                        },
-                        "children": [
-                            {
-                                "data": {
-                                    "name": "Invoices",
-                                    "size": "20kb",
-                                    "type": "Text"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "data": {
-                    "name": "Pictures",
-                    "size": "150kb",
-                    "type": "Folder"
-                },
-                "children": [
-                    {
-                        "data": {
-                            "name": "barcelona.jpg",
-                            "size": "90kb",
-                            "type": "Picture"
-                        }
-                    },
-                    {
-                        "data": {
-                            "name": "primeui.png",
-                            "size": "30kb",
-                            "type": "Picture"
-                        }
-                    },
-                    {
-                        "data": {
-                            "name": "optimus.jpg",
-                            "size": "30kb",
-                            "type": "Picture"
-                        }
-                    }
-                ]
-            }
-        ];
+    componentDidMount() {
+        this.nodeservice.getNodes().then(data => this.setState({data: data}));
+    }
 
+    render() {
         return (
             <div>
-                <div className="content-section">
+                <TreeTableSubmenu />
+
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable</h1>
                         <p>TreeTable is used to display hierarchical data in tabular format.</p>
@@ -707,14 +620,14 @@ export class TreeTableDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <TreeTable value={data} header="Basic">
+                    <TreeTable value={this.state.data} header="Basic">
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Single Selection</h3>
-                    <TreeTable value={data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange.bind(this)}>
+                    <TreeTable value={this.state.data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -722,7 +635,7 @@ export class TreeTableDemo extends Component {
                     <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}>
+                    <TreeTable value={this.state.data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -737,7 +650,7 @@ export class TreeTableDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange.bind(this)}>
+                    <TreeTable value={this.state.data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -752,14 +665,14 @@ export class TreeTableDemo extends Component {
                     </div>
                 </div>
 
-                 <TreeTableDoc />
+                <TreeTableDoc />
             </div>
         )
     }
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>
