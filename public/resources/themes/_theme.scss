@@ -417,6 +417,11 @@
         background: $stateHoverBgColor;
         color: $stateHoverTextColor;
     }
+        
+    .ui-sortable-column:not(.ui-state-active):hover {
+        background: $stateHoverBgColor;
+        color: $stateHoverTextColor;
+    }
 }
 
 .ui-organizationchart {
