@@ -70,10 +70,10 @@ export class TabView extends Component {
         event.preventDefault();
     }
          
-    componentWillReceiveProps(nextState) {
-        if(nextState.activeIndex !== this.state.activeIndex) {
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.activeIndex !== this.state.activeIndex) {
             this.setState({
-                activeIndex: nextState.activeIndex
+                activeIndex: nextProps.activeIndex
             });
         }
     }
