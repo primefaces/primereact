@@ -13,6 +13,7 @@ interface PickListProps {
     responsive?: boolean;
     showSourceControls?: boolean;
     showTargetControls?: boolean;
+    metaKeySelection?: boolean;
     itemTemplate?(item: any): void;
     onChange?(e: {event: Event, source: any, target: any}): void;
     onMoveToSource?(e: {originalEvent: Event, value: any}): void;
