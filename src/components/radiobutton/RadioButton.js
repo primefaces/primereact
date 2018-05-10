@@ -21,11 +21,11 @@ export class RadioButton extends Component {
         id: PropTypes.string,
         inputId: PropTypes.string,
         value: PropTypes.any,
-        checked: PropTypes.bool.isRequired,
+        checked: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        onChange: PropTypes.func.isRequired
+        onChange: PropTypes.func
     };
     
     constructor(props) {
@@ -48,6 +48,8 @@ export class RadioButton extends Component {
                 value: this.props.value,
                 checked: !this.props.checked
             });
+
+            this.input.checked = !this.props.checked;
         }
     }
 
@@ -59,6 +61,10 @@ export class RadioButton extends Component {
         DomHandler.removeClass(this.box, 'ui-state-focus');
     }
 
+    componentWillUpdate(nextProps) {
+        this.input.checked = nextProps.checked;
+    }
+
     render() {
         let containerClass = classNames('ui-radiobutton ui-widget', this.props.className);
         let boxClass = classNames('ui-radiobutton-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked,  'ui-state-disabled': this.props.disabled});
@@ -67,7 +73,7 @@ export class RadioButton extends Component {
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="ui-helper-hidden-accessible">
-                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled}/>
+                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>
