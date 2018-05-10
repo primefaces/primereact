@@ -8,7 +8,7 @@ interface ColorPickerProps {
     defaultColor?: string;
     inline?: boolean;
     format?: string;
-    appendTo?: string;
+    appendTo?: any;
     disabled?: boolean;
     tabindex?: string;
     inputId?: string;

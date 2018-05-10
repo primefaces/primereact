@@ -29,7 +29,7 @@ export class ColorPicker extends Component {
         defaultColor: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.any,
         disabled: PropTypes.bool,
         tabIndex: PropTypes.string,
         inputId: PropTypes.string,

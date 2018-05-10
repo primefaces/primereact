@@ -13,7 +13,7 @@ export class ColorPickerPanel extends Component {
     }
 
     static propsTypes = {
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.any,
         inline: PropTypes.bool,
         disabled: PropTypes.bool,
         onClick: PropTypes.func
