@@ -112,7 +112,7 @@ export class BodyCell extends Component {
 
     render() {
         let content, header;
-        let cellClassName = classNames(this.props.headerClassName||this.props.className, {
+        let cellClassName = classNames(this.props.bodyClassName||this.props.className, {
                                 'ui-selection-column': this.props.selectionMode,
                                 'ui-editable-column': this.props.editor,
                                 'ui-cell-editing': this.state.editing
