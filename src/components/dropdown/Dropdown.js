@@ -400,7 +400,7 @@ export class Dropdown extends Component {
         if(this.props.editable) {
             let value = label||this.props.value||'';
             
-            return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="ui-dropdown-label ui-inputtext ui-corner-all" disabled={this.props.disabled} placeholder={this.props.placeholder}
+            return <input ref={(el) => this.editableInput = el} type="text" value={value} className="ui-dropdown-label ui-inputtext ui-corner-all" disabled={this.props.disabled} placeholder={this.props.placeholder}
                         onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} />;
         }
         else {
