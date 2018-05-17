@@ -45,6 +45,14 @@ export class Spinner extends Component {
             this.precision = this.props.step.toString().split(/[,]|[.]/)[1].length;
         }
 
+        let val = this.props.value;
+        if(val !== undefined && val != null) {
+            this.value = this.updateValue(val);
+        }
+
+        this.formatValue();
+        this.updateFilledState();
+
         this.onInputKeyUp = this.onInputKeyUp.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onInputKeyPress = this.onInputKeyPress.bind(this);
@@ -309,16 +317,6 @@ export class Spinner extends Component {
 
     updateFilledState() {
         this.filled = (this.value !== undefined && this.value != null);
-    }
-
-    componentWillMount() {
-        let val = this.props.value;
-        if(val !== undefined && val != null) {
-            this.value = this.updateValue(val);
-        }
-
-        this.formatValue();
-        this.updateFilledState();
     }
 
     componentDidMount() {
