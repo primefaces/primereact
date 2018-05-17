@@ -32,9 +32,7 @@ export class Fieldset extends Component {
         super(props);
         this.state = {collapsed: this.props.collapsed};
         this.toggle = this.toggle.bind(this);
-    }
 
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
 
@@ -49,12 +47,14 @@ export class Fieldset extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.collapsed != null && nextProps.collapsed !== this.state.collapsed) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.collapsed != null && nextProps.collapsed !== prevState.collapsed) {
+            return {
                 collapsed: nextProps.collapsed
-            });
+            };
         }
+
+        return null;
     }
 
     toggle(e) {
