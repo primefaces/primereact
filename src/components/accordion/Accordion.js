@@ -53,9 +53,6 @@ export class Accordion extends Component {
             activeIndex: props.activeIndex
         };
         this.contentWrappers = [];
-    }
-
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
 
@@ -70,12 +67,11 @@ export class Accordion extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    static getDerivedStateFromProps(nextProps, prevState) {
         if(nextProps.activeIndex != null) {
-            this.setState({
-                activeIndex: nextProps.activeIndex
-            });
+            return {activeIndex: nextProps.activeIndex};
         }
+        return null;
     }
     
     onTabClick(event, tab, i) {
