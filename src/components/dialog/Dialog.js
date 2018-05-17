@@ -82,9 +82,7 @@ export class Dialog extends Component {
         this.moveOnTop = this.moveOnTop.bind(this);
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
-    }
 
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
 
@@ -417,17 +415,16 @@ export class Dialog extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    shouldComponentUpdate(nextProps, nextState) {
         if(this.state.visible !== nextProps.visible) {
             if (nextProps.visible)
                 this.show();
             else {
-                if(this.preventVisibleChangePropagation)
-                    this.preventVisibleChangePropagation = false;
-                else
-                    this.hide();
+                this.hide();
             }
         }
+
+        return true;
     }
 
     componentDidMount() {
