@@ -434,7 +434,7 @@ export class InputMask extends Component {
         this.filled = this.input && this.input.value !== '';
     }
 
-    componentWillMount() {
+    init() {
         this.tests = [];
         this.partialPosition = this.props.mask.length;
         this.len = this.props.mask.length;
@@ -483,6 +483,8 @@ export class InputMask extends Component {
     }
 
     componentDidMount() {
+        this.init();
+
         this.value = this.props.value;
 
         if (this.input) {
