@@ -105,19 +105,17 @@ export class AutoComplete extends Component {
         this.selectItem = this.selectItem.bind(this);
     }
     
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {
+        if(!this.props.multiple) {
+            this.updateInputField(nextProps.value);
+        }
+        
         if(this.manualModelChange) {
             this.manualModelChange = false;
             return false;
         }
         else {
             return true;
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(!this.props.multiple) {
-            this.updateInputField(nextProps.value);
         }
     }
     
