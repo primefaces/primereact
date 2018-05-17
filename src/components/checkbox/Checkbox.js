@@ -55,8 +55,8 @@ export class Checkbox extends Component {
         }
     }
 
-    componentWillUpdate(nextProps) {
-        this.input.checked = nextProps.checked;
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.input.checked = this.props.checked;
     }
 
     onFocus(e) {
