@@ -422,16 +422,9 @@ export class ColorPicker extends Component {
         return this.RGBtoHEX(this.HSBtoRGB(hsb));
     }
 
-    componentWillMount() {
-        this.updateHSBValue(this.props.value);
-    }
-
     componentDidMount() {
+        this.updateHSBValue(this.props.value);
         this.updateUI();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.updateHSBValue(nextProps.value);
     }
 
     componentDidUpdate() {
@@ -445,6 +438,7 @@ export class ColorPicker extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
+        this.updateHSBValue(nextProps.value);
         let newValue = this.toHSB(nextProps.value);
         let oldValue = this.hsbValue;
         let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
