@@ -50,9 +50,7 @@ export class TabView extends Component {
         this.state = {
             activeIndex: this.props.activeIndex || 0
         };
-    }
 
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
     
@@ -70,12 +68,14 @@ export class TabView extends Component {
         event.preventDefault();
     }
          
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.activeIndex !== this.state.activeIndex) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.activeIndex !== null && nextProps.activeIndex !== prevState.activeIndex) {
+            return {
                 activeIndex: nextProps.activeIndex
-            });
+            };
         }
+
+        return null;
     }
     
     renderTabHeader(tab, index) {
