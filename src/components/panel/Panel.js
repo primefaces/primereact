@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import DomHandler from '../utils/DomHandler';
 import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Panel extends Component {
@@ -34,9 +34,7 @@ export class Panel extends Component {
             collapsed: this.props.collapsed
         };
         this.toggle = this.toggle.bind(this);
-    }
 
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
     
@@ -50,13 +48,15 @@ export class Panel extends Component {
             }, 500);
         }
     }
-    
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.collapsed != null && nextProps.collapsed !== this.state.collapsed) {
-            this.setState({
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.collapsed != null && nextProps.collapsed !== prevState.collapsed) {
+            return {
                 collapsed: nextProps.collapsed
-            });
+            };
         }
+
+        return null;
     }
 
     toggle(e) {
