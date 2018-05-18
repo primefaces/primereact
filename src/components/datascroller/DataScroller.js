@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 export class DataScroller extends Component {
+    
     static defaultProps = {
         id: null,
         value:	null,
