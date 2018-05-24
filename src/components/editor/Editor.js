@@ -81,9 +81,9 @@ export class Editor extends Component {
         this.quill.on('selection-change', this.handleSelectionChange);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.value !== this.value) {
-            this.value = nextProps.value;
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.value !== this.value) {
+            this.value = this.props.value;
             let sel = this.quill.getSelection();
             if(sel) {
                 var length = this.quill.getLength();
