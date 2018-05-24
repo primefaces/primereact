@@ -105,11 +105,7 @@ export class AutoComplete extends Component {
         this.selectItem = this.selectItem.bind(this);
     }
     
-    shouldComponentUpdate(nextProps, nextState) {
-        if(!this.props.multiple) {
-            this.updateInputField(nextProps.value);
-        }
-        
+    shouldComponentUpdate(nextProps, nextState) {        
         if(this.manualModelChange) {
             this.manualModelChange = false;
             return false;
@@ -580,6 +576,10 @@ export class AutoComplete extends Component {
     }
 
     render() {
+        if(this.input && !this.props.multiple) {
+            this.updateInputField(this.props.value);
+        }
+
         let input, dropdown;
         let className = classNames('ui-autocomplete ui-widget', this.props.className, {
             'ui-autocomplete-dd': this.props.dropdown,
