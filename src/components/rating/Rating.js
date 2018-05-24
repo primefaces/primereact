@@ -56,12 +56,13 @@ export class Rating extends Component {
         event.preventDefault();
     }
 
-    componentWillReceiveProps(nextProps) {
-        var newValue = nextProps.value;
-
-        if (newValue !== this.state.value) {
-            this.setState({value: newValue});
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.value !== prevState.value) {
+            return {
+                value: nextProps.value
+            };
         } 
+        return null;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -88,8 +89,8 @@ export class Rating extends Component {
         
         var stars = starsArray.map((value) => {
             var iconClass = classNames('fa', {
-                'fa-star-o': (!this.props.value || value > this.props.value), 
-                'fa-star': (value <= this.props.value)
+                'fa-star-o': (!this.state.value || value > this.state.value), 
+                'fa-star': (value <= this.state.value)
             });
             
             return <a onClick={(e) => this.rate(e, value)} key={value}>
