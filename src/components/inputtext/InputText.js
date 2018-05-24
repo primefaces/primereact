@@ -61,9 +61,9 @@ export class InputText extends Component {
         this.updateFilledState(_value);
     }
 
-    componentWillUpdate(nextProps){
-        if (nextProps.value !== this.props.value) {
-            this.updateFilledState(nextProps.value);
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if (prevProps.value !== this.props.value) {
+            this.updateFilledState(this.props.value);
         }
     }
 
