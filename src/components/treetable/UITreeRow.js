@@ -78,13 +78,22 @@ export class UITreeRow extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.node = nextProps.node;
-        this.node.parent = nextProps.parentNode;
-        this.setState({ expanded: this.node.expanded });
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let expanded = nextProps.node.expanded
+        if(prevState.expanded !== expanded) {
+            return {
+                expanded: expanded
+            };
+        }
+        return null;
     }
 
     render() {
+        if(this.node !== this.props.node) {
+            this.node = this.props.node;
+            this.node.parent = this.props.node.parentNode;
+        }
+
         var tableRowClass = classNames('ui-treetable-row', {
             'ui-state-highlight': this.isSelected(),
             'ui-treetable-row-selectable': this.treeTable.props.selectionMode && this.node.selectable !== false

@@ -197,10 +197,13 @@ export class TreeNode extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.state.expanded !== nextProps.node.expanded) {
-            this.setState({expanded: nextProps.node.expanded});
+    static getDeviredStateFromProps(nextProps, prevState) {
+        if(prevState.expanded !== nextProps.node.expanded) {
+            return {
+                expanded: nextProps.node.expanded
+            };
         }
+        return null;
     }
 
     render() {
