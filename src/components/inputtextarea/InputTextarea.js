@@ -101,9 +101,9 @@ export class InputTextarea extends Component {
         this.setState({filled: _filled});
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.hasOwnProperty('value')) {
-            this.textareaProps.value = nextProps.value;
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(this.props.hasOwnProperty('value')) {
+            this.textareaProps.value = this.props.value;
         }
     }   
 
