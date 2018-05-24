@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 export class DataScroller extends Component {
+    
     static defaultProps = {
         id: null,
         value:	null,
@@ -17,7 +18,8 @@ export class DataScroller extends Component {
         onLazyLoad: null,
         itemTemplate: null,
         header:null,
-        footer:null
+        footer:null,
+        lazy: null
     }
 
     static propsTypes = {
@@ -33,7 +35,8 @@ export class DataScroller extends Component {
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
         header:PropTypes.string,
-        footer:PropTypes.string
+        footer:PropTypes.string,
+        lazy:PropTypes.bool
     }
 
     constructor(props) {
