@@ -109,6 +109,7 @@ export class GMap extends Component {
         if(prevProps.overlays !== this.props.overlays) {
             if(prevProps.overlays) {
                 for(let overlay of prevProps.overlays) {
+                    google.maps.event.clearInstanceListeners(overlay);
                     overlay.setMap(null);
                 }
             }
