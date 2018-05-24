@@ -61,11 +61,11 @@ export class RadioButton extends Component {
         DomHandler.removeClass(this.box, 'ui-state-focus');
     }
 
-    componentWillUpdate(nextProps) {
-        this.input.checked = nextProps.checked;
-    }
-
     render() {
+        if(this.input) {
+            this.input.checked = this.props.checked;
+        }
+        
         let containerClass = classNames('ui-radiobutton ui-widget', this.props.className);
         let boxClass = classNames('ui-radiobutton-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked,  'ui-state-disabled': this.props.disabled});
         let iconClass = classNames('ui-radiobutton-icon ui-c', { 'fa fa-circle': this.props.checked });
