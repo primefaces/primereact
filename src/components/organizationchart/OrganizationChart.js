@@ -54,12 +54,18 @@ export class OrganizationChartNode extends Component {
         return this.props.isSelected(this.node);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.node = nextProps.node;
-        this.setState({expanded: this.node.expanded});
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.node.expanded !== prevState.expanded) {
+            return {
+                expanded: nextProps.node.expanded
+            };
+        }
+        return null;
     }
 
     render() {
+        this.node = this.props.node;
+
         var colspan = this.getColspan();
         let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.className, {
                 'ui-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
@@ -231,11 +237,9 @@ export class OrganizationChart extends Component {
         return this.findIndexInSelection(node) !== -1;         
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.root = nextProps.value && nextProps.value.length ? nextProps.value[0] : null;
-    }
-
     render() {
+        this.root = this.props.value && this.props.value.length ? this.props.value[0] : null;
+
         var className = classNames('ui-organizationchart ui-widget', this.props.className);
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
