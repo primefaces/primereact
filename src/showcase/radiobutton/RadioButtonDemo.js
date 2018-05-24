@@ -37,8 +37,8 @@ export class RadioButtonDemo extends Component {
                             <label htmlFor="rb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb2" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
-                            <label htmlFor="rb2">Los Angeles</label>
+                            <RadioButton inputId="rb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="rb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}
@@ -254,8 +254,8 @@ export class RadioButtonDemo extends Component {
                             <label htmlFor="rb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb2" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
-                            <label htmlFor="rb2">Los Angeles</label>
+                            <RadioButton inputId="rb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="rb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}
