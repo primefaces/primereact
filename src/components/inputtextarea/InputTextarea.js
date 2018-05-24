@@ -87,8 +87,6 @@ export class InputTextarea extends Component {
         this.textareaElement.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
     }
 
-    
-
     updateFilledState(e) {
         let _filled = (e.target.value && e.target.value.length) ? true : false;
         this.setState({filled: _filled});
@@ -99,15 +97,13 @@ export class InputTextarea extends Component {
         _filled = (_value && _value.length) ? true : false;
         
         this.setState({filled: _filled});
-    }
+    } 
 
-    componentDidUpdate(prevProps, prevState, snapshot){
+    render() {
         if(this.props.hasOwnProperty('value')) {
             this.textareaProps.value = this.props.value;
         }
-    }   
 
-    render() {
         var className = classNames('ui-inputtext ui-inputtextarea ui-corner-all ui-state-default ui-widget', this.props.className, {
             'ui-state-disabled': this.props.disabled,
             'ui-state-filled': this.state.filled,
