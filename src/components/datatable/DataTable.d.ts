@@ -64,8 +64,9 @@ interface DataTableProps {
     rowGroupMode?: string;
     autoLayout?:boolean;
     rowClassName?(rowData: any): object;
-    rowGroupHeaderTemplate?(): void;
-    rowGroupFooterTemplate?(): void;
+    rowGroupHeaderTemplate?(data: any): void;
+    rowGroupFooterTemplate?(data: any, index: number): void;
+    groupField?: string;
     loading?:boolean;
     loadingIcon?:string;
     onColumnResizeEnd?(e: {element: any, delta: number}): void;
