@@ -305,6 +305,7 @@ export class InputMask extends Component {
     }
 
     checkVal(allow) {
+        this.isValueChecked = true;
         //try to place characters where they belong
         let test = this.input.value,
             lastMatch = -1,
@@ -434,6 +435,31 @@ export class InputMask extends Component {
         this.filled = this.input && this.input.value !== '';
     }
 
+    updateValue() {
+        this.value = this.props.value;
+
+        if (this.input) {
+            if (this.value === undefined || this.value === null) {
+                this.input.value = '';
+            }
+            else {
+                this.input.value = this.value;
+                this.checkVal();
+            }
+
+            setTimeout(() => {
+                if(this.input) {
+                    this.writeBuffer();
+                    this.checkVal();
+                }
+            }, 10);
+
+            this.focusText = this.input.value;
+        }
+        
+        this.updateFilledState();
+    }
+
     init() {
         this.tests = [];
         this.partialPosition = this.props.mask.length;
@@ -484,32 +510,14 @@ export class InputMask extends Component {
 
     componentDidMount() {
         this.init();
-
-        this.value = this.props.value;
-
-        if (this.input) {
-            if (this.value === undefined || this.value === null) {
-                this.input.value = '';
-            }
-            else {
-                this.input.value = this.value;
-                this.checkVal();
-            }
-
-            setTimeout(() => {
-                if(this.input) {
-                    this.writeBuffer();
-                    this.checkVal();
-                }
-            }, 10);
-
-            this.focusText = this.input.value;
-        }
-        
-        this.updateFilledState();
+        this.updateValue();
     }
 
     render() {
+        if(this.input && this.input.value !== this.props.value) {
+            this.updateValue();
+        }
+
         return (
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
