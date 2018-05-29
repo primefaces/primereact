@@ -50,6 +50,17 @@ export class InputMask extends Component {
         onChange: PropTypes.func
     }
 
+    constructor(props) {
+        super(props);
+        
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
+        this.onInput = this.onInput.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
     caret(first, last) {
         let range, begin, end;
 
@@ -521,8 +532,8 @@ export class InputMask extends Component {
         return (
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
-                onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onKeyPress={this.onKeyPress.bind(this)}
-                onInput={this.onInput.bind(this)} onPaste={this.handleInputChange.bind(this)} required={this.props.required}/>
+                onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
+                onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required}/>
         );
     }
 
