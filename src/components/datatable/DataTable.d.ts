@@ -64,7 +64,7 @@ interface DataTableProps {
     rowGroupMode?: string;
     autoLayout?:boolean;
     rowClassName?(rowData: any): object;
-    rowGroupHeaderTemplate?(data: any): void;
+    rowGroupHeaderTemplate?(data: any, index: number): void;
     rowGroupFooterTemplate?(data: any, index: number): void;
     groupField?: string;
     loading?:boolean;
