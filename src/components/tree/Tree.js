@@ -530,6 +530,10 @@ export class Tree extends Component {
     }
 
     render() {
+        if(this.props.selection && this.selection !== this.props.selection) {
+            this.selection = this.props.selection;
+        }
+
         var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-tree-selectable': this.props.selectionMode,
             'ui-tree-horizontal': this.isHorizontal()
