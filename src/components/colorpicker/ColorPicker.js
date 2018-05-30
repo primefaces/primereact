@@ -162,7 +162,12 @@ export class ColorPicker extends Component {
     }
     
     updateColorSelector() {
-        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
+        var hsbValue = this.validateHSB({
+            h: this.hsbValue.h,
+            s: 100,
+            b: 100
+        });
+        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(hsbValue);
     }
 
     updateColorHandle() {
@@ -438,19 +443,24 @@ export class ColorPicker extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        this.updateHSBValue(nextProps.value);
-        let newValue = this.toHSB(nextProps.value);
-        let oldValue = this.hsbValue;
-        let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
-        
-        return !equals;
+        if(this.colorDragging) {
+            return false;
+        }
+        else {
+            let oldValue = this.hsbValue;
+            this.updateHSBValue(nextProps.value);
+            let newValue = this.toHSB(nextProps.value);
+            let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
+            
+            return !equals;
+        }
     }
 
     updateUI() {
-        this.updateColorHandle();
-        this.updateColorSelector();
         this.updateHue();
+        this.updateColorHandle();
         this.updateInput();
+        this.updateColorSelector();
     }
 
     alignPanel() {
