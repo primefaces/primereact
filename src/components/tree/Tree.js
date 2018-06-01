@@ -198,9 +198,10 @@ export class TreeNode extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if(prevState.expanded !== nextProps.node.expanded) {
+        let nextNode = nextProps.node;
+        if(nextNode.hasOwnProperty("expanded") && prevState.expanded !== nextNode.expanded) {
             return {
-                expanded: nextProps.node.expanded
+                expanded: nextNode.expanded
             };
         }
         return null;
