@@ -35,7 +35,7 @@ export class Rating extends Component {
     }
 
     rate(event, i) {
-        if(!this.props.readonly && !this.props.disabled) {
+        if(!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: i
@@ -46,7 +46,7 @@ export class Rating extends Component {
     }
     
     clear(event) {
-        if(!this.props.readonly && !this.props.disabled) {
+        if(!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: null
@@ -66,7 +66,7 @@ export class Rating extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(nextState.value === this.state.value) {
+        if(nextState.value === this.state.value && nextProps.disabled === this.props.disabled) {
             return false;
         }
 
