@@ -712,7 +712,7 @@ export class DataTable extends Component {
         });
         
         if(window.navigator.msSaveOrOpenBlob) {
-            navigator.msSaveOrOpenBlob(blob, this.exportFilename + '.csv');
+            navigator.msSaveOrOpenBlob(blob, this.props.exportFilename + '.csv');
         }
         else {
             let link = document.createElement("a");
