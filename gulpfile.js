@@ -5,7 +5,14 @@ var gulp = require('gulp'),
     uglifycss = require('gulp-uglifycss'),
     rename = require('gulp-rename'),
     del = require('del'),
-    flatten = require('gulp-flatten');
+    flatten = require('gulp-flatten'),
+    sass = require('gulp-sass');
+
+gulp.task('app-sass', function() {
+    return gulp.src('./src/sass/App.scss')
+    .pipe(sass.sync().on('error', sass.logError))
+    .pipe(gulp.dest('./src/sass'));
+})
     
 gulp.task('build-css', function() {
 	return gulp.src([

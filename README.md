@@ -71,3 +71,13 @@ An [example application](https://github.com/primefaces/primereact-quickstart) ba
 
 Typescript
 Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-typescript-quickstart) is available as well at github.
+
+## Run Showcase
+
+In order to run the showcase you need to compile the `App.scss` file, you can use the command
+
+    npm run compile-sass
+
+After that you just need to run
+
+    npm start
