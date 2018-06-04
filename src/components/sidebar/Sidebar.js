@@ -44,8 +44,8 @@ export class Sidebar extends Component {
     }
 
     componentWillUnmount() {
-        this.disableModality();
         this.unbindMaskClickListener();
+        this.disableModality();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
