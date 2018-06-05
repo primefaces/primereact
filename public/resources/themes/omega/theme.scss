@@ -1,4 +1,4 @@
-$fontFamily:  "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+$fontFamily:  "Lato", "Trebuchet MS", Arial, Helvetica, sans-serif;
 $fontSize: 1em;
 $borderRadius: 3px;
 $disabledOpacity: 0.35;
@@ -57,18 +57,18 @@ $inputGroupTextColor: #222222;
 @import '../_theme';
 
 
-/* roboto-regular - latin */
+/* lato-regular - latin-ext_latin */
 @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/roboto-v15-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local('Roboto'), local('Roboto-Regular'),
-       url('fonts/roboto-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/roboto-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('fonts/roboto-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('fonts/roboto-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('fonts/roboto-v15-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/lato-v14-latin-ext_latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Lato Regular'), local('Lato-Regular'),
+         url('fonts/lato-v14-latin-ext_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('fonts/lato-v14-latin-ext_latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('fonts/lato-v14-latin-ext_latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('fonts/lato-v14-latin-ext_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('fonts/lato-v14-latin-ext_latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
 }
 
 .ui-widget-header {
