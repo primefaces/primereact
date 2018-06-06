@@ -524,6 +524,13 @@ export class InputMask extends Component {
         this.updateValue();
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if(nextProps.value === this.props.value) {
+            return false;
+        }
+        return true;
+    }
+
     render() {
         if(this.input && this.input.value !== this.props.value) {
             this.updateValue();
