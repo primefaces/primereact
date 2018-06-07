@@ -23,7 +23,7 @@ export class HomeComponent extends Component {
                         <div className="ui-g-12 ui-md-3">
                             <img alt="component" src="showcase/resources/images/home/icon-component.svg" />
                             <span className="feature-name">70+ COMPONENTS</span>
-                            <p>The most complete set of native widgets featuring 60+ easy to use components for all your UI requirements.</p>
+                            <p>The most complete set of native widgets featuring 70+ easy to use components for all your UI requirements.</p>
                         </div>
                         <div className="ui-g-12 ui-md-3">
                             <img alt="opensource" src="showcase/resources/images/home/icon-opensource.svg" />
