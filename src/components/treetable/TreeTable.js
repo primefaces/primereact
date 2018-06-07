@@ -137,7 +137,7 @@ export class TreeTable extends Component {
                 else if (value1 == null && value2 == null)
                     result = 0;
                 else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2, undefined, { numeric: true })
+                    result = value1.localeCompare(value2, undefined, { numeric: true });
                 else
                     result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
@@ -484,14 +484,24 @@ export class TreeTable extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.sortField !== this.props.sortField) { this.setState({ sortField: nextProps.sortField }) }
-        if (nextProps.sortOrder !== this.props.sortOrder) { this.setState({ sortOrder: nextProps.sortOrder }) }
-        if (nextProps.multiSortMeta !== this.props.multiSortMeta) { this.setState({ multiSortMeta: nextProps.multiSortMeta }) }
-        if (nextProps.value && !ObjectUtils.equalsByValue(nextProps.value, this.value)) { this.value = [...nextProps.value]; }
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let state = {};
+
+        if (nextProps.sortField !== prevState.sortField) { state = {...state, ...{sortField: nextProps.sortField}} }
+        if (nextProps.sortOrder !== prevState.sortOrder) { state = {...state, ...{sortOrder: nextProps.sortOrder}} }
+        if (nextProps.multiSortMeta !== prevState.multiSortMeta) {state = {...state, ...{multiSortMeta: nextProps.multiSortMeta}} }
+
+        if(Object.keys(state).length > 0)
+            return state;
+
+        return null;
     }
 
     render() {
+        if (this.props.value && !ObjectUtils.equalsByValue(this.props.value, this.value)) { 
+            this.value = [...this.props.value]; 
+        }
+
         let value = this.processData();
         this.columns = React.Children.map(this.props.children, (element, i) => {
             if (element && element.type === Column)

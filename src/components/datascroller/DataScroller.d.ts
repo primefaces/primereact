@@ -14,6 +14,7 @@ interface DataScrollerProps {
     itemTemplate?(): void;
     header?: string;
     footer?: string;
+    lazy?: boolean;
 }
 
 export class DataScroller extends React.Component<DataScrollerProps,any> {}

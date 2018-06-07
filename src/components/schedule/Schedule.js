@@ -326,19 +326,19 @@ export class Schedule extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         return false;
     }
-    
-    componentWillReceiveProps(nextProps) {
-        if(!ObjectUtils.equals(nextProps.events, this.events)) {
-            this.events = [...nextProps.events];
-            this.schedule.fullCalendar('removeEventSources');
-            this.schedule.fullCalendar('addEventSource', this.events);
-        }
-    }
 
     componentWillUnmount() {
         jQuery(this.scheduleEl).fullCalendar('destroy');
     }
     
+    componentDidUpdate(prevProps, prevState, snaphot) {
+        if(!ObjectUtils.equals(this.props.events, this.events)) {
+            this.events = [...this.props.events];
+            this.schedule.fullCalendar('removeEventSources');
+            this.schedule.fullCalendar('addEventSource', this.events);
+        }
+    }
+
     render() {
         return <div id={this.props.id} ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.className}></div>;
     }

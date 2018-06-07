@@ -197,10 +197,14 @@ export class TreeNode extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.state.expanded !== nextProps.node.expanded) {
-            this.setState({expanded: nextProps.node.expanded});
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let nextNode = nextProps.node;
+        if(nextNode.hasOwnProperty("expanded") && prevState.expanded !== nextNode.expanded) {
+            return {
+                expanded: nextNode.expanded
+            };
         }
+        return null;
     }
 
     render() {
@@ -527,6 +531,10 @@ export class Tree extends Component {
     }
 
     render() {
+        if(this.props.selection && this.selection !== this.props.selection) {
+            this.selection = this.props.selection;
+        }
+
         var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-tree-selectable': this.props.selectionMode,
             'ui-tree-horizontal': this.isHorizontal()

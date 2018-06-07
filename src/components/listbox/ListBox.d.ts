@@ -4,6 +4,7 @@ interface ListBoxProps {
     id?: string,
     value?: any,
     options?: Array<any>,
+    optionLabel?: string,
     itemTemplate?(): void,
     style?: object,
     listStyle?: object,

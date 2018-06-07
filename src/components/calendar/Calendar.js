@@ -132,7 +132,9 @@ export class Calendar extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
+        this.init();
+        
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
@@ -150,6 +152,33 @@ export class Calendar extends Component {
         this.decrementSecond = this.decrementSecond.bind(this);
         this.toggleAMPM = this.toggleAMPM.bind(this);
         this.onDatePickerClick = this.onDatePickerClick.bind(this);
+    }
+
+    init() {
+        let date = this.getMonthYearDate(this.props.value);
+        this.createWeekDays();
+        let month =  date.getMonth();
+        let year = date.getFullYear();
+        
+        this.state = {
+            currentMonth: month,
+            currentYear: year,
+            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
+        };
+        
+        this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
+    		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
+            
+        if(this.props.yearNavigator && this.props.yearRange) {
+            this.yearOptions = [];
+            let years = this.props.yearRange.split(':'),
+            yearStart = parseInt(years[0], 10),
+            yearEnd = parseInt(years[1], 10);
+            
+            for(let i = yearStart; i <= yearEnd; i++) {
+                this.yearOptions.push(i);
+            }
+        }
     }
 
     createMonth(month, year, minDate, maxDate) {
@@ -1288,56 +1317,27 @@ export class Calendar extends Component {
     componentWillUnmount() {
         this.unbindDocumentClickListener();
     }
-
-    componentWillMount() {
-        let date = this.getMonthYearDate(this.props.value);
-        this.createWeekDays();
-        let month =  date.getMonth();
-        let year = date.getFullYear();
-        
-        this.setState({
-            currentMonth: month,
-            currentYear: year,
-            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
-        });
-        
-        this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
-    		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
-            
-        if(this.props.yearNavigator && this.props.yearRange) {
-            this.yearOptions = [];
-            let years = this.props.yearRange.split(':'),
-            yearStart = parseInt(years[0], 10),
-            yearEnd = parseInt(years[1], 10);
-            
-            for(let i = yearStart; i <= yearEnd; i++) {
-                this.yearOptions.push(i);
-            }
-        }
-    }
     
     shouldComponentUpdate(nextProps, nextState) {
         return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear)
             || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate || (nextProps.disabled !== this.props.disabled));
     }
-    
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value || nextProps.minDate !== this.props.minDate || nextProps.maxDate !== this.props.maxDate) {
-            let date = this.getMonthYearDate(nextProps.value);
+        
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.value !== prevProps.value || this.props.minDate !== prevProps.minDate || this.props.maxDate !== prevProps.maxDate) {
+            let date = this.getMonthYearDate(this.props.value);
             let month = date.getMonth();
             let year = date.getFullYear();
 
-            if ((month !== this.state.currentMonth) || (year !== this.state.currentYear) || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate)) {
+            if ((month !== this.state.currentMonth) || (year !== this.state.currentYear) || (prevProps.minDate !== this.props.minDate) || (prevProps.maxDate !== this.props.maxDate)) {
                 this.setState({
                     currentMonth: month,
                     currentYear: year,
-                    dates: this.createMonth(month, year, nextProps.minDate, nextProps.maxDate)
+                    dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
                 });
             }
         }
-    }
-        
-    componentDidUpdate(prevProps, prevState) {
+
         if(this.keyboardInput)
             this.keyboardInput = false;
         else

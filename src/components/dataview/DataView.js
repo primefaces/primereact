@@ -125,7 +125,7 @@ export class DataView extends Component {
                 else if (value1 == null && value2 == null)
                     result = 0;
                 else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2);
+                    result = value1.localeCompare(value2, undefined, { numeric: true });
                 else
                     result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
                 return (this.state.sortOrder * result);
@@ -165,17 +165,14 @@ export class DataView extends Component {
         }
     }
 
-    componentWillUpdate(nextProps){
-        if (this.state.sortField!==nextProps.sortField || this.state.sortOrder!==nextProps.sortOrder) {
-            this.setState({sortField: nextProps.sortField, sortOrder: nextProps.sortOrder});
-            this.sortChange = false;
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.sortField!==nextProps.sortField || prevState.sortOrder!==nextProps.sortOrder) {
+            return {
+                sortField: nextProps.sortField, 
+                sortOrder: nextProps.sortOrder
+            };
         }
-    }
-
-    componentDidUpdate(){
-        if(this.state.sortField && !this.sortChange){
-            this.sort();
-        }
+        return null;
     }
 
     renderTopPaginator(){
@@ -247,6 +244,10 @@ export class DataView extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.sortField!==nextProps.sortField || this.state.sortOrder!==nextProps.sortOrder) {
+            this.sortChange = false;
+        }
+
         if(this.props.lazy && nextProps.value === this.props.value)
             return false;
         else
@@ -254,6 +255,9 @@ export class DataView extends Component {
     }
 
     render() {
+        if(this.state.sortField && !this.sortChange){
+            this.sort();
+        }
 
         let className = classNames('ui-dataview ui-widget', {'ui-dataview-list': (this.state.layout === 'list'),
             'ui-dataview-grid': (this.state.layout === 'grid')}, this.props.className);

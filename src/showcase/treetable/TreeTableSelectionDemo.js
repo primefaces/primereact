@@ -10,7 +10,7 @@ export class TreeTableSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { data1: [], data2: [], data3: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
 
         this.nodeservice = new NodeService();
 
@@ -32,7 +32,9 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getNodes().then(data => this.setState({data: data}));
+        this.nodeservice.getNodes().then(data => this.setState({data1: data}));
+        this.nodeservice.getNodes().then(data => this.setState({data2: data}));
+        this.nodeservice.getNodes().then(data => this.setState({data3: data}));
     }
 
     render() {
@@ -52,7 +54,7 @@ export class TreeTableSelectionDemo extends Component {
                 <div className="content-section implementation">
 
                     <h3>Single Selection</h3>
-                    <TreeTable value={this.state.data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
+                    <TreeTable value={this.state.data1} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -60,7 +62,7 @@ export class TreeTableSelectionDemo extends Component {
                     <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={this.state.data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
+                    <TreeTable value={this.state.data2} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -75,7 +77,7 @@ export class TreeTableSelectionDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={this.state.data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
+                    <TreeTable value={this.state.data3} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -119,7 +121,7 @@ export class TreeTableSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
+        this.state = { data1: [], data2: [], data3: [], selectedFile: null, selectedFiles1: [], selectedFiles2: [] };
 
         this.nodeservice = new NodeService();
 
@@ -141,7 +143,9 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getNodes().then(data => this.setState({data: data}));
+        this.nodeservice.getNodes().then(data => this.setState({data1: data}));
+        this.nodeservice.getNodes().then(data => this.setState({data2: data}));
+        this.nodeservice.getNodes().then(data => this.setState({data3: data}));
     }
 
     render() {
@@ -159,7 +163,7 @@ export class TreeTableSelectionDemo extends Component {
                 <div className="content-section implementation">
 
                     <h3>Single Selection</h3>
-                    <TreeTable value={this.state.data} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
+                    <TreeTable value={this.state.data1} selectionMode="single" header="Single Selection" selectionChange={this.onSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -167,7 +171,7 @@ export class TreeTableSelectionDemo extends Component {
                     <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.data.name}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <TreeTable value={this.state.data} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
+                    <TreeTable value={this.state.data2} selectionMode="multiple" header="Multiple Selection with MetaKey" selectionChange={this.onMultiMetaKeySelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -182,7 +186,7 @@ export class TreeTableSelectionDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <TreeTable value={this.state.data} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
+                    <TreeTable value={this.state.data3} selectionMode="checkbox" header="Checkbox Selection" selectionChange={this.onCheckboxSelectionChange}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>

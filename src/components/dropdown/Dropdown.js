@@ -509,6 +509,11 @@ export class Dropdown extends Component {
         let items = this.renderItems(selectedOption);
         let filterElement = this.renderFilter();
         let clearIcon = this.renderClearIcon();
+
+        if(this.props.editable && this.editableInput) {
+            let value = label||this.props.value||'';
+            this.editableInput.value = value;
+        }
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}

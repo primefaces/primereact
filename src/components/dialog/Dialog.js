@@ -415,18 +415,6 @@ export class Dialog extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.visible !== nextProps.visible) {
-            if (nextProps.visible)
-                this.show();
-            else {
-                this.hide();
-            }
-        }
-
-        return true;
-    }
-
     componentDidMount() {
         if(this.state.visible) {
             this.show();
@@ -434,12 +422,24 @@ export class Dialog extends Component {
         }
     }
 
-    componentDidUpdate() {
+    getSnapshotBeforeUpdate(prevProps, prevState) {
         if(this.props.autoAlign && this.state.visible) {
             let height = DomHandler.getOuterHeight(this.container);
             if(height !== this.currentHeight) {
                 this.currentHeight = height;
                 this.positionOverlay();
+            }
+        }
+
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.visible !== this.props.visible) {
+            if (this.props.visible)
+                this.show();
+            else {
+                this.hide();
             }
         }
     }
