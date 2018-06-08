@@ -487,9 +487,9 @@ export class TreeTable extends Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         let state = {};
 
-        if (nextProps.sortField !== prevState.sortField) { state = {...state, ...{sortField: nextProps.sortField}} }
-        if (nextProps.sortOrder !== prevState.sortOrder) { state = {...state, ...{sortOrder: nextProps.sortOrder}} }
-        if (nextProps.multiSortMeta !== prevState.multiSortMeta) {state = {...state, ...{multiSortMeta: nextProps.multiSortMeta}} }
+        if (nextProps.sortField && nextProps.sortField !== prevState.sortField) { state = {...state, ...{sortField: nextProps.sortField}} }
+        if (nextProps.sortOrder && nextProps.sortOrder !== prevState.sortOrder) { state = {...state, ...{sortOrder: nextProps.sortOrder}} }
+        if (nextProps.multiSortMeta && nextProps.multiSortMeta !== prevState.multiSortMeta) {state = {...state, ...{multiSortMeta: nextProps.multiSortMeta}} }
 
         if(Object.keys(state).length > 0)
             return state;
