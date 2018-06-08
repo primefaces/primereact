@@ -42,12 +42,12 @@ class MenuModelDoc extends Component {
 render() {
     var items=[ {
             label: 'File',
-            items: [{label: 'New', icon: 'fa-plus'},
-                    {label: 'Open', icon: 'fa-download'}]
+            items: [{label: 'New', icon: 'fa fa-plus'},
+                    {label: 'Open', icon: 'fa fa-download'}]
         }, {
             label: 'Edit',
-            items: [{label: 'Undo', icon: 'fa-refresh'},
-                    {label: 'Redo', icon: 'fa-repeat'} ]
+            items: [{label: 'Undo', icon: 'fa fa-refresh'},
+                    {label: 'Redo', icon: 'fa fa-repeat'} ]
         }];
 }
 
@@ -138,7 +138,7 @@ render() {
     var items=[{
             label: 'File',
             items: [
-                {label: 'New', icon: 'fa-plus',command: (event) => {
+                {label: 'New', icon: 'fa fa-plus',command: (event) => {
                     //event.originalEvent: Browser event
                     //event.item: menuitem metadata
                 }}
@@ -156,12 +156,12 @@ render() {
 render() {
     var items=[ {
             label: 'File',
-            items: [{label: 'New', icon: 'fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                    {label: 'Open', icon: 'fa-download', url: 'http://primetek.com.tr'}]
+            items: [{label: 'New', icon: 'fa fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                    {label: 'Open', icon: 'fa fa-download', url: 'http://primetek.com.tr'}]
         }, {
             label: 'Edit',
-            items: [{label: 'Undo', icon: 'fa-refresh',command:()=>{ window.location.hash="/"; }},
-                    {label: 'Redo', icon: 'fa-repeat'} ]
+            items: [{label: 'Undo', icon: 'fa fa-refresh',command:()=>{ window.location.hash="/"; }},
+                    {label: 'Redo', icon: 'fa fa-repeat'} ]
         }];
 }
 

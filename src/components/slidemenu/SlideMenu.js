@@ -96,12 +96,12 @@ export class SlideMenuSub extends Component {
                                     'ui-menuitem-link-parent':child.items,
                                     'ui-state-disabled':child.disabled
                                 }),
-                                menuiconClass = classNames('ui-menuitem-icon fa fa-fw', child.icon);
+                                menuiconClass = classNames('ui-menuitem-icon', child.icon);
 
                             return (
                                 <li key={'item_' + index} className={menuitemClass}>
                                     <a href={child.url||'#'} className={menuLinkClass} target={child.target} onClick={(e) => this.itemClick(e, child, index)}>
-                                        {child.items && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
+                                        {child.items && <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>}
                                         {child.icon && <span className={menuiconClass}></span>}
                                         <span className="ui-menuitem-text">{child.label}</span>
                                     </a>
@@ -236,7 +236,7 @@ export class SlideMenu extends Component {
                             effectDuration={this.props.effectDuration} easing={this.props.easing} isAnimating={this.isAnimating} setAnimating={this.setAnimating}></SlideMenuSub>
                     </div>
                     <div ref={(el) => this.backward = el} className="ui-slidemenu-backward ui-widget-header ui-corner-all" style={{'display': this.left ? 'block' : 'none'}} onClick={this.goBack}>
-                        <span className="fa fa-fw fa-caret-left"></span> <span>{this.props.backLabel}</span>
+                        <span className="pi pi-fw pi-caret-left"></span> <span>{this.props.backLabel}</span>
                     </div>
                 </div>
             </div>

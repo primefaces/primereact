@@ -416,7 +416,7 @@ export class Dropdown extends Component {
     renderClearIcon() {
         if(this.props.value && this.props.showClear && !this.props.disabled) {
             return (
-                <i className="ui-dropdown-clear-icon fa fa-close" onClick={this.clear}></i>
+                <i className="ui-dropdown-clear-icon pi pi-times" onClick={this.clear}></i>
             );
         }
         else {
@@ -426,7 +426,7 @@ export class Dropdown extends Component {
     
     renderDropdownIcon() {
         return <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
-                    <span className="fa fa-fw fa-caret-down ui-clickable"></span>
+                    <span className="pi pi-fw pi-caret-down ui-clickable"></span>
                 </div>;
     }
 
@@ -456,7 +456,7 @@ export class Dropdown extends Component {
             return <div className="ui-dropdown-filter-container">
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
                             onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
-                        <span className="fa fa-search"></span>
+                        <span className="pi pi-search"></span>
                    </div>;
         }
         else {

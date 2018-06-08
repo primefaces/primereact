@@ -50,13 +50,13 @@ export class MultiSelectHeader extends Component {
     render() {
         let filterElement;
         let checkboxClassName = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.allChecked});
-        let checkboxIcon = classNames('ui-chkbox-icon ui-clickable', {'fa fa-check': this.props.allChecked});
+        let checkboxIcon = classNames('ui-chkbox-icon ui-clickable', {'pi pi-check': this.props.allChecked});
         
         if(this.props.filter) {
             filterElement = <div className="ui-multiselect-filter-container">
                                 <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
                                             className="ui-inputtext ui-widget ui-state-default ui-corner-all" />
-                                <span className="fa fa-fw fa-search"></span>
+                                <span className="ui-multiselect-filter-icon pi pi-search"></span>
                             </div>;
         }
         
@@ -72,7 +72,7 @@ export class MultiSelectHeader extends Component {
                     </div>
                     {filterElement}
                     <a className="ui-multiselect-close ui-corner-all" onClick={this.props.onClose}>
-                        <span className="fa fa-close"></span>
+                        <span className="pi pi-times"></span>
                     </a>
                 </div>
         );

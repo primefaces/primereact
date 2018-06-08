@@ -58,11 +58,11 @@ export class SidebarDemo extends Component {
                         <Button type="button" onClick={() => this.setState({visibleFullScreen: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
                     
-                    <Button icon="fa-arrow-right" onClick={() => this.setState({visibleLeft:true})} />
-                    <Button icon="fa-arrow-left" onClick={() => this.setState({visibleRight:true})} />
-                    <Button icon="fa-arrow-down" onClick={() => this.setState({visibleTop:true})} />
-                    <Button icon="fa-arrow-up" onClick={() => this.setState({visibleBottom:true})} />
-                    <Button icon="fa-arrows-alt" onClick={() => this.setState({visibleFullScreen:true})} />
+                    <Button icon="pi pi-arrow-right" onClick={() => this.setState({visibleLeft:true})} />
+                    <Button icon="pi pi-arrow-left" onClick={() => this.setState({visibleRight:true})} />
+                    <Button icon="pi pi-arrow-down" onClick={() => this.setState({visibleTop:true})} />
+                    <Button icon="pi pi-arrow-up" onClick={() => this.setState({visibleBottom:true})} />
+                    <Button icon="pi pi-th-large" onClick={() => this.setState({visibleFullScreen:true})} />
                 </div>
 
                 <SidebarDoc/>
@@ -101,7 +101,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
     Content
 </Sidebar>
 
-<Button icon="fa-arrow-right" onClick={ () => this.setState({visible:true}) }/>
+<Button icon="pi pi-arrow-right" onClick={ () => this.setState({visible:true}) }/>
 
 `}
                         </CodeHighlight>
@@ -362,11 +362,11 @@ export class SidebarDemo extends Component {
                         <Button type="button" onClick={() => this.setState({visibleFullScreen: true})} label="Cancel" className="ui-button-secondary"/>
                     </Sidebar>
                     
-                    <Button icon="fa-arrow-right" onClick={() => this.setState({visibleLeft:true})} />
-                    <Button icon="fa-arrow-left" onClick={() => this.setState({visibleRight:true})} />
-                    <Button icon="fa-arrow-down" onClick={() => this.setState({visibleTop:true})} />
-                    <Button icon="fa-arrow-up" onClick={() => this.setState({visibleBottom:true})} />
-                    <Button icon="fa-arrows-alt" onClick={() => this.setState({visibleFullScreen:true})} />
+                    <Button icon="pi pi-arrow-right" onClick={() => this.setState({visibleLeft:true})} />
+                    <Button icon="pi pi-arrow-left" onClick={() => this.setState({visibleRight:true})} />
+                    <Button icon="pi pi-arrow-down" onClick={() => this.setState({visibleTop:true})} />
+                    <Button icon="pi pi-arrow-up" onClick={() => this.setState({visibleBottom:true})} />
+                    <Button icon="pi pi-th-large" onClick={() => this.setState({visibleFullScreen:true})} />
                 </div>
 
                 <SidebarDoc/>

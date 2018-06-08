@@ -22,8 +22,8 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     render() {
-        let paginatorLeft = <Button icon="fa-refresh"/>;
-        let paginatorRight = <Button icon="fa-cloud-upload"/>;
+        let paginatorLeft = <Button icon="fa fa-refresh"/>;
+        let paginatorRight = <Button icon="fa fa-cloud-upload"/>;
         return (
             <div>
                 <DataTableSubmenu />
@@ -83,8 +83,8 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     render() {
-        let paginatorLeft = <Button icon="fa-refresh"/>;
-        let paginatorRight = <Button icon="fa-cloud-upload"/>;
+        let paginatorLeft = <Button icon="fa fa-refresh"/>;
+        let paginatorRight = <Button icon="fa fa-cloud-upload"/>;
         return (
             <div>
                 <div className="content-section introduction">

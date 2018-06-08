@@ -20,7 +20,7 @@ export class Button extends Component {
 
     renderIcon() {
         if(this.props.icon) {
-            let className = classNames(this.props.icon, 'ui-button-icon ui-c fa fa-fw', {
+            let className = classNames(this.props.icon, 'ui-button-icon ui-c', {
                 'ui-button-icon-left': this.props.iconPos !== 'right',
                 'ui-button-icon-right': this.props.iconPos === 'right'
             });

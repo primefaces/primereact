@@ -119,7 +119,7 @@ export class BodyCell extends Component {
                             });
 
         if(this.props.expander) {
-            let iconClassName = classNames('ui-row-toggler fa fa-fw ui-clickable', {'fa-chevron-circle-down': this.props.expanded, 'fa-chevron-circle-right': !this.props.expanded});
+            let iconClassName = classNames('ui-row-toggler pi pi-fw ui-clickable', {'pi-chevron-circle-down': this.props.expanded, 'pi-chevron-circle-right': !this.props.expanded});
             content = <a onClick={this.onExpanderClick}>
                         <span className={iconClassName}></span>
                       </a>;

@@ -29,7 +29,7 @@ export class DataScrollerLoaderDemo extends Component {
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
                 <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
+                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
                     <div className="ui-grid-col-9">
                         <div className="ui-grid ui-grid-responsive ui-fluid">
                             <div className="ui-grid-row">
@@ -70,7 +70,7 @@ export class DataScrollerLoaderDemo extends Component {
                 <div className="content-section implementation">
 
                     <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton} footer="Load" header="Click Load Button at Footer to Load More"/>
-                    <Button ref={(el) => this.loadButton = el} type="text" icon="fa-refresh" label="Load" />
+                    <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />
 
                 <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
@@ -135,7 +135,7 @@ export class DataScrollerLoaderDemo extends Component {
         return (
             <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
                 <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
+                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
                     <div className="ui-grid-col-9">
                         <div className="ui-grid ui-grid-responsive ui-fluid">
                             <div className="ui-grid-row">
@@ -177,7 +177,7 @@ export class DataScrollerLoaderDemo extends Component {
 
 
                     <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton} footer="Load" header="Click Load Button at Footer to Load More"/>
-                    <Button ref={(el) => this.loadButton = el} type="text" icon="fa-refresh" label="Load" />
+                    <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {

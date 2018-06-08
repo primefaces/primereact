@@ -68,7 +68,7 @@ export class RadioButton extends Component {
         
         let containerClass = classNames('ui-radiobutton ui-widget', this.props.className);
         let boxClass = classNames('ui-radiobutton-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked,  'ui-state-disabled': this.props.disabled});
-        let iconClass = classNames('ui-radiobutton-icon ui-c', { 'fa fa-circle': this.props.checked });
+        let iconClass = classNames('ui-radiobutton-icon ui-c', { 'pi pi-circle-on': this.props.checked });
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>

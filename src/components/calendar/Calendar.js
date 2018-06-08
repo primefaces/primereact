@@ -25,7 +25,7 @@ export class Calendar extends Component {
         showOtherMonths: true,
         selectOtherMonths: false,
         showIcon: false,
-        icon: "fa-calendar",
+        icon: "pi pi-calendar",
         utc: false,
         showOnFocus: true,
         appendTo: null,
@@ -1434,8 +1434,8 @@ export class Calendar extends Component {
 
     renderDatePickerHeader() {
         if(!this.props.timeOnly) {
-            let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'fa fa-angle-left');
-            let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'fa fa-angle-right');
+            let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'pi pi-chevron-left');
+            let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'pi pi-chevron-right');
             let title = this.renderDatePickerTitle();
 
             return (
@@ -1455,11 +1455,11 @@ export class Calendar extends Component {
         return (
             <div className="ui-hour-picker">
                 <a onClick={this.incrementHour}>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span style={{ 'display': time.hour < 10 ? 'inline' : 'none' }}>0</span><span>{time.hour}</span>
                 <a onClick={this.decrementHour}>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>
         );
@@ -1469,11 +1469,11 @@ export class Calendar extends Component {
         return (
             <div className="ui-minute-picker">
                 <a onClick={this.incrementMinute}>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span style={{ 'display': time.minute < 10 ? 'inline' : 'none' }}>0</span><span>{time.minute}</span>
                 <a onClick={this.decrementMinute}>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>  
         );
@@ -1484,11 +1484,11 @@ export class Calendar extends Component {
             return (
                 <div className="ui-second-picker">
                     <a onClick={this.incrementSecond}>
-                        <span className="fa fa-angle-up"></span>
+                        <span className="pi pi-chevron-up"></span>
                     </a>
                     <span style={{ 'display': time.second < 10 ? 'inline' : 'none' }}>0</span><span>{time.second}</span>
                     <a onClick={this.decrementSecond}>
-                        <span className="fa fa-angle-down"></span>
+                        <span className="pi pi-chevron-down"></span>
                     </a>
                 </div>
             );
@@ -1503,11 +1503,11 @@ export class Calendar extends Component {
         if (this.props.hourFormat === '12') {
             return (<div className="ui-ampm-picker">
                 <a onClick={this.toggleAMPM}>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span>{this.pm ? 'PM' : 'AM'}</span>
                 <a onClick={this.toggleAMPM}>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>);
         }
@@ -1520,11 +1520,11 @@ export class Calendar extends Component {
         return (
             <div className="ui-separator">
                 <a>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span>:</span>
                 <a>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>
         );

@@ -107,8 +107,8 @@ export class MegaMenu extends Component {
         menuItems=this.props.model && this.props.model.map((category,index)=>{
             var liClass=classNames('ui-menuitem ui-widget ui-corner-all',{'ui-menu-parent':category.items,'ui-menuitem-active':category===this.state.activeItem});
             var aClass=classNames('ui-menuitem-link ui-corner-all ui-submenu-link',{'ui-state-disabled':category.disabled});
-            var spanClass=classNames('ui-menuitem-icon fa fa-fw ',category.icon);
-            var submenuClass=classNames('ui-submenu-icon fa fa-fw ',{'fa-caret-down':this.props.orientation==='horizontal','fa-caret-right':this.props.orientation==='vertical'})
+            var spanClass=classNames('ui-menuitem-icon',category.icon);
+            var submenuClass=classNames('ui-submenu-icon pi pi-fw ',{'pi-caret-down':this.props.orientation==='horizontal','pi-caret-right':this.props.orientation==='vertical'})
 
             var categoryItem=category.separator?<li className="ui-menu-separator ui-widget-content" key={index}></li>:
             <li  onMouseEnter={event=>this.onItemMouseEnter(event,category)} onMouseLeave={event=>this.onItemMouseLeave(event,category)}

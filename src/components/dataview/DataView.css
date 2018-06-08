@@ -36,3 +36,6 @@
     width: 100%;
 }
 
+.ui-dataview-loading-icon {
+    font-size: 2em;
+}

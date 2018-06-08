@@ -428,8 +428,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa-search" className="ui-button-success"></Button>
-            <Button type="button" icon="fa-edit" className="ui-button-warning"></Button>
+            <Button type="button" icon="fa fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa fa-edit" className="ui-button-warning"></Button>
         </div>;
     }
 
@@ -439,7 +439,7 @@ export class DataTableTemplatingDemo extends Component {
 
     render() {
         var carCount = this.state.cars ? this.state.cars.length: 0;
-        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa-refresh" style={{'float':'right'}}/></div>;
+        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa fa-refresh" style={{'float':'right'}}/></div>;
         var footer = "There are " + carCount + ' cars';
 
         return (
@@ -1081,8 +1081,8 @@ export class DataTableContextMenuDemo extends Component {
 
     render() {
         let items = [
-            {label: 'View', icon: 'fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
+            {label: 'View', icon: 'fa fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'fa fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
         ];
 
         return (
@@ -1251,7 +1251,7 @@ export class DataTableExportDemo extends Component {
     }
 
     render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="fa-file-o" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        var header = <div style={{textAlign:'left'}}><Button type="button" icon="fa fa-file-o" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
 
         return (
             <DataTable value={this.state.cars} header={header} ref={(el) => { this.dt = el; }}>
@@ -1854,7 +1854,7 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>loadingIcon</td>
                             <td>string</td>
-                            <td>fa-circle-o-notch</td>
+                            <td>fa fa-circle-o-notch</td>
                             <td>The icon to show while indicating data load is in progress.</td>
                         </tr>
                         <tr>

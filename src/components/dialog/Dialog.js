@@ -454,7 +454,7 @@ export class Dialog extends Component {
         if(this.props.closable) {
             return (
                 <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
-                    <span className="fa fa-fw fa-close"></span>
+                    <span className="pi pi-times"></span>
                 </a>
             );
         }

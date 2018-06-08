@@ -60,7 +60,7 @@ export class GrowlMessage extends Component {
     renderCloseIcon() {
         if(this.props.message.closable !== false) {
             return (
-                <a className="ui-growl-icon-close fa fa-close" onClick={this.onClose}><span></span></a>
+                <a className="ui-growl-icon-close pi pi-times" onClick={this.onClose}><span></span></a>
             );
         }
         else {
@@ -76,11 +76,11 @@ export class GrowlMessage extends Component {
             'ui-growl-message-success': this.props.message.severity === 'success'
         });
 
-        let iconClassName = classNames('ui-growl-image fa fa-2x', {
-            'fa-info-circle': this.props.message.severity === 'info',
-            'fa-warning': this.props.message.severity === 'warn',
-            'fa-close': this.props.message.severity === 'error',
-            'fa-check': this.props.message.severity === 'success'
+        let iconClassName = classNames('ui-growl-image pi', {
+            'pi-info-circle': this.props.message.severity === 'info',
+            'pi-exclamation-triangle': this.props.message.severity === 'warn',
+            'pi-times': this.props.message.severity === 'error',
+            'pi-check': this.props.message.severity === 'success'
         });
 
         let closeIcon = this.renderCloseIcon();

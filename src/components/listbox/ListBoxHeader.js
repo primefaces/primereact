@@ -35,7 +35,7 @@ export class ListBoxHeader extends Component {
                 <div className="ui-widget-header ui-corner-all ui-listbox-header ui-helper-clearfix">
                     <div className="ui-listbox-filter-container">
                         <InputText type="text" role="textbox" value={this.props.filter} onChange={this.onFilter} disabled={this.props.disabled} />
-                        <span className="fa fa-search"></span>
+                        <span className="ui-listbox-filter-icon pi pi-search"></span>
                     </div>
                 </div>
         );

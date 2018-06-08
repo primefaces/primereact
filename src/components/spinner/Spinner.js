@@ -340,7 +340,7 @@ export class Spinner extends Component {
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
                 onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled}>
-                <span className="fa fa-caret-up"></span>
+                <span className="ui-spinner-button-icon pi pi-caret-up"></span>
             </button>
         );
     }
@@ -353,7 +353,7 @@ export class Spinner extends Component {
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp} 
                 onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled}>
-                <span className="fa fa-caret-down"></span>
+                <span className="ui-spinner-button-icon pi pi-caret-down"></span>
             </button>
         );
     }

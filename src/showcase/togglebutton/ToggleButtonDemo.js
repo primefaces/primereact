@@ -37,7 +37,7 @@ export class ToggleButtonDemo extends Component {
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Custom</h3>
-                    <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square"
+                    <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                                 checked={this.state.checked2} onChange={this.onChangeCustom}/>
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>
@@ -101,7 +101,7 @@ render() {
             <p>Icons and Labels can be customized using onLabel, offLabel, onIcon and OffIcon attributes.</p>
 <CodeHighlight className="html">
 {`
-<ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square"
+<ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                                 checked={this.state.checked2} onChange={this.onChangeCustom}/>
 
 `}
@@ -263,7 +263,7 @@ export class ToggleButtonDemo extends Component {
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Custom</h3>
-                    <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square"
+                    <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                                 checked={this.state.checked2} onChange={this.onChangeCustom}/>
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>

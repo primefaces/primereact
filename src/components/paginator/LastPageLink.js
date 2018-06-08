@@ -19,7 +19,7 @@ export class LastPageLink extends Component {
         
         return (
             <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
-                <span className="fa fa-step-forward"></span>
+                <span className="ui-paginator-icon pi pi-step-forward"></span>
             </a>
         );
     }

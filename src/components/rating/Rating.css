@@ -3,6 +3,10 @@
     cursor: pointer;
 }
 
+.ui-rating {
+    font-size: 1.25em;
+}
+
 .ui-rating.ui-state-disabled {
     cursor: default;
 }

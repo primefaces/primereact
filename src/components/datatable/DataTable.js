@@ -71,7 +71,7 @@ export class DataTable extends Component {
         rowGroupHeaderTemplate: null,
         rowGroupFooterTemplate: null,
         loading: false,
-        loadingIcon: 'fa-circle-o-notch',
+        loadingIcon: 'pi pi-circle-o-notch',
         autoLayout: false,
         onColumnResizeEnd: null,
         onSort: null,
@@ -940,7 +940,7 @@ export class DataTable extends Component {
     }
     
     renderLoader() {
-        let iconClassName = classNames('fa fa-spin fa-2x', this.props.loadingIcon);
+        let iconClassName = classNames('ui-datatable-loading-icon pi-spin', this.props.loadingIcon);
         
         return (
             <div className="ui-datatable-loader">
@@ -965,8 +965,8 @@ export class DataTable extends Component {
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
         let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>;
         let tableContent = null;
-        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="fa fa-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
-        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="fa fa-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
+        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="pi pi-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
+        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
         let loader;
         
         if(this.props.loading) {

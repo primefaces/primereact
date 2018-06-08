@@ -112,18 +112,18 @@ export class UITreeRow extends Component {
                                 checkbox = null;
 
                             if (i === 0) {
-                                var togglerClass = classNames('ui-treetable-toggler fa fa-fw ui-c', {
-                                    'fa-caret-down': this.state.expanded,
-                                    'fa-caret-right': !this.state.expanded
+                                var togglerClass = classNames('ui-treetable-toggler pi pi-fw ui-c', {
+                                    'pi-caret-down': this.state.expanded,
+                                    'pi-caret-right': !this.state.expanded
                                 }),
                                     togglerStyle = { 'marginLeft': this.props.level * 16 + 'px', 'visibility': this.isLeaf() ? 'hidden' : 'visible' };
 
                                 toggler = (<a className={togglerClass} style={togglerStyle} onClick={this.toggle.bind(this)} title={this.state.expanded ? this.props.labelCollapse : this.props.labelExpand}><span></span></a>);
 
                                 if (this.treeTable.props.selectionMode === 'checkbox') {
-                                    var checkboxIconClass = classNames('ui-chkbox-icon ui-c fa', {
-                                        'fa-check': this.isSelected(),
-                                        'fa-minus': this.node.partialSelected
+                                    var checkboxIconClass = classNames('ui-chkbox-icon ui-c pi', {
+                                        'pi-check': this.isSelected(),
+                                        'pi-minus': this.node.partialSelected
                                     });
 
                                     checkbox = (

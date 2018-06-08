@@ -17,10 +17,10 @@ export class MenubarDemo extends Component {
     render() {
         var items=[ {
             label: 'File',
-            icon: 'fa-file-o',
+            icon: 'fa fa-fw fa-file-o',
             items: [{
                 label: 'New',
-                icon: 'fa-plus',
+                icon: 'fa fa-fw fa-plus',
                 items: [
                     {label: 'Project'},
                     {label: 'Other'},
@@ -33,22 +33,22 @@ export class MenubarDemo extends Component {
         },
             {
                 label: 'Edit',
-                icon: 'fa-edit',
+                icon: 'fa fa-fw fa-edit',
                 items: [
-                    {label: 'Undo', icon: 'fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa-mail-reply'}
+                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
                 ]
             },
             {
                 label: 'Help',
-                icon: 'fa-question',
+                icon: 'fa fa-fw fa-question',
                 items: [
                     {
                         label: 'Contents'
                     },
                     {
                         label: 'Search',
-                        icon: 'fa-search',
+                        icon: 'fa fa-fw fa-search',
                         items: [
                             {
                                 label: 'Text',
@@ -66,27 +66,27 @@ export class MenubarDemo extends Component {
             },
             {
                 label: 'Actions',
-                icon: 'fa-gear',
+                icon: 'fa fa-fw fa-gear',
                 items: [
                     {
                         label: 'Edit',
-                        icon: 'fa-refresh',
+                        icon: 'fa fa-fw fa-refresh',
                         items: [
-                            {label: 'Save', icon: 'fa-save'},
-                            {label: 'Update', icon: 'fa-save'},
+                            {label: 'Save', icon: 'fa fa-fw fa-save'},
+                            {label: 'Update', icon: 'fa fa-fw fa-save'},
                         ]
                     },
                     {
                         label: 'Other',
-                        icon: 'fa-phone',
+                        icon: 'fa fa-fw fa-phone',
                         items: [
-                            {label: 'Delete', icon: 'fa-minus'}
+                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
                         ]
                     }
                 ]
             },
             {
-                label: 'Quit', icon: 'fa-minus'
+                label: 'Quit', icon: 'fa fa-fw fa-minus'
             }];
         return (
             <div>
@@ -99,7 +99,7 @@ export class MenubarDemo extends Component {
                 <div className="content-section implementation">
                     <Menubar model={items}>
                         <InputText placeholder="Search" type="text"/>
-                        <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
+                        <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
                     </Menubar>
                 </div>
 
@@ -142,10 +142,10 @@ import {Menubar} from 'primereact/components/menubar/Menubar';
 var items=[
     {
         label: 'File',
-        icon: 'fa-file-o',
+        icon: 'fa fa-fw fa-file-o',
         items: [{
             label: 'New',
-            icon: 'fa-plus',
+            icon: 'fa fa-fw fa-plus',
             items: [
                 {label: 'Project'},
                 {label: 'Other'},
@@ -158,22 +158,22 @@ var items=[
     },
     {
         label: 'Edit',
-        icon: 'fa-edit',
+        icon: 'fa fa-fw fa-edit',
         items: [
-            {label: 'Undo', icon: 'fa-mail-forward'},
-            {label: 'Redo', icon: 'fa-mail-reply'}
+            {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+            {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
         ]
     },
     {
         label: 'Help',
-        icon: 'fa-question',
+        icon: 'fa fa-fw fa-question',
         items: [
             {
                 label: 'Contents'
             },
             {
                 label: 'Search',
-                icon: 'fa-search',
+                icon: 'fa fa-fw fa-search',
                 items: [
                     {
                         label: 'Text',
@@ -191,27 +191,27 @@ var items=[
     },
     {
         label: 'Actions',
-        icon: 'fa-gear',
+        icon: 'fa fa-fw fa-gear',
         items: [
             {
                 label: 'Edit',
-                icon: 'fa-refresh',
+                icon: 'fa fa-fw fa-refresh',
                 items: [
-                    {label: 'Save', icon: 'fa-save'},
-                    {label: 'Update', icon: 'fa-save'},
+                    {label: 'Save', icon: 'fa fa-fw fa-save'},
+                    {label: 'Update', icon: 'fa fa-fw fa-save'},
                 ]
             },
             {
                 label: 'Other',
-                icon: 'fa-phone',
+                icon: 'fa fa-fw fa-phone',
                 items: [
-                    {label: 'Delete', icon: 'fa-minus'}
+                    {label: 'Delete', icon: 'fa fa-fw fa-minus'}
                 ]
             }
         ]
     },
     {
-        label: 'Quit', icon: 'fa-minus'
+        label: 'Quit', icon: 'fa fa-fw fa-minus'
     }
 ];
 
@@ -223,7 +223,7 @@ var items=[
                             {`
 <Menubar model={items}>
     <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
+    <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
 </Menubar>
 
 `}
@@ -328,10 +328,10 @@ export class MenubarDemo extends Component {
     render() {
         var items=[ {
             label: 'File',
-            icon: 'fa-file-o',
+            icon: 'fa fa-fw fa-file-o',
             items: [{
                 label: 'New',
-                icon: 'fa-plus',
+                icon: 'fa fa-fw fa-plus',
                 items: [
                     {label: 'Project'},
                     {label: 'Other'},
@@ -344,22 +344,22 @@ export class MenubarDemo extends Component {
         },
             {
                 label: 'Edit',
-                icon: 'fa-edit',
+                icon: 'fa fa-fw fa-edit',
                 items: [
-                    {label: 'Undo', icon: 'fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa-mail-reply'}
+                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
                 ]
             },
             {
                 label: 'Help',
-                icon: 'fa-question',
+                icon: 'fa fa-fw fa-question',
                 items: [
                     {
                         label: 'Contents'
                     },
                     {
                         label: 'Search',
-                        icon: 'fa-search',
+                        icon: 'fa fa-fw fa-search',
                         items: [
                             {
                                 label: 'Text',
@@ -377,27 +377,27 @@ export class MenubarDemo extends Component {
             },
             {
                 label: 'Actions',
-                icon: 'fa-gear',
+                icon: 'fa fa-fw fa-gear',
                 items: [
                     {
                         label: 'Edit',
-                        icon: 'fa-refresh',
+                        icon: 'fa fa-fw fa-refresh',
                         items: [
-                            {label: 'Save', icon: 'fa-save'},
-                            {label: 'Update', icon: 'fa-save'},
+                            {label: 'Save', icon: 'fa fa-fw fa-save'},
+                            {label: 'Update', icon: 'fa fa-fw fa-save'},
                         ]
                     },
                     {
                         label: 'Other',
-                        icon: 'fa-phone',
+                        icon: 'fa fa-fw fa-phone',
                         items: [
-                            {label: 'Delete', icon: 'fa-minus'}
+                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
                         ]
                     }
                 ]
             },
             {
-                label: 'Quit', icon: 'fa-minus'
+                label: 'Quit', icon: 'fa fa-fw fa-minus'
             }];
         return (
             <div>
@@ -410,7 +410,7 @@ export class MenubarDemo extends Component {
                 <div className="content-section implementation">
                     <Menubar model={items}>
                         <InputText placeholder="Search" type="text"/>
-                        <Button label="Logout" icon="fa-sign-out" style={{marginLeft:4}}/>
+                        <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
                     </Menubar>
                 </div>
 

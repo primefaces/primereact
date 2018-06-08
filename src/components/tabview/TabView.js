@@ -87,9 +87,9 @@ export class TabView extends Component {
         return (
             <li className={className} role="presentation" style={tab.props.headerStyle}>
                 <a role="tab" href={'#' + ariaControls} onClick={(e) => this.onTabHeaderClick(e, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected} >
-                    {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon fa', tab.props.leftIcon)}></span>}
+                    {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon ', tab.props.leftIcon)}></span>}
                     <span className="ui-tabview-title">{tab.props.header}</span>
-                    {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon fa', tab.props.rightIcon)}></span>}
+                    {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon ', tab.props.rightIcon)}></span>}
                 </a>
             </li>
         );

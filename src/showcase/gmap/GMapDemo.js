@@ -103,8 +103,8 @@ export class GMapDemo extends Component {
         };
                 
         let footer = <div>
-            <Button label="Yes" icon="fa-check" onClick={this.addMarker} />
-            <Button label="No" icon="fa-close" onClick={this.onHide} />
+            <Button label="Yes" icon="pi pi-check" onClick={this.addMarker} />
+            <Button label="No" icon="pi pi-times" onClick={this.onHide} />
         </div>;
         
         return (
@@ -532,8 +532,8 @@ export class GMapDemo extends Component {
         };
                 
         let footer = <div>
-            <Button label="Yes" icon="fa-check" onClick={this.addMarker} />
-            <Button label="No" icon="fa-close" onClick={this.onHide} />
+            <Button label="Yes" icon="pi pi-check" onClick={this.addMarker} />
+            <Button label="No" icon="pi pi-times" onClick={this.onHide} />
         </div>;
         
         return (

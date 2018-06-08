@@ -93,15 +93,15 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="fa-search" cornerStyleClass="ui-button-secondary"/>
+                                <Button icon="fa fa-search" cornerStyleClass="ui-button-secondary"/>
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <Button icon="fa-check" cornerStyleClass="ui-button-success"/>
+                                <Button icon="pi pi-check" cornerStyleClass="ui-button-success"/>
                                 <InputText placeholder="Vote"/>
-                                <Button icon="fa-close" cornerStyleClass="ui-button-danger"/>
+                                <Button icon="pi pi-times" cornerStyleClass="ui-button-danger"/>
                             </div>
                         </div>
                     </div>
@@ -241,15 +241,15 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="fa-search" cornerStyleClass="ui-button-secondary"/>
+                                <Button icon="fa fa-search" cornerStyleClass="ui-button-secondary"/>
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <Button icon="fa-check" cornerStyleClass="ui-button-success"/>
+                                <Button icon="pi pi-check" cornerStyleClass="ui-button-success"/>
                                 <InputText placeholder="Vote"/>
-                                <Button icon="fa-close" cornerStyleClass="ui-button-danger"/>
+                                <Button icon="pi pi-times" cornerStyleClass="ui-button-danger"/>
                             </div>
                         </div>
                     </div>

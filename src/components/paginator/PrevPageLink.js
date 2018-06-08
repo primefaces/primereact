@@ -19,7 +19,7 @@ export class PrevPageLink extends Component {
         
         return (
             <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
-                <span className="fa fa-backward"></span>
+                <span className="ui-paginator-icon pi pi-caret-left"></span>
             </a>
         );
     }

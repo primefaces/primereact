@@ -15,12 +15,12 @@ export class MenuDemo extends Component {
     render() {
         var items=[ {
                 label: 'File',
-                items: [{label: 'New', icon: 'fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                        {label: 'Open', icon: 'fa-download', url: 'http://primetek.com.tr'}]
+                items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                        {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
             }, {
                 label: 'Edit',
-                items: [{label: 'Undo', icon: 'fa-refresh',command:()=>{ window.location.hash="/"; }},
-                        {label: 'Redo', icon: 'fa-repeat'} ]
+                items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
+                        {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
             }];
         return (
             <div>
@@ -37,7 +37,7 @@ export class MenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <Menu model={items} popup={true} ref={el => this.menu = el} />
-                    <Button label="Show" icon="fa fa-list" onClick={(event) => this.menu.toggle(event)}/>
+                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
                 </div>
 
                 <MenuDoc/>
@@ -82,9 +82,9 @@ import {Menu} from 'primereact/components/menu/Menu';
                         <CodeHighlight className="html">
                             {`
 var items=[
-    {label: 'New', icon: 'fa-plus'},
-    {label: 'Open', icon: 'fa-download'},
-    {label: 'Undo', icon: 'fa-refresh'}
+    {label: 'New', icon: 'fa fa-fw fa-plus'},
+    {label: 'Open', icon: 'fa fa-fw fa-download'},
+    {label: 'Undo', icon: 'fa fa-fw fa-refresh'}
 ];
 
 `}
@@ -97,13 +97,13 @@ var items=[
 var items=[
     {
         label: 'File',
-        items: [{label: 'New', icon: 'fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                {label: 'Open', icon: 'fa-download', url: 'http://primetek.com.tr'}]
+        items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
     },
     {
         label: 'Edit',
-        items: [{label: 'Undo', icon: 'fa-refresh',command:()=>{ window.location.hash="/"; }},
-                {label: 'Redo', icon: 'fa-repeat'} ]
+        items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
+                {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
     }
 ];
 
@@ -115,7 +115,7 @@ var items=[
                         <CodeHighlight className="html">
                             {`
 <Menu model={items} popup={true} ref={el=>this.menu=el} />
-<Button label="Show" icon="fa fa-list" onClick={(event)=>this.menu.toggle(event)}/>
+<Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
 
 `}
                         </CodeHighlight>
@@ -277,12 +277,12 @@ export class MenuDemo extends Component {
     render() {
         var items=[ {
                 label: 'File',
-                items: [{label: 'New', icon: 'fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                        {label: 'Open', icon: 'fa-download', url: 'http://primetek.com.tr'}]
+                items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                        {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
             }, {
                 label: 'Edit',
-                items: [{label: 'Undo', icon: 'fa-refresh',command:()=>{ window.location.hash="/"; }},
-                        {label: 'Redo', icon: 'fa-repeat'} ]
+                items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
+                        {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
             }];
         return (
             <div>
@@ -299,7 +299,7 @@ export class MenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <Menu model={items} popup={true} ref={el => this.menu = el}/>
-                    <Button label="Show" icon="fa fa-list" onClick={(event) => this.menu.toggle(event)}/>
+                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
                 </div>
 
                 <MenuDoc/>

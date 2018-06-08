@@ -90,7 +90,7 @@ export class MessagesDemo extends Component {
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear" />
+                            <Button onClick={this.clear} icon="pi pi-times" style={{ float: 'right' }} label="Clear" />
                         </div>
                     </div>
 
@@ -535,7 +535,7 @@ export class MessagesDemo extends Component {
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <Button onClick={this.clear} icon="fa-close" style={{ float: 'right' }} label="Clear" />
+                            <Button onClick={this.clear} icon="pi pi-times" style={{ float: 'right' }} label="Clear" />
                         </div>
                     </div>
 

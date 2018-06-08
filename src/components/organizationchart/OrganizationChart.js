@@ -72,7 +72,7 @@ export class OrganizationChartNode extends Component {
                 'ui-state-highlight': this.isSelected()
             }),
             nodeLabel = (this.props.nodeTemplate && this.props.nodeTemplate(this.node)) ? <div>{this.props.nodeTemplate(this.node)}</div> : <div>{this.node.label}</div>,
-            toggleIcon = classNames('fa ui-node-toggler-icon', {'fa-chevron-down': this.state.expanded, 'fa-chevron-up': !this.state.expanded}),
+            toggleIcon = classNames('ui-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
                     <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>

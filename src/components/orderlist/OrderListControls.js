@@ -140,10 +140,10 @@ export class OrderListControls extends Component {
     render() {        
         return (
             <div className="ui-orderlist-controls">
-                <Button type="button" icon="fa-angle-up" onClick={this.moveUp}></Button>
-                <Button type="button" icon="fa-angle-double-up" onClick={this.moveTop}></Button>
-                <Button type="button" icon="fa-angle-down" onClick={this.moveDown}></Button>
-                <Button type="button" icon="fa-angle-double-down" onClick={this.moveBottom}></Button>
+                <Button type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>
+                <Button type="button" icon="pi pi-angle-double-up" onClick={this.moveTop}></Button>
+                <Button type="button" icon="pi pi-angle-down" onClick={this.moveDown}></Button>
+                <Button type="button" icon="pi pi-angle-double-down" onClick={this.moveBottom}></Button>
             </div>
         );
     }

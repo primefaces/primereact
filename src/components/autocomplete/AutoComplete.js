@@ -495,7 +495,7 @@ export class AutoComplete extends Component {
             return this.props.value.map((val, index) => {
                 return (
                     <li key={index + 'multi-item'} className="ui-autocomplete-token ui-state-highlight ui-corner-all">
-                        <span className="ui-autocomplete-token-icon fa fa-fw fa-close" onClick={(e) => this.removeItem(e, index)}></span>
+                        <span className="ui-autocomplete-token-icon pi pi-fw pi-times" onClick={(e) => this.removeItem(e, index)}></span>
                         <span className="ui-autocomplete-token-label">{this.formatValue(val)}</span>
                     </li>
                 );
@@ -535,13 +535,13 @@ export class AutoComplete extends Component {
     
     renderDropdown() {
         return (
-            <Button type="button" icon="fa-fw fa-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
+            <Button type="button" icon="pi pi-fw pi-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
         );
     }
 
     renderLoader() {
         return (
-            <i ref={(el) => this.loader = el} className="ui-autocomplete-loader fa fa-circle-o-notch fa-spin fa-fw" style={{visibility: 'hidden'}}></i>
+            <i ref={(el) => this.loader = el} className="ui-autocomplete-loader pi pi-spinner pi-spin" style={{visibility: 'hidden'}}></i>
         );
     }
     

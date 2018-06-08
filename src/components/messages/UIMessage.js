@@ -56,7 +56,7 @@ export class UIMessage extends Component {
         if (this.props.message.closable !== false) {
             return (
                 <a className="ui-messages-close" onClick={this.onClose}>
-                    <i className="fa fa-close"></i>
+                    <i className="pi pi-times"></i>
                 </a>
             );
         }
@@ -83,11 +83,11 @@ export class UIMessage extends Component {
 
     render() {
         let className = 'ui-messages ui-widget ui-corner-all ui-messages-' + this.props.message.severity;
-        let icon = classNames('ui-messages-icon fa fa-fw fa-2x', {
-            'fa-info-circle': this.props.message.severity === 'info',
-            'fa-warning': this.props.message.severity === 'warn',
-            'fa-close': this.props.message.severity === 'error',
-            'fa-check': this.props.message.severity === 'success',
+        let icon = classNames('ui-messages-icon pi ', {
+            'pi-info-circle': this.props.message.severity === 'info',
+            'pi-exclamation-triangle': this.props.message.severity === 'warn',
+            'pi-times': this.props.message.severity === 'error',
+            'pi-check': this.props.message.severity === 'success',
         });
         let closeIcon = this.renderCloseIcon();
         let messages = this.renderMessages();

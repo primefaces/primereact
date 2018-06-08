@@ -367,7 +367,7 @@ let es = {
                         <tr>
                             <td>icon</td>
                             <td>string</td>
-                            <td>fa-calendar</td>
+                            <td>pi pi-calendar</td>
                             <td>Icon of the calendar button.</td>
                         </tr>
                         <tr>

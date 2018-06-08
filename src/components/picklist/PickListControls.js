@@ -155,10 +155,10 @@ export class PickListControls extends Component {
         
         return <div className={className}>
                     <div className="ui-picklist-buttons-cell">
-                        <Button type="button" icon="fa-angle-up" onClick={this.moveUp}></Button>
-                        <Button type="button" icon="fa-angle-double-up" onClick={this.moveTop}></Button>
-                        <Button type="button" icon="fa-angle-down" onClick={this.moveDown}></Button>
-                        <Button type="button" icon="fa-angle-double-down" onClick={this.moveBottom}></Button>
+                        <Button type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>
+                        <Button type="button" icon="pi pi-angle-double-up" onClick={this.moveTop}></Button>
+                        <Button type="button" icon="pi pi-angle-down" onClick={this.moveDown}></Button>
+                        <Button type="button" icon="pi pi-angle-double-down" onClick={this.moveBottom}></Button>
                     </div>
                 </div>;
     }

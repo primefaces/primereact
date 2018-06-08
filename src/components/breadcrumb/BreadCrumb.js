@@ -63,26 +63,26 @@ export class BreadCrumb extends Component {
                 {this.props.home.url?
                     <a href={this.props.home.url || '#'} className={homeClass} target={this.props.home.target}
                        onClick={event=>this.itemClick(event,this.props.home)}>
-                        <span className="fa fa-home"></span>
+                        <span className="pi pi-home"></span>
                     </a>:
                     <a className={homeClass} target={this.props.home.target}
                        onClick={event=>this.itemClick(event,this.props.home)}>
-                        <span className="fa fa-home"></span>
+                        <span className="pi pi-home"></span>
                     </a>}
             </li>
         }
         else{
-            home=<li className="ui-breadcrumb-home fa fa-home" ></li>
+            home=<li className="ui-breadcrumb-home pi pi-home" ></li>
         }
         if(this.props.model){
-            right=<li className="ui-breadcrumb-chevron fa fa-chevron-right"></li>
+            right=<li className="ui-breadcrumb-chevron pi pi-chevron-right"></li>
         }
         menu=this.props.model && this.props.model.map((item,index)=>{
             var menuItem=<span key={index}>
                 <li role="menuitem">
                     <MenuItem items={item} index={index} onItemClick={event=>this.itemClick(event,item)} />
                 </li>
-                {this.props.model.length-1!==index && <li className="ui-breadcrumb-chevron fa fa-chevron-right" style={{marginLeft:4,marginRight:4}}></li>}
+                {this.props.model.length-1!==index && <li className="ui-breadcrumb-chevron pi pi-chevron-right" style={{marginLeft:4,marginRight:4}}></li>}
             </span>
                 return menuItem;
         })
