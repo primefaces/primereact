@@ -20,7 +20,7 @@ export class Button extends Component {
 
     renderIcon() {
         if(this.props.icon) {
-            let className = classNames(this.props.icon, 'ui-button-icon ui-c', {
+            let className = classNames(this.props.icon, 'ui-c', {
                 'ui-button-icon-left': this.props.iconPos !== 'right',
                 'ui-button-icon-right': this.props.iconPos === 'right'
             });
@@ -35,19 +35,19 @@ export class Button extends Component {
     }
 
     renderLabel() {
-        if(this.props.label) {
-            return (
-                <span className="ui-button-text ui-c">{this.props.label}</span>
-            );
-        }
-        else {
-            return null;
-        }
+        const buttonLabel = this.props.label||'ui-btn';
+
+        return (
+            <span className="ui-button-text ui-c">{buttonLabel}</span>
+        );
     }
 
     render() {
         let className = classNames('ui-button ui-widget ui-state-default', this.props.cornerStyleClass, this.props.className, {
                 'ui-button-icon-only': this.props.icon && !this.props.label,
+                'ui-button-text-icon-left': this.props.icon && this.props.label && this.props.iconPos === 'left',
+                'ui-button-text-icon-right': this.props.icon && this.props.label && this.props.iconPos === 'right',
+                'ui-button-text-only': !this.props.icon && this.props.label,
                 'ui-state-disabled': this.props.disabled
         });
         let icon = this.renderIcon();
