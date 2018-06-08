@@ -48,7 +48,7 @@ export class TreeNode extends Component {
         else
             icon = this.state.expanded && this.node.children && this.node.children.length ? this.node.expandedIcon : this.node.collapsedIcon;
 
-        return 'ui-treenode-icon pi pi-fw ' + icon;
+        return 'ui-treenode-icon ' + icon;
     }
 
     isLeaf(node) {
