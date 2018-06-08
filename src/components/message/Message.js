@@ -31,7 +31,7 @@ export class Message extends Component {
 
         let icon = classNames('ui-message-icon pi pi-fw', {
             'pi-info-circle': this.props.severity === 'info',
-            'pi-ex': this.props.severity === 'warn',
+            'pi-exclamation-triangle': this.props.severity === 'warn',
             'pi-times': this.props.severity === 'error',
             'pi-check': this.props.severity === 'success',
         });

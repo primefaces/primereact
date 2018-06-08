@@ -91,7 +91,7 @@ export class PanelMenuItem extends Component {
                 'pi-caret-right': !this.state.expanded,
                 'pi-caret-down': this.state.expanded
             }),
-            menuitemIconClass = classNames('ui-menuitem-icon pi pi-fw', this.child.icon);
+            menuitemIconClass = classNames('ui-menuitem-icon ', this.child.icon);
 
             let panelMenuIcon = this.child.items && (<span className={panelMenuIconClass} />),
             menuitemIcon = this.child.icon && (<span className={menuitemIconClass} />),
@@ -163,7 +163,7 @@ export class PanelMenuHeaderItems extends Component {
             'pi-caret-right': !this.state.expanded,
             'pi-caret-down': this.state.expanded
         }),
-        menuitemIconClass = classNames('ui-menuitem-icon pi', this.item.icon);
+        menuitemIconClass = classNames('ui-menuitem-icon ', this.item.icon);
 
         let panelMenuIcon = this.item.items && <span className={panelMenuIconClass} />,
             menuitemIcon = this.item.icon && <span className={menuitemIconClass} />,

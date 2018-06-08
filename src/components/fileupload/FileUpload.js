@@ -292,7 +292,7 @@ export class FileUpload extends Component {
     }
     
     renderChooseButton() {
-        let className = classNames('ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all');
+        let className = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left');
         
         return (
             <span icon="pi pi-plus" className={className}>

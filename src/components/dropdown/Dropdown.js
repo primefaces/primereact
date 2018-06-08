@@ -426,7 +426,7 @@ export class Dropdown extends Component {
     
     renderDropdownIcon() {
         return <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
-                    <span className="pi pi-fw pi-caret-down ui-clickable"></span>
+                    <span className="ui-dropdown-trigger-icon pi pi-caret-down ui-clickable"></span>
                 </div>;
     }
 

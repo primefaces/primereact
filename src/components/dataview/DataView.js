@@ -321,10 +321,12 @@ export class DataViewLayoutOptions extends Component {
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
                 <a role={"button"} className={buttonListClass} onClick={(e)=>this.changeLayout(e, 'list')}>
-                    <i className="pi pi-bars"></i>
+                    <i className="pi pi-bars ui-button-icon-left"></i>
+                    <span className="ui-button-text ui-clickable">ui-btn</span>
                 </a>
                 <a role={"button"} className={buttonGridClass} onClick={(e)=>this.changeLayout(e, 'grid')}>
-                    <i className="pi pi-th-large"></i>
+                    <i className="pi pi-th-large ui-button-icon-left"></i>
+                    <span className="ui-button-text ui-clickable">ui-btn</span>
                 </a>
             </div>
         );
