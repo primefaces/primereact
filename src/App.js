@@ -395,11 +395,13 @@ class App extends Component {
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
-                                <li className="topbar-submenu-header">PREMIUM</li>
+                                <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span className="ui-text">Serenity</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
-                                <li className="topbar-submenu-header">FREE</li>
+                                <li className="topbar-submenu-header">FREE TEMPLATES</li>
+                                <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span className="ui-text">Sigma</span></a></li>
+                                <li className="topbar-submenu-header">FREE THEMES</li>
                                 <li><a data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
                                 <li><a data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
                                 <li><a data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>

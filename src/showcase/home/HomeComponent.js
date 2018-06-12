@@ -28,7 +28,7 @@ export class HomeComponent extends Component {
                         <div className="ui-g-12 ui-md-3">
                             <img alt="opensource" src="showcase/resources/images/home/icon-opensource.svg" />
                             <span className="feature-name">OPEN SOURCE</span>
-                            <p>Hosted at GitHub, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
+                            <p>Hosted at <a href="https://github.com/primefaces/primereact">GitHub</a>, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
                         </div>
                         <div className="ui-g-12 ui-md-3">
                             <img alt="themes" src="showcase/resources/images/home/icon-themes.svg" />
@@ -40,20 +40,25 @@ export class HomeComponent extends Component {
                             <span className="feature-name">COMMUNITY</span>
                             <p>Join PrimeReact community to become a part of an active, vibrant and growing open source foundation.</p>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="ui-g-12 ui-md-3">
                             <img alt="productive" src="showcase/resources/images/home/icon-productive.svg" />
                             <span className="feature-name">PRODUCTIVITY</span>
                             <p>Allocate your valuable time on business logic rather than dealing with the complex user interface requirements.</p>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="ui-g-12 ui-md-3">
                             <img alt="mobile" src="showcase/resources/images/home/icon-mobile.svg" />
                             <span className="feature-name">MOBILE</span>
                             <p>Enhanced mobile user experience with  touch optimized responsive design elements.</p>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="ui-g-12 ui-md-3">
                             <img alt="templates" src="showcase/resources/images/home/icon-templates.svg" />
                             <span className="feature-name">TEMPLATES</span>
                             <p>Professionally designed highly customizable native React application templates to get started in no time. </p>
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <img alt="templates" src="showcase/resources/images/home/icon-sigma.svg" />
+                            <span className="feature-name">FREE ADMIN TEMPLATE</span>
+                            <p>An elegant admin template powered by create-react-app.</p>
                         </div>
                     </div>
                 </div>
@@ -74,6 +79,18 @@ export class HomeComponent extends Component {
                         <div className="ui-g-6 ui-md-2"><img alt="unicredit" src="showcase/resources/images/home/unicredit.svg"/></div>
                         <div className="ui-g-6 ui-md-2"><img alt="verizon" src="showcase/resources/images/home/verizon.svg"/></div>
                         <div className="ui-g-6 ui-md-2"><img alt="viacom" src="showcase/resources/images/home/viacom.svg"/></div>
+                    </div>
+                </div>
+                <div className="templates">
+                    <h3>Free Application Template for PrimeReact</h3>
+                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the free Sigma template and impress your users.</p>
+
+                    <div className="ui-g">
+                        <div className="ui-g-12">
+                            <a href="https://www.primefaces.org/sigma-react">
+                                <img alt="Serenity" src="showcase/resources/images/layouts/sigma-biggest.jpg" />
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="templates">
