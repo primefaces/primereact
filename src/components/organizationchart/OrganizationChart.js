@@ -54,15 +54,6 @@ export class OrganizationChartNode extends Component {
         return this.props.isSelected(this.node);
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.node.expanded && nextProps.node.expanded !== prevState.expanded) {
-            return {
-                expanded: nextProps.node.expanded
-            };
-        }
-        return null;
-    }
-
     render() {
         this.node = this.props.node;
 
