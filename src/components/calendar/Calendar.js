@@ -817,8 +817,31 @@ export class Calendar extends Component {
     }
     
     toggleAMPM(event) {
+        let date;
+        if(this.props.value) {
+            if(this.isSingleSelection()) 
+                date = this.props.value;
+            else
+                date = this.props.value.length ? this.props.value[0] : this.props.defaultDate||new Date();
+        }
+        else {
+            date = this.props.defaultDate||new Date();
+        }
+
         this.pm = !this.pm;
-        this.updateTime(event);
+        
+        let hour;
+        if(this.props.hourFormat === '12')
+            hour = date.getHours() === 0 ? 12 : date.getHours() % 12;
+        else
+            hour = date.getHours();
+        
+        let time = {
+            hour: hour,
+            minute: date.getMinutes(),
+            second: date.getSeconds()
+        };
+        this.updateTime(event, time);
         event.preventDefault();
     }
     
