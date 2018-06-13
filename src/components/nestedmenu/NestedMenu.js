@@ -31,10 +31,6 @@ export class NestedMenu extends Component{
                 {this.props.items && this.props.items.map((item,index)=>
                     <NestedMenuItem key={this.props.index+'_'+index} item={item} root={this.props.root} index={this.props.index+'_'+index}
                                     menu={this} parentMenu={this.props.parentMenu}/>)}
-
-                {this.props.parentMenu==='Menubar' && <li className="ui-menuitem ui-menuitem-custom ui-widget ui-corner-all">
-                    {this.props.children}
-                </li> }
             </ul>
         )
     }
