@@ -78,7 +78,7 @@ export class Rating extends Component {
                 
         if(this.props.cancel) {
             var cancel = <a onClick={this.clear}>
-                        <span className="pi pi-ban"></span>
+                        <span className="ui-rating-icon pi pi-ban"></span>
                       </a>;
         }
 
@@ -88,7 +88,7 @@ export class Rating extends Component {
         }
         
         var stars = starsArray.map((value) => {
-            var iconClass = classNames('pi', {
+            var iconClass = classNames('ui-rating-icon pi', {
                 'pi-star-o': (!this.state.value || value > this.state.value),
                 'pi-star': (value <= this.state.value)
             });
