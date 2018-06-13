@@ -456,7 +456,7 @@ export class Dropdown extends Component {
             return <div className="ui-dropdown-filter-container">
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
                             onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
-                        <span className="pi pi-search"></span>
+                        <span className="ui-dropdown-filter-icon pi pi-search"></span>
                    </div>;
         }
         else {
