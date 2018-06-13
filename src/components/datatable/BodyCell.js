@@ -155,12 +155,16 @@ export class BodyCell extends Component {
         if(this.props.responsive) {
             header = <span className="ui-column-title">{this.props.header}</span>;
         }
+
+        /* eslint-disable */
+        let editorKeyHelper = this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+        /* eslint-enable */
                        
         return (
             <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.bodyStyle||this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan}>
                 {header}
-                {this.props.editor && <a ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>}
+                {editorKeyHelper}
                 <span className="ui-cell-data">{content}</span>
             </td>
         );
