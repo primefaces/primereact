@@ -15,10 +15,11 @@ export class SetupPage extends Component {
 
                 <div className="content-section source">
                     <h3 style={{margin:'0'}}>Download</h3>
-                    <p>PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.</p>
+                    <p>PrimeReact is available at npm, if you have an existing application run the following commands to download PrimeReact and PrimeIcons to your project.</p>
 <CodeHighlight className="javascript">
 {`
 npm install primereact --save
+npm install primeicons --save
 
 `}
 </CodeHighlight>
@@ -35,15 +36,15 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                 
                     <h3>Dependencies</h3>
                     <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
-                    <p>In addition, components require font-awesome for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and <a href="react transition group">react-transition-group</a> for animations.</p>
+                    <p>In addition, components require PrimeIcons library for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and <a href="react transition group">react-transition-group</a> for animations.</p>
 <CodeHighlight className="json">
 {`
 dependencies: {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-transition-group": "^2.2.1",
-    "font-awesome": "^4.7.0",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "primeicons": "^1.0.0-beta.8"
 }
 
 `}
@@ -88,6 +89,7 @@ dependencies: {
 {`
 primereact/resources/themes/omega/theme.css
 primereact/resources/primereact.min.css
+primeicons/primeicons.css
 
 `}
 </CodeHighlight>
@@ -107,7 +109,7 @@ primereact/components/autocomplete/AutoComplete.css
 {`
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
-import 'font-awesome/css/font-awesome.css';
+import 'primeicons/primeicons.css';
 
 `}
 </CodeHighlight>
