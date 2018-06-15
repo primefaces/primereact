@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 export class DataScroller extends Component {
+    
     static defaultProps = {
         id: null,
         value:	null,
@@ -17,7 +18,8 @@ export class DataScroller extends Component {
         onLazyLoad: null,
         itemTemplate: null,
         header:null,
-        footer:null
+        footer:null,
+        lazy: null
     }
 
     static propsTypes = {
@@ -33,7 +35,8 @@ export class DataScroller extends Component {
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
         header:PropTypes.string,
-        footer:PropTypes.string
+        footer:PropTypes.string,
+        lazy:PropTypes.bool
     }
 
     constructor(props) {
@@ -161,6 +164,13 @@ export class DataScroller extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        var newValue = this.props.value;
+        if (newValue && this.value !== newValue) {
+            this.value = newValue;
+            
+            this.handleDataChange();
+        } 
+
         if(this.props.loader && !this.isLoaded) {
             this.unbindScrollListener();
 
@@ -171,15 +181,6 @@ export class DataScroller extends Component {
             this.loader.addEventListener('click', this.scrollFunction);
             this.isLoaded = true;
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        var newValue = nextProps.value;
-        if (newValue && this.value !== newValue) {
-            this.value = newValue;
-            
-            this.handleDataChange();
-        } 
     }
 
     componentWillUnmount() {

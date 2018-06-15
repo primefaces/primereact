@@ -119,6 +119,7 @@ export class FileUpload extends Component {
 
     onFileSelect(event) {
         this.setState({msgs:[]});
+        this.files = this.state.files || [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let file of files) {
             if (!this.isFileSelected(file)) {
@@ -126,16 +127,17 @@ export class FileUpload extends Component {
                     if (this.isImage(file)) {
                         file.objectURL = window.URL.createObjectURL(file);
                     }
-
-                    this.setState({files: [...this.state.files, file]}, () => {
-                        if (this.hasFiles() && this.props.auto) {
-                            this.upload();
-                        }
-                    });
+                    this.files.push(file);
                 }
             }
         }
-                
+
+        this.setState({files: this.files}, () => {
+            if (this.hasFiles() && this.props.auto) {
+                this.upload();
+            }
+        });
+        
         if(this.props.onSelect) {
             this.props.onSelect({originalEvent: event, files: files});
         }
@@ -290,13 +292,13 @@ export class FileUpload extends Component {
     }
     
     renderChooseButton() {
-        let className = classNames('ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all');
+        let className = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left');
         
         return (
-            <span icon="fa-plus" className={className}>
+            <span icon="pi pi-plus" className={className}>
                 <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} 
                     multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
-                <span className="ui-button-icon ui-button-icon-left ui-clickable fa fa-fw fa-plus"></span>
+                <span className="ui-button-icon ui-button-icon-left ui-clickable pi pi-fw pi-plus"></span>
                 <span className="ui-button-text ui-clickable">{this.props.chooseLabel}</span>
             </span>    
         );
@@ -310,7 +312,7 @@ export class FileUpload extends Component {
                         let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
                         let fileName = <div>{file.name}</div>;
                         let size = <div>{this.formatSize(file.size)}</div>;
-                        let removeButton = <div><Button type="button" icon="fa-close" onClick={() => this.remove(index)} /></div>
+                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={() => this.remove(index)} /></div>
 
                         return <div className="ui-fileupload-row" key={file.name + file.type + file.size}>
                                  {preview}
@@ -330,8 +332,8 @@ export class FileUpload extends Component {
         let chooseButton = this.renderChooseButton();
                            
         if (!this.props.auto) {
-            uploadButton = <Button label={this.props.uploadLabel} icon="fa-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
-            cancelButton = <Button label={this.props.cancelLabel} icon="fa-close" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
+            uploadButton = <Button label={this.props.uploadLabel} icon="pi pi-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
+            cancelButton = <Button label={this.props.cancelLabel} icon="pi pi-times" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
         }
 
         if (this.hasFiles()) {
@@ -358,7 +360,7 @@ export class FileUpload extends Component {
     
     renderBasic() {
         let buttonClassName = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left', {'ui-fileupload-choose-selected': this.hasFiles()});
-        let iconClassName = classNames('ui-button-icon-left fa', {'fa-plus': !this.hasFiles() || this.props.auto, 'fa-upload': this.hasFiles() && !this.props.auto});
+        let iconClassName = classNames('ui-button-icon-left pi', {'pi-plus': !this.hasFiles() || this.props.auto, 'pi-upload': this.hasFiles() && !this.props.auto});
                          
         return (
             <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick}>
@@ -370,7 +372,7 @@ export class FileUpload extends Component {
         );
     }
     
-    render() {        
+    render() {
         if (this.props.mode === 'advanced')
             return this.renderAdvanced();
         else if (this.props.mode === 'basic')

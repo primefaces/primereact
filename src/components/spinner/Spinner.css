@@ -22,7 +22,7 @@
     vertical-align: middle;
     width: 1.5em;
 }
-.ui-spinner .fa {
+.ui-spinner .ui-spinner-button-icon {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -48,6 +48,6 @@
 .ui-fluid .ui-spinner .ui-spinner-button {
     width: 1.5em;
 }
-.ui-fluid .ui-spinner .ui-spinner-button .fa {
+.ui-fluid .ui-spinner .ui-spinner-button .ui-spinner-button-icon {
     left: .375em;
 }

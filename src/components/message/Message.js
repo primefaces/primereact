@@ -29,11 +29,11 @@ export class Message extends Component {
             'ui-message-icon-only': !this.props.text
         });
 
-        let icon = classNames('ui-message-icon fa fa-fw', {
-            'fa-info-circle': this.props.severity === 'info',
-            'fa-warning': this.props.severity === 'warn',
-            'fa-close': this.props.severity === 'error',
-            'fa-check': this.props.severity === 'success',
+        let icon = classNames('ui-message-icon pi pi-fw', {
+            'pi-info-circle': this.props.severity === 'info',
+            'pi-exclamation-triangle': this.props.severity === 'warn',
+            'pi-times': this.props.severity === 'error',
+            'pi-check': this.props.severity === 'success',
         });
 
         return <div id={this.props.id} aria-live="polite" className={className} style={this.props.style}>

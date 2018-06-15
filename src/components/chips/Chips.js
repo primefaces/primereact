@@ -130,7 +130,7 @@ export class Chips extends Component {
             var items = this.state.values.map((value , index) => {
                             var customContent = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
                             var item = <li className="ui-chips-token ui-state-highlight ui-corner-all" key={index}>
-                                <span className="ui-chips-token-icon fa fa-fw fa-close" onClick={(event) => this.removeItem(event, index)}></span>
+                                <span className="ui-chips-token-icon pi pi-fw pi-times" onClick={(event) => this.removeItem(event, index)}></span>
                                 <span className="ui-chips-token-label">{this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) : customContent}</span>
                             </li>;
                             return item;
@@ -138,7 +138,7 @@ export class Chips extends Component {
         }
 
         var inputToken = <li className="ui-chips-input-token">
-                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} type="text" disabled={this.props.disabled||this.maxedOut()} 
+                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" disabled={this.props.disabled||this.maxedOut()}
                                         onKeyDown={(event) => this.onKeydown(event)} onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
                         </li>;
 

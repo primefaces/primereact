@@ -120,7 +120,7 @@ export class SplitButton extends Component {
         return (
             <div id={this.props.id} className={className} style={this.props.style}  ref={(el) => { this.container = el; }}>
                 <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-left" tabIndex={this.props.tabIndex}></Button>
-                <Button type="button" className="ui-splitbutton-menubutton" icon="fa-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-right"></Button>
+                <Button type="button" className="ui-splitbutton-menubutton" icon="pi pi-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled} cornerStyleClass="ui-corner-right"></Button>
                 <SplitButtonPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} 
                                 menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName}>
                     {items}

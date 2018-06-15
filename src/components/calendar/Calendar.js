@@ -25,7 +25,7 @@ export class Calendar extends Component {
         showOtherMonths: true,
         selectOtherMonths: false,
         showIcon: false,
-        icon: "fa-calendar",
+        icon: "pi pi-calendar",
         utc: false,
         showOnFocus: true,
         appendTo: null,
@@ -132,7 +132,9 @@ export class Calendar extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
+        this.init();
+        
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
@@ -150,6 +152,33 @@ export class Calendar extends Component {
         this.decrementSecond = this.decrementSecond.bind(this);
         this.toggleAMPM = this.toggleAMPM.bind(this);
         this.onDatePickerClick = this.onDatePickerClick.bind(this);
+    }
+
+    init() {
+        let date = this.getMonthYearDate(this.props.value);
+        this.createWeekDays();
+        let month =  date.getMonth();
+        let year = date.getFullYear();
+        
+        this.state = {
+            currentMonth: month,
+            currentYear: year,
+            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
+        };
+        
+        this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
+    		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
+            
+        if(this.props.yearNavigator && this.props.yearRange) {
+            this.yearOptions = [];
+            let years = this.props.yearRange.split(':'),
+            yearStart = parseInt(years[0], 10),
+            yearEnd = parseInt(years[1], 10);
+            
+            for(let i = yearStart; i <= yearEnd; i++) {
+                this.yearOptions.push(i);
+            }
+        }
     }
 
     createMonth(month, year, minDate, maxDate) {
@@ -529,12 +558,11 @@ export class Calendar extends Component {
     
     isDateBetween(start, end, dateMeta) {
         if(start && end) {
-            return start.getDate() < dateMeta.day && start.getMonth() <= dateMeta.month && start.getFullYear() <= dateMeta.year &&
-            end.getDate() > dateMeta.day && end.getMonth() >= dateMeta.month && end.getFullYear() >= dateMeta.year;
+            let date = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
+            return start.getTime() <= date.getTime() && end.getTime() >= date.getTime();
         }
-        else {
-            return false; 
-        }
+        
+        return false;
     }
     
     isToday(today, day, month, year) {     
@@ -630,13 +658,22 @@ export class Calendar extends Component {
         }
     }
     
-    onInputFocus(event) {
+    onInputFocus(event) {      
+        if(this.refocus) {
+            this.refocus = false;
+            return;
+        }
+
         if(this.props.showOnFocus) {
             this.showOverlay();
         }
 
         if(this.props.onFocus) {
             this.props.onFocus(event);
+        }
+
+        if(event.target.getAttribute('data-isCellEditing')) {
+            this.refocus = true;
         }
     }
     
@@ -780,8 +817,31 @@ export class Calendar extends Component {
     }
     
     toggleAMPM(event) {
+        let date;
+        if(this.props.value) {
+            if(this.isSingleSelection()) 
+                date = this.props.value;
+            else
+                date = this.props.value.length ? this.props.value[0] : this.props.defaultDate||new Date();
+        }
+        else {
+            date = this.props.defaultDate||new Date();
+        }
+
         this.pm = !this.pm;
-        this.updateTime(event);
+        
+        let hour;
+        if(this.props.hourFormat === '12')
+            hour = date.getHours() === 0 ? 12 : date.getHours() % 12;
+        else
+            hour = date.getHours();
+        
+        let time = {
+            hour: hour,
+            minute: date.getMinutes(),
+            second: date.getSeconds()
+        };
+        this.updateTime(event, time);
         event.preventDefault();
     }
     
@@ -1280,56 +1340,27 @@ export class Calendar extends Component {
     componentWillUnmount() {
         this.unbindDocumentClickListener();
     }
-
-    componentWillMount() {
-        let date = this.getMonthYearDate(this.props.value);
-        this.createWeekDays();
-        let month =  date.getMonth();
-        let year = date.getFullYear();
-        
-        this.setState({
-            currentMonth: month,
-            currentYear: year,
-            dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
-        });
-        
-        this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
-    		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
-            
-        if(this.props.yearNavigator && this.props.yearRange) {
-            this.yearOptions = [];
-            let years = this.props.yearRange.split(':'),
-            yearStart = parseInt(years[0], 10),
-            yearEnd = parseInt(years[1], 10);
-            
-            for(let i = yearStart; i <= yearEnd; i++) {
-                this.yearOptions.push(i);
-            }
-        }
-    }
     
     shouldComponentUpdate(nextProps, nextState) {
         return (nextProps.value !== this.props.value) || (this.state.currentMonth !== nextState.currentMonth) || (this.state.currentYear !== nextState.currentYear)
             || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate || (nextProps.disabled !== this.props.disabled));
     }
-    
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
-            let date = this.getMonthYearDate(nextProps.value);
+        
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.value !== prevProps.value || this.props.minDate !== prevProps.minDate || this.props.maxDate !== prevProps.maxDate) {
+            let date = this.getMonthYearDate(this.props.value);
             let month = date.getMonth();
             let year = date.getFullYear();
 
-            if ((month !== this.state.currentMonth) || (year !== this.state.currentYear) || (this.props.minDate !== nextProps.minDate) || (this.props.maxDate !== nextProps.maxDate)) {
+            if ((month !== this.state.currentMonth) || (year !== this.state.currentYear) || (prevProps.minDate !== this.props.minDate) || (prevProps.maxDate !== this.props.maxDate)) {
                 this.setState({
                     currentMonth: month,
                     currentYear: year,
-                    dates: this.createMonth(month, year, nextProps.minDate, nextProps.maxDate)
+                    dates: this.createMonth(month, year, this.props.minDate, this.props.maxDate)
                 });
             }
         }
-    }
-        
-    componentDidUpdate(prevProps, prevState) {
+
         if(this.keyboardInput)
             this.keyboardInput = false;
         else
@@ -1426,8 +1457,8 @@ export class Calendar extends Component {
 
     renderDatePickerHeader() {
         if(!this.props.timeOnly) {
-            let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'fa fa-angle-left');
-            let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'fa fa-angle-right');
+            let prevLink = this.renderDatePickerNavigatorLink('ui-datepicker-prev ui-corner-all', this.prevMonth, 'pi pi-chevron-left');
+            let nextLink = this.renderDatePickerNavigatorLink('ui-datepicker-next ui-corner-all', this.nextMonth, 'pi pi-chevron-right');
             let title = this.renderDatePickerTitle();
 
             return (
@@ -1447,11 +1478,11 @@ export class Calendar extends Component {
         return (
             <div className="ui-hour-picker">
                 <a onClick={this.incrementHour}>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span style={{ 'display': time.hour < 10 ? 'inline' : 'none' }}>0</span><span>{time.hour}</span>
                 <a onClick={this.decrementHour}>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>
         );
@@ -1461,11 +1492,11 @@ export class Calendar extends Component {
         return (
             <div className="ui-minute-picker">
                 <a onClick={this.incrementMinute}>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span style={{ 'display': time.minute < 10 ? 'inline' : 'none' }}>0</span><span>{time.minute}</span>
                 <a onClick={this.decrementMinute}>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>  
         );
@@ -1476,11 +1507,11 @@ export class Calendar extends Component {
             return (
                 <div className="ui-second-picker">
                     <a onClick={this.incrementSecond}>
-                        <span className="fa fa-angle-up"></span>
+                        <span className="pi pi-chevron-up"></span>
                     </a>
                     <span style={{ 'display': time.second < 10 ? 'inline' : 'none' }}>0</span><span>{time.second}</span>
                     <a onClick={this.decrementSecond}>
-                        <span className="fa fa-angle-down"></span>
+                        <span className="pi pi-chevron-down"></span>
                     </a>
                 </div>
             );
@@ -1495,11 +1526,11 @@ export class Calendar extends Component {
         if (this.props.hourFormat === '12') {
             return (<div className="ui-ampm-picker">
                 <a onClick={this.toggleAMPM}>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span>{this.pm ? 'PM' : 'AM'}</span>
                 <a onClick={this.toggleAMPM}>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>);
         }
@@ -1512,11 +1543,11 @@ export class Calendar extends Component {
         return (
             <div className="ui-separator">
                 <a>
-                    <span className="fa fa-angle-up"></span>
+                    <span className="pi pi-chevron-up"></span>
                 </a>
                 <span>:</span>
                 <a>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="pi pi-chevron-down"></span>
                 </a>
             </div>
         );

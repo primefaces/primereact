@@ -69,7 +69,7 @@ export class Captcha extends Component {
         }
     }
     
-    componentWillMount() {
+    addRecaptchaScript() {
         this.recaptchaScript = null;
         if (!(window).grecaptcha) {
             var head = document.head || document.getElementsByTagName('head')[0];
@@ -82,6 +82,8 @@ export class Captcha extends Component {
     }
 
     componentDidMount() {
+        this.addRecaptchaScript();
+
         if ((window).grecaptcha) {
             this.init(); 
         }

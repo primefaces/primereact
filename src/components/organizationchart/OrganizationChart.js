@@ -55,13 +55,15 @@ export class OrganizationChartNode extends Component {
     }
 
     render() {
+        this.node = this.props.node;
+
         var colspan = this.getColspan();
         let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.className, {
                 'ui-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
                 'ui-state-highlight': this.isSelected()
             }),
             nodeLabel = (this.props.nodeTemplate && this.props.nodeTemplate(this.node)) ? <div>{this.props.nodeTemplate(this.node)}</div> : <div>{this.node.label}</div>,
-            toggleIcon = classNames('fa ui-node-toggler-icon', {'fa-chevron-down': this.state.expanded, 'fa-chevron-up': !this.state.expanded}),
+            toggleIcon = classNames('ui-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
                     <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
@@ -227,6 +229,8 @@ export class OrganizationChart extends Component {
     }
 
     render() {
+        this.root = this.props.value && this.props.value.length ? this.props.value[0] : null;
+
         var className = classNames('ui-organizationchart ui-widget', this.props.className);
         return (
             <div id={this.props.id} style={this.props.style} className={className}>

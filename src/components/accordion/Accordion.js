@@ -53,9 +53,6 @@ export class Accordion extends Component {
             activeIndex: props.activeIndex
         };
         this.contentWrappers = [];
-    }
-
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
 
@@ -70,12 +67,11 @@ export class Accordion extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    static getDerivedStateFromProps(nextProps, prevState) {
         if(nextProps.activeIndex != null) {
-            this.setState({
-                activeIndex: nextProps.activeIndex
-            });
+            return {activeIndex: nextProps.activeIndex};
         }
+        return null;
     }
     
     onTabClick(event, tab, i) {
@@ -120,7 +116,7 @@ export class Accordion extends Component {
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle} onClick={(event) => this.onTabClick(event, tab, index)}>
                 <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected}>
-                    <span className={classNames('ui-accordion-toggle-icon fa fa-fw', { 'fa-caret-right': !selected, 'fa-caret-down': selected })}></span>
+                    <span className={classNames('ui-accordion-toggle-icon pi pi-fw', { 'pi-caret-right': !selected, 'pi-caret-down': selected })}></span>
                     <span className="ui-accordion-header-text">{tab.props.header}</span>
                 </a>
             </div>

@@ -10,10 +10,11 @@ interface DataScrollerProps {
     buffer?: number;
     style?: object;
     className?: string;
-    onLazyLoad?({first: number, rows: number}): void;
+    onLazyLoad?(p: {first: number, rows: number}): void;
     itemTemplate?(): void;
     header?: string;
     footer?: string;
+    lazy?: boolean;
 }
 
 export class DataScroller extends React.Component<DataScrollerProps,any> {}

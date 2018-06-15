@@ -2,8 +2,8 @@ import React = require("react");
 
 export interface GrowlMessage {
     severity: 'success' | 'info' | 'warn' | 'error',
-    summary: React.ReactElement | string;
-    detail: React.ReactElement | string;
+    summary: Element | string;
+    detail: Element | string;
     closable: boolean;
     sticky: boolean;
     life: number;

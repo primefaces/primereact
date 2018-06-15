@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {PickListItem} from './PickListItem';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import ObjectUtils from '../utils/ObjectUtils';
+import { PickListItem } from './PickListItem';
 
 export class PickListSubList extends Component {
     
@@ -14,6 +14,7 @@ export class PickListSubList extends Component {
         listClassName: null,
         style: null,
         showControls: true,
+        metaKeySelection: true,
         itemTemplate: null,
         onItemClick: null,
         onSelectionChange: null
@@ -27,6 +28,7 @@ export class PickListSubList extends Component {
         listClassName: PropTypes.string,
         style: PropTypes.object,
         showControls: PropTypes.bool,
+        metaKeySelection: PropTypes.bool,
         itemTemplate: PropTypes.func,
         onItemClick: PropTypes.func,
         onSelectionChange: PropTypes.func
@@ -38,26 +40,36 @@ export class PickListSubList extends Component {
     }
     
     onItemClick(event) {
+        let originalEvent = event.originalEvent;
         let item = event.value;
         let selection = [...this.props.selection];
-        let metaKey = (event.metaKey || event.ctrlKey);
         let index = ObjectUtils.findIndexInList(item, selection);
         let selected = (index !== -1);
-        
-        if(selected && metaKey) {
-            selection = selection.filter((val, i) => i !== index);
+        let metaSelection = this.props.metaKeySelection;
+
+        if(metaSelection) {
+            let metaKey = (originalEvent.metaKey||originalEvent.ctrlKey);
+            
+            if(selected && metaKey) {
+                selection.splice(index, 1);
+            }
+            else {
+                if(!metaKey) {
+                    selection.length = 0;
+                }         
+                selection.push(item);
+            }
         }
         else {
-            if(!metaKey) {
-                selection.length = 0;
-            }      
-            
-            selection.push(item);
+            if(selected)
+                selection.splice(index, 1);
+            else
+                selection.push(item);
         }
 
         if(this.props.onSelectionChange) {
             this.props.onSelectionChange({
-                event: event.originalEvent,
+                event: originalEvent,
                 value: selection
             })
         }

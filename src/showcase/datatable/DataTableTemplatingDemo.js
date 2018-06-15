@@ -31,8 +31,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa-search" className="ui-button-success"></Button>
-            <Button type="button" icon="fa-edit" className="ui-button-warning"></Button>
+            <Button type="button" icon="fa fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa fa-edit" className="ui-button-warning"></Button>
         </div>;
     }
 
@@ -42,7 +42,7 @@ export class DataTableTemplatingDemo extends Component {
 
     render() {
         var carCount = this.state.cars ? this.state.cars.length: 0;
-        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa-refresh" style={{'float':'right'}}/></div>;
+        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa fa-refresh" style={{'float':'right'}}/></div>;
         var footer = "There are " + carCount + ' cars';
 
         return (
@@ -115,8 +115,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa-search" className="ui-button-success"></Button>
-            <Button type="button" icon="fa-edit" className="ui-button-warning"></Button>
+            <Button type="button" icon="fa fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa fa-edit" className="ui-button-warning"></Button>
         </div>;
     }
 
@@ -126,7 +126,7 @@ export class DataTableTemplatingDemo extends Component {
 
     render() {
         var carCount = this.state.cars ? this.state.cars.length: 0;
-        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa-refresh" style={{'float':'right'}}/></div>;
+        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa fa-refresh" style={{'float':'right'}}/></div>;
         var footer = "There are " + carCount + ' cars';
 
         return (

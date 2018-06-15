@@ -19,7 +19,7 @@ export class NextPageLink extends Component {
         
         return (
             <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
-                <span className="fa fa-forward"></span>
+                <span className="ui-paginator-icon pi pi-caret-right"></span>
             </a>
         );
     }

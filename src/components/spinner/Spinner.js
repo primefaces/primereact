@@ -45,6 +45,14 @@ export class Spinner extends Component {
             this.precision = this.props.step.toString().split(/[,]|[.]/)[1].length;
         }
 
+        let val = this.props.value;
+        if(val !== undefined && val != null) {
+            this.value = this.updateValue(val);
+        }
+
+        this.formatValue();
+        this.updateFilledState();
+
         this.onInputKeyUp = this.onInputKeyUp.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onInputKeyPress = this.onInputKeyPress.bind(this);
@@ -311,16 +319,6 @@ export class Spinner extends Component {
         this.filled = (this.value !== undefined && this.value != null);
     }
 
-    componentWillMount() {
-        let val = this.props.value;
-        if(val !== undefined && val != null) {
-            this.value = this.updateValue(val);
-        }
-
-        this.formatValue();
-        this.updateFilledState();
-    }
-
     componentDidMount() {
         this.inputEl.value = this.valueAsString;
     }
@@ -342,7 +340,7 @@ export class Spinner extends Component {
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
                 onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled}>
-                <span className="fa fa-caret-up"></span>
+                <span className="ui-spinner-button-icon pi pi-caret-up"></span>
             </button>
         );
     }
@@ -355,7 +353,7 @@ export class Spinner extends Component {
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp} 
                 onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled}>
-                <span className="fa fa-caret-down"></span>
+                <span className="ui-spinner-button-icon pi pi-caret-down"></span>
             </button>
         );
     }

@@ -29,6 +29,27 @@
     font-weight: bold;
 }
 
+.ui-progressbar.ui-progressbar-indeterminate {
+    border-width: 0;
+    overflow: visible;
+    margin-top: 1.5em;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-indeterminate-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid;
+    border-color: inherit;
+    border-radius: inherit;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-label {
+    position: absolute;
+    top: -1.3em;
+}
+
 .ui-progressbar-indeterminate .ui-progressbar-value {
     border: 0 none;
 }

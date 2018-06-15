@@ -24,7 +24,7 @@ interface ColumnProps {
     colSpan?: number;
     rowSpan?: number;
     editor?(props: any): void;
-    editorValidator?(props: any): booelan;
+    editorValidator?(props: any): boolean;
     rowReorder?: boolean;
     rowReorderIcon?: string;
 }

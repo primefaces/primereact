@@ -14,6 +14,7 @@ export class Checkbox extends Component {
         style: null,
         className: null,
         disabled: false,
+        readOnly: false,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -24,11 +25,12 @@ export class Checkbox extends Component {
         inputId: PropTypes.string,
         value: PropTypes.any,
         name: PropTypes.string,
-        checked: PropTypes.bool.isRequired,
+        checked: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        onChange: PropTypes.func.isRequired,
+        readOnly: PropTypes.bool,
+        onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
     };
@@ -42,13 +44,19 @@ export class Checkbox extends Component {
     }
 
     onClick(e) {
-        if(!this.props.disabled && this.props.onChange) {
+        if(!this.props.disabled && this.props.onChange && !this.props.readOnly) {
             this.props.onChange({
                 originalEvent: e,
                 value: this.props.value,
                 checked: !this.props.checked
             });
+
+            this.input.checked = !this.props.checked;
         }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.input.checked = this.props.checked;
     }
 
     onFocus(e) {
@@ -62,12 +70,12 @@ export class Checkbox extends Component {
     render() {
         let containerClass = classNames('ui-chkbox ui-widget', this.props.className);
         let boxClass = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked, 'ui-state-disabled': this.props.disabled});
-        let iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.checked});
+        let iconClass = classNames('ui-chkbox-icon ui-c', {'pi pi-check': this.props.checked});
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="ui-helper-hidden-accessible">
-                    <input type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} />
+                    <input type="checkbox" ref={(el) => { this.input = el; }} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>

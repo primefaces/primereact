@@ -10,8 +10,8 @@ export class CardDemo extends Component {
     render() {
         let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
         let footer = <span>
-                        <Button label="Save" icon="fa-check"/>
-                        <Button label="Cancel" icon="fa-close" className="ui-button-secondary"/>
+                        <Button label="Save" icon="pi pi-check"/>
+                        <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
                      </span>;
 
         return (
@@ -90,8 +90,8 @@ import {Card} from 'primereact/components/card/Card';
                             {`
 let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
 let footer = <span>
-                <Button label="Save" icon="fa-check"/>
-                <Button label="Cancel" icon="fa-close" className="ui-button-secondary"/>
+                <Button label="Save" icon="pi pi-check"/>
+                <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
              </span>;
 
 <Card footer={footer} header={header}>
@@ -210,8 +210,8 @@ export class CardDemo extends Component {
 
         let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
         let footer = <span>
-                        <Button label="Save" icon="fa-check"/>
-                        <Button label="Cancel" icon="fa-close" className="ui-button-secondary"/>
+                        <Button label="Save" icon="pi pi-check"/>
+                        <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
                      </span>;
 
         return (

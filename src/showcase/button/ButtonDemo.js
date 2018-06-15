@@ -31,9 +31,9 @@ export class ButtonDemo extends Component {
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
                     <Button label="Click" onClick={this.increment} />
-                    <Button label="Click" icon="fa-check" onClick={this.increment}/>
-                    <Button label="Click" icon="fa-check" iconPos="right" onClick={this.increment}/>
-                    <Button icon="fa-check" onClick={this.increment}/>
+                    <Button label="Click" icon="pi pi-check" onClick={this.increment}/>
+                    <Button label="Click" icon="pi pi-check" iconPos="right" onClick={this.increment}/>
+                    <Button icon="pi pi-check" onClick={this.increment}/>
                     <Button label="Click" disabled="disabled" onClick={this.increment}/>
 
                     <h3>Severities</h3>
@@ -95,9 +95,9 @@ import {Button} from 'primereact/components/button/Button';
                         icon position is left. To display only an icon, leave label as undefined.</p>
 <CodeHighlight className="html">
 {`
-<Button label="Click" icon="fa-check" />
-<Button label="Click" icon="fa-check" iconPos="right"/>
-<Button icon="fa-check" iconPos="right"/>
+<Button label="Click" icon="pi pi-check" />
+<Button label="Click" icon="pi pi-check" iconPos="right"/>
+<Button icon="pi pi-check" iconPos="right"/>
 
 `}
 </CodeHighlight>
@@ -248,9 +248,9 @@ export class ButtonDemo extends Component {
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
                     <Button label="Click" onClick={this.increment} />
-                    <Button label="Click" icon="fa-check" onClick={this.increment}/>
-                    <Button label="Click" icon="fa-check" iconPos="right" onClick={this.increment}/>
-                    <Button icon="fa-check" onClick={this.increment}/>
+                    <Button label="Click" icon="pi pi-check" onClick={this.increment}/>
+                    <Button label="Click" icon="pi pi-check" iconPos="right" onClick={this.increment}/>
+                    <Button icon="pi pi-check" onClick={this.increment}/>
                     <Button label="Click" disabled="disabled" onClick={this.increment}/>
 
                     <h3>Severities</h3>

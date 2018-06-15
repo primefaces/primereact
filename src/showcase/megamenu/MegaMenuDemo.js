@@ -14,7 +14,7 @@ export class MegaMenuDemo extends Component {
     render() {
         var items=[
             {
-                label: 'TV', icon: 'fa-check',
+                label: 'TV', icon: 'fa fa-fw fa-check',
                 items: [
                     [
                         {
@@ -39,7 +39,7 @@ export class MegaMenuDemo extends Component {
                 ]
             },
             {
-                label: 'Sports', icon: 'fa-soccer-ball-o',
+                label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
                 items: [
                     [
                         {
@@ -75,7 +75,7 @@ export class MegaMenuDemo extends Component {
                 ]
             },
             {
-                label: 'Entertainment', icon: 'fa-child',
+                label: 'Entertainment', icon: 'fa fa-fw fa-child',
                 items: [
                     [
                         {
@@ -100,7 +100,7 @@ export class MegaMenuDemo extends Component {
                 ]
             },
             {
-                label: 'Technology', icon: 'fa-gears',
+                label: 'Technology', icon: 'fa fa-fw fa-gears',
                 items: [
                     [
                         {
@@ -180,7 +180,7 @@ import {MegaMenu} from 'primereact/components/megamenu/MegaMenu';
                             {`
 var items=[
     {
-        label: 'TV', icon: 'fa-check',
+        label: 'TV', icon: 'fa fa-fw fa-check',
         items: [
             [
                 {
@@ -205,7 +205,7 @@ var items=[
         ]
     },
     {
-        label: 'Sports', icon: 'fa-soccer-ball-o',
+        label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
         items: [
             [
                 {
@@ -241,7 +241,7 @@ var items=[
         ]
     },
     {
-        label: 'Entertainment', icon: 'fa-child',
+        label: 'Entertainment', icon: 'fa fa-fw fa-child',
         items: [
             [
                 {
@@ -266,7 +266,7 @@ var items=[
         ]
     },
     {
-        label: 'Technology', icon: 'fa-gears',
+        label: 'Technology', icon: 'fa fa-fw fa-gears',
         items: [
             [
                 {
@@ -301,7 +301,7 @@ var items=[
                             {`
 <MegaMenu model={items}>
     <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="fa-sign-out"/>
+    <Button label="Logout" icon="fa fa-sign-out"/>
 </MegaMenu>
 
 `}
@@ -413,7 +413,7 @@ export class MegaMenuDemo extends Component {
     render() {
         var items=[
             {
-                label: 'TV', icon: 'fa-check',
+                label: 'TV', icon: 'fa fa-fw fa-check',
                 items: [
                     [
                         {
@@ -438,7 +438,7 @@ export class MegaMenuDemo extends Component {
                 ]
             },
             {
-                label: 'Sports', icon: 'fa-soccer-ball-o',
+                label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
                 items: [
                     [
                         {
@@ -474,7 +474,7 @@ export class MegaMenuDemo extends Component {
                 ]
             },
             {
-                label: 'Entertainment', icon: 'fa-child',
+                label: 'Entertainment', icon: 'fa fa-fw fa-child',
                 items: [
                     [
                         {
@@ -499,7 +499,7 @@ export class MegaMenuDemo extends Component {
                 ]
             },
             {
-                label: 'Technology', icon: 'fa-gears',
+                label: 'Technology', icon: 'fa fa-fw fa-gears',
                 items: [
                     [
                         {

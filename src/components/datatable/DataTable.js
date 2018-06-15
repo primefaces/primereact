@@ -71,7 +71,7 @@ export class DataTable extends Component {
         rowGroupHeaderTemplate: null,
         rowGroupFooterTemplate: null,
         loading: false,
-        loadingIcon: 'fa-circle-o-notch',
+        loadingIcon: 'pi pi-circle-o-notch',
         autoLayout: false,
         onColumnResizeEnd: null,
         onSort: null,
@@ -188,6 +188,7 @@ export class DataTable extends Component {
         this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
         this.onColumnDrop = this.onColumnDrop.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
+        this.frozenSelectionMode = null;
     }
 
     onPageChange(event) {
@@ -220,6 +221,9 @@ export class DataTable extends Component {
         let sortField = event.sortField;
         let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
         let multiSortMeta;
+
+        this.columnSortable = event.sortable;
+        this.columnSortFunction = event.sortFunction;
 
         if(this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey||event.originalEvent.ctrlKey;
@@ -275,7 +279,15 @@ export class DataTable extends Component {
 
     sortSingle(data) {
         let value = [...data];
-        value.sort((data1, data2) => {
+
+        if(this.columnSortable && this.columnSortable === 'custom' && this.columnSortFunction) {
+            value = this.columnSortFunction({
+                field: this.state.sortField,
+                order: this.state.sortOrder
+            });
+        }
+        else {
+            value.sort((data1, data2) => {
                 let value1 = ObjectUtils.resolveFieldData(data1, this.state.sortField);
                 let value2 = ObjectUtils.resolveFieldData(data2, this.state.sortField);
                 let result = null;
@@ -287,12 +299,13 @@ export class DataTable extends Component {
                 else if (value1 == null && value2 == null)
                     result = 0;
                 else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2);
+                    result = value1.localeCompare(value2, undefined, { numeric: true });
                 else
                     result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
                 return (this.state.sortOrder * result);
             });
+        }
 
         return value;
     }
@@ -313,7 +326,7 @@ export class DataTable extends Component {
 
         if (typeof value1 === 'string' || value1 instanceof String) {
             if (value1.localeCompare && (value1 !== value2)) {
-                return (this.state.multiSortMeta[index].order * value1.localeCompare(value2));
+                return (this.state.multiSortMeta[index].order * value1.localeCompare(value2, undefined, { numeric: true }));
             }
         }
         else {
@@ -386,19 +399,27 @@ export class DataTable extends Component {
                 filters: this.props.filters
             });
         }
+
+        this.container.style.width = this.getContainerWidth();
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.first !== null && nextProps.first !== this.props.first) { this.setState({first: nextProps.first}) }
-        if(nextProps.rows !== null && nextProps.rows !== this.props.rows) { this.setState({rows: nextProps.rows}) }
-        if(nextProps.sortField && nextProps.sortField !== this.props.sortField) { this.setState({sortField: nextProps.sortField}) }
-        if(nextProps.sortOrder && nextProps.sortOrder !== this.props.sortOrder) { this.setState({sortOrder: nextProps.sortOrder}) }
-        if(nextProps.multiSortMeta && nextProps.multiSortMeta !== this.props.multiSortMeta) { this.setState({multiSortMeta: nextProps.multiSortMeta}) }
-        if(nextProps.filters && nextProps.filters !== this.props.filters) { this.setState({filters: nextProps.filters}) }
+    static getDerivedStateProps(nextProps, prevState) {
+        let state = {};
 
-        if(nextProps.globalFilter !== this.props.globalFilter) {
-            this.setState({first: 0});
-        }
+        if(nextProps.first !== null && nextProps.first !== prevState.first) { state = {...state, ...{first: nextProps.first}} }
+        if(nextProps.rows !== null && nextProps.rows !== prevState.rows) { state = {...state, ...{rows: nextProps.rows}} }
+        if(nextProps.sortField && nextProps.sortField !== prevState.sortField) { state = {...state, ...{sortField: nextProps.sortField}} }
+        if(nextProps.sortOrder && nextProps.sortOrder !== prevState.sortOrder) { state = {...state, ...{sortOrder: nextProps.sortOrder}} }
+        if(nextProps.multiSortMeta && nextProps.multiSortMeta !== prevState.multiSortMeta) { state = {...state, ...{multiSortMeta: nextProps.multiSortMeta}} }
+        if(nextProps.filters && nextProps.filters !== prevState.filters) { state = {...state, ...{filters: nextProps.filters}} }
+
+        if(nextProps.globalFilter !== null) { state = {...state, ...{first: 0}} }
+
+        if(Object.keys(state).length > 0)
+            return state;
+
+        return null;
+
     }
 
     hasFooter() {
@@ -619,7 +640,7 @@ export class DataTable extends Component {
                     this.props.onColReorder({
                         dragIndex: dragIndex,
                         dropIndex: dropIndex,
-                        columns: this.columns
+                        columns: columns
                     });
                 }
             }
@@ -657,7 +678,7 @@ export class DataTable extends Component {
     }
 
     exportCSV() {
-        let data = this.props.value;
+        let data = this.processData();
         let csv = '\ufeff';
         let columns = React.Children.toArray(this.props.children);
         
@@ -691,7 +712,7 @@ export class DataTable extends Component {
         });
         
         if(window.navigator.msSaveOrOpenBlob) {
-            navigator.msSaveOrOpenBlob(blob, this.exportFilename + '.csv');
+            navigator.msSaveOrOpenBlob(blob, this.props.exportFilename + '.csv');
         }
         else {
             let link = document.createElement("a");
@@ -810,6 +831,20 @@ export class DataTable extends Component {
         return frozenColumns;
     }
 
+    getContainerWidth() {
+        if(this.props.scrollable) {
+            if(this.props.scrollWidth) {
+                return this.props.scrollWidth;
+            }
+            else if(this.props.frozenWidth && this.props.unfrozenWidth) {
+                return parseFloat(this.props.frozenWidth) + parseFloat(this.props.unfrozenWidth) + 'px';
+            }
+        }
+        else {
+            return this.props.style ? this.props.style.width : null;
+        }
+    }
+
     getScrollableColumns(columns) {
         let scrollableColumns = null;
         
@@ -821,6 +856,17 @@ export class DataTable extends Component {
         }
 
         return scrollableColumns;
+    }
+
+    getFrozenSelectionModeInColumn(columns) {
+        if(Array.isArray(columns)) {
+            for(let col of columns) {
+                if(col.props.selectionMode)
+                   return col.props.selectionMode;
+            }
+        }
+
+        return null;
     }
 
     createTableHeader(columns, columnGroup) {
@@ -835,7 +881,7 @@ export class DataTable extends Component {
 
     createTableBody(value, columns) {
         return <TableBody value={value} first={this.state.first} rows={this.state.rows} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection}
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
@@ -894,7 +940,7 @@ export class DataTable extends Component {
     }
     
     renderLoader() {
-        let iconClassName = classNames('fa fa-spin fa-2x', this.props.loadingIcon);
+        let iconClassName = classNames('ui-datatable-loading-icon pi-spin', this.props.loadingIcon);
         
         return (
             <div className="ui-datatable-loader">
@@ -919,8 +965,8 @@ export class DataTable extends Component {
         let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
         let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>;
         let tableContent = null;
-        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="fa fa-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
-        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="fa fa-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
+        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="pi pi-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
+        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
         let loader;
         
         if(this.props.loading) {
@@ -928,6 +974,7 @@ export class DataTable extends Component {
         }
 
         if(this.props.scrollable) {
+            this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
             let frozenColumns = this.getFrozenColumns(columns);
             let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
             let frozenView, scrollableView;

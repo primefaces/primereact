@@ -31,7 +31,7 @@ export class RowCheckbox extends Component {
     
     render() {
         let className = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.selected});
-        let iconClassName = classNames('ui-chkbox-icon ui-clickable', {'fa fa-check': this.props.selected});
+        let iconClassName = classNames('ui-chkbox-icon ui-clickable', {'pi pi-check': this.props.selected});
         
         return <div className="ui-chkbox ui-widget">
                  <div className="ui-helper-hidden-accessible">

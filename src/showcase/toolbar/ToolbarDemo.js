@@ -24,16 +24,16 @@ export class ToolbarDemo extends Component {
                 <div className="content-section implementation">
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
-                            <Button label="New" icon="fa-plus"/>
-                            <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
-                            <i className="fa fa-bars" style={{marginRight:'.25em'}}></i>
-                            <Button label="Save" icon="fa-check" className="ui-button-warning"/>
+                            <Button label="New" icon="pi pi-plus"/>
+                            <Button label="Upload" icon="pi pi-upload" className="ui-button-success"/>
+                            <i className="pi pi-bars" style={{marginRight:'.25em'}}></i>
+                            <Button label="Save" icon="pi pi-check" className="ui-button-warning"/>
                         </div>
                         <div className="ui-toolbar-group-right">
-                            <Button icon="fa-search"/>
-                            <i className="fa fa-bars" style={{marginRight:'.25em'}}></i>
-                            <Button icon="fa-refresh"/>
-                            <Button icon="fa-trash" className="ui-button-danger"/>
+                            <Button icon="pi pi-search"/>
+                            <i className="pi pi-bars" style={{marginRight:'.25em'}}></i>
+                            <Button icon="pi pi-calendar" className="ui-button-success"/>
+                            <Button icon="pi pi-times" className="ui-button-danger"/>
                         </div>
                     </Toolbar>
                 </div>
@@ -69,16 +69,16 @@ import {Toolbar} from 'primereact/components/toolbar/Toolbar';
                             {`
 <Toolbar>
     <div className="ui-toolbar-group-left">
-        <Button label="New" icon="fa-plus"/>
-        <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
-        <i className="fa fa-bars"></i>
-        <Button label="Save" icon="fa-check" className="ui-button-warning"/>
+        <Button label="New" icon="pi pi-plus"/>
+        <Button label="Upload" icon="pi pi-upload" className="ui-button-success"/>
+        <i className="pi pi-bars"></i>
+        <Button label="Save" icon="pi pi-check" className="ui-button-warning"/>
     </div>
     <div className="ui-toolbar-group-right">
-        <Button icon="fa-search"/>
-        <i className="fa fa-bars"></i>
-        <Button icon="fa-refresh"/>
-        <Button icon="fa-trash" className="ui-button-danger"/>
+        <Button icon="pi pi-search"/>
+        <i className="pi pi-bars"></i>
+        <Button icon="pi pi-calendar" className="ui-button-success"/>
+        <Button icon="pi pi-times" className="ui-button-danger"/>
     </div>
 </Toolbar>
 
@@ -174,16 +174,16 @@ export class ToolbarDemo extends Component {
                 <div className="content-section implementation">
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
-                            <Button label="New" icon="fa-plus"/>
-                            <Button label="Open" icon="fa-folder-open" className="ui-button-success"/>
-                            <i className="fa fa-bars"></i>
-                            <Button label="Save" icon="fa-check" className="ui-button-warning"/>
+                            <Button label="New" icon="pi pi-plus"/>
+                            <Button label="Upload" icon="pi pi-upload" className="ui-button-success"/>
+                            <i className="pi pi-bars"></i>
+                            <Button label="Save" icon="pi pi-check" className="ui-button-warning"/>
                         </div>
                         <div className="ui-toolbar-group-right">
-                            <Button icon="fa-search"/>
-                            <i className="fa fa-bars"></i>
-                            <Button icon="fa-refresh"/>
-                            <Button icon="fa-trash" className="ui-button-danger"/>
+                            <Button icon="pi pi-search"/>
+                            <i className="pi pi-bars"></i>
+                            <Button icon="pi pi-calendar" className="ui-button-success"/>
+                            <Button icon="pi pi-times" className="ui-button-danger"/>
                         </div>
                     </Toolbar>
                 </div>

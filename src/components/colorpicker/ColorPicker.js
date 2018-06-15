@@ -29,7 +29,7 @@ export class ColorPicker extends Component {
         defaultColor: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.any,
         disabled: PropTypes.bool,
         tabIndex: PropTypes.string,
         inputId: PropTypes.string,
@@ -162,7 +162,12 @@ export class ColorPicker extends Component {
     }
     
     updateColorSelector() {
-        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
+        var hsbValue = this.validateHSB({
+            h: this.hsbValue.h,
+            s: 100,
+            b: 100
+        });
+        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(hsbValue);
     }
 
     updateColorHandle() {
@@ -422,16 +427,9 @@ export class ColorPicker extends Component {
         return this.RGBtoHEX(this.HSBtoRGB(hsb));
     }
 
-    componentWillMount() {
-        this.updateHSBValue(this.props.value);
-    }
-
     componentDidMount() {
+        this.updateHSBValue(this.props.value);
         this.updateUI();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.updateHSBValue(nextProps.value);
     }
 
     componentDidUpdate() {
@@ -445,18 +443,24 @@ export class ColorPicker extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        let newValue = this.toHSB(nextProps.value);
-        let oldValue = this.hsbValue;
-        let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
-        
-        return !equals;
+        if(this.colorDragging) {
+            return false;
+        }
+        else {
+            let oldValue = this.hsbValue;
+            this.updateHSBValue(nextProps.value);
+            let newValue = this.toHSB(nextProps.value);
+            let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
+            
+            return !equals;
+        }
     }
 
     updateUI() {
-        this.updateColorHandle();
-        this.updateColorSelector();
         this.updateHue();
+        this.updateColorHandle();
         this.updateInput();
+        this.updateColorSelector();
     }
 
     alignPanel() {

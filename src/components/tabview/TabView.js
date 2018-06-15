@@ -50,9 +50,7 @@ export class TabView extends Component {
         this.state = {
             activeIndex: this.props.activeIndex || 0
         };
-    }
 
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
     
@@ -70,12 +68,14 @@ export class TabView extends Component {
         event.preventDefault();
     }
          
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.activeIndex !== this.props.activeIndex) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.activeIndex !== null && nextProps.activeIndex !== prevState.activeIndex) {
+            return {
                 activeIndex: nextProps.activeIndex
-            });
+            };
         }
+
+        return null;
     }
     
     renderTabHeader(tab, index) {
@@ -87,9 +87,9 @@ export class TabView extends Component {
         return (
             <li className={className} role="presentation" style={tab.props.headerStyle}>
                 <a role="tab" href={'#' + ariaControls} onClick={(e) => this.onTabHeaderClick(e, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected} >
-                    {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon fa', tab.props.leftIcon)}></span>}
+                    {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon ', tab.props.leftIcon)}></span>}
                     <span className="ui-tabview-title">{tab.props.header}</span>
-                    {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon fa', tab.props.rightIcon)}></span>}
+                    {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon ', tab.props.rightIcon)}></span>}
                 </a>
             </li>
         );
@@ -116,7 +116,7 @@ export class TabView extends Component {
 
             return (
                 <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={tab.props.contentStyle} role="tabpanel">
-                    {tab.props.children}
+                    {selected && tab.props.children}
                 </div>
             );
         })

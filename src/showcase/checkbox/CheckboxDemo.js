@@ -185,6 +185,12 @@ onCityChange(e) {
                                     <td>false</td>
                                     <td>When present, it specifies that the element value cannot be altered.</td>
                                 </tr>
+                                <tr>
+                                    <td>readOnly</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element cannot be typed.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

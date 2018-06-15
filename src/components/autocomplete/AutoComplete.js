@@ -105,19 +105,13 @@ export class AutoComplete extends Component {
         this.selectItem = this.selectItem.bind(this);
     }
     
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {        
         if(this.manualModelChange) {
             this.manualModelChange = false;
             return false;
         }
         else {
             return true;
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(!this.props.multiple) {
-            this.updateInputField(nextProps.value);
         }
     }
     
@@ -216,7 +210,11 @@ export class AutoComplete extends Component {
 
     formatValue(value) {
         if(value) {
-            if (this.props.field) {
+            if (this.props.selectedItemTemplate) {
+                const resolvedFieldData = this.props.selectedItemTemplate(value);
+                return resolvedFieldData ? resolvedFieldData : value;
+            } 
+            else if (this.props.field) {
                 const resolvedFieldData = ObjectUtils.resolveFieldData(value, this.props.field);
                 return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
             }
@@ -495,13 +493,10 @@ export class AutoComplete extends Component {
     renderChips() {
         if(this.props.value && this.props.value.length) {
             return this.props.value.map((val, index) => {
-                let tokenContent = this.props.selectedItemTemplate ? this.props.selectedItemTemplate(val) : 
-                    (<span className="ui-autocomplete-token-label">{this.props.field ? ObjectUtils.resolveFieldData(val, this.props.field) : val}</span>);
-                
                 return (
                     <li key={index + 'multi-item'} className="ui-autocomplete-token ui-state-highlight ui-corner-all">
-                        <span className="ui-autocomplete-token-icon fa fa-fw fa-close" onClick={(e) => this.removeItem(e, index)}></span>
-                        {tokenContent}
+                        <span className="ui-autocomplete-token-icon pi pi-fw pi-times" onClick={(e) => this.removeItem(e, index)}></span>
+                        <span className="ui-autocomplete-token-label">{this.formatValue(val)}</span>
                     </li>
                 );
             });
@@ -540,13 +535,13 @@ export class AutoComplete extends Component {
     
     renderDropdown() {
         return (
-            <Button type="button" icon="fa-fw fa-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
+            <Button type="button" icon="pi pi-fw pi-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
         );
     }
 
     renderLoader() {
         return (
-            <i ref={(el) => this.loader = el} className="ui-autocomplete-loader fa fa-circle-o-notch fa-spin fa-fw" style={{visibility: 'hidden'}}></i>
+            <i ref={(el) => this.loader = el} className="ui-autocomplete-loader pi pi-spinner pi-spin" style={{visibility: 'hidden'}}></i>
         );
     }
     
@@ -581,6 +576,10 @@ export class AutoComplete extends Component {
     }
 
     render() {
+        if(this.input && !this.props.multiple) {
+            this.updateInputField(this.props.value);
+        }
+
         let input, dropdown;
         let className = classNames('ui-autocomplete ui-widget', this.props.className, {
             'ui-autocomplete-dd': this.props.dropdown,

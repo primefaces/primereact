@@ -323,7 +323,7 @@ export class MultiSelect extends Component {
                     <label className="ui-multiselect-label ui-corner-all">{label}</label>
                 </div>
                 <div className="ui-multiselect-trigger ui-state-default ui-corner-right">
-                    <span className="fa fa-fw fa-caret-down ui-c"></span>
+                    <span className="ui-multiselect-trigger-icon pi pi-caret-down ui-c"></span>
                 </div>
                 <MultiSelectPanel ref={(el) => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     scrollHeight={this.props.scrollHeight}>

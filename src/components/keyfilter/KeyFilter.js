@@ -59,7 +59,11 @@ export default class KeyFilter {
         return e.charCode || e.keyCode || e.which;
     }
 
-    static onKeyPress(e,keyfilter) {
+    static onKeyPress(e,keyfilter, validateOnly) {
+        if(validateOnly) {
+            return;
+        }
+
         this.regex = KeyFilter.DEFAULT_MASKS[keyfilter]? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
         let browser = DomHandler.getBrowser();
 
@@ -85,5 +89,16 @@ export default class KeyFilter {
         if (!ok) {
             e.preventDefault();
         }
+    }
+
+    static validate(e, keyfilter) {
+        let value = e.target.value,
+        validatePattern = true;
+            
+        if (value && !keyfilter.test(value)) {
+            validatePattern = false;
+        }
+
+        return validatePattern;
     }
 }

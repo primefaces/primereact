@@ -50,6 +50,17 @@ export class InputMask extends Component {
         onChange: PropTypes.func
     }
 
+    constructor(props) {
+        super(props);
+        
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
+        this.onInput = this.onInput.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
     caret(first, last) {
         let range, begin, end;
 
@@ -305,6 +316,7 @@ export class InputMask extends Component {
     }
 
     checkVal(allow) {
+        this.isValueChecked = true;
         //try to place characters where they belong
         let test = this.input.value,
             lastMatch = -1,
@@ -434,7 +446,32 @@ export class InputMask extends Component {
         this.filled = this.input && this.input.value !== '';
     }
 
-    componentWillMount() {
+    updateValue() {
+        this.value = this.props.value;
+
+        if (this.input) {
+            if (this.value === undefined || this.value === null) {
+                this.input.value = '';
+            }
+            else {
+                this.input.value = this.value;
+                this.checkVal();
+            }
+
+            setTimeout(() => {
+                if(this.input) {
+                    this.writeBuffer();
+                    this.checkVal();
+                }
+            }, 10);
+
+            this.focusText = this.input.value;
+        }
+        
+        this.updateFilledState();
+    }
+
+    init() {
         this.tests = [];
         this.partialPosition = this.props.mask.length;
         this.len = this.props.mask.length;
@@ -483,35 +520,27 @@ export class InputMask extends Component {
     }
 
     componentDidMount() {
-        var _this = this;
-        this.value = this.props.value;
+        this.init();
+        this.updateValue();
+    }
 
-        if (this.input) {
-            if (this.value === undefined || this.value === null) {
-                this.input.value = '';
-            }
-            else {
-                this.input.value = this.value;
-                this.checkVal();
-            }
-
-            setTimeout(() => {
-                _this.writeBuffer();
-                _this.checkVal();
-            }, 10);
-
-            this.focusText = this.input.value;
+    shouldComponentUpdate(nextProps, nextState) {
+        if(nextProps.value === this.props.value) {
+            return false;
         }
-        
-        this.updateFilledState();
+        return true;
     }
 
     render() {
+        if(this.input && this.input.value !== this.props.value) {
+            this.updateValue();
+        }
+
         return (
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
-                onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onKeyPress={this.onKeyPress.bind(this)}
-                onInput={this.onInput.bind(this)} onPaste={this.handleInputChange.bind(this)} required={this.props.required}/>
+                onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
+                onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required}/>
         );
     }
 

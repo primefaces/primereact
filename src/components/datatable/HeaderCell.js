@@ -20,7 +20,9 @@ export class HeaderCell extends Component {
             if(DomHandler.hasClass(targetNode, 'ui-sortable-column') || DomHandler.hasClass(targetNode, 'ui-column-title') || DomHandler.hasClass(targetNode, 'ui-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
-                    sortField: this.props.field
+                    sortField: this.props.field,
+                    sortFunction: this.props.sortFunction,
+                    sortable: this.props.sortable
                 });
             }
         }
@@ -95,8 +97,8 @@ export class HeaderCell extends Component {
                         'ui-selection-column': this.props.selectionMode}, this.props.headerClassName||this.props.className);
 
         if(this.props.sortable) {
-            var sortIcon = sorted ? sortOrder < 0 ? 'fa-sort-desc' : 'fa-sort-asc': 'fa-sort';
-            sortIconElement = <span className={classNames('ui-sortable-column-icon fa fa-fw', sortIcon)}></span>;
+            var sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            sortIconElement = <span className={classNames('ui-sortable-column-icon pi pi-fw', sortIcon)}></span>;
         }
 
         if(this.props.filter) {

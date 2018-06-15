@@ -82,9 +82,7 @@ export class Dialog extends Component {
         this.moveOnTop = this.moveOnTop.bind(this);
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
-    }
 
-    componentWillMount() {
         this.id = this.props.id || UniqueComponentId();
     }
 
@@ -417,19 +415,6 @@ export class Dialog extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.state.visible !== nextProps.visible) {
-            if (nextProps.visible)
-                this.show();
-            else {
-                if(this.preventVisibleChangePropagation)
-                    this.preventVisibleChangePropagation = false;
-                else
-                    this.hide();
-            }
-        }
-    }
-
     componentDidMount() {
         if(this.state.visible) {
             this.show();
@@ -437,12 +422,24 @@ export class Dialog extends Component {
         }
     }
 
-    componentDidUpdate() {
+    getSnapshotBeforeUpdate(prevProps, prevState) {
         if(this.props.autoAlign && this.state.visible) {
             let height = DomHandler.getOuterHeight(this.container);
             if(height !== this.currentHeight) {
                 this.currentHeight = height;
                 this.positionOverlay();
+            }
+        }
+
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.visible !== this.props.visible) {
+            if (this.props.visible)
+                this.show();
+            else {
+                this.hide();
             }
         }
     }
@@ -457,7 +454,7 @@ export class Dialog extends Component {
         if(this.props.closable) {
             return (
                 <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
-                    <span className="fa fa-fw fa-close"></span>
+                    <span className="pi pi-times"></span>
                 </a>
             );
         }

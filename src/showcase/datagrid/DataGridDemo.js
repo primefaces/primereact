@@ -30,7 +30,7 @@ export class DataGridDemo extends Component {
                     <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
-                    <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
+                    <i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
                 </Panel>
             </div>
         );
@@ -349,7 +349,7 @@ export class DataGridDemo extends Component {
                     <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
-                    <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
+                    <i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
                 </Panel>
             </div>
         );

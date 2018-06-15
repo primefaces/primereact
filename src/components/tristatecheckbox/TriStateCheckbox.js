@@ -65,7 +65,7 @@ export class TriStateCheckbox extends Component {
     render() {
         let containerClass = classNames('ui-chkbox ui-tristatecheckbox ui-widget', this.props.className);
         let boxClass = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active':(this.props.value || !this.props.value) && this.props.value !== null});
-        let iconClass = classNames('ui-chkbox-icon ui-c', {'fa fa-check': this.props.value === true, 'fa fa-close': this.props.value === false});
+        let iconClass = classNames('ui-chkbox-icon ui-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
 
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>

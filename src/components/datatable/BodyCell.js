@@ -95,6 +95,7 @@ export class BodyCell extends Component {
             if(this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
                 if(focusable) {
+                    focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
                 
@@ -111,14 +112,14 @@ export class BodyCell extends Component {
 
     render() {
         let content, header;
-        let cellClassName = classNames(this.props.headerClassName||this.props.className, {
+        let cellClassName = classNames(this.props.bodyClassName||this.props.className, {
                                 'ui-selection-column': this.props.selectionMode,
                                 'ui-editable-column': this.props.editor,
                                 'ui-cell-editing': this.state.editing
                             });
 
         if(this.props.expander) {
-            let iconClassName = classNames('ui-row-toggler fa fa-fw ui-clickable', {'fa-chevron-circle-down': this.props.expanded, 'fa-chevron-circle-right': !this.props.expanded});
+            let iconClassName = classNames('ui-row-toggler pi pi-fw ui-clickable', {'pi-chevron-circle-down': this.props.expanded, 'pi-chevron-circle-right': !this.props.expanded});
             content = <a onClick={this.onExpanderClick}>
                         <span className={iconClassName}></span>
                       </a>;
@@ -154,12 +155,16 @@ export class BodyCell extends Component {
         if(this.props.responsive) {
             header = <span className="ui-column-title">{this.props.header}</span>;
         }
+
+        /* eslint-disable */
+        let editorKeyHelper = this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+        /* eslint-enable */
                        
         return (
             <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.bodyStyle||this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan}>
                 {header}
-                {this.props.editor && <a ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>}
+                {editorKeyHelper}
                 <span className="ui-cell-data">{content}</span>
             </td>
         );

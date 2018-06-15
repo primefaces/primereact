@@ -64,8 +64,9 @@ interface DataTableProps {
     rowGroupMode?: string;
     autoLayout?:boolean;
     rowClassName?(rowData: any): object;
-    rowGroupHeaderTemplate?(): void;
-    rowGroupFooterTemplate?(): void;
+    rowGroupHeaderTemplate?(data: any, index: number): void;
+    rowGroupFooterTemplate?(data: any, index: number): void;
+    groupField?: string;
     loading?:boolean;
     loadingIcon?:string;
     onColumnResizeEnd?(e: {element: any, delta: number}): void;
@@ -82,6 +83,7 @@ interface DataTableProps {
     onContextMenuSelect?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
     onColReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
+    onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {}

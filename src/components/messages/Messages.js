@@ -10,13 +10,17 @@ export class Messages extends Component {
     static defaultProps = {
         id: null,
         className: null,
-        style: null
+        style: null,
+        onRemove: null,
+        onClick: null
     }
 
     static propTypes = {
         id: PropTypes.string,
         className: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        onRemove: PropTypes.func,
+        onClick: PropTypes.func
     };
 
     constructor(props) {

@@ -89,7 +89,7 @@ export class ScrollPanelDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="javascript">
                             {`
-import {ScrollPanel} from 'primereact/components/scrollpanel/ScrollPanelDoc';
+import {ScrollPanel} from 'primereact/components/scrollpanel/ScrollPanel';
 
 `}
                         </CodeHighlight>

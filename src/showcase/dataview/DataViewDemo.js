@@ -64,7 +64,7 @@ export class DataViewDemo extends Component {
                     </div>
 
                     <div className="ui-g-12 ui-md-1 search-icon" style={{marginTop:'40px'}}>
-                        <Button icon="fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
+                        <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                     </div>
                 </div>
             );
@@ -76,7 +76,7 @@ export class DataViewDemo extends Component {
                         <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
                         <div className="car-detail">{car.year} - {car.color}</div>
                         <hr className="ui-widget-content" style={{ borderTop: 0 }} />
-                        <Button icon="fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
+                        <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                     </Panel>
                 </div>
             );
@@ -592,7 +592,7 @@ export class DataViewDemo extends Component {
                     </div>
 
                     <div className="ui-g-12 ui-md-1 search-icon" style={{marginTop:'40px'}}>
-                        <Button icon="fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
+                        <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                     </div>
                 </div>
             );
@@ -604,7 +604,7 @@ export class DataViewDemo extends Component {
                     <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <hr className="ui-widget-content" style={{ borderTop: 0 }} />
-                    <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
+                    <i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer' }}></i>
                 </Panel>
                 </div>
             );

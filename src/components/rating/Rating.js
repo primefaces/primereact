@@ -35,7 +35,7 @@ export class Rating extends Component {
     }
 
     rate(event, i) {
-        if(!this.props.readonly && !this.props.disabled) {
+        if(!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: i
@@ -46,7 +46,7 @@ export class Rating extends Component {
     }
     
     clear(event) {
-        if(!this.props.readonly && !this.props.disabled) {
+        if(!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: null
@@ -56,16 +56,17 @@ export class Rating extends Component {
         event.preventDefault();
     }
 
-    componentWillReceiveProps(nextProps) {
-        var newValue = nextProps.value;
-
-        if (newValue !== this.state.value) {
-            this.setState({value: newValue});
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.value !== prevState.value) {
+            return {
+                value: nextProps.value
+            };
         } 
+        return null;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(nextState.value === this.state.value) {
+        if(nextState.value === this.state.value && nextProps.disabled === this.props.disabled) {
             return false;
         }
 
@@ -77,7 +78,7 @@ export class Rating extends Component {
                 
         if(this.props.cancel) {
             var cancel = <a onClick={this.clear}>
-                        <span className="fa fa-ban"></span>
+                        <span className="ui-rating-icon pi pi-ban"></span>
                       </a>;
         }
 
@@ -87,9 +88,9 @@ export class Rating extends Component {
         }
         
         var stars = starsArray.map((value) => {
-            var iconClass = classNames('fa', {
-                'fa-star-o': (!this.props.value || value > this.props.value), 
-                'fa-star': (value <= this.props.value)
+            var iconClass = classNames('ui-rating-icon pi', {
+                'pi-star-o': (!this.state.value || value > this.state.value),
+                'pi-star': (value <= this.state.value)
             });
             
             return <a onClick={(e) => this.rate(e, value)} key={value}>

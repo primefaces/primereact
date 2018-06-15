@@ -40,7 +40,7 @@ export class GrowlDemo extends Component {
     }
 
     showCustom() {
-        let summary = <span><i className="fa fa-check" /> <strong>PrimeReact</strong></span>;
+        let summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
         let detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px"/> 
 
         this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
@@ -467,7 +467,7 @@ export class GrowlDemo extends Component {
     }
 
     showCustom() {
-        let summary = <span><i className="fa fa-check" /> <strong>PrimeReact</strong></span>;
+        let summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
         let detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px"/> 
 
         this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });

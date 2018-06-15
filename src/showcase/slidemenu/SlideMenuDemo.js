@@ -20,10 +20,10 @@ export class SlideMenuDemo extends Component {
         this.items = [
             {
                 label: 'File',
-                icon: 'fa-file-o',
+                icon: 'fa fa-fw fa-file-o',
                 items: [{
                         label: 'New', 
-                        icon: 'fa-plus',
+                        icon: 'fa fa-fw fa-plus',
                         items: [
                             {label: 'Project'},
                             {label: 'Other'},
@@ -36,22 +36,22 @@ export class SlideMenuDemo extends Component {
             },
             {
                 label: 'Edit',
-                icon: 'fa-edit',
+                icon: 'fa fa-fw fa-edit',
                 items: [
-                    {label: 'Undo', icon: 'fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa-mail-reply'}
+                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
                 ]
             },
             {
                 label: 'Help',
-                icon: 'fa-question',
+                icon: 'fa fa-fw fa-question',
                 items: [
                     {
                         label: 'Contents'
                     },
                     {
                         label: 'Search', 
-                        icon: 'fa-search', 
+                        icon: 'fa fa-fw fa-search',
                         items: [
                             {
                                 label: 'Text', 
@@ -69,28 +69,28 @@ export class SlideMenuDemo extends Component {
             },
             {
                 label: 'Actions',
-                icon: 'fa-gear',
+                icon: 'fa fa-fw fa-gear',
                 items: [
                     {
                         label: 'Edit',
-                        icon: 'fa-refresh',
+                        icon: 'fa fa-fw fa-refresh',
                         items: [
-                            {label: 'Save', icon: 'fa-save'},
-                            {label: 'Update', icon: 'fa-save'},
+                            {label: 'Save', icon: 'fa fa-fw fa-save'},
+                            {label: 'Update', icon: 'fa fa-fw fa-save'},
                         ]
                     },
                     {
                         label: 'Other',
-                        icon: 'fa-phone',
+                        icon: 'fa fa-fw fa-phone',
                         items: [
-                            {label: 'Delete', icon: 'fa-minus'}
+                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
                         ]
                     }
                 ]
             },
             {separator: true},
             {
-                label: 'Quit', icon: 'fa-minus'
+                label: 'Quit', icon: 'fa fa-fw fa-minus'
             }
         ];
 
@@ -109,7 +109,7 @@ export class SlideMenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
-                    <Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick}></Button>
+                    <Button type="button" icon="pi pi-bars" label="Show" onClick={this.onButtonClick}></Button>
                 </div>
 
                 <SlideMenuDoc />
@@ -158,10 +158,10 @@ export class SlideMenuDemo extends Component {
         this.items = [
             {
                 label: 'File',
-                icon: 'fa-file-o',
+                icon: 'fa fa-fw fa-file-o',
                 items: [{
                         label: 'New', 
-                        icon: 'fa-plus',
+                        icon: 'fa fa-fw fa-plus',
                         items: [
                             {label: 'Project'},
                             {label: 'Other'},
@@ -174,10 +174,10 @@ export class SlideMenuDemo extends Component {
             },
             {
                 label: 'Edit',
-                icon: 'fa-edit',
+                icon: 'fa fa-fw fa-edit',
                 items: [
-                    {label: 'Undo', icon: 'fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa-mail-reply'}
+                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
                 ]
             }
         ];
@@ -195,7 +195,7 @@ export class SlideMenuDemo extends Component {
 <CodeHighlight className="html">
 {`
 <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
-<Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick}></Button>
+<Button type="button" icon="pi pi-bars" label="Show" onClick={this.onButtonClick}></Button>
 
 `}
 </CodeHighlight>
@@ -393,10 +393,10 @@ export class SlideMenuDemo extends Component {
         this.items = [
             {
                 label: 'File',
-                icon: 'fa-file-o',
+                icon: 'fa fa-fw fa-file-o',
                 items: [{
                         label: 'New', 
-                        icon: 'fa-plus',
+                        icon: 'fa fa-fw fa-plus',
                         items: [
                             {label: 'Project'},
                             {label: 'Other'},
@@ -409,22 +409,22 @@ export class SlideMenuDemo extends Component {
             },
             {
                 label: 'Edit',
-                icon: 'fa-edit',
+                icon: 'fa fa-fw fa-edit',
                 items: [
-                    {label: 'Undo', icon: 'fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa-mail-reply'}
+                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
                 ]
             },
             {
                 label: 'Help',
-                icon: 'fa-question',
+                icon: 'fa fa-fw fa-question',
                 items: [
                     {
                         label: 'Contents'
                     },
                     {
                         label: 'Search', 
-                        icon: 'fa-search', 
+                        icon: 'fa fa-fw fa-search',
                         items: [
                             {
                                 label: 'Text', 
@@ -442,28 +442,28 @@ export class SlideMenuDemo extends Component {
             },
             {
                 label: 'Actions',
-                icon: 'fa-gear',
+                icon: 'fa fa-fw fa-gear',
                 items: [
                     {
                         label: 'Edit',
-                        icon: 'fa-refresh',
+                        icon: 'fa fa-fw fa-refresh',
                         items: [
-                            {label: 'Save', icon: 'fa-save'},
-                            {label: 'Update', icon: 'fa-save'},
+                            {label: 'Save', icon: 'fa fa-fw fa-save'},
+                            {label: 'Update', icon: 'fa fa-fw fa-save'},
                         ]
                     },
                     {
                         label: 'Other',
-                        icon: 'fa-phone',
+                        icon: 'fa fa-fw fa-phone',
                         items: [
-                            {label: 'Delete', icon: 'fa-minus'}
+                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
                         ]
                     }
                 ]
             },
             {separator: true},
             {
-                label: 'Quit', icon: 'fa-minus'
+                label: 'Quit', icon: 'fa fa-fw fa-minus'
             }
         ];
 
@@ -482,7 +482,7 @@ export class SlideMenuDemo extends Component {
 
                     <h3>Popup</h3>
                     <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
-                    <Button type="button" icon="fa fa-list" label="Show" onClick={this.onButtonClick}></Button>
+                    <Button type="button" icon="pi pi-bars" label="Show" onClick={this.onButtonClick}></Button>
                 </div>
             </div>
         )

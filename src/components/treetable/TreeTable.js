@@ -1,152 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { TreeTableHeader } from './TreeTableHeader';
+import { TreeTableFooter } from './TreeTableFooter';
+import { UITreeRow } from './UITreeRow';
 import ObjectUtils from '../utils/ObjectUtils';
-import {Column} from "../column/Column"
-
-export class UITreeRow extends Component {
-
-    static defaultProps = {
-        node: null,
-        level: null,
-        treeTable: null,
-        parentNode: null,
-        labelExpand: "Expand",
-        labelCollapse: "Collapse"
-    }
-
-    static propsTypes = {
-        node: PropTypes.any,
-        level: PropTypes.any,
-        treeTable: PropTypes.any,
-        parentNode: PropTypes.any,
-        labelExpand: PropTypes.string,
-        labelCollapse: PropTypes.string
-    }
-
-    constructor(props) {
-        super(props);
-        this.node = this.props.node;
-        this.node.parent = this.props.parentNode;
-        this.treeTable = this.props.treeTable;
-        this.state = { expanded: this.node.expanded };
-    }
-
-    toggle(event) {
-        if (this.state.expanded && this.treeTable.props.onNodeCollapse)
-            this.treeTable.props.onNodeCollapse({ originalEvent: event, node: this.node });
-        else if (this.treeTable.props.onNodeExpand)
-            this.treeTable.props.onNodeExpand({ originalEvent: event, node: this.node });
-
-        this.setState({ expanded: !this.state.expanded });
-
-        event.preventDefault();
-    }
-
-    isLeaf() {
-        return this.node.leaf === false ? false : !(this.node.children && this.node.children.length);
-    }
-
-    isSelected() {
-        return this.treeTable.isSelected(this.node);
-    }
-
-    onRowClick(event) {
-        this.treeTable.onRowClick(event, this.node);
-    }
-
-    onRowTouchEnd() {
-        this.treeTable.onRowTouchEnd();
-    }
-
-    resolveFieldData(data, field) {
-        if (data && field) {
-            if (field.indexOf('.') === -1) {
-                return data[field];
-            }
-            else {
-                var fields = field.split('.');
-                var value = data;
-                for (var i = 0, len = fields.length; i < len; ++i) {
-                    value = value[fields[i]];
-                }
-                return value;
-            }
-        }
-        else {
-            return null;
-        }
-    }
-
-    render() {
-        var tableRowClass = classNames('ui-treetable-row', {
-            'ui-state-highlight': this.isSelected(),
-            'ui-treetable-row-selectable': this.treeTable.props.selectionMode && this.node.selectable !== false
-        });
-
-        var childTbody = this.node.children && this.node.children.map((childNode, index) => {
-            return (<UITreeRow key={index} node={childNode} index={index} level={this.props.level + 1} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this.treeTable} parentNode={this.node} />)
-        });
-
-        return (
-            <tbody>
-                <tr className={tableRowClass}>
-                    {
-                        this.treeTable.columns && this.treeTable.columns.map((col, i) => {
-                            var toggler = null,
-                                checkbox = null;
-
-                            if (i === 0) {
-                                var togglerClass = classNames('ui-treetable-toggler fa fa-fw ui-c', {
-                                    'fa-caret-down': this.state.expanded,
-                                    'fa-caret-right': !this.state.expanded
-                                }),
-                                    togglerStyle = { 'marginLeft': this.props.level * 16 + 'px', 'visibility': this.isLeaf() ? 'hidden' : 'visible' };
-
-                                toggler = (<a className={togglerClass} style={togglerStyle} onClick={this.toggle.bind(this)} title={this.state.expanded ? this.props.labelCollapse : this.props.labelExpand}><span></span></a>);
-
-                                if (this.treeTable.props.selectionMode === 'checkbox') {
-                                    var checkboxIconClass = classNames('ui-chkbox-icon ui-c fa', {
-                                        'fa-check': this.isSelected(),
-                                        'fa-minus': this.node.partialSelected
-                                    });
-
-                                    checkbox = (
-                                        <div className="ui-chkbox ui-treetable-checkbox">
-                                            <div className="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
-                                                <span className={checkboxIconClass}></span>
-                                            </div>
-                                        </div>
-                                    );
-                                }
-                            }
-
-                            var rowData = (<span>{ObjectUtils.resolveFieldData(this.node.data, col.props.field)}</span>);
-
-                            return (
-                                <td key={'col_' + i} style={col.props.style} className={col.props.className} onClick={this.onRowClick.bind(this)} onTouchEnd={this.onRowTouchEnd.bind(this)}>
-                                    {toggler}
-                                    {checkbox}
-                                    {rowData}
-                                </td>
-                            );
-
-                        })
-                    }
-                </tr>
-                {
-                    this.node.children && this.state.expanded && (<tr className="ui-treetable-row" style={{ 'display': 'table-row' }}>
-                        <td colSpan={this.treeTable.columns.length} className="ui-treetable-child-table-container">
-                            <table>
-                                {childTbody}
-                            </table>
-                        </td>
-                    </tr>)
-                }
-            </tbody>
-        );
-    }
-}
+import { Column } from "../column/Column"
 
 export class TreeTable extends Component {
     static defaultProps = {
@@ -162,6 +21,11 @@ export class TreeTable extends Component {
         metaKeySelection: true,
         header: '',
         footer: '',
+        sortField: null,
+        sortOrder: 1,
+        multiSortMeta: null,
+        sortMode: 'single',
+        onSort: null,
         onNodeSelect: null,
         onNodeUnselect: null,
         onNodeExpand: null,
@@ -181,14 +45,154 @@ export class TreeTable extends Component {
         metaKeySelection: PropTypes.bool,
         header: PropTypes.string,
         footer: PropTypes.string,
+        sortField: PropTypes.string,
+        sortOrder: PropTypes.number,
+        multiSortMeta: PropTypes.array,
+        sortMode: PropTypes.string,
+        onSort: PropTypes.func,
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func,
         onNodeExpand: PropTypes.func,
         onNodeCollapse: PropTypes.func
     }
 
+    constructor(props) {
+        super(props);
+        this.value = [...this.props.value];
+
+        this.state = {
+            sortField: props.sortField,
+            sortOrder: props.sortOrder,
+            multiSortMeta: props.multiSortMeta
+        };
+
+        this.onSort = this.onSort.bind(this);
+    }
+
+    onSort(event) {
+        let sortField = event.sortField;
+        let sortOrder = (this.state.sortField === event.sortField) ? this.state.sortOrder * -1 : 1;
+        let multiSortMeta;
+
+        this.columnSortable = event.sortable;
+        this.columnSortFunction = event.sortFunction;
+
+        if (this.props.sortMode === 'multiple') {
+            let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
+            multiSortMeta = this.state.multiSortMeta;
+            if (!multiSortMeta || !metaKey) {
+                multiSortMeta = [];
+            }
+
+            this.addSortMeta({ field: sortField, order: sortOrder }, multiSortMeta);
+        }
+
+        this.setState({
+            sortField: sortField,
+            sortOrder: sortOrder,
+            multiSortMeta: multiSortMeta
+        });
+
+        if (this.props.onSort) {
+            this.props.onSort({
+                sortField: sortField,
+                sortOrder: sortOrder,
+                multiSortMeta: multiSortMeta
+            });
+        }
+    }
+
+    addSortMeta(meta, multiSortMeta) {
+        let index = -1;
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if (multiSortMeta[i].field === meta.field) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index >= 0)
+            multiSortMeta[index] = meta;
+        else
+            multiSortMeta.push(meta);
+    }
+
+    sortSingle(value) {
+        if (this.columnSortable && this.columnSortable === 'custom' && this.columnSortFunction) {
+            value = this.columnSortFunction({
+                field: this.state.sortField,
+                order: this.state.sortOrder
+            });
+        }
+        else {
+            value.sort((data1, data2) => {
+                let value1 = ObjectUtils.resolveFieldData(data1.data, this.state.sortField);
+                let value2 = ObjectUtils.resolveFieldData(data2.data, this.state.sortField);
+                let result = null;
+
+                if (value1 == null && value2 != null)
+                    result = -1;
+                else if (value1 != null && value2 == null)
+                    result = 1;
+                else if (value1 == null && value2 == null)
+                    result = 0;
+                else if (typeof value1 === 'string' && typeof value2 === 'string')
+                    result = value1.localeCompare(value2, undefined, { numeric: true });
+                else
+                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+                return (this.state.sortOrder * result);
+            });
+        }
+
+        for(let i = 0; i < value.length; i++) {
+            let child = value[i].children;
+            if(child) {
+                this.sortSingle(child);
+            }
+        }
+
+        return value;
+    }
+
+    sortMultiple(value) {
+        value.sort((data1, data2) => {
+            return this.multisortField(data1, data2, this.state.multiSortMeta, 0);
+        });
+
+        for(let i = 0; i < value.length; i++) {
+            let child = value[i].children;
+            if(child) {
+                this.sortMultiple(child);
+            }
+        }
+
+        return value;
+    }
+
+    multisortField(data1, data2, multiSortMeta, index) {
+        let value1 = ObjectUtils.resolveFieldData(data1.data, this.state.multiSortMeta[index].field);
+        let value2 = ObjectUtils.resolveFieldData(data2.data, this.state.multiSortMeta[index].field);
+        let result = null;
+
+        if (typeof value1 === 'string' || value1 instanceof String) {
+            if (value1.localeCompare && (value1 !== value2)) {
+                return (this.state.multiSortMeta[index].order * value1.localeCompare(value2, undefined, { numeric: true }));
+            }
+        }
+        else {
+            result = (value1 < value2) ? -1 : 1;
+        }
+
+        if (value1 === value2) {
+            return (this.state.multiSortMeta.length - 1) > (index) ? (this.multisortField(data1, data2, this.state.multiSortMeta, index + 1)) : 0;
+        }
+
+        return (this.state.multiSortMeta[index].order * result);
+    }
+
     onRowClick(event, node) {
-        var eventTarget = (event.target);
+        let eventTarget = (event.target);
         if (eventTarget.className && eventTarget.className.indexOf('ui-treetable-toggler') === 0) {
             return;
         }
@@ -197,9 +201,9 @@ export class TreeTable extends Component {
                 return;
             }
 
-            var metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
-            var index = this.findIndexInSelection(node);
-            var selected = (index >= 0);
+            let metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
+            let index = this.findIndexInSelection(node);
+            let selected = (index >= 0);
 
             if (this.isCheckboxSelectionMode()) {
                 if (selected) {
@@ -241,7 +245,7 @@ export class TreeTable extends Component {
             }
             else {
                 if (metaSelection) {
-                    var metaKey = (event.metaKey || event.ctrlKey);
+                    let metaKey = (event.metaKey || event.ctrlKey);
 
                     if (selected && metaKey) {
                         if (this.isSingleSelectionMode()) {
@@ -349,14 +353,14 @@ export class TreeTable extends Component {
     }
 
     findIndexInSelection(node) {
-        var index = -1;
+        let index = -1;
 
         if (this.props.selectionMode && this.selection) {
             if (this.isSingleSelectionMode()) {
                 index = (ObjectUtils.equals(this.selection, node)) ? 0 : - 1;
             }
             else {
-                for (var i = 0; i < this.selection.length; i++) {
+                for (let i = 0; i < this.selection.length; i++) {
                     if (ObjectUtils.equals(this.selection[i], node)) {
                         index = i;
                         break;
@@ -370,9 +374,9 @@ export class TreeTable extends Component {
 
     propagateSelectionUp(node, select) {
         if (node.children && node.children.length) {
-            var selectedCount = 0;
-            var childPartialSelected = false;
-            for (var child of node.children) {
+            let selectedCount = 0;
+            let childPartialSelected = false;
+            for (let child of node.children) {
                 if (this.isSelected(child)) {
                     selectedCount++;
                 }
@@ -387,7 +391,7 @@ export class TreeTable extends Component {
             }
             else {
                 if (!select) {
-                    var index = this.findIndexInSelection(node);
+                    let index = this.findIndexInSelection(node);
                     if (index >= 0) {
                         this.selection = this.selection.filter((val, i) => i !== index);
                     }
@@ -400,14 +404,14 @@ export class TreeTable extends Component {
             }
         }
 
-        var parent = node.parent;
+        let parent = node.parent;
         if (parent) {
             this.propagateSelectionUp(parent, select);
         }
     }
 
     propagateSelectionDown(node, select) {
-        var index = this.findIndexInSelection(node);
+        let index = this.findIndexInSelection(node);
 
         if (select && index === -1) {
             this.selection = [...this.selection || [], node];
@@ -419,7 +423,7 @@ export class TreeTable extends Component {
         node.partialSelected = false;
 
         if (node.children && node.children.length) {
-            for (var child of node.children) {
+            for (let child of node.children) {
                 this.propagateSelectionDown(child, select);
             }
         }
@@ -443,70 +447,79 @@ export class TreeTable extends Component {
 
     hasFooter() {
         if (this.columns) {
-            var columnsArr = this.columns;
-            for (var i = 0; i < columnsArr.length; i++) {
-                if (columnsArr[i].footer) {
+            for (let i = 0; i < this.columns.length; i++) {
+                if (this.columns[i].footer) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
+    processData() {
+        let data = this.value;
+        if (data && data.length) {
+            if (this.state.sortField || this.state.multiSortMeta) {
+                if (this.props.sortMode === 'single')
+                    data = this.sortSingle(data);
+                else if (this.props.sortMode === 'multiple')
+                    data = this.sortMultiple(data);
+            }
+        }
+
+        return data;
+    }
+
+    createTreeTableHeader() {
+        return <TreeTableHeader columns={this.columns} onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} multiSortMeta={this.state.multiSortMeta}></TreeTableHeader>;
+    }
+
+    createTreeTableFooter() {
+        if (this.hasFooter()) {
+            return <TreeTableFooter columns={this.columns}></TreeTableFooter>;
+        }
+        else {
+            return null;
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let state = {};
+
+        if(this.props.sortOrder !== prevProps.sortOrder && this.props.sortOrder !== prevState.sortOrder) { state = {sortOrder: this.props.sortOrder}; }
+        if(this.props.sortField !== prevProps.sortField && this.props.sortField !== prevState.sortField) { state = {...state, ...{sortField: this.props.sortField}}; }
+        if(this.props.multiSortMeta !== prevProps.multiSortMeta && this.props.multiSortMeta !== prevState.multiSortMeta) { state = {...state, ...{multiSortMeta: this.props.multiSortMeta}}; }
+
+        if(Object.keys(state).length > 0)
+            this.setState(state);
+    }
+
     render() {
+        if (this.props.value && !ObjectUtils.equalsByValue(this.props.value, this.value)) { 
+            this.value = [...this.props.value]; 
+        }
+
+        let value = this.processData();
         this.columns = React.Children.map(this.props.children, (element, i) => {
             if (element && element.type === Column)
                 return element;
         });
 
-        var treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
+        let treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
 
-        var header =
-            this.props.header && <div className="ui-treetable-header ui-widget-header">
-                    {this.props.header}
-                </div>,
-            footer = this.props.footer && <div className="ui-treetable-footer ui-widget-header">
-                {this.props.footer}
-            </div>;
+        let headerFacet = this.props.header && <div className="ui-treetable-header ui-widget-header">{this.props.header}</div>,
+            footerFacet = this.props.footer && <div className="ui-treetable-footer ui-widget-header">{this.props.footer}</div>;
 
-        var thead = (
-            <thead>
-                <tr>
-                    {
-                        this.columns && this.columns.map((col, i) => {
-                            var colStyleClass = classNames('ui-state-default ui-unselectable-text', col.props.className);
-
-                            return (<th key={'headerCol_' + i} className={colStyleClass} style={col.props.style}>
-
-                                <span className="ui-column-title">{col.props.header}</span>
-                            </th>);
-                        })
-                    }
-                </tr>
-            </thead>
-        ),
-            tfoot = (
-                this.hasFooter() && (<tfoot>
-                    <tr>
-                        {
-                            this.columns && this.columns.map((col, i) => {
-                                var colStyleClass = classNames('ui-state-default', col.props.className);
-
-                                return (<td key={'footerCol_' + i} className={colStyleClass} style={col.props.style}>
-                                    <span className="ui-column-footer">{col.props.footer}</span>
-                                </td>);
-                            })
-                        }
-                    </tr>
-                </tfoot>)
-            ),
-            tbody = this.props.value && this.props.value.map((node, index) => {
-                return (<UITreeRow key={'row_' + index} node={node} index={index} level={0} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this} parentNode={this.props.value} />)
+        let thead = this.createTreeTableHeader(),
+            tfoot = this.createTreeTableFooter(),
+            tbody = value && value.map((node, index) => {
+                return (<UITreeRow key={'row_' + index} node={node} index={index} level={0} labelExpand={this.props.labelExpand} labelCollapse={this.props.labelCollapse} treeTable={this} parentNode={value} />)
             });
 
         return (
             <div id={this.props.id} className={treeTableClass} style={this.props.style}>
-                {header}
+                {headerFacet}
                 <div className="ui-treetable-tablewrapper">
                     <table className="ui-widget-content">
                         {thead}
@@ -514,7 +527,7 @@ export class TreeTable extends Component {
                         {tbody}
                     </table>
                 </div>
-                {footer}
+                {footerFacet}
             </div>);
     }
 }

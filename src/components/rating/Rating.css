@@ -1,6 +1,9 @@
 .ui-rating a {
-    margin-left: .25em;
     cursor: pointer;
+}
+
+.ui-rating {
+    font-size: 1.25em;
 }
 
 .ui-rating.ui-state-disabled {

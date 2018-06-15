@@ -28,12 +28,12 @@ export class MenuItem extends Component{
     render() {
         var className=classNames('ui-menuitem-link ui-corner-all',{'ui-state-disabled':this.item.disabled},
             {'ui-menuitem-link-parent':this.item.items && this.props.parentMenu==='SlideMenu'});
-        var iconClass=classNames('ui-menuitem-icon fa fa-fw',this.item.icon?this.item.icon:null);
-        var rootClass=classNames('ui-submenu-icon fa fa-fw',{' fa-caret-down':this.props.root},{' fa-caret-right':!this.props.root})
+        var iconClass=classNames('ui-menuitem-icon',this.item.icon?this.item.icon:null);
+        var rootClass=classNames('ui-submenu-icon pi pi-fw',{' pi-caret-down':this.props.root},{'pi-caret-right':!this.props.root})
         if(this.item.url){
             return (
                 <a href={this.item.url || '#'} className={className} target={this.item.target} onClick={this.props.onItemClick}>
-                    {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
+                    {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
                     {this.item.items && this.props.parentMenu==='Menubar' && <span className={rootClass}></span>}
@@ -43,7 +43,7 @@ export class MenuItem extends Component{
         else{
             return (
                 <a className={className} target={this.item.target} onClick={this.props.onItemClick}>
-                    {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon fa fa-fw fa-caret-right"></span>}
+                    {this.item.items && (this.props.parentMenu==='TieredMenu' || this.props.parentMenu==='ContextMenu') && <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>}
                     {this.item.icon && <span className={iconClass}></span>}
                     <span className="ui-menuitem-text">{this.item.label}</span>
                     {this.item.items && this.props.parentMenu==='Menubar' && <span className={rootClass}></span>}

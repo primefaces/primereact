@@ -22,6 +22,7 @@ export class PickList extends Component {
         responsive: false,
         showSourceControls: true,
         showTargetControls: true,
+        metaKeySelection: true,
         itemTemplate: null,
         onChange: null,
         onMoveToSource: null,
@@ -43,6 +44,7 @@ export class PickList extends Component {
         responsive: PropTypes.bool,
         showSourceControls: PropTypes.bool,
         showTargetControls: PropTypes.bool,
+        metaKeySelection: PropTypes.bool,
         itemTemplate: PropTypes.func,
         onChange: PropTypes.func,
         onMoveToSource: PropTypes.func,
@@ -189,13 +191,13 @@ export class PickList extends Component {
                             onReorder={this.onSourceReorder} className="ui-picklist-source-controls" />}
                 
                 <PickListSubList ref={(el) => this.sourceListElement = ReactDOM.findDOMNode(el)} list={this.props.source} selection={this.state.selectedItemsSource} onSelectionChange={(e) => this.setState({selectedItemsSource: e.value})} itemTemplate={this.props.itemTemplate} 
-                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="ui-picklist-source-wrapper" listClassName="ui-picklist-source" />
+                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="ui-picklist-source-wrapper" listClassName="ui-picklist-source" metaKeySelection={this.props.metaKeySelection} />
                 
                 <PickListTransferControls onTransfer={this.onTransfer} source={this.props.source} target={this.props.target} 
                     sourceSelection={this.state.selectedItemsSource} targetSelection={this.state.selectedItemsTarget} />
                 
                 <PickListSubList ref={(el) => this.targetListElement = ReactDOM.findDOMNode(el)} list={this.props.target} selection={this.state.selectedItemsTarget} onSelectionChange={(e) => this.setState({selectedItemsTarget: e.value})}  itemTemplate={this.props.itemTemplate} 
-                    header={this.props.targetHeader} style={this.props.targetStyle} className="ui-picklist-target-wrapper" listClassName="ui-picklist-targe"/>
+                    header={this.props.targetHeader} style={this.props.targetStyle} className="ui-picklist-target-wrapper" listClassName="ui-picklist-targe" metaKeySelection={this.props.metaKeySelection}/>
                 
                 {this.props.showTargetControls && <PickListControls list={this.props.target} selection={this.state.selectedItemsTarget} 
                             onReorder={this.onTargetReorder} className="ui-picklist-target-controls" />}

@@ -52,7 +52,7 @@ export class ToggleButton extends Component {
         iconStyleClass = null;
 
         if(this.props.onIcon || this.props.offIcon) {
-            iconStyleClass = classNames('ui-c fa fa-fw' , this.props.checked ? this.props.onIcon : this.props.offIcon , {
+            iconStyleClass = classNames('ui-c' , this.props.checked ? this.props.onIcon : this.props.offIcon , {
                 'ui-button-icon-only': (this.props.onIcon && this.props.offIcon) && (!this.props.onLabel || !this.props.offLabel),
                 'ui-button-icon-left': (this.props.onIcon && this.props.offIcon)
             });

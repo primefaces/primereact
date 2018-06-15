@@ -22,13 +22,13 @@ export class HomeComponent extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-3">
                             <img alt="component" src="showcase/resources/images/home/icon-component.svg" />
-                            <span className="feature-name">60+ COMPONENTS</span>
-                            <p>The most complete set of native widgets featuring 60+ easy to use components for all your UI requirements.</p>
+                            <span className="feature-name">70+ COMPONENTS</span>
+                            <p>The most complete set of native widgets featuring 70+ easy to use components for all your UI requirements.</p>
                         </div>
                         <div className="ui-g-12 ui-md-3">
                             <img alt="opensource" src="showcase/resources/images/home/icon-opensource.svg" />
                             <span className="feature-name">OPEN SOURCE</span>
-                            <p>Hosted at GitHub, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
+                            <p>Hosted at <a href="https://github.com/primefaces/primereact">GitHub</a>, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
                         </div>
                         <div className="ui-g-12 ui-md-3">
                             <img alt="themes" src="showcase/resources/images/home/icon-themes.svg" />
@@ -40,20 +40,25 @@ export class HomeComponent extends Component {
                             <span className="feature-name">COMMUNITY</span>
                             <p>Join PrimeReact community to become a part of an active, vibrant and growing open source foundation.</p>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="ui-g-12 ui-md-3">
                             <img alt="productive" src="showcase/resources/images/home/icon-productive.svg" />
                             <span className="feature-name">PRODUCTIVITY</span>
                             <p>Allocate your valuable time on business logic rather than dealing with the complex user interface requirements.</p>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="ui-g-12 ui-md-3">
                             <img alt="mobile" src="showcase/resources/images/home/icon-mobile.svg" />
                             <span className="feature-name">MOBILE</span>
                             <p>Enhanced mobile user experience with  touch optimized responsive design elements.</p>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="ui-g-12 ui-md-3">
                             <img alt="templates" src="showcase/resources/images/home/icon-templates.svg" />
                             <span className="feature-name">TEMPLATES</span>
                             <p>Professionally designed highly customizable native React application templates to get started in no time. </p>
+                        </div>
+                        <div className="ui-g-12 ui-md-3">
+                            <img alt="templates" src="showcase/resources/images/home/icon-sigma.svg" />
+                            <span className="feature-name">FREE ADMIN TEMPLATE</span>
+                            <p>An elegant admin template powered by create-react-app.</p>
                         </div>
                     </div>
                 </div>
@@ -62,20 +67,30 @@ export class HomeComponent extends Component {
                     <p>Open source products of <a href="http://www.primetek.com.tr">PrimeTek</a> are used all around the world by 1M+ developers in Fortune 500 companies, corporations, government and educational
                         institutions.</p>
                     <div className="ui-g">
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/fox.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/airbus.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/bank-of-america.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/mercedes.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/ebay.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/ford.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/vw.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/unicredit.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/lufthansa.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/bmw.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/verizon.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/sap.svg"></img></div>
-                        <div className="ui-g-3 ui-md-1"><img alt="users" src="showcase/resources/images/home/amex.svg"></img></div>
-                        <div className="ui-g-3 ui-md-2"><img alt="users" src="showcase/resources/images/home/viacom.svg"></img></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="airbus" src="showcase/resources/images/home/airbus.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="amex" src="showcase/resources/images/home/amex.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="bmw" src="showcase/resources/images/home/bmw.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="ebay" src="showcase/resources/images/home/ebay.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="ford" src="showcase/resources/images/home/ford.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="fox" src="showcase/resources/images/home/fox.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="lufthansa" src="showcase/resources/images/home/lufthansa.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="mercedes" src="showcase/resources/images/home/mercedes.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="sap" src="showcase/resources/images/home/sap.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="unicredit" src="showcase/resources/images/home/unicredit.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="verizon" src="showcase/resources/images/home/verizon.svg"/></div>
+                        <div className="ui-g-6 ui-md-2"><img alt="viacom" src="showcase/resources/images/home/viacom.svg"/></div>
+                    </div>
+                </div>
+                <div className="templates">
+                    <h3>Free Application Template for PrimeReact</h3>
+                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the free Sigma template and impress your users.</p>
+
+                    <div className="ui-g">
+                        <div className="ui-g-12">
+                            <a href="https://www.primefaces.org/sigma-react">
+                                <img alt="Serenity" src="showcase/resources/images/layouts/sigma-biggest.jpg" />
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="templates">

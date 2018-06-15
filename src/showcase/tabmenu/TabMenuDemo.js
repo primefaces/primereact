@@ -13,11 +13,11 @@ export class TabMenuDemo extends Component {
 
     render() {
         var items=[
-            {label: 'Stats', icon: 'fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa-calendar'},
-            {label: 'Documentation', icon: 'fa-book'},
-            {label: 'Support', icon: 'fa-support'},
-            {label: 'Social', icon: 'fa-twitter'}
+            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
+            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
+            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
+            {label: 'Support', icon: 'fa fa-fw fa-support'},
+            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
         ];
         return (
             <div>
@@ -69,11 +69,11 @@ import {TabMenu} from 'primereact/components/tabmenu/TabMenu';
                         <CodeHighlight className="html">
                             {`
 var items=[
-            {label: 'Stats', icon: 'fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa-calendar'},
-            {label: 'Documentation', icon: 'fa-book'},
-            {label: 'Support', icon: 'fa-support'},
-            {label: 'Social', icon: 'fa-twitter'}
+            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
+            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
+            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
+            {label: 'Support', icon: 'fa fa-fw fa-support'},
+            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
         ];
 
 `}
@@ -191,11 +191,11 @@ export class TabMenuDemo extends Component {
 
     render() {
         var items=[
-            {label: 'Stats', icon: 'fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa-calendar'},
-            {label: 'Documentation', icon: 'fa-book'},
-            {label: 'Support', icon: 'fa-support'},
-            {label: 'Social', icon: 'fa-twitter'}
+            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
+            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
+            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
+            {label: 'Support', icon: 'fa fa-fw fa-support'},
+            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
         ];
         return (
             <div>

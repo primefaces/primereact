@@ -33,11 +33,6 @@ export class GMap extends Component {
         onOverlayDragEnd: PropTypes.func,
         onOverlayClick: PropTypes.func
     };
-    
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
         
     initMap() {
         this.map = new google.maps.Map(this.container, this.props.options);
@@ -110,15 +105,16 @@ export class GMap extends Component {
         return this.map;
     }
     
-    componentWillReceiveProps(nextProps, nextState) {
-        if(this.props.overlays !== nextProps.overlays) {
-            if(this.props.overlays) {
-                for(let overlay of this.props.overlays) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.overlays !== this.props.overlays) {
+            if(prevProps.overlays) {
+                for(let overlay of prevProps.overlays) {
+                    google.maps.event.clearInstanceListeners(overlay);
                     overlay.setMap(null);
                 }
             }
             
-            this.initOverlays(nextProps.overlays);
+            this.initOverlays(this.props.overlays);
         }
     }
     

@@ -1,11 +1,27 @@
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
+import {Message} from '../../components/message/Message';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import classNames from 'classnames';
 
 export class KeyFilterDemo extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onValidateInput = this.onValidateInput.bind(this);
+        this.state = { validatePattern: true };
+    }
+
+    onValidateInput(e, validatePattern) {
+        this.setState({ validatePattern: validatePattern });
+    }
+
     render() {
+        let validateInputClass = classNames({
+            'ui-state-error': !this.state.validatePattern
+        });
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -42,6 +58,13 @@ export class KeyFilterDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <InputText keyfilter={/[^\s]/} placeholder="Block space key"/>
                         </div>
+                    </div>
+
+                    <h3>Validation Mode</h3>
+                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                        <label htmlFor="validateInput" style={{display: 'block', marginBottom: '4px'}}>Float Number</label>
+                        <InputText id="validateInput" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} placeholder="Float" className={validateInputClass}/>
+                        {!this.state.validatePattern && <Message severity="error" text="Not a valid number"></Message>}
                     </div>
                 </div>
 
@@ -103,6 +126,41 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 `}
                         </CodeHighlight>
 
+                        <h3>Validate Mode</h3>
+                        <p>Instead of blocking a single keypress, the alternative validation mode which is enabled with validateOnly property validates the whole input.</p>
+                        <CodeHighlight className="html">
+                            {`
+<div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+   <label htmlFor="validateInput" style={{display: 'block', marginBottom: '4px'}}>Float Number</label>
+   <InputText id="validateInput" keyfilter={/^[+-]?((\\.\\d+)|(\\d+(\\.\\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} placeholder="Float" className={validateInputClass}/>
+   {!this.state.validatePattern && <Message severity="error" text="Not a valid number"></Message>}
+</div>
+
+`}
+                        </CodeHighlight>
+
+            <h3>Properties</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>validateOnly</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, instead of blocking keys, input is validated internally to test against the regular expression.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
                         <h3>Styling</h3>
                         <p>This directive does not apply any styling.</p>
 
@@ -119,10 +177,26 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                             {`
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
+import {Message} from '../../components/message/Message';
+import classNames from 'classnames';
 
 export class KeyFilterDemo extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onValidateInput = this.onValidateInput.bind(this);
+        this.state = { validatePattern: true };
+    }
+
+    onValidateInput(e, validatePattern) {
+        this.setState({ validatePattern: validatePattern });
+    }
+
     render() {
+        let validateInputClass = classNames({
+            'ui-state-error': !this.state.validatePattern
+        });
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -159,6 +233,13 @@ export class KeyFilterDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <InputText keyfilter={/[^\\s]/} placeholder="Block space key"/>
                         </div>
+                    </div>
+
+                    <h3>Validation Mode</h3>
+                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                        <label htmlFor="validateInput" style={{display: 'block', marginBottom: '4px'}}>Float Number</label>
+                        <InputText id="validateInput" keyfilter={/^[+-]?((\\.\\d+)|(\\d+(\\.\\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} placeholder="Float" className={validateInputClass}/>
+                        {!this.state.validatePattern && <Message severity="error" text="Not a valid number"></Message>}
                     </div>
                 </div>
             </div>

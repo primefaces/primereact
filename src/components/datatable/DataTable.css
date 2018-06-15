@@ -75,6 +75,10 @@
     cursor: pointer;
 }
 
+.ui-datatable-loading-icon {
+    font-size: 2em;
+}
+
 /* Scrollable */
 .ui-datatable-scrollable-body {
     overflow:auto;

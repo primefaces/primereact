@@ -416,7 +416,7 @@ export class Dropdown extends Component {
     renderClearIcon() {
         if(this.props.value && this.props.showClear && !this.props.disabled) {
             return (
-                <i className="ui-dropdown-clear-icon fa fa-close" onClick={this.clear}></i>
+                <i className="ui-dropdown-clear-icon pi pi-times" onClick={this.clear}></i>
             );
         }
         else {
@@ -426,7 +426,7 @@ export class Dropdown extends Component {
     
     renderDropdownIcon() {
         return <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
-                    <span className="fa fa-fw fa-caret-down ui-clickable"></span>
+                    <span className="ui-dropdown-trigger-icon pi pi-caret-down ui-clickable"></span>
                 </div>;
     }
 
@@ -456,7 +456,7 @@ export class Dropdown extends Component {
             return <div className="ui-dropdown-filter-container">
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
                             onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
-                        <span className="fa fa-search"></span>
+                        <span className="ui-dropdown-filter-icon pi pi-search"></span>
                    </div>;
         }
         else {
@@ -470,9 +470,12 @@ export class Dropdown extends Component {
     
     componentDidMount() {
         if(this.props.autoWidth) {
-            if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
-                this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
-            }
+            // Added setTimeout to render it with the correct width value in hidden container components such as TabView and Accordion.
+            setTimeout(() => {
+                if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
+                    this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
+                }
+            }, 0);
         }
     }
     
@@ -506,6 +509,11 @@ export class Dropdown extends Component {
         let items = this.renderItems(selectedOption);
         let filterElement = this.renderFilter();
         let clearIcon = this.renderClearIcon();
+
+        if(this.props.editable && this.editableInput) {
+            let value = label||this.props.value||'';
+            this.editableInput.value = value;
+        }
         
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}

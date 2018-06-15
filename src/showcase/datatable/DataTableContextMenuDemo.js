@@ -38,8 +38,8 @@ export class DataTableContextMenuDemo extends Component {
 
     render() {
         let items = [
-            {label: 'View', icon: 'fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
+            {label: 'View', icon: 'fa fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'fa fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
         ];
 
         return (
@@ -123,8 +123,8 @@ export class DataTableContextMenuDemo extends Component {
 
     render() {
         let items = [
-            {label: 'View', icon: 'fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
+            {label: 'View', icon: 'fa fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'fa fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
         ];
 
         return (

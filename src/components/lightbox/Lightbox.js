@@ -188,7 +188,7 @@ export class Lightbox extends Component {
                                 zIndex:this.zindex }} ref={el=>this.panel=el } onClick={()=>this.preventDocumentClickListener = true}>
                     <div className="ui-lightbox-content-wrapper">
                         <a className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev.bind(this)}>
-                            <span className="fa fa-fw fa-caret-left"></span>
+                            <span className="ui-lightbox-nav-icon pi pi-chevron-left"></span>
                         </a>
                         <div className="ui-lightbox-content ui-corner-all" ref={el=>this.content=el}
                              style={{transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing}}>
@@ -198,7 +198,7 @@ export class Lightbox extends Component {
                         </div>
 
                         <a className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next.bind(this)}>
-                            <span className="fa fa-fw fa-caret-right"></span>
+                            <span className="ui-lightbox-nav-icon pi pi-chevron-right"></span>
                         </a>
                     </div>
                 </div>

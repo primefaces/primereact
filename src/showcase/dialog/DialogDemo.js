@@ -24,8 +24,8 @@ export class DialogDemo extends Component {
 
     render() {
         let footer = <div>
-            <Button label="Yes" icon="fa-check" onClick={this.onHide} />
-            <Button label="No" icon="fa-close" onClick={this.onHide} />
+            <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
+            <Button label="No" icon="pi pi-times" onClick={this.onHide} />
         </div>;
 
         return (
@@ -45,7 +45,7 @@ export class DialogDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
 
-                    <Button label="Show" icon="fa-external-link-square" onClick={this.onClick} />
+                    <Button label="Show" icon="pi pi-info-circle" onClick={this.onClick} />
                 </div>
 
                 <DialogDoc></DialogDoc>
@@ -84,7 +84,7 @@ import {Dialog} from 'primereact/components/dialog/Dialog';
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </Dialog>
 
-<Button label="Show" icon="fa-external-link-square" onClick={this.onClick} />
+<Button label="Show" icon="pi pi-info-circle" onClick={this.onClick} />
 
 `}
 </CodeHighlight>
@@ -112,8 +112,8 @@ onHide(event) {
 <CodeHighlight className="html">
 {`
 let footer = <div>
-                <Button label="Yes" icon="fa-check" />
-                <Button label="No" icon="fa-close" />
+                <Button label="Yes" icon="pi pi-check" />
+                <Button label="No" icon="pi pi-times" />
             </div>;
 
 <Dialog header="Header Text" footer={footer} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
@@ -412,8 +412,8 @@ export class DialogDemo extends Component {
 
     render() {
         let footer = <div>
-            <Button label="Yes" icon="fa-check" onClick={this.onHide} />
-            <Button label="No" icon="fa-close" onClick={this.onHide} />
+            <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
+            <Button label="No" icon="pi pi-times" onClick={this.onHide} />
         </div>;
 
         return (
@@ -433,7 +433,7 @@ export class DialogDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
 
-                    <Button label="Show" icon="fa-external-link-square" onClick={this.onClick} />
+                    <Button label="Show" icon="pi pi-info-circle" onClick={this.onClick} />
                 </div>
             </div>
         )

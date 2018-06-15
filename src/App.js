@@ -6,6 +6,7 @@ import jQuery from "jquery";
 import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
+import 'primeicons/primeicons.css';
 import './sass/App.css';
 
 import { AccordionDemo } from './showcase/accordion/AccordionDemo';
@@ -75,6 +76,8 @@ import { PickListDemo } from './showcase/picklist/PickListDemo';
 import { ScheduleDemo } from './showcase/schedule/ScheduleDemo';
 import { TreeDemo } from './showcase/tree/TreeDemo';
 import { TreeTableDemo } from './showcase/treetable/TreeTableDemo';
+import { TreeTableSortDemo } from './showcase/treetable/TreeTableSortDemo';
+import { TreeTableSelectionDemo } from './showcase/treetable/TreeTableSelectionDemo';
 import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
 import { ColorPickerDemo } from './showcase/colorpicker/ColorPickerDemo';
 import { PasswordDemo } from './showcase/password/PasswordDemo';
@@ -392,11 +395,13 @@ class App extends Component {
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
-                                <li className="topbar-submenu-header">PREMIUM</li>
+                                <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span className="ui-text">Serenity</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
-                                <li className="topbar-submenu-header">FREE</li>
+                                <li className="topbar-submenu-header">FREE TEMPLATES</li>
+                                <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span className="ui-text">Sigma</span></a></li>
+                                <li className="topbar-submenu-header">FREE THEMES</li>
                                 <li><a data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
                                 <li><a data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
                                 <li><a data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
@@ -494,7 +499,9 @@ class App extends Component {
                     <Route path="/picklist" component={PickListDemo} />
                     <Route path="/schedule" component={ScheduleDemo} />
                     <Route path="/tree" component={TreeDemo} />
-                    <Route path="/treetable" component={TreeTableDemo} />
+                    <Route exact path="/treetable" component={TreeTableDemo} />
+                    <Route path="/treetable/sort" component={TreeTableSortDemo} />
+                    <Route path="/treetable/selection" component={TreeTableSelectionDemo} />
                     <Route path="/captcha" component={CaptchaDemo} />
                     <Route path="/colorpicker" component={ColorPickerDemo} />
                     <Route path="/password" component={PasswordDemo} />

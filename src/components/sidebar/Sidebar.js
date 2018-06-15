@@ -44,13 +44,13 @@ export class Sidebar extends Component {
     }
 
     componentWillUnmount() {
-        this.disableModality();
         this.unbindMaskClickListener();
+        this.disableModality();
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.state.visible !== nextProps.visible) {
-            if (nextProps.visible)
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.visible !== this.props.visible) {
+            if (this.props.visible)
                 this.show();
             else {
                 if(this.preventVisibleChangePropagation)
@@ -125,7 +125,7 @@ export class Sidebar extends Component {
         return (
             <div ref={(el) => this.container=el} id={this.props.id} className={containerClass} style={this.props.style}>
                 <a className={'ui-sidebar-close ui-corner-all'} role="button" onClick={this.onClose}>
-                    <span className="fa fa-fw fa-close"/>
+                    <span className="pi pi-times"/>
                 </a>
                 {this.props.children}
             </div>

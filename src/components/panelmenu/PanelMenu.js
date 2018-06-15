@@ -87,11 +87,11 @@ export class PanelMenuItem extends Component {
                 'ui-menuitem-link-hasicon': this.child.icon&&this.child.items,
                 'ui-state-disabled': this.child.disabled
             }),
-            panelMenuIconClass = classNames('ui-panelmenu-icon fa fa-fw', {
-                'fa-caret-right': !this.state.expanded,
-                'fa-caret-down': this.state.expanded
+            panelMenuIconClass = classNames('ui-panelmenu-icon pi pi-fw', {
+                'pi-caret-right': !this.state.expanded,
+                'pi-caret-down': this.state.expanded
             }),
-            menuitemIconClass = classNames('ui-menuitem-icon fa fa-fw', this.child.icon);
+            menuitemIconClass = classNames('ui-menuitem-icon ', this.child.icon);
 
             let panelMenuIcon = this.child.items && (<span className={panelMenuIconClass} />),
             menuitemIcon = this.child.icon && (<span className={menuitemIconClass} />),
@@ -159,11 +159,11 @@ export class PanelMenuHeaderItems extends Component {
             'ui-state-disabled': this.item.disabled
         }),
         headerLinkClass = classNames({'ui-panelmenu-headerlink-hasicon': this.item.icon}),
-        panelMenuIconClass = classNames('ui-panelmenu-icon fa', {
-            'fa-caret-right': !this.state.expanded,
-            'fa-caret-down': this.state.expanded
+        panelMenuIconClass = classNames('ui-panelmenu-icon pi', {
+            'pi-caret-right': !this.state.expanded,
+            'pi-caret-down': this.state.expanded
         }),
-        menuitemIconClass = classNames('ui-menuitem-icon fa', this.item.icon);
+        menuitemIconClass = classNames('ui-menuitem-icon ', this.item.icon);
 
         let panelMenuIcon = this.item.items && <span className={panelMenuIconClass} />,
             menuitemIcon = this.item.icon && <span className={menuitemIconClass} />,

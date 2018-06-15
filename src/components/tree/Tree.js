@@ -48,7 +48,7 @@ export class TreeNode extends Component {
         else
             icon = this.state.expanded && this.node.children && this.node.children.length ? this.node.expandedIcon : this.node.collapsedIcon;
 
-        return 'ui-treenode-icon fa fa-fw ' + icon;
+        return 'ui-treenode-icon ' + icon;
     }
 
     isLeaf(node) {
@@ -76,18 +76,18 @@ export class TreeNode extends Component {
                 <span>{this.node.label}</span>
             </span>);
 
-        var togglerClass = classNames('ui-tree-toggler fa fa-fw', {
-            'fa-caret-right': !this.state.expanded,
-            'fa-caret-down': this.state.expanded
+        var togglerClass = classNames('ui-tree-toggler pi pi-fw', {
+            'pi-caret-right': !this.state.expanded,
+            'pi-caret-down': this.state.expanded
         });
 
         var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
             iconClass = this.getIcon();
 
         if (this.props.selectionMode === 'checkbox') {
-            var checkboxIconClass = classNames('ui-chkbox-icon ui-c fa', {
-                'fa-check': this.props.isSelected(this.node),
-                'fa-minus': this.node.partialSelected
+            var checkboxIconClass = classNames('ui-chkbox-icon ui-c pi', {
+                'pi-check': this.props.isSelected(this.node),
+                'pi-minus': this.node.partialSelected
             }),
                 checkbox = (<div className="ui-chkbox">
                     <div className="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
@@ -148,9 +148,9 @@ export class TreeNode extends Component {
             <span>{this.node.label}</span>
         </span>);
 
-        var togglerClass = classNames('ui-tree-toggler fa fa-fw', {
-            'fa-plus': !this.state.expanded,
-            'fa-minus': this.state.expanded
+        var togglerClass = classNames('ui-tree-toggler pi pi-fw', {
+            'pi-plus': !this.state.expanded,
+            'pi-minus': this.state.expanded
         });
 
         var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
@@ -195,6 +195,16 @@ export class TreeNode extends Component {
         else {
             return (<table>{tbody}</table>);
         }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let nextNode = nextProps.node;
+        if(nextNode.hasOwnProperty("expanded") && prevState.expanded !== nextNode.expanded) {
+            return {
+                expanded: nextNode.expanded
+            };
+        }
+        return null;
     }
 
     render() {
@@ -521,6 +531,10 @@ export class Tree extends Component {
     }
 
     render() {
+        if(this.props.selection && this.selection !== this.props.selection) {
+            this.selection = this.props.selection;
+        }
+
         var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.className, {
             'ui-tree-selectable': this.props.selectionMode,
             'ui-tree-horizontal': this.isHorizontal()

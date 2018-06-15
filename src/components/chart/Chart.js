@@ -85,11 +85,15 @@ export class Chart extends Component {
     }
 
     render() {
-        let className = classNames('ui-chart', this.props.className);
+        let className = classNames('ui-chart', this.props.className),
+            style = Object.assign({
+                width: this.props.width,
+                height: this.props.height
+            }, this.props.style);
 
         return (
-            <div id={this.props.id} style={this.props.style} className={className} width={this.props.width} height={this.props.height}>
-                <canvas ref={(el) => {this.canvas = el;}}></canvas>
+            <div id={this.props.id} style={style} className={className}>
+                <canvas ref={(el) => {this.canvas = el;}} width={this.props.width} height={this.props.height}></canvas>
             </div>
         );
     }

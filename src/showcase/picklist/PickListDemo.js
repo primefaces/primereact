@@ -203,6 +203,13 @@ import {PickList} from 'primereact/components/picklist/PickList';
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
                         </tr>
+                        <tr>
+                            <td>metaKeySelection</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
+                            can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

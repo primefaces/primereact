@@ -8,13 +8,15 @@ export class InputText extends Component {
     static defaultProps = {
         onInput: null,
         onKeyPress: null,
-        keyfilter: null
+        keyfilter: null,
+        validateOnly: false,
     };
 
     static propTypes = {
         onInput: PropTypes.func,
         onKeyPress: PropTypes.func,
-        keyfilter: PropTypes.any
+        keyfilter: PropTypes.any,
+        validateOnly: PropTypes.bool
     };
 
     constructor(props) {
@@ -29,13 +31,18 @@ export class InputText extends Component {
         }
 
         if (this.props.keyfilter) {
-            KeyFilter.onKeyPress(event, this.props.keyfilter)
+            KeyFilter.onKeyPress(event, this.props.keyfilter, this.props.validateOnly)
         }
     }
 
     onInput(e) {
+        let validatePattern = true;
+        if (this.props.keyfilter && this.props.validateOnly) {
+            validatePattern = KeyFilter.validate(e, this.props.keyfilter);
+        }
+
         if(this.props.onInput) {
-            this.props.onInput(e);
+            this.props.onInput(e, validatePattern);
         }
 
         this.updateFilledState(e.target.value);
@@ -54,9 +61,9 @@ export class InputText extends Component {
         this.updateFilledState(_value);
     }
 
-    componentWillUpdate(nextProps){
-        if (nextProps.value !== this.props.value) {
-            this.updateFilledState(nextProps.value);
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if (prevProps.value !== this.props.value) {
+            this.updateFilledState(this.props.value);
         }
     }
 
@@ -69,6 +76,7 @@ export class InputText extends Component {
         delete inputProps.onInput;
         delete inputProps.onKeyPress;
         delete inputProps.keyfilter;
+        delete inputProps.validateOnly;
 
         return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
