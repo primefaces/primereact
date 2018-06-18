@@ -200,7 +200,7 @@ export class IconsPage extends Component {
                             <div>pi-minus</div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
-                            <i class="pi pi-plus-circle"></i>
+                            <i class="pi pi-minus-circle"></i>
                             <div>pi-minus-circle</div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
