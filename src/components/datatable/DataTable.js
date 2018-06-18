@@ -403,7 +403,7 @@ export class DataTable extends Component {
         this.container.style.width = this.getContainerWidth();
     }
 
-    static getDerivedStateProps(nextProps, prevState) {
+    static getDerivedStateFromProps(nextProps, prevState) {
         let state = {};
 
         if(nextProps.first !== null && nextProps.first !== prevState.first) { state = {...state, ...{first: nextProps.first}} }
