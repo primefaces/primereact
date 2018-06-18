@@ -122,8 +122,8 @@ body {
                 > ul {
                     position: absolute;
                     top: 65px;
-                    left: -50px;
-                    width: 200px;
+                    left: -75px;
+                    width: 250px;
                     max-height: 300px;
                     background-color: #ffffff;
                     -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -362,6 +362,10 @@ body {
                 p {
                     margin: 0;
                     line-height: 1.5em;
+                }
+
+                a {
+                    color: #cce8f1;
                 }
             }
         }
@@ -789,6 +793,20 @@ body {
                 background-color: #b90264;
             }
         }
+    }
+}
+
+.icons-page {
+    .icons-list {
+        text-align: center;
+    }
+
+    .icons-list i {
+        font-size: 2em;
+    }
+
+    .icons-list .ui-md-2 {
+        padding-bottom: 2em;
     }
 }
 

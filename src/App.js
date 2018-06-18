@@ -82,6 +82,7 @@ import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
 import { ColorPickerDemo } from './showcase/colorpicker/ColorPickerDemo';
 import { PasswordDemo } from './showcase/password/PasswordDemo';
 import { HomeComponent } from './showcase/home/HomeComponent';
+import { IconsPage } from './showcase/icons/IconsPage';
 import { SetupPage } from './showcase/setup/SetupPage';
 import { RatingDemo } from './showcase/rating/RatingDemo';
 import { ToolbarDemo } from './showcase/toolbar/ToolbarDemo';
@@ -395,6 +396,7 @@ class App extends Component {
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
+                                <li><Link to="/icons"><span className="ui-text">Icons</span></Link></li>
                                 <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span className="ui-text">Serenity</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
@@ -436,6 +438,7 @@ class App extends Component {
 
                 <div id="layout-content">
                     <Route exact path="/" component={HomeComponent} />
+                    <Route path="/icons" component={IconsPage} />
                     <Route path="/accordion" component={AccordionDemo} />
                     <Route path="/autocomplete" component={AutoCompleteDemo} />
                     <Route path="/button" component={ButtonDemo} />
