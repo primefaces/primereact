@@ -9,7 +9,7 @@ export class IconsPage extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Icons</h1>
-                        <p>PrimeNG components internally use <a href="https://github.com/primefaces/primeicons">PrimeIcons</a> library, the official icons suite from <a href="https://www.primetek.com.tr">PrimeTek</a>.</p>
+                        <p>PrimeReact components internally use <a href="https://github.com/primefaces/primeicons">PrimeIcons</a> library, the official icons suite from <a href="https://www.primetek.com.tr">PrimeTek</a>.</p>
                     </div>
                 </div>
 
@@ -300,12 +300,32 @@ export class IconsPage extends Component {
                             <div>pi-window-minimize</div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
+                            <i class="pi pi-refresh"></i>
+                            <div>pi-refresh</div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
                             <i class="pi pi-user"></i>
                             <div>pi-user</div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
-                            <i class="pi pi-refresh"></i>
-                            <div>pi-refresh</div>
+                            <i class="pi pi-user-plus"></i>
+                            <div>pi-user-plus</div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <i class="pi pi-user-minus"></i>
+                            <div>pi-user-minus</div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <i class="pi pi-users"></i>
+                            <div>pi-users</div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <i class="pi pi-clock"></i>
+                            <div>pi-clock</div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <i class="pi pi-trash"></i>
+                            <div>pi-trash</div>
                         </div>
                     </div>
 

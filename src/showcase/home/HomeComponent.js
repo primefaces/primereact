@@ -83,12 +83,12 @@ export class HomeComponent extends Component {
                 </div>
                 <div className="templates">
                     <h3>Free Application Template for PrimeReact</h3>
-                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the free Sigma template and impress your users.</p>
+                    <p>Sigma is a free and open source admin template based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>.</p>
 
                     <div className="ui-g">
                         <div className="ui-g-12">
                             <a href="https://www.primefaces.org/sigma-react">
-                                <img alt="Serenity" src="showcase/resources/images/layouts/sigma-biggest.jpg" />
+                                <img alt="Sigma" src="showcase/resources/images/layouts/sigma-biggest.jpg" />
                             </a>
                         </div>
                     </div>
