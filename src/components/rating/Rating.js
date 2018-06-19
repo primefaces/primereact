@@ -30,7 +30,6 @@ export class Rating extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value};
         this.clear = this.clear.bind(this);
     }
 
@@ -56,17 +55,8 @@ export class Rating extends Component {
         event.preventDefault();
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.value !== prevState.value) {
-            return {
-                value: nextProps.value
-            };
-        } 
-        return null;
-    }
-
     shouldComponentUpdate(nextProps, nextState) {
-        if(nextState.value === this.state.value && nextProps.disabled === this.props.disabled) {
+        if(nextProps.value === this.props.value && nextProps.disabled === this.props.disabled) {
             return false;
         }
 
@@ -89,8 +79,8 @@ export class Rating extends Component {
         
         var stars = starsArray.map((value) => {
             var iconClass = classNames('ui-rating-icon pi', {
-                'pi-star-o': (!this.state.value || value > this.state.value),
-                'pi-star': (value <= this.state.value)
+                'pi-star-o': (!this.props.value || value > this.props.value),
+                'pi-star': (value <= this.props.value)
             });
             
             return <a onClick={(e) => this.rate(e, value)} key={value}>
