@@ -22,7 +22,7 @@ export class IconsPage extends Component {
 </CodeHighlight>
 
                     <h3>Getting Started</h3>
-                    <p>PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>. 
+                    <p>PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>.
                     A standalone icon can be displayed using an element such as <i>i</i> or <i>span</i></p>
 
 <CodeHighlight className="markup">
@@ -43,7 +43,7 @@ export class IconsPage extends Component {
 </CodeHighlight>
 
                     <i class="pi pi-check"></i>
-    
+
 <CodeHighlight className="markup">
 {`<i class="pi pi-check" style={{'fontSize': '3em'}}></i>
 `}
@@ -196,7 +196,7 @@ export class IconsPage extends Component {
                             <div>pi-plus-circle</div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
-                            <i class="pi pi-plus"></i>
+                            <i class="pi pi-minus"></i>
                             <div>pi-minus</div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
