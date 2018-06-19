@@ -34,7 +34,7 @@ export class Rating extends Component {
     }
 
     rate(event, i) {
-        if(!this.props.readonly && !this.props.disabled && this.props.onChange) {
+        if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: i
@@ -45,7 +45,7 @@ export class Rating extends Component {
     }
     
     clear(event) {
-        if(!this.props.readonly && !this.props.disabled && this.props.onChange) {
+        if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: null
@@ -56,41 +56,58 @@ export class Rating extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(nextProps.value === this.props.value && nextProps.disabled === this.props.disabled) {
+        if (nextProps.value === this.props.value && nextProps.disabled === this.props.disabled) {
             return false;
         }
 
         return true;
     }
 
-    render() {
-        var className = classNames('ui-rating', this.props.className, {'ui-state-disabled': this.props.disabled});
-                
-        if(this.props.cancel) {
-            var cancel = <a onClick={this.clear}>
-                        <span className="ui-rating-icon pi pi-ban"></span>
-                      </a>;
-        }
-
-        var starsArray = [];
-        for(var i = 0; i < this.props.stars; i++) {
+    renderStars() {
+        let starsArray = [];
+        for (var i = 0; i < this.props.stars; i++) {
             starsArray[i] = i + 1;
         }
-        
-        var stars = starsArray.map((value) => {
-            var iconClass = classNames('ui-rating-icon pi', {
+
+        let stars = starsArray.map((value) => {
+            let iconClass = classNames('ui-rating-icon pi', {
                 'pi-star-o': (!this.props.value || value > this.props.value),
                 'pi-star': (value <= this.props.value)
             });
             
-            return <a onClick={(e) => this.rate(e, value)} key={value}>
-                      <span className={iconClass}></span>
-                   </a>;
+            return (
+                <a onClick={(e) => this.rate(e, value)} key={value}>
+                    <span className={iconClass}></span>
+                </a>
+            );
         });
-                
-        return <div id={this.props.id} className={className} style={this.props.style}>
-                    {cancel}
-                    {stars}
-                </div>;
+
+        return stars;
+    }
+
+    renderCancelIcon() {
+        if (this.props.cancel) {
+            return (
+                <a onClick={this.clear}>
+                    <span className="ui-rating-icon pi pi-ban"></span>
+                </a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    render() {
+        let className = classNames('ui-rating', this.props.className, {'ui-state-disabled': this.props.disabled});
+        let cancelIcon = this.renderCancelIcon();        
+        let stars = this.renderStars();
+                        
+        return (
+            <div id={this.props.id} className={className} style={this.props.style}>
+                {cancelIcon}
+                {stars}
+            </div>
+        );
     }
 }
