@@ -95,7 +95,7 @@ export class Accordion extends Component {
                     this.setState({activeIndex: i});
             }
 
-            let callback = selected ? this.props.onTabOpen : this.props.onTabClose;
+            let callback = selected ? this.props.onTabClose : this.props.onTabOpen;
             if(callback) {
                 callback({originalEvent: event, index: i});
             }
