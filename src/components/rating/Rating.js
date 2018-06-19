@@ -99,7 +99,7 @@ export class Rating extends Component {
     }
 
     render() {
-        let className = classNames('ui-rating', this.props.className, {'ui-state-disabled': this.props.disabled});
+        let className = classNames('ui-rating', this.props.className, {'ui-state-disabled': this.props.disabled, 'ui-rating-readonly': this.props.readonly});
         let cancelIcon = this.renderCancelIcon();        
         let stars = this.renderStars();
                         
