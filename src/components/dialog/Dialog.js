@@ -36,8 +36,7 @@ export class Dialog extends Component {
         appendTo: null,
         baseZIndex: 0,
         minX: 0,
-        minY: 0,
-        autoAlign: true
+        minY: 0
     }
 
     static propTypes = {
@@ -69,13 +68,12 @@ export class Dialog extends Component {
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
         minX: PropTypes.number,
-        minY: PropTypes.number,
-        autoAlign: PropTypes.bool
+        minY: PropTypes.number
     };
     
     constructor(props) {
         super(props);
-        this.state = {visible: props.visible};
+        this.state = {};
         this.onClose = this.onClose.bind(this);
         this.initDrag = this.initDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
@@ -106,14 +104,11 @@ export class Dialog extends Component {
     }
 
     onClose(event) {
-        this.hide();
+        this.props.onHide();
         event.preventDefault();
     }
 
     hide() {
-        this.setState({visible:false});
-
-        this.props.onHide();   
         this.unbindMaskClickListener();
         this.unbindGlobalListeners();     
 
@@ -123,9 +118,6 @@ export class Dialog extends Component {
     }
 
     show() {
-        this.setState({visible: true});
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        
         this.bindGlobalListeners();
         
         if(this.props.modal) {
@@ -136,6 +128,7 @@ export class Dialog extends Component {
             this.props.onShow();
         }
         
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.positionOverlay();
         DomHandler.fadeIn(this.container, 250);
     }
@@ -173,6 +166,7 @@ export class Dialog extends Component {
                 this.mask.addEventListener('click', this.maskClickListener);
             }
             document.body.appendChild(this.mask);
+
             if(this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'ui-overflow-hidden');
             }
@@ -181,6 +175,8 @@ export class Dialog extends Component {
 
     disableModality() {
         if(this.mask) {
+            this.unbindMaskClickListener();
+
             document.body.removeChild(this.mask);
             if(this.props.blockScroll) {
                 DomHandler.removeClass(document.body, 'ui-overflow-hidden');
@@ -416,26 +412,14 @@ export class Dialog extends Component {
     }
 
     componentDidMount() {
-        if(this.state.visible) {
+        if(this.props.visible) {
             this.show();
             this.currentHeight = DomHandler.getOuterHeight(this.container);
         }
     }
 
-    getSnapshotBeforeUpdate(prevProps, prevState) {
-        if(this.props.autoAlign && this.state.visible) {
-            let height = DomHandler.getOuterHeight(this.container);
-            if(height !== this.currentHeight) {
-                this.currentHeight = height;
-                this.positionOverlay();
-            }
-        }
-
-        return null;
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevState.visible !== this.props.visible) {
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.visible !== this.props.visible) {
             if (this.props.visible)
                 this.show();
             else {
@@ -516,7 +500,7 @@ export class Dialog extends Component {
         });
 
         let style = Object.assign({
-            display: this.state.visible ? 'block': 'none',
+            display: this.props.visible ? 'block': 'none',
             width: this.props.width,
             height: this.props.height,
             minWidth: this.props.minWidth
