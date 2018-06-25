@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import classNames from 'classnames';
 import 'nanoscroller';
 import jQuery from "jquery";
+import './resources/style/primereact.css';
 import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
