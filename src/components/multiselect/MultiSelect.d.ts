@@ -4,6 +4,7 @@ interface MultiSelectProps {
     id?: string;
     value?: any;
     options?: Array<any>;
+    optionLabel?: string;
     style?: object;
     className?: string;
     scrollHeight?: string;
