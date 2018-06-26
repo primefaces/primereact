@@ -993,7 +993,7 @@ export class Calendar extends Component {
                             output += formatNumber('d', this.props.utc ? date.getUTCDate() : date.getDate(), 2);
                             break;
                         case 'D':
-                            output += formatName('D', this.props.utc ? date.getUTCDay() : date.getDay(), this.locale.dayNamesShort, this.locale.dayNames);
+                            output += formatName('D', this.props.utc ? date.getUTCDay() : date.getDay(), this.props.locale.dayNamesShort, this.props.locale.dayNames);
                             break;
                         case 'o':
                             if (this.props.utc) {
@@ -1012,7 +1012,7 @@ export class Calendar extends Component {
                             output += formatNumber('m', (this.props.utc ? date.getUTCMonth() : date.getMonth()) + 1, 2);
                             break;
                         case 'M':
-                            output += formatName('M', this.props.utc ? date.getUTCMonth() : date.getMonth(), this.locale.monthNamesShort, this.locale.monthNames);
+                            output += formatName('M', this.props.utc ? date.getUTCMonth() : date.getMonth(), this.props.locale.monthNamesShort, this.props.locale.monthNames);
                             break;
                         case 'y':
                             output += (lookAhead('y') ? (this.props.utc ? date.getUTCFullYear() : date.getFullYear()) :
@@ -1199,7 +1199,7 @@ export class Calendar extends Component {
                         day = getNumber("d");
                         break;
                     case "D":
-                        getName("D", this.locale.dayNamesShort, this.locale.dayNames);
+                        getName("D", this.props.locale.dayNamesShort, this.props.locale.dayNames);
                         break;
                     case "o":
                         doy = getNumber("o");
@@ -1208,7 +1208,7 @@ export class Calendar extends Component {
                         month = getNumber("m");
                         break;
                     case "M":
-                        month = getName("M", this.locale.monthNamesShort, this.locale.monthNames);
+                        month = getName("M", this.props.locale.monthNamesShort, this.props.locale.monthNames);
                         break;
                     case "y":
                         year = getNumber("y");
