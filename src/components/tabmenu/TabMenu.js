@@ -1,70 +1,107 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {MenuItem} from '../menu/MenuItem'
 
 export class TabMenu extends Component {
 
     static defaultProps = {
         id: null,
-        model:null,
-        activeItem:null,
-        style:null,
-        className:null,
+        model: null,
+        activeItem: null,
+        style: null,
+        className: null
     };
 
     static propTypes = {
         id: PropTypes.string,
-        model:PropTypes.array,
-        activeItem:PropTypes.any,
-        style:PropTypes.any,
-        className:PropTypes.string,
+        model: PropTypes.array,
+        activeItem: PropTypes.any,
+        style: PropTypes.any,
+        className: PropTypes.string
     };
-
 
     constructor(props) {
         super(props);
-        this.state ={activeItem:this.props.activeItem || this.props.model[0]};
+        this.state = {
+            activeItem: props.activeItem || props.model ? props.model[0] : null
+        };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.activeItem && nextProps.activeItem !== prevState.activeItem) {
+            return {
+                activeItem: nextProps.activeItem
+            };
+        }
+
+        return null;
     }
 
     itemClick(event, item) {
-        if(item.disabled) {
+        if (item.disabled) {
             event.preventDefault();
             return;
         }
 
-        if(!item.url) {
+        if (!item.url) {
             event.preventDefault();
         }
 
-        if(item.command) {
+        if (item.command) {
             item.command({
                 originalEvent: event,
                 item: item
             });
         }
 
-        this.setState({activeItem:item});
+        if(this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event,
+                value: item
+            });
+        }
+
+        this.setState({activeItem: item});
+    }
+
+    renderMenuItem(item, index) {
+        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', {'ui-state-active': this.state.activeItem === item});
+        const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
+        const icon = item.icon ? <span className={iconClassName}></span>: null;
+
+        return (
+            <li key={item.label + '_' + index} className={className}>
+                 <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+                    {icon}
+                    <span className="ui-menuitem-text">{item.label}</span>
+                </a>
+            </li>
+        );
+    }
+
+    renderItems() {
+        return (
+            this.props.model.map((item, index) => {
+                return this.renderMenuItem(item, index);
+            })
+        );
     }
 
     render() {
-        var tabMenuClass=classNames('ui-tabmenu ui-widget ui-widget-content ui-corner-all',this.props.className);
+        if (this.props.model) {
+            const className = classNames('ui-tabmenu ui-widget ui-widget-content ui-corner-all', this.props.className);
+            const items = this.renderItems();
 
-        var item=this.props.model && this.props.model.map((item,index)=>{
-            var listClass=classNames('ui-tabmenuitem ui-state-default ui-corner-top',{'ui-state-disabled':item.disabled},
-                {'ui-tabmenuitem-hasicon':item.icon},{'ui-state-active':this.state.activeItem===item})
-            var list=<li className={listClass} key={'tabmenuItem_' + index}>
-                <MenuItem index={index} items={item} onItemClick={event=>this.itemClick(event,item)}/>
-            </li>
-                return list;
-            })
-
-        return (
-            <div id={this.props.id} className={tabMenuClass} style={this.props.style} ref={el=>this.container=el}>
-                <ul className="ui-tabmenu-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-                    {item}
-                </ul>
-            </div>
-        );
+            return (
+                <div id={this.props.id} className={className} style={this.props.style}>
+                    <ul className="ui-tabmenu-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                        {items}
+                    </ul>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 }

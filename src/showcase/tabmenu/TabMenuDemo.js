@@ -8,17 +8,18 @@ export class TabMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            items: [
+                {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
+                {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
+                {label: 'Documentation', icon: 'fa fa-fw fa-book'},
+                {label: 'Support', icon: 'fa fa-fw fa-support'},
+                {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+            ]
+        };
     }
 
     render() {
-        var items=[
-            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
-            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
-            {label: 'Support', icon: 'fa fa-fw fa-support'},
-            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-        ];
         return (
             <div>
                 <div className="content-section introduction">
@@ -28,7 +29,7 @@ export class TabMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <TabMenu model={items}/>
+                    <TabMenu model={this.state.items} onChange={(e) => this.setState({activeItem: e.value})}/>
                 </div>
 
                 <TabMenuDoc/>
