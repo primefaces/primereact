@@ -2,165 +2,212 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import {MenuItem} from './MenuItem'
 
 export class Menu extends Component {
 
     static defaultProps = {
         id: null,
-        model:null,
-        popup:false,
-        style:null,
-        className:null,
-        onShow:null,
-        onHide:null
+        model: null,
+        popup: false,
+        style: null,
+        className: null,
+        autoZIndex: true,
+        baseZIndex: 0,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
         id: PropTypes.string,
-        model:PropTypes.array,
-        popup:PropTypes.bool,
-        style:PropTypes.object,
-        className:PropTypes.string,
-        onShow:PropTypes.func,
-        onHide:PropTypes.func
+        model: PropTypes.array,
+        popup: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
-    constructor() {
+    constructor(props) {
         super();
-        this.state = {};
+        this.onMenuClick = this.onMenuClick.bind(this);
     }
-    hasSubMenu(){
-        if(this.props.model){
-            for(var items of this.props.model){
-                if(items.items)
-                    return true;
-            }
+
+    onMenuClick() {
+        if (this.documentClickListener) {
+            this.selfClick = true;
         }
-        return false;
     }
-    itemClick(event,item){
-        if(item.disabled) {
+
+    itemClick(event, item){
+        if (item.disabled) {
             event.preventDefault();
             return;
         }
 
-        if(!item.url) {
+        if (!item.url) {
             event.preventDefault();
         }
 
-        if(item.command) {
+        if (item.command) {
             item.command({
                 originalEvent: event,
                 item: item
             });
         }
 
-        if(this.props.popup) {
+        if (this.props.popup) {
             this.hide(event);
         }
     }
-    toggle(event){
-        if(this.documentClickListener) {
-            this.dropdownClick = true;
-        }
-        if(this.container.offsetParent)
-            this.hide(event);
-        else
-            this.show(event);
 
+    toggle(event) {
+        if (this.props.popup) {
+            if (this.documentClickListener) {
+                this.selfClick = true;
+            }
+    
+            if (this.container.offsetParent)
+                this.hide(event);
+            else
+                this.show(event);
+        }
     }
 
     show(event) {
-        let target = event.currentTarget;
-        this.onResizeTarget = event.currentTarget;
         this.container.style.display = 'block';
-        DomHandler.absolutePosition(this.container, target);
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        DomHandler.absolutePosition(this.container,  event.currentTarget);
         DomHandler.fadeIn(this.container, 250);
-        this.bindDocumentListener();
-        if(this.props.onShow){
-            this.props.onShow({
-                originalEvent:event
-            })
+        
+        this.bindDocumentListeners();
+        
+        if (this.props.onShow) {
+            this.props.onShow(event);
         }
     }
+
     hide(event) {
-        if(this.container)
+        if (this.container) {
             this.container.style.display = 'none';
-        if(this.props.onHide){
-            this.props.onHide({
-                originalEvent:event
-            })
         }
-        this.unbindDocumentListener();
+            
+        if (this.props.onHide) {
+            this.props.onHide(event);
+        }
+
+        this.unbindDocumentListeners();
+        this.selfClick = false;
     }
-    bindDocumentListener() {
-        if(!this.documentClickListener) {
-            this.documentClickListener = () => {
-                if(this.dropdownClick)
-                    this.dropdownClick = false;
+
+    bindDocumentListeners() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.selfClick)
+                    this.selfClick = false;
                 else
-                    this.hide();
+                    this.hide(event);
             };
 
             document.addEventListener('click', this.documentClickListener);
         }
 
-        window.addEventListener('resize',()=>{
-            if(this.onResizeTarget && this.container.offsetParent) {
-                DomHandler.absolutePosition(this.container, this.onResizeTarget);
-            }
-        })
+        if (!this.documentResizeListener) {
+            this.documentResizeListener = (event) => {
+                if(this.container.offsetParent) {
+                    this.hide(event);
+                }
+            };
+
+            window.addEventListener('resize', this.documentResizeListener);
+        }
     }
 
-    unbindDocumentListener() {
+    unbindDocumentListeners() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
+
+        if(this.documentResizeListener) {
+            window.removeEventListener('resize', this.documentResizeListener);
+            this.documentResizeListener = null;
+        }
     }
 
     componentWillUnmount() {
-        this.unbindDocumentListener();
+        this.unbindDocumentListeners();
     }
 
-    render() {
-        var className=classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix',this.props.className,
-            {'ui-menu-dynamic ui-shadow':this.props.popup})
-        var itemSubMenu,itemMenu;
-
-        if(this.hasSubMenu()){
-            itemSubMenu=this.props.model && this.props.model.map((submenu,indexSub)=>{
-                var subMenu=<div key={indexSub}>
-                    <li className={submenu.separator?'ui-menu-separator ui-widget-content':'ui-widget-header ui-corner-all'}>
-                        <h3>{submenu.label}</h3>
-                    </li>
-                    {submenu.items && submenu.items.map((item,indexItem)=>{
-                      var menu=<li className={item.separator?'ui-menu-separator ui-widget-content':'ui-menuitem ui-widget ui-corner-all'}
-                                       key={item.label+'_'+indexSub+'_'+indexItem}>
-                          <MenuItem items={item} index={indexItem} onItemClick={event=>this.itemClick(event,item)}/>
-                      </li>
-                        return menu;
-                    })}</div>
-                    return subMenu})
-        }
-        else{
-            itemMenu=this.props.model && this.props.model.map((item,index)=>{
-                var menu=<li className={item.separator?'ui-menu-separator ui-widget-content':'ui-menuitem ui-widget ui-corner-all'}
-                             key={item.label+'_'+index}>
-                    <MenuItem items={item} index={index} onItemClick={event=>this.itemClick(event,item)}/>
-                </li>
-                    return menu
-                })
-        }
+    renderSubmenu(submenu, index) {
+        const items = submenu.items.map((item, index)=> {
+            return this.renderMenuitem(item, index);
+        });
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={el=>this.container=el} onClick={()=>this.preventDocumentDefault=true}>
-                <ul className="ui-menu-list ui-helper-reset">
-                    {itemSubMenu}
-                    {itemMenu}
-                </ul>
-            </div>
+            <React.Fragment key={submenu.label + '_' + index}>
+                <li className="ui-submenu-header ui-widget-header ui-corner-all">{submenu.label}</li>
+                {items}
+            </React.Fragment>
         );
+    }
+
+    renderSeparator(index) {
+        return (
+            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+        );
+    }
+
+    renderMenuitem(item, index) {
+        const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
+        const icon = item.icon ? <span className={iconClassName}></span>: null;
+
+        return (
+            <li key={item.label + '_' + index} className="ui-menuitem ui-widget ui-corner-all">
+                 <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+                    {icon}
+                    <span className="ui-menuitem-text">{item.label}</span>
+                </a>
+            </li>
+        );
+    }
+
+    renderItem(item, index) {
+        if (item.separator) {
+            return this.renderSeparator(index);
+        }
+        else {
+            if (item.items)
+                return this.renderSubmenu(item, index);
+            else
+                return this.renderMenuitem(item, index);
+        }
+    }
+
+    renderMenu() {
+        return (
+            this.props.model.map((item, index) => {
+                return this.renderItem(item, index);
+            })
+        );
+    }
+  
+    render() {
+        if (this.props.model) {
+            const className = classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.className, {'ui-menu-dynamic ui-shadow': this.props.popup});
+            const menuitems = this.renderMenu();
+
+            return (
+                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
+                    <ul className="ui-menu-list ui-helper-reset">
+                        {menuitems}
+                    </ul>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 }

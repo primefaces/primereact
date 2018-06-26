@@ -7,21 +7,20 @@ import {Button} from "../../components/button/Button";
 
 export class MenuDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-        var items=[ {
+        let items= [
+            {
                 label: 'File',
                 items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
                         {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
-            }, {
+            }, 
+            {
                 label: 'Edit',
                 items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
                         {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
-            }];
+            }
+        ];
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -79,9 +78,9 @@ import {Menu} from 'primereact/menu';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-javascript">
                             {`
-var items=[
+let items = [
     {label: 'New', icon: 'fa fa-fw fa-plus'},
     {label: 'Open', icon: 'fa fa-fw fa-download'},
     {label: 'Undo', icon: 'fa fa-fw fa-refresh'}
@@ -92,9 +91,9 @@ var items=[
 
                         <h3>SubMenus</h3>
                         <p>Menu supports 1 level of nesting via subitems of an item.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-javascript">
                             {`
-var items=[
+let items = [
     {
         label: 'File',
         items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
@@ -112,9 +111,10 @@ var items=[
 
                         <h3>Popup Mode</h3>
                         <p>Menu is inline by default, popup mode is also supported by enabling popup property and calling toggle method by passing the event from the anchor element.</p>
+
                         <CodeHighlight className="language-jsx">
                             {`
-<Menu model={items} popup={true} ref={el=>this.menu=el} />
+<Menu model={items} popup={true} ref={el => this.menu=el} />
 <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
 
 `}
@@ -124,44 +124,56 @@ var items=[
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>      
-                                <tr>
-                                    <td>model</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>popup</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>Defines if menu would displayed as a popup.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the component.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>      
+                                    <tr>
+                                        <td>model</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of menuitems.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>popup</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Defines if menu would displayed as a popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>baseZIndex</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Base zIndex value to use in layering.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoZIndex</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to automatically manage layering.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -170,28 +182,28 @@ var items=[
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
                                 <tbody>
-                                <tr>
-                                    <td>toggle</td>
-                                    <td>event: browser event</td>
-                                    <td>Toggles the visibility of the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>show</td>
-                                    <td>event: browser event</td>
-                                    <td>Displays the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>hide</td>
-                                    <td>-</td>
-                                    <td>Hides the popup menu.</td>
-                                </tr>
+                                    <tr>
+                                        <td>toggle</td>
+                                        <td>event: Browser event</td>
+                                        <td>Toggles the visibility of the popup menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>show</td>
+                                        <td>event: Browser event</td>
+                                        <td>Displays the popup menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>hide</td>
+                                        <td>event: Browser event</td>
+                                        <td>Hides the popup menu.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -200,23 +212,23 @@ var items=[
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>onShow</td>
-                                    <td>event.originalEvent: browser event </td>
-                                    <td>Displays the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>onHide</td>
-                                    <td>event.originalEvent: browser event </td>
-                                    <td>Hides the popup menu.</td>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>event: Browser event </td>
+                                        <td>Callback to invoke when a popup menu is shown.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>event: Browser event </td>
+                                        <td>Hides the popup menu.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -226,32 +238,32 @@ var items=[
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Element</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>ui-menu</td>
-                                    <td>Container element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menu-list</td>
-                                    <td>List element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem</td>
-                                    <td>Menuitem element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem-text</td>
-                                    <td>Label of a menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem-icon</td>
-                                    <td>Icon of a menuitem.</td>
-                                </tr>
+                                    <tr>
+                                        <td>ui-menu</td>
+                                        <td>Container element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menu-list</td>
+                                        <td>List element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem</td>
+                                        <td>Menuitem element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem-text</td>
+                                        <td>Label of a menuitem.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem-icon</td>
+                                        <td>Icon of a menuitem.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -267,23 +279,25 @@ var items=[
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Menu} from 'primereact/menu';
+
 export class MenuDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-        var items=[ {
+        let items= [
+            {
                 label: 'File',
                 items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
                         {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
-            }, {
+            }, 
+            {
                 label: 'Edit',
                 items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
                         {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
-            }];
+            }
+        ];
+
         return (
             <div>
                 <div className="content-section">
