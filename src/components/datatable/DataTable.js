@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {Paginator} from '../paginator/Paginator';
-import {TableHeader} from './TableHeader';
-import {TableBody} from './TableBody';
-import {TableFooter} from './TableFooter';
-import {ScrollableView} from './ScrollableView';
-import ObjectUtils from '../utils/ObjectUtils';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Paginator } from '../paginator/Paginator';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
+import { ScrollableView } from './ScrollableView';
+import { TableBody } from './TableBody';
+import { TableFooter } from './TableFooter';
+import { TableHeader } from './TableHeader';
 
 export class DataTable extends Component {
 
@@ -403,23 +403,20 @@ export class DataTable extends Component {
         this.container.style.width = this.getContainerWidth();
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         let state = {};
 
-        if(nextProps.first !== null && nextProps.first !== prevState.first) { state = {...state, ...{first: nextProps.first}} }
-        if(nextProps.rows !== null && nextProps.rows !== prevState.rows) { state = {...state, ...{rows: nextProps.rows}} }
-        if(nextProps.sortField && nextProps.sortField !== prevState.sortField) { state = {...state, ...{sortField: nextProps.sortField}} }
-        if(nextProps.sortOrder && nextProps.sortOrder !== prevState.sortOrder) { state = {...state, ...{sortOrder: nextProps.sortOrder}} }
-        if(nextProps.multiSortMeta && nextProps.multiSortMeta !== prevState.multiSortMeta) { state = {...state, ...{multiSortMeta: nextProps.multiSortMeta}} }
-        if(nextProps.filters && nextProps.filters !== prevState.filters) { state = {...state, ...{filters: nextProps.filters}} }
+        if(this.props.first !== prevProps.first && this.props.first !== prevState.first) { state = {first: this.props.first} }
+        if(this.props.rows !== prevProps.rows && this.props.rows !== prevState.rows) { state = {...state, ...{rows: this.props.rows}} }
+        if(this.props.sortField && this.props.sortField !== prevState.sortField) { state = {...state, ...{sortField: this.props.sortField}} }
+        if(this.props.sortOrder && this.props.sortOrder !== prevState.sortOrder) { state = {...state, ...{sortOrder: this.props.sortOrder}} }
+        if(this.props.multiSortMeta && this.props.multiSortMeta !== prevState.multiSortMeta) { state = {...state, ...{multiSortMeta: this.props.multiSortMeta}} }
+        if(this.props.filters && this.props.filters !== prevState.filters) { state = {...state, ...{filters: this.props.filters}} }
 
-        if(nextProps.globalFilter !== null) { state = {...state, ...{first: 0}} }
+        if(this.props.globalFilter !== null) { state = {...state, ...{first: 0}} }
 
         if(Object.keys(state).length > 0)
-            return state;
-
-        return null;
-
+            this.setState(state);
     }
 
     hasFooter() {
