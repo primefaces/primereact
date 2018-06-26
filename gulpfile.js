@@ -34,7 +34,6 @@ gulp.task('images', function() {
         .pipe(gulp.dest('public/resources/images'));
 });
 
-
 gulp.task('build-exports', function() {
     return gulp.src(['exports/*.js','exports/*.d.ts'])
         .pipe(gulp.dest('./'));
