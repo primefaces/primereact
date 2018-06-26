@@ -60,7 +60,7 @@ export class TreeTableDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {TreeTable} from 'primereact/components/treetable/TreeTable';
+import {TreeTable} from 'primereact/treetable';
 
 `}
                         </CodeHighlight>
@@ -303,7 +303,7 @@ render() {
 
                         <CodeHighlight className="language-javascript">
                             {`
-import {Column} from 'primereact/components/column/Column';
+import {Column} from 'primereact/column';
 
 `}
                         </CodeHighlight>

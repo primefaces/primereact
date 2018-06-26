@@ -113,7 +113,7 @@ class DropdownDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Dropdown} from 'primereact/components/dropdown/Dropdown';
+import {Dropdown} from 'primereact/dropdown';
 
 `}
                         </CodeHighlight>

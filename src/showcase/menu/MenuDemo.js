@@ -61,7 +61,7 @@ class MenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Menu} from 'primereact/components/menu/Menu';
+import {Menu} from 'primereact/menu';
 
 `}
                         </CodeHighlight>

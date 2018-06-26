@@ -62,7 +62,7 @@ class ToggleButtonDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {ToggleButton} from 'primereact/components/togglebutton/ToggleButton';
+import {ToggleButton} from 'primereact/togglebutton';
 
 `}
 </CodeHighlight>

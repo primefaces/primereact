@@ -70,7 +70,7 @@ export class DialogDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Dialog} from 'primereact/components/dialog/Dialog';
+import {Dialog} from 'primereact/dialog';
 
 `}
 </CodeHighlight>
@@ -393,10 +393,8 @@ const footer = (
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Dialog} from 'primereact/components/dialog/Dialog';
-import {Button} from 'primereact/components/button/Button';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import {Dialog} from 'primereact/dialog';
+import {Button} from 'primereact/button';
 
 export class DialogDemo extends Component {
         

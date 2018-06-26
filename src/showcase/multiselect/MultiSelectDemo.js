@@ -60,7 +60,7 @@ export class MultiSelectDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
+import {MultiSelect} from 'primereact/multiselect';
 
 `}
 </CodeHighlight>
@@ -325,8 +325,8 @@ carTemplate(option) {
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
-import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+import {MultiSelect} from 'primereact/multiselect';
+import {TabView,TabPanel} from 'primereact/tabview';
 
 export class MultiSelectDemo extends Component {
         

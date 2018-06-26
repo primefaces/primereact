@@ -124,7 +124,7 @@ class MenubarDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Menubar} from 'primereact/components/menubar/Menubar';
+import {Menubar} from 'primereact/menubar';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>

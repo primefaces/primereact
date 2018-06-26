@@ -71,7 +71,7 @@ export class FileUploadDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {FileUpload} from 'primereact/components/fileupload/FileUpload';
+import {FileUpload} from 'primereact/fileupload';
 
 `}
 </CodeHighlight>

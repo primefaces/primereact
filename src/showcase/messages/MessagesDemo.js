@@ -141,8 +141,8 @@ export class MessagesDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Messages} from 'primereact/components/messages/Messages';
-import {Message} from 'primereact/components/message/Message';
+import {Messages} from 'primereact/messages';
+import {Message} from 'primereact/message';
 
 `}
 </CodeHighlight>
@@ -446,10 +446,10 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Messages} from 'primereact/components/messages/Messages';
-import {Message} from 'primereact/components/message/Message';
-import {InputText} from 'primereact/components/inputtext/InputText';
-import {Button} from 'primereact/components/button/Button';
+import {Messages} from 'primereact/messages';
+import {Message} from 'primereact/message';
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
 
 export class MessagesDemo extends Component {
         

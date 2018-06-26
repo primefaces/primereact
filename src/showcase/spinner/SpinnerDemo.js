@@ -70,7 +70,7 @@ class SpinnerDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Spinner} from 'primereact/components/spinner/Spinner';
+import {Spinner} from 'primereact/spinner';
 
 `}
 </CodeHighlight>

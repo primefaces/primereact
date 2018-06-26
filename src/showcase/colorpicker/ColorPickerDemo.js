@@ -53,7 +53,7 @@ class ColorPickerDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
+import {ColorPicker} from 'primereact/colorpicker';
 
 `}
 </CodeHighlight>
@@ -252,7 +252,7 @@ import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {ColorPicker} from 'primereact/components/colorpicker/ColorPicker';
+import {ColorPicker} from 'primereact/colorpicker';
 
 export class ColorPickerDemo extends Component {
         

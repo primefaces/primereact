@@ -166,7 +166,7 @@ export class DataViewDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {DataView, DataViewLayoutOptions} from 'primereact/components/dataview/DataView';
+import {DataView, DataViewLayoutOptions} from 'primereact/dataview';
 
 `}
                         </CodeHighlight>

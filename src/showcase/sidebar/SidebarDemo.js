@@ -86,7 +86,7 @@ class SidebarDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Sidebar} from 'primereact/components/sidebar/Sidebar';
+import {Sidebar} from 'primereact/sidebar';
 
 `}
                         </CodeHighlight>

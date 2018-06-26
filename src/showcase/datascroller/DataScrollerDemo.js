@@ -117,7 +117,7 @@ export class DataScrollerDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {DataScroller} from 'primereact/components/datascroller/DataScroller';
+import {DataScroller} from 'primereact/datascroller';
 
 `}
 </CodeHighlight>

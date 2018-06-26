@@ -66,7 +66,7 @@ class EditorDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Editor} from 'primereact/components/editor/Editor';
+import {Editor} from 'primereact/editor';
 
 `}
                         </CodeHighlight>
@@ -241,8 +241,8 @@ npm install quill --save
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {Editor} from "primereact/components/editor/Editor";
-import {Button} from "primereact/components/button/Button";
+import {Editor} from 'primereact/editor";
+import {Button} from 'primereact/button";
                                 
 export class EditorDemo extends Component {
 

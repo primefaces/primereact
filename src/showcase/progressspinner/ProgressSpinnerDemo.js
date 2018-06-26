@@ -44,7 +44,7 @@ class ProgressSpinnerDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {ProgressSpinner} from 'primereact/components/progressspinner/ProgressSpinner';
+import {ProgressSpinner} from 'primereact/progressspinner';
 
 `}</CodeHighlight>
 

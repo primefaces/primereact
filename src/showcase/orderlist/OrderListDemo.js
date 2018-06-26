@@ -68,7 +68,7 @@ export class OrderListDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {OrderList} from 'primereact/components/orderlist/OrderList';
+import {OrderList} from 'primereact/orderlist';
 
 `}
 </CodeHighlight>
@@ -242,9 +242,8 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
 {`
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import {OrderList} from 'primereact/components/orderlist/OrderList';
+import {OrderList} from 'primereact/orderlist';
 import {CarService} from '../service/CarService';
-import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 
 export class OrderListDemo extends Component {
 

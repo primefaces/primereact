@@ -89,10 +89,10 @@ export class DataTableColTogglerDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/components/datatable/DataTable';
-import {Column} from 'primereact/components/column/Column';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
+import {MultiSelect} from 'primereact/multiselect';
 
 export class DataTableColTogglerDemo extends Component {
 

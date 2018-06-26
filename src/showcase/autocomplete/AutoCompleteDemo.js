@@ -119,7 +119,7 @@ class AutoCompleteDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
+import {AutoComplete} from 'primereact/autocomplete';
 
 `}
                         </CodeHighlight>
@@ -524,7 +524,7 @@ brandTemplate(brand) {
                         <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
+import {AutoComplete} from 'primereact/autocomplete';
 import {CountryService} from '../service/CountryService';
 
 export class AutoCompleteDemo extends Component {

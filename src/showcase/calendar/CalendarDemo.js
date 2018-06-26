@@ -136,7 +136,7 @@ export class CalendarDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Calendar} from 'primereact/components/calendar/Calendar';
+import {Calendar} from 'primereact/calendar';
 
 `}
 </CodeHighlight>
@@ -640,8 +640,8 @@ let es = {
 {`
     import React, {Component} from 'react';
     import {Link} from 'react-router-dom';
-    import {Calendar} from 'primereact/components/calendar/Calendar';
-    import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+    import {Calendar} from 'primereact/calendar';
+    import {TabView,TabPanel} from 'primereact/tabview';
 
     export class CalendarDemo extends Component {
 

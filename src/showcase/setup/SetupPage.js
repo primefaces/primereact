@@ -26,10 +26,12 @@ npm install primeicons --save
 
 
                 <h3>Import</h3>
+                <p>Path of each component is available at the "import" section of a component documentation.</p>
 <CodeHighlight className="language-javascript">
 {`
-//import {ComponentName} from 'primereact/components/componentname/componentname';
-import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
+//import {ComponentName} from 'primereact/{componentname}';
+import {Dialog} from 'primereact/dialog';
+import {Accordion,AccordionTab} from 'primereact/accordion';
 
 `}
 </CodeHighlight>

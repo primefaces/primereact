@@ -59,7 +59,7 @@ class ToolbarDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Toolbar} from 'primereact/components/toolbar/Toolbar';
+import {Toolbar} from 'primereact/toolbar';
 
 `}</CodeHighlight>
 

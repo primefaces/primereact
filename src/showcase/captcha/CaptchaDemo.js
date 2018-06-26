@@ -46,7 +46,7 @@ class CaptchaDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Captcha} from 'primereact/components/captcha/Captcha';
+import {Captcha} from 'primereact/captcha';
 
 `}
 </CodeHighlight>

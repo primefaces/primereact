@@ -88,7 +88,7 @@ class ListboxDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {ListBox} from 'primereact/components/listbox/ListBox';
+import {ListBox} from 'primereact/listbox';
 
 `}
 </CodeHighlight>
@@ -354,8 +354,8 @@ carTemplate(option) {
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {ListBox} from 'primereact/components/listbox/ListBox';
-import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+import {ListBox} from 'primereact/listbox';
+import {TabView,TabPanel} from 'primereact/tabview';
 
 export class ListBoxDemo extends Component {
         

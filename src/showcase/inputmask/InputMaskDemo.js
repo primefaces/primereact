@@ -105,7 +105,7 @@ class InputMaskDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {InputMask} from 'primereact/components/inputmask/InputMask';
+import {InputMask} from 'primereact/inputmask';
 
 `}
 </CodeHighlight>

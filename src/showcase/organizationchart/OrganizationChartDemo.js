@@ -176,7 +176,7 @@ export class OrganizationChartDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {OrganizationChart} from 'primereact/components/organizationchart/OrganizationChart';
+import {OrganizationChart} from 'primereact/organizationchart';
 
 `}
 </CodeHighlight>

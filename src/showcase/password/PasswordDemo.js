@@ -40,7 +40,7 @@ class PasswordDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                         {`
-import {Password} from 'primereact/components/password/Password';
+import {Password} from 'primereact/password';
 
 `}</CodeHighlight>
 
@@ -138,9 +138,7 @@ import {Password} from 'primereact/components/password/Password';
                             {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Password} from 'primereact/components/password/Password';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import {Password} from 'primereact/password';
 
 export class PasswordDemo extends Component {
 

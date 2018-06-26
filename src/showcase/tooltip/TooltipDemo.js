@@ -89,7 +89,7 @@ class TooltipDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Tooltip} from 'primereact/components/tooltip/Tooltip';
+import {Tooltip} from 'primereact/tooltip';
 
 `}
 </CodeHighlight>

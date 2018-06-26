@@ -61,7 +61,7 @@ export class TabViewDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+import {TabView,TabPanel} from 'primereact/tabview';
 
 `}
 </CodeHighlight>

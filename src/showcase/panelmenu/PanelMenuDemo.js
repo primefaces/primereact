@@ -117,7 +117,7 @@ class PanelMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {PanelMenu} from 'primereact/components/panelmenu/PanelMenu';
+import {PanelMenu} from 'primereact/panelmenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>

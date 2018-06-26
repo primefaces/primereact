@@ -94,10 +94,10 @@ export class DataTableColGroupDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/components/datatable/DataTable';
-import {Column} from 'primereact/components/column/Column';
-import {ColumnGroup} from 'primereact/components/columngroup/ColumnGroup';
-import {Row} from 'primereact/components/row/Row';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {ColumnGroup} from 'primereact/columngroup';
+import {Row} from 'primereact/row';
 
 export class DataTableColGroupDemo extends Component {
 

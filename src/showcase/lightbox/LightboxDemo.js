@@ -68,7 +68,7 @@ class LightboxDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Lightbox} from 'primereact/components/lightbox/Lightbox';
+import {Lightbox} from 'primereact/lightbox';
 
 `}</CodeHighlight>
 

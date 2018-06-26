@@ -115,7 +115,7 @@ export class ScheduleDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Schedule} from 'primereact/components/schedule/Schedule';
+import {Schedule} from 'primereact/schedule';
 
 `}
 </CodeHighlight>

@@ -130,7 +130,7 @@ class ContextMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
+import {ContextMenu} from 'primereact/contextmenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>

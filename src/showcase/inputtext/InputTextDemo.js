@@ -59,7 +59,7 @@ class InputTextDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {InputText} from 'primereact/components/inputtext/InputText';
+import {InputText} from 'primereact/inputtext';
 
 `}
 </CodeHighlight>
@@ -129,7 +129,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {InputText} from 'primereact/components/inputtext/InputText';
+import {InputText} from 'primereact/inputtext';
     
 export class InputTextDemo extends Component {
     

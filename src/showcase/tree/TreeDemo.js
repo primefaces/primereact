@@ -145,7 +145,7 @@ export class TreeDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Tree} from 'primereact/components/tree/Tree';
+import {Tree} from 'primereact/tree';
 
 `}
 </CodeHighlight>

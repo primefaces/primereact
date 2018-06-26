@@ -64,7 +64,7 @@ class RadioButtonDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
+import {RadioButton} from 'primereact/radiobutton';
 
 `}
 </CodeHighlight>

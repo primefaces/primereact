@@ -87,10 +87,10 @@ export class DataTableContextMenuDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/components/datatable/DataTable';
-import {Column} from 'primereact/components/column/Column';
-import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
-import {Growl} from 'primereact/components/growl/Growl';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {ContextMenu} from 'primereact/contextmenu';
+import {Growl} from 'primereact/growl';
 import {CarService} from '../service/CarService';
 
 export class DataTableContextMenuDemo extends Component {

@@ -89,8 +89,8 @@ export class DataTableRowExpansionDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/components/datatable/DataTable';
-import {Column} from 'primereact/components/column/Column';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
 
 export class DataTableRowExpansionDemo extends Component {

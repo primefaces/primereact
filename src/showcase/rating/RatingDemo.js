@@ -57,7 +57,7 @@ class RatingDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Rating} from 'primereact/components/rating/Rating';
+import {Rating} from 'primereact/rating';
 
 `}
                         </CodeHighlight>
@@ -202,8 +202,7 @@ import {Rating} from 'primereact/components/rating/Rating';
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {Rating} from 'primereact/components/rating/Rating'
-import {TabView, TabPanel} from 'primereact/components/tabview/TabView';
+import {Rating} from 'primereact/rating';
 
 export class RatingDemo extends Component {
 

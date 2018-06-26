@@ -86,10 +86,10 @@ export class DataTableTemplatingDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/components/datatable/DataTable';
-import {Column} from 'primereact/components/column/Column';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Button} from 'primereact/button';
 import {CarService} from '../service/CarService';
-import {Button} from 'primereact/components/button/Button';
 
 export class DataTableTemplatingDemo extends Component {
 

@@ -96,7 +96,7 @@ export class DataGridDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {DataGrid} from 'primereact/components/datagrid/DataGrid';
+import {DataGrid} from 'primereact/datagrid';
 
 `}
 </CodeHighlight>

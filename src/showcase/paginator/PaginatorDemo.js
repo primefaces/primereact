@@ -66,7 +66,7 @@ export class PaginatorDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Paginator} from 'primereact/components/paginator/Paginator';
+import {Paginator} from 'primereact/paginator';
 
 `}
 </CodeHighlight>

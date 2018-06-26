@@ -106,7 +106,7 @@ export class DataListDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {DataList} from 'primereact/components/datalist/DataList';
+import {DataList} from 'primereact/datalist';
 
 `}
 </CodeHighlight>
@@ -337,8 +337,8 @@ componentDidMount() {
 {`
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { DataList } from 'primereact/components/datalist/DataList';
-import { Dialog } from 'primereact/components/dialog/Dialog';
+import { DataList } from 'primereact/datalist';
+import { Dialog } from 'primereact/dialog';
 import { CarService } from '../service/CarService';
 
 export class DataListDemo extends Component {

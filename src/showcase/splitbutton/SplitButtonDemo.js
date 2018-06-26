@@ -75,7 +75,7 @@ class SplitButtonDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
+import {SplitButton} from 'primereact/splitbutton';
 
 `}
 </CodeHighlight>
@@ -252,8 +252,8 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
-import {Growl} from 'primereact/components/growl/Growl';
+import {SplitButton} from 'primereact/splitbutton';
+import {Growl} from 'primereact/growl';
 
 export class SplitButtonDemo extends Component {
         

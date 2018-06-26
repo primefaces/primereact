@@ -56,7 +56,7 @@ export class OverlayPanelDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {OverlayPanel} from 'primereact/components/overlaypanel/OverlayPanel';
+import {OverlayPanel} from 'primereact/overlaypanel';
 
 `}
 </CodeHighlight>

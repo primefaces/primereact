@@ -125,7 +125,7 @@ class TieredMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {TieredMenu} from 'primereact/components/tieredmenu/TieredMenu';
+import {TieredMenu} from 'primereact/tieredmenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>

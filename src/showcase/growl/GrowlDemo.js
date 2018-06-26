@@ -124,7 +124,7 @@ export class GrowlDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Growl} from 'primereact/components/growl/Growl';
+import {Growl} from 'primereact/growl';
 
 `}
 </CodeHighlight>
@@ -429,8 +429,8 @@ this.growl.clear();
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Growl} from 'primereact/components/growl/Growl';
-import {Button} from 'primereact/components/button/Button';
+import {Growl} from 'primereact/growl';
+import {Button} from 'primereact/button';
 
 export class GrowlDemo extends Component {
         

@@ -132,7 +132,7 @@ class SlideMenuDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {SlideMenu} from 'primereact/components/slidemenu/SlideMenu';
+import {SlideMenu} from 'primereact/slidemenu';
 
 `}
 </CodeHighlight>

@@ -85,7 +85,7 @@ class StepsDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Steps} from 'primereact/components/steps/Steps';
+import {Steps} from 'primereact/steps';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>

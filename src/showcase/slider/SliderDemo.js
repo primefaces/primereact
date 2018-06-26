@@ -101,7 +101,7 @@ class SliderDoc extends Component {
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {Slider} from 'primereact/components/slider/Slider';
+import {Slider} from 'primereact/slider';
 
 `}
 </CodeHighlight>

@@ -52,7 +52,7 @@ class TabMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {TabMenu} from 'primereact/components/tabmenu/TabMenu';
+import {TabMenu} from 'primereact/tabmenu';
 
 `}</CodeHighlight>
                         <h3>MenuModel API</h3>

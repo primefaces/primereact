@@ -116,12 +116,12 @@ export class DataTableFilterDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/components/datatable/DataTable';
-import {Column} from 'primereact/components/column/Column';
-import {InputText} from 'primereact/components/inputtext/InputText';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {InputText} from 'primereact/inputtext';
+import {Dropdown} from 'primereact/dropdown';
+import {MultiSelect} from 'primereact/multiselect';
 import {CarService} from '../service/CarService';
-import {Dropdown} from 'primereact/components/dropdown/Dropdown';
-import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 
 export class DataTableFilterDemo extends Component {
 

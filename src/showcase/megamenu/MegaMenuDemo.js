@@ -162,7 +162,7 @@ class MegaMenuDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {MegaMenu} from 'primereact/components/megamenu/MegaMenu';
+import {MegaMenu} from 'primereact/megamenu';
 
 `}</CodeHighlight>
                         <h3>MenuItem API</h3>

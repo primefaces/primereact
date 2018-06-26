@@ -57,7 +57,7 @@ class CardDoc extends Component {
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
-import {Card} from 'primereact/components/card/Card';
+import {Card} from 'primereact/card';
 
 `}
                         </CodeHighlight>

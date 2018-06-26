@@ -57,7 +57,7 @@ export class DoughnutChartDemoDoc extends Component {
                         <CodeHighlight className="language-javascript">
                             {`
 import React, { Component } from 'react';
-import { Chart } from 'primereact/components/chart/Chart';
+import { Chart } from 'primereact/chart';
 
 export class DoughnutChartDemo extends Component {
 

@@ -161,7 +161,7 @@ export class GMapDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {GMap} from 'primereact/components/gmap/GMap';
+import {GMap} from 'primereact/gmap';
 
 `}
 </CodeHighlight>
@@ -432,12 +432,12 @@ render() {
 /*global google*/
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {GMap} from 'primereact/components/gmap/GMap';
-import {Dialog} from 'primereact/components/dialog/Dialog';
-import {InputText} from 'primereact/components/inputtext/InputText';
-import {Button} from 'primereact/components/button/Button';
-import {Checkbox} from 'primereact/components/checkbox/Checkbox';
-import {Growl} from 'primereact/components/growl/Growl';
+import {GMap} from 'primereact/gmap';
+import {Dialog} from 'primereact/dialog';
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {Growl} from 'primereact/growl';
 
 export class GMapDemo extends Component {
         
