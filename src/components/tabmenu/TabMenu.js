@@ -9,33 +9,18 @@ export class TabMenu extends Component {
         model: null,
         activeItem: null,
         style: null,
-        className: null
+        className: null,
+        onTabChange: null
     };
 
     static propTypes = {
         id: PropTypes.string,
-        model: PropTypes.array,
-        activeItem: PropTypes.any,
+        model: PropTypes.array.isRequired,
+        activeItem: PropTypes.any.isRequired,
         style: PropTypes.any,
-        className: PropTypes.string
+        className: PropTypes.string,
+        onTabChange: PropTypes.func.isRequired
     };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeItem: props.activeItem || props.model ? props.model[0] : null
-        };
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.activeItem && nextProps.activeItem !== prevState.activeItem) {
-            return {
-                activeItem: nextProps.activeItem
-            };
-        }
-
-        return null;
-    }
 
     itemClick(event, item) {
         if (item.disabled) {
@@ -54,18 +39,14 @@ export class TabMenu extends Component {
             });
         }
 
-        if(this.props.onChange) {
-            this.props.onChange({
-                originalEvent: event,
-                value: item
-            });
-        }
-
-        this.setState({activeItem: item});
+        this.props.onTabChange({
+            originalEvent: event,
+            value: item
+        });
     }
 
     renderMenuItem(item, index) {
-        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', {'ui-state-active': this.state.activeItem === item});
+        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', {'ui-state-active': this.props.activeItem ? this.props.activeItem === item : index === 0});
         const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 

@@ -15,7 +15,8 @@ export class TabMenuDemo extends Component {
                 {label: 'Documentation', icon: 'fa fa-fw fa-book'},
                 {label: 'Support', icon: 'fa fa-fw fa-support'},
                 {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-            ]
+            ],
+            activeItem: null
         };
     }
 
@@ -28,12 +29,12 @@ export class TabMenuDemo extends Component {
                         <p>Menu is a navigation/command component that displays items as tab headers.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <TabMenu model={this.state.items} onChange={(e) => this.setState({activeItem: e.value})}/>
+                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})} />
                 </div>
 
                 <TabMenuDoc/>
-
             </div>
         );
     }
@@ -60,30 +61,30 @@ import {TabMenu} from 'primereact/tabmenu';
                         <p>TabMenu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>TabMenu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<TabMenu model={items}/>
+                        <p>TabMenu is used as a controlled component and requires a collection of menuitems as its model.</p>
 
-`}
-                        </CodeHighlight>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-javascript">
                             {`
-var items=[
+constructor() {
+    super();
+    this.state = {
+        items: [
             {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
             {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
             {label: 'Documentation', icon: 'fa fa-fw fa-book'},
             {label: 'Support', icon: 'fa fa-fw fa-support'},
             {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-        ];
+        ],
+        activeItem: null
+    };
+}
 
 `}
                         </CodeHighlight>
-                        <h3>ActiveItem</h3>
-                        <p>By default, first item is activated, use activeItem property to choose the initial active item.</p>
+
                         <CodeHighlight className="language-jsx">
                             {`
-<TabMenu model={items} activeItem={items[2]}/>
+<TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})}/>
 
 `}
                         </CodeHighlight>
@@ -92,47 +93,69 @@ var items=[
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>model</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>activeItem</td>
-                                    <td>MenuItem</td>
-                                    <td>null</td>
-                                    <td>Defines the default active menuitem</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the component.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of menuitems.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>activeItem</td>
+                                        <td>MenuItem</td>
+                                        <td>null</td>
+                                        <td>Defines the default active menuitem</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+
+                        <h3>Events</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>onTabChange</td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.value: Selected menuitem </td>
+                                        <td>Callback to invoke when active tab changes.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
@@ -183,35 +206,39 @@ var items=[
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {TabMenu} from 'primereact/TabMenu';
+
 export class TabMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            items: [
+                {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
+                {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
+                {label: 'Documentation', icon: 'fa fa-fw fa-book'},
+                {label: 'Support', icon: 'fa fa-fw fa-support'},
+                {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+            ],
+            activeItem: null
+        };
     }
 
     render() {
-        var items=[
-            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
-            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
-            {label: 'Support', icon: 'fa fa-fw fa-support'},
-            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-        ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TabMenu</h1>
                         <p>Menu is a navigation/command component that displays items as tab headers.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <TabMenu model={items}/>
+                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})} />
                 </div>
-
-                <TabMenuDoc/>
-
             </div>
         );
     }
