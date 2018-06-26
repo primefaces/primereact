@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import highlight from 'highlight.js';
-import 'highlight.js/styles/vs2015.css';
+import Prism from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/themes/prism-coy.css';
 
 export class CodeHighlight extends Component {
     
@@ -21,20 +24,22 @@ export class CodeHighlight extends Component {
     }
 
     componentDidUpdate() {
-        highlight.initHighlighting.called = false;
         this.highlightCode();
     }
 
     highlightCode() {
-        const domNode = ReactDOM.findDOMNode(this.code);
-        highlight.highlightBlock(domNode);
+        if(Prism) {
+            Prism.highlightElement(this.codeElement);
+        }
     }
 
     render() {
-        return <pre style={this.props.style}>
-                <code ref={el=>this.code=el} className={this.props.className}>
+        return (
+            <pre style={this.props.style}>
+                <code ref={el => this.codeElement = el} className={this.props.className}>
                     {this.props.children}
                 </code>
-               </pre>
+            </pre>
+        );
     }
 }

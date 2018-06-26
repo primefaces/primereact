@@ -77,7 +77,7 @@ import {Dialog} from 'primereact/components/dialog/Dialog';
 
             <h3>Getting Started</h3>
             <p>Dialog is used as a container and visibility is controlled with visible property. "onHide" event is required to update the visibility state.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="markup">
 {`
 <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 

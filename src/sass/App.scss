@@ -1010,12 +1010,13 @@ a{
     top:100px !important;
 }
 
-pre {
+pre[class*="language-"] {
+    border-left: 10px solid #b2e0e8 !important;
+    box-shadow: -1px 0px 0px 0px #b2e0e8, 0px 0px 0px 1px #dfdfdf !important;
+    webkit-box-shadow: -1px 0px 0px 0px #b2e0e8, 0px 0px 0px 1px #dfdfdf !important;
+
     code {
-        border-radius: 4px;
-        -webkit-border-radius: 4px;
         font-size: 14px;
-        background-color: #20272a !important;
     }
 }
 
