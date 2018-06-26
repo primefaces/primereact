@@ -207,7 +207,6 @@ constructor() {
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {TabMenu} from 'primereact/TabMenu';
 
 export class TabMenuDemo extends Component {
