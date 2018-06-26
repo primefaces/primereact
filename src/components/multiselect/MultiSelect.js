@@ -205,7 +205,7 @@ export class MultiSelect extends Component {
             let option = this.props.options[i];
             let optionValue = this.getOptionValue(option);
             
-            if(ObjectUtils.equals(optionValue, value)) {
+            if(ObjectUtils.equals(optionValue, val)) {
                 label = this.getOptionLabel(option);
                 break; 
             }
