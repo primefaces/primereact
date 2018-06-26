@@ -73,7 +73,7 @@ class SplitButtonDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 
@@ -82,7 +82,7 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 
                         <h3>Getting Started</h3>
                         <p>SplitButton has a default command button and a collection of menuitems to be displayed in an overlay.</p> 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SplitButton label="Save" icon="pi pi-check" onClick={this.save} model={this.items}></SplitButton>
 
@@ -102,7 +102,7 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SplitButton label="Primary" />
 <SplitButton label="Secondary" className="ui-button-secondary" model={this.items}/>
@@ -248,7 +248,7 @@ import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
                     </TabPanel>
 
                     <TabPanel header="Source">
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';

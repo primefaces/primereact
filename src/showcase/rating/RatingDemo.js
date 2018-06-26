@@ -55,7 +55,7 @@ class RatingDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Rating} from 'primereact/components/rating/Rating';
 
@@ -65,7 +65,7 @@ import {Rating} from 'primereact/components/rating/Rating';
                         <h3>Getting Started</h3>
                         <p>Calendar is used a controlled input component with value and onChange properties.</p>
                         
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
@@ -199,7 +199,7 @@ import {Rating} from 'primereact/components/rating/Rating';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
 import {Rating} from 'primereact/components/rating/Rating'

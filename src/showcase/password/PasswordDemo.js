@@ -38,7 +38,7 @@ class PasswordDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                         {`
 import {Password} from 'primereact/components/password/Password';
 
@@ -46,7 +46,7 @@ import {Password} from 'primereact/components/password/Password';
 
                         <h3>Getting Started</h3>
                         <p>Password is used as a regular input component.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                         {`
 <Password value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
 
@@ -134,7 +134,7 @@ import {Password} from 'primereact/components/password/Password';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';

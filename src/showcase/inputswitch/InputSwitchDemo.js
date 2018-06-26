@@ -58,7 +58,7 @@ class InputSwitchDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {InputSwitch} from 'primereact/components/inputswitch/InputSwitch';
 
@@ -68,14 +68,14 @@ import {InputSwitch} from 'primereact/components/inputswitch/InputSwitch';
             <h3>Getting Started</h3>
             <p>InputSwitch is used as a controlled input with checked and onChange properties.</p>
                     
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <InputSwitch checked={this.state.checked1} onChange={this.onChangeBasic}/>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 constructor() {
     super();
@@ -92,7 +92,7 @@ onChangeBasic(e) {
 
             <h3>Customization</h3>
             <p>Labels can be customized using onLabel and offLabel properties.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={this.onChangeCustom}/>
 
@@ -187,7 +187,7 @@ onChangeBasic(e) {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class InputSwitchDemo extends Component {
 

@@ -59,7 +59,7 @@ export class TabViewDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 
@@ -68,7 +68,7 @@ import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
 
             <h3>Getting Started</h3>
             <p>Tabview element consists of one or more TabPanel elements. Header of the tab is defined using header attribute.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <TabView>
     <TabPanel header="Godfather I"  leftIcon="fa fa-calendar">
@@ -266,7 +266,7 @@ import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class TabViewDemo extends Component {
         

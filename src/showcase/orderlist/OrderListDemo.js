@@ -66,7 +66,7 @@ export class OrderListDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {OrderList} from 'primereact/components/orderlist/OrderList';
 
@@ -77,7 +77,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
             <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onChange 
                     callback to update the value after reorder.
             </p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
@@ -87,7 +87,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
             <h3>DragDrop</h3>
             <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflicts with other drag drop events on view.</p>
             
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
@@ -96,7 +96,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
 
             <h3>Responsive</h3>
             <p>In responsive mode, orderlist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
@@ -238,7 +238,7 @@ import {OrderList} from 'primereact/components/orderlist/OrderList';
                     <span>View on GitHub</span>
                 </a>
                 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';

@@ -164,7 +164,7 @@ export class DataViewDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {DataView, DataViewLayoutOptions} from 'primereact/components/dataview/DataView';
 
@@ -174,13 +174,13 @@ import {DataView, DataViewLayoutOptions} from 'primereact/components/dataview/Da
                         <h3>Getting Started</h3>
                         <p>DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. list and grid.Throughout the samples, a car interface having vin, brand, year and color properties are used to define an object to be displayed by the dataview. Cars are loaded by a CarService that connects to a server to fetch the cars.
                         </p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <DataView value={this.state.cars}></DataView>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 constructor() {
     super();
@@ -199,7 +199,7 @@ componentDidMount() {
                         <p>DataView has two layout modes; "list" and "grid" where a separate template is used to render an item in each mode. In list mode name of the layout is "list" whereas
                             in grid mode it is "grid".</p>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 itemTemplate(car,layout) {
     if(layout === 'list') {
@@ -226,7 +226,7 @@ itemTemplate(car,layout) {
                         <p>When both layout modes are enabled in DataView, a UI element would be necessary to let the user toggle between the view. DataViewLayoutOptions is a helper component
                             to display a buttonset to choose the layout mode in DataView.
                         </p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 let header =
 <div className="ui-g">
@@ -242,7 +242,7 @@ let header =
                         <h3>Paginator</h3>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number
                             of page links to display.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <DataView value={this.state.cars} paginatorPosition={'both'} paginator={true} rows={20}/>
 
@@ -252,14 +252,14 @@ let header =
 
                         <h3>Lazy Loading</h3>
                         <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. To implement lazy loading, enable lazy attribute and provide a method callback using onLazyLoad that actually loads the data from a remote datasource. onLazyLoad gets an event object that contains information about what to load. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <DataView value={this.state.cars} paginator={true} rows={20}
     lazy={true} onLazyLoad={(e)=>this.loadData(e)} totalRecords={totalRecords}/>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 loadData(event) {
     //event.first = First row offset
@@ -273,7 +273,7 @@ loadData(event) {
                         <p>sortField and sortOrder properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element.
                             Here is an example that uses a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.</p>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                         {`
 let header =
 <div className="ui-g">
@@ -537,7 +537,7 @@ let header =
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class DataViewDemo extends Component {
 

@@ -55,7 +55,7 @@ class ChipsDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Chips} from 'primereact/components/chips/Chips';
 
@@ -65,14 +65,14 @@ import {Chips} from 'primereact/components/chips/Chips';
             <h3>Getting Started</h3>
             <p>Chips requires an array as its value.</p>
                     
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Chips value={this.state.basicValues}></Chips>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 constructor(props) {
     super(props);
@@ -84,13 +84,13 @@ constructor(props) {
 
             <h3>Custom Content</h3>
             <p>A chip is customized using a template element where the value is passed as the implicit variable.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Chips value={this.state.advancedValues} max={5} itemTemplate={this.customTemplate}></Chips>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 customTemplate(item) {
     return (
@@ -244,7 +244,7 @@ customTemplate(item) {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class ChipsDemo extends Component {
     constructor(props) {

@@ -62,7 +62,7 @@ export class RadarChartDemoDoc extends Component {
             <div className="content-section source">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, { Component } from 'react';
 import { Chart } from '../../components/chart/Chart';

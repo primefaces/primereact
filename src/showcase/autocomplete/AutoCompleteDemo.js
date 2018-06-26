@@ -117,7 +117,7 @@ class AutoCompleteDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
 
@@ -127,7 +127,7 @@ import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
                         <h3>Getting Started</h3>
                         <p>AutoComplete requires a list of suggestions and a completeMethod to query for the results
                         in addition to the regular value and onChange properties of value binding.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <AutoComplete value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -135,7 +135,7 @@ import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 constructor() {
     super();
@@ -169,7 +169,7 @@ render() {
                             "blank" is the default mode to send a query with an empty string whereas 
                             "current" setting sends a query with the current value of the input.</p>
                         
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
 {`
 <AutoComplete dropdown={true} value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -179,7 +179,7 @@ render() {
                         
                         <h3>Multiple Mode</h3>
                         <p>Multiple mode is used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
 {`
 <AutoComplete multiple={true} value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -191,7 +191,7 @@ render() {
                         <p>AutoComplete can also work with objects using the field property that defines the label to display 
                         as a suggestion. The value passed to the model would still be the object instance of a suggestion. 
                         Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
 {`
 <AutoComplete field="name" value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -204,7 +204,7 @@ render() {
                         the suggestion option and returns an element. Similarly selectedItemTemplate property is available
                         to customize the chips in multiple mode using the same approach.</p>
                         
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
 {`
 <AutoComplete itemTemplate="this.brandTemplate" value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -212,7 +212,7 @@ render() {
 `}
                         </CodeHighlight>
                         
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
 {`
 brandTemplate(brand) {
     //return custom element
@@ -521,7 +521,7 @@ brandTemplate(brand) {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {AutoComplete} from 'primereact/components/autocomplete/AutoComplete';

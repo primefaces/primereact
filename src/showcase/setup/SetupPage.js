@@ -16,7 +16,7 @@ export class SetupPage extends Component {
                 <div className="content-section source">
                     <h3 style={{margin:'0'}}>Download</h3>
                     <p>PrimeReact is available at npm, if you have an existing application run the following commands to download PrimeReact and PrimeIcons to your project.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 npm install primereact --save
 npm install primeicons --save
@@ -26,7 +26,7 @@ npm install primeicons --save
 
 
                 <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 //import {ComponentName} from 'primereact/components/componentname/componentname';
 import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
@@ -85,7 +85,7 @@ dependencies: {
                     <h3>Styles</h3>
                     <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
                     
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 primereact/resources/themes/omega/theme.css
 primereact/resources/primereact.min.css
@@ -95,7 +95,7 @@ primeicons/primeicons.css
 </CodeHighlight>
 
                     <p>primereact.min.css is a bundle that contains styles of all components, if you require a style of a specific component import the css from the folder of the component along with the common.css.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 primereact/resources/themes/omega/theme.css
 primereact/components/common/common.css
@@ -105,7 +105,7 @@ primereact/components/autocomplete/AutoComplete.css
 </CodeHighlight>
 
                     <p>If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import 'primereact/resources/themes/omega/theme.css';
 import 'primereact/resources/primereact.min.css';

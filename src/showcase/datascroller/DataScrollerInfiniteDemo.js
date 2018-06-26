@@ -99,7 +99,7 @@ export class DataScrollerInfiniteDoc extends Component {
             <div className="content-section source">
                 <TabView>
                     <TabPanel header="Source">
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataScrollerInfiniteDemo extends Component {
 

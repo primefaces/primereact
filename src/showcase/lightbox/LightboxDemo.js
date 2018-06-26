@@ -66,7 +66,7 @@ class LightboxDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Lightbox} from 'primereact/components/lightbox/Lightbox';
 
@@ -74,14 +74,14 @@ import {Lightbox} from 'primereact/components/lightbox/Lightbox';
 
                         <h3>Getting Started</h3>
                         <p>Lightbox has two modes; image and custom content defined using type property. In image mode a collection of images are required to display where an image object in the collection defines the source of the original image, thumbnail image and the title.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Lightbox type="images" images={images}/>
 
 `}
                         </CodeHighlight>
                         
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
 {`
 var images=[
     {source:'showcase/resources/demo/images/sopranos/sopranos1.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg', title:'Sopranos 1'},
@@ -93,7 +93,7 @@ var images=[
 `}
                         </CodeHighlight>
                         <p>Content mode is enabled by setting type property to "content", providing an anchor to open the lightbox and content to display inside lightbox.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Lightbox type="content">
     <a className="group" href="#">
@@ -107,7 +107,7 @@ var images=[
 
                         <h3>Effects</h3>
                         <p>The easing function to use between image transitions is "ease-out" by default and this can be customized using easing property. See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values. Duration of the effect can be changed using effectDuration option.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Lightbox type="images" images={images} easing="ease-in" effectDuration="1500ms" />
 
@@ -223,7 +223,7 @@ var images=[
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class LightboxDemo extends Component {
 

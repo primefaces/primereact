@@ -122,7 +122,7 @@ class MenubarDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Menubar} from 'primereact/components/menubar/Menubar';
 
@@ -132,12 +132,12 @@ import {Menubar} from 'primereact/components/menubar/Menubar';
 
                         <h3>Getting Started</h3>
                         <p>Menubar requires nested menuitems as its model.</p>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 <Menubar model={items}/>
 
 `}</CodeHighlight>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 var items=[
     {
@@ -219,7 +219,7 @@ var items=[
 
                         <h3>Custom Content</h3>
                         <p>Custom content can be placed between Menubar tags.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Menubar model={items}>
     <InputText placeholder="Search" type="text"/>
@@ -316,7 +316,7 @@ var items=[
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class MenubarDemo extends Component {
 

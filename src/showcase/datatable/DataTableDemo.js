@@ -78,7 +78,7 @@ export class DataTableDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {DataTable} from 'primereact/components/datatable/DataTable';
 
@@ -90,7 +90,7 @@ import {DataTable} from 'primereact/components/datatable/DataTable';
                 Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
             </p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import axios from 'axios';
 
@@ -116,7 +116,7 @@ export class CarService {
 </CodeHighlight>
 
             <p>Following sample datatable has 4 columns and retrieves the data from a service on componentDidMount.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableDemo extends Component {
 
@@ -146,7 +146,7 @@ export class DataTableDemo extends Component {
 </CodeHighlight>
 
             <p>Dynamic columns are also possible by creating the column component dynamically.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableDemo extends Component {
 
@@ -404,7 +404,7 @@ export class DataTableDemo extends Component {
                 On the other hand, header and footer properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly DataTable itself
                 also provides header and footer properties for the main header and footer of the table.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableTemplatingDemo extends Component {
 
@@ -460,7 +460,7 @@ export class DataTableTemplatingDemo extends Component {
             <h3>Column Group</h3>
             <p>Columns can be grouped at header and footer sections by defining a ColumnGroup component as the headerColumnGroup and footerColumnGroup properties.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
 import {DataTable} from 'primereact/components/datatable/DataTable';
@@ -532,7 +532,7 @@ export class DataTableColGroupDemo extends Component {
 
             <h3>Paginator</h3>
             <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. See <Link to="/paginator">&#9679; paginator</Link> component for more information.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTablePaginatorDemo extends Component {
 
@@ -563,7 +563,7 @@ export class DataTablePaginatorDemo extends Component {
 
 
             <p>Paginator can also be controlled via model using property binding to first which allows resetting or navigating to a certain page programmatically.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTablePaginatorDemo extends Component {
 
@@ -595,7 +595,7 @@ export class DataTablePaginatorDemo extends Component {
 </CodeHighlight>
 
             <p>Elements of the paginator can be customized using paginatorTemplate by the DataTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} paginator={true} rows={10} first={start} 
     paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
@@ -610,7 +610,7 @@ export class DataTablePaginatorDemo extends Component {
 
             <h3>Sorting</h3>
             <p>Enabling sortable property at column component is enough to make a column sortable. The property to use when sorting is field by default and can be customized using sortField.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Column field="vin" header="Vin" sortable={true}/>
 
@@ -618,7 +618,7 @@ export class DataTablePaginatorDemo extends Component {
 </CodeHighlight>
 
             <p>By default sorting is executed on the clicked column. To do multiple field sorting, set sortMode property to "multiple" and use metakey when clicking on another column.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} sortMode="multiple">
 
@@ -628,7 +628,7 @@ export class DataTablePaginatorDemo extends Component {
 
 
             <p>In case you'd like to display the table as sorted by default initially on load, use the sortField-sortOrder properties in single mode.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} sortField="year" sortOrder={1}>
     <Column field="vin" header="Vin" sortable={true}/>
@@ -641,7 +641,7 @@ export class DataTablePaginatorDemo extends Component {
 </CodeHighlight>
 
             <p>In multiple mode, use the multiSortMeta property and bind an array of SortMeta objects.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} multiSortMeta={multiSortMeta}>
     <Column field="vin" header="Vin" sortable={true}/>
@@ -653,7 +653,7 @@ export class DataTablePaginatorDemo extends Component {
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 let multiSortMeta = [];
 multiSortMeta.push({field: 'year', order: 1});
@@ -663,7 +663,7 @@ multiSortMeta.push({field: 'brand', order: -1});
 </CodeHighlight>
 
             <p>To customize sorting, set sortable option to custom and define a sortFunction that sorts the list.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} >
     <Column field="vin" header="Vin" sortable={true}/>
@@ -675,7 +675,7 @@ multiSortMeta.push({field: 'brand', order: -1});
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 mysort(event) {
     //event.field = Field to sort
@@ -687,7 +687,7 @@ mysort(event) {
 
             <h3>Filtering</h3>
             <p>Filtering is enabled by setting the filter property as true on a column. Default match mode is "startsWith" and this can be configured using filterMatchMode property that also accepts "contains", "endsWith", "equals", "notEquals" and "in".</p>
- <CodeHighlight className="html">
+ <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} >
     <Column field="vin" header="Vin" filter={true} />
@@ -701,7 +701,7 @@ mysort(event) {
 
             <p>An optional global filter feature is available to search all fields with the same keyword, 
                 to implement this place an input component whose value is bound to the globalFilter property of the DataTable.</p>    
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableFilterDemo extends Component {
 
@@ -738,7 +738,7 @@ export class DataTableFilterDemo extends Component {
 
             <p>By default, input fields are used as filter elements and this can be customized using the filterElement property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.
             </p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableCustomFilterDemo extends Component {
 
@@ -814,7 +814,7 @@ export class DataTableCustomFilterDemo extends Component {
 </CodeHighlight>
 
             <p>If you need to render the DataTable as filtered initially, use the "filters" property of the DataTable with prepopulated values.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableDefaultFilteredDemo extends Component {
 
@@ -850,7 +850,7 @@ export class DataTableDefaultFilteredDemo extends Component {
 </CodeHighlight>
 
             <p>Custom filtering is implemented by setting the filterMatchMode property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
-            <CodeHighlight className="javascript">
+            <CodeHighlight className="language-javascript">
 {`
 export class DataTableFilterDemo extends Component {
 
@@ -890,7 +890,7 @@ export class DataTableFilterDemo extends Component {
 
             <p>In single mode, selection binding is an object reference.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableSelectionDemo extends Component {
 
@@ -923,7 +923,7 @@ export class DataTableSelectionDemo extends Component {
             <p>In multiple mode, selection binding should be an array and multiple items can either be selected using metaKey or toggled individually depending on the value of metaKeySelection property value which is true by default. 
                 On touch enabled devices metaKeySelection is turned off automatically. Additionally ShiftKey is supported for range selection.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableSelectionDemo extends Component {
 
@@ -955,7 +955,7 @@ export class DataTableSelectionDemo extends Component {
 
             <p>If you prefer a radioButton or a checkbox instead of a row click, use the selectionMode of a column instead.
                  Following datatable displays a checkbox at the first column of each row and automatically adds a header checkbox to toggle selection of all rows.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} selection={this.state.selectedCars} onSelectionChange={(e) => this.setState({selectedCars: e.data})}>
     <Column selectionMode="multiple" />
@@ -972,7 +972,7 @@ export class DataTableSelectionDemo extends Component {
             <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the editor property
             that refers to a function to return an input element for the editing.</p>
             
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars}>
     <Column field="vin" header="Vin" editor={this.vinEditor} />
@@ -983,7 +983,7 @@ export class DataTableSelectionDemo extends Component {
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 onEditorValueChange(props, value) {
     let updatedCars = [...this.state.cars];
@@ -1027,7 +1027,7 @@ saleDateEditor(props) {
 
             <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is valid. In order
             to decide whether to keep the cell open or not, provide a editorValidator function that validates the value.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars}>
     <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
@@ -1038,7 +1038,7 @@ saleDateEditor(props) {
 `}
 </CodeHighlight>
             
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 requiredValidator(props) {
     let value = props.rowData[props.field];
@@ -1049,7 +1049,7 @@ requiredValidator(props) {
 
             <h3>ContextMenu</h3>
             <p>DataTable provides exclusive integration with ContextMenu by binding the reference of a menu to the contextMenu property.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableContextMenuDemo extends Component {
 
@@ -1111,7 +1111,7 @@ export class DataTableContextMenuDemo extends Component {
             <h3>Expandable Rows</h3>
             <p>Row expansion allows displaying detailed content for a particular row. To use this feature, add an expander column, define a rowExpansionTemplate as a function to return the expanded content and bind to
                 expandedRows property to read the expanded rows along with the onRowToggle property to update them.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableRowExpansionDemo extends Component {
 
@@ -1171,7 +1171,7 @@ export class DataTableRowExpansionDemo extends Component {
             <h3>Column Resize</h3>
             <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
                 In "expand" mode, table width also changes along with the column width. onColumnResizeEnd is a callback that passes the resized column header as a parameter.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} resizableColumns={true}>
     <Column field="vin" header="Vin" />
@@ -1184,7 +1184,7 @@ export class DataTableRowExpansionDemo extends Component {
 </CodeHighlight>
 
             <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} resizableColumns={true}>
     <Column field="vin" header="Vin" style={{width:'20%'}}/>
@@ -1200,7 +1200,7 @@ export class DataTableRowExpansionDemo extends Component {
             <p>Columns can be reordered using drag drop by setting the reorderableColumns to true. onColReorder is a callback that is invoked when a column is reordered.
             DataTable keeps the column order state internally using keys that identifies a column using the field property. If the column has no field, use columnKey instead.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} reorderableColumns={true}>
     <Column field="vin" header="Vin" />
@@ -1216,7 +1216,7 @@ export class DataTableRowExpansionDemo extends Component {
             <p>Data can be reordered using drag drop by adding a reorder column that will display an icon as a drag handle. onRowReorder is a callback that is invoked when a column is reordered, use
                 this callback to update the new order. The reorder icon can be customized using rowReorderIcon of the column component.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} reorderableColumns={true} onRowReorder={(e) => this.setState({cars: e.value})}>
     <Column rowReorder={true} style={{width: '2em'}} />
@@ -1231,7 +1231,7 @@ export class DataTableRowExpansionDemo extends Component {
 
             <h3>Data Export</h3>
             <p>DataTable can export its data in CSV format using exportCSV() method.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableExportDemo extends Component {
 
@@ -1273,7 +1273,7 @@ export class DataTableExportDemo extends Component {
             rowGroupHeaderTemplate property should be defined to provide the content of the header and optionally rowGroupFooterTemplate is available to provide a footer
             for the group.</p>
             
-            <CodeHighlight className="javascript">
+            <CodeHighlight className="language-javascript">
             {`
 export class DataTableRowGroupDemo extends Component {
 
@@ -1346,7 +1346,7 @@ export class DataTableRowGroupDemo extends Component {
 
             <h3>Scrolling</h3>
             <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using scrollable property and scrollHeight to define the viewport height.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px">
     <Column field="vin" header="Vin" />
@@ -1359,7 +1359,7 @@ export class DataTableRowGroupDemo extends Component {
 </CodeHighlight>
 
             <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
     <Column field="vin" header="Vin" style={{width:'250px'}} />
@@ -1373,7 +1373,7 @@ export class DataTableRowGroupDemo extends Component {
 
             <p>Certain columns can be frozen by using the frozen property of the column component. Widths of the frozen and unfrozen sections are defined with frozenWidth and frozenHeight properties where
                 total of these values should equal to the width of the DataTable itself.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
     <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
@@ -1392,7 +1392,7 @@ export class DataTableRowGroupDemo extends Component {
 </CodeHighlight> 
 
             <p>One or more rows can be displayed as fixed using the frozenValue property.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
     <Column field="vin" header="Vin" />
@@ -1408,7 +1408,7 @@ export class DataTableRowGroupDemo extends Component {
             headerColumnGroup and footerColumnGroup.</p>
 
             <p>Virtual scrolling is enabled using virtualScroll property combined with lazy loading so that data is loaded on the fly during scrolling.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
     rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onLazyLoad={this.loadCarsLazy} style={{marginTop:'30px'}}>
@@ -1429,7 +1429,7 @@ export class DataTableRowGroupDemo extends Component {
                 they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
 
             <p>Here is a sample implementation with in memory data.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 export class DataTableLazyDemo extends Component {
 
@@ -1484,7 +1484,7 @@ export class DataTableLazyDemo extends Component {
 
             <h3>Responsive</h3>
             <p>DataTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. This feature is enabled by setting responsive to true.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} responsive={true}>
     <Column field="vin" header="Vin" />
@@ -2065,7 +2065,7 @@ export class DataTableLazyDemo extends Component {
                     <span>View on GitHub</span>
                 </a>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class DataTableDemo extends Component {
 

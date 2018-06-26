@@ -69,7 +69,7 @@ export class FileUploadDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {FileUpload} from 'primereact/components/fileupload/FileUpload';
 
@@ -78,7 +78,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
 
             <h3>Getting Started</h3>
             <p>FileUpload requires a url property as the upload target and a name to identify the files at backend.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo" url="./upload"></FileUpload>
 
@@ -88,7 +88,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
             <h3>Multiple Uploads</h3>
             <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable multiple option.</p>
                
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo[]" url="./upload" multiple={true} />
 
@@ -101,7 +101,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
             <h3>Auto Uploads</h3>
             <p>When auto property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo" url="./upload" auto={true} />
 
@@ -110,7 +110,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
 
             <h3>File Types</h3>
             <p>Selectable file types can be restricted with accept property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo[]" url="./upload" multiple={true} accept="image/*" />
 
@@ -120,7 +120,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
             <h3>File Size</h3>
             <p>Maximium file size can be restricted using maxFileSize property defined in bytes.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo" url="./upload" maxFileSize="1000000" />
 
@@ -143,7 +143,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
             <h3>Basic UI</h3>
             <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo" url="./upload" mode="basic" />
 
@@ -369,7 +369,7 @@ import {FileUpload} from 'primereact/components/fileupload/FileUpload';
                      <i className="fa fa-github"></i>
                      <span>View on GitHub</span>
                  </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';

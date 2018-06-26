@@ -57,7 +57,7 @@ class InputTextDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {InputText} from 'primereact/components/inputtext/InputText';
 
@@ -67,7 +67,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         <h3>Getting Started</h3>
                         <p>Component is defined using the InputText element with standard attributes of an input element.</p>
                         
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <InputText />
 
@@ -76,7 +76,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 
                         <h3>Controlled Input</h3>
                         <p>InputText is used as a controlled input with value and onChange properties.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <InputText onChange={(e) => this.setState({value: e.target.value})}/>
 
@@ -85,7 +85,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 
                         <h3>Float Label</h3>
                         <p>A floating label is implemented by wrapping the input and the label inside a container with .ui-float-label class.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <span className="ui-float-label">
     <InputText id="float-input" type="text" size="30" />
@@ -126,7 +126,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {InputText} from 'primereact/components/inputtext/InputText';

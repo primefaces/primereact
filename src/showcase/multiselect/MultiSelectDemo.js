@@ -58,7 +58,7 @@ export class MultiSelectDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
 
@@ -71,7 +71,7 @@ import {MultiSelect} from 'primereact/components/multiselect/MultiSelect';
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
         
             <p><b>Options as SelectItems</b></p>
-            <CodeHighlight className="javascript">
+            <CodeHighlight className="language-javascript">
 {`
 var citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -84,7 +84,7 @@ var citySelectItems = [
 `}
             </CodeHighlight>
         
-            <CodeHighlight className="html">
+            <CodeHighlight className="language-jsx">
 {`
 <MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} />
 
@@ -92,7 +92,7 @@ var citySelectItems = [
             </CodeHighlight>
 
             <p><b>Options as any type</b></p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 var cities = [
     {name: 'New York', code: 'NY'},
@@ -105,7 +105,7 @@ var cities = [
 `}
 </CodeHighlight>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <MultiSelect optionLabel="name" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
 
@@ -115,14 +115,14 @@ var cities = [
             <h3>Custom Content</h3>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a property and returns the content.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} itemTemplate={this.carTemplate} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 carTemplate(option) {
     var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
@@ -141,7 +141,7 @@ carTemplate(option) {
             <h3>Filter</h3>
             <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable filter property.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} filter={true}/>
 
@@ -321,7 +321,7 @@ carTemplate(option) {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';

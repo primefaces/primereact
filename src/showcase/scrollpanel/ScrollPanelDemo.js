@@ -87,7 +87,7 @@ export class ScrollPanelDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {ScrollPanel} from 'primereact/components/scrollpanel/ScrollPanel';
 
@@ -96,7 +96,7 @@ import {ScrollPanel} from 'primereact/components/scrollpanel/ScrollPanel';
 
                         <h3>Getting Started</h3>
                         <p>ScrollPanel is defined using dimensions for the scrollable viewport.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <ScrollPanel style={{width: '100%', height: '200px'}}">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -110,7 +110,7 @@ import {ScrollPanel} from 'primereact/components/scrollpanel/ScrollPanel';
 
                         <h3>Customization</h3>
                         <p>Look and feel can easily be customized, here is an example with a background and blue handle.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <ScrollPanel style={{width: '100%', height: '200px'}}" className="custom">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -210,7 +210,7 @@ import {ScrollPanel} from 'primereact/components/scrollpanel/ScrollPanel';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, { Component } from 'react';
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel';

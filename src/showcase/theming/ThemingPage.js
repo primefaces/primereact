@@ -75,7 +75,7 @@ export class ThemingPage extends Component {
                     <p>For example Panel component’s header section has the "ui-panel-titlebar" structural class, to change the color of a panel header you don’t need to about this class as "ui-widget-header" defines colors for panel header. However
                     if you only want to customize the headers of all panel component you need to use the "ui-panel-titlebar" instead of the global "ui-widget-header". Additionally to change the style of a particular panel header instead of
                     of panels, use the className property of the panel instead.</p>
-<CodeHighlight className="markup">
+<CodeHighlight className="language-jsx">
 {`
 <Panel className="my-panel"></Panel>
 

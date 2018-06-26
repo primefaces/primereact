@@ -130,7 +130,7 @@ class SlideMenuDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {SlideMenu} from 'primereact/components/slidemenu/SlideMenu';
 
@@ -143,14 +143,14 @@ import {SlideMenu} from 'primereact/components/slidemenu/SlideMenu';
                         <h3>Getting Started</h3>
                         <p>SlideMenu requires nested menuitems as its model.</p>
                         
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SlideMenu model={this.items}></SlideMenu>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class SlideMenuDemo extends Component {
 
@@ -192,7 +192,7 @@ export class SlideMenuDemo extends Component {
                         <h3>Popup Mode</h3>
                         <p>SlideMenu is inline by default, popup mode is also supported by enabling popup property and calling toggle method by passing the event 
                             from the anchor element.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true}></SlideMenu>
 <Button type="button" icon="pi pi-bars" label="Show" onClick={this.onButtonClick}></Button>
@@ -203,7 +203,7 @@ export class SlideMenuDemo extends Component {
                         <h3>Effects</h3>
                         <p>The easing function to use is "ease-out" by default and this can be customized using easing property. 
                             See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SlideMenu model={this.items} effectDuration={1000} easing="ease-in"></SlideMenu>
 
@@ -376,7 +376,7 @@ export class SlideMenuDemo extends Component {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class SlideMenuDemo extends Component {
         

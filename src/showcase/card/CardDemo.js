@@ -55,7 +55,7 @@ class CardDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Card} from 'primereact/components/card/Card';
 
@@ -64,7 +64,7 @@ import {Card} from 'primereact/components/card/Card';
 
                         <h3>Getting Started</h3>
                         <p>Card is used as a container.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Card>
     Content
@@ -75,7 +75,7 @@ import {Card} from 'primereact/components/card/Card';
 
                         <h3>Title</h3>
                         <p>Title text of the card is provided using the <strong>title</strong> property, optionally <strong>subtitle</strong> property is available for additional information about the card.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Card title="Title">
     Content
@@ -86,7 +86,7 @@ import {Card} from 'primereact/components/card/Card';
                         <h3>Header and Footer</h3>
                         <p>Header and Footer sections are defined using the properties of the same name.</p>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
 let footer = <span>
@@ -202,7 +202,7 @@ let footer = <span>
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class CardDemo extends Component {
 

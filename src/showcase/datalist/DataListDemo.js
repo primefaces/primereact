@@ -104,7 +104,7 @@ export class DataListDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {DataList} from 'primereact/components/datalist/DataList';
 
@@ -117,13 +117,13 @@ import {DataList} from 'primereact/components/datalist/DataList';
                brand, year and color properties are used to define an object to be displayed by the datalist.
                Cars are loaded by a CarService that connects to a server to fetch the cars with a axios.
             </p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataList value={this.state.cars}></DataList>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 constructor() {
     super();
@@ -139,7 +139,7 @@ componentDidMount() {
 </CodeHighlight>
 
             <p>Here is a sample DataList that displays a list of cars.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5}></DataList>
 
@@ -148,7 +148,7 @@ componentDidMount() {
 
             <h3>Paginator</h3>
             <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <DataList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} paginator={true} rows={5} header="List of Cars"/>
 
@@ -333,7 +333,7 @@ componentDidMount() {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';

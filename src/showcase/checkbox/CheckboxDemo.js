@@ -68,7 +68,7 @@ class CheckboxDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
@@ -77,7 +77,7 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
                         <h3>Getting Started</h3>
                         <p>Checkbox is used as a controlled input with checked and onChange properties.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Checkbox onChange={this.onChange} checked={this.state.checked}></Checkbox>
 
@@ -86,7 +86,7 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 
                         <h4>Multiple Values</h4>
                         <p>Multiple checkboxes can be grouped by checking against a list of values.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g-12">
     <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
@@ -104,7 +104,7 @@ import {Checkbox} from 'primereact/components/checkbox/Checkbox';
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 constructor() {
     super();
@@ -266,7 +266,7 @@ onCityChange(e) {
                         <i className="fa fa-github"></i>
                         <span>View on GitHub</span>
                     </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class CheckboxDemo extends Component {
         

@@ -44,7 +44,7 @@ class CaptchaDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Captcha} from 'primereact/components/captcha/Captcha';
 
@@ -53,7 +53,7 @@ import {Captcha} from 'primereact/components/captcha/Captcha';
 
                         <h3>Getting Started</h3>
                         <p>Captcha is used with a siteKey and a callback to verify the response.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse.bind(this)}></Captcha>
 
@@ -61,7 +61,7 @@ import {Captcha} from 'primereact/components/captcha/Captcha';
 </CodeHighlight>
 
                         <p>In addition include the captcha widget resource to your page.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 
@@ -71,7 +71,7 @@ import {Captcha} from 'primereact/components/captcha/Captcha';
                         <h3>Verification</h3>
                         <p>In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at
                         official documentation.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 showResponse(response) {
     //call to a backend to verify against recaptcha with private key
@@ -203,7 +203,7 @@ showResponse(response) {
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class CaptchaDemo extends Component {
 

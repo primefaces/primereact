@@ -174,7 +174,7 @@ export class OrganizationChartDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {OrganizationChart} from 'primereact/components/organizationchart/OrganizationChart';
 
@@ -183,13 +183,13 @@ import {OrganizationChart} from 'primereact/components/organizationchart/Organiz
 
             <h3>Getting Started</h3>
             <p>OrganizationChart requires a model of TreeNode as its value and onSelectionChange method for selection mode.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <OrganizationChart value={data}></OrganizationChart>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 var data = [{
     label: 'F.C Barcelona',
@@ -228,7 +228,7 @@ var data = [{
             <h3>Templating</h3>
             <p>Label of the treenode is displayed inside the node content by default and templating enables enhanced customization.</p>
                
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <OrganizationChart value={data1} nodeTemplate={this.nodeTemplate.bind(this)}></OrganizationChart>
 
@@ -255,13 +255,13 @@ nodeTemplate(node) {
 
             <h3>Selection</h3>
             <p>OrganizationChart supports 2 selection methods; single or multiple. Selection is enabled by setting selectionMode property and providing a single TreeNode or an array of TreeNodes to reference the selections depending on the selection mode.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <OrganizationChart value={data} selectionMode="multiple" selectionChange={this.onSelectionChange}></OrganizationChart>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 var data = [{
     label: 'F.C Barcelona',
@@ -444,7 +444,7 @@ onSelectionChange(_selections) {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class OverlayPanelDemo extends Component {
         

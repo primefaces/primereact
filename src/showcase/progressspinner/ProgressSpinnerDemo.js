@@ -42,7 +42,7 @@ class ProgressSpinnerDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {ProgressSpinner} from 'primereact/components/progressspinner/ProgressSpinner';
 
@@ -50,7 +50,7 @@ import {ProgressSpinner} from 'primereact/components/progressspinner/ProgressSpi
 
                         <h3>Getting Started</h3>
                         <p>ProgressSpinner is defined using ProgressSpinner element.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <ProgressSpinner/>
 
@@ -168,7 +168,7 @@ import {ProgressSpinner} from 'primereact/components/progressspinner/ProgressSpi
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class ProgressSpinnerDemo extends Component {
 

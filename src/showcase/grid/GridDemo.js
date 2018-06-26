@@ -164,7 +164,7 @@ export class GridDoc extends Component {
                     <h3>Getting Started</h3>
                     <p>Grid CSS is based on a 12 column layout. Columns are prefixed with <i>ui-g-*</i> and they should be a descendant of a container having <i>ui-g</i> class.
                        A simple 3 column layout can be defined as;</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div class="ui-g">
     <div class="ui-g-4">Col1</div>
@@ -184,7 +184,7 @@ export class GridDoc extends Component {
                     <h3>Multi Line</h3>
                     <p>When the number of columns exceed 12, columns wrap to a new line.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-6">Col1</div>
@@ -205,7 +205,7 @@ export class GridDoc extends Component {
 
 <p>Same can also be achieved by having two ui-g containers to semantically define a row.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-6">Col1</div>
@@ -230,7 +230,7 @@ export class GridDoc extends Component {
 
              <h3>Nested</h3>
              <p>Columns can be nested to create more complex layouts.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-8 ui-g-nopad">
@@ -255,7 +255,7 @@ export class GridDoc extends Component {
 
 <p>Direct children of ui-g has the same height automatically, in example above if the inside columns is likely to have different height with different content.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-8 ui-g-nopad">
@@ -279,7 +279,7 @@ export class GridDoc extends Component {
 </div>
 
 <p>Solution is wrapping the internal divs inside a ui-g as well.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-8 ui-g-nopad">
@@ -354,7 +354,7 @@ export class GridDoc extends Component {
         <p>In example below, large screens display 4 columns, medium screens display 2 columns in 2 rows and default behavior gets only displayed in a mobile phone
         where each column is rendered in a separate row.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-12 ui-md-6 ui-lg-3">ui-g-12 ui-md-6 ui-lg-3</div>
@@ -377,7 +377,7 @@ export class GridDoc extends Component {
    first two columns are placed side by side where the last column displayed below them.
    In a mobile phone, they all get displayed in a separate row.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <div className="ui-g">
     <div className="ui-g-12 ui-md-6 ui-lg-4">ui-g-12 ui-md-6 ui-lg-4</div>
@@ -403,7 +403,7 @@ export class GridDoc extends Component {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class GridDemo extends Component {
         

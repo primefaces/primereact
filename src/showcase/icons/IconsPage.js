@@ -16,7 +16,7 @@ export class IconsPage extends Component {
                 <div className="content-section documentation">
                     <h3 style={{marginTop:0}}>Download</h3>
                     <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`npm install primeicons --save
 `}
 </CodeHighlight>
@@ -25,7 +25,7 @@ export class IconsPage extends Component {
                     <p>PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>.
                     A standalone icon can be displayed using an element such as <i>i</i> or <i>span</i></p>
 
-<CodeHighlight className="markup">
+<CodeHighlight className="language-jsx">
 {`<i class="pi pi-check"></i>
 <i class="pi pi-times"></i>
 `}
@@ -37,14 +37,14 @@ export class IconsPage extends Component {
                     <h3>Size</h3>
                     <p>Size of the icons can easily be changed using font-size property.</p>
 
-<CodeHighlight className="markup">
+<CodeHighlight className="language-jsx">
 {`<i class="pi pi-check"></i>
 `}
 </CodeHighlight>
 
                     <i class="pi pi-check"></i>
 
-<CodeHighlight className="markup">
+<CodeHighlight className="language-jsx">
 {`<i class="pi pi-check" style={{'fontSize': '3em'}}></i>
 `}
 </CodeHighlight>
@@ -53,7 +53,7 @@ export class IconsPage extends Component {
 
                     <h3>Spinning Animation</h3>
                     <p>Special pi-spin class applies infinite rotate to an icon.</p>
-<CodeHighlight className="markup">
+<CodeHighlight className="language-jsx">
 {`<i class="pi pi-spin pi-spinner" style={{'fontSize': '3em'}}></i>
 `}
 </CodeHighlight>

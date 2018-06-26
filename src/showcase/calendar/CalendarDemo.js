@@ -134,7 +134,7 @@ export class CalendarDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Calendar} from 'primereact/components/calendar/Calendar';
 
@@ -144,7 +144,7 @@ import {Calendar} from 'primereact/components/calendar/Calendar';
             <h3>Getting Started</h3>
             <p>Calendar is used a controlled input component with value and onChange properties.</p>
             
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
@@ -636,7 +636,7 @@ let es = {
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
     import React, {Component} from 'react';
     import {Link} from 'react-router-dom';

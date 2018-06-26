@@ -57,7 +57,7 @@ class SelectButtonDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {SelectButton} from 'primereact/components/selectbutton/SelectButton';
 
@@ -70,7 +70,7 @@ import {SelectButton} from 'primereact/components/selectbutton/SelectButton';
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
                     
             <p><b>Options as SelectItems</b></p>
-            <CodeHighlight className="javascript">
+            <CodeHighlight className="language-javascript">
                 {`
 var citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -83,7 +83,7 @@ var citySelectItems = [
 `}
             </CodeHighlight>
                     
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SelectButton value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({val: event.value})}></SelectButton>
 
@@ -91,7 +91,7 @@ var citySelectItems = [
 </CodeHighlight>
 
             <p><b>Options as any type</b></p>
-            <CodeHighlight className="javascript">
+            <CodeHighlight className="language-javascript">
 {`
 var cities = [
     {name: 'New York', code: 'NY'},
@@ -104,7 +104,7 @@ var cities = [
 `}
 </CodeHighlight>
                     
-            <CodeHighlight className="html">
+            <CodeHighlight className="language-jsx">
 {`
 <SelectButton value={this.state.city} options={cities} onChange={(e) => this.setState({val: event.value})}></SelectButton>
 
@@ -113,7 +113,7 @@ var cities = [
 
             <h3>Multiple</h3>
             <p>SelectButton allows selecting only one item by default and setting multiple option enables choosing more than one item. In multiple case, model property should be an array.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <SelectButton value={this.state.values} options={this.options} onChange={(e) => this.setState({val: event.value})}></SelectButton>
 
@@ -226,7 +226,7 @@ var cities = [
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {SelectButton} from 'primeng/components/selectbutton/SelectButton';

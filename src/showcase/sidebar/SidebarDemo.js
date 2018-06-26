@@ -84,7 +84,7 @@ class SidebarDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Sidebar} from 'primereact/components/sidebar/Sidebar';
 
@@ -94,7 +94,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                         <h3>Getting Started</h3>
                         <p>Sidebar is used as a container and visibility is controlled with visible property.</p>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 
 <Sidebar visible={this.state.visible} onHide={ () => this.setState({visible:false}) }>
@@ -109,7 +109,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                         <h3>Position</h3>
                         <p>Sidebar can either be located as the left (default), right, top or bottom of the screen depending on the position property.</p>
 
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 <Sidebar visible={this.state.visible} position="right" onHide={ () => this.setState({visible:false}) }>
     Content
@@ -120,7 +120,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
 
                         <h3>Size</h3>
                         <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Sidebar visible={this.state.visible} position="right" style={{width:'30em'}} onHide={ () => this.setState({visible:false}) }></Sidebar>
 <Sidebar visible={this.state.visible} position="right" className="ui-sidebar-sm" onHide={ () => this.setState({visible:false}) }</Sidebar>
@@ -132,7 +132,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
 
                         <h3>Full Screen</h3>
                         <p>Full screen mode allows the sidebar to cover whole screen.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Sidebar visible={this.state.visible} fullScreen={true} onHide={ () => this.setState({visible:false}) }>
     Content
@@ -302,7 +302,7 @@ import {Sidebar} from 'primereact/components/sidebar/Sidebar';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
 import {Sidebar} from "primeng/components/sidebar/Sidebar";

@@ -60,7 +60,7 @@ class ToggleButtonDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {ToggleButton} from 'primereact/components/togglebutton/ToggleButton';
 
@@ -70,14 +70,14 @@ import {ToggleButton} from 'primereact/components/togglebutton/ToggleButton';
             <h3>Getting Started</h3>
             <p>ToggleButton is used as a controlled input with checked and onChange properties.</p>
                     
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={this.onChangeBasic}/>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
  constructor() {
     super();
@@ -99,7 +99,7 @@ render() {
 
             <h3>Customization</h3>
             <p>Icons and Labels can be customized using onLabel, offLabel, onIcon and OffIcon attributes.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                                 checked={this.state.checked2} onChange={this.onChangeCustom}/>
@@ -228,7 +228,7 @@ render() {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class ToggleButtonDemo extends Component {
 

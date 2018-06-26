@@ -75,7 +75,7 @@ export class PickListDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {PickList} from 'primereact/components/picklist/PickList';
 
@@ -84,7 +84,7 @@ import {PickList} from 'primereact/components/picklist/PickList';
 
             <h3>Getting Started</h3>
             <p>PickList requires two arrays as the lists, a template for the item content and onChange callback to update the value after reorder or transfer.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate} 
     onChange={(e) => this.setState({source: e.source, target: e.target})} />
@@ -94,7 +94,7 @@ import {PickList} from 'primereact/components/picklist/PickList';
 
             <h3>Responsive</h3>
             <p>In responsive mode, picklist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate} 
     onChange={(e) => this.setState({source: e.source, target: e.target})} responsive={true}/>
@@ -105,7 +105,7 @@ import {PickList} from 'primereact/components/picklist/PickList';
             <h3>Headers</h3>
             <p>sourceHeader and targetHeader properties are used to define captions for the lists that accept simple strings or JSX for custom content.</p>
             
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate} 
     onChange={(e) => this.setState({source: e.source, target: e.target})} sourceHeader="Available" targetHeader="Seleced"/>
@@ -313,7 +313,7 @@ import {PickList} from 'primereact/components/picklist/PickList';
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';

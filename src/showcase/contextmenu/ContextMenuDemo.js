@@ -128,7 +128,7 @@ class ContextMenuDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
 
@@ -138,7 +138,7 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
 
                         <h3>Getting Started</h3>
                         <p>ContextMenu requires nested menuitems as its model and in its simplest form ContextMenu is attached to the document with global setting. .</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <ContextMenu global={true} model={items1}/>
 
@@ -280,7 +280,7 @@ import {ContextMenu} from 'primereact/components/contextmenu/ContextMenu';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class ContextMenuDemo extends Component {
     

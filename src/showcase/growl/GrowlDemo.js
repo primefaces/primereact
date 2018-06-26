@@ -122,7 +122,7 @@ export class GrowlDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Growl} from 'primereact/components/growl/Growl';
 
@@ -133,14 +133,14 @@ import {Growl} from 'primereact/components/growl/Growl';
             <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as  severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Growl instance.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Growl ref={(el) => { this.growl = el; }}></Growl>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 
@@ -238,7 +238,7 @@ this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Orde
             <h3>Showing Messages</h3>
             <p>Show method accepts either a single message or an array of messages.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Growl ref={(el) => { this.growl = el; }}></Growl>
 
@@ -251,7 +251,7 @@ this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Orde
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 showSuccess() {
     this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
@@ -283,7 +283,7 @@ showMultiple() {
             <h3>Closable</h3>
             <p>Growls are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 this.growl.show({ closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
@@ -294,7 +294,7 @@ this.growl.show({ closable: false, severity: 'error', summary: 'Error Message', 
             <p>Messages are cleared automatically after the timeout defined by life property which is 3 seconds by default. Use sticky mode to make them stay until
             they are manually removed.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 //sticky
 this.growl.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
@@ -310,7 +310,7 @@ this.growl.show({ life: 5000, severity: 'error', summary: 'Error Message', detai
                 valid values are "topleft", "bottomleft" and "bottomright"
             </p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
             {`
 <Growl ref={(el) => { this.growl = el; }} position="topleft"></Growl>
 
@@ -320,7 +320,7 @@ this.growl.show({ life: 5000, severity: 'error', summary: 'Error Message', detai
             <h3>Clearing Messages</h3>
             <p><i>clear()</i> method removes all messages from Growl.</p>
 
-            <CodeHighlight className="html">
+            <CodeHighlight className="language-jsx">
                 {`
 this.growl.clear();
 
@@ -426,7 +426,7 @@ this.growl.clear();
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Growl} from 'primereact/components/growl/Growl';

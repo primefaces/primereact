@@ -139,7 +139,7 @@ export class MessagesDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Messages} from 'primereact/components/messages/Messages';
 import {Message} from 'primereact/components/message/Message';
@@ -151,14 +151,14 @@ import {Message} from 'primereact/components/message/Message';
             <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as  severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Messages ref={(el) => { this.messages = el; }}></Messages>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 
@@ -256,7 +256,7 @@ this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'O
             <h3>Showing Messages</h3>
             <p>Show method accepts either a single message or an array of messages.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Messages ref={(el) => { this.messages = el; }}></Messages>
 
@@ -269,7 +269,7 @@ this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'O
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 showSuccess() {
     this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
@@ -301,7 +301,7 @@ showMultiple() {
                 <h3>Clearing Messages</h3>
                 <p><i>clear()</i> method removes all messages.</p>
 
-                <CodeHighlight className="html">
+                <CodeHighlight className="language-jsx">
 {`
 this.messages.clear();
 
@@ -311,7 +311,7 @@ this.messages.clear();
                 <h3>Closable</h3>
                 <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
-                <CodeHighlight className="javascript">
+                <CodeHighlight className="language-javascript">
 {`
 this.messages.show({ closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
@@ -322,7 +322,7 @@ this.messages.show({ closable: false, severity: 'error', summary: 'Error Message
                 <p>Messages are cleared automatically after the timeout defined by life property which is 3 seconds by default. Use sticky mode to make them stay until
                 they are manually removed.</p>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
     {`
 //sticky
 this.messages.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
@@ -336,7 +336,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 
                     <h3>Message Component</h3>
                     <p>Message component is useful in cases where messages need to be displayed related to an element such as forms. It has two property, severity and text of the message.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <h3>Inline Message CSS</h3>
 <p>CSS helpers to display inline messages mostly within forms.</p>
@@ -443,7 +443,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Messages} from 'primereact/components/messages/Messages';

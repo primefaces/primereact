@@ -64,7 +64,7 @@ class EditorDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Editor} from 'primereact/components/editor/Editor';
 
@@ -73,7 +73,7 @@ import {Editor} from 'primereact/components/editor/Editor';
 
                         <h3>Getting Started</h3>
                         <p></p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Editor style={{height:'320px'}} value={this.state.text1}/>
 
@@ -83,7 +83,7 @@ import {Editor} from 'primereact/components/editor/Editor';
                         <h3>Toolbar</h3>
                         <p>Editor provides a default toolbar with common options, to customize it define your elements inside the header element. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 var header =
     <span className="ql-formats">
@@ -225,7 +225,7 @@ var header =
                         <h3>Dependencies</h3>
                         <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>
                         <p>Resources of quill needs to be added to your application.</p>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 npm install quill --save
 
@@ -238,7 +238,7 @@ npm install quill --save
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
 import {Editor} from "primereact/components/editor/Editor";

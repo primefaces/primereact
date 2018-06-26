@@ -99,7 +99,7 @@ class SliderDoc extends Component {
     <TabView effect="fade">
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Slider} from 'primereact/components/slider/Slider';
 
@@ -109,14 +109,14 @@ import {Slider} from 'primereact/components/slider/Slider';
             <h3>Getting Started</h3>
             <p>Slider is used as a controlled input with dragging of a handle.</p>
                     
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Slider style={{ width: '200px' }} onChange={this.onChangeSlider1} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 constructor() {
     super();
@@ -133,7 +133,7 @@ onChangeSlider1(e) {
 
             <h3>Range</h3>
             <p>Range slider provides two handles to define two values. In this case, value binding should refer to an array.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Slider style={{ width: '200px' }} value={this.state.rangeValues} onChange={this.onChangeRangeSlider} range={true} />
 
@@ -238,13 +238,13 @@ onChangeSlider1(e) {
                     </tbody>
                 </table>
             </div>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Slider style={{ width: '200px' }} onChange={this.onChangeSlider1} />
 
 `}
 </CodeHighlight>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 onChangeSlider1(e) {
     this.setState({ val1: e.value });
@@ -285,7 +285,7 @@ onChangeSlider1(e) {
                 <i className="fa fa-github"></i>
                 <span>View on GitHub</span>
             </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class SliderDemo extends Component {
 

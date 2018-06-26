@@ -58,7 +58,7 @@ export class TreeTableDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {TreeTable} from 'primereact/components/treetable/TreeTable';
 
@@ -143,14 +143,14 @@ import {TreeTable} from 'primereact/components/treetable/TreeTable';
                                 </tbody>
                             </table>
                         </div>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <TreeTable value={data} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 
 render() {
@@ -301,14 +301,14 @@ render() {
                             </table>
                         </div>
 
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Column} from 'primereact/components/column/Column';
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Column field="name" header="Name"></Column>
 
@@ -515,7 +515,7 @@ import {Column} from 'primereact/components/column/Column';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';

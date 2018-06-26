@@ -29,7 +29,7 @@ class ChartDoc extends Component {
         return (
             <div className="content-section source">
                 <h3 style={{marginTop:0}}>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Chart} from 'primereact/components/chart/Chart';
 
@@ -42,14 +42,14 @@ import {Chart} from 'primereact/components/chart/Chart';
                 <h3>Data</h3>
                 <p>Data of a chart is provided using a binding to the data property, each type has its own format of data. Here is an example of a line chart.</p>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Chart type="line" data={data} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 var data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -76,14 +76,14 @@ var data = {
 <p>While a series can be customized per dataset, general chart options are defined with options property. 
     Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js documentation.</p>
 
-    <CodeHighlight className="html">
+    <CodeHighlight className="language-jsx">
 {`
 <Chart type="line" data={data} options={options}/>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 var options = {
         title: {

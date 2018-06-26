@@ -49,7 +49,7 @@ class TriStateCheckboxDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {TriStateCheckbox} from 'primereact/components/tristatecheckbox/TriStateCheckbox';
 
@@ -58,14 +58,14 @@ import {TriStateCheckbox} from 'primereact/components/tristatecheckbox/TriStateC
 
                         <h3>Getting Started</h3>
                         <p>TriStateCheckbox is used as a controlled input with checked and onChange properties.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <TriStateCheckbox onChange={this.onStateChange} value={this.state.value}></TriStateCheckbox>
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
  constructor(props) {
     super(props);
@@ -193,7 +193,7 @@ onStateChange(e) {
                         <i className="fa fa-github"></i>
                         <span>View on GitHub</span>
                     </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class TriStateCheckboxDemo extends Component {
 

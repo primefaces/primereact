@@ -83,7 +83,7 @@ class StepsDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Steps} from 'primereact/components/steps/Steps';
 
@@ -93,7 +93,7 @@ import {Steps} from 'primereact/components/steps/Steps';
 
                         <h3>Getting Started</h3>
                         <p>Component is defined using the Steps element .</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Steps model={items}/>
 
@@ -102,7 +102,7 @@ import {Steps} from 'primereact/components/steps/Steps';
 
                         <h3>Readonly</h3>
                         <p>Items are readonly by default, if you'd like to make them interactive then disable readonly.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Steps model={items} readOnly={false}/>
 
@@ -221,7 +221,7 @@ import {Steps} from 'primereact/components/steps/Steps';
                         </a>
 
                         <p>StepsDemo.css</p>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 .ui-steps.steps-custom {
     margin-bottom: 30px;
@@ -248,7 +248,7 @@ import {Steps} from 'primereact/components/steps/Steps';
 }
                         `}
                         </CodeHighlight>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class StepsDemo extends Component {
 

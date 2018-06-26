@@ -83,7 +83,7 @@ export class AccordionDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
 
@@ -312,7 +312,7 @@ import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion'
                     <i className="fa fa-github"></i>
                     <span>View on GitHub</span>
                 </a>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
 import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';

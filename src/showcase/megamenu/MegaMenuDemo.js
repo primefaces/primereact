@@ -160,7 +160,7 @@ class MegaMenuDoc extends Component {
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {MegaMenu} from 'primereact/components/megamenu/MegaMenu';
 
@@ -170,13 +170,13 @@ import {MegaMenu} from 'primereact/components/megamenu/MegaMenu';
 
                         <h3>Getting Started</h3>
                         <p>MegaMenu requires nested menuitems as its model where the items of a root menuitem is a two dimensional array to define columns in an overlay submenu.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <MegaMenu model={items}/>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 var items=[
     {
@@ -297,7 +297,7 @@ var items=[
 
                         <h3>Custom Content</h3>
                         <p>Custom content can be placed between MegaMenu tags. Megamenu should be horizontal for custom content.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <MegaMenu model={items}>
     <InputText placeholder="Search" type="text"/>
@@ -401,7 +401,7 @@ var items=[
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class MegaMenuDemo extends Component {
 

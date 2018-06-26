@@ -109,7 +109,7 @@ export class TreeTableSelectionDoc extends Component {
             <div className="content-section source">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';

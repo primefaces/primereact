@@ -86,7 +86,7 @@ class KeyFilterDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {InputText} from 'primereact/components/inputtext/InputText';
 
@@ -96,7 +96,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                         <h3>Getting Started</h3>
                         <p>KeyFilter property is integrated in input components such as InputText using the keyfilter property whose value is either a built-in regular expression name or a custom one. Following input only accepts integers.</p>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <InputText keyfilter="int"/>
 
@@ -119,7 +119,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 
                         <h3>Custom Filter</h3>
                         <p>A custom filter is provided by binding a regular expression, here is an example that blocks special characters</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <InputText keyfilter={/^[^#<>*!]+$/}/>
 
@@ -128,7 +128,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
 
                         <h3>Validate Mode</h3>
                         <p>Instead of blocking a single keypress, the alternative validation mode which is enabled with validateOnly property validates the whole input.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
    <label htmlFor="validateInput" style={{display: 'block', marginBottom: '4px'}}>Float Number</label>
@@ -173,7 +173,7 @@ import {InputText} from 'primereact/components/inputtext/InputText';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';

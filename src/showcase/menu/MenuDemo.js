@@ -59,7 +59,7 @@ class MenuDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 import {Menu} from 'primereact/components/menu/Menu';
 
@@ -72,14 +72,14 @@ import {Menu} from 'primereact/components/menu/Menu';
 
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Menu model={items}/>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 var items=[
     {label: 'New', icon: 'fa fa-fw fa-plus'},
@@ -92,7 +92,7 @@ var items=[
 
                         <h3>SubMenus</h3>
                         <p>Menu supports 1 level of nesting via subitems of an item.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 var items=[
     {
@@ -112,7 +112,7 @@ var items=[
 
                         <h3>Popup Mode</h3>
                         <p>Menu is inline by default, popup mode is also supported by enabling popup property and calling toggle method by passing the event from the anchor element.</p>
-                        <CodeHighlight className="html">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Menu model={items} popup={true} ref={el=>this.menu=el} />
 <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
@@ -265,7 +265,7 @@ var items=[
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
-                        <CodeHighlight className="javascript">
+                        <CodeHighlight className="language-javascript">
                             {`
 export class MenuDemo extends Component {
 

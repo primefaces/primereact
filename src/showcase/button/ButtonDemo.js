@@ -65,7 +65,7 @@ class ButtonDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 import {Button} from 'primereact/components/button/Button';
 
@@ -74,7 +74,7 @@ import {Button} from 'primereact/components/button/Button';
 
                         <h3>Getting Started</h3>
                         <p>Button is created using the Button element.</p>    
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Button />
 
@@ -83,7 +83,7 @@ import {Button} from 'primereact/components/button/Button';
 
                         <h3>Label</h3>
                         <p>Use label property to define the text of the button.</p>    
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Button label="Save"/>
 
@@ -93,7 +93,7 @@ import {Button} from 'primereact/components/button/Button';
                         <h3>Icons</h3>
                         <p>Icon on a button is specified with icon attribute and position is customized using iconPos attribute. Default
                         icon position is left. To display only an icon, leave label as undefined.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Button label="Click" icon="pi pi-check" />
 <Button label="Click" icon="pi pi-check" iconPos="right"/>
@@ -104,7 +104,7 @@ import {Button} from 'primereact/components/button/Button';
 
                         <h3>Events</h3>
                         <p>Events are defined using standard notation.</p>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Button label="Click" onClick={this.handleClick} />
 
@@ -123,7 +123,7 @@ import {Button} from 'primereact/components/button/Button';
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
-<CodeHighlight className="html">
+<CodeHighlight className="language-jsx">
 {`
 <Button label="Primary" />
 <Button label="Secondary" className="ui-button-secondary"/>
@@ -219,7 +219,7 @@ import {Button} from 'primereact/components/button/Button';
                             <span>View on GitHub</span>
                         </a>
 
-<CodeHighlight className="javascript">
+<CodeHighlight className="language-javascript">
 {`
 export class ButtonDemo extends Component {
         
