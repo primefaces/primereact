@@ -6,13 +6,8 @@ import {BreadCrumb} from '../../components/breadcrumb/BreadCrumb';
 
 export class BreadcrumbDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-        var items=[
+        const items = [
             {label:'Categories'},
             {label:'Sports'},
             {label:'Football'},
@@ -22,6 +17,9 @@ export class BreadcrumbDemo extends Component {
             {label:'Squad'},
             {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
         ];
+
+        const home = {icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact'}
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -30,8 +28,9 @@ export class BreadcrumbDemo extends Component {
                         <p>Breadcrumb provides contextual information about page hierarchy.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <BreadCrumb model={items}/>
+                    <BreadCrumb model={items} home={home} />
                 </div>
 
                 <BreadCrumbDoc/>
@@ -40,6 +39,7 @@ export class BreadcrumbDemo extends Component {
         );
     }
 }
+
 class BreadCrumbDoc extends Component {
 
     shouldComponentUpdate(){
@@ -58,11 +58,33 @@ import {Breadcrumb} from 'primereact/breadcrumb';
 
 `}</CodeHighlight>
 
+                        <h3>MenuModel API</h3>
+                        <p>BreadCrumb uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
+
                         <h3>Getting Started</h3>
-                        <p>Component is defined using the BreadCrumb element .</p>
-                        <CodeHighlight className="html javascript">
+                        <p>BreadCrumb requires a collection of menuitems as its model.</p>
+
+                        <CodeHighlight className="language-javascript">
                             {`
-<BreadCrumb model={items}/>
+const items = [
+    {label:'Categories'},
+    {label:'Sports'},
+    {label:'Football'},
+    {label:'Countries'},
+    {label:'Spain'},
+    {label:'F.C. Barcelona'},
+    {label:'Squad'},
+    {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
+];
+
+const home = {icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact'}
+
+`}
+</CodeHighlight>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<BreadCrumb model={items} home="home"/>
 
 `}
                         </CodeHighlight>
@@ -111,33 +133,34 @@ import {Breadcrumb} from 'primereact/breadcrumb';
                                 </tbody>
                             </table>
                         </div>
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Element</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>ui-breadcrumb</td>
-                                    <td>Container element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem</td>
-                                    <td>Menuitem element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem-text</td>
-                                    <td>Label of a menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-breadcrumb-chevron</td>
-                                    <td>Chevron element.</td>
-                                </tr>
+                                    <tr>
+                                        <td>ui-breadcrumb</td>
+                                        <td>Container element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem</td>
+                                        <td>Menuitem element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem-text</td>
+                                        <td>Label of a menuitem.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-breadcrumb-chevron</td>
+                                        <td>Chevron element.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -153,15 +176,13 @@ import {Breadcrumb} from 'primereact/breadcrumb';
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {BreadCrumb} from 'primereact/breadcrumb';
+
 export class BreadcrumbDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-        var items=[
+        const items = [
             {label:'Categories'},
             {label:'Sports'},
             {label:'Football'},
@@ -171,20 +192,21 @@ export class BreadcrumbDemo extends Component {
             {label:'Squad'},
             {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
         ];
+
+        const home = {icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact'}
+
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Breadcrumb</h1>
                         <p>Breadcrumb provides contextual information about page hierarchy.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <BreadCrumb model={items}/>
+                    <BreadCrumb model={items} home={home} />
                 </div>
-
-                <BreadCrumbDoc/>
-
             </div>
         );
     }

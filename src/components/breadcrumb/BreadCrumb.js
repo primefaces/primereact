@@ -1,43 +1,36 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {MenuItem} from '../menu/MenuItem'
 
 export class BreadCrumb extends Component {
 
     static defaultProps = {
         id: null,
-        model:null,
-        home:null,
-        style:null,
-        className:null
+        model: null,
+        home: null,
+        style: null,
+        className: null
     };
 
     static propTypes = {
         id: PropTypes.string,
-        model:PropTypes.array,
-        home:PropTypes.any,
-        style:PropTypes.object,
-        className:PropTypes.string
+        model: PropTypes.array,
+        home: PropTypes.any,
+        style: PropTypes.object,
+        className: PropTypes.string
     };
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
-
     itemClick(event,item){
-        if(item.disabled) {
+        if (item.disabled) {
             event.preventDefault();
             return;
         }
 
-        if(!item.url) {
+        if (!item.url) {
             event.preventDefault();
         }
 
-        if(item.command) {
+        if (item.command) {
             item.command({
                 originalEvent: event,
                 item: item
@@ -45,54 +38,70 @@ export class BreadCrumb extends Component {
         }
     }
 
-
-    onHomeClick(event) {
+    renderHome() {
         if(this.props.home) {
-            this.itemClick(event, this.props.home);
+            return (
+                <li className="ui-breadcrumb-home">
+                    <a href={this.props.home.url || '#'} className="ui-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
+                        <span className={this.props.home.icon}></span>
+                    </a>
+                </li>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderSeparator() {
+        return (
+            <li className="ui-breadcrumb-chevron pi pi-chevron-right"></li>
+        );
+    }
+
+    renderMenuitem(item, index) {
+        return (
+            <li role="menuitem">
+                <a href={item.url || '#'} className="ui-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
+                    <span class="ui-menuitem-text">{item.label}</span>
+                </a>
+            </li>
+        );
+    }
+
+    renderMenuitems() {
+        if (this.props.model) {
+            const items = this.props.model.map((item, index)=> {
+                const menuitem = this.renderMenuitem(item, index);
+                const separator = (index === this.props.model.length - 1) ? null : this.renderSeparator();
+
+                return (
+                    <React.Fragment key={item.label + '_' + index}>
+                        {menuitem}
+                        {separator}
+                    </React.Fragment>
+                );
+            });
+
+            return items;
+        }
+        else {
+            return null;
         }
     }
 
     render() {
-        var className=classNames('ui-breadcrumb ui-widget ui-widget-header ui-helper-clearfix ui-corner-all',this.props.className);
-        var homeClass=classNames('ui-menuitem-link',{'ui-state-disabled':this.props.home && this.props.home.disabled})
-
-        var home,right,menu;
-
-        if(this.props.home){
-            home=<li className="ui-breadcrumb-home" >
-                {this.props.home.url?
-                    <a href={this.props.home.url || '#'} className={homeClass} target={this.props.home.target}
-                       onClick={event=>this.itemClick(event,this.props.home)}>
-                        <span className="pi pi-home"></span>
-                    </a>:
-                    <a className={homeClass} target={this.props.home.target}
-                       onClick={event=>this.itemClick(event,this.props.home)}>
-                        <span className="pi pi-home"></span>
-                    </a>}
-            </li>
-        }
-        else{
-            home=<li className="ui-breadcrumb-home pi pi-home" ></li>
-        }
-        if(this.props.model){
-            right=<li className="ui-breadcrumb-chevron pi pi-chevron-right"></li>
-        }
-        menu=this.props.model && this.props.model.map((item,index)=>{
-            var menuItem=<span key={index}>
-                <li role="menuitem">
-                    <MenuItem items={item} index={index} onItemClick={event=>this.itemClick(event,item)} />
-                </li>
-                {this.props.model.length-1!==index && <li className="ui-breadcrumb-chevron pi pi-chevron-right" style={{marginLeft:4,marginRight:4}}></li>}
-            </span>
-                return menuItem;
-        })
-
+        const className=classNames('ui-breadcrumb ui-widget ui-widget-header ui-helper-clearfix ui-corner-all', this.props.className);
+        const home = this.renderHome();
+        const items = this.renderMenuitems();
+        const separator = this.renderSeparator();
+    
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={el=>this.container=el}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 <ul>
                     {home}
-                    {right}
-                    {menu}
+                    {separator}
+                    {items}
                 </ul>
             </div>
         );
