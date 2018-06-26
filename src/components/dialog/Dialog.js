@@ -36,7 +36,8 @@ export class Dialog extends Component {
         appendTo: null,
         baseZIndex: 0,
         minX: 0,
-        minY: 0
+        minY: 0,
+        maximizable: false
     }
 
     static propTypes = {
@@ -68,18 +69,22 @@ export class Dialog extends Component {
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
         minX: PropTypes.number,
-        minY: PropTypes.number
+        minY: PropTypes.number,
+        maximizable: PropTypes.bool
     };
     
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            maximized: false
+        };
         this.onClose = this.onClose.bind(this);
         this.initDrag = this.initDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
         this.moveOnTop = this.moveOnTop.bind(this);
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
+        this.toggleMaximize = this.toggleMaximize.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -87,7 +92,7 @@ export class Dialog extends Component {
     positionOverlay() {
         let viewport = DomHandler.getViewport();
         if(DomHandler.getOuterHeight(this.container) > viewport.height) {
-             this.content.style.height = (viewport.height * .75) + 'px';
+             this.contentElement.style.height = (viewport.height * .75) + 'px';
         }
         
         if(this.props.positionLeft >= 0 && this.props.positionTop >= 0) {
@@ -115,6 +120,10 @@ export class Dialog extends Component {
         if(this.props.modal) {
             this.disableModality();
         }
+
+        if(this.state.maximized) {
+            DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+        }
     }
 
     show() {
@@ -131,8 +140,49 @@ export class Dialog extends Component {
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.positionOverlay();
         DomHandler.fadeIn(this.container, 250);
+
+        if(this.state.maximized) {
+            DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+        }
+    }
+    
+    toggleMaximize(event) {
+        this.setState({
+            maximized: !this.state.maximized
+        });
+        event.preventDefault();
     }
 
+    maximize() {
+        DomHandler.addClass(this.container, 'ui-dialog-maximized');
+        this.preMaximizePageX = parseFloat(this.container.style.top);
+        this.preMaximizePageY = parseFloat(this.container.style.left);
+        this.preMaximizeContainerWidth = DomHandler.getOuterWidth(this.container);
+        this.preMaximizeContainerHeight = DomHandler.getOuterHeight(this.container);
+        this.preMaximizeContentHeight = DomHandler.getOuterHeight(this.contentElement);
+
+        this.container.style.top = '0px';
+        this.container.style.left = '0px';
+        this.container.style.width = '100vw';
+        this.container.style.height = '100vh';
+        const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement) + parseFloat(this.container.style.top);
+        this.contentElement.style.height = 'calc(100vh - ' + diffHeight +'px)';
+
+        DomHandler.addClass(document.body, 'ui-overflow-hidden');
+    }
+
+    restoreMaximize() {
+        this.container.style.top = this.preMaximizePageX + 'px';
+        this.container.style.left = this.preMaximizePageY + 'px';
+        this.container.style.width = this.preMaximizeContainerWidth + 'px';
+        this.container.style.height = this.preMaximizeContainerHeight + 'px';
+        this.contentElement.style.height = this.preMaximizeContentHeight + 'px';
+
+        DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+
+        setTimeout(() => DomHandler.removeClass(this.container, 'ui-dialog-maximized'), 300);
+    }
+   
     center() {
         var elementWidth = DomHandler.getOuterWidth(this.container);
         var elementHeight = DomHandler.getOuterHeight(this.container);
@@ -278,7 +328,7 @@ export class Dialog extends Component {
                 
             if(newHeight > this.props.minHeight) {
                 this.container.style.height = newHeight + 'px';
-                this.content.style.height = contentHeight + deltaY + 'px';
+                this.contentElement.style.height = contentHeight + deltaY + 'px';
             }
 
             this.lastPageX = event.pageX;
@@ -426,6 +476,15 @@ export class Dialog extends Component {
                 this.hide();
             }
         }
+
+        if(prevState.maximized !== this.state.maximized) {
+            if(this.state.maximized) {
+                this.maximize();
+            }
+            else {
+                this.restoreMaximize();
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -447,14 +506,31 @@ export class Dialog extends Component {
         }
     }
 
+    renderMaximizeIcon() {
+        const iconClassName = classNames('pi', {'pi-window-maximize': !this.state.maximized, 'pi-window-minimize': this.state.maximized});
+
+        if(this.props.maximizable) {
+            return (
+                <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-maximize ui-corner-all" onClick={this.toggleMaximize}>
+                    <span className={iconClassName}></span>
+                </a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     renderHeader() {
         if(this.props.showHeader) {
             let closeIcon = this.renderCloseIcon();
+            let maximizeIcon = this.renderMaximizeIcon();
 
             return (
-                <div className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag}>
+                <div ref={(el) => { this.headerElement = el; }} className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag}>
                     <span id={this.id + '_label'} className="ui-dialog-title">{this.props.header}</span>
                     {closeIcon}
+                    {maximizeIcon}
                 </div>
             );
         }
@@ -465,7 +541,7 @@ export class Dialog extends Component {
 
     renderContent() {
         return (
-            <div ref={(el) => this.content = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
+            <div ref={(el) => this.contentElement = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -474,7 +550,7 @@ export class Dialog extends Component {
     renderFooter() {
         if(this.props.footer) {
             return (
-                <div className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>
+                <div ref={(el) => { this.footerElement = el; }} className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>
             );
         }
         else {

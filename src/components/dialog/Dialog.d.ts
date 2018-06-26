@@ -8,7 +8,7 @@ interface DialogProps {
     width?: string;
     height?: string;
     modal?: boolean;
-    onHide(): void
+    onHide(): void;
     onShow?(): void;
     draggable?: boolean;
     resizable?: boolean;
@@ -30,7 +30,7 @@ interface DialogProps {
     baseZIndex?: number;
     minX?: number;
     minY?: number;
-    autoAlign?: boolean;
+    maximizable?: boolean;
 }
 
 export class Dialog extends React.Component<DialogProps,any> {}

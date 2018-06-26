@@ -40,7 +40,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} appendTo={document.body}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -76,7 +76,7 @@ import {Dialog} from 'primereact/components/dialog/Dialog';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Dialog is used as a container and visibility is controlled with visible property. "onHide" event is required to update user's state.</p>
+            <p>Dialog is used as a container and visibility is controlled with visible property. "onHide" event is required to update the visibility state.</p>
 <CodeHighlight className="html">
 {`
 <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
@@ -304,6 +304,12 @@ const footer = (
                             <td>0</td>
                             <td>Minimum value for the top coordinate of dialog in dragging.</td>
                         </tr>
+                        <tr>
+                            <td>maximizable</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the dialog can be displayed full screen.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -426,7 +432,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} minY={70} footer={footer} onHide={this.onHide}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 

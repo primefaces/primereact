@@ -27,25 +27,35 @@ export default class DomHandler {
     }
 
     static getOuterWidth(el, margin) {
-        let width = el.offsetWidth;
+        if (el) {
+            let width = el.offsetWidth;
 
-        if (margin) {
-            let style = getComputedStyle(el);
-            width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+            if (margin) {
+                let style = getComputedStyle(el);
+                width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+            }
+
+            return width;
         }
-
-        return width;
+        else {
+            return 0;
+        }
     }
 
     static getOuterHeight(el, margin) {
-        let height = el.offsetHeight;
+        if (el) {
+            let height = el.offsetHeight;
 
-        if (margin) {
-            let style = getComputedStyle(el);
-            height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+            if (margin) {
+                let style = getComputedStyle(el);
+                height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+            }
+    
+            return height;
         }
-
-        return height;
+        else {
+            return 0;
+        }
     }
 
     static getViewport() {
