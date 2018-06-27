@@ -59,7 +59,7 @@
 @import '../../components/tabmenu/TabMenu.css';
 @import '../../components/tabview/TabView.css';
 /*@import '../../components/terminal/Terminal.css';*/
-/*@import '../../components/tieredmenu/TieredMenu.css';*/
+@import '../../components/tieredmenu/TieredMenu.css';
 @import '../../components/toolbar/Toolbar.css';
 @import '../../components/tooltip/Tooltip.css';
 @import '../../components/tree/Tree.css';

@@ -165,7 +165,7 @@ export class Menu extends Component {
 
         return (
             <li key={item.label + '_' + index} className="ui-menuitem ui-widget ui-corner-all">
-                 <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+                <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
                     {icon}
                     <span className="ui-menuitem-text">{item.label}</span>
                 </a>
