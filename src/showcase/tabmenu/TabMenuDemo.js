@@ -15,8 +15,7 @@ export class TabMenuDemo extends Component {
                 {label: 'Documentation', icon: 'fa fa-fw fa-book'},
                 {label: 'Support', icon: 'fa fa-fw fa-support'},
                 {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-            ],
-            activeItem: null
+            ]
         };
     }
 
@@ -26,12 +25,12 @@ export class TabMenuDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TabMenu</h1>
-                        <p>Menu is a navigation/command component that displays items as tab headers.</p>
+                        <p>Menu is a navigation component that displays items as tab headers.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})} />
+                    <TabMenu model={this.state.items} />
                 </div>
 
                 <TabMenuDoc/>
@@ -61,7 +60,7 @@ import {TabMenu} from 'primereact/tabmenu';
                         <p>TabMenu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>TabMenu is used as a controlled component and requires a collection of menuitems as its model.</p>
+                        <p>TabMenu requires a collection of menuitems as its model and can either be used as a Controlled or Uncontrolled component.</p>
 
                         <CodeHighlight className="language-javascript">
                             {`
@@ -74,13 +73,15 @@ constructor() {
             {label: 'Documentation', icon: 'fa fa-fw fa-book'},
             {label: 'Support', icon: 'fa fa-fw fa-support'},
             {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-        ],
-        activeItem: null
+        ]
     };
 }
 
 `}
                         </CodeHighlight>
+
+                        <h3>Controlled Component</h3>
+                        <p>In controlled mode, <b>activeItem</b> and <b>onTabChange</b> properties must be defined along with the model.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
@@ -88,6 +89,19 @@ constructor() {
 
 `}
                         </CodeHighlight>
+
+                        <h3>Uncontrolled</h3>
+                        <p>In uncontrolled mode, only <b>model</b> is required.</p>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<TabMenu model={this.state.items} />
+
+`}
+                        </CodeHighlight>
+
+                        <p>Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
+                            need to update the active item, prefer to use the component as controlled.</p>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
@@ -207,7 +221,7 @@ constructor() {
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {TabMenu} from 'primereact/TabMenu';
+import {TabMenu} from 'primereact/tabmenu';
 
 export class TabMenuDemo extends Component {
 
@@ -220,8 +234,7 @@ export class TabMenuDemo extends Component {
                 {label: 'Documentation', icon: 'fa fa-fw fa-book'},
                 {label: 'Support', icon: 'fa fa-fw fa-support'},
                 {label: 'Social', icon: 'fa fa-fw fa-twitter'}
-            ],
-            activeItem: null
+            ]
         };
     }
 
@@ -231,12 +244,12 @@ export class TabMenuDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TabMenu</h1>
-                        <p>Menu is a navigation/command component that displays items as tab headers.</p>
+                        <p>Menu is a navigation component that displays items as tab headers.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})} />
+                    <TabMenu model={this.state.items} />
                 </div>
             </div>
         );

@@ -16,11 +16,20 @@ export class TabMenu extends Component {
     static propTypes = {
         id: PropTypes.string,
         model: PropTypes.array.isRequired,
-        activeItem: PropTypes.any.isRequired,
+        activeItem: PropTypes.any,
         style: PropTypes.any,
         className: PropTypes.string,
-        onTabChange: PropTypes.func.isRequired
+        onTabChange: PropTypes.func
     };
+
+    constructor(props) {
+        super(props);
+        if (!this.props.onTabChange) {
+            this.state = {
+                activeItem: props.activeItem
+            };
+        }
+    }
 
     itemClick(event, item) {
         if (item.disabled) {
@@ -39,14 +48,22 @@ export class TabMenu extends Component {
             });
         }
 
-        this.props.onTabChange({
-            originalEvent: event,
-            value: item
-        });
+        if (this.props.onTabChange) {
+            this.props.onTabChange({
+                originalEvent: event,
+                value: item
+            });
+        }
+        else {
+            this.setState({
+                activeItem: item
+            });
+        }
     }
 
     renderMenuItem(item, index) {
-        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', {'ui-state-active': this.props.activeItem ? this.props.activeItem === item : index === 0});
+        const activeItem = this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
+        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', {'ui-state-active': activeItem ? activeItem === item : index === 0});
         const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 
