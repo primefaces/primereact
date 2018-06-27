@@ -68,7 +68,6 @@ import {Menu} from 'primereact/menu';
                         <h3>MenuModel API</h3>
                         <p>Menu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel API</Link> for details.</p>
 
-
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
                         <CodeHighlight className="language-jsx">
@@ -96,12 +95,12 @@ let items = [
 let items = [
     {
         label: 'File',
-        items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+        items: [{label: 'New', icon: 'fa fa-fw fa-plus', command:()=>{ window.location.hash="/fileupload"; }},
                 {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
     },
     {
         label: 'Edit',
-        items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
+        items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh', command:()=>{ window.location.hash="/"; }},
                 {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
     }
 ];
@@ -110,7 +109,7 @@ let items = [
                         </CodeHighlight>
 
                         <h3>Popup Mode</h3>
-                        <p>Menu is inline by default, popup mode is also supported by enabling popup property and calling toggle method by passing the event from the anchor element.</p>
+                        <p>Menu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`

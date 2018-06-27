@@ -124,7 +124,7 @@ class TieredMenuSub extends Component {
     renderSubmenu(item) {
         if(item.items) {
             return (
-                <TieredMenuSub model={item.items} baseZIndex={this.props.baseZIndex} autoZIndex={this.props.autoZIndex} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} popup={this.props.popup} />
+                <TieredMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} popup={this.props.popup} />
             );
         }
         else {
@@ -190,6 +190,8 @@ export class TieredMenu extends Component {
         popup: false,
         style: null,
         className: null,
+        autoZIndex: true,
+        baseZIndex: 0,
         onShow: null,
         onHide: null
     };
@@ -200,6 +202,8 @@ export class TieredMenu extends Component {
         popup: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
@@ -329,7 +333,7 @@ export class TieredMenu extends Component {
 
         return(
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container=el} onClick={this.onMenuClick}>
-                <TieredMenuSub model={this.props.model} root={true} baseZIndex={this.props.baseZIndex} autoZIndex={this.props.autoZIndex} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} popup={this.props.popup}/>
+                <TieredMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} popup={this.props.popup}/>
             </div>
         );
     }

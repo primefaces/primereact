@@ -9,6 +9,7 @@ export class TieredMenuDemo extends Component {
 
     constructor() {
         super();
+
         this.state = {
             items: [{
                 label: 'File',
@@ -134,85 +135,152 @@ import {TieredMenu} from 'primereact/tieredmenu';
                         <p>TieredMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>Component is defined using the TieredMenu element .</p>
-                        <CodeHighlight className="language-jsx">
+                        <p>Menu requires a collection of menuitems as its model.</p>
+                        <CodeHighlight className="language-javascript">
                             {`
-<TieredMenu model={items}/>
+const items = [
+    {
+        label: 'File',
+        items: [{label: 'New', icon: 'fa fa-fw fa-plus', command:()=>{ window.location.hash="/fileupload"; }},
+                {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
+    },
+    {
+        label: 'Edit',
+        items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh', command:()=>{ window.location.hash="/"; }},
+                {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+    }
+];
 
 `}
                         </CodeHighlight>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<TieredMenu model={items} />
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Popup Mode</h3>
+                        <p>TieredMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<TieredMenu model={items} popup={true} ref={el => this.menu = el} />
+<Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+
+`}
+                        </CodeHighlight>
+
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
-
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>model</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>popup</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>Defines if menu would displayed as a popup.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the component.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of menuitems.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>popup</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Defines if menu would displayed as a popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>baseZIndex</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Base zIndex value to use in layering.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoZIndex</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to automatically manage layering.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+
                         <h3>Methods</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>toggle</td>
-                                    <td>event: browser event</td>
-                                    <td>Toggles the visibility of the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>show</td>
-                                    <td>event: browser event</td>
-                                    <td>Displays the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>hide</td>
-                                    <td>-</td>
-                                    <td>Hides the popup menu.</td>
-                                </tr>
+                                    <tr>
+                                        <td>toggle</td>
+                                        <td>event: browser event</td>
+                                        <td>Toggles the visibility of the popup menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>show</td>
+                                        <td>event: browser event</td>
+                                        <td>Displays the popup menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>hide</td>
+                                        <td>event: browser event</td>
+                                        <td>Hides the popup menu.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Events</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>event: Browser event </td>
+                                        <td>Callback to invoke when a popup menu is shown.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>event: Browser event </td>
+                                        <td>Hides the popup menu.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -222,10 +290,10 @@ import {TieredMenu} from 'primereact/tieredmenu';
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Element</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
@@ -265,93 +333,101 @@ import {TieredMenu} from 'primereact/tieredmenu';
                             <i className="fa fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
+
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {TieredMenu} from 'primereact/tieredmenu';
+import {Button} from 'primereact/button';
+
 export class TieredMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        
+        this.state = {
+            items: [{
+                label: 'File',
+                icon: 'fa fa-fw fa-file-o',
+                items: [{
+                    label: 'New',
+                    icon: 'fa fa-fw fa-plus',
+                    items: [
+                        {label: 'Project'},
+                        {label: 'Other'},
+                    ]
+                },
+                    {label: 'Open'},
+                    {separator:true},
+                    {label: 'Quit'}
+                ]
+            },
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents'
+                        },
+                        {
+                            label: 'Search',
+                            icon: 'fa fa-fw fa-search',
+                            items: [
+                                {
+                                    label: 'Text',
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File'
+                                }
+                            ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                },
+                {separator:true},
+                {
+                    label: 'Quit', icon: 'fa fa-fw fa-minus'
+                }
+            ]
+        };
     }
 
     render() {
-        var items=[ {
-            label: 'File',
-            icon: 'fa fa-fw fa-file-o',
-            items: [{
-                label: 'New',
-                icon: 'fa fa-fw fa-plus',
-                items: [
-                    {label: 'Project'},
-                    {label: 'Other'},
-                ]
-            },
-                {label: 'Open'},
-                {separator:true},
-                {label: 'Quit'}
-            ]
-        },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            },
-            {separator:true},
-            {
-                label: 'Quit', icon: 'fa fa-fw fa-minus'
-            }];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tiered Menu</h1>
                         <p>TieredMenu displays submenus in nested overlays.</p>
@@ -359,15 +435,12 @@ export class TieredMenuDemo extends Component {
                 </div>
                 <div className="content-section implementation">
                     <h3 className="first">Basic</h3>
-                    <TieredMenu model={items}/>
+                    <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={items} popup={true} ref={el=>this.menu=el}/>
+                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el}/>
                     <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
                 </div>
-
-                <TieredMenuDoc/>
-
             </div>
         );
     }
