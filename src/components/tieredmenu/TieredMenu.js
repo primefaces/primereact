@@ -226,9 +226,9 @@ export class TieredMenu extends Component {
             this.selfClick = true;
 
             this.setState({
-                resetMenu: false
+                resetMenu: true
             });
-    
+
             if (this.container.offsetParent)
                 this.hide(event);
             else
@@ -279,6 +279,11 @@ export class TieredMenu extends Component {
 
                     this.setState({
                         resetMenu: true
+                    });
+                }
+                else {
+                    this.setState({
+                        resetMenu: false
                     });
                 }
 
