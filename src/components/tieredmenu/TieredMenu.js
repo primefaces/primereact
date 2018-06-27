@@ -42,7 +42,7 @@ class TieredMenuSub extends Component {
 
     onItemMouseEnter(event, item) {
         if (this.props.root) {
-            if (this.props.popup || this.state.activeItem) {
+            if (this.state.activeItem) {
                 this.setState({
                     activeItem: item
                 });
@@ -223,7 +223,7 @@ export class TieredMenu extends Component {
 
     toggle(event) {
         if (this.props.popup) {
-            this.selfClick = true;
+            this.targetClick = true;
 
             this.setState({
                 resetMenu: true
@@ -272,22 +272,18 @@ export class TieredMenu extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.selfClick) {
+                if (!this.targetClick && !this.selfClick) {
                     if (this.props.popup) {
                         this.hide(event);
                     }
-
+                    
                     this.setState({
                         resetMenu: true
                     });
                 }
-                else {
-                    this.setState({
-                        resetMenu: false
-                    });
-                }
 
                 this.selfClick = false;
+                this.targetClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
