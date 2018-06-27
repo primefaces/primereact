@@ -8,19 +8,19 @@ class TieredMenuSub extends Component {
     static defaultProps = {
         model: null,
         root: false,
-        autoZIndex: true,
-        baseZIndex: 0,
         className: null,
-        parentActive: false
+        popup: false,
+        resetMenu: false,
+        onLeafClick: null
     };
 
     static propTypes = {
         model: PropTypes.any,
         root: PropTypes.bool,
-        autoZIndex: PropTypes.bool,
-        baseZIndex: PropTypes.number,
         className: PropTypes.string,
-        parentActive: PropTypes.bool
+        popup: PropTypes.bool,
+        resetMenu: PropTypes.bool,
+        onLeafClick: PropTypes.func
     };
 
     constructor(props) {
@@ -31,7 +31,7 @@ class TieredMenuSub extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.parentActive === false) {
+        if (nextProps.resetMenu === true) {
             return {
                 activeItem: null
             }
@@ -40,15 +40,9 @@ class TieredMenuSub extends Component {
         return null;
     }
 
-    onLeafClick() {
-        this.setState({
-            activeItem: null
-        });
-    }
-
     onItemMouseEnter(event, item) {
         if (this.props.root) {
-            if (this.state.activeItem) {
+            if (this.props.popup || this.state.activeItem) {
                 this.setState({
                     activeItem: item
                 });
@@ -92,10 +86,9 @@ class TieredMenuSub extends Component {
                 }
             }
         }
-        else {
-            if (this.props.onLeafClick) {
-                this.props.onLeafClick();
-            }
+
+        if (!item.items) {
+            this.props.onLeafClick(event);
         }
     }
 
@@ -131,7 +124,7 @@ class TieredMenuSub extends Component {
     renderSubmenu(item) {
         if(item.items) {
             return (
-                <TieredMenuSub model={item.items} baseZIndex={this.props.baseZIndex} autoZIndex={this.props.autoZIndex} parentActive={item === this.state.activeItem} onLeafClick={this.onLeafClick}/>
+                <TieredMenuSub model={item.items} baseZIndex={this.props.baseZIndex} autoZIndex={this.props.autoZIndex} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} popup={this.props.popup} />
             );
         }
         else {
@@ -140,7 +133,7 @@ class TieredMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': (this.state.activeItem === item && this.props.parentActive)}, item.className);
+        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item}, item.className);
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
@@ -197,8 +190,6 @@ export class TieredMenu extends Component {
         popup: false,
         style: null,
         className: null,
-        autoZIndex: true,
-        baseZIndex: 0,
         onShow: null,
         onHide: null
     };
@@ -209,22 +200,30 @@ export class TieredMenu extends Component {
         popup: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
-        autoZIndex: PropTypes.bool,
-        baseZIndex: PropTypes.number,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
 
     constructor(props) {
         super();
+        this.state = {
+            resetMenu: false
+        }
         this.onMenuClick = this.onMenuClick.bind(this);
+        this.onLeafClick = this.onLeafClick.bind(this);
     }
 
-    toggle(event){
+    componentDidMount() {
+        this.bindDocumentClickListener();
+    }
+
+    toggle(event) {
         if (this.props.popup) {
-            if (this.documentClickListener) {
-                this.selfClick = true;
-            }
+            this.selfClick = true;
+
+            this.setState({
+                resetMenu: false
+            });
     
             if (this.container.offsetParent)
                 this.hide(event);
@@ -234,9 +233,11 @@ export class TieredMenu extends Component {
     }
 
     onMenuClick() {
-        if (this.documentClickListener) {
-            this.selfClick = true;
-        }
+        this.selfClick = true;
+
+        this.setState({
+            resetMenu: false
+        });
     }
 
     show(event) {
@@ -245,7 +246,7 @@ export class TieredMenu extends Component {
         DomHandler.absolutePosition(this.container,  event.currentTarget);
         DomHandler.fadeIn(this.container, 250);
         
-        this.bindDocumentListeners();
+        this.bindDocumentResizeListener();
         
         if (this.props.onShow) {
             this.props.onShow(event);
@@ -261,22 +262,38 @@ export class TieredMenu extends Component {
             this.props.onHide(event);
         }
 
-        this.unbindDocumentListeners();
-        this.selfClick = false;
+        this.unbindDocumentResizeListener();
     }
 
-    bindDocumentListeners() {
+    bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.selfClick)
-                    this.selfClick = false;
-                else
-                    this.hide(event);
+                if (!this.selfClick) {
+                    if (this.props.popup) {
+                        this.hide(event);
+                    }
+
+                    this.setState({
+                        resetMenu: true
+                    });
+                }
+
+                this.selfClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
         }
+    }
 
+    onLeafClick(event) {
+        this.setState({
+            resetMenu: true
+        });
+
+        event.stopPropagation();
+    }
+
+    bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
                 if(this.container.offsetParent) {
@@ -288,12 +305,14 @@ export class TieredMenu extends Component {
         }
     }
 
-    unbindDocumentListeners() {
+    unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
+    }
 
+    unbindDocumentResizeListener() {
         if(this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
@@ -301,7 +320,8 @@ export class TieredMenu extends Component {
     }
 
     componentWillUnmount() {
-        this.unbindDocumentListeners();
+        this.unbindDocumentClickListener();
+        this.unbindDocumentResizeListener();
     }
 
     render() {
@@ -309,7 +329,7 @@ export class TieredMenu extends Component {
 
         return(
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container=el} onClick={this.onMenuClick}>
-                <TieredMenuSub model={this.props.model} root={true} baseZIndex={this.props.baseZIndex} autoZIndex={this.props.autoZIndex} parentActive={true} />
+                <TieredMenuSub model={this.props.model} root={true} baseZIndex={this.props.baseZIndex} autoZIndex={this.props.autoZIndex} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} popup={this.props.popup}/>
             </div>
         );
     }
