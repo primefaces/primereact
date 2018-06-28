@@ -23,6 +23,7 @@
     position: absolute;
     width: 12.5em;
     padding: .25em;
+    z-index: 1;
 }
 
 .ui-tieredmenu .ui-menuitem-link {

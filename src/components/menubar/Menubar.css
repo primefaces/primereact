@@ -44,6 +44,7 @@
 
 .ui-menubar .ui-menubar-root-list > li ul {
     display: none;
+    z-index: 1;
 }
 
 .ui-menubar .ui-menubar-root-list > .ui-menuitem-active > .ui-submenu-list {

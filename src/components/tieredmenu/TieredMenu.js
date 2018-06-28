@@ -240,6 +240,10 @@ export class TieredMenu extends Component {
         this.setState({
             resetMenu: false
         });
+
+        if (!this.props.popup && this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        }
     }
 
     show(event) {
@@ -333,7 +337,7 @@ export class TieredMenu extends Component {
         const className = classNames('ui-tieredmenu ui-widget ui-widget-content ui-corner-all', {'ui-tieredmenu-dynamic ui-shadow': this.props.popup}, this.props.className);
 
         return(
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container=el} onClick={this.onMenuClick}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
                 <TieredMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
             </div>
         );

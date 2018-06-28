@@ -188,14 +188,18 @@ export class Menubar extends Component {
         id: null,
         model: null,
         style: null,
-        className: null
+        className: null,
+        autoZIndex: true,
+        baseZIndex: 0
     };
 
     static propTypes = {
         id: PropTypes.string,
         model: PropTypes.array,
         style: PropTypes.object,
-        className: PropTypes.string
+        className: PropTypes.string,
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number
     };
 
     constructor(props) {
@@ -217,6 +221,10 @@ export class Menubar extends Component {
         this.setState({
             resetMenu: false
         });
+
+        if (this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        }
     }
 
     onLeafClick(event) {
@@ -276,7 +284,7 @@ export class Menubar extends Component {
         const customContent = this.renderCustomContent();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick}>
+            <div id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick} ref={el => this.container = el}>
                 <MenubarSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
                 {customContent}
             </div>
