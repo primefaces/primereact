@@ -9,7 +9,7 @@ export class ContextMenuDemo extends Component {
     constructor() {
         super();
         this.state = {
-            globalItems: [
+            items: [
                 {
                     label: 'File',
                     icon: 'fa fa-fw fa-file-o',
@@ -84,16 +84,6 @@ export class ContextMenuDemo extends Component {
                 {
                     label: 'Quit', icon: 'fa fa-fw fa-minus'
                 }
-            ],
-            imageItems: [
-                {
-                    label: 'Next',
-                    icon: 'fa fa-fw fa-chevron-right'
-                },
-                {
-                    label: 'Prev',
-                    icon: 'fa fa-fw fa-chevron-left'
-                }
             ]
         }
     }
@@ -108,9 +98,7 @@ export class ContextMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <ContextMenu global={true} model={this.state.globalItems} />
-                    
-                    <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
+                    <ContextMenu model={this.state.items} ref={el => this.cm = el}></ContextMenu>
 
                     <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
                 </div>
@@ -340,7 +328,7 @@ export class ContextMenuDemo extends Component {
     constructor() {
         super();
         this.state = {
-            globalItems: [
+            items: [
                 {
                     label: 'File',
                     icon: 'fa fa-fw fa-file-o',
@@ -415,16 +403,6 @@ export class ContextMenuDemo extends Component {
                 {
                     label: 'Quit', icon: 'fa fa-fw fa-minus'
                 }
-            ],
-            imageItems: [
-                {
-                    label: 'Next',
-                    icon: 'fa fa-fw fa-chevron-right'
-                },
-                {
-                    label: 'Prev',
-                    icon: 'fa fa-fw fa-chevron-left'
-                }
             ]
         }
     }
@@ -439,9 +417,7 @@ export class ContextMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <ContextMenu global={true} model={this.state.globalItems} />
-                    
-                    <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
+                    <ContextMenu model={this.state.items} ref={el => this.cm = el}></ContextMenu>
 
                     <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
                 </div>

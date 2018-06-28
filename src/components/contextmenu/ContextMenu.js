@@ -314,7 +314,7 @@ export class ContextMenu extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.selfClick) {
+                if (!this.selfClick && event.button !== 2) {
                     this.hide(event);
                     
                     this.setState({
