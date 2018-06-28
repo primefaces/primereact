@@ -247,6 +247,12 @@ const items = [
                                         <td>true</td>
                                         <td>Whether to automatically manage layering.</td>
                                     </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>Dom Element</td>
+                                        <td>null</td>
+                                        <td>DOM element instance where the menu should be mounted.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 
 class ContextMenuSub extends Component {
@@ -189,6 +190,7 @@ export class ContextMenu extends Component {
         global: false,
         autoZIndex: true,
         baseZIndex: 0,
+        appendTo: null,
         onShow: null,
         onHide: null
     };
@@ -201,6 +203,7 @@ export class ContextMenu extends Component {
         global: PropTypes.bool,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
+        appendTo: PropTypes.any,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
@@ -330,7 +333,6 @@ export class ContextMenu extends Component {
         if (!this.documentContextMenuListener) {
             this.documentContextMenuListener = (event) => {
                 this.show(event);
-                event.preventDefault();
             };
 
             document.addEventListener('contextmenu', this.documentContextMenuListener);
@@ -375,8 +377,8 @@ export class ContextMenu extends Component {
         this.unbindDocumentResizeListener();
         this.unbindDocumentContextMenuListener();
     }
-
-    render() {
+    
+    renderContextMenu() {
         const className = classNames('ui-contextmenu ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
 
         return(
@@ -384,5 +386,14 @@ export class ContextMenu extends Component {
                 <ContextMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
             </div>
         );
+    }
+
+    render() {
+        const contextMenu = this.renderContextMenu();
+
+        if (this.props.appendTo)
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        else
+            return element;
     }
 }
