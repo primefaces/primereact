@@ -31,7 +31,7 @@
 @import '../../components/listbox/ListBox.css';
 @import '../../components/menu/Menu.css';
 /*@import '../../components/megamenu/MegaMenu.css';*/
-/*@import '../../components/menubar/Menubar.css';*/
+@import '../../components/menubar/Menubar.css';
 @import '../../components/message/Message.css';
 @import '../../components/messages/Messages.css';
 @import '../../components/multiselect/MultiSelect.css';

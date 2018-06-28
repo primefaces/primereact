@@ -8,96 +8,98 @@ import {InputText} from "../../components/inputtext/InputText";
 
 export class MenubarDemo extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {};
+    constructor() {
+        super();
+
+        this.state = {
+            items: [{
+                label: 'File',
+                icon: 'fa fa-fw fa-file-o',
+                items: [{
+                    label: 'New',
+                    icon: 'fa fa-fw fa-plus',
+                    items: [
+                        {label: 'Project'},
+                        {label: 'Other'},
+                    ]
+                },
+                    {label: 'Open'},
+                    {separator:true},
+                    {label: 'Quit'}
+                ]
+            },
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents'
+                        },
+                        {
+                            label: 'Search',
+                            icon: 'fa fa-fw fa-search',
+                            items: [
+                                {
+                                    label: 'Text',
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File'
+                                }
+                            ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    label: 'Quit', icon: 'fa fa-fw fa-minus'
+                }
+            ]
+        };
     }
 
-
     render() {
-        var items=[ {
-            label: 'File',
-            icon: 'fa fa-fw fa-file-o',
-            items: [{
-                label: 'New',
-                icon: 'fa fa-fw fa-plus',
-                items: [
-                    {label: 'Project'},
-                    {label: 'Other'},
-                ]
-            },
-                {label: 'Open'},
-                {separator:true},
-                {label: 'Quit'}
-            ]
-        },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            },
-            {
-                label: 'Quit', icon: 'fa fa-fw fa-minus'
-            }];
         return (
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Menubar</h1>
-                        <p>Menubar is an horizontal menu components with support for nested submenus.</p>
+                        <p>Menubar is a horizontal menu component.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <Menubar model={items}>
+                    <Menubar model={this.state.items}>
                         <InputText placeholder="Search" type="text"/>
                         <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
                     </Menubar>
@@ -112,7 +114,7 @@ export class MenubarDemo extends Component {
 
 class MenubarDoc extends Component {
 
-    shouldComponentUpdate(){
+    shouldComponentUpdate() {
         return false;
     }
 
@@ -127,19 +129,20 @@ class MenubarDoc extends Component {
 import {Menubar} from 'primereact/menubar';
 
 `}</CodeHighlight>
+
                         <h3>MenuItem API</h3>
                         <p>Menubar uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
                         <p>Menubar requires nested menuitems as its model.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight className="language-jsx">
                             {`
 <Menubar model={items}/>
 
 `}</CodeHighlight>
                         <CodeHighlight className="language-javascript">
                             {`
-var items=[
+var items = [
     {
         label: 'File',
         icon: 'fa fa-fw fa-file-o',
@@ -218,7 +221,7 @@ var items=[
 `}</CodeHighlight>
 
                         <h3>Custom Content</h3>
-                        <p>Custom content can be placed between Menubar tags.</p>
+                        <p>Any content inside the menubar will be displayed on the right side by default. You may use ".ui-menubar-custom" style class to change the location of the content.</p>
                         <CodeHighlight className="language-jsx">
                             {`
 <Menubar model={items}>
@@ -228,42 +231,43 @@ var items=[
 
 `}
                         </CodeHighlight>
+                        
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>model</td>
-                                    <td>array</td>
-                                    <td>null</td>
-                                    <td>An array of menuitems.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the component.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of menuitems.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -273,36 +277,36 @@ var items=[
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Element</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>ui-menubar</td>
-                                    <td>Container element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menu-list</td>
-                                    <td>List element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem</td>
-                                    <td>Menuitem element.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem-text</td>
-                                    <td>Label of a menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-menuitem-icon</td>
-                                    <td>Icon of a menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>ui-submenu-icon</td>
-                                    <td>Arrow icon of a submenu.</td>
-                                </tr>
+                                    <tr>
+                                        <td>ui-menubar</td>
+                                        <td>Container element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menu-list</td>
+                                        <td>List element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem</td>
+                                        <td>Menuitem element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem-text</td>
+                                        <td>Label of a menuitem.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-menuitem-icon</td>
+                                        <td>Icon of a menuitem.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-submenu-icon</td>
+                                        <td>Arrow icon of a submenu.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -318,104 +322,110 @@ var items=[
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {Menubar} from 'primereact/menubar';
+import {Button} from 'primereact/button';
+import {InputText} from "primereact/inputtext";
+
 export class MenubarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+
+        this.state = {
+            items: [{
+                label: 'File',
+                icon: 'fa fa-fw fa-file-o',
+                items: [{
+                    label: 'New',
+                    icon: 'fa fa-fw fa-plus',
+                    items: [
+                        {label: 'Project'},
+                        {label: 'Other'},
+                    ]
+                },
+                    {label: 'Open'},
+                    {separator:true},
+                    {label: 'Quit'}
+                ]
+            },
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents'
+                        },
+                        {
+                            label: 'Search',
+                            icon: 'fa fa-fw fa-search',
+                            items: [
+                                {
+                                    label: 'Text',
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File'
+                                }
+                            ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    label: 'Quit', icon: 'fa fa-fw fa-minus'
+                }
+            ]
+        };
     }
 
     render() {
-        var items=[ {
-            label: 'File',
-            icon: 'fa fa-fw fa-file-o',
-            items: [{
-                label: 'New',
-                icon: 'fa fa-fw fa-plus',
-                items: [
-                    {label: 'Project'},
-                    {label: 'Other'},
-                ]
-            },
-                {label: 'Open'},
-                {separator:true},
-                {label: 'Quit'}
-            ]
-        },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            },
-            {
-                label: 'Quit', icon: 'fa fa-fw fa-minus'
-            }];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Menubar</h1>
-                        <p>Menubar is an horizontal menu components with support for nested submenus.</p>
+                        <p>Menubar is a horizontal menu component.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <Menubar model={items}>
+                    <Menubar model={this.state.items}>
                         <InputText placeholder="Search" type="text"/>
                         <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
                     </Menubar>
                 </div>
-
-                <MenubarDoc/>
-
             </div>
         );
     }
