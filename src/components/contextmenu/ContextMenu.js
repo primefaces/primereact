@@ -389,7 +389,7 @@ export class ContextMenu extends Component {
     }
 
     render() {
-        const contextMenu = this.renderContextMenu();
+        const element = this.renderContextMenu();
 
         if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
