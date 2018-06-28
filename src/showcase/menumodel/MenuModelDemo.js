@@ -37,7 +37,7 @@ class MenuModelDoc extends Component {
 
                 <h3>MenuItem</h3>
                 <p>Core of the api is MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
-                <CodeHighlight className="language-jsx">
+                <CodeHighlight className="language-javascript">
                     {`
 render() {
     var items=[ {
@@ -132,7 +132,7 @@ render() {
 
                 <h3>Command</h3>
                 <p>The function to invoke when an item is clicked is defined using the command property.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight className="language-javascript">
     {`
 render() {
     var items=[{
@@ -151,7 +151,7 @@ render() {
 
                 <h3>Navigation</h3>
                 <p>Navigation is specified using url property for external links and command function to invoke when an item is clicked is defined using the command property. </p>
-                <CodeHighlight className="language-jsx">
+                <CodeHighlight className="language-javascript">
                     {`
 render() {
     var items=[ {

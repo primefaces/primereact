@@ -176,7 +176,7 @@ import {MegaMenu} from 'primereact/megamenu';
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-javascript">
                             {`
 var items = [
     {
