@@ -8,141 +8,141 @@ export class MegaMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            items: [
+                {
+                    label: 'TV', icon: 'fa fa-fw fa-check',
+                    items: [
+                        [
+                            {
+                                label: 'TV 1',
+                                items: [{label: 'TV 1.1'}, {label: 'TV 1.2'}]
+                            },
+                            {
+                                label: 'TV 2',
+                                items: [{label: 'TV 2.1'}, {label: 'TV 2.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'TV 3',
+                                items: [{label: 'TV 3.1'}, {label: 'TV 3.2'}]
+                            },
+                            {
+                                label: 'TV 4',
+                                items: [{label: 'TV 4.1'}, {label: 'TV 4.2'}]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
+                    items: [
+                        [
+                            {
+                                label: 'Sports 1',
+                                items: [{label: 'Sports 1.1'}, {label: 'Sports 1.2'}]
+                            },
+                            {
+                                label: 'Sports 2',
+                                items: [{label: 'Sports 2.1'}, {label: 'Sports 2.2'}]
+                            },
+                        ],
+                        [
+                            {
+                                label: 'Sports 3',
+                                items: [{label: 'Sports 3.1'}, {label: 'Sports 3.2'}]
+                            },
+                            {
+                                label: 'Sports 4',
+                                items: [{label: 'Sports 4.1'}, {label: 'Sports 4.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'Sports 5',
+                                items: [{label: 'Sports 5.1'}, {label: 'Sports 5.2'}]
+                            },
+                            {
+                                label: 'Sports 6',
+                                items: [{label: 'Sports 6.1'}, {label: 'Sports 6.2'}]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    label: 'Entertainment', icon: 'fa fa-fw fa-child',
+                    items: [
+                        [
+                            {
+                                label: 'Entertainment 1',
+                                items: [{label: 'Entertainment 1.1'}, {label: 'Entertainment 1.2'}]
+                            },
+                            {
+                                label: 'Entertainment 2',
+                                items: [{label: 'Entertainment 2.1'}, {label: 'Entertainment 2.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'Entertainment 3',
+                                items: [{label: 'Entertainment 3.1'}, {label: 'Entertainment 3.2'}]
+                            },
+                            {
+                                label: 'Entertainment 4',
+                                items: [{label: 'Entertainment 4.1'}, {label: 'Entertainment 4.2'}]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    label: 'Technology', icon: 'fa fa-fw fa-gears',
+                    items: [
+                        [
+                            {
+                                label: 'Technology 1',
+                                items: [{label: 'Technology 1.1'}, {label: 'Technology 1.2'}]
+                            },
+                            {
+                                label: 'Technology 2',
+                                items: [{label: 'Technology 2.1'}, {label: 'Technology 2.2'}]
+                            },
+                            {
+                                label: 'Technology 3',
+                                items: [{label: 'Technology 3.1'}, {label: 'Technology 3.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'Technology 4',
+                                items: [{label: 'Technology 4.1'}, {label: 'Technology 4.2'}]
+                            }
+                        ]
+                    ]
+                }
+            ]
+        };
     }
 
     render() {
-        var items=[
-            {
-                label: 'TV', icon: 'fa fa-fw fa-check',
-                items: [
-                    [
-                        {
-                            label: 'TV 1',
-                            items: [{label: 'TV 1.1'},{label: 'TV 1.2'}]
-                        },
-                        {
-                            label: 'TV 2',
-                            items: [{label: 'TV 2.1'},{label: 'TV 2.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'TV 3',
-                            items: [{label: 'TV 3.1'},{label: 'TV 3.2'}]
-                        },
-                        {
-                            label: 'TV 4',
-                            items: [{label: 'TV 4.1'},{label: 'TV 4.2'}]
-                        }
-                    ]
-                ]
-            },
-            {
-                label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
-                items: [
-                    [
-                        {
-                            label: 'Sports 1',
-                            items: [{label: 'Sports 1.1'},{label: 'Sports 1.2'}]
-                        },
-                        {
-                            label: 'Sports 2',
-                            items: [{label: 'Sports 2.1'},{label: 'Sports 2.2'}]
-                        },
-
-                    ],
-                    [
-                        {
-                            label: 'Sports 3',
-                            items: [{label: 'Sports 3.1'},{label: 'Sports 3.2'}]
-                        },
-                        {
-                            label: 'Sports 4',
-                            items: [{label: 'Sports 4.1'},{label: 'Sports 4.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'Sports 5',
-                            items: [{label: 'Sports 5.1'},{label: 'Sports 5.2'}]
-                        },
-                        {
-                            label: 'Sports 6',
-                            items: [{label: 'Sports 6.1'},{label: 'Sports 6.2'}]
-                        }
-                    ]
-                ]
-            },
-            {
-                label: 'Entertainment', icon: 'fa fa-fw fa-child',
-                items: [
-                    [
-                        {
-                            label: 'Entertainment 1',
-                            items: [{label: 'Entertainment 1.1'},{label: 'Entertainment 1.2'}]
-                        },
-                        {
-                            label: 'Entertainment 2',
-                            items: [{label: 'Entertainment 2.1'},{label: 'Entertainment 2.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'Entertainment 3',
-                            items: [{label: 'Entertainment 3.1'},{label: 'Entertainment 3.2'}]
-                        },
-                        {
-                            label: 'Entertainment 4',
-                            items: [{label: 'Entertainment 4.1'},{label: 'Entertainment 4.2'}]
-                        }
-                    ]
-                ]
-            },
-            {
-                label: 'Technology', icon: 'fa fa-fw fa-gears',
-                items: [
-                    [
-                        {
-                            label: 'Technology 1',
-                            items: [{label: 'Technology 1.1'},{label: 'Technology 1.2'}]
-                        },
-                        {
-                            label: 'Technology 2',
-                            items: [{label: 'Technology 2.1'},{label: 'Technology 2.2'}]
-                        },
-                        {
-                            label: 'Technology 3',
-                            items: [{label: 'Technology 3.1'},{label: 'Technology 3.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'Technology 4',
-                            items: [{label: 'Technology 4.1'},{label: 'Technology 4.2'}]
-                        }
-                    ]
-                ]
-            }
-        ];
         return (
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>MegaMenu</h1>
-                        <p>MegaMenu displays submenus of root items together.</p>
+                        <p>MegaMenu is navigation component that displays submenus together.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <h3>Default</h3>
-                    <MegaMenu model={items}/>
+                    <h3>Horizontal</h3>
+                    <MegaMenu model={this.state.items}/>
 
                     <h3>Vertical</h3>
-                    <MegaMenu model={items} orientation="vertical"/>
+                    <MegaMenu model={this.state.items} orientation="vertical"/>
                 </div>
 
                 <MegaMenuDoc/>
-
             </div>
         );
     }
@@ -169,16 +169,16 @@ import {MegaMenu} from 'primereact/megamenu';
                         <p>MegaMenu uses the common menu item api to define its items, visit <Link to="/menumodel">  MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>MegaMenu requires nested menuitems as its model where the items of a root menuitem is a two dimensional array to define columns in an overlay submenu.</p>
+                        <p>MegaMenu requires a collection of menuitems as its model.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<MegaMenu model={items}/>
+<MegaMenu model={items} />
 
 `}
                         </CodeHighlight>
                         <CodeHighlight className="language-jsx">
                             {`
-var items=[
+var items = [
     {
         label: 'TV', icon: 'fa fa-fw fa-check',
         items: [
@@ -295,13 +295,22 @@ var items=[
 `}
                         </CodeHighlight>
 
+                        <h3>Orientation</h3>
+                        <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
+                        <CodeHighlight className="language-jsx">
+                            {`
+<MegaMenu model={items} orientation="vertical"/>
+
+`}
+                        </CodeHighlight>
+
                         <h3>Custom Content</h3>
-                        <p>Custom content can be placed between MegaMenu tags. Megamenu should be horizontal for custom content.</p>
+                        <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
                         <CodeHighlight className="language-jsx">
                             {`
 <MegaMenu model={items}>
     <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="fa fa-sign-out"/>
+    <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
 </MegaMenu>
 
 `}
@@ -348,6 +357,18 @@ var items=[
                                         <td>string</td>
                                         <td>horizontal</td>
                                         <td>Defines the orientation, valid values are horizontal and vertical.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>baseZIndex</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Base zIndex value to use in layering.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoZIndex</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to automatically manage layering.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -403,145 +424,147 @@ var items=[
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {MegaMenu} from 'primereact/megamenu';
+
 export class MegaMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            items: [
+                {
+                    label: 'TV', icon: 'fa fa-fw fa-check',
+                    items: [
+                        [
+                            {
+                                label: 'TV 1',
+                                items: [{label: 'TV 1.1'}, {label: 'TV 1.2'}]
+                            },
+                            {
+                                label: 'TV 2',
+                                items: [{label: 'TV 2.1'}, {label: 'TV 2.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'TV 3',
+                                items: [{label: 'TV 3.1'}, {label: 'TV 3.2'}]
+                            },
+                            {
+                                label: 'TV 4',
+                                items: [{label: 'TV 4.1'}, {label: 'TV 4.2'}]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
+                    items: [
+                        [
+                            {
+                                label: 'Sports 1',
+                                items: [{label: 'Sports 1.1'}, {label: 'Sports 1.2'}]
+                            },
+                            {
+                                label: 'Sports 2',
+                                items: [{label: 'Sports 2.1'}, {label: 'Sports 2.2'}]
+                            },
+                        ],
+                        [
+                            {
+                                label: 'Sports 3',
+                                items: [{label: 'Sports 3.1'}, {label: 'Sports 3.2'}]
+                            },
+                            {
+                                label: 'Sports 4',
+                                items: [{label: 'Sports 4.1'}, {label: 'Sports 4.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'Sports 5',
+                                items: [{label: 'Sports 5.1'}, {label: 'Sports 5.2'}]
+                            },
+                            {
+                                label: 'Sports 6',
+                                items: [{label: 'Sports 6.1'}, {label: 'Sports 6.2'}]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    label: 'Entertainment', icon: 'fa fa-fw fa-child',
+                    items: [
+                        [
+                            {
+                                label: 'Entertainment 1',
+                                items: [{label: 'Entertainment 1.1'}, {label: 'Entertainment 1.2'}]
+                            },
+                            {
+                                label: 'Entertainment 2',
+                                items: [{label: 'Entertainment 2.1'}, {label: 'Entertainment 2.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'Entertainment 3',
+                                items: [{label: 'Entertainment 3.1'}, {label: 'Entertainment 3.2'}]
+                            },
+                            {
+                                label: 'Entertainment 4',
+                                items: [{label: 'Entertainment 4.1'}, {label: 'Entertainment 4.2'}]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    label: 'Technology', icon: 'fa fa-fw fa-gears',
+                    items: [
+                        [
+                            {
+                                label: 'Technology 1',
+                                items: [{label: 'Technology 1.1'}, {label: 'Technology 1.2'}]
+                            },
+                            {
+                                label: 'Technology 2',
+                                items: [{label: 'Technology 2.1'}, {label: 'Technology 2.2'}]
+                            },
+                            {
+                                label: 'Technology 3',
+                                items: [{label: 'Technology 3.1'}, {label: 'Technology 3.2'}]
+                            }
+                        ],
+                        [
+                            {
+                                label: 'Technology 4',
+                                items: [{label: 'Technology 4.1'}, {label: 'Technology 4.2'}]
+                            }
+                        ]
+                    ]
+                }
+            ]
+        };
     }
 
     render() {
-        var items=[
-            {
-                label: 'TV', icon: 'fa fa-fw fa-check',
-                items: [
-                    [
-                        {
-                            label: 'TV 1',
-                            items: [{label: 'TV 1.1'},{label: 'TV 1.2'}]
-                        },
-                        {
-                            label: 'TV 2',
-                            items: [{label: 'TV 2.1'},{label: 'TV 2.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'TV 3',
-                            items: [{label: 'TV 3.1'},{label: 'TV 3.2'}]
-                        },
-                        {
-                            label: 'TV 4',
-                            items: [{label: 'TV 4.1'},{label: 'TV 4.2'}]
-                        }
-                    ]
-                ]
-            },
-            {
-                label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
-                items: [
-                    [
-                        {
-                            label: 'Sports 1',
-                            items: [{label: 'Sports 1.1'},{label: 'Sports 1.2'}]
-                        },
-                        {
-                            label: 'Sports 2',
-                            items: [{label: 'Sports 2.1'},{label: 'Sports 2.2'}]
-                        },
-
-                    ],
-                    [
-                        {
-                            label: 'Sports 3',
-                            items: [{label: 'Sports 3.1'},{label: 'Sports 3.2'}]
-                        },
-                        {
-                            label: 'Sports 4',
-                            items: [{label: 'Sports 4.1'},{label: 'Sports 4.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'Sports 5',
-                            items: [{label: 'Sports 5.1'},{label: 'Sports 5.2'}]
-                        },
-                        {
-                            label: 'Sports 6',
-                            items: [{label: 'Sports 6.1'},{label: 'Sports 6.2'}]
-                        }
-                    ]
-                ]
-            },
-            {
-                label: 'Entertainment', icon: 'fa fa-fw fa-child',
-                items: [
-                    [
-                        {
-                            label: 'Entertainment 1',
-                            items: [{label: 'Entertainment 1.1'},{label: 'Entertainment 1.2'}]
-                        },
-                        {
-                            label: 'Entertainment 2',
-                            items: [{label: 'Entertainment 2.1'},{label: 'Entertainment 2.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'Entertainment 3',
-                            items: [{label: 'Entertainment 3.1'},{label: 'Entertainment 3.2'}]
-                        },
-                        {
-                            label: 'Entertainment 4',
-                            items: [{label: 'Entertainment 4.1'},{label: 'Entertainment 4.2'}]
-                        }
-                    ]
-                ]
-            },
-            {
-                label: 'Technology', icon: 'fa fa-fw fa-gears',
-                items: [
-                    [
-                        {
-                            label: 'Technology 1',
-                            items: [{label: 'Technology 1.1'},{label: 'Technology 1.2'}]
-                        },
-                        {
-                            label: 'Technology 2',
-                            items: [{label: 'Technology 2.1'},{label: 'Technology 2.2'}]
-                        },
-                        {
-                            label: 'Technology 3',
-                            items: [{label: 'Technology 3.1'},{label: 'Technology 3.2'}]
-                        }
-                    ],
-                    [
-                        {
-                            label: 'Technology 4',
-                            items: [{label: 'Technology 4.1'},{label: 'Technology 4.2'}]
-                        }
-                    ]
-                ]
-            }
-        ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>MegaMenu</h1>
-                        <p>MegaMenu displays submenus of root items together.</p>
+                        <p>MegaMenu is navigation component that displays submenus together.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <h3>Default</h3>
-                    <MegaMenu model={items}/>
+                    <h3>Horizontal</h3>
+                    <MegaMenu model={this.state.items}/>
 
                     <h3>Vertical</h3>
-                    <MegaMenu model={items} orientation="vertical"/>
+                    <MegaMenu model={this.state.items} orientation="vertical"/>
                 </div>
-
-                <MegaMenuDoc/>
-
             </div>
         );
     }

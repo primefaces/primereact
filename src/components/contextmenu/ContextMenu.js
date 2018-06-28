@@ -82,7 +82,7 @@ class ContextMenuSub extends Component {
 
         this.element.style.top = '0px';
 
-        if ((parseInt(containerOffset.left) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
+        if ((parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
             this.element.style.left = -1 * sublistWidth + 'px';
         }
         else {
