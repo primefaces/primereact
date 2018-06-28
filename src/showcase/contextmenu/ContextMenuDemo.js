@@ -6,84 +6,86 @@ import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class ContextMenuDemo extends Component {
 
-    render() {
-        var items1=[
-            {
-                label: 'File',
-                icon: 'fa fa-fw fa-file-o',
-                items: [{
-                    label: 'New',
-                    icon: 'fa fa-fw fa-plus',
-                    items: [
-                        {label: 'Project'},
-                        {label: 'Other'},
+    constructor() {
+        super();
+        this.state = {
+            globalItems: [
+                {
+                    label: 'File',
+                    icon: 'fa fa-fw fa-file-o',
+                    items: [{
+                        label: 'New',
+                        icon: 'fa fa-fw fa-plus',
+                        items: [
+                            {label: 'Project'},
+                            {label: 'Other'},
+                        ]
+                    },
+                        {label: 'Open'},
+                        {separator: true},
+                        {label: 'Quit'}
                     ]
                 },
-                    {label: 'Open'},
-                    {separator: true},
-                    {label: 'Quit'}
-                ]
-            },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            },
-            {separator: true},
-            {
-                label: 'Quit', icon: 'fa fa-fw fa-minus'
-            }
-        ],
-        items2 = [
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents'
+                        },
+                        {
+                            label: 'Search',
+                            icon: 'fa fa-fw fa-search',
+                            items: [
+                                {
+                                    label: 'Text',
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File'
+                                }
+                            ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                },
+                {separator: true},
+                {
+                    label: 'Quit', icon: 'fa fa-fw fa-minus'
+                }
+            ],
+            imageItems: [
                 {
                     label: 'Next',
                     icon: 'fa fa-fw fa-chevron-right'
@@ -92,8 +94,11 @@ export class ContextMenuDemo extends Component {
                     label: 'Prev',
                     icon: 'fa fa-fw fa-chevron-left'
                 }
-        ];
-        
+            ]
+        }
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -103,14 +108,14 @@ export class ContextMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <ContextMenu global={true} model={items1}/>
+                    <ContextMenu global={true} model={this.state.globalItems} />
                     
-                    <ContextMenu target="contextImg" model={items2}></ContextMenu>
-                    <img id="contextImg" src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}}/>
+                    <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
+
+                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
                 </div>
 
                 <ContextMenuDoc/>
-
             </div>
         );
     }
@@ -137,13 +142,57 @@ import {ContextMenu} from 'primereact/contextmenu';
                         <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>ContextMenu requires nested menuitems as its model and in its simplest form ContextMenu is attached to the document with global setting. .</p>
-                        <CodeHighlight className="language-jsx">
+                        <p>Menu requires a collection of menuitems as its model.</p>
+                        <CodeHighlight className="language-javascript">
                             {`
-<ContextMenu global={true} model={items1}/>
+const items = [
+    {
+        label: 'File',
+        items: [{label: 'New', icon: 'fa fa-fw fa-plus', command:()=>{ window.location.hash="/fileupload"; }},
+                {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
+    },
+    {
+        label: 'Edit',
+        items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh', command:()=>{ window.location.hash="/"; }},
+                {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+    }
+];
 
 `}
                         </CodeHighlight>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<ContextMenu model={items}/>
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Document Menu</h3>
+                        <p>Setting global property attaches the context menu to the document.
+                        </p>
+
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<ContextMenu global={true} model={items}/>
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Element Menu</h3>
+                        <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
+<img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+
+`}
+                        </CodeHighlight>
+
+
+
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -187,16 +236,16 @@ import {ContextMenu} from 'primereact/contextmenu';
                                         <td>Attaches the menu to document instead of a particular item.</td>
                                     </tr>
                                     <tr>
-                                        <td>target</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>The id of the element to attach the context menu.</td>
+                                        <td>baseZIndex</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Base zIndex value to use in layering.</td>
                                     </tr>
                                     <tr>
-                                        <td>appendTo</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Target element to attach the overlay, valid values are "body" or a local template variable of another element.</td>
+                                        <td>autoZIndex</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to automatically manage layering.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -206,28 +255,23 @@ import {ContextMenu} from 'primereact/contextmenu';
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>toggle</td>
-                                    <td>event (optional): mouse event</td>
-                                    <td>Toggles the visibility of the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>show</td>
-                                    <td>event: browser event</td>
-                                    <td>Displays the popup menu.</td>
-                                </tr>
-                                <tr>
-                                    <td>hide</td>
-                                    <td>-</td>
-                                    <td>Hides the popup menu.</td>
-                                </tr>
+                                    <tr>
+                                        <td>show</td>
+                                        <td>event: browser event</td>
+                                        <td>Displays the popup menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>hide</td>
+                                        <td>event: browser event</td>
+                                        <td>Hides the popup menu.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -282,86 +326,91 @@ import {ContextMenu} from 'primereact/contextmenu';
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {ContextMenu} from 'primereact/contextmenu';
+
 export class ContextMenuDemo extends Component {
-    
-    render() {
-        var items1=[
-            {
-                label: 'File',
-                icon: 'fa fa-fw fa-file-o',
-                items: [{
-                    label: 'New',
-                    icon: 'fa fa-fw fa-plus',
-                    items: [
-                        {label: 'Project'},
-                        {label: 'Other'},
+
+    constructor() {
+        super();
+        this.state = {
+            globalItems: [
+                {
+                    label: 'File',
+                    icon: 'fa fa-fw fa-file-o',
+                    items: [{
+                        label: 'New',
+                        icon: 'fa fa-fw fa-plus',
+                        items: [
+                            {label: 'Project'},
+                            {label: 'Other'},
+                        ]
+                    },
+                        {label: 'Open'},
+                        {separator: true},
+                        {label: 'Quit'}
                     ]
                 },
-                    {label: 'Open'},
-                    {separator: true},
-                    {label: 'Quit'}
-                ]
-            },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            },
-            {separator: true},
-            {
-                label: 'Quit', icon: 'fa fa-fw fa-minus'
-            }
-        ],
-        items2 = [
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents'
+                        },
+                        {
+                            label: 'Search',
+                            icon: 'fa fa-fw fa-search',
+                            items: [
+                                {
+                                    label: 'Text',
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File'
+                                }
+                            ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                },
+                {separator: true},
+                {
+                    label: 'Quit', icon: 'fa fa-fw fa-minus'
+                }
+            ],
+            imageItems: [
                 {
                     label: 'Next',
                     icon: 'fa fa-fw fa-chevron-right'
@@ -370,25 +419,26 @@ export class ContextMenuDemo extends Component {
                     label: 'Prev',
                     icon: 'fa fa-fw fa-chevron-left'
                 }
-        ];
-        
+            ]
+        }
+    }
+
+    render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ContextMenu</h1>
                         <p>ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.</p>
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <ContextMenu global={true} model={items1}/>
+                    <ContextMenu global={true} model={this.state.globalItems} />
                     
-                    <ContextMenu target="contextImg" model={items2}></ContextMenu>
-                    <img id="contextImg" src="showcase/resources/images/logo.png" alt="Logo"  style={{width: '80px'}}/>
+                    <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
+
+                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
                 </div>
-
-                <ContextMenuDoc/>
-
             </div>
         );
     }

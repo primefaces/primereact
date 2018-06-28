@@ -1,54 +1,272 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import {NestedMenu} from "../nestedmenu/NestedMenu";
+import DomHandler from '../utils/DomHandler';
+
+class ContextMenuSub extends Component {
+
+    static defaultProps = {
+        model: null,
+        root: false,
+        className: null,
+        resetMenu: false,
+        onLeafClick: null
+    };
+
+    static propTypes = {
+        model: PropTypes.any,
+        root: PropTypes.bool,
+        className: PropTypes.string,
+        resetMenu: PropTypes.bool,
+        onLeafClick: PropTypes.func
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeItem : null
+        };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.resetMenu === true) {
+            return {
+                activeItem: null
+            }
+        }
+
+        return null;
+    }
+
+    onItemMouseEnter(event, item) {
+        this.setState({
+            activeItem: item
+        });
+    }
+
+    onItemClick(event, item, index) {
+        if (item.disabled) {
+            event.preventDefault();
+            return;
+        }
+
+        if (!item.url) {
+            event.preventDefault();
+        }
+
+        if (item.command) {
+            item.command({
+                originalEvent: event,
+                item: this.props.item
+            });
+        }
+        
+        if (!item.items) {
+            this.props.onLeafClick(event);
+        }
+    }
+    
+    componentDidUpdate() {
+        if (this.element.offsetParent) {
+            this.position();
+        }
+    }
+
+    position() {
+        const parentItem = this.element.parentElement;
+        const containerOffset = DomHandler.getOffset(this.element.parentElement)
+        const viewport = DomHandler.getViewport();
+        const sublistWidth = this.element.offsetParent ? this.element.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.element);
+        const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+
+        this.element.style.top = '0px';
+
+        if ((parseInt(containerOffset.left) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
+            this.element.style.left = -sublistWidth + 'px';
+        }
+        else {
+            this.element.style.left = itemOuterWidth + 'px';
+        }
+    }
+
+    renderSeparator(index) {
+        return (
+            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+        );
+    }
+    
+    renderIcon(item) {
+        const className = classNames('ui-menuitem-icon', item.icon);
+        if (item.icon) {
+            return (
+                <span className={className}></span>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderSubmenuIcon(item) {
+        if (item.items) {
+            return (
+                <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderSubmenu(item) {
+        if(item.items) {
+            return (
+                <ContextMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} />
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderMenuitem(item, index) {
+        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item}, item.className);
+        const icon = this.renderIcon(item);
+        const submenuIcon = this.renderSubmenuIcon(item);
+        const submenu = this.renderSubmenu(item);
+
+        return (
+            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
+                <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+                    {icon}
+                    <span className="ui-menuitem-text">{item.label}</span>
+                    {submenuIcon}
+                </a>
+                {submenu}
+            </li>
+        );
+    }
+
+    renderItem(item, index) {
+        if (item.separator)
+            return this.renderSeparator(index);
+        else 
+            return this.renderMenuitem(item, index);
+    }
+
+    renderMenu() {
+        if (this.props.model) {
+            return (
+                this.props.model.map((item, index) => {
+                    return this.renderItem(item, index);
+                })
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    render() {
+        const className = classNames({'ui-widget-content ui-corner-all ui-submenu-list ui-shadow': !this.props.root});
+        const submenu = this.renderMenu();
+
+        return (
+            <ul ref={el => this.element = el} className={className}>
+                {submenu}
+            </ul>
+        );   
+    }
+ }
 
 export class ContextMenu extends Component {
-    
+
     static defaultProps = {
         id: null,
         model: null,
         style: null,
         className: null,
         global: false,
-        target: null,
-        appendTo: null
-    }
+        autoZIndex: true,
+        baseZIndex: 0,
+        onShow: null,
+        onHide: null
+    };
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         model: PropTypes.array,
         style: PropTypes.object,
         className: PropTypes.string,
         global: PropTypes.bool,
-        target: PropTypes.any,
-        appendTo: PropTypes.any
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
+    };
+
+    constructor(props) {
+        super();
+        this.state = {
+            resetMenu: false
+        }
+        this.onMenuClick = this.onMenuClick.bind(this);
+        this.onLeafClick = this.onLeafClick.bind(this);
+        this.onMenuMouseEnter = this.onMenuMouseEnter.bind(this);
     }
-    
-    toggle(event) {
-        if(this.container.offsetParent)
-            this.hide();
-        else
-            this.show(event);
+
+    componentDidMount() {
+        this.bindDocumentClickListener();
+
+        if (this.props.global) {
+            this.bindDocumentContextMenuListener();
+        }
+    }
+
+    onMenuClick() {
+        this.selfClick = true;
+
+        this.setState({
+            resetMenu: false
+        });
+    }
+
+    onMenuMouseEnter() {
+        this.setState({
+            resetMenu: false
+        });
     }
 
     show(event) {
-        this.position(event);
-        DomHandler.fadeIn(this.container, 250);
         this.container.style.display = 'block';
-
-        if(event) {
-            event.preventDefault();
+        this.position(event);
+        if (this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
+        DomHandler.fadeIn(this.container, 250);
+      
+        this.bindDocumentResizeListener();
+        
+        if (this.props.onShow) {
+            this.props.onShow(event);
+        }
+
+        event.stopPropagation();
+        event.preventDefault();
     }
-    
-    hide() {
-        if(this.container) {
+
+    hide(event) {
+        if (this.container) {
             this.container.style.display = 'none';
         }
+            
+        if (this.props.onHide) {
+            this.props.onHide(event);
+        }
+
+        this.unbindDocumentResizeListener();
     }
-    
+
     position(event) {
         if(event) {
             let left = event.pageX + 1;
@@ -81,71 +299,89 @@ export class ContextMenu extends Component {
             this.container.style.top = top + 'px';
         }
     }
-    
-    bindDocumentListener() {
-        this.documentClickListener = () => {
-            this.hide();
-        };
-        document.addEventListener('click', this.documentClickListener, false);
-        
-        var documentEvent = document.createEvent('HTMLEvents');
-        documentEvent.initEvent('click', true, false);
-        
-        if(this.props.global){
-            this.rightClickListener = (event) => {
-                document.dispatchEvent(documentEvent);
-                this.show(event);
-                event.preventDefault();
-            }
-            document.addEventListener('contextmenu', this.rightClickListener);
-        }
-        else if(this.props.target) {
-            this.rightClickListener = (event) => {
-                document.dispatchEvent(documentEvent);
-                this.show(event);
-                event.preventDefault();
-                event.stopPropagation();                
-            }
-            
-            document.getElementById(this.props.target).addEventListener('contextmenu', this.rightClickListener);
-        }
 
+    onLeafClick(event) {
+        this.setState({
+            resetMenu: true
+        });
+
+        event.stopPropagation();
     }
 
-    unbindDocumentListener() {
+    bindDocumentClickListener() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (!this.selfClick) {
+                    this.hide(event);
+                    
+                    this.setState({
+                        resetMenu: true
+                    });
+                }
+
+                this.selfClick = false;
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    bindDocumentContextMenuListener() {
+        if (!this.documentContextMenuListener) {
+            this.documentContextMenuListener = (event) => {
+                this.show(event);
+                event.preventDefault();
+            };
+
+            document.addEventListener('contextmenu', this.documentContextMenuListener);
+        }
+    }
+
+    bindDocumentResizeListener() {
+        if (!this.documentResizeListener) {
+            this.documentResizeListener = (event) => {
+                if(this.container.offsetParent) {
+                    this.hide(event);
+                }
+            };
+
+            window.addEventListener('resize', this.documentResizeListener);
+        }
+    }
+
+    unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
+    }
 
-        if(this.rightClickListener) {
-            document.removeEventListener('contextmenu', this.rightClickListener);
-            this.rightClickListener = null;
+    unbindDocumentContextMenuListener() {
+        if(this.documentContextMenuListener) {
+            document.removeEventListener('contextmenu', this.documentContextMenuListener);
+            this.documentContextMenuListener = null;
         }
     }
-    
-    componentDidMount(){
-        this.bindDocumentListener();
-        
-        if(this.props.appendTo) {
-            if(this.props.appendTo === 'body')
-                document.body.appendChild(this.container);
-            else
-                DomHandler.appendChild(this.container, this.props.appendTo);
+
+    unbindDocumentResizeListener() {
+        if(this.documentResizeListener) {
+            window.removeEventListener('resize', this.documentResizeListener);
+            this.documentResizeListener = null;
         }
     }
 
     componentWillUnmount() {
-        this.unbindDocumentListener();
+        this.unbindDocumentClickListener();
+        this.unbindDocumentResizeListener();
+        this.unbindDocumentContextMenuListener();
     }
-    
+
     render() {
-        let className = classNames('ui-contextmenu ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-dynamic ui-shadow', 
-                                this.props.className);
-        
-        return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                <NestedMenu className="ui-menu-list ui-helper-reset" items={this.props.model} root={true} parentMenu="ContextMenu" index={Math.random()}/>
+        const className = classNames('ui-contextmenu ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+
+        return(
+            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
+                <ContextMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
             </div>
         );
     }

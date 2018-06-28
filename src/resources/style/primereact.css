@@ -10,7 +10,7 @@
 @import '../../components/checkbox/Checkbox.css';
 @import '../../components/chips/Chips.css';
 @import '../../components/colorpicker/ColorPicker.css';
-/*@import '../../components/contextmenu/ContextMenu.css';*/
+@import '../../components/contextmenu/ContextMenu.css';
 @import '../../components/datagrid/DataGrid.css';
 @import '../../components/datalist/DataList.css';
 @import '../../components/datascroller/DataScroller.css';
