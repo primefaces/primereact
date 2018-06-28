@@ -269,8 +269,8 @@ const items = [
                                         <th>Parameters</th>
                                         <th>Description</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <td>onShow</td>
                                         <td>event: Browser event </td>
@@ -279,7 +279,7 @@ const items = [
                                     <tr>
                                         <td>onHide</td>
                                         <td>event: Browser event </td>
-                                        <td>Hides the popup menu.</td>
+                                        <td>Callback to invoke when a popup menu is hidden.</td>
                                     </tr>
                                 </tbody>
                             </table>

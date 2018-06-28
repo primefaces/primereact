@@ -270,6 +270,31 @@ const items = [
                             </table>
                         </div>
 
+                        <h3>Events</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>event: Browser event </td>
+                                        <td>Callback to invoke when a popup menu is shown.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>event: Browser event </td>
+                                        <td>Callback to invoke when a popup menu is hidden.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
