@@ -1,12 +1,10 @@
 @import '../../components/common/Common.css';
 @import '../../components/accordion/Accordion.css';
 @import '../../components/autocomplete/AutoComplete.css';
-/*@import '../../components/blockui/blockui.css';*/
 @import '../../components/breadcrumb/BreadCrumb.css';
 @import '../../components/button/Button.css';
 @import '../../components/calendar/Calendar.css';
 @import '../../components/card/Card.css';
-/*@import '../../components/carousel/Carousel.css';*/
 @import '../../components/checkbox/Checkbox.css';
 @import '../../components/chips/Chips.css';
 @import '../../components/colorpicker/ColorPicker.css';
@@ -20,7 +18,6 @@
 @import '../../components/dropdown/Dropdown.css';
 @import '../../components/fieldset/Fieldset.css';
 @import '../../components/fileupload/FileUpload.css';
-/*@import '../../components/galleria/Galleria.css';*/
 @import '../../components/grid/Grid.css';
 @import '../../components/growl/Growl.css';
 /*import '../../components/inplace/Inplace.css';*/
@@ -40,7 +37,7 @@
 @import '../../components/overlaypanel/OverlayPanel.css';
 @import '../../components/paginator/Paginator.css';
 @import '../../components/panel/Panel.css';
-/*@import '../../components/panelmenu/PanelMenu.css';*/
+@import '../../components/panelmenu/PanelMenu.css';
 @import '../../components/password/Password.css';
 @import '../../components/picklist/PickList.css';
 @import '../../components/progressbar/ProgressBar.css';

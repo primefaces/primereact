@@ -484,6 +484,14 @@ $inputGroupTextColor: #222222;
     color: #ffffff;
 }
 
+/* PanelMenu */
+.ui-panelmenu .ui-panelmenu-header.ui-state-active,
+.ui-panelmenu .ui-panelmenu-header.ui-state-active a {
+    border-color: #156090; 
+    background: #186ba0; 
+    color: #FFFFFF;
+}
+
 /* DatePicker */
 .ui-datepicker.ui-widget {
     padding: 0;

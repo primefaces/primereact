@@ -8,82 +8,85 @@ export class PanelMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            items: [
+                {
+                    label: 'File',
+                    icon: 'fa fa-fw fa-file-o',
+                    items: [{
+                            label: 'New', 
+                            icon: 'fa fa-fw fa-plus',
+                            items: [
+                                {label: 'Project', icon: 'fa fa-fw fa-lock'},
+                                {label: 'Other', icon: 'fa fa-fw fa-list'}
+                            ]
+                        },
+                        {label: 'Open', icon: 'fa fa-fw fa-external-link'},
+                        {separator: true},
+                        {label: 'Quit', icon: 'fa fa-fw fa-close'}
+                    ]
+                },
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents',
+                            icon: 'fa fa-fw fa-bars'
+                        },
+                        {
+                            label: 'Search', 
+                            icon: 'fa fa-fw fa-search', 
+                            items: [
+                                {
+                                    label: 'Text', 
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File',
+                                    icon: 'fa fa-fw fa-file',
+                                }
+                        ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
     }
 
     render() {
-        var items=[
-            {
-                label: 'File',
-                icon: 'fa fa-fw fa-file-o',
-                items: [{
-                    label: 'New',
-                    icon: 'fa fa-fw fa-plus',
-                    items: [
-                        {label: 'Project'},
-                        {label: 'Other'},
-                    ]
-                },
-                    {label: 'Open'},
-                    {separator: true},
-                    {label: 'Quit'}
-                ]
-            },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            }
-        ];
         return (
             <div>
                 <div className="content-section introduction">
@@ -92,12 +95,12 @@ export class PanelMenuDemo extends Component {
                         <p>PanelMenu is a hybrid of accordion-tree components.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <PanelMenu model={items} style={{width:'300px'}}/>
+                    <PanelMenu model={this.state.items} style={{width:'300px'}}/>
                 </div>
 
                 <PanelMenuDoc/>
-
             </div>
         );
     }
@@ -124,7 +127,7 @@ import {PanelMenu} from 'primereact/panelmenu';
                         <p>PanelMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
-                        <p>PanelMenu requires nested menuitems as its model.</p>
+                        <p>PanelMenu requires a collection of menuitems as its model.</p>
                         <CodeHighlight className="language-jsx">
                             {`
 <PanelMenu model={items} style={{width:'300px'}}/>
@@ -132,7 +135,7 @@ import {PanelMenu} from 'primereact/panelmenu';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-javascript">
                             {`
 var items=[
     {
@@ -210,9 +213,6 @@ var items=[
 `}
                         </CodeHighlight>
 
-                        <h3>Initial State</h3>
-                        <p>MenuItem has an expanded property to control the visibility of a submenu, you may use this property to control the state from the menumodel.</p>
-
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -277,7 +277,7 @@ var items=[
                                         <td>Accordion content of root submenu.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menu-list</td>
+                                        <td>ui-submenu-list</td>
                                         <td>List element.</td>
                                     </tr>
                                     <tr>
@@ -311,100 +311,104 @@ var items=[
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {PanelMenu} from 'primereact/panelmenu';
+
 export class PanelMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            items: [
+                {
+                    label: 'File',
+                    icon: 'fa fa-fw fa-file-o',
+                    items: [{
+                            label: 'New', 
+                            icon: 'fa fa-fw fa-plus',
+                            items: [
+                                {label: 'Project', icon: 'fa fa-fw fa-lock'},
+                                {label: 'Other', icon: 'fa fa-fw fa-list'}
+                            ]
+                        },
+                        {label: 'Open', icon: 'fa fa-fw fa-external-link'},
+                        {separator: true},
+                        {label: 'Quit', icon: 'fa fa-fw fa-close'}
+                    ]
+                },
+                {
+                    label: 'Edit',
+                    icon: 'fa fa-fw fa-edit',
+                    items: [
+                        {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
+                        {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
+                    ]
+                },
+                {
+                    label: 'Help',
+                    icon: 'fa fa-fw fa-question',
+                    items: [
+                        {
+                            label: 'Contents',
+                            icon: 'fa fa-fw fa-bars'
+                        },
+                        {
+                            label: 'Search', 
+                            icon: 'fa fa-fw fa-search', 
+                            items: [
+                                {
+                                    label: 'Text', 
+                                    items: [
+                                        {
+                                            label: 'Workspace'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'File',
+                                    icon: 'fa fa-fw fa-file',
+                                }
+                        ]}
+                    ]
+                },
+                {
+                    label: 'Actions',
+                    icon: 'fa fa-fw fa-gear',
+                    items: [
+                        {
+                            label: 'Edit',
+                            icon: 'fa fa-fw fa-refresh',
+                            items: [
+                                {label: 'Save', icon: 'fa fa-fw fa-save'},
+                                {label: 'Update', icon: 'fa fa-fw fa-save'},
+                            ]
+                        },
+                        {
+                            label: 'Other',
+                            icon: 'fa fa-fw fa-phone',
+                            items: [
+                                {label: 'Delete', icon: 'fa fa-fw fa-minus'}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
     }
 
     render() {
-        var items=[
-            {
-                label: 'File',
-                icon: 'fa fa-fw fa-file-o',
-                items: [{
-                    label: 'New',
-                    icon: 'fa fa-fw fa-plus',
-                    items: [
-                        {label: 'Project'},
-                        {label: 'Other'},
-                    ]
-                },
-                    {label: 'Open'},
-                    {separator: true},
-                    {label: 'Quit'}
-                ]
-            },
-            {
-                label: 'Edit',
-                icon: 'fa fa-fw fa-edit',
-                items: [
-                    {label: 'Undo', icon: 'fa fa-fw fa-mail-forward'},
-                    {label: 'Redo', icon: 'fa fa-fw fa-mail-reply'}
-                ]
-            },
-            {
-                label: 'Help',
-                icon: 'fa fa-fw fa-question',
-                items: [
-                    {
-                        label: 'Contents'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'fa fa-fw fa-search',
-                        items: [
-                            {
-                                label: 'Text',
-                                items: [
-                                    {
-                                        label: 'Workspace'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'File'
-                            }
-                        ]}
-                ]
-            },
-            {
-                label: 'Actions',
-                icon: 'fa fa-fw fa-gear',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'fa fa-fw fa-refresh',
-                        items: [
-                            {label: 'Save', icon: 'fa fa-fw fa-save'},
-                            {label: 'Update', icon: 'fa fa-fw fa-save'},
-                        ]
-                    },
-                    {
-                        label: 'Other',
-                        icon: 'fa fa-fw fa-phone',
-                        items: [
-                            {label: 'Delete', icon: 'fa fa-fw fa-minus'}
-                        ]
-                    }
-                ]
-            }
-        ];
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>PanelMenu</h1>
                         <p>PanelMenu is a hybrid of accordion-tree components.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <PanelMenu model={items} style={{width:'300px'}}/>
+                    <PanelMenu model={this.state.items} style={{width:'300px'}}/>
                 </div>
-
-                <PanelMenuDoc/>
-
             </div>
         );
     }
