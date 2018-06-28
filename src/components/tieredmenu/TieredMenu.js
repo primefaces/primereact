@@ -244,7 +244,9 @@ export class TieredMenu extends Component {
 
     show(event) {
         this.container.style.display = 'block';
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        if (this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        }
         DomHandler.absolutePosition(this.container,  event.currentTarget);
         DomHandler.fadeIn(this.container, 250);
         
