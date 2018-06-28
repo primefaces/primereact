@@ -48,7 +48,7 @@
 @import '../../components/scrollpanel/ScrollPanel.css';
 @import '../../components/selectbutton/SelectButton.css';
 @import '../../components/sidebar/Sidebar.css';
-/*@import '../../components/slidemenu/SlideMenu.css';*/
+@import '../../components/slidemenu/SlideMenu.css';
 @import '../../components/slider/Slider.css';
 @import '../../components/spinner/Spinner.css';
 @import '../../components/splitbutton/SplitButton.css';

@@ -1,122 +1,162 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 
 export class SlideMenuSub extends Component {
+
     static defaultProps = {     
-        item: null,
-        root: false,
-        backLabel: 'Back',
-        menuWidth: null,
-        effectDuration: null,       
+        model: null,
+        level: 0,
         easing: 'ease-out',
-        slideMenu: null,
-        slideMenuLeft: null,
-        onMenuItemClick: null,
-        isAnimating: null,
-        setAnimating: null
+        effectDuration: 250,
+        menuWidth: 190,
+        parentActive: false,
+        onForward: null
     }
 
     static propsTypes = {
-        item: PropTypes.any,
-        root: PropTypes.bool,
-        backLabel: PropTypes.string,
-        menuWidth: PropTypes.any,
-        effectDuration: PropTypes.any,       
+        model: PropTypes.any,
+        level: PropTypes.number,
         easing: PropTypes.string,
-        slideMenu: PropTypes.any,
-        slideMenuLeft: PropTypes.string,
-        onMenuItemClick: PropTypes.func,
-        isAnimating: PropTypes.func,
-        setAnimating: PropTypes.func
+        effectDuration: PropTypes.number,
+        menuWidth: PropTypes.number,
+        parentActive: PropTypes.bool,
+        onForward: PropTypes.func
     }
 
     constructor(props) {
         super(props);
-        this.state = {activeItemIndex: null};
+        this.state = {
+            activeItem: null
+        };
     }
-    
 
-    itemClick(event, item, index) {
-        if(item.disabled) {
+    onItemClick(event, item) {
+        if (item.disabled) {
             event.preventDefault();
             return;
         }
-        
-        if(!item.url) {
+
+        if (!item.url) {
             event.preventDefault();
         }
-                
-        if(item.command) {            
+
+        if (item.command) {
             item.command({
                 originalEvent: event,
                 item: item
             });
         }
 
-        if(item.items && !this.props.isAnimating()) {
-            this.props.onMenuItemClick();
-            
-            this.setState({activeItemIndex: index});
-            this.props.setAnimating(true);
-            setTimeout(() => this.props.setAnimating(false), this.props.effectDuration);
+        if (item.items) {
+            this.setState({
+                activeItem: item
+            });
+            this.props.onForward();
         }
     }
 
-    render() {
-        var menuListClass = classNames('ui-menu-list', {
-            'ui-helper-reset ui-menu-rootlist': this.props.root, 
-            'ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-child': !this.props.root
-        }),
-        menuListStyle = {
-                'width': this.props.menuWidth, 
-                'left': this.props.root ? this.props.slideMenuLeft : this.props.menuWidth,
-                'transitionProperty': this.props.root ? 'left' : 'none',
-                'transitionDuration': this.props.effectDuration + 'ms',
-                'transitionTimingFunction': this.props.easing
-            };
+    renderSeparator(index) {
+        return (
+            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+        );
+    }
+    
+    renderIcon(item) {
+        const className = classNames('ui-menuitem-icon', item.icon);
+        if (item.icon) {
+            return (
+                <span className={className}></span>
+            );
+        }
+        else {
+            return null;
+        }
+    }
 
-        var menuMap = this.props.root ? this.props.item : this.props.item.items;
+    renderSubmenuIcon(item) {
+        if (item.items) {
+            return (
+                <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderSubmenu(item) {
+        if(item.items) {
+            return (
+                <SlideMenuSub model={item.items} index={this.props.index + 1} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
+                    onForward={this.props.onForward} parentActive={item === this.state.activeItem} />
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderMenuitem(item, index) {
+        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item}, item.className);
+        const icon = this.renderIcon(item);
+        const submenuIcon = this.renderSubmenuIcon(item);
+        const submenu = this.renderSubmenu(item);
 
         return (
-            <ul className={menuListClass} style={menuListStyle}>
-                {
-                    menuMap && menuMap.map((child, index) => {
-                        if(child.separator) {
-                            return <li key={'item_' + index} className="ui-menu-separator ui-widget-content" />;
-                        }
-                        else {
-                            var menuitemClass = classNames('ui-menuitem ui-widget ui-corner-all', {
-                                'ui-menu-parent': child.items,
-                                'ui-slidemenuitem-active': index===this.state.activeItemIndex
-                                }),
-                                menuLinkClass = classNames('ui-menuitem-link ui-corner-all', {
-                                    'ui-menuitem-link-parent':child.items,
-                                    'ui-state-disabled':child.disabled
-                                }),
-                                menuiconClass = classNames('ui-menuitem-icon', child.icon);
-
-                            return (
-                                <li key={'item_' + index} className={menuitemClass}>
-                                    <a href={child.url||'#'} className={menuLinkClass} target={child.target} onClick={(e) => this.itemClick(e, child, index)}>
-                                        {child.items && <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>}
-                                        {child.icon && <span className={menuiconClass}></span>}
-                                        <span className="ui-menuitem-text">{child.label}</span>
-                                    </a>
-                                    {child.items && <SlideMenuSub item={child} menuWidth={this.props.menuWidth} onMenuItemClick={this.props.onMenuItemClick} isAnimating={this.props.isAnimating} setAnimating={this.props.setAnimating}/>}
-                                </li>
-                            );
-                        }
-                    })
-                }
-            </ul>
+            <li key={item.label + '_' + index} className={className} style={item.style}>
+                <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+                    {icon}
+                    <span className="ui-menuitem-text">{item.label}</span>
+                    {submenuIcon}
+                </a>
+                {submenu}
+            </li>
         );
+    }
+
+    renderItem(item, index) {
+        if (item.separator)
+            return this.renderSeparator(index);
+        else 
+            return this.renderMenuitem(item, index);
+    }
+
+    renderItems() {
+        if (this.props.model) {
+            return (
+                this.props.model.map((item, index) => {
+                    return this.renderItem(item, index);
+                })
+            );
+        }
+        else {
+            return null;
+        }
+    }
+    
+    render() {
+        const className = classNames({'ui-slidemenu-rootlist': this.props.root, 'ui-submenu-list': !this.props.root, 'ui-active-submenu': this.props.parentActive});
+        const style = {
+            width: this.props.menuWidth + 'px',
+            left: this.props.root ? (-1 * this.props.level * this.props.menuWidth) + 'px' : this.props.menuWidth + 'px',
+            transitionProperty: this.props.root ? 'left' : 'none',
+            transitionDuration: this.props.effectDuration + 'ms',
+            transitionTimingFunction: this.props.easing
+        };
+        const items = this.renderItems();
+
+        return (
+            <ul className={className} style={style}>
+                {items}
+            </ul>
+        );   
     }
 }
 
 export class SlideMenu extends Component {
+
     static defaultProps = {
         id: null,
         model: null,
@@ -127,7 +167,11 @@ export class SlideMenu extends Component {
         effectDuration: 250,
         backLabel: 'Back',
         menuWidth: 190,
-        viewportHeight: 175
+        viewportHeight: 175,
+        autoZIndex: true,
+        baseZIndex: 0,
+        onShow: null,
+        onHide: null
     }
 
     static propsTypes = {
@@ -140,106 +184,161 @@ export class SlideMenu extends Component {
         effectDuration: PropTypes.number,
         backLabel: PropTypes.string,
         menuWidth: PropTypes.number,
-        viewportHeight: PropTypes.number
+        viewportHeight: PropTypes.number,
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
         super(props);
-        this.left = 0;
-        this.animating = false;
-        this.onClick = this.onClick.bind(this);
-        this.goBack = this.goBack.bind(this);
-        this.onMenuItemClick = this.onMenuItemClick.bind(this);
-        this.isAnimating = this.isAnimating.bind(this);
-        this.setAnimating = this.setAnimating.bind(this);
+        this.state = {
+            level: 0
+        };
+        this.onMenuClick = this.onMenuClick.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
+        this.navigateForward = this.navigateForward.bind(this);
     }
 
-    onMenuItemClick() {
-        this.left -= this.props.menuWidth;
-        this.rootSlideMenuSub.style.left = this.left + 'px';
-        this.updateBackward();
+    onMenuClick(event) {
+        this.selfClick = true;
     }
 
-    toggle(event) {
-        if(this.container.offsetParent)
-            this.hide();
-        else
-            this.show(event);
-    }
-    
-    show(event) {
-        this.preventDocumentDefault = true;
-        this.container.style.display = 'block';
-        DomHandler.absolutePosition(this.container, event.target);
-        DomHandler.fadeIn(this.container, 250);
-    }
-    
-    hide() {
-        this.container.style.display = 'none';
-    }
-    
-    onClick(event) {
-        this.preventDocumentDefault = true;
-    }
-    
-    goBack() {
-        this.left += this.props.menuWidth;
-        this.rootSlideMenuSub.style.left = this.left + 'px';
-        this.updateBackward();
+    navigateForward() {
+        this.setState({
+            level: this.state.level + 1 
+        });
     }
 
-    updateBackward() {
-        this.backward.style.display = this.left ? 'block' : 'none';
+    navigateBack() {
+        this.setState({
+            level: this.state.level - 1 
+        });
     }
 
-    isAnimating() {
-        return this.animating;
-    }
+    renderBackward() {
+        const className = classNames('ui-slidemenu-backward ui-widget-header ui-corner-all', {'ui-helper-hidden': this.state.level === 0});
 
-    setAnimating(_animating) {
-        this.animating = _animating;
+        return (
+            <div ref={el => this.backward = el} className={className} onClick={this.navigateBack}>
+                <span className="ui-slidemenu-backward-icon pi pi-fw pi-caret-left"></span>
+                <span>{this.props.backLabel}</span>
+            </div>
+        );
     }
 
     componentDidMount() {
-        if(this.props.popup) {
-            this.slideMenuContent.style.height = this.props.viewportHeight - DomHandler.getHiddenElementOuterHeight(this.backward) + 'px';
+        if (this.props.popup) {
+            this.bindDocumentClickListener();
+        }
+    }
 
-            this.documentClickListener = () => {
-                if(!this.preventDocumentDefault) {
-                    this.hide();
+    toggle(event) {
+        if (this.props.popup) {
+            this.selfClick = true;
+
+            if (this.container.offsetParent)
+                this.hide(event);
+            else
+                this.show(event);
+        }
+    }
+
+    show(event) {
+        this.container.style.display = 'block';
+        if (this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        }
+        DomHandler.absolutePosition(this.container,  event.currentTarget);
+        DomHandler.fadeIn(this.container, 250);
+        
+        this.bindDocumentResizeListener();
+        
+        if (this.props.onShow) {
+            this.props.onShow(event);
+        }
+    }
+
+    hide(event) {
+        if (this.container) {
+            this.container.style.display = 'none';
+        }
+            
+        if (this.props.onHide) {
+            this.props.onHide(event);
+        }
+
+        this.unbindDocumentResizeListener();
+    }
+
+    bindDocumentClickListener() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (!this.selfClick && this.container.offsetParent) {
+                    this.hide(event);
                 }
-                this.preventDocumentDefault = false;
-            }
 
-            document.addEventListener('click', this.documentClickListener);     
-        } 
-        else {
-            this.slideMenuContent.style.height = this.props.viewportHeight + 'px';
+                this.selfClick = false;
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    onLeafClick(event) {
+        this.setState({
+            resetMenu: true
+        });
+
+        event.stopPropagation();
+    }
+
+    bindDocumentResizeListener() {
+        if (!this.documentResizeListener) {
+            this.documentResizeListener = (event) => {
+                if(this.container.offsetParent) {
+                    this.hide(event);
+                }
+            };
+
+            window.addEventListener('resize', this.documentResizeListener);
+        }
+    }
+
+    unbindDocumentClickListener() {
+        if(this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    unbindDocumentResizeListener() {
+        if(this.documentResizeListener) {
+            window.removeEventListener('resize', this.documentResizeListener);
+            this.documentResizeListener = null;
         }
     }
 
     componentWillUnmount() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-        }
+        this.unbindDocumentClickListener();
+        this.unbindDocumentResizeListener();
     }
     
     render() {
-        var menuClass = classNames('ui-menu ui-slidemenu ui-widget ui-widget-content ui-corner-all', this.props.className, {
-            'ui-menu-dynamic ui-shadow': this.props.popup
-        });
+        const className = classNames('ui-slidemenu ui-widget ui-widget-content ui-corner-all', {'ui-slidemenu-dynamic ui-shadow': this.props.popup});
+        const backward = this.renderBackward();
+
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={menuClass} style={this.props.style} onClick={this.onClick}>
-                <div className="ui-slidemenu-wrapper" style={{'height': this.props.viewportHeight + 'px'}}>
-                    <div ref={(el) => this.slideMenuContent = el} className="ui-slidemenu-content">
-                        <SlideMenuSub ref={(el) => this.rootSlideMenuSub = ReactDOM.findDOMNode(el)} onMenuItemClick={this.onMenuItemClick} item={this.props.model} slideMenuLeft={0} root={true} menuWidth={this.props.menuWidth} 
-                            effectDuration={this.props.effectDuration} easing={this.props.easing} isAnimating={this.isAnimating} setAnimating={this.setAnimating}></SlideMenuSub>
+            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
+                <div className="ui-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
+                    <div className="ui-slidemenu-content" ref={el => this.slideMenuContent = el}>
+                        <SlideMenuSub model={this.props.model} root={true} index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration} 
+                                level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
                     </div>
-                    <div ref={(el) => this.backward = el} className="ui-slidemenu-backward ui-widget-header ui-corner-all" style={{'display': this.left ? 'block' : 'none'}} onClick={this.goBack}>
-                        <span className="pi pi-fw pi-caret-left"></span> <span>{this.props.backLabel}</span>
-                    </div>
-                </div>
+                    {backward}
+                 </div>
             </div>
-        )
+        );
     }
 }

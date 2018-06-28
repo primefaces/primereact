@@ -77,7 +77,7 @@ import {Menu} from 'primereact/menu';
                         <p>Menu requires a collection of menuitems as its model.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<Menu model={items}/>
+<Menu model={items} />
 
 `}
                         </CodeHighlight>
