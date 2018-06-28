@@ -7,20 +7,25 @@ import {Button} from "../../components/button/Button";
 
 export class MenuDemo extends Component {
 
-    render() {
-        let items= [
-            {
-                label: 'File',
-                items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                        {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
-            }, 
-            {
-                label: 'Edit',
-                items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
-                        {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
-            }
-        ];
+    constructor() {
+        super();
+        this.state = {
+            items: [
+                {
+                    label: 'File',
+                    items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                            {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
+                }, 
+                {
+                    label: 'Edit',
+                    items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
+                            {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+                }
+            ]
+        };
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -32,10 +37,10 @@ export class MenuDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <Menu model={items}/>
+                    <Menu model={this.state.items}/>
 
                     <h3>Popup</h3>
-                    <Menu model={items} popup={true} ref={el => this.menu = el} />
+                    <Menu model={this.state.items} popup={true} ref={el => this.menu = el} />
                     <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
                 </div>
 
@@ -89,7 +94,7 @@ let items = [
                         </CodeHighlight>
 
                         <h3>SubMenus</h3>
-                        <p>Menu supports 1 level of nesting via subitems of an item.</p>
+                        <p>Menu supports one level of nesting via subitems of an item.</p>
                         <CodeHighlight className="language-javascript">
                             {`
 let items = [
@@ -283,20 +288,25 @@ import {Menu} from 'primereact/menu';
 
 export class MenuDemo extends Component {
 
-    render() {
-        let items= [
-            {
-                label: 'File',
-                items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                        {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
-            }, 
-            {
-                label: 'Edit',
-                items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
-                        {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
-            }
-        ];
+    constructor() {
+        super();
+        this.state = {
+            items: [
+                {
+                    label: 'File',
+                    items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                            {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
+                }, 
+                {
+                    label: 'Edit',
+                    items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
+                            {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+                }
+            ]
+        };
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section">
@@ -308,10 +318,10 @@ export class MenuDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <Menu model={items}/>
+                    <Menu model={this.state.items}/>
 
                     <h3>Popup</h3>
-                    <Menu model={items} popup={true} ref={el => this.menu = el}/>
+                    <Menu model={this.state.items} popup={true} ref={el => this.menu = el}/>
                     <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
                 </div>
 
