@@ -238,18 +238,13 @@ export class Menubar extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.targetClick && !this.selfClick) {
-                    if (this.props.popup) {
-                        this.hide(event);
-                    }
-                    
+                if (!this.selfClick) {                    
                     this.setState({
                         resetMenu: true
                     });
                 }
 
                 this.selfClick = false;
-                this.targetClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
