@@ -7,7 +7,7 @@ export class HomeComponent extends Component {
         return (
             <div className="home">
                 <div className="introduction">
-                    <h1>Your Favorite UI Framework</h1>
+                    <h1>The Most Complete UI Framework</h1>
                     <h2>for REACT</h2>
 
                     <Link to="/setup" className="home-button">Get Started</Link>
