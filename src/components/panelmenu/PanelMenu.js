@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
 
 class PanelMenuSub extends Component {
 
@@ -75,7 +74,7 @@ class PanelMenuSub extends Component {
 
         if (item.items) {
             return (
-                <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>
+                <span className={className}></span>
             );
         }
         else {
@@ -234,7 +233,7 @@ export class PanelMenu extends Component {
         return (
             <div key={item.label + '_' + index} className="ui-panelmenu-panel">
                 <div className={headerClassName} style={item.style}>
-                    <a href="#" className="ui-panelmenu-header-link ng-tns-c2-1 ng-star-inserted" onClick={(e) => this.onItemClick(e, item)}>
+                    <a href={item.url || '#'} className="ui-panelmenu-header-link ng-tns-c2-1 ng-star-inserted" onClick={(e) => this.onItemClick(e, item)}>
                         {toggleIcon}
                         {itemIcon}
                         <span class="ui-menuitem-text">{item.label}</span>
