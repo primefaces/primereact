@@ -9,6 +9,7 @@ class TieredMenuSub extends Component {
         model: null,
         root: false,
         className: null,
+        popup: false,
         resetMenu: false,
         onLeafClick: null
     };
@@ -17,6 +18,7 @@ class TieredMenuSub extends Component {
         model: PropTypes.any,
         root: PropTypes.bool,
         className: PropTypes.string,
+        popup: PropTypes.bool,
         resetMenu: PropTypes.bool,
         onLeafClick: PropTypes.func
     };
@@ -40,7 +42,7 @@ class TieredMenuSub extends Component {
 
     onItemMouseEnter(event, item) {
         if (this.props.root) {
-            if (this.state.activeItem) {
+            if (this.state.activeItem || this.props.popup) {
                 this.setState({
                     activeItem: item
                 });
@@ -122,7 +124,7 @@ class TieredMenuSub extends Component {
     renderSubmenu(item) {
         if(item.items) {
             return (
-                <TieredMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} />
+                <TieredMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} popup={this.props.popup} />
             );
         }
         else {
@@ -213,6 +215,7 @@ export class TieredMenu extends Component {
         }
         this.onMenuClick = this.onMenuClick.bind(this);
         this.onLeafClick = this.onLeafClick.bind(this);
+        this.onMenuMouseEnter = this.onMenuMouseEnter.bind(this);
     }
 
     componentDidMount() {
@@ -244,6 +247,12 @@ export class TieredMenu extends Component {
         if (!this.props.popup && this.props.autoZIndex) {
             this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
+    }
+
+    onMenuMouseEnter() {
+        this.setState({
+            resetMenu: false
+        });
     }
 
     show(event) {
@@ -337,8 +346,8 @@ export class TieredMenu extends Component {
         const className = classNames('ui-tieredmenu ui-widget ui-widget-content ui-corner-all', {'ui-tieredmenu-dynamic ui-shadow': this.props.popup}, this.props.className);
 
         return(
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
-                <TieredMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
+            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
+                <TieredMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} popup={this.props.popup} />
             </div>
         );
     }
