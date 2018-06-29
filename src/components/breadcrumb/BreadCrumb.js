@@ -20,7 +20,7 @@ export class BreadCrumb extends Component {
         className: PropTypes.string
     };
 
-    itemClick(event,item){
+    itemClick(event, item){
         if (item.disabled) {
             event.preventDefault();
             return;

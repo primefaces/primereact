@@ -53,7 +53,7 @@ class MenubarSub extends Component {
         }
     }
 
-    onItemClick(event, item, index) {
+    onItemClick(event, item) {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -66,7 +66,7 @@ class MenubarSub extends Component {
         if (item.command) {
             item.command({
                 originalEvent: event,
-                item: this.props.item
+                item: item
             });
         }
         
