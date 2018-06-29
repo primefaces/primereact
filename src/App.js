@@ -543,7 +543,7 @@ class App extends Component {
                     <Route path="/dataview" component={DataViewDemo}/>
 
                     <div className="content-section layout-footer clearfix">
-                        <span>Released under the MIT License,  Copyright © 2017 PrimeTek</span>
+                        <span>Released under the MIT License,  Copyright © 2018 PrimeTek</span>
                         <div className="footer-links">
                             <a href="https://github.com/primefaces/primereact"><i className=" icon-github fa fa-github-square"></i></a>
                             <a href="https://twitter.com/primereact"><i className="icon-twitter fa fa-twitter-square"></i></a>

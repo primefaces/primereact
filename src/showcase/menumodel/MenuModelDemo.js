@@ -34,98 +34,105 @@ class MenuModelDoc extends Component {
     render() {
         return (
             <div className="content-section source">
-
                 <h3>MenuItem</h3>
-                <p>Core of the api is MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
+                <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
                 <CodeHighlight className="language-javascript">
                     {`
-render() {
-    var items=[ {
-            label: 'File',
-            items: [{label: 'New', icon: 'fa fa-plus'},
-                    {label: 'Open', icon: 'fa fa-download'}]
-        }, {
-            label: 'Edit',
-            items: [{label: 'Undo', icon: 'fa fa-refresh'},
-                    {label: 'Redo', icon: 'fa fa-repeat'} ]
-        }];
-}
+const items = [
+    {
+        label: 'File',
+        items: [{label: 'New', icon: 'fa fa-plus'},
+                {label: 'Open', icon: 'fa fa-download'}]
+    }, 
+    {
+        label: 'Edit',
+        items: [{label: 'Undo', icon: 'fa fa-refresh'},
+                {label: 'Redo', icon: 'fa fa-repeat'} ]
+    }
+];
 
 `}
                 </CodeHighlight>
 
-                <p>MenuItem provides the following properties. Note that not all of them may be utilized by the menu component.</p>
+                <p>MenuItem provides the following properties. Note that not all of them may be utilized by the corresponding menu component.</p>
+
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Description</th>
-                        </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>label</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Text of the item.</td>
-                        </tr>
-                        <tr>
-                            <td>icon</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Icon of the item.</td>
-                        </tr>
-                        <tr>
-                            <td>command</td>
-                            <td>function</td>
-                            <td>null</td>
-                            <td>Callback to execute when item is clicked.</td>
-                        </tr>
-                        <tr>
-                            <td>url</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>External link to navigate when item is clicked.</td>
-                        </tr>
-                        <tr>
-                            <td>items</td>
-                            <td>array</td>
-                            <td>null</td>
-                            <td>An array of children menuitems.</td>
-                        </tr>
-                        <tr>
-                            <td>disabled</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When set as true, disables the menuitem.</td>
-                        </tr>
-                        <tr>
-                            <td>target</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Specifies where to open the linked document.</td>
-                        </tr>
-                        <tr>
-                            <td>separator</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Defines the item as a separator.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Inline style of the menuitem.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the menuitem.</td>
-                        </tr>
+                            <tr>
+                                <td>label</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Text of the item.</td>
+                            </tr>
+                            <tr>
+                                <td>icon</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Icon of the item.</td>
+                            </tr>
+                            <tr>
+                                <td>command</td>
+                                <td>function</td>
+                                <td>null</td>
+                                <td>Callback to execute when item is clicked.</td>
+                            </tr>
+                            <tr>
+                                <td>url</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>External link to navigate when item is clicked.</td>
+                            </tr>
+                            <tr>
+                                <td>items</td>
+                                <td>array</td>
+                                <td>null</td>
+                                <td>An array of children menuitems.</td>
+                            </tr>
+                            <tr>
+                                <td>disabled</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>When set as true, disables the menuitem.</td>
+                            </tr>
+                            <tr>
+                                <td>visible</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Whether the item is rendered.</td>
+                            </tr>
+                            <tr>
+                                <td>target</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Specifies where to open the linked document.</td>
+                            </tr>
+                            <tr>
+                                <td>separator</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Defines the item as a separator.</td>
+                            </tr>
+                            <tr>
+                                <td>style</td>
+                                <td>object</td>
+                                <td>null</td>
+                                <td>Inline style of the menuitem.</td>
+                            </tr>
+                            <tr>
+                                <td>className</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Style class of the menuitem.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -134,36 +141,40 @@ render() {
                 <p>The function to invoke when an item is clicked is defined using the command property.</p>
 <CodeHighlight className="language-javascript">
     {`
-render() {
-    var items=[{
-            label: 'File',
-            items: [
-                {label: 'New', icon: 'fa fa-plus',command: (event) => {
-                    //event.originalEvent: Browser event
-                    //event.item: menuitem metadata
-                }}
-            ]
-        }];
-}
+const items = 
+[
+    {
+        label: 'New', 
+        icon: 'pi pi-plus', 
+        command: (event) => {
+            // event.originalEvent: Browser event
+            // event.item: MenuItem instance
+        }
+    }
+];
 
 `}
 </CodeHighlight>
 
                 <h3>Navigation</h3>
-                <p>Navigation is specified using url property for external links and command function to invoke when an item is clicked is defined using the command property. </p>
+                <p>Navigation is specified using url property for external links or using command function for internal router.</p>
                 <CodeHighlight className="language-javascript">
                     {`
-render() {
-    var items=[ {
-            label: 'File',
-            items: [{label: 'New', icon: 'fa fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                    {label: 'Open', icon: 'fa fa-download', url: 'http://primetek.com.tr'}]
-        }, {
-            label: 'Edit',
-            items: [{label: 'Undo', icon: 'fa fa-refresh',command:()=>{ window.location.hash="/"; }},
-                    {label: 'Redo', icon: 'fa fa-repeat'} ]
-        }];
-}
+const items = 
+[
+    {
+        label: 'New', 
+        icon: 'pi pi-plus', 
+        command: (event) => {
+            window.location.hash = "/fileupload";
+        }
+    },
+    {
+        label: 'Link', 
+        icon: 'pi pi-check',
+        url: 'https://www.primefaces.org/primereact'
+    }
+];
 
 `}
                 </CodeHighlight>

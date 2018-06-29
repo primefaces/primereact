@@ -426,6 +426,10 @@ body {
                 margin-bottom: 0px;
                 font-size: 22px;
                 font-weight: normal;
+
+                &:first-child {
+                    margin-top: 0;
+                }
             }
 
             h4 {
