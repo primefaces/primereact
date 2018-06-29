@@ -1,5 +1,3 @@
-import React = require("react");
-
 export interface MenuItem {
     label?: string;
     icon?: string;
