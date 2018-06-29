@@ -141,7 +141,7 @@ export class Menu extends Component {
     }
 
     renderSubmenu(submenu, index) {
-        const className = classNames('ui-submenu-header ui-widget-header ui-corner-all', submenu.className);
+        const className = classNames('ui-submenu-header ui-widget-header ui-corner-all', submenu.className,  {'ui-state-disabled': submenu.disabled});
         const items = submenu.items.map((item, index)=> {
             return this.renderMenuitem(item, index);
         });
@@ -161,7 +161,7 @@ export class Menu extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('ui-menuitem ui-widget ui-corner-all', item.className);
+        const className = classNames('ui-menuitem ui-widget ui-corner-all', item.className, {'ui-state-disabled': item.disabled});
         const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 

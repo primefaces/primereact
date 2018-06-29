@@ -41,6 +41,11 @@ class TieredMenuSub extends Component {
     }
 
     onItemMouseEnter(event, item) {
+        if (item.disabled) {
+            event.preventDefault();
+            return;
+        }
+        
         if (this.props.root) {
             if (this.state.activeItem || this.props.popup) {
                 this.setState({
@@ -134,7 +139,7 @@ class TieredMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item}, item.className);
+        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item, 'ui-state-disabled': item.disabled}, item.className);
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);

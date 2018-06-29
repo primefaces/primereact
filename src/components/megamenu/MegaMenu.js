@@ -96,6 +96,11 @@ export class MegaMenu extends Component {
     }
 
     onCategoryMouseEnter(event, item) {
+        if (item.disabled) {
+            event.preventDefault();
+            return;
+        }
+        
         if (this.state.activeItem) {
             this.setState({
                 activeItem: item
@@ -191,7 +196,7 @@ export class MegaMenu extends Component {
             );
         }
         else {
-            const className = classNames('ui-menuitem ui-corner-all', item.className);
+            const className = classNames('ui-menuitem ui-corner-all', item.className, {'ui-state-disabled': item.disabled});
             const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
             const icon = item.icon ? <span className={iconClassName}></span>: null;
 
@@ -207,7 +212,7 @@ export class MegaMenu extends Component {
     }
 
     renderSubmenu(submenu) {
-        const className = classNames('ui-widget-header ui-megamenu-submenu-header ui-corner-all', submenu.className);
+        const className = classNames('ui-widget-header ui-megamenu-submenu-header ui-corner-all', submenu.className, {'ui-state-disabled': submenu.disabled});
         const items = submenu.items.map((item, index) => {
             return this.renderSubmenuItem(item, index);
         });
@@ -273,7 +278,7 @@ export class MegaMenu extends Component {
     }
 
     renderCategory(category, index) {
-        const className = classNames('ui-menuitem ui-corner-all', {'ui-menuitem-active': category === this.state.activeItem}, category.className);
+        const className = classNames('ui-menuitem ui-corner-all', {'ui-menuitem-active': category === this.state.activeItem, 'ui-state-disabled': category.disabled}, category.className);
         const iconClassName = classNames(category.icon, 'ui-menuitem-icon');
         const icon = category.icon ? <span className={iconClassName}></span>: null;
         const submenuIcon = this.renderSubmenuIcon(category);

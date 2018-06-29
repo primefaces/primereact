@@ -97,7 +97,7 @@ class PanelMenuSub extends Component {
 
     renderMenuitem(item, index) {
         const active = this.state.activeItem === item;
-        const className = classNames('ui-menuitem ui-corner-all', item.className);
+        const className = classNames('ui-menuitem ui-corner-all', item.className, {'ui-state-disabled': item.disabled});
         const icon = this.renderIcon(item, active);
         const submenuIcon = this.renderSubmenuIcon(item, active);
         const submenu = this.renderSubmenu(item, active);
@@ -226,7 +226,7 @@ export class PanelMenu extends Component {
 
     renderPanel(item, index) {
         const active = this.state.activeItem === item;
-        const className = classNames('ui-panelmenu-panel', item.className);
+        const className = classNames('ui-panelmenu-panel', item.className, {'ui-state-disabled': item.disabled});
         const headerClassName = classNames('ui-widget ui-panelmenu-header ui-state-default', {'ui-state-active': active});
         const toggleIcon = this.renderPanelToggleIcon(item, active);
         const itemIcon = this.renderPanelIcon(item);
