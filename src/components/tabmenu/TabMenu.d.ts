@@ -2,7 +2,7 @@ import React = require("react");
 
 interface TabMenuProps {
     id?: string;
-    model: Array<any>;
+    model?: Array<any>;
     activeItem?: any;
     style?: any;
     className?: string;

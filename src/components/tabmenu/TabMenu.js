@@ -15,7 +15,7 @@ export class TabMenu extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        model: PropTypes.array.isRequired,
+        model: PropTypes.array,
         activeItem: PropTypes.any,
         style: PropTypes.any,
         className: PropTypes.string,
