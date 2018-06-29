@@ -40,8 +40,10 @@ export class BreadCrumb extends Component {
 
     renderHome() {
         if(this.props.home) {
+            const className = classNames('ui-breadcrumb-home', this.props.home.className);
+
             return (
-                <li className="ui-breadcrumb-home">
+                <li className={className} style={this.props.home.style}>
                     <a href={this.props.home.url || '#'} className="ui-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
                         <span className={this.props.home.icon}></span>
                     </a>
@@ -61,7 +63,7 @@ export class BreadCrumb extends Component {
 
     renderMenuitem(item, index) {
         return (
-            <li role="menuitem">
+            <li role="menuitem" className={item.className} style={item.style}>
                 <a href={item.url || '#'} className="ui-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
                     <span class="ui-menuitem-text">{item.label}</span>
                 </a>

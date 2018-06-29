@@ -141,13 +141,14 @@ export class Menu extends Component {
     }
 
     renderSubmenu(submenu, index) {
+        const className = classNames('ui-submenu-header ui-widget-header ui-corner-all', submenu.className);
         const items = submenu.items.map((item, index)=> {
             return this.renderMenuitem(item, index);
         });
 
         return (
             <React.Fragment key={submenu.label + '_' + index}>
-                <li className="ui-submenu-header ui-widget-header ui-corner-all">{submenu.label}</li>
+                <li className={className} style={submenu.style}>{submenu.label}</li>
                 {items}
             </React.Fragment>
         );
@@ -160,11 +161,12 @@ export class Menu extends Component {
     }
 
     renderMenuitem(item, index) {
+        const className = classNames('ui-menuitem ui-widget ui-corner-all', item.className);
         const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 
         return (
-            <li key={item.label + '_' + index} className="ui-menuitem ui-widget ui-corner-all">
+            <li key={item.label + '_' + index} className={className} style={item.style}>
                 <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
                     {icon}
                     <span className="ui-menuitem-text">{item.label}</span>

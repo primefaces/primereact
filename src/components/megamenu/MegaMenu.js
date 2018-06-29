@@ -191,11 +191,12 @@ export class MegaMenu extends Component {
             );
         }
         else {
+            const className = classNames('ui-menuitem ui-corner-all', item.className);
             const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
             const icon = item.icon ? <span className={iconClassName}></span>: null;
 
             return (
-                <li key={item.label + '_' + index} className="ui-menuitem ui-corner-all">
+                <li key={item.label + '_' + index} className={className} style={item.style}>
                     <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onLeafClick(event, item)}>
                         {icon}
                         <span className="ui-menuitem-text">{item.label}</span>
@@ -206,13 +207,14 @@ export class MegaMenu extends Component {
     }
 
     renderSubmenu(submenu) {
+        const className = classNames('ui-widget-header ui-megamenu-submenu-header ui-corner-all', submenu.className);
         const items = submenu.items.map((item, index) => {
             return this.renderSubmenuItem(item, index);
         });
         
         return (
             <React.Fragment key={submenu.label}>
-                <li className="ui-widget-header ui-megamenu-submenu-header ui-corner-all">{submenu.label}</li>
+                <li className={className} style={submenu.style}>{submenu.label}</li>
                 {items}
             </React.Fragment>
         );
@@ -271,14 +273,14 @@ export class MegaMenu extends Component {
     }
 
     renderCategory(category, index) {
-        const className = classNames('ui-menuitem ui-corner-all', {'ui-menuitem-active': category === this.state.activeItem});
+        const className = classNames('ui-menuitem ui-corner-all', {'ui-menuitem-active': category === this.state.activeItem}, category.className);
         const iconClassName = classNames(category.icon, 'ui-menuitem-icon');
         const icon = category.icon ? <span className={iconClassName}></span>: null;
         const submenuIcon = this.renderSubmenuIcon(category);
         const panel = this.renderCategoryPanel(category);
 
         return (
-            <li key={category.label + '_' + index} className={className} onMouseEnter={(event) => this.onCategoryMouseEnter(event, category)}>
+            <li key={category.label + '_' + index} className={className} style={category.style} onMouseEnter={(event) => this.onCategoryMouseEnter(event, category)}>
                 <a href={category.url || '#'} className="ui-menuitem-link ui-corner-all" target={category.target} onClick={(event) => this.onCategoryClick(event, category)}>
                     {icon}
                     <span className="ui-menuitem-text">{category.label}</span>

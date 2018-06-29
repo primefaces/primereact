@@ -52,13 +52,13 @@ export class Steps extends Component {
     }
 
     renderItem(item, index) {
-        const className = classNames('ui-steps-item', {
+        const className = classNames('ui-steps-item', item.className, {
                 'ui-state-highlight': (index === this.props.activeIndex), 
                 'ui-state-default': (index !== this.props.activeIndex),
                 'ui-state-disabled': (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))});
         
         return (
-            <li className={className} key={item.label + '_' + index}>
+            <li key={item.label + '_' + index} className={className} style={item.style}>
                 <a href={item.url || '#'} className="ui-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item, index)}>
                     <span className="ui-steps-number">{index + 1}</span>
                     <span className="ui-steps-title">{item.label}</span>

@@ -97,12 +97,13 @@ class PanelMenuSub extends Component {
 
     renderMenuitem(item, index) {
         const active = this.state.activeItem === item;
+        const className = classNames('ui-menuitem ui-corner-all', item.className);
         const icon = this.renderIcon(item, active);
         const submenuIcon = this.renderSubmenuIcon(item, active);
         const submenu = this.renderSubmenu(item, active);
 
         return (
-            <li key={item.label + '_' + index} className="ui-menuitem ui-corner-all" style={item.style}>
+            <li key={item.label + '_' + index} className={className} style={item.style}>
                 <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
                     {submenuIcon}
                     {icon}
@@ -225,13 +226,14 @@ export class PanelMenu extends Component {
 
     renderPanel(item, index) {
         const active = this.state.activeItem === item;
+        const className = classNames('ui-panelmenu-panel', item.className);
         const headerClassName = classNames('ui-widget ui-panelmenu-header ui-state-default', {'ui-state-active': active});
         const toggleIcon = this.renderPanelToggleIcon(item, active);
         const itemIcon = this.renderPanelIcon(item);
         const contentWrapperClassName = classNames('ui-panelmenu-content-wrapper', {'ui-panelmenu-content-wrapper-collapsed': !active, 'ui-panelmenu-content-wrapper-expanded': active});
 
         return (
-            <div key={item.label + '_' + index} className="ui-panelmenu-panel">
+            <div key={item.label + '_' + index} className={className} style={item.style}>
                 <div className={headerClassName} style={item.style}>
                     <a href={item.url || '#'} className="ui-panelmenu-header-link ng-tns-c2-1 ng-star-inserted" onClick={(e) => this.onItemClick(e, item)}>
                         {toggleIcon}

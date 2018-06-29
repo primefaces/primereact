@@ -100,6 +100,7 @@ class TieredMenuSub extends Component {
     
     renderIcon(item) {
         const className = classNames('ui-menuitem-icon', item.icon);
+        
         if (item.icon) {
             return (
                 <span className={className}></span>

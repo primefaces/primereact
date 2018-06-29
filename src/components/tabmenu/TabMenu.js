@@ -63,12 +63,12 @@ export class TabMenu extends Component {
 
     renderMenuItem(item, index) {
         const activeItem = this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
-        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', {'ui-state-active': activeItem ? activeItem === item : index === 0});
+        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', item.className, {'ui-state-active': activeItem ? activeItem === item : index === 0});
         const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 
         return (
-            <li key={item.label + '_' + index} className={className}>
+            <li key={item.label + '_' + index} className={className} style={item.style}>
                  <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
                     {icon}
                     <span className="ui-menuitem-text">{item.label}</span>
