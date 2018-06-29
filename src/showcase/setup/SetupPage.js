@@ -122,6 +122,15 @@ import 'primeicons/primeicons.css';
                     <h3>Typescript</h3>
                     <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample typescript-primereact application 
                     is available as well at <a href="https://github.com/primefaces/primereact-typescript-quickstart">github</a>.</p>
+
+                    <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
+                    <CodeHighlight className="language-javascript">
+{`
+import {SelectItem} from 'primereact/api';
+import {MenuItem} from 'primereact/api';
+
+`}
+</CodeHighlight>
                 </div>        
             </div>
         );
