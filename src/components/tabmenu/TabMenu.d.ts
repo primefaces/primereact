@@ -1,8 +1,9 @@
 import React = require("react");
+import {MenuItem} from '../menuitem/MenuItem';
 
 interface TabMenuProps {
     id?: string;
-    model?: Array<any>;
+    model?: Array<MenuItem>;
     activeItem?: any;
     style?: any;
     className?: string;

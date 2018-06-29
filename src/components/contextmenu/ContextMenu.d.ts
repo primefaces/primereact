@@ -1,8 +1,9 @@
 import React = require("react");
+import {MenuItem} from '../menuitem/MenuItem';
 
 interface ContextMenuProps {
     id?: string;
-    model?: Array<any>;
+    model?: Array<MenuItem>;
     style?: object;
     className?: string;
     global?: boolean;

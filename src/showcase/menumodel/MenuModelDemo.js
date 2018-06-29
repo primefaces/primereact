@@ -104,12 +104,6 @@ const items = [
                                 <td>When set as true, disables the menuitem.</td>
                             </tr>
                             <tr>
-                                <td>visible</td>
-                                <td>boolean</td>
-                                <td>true</td>
-                                <td>Whether the item is rendered.</td>
-                            </tr>
-                            <tr>
                                 <td>target</td>
                                 <td>string</td>
                                 <td>null</td>

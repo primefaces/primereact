@@ -1,8 +1,9 @@
 import React = require("react");
+import {MenuItem} from '../menuitem/MenuItem';
 
 interface BreadCrumbProps {
     id?: string;
-    model?: Array<any>;
+    model?: Array<MenuItem>;
     home?: any;
     style?: object;
     className?: string;

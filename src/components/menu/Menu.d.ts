@@ -1,8 +1,9 @@
 import React = require("react");
+import {MenuItem} from '../menuitem/MenuItem';
 
 interface MenuProps {
     id?: string;
-    model?: Array<any>;
+    model?: Array<MenuItem>;
     popup?: boolean;
     style?: object;
     className?: string;

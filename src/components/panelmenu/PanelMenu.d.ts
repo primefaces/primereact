@@ -1,10 +1,9 @@
 import React = require("react");
-
-export class PanelMenuHeaderItems extends React.Component<PanelMenuHeaderItemsProps,any> {}
+import {MenuItem} from '../menuitem/MenuItem';
 
 interface PanelMenuProps {
     id?: string;
-    model?: Array<any>;
+    model?: Array<MenuItem>;
     style?: object;
     className?: string;
 }

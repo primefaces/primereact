@@ -1,8 +1,9 @@
 import React = require("react");
+import {MenuItem} from '../menuitem/MenuItem';
 
 interface StepsProps {
     id?: string;
-    model: Array<any>;
+    model: Array<MenuItem>;
     activeIndex?:  number;
     readOnly?: boolean;
     style?: object;
