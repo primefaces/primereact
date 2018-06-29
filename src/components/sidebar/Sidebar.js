@@ -13,6 +13,7 @@ export class Sidebar extends Component {
         position: 'left',
         fullScreen: false,
         blockScroll: false,
+        control: false,
         baseZIndex: 0,
         onShow: null,
         onHide: null
@@ -26,6 +27,7 @@ export class Sidebar extends Component {
         position: PropTypes.string,
         fullScreen: PropTypes.bool,
         blockScroll: PropTypes.bool,
+        control: PropTypes.bool,
         baseZIndex: PropTypes.number,
         onShow: PropTypes.func,
         onHide: PropTypes.func
@@ -75,11 +77,15 @@ export class Sidebar extends Component {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(parseInt(this.container.style.zIndex,10) - 1);
             DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-sidebar-mask');
-
+            
+            if(this.props.control) {
+             
             this.maskClickListener = (event) => {
                 this.onClose(event);
             };
+            
             this.mask.addEventListener('click', this.maskClickListener);
+           }
             document.body.appendChild(this.mask);
             if(this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'ui-overflow-hidden');

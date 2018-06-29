@@ -52,5 +52,8 @@
     "eject": "react-scripts eject",
     "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0 --copy-files",
     "build-resources": "gulp prepublish"
+  },
+  "dependencies": {
+    "start": "^5.1.0"
   }
 }
