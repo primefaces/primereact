@@ -102,19 +102,19 @@ export class HomeComponent extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <h4>Serenity with Material Design</h4>
                             <a href="https://www.primefaces.org/layouts/serenity-react">
-                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.png" />
+                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg" />
                             </a>
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h4>Ultima with Material Design</h4>
                             <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.png" />
+                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" />
                             </a>
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h4>Avalon with Bootstrap Styling</h4>
                             <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.png" />
+                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" />
                             </a>
                         </div>
                     </div>
