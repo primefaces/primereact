@@ -81,7 +81,7 @@ constructor() {
                         </CodeHighlight>
 
                         <h3>Controlled Component</h3>
-                        <p>In controlled mode, <b>activeItem</b> and <b>onTabChange</b> properties must be defined along with the model.</p>
+                        <p>In controlled mode, <i>activeItem</i> and <i>onTabChange</i> properties must be defined along with the model.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
@@ -91,7 +91,7 @@ constructor() {
                         </CodeHighlight>
 
                         <h3>Uncontrolled</h3>
-                        <p>In uncontrolled mode, only <b>model</b> is required.Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
+                        <p>In uncontrolled mode, only <i>model</i> is required. Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                             need to update the active item, prefer to use the component as controlled.</p>
 
                         <CodeHighlight className="language-jsx">
