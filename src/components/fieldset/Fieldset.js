@@ -14,7 +14,8 @@ export class Fieldset extends Component {
         toggleable: null,
         collapsed: null,
         onExpand: null,
-        onCollapse: null
+        onCollapse: null,
+        onToggle: null
     };
 
     static propTypes = {
@@ -25,19 +26,26 @@ export class Fieldset extends Component {
         toggleable: PropTypes.bool,
         collapsed: PropTypes.bool,
         onExpand: PropTypes.func,
-        onCollapse: PropTypes.func
+        onCollapse: PropTypes.func,
+        onToggle: PropTypes.func
     };
     
     constructor(props) {
         super(props);
-        this.state = {collapsed: this.props.collapsed};
-        this.toggle = this.toggle.bind(this);
+        if (!this.props.onToggle) {
+            this.state = {
+                collapsed: this.props.collapsed
+            };
+        }
 
+        this.toggle = this.toggle.bind(this);
         this.id = this.props.id || UniqueComponentId();
     }
 
     componentDidUpdate() {
-        if(this.props.toggleable && !this.state.collapsed && this.expanding) {
+        const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
+
+        if(this.props.toggleable && !collapsed && this.expanding) {
             DomHandler.addClass(this.contentWrapper, 'ui-fieldset-content-wrapper-expanding');
 
             setTimeout(() => {
@@ -47,51 +55,57 @@ export class Fieldset extends Component {
         }
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.collapsed != null && nextProps.collapsed !== prevState.collapsed) {
-            return {
-                collapsed: nextProps.collapsed
-            };
-        }
+    toggle(event) {
+        if (this.props.toggleable) {
+            const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
 
-        return null;
-    }
-
-    toggle(e) {
-        if(this.props.toggleable) {
-            if(this.state.collapsed)
-                this.expand(e);
+            if(collapsed)
+                this.expand(event);
             else
-                this.collapse(e);
-        }
+                this.collapse(event);
 
-        e.preventDefault();
+            if (this.props.onToggle) {
+                this.props.onToggle({
+                    originalEvent: event,
+                    value: !collapsed
+                });
+            }
+        }
+        
+        event.preventDefault();
     }
 
     expand(event) {
-        this.setState({collapsed: false});
+        if (!this.props.onToggle) {
+            this.setState({collapsed: false});
+        }
+
         this.expanding = true;
-        if(this.props.onCollapse) {
-            this.props.onCollapse(event);
+
+        if (this.props.onExpand) {
+            this.props.onExpand(event);
         }
     }
 
     collapse(event) {
-        this.setState({collapsed: true});
-        if(this.props.onCollapse) {
+        if (!this.props.onToggle) {
+            this.setState({collapsed: true});
+        }
+        
+        if (this.props.onCollapse) {
             this.props.onCollapse(event);
         }
     }
 
-    renderContent() {
-        let className = classNames('ui-fieldset-content-wrapper', {
-            'ui-fieldset-content-wrapper-collapsed': (this.state.collapsed && this.props.toggleable),
-            'ui-fieldset-content-wrapper-expanded': (!this.state.collapsed && this.props.toggleable)
+    renderContent(collapsed) {
+        const className = classNames('ui-fieldset-content-wrapper', {
+            'ui-fieldset-content-wrapper-collapsed': (this.props.toggleable && collapsed),
+            'ui-fieldset-content-wrapper-expanded': (this.props.toggleable && !collapsed)
         });
-        let id = this.id + '_content';
+        const id = this.id + '_content';
 
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-hidden={this.state.collapsed} role="region">
+            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-hidden={collapsed} role="region">
                 <div className="ui-fieldset-content">
                     {this.props.children}
                 </div>
@@ -99,9 +113,9 @@ export class Fieldset extends Component {
         );
     }
 
-    renderToggleIcon() {
-        if(this.props.toggleable) {
-            let className = classNames('ui-fieldset-toggler pi ', { 'pi-plus': this.state.collapsed, 'pi-minus': !this.state.collapsed });
+    renderToggleIcon(collapsed) {
+        if (this.props.toggleable) {
+            const className = classNames('ui-fieldset-toggler pi', {'pi-plus': collapsed, 'pi-minus': !collapsed});
 
             return (
                 <span className={className}></span>
@@ -112,20 +126,44 @@ export class Fieldset extends Component {
         }
     }
 
+    renderLegendContent(collapsed) {
+        if (this.props.toggleable) {
+            const toggleIcon = this.renderToggleIcon(collapsed);
+            const ariaControls = this.id + '_content';
+
+            return (
+                <a href={'#' + ariaControls} aria-controls={ariaControls} aria-expanded={!collapsed} tabIndex={this.props.toggleable ? null  : -1}>
+                    {toggleIcon}
+                    <span className="ui-fieldset-legend-text">{this.props.legend}</span>
+                 </a>
+            );
+        }
+        else {
+            return (
+                <span className="ui-fieldset-legend-text">{this.props.legend}</span>
+            );
+        }
+    }
+
+    renderLegend(collapsed) {
+        const legendContent = this.renderLegendContent(collapsed);
+
+        return (
+            <legend className="ui-fieldset-legend ui-corner-all ui-state-default ui-unselectable-text" onClick={this.toggle}>
+                {legendContent}
+            </legend>
+        );
+    }
+
     render() {
-        let content = this.renderContent();
-        let className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
-        let toggleIcon = this.renderToggleIcon();
-        let ariaControls = this.id + '_content';
+        const className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
+        const collapsed = this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
+        const legend = this.renderLegend(collapsed);
+        const content = this.renderContent(collapsed);
 
         return (
             <fieldset id={this.props.id} className={className} style={this.props.style}>
-                <legend className="ui-fieldset-legend ui-corner-all ui-state-default ui-unselectable-text" onClick={this.toggle}>
-                    <a href={'#' + ariaControls} aria-controls={ariaControls} aria-expanded={!this.state.collapsed} tabIndex={this.props.toggleable ? null  : -1}>
-                        {toggleIcon}
-                        <span className="ui-fieldset-legend-text">{this.props.legend}</span>
-                    </a>
-                </legend>
+                {legend}
                 {content}
             </fieldset>
         );
