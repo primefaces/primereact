@@ -70,16 +70,16 @@ import {Panel} from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <p>Instead of simple strings, header propery also can be used to provide custom content as JSX.</p>
+            <p>Instead of simple strings, <i>header</i> propery also can be used to provide custom content as JSX.</p>
 
             <h3>Toggleable</h3>
-            <p>Content of the panel can be expanded and collapsed using toggleable option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
+            <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
 
             <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
 
 <CodeHighlight className="language-jsx">
 {`
-<Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true} collasped={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
+<Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -235,12 +235,15 @@ import {Panel} from 'primereact/panel';
                 </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {Panel} from 'primereact/panel';
+
 export class PanelDemo extends Component {
         
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Panel</h1>
                         <p>Panel is a grouping component providing with content toggle feature.</p>
@@ -262,7 +265,6 @@ export class PanelDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Panel>
                 </div>
-                <PanelDoc></PanelDoc>
             </div>
         )
     }
