@@ -12,12 +12,11 @@ interface TabPanelProps {
 }
 
 interface TabViewProps {
-    header?: string;
-    leftIcon?: string;
-    rightIcon?: string;
+    id?: string;
+    activeIndex?: number;
     style?: any;
     className?: string;
-    onTabChange?(e:{event: originalEvent, value: index}): void;
+    onTabChange?(e:{event: originalEvent, index: number}): void;
 }
 
 export class TabPanel extends React.Component<TabPanelProps,any> {}

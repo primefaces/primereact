@@ -46,7 +46,7 @@ export class TabViewDemo extends Component {
                     </TabView>
 
                     <h3>Controlled</h3>
-                    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.value})}>
+                    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
                         <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                             The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war, 
                             but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is 
@@ -100,7 +100,7 @@ import {TabView,TabPanel} from 'primereact/tabview';
 
 <CodeHighlight className="language-jsx">
 {`
-<TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.value})}>
+<TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
     <TabPanel header="Header I">
         Content I
     </TabPanel>
@@ -254,7 +254,7 @@ import {TabView,TabPanel} from 'primereact/tabview';
                         <tr>
                             <td>onTabChange</td>
                             <td>event.originalEvent: Click object  <br/>
-                                event.value: Index of the selected tab 
+                                event.index: Index of the selected tab 
                             </td>
                             <td>Callback to invoke when an active tab is changed.</td>
                         </tr>
@@ -347,7 +347,7 @@ export class TabViewDemo extends Component {
                     </TabView>
 
                     <h3>Controlled</h3>
-                    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.value})}>
+                    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
                         <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                             The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war, 
                             but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is 

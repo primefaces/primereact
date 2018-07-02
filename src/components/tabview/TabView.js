@@ -67,7 +67,7 @@ export class TabView extends Component {
     onTabHeaderClick(event, tab, index) {
         if (!tab.props.disabled) {
             if (this.props.onTabChange) {
-                this.props.onTabChange({originalEvent: event, value: index});
+                this.props.onTabChange({originalEvent: event, index: index});
             }
             else {
                 this.setState({
