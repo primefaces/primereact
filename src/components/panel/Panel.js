@@ -14,7 +14,8 @@ export class Panel extends Component {
         className: null,
         collapsed: null,
         onExpand: null,
-        onCollapse: null
+        onCollapse: null,
+        onToggle: null
     }
 
     static propTypes = {
@@ -25,21 +26,26 @@ export class Panel extends Component {
         className: PropTypes.string,
         collapsed: PropTypes.bool,
         onExpand: PropTypes.func,
-        onCollapse: PropTypes.func
+        onCollapse: PropTypes.func,
+        onToggle: PropTypes.func
     };
     
     constructor(props) {
         super(props);
-        this.state = {
-            collapsed: this.props.collapsed
-        };
+        if (!this.props.onToggle) {
+            this.state = {
+                collapsed: this.props.collapsed
+            };
+        }
+        
         this.toggle = this.toggle.bind(this);
-
         this.id = this.props.id || UniqueComponentId();
     }
     
     componentDidUpdate() {
-        if(this.props.toggleable && !this.state.collapsed && this.expanding) {
+        const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
+
+        if (this.props.toggleable && !collapsed && this.expanding) {
             DomHandler.addClass(this.contentWrapper, 'ui-panel-content-wrapper-expanding');
             
             setTimeout(() => {
@@ -49,51 +55,64 @@ export class Panel extends Component {
         }
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.collapsed != null && nextProps.collapsed !== prevState.collapsed) {
-            return {
-                collapsed: nextProps.collapsed
-            };
-        }
+    toggle(event) {
+        if (this.props.toggleable) {
+            const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
 
-        return null;
-    }
-
-    toggle(e) {
-        if(this.props.toggleable) {
-            if(this.state.collapsed)
-                this.expand(e);
+            if(collapsed)
+                this.expand(event);
             else
-                this.collapse(e);
+                this.collapse(event);
+
+            if (this.props.onToggle) {
+                this.props.onToggle({
+                    originalEvent: event,
+                    value: !collapsed
+                });
+            }
         }
         
-        e.preventDefault();
+        event.preventDefault();
     }
     
     expand(event) {
-        this.setState({collapsed: false});
+        if (!this.props.onToggle) {
+            this.setState({collapsed: false});
+        }
+        
         this.expanding = true;
-        if(this.props.onCollapse) {
-            this.props.onCollapse(event);
+
+        if (this.props.onExpand) {
+            this.props.onExpand(event);
+        }
+
+        if (this.props.onToggle) {
+            this.props.onToggle({
+                originalEvent: event,
+                value: false
+            });
         }
     }
     
     collapse(event) {
-        this.setState({collapsed: true});
-        if(this.props.onCollapse) {
+        if (!this.props.onToggle) {
+            this.setState({collapsed: true});
+        }
+        
+        if (this.props.onCollapse) {
             this.props.onCollapse(event);
         }
     }
     
-    renderToggleIcon() {
-        if(this.props.toggleable) {
-            let id = this.id + '_label';
-            let ariaControls = this.id + '_content';
+    renderToggleIcon(collapsed) {
+        if (this.props.toggleable) {
+            const id = this.id + '_label';
+            const ariaControls = this.id + '_content';
 
             return (
                 <a href={'#' + ariaControls} className="ui-panel-titlebar-icon ui-panel-titlebar-toggler ui-corner-all ui-state-default" onClick={this.toggle}
-                    id={id} aria-controls={ariaControls} aria-expanded={!this.state.collapsed} role="tab">
-                   <span className={classNames('pi', {'pi-plus': this.state.collapsed, 'pi-minus': !this.state.collapsed})}></span>
+                    id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
+                   <span className={classNames('pi', {'pi-plus': collapsed, 'pi-minus': !collapsed})}></span>
                 </a>
             );
         }
@@ -102,9 +121,9 @@ export class Panel extends Component {
         }
     }
     
-    renderHeader() {
-        if(this.props.header || this.props.toggleable) {
-            let toggleIcon = this.renderToggleIcon();
+    renderHeader(collapsed) {
+        if (this.props.header || this.props.toggleable) {
+            const toggleIcon = this.renderToggleIcon(collapsed);
             
             return (
                 <div className="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
@@ -118,16 +137,16 @@ export class Panel extends Component {
         }
     }
     
-    renderContent() {
-        let className = classNames('ui-panel-content-wrapper', {
-                                    'ui-panel-content-wrapper-collapsed': (this.state.collapsed && this.props.toggleable), 
-                                    'ui-panel-content-wrapper-expanded': (!this.state.collapsed && this.props.toggleable)
+    renderContent(collapsed) {
+        const className = classNames('ui-panel-content-wrapper', {
+                                    'ui-panel-content-wrapper-collapsed': collapsed, 
+                                    'ui-panel-content-wrapper-expanded': !collapsed
                                 });
-        let id = this.id + '_content';
-        let ariaLabelledBy = this.id + '_label';
+        const id = this.id + '_content';
+        const ariaLabelledBy = this.id + '_label';
         
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-labelledby={ariaLabelledBy} aria-hidden={this.state.collapsed}>
+            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-labelledby={ariaLabelledBy} aria-hidden={collapsed}>
                 <div className="ui-panel-content ui-widget-content">
                     {this.props.children}
                 </div>
@@ -136,10 +155,11 @@ export class Panel extends Component {
     }
     
     render() {
-        let className = classNames('ui-panel ui-widget ui-widget-content ui-corner-all', this.props.className);
-        let header = this.renderHeader();
-        let content = this.renderContent();
-        
+        const className = classNames('ui-panel ui-widget ui-widget-content ui-corner-all', this.props.className);
+        const collapsed = this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
+        const header = this.renderHeader(collapsed);
+        const content = this.renderContent(collapsed);
+
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {header}
