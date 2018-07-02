@@ -85,13 +85,6 @@ export class Panel extends Component {
         if (this.props.onExpand) {
             this.props.onExpand(event);
         }
-
-        if (this.props.onToggle) {
-            this.props.onToggle({
-                originalEvent: event,
-                value: false
-            });
-        }
     }
     
     collapse(event) {
