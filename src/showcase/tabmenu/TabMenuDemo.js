@@ -91,7 +91,8 @@ constructor() {
                         </CodeHighlight>
 
                         <h3>Uncontrolled</h3>
-                        <p>In uncontrolled mode, only <b>model</b> is required.</p>
+                        <p>In uncontrolled mode, only <b>model</b> is required.Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
+                            need to update the active item, prefer to use the component as controlled.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
@@ -99,9 +100,6 @@ constructor() {
 
 `}
                         </CodeHighlight>
-
-                        <p>Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
-                            need to update the active item, prefer to use the component as controlled.</p>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">

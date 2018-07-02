@@ -17,6 +17,7 @@ interface TabViewProps {
     rightIcon?: string;
     style?: any;
     className?: string;
+    onTabChange?(e:{event: originalEvent, value: index}): void;
 }
 
 export class TabPanel extends React.Component<TabPanelProps,any> {}
