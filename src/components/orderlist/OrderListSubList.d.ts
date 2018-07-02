@@ -7,7 +7,7 @@ interface OrderListSubListProps {
     listStyle?: object;
     dragdrop?: boolean;
     onItemClick?(e: {originalEvent: Event, value: any, index: number}): void;
-    itemTemplate?(item: any): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 

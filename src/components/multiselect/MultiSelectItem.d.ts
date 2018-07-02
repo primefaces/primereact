@@ -3,7 +3,7 @@ import React = require("react");
 interface MultiSelectItemProps {
     option?: object;
     selected?: boolean;
-    template?(): void;
+    template?(item: any): JSX.Element | undefined;
     onClick?(e: {originalEvent: Event, option: object}): void;
 }
 

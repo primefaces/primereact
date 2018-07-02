@@ -11,7 +11,7 @@ interface DataScrollerProps {
     style?: object;
     className?: string;
     onLazyLoad?(p: {first: number, rows: number}): void;
-    itemTemplate?(): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
     header?: string;
     footer?: string;
     lazy?: boolean;
