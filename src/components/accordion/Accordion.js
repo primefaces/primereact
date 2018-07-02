@@ -34,7 +34,8 @@ export class Accordion extends Component {
         style: null,
         multiple: false,
         onTabOpen: null,
-        onTabClose: null
+        onTabClose: null,
+        onTabChange: null
     }
 
     static propTypes = {
@@ -44,78 +45,87 @@ export class Accordion extends Component {
         style: PropTypes.object,
         multiple: PropTypes.bool,
         onTabOpen: PropTypes.func,
-        onTabClose: PropTypes.func
+        onTabClose: PropTypes.func,
+        onTabChange: PropTypes.func
     };
     
     constructor(props) {
         super(props);
-        this.state = {
-            activeIndex: props.activeIndex
-        };
+        if (!this.props.onTabChange) {
+            this.state = {
+                activeIndex: props.activeIndex
+            };
+        }
+        
         this.contentWrappers = [];
         this.id = this.props.id || UniqueComponentId();
     }
 
     componentDidUpdate() {
-        if (this.expandingTabIndex != null && this.expandingTabIndex >= 0) {
-            let expandingTabContent = this.container.children[this.expandingTabIndex].children[1];
+        if (this.togglingTabIndex != null && this.togglingTabIndex >= 0) {
+            const expandingTabContent = this.container.children[this.togglingTabIndex].children[1];
             DomHandler.addClass(expandingTabContent, 'ui-accordion-content-wrapper-expanding');
             setTimeout(() => {
                 DomHandler.removeClass(expandingTabContent, 'ui-accordion-content-wrapper-expanding');
-                this.expandingTabIndex = null;
+                this.togglingTabIndex = null;
             }, 500);
         }
     }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.activeIndex != null) {
-            return {activeIndex: nextProps.activeIndex};
-        }
-        return null;
-    }
     
-    onTabClick(event, tab, i) {
-        if(!tab.props.disabled) {
-            let selected = this.isSelected(i);
-            this.expandingTabIndex = selected ? null : i;
+    onTabHeaderClick(event, tab, index) {
+        if (!tab.props.disabled) {
+            const selected = this.isSelected(index);
+            this.togglingTabIndex = selected ? null : index;
+            let newActiveIndex = null;
 
             if(this.props.multiple) {
-                var indexes = this.state.activeIndex||[];
+                let indexes = this.state.activeIndex||[];
                 if(selected)
-                    indexes = indexes.filter(index => index !== i);
+                    indexes = indexes.filter(i => i !== index);
                 else
-                    indexes = [...indexes,i];
+                    indexes = [...indexes, index];
 
-                this.setState({activeIndex: indexes});
+                newActiveIndex = indexes;
             }
             else {
-                if(selected)
-                    this.setState({activeIndex: null});
-                else
-                    this.setState({activeIndex: i});
+                newActiveIndex = selected ? null : index;
             }
 
             let callback = selected ? this.props.onTabClose : this.props.onTabOpen;
             if(callback) {
-                callback({originalEvent: event, index: i});
+                callback({originalEvent: event, index: index});
+            }
+
+            if (this.props.onTabChange) {
+                this.props.onTabChange({
+                    originalEvent: event,
+                    index: newActiveIndex
+                })
+            }
+            else {
+                this.setState({
+                    activeIndex: newActiveIndex
+                });
             }
         }
 
         event.preventDefault();
     }
 
-    isSelected(i) {
-        return this.props.multiple ? (this.state.activeIndex && this.state.activeIndex.indexOf(i) !== -1) : this.state.activeIndex === i;
+    isSelected(index) {
+        const activeIndex = this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex;
+
+        return this.props.multiple ? (activeIndex && activeIndex.indexOf(index) >= 0) : activeIndex === index;        
     }
     
     renderTabHeader(tab, selected, index) {
-        let tabHeaderClass = classNames(tab.props.headerClassName, 'ui-accordion-header ui-state-default ui-corner-all', {'ui-state-active': selected, 'ui-state-disabled': tab.props.disabled});
-        let id = this.id + '_header_' + index;
-        let ariaControls = this.id + '_content_' + index;
+        const tabHeaderClass = classNames(tab.props.headerClassName, 'ui-accordion-header ui-state-default ui-corner-all', {'ui-state-active': selected, 'ui-state-disabled': tab.props.disabled});
+        const id = this.id + '_header_' + index;
+        const ariaControls = this.id + '_content_' + index;
 
         return (
-            <div className={tabHeaderClass} style={tab.props.headerStyle} onClick={(event) => this.onTabClick(event, tab, index)}>
-                <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected}>
+            <div className={tabHeaderClass} style={tab.props.headerStyle}>
+                <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)}>
                     <span className={classNames('ui-accordion-toggle-icon pi pi-fw', { 'pi-caret-right': !selected, 'pi-caret-down': selected })}></span>
                     <span className="ui-accordion-header-text">{tab.props.header}</span>
                 </a>
@@ -124,10 +134,10 @@ export class Accordion extends Component {
     }
     
     renderTabContent(tab, selected, index) {
-        let tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper',{
+        const tabContentWrapperClass = classNames(tab.props.contentClassName, 'ui-accordion-content-wrapper',{
                                     'ui-accordion-content-wrapper-collapsed': !selected,
                                     'ui-accordion-content-wrapper-expanded': selected});
-        let id = this.id + '_content_' + index;
+        const id = this.id + '_content_' + index;
 
         return (
             <div id={id} className={tabContentWrapperClass} style={tab.props.contentStyle}>
@@ -139,9 +149,9 @@ export class Accordion extends Component {
     } 
     
     renderTab(tab, index) {
-        let selected = this.isSelected(index);
-        let tabHeader = this.renderTabHeader(tab, selected, index);
-        let tabContent = this.renderTabContent(tab, selected, index);
+        const selected = this.isSelected(index);
+        const tabHeader = this.renderTabHeader(tab, selected, index);
+        const tabContent = this.renderTabContent(tab, selected, index);
 
         return (
             <div key={tab.props.header} className="ui-accordion-tab">
@@ -150,12 +160,18 @@ export class Accordion extends Component {
             </div>
         );
     }
+
+    renderTabs() {
+        return (
+            React.Children.map(this.props.children, (tab, index) => {
+                return this.renderTab(tab, index);
+            })
+        )
+    }
          
     render() {
-        let tabs = React.Children.map(this.props.children, (tab, index) => {
-            return this.renderTab(tab, index);
-        });
-        let className = classNames('ui-accordion ui-widget ui-helper-reset', this.props.className);
+        const className = classNames('ui-accordion ui-widget ui-helper-reset', this.props.className);
+        const tabs = this.renderTabs();
 
         return (
             <div ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>

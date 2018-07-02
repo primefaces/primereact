@@ -19,6 +19,7 @@ interface AccordionProps {
     multiple?: boolean;
     onTabOpen?(e: {originalEvent: Event, index: number}): void;
     onTabClose?(e: {originalEvent: Event, index: number}): void;
+    onTabChange?(e: {originalEvent: Event, index: number}): void;
 }
 
 export class Accordion extends React.Component<AccordionProps,any> {}
