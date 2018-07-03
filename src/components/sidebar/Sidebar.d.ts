@@ -10,7 +10,7 @@ interface SidebarProps {
     blockScroll?: boolean;
     baseZIndex?: number;
     onShow?(): void;
-    onHide?(): void;
+    onHide(): void;
 }
 
 export class Sidebar extends React.Component<SidebarProps,any> {}
