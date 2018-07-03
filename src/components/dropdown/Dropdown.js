@@ -392,7 +392,7 @@ export class Dropdown extends Component {
         return <div className="ui-helper-hidden-accessible">
                     <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                        disabled={this.props.disabled} tabIndex={this.props.tabIndex} autoFocus={this.props.autoFocus} />
+                        disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
                 </div>;
     }
     
@@ -467,6 +467,12 @@ export class Dropdown extends Component {
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
+
+    unbindWindowLoadListener() {
+        if (this.windowLoadListener) {
+            window.removeEventListener('load', this.windowLoadListener);
+        }
+    }
     
     componentDidMount() {
         if(this.props.autoWidth) {
@@ -477,10 +483,19 @@ export class Dropdown extends Component {
                 }
             }, 0);
         }
+
+        if (this.props.autoFocus && this.focusInput) {
+            this.windowLoadListener = () => {
+                this.focusInput.focus();
+            }
+            
+            window.addEventListener('load', this.windowLoadListener);
+        }
     }
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindWindowLoadListener();
     }
     
     componentDidUpdate(prevProps, prevState) {
