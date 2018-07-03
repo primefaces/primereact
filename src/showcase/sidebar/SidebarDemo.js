@@ -121,10 +121,10 @@ import {Sidebar} from 'primereact/sidebar';
                         <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<Sidebar visible={this.state.visible} position="right" style={{width:'30em'}} onHide={(e) => this.setState({visible:false})}></Sidebar>
 <Sidebar visible={this.state.visible} position="right" className="ui-sidebar-sm" onHide={(e) => this.setState({visible:false})}</Sidebar>
 <Sidebar visible={this.state.visible} position="right" className="ui-sidebar-md" onHide={(e) => this.setState({visible:false})}></Sidebar>
 <Sidebar visible={this.state.visible} position="right" className="ui-sidebar-lg" onHide={(e) => this.setState({visible:false})}></Sidebar>
+<Sidebar visible={this.state.visible} position="right" style={{width:'30em'}} onHide={(e) => this.setState({visible:false})}></Sidebar>
 
 `}
                         </CodeHighlight>
