@@ -209,6 +209,8 @@ export class InputMask extends Component {
         if (this.props.readonly) {
             return;
         }
+        
+        this.isKeydownPressed = true;
 
         let k = e.which || e.keyCode,
             pos,
@@ -532,9 +534,10 @@ export class InputMask extends Component {
     }
 
     render() {
-        if(this.input && this.input.value !== this.props.value) {
+        if(this.input && this.input.value !== this.props.value && !this.isKeydownPressed) {
             this.updateValue();
         }
+        this.isKeydownPressed = false;
 
         return (
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
