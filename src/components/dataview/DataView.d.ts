@@ -1,28 +1,35 @@
 import React = require("react");
 
+interface DataViewLayoutOptionsProps {
+    id?: string,
+    layout?: string,
+    style?: string,
+    className?: string,
+    onChange(e: {originalEvent: event, value: string}): void
+}
+
+export class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps,any> {}
+
 interface DataViewProps {
     id?: string,
-    header?: any,
-    footer?: any,
+    header?: JSX.Element | string,
+    footer?: JSX.Element | string,
     value?: Array<any>,
     layout?: string,
     paginator?: boolean,
     rows?: number,
+    first?: number,
     totalRecords?: number,
     pageLinks?: number,
     rowsPerPageOptions?: Array<any>,
     paginatorPosition?: string,
-    lazy?: boolean,
     emptyMessage?: string,
-    sortField?:string,
-    sortOrder?:number,
+    sortField?: string,
+    sortOrder?: number,
     style?: string,
     className?: string,
-    filterBy?: string,
-    onLazyLoad?(e: {first: number, rows:number}): void,
-    onPage?(e: {first: number, rows:number}): void,
-    onSort?(e: {field: number, order:number}): void,
-    itemTemplate?(item: any, layout: "grid" | "list"): JSX.Element | undefined,
+    onPageChange?(e: {originalEvent: event, first: number, rows:number}): void,
+    itemTemplate?(item: any, layout: "grid" | "list"): JSX.Element | undefined
 }
 
 export class DataView extends React.Component<DataViewProps,any> {}
