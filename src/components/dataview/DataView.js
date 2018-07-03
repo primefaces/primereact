@@ -96,7 +96,7 @@ export class DataView extends Component {
         style: null,
         className: null,
         itemTemplate: null,
-        onPageChange: null
+        onPage: null
     }
 
     static propsTypes = {
@@ -123,7 +123,7 @@ export class DataView extends Component {
 
     constructor(props) {
         super(props);
-        if (!this.props.onPageChange) {
+        if (!this.props.onPage) {
             this.state = {
                 first: this.props.first,
                 rows: this.props.rows
@@ -142,8 +142,8 @@ export class DataView extends Component {
 
     createPaginator(position) {
         const className = 'ui-paginator-' + position;
-        const first = this.props.onPageChange ? this.props.first: this.state.first;
-        const rows = this.props.onPageChange ? this.props.rows : this.state.rows;
+        const first = this.props.onPage ? this.props.first: this.state.first;
+        const rows = this.props.onPage ? this.props.rows : this.state.rows;
         const totalRecords = this.getTotalRecords();
 
         return (
@@ -244,8 +244,8 @@ export class DataView extends Component {
     renderItems(value) {
         if (value && value.length) {
             if (this.props.paginator) {
-                const rows = this.onPage ? this.props.rows : this.state.rows;
-                const first = this.onPage ? this.props.first : this.state.first;
+                const rows = this.props.onPage ? this.props.rows : this.state.rows;
+                const first = this.props.onPage ? this.props.first : this.state.first;
                 const last = rows + first;
                 let items = [];
 

@@ -28,7 +28,7 @@ interface DataViewProps {
     sortOrder?: number,
     style?: string,
     className?: string,
-    onPageChange?(e: {originalEvent: event, first: number, rows:number}): void,
+    onPage?(e: {originalEvent: event, first: number, rows: number}): void,
     itemTemplate?(item: any, layout: "grid" | "list"): JSX.Element | undefined
 }
 

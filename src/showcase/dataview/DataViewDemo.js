@@ -323,7 +323,7 @@ itemTemplate(car, layout) {
 
                         <CodeHighlight className="language-jsx">
                             {`
-<DataView value={this.state.cars} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator={true} rows={10} first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></DataView>
+<DataView value={this.state.cars} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}></DataView>
 
 `}
                         </CodeHighlight>
@@ -379,7 +379,7 @@ onSortChange(event) {
                         </CodeHighlight>
 
                         <h3>Lazy Loading</h3>
-                        <p>Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPageChange</i> callback to load your data from the backend.
+                        <p>Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPage</i> callback to load your data from the backend.
                         Pagination in this case needs to display the logical number of records so bind this value to the <i>totalRecords</i> property so that paginator can display itself according to the total records although you'd only
                         need to load the data of the current page.</p>
 
@@ -525,7 +525,7 @@ onSortChange(event) {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>onPageChange</td>
+                                        <td>onPage</td>
                                         <td>event.originalEvent: browser event <br />
                                             event.first: index of the first records on page. <br />
                                             event.rows: number of records to display per page. <br /></td>
