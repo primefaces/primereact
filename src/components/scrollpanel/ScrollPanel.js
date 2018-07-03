@@ -19,45 +19,77 @@ export class ScrollPanel extends Component {
         super(props);
 
         this.moveBar = this.moveBar.bind(this);
-        this.onBarMouseDown = this.onBarMouseDown.bind(this);
+        this.onXBarMouseDown = this.onXBarMouseDown.bind(this);
+        this.onYBarMouseDown = this.onYBarMouseDown.bind(this);
+
         this.onDocumentMouseMove = this.onDocumentMouseMove.bind(this);
         this.onDocumentMouseUp = this.onDocumentMouseUp.bind(this);
     }
 
-    componentDidMount() {
-        this.moveBar();
-        this.moveBar = this.moveBar.bind(this);
+    calculateContainerHeight() {
+        let containerStyles = getComputedStyle(this.container),
+        xBarStyles = getComputedStyle(this.xBar),
+        pureContainerHeight = DomHandler.getHeight(this.container) - parseInt(xBarStyles['height'], 10);
 
-        window.addEventListener('resize', this.moveBar);
-        this.initialized = true;
-    }
-
-    componentWillUnmount() {
-        if(this.initialized) {
-            window.removeEventListener('resize', this.moveBar);
+        if (containerStyles['max-height'] !== "none" && pureContainerHeight === 0) {
+            if(this.content.offsetHeight + parseInt(xBarStyles['height'], 10) > parseInt(containerStyles['max-height'], 10)) {
+                this.container.style.height = containerStyles['max-height'];
+            }
+            else {
+                this.container.style.height = this.content.offsetHeight + parseFloat(containerStyles.paddingTop) + parseFloat(containerStyles.paddingBottom) + parseFloat(containerStyles.borderTopWidth) + parseFloat(containerStyles.borderBottomWidth) + "px";
+            }
         }
     }
 
     moveBar() {
+        /* horizontal scroll */
+        let totalWidth = this.content.scrollWidth;
+        let ownWidth = this.content.clientWidth;
+        let bottom = (this.container.clientHeight - this.xBar.clientHeight) * -1;
+
+        this.scrollXRatio = ownWidth / totalWidth;
+
+        /* vertical scroll */
         let totalHeight = this.content.scrollHeight;
         let ownHeight = this.content.clientHeight;
-        let right = (this.container.clientWidth - this.bar.clientWidth) * -1;
-        this.scrollRatio = ownHeight / totalHeight;
+        let right = (this.container.clientWidth - this.yBar.clientWidth) * -1;
+
+        this.scrollYRatio = ownHeight / totalHeight;
 
         this.requestAnimationFrame(() => {
-            if (this.scrollRatio >= 1) {
-                DomHandler.addClass(this.bar, 'ui-scrollpanel-hidden');
+            if (this.scrollXRatio >= 1) {
+                DomHandler.addClass(this.xBar, 'ui-scrollpanel-hidden');
             }
             else {
-                DomHandler.removeClass(this.bar, 'ui-scrollpanel-hidden');
-                this.bar.style.cssText = 'height:' + Math.max(this.scrollRatio * 100, 10) + '%; top:' + (this.content.scrollTop / totalHeight) * 100 + '%;right:' + right + 'px;';
+                DomHandler.removeClass(this.xBar, 'ui-scrollpanel-hidden');
+                this.xBar.style.cssText = 'width:' + Math.max(this.scrollXRatio * 100, 10) + '%; left:' + (this.content.scrollLeft / totalWidth) * 100 + '%;bottom:' + bottom + 'px;';
+            }
+
+            if (this.scrollYRatio >= 1) {
+                DomHandler.addClass(this.yBar, 'ui-scrollpanel-hidden');
+            }
+            else {
+                DomHandler.removeClass(this.yBar, 'ui-scrollpanel-hidden');
+                this.yBar.style.cssText = 'height:' + Math.max(this.scrollYRatio * 100, 10) + '%; top: calc(' + (this.content.scrollTop / totalHeight) * 100 + '% - ' + this.xBar.clientHeight + 'px);right:' + right + 'px;';
             }
         });
     }
 
-    onBarMouseDown(e) {
+    onYBarMouseDown(e) {
+        this.isYBarClicked = true;
         this.lastPageY = e.pageY;
-        DomHandler.addClass(this.bar, 'ui-scrollpanel-grabbed');
+        DomHandler.addClass(this.yBar, 'ui-scrollpanel-grabbed');
+        DomHandler.addClass(document.body, 'ui-scrollpanel-grabbed');
+
+        document.addEventListener('mousemove', this.onDocumentMouseMove);
+        document.addEventListener('mouseup', this.onDocumentMouseUp);
+        e.preventDefault();
+    }
+
+    onXBarMouseDown(e) {
+        this.isXBarClicked = true;
+        this.lastPageX = e.pageX;
+        DomHandler.addClass(this.xBar, 'ui-scrollpanel-grabbed');
         DomHandler.addClass(document.body, 'ui-scrollpanel-grabbed');
 
         document.addEventListener('mousemove', this.onDocumentMouseMove);
@@ -66,25 +98,71 @@ export class ScrollPanel extends Component {
     }
 
     onDocumentMouseMove(e) {
-        let delta = e.pageY - this.lastPageY;
+        if(this.isXBarClicked) {
+            this.onMouseMoveForXBar(e);
+        }
+        else if(this.isYBarClicked) {
+            this.onMouseMoveForYBar(e);
+        }
+        else {
+            this.onMouseMoveForXBar(e);
+            this.onMouseMoveForYBar(e);
+        }
+        
+    }
+
+    onMouseMoveForXBar(e) {
+        let deltaX = e.pageX - this.lastPageX;
+        this.lastPageX = e.pageX;
+
+        this.requestAnimationFrame(() => {
+            this.content.scrollLeft += deltaX / this.scrollXRatio;
+        });
+    }
+
+    onMouseMoveForYBar(e) {
+        let deltaY = e.pageY - this.lastPageY;
         this.lastPageY = e.pageY;
 
         this.requestAnimationFrame(() => {
-            this.content.scrollTop += delta / this.scrollRatio;
+            this.content.scrollTop += deltaY / this.scrollYRatio;
         });
     }
 
     onDocumentMouseUp(e) {
-        DomHandler.removeClass(this.bar, 'ui-scrollpanel-grabbed');
+        DomHandler.removeClass(this.yBar, 'ui-scrollpanel-grabbed');
+        DomHandler.removeClass(this.xBar, 'ui-scrollpanel-grabbed');
         DomHandler.removeClass(document.body, 'ui-scrollpanel-grabbed');
 
         document.removeEventListener('mousemove', this.onDocumentMouseMove);
         document.removeEventListener('mouseup', this.onDocumentMouseUp);
+        this.isXBarClicked = false;
+        this.isYBarClicked = false;
     }
 
     requestAnimationFrame(f) {
-        let frame = window.requestAnimationFrame ||  this.timeoutFrame;
+        let frame = window.requestAnimationFrame || this.timeoutFrame;
         frame(f);
+    }
+
+    refresh() {
+        this.moveBar();
+    }
+
+    componentDidMount() {
+        this.moveBar();
+        this.moveBar = this.moveBar.bind(this);
+
+        window.addEventListener('resize', this.moveBar);
+        
+        this.calculateContainerHeight();
+        this.initialized = true;
+    }
+
+    componentWillUnmount() {
+        if (this.initialized) {
+            window.removeEventListener('resize', this.moveBar);
+        }
     }
 
     render() {
@@ -97,7 +175,8 @@ export class ScrollPanel extends Component {
                         {this.props.children}
                     </div>
                 </div>
-                <div ref={(el) => { this.bar = el; }} className="ui-scrollpanel-bar" onMouseDown={this.onBarMouseDown}></div>                
+                <div ref={(el) => { this.xBar = el; }} className="ui-scrollpanel-bar ui-scrollpanel-bar-x" onMouseDown={this.onXBarMouseDown}></div>
+                <div ref={(el) => { this.yBar = el; }} className="ui-scrollpanel-bar ui-scrollpanel-bar-y" onMouseDown={this.onYBarMouseDown}></div>
             </div>
         );
     }

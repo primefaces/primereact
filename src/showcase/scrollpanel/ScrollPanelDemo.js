@@ -52,7 +52,7 @@ export class ScrollPanelDemo extends Component {
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                                <div style={{ padding: '1em', lineHeight: '1.5' }}>
+                                <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
@@ -169,6 +169,26 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                             </table>
                         </div>
 
+                        <h3>Methods</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>refresh</td>
+                                        <td>-</td>
+                                        <td>Refreshes the position and size of the scrollbar.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
@@ -195,6 +215,14 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                                     <tr>
                                         <td>ui-scrollpanel-bar</td>
                                         <td>Scrollbar handle.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-scrollpanel-bar-x</td>
+                                        <td>Scrollbar handle of a horizontal bar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-scrollpanel-bar-y</td>
+                                        <td>Scrollbar handle of a vertical bar</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -263,7 +291,7 @@ export class ScrollPanelDemo extends Component {
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                                <div style={{ padding: '1em', lineHeight: '1.5' }}>
+                                <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
