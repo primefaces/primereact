@@ -472,9 +472,8 @@ export class Dialog extends Component {
         if(prevProps.visible !== this.props.visible) {
             if (this.props.visible)
                 this.show();
-            else {
+            else
                 this.hide();
-            }
         }
 
         if(prevState.maximized !== this.state.maximized) {
