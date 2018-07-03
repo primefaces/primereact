@@ -10,7 +10,7 @@ interface OrderListProps {
     responsive?: boolean;
     dragdrop?: boolean;
     onChange?(e: {originalEvent: Event, value: any}): void;
-    itemTemplate?(item: any): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
 }
 
 export class OrderList extends React.Component<OrderListProps,any> {}

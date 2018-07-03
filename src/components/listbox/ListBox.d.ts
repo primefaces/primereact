@@ -5,7 +5,7 @@ interface ListBoxProps {
     value?: any,
     options?: Array<any>,
     optionLabel?: string,
-    itemTemplate?(): void,
+    itemTemplate?(item: any): JSX.Element | undefined,
     style?: object,
     listStyle?: object,
     className?: string,

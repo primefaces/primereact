@@ -9,7 +9,7 @@ interface PickListSubListProps {
     style?: object;
     showControls?: boolean;
     metaKeySelection?: boolean;
-    itemTemplate?(item: any): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
     onItemClick?(): void;
     onSelectionChange?({event: Event, value: any}): void;
 }

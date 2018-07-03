@@ -15,7 +15,7 @@ interface DataGridProps {
     paginatorPosition?: string,
     paginatorTemplate?: string,
     onLazyLoad?(e: {first: number, rows:number}): void,
-    itemTemplate?(): void,
+    itemTemplate?(item: any): JSX.Element | undefined,
     header?:string,
     footer?:string;
 }

@@ -5,7 +5,7 @@ interface DropdownProps {
     value?: any;
     options?: Array<any>;
     optionLabel?: string;
-    itemTemplate?(option:any): any;
+    itemTemplate?(option:any): JSX.Element | undefined;
     style?: object;
     className?: string;
     autoWidth?: boolean;

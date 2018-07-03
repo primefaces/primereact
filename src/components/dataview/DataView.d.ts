@@ -22,7 +22,7 @@ interface DataViewProps {
     onLazyLoad?(e: {first: number, rows:number}): void,
     onPage?(e: {first: number, rows:number}): void,
     onSort?(e: {field: number, order:number}): void,
-    itemTemplate?(): void,
+    itemTemplate?(item: any, layout: "grid" | "list"): JSX.Element | undefined,
 }
 
 export class DataView extends React.Component<DataViewProps,any> {}

@@ -12,7 +12,7 @@ interface MultiSelectProps {
     disabled?: boolean;
     filter?: boolean;
     key?: string;
-    itemTemplate?(): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
     appendTo?: HTMLElement;
 }

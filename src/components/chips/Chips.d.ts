@@ -11,7 +11,7 @@ interface ChipsProps {
     className?: string;
     onAdd?(e: {originalEvent: Event, value: any}): void;
     onRemove?(e: {originalEvent: Event, value: any}): void;
-    itemTemplate?(): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
 }
 
 export class Chips extends React.Component<ChipsProps,any> {}
