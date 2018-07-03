@@ -28,17 +28,16 @@ export class Sidebar extends Component {
         blockScroll: PropTypes.bool,
         baseZIndex: PropTypes.number,
         onShow: PropTypes.func,
-        onHide: PropTypes.func
+        onHide: PropTypes.func.isRequired
     };
 
     constructor(props) {
         super(props);
-        this.state = {visible: this.props.visible};
-        this.onClose = this.onClose.bind(this);
+        this.onCloseClick = this.onCloseClick.bind(this);
     }
 
     componentDidMount() {
-        if(this.state.visible) {
+        if (this.props.visible) {
             this.show();
         }
     }
@@ -48,61 +47,43 @@ export class Sidebar extends Component {
         this.disableModality();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevState.visible !== this.props.visible) {
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.visible !== this.props.visible) {
             if (this.props.visible)
-                this.show();
-            else {
-                if(this.preventVisibleChangePropagation)
-                    this.preventVisibleChangePropagation = false;
-                else
-                    this.hide();
-            }
+                this.onShow();
+            else
+                this.onHide();
         }
     }
 
-    show(){
-        this.setState({visible: true});
+    onShow() {
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.enableModality();
-        if(this.props.onShow) {
+
+        if (this.props.onShow) {
             this.props.onShow();
         }
     }
 
     enableModality() {
-        if(!this.mask) {
+        if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.container.style.zIndex,10) - 1);
+            this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
             DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-sidebar-mask');
-
             this.maskClickListener = (event) => {
-                this.onClose(event);
+                this.onCloseClick(event);
             };
             this.mask.addEventListener('click', this.maskClickListener);
             document.body.appendChild(this.mask);
-            if(this.props.blockScroll) {
+            if (this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'ui-overflow-hidden');
             }
         }
     }
 
-    onClose(event) {
-        this.hide();
-        event.preventDefault();
-    }
-
-    hide() {
-        this.setState({visible:false});
-        this.unbindMaskClickListener();
-        this.disableModality();
-        if(this.props.onHide) {
-            this.props.onHide();
-        }
-    }
-
     disableModality() {
-        if(this.mask) {
+        if (this.mask) {
+            this.unbindMaskClickListener();
             document.body.removeChild(this.mask);
             if(this.props.blockScroll) {
                 DomHandler.removeClass(document.body, 'ui-overflow-hidden');
@@ -111,20 +92,30 @@ export class Sidebar extends Component {
         }
     }
 
+    onCloseClick(event) {
+        this.props.onHide();
+        event.preventDefault();
+    }
+
+    onHide() {
+        this.unbindMaskClickListener();
+        this.disableModality();
+    }
+
     unbindMaskClickListener() {
-        if(this.maskClickListener) {
+        if (this.maskClickListener) {
             this.mask.removeEventListener('click', this.maskClickListener);
             this.maskClickListener = null;
         }
     }
 
     render() {
-        let containerClass = classNames('ui-sidebar ui-widget ui-widget-content ui-shadow', this.props.className, 'ui-sidebar-' + this.props.position,
-                                       {'ui-sidebar-active': this.state.visible, 'ui-sidebar-full': this.props.fullScreen});
+        const className = classNames('ui-sidebar ui-widget ui-widget-content ui-shadow', this.props.className, 'ui-sidebar-' + this.props.position,
+                                       {'ui-sidebar-active': this.props.visible, 'ui-sidebar-full': this.props.fullScreen});
 
         return (
-            <div ref={(el) => this.container=el} id={this.props.id} className={containerClass} style={this.props.style}>
-                <a className={'ui-sidebar-close ui-corner-all'} role="button" onClick={this.onClose}>
+            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style}>
+                <a className="ui-sidebar-close ui-corner-all" role="button" onClick={this.onCloseClick}>
                     <span className="pi pi-times"/>
                 </a>
                 {this.props.children}
