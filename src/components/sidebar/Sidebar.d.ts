@@ -9,6 +9,8 @@ interface SidebarProps {
     fullScreen?: boolean;
     blockScroll?: boolean;
     baseZIndex?: number;
+    dismissable?: boolean;
+    showCloseIcon?: boolean;
     onShow?(): void;
     onHide(): void;
 }

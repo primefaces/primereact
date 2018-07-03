@@ -200,6 +200,18 @@ import {Sidebar} from 'primereact/sidebar';
                                         <td>0</td>
                                         <td>Base zIndex value to use in layering.</td>
                                     </tr>
+                                    <tr>
+                                        <td>dismissable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether clicking outside closes the panel.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showCloseIcon</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to display a close icon inside the panel.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
