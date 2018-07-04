@@ -11,36 +11,42 @@ export class DataTableLazyDemo extends Component {
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            loading: true,
+            first: 0,
+            rows: 10,
+            totalRecords: 0
         };
         this.carservice = new CarService();
-        this.onLazyLoad = this.onLazyLoad.bind(this);
+        this.onPage = this.onPage.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => {
             this.datasource = data;
-            this.setState({totalRecords: data.length});
+            this.setState({
+                totalRecords: data.length,
+                cars: this.datasource.slice(0, this.state.rows),
+                loading: false
+            });
         });
     }
 
-    onLazyLoad(event) {
-        this.setState({loading: true});
-        /* In a real application, make a remote request to load data using state metadata from event
-         * event.first = First row offset
-         * event.rows = Number of rows per page
-         * event.sortField = Field name to sort with
-         * event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-         * filters: FilterMetadata object having field as key and filter value, filter matchMode as value */
-        
-        //imitate db connection over a network
+    onPage(event) {
+        this.setState({
+            loading: true
+        });
+
+        //imitate delay of a backend call
         setTimeout(() => {
-            if(this.datasource) {
-                this.setState({
-                    cars: this.datasource.slice(event.first, (event.first + event.rows)),
-                    loading: false
-                });
-            }
+            const startIndex = event.first;
+            const endIndex = event.first + this.state.rows;
+    
+            this.setState({
+                first: startIndex,
+                cars: this.datasource.slice(startIndex, endIndex),
+                loading: false
+            });
         }, 250);
     }
 
@@ -52,15 +58,15 @@ export class DataTableLazyDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Lazy</h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. Sample belows imitates 
+                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates 
                             lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming 
-                            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist..</p>
+                            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} totalRecords={this.state.totalRecords}
-                        lazy={true} onLazyLoad={this.onLazyLoad} loading={this.state.loading}>
+                    <DataTable value={this.state.cars} paginator={true} rows={this.state.rows} totalRecords={this.state.totalRecords}
+                        lazy={true} first={this.state.first} onPage={this.onPage} loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -88,45 +94,54 @@ export class DataTableLazyDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
+import {DataTable} from '../../components/datatable/DataTable';
+import {Column} from '../../components/column/Column';
 import {CarService} from '../service/CarService';
+import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class DataTableLazyDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            loading: true,
+            first: 0,
+            rows: 10,
+            totalRecords: 0
         };
         this.carservice = new CarService();
-        this.onLazyLoad = this.onLazyLoad.bind(this);
+        this.onPage = this.onPage.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => {
             this.datasource = data;
-            this.setState({totalRecords: data.length});
+            this.setState({
+                totalRecords: data.length,
+                cars: this.datasource.slice(0, this.state.rows),
+                loading: false
+            });
         });
     }
-    
-    onLazyLoad(event) {
-        this.setState({loading: true});
-        /* In a real application, make a remote request to load data using state metadata from event
-         * event.first = First row offset
-         * event.rows = Number of rows per page
-         * event.sortField = Field name to sort with
-         * event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-         * filters: FilterMetadata object having field as key and filter value, filter matchMode as value */
-        
-        //imitate db connection over a network
+
+    onPage(event) {
+        this.setState({
+            loading: true
+        });
+
+        //imitate delay of a backend call
         setTimeout(() => {
-            if(this.datasource) {
-                this.setState({
-                    cars: this.datasource.slice(event.first, (event.first + event.rows)),
-                    loading: false
-                });
-            }
+            const startIndex = event.first;
+            const endIndex = event.first + this.state.rows;
+    
+            this.setState({
+                first: startIndex,
+                cars: this.datasource.slice(startIndex, endIndex),
+                loading: false
+            });
         }, 250);
     }
 
@@ -136,15 +151,15 @@ export class DataTableLazyDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Lazy</h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. Sample belows imitates 
+                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates 
                             lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming 
-                            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist..</p>
+                            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} rows={10} totalRecords={this.state.totalRecords}
-                        lazy={true} onLazyLoad={this.onLazyLoad}>
+                    <DataTable value={this.state.cars} paginator={true} rows={this.state.rows} totalRecords={this.state.totalRecords}
+                        lazy={true} first={this.state.first} onPage={this.onPage} loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />

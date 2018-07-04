@@ -530,15 +530,53 @@ export class DataTableColGroupDemo extends Component {
 
             <p>When using sorting with column groups, define sort properties like sortable at columns inside column groups not at the direct children of DataTable component.</p>
 
-            <h3>Paginator</h3>
-            <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. See <Link to="/paginator">&#9679; paginator</Link> component for more information.</p>
+            <h3>Pagination</h3>
+            <p>Pagination is enabled by setting paginator <i>property</i> to true, <i>rows</i> attribute defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. 
+            See <Link to="/paginator">paginator</Link> component for more information about further customization options such as <i>paginator template</i>.</p>
+
+            <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
 <CodeHighlight className="language-javascript">
 {`
 export class DataTablePaginatorDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            cars: null
+        };
+        this.carservice = new CarService();
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    }
+
+    render() {
+        return (
+            <DataTable value={this.state.cars} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}>
+                <Column field="vin" header="Vin" />
+                <Column field="year" header="Year" />
+                <Column field="brand" header="Brand" />
+                <Column field="color" header="Color" />
+            </DataTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
+
+            <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however 
+            it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.</p>
+<CodeHighlight className="language-javascript">
+{`
+export class DataTablePaginatorDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            cars: null
+        };
         this.carservice = new CarService();
     }
 
@@ -561,40 +599,7 @@ export class DataTablePaginatorDemo extends Component {
 `}
 </CodeHighlight>
 
-
-            <p>Paginator can also be controlled via model using property binding to first which allows resetting or navigating to a certain page programmatically.</p>
-<CodeHighlight className="language-javascript">
-{`
-export class DataTablePaginatorDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
-    }
-
-    render() {
-        let start = 20;
-
-        return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} first={start}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-
-            <p>Elements of the paginator can be customized using paginatorTemplate by the DataTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
+            <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the DataTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} paginator={true} rows={10} first={start} 
@@ -609,7 +614,7 @@ export class DataTablePaginatorDemo extends Component {
 </CodeHighlight>
 
             <h3>Sorting</h3>
-            <p>Enabling sortable property at column component is enough to make a column sortable. The property to use when sorting is field by default and can be customized using sortField.</p>
+            <p>Enabling <i>sortable</i> property at column component would be enough to make a column sortable. The property to use when sorting is <i>field</i> by default and can be customized using <i>sortField</i>.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Column field="vin" header="Vin" sortable={true}/>
@@ -617,7 +622,7 @@ export class DataTablePaginatorDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>By default sorting is executed on the clicked column. To do multiple field sorting, set sortMode property to "multiple" and use metakey when clicking on another column.</p>
+            <p>By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} sortMode="multiple">
@@ -626,11 +631,12 @@ export class DataTablePaginatorDemo extends Component {
 </CodeHighlight>
 
 
+            <p>In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner. 
+            In controlled mode, <i>sortField</i>, <i>sortOrder</i> and <i>onSort</i> properties need to be defined to control the sorting state.</p>
 
-            <p>In case you'd like to display the table as sorted by default initially on load, use the sortField-sortOrder properties in single mode.</p>
 <CodeHighlight className="language-jsx">
 {`
-<DataTable value={this.state.cars} sortField="year" sortOrder={1}>
+<DataTable value={this.state.cars} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onSort={(e) => this.setState({sortField: e.sortField, sortOrder: e.sortOrder})}>
     <Column field="vin" header="Vin" sortable={true}/>
     <Column field="year" header="Year" sortable={true}/>
     <Column field="brand" header="Brand" sortable={true}/>
@@ -640,10 +646,10 @@ export class DataTablePaginatorDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>In multiple mode, use the multiSortMeta property and bind an array of SortMeta objects.</p>
+            <p>In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.</p>
 <CodeHighlight className="language-jsx">
 {`
-<DataTable value={this.state.cars} multiSortMeta={multiSortMeta}>
+<DataTable value={this.state.cars} multiSortMeta={multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
     <Column field="vin" header="Vin" sortable={true}/>
     <Column field="year" header="Year" sortable={true}/>
     <Column field="brand" header="Brand" sortable={true}/>
@@ -662,7 +668,22 @@ multiSortMeta.push({field: 'brand', order: -1});
 `}
 </CodeHighlight>
 
-            <p>To customize sorting, set sortable option to custom and define a sortFunction that sorts the list.</p>
+            <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however 
+            it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
+
+            <CodeHighlight className="language-jsx">
+{`
+<DataTable value={this.state.cars} sortField="year" sortOrder={1}>
+    <Column field="vin" header="Vin" sortable={true}/>
+    <Column field="year" header="Year" sortable={true}/>
+    <Column field="brand" header="Brand" sortable={true}/>
+    <Column field="color" header="Color" sortable={true}/>
+</DataTable>
+
+`}
+</CodeHighlight>
+
+            <p>To customize sorting algorithm, set sortable option to custom and define a sortFunction that sorts the list.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} >
@@ -686,10 +707,10 @@ mysort(event) {
 </CodeHighlight>
 
             <h3>Filtering</h3>
-            <p>Filtering is enabled by setting the filter property as true on a column. Default match mode is "startsWith" and this can be configured using filterMatchMode property that also accepts "contains", "endsWith", "equals", "notEquals" and "in".</p>
+            <p>Filtering is enabled by setting the <i>filter</i> property as true on a column. Default match mode is "startsWith" and this can be configured using <i>filterMatchMode</i> property that also accepts "contains", "endsWith", "equals", "notEquals" and "in" as available modes.</p>
  <CodeHighlight className="language-jsx">
 {`
-<DataTable value={this.state.cars} >
+<DataTable value={this.state.cars}>
     <Column field="vin" header="Vin" filter={true} />
     <Column field="year" header="Year" filter={true} filterPlaceholder="Search" />
     <Column field="brand" header="Brand" filter={true} filterMatchMode="contains"/>
@@ -707,7 +728,9 @@ export class DataTableFilterDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            globalFilter: null
+        };
         this.carservice = new CarService();
     }
 
@@ -716,14 +739,15 @@ export class DataTableFilterDemo extends Component {
     }
 
     render() {
-        let header = <div style={{'textAlign':'left'}}>
-                        <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
-                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
-                    </div>;
+        let header = (
+            <div style={{'textAlign':'left'}}>
+                <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
+                <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+            </div>
+        );
 
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} header={header} 
-                globalFilter={this.state.globalFilter}>
+            <DataTable value={this.state.cars} paginator={true} rows={10} header={header} globalFilter={this.state.globalFilter}>
                 <Column field="vin" header="Vin" filter={true} />
                 <Column field="year" header="Year" filter={true} />
                 <Column field="brand" header="Brand" filter={true} />
@@ -736,8 +760,7 @@ export class DataTableFilterDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>By default, input fields are used as filter elements and this can be customized using the filterElement property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.
-            </p>
+            <p>By default, input fields are used as filter elements and this can be customized using the <i>filterElement</i> property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.</p>
 <CodeHighlight className="language-javascript">
 {`
 export class DataTableCustomFilterDemo extends Component {
@@ -813,7 +836,9 @@ export class DataTableCustomFilterDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>If you need to render the DataTable as filtered initially, use the "filters" property of the DataTable with prepopulated values.</p>
+            <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner. 
+            In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to be defined to control the filtering state.</p>
+
 <CodeHighlight className="language-javascript">
 {`
 export class DataTableDefaultFilteredDemo extends Component {
@@ -836,7 +861,7 @@ export class DataTableDefaultFilteredDemo extends Component {
 
     render() {
         return (
-            <DataTable value={this.state.cars} filters={this.state.filters}>
+            <DataTable value={this.state.cars} filters={this.state.filters} onFilter={(e) => this.setState({filters: e.filters})}>
                 <Column field="vin" header="Vin" filter={true} />
                 <Column field="year" header="Year" filter={true} />
                 <Column field="brand" header="Brand" filter={true} />
@@ -849,7 +874,22 @@ export class DataTableDefaultFilteredDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>Custom filtering is implemented by setting the filterMatchMode property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
+            <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however 
+            it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.</p>
+
+            <CodeHighlight className="language-jsx">
+{`
+<DataTable value={this.state.cars}>
+    <Column field="vin" header="Vin" filter={true} />
+    <Column field="year" header="Year" filter={true} />
+    <Column field="brand" header="Brand" filter={true} />
+    <Column field="color" header="Color" filter={true}  />
+</DataTable>
+
+`}
+</CodeHighlight>
+
+            <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
             <CodeHighlight className="language-javascript">
 {`
 export class DataTableFilterDemo extends Component {
@@ -1407,11 +1447,11 @@ export class DataTableRowGroupDemo extends Component {
             <p>When using frozen columns with column grouping, use frozenHeaderColumnGroup and frozenFooterColumnGroup properties along with
             headerColumnGroup and footerColumnGroup.</p>
 
-            <p>Virtual scrolling is enabled using virtualScroll property combined with lazy loading so that data is loaded on the fly during scrolling.</p>
+            <p>Virtual scrolling is enabled using <i>virtualScroll</i>, <i>onVirtualScroll</i> properties combined with lazy loading so that data is loaded on the fly during scrolling. View the <Link to="/datatable/scroll">scrolling demo</Link> for a sample implementation.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
-    rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onLazyLoad={this.loadCarsLazy} style={{marginTop:'30px'}}>
+    rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.loadCarsLazy} style={{marginTop:'30px'}}>
     <Column field="vin" header="Vin" />
     <Column field="year" header="Year" />
     <Column field="brand" header="Brand" />
@@ -1422,13 +1462,11 @@ export class DataTableRowGroupDemo extends Component {
 </CodeHighlight>  
 
             <h3>Lazy Loading</h3>
-            <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging, sorting and filtering happens. To implement lazy loading, 
-                enable lazy attribute and provide a method callback using onLazyLoad that actually loads the data from a remote datasource. 
-                onLazyLoad gets an event object that contains information about what to load. It is also important to assign the logical number of rows to totalRecords by doing a 
-                projection query for paginator configuration so that paginator displays the UI assuming there are actually records of totalRecords size although in reality 
-                they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
+            <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates 
+            lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming 
+            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
 
-            <p>Here is a sample implementation with in memory data.</p>
+            <p>In lazy mode, pagination, sorting and filtering must be used in controlled mode in addition to enabling <i>lazy</i> property. Here is a sample paging implementation with in memory data.</p>
 <CodeHighlight className="language-jsx">
 {`
 export class DataTableLazyDemo extends Component {
@@ -1436,46 +1474,54 @@ export class DataTableLazyDemo extends Component {
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            loading: true,
+            first: 0,
+            rows: 10,
+            totalRecords: 0
         };
         this.carservice = new CarService();
-        this.onLazyLoad = this.onLazyLoad.bind(this);
+        this.onPage = this.onPage.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsLarge().then(data => {
             this.datasource = data;
-            this.setState({totalRecords: data.length});
+            this.setState({
+                totalRecords: data.length,
+                cars: this.datasource.slice(0, this.state.rows),
+                loading: false
+            });
         });
     }
 
-    onLazyLoad(event) {
-        /* In a real application, make a remote request to load data using state metadata from event
-         * event.first = First row offset
-         * event.rows = Number of rows per page
-         * event.sortField = Field name to sort with
-         * event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-         * event.multiSortMeta = Sort information when sort mode is multiple, a multiSortMeta object is in {field: string, order: number} format
-         * filters: FilterMetadata object having field as key and {value: filterValue, matchMode: filterMatchMode} as the value such as filterMeta['id']= {value: 'prime', matchMode: 'equals'} */
-        
-        //imitate db connection over a network
+    onPage(event) {
+        this.setState({
+            loading: true
+        });
+
+        //imitate delay of a backend call
         setTimeout(() => {
-            if(this.datasource) {
-                this.setState({cars: this.datasource.slice(event.first, (event.first + event.rows))});
-            }
+            const startIndex = event.first;
+            const endIndex = event.first + this.state.rows;
+    
+            this.setState({
+                first: startIndex,
+                cars: this.datasource.slice(startIndex, endIndex),
+                loading: false
+            });
         }, 250);
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} totalRecords={this.state.totalRecords}
-                lazy={true} onLazyLoad={this.onLazyLoad}>
+            <DataTable value={this.state.cars} paginator={true} rows={this.state.rows} totalRecords={this.state.totalRecords}
+                lazy={true} first={this.state.first} onPage={this.onPage} loading={this.state.loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
                 <Column field="color" header="Color" />
             </DataTable>
-        );
     }
 }
 
@@ -1918,17 +1964,11 @@ export class DataTableLazyDemo extends Component {
                             <td>Callback to invoke on filtering.</td>
                         </tr>
                         <tr>
-                            <td>onLazyLoad</td>
+                            <td>onVirtualScroll</td>
                             <td>event.first = First row offset.  <br/>
-                                event.rows = Number of rows per page. <br/>
-                                event.sortField = Field name to sort with. <br/>
-                                event.sortOrder = Sort order as number, 1 for asc and -1 for desc.<br />
-                                event.multiSortMeta = MultiSort metadata. <br/>
-                                event.filters = Array of FilterMetadata objects. <br/>
-                                event.globalFilter = Global filter value. <br/>
-                                <br/>
+                                event.rows = Number of rows per page.
                             </td>
-                            <td>Callback to invoke when paging, sorting or filtering happens in lazy mode.</td>
+                            <td>Callback to invoke to load data on virtual scroll.</td>
                         </tr>
                         <tr>
                             <td>onRowClick</td>

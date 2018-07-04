@@ -71,9 +71,9 @@ interface DataTableProps {
     loadingIcon?:string;
     onColumnResizeEnd?(e: {element: any, delta: number}): void;
     onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
-    onPage?(event: Event): void;
+    onPage?(e: {first: number, rows: number}): void;
     onFilter?(filters: Array<any>): void;
-    onLazyLoad?(event: DataTableLazyLoadEvent): void;
+    onVirtualScroll?(e: {first: number, rows: number}): void;
     onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowDoubleClick?(e: Event): void;
     onRowSelect?(e: {originalEvent: Event, data: any, index: number}): void;
