@@ -122,6 +122,12 @@ customTemplate(item) {
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
+                            <td>name</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the input field.</td>
+                        </tr>
+                        <tr>
                             <td>placeholder</td>
                             <td>string</td>
                             <td>null</td>

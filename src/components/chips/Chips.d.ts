@@ -2,6 +2,7 @@ import React = require("react");
 
 interface ChipsProps {
     id?: string;
+    name?: string;
     placeholder?: string;
     value?: Array<any>;
     field?: string;
