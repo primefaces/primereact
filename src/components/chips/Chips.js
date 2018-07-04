@@ -9,6 +9,7 @@ export class Chips extends Component {
 
     static defaultProps = {
         id: null,
+        name: null,
         placeholder: null,
         value: [],
         field: null,
@@ -23,6 +24,7 @@ export class Chips extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        name: PropTypes.string,
         placeholder: PropTypes.string,
         value: PropTypes.array,
         field: PropTypes.string,
@@ -138,7 +140,7 @@ export class Chips extends Component {
         }
 
         var inputToken = <li className="ui-chips-input-token">
-                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" disabled={this.props.disabled||this.maxedOut()}
+                            <InputText ref={(el) => this.inputEL = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.maxedOut()}
                                         onKeyDown={(event) => this.onKeydown(event)} onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}/>
                         </li>;
 
