@@ -83,6 +83,7 @@ export class BodyRow extends Component {
                 rowElement: this.container
             });
         }
+        event.preventDefault();
     }
 
     render() {
