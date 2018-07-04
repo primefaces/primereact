@@ -383,9 +383,9 @@ class App extends Component {
                     <a className="menu-button" onClick={this.openMenu}>
                         <i className="fa fa-bars"></i>
                     </a>
-                    <a className="logo">
+                    <Link to="/" className="logo">
                         <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
-                    </a>
+                    </Link>
 
                     <ul className="topbar-menu">
                         <li>
