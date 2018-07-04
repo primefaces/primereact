@@ -279,8 +279,8 @@ export class InputMask extends Component {
 
                     if (/android/i.test(DomHandler.getUserAgent())) {
                         //Path for CSP Violation on FireFox OS 1.1
-                        let proxy = function () {
-                            this.caret.bind(this, next)();
+                        let proxy = () => {
+                            this.caret(next);
                         };
 
                         setTimeout(proxy, 0);
