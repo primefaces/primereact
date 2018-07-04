@@ -22,7 +22,7 @@ export class SupportPage extends Component {
                                 <a className="home-button2" href="mailto:PrimeReact@primetek.com.tr">GET A QUOTE</a>
                             </div>
                             <div className="ui-g-12 ui-md-6">
-                                <img alt="PRO" src="showcase/resources/images/home/icon-pro.svg"></img>
+                                <img alt="PRO" src="showcase/resources/images/home/icon-pro-white.svg"></img>
                             </div>
                         </div>
                     </div>
