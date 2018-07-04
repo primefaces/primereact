@@ -85,6 +85,7 @@ import { PasswordDemo } from './showcase/password/PasswordDemo';
 import { HomeComponent } from './showcase/home/HomeComponent';
 import { IconsPage } from './showcase/icons/IconsPage';
 import { SetupPage } from './showcase/setup/SetupPage';
+import { SupportPage } from './showcase/support/SupportPage';
 import { RatingDemo } from './showcase/rating/RatingDemo';
 import { ToolbarDemo } from './showcase/toolbar/ToolbarDemo';
 import { LightboxDemo } from './showcase/lightbox/LightboxDemo';
@@ -425,7 +426,7 @@ class App extends Component {
                         </li>
 
                         <li>
-                            <a href="http://forum.primefaces.org/viewforum.php?f=57">SUPPORT</a>
+                            <Link to="/support">SUPPORT</Link>
                         </li>
                     </ul>
                 </div>
@@ -440,6 +441,7 @@ class App extends Component {
                 <div id="layout-content">
                     <Route exact path="/" component={HomeComponent} />
                     <Route path="/icons" component={IconsPage} />
+                    <Route path="/support" component={SupportPage} />
                     <Route path="/accordion" component={AccordionDemo} />
                     <Route path="/autocomplete" component={AutoCompleteDemo} />
                     <Route path="/button" component={ButtonDemo} />

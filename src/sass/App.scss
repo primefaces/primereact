@@ -538,6 +538,23 @@ body {
                 }
             }
         }
+
+        &.support {
+            .support-image {
+                background-color: #f5f7f8;
+                padding: 30px;
+                color: #222222;
+                text-align: left;
+
+                .ui-md-6:last-child {
+                    text-align: right;
+                }
+            }
+                    
+            li {
+                line-height: 1.5;
+            }
+        }
         
         .doc-table {
             border-collapse: collapse;
@@ -618,6 +635,37 @@ body {
     display: block;
 }
 
+.home-button {
+    width: 112px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    background-color: #03C4E8;
+    padding: 10px 24px 9px 24px;
+    border-radius: 3px;
+    transition: background-color .3s;
+
+    &:hover {
+        background-color: #029cb9;
+    }
+}
+
+.home-button2 {
+    width: 112px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    background-color: #E8037D;
+    padding: 10px 24px 9px 24px;
+    border-radius: 3px;
+    transition: background-color .3s;
+    display: inline-block;
+
+    &:hover {
+        background-color: #b90264;
+    }
+}
+
 /* Home Component*/
 .home {
     p {
@@ -646,20 +694,7 @@ body {
             font-size: 24px;
         }
 
-        .home-button {
-            width: 112px;
-            font-weight: bold;
-            text-align: center;
-            color: #ffffff;
-            background-color: #03C4E8;
-            padding: 10px 24px 9px 24px;
-            border-radius: 3px;
-            transition: background-color .3s;
 
-            &:hover {
-                background-color: #029cb9;
-            }
-        }
 
         > div {
             padding: 100px 100px 0 100px;
@@ -794,22 +829,6 @@ body {
 
         .ui-md-6:last-child {
             text-align: center;
-        }
-
-        .home-button2 {
-            width: 112px;
-            font-weight: bold;
-            text-align: center;
-            color: #ffffff;
-            background-color: #E8037D;
-            padding: 10px 24px 9px 24px;
-            border-radius: 3px;
-            transition: background-color .3s;
-            display: inline-block;
-
-            &:hover {
-                background-color: #b90264;
-            }
         }
     }
 }
