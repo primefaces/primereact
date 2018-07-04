@@ -1055,6 +1055,16 @@ pre[class*="language-"] {
 
     code {
         font-size: 14px;
+
+        .token {
+            &.tag {
+                color: #a846a8 !important;
+            }
+
+            &.attr-value {
+                color: #308eea !important;
+            }
+        }
     }
 }
 

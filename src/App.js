@@ -8,6 +8,7 @@ import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'font-awesome/css/font-awesome.css';
 import 'primeicons/primeicons.css';
+import 'prismjs/themes/prism-coy.css';
 import './sass/App.css';
 
 import { AccordionDemo } from './showcase/accordion/AccordionDemo';

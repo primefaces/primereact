@@ -5,7 +5,6 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-javascript';
-import 'prismjs/themes/prism-coy.css';
 
 export class CodeHighlight extends Component {
     
