@@ -12,7 +12,7 @@ interface ColorPickerProps {
     disabled?: boolean;
     tabindex?: string;
     inputId?: string;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onChange?(value: any): void;
 }
 
 export class ColorPicker extends React.Component<ColorPickerProps,any> {}

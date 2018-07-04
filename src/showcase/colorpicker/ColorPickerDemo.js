@@ -59,11 +59,11 @@ import {ColorPicker} from 'primereact/colorpicker';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>ColorPicker is used with onChange properties.</p>
+                        <p>ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
                         
 <CodeHighlight className="language-jsx">
 {`
-<ColorPicker onChange={(e) => this.setState({value: e.value})}/>
+<ColorPicker value={this.state.color} onChange={(e) => this.setState({color: e.value})} />
 
 `}
 </CodeHighlight>
@@ -73,11 +73,11 @@ import {ColorPicker} from 'primereact/colorpicker';
                         
 <CodeHighlight className="language-jsx">
 {`
-<ColorPicker onChange={(e) => this.setState({value: e.value})}/>
+<ColorPicker value={this.state.color1} onChange={(e) => this.setState({color1: e.value})} />
 
-<ColorPicker format="rgb" onChange={(e) => this.setState({value: e.value})}/>
+<ColorPicker format="rgb" value={this.state.color2} onChange={(e) => this.setState({color2: e.value})} />
 
-<ColorPicker format="hsb" onChange={(e) => this.setState({value: e.value})}/>
+<ColorPicker format="hsb" value={this.state.color3} onChange={(e) => this.setState({color3: e.value})}/>
 
 `}
 </CodeHighlight>
@@ -178,7 +178,7 @@ import {ColorPicker} from 'primereact/colorpicker';
                                 <tbody>
                                     <tr>
                                         <td>onChange</td>
-                                        <td>event.value: Selected color</td>
+                                        <td>value: Selected color value whose type depends on the format.</td>
                                         <td>Callback to invoke when a color is selected.</td>
                                     </tr>
                                 </tbody>
