@@ -476,7 +476,9 @@ body {
 
             i {
                 background-color: #fcf2a7;
+                font-family: monaco, Consolas, Lucida Console, monospace;
                 font-style: normal;
+                font-size: 14px;
                 padding: 2px;
             }
 
@@ -541,9 +543,9 @@ body {
 
         &.support {
             .support-image {
-                background-color: #f5f7f8;
+                background-color: #906C90;
                 padding: 30px;
-                color: #222222;
+                color: #ffffff;
                 text-align: left;
 
                 .ui-md-6:last-child {
@@ -654,15 +656,15 @@ body {
     width: 112px;
     font-weight: bold;
     text-align: center;
-    color: #ffffff;
-    background-color: #E8037D;
+    color: #8C6816;
+    background-color: #FFCB54;
     padding: 10px 24px 9px 24px;
     border-radius: 3px;
     transition: background-color .3s;
     display: inline-block;
 
     &:hover {
-        background-color: #b90264;
+        background-color: #E5AF36;
     }
 }
 
