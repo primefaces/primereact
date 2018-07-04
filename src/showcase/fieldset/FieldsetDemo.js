@@ -185,6 +185,11 @@ import {Fieldset} from 'primereact/fieldset';
                             </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
                         </tr>
+                        <tr>
+                            <td>onClick</td>
+                            <td>event browser event  </td>
+                            <td>Callback to invoke when fieldset is clicked.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

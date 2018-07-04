@@ -15,7 +15,8 @@ export class Fieldset extends Component {
         collapsed: null,
         onExpand: null,
         onCollapse: null,
-        onToggle: null
+        onToggle: null,
+        onClick: null
     };
 
     static propTypes = {
@@ -27,7 +28,8 @@ export class Fieldset extends Component {
         collapsed: PropTypes.bool,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
-        onToggle: PropTypes.func
+        onToggle: PropTypes.func,
+        onClick: PropTypes.func
     };
     
     constructor(props) {
@@ -162,7 +164,7 @@ export class Fieldset extends Component {
         const content = this.renderContent(collapsed);
 
         return (
-            <fieldset id={this.props.id} className={className} style={this.props.style}>
+            <fieldset id={this.props.id} className={className} style={this.props.style} onClick={this.props.onClick}>
                 {legend}
                 {content}
             </fieldset>
