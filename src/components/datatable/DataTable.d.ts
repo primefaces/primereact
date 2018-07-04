@@ -75,7 +75,7 @@ interface DataTableProps {
     onFilter?(filters: Array<any>): void;
     onVirtualScroll?(e: {first: number, rows: number}): void;
     onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowDoubleClick?(e: Event): void;
+    onRowDoubleClick?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowSelect?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowUnselect?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowExpand?(e: {originalEvent: Event, data: any}): void;
