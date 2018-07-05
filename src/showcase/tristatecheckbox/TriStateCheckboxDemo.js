@@ -8,12 +8,9 @@ export class TriStateCheckboxDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: null};
-        this.onStateChange = this.onStateChange.bind(this);
-    }
-
-    onStateChange(e) {
-        this.setState({value: e.value});
+        this.state = {
+            value: null
+        };
     }
 
     render() {
@@ -27,8 +24,8 @@ export class TriStateCheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Value: {this.state.value + ''} </h3>
-                    <TriStateCheckbox onChange={this.onStateChange} value={this.state.value}></TriStateCheckbox>
+                    <h3 className="first">Value: {this.state.value + ''}</h3>
+                    <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
                 </div>
 
                 <TriStateCheckboxDoc></TriStateCheckboxDoc>
@@ -57,25 +54,10 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>TriStateCheckbox is used as a controlled input with checked and onChange properties.</p>
+                        <p>TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 <CodeHighlight className="language-jsx">
 {`
-<TriStateCheckbox onChange={this.onStateChange} value={this.state.value}></TriStateCheckbox>
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-javascript">
-{`
- constructor(props) {
-    super(props);
-    this.state = {value: null};
-    this.onStateChange = this.onStateChange.bind(this);
-}
-
-onStateChange(e) {
-    this.setState({value: e.value});
-}
+<TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
 `}
 </CodeHighlight>
@@ -145,7 +127,7 @@ onStateChange(e) {
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Original browser event <br />
+                                    <td>event.originalEvent: Browser event <br />
                                         event.value: Current Value 
                                     </td>
                                     <td>Callback to invoke on value change</td>
@@ -195,22 +177,22 @@ onStateChange(e) {
                     </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {TriStateCheckbox} from 'primereact/tristatecheckbox';
+
 export class TriStateCheckboxDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: null};
-        this.onStateChange = this.onStateChange.bind(this);
-    }
-
-    onStateChange(e) {
-        this.setState({value: e.value});
+        this.state = {
+            value: null
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TriStateCheckbox</h1>
                         <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
@@ -218,10 +200,9 @@ export class TriStateCheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Value: {this.state.value + ''} </h3>
-                    <TriStateCheckbox onChange={this.onStateChange} value={this.state.value}></TriStateCheckbox>
+                    <h3 className="first">Value: {this.state.value + ''}</h3>
+                    <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
                 </div>
-                <TriStateCheckboxDoc></TriStateCheckboxDoc>
             </div>
         );
     }
