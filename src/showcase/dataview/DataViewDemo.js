@@ -156,7 +156,7 @@ export class DataViewDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataView</h1>
-                        <p>DataView displays data in grid or list layout with pagination, sorting and filtering features.</p>
+                        <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
                     </div>
                 </div>
 
@@ -217,14 +217,14 @@ componentDidMount() {
 }
 
 itemTemplate(car, layout) {
-    if(layout === 'list') {
+    if (layout === 'list') {
         return (
             <div className="ui-g">
                 <div>{car.brand}</div>
             </div>
         );
     }
-    if(layout === 'grid') {
+    if (layout === 'grid') {
         return (
             <div className="ui-g-12 ui-md-3">
                 <div>{car.brand}</div>
@@ -341,7 +341,7 @@ itemTemplate(car, layout) {
                         <p><i>sortField</i> and <i>sortOrder</i> properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element.
                             Here is an example that uses a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-javascript">
                         {`
 const sortOptions = [
     {label: 'Newest First', value: '!year'},
@@ -426,12 +426,6 @@ onSortChange(event) {
                                         <td>Layout of the items, valid values are "list" and "grid".</td>
                                     </tr>
                                     <tr>
-                                        <td>layout</td>
-                                        <td>string</td>
-                                        <td>list</td>
-                                        <td>Layout of the items, valid values are "list" and "grid".</td>
-                                    </tr>
-                                    <tr>
                                         <td>paginator</td>
                                         <td>boolean</td>
                                         <td>false</td>
@@ -480,6 +474,18 @@ onSortChange(event) {
                                         <td>Text to display when there is no data.</td>
                                     </tr>
                                     <tr>
+                                        <td>sortField</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the field to sort data by default.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortOrder</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Order to sort the data by default.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>object</td>
                                         <td>null</td>
@@ -496,18 +502,6 @@ onSortChange(event) {
                                         <td>function</td>
                                         <td>null</td>
                                         <td>Function that gets the option along with the layout mdoe and returns the content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sortField</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Name of the field to sort data by default.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sortOrder</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Order to sort the data by default.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -526,9 +520,9 @@ onSortChange(event) {
                                 <tbody>
                                     <tr>
                                         <td>onPage</td>
-                                        <td>event.originalEvent: browser event <br />
-                                            event.first: index of the first records on page. <br />
-                                            event.rows: number of records to display per page. <br /></td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.first: Index of the first records on page. <br />
+                                            event.rows: Number of records to display per page.></td>
                                         <td>Callback to invoke on pagination.</td>
                                     </tr>
                                 </tbody>
@@ -586,13 +580,13 @@ onSortChange(event) {
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
-import React, { Component } from 'react';
-import { Dialog } from 'primereact/dialog';
-import { Panel } from 'primereact/panel';
-import { CarService } from '../service/CarService';
-import { DataView, DataViewLayoutOptions } from "primereact/dataview";
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
+import React, {Component} from 'react';
+import {Dialog} from 'primereact/dialog';
+import {Panel} from 'primereact/panel';
+import {CarService} from '../service/CarService';
+import {DataView, DataViewLayoutOptions} from "primereact/dataview";
+import {Button} from "primereact/button";
+import {Dropdown} from "primereact/dropdown";
 
 export class DataViewDemo extends Component {
 
