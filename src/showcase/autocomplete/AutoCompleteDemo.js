@@ -125,8 +125,9 @@ import {AutoComplete} from 'primereact/autocomplete';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>AutoComplete requires a list of suggestions and a completeMethod to query for the results
-                        in addition to the regular value and onChange properties of value binding.</p>
+                        <p>AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component
+                            requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.</p>
+                        
                         <CodeHighlight className="language-jsx">
                             {`
 <AutoComplete value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
@@ -164,7 +165,7 @@ render() {
                         </CodeHighlight>
                         
                         <h3>Dropdown</h3>
-                        <p>Enabling dropdown property displays a button next to the input field where click behavior of the button is defined using 
+                        <p>Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using 
                             dropdownMode property that takes "blank" or "current" as possible values. 
                             "blank" is the default mode to send a query with an empty string whereas 
                             "current" setting sends a query with the current value of the input.</p>
@@ -178,7 +179,7 @@ render() {
                         </CodeHighlight>
                         
                         <h3>Multiple Mode</h3>
-                        <p>Multiple mode is used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
+                        <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
                         <CodeHighlight className="language-jsx">
 {`
 <AutoComplete multiple={true} value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
@@ -188,9 +189,10 @@ render() {
                         </CodeHighlight>
                         
                         <h3>Objects</h3>
-                        <p>AutoComplete can also work with objects using the field property that defines the label to display 
+                        <p>AutoComplete can also work with objects using the  <i>field</i> property that defines the label to display 
                         as a suggestion. The value passed to the model would still be the object instance of a suggestion. 
                         Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
+
                         <CodeHighlight className="language-jsx">
 {`
 <AutoComplete field="name" value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
@@ -200,8 +202,8 @@ render() {
                         </CodeHighlight>
                         
                         <h3>Templating</h3>
-                        <p>Custom content can be displayed using itemTemplate property that references a function which gets
-                        the suggestion option and returns an element. Similarly selectedItemTemplate property is available
+                        <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function which gets
+                        the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
                         to customize the chips in multiple mode using the same approach.</p>
                         
                         <CodeHighlight className="language-jsx">
@@ -546,7 +548,7 @@ export class AutoCompleteDemo extends Component {
 
     componentDidMount() {
         this.countriesData = this.countryservice.getCountries(this);
-        this.brands = ["Audi", "BMW", "Fiat", "Ford", "Honda", "Jaguar", "Mercedes", "Renault", "Volvo"];
+        this.brands = ['Audi', 'BMW', 'Fiat', 'Ford', 'Honda', 'Jaguar', 'Mercedes', 'Renault', 'Volvo'];
     }
 
     filterCountrySingle(event) {
@@ -587,9 +589,9 @@ export class AutoCompleteDemo extends Component {
 
     itemTemplate(brand) {
         return (
-            <div className="ui-helper-clearfix" style={{ borderBottom: "1px solid #D5D5D5" }}>
-                <img alt={brand} src={"showcase/resources/demo/images/car/\${brand}.png"} style={{width: "32px", display: "inline-block"}} />
-                <div style={{ fontSize: "18px", float: "right", margin: "10px 10px 0 0" }}>{brand}</div>
+            <div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
+                <img alt={brand} src={'showcase/resources/demo/images/car/\${brand}.png'} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
+                <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
             </div>
         );
     }
@@ -597,25 +599,35 @@ export class AutoCompleteDemo extends Component {
     render() {
         return (
             <div>
-                <h3>Basic</h3>
-                <AutoComplete value={this.state.country} suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle} field="name"
-                    size={30} placeholder="Countries" minLength={1} onChange={(e) => this.setState({country: e.value})} />
-                <span style={{ marginLeft: "10px" }}>Country: {this.state.country ? this.state.country.name || this.state.country : "none"}</span>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>AutoComplete</h1>
+                        <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
+                    </div>
+                </div>
 
-                <h3>Advanced</h3>
-                <AutoComplete value={this.state.brand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands} size={30} minLength={1}
-                    placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={this.itemTemplate.bind(this)} onChange={(e) => this.setState({brand: e.value})} />
-                <span style={{ marginLeft: "50px" }}>Brand: {this.state.brand || "none"}</span>
+                <div className="content-section implementation">
+                    <h3>Basic</h3>
+                    <AutoComplete value={this.state.country} suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle} field="name"
+                        size={30} placeholder="Countries" minLength={1} onChange={(e) => this.setState({country: e.value})} />
+                    <span style={{ marginLeft: '10px' }}>Country: {this.state.country ? this.state.country.name || this.state.country : 'none'}</span>
 
-                <h3>Multiple</h3>
-                <span className="ui-fluid">
-                    <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple}
-                        minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => this.setState({countries: e.value})} />
-                </span>
+                    <h3>Advanced</h3>
+                    <AutoComplete value={this.state.brand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands} size={30} minLength={1}
+                        placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={this.itemTemplate.bind(this)} onChange={(e) => this.setState({brand: e.value})} />
+                    <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
+
+                    <h3>Multiple</h3>
+                    <span className="ui-fluid">
+                        <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple}
+                            minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => this.setState({countries: e.value})} />
+                    </span>
+                </div>
             </div>
         )
     }
 }
+
 `}
                         </CodeHighlight>
                     </TabPanel>

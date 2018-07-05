@@ -7,6 +7,7 @@ interface AutoCompleteProps {
     field?: string;
     scrollHeight?: string;
     dropdown?: boolean;
+    dropdownMode?: string;
     multiple?: boolean;
     minLength?: number;
     delay?: number;
@@ -21,21 +22,22 @@ interface AutoCompleteProps {
     size?: number;
     appendTo?: any;
     tabindex?: number;
-    completeMethod?(e: {originalEvent: Event, query: any}): void;
+    completeMethod?(e: {originalEvent: Event, query: string}): void;
     itemTemplate?(data: any): JSX.Element | undefined;
-    selectedItemTemplate?(item: any): JSX.Element | undefined;
+    selectedItemTemplate?(data: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
     onSelect?(e: {originalEvent: Event, value: any}): void;
     onUnselect?(e: {originalEvent: Event, value: any}): void;
-    onDropdownClick?(e: {originalEvent: Event, query: any}): void;
+    onDropdownClick?(e: {originalEvent: Event, query: string}): void;
     onClick?(event:Event): void;
-    onDblClick?(): void;
-    onMouseDown?(): void;
-    onKeyUp?(): void;
-    onKeyPress?(): void;
-    onContextMenu?(): void;
+    onDblClick?(event:Event): void;
+    onMouseDown?(event:Event): void;
+    onKeyUp?(event:Event): void;
+    onKeyPress?(event:Event): void;
+    onContextMenu?(event:Event): void;
+    onClear?(event:Event): void;
 }
 
 export class AutoComplete extends React.Component<AutoCompleteProps,any> {}
