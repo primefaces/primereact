@@ -8,7 +8,7 @@ interface EditorProps {
     placeholder?: string,
     readonly?: boolean,
     formats?: Array<any>,
-    headerTemplate?: any,
+    headerTemplate?: JSX.Element | undefined,
     onTextChange?({htmlValue: HTMLElement, textValue: string, delta: any, source: string}): void,
     onSelectionChange?({range: any, oldRange: any, source: string}): void;
 }

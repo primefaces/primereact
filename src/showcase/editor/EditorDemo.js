@@ -10,17 +10,23 @@ export class EditorDemo extends Component {
     constructor() {
         super();
         this.state = {
-            text1 :'<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
+            text1 : '<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
             text2 : ''
         };
     }
 
+    renderHeader() {
+        return (
+            <span className="ql-formats">
+                <button className="ql-bold" aria-label="Bold"></button>
+                <button className="ql-italic" aria-label="Italic"></button>
+                <button className="ql-underline" aria-label="Underline"></button>
+            </span>
+        );
+    }
+
     render() {
-        let header = <span className="ql-formats">
-                        <button className="ql-bold" aria-label="Bold"></button>
-                        <button className="ql-italic" aria-label="Italic"></button>
-                        <button className="ql-underline" aria-label="Underline"></button>
-                     </span>;
+        const header = this.renderHeader();
 
         return (
             <div>
@@ -72,27 +78,29 @@ import {Editor} from 'primereact/editor';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p></p>
+                        <p>Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.</p>
+
                         <CodeHighlight className="language-jsx">
                             {`
-<Editor style={{height:'320px'}} value={this.state.text1}/>
+<Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} />
 
 `}
                         </CodeHighlight>
 
                         <h3>Toolbar</h3>
-                        <p>Editor provides a default toolbar with common options, to customize it define your elements inside the header element. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
+                        <p>Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
-var header =
+const header = (
     <span className="ql-formats">
         <button className="ql-bold" aria-label="Bold"></button>
         <button className="ql-italic" aria-label="Italic"></button>
         <button className="ql-underline" aria-label="Underline"></button>
-    </span>;
-
-<Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
+    </span>
+);
+    
+<Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} headerTemplate={header}/>
 
 `}
                         </CodeHighlight>
@@ -101,63 +109,62 @@ var header =
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>value</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Value of the content.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the container.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the container.</td>
-                                </tr>
-                                <tr>
-                                    <td>placeholder</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Placeholder text to show when editor is empty.</td>
-                                </tr>
-                                <tr>
-                                    <td>readonly</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>Whether to instantiate the editor to read-only mode.</td>
-                                </tr>
-                                <tr>
-                                    <td>formats</td>
-                                    <td>string[]</td>
-                                    <td>null</td>
-                                    <td>Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.</td>
-                                </tr>
-                                <tr>
-                                    <td>headerTemplate</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Style and modules of the toolbar.</td>
-                                </tr>
-
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>value</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Value of the content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the container.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the container.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>placeholder</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Placeholder text to show when editor is empty.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>readonly</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether to instantiate the editor to read-only mode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>formats</td>
+                                        <td>string[]</td>
+                                        <td>null</td>
+                                        <td>Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>headerTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Style and modules of the toolbar.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -241,26 +248,31 @@ npm install quill --save
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {Editor} from 'primereact/editor";
-import {Button} from 'primereact/button";
-                                
+import {Editor} from "primereact/editor";
+import {Button} from "primereact/button";
+
 export class EditorDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            text1 :'<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
+            text1 : '<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
             text2 : ''
         };
     }
 
-    render() {
-        var header =
+    renderHeader() {
+        return (
             <span className="ql-formats">
                 <button className="ql-bold" aria-label="Bold"></button>
                 <button className="ql-italic" aria-label="Italic"></button>
                 <button className="ql-underline" aria-label="Underline"></button>
-            </span>;
+            </span>
+        );
+    }
+
+    render() {
+        const header = this.renderHeader();
 
         return (
             <div>
@@ -275,16 +287,15 @@ export class EditorDemo extends Component {
                     <h3 className="first">Default</h3>
                     <Editor style={{height:'320px'}} value={this.state.text1} onTextChange={(e)=>this.setState({text1:e.htmlValue})}/>
                     <p>Value: {this.state.text1 ||'empty'}</p>
-                    <Button label="Clear" icon="pi pi-times" onClick={ ()=> this.setState({text1:''})}/>
+                    <Button label="Clear" icon="pi pi-times" onClick={()=> this.setState({text1:''})}/>
 
                     <hr/>
 
                     <h3 className="first">Custom Toolbar</h3>
                     <Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
                     <p>Value: {this.state.text2 ||'empty'}</p>
-                    <Button label="Clear" icon="pi pi-times" onClick={ ()=> this.setState({text2:''})}/>
+                    <Button label="Clear" icon="pi pi-times" onClick={() => this.setState({text2:''})}/>
                 </div>
-
             </div>
         );
     }
