@@ -1054,17 +1054,26 @@ pre[class*="language-"] {
     border-left: 10px solid #b2e0e8 !important;
     box-shadow: -1px 0px 0px 0px #b2e0e8, 0px 0px 0px 1px #dfdfdf !important;
     webkit-box-shadow: -1px 0px 0px 0px #b2e0e8, 0px 0px 0px 1px #dfdfdf !important;
+    background: #ffffff !important;
 
     code {
         font-size: 14px;
 
         .token {
             &.tag {
-                color: #a846a8 !important;
+                color: #d57935;
             }
 
             &.attr-value {
-                color: #308eea !important;
+                color: #308eea;
+            }
+
+            &.language-javascript {
+                color: #1990b8;
+            }
+
+            &.operator {
+                background: transparent;
             }
         }
     }
