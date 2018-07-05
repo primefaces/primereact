@@ -225,7 +225,7 @@ carTemplate(option) {
                             <td>dataKey</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>A property to uniquely identify a value in options.</td>
+                            <td>A property to uniquely match the value in options for better performance.</td>
                         </tr>
                         <tr>
                             <td>itemTemplate</td>
