@@ -1,11 +1,5 @@
 import React = require("react");
 
-interface SplitButtonItemProps {
-    menuitem?: any;
-}
-
-export class SplitButtonItem extends React.Component<SplitButtonItemProps,any> {}
-
 interface SplitButtonProps {
     id?: string;
     label?: string;
@@ -14,10 +8,11 @@ interface SplitButtonProps {
     disabled?: boolean;
     style?: object;
     className?: string;
-    menustyle?: object;
+    menuStyle?: object;
     menuClassName?: string;
     tabIndex?: string;
-    onClick?(): void;
+    appendTo?: HTMLElement;
+    onClick?(event: Event): void;
 }
 
 export class SplitButton extends React.Component<SplitButtonProps,any> {}
