@@ -9,7 +9,7 @@ export class InputText extends Component {
         onInput: null,
         onKeyPress: null,
         keyfilter: null,
-        validateOnly: false,
+        validateOnly: false
     };
 
     static propTypes = {
