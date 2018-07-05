@@ -4,6 +4,7 @@ interface SelectButtonProps {
     id?: string;
     value?: any;
     options?: Array<any>;
+    optionLabel?: string;
     tabIndex?: string;
     multiple?: boolean;
     disabled?: boolean;
