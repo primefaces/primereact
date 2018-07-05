@@ -7,17 +7,9 @@ export class InputSwitchDemo extends Component {
 
     constructor() {
         super();
-        this.state = {checked2:true};
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeCustom = this.onChangeCustom.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({checked1:e.value});
-    }
-
-    onChangeCustom(e) {
-        this.setState({checked2:e.value});
+        this.state = {
+            checked2:true
+        };
     }
 
     render() {
@@ -32,11 +24,11 @@ export class InputSwitchDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <InputSwitch checked={this.state.checked1} onChange={this.onChangeBasic}/>
+                    <InputSwitch checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Labels</h3>
-                    <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={this.onChangeCustom}/>
+                    <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>
 
@@ -66,35 +58,20 @@ import {InputSwitch} from 'primereact/inputswitch';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>InputSwitch is used as a controlled input with checked and onChange properties.</p>
+            <p>InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
                     
 <CodeHighlight className="language-jsx">
 {`
-<InputSwitch checked={this.state.checked1} onChange={this.onChangeBasic}/>
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-javascript">
-{`
-constructor() {
-    super();
-    this.state = {checked2:true};
-    this.onChangeBasic = this.onChangeBasic.bind(this);
-}
-
-onChangeBasic(e) {
-    this.setState({checked1:e.value});
-}
+<InputSwitch checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
 `}
 </CodeHighlight>
 
             <h3>Customization</h3>
-            <p>Labels can be customized using onLabel and offLabel properties.</p>
+            <p>Labels can be customized with <i>onLabel</i> and <i>offLabel</i> properties.</p>
 <CodeHighlight className="language-jsx">
 {`
-<InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={this.onChangeCustom}/>
+<InputSwitch onLabel="Yes" offLabel="No" checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
 `}
 </CodeHighlight>
@@ -170,9 +147,9 @@ onChangeBasic(e) {
                     <tbody>
                         <tr>
                             <td>onChange</td>
-                            <td>event.originalEvent: browser event <br />
-                                event.value: checked state as a boolean.</td>
-                            <td>Callback to invoke on state change.</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.value: Checked state as a boolean.</td>
+                            <td>Callback to invoke on value change.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -189,27 +166,22 @@ onChangeBasic(e) {
             </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {InputSwitch} from 'primereact/inputswitch';
+
 export class InputSwitchDemo extends Component {
 
     constructor() {
         super();
-        this.state = {checked2:true};
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeCustom = this.onChangeCustom.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({checked1:e.value});
-    }
-
-    onChangeCustom(e) {
-        this.setState({checked2:e.value});
+        this.state = {
+            checked2:true
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>InputSwitch</h1>
                         <p>InputSwitch is used to select a boolean value.</p>
@@ -218,15 +190,13 @@ export class InputSwitchDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <InputSwitch checked={this.state.checked1} onChange={this.onChangeBasic}/>
+                    <InputSwitch checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Labels</h3>
-                    <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={this.onChangeCustom}/>
+                    <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>
-
-                <InputSwitchDoc></InputSwitchDoc>
             </div>
         );
     }
