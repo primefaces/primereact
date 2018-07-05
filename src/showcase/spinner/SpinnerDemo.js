@@ -222,11 +222,11 @@ import {Spinner} from 'primereact/spinner';
                         </tr>
                         <tr>
                             <td>ui-spinner-up</td>
-                            <td>Up element</td>
+                            <td>Up icon.</td>
                         </tr>
                         <tr>
                             <td>ui-spinner-down</td>
-                            <td>Down element</td>
+                            <td>Down icon.</td>
                         </tr>
                         <tr>
                             <td>ui-spinner-input</td>
