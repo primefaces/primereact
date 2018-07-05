@@ -14,7 +14,7 @@ interface SpinnerProps {
     thousandSeparator?: string,
     style?: string,
     className?: string,
-    onChange?(e: {value: number}): void
+    onChange?(e: {value: number}): void;
 }
 
 export class Spinner extends React.Component<SpinnerProps,any> {}

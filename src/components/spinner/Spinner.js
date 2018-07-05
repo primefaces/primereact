@@ -19,7 +19,8 @@ export class Spinner extends Component {
         decimalSeparator: '.',
         thousandSeparator: ',',
         style: null,
-        className: null
+        className: null,
+        onChange: null
     }
 
     static propsTypes = {
@@ -35,7 +36,8 @@ export class Spinner extends Component {
         decimalSeparator: PropTypes.string,
         thousandSeparator: PropTypes.string,
         style: PropTypes.object,
-        className: PropTypes.string
+        className: PropTypes.string,
+        onChange: PropTypes.func
     }
 
     constructor(props) {

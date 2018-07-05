@@ -8,23 +8,11 @@ export class SpinnerDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeMinMax = this.onChangeMinMax.bind(this);
-        this.onChangeStep = this.onChangeStep.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({ value: e.value });
-    }
-
-    onChangeMinMax(e) {
-        this.setState({ value2: e.value });
-    }
-
-    onChangeStep(e) {
-        this.setState({ value3: e.value });
+        this.state = {
+            value1: null,
+            value2: null,
+            value3: null
+        };
     }
 
     render() {
@@ -38,14 +26,14 @@ export class SpinnerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic: {this.state.value}</h3>
-                    <Spinner value={this.state.value} size={30} onChange={this.onChangeBasic} />
+                    <h3>Basic: {this.state.value1}</h3>
+                    <Spinner value={this.state.value} size={30} onChange={(e) => this.setState({value1: e.value})} />
 
                     <h3>Min/Max: {this.state.value2}</h3>
-                    <Spinner value={this.state.value2} size={30} onChange={this.onChangeMinMax} min={0} max={100} />
+                    <Spinner value={this.state.value2} size={30} onChange={(e) => this.setState({value2: e.value})} min={0} max={100} />
 
                     <h3>Step: {this.state.value3}</h3>
-                    <Spinner value={this.state.value3} size={30} onChange={this.onChangeStep} step={0.25} />
+                    <Spinner value={this.state.value3} size={30} onChange={(e) => this.setState({value3: e.value})} step={0.25} />
 
                     <h3>Disabled</h3>
                     <Spinner value={this.state.value4} size={30} disabled={true} />
@@ -76,45 +64,29 @@ import {Spinner} from 'primereact/spinner';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Slider is used as a controlled input with dragging of a handle.</p>
+            <p>Spinner is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
                     
 <CodeHighlight className="language-jsx">
 {`
-<Spinner value={this.state.value} size={30} onChange={this.onChangeBasic} />
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-javascript">
-{`
-constructor() {
-    super();
-    this.state = {};
-
-    this.onChangeBasic = this.onChangeBasic.bind(this);
-}
-
-onChangeBasic(e) {
-    this.setState({ value: e.value });
-}
+<Spinner value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
 `}
 </CodeHighlight>
 
             <h3>Min-Max</h3>
-            <p>Boundaries are specified with min and max attributes.</p>
+            <p>Boundaries are specified with <i>min</i> and <i>max</i> attributes.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Spinner value={this.state.value2} size={30} onChange={this.onChangeMinMax} min={0} max={100} />
+<Spinner value={this.state.value} onChange={(e) => this.setState({value: e.value})} min={0} max={100} />
 
 `}
 </CodeHighlight>
 
             <h3>Step</h3>
-            <p>Step factor is 1 by default and can be customized with step option.</p>
+            <p>Step factor is 1 by default and can be customized with <i>step</i> option.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Spinner value={this.state.value3} size={30} onChange={this.onChangeStep} step={0.25} />
+<Spinner value={this.state.value} onChange={(e) => this.setState({value: e.value})} step={0.25} />
 
 `}
 </CodeHighlight>
@@ -232,20 +204,6 @@ onChangeBasic(e) {
                     </tbody>
                 </table>
             </div>
-<CodeHighlight className="language-jsx">
-{`
-<Slider style={{ width: '200px' }} onChange={this.onChangeSlider1} />
-
-`}
-</CodeHighlight>
-<CodeHighlight className="language-javascript">
-{`
-onChangeSlider1(e) {
-    this.setState({ val1: e.value });
-}
-
-`}
-</CodeHighlight>
 
             <h3>Styling</h3>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
@@ -270,6 +228,10 @@ onChangeSlider1(e) {
                             <td>ui-spinner-down</td>
                             <td>Down element</td>
                         </tr>
+                        <tr>
+                            <td>ui-spinner-input</td>
+                            <td>Input element</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -285,33 +247,24 @@ onChangeSlider1(e) {
             </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {Spinner} from 'primereact/spinner';
+
 export class SpinnerDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeMinMax = this.onChangeMinMax.bind(this);
-        this.onChangeStep = this.onChangeStep.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({ value: e.value });
-    }
-
-    onChangeMinMax(e) {
-        this.setState({ value2: e.value });
-    }
-
-    onChangeStep(e) {
-        this.setState({ value3: e.value });
+        this.state = {
+            value1: null,
+            value2: null,
+            value3: null
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Spinner</h1>
                         <p>Spinner is an input component to provide a numerical input.</p>
@@ -319,19 +272,18 @@ export class SpinnerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic: {this.state.value}</h3>
-                    <Spinner value={this.state.value} size={30} onChange={this.onChangeBasic} />
+                    <h3>Basic: {this.state.value1}</h3>
+                    <Spinner value={this.state.value} size={30} onChange={(e) => this.setState({value1: e.value})} />
 
                     <h3>Min/Max: {this.state.value2}</h3>
-                    <Spinner value={this.state.value2} size={30} onChange={this.onChangeMinMax} min={0} max={100} />
+                    <Spinner value={this.state.value2} size={30} onChange={(e) => this.setState({value2: e.value})} min={0} max={100} />
 
                     <h3>Step: {this.state.value3}</h3>
-                    <Spinner value={this.state.value3} size={30} onChange={this.onChangeStep} step={0.25} />
+                    <Spinner value={this.state.value3} size={30} onChange={(e) => this.setState({value3: e.value})} step={0.25} />
 
                     <h3>Disabled</h3>
                     <Spinner value={this.state.value4} size={30} disabled={true} />
                 </div>
-                <SpinnerDoc></SpinnerDoc>
             </div>
         );
     }
