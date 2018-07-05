@@ -16,7 +16,7 @@ export class ListBoxDemo extends Component {
     }
 
     carTemplate(option) {
-        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="ui-helper-clearfix">
@@ -27,7 +27,7 @@ export class ListBoxDemo extends Component {
     }
 
     render() {
-        var cities = [
+        const cities = [
             {name: 'New York', code: 'NY'},
             {name: 'Rome', code: 'RM'},
             {name: 'London', code: 'LDN'},
@@ -35,7 +35,7 @@ export class ListBoxDemo extends Component {
             {name: 'Paris', code: 'PRS'}
         ];
 
-        var cars = [
+        const cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -85,6 +85,7 @@ class ListboxDoc extends Component {
             <div className="content-section source">
     <TabView effect="fade">
         <TabPanel header="Documentation">
+
             <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
@@ -94,14 +95,15 @@ import {ListBox} from 'primereact/listbox';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Listbox requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+            <p>ListBox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+            of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabe</i> property to specify the field name of the option. SelectItem API is designed to have more 
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
         
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">
 {`
-var citySelectItems = [
+const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
     {label: 'London', value: 'LDN'},
@@ -122,7 +124,7 @@ var citySelectItems = [
             <p><b>Options as any type</b></p>
             <CodeHighlight className="language-javascript">
 {`
-var cities = [
+const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
     {name: 'London', code: 'LDN'},
@@ -141,9 +143,8 @@ var cities = [
             </CodeHighlight>
 
             <h3>Selection</h3>
-            <p>Listbox allows selection of either single or multiple items whereas checkbox option displays a checkbox to indicate multiple selection. 
-                In single case, model should be a single object reference whereas in multiple case should be an array. Multiple items can either be selected
-                using metaKey or toggled individually depending on the value of metaKeySelection property value which is true by default. On touch enabled
+            <p>Listbox allows selection of either single or multiple items. In single case, model should be a single object reference whereas in multiple case should be an array. Multiple items can either be selected
+                using metaKey or toggled individually depending on the value of <i>metaKeySelection</i> property value which is true by default. On touch enabled
                 devices metaKeySelection is turned off automatically.</p>
 
 <CodeHighlight className="language-jsx">
@@ -154,7 +155,7 @@ var cities = [
 </CodeHighlight>
 
             <h3>Custom Content</h3>
-            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a property and returns the content.</p>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -166,7 +167,7 @@ var cities = [
 <CodeHighlight className="language-javascript">
 {`
 carTemplate(option) {
-    var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+    const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
     return (
         <div className="ui-helper-clearfix">
@@ -180,7 +181,7 @@ carTemplate(option) {
 </CodeHighlight>
 
             <h3>Filter</h3>
-            <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable filter property.</p>
+            <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable <i>filter</i> property.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -256,8 +257,8 @@ carTemplate(option) {
                             <td>When specified, disables the component.</td>
                         </tr>
                         <tr>
-                            <td>key</td>
-                            <td>boolea</td>
+                            <td>dataKey</td>
+                            <td>string</td>
                             <td>false</td>
                             <td>A property to uniquely identify a value in options.</td>
                         </tr>
@@ -353,9 +354,7 @@ carTemplate(option) {
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {ListBox} from 'primereact/listbox';
-import {TabView,TabPanel} from 'primereact/tabview';
 
 export class ListBoxDemo extends Component {
         
@@ -369,7 +368,7 @@ export class ListBoxDemo extends Component {
     }
 
     carTemplate(option) {
-        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="ui-helper-clearfix">
@@ -380,7 +379,7 @@ export class ListBoxDemo extends Component {
     }
 
     render() {
-        var cities = [
+        const cities = [
             {name: 'New York', code: 'NY'},
             {name: 'Rome', code: 'RM'},
             {name: 'London', code: 'LDN'},
@@ -388,7 +387,7 @@ export class ListBoxDemo extends Component {
             {name: 'Paris', code: 'PRS'}
         ];
 
-        var cars = [
+        const cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -402,15 +401,24 @@ export class ListBoxDemo extends Component {
 
         return (
             <div>
-                <h3 className="first">Single</h3>
-                <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
-                
-                <h3>Multiple</h3>
-                <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>ListBox</h1>
+                        <p>ListBox is used to select one or more values from a list of items.</p>
+                    </div>
+                </div>
 
-                <h3>Advanced</h3>
-                <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({cities: e.value})} itemTemplate={this.carTemplate} 
-                                style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
+                <div className="content-section implementation">
+                    <h3 className="first">Single</h3>
+                    <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
+                    
+                    <h3>Multiple</h3>
+                    <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
+
+                    <h3>Advanced</h3>
+                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate} 
+                                    style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
+                </div>
             </div>
         );
     }

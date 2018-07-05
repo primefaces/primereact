@@ -17,7 +17,7 @@ export class ListBox extends Component {
         listStyle: null,
         className: null,
         disabled: null,
-        key: null,
+        dataKey: null,
         multiple: false,
         metaKeySelection: false,
         filter: false,
@@ -33,7 +33,7 @@ export class ListBox extends Component {
         style: PropTypes.object,
         listStyle: PropTypes.object,
         className: PropTypes.string,
-        key: PropTypes.string,
+        dataKey: PropTypes.string,
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
         filter: PropTypes.bool,
@@ -155,7 +155,7 @@ export class ListBox extends Component {
     }
     
     removeOption(option) {
-        return this.props.value.filter(val => !ObjectUtils.equals(val, this.getOptionValue(option), this.props.key));
+        return this.props.value.filter(val => !ObjectUtils.equals(val, this.getOptionValue(option), this.props.dataKey));
     }
     
     isSelected(option) {
@@ -165,7 +165,7 @@ export class ListBox extends Component {
         if(this.props.multiple) {
             if(this.props.value) {
                 for(let val of this.props.value) {
-                    if(ObjectUtils.equals(val, optionValue, this.props.key)) {
+                    if(ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
                         selected = true;
                         break;
                     }
@@ -173,7 +173,7 @@ export class ListBox extends Component {
             }
         }
         else {
-            selected = ObjectUtils.equals(this.props.value, optionValue, this.props.key);
+            selected = ObjectUtils.equals(this.props.value, optionValue, this.props.dataKey);
         }
 
         return selected;
