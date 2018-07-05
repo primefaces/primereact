@@ -183,7 +183,7 @@ customChip(item) {
                             <td>onChange</td>
                             <td>originalEvent: Browser event <br/>
                                 value: New value of the component</td>
-                            <td>Callback to invoke when a chip is added.</td>
+                            <td>Callback to invoke when a chip is added or removed.</td>
                         </tr>
                         <tr>
                             <td>onAdd</td>
