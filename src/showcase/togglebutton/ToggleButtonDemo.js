@@ -8,17 +8,10 @@ export class ToggleButtonDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeCustom = this.onChangeCustom.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({checked1:e.value});
-    }
-
-    onChangeCustom(e) {
-        this.setState({checked2:e.value});
+        this.state = {
+            checked1: false,
+            checked2: false
+        };
     }
 
     render() {
@@ -33,12 +26,12 @@ export class ToggleButtonDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={this.onChangeBasic}/>
+                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Custom</h3>
                     <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                                checked={this.state.checked2} onChange={this.onChangeCustom}/>
+                                checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>
 
@@ -68,41 +61,22 @@ import {ToggleButton} from 'primereact/togglebutton';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>ToggleButton is used as a controlled input with checked and onChange properties.</p>
+            <p>ToggleButton is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
                     
 <CodeHighlight className="language-jsx">
 {`
-<ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={this.onChangeBasic}/>
+<ToggleButton checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
-{`
- constructor() {
-    super();
-    this.state = {};
-    this.onChangeBasic = this.onChangeBasic.bind(this);
-}
+            <h3>Labels and Icons</h3>
+            <p>Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.</p>
 
-onChangeBasic(e) {
-    this.setState({checked1:e.value});
-}
-
-render() {
-    return (
-        <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={this.onChangeBasic}/>
-    );
-}
-`}
-</CodeHighlight>
-
-            <h3>Customization</h3>
-            <p>Icons and Labels can be customized using onLabel, offLabel, onIcon and OffIcon attributes.</p>
 <CodeHighlight className="language-jsx">
 {`
-<ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                                checked={this.state.checked2} onChange={this.onChangeCustom}/>
+ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
+                                checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
 
 `}
 </CodeHighlight>
@@ -165,7 +139,7 @@ render() {
                             <td>checked</td>
                             <td>boolean</td>
                             <td>false</td>
-                            <td>Specifies whether a togglebutton should be checked or not.</td>
+                            <td>Specifies the on/off state of the button.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -184,9 +158,9 @@ render() {
                     <tbody>
                         <tr>
                             <td>onChange</td>
-                            <td>event.originalEvent: browser event <br />
-                                event.value: boolean value to represent checked state.</td>
-                            <td>Callback to invoke on state change.</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.value: Value as the checked state.</td>
+                            <td>Callback to invoke on value change.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -230,27 +204,23 @@ render() {
             </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {ToggleButton} from 'primereact/togglebutton';
+
 export class ToggleButtonDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeCustom = this.onChangeCustom.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({checked1:e.value});
-    }
-
-    onChangeCustom(e) {
-        this.setState({checked2:e.value});
+        this.state = {
+            checked1: false,
+            checked2: false
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ToggleButton</h1>
                         <p>ToggleButton is used to select a boolean value using a button.</p>
@@ -259,16 +229,14 @@ export class ToggleButtonDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={this.onChangeBasic}/>
+                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Custom</h3>
                     <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                                checked={this.state.checked2} onChange={this.onChangeCustom}/>
+                                checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>
-
-                <ToggleButtonDoc />
             </div>
         );
     }
