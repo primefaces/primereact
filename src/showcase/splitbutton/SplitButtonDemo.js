@@ -98,7 +98,7 @@ import {SplitButton} from 'primereact/splitbutton';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>SplitButton has a default command button and a collection of additional optioms defined by the <p>model</p> property.</p> 
+                        <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p> 
                         <CodeHighlight className="language-javascript">
 {`
 export class SplitButtonDemo extends Component {
@@ -167,7 +167,7 @@ export class SplitButtonDemo extends Component {
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
-                        
+
 <CodeHighlight className="language-jsx">
 {`
 <SplitButton label="Primary" />
