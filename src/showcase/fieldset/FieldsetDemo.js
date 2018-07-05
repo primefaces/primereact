@@ -77,7 +77,7 @@ import {Fieldset} from 'primereact/fieldset';
              <h3>Toggleable</h3>
              <p>Content of the fieldset can be expanded and collapsed using <i>toggleable</i> option. A toggleable fieldset can either be used as a Controlled or Uncontrolled component.</p>
              
-             <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
+             <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties need to be defined to control the collapsed state.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Fieldset legend="Godfather I" toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>

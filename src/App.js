@@ -89,6 +89,7 @@ import { SetupPage } from './showcase/setup/SetupPage';
 import { SupportPage } from './showcase/support/SupportPage';
 import { RatingDemo } from './showcase/rating/RatingDemo';
 import { ToolbarDemo } from './showcase/toolbar/ToolbarDemo';
+import { InplaceDemo } from './showcase/inplace/InplaceDemo';
 import { LightboxDemo } from './showcase/lightbox/LightboxDemo';
 import { DataScrollerDemo } from './showcase/datascroller/DataScrollerDemo';
 import { DataScrollerInlineDemo } from './showcase/datascroller/DataScrollerInlineDemo';
@@ -329,6 +330,7 @@ class AppMenu extends Component {
                             <div>
                                 <Link to="/progressbar">&#9679; ProgressBar</Link>
                                 <Link to="/captcha">&#9679; Captcha</Link>
+                                <Link to="/inplace">&#9679; Inplace</Link>
                                 <Link to="/progressspinner">&#9679; ProgressSpinner</Link>
                             </div>
                         </div>
@@ -544,6 +546,7 @@ class App extends Component {
                     <Route path="/card" component={CardDemo}/>
                     <Route path="/keyfilter" component={KeyFilterDemo}/>
                     <Route path="/dataview" component={DataViewDemo}/>
+                    <Route path="/inplace" component={InplaceDemo}/>
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2018 <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
