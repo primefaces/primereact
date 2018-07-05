@@ -10,24 +10,12 @@ export class InputGroupDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-        this.onUsernameChange = this.onUsernameChange.bind(this);
-        this.onPriceChange = this.onPriceChange.bind(this);
-        this.onWebsiteRadioChange = this.onWebsiteRadioChange.bind(this);
-        this.onWebsiteCheckChange = this.onWebsiteCheckChange.bind(this);
-    }
-
-    onUsernameChange(event){
-        this.setState({username:event.checked})
-    }
-    onPriceChange(event){
-        this.setState({price:event.checked})
-    }
-    onWebsiteCheckChange(event){
-        this.setState({website1:event.checked})
-    }
-    onWebsiteRadioChange(event){
-        this.setState({website2:event.checked})
+        this.state = {
+            username: null,
+            price: null,
+            website1: null,
+            website2: null
+        }
     }
 
     render() {
@@ -46,23 +34,25 @@ export class InputGroupDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><i className="fa fa-user"></i></span>
-                                <InputText placeholder="Username"/>
+                                <span className="ui-inputgroup-addon">
+                                    <i className="fa fa-user"></i>
+                                </span>
+                                <InputText placeholder="Username" />
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <span className="ui-inputgroup-addon">$</span>
-                                <InputText placeholder="Price"/>
-                                    <span className="ui-inputgroup-addon">.00</span>
+                                <InputText placeholder="Price" />
+                                <span className="ui-inputgroup-addon">.00</span>
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <span className="ui-inputgroup-addon">W</span>
-                                <InputText placeholder="Website"/>
+                                <InputText placeholder="Website" />
                             </div>
                         </div>
                     </div>
@@ -72,11 +62,15 @@ export class InputGroupDemo extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><i className="fa fa-credit-card"></i></span>
-                                <span className="ui-inputgroup-addon"><i className="fa fa-cc-visa"></i></span>
-                                <InputText placeholder="Price"/>
-                                    <span className="ui-inputgroup-addon">$</span>
-                                    <span className="ui-inputgroup-addon">.00</span>
+                                <span className="ui-inputgroup-addon">
+                                    <i className="fa fa-credit-card"></i>
+                                </span>
+                                <span className="ui-inputgroup-addon">
+                                    <i className="fa fa-cc-visa"></i>
+                                </span>
+                                <InputText placeholder="Price" />
+                                <span className="ui-inputgroup-addon">$</span>
+                                <span className="ui-inputgroup-addon">.00</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +104,9 @@ export class InputGroupDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><Checkbox onChange={this.onUsernameChange} checked={this.state.username}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: e.value})} />
+                                </span>
                                 <InputText placeholder="Username"/>
                             </div>
                         </div>
@@ -118,15 +114,21 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <InputText placeholder="Price"/>
-                                    <span className="ui-inputgroup-addon"><RadioButton onChange={this.onPriceChange} checked={this.state.price}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <RadioButton onChange={(e) => this.setState({price: e.value})} checked={this.state.price}/>    
+                                </span>
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><Checkbox onChange={this.onWebsiteCheckChange} checked={this.state.website1}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <Checkbox onChange={this.onWebsiteCheckChange} onChange={(e) => this.setState({website1: e.value})}/>
+                                </span>
                                 <InputText placeholder="Website"/>
-                                    <span className="ui-inputgroup-addon"><RadioButton onChange={this.onWebsiteRadioChange} checked={this.state.website2}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <RadioButton onChange={this.onWebsiteRadioChange} onChange={(e) => this.setState({website2: e.value})}/>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -154,28 +156,22 @@ class InputGroupDoc extends Component {
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, { Component } from 'react';
+import {InputText} from "primereact/inputtext";
+import {Button} from "primereact/button";
+import {Checkbox} from "primereact/checkbox";
+import {RadioButton} from "primereact/radiobutton";
+
 export class InputGroupDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-        this.onUsernameChange = this.onUsernameChange.bind(this);
-        this.onPriceChange = this.onPriceChange.bind(this);
-        this.onWebsiteRadioChange = this.onWebsiteRadioChange.bind(this);
-        this.onWebsiteCheckChange = this.onWebsiteCheckChange.bind(this);
-    }
-
-    onUsernameChange(event){
-        this.setState({username:event.checked})
-    }
-    onPriceChange(event){
-        this.setState({price:event.checked})
-    }
-    onWebsiteCheckChange(event){
-        this.setState({website1:event.checked})
-    }
-    onWebsiteRadioChange(event){
-        this.setState({website2:event.checked})
+        this.state = {
+            username: null,
+            price: null,
+            website1: null,
+            website2: null
+        }
     }
 
     render() {
@@ -194,23 +190,25 @@ export class InputGroupDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><i className="fa fa-user"></i></span>
-                                <InputText placeholder="Username"/>
+                                <span className="ui-inputgroup-addon">
+                                    <i className="fa fa-user"></i>
+                                </span>
+                                <InputText placeholder="Username" />
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <span className="ui-inputgroup-addon">$</span>
-                                <InputText placeholder="Price"/>
-                                    <span className="ui-inputgroup-addon">.00</span>
+                                <InputText placeholder="Price" />
+                                <span className="ui-inputgroup-addon">.00</span>
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <span className="ui-inputgroup-addon">W</span>
-                                <InputText placeholder="Website"/>
+                                <InputText placeholder="Website" />
                             </div>
                         </div>
                     </div>
@@ -220,11 +218,15 @@ export class InputGroupDemo extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><i className="fa fa-credit-card"></i></span>
-                                <span className="ui-inputgroup-addon"><i className="fa fa-cc-visa"></i></span>
-                                <InputText placeholder="Price"/>
-                                    <span className="ui-inputgroup-addon">$</span>
-                                    <span className="ui-inputgroup-addon">.00</span>
+                                <span className="ui-inputgroup-addon">
+                                    <i className="fa fa-credit-card"></i>
+                                </span>
+                                <span className="ui-inputgroup-addon">
+                                    <i className="fa fa-cc-visa"></i>
+                                </span>
+                                <InputText placeholder="Price" />
+                                <span className="ui-inputgroup-addon">$</span>
+                                <span className="ui-inputgroup-addon">.00</span>
                             </div>
                         </div>
                     </div>
@@ -258,7 +260,9 @@ export class InputGroupDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><Checkbox onChange={this.onUsernameChange} checked={this.state.username}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: e.value})} />
+                                </span>
                                 <InputText placeholder="Username"/>
                             </div>
                         </div>
@@ -266,15 +270,21 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <InputText placeholder="Price"/>
-                                    <span className="ui-inputgroup-addon"><RadioButton onChange={this.onPriceChange} checked={this.state.price}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <RadioButton onChange={(e) => this.setState({price: e.value})} checked={this.state.price}/>    
+                                </span>
                             </div>
                         </div>
 
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
-                                <span className="ui-inputgroup-addon"><Checkbox onChange={this.onWebsiteCheckChange} checked={this.state.website1}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <Checkbox onChange={this.onWebsiteCheckChange} onChange={(e) => this.setState({website1: e.value})}/>
+                                </span>
                                 <InputText placeholder="Website"/>
-                                    <span className="ui-inputgroup-addon"><RadioButton onChange={this.onWebsiteRadioChange} checked={this.state.website2}/></span>
+                                <span className="ui-inputgroup-addon">
+                                    <RadioButton onChange={this.onWebsiteRadioChange} onChange={(e) => this.setState({website2: e.value})}/>
+                                </span>
                             </div>
                         </div>
                     </div>
