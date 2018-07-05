@@ -8,12 +8,9 @@ export class RadioButtonDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
-        this.onCityChange = this.onCityChange.bind(this);
-    }
-
-    onCityChange(e) {
-        this.setState({city: e.value});
+        this.state = {
+            city: null
+        };
     }
 
     render() {
@@ -29,15 +26,15 @@ export class RadioButtonDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb1" value="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
                             <label htmlFor="rb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
                             <label htmlFor="rb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
                             <label htmlFor="rb3">Los Angeles</label>
                         </div>
                     </div>
@@ -73,23 +70,8 @@ import {RadioButton} from 'primereact/radiobutton';
                         <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
 <CodeHighlight className="language-jsx">
 {`
-<RadioButton value="val1" onChange={this.onChange} checked={this.state.checked} />
-<RadioButton value="val2" onChange={this.onChange} checked={this.state.checked} />
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-javascript">
-{`
-constructor() {
-    super();
-    this.state = {};
-    this.onCityChange = this.onCityChange.bind(this);
-}
-
-onCityChange(e) {
-    this.setState({city: e.value});
-}
+<RadioButton value="val1" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val1'} />
+<RadioButton value="val2" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val1'} />
 
 `}
 </CodeHighlight>
@@ -221,22 +203,22 @@ onCityChange(e) {
                     </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {RadioButton} from 'primereact/radiobutton';
+
 export class RadioButtonDemo extends Component {
         
     constructor() {
         super();
-        this.state = {};
-        this.onCityChange = this.onCityChange.bind(this);
-    }
-
-    onCityChange(e) {
-        this.setState({city: e.value});
+        this.state = {
+            city: null
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>RadioButton</h1>
                         <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>
@@ -246,21 +228,20 @@ export class RadioButtonDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb1" value="New York" onChange={this.onCityChange} checked={this.state.city === 'New York'} />
+                            <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
                             <label htmlFor="rb1">New York</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.city === 'San Francisco'} />
+                            <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
                             <label htmlFor="rb2">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
-                            <RadioButton inputId="rb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.city === 'Los Angeles'} />
+                            <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
                             <label htmlFor="rb3">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}
                 </div>
-                <RadioButtonDoc></RadioButtonDoc>
             </div>
         )
     }
