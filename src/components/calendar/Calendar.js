@@ -645,8 +645,8 @@ export class Calendar extends Component {
         
         this.onDateSelect(event, dateMeta);
         
-        if(this.props.onTodayClick) {
-            this.onTodayClick(event);
+        if(this.props.onTodayButtonClick) {
+            this.onTodayButtonClick(event);
         }
     }
     

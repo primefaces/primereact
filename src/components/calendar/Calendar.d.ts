@@ -48,12 +48,12 @@ interface CalendarProps {
     onSelect?(e: {originalEvent: Event, value: any}): void;
     onBlur?(event: Event): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
-    onTodayButtonClick?(): void;
+    onTodayButtonClick?(event: Event): void;
     onClearButtonClick?(event: Event): void;
-    onMouseDown?(): void;
-    onKeyUp?(): void;
-    onKeyPress?(): void;
-    onContextMenu?(): void;
+    onMouseDown?(event: Event): void;
+    onKeyUp?(event: Event): void;
+    onKeyPress?(event: Event): void;
+    onContextMenu?(event: Event): void;
 }
 
 export class Calendar extends React.Component<CalendarProps,any> {}
