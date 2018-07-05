@@ -27,10 +27,10 @@ export class DataTable extends Component {
         paginatorLeft:null,
         paginatorRight: null,
         pageLinkSize: 5,
+        rowsPerPageOptions: null,
         first: null,
         rows: null,
         totalRecords: null,
-        rowsPerPageOptions: null,
         lazy: false,
         sortField: null,
         sortOrder: null,
@@ -67,16 +67,17 @@ export class DataTable extends Component {
         exportFilename: 'download',
         contextMenu: null,
         rowGroupMode: null,
+        autoLayout: false,
         rowClassName: null,
         rowGroupHeaderTemplate: null,
         rowGroupFooterTemplate: null,
         loading: false,
-        loadingIcon: 'pi pi-circle-o-notch',
-        autoLayout: false,
+        loadingIcon: 'pi pi-spinner',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
         onFilter: null,
+        onVirtualScroll: null,
         onRowClick: null,
         onRowDoubleClick: null,
         onRowSelect: null,
@@ -85,8 +86,7 @@ export class DataTable extends Component {
         onRowCollapse: null,
         onContextMenuSelect: null,
         onColReorder: null,
-        onRowReorder: null,
-        onVirtualScroll: null
+        onRowReorder: null
     }
 
     static propTypes = {
@@ -105,10 +105,10 @@ export class DataTable extends Component {
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
         pageLinkSize: PropTypes.number,
+        rowsPerPageOptions: PropTypes.array,
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
-        rowsPerPageOptions: PropTypes.array,
         lazy: PropTypes.bool,
         sortField: PropTypes.string,
         sortOrder: PropTypes.number,
@@ -145,16 +145,17 @@ export class DataTable extends Component {
         exportFilename: PropTypes.string,
         contextMenu: PropTypes.any,
         rowGroupMode: PropTypes.string,
+        autoLayout: PropTypes.bool,
         rowClassName: PropTypes.func,
         rowGroupHeaderTemplate: PropTypes.func,
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
-        autoLayout: PropTypes.bool,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
         onFilter: PropTypes.func,
+        onVirtualScroll: PropTypes.func,
         onRowClick: PropTypes.func,
         onRowDoubleClick: PropTypes.func,
         onRowSelect: PropTypes.func,
@@ -163,8 +164,7 @@ export class DataTable extends Component {
         onRowCollapse: PropTypes.func,
         onContextMenuSelect: PropTypes.func,
         onColReorder: PropTypes.func,
-        onRowReorder: PropTypes.func,
-        onVirtualScroll: PropTypes.func
+        onRowReorder: PropTypes.func
     };
 
     constructor(props) {

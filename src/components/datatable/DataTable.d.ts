@@ -1,13 +1,5 @@
 import React = require("react");
 
-interface DataTableLazyLoadEvent {
-    first: number;
-    rows: number;
-    sortField: string;
-    sortOrder: number;
-    multiSortMeta: Array<any>;
-}
-
 interface DataTableProps {
     id?: string;
     value?: Array<any>;
@@ -15,7 +7,7 @@ interface DataTableProps {
     footer?: any;
     style?: object;
     className?: string;
-    tableStyle?: any;
+    tableStyle?: object;
     tableClassName?: string;
     paginator?: boolean;
     paginatorPosition?: string;
@@ -40,9 +32,11 @@ interface DataTableProps {
     compareSelectionBy?: string;
     dataKey?: string;
     metaKeySelection?: boolean;
-    headerColumnGroup?: object;
-    footerColumnGroup?: object;
-    rowExpansionTemplate?(data: any): void;
+    headerColumnGroup?: JSX.Element;
+    footerColumnGroup?: JSX.Element;
+    frozenHeaderColumnGroup?: JSX.Element;
+    frozenFooterColumnGroup?: JSX.Element;
+    rowExpansionTemplate?(data: any): JSX.Element | undefined;
     expandedRows?: Array<any>;
     onRowToggle?(data: Array<any>): void;
     responsive?: boolean;
@@ -64,25 +58,23 @@ interface DataTableProps {
     rowGroupMode?: string;
     autoLayout?:boolean;
     rowClassName?(rowData: any): object;
-    rowGroupHeaderTemplate?(data: any, index: number): void;
-    rowGroupFooterTemplate?(data: any, index: number): void;
-    groupField?: string;
+    rowGroupHeaderTemplate?(data: any, index: number): JSX.Element | undefined;
+    rowGroupFooterTemplate?(data: any, index: number): JSX.Element | undefined;
     loading?:boolean;
     loadingIcon?:string;
-    onColumnResizeEnd?(e: {element: any, delta: number}): void;
+    onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
     onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
     onPage?(e: {first: number, rows: number}): void;
     onFilter?(filters: Array<any>): void;
     onVirtualScroll?(e: {first: number, rows: number}): void;
-    onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowClick?(e: Event): void;
     onRowDoubleClick?(e: Event): void;
-    onRowSelect?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowUnselect?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowSelect?(e: {originalEvent: Event, data: any, type: string}): void;
+    onRowUnselect?(e: {originalEvent: Event, data: any, type: string}): void;
     onRowExpand?(e: {originalEvent: Event, data: any}): void;
     onRowCollapse?(e: {originalEvent: Event, data: any}): void;
     onContextMenuSelect?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
-    onColReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
 }
 

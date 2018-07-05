@@ -18,6 +18,12 @@ interface ColumnProps {
     filterFunction?(value: any, filter: any): void;
     style?: object;
     className?: string;
+    headerStyle?: object;
+    headerClassName?: string;
+    bodyStyle?: object;
+    bodyClassName?: string;
+    footerStyle?: object;
+    footerClassName?: string;
     expander?: boolean;
     frozen?: boolean;
     selectionMode?: string;

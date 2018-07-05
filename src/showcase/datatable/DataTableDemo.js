@@ -15,13 +15,6 @@ export class DataTableDemo extends Component {
             cars: []
         };
         this.carservice = new CarService();
-
-        this.cols = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
     }
 
     componentDidMount() {
@@ -29,7 +22,14 @@ export class DataTableDemo extends Component {
     }
 
     render() {
-        var dynamicColumns = this.cols.map((col,i) => {
+        const columns = [
+            {field: 'vin', header: 'Vin'},
+            {field: 'year', header: 'Year'},
+            {field: 'brand', header: 'Brand'},
+            {field: 'color', header: 'Color'}
+        ];
+
+        const dynamicColumns = columns.map((col,i) => {
             return <Column key={col.field} field={col.field} header={col.header} />;
         });
 
@@ -218,21 +218,21 @@ export class DataTableDemo extends Component {
                         </tr>
                         <tr>
                             <td>header</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Header text of a column or a function to return custom content.</td>
+                            <td>Header content of the column.</td>
                         </tr>
                         <tr>
                             <td>body</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Function to return the custom cell content.</td>
+                            <td>Body content of the column.</td>
                         </tr>
                         <tr>
                             <td>footer</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Footer text of a column or a function to return custom content.</td>
+                            <td>Footer content of the column.</td>
                         </tr>
                         <tr>
                             <td>sortable</td>
@@ -401,8 +401,8 @@ export class DataTableDemo extends Component {
 
             <h3>Templates</h3>
             <p>Field data of a corresponding row is displayed as the cell content by default, this can be customized using templating where current row data and column properties are passed to the body template. 
-                On the other hand, header and footer properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly DataTable itself
-                also provides header and footer properties for the main header and footer of the table.</p>
+                On the other hand, <i>header</i> and <i>footer</i> properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly DataTable itself
+                also provides <i>header</i> and <i>footer</i> properties for the main header and footer of the table.</p>
 
 <CodeHighlight className="language-javascript">
 {`
@@ -458,7 +458,7 @@ export class DataTableTemplatingDemo extends Component {
 </CodeHighlight>
 
             <h3>Column Group</h3>
-            <p>Columns can be grouped at header and footer sections by defining a ColumnGroup component as the headerColumnGroup and footerColumnGroup properties.</p>
+            <p>Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.</p>
 
 <CodeHighlight className="language-javascript">
 {`
@@ -531,7 +531,7 @@ export class DataTableColGroupDemo extends Component {
             <p>When using sorting with column groups, define sort properties like sortable at columns inside column groups not at the direct children of DataTable component.</p>
 
             <h3>Pagination</h3>
-            <p>Pagination is enabled by setting paginator <i>property</i> to true, <i>rows</i> attribute defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. 
+            <p>Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. 
             See <Link to="/paginator">paginator</Link> component for more information about further customization options such as <i>paginator template</i>.</p>
 
             <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
@@ -925,8 +925,8 @@ export class DataTableFilterDemo extends Component {
 </CodeHighlight>
 
             <h3>Selection</h3>
-            <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property for reading and onSelectionChange for updating back.
-                Alternatively column based selection can be done using radio buttons or checkboxes using selectionMode of a particular column. In additiob onRowSelect-onRowUnselect events are provided as optional callbacks.</p>
+            <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the <i>selection</i> property for reading and updated using <i>onSelectionChange</i> callback.
+                Alternatively column based selection can be done using radio buttons or checkboxes using <i>selectionMode</i> of a particular column. In addition <i>onRowSelect</i>-<i>onRowUnselect</i> events are provided as optional callbacks.</p>
 
             <p>In single mode, selection binding is an object reference.</p>
 
@@ -993,7 +993,7 @@ export class DataTableSelectionDemo extends Component {
 `}
 </CodeHighlight>
 
-            <p>If you prefer a radioButton or a checkbox instead of a row click, use the selectionMode of a column instead.
+            <p>If you prefer a radioButton or a checkbox instead of a row click, use the <i>selectionMode</i> of a column instead.
                  Following datatable displays a checkbox at the first column of each row and automatically adds a header checkbox to toggle selection of all rows.</p>
 <CodeHighlight className="language-jsx">
 {`
@@ -1009,7 +1009,7 @@ export class DataTableSelectionDemo extends Component {
 </CodeHighlight>
 
             <h3>Incell Editing</h3>
-            <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the editor property
+            <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the <i>editor</i> property
             that refers to a function to return an input element for the editing.</p>
             
 <CodeHighlight className="language-jsx">
@@ -1066,7 +1066,8 @@ saleDateEditor(props) {
 </CodeHighlight>
 
             <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is valid. In order
-            to decide whether to keep the cell open or not, provide a editorValidator function that validates the value.</p>
+            to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value.</p>
+
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars}>
@@ -1088,7 +1089,7 @@ requiredValidator(props) {
 </CodeHighlight>
 
             <h3>ContextMenu</h3>
-            <p>DataTable provides exclusive integration with ContextMenu by binding the reference of a menu to the contextMenu property.</p>
+            <p>DataTable provides exclusive integration with ContextMenu by binding the reference of a menu to the <i>contextMenu</i> property.</p>
 <CodeHighlight className="language-javascript">
 {`
 export class DataTableContextMenuDemo extends Component {
@@ -1145,12 +1146,12 @@ export class DataTableContextMenuDemo extends Component {
 
 `}
 </CodeHighlight>
-
             
 
             <h3>Expandable Rows</h3>
-            <p>Row expansion allows displaying detailed content for a particular row. To use this feature, add an expander column, define a rowExpansionTemplate as a function to return the expanded content and bind to
-                expandedRows property to read the expanded rows along with the onRowToggle property to update them.</p>
+            <p>Row expansion allows displaying detailed content for a particular row. To use this feature, add an <i>expander</i> column, define a <i>rowExpansionTemplate</i> as a function to return the expanded content and bind to
+                <i>expandedRows</i> property to read the expanded rows along with the <i>onRowToggle</i> property to update it.</p>
+
 <CodeHighlight className="language-javascript">
 {`
 export class DataTableRowExpansionDemo extends Component {
@@ -1209,8 +1210,8 @@ export class DataTableRowExpansionDemo extends Component {
 </CodeHighlight>
 
             <h3>Column Resize</h3>
-            <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
-                In "expand" mode, table width also changes along with the column width. onColumnResizeEnd is a callback that passes the resized column header as a parameter.</p>
+            <p>Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
+                In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} resizableColumns={true}>
@@ -1237,8 +1238,8 @@ export class DataTableRowExpansionDemo extends Component {
 </CodeHighlight>
 
             <h3>Column Reorder</h3>
-            <p>Columns can be reordered using drag drop by setting the reorderableColumns to true. onColReorder is a callback that is invoked when a column is reordered.
-            DataTable keeps the column order state internally using keys that identifies a column using the field property. If the column has no field, use columnKey instead.</p>
+            <p>Columns can be reordered using drag drop by setting the <i>reorderableColumns</i> to true. <i>onColReorder</i> is a callback that is invoked when a column is reordered.
+            DataTable keeps the column order state internally using keys that identifies a column using the <i>field</i> property. If the column has no field, use columnKey instead.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -1253,8 +1254,8 @@ export class DataTableRowExpansionDemo extends Component {
 </CodeHighlight>
 
             <h3>Row Reorder</h3>
-            <p>Data can be reordered using drag drop by adding a reorder column that will display an icon as a drag handle. onRowReorder is a callback that is invoked when a column is reordered, use
-                this callback to update the new order. The reorder icon can be customized using rowReorderIcon of the column component.</p>
+            <p>Data can be reordered using drag drop by adding a reorder column that will display an icon as a drag handle. <i>onRowReorder</i> is a callback that is invoked when a column is reordered, use
+                this callback to update the new order. The reorder icon can be customized using <i>rowReorderIcon</i> of the column component.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -1308,9 +1309,9 @@ export class DataTableExportDemo extends Component {
 </CodeHighlight>
 
             <h3>RowGrouping</h3>
-            <p>RowGrouping has two modes defined be the rowGroupMode property, in "subheader" option rows are grouped by a groupField and in "rowspan" mode grouping
+            <p>RowGrouping has two modes defined be the <i>rowGroupMode</i> property, in "subheader" option rows are grouped by a groupField and in "rowspan" mode grouping
             is done based on the sort field. In both cases, data should be sorted initally using the properties such as sortField and sortOrder. In "subheader" mode,
-            rowGroupHeaderTemplate property should be defined to provide the content of the header and optionally rowGroupFooterTemplate is available to provide a footer
+            <i>rowGroupHeaderTemplate</i> property should be defined to provide the content of the header and optionally <i>rowGroupFooterTemplate</i> is available to provide a footer
             for the group.</p>
             
             <CodeHighlight className="language-javascript">
@@ -1385,7 +1386,7 @@ export class DataTableRowGroupDemo extends Component {
             </CodeHighlight>
 
             <h3>Scrolling</h3>
-            <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using scrollable property and scrollHeight to define the viewport height.</p>
+            <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px">
@@ -1411,8 +1412,9 @@ export class DataTableRowGroupDemo extends Component {
 `}
 </CodeHighlight> 
 
-            <p>Certain columns can be frozen by using the frozen property of the column component. Widths of the frozen and unfrozen sections are defined with frozenWidth and frozenHeight properties where
+            <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen and unfrozen sections are defined with <i>frozenWidth</i> and <i>unfrozenWidth</i> properties where
                 total of these values should equal to the width of the DataTable itself.</p>
+
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
@@ -1431,7 +1433,7 @@ export class DataTableRowGroupDemo extends Component {
 `}
 </CodeHighlight> 
 
-            <p>One or more rows can be displayed as fixed using the frozenValue property.</p>
+            <p>One or more rows can be displayed as fixed using the <i>frozenValue</i> property.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
@@ -1444,8 +1446,8 @@ export class DataTableRowGroupDemo extends Component {
 `}
 </CodeHighlight> 
 
-            <p>When using frozen columns with column grouping, use frozenHeaderColumnGroup and frozenFooterColumnGroup properties along with
-            headerColumnGroup and footerColumnGroup.</p>
+            <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
+            <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
 
             <p>Virtual scrolling is enabled using <i>virtualScroll</i>, <i>onVirtualScroll</i> properties combined with lazy loading so that data is loaded on the fly during scrolling. View the <Link to="/datatable/scroll">scrolling demo</Link> for a sample implementation.</p>
 <CodeHighlight className="language-jsx">
@@ -1645,6 +1647,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Number of page links to display.</td>
                         </tr>
                         <tr>
+                            <td>rowsPerPageOptions</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>Array of integer values to display inside rows per page dropdown.</td>
+                        </tr>
+                        <tr>
                             <td>first</td>
                             <td>number</td>
                             <td>0</td>
@@ -1661,12 +1669,6 @@ export class DataTableLazyDemo extends Component {
                             <td>number</td>
                             <td>null</td>
                             <td>Number of total records, defaults to length of value when not defined.</td>
-                        </tr>
-                        <tr>
-                            <td>rowsPerPageOptions</td>
-                            <td>array</td>
-                            <td>null</td>
-                            <td>Array of integer values to display inside rows per page dropdown.</td>
                         </tr>
                         <tr>
                             <td>lazy</td>
@@ -1874,6 +1876,18 @@ export class DataTableLazyDemo extends Component {
                             <td>Defines the row grouping mode, valid values are "subheader" and "rowgroup".</td>
                         </tr>
                         <tr>
+                            <td>autoLayout</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the cell widths scale according to their content or not.</td>
+                        </tr>
+                        <tr>
+                            <td>rowClassName</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
+                        </tr>
+                        <tr>
                             <td>rowGroupHeaderTemplate</td>
                             <td>function</td>
                             <td>null</td>
@@ -1886,12 +1900,6 @@ export class DataTableLazyDemo extends Component {
                             <td>Function to provide the content of row group footer.</td>
                         </tr>
                         <tr>
-                            <td>rowClassName</td>
-                            <td>function</td>
-                            <td>null</td>
-                            <td>Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
-                        </tr>
-                        <tr>
                             <td>loading</td>
                             <td>boolean</td>
                             <td>false</td>
@@ -1900,14 +1908,8 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>loadingIcon</td>
                             <td>string</td>
-                            <td>fa fa-circle-o-notch</td>
+                            <td>pi pi-spinner</td>
                             <td>The icon to show while indicating data load is in progress.</td>
-                        </tr>
-                        <tr>
-                            <td>autoLayout</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether the cell widths scale according to their content or not.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1926,20 +1928,19 @@ export class DataTableLazyDemo extends Component {
                     <tbody>
                         <tr>
                             <td>onSelectionChange</td>
-                            <td>event.originalEvent = Original event <br/>
-                                event.data = Selection object <br/>
-                                <br/>
+                            <td>event.originalEvent: Browser event <br/>
+                                event.data: Selection object
                             </td>
                             <td>Callback to invoke when selection changes.</td>
                         </tr>
                         <tr>
                             <td>onRowToggle</td>
-                            <td>event.data = Expanded rows</td>
+                            <td>event.data: Expanded rows</td>
                             <td>Callback to invoke when a row is toggled or collapsed.</td>
                         </tr>
                         <tr>
                             <td>onColumnResizeEnd</td>
-                            <td>event.element: Resized column instance. <br />
+                            <td>event.element: DOM element of the resized column.<br />
                                 event.delta: Change in column width</td>
                             <td>Callback to invoke when a column is resized.</td>
                         </tr>
@@ -1947,20 +1948,18 @@ export class DataTableLazyDemo extends Component {
                             <td>onSort</td>
                             <td>event.sortField: Field to sort against. <br />
                                 event.sortOrder: Sort order as integer. <br />
-                                event.multiSortMeta: MultiSort metadata. <br /></td>
+                                event.multiSortMeta: MultiSort metadata.</td>
                             <td>Callback to invoke on sort.</td>
                         </tr>
                         <tr>
                             <td>onPage</td>
-                            <td>event.first: New first row index. <br />
-                                event.rows: Rows per page. <br />
-                                event.page: New page index. <br />
-                                event.pageCount: Number of total pages. <br /></td>
+                            <td>event.first: Index of the first row. <br />
+                                event.rows: Rows per page.</td>
                             <td>Callback to invoke on pagination.</td>
                         </tr>
                         <tr>
                             <td>onFilter</td>
-                            <td>event.filters: Array of FilterMetadata objects.</td>
+                            <td>event.filters: Collection of active filters.</td>
                             <td>Callback to invoke on filtering.</td>
                         </tr>
                         <tr>
@@ -1971,39 +1970,45 @@ export class DataTableLazyDemo extends Component {
                             <td>Callback to invoke to load data on virtual scroll.</td>
                         </tr>
                         <tr>
+                            <td>onVirtualScroll</td>
+                            <td>event.first: Index of the first row. <br />
+                                event.rows: Rows per page.</td>
+                            <td>Callback to invoke during virtual scrolling.</td>
+                        </tr>
+                        <tr>
                             <td>onRowClick</td>
-                            <td>event: Browser row click event</td>
+                            <td>event: Browser event</td>
                             <td>Callback to invoke when a row is clicked.</td>
                         </tr>
                         <tr>
                             <td>onRowDloubleClick</td>
-                            <td>event: Browser double click event</td>
+                            <td>event: Browser event</td>
                             <td>Callback to invoke when a row is double clicked.</td>
                         </tr>
                         <tr>
                             <td>onRowSelect</td>
-                            <td>event.originalEvent: Original event instance. <br />
+                            <td>event.originalEvent: Browser event. <br />
                                 event.data: Selected row data. <br />
-                                event.type: Type of the selection, valid values are row, radio or checkbox. <br /></td>
+                                event.type: Type of the selection, valid values are "row", "radio" or "checkbox".</td>
                             <td>Callback to invoke when a row is selected.</td>
                         </tr>
                         <tr>
                             <td>onRowUnselect</td>
-                            <td>event.originalEvent: Original event instance. <br />
+                            <td>event.originalEvent: Browser event. <br />
                                 event.data: Unselected row data. <br />
-                                event.type: Type of the unselection, valid values are row, radio or checkbox. <br /></td>
+                                event.type: Type of the selection, valid values are "row", "radio" or "checkbox".</td>
                             <td>Callback to invoke when a row is unselected.</td>
                         </tr>
                         <tr>
                             <td>onRowExpand</td>
-                            <td>event.originalEvent: Original event instance. <br />
-                                event.data: Unselected row data.</td>
+                            <td>event.originalEvent: Browser event. <br />
+                                event.data: Expanded row data.</td>
                             <td>Callback to invoke when a row is expanded.</td>
                         </tr>
                         <tr>
                             <td>onRowCollapse</td>
-                            <td>event.originalEvent: Original event instance. <br />
-                                event.data: Unselected row data.</td>
+                            <td>event.originalEvent: Browser event. <br />
+                                event.data: Collapsed row data.</td>
                             <td>Callback to invoke when a row is collapsed.</td>
                         </tr>
                         <tr>
@@ -2014,10 +2019,19 @@ export class DataTableLazyDemo extends Component {
                         </tr>
                         <tr>
                             <td>onColReorder</td>
-                            <td>event.dragIndex: Index of the dragged column <br />
+                            <td>event.originalEvent: Browser event <br />
+                                event.dragIndex: Index of the dragged column <br />
                                 event.dropIndex: Index of the dropped column <br />
-                                event.columns: Columns array after reorder. <br /></td>
+                                event.columns: Columns array after reorder.</td>
                             <td>Callback to invoke when a column is reordered.</td>
+                        </tr>
+                        <tr>
+                            <td>onRowOrder</td>
+                            <td>event.originalEvent: Browser event. <br />
+                                event.value: New value after reorder <br />
+                                event.dragIndex: Index of the dragged row <br />
+                                event.dropIndex: Index of the drop location</td>
+                            <td>Callback to invoke when a row is reordered.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -2107,6 +2121,11 @@ export class DataTableLazyDemo extends Component {
 
 <CodeHighlight className="language-javascript">
 {`
+import React, { Component } from 'react';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {CarService} from '../service';
+
 export class DataTableDemo extends Component {
 
     constructor() {
@@ -2115,13 +2134,6 @@ export class DataTableDemo extends Component {
             cars: []
         };
         this.carservice = new CarService();
-
-        this.cols = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
     }
 
     componentDidMount() {
@@ -2129,7 +2141,14 @@ export class DataTableDemo extends Component {
     }
 
     render() {
-        var dynamicColumns = this.cols.map((col,i) => {
+        const columns = [
+            {field: 'vin', header: 'Vin'},
+            {field: 'year', header: 'Year'},
+            {field: 'brand', header: 'Brand'},
+            {field: 'color', header: 'Color'}
+        ];
+
+        const dynamicColumns = columns.map((col,i) => {
             return <Column key={col.field} field={col.field} header={col.header} />;
         });
 
@@ -2159,6 +2178,8 @@ export class DataTableDemo extends Component {
                     </DataTable>
 
                 </div>
+
+                <DataTableDoc></DataTableDoc>
             </div>
         );
     }

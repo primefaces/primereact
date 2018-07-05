@@ -21,6 +21,12 @@ export class Column extends Component {
         filterFunction: null,
         style: null,
         className: null,
+        headerStyle: null,
+        headerClassName: null,
+        bodyStyle: null,
+        bodyClassName: null,
+        footerStyle: null,
+        footerClassName: null,
         expander: false,
         frozen: false,
         selectionMode: null,
@@ -29,7 +35,7 @@ export class Column extends Component {
         editor: null,
         editorValidator: null,
         rowReorder: false,
-        rowReorderIcon: 'fa fa-bars'
+        rowReorderIcon: 'pi pi-bars'
     }
 
     static propsTypes = {
@@ -50,6 +56,12 @@ export class Column extends Component {
         filterFunction: PropTypes.func,
         style: PropTypes.object,
         className: PropTypes.string,
+        headerStyle: PropTypes.object,
+        headerClassName: PropTypes.string,
+        bodyStyle: PropTypes.object,
+        bodyClassName: PropTypes.string,
+        footerStyle: PropTypes.object,
+        footerClassName: PropTypes.string,
         expander: PropTypes.bool,
         frozen: PropTypes.bool,
         selectionMode: PropTypes.string,
