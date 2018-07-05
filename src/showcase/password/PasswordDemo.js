@@ -15,6 +15,7 @@ export class PasswordDemo extends Component {
                         <p>Password displays strength indicator for password fields.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
                     <h3 className="first">Password</h3>
                     <Password/>
@@ -45,24 +46,26 @@ import {Password} from 'primereact/password';
 `}</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Password is used as a regular input component.</p>
+                        <p>Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
                         <CodeHighlight className="language-jsx">
                         {`
 <Password value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
 
 `}
-                    </CodeHighlight>
+                        </CodeHighlight>
+
                         <h3>Properties</h3>
                         <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
+                        
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -98,6 +101,7 @@ import {Password} from 'primereact/password';
                                 </tbody>
                             </table>
                         </div>
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
@@ -137,7 +141,6 @@ import {Password} from 'primereact/password';
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {Password} from 'primereact/password';
 
 export class PasswordDemo extends Component {
@@ -151,9 +154,10 @@ export class PasswordDemo extends Component {
                         <p>Password displays strength indicator for password fields.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
                     <h3 className="first">Password</h3>
-                    <Password />
+                    <Password/>
                 </div>
             </div>
         );
