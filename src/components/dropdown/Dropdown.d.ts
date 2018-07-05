@@ -21,13 +21,13 @@ interface DropdownProps {
     autoFocus?: boolean;
     lazy?: boolean;
     panelClassName?: string;
-    panelstyle?: object;
+    panelStyle?: object;
     dataKey?: string;
     inputId?: string;
     showClear?: boolean;
     onChange?(e: {originalEvent: Event, value: any}): void;
-    onMouseDown?(): void;
-    onContextMenu?(): void;
+    onMouseDown?(event: Event): void;
+    onContextMenu?(event: Event): void;
 }
 
 export class Dropdown extends React.Component<DropdownProps,any> {}

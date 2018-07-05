@@ -48,7 +48,7 @@ export class DropdownDemo extends Component {
     }
 
     render() {
-        var cities = [
+        const cities = [
             {name: 'New York', code: 'NY'},
             {name: 'Rome', code: 'RM'},
             {name: 'London', code: 'LDN'},
@@ -56,7 +56,7 @@ export class DropdownDemo extends Component {
             {name: 'Paris', code: 'PRS'}
         ];
 
-        var cars = [
+        const cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -119,15 +119,15 @@ import {Dropdown} from 'primereact/dropdown';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Dropdown requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
-                        whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+                        <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+                        of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
+                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabe</i> property to specify the field name of the option. SelectItem API is designed to have more 
                         control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
-
 
                         <p><b>Options as SelectItems</b></p>
                         <CodeHighlight className="language-javascript">
                             {`
-var citySelectItems = [
+const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
     {label: 'London', value: 'LDN'},
@@ -140,7 +140,7 @@ var citySelectItems = [
                         
                         <CodeHighlight className="language-jsx">
                             {`
-<Dropdown value={this.state.city} options={citySelectItems} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
+<Dropdown value={this.state.city} options={citySelectItems} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
 
 `}
                         </CodeHighlight>
@@ -148,7 +148,7 @@ var citySelectItems = [
                         <p><b>Options as any type</b></p>
                         <CodeHighlight className="language-javascript">
                             {`
-var cities = [
+const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
     {name: 'London', code: 'LDN'},
@@ -161,73 +161,47 @@ var cities = [
                         
                         <CodeHighlight className="language-jsx">
                             {`
-<Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
+<Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
 
 `}
                         </CodeHighlight>
 
                         <h3>Filtering</h3>
-                        <p>Options can be filtered using an input field in the overlay by enabling the filter property. By default filtering is done against
-                            label of the SelectItem and filterBy property is available to choose one or more properties of the SelectItem API.</p>
+                        <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
+                            label of the SelectItem and <i>filterBy</i> property is available to choose one or more properties of the SelectItem API.</p>
+
                         <CodeHighlight className="language-jsx">
                             {`
-<Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" placeholder="Select a Car"/>
+<Dropdown value={this.state.car} options={cars} onChange={(e) => {this.setState({city: e.value})}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" placeholder="Select a Car"/>
 
 `}
                         </CodeHighlight>
 
                         <h3>Custom Content</h3>
-                        <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate fucntion that gets the SelectItem as a property and returns the content.</p>
+                        <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}} placeholder="Select a Car"/>
+<Dropdown value={this.state.car} options={cars} onChange={(e) => {this.setState({city: e.value})}} itemTemplate={this.carTemplate} placeholder="Select a Car"/>
 
 `}
                         </CodeHighlight>
 
                         <CodeHighlight className="language-javascript">
                             {`
-
-constructor() {
-    super();
-    this.state = {car: null};
-    this.onCarChange = this.onCarChange.bind(this);
-}
-
-onCarChange(e) {
-    this.setState({car: e.value});
-}
-
 carTemplate(option) {
-    if(!option.value) {
+    if (!option.value) {
         return option.label;
     }
     else {
-        var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="ui-helper-clearfix">
                 <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                <span style={{float:'right', margin:'.5em .25em 0 0'}}>{option.label}</span>
             </div>
         );
     }
-}
-
-render() {
-    var cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
-
-    return <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} itemTemplate={this.carTemplate} style={{width:'150px'}} placeholder="Select a Car"/>;
 }
 
 `}
@@ -273,7 +247,7 @@ render() {
                                         <td>itemTemplate</td>
                                         <td>function</td>
                                         <td>null</td>
-                                        <td>Function that gets the option and returns the content for it.</td>
+                                        <td>Function that gets the option and returns the content.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -484,6 +458,9 @@ render() {
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Dropdown} from 'primereact/dropdown';
+
 export class DropdownDemo extends Component {
 
     constructor() {
@@ -528,7 +505,7 @@ export class DropdownDemo extends Component {
     }
 
     render() {
-        var cities = [
+        const cities = [
             {name: 'New York', code: 'NY'},
             {name: 'Rome', code: 'RM'},
             {name: 'London', code: 'LDN'},
@@ -536,7 +513,7 @@ export class DropdownDemo extends Component {
             {name: 'Paris', code: 'PRS'}
         ];
 
-        var cars = [
+        const cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -550,7 +527,7 @@ export class DropdownDemo extends Component {
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>
@@ -559,20 +536,19 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City"/>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City" optionLabel="name"/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange} style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>
+                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
+                              style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} 
-                        style={{width:'150px'}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}}
+                              filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
-
-                <DropdownDoc />
             </div>
         );
     }
