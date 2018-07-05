@@ -17,7 +17,8 @@ interface InputMaskProps {
     disabled?: boolean;
     readonly?: boolean;
     name?: string;
-    onComplete?(e: {originalEvent: Event}): void;
+    required?: boolean;
+    onComplete?(e: Event): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 

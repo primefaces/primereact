@@ -8,38 +8,14 @@ export class InputMaskDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeSNN = this.onChangeSNN.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
-        this.onChangePhoneExt = this.onChangePhoneExt.bind(this);
-        this.onChangeSerialNumber = this.onChangeSerialNumber.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({ val1: e.value });
-    }
-
-    onChangeSNN(e) {
-        this.setState({ val2: e.value });
-    }
-
-    onChangeDate(e) {
-        this.setState({ val3: e.value });
-    }
-
-    onChangePhone(e) {
-        this.setState({ val4: e.value });
-    }
-
-    onChangePhoneExt(e) {
-        this.setState({ val5: e.value });
-    }
-
-    onChangeSerialNumber(e) {
-        this.setState({ val6: e.value });
+        this.state = {
+            val1: null,
+            val2: null,
+            val3: null,
+            val4: null,
+            val5: null,
+            val6: null
+        };
     }
 
     render() {
@@ -56,32 +32,32 @@ export class InputMaskDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Basic: {this.state.val1}</span>
-                            <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={this.onChangeBasic}></InputMask>
+                            <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={(e) => this.setState({val1: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>SSN: {this.state.val2}</span>
-                            <InputMask mask="999-99-9999" value={this.state.val2} placeholder="999-99-9999" onChange={this.onChangeSNN}></InputMask>
+                            <InputMask mask="999-99-9999" value={this.state.val2} placeholder="999-99-9999" onChange={(e) => this.setState({val2: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Date: {this.state.val3}</span>
-                            <InputMask mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={this.onChangeDate}></InputMask>
+                            <InputMask mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => this.setState({val3: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Phone: {this.state.val4}</span>
-                            <InputMask mask="(999) 999-9999" value={this.state.val4} placeholder="(999) 999-9999" onChange={this.onChangePhone}></InputMask>
+                            <InputMask mask="(999) 999-9999" value={this.state.val4} placeholder="(999) 999-9999" onChange={(e) => this.setState({val4: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Phone Ext: {this.state.val5}</span>
-                            <InputMask mask="(999) 999-9999? x99999" value={this.state.val5} placeholder="(999) 999-9999? x99999" onChange={this.onChangePhoneExt}></InputMask>
+                            <InputMask mask="(999) 999-9999? x99999" value={this.state.val5} placeholder="(999) 999-9999? x99999" onChange={(e) => this.setState({val5: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Serial Number: {this.state.val6}</span>
-                            <InputMask mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={this.onChangeSerialNumber}></InputMask>
+                            <InputMask mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={(e) => this.setState({val6: e.value})}></InputMask>
                         </div>
                     </div>
                 </div>
@@ -111,35 +87,18 @@ import {InputMask} from 'primereact/inputmask';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>InputMask requires a value and an onChange event.
-
-</p>
+            <p>InputMask is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight className="language-jsx">
 {`
-<InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={this.onChangeBasic}></InputMask>
-
-`}
-</CodeHighlight>
-
-<CodeHighlight className="language-javascript">
-{`
-constructor() {
-        super();
-        this.state = {};
-
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({ val1: e.value });
-    }
+<InputMask mask="99-999999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
 
 `}
 </CodeHighlight>
 
             <h3>Mask</h3>
             <p>Mask format can be a combination of the the following built-in definitions.</p>
+            
             <ul>
                 <li>
                     a - Alpha character (A-Z,a-z)
@@ -151,28 +110,36 @@ constructor() {
                     * - Alpha numberic character (A-Z,a-z,0-9)
                 </li>
             </ul>
+
 <CodeHighlight className="language-jsx">
 {`
-<InputMask mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={this.onChangeSerialNumber}></InputMask>
+<InputMask mask="a*-999-a999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
 
 `}
 </CodeHighlight>
 
             <h3>SlotChar</h3>
-            <p>Underscore is the default placeholder for a mask and this can be customized using slotChart option.</p>
+            <p>Underscore is the default placeholder for a mask and this can be customized using <i>slotChart</i> option.</p>
+
 <CodeHighlight className="language-jsx">
 {`
-<InputMask mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={this.onChangeDate}></InputMask>
+<InputMask mask="99/99/9999" value={this.state.value} slotChar="mm/dd/yyyy" onChange={(e) => this.setState({value: e.value})}></InputMask>
 
 `}
 </CodeHighlight>
+
             <h3>Optional Values</h3>
-            <p>
-               If the input does not complete the mask definition, it is cleared by default.
-               Use autoClear property to control this behavior. In addition, certain part of
+            <p>If the input does not complete the mask definition, it is cleared by default.
+               Use <i>autoClear</i> property to control this behavior. In addition, certain part of
                a mask can be made optional by using ? symbol where anything after the question
-               mark becomes optional.
-            </p>
+               mark becomes optional.</p>
+<CodeHighlight className="language-jsx">
+{`
+<InputMask mask="(999) 999-9999? x99999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+
+`}
+</CodeHighlight>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -221,12 +188,12 @@ constructor() {
                             <td>true</td>
                             <td>Clears the incomplete value on blur.</td>
                         </tr>
-                         <tr>
-                           <td>unmask</td>
-                           <td>boolean</td>
-                           <td>false</td>
-                           <td>Defines if model sets the raw unmasked value to bound value or the formatted mask value.</td>
-                         </tr>
+                        <tr>
+                            <td>unmask</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Defines if model sets the raw unmasked value to bound value or the formatted mask value.</td>
+                        </tr>
                          <tr>
                             <td>style</td>
                             <td>string</td>
@@ -275,18 +242,18 @@ constructor() {
                             <td>false</td>
                             <td>When present, it specifies that an input field is read-only.</td>
                         </tr>
-                         <tr>
-                             <td>required</td>
-                             <td>boolean</td>
-                             <td>false</td>
-                             <td>When present, it specifies that the element must be filled out before submitting the form.</td>
-                         </tr>
                         <tr>
                             <td>name</td>
                             <td>string</td>
                             <td>null</td>
                             <td>Name of the input field.</td>
                         </tr>
+                         <tr>
+                             <td>required</td>
+                             <td>boolean</td>
+                             <td>false</td>
+                             <td>When present, it specifies that the element must be filled out before submitting the form.</td>
+                         </tr>
                     </tbody>
                 </table>
             </div>
@@ -304,8 +271,14 @@ constructor() {
                     <tbody>
                         <tr>
                             <td>onComplete</td>
-                            <td>-</td>
+                            <td>event: Browser event</td>
                             <td>Callback to invoke on when user completes the mask pattern.</td>
+                        </tr>
+                        <tr>
+                            <td>onChange</td>
+                            <td>originalEvent: Browser event <br/>
+                                value: New value of the component</td>
+                            <td>Callback to invoke on value change.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -325,48 +298,27 @@ constructor() {
             </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, { Component } from 'react';
+import {InputMask} from 'primereact/inputmask';
+
 export class InputMaskDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
-
-        this.onChangeBasic = this.onChangeBasic.bind(this);
-        this.onChangeSNN = this.onChangeSNN.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
-        this.onChangePhoneExt = this.onChangePhoneExt.bind(this);
-        this.onChangeSerialNumber = this.onChangeSerialNumber.bind(this);
-    }
-
-    onChangeBasic(e) {
-        this.setState({ val1: e.value });
-    }
-
-    onChangeSNN(e) {
-        this.setState({ val2: e.value });
-    }
-
-    onChangeDate(e) {
-        this.setState({ val3: e.value });
-    }
-
-    onChangePhone(e) {
-        this.setState({ val4: e.value });
-    }
-
-    onChangePhoneExt(e) {
-        this.setState({ val5: e.value });
-    }
-
-    onChangeSerialNumber(e) {
-        this.setState({ val6: e.value });
+        this.state = {
+            val1: null,
+            val2: null,
+            val3: null,
+            val4: null,
+            val5: null,
+            val6: null
+        };
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>InputMask</h1>
                         <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
@@ -377,36 +329,35 @@ export class InputMaskDemo extends Component {
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Basic: {this.state.val1}</span>
-                            <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={this.onChangeBasic}></InputMask>
+                            <InputMask mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={(e) => this.setState({val1: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>SSN: {this.state.val2}</span>
-                            <InputMask mask="999-99-9999" value={this.state.val2} placeholder="999-99-9999" onChange={this.onChangeSNN}></InputMask>
+                            <InputMask mask="999-99-9999" value={this.state.val2} placeholder="999-99-9999" onChange={(e) => this.setState({val2: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Date: {this.state.val3}</span>
-                            <InputMask mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={this.onChangeDate}></InputMask>
+                            <InputMask mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => this.setState({val3: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Phone: {this.state.val4}</span>
-                            <InputMask mask="(999) 999-9999" value={this.state.val4} placeholder="(999) 999-9999" onChange={this.onChangePhone}></InputMask>
+                            <InputMask mask="(999) 999-9999" value={this.state.val4} placeholder="(999) 999-9999" onChange={(e) => this.setState({val4: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Phone Ext: {this.state.val5}</span>
-                            <InputMask mask="(999) 999-9999? x99999" value={this.state.val5} placeholder="(999) 999-9999? x99999" onChange={this.onChangePhoneExt}></InputMask>
+                            <InputMask mask="(999) 999-9999? x99999" value={this.state.val5} placeholder="(999) 999-9999? x99999" onChange={(e) => this.setState({val5: e.value})}></InputMask>
                         </div>
 
                         <div className="ui-g-12 ui-md-6 ui-lg-4">
                             <span>Serial Number: {this.state.val6}</span>
-                            <InputMask mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={this.onChangeSerialNumber}></InputMask>
+                            <InputMask mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={(e) => this.setState({val6: e.value})}></InputMask>
                         </div>
                     </div>
                 </div>
-                <InputMaskDoc></InputMaskDoc>
             </div>
         );
     }

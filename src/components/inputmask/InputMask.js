@@ -186,9 +186,7 @@ export class InputMask extends Component {
         }
 
         if (this.props.onComplete && this.isCompleted()) {
-            this.props.onComplete({
-                originalEvent: e
-            })
+            this.props.onComplete(e);
         }
     }
 
