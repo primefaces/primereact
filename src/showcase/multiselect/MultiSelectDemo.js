@@ -14,7 +14,7 @@ export class MultiSelectDemo extends Component {
     }
 
     render() {
-        let cars = [
+        const cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
@@ -66,14 +66,15 @@ import {MultiSelect} from 'primereact/multiselect';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>MultiSelect requires a value to bind and a collection of options. There are two alternatives of how to define the options property; One way is providing a collection of SelectItem instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the optionLabel property to specify the field name of the option. SelectItem API is designed to have more 
+            <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+            of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabe</i> property to specify the field name of the option. SelectItem API is designed to have more 
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
         
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">
 {`
-var citySelectItems = [
+const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
     {label: 'London', value: 'LDN'},
@@ -94,7 +95,7 @@ var citySelectItems = [
             <p><b>Options as any type</b></p>
 <CodeHighlight className="language-javascript">
 {`
-var cities = [
+const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
     {name: 'London', code: 'LDN'},
@@ -113,7 +114,7 @@ var cities = [
 </CodeHighlight>
 
             <h3>Custom Content</h3>
-            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a property and returns the content.</p>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -125,7 +126,7 @@ var cities = [
 <CodeHighlight className="language-javascript">
 {`
 carTemplate(option) {
-    var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+    const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
     return (
         <div className="ui-helper-clearfix">
@@ -221,7 +222,7 @@ carTemplate(option) {
                             <td>When specified, displays an input field to filter the items on keyup.</td>
                         </tr>
                         <tr>
-                            <td>key</td>
+                            <td>dataKey</td>
                             <td>string</td>
                             <td>null</td>
                             <td>A property to uniquely identify a value in options.</td>
@@ -324,9 +325,7 @@ carTemplate(option) {
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {MultiSelect} from 'primereact/multiselect';
-import {TabView,TabPanel} from 'primereact/tabview';
 
 export class MultiSelectDemo extends Component {
         
@@ -338,7 +337,7 @@ export class MultiSelectDemo extends Component {
     }
 
     render() {
-        let cars = [
+        const cars = [
             {label: 'Audi', value: 'Audi'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},

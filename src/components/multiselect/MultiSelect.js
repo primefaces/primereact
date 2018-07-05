@@ -20,10 +20,10 @@ export class MultiSelect extends Component {
         defaultLabel: 'Choose',
         disabled: false,
         filter: false,
-        key: null,
+        dataKey: null,
+        appendTo: null,
         itemTemplate: null,
-        onChange: null,
-        appendTo: null
+        onChange: null
     };
 
     static propTypes = {
@@ -37,10 +37,10 @@ export class MultiSelect extends Component {
         defaultLabel: PropTypes.string,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
-        key: PropTypes.string,
+        dataKey: PropTypes.string,
+        appendTo: PropTypes.object,
         itemTemplate: PropTypes.func,
         onChange: PropTypes.func,
-        appendTo: PropTypes.object
     };
 
     constructor(props) {
@@ -165,7 +165,7 @@ export class MultiSelect extends Component {
         
         if(this.props.value) {
             for(let i = 0; i < this.props.value.length; i++) {
-                if(ObjectUtils.equals(this.props.value[i], value, this.props.key)) {
+                if(ObjectUtils.equals(this.props.value[i], value, this.props.dataKey)) {
                     index = i;
                     break;
                 }

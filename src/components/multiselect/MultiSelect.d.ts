@@ -11,10 +11,10 @@ interface MultiSelectProps {
     defaultLabel?: string;
     disabled?: boolean;
     filter?: boolean;
-    key?: string;
+    dataKey?: string;
+    appendTo?: HTMLElement;
     itemTemplate?(item: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
-    appendTo?: HTMLElement;
 }
 
 export class MultiSelect extends React.Component<MultiSelectProps,any> {}
