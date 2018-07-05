@@ -63,11 +63,31 @@ import {Rating} from 'primereact/rating';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Calendar is used a controlled input component with value and onChange properties.</p>
+                        <p>Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
                         
                         <CodeHighlight className="language-jsx">
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Number of Stars</h3>
+                        <p>Number of stars to display is defined with <i>stars</i> property, default is 5.</p>
+                        
+                        <CodeHighlight className="language-jsx">
+{`
+<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} stars={5} />
+
+`}
+                        </CodeHighlight>
+
+                        <h3>Cancel</h3>
+                        <p>A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.</p>
+                        
+                        <CodeHighlight className="language-jsx">
+{`
+<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} cancel={5} />
 
 `}
                         </CodeHighlight>
@@ -132,7 +152,6 @@ import {Rating} from 'primereact/rating';
                                         <td>null</td>
                                         <td>ClassName of the component.</td>
                                     </tr>
-                                    
                                 </tbody>
                             </table>
                         </div>
@@ -153,7 +172,7 @@ import {Rating} from 'primereact/rating';
                                         <td>event.originalEvent: Browser event <br />
                                             event.value: selected value
                                         </td>
-                                        <td>Callback to invoke on rate change.</td>
+                                        <td>Callback to invoke on value change.</td>
                                     </tr>
                                 </tbody>
                             </table>
