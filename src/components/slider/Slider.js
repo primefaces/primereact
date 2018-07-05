@@ -15,7 +15,8 @@ export class Slider extends Component {
         step: null,
         range: false,
         style: null,
-        className: null
+        className: null,
+        onChange: null
     }
 
     static propsTypes = {
@@ -29,6 +30,7 @@ export class Slider extends Component {
         range: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        onChange: PropTypes.func
     }
 
     constructor(props) {
