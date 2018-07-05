@@ -8,7 +8,9 @@ export class ButtonDemo extends Component {
         
     constructor() {
         super();
-        this.state = {count: 0};
+        this.state = {
+            count: 0
+        };
         this.increment = this.increment.bind(this);
     }
 
@@ -82,7 +84,7 @@ import {Button} from 'primereact/button';
 </CodeHighlight>
 
                         <h3>Label</h3>
-                        <p>Use label property to define the text of the button.</p>    
+                        <p>Text of the button is defined using the <i>label</i> property.</p>    
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Save"/>
@@ -91,8 +93,9 @@ import {Button} from 'primereact/button';
 </CodeHighlight>
 
                         <h3>Icons</h3>
-                        <p>Icon on a button is specified with icon attribute and position is customized using iconPos attribute. Default
-                        icon position is left. To display only an icon, leave label as undefined.</p>
+                        <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
+                        icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
+
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Click" icon="pi pi-check" />
@@ -103,7 +106,7 @@ import {Button} from 'primereact/button';
 </CodeHighlight>
 
                         <h3>Events</h3>
-                        <p>Events are defined using standard notation.</p>
+                        <p>Events are defined with the standard notation.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Click" onClick={this.handleClick} />
@@ -114,7 +117,7 @@ import {Button} from 'primereact/button';
 
 
                         <h3>Severity</h3>
-                        <p>Different color options are available to define severity levels.</p>
+                        <p>Different color options are available as severity levels.</p>
                         
                         <ul>
                             <li>.ui-button-secondary</li>
@@ -123,6 +126,7 @@ import {Button} from 'primereact/button';
                             <li>.ui-button-warning</li>
                             <li>.ui-button-danger</li>
                         </ul>
+
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Primary" />
@@ -148,12 +152,6 @@ import {Button} from 'primereact/button';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
                                         <td>label</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -170,12 +168,6 @@ import {Button} from 'primereact/button';
                                         <td>string</td>
                                         <td>left</td>
                                         <td>Position of the icon, valid values are "left" and "right".</td>
-                                    </tr>
-                                    <tr>
-                                        <td>cornerStyleClass</td>
-                                        <td>string</td>
-                                        <td>ui-corner-all</td>
-                                        <td>Classname of corner style.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -221,11 +213,16 @@ import {Button} from 'primereact/button';
 
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {Button} from 'primereact/button';
+
 export class ButtonDemo extends Component {
         
     constructor() {
         super();
-        this.state = {count: 0};
+        this.state = {
+            count: 0
+        };
         this.increment = this.increment.bind(this);
     }
 
@@ -238,7 +235,7 @@ export class ButtonDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
@@ -267,6 +264,7 @@ export class ButtonDemo extends Component {
         )
     }
 }
+
 `}
 </CodeHighlight>
                     </TabPanel>
