@@ -11,7 +11,7 @@ export class GridDemo extends Component {
                     <div className="feature-intro">
                         <h1>Grid CSS</h1>
                         <p>Grid CSS is a lightweight responsive and fluid layout utility optimized for mobile devices, tablets and desktops. 
-                        Grid CSS is used internally in PrimeReact components and can be used as standalone as well.</p>
+                        Grid CSS is used internally in some PrimeReact components and can be used as standalone as well.</p>
                     </div>
                 </div>
 
@@ -324,25 +324,25 @@ export class GridDoc extends Component {
                     <tr>
                         <td>ui-sm-*</td>
                         <td>Small devices like phones</td>
-                        <td>max-width: 40em (640px)</td>
+                        <td>max-width: 40em</td>
                         <td>ui-sm-6, ui-sm-4</td>
                     </tr>
                     <tr>
                         <td>ui-md-*</td>
                         <td>Medium sized devices such as tablets</td>
-                        <td>min-width: 40.063em (641px)</td>
+                        <td>min-width: 40.063em</td>
                         <td>ui-md-2, ui-sm-8</td>
                     </tr>
                     <tr>
                         <td>ui-lg-*</td>
                         <td>Devices with large screen like desktops</td>
-                        <td>min-width: 64.063em (1025px)</td>
+                        <td>min-width: 64.063em</td>
                         <td>ui-lg-6, ui-sm-12</td>
                     </tr>
                     <tr>
                         <td>ui-xl-*</td>
                         <td>Big screen monitors</td>
-                        <td>min-width: 90.063em (1441px)</td>
+                        <td>min-width: 90.063em</td>
                         <td>ui-xl-2, ui-sm-10</td>
                     </tr>
                 </tbody>
