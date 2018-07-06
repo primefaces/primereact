@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { Chart } from '../../components/chart/Chart';
+import React, {Component} from 'react';
+import {TabView, TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import {Chart} from '../../components/chart/Chart';
 
 export class BarChartDemo extends Component {
+
     render() {
-        var data = {
+        const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
@@ -55,13 +56,13 @@ export class BarChartDemoDoc extends Component {
                     <TabPanel header="Source">
                         <CodeHighlight className="language-javascript">
                             {`
-import React, { Component } from 'react';
-import { Chart } from 'primereact/chart';
+import React, {Component} from 'react';
+import {Chart} from 'primereact/chart';
 
 export class BarChartDemo extends Component {
     
     render() {
-        var data = {
+        const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {

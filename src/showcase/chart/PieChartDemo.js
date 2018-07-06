@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { Chart } from '../../components/chart/Chart';
+import {TabView, TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import {Chart} from '../../components/chart/Chart';
 
 export class PieChartDemo extends Component {
 
     render() {
-        var data = {
+        const data = {
             labels: ['A','B','C'],
             datasets: [
                 {
@@ -57,12 +57,12 @@ export class PieChartDemoDoc extends Component {
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import { Chart } from 'primereact/chart';
+import {Chart} from 'primereact/chart';
 
 export class PieChartDemo extends Component {
-    
+
     render() {
-        var data = {
+        const data = {
             labels: ['A','B','C'],
             datasets: [
                 {

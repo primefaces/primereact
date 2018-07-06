@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { Chart } from '../../components/chart/Chart';
+import React, {Component} from 'react';
+import {TabView, TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import {Chart} from '../../components/chart/Chart';
 
 export class RadarChartDemo extends Component {
 
     render() {
-        var data = {
+        const data = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
                 {
@@ -64,13 +64,13 @@ export class RadarChartDemoDoc extends Component {
                     <TabPanel header="Source">
                         <CodeHighlight className="language-javascript">
                             {`
-import React, { Component } from 'react';
-import { Chart } from '../../components/chart/Chart';
+import React, {Component} from 'react';
+import {Chart} from '../../components/chart/Chart';
 
 export class RadarChartDemo extends Component {
 
     render() {
-        var data = {
+        const data = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
                 {

@@ -9,7 +9,7 @@ export class ChartDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Charts</h1>
-                        <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Charts.js</a> 2.7.x, an open source HTML5 based charting library.</p>
+                        <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Charts.js</a>, an open source HTML5 based charting library.</p>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@ class ChartDoc extends Component {
     render() {
         return (
             <div className="content-section source">
-                <h3 style={{marginTop:0}}>Import</h3>
+                <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
 import {Chart} from 'primereact/chart';
@@ -37,10 +37,10 @@ import {Chart} from 'primereact/chart';
 </CodeHighlight>
 
                 <h3>Chart Types</h3>
-                <p>Chart type is defined using the type property. Currently there are 6 options available; pie, doughtnut, line, bar, radar and polarArea.</p>
+                <p>Chart type is defined using the <i>type</i> property. Currently there are 6 options available; "pie", "doughtnut", "line", "bar", "radar" and "polarArea".</p>
 
                 <h3>Data</h3>
-                <p>Data of a chart is provided using a binding to the data property, each type has its own format of data. Here is an example of a line chart.</p>
+                <p>Data of a chart is provided using a binding to the <i>data</i> property, each type has its own format of data. Here is an example of a line chart.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -51,7 +51,7 @@ import {Chart} from 'primereact/chart';
 
 <CodeHighlight className="language-jsx">
 {`
-var data = {
+const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         {
@@ -78,14 +78,14 @@ var data = {
 
     <CodeHighlight className="language-jsx">
 {`
-<Chart type="line" data={data} options={options}/>
+<Chart type="line" data={data} options={options} />
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="language-javascript">
 {`
-var options = {
+const options = {
         title: {
             display: true,
             text: 'My Title',
