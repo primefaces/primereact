@@ -6,11 +6,13 @@ import classNames from 'classnames';
 export class ScrollPanel extends Component {
 
     static defaultProps = {
+        id: null,
         style: null,
         className: null
     }
 
     static propTypes = {
+        id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string
     };

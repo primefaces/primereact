@@ -12,7 +12,7 @@ export class ScrollPanelDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ScrollPanel</h1>
-                        <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar..</p>
+                        <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.</p>
                     </div>
                 </div>
 
@@ -20,8 +20,8 @@ export class ScrollPanelDemo extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}}>
-                                <div style={{padding:'1em',lineHeight:'1.5'}}>
-                                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
+                                <div style={{padding:'1em', lineHeight:'1.5'}}>
+                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
                                     of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands
@@ -35,9 +35,9 @@ export class ScrollPanelDemo extends Component {
                             </ScrollPanel>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
+                            <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar1">
                                 <div style={{ padding: '1em', lineHeight: '1.5' }}>
-                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
+                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
                                     of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands
@@ -51,8 +51,8 @@ export class ScrollPanelDemo extends Component {
                             </ScrollPanel>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                                <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
+                            <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar2">
+                                <div style={{padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
@@ -96,7 +96,7 @@ import {ScrollPanel} from 'primereact/scrollpanel';
 
                         <h3>Getting Started</h3>
                         <p>ScrollPanel is defined using dimensions for the scrollable viewport.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight className="language-markup">
                             {`
 <ScrollPanel style={{width: '100%', height: '200px'}}">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -109,8 +109,8 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                         </CodeHighlight>
 
                         <h3>Customization</h3>
-                        <p>Look and feel can easily be customized, here is an example with a background and blue handle.</p>
-                        <CodeHighlight className="language-jsx">
+                        <p>Look and feel can easily be customized, here is an example with a custom handle.</p>
+                        <CodeHighlight className="language-markup">
                             {`
 <ScrollPanel style={{width: '100%', height: '200px'}}" className="custom">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
@@ -122,7 +122,7 @@ import {ScrollPanel} from 'primereact/scrollpanel';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="css">
+                        <CodeHighlight className="language-markup">
                             {`
 .custom .ui-scrollpanel-wrapper {
     border-right: 9px solid #f4f4f4;
@@ -153,6 +153,12 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
                                     <tr>
                                         <td>style</td>
                                         <td>string</td>
@@ -240,8 +246,8 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
-import React, { Component } from 'react';
-import { ScrollPanel } from 'primereact/scrollpanel';
+import React, {Component} from 'react';
+import {ScrollPanel} from '../../components/scrollpanel/ScrollPanel';
 
 export class ScrollPanelDemo extends Component {
 
@@ -251,7 +257,7 @@ export class ScrollPanelDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ScrollPanel</h1>
-                        <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar..</p>
+                        <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.</p>
                     </div>
                 </div>
 
@@ -259,8 +265,8 @@ export class ScrollPanelDemo extends Component {
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}}>
-                                <div style={{padding:'1em',lineHeight:'1.5'}}>
-                                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
+                                <div style={{padding:'1em', lineHeight:'1.5'}}>
+                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
                                     of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands
@@ -274,9 +280,9 @@ export class ScrollPanelDemo extends Component {
                             </ScrollPanel>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
+                            <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar1">
                                 <div style={{ padding: '1em', lineHeight: '1.5' }}>
-                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
+                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
                                     of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands
@@ -290,8 +296,8 @@ export class ScrollPanelDemo extends Component {
                             </ScrollPanel>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                                <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
+                            <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar2">
+                                <div style={{padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
                                     son Michael has just come home from the war, but does not intend to become part of his father's business. Through
                                     Michael's life the nature of the family business becomes clear. The business of the family is just like the head
