@@ -8,3 +8,4 @@ src
 gulpfile.js
 yarn.lock
 .github
+exports
