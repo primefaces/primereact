@@ -9,7 +9,7 @@ export class Card extends Component {
         header: null,
         footer: null,
         title: null,
-        subtitle: null,
+        subTitle: null,
         style: null,
         className: null
     };
@@ -19,7 +19,7 @@ export class Card extends Component {
         header: PropTypes.any,
         footer: PropTypes.any,
         title: PropTypes.string,
-        subtitle: PropTypes.string,
+        subTitle: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string
     };
@@ -31,13 +31,13 @@ export class Card extends Component {
     }
     
     renderBody(){
-        let title, subtitle, footer, children;
+        let title, subTitle, footer, children;
 
         if(this.props.title) {
             title = <div className="ui-card-title">{this.props.title}</div>;
         }
-        if(this.props.subtitle) {
-            subtitle = <div className="ui-card-subtitle">{this.props.subtitle}</div>;
+        if(this.props.subTitle) {
+            subTitle = <div className="ui-card-subtitle">{this.props.subTitle}</div>;
         }
         if(this.props.footer) {
             footer = <div className="ui-card-footer"> {this.props.footer}</div>;
@@ -48,7 +48,7 @@ export class Card extends Component {
         return (
             <div className="ui-card-body">
                 {title}
-                {subtitle}
+                {subTitle}
                 {children}
                 {footer}
             </div>

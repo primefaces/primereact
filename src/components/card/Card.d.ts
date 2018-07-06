@@ -1,10 +1,11 @@
 import React = require("react");
 
 interface CardProps {
+    id?: string;
     header?: any;
     footer?: any;
     title?: string;
-    subtitle?: string;
+    subTitle?: string;
     style?: object;
     className?: string;
 }

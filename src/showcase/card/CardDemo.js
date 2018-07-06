@@ -8,11 +8,15 @@ import {CodeHighlight} from '../codehighlight/CodeHighlight';
 export class CardDemo extends Component {
 
     render() {
-        let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
-        let footer = <span>
-                        <Button label="Save" icon="pi pi-check"/>
-                        <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
-                     </span>;
+        const header = (
+            <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>
+        );
+        const footer = (
+            <span>
+                <Button label="Save" icon="pi pi-check"/>
+                <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
+            </span>
+        );
 
         return (
             <div>
@@ -31,7 +35,7 @@ export class CardDemo extends Component {
 
                     <br/><br/>
 
-                    <Card title="Advanced Card" subtitle="Subtitle" style={{width: '360px'}} className="ui-card-shadow" footer={footer} header={header}>
+                    <Card title="Advanced Card" subTitle="Subtitle" style={{width: '360px'}} className="ui-card-shadow" footer={footer} header={header}>
                         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                             quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</div>
                     </Card>
@@ -74,10 +78,10 @@ import {Card} from 'primereact/card';
                         </CodeHighlight>
 
                         <h3>Title</h3>
-                        <p>Title text of the card is provided using the <strong>title</strong> property, optionally <strong>subtitle</strong> property is available for additional information about the card.</p>
+                        <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<Card title="Title">
+<Card title="Title" subTitle="SubTitle">
     Content
 </Card>
 `}
@@ -88,8 +92,8 @@ import {Card} from 'primereact/card';
 
                         <CodeHighlight className="language-jsx">
                             {`
-let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
-let footer = <span>
+const header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
+const footer = <span>
                 <Button label="Save" icon="pi pi-check"/>
                 <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
              </span>;
@@ -105,56 +109,56 @@ let footer = <span>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>header</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Header of the card.</td>
-                                </tr>
-                                <tr>
-                                    <td>footer</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Footer of the card.</td>
-                                </tr>
-                                <tr>
-                                    <td>title</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Title of the card.</td>
-                                </tr>
-                                <tr>
-                                    <td>subtitle</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Secondary title of the card.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the component.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Header of the card.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Footer of the card.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Title of the card.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>subTitle</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Secondary title of the card.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -204,15 +208,22 @@ let footer = <span>
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Card} from 'primereact/card';
+import {Button} from 'primereact/button';
+
 export class CardDemo extends Component {
 
     render() {
-
-        let header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
-        let footer = <span>
-                        <Button label="Save" icon="pi pi-check"/>
-                        <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
-                     </span>;
+        const header = (
+            <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>
+        );
+        const footer = (
+            <span>
+                <Button label="Save" icon="pi pi-check"/>
+                <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
+            </span>
+        );
 
         return (
             <div>
@@ -231,13 +242,11 @@ export class CardDemo extends Component {
 
                     <br/><br/>
 
-                    <Card title="Advanced Card" subtitle="Subtitle" style={{width: '360px'}} className="ui-card-shadow" footer={footer} header={header}>
+                    <Card title="Advanced Card" subTitle="Subtitle" style={{width: '360px'}} className="ui-card-shadow" footer={footer} header={header}>
                         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                             quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</div>
                     </Card>
                 </div>
-
-                <CardDoc />
             </div>
         )
     }
