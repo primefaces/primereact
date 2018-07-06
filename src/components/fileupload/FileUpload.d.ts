@@ -14,7 +14,7 @@ interface FileUploadProps {
     invalidFileSizeMessageDetail?: string;
     style?: object;
     className?: string;
-    widthCredentials?: boolean;
+    withCredentials?: boolean;
     previewWidth?: number;
     chooseLabel?: string;
     uploadLabel?: string;

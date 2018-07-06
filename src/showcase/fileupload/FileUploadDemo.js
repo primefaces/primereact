@@ -77,7 +77,7 @@ import {FileUpload} from 'primereact/fileupload';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>FileUpload requires a url property as the upload target and a name to identify the files at backend.</p>
+            <p>FileUpload requires a <i>url</i> property as the upload target and a <i>name</i> to identify the files at backend.</p>
 <CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo" url="./upload"></FileUpload>
@@ -86,7 +86,7 @@ import {FileUpload} from 'primereact/fileupload';
 </CodeHighlight>
 
             <h3>Multiple Uploads</h3>
-            <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable multiple option.</p>
+            <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable <i>multiple</i> option.</p>
                
 <CodeHighlight className="language-jsx">
 {`
@@ -99,7 +99,7 @@ import {FileUpload} from 'primereact/fileupload';
             <p>File selection can also be done by dragging and dropping from the filesystem to the content section of the component.</p>
 
             <h3>Auto Uploads</h3>
-            <p>When auto property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
+            <p>When <i>auto</i> property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -109,7 +109,7 @@ import {FileUpload} from 'primereact/fileupload';
 </CodeHighlight>
 
             <h3>File Types</h3>
-            <p>Selectable file types can be restricted with accept property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
+            <p>Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
 <CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo[]" url="./upload" multiple={true} accept="image/*" />
@@ -118,7 +118,7 @@ import {FileUpload} from 'primereact/fileupload';
 </CodeHighlight>
 
             <h3>File Size</h3>
-            <p>Maximium file size can be restricted using maxFileSize property defined in bytes.</p>
+            <p>Maximium file size can be restricted using <i>maxFileSize</i> property defined in bytes.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -127,7 +127,7 @@ import {FileUpload} from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <p>In order to customize the default messages use invalidFileSizeMessageSummary and invalidFileSizeMessageDetail options. In summary messages, {0} placeholder refers to the filename and in detail message, the file size.</p>
+            <p>In order to customize the default messages use <i>invalidFileSizeMessageSummary</i> and <i>invalidFileSizeMessageDetail</i> options. In summary messages, {0} placeholder refers to the filename and in detail message, the file size.</p>
             <ul>
                 <li>
                     invalidFileSizeMessageSummary: '{0}: Invalid file size, '
@@ -372,11 +372,8 @@ import {FileUpload} from 'primereact/fileupload';
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Growl} from '../../components/growl/Growl';
-import {FileUpload} from '../../components/fileupload/FileUpload';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import {Growl} from 'primereact/growl';
+import {FileUpload} from 'primereact/fileupload';;
 
 export class FileUploadDemo extends Component {
         
