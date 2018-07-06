@@ -9,27 +9,35 @@ export class ProgressBarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {value1: 0, value2: 50};
+        this.state = {
+            value1: 0, 
+            value2: 50
+        };
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
-            var val = this.state.value1;
+            let val = this.state.value1;
             val += Math.floor(Math.random() * 10) + 1;
+
             if(val >= 100) {
                 val = 100;
                 this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
                 clearInterval(this.interval);
             }
-            this.setState({value1: val});
+
+            this.setState({
+                value1: val
+            });
         }, 2000);
     }
 
     componentWillUnmount () {
-        this.interval && clearInterval(this.interval);
-        this.interval = false;
+        if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = null;
+        }
     }
-
 
     render() {
         return (
@@ -42,7 +50,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Growl ref={(el) => this.growl = el}></Growl>
 
                     <h3>Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>
@@ -78,173 +86,168 @@ import {ProgressBar} from 'primereact/progressbar';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
-            <p>ProgressBar has two modes; "determinate" and "indeterminate". ProgressBar requires a value between 0 and 100 to display the progress.</p>
+                        <h3>Getting Started</h3>
+                        <p>ProgressBar has two modes; "determinate" (default) and "indeterminate". In determinate mode, a value between 0 and 100 is required to display the progress.</p>
 <CodeHighlight className="language-jsx">
 {`
-<ProgressBar value={this.state.value1}></ProgressBar>
+<ProgressBar value={this.state.value} />
 
 `}
 </CodeHighlight>
-                        <p>Indeterminate has no such a requirement and is simple enabled using mode property.</p>
-                        <CodeHighlight className="language-jsx">
+                        <p>Indeterminate is simplly enabled using <i>mode</i> property.</p>
+            <CodeHighlight className="language-jsx">
                             {`
-<ProgressBar mode="indeterminate"></ProgressBar>
-
-`}
-                        </CodeHighlight>
-<CodeHighlight className="language-javascript">
-{`
-constructor() {
-    super();
-    this.state = {value1: 0, value2: 50};
-}
-
-componentDidMount() {
-    this.interval = setInterval(() => {
-        var val = this.state.value1;
-        val += Math.floor(Math.random() * 10) + 1;
-        if(val >= 100) {
-            val = 100;
-            this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
-            clearInterval(this.interval);
-        }
-        this.setState({value1: val});
-    }, 2000);
-}
+<ProgressBar mode="indeterminate" />
 
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>value</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Current value of the progress.</td>
-                        </tr>
-                        <tr>
-                            <td>showValue</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Show or hide progress bar value.</td>
-                        </tr>
-                        <tr>
-                            <td>unit</td>
-                            <td>string</td>
-                            <td>%</td>
-                            <td>Unit sign appended to the value.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>mode</td>
-                            <td>string</td>
-                            <td>determinate</td>
-                            <td>Defines the mode of the progress, valid values are "determinate" and "indeterminate".</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <h3>Properties</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>value</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Current value of the progress.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showValue</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Show or hide progress bar value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>unit</td>
+                                        <td>string</td>
+                                        <td>%</td>
+                                        <td>Unit sign appended to the value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>mode</td>
+                                        <td>string</td>
+                                        <td>determinate</td>
+                                        <td>Defines the mode of the progress, valid values are "determinate" and "indeterminate".</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-            <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ui-progressbar</td>
-                            <td>Container element.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-progressbar-determinate</td>
-                            <td>Container element of a determinate progressbar.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-progressbar-indeterminate</td>
-                            <td>Container element of an indeterminate progressbar.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-progressbar-value</td>
-                            <td>Element whose width changes according to value.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-progressbar-label</td>
-                            <td>Label element that displays the current value.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <h3>Styling</h3>
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ui-progressbar</td>
+                                        <td>Container element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-progressbar-determinate</td>
+                                        <td>Container element of a determinate progressbar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-progressbar-indeterminate</td>
+                                        <td>Container element of an indeterminate progressbar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-progressbar-value</td>
+                                        <td>Element whose width changes according to value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ui-progressbar-label</td>
+                                        <td>Label element that displays the current value.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                <h3>Dependencies</h3>
-                <p>None.</p>
-            </div>
-            
-            </TabPanel>
+                            <h3>Dependencies</h3>
+                            <p>None.</p>
+                        </div>
+                </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/progressbar" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <i className="fa fa-github"></i>
-                    <span>View on GitHub</span>
-                </a>
+                <TabPanel header="Source">
+                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/progressbar" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                        <i className="fa fa-github"></i>
+                        <span>View on GitHub</span>
+                    </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {ProgressBar} from 'primereact/progressbar';
+import {Growl} from 'primereact/growl';
+
 export class ProgressBarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {value1: 0, value2: 50};
+        this.state = {
+            value1: 0, 
+            value2: 50
+        };
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
-            var val = this.state.value1;
+            let val = this.state.value1;
             val += Math.floor(Math.random() * 10) + 1;
+
             if(val >= 100) {
                 val = 100;
                 this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
                 clearInterval(this.interval);
             }
-            this.setState({value1: val});
+
+            this.setState({
+                value1: val
+            });
         }, 2000);
+    }
+
+    componentWillUnmount () {
+        if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = null;
+        }
     }
 
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ProgressBar</h1>
                         <p>ProgressBar is a process status indicator</p>
@@ -252,7 +255,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Growl ref={(el) => this.growl = el}></Growl>
 
                     <h3>Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>
@@ -263,7 +266,6 @@ export class ProgressBarDemo extends Component {
                     <h3>Indeterminate</h3>
                     <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
                 </div>
-                <ProgressBarDoc></ProgressBarDoc>
             </div>
         );
     }
