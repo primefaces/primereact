@@ -1,18 +1,5 @@
 import React = require("react");
 
-interface OrganizationChartNodeProps {
-    node?: any;
-    nodeTemplate?: any;
-    root?: boolean;
-    first?: boolean;
-    last?: boolean;
-    selectionMode?: string;
-    onNodeClick?(event: Event, node: any): void;
-    isSelected?(node: any): void;
-}
-
-export class OrganizationChartNode extends React.Component<OrganizationChartNodeProps,any> {}
-
 interface OrganizationChartProps {
     id?: string;
     value?: any;
@@ -21,7 +8,7 @@ interface OrganizationChartProps {
     selectionMode?: string;
     selection?: any;
     nodeTemplate?: any;
-    selectionChange?(): void;
+    selectionChange?(data: any): void;
     onNodeSelect?(e: {originalEvent: Event, node: any}): void;
     onNodeUnselect?(e: {originalEvent: Event, node: any}): void;
 }
