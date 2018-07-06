@@ -106,7 +106,7 @@ import {Sidebar} from 'primereact/sidebar';
                         </CodeHighlight>
 
                         <h3>Position</h3>
-                        <p>Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the position property.</p>
+                        <p>Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
