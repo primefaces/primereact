@@ -76,42 +76,23 @@ import {Dialog} from 'primereact/dialog';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Dialog is used as a container and visibility is controlled with visible property. "onHide" event is required to update the visibility state.</p>
+            <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
+<Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={(e) => this.setState({visible: false})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </Dialog>
 
-<Button label="Show" icon="pi pi-info-circle" onClick={this.show} />
-
-`}
-</CodeHighlight>
-<CodeHighlight className="language-javascript">
-{`
-constructor() {
-    super();
-    this.state = {visible: false};
-    this.onClick = this.show.bind(this);
-    this.onHide = this.onHide.bind(this);
-}
-
-show(event) {
-    this.setState({visible: true});
-}
-
-onHide(event) {
-    this.setState({visible: false});
-}
+<Button label="Show" icon="pi pi-info-circle" onClick={(e) => this.setState({visible: true})} />
 
 `}
 </CodeHighlight>
 
             <h3>Header and Footer</h3>
-            <p>Header and Footer sections are defined using properties with the same name that accepts simple strings or JSX for custom content.</p>
+            <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content.</p>
 <CodeHighlight className="language-jsx">
 {`
 const footer = (
@@ -392,7 +373,6 @@ const footer = (
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {Dialog} from 'primereact/dialog';
 import {Button} from 'primereact/button';
 
