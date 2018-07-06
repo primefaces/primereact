@@ -20,30 +20,30 @@ export class GrowlDemo extends Component {
     }
 
     showSuccess() {
-        this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+        this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
 
     showInfo() {
-        this.growl.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+        this.growl.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
     }
 
     showWarn() {
-        this.growl.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+        this.growl.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
     }
 
     showError() {
-        this.growl.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+        this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
     }
 
     showSticky() {
-        this.growl.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+        this.growl.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
     }
 
     showCustom() {
-        let summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        let detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px"/> 
+        const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" /> 
 
-        this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
+        this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
 
     showMultiple() {
@@ -69,9 +69,9 @@ export class GrowlDemo extends Component {
                 </div>
 
                 <div className="content-section implementation ui-fluid">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Growl ref={(el) => this.growl = el} />
 
-                    <h3>Severities</h3>
+                    <h3 style={{marginTop: 0}}>Severities</h3>
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
@@ -130,19 +130,21 @@ import {Growl} from 'primereact/growl';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as  severity,
+            <p>A single message is represented by the Message interface in PrimeReact that defines various properties such as severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Growl instance.</p>
+
+            <p>Note that for animations, growl requires react-transition-group package.</p>
 
 <CodeHighlight className="language-jsx">
 {`
-<Growl ref={(el) => { this.growl = el; }}></Growl>
+<Growl ref={(el) => this.growl = el} />
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="language-javascript">
 {`
-this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 
 `}
 </CodeHighlight>
@@ -199,32 +201,6 @@ this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Orde
                 </table>
             </div>
 
-            <h3>Events</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Parameters</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onClick</td>
-                            <td>message: Clicked message instance </td>
-                            <td>Callback to invoke when a message is clicked.</td>
-                        </tr>
-                        <tr>
-                            <td>onRemove</td>
-                            <td>message: Closed message instance </td>
-                            <td>Callback to invoke when a message is removed.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
             <h3>Severities</h3>
             <p>There are four possible values for the severity of a message.</p>
             
@@ -240,7 +216,7 @@ this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Orde
 
 <CodeHighlight className="language-jsx">
 {`
-<Growl ref={(el) => { this.growl = el; }}></Growl>
+<Growl ref={(el) => this.growl = el}></Growl>
 
 <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
 <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
@@ -254,19 +230,19 @@ this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Orde
 <CodeHighlight className="language-javascript">
 {`
 showSuccess() {
-    this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+    this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 }
 
 showInfo() {
-    this.growl.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+    this.growl.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
 }
 
 showWarn() {
-    this.growl.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+    this.growl.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
 }
 
 showError() {
-    this.growl.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+    this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 }
 
 showMultiple() {
@@ -285,34 +261,34 @@ showMultiple() {
 
 <CodeHighlight className="language-javascript">
 {`
-this.growl.show({ closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+this.growl.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
 `}
 </CodeHighlight>
 
             <h3>Sticky</h3>
-            <p>Messages are cleared automatically after the timeout defined by life property which is 3 seconds by default. Use sticky mode to make them stay until
+            <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
             they are manually removed.</p>
 
 <CodeHighlight className="language-javascript">
 {`
 //sticky
-this.growl.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+this.growl.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
 //automatically removed after 5 seconds
-this.growl.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+this.growl.show({life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
 `}
 </CodeHighlight>
 
             <h3>Position</h3>
-            <p>There are four positions available for the growl container defined by the position property that defaults to "topright". Other 
+            <p>There are four positions available for the growl container defined by the <i>position</i> property that defaults to "topright". Other 
                 valid values are "topleft", "bottomleft" and "bottomright"
             </p>
 
 <CodeHighlight className="language-jsx">
             {`
-<Growl ref={(el) => { this.growl = el; }} position="topleft"></Growl>
+<Growl ref={(el) => this.growl = el} position="topleft"></Growl>
 
 `}
             </CodeHighlight>
@@ -368,6 +344,31 @@ this.growl.clear();
                             <td>string</td>
                             <td>topright</td>
                             <td>Position of the growl in viewport, valid values are "topright", "topleft", "bottomleft" and "bottomright".</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Events</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Parameters</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>onRemove</td>
+                            <td>message: Removed message </td>
+                            <td>Callback to invoke when a message is removed.</td>
+                        </tr>
+                        <tr>
+                            <td>onClick</td>
+                            <td>message: Clicked message </td>
+                            <td>Callback to invoke when a message gets clicked.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -447,30 +448,30 @@ export class GrowlDemo extends Component {
     }
 
     showSuccess() {
-        this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+        this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
 
     showInfo() {
-        this.growl.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+        this.growl.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
     }
 
     showWarn() {
-        this.growl.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+        this.growl.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
     }
 
     showError() {
-        this.growl.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+        this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
     }
 
     showSticky() {
-        this.growl.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+        this.growl.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
     }
 
     showCustom() {
-        let summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        let detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px"/> 
+        const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" /> 
 
-        this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
+        this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
 
     showMultiple() {
@@ -488,15 +489,15 @@ export class GrowlDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section introduction">
+                <div className="content-section introduction growl-demo">
                     <div className="feature-intro">
                         <h1>Growl</h1>
                         <p>Growl is used to display messages in an overlay.</p>
                     </div>
                 </div>
-   
+
                 <div className="content-section implementation ui-fluid">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Growl ref={(el) => this.growl = el} />
 
                     <h3>Severities</h3>
                     <div className="ui-g">

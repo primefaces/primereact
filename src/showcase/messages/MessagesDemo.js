@@ -65,7 +65,7 @@ export class MessagesDemo extends Component {
                 <div className="content-section implementation">
                     <Messages ref={(el) => this.messages = el} />
 
-                    <h3>Severities</h3>
+                    <h3 style={{marginTop: 0}}>Severities</h3>
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
@@ -150,6 +150,8 @@ import {Message} from 'primereact/message';
             <h3>Getting Started</h3>
             <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
+
+            <p>Note that for animations, messages requires react-transition-group package.</p>
 
 <CodeHighlight className="language-jsx">
 {`
