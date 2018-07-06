@@ -10,6 +10,8 @@ interface PaginatorProps {
     className?: string;
     template?: string;
     onPageChange?(event: Event): void;
+    leftContent: JSX.Element | undefined;
+    rightContent: JSX.Element | undefined;
 }
 
 export class Paginator extends React.Component<PaginatorProps,any> {}

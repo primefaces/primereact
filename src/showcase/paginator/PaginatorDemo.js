@@ -8,7 +8,13 @@ export class PaginatorDemo extends Component {
 
     constructor() {
         super();
-        this.state = {first: 0, rows: 10, first2: 0, rows2: 10};
+        this.state = {
+            first: 0, 
+            rows: 10, 
+            first2: 0, 
+            rows2: 10
+        };
+
         this.onPageChange = this.onPageChange.bind(this);
         this.onPageChange2 = this.onPageChange2.bind(this);
     }
@@ -72,12 +78,11 @@ import {Paginator} from 'primereact/paginator';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Paginator is defined using Paginator element, as it does not keep any internal state, usage is very similar to a controlled form components where a binding to the first 
-                    property along with a page change callback are required.</p>
+            <p>Paginator is used as a controlled component with <i>first</i>, <i>rows</i> (optional) and <i>onPageChange</i> properties.</p>
 
 <CodeHighlight className="language-jsx">
 {`
-<Paginator first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
+<Paginator first={this.state.first} rows={this.state.rows} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
 
 `}
 </CodeHighlight>
@@ -97,7 +102,7 @@ import {Paginator} from 'primereact/paginator';
             </p>
 <CodeHighlight className="language-jsx">
 {`
-<Paginator rows={10} totalRecords={120} rowsPerPageOptions={[10,20,30]} first={this.state.first} onPageChange={(e) => this.setState({first: e.first, rows: e.first})}></Paginator>
+<Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={(e) => this.setState({first: e.first, rows: e.rows})}></Paginator>
 
 `}
 </CodeHighlight>
@@ -181,13 +186,13 @@ import {Paginator} from 'primereact/paginator';
                             <td>leftContent</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Template instance to inject into the left side of the paginator.</td>
+                            <td>Content to inject into the left side of the paginator.</td>
                         </tr>
                         <tr>
                             <td>rightContent</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Template instance to inject into the right side of the paginator.</td>
+                            <td>Content to inject into the right side of the paginator.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -277,51 +282,60 @@ import {Paginator} from 'primereact/paginator';
                 </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {Paginator} from 'primereact/paginator';
+
 export class PaginatorDemo extends Component {
-    
-        constructor() {
-            super();
-            this.state = {first: 0, rows: 10, first2: 0, rows2: 10};
-            this.onPageChange = this.onPageChange.bind(this);
-            this.onPageChange2 = this.onPageChange2.bind(this);
-        }
-    
-        onPageChange(event) {
-            this.setState({
-                first: event.first,
-                rows: event.rows
-            });
-        }
-    
-        onPageChange2(event) {
-            this.setState({
-                first2: event.first,
-                rows2: event.rows
-            });
-        }
-    
-        render() {
-            return (
-                <div>
-                    <div className="content-section introduction">
-                        <div className="feature-intro">
-                            <h1>Paginator</h1>
-                            <p>Paginator is a generic widget to display content in paged format.</p>
-                        </div>
-                    </div>
-    
-                    <div className="content-section implementation">
-                        <h3>Default</h3>
-                        <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
-                        
-                        <h3>Custom Template</h3>
-                        <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
-                            template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+
+    constructor() {
+        super();
+        this.state = {
+            first: 0, 
+            rows: 10, 
+            first2: 0, 
+            rows2: 10
+        };
+        
+        this.onPageChange = this.onPageChange.bind(this);
+        this.onPageChange2 = this.onPageChange2.bind(this);
+    }
+
+    onPageChange(event) {
+        this.setState({
+            first: event.first,
+            rows: event.rows
+        });
+    }
+
+    onPageChange2(event) {
+        this.setState({
+            first2: event.first,
+            rows2: event.rows
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>Paginator</h1>
+                        <p>Paginator is a generic widget to display content in paged format.</p>
                     </div>
                 </div>
-            );
-        }
+
+                <div className="content-section implementation">
+                    <h3>Default</h3>
+                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
+                    
+                    <h3>Custom Template</h3>
+                    <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
+                        template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+                </div>
+            </div>
+        );
     }
+}
 
 `}
 </CodeHighlight>
