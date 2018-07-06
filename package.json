@@ -51,6 +51,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0 --copy-files",
-    "build-resources": "gulp prepublish"
+    "build-resources": "gulp prepublish",
+    "build-exports": "gulp build-exports"
   }
 }
