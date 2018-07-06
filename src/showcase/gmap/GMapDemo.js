@@ -97,12 +97,12 @@ export class GMapDemo extends Component {
     }
     
     render() {
-        let options = {
+        const options = {
             center: {lat: 36.890257, lng: 30.707417},
             zoom: 12
         };
                 
-        let footer = <div>
+        const footer = <div>
             <Button label="Yes" icon="pi pi-check" onClick={this.addMarker} />
             <Button label="No" icon="pi pi-times" onClick={this.onHide} />
         </div>;
@@ -172,7 +172,7 @@ import {GMap} from 'primereact/gmap';
 <CodeHighlight className="language-javascript">
 {`
 render() {
-    let options = {
+    const options = {
         center: {lat: 36.890257, lng: 30.707417},
         zoom: 12
     };
@@ -192,12 +192,12 @@ render() {
 <CodeHighlight className="language-javascript">
 {`
 render() {
-    let options = {
+    const options = {
         center: {lat: 36.890257, lng: 30.707417},
         zoom: 12
     };
     
-    let overlays = [
+    const overlays = [
                 new google.maps.Marker({position: {lat: 36.879466, lng: 30.667648}, title:"Konyaalti"}),
                 new google.maps.Marker({position: {lat: 36.883707, lng: 30.689216}, title:"Ataturk Park"}),
                 new google.maps.Marker({position: {lat: 36.885233, lng: 30.702323}, title:"Oldtown"}),
@@ -207,7 +207,7 @@ render() {
                 }),
                 new google.maps.Circle({center: {lat: 36.90707, lng: 30.56533}, fillColor: '#1976D2', fillOpacity: 0.35, strokeWeight: 1, radius: 1500}),
                 new google.maps.Polyline({path: [{lat: 36.86149, lng: 30.63743},{lat: 36.86341, lng: 30.72463}], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2})
-            ]
+            ];
     
     return (
         <GMap overlays={overlays} options={options} style={{width: '100%', minHeight: '320px'}} />
@@ -237,7 +237,7 @@ onMapReady(map) {
 }
     
 render() {
-    let options = {
+    const options = {
         center: {lat: 36.890257, lng: 30.707417},
         zoom: 12
     };
@@ -269,13 +269,13 @@ render() {
 <CodeHighlight className="language-javascript">
 {`
 render() {
-    let options = {
+    const options = {
         center: {lat: 36.890257, lng: 30.707417},
         zoom: 12
     };
     
     return (
-        <GMap ref={(el) => {this.gmap = el;}} options={options} style={{width: '100%', minHeight: '320px'}} />
+        <GMap ref={(el) => this.gmap = el} options={options} style={{width: '100%', minHeight: '320px'}} />
     )
 }
 
@@ -341,7 +341,7 @@ render() {
                         </tr>
                         <tr>
                             <td>onMapDragEnd</td>
-                            <td>originalEvent: Google Maps dragend</td>
+                            <td>-</td>
                             <td>Callback to invoke when map drag (i.e. pan) has ended.</td>
                         </tr>
                         <tr>
@@ -357,29 +357,23 @@ render() {
                             <td>Callback to invoke when an overlay is clicked.</td>
                         </tr>
                         <tr>
+                            <td>onOverlayDragStart</td>
+                            <td>event: Google Maps MouseEvent</td>
+                            <td>Callback to invoke when an overlay drag starts.</td>
+                        </tr>
+                        <tr>
                             <td>onOverlayDrag</td>
-                            <td>originalEvent: Google Maps MouseEvent <br />
-                                overlay: Clicked overlay <br />
-                                map: Map instance <br /></td>
+                            <td>event: Google Maps MouseEvent</td>
                             <td>Callback to invoke when an overlay is being dragged.</td>
                         </tr>
                         <tr>
                             <td>onOverlayDragEnd</td>
-                            <td>originalEvent: Google Maps MouseEvent <br />
-                                overlay: Clicked overlay <br />
-                                map: Map instance <br /></td>
+                            <td>event: Google Maps MouseEvent</td>
                             <td>Callback to invoke when an overlay drag ends.</td>
                         </tr>
                         <tr>
-                            <td>onOverlayDragStart</td>
-                            <td>originalEvent: Google Maps MouseEvent <br />
-                                overlay: Clicked overlay <br />
-                                map: Map instance <br /></td>
-                            <td>Callback to invoke when an overlay drag starts.</td>
-                        </tr>
-                        <tr>
                             <td>onZoomChanged</td>
-                            <td>originalEvent: Google Maps zoom_changed</td>
+                            <td>-</td>
                             <td>Callback to invoke when zoom level has changed.</td>
                         </tr>
                     </tbody>
@@ -387,38 +381,11 @@ render() {
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ui-fieldset</td>
-                            <td>Fieldset element.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-fieldset-toggleable</td>
-                            <td>Toggleable fieldset element.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-fieldset-legend</td>
-                            <td>Legend element.</td>
-                        </tr>
-                        <tr>
-                            <td>ui-fieldset-content</td>
-                            <td>Content element.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <p>Compoennt does not apply any styling.</p>
 
-                <h3>Dependencies</h3>
-                <p>Google Maps API as a script tag at index page.</p>
-            </div>
+
+            <h3>Dependencies</h3>
+            <p>Google Maps script.</p>
             
             </TabPanel>
 
@@ -526,12 +493,12 @@ export class GMapDemo extends Component {
     }
     
     render() {
-        let options = {
+        const options = {
             center: {lat: 36.890257, lng: 30.707417},
             zoom: 12
         };
                 
-        let footer = <div>
+        const footer = <div>
             <Button label="Yes" icon="pi pi-check" onClick={this.addMarker} />
             <Button label="No" icon="pi pi-times" onClick={this.onHide} />
         </div>;

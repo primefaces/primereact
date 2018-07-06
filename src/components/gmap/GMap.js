@@ -124,7 +124,7 @@ export class GMap extends Component {
     
     render() {
         return (
-            <div ref={(el) => {this.container = el;}} style={this.props.style} className={this.props.className}></div>
+            <div ref={(el) => this.container = el} style={this.props.style} className={this.props.className}></div>
         );
     }
 }

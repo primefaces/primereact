@@ -6,12 +6,12 @@ interface GMapProps {
     style?: object;
     className?: string;
     onMapReady?(map: any): void;
-    onMapClick?(): void;
+    onMapClick?(event: Event): void;
     onMapDragEnd?(): void;
     onZoomChanged?(): void;
-    onOverlayDragStart?(): void;
-    onOverlayDrag?(): void;
-    onOverlayDragEnd?(): void;
+    onOverlayDragStart?(event: Event): void;
+    onOverlayDrag?(event: Event): void;
+    onOverlayDragEnd?(event: Event): void;
     onOverlayClick?(e: {originalEvent: Event, overlay: any, map: any}): void;
 }
 
