@@ -381,7 +381,7 @@ render() {
             </div>
 
             <h3>Styling</h3>
-            <p>Compoennt does not apply any styling.</p>
+            <p>Component does not apply any styling.</p>
 
 
             <h3>Dependencies</h3>
