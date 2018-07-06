@@ -7,11 +7,11 @@ export class Lightbox extends Component {
 
     static defaultProps = {
         id: null,
-        images:null,
-        type:'images',
-        style:null,
-        className:null,
-        easing:'ease-out',
+        images: null,
+        type: 'images',
+        style: null,
+        className: null,
+        easing: 'ease-out',
         effectDuration:'500ms'
     };
 

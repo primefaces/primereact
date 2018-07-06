@@ -6,25 +6,28 @@ import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class LightboxDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-        var images=[
-            {source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
+        const images = [
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
                 thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg',
-                title:'Sopranos 1'},
-            {source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
+                title:'Sopranos 1'
+            },
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
                 thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg',
-                title:'Sopranos 2'},
-            {source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
+                title:'Sopranos 2'
+            },
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
                 thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg',
-                title:'Sopranos 3'},
-            {source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
+                title:'Sopranos 3'
+            },
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
                 thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg',
-                title:'Sopranos 4'}
+                title:'Sopranos 4'
+            }
         ];
 
         return (
@@ -32,12 +35,14 @@ export class LightboxDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Lightbox</h1>
-                        <p>LightBox is a modal overlay component to display images, videos, inline html content and iframes.</p>
+                        <p>LightBox is a modal overlay component to display images, videos and inline content.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
                     <h3 className="first">Basic</h3>
                     <Lightbox type="images" images={images} />
+
                     <h3>Content</h3>
                     <Lightbox type="content">
                         <a className="group">
@@ -48,7 +53,6 @@ export class LightboxDemo extends Component {
                 </div>
 
                 <LightboxDoc/>
-
             </div>
         );
     }
@@ -73,14 +77,9 @@ import {Lightbox} from 'primereact/lightbox';
 `}</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Lightbox has two modes; image and custom content defined using type property. In image mode a collection of images are required to display where an image object in the collection defines the source of the original image, thumbnail image and the title.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Lightbox type="images" images={images}/>
+                        <p>Lightbox has two modes; image and custom content defined using <i>type</i> property. In image mode a collection of images are required to display 
+                        where an image object in the collection defines the source of the original image, thumbnail image and the title.</p>
 
-`}
-                        </CodeHighlight>
-                        
                         <CodeHighlight className="language-javascript">
 {`
 var images=[
@@ -92,13 +91,19 @@ var images=[
 
 `}
                         </CodeHighlight>
-                        <p>Content mode is enabled by setting type property to "content", providing an anchor to open the lightbox and content to display inside lightbox.</p>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<Lightbox type="images" images={images} />
+
+`}
+                        </CodeHighlight>
+                        
+                        <p>Content mode is enabled by setting <i>type</i> property to "content", providing an anchor to open the lightbox and content to display inside lightbox.</p>
                         <CodeHighlight className="language-jsx">
                             {`
 <Lightbox type="content">
-    <a className="group" href="#">
-        Watch Video
-    </a>
+    <a>Watch Video</a>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
 </Lightbox>
 
@@ -106,7 +111,7 @@ var images=[
                         </CodeHighlight>
 
                         <h3>Effects</h3>
-                        <p>The easing function to use between image transitions is "ease-out" by default and this can be customized using easing property. See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values. Duration of the effect can be changed using effectDuration option.</p>
+                        <p>The easing function to use between image transitions is "ease-out" by default and this can be customized using <i>easing</i> property. See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values. Duration of the effect can be changed using effectDuration option.</p>
                         <CodeHighlight className="language-jsx">
                             {`
 <Lightbox type="images" images={images} easing="ease-in" effectDuration="1500ms" />
@@ -141,7 +146,7 @@ var images=[
                                     <tr>
                                         <td>type</td>
                                         <td>string</td>
-                                        <td>image</td>
+                                        <td>images</td>
                                         <td>Type of the lightbox, valid values are "image" and "content".</td>
                                     </tr>
                                     <tr>
@@ -225,47 +230,60 @@ var images=[
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {Lightbox} from 'primereact/lightbox';
+
 export class LightboxDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
-        var images=[
-            {source:'showcase/resources/demo/images/sopranos/sopranos1.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg', title:'Sopranos 1'},
-            {source:'showcase/resources/demo/images/sopranos/sopranos2.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg', title:'Sopranos 2'},
-            {source:'showcase/resources/demo/images/sopranos/sopranos3.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg', title:'Sopranos 3'},
-            {source:'showcase/resources/demo/images/sopranos/sopranos4.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg', title:'Sopranos 4'}
+        const images = [
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
+                thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg',
+                title:'Sopranos 1'
+            },
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
+                thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg',
+                title:'Sopranos 2'
+            },
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
+                thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg',
+                title:'Sopranos 3'
+            },
+            {
+                source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
+                thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg',
+                title:'Sopranos 4'
+            }
         ];
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Lightbox</h1>
-                        <p>LightBox is a modal overlay component to display images, videos, inline html content and iframes.</p>
+                        <p>LightBox is a modal overlay component to display images, videos and inline content.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
                     <h3 className="first">Basic</h3>
                     <Lightbox type="images" images={images} />
 
                     <h3>Content</h3>
                     <Lightbox type="content">
-                        <a className="group" href="#">
+                        <a className="group">
                             Watch Video
                         </a>
                         <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>
-
-                <LightboxDoc/>
-
             </div>
         );
     }
+} }
 }
                         `}
                         </CodeHighlight>
