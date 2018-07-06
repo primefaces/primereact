@@ -10,8 +10,9 @@ export class TreeTableDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [] };
-
+        this.state = {
+            data: []
+        };
         this.nodeservice = new NodeService();
     }
 
@@ -66,9 +67,9 @@ import {TreeTable} from 'primereact/treetable';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>TreeTable component requires an array of TreeNode objects as its value. TreeTable requires a value, selectionChange callback(for selectable TreeTable).</p>
+                        <p>TreeTable component requires an array of TreeNode objects as its its <i>value</i>.</p>
 
-                        TreeNode:
+                        <h3>TreeNode API</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -80,12 +81,6 @@ import {TreeTable} from 'primereact/treetable';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
                                     <tr>
                                         <td>label</td>
                                         <td>string</td>
@@ -102,23 +97,23 @@ import {TreeTable} from 'primereact/treetable';
                                         <td>icon</td>
                                         <td>string</td>
                                         <td>null</td>
-                                        <td>Icon of the node to display next to content. Not used by TreeTable.</td>
+                                        <td>Icon of the node to display next to content.</td>
                                     </tr>
                                     <tr>
                                         <td>expandedIcon</td>
                                         <td>string</td>
                                         <td>null</td>
-                                        <td>Icon to use in expanded state. Not used by TreeTable.</td>
+                                        <td>Icon to use in expanded state.</td>
                                     </tr>
                                     <tr>
                                         <td>collapsedIcon</td>
                                         <td>string</td>
                                         <td>null</td>
-                                        <td>Icon to use in collapsed state. Not used by TreeTable.</td>
+                                        <td>Icon to use in collapsed state.</td>
                                     </tr>
                                     <tr>
                                         <td>children</td>
-                                        <td>any</td>
+                                        <td>TreeNode[]</td>
                                         <td>null</td>
                                         <td>An array of treenodes as children.</td>
                                     </tr>
@@ -140,15 +135,27 @@ import {TreeTable} from 'primereact/treetable';
                                         <td>null</td>
                                         <td>Style class of the node.</td>
                                     </tr>
+                                    <tr>
+                                        <td>expanded</td>
+                                        <td>boolean</td>
+                                        <td>null</td>
+                                        <td>Whether the node is in an expanded or collapsed state.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the style class for the node element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectable</td>
+                                        <td>boolean</td>
+                                        <td>null</td>
+                                        <td>Used to disable selection of a particular node.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<TreeTable value={data} />
-
-`}
-                        </CodeHighlight>
 
                         <CodeHighlight className="language-javascript">
                             {`
@@ -235,7 +242,13 @@ render() {
             }
         ];
 
-        return <TreeTable value={data} />
+        return (
+            <TreeTable value={data} header="Basic">
+                <Column field="name" header="Name"></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
+        );
     }
 
 `}
@@ -243,6 +256,7 @@ render() {
 
                         <h3>Column Component</h3>
                         <p>TreeTable utilizes the following options defined by a column component.</p>
+
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -517,17 +531,19 @@ import {Column} from 'primereact/column';
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
-import React, { Component } from 'react';
-import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
-import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
+import React, {Component} from 'react';
+import {TreeTable} from 'primereact/treetable';
+import {Column} from "primereact/column";
+import {NodeService} from '../service/NodeService';
 
 export class TreeTableDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = {
+            data: []
+        };
+        this.nodeservice = new NodeService();
     }
 
     componentDidMount() {
@@ -553,10 +569,7 @@ export class TreeTableDemo extends Component {
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
-
                 </div>
-
-                <TreeTableDoc />
             </div>
         )
     }

@@ -142,7 +142,7 @@ import {Tree} from 'primereact/tree';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Tree component requires an array of TreeNode objects as its <p>value</p>.</p>
+            <p>Tree component requires an array of TreeNode objects as its <i>value</i>.</p>
 
             <h3>TreeNode API</h3>
             <div className="doc-tablewrapper">

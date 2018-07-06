@@ -8,6 +8,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { Column } from "../column/Column"
 
 export class TreeTable extends Component {
+    
     static defaultProps = {
         id: null,
         value: null,
