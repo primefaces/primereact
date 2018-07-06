@@ -121,7 +121,7 @@ import {Dropdown} from 'primereact/dropdown';
                         <h3>Getting Started</h3>
                         <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
                         of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabe</i> property to specify the field name of the option. SelectItem API is designed to have more 
+                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more 
                         control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
 
                         <p><b>Options as SelectItems</b></p>
