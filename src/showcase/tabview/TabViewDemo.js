@@ -96,7 +96,7 @@ import {TabView,TabPanel} from 'primereact/tabview';
             <p>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component.</p>
 
             <h3>Controlled Component</h3>
-            <p>In controlled mode, <b>activeIndex</b> and <b>onTabChange</b> properties need to be defined to control the state.</p>
+            <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -253,7 +253,7 @@ import {TabView,TabPanel} from 'primereact/tabview';
                     <tbody>
                         <tr>
                             <td>onTabChange</td>
-                            <td>event.originalEvent: Click object  <br/>
+                            <td>event.originalEvent: Browser event  <br/>
                                 event.index: Index of the selected tab 
                             </td>
                             <td>Callback to invoke when an active tab is changed.</td>
