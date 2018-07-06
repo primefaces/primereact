@@ -399,8 +399,8 @@ class App extends Component {
                             <a>THEMES</a>
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
-                                <li><Link to="/theming"><span className="ui-text">Guide</span></Link></li>
-                                <li><Link to="/icons"><span className="ui-text">Icons</span></Link></li>
+                                <li><Link to="/theming"><i className="fa fa-fw fa-book" /><span className="ui-text">Guide</span></Link></li>
+                                <li><Link to="/icons"><i className="fa fa-fw fa-info" /><span className="ui-text">Icons</span></Link></li>
                                 <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span className="ui-text">Serenity</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>

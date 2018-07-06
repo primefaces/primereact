@@ -27,6 +27,7 @@ npm install primeicons --save
 
                 <h3>Import</h3>
                 <p>Path of each component is available at the "import" section of a component documentation.</p>
+
 <CodeHighlight className="language-javascript">
 {`
 //import {ComponentName} from 'primereact/{componentname}';
@@ -38,7 +39,9 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
                 
                     <h3>Dependencies</h3>
                     <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
-                    <p>In addition, components require PrimeIcons library for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and <a href="react transition group">react-transition-group</a> for animations.</p>
+                    <p>In addition, components require PrimeIcons library for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and 
+                        <a href="react transition group">react-transition-group</a> for animations.</p>
+
 <CodeHighlight className="json">
 {`
 dependencies: {
@@ -46,7 +49,7 @@ dependencies: {
     "react-dom": "^16.0.0",
     "react-transition-group": "^2.2.1",
     "classnames": "^2.2.5",
-    "primeicons": "^1.0.0-beta.8"
+    "primeicons": "^1.0.0-beta.9"
 }
 
 `}
@@ -82,7 +85,7 @@ dependencies: {
                         </table>
                     </div>
                     
-                    <p>* Schedule is being planned to be rewritten to avoid any dependency.</p>
+                    <p>* Schedule will not depend on jQuery in PrimeReact 2.0.0.</p>
                         
                     <h3>Styles</h3>
                     <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
