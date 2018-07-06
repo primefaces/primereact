@@ -170,24 +170,24 @@ import {Fieldset} from 'primereact/fieldset';
                     <tbody>
                         <tr>
                             <td>onCollapse</td>
-                            <td>event.originalEvent: browser event </td>
+                            <td>event.originalEvent: Browser event </td>
                             <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
                         </tr>
                         <tr>
                             <td>onExpand</td>
-                            <td>event.originalEvent: browser event </td>
+                            <td>event.originalEvent: Browser event </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
                         </tr>
                         <tr>
                             <td>onToggle</td>
                             <td>event.originalEvent: browser event <br />
-                                event.value: collapsed state as a boolean    
+                                event.value: Collapsed state as a boolean    
                             </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
                         </tr>
                         <tr>
                             <td>onClick</td>
-                            <td>event browser event  </td>
+                            <td>event Browser event </td>
                             <td>Callback to invoke when fieldset is clicked.</td>
                         </tr>
                     </tbody>
@@ -259,10 +259,8 @@ export class FieldsetDemo extends Component {
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Fieldset>
-
-                    <br />
-
-                    <Fieldset legend="Godfather I" toggleable={true}>
+ 
+                   <Fieldset legend="Godfather I" toggleable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 

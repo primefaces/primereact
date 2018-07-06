@@ -9,8 +9,8 @@ interface FieldsetProps {
     collapsed?: boolean;
     onExpand?(event: Event): void;
     onCollapse?(event: Event): void;
-    onToggle?(e:{event: originalEvent, value: boolean}): void;
-    onClick?(event: event): void;
+    onToggle?(e:{event: Event, value: boolean}): void;
+    onClick?(event: Event): void;
 }
 
 export class Fieldset extends React.Component<FieldsetProps,any> {}
