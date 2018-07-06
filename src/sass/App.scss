@@ -425,7 +425,7 @@ body {
                 margin-top: 25px;
                 margin-bottom: 0px;
                 font-size: 22px;
-                font-weight: bold;
+                font-weight: normal;
 
                 &:first-child {
                     margin-top: 0;
@@ -956,6 +956,27 @@ a{
     background-color: #ededed;
     text-align: center;
     border: 1px solid #fafafa;
+}
+
+/* DataScroller */
+.datascroll-demo {
+    .car-item {
+        border-bottom: 1px solid #D5D5D5;
+    }
+
+    .car-item .ui-md-3 {
+        text-align: center;
+    }
+    
+    .car-item .ui-g-10 {
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 40em) {
+    .datascroll-demo .car-item {
+        text-align: center;
+    }
 }
 
 .scrollpanel-demo {

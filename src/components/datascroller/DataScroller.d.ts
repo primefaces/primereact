@@ -10,10 +10,10 @@ interface DataScrollerProps {
     buffer?: number;
     style?: object;
     className?: string;
-    onLazyLoad?(p: {first: number, rows: number}): void;
+    onLazyLoad?(e: {first: number, rows: number}): void;
     itemTemplate?(item: any): JSX.Element | undefined;
-    header?: string;
-    footer?: string;
+    header?: any;
+    footer?: any;
     lazy?: boolean;
 }
 

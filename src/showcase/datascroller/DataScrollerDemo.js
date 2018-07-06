@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { DataScroller } from '../../components/datascroller/DataScroller';
-import { Dialog } from '../../components/dialog/Dialog';
-import { CarService } from '../service/CarService';
+import React, {Component} from 'react';
+import {DataScroller} from '../../components/datascroller/DataScroller';
+import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
@@ -10,8 +9,11 @@ export class DataScrollerDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [], selectedCar: null, visible: false };
+        this.state = { 
+            cars: []
+        };
         this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
     }
 
     componentDidMount() {
@@ -19,35 +21,30 @@ export class DataScrollerDemo extends Component {
     }
 
     carTemplate(car) {
-        if(!car) {
+        if (!car) {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
+        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
-                <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
-                    <div className="ui-grid-col-9">
-                        <div className="ui-grid ui-grid-responsive ui-fluid">
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Vin: </div>
-                                <div className="ui-grid-col-10">{car.vin}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Year: </div>
-                                <div className="ui-grid-col-10">{car.year}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Brand: </div>
-                                <div className="ui-grid-col-10">{car.brand}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Color: </div>
-                                <div className="ui-grid-col-10">{car.color}</div>
-                            </div>
-                        </div>
+            <div className="ui-g car-item">
+                <div className="ui-g-12 ui-md-3">
+                    <img src={src} />
+                </div>
+                <div className="ui-g-12 ui-md-9">
+                    <div className="ui-g">
+                        <div className="ui-g-2 ui-sm-6">Vin: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Year: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Brand: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Color: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -56,7 +53,7 @@ export class DataScrollerDemo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="datascroll-demo">
                 <DataScrollerSubmenu />
 
                 <div className="content-section introduction">
@@ -67,37 +64,16 @@ export class DataScrollerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} buffer={0.4} header="Scroll Down to to Load More"/>
-
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-                        {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand}/></div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Vin: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.vin }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Year: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.year }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Brand: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.brand }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Color: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.color }</div>
-                                    </div>
-                            </div>)
-                        }
-                    </Dialog>
+                    Demo is at the bottom of this page.
                 </div>
 
-                <DataScrollerDoc></DataScrollerDoc>
+                <DataScrollerDoc />
+
+                <div className="content-section implementation">
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} 
+                            rows={10} buffer={0.4} header="List of Cars" />
+                </div>
+                
             </div>
         );
     }
@@ -123,13 +99,11 @@ import {DataScroller} from 'primereact/datascroller';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display
-               where each item can be accessed using the implicit variable.
-            </p>
-            <p>Here is a sample DataScroller that displays a list of cars where each load event adds 10 more rows if available.</p>
+            <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a 
+                list of cars where each load event adds 10 more rows if available.</p>
 <CodeHighlight className="language-jsx">
 {`
-<DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10}></DataScroller>
+<DataScroller value={this.state.cars} itemTemplate={carTemplate} rows={10}></DataScroller>
 
 `}
 </CodeHighlight>
@@ -137,16 +111,19 @@ import {DataScroller} from 'primereact/datascroller';
 {`
 constructor() {
     super();
-    this.state = { cars: [], selectedCar: null, visible: false };
+    this.state = { 
+        cars: []
+    };
     this.carservice = new CarService();
+    this.carTemplate = this.carTemplate.bind(this);
 }
 
 componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    this.carservice.getCars().then(data => this.setState({cars: data}));
 }
 
 carTemplate(car) {
-    // return template;
+    // return content;
 }
 
 `}
@@ -154,14 +131,10 @@ carTemplate(car) {
 
 
             <h3>Inline</h3>
-            <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set inline option to true to enable this mode.</p>
+            <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
 <CodeHighlight className="language-jsx">
 {`
-<DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} inline={true} scrollHeight="500px">
-    <Header>
-        Scroll Down to Load More
-    </Header>
-</DataScroller>
+<DataScroller value={this.state.cars} itemTemplate={carTemplate} rows={10} inline={true}></DataScroller>
 
 `}
 </CodeHighlight>
@@ -169,19 +142,17 @@ carTemplate(car) {
             <h3>Lazy Loading</h3>
             <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
              onLazyLoad callback everytime paging happens. To implement lazy loading,
-            enable lazy attribute and provide a method callback using onLazyLoad that actually loads the data from a remote datasource. onLazyLoad gets an event object
+            enable <p>lazy</p> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
             that contains information about what to load.</p>
+
 <CodeHighlight className="language-jsx">
 {`
-<DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} lazy={true} onLazyLoad={this.loadData.bind(this)}>
-    <Header>
-        Scroll Down to to Load More
-    </Header>
-</DataScroller>
+<DataScroller value={this.state.cars} itemTemplate={carTemplate} rows={10} lazy={true} onLazyLoad={this.loadData}></DataScroller>
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-jsx">
+
+<CodeHighlight className="language-javascript">
 {`
 loadData(event) {
     //event.first = First row offset
@@ -262,17 +233,17 @@ loadData(event) {
                             <td>itemTemplate</td>
                             <td>function</td>
                             <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
+                            <td>Function that gets an item in the value and returns the content for it.</td>
                         </tr>
                         <tr>
                             <td>header</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
                             <td>Label of header.</td>
                         </tr>
                         <tr>
                             <td>footer</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
                             <td>Label of footer.</td>
                         </tr>
@@ -348,12 +319,19 @@ loadData(event) {
                 </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {DataScroller} from 'primereact/datascroller';
+import {CarService} from '../service/CarService';
+
 export class DataScrollerDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [], selectedCar: null, visible: false };
+        this.state = { 
+            cars: [] 
+        };
         this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
     }
 
     componentDidMount() {
@@ -361,35 +339,30 @@ export class DataScrollerDemo extends Component {
     }
 
     carTemplate(car) {
-        if(!car) {
+        if (!car) {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
+        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
-                <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
-                    <div className="ui-grid-col-9">
-                        <div className="ui-grid ui-grid-responsive ui-fluid">
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Vin: </div>
-                                <div className="ui-grid-col-10">{car.vin}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Year: </div>
-                                <div className="ui-grid-col-10">{car.year}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Brand: </div>
-                                <div className="ui-grid-col-10">{car.brand}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Color: </div>
-                                <div className="ui-grid-col-10">{car.color}</div>
-                            </div>
-                        </div>
+            <div className="ui-g car-item">
+                <div className="ui-g-12 ui-md-3">
+                    <img src={src} />
+                </div>
+                <div className="ui-g-12 ui-md-9">
+                    <div className="ui-g">
+                        <div className="ui-g-2 ui-sm-6">Vin: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Year: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Brand: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Color: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -398,10 +371,10 @@ export class DataScrollerDemo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="datascroll-demo">
                 <DataScrollerSubmenu />
 
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller</h1>
                         <p>DataScroller displays data with on demand loading using scroll.</p>
@@ -409,37 +382,14 @@ export class DataScrollerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    Demo is at the bottom of this page.
+                </div>
 
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={10} buffer={0.4} header="Scroll Down to to Load More"/>
-
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-                        {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand}/></div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Vin: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.vin }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Year: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.year }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Brand: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.brand }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Color: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.color }</div>
-                                    </div>
-                            </div>)
-                        }
-                    </Dialog>
+                <div className="content-section implementation">
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} 
+                            rows={10} buffer={0.4} header="List of Cars" />
                 </div>
                 
-                <DataScrollerDoc></DataScrollerDoc>
             </div>
         );
     }

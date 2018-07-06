@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { DataScroller } from '../../components/datascroller/DataScroller';
-import { Button } from '../../components/button/Button';
-import { Dialog } from '../../components/dialog/Dialog';
-import { CarService } from '../service/CarService';
+import React, {Component} from 'react';
+import {DataScroller} from '../../components/datascroller/DataScroller';
+import {Button} from '../../components/button/Button';
+import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
@@ -11,44 +10,42 @@ export class DataScrollerLoaderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [], selectedCar: null, visible: false };
+        this.state = { 
+            cars: []
+        };
         this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
-        if(!car) {
+        if (!car) {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
+        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
-                <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
-                    <div className="ui-grid-col-9">
-                        <div className="ui-grid ui-grid-responsive ui-fluid">
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Vin: </div>
-                                <div className="ui-grid-col-10">{car.vin}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Year: </div>
-                                <div className="ui-grid-col-10">{car.year}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Brand: </div>
-                                <div className="ui-grid-col-10">{car.brand}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Color: </div>
-                                <div className="ui-grid-col-10">{car.color}</div>
-                            </div>
-                        </div>
+            <div className="ui-g car-item">
+                <div className="ui-g-12 ui-md-3">
+                    <img src={src} />
+                </div>
+                <div className="ui-g-12 ui-md-9">
+                    <div className="ui-g">
+                        <div className="ui-g-2 ui-sm-6">Vin: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Year: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Brand: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Color: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -56,49 +53,25 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     render() {
+        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+
         return (
-            <div>
+            <div className="datascroll-demo">
                 <DataScrollerSubmenu />
 
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller - Loader</h1>
-                        <p>Instead of scrolling, click event of an element can be used to load data.</p>
+                        <p>Instead of scrolling, a custom element can be used to load data.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton} footer="Load" header="Click Load Button at Footer to Load More"/>
-                    <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />
-
-                <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-                        {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand}/></div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Vin: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.vin }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Year: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.year }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Brand: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.brand }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Color: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.color }</div>
-                                    </div>
-                            </div>)
-                        }
-                    </Dialog>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5} 
+                        loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More"/>
                 </div>
-                <DataScrollerLoaderDoc></DataScrollerLoaderDoc>
+
+                <DataScrollerLoaderDoc />
             </div>
         );
     }
@@ -113,48 +86,51 @@ export class DataScrollerLoaderDoc extends Component {
                     <TabPanel header="Source">
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {DataScroller} from 'primereact/datascroller';
+import {Button} from 'primereact/button';
+import {CarService} from '../service/CarService';
+
 export class DataScrollerLoaderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { cars: [], selectedCar: null, visible: false };
+        this.state = { 
+            cars: []
+        };
         this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
-        if(!car) {
+        if (!car) {
             return;
         }
 
-        var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
+        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', padding: '20px', borderBottom: '1px solid #D5D5D5' }}>
-                <div className="ui-grid-row">
-                    <div className="ui-grid-col-3" style={{ textAlign: 'center' }}><i className="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })} style={{ cursor: 'pointer', float: 'left', marginTop: '40px' }}></i><img src={src} alt={car.brand} /></div>
-                    <div className="ui-grid-col-9">
-                        <div className="ui-grid ui-grid-responsive ui-fluid">
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Vin: </div>
-                                <div className="ui-grid-col-10">{car.vin}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Year: </div>
-                                <div className="ui-grid-col-10">{car.year}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Brand: </div>
-                                <div className="ui-grid-col-10">{car.brand}</div>
-                            </div>
-                            <div className="ui-grid-row">
-                                <div className="ui-grid-col-2">Color: </div>
-                                <div className="ui-grid-col-10">{car.color}</div>
-                            </div>
-                        </div>
+            <div className="ui-g car-item">
+                <div className="ui-g-12 ui-md-3">
+                    <img src={src} />
+                </div>
+                <div className="ui-g-12 ui-md-9">
+                    <div className="ui-g">
+                        <div className="ui-g-2 ui-sm-6">Vin: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Year: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Brand: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+            
+                        <div className="ui-g-2 ui-sm-6">Color: </div>
+                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -162,48 +138,20 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <DataScrollerSubmenu />
+        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
 
-                <div className="content-section">
+        return (
+            <div className="datascroll-demo">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataScroller - Loader</h1>
-                        <p>Instead of scrolling, click event of an element can be used to load data.</p>
+                        <p>Instead of scrolling, a custom element can be used to load data.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-
-
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} rows={5} loader={this.loadButton} footer="Load" header="Click Load Button at Footer to Load More"/>
-                    <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />
-
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-                        {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{fontSize: '16px', textAlign: 'center', padding:'20px'}}>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-12" style={{textAlign: 'center'}}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand}/></div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Vin: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.vin }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Year: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.year }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Brand: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.brand }</div>
-                                    </div>
-                                    <div className="ui-grid-row">
-                                        <div className="ui-grid-col-4">Color: </div>
-                                        <div className="ui-grid-col-8">{ this.state.selectedCar.color }</div>
-                                    </div>
-                            </div>)
-                        }
-                    </Dialog>
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5} 
+                        loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More"/>
                 </div>
             </div>
         );

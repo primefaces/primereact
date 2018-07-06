@@ -9,7 +9,6 @@ export class DataScrollerSubmenu extends Component {
                     <li><Link to="/datascroller">&#9679; Window</Link></li>
                     <li><Link to="/datascroller/inline">&#9679; Inline</Link></li>
                     <li><Link to="/datascroller/loader">&#9679; Loader</Link></li>
-                    <li><Link to="/datascroller/infinite">&#9679; Infinite</Link></li>
                 </ul>
             </div>
         );

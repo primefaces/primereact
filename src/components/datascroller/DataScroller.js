@@ -7,19 +7,19 @@ export class DataScroller extends Component {
     
     static defaultProps = {
         id: null,
-        value:	null,
+        value: null,
         rows: 0,
         inline:	false,
-        scrollHeight:null,
+        scrollHeight: null,
         loader:	null,
         buffer: 0.9,
-        style:	null,
+        style: null,
         className: null,
         onLazyLoad: null,
         itemTemplate: null,
-        header:null,
-        footer:null,
-        lazy: null
+        header: null,
+        footer: null,
+        lazy: false
     }
 
     static propsTypes = {
@@ -34,9 +34,9 @@ export class DataScroller extends Component {
         className: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
-        header:PropTypes.string,
-        footer:PropTypes.string,
-        lazy:PropTypes.bool
+        header: PropTypes.string,
+        footer: PropTypes.string,
+        lazy: PropTypes.bool
     }
 
     constructor(props) {

@@ -94,7 +94,6 @@ import { LightboxDemo } from './showcase/lightbox/LightboxDemo';
 import { DataScrollerDemo } from './showcase/datascroller/DataScrollerDemo';
 import { DataScrollerInlineDemo } from './showcase/datascroller/DataScrollerInlineDemo';
 import { DataScrollerLoaderDemo } from './showcase/datascroller/DataScrollerLoaderDemo';
-import { DataScrollerInfiniteDemo } from './showcase/datascroller/DataScrollerInfiniteDemo';
 import { MenuDemo } from './showcase/menu/MenuDemo';
 import { TabMenuDemo } from './showcase/tabmenu/TabMenuDemo';
 import { BreadcrumbDemo } from './showcase/breadcrumb/BreadcrumbDemo';
@@ -520,7 +519,6 @@ class App extends Component {
                     <Route exact path="/datascroller" component={DataScrollerDemo} />
                     <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
                     <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
-                    <Route path="/datascroller/infinite" component={DataScrollerInfiniteDemo} />
                     <Route path="/menumodel" component={MenuModelDemo} />
                     <Route path="/menu" component={MenuDemo} />
                     <Route path="/tabmenu" component={TabMenuDemo} />
