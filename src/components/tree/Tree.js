@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class TreeNode extends Component {
+    
     static defaultProps = {
         node: null,
         index: null,

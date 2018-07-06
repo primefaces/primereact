@@ -1,19 +1,5 @@
 import React = require("react");
 
-interface TreeNodeProps {
-    node?: any;
-    index?: string;
-    parentNode?: any;
-    root?: boolean;
-    isHorizontal?: boolean;
-    selectionMode?: string;
-    onNodeTouchEnd?(): void;
-    onNodeClick?(): void;
-    isSelected?(): void;
-}
-
-export class TreeNode extends React.Component<TreeNodeProps,any> {}
-
 interface TreeProps {
     id?: string;
     value: any;

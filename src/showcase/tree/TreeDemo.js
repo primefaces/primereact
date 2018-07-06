@@ -1,33 +1,27 @@
 import React, { Component } from 'react';
-import { Tree } from '../../components/tree/Tree';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import {Tree} from '../../components/tree/Tree';
+import {TabView, TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [], selectedFile3: null };
+        this.state = { 
+            data1: this.generateData(),
+            data2: [{
+                label: 'Root',
+                children: this.generateData()
+            }],
+            selectedFile1: null, 
+            selectedFile2: null,
+            selectedFiles1: [], 
+            selectedFiles2: []
+        };
     }
 
-    onSelectionChange(e) {
-        this.setState({ selectedFile: e.selection });
-    }
-
-    onMultiMetaKeySelectionChange(e) {
-        this.setState({ selectedFiles1: e.selection });
-    }
-
-    onCheckboxSelectionChange(e) {
-        this.setState({ selectedFiles2: e.selection });
-    }
-
-    onHorizontalSelectionChange(e) {
-        this.setState({ selectedFile3: e.selection });
-    }
-
-    render() {
-        var data = [
+    generateData() {
+        return [
             {
                 "label": "Documents",
                 "data": "Documents Folder",
@@ -75,12 +69,9 @@ export class TreeDemo extends Component {
                 }]
             }
         ];
+    }
 
-        var horizontalTreeData = [{
-            label: 'Root',
-            children: data
-        }];
-
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -92,14 +83,14 @@ export class TreeDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Tree value={data} />
+                    <Tree value={this.state.data1} />
 
                     <h3>Single Selection</h3>
-                    <Tree value={data} selectionMode="single" selectionChange={this.onSelectionChange.bind(this)}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.label}</div>
+                    <Tree value={this.state.data1} selectionMode="single" selection={this.state.selectedFile1} selectionChange={(e) => this.setState({selectedFile1: e.selection})}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile1 && this.state.selectedFile1.label}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <Tree value={data} selectionMode="multiple" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}></Tree>
+                    <Tree value={this.state.data1} selectionMode="multiple" selection={this.state.selectedFiles1} selectionChange={(e) => this.setState({selectedFiles1: e.selection})}></Tree>
                     <div style={{ 'marginTop': '8px' }}>
                         Selected Nodes:
                             {
@@ -110,7 +101,7 @@ export class TreeDemo extends Component {
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <Tree value={data} selectionMode="checkbox" selectionChange={this.onCheckboxSelectionChange.bind(this)}></Tree>
+                    <Tree value={this.state.data1} selectionMode="checkbox" selection={this.state.selectedFile} selectionChange={(e) => this.setState({selectedFile: e.selection})}></Tree>
                     <div style={{ 'marginTop': '8px' }}>
                         Selected Nodes: 
                             {
@@ -121,8 +112,8 @@ export class TreeDemo extends Component {
                     </div>
 
                     <h3>Horizontal Tree</h3>
-                    <Tree value={horizontalTreeData} layout="horizontal" selectionMode="single" selectionChange={this.onHorizontalSelectionChange.bind(this)}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile3 && this.state.selectedFile3.label}</div>
+                    <Tree value={this.state.data2} layout="horizontal" selectionMode="single" selection={this.state.selectedFile2} selectionChange={(e) => this.setState({selectedFile2: e.selection})}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile2 && this.state.selectedFile2.label}</div>
                 </div>
 
                 <TreeDoc />
@@ -151,9 +142,9 @@ import {Tree} from 'primereact/tree';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Tree component requires an array of TreeNode objects as its value. Tree requires a value, selectionChange callback(for selectable Tree).</p>
+            <p>Tree component requires an array of TreeNode objects as its <p>value</p>.</p>
 
-            TreeNode:
+            <h3>TreeNode API</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -226,12 +217,6 @@ import {Tree} from 'primereact/tree';
                             <td>Whether the node is in an expanded or collapsed state.</td>
 						</tr>
                         <tr>
-                            <td>parent</td>
-                            <td>TreeNode</td>
-                            <td>null</td>
-                            <td>Parent of the node.</td>
-                        </tr>
-                        <tr>
                             <td>className</td>
                             <td>string</td>
                             <td>null</td>
@@ -246,7 +231,8 @@ import {Tree} from 'primereact/tree';
                     </tbody>
                 </table>
             </div>
-<CodeHighlight className="language-jsx">
+
+            <CodeHighlight className="language-jsx">
 {`
 <Tree value={data} />
 
@@ -255,68 +241,73 @@ import {Tree} from 'primereact/tree';
 
 <CodeHighlight className="language-javascript">
 {`
-
-render() {
-        var data = [
-            {
-                "label": "Documents",
-                "data": "Documents Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
-                "children": [{
-                    "label": "Work",
-                    "data": "Work Folder",
-                    "expandedIcon": "fa fa-fw fa-folder-open",
-                    "collapsedIcon": "fa fa-fw fa-folder",
-                    "children": [{ "label": "Expenses.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Resume Document" }]
-                },
-                {
-                    "label": "Home",
-                    "data": "Home Folder",
-                    "expandedIcon": "fa fa-fw fa-folder-open",
-                    "collapsedIcon": "fa fa-fw fa-folder",
-                    "children": [{ "label": "Invoices.txt", "icon": "fa fa-fw fa-file-word-o", "data": "Invoices for this month" }]
-                }]
-            },
-            {
-                "label": "Pictures",
-                "data": "Pictures Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
-                "children": [
-                    { "label": "barcelona.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "Barcelona Photo" },
-                    { "label": "logo.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeFaces Logo" },
-                    { "label": "primeui.png", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeUI Logo" }]
-            },
-            {
-                "label": "Movies",
-                "data": "Movies Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
-                "children": [{
-                    "label": "Al Pacino",
-                    "data": "Pacino Movies",
-                    "children": [{ "label": "Scarface", "icon": "fa fa-fw fa-file-video-o", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "fa fa-fw fa-file-video-o", "data": "Serpico Movie" }]
-                },
-                {
-                    "label": "Robert De Niro",
-                    "data": "De Niro Movies",
-                    "children": [{ "label": "Goodfellas", "icon": "fa fa-fw fa-file-video-o", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "fa fa-fw fa-file-video-o", "data": "Untouchables Movie" }]
-                }]
-            }
-        ];
-
-        return <Tree value={data} />
+const data = [
+    {
+        "label": "Documents",
+        "data": "Documents Folder",
+        "expandedIcon": "fa fa-fw fa-folder-open",
+        "collapsedIcon": "fa fa-fw fa-folder",
+        "children": [{
+            "label": "Work",
+            "data": "Work Folder",
+            "expandedIcon": "fa fa-fw fa-folder-open",
+            "collapsedIcon": "fa fa-fw fa-folder",
+            "children": [{ "label": "Expenses.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Resume Document" }]
+        },
+        {
+            "label": "Home",
+            "data": "Home Folder",
+            "expandedIcon": "fa fa-fw fa-folder-open",
+            "collapsedIcon": "fa fa-fw fa-folder",
+            "children": [{ "label": "Invoices.txt", "icon": "fa fa-fw fa-file-word-o", "data": "Invoices for this month" }]
+        }]
+    },
+    {
+        "label": "Pictures",
+        "data": "Pictures Folder",
+        "expandedIcon": "fa fa-fw fa-folder-open",
+        "collapsedIcon": "fa fa-fw fa-folder",
+        "children": [
+            { "label": "barcelona.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "Barcelona Photo" },
+            { "label": "logo.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeFaces Logo" },
+            { "label": "primeui.png", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeUI Logo" }]
+    },
+    {
+        "label": "Movies",
+        "data": "Movies Folder",
+        "expandedIcon": "fa fa-fw fa-folder-open",
+        "collapsedIcon": "fa fa-fw fa-folder",
+        "children": [{
+            "label": "Al Pacino",
+            "data": "Pacino Movies",
+            "children": [{ "label": "Scarface", "icon": "fa fa-fw fa-file-video-o", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "fa fa-fw fa-file-video-o", "data": "Serpico Movie" }]
+        },
+        {
+            "label": "Robert De Niro",
+            "data": "De Niro Movies",
+            "children": [{ "label": "Goodfellas", "icon": "fa fa-fw fa-file-video-o", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "fa fa-fw fa-file-video-o", "data": "Untouchables Movie" }]
+        }]
     }
+];
+
+`}
+</CodeHighlight>
+
+            <h3>Selection</h3>
+            <p>Tree supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selection</i> and <i>selectionChange</i> properties to control the selection.</p>
+            <CodeHighlight className="language-jsx">
+{`
+<Tree value={data} layout="horizontal" selectionMode="single" selection={this.state.selectedNode} selectionChange={(e) => this.setState({selectedNode: e.selection})} />
 
 `}
 </CodeHighlight>
 
             <h3>Horizontal Orientation</h3>
-            <p>Horizontal mode is the alternative option for orientation.</p>
+            <p>Horizontal mode is the alternative <i>layout</i> option.</p>
+
 <CodeHighlight className="language-jsx">
 {`
-<Tree value={horizontalTreeData} layout="horizontal" />
+<Tree value={data} layout="horizontal" />
 
 `}
 </CodeHighlight>
@@ -325,14 +316,14 @@ render() {
 {`
 
 render() {
-        var data = // data array
+        const data = // data array
 
         var horizontalTreeData = [{
             label: 'Root',
             children: data
         }];
 
-        return <Tree value={horizontalTreeData} layout="horizontal"/>
+        return <Tree value={horizontalTreeData} layout="horizontal" />
     }
 
 `}
@@ -517,31 +508,28 @@ render() {
                 </a>
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {Tree} from 'primerecat/tree
+
 export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedFile: null, selectedFiles1: [], selectedFiles2: [], selectedFile3: null };
+        this.state = { 
+            data1: this.generateData(),
+            data2: [{
+                label: 'Root',
+                children: this.generateData()
+            }],
+            selectedFile1: null, 
+            selectedFile2: null,
+            selectedFiles1: [], 
+            selectedFiles2: []
+        };
     }
 
-    onSelectionChange(e) {
-        this.setState({ selectedFile: e.selection });
-    }
-
-    onMultiMetaKeySelectionChange(e) {
-        this.setState({ selectedFiles1: e.selection });
-    }
-
-    onCheckboxSelectionChange(e) {
-        this.setState({ selectedFiles2: e.selection });
-    }
-
-    onHorizontalSelectionChange(e) {
-        this.setState({ selectedFile3: e.selection });
-    }
-
-    render() {
-        var data = [
+    generateData() {
+        return [
             {
                 "label": "Documents",
                 "data": "Documents Folder",
@@ -589,15 +577,12 @@ export class TreeDemo extends Component {
                 }]
             }
         ];
+    }
 
-        var horizontalTreeData = [{
-            label: 'Root',
-            children: data
-        }];
-
+    render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree</h1>
                         <p>Tree is used to display hierarchical data.</p>
@@ -606,40 +591,38 @@ export class TreeDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Tree value={data} />
+                    <Tree value={this.state.data1} />
 
                     <h3>Single Selection</h3>
-                    <Tree value={data} selectionMode="single" selectionChange={this.onSelectionChange.bind(this)}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile && this.state.selectedFile.label}</div>
+                    <Tree value={this.state.data1} selectionMode="single" selection={this.state.selectedFile1} selectionChange={(e) => this.setState({selectedFile1: e.selection})}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile1 && this.state.selectedFile1.label}</div>
 
                     <h3>Multiple Selection with Metakey</h3>
-                    <Tree value={data} selectionMode="multiple" selectionChange={this.onMultiMetaKeySelectionChange.bind(this)}></Tree>
+                    <Tree value={this.state.data1} selectionMode="multiple" selection={this.state.selectedFiles1} selectionChange={(e) => this.setState({selectedFiles1: e.selection})}></Tree>
                     <div style={{ 'marginTop': '8px' }}>
                         Selected Nodes:
                             {
                             this.state.selectedFiles1.map((obj, i) => {
-                                return return <span key={i}>{i!==0? ",": ""} {obj.label}</span>
+                                return <span key={i}>{i!==0? ",": ""} {obj.label}</span>
                             })
                         }
                     </div>
 
                     <h3>Multiple Selection with Checkbox</h3>
-                    <Tree value={data} selectionMode="checkbox" selectionChange={this.onCheckboxSelectionChange.bind(this)}></Tree>
-                    <div style={{ 'marginTop': '8px', 'height': '200px', 'overflow': 'auto' }}>
-                        Selected Nodes:
+                    <Tree value={this.state.data1} selectionMode="checkbox" selection={this.state.selectedFile} selectionChange={(e) => this.setState({selectedFile: e.selection})}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>
+                        Selected Nodes: 
                             {
                             this.state.selectedFiles2.map((obj, i) => {
-                                return return <span key={i}>{i!==0? ",": ""} {obj.label}</span>
+                                return <span key={i}>{i!==0? ",": ""} {obj.label}</span>
                             })
                         }
                     </div>
 
                     <h3>Horizontal Tree</h3>
-                    <Tree value={horizontalTreeData} layout="horizontal" selectionMode="single" selectionChange={this.onHorizontalSelectionChange.bind(this)}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile3 && this.state.selectedFile3.label}</div>
+                    <Tree value={this.state.data2} layout="horizontal" selectionMode="single" selection={this.state.selectedFile2} selectionChange={(e) => this.setState({selectedFile2: e.selection})}></Tree>
+                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile2 && this.state.selectedFile2.label}</div>
                 </div>
-
-                <TreeDoc />
             </div>
         )
     }
