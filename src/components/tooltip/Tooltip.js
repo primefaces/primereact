@@ -11,7 +11,7 @@ export class Tooltip extends Component {
         tooltipEvent: 'hover',
         appendTo: 'body',
         positionStyle: null,
-        tooltipStyleClass: null,
+        tooltipClassName: null,
         tooltipDisabled: false,
         escape: true,
         hideDelay: null,
@@ -26,7 +26,7 @@ export class Tooltip extends Component {
         tooltipEvent: PropTypes.string,
         appendTo: PropTypes.string,
         positionstyle: PropTypes.object,
-        tooltipStyleClass: PropTypes.string,
+        tooltipClassName: PropTypes.string,
         tooltipDisabled: PropTypes.bool,
         escape: PropTypes.bool,
         hideDelay: PropTypes.number,
@@ -42,7 +42,7 @@ export class Tooltip extends Component {
     onMouseEnter(event) {
         if(this.props.tooltipEvent === 'hover') {
             if(this.props.onBeforeShow) {
-                this.props.onBeforeShow({originalEvent: event});
+                this.props.onBeforeShow(event);
             }
 
             if(this.hideTimeout) {
@@ -74,7 +74,7 @@ export class Tooltip extends Component {
  
     activate(event) {
         if(this.props.onBeforeShow) {
-            this.props.onBeforeShow({originalEvent: event});
+            this.props.onBeforeShow(event);
         }
 
         this.active = true;
@@ -135,8 +135,8 @@ export class Tooltip extends Component {
         
         this.create();
         this.align();
-        if(this.props.tooltipStyleClass) {
-            this.container.className = this.container.className + ' ' + this.props.tooltipStyleClass; 
+        if(this.props.tooltipClassName) {
+            this.container.className = this.container.className + ' ' + this.props.tooltipClassName; 
         }
         DomHandler.fadeIn(this.container, 250);
         this.container.style.zIndex = String(DomHandler.generateZIndex());

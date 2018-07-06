@@ -13,7 +13,8 @@ export class TooltipDemo extends Component {
     }
 
     onTooltipPosition(e) {
-        let element = e.originalEvent.target;
+        let element = e.target;
+
         switch(element.id) {
             case "username":
                 this.setState({title: "Enter your username", tooltipPosition: 'right'});
@@ -47,8 +48,9 @@ export class TooltipDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">                    
-                    <h3 className="first">Positions</h3>
-                    <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition}/>
+                    <h3 className="first">Multiple</h3>
+                    <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition} />
+
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-3">
                             <InputText id="username" placeholder="Right" />              
@@ -95,7 +97,7 @@ import {Tooltip} from 'primereact/tooltip';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>The "for" attribute is required to display Tooltip. It can be id of an element or selector or array containing ids/selectors.</p>
+                        <p>The <i>for</i> property is required to display Tooltip. It can be a single selector or an array or selectors to attach the tooltip.</p>
                         
 <CodeHighlight className="language-jsx">
 {`
@@ -107,7 +109,7 @@ import {Tooltip} from 'primereact/tooltip';
 
                         <h3>Position</h3>
                         <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is 
-                        specified using tooltipPosition attribute.</p>
+                        specified using <i>tooltipPosition</i> attribute.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" />
@@ -127,7 +129,7 @@ import {Tooltip} from 'primereact/tooltip';
 </CodeHighlight>
 
                         <h3>Delay</h3>
-                        <p>Tooltip is displayed or hidden instantly by default however you may add delays using showDelay and hideDelay properties which accept a number value in terms of milliseconds.</p>
+                        <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" tooltipEvent="focus" showDelay={1000} hideDelay={500} />
@@ -173,10 +175,22 @@ import {Tooltip} from 'primereact/tooltip';
                                     <td>Event to show the tooltip, valid values are hover and focus.</td>
                                 </tr>
                                 <tr>
+                                    <td>appendTo</td>
+                                    <td>string | DOM element</td>
+                                    <td>body</td>
+                                    <td>Target element to attach the overlay, valid values are "body", "target" or a DOM Element.</td>
+                                </tr>
+                                <tr>
                                     <td>positionStyle</td>
                                     <td>string</td>
                                     <td>absolute</td>
                                     <td>Type of CSS position.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tooltip.</td>
                                 </tr>
                                 <tr>
                                     <td>tooltipDisabled</td>
@@ -185,10 +199,10 @@ import {Tooltip} from 'primereact/tooltip';
                                     <td>When present, it specifies that the component should be disabled.</td>
                                 </tr>
                                 <tr>
-                                    <td>appendTo</td>
-                                    <td>string</td>
-                                    <td>any</td>
-                                    <td>Target element to attach the overlay, valid values are "body", "target" or a local variable of another element.</td>
+                                    <td>escape</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>By default the tooltip contents are rendered as text. Set to false to support html tags in the content</td>
                                 </tr>
                                 <tr>
                                     <td>hideDelay</td>
@@ -201,19 +215,7 @@ import {Tooltip} from 'primereact/tooltip';
                                     <td>null</td>
                                     <td>number</td>
                                     <td>Delay to show the tooltip in milliseconds.</td>
-                                </tr>
-                                <tr>
-                                    <td>tooltipStyleClass</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the tooltip.</td>
-                                </tr>
-                                <tr>
-                                    <td>escape</td>
-                                    <td>boolean</td>
-                                    <td>true</td>
-                                    <td>By default the tooltip contents are rendered as text. Set to false to support html tags in the content</td>
-                                </tr>
+                                </tr>                   
                             </tbody>
                         </table>
                     </div>
@@ -231,7 +233,7 @@ import {Tooltip} from 'primereact/tooltip';
                             <tbody>
                                 <tr>
                                     <td>onBeforeShow</td>
-                                    <td>event.originalEvent</td>
+                                    <td>event: Browser event</td>
                                     <td>Callback before showing tooltip.</td>
                                 </tr>
                             </tbody>
@@ -272,6 +274,10 @@ import {Tooltip} from 'primereact/tooltip';
                     <TabPanel header="Source">
 <CodeHighlight className="language-javascript">
 {`
+import React, {Component} from 'react';
+import {InputText} from 'primereact/inputtext';
+import {Tooltip} from 'primereact/tooltip';
+
 export class TooltipDemo extends Component {
         
     constructor() {
@@ -281,7 +287,8 @@ export class TooltipDemo extends Component {
     }
 
     onTooltipPosition(e) {
-        let element = e.originalEvent.target;
+        let element = e.target;
+
         switch(element.id) {
             case "username":
                 this.setState({title: "Enter your username", tooltipPosition: 'right'});
@@ -307,7 +314,7 @@ export class TooltipDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tooltip</h1>
                         <p>Tooltip provides advisory information for a component.</p>
@@ -315,8 +322,9 @@ export class TooltipDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">                    
-                    <h3 className="first">Positions</h3>
-                    <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition}/>
+                    <h3 className="first">Multiple</h3>
+                    <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition} />
+
                     <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-3">
                             <InputText id="username" placeholder="Right" />              
@@ -336,12 +344,11 @@ export class TooltipDemo extends Component {
                     <Tooltip for="#input5" title="Enter your username" tooltipEvent="focus"/>
                     <InputText id="input5" placeholder="Right" style={{marginLeft:'.5em'}}/>
                 </div>
-
-                <TooltipDoc />
             </div>
         )
     }
 }
+
 `}
 </CodeHighlight>
                     </TabPanel>
