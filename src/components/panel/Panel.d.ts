@@ -9,7 +9,7 @@ interface PanelProps {
     collapsed?: boolean;
     onExpand?(event: Event): void;
     onCollapse?(event: Event): void;
-    onToggle?(e:{event: originalEvent, value: boolean}): void;
+    onToggle?(e: {event: Event, value: boolean}): void;
 }
 
 export class Panel extends React.Component<PanelProps,any> {}
