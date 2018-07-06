@@ -15,8 +15,9 @@ export class ProgressSpinnerDemo extends Component {
                         <p>ProgressSpinner is a process status indicator.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
+                    <h3>Basic</h3>
                     <ProgressSpinner/>
 
                     <h3>Custom</h3>
@@ -24,7 +25,6 @@ export class ProgressSpinnerDemo extends Component {
                 </div>
 
                 <ProgressSpinnerDoc/>
-
             </div>
         );
     }
@@ -59,7 +59,7 @@ import {ProgressSpinner} from 'primereact/progressspinner';
 
                         <h3>Colors</h3>
                         <p>Colors of the spinner can be changed by overriding the keyframes animation</p>
-                        <CodeHighlight className="css">
+                        <CodeHighlight className="language-markup">
                             {`
 @keyframes ui-progress-spinner-color {
     100%,
@@ -85,50 +85,50 @@ import {ProgressSpinner} from 'primereact/progressspinner';
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>strokeWidth</td>
-                                    <td>string</td>
-                                    <td>2</td>
-                                    <td>Width of the circle stroke.</td>
-                                </tr>
-                                <tr>
-                                    <td>fill</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Color for the background of the circle.</td>
-                                </tr>
-                                <tr>
-                                    <td>animationDuration</td>
-                                    <td>string</td>
-                                    <td>2s</td>
-                                    <td>Duration of the rotate animation.</td>
-                                </tr>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>strokeWidth</td>
+                                        <td>string</td>
+                                        <td>2</td>
+                                        <td>Width of the circle stroke.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fill</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Color for the background of the circle.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>animationDuration</td>
+                                        <td>string</td>
+                                        <td>2s</td>
+                                        <td>Duration of the rotate animation.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -170,6 +170,9 @@ import {ProgressSpinner} from 'primereact/progressspinner';
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
+import React, {Component} from 'react';
+import {ProgressSpinner} from 'primereact/progressspinner';
+
 export class ProgressSpinnerDemo extends Component {
 
     render() {
@@ -178,19 +181,17 @@ export class ProgressSpinnerDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>ProgressSpinner</h1>
-                        <p>ProgressSpinnerDemo is a process status indicator.</p>
+                        <p>ProgressSpinner is a process status indicator.</p>
                     </div>
                 </div>
+
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
+                    <h3>Basic</h3>
                     <ProgressSpinner/>
 
                     <h3>Custom</h3>
                     <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
                 </div>
-
-                <ProgressSpinnerDoc/>
-
             </div>
         );
     }
