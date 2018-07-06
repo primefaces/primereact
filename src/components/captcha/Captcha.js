@@ -6,11 +6,11 @@ export class Captcha extends Component {
 
     static defaultProps = {
         id: null,
-        sitekey: null,
+        siteKey: null,
         theme: "light",
         type: "image",
         size: "normal",
-        tabindex: 0,
+        tabIndex: 0,
         language: "en",
         onResponse: null,
         onExpire: null
@@ -34,7 +34,7 @@ export class Captcha extends Component {
             'theme': this.props.theme,
             'type': this.props.type,
             'size': this.props.size,
-            'tabindex': this.props.tabindex,
+            'tabindex': this.props.tabIndex,
             'hl': this.props.language,
             'callback': (response) => {this.recaptchaCallback(response)},
             'expired-callback': () => {this.recaptchaExpiredCallback()}

@@ -2,11 +2,11 @@ import React = require("react");
 
 interface CaptchaProps {
     id?: string;
-    sitekey?: string;
+    siteKey?: string;
     theme?: string;
     type?: string;
     size?: string;
-    tabindex?: number;
+    tabIndex?: number;
     language?: string;
     onResponse?(response: any): void;
     onExpire?(): void;
