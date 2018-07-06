@@ -1,6 +1,5 @@
 /*global google*/
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {GMap} from '../../components/gmap/GMap';
 import {Dialog} from '../../components/dialog/Dialog';
 import {InputText} from '../../components/inputtext/InputText';

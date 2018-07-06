@@ -123,11 +123,11 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <span className="ui-inputgroup-addon">
-                                    <Checkbox onChange={this.onWebsiteCheckChange} onChange={(e) => this.setState({website1: e.value})}/>
+                                    <Checkbox value={this.state.website1} onChange={(e) => this.setState({website1: e.value})}/>
                                 </span>
                                 <InputText placeholder="Website"/>
                                 <span className="ui-inputgroup-addon">
-                                    <RadioButton onChange={this.onWebsiteRadioChange} onChange={(e) => this.setState({website2: e.value})}/>
+                                    <RadioButton value={this.state.website2} onChange={(e) => this.setState({website2: e.value})}/>
                                 </span>
                             </div>
                         </div>
@@ -279,11 +279,11 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <span className="ui-inputgroup-addon">
-                                    <Checkbox onChange={this.onWebsiteCheckChange} onChange={(e) => this.setState({website1: e.value})}/>
+                                    <Checkbox value={this.state.website1} onChange={(e) => this.setState({website1: e.value})}/>
                                 </span>
                                 <InputText placeholder="Website"/>
                                 <span className="ui-inputgroup-addon">
-                                    <RadioButton onChange={this.onWebsiteRadioChange} onChange={(e) => this.setState({website2: e.value})}/>
+                                    <RadioButton value={this.state.website2} onChange={(e) => this.setState({website2: e.value})}/>
                                 </span>
                             </div>
                         </div>

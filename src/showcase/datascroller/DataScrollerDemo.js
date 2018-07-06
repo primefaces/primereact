@@ -30,7 +30,7 @@ export class DataScrollerDemo extends Component {
         return (
             <div className="ui-g car-item">
                 <div className="ui-g-12 ui-md-3">
-                    <img src={src} />
+                    <img src={src} alt="Car" />
                 </div>
                 <div className="ui-g-12 ui-md-9">
                     <div className="ui-g">
@@ -348,7 +348,7 @@ export class DataScrollerDemo extends Component {
         return (
             <div className="ui-g car-item">
                 <div className="ui-g-12 ui-md-3">
-                    <img src={src} />
+                    <img src={src} alt="Car" />
                 </div>
                 <div className="ui-g-12 ui-md-9">
                     <div className="ui-g">

@@ -154,7 +154,7 @@ export class KeyFilterDemo extends Component {
                             <InputText keyfilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <InputText keyfilter={/[^\s]/} placeholder="Block space key"/>
+                            <InputText keyfilter={/[^\\s]/} placeholder="Block space key"/>
                         </div>
                     </div>
                 </div>
