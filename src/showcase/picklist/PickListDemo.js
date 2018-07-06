@@ -34,8 +34,8 @@ export class PickListDemo extends Component {
         
         return (
             <div className="ui-helper-clearfix">
-                <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px',width:48 }} />
-                <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
+                <img src={imageSource} alt={car.brand} style={{display: 'inline-block', margin: '2px 0 2px 2px',width:48}} />
+                <div style={{fontSize: '14px', float: 'right', margin: '15px 5px 0 0'}}>{car.brand} - {car.year} - {car.color}</div>
             </div>
         );
     }
@@ -52,9 +52,9 @@ export class PickListDemo extends Component {
 
                 <div className="content-section implementation">
                     <PickList source={this.state.source} target={this.state.target} itemTemplate={this.carTemplate} 
-                    sourceHeader="Available" targetHeader="Selected" responsive={true} 
-                    sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
-                    onChange={this.onChange}></PickList>
+                        sourceHeader="Available" targetHeader="Selected" responsive={true} 
+                        sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
+                        onChange={this.onChange}></PickList>
                 </div>
 
                 <PickListDoc/>
@@ -83,7 +83,7 @@ import {PickList} from 'primereact/picklist';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>PickList requires two arrays as the lists, a template for the item content and onChange callback to update the value after reorder or transfer.</p>
+            <p>PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.</p>
 <CodeHighlight className="language-jsx">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate} 
@@ -97,13 +97,13 @@ import {PickList} from 'primereact/picklist';
 <CodeHighlight className="language-jsx">
 {`
 <PickList source={this.state.cars} target={this.state.targetCars} itemTemplate={this.carTemplate} 
-    onChange={(e) => this.setState({source: e.source, target: e.target})} responsive={true}/>
+    onChange={(e) => this.setState({source: e.source, target: e.target})} responsive={true} />
 
 `}
 </CodeHighlight>
 
             <h3>Headers</h3>
-            <p>sourceHeader and targetHeader properties are used to define captions for the lists that accept simple strings or JSX for custom content.</p>
+            <p><i>sourceHeader</i> and <i>targetHeader</i> properties are used to define captions for the lists that accept simple strings or JSX for custom content.</p>
             
 <CodeHighlight className="language-jsx">
 {`
@@ -316,7 +316,6 @@ import {PickList} from 'primereact/picklist';
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {PickList} from 'primereact/picklist';
 import {CarService} from '../service/CarService';
 

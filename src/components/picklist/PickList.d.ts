@@ -8,8 +8,8 @@ interface PickListProps {
     targetHeader?: any;
     style?: object;
     className?: string;
-    sourcestyle?: object;
-    targetstyle?: object;
+    sourceStyle?: object;
+    targetStyle?: object;
     responsive?: boolean;
     showSourceControls?: boolean;
     showTargetControls?: boolean;
