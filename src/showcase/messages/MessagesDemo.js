@@ -21,30 +21,30 @@ export class MessagesDemo extends Component {
     }
 
     showSuccess() {
-        this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+        this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
 
     showInfo() {
-        this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+        this.messages.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
     }
 
     showWarn() {
-        this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+        this.messages.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
     }
 
     showError() {
-        this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+        this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
     }
 
     showSticky() {
-        this.messages.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+        this.messages.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
     }
 
     showMultiple() {
         this.messages.show([
-            { severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks' },
-            { severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks' },
-            { severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks' }
+            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
         ]);
     }
 
@@ -58,12 +58,12 @@ export class MessagesDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Messages</h1>
-                        <p>Messages is used to display inline messages.</p>
+                        <p>Messages is used to display inline messages with various severities.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <Messages ref={(el) => { this.messages = el; }}></Messages>
+                    <Messages ref={(el) => this.messages = el} />
 
                     <h3>Severities</h3>
                     <div className="ui-g ui-fluid">
@@ -98,26 +98,26 @@ export class MessagesDemo extends Component {
                     <p>CSS helpers to display inline messages mostly within forms.</p>
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="info" text="PrimeNG Rocks"></Message>
+                            <Message severity="info" text="PrimeReact Rocks" />
                         </div>
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="success" text="Record Saved"></Message>
+                            <Message severity="success" text="Record Saved" />
                         </div>
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="warn" text="Are you sure?"></Message>
+                            <Message severity="warn" text="Are you sure?" />
                         </div>
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="error" text="Field is required"></Message>
+                            <Message severity="error" text="Field is required" />
                         </div>
                     </div>
 
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Username" className="ui-state-error"/>
-                        <Message severity="error" text="Field is required"></Message>
+                        <Message severity="error" text="Field is required" />
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Email" className="ui-state-error"/>
-                        <Message severity="error"></Message>
+                        <Message severity="error" />
                     </div>
                 </div>
 
@@ -148,19 +148,19 @@ import {Message} from 'primereact/message';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as  severity,
+            <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
 
 <CodeHighlight className="language-jsx">
 {`
-<Messages ref={(el) => { this.messages = el; }}></Messages>
+<Messages ref={(el) => this.messages = el}></Messages>
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="language-javascript">
 {`
-this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 
 `}
 </CodeHighlight>
@@ -217,32 +217,6 @@ this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'O
                 </table>
             </div>
 
-            <h3>Events</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Parameters</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onClick</td>
-                            <td>message: Clicked message instance </td>
-                            <td>Callback to invoke when a message is clicked.</td>
-                        </tr>
-                        <tr>
-                            <td>onRemove</td>
-                            <td>message: Closed message instance </td>
-                            <td>Callback to invoke when a message is removed.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
             <h3>Severities</h3>
             <p>There are four possible values for the severity of a message.</p>
 
@@ -258,7 +232,7 @@ this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'O
 
 <CodeHighlight className="language-jsx">
 {`
-<Messages ref={(el) => { this.messages = el; }}></Messages>
+<Messages ref={(el) => this.messages = el}></Messages>
 
 <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
 <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
@@ -309,17 +283,17 @@ this.messages.clear();
 </CodeHighlight>
 
                 <h3>Closable</h3>
-                <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
+                <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
 
                 <CodeHighlight className="language-javascript">
 {`
-this.messages.show({ closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+this.messages.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
 `}
                 </CodeHighlight>
 
                 <h3>Sticky</h3>
-                <p>Messages are cleared automatically after the timeout defined by life property which is 3 seconds by default. Use sticky mode to make them stay until
+                <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
                 they are manually removed.</p>
 
 <CodeHighlight className="language-javascript">
@@ -334,8 +308,8 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 </CodeHighlight>
 
 
-                    <h3>Message Component</h3>
-                    <p>Message component is useful in cases where messages need to be displayed related to an element such as forms. It has two property, severity and text of the message.</p>
+                <h3>Message Component</h3>
+                <p>Message component is useful in cases where a single message needs to be displayed related to an element such as forms. It has two properties, <i>severity</i> and <i>text</i> of the message.</p>
 <CodeHighlight className="language-jsx">
 {`
 <h3>Inline Message CSS</h3>
@@ -348,7 +322,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h3>Properties of Message</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -377,6 +351,77 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                             <td>string</td>
                             <td>null</td>
                             <td>Inline style of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>severity</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Severity level of the message.</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Message text.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Properties of Messages</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Unique identifier of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>className</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of the element.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Events of Messages</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Parameters</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>onRemove</td>
+                            <td>message: Removed message </td>
+                            <td>Callback to invoke when a message is removed.</td>
+                        </tr>
+                        <tr>
+                            <td>onClick</td>
+                            <td>message: Clicked message </td>
+                            <td>Callback to invoke when a message gets clicked.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -446,16 +491,16 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {Messages} from 'primereact/messages';
-import {Message} from 'primereact/message';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
+import {Message} from 'primereact/components/message';
+import {InputText} from 'primereact/components/inputtext';
+import {Button} from 'primereact/components/button';
 
 export class MessagesDemo extends Component {
         
     constructor() {
         super();
-
         this.showSuccess = this.showSuccess.bind(this);
         this.showInfo = this.showInfo.bind(this);
         this.showWarn = this.showWarn.bind(this);
@@ -466,30 +511,30 @@ export class MessagesDemo extends Component {
     }
 
     showSuccess() {
-        this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+        this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
 
     showInfo() {
-        this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+        this.messages.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
     }
 
     showWarn() {
-        this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+        this.messages.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
     }
 
     showError() {
-        this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+        this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
     }
 
     showSticky() {
-        this.messages.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+        this.messages.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
     }
 
     showMultiple() {
         this.messages.show([
-            { severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks' },
-            { severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks' },
-            { severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks' }
+            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
         ]);
     }
 
@@ -503,12 +548,12 @@ export class MessagesDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Messages</h1>
-                        <p>Messages is used to display inline messages.</p>
+                        <p>Messages is used to display inline messages with various severities.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <Messages ref={(el) => { this.messages = el; }}></Messages>
+                    <Messages ref={(el) => this.messages = el} />
 
                     <h3>Severities</h3>
                     <div className="ui-g ui-fluid">
@@ -543,26 +588,26 @@ export class MessagesDemo extends Component {
                     <p>CSS helpers to display inline messages mostly within forms.</p>
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="info" text="PrimeNG Rocks"></Message>
+                            <Message severity="info" text="PrimeReact Rocks" />
                         </div>
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="success" text="Record Saved"></Message>
+                            <Message severity="success" text="Record Saved" />
                         </div>
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="warn" text="Are you sure?"></Message>
+                            <Message severity="warn" text="Are you sure?" />
                         </div>
                         <div className="ui-g-12 ui-md-3">
-                            <Message severity="error" text="Field is required"></Message>
+                            <Message severity="error" text="Field is required" />
                         </div>
                     </div>
 
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="ng-dirty ng-invalid"/>
-                        <Message severity="error" text="Field is required"></Message>
+                        <InputText placeholder="Username" className="ui-state-error"/>
+                        <Message severity="error" text="Field is required" />
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="ng-dirty ng-invalid"/>
-                        <Message severity="error"></Message>
+                        <InputText placeholder="Email" className="ui-state-error"/>
+                        <Message severity="error" />
                     </div>
                 </div>
             </div>
