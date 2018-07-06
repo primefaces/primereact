@@ -3,9 +3,9 @@ import React = require("react");
 interface AccordionTabProps {
     header?: string;
     disabled?: boolean;
-    headerStyle?: any;
+    headerStyle?: object;
     headerClassName?: string;
-    contentStyle?: any;
+    contentStyle?: object;
     contentClassName?: string;
 }
 

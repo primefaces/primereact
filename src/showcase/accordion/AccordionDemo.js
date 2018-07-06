@@ -94,7 +94,7 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
             <p>Accordion element consists of one or more AccordionTab elements and can either be used as a Controlled or Uncontrolled component.</p>
 
             <h3>Controlled Component</h3>
-            <p>In controlled mode, <b>activeIndex</b> and <b>onTabChange</b> properties need to be defined to control the state.</p>
+            <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
 
 <CodeHighlight className="language-jsx">
 {`
