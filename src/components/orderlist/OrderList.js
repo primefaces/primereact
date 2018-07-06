@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { OrderListControls } from './OrderListControls';
-import { OrderListSubList } from './OrderListSubList';
+import {OrderListControls} from './OrderListControls';
+import {OrderListSubList} from './OrderListSubList';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames'

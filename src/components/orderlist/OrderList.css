@@ -14,7 +14,7 @@
     margin-bottom: 0.25em;
 }
 
-.ui-orderlist .ui-orderlist-container {
+.ui-orderlist .ui-orderlist-list-container {
     display: table-cell;
     vertical-align: top;
 }
@@ -102,7 +102,7 @@
     .ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls {
         text-align: center;
         width: 100%;
-        display: inline-block;
+        display: block;
         height: auto;
     }
 
@@ -114,5 +114,6 @@
 
     .ui-orderlist.ui-orderlist-responsive .ui-orderlist-list-container {
         width: 100%;
+        display: block;
     }
 }

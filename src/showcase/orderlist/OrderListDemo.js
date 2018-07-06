@@ -10,7 +10,7 @@ export class OrderListDemo extends Component {
     constructor() {
         super();
         this.state = {
-            cars: null
+            cars: []
         };
 
         this.carservice = new CarService();
@@ -22,7 +22,7 @@ export class OrderListDemo extends Component {
     }
 
     carTemplate(car) {        
-        var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
         
         return (
             <div className="ui-helper-clearfix">
@@ -43,9 +43,18 @@ export class OrderListDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
-                        responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} 
-                        onChange={(e) => this.setState({cars: e.value})}></OrderList>
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-6">
+                            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
+                                responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
+                                onChange={(e) => this.setState({cars: e.value})} />
+                        </div>
+                        <div className="ui-g-12 ui-md-6">
+                            <ul>
+                                {this.state.cars.map(car => <li key={car.vin}>{car.brand} - {car.year} - {car.color}</li>)}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 
                 <OrderListDoc></OrderListDoc>
@@ -74,22 +83,22 @@ import {OrderList} from 'primereact/orderlist';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onChange 
+            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i> 
                     callback to update the value after reorder.
             </p>
 <CodeHighlight className="language-jsx">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
 
             <h3>DragDrop</h3>
-            <p>Items can be reordered using drag and drop by enabling dragdrop property along with dragdropScope to avoid conflicts with other drag drop events on view.</p>
+            <p>Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.</p>
             
 <CodeHighlight className="language-jsx">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} dragdrop={true} onChange={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate} dragdrop={true} onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -98,7 +107,8 @@ import {OrderList} from 'primereact/orderlist';
             <p>In responsive mode, orderlist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
 <CodeHighlight className="language-jsx">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate.bind(this)} responsive={true} header="Responsive Cars" onChange={(e) => this.setState({cars: e.value})}></OrderList>
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate} responsive={true} 
+        onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
 </CodeHighlight>
@@ -173,7 +183,7 @@ import {OrderList} from 'primereact/orderlist';
                             <td>itemTemplate</td>
                             <td>func</td>
                             <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
+                            <td>Function that gets an item in the list and returns the content for it.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -241,7 +251,6 @@ import {OrderList} from 'primereact/orderlist';
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import {OrderList} from 'primereact/orderlist';
 import {CarService} from '../service/CarService';
 
@@ -262,7 +271,7 @@ export class OrderListDemo extends Component {
     }
 
     carTemplate(car) {        
-        var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
         
         return (
             <div className="ui-helper-clearfix">
@@ -274,9 +283,29 @@ export class OrderListDemo extends Component {
 
     render() {
         return (
-            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
-                responsive={true} header="Responsive Cars" listStyle={{ height: '20em' }} 
-                onChange={(e) => this.setState({cars: e.value})}></OrderList>
+            <div>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>OrderList</h1>
+                        <p>OrderList is used to sort a collection.</p>
+                    </div>
+                </div>
+
+                <div className="content-section implementation">
+                    <div className="ui-g">
+                        <div className="ui-g-12 ui-md-6">
+                            <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
+                                responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
+                                onChange={(e) => this.setState({cars: e.value})} />
+                        </div>
+                        <div className="ui-g-12 ui-md-6">
+                            <ul>
+                                {this.state.cars.map(car => <li key={car.vin}>{car.brand} - {car.year} - {car.color}</li>)}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
