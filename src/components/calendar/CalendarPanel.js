@@ -6,19 +6,21 @@ export class CalendarPanel extends Component {
 
     static defaultProps = {
         appendTo: null,
+        style: null,
         className: null,
         onClick: null
     };
 
     static propTypes = {
         appendTo: PropTypes.object,
+        style: PropTypes.object,
         className: PropTypes.string,
         onClick: PropTypes.func
     };
 
     renderElement() {
         return (
-            <div ref={(el) => this.element = el} className={this.props.className} onClick={this.props.onClick}>
+            <div ref={(el) => this.element = el} className={this.props.className} style={this.props.style} onClick={this.props.onClick}>
                 {this.props.children}
             </div>
         );
@@ -27,12 +29,10 @@ export class CalendarPanel extends Component {
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo) {
+        if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
+        else
             return element;
-        }
     }
 
 }

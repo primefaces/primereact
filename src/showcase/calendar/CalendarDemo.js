@@ -18,13 +18,18 @@ export class CalendarDemo extends Component {
             date7: null,
             date8: null,
             date9: null,
+            date10: null,
+            date11: null,
+            date12: null,
+            date13: null,
+            date14: null,
             dates1: null,
             dates2: null
         };
     }
 
     render() {
-        let es = {
+        const es = {
             firstDayOfWeek: 1,
             dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
             dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
@@ -60,60 +65,21 @@ export class CalendarDemo extends Component {
                 <div className="content-section implementation">
                     <div className="ui-g">
                         <div className="ui-g-12 ui-md-4">
-                            <h3>Basic</h3>
-                            <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
+                            <h3 className="first">Basic</h3>
+                            <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})} />
                         </div>
-
                         <div className="ui-g-12 ui-md-4">
-                            <h3>Spanish</h3>
-                            <Calendar value={this.state.date2} locale={es} dateFormat="dd/mm/yy" onChange={(e) => this.setState({date2: e.value})}></Calendar>
+                            <h3 className="first">Spanish</h3>
+                            <Calendar value={this.state.date2} onChange={(e) => this.setState({date2: e.value})} locale={es} dateFormat="dd/mm/yy" />
                         </div>
-
                         <div className="ui-g-12 ui-md-4">
-                            <h3>Icon</h3>
-                            <Calendar value={this.state.date3} showIcon="true" onChange={(e) => this.setState({date3: e.value})}></Calendar>
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Restrict</h3>
-                            <Calendar value={this.state.date4} minDate={minDate} maxDate={maxDate} readOnlyInput={true} onChange={(e) => this.setState({date4: e.value})}></Calendar>
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Navigators</h3>
-                            <Calendar value={this.state.date5} monthNavigator="true" yearNavigator="true" yearRange="2000:2030" onChange={(e) => this.setState({date5: e.value})}></Calendar>
-                        </div>
-                        
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Multiple</h3>
-                            <Calendar value={this.state.dates1} selectionMode="multiple" onChange={(e) => this.setState({dates1: e.value})}></Calendar>
-                        </div>
-                        
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Range</h3>
-                            <Calendar value={this.state.dates2} selectionMode="range" onChange={(e) => this.setState({dates2: e.value})}></Calendar>
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Time</h3>
-                            <Calendar value={this.state.date6} showTime="true" onChange={(e) => this.setState({date6: e.value})}></Calendar>
-                        </div>
-
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Time Only</h3>
-                            <Calendar value={this.state.date7} timeOnly="true" onChange={(e) => this.setState({date7: e.value})}></Calendar>
-                        </div>
-                        
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>ButtonBar</h3>
-                            <Calendar value={this.state.date8} showButtonBar={true} onChange={(e) => this.setState({date8: e.value})}></Calendar>
-                        </div>
-                                                
-                        <div className="ui-g-12 ui-md-4">
-                            <h3>Inline</h3>
-                            <Calendar value={this.state.date9} inline="true" onChange={(e) => this.setState({date9: e.value})}></Calendar>
+                            <h3 className="first">Icon</h3>
+                            <Calendar value={this.state.date3} onChange={(e) => this.setState({date3: e.value})} showIcon={true} />
                         </div>
                     </div>
+
+                    <h3>Inline</h3>
+                    <Calendar value={this.state.date14} onChange={(e) => this.setState({date14: e.value})} inline={true} />
                 </div>
                 
                 <CalendarDoc></CalendarDoc>
