@@ -141,7 +141,7 @@ export class Calendar extends Component {
     }
 
     onInputFocus(event) {
-        if (this.props.showOnFocus) {
+        if (this.props.showOnFocus && !this.panel.offsetParent) {
             this.showOverlay();
         }
 
@@ -280,14 +280,7 @@ export class Calendar extends Component {
         }
         else {
             if(this.shouldSelectDate(dateMeta)) {
-                if(dateMeta.otherMonth) {
-                    if(this.props.selectOtherMonths) {
-                        this.selectDate(event, dateMeta);
-                    }
-                }
-                else {
-                     this.selectDate(event, dateMeta);
-                }
+                this.selectDate(event, dateMeta);
             }
         }
         
