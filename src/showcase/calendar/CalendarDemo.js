@@ -8,35 +8,6 @@ export class CalendarDemo extends Component {
 
     constructor() {
         super();
-        this.state = {
-            date1: null,
-            date2: null,
-            date3: null,
-            date4: null,
-            date5: null,
-            date6: null,
-            date7: null,
-            date8: null,
-            date9: null,
-            date10: null,
-            date11: null,
-            date12: null,
-            date13: null,
-            date14: null,
-            dates1: null,
-            dates2: null
-        };
-    }
-
-    render() {
-        const es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
-        };
 
         let today = new Date();
         let month = today.getMonth();
@@ -53,6 +24,39 @@ export class CalendarDemo extends Component {
         maxDate.setMonth(nextMonth);
         maxDate.setFullYear(nextYear);
 
+        this.state = {
+            date1: null,
+            date2: null,
+            date3: null,
+            date4: null,
+            date5: null,
+            date6: null,
+            date7: null,
+            date8: null,
+            date9: null,
+            date10: null,
+            date11: null,
+            date12: null,
+            date13: null,
+            date14: null,
+            dates1: null,
+            dates2: null,
+            minDate: minDate,
+            maxDate: maxDate,
+            invalidDates: [today]
+        };
+    }
+
+    render() {
+        const es = {
+            firstDayOfWeek: 1,
+            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
+            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
+            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
+            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+        };
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -63,7 +67,7 @@ export class CalendarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g">
+                    <div className="ui-g ui-fluid">
                         <div className="ui-g-12 ui-md-4">
                             <h3 className="first">Basic</h3>
                             <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})} />
@@ -75,6 +79,19 @@ export class CalendarDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <h3 className="first">Icon</h3>
                             <Calendar value={this.state.date3} onChange={(e) => this.setState({date3: e.value})} showIcon={true} />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Min-Max</h3>
+                            <Calendar value={this.state.date4} onChange={(e) => this.setState({date4: e.value})} minDate={this.state.minDate} maxDate={this.state.maxDate} readonlyInput={true}/>
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Disable Days</h3>
+                            <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readonlyInput={true} />
+                        </div>
+
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Navigators</h3>
+                            <Calendar value={this.state.date6} onChange={(e) => this.setState({date6: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2000:2030"/>
                         </div>
                     </div>
 

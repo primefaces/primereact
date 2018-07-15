@@ -574,28 +574,24 @@
     .ui-datepicker-header {
         a {
             color: $headerTextColor;
-            
+
             &:hover {
                 @include hover-element();
             }
         }
     }
-    
-    .ui-datepicker-calendar {
-		tbody {
-			>tr {
-				.ui-datepicker-selectable-other-month {
-					a:hover {
-						@include hover-element();
-					}
 
-				}
-			}
-		}
-        td:not(.ui-state-disabled) {
+    .ui-datepicker-calendar {
+        td {
             a:hover {
                 @include hover-element();
-            }            
+            }
+        }
+    }
+
+    &.ui-datepicker-monthpicker {
+        .ui-datepicker-month-cell:hover {
+            @include hover-element();
         }
     }
 }
