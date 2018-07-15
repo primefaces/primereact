@@ -91,7 +91,7 @@ export class CalendarDemo extends Component {
 
                         <div className="ui-g-12 ui-md-4">
                             <h3>Navigators</h3>
-                            <Calendar value={this.state.date6} onChange={(e) => this.setState({date6: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2000:2030"/>
+                            <Calendar value={this.state.date6} onChange={(e) => this.setState({date6: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030"/>
                         </div>
                     </div>
 

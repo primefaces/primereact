@@ -130,6 +130,8 @@ export class Calendar extends Component {
         this.onPanelClick = this.onPanelClick.bind(this);
         this.navBackward = this.navBackward.bind(this);
         this.navForward = this.navForward.bind(this);
+        this.onMonthDropdownChange = this.onMonthDropdownChange.bind(this);
+        this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
     }
 
     onInputClick(event) {
@@ -252,6 +254,42 @@ export class Calendar extends Component {
         }
 
         event.preventDefault();
+    }
+
+    onMonthDropdownChange(event) {
+        const currentViewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        let newViewDate = new Date(currentViewDate.getTime());
+        newViewDate.setMonth(parseInt(event.target.value, 10));
+
+        if (this.onViewDateChange) {
+            this.onViewDateChange({
+                originalEvent: event,
+                value: newViewDate
+            });
+        }
+        else {
+            this.setState({
+                viewDate: newViewDate
+            });
+        }
+    }
+
+    onYearDropdownChange(event) {
+        const currentViewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        let newViewDate = new Date(currentViewDate.getTime());
+        newViewDate.setFullYear(parseInt(event.target.value, 10));
+
+        if (this.onViewDateChange) {
+            this.onViewDateChange({
+                originalEvent: event,
+                value: newViewDate
+            });
+        }
+        else {
+            this.setState({
+                viewDate: newViewDate
+            });
+        }
     }
 
     onDateSelect(event, dateMeta) {
@@ -1069,16 +1107,62 @@ export class Calendar extends Component {
         );
     }
 
+    /*
+      <select  *ngIf="monthNavigator && (view !== 'month')" (change)="onMonthDropdownChange($event.target.value)">
+                                    <option [value]="i" *ngFor="let month of locale.monthNames;let i = index" [selected]="i == currentMonth + i">{{month}}</option>
+                                </select>
+                                <select class="ui-datepicker-year" *ngIf="yearNavigator" (change)="onYearDropdownChange($event.target.value)">
+                                    <option [value]="year" *ngFor="let year of yearOptions" [selected]="year == currentYear">{{year}}</option>
+                                </select>
+                                */
+
     renderTitleMonthElement(month) {
-        return (
-            <span className="ui-datepicker-month">{this.props.locale.monthNames[month]}</span>
-        );
+        if (this.props.monthNavigator && this.props.view !== 'month') {
+            let viewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewMonth = viewDate.getMonth();
+
+            return (
+                <select className="ui-datepicker-month" onChange={this.onMonthDropdownChange}>
+                    {
+                        this.props.locale.monthNames.map((month, index) => <option key={month} value={index} selected={index === viewMonth}>{month}</option>)
+                    }
+                </select>
+            );
+        }
+        else {
+            return (
+                <span className="ui-datepicker-month">{this.props.locale.monthNames[month]}</span>
+            );
+        }
     }
 
     renderTitleYearElement(year) {
-        return (
-            <span className="ui-datepicker-year">{year}</span>  
-        );
+        if (this.props.yearNavigator) {
+            let yearOptions = [];
+            let years = this.props.yearRange.split(':'),
+            yearStart = parseInt(years[0]),
+            yearEnd = parseInt(years[1]);
+            
+            for(let i = yearStart; i <= yearEnd; i++) {
+                yearOptions.push(i);
+            }
+
+            let viewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewYear = viewDate.getFullYear();
+
+            return (
+                <select className="ui-datepicker-year" onChange={this.onYearDropdownChange}>
+                    {
+                        yearOptions.map(year => <option key={year} value={year} selected={year === viewYear}>{year}</option>)
+                    }
+                </select>
+            );
+        }
+        else {
+            return (
+                <span className="ui-datepicker-year">{year}</span>  
+            );
+        }
     }
 
     renderTitle(monthMetaData) {
