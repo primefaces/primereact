@@ -204,17 +204,7 @@ export class Calendar extends Component {
             //this.decrementYear();
         }
 
-        if (this.onViewDateChange) {
-            this.onViewDateChange({
-                originalEvent: event,
-                value: newViewDate
-            });
-        }
-        else {
-            this.setState({
-                viewDate: newViewDate
-            });
-        }
+        this.updateViewDate(event, newViewDate);
  
         event.preventDefault();
     } 
@@ -241,17 +231,7 @@ export class Calendar extends Component {
             //this.incrementYear();
         }
 
-        if (this.onViewDateChange) {
-            this.onViewDateChange({
-                originalEvent: event,
-                value: newViewDate
-            });
-        }
-        else {
-            this.setState({
-                viewDate: newViewDate
-            });
-        }
+        this.updateViewDate(event, newViewDate);
 
         event.preventDefault();
     }
@@ -261,17 +241,7 @@ export class Calendar extends Component {
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setMonth(parseInt(event.target.value, 10));
 
-        if (this.onViewDateChange) {
-            this.onViewDateChange({
-                originalEvent: event,
-                value: newViewDate
-            });
-        }
-        else {
-            this.setState({
-                viewDate: newViewDate
-            });
-        }
+        this.updateViewDate(event, newViewDate);
     }
 
     onYearDropdownChange(event) {
@@ -279,6 +249,10 @@ export class Calendar extends Component {
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setFullYear(parseInt(event.target.value, 10));
 
+        this.updateViewDate(event, newViewDate);
+    }
+
+    updateViewDate(event, value) {
         if (this.onViewDateChange) {
             this.onViewDateChange({
                 originalEvent: event,
