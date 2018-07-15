@@ -611,11 +611,11 @@ export class Calendar extends Component {
     isSelected(dateMeta) {
         if(this.props.value) {
             if(this.isSingleSelection()) {
-                return this.isDateEquals(this.value, dateMeta);
+                return this.isDateEquals(this.props.value, dateMeta);
             }
             else if(this.isMultipleSelection()) {
                 let selected = false;
-                for(let date of this.value) {
+                for(let date of this.props.value) {
                     selected = this.isDateEquals(date, dateMeta);
                     if(selected) {
                         break;
@@ -625,10 +625,10 @@ export class Calendar extends Component {
                 return selected;
             }
             else if(this.isRangeSelection()) {
-                if(this.value[1])
-                    return this.isDateEquals(this.value[0], dateMeta) || this.isDateEquals(this.value[1], dateMeta) || this.isDateBetween(this.value[0], this.value[1], dateMeta);
+                if(this.props.value[1])
+                    return this.isDateEquals(this.props.value[0], dateMeta) || this.isDateEquals(this.props.value[1], dateMeta) || this.isDateBetween(this.props.value[0], this.props.value[1], dateMeta);
                 else
-                    return this.isDateEquals(this.value[0], dateMeta)
+                    return this.isDateEquals(this.props.value[0], dateMeta)
             }
         }
         else {
