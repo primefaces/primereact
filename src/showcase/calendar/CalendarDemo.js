@@ -85,7 +85,7 @@ export class CalendarDemo extends Component {
                             <Calendar value={this.state.date4} onChange={(e) => this.setState({date4: e.value})} minDate={this.state.minDate} maxDate={this.state.maxDate} readonlyInput={true}/>
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <h3>Disable Days</h3>
+                            <h3>Disabled Days</h3>
                             <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readonlyInput={true} />
                         </div>
 
