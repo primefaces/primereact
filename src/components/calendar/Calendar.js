@@ -256,12 +256,12 @@ export class Calendar extends Component {
         if (this.onViewDateChange) {
             this.onViewDateChange({
                 originalEvent: event,
-                value: newViewDate
+                value: value
             });
         }
         else {
             this.setState({
-                viewDate: newViewDate
+                viewDate: value
             });
         }
     }
