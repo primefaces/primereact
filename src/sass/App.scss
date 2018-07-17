@@ -436,10 +436,6 @@ body {
                 margin-bottom: 0px;
                 font-size: 22px;
                 font-weight: normal;
-
-                &:first-child {
-                    margin-top: 0;
-                }
             }
 
             h4 {
@@ -489,6 +485,7 @@ body {
             i {
                 background-color: #fcf2a7;
                 font-family: monaco, Consolas, Lucida Console, monospace;
+                font-weight: bold;
                 font-style: normal;
                 font-size: 14px;
                 padding: 2px;
