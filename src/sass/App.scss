@@ -37,7 +37,7 @@ body {
 }
 
 #layout-topbar {
-    background-color: #20272a;
+    @include background-gradient-left2right(#0B222A, #234B55)
     box-sizing: border-box;
     display: block;
     padding: 0;
