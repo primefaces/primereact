@@ -57,12 +57,19 @@ export class Calendar extends Component {
         maxDateCount: null,
         showOtherMonths: true,
         selectOtherMonths: false,
+        showButtonBar: false,
+        todayButtonClassName: 'ui-button-secondary',
+        clearButtonStyleClass: 'ui-button-secondary',
+        autoZIndex: true,
+        baseZIndex: 0,
         onFocus: null,
         onBlur: null,
         onInput: null,
         onSelect: null,
         onChange: null,
-        onViewDateChange: null
+        onViewDateChange: null,
+        onTodayButtonClick: null,
+        onClearButtonClick: null
     }
 
     static propsTypes = {
@@ -104,12 +111,19 @@ export class Calendar extends Component {
         maxDateCount: PropTypes.number,
         showOtherMonths: PropTypes.bool,
         selectOtherMonths: PropTypes.bool,
+        showButtonBar: PropTypes.bool,
+        todayButtonClassName: PropTypes.string,
+        clearButtonStyleClass: PropTypes.string,
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onInput: PropTypes.func,
         onSelect: PropTypes.func,
         onChange: PropTypes.func,
-        onViewDateChange: PropTypes.func
+        onViewDateChange: PropTypes.func,
+        onTodayButtonClick: PropTypes.func,
+        onClearButtonClick: PropTypes.func,
     }
 
     constructor(props) {
@@ -132,6 +146,8 @@ export class Calendar extends Component {
         this.navForward = this.navForward.bind(this);
         this.onMonthDropdownChange = this.onMonthDropdownChange.bind(this);
         this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
+        this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
+        this.onClearButtonClick = this.onClearButtonClick.bind(this);
     }
 
     onInputClick(event) {
@@ -188,7 +204,7 @@ export class Calendar extends Component {
             return;
         }
 
-        const currentViewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
         let newViewDate = new Date(currentViewDate.getTime());
 
         if (this.props.view === 'date') {
@@ -215,7 +231,7 @@ export class Calendar extends Component {
             return;
         }
 
-        const currentViewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
         let newViewDate = new Date(currentViewDate.getTime());
 
         if (this.props.view === 'date') {
@@ -237,7 +253,7 @@ export class Calendar extends Component {
     }
 
     onMonthDropdownChange(event) {
-        const currentViewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setMonth(parseInt(event.target.value, 10));
 
@@ -245,16 +261,36 @@ export class Calendar extends Component {
     }
 
     onYearDropdownChange(event) {
-        const currentViewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setFullYear(parseInt(event.target.value, 10));
 
         this.updateViewDate(event, newViewDate);
     }
 
+    onTodayButtonClick(event) {
+        const today = new Date();
+        const dateMeta = {day: today.getDate(), month: today.getMonth(), year: today.getFullYear(), today: true, selectable: true};
+
+        this.updateViewDate(event, today);
+        this.onDateSelect(event, dateMeta);
+        
+        if (this.props.onTodayButtonClick) {
+            this.props.onTodayButtonClick(event);
+        }
+    }
+
+    onClearButtonClick(event) {
+        this.updateModel(null);
+
+        if (this.props.onClearButtonClick) {
+            this.props.onClearButtonClick(event);
+        }
+    }
+
     updateViewDate(event, value) {
-        if (this.onViewDateChange) {
-            this.onViewDateChange({
+        if (this.props.onViewDateChange) {
+            this.props.onViewDateChange({
                 originalEvent: event,
                 value: value
             });
@@ -271,17 +307,20 @@ export class Calendar extends Component {
             event.preventDefault();
             return;
         }
-        
-        if(this.isMultipleSelection() && this.isSelected(dateMeta)) {
-            let value = this.props.value.filter((date, i) => {
-                return !this.isDateEquals(date, dateMeta);
-            });
-            this.updateModel(event, value);
+
+        if (this.isMultipleSelection()) {
+            if (this.isSelected(dateMeta)) {
+                let value = this.props.value.filter((date, i) => {
+                    return !this.isDateEquals(date, dateMeta);
+                });
+                this.updateModel(event, value);
+            }
+            else if(!this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length) {
+                this.selectDate(event, dateMeta);       
+            }
         }
         else {
-            if(this.shouldSelectDate(dateMeta)) {
-                this.selectDate(event, dateMeta);
-            }
+            this.selectDate(event, dateMeta);       
         }
         
         if(!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
@@ -293,13 +332,6 @@ export class Calendar extends Component {
         }
 
         event.preventDefault();
-    }
-
-    shouldSelectDate(dateMeta) {
-        if(this.isMultipleSelection())
-            return !this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length;
-        else
-            return true;
     }
 
     selectDate(event, dateMeta) {
@@ -329,18 +361,18 @@ export class Calendar extends Component {
             this.currentSecond = date.getSeconds();
         }*/
         
-        if(this.isSingleSelection()) {
+        if (this.isSingleSelection()) {
             this.updateModel(event, date);
         }
         else if(this.isMultipleSelection()) {
-            this.updateModel(event, this.props.value ? [...this.value, date] : [date]);
+            this.updateModel(event, this.props.value ? [...this.props.value, date] : [date]);
         }
-        else if(this.isRangeSelection()) {
-            if(this.props.value && this.props.value.length) {
-                let startDate = this.value[0];
-                let endDate = this.value[1];
+        else if (this.isRangeSelection()) {
+            if (this.props.value && this.props.value.length) {
+                let startDate = this.props.value[0];
+                let endDate = this.props.value[1];
                 
-                if(!endDate && date.getTime() >= startDate.getTime()) {
+                if (!endDate && date.getTime() >= startDate.getTime()) {
                     endDate = date;
                 }
                 else {
@@ -373,7 +405,10 @@ export class Calendar extends Component {
     }
 
     showOverlay() {
-        this.panel.style.zIndex = String(DomHandler.generateZIndex());
+        if (this.props.autoZIndex) {
+            this.panel.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        }
+        
         this.panel.style.display = 'block';
         this.alignPanel();
         DomHandler.fadeIn(this.panel, 250);
@@ -726,8 +761,8 @@ export class Calendar extends Component {
             }
             else if(this.isRangeSelection()) {
                 if(this.props.value && this.props.value.length) {
-                    let startDate = this.value[0];
-                    let endDate = this.value[1];
+                    let startDate = this.props.value[0];
+                    let endDate = this.props.value[1];
                     
                     formattedValue = this.formatDateTime(startDate);
                     if(endDate) {
@@ -1085,7 +1120,7 @@ export class Calendar extends Component {
 
     renderTitleMonthElement(month) {
         if (this.props.monthNavigator && this.props.view !== 'month') {
-            let viewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
             let viewMonth = viewDate.getMonth();
 
             return (
@@ -1114,7 +1149,7 @@ export class Calendar extends Component {
                 yearOptions.push(i);
             }
 
-            let viewDate = this.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
             let viewYear = viewDate.getFullYear();
 
             return (
@@ -1298,6 +1333,26 @@ export class Calendar extends Component {
             return null;
         }
     }
+
+    renderButtonBar() {
+        if (this.props.showButtonBar) {
+            return (
+                <div className="ui-datepicker-buttonbar ui-widget-header">
+                    <div class="ui-g">
+                        <div class="ui-g-6">
+                            <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
+                        </div>
+                        <div class="ui-g-6">
+                            <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.todayButtonClassName} />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
     
     render() {
         const className = classNames('ui-calendar', this.props.className, {
@@ -1317,6 +1372,7 @@ export class Calendar extends Component {
         const input = this.renderInputElement();
         const button = this.renderButton();
         const datePicker = this.renderDatePicker();
+        const buttonBar = this.renderButtonBar();
 
         return (
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
@@ -1325,6 +1381,7 @@ export class Calendar extends Component {
                 <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle} 
                         appendTo={this.props.appendTo} onClick={this.onPanelClick}>
                     {datePicker}
+                    {buttonBar}
                 </CalendarPanel>
             </span>
         );

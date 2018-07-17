@@ -88,10 +88,21 @@ export class CalendarDemo extends Component {
                             <h3>Disabled Days</h3>
                             <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readonlyInput={true} />
                         </div>
-
                         <div className="ui-g-12 ui-md-4">
                             <h3>Navigators</h3>
                             <Calendar value={this.state.date6} onChange={(e) => this.setState({date6: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030"/>
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Multiple Selection</h3>
+                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Range Selection</h3>
+                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Button Bar</h3>
+                            <Calendar value={this.state.date9} onChange={(e) => this.setState({date9: e.value})} showButtonBar={true} />
                         </div>
                     </div>
 
