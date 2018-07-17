@@ -238,7 +238,7 @@ export class PanelMenu extends Component {
                     <a href={item.url || '#'} className="ui-panelmenu-header-link ng-tns-c2-1 ng-star-inserted" onClick={(e) => this.onItemClick(e, item)}>
                         {toggleIcon}
                         {itemIcon}
-                        <span class="ui-menuitem-text">{item.label}</span>
+                        <span className="ui-menuitem-text">{item.label}</span>
                     </a>
                 </div>
                 <div className={contentWrapperClassName}>
