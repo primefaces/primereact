@@ -312,7 +312,7 @@ let es = {
 
             <h3>Date Template</h3>
             <p>Date cell contents can be templated using the <i>dateTemplate</i> property that returns the content of a cell. This is a handy feature to highlight specific dates. Note that the
-            variable passed to the template is not a date instance but a metadata object to represent a Date with "day", "month" and "year" properties. Example below changes the styling of dates between 10 and 15.</p>
+            variable passed to the template is not a date instance but a metadata object to represent a Date with "day", "month", "year", "otherMonth", "today" and "selectable" properties to represent the date. Example below changes the styling of dates between 10 and 15.</p>
             
             <CodeHighlight className="language-jsx">
 {`
