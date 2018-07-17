@@ -192,19 +192,43 @@ export class Calendar extends Component {
         if (this.props.onFocus) {
             this.props.onFocus(event);
         }
+
+        DomHandler.addClass(this.container, 'ui-inputwrapper-focus');
     }
 
     onInputBlur(event) {
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
+
+        DomHandler.removeClass(this.container, 'ui-inputwrapper-focus');
     }
 
     onInputKeyDown(event) {
-        
+        this.isKeydown = true;
+        if (event.keyCode === 9) {
+            this.hideOverlay();
+        }
     }
 
     onInput(event) {
+        // IE 11 Workaround for input placeholder
+        if (!this.isKeydown) {
+            return;
+        }
+        this.isKeydown = false;
+        
+        let rawValue = event.target.value;
+
+        try {
+            let value = this.parseValueFromString(rawValue);
+            this.updateModel(event, value);
+            this.updateViewDate(event, value.length ? value[0] : value);
+        }
+        catch(err) {
+            this.updateModel(event, rawValue);
+        }
+        
         if (this.props.onInput) {
             this.props.onInput(event);
         }
@@ -329,7 +353,7 @@ export class Calendar extends Component {
     }
 
     onClearButtonClick(event) {
-        this.updateModel(null);
+        this.updateModel(event, null);
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
@@ -680,7 +704,7 @@ export class Calendar extends Component {
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.panel.style.zIndex) - 1);
+            this.mask.style.zIndex = String(parseInt(this.panel.style.zIndex, 10) - 1);
             DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-datepicker-mask ui-datepicker-mask-scrollblocker');
             
             this.maskClickListener = () => {
@@ -952,7 +976,7 @@ export class Calendar extends Component {
     }
      
     isDateEquals(value, dateMeta) {
-        if(value)
+        if(value && value instanceof Date)
             return value.getDate() === dateMeta.day && value.getMonth() === dateMeta.month && value.getFullYear() === dateMeta.year;
         else
             return false;
@@ -1013,28 +1037,33 @@ export class Calendar extends Component {
         let formattedValue = '';
 
         if(this.props.value) {
-            if(this.isSingleSelection()) {
-                formattedValue = this.formatDateTime(this.props.value);
-            }
-            else if(this.isMultipleSelection()) {
-                for(let i = 0; i < this.props.value.length; i++) {
-                    let dateAsString = this.formatDateTime(this.props.value[i]);
-                    formattedValue += dateAsString;
-                    if(i !== (this.props.value.length - 1)) {
-                        formattedValue += ', ';
+            try {
+                if(this.isSingleSelection()) {
+                    formattedValue = this.formatDateTime(this.props.value);
+                }
+                else if(this.isMultipleSelection()) {
+                    for(let i = 0; i < this.props.value.length; i++) {
+                        let dateAsString = this.formatDateTime(this.props.value[i]);
+                        formattedValue += dateAsString;
+                        if(i !== (this.props.value.length - 1)) {
+                            formattedValue += ', ';
+                        }
                     }
                 }
-            }
-            else if(this.isRangeSelection()) {
-                if(this.props.value && this.props.value.length) {
-                    let startDate = this.props.value[0];
-                    let endDate = this.props.value[1];
-                    
-                    formattedValue = this.formatDateTime(startDate);
-                    if(endDate) {
-                        formattedValue += ' - ' + this.formatDateTime(endDate);
+                else if(this.isRangeSelection()) {
+                    if(this.props.value && this.props.value.length) {
+                        let startDate = this.props.value[0];
+                        let endDate = this.props.value[1];
+                        
+                        formattedValue = this.formatDateTime(startDate);
+                        if(endDate) {
+                            formattedValue += ' - ' + this.formatDateTime(endDate);
+                        }
                     }
                 }
+            } 
+            catch(err) {
+                formattedValue = this.props.value;
             }
         }
         
@@ -1173,6 +1202,55 @@ export class Calendar extends Component {
         
         return output;
     }
+
+    parseValueFromString(text) {
+        if(!text || text.trim().length === 0) {
+            return null;
+        }
+        
+        let value;
+        
+        if(this.isSingleSelection()) {
+            value = this.parseDateTime(text);
+        }
+        else if(this.isMultipleSelection()) {
+            let tokens = text.split(',');
+            value = [];
+            for(let token of tokens) {
+                value.push(this.parseDateTime(token.trim()));
+            }
+        }
+        else if(this.isRangeSelection()) {
+            let tokens = text.split(' - ');
+            value = [];
+            for(let i = 0; i < tokens.length; i++) {
+                value[i] = this.parseDateTime(tokens[i].trim());
+            }
+        }
+        
+        return value;
+    }
+
+    parseDateTime(text) {
+        let date;
+        let parts = text.split(' ');
+        
+        if(this.props.timeOnly) {
+            date = new Date();
+            this.populateTime(date, parts[0], parts[1]);
+        }
+        else {
+            if(this.props.showTime) {
+                date = this.parseDate(parts[0], this.props.dateFormat);
+                this.populateTime(date, parts[1], parts[2]);
+            }
+            else {
+                 date = this.parseDate(text, this.props.dateFormat);
+            }
+        }
+        
+        return date;
+    }
     
     parseTime(value) {
         let tokens = value.split(':');
@@ -1285,7 +1363,7 @@ export class Calendar extends Component {
                         day = getNumber("d");
                         break;
                     case "D":
-                        getName("D", this.locale.dayNamesShort, this.locale.dayNames);
+                        getName("D", this.props.locale.dayNamesShort, this.props.locale.dayNames);
                         break;
                     case "o":
                         doy = getNumber("o");
@@ -1294,7 +1372,7 @@ export class Calendar extends Component {
                         month = getNumber("m");
                         break;
                     case "M":
-                        month = getName("M", this.locale.monthNamesShort, this.locale.monthNames);
+                        month = getName("M", this.props.locale.monthNamesShort, this.props.locale.monthNames);
                         break;
                     case "y":
                         year = getNumber("y");
@@ -1774,7 +1852,7 @@ export class Calendar extends Component {
             return null;
         }
     }
-    
+   
     render() {
         const className = classNames('ui-calendar', this.props.className, {
             'ui-calendar-w-btn': this.props.showIcon, 

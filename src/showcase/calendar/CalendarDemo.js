@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {Calendar} from '../../components/calendar/Calendar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import { max } from '../../../node_modules/moment';
 
 export class CalendarDemo extends Component {
 
