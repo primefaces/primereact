@@ -192,6 +192,17 @@ import {Calendar} from 'primereact/calendar';
 `}
 </CodeHighlight>
 
+            <h3>View Date</h3>
+            <p><i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like
+            to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in 
+            uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the viewChange in controlled mode.</p>
+            <CodeHighlight className="language-jsx">
+{`
+<Calendar value={this.state.dates} onChange={(e) => this.setState({date: e.value})} viewDate={this.state.viewDate} onViewDateChange={(e) => this.setState({viewDate: e.value})}></Calendar>
+
+`}
+</CodeHighlight>
+
             <h3>Selection Mode</h3>
             <p>Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple
             case an array is required. Third alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value
@@ -333,6 +344,17 @@ dateTemplate(date) {
         return date.day;
     }
 }
+
+`}
+</CodeHighlight>
+
+            <h3>Month and Year Navigator</h3>
+            <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays
+            available years. Format of the <i>yearRange</i> is "startYear:endYear".</p>
+            
+            <CodeHighlight className="language-jsx">
+{`
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
 
 `}
 </CodeHighlight>
