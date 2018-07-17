@@ -6,7 +6,6 @@ import {Button} from '../button/Button';
 import {CalendarPanel} from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import { max } from '../../../node_modules/moment';
 
 export class Calendar extends Component {
 
