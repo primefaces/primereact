@@ -883,11 +883,11 @@ export class Calendar extends Component {
         let minutes = date.getMinutes();
         let seconds = date.getSeconds();
         
-        if (this.hourFormat == '12' && hours > 11 && hours != 12) {
-            hours-=12;
+        if (this.hourFormat === '12' && hours > 11 && hours !== 12) {
+            hours -= 12;
         }
         
-        if (this.hourFormat == '12') {
+        if (this.hourFormat === '12') {
             output += hours === 0 ? 12 : (hours < 10) ? '0' + hours : hours;
         } 
         else {
@@ -901,7 +901,7 @@ export class Calendar extends Component {
             output += (seconds < 10) ? '0' + seconds : seconds;
         }
         
-        if (this.props.hourFormat == '12') {
+        if (this.props.hourFormat === '12') {
             output += date.getHours() > 11 ? ' PM' : ' AM';
         }
         
@@ -913,18 +913,18 @@ export class Calendar extends Component {
         let validTokenLength = this.showSeconds ? 3 : 2;
         
         if(tokens.length !== validTokenLength) {
-            throw "Invalid time";
+            throw new Error('Invalid time');
         }
         
-        let h = parseInt(tokens[0]);
-        let m = parseInt(tokens[1]);
-        let s = this.showSeconds ? parseInt(tokens[2]) : null;
+        let h = parseInt(tokens[0], 10);
+        let m = parseInt(tokens[1], 10);
+        let s = this.showSeconds ? parseInt(tokens[2], 10) : null;
         
-        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.hourFormat == '12' && h > 12) || (this.showSeconds && (isNaN(s) || s > 59))) {
-            throw "Invalid time";
+        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.hourFormat === '12' && h > 12) || (this.showSeconds && (isNaN(s) || s > 59))) {
+            throw new Error('Invalid time');
         }
         else {
-            if(this.hourFormat == '12' && h !== 12 && this.pm) {
+            if(this.hourFormat === '12' && h !== 12 && this.pm) {
                 h+= 12;
             }
             
@@ -935,7 +935,7 @@ export class Calendar extends Component {
     // Ported from jquery-ui datepicker parseDate
     parseDate(value, format) {
         if(format == null || value == null) {
-            throw "Invalid arguments";
+            throw new Error('Invalid arguments');
         }
 
         value = (typeof value === "object" ? value.toString() : value + "");
@@ -967,7 +967,7 @@ export class Calendar extends Component {
                 digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
                 num = value.substring(iValue).match(digits);
             if(!num) {
-                throw "Missing number at position " + iValue;
+                throw new Error('Missing number at position ' + iValue);
             }
             iValue += num[ 0 ].length;
             return parseInt(num[ 0 ], 10);
@@ -996,12 +996,12 @@ export class Calendar extends Component {
             if(index !== -1) {
                 return index + 1;
             } else {
-                throw "Unknown name at position " + iValue;
+                throw new Error('Unknown name at position ' + iValue);
             }
         },
         checkLiteral = () => {
             if(value.charAt(iValue) !== format.charAt(iFormat)) {
-                throw "Unexpected literal at position " + iValue;
+                throw new Error('Unexpected literal at position ' + iValue);
             }
             iValue++;
         };
@@ -1061,7 +1061,7 @@ export class Calendar extends Component {
         if(iValue < value.length) {
             extra = value.substr(iValue);
             if(!/^\s+/.test(extra)) {
-                throw "Extra/unparsed characters found in date: " + extra;
+                throw new Error('Extra/unparsed characters found in date: ' + extra);
             }
         }
 
@@ -1087,7 +1087,7 @@ export class Calendar extends Component {
 
         date = this.daylightSavingAdjust(new Date(year, month - 1, day));
                 if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
-                    throw "Invalid date"; // E.g. 31/02/00
+                    throw new Error('Invalid date'); // E.g. 31/02/00
                 }
 
         return date;
@@ -1109,24 +1109,15 @@ export class Calendar extends Component {
         );
     }
 
-    /*
-      <select  *ngIf="monthNavigator && (view !== 'month')" (change)="onMonthDropdownChange($event.target.value)">
-                                    <option [value]="i" *ngFor="let month of locale.monthNames;let i = index" [selected]="i == currentMonth + i">{{month}}</option>
-                                </select>
-                                <select class="ui-datepicker-year" *ngIf="yearNavigator" (change)="onYearDropdownChange($event.target.value)">
-                                    <option [value]="year" *ngFor="let year of yearOptions" [selected]="year == currentYear">{{year}}</option>
-                                </select>
-                                */
-
     renderTitleMonthElement(month) {
         if (this.props.monthNavigator && this.props.view !== 'month') {
             let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
             let viewMonth = viewDate.getMonth();
 
             return (
-                <select className="ui-datepicker-month" onChange={this.onMonthDropdownChange}>
+                <select className="ui-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
                     {
-                        this.props.locale.monthNames.map((month, index) => <option key={month} value={index} selected={index === viewMonth}>{month}</option>)
+                        this.props.locale.monthNames.map((month, index) => <option key={month} value={index}>{month}</option>)
                     }
                 </select>
             );
@@ -1141,9 +1132,9 @@ export class Calendar extends Component {
     renderTitleYearElement(year) {
         if (this.props.yearNavigator) {
             let yearOptions = [];
-            let years = this.props.yearRange.split(':'),
-            yearStart = parseInt(years[0]),
-            yearEnd = parseInt(years[1]);
+            const years = this.props.yearRange.split(':');
+            const yearStart = parseInt(years[0], 10);
+            const yearEnd = parseInt(years[1], 10);
             
             for(let i = yearStart; i <= yearEnd; i++) {
                 yearOptions.push(i);
@@ -1153,9 +1144,9 @@ export class Calendar extends Component {
             let viewYear = viewDate.getFullYear();
 
             return (
-                <select className="ui-datepicker-year" onChange={this.onYearDropdownChange}>
+                <select className="ui-datepicker-year" onChange={this.onYearDropdownChange} value={viewYear}>
                     {
-                        yearOptions.map(year => <option key={year} value={year} selected={year === viewYear}>{year}</option>)
+                        yearOptions.map(year => <option key={year} value={year}>{year}</option>)
                     }
                 </select>
             );
@@ -1338,11 +1329,11 @@ export class Calendar extends Component {
         if (this.props.showButtonBar) {
             return (
                 <div className="ui-datepicker-buttonbar ui-widget-header">
-                    <div class="ui-g">
-                        <div class="ui-g-6">
+                    <div className="ui-g">
+                        <div className="ui-g-6">
                             <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
                         </div>
-                        <div class="ui-g-6">
+                        <div className="ui-g-6">
                             <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.todayButtonClassName} />
                         </div>
                     </div>
