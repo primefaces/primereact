@@ -6,6 +6,7 @@ import {Button} from '../button/Button';
 import {CalendarPanel} from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import { max } from '../../../node_modules/moment';
 
 export class Calendar extends Component {
 
@@ -232,8 +233,7 @@ export class Calendar extends Component {
             return;
         }
 
-        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
-        let newViewDate = new Date(currentViewDate.getTime());
+        let newViewDate = new Date(this.getViewDate().getTime());
 
         if (this.props.view === 'date') {
             if(newViewDate.getMonth() === 0) {
@@ -245,7 +245,18 @@ export class Calendar extends Component {
             }
         }
         else if (this.props.view === 'month') {
-            //this.decrementYear();
+            let currentYear = newViewDate.getFullYear();
+            let newYear = currentYear - 1;
+
+            if(this.props.yearNavigator) {
+                const minYear = parseInt(this.props.yearRange.split(':')[0], 10);
+
+                if(newYear < minYear) {
+                    newYear = minYear;
+                }
+            }
+
+            newViewDate.setFullYear(newYear);
         }
 
         this.updateViewDate(event, newViewDate);
@@ -259,8 +270,7 @@ export class Calendar extends Component {
             return;
         }
 
-        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
-        let newViewDate = new Date(currentViewDate.getTime());
+        let newViewDate = new Date(this.getViewDate().getTime());
 
         if (this.props.view === 'date') {
             if(newViewDate.getMonth() === 11) {
@@ -272,7 +282,18 @@ export class Calendar extends Component {
             }
         }
         else if (this.props.view === 'month') {
-            //this.incrementYear();
+            let currentYear = newViewDate.getFullYear();
+            let newYear = currentYear + 1;
+
+            if(this.props.yearNavigator) {
+                const maxYear = parseInt(this.props.yearRange.split(':')[1], 10);
+
+                if(newYear > maxYear) {
+                    newYear = maxYear;
+                }
+            }
+
+            newViewDate.setFullYear(newYear);
         }
 
         this.updateViewDate(event, newViewDate);
@@ -588,6 +609,11 @@ export class Calendar extends Component {
                 value: date
             });
         }
+    }
+
+    onMonthSelect(event, month) {
+        this.onDateSelect(event, {year: this.getViewDate().getFullYear(), month: month, day: 1, selectable: true});
+        event.preventDefault();
     }
     
     updateModel(event, value) {   
@@ -918,12 +944,12 @@ export class Calendar extends Component {
     }
 
     isMonthSelected(month) {
-        if(this.value) {
-            return this.value.getDate() === 1 && this.value.getMonth() === month && this.value.getFullYear() === this.currentYear;
-        }
-        else {
+        const viewDate = this.getViewDate();
+
+        if(this.props.value)
+            return this.props.value.getDate() === 1 && this.props.value.getMonth() === month && this.props.value.getFullYear() === viewDate.getFullYear();
+        else
             return false;
-        }
     }
      
     isDateEquals(value, dateMeta) {
@@ -1523,8 +1549,46 @@ export class Calendar extends Component {
         );
     }
 
+    renderMonthViewMonth(index) {
+        const className = classNames('ui-monthpicker-month', {'ui-state-active': this.isMonthSelected(index)});
+        const monthName = this.props.locale.monthNamesShort[index];
+
+        return (
+            <a key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)}>
+                {monthName}                                
+            </a>
+        );
+    }
+
+    renderMonthViewMonths() {
+        let months = [];
+        for(let i = 0; i <= 11; i++) {
+            months.push(this.renderMonthViewMonth(i));
+        }
+
+        return months;
+    }
+
     renderMonthView() {
-        //todo
+        const backwardNavigator = this.renderBackwardNavigator();
+        const forwardNavigator = this.renderForwardNavigator();
+        const yearElement = this.renderTitleYearElement(this.getViewDate().getFullYear());
+        const months = this.renderMonthViewMonths();
+        
+        return (
+            <React.Fragment>
+                <div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+                    {backwardNavigator}
+                    {forwardNavigator}
+                    <div className="ui-datepicker-title">
+                        {yearElement}
+                    </div>
+                </div>
+                <div className="ui-monthpicker">
+                    {months}
+                </div>
+            </React.Fragment>  
+        );
     }
 
     renderDatePicker() {

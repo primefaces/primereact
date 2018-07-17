@@ -589,8 +589,8 @@
         }
     }
 
-    &.ui-datepicker-monthpicker {
-        .ui-datepicker-month-cell:hover {
+    .ui-monthpicker {
+        .ui-monthpicker-month:hover {
             @include hover-element();
         }
     }
