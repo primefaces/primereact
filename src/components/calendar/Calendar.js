@@ -171,6 +171,13 @@ export class Calendar extends Component {
         this.toggleAmPm = this.toggleAmPm.bind(this);
     }
 
+    componentWillUnmount() {
+        if (this.mask) {
+            this.disableModality();
+            this.mask = null;
+        }
+    }
+
     onInputClick(event) {
         if (this.documentClickListener) {
             this.datepickerClick = true;
@@ -523,9 +530,9 @@ export class Calendar extends Component {
         if(!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
             this.hideOverlay();
 
-            /*if(this.mask) {
+            if(this.mask) {
                 this.disableModality();
-            }*/
+            }
         }
 
         event.preventDefault();
@@ -631,13 +638,59 @@ export class Calendar extends Component {
     }
     
     alignPanel() {
-        if(this.props.appendTo) {
-            DomHandler.absolutePosition(this.panel, this.container);
-            this.panel.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+        if (this.props.touchUI) {
+            this.enableModality();
         }
         else {
-            DomHandler.relativePosition(this.panel, this.container);
-        }            
+            if(this.props.appendTo) {
+                DomHandler.absolutePosition(this.panel, this.container);
+                this.panel.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+            }
+            else {
+                DomHandler.relativePosition(this.panel, this.container);
+            }   
+        }
+    }
+
+    enableModality() {
+        if (!this.mask) {
+            this.mask = document.createElement('div');
+            this.mask.style.zIndex = String(parseInt(this.panel.style.zIndex) - 1);
+            DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-datepicker-mask ui-datepicker-mask-scrollblocker');
+            
+            this.maskClickListener = () => {
+                this.disableModality();
+            };
+            this.mask.addEventListener('click', this.maskClickListener);
+
+            document.body.appendChild(this.mask);
+            DomHandler.addClass(document.body, 'ui-overflow-hidden');
+        }
+    }
+    
+    disableModality() {
+        if (this.mask) {
+            this.mask.removeEventListener('click', this.maskClickListener);
+            this.maskClickListener = null;         
+            document.body.removeChild(this.mask);
+            this.mask = null;   
+
+            let bodyChildren = document.body.children;
+            let hasBlockerMasks;
+            for (let i = 0; i < bodyChildren.length; i++) {
+                let bodyChild = bodyChildren[i];
+                if(DomHandler.hasClass(bodyChild, 'ui-datepicker-mask-scrollblocker')) {
+                    hasBlockerMasks = true;
+                    break;
+                }
+            }
+            
+            if (!hasBlockerMasks) {
+                DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+            }
+
+            this.hideOverlay();
+        }
     }
 
     getFirstDayOfMonthIndex(month, year) {
@@ -1492,7 +1545,7 @@ export class Calendar extends Component {
         let currentTime = this.props.value || this.getViewDate();
         let hour = currentTime.getHours();
 
-        if (this.props.hourFormat == '12') {
+        if (this.props.hourFormat === '12') {
             if (hour === 0) 
                 hour = 12;
             else if (hour > 11 && hour !== 12)

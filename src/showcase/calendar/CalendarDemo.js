@@ -38,7 +38,6 @@ export class CalendarDemo extends Component {
             date11: null,
             date12: null,
             date13: null,
-            date14: null,
             dates1: null,
             dates2: null,
             minDate: minDate,
@@ -107,11 +106,11 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Multiple Selection</h3>
-                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readonlyInput="true" />
+                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readonlyInput={true} />
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Range Selection</h3>
-                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readonlyInput="true" />
+                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readonlyInput={true} />
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Button Bar</h3>
@@ -128,6 +127,18 @@ export class CalendarDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <h3>Date Template</h3>
                             <Calendar value={this.state.date10} onChange={(e) => this.setState({date10: e.value})} dateTemplate={this.dateTemplate} />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Multiple Months</h3>
+                            <Calendar value={this.state.date11} onChange={(e) => this.setState({date11: e.value})} numberOfMonths={3} />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Month/Year Picker</h3>
+                            <Calendar value={this.state.date12} onChange={(e) => this.setState({date12: e.value})} view="month" dateFormat="mm/yy"  yearNavigator={true} yearRange="2010:2030"/>
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Touch UI</h3>
+                            <Calendar value={this.state.date13} onChange={(e) => this.setState({date13: e.value})} touchUI={true} />
                         </div>
                     </div>
 
