@@ -1,59 +1,84 @@
 import React = require("react");
 
+export interface LocaleSettings {
+    firstDayOfWeek?: number;
+    dayNames: string[];
+    dayNamesShort: string[];
+    dayNamesMin: string[];
+    monthNames: string[];
+    monthNamesShort: string[];
+    today: string;
+    clear: string;
+}
+
+export interface DateMetaData {
+    day: number;
+    month: number;
+    year: number;
+    otherMonth: boolean;
+    today: boolean;
+    selectable: boolean;
+}
+
 interface CalendarProps {
     id?: string;
-    value?: any;
-    defaultDate?: Date;
-    selectionMode?: string;
-    style?: string;
+    name?: string;
+    value?: Date|Date[];
+    viewDate?: Date;
+    style?: object;
     className?: string;
-    inputStyle?: string;
-    inputClassName?: string;
-    placeholder?: string;
-    disabled?: boolean;
-    dateFormat?: string;
     inline?: boolean;
-    showOtherMonths?: boolean;
-    selectOtherMonths?: boolean;
+    selectionMode?: string;
+    inputId?: string;
+    inputStyle?: object;
+    inputClassName?: string;
+    required?: boolean;
+    readOnlyInput?: boolean;
+    disabled?: boolean;
+    tabIndex?: string;
+    placeholder?: string;
     showIcon?: boolean;
     icon?: string;
-    utc?: boolean;
     showOnFocus?: boolean;
-    appendTo?: object;
-    readOnlyInput?: boolean;
-    shortYearCutoff?: string;
-    minDate?: any;
-    maxDate?: any;
-    monthNavigator?: boolean;
-    yearNavigator?: boolean;
-    maxDateCount?: number;
-    yearRange?: string;
+    numberOfMonths?: number;
+    view?: string;
+    touchUI?: boolean;
     showTime?: boolean;
-    hourFormat?: string;
     timeOnly?: boolean;
-    locale?: object;
-    dataType?: string;
-    showButtonBar?: boolean;
-    todayButtonClassName?: boolean;
-    clearButtonClassName?: boolean;
-    required?: boolean;
-    tabindex?: number;
+    showSeconds?: boolean;
+    hourFormat?: string;
     stepHour?: number;
     stepMinute?: number;
     stepSecond?: number;
-    showSeconds?: boolean;
-    disabledDates?: Array<any>;
-    disabledDays?: Array<any>;
+    shortYearCutoff?: string;
+    hideOnDateTimeSelect?: boolean;
+    locale?: LocaleSettings;
+    dateFormat?: string;
+    panelStyle?: object;
+    panelClassName?: string;
+    monthNavigator?: boolean;
+    yearNavigator?: boolean;
+    disabledDates?: Date[];
+    disabledDays?: number[];
+    minDate?: Date;
+    maxDate?: Date;
+    maxDateCount?: number;
+    showOtherMonths?: boolean;
+    selectOtherMonths?: boolean;
+    showButtonBar?: boolean;
+    todayButtonClassName?: string;
+    clearButtonStyleClass?: string;
+    autoZIndex?: boolean;
+    baseZIndex?: number;
+    dateTemplate?(dateMeta:DateMetaData): JSX.Element | undefined;
     onFocus?(event: Event): void;
-    onSelect?(e: {originalEvent: Event, value: any}): void;
     onBlur?(event: Event): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onInput?(event: Event): void;
+    onSelect?(e: {originalEvent: Event, value: Date}): void;
+    onChange?(e: {originalEvent: Event, value: Date|Date[]}): void;
     onTodayButtonClick?(event: Event): void;
     onClearButtonClick?(event: Event): void;
-    onMouseDown?(event: Event): void;
-    onKeyUp?(event: Event): void;
-    onKeyPress?(event: Event): void;
-    onContextMenu?(event: Event): void;
+    onViewDateChange?(e: {originalEvent: Event, value: Date}): void;
 }
 
 export class Calendar extends React.Component<CalendarProps,any> {}

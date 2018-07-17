@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ObjectUtils from '../utils/ObjectUtils';
-import jQuery from "jquery";
-import "fullcalendar";
+var FullCalendar = require('fullcalendar');
 
 export class Schedule extends Component {
 
@@ -119,39 +118,39 @@ export class Schedule extends Component {
     }
 
     gotoDate(date) {
-        this.schedule.fullCalendar('gotoDate', date);
+        this.calendar.gotoDate(date);
     }
     
     prev() {
-        this.schedule.fullCalendar('prev');
+        this.calendar.prev();
     }
     
     next() {
-        this.schedule.fullCalendar('next');
+        this.calendar.next();
     }
     
     prevYear() {
-        this.schedule.fullCalendar('prevYear');
+        this.calendar.prevYear();
     }
     
     nextYear() {
-        this.schedule.fullCalendar('nextYear');
+        this.calendar.nextYear();
     }
     
     today() {
-        this.schedule.fullCalendar('today');
+        this.calendar.today();
     }
     
     incrementDate(duration) {
-        this.schedule.fullCalendar('incrementDate', duration);
+        this.calendar.incrementDate(duration);
     }
      
     changeView(viewName) {
-        this.schedule.fullCalendar('changeView', viewName);   
+        this.calendar.changeView(viewName);
     }
     
     getDate() {
-        return this.schedule.fullCalendar('getDate');
+        return this.calendar.getDate();
     }
 
     componentDidMount() {
@@ -317,29 +316,33 @@ export class Schedule extends Component {
             }
         }
 
-        this.schedule = jQuery(this.scheduleEl);
-        this.schedule.fullCalendar(this.config);
-        this.events = [...this.props.events];
-        this.schedule.fullCalendar('addEventSource', this.events);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return false;
+        this.calendar = new FullCalendar.Calendar(this.calendarEl, this.config);
+        this.calendar.render();
+        this.calendar.addEventSource(this.props.events);
     }
 
     componentWillUnmount() {
-        jQuery(this.scheduleEl).fullCalendar('destroy');
+        if(this.calendar) {
+            this.calendar.destroy();
+        }
     }
-    
-    componentDidUpdate(prevProps, prevState, snaphot) {
-        if(!ObjectUtils.equals(this.props.events, this.events)) {
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        if(!ObjectUtils.equals(prevProps.events, this.props.events)) {
             this.events = [...this.props.events];
-            this.schedule.fullCalendar('removeEventSources');
-            this.schedule.fullCalendar('addEventSource', this.events);
+            return this.events;
+        }
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (snapshot !== null) {
+            this.calendar.removeEventSources();
+            this.calendar.addEventSource(this.events);
         }
     }
 
     render() {
-        return <div id={this.props.id} ref={(el) => this.scheduleEl = el} style={this.props.style} className={this.props.className}></div>;
+        return <div id={this.props.id} ref={(el) => this.calendarEl = el} style={this.props.style} className={this.props.className}></div>;
     }
 }
