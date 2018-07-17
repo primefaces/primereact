@@ -139,8 +139,8 @@
 	border: 0;
 	padding: 0;
 }
-.ui-datepicker td span,
-.ui-datepicker td a {
+.ui-datepicker td > span,
+.ui-datepicker td > a {
 	display: block;
 	padding: .5em;
 	text-align: right;
@@ -215,6 +215,7 @@
     display: block;
     opacity: 0.7;
     filter:Alpha(Opacity=70);
+    cursor: pointer;
 }
 
 .ui-timepicker > div a:last-child {

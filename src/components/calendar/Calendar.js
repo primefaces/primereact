@@ -34,6 +34,12 @@ export class Calendar extends Component {
         touchUI: false,
         showTime: false,
         timeOnly: false,
+        showSeconds: false,
+        hourFormat: '24',
+        stepHour: 1,
+        stepMinute: 1,
+        stepSecond: 1,
+        shortYearCutoff: '+10',
         hideOnDateTimeSelect: false,
         locale: {
             firstDayOfWeek: 0,
@@ -62,6 +68,7 @@ export class Calendar extends Component {
         clearButtonStyleClass: 'ui-button-secondary',
         autoZIndex: true,
         baseZIndex: 0,
+        dateTemplate: null,
         onFocus: null,
         onBlur: null,
         onInput: null,
@@ -97,6 +104,12 @@ export class Calendar extends Component {
         touchUI: PropTypes.bool,
         showTime: PropTypes.bool,
         timeOnly: PropTypes.bool,
+        showSeconds: PropTypes.bool,
+        hourFormat: PropTypes.string,
+        stepHour: PropTypes.number,
+        stepMinute: PropTypes.number,
+        stepSecond: PropTypes.number,
+        shortYearCutoff: PropTypes.string,
         hideOnDateTimeSelect: PropTypes.bool,
         locale: PropTypes.string,
         dateFormat: PropTypes.string,
@@ -116,6 +129,7 @@ export class Calendar extends Component {
         clearButtonStyleClass: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
+        dateTemplate: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onInput: PropTypes.func,
@@ -148,6 +162,13 @@ export class Calendar extends Component {
         this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
+        this.incrementHour = this.incrementHour.bind(this);
+        this.decrementHour = this.decrementHour.bind(this);
+        this.incrementMinute = this.incrementMinute.bind(this);
+        this.decrementMinute = this.decrementMinute.bind(this);
+        this.incrementSecond = this.incrementSecond.bind(this);
+        this.decrementSecond= this.decrementSecond.bind(this);
+        this.toggleAmPm = this.toggleAmPm.bind(this);
     }
 
     onInputClick(event) {
@@ -288,6 +309,182 @@ export class Calendar extends Component {
         }
     }
 
+    incrementHour(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentHour = currentTime.getHours();
+        let newHour = currentHour + this.props.stepHour;
+        newHour = (newHour >= 24) ? (newHour - 24) : newHour;
+
+        if (this.validateHour(newHour)) {
+            this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+        }
+
+        event.preventDefault();
+    }
+    
+    decrementHour(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentHour = currentTime.getHours();
+        let newHour = currentHour - this.props.stepHour;
+        newHour = (newHour < 0) ? (newHour + 24) : newHour;
+
+        if (this.validateHour(newHour)) {
+            this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+        }
+
+        event.preventDefault();
+    }
+
+    incrementMinute(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentMinute = currentTime.getMinutes();
+        let newMinute = currentMinute + this.props.stepMinute;
+        newMinute = (newMinute > 59) ? (newMinute - 60) : newMinute;
+
+        if (this.validateMinute(newMinute)) {
+            this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+        }
+
+        event.preventDefault();
+    }
+
+    decrementMinute(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentMinute = currentTime.getMinutes();
+        let newMinute = currentMinute - this.props.stepMinute;
+        newMinute = (newMinute < 0) ? (newMinute + 60) : newMinute;
+
+        if (this.validateMinute(newMinute)) {
+            this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+        }
+
+        event.preventDefault();
+    }
+
+    incrementSecond(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentSecond = currentTime.getSeconds();
+        let newSecond = currentSecond + this.props.stepSecond;
+        newSecond = (newSecond > 59) ? (newSecond - 60) : newSecond;
+
+        if (this.validateSecond(newSecond)) {
+            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
+        }
+
+        event.preventDefault();
+    }
+
+    decrementSecond(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentSecond = currentTime.getSeconds();
+        let newSecond = currentSecond - this.props.stepSecond;
+        newSecond = (newSecond < 0) ? (newSecond + 60) : newSecond;
+
+        if (this.validateSecond(newSecond)) {
+            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
+        }
+
+        event.preventDefault();
+    }
+
+    toggleAmPm(event) {
+        const currentTime = this.props.value || this.getViewDate();
+        const currentHour = currentTime.getHours();
+        const newHour = (currentHour >= 12) ? currentHour - 12: currentHour + 12;
+
+        this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+        event.preventDefault();
+    }
+
+    getViewDate() {
+        return this.props.onViewDateChange ? this.props.viewDate: this.state.viewDate;
+    }
+
+    validateHour(hour) {
+        let valid = true;
+        let value = this.props.value;
+        let valueDateString = value ? value.toDateString() : null;
+        
+        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if(this.props.minDate.getHours() > hour) {
+                valid = false;
+            }
+        }
+        
+        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if(this.props.maxDate.getHours() < hour) {
+                valid = false;
+            }
+        }
+        
+        return valid;
+    }
+
+    validateMinute(minute) {
+        let valid = true;
+        let value = this.props.value;
+        let valueDateString = value ? value.toDateString() : null;
+
+        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if(value.getHours() === this.props.minDate.getHours()){
+                if(this.props.minDate.getMinutes() > minute) {
+                    valid = false;
+                }
+            }
+        }
+        
+        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if(value.getHours() === this.props.maxDate.getHours()){
+                if(this.props.maxDate.getMinutes() < minute) {
+                    valid = false;
+                }
+            }
+        }
+        
+        return valid;
+    }
+
+    validateSecond(second) {
+        let valid = true;
+        let value = this.props.value;
+        let valueDateString = value ? value.toDateString() : null;
+
+        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if(value.getHours() === this.props.minDate.getHours() && value.getMinutes() === this.props.minDate.getMinutes()) {
+                if(this.props.minDate.getMinutes() > second) {
+                    valid = false;
+                }
+            }
+        }
+        
+        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if(value.getHours() === this.props.maxDate.getHours() && value.getMinutes() === this.props.maxDate.getMinutes()){
+                if(this.props.maxDate.getMinutes() < second) {
+                    valid = false;
+                }
+            }
+        }
+        
+        return valid;
+    }
+
+    updateTime(event, hour, minute, second) {
+        let newDateTime = this.props.value ? new Date(this.props.value) : new Date();
+        
+        newDateTime.setHours(hour);
+        newDateTime.setMinutes(minute);
+        newDateTime.setSeconds(second);
+
+        this.updateModel(event, newDateTime);
+
+        if (this.props.onSelect) {
+            this.props.onSelect({
+                originalEvent: event,
+                value: newDateTime
+            });
+        }
+    }
+
     updateViewDate(event, value) {
         if (this.props.onViewDateChange) {
             this.props.onViewDateChange({
@@ -337,29 +534,20 @@ export class Calendar extends Component {
     selectDate(event, dateMeta) {
         let date = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
         
-        /*if(this.showTime) {
-            if(this.hourFormat === '12' && this.pm && this.currentHour != 12)
-                date.setHours(this.currentHour + 12);
-            else
-                date.setHours(this.currentHour);
-
-            date.setMinutes(this.currentMinute);
-            date.setSeconds(this.currentSecond);
+        if(this.props.showTime) {
+            let time = this.props.value || new Date();
+            date.setHours(time.getHours());
+            date.setMinutes(time.getMinutes());
+            date.setSeconds(time.getSeconds());
         }
         
-        if(this.props.minDate && this.minDate > date) {
+        if(this.props.minDate && this.props.minDate > date) {
             date = this.minDate;
-            this.currentHour = date.getHours();
-            this.currentMinute = date.getMinutes();
-            this.currentSecond = date.getSeconds();
         }
         
         if(this.maxDate && this.maxDate < date) {
             date = this.maxDate;
-            this.currentHour = date.getHours();
-            this.currentMinute = date.getMinutes();
-            this.currentSecond = date.getSeconds();
-        }*/
+        }
         
         if (this.isSingleSelection()) {
             this.updateModel(event, date);
@@ -883,11 +1071,11 @@ export class Calendar extends Component {
         let minutes = date.getMinutes();
         let seconds = date.getSeconds();
         
-        if (this.hourFormat === '12' && hours > 11 && hours !== 12) {
+        if (this.props.hourFormat === '12' && hours > 11 && hours !== 12) {
             hours -= 12;
         }
         
-        if (this.hourFormat === '12') {
+        if (this.props.hourFormat === '12') {
             output += hours === 0 ? 12 : (hours < 10) ? '0' + hours : hours;
         } 
         else {
@@ -910,7 +1098,7 @@ export class Calendar extends Component {
     
     parseTime(value) {
         let tokens = value.split(':');
-        let validTokenLength = this.showSeconds ? 3 : 2;
+        let validTokenLength = this.props.showSeconds ? 3 : 2;
         
         if(tokens.length !== validTokenLength) {
             throw new Error('Invalid time');
@@ -918,13 +1106,13 @@ export class Calendar extends Component {
         
         let h = parseInt(tokens[0], 10);
         let m = parseInt(tokens[1], 10);
-        let s = this.showSeconds ? parseInt(tokens[2], 10) : null;
+        let s = this.props.showSeconds ? parseInt(tokens[2], 10) : null;
         
-        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.hourFormat === '12' && h > 12) || (this.showSeconds && (isNaN(s) || s > 59))) {
+        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.props.hourFormat === '12' && h > 12) || (this.props.showSeconds && (isNaN(s) || s > 59))) {
             throw new Error('Invalid time');
         }
         else {
-            if(this.hourFormat === '12' && h !== 12 && this.pm) {
+            if(this.props.hourFormat === '12' && h !== 12 && this.pm) {
                 h+= 12;
             }
             
@@ -945,7 +1133,7 @@ export class Calendar extends Component {
 
         let iFormat, dim, extra,
         iValue = 0,
-        shortYearCutoff = (typeof this.shortYearCutoff !== "string" ? this.shortYearCutoff : new Date().getFullYear() % 100 + parseInt(this.shortYearCutoff, 10)),
+        shortYearCutoff = (typeof this.props.shortYearCutoff !== "string" ? this.props.shortYearCutoff : new Date().getFullYear() % 100 + parseInt(this.props.shortYearCutoff, 10)),
         year = -1,
         month = -1,
         day = -1,
@@ -1181,17 +1369,18 @@ export class Calendar extends Component {
     }
 
     renderDateCellContent(date, className) {
+        const content = this.props.dateTemplate ? this.props.dateTemplate(date) : date.day;
         if (date.selectable) {
             return (
                 <a className={className} onClick={e => this.onDateSelect(e, date)}>
-                    {date.day}
+                    {content}
                 </a>
             );
         }
         else {
             return (
                 <span className={className}>
-                    {date.day}
+                    {content}
                 </span>
             );
         }
@@ -1286,11 +1475,136 @@ export class Calendar extends Component {
     }
 
     renderDatePicker() {
-        if (this.props.view === 'date') {
-            return this.renderDateView();
-        } 
-        else if (this.props.view === 'month') {
-            return this.renderMonthView();
+        if (!this.props.timeOnly) {
+            if (this.props.view === 'date') {
+                return this.renderDateView();
+            } 
+            else if (this.props.view === 'month') {
+                return this.renderMonthView();
+            }
+            else {
+                return null;
+            }
+        }
+    }
+
+    renderHourPicker() {
+        let currentTime = this.props.value || this.getViewDate();
+        let hour = currentTime.getHours();
+
+        if (this.props.hourFormat == '12') {
+            if (hour === 0) 
+                hour = 12;
+            else if (hour > 11 && hour !== 12)
+                hour = hour - 12;
+        }
+
+        const hourDisplay = hour < 10 ? '0' + hour: hour;
+        
+        return (
+            <div className="ui-hour-picker">
+                <a onClick={this.incrementHour}>
+                    <span className="pi pi-chevron-up"></span>
+                </a>
+                <span>{hourDisplay}</span>
+                <a onClick={this.decrementHour}>
+                    <span className="pi pi-chevron-down"></span>
+                </a>
+            </div>
+        );
+    }
+
+    renderMinutePicker() {
+        let currentTime = this.props.value || this.getViewDate();
+        let minute = currentTime.getMinutes();
+        let minuteDisplay = minute < 10 ? '0' + minute: minute;
+        
+        return (
+            <div className="ui-minute-picker">
+                <a onClick={this.incrementMinute}>
+                    <span className="pi pi-chevron-up"></span>
+                </a>
+                <span>{minuteDisplay}</span>
+                <a onClick={this.decrementMinute}>
+                    <span className="pi pi-chevron-down"></span>
+                </a>
+            </div>
+        );
+    }
+
+    renderSecondPicker() {
+        if (this.props.showSeconds) {
+            let currentTime = this.props.value || this.getViewDate();
+            let second = currentTime.getSeconds();
+            let secondDisplay = second < 10 ? '0' + second: second;
+            
+            return (
+                <div className="ui-second-picker">
+                    <a onClick={this.incrementSecond}>
+                        <span className="pi pi-chevron-up"></span>
+                    </a>
+                    <span>{secondDisplay}</span>
+                    <a onClick={this.decrementSecond}>
+                        <span className="pi pi-chevron-down"></span>
+                    </a>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderAmPmPicker() {
+        if (this.props.hourFormat === '12') {
+            let currentTime = this.props.value || this.getViewDate();
+            let hour = currentTime.getHours();
+            let display = hour > 11 ? 'PM' : 'AM';
+
+            return (
+                <div className="ui-ampm-picker">
+                    <a onClick={this.toggleAmPm}>
+                        <span className="pi pi-chevron-up"></span>
+                    </a>
+                    <span>{display}</span>
+                    <a onClick={this.toggleAmPm}>
+                        <span className="pi pi-chevron-down"></span>
+                    </a>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderSeparator() {
+        return (
+            <div className="ui-separator">
+                <a>
+                    <span className="pi pi-chevron-up"></span>
+                </a>
+                <span>:</span>
+                <a>
+                    <span className="pi pi-chevron-down"></span>
+                </a>
+            </div>
+        );
+    }
+
+    renderTimePicker() {
+        if (this.props.showTime || this.props.timeOnly) {
+            return (
+                <div className="ui-timepicker ui-widget-header ui-corner-all">
+                     {this.renderHourPicker()}
+                     {this.renderSeparator()}
+                     {this.renderMinutePicker()}
+                     {this.props.showSeconds && this.renderSeparator()}
+                     {this.renderSecondPicker()}
+                     {this.props.hourFormat === '12' && this.renderSeparator()}
+                     {this.renderAmPmPicker()}
+                </div>
+            )
         }
         else {
             return null;
@@ -1363,6 +1677,7 @@ export class Calendar extends Component {
         const input = this.renderInputElement();
         const button = this.renderButton();
         const datePicker = this.renderDatePicker();
+        const timePicker = this.renderTimePicker();
         const buttonBar = this.renderButtonBar();
 
         return (
@@ -1372,6 +1687,7 @@ export class Calendar extends Component {
                 <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle} 
                         appendTo={this.props.appendTo} onClick={this.onPanelClick}>
                     {datePicker}
+                    {timePicker}
                     {buttonBar}
                 </CalendarPanel>
             </span>

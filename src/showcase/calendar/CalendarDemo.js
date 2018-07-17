@@ -45,6 +45,19 @@ export class CalendarDemo extends Component {
             maxDate: maxDate,
             invalidDates: [today]
         };
+
+        this.dateTemplate = this.dateTemplate.bind(this);
+    }
+
+    dateTemplate(date) {
+        if (date.day > 10 && date.day < 15) {
+            return (
+                <span style={{backgroundColor: '#1d8ccb', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', padding: '.25em'}}>{date.day}</span>
+            );
+        }
+        else {
+            return date.day;
+        }
     }
 
     render() {
@@ -94,15 +107,27 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Multiple Selection</h3>
-                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" />
+                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readonlyInput="true" />
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Range Selection</h3>
-                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" />
+                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readonlyInput="true" />
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Button Bar</h3>
-                            <Calendar value={this.state.date9} onChange={(e) => this.setState({date9: e.value})} showButtonBar={true} />
+                            <Calendar value={this.state.date7} onChange={(e) => this.setState({date9: e.value})} showButtonBar={true} />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Time / 24h</h3>
+                            <Calendar value={this.state.date8} onChange={(e) => this.setState({date8: e.value})} showTime={true} showSeconds={true} />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Time Only / 12h</h3>
+                            <Calendar value={this.state.date9} onChange={(e) => this.setState({date9: e.value})} timeOnly={true} hourFormat="12" />
+                        </div>
+                        <div className="ui-g-12 ui-md-4">
+                            <h3>Date Template</h3>
+                            <Calendar value={this.state.date10} onChange={(e) => this.setState({date10: e.value})} dateTemplate={this.dateTemplate} />
                         </div>
                     </div>
 
