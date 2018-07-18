@@ -253,10 +253,16 @@ $inputGroupTextColor: #222222;
 }
 
 /* InputSwitch */
-.ui-inputswitch-on {
-	background: #186ba0 !important;
-	color: #ffffff !important;
+.ui-inputswitch.ui-inputswitch-focus {
+    .ui-inputswitch-slider {
+        transition: box-shadow .2s;
+        -moz-box-shadow: 0px 0px 5px #1f89ce;
+        -webkit-box-shadow: 0px 0px 5px #1f89ce;
+        box-shadow: 0px 0px 5px #1f89ce;
+    }
 }
+
+/* Paginator */
 
 .ui-paginator .ui-paginator-page.ui-state-active {
 	background: #186ba0;
@@ -384,6 +390,7 @@ $inputGroupTextColor: #222222;
 }
 
 .ui-dropdown.ui-state-focus, .ui-multiselect.ui-state-focus {
+    transition: box-shadow .2s;
     -moz-box-shadow: 0px 0px 5px #1f89ce;
     -webkit-box-shadow: 0px 0px 5px #1f89ce;
     box-shadow: 0px 0px 5px #1f89ce;

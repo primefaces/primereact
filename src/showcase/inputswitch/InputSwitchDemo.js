@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {InputSwitch} from '../../components/inputswitch/InputSwitch';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
@@ -26,11 +27,9 @@ export class InputSwitchDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
                     <InputSwitch checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
-                    <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
-                    <h3>Labels</h3>
-                    <InputSwitch checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
-                    <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
+                    <h3>Default Value</h3>
+                    <InputSwitch checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
                 </div>
 
                 <InputSwitchDoc></InputSwitchDoc>
@@ -96,18 +95,6 @@ import {InputSwitch} from 'primereact/inputswitch';
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
-                            <td>offLabel</td>
-                            <td>string</td>
-                            <td>off</td>
-                            <td>Label for the off state.</td>
-                        </tr>
-                        <tr>
-                            <td>onLabel</td>
-                            <td>string</td>
-                            <td>On</td>
-                            <td>Label for the on state.</td>
-                        </tr>
-                        <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
@@ -118,6 +105,18 @@ import {InputSwitch} from 'primereact/inputswitch';
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>inputId</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Identifier of the input element.</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the input element.</td>
                         </tr>
                         <tr>
                              <td>checked</td>
@@ -152,6 +151,43 @@ import {InputSwitch} from 'primereact/inputswitch';
                                 event.value: Checked state as a boolean.</td>
                             <td>Callback to invoke on value change.</td>
                         </tr>
+                        <tr>
+                            <td>onFocus</td>
+                            <td>event.originalEvent: Browser event.</td>
+                            <td>Callback to invoke when the element receives focus.</td>
+                        </tr>
+                        <tr>
+                            <td>onBlur</td>
+                            <td>event.originalEvent: Browser event.</td>
+                            <td>Callback to invoke when the element loses focus.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Styling</h3>
+            <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Element</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ui-inputswitch</td>
+                            <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-inputswitch-checked</td>
+                            <td>Container element in active state.</td>
+                        </tr>
+                        <tr>
+                            <td>ui-inputswitch-slider</td>
+                            <td>Slider element behind the handle.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -175,7 +211,8 @@ export class InputSwitchDemo extends Component {
     constructor() {
         super();
         this.state = {
-            checked2:true
+            checked1: false,
+            checked2: true
         };
     }
 
@@ -192,11 +229,9 @@ export class InputSwitchDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
                     <InputSwitch checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
-                    <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
-                    <h3>Labels</h3>
-                    <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
-                    <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
+                    <h3>Default Value</h3>
+                    <InputSwitch checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
                 </div>
             </div>
         );

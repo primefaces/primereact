@@ -644,7 +644,45 @@
     .ui-organizationchart-node-content .ui-node-toggler {
         color: darken($contentBorderColor, 10%);
     }
-} 
+}
+
+.ui-inputswitch {
+    .ui-inputswitch-slider {
+        background: #cccccc; 
+    
+        &:before {
+            background-color: #ffffff;
+        }
+    }
+
+    &.ui-inputswitch-focus {
+        .ui-inputswitch-slider {
+            -moz-box-shadow: 0px 0px 5px $stateFocusBorderColor;
+            -webkit-box-shadow: 0px 0px 5px $stateFocusBorderColor;
+            box-shadow: 0px 0px 5px $stateFocusBorderColor;
+        } 
+    }
+
+    &:not(.ui-state-disabled):hover {
+        .ui-inputswitch-slider {
+            background-color: #b7b7b7;
+        }
+    }
+
+    &.ui-inputswitch-checked {
+        .ui-inputswitch-slider {
+            background-color: $stateHighlightBgColor;
+        }
+
+        &:not(.ui-state-disabled):hover {
+            .ui-inputswitch-slider {
+                background-color: darken($stateHighlightBgColor, 10%);
+            }
+        }
+    }
+}
+
+
 
 /* Validation */
 .ui-inputtext.ui-state-error {
