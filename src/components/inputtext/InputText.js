@@ -16,7 +16,11 @@ export class InputText extends Component {
         onInput: PropTypes.func,
         onKeyPress: PropTypes.func,
         keyfilter: PropTypes.any,
-        validateOnly: PropTypes.bool
+        validateOnly: PropTypes.bool,
+        disabled: PropTypes.bool,
+        value: PropTypes.string,
+        defaultValue: PropTypes.string,
+        className: PropTypes.string
     };
 
     constructor(props) {
