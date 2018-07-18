@@ -9,6 +9,7 @@ export class Spinner extends Component {
     static defaultProps = {
         id: null,
         value: null,
+        name: null,
         step: 1,
         min: null,
         max: null,
@@ -20,12 +21,16 @@ export class Spinner extends Component {
         thousandSeparator: ',',
         style: null,
         className: null,
+        inputId: null,
+        inputStyle: null,
+        inputClassName: null,
         onChange: null
     }
 
     static propsTypes = {
         id: PropTypes.string,
         value: PropTypes.number,
+        name: PropTypes.string,
         step: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
@@ -37,6 +42,9 @@ export class Spinner extends Component {
         thousandSeparator: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
+        inputId: PropTypes.string,
+        inputStyle: PropTypes.object,
+        inputClassName: PropTypes.string,
         onChange: PropTypes.func
     }
 
@@ -326,9 +334,11 @@ export class Spinner extends Component {
     }
 
     renderInputElement() {
+        const className = classNames('ui-spinner-input', this.props.inputClassName);
+
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" className="ui-spinner-input"
-                size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly}
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} 
+                type="text" size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly} name={this.props.name}
                 onKeyDown={this.onInputKeyDown} onKeyUp={this.onInputKeyUp} onKeyPress={this.onInputKeyPress} 
                 onBlur={this.onInputBlur} onChange={this.onChange} onFocus={this.onInputFocus} />
         );

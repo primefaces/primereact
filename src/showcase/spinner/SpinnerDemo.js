@@ -116,6 +116,12 @@ import {Spinner} from 'primereact/spinner';
                             <td>Value of the component.</td>
                          </tr>
                          <tr>
+                            <td>name</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the input element.</td>
+                        </tr>
+                         <tr>
                             <td>step</td>
                             <td>number</td>
                             <td>1</td>
@@ -180,6 +186,24 @@ import {Spinner} from 'primereact/spinner';
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the element.</td>
+                        </tr>
+                        <tr>
+                            <td>inputId</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Identifier of the input element.</td>
+                        </tr>
+                        <tr>
+                            <td>inputStyle</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of the input field.</td>
+                        </tr>
+                        <tr>
+                            <td>inputClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of the input field.</td>
                         </tr>
                     </tbody>
                 </table>

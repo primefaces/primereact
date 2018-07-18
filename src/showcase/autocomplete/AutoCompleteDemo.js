@@ -248,6 +248,12 @@ brandTemplate(brand) {
                                         <td>Value of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>name</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the input element.</td>
+                                    </tr>
+                                    <tr>
                                         <td>suggestions</td>
                                         <td>array</td>
                                         <td>null</td>
@@ -306,6 +312,12 @@ brandTemplate(brand) {
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>inputId</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Identifier of the input element.</td>
                                     </tr>
                                     <tr>
                                         <td>inputStyle</td>

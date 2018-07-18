@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { InputText } from '../inputtext/InputText';
-import { Button } from '../button/Button';
+import {InputText} from '../inputtext/InputText';
+import {Button} from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import {AutoCompletePanel} from './AutoCompletePanel';
@@ -13,6 +13,7 @@ export class AutoComplete extends Component {
     static defaultProps = {
         id: null,
         value: null,
+        name: null,
         suggestions: null,
         field: null,
         scrollHeight: '200px',
@@ -23,6 +24,7 @@ export class AutoComplete extends Component {
         delay: 300,
         style: null,
         className: null,
+        inputId: null,
         inputStyle: null,
         inputClassName: null,
         placeholder: null,
@@ -53,6 +55,7 @@ export class AutoComplete extends Component {
     static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
+        name: PropTypes.string,
         suggestions: PropTypes.array,
         field: PropTypes.string,
         scrollHeight: PropTypes.string,
@@ -63,6 +66,7 @@ export class AutoComplete extends Component {
         delay: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
+        inputId: PropTypes.string,
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
         placeholder: PropTypes.string,
@@ -474,12 +478,13 @@ export class AutoComplete extends Component {
     }
     
     renderSimpleAutoComplete() {
-        let inputClassName = classNames('ui-autocomplete-input', this.props.inputClassName, {
+        const inputClassName = classNames('ui-autocomplete-input', this.props.inputClassName, {
             'ui-autocomplete-dd-input': this.props.dropdown
         });
             
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} type="text" defaultValue={this.formatValue(this.props.value)}
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} type="text" name={this.props.name} 
+                        defaultValue={this.formatValue(this.props.value)}
                         className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                         readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
                         maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
@@ -510,7 +515,8 @@ export class AutoComplete extends Component {
         return (
             <li className="ui-autocomplete-input-token">
                 <input ref={(el) => this.inputEl = el} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
-                       autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange}
+                       autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
+                       style={this.props.inputStyle} className={this.props.inputClassName}
                        onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                        onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
             </li>

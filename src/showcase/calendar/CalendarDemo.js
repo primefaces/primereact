@@ -435,7 +435,7 @@ dateTemplate(date) {
                             <td>inputId</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>.</td>
+                            <td>Identifier of the input element.</td>
                         </tr>
                         <tr>
                             <td>inputStyle</td>

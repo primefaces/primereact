@@ -3,6 +3,7 @@ import React = require("react");
 interface AutoCompleteProps {
     id?: string;
     value?: any;
+    name?: string;
     suggestions?: Array<any>;
     field?: string;
     scrollHeight?: string;
@@ -13,6 +14,7 @@ interface AutoCompleteProps {
     delay?: number;
     style?: object;
     className?: string;
+    inputId?: string;
     inputStyle?: object;
     inputClassName?: string;
     placeholder?: string;
