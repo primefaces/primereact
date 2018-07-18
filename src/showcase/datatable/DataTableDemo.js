@@ -1977,12 +1977,16 @@ export class DataTableLazyDemo extends Component {
                         </tr>
                         <tr>
                             <td>onRowClick</td>
-                            <td>event: Browser event</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.data: Clicked row data <br />
+                                event.index: Clicked row data index</td>
                             <td>Callback to invoke when a row is clicked.</td>
                         </tr>
                         <tr>
-                            <td>onRowDloubleClick</td>
-                            <td>event: Browser event</td>
+                            <td>onRowDoubleClick</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.data: Clicked row data <br />
+                                event.index: Clicked row data index</td>
                             <td>Callback to invoke when a row is double clicked.</td>
                         </tr>
                         <tr>
