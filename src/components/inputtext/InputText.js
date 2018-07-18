@@ -35,41 +35,21 @@ export class InputText extends Component {
         }
     }
 
-    onInput(e) {
+    onInput(event) {
         let validatePattern = true;
         if (this.props.keyfilter && this.props.validateOnly) {
-            validatePattern = KeyFilter.validate(e, this.props.keyfilter);
+            validatePattern = KeyFilter.validate(event, this.props.keyfilter);
         }
 
-        if(this.props.onInput) {
-            this.props.onInput(e, validatePattern);
-        }
-
-        this.updateFilledState(e.target.value);
-    }
-
-    updateFilledState(val) {
-        if(val && val.length)
-            this.inputEl.classList.add('ui-state-filled');
-        else
-            this.inputEl.classList.remove('ui-state-filled');
-    }
-    
-    componentDidMount() {
-        let _value =  this.props.value || this.props.defaultValue;
-
-        this.updateFilledState(_value);
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot){
-        if (prevProps.value !== this.props.value) {
-            this.updateFilledState(this.props.value);
+        if (this.props.onInput) {
+            this.props.onInput(event, validatePattern);
         }
     }
 
     render() {
-        let className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
-            'ui-state-disabled': this.props.disabled
+        const className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
+            'ui-state-disabled': this.props.disabled,
+            'ui-state-filled': this.props.value && this.props.value.length
         });
 
         let inputProps = Object.assign({}, this.props);

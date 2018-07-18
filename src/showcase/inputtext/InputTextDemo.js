@@ -9,7 +9,9 @@ export class InputTextDemo extends Component {
     constructor() {
         super();
         this.state = {
-            value: null
+            value1: '',
+            value2: '',
+            value3: ''
         };
     }
 
@@ -29,17 +31,17 @@ export class InputTextDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3 className="first">Basic</h3>
-                    <InputText onChange={(e) => this.setState({value: e.target.value})}/>
-                    <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
+                    <InputText value={this.state.value1} onChange={(e) => this.setState({value1: e.target.value})} />
+                    <span style={{marginLeft:'.5em'}}>{this.state.value1}</span>
 
                     <h3>Floating Label</h3>
                     <span className="ui-float-label">
-                        <InputText id="float-input" type="text" size="30" />
+                        <InputText id="float-input" type="text" size="30" value={this.state.value2} onChange={(e) => this.setState({value2: e.target.value})} />
                         <label htmlFor="float-input">Username</label>
                     </span>
 
-                    <h3>KeyFilter</h3>
-                    <InputText type="text" keyfilter="pint" />
+                    <h3>KeyFilter - Positive Number Only</h3>
+                    <InputText type="text" keyfilter="pint" value={this.state.value3} onChange={(e) => this.setState({value3: e.target.value})} />
                 </div>
 
                 <InputTextDoc />
@@ -89,7 +91,7 @@ import {InputText} from 'primereact/inputtext';
                         </CodeHighlight>
 
                         <h3>KeyFilter</h3>
-                        <p>InputText has built-in key filtering support to block certain keys, refer to <Link to="/keyfilter">keyfilte</Link> page for more information.</p>
+                        <p>InputText has built-in key filtering support to block certain keys, refer to <Link to="/keyfilter">keyfilter</Link> page for more information.</p>
 
                         <h3>Properties</h3>
                         <p>InputText passes any valid attribute to the underlying input element. Extended properties are as follows;</p>
@@ -179,18 +181,20 @@ export class InputTextDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
-                    <InputText onChange={(e) => this.setState({value: e.target.value})}/>
-                    <span style={{marginLeft:'.5em'}}>{this.state.value}</span>
+                    <div className="content-section implementation">
+                        <h3 className="first">Basic</h3>
+                        <InputText value={this.state.value1} onChange={(e) => this.setState({value1: e.target.value})} />
+                        <span style={{marginLeft:'.5em'}}>{this.state.value1}</span>
 
-                    <h3>Floating Label</h3>
-                    <span className="ui-float-label">
-                        <InputText id="float-input" type="text" size="30" />
-                        <label htmlFor="float-input">Username</label>
-                    </span>
+                        <h3>Floating Label</h3>
+                        <span className="ui-float-label">
+                            <InputText id="float-input" type="text" size="30" value={this.state.value2} onChange={(e) => this.setState({value2: e.target.value})} />
+                            <label htmlFor="float-input">Username</label>
+                        </span>
 
-                    <h3>KeyFilter</h3>
-                    <InputText type="text" keyfilter="pint" />
+                        <h3>KeyFilter - Positive Number Only</h3>
+                        <InputText type="text" keyfilter="pint" value={this.state.value3} onChange={(e) => this.setState({value3: e.target.value})} />
+                    </div>
                 </div>
             </div>
         )
