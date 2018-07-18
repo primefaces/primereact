@@ -8,7 +8,8 @@ export class InputSwitchDemo extends Component {
     constructor() {
         super();
         this.state = {
-            checked2:true
+            checked1: false,
+            checked2: true
         };
     }
 
@@ -28,7 +29,7 @@ export class InputSwitchDemo extends Component {
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Labels</h3>
-                    <InputSwitch onLabel="Yes" offLabel="No" checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
+                    <InputSwitch checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})}/>
                     <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
                 </div>
 
