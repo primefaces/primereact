@@ -37,12 +37,10 @@ body {
 }
 
 #layout-topbar {
-    @include background-gradient-left2right(#0B222A, #234B55)
-    box-sizing: border-box;
+    @include background-gradient-left2right(#234B55, #0B222A);
     display: block;
     padding: 0;
     height: 70px;
-    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
