@@ -671,12 +671,12 @@
 
     &.ui-inputswitch-checked {
         .ui-inputswitch-slider {
-            background-color: $stateHighlightBgColor;
+            background-color: #186ba0;
         }
 
         &:not(.ui-state-disabled):hover {
             .ui-inputswitch-slider {
-                background-color: darken($stateHighlightBgColor, 10%);
+                background-color: darken(#186ba0, 10%);
             }
         }
     }
