@@ -26,7 +26,7 @@ export class DataTableTemplatingDemo extends Component {
 
     brandTemplate(rowData, column) {
         var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} alt={rowData.brand}/>;
+        return <img src={src} alt={rowData.brand} width="48px" />;
     }
 
     actionTemplate(rowData, column) {
@@ -110,7 +110,7 @@ export class DataTableTemplatingDemo extends Component {
 
     brandTemplate(rowData, column) {
         var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} alt={rowData.brand}/>;
+        return <img src={src} alt={rowData.brand} width="48px" />;
     }
 
     actionTemplate(rowData, column) {
@@ -142,7 +142,7 @@ export class DataTableTemplatingDemo extends Component {
                     <DataTable value={this.state.cars} header={header} footer={footer}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}}/>
+                        <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}/>
                         <Column field="color" header="Color" body={this.colorTemplate} />
                         <Column body={this.actionTemplate} style={{textAlign:'center', width: '6em'}}/>
                     </DataTable>
