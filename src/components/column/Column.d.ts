@@ -29,7 +29,7 @@ interface ColumnProps {
     selectionMode?: string;
     colSpan?: number;
     rowSpan?: number;
-    editor?(props: any): void;
+    editor?(props: any): JSX.Element | undefined;
     editorValidator?(props: any): boolean;
     rowReorder?: boolean;
     rowReorderIcon?: string;
