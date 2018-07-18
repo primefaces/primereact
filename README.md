@@ -47,11 +47,11 @@ primereact/resources/themes/omega/theme.css
 primereact/resources/primereact.min.css
 ```
 
-primereact.min.css is a bundle that contains styles of all components, if you require a style of a specific component import the css from the folder of the component along with the common.css.
+primereact.min.css is a bundle that contains styles of all components, if you require a style of a specific component import the css from the folder of the component along with the Common.css.
 
 ```
 primereact/resources/themes/omega/theme.css
-primereact/components/common/common.css
+primereact/components/common/Common.css
 primereact/components/autocomplete/AutoComplete.css
 ```
 
