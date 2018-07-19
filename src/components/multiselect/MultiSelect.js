@@ -131,17 +131,28 @@ export class MultiSelect extends Component {
     show() {
         if(this.props.options && this.props.options.length) {
             this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
-            this.alignPanel();
-            DomHandler.fadeIn(this.panel.element, 250);
             this.panel.element.style.display = 'block';
+
+            setTimeout(() => {
+                DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
+                DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            }, 1);
+
+            this.alignPanel();            
             this.bindDocumentClickListener();
         }
     }
 
     hide() {
-        this.panel.element.style.display = 'none';
+        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
         this.unbindDocumentClickListener();
         this.clearClickState();
+
+        setTimeout(() => {
+            this.panel.element.style.display = 'none';
+            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+        }, 150);
     }
 
     alignPanel() {
