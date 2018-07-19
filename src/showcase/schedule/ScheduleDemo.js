@@ -30,7 +30,7 @@ export class ScheduleDemo extends Component {
 				<div className="content-section introduction">
 					<div className="feature-intro">
 						<h1>Schedule</h1>
-						<p>Schedule is an event calendar based on FullCalendar.</p>
+						<p>Schedule is an event calendar based on <a href="https://fullcalendar.io/">FullCalendar</a>. For a complete documentation and samples please refer to the FullCalendar website.</p>
 					</div>
 				</div>
 
@@ -64,11 +64,20 @@ import {Schedule} from 'primereact/schedule';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Schedule is based on <a href="http://fullcalendar.io/">FullCalendar</a>. For a complete documentation and samples please refer to the fullcalendar website.
-            Events of schedule should be an array and defined using the events property.</p>
+            <p>Schedule is based on <a href="http://fullcalendar.io/">FullCalendar 4.0.0</a>. In order to setup the styling, add fullcalendar css to your application.</p>
+
+<CodeHighlight className="language-js">
+{`
+import 'fullcalendar/dist/fullcalendar.css';
+
+`}
+</CodeHighlight>
+            
+            <p>Events of schedule should be an array and defined using the events property.</p>
+
 <CodeHighlight className="language-jsx">
 {`
-<Schedule events={this.events}></Schedule>
+<Schedule events={this.state.events}></Schedule>
 
 `}
 </CodeHighlight>
@@ -158,6 +167,43 @@ export class ScheduleDemo extends Component {
 
 `}
 </CodeHighlight>
+
+            <h3>Event API</h3>
+            <p>Event object has various properties to define an event, refer to <a href="http://fullcalendar.io/docs/event_data/Event_Object/">official documentation</a> for the whole list.</p>
+
+            <h3>Header Customization</h3>
+            <p>Header is customized using the header property that takes an object as its value. Default configuration is;</p>
+            <CodeHighlight className="language-javascript">
+{`
+{
+    left:   'title',
+    center: '',
+    right:  'today prev,next'
+}
+
+`}
+</CodeHighlight>
+
+            <p>Here is a customized version of header.</p>
+
+<CodeHighlight className="language-javascript">
+            {`
+const header = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'month,agendaWeek,agendaDay'
+};
+
+`}
+</CodeHighlight>
+
+<CodeHighlight className="language-jsx">
+            {`
+<Schedule events={this.state.events} header={header} />
+
+`}
+</CodeHighlight>
+
 
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
@@ -440,6 +486,74 @@ export class ScheduleDemo extends Component {
                     </tbody>
                 </table>
             </div>
+
+            <h3>Methods</h3>
+            <div class="doc-tablewrapper">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>prev()</td>
+                            <td>-</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/prev/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>next()</td>
+                            <td>-</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/next/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>prevYear()</td>
+                            <td>-</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/prevYear/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>nextYear()</td>
+                            <td>-</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/nextYear/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>today()</td>
+                            <td>-</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/today/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>gotoDate(date)</td>
+                            <td>date: Date to navigate</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/gotoDate/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>incrementDate(duration)</td>
+                            <td>duration: Duration to add to current date</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/incrementDate/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>getDate()</td>
+                            <td>-</td>
+                            <td><a href="http://fullcalendar.io/docs/current_date/getDate/">Read more</a></td>
+                        </tr>
+                        <tr>
+                            <td>changeView(viewName)</td>
+                            <td>viewName: A valid view string to change to</td>
+                            <td><a href="https://fullcalendar.io/docs/views/changeView/">Read more</a></td>
+                        </tr>
+                        <tr>
+                          <td>updateEvent(event)</td>
+                          <td>event: Original Event Object for an event (not merely a reconstructed object)</td>
+                          <td><a href="https://fullcalendar.io/docs/event_data/updateEvent/">Read more</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Dependencies</h3>
+            <p>Full Calendar 4.0.0+ and Moment JS ^2.17.1</p>
             
             </TabPanel>
 
