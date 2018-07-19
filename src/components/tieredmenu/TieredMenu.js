@@ -262,13 +262,17 @@ export class TieredMenu extends Component {
     }
 
     show(event) {
-        this.container.style.display = 'block';
         if (this.props.autoZIndex) {
             this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
-        DomHandler.absolutePosition(this.container,  event.currentTarget);
-        DomHandler.fadeIn(this.container, 250);
+        this.container.style.display = 'block';
         
+        setTimeout(() => {
+            DomHandler.addClass(this.container, 'ui-menu-overlay-visible');
+            DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+        }, 1);
+
+        DomHandler.absolutePosition(this.container,  event.currentTarget);
         this.bindDocumentResizeListener();
         
         if (this.props.onShow) {
@@ -278,7 +282,15 @@ export class TieredMenu extends Component {
 
     hide(event) {
         if (this.container) {
-            this.container.style.display = 'none';
+            DomHandler.addClass(this.container, 'ui-menu-overlay-hidden');
+            DomHandler.removeClass(this.container, 'ui-menu-overlay-visible');
+
+            setTimeout(() => {
+                if (this.container) {
+                    this.container.style.display = 'none';
+                    DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+                }
+            }, 150);
         }
             
         if (this.props.onHide) {
@@ -349,7 +361,7 @@ export class TieredMenu extends Component {
     }
 
     render() {
-        const className = classNames('ui-tieredmenu ui-widget ui-widget-content ui-corner-all', {'ui-tieredmenu-dynamic ui-shadow': this.props.popup}, this.props.className);
+        const className = classNames('ui-tieredmenu ui-widget ui-widget-content ui-corner-all', {'ui-tieredmenu-dynamic ui-menu-overlay ui-shadow': this.props.popup}, this.props.className);
 
         return(
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>

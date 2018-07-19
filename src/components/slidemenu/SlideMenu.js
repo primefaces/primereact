@@ -246,13 +246,17 @@ export class SlideMenu extends Component {
     }
 
     show(event) {
-        this.container.style.display = 'block';
         if (this.props.autoZIndex) {
             this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
+        this.container.style.display = 'block';
+
+        setTimeout(() => {
+            DomHandler.addClass(this.container, 'ui-menu-overlay-visible');
+            DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+        }, 1);
+
         DomHandler.absolutePosition(this.container,  event.currentTarget);
-        DomHandler.fadeIn(this.container, 250);
-        
         this.bindDocumentResizeListener();
         
         if (this.props.onShow) {
@@ -262,7 +266,15 @@ export class SlideMenu extends Component {
 
     hide(event) {
         if (this.container) {
-            this.container.style.display = 'none';
+            DomHandler.addClass(this.container, 'ui-menu-overlay-hidden');
+            DomHandler.removeClass(this.container, 'ui-menu-overlay-visible');
+
+            setTimeout(() => {
+                if (this.container) {
+                    this.container.style.display = 'none';
+                    DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+                }
+            }, 150);
         }
             
         if (this.props.onHide) {
@@ -326,7 +338,7 @@ export class SlideMenu extends Component {
     }
     
     render() {
-        const className = classNames('ui-slidemenu ui-widget ui-widget-content ui-corner-all', {'ui-slidemenu-dynamic ui-shadow': this.props.popup});
+        const className = classNames('ui-slidemenu ui-widget ui-widget-content ui-corner-all', {'ui-slidemenu-dynamic ui-menu-overlay ui-shadow': this.props.popup});
         const backward = this.renderBackward();
 
         return (
