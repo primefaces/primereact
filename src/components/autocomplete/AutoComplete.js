@@ -240,26 +240,41 @@ export class AutoComplete extends Component {
             if (this.panel && this.panel.element && !this.panel.element.offsetParent) {
                 this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
                 this.panel.element.style.display = "block";
-                DomHandler.fadeIn(this.panel.element, 200);
+                
+                setTimeout(() => {
+                    DomHandler.addClass(this.panel.element, 'ui-autocomplete-panel-visible');
+                    DomHandler.removeClass(this.panel.element, 'ui-autocomplete-panel-hidden');
+                }, 1);
+
+                this.alignPanel();
                 this.bindDocumentClickListener();
             }
         }
     }
 
     alignPanel() {
-        let target = this.props.multiple ? this.multiContainer : this.inputEl;
+        if (this.panel.element.offsetParent) {
+            let target = this.props.multiple ? this.multiContainer : this.inputEl;
         
-        if(this.props.appendTo) {
-            DomHandler.absolutePosition(this.panel.element, target);
-            this.panel.element.style.minWidth = DomHandler.getWidth(target) + 'px';
-        }
-        else {
-            DomHandler.relativePosition(this.panel.element, target);
+            if(this.props.appendTo) {
+                DomHandler.absolutePosition(this.panel.element, target);
+                this.panel.element.style.minWidth = DomHandler.getWidth(target) + 'px';
+            }
+            else {
+                DomHandler.relativePosition(this.panel.element, target);
+            }
         }
     }
 
     hidePanel() {
-        this.panel.element.style.display = 'none';
+        DomHandler.addClass(this.panel.element, 'ui-autocomplete-panel-hidden');
+        DomHandler.removeClass(this.panel.element, 'ui-autocomplete-panel-visible');
+
+        setTimeout(() => {
+            this.panel.element.style.display = 'none';
+            DomHandler.removeClass(this.panel.element, 'ui-autocomplete-panel-hidden');
+        }, 150);
+
         this.unbindDocumentClickListener();
     }
 
