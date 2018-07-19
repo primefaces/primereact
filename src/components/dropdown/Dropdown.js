@@ -233,8 +233,9 @@ export class Dropdown extends Component {
     onOptionClick(event) {
         this.selectItem(event);
         this.focusInput.focus();
-        this.hide();
-        event.originalEvent.stopPropagation();
+        setTimeout(() => {
+            this.hide();
+        }, 100);
     }
         
     onFilterInputChange(event) {
@@ -306,15 +307,27 @@ export class Dropdown extends Component {
     show() {        
         this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
         this.panel.element.style.display = 'block';
+
+        setTimeout(() => {
+            DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
+            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+        }, 1);
+
         this.alignPanel();
-        DomHandler.fadeIn(this.panel.element, 250);
         this.bindDocumentClickListener();
     }
 
     hide() {
-        this.panel.element.style.display = 'none';
+        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
+
         this.unbindDocumentClickListener();
         this.clearClickState();
+
+        setTimeout(() => {
+            this.panel.element.style.display = 'none';
+            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+        }, 150);        
     }
     
     alignPanel() {

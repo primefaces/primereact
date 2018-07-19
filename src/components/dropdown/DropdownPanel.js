@@ -24,7 +24,7 @@ export class DropdownPanel extends Component {
     };
 
     renderElement() {
-        let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow', this.props.panelClassName);
+        let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-input-overlay ui-shadow', this.props.panelClassName);
 
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
