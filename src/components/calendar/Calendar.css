@@ -48,10 +48,31 @@
 	padding: .2em;
 	display: none;
     position: absolute;
+    transform: translateY(5%);
+    opacity: 0;
+    -webkit-transition: transform .3s, opacity .3s;
+    transition: transform .3s, opacity .3s;
 }
+
 .ui-datepicker.ui-datepicker-inline {
     display: inline-block;
     position: static;
+    transform: none;
+    opacity: 1;
+    -webkit-transition: none;
+    transition: none;
+}
+
+.ui-datepicker-visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.ui-datepicker-hidden {
+    opacity: 0;
+    transform: translateY(5%);
+    -webkit-transition: transform .3s, opacity .15s;
+    transition: transform .3s, opacity .15s;
 }
 
 .ui-datepicker .ui-datepicker-group {

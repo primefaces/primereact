@@ -574,7 +574,9 @@ export class Calendar extends Component {
         }
         
         if(!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
-            this.hideOverlay();
+            setTimeout(() => {
+                this.hideOverlay();
+            }, 100);
 
             if(this.mask) {
                 this.disableModality();
@@ -656,24 +658,35 @@ export class Calendar extends Component {
         }
         
         this.panel.style.display = 'block';
+
+        setTimeout(() => {
+            DomHandler.addClass(this.panel, 'ui-datepicker-visible');
+            DomHandler.removeClass(this.panel, 'ui-datepicker-hidden');
+        }, 1);
+        
         this.alignPanel();
-        DomHandler.fadeIn(this.panel, 250);
         this.bindDocumentClickListener();
     }
 
     hideOverlay() {
-        this.panel.style.display = 'none';
+        DomHandler.addClass(this.panel, 'ui-datepicker-hidden');
+        DomHandler.removeClass(this.panel, 'ui-datepicker-visible');
         this.unbindDocumentClickListener();
         this.datepickerClick = false;
+
+        setTimeout(() => {
+            this.panel.style.display = 'none';
+            DomHandler.removeClass(this.panel, 'ui-datepicker-hidden');
+        }, 150);
     }
 
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {            
+            this.documentClickListener = (event) => {
                 if (!this.datepickerClick) {
                     this.hideOverlay();
                 }
-                    
+
                 this.datepickerClick = false;
             };
 
@@ -682,7 +695,7 @@ export class Calendar extends Component {
     }
     
     unbindDocumentClickListener() {
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
