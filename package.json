@@ -1,6 +1,6 @@
 {
   "name": "primereact",
-  "version": "2.0.0-SNAPSHOT",
+  "version": "2.0.0-beta.1-SNAPSHOT",
   "homepage": "https://www.primefaces.org/primereact",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "moment": "^2.17.1",
     "nanoscroller": "^0.8.7",
     "prop-types": "^15.5.0",
-    "primeicons": "1.0.0-beta.8",
+    "primeicons": "1.0.0-beta.10",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
