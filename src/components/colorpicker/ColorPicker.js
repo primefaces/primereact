@@ -187,15 +187,28 @@ export class ColorPicker extends Component {
     
     show() {
         this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
-        this.alignPanel();
-        DomHandler.fadeIn(this.panel.element, 250);
         this.panel.element.style.display = 'block';
+
+        setTimeout(() => {
+            DomHandler.addClass(this.panel.element, 'ui-colorpicker-overlay-panel-visible');
+            DomHandler.removeClass(this.panel.element, 'ui-colorpicker-overlay-panel-hidden');
+        }, 1);
+
+        this.alignPanel();
+        
         this.bindDocumentClickListener();
     }
     
     hide() {
-        this.panel.element.style.display = 'none';
+        DomHandler.addClass(this.panel.element, 'ui-colorpicker-overlay-panel-hidden');
+        DomHandler.removeClass(this.panel.element, 'ui-colorpicker-overlay-panel-visible');
         this.unbindDocumentClickListener();
+
+        setTimeout(() => {
+            this.panel.element.style.display = 'none';
+            DomHandler.removeClass(this.panel.element, 'ui-colorpicker-overlay-panel-hidden');
+        }, 150);
+        
     }
          
     onInputClick() {
