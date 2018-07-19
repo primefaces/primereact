@@ -79,7 +79,7 @@ dependencies: {
                                 </tr>
                                 <tr>
                                     <td>Schedule *</td>
-                                    <td>FullCalendar, jQuery and Moment.js</td>
+                                    <td>FullCalendar 4.0 Alpha and Moment</td>
                                 </tr>
                             </tbody>
                         </table>
