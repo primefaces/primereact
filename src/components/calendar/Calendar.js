@@ -655,13 +655,12 @@ export class Calendar extends Component {
     showOverlay() {
         if (this.props.autoZIndex) {
             this.panel.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        }
-        
+        }        
         this.panel.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.panel, 'ui-datepicker-visible');
-            DomHandler.removeClass(this.panel, 'ui-datepicker-hidden');
+            DomHandler.addClass(this.panel, 'ui-input-overlay-visible');
+            DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
         }, 1);
         
         this.alignPanel();
@@ -669,14 +668,14 @@ export class Calendar extends Component {
     }
 
     hideOverlay() {
-        DomHandler.addClass(this.panel, 'ui-datepicker-hidden');
-        DomHandler.removeClass(this.panel, 'ui-datepicker-visible');
+        DomHandler.addClass(this.panel, 'ui-input-overlay-hidden');
+        DomHandler.removeClass(this.panel, 'ui-input-overlay-visible');
         this.unbindDocumentClickListener();
         this.datepickerClick = false;
 
         setTimeout(() => {
             this.panel.style.display = 'none';
-            DomHandler.removeClass(this.panel, 'ui-datepicker-hidden');
+            DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
         }, 150);
     }
 
@@ -1876,6 +1875,7 @@ export class Calendar extends Component {
         });
         const panelClassName = classNames('ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all', this.props.panelClassName, {
             'ui-datepicker-inline': this.props.inline,
+            'ui-input-overlay': !this.props.inline,
             'ui-shadow': !this.props.inline,
             'ui-state-disabled': this.props.disabled,
             'ui-datepicker-timeonly': this.props.timeOnly,

@@ -37,7 +37,7 @@ export class AutoCompletePanel extends Component {
         }
 
         return (
-            <div ref={(el) => this.element = el} className="ui-autocomplete-panel ui-widget-content ui-corner-all ui-shadow" style={{ maxHeight: this.props.scrollHeight }}>
+            <div ref={(el) => this.element = el} className="ui-autocomplete-panel ui-widget-content ui-corner-all ui-input-overlay ui-shadow" style={{ maxHeight: this.props.scrollHeight }}>
                 <ul className="ui-autocomplete-items ui-autocomplete-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
                     {items}
                 </ul>

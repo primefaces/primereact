@@ -190,8 +190,8 @@ export class ColorPicker extends Component {
         this.panel.element.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.panel.element, 'ui-colorpicker-overlay-panel-visible');
-            DomHandler.removeClass(this.panel.element, 'ui-colorpicker-overlay-panel-hidden');
+            DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
+            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
         }, 1);
 
         this.alignPanel();
@@ -200,13 +200,13 @@ export class ColorPicker extends Component {
     }
     
     hide() {
-        DomHandler.addClass(this.panel.element, 'ui-colorpicker-overlay-panel-hidden');
-        DomHandler.removeClass(this.panel.element, 'ui-colorpicker-overlay-panel-visible');
+        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
         this.unbindDocumentClickListener();
 
         setTimeout(() => {
             this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'ui-colorpicker-overlay-panel-hidden');
+            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
         }, 150);
         
     }
