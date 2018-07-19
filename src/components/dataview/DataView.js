@@ -259,7 +259,7 @@ export class DataView extends Component {
                 return (
                     value.map((item, index) => {
                         return <DataViewItem key={index} template={this.props.itemTemplate} layout={this.props.layout} item={item} />
-                    });
+                    })
                 );
             }
         }
