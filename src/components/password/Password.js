@@ -37,9 +37,12 @@ export class Password extends Component {
             }
             
             this.panel.style.zIndex = String(DomHandler.generateZIndex());
-            DomHandler.absolutePosition(this.panel, this.inputEl);
             this.panel.style.display = 'block';
-            DomHandler.fadeIn(this.panel, 250);
+            setTimeout(() => {
+                DomHandler.addClass(this.panel, 'ui-input-overlay-visible');
+                DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
+            }, 1);
+            DomHandler.absolutePosition(this.panel, this.inputEl);
         }
         
         if (this.props.onFocus) {
@@ -49,7 +52,13 @@ export class Password extends Component {
   
     onBlur(e) {
         if (this.props.feedback) {
-            this.panel.style.display = 'none';
+            DomHandler.addClass(this.panel, 'ui-input-overlay-hidden');
+            DomHandler.removeClass(this.panel, 'ui-input-overlay-visible');
+
+            setTimeout(() => {
+                this.panel.style.display = 'none';
+                DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
+            }, 150);
         }
 
         if (this.props.onBlur) {
@@ -125,7 +134,7 @@ export class Password extends Component {
 
     createPanel() {
         this.panel = document.createElement('div');
-        this.panel.className = 'ui-password-panel ui-widget ui-state-highlight ui-corner-all ui-helper-hidden ui-password-panel-overlay';
+        this.panel.className = 'ui-password-panel ui-widget ui-state-highlight ui-corner-all ui-helper-hidden ui-password-panel-overlay ui-input-overlay';
         this.meter = document.createElement('div');
         this.meter.className = 'ui-password-meter';
         this.info = document.createElement('div');
