@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Paginator } from '../paginator/Paginator';
+import {Paginator} from '../paginator/Paginator';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 
@@ -259,7 +259,7 @@ export class DataView extends Component {
                 return (
                     value.map((item, index) => {
                         return <DataViewItem key={index} template={this.props.itemTemplate} layout={this.props.layout} item={item} />
-                    })
+                    });
                 );
             }
         }
