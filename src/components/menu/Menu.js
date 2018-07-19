@@ -76,11 +76,15 @@ export class Menu extends Component {
     }
 
     show(event) {
-        this.container.style.display = 'block';
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        this.container.style.display = 'block';
+
+        setTimeout(() => {
+            DomHandler.addClass(this.container, 'ui-menu-overlay-visible');
+            DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+        }, 1);
+
         DomHandler.absolutePosition(this.container,  event.currentTarget);
-        DomHandler.fadeIn(this.container, 250);
-        
         this.bindDocumentListeners();
         
         if (this.props.onShow) {
@@ -90,7 +94,15 @@ export class Menu extends Component {
 
     hide(event) {
         if (this.container) {
-            this.container.style.display = 'none';
+            DomHandler.addClass(this.container, 'ui-menu-overlay-hidden');
+            DomHandler.removeClass(this.container, 'ui-menu-overlay-visible');
+
+            setTimeout(() => {
+                if (this.container) {
+                    this.container.style.display = 'none';
+                    DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+                }
+            }, 150);
         }
             
         if (this.props.onHide) {
@@ -197,7 +209,7 @@ export class Menu extends Component {
   
     render() {
         if (this.props.model) {
-            const className = classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.className, {'ui-menu-dynamic ui-shadow': this.props.popup});
+            const className = classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.className, {'ui-menu-dynamic ui-menu-overlay ui-shadow': this.props.popup});
             const menuitems = this.renderMenu();
 
             return (
