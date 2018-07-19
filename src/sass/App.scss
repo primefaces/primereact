@@ -369,7 +369,15 @@ body {
                 }
 
                 a {
-                    color: #cce8f1;
+                    border-radius: 3px;
+                    background-color: #b2ddea;
+                    color: #00475d;
+                    padding: 2px 4px;
+                    transition: background-color .3s;
+
+                    &:hover {
+                        background-color: #d8eef4;
+                    }
                 }
             }
         }
