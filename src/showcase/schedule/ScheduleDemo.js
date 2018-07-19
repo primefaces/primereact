@@ -488,8 +488,8 @@ const header = {
             </div>
 
             <h3>Methods</h3>
-            <div class="doc-tablewrapper">
-                <table class="doc-table">
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
                     <thead>
                         <tr>
                             <th>Name</th>
