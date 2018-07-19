@@ -203,7 +203,6 @@ button {
     transition: transform .3s, opacity .15s;
 }
 
-/* Overlay Animations */
 .ui-menu-overlay {
     -webkit-transform: translateY(5%);
     -ms-transform: translateY(5%);
