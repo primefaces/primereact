@@ -114,7 +114,7 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Button Bar</h3>
-                            <Calendar value={this.state.date7} onChange={(e) => this.setState({date9: e.value})} showButtonBar={true} />
+                            <Calendar value={this.state.date7} onChange={(e) => this.setState({date7: e.value})} showButtonBar={true} />
                         </div>
                         <div className="ui-g-12 ui-md-4">
                             <h3>Time / 24h</h3>
