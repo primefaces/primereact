@@ -70,6 +70,7 @@ interface CalendarProps {
     clearButtonStyleClass?: string;
     autoZIndex?: boolean;
     baseZIndex?: number;
+    appendTo?: any;
     dateTemplate?(dateMeta:DateMetaData): JSX.Element | undefined;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;

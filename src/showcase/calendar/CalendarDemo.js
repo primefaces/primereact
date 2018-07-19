@@ -672,6 +672,12 @@ dateTemplate(date) {
                             <td>Whether to automatically manage layering.</td>
                         </tr>
                         <tr>
+                            <td>appendTo</td>
+                            <td>DOM element</td>
+                            <td>null</td>
+                            <td>DOM element instance where the dialog should be mounted.</td>
+                        </tr>
+                        <tr>
                             <td>dateTemplate</td>
                             <td>function</td>
                             <td>null</td>
