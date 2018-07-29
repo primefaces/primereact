@@ -34,6 +34,8 @@ export class AutoComplete extends Component {
         size: null,
         appendTo: null,
         tabindex: null,
+        objectsInList: false,
+        displayField: 'label',
         completeMethod: null,
         itemTemplate: null,
         selectedItemTemplate: null,
@@ -76,6 +78,8 @@ export class AutoComplete extends Component {
         size: PropTypes.number,
         appendTo: PropTypes.any,
         tabindex: PropTypes.number,
+        objectsInList: PropTypes.bool,
+        displayField: PropTypes.string,
         completeMethod: PropTypes.func,
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
@@ -96,7 +100,7 @@ export class AutoComplete extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this.onInputChange = this.onInputChange.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
@@ -181,18 +185,38 @@ export class AutoComplete extends Component {
     }
 
     selectItem(event, option) {
-        if(this.props.multiple) {
-            this.inputEl.value = '';
-            if(!this.isSelected(option)) {
-                let newValue = this.props.value ? [...this.props.value, option] : [option];
-                this.updateModel(event, newValue);
+        if (option === undefined) return;
+        if (this.props.multiple) {
+            let newValue='';
+            if(this.props.objectsInList) {
+                this.inputEl.value = '';
+                if (option.value === '' ) { 
+                    return;
+                }
+                if (!this.isSelectedObject(option.value)) {
+                    newValue = this.props.value ? [...this.props.value, option.value] : [option.value];
+                    this.updateModel(event, newValue);
+                } 
             }
-        }
+            else {
+                this.inputEl.value = '';
+                if (!this.isSelected(option)) {
+                    newValue = this.props.value ? [...this.props.value, option] : [option];
+                    this.updateModel(event, newValue);
+                }
+            }
+        } 
         else {
-            this.updateInputField(option);
-            this.updateModel(event, option);
+            if(this.props.objectsInList) {                         
+                if (option.value === '' ) return;                       
+                const field = this.props.displayField ? this.props.displayField : 'label';
+                this.updateInputField(option[field]);
+            }
+            else {
+                this.updateInputField(option);                        
+            } 
+            this.updateModel(event, option);            
         }
-
         if(this.props.onSelect) {
             this.props.onSelect({
                 originalEvent: event,
@@ -455,9 +479,17 @@ export class AutoComplete extends Component {
 
     findOptionIndex(option) {
         let index = -1;
-        if(this.suggestions) {
+        if (this.suggestions && this.props.objectsInList === false) {
             for(let i = 0; i < this.suggestions.length; i++) {
                 if(ObjectUtils.equals(option, this.suggestions[i])) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        else {
+            for(let i = 0; i < this.suggestions.length; i++) {
+                if(ObjectUtils.equals(option.value, this.suggestions[i].value)) {
                     index = i;
                     break;
                 }
@@ -565,14 +597,27 @@ export class AutoComplete extends Component {
             <i ref={(el) => this.loader = el} className="ui-autocomplete-loader pi pi-spinner pi-spin" style={{visibility: 'hidden'}}></i>
         );
     }
-    
+    isSelectedObject(val) {
+        var selected = false;
+        if (this.props.value && this.props.value.length) {
+            for (var i = 0; i < this.props.value.length; i++) {
+                if (ObjectUtils.equals(this.props.value[i].value, val)) {
+                    selected = true;
+                    break;
+                }
+            }
+        }
+        return selected;
+    }
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if(event.which === 3) {
                     return;
+                } 
+                if (event.target && event.target.className && event.target.className.indexOf('novalue4autocomplete') > -1 ) { 
+                    return;
                 }
-                
                 if(!this.inputClick && !this.dropdownClick) {
                     this.hidePanel();
                 }
@@ -616,14 +661,14 @@ export class AutoComplete extends Component {
         if(this.props.dropdown) {
             dropdown = this.renderDropdown();
         }
-
         return (
             <span ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={className} >
                 {input}
                 {loader}
                 {dropdown}
                 <AutoCompletePanel ref={(el) => this.panel = el} suggestions={this.props.suggestions} field={this.props.field} 
-                            appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem}/>
+                    objectsInList = {this.props.objectsInList}
+                    appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem}/>
             </span>
         );
     }
