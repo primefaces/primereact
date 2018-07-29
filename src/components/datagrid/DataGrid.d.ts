@@ -2,22 +2,22 @@ import React = require("react");
 
 interface DataGridProps {
     id?: string,
-    value?: Array<any>,
+    value?: any[],
     rows?: number,
     first?:number,
     paginator?: boolean,
     totalRecords?: number,
     pageLinks?: number,
-    rowsPerPageOptions?: Array<any>,
+    rowsPerPageOptions?: any[],
     lazy?: boolean,
     style?: string,
     className?: string,
     paginatorPosition?: string,
     paginatorTemplate?: string,
-    onLazyLoad?(e: {first: number, rows:number}): void,
-    itemTemplate?(item: any): JSX.Element | undefined,
     header?:string,
     footer?:string;
+    onLazyLoad?(e: {first: number, rows:number}): void,
+    itemTemplate?(item: any): JSX.Element | undefined,
 }
 
 export class DataGrid extends React.Component<DataGridProps,any> {}

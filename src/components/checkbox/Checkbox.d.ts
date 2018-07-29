@@ -5,7 +5,7 @@ interface CheckboxProps {
     inputId?: string;
     value?: any;
     name?: string;
-    checked: boolean;
+    checked?: boolean;
     style?: object;
     className?: string;
     disabled?: boolean;

@@ -3,7 +3,7 @@ import {MenuItem} from '../menuitem/MenuItem';
 
 interface BreadCrumbProps {
     id?: string;
-    model?: Array<MenuItem>;
+    model?: MenuItem[];
     home?: any;
     style?: object;
     className?: string;

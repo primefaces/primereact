@@ -1,9 +1,10 @@
 import React = require("react");
 import {MenuItem} from '../menuitem/MenuItem';
+import {SyntheticEvent} from "react";
 
 interface SlideMenuProps {
     id?: string;
-    model?: Array<MenuItem>;
+    model?: MenuItem[];
     popup?: boolean;
     style?: object;
     className?: string;
@@ -18,4 +19,8 @@ interface SlideMenuProps {
     onHide?(e: Event): void;
 }
 
-export class SlideMenu extends React.Component<SlideMenuProps,any> {}
+export class SlideMenu extends React.Component<SlideMenuProps,any> {
+    public show(event:SyntheticEvent):void;
+    public hide(event:SyntheticEvent):void;
+    public toggle(event:SyntheticEvent):void;
+}

@@ -2,13 +2,13 @@ import React = require("react");
 
 interface ScheduleProps {
     id?: string;
-    events?: Array<any>;
+    events?: any[];
     header?: any;
     style?: object;
     className?: string;
     isRTL?: boolean;
     weekends?: boolean;
-    hiddenDays?: Array<any>;
+    hiddenDays?: any[];
     fixedWeekCount?: boolean;
     weekNumbers?: boolean;
     businessHours?: any;
@@ -37,11 +37,11 @@ interface ScheduleProps {
     dragScroll?: boolean;
     eventOverlap?: any;
     eventConstraint?: any;
-    eventRender?(): void;
-    dayRender?(): void;
     locale?: object;
     timezone?: any;
     options?: object;
+    eventRender?(): void;
+    dayRender?(): void;
     onDayClick?(): void;
     onEventClick?(): void;
     onEventMouseover?(): void;

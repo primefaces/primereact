@@ -2,7 +2,7 @@ import React = require("react");
 
 interface OrderListProps {
     id?: string;
-    value?: Array<any>;
+    value?: any[];
     header?: any;
     style?: object;
     className?: string;

@@ -3,7 +3,7 @@ import {MenuItem} from '../menuitem/MenuItem';
 
 interface MenubarProps {
     id?: string;
-    model?: Array<MenuItem>;
+    model?: MenuItem[];
     style?: object;
     className?: string;
     autoZIndex?: boolean;

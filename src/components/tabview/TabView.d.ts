@@ -11,13 +11,16 @@ interface TabPanelProps {
     contentClassName?: string;
 }
 
+export class TabPanel extends React.Component<TabPanelProps,any> {}
+
 interface TabViewProps {
     id?: string;
     activeIndex?: number;
     style?: any;
     className?: string;
-    onTabChange?(e: {event: originalEvent, index: number}): void;
+    effect?: string;
+    onTabChange?(e: {originalEvent: Event, index: number}): void;
 }
 
-export class TabPanel extends React.Component<TabPanelProps,any> {}
+// tslint:disable-next-line:max-classes-per-file
 export class TabView extends React.Component<TabViewProps,any> {}

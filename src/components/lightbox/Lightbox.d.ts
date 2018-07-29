@@ -2,7 +2,7 @@ import React = require("react");
 
 interface LightboxProps {
     id?: string;
-    images?: Array<any>;
+    images?: any[];
     type?: string;
     style?: object;
     className?: string;

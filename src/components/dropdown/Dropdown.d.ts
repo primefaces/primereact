@@ -3,14 +3,14 @@ import React = require("react");
 interface DropdownProps {
     id?: string;
     value?: any;
-    options?: Array<any>;
+    options?: any[];
     optionLabel?: string;
-    itemTemplate?(option:any): JSX.Element | undefined;
     style?: object;
     className?: string;
     autoWidth?: boolean;
     scrollHeight?: string;
     filter?: boolean;
+    filterBy?: string;
     filterPlaceholder?: string;
     editable?:boolean;
     placeholder?: string;
@@ -25,6 +25,7 @@ interface DropdownProps {
     dataKey?: string;
     inputId?: string;
     showClear?: boolean;
+    itemTemplate?(option:any): React.ReactNode;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onMouseDown?(event: Event): void;
     onContextMenu?(event: Event): void;

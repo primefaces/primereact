@@ -1,4 +1,5 @@
 import React = require("react");
+import {SyntheticEvent} from "react";
 
 interface TooltipProps {
     for?: any;
@@ -12,7 +13,7 @@ interface TooltipProps {
     escape?: boolean;
     hideDelay?: number;
     showDelay?: number;
-    onBeforeShow?(e: Event): void;
+    onBeforeShow?(e: SyntheticEvent): void;
 }
 
 export class Tooltip extends React.Component<TooltipProps,any> {}

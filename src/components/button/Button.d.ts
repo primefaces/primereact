@@ -1,6 +1,7 @@
 import React = require("react");
+import {Omit} from "../util";
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref'> {
     label?: string;
     icon?: string;
     iconPos?: string;

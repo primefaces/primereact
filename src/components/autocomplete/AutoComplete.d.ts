@@ -4,7 +4,7 @@ interface AutoCompleteProps {
     id?: string;
     value?: any;
     name?: string;
-    suggestions?: Array<any>;
+    suggestions?: any[];
     field?: string;
     scrollHeight?: string;
     dropdown?: boolean;

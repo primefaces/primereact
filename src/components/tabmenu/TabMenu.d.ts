@@ -3,7 +3,7 @@ import {MenuItem} from '../menuitem/MenuItem';
 
 interface TabMenuProps {
     id?: string;
-    model?: Array<MenuItem>;
+    model?: MenuItem[];
     activeItem?: any;
     style?: any;
     className?: string;

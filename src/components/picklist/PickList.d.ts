@@ -2,8 +2,8 @@ import React = require("react");
 
 interface PickListProps {
     id?: string;
-    source?: Array<any>;
-    target?: Array<any>;
+    source?: any[];
+    target?: any[];
     sourceHeader?: any;
     targetHeader?: any;
     style?: object;

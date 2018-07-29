@@ -22,4 +22,6 @@ interface AccordionProps {
     onTabChange?(e: {originalEvent: Event, index: number}): void;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class Accordion extends React.Component<AccordionProps,any> {}
+

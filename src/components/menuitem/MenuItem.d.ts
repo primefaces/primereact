@@ -1,7 +1,6 @@
 export interface MenuItem {
     label?: string;
     icon?: string;
-    command?(e: {originalEvent: Event, item: MenuItem}): void;
     url?: string;
     items?: MenuItem[]|MenuItem[][];
     disabled?: boolean;
@@ -9,4 +8,5 @@ export interface MenuItem {
     separator?: boolean;
     style?: any;
     className?: string;
+    command?(e: {originalEvent: Event, item: MenuItem}): void;
 }

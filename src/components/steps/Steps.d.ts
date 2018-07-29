@@ -3,12 +3,12 @@ import {MenuItem} from '../menuitem/MenuItem';
 
 interface StepsProps {
     id?: string;
-    model: Array<MenuItem>;
+    model: MenuItem[];
     activeIndex?:  number;
     readOnly?: boolean;
     style?: object;
     className?: string;
-    onSelect?(e: {originalEvent: Event, item: any, index: any}): void;
+    onSelect?(e: {originalEvent: Event, item: MenuItem, index: number}): void;
 }
 
 export class Steps extends React.Component<StepsProps,any> {}
