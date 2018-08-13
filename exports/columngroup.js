@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./components/columngroup/ColumGroup');
+module.exports = require('./components/columngroup/ColumnGroup');
