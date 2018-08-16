@@ -155,7 +155,7 @@ export class Inplace extends Component {
     }
 
     render() {
-        const className = classNames('ui-inplace ui-widget', this.props.className);
+        const className = classNames('ui-inplace ui-widget', {'ui-inplace-closable': this.props.closable}, this.props.className);
 
         return (
             <div className={className}>
