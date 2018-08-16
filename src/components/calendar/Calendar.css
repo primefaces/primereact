@@ -12,10 +12,6 @@
     border-left: 0 none;
 }
 
-.ui-calendar .ui-calendar-button .ui-button-icon-left {
-    font-size: 1.25em;
-}
-
 .ui-calendar .ui-calendar-button:enabled:hover,
 .ui-calendar .ui-calendar-button:focus {
     border-left: 0 none;
@@ -82,6 +78,7 @@
 .ui-datepicker .ui-datepicker-next {
 	right: .125em;
 }
+
 .ui-datepicker .ui-datepicker-prev span,
 .ui-datepicker .ui-datepicker-next span {
 	display: block;
@@ -91,6 +88,7 @@
     margin-top: -.5em;
     margin-left: -.5em;
 }
+
 .ui-datepicker .ui-datepicker-title {
 	margin: 0 2.3em;
 	line-height: 1.8em;
@@ -100,12 +98,6 @@
 	font-size: 1em;
 	margin: .125em 0;
     vertical-align: middle;
-}
-.ui-datepicker select.ui-datepicker-month {
-    width: 55%;
-}
-.ui-datepicker select.ui-datepicker-year {
-	width: 35%;
 }
 .ui-datepicker select.ui-datepicker-month {
     margin-right: .25em;
@@ -185,6 +177,10 @@
     text-align: center;
     padding: .5em;
     cursor: pointer;
+}
+
+.ui-datepicker-monthpicker select.ui-datepicker-year {
+    width: auto;
 }
 
 /* Time Picker */

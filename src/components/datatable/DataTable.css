@@ -75,7 +75,7 @@
     cursor: pointer;
 }
 
-.ui-datatable-loading-icon {
+.ui-datatable .ui-datatable-loading-icon {
     font-size: 2em;
 }
 
