@@ -67,7 +67,7 @@ export class BreadCrumb extends Component {
         return (
             <li role="menuitem" className={className} style={item.style}>
                 <a href={item.url || '#'} className="ui-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
-                    <span class="ui-menuitem-text">{item.label}</span>
+                    <span className="ui-menuitem-text">{item.label}</span>
                 </a>
             </li>
         );
