@@ -7,6 +7,7 @@ interface TieredMenuProps {
     popup?: boolean;
     style?: object;
     className?: string;
+    appendTo?: any;
     autoZIndex?: boolean;
     bazeZIndex?: number;
     onShow?(e: Event): void;

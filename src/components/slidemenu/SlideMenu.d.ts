@@ -7,6 +7,7 @@ interface SlideMenuProps {
     popup?: boolean;
     style?: object;
     className?: string;
+    appendTo?: any;
     easing?: string;
     effectDuration?: number;
     backLabel?: string;

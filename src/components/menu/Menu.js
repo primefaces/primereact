@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 
@@ -11,6 +12,7 @@ export class Menu extends Component {
         popup: false,
         style: null,
         className: null,
+        appendTo: null,
         autoZIndex: true,
         baseZIndex: 0,
         onShow: null,
@@ -23,6 +25,7 @@ export class Menu extends Component {
         popup: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        appendTo: PropTypes.any,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         onShow: PropTypes.func,
@@ -207,7 +210,7 @@ export class Menu extends Component {
         );
     }
   
-    render() {
+    renderElement() {
         if (this.props.model) {
             const className = classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.className, {'ui-menu-dynamic ui-menu-overlay ui-shadow': this.props.popup});
             const menuitems = this.renderMenu();
@@ -222,6 +225,17 @@ export class Menu extends Component {
         }
         else {
             return null;
+        }
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        if (this.props.appendTo) {
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        }
+        else {
+            return element;
         }
     }
 }
