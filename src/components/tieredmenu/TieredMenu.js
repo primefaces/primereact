@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
@@ -196,6 +197,7 @@ export class TieredMenu extends Component {
         popup: false,
         style: null,
         className: null,
+        appendTo: null,
         autoZIndex: true,
         baseZIndex: 0,
         onShow: null,
@@ -208,6 +210,7 @@ export class TieredMenu extends Component {
         popup: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        appendTo: PropTypes.any,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         onShow: PropTypes.func,
@@ -360,7 +363,7 @@ export class TieredMenu extends Component {
         this.unbindDocumentResizeListener();
     }
 
-    render() {
+    renderElement() {
         const className = classNames('ui-tieredmenu ui-widget ui-widget-content ui-corner-all', {'ui-tieredmenu-dynamic ui-menu-overlay ui-shadow': this.props.popup}, this.props.className);
 
         return(
@@ -368,5 +371,16 @@ export class TieredMenu extends Component {
                 <TieredMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} popup={this.props.popup} />
             </div>
         );
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        if (this.props.appendTo) {
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        }
+        else {
+            return element;
+        }
     }
 }

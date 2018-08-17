@@ -244,6 +244,12 @@ var items = [
                                         <td>Style class of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>appendTo</td>
+                                        <td>DOM element</td>
+                                        <td>null</td>
+                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                    </tr>
+                                    <tr>
                                         <td>easing</td>
                                         <td>string</td>
                                         <td>ease-out</td>

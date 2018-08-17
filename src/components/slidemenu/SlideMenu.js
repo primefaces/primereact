@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
@@ -12,7 +13,8 @@ export class SlideMenuSub extends Component {
         effectDuration: 250,
         menuWidth: 190,
         parentActive: false,
-        onForward: null
+        onForward: null,
+        appendTo: null
     }
 
     static propsTypes = {
@@ -22,7 +24,8 @@ export class SlideMenuSub extends Component {
         effectDuration: PropTypes.number,
         menuWidth: PropTypes.number,
         parentActive: PropTypes.bool,
-        onForward: PropTypes.func
+        onForward: PropTypes.func,
+        appendTo: PropTypes.any
     }
 
     constructor(props) {
@@ -337,7 +340,7 @@ export class SlideMenu extends Component {
         this.unbindDocumentResizeListener();
     }
     
-    render() {
+    renderElement() {
         const className = classNames('ui-slidemenu ui-widget ui-widget-content ui-corner-all', {'ui-slidemenu-dynamic ui-menu-overlay ui-shadow': this.props.popup});
         const backward = this.renderBackward();
 
@@ -352,5 +355,16 @@ export class SlideMenu extends Component {
                  </div>
             </div>
         );
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        if (this.props.appendTo) {
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        }
+        else {
+            return element;
+        }
     }
 }
