@@ -10,6 +10,13 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$start-color}', endColorStr='#{$end-color}', gradientType='1');
 }
 
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+
 body {
     margin: 0px;
     height: 100%;
@@ -48,7 +55,7 @@ body {
         height: 60px;
         line-height: 58px;
         text-align: center;
-        transition: background-color .3s;
+        @include transition(background-color .2s);
 
         &:hover {
             background-color: #4a4f52;
@@ -84,7 +91,7 @@ body {
             > a{
                 text-decoration: none;
                 color: #ffffff;
-                transition: background-color .3s;
+                @include transition(background-color .2s);
                 min-width: 120px;
                 display: inline-block;
                 text-align: center;
@@ -136,7 +143,7 @@ body {
                         color: #404C51;
                         padding: 6px 12px;
                         display: block;
-                        transition: all 0.5s ease;
+                        @include transition(all .5s ease);
 
                         &:hover {
                             background-color: #eeeeee;
@@ -250,10 +257,10 @@ body {
                 padding-bottom: 0;
                 margin-top: 0;
                 margin-bottom: 0;
-                -moz-transition-duration: 0.3s;
-                -webkit-transition-duration: 0.3s;
-                -o-transition-duration: 0.3s;
-                transition-duration: 0.3s;
+                -moz-transition-duration: 0.2s;
+                -webkit-transition-duration: 0.2s;
+                -o-transition-duration: 0.2s;
+                transition-duration: 0.2s;
                 -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
@@ -261,10 +268,10 @@ body {
             }
 
             &.submenushow {
-                -moz-transition-duration: 0.3s;
-                -webkit-transition-duration: 0.3s;
-                -o-transition-duration: 0.3s;
-                transition-duration: 0.3s;
+                -moz-transition-duration: 0.2s;
+                -webkit-transition-duration: 0.2s;
+                -o-transition-duration: 0.2s;
+                transition-duration: 0.2s;
                 -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
@@ -362,7 +369,7 @@ body {
                     background-color: #b2ddea;
                     color: #00475d;
                     padding: 2px 4px;
-                    transition: background-color .3s;
+                    @include transition(background-color .2s);
 
                     &:hover {
                         background-color: #d8eef4;
@@ -411,7 +418,7 @@ body {
                         display: block;
                         width: 90%;
                         border: 1px solid transparent;
-                        transition: border-color .1s;
+                        @include transition(border-color .1s);
                         padding: 6px 12px;
                         border-radius: 3px;
 
@@ -464,7 +471,7 @@ body {
                 font-weight: 700;
                 margin: .5em 0;
                 display: inline-block;
-                transition: background-color .3s;
+                @include transition(background-color .2s);
                 
                 &:hover {
                     background-color: #595959;
@@ -501,13 +508,14 @@ body {
                     @include background-gradient-left2right(#008fba, #03c4e8);
                     padding: 4px 4px 0px 4px;
 
-
                     li {
                         margin-right: 4px;
                         box-shadow: none !important;
+                        top: 0 !important;
                         
                         a {
                             padding-top: 8px;
+                            @include transition(background-color .2s);
                         }
 
                         &.tab-doc {
@@ -650,7 +658,7 @@ body {
     background-color: #03C4E8;
     padding: 10px 24px 9px 24px;
     border-radius: 3px;
-    transition: background-color .3s;
+    @include transition(background-color .2s);
 
     &:hover {
         background-color: #029cb9;
@@ -665,7 +673,7 @@ body {
     background-color: #FFCB54;
     padding: 10px 24px 9px 24px;
     border-radius: 3px;
-    transition: background-color .3s;
+    @include transition(background-color .2s);
     display: inline-block;
 
     &:hover {
@@ -901,7 +909,7 @@ body {
     #layout-sidebar {
         top: 98px;
         left: -300px;
-        transition: left .3s;
+        @include transition(left .2s);
         z-index: 999;
 
         &.active {
@@ -1082,7 +1090,7 @@ pre[class*="language-"] {
     .custombar1 .ui-scrollpanel-bar {
         background-color: #1976d2;
         opacity: 1;
-        transition: background-color .3s;
+        @include transition(background-color .2s);
     }
 
     .custombar1 .ui-scrollpanel-bar:hover {
@@ -1098,7 +1106,7 @@ pre[class*="language-"] {
         background-color: #68C77D;
         border-radius: 0;
         opacity: 1;
-        transition: background-color .3s;
+        @include transition(background-color .2s);
     }
 
     .custombar2:hover .ui-scrollpanel-bar {
