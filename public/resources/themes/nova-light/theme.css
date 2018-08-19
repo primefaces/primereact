@@ -1409,6 +1409,13 @@ body .ui-paginator {
   body .ui-paginator .ui-paginator-last:before {
     position: relative;
     top: 1px; }
+  body .ui-paginator .ui-paginator-current {
+    vertical-align: top;
+    display: inline-block;
+    height: 2.286em;
+    min-width: 2.286em;
+    border: 0 none;
+    line-height: 2.286em; }
   body .ui-paginator .ui-paginator-pages {
     vertical-align: top;
     display: inline-block;
@@ -1681,7 +1688,8 @@ body .ui-picklist .ui-picklist-caption {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400; }
+  font-weight: 400;
+  border-bottom: 0 none; }
 
 body .ui-picklist .ui-picklist-filter-container {
   padding: 0.429em 0.857em 0.429em 0.857em;
@@ -1689,8 +1697,7 @@ body .ui-picklist .ui-picklist-filter-container {
   color: #333333;
   background-color: #ffffff;
   margin: 0;
-  border-bottom: 0 none;
-  border-top: 0 none; }
+  border-bottom: 0 none; }
   body .ui-picklist .ui-picklist-filter-container input {
     width: 100%;
     padding-right: 2em; }
@@ -1736,7 +1743,8 @@ body .ui-orderlist .ui-orderlist-caption {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400; }
+  font-weight: 400;
+  border-bottom: 0 none; }
 
 body .ui-orderlist .ui-orderlist-filter-container {
   padding: 0.429em 0.857em 0.429em 0.857em;
@@ -1744,8 +1752,7 @@ body .ui-orderlist .ui-orderlist-filter-container {
   color: #333333;
   background-color: #ffffff;
   margin: 0;
-  border-bottom: 0 none;
-  border-top: 0 none; }
+  border-bottom: 0 none; }
   body .ui-orderlist .ui-orderlist-filter-container input {
     width: 100%;
     padding-right: 2em; }

@@ -49,7 +49,7 @@ export class PaginatorDemo extends Component {
                     
                     <h3>Custom Template</h3>
                     <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
-                        template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+                        template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
                 </div>
 
                 <PaginatorDoc></PaginatorDoc>
@@ -330,7 +330,7 @@ export class PaginatorDemo extends Component {
                     
                     <h3>Custom Template</h3>
                     <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
-                        template="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+                        template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
                 </div>
             </div>
         );

@@ -6,20 +6,6 @@ import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class ButtonDemo extends Component {
         
-    constructor() {
-        super();
-        this.state = {
-            count: 0
-        };
-        this.increment = this.increment.bind(this);
-    }
-
-    increment() {
-        this.setState((prevState, props) => ({
-            count: prevState.count + 1
-        }));
-    }
-
     render() {
         return (
             <div>
@@ -32,37 +18,35 @@ export class ButtonDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <Button label="Click" onClick={this.increment} />
-                    <Button label="Click" icon="pi pi-check" onClick={this.increment}/>
-                    <Button label="Click" icon="pi pi-check" iconPos="right" onClick={this.increment}/>
-                    <Button icon="pi pi-check" onClick={this.increment}/>
-                    <Button label="Click" disabled="disabled" onClick={this.increment}/>
+                    <Button label="Click" />
+                    <Button label="Click" icon="pi pi-check" />
+                    <Button label="Click" icon="pi pi-check" iconPos="right" />
+                    <Button icon="pi pi-check" />
+                    <Button label="Click" disabled="disabled" />
 
                     <h3>Severities</h3>
-                    <Button label="Primary" onClick={this.increment} />
-                    <Button label="Secondary" onClick={this.increment} className="ui-button-secondary"/>
-                    <Button label="Success" onClick={this.increment} className="ui-button-success"/>
-                    <Button label="Info" onClick={this.increment} className="ui-button-info"/>
-                    <Button label="Warning" onClick={this.increment} className="ui-button-warning"/>
-                    <Button label="Danger" onClick={this.increment} className="ui-button-danger"/>
+                    <Button label="Primary" />
+                    <Button label="Secondary" className="ui-button-secondary" />
+                    <Button label="Success" className="ui-button-success" />
+                    <Button label="Info" className="ui-button-info" />
+                    <Button label="Warning" className="ui-button-warning" />
+                    <Button label="Danger" className="ui-button-danger" />
 
                     <h3>Raised Buttons</h3>
-                    <Button label="Primary" onClick={this.increment} className="ui-button-raised"/>
-                    <Button label="Secondary" onClick={this.increment} className="ui-button-raised ui-button-secondary"/>
-                    <Button label="Success" onClick={this.increment} className="ui-button-raised ui-button-success"/>
-                    <Button label="Info" onClick={this.increment} className="ui-button-raised ui-button-info"/>
-                    <Button label="Warning" onClick={this.increment} className="ui-button-raised ui-button-warning"/>
-                    <Button label="Danger" onClick={this.increment} className="ui-button-raised ui-button-danger"/>
+                    <Button label="Primary" className="ui-button-raised" />
+                    <Button label="Secondary" className="ui-button-raised ui-button-secondary" />
+                    <Button label="Success" className="ui-button-raised ui-button-success" />
+                    <Button label="Info" className="ui-button-raised ui-button-info" />
+                    <Button label="Warning" className="ui-button-raised ui-button-warning" />
+                    <Button label="Danger" className="ui-button-raised ui-button-danger" />
 
                     <h3>Rounded Buttons</h3>
-                    <Button label="Primary" onClick={this.increment} />
-                    <Button label="Secondary" onClick={this.increment} className="ui-button-rounded ui-button-secondary"/>
-                    <Button label="Success" onClick={this.increment} className="ui-button-rounded ui-button-success"/>
-                    <Button label="Info" onClick={this.increment} className="ui-button-rounded ui-button-info"/>
-                    <Button label="Warning" onClick={this.increment} className="ui-button-rounded ui-button-warning"/>
-                    <Button label="Danger" onClick={this.increment} className="ui-button-rounded ui-button-danger"/>
-
-                    <p>Number of Clicks: {this.state.count}</p>
+                    <Button label="Primary" />
+                    <Button label="Secondary" className="ui-button-rounded ui-button-secondary" />
+                    <Button label="Success" className="ui-button-rounded ui-button-success" />
+                    <Button label="Info" className="ui-button-rounded ui-button-info" />
+                    <Button label="Warning" className="ui-button-rounded ui-button-warning" />
+                    <Button label="Danger" className="ui-button-rounded ui-button-danger" />
                 </div>
 
                 <ButtonDoc />
@@ -103,7 +87,7 @@ import {Button} from 'primereact/button';
                         <p>Text of the button is defined using the <i>label</i> property.</p>    
 <CodeHighlight className="language-jsx">
 {`
-<Button label="Save"/>
+<Button label="Save" />
 
 `}
 </CodeHighlight>
@@ -115,8 +99,8 @@ import {Button} from 'primereact/button';
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Click" icon="pi pi-check" />
-<Button label="Click" icon="pi pi-check" iconPos="right"/>
-<Button icon="pi pi-check" iconPos="right"/>
+<Button label="Click" icon="pi pi-check" iconPos="right" />
+<Button icon="pi pi-check" iconPos="right" />
 
 `}
 </CodeHighlight>
@@ -146,11 +130,11 @@ import {Button} from 'primereact/button';
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Primary" />
-<Button label="Secondary" className="ui-button-secondary"/>
-<Button label="Success" className="ui-button-success"/>
-<Button label="Info" className="ui-button-info"/>
-<Button label="Warning" className="ui-button-warning"/>
-<Button label="Danger" className="ui-button-danger"/>
+<Button label="Secondary" className="ui-button-secondary" />
+<Button label="Success" className="ui-button-success" />
+<Button label="Info" className="ui-button-info" />
+<Button label="Warning" className="ui-button-warning" />
+<Button label="Danger" className="ui-button-danger" />
 
 `}
 </CodeHighlight>
@@ -260,21 +244,35 @@ export class ButtonDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <Button label="Click" onClick={this.increment} />
-                    <Button label="Click" icon="pi pi-check" onClick={this.increment}/>
-                    <Button label="Click" icon="pi pi-check" iconPos="right" onClick={this.increment}/>
-                    <Button icon="pi pi-check" onClick={this.increment}/>
-                    <Button label="Click" disabled="disabled" onClick={this.increment}/>
+                    <Button label="Click" />
+                    <Button label="Click" icon="pi pi-check" />
+                    <Button label="Click" icon="pi pi-check" iconPos="right" />
+                    <Button icon="pi pi-check" />
+                    <Button label="Click" disabled="disabled" />
 
                     <h3>Severities</h3>
-                    <Button label="Primary" onClick={this.increment} />
-                    <Button label="Secondary" onClick={this.increment} className="ui-button-secondary"/>
-                    <Button label="Success" onClick={this.increment} className="ui-button-success"/>
-                    <Button label="Info" onClick={this.increment} className="ui-button-info"/>
-                    <Button label="Warning" onClick={this.increment} className="ui-button-warning"/>
-                    <Button label="Danger" onClick={this.increment} className="ui-button-danger"/>
+                    <Button label="Primary" />
+                    <Button label="Secondary" className="ui-button-secondary" />
+                    <Button label="Success" className="ui-button-success" />
+                    <Button label="Info" className="ui-button-info" />
+                    <Button label="Warning" className="ui-button-warning" />
+                    <Button label="Danger" className="ui-button-danger" />
 
-                    <p>Number of Clicks: {this.state.count}</p>
+                    <h3>Raised Buttons</h3>
+                    <Button label="Primary" className="ui-button-raised" />
+                    <Button label="Secondary" className="ui-button-raised ui-button-secondary" />
+                    <Button label="Success" className="ui-button-raised ui-button-success" />
+                    <Button label="Info" className="ui-button-raised ui-button-info" />
+                    <Button label="Warning" className="ui-button-raised ui-button-warning" />
+                    <Button label="Danger" className="ui-button-raised ui-button-danger" />
+
+                    <h3>Rounded Buttons</h3>
+                    <Button label="Primary" />
+                    <Button label="Secondary" className="ui-button-rounded ui-button-secondary" />
+                    <Button label="Success" className="ui-button-rounded ui-button-success" />
+                    <Button label="Info" className="ui-button-rounded ui-button-info" />
+                    <Button label="Warning" className="ui-button-rounded ui-button-warning" />
+                    <Button label="Danger" className="ui-button-rounded ui-button-danger" />
                 </div>
             </div>
         )
