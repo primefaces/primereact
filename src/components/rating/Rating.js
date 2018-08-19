@@ -88,7 +88,7 @@ export class Rating extends Component {
     renderCancelIcon() {
         if (this.props.cancel) {
             return (
-                <a onClick={this.clear}>
+                <a onClick={this.clear} className="ui-rating-cancel">
                     <span className="ui-rating-icon pi pi-ban"></span>
                 </a>
             );

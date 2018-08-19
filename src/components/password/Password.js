@@ -7,7 +7,7 @@ import DomHandler from '../utils/DomHandler';
 export class Password extends Component {
  
     static defaultProps = {
-        promptLabel: 'Please enter a password',
+        promptLabel: 'Enter a password',
         weakLabel: 'Weak',
         mediumLabel: 'Medium',
         strongLabel: 'Strong',
@@ -141,6 +141,7 @@ export class Password extends Component {
         this.info.className = 'ui-password-info';
         this.info.textContent = this.props.promptLabel;
 
+        this.panel.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
         this.panel.appendChild(this.meter);
         this.panel.appendChild(this.info);
         document.body.appendChild(this.panel);

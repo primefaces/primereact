@@ -526,17 +526,15 @@ body {
       color: #333333;
       background-color: #ffffff;
       margin: 0; }
-      body .ui-listbox .ui-listbox-header .ui-listbox-filter-container {
-        width: calc(100% - (0.857em + 0.857em + 0.5em)); }
-        body .ui-listbox .ui-listbox-header .ui-listbox-filter-container input {
-          padding: 0.429em;
-          padding-right: 2em; }
-        body .ui-listbox .ui-listbox-header .ui-listbox-filter-container .ui-listbox-filter-icon {
-          top: 50%;
-          left: auto;
-          margin-top: -.5em;
-          right: .5em;
-          color: #007ad9; }
+      body .ui-listbox .ui-listbox-header .ui-listbox-filter-container input {
+        padding: 0.429em;
+        padding-right: 2em; }
+      body .ui-listbox .ui-listbox-header .ui-listbox-filter-container .ui-listbox-filter-icon {
+        top: 50%;
+        left: auto;
+        margin-top: -.5em;
+        right: .5em;
+        color: #007ad9; }
     body .ui-listbox .ui-listbox-list .ui-listbox-item {
       margin: 0;
       padding: 0.429em 0.857em;
@@ -625,9 +623,9 @@ body {
       color: #e4018d; }
     body .ui-rating a .ui-rating-icon {
       font-size: 20px; }
-  body .ui-rating:not(.ui-state-disabled) a:hover {
+  body .ui-rating:not(.ui-state-disabled):not(.ui-rating-readonly) a:hover {
     color: #007ad9; }
-  body .ui-rating:not(.ui-state-disabled) a.ui-rating-cancel:hover {
+  body .ui-rating:not(.ui-state-disabled):not(.ui-rating-readonly) a.ui-rating-cancel:hover {
     color: #b5019f; }
   body .ui-spinner .ui-spinner-input {
     padding-right: 2.429em; }
