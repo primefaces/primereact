@@ -61,7 +61,6 @@ export class DataTable extends Component {
         virtualScroll: false,
         virtualScrollDelay: 500,
         frozenWidth: null,
-        unfrozenWidth: null,
         frozenValue: null,
         csvSeparator: ',',
         exportFilename: 'download',
@@ -139,7 +138,6 @@ export class DataTable extends Component {
         virtualScroll: PropTypes.bool,
         virtualScrollDelay: PropTypes.number,
         frozenWidth: PropTypes.string,
-        unfrozenWidth: PropTypes.string,
         frozenValue: PropTypes.array,
         csvSeparator: PropTypes.string,
         exportFilename: PropTypes.string,
@@ -395,10 +393,6 @@ export class DataTable extends Component {
         return true;
     }
 
-    componentDidMount() {
-        this.container.style.width = this.getContainerWidth();
-    }
-
     hasFooter() {
         if(this.props.children) {
             if(this.props.footerColumnGroup) {
@@ -470,7 +464,7 @@ export class DataTable extends Component {
                 }
             }
             else if(this.props.columnResizeMode === 'expand') {
-                let table = DomHandler.findSingle(this.container, 'tbody.ui-datatable-data').parentElement;
+                let table = DomHandler.findSingle(this.container, 'tbody.ui-datatable-tbody').parentElement;
                 table.style.width = table.offsetWidth + delta + 'px';
                 this.resizeColumn.style.width = newColumnWidth + 'px';
                 let containerWidth = table.style.width;
@@ -800,20 +794,6 @@ export class DataTable extends Component {
         return frozenColumns;
     }
 
-    getContainerWidth() {
-        if(this.props.scrollable) {
-            if(this.props.scrollWidth) {
-                return this.props.scrollWidth;
-            }
-            else if(this.props.frozenWidth && this.props.unfrozenWidth) {
-                return parseFloat(this.props.frozenWidth) + parseFloat(this.props.unfrozenWidth) + 'px';
-            }
-        }
-        else {
-            return this.props.style ? this.props.style.width : null;
-        }
-    }
-
     getScrollableColumns(columns) {
         let scrollableColumns = null;
         
@@ -869,8 +849,10 @@ export class DataTable extends Component {
     }
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
-        return <ScrollableView columns={columns} header={this.createTableHeader(columns, headerColumnGroup)} body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} footer={this.createTableFooter(columns, footerColumnGroup)} 
-                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} unfrozenWidth={this.props.unfrozenWidth}
+        return <ScrollableView columns={columns} header={this.createTableHeader(columns, headerColumnGroup)} 
+                body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
+                footer={this.createTableFooter(columns, footerColumnGroup)} 
+                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll}></ScrollableView>
     }
@@ -925,9 +907,9 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
-        let className = classNames('ui-datatable ui-widget', {'ui-datatable-reflow': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 
+        let className = classNames('ui-datatable ui-widget', {'ui-datatable-responsive': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 
                         'ui-datatable-scrollable': this.props.scrollable, 'ui-datatable-virtual-scrollable': this.props.virtualScroll,
-                        'ui-datatable-auto-layout': this.props.autoLayout}, this.props.className);
+                        'ui-datatable-auto-layout': this.props.autoLayout, 'ui-datatable-hoverable-rows': this.props.selectionMode}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;

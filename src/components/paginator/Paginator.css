@@ -89,6 +89,10 @@
     margin-left: .375em;
 }
 
+.ui-fluid .ui-paginator .ui-dropdown {
+    width: auto;
+}
+
 .ui-paginator .ui-paginator-current {
     width: auto;
     height: auto;

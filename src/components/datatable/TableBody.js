@@ -378,7 +378,6 @@ export class TableBody extends Component {
     }
 
     render() {
-        let className = classNames('ui-datatable-data ui-widget-content', {'ui-datatable-hoverable-rows': this.props.selectionMode});
         let rows;
         let rpp = this.props.rows||0;
         let first = this.props.first||0;
@@ -463,11 +462,11 @@ export class TableBody extends Component {
             }
         }
         else {
-            rows = <tr className="ui-widget-content ui-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr>;
+            rows = <tr className="ui-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr>;
         }
 
         return (
-            <tbody className={className}>
+            <tbody className="ui-datatable-tbody">
                 {rows}
             </tbody>
         );

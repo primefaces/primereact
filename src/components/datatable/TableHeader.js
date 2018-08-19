@@ -3,7 +3,7 @@ import {HeaderCell} from './HeaderCell';
 
 export class TableHeader extends Component {
 
-    createHeaderCells(root, column, i) {
+    createHeaderCells(root) {
         let children = React.Children.toArray(root.props.children);
         
         return React.Children.map(children, (column, i) => {
@@ -21,11 +21,11 @@ export class TableHeader extends Component {
         if(this.props.columnGroup) {
             let rows = React.Children.toArray(this.props.columnGroup.props.children);
             content = rows.map((row, i) => {
-                return <tr key={i} className="ui-state-default">{this.createHeaderCells(row)}</tr>;
+                return <tr key={i}>{this.createHeaderCells(row)}</tr>;
             });
         }
         else {
-            content = <tr className="ui-state-default">{this.createHeaderCells(this)}</tr>;
+            content = <tr>{this.createHeaderCells(this)}</tr>;
         }
 
         return (

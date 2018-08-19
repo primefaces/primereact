@@ -76,13 +76,29 @@ export class HeaderCell extends Component {
         return null;
     }
 
+    renderSortIcon(sorted, sortOrder) {
+        if (this.props.sortable) {
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            let sortIconClassName = classNames('pi pi-fw', sortIcon);
+
+            return (
+                <a className="ui-datatable-sort-icon">
+                    <span className={sortIconClassName}></span>
+                </a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
         let multiSortMetaData = this.getMultiSortMetaData();
         let singleSorted = (this.props.field === this.props.sortField);
         let multipleSorted = multiSortMetaData !== null;
         let sortOrder = 0;
         let resizer = this.props.resizableColumns && <span className="ui-column-resizer ui-clickable" onMouseDown={this.onResizerMouseDown}></span>;
-        let sortIconElement, filterElement, headerCheckbox;
+        let filterElement, headerCheckbox;
 
         if(singleSorted) 
             sortOrder = this.props.sortOrder;
@@ -90,16 +106,12 @@ export class HeaderCell extends Component {
             sortOrder = multiSortMetaData.order;
 
         let sorted = this.props.sortable && (singleSorted || multipleSorted);
-        let className = classNames('ui-state-default ui-unselectable-text', 
-                        {'ui-sortable-column': this.props.sortable, 
-                        'ui-state-active': sorted, 
+        let className = classNames({'ui-sortable-column': this.props.sortable, 
+                        'ui-state-highlight': sorted, 
                         'ui-resizable-column': this.props.resizableColumns,
                         'ui-selection-column': this.props.selectionMode}, this.props.headerClassName||this.props.className);
 
-        if(this.props.sortable) {
-            var sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
-            sortIconElement = <span className={classNames('ui-sortable-column-icon pi pi-fw', sortIcon)}></span>;
-        }
+        let sortIconElement = this.renderSortIcon(sorted, sortOrder);
 
         if(this.props.filter) {
             filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}

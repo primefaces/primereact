@@ -119,7 +119,7 @@ export class BodyCell extends Component {
                             });
 
         if(this.props.expander) {
-            let iconClassName = classNames('ui-row-toggler pi pi-fw ui-clickable', {'pi-chevron-circle-down': this.props.expanded, 'pi-chevron-circle-right': !this.props.expanded});
+            let iconClassName = classNames('ui-row-toggler pi pi-fw ui-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
             content = <a onClick={this.onExpanderClick}>
                         <span className={iconClassName}></span>
                       </a>;
@@ -165,7 +165,7 @@ export class BodyCell extends Component {
                 rowSpan={this.props.rowSpan}>
                 {header}
                 {editorKeyHelper}
-                <span className="ui-cell-data">{content}</span>
+                {content}
             </td>
         );
     }

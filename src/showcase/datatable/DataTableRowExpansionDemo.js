@@ -61,7 +61,7 @@ export class DataTableRowExpansionDemo extends Component {
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}     
                             rowExpansionTemplate={this.rowExpansionTemplate}>
-                        <Column expander={true} style={{width: '2em'}} />
+                        <Column expander={true} style={{width: '3em'}} />
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />

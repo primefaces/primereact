@@ -31,7 +31,7 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa fa-search" className="ui-button-success" style={{marginRight: '.5em'}}></Button>
             <Button type="button" icon="fa fa-edit" className="ui-button-warning"></Button>
         </div>;
     }
@@ -62,7 +62,7 @@ export class DataTableTemplatingDemo extends Component {
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}}/>
                         <Column field="color" header="Color" body={this.colorTemplate} />
-                        <Column body={this.actionTemplate} style={{textAlign:'center', width: '6em'}}/>
+                        <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
                     </DataTable>
                 </div>
 
@@ -115,7 +115,7 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa fa-search" className="ui-button-success"></Button>
+            <Button type="button" icon="fa fa-search" className="ui-button-success" style={{marginRight: '.5em'}}></Button>
             <Button type="button" icon="fa fa-edit" className="ui-button-warning"></Button>
         </div>;
     }
@@ -144,7 +144,7 @@ export class DataTableTemplatingDemo extends Component {
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}/>
                         <Column field="color" header="Color" body={this.colorTemplate} />
-                        <Column body={this.actionTemplate} style={{textAlign:'center', width: '6em'}}/>
+                        <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
                     </DataTable>
                 </div>
             </div>

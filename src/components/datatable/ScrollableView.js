@@ -12,7 +12,6 @@ export class ScrollableView extends Component {
         columns: null,
         frozen: null,
         frozenWidth: null,
-        unfrozenWidth: null,
         frozenBody: null,
         virtualScroll: false,
         rows: null,
@@ -27,7 +26,6 @@ export class ScrollableView extends Component {
         columns: PropTypes.array,
         frozen: PropTypes.bool,
         frozenWidth: PropTypes.string,
-        unfrozenWidth: PropTypes.string,
         frozenBody: PropTypes.element,
         virtualScroll: PropTypes.bool,
         rows: PropTypes.number,
@@ -58,7 +56,7 @@ export class ScrollableView extends Component {
             
             if(this.props.virtualScroll) {
                 this.calculateRowHeight();
-                this.scrollTableWrapper.style.height = this.props.totalRecords * this.rowHeight + 'px';
+                this.virtualScroller.style.height = this.props.totalRecords * this.rowHeight + 'px';
             }
         }
         
@@ -127,7 +125,7 @@ export class ScrollableView extends Component {
             let viewport = DomHandler.getOuterHeight(this.scrollBody);
             let tableHeight = DomHandler.getOuterHeight(this.scrollTable);
             let pageHeight = this.rowHeight * this.props.rows;
-            let virtualTableHeight = DomHandler.getOuterHeight(this.scrollTableWrapper);
+            let virtualTableHeight = DomHandler.getOuterHeight(this.virtualScroller);
             let pageCount = (virtualTableHeight / pageHeight)||1;
             
             if(this.scrollBody.scrollTop + viewport > parseFloat(this.scrollTable.style.top) + tableHeight || this.scrollBody.scrollTop < parseFloat(this.scrollTable.style.top)) {
@@ -179,8 +177,8 @@ export class ScrollableView extends Component {
     }
 
     render() {
-        let className = classNames('ui-datatable-scrollable-view', {'ui-datatable-frozen-view': this.props.frozen});
-        let width = this.props.frozen ? this.props.frozenWidth : this.props.unfrozenWidth;
+        let className = classNames('ui-datatable-scrollable-view', {'ui-datatable-frozen-view': this.props.frozen, 'ui-datatable-unfrozen-view': !this.props.frozen && this.props.frozenWidth});
+        let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
 
@@ -195,12 +193,11 @@ export class ScrollableView extends Component {
                     </div>
                 </div>
                 <div className="ui-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
-                    <div className="ui-datatable-scrollable-table-wrapper" ref={(el) => { this.scrollTableWrapper = el; }} >
-                        <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
-                            {colGroup}
-                            {this.props.body}
-                        </table>
-                    </div>
+                    <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
+                        {colGroup}
+                        {this.props.body}
+                    </table>
+                    <div className="ui-datatable-virtual-scroller" ref={(el) => { this.virtualScroller = el; }}></div>
                 </div>
                 <div className="ui-widget-header ui-datatable-scrollable-footer" ref={(el) => { this.scrollFooter = el; }}>
                     <div className="ui-datatable-scrollable-footer-box" ref={(el) => { this.scrollFooterBox = el; }}>

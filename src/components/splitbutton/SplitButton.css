@@ -2,11 +2,11 @@
     position: relative;
     display: inline-block;
     zoom: 1;
-    margin-right: .5em;
 }
 
 .ui-splitbutton .ui-button.ui-splitbutton-menubutton {
     width: 2em;
+    vertical-align: top;
 }
 
 .ui-splitbutton.ui-state-disabled button {

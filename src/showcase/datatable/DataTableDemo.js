@@ -2077,10 +2077,6 @@ export class DataTableLazyDemo extends Component {
                             <td>Filter element in header.</td>
                         </tr>
                         <tr>
-                            <td>ui-cell-data</td>
-                            <td>Data cell in body.</td>
-                        </tr>
-                        <tr>
                             <td>ui-datatable-scrollable-header</td>
                             <td>Container of header in a scrollable table.</td>
                         </tr>

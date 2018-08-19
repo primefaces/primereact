@@ -104,7 +104,7 @@ export class BodyRow extends Component {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
             conditionalStyles = {...conditionalStyles, ...rowClassNameCondition};
         }
-        let className = classNames('ui-widget-content', conditionalStyles);
+        let className = classNames(conditionalStyles);
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
         

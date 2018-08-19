@@ -46,6 +46,22 @@ export class ButtonDemo extends Component {
                     <Button label="Warning" onClick={this.increment} className="ui-button-warning"/>
                     <Button label="Danger" onClick={this.increment} className="ui-button-danger"/>
 
+                    <h3>Raised Buttons</h3>
+                    <Button label="Primary" onClick={this.increment} className="ui-button-raised"/>
+                    <Button label="Secondary" onClick={this.increment} className="ui-button-raised ui-button-secondary"/>
+                    <Button label="Success" onClick={this.increment} className="ui-button-raised ui-button-success"/>
+                    <Button label="Info" onClick={this.increment} className="ui-button-raised ui-button-info"/>
+                    <Button label="Warning" onClick={this.increment} className="ui-button-raised ui-button-warning"/>
+                    <Button label="Danger" onClick={this.increment} className="ui-button-raised ui-button-danger"/>
+
+                    <h3>Rounded Buttons</h3>
+                    <Button label="Primary" onClick={this.increment} />
+                    <Button label="Secondary" onClick={this.increment} className="ui-button-rounded ui-button-secondary"/>
+                    <Button label="Success" onClick={this.increment} className="ui-button-rounded ui-button-success"/>
+                    <Button label="Info" onClick={this.increment} className="ui-button-rounded ui-button-info"/>
+                    <Button label="Warning" onClick={this.increment} className="ui-button-rounded ui-button-warning"/>
+                    <Button label="Danger" onClick={this.increment} className="ui-button-rounded ui-button-danger"/>
+
                     <p>Number of Clicks: {this.state.count}</p>
                 </div>
 

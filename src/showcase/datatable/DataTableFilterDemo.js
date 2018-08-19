@@ -55,7 +55,7 @@ export class DataTableFilterDemo extends Component {
                 {label: 'Volvo', value: 'Volvo'}
             ];
 
-        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+        let brandFilter = <Dropdown style={{width: '100%'}}
                 value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
@@ -70,7 +70,7 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+        let colorFilter = <MultiSelect style={{width:'100%'}}
             value={this.state.colors} options={colors} onChange={this.onColorChange}/>
 
         return (
@@ -169,7 +169,7 @@ export class DataTableFilterDemo extends Component {
                 {label: 'Volvo', value: 'Volvo'}
             ];
 
-        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+        let brandFilter = <Dropdown style={{width: '100%'}}
                 value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
@@ -184,7 +184,7 @@ export class DataTableFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+        let colorFilter = <MultiSelect style={{width:'100%'}}
             value={this.state.colors} options={colors} onChange={this.onColorChange}/>
 
         return (
