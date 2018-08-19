@@ -300,7 +300,7 @@ body {
         -moz-border-radius: 0;
         -webkit-border-radius: 0;
         border-radius: 0; }
-        body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item.ui-state-highlight {
+        body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item:hover {
           color: #ffffff;
           background-color: #e02365; }
       body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-group {

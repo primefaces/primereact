@@ -9,7 +9,7 @@ export class SelectButtonDemo extends Component {
         super(props);
         this.state = {
             value1: null,
-            value2: null
+            value2: ['Apartment', 'Studio']
         };
     }
     

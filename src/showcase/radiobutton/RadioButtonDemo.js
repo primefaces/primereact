@@ -27,15 +27,15 @@ export class RadioButtonDemo extends Component {
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
                             <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
-                            <label htmlFor="rb1">New York</label>
+                            <label htmlFor="rb1" className="ui-radiobutton-label">New York</label>
                         </div>
                         <div className="ui-g-12">
                             <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
-                            <label htmlFor="rb2">San Francisco</label>
+                            <label htmlFor="rb2" className="ui-radiobutton-label">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
                             <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
-                            <label htmlFor="rb3">Los Angeles</label>
+                            <label htmlFor="rb3" className="ui-radiobutton-label">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}
@@ -229,15 +229,15 @@ export class RadioButtonDemo extends Component {
                     <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="ui-g-12">
                             <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
-                            <label htmlFor="rb1">New York</label>
+                            <label htmlFor="rb1" className="ui-radiobutton-label">New York</label>
                         </div>
                         <div className="ui-g-12">
                             <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
-                            <label htmlFor="rb2">San Francisco</label>
+                            <label htmlFor="rb2" className="ui-radiobutton-label">San Francisco</label>
                         </div>
                         <div className="ui-g-12">
                             <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
-                            <label htmlFor="rb3">Los Angeles</label>
+                            <label htmlFor="rb3" className="ui-radiobutton-label">Los Angeles</label>
                         </div>
                     </div>
                     Selected City : {this.state.city}

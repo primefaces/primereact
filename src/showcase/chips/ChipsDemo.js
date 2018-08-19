@@ -18,7 +18,7 @@ export class ChipsDemo extends Component {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user"></i>
+                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
             </div>
         );
     }
@@ -90,7 +90,7 @@ customChip(item) {
     return (
         <div>
             <span>{item} - (active) </span>
-            <i className="fa fa-user"></i>
+            <i className="pi pi-user-plus"></i>
         </div>
     );
 }
@@ -264,7 +264,7 @@ export class ChipsDemo extends Component {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user"></i>
+                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
             </div>
         );
     }

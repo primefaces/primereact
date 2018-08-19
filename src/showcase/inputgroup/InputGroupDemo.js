@@ -87,7 +87,7 @@ export class InputGroupDemo extends Component {
                         <div className="ui-g-12 ui-md-4">
                             <div className="ui-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="fa fa-search" cornerStyleClass="ui-button-secondary"/>
+                                <Button icon="fa fa-search" cornerStyleClass="ui-button-warning"/>
                             </div>
                         </div>
 

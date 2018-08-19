@@ -883,7 +883,12 @@ body {
                     padding-bottom: 0;
                     line-height: 40px;
                     min-width: 100px;
+
+                    &:hover {
+                        background-color: #285a6c;
+                    }
                 }
+
                 &.topbar-menu-themes > ul {
                     top: 40px;
                     text-align: left;
