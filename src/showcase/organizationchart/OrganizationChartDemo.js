@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {OrganizationChart} from '../../components/organizationchart/OrganizationChart';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import './OrganizationChartCustomStyle.css';
 
 export class OrganizationChartDemo extends Component {
         
@@ -140,7 +139,7 @@ export class OrganizationChartDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation organizationchart-demo">
                     <h3>Advanced</h3>
                     <p>Organization with advanced customization.</p>
                     <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selectionMode="multiple" 
@@ -235,6 +234,7 @@ export class OrganizationChartDemo extends Component {
 <CodeHighlight className="language-jsx">
 {`
 <OrganizationChart value={this.state.data} nodeTemplate={this.nodeTemplate}></OrganizationChart>
+
 `}
 </CodeHighlight>
 
@@ -573,6 +573,60 @@ export class OrganizationChartDemo extends Component {
     }
 }
 
+`}
+</CodeHighlight>
+
+<CodeHighlight className="language-javascript">
+{`
+.company.ui-organizationchart .ui-organizationchart-node-content.ui-person {
+    padding: 0;
+    border: 0 none;
+}
+
+.node-header, .node-content {
+    padding: .5em .7em;
+}
+
+.node-header {
+    background-color: #495ebb;
+    color: #ffffff;
+}
+
+.node-content {
+    text-align: center;
+    border: 1px solid #495ebb;
+}
+
+.node-content img {
+    border-radius: 50%;
+}
+
+.department-cfo {
+    background-color: #7247bc;
+    color: #ffffff;
+}
+
+.department-coo {
+    background-color: #a534b6;
+    color: #ffffff;
+}
+
+.department-cto {
+    background-color: #e9286f;
+    color: #ffffff;
+}
+
+.ui-organizationchart .ui-state-highlight {
+    background-color: orange;
+}
+
+.ui-person .ui-node-toggler {
+    color: #495ebb !important;
+}
+
+.department-cto .ui-node-toggler {
+    color: #8a0a39 !important;
+}
 `}
 </CodeHighlight>
                     </TabPanel>
