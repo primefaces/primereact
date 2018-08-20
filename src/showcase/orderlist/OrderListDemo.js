@@ -43,13 +43,13 @@ export class OrderListDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-6">
                             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
                                 responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
                                 onChange={(e) => this.setState({cars: e.value})} />
                         </div>
-                        <div className="ui-g-12 ui-md-6">
+                        <div className="p-g-12 p-md-6">
                             <ul>
                                 {this.state.cars.map(car => <li key={car.vin}>{car.brand} - {car.year} - {car.color}</li>)}
                             </ul>
@@ -222,15 +222,15 @@ import {OrderList} from 'primereact/orderlist';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-orderlist</td>
+                            <td>p-orderlist</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-orderlist-list</td>
+                            <td>p-orderlist-list</td>
                             <td>List container.</td>
                         </tr>
                         <tr>
-                            <td>ui-orderlist-item</td>
+                            <td>p-orderlist-item</td>
                             <td>An item in the list</td>
                         </tr>
                     </tbody>
@@ -292,13 +292,13 @@ export class OrderListDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-6">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-6">
                             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
                                 responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
                                 onChange={(e) => this.setState({cars: e.value})} />
                         </div>
-                        <div className="ui-g-12 ui-md-6">
+                        <div className="p-g-12 p-md-6">
                             <ul>
                                 {this.state.cars.map(car => <li key={car.vin}>{car.brand} - {car.year} - {car.color}</li>)}
                             </ul>

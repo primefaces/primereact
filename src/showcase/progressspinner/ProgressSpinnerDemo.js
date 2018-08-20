@@ -144,15 +144,15 @@ import {ProgressSpinner} from 'primereact/progressspinner';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-progress-spinner</td>
+                                        <td>p-progress-spinner</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-progress-circle</td>
+                                        <td>p-progress-circle</td>
                                         <td>SVG element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-progress-path</td>
+                                        <td>p-progress-path</td>
                                         <td>Circle element.</td>
                                     </tr>
                                 </tbody>

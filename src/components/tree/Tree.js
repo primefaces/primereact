@@ -86,12 +86,12 @@ export class TreeNode extends Component {
             iconClass = this.getIcon();
 
         if (this.props.selectionMode === 'checkbox') {
-            var checkboxIconClass = classNames('p-chkbox-icon p-c pi', {
+            var checkboxIconClass = classNames('p-checkbox-icon p-c pi', {
                 'pi-check': this.props.isSelected(this.node),
                 'pi-minus': this.node.partialSelected
             }),
-                checkbox = (<div className="p-chkbox">
-                    <div className="p-chkbox-box p-component">
+                checkbox = (<div className="p-checkbox">
+                    <div className="p-checkbox-box p-component">
                         <span className={checkboxIconClass}></span>
                     </div>
                 </div>);

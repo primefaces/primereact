@@ -501,19 +501,19 @@ import {Column} from 'primereact/column';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-treetable</td>
+                                        <td>p-treetable</td>
                                         <td>Main container element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-treetable-header</td>
+                                        <td>p-treetable-header</td>
                                         <td>Header element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-treetable-tablewrapper</td>
+                                        <td>p-treetable-tablewrapper</td>
                                         <td>Container of table</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-treetable-footer</td>
+                                        <td>p-treetable-footer</td>
                                         <td>Footer element</td>
                                     </tr>
                                 </tbody>

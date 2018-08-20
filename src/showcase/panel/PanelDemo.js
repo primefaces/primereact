@@ -200,23 +200,23 @@ import {Panel} from 'primereact/panel';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-panel</td>
+                            <td>p-panel</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-panel-titlebar</td>
+                            <td>p-panel-titlebar</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
-                            <td>ui-panel-title</td>
+                            <td>p-panel-title</td>
                             <td>Title text of panel.</td>
                         </tr>
                         <tr>
-                            <td>ui-panel-titlebar-toggler</td>
+                            <td>p-panel-titlebar-toggler</td>
                             <td>Toggle icon.</td>
                         </tr>
                         <tr>
-                            <td>ui-panel-content</td>
+                            <td>p-panel-content</td>
                             <td>Content of panel.</td>
                         </tr>
                     </tbody>

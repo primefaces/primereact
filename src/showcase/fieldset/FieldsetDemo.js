@@ -206,19 +206,19 @@ import {Fieldset} from 'primereact/fieldset';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-fieldset</td>
+                            <td>p-fieldset</td>
                             <td>Fieldset element.</td>
                         </tr>
                         <tr>
-                            <td>ui-fieldset-toggleable</td>
+                            <td>p-fieldset-toggleable</td>
                             <td>Toggleable fieldset element.</td>
                         </tr>
                         <tr>
-                            <td>ui-fieldset-legend</td>
+                            <td>p-fieldset-legend</td>
                             <td>Legend element.</td>
                         </tr>
                         <tr>
-                            <td>ui-fieldset-content</td>
+                            <td>p-fieldset-content</td>
                             <td>Content element.</td>
                         </tr>
                     </tbody>

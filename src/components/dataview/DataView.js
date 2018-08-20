@@ -227,7 +227,7 @@ export class DataView extends Component {
 
     renderHeader(){
         if(this.props.header) {
-            return <div className="p-dataview-header p-corner-top">{this.props.header}</div>;
+            return <div className="p-dataview-header">{this.props.header}</div>;
         }
         else {
             return null;
@@ -236,7 +236,7 @@ export class DataView extends Component {
 
     renderFooter(){
         if (this.props.footer)
-            return <div className="p-dataview-footer p-corner-bottom"> {this.props.footer}</div>;
+            return <div className="p-dataview-footer"> {this.props.footer}</div>;
         else
             return null;
     }

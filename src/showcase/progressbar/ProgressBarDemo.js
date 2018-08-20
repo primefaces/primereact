@@ -172,23 +172,23 @@ import {ProgressBar} from 'primereact/progressbar';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-progressbar</td>
+                                        <td>p-progressbar</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-progressbar-determinate</td>
+                                        <td>p-progressbar-determinate</td>
                                         <td>Container element of a determinate progressbar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-progressbar-indeterminate</td>
+                                        <td>p-progressbar-indeterminate</td>
                                         <td>Container element of an indeterminate progressbar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-progressbar-value</td>
+                                        <td>p-progressbar-value</td>
                                         <td>Element whose width changes according to value.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-progressbar-label</td>
+                                        <td>p-progressbar-label</td>
                                         <td>Label element that displays the current value.</td>
                                     </tr>
                                 </tbody>

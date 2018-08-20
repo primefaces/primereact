@@ -68,34 +68,34 @@ export class GrowlDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation ui-fluid">
+                <div className="content-section implementation p-fluid">
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3 style={{marginTop: 0}}>Severities</h3>
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         </div>
                     </div>
                     
                     <h3>Options</h3>
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-4">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
                         </div>
                     </div>
@@ -386,31 +386,31 @@ this.growl.clear();
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-growl</td>
+                            <td>p-growl</td>
                             <td>Main container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-growl-container</td>
+                            <td>p-growl-container</td>
                             <td>Container of a message item.</td>
                         </tr>
                         <tr>
-                            <td>ui-growl-item</td>
+                            <td>p-growl-item</td>
                             <td>Message element.</td>
                         </tr>
                         <tr>
-                            <td>ui-growl-icon-close</td>
+                            <td>p-growl-icon-close</td>
                             <td>Close icon of a message.</td>
                         </tr>
                         <tr>
-                            <td>ui-growl-image</td>
+                            <td>p-growl-image</td>
                             <td>Severity icon.</td>
                         </tr>
                         <tr>
-                            <td>ui-growl-message</td>
+                            <td>p-growl-message</td>
                             <td>Container of message texts.</td>
                         </tr>
                         <tr>
-                            <td>ui-growl-title</td>
+                            <td>p-growl-title</td>
                             <td>Summary of the message.</td>
                         </tr>
                     </tbody>
@@ -496,34 +496,34 @@ export class GrowlDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation ui-fluid">
+                <div className="content-section implementation p-fluid">
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3>Severities</h3>
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         </div>
                     </div>
                     
                     <h3>Options</h3>
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-4">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
                         </div>
                     </div>

@@ -375,31 +375,31 @@ nodeTemplate(node) {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>ui-organizationchart</td>
+                                <td>p-organizationchart</td>
                                 <td>Container element.</td>
                             </tr>
                             <tr>
-                                <td>ui-organizationchart-table</td>
+                                <td>p-organizationchart-table</td>
                                 <td>Table container of a node.</td>
                             </tr>
                             <tr>
-                                <td>ui-organizationchart-lines</td>
+                                <td>p-organizationchart-lines</td>
                                 <td>Connector lines container.</td>
                             </tr>
                             <tr>
-                                <td>ui-organizationchart-nodes</td>
+                                <td>p-organizationchart-nodes</td>
                                 <td>Contained of node children.</td>
                             </tr>
                             <tr>
-                                <td>ui-organizationchart-line-right</td>
+                                <td>p-organizationchart-line-right</td>
                                 <td>Right side line of a node connector.</td>
                             </tr>
                             <tr>
-                                <td>ui-organizationchart-line-left</td>
+                                <td>p-organizationchart-line-left</td>
                                 <td>Left side line of a node connector.</td>
                             </tr>
                             <tr>
-                                <td>ui-organizationchart-line-top</td>
+                                <td>p-organizationchart-line-top</td>
                                 <td>Top side line of a node connector.</td>
                             </tr>
                         </tbody>

@@ -26,27 +26,27 @@ export class ButtonDemo extends Component {
 
                     <h3>Severities</h3>
                     <Button label="Primary" />
-                    <Button label="Secondary" className="ui-button-secondary" />
-                    <Button label="Success" className="ui-button-success" />
-                    <Button label="Info" className="ui-button-info" />
-                    <Button label="Warning" className="ui-button-warning" />
-                    <Button label="Danger" className="ui-button-danger" />
+                    <Button label="Secondary" className="p-button-secondary" />
+                    <Button label="Success" className="p-button-success" />
+                    <Button label="Info" className="p-button-info" />
+                    <Button label="Warning" className="p-button-warning" />
+                    <Button label="Danger" className="p-button-danger" />
 
                     <h3>Raised Buttons</h3>
-                    <Button label="Primary" className="ui-button-raised" />
-                    <Button label="Secondary" className="ui-button-raised ui-button-secondary" />
-                    <Button label="Success" className="ui-button-raised ui-button-success" />
-                    <Button label="Info" className="ui-button-raised ui-button-info" />
-                    <Button label="Warning" className="ui-button-raised ui-button-warning" />
-                    <Button label="Danger" className="ui-button-raised ui-button-danger" />
+                    <Button label="Primary" className="p-button-raised" />
+                    <Button label="Secondary" className="p-button-raised p-button-secondary" />
+                    <Button label="Success" className="p-button-raised p-button-success" />
+                    <Button label="Info" className="p-button-raised p-button-info" />
+                    <Button label="Warning" className="p-button-raised p-button-warning" />
+                    <Button label="Danger" className="p-button-raised p-button-danger" />
 
                     <h3>Rounded Buttons</h3>
                     <Button label="Primary" />
-                    <Button label="Secondary" className="ui-button-rounded ui-button-secondary" />
-                    <Button label="Success" className="ui-button-rounded ui-button-success" />
-                    <Button label="Info" className="ui-button-rounded ui-button-info" />
-                    <Button label="Warning" className="ui-button-rounded ui-button-warning" />
-                    <Button label="Danger" className="ui-button-rounded ui-button-danger" />
+                    <Button label="Secondary" className="p-button-rounded p-button-secondary" />
+                    <Button label="Success" className="p-button-rounded p-button-success" />
+                    <Button label="Info" className="p-button-rounded p-button-info" />
+                    <Button label="Warning" className="p-button-rounded p-button-warning" />
+                    <Button label="Danger" className="p-button-rounded p-button-danger" />
                 </div>
 
                 <ButtonDoc />
@@ -120,21 +120,21 @@ import {Button} from 'primereact/button';
                         <p>Different color options are available as severity levels.</p>
                         
                         <ul>
-                            <li>.ui-button-secondary</li>
-                            <li>.ui-button-success</li>
-                            <li>.ui-button-info</li>
-                            <li>.ui-button-warning</li>
-                            <li>.ui-button-danger</li>
+                            <li>.p-button-secondary</li>
+                            <li>.p-button-success</li>
+                            <li>.p-button-info</li>
+                            <li>.p-button-warning</li>
+                            <li>.p-button-danger</li>
                         </ul>
 
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Primary" />
-<Button label="Secondary" className="ui-button-secondary" />
-<Button label="Success" className="ui-button-success" />
-<Button label="Info" className="ui-button-info" />
-<Button label="Warning" className="ui-button-warning" />
-<Button label="Danger" className="ui-button-danger" />
+<Button label="Secondary" className="p-button-secondary" />
+<Button label="Success" className="p-button-success" />
+<Button label="Info" className="p-button-info" />
+<Button label="Warning" className="p-button-warning" />
+<Button label="Danger" className="p-button-danger" />
 
 `}
 </CodeHighlight>
@@ -185,15 +185,15 @@ import {Button} from 'primereact/button';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-button</td>
+                                        <td>p-button</td>
                                         <td>Button element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-button-icon</td>
+                                        <td>p-button-icon</td>
                                         <td>Icon element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-button-text</td>
+                                        <td>p-button-text</td>
                                         <td>Label element of the button</td>
                                     </tr>
                                 </tbody>
@@ -252,27 +252,27 @@ export class ButtonDemo extends Component {
 
                     <h3>Severities</h3>
                     <Button label="Primary" />
-                    <Button label="Secondary" className="ui-button-secondary" />
-                    <Button label="Success" className="ui-button-success" />
-                    <Button label="Info" className="ui-button-info" />
-                    <Button label="Warning" className="ui-button-warning" />
-                    <Button label="Danger" className="ui-button-danger" />
+                    <Button label="Secondary" className="p-button-secondary" />
+                    <Button label="Success" className="p-button-success" />
+                    <Button label="Info" className="p-button-info" />
+                    <Button label="Warning" className="p-button-warning" />
+                    <Button label="Danger" className="p-button-danger" />
 
                     <h3>Raised Buttons</h3>
-                    <Button label="Primary" className="ui-button-raised" />
-                    <Button label="Secondary" className="ui-button-raised ui-button-secondary" />
-                    <Button label="Success" className="ui-button-raised ui-button-success" />
-                    <Button label="Info" className="ui-button-raised ui-button-info" />
-                    <Button label="Warning" className="ui-button-raised ui-button-warning" />
-                    <Button label="Danger" className="ui-button-raised ui-button-danger" />
+                    <Button label="Primary" className="p-button-raised" />
+                    <Button label="Secondary" className="p-button-raised p-button-secondary" />
+                    <Button label="Success" className="p-button-raised p-button-success" />
+                    <Button label="Info" className="p-button-raised p-button-info" />
+                    <Button label="Warning" className="p-button-raised p-button-warning" />
+                    <Button label="Danger" className="p-button-raised p-button-danger" />
 
                     <h3>Rounded Buttons</h3>
                     <Button label="Primary" />
-                    <Button label="Secondary" className="ui-button-rounded ui-button-secondary" />
-                    <Button label="Success" className="ui-button-rounded ui-button-success" />
-                    <Button label="Info" className="ui-button-rounded ui-button-info" />
-                    <Button label="Warning" className="ui-button-rounded ui-button-warning" />
-                    <Button label="Danger" className="ui-button-rounded ui-button-danger" />
+                    <Button label="Secondary" className="p-button-rounded p-button-secondary" />
+                    <Button label="Success" className="p-button-rounded p-button-success" />
+                    <Button label="Info" className="p-button-rounded p-button-info" />
+                    <Button label="Warning" className="p-button-rounded p-button-warning" />
+                    <Button label="Danger" className="p-button-rounded p-button-danger" />
                 </div>
             </div>
         )

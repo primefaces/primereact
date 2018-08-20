@@ -265,35 +265,35 @@ var items=[
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-panelmenu</td>
+                                        <td>p-panelmenu</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-panelmenu-header</td>
+                                        <td>p-panelmenu-header</td>
                                         <td>Accordion header of root submenu.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-panelmenu-content</td>
+                                        <td>p-panelmenu-content</td>
                                         <td>Accordion content of root submenu.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-submenu-list</td>
+                                        <td>p-submenu-list</td>
                                         <td>List element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem</td>
+                                        <td>p-menuitem</td>
                                         <td>Menuitem element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem-text</td>
+                                        <td>p-menuitem-text</td>
                                         <td>Label of a menuitem.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem-icon</td>
+                                        <td>p-menuitem-icon</td>
                                         <td>Icon of a menuitem.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-panelmenu-icon</td>
+                                        <td>p-panelmenu-icon</td>
                                         <td>Arrow icon of an accordion header.</td>
                                     </tr>
                                 </tbody>

@@ -114,7 +114,7 @@ import {InputTextarea} from 'primereact/inputtextarea';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-inputtextarea</td>
+                                        <td>p-inputtextarea</td>
                                         <td>Textarea element</td>
                                     </tr>
                                 </tbody>

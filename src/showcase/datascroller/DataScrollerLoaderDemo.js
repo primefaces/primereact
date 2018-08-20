@@ -29,23 +29,23 @@ export class DataScrollerLoaderDemo extends Component {
         const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-g car-item">
-                <div className="ui-g-12 ui-md-3">
+            <div className="p-g car-item">
+                <div className="p-g-12 p-md-3">
                     <img src={src} alt="Car" />
                 </div>
-                <div className="ui-g-12 ui-md-9">
-                    <div className="ui-g">
-                        <div className="ui-g-2 ui-sm-6">Vin: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                <div className="p-g-12 p-md-9">
+                    <div className="p-g">
+                        <div className="p-g-2 p-sm-6">Vin: </div>
+                        <div className="p-g-10 p-sm-6">{car.vin}</div>
             
-                        <div className="ui-g-2 ui-sm-6">Year: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        <div className="p-g-2 p-sm-6">Year: </div>
+                        <div className="p-g-10 p-sm-6">{car.year}</div>
             
-                        <div className="ui-g-2 ui-sm-6">Brand: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        <div className="p-g-2 p-sm-6">Brand: </div>
+                        <div className="p-g-10 p-sm-6">{car.brand}</div>
             
-                        <div className="ui-g-2 ui-sm-6">Color: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
+                        <div className="p-g-2 p-sm-6">Color: </div>
+                        <div className="p-g-10 p-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -114,23 +114,23 @@ export class DataScrollerLoaderDemo extends Component {
         const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-g car-item">
-                <div className="ui-g-12 ui-md-3">
+            <div className="p-g car-item">
+                <div className="p-g-12 p-md-3">
                     <img src={src} alt="Car" />
                 </div>
-                <div className="ui-g-12 ui-md-9">
-                    <div className="ui-g">
-                        <div className="ui-g-2 ui-sm-6">Vin: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                <div className="p-g-12 p-md-9">
+                    <div className="p-g">
+                        <div className="p-g-2 p-sm-6">Vin: </div>
+                        <div className="p-g-10 p-sm-6">{car.vin}</div>
             
-                        <div className="ui-g-2 ui-sm-6">Year: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        <div className="p-g-2 p-sm-6">Year: </div>
+                        <div className="p-g-10 p-sm-6">{car.year}</div>
             
-                        <div className="ui-g-2 ui-sm-6">Brand: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        <div className="p-g-2 p-sm-6">Brand: </div>
+                        <div className="p-g-10 p-sm-6">{car.brand}</div>
             
-                        <div className="ui-g-2 ui-sm-6">Color: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
+                        <div className="p-g-2 p-sm-6">Color: </div>
+                        <div className="p-g-10 p-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>

@@ -25,7 +25,7 @@ export class DataGridDemo extends Component {
         }
 
         return (
-            <div style={{ padding: '3px' }} className="ui-g-12 ui-md-3">
+            <div style={{ padding: '3px' }} className="p-g-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
                     <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
@@ -52,7 +52,7 @@ export class DataGridDemo extends Component {
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
+                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive p-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
                                     <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} /></div>
                                 </div>
@@ -295,19 +295,19 @@ componentDidMount() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-datagrid</td>
+                            <td>p-datagrid</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-datagrid-header</td>
+                            <td>p-datagrid-header</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
-                            <td>ui-datagrid-footer</td>
+                            <td>p-datagrid-footer</td>
                             <td>Footer section.</td>
                         </tr>
                         <tr>
-                            <td>ui-datagrid-content</td>
+                            <td>p-datagrid-content</td>
                             <td>Container of items.</td>
                         </tr>
                     </tbody>
@@ -344,7 +344,7 @@ export class DataGridDemo extends Component {
         }
 
         return (
-            <div style={{ padding: '3px' }} className="ui-g-12 ui-md-3">
+            <div style={{ padding: '3px' }} className="p-g-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
                     <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
@@ -374,7 +374,7 @@ export class DataGridDemo extends Component {
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
                         {
-                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive ui-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
+                            this.state.selectedCar && (<div className="ui-grid ui-grid-responsive p-fluid" style={{ fontSize: '16px', textAlign: 'center', padding: '20px' }}>
                                 <div className="ui-grid-row">
                                     <div className="ui-grid-col-12" style={{ textAlign: 'center' }}><img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand} /></div>
                                 </div>

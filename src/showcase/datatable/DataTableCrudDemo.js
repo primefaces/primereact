@@ -104,7 +104,7 @@ export class DataTableCrudDemo extends Component {
                     </DataTable>
 
                     <Dialog visible={this.state.displayDialog} header="Car Details" modal={true} footer={dialogFooter} onHide={() => this.setState({displayDialog: false})}>
-                        {this.state.car && <div className="ui-grid ui-grid-responsive ui-fluid">
+                        {this.state.car && <div className="ui-grid ui-grid-responsive p-fluid">
                             <div className="ui-grid-row">
                                 <div className="ui-grid-col-4" style={{padding:'4px 10px'}}><label htmlFor="vin">Vin</label></div>
                                 <div className="ui-grid-col-8" style={{padding:'4px 10px'}}>
@@ -248,7 +248,7 @@ export class DataTableCrudDemo extends Component {
                     </DataTable>
 
                     <Dialog visible={this.state.displayDialog} header="Car Details" modal={true} footer={dialogFooter} onHide={() => this.setState({displayDialog: false})}>
-                        {this.state.car && <div className="ui-grid ui-grid-responsive ui-fluid">
+                        {this.state.car && <div className="ui-grid ui-grid-responsive p-fluid">
                             <div className="ui-grid-row">
                                 <div className="ui-grid-col-4" style={{padding:'4px 10px'}}><label htmlFor="vin">Vin</label></div>
                                 <div className="ui-grid-col-8" style={{padding:'4px 10px'}}>

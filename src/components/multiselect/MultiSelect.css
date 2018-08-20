@@ -78,7 +78,7 @@
     position: relative;
 }
 
-.p-multiselect-panel .p-multiselect-item .p-chkbox {
+.p-multiselect-panel .p-multiselect-item .p-checkbox {
     display: inline-block;
     vertical-align: middle;
 }
@@ -95,7 +95,7 @@
     text-align: left;
 }
 
-.p-multiselect-header .p-chkbox {
+.p-multiselect-header .p-checkbox {
     display: inline-block;
     vertical-align: middle;
     cursor:pointer;

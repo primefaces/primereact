@@ -438,8 +438,8 @@ export class Dropdown extends Component {
     }
     
     renderDropdownIcon() {
-        return <div className="p-dropdown-trigger p-corner-right">
-                    <span className="p-dropdown-trigger-icon pi pi-caret-down p-clickable"></span>
+        return <div className="p-dropdown-trigger">
+                    <span className="p-dropdown-trigger-icon pi pi-chevron-down p-clickable"></span>
                 </div>;
     }
 

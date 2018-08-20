@@ -556,7 +556,7 @@ export class AutoComplete extends Component {
     
     renderDropdown() {
         return (
-            <Button type="button" icon="pi pi-fw pi-caret-down" className="p-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
+            <Button type="button" icon="pi pi-fw pi-chevron-down" className="p-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
         );
     }
 

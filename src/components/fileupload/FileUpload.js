@@ -343,12 +343,12 @@ export class FileUpload extends Component {
         
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                <div className="p-fileupload-buttonbar p-corner-top">
+                <div className="p-fileupload-buttonbar">
                     {chooseButton}
                     {uploadButton}
                     {cancelButton}
                 </div>
-                <div ref={(el) => {this.content = el;}} className="p-fileupload-content p-corner-bottom" 
+                <div ref={(el) => {this.content = el;}} className="p-fileupload-content" 
                     onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {progressBar}
                     <Messages ref={(el) => this.messagesUI = el } />

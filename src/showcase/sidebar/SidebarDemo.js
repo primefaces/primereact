@@ -253,51 +253,51 @@ import {Sidebar} from 'primereact/sidebar';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-sidebar</td>
+                                        <td>p-sidebar</td>
                                         <td>Container element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-left</td>
+                                        <td>p-sidebar-left</td>
                                         <td>Container element of left sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-right</td>
+                                        <td>p-sidebar-right</td>
                                         <td>Container element of right sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-top</td>
+                                        <td>p-sidebar-top</td>
                                         <td>Container element of top sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-bottom</td>
+                                        <td>p-sidebar-bottom</td>
                                         <td>Container element of bottom sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-full</td>
+                                        <td>p-sidebar-full</td>
                                         <td>Container element of a full screen sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-active</td>
+                                        <td>p-sidebar-active</td>
                                         <td>Container element when sidebar is visible.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-close</td>
+                                        <td>p-sidebar-close</td>
                                         <td>Close anchor element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-sm</td>
+                                        <td>p-sidebar-sm</td>
                                         <td>Small sized sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-md</td>
+                                        <td>p-sidebar-md</td>
                                         <td>Medium sized sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-lg</td>
+                                        <td>p-sidebar-lg</td>
                                         <td>Large sized sidebar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-sidebar-mask</td>
+                                        <td>p-sidebar-mask</td>
                                         <td>Modal layer of the sidebar.</td>
                                     </tr>
                                 </tbody>

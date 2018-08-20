@@ -51,27 +51,27 @@ export class DataViewDemo extends Component {
 
     renderListItem(car) {
         return (
-            <div className="ui-g-12" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
-                <div className="ui-g-12 ui-md-3">
+            <div className="p-g-12" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
+                <div className="p-g-12 p-md-3">
                     <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
                 </div>
-                <div className="ui-g-12 ui-md-8 car-details">
-                    <div className="ui-g">
-                        <div className="ui-g-2 ui-sm-6">Vin:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                <div className="p-g-12 p-md-8 car-details">
+                    <div className="p-g">
+                        <div className="p-g-2 p-sm-6">Vin:</div>
+                        <div className="p-g-10 p-sm-6">{car.vin}</div>
 
-                        <div className="ui-g-2 ui-sm-6">Year:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        <div className="p-g-2 p-sm-6">Year:</div>
+                        <div className="p-g-10 p-sm-6">{car.year}</div>
 
-                        <div className="ui-g-2 ui-sm-6">Brand:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        <div className="p-g-2 p-sm-6">Brand:</div>
+                        <div className="p-g-10 p-sm-6">{car.brand}</div>
 
-                        <div className="ui-g-2 ui-sm-6">Color:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
+                        <div className="p-g-2 p-sm-6">Color:</div>
+                        <div className="p-g-10 p-sm-6">{car.color}</div>
                     </div>
                 </div>
 
-                <div className="ui-g-12 ui-md-1 search-icon" style={{marginTop:'40px'}}>
+                <div className="p-g-12 p-md-1 search-icon" style={{marginTop:'40px'}}>
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </div>
             </div>
@@ -80,7 +80,7 @@ export class DataViewDemo extends Component {
 
     renderGridItem(car) {
         return (
-            <div style={{ padding: '.5em' }} className="ui-g-12 ui-md-3">
+            <div style={{ padding: '.5em' }} className="p-g-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
                     <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
@@ -105,8 +105,8 @@ export class DataViewDemo extends Component {
     renderCarDialogContent() {
         if (this.state.selectedCar) {
             return (
-                <div className="ui-g" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
-                    <div className="ui-g-12" style={{textAlign: 'center'}}>
+                <div className="p-g" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
+                    <div className="p-g-12" style={{textAlign: 'center'}}>
                         <img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} />
                     </div>
                     
@@ -137,11 +137,11 @@ export class DataViewDemo extends Component {
         ];
 
         return (
-            <div className="ui-g">
-                <div className="ui-g-12 ui-md-6" style={{textAlign: 'left'}}>
+            <div className="p-g">
+                <div className="p-g-12 p-md-6" style={{textAlign: 'left'}}>
                     <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} autoWidth={false} style={{minWidth:'15em'}}/>
                 </div>
-                <div className="ui-g-6 ui-md-6" style={{textAlign: 'right'}}>
+                <div className="p-g-6 p-md-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
                 </div>
              </div>
@@ -219,14 +219,14 @@ componentDidMount() {
 itemTemplate(car, layout) {
     if (layout === 'list') {
         return (
-            <div className="ui-g">
+            <div className="p-g">
                 <div>{car.brand}</div>
             </div>
         );
     }
     if (layout === 'grid') {
         return (
-            <div className="ui-g-12 ui-md-3">
+            <div className="p-g-12 p-md-3">
                 <div>{car.brand}</div>
             </div>
         );
@@ -350,8 +350,8 @@ const sortOptions = [
 ];
 
 const header = (
-    <div className="ui-g">
-        <div className="ui-g-12 ui-md-4">
+    <div className="p-g">
+        <div className="p-g-12 p-md-4">
             <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
         </div>
     </div>
@@ -541,27 +541,27 @@ onSortChange(event) {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-dataview</td>
+                                        <td>p-dataview</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-dataview-list</td>
+                                        <td>p-dataview-list</td>
                                         <td>Container element in list layout.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-dataview-grid</td>
+                                        <td>p-dataview-grid</td>
                                         <td>Container element in grid layout.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-dataview-header</td>
+                                        <td>p-dataview-header</td>
                                         <td>Header section.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-dataview-footer</td>
+                                        <td>p-dataview-footer</td>
                                         <td>Footer section.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-dataview-content</td>
+                                        <td>p-dataview-content</td>
                                         <td>Container of items.</td>
                                     </tr>
                                 </tbody>
@@ -630,27 +630,27 @@ export class DataViewDemo extends Component {
 
     renderListItem(car) {
         return (
-            <div className="ui-g-12" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
-                <div className="ui-g-12 ui-md-3">
+            <div className="p-g-12" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
+                <div className="p-g-12 p-md-3">
                     <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand}/>
                 </div>
-                <div className="ui-g-12 ui-md-8 car-details">
-                    <div className="ui-g">
-                        <div className="ui-g-2 ui-sm-6">Vin:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                <div className="p-g-12 p-md-8 car-details">
+                    <div className="p-g">
+                        <div className="p-g-2 p-sm-6">Vin:</div>
+                        <div className="p-g-10 p-sm-6">{car.vin}</div>
 
-                        <div className="ui-g-2 ui-sm-6">Year:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        <div className="p-g-2 p-sm-6">Year:</div>
+                        <div className="p-g-10 p-sm-6">{car.year}</div>
 
-                        <div className="ui-g-2 ui-sm-6">Brand:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        <div className="p-g-2 p-sm-6">Brand:</div>
+                        <div className="p-g-10 p-sm-6">{car.brand}</div>
 
-                        <div className="ui-g-2 ui-sm-6">Color:</div>
-                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
+                        <div className="p-g-2 p-sm-6">Color:</div>
+                        <div className="p-g-10 p-sm-6">{car.color}</div>
                     </div>
                 </div>
 
-                <div className="ui-g-12 ui-md-1 search-icon" style={{marginTop:'40px'}}>
+                <div className="p-g-12 p-md-1 search-icon" style={{marginTop:'40px'}}>
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </div>
             </div>
@@ -659,7 +659,7 @@ export class DataViewDemo extends Component {
 
     renderGridItem(car) {
         return (
-            <div style={{ padding: '.5em' }} className="ui-g-12 ui-md-3">
+            <div style={{ padding: '.5em' }} className="p-g-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
                     <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
@@ -684,8 +684,8 @@ export class DataViewDemo extends Component {
     renderCarDialogContent() {
         if (this.state.selectedCar) {
             return (
-                <div className="ui-g" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
-                    <div className="ui-g-12" style={{textAlign: 'center'}}>
+                <div className="p-g" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
+                    <div className="p-g-12" style={{textAlign: 'center'}}>
                         <img src={'showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png'} alt={this.state.selectedCar.brand} />
                     </div>
                     
@@ -716,11 +716,11 @@ export class DataViewDemo extends Component {
         ];
 
         return (
-            <div className="ui-g">
-                <div className="ui-g-12 ui-md-6" style={{textAlign: 'left'}}>
+            <div className="p-g">
+                <div className="p-g-12 p-md-6" style={{textAlign: 'left'}}>
                     <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} autoWidth={false} style={{minWidth:'15em'}}/>
                 </div>
-                <div className="ui-g-6 ui-md-6" style={{textAlign: 'right'}}>
+                <div className="p-g-6 p-md-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
                 </div>
              </div>

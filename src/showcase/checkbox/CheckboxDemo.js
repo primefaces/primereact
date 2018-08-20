@@ -34,18 +34,18 @@ export class CheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
-                        <div className="ui-g-12">
+                    <div className="p-g" style={{width:'250px',marginBottom:'10px'}}>
+                        <div className="p-g-12">
                             <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
-                            <label htmlFor="cb1" className="ui-chkbox-label">New York</label>
+                            <label htmlFor="cb1" className="p-checkbox-label">New York</label>
                         </div>
-                        <div className="ui-g-12">
+                        <div className="p-g-12">
                             <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
-                            <label htmlFor="cb2" className="ui-chkbox-label">San Francisco</label>
+                            <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
                         </div>
-                        <div className="ui-g-12">
+                        <div className="p-g-12">
                             <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
-                            <label htmlFor="cb3" className="ui-chkbox-label">Los Angeles</label>
+                            <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
                         </div>
                     </div>
                     Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}
@@ -89,17 +89,17 @@ import {Checkbox} from 'primereact/checkbox';
                         <p>Multiple checkboxes can be grouped by controllimng against a list of values.</p>
 <CodeHighlight className="language-jsx">
 {`
-<div className="ui-g-12">
+<div className="p-g-12">
     <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
-    <label htmlFor="cb1" className="ui-chkbox-label">New York</label>
+    <label htmlFor="cb1" className="p-checkbox-label">New York</label>
 </div>
-<div className="ui-g-12">
+<div className="p-g-12">
     <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
-    <label htmlFor="cb2" className="ui-chkbox-label">San Francisco</label>
+    <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
 </div>
-<div className="ui-g-12">
+<div className="p-g-12">
     <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
-    <label htmlFor="cb3" className="ui-chkbox-label">Los Angeles</label>
+    <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
 </div>
 
 `}
@@ -242,19 +242,19 @@ onCityChange(e) {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ui-chkbox</td>
+                                    <td>p-chkbox</td>
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-chkbox-box</td>
+                                    <td>p-chkbox-box</td>
                                     <td>Container of icon.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-chkbox-icon</td>
+                                    <td>p-chkbox-icon</td>
                                     <td>Icon element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-chkbox-label</td>
+                                    <td>p-chkbox-label</td>
                                     <td>Label element.</td>
                                 </tr>
                             </tbody>
@@ -304,18 +304,18 @@ export class CheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="ui-g" style={{width:'250px',marginBottom:'10px'}}>
-                        <div className="ui-g-12">
+                    <div className="p-g" style={{width:'250px',marginBottom:'10px'}}>
+                        <div className="p-g-12">
                             <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
-                            <label htmlFor="cb1" className="ui-chkbox-label">New York</label>
+                            <label htmlFor="cb1" className="p-checkbox-label">New York</label>
                         </div>
-                        <div className="ui-g-12">
+                        <div className="p-g-12">
                             <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
-                            <label htmlFor="cb2" className="ui-chkbox-label">San Francisco</label>
+                            <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
                         </div>
-                        <div className="ui-g-12">
+                        <div className="p-g-12">
                             <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
-                            <label htmlFor="cb3" className="ui-chkbox-label">Los Angeles</label>
+                            <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
                         </div>
                     </div>
                     Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}

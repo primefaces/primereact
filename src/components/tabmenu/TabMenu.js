@@ -63,7 +63,7 @@ export class TabMenu extends Component {
 
     renderMenuItem(item, index) {
         const activeItem = this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
-        const className = classNames('p-tabmenuitem p-corner-top', item.className, {'p-highlight': activeItem ? activeItem === item : index === 0, 'p-disabled': item.disabled});
+        const className = classNames('p-tabmenuitem', item.className, {'p-highlight': activeItem ? activeItem === item : index === 0, 'p-disabled': item.disabled});
         const iconClassName = classNames(item.icon, 'p-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 

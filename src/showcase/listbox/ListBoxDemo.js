@@ -319,23 +319,23 @@ carTemplate(option) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-listbox</td>
+                            <td>p-listbox</td>
                             <td>Main container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-listbox-header</td>
+                            <td>p-listbox-header</td>
                             <td>Header element.</td>
                         </tr>
                         <tr>
-                            <td>ui-listbox-list-wrapper</td>
+                            <td>p-listbox-list-wrapper</td>
                             <td>Container of list element.</td>
                         </tr>
                         <tr>
-                            <td>ui-listbox-list</td>
+                            <td>p-listbox-list</td>
                             <td>List element.</td>
                         </tr>
                         <tr>
-                            <td>ui-listbox-item</td>
+                            <td>p-listbox-item</td>
                             <td>An item in the list element.</td>
                         </tr>
                     </tbody>

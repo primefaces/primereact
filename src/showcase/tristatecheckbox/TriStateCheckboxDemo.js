@@ -148,19 +148,19 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ui-chkbox</td>
+                                    <td>p-chkbox</td>
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-tristatechkbox</td>
+                                    <td>p-tristatechkbox</td>
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-chkbox-box</td>
+                                    <td>p-chkbox-box</td>
                                     <td>Container of icon.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-chkbox-icon</td>
+                                    <td>p-chkbox-icon</td>
                                     <td>Icon element.</td>
                                 </tr>
                             </tbody>

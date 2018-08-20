@@ -345,7 +345,7 @@ export class Spinner extends Component {
     }
 
     renderUpButton() {
-        let className = classNames("p-spinner-button p-spinner-up p-corner-tr p-button p-component", {
+        let className = classNames("p-spinner-button p-spinner-button-up p-button p-component", {
             'p-disabled': this.props.disabled
         });
 
@@ -358,7 +358,7 @@ export class Spinner extends Component {
     }
 
     renderDownButton() {
-        let className = classNames("p-spinner-button p-spinner-down p-corner-br p-button p-component", {
+        let className = classNames("p-spinner-button p-spinner-button-down p-button p-component", {
             'p-disabled': this.props.disabled
         });
 

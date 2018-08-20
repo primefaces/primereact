@@ -17,8 +17,8 @@ export class ScrollPanelDemo extends Component {
                 </div>
 
                 <div className="content-section implementation scrollpanel-demo">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-4">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}}>
                                 <div style={{padding:'1em', lineHeight:'1.5'}}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -34,7 +34,7 @@ export class ScrollPanelDemo extends Component {
                                 </div>
                             </ScrollPanel>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar1">
                                 <div style={{ padding: '1em', lineHeight: '1.5' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -50,7 +50,7 @@ export class ScrollPanelDemo extends Component {
                                 </div>
                             </ScrollPanel>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar2">
                                 <div style={{padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -207,27 +207,27 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-scrollpanel</td>
+                                        <td>p-scrollpanel</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-scrollpanel-wrapper</td>
+                                        <td>p-scrollpanel-wrapper</td>
                                         <td>Wrapper of content section.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-scrollpanel-content</td>
+                                        <td>p-scrollpanel-content</td>
                                         <td>Content section.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-scrollpanel-bar</td>
+                                        <td>p-scrollpanel-bar</td>
                                         <td>Scrollbar handle.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-scrollpanel-bar-x</td>
+                                        <td>p-scrollpanel-bar-x</td>
                                         <td>Scrollbar handle of a horizontal bar.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-scrollpanel-bar-y</td>
+                                        <td>p-scrollpanel-bar-y</td>
                                         <td>Scrollbar handle of a vertical bar</td>
                                     </tr>
                                 </tbody>
@@ -262,8 +262,8 @@ export class ScrollPanelDemo extends Component {
                 </div>
 
                 <div className="content-section implementation scrollpanel-demo">
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-4">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}}>
                                 <div style={{padding:'1em', lineHeight:'1.5'}}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -279,7 +279,7 @@ export class ScrollPanelDemo extends Component {
                                 </div>
                             </ScrollPanel>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar1">
                                 <div style={{ padding: '1em', lineHeight: '1.5' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -295,7 +295,7 @@ export class ScrollPanelDemo extends Component {
                                 </div>
                             </ScrollPanel>
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <ScrollPanel style={{width: '100%', height: '200px'}} className="custombar2">
                                 <div style={{padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved

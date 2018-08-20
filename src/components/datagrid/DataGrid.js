@@ -108,8 +108,8 @@ export class DataGrid extends Component {
         var topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) && this.createPaginator('top'),
             bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
 
-        var header =this.props.header && <div className="p-datagrid-header p-corner-top"> {this.props.header}</div>,
-            footer = this.props.footer && <div className="p-datagrid-footer p-corner-top"> {this.props.footer}</div>,
+        var header =this.props.header && <div className="p-datagrid-header"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="p-datagrid-footer"> {this.props.footer}</div>,
             content = (
                 <div className="p-datagrid-content">
                     <div className="p-g">

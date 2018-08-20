@@ -194,8 +194,8 @@ export class DataScroller extends Component {
             'p-datascroller-inline': this.props.inline
         });
 
-        var header =this.props.header && <div className="p-datascroller-header p-corner-top"> {this.props.header}</div>,
-            footer = this.props.footer && <div className="p-datascroller-footer p-corner-bottom"> {this.props.footer} </div>,
+        var header =this.props.header && <div className="p-datascroller-header"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="p-datascroller-footer"> {this.props.footer} </div>,
             content = (
                 <div ref={(el) => this.contentElement = ReactDOM.findDOMNode(el)} className="p-datascroller-content" style={{'maxHeight': this.props.scrollHeight}}>
                     <ul className="p-datascroller-list">

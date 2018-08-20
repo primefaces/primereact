@@ -26,24 +26,24 @@ export class DataListDemo extends Component {
         var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-g ui-fluid car-item">
-                <div className="ui-g-12 ui-md-3">
+            <div className="p-g p-fluid car-item">
+                <div className="p-g-12 p-md-3">
                     <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></i>
                     <img src={src} alt={car.brand} />
                 </div>
-                <div className="ui-g-12 ui-md-9 car-details">
-                    <div className="ui-g">
-                        <div className="ui-g-2 ui-sm-6">Vin: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                <div className="p-g-12 p-md-9 car-details">
+                    <div className="p-g">
+                        <div className="p-g-2 p-sm-6">Vin: </div>
+                        <div className="p-g-10 p-sm-6">{car.vin}</div>
                         
-                        <div className="ui-g-2 ui-sm-6">Year: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        <div className="p-g-2 p-sm-6">Year: </div>
+                        <div className="p-g-10 p-sm-6">{car.year}</div>
                         
-                        <div className="ui-g-2 ui-sm-6">Brand: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        <div className="p-g-2 p-sm-6">Brand: </div>
+                        <div className="p-g-10 p-sm-6">{car.brand}</div>
                         
-                        <div className="ui-g-2 ui-sm-6">Color: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
+                        <div className="p-g-2 p-sm-6">Color: </div>
+                        <div className="p-g-10 p-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -52,21 +52,21 @@ export class DataListDemo extends Component {
 
     render() {
         let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-            <div className="ui-g car-item" style={{padding: 0, textAlign: 'center'}}>
-                    <div className="ui-g-12">
+            <div className="p-g car-item" style={{padding: 0, textAlign: 'center'}}>
+                    <div className="p-g-12">
                         <img src={'showcase/resources/demo/images/car/' + this.state.selectedCar.brand + '.png'} alt={this.state.selectedCar.brand}/>
                     </div>
-                    <div className="ui-g-4">Vin: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.vin}</div>
+                    <div className="p-g-4">Vin: </div>
+                    <div className="p-g-8">{this.state.selectedCar.vin}</div>
                     
-                    <div className="ui-g-4">Year: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.year}</div>
+                    <div className="p-g-4">Year: </div>
+                    <div className="p-g-8">{this.state.selectedCar.year}</div>
                     
-                    <div className="ui-g-4">Brand: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.brand}</div>
+                    <div className="p-g-4">Brand: </div>
+                    <div className="p-g-8">{this.state.selectedCar.brand}</div>
                     
-                    <div className="ui-g-4">Color: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.color}</div>
+                    <div className="p-g-4">Color: </div>
+                    <div className="p-g-8">{this.state.selectedCar.color}</div>
             </div>
         </Dialog>;
         
@@ -300,23 +300,23 @@ componentDidMount() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-datalist</td>
+                            <td>p-datalist</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-datalist-header</td>
+                            <td>p-datalist-header</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
-                            <td>ui-datalist-footer</td>
+                            <td>p-datalist-footer</td>
                             <td>Footer section.</td>
                         </tr>
                         <tr>
-                            <td>ui-datalist-content</td>
+                            <td>p-datalist-content</td>
                             <td>Wrapper of item container.</td>
                         </tr>
                         <tr>
-                            <td>ui-datalist-data</td>
+                            <td>p-datalist-data</td>
                             <td>A page link.</td>
                         </tr>
                     </tbody>
@@ -361,24 +361,24 @@ export class DataListDemo extends Component {
         var src = "showcase/resources/demo/images/car/" + car.brand + ".png";
 
         return (
-            <div className="ui-g ui-fluid car-item">
-                <div className="ui-g-12 ui-md-3">
+            <div className="p-g p-fluid car-item">
+                <div className="p-g-12 p-md-3">
                     <i className="fa fa-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></i>
                     <img src={src} alt={car.brand} />
                 </div>
-                <div className="ui-g-12 ui-md-9 car-details">
-                    <div className="ui-g">
-                        <div className="ui-g-2 ui-sm-6">Vin: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.vin}</div>
+                <div className="p-g-12 p-md-9 car-details">
+                    <div className="p-g">
+                        <div className="p-g-2 p-sm-6">Vin: </div>
+                        <div className="p-g-10 p-sm-6">{car.vin}</div>
                         
-                        <div className="ui-g-2 ui-sm-6">Year: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.year}</div>
+                        <div className="p-g-2 p-sm-6">Year: </div>
+                        <div className="p-g-10 p-sm-6">{car.year}</div>
                         
-                        <div className="ui-g-2 ui-sm-6">Brand: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.brand}</div>
+                        <div className="p-g-2 p-sm-6">Brand: </div>
+                        <div className="p-g-10 p-sm-6">{car.brand}</div>
                         
-                        <div className="ui-g-2 ui-sm-6">Color: </div>
-                        <div className="ui-g-10 ui-sm-6">{car.color}</div>
+                        <div className="p-g-2 p-sm-6">Color: </div>
+                        <div className="p-g-10 p-sm-6">{car.color}</div>
                     </div>
                 </div>
             </div>
@@ -387,21 +387,21 @@ export class DataListDemo extends Component {
 
     render() {
         let selectedCarDialog = this.state.selectedCar && <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-            <div className="ui-g car-item" style={{padding: 0, textAlign: 'center'}}>
-                    <div className="ui-g-12">
+            <div className="p-g car-item" style={{padding: 0, textAlign: 'center'}}>
+                    <div className="p-g-12">
                         <img src={'showcase/resources/demo/images/car/' + this.state.selectedCar.brand + '.png'} alt={this.state.selectedCar.brand}/>
                     </div>
-                    <div className="ui-g-4">Vin: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.vin}</div>
+                    <div className="p-g-4">Vin: </div>
+                    <div className="p-g-8">{this.state.selectedCar.vin}</div>
                     
-                    <div className="ui-g-4">Year: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.year}</div>
+                    <div className="p-g-4">Year: </div>
+                    <div className="p-g-8">{this.state.selectedCar.year}</div>
                     
-                    <div className="ui-g-4">Brand: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.brand}</div>
+                    <div className="p-g-4">Brand: </div>
+                    <div className="p-g-8">{this.state.selectedCar.brand}</div>
                     
-                    <div className="ui-g-4">Color: </div>
-                    <div className="ui-g-8">{this.state.selectedCar.color}</div>
+                    <div className="p-g-4">Color: </div>
+                    <div className="p-g-8">{this.state.selectedCar.color}</div>
             </div>
         </Dialog>;
         

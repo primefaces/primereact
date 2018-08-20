@@ -65,11 +65,11 @@ export class SplitButtonDemo extends Component {
                     <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items}></SplitButton>
 
                     <h3>Severities</h3>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-secondary"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-success"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-info"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-warning"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-danger"></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-secondary"></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-info" style={{marginRight: '.25em'}}></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-warning" style={{marginRight: '.25em'}}></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-danger" style={{marginRight: '.25em'}}></SplitButton>
                 </div>
 
                 <SplitButtonDoc />
@@ -161,21 +161,21 @@ export class SplitButtonDemo extends Component {
                         <p>Different color options are available as severity levels.</p>
                         
                         <ul>
-                            <li>.ui-button-secondary</li>
-                            <li>.ui-button-success</li>
-                            <li>.ui-button-info</li>
-                            <li>.ui-button-warning</li>
-                            <li>.ui-button-danger</li>
+                            <li>.p-button-secondary</li>
+                            <li>.p-button-success</li>
+                            <li>.p-button-info</li>
+                            <li>.p-button-warning</li>
+                            <li>.p-button-danger</li>
                         </ul>
 
 <CodeHighlight className="language-jsx">
 {`
 <SplitButton label="Primary" />
-<SplitButton label="Secondary" className="ui-button-secondary" model={this.state.items} />
-<SplitButton label="Success" className="ui-button-success" model={this.state.items} />
-<SplitButton label="Info" className="ui-button-info" model={this.state.items} />
-<SplitButton label="Warning" className="ui-button-warning" model={this.state.items} />
-<SplitButton label="Danger" className="ui-button-danger" model={this.state.items} />
+<SplitButton label="Secondary" className="p-button-secondary" model={this.state.items} />
+<SplitButton label="Success" className="p-button-success" model={this.state.items} />
+<SplitButton label="Info" className="p-button-info" model={this.state.items} />
+<SplitButton label="Warning" className="p-button-warning" model={this.state.items} />
+<SplitButton label="Danger" className="p-button-danger" model={this.state.items} />
 
 `}
 </CodeHighlight>
@@ -294,15 +294,15 @@ export class SplitButtonDemo extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-splitbutton</td>
+                                        <td>p-splitbutton</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-splitbutton-button</td>
+                                        <td>p-splitbutton-button</td>
                                         <td>Dropdown button.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menu</td>
+                                        <td>p-menu</td>
                                         <td>Overlay menu.</td>
                                     </tr>
                                 </tbody>
@@ -380,11 +380,11 @@ export class SplitButtonDemo extends Component {
                     <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items}></SplitButton>
 
                     <h3>Severities</h3>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-secondary"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-success"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-info"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-warning"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="ui-button-danger"></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-secondary" style={{marginRight: '.25em'}}></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-info"> style={{marginRight: '.25em'}}</SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-warning" style={{marginRight: '.25em'}}></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items} className="p-button-danger"></SplitButton>
                 </div>
             </div>
         )

@@ -60,16 +60,16 @@
     visibility: hidden;
 }
 
-.p-tree .p-chkbox-box {
+.p-tree .p-checkbox-box {
     cursor: pointer;
 }
 
-.p-tree .p-chkbox {
+.p-tree .p-checkbox {
     display: inline-block;
     vertical-align: middle;
 }
 
-.p-tree .p-chkbox .p-chkbox-icon {
+.p-tree .p-checkbox .p-checkbox-icon {
     margin-left: 1px;
 }
 
@@ -146,7 +146,7 @@
 	height: 0;
 }
 
-.p-tree.p-tree-horizontal .p-chkbox {
+.p-tree.p-tree-horizontal .p-checkbox {
     vertical-align: bottom;
     margin-right: .25em;
 }

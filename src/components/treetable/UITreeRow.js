@@ -121,14 +121,14 @@ export class UITreeRow extends Component {
                                 toggler = (<a className={togglerClass} style={togglerStyle} onClick={this.toggle.bind(this)} title={this.state.expanded ? this.props.labelCollapse : this.props.labelExpand}><span></span></a>);
 
                                 if (this.treeTable.props.selectionMode === 'checkbox') {
-                                    var checkboxIconClass = classNames('p-chkbox-icon p-c pi', {
+                                    var checkboxIconClass = classNames('p-checkbox-icon p-c pi', {
                                         'pi-check': this.isSelected(),
                                         'pi-minus': this.node.partialSelected
                                     });
 
                                     checkbox = (
-                                        <div className="p-chkbox p-treetable-checkbox">
-                                            <div className="p-chkbox-box p-component">
+                                        <div className="p-checkbox p-treetable-checkbox">
+                                            <div className="p-checkbox-box p-component">
                                                 <span className={checkboxIconClass}></span>
                                             </div>
                                         </div>

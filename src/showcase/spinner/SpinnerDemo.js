@@ -241,19 +241,19 @@ import {Spinner} from 'primereact/spinner';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-spinner</td>
+                            <td>p-spinner</td>
                             <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>ui-spinner-up</td>
+                            <td>p-spinner-up</td>
                             <td>Up icon.</td>
                         </tr>
                         <tr>
-                            <td>ui-spinner-down</td>
+                            <td>p-spinner-down</td>
                             <td>Down icon.</td>
                         </tr>
                         <tr>
-                            <td>ui-spinner-input</td>
+                            <td>p-spinner-input</td>
                             <td>Input element</td>
                         </tr>
                     </tbody>

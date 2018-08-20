@@ -249,23 +249,23 @@ let items = [
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-menu</td>
+                                        <td>p-menu</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menu-list</td>
+                                        <td>p-menu-list</td>
                                         <td>List element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem</td>
+                                        <td>p-menuitem</td>
                                         <td>Menuitem element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem-text</td>
+                                        <td>p-menuitem-text</td>
                                         <td>Label of a menuitem.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem-icon</td>
+                                        <td>p-menuitem-icon</td>
                                         <td>Icon of a menuitem.</td>
                                     </tr>
                                 </tbody>

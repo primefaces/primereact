@@ -171,15 +171,15 @@ import {OverlayPanel} from 'primereact/overlaypanel';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-overlaypanel</td>
+                            <td>p-overlaypanel</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-overlaypanel-content</td>
+                            <td>p-overlaypanel-content</td>
                             <td>Content of the panel.</td>
                         </tr>
                         <tr>
-                            <td>ui-overlaypanel-close</td>
+                            <td>p-overlaypanel-close</td>
                             <td>Close icon.</td>
                         </tr>
                     </tbody>

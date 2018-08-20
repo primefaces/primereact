@@ -213,15 +213,15 @@ const header = (
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>ui-editor-container</td>
+                                    <td>p-editor-container</td>
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-editor-toolbar</td>
+                                    <td>p-editor-toolbar</td>
                                     <td>Toolbar of the editor</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-editor-content</td>
+                                    <td>p-editor-content</td>
                                     <td>Editable area</td>
                                 </tr>
                                 </tbody>

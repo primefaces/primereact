@@ -197,43 +197,43 @@ import {ColorPicker} from 'primereact/colorpicker';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-colorpicker</td>
+                                        <td>p-colorpicker</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-overlay</td>
+                                        <td>p-colorpicker-overlay</td>
                                         <td>Container element in overlay mode.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-preview </td>
+                                        <td>p-colorpicker-preview </td>
                                         <td>Preview input in overlay mode.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-panel</td>
+                                        <td>p-colorpicker-panel</td>
                                         <td>Panel element of the colorpicker.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-content</td>
+                                        <td>p-colorpicker-content</td>
                                         <td>Wrapper that contains color and hue sections.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-color-selector</td>
+                                        <td>p-colorpicker-color-selector</td>
                                         <td>Color selector container.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-color</td>
+                                        <td>p-colorpicker-color</td>
                                         <td>Color element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-color-handle</td>
+                                        <td>p-colorpicker-color-handle</td>
                                         <td>Handle of the color element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-hue</td>
+                                        <td>p-colorpicker-hue</td>
                                         <td>Hue slider.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-colorpicker-hue-handle</td>
+                                        <td>p-colorpicker-hue-handle</td>
                                         <td>Handle of the hue slider.</td>
                                     </tr>
                                 </tbody>

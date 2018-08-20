@@ -7,15 +7,13 @@ export class Button extends Component {
     static defaultProps = {
         label: null,
         icon: null,
-        iconPos: 'left',
-        cornerStyleClass: 'p-corner-all'
+        iconPos: 'left'
     }
 
     static propTypes = {
         label: PropTypes.string,
         icon: PropTypes.string,
-        iconPos: PropTypes.string,
-        cornerStyleClass: PropTypes.string
+        iconPos: PropTypes.string
     };
 
     renderIcon() {
@@ -43,7 +41,7 @@ export class Button extends Component {
     }
 
     render() {
-        let className = classNames('p-button p-component', this.props.cornerStyleClass, this.props.className, {
+        let className = classNames('p-button p-component', this.props.className, {
                 'p-button-icon-only': this.props.icon && !this.props.label,
                 'p-button-text-icon-left': this.props.icon && this.props.label && this.props.iconPos === 'left',
                 'p-button-text-icon-right': this.props.icon && this.props.label && this.props.iconPos === 'right',
@@ -57,7 +55,6 @@ export class Button extends Component {
         delete buttonProps.iconPos;
         delete buttonProps.icon;
         delete buttonProps.label;
-        delete buttonProps.cornerStyleClass;
 
         return (
             <button {...buttonProps} className={className}>

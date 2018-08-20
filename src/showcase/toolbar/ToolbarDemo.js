@@ -127,15 +127,15 @@ import {Toolbar} from 'primereact/toolbar';
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>ui-toolbar</td>
+                                    <td>p-toolbar</td>
                                     <td>Main container element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-toolbar-group-left</td>
+                                    <td>p-toolbar-group-left</td>
                                     <td>Left content container.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-toolbar-group-right</td>
+                                    <td>p-toolbar-group-right</td>
                                     <td>Right content container.</td>
                                 </tr>
                                 </tbody>

@@ -146,19 +146,19 @@ const home = {icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact'}
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-breadcrumb</td>
+                                        <td>p-breadcrumb</td>
                                         <td>Container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem</td>
+                                        <td>p-menuitem</td>
                                         <td>Menuitem element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-menuitem-text</td>
+                                        <td>p-menuitem-text</td>
                                         <td>Label of a menuitem.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-breadcrumb-chevron</td>
+                                        <td>p-breadcrumb-chevron</td>
                                         <td>Chevron element.</td>
                                     </tr>
                                 </tbody>

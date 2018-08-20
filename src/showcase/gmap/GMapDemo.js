@@ -123,18 +123,18 @@ export class GMapDemo extends Component {
                         onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
                         
                     <Dialog header="New Location" visible={this.state.dialogVisible} width="300px" modal={true} footer={footer} onHide={this.onHide}>
-                        <div className="ui-g ui-fluid">
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
-                            <div className="ui-g-10"><InputText type="text" id="title" value={this.state.markerTitle} onChange={(e) => this.setState({markerTitle: e.target.value})} /></div>
+                        <div className="p-g p-fluid">
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
+                            <div className="p-g-10"><InputText type="text" id="title" value={this.state.markerTitle} onChange={(e) => this.setState({markerTitle: e.target.value})} /></div>
                             
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}>Lat</div>
-                            <div className="ui-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lat() : ''} /></div>
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}>Lat</div>
+                            <div className="p-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lat() : ''} /></div>
                             
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}>Lng</div>
-                            <div className="ui-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lng() : ''} /></div>
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}>Lng</div>
+                            <div className="p-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lng() : ''} /></div>
                             
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
-                            <div className="ui-g-10"><Checkbox checked={this.state.draggableMarker} onChange={(event) => this.setState({draggableMarker: event.checked})}/></div>
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
+                            <div className="p-g-10"><Checkbox checked={this.state.draggableMarker} onChange={(event) => this.setState({draggableMarker: event.checked})}/></div>
                         </div>
                     </Dialog>
                 </div>
@@ -519,18 +519,18 @@ export class GMapDemo extends Component {
                         onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
                         
                     <Dialog header="New Location" visible={this.state.dialogVisible} width="300px" modal={true} footer={footer} onHide={this.onHide}>
-                        <div className="ui-g ui-fluid">
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
-                            <div className="ui-g-10"><InputText type="text" id="title" value={this.state.markerTitle} onChange={(e) => this.setState({markerTitle: e.target.value})} /></div>
+                        <div className="p-g p-fluid">
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
+                            <div className="p-g-10"><InputText type="text" id="title" value={this.state.markerTitle} onChange={(e) => this.setState({markerTitle: e.target.value})} /></div>
                             
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}>Lat</div>
-                            <div className="ui-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lat() : ''} /></div>
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}>Lat</div>
+                            <div className="p-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lat() : ''} /></div>
                             
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}>Lng</div>
-                            <div className="ui-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lng() : ''} /></div>
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}>Lng</div>
+                            <div className="p-g-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lng() : ''} /></div>
                             
-                            <div className="ui-g-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
-                            <div className="ui-g-10"><Checkbox checked={this.state.draggableMarker} onChange={(event) => this.setState({draggableMarker: event.checked})}/></div>
+                            <div className="p-g-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
+                            <div className="p-g-10"><Checkbox checked={this.state.draggableMarker} onChange={(event) => this.setState({draggableMarker: event.checked})}/></div>
                         </div>
                     </Dialog>
                 </div>

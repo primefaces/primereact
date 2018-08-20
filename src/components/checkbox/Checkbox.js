@@ -68,9 +68,9 @@ export class Checkbox extends Component {
     }
 
     render() {
-        let containerClass = classNames('p-chkbox p-component', this.props.className);
-        let boxClass = classNames('p-chkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled});
-        let iconClass = classNames('p-chkbox-icon p-c', {'pi pi-check': this.props.checked});
+        let containerClass = classNames('p-checkbox p-component', this.props.className);
+        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled});
+        let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.checked});
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>

@@ -289,15 +289,15 @@ export class InplaceDemo extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-inplace</td>
+                            <td>p-inplace</td>
                             <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>ui-inplace-display</td>
+                            <td>p-inplace-display</td>
                             <td>Display container</td>
                         </tr>
                         <tr>
-                            <td>ui-inplace-content</td>
+                            <td>p-inplace-content</td>
                             <td>Content container</td>
                         </tr>
                     </tbody>

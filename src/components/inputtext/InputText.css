@@ -63,7 +63,7 @@
     flex: 1 1 auto;
 }
 
-.p-inputgroup .p-chkbox, 
+.p-inputgroup .p-checkbox, 
 .p-inputgroup .p-radiobutton {
     margin-right: 0;
     vertical-align: bottom;

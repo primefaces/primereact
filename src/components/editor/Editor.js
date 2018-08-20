@@ -104,14 +104,14 @@ export class Editor extends Component {
         let toolbarHeader = null;
         if (this.props.headerTemplate) {
             toolbarHeader = (
-                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar p-corner-top">
+                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
                     {this.props.headerTemplate}
                 </div>
             );
         }
         else {
             toolbarHeader = (
-                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar p-corner-top">
+                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
                     <span className="ql-formats">
                         <select className="ql-header" defaultValue="0">
                           <option value="1">Heading</option>

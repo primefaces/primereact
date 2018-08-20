@@ -277,35 +277,35 @@ carTemplate(option) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-multiselect</td>
+                            <td>p-multiselect</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-label-container</td>
+                            <td>p-multiselect-label-container</td>
                             <td>Container of the label to display selected items.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-label-container</td>
+                            <td>p-multiselect-label-container</td>
                             <td>Label to display selected items.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-trigger</td>
+                            <td>p-multiselect-trigger</td>
                             <td>Dropdown button.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-filter-container</td>
+                            <td>p-multiselect-filter-container</td>
                             <td>Container of filter input.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-panel</td>
+                            <td>p-multiselect-panel</td>
                             <td>Overlay panel for items.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-items</td>
+                            <td>p-multiselect-items</td>
                             <td>List container of items.</td>
                         </tr>
                         <tr>
-                            <td>ui-multiselect-item</td>
+                            <td>p-multiselect-item</td>
                             <td>An item in the list.</td>
                         </tr>
                     </tbody>

@@ -251,11 +251,11 @@ import {Slider} from 'primereact/slider';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-slider</td>
+                            <td>p-slider</td>
                             <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>ui-slider-handle</td>
+                            <td>p-slider-handle</td>
                             <td>Handle element.</td>
                         </tr>
                     </tbody>

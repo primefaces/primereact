@@ -333,8 +333,8 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-label-container" title="Choose">
                     <label className="p-multiselect-label">{label}</label>
                 </div>
-                <div className="p-multiselect-trigger p-corner-right">
-                    <span className="p-multiselect-trigger-icon pi pi-caret-down p-c"></span>
+                <div className="p-multiselect-trigger">
+                    <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
                 <MultiSelectPanel ref={(el) => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     scrollHeight={this.props.scrollHeight}>

@@ -180,27 +180,27 @@ constructor() {
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>ui-tabmenu</td>
+                                    <td>p-tabmenu</td>
                                     <td>Container element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-tabmenu-nav</td>
+                                    <td>p-tabmenu-nav</td>
                                     <td>List element of headers.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-tabmenuitem</td>
+                                    <td>p-tabmenuitem</td>
                                     <td>Menuitem element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-menuitem-link</td>
+                                    <td>p-menuitem-link</td>
                                     <td>Link inside a menuitem.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-menuitem-text</td>
+                                    <td>p-menuitem-text</td>
                                     <td>Label of a menuitem.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-menuitem-icon</td>
+                                    <td>p-menuitem-icon</td>
                                     <td>Icon of a menuitem.</td>
                                 </tr>
                                 </tbody>

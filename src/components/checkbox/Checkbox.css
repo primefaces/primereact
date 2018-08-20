@@ -1,4 +1,4 @@
-.p-chkbox {
+.p-checkbox {
     display: inline-block;
     cursor: pointer;
     vertical-align: middle;
@@ -8,7 +8,7 @@
     -webkit-user-select: none;
 }
 
-.p-chkbox .p-chkbox-box {
+.p-checkbox .p-checkbox-box {
     width: 1.125em;
     height: 1.125em;
     line-height: 1.125em;
@@ -18,14 +18,14 @@
     text-align: center;
 }
 
-.p-chkbox .p-chkbox-icon {
+.p-checkbox .p-checkbox-icon {
     display: block;
 }
 
-.p-chkbox-label {
+.p-checkbox-label {
     vertical-align: middle;  
 }
 
-.p-chkbox + label {
+.p-checkbox + label {
     vertical-align: middle;
 }

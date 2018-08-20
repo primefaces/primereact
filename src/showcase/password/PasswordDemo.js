@@ -114,15 +114,15 @@ import {Password} from 'primereact/password';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-password-panel</td>
+                                        <td>p-password-panel</td>
                                         <td>Container of password panel</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-password-meter</td>
+                                        <td>p-password-meter</td>
                                         <td>Meter element of password strength</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-password-info</td>
+                                        <td>p-password-info</td>
                                         <td>Text to display strength</td>
                                     </tr>
                                 </tbody>

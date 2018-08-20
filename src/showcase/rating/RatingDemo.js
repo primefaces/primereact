@@ -190,19 +190,19 @@ import {Rating} from 'primereact/rating';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-rating</td>
+                                        <td>p-rating</td>
                                         <td>Container element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-rating-star</td>
+                                        <td>p-rating-star</td>
                                         <td>Star element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-rating-star-on</td>
+                                        <td>p-rating-star-on</td>
                                         <td>Selected star element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-rating-cancel</td>
+                                        <td>p-rating-cancel</td>
                                         <td>Cancel icon.</td>
                                     </tr>
                                 </tbody>

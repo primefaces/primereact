@@ -274,23 +274,23 @@ import {TabView,TabPanel} from 'primereact/tabview';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-tabview</td>
+                            <td>p-tabview</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-tabview-nav</td>
+                            <td>p-tabview-nav</td>
                             <td>Container of headers.</td>
                         </tr>
                         <tr>
-                            <td>ui-tabview-selected</td>
+                            <td>p-tabview-selected</td>
                             <td>Selected tab header.</td>
                         </tr>
                         <tr>
-                            <td>ui-tabview-panels</td>
+                            <td>p-tabview-panels</td>
                             <td>Container panels.</td>
                         </tr>
                         <tr>
-                            <td>ui-tabview-panel</td>
+                            <td>p-tabview-panel</td>
                             <td>Content of a tab.</td>
                         </tr>
                     </tbody>

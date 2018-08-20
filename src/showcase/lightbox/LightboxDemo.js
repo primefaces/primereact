@@ -188,31 +188,31 @@ var images=[
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-lightbox</td>
+                                        <td>p-lightbox</td>
                                         <td>Container element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-lightbox-content</td>
+                                        <td>p-lightbox-content</td>
                                         <td>Content element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-lightbox-nav-right</td>
+                                        <td>p-lightbox-nav-right</td>
                                         <td>Element to navigate to next image.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-lightbox-nav-left</td>
+                                        <td>p-lightbox-nav-left</td>
                                         <td>Element to navigate to previous image.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-lightbox-caption</td>
+                                        <td>p-lightbox-caption</td>
                                         <td>Caption element.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-lightbox-caption-text</td>
+                                        <td>p-lightbox-caption-text</td>
                                         <td>Text of caption.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-lightbox-close</td>
+                                        <td>p-lightbox-close</td>
                                         <td>Close icon.</td>
                                     </tr>
                                 </tbody>

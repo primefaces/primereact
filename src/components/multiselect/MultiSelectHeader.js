@@ -49,8 +49,8 @@ export class MultiSelectHeader extends Component {
         
     render() {
         let filterElement;
-        let checkboxClassName = classNames('p-chkbox-box p-component', {'p-highlight': this.props.allChecked});
-        let checkboxIcon = classNames('p-chkbox-icon p-clickable', {'pi pi-check': this.props.allChecked});
+        let checkboxClassName = classNames('p-checkbox-box p-component', {'p-highlight': this.props.allChecked});
+        let checkboxIcon = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.allChecked});
         
         if(this.props.filter) {
             filterElement = <div className="p-multiselect-filter-container">
@@ -62,7 +62,7 @@ export class MultiSelectHeader extends Component {
         
         return (
                 <div className="p-multiselect-header">
-                    <div className="p-chkbox p-component" onClick={this.onToggleAll}>
+                    <div className="p-checkbox p-component" onClick={this.onToggleAll}>
                         <div className="p-hidden-accessible">
                             <input type="checkbox" readOnly={true} />
                         </div>

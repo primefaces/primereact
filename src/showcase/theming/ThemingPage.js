@@ -31,35 +31,35 @@ export class ThemingPage extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ui-widget</td>
+                                    <td>p-widget</td>
                                     <td>All PrimeReact components</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-widget-header</td>
+                                    <td>p-widget-header</td>
                                     <td>Header section of a component</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-widget-content</td>
+                                    <td>p-widget-content</td>
                                     <td>Content section of a component</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-state-default</td>
+                                    <td>p-state-default</td>
                                     <td>Default state of a clickable element</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-state-hover</td>
+                                    <td>p-state-hover</td>
                                     <td>Hover state of a clickable element like mouse over</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-state-active</td>
+                                    <td>p-state-active</td>
                                     <td>Active state of a clickable element like mouse press</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-state-highlight</td>
+                                    <td>p-state-highlight</td>
                                     <td>Highlighed elements</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-state-disabled</td>
+                                    <td>p-state-disabled</td>
                                     <td>Disabled elements</td>
                                 </tr>
                                 <tr>

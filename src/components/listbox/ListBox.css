@@ -39,7 +39,7 @@
     position: relative;
 }
 
-.p-listbox-header .p-chkbox {
+.p-listbox-header .p-checkbox {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;

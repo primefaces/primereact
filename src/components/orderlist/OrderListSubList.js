@@ -107,7 +107,7 @@ export class OrderListSubList extends Component {
         let listClassName = classNames('p-orderlist-list', {'p-corner-bottom': this.props.header, 'p-corner-all': !this.props.header});
 
         if (this.props.header) {
-            header = <div className="p-orderlist-caption p-corner-top">{this.props.header}</div>
+            header = <div className="p-orderlist-caption">{this.props.header}</div>
         }
         
         if (this.props.value) {

@@ -24,23 +24,23 @@ export class DataTableRowExpansionDemo extends Component {
     rowExpansionTemplate(data) {
         var src = "showcase/resources/demo/images/car/" + data.brand + ".png";
 
-        return  <div className="ui-g ui-fluid">
-                    <div className="ui-g-12 ui-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
+        return  <div className="p-g p-fluid">
+                    <div className="p-g-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
                         <img src={src} alt={data.brand}/>
                     </div>
-                     <div className="ui-g-12 ui-md-9">
-                       <div className="ui-g">
-                          <div className="ui-md-2">Vin: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
+                     <div className="p-g-12 p-md-9">
+                       <div className="p-g">
+                          <div className="p-md-2">Vin: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
 
-                          <div className="ui-md-2">Year: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
+                          <div className="p-md-2">Year: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
 
-                          <div className="ui-md-2">Brand: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
+                          <div className="p-md-2">Brand: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
 
-                          <div className="ui-md-2">Color: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
+                          <div className="p-md-2">Color: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
                        </div>
                     </div>
                 </div>;
@@ -111,23 +111,23 @@ export class DataTableRowExpansionDemo extends Component {
     rowExpansionTemplate(data) {
         var src = "showcase/resources/demo/images/car/" + data.brand + ".png";
 
-        return  <div className="ui-g ui-fluid">
-                    <div className="ui-g-12 ui-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
+        return  <div className="p-g p-fluid">
+                    <div className="p-g-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
                         <img src={src} alt={data.brand}/>
                     </div>
-                     <div className="ui-g-12 ui-md-9">
-                       <div className="ui-g">
-                          <div className="ui-md-2">Vin: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
+                     <div className="p-g-12 p-md-9">
+                       <div className="p-g">
+                          <div className="p-md-2">Vin: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
 
-                          <div className="ui-md-2">Year: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
+                          <div className="p-md-2">Year: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
 
-                          <div className="ui-md-2">Brand: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
+                          <div className="p-md-2">Brand: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
 
-                          <div className="ui-md-2">Color: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
+                          <div className="p-md-2">Color: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
                        </div>
                     </div>
                 </div>;

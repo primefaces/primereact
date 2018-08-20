@@ -51,17 +51,17 @@ export class TooltipDemo extends Component {
                     <h3 className="first">Multiple</h3>
                     <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition} />
 
-                    <div className="ui-g ui-fluid">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g p-fluid">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="username" placeholder="Right" />              
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="surname" placeholder="Top" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="age" placeholder="Bottom" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="email" placeholder="Left" />
                         </div>
                     </div>
@@ -252,15 +252,15 @@ import {Tooltip} from 'primereact/tooltip';
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ui-tooltip</td>
+                                    <td>p-tooltip</td>
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-tooltip-arrow</td>
+                                    <td>p-tooltip-arrow</td>
                                     <td>Arrow of the tooltip</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-tooltip-text</td>
+                                    <td>p-tooltip-text</td>
                                     <td>Text of the tooltip</td>
                                 </tr>
                             </tbody>
@@ -325,17 +325,17 @@ export class TooltipDemo extends Component {
                     <h3 className="first">Multiple</h3>
                     <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition} />
 
-                    <div className="ui-g ui-fluid">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g p-fluid">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="username" placeholder="Right" />              
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="surname" placeholder="Top" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="age" placeholder="Bottom" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <InputText id="email" placeholder="Left" />
                         </div>
                     </div>

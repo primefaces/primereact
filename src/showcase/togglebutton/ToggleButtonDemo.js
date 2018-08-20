@@ -178,15 +178,15 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-togglebutton</td>
+                            <td>p-togglebutton</td>
                             <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>ui-button-icon-left</td>
+                            <td>p-button-icon-left</td>
                             <td>Icon element.</td>
                         </tr>
                         <tr>
-                            <td>ui-button-text</td>
+                            <td>p-button-text</td>
                             <td>Label element.</td>
                         </tr>
                     </tbody>

@@ -30,10 +30,10 @@
     margin-left: -.5em;
     width: 1em;
 }
-.p-spinner-up {
+.p-spinner-button-up {
     top: 0;
 }
-.p-spinner-down {
+.p-spinner-button-down {
     bottom: 0;
 }
 

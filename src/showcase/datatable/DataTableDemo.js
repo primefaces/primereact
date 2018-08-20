@@ -1170,23 +1170,23 @@ export class DataTableRowExpansionDemo extends Component {
     rowExpansionTemplate(data) {
         var src = "showcase/resources/demo/images/car/" + data.brand + ".png";
 
-        return  <div className="ui-g ui-fluid">
-                    <div className="ui-g-12 ui-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
+        return  <div className="p-g p-fluid">
+                    <div className="p-g-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
                         <img src={src} alt={data.brand}/>
                     </div>
-                     <div className="ui-g-12 ui-md-9">
-                       <div className="ui-g">
-                          <div className="ui-md-2">Vin: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
+                     <div className="p-g-12 p-md-9">
+                       <div className="p-g">
+                          <div className="p-md-2">Vin: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
 
-                          <div className="ui-md-2">Year: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
+                          <div className="p-md-2">Year: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
 
-                          <div className="ui-md-2">Brand: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
+                          <div className="p-md-2">Brand: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
 
-                          <div className="ui-md-2">Color: </div>
-                          <div className="ui-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
+                          <div className="p-md-2">Color: </div>
+                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
                        </div>
                     </div>
                 </div>;
@@ -2053,55 +2053,55 @@ export class DataTableLazyDemo extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-datatable</td>
+                            <td>p-datatable</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-header</td>
+                            <td>p-datatable-header</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-footer</td>
+                            <td>p-datatable-footer</td>
                             <td>Footer section.</td>
                         </tr>
                         <tr>
-                            <td>ui-column-title</td>
+                            <td>p-column-title</td>
                             <td>Title of a column.</td>
                         </tr>
                         <tr>
-                            <td>ui-sortable-column</td>
+                            <td>p-sortable-column</td>
                             <td>Sortable column header.</td>
                         </tr>
                         <tr>
-                            <td>ui-column-filter</td>
+                            <td>p-column-filter</td>
                             <td>Filter element in header.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-scrollable-header</td>
+                            <td>p-datatable-scrollable-header</td>
                             <td>Container of header in a scrollable table.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-scrollable-body</td>
+                            <td>p-datatable-scrollable-body</td>
                             <td>Container of body in a scrollable table.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-scrollable-footer</td>
+                            <td>p-datatable-scrollable-footer</td>
                             <td>Container of footer in a scrollable table.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-responsive</td>
+                            <td>p-datatable-responsive</td>
                             <td>Container element of a responsive datatable.</td>
                         </tr>
                         <tr>
-                            <td>ui-datatable-emptymessage</td>
+                            <td>p-datatable-emptymessage</td>
                             <td>Cell containing the empty message.</td>
                         </tr>
                         <tr>
-                            <td>ui-rowgroup-header</td>
+                            <td>p-rowgroup-header</td>
                             <td>Header of a rowgroup.</td>
                         </tr>
                         <tr>
-                            <td>ui-rowgroup-footer</td>
+                            <td>p-rowgroup-footer</td>
                             <td>Footer of a rowgroup.</td>
                         </tr>
                     </tbody>

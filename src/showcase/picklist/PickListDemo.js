@@ -272,31 +272,31 @@ import {PickList} from 'primereact/picklist';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-picklist</td>
+                            <td>p-picklist</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-picklist-source-controls</td>
+                            <td>p-picklist-source-controls</td>
                             <td>Container of source list buttons.</td>
                         </tr>
                         <tr>
-                            <td>ui-picklist-target-controls</td>
+                            <td>p-picklist-target-controls</td>
                             <td>Container of target list buttons.</td>
                         </tr>
                         <tr>
-                            <td>ui-picklist-buttons</td>
+                            <td>p-picklist-buttons</td>
                             <td>Container of buttons.</td>
                         </tr>
                         <tr>
-                            <td>ui-picklist-listwrapper</td>
+                            <td>p-picklist-listwrapper</td>
                             <td>Parent of a list element.</td>
                         </tr>
                         <tr>
-                            <td>ui-picklist-list</td>
+                            <td>p-picklist-list</td>
                             <td>List element.</td>
                         </tr>
                         <tr>
-                            <td>ui-picklist-item</td>
+                            <td>p-picklist-item</td>
                             <td>An item in the list.</td>
                         </tr>
                     </tbody>

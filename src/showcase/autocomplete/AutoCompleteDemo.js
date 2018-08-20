@@ -93,7 +93,7 @@ export class AutoCompleteDemo extends Component {
                     <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
 
                     <h3>Multiple</h3>
-                    <span className="ui-fluid">
+                    <span className="p-fluid">
                         <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple}
                             minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => this.setState({countries: e.value})} />
                     </span>
@@ -495,31 +495,31 @@ brandTemplate(brand) {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-autocomplete</td>
+                                        <td>p-autocomplete</td>
                                         <td>Container element</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-autocomplete-panel</td>
+                                        <td>p-autocomplete-panel</td>
                                         <td>Overlay panel of suggestions.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-autocomplete-items</td>
+                                        <td>p-autocomplete-items</td>
                                         <td>List container of suggestions.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-autocomplete-item</td>
+                                        <td>p-autocomplete-item</td>
                                         <td>List item of a suggestion.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-autocomplete-token</td>
+                                        <td>p-autocomplete-token</td>
                                         <td>Element of a selected item in multiple mode.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-autocomplete-token-icon</td>
+                                        <td>p-autocomplete-token-icon</td>
                                         <td>Close icon element of a selected item in multiple mode.</td>
                                     </tr>
                                     <tr>
-                                        <td>ui-autocomplete-token-label</td>
+                                        <td>p-autocomplete-token-label</td>
                                         <td>Label of a selected item in multiple mode.</td>
                                     </tr>
                                 </tbody>
@@ -630,7 +630,7 @@ export class AutoCompleteDemo extends Component {
                     <span style={{ marginLeft: '50px' }}>Brand: {this.state.brand || 'none'}</span>
 
                     <h3>Multiple</h3>
-                    <span className="ui-fluid">
+                    <span className="p-fluid">
                         <AutoComplete value={this.state.countries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple}
                             minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => this.setState({countries: e.value})} />
                     </span>

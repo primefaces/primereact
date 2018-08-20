@@ -299,15 +299,15 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-accordion</td>
+                            <td>p-accordion</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-accordion-header</td>
+                            <td>p-accordion-header</td>
                             <td>Header of a tab.</td>
                         </tr>
                         <tr>
-                            <td>ui-accordion-content</td>
+                            <td>p-accordion-content</td>
                             <td>Container of a tab.</td>
                         </tr>
                     </tbody>

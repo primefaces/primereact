@@ -235,35 +235,35 @@ import {Paginator} from 'primereact/paginator';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-paginator</td>
+                            <td>p-paginator</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-first</td>
+                            <td>p-paginator-first</td>
                             <td>First page element.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-prev</td>
+                            <td>p-paginator-prev</td>
                             <td>Previous page element.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-pages</td>
+                            <td>p-paginator-pages</td>
                             <td>Container of page links.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-page</td>
+                            <td>p-paginator-page</td>
                             <td>A page link.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-next</td>
+                            <td>p-paginator-next</td>
                             <td>Next pge element.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-last</td>
+                            <td>p-paginator-last</td>
                             <td>Last page element.</td>
                         </tr>
                         <tr>
-                            <td>ui-paginator-rpp-options</td>
+                            <td>p-paginator-rpp-options</td>
                             <td>Rows per page dropdown.</td>
                         </tr>
                     </tbody>

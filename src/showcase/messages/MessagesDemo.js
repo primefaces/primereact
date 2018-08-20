@@ -66,47 +66,47 @@ export class MessagesDemo extends Component {
                     <Messages ref={(el) => this.messages = el} />
 
                     <h3 style={{marginTop: 0}}>Severities</h3>
-                    <div className="ui-g ui-fluid">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g p-fluid">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         </div>
                     </div>
 
                     <h3>Options</h3>
-                    <div className="ui-g ui-fluid">
-                        <div className="ui-g-12 ui-md-4">
+                    <div className="p-g p-fluid">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
                         </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="info" text="PrimeReact Rocks" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="success" text="Record Saved" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="warn" text="Are you sure?" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="error" text="Field is required" />
                         </div>
                     </div>
@@ -441,39 +441,39 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-messages</td>
+                            <td>p-messages</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-info</td>
+                            <td>p-messages-info</td>
                             <td>Container element when displaying info messages.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-warn</td>
+                            <td>p-messages-warn</td>
                             <td>Container element when displaying warning messages.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-error</td>
+                            <td>p-messages-error</td>
                             <td>Container element when displaying error messages.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-success</td>
+                            <td>p-messages-success</td>
                             <td>Container element when displaying success messages.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-close</td>
+                            <td>p-messages-close</td>
                             <td>Close icon.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-icon</td>
+                            <td>p-messages-icon</td>
                             <td>Severity icon.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-summary</td>
+                            <td>p-messages-summary</td>
                             <td>Summary of a message.</td>
                         </tr>
                         <tr>
-                            <td>ui-messages-detail</td>
+                            <td>p-messages-detail</td>
                             <td>Detail of a message.</td>
                         </tr>
                     </tbody>
@@ -558,47 +558,47 @@ export class MessagesDemo extends Component {
                     <Messages ref={(el) => this.messages = el} />
 
                     <h3>Severities</h3>
-                    <div className="ui-g ui-fluid">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g p-fluid">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="ui-button-danger" />
                         </div>
                     </div>
 
                     <h3>Options</h3>
-                    <div className="ui-g ui-fluid">
-                        <div className="ui-g-12 ui-md-4">
+                    <div className="p-g p-fluid">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="ui-g-12 ui-md-4">
+                        <div className="p-g-12 p-md-4">
                             <Button onClick={this.clear} icon="pi pi-times" style={{ float: 'right' }} label="Clear" />
                         </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div className="ui-g">
-                        <div className="ui-g-12 ui-md-3">
+                    <div className="p-g">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="info" text="PrimeReact Rocks" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="success" text="Record Saved" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="warn" text="Are you sure?" />
                         </div>
-                        <div className="ui-g-12 ui-md-3">
+                        <div className="p-g-12 p-md-3">
                             <Message severity="error" text="Field is required" />
                         </div>
                     </div>

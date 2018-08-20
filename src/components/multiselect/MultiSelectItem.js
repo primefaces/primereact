@@ -38,13 +38,13 @@ export class MultiSelectItem extends Component {
     
     render() {
         let className = classNames('p-multiselect-item', {'p-highlight': this.props.selected});
-        let checkboxClassName = classNames('p-chkbox-box p-component', {'p-highlight': this.props.selected});
-        let checkboxIcon = classNames('p-chkbox-icon p-c', {'pi pi-check': this.props.selected});
+        let checkboxClassName = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected});
+        let checkboxIcon = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.selected});
         let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
         
         return (
             <li className={className} onClick={this.onClick}>
-                <div className="p-chkbox p-component">
+                <div className="p-checkbox p-component">
                     <div className="p-hidden-accessible">
                         <input readOnly="readonly" type="checkbox" />
                     </div>

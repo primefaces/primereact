@@ -457,39 +457,39 @@ render() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-tree</td>
+                            <td>p-tree</td>
                             <td>Main container element</td>
                         </tr>
                         <tr>
-                            <td>ui-tree-horizontal</td>
+                            <td>p-tree-horizontal</td>
                             <td>Main container element in horizontal mode</td>
                         </tr>
                         <tr>
-                            <td>ui-tree-container</td>
+                            <td>p-tree-container</td>
                             <td>Container of nodes</td>
                         </tr>
                         <tr>
-                            <td>ui-treenode</td>
+                            <td>p-treenode</td>
                             <td>A treenode element</td>
                         </tr>
                         <tr>
-                            <td>ui-treenode-content</td>
+                            <td>p-treenode-content</td>
                             <td>Content of a treenode</td>
                         </tr>
                         <tr>
-                            <td>ui-treenode-toggler</td>
+                            <td>p-treenode-toggler</td>
                             <td>Toggle icon</td>
                         </tr>
                         <tr>
-                            <td>ui-treenode-icon</td>
+                            <td>p-treenode-icon</td>
                             <td>Icon of a treenode</td>
                         </tr>
                         <tr>
-                            <td>ui-treenode-label</td>
+                            <td>p-treenode-label</td>
                             <td>Label of a treenode</td>
                         </tr>
                         <tr>
-                            <td>ui-treenode-children</td>
+                            <td>p-treenode-children</td>
                             <td>Container element for node children</td>
                         </tr>
                     </tbody>

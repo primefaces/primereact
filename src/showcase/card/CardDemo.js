@@ -175,23 +175,23 @@ const footer = <span>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>ui-card</td>
+                                    <td>p-card</td>
                                     <td>Container element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-card-title</td>
+                                    <td>p-card-title</td>
                                     <td>Title element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-card-subtitle</td>
+                                    <td>p-card-subtitle</td>
                                     <td>Subtitle element.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-card-content</td>
+                                    <td>p-card-content</td>
                                     <td>Content of the card.</td>
                                 </tr>
                                 <tr>
-                                    <td>ui-card-footer</td>
+                                    <td>p-card-footer</td>
                                     <td>Footer of the card.</td>
                                 </tr>
                                 </tbody>

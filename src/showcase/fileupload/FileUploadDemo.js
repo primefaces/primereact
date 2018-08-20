@@ -344,15 +344,15 @@ import {FileUpload} from 'primereact/fileupload';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-fileupload</td>
+                            <td>p-fileupload</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-fileupload-buttonbar</td>
+                            <td>p-fileupload-buttonbar</td>
                             <td>Header containing the buttons.</td>
                         </tr>
                         <tr>
-                            <td>ui-fileupload-content</td>
+                            <td>p-fileupload-content</td>
                             <td>Content section.</td>
                         </tr>
                     </tbody>

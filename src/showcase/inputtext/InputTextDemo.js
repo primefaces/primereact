@@ -35,7 +35,7 @@ export class InputTextDemo extends Component {
                     <span style={{marginLeft:'.5em'}}>{this.state.value1}</span>
 
                     <h3>Floating Label</h3>
-                    <span className="ui-float-label">
+                    <span className="p-float-label">
                         <InputText id="float-input" type="text" size="30" value={this.state.value2} onChange={(e) => this.setState({value2: e.target.value})} />
                         <label htmlFor="float-input">Username</label>
                     </span>
@@ -135,7 +135,7 @@ import {InputText} from 'primereact/inputtext';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ui-inputtext</td>
+                                        <td>p-inputtext</td>
                                         <td>Input element</td>
                                     </tr>
                                 </tbody>
@@ -187,7 +187,7 @@ export class InputTextDemo extends Component {
                         <span style={{marginLeft:'.5em'}}>{this.state.value1}</span>
 
                         <h3>Floating Label</h3>
-                        <span className="ui-float-label">
+                        <span className="p-float-label">
                             <InputText id="float-input" type="text" size="30" value={this.state.value2} onChange={(e) => this.setState({value2: e.target.value})} />
                             <label htmlFor="float-input">Username</label>
                         </span>

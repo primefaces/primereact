@@ -63,9 +63,9 @@ export class TriStateCheckbox extends Component {
     }
 
     render() {
-        let containerClass = classNames('p-chkbox p-tristatecheckbox p-component', this.props.className);
-        let boxClass = classNames('p-chkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null});
-        let iconClass = classNames('p-chkbox-icon p-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
+        let containerClass = classNames('p-checkbox p-tristatecheckbox p-component', this.props.className);
+        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null});
+        let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
 
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>

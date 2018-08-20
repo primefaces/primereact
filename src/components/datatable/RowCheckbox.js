@@ -30,10 +30,10 @@ export class RowCheckbox extends Component {
     }
     
     render() {
-        let className = classNames('p-chkbox-box p-component', {'p-highlight': this.props.selected});
-        let iconClassName = classNames('p-chkbox-icon p-clickable', {'pi pi-check': this.props.selected});
+        let className = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected});
+        let iconClassName = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.selected});
         
-        return <div className="p-chkbox p-component">
+        return <div className="p-checkbox p-component">
                  <div className="p-hidden-accessible">
                     <input type="checkbox" />
                 </div>

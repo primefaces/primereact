@@ -177,15 +177,15 @@ import {InputSwitch} from 'primereact/inputswitch';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>ui-inputswitch</td>
+                            <td>p-inputswitch</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>ui-inputswitch-checked</td>
+                            <td>p-inputswitch-checked</td>
                             <td>Container element in active state.</td>
                         </tr>
                         <tr>
-                            <td>ui-inputswitch-slider</td>
+                            <td>p-inputswitch-slider</td>
                             <td>Slider element behind the handle.</td>
                         </tr>
                     </tbody>
