@@ -108,7 +108,7 @@ export class TabView extends Component {
         const headers = this.renderTabHeaders();
             
         return (
-            <ul className="p-tabview-nav p-helper-reset p-helper-clearfix" role="tablist">
+            <ul className="p-tabview-nav p-reset" role="tablist">
                 {headers}
             </ul>
         );
@@ -117,7 +117,7 @@ export class TabView extends Component {
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
             const selected = this.isSelected(index);
-            const className = classNames(tab.props.contentClassName, 'p-tabview-panel', {'p-helper-hidden': !selected});
+            const className = classNames(tab.props.contentClassName, 'p-tabview-panel', {'p-hidden': !selected});
             const id = this.id + '_content_' + index;
             const ariaLabelledBy = this.id + '_header_' + index;
 

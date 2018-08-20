@@ -92,7 +92,7 @@ export class TabMenu extends Component {
 
             return (
                 <div id={this.props.id} className={className} style={this.props.style}>
-                    <ul className="p-tabmenu-nav p-helper-reset p-helper-clearfix" role="tablist">
+                    <ul className="p-tabmenu-nav p-reset" role="tablist">
                         {items}
                     </ul>
                 </div>

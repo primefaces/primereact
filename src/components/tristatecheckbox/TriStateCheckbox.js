@@ -69,7 +69,7 @@ export class TriStateCheckbox extends Component {
 
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
-                <div className="p-helper-hidden-accessible">
+                <div className="p-hidden-accessible">
                     <input ref={(el) => this.inputEL = el} type="checkbox" id={this.props.inputId} name={this.props.name} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

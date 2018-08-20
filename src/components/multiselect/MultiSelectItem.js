@@ -45,7 +45,7 @@ export class MultiSelectItem extends Component {
         return (
             <li className={className} onClick={this.onClick}>
                 <div className="p-chkbox p-component">
-                    <div className="p-helper-hidden-accessible">
+                    <div className="p-hidden-accessible">
                         <input readOnly="readonly" type="checkbox" />
                     </div>
                     <div className={checkboxClassName}>

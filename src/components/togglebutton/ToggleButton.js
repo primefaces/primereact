@@ -60,7 +60,7 @@ export class ToggleButton extends Component {
 
         return (
            <div id={this.props.id} className={className} style={this.props.style} onClick={this.toggle}>
-                <div className="p-helper-hidden-accessible">
+                <div className="p-hidden-accessible">
                     <input type="checkbox"/>
                 </div>
                 {(this.props.onIcon && this.props.offIcon) && <span className={iconStyleClass}></span>}

@@ -218,7 +218,7 @@ export class SlideMenu extends Component {
     }
 
     renderBackward() {
-        const className = classNames('p-slidemenu-backward', {'p-helper-hidden': this.state.level === 0});
+        const className = classNames('p-slidemenu-backward', {'p-hidden': this.state.level === 0});
 
         return (
             <div ref={el => this.backward = el} className={className} onClick={this.navigateBack}>

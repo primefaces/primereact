@@ -55,7 +55,7 @@ export class SelectButtonItem extends Component {
         return (
             <div ref={(el) => this.el = el} className={className} onClick={this.onClick}>
                 <span className="p-button-text p-c">{this.props.label}</span>
-                <div className="p-helper-hidden-accessible">
+                <div className="p-hidden-accessible">
                     <input type="checkbox" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} 
                         tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
                 </div>

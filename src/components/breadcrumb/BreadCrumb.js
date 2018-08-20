@@ -95,7 +95,7 @@ export class BreadCrumb extends Component {
     }
 
     render() {
-        const className=classNames('p-breadcrumb p-component p-helper-clearfix', this.props.className);
+        const className=classNames('p-breadcrumb p-component', this.props.className);
         const home = this.renderHome();
         const items = this.renderMenuitems();
         const separator = this.renderSeparator();

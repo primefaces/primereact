@@ -151,10 +151,10 @@ export class Lightbox extends Component {
         var contentText,contentFrame;
 
         var leftButton=classNames('p-lightbox-nav-left p-corner-right',
-            {'p-helper-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
+            {'p-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
         var rightButton=classNames('p-lightbox-nav-right p-corner-left',
-            {'p-helper-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
-        var containerClassName = classNames('p-lightbox p-component p-helper-hidden p-shadow', {'p-lightbox-loading':this.state.loading});
+            {'p-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
+        var containerClassName = classNames('p-lightbox p-component p-hidden p-shadow', {'p-lightbox-loading':this.state.loading});
 
         if(this.props.type==='images'){
             images=<div style={this.props.style} className={this.props.className}>{

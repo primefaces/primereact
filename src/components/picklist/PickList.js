@@ -181,7 +181,7 @@ export class PickList extends Component {
     }
 
     render() {
-        let className = classNames('p-picklist p-component p-helper-clearfix', this.props.className, {
+        let className = classNames('p-picklist p-component', this.props.className, {
             'p-picklist-responsive': this.props.responsive
         });
         

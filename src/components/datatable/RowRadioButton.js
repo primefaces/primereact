@@ -35,7 +35,7 @@ export class RowRadioButton extends Component {
         let iconClassName = classNames('p-radiobutton-icon p-clickable', {'pi pi-circle-on': this.props.selected});
 
         return <div className="p-radiobutton p-component">
-                    <div className="p-helper-hidden-accessible">
+                    <div className="p-hidden-accessible">
                         <input type="radio" />
                     </div>
                     <div className={className} onClick={this.onClick}>

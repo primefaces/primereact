@@ -61,9 +61,9 @@ export class MultiSelectHeader extends Component {
         }
         
         return (
-                <div className="p-multiselect-header p-helper-clearfix">
+                <div className="p-multiselect-header">
                     <div className="p-chkbox p-component" onClick={this.onToggleAll}>
-                        <div className="p-helper-hidden-accessible">
+                        <div className="p-hidden-accessible">
                             <input type="checkbox" readOnly={true} />
                         </div>
                         <div className={checkboxClassName}>

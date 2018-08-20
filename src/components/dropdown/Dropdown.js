@@ -390,7 +390,7 @@ export class Dropdown extends Component {
                 return <option key={this.getOptionLabel(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
             });
             
-            return (<div className="p-helper-hidden-accessible">
+            return (<div className="p-hidden-accessible">
                         <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
                             {options}
                         </select>
@@ -402,7 +402,7 @@ export class Dropdown extends Component {
     }
     
     renderKeyboardHelper() {
-        return <div className="p-helper-hidden-accessible">
+        return <div className="p-hidden-accessible">
                     <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                         disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
@@ -525,7 +525,7 @@ export class Dropdown extends Component {
     }
 
     render() {
-        let className = classNames('p-dropdown p-component p-helper-clearfix', this.props.className, {'p-disabled': this.props.disabled, 
+        let className = classNames('p-dropdown p-component', this.props.className, {'p-disabled': this.props.disabled, 
                                     'p-dropdown-clearable': this.props.showClear && !this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;

@@ -170,7 +170,7 @@ export class Accordion extends Component {
     }
          
     render() {
-        const className = classNames('p-accordion p-component p-helper-reset', this.props.className);
+        const className = classNames('p-accordion p-component p-reset', this.props.className);
         const tabs = this.renderTabs();
 
         return (

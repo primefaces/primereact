@@ -134,7 +134,7 @@ export class Password extends Component {
 
     createPanel() {
         this.panel = document.createElement('div');
-        this.panel.className = 'p-password-panel p-component p-highlight p-helper-hidden p-password-panel-overlay p-input-overlay';
+        this.panel.className = 'p-password-panel p-component p-highlight p-hidden p-password-panel-overlay p-input-overlay';
         this.meter = document.createElement('div');
         this.meter.className = 'p-password-meter';
         this.info = document.createElement('div');

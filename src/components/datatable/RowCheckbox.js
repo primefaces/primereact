@@ -34,7 +34,7 @@ export class RowCheckbox extends Component {
         let iconClassName = classNames('p-chkbox-icon p-clickable', {'pi pi-check': this.props.selected});
         
         return <div className="p-chkbox p-component">
-                 <div className="p-helper-hidden-accessible">
+                 <div className="p-hidden-accessible">
                     <input type="checkbox" />
                 </div>
                 <div className={className} onClick={this.onClick}>

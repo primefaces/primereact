@@ -327,7 +327,7 @@ export class MultiSelect extends Component {
 
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
-                <div className="p-helper-hidden-accessible">
+                <div className="p-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={(el) => {this.focusInput = el;}}/>
                 </div>
                 <div className="p-multiselect-label-container" title="Choose">

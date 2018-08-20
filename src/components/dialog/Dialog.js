@@ -526,7 +526,7 @@ export class Dialog extends Component {
             let maximizeIcon = this.renderMaximizeIcon();
 
             return (
-                <div ref={(el) => { this.headerElement = el; }} className="p-dialog-titlebar p-helper-clearfix p-corner-top" onMouseDown={this.initDrag}>
+                <div ref={(el) => { this.headerElement = el; }} className="p-dialog-titlebar p-corner-top" onMouseDown={this.initDrag}>
                     <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
                     {closeIcon}
                     {maximizeIcon}

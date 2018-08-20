@@ -74,7 +74,7 @@ export class Checkbox extends Component {
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
-                <div className="p-helper-hidden-accessible">
+                <div className="p-hidden-accessible">
                     <input type="checkbox" ref={(el) => { this.input = el; }} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

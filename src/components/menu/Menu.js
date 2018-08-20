@@ -209,12 +209,12 @@ export class Menu extends Component {
   
     render() {
         if (this.props.model) {
-            const className = classNames('p-menu p-component p-helper-clearfix', this.props.className, {'p-menu-dynamic p-menu-overlay p-shadow': this.props.popup});
+            const className = classNames('p-menu p-component', this.props.className, {'p-menu-dynamic p-menu-overlay p-shadow': this.props.popup});
             const menuitems = this.renderMenu();
 
             return (
                 <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
-                    <ul className="p-menu-list p-helper-reset">
+                    <ul className="p-menu-list p-reset">
                         {menuitems}
                     </ul>
                 </div>

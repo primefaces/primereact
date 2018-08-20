@@ -72,7 +72,7 @@ export class RadioButton extends Component {
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
-                <div className="p-helper-hidden-accessible">
+                <div className="p-hidden-accessible">
                     <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

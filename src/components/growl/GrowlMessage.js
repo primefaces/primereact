@@ -87,7 +87,7 @@ export class GrowlMessage extends Component {
 
         return (
             <div ref={(el) => { this.element = el; }} className={className} aria-live="polite" onClick={this.onClick}>
-                <div className="p-growl-item p-helper-clearfix">
+                <div className="p-growl-item">
                     {closeIcon}
                     <span className={iconClassName}></span>
                     <div className="p-growl-message">

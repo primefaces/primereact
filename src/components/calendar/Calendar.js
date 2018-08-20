@@ -1610,7 +1610,7 @@ export class Calendar extends Component {
 
         return (
             <div key={monthMetaData.month} className="p-datepicker-group">
-                <div className="p-datepicker-header p-helper-clearfix">
+                <div className="p-datepicker-header">
                     {backwardNavigator}
                     {forwardNavigator}
                     {title}
@@ -1668,7 +1668,7 @@ export class Calendar extends Component {
         
         return (
             <React.Fragment>
-                <div className="p-datepicker-header p-helper-clearfix">
+                <div className="p-datepicker-header">
                     {backwardNavigator}
                     {forwardNavigator}
                     <div className="p-datepicker-title">
@@ -1873,7 +1873,7 @@ export class Calendar extends Component {
             'p-calendar-timeonly': this.props.timeOnly,
             'p-inputwrapper-filled': this.props.value
         });
-        const panelClassName = classNames('p-datepicker p-component p-helper-clearfix', this.props.panelClassName, {
+        const panelClassName = classNames('p-datepicker p-component', this.props.panelClassName, {
             'p-datepicker-inline': this.props.inline,
             'p-input-overlay': !this.props.inline,
             'p-shadow': !this.props.inline,
