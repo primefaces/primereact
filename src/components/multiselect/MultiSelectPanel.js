@@ -20,11 +20,11 @@ export class MultiSelectPanel extends Component {
 
     renderElement() {
         return (
-            <div className="ui-multiselect-panel ui-widget-content ui-corner-all ui-helper-hidden ui-input-overlay ui-shadow"
+            <div className="p-multiselect-panel p-helper-hidden p-input-overlay p-shadow"
                 ref={(el) => this.element = el} onClick={this.props.onClick}>
                 {this.props.header}
-                <div className="ui-multiselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight }}>
-                    <ul className="ui-multiselect-items ui-multiselect-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
+                <div className="p-multiselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight }}>
+                    <ul className="p-multiselect-items p-multiselect-list p-component p-helper-reset">
                         {this.props.children}
                     </ul>
                 </div>

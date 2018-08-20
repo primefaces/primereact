@@ -60,21 +60,21 @@ export class Checkbox extends Component {
     }
 
     onFocus(e) {
-        DomHandler.addClass(this.box, 'ui-state-focus');
+        DomHandler.addClass(this.box, 'p-focus');
     }
 
     onBlur(e) {
-        DomHandler.removeClass(this.box, 'ui-state-focus');
+        DomHandler.removeClass(this.box, 'p-focus');
     }
 
     render() {
-        let containerClass = classNames('ui-chkbox ui-widget', this.props.className);
-        let boxClass = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked, 'ui-state-disabled': this.props.disabled});
-        let iconClass = classNames('ui-chkbox-icon ui-c', {'pi pi-check': this.props.checked});
+        let containerClass = classNames('p-chkbox p-component', this.props.className);
+        let boxClass = classNames('p-chkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled});
+        let iconClass = classNames('p-chkbox-icon p-c', {'pi pi-check': this.props.checked});
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
-                <div className="ui-helper-hidden-accessible">
+                <div className="p-helper-hidden-accessible">
                     <input type="checkbox" ref={(el) => { this.input = el; }} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

@@ -190,15 +190,15 @@ export class DataScroller extends Component {
     }
 
     render() {
-        var className = classNames('ui-datascroller ui-widget', this.props.className, {
-            'ui-datascroller-inline': this.props.inline
+        var className = classNames('p-datascroller p-component', this.props.className, {
+            'p-datascroller-inline': this.props.inline
         });
 
-        var header =this.props.header && <div className="ui-datascroller-header ui-widget-header ui-corner-top"> {this.props.header}</div>,
-            footer = this.props.footer && <div className="ui-datascroller-footer ui-widget-header ui-corner-bottom"> {this.props.footer} </div>,
+        var header =this.props.header && <div className="p-datascroller-header p-corner-top"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="p-datascroller-footer p-corner-bottom"> {this.props.footer} </div>,
             content = (
-                <div ref={(el) => this.contentElement = ReactDOM.findDOMNode(el)} className="ui-datascroller-content ui-widget-content" style={{'maxHeight': this.props.scrollHeight}}>
-                    <ul className="ui-datascroller-list">
+                <div ref={(el) => this.contentElement = ReactDOM.findDOMNode(el)} className="p-datascroller-content" style={{'maxHeight': this.props.scrollHeight}}>
+                    <ul className="p-datascroller-list">
                     {
                         this.state.dataToRender && this.state.dataToRender.map((val, i) => {
                             var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(val) : val;

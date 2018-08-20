@@ -24,7 +24,7 @@ export class TableFooter extends Component {
         }
 
         return (
-            <tfoot className="ui-datatable-tfoot">
+            <tfoot className="p-datatable-tfoot">
                 {content}
             </tfoot>
         );

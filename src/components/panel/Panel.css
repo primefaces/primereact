@@ -1,12 +1,12 @@
-.ui-panel {
+.p-panel {
 	padding: 0.2em;
 }
 
-.ui-panel .ui-panel-titlebar {
+.p-panel .p-panel-titlebar {
 	padding: .5em .75em;
 }
 
-.ui-panel .ui-panel-titlebar-icon {
+.p-panel .p-panel-titlebar-icon {
 	float: right;
     cursor: pointer;
     height: 1.25em;
@@ -15,34 +15,34 @@
     text-align: center;
 }
 
-.ui-panel .ui-panel-titlebar-icon span {
+.p-panel .p-panel-titlebar-icon span {
     line-height: inherit;
     margin-top: -1px;
 }
 
-.ui-panel .ui-panel-content {
+.p-panel .p-panel-content {
 	border: 0;
     background: none;
     padding: .5em .75em;
 }
 
-.ui-panel .ui-panel-footer {
+.p-panel .p-panel-footer {
 	border-width: 1px 0 0;
 	padding: .25em .5em;
 	text-align:left;
 }
 
-.ui-panel-content-wrapper-collapsed {
+.p-panel-content-wrapper-collapsed {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 }
 
-.ui-panel-content-wrapper-expanded {
+.p-panel-content-wrapper-expanded {
     max-height: 1000px;
     transition: max-height 1s ease-in-out;
 }
 
-.ui-panel-content-wrapper-expanding {
+.p-panel-content-wrapper-expanding {
     overflow: hidden;
 }

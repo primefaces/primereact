@@ -1,15 +1,15 @@
-.ui-overlaypanel {
+.p-overlaypanel {
     padding: 0;
     margin: 0;
     position: absolute;
     display: none;
 }
 
-.ui-overlaypanel-content {
+.p-overlaypanel-content {
     padding: 0.5em 1em;
 }
 
-.ui-overlaypanel-close {
+.p-overlaypanel-close {
     position: absolute;
     top: -1em;
     right: -1em;
@@ -22,6 +22,6 @@
     border-radius: 100%;
 }
 
-.ui-overlaypanel-close-icon {
+.p-overlaypanel-close-icon {
     line-height: inherit;
 }

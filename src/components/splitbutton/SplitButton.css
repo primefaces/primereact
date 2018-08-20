@@ -1,36 +1,36 @@
-.ui-splitbutton {
+.p-splitbutton {
     position: relative;
     display: inline-block;
     zoom: 1;
 }
 
-.ui-splitbutton .ui-button.ui-splitbutton-menubutton {
+.p-splitbutton .p-button.p-splitbutton-menubutton {
     width: 2em;
     vertical-align: top;
 }
 
-.ui-splitbutton.ui-state-disabled button {
+.p-splitbutton.p-disabled button {
     cursor: default;
 }
 
-.ui-fluid .ui-splitbutton {
+.p-fluid .p-splitbutton {
     width: 100%;
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
 }
 
-.ui-fluid .ui-splitbutton .ui-button:first-child {
+.p-fluid .p-splitbutton .p-button:first-child {
     width: calc(100% - 2em);
 }
 
-.ui-fluid .ui-splitbutton .ui-button.ui-splitbutton-menubutton {
+.p-fluid .p-splitbutton .p-button.p-splitbutton-menubutton {
     width: 2em;
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
 }
 
-.ui-splitbutton.ui-button-secondary .ui-button.ui-state-default:first-child {
+.p-splitbutton.p-button-secondary .p-button:first-child {
     border-right: 0 none;
 }

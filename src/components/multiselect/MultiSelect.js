@@ -134,8 +134,8 @@ export class MultiSelect extends Component {
             this.panel.element.style.display = 'block';
 
             setTimeout(() => {
-                DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
-                DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+                DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
+                DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
             }, 1);
 
             this.alignPanel();            
@@ -144,14 +144,14 @@ export class MultiSelect extends Component {
     }
 
     hide() {
-        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
+        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
         this.unbindDocumentClickListener();
         this.clearClickState();
 
         setTimeout(() => {
             this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 150);
     }
 
@@ -226,11 +226,11 @@ export class MultiSelect extends Component {
     }
 
     onFocus() {
-        DomHandler.addClass(this.container, 'ui-state-focus');
+        DomHandler.addClass(this.container, 'p-focus');
     }
     
     onBlur() {
-        DomHandler.removeClass(this.container, 'ui-state-focus');
+        DomHandler.removeClass(this.container, 'p-focus');
     }
     
     bindDocumentClickListener() {
@@ -304,8 +304,8 @@ export class MultiSelect extends Component {
     }
 
     render() {
-        let className = classNames('ui-multiselect ui-widget ui-state-default ui-corner-all', this.props.className, {
-            'ui-state-disabled': this.props.disabled
+        let className = classNames('p-multiselect p-component', this.props.className, {
+            'p-disabled': this.props.disabled
         });
         let label = this.getLabel();
         let items = this.props.options;
@@ -327,14 +327,14 @@ export class MultiSelect extends Component {
 
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
-                <div className="ui-helper-hidden-accessible">
+                <div className="p-helper-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={(el) => {this.focusInput = el;}}/>
                 </div>
-                <div className="ui-multiselect-label-container" title="Choose">
-                    <label className="ui-multiselect-label ui-corner-all">{label}</label>
+                <div className="p-multiselect-label-container" title="Choose">
+                    <label className="p-multiselect-label">{label}</label>
                 </div>
-                <div className="ui-multiselect-trigger ui-state-default ui-corner-right">
-                    <span className="ui-multiselect-trigger-icon pi pi-caret-down ui-c"></span>
+                <div className="p-multiselect-trigger p-corner-right">
+                    <span className="p-multiselect-trigger-icon pi pi-caret-down p-c"></span>
                 </div>
                 <MultiSelectPanel ref={(el) => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     scrollHeight={this.props.scrollHeight}>

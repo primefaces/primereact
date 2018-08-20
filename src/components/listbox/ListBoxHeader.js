@@ -32,10 +32,10 @@ export class ListBoxHeader extends Component {
         
     render() {        
         return (
-                <div className="ui-widget-header ui-corner-all ui-listbox-header ui-helper-clearfix">
-                    <div className="ui-listbox-filter-container">
+                <div className="p-listbox-header p-helper-clearfix">
+                    <div className="p-listbox-filter-container">
                         <InputText type="text" role="textbox" value={this.props.filter} onChange={this.onFilter} disabled={this.props.disabled} />
-                        <span className="ui-listbox-filter-icon pi pi-search"></span>
+                        <span className="p-listbox-filter-icon pi pi-search"></span>
                     </div>
                 </div>
         );

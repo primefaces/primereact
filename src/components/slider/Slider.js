@@ -311,28 +311,28 @@ export class Slider extends Component {
     }
 
     render() {
-        var className = classNames('ui-slider ui-widget ui-widget-content ui-corner-all', this.props.className, {
-            'ui-state-disabled': this.props.disabled,
-            'ui-slider-horizontal': this.props.orientation === 'horizontal',
-            'ui-slider-vertical': this.props.orientation === 'vertical',
-            'ui-slider-animate': this.props.animate
+        var className = classNames('p-slider p-component', this.props.className, {
+            'p-disabled': this.props.disabled,
+            'p-slider-horizontal': this.props.orientation === 'horizontal',
+            'p-slider-vertical': this.props.orientation === 'vertical',
+            'p-slider-animate': this.props.animate
         });
 
-        var verticalRange = this.props.orientation === 'vertical' && <span className="ui-slider-range ui-slider-range-min ui-widget-header ui-corner-all" style={{ 'height': this.handleValue + '%' }}></span>;
+        var verticalRange = this.props.orientation === 'vertical' && <span className="p-slider-range p-slider-range-min" style={{ 'height': this.handleValue + '%' }}></span>;
         if (this.props.range) {
-            var leftHandleClass = classNames('ui-slider-handle ui-state-default ui-corner-all', {
-                'ui-slider-handle-active': (this.props.handleIndex === 0)
+            var leftHandleClass = classNames('p-slider-handle', {
+                'p-slider-handle-active': (this.props.handleIndex === 0)
             }),
-            rightHandleClass = classNames('ui-slider-handle ui-state-default ui-corner-all', {
-                'ui-slider-handle-active': (this.props.handleIndex === 1)
+            rightHandleClass = classNames('p-slider-handle', {
+                'p-slider-handle-active': (this.props.handleIndex === 1)
             });
 
-            var middleRange = <span className="ui-slider-range ui-widget-header ui-corner-all" style={{ 'left': this.handleValues[0] + '%', width: (this.handleValues[1] - this.handleValues[0] + '%') }}></span>
+            var middleRange = <span className="p-slider-range" style={{ 'left': this.handleValues[0] + '%', width: (this.handleValues[1] - this.handleValues[0] + '%') }}></span>
             var leftHandle = <span onMouseDown={(e) => this.onMouseDown(e, 0)} onTouchStart={(e) => this.onTouchStart(e, 0)} onTouchMove={(e) => this.onTouchMove(e, 0)} className={leftHandleClass} style={{ 'left': this.handleValues[0] + '%' }}></span>
             var rightHandle = <span onMouseDown={(e) => this.onMouseDown(e, 1)} onTouchStart={(e) => this.onTouchStart(e, 1)} onTouchMove={(e) => this.onTouchMove(e, 1)} className={rightHandleClass} style={{ 'left': this.handleValues[1] + '%' }}></span>
         }
         else {
-            var handle = <span className="ui-slider-handle ui-state-default ui-corner-all" onMouseDown={this.onMouseDown} onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove}
+            var handle = <span className="p-slider-handle" onMouseDown={this.onMouseDown} onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove}
                         style={{ 'left': this.props.orientation === 'horizontal' ? this.handleValue + '%' : null, 'bottom': this.props.orientation === 'vertical' ? this.handleValue + '%' : null }}></span>
         }
 

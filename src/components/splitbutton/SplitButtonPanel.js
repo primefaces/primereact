@@ -18,11 +18,11 @@ export class SplitButtonPanel extends Component {
     };
 
     renderElement() {
-        let className = classNames('ui-menu ui-menu-dynamic ui-widget ui-widget-content ui-corner-all ui-helper-clearfix ui-shadow', this.props.menuClassName);
+        let className = classNames('p-menu p-menu-dynamic p-component p-helper-clearfix p-shadow', this.props.menuClassName);
 
         return (
             <div className={className} style={this.props.menuStyle} ref={(el) => { this.element = el; }}>
-                <ul className="ui-menu-list ui-helper-reset">
+                <ul className="p-menu-list p-helper-reset">
                     {this.props.children}
                 </ul>
             </div>

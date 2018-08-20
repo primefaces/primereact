@@ -60,7 +60,7 @@ export class GrowlMessage extends Component {
     renderCloseIcon() {
         if(this.props.message.closable !== false) {
             return (
-                <a className="ui-growl-icon-close pi pi-times" onClick={this.onClose}><span></span></a>
+                <a className="p-growl-icon-close pi pi-times" onClick={this.onClose}><span></span></a>
             );
         }
         else {
@@ -69,14 +69,14 @@ export class GrowlMessage extends Component {
     }
 
     render() {
-        let className = classNames('ui-growl-item-container ui-state-highlight ui-corner-all ui-shadow', {
-            'ui-growl-message-info': this.props.message.severity === 'info',
-            'ui-growl-message-warn': this.props.message.severity === 'warn',
-            'ui-growl-message-error': this.props.message.severity === 'error',
-            'ui-growl-message-success': this.props.message.severity === 'success'
+        let className = classNames('p-growl-item-container p-highlight p-shadow', {
+            'p-growl-message-info': this.props.message.severity === 'info',
+            'p-growl-message-warn': this.props.message.severity === 'warn',
+            'p-growl-message-error': this.props.message.severity === 'error',
+            'p-growl-message-success': this.props.message.severity === 'success'
         });
 
-        let iconClassName = classNames('ui-growl-image pi', {
+        let iconClassName = classNames('p-growl-image pi', {
             'pi-info-circle': this.props.message.severity === 'info',
             'pi-exclamation-triangle': this.props.message.severity === 'warn',
             'pi-times': this.props.message.severity === 'error',
@@ -87,11 +87,11 @@ export class GrowlMessage extends Component {
 
         return (
             <div ref={(el) => { this.element = el; }} className={className} aria-live="polite" onClick={this.onClick}>
-                <div className="ui-growl-item ui-helper-clearfix">
+                <div className="p-growl-item p-helper-clearfix">
                     {closeIcon}
                     <span className={iconClassName}></span>
-                    <div className="ui-growl-message">
-                        <span className="ui-growl-title">{this.props.message.summary}</span>
+                    <div className="p-growl-message">
+                        <span className="p-growl-title">{this.props.message.summary}</span>
                         <p>{this.props.message.detail}</p>
                     </div>
                 </div>

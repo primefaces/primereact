@@ -160,8 +160,8 @@ export class PickList extends Component {
     }
         
     scrollInView(listElement, direction) {
-        let listContainer = DomHandler.findSingle(listElement, '.ui-picklist-list');
-        let listItems = listContainer.getElementsByClassName('ui-state-highlight');
+        let listContainer = DomHandler.findSingle(listElement, '.p-picklist-list');
+        let listItems = listContainer.getElementsByClassName('p-highlight');
         let listItem;
         
         if(direction === -1)
@@ -181,26 +181,26 @@ export class PickList extends Component {
     }
 
     render() {
-        let className = classNames('ui-picklist ui-widget ui-helper-clearfix', this.props.className, {
-            'ui-picklist-responsive': this.props.responsive
+        let className = classNames('p-picklist p-component p-helper-clearfix', this.props.className, {
+            'p-picklist-responsive': this.props.responsive
         });
         
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {this.props.showSourceControls && <PickListControls list={this.props.source} selection={this.state.selectedItemsSource} 
-                            onReorder={this.onSourceReorder} className="ui-picklist-source-controls" />}
+                            onReorder={this.onSourceReorder} className="p-picklist-source-controls" />}
                 
                 <PickListSubList ref={(el) => this.sourceListElement = ReactDOM.findDOMNode(el)} list={this.props.source} selection={this.state.selectedItemsSource} onSelectionChange={(e) => this.setState({selectedItemsSource: e.value})} itemTemplate={this.props.itemTemplate} 
-                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="ui-picklist-source-wrapper" listClassName="ui-picklist-source" metaKeySelection={this.props.metaKeySelection} />
+                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} />
                 
                 <PickListTransferControls onTransfer={this.onTransfer} source={this.props.source} target={this.props.target} 
                     sourceSelection={this.state.selectedItemsSource} targetSelection={this.state.selectedItemsTarget} />
                 
                 <PickListSubList ref={(el) => this.targetListElement = ReactDOM.findDOMNode(el)} list={this.props.target} selection={this.state.selectedItemsTarget} onSelectionChange={(e) => this.setState({selectedItemsTarget: e.value})}  itemTemplate={this.props.itemTemplate} 
-                    header={this.props.targetHeader} style={this.props.targetStyle} className="ui-picklist-target-wrapper" listClassName="ui-picklist-targe" metaKeySelection={this.props.metaKeySelection}/>
+                    header={this.props.targetHeader} style={this.props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-targe" metaKeySelection={this.props.metaKeySelection}/>
                 
                 {this.props.showTargetControls && <PickListControls list={this.props.target} selection={this.state.selectedItemsTarget} 
-                            onReorder={this.onTargetReorder} className="ui-picklist-target-controls" />}
+                            onReorder={this.onTargetReorder} className="p-picklist-target-controls" />}
             
             </div>
         );

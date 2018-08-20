@@ -1,35 +1,35 @@
-.ui-datalist .ui-datalist-header,
-.ui-datalist .ui-datalist-footer {
+.p-datalist .p-datalist-header,
+.p-datalist .p-datalist-footer {
     text-align:center;
 	padding: .5em .75em;
 }
 
-.ui-datalist .ui-datalist-header {
+.p-datalist .p-datalist-header {
     border-bottom: 0 none;
 }
 
-.ui-datalist .ui-datalist-footer {
+.p-datalist .p-datalist-footer {
     border-top: 0 none;
 }
 
-.ui-datalist .ui-paginator {
+.p-datalist .p-paginator {
     border-top: 0 none;
 }
 
-.ui-datalist .ui-datalist-data {
+.p-datalist .p-datalist-data {
     margin: 0;
     padding: 0;
 }
 
-.ui-datalist .ui-datalist-data > li {
+.p-datalist .p-datalist-data > li {
     list-style-type: none;
     
 }
 
-.ui-datalist .ui-datalist-emptymessage {
+.p-datalist .p-datalist-emptymessage {
     padding: .5em .75em;
 }
 
-.ui-datalist.ui-datalist-scrollable .ui-datalist-content {
+.p-datalist.p-datalist-scrollable .p-datalist-content {
     overflow: auto;
 }

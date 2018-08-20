@@ -1,87 +1,87 @@
-.ui-megamenu {
+.p-megamenu {
     padding: .25em;
 }
 
-.ui-megamenu-root-list {
+.p-megamenu-root-list {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.ui-megamenu-root-list > .ui-menuitem {
+.p-megamenu-root-list > .p-menuitem {
     position: relative;
 }
 
-.ui-megamenu .ui-menuitem-link {
+.p-megamenu .p-menuitem-link {
     padding: .25em;
     display: block;
     text-decoration: none;
 }
 
-.ui-megamenu .ui-menuitem-icon {
+.p-megamenu .p-menuitem-icon {
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-megamenu .ui-menuitem-text {
+.p-megamenu .p-menuitem-text {
     vertical-align: middle;
 }
 
-.ui-megamenu-panel {
+.p-megamenu-panel {
     display: none;
     position: absolute;
     width: auto;
     z-index: 1;
 }
 
-.ui-megamenu-root-list > .ui-menuitem-active > .ui-megamenu-panel {
+.p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {
     display: block;
 }
 
-.ui-megamenu-panel .ui-menuitem {
+.p-megamenu-panel .p-menuitem {
     margin: .125em 0;
 }
 
-.ui-megamenu-submenu {
+.p-megamenu-submenu {
     margin: 0;
     padding: 0;
     list-style: none;
     width: 12.5em;
 }
 
-.ui-megamenu-submenu-header {
+.p-megamenu-submenu-header {
     padding: .25em;
 }
 
 /* Horizontal */
-.ui-megamenu-horizontal .ui-megamenu-root-list > .ui-menuitem {
+.p-megamenu-horizontal .p-megamenu-root-list > .p-menuitem {
     display: inline-block;
 }
 
-.ui-megamenu-horizontal .ui-megamenu-root-list > .ui-menuitem > .ui-menuitem-link > .ui-submenu-icon {
+.p-megamenu-horizontal .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
     vertical-align: middle;
     margin-left: .25em;
 }
 
 /* Vertical */
-.ui-megamenu-vertical {
+.p-megamenu-vertical {
     width: 12.5em;
 }
 
-.ui-megamenu-vertical .ui-megamenu-root-list > .ui-menuitem {
+.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem {
     display: block;
 }
 
-.ui-megamenu-vertical .ui-megamenu-root-list > .ui-menuitem > .ui-menuitem-link {
+.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-link {
     position: relative;
 }
 
-.ui-megamenu-vertical .ui-megamenu-root-list > .ui-menuitem-active > .ui-megamenu-panel {
+.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {
     left: 100%;
     top: 0;
 }
 
-.ui-megamenu-vertical .ui-megamenu-root-list > .ui-menuitem > .ui-menuitem-link > .ui-submenu-icon {
+.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
     position: absolute;
     width: 1em;
     height: 1em;
@@ -90,7 +90,7 @@
     margin-top: -.5em;
 }
 
-.ui-megamenu .ui-g {
+.p-megamenu .p-g {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }

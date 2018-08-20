@@ -82,13 +82,13 @@ export class PickListSubList extends Component {
     render() {
         let header = null;
         let items = null;
-        let wrapperClassName = classNames('ui-picklist-listwrapper', this.props.className, {
-            'ui-picklist-listwrapper-nocontrols': !this.props.showControls
+        let wrapperClassName = classNames('p-picklist-listwrapper', this.props.className, {
+            'p-picklist-listwrapper-nocontrols': !this.props.showControls
         });
-        let listClassName = classNames('ui-widget-content ui-picklist-list ui-corner-bottom', this.props.listClassName);
+        let listClassName = classNames('p-picklist-list p-corner-bottom', this.props.listClassName);
         
         if(this.props.header) {
-            header = <div className="ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr">{this.props.header}</div>
+            header = <div className="p-picklist-caption p-corner-tl p-corner-tr">{this.props.header}</div>
         }
         
         if(this.props.list) {

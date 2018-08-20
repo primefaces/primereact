@@ -122,7 +122,7 @@ export class Dialog extends Component {
         }
 
         if(this.state.maximized) {
-            DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
 
@@ -142,7 +142,7 @@ export class Dialog extends Component {
         DomHandler.fadeIn(this.container, 250);
 
         if(this.state.maximized) {
-            DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
     
@@ -154,7 +154,7 @@ export class Dialog extends Component {
     }
 
     maximize() {
-        DomHandler.addClass(this.container, 'ui-dialog-maximized');
+        DomHandler.addClass(this.container, 'p-dialog-maximized');
         this.preMaximizePageX = parseFloat(this.container.style.top);
         this.preMaximizePageY = parseFloat(this.container.style.left);
         this.preMaximizeContainerWidth = DomHandler.getOuterWidth(this.container);
@@ -168,7 +168,7 @@ export class Dialog extends Component {
         const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement) + parseFloat(this.container.style.top);
         this.contentElement.style.height = 'calc(100vh - ' + diffHeight +'px)';
 
-        DomHandler.addClass(document.body, 'ui-overflow-hidden');
+        DomHandler.addClass(document.body, 'p-overflow-hidden');
     }
 
     restoreMaximize() {
@@ -178,9 +178,9 @@ export class Dialog extends Component {
         this.container.style.height = this.preMaximizeContainerHeight + 'px';
         this.contentElement.style.height = this.preMaximizeContentHeight + 'px';
 
-        DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+        DomHandler.removeClass(document.body, 'p-overflow-hidden');
 
-        setTimeout(() => DomHandler.removeClass(this.container, 'ui-dialog-maximized'), 300);
+        setTimeout(() => DomHandler.removeClass(this.container, 'p-dialog-maximized'), 300);
     }
    
     center() {
@@ -206,7 +206,7 @@ export class Dialog extends Component {
         if(!this.mask) {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-dialog-mask');
+            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-dialog-mask');
 
             if(this.props.closable && this.props.dismissableMask) {
                 this.maskClickListener = (event) => {
@@ -218,7 +218,7 @@ export class Dialog extends Component {
             document.body.appendChild(this.mask);
 
             if(this.props.blockScroll) {
-                DomHandler.addClass(document.body, 'ui-overflow-hidden');
+                DomHandler.addClass(document.body, 'p-overflow-hidden');
             }
         }
     }
@@ -229,7 +229,7 @@ export class Dialog extends Component {
 
             document.body.removeChild(this.mask);
             if(this.props.blockScroll) {
-                DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+                DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
             this.mask = null;
         }
@@ -270,7 +270,7 @@ export class Dialog extends Component {
             this.dragging = true;
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
-            DomHandler.addClass(document.body, 'ui-unselectable-text');
+            DomHandler.addClass(document.body, 'p-unselectable-text');
         }
     }
 
@@ -298,7 +298,7 @@ export class Dialog extends Component {
     endDrag(event) {
         if(this.props.draggable) {
             this.dragging = false;
-            DomHandler.removeClass(document.body, 'ui-unselectable-text');
+            DomHandler.removeClass(document.body, 'p-unselectable-text');
         }
     }
 
@@ -308,7 +308,7 @@ export class Dialog extends Component {
             this.resizing = true;
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
-            DomHandler.addClass(document.body, 'ui-unselectable-text');
+            DomHandler.addClass(document.body, 'p-unselectable-text');
         }
     }
     
@@ -399,7 +399,7 @@ export class Dialog extends Component {
         this.documentResizeEndListener = (event) => {
             if(this.resizing) {
                 this.resizing = false;
-                DomHandler.removeClass(document.body, 'ui-unselectable-text');
+                DomHandler.removeClass(document.body, 'p-unselectable-text');
             }
         };
 
@@ -495,7 +495,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if(this.props.closable) {
             return (
-                <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                <a role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
                     <span className="pi pi-times"></span>
                 </a>
             );
@@ -510,7 +510,7 @@ export class Dialog extends Component {
 
         if(this.props.maximizable) {
             return (
-                <a role="button" className="ui-dialog-titlebar-icon ui-dialog-titlebar-maximize ui-corner-all" onClick={this.toggleMaximize}>
+                <a role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
                 </a>
             );
@@ -526,8 +526,8 @@ export class Dialog extends Component {
             let maximizeIcon = this.renderMaximizeIcon();
 
             return (
-                <div ref={(el) => { this.headerElement = el; }} className="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top" onMouseDown={this.initDrag}>
-                    <span id={this.id + '_label'} className="ui-dialog-title">{this.props.header}</span>
+                <div ref={(el) => { this.headerElement = el; }} className="p-dialog-titlebar p-helper-clearfix p-corner-top" onMouseDown={this.initDrag}>
+                    <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
                     {closeIcon}
                     {maximizeIcon}
                 </div>
@@ -540,7 +540,7 @@ export class Dialog extends Component {
 
     renderContent() {
         return (
-            <div ref={(el) => this.contentElement = el} className="ui-dialog-content ui-widget-content" style={this.props.contentStyle}>
+            <div ref={(el) => this.contentElement = el} className="p-dialog-content" style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -549,7 +549,7 @@ export class Dialog extends Component {
     renderFooter() {
         if(this.props.footer) {
             return (
-                <div ref={(el) => { this.footerElement = el; }} className="ui-dialog-footer ui-widget-content">{this.props.footer}</div>
+                <div ref={(el) => { this.footerElement = el; }} className="p-dialog-footer">{this.props.footer}</div>
             );
         }
         else {
@@ -560,7 +560,7 @@ export class Dialog extends Component {
     renderResizer() {
         if(this.props.resizable) {
             return (
-                <div className="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style={{ 'zIndex': '90' }} onMouseDown={this.initResize}></div>
+                <div className="p-resizable-handle p-resizable-se p-icon p-icon-gripsmall-diagonal-se" style={{ 'zIndex': '90' }} onMouseDown={this.initResize}></div>
             );
         }
         else {
@@ -569,9 +569,9 @@ export class Dialog extends Component {
     }
 
     render() {
-        let className = classNames('ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className, {
-            'ui-dialog-rtl': this.props.rtl,
-            'ui-dialog-draggable': this.props.draggable
+        let className = classNames('p-dialog p-component p-shadow', this.props.className, {
+            'p-dialog-rtl': this.props.rtl,
+            'p-dialog-draggable': this.props.draggable
         });
 
         let style = Object.assign({

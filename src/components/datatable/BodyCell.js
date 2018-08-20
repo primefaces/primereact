@@ -113,13 +113,13 @@ export class BodyCell extends Component {
     render() {
         let content, header;
         let cellClassName = classNames(this.props.bodyClassName||this.props.className, {
-                                'ui-selection-column': this.props.selectionMode,
-                                'ui-editable-column': this.props.editor,
-                                'ui-cell-editing': this.state.editing
+                                'p-selection-column': this.props.selectionMode,
+                                'p-editable-column': this.props.editor,
+                                'p-cell-editing': this.state.editing
                             });
 
         if(this.props.expander) {
-            let iconClassName = classNames('ui-row-toggler pi pi-fw ui-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
+            let iconClassName = classNames('p-row-toggler pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
             content = <a onClick={this.onExpanderClick}>
                         <span className={iconClassName}></span>
                       </a>;
@@ -131,7 +131,7 @@ export class BodyCell extends Component {
                 content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
         }
         else if(this.props.rowReorder) {
-            let reorderIcon = classNames('ui-table-reorderablerow-handle', this.props.rowReorderIcon);
+            let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
 
             content = (
                 <i className={reorderIcon}></i>
@@ -153,11 +153,11 @@ export class BodyCell extends Component {
         }
         
         if(this.props.responsive) {
-            header = <span className="ui-column-title">{this.props.header}</span>;
+            header = <span className="p-column-title">{this.props.header}</span>;
         }
 
         /* eslint-disable */
-        let editorKeyHelper = this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="ui-cell-editor-key-helper ui-helper-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+        let editorKeyHelper = this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-helper-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
         /* eslint-enable */
                        
         return (

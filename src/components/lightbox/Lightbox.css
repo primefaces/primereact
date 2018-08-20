@@ -1,12 +1,12 @@
-.ui-lightbox {
+.p-lightbox {
     position: fixed;
 }
 
-.ui-lightbox-content-wrapper {
+.p-lightbox-content-wrapper {
     position: relative;
 }
 
-.ui-lightbox-content {
+.p-lightbox-content {
     position: relative;
     margin: 0;
     padding: 0;
@@ -18,48 +18,48 @@
     transition-property: width, height;
 }
 
-.ui-lightbox-nav-right, .ui-lightbox-nav-left {
+.p-lightbox-nav-right, .p-lightbox-nav-left {
    position: absolute;
    top: 50%;
    cursor: pointer;
 }
 
-.ui-lightbox-nav-left {
+.p-lightbox-nav-left {
    left: 0;
 }
 
-.ui-lightbox-nav-right {
+.p-lightbox-nav-right {
    right: 0;
 }
 
-.ui-lightbox-loading .ui-lightbox-content {
+.p-lightbox-loading .p-lightbox-content {
     background: url("./images/loading.gif") #000000 center center no-repeat;
 }
 
-.ui-lightbox-caption {
+.p-lightbox-caption {
     padding: 0.2em 0.4em;
     display: none;
 }
 
-.ui-lightbox-caption-text {
+.p-lightbox-caption-text {
     margin: 0.3em 0 0.1em 0;
     float:left;
 }
 
-.ui-lightbox-close {
+.p-lightbox-close {
     float:right;
     margin: 0;
     padding: .125em;
 }
 
-.ui-lightbox-close.ui-state-hover {
+.p-lightbox-close.p-state-hover {
     padding: 0;
 }
 
-.ui-lightbox-nav-left, .ui-lightbox-nav-right {
+.p-lightbox-nav-left, .p-lightbox-nav-right {
     opacity: .5;
 }
 
-.ui-lightbox-nav-left:hover, .ui-lightbox-nav-right:hover{
+.p-lightbox-nav-left:hover, .p-lightbox-nav-right:hover{
     opacity: 1;
 }

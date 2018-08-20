@@ -81,16 +81,16 @@ export class TabView extends Component {
              
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames(tab.props.headerClassName, 'ui-state-default ui-corner-top', {'ui-tabview-selected ui-state-active': selected, 'ui-state-disabled': tab.props.disabled});
+        const className = classNames(tab.props.headerClassName, 'p-corner-top', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled});
         const id = this.id + '_header_' + index;
         const ariaControls = this.id + '_content_' + index;
 
         return (
             <li className={className} style={tab.props.headerStyle} role="presentation" >
                 <a role="tab" href={'#' + ariaControls} onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected}>
-                    {tab.props.leftIcon && <span className={classNames('ui-tabview-left-icon ', tab.props.leftIcon)}></span>}
-                    <span className="ui-tabview-title">{tab.props.header}</span>
-                    {tab.props.rightIcon && <span className={classNames('ui-tabview-right-icon ', tab.props.rightIcon)}></span>}
+                    {tab.props.leftIcon && <span className={classNames('p-tabview-left-icon ', tab.props.leftIcon)}></span>}
+                    <span className="p-tabview-title">{tab.props.header}</span>
+                    {tab.props.rightIcon && <span className={classNames('p-tabview-right-icon ', tab.props.rightIcon)}></span>}
                 </a>
             </li>
         );
@@ -108,7 +108,7 @@ export class TabView extends Component {
         const headers = this.renderTabHeaders();
             
         return (
-            <ul className="ui-tabview-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+            <ul className="p-tabview-nav p-helper-reset p-helper-clearfix" role="tablist">
                 {headers}
             </ul>
         );
@@ -117,7 +117,7 @@ export class TabView extends Component {
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
             const selected = this.isSelected(index);
-            const className = classNames(tab.props.contentClassName, 'ui-tabview-panel ui-widget-content', {'ui-helper-hidden': !selected});
+            const className = classNames(tab.props.contentClassName, 'p-tabview-panel', {'p-helper-hidden': !selected});
             const id = this.id + '_content_' + index;
             const ariaLabelledBy = this.id + '_header_' + index;
 
@@ -129,14 +129,14 @@ export class TabView extends Component {
         })
         
         return (
-            <div className="ui-tabview-panels">
+            <div className="p-tabview-panels">
                 {contents}
             </div>
         );
     }
 
     render() {
-        const className = classNames('ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-top', this.props.className)
+        const className = classNames('p-tabview p-component p-tabview-top', this.props.className)
         const navigator = this.renderNavigator();
         const content = this.renderContent();
         

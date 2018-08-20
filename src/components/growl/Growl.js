@@ -79,13 +79,13 @@ export class Growl extends Component {
     }
  
     render() {
-        let className = classNames('ui-growl ui-widget ui-growl-' + this.props.position, this.props.className);
+        let className = classNames('p-growl p-component p-growl-' + this.props.position, this.props.className);
 
         return (
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
                 <TransitionGroup>
                     {this.state.messages.map((message, index) =>
-                        <CSSTransition key={message.id} classNames="ui-growl"
+                        <CSSTransition key={message.id} classNames="p-growl"
                             timeout={{ enter: 250, exit: 500 }}>
                             <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
                         </CSSTransition>

@@ -330,7 +330,7 @@ export default class DomHandler {
             return this.calculatedScrollbarWidth;
         
         let scrollDiv = document.createElement("div");
-        scrollDiv.className = "ui-scrollbar-measure";
+        scrollDiv.className = "p-scrollbar-measure";
         document.body.appendChild(scrollDiv);
 
         let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;

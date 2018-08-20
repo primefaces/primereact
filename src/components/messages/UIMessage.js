@@ -55,7 +55,7 @@ export class UIMessage extends Component {
     renderCloseIcon() {
         if (this.props.message.closable !== false) {
             return (
-                <a className="ui-messages-close" onClick={this.onClose}>
+                <a className="p-messages-close" onClick={this.onClose}>
                     <i className="pi pi-times"></i>
                 </a>
             );
@@ -70,8 +70,8 @@ export class UIMessage extends Component {
             return (
                 <ul>
                     <li key={this.props.message.id}>
-                        <span className="ui-messages-summary">{this.props.message.summary}</span>
-                        <span className="ui-messages-detail">{this.props.message.detail}</span>
+                        <span className="p-messages-summary">{this.props.message.summary}</span>
+                        <span className="p-messages-detail">{this.props.message.detail}</span>
                     </li>
                 </ul>
             )
@@ -82,8 +82,8 @@ export class UIMessage extends Component {
     }
 
     render() {
-        let className = 'ui-messages ui-widget ui-corner-all ui-messages-' + this.props.message.severity;
-        let icon = classNames('ui-messages-icon pi ', {
+        let className = 'p-messages p-component p-messages-' + this.props.message.severity;
+        let icon = classNames('p-messages-icon pi ', {
             'pi-info-circle': this.props.message.severity === 'info',
             'pi-exclamation-triangle': this.props.message.severity === 'warn',
             'pi-times': this.props.message.severity === 'error',
@@ -94,7 +94,7 @@ export class UIMessage extends Component {
 
         return (
             <div ref={(el) => { this.container = el; }} className={className} onClick={this.onClick}>
-                <div className="ui-messages-wrapper">
+                <div className="p-messages-wrapper">
                     {closeIcon}
                     <span className={icon}></span>
                     {messages}

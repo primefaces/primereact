@@ -117,7 +117,7 @@ export class OverlayPanel extends Component {
     renderCloseIcon() {
         if(this.props.showCloseIcon) {
             return (
-                <a className="ui-overlaypanel-close ui-state-default" onClick={this.onCloseClick}>
+                <a className="p-overlaypanel-close" onClick={this.onCloseClick}>
                     <span className="pi pi-times"></span>
                 </a>
             );
@@ -128,13 +128,13 @@ export class OverlayPanel extends Component {
     }
 
     renderElement() {
-        let className = classNames('ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        let className = classNames('p-overlaypanel p-component p-shadow', this.props.className);
         let closeIcon = this.renderCloseIcon();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}
                 onClick={this.onPanelClick} ref={(el) => { this.container = el }}>
-                <div className="ui-overlaypanel-content">
+                <div className="p-overlaypanel-content">
                     {this.props.children}
                 </div>
                 {closeIcon}

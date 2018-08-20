@@ -17,7 +17,7 @@ export class HeaderCell extends Component {
     onClick(e) {
         if(this.props.sortable) {
             let targetNode = e.target;
-            if(DomHandler.hasClass(targetNode, 'ui-sortable-column') || DomHandler.hasClass(targetNode, 'ui-column-title') || DomHandler.hasClass(targetNode, 'ui-sortable-column-icon')) {
+            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') || DomHandler.hasClass(targetNode, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
                     sortField: this.props.field,
@@ -82,7 +82,7 @@ export class HeaderCell extends Component {
             let sortIconClassName = classNames('pi pi-fw', sortIcon);
 
             return (
-                <a className="ui-datatable-sort-icon">
+                <a className="p-datatable-sort-icon">
                     <span className={sortIconClassName}></span>
                 </a>
             );
@@ -97,7 +97,7 @@ export class HeaderCell extends Component {
         let singleSorted = (this.props.field === this.props.sortField);
         let multipleSorted = multiSortMetaData !== null;
         let sortOrder = 0;
-        let resizer = this.props.resizableColumns && <span className="ui-column-resizer ui-clickable" onMouseDown={this.onResizerMouseDown}></span>;
+        let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown}></span>;
         let filterElement, headerCheckbox;
 
         if(singleSorted) 
@@ -106,16 +106,16 @@ export class HeaderCell extends Component {
             sortOrder = multiSortMetaData.order;
 
         let sorted = this.props.sortable && (singleSorted || multipleSorted);
-        let className = classNames({'ui-sortable-column': this.props.sortable, 
-                        'ui-state-highlight': sorted, 
-                        'ui-resizable-column': this.props.resizableColumns,
-                        'ui-selection-column': this.props.selectionMode}, this.props.headerClassName||this.props.className);
+        let className = classNames({'p-sortable-column': this.props.sortable, 
+                        'p-highlight': sorted, 
+                        'p-resizable-column': this.props.resizableColumns,
+                        'p-selection-column': this.props.selectionMode}, this.props.headerClassName||this.props.className);
 
         let sortIconElement = this.renderSortIcon(sorted, sortOrder);
 
         if(this.props.filter) {
             filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
-                        className="ui-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
+                        className="p-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
         }
 
         if(this.props.selectionMode === 'multiple') {
@@ -128,7 +128,7 @@ export class HeaderCell extends Component {
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
-                <span className="ui-column-title">{this.props.header}</span>
+                <span className="p-column-title">{this.props.header}</span>
                 {sortIconElement}
                 {filterElement}
                 {headerCheckbox}

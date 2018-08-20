@@ -1,43 +1,43 @@
-.ui-menu {
+.p-menu {
     width: 12.5em;
     padding: .25em;
 }
 
-.ui-menu.ui-menu-dynamic {
+.p-menu.p-menu-dynamic {
     position: absolute;
     display: none;
 }
 
-.ui-menu .ui-menu-separator {
+.p-menu .p-menu-separator {
     border-width: 1px 0 0 0;
 }
 
-.ui-menu ul {
+.p-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.ui-menu .ui-submenu-header {
+.p-menu .p-submenu-header {
     padding: .25em .5em;
     margin: .125em 0;
 }
 
-.ui-menu .ui-menuitem {
+.p-menu .p-menuitem {
     margin: .125em 0;
 }
 
-.ui-menu .ui-menuitem-link {
+.p-menu .p-menuitem-link {
     padding: .25em;
     display: block;
     text-decoration: none;
 }
 
-.ui-menu .ui-menuitem-icon {
+.p-menu .p-menuitem-icon {
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-menu .ui-menuitem-text {
+.p-menu .p-menuitem-text {
     vertical-align: middle;
 }

@@ -20,9 +20,9 @@ export class ColorPickerPanel extends Component {
     }
 
     renderElement() {
-        let className = classNames('ui-colorpicker-panel ui-corner-all', {
-            'ui-colorpicker-overlay-panel ui-input-overlay ui-shadow': !this.props.inline,
-            'ui-state-disabled': this.props.disabled
+        let className = classNames('p-colorpicker-panel', {
+            'p-colorpicker-overlay-panel p-input-overlay p-shadow': !this.props.inline,
+            'p-disabled': this.props.disabled
         });
 
         return (

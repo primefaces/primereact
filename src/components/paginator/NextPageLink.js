@@ -15,11 +15,11 @@ export class NextPageLink extends Component {
     }
     
     render() {
-        let className = classNames('ui-paginator-next ui-paginator-element ui-state-default ui-corner-all', {'ui-state-disabled': this.props.disabled});
+        let className = classNames('p-paginator-next p-paginator-element', {'p-disabled': this.props.disabled});
         
         return (
             <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
-                <span className="ui-paginator-icon pi pi-caret-right"></span>
+                <span className="p-paginator-icon pi pi-caret-right"></span>
             </a>
         );
     }

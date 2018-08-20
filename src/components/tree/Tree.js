@@ -49,7 +49,7 @@ export class TreeNode extends Component {
         else
             icon = this.state.expanded && this.node.children && this.node.children.length ? this.node.expandedIcon : this.node.collapsedIcon;
 
-        return 'ui-treenode-icon ' + icon;
+        return 'p-treenode-icon ' + icon;
     }
 
     isLeaf(node) {
@@ -68,16 +68,16 @@ export class TreeNode extends Component {
     }
 
     renderVerticalTree() {
-        var nodeClass = classNames('ui-treenode', this.node.className, {
-            'ui-treenode-leaf': this.isLeaf(this.node)
+        var nodeClass = classNames('p-treenode', this.node.className, {
+            'p-treenode-leaf': this.isLeaf(this.node)
         });
 
-        var labelClass = classNames('ui-treenode-label ui-corner-all', { 'ui-state-highlight': this.props.isSelected(this.node) }),
+        var labelClass = classNames('p-treenode-label', { 'p-highlight': this.props.isSelected(this.node) }),
             label = (<span className={labelClass}>
                 <span>{this.node.label}</span>
             </span>);
 
-        var togglerClass = classNames('ui-tree-toggler pi pi-fw', {
+        var togglerClass = classNames('p-tree-toggler pi pi-fw', {
             'pi-caret-right': !this.state.expanded,
             'pi-caret-down': this.state.expanded
         });
@@ -86,19 +86,19 @@ export class TreeNode extends Component {
             iconClass = this.getIcon();
 
         if (this.props.selectionMode === 'checkbox') {
-            var checkboxIconClass = classNames('ui-chkbox-icon ui-c pi', {
+            var checkboxIconClass = classNames('p-chkbox-icon p-c pi', {
                 'pi-check': this.props.isSelected(this.node),
                 'pi-minus': this.node.partialSelected
             }),
-                checkbox = (<div className="ui-chkbox">
-                    <div className="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
+                checkbox = (<div className="p-chkbox">
+                    <div className="p-chkbox-box p-component">
                         <span className={checkboxIconClass}></span>
                     </div>
                 </div>);
         }
 
-        var nodeContentClass = classNames('ui-treenode-content', {
-            'ui-treenode-selectable': this.props.selectionMode && this.node.selectable !== false
+        var nodeContentClass = classNames('p-treenode-content', {
+            'p-treenode-selectable': this.props.selectionMode && this.node.selectable !== false
         }),
             nodeContent = (
                 <div className={nodeContentClass} onClick={(e) => this.props.onNodeClick(e, this.node)} onTouchEnd={this.props.onNodeTouchEnd}>
@@ -109,7 +109,7 @@ export class TreeNode extends Component {
                 </div>
             );
 
-        var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }} className="ui-treenode-children">
+        var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }} className="p-treenode-children">
             {
                 this.node.children && this.node.children.map((child, i) => {
                     return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
@@ -128,28 +128,28 @@ export class TreeNode extends Component {
         var isFirstChild = String(this.props.index).slice(-1) === "0",
             isLastChild = this.node.parent && String(this.props.index).slice(-1) === String(this.node.parent.children.length - 1);
 
-        var connector = (!this.props.root && <td className="ui-treenode-connector">
-            <table className="ui-treenode-connector-table">
+        var connector = (!this.props.root && <td className="p-treenode-connector">
+            <table className="p-treenode-connector-table">
                 <tbody>
                     <tr>
-                        <td className={!isFirstChild ? "ui-treenode-connector-line" : ""}></td>
+                        <td className={!isFirstChild ? "p-treenode-connector-line" : ""}></td>
                     </tr>
                     <tr>
-                        <td className={!isLastChild ? "ui-treenode-connector-line" : ""}></td>
+                        <td className={!isLastChild ? "p-treenode-connector-line" : ""}></td>
                     </tr>
                 </tbody>
             </table>
         </td>);
 
-        var nodeClass = classNames('ui-treenode', this.node.className, {
-            'ui-treenode-collapsed': !this.state.expanded
+        var nodeClass = classNames('p-treenode', this.node.className, {
+            'p-treenode-collapsed': !this.state.expanded
         });
 
-        var label = (<span className="ui-treenode-label ui-corner-all">
+        var label = (<span className="p-treenode-label">
             <span>{this.node.label}</span>
         </span>);
 
-        var togglerClass = classNames('ui-tree-toggler pi pi-fw', {
+        var togglerClass = classNames('p-tree-toggler pi pi-fw', {
             'pi-plus': !this.state.expanded,
             'pi-minus': this.state.expanded
         });
@@ -157,9 +157,9 @@ export class TreeNode extends Component {
         var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
             iconClass = this.getIcon();
 
-        var nodeContentClass = classNames('ui-treenode-content ui-state-default ui-corner-all', {
-            'ui-treenode-selectable': this.props.selectionMode && this.node.selectable !== false,
-            'ui-state-highlight': this.props.isSelected(this.node)
+        var nodeContentClass = classNames('p-treenode-content', {
+            'p-treenode-selectable': this.props.selectionMode && this.node.selectable !== false,
+            'p-highlight': this.props.isSelected(this.node)
         }),
             nodeContent = (
                 <td className={nodeClass}>
@@ -171,8 +171,8 @@ export class TreeNode extends Component {
                 </td>
             );
 
-        var nodeChildren = (this.node.children && this.state.expanded) && (<td className="ui-treenode-children-container" style={{ 'display': this.state.expanded ? 'table-cell' : 'none' }}>
-            <div className="ui-treenode-children">
+        var nodeChildren = (this.node.children && this.state.expanded) && (<td className="p-treenode-children-container" style={{ 'display': this.state.expanded ? 'table-cell' : 'none' }}>
+            <div className="p-treenode-children">
                 {
                     this.node.children && this.node.children.map((child, i) => {
                         return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
@@ -359,7 +359,7 @@ export class Tree extends Component {
     onNodeClick(event, node) {
         var eventTarget = (event.target);
 
-        if (eventTarget.className && eventTarget.className.indexOf('ui-tree-toggler') === 0) {
+        if (eventTarget.className && eventTarget.className.indexOf('p-tree-toggler') === 0) {
             return;
         }
         else if (this.props.selectionMode) {
@@ -536,9 +536,9 @@ export class Tree extends Component {
             this.selection = this.props.selection;
         }
 
-        var treeClass = classNames('ui-tree ui-widget ui-widget-content ui-corner-all', this.props.className, {
-            'ui-tree-selectable': this.props.selectionMode,
-            'ui-tree-horizontal': this.isHorizontal()
+        var treeClass = classNames('p-tree p-component', this.props.className, {
+            'p-tree-selectable': this.props.selectionMode,
+            'p-tree-horizontal': this.isHorizontal()
         });
 
         var container;
@@ -550,7 +550,7 @@ export class Tree extends Component {
                 </table>)
         }
         else {
-            container = (<ul className="ui-tree-container">
+            container = (<ul className="p-tree-container">
                 {
                     this.props.value && this.props.value.map((node, index) => {
                         return (<TreeNode key={'node_' + index} node={node} index={index} parentNode={this.props.value} isHorizontal={false} selectionMode={this.props.selectionMode}

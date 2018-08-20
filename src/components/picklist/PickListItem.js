@@ -36,7 +36,7 @@ export class PickListItem extends Component {
     
     render() {
         let content = this.props.template ? this.props.template(this.props.value) : this.props.value;
-        let className = classNames('ui-picklist-item', this.props.className, {'ui-state-highlight': this.props.selected});
+        let className = classNames('p-picklist-item', this.props.className, {'p-highlight': this.props.selected});
         
         return <li className={className} onClick={this.onClick}>
                   {content}

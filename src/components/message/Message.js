@@ -21,15 +21,15 @@ export class Message extends Component {
     };
 
     render() {
-        let className = classNames('ui-message ui-widget ui-corner-all', {
-            'ui-message-info': this.props.severity === 'info',
-            'ui-message-warn': this.props.severity === 'warn',
-            'ui-message-error': this.props.severity === 'error',
-            'ui-message-success': this.props.severity === 'success',
-            'ui-message-icon-only': !this.props.text
+        let className = classNames('p-message p-component', {
+            'p-message-info': this.props.severity === 'info',
+            'p-message-warn': this.props.severity === 'warn',
+            'p-message-error': this.props.severity === 'error',
+            'p-message-success': this.props.severity === 'success',
+            'p-message-icon-only': !this.props.text
         });
 
-        let icon = classNames('ui-message-icon pi pi-fw', {
+        let icon = classNames('p-message-icon pi pi-fw', {
             'pi-info-circle': this.props.severity === 'info',
             'pi-exclamation-triangle': this.props.severity === 'warn',
             'pi-times': this.props.severity === 'error',
@@ -38,7 +38,7 @@ export class Message extends Component {
 
         return <div id={this.props.id} aria-live="polite" className={className} style={this.props.style}>
             <span className={icon}></span>
-            <span className="ui-message-text">{this.props.text}</span>
+            <span className="p-message-text">{this.props.text}</span>
         </div>;
     }
 }

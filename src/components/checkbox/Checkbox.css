@@ -1,4 +1,4 @@
-.ui-chkbox {
+.p-chkbox {
     display: inline-block;
     cursor: pointer;
     vertical-align: middle;
@@ -8,7 +8,7 @@
     -webkit-user-select: none;
 }
 
-.ui-chkbox .ui-chkbox-box {
+.p-chkbox .p-chkbox-box {
     width: 1.125em;
     height: 1.125em;
     line-height: 1.125em;
@@ -18,14 +18,14 @@
     text-align: center;
 }
 
-.ui-chkbox .ui-chkbox-icon {
+.p-chkbox .p-chkbox-icon {
     display: block;
 }
 
-.ui-chkbox-label {
+.p-chkbox-label {
     vertical-align: middle;  
 }
 
-.ui-chkbox + label {
+.p-chkbox + label {
     vertical-align: middle;
 }

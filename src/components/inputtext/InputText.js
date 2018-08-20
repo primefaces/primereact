@@ -47,9 +47,9 @@ export class InputText extends Component {
     }
 
     render() {
-        const className = classNames('ui-inputtext ui-state-default ui-corner-all ui-widget', this.props.className, {
-            'ui-state-disabled': this.props.disabled,
-            'ui-state-filled': this.props.value && this.props.value.length
+        const className = classNames('p-inputtext p-component', this.props.className, {
+            'p-disabled': this.props.disabled,
+            'p-state-filled': this.props.value && this.props.value.length
         });
 
         let inputProps = Object.assign({}, this.props);

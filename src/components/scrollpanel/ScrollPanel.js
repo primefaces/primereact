@@ -60,18 +60,18 @@ export class ScrollPanel extends Component {
 
         this.requestAnimationFrame(() => {
             if (this.scrollXRatio >= 1) {
-                DomHandler.addClass(this.xBar, 'ui-scrollpanel-hidden');
+                DomHandler.addClass(this.xBar, 'p-scrollpanel-hidden');
             }
             else {
-                DomHandler.removeClass(this.xBar, 'ui-scrollpanel-hidden');
+                DomHandler.removeClass(this.xBar, 'p-scrollpanel-hidden');
                 this.xBar.style.cssText = 'width:' + Math.max(this.scrollXRatio * 100, 10) + '%; left:' + (this.content.scrollLeft / totalWidth) * 100 + '%;bottom:' + bottom + 'px;';
             }
 
             if (this.scrollYRatio >= 1) {
-                DomHandler.addClass(this.yBar, 'ui-scrollpanel-hidden');
+                DomHandler.addClass(this.yBar, 'p-scrollpanel-hidden');
             }
             else {
-                DomHandler.removeClass(this.yBar, 'ui-scrollpanel-hidden');
+                DomHandler.removeClass(this.yBar, 'p-scrollpanel-hidden');
                 this.yBar.style.cssText = 'height:' + Math.max(this.scrollYRatio * 100, 10) + '%; top: calc(' + (this.content.scrollTop / totalHeight) * 100 + '% - ' + this.xBar.clientHeight + 'px);right:' + right + 'px;';
             }
         });
@@ -80,8 +80,8 @@ export class ScrollPanel extends Component {
     onYBarMouseDown(e) {
         this.isYBarClicked = true;
         this.lastPageY = e.pageY;
-        DomHandler.addClass(this.yBar, 'ui-scrollpanel-grabbed');
-        DomHandler.addClass(document.body, 'ui-scrollpanel-grabbed');
+        DomHandler.addClass(this.yBar, 'p-scrollpanel-grabbed');
+        DomHandler.addClass(document.body, 'p-scrollpanel-grabbed');
 
         document.addEventListener('mousemove', this.onDocumentMouseMove);
         document.addEventListener('mouseup', this.onDocumentMouseUp);
@@ -91,8 +91,8 @@ export class ScrollPanel extends Component {
     onXBarMouseDown(e) {
         this.isXBarClicked = true;
         this.lastPageX = e.pageX;
-        DomHandler.addClass(this.xBar, 'ui-scrollpanel-grabbed');
-        DomHandler.addClass(document.body, 'ui-scrollpanel-grabbed');
+        DomHandler.addClass(this.xBar, 'p-scrollpanel-grabbed');
+        DomHandler.addClass(document.body, 'p-scrollpanel-grabbed');
 
         document.addEventListener('mousemove', this.onDocumentMouseMove);
         document.addEventListener('mouseup', this.onDocumentMouseUp);
@@ -132,9 +132,9 @@ export class ScrollPanel extends Component {
     }
 
     onDocumentMouseUp(e) {
-        DomHandler.removeClass(this.yBar, 'ui-scrollpanel-grabbed');
-        DomHandler.removeClass(this.xBar, 'ui-scrollpanel-grabbed');
-        DomHandler.removeClass(document.body, 'ui-scrollpanel-grabbed');
+        DomHandler.removeClass(this.yBar, 'p-scrollpanel-grabbed');
+        DomHandler.removeClass(this.xBar, 'p-scrollpanel-grabbed');
+        DomHandler.removeClass(document.body, 'p-scrollpanel-grabbed');
 
         document.removeEventListener('mousemove', this.onDocumentMouseMove);
         document.removeEventListener('mouseup', this.onDocumentMouseUp);
@@ -168,17 +168,17 @@ export class ScrollPanel extends Component {
     }
 
     render() {
-        let className = classNames('ui-scrollpanel ui-widget ui-widget-content ui-corner-all', this.props.className);
+        let className = classNames('p-scrollpanel p-component', this.props.className);
 
         return (
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
-                <div className="ui-scrollpanel-wrapper">
-                    <div ref={(el) => { this.content = el; }} className="ui-scrollpanel-content" onScroll={this.moveBar} onMouseEnter={this.moveBar}>
+                <div className="p-scrollpanel-wrapper">
+                    <div ref={(el) => { this.content = el; }} className="p-scrollpanel-content" onScroll={this.moveBar} onMouseEnter={this.moveBar}>
                         {this.props.children}
                     </div>
                 </div>
-                <div ref={(el) => { this.xBar = el; }} className="ui-scrollpanel-bar ui-scrollpanel-bar-x" onMouseDown={this.onXBarMouseDown}></div>
-                <div ref={(el) => { this.yBar = el; }} className="ui-scrollpanel-bar ui-scrollpanel-bar-y" onMouseDown={this.onYBarMouseDown}></div>
+                <div ref={(el) => { this.xBar = el; }} className="p-scrollpanel-bar p-scrollpanel-bar-x" onMouseDown={this.onXBarMouseDown}></div>
+                <div ref={(el) => { this.yBar = el; }} className="p-scrollpanel-bar p-scrollpanel-bar-y" onMouseDown={this.onYBarMouseDown}></div>
             </div>
         );
     }

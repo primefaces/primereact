@@ -18,7 +18,7 @@ export class Toolbar extends Component {
     };
 
     render() {
-        let toolbarClass = classNames('ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix', this.props.className)
+        let toolbarClass = classNames('p-toolbar p-component p-helper-clearfix', this.props.className)
         return (
             <div id={this.props.id} className={toolbarClass} style={this.props.style}>
                 {this.props.children}

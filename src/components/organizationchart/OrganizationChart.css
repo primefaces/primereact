@@ -1,23 +1,23 @@
-.ui-organizationchart .ui-organizationchart-table {
+.p-organizationchart .p-organizationchart-table {
     border-spacing: 0;
     border-collapse: separate;
     margin: 0 auto;
 }
 
-.ui-organizationchart .ui-organizationchart-table > tbody > tr > td {
+.p-organizationchart .p-organizationchart-table > tbody > tr > td {
     text-align: center;
     vertical-align: top;
     padding: 0;
     padding: 0 .75em;
 }
 
-.ui-organizationchart .ui-organizationchart-node-content {
+.p-organizationchart .p-organizationchart-node-content {
     padding: .5em .75em;
     display: inline-block;
     position: relative;
 }
 
-.ui-organizationchart .ui-organizationchart-node-content .ui-node-toggler {
+.p-organizationchart .p-organizationchart-node-content .p-node-toggler {
     position: absolute;
     bottom: -9px;
     margin-left: -8px;
@@ -25,23 +25,23 @@
     left: 50%;
 }
 
-.ui-organizationchart .ui-organizationchart-line-down {
+.p-organizationchart .p-organizationchart-line-down {
     margin: 0 auto;
     height: 20px;
     width: 1px;
     float: none;
 }
 
-.ui-organizationchart .ui-organizationchart-line-right {
+.p-organizationchart .p-organizationchart-line-right {
     float: none;
     border-radius: 0px;
 }
 
-.ui-organizationchart .ui-organizationchart-line-left {
+.p-organizationchart .p-organizationchart-line-left {
     float: none;
     border-radius: 0;
 }
 
-.ui-organizationchart .ui-organizationchart-node-content.ui-organizationchart-selectable-node {
+.p-organizationchart .p-organizationchart-node-content.p-organizationchart-selectable-node {
     cursor: pointer;
 }

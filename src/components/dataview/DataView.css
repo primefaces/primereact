@@ -1,41 +1,41 @@
-.ui-dataview .ui-paginator {
+.p-dataview .p-paginator {
     text-align: center;
 }
 
-.ui-dataview-column {
+.p-dataview-column {
     padding: .25em;
 }
 
-.ui-dataview-content-empty {
+.p-dataview-content-empty {
     padding: .25em .625em;
 }
 
-.ui-dataview .ui-dataview-header,
-.ui-dataview .ui-dataview-footer {
+.p-dataview .p-dataview-header,
+.p-dataview .p-dataview-footer {
     text-align: center;
     padding: .5em .75em;
 }
 
-.ui-dataview .ui-dataview-header {
+.p-dataview .p-dataview-header {
     border-bottom: 0 none;
 }
 
-.ui-dataview .ui-dataview-footer {
+.p-dataview .p-dataview-footer {
     border-top: 0 none;
 }
 
-.ui-dataview .ui-paginator-top {
+.p-dataview .p-paginator-top {
     border-bottom: 0 none;
 }
 
-.ui-dataview .ui-paginator-bottom {
+.p-dataview .p-paginator-bottom {
     border-top: 0 none;
 }
 
-.ui-dataview.ui-dataview-list > .ui-dataview-content > div.ui-g > div {
+.p-dataview.p-dataview-list > .p-dataview-content > div.p-g > div {
     width: 100%;
 }
 
-.ui-dataview-loading-icon {
+.p-dataview-loading-icon {
     font-size: 2em;
 }

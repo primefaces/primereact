@@ -1,11 +1,11 @@
-.ui-toolbar {
+.p-toolbar {
     padding: .25em .5em;
 }
 
-.ui-toolbar-group-left {
+.p-toolbar-group-left {
     float:left
 }
 
-.ui-toolbar-group-right {
+.p-toolbar-group-right {
     float:right
 }

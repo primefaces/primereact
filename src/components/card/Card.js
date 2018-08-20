@@ -25,7 +25,7 @@ export class Card extends Component {
     };
 
     renderHeader(){
-        return <div className="ui-card-header">
+        return <div className="p-card-header">
                     {this.props.header}
                 </div>;
     }
@@ -34,19 +34,19 @@ export class Card extends Component {
         let title, subTitle, footer, children;
 
         if(this.props.title) {
-            title = <div className="ui-card-title">{this.props.title}</div>;
+            title = <div className="p-card-title">{this.props.title}</div>;
         }
         if(this.props.subTitle) {
-            subTitle = <div className="ui-card-subtitle">{this.props.subTitle}</div>;
+            subTitle = <div className="p-card-subtitle">{this.props.subTitle}</div>;
         }
         if(this.props.footer) {
-            footer = <div className="ui-card-footer"> {this.props.footer}</div>;
+            footer = <div className="p-card-footer"> {this.props.footer}</div>;
         }
         if(this.props.children) {
-            children = <div className="ui-card-content"> {this.props.children} </div>;
+            children = <div className="p-card-content"> {this.props.children} </div>;
         }
         return (
-            <div className="ui-card-body">
+            <div className="p-card-body">
                 {title}
                 {subTitle}
                 {children}
@@ -58,7 +58,7 @@ export class Card extends Component {
     render(){
 
         let header, body;
-        let className = classNames('ui-card ui-widget ui-widget-content ui-corner-all',this.props.className);
+        let className = classNames('p-card p-component',this.props.className);
 
         if(this.props.header) {
             header = this.renderHeader();

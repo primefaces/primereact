@@ -29,7 +29,7 @@ export class TableHeader extends Component {
         }
 
         return (
-            <thead className="ui-datatable-thead">
+            <thead className="p-datatable-thead">
                 {content}
             </thead>
         );

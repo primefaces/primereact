@@ -63,15 +63,15 @@ export class TabMenu extends Component {
 
     renderMenuItem(item, index) {
         const activeItem = this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
-        const className = classNames('ui-tabmenuitem ui-state-default ui-corner-top', item.className, {'ui-state-active': activeItem ? activeItem === item : index === 0, 'ui-state-disabled': item.disabled});
-        const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
+        const className = classNames('p-tabmenuitem p-corner-top', item.className, {'p-highlight': activeItem ? activeItem === item : index === 0, 'p-disabled': item.disabled});
+        const iconClassName = classNames(item.icon, 'p-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style}>
-                 <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+                 <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)}>
                     {icon}
-                    <span className="ui-menuitem-text">{item.label}</span>
+                    <span className="p-menuitem-text">{item.label}</span>
                 </a>
             </li>
         );
@@ -87,12 +87,12 @@ export class TabMenu extends Component {
 
     render() {
         if (this.props.model) {
-            const className = classNames('ui-tabmenu ui-widget ui-widget-content ui-corner-all', this.props.className);
+            const className = classNames('p-tabmenu p-component', this.props.className);
             const items = this.renderItems();
 
             return (
                 <div id={this.props.id} className={className} style={this.props.style}>
-                    <ul className="ui-tabmenu-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                    <ul className="p-tabmenu-nav p-helper-reset p-helper-clearfix" role="tablist">
                         {items}
                     </ul>
                 </div>

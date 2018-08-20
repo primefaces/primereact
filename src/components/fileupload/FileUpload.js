@@ -242,11 +242,11 @@ export class FileUpload extends Component {
     }
     
     onFocus(event) {
-        DomHandler.addClass(event.currentTarget.parentElement, 'ui-state-focus');
+        DomHandler.addClass(event.currentTarget.parentElement, 'p-focus');
     }
     
     onBlur(event) {
-        DomHandler.removeClass(event.currentTarget.parentElement, 'ui-state-focus');
+        DomHandler.removeClass(event.currentTarget.parentElement, 'p-focus');
     }
 
     onDragEnter(event) {
@@ -258,7 +258,7 @@ export class FileUpload extends Component {
     
     onDragOver(event) {
         if (!this.props.disabled) {
-            DomHandler.addClass(this.content, 'ui-fileupload-highlight');
+            DomHandler.addClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
         }
@@ -266,13 +266,13 @@ export class FileUpload extends Component {
     
     onDragLeave(event) {
         if (!this.props.disabled) {
-            DomHandler.removeClass(this.content, 'ui-fileupload-highlight');
+            DomHandler.removeClass(this.content, 'p-fileupload-highlight');
         }
     }
     
     onDrop(event) {
         if (!this.props.disabled) {
-            DomHandler.removeClass(this.content, 'ui-fileupload-highlight');
+            DomHandler.removeClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
             
@@ -292,21 +292,21 @@ export class FileUpload extends Component {
     }
     
     renderChooseButton() {
-        let className = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left');
+        let className = classNames('p-button p-fileupload-choose p-component p-button-text-icon-left');
         
         return (
             <span icon="pi pi-plus" className={className}>
                 <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} 
                     multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
-                <span className="ui-button-icon ui-button-icon-left ui-clickable pi pi-fw pi-plus"></span>
-                <span className="ui-button-text ui-clickable">{this.props.chooseLabel}</span>
+                <span className="p-button-icon p-button-icon-left p-clickable pi pi-fw pi-plus"></span>
+                <span className="p-button-text p-clickable">{this.props.chooseLabel}</span>
             </span>    
         );
     }
     
     renderFiles() {
         return (
-            <div className="ui-fileupload-files">
+            <div className="p-fileupload-files">
                 {
                     this.state.files.map((file, index) => {
                         let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
@@ -314,7 +314,7 @@ export class FileUpload extends Component {
                         let size = <div>{this.formatSize(file.size)}</div>;
                         let removeButton = <div><Button type="button" icon="pi pi-times" onClick={() => this.remove(index)} /></div>
 
-                        return <div className="ui-fileupload-row" key={file.name + file.type + file.size}>
+                        return <div className="p-fileupload-row" key={file.name + file.type + file.size}>
                                  {preview}
                                  {fileName}
                                  {size}
@@ -327,7 +327,7 @@ export class FileUpload extends Component {
     }
     
     renderAdvanced() {
-        let className = classNames('ui-fileupload ui-widget', this.props.className);
+        let className = classNames('p-fileupload p-component', this.props.className);
         let uploadButton, cancelButton, filesList, progressBar;
         let chooseButton = this.renderChooseButton();
                            
@@ -343,12 +343,12 @@ export class FileUpload extends Component {
         
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                <div className="ui-fileupload-buttonbar ui-widget-header ui-corner-top">
+                <div className="p-fileupload-buttonbar p-corner-top">
                     {chooseButton}
                     {uploadButton}
                     {cancelButton}
                 </div>
-                <div ref={(el) => {this.content = el;}} className="ui-fileupload-content ui-widget-content ui-corner-bottom" 
+                <div ref={(el) => {this.content = el;}} className="p-fileupload-content p-corner-bottom" 
                     onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {progressBar}
                     <Messages ref={(el) => this.messagesUI = el } />
@@ -359,13 +359,13 @@ export class FileUpload extends Component {
     }
     
     renderBasic() {
-        let buttonClassName = classNames('ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left', {'ui-fileupload-choose-selected': this.hasFiles()});
-        let iconClassName = classNames('ui-button-icon-left pi', {'pi-plus': !this.hasFiles() || this.props.auto, 'pi-upload': this.hasFiles() && !this.props.auto});
+        let buttonClassName = classNames('p-button p-fileupload-choose p-component p-button-text-icon-left', {'p-fileupload-choose-selected': this.hasFiles()});
+        let iconClassName = classNames('p-button-icon-left pi', {'pi-plus': !this.hasFiles() || this.props.auto, 'pi-upload': this.hasFiles() && !this.props.auto});
                          
         return (
             <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick}>
                 <span className={iconClassName}></span>
-                <span className="ui-button-text ui-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
+                <span className="p-button-text p-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
                 <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}
                     onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} />
              </span>

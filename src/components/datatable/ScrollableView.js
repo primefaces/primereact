@@ -90,7 +90,7 @@ export class ScrollableView extends Component {
     findDataTableContainer(element) {
         if(element) {
             let el = element;
-            while(el && !DomHandler.hasClass(el, 'ui-datatable')) {
+            while(el && !DomHandler.hasClass(el, 'p-datatable')) {
                 el = el.parentElement;
             }
 
@@ -109,7 +109,7 @@ export class ScrollableView extends Component {
         let frozenView = this.container.previousElementSibling;
         let frozenScrollBody;
         if(frozenView) {
-            frozenScrollBody = DomHandler.findSingle(frozenView, '.ui-datatable-scrollable-body');
+            frozenScrollBody = DomHandler.findSingle(frozenView, '.p-datatable-scrollable-body');
         }
         
         this.scrollHeaderBox.style.marginLeft = -1 * this.scrollBody.scrollLeft + 'px';
@@ -157,7 +157,7 @@ export class ScrollableView extends Component {
     }
     
     calculateRowHeight() {
-        let row = DomHandler.findSingle(this.scrollTable, 'tr.ui-widget-content:not(.ui-datatable-emptymessage-row)');
+        let row = DomHandler.findSingle(this.scrollTable, 'tr:not(.p-datatable-emptymessage-row)');
         if(row) {
             this.rowHeight = DomHandler.getOuterHeight(row);
         }
@@ -166,7 +166,7 @@ export class ScrollableView extends Component {
     renderColGroup() {
         if(this.props.columns && this.props.columns.length) {
             return (
-                <colgroup className="ui-datatable-scrollable-colgroup">
+                <colgroup className="p-datatable-scrollable-colgroup">
                     {this.props.columns.map((col, i) => <col key={col.field + '_' + i} />)}
                 </colgroup>
             );
@@ -177,30 +177,30 @@ export class ScrollableView extends Component {
     }
 
     render() {
-        let className = classNames('ui-datatable-scrollable-view', {'ui-datatable-frozen-view': this.props.frozen, 'ui-datatable-unfrozen-view': !this.props.frozen && this.props.frozenWidth});
+        let className = classNames('p-datatable-scrollable-view', {'p-datatable-frozen-view': this.props.frozen, 'p-datatable-unfrozen-view': !this.props.frozen && this.props.frozenWidth});
         let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
 
         return (
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
-                <div className="ui-widget-header ui-datatable-scrollable-header" ref={(el) => { this.scrollHeader= el; }} onScroll={this.onHeaderScroll}>
-                    <div className="ui-datatable-scrollable-header-box" ref={(el) => { this.scrollHeaderBox = el; }}>
+                <div className="p-datatable-scrollable-header" ref={(el) => { this.scrollHeader= el; }} onScroll={this.onHeaderScroll}>
+                    <div className="p-datatable-scrollable-header-box" ref={(el) => { this.scrollHeaderBox = el; }}>
                         <table>
                             {this.props.header}
                             {this.props.frozenBody}
                         </table>
                     </div>
                 </div>
-                <div className="ui-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
+                <div className="p-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
                     <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
                         {colGroup}
                         {this.props.body}
                     </table>
-                    <div className="ui-datatable-virtual-scroller" ref={(el) => { this.virtualScroller = el; }}></div>
+                    <div className="p-datatable-virtual-scroller" ref={(el) => { this.virtualScroller = el; }}></div>
                 </div>
-                <div className="ui-widget-header ui-datatable-scrollable-footer" ref={(el) => { this.scrollFooter = el; }}>
-                    <div className="ui-datatable-scrollable-footer-box" ref={(el) => { this.scrollFooterBox = el; }}>
+                <div className="p-datatable-scrollable-footer" ref={(el) => { this.scrollFooter = el; }}>
+                    <div className="p-datatable-scrollable-footer-box" ref={(el) => { this.scrollFooterBox = el; }}>
                          <table>
                             {this.props.footer}
                         </table>

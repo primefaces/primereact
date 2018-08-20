@@ -36,9 +36,9 @@ export class DropdownItem extends Component {
     }
     
     render() {
-        let className = classNames('ui-dropdown-item ui-corner-all', {
-            'ui-state-highlight': this.props.selected,
-            'ui-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)
+        let className = classNames('p-dropdown-item', {
+            'p-highlight': this.props.selected,
+            'p-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)
         });
         let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
         

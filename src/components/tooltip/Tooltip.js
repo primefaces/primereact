@@ -104,11 +104,11 @@ export class Tooltip extends Component {
         this.container = document.createElement('div');
                 
         let tooltipArrow = document.createElement('div');
-        tooltipArrow.className = 'ui-tooltip-arrow';
+        tooltipArrow.className = 'p-tooltip-arrow';
         this.container.appendChild(tooltipArrow);
         
         this.tooltipText = document.createElement('div');
-        this.tooltipText.className = 'ui-tooltip-text ui-shadow ui-corner-all';
+        this.tooltipText.className = 'p-tooltip-text p-shadow';
 
 		this.updateText();
         
@@ -220,7 +220,7 @@ export class Tooltip extends Component {
     
     alignRight() {
         this.preAlign();
-        this.container.className = 'ui-tooltip ui-widget ui-tooltip-right';
+        this.container.className = 'p-tooltip p-component p-tooltip-right';
         let hostOffset = this.getHostOffset();
         let left = hostOffset.left + DomHandler.getOuterWidth(this.element);
         let top = hostOffset.top + (DomHandler.getOuterHeight(this.element) - DomHandler.getOuterHeight(this.container)) / 2;
@@ -230,7 +230,7 @@ export class Tooltip extends Component {
     
     alignLeft() {
         this.preAlign();
-        this.container.className = 'ui-tooltip ui-widget ui-tooltip-left';
+        this.container.className = 'p-tooltip p-component p-tooltip-left';
         let hostOffset = this.getHostOffset();
         let left = hostOffset.left - DomHandler.getOuterWidth(this.container);
         let top = hostOffset.top + (DomHandler.getOuterHeight(this.element) - DomHandler.getOuterHeight(this.container)) / 2;
@@ -240,7 +240,7 @@ export class Tooltip extends Component {
     
     alignTop() {
         this.preAlign();
-        this.container.className = 'ui-tooltip ui-widget ui-tooltip-top';
+        this.container.className = 'p-tooltip p-component p-tooltip-top';
         let hostOffset = this.getHostOffset();
         let left = hostOffset.left + (DomHandler.getOuterWidth(this.element) - DomHandler.getOuterWidth(this.container)) / 2;
         let top = hostOffset.top - DomHandler.getOuterHeight(this.container);
@@ -250,7 +250,7 @@ export class Tooltip extends Component {
     
     alignBottom() {
         this.preAlign();
-        this.container.className = 'ui-tooltip ui-widget ui-tooltip-bottom';
+        this.container.className = 'p-tooltip p-component p-tooltip-bottom';
         let hostOffset = this.getHostOffset();
         let left = hostOffset.left + (DomHandler.getOuterWidth(this.element) - DomHandler.getOuterWidth(this.container)) / 2;
         let top = hostOffset.top + DomHandler.getOuterHeight(this.element);

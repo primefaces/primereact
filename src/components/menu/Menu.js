@@ -80,8 +80,8 @@ export class Menu extends Component {
         this.container.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.container, 'ui-menu-overlay-visible');
-            DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+            DomHandler.addClass(this.container, 'p-menu-overlay-visible');
+            DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
         }, 1);
 
         DomHandler.absolutePosition(this.container,  event.currentTarget);
@@ -94,13 +94,13 @@ export class Menu extends Component {
 
     hide(event) {
         if (this.container) {
-            DomHandler.addClass(this.container, 'ui-menu-overlay-hidden');
-            DomHandler.removeClass(this.container, 'ui-menu-overlay-visible');
+            DomHandler.addClass(this.container, 'p-menu-overlay-hidden');
+            DomHandler.removeClass(this.container, 'p-menu-overlay-visible');
 
             setTimeout(() => {
                 if (this.container) {
                     this.container.style.display = 'none';
-                    DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+                    DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
                 }
             }, 150);
         }
@@ -153,7 +153,7 @@ export class Menu extends Component {
     }
 
     renderSubmenu(submenu, index) {
-        const className = classNames('ui-submenu-header ui-widget-header ui-corner-all', submenu.className,  {'ui-state-disabled': submenu.disabled});
+        const className = classNames('p-submenu-header', submenu.className,  {'p-disabled': submenu.disabled});
         const items = submenu.items.map((item, index)=> {
             return this.renderMenuitem(item, index);
         });
@@ -168,20 +168,20 @@ export class Menu extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+            <li key={'separator_' + index} className="p-menu-separator"></li>
         );
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('ui-menuitem ui-widget ui-corner-all', item.className, {'ui-state-disabled': item.disabled});
-        const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
+        const className = classNames('p-menuitem p-component', item.className, {'p-disabled': item.disabled});
+        const iconClassName = classNames(item.icon, 'p-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style}>
-                <a href={item.url||'#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+                <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)}>
                     {icon}
-                    <span className="ui-menuitem-text">{item.label}</span>
+                    <span className="p-menuitem-text">{item.label}</span>
                 </a>
             </li>
         );
@@ -209,12 +209,12 @@ export class Menu extends Component {
   
     render() {
         if (this.props.model) {
-            const className = classNames('ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix', this.props.className, {'ui-menu-dynamic ui-menu-overlay ui-shadow': this.props.popup});
+            const className = classNames('p-menu p-component p-helper-clearfix', this.props.className, {'p-menu-dynamic p-menu-overlay p-shadow': this.props.popup});
             const menuitems = this.renderMenu();
 
             return (
                 <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
-                    <ul className="ui-menu-list ui-helper-reset">
+                    <ul className="p-menu-list p-helper-reset">
                         {menuitems}
                     </ul>
                 </div>

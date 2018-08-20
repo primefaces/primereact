@@ -49,21 +49,21 @@ export class MultiSelectHeader extends Component {
         
     render() {
         let filterElement;
-        let checkboxClassName = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.allChecked});
-        let checkboxIcon = classNames('ui-chkbox-icon ui-clickable', {'pi pi-check': this.props.allChecked});
+        let checkboxClassName = classNames('p-chkbox-box p-component', {'p-highlight': this.props.allChecked});
+        let checkboxIcon = classNames('p-chkbox-icon p-clickable', {'pi pi-check': this.props.allChecked});
         
         if(this.props.filter) {
-            filterElement = <div className="ui-multiselect-filter-container">
+            filterElement = <div className="p-multiselect-filter-container">
                                 <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
-                                            className="ui-inputtext ui-widget ui-state-default ui-corner-all" />
-                                <span className="ui-multiselect-filter-icon pi pi-search"></span>
+                                            className="p-inputtext p-component" />
+                                <span className="p-multiselect-filter-icon pi pi-search"></span>
                             </div>;
         }
         
         return (
-                <div className="ui-widget-header ui-corner-all ui-multiselect-header ui-helper-clearfix">
-                    <div className="ui-chkbox ui-widget" onClick={this.onToggleAll}>
-                        <div className="ui-helper-hidden-accessible">
+                <div className="p-multiselect-header p-helper-clearfix">
+                    <div className="p-chkbox p-component" onClick={this.onToggleAll}>
+                        <div className="p-helper-hidden-accessible">
                             <input type="checkbox" readOnly={true} />
                         </div>
                         <div className={checkboxClassName}>
@@ -71,7 +71,7 @@ export class MultiSelectHeader extends Component {
                         </div>
                     </div>
                     {filterElement}
-                    <a className="ui-multiselect-close ui-corner-all" onClick={this.props.onClose}>
+                    <a className="p-multiselect-close" onClick={this.props.onClose}>
                         <span className="pi pi-times"></span>
                     </a>
                 </div>

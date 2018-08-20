@@ -1,25 +1,25 @@
-.ui-orderlist {
+.p-orderlist {
     display: table;
 }
 
-.ui-orderlist .ui-orderlist-controls {
+.p-orderlist .p-orderlist-controls {
     height: 12.5em;
     padding: 0 .25em;
     vertical-align: middle;
     display: table-cell;
 }
 
-.ui-orderlist .ui-orderlist-controls .ui-button {
+.p-orderlist .p-orderlist-controls .p-button {
     display: block;
     margin-bottom: 0.25em;
 }
 
-.ui-orderlist .ui-orderlist-list-container {
+.p-orderlist .p-orderlist-list-container {
     display: table-cell;
     vertical-align: top;
 }
 
-.ui-orderlist .ui-orderlist-list {
+.p-orderlist .p-orderlist-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -28,13 +28,13 @@
     width: 12.5em;
 }
 
-.ui-orderlist .ui-orderlist-caption {
+.p-orderlist .p-orderlist-caption {
     text-align: center;
     padding: .5em .75em;
     border-bottom: 0 none;
 }
 
-.ui-orderlist .ui-orderlist-list .ui-orderlist-item {
+.p-orderlist .p-orderlist-list .p-orderlist-item {
     margin: 1px;
     padding: .125em;
     cursor: pointer;
@@ -42,77 +42,77 @@
     font-weight: inherit;
 }
 
-.ui-orderlist .ui-orderlist-filter-container {
+.p-orderlist .p-orderlist-filter-container {
     position: relative;
     width: 100%;
     padding: .5em .6em;
     border-bottom: 0 none;
 }
 
-.ui-orderlist .ui-orderlist-filter-container .ui-inputtext {
+.p-orderlist .p-orderlist-filter-container .p-inputtext {
     text-indent: 1.1em;
     width: 100%;
 }
 
-.ui-orderlist .ui-orderlist-filter-container .ui-orderlist-filter-icon {
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
     position: absolute;
     top: 50%;
     left: 1em;
     margin-top: -.6em;
 }
 
-.ui-orderlist.ui-state-disabled .ui-orderlist-item,
-.ui-orderlist.ui-state-disabled .ui-button {
+.p-orderlist.p-disabled .p-orderlist-item,
+.p-orderlist.p-disabled .p-button {
     cursor: default;
 }
 
-.ui-orderlist.ui-state-disabled .ui-orderlist-list {
+.p-orderlist.p-disabled .p-orderlist-list {
     overflow:hidden;
 }
 
 /* Responsive */
-.ui-orderlist.ui-orderlist-responsive {
+.p-orderlist.p-orderlist-responsive {
     width: 100%;
 }
 
-.ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls {
+.p-orderlist.p-orderlist-responsive .p-orderlist-controls {
     width: 16.66666%;
     padding-right: .5em;
 }
 
-.ui-orderlist.ui-orderlist-responsive .ui-orderlist-list-container {
+.p-orderlist.p-orderlist-responsive .p-orderlist-list-container {
     width: 83.33333%;
 }
 
-.ui-orderlist.ui-orderlist-responsive .ui-orderlist-list,
-.ui-orderlist.ui-orderlist-responsive .ui-orderlist-caption {
+.p-orderlist.p-orderlist-responsive .p-orderlist-list,
+.p-orderlist.p-orderlist-responsive .p-orderlist-caption {
     width: 100%;
 }
 
-.ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls > .ui-button {
+.p-orderlist.p-orderlist-responsive .p-orderlist-controls > .p-button {
     width: 100%;
 }
 
-.ui-orderlist .ui-orderlist-droppoint {
+.p-orderlist .p-orderlist-droppoint {
     height: 6px;
     list-style-type: none;
 }
 
 @media (max-width: 40em) {
-    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls {
+    .p-orderlist.p-orderlist-responsive .p-orderlist-controls {
         text-align: center;
         width: 100%;
         display: block;
         height: auto;
     }
 
-    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls .ui-button {
+    .p-orderlist.p-orderlist-responsive .p-orderlist-controls .p-button {
         display: inline-block;
         width: 20%;
         margin-right: .25em;
     }
 
-    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-list-container {
+    .p-orderlist.p-orderlist-responsive .p-orderlist-list-container {
         width: 100%;
         display: block;
     }

@@ -1,34 +1,34 @@
-.ui-treetable {
+.p-treetable {
     position: relative;
 }
 
-.ui-treetable table {
+.p-treetable table {
 	border-collapse:collapse;
     width: 100%;
     table-layout: fixed;
 }
 
-.ui-treetable .ui-treetable-header,
-.ui-treetable .ui-treetable-footer {
+.p-treetable .p-treetable-header,
+.p-treetable .p-treetable-footer {
     text-align:center;
 	padding: .5em .75em;
 }
 
-.ui-treetable .ui-treetable-header {
+.p-treetable .p-treetable-header {
     border-bottom: 0 none;
 }
 
-.ui-treetable .ui-treetable-footer {
+.p-treetable .p-treetable-footer {
     border-top: 0 none;
 }
 
-.ui-treetable th, .ui-treetable tfoot td {
+.p-treetable th, .p-treetable tfoot td {
     text-align: center;
 }
 
-.ui-treetable thead th,
-.ui-treetable tbody td,
-.ui-treetable tfoot td {
+.p-treetable thead th,
+.p-treetable tbody td,
+.p-treetable tfoot td {
     padding: .25em .5em;
     overflow: hidden;
     white-space: nowrap;
@@ -36,75 +36,67 @@
     border-style: solid;
 }
 
-.ui-treetable tbody td {
+.p-treetable tbody td {
     border-color: inherit;
 }
 
-.ui-treetable tbody td:first-child span {
+.p-treetable tbody td:first-child span {
     vertical-align: middle;
 }
 
-.ui-treetable .ui-treetable-toggler {
+.p-treetable .p-treetable-toggler {
     vertical-align: middle;
     cursor: pointer;
     text-decoration: none;
 }
 
-.ui-treetable .ui-treetable-checkbox {
+.p-treetable .p-treetable-checkbox {
     margin-right: .5em;
 }
 
-.ui-treetable .ui-treetable-checkbox .ui-chkbox-icon {
+.p-treetable .p-treetable-checkbox .p-chkbox-icon {
     margin-left: 1px;
 }
 
-.ui-treetable .ui-treetable-row.ui-treetable-row-selectable {
+.p-treetable .p-treetable-row.p-treetable-row-selectable {
     cursor: pointer;
 }
-
-.ui-treetable .ui-treetable-row.ui-state-highlight {
-    border: 0 none;
-}
       
-.ui-treetable tr.ui-state-hover {
+.p-treetable tr.p-state-hover {
     border-color: inherit;
     font-weight: inherit;
 }
 
-.ui-treetable .ui-treetable-indent {
+.p-treetable .p-treetable-indent {
     width: 1em;
     height: 1em;
     float: left;
 }
 
-.ui-treetable .ui-sortable-column {
+.p-treetable .p-sortable-column {
     cursor: pointer;
 }
 
-.ui-treetable .ui-sortable-column-icon {
+.p-treetable .p-sortable-column-icon {
     display: inline-block;
     margin-left: .125em;
 }
 
-.ui-treetable tr.ui-state-highlight {
-    cursor: pointer;
-}
-
 /* PrimeReact */
-.ui-treetable td.ui-treetable-child-table-container {
+.p-treetable td.p-treetable-child-table-container {
     padding: 0;
     border: 0 none;
 }
 
-.ui-treetable .ui-treetable-row {
+.p-treetable .p-treetable-row {
     display: table-row;
     border-bottom: 0 transparent
 }
 
-.ui-treetable tbody .ui-treetable-row td {
+.p-treetable tbody .p-treetable-row td {
     border: 0 none;
 }
 
-.ui-treetable tbody .ui-treetable-row td input {
+.p-treetable tbody .p-treetable-row td input {
     outline: 0 none;
 }

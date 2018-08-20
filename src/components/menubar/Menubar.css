@@ -1,100 +1,100 @@
-.ui-menubar {
+.p-menubar {
     padding: .25em;
 }
 
-.ui-menubar .ui-menu-separator {
+.p-menubar .p-menu-separator {
     border-width: 1px 0 0 0;
 }
 
-.ui-menubar:after {
+.p-menubar:after {
     content: "";
     clear: both;
     display: table;
 }
 
-.ui-menubar ul {
+.p-menubar ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.ui-menubar .ui-menuitem-link {
+.p-menubar .p-menuitem-link {
     display: block;
     padding: .25em;
     position: relative;
     text-decoration: none;
 }
 
-.ui-menubar .ui-menuitem-icon {
+.p-menubar .p-menuitem-icon {
     margin-right: .25em;
 }
 
-.ui-menubar .ui-menubar-root-list {
+.p-menubar .p-menubar-root-list {
     display: inline-block;
 }
 
-.ui-menubar .ui-menubar-root-list > .ui-menuitem {
+.p-menubar .p-menubar-root-list > .p-menuitem {
     display: inline-block;
     position: relative;
 }
 
-.ui-menubar .ui-menubar-root-list > .ui-menuitem > .ui-menuitem-link {
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
     padding: .5em;
 }
 
-.ui-menubar .ui-menubar-root-list > .ui-menuitem > .ui-menuitem-link > .ui-submenu-icon {
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
     vertical-align: middle;
     margin-left: .25em;
 }
 
-.ui-menubar .ui-menubar-root-list > li ul {
+.p-menubar .p-menubar-root-list > li ul {
     display: none;
     z-index: 1;
 }
 
-.ui-menubar .ui-menubar-root-list > .ui-menuitem-active > .ui-submenu-list {
+.p-menubar .p-menubar-root-list > .p-menuitem-active > .p-submenu-list {
     display: block;
 }
 
-.ui-menubar .ui-submenu-list {
+.p-menubar .p-submenu-list {
     display: none;
     position: absolute;
     min-width: 12.5em;
     padding: .25em;
 }
 
-.ui-menubar .ui-submenu-list .ui-menuitem {
+.p-menubar .p-submenu-list .p-menuitem {
     margin: .125em 0;
     position: relative;
 }
 
-.ui-menubar .ui-submenu-list > .ui-menuitem-active > .ui-submenu-list  {
+.p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list  {
     display: block;
     left: 100%;
     top: 0;
 }
 
-.ui-menubar .ui-menuitem-icon {
+.p-menubar .p-menuitem-icon {
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-menubar .ui-menuitem-text {
+.p-menubar .p-menuitem-text {
     vertical-align: middle;
 }
 
-.ui-menubar .ui-submenu-list .ui-menuitem-link .ui-submenu-icon {
+.p-menubar .p-submenu-list .p-menuitem-link .p-submenu-icon {
     position: absolute;
     margin-top: -.5em;
     right: 0;
     top: 50%;
 }
 
-.ui-menubar .ui-menuitem-active > .ui-submenu > .ui-submenu-list {
+.p-menubar .p-menuitem-active > .p-submenu > .p-submenu-list {
     display: block;
 }
 
-.ui-menubar .ui-menubar-custom {
+.p-menubar .p-menubar-custom {
     float: right;
     padding: .25em;
 }

@@ -36,19 +36,19 @@ export class DataViewLayoutOptions extends Component {
     }
 
     render() {
-        const className = classNames('ui-dataview-layout-options ui-selectbutton ui-buttonset', this.props.className);
-        const buttonListClass = classNames("ui-button ui-button-icon-only ui-state-default", {'ui-state-active': this.props.layout === 'list'});
-        const buttonGridClass = classNames("ui-button ui-button-icon-only ui-state-default", {'ui-state-active': this.props.layout === 'grid'});
+        const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', this.props.className);
+        const buttonListClass = classNames("p-button p-button-icon-only", {'p-highlight': this.props.layout === 'list'});
+        const buttonGridClass = classNames("p-button p-button-icon-only", {'p-highlight': this.props.layout === 'grid'});
 
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
                 <a role={"button"} className={buttonListClass} onClick={(event) => this.changeLayout(event, 'list')}>
-                    <i className="pi pi-bars ui-button-icon-left"></i>
-                    <span className="ui-button-text ui-clickable">ui-btn</span>
+                    <i className="pi pi-bars p-button-icon-left"></i>
+                    <span className="p-button-text p-clickable">p-btn</span>
                 </a>
                 <a role={"button"} className={buttonGridClass} onClick={(event) => this.changeLayout(event, 'grid')}>
-                    <i className="pi pi-th-large ui-button-icon-left"></i>
-                    <span className="ui-button-text ui-clickable">ui-btn</span>
+                    <i className="pi pi-th-large p-button-icon-left"></i>
+                    <span className="p-button-text p-clickable">p-btn</span>
                 </a>
             </div>
         );
@@ -141,7 +141,7 @@ export class DataView extends Component {
     }
 
     createPaginator(position) {
-        const className = 'ui-paginator-' + position;
+        const className = 'p-paginator-' + position;
         const first = this.props.onPage ? this.props.first: this.state.first;
         const rows = this.props.onPage ? this.props.rows : this.state.rows;
         const totalRecords = this.getTotalRecords();
@@ -221,13 +221,13 @@ export class DataView extends Component {
 
     renderEmptyMessage(){
         return (
-            <div className="ui-widget-content ui-g-12">{this.props.emptyMessage}</div>
+            <div className="p-g-12">{this.props.emptyMessage}</div>
         );
     }
 
     renderHeader(){
         if(this.props.header) {
-            return <div className="ui-dataview-header ui-widget-header ui-corner-top">{this.props.header}</div>;
+            return <div className="p-dataview-header p-corner-top">{this.props.header}</div>;
         }
         else {
             return null;
@@ -236,7 +236,7 @@ export class DataView extends Component {
 
     renderFooter(){
         if (this.props.footer)
-            return <div className="ui-dataview-footer ui-widget-header ui-corner-bottom"> {this.props.footer}</div>;
+            return <div className="p-dataview-footer p-corner-bottom"> {this.props.footer}</div>;
         else
             return null;
     }
@@ -272,8 +272,8 @@ export class DataView extends Component {
         const items = this.renderItems(value);
 
         return (
-            <div className="ui-dataview-content ui-widget-content">
-                <div className="ui-g">
+            <div className="p-dataview-content">
+                <div className="p-g">
                     {items}
                 </div>
             </div>
@@ -294,7 +294,7 @@ export class DataView extends Component {
 
     render() {
         const value = this.processData();
-        const className = classNames('ui-dataview ui-widget', {'ui-dataview-list': (this.props.layout === 'list'), 'ui-dataview-grid': (this.props.layout === 'grid')}, this.props.className);
+        const className = classNames('p-dataview p-component', {'p-dataview-list': (this.props.layout === 'list'), 'p-dataview-grid': (this.props.layout === 'grid')}, this.props.className);
         const topPaginator = this.renderTopPaginator();
         const bottomPaginator = this.renderBottomPaginator() ;
         const header =  this.renderHeader();

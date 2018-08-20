@@ -104,10 +104,10 @@ export class InputTextarea extends Component {
             this.textareaProps.value = this.props.value;
         }
 
-        var className = classNames('ui-inputtext ui-inputtextarea ui-corner-all ui-state-default ui-widget', this.props.className, {
-            'ui-state-disabled': this.props.disabled,
-            'ui-state-filled': this.state.filled,
-            'ui-inputtextarea-resizable': this.props.autoResize
+        var className = classNames('p-inputtext p-inputtextarea p-component', this.props.className, {
+            'p-disabled': this.props.disabled,
+            'p-state-filled': this.state.filled,
+            'p-inputtextarea-resizable': this.props.autoResize
         });
 
         return (

@@ -1,4 +1,4 @@
-.ui-message {
+.p-message {
     border: 1px solid;
     margin: 0px .25em;
     padding: .25em .5em;
@@ -6,11 +6,11 @@
     vertical-align: top;
 }
 
-.ui-message .ui-message-icon,
-.ui-message .ui-message-text {
+.p-message .p-message-icon,
+.p-message .p-message-text {
     vertical-align: middle;
 }
 
-.ui-fluid .ui-message {
+.p-fluid .p-message {
     display: block;
 }

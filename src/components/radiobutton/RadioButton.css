@@ -1,4 +1,4 @@
-.ui-radiobutton {
+.p-radiobutton {
     display:inline-block;
     cursor: pointer;
     vertical-align: middle;
@@ -8,7 +8,7 @@
     -webkit-user-select: none;
 }
 
-.ui-radiobutton .ui-radiobutton-box {
+.p-radiobutton .p-radiobutton-box {
     width: 1.125em;
     height: 1.125em;
     line-height: 1.125em;
@@ -19,7 +19,7 @@
     position: relative;
 }
 
-.ui-radiobutton .ui-radiobutton-icon {
+.p-radiobutton .p-radiobutton-icon {
     display: block;
     position: absolute;
     left: 50%;
@@ -30,6 +30,6 @@
     margin-left: -.5em;
 }
  
-.ui-radiobutton + label {
+.p-radiobutton + label {
     vertical-align: middle;
 }

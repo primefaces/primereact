@@ -1,49 +1,49 @@
 /*
  * FileUpload
  */
-.ui-fileupload-buttonbar .ui-fileupload-choose.ui-state-disabled input {
+.p-fileupload-buttonbar .p-fileupload-choose.p-disabled input {
     cursor: default;
 }
 
-.ui-fileupload-buttonbar {
+.p-fileupload-buttonbar {
     padding: .5em;
     border-bottom: 0 none;
 }
 
-.ui-fileupload-buttonbar .ui-button {
+.p-fileupload-buttonbar .p-button {
     vertical-align: middle;
     margin-right: .25em;
 }
 
-.ui-fileupload-content {
+.p-fileupload-content {
     padding: 1em;
     position: relative;
     transition: border-color .3s;
 }
 
-.ui-fileupload-content.ui-fileupload-highlight {
+.p-fileupload-content.p-fileupload-highlight {
     border-color: #156090;
 }
 
-.ui-fileupload-files img {
+.p-fileupload-files img {
     border: none;
 }
 
-.ui-fileupload-files {
+.p-fileupload-files {
     display: table;
 }
 
-.ui-fileupload-row {
+.p-fileupload-row {
     display: table-row;
 }
 
-.ui-fileupload-row > div {
+.p-fileupload-row > div {
     display: table-cell;
     padding: .5em 1em;
     vertical-align: middle;
 }
 
-.ui-fileupload-content .ui-progressbar {
+.p-fileupload-content .p-progressbar {
     width: 100%;
     position: absolute;
     top: 1px;
@@ -52,7 +52,7 @@
     border: 0 none;
 }
 
-.ui-fileupload-content .ui-progressbar-value {
+.p-fileupload-content .p-progressbar-value {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -60,12 +60,12 @@
 }
 
 /* Simple */
-.ui-fileupload-choose {
+.p-fileupload-choose {
     position: relative;
     overflow: hidden;
 }
 
-.ui-fileupload-choose input[type=file] {
+.p-fileupload-choose input[type=file] {
     position: absolute;
     top: 0;
     right: 0;
@@ -79,15 +79,15 @@
     cursor: pointer;
 }
 
-.ui-fileupload-choose.ui-fileupload-choose-selected input[type=file] {
+.p-fileupload-choose.p-fileupload-choose-selected input[type=file] {
     display: none;
 }
 
-/* ui-fluid */
-.ui-fluid .ui-fileupload .ui-button {
+/* p-fluid */
+.p-fluid .p-fileupload .p-button {
     width: auto;
 }
 
-.ui-fluid .ui-fileupload-content .ui-button-icon-only {
+.p-fluid .p-fileupload-content .p-button-icon-only {
     width: 2em;
 }

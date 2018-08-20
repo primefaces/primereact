@@ -334,7 +334,7 @@ export class Spinner extends Component {
     }
 
     renderInputElement() {
-        const className = classNames('ui-spinner-input', this.props.inputClassName);
+        const className = classNames('p-spinner-input', this.props.inputClassName);
 
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} 
@@ -345,33 +345,33 @@ export class Spinner extends Component {
     }
 
     renderUpButton() {
-        let className = classNames("ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default", {
-            'ui-state-disabled': this.props.disabled
+        let className = classNames("p-spinner-button p-spinner-up p-corner-tr p-button p-component", {
+            'p-disabled': this.props.disabled
         });
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
                 onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled}>
-                <span className="ui-spinner-button-icon pi pi-caret-up"></span>
+                <span className="p-spinner-button-icon pi pi-caret-up"></span>
             </button>
         );
     }
 
     renderDownButton() {
-        let className = classNames("ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default", {
-            'ui-state-disabled': this.props.disabled
+        let className = classNames("p-spinner-button p-spinner-down p-corner-br p-button p-component", {
+            'p-disabled': this.props.disabled
         });
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp} 
                 onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled}>
-                <span className="ui-spinner-button-icon pi pi-caret-down"></span>
+                <span className="p-spinner-button-icon pi pi-caret-down"></span>
             </button>
         );
     }
 
     render() {
-        let className = classNames("ui-spinner ui-widget ui-corner-all");
+        let className = classNames("p-spinner p-component");
         let inputElement = this.renderInputElement();
         let upButton = this.renderUpButton();
         let downButton = this.renderDownButton();

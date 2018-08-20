@@ -97,12 +97,12 @@ class ContextMenuSub extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+            <li key={'separator_' + index} className="p-menu-separator"></li>
         );
     }
     
     renderIcon(item) {
-        const className = classNames('ui-menuitem-icon', item.icon);
+        const className = classNames('p-menuitem-icon', item.icon);
         if (item.icon) {
             return (
                 <span className={className}></span>
@@ -116,7 +116,7 @@ class ContextMenuSub extends Component {
     renderSubmenuIcon(item) {
         if (item.items) {
             return (
-                <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>
+                <span className="p-submenu-icon pi pi-fw pi-caret-right"></span>
             );
         }
         else {
@@ -136,16 +136,16 @@ class ContextMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item, 'ui-state-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem p-component', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
                     {icon}
-                    <span className="ui-menuitem-text">{item.label}</span>
+                    <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
                 </a>
                 {submenu}
@@ -174,7 +174,7 @@ class ContextMenuSub extends Component {
     }
 
     render() {
-        const className = classNames({'ui-widget-content ui-corner-all ui-submenu-list ui-shadow': !this.props.root});
+        const className = classNames({'p-submenu-list p-shadow': !this.props.root});
         const submenu = this.renderMenu();
 
         return (
@@ -384,7 +384,7 @@ export class ContextMenu extends Component {
     }
     
     renderContextMenu() {
-        const className = classNames('ui-contextmenu ui-widget ui-widget-content ui-corner-all ui-shadow', this.props.className);
+        const className = classNames('p-contextmenu p-component p-shadow', this.props.className);
 
         return(
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>

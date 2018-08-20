@@ -20,6 +20,6 @@ export class CurrentPageReport extends Component {
             .replace("{currentPage}", this.props.page + 1)
             .replace("{totalPages}", this.props.pageCount);
             
-        return <span className="ui-paginator-current">{text}</span>
+        return <span className="p-paginator-current">{text}</span>
     }
 }

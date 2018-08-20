@@ -49,7 +49,7 @@ export class ListBoxItem extends Component {
     }
     
     render() {
-        let className = classNames('ui-listbox-item ui-corner-all', {'ui-state-highlight': this.props.selected});
+        let className = classNames('p-listbox-item', {'p-highlight': this.props.selected});
         let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
         
         return (

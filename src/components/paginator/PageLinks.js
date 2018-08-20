@@ -29,13 +29,13 @@ export class PageLinks extends Component {
 
     render() {
         let elements = this.props.value.map((pageLink, i) => {
-                            let pageClassName = classNames('ui-paginator-page ui-paginator-element ui-state-default ui-corner-all', {
-                                'ui-state-active': ((pageLink - 1) === this.props.page)
+                            let pageClassName = classNames('p-paginator-page p-paginator-element', {
+                                'p-highlight': ((pageLink - 1) === this.props.page)
                             });
 
                             return <a key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</a>;
                         });
 
-        return <span className="ui-paginator-pages">{elements}</span>;
+        return <span className="p-paginator-pages">{elements}</span>;
     }
 }

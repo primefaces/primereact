@@ -1,4 +1,4 @@
-.ui-chips > ul.ui-inputtext {
+.p-chips > ul.p-inputtext {
     clear: left;
     cursor: text;
     list-style-type: none;
@@ -7,7 +7,7 @@
     padding: 0 .25em;
 }
 
-.ui-chips-token {
+.p-chips-token {
     cursor: default;
     display: inline-block;
     vertical-align: middle;
@@ -20,16 +20,16 @@
     font-size: .9em;
 }
 
-.ui-chips-token .ui-chips-token-label {
+.p-chips-token .p-chips-token-label {
     display: block;
     margin-right: 2em;
 }
 
-.ui-chips > .ui-state-disabled .ui-chips-token-label {
+.p-chips > .p-disabled .p-chips-token-label {
     margin-right: 0;
 }
 
-.ui-chips-token .ui-chips-token-icon {
+.p-chips-token .p-chips-token-icon {
     margin-top: -.5em;
     position: absolute;
     right: 0.2em;
@@ -37,7 +37,7 @@
     cursor: pointer;
 }
 
-.ui-chips-input-token {
+.p-chips-input-token {
     display: inline-block;
     vertical-align: middle;
     list-style-type: none;
@@ -45,7 +45,7 @@
     padding: .25em .25em .25em 0;
 }
 
-.ui-chips-input-token .ui-inputtext {
+.p-chips-input-token .p-inputtext {
     border: 0 none;
     width: 10em;
     outline: medium none;

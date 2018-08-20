@@ -116,7 +116,7 @@ export class SelectButton extends Component {
     }
 
     render() {
-        let className = classNames('ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-3', this.props.className);
+        let className = classNames('p-selectbutton p-buttonset p-component p-buttonset-3', this.props.className);
         let items = this.renderItems();
 
         return (

@@ -58,18 +58,18 @@ export class OrganizationChartNode extends Component {
         this.node = this.props.node;
 
         var colspan = this.getColspan();
-        let nodeStyleClass = classNames('ui-organizationchart-node-content ui-widget-content ui-corner-all', this.node.className, {
-                'ui-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
-                'ui-state-highlight': this.isSelected()
+        let nodeStyleClass = classNames('p-organizationchart-node-content', this.node.className, {
+                'p-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
+                'p-highlight': this.isSelected()
             }),
             nodeLabel = (this.props.nodeTemplate && this.props.nodeTemplate(this.node)) ? <div>{this.props.nodeTemplate(this.node)}</div> : <div>{this.node.label}</div>,
-            toggleIcon = classNames('ui-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
+            toggleIcon = classNames('p-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
                     <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
                         {nodeLabel}
                         {
-                            !this.getLeaf() && <a className="ui-node-toggler" onClick={(e) => this.toggleNode(e, this.node)}>
+                            !this.getLeaf() && <a className="p-node-toggler" onClick={(e) => this.toggleNode(e, this.node)}>
                                 <i className={toggleIcon}></i>
                             </a>
                         }
@@ -78,23 +78,23 @@ export class OrganizationChartNode extends Component {
             </tr>);
 
         let _visibility = (!this.getLeaf() && this.state.expanded) ? 'inherit' : 'hidden',
-            linesDown = (<tr style={{visibility: _visibility}} className="ui-organizationchart-lines">
+            linesDown = (<tr style={{visibility: _visibility}} className="p-organizationchart-lines">
                 <td colSpan={colspan}>
-                    <div className="ui-organizationchart-line-down"></div>
+                    <div className="p-organizationchart-line-down"></div>
                 </td>
             </tr>),
             nodeChildLength = this.node.children && this.node.children.length,
-            linesMiddle = (<tr style={{visibility: _visibility}} className="ui-organizationchart-lines">
+            linesMiddle = (<tr style={{visibility: _visibility}} className="p-organizationchart-lines">
                 {
                     this.node.children && this.node.children.map((item, index) => {
-                        let leftClass = classNames('ui-organizationchart-line-left', {'ui-organizationchart-line-top': index !== 0}),
-                        rightClass = classNames('ui-organizationchart-line-right', {'ui-organizationchart-line-top': index !== nodeChildLength - 1});
+                        let leftClass = classNames('p-organizationchart-line-left', {'p-organizationchart-line-top': index !== 0}),
+                        rightClass = classNames('p-organizationchart-line-right', {'p-organizationchart-line-top': index !== nodeChildLength - 1});
 
                         return [<td key={index + '_lineleft'} className={leftClass}>&nbsp;</td>, <td key={index + '_lineright'} className={rightClass}>&nbsp;</td>];
                     })
                 }
             </tr>),
-            childNodes = (<tr style={{visibility: _visibility}} className="ui-organizationchart-nodes">
+            childNodes = (<tr style={{visibility: _visibility}} className="p-organizationchart-nodes">
                     {
                         this.node.children && this.node.children.map((child, index) => {
                             return (<td key={index} colSpan="2">
@@ -107,7 +107,7 @@ export class OrganizationChartNode extends Component {
 
 
         return (
-            <table className="ui-organizationchart-table">
+            <table className="p-organizationchart-table">
                 <tbody>
                     {nodeContent}
                     {linesDown}
@@ -158,7 +158,7 @@ export class OrganizationChart extends Component {
     onNodeClick(event, node) {
         let eventTarget = (event.target);
 
-        if(eventTarget.className && (eventTarget.className.indexOf('ui-node-toggler') !== -1 || eventTarget.className.indexOf('ui-node-toggler-icon') !== -1)) {
+        if(eventTarget.className && (eventTarget.className.indexOf('p-node-toggler') !== -1 || eventTarget.className.indexOf('p-node-toggler-icon') !== -1)) {
             return;
         }
         else if(this.props.selectionMode) {
@@ -231,7 +231,7 @@ export class OrganizationChart extends Component {
     render() {
         this.root = this.props.value && this.props.value.length ? this.props.value[0] : null;
 
-        var className = classNames('ui-organizationchart ui-widget', this.props.className);
+        var className = classNames('p-organizationchart p-component', this.props.className);
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
                 <OrganizationChartNode node={this.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}

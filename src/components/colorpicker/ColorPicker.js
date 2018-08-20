@@ -53,7 +53,7 @@ export class ColorPicker extends Component {
         this.bindDocumentMouseMoveListener();
         this.bindDocumentMouseUpListener();
         this.pickHue(event);
-        DomHandler.addClass(this.container, 'ui-colorpicker-dragging');
+        DomHandler.addClass(this.container, 'p-colorpicker-dragging');
     }
     
     pickHue(event) {
@@ -78,7 +78,7 @@ export class ColorPicker extends Component {
         this.bindDocumentMouseMoveListener();
         this.bindDocumentMouseUpListener();
         this.pickColor(event);
-        DomHandler.addClass(this.container, 'ui-colorpicker-dragging');
+        DomHandler.addClass(this.container, 'p-colorpicker-dragging');
     }
     
     pickColor(event) {
@@ -190,8 +190,8 @@ export class ColorPicker extends Component {
         this.panel.element.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
-            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 1);
 
         this.alignPanel();
@@ -200,13 +200,13 @@ export class ColorPicker extends Component {
     }
     
     hide() {
-        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
+        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
         this.unbindDocumentClickListener();
 
         setTimeout(() => {
             this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 150);
         
     }
@@ -306,7 +306,7 @@ export class ColorPicker extends Component {
     onDocumentMouseUp() {
         this.colorDragging = false;
         this.hueDragging = false;
-        DomHandler.removeClass(this.container, 'ui-colorpicker-dragging');
+        DomHandler.removeClass(this.container, 'p-colorpicker-dragging');
         this.unbindDocumentMouseMoveListener();
         this.unbindDocumentMouseUpListener();
     }
@@ -488,9 +488,9 @@ export class ColorPicker extends Component {
 
     renderColorSelector() {
         return (
-            <div ref={(el) => this.colorSelector = el} className="ui-colorpicker-color-selector" onMouseDown={this.onColorMousedown.bind(this)}>
-                <div className="ui-colorpicker-color">
-                    <div ref={(el) => this.colorHandle = el} className="ui-colorpicker-color-handle"></div>
+            <div ref={(el) => this.colorSelector = el} className="p-colorpicker-color-selector" onMouseDown={this.onColorMousedown.bind(this)}>
+                <div className="p-colorpicker-color">
+                    <div ref={(el) => this.colorHandle = el} className="p-colorpicker-color-handle"></div>
                 </div>
             </div>
         );
@@ -498,8 +498,8 @@ export class ColorPicker extends Component {
 
     renderHue() {
         return (
-            <div ref={(el) => this.hueView = el} className="ui-colorpicker-hue" onMouseDown={this.onHueMousedown.bind(this)}>
-                <div ref={(el) => this.hueHandle = el} className="ui-colorpicker-hue-handle"></div>
+            <div ref={(el) => this.hueView = el} className="p-colorpicker-hue" onMouseDown={this.onHueMousedown.bind(this)}>
+                <div ref={(el) => this.hueHandle = el} className="p-colorpicker-hue-handle"></div>
             </div>
         );
     }
@@ -509,7 +509,7 @@ export class ColorPicker extends Component {
         let hue = this.renderHue();
 
         return (
-            <div className="ui-colorpicker-content">
+            <div className="p-colorpicker-content">
                 {colorSelector}
                 {hue}
             </div>
@@ -518,8 +518,8 @@ export class ColorPicker extends Component {
 
     renderInput() {
         if (!this.props.inline) {
-            let inputClassName = classNames('ui-colorpicker-preview ui-inputtext ui-state-default ui-corner-all', {
-                'ui-state-disabled': this.props.disabled
+            let inputClassName = classNames('p-colorpicker-preview p-inputtext', {
+                'p-disabled': this.props.disabled
             });
 
             return (
@@ -533,7 +533,7 @@ export class ColorPicker extends Component {
     }
 
     render() {
-        let className = classNames('ui-colorpicker ui-widget', this.props.className, {'ui-colorpicker-overlay': !this.props.inline});
+        let className = classNames('p-colorpicker p-component', this.props.className, {'p-colorpicker-overlay': !this.props.inline});
         let content = this.renderContent();
         let input = this.renderInput();
 

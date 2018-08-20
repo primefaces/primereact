@@ -1,13 +1,13 @@
-.ui-picklist > div {
+.p-picklist > div {
     float: left;
 }
 
-.ui-picklist .ui-picklist-buttons {
+.p-picklist .p-picklist-buttons {
     height: 12.5em;
     padding: 0 .25em;
 }
 
-.ui-picklist .ui-picklist-list {
+.p-picklist .p-picklist-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -16,172 +16,172 @@
     width: 12.5em;
 }
 
-.ui-picklist .ui-picklist-list li {
+.p-picklist .p-picklist-list li {
     margin: 1px;
     padding: .125em;
 }
 
-.ui-picklist .ui-button {
+.p-picklist .p-button {
     display:block;
     margin-bottom: 0.25em;
 }
 
-.ui-picklist .ui-button-text-icon-left {
+.p-picklist .p-button-text-icon-left {
     width: 100%;
 }
 
-.ui-picklist .ui-picklist-item {
+.p-picklist .p-picklist-item {
     cursor: pointer;
     border: 0 none;
     font-weight: inherit;
 }
 
-.ui-picklist .ui-picklist-caption {
+.p-picklist .p-picklist-caption {
     text-align: center;
     padding: .5em .75em;
     border-bottom:0 none;
 }
 
-.ui-picklist table {
+.p-picklist table {
     width: 100%;
     border-collapse:collapse;
 }
 
-.ui-picklist .ui-picklist-filter-container {
+.p-picklist .p-picklist-filter-container {
     position: relative;
     width: 100%;
     padding: .5em .6em;
     border-bottom: 0 none;
 }
 
-.ui-picklist .ui-picklist-filter-container .ui-picklist-filter {
+.p-picklist .p-picklist-filter-container .p-picklist-filter {
     text-indent: 1.1em;
     width: 100%;
 }
 
-.ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon {
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
     position: absolute;
     top: 50%;
     left: 1em;
     margin-top: -.6em;
 }
 
-.ui-picklist {
+.p-picklist {
     display: table;
 }
 
-.ui-picklist > div {
+.p-picklist > div {
     float: none;
     display: table-cell;
     vertical-align: top;
 }
 
-.ui-picklist .ui-picklist-buttons {
+.p-picklist .p-picklist-buttons {
     vertical-align: middle;
 }
 
 /* Vertical */
-.ui-picklist.ui-picklist-vertical {
+.p-picklist.p-picklist-vertical {
     display: table;
 }
 
-.ui-picklist.ui-picklist-vertical > div {
+.p-picklist.p-picklist-vertical > div {
     float: none;
     display: table-row;
     vertical-align: top;
 }
 
-.ui-picklist.ui-picklist-vertical .ui-picklist-buttons {
+.p-picklist.p-picklist-vertical .p-picklist-buttons {
     text-align:center;
     height: auto;
 }
 
-.ui-picklist.ui-picklist-vertical .ui-picklist-buttons .ui-button {
+.p-picklist.p-picklist-vertical .p-picklist-buttons .p-button {
     display: inline-block;
 }
 
-.ui-picklist.ui-picklist-vertical .ui-button {
+.p-picklist.p-picklist-vertical .p-button {
     margin-top: 0.25em;
 }
 
-.ui-picklist-outline {
+.p-picklist-outline {
     outline: 1px dotted black;
     z-index: 1;
 }
 
-.ui-picklist .ui-picklist-droppoint {
+.p-picklist .p-picklist-droppoint {
     height: 6px;
     list-style-type: none;
 }
 
-.ui-picklist .ui-picklist-list .ui-picklist-droppoint-empty {
+.p-picklist .p-picklist-list .p-picklist-droppoint-empty {
     height: 100%;
     list-style-type: none;
 }
 
-.ui-picklist-list.ui-picklist-source,
-.ui-picklist-list.ui-picklist-target {
+.p-picklist-list.p-picklist-source,
+.p-picklist-list.p-picklist-target {
     outline: none;
 }
 
 /* Responsive */
-.ui-picklist.ui-picklist-responsive * {
+.p-picklist.p-picklist-responsive * {
     box-sizing: border-box;
 }
 
-.ui-picklist.ui-picklist-responsive {
+.p-picklist.p-picklist-responsive {
     width: 100%;
 }
 
-.ui-picklist.ui-picklist-responsive .ui-picklist-listwrapper {
+.p-picklist.p-picklist-responsive .p-picklist-listwrapper {
     width: 35%;
 }
 
-.ui-picklist.ui-picklist-responsive .ui-picklist-listwrapper.ui-picklist-listwrapper-nocontrols {
+.p-picklist.p-picklist-responsive .p-picklist-listwrapper.p-picklist-listwrapper-nocontrols {
     width: 45%;
 }
 
-.ui-picklist.ui-picklist-responsive .ui-picklist-buttons {
+.p-picklist.p-picklist-responsive .p-picklist-buttons {
     width: 10%;
 }
 
-.ui-picklist.ui-picklist-responsive .ui-picklist-buttons button {
+.p-picklist.p-picklist-responsive .p-picklist-buttons button {
     width: 100%;
 }
 
-.ui-picklist.ui-picklist-responsive .ui-picklist-list {
+.p-picklist.p-picklist-responsive .p-picklist-list {
     width: auto;
 }
 
 /* Responsive */
 @media (max-width: 40em) {
-    .ui-picklist.ui-picklist-responsive {
+    .p-picklist.p-picklist-responsive {
         display: block;
     }
 
-    .ui-picklist.ui-picklist-responsive > div {
+    .p-picklist.p-picklist-responsive > div {
         display: block;
         width: 100% !important;
     }
 
-    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons {
+    .p-picklist.p-picklist-responsive .p-picklist-buttons {
         text-align: center;
         height: auto;
         padding: .4em 0;
     }
 
-    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons button {
+    .p-picklist.p-picklist-responsive .p-picklist-buttons button {
         display: inline-block;
         width: 20%;
         margin-bottom: 0;
         margin-right: .25em;
     }
 
-    .ui-picklist.ui-picklist-responsive .ui-picklist-source-controls.ui-picklist-buttons {
+    .p-picklist.p-picklist-responsive .p-picklist-source-controls.p-picklist-buttons {
         padding-bottom: .4em;
     }
 
-    .ui-picklist.ui-picklist-responsive .ui-picklist-target-controls.ui-picklist-buttons {
+    .p-picklist.p-picklist-responsive .p-picklist-target-controls.p-picklist-buttons {
         padding-top: .4em;
     }
 }

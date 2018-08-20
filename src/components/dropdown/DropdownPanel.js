@@ -24,13 +24,13 @@ export class DropdownPanel extends Component {
     };
 
     renderElement() {
-        let className = classNames('ui-dropdown-panel ui-widget-content ui-corner-all ui-helper-hidden ui-input-overlay ui-shadow', this.props.panelClassName);
+        let className = classNames('p-dropdown-panel p-helper-hidden p-input-overlay p-shadow', this.props.panelClassName);
 
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
                 {this.props.filter}
-                <div ref={(el) => this.itemsWrapper = el} className="ui-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
-                    <ul className="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
+                <div ref={(el) => this.itemsWrapper = el} className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
+                    <ul className="p-dropdown-items p-dropdown-list p-component p-helper-reset">
                         {this.props.children}
                     </ul>
                 </div>

@@ -59,12 +59,12 @@ export class SlideMenuSub extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+            <li key={'separator_' + index} className="p-menu-separator"></li>
         );
     }
     
     renderIcon(item) {
-        const className = classNames('ui-menuitem-icon', item.icon);
+        const className = classNames('p-menuitem-icon', item.icon);
         if (item.icon) {
             return (
                 <span className={className}></span>
@@ -78,7 +78,7 @@ export class SlideMenuSub extends Component {
     renderSubmenuIcon(item) {
         if (item.items) {
             return (
-                <span className="ui-submenu-icon pi pi-fw pi-caret-right"></span>
+                <span className="p-submenu-icon pi pi-fw pi-caret-right"></span>
             );
         }
         else {
@@ -99,16 +99,16 @@ export class SlideMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('ui-menuitem ui-widget ui-corner-all', {'ui-menuitem-active': this.state.activeItem === item, 'ui-state-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem p-component', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style}>
-                <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
                     {icon}
-                    <span className="ui-menuitem-text">{item.label}</span>
+                    <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
                 </a>
                 {submenu}
@@ -137,7 +137,7 @@ export class SlideMenuSub extends Component {
     }
     
     render() {
-        const className = classNames({'ui-slidemenu-rootlist': this.props.root, 'ui-submenu-list': !this.props.root, 'ui-active-submenu': this.props.parentActive});
+        const className = classNames({'p-slidemenu-rootlist': this.props.root, 'p-submenu-list': !this.props.root, 'p-active-submenu': this.props.parentActive});
         const style = {
             width: this.props.menuWidth + 'px',
             left: this.props.root ? (-1 * this.props.level * this.props.menuWidth) + 'px' : this.props.menuWidth + 'px',
@@ -218,11 +218,11 @@ export class SlideMenu extends Component {
     }
 
     renderBackward() {
-        const className = classNames('ui-slidemenu-backward ui-widget-header ui-corner-all', {'ui-helper-hidden': this.state.level === 0});
+        const className = classNames('p-slidemenu-backward', {'p-helper-hidden': this.state.level === 0});
 
         return (
             <div ref={el => this.backward = el} className={className} onClick={this.navigateBack}>
-                <span className="ui-slidemenu-backward-icon pi pi-fw pi-caret-left"></span>
+                <span className="p-slidemenu-backward-icon pi pi-fw pi-caret-left"></span>
                 <span>{this.props.backLabel}</span>
             </div>
         );
@@ -252,8 +252,8 @@ export class SlideMenu extends Component {
         this.container.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.container, 'ui-menu-overlay-visible');
-            DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+            DomHandler.addClass(this.container, 'p-menu-overlay-visible');
+            DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
         }, 1);
 
         DomHandler.absolutePosition(this.container,  event.currentTarget);
@@ -266,13 +266,13 @@ export class SlideMenu extends Component {
 
     hide(event) {
         if (this.container) {
-            DomHandler.addClass(this.container, 'ui-menu-overlay-hidden');
-            DomHandler.removeClass(this.container, 'ui-menu-overlay-visible');
+            DomHandler.addClass(this.container, 'p-menu-overlay-hidden');
+            DomHandler.removeClass(this.container, 'p-menu-overlay-visible');
 
             setTimeout(() => {
                 if (this.container) {
                     this.container.style.display = 'none';
-                    DomHandler.removeClass(this.container, 'ui-menu-overlay-hidden');
+                    DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
                 }
             }, 150);
         }
@@ -338,13 +338,13 @@ export class SlideMenu extends Component {
     }
     
     render() {
-        const className = classNames('ui-slidemenu ui-widget ui-widget-content ui-corner-all', {'ui-slidemenu-dynamic ui-menu-overlay ui-shadow': this.props.popup});
+        const className = classNames('p-slidemenu p-component', {'p-slidemenu-dynamic p-menu-overlay p-shadow': this.props.popup});
         const backward = this.renderBackward();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
-                <div className="ui-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
-                    <div className="ui-slidemenu-content" ref={el => this.slideMenuContent = el}>
+                <div className="p-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
+                    <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
                         <SlideMenuSub model={this.props.model} root={true} index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration} 
                                 level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
                     </div>

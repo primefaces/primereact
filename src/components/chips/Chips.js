@@ -118,11 +118,11 @@ export class Chips extends Component {
     }
 
     onFocus() {
-        DomHandler.addClass(this.listElement, 'ui-state-focus');
+        DomHandler.addClass(this.listElement, 'p-focus');
     }
 
     onBlur() {
-        DomHandler.removeClass(this.listElement, 'ui-state-focus');
+        DomHandler.removeClass(this.listElement, 'p-focus');
     }
 
     isMaxedOut() {
@@ -133,16 +133,16 @@ export class Chips extends Component {
         const content = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
 
         return (
-            <li key={index} className="ui-chips-token ui-state-highlight ui-corner-all">
-                <span className="ui-chips-token-icon pi pi-fw pi-times" onClick={(event) => this.removeItem(event, index)}></span>
-                <span className="ui-chips-token-label">{content}</span>
+            <li key={index} className="p-chips-token p-highlight">
+                <span className="p-chips-token-icon pi pi-fw pi-times" onClick={(event) => this.removeItem(event, index)}></span>
+                <span className="p-chips-token-label">{content}</span>
             </li>
         );
     }
 
     renderInputElement() {
         return (
-            <li className="ui-chips-input-token">
+            <li className="p-chips-input-token">
                 <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
                             onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} />
             </li>
@@ -161,7 +161,7 @@ export class Chips extends Component {
     }
 
     renderList() {
-        const className = classNames('ui-inputtext ui-state-default ui-corner-all', {'ui-state-disabled': this.props.disabled});
+        const className = classNames('p-inputtext', {'p-disabled': this.props.disabled});
         const items = this.renderItems();
         const inputElement = this.renderInputElement();
 
@@ -179,7 +179,7 @@ export class Chips extends Component {
     }
 
     render() {
-        const className = classNames('ui-chips ui-widget', this.props.className);
+        const className = classNames('p-chips p-component', this.props.className);
         const list = this.renderList();
 
         return (

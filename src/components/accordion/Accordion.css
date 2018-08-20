@@ -1,51 +1,51 @@
-.ui-accordion { 
+.p-accordion { 
     width: 100%; 
 }
 
-.ui-accordion .ui-accordion-header { 
+.p-accordion .p-accordion-header { 
     cursor: pointer; 
     position: relative; 
     margin-top: 1px; 
     zoom: 1; 
 }
 
-.ui-accordion .ui-accordion-header a { 
+.p-accordion .p-accordion-header a { 
     display: block; 
     padding: .5em;
 }
 
-.ui-accordion .ui-accordion-toggle-icon,
-.ui-accordion .ui-accordion-header-text {
+.p-accordion .p-accordion-toggle-icon,
+.p-accordion .p-accordion-header-text {
     vertical-align: middle;   
 }
 
-.ui-accordion .ui-accordion-header a > span { 
+.p-accordion .p-accordion-header a > span { 
     display: inline-block; 
     vertical-align: middle;
 }
 
-.ui-accordion .ui-accordion-content { 
+.p-accordion .p-accordion-content { 
     padding: 1em;
     border-top: 0;
     zoom: 1;
 }
 
-.ui-accordion .ui-accordion-header.ui-state-disabled, 
-.ui-accordion .ui-accordion-header.ui-state-disabled a { 
+.p-accordion .p-accordion-header.p-disabled, 
+.p-accordion .p-accordion-header.p-disabled a { 
     cursor: default; 
 }
 
-.ui-accordion .ui-accordion-content-wrapper-collapsed {
+.p-accordion .p-accordion-content-wrapper-collapsed {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 }
 
-.ui-accordion .ui-accordion-content-wrapper-expanded {
+.p-accordion .p-accordion-content-wrapper-expanded {
     max-height: 1000px;
     transition: max-height 1s ease-in-out;
 }
 
-.ui-accordion .ui-accordion-content-wrapper-expanding {
+.p-accordion .p-accordion-content-wrapper-expanding {
     overflow: hidden;
 }

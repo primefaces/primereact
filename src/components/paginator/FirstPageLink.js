@@ -15,11 +15,11 @@ export class FirstPageLink extends Component {
     }
     
     render() {
-        let className = classNames('ui-paginator-first ui-paginator-element ui-state-default ui-corner-all', {'ui-state-disabled': this.props.disabled});
+        let className = classNames('p-paginator-first p-paginator-element', {'p-disabled': this.props.disabled});
         
         return (
             <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
-                <span className="ui-paginator-icon pi pi-step-backward"></span>
+                <span className="p-paginator-icon pi pi-step-backward"></span>
             </a>
         );
     }

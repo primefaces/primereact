@@ -99,19 +99,19 @@ export class Editor extends Component {
     }
 
     render() {
-        let containerClass = classNames('ui-widget ui-editor-container ui-corner-all', this.props.className);
+        let containerClass = classNames('p-component p-editor-container', this.props.className);
 
         let toolbarHeader = null;
         if (this.props.headerTemplate) {
             toolbarHeader = (
-                <div ref={(el) => this.toolbarElement = el} className="ui-editor-toolbar ui-widget-header ui-corner-top">
+                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar p-corner-top">
                     {this.props.headerTemplate}
                 </div>
             );
         }
         else {
             toolbarHeader = (
-                <div ref={(el) => this.toolbarElement = el} className="ui-editor-toolbar ui-widget-header ui-corner-top">
+                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar p-corner-top">
                     <span className="ql-formats">
                         <select className="ql-header" defaultValue="0">
                           <option value="1">Heading</option>
@@ -155,7 +155,7 @@ export class Editor extends Component {
             );
         }
 
-        let content = (<div ref={(el) => this.editorElement = el} className="ui-editor-content" style={this.props.style}></div>)
+        let content = (<div ref={(el) => this.editorElement = el} className="p-editor-content" style={this.props.style}></div>)
 
         return (
             <div id={this.props.id} className={containerClass}>

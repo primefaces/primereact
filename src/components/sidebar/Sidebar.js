@@ -73,7 +73,7 @@ export class Sidebar extends Component {
         if (!this.mask) {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-sidebar-mask');
+            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-sidebar-mask');
             if (this.props.dismissable) {
                 this.bindMaskClickListener();
             }
@@ -81,7 +81,7 @@ export class Sidebar extends Component {
             document.body.appendChild(this.mask);
             
             if (this.props.blockScroll) {
-                DomHandler.addClass(document.body, 'ui-overflow-hidden');
+                DomHandler.addClass(document.body, 'p-overflow-hidden');
             }
         }
     }
@@ -91,7 +91,7 @@ export class Sidebar extends Component {
             this.unbindMaskClickListener();
             document.body.removeChild(this.mask);
             if (this.props.blockScroll) {
-                DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+                DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
             this.mask = null;
         }
@@ -126,7 +126,7 @@ export class Sidebar extends Component {
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
-                <a className="ui-sidebar-close ui-corner-all" role="button" onClick={this.onCloseClick}>
+                <a className="p-sidebar-close" role="button" onClick={this.onCloseClick}>
                     <span className="pi pi-times"/>
                 </a>
             );
@@ -137,8 +137,8 @@ export class Sidebar extends Component {
     }
 
     render() {
-        const className = classNames('ui-sidebar ui-widget ui-widget-content ui-shadow', this.props.className, 'ui-sidebar-' + this.props.position,
-                                       {'ui-sidebar-active': this.props.visible, 'ui-sidebar-full': this.props.fullScreen});
+        const className = classNames('p-sidebar p-component p-shadow', this.props.className, 'p-sidebar-' + this.props.position,
+                                       {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
         const closeIcon = this.renderCloseIcon();
 
         return (

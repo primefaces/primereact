@@ -1,12 +1,12 @@
-.ui-tabview {
+.p-tabview {
     padding: .25em; 
 }
 
-.ui-tabview .ui-tabview-nav { 
+.p-tabview .p-tabview-nav { 
     margin: 0;
 }
 
-.ui-tabview .ui-tabview-nav li { 
+.p-tabview .p-tabview-nav li { 
     list-style: none; 
     float: left; 
     position: relative; 
@@ -15,76 +15,76 @@
     white-space: nowrap; 
 }
 
-.ui-tabview .ui-tabview-nav li a { 
+.p-tabview .p-tabview-nav li a { 
     float: left; 
     padding: .5em 1em; 
     text-decoration: none; 
 }
 
-.ui-tabview .ui-tabview-nav li.ui-tabview-selected a, 
-.ui-tabview .ui-tabview-nav li.ui-state-disabled a, 
-.ui-tabview .ui-tabview-nav li.ui-state-processing a { 
+.p-tabview .p-tabview-nav li.p-tabview-selected a, 
+.p-tabview .p-tabview-nav li.p-disabled a, 
+.p-tabview .p-tabview-nav li.p-state-processing a { 
     cursor: text; 
 }
 
-.ui-tabview .ui-tabview-nav li a, 
-.ui-tabview.ui-tabview-collapsible .ui-tabview-nav li.ui-tabview-selected a { 
+.p-tabview .p-tabview-nav li a, 
+.p-tabview.p-tabview-collapsible .p-tabview-nav li.p-tabview-selected a { 
     cursor: pointer; 
 }
 
-.ui-tabview .ui-tabview-panel { 
+.p-tabview .p-tabview-panel { 
     border-width: 0; 
     padding: 1em; 
     background: none; 
 }
 
-.ui-tabview .ui-tabview-nav li { 
+.p-tabview .p-tabview-nav li { 
     display: block; 
 }
 
-.ui-tabview .ui-tabview-nav li .ui-tabview-left-icon,
-.ui-tabview .ui-tabview-nav li .ui-tabview-right-icon,
-.ui-tabview .ui-tabview-nav li .ui-tabview-title {
+.p-tabview .p-tabview-nav li .p-tabview-left-icon,
+.p-tabview .p-tabview-nav li .p-tabview-right-icon,
+.p-tabview .p-tabview-nav li .p-tabview-title {
     vertical-align: middle;
 }
 
-.ui-tabview .ui-tabview-nav li .ui-tabview-left-icon {
+.p-tabview .p-tabview-nav li .p-tabview-left-icon {
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-tabview .ui-tabview-nav li .ui-tabview-right-icon {
+.p-tabview .p-tabview-nav li .p-tabview-right-icon {
     margin-left: .25em;
     vertical-align: middle;
 }
 
-.ui-tabview .ui-tabview-nav li .ui-tabview-close { 
+.p-tabview .p-tabview-nav li .p-tabview-close { 
     margin: 0.5em 0.3em 0 0; 
     cursor: pointer; 
 }
 
 /* per orientation settings */
 /* top and bottom */
-.ui-tabview.ui-tabview-top > .ui-tabview-nav li { 
+.p-tabview.p-tabview-top > .p-tabview-nav li { 
     border-bottom: 0;
     top: 1px; 
 }
 
-.ui-tabview.ui-tabview-top > .ui-tabview-nav { 
+.p-tabview.p-tabview-top > .p-tabview-nav { 
     padding: .2em .2em 0; 
 }
 
-.ui-tabview.ui-tabview-bottom > .ui-tabview-nav { 
+.p-tabview.p-tabview-bottom > .p-tabview-nav { 
     padding: 0 .2em .2em; 
 }
 
-.ui-tabview.ui-tabview-bottom > .ui-tabview-nav li { 
+.p-tabview.p-tabview-bottom > .p-tabview-nav li { 
     border-top: 0;
 }
 
 /* left and right*/
-.ui-tabview-left:after,
-.ui-tabview-right:after {
+.p-tabview-left:after,
+.p-tabview-right:after {
     clear:both;
     content: ".";
     display: block;
@@ -92,7 +92,7 @@
     visibility: hidden;
 }
 
-.ui-tabview-left > .ui-tabview-nav {
+.p-tabview-left > .p-tabview-nav {
     float:left;
     width: 25%;
     height: 300px;
@@ -100,25 +100,25 @@
     padding-top: 1px;
 }
 
-.ui-tabview-left > .ui-tabview-panels {
+.p-tabview-left > .p-tabview-panels {
     float:right;
     width: 75%;
 }
 
-.ui-tabview.ui-tabview-left > .ui-tabview-nav li,
-.ui-tabview.ui-tabview-right > .ui-tabview-nav li{
+.p-tabview.p-tabview-left > .p-tabview-nav li,
+.p-tabview.p-tabview-right > .p-tabview-nav li{
     display: block;
     float: right;
     white-space: normal;
     width: 99%;
 }
 
-.ui-tabview.ui-tabview-left > .ui-tabview-nav li {
+.p-tabview.p-tabview-left > .p-tabview-nav li {
     margin: 0 0 1px 0;
     border-right:0 none;
 }
 
-.ui-tabview.ui-tabview-right > .ui-tabview-nav {
+.p-tabview.p-tabview-right > .p-tabview-nav {
     float:right;
     width: 25%;
     height: 300px;
@@ -126,16 +126,16 @@
     padding-top: 1px;
 }
 
-.ui-tabview.ui-tabview-right > .ui-tabview-panels {
+.p-tabview.p-tabview-right > .p-tabview-panels {
     float:left;
     width: 75%;
 }
 
-.ui-tabview.ui-tabview-right > .ui-tabview-nav li {
+.p-tabview.p-tabview-right > .p-tabview-nav li {
     margin: 0 0 1px 0;
     border-left:0 none;
 }
 /* RTL */
-.ui-rtl .ui-tabview .ui-tabview-nav li {
+.p-rtl .p-tabview .p-tabview-nav li {
     float: right;
 }

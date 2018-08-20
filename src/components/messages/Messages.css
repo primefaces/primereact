@@ -1,27 +1,27 @@
-.ui-messages {
+.p-messages {
     border: 1px solid;
     margin: .5em 0;
     padding: 1em 1em 1em .5em;
     position: relative;
 }
 
-.ui-messages .ui-messages-icon {
+.p-messages .p-messages-icon {
     display:inline-block;
     padding: 0;
     vertical-align: middle;
     font-size: 2em;
 }
 
-.ui-messages .ui-messages-summary {
+.p-messages .p-messages-summary {
     font-weight: bold;
     margin-left: .25em;
 }
 
-.ui-messages .ui-messages-detail {
+.p-messages .p-messages-detail {
     margin-left: .25em;
 }
 
-.ui-messages ul {
+.p-messages ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -29,15 +29,15 @@
     vertical-align: middle;
 }
 
-.ui-messages ul > li {
+.p-messages ul > li {
     padding: .25em 0;
 }
 
-.ui-messages.ui-messages-noicon ul {
+.p-messages.p-messages-noicon ul {
     margin: 0 1.5em 0 0;
 }
 
-.ui-messages .ui-messages-close {
+.p-messages .p-messages-close {
     cursor: pointer;
     position: absolute;
     top: 5px;

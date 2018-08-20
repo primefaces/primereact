@@ -85,7 +85,7 @@ export class Chart extends Component {
     }
 
     render() {
-        let className = classNames('ui-chart', this.props.className),
+        let className = classNames('p-chart', this.props.className),
             style = Object.assign({
                 width: this.props.width,
                 height: this.props.height

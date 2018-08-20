@@ -94,9 +94,9 @@ export class UITreeRow extends Component {
             this.node.parent = this.props.node.parentNode;
         }
 
-        var tableRowClass = classNames('ui-treetable-row', {
-            'ui-state-highlight': this.isSelected(),
-            'ui-treetable-row-selectable': this.treeTable.props.selectionMode && this.node.selectable !== false
+        var tableRowClass = classNames('p-treetable-row', {
+            'p-highlight': this.isSelected(),
+            'p-treetable-row-selectable': this.treeTable.props.selectionMode && this.node.selectable !== false
         });
 
         var childTbody = this.node.children && this.node.children.map((childNode, index) => {
@@ -112,7 +112,7 @@ export class UITreeRow extends Component {
                                 checkbox = null;
 
                             if (i === 0) {
-                                var togglerClass = classNames('ui-treetable-toggler pi pi-fw ui-c', {
+                                var togglerClass = classNames('p-treetable-toggler pi pi-fw p-c', {
                                     'pi-caret-down': this.state.expanded,
                                     'pi-caret-right': !this.state.expanded
                                 }),
@@ -121,14 +121,14 @@ export class UITreeRow extends Component {
                                 toggler = (<a className={togglerClass} style={togglerStyle} onClick={this.toggle.bind(this)} title={this.state.expanded ? this.props.labelCollapse : this.props.labelExpand}><span></span></a>);
 
                                 if (this.treeTable.props.selectionMode === 'checkbox') {
-                                    var checkboxIconClass = classNames('ui-chkbox-icon ui-c pi', {
+                                    var checkboxIconClass = classNames('p-chkbox-icon p-c pi', {
                                         'pi-check': this.isSelected(),
                                         'pi-minus': this.node.partialSelected
                                     });
 
                                     checkbox = (
-                                        <div className="ui-chkbox ui-treetable-checkbox">
-                                            <div className="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
+                                        <div className="p-chkbox p-treetable-checkbox">
+                                            <div className="p-chkbox-box p-component">
                                                 <span className={checkboxIconClass}></span>
                                             </div>
                                         </div>
@@ -150,8 +150,8 @@ export class UITreeRow extends Component {
                     }
                 </tr>
                 {
-                    this.node.children && this.state.expanded && (<tr className="ui-treetable-row" style={{ 'display': 'table-row' }}>
-                        <td colSpan={this.treeTable.columns.length} className="ui-treetable-child-table-container">
+                    this.node.children && this.state.expanded && (<tr className="p-treetable-row" style={{ 'display': 'table-row' }}>
+                        <td colSpan={this.treeTable.columns.length} className="p-treetable-child-table-container">
                             <table>
                                 {childTbody}
                             </table>

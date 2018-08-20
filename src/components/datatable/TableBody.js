@@ -20,7 +20,7 @@ export class TableBody extends Component {
 
     onRowClick(event) {
         let targetNode = event.originalEvent.target.nodeName;
-        if(targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode ==='A' || (DomHandler.hasClass(event.originalEvent.target, 'ui-clickable'))) {
+        if(targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode ==='A' || (DomHandler.hasClass(event.originalEvent.target, 'p-clickable'))) {
             return;
         }
 
@@ -304,22 +304,22 @@ export class TableBody extends Component {
             let prevRowElement = rowElement.previousElementSibling;
             
             if (pageY < rowMidY) {
-                DomHandler.removeClass(rowElement, 'ui-datatable-dragpoint-bottom');
+                DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
     
                 this.droppedRowIndex = index;
                 if (prevRowElement)
-                    DomHandler.addClass(prevRowElement, 'ui-datatable-dragpoint-bottom');
+                    DomHandler.addClass(prevRowElement, 'p-datatable-dragpoint-bottom');
                 else
-                    DomHandler.addClass(rowElement, 'ui-datatable-dragpoint-top');
+                    DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
             } 
             else {
                 if (prevRowElement)
-                    DomHandler.removeClass(prevRowElement, 'ui-datatable-dragpoint-bottom');
+                    DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
                 else
-                    DomHandler.addClass(rowElement, 'ui-datatable-dragpoint-top');
+                    DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
     
                 this.droppedRowIndex = index + 1;
-                DomHandler.addClass(rowElement, 'ui-datatable-dragpoint-bottom');
+                DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
             }
         }
     }
@@ -328,11 +328,11 @@ export class TableBody extends Component {
         let rowElement = event.rowElement;
         let prevRowElement = rowElement.previousElementSibling;
         if (prevRowElement) {
-            DomHandler.removeClass(prevRowElement, 'ui-datatable-dragpoint-bottom');
+            DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
         }
 
-        DomHandler.removeClass(rowElement, 'ui-datatable-dragpoint-bottom');
-        DomHandler.removeClass(rowElement, 'ui-datatable-dragpoint-top');
+        DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
+        DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-top');
     }
 
     onRowDrop(event) {
@@ -358,9 +358,9 @@ export class TableBody extends Component {
     
     renderRowGroupHeader(rowData, index) {
         return (
-            <tr key={index + '_rowgroupheader'} className="ui-widget-header ui-rowgroup-header">
+            <tr key={index + '_rowgroupheader'} className="p-rowgroup-header">
                 <td colSpan={React.Children.count(this.props.children)}>
-                    <span className="ui-rowgroup-header-name">
+                    <span className="p-rowgroup-header-name">
                         {this.props.rowGroupHeaderTemplate(rowData, index)}
                     </span>
                 </td>
@@ -370,7 +370,7 @@ export class TableBody extends Component {
     
     renderRowGroupFooter(rowData, index) {
         return (
-            <tr key={index + '_rowgroupfooter'} className="ui-widget-header ui-rowgroup-footer">
+            <tr key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
                 {this.props.rowGroupFooterTemplate(rowData, index)}
             </tr>
         );
@@ -445,7 +445,7 @@ export class TableBody extends Component {
                 //row expansion
                 if(expanded) {
                     let expandedRowContent = this.props.rowExpansionTemplate(rowData);
-                    let expandedRow = <tr className="ui-widget-content" key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
+                    let expandedRow = <tr key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
                     rows.push(expandedRow);
                 }
                 
@@ -461,11 +461,11 @@ export class TableBody extends Component {
             }
         }
         else {
-            rows = <tr className="ui-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr>;
+            rows = <tr className="p-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr>;
         }
 
         return (
-            <tbody className="ui-datatable-tbody">
+            <tbody className="p-datatable-tbody">
                 {rows}
             </tbody>
         );

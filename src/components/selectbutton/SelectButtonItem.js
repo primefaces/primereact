@@ -39,23 +39,23 @@ export class SelectButtonItem extends Component {
     }
     
     onFocus(event) {
-        DomHandler.addClass(this.el, 'ui-state-focus');
+        DomHandler.addClass(this.el, 'p-focus');
     }
     
     onBlur(event) {
-        DomHandler.removeClass(this.el, 'ui-state-focus');
+        DomHandler.removeClass(this.el, 'p-focus');
     }
 
     render() {
-        let className = classNames('ui-button ui-widget ui-state-default ui-button-text-only', {
-            'ui-state-active': this.props.selected,
-            'ui-state-disabled': this.props.disabled
+        let className = classNames('p-button p-component p-button-text-only', {
+            'p-highlight': this.props.selected,
+            'p-disabled': this.props.disabled
         });
         
         return (
             <div ref={(el) => this.el = el} className={className} onClick={this.onClick}>
-                <span className="ui-button-text ui-c">{this.props.label}</span>
-                <div className="ui-helper-hidden-accessible">
+                <span className="p-button-text p-c">{this.props.label}</span>
+                <div className="p-helper-hidden-accessible">
                     <input type="checkbox" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} 
                         tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
                 </div>

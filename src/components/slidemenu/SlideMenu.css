@@ -1,29 +1,29 @@
-.ui-slidemenu {
+.p-slidemenu {
     width: 12.5em;
     padding: .25em;
 }
 
-.ui-slidemenu.ui-slidemenu-dynamic {
+.p-slidemenu.p-slidemenu-dynamic {
     position: absolute;
     display: none;
 }
 
-.ui-slidemenu .ui-menu-separator {
+.p-slidemenu .p-menu-separator {
     border-width: 1px 0 0 0;
 }
 
-.ui-slidemenu ul {
+.p-slidemenu ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.ui-slidemenu .ui-slidemenu-rootlist {
+.p-slidemenu .p-slidemenu-rootlist {
     position: absolute;
     top: 0;
 }
 
-.ui-slidemenu .ui-submenu-list {
+.p-slidemenu .p-submenu-list {
     display: none;
     position: absolute;
     top: 0;
@@ -31,46 +31,46 @@
     padding: .25em;
 }
 
-.ui-slidemenu .ui-menuitem-link {
+.p-slidemenu .p-menuitem-link {
     padding: .25em;
     display: block;
     position: relative;
     text-decoration: none;
 }
 
-.ui-slidemenu .ui-menuitem-icon {
+.p-slidemenu .p-menuitem-icon {
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-slidemenu .ui-menuitem-text {
+.p-slidemenu .p-menuitem-text {
     vertical-align: middle;
 }
 
-.ui-slidemenu .ui-menuitem {
+.p-slidemenu .p-menuitem {
     position: relative;
     margin: .125em 0;
 }
 
-.ui-slidemenu .ui-menuitem-link .ui-submenu-icon {
+.p-slidemenu .p-menuitem-link .p-submenu-icon {
     position: absolute;
     margin-top: -.5em;
     right: 0;
     top: 50%;
 }
 
-.ui-slidemenu .ui-slidemenu-wrapper {
+.p-slidemenu .p-slidemenu-wrapper {
     position: relative;
 }
 
-.ui-slidemenu .ui-slidemenu-content {
+.p-slidemenu .p-slidemenu-content {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
     height: 100%;
 }
 
-.ui-slidemenu-backward {
+.p-slidemenu-backward {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -78,18 +78,18 @@
     cursor: pointer;
 }
 
-.ui-slidemenu-backward .ui-slidemenu-backward-icon {
+.p-slidemenu-backward .p-slidemenu-backward-icon {
     vertical-align: middle;
 }
 
-.ui-slidemenu-backward span {
+.p-slidemenu-backward span {
     vertical-align: middle;
 }
 
-.ui-slidemenu .ui-menuitem-active {
+.p-slidemenu .p-menuitem-active {
     position: static;
 }
 
-.ui-slidemenu .ui-menuitem-active > .ui-submenu-list {
+.p-slidemenu .p-menuitem-active > .p-submenu-list {
     display: block;
 }

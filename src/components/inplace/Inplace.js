@@ -108,7 +108,7 @@ export class Inplace extends Component {
     }
 
     renderDisplay(content) {
-        const className = classNames('ui-inplace-display', {'ui-state-disabled': this.props.disabled});
+        const className = classNames('p-inplace-display', {'p-disabled': this.props.disabled});
 
         return (
             <div className={className} onClick={this.open}>
@@ -132,7 +132,7 @@ export class Inplace extends Component {
         const closeButton = this.renderCloseButton();
 
         return (
-            <div className="ui-inplace-content">
+            <div className="p-inplace-content">
                 {content}
                 {closeButton}
             </div>
@@ -155,7 +155,7 @@ export class Inplace extends Component {
     }
 
     render() {
-        const className = classNames('ui-inplace ui-widget', {'ui-inplace-closable': this.props.closable}, this.props.className);
+        const className = classNames('p-inplace p-component', {'p-inplace-closable': this.props.closable}, this.props.className);
 
         return (
             <div className={className}>

@@ -1,4 +1,4 @@
-.ui-inplace .ui-inplace-display {
+.p-inplace .p-inplace-display {
     display: inline;
     cursor: pointer;
     border: 0 none;
@@ -6,6 +6,6 @@
     font-weight: normal;
 }
 
-.ui-inplace .ui-inplace-content {
+.p-inplace .p-inplace-content {
     display: inline;
 }

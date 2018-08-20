@@ -31,14 +31,14 @@ export class AutoCompletePanel extends Component {
                 let itemContent = this.props.itemTemplate ? this.props.itemTemplate(suggestion) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
 
                 return (
-                    <li key={index + '_item'} className="ui-autocomplete-list-item ui-corner-all" onClick={(e) => this.props.onItemClick(e, suggestion)}>{itemContent}</li>
+                    <li key={index + '_item'} className="p-autocomplete-list-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>{itemContent}</li>
                 );
             });
         }
 
         return (
-            <div ref={(el) => this.element = el} className="ui-autocomplete-panel ui-widget-content ui-corner-all ui-input-overlay ui-shadow" style={{ maxHeight: this.props.scrollHeight }}>
-                <ul className="ui-autocomplete-items ui-autocomplete-list ui-widget-content ui-widget ui-corner-all ui-helper-reset">
+            <div ref={(el) => this.element = el} className="p-autocomplete-panel p-input-overlay p-shadow" style={{ maxHeight: this.props.scrollHeight }}>
+                <ul className="p-autocomplete-items p-autocomplete-list p-component p-helper-reset">
                     {items}
                 </ul>
             </div>

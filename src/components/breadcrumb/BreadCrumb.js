@@ -40,11 +40,11 @@ export class BreadCrumb extends Component {
 
     renderHome() {
         if(this.props.home) {
-            const className = classNames('ui-breadcrumb-home', this.props.home.className,  {'ui-state-disabled': this.props.home.disabled});
+            const className = classNames('p-breadcrumb-home', this.props.home.className,  {'p-disabled': this.props.home.disabled});
 
             return (
                 <li className={className} style={this.props.home.style}>
-                    <a href={this.props.home.url || '#'} className="ui-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
+                    <a href={this.props.home.url || '#'} className="p-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
                         <span className={this.props.home.icon}></span>
                     </a>
                 </li>
@@ -57,17 +57,17 @@ export class BreadCrumb extends Component {
 
     renderSeparator() {
         return (
-            <li className="ui-breadcrumb-chevron pi pi-chevron-right"></li>
+            <li className="p-breadcrumb-chevron pi pi-chevron-right"></li>
         );
     }
 
     renderMenuitem(item, index) {
-        const className = classNames(item.className, {'ui-state-disabled': item.disabled});
+        const className = classNames(item.className, {'p-disabled': item.disabled});
 
         return (
             <li role="menuitem" className={className} style={item.style}>
-                <a href={item.url || '#'} className="ui-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
-                    <span class="ui-menuitem-text">{item.label}</span>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
+                    <span class="p-menuitem-text">{item.label}</span>
                 </a>
             </li>
         );
@@ -95,7 +95,7 @@ export class BreadCrumb extends Component {
     }
 
     render() {
-        const className=classNames('ui-breadcrumb ui-widget ui-widget-header ui-helper-clearfix ui-corner-all', this.props.className);
+        const className=classNames('p-breadcrumb p-component p-helper-clearfix', this.props.className);
         const home = this.renderHome();
         const items = this.renderMenuitems();
         const separator = this.renderSeparator();

@@ -1,4 +1,4 @@
-.ui-autocomplete {
+.p-autocomplete {
     width: auto;
     zoom: 1;
     cursor: pointer;
@@ -9,44 +9,44 @@
     display: inline-block;
 }
 
-.ui-autocomplete .ui-autocomplete-dropdown {
+.p-autocomplete .p-autocomplete-dropdown {
     height: 100%;
     width: 2em;
     margin-right: 0;
     vertical-align: top;
 }
 
-.ui-autocomplete .ui-autocomplete-input {
+.p-autocomplete .p-autocomplete-input {
     padding-right: 1.5em;
 }
 
-.ui-autocomplete-loader {
+.p-autocomplete-loader {
     position: absolute;
     right: .25em;
     top: 50%;
     margin-top: -.5em;
 }
 
-.ui-autocomplete-query {
+.p-autocomplete-query {
     font-weight: bold;
 }
 
-.ui-autocomplete .ui-autocomplete-panel {
+.p-autocomplete .p-autocomplete-panel {
     min-width: 100%;
 }
 
-.ui-autocomplete-panel {
+.p-autocomplete-panel {
     position: absolute;
     overflow: auto;
     display: none;
 }
 
-.ui-autocomplete-panel .ui-autocomplete-list {
+.p-autocomplete-panel .p-autocomplete-list {
     padding: 0.4em;
     border: 0 none;
 }
 
-.ui-autocomplete-panel .ui-autocomplete-list-item {
+.p-autocomplete-panel .p-autocomplete-list-item {
     border: 0 none;
     cursor: pointer;
     font-weight: normal;
@@ -55,20 +55,20 @@
     text-align: left;
 }
 
-.ui-autocomplete .ui-button-icon-only,
-.ui-autocomplete .ui-button-icon-only:enabled:hover,
-.ui-autocomplete .ui-button-icon-only:enabled:focus,
-.ui-autocomplete .ui-button-icon-only:enabled:active {
+.p-autocomplete .p-button-icon-only,
+.p-autocomplete .p-button-icon-only:enabled:hover,
+.p-autocomplete .p-button-icon-only:enabled:focus,
+.p-autocomplete .p-button-icon-only:enabled:active {
     border-left: 0 none;
 }
 
 /* Multiple Selection */
-.ui-autocomplete-multiple-container {
+.p-autocomplete-multiple-container {
     display: inline-block;
     vertical-align: middle;
 }
 
-.ui-autocomplete-multiple-container.ui-inputtext {
+.p-autocomplete-multiple-container.p-inputtext {
     clear: left;
     cursor: text;
     list-style-type: none;
@@ -77,7 +77,7 @@
     padding: 0 1.5em 0 .25em;
 }
 
-.ui-autocomplete-token {
+.p-autocomplete-token {
     cursor: default;
     display: inline-block;
     vertical-align: middle;
@@ -90,12 +90,12 @@
     font-size: .9em;
 }
 
-.ui-autocomplete-token-label {
+.p-autocomplete-token-label {
     display: block;
     margin-right: 2em;
 }
 
-.ui-autocomplete-token-icon {
+.p-autocomplete-token-icon {
     margin-top: -.5em;
     position: absolute;
     right: 0.2em;
@@ -103,7 +103,7 @@
     cursor: pointer;
 }
 
-.ui-autocomplete-input-token {
+.p-autocomplete-input-token {
     display: inline-block;
     vertical-align: middle;
     list-style-type: none;
@@ -111,7 +111,7 @@
     padding: .25em .25em .25em 0;
 }
 
-.ui-autocomplete-input-token input {
+.p-autocomplete-input-token input {
     border: 0 none;
     width: 10em;
     outline: medium none;
@@ -124,12 +124,12 @@
     border-radius: 0;
 }
 
-.ui-autocomplete-dd .ui-autocomplete-loader {
+.p-autocomplete-dd .p-autocomplete-loader {
     right: 2.25em;
 }
 
-.ui-autocomplete-dd input.ui-corner-all ,
-.ui-autocomplete-dd .ui-autocomplete-multiple-container.ui-corner-all {
+.p-autocomplete-dd input,
+.p-autocomplete-dd .p-autocomplete-multiple-container {
      -moz-border-radius-topright: 0px; 
      -webkit-border-top-right-radius: 0px;
      border-top-right-radius: 0px;
@@ -138,7 +138,7 @@
      border-bottom-right-radius: 0px;
  }
  
-.ui-autocomplete-dd .ui-autocomplete-dropdown.ui-corner-all {
+.p-autocomplete-dd .p-autocomplete-dropdown {
      -moz-border-radius-topleft: 0px; 
      -webkit-border-top-left-radius: 0px;
      border-top-left-radius: 0px;
@@ -148,16 +148,16 @@
 }
 
 /** AutoComplete **/
-.ui-fluid .ui-autocomplete,
-.ui-fluid .ui-autocomplete-input {
+.p-fluid .p-autocomplete,
+.p-fluid .p-autocomplete-input {
     width: 100%;
 }
 
-.ui-fluid .ui-autocomplete.ui-autocomplete-dd .ui-autocomplete-input,
-.ui-fluid .ui-autocomplete.ui-autocomplete-dd .ui-autocomplete-multiple-container {
+.p-fluid .p-autocomplete.p-autocomplete-dd .p-autocomplete-input,
+.p-fluid .p-autocomplete.p-autocomplete-dd .p-autocomplete-multiple-container {
     width: calc(100% - 2em);
 }
 
-.ui-fluid .ui-autocomplete .ui-autocomplete-dropdown.ui-button {
+.p-fluid .p-autocomplete .p-autocomplete-dropdown.p-button {
     width: 2em;
 }

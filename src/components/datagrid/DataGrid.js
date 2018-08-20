@@ -59,7 +59,7 @@ export class DataGrid extends Component {
     }
 
     createPaginator(position) {
-        var className = 'ui-paginator-' + position;
+        var className = 'p-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className}
                           totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}/>;
@@ -103,19 +103,19 @@ export class DataGrid extends Component {
 
     render() {
         let value=this.processData();
-        var className = classNames('ui-datagrid ui-widget', this.props.className);
+        var className = classNames('p-datagrid p-component', this.props.className);
 
         var topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) && this.createPaginator('top'),
             bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
 
-        var header =this.props.header && <div className="ui-datagrid-header ui-widget-header ui-corner-top"> {this.props.header}</div>,
-            footer = this.props.footer && <div className="ui-datagrid-footer ui-widget-header ui-corner-top"> {this.props.footer}</div>,
+        var header =this.props.header && <div className="p-datagrid-header p-corner-top"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="p-datagrid-footer p-corner-top"> {this.props.footer}</div>,
             content = (
-                <div className="ui-datagrid-content ui-widget-content">
-                    <div className="ui-g">
+                <div className="p-datagrid-content">
+                    <div className="p-g">
                     {
                         value && value.map((val, i) => {
-                            return this.props.itemTemplate ? React.cloneElement(this.props.itemTemplate(val), {key : i + '_datagriditem'}) : <div className="ui-g-12" key={i + '_datagriditem'}>val</div>;
+                            return this.props.itemTemplate ? React.cloneElement(this.props.itemTemplate(val), {key : i + '_datagriditem'}) : <div className="p-g-12" key={i + '_datagriditem'}>val</div>;
                         })
                     }
                     </div>

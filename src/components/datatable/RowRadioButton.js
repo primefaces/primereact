@@ -31,11 +31,11 @@ export class RowRadioButton extends Component {
     }
     
     render() {
-        let className = classNames('ui-radiobutton-box ui-widget ui-radiobutton-relative ui-state-default', {'ui-state-active': this.props.selected});
-        let iconClassName = classNames('ui-radiobutton-icon ui-clickable', {'pi pi-circle-on': this.props.selected});
+        let className = classNames('p-radiobutton-box p-component p-radiobutton-relative', {'p-highlight': this.props.selected});
+        let iconClassName = classNames('p-radiobutton-icon p-clickable', {'pi pi-circle-on': this.props.selected});
 
-        return <div className="ui-radiobutton ui-widget">
-                    <div className="ui-helper-hidden-accessible">
+        return <div className="p-radiobutton p-component">
+                    <div className="p-helper-hidden-accessible">
                         <input type="radio" />
                     </div>
                     <div className={className} onClick={this.onClick}>

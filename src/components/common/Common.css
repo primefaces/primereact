@@ -1,10 +1,10 @@
-.ui-widget, .ui-widget * {
+.p-component, .p-component * {
     box-sizing: border-box;
 }
-.ui-helper-hidden {
+.p-helper-hidden {
     display: none;
 }
-.ui-helper-hidden-accessible {
+.p-helper-hidden-accessible {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -14,11 +14,11 @@
     position: absolute;
     width: 1px;
 }
-.ui-helper-hidden-accessible input,
-.ui-helper-hidden-accessible select {
+.p-helper-hidden-accessible input,
+.p-helper-hidden-accessible select {
     transform: scale(0);
 }
-.ui-helper-reset {
+.p-helper-reset {
     margin: 0;
     padding: 0;
     border: 0;
@@ -28,18 +28,18 @@
     font-size: 100%;
     list-style: none;
 }
-.ui-helper-clearfix:before,
-.ui-helper-clearfix:after {
+.p-helper-clearfix:before,
+.p-helper-clearfix:after {
     content: " ";
     display: table;
 }
-.ui-helper-clearfix:after {
+.p-helper-clearfix:after {
     clear: both;
 }
-.ui-helper-clearfix {
+.p-helper-clearfix {
     zoom: 1;
 }
-.ui-helper-zfix {
+.p-helper-zfix {
     width: 100%;
     height: 100%;
     top: 0;
@@ -48,123 +48,123 @@
     opacity: 0;
     filter: Alpha(Opacity=0);
 }
-.ui-state-disabled {
+.p-disabled {
     cursor: default !important;
 }
-.ui-state-disabled a {
+.p-disabled a {
     cursor: default !important;
 }
-.ui-icon {
+.p-icon {
     display: block;
     text-indent: -99999px;
     overflow: hidden;
     background-repeat: no-repeat;
 }
-.ui-widget-overlay {
+.p-component-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
-.ui-resizable {
+.p-resizable {
     position: relative;
 }
-.ui-resizable-handle {
+.p-resizable-handle {
     position: absolute;
     font-size: 0.1px;
     display: block;
 }
-.ui-resizable-disabled .ui-resizable-handle,
-.ui-resizable-autohide .ui-resizable-handle {
+.p-resizable-disabled .p-resizable-handle,
+.p-resizable-autohide .p-resizable-handle {
     display: none;
 }
-.ui-resizable-n {
+.p-resizable-n {
     cursor: n-resize;
     height: 7px;
     width: 100%;
     top: -5px;
     left: 0;
 }
-.ui-resizable-s {
+.p-resizable-s {
     cursor: s-resize;
     height: 7px;
     width: 100%;
     bottom: -5px;
     left: 0;
 }
-.ui-resizable-e {
+.p-resizable-e {
     cursor: e-resize;
     width: 7px;
     right: -5px;
     top: 0;
     height: 100%;
 }
-.ui-resizable-w {
+.p-resizable-w {
     cursor: w-resize;
     width: 7px;
     left: -5px;
     top: 0;
     height: 100%;
 }
-.ui-resizable-se {
+.p-resizable-se {
     cursor: se-resize;
     width: 12px;
     height: 12px;
     right: 1px;
     bottom: 1px;
 }
-.ui-resizable-sw {
+.p-resizable-sw {
     cursor: sw-resize;
     width: 9px;
     height: 9px;
     left: -5px;
     bottom: -5px;
 }
-.ui-resizable-nw {
+.p-resizable-nw {
     cursor: nw-resize;
     width: 9px;
     height: 9px;
     left: -5px;
     top: -5px;
 }
-.ui-resizable-ne {
+.p-resizable-ne {
     cursor: ne-resize;
     width: 9px;
     height: 9px;
     right: -5px;
     top: -5px;
 }
-.ui-shadow {
+.p-shadow {
     -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
 }
-.ui-unselectable-text {
+.p-unselectable-text {
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
 }
-.ui-scrollbar-measure {
+.p-scrollbar-measure {
     width: 100px;
     height: 100px;
     overflow: scroll;
     position: absolute;
     top: -9999px;
 }
-.ui-overflow-hidden {
+.p-overflow-hidden {
     overflow: hidden;
     position: fixed;
     height: 100%;
 }
 
-@-webkit-keyframes ui-fadein {
+@-webkit-keyframes p-fadein {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes ui-fadein {
+@keyframes p-fadein {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
@@ -180,7 +180,7 @@ button {
 }
 
 /* Overlay Animations */
-.ui-input-overlay {
+.p-input-overlay {
     -webkit-transform: translateY(5%);
     -ms-transform: translateY(5%);
     transform: translateY(5%);
@@ -189,14 +189,14 @@ button {
     transition: transform .3s, opacity .3s;
 }
 
-.ui-input-overlay-visible {
+.p-input-overlay-visible {
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
     opacity: 1;
 }
 
-.ui-input-overlay-hidden {
+.p-input-overlay-hidden {
     opacity: 0;
     -webkit-transform: translateY(5%);
     -ms-transform: translateY(5%);
@@ -205,7 +205,7 @@ button {
     transition: transform .3s, opacity .15s;
 }
 
-.ui-menu-overlay {
+.p-menu-overlay {
     -webkit-transform: translateY(5%);
     -ms-transform: translateY(5%);
     transform: translateY(5%);
@@ -214,14 +214,14 @@ button {
     transition: transform .3s, opacity .3s;
 }
 
-.ui-menu-overlay-visible {
+.p-menu-overlay-visible {
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
     opacity: 1;
 }
 
-.ui-menu-overlay-hidden {
+.p-menu-overlay-hidden {
     opacity: 0;
     -webkit-transform: translateY(5%);
     -ms-transform: translateY(5%);

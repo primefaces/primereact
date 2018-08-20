@@ -1,33 +1,33 @@
 /** Breadcrumb **/
-.ui-breadcrumb {
+.p-breadcrumb {
     margin: 0;
     padding: 0;
     padding: .5em;
 }
 
-.ui-breadcrumb ul {
+.p-breadcrumb ul {
     margin: 0;
     padding: 0;
 }
 
-.ui-breadcrumb ul li {
+.p-breadcrumb ul li {
     display: inline-block;
     margin: 0 .25em;
 }
 
-.ui-breadcrumb-chevron, .ui-breadcrumb-home {
+.p-breadcrumb-chevron, .p-breadcrumb-home {
     vertical-align: middle;
 }
 
-.ui-breadcrumb ul li .ui-menuitem-link {
+.p-breadcrumb ul li .p-menuitem-link {
     text-decoration: none;
 }
 
-.ui-breadcrumb .ui-menuitem-icon {
+.p-breadcrumb .p-menuitem-icon {
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-breadcrumb .ui-menuitem-text {
+.p-breadcrumb .p-menuitem-text {
     vertical-align: middle;
 }

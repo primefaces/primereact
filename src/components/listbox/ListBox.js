@@ -199,8 +199,8 @@ export class ListBox extends Component {
     }
 
     render() {
-        let className = classNames('ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all', this.props.className, {
-            'ui-state-disabled': this.props.disabled
+        let className = classNames('p-listbox p-inputtext p-component', this.props.className, {
+            'p-disabled': this.props.disabled
         });
         let items = this.props.options;
         let header;
@@ -227,8 +227,8 @@ export class ListBox extends Component {
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {header}
-                <div className="ui-listbox-list-wrapper">
-                    <ul className="ui-listbox-list" style={this.props.listStyle}>
+                <div className="p-listbox-list-wrapper">
+                    <ul className="p-listbox-list" style={this.props.listStyle}>
                         {items}
                     </ul>
                 </div>

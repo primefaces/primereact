@@ -55,21 +55,21 @@ export class TriStateCheckbox extends Component {
     }
 
     onFocus(e) {
-        DomHandler.addClass(this.box, 'ui-state-focus');
+        DomHandler.addClass(this.box, 'p-focus');
     }
 
     onBlur(e) {
-        DomHandler.removeClass(this.box, 'ui-state-focus');
+        DomHandler.removeClass(this.box, 'p-focus');
     }
 
     render() {
-        let containerClass = classNames('ui-chkbox ui-tristatecheckbox ui-widget', this.props.className);
-        let boxClass = classNames('ui-chkbox-box ui-widget ui-corner-all ui-state-default', {'ui-state-active':(this.props.value || !this.props.value) && this.props.value !== null});
-        let iconClass = classNames('ui-chkbox-icon ui-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
+        let containerClass = classNames('p-chkbox p-tristatecheckbox p-component', this.props.className);
+        let boxClass = classNames('p-chkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null});
+        let iconClass = classNames('p-chkbox-icon p-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
 
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
-                <div className="ui-helper-hidden-accessible">
+                <div className="p-helper-hidden-accessible">
                     <input ref={(el) => this.inputEL = el} type="checkbox" id={this.props.inputId} name={this.props.name} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

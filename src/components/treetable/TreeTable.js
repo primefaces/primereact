@@ -194,7 +194,7 @@ export class TreeTable extends Component {
 
     onRowClick(event, node) {
         let eventTarget = (event.target);
-        if (eventTarget.className && eventTarget.className.indexOf('ui-treetable-toggler') === 0) {
+        if (eventTarget.className && eventTarget.className.indexOf('p-treetable-toggler') === 0) {
             return;
         }
         else if (this.props.selectionMode) {
@@ -507,10 +507,10 @@ export class TreeTable extends Component {
                 return element;
         });
 
-        let treeTableClass = classNames('ui-treetable ui-widget', this.props.className);
+        let treeTableClass = classNames('p-treetable p-component', this.props.className);
 
-        let headerFacet = this.props.header && <div className="ui-treetable-header ui-widget-header">{this.props.header}</div>,
-            footerFacet = this.props.footer && <div className="ui-treetable-footer ui-widget-header">{this.props.footer}</div>;
+        let headerFacet = this.props.header && <div className="p-treetable-header">{this.props.header}</div>,
+            footerFacet = this.props.footer && <div className="p-treetable-footer">{this.props.footer}</div>;
 
         let thead = this.createTreeTableHeader(),
             tfoot = this.createTreeTableFooter(),
@@ -521,8 +521,8 @@ export class TreeTable extends Component {
         return (
             <div id={this.props.id} className={treeTableClass} style={this.props.style}>
                 {headerFacet}
-                <div className="ui-treetable-tablewrapper">
-                    <table className="ui-widget-content">
+                <div className="p-treetable-tablewrapper">
+                    <table>
                         {thead}
                         {tfoot}
                         {tbody}

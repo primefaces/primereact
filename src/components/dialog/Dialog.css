@@ -1,13 +1,13 @@
-.ui-dialog {
+.p-dialog {
     position: fixed;
     padding: 0;
 }
-.ui-dialog .ui-dialog-titlebar {
+.p-dialog .p-dialog-titlebar {
 	padding: .5em .75em;
     position: relative;
     border: 0;
 }
-.ui-dialog .ui-dialog-content {
+.p-dialog .p-dialog-content {
     position: relative;
     border: 0;
     padding: .5em .75em;
@@ -15,26 +15,26 @@
     overflow: auto;
     zoom: 1;
 }
-.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+.p-dialog .p-dialog-buttonpane .p-dialog-buttonset {
     float: right;
 }
 
-.ui-dialog .ui-dialog-buttonpane button {
+.p-dialog .p-dialog-buttonpane button {
     margin: .5em .4em .5em 0;
     cursor: pointer;
     float: right;
 }
-.ui-dialog .ui-resizable-se {
+.p-dialog .p-resizable-se {
     width: 14px;
     height: 14px;
     right: 3px;
     bottom: 3px;
 }
-.ui-draggable .ui-dialog-titlebar {
+.p-draggable .p-dialog-titlebar {
     cursor: move;
 }
 
-.ui-dialog .ui-dialog-titlebar-icon {
+.p-dialog .p-dialog-titlebar-icon {
     text-decoration: none;
     float: right;
     float: right;
@@ -43,61 +43,61 @@
     border: 1px solid transparent;
 }
 
-.ui-dialog .ui-dialog-titlebar-icon span {
+.p-dialog .p-dialog-titlebar-icon span {
     display: block;
     margin: 0;
 }
 
-.ui-dialog-footer {
+.p-dialog-footer {
     padding: 1em;
     border-width: 1px 0 0 0;
     text-align: right;
 }
 
-.ui-dialog-mask {
+.p-dialog-mask {
     position: fixed;
     width: 100%;
     height: 100%;
 }
 
-.ui-dialog-maximized {
+.p-dialog-maximized {
     -webkit-transition: left .3s, top .3s, width .3s,height .3s;
     transition: left .3s, top .3s, width .3s,height .3s;
 }
 
 /* ConfirmDialog */
-.ui-confirmdialog {
+.p-confirmdialog {
     width: 30em;
 }
 
-.ui-confirmdialog.ui-dialog .ui-dialog-content {
+.p-confirmdialog.p-dialog .p-dialog-content {
     padding: 1em 2em;
 }
-.ui-confirmdialog .ui-dialog-content .ui-confirmdialog-icon {
+.p-confirmdialog .p-dialog-content .p-confirmdialog-icon {
     font-size: 1.5em;
     vertical-align: middle;
     margin-right: .5em;
 }
-.ui-confirmdialog .ui-dialog-content .ui-confirmdialog-message {
+.p-confirmdialog .p-dialog-content .p-confirmdialog-message {
     vertical-align: middle;
 }
 
 /* Fluid */
-.ui-fluid .ui-dialog-footer .ui-button {
+.p-fluid .p-dialog-footer .p-button {
     width: auto;
 }
 
 /* RTL */
-.ui-rtl .ui-dialog .ui-dialog-titlebar-close  {
+.p-rtl .p-dialog .p-dialog-titlebar-close  {
     float: left;
 }
 
-.ui-rtl .ui-dialog .ui-dialog-buttonpane button {
+.p-rtl .p-dialog .p-dialog-buttonpane button {
     text-align: right;
 }
 
 @media screen and (max-width: 40em) {
-    .ui-confirmdialog {
+    .p-confirmdialog {
         width: 90%;
     }
 }

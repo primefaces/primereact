@@ -60,7 +60,7 @@ export class Lightbox extends Component {
     show(){
         this.mask = document.createElement('div');
         this.mask.style.zIndex = String(DomHandler.generateZIndex());
-        DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-dialog-mask');
+        DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-dialog-mask');
         document.body.appendChild(this.mask);
         this.zindex = String(DomHandler.generateZIndex());
         this.center();
@@ -150,11 +150,11 @@ export class Lightbox extends Component {
         var images;
         var contentText,contentFrame;
 
-        var leftButton=classNames('ui-state-default ui-lightbox-nav-left ui-corner-right',
-            {'ui-helper-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
-        var rightButton=classNames('ui-state-default ui-lightbox-nav-right ui-corner-left',
-            {'ui-helper-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
-        var containerClassName = classNames('ui-lightbox ui-widget ui-helper-hidden ui-corner-all ui-shadow', {'ui-lightbox-loading':this.state.loading});
+        var leftButton=classNames('p-lightbox-nav-left p-corner-right',
+            {'p-helper-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
+        var rightButton=classNames('p-lightbox-nav-right p-corner-left',
+            {'p-helper-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
+        var containerClassName = classNames('p-lightbox p-component p-helper-hidden p-shadow', {'p-lightbox-loading':this.state.loading});
 
         if(this.props.type==='images'){
             images=<div style={this.props.style} className={this.props.className}>{
@@ -186,11 +186,11 @@ export class Lightbox extends Component {
                 <div className={containerClassName}
                      style={{transitionProperty:'all',transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing, display:this.state.visible?'block':'none',
                                 zIndex:this.zindex }} ref={el=>this.panel=el } onClick={()=>this.preventDocumentClickListener = true}>
-                    <div className="ui-lightbox-content-wrapper">
+                    <div className="p-lightbox-content-wrapper">
                         <a className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev.bind(this)}>
-                            <span className="ui-lightbox-nav-icon pi pi-chevron-left"></span>
+                            <span className="p-lightbox-nav-icon pi pi-chevron-left"></span>
                         </a>
-                        <div className="ui-lightbox-content ui-corner-all" ref={el=>this.content=el}
+                        <div className="p-lightbox-content" ref={el=>this.content=el}
                              style={{transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing}}>
                             <img ref={el => this.img = el} src={this.state.currentImage ? this.state.currentImage.source : ''}
                                  onLoad={this.onImageLoad.bind(this)} alt=""/>
@@ -198,7 +198,7 @@ export class Lightbox extends Component {
                         </div>
 
                         <a className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next.bind(this)}>
-                            <span className="ui-lightbox-nav-icon pi pi-chevron-right"></span>
+                            <span className="p-lightbox-nav-icon pi pi-chevron-right"></span>
                         </a>
                     </div>
                 </div>

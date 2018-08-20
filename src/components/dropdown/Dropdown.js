@@ -96,7 +96,7 @@ export class Dropdown extends Component {
             this.selfClick = true;
         }
 
-        let clearClick = DomHandler.hasClass(event.target, 'ui-dropdown-clear-icon');
+        let clearClick = DomHandler.hasClass(event.target, 'p-dropdown-clear-icon');
                 
         if(!this.overlayClick && !this.editableInputClick && !clearClick) {
             this.focusInput.focus();
@@ -125,11 +125,11 @@ export class Dropdown extends Component {
     }   
      
     onInputFocus(event) {
-        DomHandler.addClass(this.container, 'ui-state-focus');
+        DomHandler.addClass(this.container, 'p-focus');
     }
     
     onInputBlur(event) {
-        DomHandler.removeClass(this.container, 'ui-state-focus');
+        DomHandler.removeClass(this.container, 'p-focus');
     }
 
     onUpKey(event) {
@@ -226,7 +226,7 @@ export class Dropdown extends Component {
     }
     
     onEditableInputFocus(event) {
-        DomHandler.addClass(this.container, 'ui-state-focus');
+        DomHandler.addClass(this.container, 'p-focus');
         this.hide();
     }
     
@@ -309,8 +309,8 @@ export class Dropdown extends Component {
         this.panel.element.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
-            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 1);
 
         this.alignPanel();
@@ -318,15 +318,15 @@ export class Dropdown extends Component {
     }
 
     hide() {
-        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
+        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
 
         this.unbindDocumentClickListener();
         this.clearClickState();
 
         setTimeout(() => {
             this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 150);        
     }
     
@@ -390,7 +390,7 @@ export class Dropdown extends Component {
                 return <option key={this.getOptionLabel(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
             });
             
-            return (<div className="ui-helper-hidden-accessible">
+            return (<div className="p-helper-hidden-accessible">
                         <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
                             {options}
                         </select>
@@ -402,7 +402,7 @@ export class Dropdown extends Component {
     }
     
     renderKeyboardHelper() {
-        return <div className="ui-helper-hidden-accessible">
+        return <div className="p-helper-hidden-accessible">
                     <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                         disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
@@ -413,13 +413,13 @@ export class Dropdown extends Component {
         if(this.props.editable) {
             let value = label||this.props.value||'';
             
-            return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="ui-dropdown-label ui-inputtext ui-corner-all" disabled={this.props.disabled} placeholder={this.props.placeholder}
+            return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled} placeholder={this.props.placeholder}
                         onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} />;
         }
         else {
-            let className = classNames('ui-dropdown-label ui-inputtext ui-corner-all', {
-                'ui-placeholder': label === null && this.props.placeholder, 
-                'ui-dropdown-label-empty': label === null && !this.props.placeholder}
+            let className = classNames('p-dropdown-label p-inputtext', {
+                'p-placeholder': label === null && this.props.placeholder, 
+                'p-dropdown-label-empty': label === null && !this.props.placeholder}
             );
             
             return <label className={className}>{label||this.props.placeholder||'empty'}</label>;
@@ -429,7 +429,7 @@ export class Dropdown extends Component {
     renderClearIcon() {
         if(this.props.value && this.props.showClear && !this.props.disabled) {
             return (
-                <i className="ui-dropdown-clear-icon pi pi-times" onClick={this.clear}></i>
+                <i className="p-dropdown-clear-icon pi pi-times" onClick={this.clear}></i>
             );
         }
         else {
@@ -438,8 +438,8 @@ export class Dropdown extends Component {
     }
     
     renderDropdownIcon() {
-        return <div className="ui-dropdown-trigger ui-state-default ui-corner-right">
-                    <span className="ui-dropdown-trigger-icon pi pi-caret-down ui-clickable"></span>
+        return <div className="p-dropdown-trigger p-corner-right">
+                    <span className="p-dropdown-trigger-icon pi pi-caret-down p-clickable"></span>
                 </div>;
     }
 
@@ -466,10 +466,10 @@ export class Dropdown extends Component {
         
     renderFilter() {
         if(this.props.filter) {
-            return <div className="ui-dropdown-filter-container">
-                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="ui-dropdown-filter ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder={this.props.filterPlaceholder}
+            return <div className="p-dropdown-filter-container">
+                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
                             onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
-                        <span className="ui-dropdown-filter-icon pi pi-search"></span>
+                        <span className="p-dropdown-filter-icon pi pi-search"></span>
                    </div>;
         }
         else {
@@ -517,7 +517,7 @@ export class Dropdown extends Component {
         }
 
         if (this.panel.element.offsetParent) {
-            let highlightItem = DomHandler.findSingle(this.panel.element, 'li.ui-state-highlight');
+            let highlightItem = DomHandler.findSingle(this.panel.element, 'li.p-highlight');
             if (highlightItem) {
                 DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
             }
@@ -525,8 +525,8 @@ export class Dropdown extends Component {
     }
 
     render() {
-        let className = classNames('ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix', this.props.className, {'ui-state-disabled': this.props.disabled, 
-                                    'ui-dropdown-clearable': this.props.showClear && !this.props.disabled});
+        let className = classNames('p-dropdown p-component p-helper-clearfix', this.props.className, {'p-disabled': this.props.disabled, 
+                                    'p-dropdown-clearable': this.props.showClear && !this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
         

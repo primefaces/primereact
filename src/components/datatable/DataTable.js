@@ -233,7 +233,7 @@ export class DataTable extends Component {
     }
 
     createPaginator(position, totalRecords, data) {
-        let className = 'ui-paginator-' + position;
+        let className = 'p-paginator-' + position;
 
         return <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                           totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight}/>;
@@ -427,7 +427,7 @@ export class DataTable extends Component {
 
     onColumnResize(event) {
         let containerLeft = DomHandler.getOffset(this.container).left;
-        DomHandler.addClass(this.container, 'ui-unselectable-text');
+        DomHandler.addClass(this.container, 'p-unselectable-text');
         this.resizerHelper.style.height = this.container.offsetHeight + 'px';
         this.resizerHelper.style.top = 0 + 'px';
         this.resizerHelper.style.left = (event.pageX - containerLeft + this.container.scrollLeft) + 'px';
@@ -453,7 +453,7 @@ export class DataTable extends Component {
                     }
                     
                     if(this.props.scrollable) {
-                        let colGroup = DomHandler.findSingle(this.container, 'colgroup.ui-datatable-scrollable-colgroup');
+                        let colGroup = DomHandler.findSingle(this.container, 'colgroup.p-datatable-scrollable-colgroup');
                         let resizeColumnIndex = DomHandler.index(this.resizeColumn);
                         colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
                         
@@ -464,14 +464,14 @@ export class DataTable extends Component {
                 }
             }
             else if(this.props.columnResizeMode === 'expand') {
-                let table = DomHandler.findSingle(this.container, 'tbody.ui-datatable-tbody').parentElement;
+                let table = DomHandler.findSingle(this.container, 'tbody.p-datatable-tbody').parentElement;
                 table.style.width = table.offsetWidth + delta + 'px';
                 this.resizeColumn.style.width = newColumnWidth + 'px';
                 let containerWidth = table.style.width;
                 
                 if(this.props.scrollable) {
-                    DomHandler.findSingle(this.container, '.ui-datatable-scrollable-header-box').children[0].style.width = containerWidth;
-                    let colGroup = DomHandler.findSingle(this.container, 'colgroup.ui-datatable-scrollable-colgroup');
+                    DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-box').children[0].style.width = containerWidth;
+                    let colGroup = DomHandler.findSingle(this.container, 'colgroup.p-datatable-scrollable-colgroup');
                     let resizeColumnIndex = DomHandler.index(this.resizeColumn);
                     colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
                 }
@@ -490,7 +490,7 @@ export class DataTable extends Component {
                 
         this.resizerHelper.style.display = 'none';
         this.resizeColumn = null;
-        DomHandler.removeClass(this.container, 'ui-unselectable-text');
+        DomHandler.removeClass(this.container, 'p-unselectable-text');
 
         this.unbindColumnResizeEvents();
     }
@@ -891,12 +891,12 @@ export class DataTable extends Component {
     }
     
     renderLoader() {
-        let iconClassName = classNames('ui-datatable-loading-icon pi-spin', this.props.loadingIcon);
+        let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
         
         return (
-            <div className="ui-datatable-loader">
-                <div className="ui-datatable-loader-overlay ui-widget-overlay"></div>
-                <div className="ui-datatable-loader-content">
+            <div className="p-datatable-loader">
+                <div className="p-datatable-loader-overlay p-component-overlay"></div>
+                <div className="p-datatable-loader-content">
                     <i className={iconClassName}></i>
                 </div>
             </div>
@@ -907,17 +907,17 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
-        let className = classNames('ui-datatable ui-widget', {'ui-datatable-responsive': this.props.responsive, 'ui-datatable-resizable': this.props.resizableColumns, 
-                        'ui-datatable-scrollable': this.props.scrollable, 'ui-datatable-virtual-scrollable': this.props.virtualScroll,
-                        'ui-datatable-auto-layout': this.props.autoLayout, 'ui-datatable-hoverable-rows': this.props.selectionMode}, this.props.className);
+        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive, 'p-datatable-resizable': this.props.resizableColumns, 
+                        'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
+                        'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.selectionMode}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
-        let headerFacet = this.props.header && <div className="ui-datatable-header ui-widget-header">{this.props.header}</div>;
-        let footerFacet = this.props.footer && <div className="ui-datatable-footer ui-widget-header">{this.props.footer}</div>;
-        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="ui-column-resizer-helper ui-state-highlight" style={{display:'none'}}></div>;
+        let headerFacet = this.props.header && <div className="p-datatable-header">{this.props.header}</div>;
+        let footerFacet = this.props.footer && <div className="p-datatable-footer">{this.props.footer}</div>;
+        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="p-column-resizer-helper p-highlight" style={{display:'none'}}></div>;
         let tableContent = null;
-        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="pi pi-arrow-down ui-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
-        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up ui-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
+        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
+        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
         let loader;
         
         if(this.props.loading) {
@@ -935,7 +935,7 @@ export class DataTable extends Component {
 
             scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
 
-            tableContent = <div className="ui-datatable-scrollable-wrapper">
+            tableContent = <div className="p-datatable-scrollable-wrapper">
                                 {frozenView}
                                 {scrollableView}
                           </div>;
@@ -945,7 +945,7 @@ export class DataTable extends Component {
             let tableBody = this.createTableBody(value, columns);
             let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
-            tableContent = <div className="ui-datatable-tablewrapper">
+            tableContent = <div className="p-datatable-tablewrapper">
                     <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
                         {tableHeader}                        
                         {tableFooter}

@@ -140,7 +140,7 @@ export class Paginator extends Component {
     }
 
     render() {
-        let className = classNames('ui-paginator ui-widget ui-widget-header ui-unselectable-text', this.props.className);
+        let className = classNames('p-paginator p-component p-unselectable-text', this.props.className);
         
         let paginatorElements = this.props.template.split(' ').map((value) => {
             let key = value.trim();
@@ -183,8 +183,8 @@ export class Paginator extends Component {
             return element;
         });
 
-        let leftContent = this.props.leftContent && <div className="ui-paginator-left-content" >{this.props.leftContent}</div>;
-        let rightContent = this.props.rightContent && <div className="ui-paginator-right-content" >{this.props.rightContent}</div>
+        let leftContent = this.props.leftContent && <div className="p-paginator-left-content" >{this.props.leftContent}</div>;
+        let rightContent = this.props.rightContent && <div className="p-paginator-right-content" >{this.props.rightContent}</div>
         
         return (
             <div className={className} style={this.props.style}>

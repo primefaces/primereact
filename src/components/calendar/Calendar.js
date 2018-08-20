@@ -64,8 +64,8 @@ export class Calendar extends Component {
         showOtherMonths: true,
         selectOtherMonths: false,
         showButtonBar: false,
-        todayButtonClassName: 'ui-button-secondary',
-        clearButtonStyleClass: 'ui-button-secondary',
+        todayButtonClassName: 'p-button-secondary',
+        clearButtonStyleClass: 'p-button-secondary',
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
@@ -195,7 +195,7 @@ export class Calendar extends Component {
             this.props.onFocus(event);
         }
 
-        DomHandler.addClass(this.container, 'ui-inputwrapper-focus');
+        DomHandler.addClass(this.container, 'p-inputwrapper-focus');
     }
 
     onInputBlur(event) {
@@ -203,7 +203,7 @@ export class Calendar extends Component {
             this.props.onBlur(event);
         }
 
-        DomHandler.removeClass(this.container, 'ui-inputwrapper-focus');
+        DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
     }
 
     onInputKeyDown(event) {
@@ -659,8 +659,8 @@ export class Calendar extends Component {
         this.panel.style.display = 'block';
 
         setTimeout(() => {
-            DomHandler.addClass(this.panel, 'ui-input-overlay-visible');
-            DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
+            DomHandler.addClass(this.panel, 'p-input-overlay-visible');
+            DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
         }, 1);
         
         this.alignPanel();
@@ -668,14 +668,14 @@ export class Calendar extends Component {
     }
 
     hideOverlay() {
-        DomHandler.addClass(this.panel, 'ui-input-overlay-hidden');
-        DomHandler.removeClass(this.panel, 'ui-input-overlay-visible');
+        DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
+        DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
         this.unbindDocumentClickListener();
         this.datepickerClick = false;
 
         setTimeout(() => {
             this.panel.style.display = 'none';
-            DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
+            DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
         }, 150);
     }
 
@@ -719,7 +719,7 @@ export class Calendar extends Component {
         if (!this.mask) {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(parseInt(this.panel.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'ui-widget-overlay ui-datepicker-mask ui-datepicker-mask-scrollblocker');
+            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
             
             this.maskClickListener = () => {
                 this.disableModality();
@@ -727,7 +727,7 @@ export class Calendar extends Component {
             this.mask.addEventListener('click', this.maskClickListener);
 
             document.body.appendChild(this.mask);
-            DomHandler.addClass(document.body, 'ui-overflow-hidden');
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
     
@@ -742,14 +742,14 @@ export class Calendar extends Component {
             let hasBlockerMasks;
             for (let i = 0; i < bodyChildren.length; i++) {
                 let bodyChild = bodyChildren[i];
-                if(DomHandler.hasClass(bodyChild, 'ui-datepicker-mask-scrollblocker')) {
+                if(DomHandler.hasClass(bodyChild, 'p-datepicker-mask-scrollblocker')) {
                     hasBlockerMasks = true;
                     break;
                 }
             }
             
             if (!hasBlockerMasks) {
-                DomHandler.removeClass(document.body, 'ui-overflow-hidden');
+                DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
 
             this.hideOverlay();
@@ -1453,7 +1453,7 @@ export class Calendar extends Component {
 
     renderBackwardNavigator() {
         return (
-            <a className="ui-datepicker-prev ui-corner-all" onClick={this.navBackward}>
+            <a className="p-datepicker-prev" onClick={this.navBackward}>
                 <span className="pi pi-chevron-left"></span>
             </a>
         );
@@ -1461,7 +1461,7 @@ export class Calendar extends Component {
 
     renderForwardNavigator() {
         return (
-            <a className="ui-datepicker-next ui-corner-all" onClick={this.navForward}>
+            <a className="p-datepicker-next" onClick={this.navForward}>
                 <span className="pi pi-chevron-right"></span>
             </a>
         );
@@ -1473,7 +1473,7 @@ export class Calendar extends Component {
             let viewMonth = viewDate.getMonth();
 
             return (
-                <select className="ui-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
+                <select className="p-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
                     {
                         this.props.locale.monthNames.map((month, index) => <option key={month} value={index}>{month}</option>)
                     }
@@ -1482,7 +1482,7 @@ export class Calendar extends Component {
         }
         else {
             return (
-                <span className="ui-datepicker-month">{this.props.locale.monthNames[month]}</span>
+                <span className="p-datepicker-month">{this.props.locale.monthNames[month]}</span>
             );
         }
     }
@@ -1502,7 +1502,7 @@ export class Calendar extends Component {
             let viewYear = viewDate.getFullYear();
 
             return (
-                <select className="ui-datepicker-year" onChange={this.onYearDropdownChange} value={viewYear}>
+                <select className="p-datepicker-year" onChange={this.onYearDropdownChange} value={viewYear}>
                     {
                         yearOptions.map(year => <option key={year} value={year}>{year}</option>)
                     }
@@ -1511,7 +1511,7 @@ export class Calendar extends Component {
         }
         else {
             return (
-                <span className="ui-datepicker-year">{year}</span>  
+                <span className="p-datepicker-year">{year}</span>  
             );
         }
     }
@@ -1521,7 +1521,7 @@ export class Calendar extends Component {
         const year = this.renderTitleYearElement(monthMetaData.year);
 
         return (
-            <div className="ui-datepicker-title">
+            <div className="p-datepicker-title">
                 {month}
                 {year}
             </div>
@@ -1559,8 +1559,8 @@ export class Calendar extends Component {
     renderWeek(weekDates) {
         return weekDates.map((date) => {
             const selected = this.isSelected(date);
-            const cellClassName = classNames({'ui-datepicker-other-month': date.otherMonth, 'ui-datepicker-current-day': selected, 'ui-datepicker-today': date.today});
-            const dateClassName = classNames('ui-state-default', {'ui-state-active': selected, 'ui-state-highlight': date.today, 'ui-state-disabled': !date.selectable});
+            const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-current-day': selected, 'p-datepicker-today': date.today});
+            const dateClassName = classNames('p-state-default', {'p-highlight': selected, 'p-highlight': date.today, 'p-disabled': !date.selectable});
             const content = this.renderDateCellContent(date, dateClassName);
 
             return (
@@ -1586,8 +1586,8 @@ export class Calendar extends Component {
         const dates = this.renderDates(monthMetaData);
 
         return (
-            <div className="ui-datepicker-calendar-container">
-                <table className="ui-datepicker-calendar">
+            <div className="p-datepicker-calendar-container">
+                <table className="p-datepicker-calendar">
                     <thead>
                         <tr>
                             {dayNames}
@@ -1609,8 +1609,8 @@ export class Calendar extends Component {
         const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays);
 
         return (
-            <div key={monthMetaData.month} className="ui-datepicker-group ui-widget-content">
-                <div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+            <div key={monthMetaData.month} className="p-datepicker-group">
+                <div className="p-datepicker-header p-helper-clearfix">
                     {backwardNavigator}
                     {forwardNavigator}
                     {title}
@@ -1641,7 +1641,7 @@ export class Calendar extends Component {
     }
 
     renderMonthViewMonth(index) {
-        const className = classNames('ui-monthpicker-month', {'ui-state-active': this.isMonthSelected(index)});
+        const className = classNames('p-monthpicker-month', {'p-highlight': this.isMonthSelected(index)});
         const monthName = this.props.locale.monthNamesShort[index];
 
         return (
@@ -1668,14 +1668,14 @@ export class Calendar extends Component {
         
         return (
             <React.Fragment>
-                <div className="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+                <div className="p-datepicker-header p-helper-clearfix">
                     {backwardNavigator}
                     {forwardNavigator}
-                    <div className="ui-datepicker-title">
+                    <div className="p-datepicker-title">
                         {yearElement}
                     </div>
                 </div>
-                <div className="ui-monthpicker">
+                <div className="p-monthpicker">
                     {months}
                 </div>
             </React.Fragment>  
@@ -1710,7 +1710,7 @@ export class Calendar extends Component {
         const hourDisplay = hour < 10 ? '0' + hour: hour;
         
         return (
-            <div className="ui-hour-picker">
+            <div className="p-hour-picker">
                 <a onClick={this.incrementHour}>
                     <span className="pi pi-chevron-up"></span>
                 </a>
@@ -1728,7 +1728,7 @@ export class Calendar extends Component {
         let minuteDisplay = minute < 10 ? '0' + minute: minute;
         
         return (
-            <div className="ui-minute-picker">
+            <div className="p-minute-picker">
                 <a onClick={this.incrementMinute}>
                     <span className="pi pi-chevron-up"></span>
                 </a>
@@ -1747,7 +1747,7 @@ export class Calendar extends Component {
             let secondDisplay = second < 10 ? '0' + second: second;
             
             return (
-                <div className="ui-second-picker">
+                <div className="p-second-picker">
                     <a onClick={this.incrementSecond}>
                         <span className="pi pi-chevron-up"></span>
                     </a>
@@ -1770,7 +1770,7 @@ export class Calendar extends Component {
             let display = hour > 11 ? 'PM' : 'AM';
 
             return (
-                <div className="ui-ampm-picker">
+                <div className="p-ampm-picker">
                     <a onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
                     </a>
@@ -1788,7 +1788,7 @@ export class Calendar extends Component {
 
     renderSeparator() {
         return (
-            <div className="ui-separator">
+            <div className="p-separator">
                 <a>
                     <span className="pi pi-chevron-up"></span>
                 </a>
@@ -1803,7 +1803,7 @@ export class Calendar extends Component {
     renderTimePicker() {
         if (this.props.showTime || this.props.timeOnly) {
             return (
-                <div className="ui-timepicker ui-widget-header ui-corner-all">
+                <div className="p-timepicker">
                      {this.renderHourPicker()}
                      {this.renderSeparator()}
                      {this.renderMinutePicker()}
@@ -1821,7 +1821,7 @@ export class Calendar extends Component {
 
     renderInputElement() {
         if (!this.props.inline) {
-            const className = classNames('ui-inputtext ui-widget ui-state-default ui-corner-all', this.props.inputClassName);
+            const className = classNames('p-inputtext p-component', this.props.inputClassName);
             const value = this.getValueToRender();
 
             return (
@@ -1839,7 +1839,7 @@ export class Calendar extends Component {
         if (this.props.showIcon) {
             return (
                 <Button type="button" icon={this.props.icon} onClick={this.onButtonClick} tabIndex="-1"
-                    disabled={this.props.disabled} className="ui-datepicker-trigger ui-calendar-button" />
+                    disabled={this.props.disabled} className="p-datepicker-trigger p-calendar-button" />
             );
         }
         else {
@@ -1850,12 +1850,12 @@ export class Calendar extends Component {
     renderButtonBar() {
         if (this.props.showButtonBar) {
             return (
-                <div className="ui-datepicker-buttonbar ui-widget-header">
-                    <div className="ui-g">
-                        <div className="ui-g-6">
+                <div className="p-datepicker-buttonbar">
+                    <div className="p-g">
+                        <div className="p-g-6">
                             <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
                         </div>
-                        <div className="ui-g-6">
+                        <div className="p-g-6">
                             <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.todayButtonClassName} />
                         </div>
                     </div>
@@ -1868,20 +1868,20 @@ export class Calendar extends Component {
     }
    
     render() {
-        const className = classNames('ui-calendar', this.props.className, {
-            'ui-calendar-w-btn': this.props.showIcon, 
-            'ui-calendar-timeonly': this.props.timeOnly,
-            'ui-inputwrapper-filled': this.props.value
+        const className = classNames('p-calendar', this.props.className, {
+            'p-calendar-w-btn': this.props.showIcon, 
+            'p-calendar-timeonly': this.props.timeOnly,
+            'p-inputwrapper-filled': this.props.value
         });
-        const panelClassName = classNames('ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all', this.props.panelClassName, {
-            'ui-datepicker-inline': this.props.inline,
-            'ui-input-overlay': !this.props.inline,
-            'ui-shadow': !this.props.inline,
-            'ui-state-disabled': this.props.disabled,
-            'ui-datepicker-timeonly': this.props.timeOnly,
-            'ui-datepicker-multiple-month': this.props.numberOfMonths > 1, 
-            'ui-datepicker-monthpicker': (this.props.view === 'month'), 
-            'ui-datepicker-touch-ui': this.props.touchUI
+        const panelClassName = classNames('p-datepicker p-component p-helper-clearfix', this.props.panelClassName, {
+            'p-datepicker-inline': this.props.inline,
+            'p-input-overlay': !this.props.inline,
+            'p-shadow': !this.props.inline,
+            'p-disabled': this.props.disabled,
+            'p-datepicker-timeonly': this.props.timeOnly,
+            'p-datepicker-multiple-month': this.props.numberOfMonths > 1, 
+            'p-datepicker-monthpicker': (this.props.view === 'month'), 
+            'p-datepicker-touch-ui': this.props.touchUI
         });
         const input = this.renderInputElement();
         const button = this.renderButton();

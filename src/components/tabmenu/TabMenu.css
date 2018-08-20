@@ -1,10 +1,10 @@
 /** TabMenu **/
-.ui-tabmenu .ui-tabmenu-nav { 
+.p-tabmenu .p-tabmenu-nav { 
     margin: 0;
     padding: .25em .5em 0 .25em; 
 }
 
-.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem { 
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem { 
     list-style: none; 
     float: left; 
     position: relative; 
@@ -16,25 +16,25 @@
     top: 1px; 
 }
 
-.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a { 
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem a { 
     float: left; 
     padding: 0.5em 1em;
     text-decoration: none; 
 }
 
-.ui-tabmenu .ui-tabmenu-nav a { 
+.p-tabmenu .p-tabmenu-nav a { 
     padding: 0.5em 1em;
 }
 
-.ui-tabmenu .ui-menuitem-icon  { 
+.p-tabmenu .p-menuitem-icon  { 
     margin-right: .25em;
     vertical-align: middle;
 }
 
-.ui-tabmenu .ui-menuitem-text  { 
+.p-tabmenu .p-menuitem-text  { 
     vertical-align: middle;
 }
 
-.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-disabled a {
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-disabled a {
      cursor: default;
 }

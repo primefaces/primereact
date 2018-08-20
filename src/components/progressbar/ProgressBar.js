@@ -25,17 +25,17 @@ export class ProgressBar extends Component {
     };
 
     render() {
-        let className = classNames('ui-progressbar ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-progressbar-determinate': (this.props.mode === 'determinate'), 'ui-progressbar-indeterminate': (this.props.mode === 'indeterminate')});
+        let className = classNames('p-progressbar p-component', this.props.className, {'p-progressbar-determinate': (this.props.mode === 'determinate'), 'p-progressbar-indeterminate': (this.props.mode === 'indeterminate')});
         if(this.props.showValue) {
             let labelText = (this.props.value && typeof(this.props.value) === "number") ? this.props.value + this.props.unit : (this.props.value||"");
-            var label = <div className="ui-progressbar-label" style={{display: this.props.value ? 'block' : 'none'}}>{labelText}</div>;
+            var label = <div className="p-progressbar-label" style={{display: this.props.value ? 'block' : 'none'}}>{labelText}</div>;
         } 
 
         let progressbar = null;
         
         if(this.props.mode === 'indeterminate') {
-            let container = (<div className="ui-progressbar-indeterminate-container">
-                                <div className="ui-progressbar-value ui-progressbar-value-animate ui-widget-header ui-corner-all" style={{width: this.props.value + '%', display: 'block'}}></div>
+            let container = (<div className="p-progressbar-indeterminate-container">
+                                <div className="p-progressbar-value p-progressbar-value-animate" style={{width: this.props.value + '%', display: 'block'}}></div>
                             </div>);
 
             if(typeof(this.props.value) === "string") {
@@ -52,7 +52,7 @@ export class ProgressBar extends Component {
             }
         }
         else {
-            let valueText = (<div className="ui-progressbar-value ui-progressbar-value-animate ui-widget-header ui-corner-all" style={{width: this.props.value + '%', display: 'block'}}></div>);
+            let valueText = (<div className="p-progressbar-value p-progressbar-value-animate" style={{width: this.props.value + '%', display: 'block'}}></div>);
 
             if(typeof(this.props.value) === "string") {
                     progressbar = (<div id={this.props.id} className={className} role="progressbar" aria-label={this.props.value} style={this.props.style}>

@@ -39,8 +39,8 @@ export class Password extends Component {
             this.panel.style.zIndex = String(DomHandler.generateZIndex());
             this.panel.style.display = 'block';
             setTimeout(() => {
-                DomHandler.addClass(this.panel, 'ui-input-overlay-visible');
-                DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
+                DomHandler.addClass(this.panel, 'p-input-overlay-visible');
+                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
             }, 1);
             DomHandler.absolutePosition(this.panel, this.inputEl);
         }
@@ -52,12 +52,12 @@ export class Password extends Component {
   
     onBlur(e) {
         if (this.props.feedback) {
-            DomHandler.addClass(this.panel, 'ui-input-overlay-hidden');
-            DomHandler.removeClass(this.panel, 'ui-input-overlay-visible');
+            DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
+            DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
 
             setTimeout(() => {
                 this.panel.style.display = 'none';
-                DomHandler.removeClass(this.panel, 'ui-input-overlay-hidden');
+                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
             }, 150);
         }
 
@@ -134,11 +134,11 @@ export class Password extends Component {
 
     createPanel() {
         this.panel = document.createElement('div');
-        this.panel.className = 'ui-password-panel ui-widget ui-state-highlight ui-corner-all ui-helper-hidden ui-password-panel-overlay ui-input-overlay';
+        this.panel.className = 'p-password-panel p-component p-highlight p-helper-hidden p-password-panel-overlay p-input-overlay';
         this.meter = document.createElement('div');
-        this.meter.className = 'ui-password-meter';
+        this.meter.className = 'p-password-meter';
         this.info = document.createElement('div');
-        this.info.className = 'ui-password-info';
+        this.info.className = 'p-password-info';
         this.info.textContent = this.props.promptLabel;
 
         this.panel.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';

@@ -147,23 +147,23 @@ export class MegaMenu extends Component {
 
         switch(length) {
             case 2:
-                columnClass= 'ui-g-6';
+                columnClass= 'p-g-6';
             break;
             
             case 3:
-                columnClass= 'ui-g-4';
+                columnClass= 'p-g-4';
             break;
             
             case 4:
-                columnClass= 'ui-g-3';
+                columnClass= 'p-g-3';
             break;
             
             case 6:
-                columnClass= 'ui-g-2';
+                columnClass= 'p-g-2';
             break;
                         
             default:
-                columnClass= 'ui-g-12';
+                columnClass= 'p-g-12';
             break;
         }
         
@@ -172,13 +172,13 @@ export class MegaMenu extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+            <li key={'separator_' + index} className="p-menu-separator"></li>
         );
     }
 
     renderSubmenuIcon(item) {
         if (item.items) {
-            const className = classNames('ui-submenu-icon pi pi-fw', {'pi-caret-down': this.props.orientation === 'horizontal','pi-caret-right': this.props.orientation === 'vertical'});
+            const className = classNames('p-submenu-icon pi pi-fw', {'pi-caret-down': this.props.orientation === 'horizontal','pi-caret-right': this.props.orientation === 'vertical'});
             
             return (
                 <span className={className}></span>
@@ -192,19 +192,19 @@ export class MegaMenu extends Component {
     renderSubmenuItem(item, index) {
         if (item.separator) {
             return (
-                <li key={'separator_' + index} className="ui-menu-separator ui-widget-content"></li>
+                <li key={'separator_' + index} className="p-menu-separator"></li>
             );
         }
         else {
-            const className = classNames('ui-menuitem ui-corner-all', item.className, {'ui-state-disabled': item.disabled});
-            const iconClassName = classNames(item.icon, 'ui-menuitem-icon');
+            const className = classNames('p-menuitem', item.className, {'p-disabled': item.disabled});
+            const iconClassName = classNames(item.icon, 'p-menuitem-icon');
             const icon = item.icon ? <span className={iconClassName}></span>: null;
 
             return (
                 <li key={item.label + '_' + index} className={className} style={item.style}>
-                    <a href={item.url || '#'} className="ui-menuitem-link ui-corner-all" target={item.target} onClick={(event) => this.onLeafClick(event, item)}>
+                    <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onLeafClick(event, item)}>
                         {icon}
-                        <span className="ui-menuitem-text">{item.label}</span>
+                        <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </li>
             );
@@ -212,7 +212,7 @@ export class MegaMenu extends Component {
     }
 
     renderSubmenu(submenu) {
-        const className = classNames('ui-widget-header ui-megamenu-submenu-header ui-corner-all', submenu.className, {'ui-state-disabled': submenu.disabled});
+        const className = classNames('p-megamenu-submenu-header', submenu.className, {'p-disabled': submenu.disabled});
         const items = submenu.items.map((item, index) => {
             return this.renderSubmenuItem(item, index);
         });
@@ -238,7 +238,7 @@ export class MegaMenu extends Component {
 
         return (
             <div key={category.label + '_column_' + index} className={columnClassName}>
-                <ul className="ui-megamenu-submenu">
+                <ul className="p-megamenu-submenu">
                     {submenus}
                 </ul>
             </div>
@@ -265,8 +265,8 @@ export class MegaMenu extends Component {
             const columns = this.renderColumns(category);
 
             return (
-                <div className="ui-megamenu-panel ui-widget-content ui-corner-all ui-shadow">
-                    <div className="ui-g">
+                <div className="p-megamenu-panel p-shadow">
+                    <div className="p-g">
                         {columns}
                     </div>
                 </div>
@@ -278,17 +278,17 @@ export class MegaMenu extends Component {
     }
 
     renderCategory(category, index) {
-        const className = classNames('ui-menuitem ui-corner-all', {'ui-menuitem-active': category === this.state.activeItem, 'ui-state-disabled': category.disabled}, category.className);
-        const iconClassName = classNames(category.icon, 'ui-menuitem-icon');
+        const className = classNames('p-menuitem', {'p-menuitem-active': category === this.state.activeItem, 'p-disabled': category.disabled}, category.className);
+        const iconClassName = classNames(category.icon, 'p-menuitem-icon');
         const icon = category.icon ? <span className={iconClassName}></span>: null;
         const submenuIcon = this.renderSubmenuIcon(category);
         const panel = this.renderCategoryPanel(category);
 
         return (
             <li key={category.label + '_' + index} className={className} style={category.style} onMouseEnter={(event) => this.onCategoryMouseEnter(event, category)}>
-                <a href={category.url || '#'} className="ui-menuitem-link ui-corner-all" target={category.target} onClick={(event) => this.onCategoryClick(event, category)}>
+                <a href={category.url || '#'} className="p-menuitem-link" target={category.target} onClick={(event) => this.onCategoryClick(event, category)}>
                     {icon}
-                    <span className="ui-menuitem-text">{category.label}</span>
+                    <span className="p-menuitem-text">{category.label}</span>
                     {submenuIcon}
                 </a>
                 {panel}
@@ -312,7 +312,7 @@ export class MegaMenu extends Component {
     renderCustomContent() {
         if(this.props.children) {
             return (
-                <div className="ui-megamenu-custom">
+                <div className="p-megamenu-custom">
                     {this.props.children}
                 </div>
             );
@@ -323,14 +323,14 @@ export class MegaMenu extends Component {
     }
 
     render() {
-        const className = classNames('ui-megamenu ui-widget ui-widget-content ui-corner-all', 
-                {'ui-megamenu-horizontal': this.props.orientation === 'horizontal', 'ui-megamenu-vertical': this.props.orientation === 'vertical'}, this.props.className);
+        const className = classNames('p-megamenu p-component', 
+                {'p-megamenu-horizontal': this.props.orientation === 'horizontal', 'p-megamenu-vertical': this.props.orientation === 'vertical'}, this.props.className);
         const menu = this.renderMenu();
         const customContent = this.renderCustomContent();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick} ref={el => this.container = el}>
-                <ul className="ui-megamenu-root-list">
+                <ul className="p-megamenu-root-list">
                     {menu}
                 </ul>
                 {customContent}

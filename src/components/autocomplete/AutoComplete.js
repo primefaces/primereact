@@ -242,8 +242,8 @@ export class AutoComplete extends Component {
                 this.panel.element.style.display = "block";
                 
                 setTimeout(() => {
-                    DomHandler.addClass(this.panel.element, 'ui-input-overlay-visible');
-                    DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+                    DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
+                    DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
                 }, 1);
 
                 this.alignPanel();
@@ -267,12 +267,12 @@ export class AutoComplete extends Component {
     }
 
     hidePanel() {
-        DomHandler.addClass(this.panel.element, 'ui-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'ui-input-overlay-visible');
+        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
+        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
 
         setTimeout(() => {
             this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'ui-input-overlay-hidden');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 150);
 
         this.unbindDocumentClickListener();
@@ -313,7 +313,7 @@ export class AutoComplete extends Component {
 
     onInputKeyDown(event) {
         if(this.isPanelVisible()) {
-            let highlightItem = DomHandler.findSingle(this.panel.element, 'li.ui-state-highlight');
+            let highlightItem = DomHandler.findSingle(this.panel.element, 'li.p-highlight');
 
             switch(event.which) {
                 //down
@@ -321,13 +321,13 @@ export class AutoComplete extends Component {
                     if(highlightItem) {
                         let nextElement = highlightItem.nextElementSibling;
                         if(nextElement) {
-                            DomHandler.addClass(nextElement, 'ui-state-highlight');
-                            DomHandler.removeClass(highlightItem, 'ui-state-highlight');
+                            DomHandler.addClass(nextElement, 'p-highlight');
+                            DomHandler.removeClass(highlightItem, 'p-highlight');
                             DomHandler.scrollInView(this.panel.element, nextElement);
                         }
                     }    
                     else {
-                        DomHandler.addClass(this.panel.element.firstChild.firstChild, 'ui-state-highlight');
+                        DomHandler.addClass(this.panel.element.firstChild.firstChild, 'p-highlight');
                     }
                     
                     event.preventDefault();
@@ -338,8 +338,8 @@ export class AutoComplete extends Component {
                     if(highlightItem) {
                         let previousElement = highlightItem.previousElementSibling;
                         if(previousElement) {
-                            DomHandler.addClass(previousElement, 'ui-state-highlight');
-                            DomHandler.removeClass(highlightItem, 'ui-state-highlight');
+                            DomHandler.addClass(previousElement, 'p-highlight');
+                            DomHandler.removeClass(highlightItem, 'p-highlight');
                             DomHandler.scrollInView(this.panel.element, previousElement);
                         }
                     }
@@ -431,12 +431,12 @@ export class AutoComplete extends Component {
     
     onMultiInputFocus(event) {
         this.onInputFocus(event);
-        DomHandler.addClass(this.multiContainer, 'ui-state-focus');
+        DomHandler.addClass(this.multiContainer, 'p-focus');
     }
     
     onMultiInputBlur(event) {
         this.onInputBlur(event);
-        DomHandler.removeClass(this.multiContainer, 'ui-state-focus');
+        DomHandler.removeClass(this.multiContainer, 'p-focus');
     }
     
     isSelected(val) {
@@ -493,8 +493,8 @@ export class AutoComplete extends Component {
     }
     
     renderSimpleAutoComplete() {
-        const inputClassName = classNames('ui-autocomplete-input', this.props.inputClassName, {
-            'ui-autocomplete-dd-input': this.props.dropdown
+        const inputClassName = classNames('p-autocomplete-input', this.props.inputClassName, {
+            'p-autocomplete-dd-input': this.props.dropdown
         });
             
         return (
@@ -514,9 +514,9 @@ export class AutoComplete extends Component {
         if(this.props.value && this.props.value.length) {
             return this.props.value.map((val, index) => {
                 return (
-                    <li key={index + 'multi-item'} className="ui-autocomplete-token ui-state-highlight ui-corner-all">
-                        <span className="ui-autocomplete-token-icon pi pi-fw pi-times" onClick={(e) => this.removeItem(e, index)}></span>
-                        <span className="ui-autocomplete-token-label">{this.formatValue(val)}</span>
+                    <li key={index + 'multi-item'} className="p-autocomplete-token p-highlight">
+                        <span className="p-autocomplete-token-icon pi pi-fw pi-times" onClick={(e) => this.removeItem(e, index)}></span>
+                        <span className="p-autocomplete-token-label">{this.formatValue(val)}</span>
                     </li>
                 );
             });
@@ -528,7 +528,7 @@ export class AutoComplete extends Component {
     
     renderMultiInput() {
         return (
-            <li className="ui-autocomplete-input-token">
+            <li className="p-autocomplete-input-token">
                 <input ref={(el) => this.inputEl = el} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
                        autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
                        style={this.props.inputStyle} className={this.props.inputClassName}
@@ -539,8 +539,8 @@ export class AutoComplete extends Component {
     }
     
     renderMultipleAutoComplete() {
-        let multiContainerClass = classNames("ui-autocomplete-multiple-container ui-widget ui-inputtext ui-state-default ui-corner-all", {
-            'ui-state-disabled': this.props.disabled
+        let multiContainerClass = classNames("p-autocomplete-multiple-container p-component p-inputtext", {
+            'p-disabled': this.props.disabled
         });
         let tokens = this.renderChips();
         let input = this.renderMultiInput();
@@ -556,13 +556,13 @@ export class AutoComplete extends Component {
     
     renderDropdown() {
         return (
-            <Button type="button" icon="pi pi-fw pi-caret-down" className="ui-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
+            <Button type="button" icon="pi pi-fw pi-caret-down" className="p-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
         );
     }
 
     renderLoader() {
         return (
-            <i ref={(el) => this.loader = el} className="ui-autocomplete-loader pi pi-spinner pi-spin" style={{visibility: 'hidden'}}></i>
+            <i ref={(el) => this.loader = el} className="p-autocomplete-loader pi pi-spinner pi-spin" style={{visibility: 'hidden'}}></i>
         );
     }
     
@@ -602,9 +602,9 @@ export class AutoComplete extends Component {
         }
 
         let input, dropdown;
-        let className = classNames('ui-autocomplete ui-widget', this.props.className, {
-            'ui-autocomplete-dd': this.props.dropdown,
-            'ui-autocomplete-multiple': this.props.multiple
+        let className = classNames('p-autocomplete p-component', this.props.className, {
+            'p-autocomplete-dd': this.props.dropdown,
+            'p-autocomplete-multiple': this.props.multiple
         });
         let loader = this.renderLoader();
 

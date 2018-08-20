@@ -52,14 +52,14 @@ export class OrderListSubList extends Component {
     onDragOver(event, index) {
         if(this.draggedItemIndex !== index && this.draggedItemIndex + 1 !== index) {
             this.dragOverItemIndex = index;
-            DomHandler.addClass(event.target, 'ui-state-highlight');
+            DomHandler.addClass(event.target, 'p-highlight');
             event.preventDefault();
         }
     }
     
     onDragLeave(event) {
         this.dragOverItemIndex = null;
-        DomHandler.removeClass(event.target, 'ui-state-highlight');
+        DomHandler.removeClass(event.target, 'p-highlight');
     }
     
     onDrop(event) {
@@ -67,7 +67,7 @@ export class OrderListSubList extends Component {
         let value = [...this.props.value];
         ObjectUtils.reorderArray(value, this.draggedItemIndex, dropIndex);
         this.dragOverItemIndex = null;
-        DomHandler.removeClass(event.target, 'ui-state-highlight');
+        DomHandler.removeClass(event.target, 'p-highlight');
 
         if(this.props.onChange) {
             this.props.onChange({
@@ -96,7 +96,7 @@ export class OrderListSubList extends Component {
 
     renderDropPoint(item, index, key) {
         return (
-            <li key={key} className="ui-orderlist-droppoint"
+            <li key={key} className="p-orderlist-droppoint"
                             onDragOver={(e) => this.onDragOver(e, index + 1)} onDragLeave={this.onDragLeave} onDrop={this.onDrop}></li>
         );
     }
@@ -104,16 +104,16 @@ export class OrderListSubList extends Component {
     render() {
         let header = null;
         let items = null;
-        let listClassName = classNames('ui-widget-content ui-orderlist-list', {'ui-corner-bottom': this.props.header, 'ui-corner-all': !this.props.header});
+        let listClassName = classNames('p-orderlist-list', {'p-corner-bottom': this.props.header, 'p-corner-all': !this.props.header});
 
         if (this.props.header) {
-            header = <div className="ui-orderlist-caption ui-widget-header ui-corner-top">{this.props.header}</div>
+            header = <div className="p-orderlist-caption p-corner-top">{this.props.header}</div>
         }
         
         if (this.props.value) {
             items = this.props.value.map((item, i) => {
                 let content = this.props.itemTemplate ? this.props.itemTemplate(item) : item;
-                let itemClassName = classNames('ui-orderlist-item', this.props.className, {'ui-state-highlight': this.isSelected(item)});
+                let itemClassName = classNames('p-orderlist-item', this.props.className, {'p-highlight': this.isSelected(item)});
                 let key = JSON.stringify(item);
 
                 if(this.props.dragdrop) {
@@ -138,7 +138,7 @@ export class OrderListSubList extends Component {
         }
         
         return (
-            <div className="ui-orderlist-list-container">
+            <div className="p-orderlist-list-container">
                 {header}
                 <ul ref={(el) => this.listElement = el} className={listClassName} style={this.props.listStyle} onDragOver={this.onListMouseMove}>
                     {items}

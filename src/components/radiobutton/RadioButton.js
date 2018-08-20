@@ -54,11 +54,11 @@ export class RadioButton extends Component {
     }
 
     onFocus(e) {
-        DomHandler.addClass(this.box, 'ui-state-focus');
+        DomHandler.addClass(this.box, 'p-focus');
     }
 
     onBlur(e) {
-        DomHandler.removeClass(this.box, 'ui-state-focus');
+        DomHandler.removeClass(this.box, 'p-focus');
     }
 
     render() {
@@ -66,13 +66,13 @@ export class RadioButton extends Component {
             this.input.checked = this.props.checked;
         }
         
-        let containerClass = classNames('ui-radiobutton ui-widget', this.props.className);
-        let boxClass = classNames('ui-radiobutton-box ui-widget ui-corner-all ui-state-default', {'ui-state-active': this.props.checked,  'ui-state-disabled': this.props.disabled});
-        let iconClass = classNames('ui-radiobutton-icon ui-c', { 'pi pi-circle-on': this.props.checked });
+        let containerClass = classNames('p-radiobutton p-component', this.props.className);
+        let boxClass = classNames('p-radiobutton-box p-component', {'p-highlight': this.props.checked,  'p-disabled': this.props.disabled});
+        let iconClass = classNames('p-radiobutton-icon p-c', { 'pi pi-circle-on': this.props.checked });
         
         return (
             <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
-                <div className="ui-helper-hidden-accessible">
+                <div className="p-helper-hidden-accessible">
                     <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>

@@ -115,10 +115,10 @@ export class PickListTransferControls extends Component {
     }
     
     render() {
-        let className = classNames('ui-picklist-buttons', this.props.className);
+        let className = classNames('p-picklist-buttons', this.props.className);
         
         return <div className={className}>
-                    <div className="ui-picklist-buttons-cell">
+                    <div className="p-picklist-buttons-cell">
                         <Button type="button" icon="pi pi-angle-right" onClick={this.moveRight}></Button>
                         <Button type="button" icon="pi pi-angle-double-right" onClick={this.moveAllRight}></Button>
                         <Button type="button" icon="pi pi-angle-left" onClick={this.moveLeft}></Button>

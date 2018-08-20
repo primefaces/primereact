@@ -56,7 +56,7 @@ export class InputSwitch extends Component {
     }
 
     onFocus(event) {
-        DomHandler.addClass(this.container, 'ui-inputswitch-focus');
+        DomHandler.addClass(this.container, 'p-inputswitch-focus');
 
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -64,7 +64,7 @@ export class InputSwitch extends Component {
     }
 
     onBlur(event) {  
-        DomHandler.removeClass(this.container, 'ui-inputswitch-focus');      
+        DomHandler.removeClass(this.container, 'p-inputswitch-focus');      
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
@@ -72,18 +72,18 @@ export class InputSwitch extends Component {
     }
 
     render() {
-        const className = classNames('ui-inputswitch ui-widget', this.props.className, {
-            'ui-inputswitch-checked': this.props.checked,
-            'ui-state-disabled': this.props.disabled
+        const className = classNames('p-inputswitch p-component', this.props.className, {
+            'p-inputswitch-checked': this.props.checked,
+            'p-disabled': this.props.disabled
         });
 
         return (
             <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} role="checkbox" aria-checked={this.props.checked}>
-                <div className="ui-helper-hidden-accessible">
+                <div className="p-helper-hidden-accessible">
                     <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
                         onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} />
                 </div>
-                <span className="ui-inputswitch-slider"></span>
+                <span className="p-inputswitch-slider"></span>
             </div>
         );
     }

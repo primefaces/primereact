@@ -70,7 +70,7 @@ export class Rating extends Component {
         }
 
         let stars = starsArray.map((value) => {
-            let iconClass = classNames('ui-rating-icon pi', {
+            let iconClass = classNames('p-rating-icon pi', {
                 'pi-star-o': (!this.props.value || value > this.props.value),
                 'pi-star': (value <= this.props.value)
             });
@@ -88,8 +88,8 @@ export class Rating extends Component {
     renderCancelIcon() {
         if (this.props.cancel) {
             return (
-                <a onClick={this.clear} className="ui-rating-cancel">
-                    <span className="ui-rating-icon pi pi-ban"></span>
+                <a onClick={this.clear} className="p-rating-cancel">
+                    <span className="p-rating-icon pi pi-ban"></span>
                 </a>
             );
         }
@@ -99,7 +99,7 @@ export class Rating extends Component {
     }
 
     render() {
-        let className = classNames('ui-rating', this.props.className, {'ui-state-disabled': this.props.disabled, 'ui-rating-readonly': this.props.readonly});
+        let className = classNames('p-rating', this.props.className, {'p-disabled': this.props.disabled, 'p-rating-readonly': this.props.readonly});
         let cancelIcon = this.renderCancelIcon();        
         let stars = this.renderStars();
                         

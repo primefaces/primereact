@@ -58,7 +58,7 @@ export class DataList extends Component {
     }
 
     createPaginator(position) {
-        var className = 'ui-paginator-' + position;
+        var className = 'p-paginator-' + position;
 
         return <Paginator first={this.state.first} rows={this.state.rows} className={className}
                           totalRecords={this.getTotalRecords()} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}/>;
@@ -102,16 +102,16 @@ export class DataList extends Component {
 
     render() {
         let value =this.processData();
-        var className = classNames('ui-datalist ui-widget', this.props.className);
+        var className = classNames('p-datalist p-component', this.props.className);
 
         var topPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) &&  this.createPaginator('top'),
             bottomPaginator = (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) && this.createPaginator('bottom');
 
-        var header =this.props.header && <div className="ui-datalist-header ui-widget-header ui-corner-top"> {this.props.header}</div>,
-            footer = this.props.footer && <div className="ui-datalist-footer ui-widget-header ui-corner-bottom"> {this.props.footer} </div>,
+        var header =this.props.header && <div className="p-datalist-header p-corner-top"> {this.props.header}</div>,
+            footer = this.props.footer && <div className="p-datalist-footer p-corner-bottom"> {this.props.footer} </div>,
             content = (
-                <div className="ui-datalist-content ui-widget-content">
-                    <ul className="ui-datalist-data">
+                <div className="p-datalist-content">
+                    <ul className="p-datalist-data">
                     {
                         value && value.map((val, i) => {
                             var listItemContent = this.props.itemTemplate ? this.props.itemTemplate(val) : val;

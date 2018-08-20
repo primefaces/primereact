@@ -12,7 +12,7 @@ export class TreeTableHeaderCell extends Component {
     onClick(e) {
         if(this.props.sortable) {
             let targetNode = e.target;
-            if(DomHandler.hasClass(targetNode, 'ui-sortable-column') || DomHandler.hasClass(targetNode, 'ui-column-title') || DomHandler.hasClass(targetNode, 'ui-sortable-column-icon')) {
+            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') || DomHandler.hasClass(targetNode, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
                     sortField: this.props.field,
@@ -48,18 +48,18 @@ export class TreeTableHeaderCell extends Component {
             sortOrder = multiSortMetaData.order;
 
         let sorted = this.props.sortable && (singleSorted || multipleSorted);
-        let className = classNames('ui-state-default ui-unselectable-text', 
-                        {'ui-sortable-column': this.props.sortable, 'ui-state-active': sorted}, 
+        let className = classNames('p-unselectable-text', 
+                        {'p-sortable-column': this.props.sortable, 'p-highlight': sorted}, 
                         this.props.className);
 
         if(this.props.sortable) {
             var sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
-            sortIconElement = <span className={classNames('ui-sortable-column-icon pi pi-fw', sortIcon)}></span>;
+            sortIconElement = <span className={classNames('p-sortable-column-icon pi pi-fw', sortIcon)}></span>;
         }
 
         return (
             <th className={className} style={this.props.style} onClick={this.onClick}>
-                <span className="ui-column-title">{this.props.header}</span>
+                <span className="p-column-title">{this.props.header}</span>
                 {sortIconElement}
             </th>
         );

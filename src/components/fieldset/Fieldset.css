@@ -1,40 +1,40 @@
-.ui-fieldset, 
-.ui-fieldset .ui-fieldset-legend {
+.p-fieldset, 
+.p-fieldset .p-fieldset-legend {
     padding: 0.5em 1em;
 }
 
-.ui-fieldset-toggleable .ui-fieldset-legend {
+.p-fieldset-toggleable .p-fieldset-legend {
     padding: 0;
 }
 
-.ui-fieldset-toggleable .ui-fieldset-legend a {
+.p-fieldset-toggleable .p-fieldset-legend a {
     padding: 0.5em 1em;
     cursor:pointer;
     white-space: nowrap;
     display: block;
 }
 
-.ui-fieldset .ui-fieldset-toggler {
+.p-fieldset .p-fieldset-toggler {
     margin-right: .1em;
     display: inline-block;
     vertical-align: middle;
 }
 
-.ui-fieldset .ui-fieldset-legend-text {
+.p-fieldset .p-fieldset-legend-text {
     vertical-align: middle;
 }
 
-.ui-fieldset-content-wrapper-collapsed {
+.p-fieldset-content-wrapper-collapsed {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 }
 
-.ui-fieldset-content-wrapper-expanded {
+.p-fieldset-content-wrapper-expanded {
     max-height: 1000px;
     transition: max-height 1s ease-in-out;
 }
 
-.ui-fieldset-content-wrapper-expanding {
+.p-fieldset-content-wrapper-expanding {
     overflow: hidden;
 }

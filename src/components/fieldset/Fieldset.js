@@ -48,10 +48,10 @@ export class Fieldset extends Component {
         const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
 
         if(this.props.toggleable && !collapsed && this.expanding) {
-            DomHandler.addClass(this.contentWrapper, 'ui-fieldset-content-wrapper-expanding');
+            DomHandler.addClass(this.contentWrapper, 'p-fieldset-content-wrapper-expanding');
 
             setTimeout(() => {
-                DomHandler.removeClass(this.contentWrapper, 'ui-fieldset-content-wrapper-expanding');
+                DomHandler.removeClass(this.contentWrapper, 'p-fieldset-content-wrapper-expanding');
                 this.expanding = false;
             }, 500);
         }
@@ -100,15 +100,15 @@ export class Fieldset extends Component {
     }
 
     renderContent(collapsed) {
-        const className = classNames('ui-fieldset-content-wrapper', {
-            'ui-fieldset-content-wrapper-collapsed': (this.props.toggleable && collapsed),
-            'ui-fieldset-content-wrapper-expanded': (this.props.toggleable && !collapsed)
+        const className = classNames('p-fieldset-content-wrapper', {
+            'p-fieldset-content-wrapper-collapsed': (this.props.toggleable && collapsed),
+            'p-fieldset-content-wrapper-expanded': (this.props.toggleable && !collapsed)
         });
         const id = this.id + '_content';
 
         return (
             <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-hidden={collapsed} role="region">
-                <div className="ui-fieldset-content">
+                <div className="p-fieldset-content">
                     {this.props.children}
                 </div>
             </div>
@@ -117,7 +117,7 @@ export class Fieldset extends Component {
 
     renderToggleIcon(collapsed) {
         if (this.props.toggleable) {
-            const className = classNames('ui-fieldset-toggler pi', {'pi-plus': collapsed, 'pi-minus': !collapsed});
+            const className = classNames('p-fieldset-toggler pi', {'pi-plus': collapsed, 'pi-minus': !collapsed});
 
             return (
                 <span className={className}></span>
@@ -136,13 +136,13 @@ export class Fieldset extends Component {
             return (
                 <a href={'#' + ariaControls} aria-controls={ariaControls} aria-expanded={!collapsed} tabIndex={this.props.toggleable ? null  : -1}>
                     {toggleIcon}
-                    <span className="ui-fieldset-legend-text">{this.props.legend}</span>
+                    <span className="p-fieldset-legend-text">{this.props.legend}</span>
                  </a>
             );
         }
         else {
             return (
-                <span className="ui-fieldset-legend-text">{this.props.legend}</span>
+                <span className="p-fieldset-legend-text">{this.props.legend}</span>
             );
         }
     }
@@ -151,14 +151,14 @@ export class Fieldset extends Component {
         const legendContent = this.renderLegendContent(collapsed);
 
         return (
-            <legend className="ui-fieldset-legend ui-corner-all ui-state-default ui-unselectable-text" onClick={this.toggle}>
+            <legend className="p-fieldset-legend p-unselectable-text" onClick={this.toggle}>
                 {legendContent}
             </legend>
         );
     }
 
     render() {
-        const className = classNames('ui-fieldset ui-widget ui-widget-content ui-corner-all', this.props.className, {'ui-fieldset-toggleable': this.props.toggleable});
+        const className = classNames('p-fieldset p-component', this.props.className, {'p-fieldset-toggleable': this.props.toggleable});
         const collapsed = this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
         const legend = this.renderLegend(collapsed);
         const content = this.renderContent(collapsed);

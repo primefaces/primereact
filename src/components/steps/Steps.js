@@ -52,16 +52,16 @@ export class Steps extends Component {
     }
 
     renderItem(item, index) {
-        const className = classNames('ui-steps-item', item.className, {
-                'ui-state-highlight': (index === this.props.activeIndex), 
-                'ui-state-default': (index !== this.props.activeIndex),
-                'ui-state-disabled': (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))});
+        const className = classNames('p-steps-item', item.className, {
+                'p-highlight p-steps-current': (index === this.props.activeIndex), 
+                'p-state-default': (index !== this.props.activeIndex),
+                'p-disabled': (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))});
         
         return (
             <li key={item.label + '_' + index} className={className} style={item.style}>
-                <a href={item.url || '#'} className="ui-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item, index)}>
-                    <span className="ui-steps-number">{index + 1}</span>
-                    <span className="ui-steps-title">{item.label}</span>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item, index)}>
+                    <span className="p-steps-number">{index + 1}</span>
+                    <span className="p-steps-title">{item.label}</span>
                 </a>
             </li>
         );
@@ -85,7 +85,7 @@ export class Steps extends Component {
     }
 
     render() {
-        const className = classNames('ui-steps ui-widget ui-helper-clearfix', this.props.className, {'ui-steps-readonly': this.props.readonly});
+        const className = classNames('p-steps p-component p-helper-clearfix', this.props.className, {'p-steps-readonly': this.props.readonly});
         const items = this.renderItems();
 
         return (

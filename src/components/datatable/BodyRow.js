@@ -55,7 +55,7 @@ export class BodyRow extends Component {
     }
 
     onMouseDown(event) {
-        if (DomHandler.hasClass(event.target, 'ui-table-reorderablerow-handle'))
+        if (DomHandler.hasClass(event.target, 'p-table-reorderablerow-handle'))
             event.currentTarget.draggable = true;
         else
             event.currentTarget.draggable = false;
@@ -99,7 +99,7 @@ export class BodyRow extends Component {
 
     render() {
         let columns = React.Children.toArray(this.props.children);
-        let conditionalStyles = {'ui-state-highlight': this.props.selected, 'ui-datatable-even': (this.props.rowIndex % 2 === 0), 'ui-datatable-odd': (this.props.rowIndex % 2 === 1)};
+        let conditionalStyles = {'p-highlight': this.props.selected, 'p-datatable-even': (this.props.rowIndex % 2 === 0), 'p-datatable-odd': (this.props.rowIndex % 2 === 1)};
         if(this.props.rowClassName) {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
             conditionalStyles = {...conditionalStyles, ...rowClassNameCondition};

@@ -85,7 +85,7 @@ export class OrderList extends Component {
     }
 
     updateListScroll() {
-        let listItems = DomHandler.find(this.subList.listElement, '.ui-orderlist-item.ui-state-highlight');
+        let listItems = DomHandler.find(this.subList.listElement, '.p-orderlist-item.p-highlight');
 
         if(listItems && listItems.length) {
             switch(this.reorderDirection) {
@@ -112,8 +112,8 @@ export class OrderList extends Component {
     }
 
     render() {
-        let className = classNames('ui-orderlist ui-widget', this.props.className, {
-            'ui-orderlist-responsive': this.props.responsive
+        let className = classNames('p-orderlist p-component', this.props.className, {
+            'p-orderlist-responsive': this.props.responsive
         });
 
         return (
