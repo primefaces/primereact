@@ -24,16 +24,15 @@ export class ToolbarDemo extends Component {
                 <div className="content-section implementation">
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
-                            <Button label="New" icon="pi pi-plus"/>
-                            <Button label="Upload" icon="pi pi-upload" className="ui-button-success"/>
-                            <i className="pi pi-bars" style={{marginRight:'.25em'}}></i>
-                            <Button label="Save" icon="pi pi-check" className="ui-button-warning"/>
+                            <Button label="New" icon="pi pi-plus" style={{marginRight:'.25em'}} />
+                            <Button label="Upload" icon="pi pi-upload" className="ui-button-success" />
+                            <i className="pi pi-bars ui-toolbar-separator" style={{marginRight:'.25em'}} />
+                            <Button label="Save" icon="pi pi-check" className="ui-button-warning" />
                         </div>
                         <div className="ui-toolbar-group-right">
-                            <Button icon="pi pi-search"/>
-                            <i className="pi pi-bars" style={{marginRight:'.25em'}}></i>
-                            <Button icon="pi pi-calendar" className="ui-button-success"/>
-                            <Button icon="pi pi-times" className="ui-button-danger"/>
+                            <Button icon="pi pi-search" style={{marginRight:'.25em'}} />
+                            <Button icon="pi pi-calendar" className="ui-button-success" style={{marginRight:'.25em'}} />
+                            <Button icon="pi pi-times" className="ui-button-danger" />
                         </div>
                     </Toolbar>
                 </div>
@@ -67,18 +66,17 @@ import {Toolbar} from 'primereact/toolbar';
                         <p>Toolbar is a container component defined using Toolbar element. Left aligned content is placed inside a div having .ui-toolbar-group-left class and similarly .ui-toolbar-group-right for right alignment.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<Toolbar>
+ <Toolbar>
     <div className="ui-toolbar-group-left">
-        <Button label="New" icon="pi pi-plus"/>
-        <Button label="Upload" icon="pi pi-upload" className="ui-button-success"/>
-        <i className="pi pi-bars"></i>
-        <Button label="Save" icon="pi pi-check" className="ui-button-warning"/>
+        <Button label="New" icon="pi pi-plus" style={{marginRight:'.25em'}} />
+        <Button label="Upload" icon="pi pi-upload" className="ui-button-success" />
+        <i className="pi pi-bars ui-toolbar-separator" style={{marginRight:'.25em'}} />
+        <Button label="Save" icon="pi pi-check" className="ui-button-warning" />
     </div>
     <div className="ui-toolbar-group-right">
-        <Button icon="pi pi-search"/>
-        <i className="pi pi-bars"></i>
-        <Button icon="pi pi-calendar" className="ui-button-success"/>
-        <Button icon="pi pi-times" className="ui-button-danger"/>
+        <Button icon="pi pi-search" style={{marginRight:'.25em'}} />
+        <Button icon="pi pi-calendar" className="ui-button-success" style={{marginRight:'.25em'}} />
+        <Button icon="pi pi-times" className="ui-button-danger" />
     </div>
 </Toolbar>
 
@@ -174,16 +172,15 @@ export class ToolbarDemo extends Component {
                 <div className="content-section implementation">
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
-                            <Button label="New" icon="pi pi-plus"/>
-                            <Button label="Upload" icon="pi pi-upload" className="ui-button-success"/>
-                            <i className="pi pi-bars"></i>
-                            <Button label="Save" icon="pi pi-check" className="ui-button-warning"/>
+                            <Button label="New" icon="pi pi-plus" style={{marginRight:'.25em'}} />
+                            <Button label="Upload" icon="pi pi-upload" className="ui-button-success" />
+                            <i className="pi pi-bars ui-toolbar-separator" style={{marginRight:'.25em'}} />
+                            <Button label="Save" icon="pi pi-check" className="ui-button-warning" />
                         </div>
                         <div className="ui-toolbar-group-right">
-                            <Button icon="pi pi-search"/>
-                            <i className="pi pi-bars"></i>
-                            <Button icon="pi pi-calendar" className="ui-button-success"/>
-                            <Button icon="pi pi-times" className="ui-button-danger"/>
+                            <Button icon="pi pi-search" style={{marginRight:'.25em'}} />
+                            <Button icon="pi pi-calendar" className="ui-button-success" style={{marginRight:'.25em'}} />
+                            <Button icon="pi pi-times" className="ui-button-danger" />
                         </div>
                     </Toolbar>
                 </div>
