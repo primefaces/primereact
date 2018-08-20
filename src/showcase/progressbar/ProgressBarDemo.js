@@ -52,7 +52,7 @@ export class ProgressBarDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el}></Growl>
 
-                    <h3>Dynamic</h3>
+                    <h3 className="first">Dynamic</h3>
                     <ProgressBar value={this.state.value1}></ProgressBar>
 
                     <h3>Static</h3>

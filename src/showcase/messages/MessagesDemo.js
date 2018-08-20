@@ -90,7 +90,7 @@ export class MessagesDemo extends Component {
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
                         <div className="ui-g-12 ui-md-4">
-                            <Button onClick={this.clear} icon="pi pi-times" style={{ float: 'right' }} label="Clear" />
+                            <Button onClick={this.clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
                         </div>
                     </div>
 
@@ -112,11 +112,11 @@ export class MessagesDemo extends Component {
                     </div>
 
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="ui-state-error"/>
+                        <InputText placeholder="Username" className="ui-state-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" text="Field is required" />
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="ui-state-error"/>
+                        <InputText placeholder="Email" className="ui-state-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" />
                     </div>
                 </div>
@@ -602,13 +602,13 @@ export class MessagesDemo extends Component {
                             <Message severity="error" text="Field is required" />
                         </div>
                     </div>
-
+                    
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="ui-state-error"/>
+                        <InputText placeholder="Username" className="ui-state-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" text="Field is required" />
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="ui-state-error"/>
+                        <InputText placeholder="Email" className="ui-state-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" />
                     </div>
                 </div>

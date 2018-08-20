@@ -101,10 +101,10 @@ export class SlideMenuDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <SlideMenu model={this.state.items}></SlideMenu>
+                    <SlideMenu model={this.state.items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
                     <h3>Popup</h3>
-                    <SlideMenu ref={(el) => this.menu = el} model={this.state.items} popup={true}></SlideMenu>
+                    <SlideMenu ref={(el) => this.menu = el} model={this.state.items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
                     <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                 </div>
 
