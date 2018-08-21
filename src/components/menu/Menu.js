@@ -173,7 +173,7 @@ export class Menu extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem p-component', item.className, {'p-disabled': item.disabled});
+        const className = classNames('p-menuitem', item.className, {'p-disabled': item.disabled});
         const iconClassName = classNames(item.icon, 'p-menuitem-icon');
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 

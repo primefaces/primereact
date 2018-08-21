@@ -30,7 +30,7 @@ export class SplitButtonItem extends Component {
         var label = <span className="p-menuitem-text">{this.props.menuitem.label}</span>;
 
         return (
-            <li className="p-menuitem p-component" role="menuitem">
+            <li className="p-menuitem" role="menuitem">
                 <a href={this.props.menuitem.url || '#'} className={className} target={this.props.menuitem.target} onClick={this.onClick}>
                     {icon}
                     {label}

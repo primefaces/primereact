@@ -99,7 +99,7 @@ export class SlideMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem p-component', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
