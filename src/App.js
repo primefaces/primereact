@@ -342,7 +342,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {};
-        this.theme = 'omega';
+        this.theme = 'nova-light';
         this.changeTheme = this.changeTheme.bind(this);
         this.openMenu = this.openMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
@@ -396,31 +396,18 @@ class App extends Component {
                             <a>THEMES</a>
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
-                                <li><Link to="/theming"><i className="fa fa-fw fa-book" /><span className="ui-text">Guide</span></Link></li>
-                                <li><Link to="/icons"><i className="fa fa-fw fa-info" /><span className="ui-text">Icons</span></Link></li>
+                                <li><Link to="/theming"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
+                                <li><Link to="/icons"><i className="pi pi-fw pi-search" /><span>Icons</span></Link></li>
                                 <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
-                                <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span className="ui-text">Serenity</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span className="ui-text">Ultima</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span className="ui-text">Avalon</span></a></li>
+                                <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span></a></li>
+                                <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span></a></li>
+                                <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span></a></li>
                                 <li className="topbar-submenu-header">FREE TEMPLATES</li>
-                                <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span className="ui-text">Sigma</span></a></li>
+                                <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span></a></li>
                                 <li className="topbar-submenu-header">FREE THEMES</li>
-                                <li><a data-theme="omega" onClick={this.changeTheme}><span className="ui-text">Omega</span></a></li>
-                                <li><a data-theme="cruze" onClick={this.changeTheme}><span className="ui-text">Cruze</span></a></li>
-                                <li><a data-theme="cupertino" onClick={this.changeTheme}><span className="ui-text">Cupertino</span></a></li>
-                                <li><a data-theme="darkness" onClick={this.changeTheme}><span className="ui-text">Darkness</span></a></li>
-                                <li><a data-theme="flick" onClick={this.changeTheme}><span className="ui-text">Flick</span></a></li>
-                                <li><a data-theme="home" onClick={this.changeTheme}><span className="ui-text">Home</span></a></li>
-                                <li><a data-theme="kasper" onClick={this.changeTheme}><span className="ui-text">Kasper</span></a></li>
-                                <li><a data-theme="lightness" onClick={this.changeTheme}><span className="ui-text">Lightness</span></a></li>
-                                <li><a data-theme="ludvig" onClick={this.changeTheme}><span className="ui-text">Ludvig</span></a></li>
-                                <li><a data-theme="pepper-grinder" onClick={this.changeTheme}><span className="ui-text">Pepper-Grinder</span></a></li>
-                                <li><a data-theme="redmond" onClick={this.changeTheme}><span className="ui-text">Redmond</span></a></li>
-                                <li><a data-theme="rocket" onClick={this.changeTheme}><span className="ui-text">Rocket</span></a></li>
-                                <li><a data-theme="south-street" onClick={this.changeTheme}><span className="ui-text">South-Street</span></a></li>
-                                <li><a data-theme="start" onClick={this.changeTheme}><span className="ui-text">Start</span></a></li>
-                                <li><a data-theme="trontastic" onClick={this.changeTheme}><span className="ui-text">Trontastic</span></a></li>
-                                <li><a data-theme="voclain" onClick={this.changeTheme}><span className="ui-text">Voclain</span></a></li>
+                                <li><a data-theme="nova-light" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></a></li>
+                                <li><a data-theme="nova-dark" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" /><span>Nova Dark</span></a></li>
+                                <li><a data-theme="nova-colored" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" /><span>Nova Colored</span></a></li>
                             </ul>
                         </li>
 

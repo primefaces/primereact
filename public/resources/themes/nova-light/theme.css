@@ -1701,6 +1701,9 @@ body .fc td.ui-widget-content {
   border: 1px solid #c8c8c8;
   color: #333333; }
 
+body .fc td.fc-head-container {
+  border: 1px solid #c8c8c8; }
+
 body .fc .fc-row {
   border-right: 1px solid #c8c8c8; }
 
