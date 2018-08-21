@@ -30,7 +30,7 @@ export class DataTableStyleDemo extends Component {
     rowClassName(rowData) {
         let brand = rowData.brand;
         
-        return {'ui-state-highlight' : (brand === 'Jaguar')};
+        return {'p-highlight' : (brand === 'Jaguar')};
     }
 
     render() {
@@ -103,7 +103,7 @@ export class DataTableStyleDemo extends Component {
     rowClassName(rowData) {
         let brand = rowData.brand;
         
-        return {'ui-state-highlight' : (brand === 'Jaguar')};
+        return {'p-highlight' : (brand === 'Jaguar')};
     }
 
     render() {
