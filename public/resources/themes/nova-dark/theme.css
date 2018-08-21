@@ -1328,22 +1328,46 @@ body .p-tabview.p-tabview-top, body .p-tabview.p-tabview-bottom, body .p-tabview
 body .p-tabview.p-tabview-top .p-tabview-nav {
   margin-bottom: -1px; }
   body .p-tabview.p-tabview-top .p-tabview-nav li {
-    margin-right: 2px; }
+    margin-right: 2px;
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px; }
 
 body .p-tabview.p-tabview-bottom .p-tabview-nav {
   margin-top: -1px; }
   body .p-tabview.p-tabview-bottom .p-tabview-nav li {
-    margin-right: 2px; }
+    margin-right: 2px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px; }
 
 body .p-tabview.p-tabview-left .p-tabview-nav {
   margin-right: -px; }
   body .p-tabview.p-tabview-left .p-tabview-nav li {
-    margin-bottom: 2px; }
+    margin-bottom: 2px;
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px; }
 
 body .p-tabview.p-tabview-right .p-tabview-nav {
   margin-right: -1px; }
   body .p-tabview.p-tabview-right .p-tabview-nav li {
-    margin-bottom: 2px; }
+    margin-bottom: 2px;
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px; }
 
 body .p-tabview .p-tabview-panels {
   background-color: #ffffff;

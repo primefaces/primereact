@@ -81,7 +81,7 @@ export class TabView extends Component {
              
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames(tab.props.headerClassName, 'p-corner-top', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled});
+        const className = classNames(tab.props.headerClassName, {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled});
         const id = this.id + '_header_' + index;
         const ariaControls = this.id + '_content_' + index;
 
