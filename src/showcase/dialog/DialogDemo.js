@@ -47,7 +47,7 @@ export class DialogDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
 
-                    <Button label="Show" icon="pi pi-info-circle" onClick={this.show} />
+                    <Button label="Show" icon="pi pi-external-link" onClick={this.show} />
                 </div>
 
                 <DialogDoc></DialogDoc>
@@ -417,7 +417,7 @@ export class DialogDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
 
-                    <Button label="Show" icon="pi pi-info-circle" onClick={this.onClick} />
+                    <Button label="Show" icon="pi pi-external-link" onClick={this.onClick} />
                 </div>
             </div>
         )
