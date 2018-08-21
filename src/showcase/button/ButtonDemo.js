@@ -41,7 +41,7 @@ export class ButtonDemo extends Component {
                     <Button label="Danger" className="p-button-raised p-button-danger" />
 
                     <h3>Rounded Buttons</h3>
-                    <Button label="Primary" />
+                    <Button label="Primary" className="p-button-rounded" />
                     <Button label="Secondary" className="p-button-rounded p-button-secondary" />
                     <Button label="Success" className="p-button-rounded p-button-success" />
                     <Button label="Info" className="p-button-rounded p-button-info" />
@@ -139,6 +139,14 @@ import {Button} from 'primereact/button';
 `}
 </CodeHighlight>
 
+                        <h3>Raised and Rounded Buttons</h3>
+                        <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
+                        <CodeHighlight className="language-jsx">
+{`
+<Button label="Proceed" className="p-button-raised p-button-rounded" />
+
+`}
+</CodeHighlight>
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -267,7 +275,7 @@ export class ButtonDemo extends Component {
                     <Button label="Danger" className="p-button-raised p-button-danger" />
 
                     <h3>Rounded Buttons</h3>
-                    <Button label="Primary" />
+                    <Button label="Primary" className="p-button-rounded" />
                     <Button label="Secondary" className="p-button-rounded p-button-secondary" />
                     <Button label="Success" className="p-button-rounded p-button-success" />
                     <Button label="Info" className="p-button-rounded p-button-info" />
