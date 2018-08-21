@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
 
 export class ToggleButton extends Component {
 
@@ -31,15 +32,25 @@ export class ToggleButton extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
 
     toggle(e) {
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: e,
                 value: !this.props.checked
             })
         }
+    }
+
+    onFocus(e) {
+        DomHandler.addClass(this.container, 'p-focus');
+    }
+
+    onBlur(e) {
+        DomHandler.removeClass(this.container, 'p-focus');
     }
 
     render() {
@@ -59,9 +70,9 @@ export class ToggleButton extends Component {
         }
 
         return (
-           <div id={this.props.id} className={className} style={this.props.style} onClick={this.toggle}>
+           <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="p-hidden-accessible">
-                    <input type="checkbox"/>
+                    <input ref={(el) => this.checkbox = el} type="checkbox" onFocus={this.onFocus} onBlur={this.onBlur} />
                 </div>
                 {(this.props.onIcon && this.props.offIcon) && <span className={iconStyleClass}></span>}
                 <span className="p-button-text p-unselectable-text">{this.props.checked ? this.props.onLabel : this.props.offLabel}</span>
