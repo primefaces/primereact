@@ -6,6 +6,12 @@
     margin: 0;
 }
 
+.p-tabview .p-tabview-nav:after { 
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .p-tabview .p-tabview-nav li { 
     list-style: none; 
     float: left; 

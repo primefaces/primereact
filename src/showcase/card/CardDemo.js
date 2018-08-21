@@ -13,8 +13,8 @@ export class CardDemo extends Component {
         );
         const footer = (
             <span>
-                <Button label="Save" icon="pi pi-check"/>
-                <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
+                <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}} />
+                <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary" />
             </span>
         );
 
@@ -94,7 +94,7 @@ import {Card} from 'primereact/card';
                             {`
 const header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
 const footer = <span>
-                <Button label="Save" icon="pi pi-check"/>
+                <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>
                 <Button label="Cancel" icon="pi pi-times" className="ui-button-secondary"/>
              </span>;
 

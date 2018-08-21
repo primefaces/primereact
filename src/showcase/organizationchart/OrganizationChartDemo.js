@@ -11,14 +11,14 @@ export class OrganizationChartDemo extends Component {
             data1: [{
                 label: 'CEO',
                 type: 'person',
-                className: 'ui-person',
+                className: 'p-person',
                 expanded: true,
                 data: {name:'Walter White', 'avatar': 'walter.jpg'},
                 children: [
                     {
                         label: 'CFO',
                         type: 'person',
-                        className: 'ui-person',
+                        className: 'p-person',
                         expanded: true,
                         data: {name:'Saul Goodman', 'avatar': 'saul.jpg'},
                         children:[{
@@ -33,7 +33,7 @@ export class OrganizationChartDemo extends Component {
                     {
                         label: 'COO',
                         type: 'person',
-                        className: 'ui-person',
+                        className: 'p-person',
                         expanded: true,
                         data: {name:'Mike E.', 'avatar': 'mike.jpg'},
                         children:[{
@@ -44,7 +44,7 @@ export class OrganizationChartDemo extends Component {
                     {
                         label: 'CTO',
                         type: 'person',
-                        className: 'ui-person',
+                        className: 'p-person',
                         expanded: true,
                         data: {name:'Jesse Pinkman', 'avatar': 'jesse.jpg'},
                         children:[{
@@ -115,7 +115,7 @@ export class OrganizationChartDemo extends Component {
         if (node.type === "person") {
             return (
                 <div>
-                    <div className="node-header ui-corner-top">{node.label}</div>
+                    <div className="node-header">{node.label}</div>
                     <div className="node-content">
                         <img alt={node.data.avatar} src={`showcase/resources/demo/images/organization/${node.data.avatar}`} style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>
@@ -245,7 +245,7 @@ nodeTemplate(node) {
     if (node.type === "person") {
         return (
             <div>
-                <div className="node-header ui-corner-top">{node.label}</div>
+                <div className="node-header">{node.label}</div>
                     <div className="node-content">
                         <img alt={node.data.avatar} src={\`showcase/resources/demo/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }}/>
                     <div>{node.data.name}</div>
@@ -430,14 +430,14 @@ export class OrganizationChartDemo extends Component {
             data1: [{
                 label: 'CEO',
                 type: 'person',
-                className: 'ui-person',
+                className: 'p-person',
                 expanded: true,
                 data: {name:'Walter White', 'avatar': 'walter.jpg'},
                 children: [
                     {
                         label: 'CFO',
                         type: 'person',
-                        className: 'ui-person',
+                        className: 'p-person',
                         expanded: true,
                         data: {name:'Saul Goodman', 'avatar': 'saul.jpg'},
                         children:[{
@@ -452,7 +452,7 @@ export class OrganizationChartDemo extends Component {
                     {
                         label: 'COO',
                         type: 'person',
-                        className: 'ui-person',
+                        className: 'p-person',
                         expanded: true,
                         data: {name:'Mike E.', 'avatar': 'mike.jpg'},
                         children:[{
@@ -463,7 +463,7 @@ export class OrganizationChartDemo extends Component {
                     {
                         label: 'CTO',
                         type: 'person',
-                        className: 'ui-person',
+                        className: 'p-person',
                         expanded: true,
                         data: {name:'Jesse Pinkman', 'avatar': 'jesse.jpg'},
                         children:[{
@@ -534,7 +534,7 @@ export class OrganizationChartDemo extends Component {
         if (node.type === "person") {
             return (
                 <div>
-                    <div className="node-header ui-corner-top">{node.label}</div>
+                    <div className="node-header p-corner-top">{node.label}</div>
                     <div className="node-content">
                         <img alt={node.data.avatar} src={'showcase/resources/demo/images/organization/\${node.data.avatar}'} style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>
@@ -578,7 +578,7 @@ export class OrganizationChartDemo extends Component {
 
 <CodeHighlight className="language-javascript">
 {`
-.company.ui-organizationchart .ui-organizationchart-node-content.ui-person {
+.company.p-organizationchart .p-organizationchart-node-content.p-person {
     padding: 0;
     border: 0 none;
 }
@@ -616,15 +616,15 @@ export class OrganizationChartDemo extends Component {
     color: #ffffff;
 }
 
-.ui-organizationchart .ui-state-highlight {
+.p-organizationchart .p-highlight {
     background-color: orange;
 }
 
-.ui-person .ui-node-toggler {
+.p-person .p-node-toggler {
     color: #495ebb !important;
 }
 
-.department-cto .ui-node-toggler {
+.department-cto .p-node-toggler {
     color: #8a0a39 !important;
 }
 `}

@@ -1356,7 +1356,10 @@ body .p-tabview .p-tabview-panels {
 body .p-toolbar {
   background-color: #007ad9;
   border: 1px solid #007ad9;
-  padding: 0.571em 1em; }
+  padding: 0.571em 1em;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
   body .p-toolbar button {
     vertical-align: middle; }
   body .p-toolbar .p-toolbar-separator {

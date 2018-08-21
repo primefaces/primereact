@@ -124,17 +124,17 @@ import {ScrollPanel} from 'primereact/scrollpanel';
 
                         <CodeHighlight className="language-markup">
                             {`
-.custom .ui-scrollpanel-wrapper {
+.custom .p-scrollpanel-wrapper {
     border-right: 9px solid #f4f4f4;
 }
 
-.custom .ui-scrollpanel-bar {
+.custom .p-scrollpanel-bar {
     background-color: #1976d2;
     opacity: 1;
     transition: background-color .3s;
 }
 
-.custom .ui-scrollpanel-bar:hover {
+.custom .p-scrollpanel-bar:hover {
     background-color: #135ba1;
 }
 
