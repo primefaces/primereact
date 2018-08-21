@@ -242,7 +242,10 @@ body {
       padding: 0.2145em 0.429em;
       margin: 0 0.286em 0 0;
       background: #007ad9;
-      color: #ffffff; }
+      color: #ffffff;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px; }
   body .p-autocomplete-panel {
     padding: 0;
     border: 1px solid #c8c8c8;

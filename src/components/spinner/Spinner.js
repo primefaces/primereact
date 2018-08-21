@@ -236,10 +236,7 @@ export class Spinner extends Component {
             this.value = this.parseValue(inputValue);
 
         this.formatValue();
-        setTimeout(()=>{
-            this.inputEl.value = this.valueAsString;
-        },5000);
-
+        this.inputEl.value = this.valueAsString;
 
         if (this.props.onChange) {
             this.props.onChange({

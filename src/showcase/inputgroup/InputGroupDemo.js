@@ -87,15 +87,15 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="pi pi-search" cornerStyleClass="ui-button-warning"/>
+                                <Button icon="pi pi-search" className="p-button-warning"/>
                             </div>
                         </div>
 
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
-                                <Button icon="pi pi-check" cornerStyleClass="ui-button-success"/>
+                                <Button icon="pi pi-check" className="p-button-success"/>
                                 <InputText placeholder="Vote"/>
-                                <Button icon="pi pi-times" cornerStyleClass="ui-button-danger"/>
+                                <Button icon="pi pi-times" className="p-button-danger"/>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: e.value})} />
+                                    <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: !this.state.username})} />
                                 </span>
                                 <InputText placeholder="Username"/>
                             </div>
@@ -115,7 +115,7 @@ export class InputGroupDemo extends Component {
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton onChange={(e) => this.setState({price: e.value})} checked={this.state.price}/>    
+                                    <RadioButton checked={this.state.price} value="price" onChange={(e) => this.setState({price: e.value})} />    
                                 </span>
                             </div>
                         </div>
@@ -123,16 +123,17 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <Checkbox value={this.state.website1} onChange={(e) => this.setState({website1: e.value})}/>
+                                    <Checkbox checked={this.state.website1} onChange={(e) => this.setState({website1: !this.state.website1})} />
                                 </span>
                                 <InputText placeholder="Website"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton value={this.state.website2} onChange={(e) => this.setState({website2: e.value})}/>
+                                    <RadioButton checked={this.state.website2} value="price" onChange={(e) => this.setState({website2: e.value})} />    
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <InputGroupDoc/>
             </div>
         );
@@ -242,15 +243,15 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="pi pi-search" cornerStyleClass="ui-button-secondary"/>
+                                <Button icon="pi pi-search" className="p-button-warning"/>
                             </div>
                         </div>
 
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
-                                <Button icon="pi pi-check" cornerStyleClass="ui-button-success"/>
+                                <Button icon="pi pi-check" className="p-button-success"/>
                                 <InputText placeholder="Vote"/>
-                                <Button icon="pi pi-times" cornerStyleClass="ui-button-danger"/>
+                                <Button icon="pi pi-times" className="p-button-danger"/>
                             </div>
                         </div>
                     </div>
@@ -260,7 +261,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: e.value})} />
+                                    <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: !this.state.username})} />
                                 </span>
                                 <InputText placeholder="Username"/>
                             </div>
@@ -270,7 +271,7 @@ export class InputGroupDemo extends Component {
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton onChange={(e) => this.setState({price: e.value})} checked={this.state.price}/>    
+                                    <RadioButton checked={this.state.price} value="price" onChange={(e) => this.setState({price: e.value})} />    
                                 </span>
                             </div>
                         </div>
@@ -278,11 +279,11 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <Checkbox value={this.state.website1} onChange={(e) => this.setState({website1: e.value})}/>
+                                    <Checkbox checked={this.state.website1} onChange={(e) => this.setState({website1: !this.state.website1})} />
                                 </span>
                                 <InputText placeholder="Website"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton value={this.state.website2} onChange={(e) => this.setState({website2: e.value})}/>
+                                    <RadioButton checked={this.state.website2} value="price" onChange={(e) => this.setState({website2: e.value})} />    
                                 </span>
                             </div>
                         </div>
