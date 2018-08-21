@@ -523,15 +523,17 @@ body {
                         margin-right: 4px;
                         box-shadow: none !important;
                         border: none;
+                        top: 1px;
                         @include border-radius-top(3px);
                             
                         a {
-                            @include border-radius-top(3px);
                             color: #ffffff;
                             text-shadow: none;
                             height: inherit;
                             background-color: #0080a7;
                             padding-top: 8px;
+                            @include border-radius-top(3px);
+                            @include transition(background-color .2s);
                         }
 
                         &.tab-doc {
@@ -551,9 +553,7 @@ body {
 
                 .p-tabview-panels {
                     background: transparent;
-                    border-left: 0 none;
-                    border-right: 0 none;
-                    border-bottom: 0 none;
+                    border: 0 none;
                 }
             }
         }
