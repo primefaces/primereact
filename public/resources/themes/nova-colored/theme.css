@@ -1696,39 +1696,72 @@ body .fc th {
   color: #ffffff;
   padding: 0.571em 1em; }
 
-body .fc td.p-widget-content {
+body .fc td.ui-widget-content {
   background-color: #ffffff;
   border: 1px solid #c8c8c8;
   color: #333333; }
 
-body .fc td.fc-head-container {
-  border: 1px solid #007ad9; }
+body .fc .fc-row {
+  border-right: 1px solid #007ad9; }
 
 body .fc .fc-event {
   background-color: #116fbf;
   border: 1px solid #116fbf;
   color: #ffffff; }
 
-body .fc .fc-toolbar .p-button .p-icon-circle-triangle-w {
-  font-family: 'PrimeIcons';
-  text-indent: 0; }
-  body .fc .fc-toolbar .p-button .p-icon-circle-triangle-w:before {
-    content: ""; }
+body .fc .fc-toolbar .ui-button {
+  color: #ffffff;
+  background-color: #007ad9;
+  border: 1px solid #007ad9;
+  font-size: 14px;
+  -moz-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+  body .fc .fc-toolbar .ui-button:enabled:hover {
+    background-color: #116fbf;
+    color: #ffffff;
+    border-color: #116fbf; }
+  body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-w {
+    font-family: 'PrimeIcons';
+    text-indent: 0; }
+    body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-w:before {
+      content: ""; }
+  body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-e {
+    font-family: 'PrimeIcons';
+    text-indent: 0; }
+    body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-e:before {
+      content: ""; }
+  body .fc .fc-toolbar .ui-button:focus {
+    outline: 0 none; }
 
-body .fc .fc-toolbar .p-button .p-icon-circle-triangle-e {
-  font-family: 'PrimeIcons';
-  text-indent: 0; }
-  body .fc .fc-toolbar .p-button .p-icon-circle-triangle-e:before {
-    content: ""; }
-
-body .fc .fc-toolbar .p-button:focus {
-  outline: 0 none; }
+body .fc .fc-toolbar .fc-button-group .ui-button {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0; }
+  body .fc .fc-toolbar .fc-button-group .ui-button:first-child {
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px; }
+  body .fc .fc-toolbar .fc-button-group .ui-button:last-child {
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px; }
 
 body .fc .fc-divider {
   background-color: #007ad9;
   border: 1px solid #007ad9; }
 
-body .p-fluid .fc .fc-toolbar .p-button {
+body .p-fluid .fc .fc-toolbar .ui-button {
   width: auto; }
 
 body .p-picklist .p-picklist-buttons button {
