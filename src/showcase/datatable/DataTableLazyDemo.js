@@ -22,14 +22,16 @@ export class DataTableLazyDemo extends Component {
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => {
-            this.datasource = data;
-            this.setState({
-                totalRecords: data.length,
-                cars: this.datasource.slice(0, this.state.rows),
-                loading: false
+        setTimeout(() => {
+            this.carservice.getCarsLarge().then(data => {
+                this.datasource = data;
+                this.setState({
+                    totalRecords: data.length,
+                    cars: this.datasource.slice(0, this.state.rows),
+                    loading: false
+                });
             });
-        });
+        }, 1000);
     }
 
     onPage(event) {
@@ -47,7 +49,7 @@ export class DataTableLazyDemo extends Component {
                 cars: this.datasource.slice(startIndex, endIndex),
                 loading: false
             });
-        }, 250);
+        }, 1000);
     }
 
     render() {
@@ -117,14 +119,16 @@ export class DataTableLazyDemo extends Component {
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => {
-            this.datasource = data;
-            this.setState({
-                totalRecords: data.length,
-                cars: this.datasource.slice(0, this.state.rows),
-                loading: false
+        setTimeout(() => {
+            this.carservice.getCarsLarge().then(data => {
+                this.datasource = data;
+                this.setState({
+                    totalRecords: data.length,
+                    cars: this.datasource.slice(0, this.state.rows),
+                    loading: false
+                });
             });
-        });
+        }, 1000);
     }
 
     onPage(event) {

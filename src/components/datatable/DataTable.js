@@ -894,9 +894,9 @@ export class DataTable extends Component {
         let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
         
         return (
-            <div className="p-datatable-loader">
-                <div className="p-datatable-loader-overlay p-component-overlay"></div>
-                <div className="p-datatable-loader-content">
+            <div className="p-datatable-loading">
+                <div className="p-datatable-loading-overlay p-component-overlay"></div>
+                <div className="p-datatable-loading-content">
                     <i className={iconClassName}></i>
                 </div>
             </div>

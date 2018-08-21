@@ -179,7 +179,7 @@
 }
 
 /* Loader */
-.p-datatable-loading {
+.p-datatable-loading-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
