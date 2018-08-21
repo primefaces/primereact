@@ -2,7 +2,7 @@ import React = require("react");
 
 interface DataScrollerProps {
     id?: string;
-    value?: Array<any>;
+    value?: any[];
     rows?: number;
     inline?: boolean;
     scrollHeight?: any;
@@ -10,11 +10,11 @@ interface DataScrollerProps {
     buffer?: number;
     style?: object;
     className?: string;
-    onLazyLoad?(e: {first: number, rows: number}): void;
-    itemTemplate?(item: any): JSX.Element | undefined;
     header?: any;
     footer?: any;
     lazy?: boolean;
+    onLazyLoad?(e: {first: number, rows: number}): void;
+    itemTemplate?(item: any): JSX.Element | undefined;
 }
 
 export class DataScroller extends React.Component<DataScrollerProps,any> {}

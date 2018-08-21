@@ -71,7 +71,8 @@ interface CalendarProps {
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: any;
-    dateTemplate?(dateMeta:DateMetaData): JSX.Element | undefined;
+    yearRange?: string;
+    dateTemplate?(dateMeta:DateMetaData): React.ReactNode;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
     onInput?(event: Event): void;

@@ -3,7 +3,7 @@ import React = require("react");
 interface MultiSelectProps {
     id?: string;
     value?: any;
-    options?: Array<any>;
+    options?: any[];
     optionLabel?: string;
     style?: object;
     className?: string;

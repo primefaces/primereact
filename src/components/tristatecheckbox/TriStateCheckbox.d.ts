@@ -3,7 +3,7 @@ import React = require("react");
 interface TriStateCheckboxProps {
     id?: string;
     inputId?: string;
-    value?: boolean;
+    value?: boolean | null;
     name?: string;
     style?: object;
     className?: string;

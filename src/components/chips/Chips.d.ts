@@ -4,7 +4,7 @@ interface ChipsProps {
     id?: string;
     name?: string;
     placeholder?: string;
-    value?: Array<any>;
+    value?: any[];
     max?: number;
     disabled?: boolean;
     style?: object;

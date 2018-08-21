@@ -1,9 +1,10 @@
 import React = require("react");
 import {MenuItem} from '../menuitem/MenuItem';
+import {SyntheticEvent} from "react";
 
 interface ContextMenuProps {
     id?: string;
-    model?: Array<MenuItem>;
+    model?: MenuItem[];
     style?: object;
     className?: string;
     global?: boolean;
@@ -14,4 +15,6 @@ interface ContextMenuProps {
     onHide?(e: Event): void;
 }
 
-export class ContextMenu extends React.Component<ContextMenuProps,any> {}
+export class ContextMenu extends React.Component<ContextMenuProps,any> {
+    public show(event:SyntheticEvent):void;
+}

@@ -3,9 +3,8 @@ import React = require("react");
 interface ListBoxProps {
     id?: string,
     value?: any,
-    options?: Array<any>,
+    options?: any[],
     optionLabel?: string,
-    itemTemplate?(item: any): JSX.Element | undefined,
     style?: object,
     listStyle?: object,
     className?: string,
@@ -14,6 +13,7 @@ interface ListBoxProps {
     multiple?: boolean,
     metaKeySelection?: boolean,
     filter?: boolean,
+    itemTemplate?(item: any): JSX.Element | undefined,
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 

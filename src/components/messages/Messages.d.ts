@@ -1,11 +1,24 @@
 import React = require("react");
 
+interface Message {
+    id?: string;
+    severity?: 'success' | 'info' | 'warn' | 'error',
+    summary?: React.ReactNode;
+    detail?: React.ReactNode;
+    closable?: boolean;
+    sticky?: boolean;
+    life?: number;
+}
+
 interface MessagesProps {
     id?: string;
     className?: string;
     style?: object;
-    onRemove?(message:any): void;
-    onClick?(message:any): void;
+    onRemove?(message: Message): void;
+    onClick?(message: Message): void;
 }
 
-export class Messages extends React.Component<MessagesProps,any> {}
+export class Messages extends React.Component<MessagesProps, any> {
+    public show(message: Message | Message[]): void;
+    public clear(): void;
+}

@@ -4,7 +4,7 @@ interface SplitButtonProps {
     id?: string;
     label?: string;
     icon?: string;
-    model?: Array<any>;
+    model?: any[];
     disabled?: boolean;
     style?: object;
     className?: string;

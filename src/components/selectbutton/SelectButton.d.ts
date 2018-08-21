@@ -3,7 +3,7 @@ import React = require("react");
 interface SelectButtonProps {
     id?: string;
     value?: any;
-    options?: Array<any>;
+    options?: any[];
     optionLabel?: string;
     tabIndex?: string;
     multiple?: boolean;

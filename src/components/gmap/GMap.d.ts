@@ -2,7 +2,7 @@ import React = require("react");
 
 interface GMapProps {
     options?: object;
-    overlays?: Array<any>;
+    overlays?: any[];
     style?: object;
     className?: string;
     onMapReady?(map: any): void;

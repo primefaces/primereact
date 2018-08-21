@@ -1,4 +1,5 @@
 import React = require("react");
+import {SyntheticEvent} from "react";
 
 interface OverlayPanelProps {
     id?: string;
@@ -9,4 +10,6 @@ interface OverlayPanelProps {
     appendTo?: any;
 }
 
-export class OverlayPanel extends React.Component<OverlayPanelProps,any> {}
+export class OverlayPanel extends React.Component<OverlayPanelProps,any> {
+    public toggle(event:SyntheticEvent):void;
+}

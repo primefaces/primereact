@@ -1,13 +1,17 @@
 import React = require("react");
 
+interface Node {
+    data: any,
+    children: Node[]
+}
+
 interface TreeTableProps {
     id?: string;
-    value?: any;
+    value: Node | Node[];
     labelExpand?: string;
     labelCollapse?: string;
     selectionMode?: string;
     selection?: any;
-    selectionChange(e: {originalEvent: Event, selection: any}): void;
     style?: object;
     className?: string;
     metaKeySelection?: boolean;
@@ -17,11 +21,13 @@ interface TreeTableProps {
     sortOrder?: number;
     multiSortMeta?: string;
     sortMode?: string;
-    onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
-    onNodeSelect?(e: {originalEvent: Event, node: any}): void;
-    onNodeUnselect?(e: {originalEvent: Event, node: any}): void;
-    onNodeExpand?(e: {originalEvent: Event, node: any}): void;
-    onNodeCollapse?(e: {originalEvent: Event, node: any}): void;
+    selectionChange?(e: { originalEvent: Event, selection: any }): void;
+    onSort?(e: { sortField: string, sortOrder: number, multiSortMeta: any }): void;
+    onNodeSelect?(e: { originalEvent: Event, node: any }): void;
+    onNodeUnselect?(e: { originalEvent: Event, node: any }): void;
+    onNodeExpand?(e: { originalEvent: Event, node: any }): void;
+    onNodeCollapse?(e: { originalEvent: Event, node: any }): void;
 }
 
-export class TreeTable extends React.Component<TreeTableProps,any> {}
+export class TreeTable extends React.Component<TreeTableProps, any> {
+}

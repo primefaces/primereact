@@ -3,8 +3,8 @@ import React = require("react");
 interface PickListItemProps {
     value?: any;
     className?: string;
-    template?(item: any): JSX.Element | undefined;
     selected?: boolean;
+    template?(item: any): JSX.Element | undefined;
     onClick?(e: {originalEvent: Event, value: any}): void;
 }
 
