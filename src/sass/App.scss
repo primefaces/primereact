@@ -150,8 +150,8 @@ body {
                         padding: 6px 12px;
                         font-weight: bold;
                         text-align: left;
-                        @include background-gradient-left2right(#008fba, #03c4e8);
                         color: #ffffff;
+                        @include background-gradient-left2right(#008fba, #03c4e8);
                     }
 
                     a {
@@ -414,7 +414,7 @@ body {
         }
 
         &.content-submenu {
-            background-image: linear-gradient(to left, #20272a, #20272a);
+            background-color: #20272a;
             padding: 15px 30px;
             border-bottom: 1px solid #1b81d7;
             @include clearfix();
@@ -427,7 +427,7 @@ body {
                 li {
                     list-style: none;
                     width: 20%;
-                    float: left;
+                    display: inline-block;
                     margin-top: 5px;
 
                     a {
@@ -435,9 +435,9 @@ body {
                         display: block;
                         width: 90%;
                         border: 1px solid transparent;
-                        @include transition(border-color .1s);
                         padding: 6px 12px;
                         border-radius: 3px;
+                        @include transition(border-color .1s);
 
                         &:hover {
                             border: 1px solid #ffffff;
@@ -958,6 +958,10 @@ body {
         .prosupport > div {
             width: 100%;
         }
+    }
+
+    #layout-content .content-section.content-submenu ul li {
+        width: 50%;
     }
 }
 
