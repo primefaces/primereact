@@ -265,6 +265,9 @@ body {
         -webkit-border-radius: 0;
         border-radius: 0; }
         body .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-list-item:hover {
+          color: #333333;
+          background-color: #eaeaea; }
+        body .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-list-item.p-highlight {
           color: #ffffff;
           background-color: #e02365; }
       body .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-group {
