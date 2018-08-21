@@ -135,9 +135,6 @@ export class MenubarDemo extends Component {
                    ]
                 },
                 {
-                   separator:true
-                },
-                {
                    label:'Quit',
                    icon:'pi pi-fw pi-power-off'
                 }
@@ -320,9 +317,6 @@ const items:[
              ]
           }
        ]
-    },
-    {
-       separator:true
     },
     {
        label:'Quit',
