@@ -2099,11 +2099,11 @@ body .p-message {
   body .p-message .p-message-text {
     font-size: 1em; }
 body .p-growl {
-  top: 70px; }
+  top: 70px;
+  opacity: 0.9;
+  filter: alpha(opacity=90); }
   body .p-growl .p-growl-item-container {
     margin: 0 0 1em 0;
-    opacity: 0.9;
-    filter: alpha(opacity=90);
     -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); }
@@ -2117,25 +2117,29 @@ body .p-growl {
       background-color: #7fbcec;
       border: 0 none;
       color: #212121; }
-      body .p-growl .p-growl-item-container.p-growl-message-info .p-growl-image {
+      body .p-growl .p-growl-item-container.p-growl-message-info .p-growl-image,
+      body .p-growl .p-growl-item-container.p-growl-message-info .p-growl-icon-close {
         color: #212121; }
     body .p-growl .p-growl-item-container.p-growl-message-success {
       background-color: #b7d8b7;
       border: 0 none;
       color: #212121; }
-      body .p-growl .p-growl-item-container.p-growl-message-success .p-growl-image {
+      body .p-growl .p-growl-item-container.p-growl-message-success .p-growl-image,
+      body .p-growl .p-growl-item-container.p-growl-message-success .p-growl-icon-close {
         color: #212121; }
     body .p-growl .p-growl-item-container.p-growl-message-warn {
       background-color: #ffe399;
       border: 0 none;
       color: #212121; }
-      body .p-growl .p-growl-item-container.p-growl-message-warn .p-growl-image {
+      body .p-growl .p-growl-item-container.p-growl-message-warn .p-growl-image,
+      body .p-growl .p-growl-item-container.p-growl-message-warn .p-growl-icon-close {
         color: #212121; }
     body .p-growl .p-growl-item-container.p-growl-message-error {
       background-color: #f8b7bd;
       border: 0 none;
       color: #212121; }
-      body .p-growl .p-growl-item-container.p-growl-message-error .p-growl-image {
+      body .p-growl .p-growl-item-container.p-growl-message-error .p-growl-image,
+      body .p-growl .p-growl-item-container.p-growl-message-error .p-growl-icon-close {
         color: #212121; }
 body .p-toast .p-toast-message {
   -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);

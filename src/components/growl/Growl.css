@@ -26,8 +26,6 @@
 .p-growl-item-container {
 	position:relative;
 	margin:0 0 10px 0;
-	opacity:0.95;
-	filter:alpha(opacity=95);
 }
 
 .p-growl-item {
@@ -75,10 +73,9 @@
 /* Animations */
 .p-growl-enter {
     opacity: 0.01;
-    display: none;
 }
 
-.p-growl-enter-active {
+.p-growl-enter.p-growl-enter-active {
     opacity: 1;
     transition: opacity 250ms ease-in;
 }
