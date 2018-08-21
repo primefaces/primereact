@@ -41,11 +41,10 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/sass/ -o src/sass/ | node-sass-chokidar public/resources/themes/ -o public/resources/themes/",
     "watch-css": "npm run build-css && node-sass-chokidar src/sass/ -o src/sass/ --watch --recursive | node-sass-chokidar public/resources/themes/ -o public/resources/themes/ --watch --recursive",
-    "gulp-build": "gulp build",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css gulp-build start-js ",
+    "start": "npm-run-all -p watch-css start-js ",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css gulp-build build-js",
+    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "compile-components": "babel src/components --out-dir components --presets es2015,react,stage-0 --copy-files",
