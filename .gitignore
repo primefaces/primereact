@@ -15,9 +15,3 @@
 /src/sass/App.css
 /src/sass/App.css.map
 package-lock.json
-
-/public/resources/themes/designer
-/public/resources/themes/mytheme
-/public/resources/themes/nova-light/*.scss
-/public/resources/themes/nova-dark/*.scss
-/public/resources/themes/nova-colored/*.scss
