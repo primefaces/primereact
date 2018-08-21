@@ -2048,7 +2048,10 @@ body .p-treetable .p-treetable-checkbox .p-chkbox-icon {
 
 body .p-messages {
   padding: 1em;
-  margin: 1em 0; }
+  margin: 1em 0;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
   body .p-messages.p-messages-info {
     background-color: #7fbcec;
     border: 0 none;
@@ -2090,7 +2093,10 @@ body .p-messages {
 
 body .p-message {
   padding: 0.429em;
-  margin: 0; }
+  margin: 0;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
   body .p-message.p-message-info {
     background-color: #7fbcec;
     border: 0 none;

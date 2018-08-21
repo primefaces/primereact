@@ -112,11 +112,11 @@ export class MessagesDemo extends Component {
                     </div>
 
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="ui-state-error" style={{marginRight: '.25em'}} />
+                        <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" text="Field is required" />
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="ui-state-error" style={{marginRight: '.25em'}} />
+                        <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" />
                     </div>
                 </div>
@@ -603,11 +603,11 @@ export class MessagesDemo extends Component {
                     </div>
                     
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="ui-state-error" style={{marginRight: '.25em'}} />
+                        <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" text="Field is required" />
                     </div>
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="ui-state-error" style={{marginRight: '.25em'}} />
+                        <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" />
                     </div>
                 </div>
