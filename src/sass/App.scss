@@ -406,6 +406,12 @@ body {
                 }
             }
 
+            .p-g-12 > h3 {
+                font-weight: 400;
+                margin-top: 30px;
+                font-size: 18px;
+            }
+
             h3.first {
                 margin-top: 0px;
             }
@@ -1056,6 +1062,10 @@ pre[class*="language-"] {
             text-align: left;
         }
     }
+}
+
+.inputgrid-demo {
+    padding-top: 0 !important;
 }
 
 /* Grid Demos */

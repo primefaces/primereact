@@ -78,18 +78,18 @@ export class CalendarDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation inputgrid-demo">
                     <div className="p-g p-fluid">
                         <div className="p-g-12 p-md-4">
-                            <h3 className="first">Basic</h3>
+                            <h3>Basic</h3>
                             <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})} />
                         </div>
                         <div className="p-g-12 p-md-4">
-                            <h3 className="first">Spanish</h3>
+                            <h3>Spanish</h3>
                             <Calendar value={this.state.date2} onChange={(e) => this.setState({date2: e.value})} locale={es} dateFormat="dd/mm/yy" />
                         </div>
                         <div className="p-g-12 p-md-4">
-                            <h3 className="first">Icon</h3>
+                            <h3>Icon</h3>
                             <Calendar value={this.state.date3} onChange={(e) => this.setState({date3: e.value})} showIcon={true} />
                         </div>
                         <div className="p-g-12 p-md-4">
@@ -897,18 +897,18 @@ export class CalendarDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation inputgrid-demo">
                     <div className="p-g p-fluid">
                         <div className="p-g-12 p-md-4">
-                            <h3 className="first">Basic</h3>
+                            <h3>Basic</h3>
                             <Calendar value={this.state.date1} onChange={(e) => this.setState({date1: e.value})} />
                         </div>
                         <div className="p-g-12 p-md-4">
-                            <h3 className="first">Spanish</h3>
+                            <h3>Spanish</h3>
                             <Calendar value={this.state.date2} onChange={(e) => this.setState({date2: e.value})} locale={es} dateFormat="dd/mm/yy" />
                         </div>
                         <div className="p-g-12 p-md-4">
-                            <h3 className="first">Icon</h3>
+                            <h3>Icon</h3>
                             <Calendar value={this.state.date3} onChange={(e) => this.setState({date3: e.value})} showIcon={true} />
                         </div>
                         <div className="p-g-12 p-md-4">

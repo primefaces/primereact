@@ -1559,8 +1559,8 @@ export class Calendar extends Component {
     renderWeek(weekDates) {
         return weekDates.map((date) => {
             const selected = this.isSelected(date);
-            const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-current-day': selected, 'p-datepicker-today': date.today});
-            const dateClassName = classNames('p-state-default', {'p-highlight': selected, 'p-highlight': date.today, 'p-disabled': !date.selectable});
+            const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today});
+            const dateClassName = classNames({'p-highlight': selected, 'p-disabled': !date.selectable});
             const content = this.renderDateCellContent(date, dateClassName);
 
             return (
