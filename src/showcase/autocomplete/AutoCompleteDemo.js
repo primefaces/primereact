@@ -64,7 +64,7 @@ export class AutoCompleteDemo extends Component {
 
     itemTemplate(brand) {
         return (
-            <div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
+            <div className="p-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
                 <img alt={brand} src={`showcase/resources/demo/images/car/${brand}.png`} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
                 <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
             </div>
@@ -601,7 +601,7 @@ export class AutoCompleteDemo extends Component {
 
     itemTemplate(brand) {
         return (
-            <div className="ui-helper-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
+            <div className="p-clearfix" style={{ borderBottom: '1px solid #D5D5D5' }}>
                 <img alt={brand} src={'showcase/resources/demo/images/car/\${brand}.png'} style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
                 <div style={{ fontSize: '18px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
             </div>

@@ -5,7 +5,7 @@ export class TreeTableSubmenu extends Component {
 
     render() {
         return (
-            <div className="content-section content-submenu ui-helper-clearfix">
+            <div className="content-section content-submenu p-clearfix">
                 <ul>
                     <li><Link to="/treetable">&#9679; Basic</Link></li>
                     <li><Link to="/treetable/selection">&#9679; Selection</Link></li>

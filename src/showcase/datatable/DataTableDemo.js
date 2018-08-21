@@ -439,7 +439,7 @@ export class DataTableTemplatingDemo extends Component {
 
     render() {
         var carCount = this.state.cars ? this.state.cars.length: 0;
-        var header = <div className="ui-helper-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa fa-refresh" style={{'float':'right'}}/></div>;
+        var header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa fa-refresh" style={{'float':'right'}}/></div>;
         var footer = "There are " + carCount + ' cars';
 
         return (

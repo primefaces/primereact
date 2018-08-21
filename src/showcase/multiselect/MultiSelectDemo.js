@@ -129,7 +129,7 @@ carTemplate(option) {
     const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
     return (
-        <div className="ui-helper-clearfix">
+        <div className="p-clearfix">
             <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} />
             <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
         </div>

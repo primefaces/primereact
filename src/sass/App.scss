@@ -17,6 +17,14 @@
     transition:         $transition;
 }
 
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
 body {
     margin: 0px;
     height: 100%;
@@ -401,6 +409,7 @@ body {
             background-image: linear-gradient(to left, #20272a, #20272a);
             padding: 15px 30px;
             border-bottom: 1px solid #1b81d7;
+            @include clearfix();
 
             ul {
                 margin: 0;

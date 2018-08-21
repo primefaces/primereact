@@ -25,7 +25,7 @@ export class OrderListDemo extends Component {
         const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
         
         return (
-            <div className="ui-helper-clearfix">
+            <div className="p-clearfix">
                 <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px', width:48 }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>
@@ -274,7 +274,7 @@ export class OrderListDemo extends Component {
         const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
         
         return (
-            <div className="ui-helper-clearfix">
+            <div className="p-clearfix">
                 <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px', width:48 }} />
                 <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
             </div>

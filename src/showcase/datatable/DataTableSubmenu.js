@@ -5,7 +5,7 @@ export class DataTableSubmenu extends Component {
 
     render() {
         return (
-            <div className="content-section content-submenu ui-helper-clearfix">
+            <div className="content-section content-submenu p-clearfix">
                 <ul>
                     <li><Link to="/datatable">&#9679; Documentation</Link></li>
                     <li><Link to="/datatable/templating">&#9679; Templating</Link></li>

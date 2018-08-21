@@ -39,7 +39,7 @@ export class DropdownDemo extends Component {
             var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
             return (
-                <div className="ui-helper-clearfix">
+                <div className="p-clearfix">
                     <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
                     <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
                 </div>
@@ -196,7 +196,7 @@ carTemplate(option) {
         const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
         return (
-            <div className="ui-helper-clearfix">
+            <div className="p-clearfix">
                 <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
                 <span style={{float:'right', margin:'.5em .25em 0 0'}}>{option.label}</span>
             </div>
@@ -496,7 +496,7 @@ export class DropdownDemo extends Component {
             var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
             return (
-                <div className="ui-helper-clearfix">
+                <div className="p-clearfix">
                     <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
                     <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
                 </div>
