@@ -30,32 +30,32 @@ export class SidebarDemo extends Component {
                 <div className="content-section implementation">
                     <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={(e) => this.setState({visibleLeft: false})}>
                         <h1 style={{fontWeight:'normal'}}>Left Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={(e) => this.setState({visibleRight: false})}>
                         <h1 style={{fontWeight:'normal'}}>Right Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={(e) => this.setState({visibleTop: false})}>
                         <h1 style={{fontWeight:'normal'}}>Top Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={(e) => this.setState({visibleBottom: false})}>
                         <h1 style={{fontWeight:'normal'}}>Bottom Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={(e) => this.setState({visibleFullScreen: false})}>
                         <h1 style={{fontWeight:'normal'}}>Full Screen Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Button icon="pi pi-arrow-right" onClick={(e) => this.setState({visibleLeft:true})}  style={{marginRight:'.25em'}} />
@@ -344,32 +344,32 @@ export class SidebarDemo extends Component {
                 <div className="content-section implementation">
                     <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={(e) => this.setState({visibleLeft: false})}>
                         <h1 style={{fontWeight:'normal'}}>Left Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={(e) => this.setState({visibleRight: false})}>
                         <h1 style={{fontWeight:'normal'}}>Right Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Save" className="ui-button-success"  style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Save" className="p-button-success"  style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={(e) => this.setState({visibleTop: false})}>
                         <h1 style={{fontWeight:'normal'}}>Top Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={(e) => this.setState({visibleBottom: false})}>
                         <h1 style={{fontWeight:'normal'}}>Bottom Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={(e) => this.setState({visibleFullScreen: false})}>
                         <h1 style={{fontWeight:'normal'}}>Full Screen Sidebar</h1>
-                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Save" className="ui-button-success" style={{marginRight:'.25em'}} />
-                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="ui-button-secondary"/>
+                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
                     
                     <Button icon="pi pi-arrow-right" onClick={(e) => this.setState({visibleLeft:true})} style={{marginRight:'.25em'}} />

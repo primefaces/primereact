@@ -26,7 +26,7 @@ export class DialogDemo extends Component {
         const footer = (
             <div>
                 <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-                <Button label="No" icon="pi pi-times" onClick={this.onHide} className="ui-button-secondary"/>
+                <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary"/>
             </div>
         );
 
@@ -396,7 +396,7 @@ export class DialogDemo extends Component {
         const footer = (
             <div>
                 <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-                <Button label="No" icon="pi pi-times" onClick={this.onHide} />
+                <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary" />
             </div>
         );
 

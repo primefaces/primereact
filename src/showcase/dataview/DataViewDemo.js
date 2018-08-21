@@ -51,11 +51,11 @@ export class DataViewDemo extends Component {
 
     renderListItem(car) {
         return (
-            <div className="p-g-12" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
+            <div className="p-g-12 car-details" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
                 <div className="p-g-12 p-md-3">
                     <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
                 </div>
-                <div className="p-g-12 p-md-8 car-details">
+                <div className="p-g-12 p-md-8">
                     <div className="p-g">
                         <div className="p-g-2 p-sm-6">Vin:</div>
                         <div className="p-g-10 p-sm-6">{car.vin}</div>
@@ -110,17 +110,17 @@ export class DataViewDemo extends Component {
                         <img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} />
                     </div>
                     
-                    <div className="ui-grid-col-4">Vin: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.vin}</div>
+                    <div className="p-g-4">Vin: </div>
+                    <div className="p-g-8">{this.state.selectedCar.vin}</div>
 
-                    <div className="ui-grid-col-4">Year: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.year}</div>
+                    <div className="p-g-4">Year: </div>
+                    <div className="p-g-8">{this.state.selectedCar.year}</div>
                         
-                    <div className="ui-grid-col-4">Brand: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.brand}</div>
+                    <div className="p-g-4">Brand: </div>
+                    <div className="p-g-8">{this.state.selectedCar.brand}</div>
                     
-                    <div className="ui-grid-col-4">Color: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.color}</div>
+                    <div className="p-g-4">Color: </div>
+                    <div className="p-g-8">{this.state.selectedCar.color}</div>
                 </div>
             );
         }
@@ -138,10 +138,10 @@ export class DataViewDemo extends Component {
 
         return (
             <div className="p-g">
-                <div className="p-g-12 p-md-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} autoWidth={false} style={{minWidth:'15em'}}/>
+                <div className="p-g-6" style={{textAlign: 'left'}}>
+                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
                 </div>
-                <div className="p-g-6 p-md-6" style={{textAlign: 'right'}}>
+                <div className="p-g-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
                 </div>
              </div>
@@ -160,7 +160,7 @@ export class DataViewDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation dataview-demo">
                     <DataView value={this.state.cars} layout={this.state.layout} header={header} 
                             itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20} 
                             sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
@@ -688,17 +688,17 @@ export class DataViewDemo extends Component {
                         <img src={'showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png'} alt={this.state.selectedCar.brand} />
                     </div>
                     
-                    <div className="ui-grid-col-4">Vin: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.vin}</div>
+                    <div className="p-g-4">Vin: </div>
+                    <div className="p-g-8">{this.state.selectedCar.vin}</div>
 
-                    <div className="ui-grid-col-4">Year: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.year}</div>
+                    <div className="p-g-4">Year: </div>
+                    <div className="p-g-8">{this.state.selectedCar.year}</div>
                         
-                    <div className="ui-grid-col-4">Brand: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.brand}</div>
+                    <div className="p-g-4">Brand: </div>
+                    <div className="p-g-8">{this.state.selectedCar.brand}</div>
                     
-                    <div className="ui-grid-col-4">Color: </div>
-                    <div className="ui-grid-col-8">{this.state.selectedCar.color}</div>
+                    <div className="p-g-4">Color: </div>
+                    <div className="p-g-8">{this.state.selectedCar.color}</div>
                 </div>
             );
         }
@@ -716,13 +716,13 @@ export class DataViewDemo extends Component {
 
         return (
             <div className="p-g">
-                <div className="p-g-12 p-md-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} autoWidth={false} style={{minWidth:'15em'}}/>
+                <div className="p-g-6" style={{textAlign: 'left'}}>
+                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
                 </div>
-                <div className="p-g-6 p-md-6" style={{textAlign: 'right'}}>
+                <div className="p-g-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
                 </div>
-             </div>
+            </div>
         );
     }
 

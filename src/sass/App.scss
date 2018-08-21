@@ -1035,32 +1035,26 @@ pre[class*="language-"] {
 }
 
 /* Demos */
-.datalist-demo {
-    .car-item {
-        padding: 1.5em;
-        padding: 20px;
-        border-bottom: 1px solid #cccccc;
-        
-        i {
-            cursor: pointer;
-            float: left;
-            margin-top: 40px;
-            margin-right: 20px;
-        }
+.dataview-demo {
+    .ui-button {
+        margin-top: 3em;
     }
-         
-    li:last-child {
-        .car-item {
-            border-bottom: 0 none;
-        }
+    
+    .filter-container {
+        text-align: center;
     }
+}
 
-    .p-g > div {
-        padding: .4em;
-    }
-
-    .p-g .p-g-10, .p-g .p-g-8 {
-        font-weight: bold;
+@media (max-width: 40em) {
+    .dataview-demo {
+        .car-details, .search-icon {
+            text-align: center;
+            margin-top: 0;
+        }
+    
+        .filter-container {
+            text-align: left;
+        }
     }
 }
 

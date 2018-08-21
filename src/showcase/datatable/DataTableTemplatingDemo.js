@@ -31,8 +31,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="pi pi-search" className="ui-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="ui-button-warning"></Button>
+            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
+            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
         </div>;
     }
 
@@ -115,8 +115,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="pi pi-search" className="ui-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="ui-button-warning"></Button>
+            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
+            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
         </div>;
     }
 
