@@ -7,6 +7,11 @@
     position: relative;
     border: 0;
 }
+.p-dialog .p-dialog-titlebar:after { 
+    content: "";
+    display: table;
+    clear: both;
+}
 .p-dialog .p-dialog-content {
     position: relative;
     border: 0;
