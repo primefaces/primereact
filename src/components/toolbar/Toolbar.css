@@ -2,6 +2,12 @@
     padding: .25em .5em;
 }
 
+.p-toolbar:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .p-toolbar-group-left {
     float:left
 }
