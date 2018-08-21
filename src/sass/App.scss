@@ -111,7 +111,6 @@ body {
                 min-width: 120px;
                 display: inline-block;
                 text-align: center;
-                box-sizing: border-box;
                 height: 100%;
                 line-height: 70px;
 
@@ -212,7 +211,6 @@ body {
             display: block;
             padding: 15px 0px 0px 25px;
             border-top: solid 1px #e3e9ea;
-            box-sizing: border-box;
             color: #333333;
             cursor: pointer;
             user-select: none;
@@ -299,12 +297,11 @@ body {
                 width: 50%;
                 float: left;
                 padding: 6px;
-                box-sizing: border-box;
                 cursor: pointer;
                 border-radius: 4px;
                 -webkit-border-radius: 4px;
                 font-size: 14px;
-                color: #7a8687;
+                color: #494c52;
 
                 &:hover {
                     background-color: #eeeeee;
