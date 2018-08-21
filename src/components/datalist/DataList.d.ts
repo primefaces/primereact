@@ -14,7 +14,7 @@ interface DataListProps {
     className?: string;
     paginatorPosition?: string;
     paginatorTemplate?: string;
-    onLazyLoad?({first: number, rows: number}): void;
+    onLazyLoad?(e: {first: number, rows:number}): void;
     itemTemplate?(item: any): JSX.Element | undefined;
     header?:string;
     footer?:string;
