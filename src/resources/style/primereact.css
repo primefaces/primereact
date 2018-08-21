@@ -9,8 +9,6 @@
 @import '../../components/chips/Chips.css';
 @import '../../components/colorpicker/ColorPicker.css';
 @import '../../components/contextmenu/ContextMenu.css';
-@import '../../components/datagrid/DataGrid.css';
-@import '../../components/datalist/DataList.css';
 @import '../../components/datascroller/DataScroller.css';
 @import '../../components/datatable/DataTable.css';
 @import '../../components/dataview/DataView.css';
@@ -20,7 +18,7 @@
 @import '../../components/fileupload/FileUpload.css';
 @import '../../components/grid/Grid.css';
 @import '../../components/growl/Growl.css';
-/*import '../../components/inplace/Inplace.css';*/
+@import '../../components/inplace/Inplace.css';
 @import '../../components/inputswitch/InputSwitch.css';
 @import '../../components/inputtext/InputText.css';
 @import '../../components/inputtextarea/InputTextarea.css';

@@ -48,8 +48,8 @@ export class InplaceDemo extends Component {
                     <h3>Image</h3>
                     <Inplace>
                         <InplaceDisplay>
-                            <span className="fa fa-picture-o"></span>
-                            <span style={{marginLeft:'.5em'}}>View Picture</span>
+                            <span className="pi pi-search" style={{verticalAlign: 'middle'}}></span>
+                            <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
                         </InplaceDisplay>
                         <InplaceContent>
                             <img src="showcase/resources/demo/images/galleria/galleria5.jpg" alt="Nature" />
@@ -362,8 +362,8 @@ export class InplaceDemo extends Component {
                     <h3>Image</h3>
                     <Inplace>
                         <InplaceDisplay>
-                            <span className="fa fa-picture-o"></span>
-                            <span style={{marginLeft:'.5em'}}>View Picture</span>
+                            <span className="pi pi-search" style={{verticalAlign: 'middle'}}></span>
+                            <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
                         </InplaceDisplay>
                         <InplaceContent>
                             <img src="showcase/resources/demo/images/galleria/galleria5.jpg" alt="Nature" />

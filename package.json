@@ -24,7 +24,6 @@
     "axios": "^0.15.3",
     "chart.js": "2.7.1",
     "classnames": "^2.2.5",
-    "font-awesome": "^4.7.0",
     "fullcalendar": "4.0.0-alpha",
     "quill": "1.3.3",
     "moment": "^2.17.1",

@@ -38,7 +38,7 @@ export class DataTableFilterDemo extends Component {
 
     render() {
         var header = <div style={{'textAlign':'left'}}>
-                        <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
+                        <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
                         <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
                     </div>;
 
@@ -152,7 +152,7 @@ export class DataTableFilterDemo extends Component {
 
     render() {
         var header = <div style={{'textAlign':'left'}}>
-                        <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
+                        <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
                         <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
                     </div>;
 

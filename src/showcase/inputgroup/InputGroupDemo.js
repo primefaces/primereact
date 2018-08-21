@@ -35,7 +35,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <i className="fa fa-user"></i>
+                                    <i className="pi pi-user"></i>
                                 </span>
                                 <InputText placeholder="Username" />
                             </div>
@@ -63,10 +63,10 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <i className="fa fa-credit-card"></i>
+                                    <i className="pi pi-clock"></i>
                                 </span>
                                 <span className="p-inputgroup-addon">
-                                    <i className="fa fa-cc-visa"></i>
+                                    <i className="pi pi-star"></i>
                                 </span>
                                 <InputText placeholder="Price" />
                                 <span className="p-inputgroup-addon">$</span>
@@ -87,7 +87,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="fa fa-search" cornerStyleClass="ui-button-warning"/>
+                                <Button icon="pi pi-search" cornerStyleClass="ui-button-warning"/>
                             </div>
                         </div>
 
@@ -190,7 +190,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <i className="fa fa-user"></i>
+                                    <i className="pi pi-user"></i>
                                 </span>
                                 <InputText placeholder="Username" />
                             </div>
@@ -218,10 +218,10 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
-                                    <i className="fa fa-credit-card"></i>
+                                    <i className="pi pi-clock"></i>
                                 </span>
                                 <span className="p-inputgroup-addon">
-                                    <i className="fa fa-cc-visa"></i>
+                                    <i className="pi pi-star"></i>
                                 </span>
                                 <InputText placeholder="Price" />
                                 <span className="p-inputgroup-addon">$</span>
@@ -242,7 +242,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-g-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
-                                <Button icon="fa fa-search" cornerStyleClass="ui-button-secondary"/>
+                                <Button icon="pi pi-search" cornerStyleClass="ui-button-secondary"/>
                             </div>
                         </div>
 

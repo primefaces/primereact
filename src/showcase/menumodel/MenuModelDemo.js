@@ -38,18 +38,18 @@ class MenuModelDoc extends Component {
                 <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
                 <CodeHighlight className="language-javascript">
                     {`
-const items = [
+const items: [
     {
-        label: 'File',
-        items: [{label: 'New', icon: 'fa fa-plus'},
-                {label: 'Open', icon: 'fa fa-download'}]
+        label: 'Options',
+        items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
     }, 
     {
-        label: 'Edit',
-        items: [{label: 'Undo', icon: 'fa fa-refresh'},
-                {label: 'Redo', icon: 'fa fa-repeat'} ]
+        label: 'Account',
+        items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
+                {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
     }
-];
+]
 
 `}
                 </CodeHighlight>

@@ -74,12 +74,12 @@ export class DataTableCrudDemo extends Component {
         let header = <div className="p-clearfix" style={{lineHeight:'1.87em'}}>CRUD for Cars </div>;
 
         let footer = <div className="p-clearfix" style={{width:'100%'}}>
-            <Button style={{float:'left'}} icon="fa fa-plus" label="Add" onClick={this.addNew}/>
+            <Button style={{float:'left'}} icon="pi pi-plus" label="Add" onClick={this.addNew}/>
         </div>;
 
         let dialogFooter = <div className="ui-dialog-buttonpane p-clearfix">
-                <Button icon="fa fa-close" label="Delete" onClick={this.delete}/>
-                <Button label="Save" icon="fa fa-check" onClick={this.save}/>
+                <Button icon="pi pi-close" label="Delete" onClick={this.delete}/>
+                <Button label="Save" icon="pi pi-check" onClick={this.save}/>
             </div>;
 
         return (
@@ -218,12 +218,12 @@ export class DataTableCrudDemo extends Component {
         let header = <div className="p-clearfix" style={{lineHeight:'1.87em'}}>CRUD for Cars </div>;
 
         let footer = <div className="p-clearfix" style={{width:'100%'}}>
-            <Button style={{float:'left'}} icon="fa fa-plus" label="Add" onClick={this.addNew}/>
+            <Button style={{float:'left'}} icon="pi pi-plus" label="Add" onClick={this.addNew}/>
         </div>;
 
         let dialogFooter = <div className="ui-dialog-buttonpane p-clearfix">
-                <Button icon="fa fa-close" label="Delete" onClick={this.delete}/>
-                <Button label="Save" icon="fa fa-check" onClick={this.save}/>
+                <Button icon="pi pi-times" label="Delete" onClick={this.delete}/>
+                <Button label="Save" icon="pi pi-check" onClick={this.save}/>
             </div>;
 
         return (

@@ -6,7 +6,6 @@ import jQuery from "jquery";
 import './resources/style/primereact.css';
 import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
-import 'font-awesome/css/font-awesome.css';
 import 'primeicons/primeicons.css';
 import 'prismjs/themes/prism-coy.css';
 import './sass/App.css';
@@ -51,8 +50,6 @@ import { DoughnutChartDemo } from './showcase/chart/DoughnutChartDemo';
 import { RadarChartDemo } from './showcase/chart/RadarChartDemo';
 import { PolarAreaChartDemo } from './showcase/chart/PolarAreaChartDemo';
 import { PaginatorDemo } from './showcase/paginator/PaginatorDemo';
-import { DataListDemo } from './showcase/datalist/DataListDemo';
-import { DataGridDemo } from './showcase/datagrid/DataGridDemo';
 import { DataTableDemo } from './showcase/datatable/DataTableDemo';
 import { DataTableLazyDemo } from './showcase/datatable/DataTableLazyDemo';
 import { DataTableExportDemo } from './showcase/datatable/DataTableExportDemo';
@@ -481,8 +478,6 @@ class App extends Component {
                     <Route path="/polarareachart" component={PolarAreaChartDemo} />
                     <Route path="/radarchart" component={RadarChartDemo} />
                     <Route path="/paginator" component={PaginatorDemo} />
-                    <Route path="/datalist" component={DataListDemo} />
-                    <Route path="/datagrid" component={DataGridDemo} />
                     <Route exact path="/datatable" component={DataTableDemo} />
                     <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
                     <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />

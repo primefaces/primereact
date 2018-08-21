@@ -25,7 +25,7 @@ export class DataTableExportDemo extends Component {
     }
 
     render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="fa fa-file-o" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        var header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
 
         return (
             <div>
@@ -90,7 +90,7 @@ export class DataTableExportDemo extends Component {
     }
 
     render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="fa fa-file-o" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        var header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
 
         return (
             <div>

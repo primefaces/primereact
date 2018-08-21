@@ -387,7 +387,7 @@ export class DataTableDemo extends Component {
                         <tr>
                             <td>rowReorderIcon</td>
                             <td>string</td>
-                            <td>fa fa-bars</td>
+                            <td>pi pi-bars</td>
                             <td>Icon of the drag handle to reorder rows.</td>
                         </tr>
                     </tbody>
@@ -428,8 +428,8 @@ export class DataTableTemplatingDemo extends Component {
 
     actionTemplate(rowData, column) {
         return <div>
-            <Button type="button" icon="fa fa-search" className="ui-button-success"></Button>
-            <Button type="button" icon="fa fa-edit" className="ui-button-warning"></Button>
+            <Button type="button" icon="pi pi-search" className="ui-button-success"></Button>
+            <Button type="button" icon="pi pi-pencil" className="ui-button-warning"></Button>
         </div>;
     }
 
@@ -439,7 +439,7 @@ export class DataTableTemplatingDemo extends Component {
 
     render() {
         var carCount = this.state.cars ? this.state.cars.length: 0;
-        var header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="fa fa-refresh" style={{'float':'right'}}/></div>;
+        var header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="pi pi-refresh" style={{'float':'right'}}/></div>;
         var footer = "There are " + carCount + ' cars';
 
         return (
@@ -741,7 +741,7 @@ export class DataTableFilterDemo extends Component {
     render() {
         let header = (
             <div style={{'textAlign':'left'}}>
-                <i className="fa fa-search" style={{margin:'4px 4px 0 0'}}></i>
+                <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
                 <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
             </div>
         );
@@ -1122,8 +1122,8 @@ export class DataTableContextMenuDemo extends Component {
 
     render() {
         let items = [
-            {label: 'View', icon: 'fa fa-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'fa fa-close', command: (event) => this.deleteCar(this.state.selectedCar)}
+            {label: 'View', icon: 'pi pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'pi pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
         ];
 
         return (
@@ -1292,7 +1292,7 @@ export class DataTableExportDemo extends Component {
     }
 
     render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="fa fa-file-o" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        var header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
 
         return (
             <DataTable value={this.state.cars} header={header} ref={(el) => { this.dt = el; }}>

@@ -311,7 +311,7 @@ const items: [
                             {`
 <MegaMenu model={items}>
     <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="fa fa-sign-out" style={{marginLeft:4}}/>
+    <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
 </MegaMenu>
 
 `}

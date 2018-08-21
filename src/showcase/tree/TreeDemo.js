@@ -25,47 +25,42 @@ export class TreeDemo extends Component {
             {
                 "label": "Documents",
                 "data": "Documents Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
+                "icon": "pi pi-fw pi-inbox",
                 "children": [{
                     "label": "Work",
                     "data": "Work Folder",
-                    "expandedIcon": "fa fa-fw fa-folder-open",
-                    "collapsedIcon": "fa fa-fw fa-folder",
-                    "children": [{ "label": "Expenses.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Resume Document" }]
+                    "icon": "pi pi-fw pi-cog",
+                    "children": [{ "label": "Expenses.doc", "icon": "pi pi-fw pi-file", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "pi pi-fw pi-file", "data": "Resume Document" }]
                 },
                 {
                     "label": "Home",
                     "data": "Home Folder",
-                    "expandedIcon": "fa fa-fw fa-folder-open",
-                    "collapsedIcon": "fa fa-fw fa-folder",
-                    "children": [{ "label": "Invoices.txt", "icon": "fa fa-fw fa-file-word-o", "data": "Invoices for this month" }]
+                    "icon": "pi pi-fw pi-home",
+                    "children": [{ "label": "Invoices.txt", "icon": "pi pi-fw pi-file", "data": "Invoices for this month" }]
                 }]
             },
             {
-                "label": "Pictures",
-                "data": "Pictures Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
+                "label": "Events",
+                "data": "Videos Folder",
+                "icon": "pi pi-fw pi-calendar",
                 "children": [
-                    { "label": "barcelona.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "Barcelona Photo" },
-                    { "label": "logo.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeFaces Logo" },
-                    { "label": "primeui.png", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeUI Logo" }]
+                    { "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },
+                    { "label": "Product Launch", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },
+                    { "label": "Report Review", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]
             },
             {
                 "label": "Movies",
                 "data": "Movies Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
+                "icon": "pi pi-fw pi-star",
                 "children": [{
                     "label": "Al Pacino",
                     "data": "Pacino Movies",
-                    "children": [{ "label": "Scarface", "icon": "fa fa-fw fa-file-video-o", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "fa fa-fw fa-file-video-o", "data": "Serpico Movie" }]
+                    "children": [{ "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]
                 },
                 {
                     "label": "Robert De Niro",
                     "data": "De Niro Movies",
-                    "children": [{ "label": "Goodfellas", "icon": "fa fa-fw fa-file-video-o", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "fa fa-fw fa-file-video-o", "data": "Untouchables Movie" }]
+                    "children": [{ "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
                 }]
             }
         ];
@@ -245,47 +240,42 @@ const data = [
     {
         "label": "Documents",
         "data": "Documents Folder",
-        "expandedIcon": "fa fa-fw fa-folder-open",
-        "collapsedIcon": "fa fa-fw fa-folder",
+        "icon": "pi pi-fw pi-inbox",
         "children": [{
             "label": "Work",
             "data": "Work Folder",
-            "expandedIcon": "fa fa-fw fa-folder-open",
-            "collapsedIcon": "fa fa-fw fa-folder",
-            "children": [{ "label": "Expenses.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Resume Document" }]
+            "icon": "pi pi-fw pi-cog",
+            "children": [{ "label": "Expenses.doc", "icon": "pi pi-fw pi-file", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "pi pi-fw pi-file", "data": "Resume Document" }]
         },
         {
             "label": "Home",
             "data": "Home Folder",
-            "expandedIcon": "fa fa-fw fa-folder-open",
-            "collapsedIcon": "fa fa-fw fa-folder",
-            "children": [{ "label": "Invoices.txt", "icon": "fa fa-fw fa-file-word-o", "data": "Invoices for this month" }]
+            "icon": "pi pi-fw pi-home",
+            "children": [{ "label": "Invoices.txt", "icon": "pi pi-fw pi-file", "data": "Invoices for this month" }]
         }]
     },
     {
-        "label": "Pictures",
-        "data": "Pictures Folder",
-        "expandedIcon": "fa fa-fw fa-folder-open",
-        "collapsedIcon": "fa fa-fw fa-folder",
+        "label": "Events",
+        "data": "Videos Folder",
+        "icon": "pi pi-fw pi-calendar",
         "children": [
-            { "label": "barcelona.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "Barcelona Photo" },
-            { "label": "logo.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeFaces Logo" },
-            { "label": "primeui.png", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeUI Logo" }]
+            { "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },
+            { "label": "Product Launch", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },
+            { "label": "Report Review", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]
     },
     {
         "label": "Movies",
         "data": "Movies Folder",
-        "expandedIcon": "fa fa-fw fa-folder-open",
-        "collapsedIcon": "fa fa-fw fa-folder",
+        "icon": "pi pi-fw pi-star",
         "children": [{
             "label": "Al Pacino",
             "data": "Pacino Movies",
-            "children": [{ "label": "Scarface", "icon": "fa fa-fw fa-file-video-o", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "fa fa-fw fa-file-video-o", "data": "Serpico Movie" }]
+            "children": [{ "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]
         },
         {
             "label": "Robert De Niro",
             "data": "De Niro Movies",
-            "children": [{ "label": "Goodfellas", "icon": "fa fa-fw fa-file-video-o", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "fa fa-fw fa-file-video-o", "data": "Untouchables Movie" }]
+            "children": [{ "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
         }]
     }
 ];
@@ -532,47 +522,42 @@ export class TreeDemo extends Component {
             {
                 "label": "Documents",
                 "data": "Documents Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
+                "icon": "pi pi-fw pi-inbox",
                 "children": [{
                     "label": "Work",
                     "data": "Work Folder",
-                    "expandedIcon": "fa fa-fw fa-folder-open",
-                    "collapsedIcon": "fa fa-fw fa-folder",
-                    "children": [{ "label": "Expenses.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "fa fa-fw fa-file-word-o", "data": "Resume Document" }]
+                    "icon": "pi pi-fw pi-cog",
+                    "children": [{ "label": "Expenses.doc", "icon": "pi pi-fw pi-file", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "pi pi-fw pi-file", "data": "Resume Document" }]
                 },
                 {
                     "label": "Home",
                     "data": "Home Folder",
-                    "expandedIcon": "fa fa-fw fa-folder-open",
-                    "collapsedIcon": "fa fa-fw fa-folder",
-                    "children": [{ "label": "Invoices.txt", "icon": "fa fa-fw fa-file-word-o", "data": "Invoices for this month" }]
+                    "icon": "pi pi-fw pi-home",
+                    "children": [{ "label": "Invoices.txt", "icon": "pi pi-fw pi-file", "data": "Invoices for this month" }]
                 }]
             },
             {
-                "label": "Pictures",
-                "data": "Pictures Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
+                "label": "Events",
+                "data": "Videos Folder",
+                "icon": "pi pi-fw pi-calendar",
                 "children": [
-                    { "label": "barcelona.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "Barcelona Photo" },
-                    { "label": "logo.jpg", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeFaces Logo" },
-                    { "label": "primeui.png", "icon": "fa fa-fw fa-file-image-o", "data": "PrimeUI Logo" }]
+                    { "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },
+                    { "label": "Product Launch", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },
+                    { "label": "Report Review", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]
             },
             {
                 "label": "Movies",
                 "data": "Movies Folder",
-                "expandedIcon": "fa fa-fw fa-folder-open",
-                "collapsedIcon": "fa fa-fw fa-folder",
+                "icon": "pi pi-fw pi-star",
                 "children": [{
                     "label": "Al Pacino",
                     "data": "Pacino Movies",
-                    "children": [{ "label": "Scarface", "icon": "fa fa-fw fa-file-video-o", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "fa fa-fw fa-file-video-o", "data": "Serpico Movie" }]
+                    "children": [{ "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]
                 },
                 {
                     "label": "Robert De Niro",
                     "data": "De Niro Movies",
-                    "children": [{ "label": "Goodfellas", "icon": "fa fa-fw fa-file-video-o", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "fa fa-fw fa-file-video-o", "data": "Untouchables Movie" }]
+                    "children": [{ "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
                 }]
             }
         ];
