@@ -209,7 +209,7 @@ export class Menu extends Component {
   
     render() {
         if (this.props.model) {
-            const className = classNames('p-menu p-component', this.props.className, {'p-menu-dynamic p-menu-overlay p-shadow': this.props.popup});
+            const className = classNames('p-menu p-component', this.props.className, {'p-menu-dynamic p-menu-overlay': this.props.popup});
             const menuitems = this.renderMenu();
 
             return (

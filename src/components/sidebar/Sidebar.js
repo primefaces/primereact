@@ -137,7 +137,7 @@ export class Sidebar extends Component {
     }
 
     render() {
-        const className = classNames('p-sidebar p-component p-shadow', this.props.className, 'p-sidebar-' + this.props.position,
+        const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
                                        {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
         const closeIcon = this.renderCloseIcon();
 

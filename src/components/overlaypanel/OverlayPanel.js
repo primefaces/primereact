@@ -128,7 +128,7 @@ export class OverlayPanel extends Component {
     }
 
     renderElement() {
-        let className = classNames('p-overlaypanel p-component p-shadow', this.props.className);
+        let className = classNames('p-overlaypanel p-component', this.props.className);
         let closeIcon = this.renderCloseIcon();
 
         return (

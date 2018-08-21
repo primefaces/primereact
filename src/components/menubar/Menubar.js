@@ -176,7 +176,7 @@ class MenubarSub extends Component {
     }
 
     render() {
-        const className = classNames({'p-submenu-list p-shadow': !this.props.root, 'p-menubar-root-list': this.props.root});
+        const className = classNames({'p-submenu-list': !this.props.root, 'p-menubar-root-list': this.props.root});
         const submenu = this.renderMenu();
 
         return (

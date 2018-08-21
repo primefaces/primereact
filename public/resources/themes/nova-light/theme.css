@@ -2449,7 +2449,7 @@ body .p-menu {
   border-radius: 3px; }
   body .p-menu .p-menuitem {
     margin: 0; }
-  body .p-menu.p-shadow {
+  body .p-menu.p-menu-overlay {
     border: 1px solid #c8c8c8;
     -webkit-box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16);
     -moz-box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16);
@@ -2556,6 +2556,11 @@ body .p-tieredmenu {
   body .p-tieredmenu .p-menu-separator {
     border: 1px solid #c8c8c8;
     border-width: 1px 0 0 0; }
+  body .p-tieredmenu.p-menu-overlay {
+    border: 1px solid #c8c8c8;
+    -webkit-box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16); }
 body .p-slidemenu {
   padding: 0;
   background-color: #ffffff;
@@ -2590,6 +2595,11 @@ body .p-slidemenu {
   body .p-slidemenu .p-menu-separator {
     border: 1px solid #c8c8c8;
     border-width: 1px 0 0 0; }
+  body .p-slidemenu.p-menu-overlay {
+    border: 1px solid #c8c8c8;
+    -webkit-box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0px 6px 0 rgba(0, 0, 0, 0.16); }
 body .p-tabmenu {
   border: 0 none; }
   body .p-tabmenu .p-tabmenu-nav {

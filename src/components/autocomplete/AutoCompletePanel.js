@@ -37,7 +37,7 @@ export class AutoCompletePanel extends Component {
         }
 
         return (
-            <div ref={(el) => this.element = el} className="p-autocomplete-panel p-input-overlay p-shadow" style={{ maxHeight: this.props.scrollHeight }}>
+            <div ref={(el) => this.element = el} className="p-autocomplete-panel p-input-overlay" style={{ maxHeight: this.props.scrollHeight }}>
                 <ul className="p-autocomplete-items p-autocomplete-list p-component p-reset">
                     {items}
                 </ul>

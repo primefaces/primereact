@@ -69,7 +69,7 @@ export class GrowlMessage extends Component {
     }
 
     render() {
-        let className = classNames('p-growl-item-container p-highlight p-shadow', {
+        let className = classNames('p-growl-item-container p-highlight', {
             'p-growl-message-info': this.props.message.severity === 'info',
             'p-growl-message-warn': this.props.message.severity === 'warn',
             'p-growl-message-error': this.props.message.severity === 'error',

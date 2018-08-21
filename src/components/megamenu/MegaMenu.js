@@ -265,7 +265,7 @@ export class MegaMenu extends Component {
             const columns = this.renderColumns(category);
 
             return (
-                <div className="p-megamenu-panel p-shadow">
+                <div className="p-megamenu-panel">
                     <div className="p-g">
                         {columns}
                     </div>

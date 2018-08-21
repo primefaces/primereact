@@ -24,7 +24,7 @@ export class DropdownPanel extends Component {
     };
 
     renderElement() {
-        let className = classNames('p-dropdown-panel p-hidden p-input-overlay p-shadow', this.props.panelClassName);
+        let className = classNames('p-dropdown-panel p-hidden p-input-overlay', this.props.panelClassName);
 
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>

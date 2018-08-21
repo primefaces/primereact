@@ -177,7 +177,7 @@ class TieredMenuSub extends Component {
     }
 
     render() {
-        const className = classNames({'p-shadow p-submenu-list': !this.props.root});
+        const className = classNames({'p-submenu-list': !this.props.root});
         const submenu = this.renderMenu();
 
         return (
@@ -361,7 +361,7 @@ export class TieredMenu extends Component {
     }
 
     render() {
-        const className = classNames('p-tieredmenu p-component', {'p-tieredmenu-dynamic p-menu-overlay p-shadow': this.props.popup}, this.props.className);
+        const className = classNames('p-tieredmenu p-component', {'p-tieredmenu-dynamic p-menu-overlay': this.props.popup}, this.props.className);
 
         return(
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>

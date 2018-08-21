@@ -20,7 +20,7 @@ export class MultiSelectPanel extends Component {
 
     renderElement() {
         return (
-            <div className="p-multiselect-panel p-hidden p-input-overlay p-shadow"
+            <div className="p-multiselect-panel p-hidden p-input-overlay"
                 ref={(el) => this.element = el} onClick={this.props.onClick}>
                 {this.props.header}
                 <div className="p-multiselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight }}>

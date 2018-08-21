@@ -21,7 +21,7 @@ export class ColorPickerPanel extends Component {
 
     renderElement() {
         let className = classNames('p-colorpicker-panel', {
-            'p-colorpicker-overlay-panel p-input-overlay p-shadow': !this.props.inline,
+            'p-colorpicker-overlay-panel p-input-overlay': !this.props.inline,
             'p-disabled': this.props.disabled
         });
 

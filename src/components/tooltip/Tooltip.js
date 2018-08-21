@@ -108,7 +108,7 @@ export class Tooltip extends Component {
         this.container.appendChild(tooltipArrow);
         
         this.tooltipText = document.createElement('div');
-        this.tooltipText.className = 'p-tooltip-text p-shadow';
+        this.tooltipText.className = 'p-tooltip-text';
 
 		this.updateText();
         

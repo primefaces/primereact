@@ -569,7 +569,7 @@ export class Dialog extends Component {
     }
 
     render() {
-        let className = classNames('p-dialog p-component p-shadow', this.props.className, {
+        let className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
             'p-dialog-draggable': this.props.draggable
         });

@@ -174,7 +174,7 @@ class ContextMenuSub extends Component {
     }
 
     render() {
-        const className = classNames({'p-submenu-list p-shadow': !this.props.root});
+        const className = classNames({'p-submenu-list': !this.props.root});
         const submenu = this.renderMenu();
 
         return (
@@ -384,7 +384,7 @@ export class ContextMenu extends Component {
     }
     
     renderContextMenu() {
-        const className = classNames('p-contextmenu p-component p-shadow', this.props.className);
+        const className = classNames('p-contextmenu p-component', this.props.className);
 
         return(
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
