@@ -502,7 +502,7 @@ body {
                 }
             }
 
-            i {
+            i:not([class~="pi"]) {
                 background-color: #fcf2a7;
                 font-family: monaco, Consolas, Lucida Console, monospace;
                 font-weight: bold;
