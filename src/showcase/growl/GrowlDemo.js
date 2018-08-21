@@ -74,29 +74,29 @@ export class GrowlDemo extends Component {
                     <h3 style={{marginTop: 0}}>Severities</h3>
                     <div className="p-g">
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                            <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                            <Button onClick={this.showInfo} label="Info" className="p-button-info" />
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                            <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                            <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
                     
                     <h3>Options</h3>
                     <div className="p-g">
                         <div className="p-g-12 p-md-4">
-                            <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
+                            <Button onClick={this.showMultiple} label="Multiple" className="p-button-warning" />
                         </div>
                         <div className="p-g-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
                         <div className="p-g-12 p-md-4">
-                            <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
+                            <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
                         </div>
                     </div>
                     
@@ -218,10 +218,10 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
 {`
 <Growl ref={(el) => this.growl = el}></Growl>
 
-<Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
-<Button onClick={this.showInfo} label="Info" className="ui-button-info" />
-<Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
-<Button onClick={this.showError} label="Error" className="ui-button-danger" />
+<Button onClick={this.showSuccess} label="Success" className="p-button-success" />
+<Button onClick={this.showInfo} label="Info" className="p-button-info" />
+<Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
+<Button onClick={this.showError} label="Error" className="p-button-danger" />
 <Button onClick={this.showMultiple} label="Multiple" />
 
 `}
@@ -501,29 +501,29 @@ export class GrowlDemo extends Component {
                     <h3>Severities</h3>
                     <div className="p-g">
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showSuccess} label="Success" className="ui-button-success" />
+                            <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showInfo} label="Info" className="ui-button-info" />
+                            <Button onClick={this.showInfo} label="Info" className="p-button-info" />
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showWarn} label="Warn" className="ui-button-warning" />
+                            <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <Button onClick={this.showError} label="Error" className="ui-button-danger" />
+                            <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
                     
                     <h3>Options</h3>
                     <div className="p-g">
                         <div className="p-g-12 p-md-4">
-                            <Button onClick={this.showMultiple} label="Multiple" className="ui-button-warning" />
+                            <Button onClick={this.showMultiple} label="Multiple" className="p-button-warning" />
                         </div>
                         <div className="p-g-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
                         <div className="p-g-12 p-md-4">
-                            <Button onClick={this.showCustom} label="Custom" className="ui-button-success" />
+                            <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
                         </div>
                     </div>
                     
