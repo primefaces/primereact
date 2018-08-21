@@ -23,6 +23,9 @@
     margin-left: -8px;
     z-index: 2;
     left: 50%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
 
 .p-organizationchart .p-organizationchart-line-down {
