@@ -107,7 +107,7 @@ export class DataTableCrudDemo extends Component {
                         {
                             this.state.car && 
                             
-                            <div className="p-grid p-fluid">
+                            <div className="p-g p-fluid">
                                 <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
                                 <div className="p-g-8" style={{padding:'.25em .75em'}}>
                                     <InputText id="vin" onChange={(e) => {this.updateProperty('vin', e.target.value)}} value={this.state.car.vin}/>
@@ -250,7 +250,7 @@ export class DataTableCrudDemo extends Component {
                         {
                             this.state.car && 
                             
-                            <div className="p-grid p-fluid">
+                            <div className="p-g p-fluid">
                                 <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
                                 <div className="p-g-8" style={{padding:'.25em .75em'}}>
                                     <InputText id="vin" onChange={(e) => {this.updateProperty('vin', e.target.value)}} value={this.state.car.vin}/>
