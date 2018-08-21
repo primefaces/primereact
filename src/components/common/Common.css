@@ -45,7 +45,13 @@
     position: fixed;
     height: 100%;
 }
-
+.p-scrollbar-measure {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+    position: absolute;
+    top: -9999px;
+}
 .p-clearfix:after {
     content: "";
     display: table;
