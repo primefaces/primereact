@@ -10,11 +10,11 @@ export class TabMenuDemo extends Component {
         super();
         this.state = {
             items: [
-                {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
-                {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
-                {label: 'Documentation', icon: 'fa fa-fw fa-book'},
-                {label: 'Support', icon: 'fa fa-fw fa-support'},
-                {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+                {label: 'Home', icon: 'pi pi-fw pi-home'},
+                {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
+                {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
+                {label: 'Documentation', icon: 'pi pi-fw pi-file'},
+                {label: 'Settings', icon: 'pi pi-fw pi-cog'}
             ]
         };
     }
@@ -68,11 +68,11 @@ constructor() {
     super();
     this.state = {
         items: [
-            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
-            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
-            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
-            {label: 'Support', icon: 'fa fa-fw fa-support'},
-            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+            {label: 'Home', icon: 'pi pi-fw pi-home'},
+            {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
+            {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
+            {label: 'Documentation', icon: 'pi pi-fw pi-file'},
+            {label: 'Settings', icon: 'pi pi-fw pi-cog'}
         ]
     };
 }
@@ -227,11 +227,11 @@ export class TabMenuDemo extends Component {
         super();
         this.state = {
             items: [
-                {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
-                {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
-                {label: 'Documentation', icon: 'fa fa-fw fa-book'},
-                {label: 'Support', icon: 'fa fa-fw fa-support'},
-                {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+                {label: 'Home', icon: 'pi pi-fw pi-home'},
+                {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
+                {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
+                {label: 'Documentation', icon: 'pi pi-fw pi-file'},
+                {label: 'Settings', icon: 'pi pi-fw pi-cog'}
             ]
         };
     }

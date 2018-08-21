@@ -12,14 +12,14 @@ export class MenuDemo extends Component {
         this.state = {
             items: [
                 {
-                    label: 'File',
-                    items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                            {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
+                    label: 'Options',
+                    items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                            {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
                 }, 
                 {
-                    label: 'Edit',
-                    items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
-                            {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+                    label: 'Account',
+                    items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
+                            {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
                 }
             ]
         };
@@ -85,9 +85,8 @@ import {Menu} from 'primereact/menu';
                         <CodeHighlight className="language-javascript">
                             {`
 let items = [
-    {label: 'New', icon: 'fa fa-fw fa-plus'},
-    {label: 'Open', icon: 'fa fa-fw fa-download'},
-    {label: 'Undo', icon: 'fa fa-fw fa-refresh'}
+    {label: 'New', icon: 'pi pi-fw pi-plus'},
+    {label: 'Delete', icon: 'pi pi-fw pi-trash'}
 ];
 
 `}
@@ -97,18 +96,18 @@ let items = [
                         <p>Menu supports one level of nesting via subitems of an item.</p>
                         <CodeHighlight className="language-javascript">
                             {`
-let items = [
+let items: [
     {
-        label: 'File',
-        items: [{label: 'New', icon: 'fa fa-fw fa-plus', command:()=>{ window.location.hash="/fileupload"; }},
-                {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
-    },
+        label: 'Options',
+        items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
+    }, 
     {
-        label: 'Edit',
-        items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh', command:()=>{ window.location.hash="/"; }},
-                {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+        label: 'Account',
+        items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
+                {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
     }
-];
+]
 
 `}
                         </CodeHighlight>
@@ -278,7 +277,7 @@ let items = [
 
                     <TabPanel header="Source">
                         <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/menu" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <i className="fa fa-github"></i>
+                            <i className="pi fa-github"></i>
                             <span>View on GitHub</span>
                         </a>
                         <CodeHighlight className="language-javascript">
@@ -293,14 +292,14 @@ export class MenuDemo extends Component {
         this.state = {
             items: [
                 {
-                    label: 'File',
-                    items: [{label: 'New', icon: 'fa fa-fw fa-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                            {label: 'Open', icon: 'fa fa-fw fa-download', url: 'http://primetek.com.tr'}]
+                    label: 'Options',
+                    items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
+                            {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
                 }, 
                 {
-                    label: 'Edit',
-                    items: [{label: 'Undo', icon: 'fa fa-fw fa-refresh',command:()=>{ window.location.hash="/"; }},
-                            {label: 'Redo', icon: 'fa fa-fw fa-repeat'} ]
+                    label: 'Account',
+                    items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
+                            {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
                 }
             ]
         };

@@ -11,111 +11,111 @@ export class MegaMenuDemo extends Component {
         this.state = {
             items: [
                 {
-                    label: 'TV', icon: 'fa fa-fw fa-check',
+                    label: 'Videos', icon: 'pi pi-fw pi-video',
                     items: [
                         [
                             {
-                                label: 'TV 1',
-                                items: [{label: 'TV 1.1'}, {label: 'TV 1.2'}]
+                                label: 'Video 1',
+                                items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
                             },
                             {
-                                label: 'TV 2',
-                                items: [{label: 'TV 2.1'}, {label: 'TV 2.2'}]
+                                label: 'Video 2',
+                                items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
                             }
                         ],
                         [
                             {
-                                label: 'TV 3',
-                                items: [{label: 'TV 3.1'}, {label: 'TV 3.2'}]
+                                label: 'Video 3',
+                                items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
                             },
                             {
-                                label: 'TV 4',
-                                items: [{label: 'TV 4.1'}, {label: 'TV 4.2'}]
+                                label: 'Video 4',
+                                items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
                             }
                         ]
                     ]
                 },
                 {
-                    label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
+                    label: 'Users', icon: 'pi pi-fw pi-users',
                     items: [
                         [
                             {
-                                label: 'Sports 1',
-                                items: [{label: 'Sports 1.1'}, {label: 'Sports 1.2'}]
+                                label: 'User 1',
+                                items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
                             },
                             {
-                                label: 'Sports 2',
-                                items: [{label: 'Sports 2.1'}, {label: 'Sports 2.2'}]
+                                label: 'User 2',
+                                items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
                             },
                         ],
                         [
                             {
-                                label: 'Sports 3',
-                                items: [{label: 'Sports 3.1'}, {label: 'Sports 3.2'}]
+                                label: 'User 3',
+                                items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
                             },
                             {
-                                label: 'Sports 4',
-                                items: [{label: 'Sports 4.1'}, {label: 'Sports 4.2'}]
+                                label: 'User 4',
+                                items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
                             }
                         ],
                         [
                             {
-                                label: 'Sports 5',
-                                items: [{label: 'Sports 5.1'}, {label: 'Sports 5.2'}]
+                                label: 'User 5',
+                                items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
                             },
                             {
-                                label: 'Sports 6',
-                                items: [{label: 'Sports 6.1'}, {label: 'Sports 6.2'}]
+                                label: 'User 6',
+                                items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
                             }
                         ]
                     ]
                 },
                 {
-                    label: 'Entertainment', icon: 'fa fa-fw fa-child',
+                    label: 'Events', icon: 'pi pi-fw pi-calendar',
                     items: [
                         [
                             {
-                                label: 'Entertainment 1',
-                                items: [{label: 'Entertainment 1.1'}, {label: 'Entertainment 1.2'}]
+                                label: 'Event 1',
+                                items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
                             },
                             {
-                                label: 'Entertainment 2',
-                                items: [{label: 'Entertainment 2.1'}, {label: 'Entertainment 2.2'}]
+                                label: 'Event 2',
+                                items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
                             }
                         ],
                         [
                             {
-                                label: 'Entertainment 3',
-                                items: [{label: 'Entertainment 3.1'}, {label: 'Entertainment 3.2'}]
+                                label: 'Event 3',
+                                items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
                             },
                             {
-                                label: 'Entertainment 4',
-                                items: [{label: 'Entertainment 4.1'}, {label: 'Entertainment 4.2'}]
+                                label: 'Event 4',
+                                items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
                             }
                         ]
                     ]
                 },
                 {
-                    label: 'Technology', icon: 'fa fa-fw fa-gears',
+                    label: 'Settings', icon: 'pi pi-fw pi-cog',
                     items: [
                         [
                             {
-                                label: 'Technology 1',
-                                items: [{label: 'Technology 1.1'}, {label: 'Technology 1.2'}]
+                                label: 'Setting 1',
+                                items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
                             },
                             {
-                                label: 'Technology 2',
-                                items: [{label: 'Technology 2.1'}, {label: 'Technology 2.2'}]
+                                label: 'Setting 2',
+                                items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
                             },
                             {
-                                label: 'Technology 3',
-                                items: [{label: 'Technology 3.1'}, {label: 'Technology 3.2'}]
+                                label: 'Setting 3',
+                                items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
                             }
                         ],
                         [
                             {
                                 label: 'Technology 4',
-                                items: [{label: 'Technology 4.1'}, {label: 'Technology 4.2'}]
+                                items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
                             }
                         ]
                     ]
@@ -170,127 +170,128 @@ import {MegaMenu} from 'primereact/megamenu';
 
                         <h3>Getting Started</h3>
                         <p>MegaMenu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<MegaMenu model={items} />
 
-`}
-                        </CodeHighlight>
                         <CodeHighlight className="language-javascript">
                             {`
-var items = [
+const items: [
     {
-        label: 'TV', icon: 'fa fa-fw fa-check',
+        label: 'Videos', icon: 'pi pi-fw pi-video',
         items: [
             [
                 {
-                    label: 'TV 1',
-                    items: [{label: 'TV 1.1'},{label: 'TV 1.2'}]
+                    label: 'Video 1',
+                    items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
                 },
                 {
-                    label: 'TV 2',
-                    items: [{label: 'TV 2.1'},{label: 'TV 2.2'}]
+                    label: 'Video 2',
+                    items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
                 }
             ],
             [
                 {
-                    label: 'TV 3',
-                    items: [{label: 'TV 3.1'},{label: 'TV 3.2'}]
+                    label: 'Video 3',
+                    items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
                 },
                 {
-                    label: 'TV 4',
-                    items: [{label: 'TV 4.1'},{label: 'TV 4.2'}]
+                    label: 'Video 4',
+                    items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
                 }
             ]
         ]
     },
     {
-        label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
+        label: 'Users', icon: 'pi pi-fw pi-users',
         items: [
             [
                 {
-                    label: 'Sports 1',
-                    items: [{label: 'Sports 1.1'},{label: 'Sports 1.2'}]
+                    label: 'User 1',
+                    items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
                 },
                 {
-                    label: 'Sports 2',
-                    items: [{label: 'Sports 2.1'},{label: 'Sports 2.2'}]
+                    label: 'User 2',
+                    items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
                 },
-
             ],
             [
                 {
-                    label: 'Sports 3',
-                    items: [{label: 'Sports 3.1'},{label: 'Sports 3.2'}]
+                    label: 'User 3',
+                    items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
                 },
                 {
-                    label: 'Sports 4',
-                    items: [{label: 'Sports 4.1'},{label: 'Sports 4.2'}]
+                    label: 'User 4',
+                    items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
                 }
             ],
             [
                 {
-                    label: 'Sports 5',
-                    items: [{label: 'Sports 5.1'},{label: 'Sports 5.2'}]
+                    label: 'User 5',
+                    items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
                 },
                 {
-                    label: 'Sports 6',
-                    items: [{label: 'Sports 6.1'},{label: 'Sports 6.2'}]
+                    label: 'User 6',
+                    items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
                 }
             ]
         ]
     },
     {
-        label: 'Entertainment', icon: 'fa fa-fw fa-child',
+        label: 'Events', icon: 'pi pi-fw pi-calendar',
         items: [
             [
                 {
-                    label: 'Entertainment 1',
-                    items: [{label: 'Entertainment 1.1'},{label: 'Entertainment 1.2'}]
+                    label: 'Event 1',
+                    items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
                 },
                 {
-                    label: 'Entertainment 2',
-                    items: [{label: 'Entertainment 2.1'},{label: 'Entertainment 2.2'}]
+                    label: 'Event 2',
+                    items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
                 }
             ],
             [
                 {
-                    label: 'Entertainment 3',
-                    items: [{label: 'Entertainment 3.1'},{label: 'Entertainment 3.2'}]
+                    label: 'Event 3',
+                    items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
                 },
                 {
-                    label: 'Entertainment 4',
-                    items: [{label: 'Entertainment 4.1'},{label: 'Entertainment 4.2'}]
+                    label: 'Event 4',
+                    items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
                 }
             ]
         ]
     },
     {
-        label: 'Technology', icon: 'fa fa-fw fa-gears',
+        label: 'Settings', icon: 'pi pi-fw pi-cog',
         items: [
             [
                 {
-                    label: 'Technology 1',
-                    items: [{label: 'Technology 1.1'},{label: 'Technology 1.2'}]
+                    label: 'Setting 1',
+                    items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
                 },
                 {
-                    label: 'Technology 2',
-                    items: [{label: 'Technology 2.1'},{label: 'Technology 2.2'}]
+                    label: 'Setting 2',
+                    items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
                 },
                 {
-                    label: 'Technology 3',
-                    items: [{label: 'Technology 3.1'},{label: 'Technology 3.2'}]
+                    label: 'Setting 3',
+                    items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
                 }
             ],
             [
                 {
                     label: 'Technology 4',
-                    items: [{label: 'Technology 4.1'},{label: 'Technology 4.2'}]
+                    items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
                 }
             ]
         ]
     }
-];
+]
+
+`}
+                        </CodeHighlight>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<MegaMenu model={items} />
 
 `}
                         </CodeHighlight>
@@ -435,111 +436,111 @@ export class MegaMenuDemo extends Component {
         this.state = {
             items: [
                 {
-                    label: 'TV', icon: 'fa fa-fw fa-check',
+                    label: 'Videos', icon: 'pi pi-fw pi-video',
                     items: [
                         [
                             {
-                                label: 'TV 1',
-                                items: [{label: 'TV 1.1'}, {label: 'TV 1.2'}]
+                                label: 'Video 1',
+                                items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
                             },
                             {
-                                label: 'TV 2',
-                                items: [{label: 'TV 2.1'}, {label: 'TV 2.2'}]
+                                label: 'Video 2',
+                                items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
                             }
                         ],
                         [
                             {
-                                label: 'TV 3',
-                                items: [{label: 'TV 3.1'}, {label: 'TV 3.2'}]
+                                label: 'Video 3',
+                                items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
                             },
                             {
-                                label: 'TV 4',
-                                items: [{label: 'TV 4.1'}, {label: 'TV 4.2'}]
+                                label: 'Video 4',
+                                items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
                             }
                         ]
                     ]
                 },
                 {
-                    label: 'Sports', icon: 'fa fa-fw fa-soccer-ball-o',
+                    label: 'Users', icon: 'pi pi-fw pi-users',
                     items: [
                         [
                             {
-                                label: 'Sports 1',
-                                items: [{label: 'Sports 1.1'}, {label: 'Sports 1.2'}]
+                                label: 'User 1',
+                                items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
                             },
                             {
-                                label: 'Sports 2',
-                                items: [{label: 'Sports 2.1'}, {label: 'Sports 2.2'}]
+                                label: 'User 2',
+                                items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
                             },
                         ],
                         [
                             {
-                                label: 'Sports 3',
-                                items: [{label: 'Sports 3.1'}, {label: 'Sports 3.2'}]
+                                label: 'User 3',
+                                items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
                             },
                             {
-                                label: 'Sports 4',
-                                items: [{label: 'Sports 4.1'}, {label: 'Sports 4.2'}]
+                                label: 'User 4',
+                                items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
                             }
                         ],
                         [
                             {
-                                label: 'Sports 5',
-                                items: [{label: 'Sports 5.1'}, {label: 'Sports 5.2'}]
+                                label: 'User 5',
+                                items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
                             },
                             {
-                                label: 'Sports 6',
-                                items: [{label: 'Sports 6.1'}, {label: 'Sports 6.2'}]
+                                label: 'User 6',
+                                items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
                             }
                         ]
                     ]
                 },
                 {
-                    label: 'Entertainment', icon: 'fa fa-fw fa-child',
+                    label: 'Events', icon: 'pi pi-fw pi-calendar',
                     items: [
                         [
                             {
-                                label: 'Entertainment 1',
-                                items: [{label: 'Entertainment 1.1'}, {label: 'Entertainment 1.2'}]
+                                label: 'Event 1',
+                                items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
                             },
                             {
-                                label: 'Entertainment 2',
-                                items: [{label: 'Entertainment 2.1'}, {label: 'Entertainment 2.2'}]
+                                label: 'Event 2',
+                                items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
                             }
                         ],
                         [
                             {
-                                label: 'Entertainment 3',
-                                items: [{label: 'Entertainment 3.1'}, {label: 'Entertainment 3.2'}]
+                                label: 'Event 3',
+                                items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
                             },
                             {
-                                label: 'Entertainment 4',
-                                items: [{label: 'Entertainment 4.1'}, {label: 'Entertainment 4.2'}]
+                                label: 'Event 4',
+                                items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
                             }
                         ]
                     ]
                 },
                 {
-                    label: 'Technology', icon: 'fa fa-fw fa-gears',
+                    label: 'Settings', icon: 'pi pi-fw pi-cog',
                     items: [
                         [
                             {
-                                label: 'Technology 1',
-                                items: [{label: 'Technology 1.1'}, {label: 'Technology 1.2'}]
+                                label: 'Setting 1',
+                                items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
                             },
                             {
-                                label: 'Technology 2',
-                                items: [{label: 'Technology 2.1'}, {label: 'Technology 2.2'}]
+                                label: 'Setting 2',
+                                items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
                             },
                             {
-                                label: 'Technology 3',
-                                items: [{label: 'Technology 3.1'}, {label: 'Technology 3.2'}]
+                                label: 'Setting 3',
+                                items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
                             }
                         ],
                         [
                             {
                                 label: 'Technology 4',
-                                items: [{label: 'Technology 4.1'}, {label: 'Technology 4.2'}]
+                                items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
                             }
                         ]
                     ]
