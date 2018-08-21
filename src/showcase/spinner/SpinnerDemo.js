@@ -26,13 +26,13 @@ export class SpinnerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic: {this.state.value1}</h3>
+                    <h3>Basic {this.state.value1}</h3>
                     <Spinner value={this.state.value} size={30} onChange={(e) => this.setState({value1: e.value})} />
 
-                    <h3>Min/Max: {this.state.value2}</h3>
+                    <h3>Min/Max {this.state.value2}</h3>
                     <Spinner value={this.state.value2} size={30} onChange={(e) => this.setState({value2: e.value})} min={0} max={100} />
 
-                    <h3>Step: {this.state.value3}</h3>
+                    <h3>Step {this.state.value3}</h3>
                     <Spinner value={this.state.value3} size={30} onChange={(e) => this.setState({value3: e.value})} step={0.25} />
 
                     <h3>Disabled</h3>
@@ -296,13 +296,13 @@ export class SpinnerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic: {this.state.value1}</h3>
+                    <h3>Basic {this.state.value1}</h3>
                     <Spinner value={this.state.value} size={30} onChange={(e) => this.setState({value1: e.value})} />
 
-                    <h3>Min/Max: {this.state.value2}</h3>
+                    <h3>Min/Max {this.state.value2}</h3>
                     <Spinner value={this.state.value2} size={30} onChange={(e) => this.setState({value2: e.value})} min={0} max={100} />
 
-                    <h3>Step: {this.state.value3}</h3>
+                    <h3>Step {this.state.value3}</h3>
                     <Spinner value={this.state.value3} size={30} onChange={(e) => this.setState({value3: e.value})} step={0.25} />
 
                     <h3>Disabled</h3>
