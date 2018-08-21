@@ -1,5 +1,5 @@
 .p-growl {
-  position:fixed;
+    position:fixed;
 	width: 20em;
 }
 
@@ -74,12 +74,13 @@
 
 /* Animations */
 .p-growl-enter {
-  opacity: 0.01;
+    opacity: 0.01;
+    display: none;
 }
 
 .p-growl-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
+    opacity: 1;
+    transition: opacity 250ms ease-in;
 }
 
 .p-growl-exit {

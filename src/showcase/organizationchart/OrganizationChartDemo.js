@@ -533,7 +533,7 @@ export class OrganizationChartDemo extends Component {
         if (node.type === "person") {
             return (
                 <div>
-                    <div className="node-header p-corner-top">{node.label}</div>
+                    <div className="node-header">{node.label}</div>
                     <div className="node-content">
                         <img alt={node.data.avatar} src={'showcase/resources/demo/images/organization/\${node.data.avatar}'} style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>

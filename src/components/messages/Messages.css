@@ -44,9 +44,9 @@
 /* Animations */	
 .p-messages-enter {	
     opacity: 0.01;	
-}	
+}
 .p-messages-enter-active {	
-    opacity: 1;	
+    opacity: 1;
     transition: opacity 250ms ease-in;	
 }	
 .p-messages-exit {	

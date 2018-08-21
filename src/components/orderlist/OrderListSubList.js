@@ -104,7 +104,6 @@ export class OrderListSubList extends Component {
     render() {
         let header = null;
         let items = null;
-        let listClassName = classNames('p-orderlist-list', {'p-corner-bottom': this.props.header, 'p-corner-all': !this.props.header});
 
         if (this.props.header) {
             header = <div className="p-orderlist-caption">{this.props.header}</div>
@@ -140,7 +139,7 @@ export class OrderListSubList extends Component {
         return (
             <div className="p-orderlist-list-container">
                 {header}
-                <ul ref={(el) => this.listElement = el} className={listClassName} style={this.props.listStyle} onDragOver={this.onListMouseMove}>
+                <ul ref={(el) => this.listElement = el} className="p-orderlist-list" style={this.props.listStyle} onDragOver={this.onListMouseMove}>
                     {items}
                 </ul>
             </div>
