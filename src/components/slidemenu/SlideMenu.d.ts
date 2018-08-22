@@ -15,6 +15,7 @@ interface SlideMenuProps {
     viewportHeight?: number;
     autoZIndex?: boolean;
     baseZIndex?: number;
+    appendTo?: any;
     onShow?(e: Event): void;
     onHide?(e: Event): void;
 }

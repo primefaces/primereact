@@ -177,6 +177,12 @@ let items: [
                                         <td>true</td>
                                         <td>Whether to automatically manage layering.</td>
                                     </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>DOM element</td>
+                                        <td>null</td>
+                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

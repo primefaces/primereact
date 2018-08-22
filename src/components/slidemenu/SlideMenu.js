@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
@@ -170,6 +171,7 @@ export class SlideMenu extends Component {
         viewportHeight: 175,
         autoZIndex: true,
         baseZIndex: 0,
+        appendTo: null,
         onShow: null,
         onHide: null
     }
@@ -187,6 +189,7 @@ export class SlideMenu extends Component {
         viewportHeight: PropTypes.number,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
+        appendTo: PropTypes.any,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     }
@@ -337,7 +340,7 @@ export class SlideMenu extends Component {
         this.unbindDocumentResizeListener();
     }
     
-    render() {
+    renderElement() {
         const className = classNames('p-slidemenu p-component', {'p-slidemenu-dynamic p-menu-overlay': this.props.popup});
         const backward = this.renderBackward();
 
@@ -352,5 +355,14 @@ export class SlideMenu extends Component {
                  </div>
             </div>
         );
+    }
+
+    render() {
+        const element = this.renderElement();
+        
+        if (this.props.appendTo)
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        else
+            return element;
     }
 }

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
@@ -13,6 +14,7 @@ export class Menu extends Component {
         className: null,
         autoZIndex: true,
         baseZIndex: 0,
+        appendTo: null,
         onShow: null,
         onHide: null
     };
@@ -25,6 +27,7 @@ export class Menu extends Component {
         className: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
+        appendTo: PropTypes.any,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
@@ -207,7 +210,7 @@ export class Menu extends Component {
         );
     }
   
-    render() {
+    renderElement() {
         if (this.props.model) {
             const className = classNames('p-menu p-component', this.props.className, {'p-menu-dynamic p-menu-overlay': this.props.popup});
             const menuitems = this.renderMenu();
@@ -223,5 +226,14 @@ export class Menu extends Component {
         else {
             return null;
         }
+    }
+
+    render() {
+        const element = this.renderElement();
+        
+        if (this.props.appendTo)
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        else
+            return element;
     }
 }
