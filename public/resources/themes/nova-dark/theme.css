@@ -729,9 +729,6 @@ body {
         body .p-datepicker table td > a.p-highlight {
           color: #ffffff;
           background-color: #007ad9; }
-        body .p-datepicker table td > a.p-highlight {
-          color: #333333;
-          background-color: #d0d0d0; }
       body .p-datepicker table td.p-datepicker-today a {
         background-color: #d0d0d0;
         color: #333333; }
