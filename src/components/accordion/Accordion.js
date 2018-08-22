@@ -79,7 +79,7 @@ export class Accordion extends Component {
             let newActiveIndex = null;
 
             if(this.props.multiple) {
-                let indexes = this.state.activeIndex||[];
+                let indexes = (this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex) || [];
                 if(selected)
                     indexes = indexes.filter(i => i !== index);
                 else
