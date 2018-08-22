@@ -14,28 +14,30 @@ PrimeReact is available at npm, if you have an existing application run the foll
 
 ```
 npm install primereact --save
+npm install primeicons --save
 ```
 
 ## Import
 
 ```javascript
-//import {ComponentName} from 'primereact/components/componentname/componentname';
-import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
+//import {ComponentName} from 'primereact/{componentname}';
+import {Dialog} from 'primereact/dialog';
+import {Accordion,AccordionTab} from 'primereact/accordion';
 ```
 
 ## Dependencies
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require font-awesome for icons, classNames package to manage style classes and react-transition-group for animations.
+In addition, components require PrimeIcons for icons, classNames package to manage style classes and react-transition-group for animations.
 
 ```json
 dependencies: {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-transition-group": "^2.2.1",
-    "font-awesome": "^4.7.0",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "primeicons": "^1.0.0-beta.10"
 }
 ```
 
@@ -43,23 +45,16 @@ dependencies: {
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
 ```
-primereact/resources/themes/omega/theme.css
+primereact/resources/themes/nova-light/theme.css
 primereact/resources/primereact.min.css
-```
-
-primereact.min.css is a bundle that contains styles of all components, if you require a style of a specific component import the css from the folder of the component along with the Common.css.
-
-```
-primereact/resources/themes/omega/theme.css
-primereact/components/common/Common.css
-primereact/components/autocomplete/AutoComplete.css
+primeicons/primeicons.css
 ```
 
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
 import 'primereact/resources/primereact.min.css';
-import 'primereact/resources/themes/omega/theme.css';
+import 'primereact/resources/themes/nova-light/theme.css';
 import 'font-awesome/css/font-awesome.css';
 ```
 
