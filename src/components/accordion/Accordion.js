@@ -79,7 +79,12 @@ export class Accordion extends Component {
             let newActiveIndex = null;
 
             if(this.props.multiple) {
-                let indexes = this.state.activeIndex||[];
+                let indexes = [];
+                if (this.state) {
+                    indexes = this.state.activeIndex || [];
+                } else {
+                    indexes = this.props.activeIndex || [];
+                }
                 if(selected)
                     indexes = indexes.filter(i => i !== index);
                 else
