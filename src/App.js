@@ -397,6 +397,7 @@ class App extends Component {
                             <ul>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
+                                <li><a href="https://www.primefaces.org/designer/primereact"><i className="pi pi-fw pi-cog" /><span>Designer</span></a></li>
                                 <li><Link to="/icons"><i className="pi pi-fw pi-search" /><span>Icons</span></Link></li>
                                 <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span></a></li>

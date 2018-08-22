@@ -98,7 +98,7 @@ export class HomeComponent extends Component {
                     <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates
                         of PrimeReact and impress your users.</p>
 
-                    <div className="p-g">
+                    <div className="p-g templates-grid">
                         <div className="p-g-12 p-md-4">
                             <h4>Serenity with Material Design</h4>
                             <a href="https://www.primefaces.org/layouts/serenity-react">

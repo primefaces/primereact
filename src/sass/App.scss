@@ -172,7 +172,6 @@ body {
                         }
 
                         span {
-                            vertical-align: middle;
                             margin-left: 8px;
                         }
 
@@ -458,14 +457,6 @@ body {
                 font-weight: normal;
             }
 
-            h4 {
-                color:  #333333;
-                margin-top: 25px;
-                margin-bottom: 0px;
-                font-size: 20px;
-                font-weight: normal;
-            }
-
             p {
                 color:  #333333;
                 font-size: 16px;
@@ -570,10 +561,38 @@ body {
                 .p-md-6:last-child {
                     text-align: right;
                 }
+
+                h3 {
+                    color: #ffffff;
+                }
             }
                     
             li {
                 line-height: 1.5;
+            }
+
+            h3 {
+                color:  #333333;
+                margin-top: 25px;
+                margin-bottom: 0px;
+                font-size: 22px;
+                font-weight: normal;
+            }
+        }
+
+        &.theming {
+            h3 {
+                color:  #333333;
+                margin-top: 25px;
+                margin-bottom: 0px;
+                font-size: 22px;
+                font-weight: normal;
+            }
+
+            h4 {
+                text-align: center;
+                font-weight: 700;
+                font-size: 16px;
             }
         }
         
@@ -823,6 +842,11 @@ body {
              color: #333333;
              margin-bottom: 25px;
         }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 700;
+        }
         
         img {
             width: 100%;
@@ -852,6 +876,25 @@ body {
         .p-md-6:last-child {
             text-align: center;
         }
+    }
+}
+
+.templates-grid {
+    a img {
+        @include transition(all .5s);
+    }
+
+    a:hover img {
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+
+    h4 {
+        margin: 16px 0;
+        font-weight: normal;
     }
 }
 

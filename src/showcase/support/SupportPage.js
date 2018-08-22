@@ -29,7 +29,7 @@ export class SupportPage extends Component {
                     <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, 
                                     you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
                                     
-                    <h4>Standard PRO Services</h4>
+                    <h3>Standard PRO Services</h3>
                     <ul>
                         <li>Access to pro.primefaces.org</li>
                         <li>Response within 1 business day.</li>
@@ -43,7 +43,7 @@ export class SupportPage extends Component {
                         <li>Notifications about security updates.</li>
                     </ul>
                                 
-                    <h4>New Features (Optional)</h4>			
+                    <h3>New Features (Optional)</h3>			
                                 
                     <p>New feature and enhancement requests are not available in core services and provided via an hour based model instead.  When you have a feature request we provide an estimate, if you confirm we deliver your request within an estimated timeframe and deduct the amount of work from your hours. These requests can be;</p>
 
