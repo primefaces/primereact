@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./components/menubar/MenuBar');
+module.exports = require('./components/menubar/Menubar');

@@ -1,1 +1,1 @@
-export * from './components/columngroup/ColumGroup';
+export * from './components/columngroup/ColumnGroup';
