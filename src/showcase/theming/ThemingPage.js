@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class ThemingPage extends Component {
 
