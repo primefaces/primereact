@@ -270,10 +270,10 @@ body {
                 padding-bottom: 0;
                 margin-top: 0;
                 margin-bottom: 0;
-                -moz-transition-duration: 0.2s;
-                -webkit-transition-duration: 0.2s;
-                -o-transition-duration: 0.2s;
-                transition-duration: 0.2s;
+                -moz-transition-duration: 0.4s;
+                -webkit-transition-duration: 0.4s;
+                -o-transition-duration: 0.4s;
+                transition-duration: 0.4s;
                 -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
@@ -281,10 +281,10 @@ body {
             }
 
             &.submenushow {
-                -moz-transition-duration: 0.2s;
-                -webkit-transition-duration: 0.2s;
-                -o-transition-duration: 0.2s;
-                transition-duration: 0.2s;
+                -moz-transition-duration: 0.4s;
+                -webkit-transition-duration: 0.4s;
+                -o-transition-duration: 0.4s;
+                transition-duration: 0.4s;
                 -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
                 -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
