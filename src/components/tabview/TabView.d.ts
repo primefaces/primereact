@@ -18,7 +18,6 @@ interface TabViewProps {
     activeIndex?: number;
     style?: any;
     className?: string;
-    effect?: string;
     onTabChange?(e: {originalEvent: Event, index: number}): void;
 }
 
