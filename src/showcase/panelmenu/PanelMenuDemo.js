@@ -160,7 +160,7 @@ class PanelMenuDoc extends Component {
 
     render() {
         return (
-            <div className="content-section source">
+            <div className="content-section documentation">
                 <TabView effect="fade">
                     <TabPanel header="Documentation">
                         <h3>Import</h3>

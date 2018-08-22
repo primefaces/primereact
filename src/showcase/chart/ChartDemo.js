@@ -27,7 +27,7 @@ class ChartDoc extends Component {
 
     render() {
         return (
-            <div className="content-section source">
+            <div className="content-section documentation">
                 <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`

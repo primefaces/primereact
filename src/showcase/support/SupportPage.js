@@ -12,7 +12,7 @@ export class SupportPage extends Component {
                     </div>
                 </div>
 
-                <div className="content-section support">
+                <div className="content-section support documentation">
                     <div className="support-image">
                         <div className="p-g">
                             <div className="p-g-12 p-md-6">

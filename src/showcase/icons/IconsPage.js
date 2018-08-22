@@ -13,7 +13,7 @@ export class IconsPage extends Component {
                     </div>
                 </div>
 
-                <div className="content-section source">
+                <div className="content-section documentation">
                     <h3 style={{marginTop:0}}>Download</h3>
                     <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
 <CodeHighlight className="language-javascript">

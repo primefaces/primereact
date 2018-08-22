@@ -157,7 +157,7 @@ export class GridDoc extends Component {
     
     render() {
         return (
-            <div className="content-section source grid-demo">
+            <div className="content-section documentation grid-demo">
                 <TabView>
                     <TabPanel header="Documentation">
 

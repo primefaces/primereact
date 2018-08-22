@@ -33,7 +33,7 @@ class MenuModelDoc extends Component {
 
     render() {
         return (
-            <div className="content-section source">
+            <div className="content-section documentation">
                 <h3 style={{marginTop: 0}}>MenuItem</h3>
                 <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
                 <CodeHighlight className="language-javascript">

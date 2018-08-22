@@ -55,7 +55,7 @@ export class TreeTableDoc extends Component {
 
     render() {
         return (
-            <div className="content-section source">
+            <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>

@@ -80,7 +80,7 @@ export class DataTableTemplatingDemoDoc extends Component {
     
     render() {
         return (
-            <div className="content-section source">
+            <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight className="language-javascript">
