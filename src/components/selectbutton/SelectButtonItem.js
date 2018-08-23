@@ -46,6 +46,10 @@ export class SelectButtonItem extends Component {
         DomHandler.removeClass(this.el, 'p-focus');
     }
 
+    componentDidUpdate() {
+        this.checkbox.checked = this.props.selected;
+    }
+
     render() {
         let className = classNames('p-button p-component p-button-text-only', {
             'p-highlight': this.props.selected,
@@ -56,7 +60,7 @@ export class SelectButtonItem extends Component {
             <div ref={(el) => this.el = el} className={className} onClick={this.onClick}>
                 <span className="p-button-text p-c">{this.props.label}</span>
                 <div className="p-hidden-accessible">
-                    <input type="checkbox" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} 
+                    <input ref={(el) => this.checkbox = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} 
                         tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
                 </div>
             </div>
