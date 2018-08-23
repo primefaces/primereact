@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Checkbox extends Component {
 
@@ -15,6 +16,8 @@ export class Checkbox extends Component {
         className: null,
         disabled: false,
         readOnly: false,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -30,6 +33,8 @@ export class Checkbox extends Component {
         className: PropTypes.string,
         disabled: PropTypes.bool,
         readOnly: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
@@ -55,6 +60,23 @@ export class Checkbox extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.input.checked = this.props.checked;
     }
@@ -73,7 +95,7 @@ export class Checkbox extends Component {
         let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.checked});
         
         return (
-            <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
+            <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="p-hidden-accessible">
                     <input type="checkbox" ref={(el) => { this.input = el; }} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
                 </div>
