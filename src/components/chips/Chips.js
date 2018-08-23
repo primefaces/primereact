@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Chips extends Component {
 
@@ -16,6 +17,8 @@ export class Chips extends Component {
         disabled: null,
         style: null,
         className: null,
+        tooltip: null,
+        tooltipOptions: null,
         itemTemplate: null,
         onAdd: null,
         onRemove: null,
@@ -31,6 +34,8 @@ export class Chips extends Component {
         disabled: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         itemTemplate: PropTypes.func,
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
@@ -43,6 +48,23 @@ export class Chips extends Component {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     removeItem(event, index) {
@@ -183,7 +205,7 @@ export class Chips extends Component {
         const list = this.renderList();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {list}
             </div>
         );
