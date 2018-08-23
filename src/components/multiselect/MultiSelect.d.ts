@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface MultiSelectProps {
     id?: string;
@@ -13,6 +14,8 @@ interface MultiSelectProps {
     filter?: boolean;
     dataKey?: string;
     appendTo?: HTMLElement;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     itemTemplate?(item: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }

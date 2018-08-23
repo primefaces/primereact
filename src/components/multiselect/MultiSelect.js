@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import { MultiSelectItem } from './MultiSelectItem';
 import { MultiSelectHeader } from './MultiSelectHeader';
+import Tooltip from "../tooltip/Tooltip";
 
 export class MultiSelect extends Component {
     
@@ -22,6 +23,8 @@ export class MultiSelect extends Component {
         filter: false,
         dataKey: null,
         appendTo: null,
+        tooltip: null,
+        tooltipOptions: null,
         itemTemplate: null,
         onChange: null
     };
@@ -39,6 +42,8 @@ export class MultiSelect extends Component {
         filter: PropTypes.bool,
         dataKey: PropTypes.string,
         appendTo: PropTypes.object,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         itemTemplate: PropTypes.func,
         onChange: PropTypes.func,
     };
@@ -247,8 +252,23 @@ export class MultiSelect extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     onDocumentClick() {

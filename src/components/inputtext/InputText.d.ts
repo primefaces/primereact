@@ -6,7 +6,7 @@ interface InputTextProps extends React.HTMLProps<HTMLInputElement> {
     keyfilter?: any;
     validateOnly?: boolean;
     tooltip?: any;
-    tooltipOptions?: TooltipOptions; 
+    tooltipOptions?: TooltipOptions;
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
 }
