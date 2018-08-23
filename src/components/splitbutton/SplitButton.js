@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
+import Tooltip from "../tooltip/Tooltip";
 
 export class SplitButton extends Component {
 
@@ -20,7 +21,9 @@ export class SplitButton extends Component {
         menuClassName: null,
         tabIndex: null,
         onClick: null,
-        appendTo: null
+        appendTo: null,
+        tooltip: null,
+        tooltipOptions: null
     }
 
     static propsTypes = {
@@ -35,7 +38,9 @@ export class SplitButton extends Component {
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.string,
         onClick: PropTypes.func,
-        appendTo: PropTypes.object
+        appendTo: PropTypes.object,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     }
 
     constructor(props) {
@@ -98,8 +103,23 @@ export class SplitButton extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
     componentWillUnmount() {
         this.unbindDocumentListener();
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     renderItems() {

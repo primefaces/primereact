@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface SplitButtonProps {
     id?: string;
@@ -12,6 +13,8 @@ interface SplitButtonProps {
     menuClassName?: string;
     tabIndex?: string;
     appendTo?: HTMLElement;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onClick?(event: Event): void;
 }
 
