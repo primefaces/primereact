@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import Tooltip from "../tooltip/Tooltip";
 
 export class TriStateCheckbox extends Component {
 
@@ -12,6 +13,8 @@ export class TriStateCheckbox extends Component {
         name: null,
         style: null,
         className: null,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     };
 
@@ -22,6 +25,8 @@ export class TriStateCheckbox extends Component {
         name: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     }
     
@@ -62,13 +67,30 @@ export class TriStateCheckbox extends Component {
         DomHandler.removeClass(this.box, 'p-focus');
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
     render() {
         let containerClass = classNames('p-checkbox p-tristatecheckbox p-component', this.props.className);
         let boxClass = classNames('p-checkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null});
         let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
 
         return (
-            <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
+            <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={(el) => this.inputEL = el} type="checkbox" id={this.props.inputId} name={this.props.name} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>

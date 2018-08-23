@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface TriStateCheckboxProps {
     id?: string;
@@ -7,6 +8,8 @@ interface TriStateCheckboxProps {
     name?: string;
     style?: object;
     className?: string;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: boolean}): void;
 }
 
