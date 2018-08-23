@@ -34,10 +34,10 @@ export class TooltipDemo extends Component {
                     </div>
 
                     <h3>Focus and Blur</h3>
-                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} style={{marginLeft: '.5em'}} />
                 
                     <h3>Button</h3>
-                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" style={{marginLeft: '.5em'}} />
                 </div>
 
                 <TooltipDoc />
@@ -235,10 +235,10 @@ export class TooltipDemo extends Component {
                     </div>
 
                     <h3>Focus and Blur</h3>
-                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'} style={{marginLeft: '.5em'}}} />
                 
                     <h3>Button</h3>
-                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" style={{marginLeft: '.5em'}} />
                 </div>
             </div>
         )
