@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface DropdownProps {
     id?: string;
@@ -25,6 +26,8 @@ interface DropdownProps {
     dataKey?: string;
     inputId?: string;
     showClear?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions; 
     itemTemplate?(option:any): React.ReactNode;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onMouseDown?(event: Event): void;

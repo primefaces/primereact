@@ -5,6 +5,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Dropdown extends Component {
 
@@ -32,6 +33,8 @@ export class Dropdown extends Component {
         dataKey: null,
         inputId: null,
         showClear: false,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -62,6 +65,8 @@ export class Dropdown extends Component {
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         showClear: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
@@ -504,11 +509,24 @@ export class Dropdown extends Component {
             
             window.addEventListener('load', this.windowLoadListener);
         }
+
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
     }
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindWindowLoadListener();
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
     
     componentDidUpdate(prevProps, prevState) {
