@@ -9,14 +9,18 @@ export class InputTextarea extends Component {
         autoResize: false,
         onInput: null,
         cols: 20,
-        rows: 2
+        rows: 2,
+        tooltip: null,
+        tooltipOptions: null
     };
 
     static propTypes = {
         autoResize: PropTypes.bool,
         onInput: PropTypes.func,
         cols: PropTypes.number,
-        rows: PropTypes.number
+        rows: PropTypes.number,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     };
     
     constructor(props) {
