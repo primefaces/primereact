@@ -158,7 +158,14 @@ export class ListBox extends Component {
         if(valueChanged) {
             this.props.onChange({
                 originalEvent: event,
-                value: value
+                value: value,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value
+                }
             });
         }
     }
@@ -171,7 +178,14 @@ export class ListBox extends Component {
         if(this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
-                value: value
+                value: value,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value
+                }
             });
         }
     }

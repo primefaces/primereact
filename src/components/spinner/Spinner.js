@@ -116,7 +116,14 @@ export class Spinner extends Component {
         if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
-                value: newValue
+                value: newValue,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value: newValue
+                }
             });
         }
     }
@@ -239,7 +246,14 @@ export class Spinner extends Component {
         if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
-                value: event.target.value
+                value: event.target.value,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value: event.target.value
+                }   
             });
         }
     } 
@@ -248,9 +262,17 @@ export class Spinner extends Component {
         DomHandler.removeClass(this.element, 'p-inputwrapper-focus');
 
         if (this.props.onChange) {
+            const parsedValue =  this.parseValue(event.target.value);
             this.props.onChange({
                 originalEvent: event,
-                value: this.parseValue(event.target.value)
+                value: parsedValue,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value: parsedValue,
+                }
             });
         }
 

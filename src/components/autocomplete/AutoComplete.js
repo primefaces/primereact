@@ -198,10 +198,18 @@ export class AutoComplete extends Component {
     }
     
     updateModel(event, value) {
+        const resolvedFieldData = this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) : undefined;
         if(this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
-                value: value
+                value: value,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value: resolvedFieldData ? resolvedFieldData: value
+                }
             });
         }
     }
