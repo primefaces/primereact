@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {ColorPickerPanel} from './ColorPickerPanel';
+import Tooltip from "../tooltip/Tooltip";
 
 export class ColorPicker extends Component {
     
@@ -18,6 +19,8 @@ export class ColorPicker extends Component {
         disabled: false,
         tabIndex: null,
         inputId: null,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     }
 
@@ -33,6 +36,8 @@ export class ColorPicker extends Component {
         disabled: PropTypes.bool,
         tabIndex: PropTypes.string,
         inputId: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     }
 
@@ -443,6 +448,14 @@ export class ColorPicker extends Component {
     componentDidMount() {
         this.updateHSBValue(this.props.value);
         this.updateUI();
+
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
     }
 
     componentDidUpdate() {
@@ -453,6 +466,11 @@ export class ColorPicker extends Component {
         this.unbindDocumentClickListener();
         this.unbindDocumentMouseMoveListener();
         this.unbindDocumentMouseUpListener();
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     shouldComponentUpdate(nextProps) {

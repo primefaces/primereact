@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface ColorPickerProps {
     id?: string;
@@ -12,6 +13,8 @@ interface ColorPickerProps {
     disabled?: boolean;
     tabindex?: string;
     inputId?: string;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange?(value: any): void;
 }
 
