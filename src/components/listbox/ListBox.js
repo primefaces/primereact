@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import {ListBoxItem} from './ListBoxItem';
 import {ListBoxHeader} from './ListBoxHeader';
+import Tooltip from "../tooltip/Tooltip";
 
 export class ListBox extends Component {
     
@@ -21,6 +22,8 @@ export class ListBox extends Component {
         multiple: false,
         metaKeySelection: false,
         filter: false,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     }
     
@@ -37,6 +40,8 @@ export class ListBox extends Component {
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
         filter: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     };
     
@@ -48,6 +53,23 @@ export class ListBox extends Component {
         
         this.onFilter = this.onFilter.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
     
     onOptionClick(event) {
@@ -225,7 +247,7 @@ export class ListBox extends Component {
         }
         
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
                 <div className="p-listbox-list-wrapper">
                     <ul className="p-listbox-list" style={this.props.listStyle}>
