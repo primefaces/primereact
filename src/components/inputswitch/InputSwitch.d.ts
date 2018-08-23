@@ -12,6 +12,8 @@ interface InputSwitchProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: boolean}): void;
+    onFocus?(event: Event): void;
+    onBlur?(event: Event): void;
 }
 
 export class InputSwitch extends React.Component<InputSwitchProps,any> {}
