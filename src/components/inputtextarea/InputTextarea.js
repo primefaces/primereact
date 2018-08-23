@@ -37,6 +37,8 @@ export class InputTextarea extends Component {
         delete this.textareaProps.onBlur;
         delete this.textareaProps.onKeyUp;
         delete this.textareaProps.onInput;
+        delete this.textareaProps.tooltip;
+        delete this.textareaProps.tooltipOptions;
     }
 
     onFocus(e) {
