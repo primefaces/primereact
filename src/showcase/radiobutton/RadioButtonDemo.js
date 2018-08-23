@@ -136,6 +136,18 @@ import {RadioButton} from 'primereact/radiobutton';
                                     <td>false</td>
                                     <td>When present, it specifies that the element value cannot be altered.</td>
                                 </tr>
+                                <tr>
+                                    <td>tooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface RadioButtonProps {
     id?: string;
@@ -9,6 +10,8 @@ interface RadioButtonProps {
     style?: object;
     className?: string;
     disabled?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange(e: {originalEvent: Event, value: any, checked: boolean}): void;
 }
 

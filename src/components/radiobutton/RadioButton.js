@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import Tooltip from "../tooltip/Tooltip";
 
 export class RadioButton extends Component {
 
@@ -14,6 +15,8 @@ export class RadioButton extends Component {
         style: null,
         className: null,
         disabled: false,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     };
 
@@ -25,7 +28,9 @@ export class RadioButton extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     };
     
     constructor(props) {
@@ -61,6 +66,23 @@ export class RadioButton extends Component {
         DomHandler.removeClass(this.box, 'p-focus');
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
     render() {
         if(this.input) {
             this.input.checked = this.props.checked;
@@ -71,7 +93,7 @@ export class RadioButton extends Component {
         let iconClass = classNames('p-radiobutton-icon p-c', { 'pi pi-circle-on': this.props.checked });
         
         return (
-            <div id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
+            <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled}/>
                 </div>
