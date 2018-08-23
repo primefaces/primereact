@@ -5,7 +5,7 @@ export default class Tooltip  {
     constructor(props) {
         this.target = props.target;
         this.content = props.content;
-        this.options = props.options;
+        this.options = props.options || {};
         this.options.event = this.options.event || 'hover';
         this.options.position = this.options.position || 'right';
 
@@ -14,14 +14,16 @@ export default class Tooltip  {
 
     bindEvents() {
         if (this.options.event === 'hover') {
-            this.mouseEnterListener = this.activate.bind(this);
-            this.mouseLeaveListener = this.deactivate.bind(this);
+            this.mouseEnterListener = this.onMouseEnter.bind(this);
+            this.mouseLeaveListener = this.onMouseLeave.bind(this);
+            this.clickListener = this.onClick.bind(this);
             this.target.addEventListener('mouseenter', this.mouseEnterListener);
             this.target.addEventListener('mouseleave', this.mouseLeaveListener);
+            this.target.addEventListener('click', this.clickListener);
         }
         else if (this.options.event === 'focus') {
-            this.focusListener = this.activate.bind(this);
-            this.blurListener = this.deactivate.bind(this);
+            this.focusListener = this.onFocus.bind(this);
+            this.blurListener = this.onBlur.bind(this);
             this.target.addEventListener('focus', this.focusListener);
             this.target.addEventListener('blur', this.blurListener);
         }
@@ -31,11 +33,36 @@ export default class Tooltip  {
         if (this.options.event === 'hover') {
             this.target.removeEventListener('mouseenter', this.mouseEnterListener);
             this.target.removeEventListener('mouseleave', this.mouseLeaveListener);
+            this.target.removeEventListener('click', this.clickListener);
         }
         else if (this.options.event === 'focus') {
             this.target.removeEventListener('focus', this.focusListener);
             this.target.removeEventListener('blur', this.blurListener);
         }
+
+        this.unbindDocumentResizeListener();
+    }
+
+    onMouseEnter() {
+        if (!this.container && !this.showTimeout) {
+            this.activate();
+        }
+    }
+    
+    onMouseLeave() {
+        this.deactivate();
+    }
+    
+    onFocus() {
+        this.activate();
+    }
+    
+    onBlur() {
+        this.deactivate();
+    }
+  
+    onClick() {
+        this.deactivate();
     }
 
     activate() {
@@ -68,6 +95,11 @@ export default class Tooltip  {
             clearTimeout(this.hideTimeout);
             this.hideTimeout = null;
         }
+    }
+
+    clearTimeouts() {
+        this.clearShowTimeout();
+        this.clearHideTimeout();
     }
 
     show() {
@@ -112,6 +144,7 @@ export default class Tooltip  {
         }
 
         this.unbindDocumentResizeListener();
+        this.clearTimeouts();
         this.container = null;
     }
 
@@ -235,8 +268,10 @@ export default class Tooltip  {
     }
 
     unbindDocumentResizeListener() {
-        window.removeEventListener('resize', this.resizeListener);
-        this.resizeListener = null;
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
+        }
     }
 
     onWindowResize() {
@@ -245,6 +280,7 @@ export default class Tooltip  {
 
     destroy() {
         this.unbindEvents();
+        this.remove();
         this.target = null;
     }
  }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
+import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
@@ -11,7 +12,7 @@ export class TooltipDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tooltip</h1>
-                        <p>Tooltip provides advisory information for a component.</p>
+                        <p>Tooltip functionality is integrated within various PrimeReact components.</p>
                     </div>
                 </div>
 
@@ -19,7 +20,7 @@ export class TooltipDemo extends Component {
                     <h3>Positions</h3>
                     <div className="p-g p-fluid">
                         <div className="p-g-12 p-md-3">
-                            <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{position: 'right'}} />              
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />              
                         </div>
                         <div className="p-g-12 p-md-3">
                             <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
@@ -33,7 +34,10 @@ export class TooltipDemo extends Component {
                     </div>
 
                     <h3>Focus and Blur</h3>
-                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} style={{marginLeft: '.5em'}} />
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+                
+                    <h3>Button</h3>
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
                 </div>
 
                 <TooltipDoc />
@@ -53,32 +57,23 @@ class TooltipDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
-import {Tooltip} from 'primereact/tooltip';
-
-`}
-</CodeHighlight>
-
                         <h3>Getting Started</h3>
-                        <p>The <i>for</i> property is required to display Tooltip. It can be a single selector or an array or selectors to attach the tooltip.</p>
+                        <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
                         
 <CodeHighlight className="language-jsx">
 {`
-<Tooltip for="#inputId" title="Enter your username" />
-<InputText id="inputId" />
+<InputText type="text" placeholder="Right" tooltip="Enter your username" />
+<Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
 
 `}
 </CodeHighlight>
 
                         <h3>Position</h3>
                         <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is 
-                        specified using <i>tooltipPosition</i> attribute.</p>
+                        specified using <i>tooltipOptions</i> property.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" />
-<InputText id="inputId" />
+<InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{position: 'right'}}/>
 
 `}
 </CodeHighlight>
@@ -87,8 +82,7 @@ import {Tooltip} from 'primereact/tooltip';
                         <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" tooltipEvent="focus" />
-<InputText id="inputId" />
+<InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{event: 'right'}}/>
 
 `}
 </CodeHighlight>
@@ -97,13 +91,12 @@ import {Tooltip} from 'primereact/tooltip';
                         <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Tooltip for="#inputId" title="Enter your username" tooltipPosition="top" tooltipEvent="focus" showDelay={1000} hideDelay={500} />
-<InputText id="inputId" />
+<InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
 
 `}
 </CodeHighlight>
 
-                    <h3>Properties</h3>
+                    <h3>Tooltip Options</h3>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -116,58 +109,16 @@ import {Tooltip} from 'primereact/tooltip';
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>for</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Id of an element or selector or array containing ids/selectors.</td>
-                                </tr>
-                                <tr>
-                                    <td>title</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Text of the tooltip.</td>
-                                </tr>
-                                <tr>
-                                    <td>tooltipPosition</td>
+                                    <td>posiiton</td>
                                     <td>string</td>
                                     <td>right</td>
                                     <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
                                 </tr>
                                 <tr>
-                                    <td>tooltipEvent</td>
+                                    <td>event</td>
                                     <td>string</td>
                                     <td>hover</td>
                                     <td>Event to show the tooltip, valid values are hover and focus.</td>
-                                </tr>
-                                <tr>
-                                    <td>appendTo</td>
-                                    <td>string | DOM element</td>
-                                    <td>body</td>
-                                    <td>Target element to attach the overlay, valid values are "body", "target" or a DOM Element.</td>
-                                </tr>
-                                <tr>
-                                    <td>positionStyle</td>
-                                    <td>string</td>
-                                    <td>absolute</td>
-                                    <td>Type of CSS position.</td>
-                                </tr>
-                                <tr>
-                                    <td>tooltipClassName</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the tooltip.</td>
-                                </tr>
-                                <tr>
-                                    <td>tooltipDisabled</td>
-                                    <td>boolean</td>
-                                    <td>false</td>
-                                    <td>When present, it specifies that the component should be disabled.</td>
-                                </tr>
-                                <tr>
-                                    <td>escape</td>
-                                    <td>boolean</td>
-                                    <td>true</td>
-                                    <td>By default the tooltip contents are rendered as text. Set to false to support html tags in the content</td>
                                 </tr>
                                 <tr>
                                     <td>hideDelay</td>
@@ -184,27 +135,7 @@ import {Tooltip} from 'primereact/tooltip';
                             </tbody>
                         </table>
                     </div>
-
-                    <h3>Events</h3>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>onBeforeShow</td>
-                                    <td>event: Browser event</td>
-                                    <td>Callback before showing tooltip.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                    
                     <h3>Styling</h3>
                     <p>Following is the list of structural style classes</p>
                     <div className="doc-tablewrapper">
@@ -282,32 +213,32 @@ export class TooltipDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tooltip</h1>
-                        <p>Tooltip provides advisory information for a component.</p>
+                        <p>Tooltip functionality is integrated within various PrimeReact components.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">                    
-                    <h3 className="first">Multiple</h3>
-                    <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition} />
-
+                    <h3>Positions</h3>
                     <div className="p-g p-fluid">
                         <div className="p-g-12 p-md-3">
-                            <InputText id="username" placeholder="Right" />              
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />              
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <InputText id="surname" placeholder="Top" />
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <InputText id="age" placeholder="Bottom" />
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />    
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <InputText id="email" placeholder="Left" />
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />    
                         </div>
                     </div>
-                    
+
                     <h3>Focus and Blur</h3>
-                    <Tooltip for="#input5" title="Enter your username" tooltipEvent="focus"/>
-                    <InputText id="input5" placeholder="Right" style={{marginLeft:'.5em'}}/>
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+                
+                    <h3>Button</h3>
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
                 </div>
             </div>
         )

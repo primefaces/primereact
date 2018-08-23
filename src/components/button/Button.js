@@ -1,20 +1,42 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Button extends Component {
 
     static defaultProps = {
         label: null,
         icon: null,
-        iconPos: 'left'
+        iconPos: 'left',
+        tooltip: null,
+        tooltipOptions: null
     }
 
     static propTypes = {
         label: PropTypes.string,
         icon: PropTypes.string,
-        iconPos: PropTypes.string
+        iconPos: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     };
+
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
 
     renderIcon() {
         if(this.props.icon) {
@@ -55,9 +77,11 @@ export class Button extends Component {
         delete buttonProps.iconPos;
         delete buttonProps.icon;
         delete buttonProps.label;
+        delete buttonProps.tooltip;
+        delete buttonProps.tooltipOptions;
 
         return (
-            <button {...buttonProps} className={className}>
+            <button ref={(el) => this.element = el} {...buttonProps} className={className}>
                 {this.props.iconPos === 'left' && icon}
                 {label}
                 {this.props.iconPos === 'right' && icon}
