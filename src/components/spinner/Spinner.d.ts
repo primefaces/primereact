@@ -20,7 +20,7 @@ interface SpinnerProps {
     inputStyle?: object;
     inputClassName?: string;
     tooltip?: any;
-    tooltipOptions?: TooltipOptions; 
+    tooltipOptions?: TooltipOptions;
     onChange?(e: {value: number}): void;
 }
 

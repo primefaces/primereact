@@ -27,7 +27,7 @@ interface DropdownProps {
     inputId?: string;
     showClear?: boolean;
     tooltip?: any;
-    tooltipOptions?: TooltipOptions; 
+    tooltipOptions?: TooltipOptions;
     itemTemplate?(option:any): React.ReactNode;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onMouseDown?(event: Event): void;

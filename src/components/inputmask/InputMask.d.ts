@@ -20,7 +20,7 @@ interface InputMaskProps {
     name?: string;
     required?: boolean;
     tooltip?: any;
-    tooltipOptions?: TooltipOptions; 
+    tooltipOptions?: TooltipOptions;
     onComplete?(e: Event): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }

@@ -26,7 +26,7 @@ interface AutoCompleteProps {
     appendTo?: any;
     tabindex?: number;
     tooltip?: any;
-    tooltipOptions?: TooltipOptions; 
+    tooltipOptions?: TooltipOptions;
     completeMethod?(e: {originalEvent: Event, query: string}): void;
     itemTemplate?(data: any): JSX.Element | undefined;
     selectedItemTemplate?(data: any): JSX.Element | undefined;
