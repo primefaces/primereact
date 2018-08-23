@@ -1265,7 +1265,7 @@ export class Calendar extends Component {
 
     populateTime(value, timeString, ampm) {
         if(this.props.hourFormat === '12' && (ampm !== 'PM' && ampm !== 'AM')) {
-            throw 'Invalid Time';
+            throw new Error('Invalid Time');
         }
         
         let time = this.parseTime(timeString, ampm);
