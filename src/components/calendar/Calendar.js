@@ -6,6 +6,7 @@ import {Button} from '../button/Button';
 import {CalendarPanel} from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Calendar extends Component {
 
@@ -69,6 +70,8 @@ export class Calendar extends Component {
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
+        tooltip: null,
+        tooltipOptions: null,
         dateTemplate: null,
         onFocus: null,
         onBlur: null,
@@ -131,6 +134,8 @@ export class Calendar extends Component {
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         appendTo: PropTypes.any,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         dateTemplate: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -173,10 +178,25 @@ export class Calendar extends Component {
         this.toggleAmPm = this.toggleAmPm.bind(this);
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
     componentWillUnmount() {
         if (this.mask) {
             this.disableModality();
             this.mask = null;
+        }
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
         }
     }
 

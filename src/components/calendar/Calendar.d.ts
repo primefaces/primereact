@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 export interface LocaleSettings {
     firstDayOfWeek?: number;
@@ -71,6 +72,8 @@ interface CalendarProps {
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: any;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     yearRange?: string;
     dateTemplate?(dateMeta:DateMetaData): React.ReactNode;
     onFocus?(event: Event): void;
