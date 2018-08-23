@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface SpinnerProps {
     id?: string;
@@ -18,6 +19,8 @@ interface SpinnerProps {
     inputId?: string;
     inputStyle?: object;
     inputClassName?: string;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions; 
     onChange?(e: {value: number}): void;
 }
 

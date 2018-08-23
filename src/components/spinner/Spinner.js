@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Spinner extends Component {
 
@@ -24,6 +25,8 @@ export class Spinner extends Component {
         inputId: null,
         inputStyle: null,
         inputClassName: null,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     }
 
@@ -45,6 +48,8 @@ export class Spinner extends Component {
         inputId: PropTypes.string,
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     }
 
@@ -328,6 +333,21 @@ export class Spinner extends Component {
 
     componentDidMount() {
         this.inputEl.value = this.valueAsString;
+
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     renderInputElement() {
@@ -374,7 +394,7 @@ export class Spinner extends Component {
         let downButton = this.renderDownButton();
 
         return (
-            <span id={this.props.id} className={className} style={this.props.style}>
+            <span ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {inputElement}
                 {upButton}
                 {downButton}
