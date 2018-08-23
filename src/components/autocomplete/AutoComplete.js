@@ -7,6 +7,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import {AutoCompletePanel} from './AutoCompletePanel';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class AutoComplete extends Component {
 
@@ -34,6 +35,8 @@ export class AutoComplete extends Component {
         size: null,
         appendTo: null,
         tabindex: null,
+        tooltip: null,
+        tooltipOptions: null,
         completeMethod: null,
         itemTemplate: null,
         selectedItemTemplate: null,
@@ -76,6 +79,8 @@ export class AutoComplete extends Component {
         size: PropTypes.number,
         appendTo: PropTypes.any,
         tabindex: PropTypes.number,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         completeMethod: PropTypes.func,
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
@@ -467,6 +472,25 @@ export class AutoComplete extends Component {
         return index;
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
     componentDidUpdate() {
         if(this.searching) {
             if (this.props.suggestions && this.props.suggestions.length)
@@ -486,10 +510,6 @@ export class AutoComplete extends Component {
 
     hideLoader() {
         this.loader.style.visibility = 'hidden';
-    }
-
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
     }
     
     renderSimpleAutoComplete() {

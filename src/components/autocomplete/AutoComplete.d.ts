@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface AutoCompleteProps {
     id?: string;
@@ -24,6 +25,8 @@ interface AutoCompleteProps {
     size?: number;
     appendTo?: any;
     tabindex?: number;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions; 
     completeMethod?(e: {originalEvent: Event, query: string}): void;
     itemTemplate?(data: any): JSX.Element | undefined;
     selectedItemTemplate?(data: any): JSX.Element | undefined;
