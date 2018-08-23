@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class Rating extends Component {
 
@@ -13,6 +14,8 @@ export class Rating extends Component {
         cancel: true,
         style: null,
         className: null,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     }
 
@@ -25,6 +28,8 @@ export class Rating extends Component {
         cancel: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     }
 
@@ -98,13 +103,30 @@ export class Rating extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
     render() {
         let className = classNames('p-rating', this.props.className, {'p-disabled': this.props.disabled, 'p-rating-readonly': this.props.readonly});
         let cancelIcon = this.renderCancelIcon();        
         let stars = this.renderStars();
                         
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {cancelIcon}
                 {stars}
             </div>

@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface RatingProps {
     id?: string;
@@ -9,6 +10,8 @@ interface RatingProps {
     cancel?: boolean;
     style?: object;
     className?: string;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: number}): void;
 }
 
