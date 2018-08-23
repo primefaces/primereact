@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Tooltip from "../tooltip/Tooltip";
 
 export class InputTextarea extends Component {
 
@@ -78,13 +79,13 @@ export class InputTextarea extends Component {
 
     resize () {
         let linesCount = 0,
-        lines = this.textareaElement.value.split('\n');
+        lines = this.element.value.split('\n');
 
         for(let i = lines.length-1; i >= 0 ; --i) {
             linesCount += Math.floor((lines[i].length / parseInt(this.props.cols, 10)) + 1);
         }
 
-        this.textareaElement.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
+        this.element.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
     }
 
     updateFilledState(e) {
@@ -97,7 +98,22 @@ export class InputTextarea extends Component {
         _filled = (_value && _value.length) ? true : false;
         
         this.setState({filled: _filled});
-    } 
+
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
 
     render() {
         if(this.props.hasOwnProperty('value')) {
@@ -111,7 +127,7 @@ export class InputTextarea extends Component {
         });
 
         return (
-            <textarea {...this.textareaProps} className={className} ref={(input) => {this.textareaElement = input;}} 
+            <textarea {...this.textareaProps} className={className} ref={(input) => {this.element = input;}} 
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
         );
     }

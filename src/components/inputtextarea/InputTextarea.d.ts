@@ -1,7 +1,10 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputTextareaProps extends React.HTMLProps<HTMLTextAreaElement> {
     autoResize?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions; 
     [key: string]: any;
 }
 
