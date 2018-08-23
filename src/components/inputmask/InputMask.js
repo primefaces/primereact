@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { InputText } from '../inputtext/InputText';
+import Tooltip from "../tooltip/Tooltip";
 
 export class InputMask extends Component {
 
@@ -24,6 +25,8 @@ export class InputMask extends Component {
         readonly: false,
         name: null,
         required: false,
+        tooltip: null,
+        tooltipOptions: null,
         onComplete: null,
         onChange: null
     }
@@ -46,6 +49,8 @@ export class InputMask extends Component {
         readonly: PropTypes.bool,
         name: PropTypes.string,
         required: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onComplete: PropTypes.func,
         onChange: PropTypes.func
     }
@@ -522,6 +527,21 @@ export class InputMask extends Component {
     componentDidMount() {
         this.init();
         this.updateValue();
+
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.input,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {

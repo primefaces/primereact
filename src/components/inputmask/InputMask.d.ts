@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputMaskProps {
     id?: string;
@@ -18,6 +19,8 @@ interface InputMaskProps {
     readonly?: boolean;
     name?: string;
     required?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions; 
     onComplete?(e: Event): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }

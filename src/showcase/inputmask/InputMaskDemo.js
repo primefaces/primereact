@@ -133,6 +133,7 @@ import {InputMask} from 'primereact/inputmask';
                Use <i>autoClear</i> property to control this behavior. In addition, certain part of
                a mask can be made optional by using ? symbol where anything after the question
                mark becomes optional.</p>
+               
 <CodeHighlight className="language-jsx">
 {`
 <InputMask mask="(999) 999-9999? x99999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
@@ -248,12 +249,24 @@ import {InputMask} from 'primereact/inputmask';
                             <td>null</td>
                             <td>Name of the input field.</td>
                         </tr>
-                         <tr>
+                        <tr>
                              <td>required</td>
                              <td>boolean</td>
                              <td>false</td>
                              <td>When present, it specifies that the element must be filled out before submitting the form.</td>
-                         </tr>
+                        </tr>
+                        <tr>
+                            <td>tooltip</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Content of the tooltip.</td>
+                        </tr>
+                        <tr>
+                            <td>tooltipOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
