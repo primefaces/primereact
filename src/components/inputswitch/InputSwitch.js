@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
 import DomHandler from '../utils/DomHandler';
+import Tooltip from "../tooltip/Tooltip";
 
 export class InputSwitch extends Component {
 
@@ -13,7 +14,11 @@ export class InputSwitch extends Component {
         name: null,
         checked: false,
         disabled: false,
-        onChange: null
+        tooltip: null,
+        tooltipOptions: null,
+        onChange: null,
+        onFocus: null,
+        onBlur: null
     }
 
     static propsTypes = {
@@ -24,9 +29,11 @@ export class InputSwitch extends Component {
         name: PropTypes.string,
         checked: PropTypes.bool,
         disabled: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
-        onBlur: PropTypes.func,
+        onBlur: PropTypes.func
     }
 
     constructor(props) {
@@ -68,6 +75,23 @@ export class InputSwitch extends Component {
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
         }
     }
 

@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputSwitchProps {
     id?: string;
@@ -8,6 +9,8 @@ interface InputSwitchProps {
     className?: string;
     checked?: boolean;
     disabled?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: boolean}): void;
 }
 
