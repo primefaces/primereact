@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     promptLabel?: string;
@@ -6,6 +7,8 @@ interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     mediumLabel?: string;
     strongLabel?: string;
     feedback?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     [key: string]: any;
 }
 

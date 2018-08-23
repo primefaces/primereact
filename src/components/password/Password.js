@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
+import Tooltip from "../tooltip/Tooltip";
  
 export class Password extends Component {
  
@@ -11,7 +12,9 @@ export class Password extends Component {
         weakLabel: 'Weak',
         mediumLabel: 'Medium',
         strongLabel: 'Strong',
-        feedback: true
+        feedback: true,
+        tooltip: null,
+        tooltipOptions: null
     };
 
     static propTypes = {
@@ -19,7 +22,9 @@ export class Password extends Component {
         weakLabel: PropTypes.string,
         mediumLabel: PropTypes.string,
         strongLabel:PropTypes.string,
-        feedback: PropTypes.bool
+        feedback: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     };
 
     constructor(props) {
@@ -147,14 +152,29 @@ export class Password extends Component {
         document.body.appendChild(this.panel);
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.inputEl,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
     componentWillUnmount() {
-        if(this.feedback && this.panel) {
+        if (this.feedback && this.panel) {
             this.panel.removeChild(this.meter);
             this.panel.removeChild(this.info);
             document.body.removeChild(this.panel);
             this.panel = null;
             this.meter = null;
             this.info = null;
+        }
+
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
         }
     }
 
