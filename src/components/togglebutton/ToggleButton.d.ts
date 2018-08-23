@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface ToggleButtonProps {
     id?: string;
@@ -9,6 +10,8 @@ interface ToggleButtonProps {
     style?: object;
     className?: string;
     checked?: boolean;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: boolean}): void;
 }
 

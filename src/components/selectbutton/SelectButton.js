@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import {SelectButtonItem} from './SelectButtonItem';
+import Tooltip from "../tooltip/Tooltip";
 
 export class SelectButton extends Component {
 
@@ -17,6 +18,8 @@ export class SelectButton extends Component {
         style: null,
         className: null,
         dataKey: null,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     };
 
@@ -31,6 +34,8 @@ export class SelectButton extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         dataKey: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     };
 
@@ -38,6 +43,23 @@ export class SelectButton extends Component {
         super(props);
         this.state = {};
         this.onOptionClick = this.onOptionClick.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.element,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     onOptionClick(event) {
@@ -120,7 +142,7 @@ export class SelectButton extends Component {
         let items = this.renderItems();
 
         return (
-            <div id={this.props.id}>
+            <div id={this.props.id} ref={(el) => this.element = el}>
                 <div className={className} style={this.props.style}>
                     {items}
                 </div>

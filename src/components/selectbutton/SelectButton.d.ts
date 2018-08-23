@@ -1,4 +1,5 @@
 import React = require("react");
+import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface SelectButtonProps {
     id?: string;
@@ -11,6 +12,8 @@ interface SelectButtonProps {
     style?: object;
     className?: string;
     dataKey?: string;
+    tooltip?: any;
+    tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 

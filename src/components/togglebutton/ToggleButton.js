@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import Tooltip from "../tooltip/Tooltip";
 
 export class ToggleButton extends Component {
 
@@ -14,6 +15,8 @@ export class ToggleButton extends Component {
         style: null,
         className: null,
         checked: false,
+        tooltip: null,
+        tooltipOptions: null,
         onChange: null
     };
 
@@ -26,6 +29,8 @@ export class ToggleButton extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         checked: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
     };
 
@@ -51,6 +56,23 @@ export class ToggleButton extends Component {
 
     onBlur(e) {
         DomHandler.removeClass(this.container, 'p-focus');
+    }
+
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.container,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
     }
 
     render() {
