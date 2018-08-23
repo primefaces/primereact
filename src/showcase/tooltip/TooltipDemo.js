@@ -1,42 +1,10 @@
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
-import {Tooltip} from '../../components/tooltip/Tooltip';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class TooltipDemo extends Component {
         
-    constructor() {
-        super();
-        this.state = {title: null, tooltipPosition: 'right'};
-        this.onTooltipPosition = this.onTooltipPosition.bind(this);
-    }
-
-    onTooltipPosition(e) {
-        let element = e.target;
-
-        switch(element.id) {
-            case "username":
-                this.setState({title: "Enter your username", tooltipPosition: 'right'});
-            break;
-
-            case "surname":
-                this.setState({title: "Enter your surname", tooltipPosition: 'top'});
-            break;
-
-            case "age":
-                this.setState({title: "Enter your age", tooltipPosition: 'bottom'});
-            break;
-
-            case "email":
-                this.setState({title: "Enter your email", tooltipPosition: 'left'});
-            break;
-
-            default:
-            break;
-        }
-    }
-
     render() {
         return (
             <div>
@@ -47,28 +15,25 @@ export class TooltipDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">                    
-                    <h3 className="first">Multiple</h3>
-                    <Tooltip for={["#username", "#surname", "#age", "#email"]} title={this.state.title} tooltipPosition={this.state.tooltipPosition} onBeforeShow={this.onTooltipPosition} />
-
+                <div className="content-section implementation">
+                    <h3>Positions</h3>
                     <div className="p-g p-fluid">
                         <div className="p-g-12 p-md-3">
-                            <InputText id="username" placeholder="Right" />              
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{position: 'right'}} />              
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <InputText id="surname" placeholder="Top" />
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <InputText id="age" placeholder="Bottom" />
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />    
                         </div>
                         <div className="p-g-12 p-md-3">
-                            <InputText id="email" placeholder="Left" />
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />    
                         </div>
                     </div>
-                    
+
                     <h3>Focus and Blur</h3>
-                    <Tooltip for="#input5" title="Enter your username" tooltipEvent="focus"/>
-                    <InputText id="input5" placeholder="Right" style={{marginLeft:'.5em'}}/>
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} style={{marginLeft: '.5em'}} />
                 </div>
 
                 <TooltipDoc />

@@ -2268,7 +2268,10 @@ body .p-tooltip .p-tooltip-text {
   padding: 0.429em;
   -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
   -moz-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16); }
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
 body .p-tooltip.p-tooltip-right .p-tooltip-arrow {
   border-right-color: #333333; }
 body .p-tooltip.p-tooltip-left .p-tooltip-arrow {

@@ -1,268 +1,223 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 
-export class Tooltip extends Component {
+export default class Tooltip  {
 
-    static defaultProps = {
-        for: null,
-        title: null,
-        tooltipPosition: 'right',
-        tooltipEvent: 'hover',
-        appendTo: 'body',
-        positionStyle: null,
-        tooltipClassName: null,
-        tooltipDisabled: false,
-        escape: true,
-        hideDelay: null,
-        showDelay: null,
-        onBeforeShow: null
-    };
- 
-    static propTypes = {
-        for: PropTypes.any,
-        title: PropTypes.string,
-        tooltipPosition: PropTypes.string,
-        tooltipEvent: PropTypes.string,
-        appendTo: PropTypes.string,
-        positionstyle: PropTypes.object,
-        tooltipClassName: PropTypes.string,
-        tooltipDisabled: PropTypes.bool,
-        escape: PropTypes.bool,
-        hideDelay: PropTypes.number,
-        showDelay: PropTypes.number,
-        onBeforeShow: PropTypes.func
-    };
- 
-    constructor() {
-        super();
-        this.handleLoad = this.handleLoad.bind(this);
-    }
- 
-    onMouseEnter(event) {
-        if(this.props.tooltipEvent === 'hover') {
-            if(this.props.onBeforeShow) {
-                this.props.onBeforeShow(event);
-            }
+    constructor(props) {
+        this.target = props.target;
+        this.content = props.content;
+        this.options = props.options;
+        this.options.event = this.options.event || 'hover';
+        this.options.position = this.options.position || 'right';
 
-            if(this.hideTimeout) {
-                clearTimeout(this.hideTimeout);
-                this.destroy();
-            }
+        this.bindEvents();
+    }
 
-            this.activate(event);
+    bindEvents() {
+        if (this.options.event === 'hover') {
+            this.mouseEnterListener = this.activate.bind(this);
+            this.mouseLeaveListener = this.deactivate.bind(this);
+            this.target.addEventListener('mouseenter', this.mouseEnterListener);
+            this.target.addEventListener('mouseleave', this.mouseLeaveListener);
+        }
+        else if (this.options.event === 'focus') {
+            this.focusListener = this.activate.bind(this);
+            this.blurListener = this.deactivate.bind(this);
+            this.target.addEventListener('focus', this.focusListener);
+            this.target.addEventListener('blur', this.blurListener);
         }
     }
- 
-    onMouseLeave(event) {
-        if(this.props.tooltipEvent === 'hover') {
-            this.deactivate();
-        }
-    }
- 
-    onFocus(event) {
-        if(this.props.tooltipEvent === 'focus') {
-            this.activate(event);
-        }
-    }
- 
-    onBlur(event) {
-        if(this.props.tooltipEvent === 'focus') {
-            this.deactivate();
-        }
-    }
- 
-    activate(event) {
-        if(this.props.onBeforeShow) {
-            this.props.onBeforeShow(event);
-        }
 
-        this.active = true;
-        if(this.hideTimeout) {
-            clearTimeout(this.hideTimeout);
+    unbindEvents() {
+        if (this.options.event === 'hover') {
+            this.target.removeEventListener('mouseenter', this.mouseEnterListener);
+            this.target.removeEventListener('mouseleave', this.mouseLeaveListener);
         }
-        
-        if(this.props.showDelay)
-            this.showTimeout = setTimeout(() => { this.show() }, this.props.showDelay);
+        else if (this.options.event === 'focus') {
+            this.target.removeEventListener('focus', this.focusListener);
+            this.target.removeEventListener('blur', this.blurListener);
+        }
+    }
+
+    activate() {
+        this.clearHideTimeout();
+
+        if (this.options.showDelay)
+            this.showTimeout = setTimeout(() => { this.show() }, this.options.showDelay);
         else
             this.show();
     }
-    
+
     deactivate() {
-        this.active = false;
-        if(this.showTimeout) {
-            clearTimeout(this.showTimeout);
-        }
-        
-        if(this.hideDelay)
-            this.hideTimeout = setTimeout(() => { this.hide() }, this.props.hideDelay);
+        this.clearShowTimeout();
+
+        if (this.options.hideDelay)
+            this.hideTimeout = setTimeout(() => { this.hide() }, this.options.hideDelay);
         else
             this.hide();
     }
-    
+
+    clearShowTimeout() {
+        if (this.showTimeout) {
+            clearTimeout(this.showTimeout);
+            this.showTimeout = null;
+        }
+    }
+
+    clearHideTimeout() {
+        if (this.hideTimeout) {
+            clearTimeout(this.hideTimeout);
+            this.hideTimeout = null;
+        }
+    }
+
+    show() {
+        if (!this.content) {
+            return;
+        }
+
+        this.create();
+        this.align();
+        DomHandler.fadeIn(this.container, 250);
+        this.container.style.zIndex = ++DomHandler.zindex;
+
+        this.bindDocumentResizeListener();
+    }
+
+    hide() {
+        this.remove();
+    }
+
     create() {
         this.container = document.createElement('div');
-                
+
         let tooltipArrow = document.createElement('div');
         tooltipArrow.className = 'p-tooltip-arrow';
         this.container.appendChild(tooltipArrow);
-        
+
         this.tooltipText = document.createElement('div');
         this.tooltipText.className = 'p-tooltip-text';
 
-		this.updateText();
-        
-        if(this.props.positionStyle) {
-            this.container.style.position = this.props.positionStyle;
-        }
-        
-        this.container.appendChild(this.tooltipText);
+        //todo: JSX support
+        this.tooltipText.innerHTML = this.content;
 
-        if(this.props.appendTo === 'body')
-            document.body.appendChild(this.container);
-        else if(this.props.appendTo === 'target')
-            DomHandler.appendChild(this.container, this.element);
-        else
-            DomHandler.appendChild(this.container, this.props.appendTo);
-            
+        this.container.appendChild(this.tooltipText);
+        document.body.appendChild(this.container);
+
         this.container.style.display = 'inline-block';
     }
-    
-    show() {
-        if(!this.props.title || this.props.disabled) {
-            return;
+
+    remove() {
+        if (this.container && this.container.parentElement) {
+            document.body.removeChild(this.container);
         }
-        
-        this.create();
-        this.align();
-        if(this.props.tooltipClassName) {
-            this.container.className = this.container.className + ' ' + this.props.tooltipClassName; 
-        }
-        DomHandler.fadeIn(this.container, 250);
-        this.container.style.zIndex = String(DomHandler.generateZIndex());
-        this.bindDocumentResizeListener();
+
+        this.unbindDocumentResizeListener();
+        this.container = null;
     }
-    
-    hide() {
-        this.destroy();
-    }
-    
-    updateText() {
-        if(this.props.escape) {
-            this.tooltipText.innerHTML = '';
-            this.tooltipText.appendChild(document.createTextNode(this.props.title));
-        }
-		else {
-            this.tooltipText.innerHTML = this.props.title;
-        }
-    }
-    
+
     align() {
-        let position = this.props.tooltipPosition;
-        
-        switch(position) {
+        switch (this.options.position) {
             case 'top':
                 this.alignTop();
-                if(this.isOutOfBounds()) {
+                if (this.isOutOfBounds()) {
                     this.alignBottom();
                 }
-            break;
-            
+                break;
+
             case 'bottom':
                 this.alignBottom();
-                if(this.isOutOfBounds()) {
+                if (this.isOutOfBounds()) {
                     this.alignTop();
                 }
-            break;
-            
+                break;
+
             case 'left':
                 this.alignLeft();
-                if(this.isOutOfBounds()) {
+                if (this.isOutOfBounds()) {
                     this.alignRight();
-                    
-                    if(this.isOutOfBounds()) {
+
+                    if (this.isOutOfBounds()) {
                         this.alignTop();
-                        
-                        if(this.isOutOfBounds()) {
+
+                        if (this.isOutOfBounds()) {
                             this.alignBottom();
                         }
                     }
                 }
-            break;
-            
+                break;
+
             case 'right':
                 this.alignRight();
-                if(this.isOutOfBounds()) {
+                if (this.isOutOfBounds()) {
                     this.alignLeft();
-                    
-                    if(this.isOutOfBounds()) {
+
+                    if (this.isOutOfBounds()) {
                         this.alignTop();
-                        
-                        if(this.isOutOfBounds()) {
+
+                        if (this.isOutOfBounds()) {
                             this.alignBottom();
                         }
                     }
                 }
-            break;
+                break;
 
             default:
-            break;
+                throw new Error('Invalid position:' + this.options.position);
         }
     }
-    
+
     getHostOffset() {
-        let offset = this.element.getBoundingClientRect();
+        let offset = this.target.getBoundingClientRect();
         let targetLeft = offset.left + DomHandler.getWindowScrollLeft();
         let targetTop = offset.top + DomHandler.getWindowScrollTop();
-        
-        return {left: targetLeft, top: targetTop};
-    }
     
+        return { left: targetLeft, top: targetTop };
+    }
+
     alignRight() {
-        this.preAlign();
-        this.container.className = 'p-tooltip p-component p-tooltip-right';
+        this.preAlign('right');
         let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + DomHandler.getOuterWidth(this.element);
-        let top = hostOffset.top + (DomHandler.getOuterHeight(this.element) - DomHandler.getOuterHeight(this.container)) / 2;
+        let left = hostOffset.left + DomHandler.getOuterWidth(this.target);
+        let top = hostOffset.top + (DomHandler.getOuterHeight(this.target) - DomHandler.getOuterHeight(this.container)) / 2;
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
-    } 
-    
+    }
+
     alignLeft() {
-        this.preAlign();
-        this.container.className = 'p-tooltip p-component p-tooltip-left';
+        this.preAlign('left');
         let hostOffset = this.getHostOffset();
         let left = hostOffset.left - DomHandler.getOuterWidth(this.container);
-        let top = hostOffset.top + (DomHandler.getOuterHeight(this.element) - DomHandler.getOuterHeight(this.container)) / 2;
+        let top = hostOffset.top + (DomHandler.getOuterHeight(this.target) - DomHandler.getOuterHeight(this.container)) / 2;
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
-    } 
-    
+    }
+
     alignTop() {
-        this.preAlign();
-        this.container.className = 'p-tooltip p-component p-tooltip-top';
+        this.preAlign('top');
         let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + (DomHandler.getOuterWidth(this.element) - DomHandler.getOuterWidth(this.container)) / 2;
+        let left = hostOffset.left + (DomHandler.getOuterWidth(this.target) - DomHandler.getOuterWidth(this.container)) / 2;
         let top = hostOffset.top - DomHandler.getOuterHeight(this.container);
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
-    } 
-    
+    }
+
     alignBottom() {
-        this.preAlign();
-        this.container.className = 'p-tooltip p-component p-tooltip-bottom';
+        this.preAlign('bottom');
         let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + (DomHandler.getOuterWidth(this.element) - DomHandler.getOuterWidth(this.container)) / 2;
-        let top = hostOffset.top + DomHandler.getOuterHeight(this.element);
+        let left = hostOffset.left + (DomHandler.getOuterWidth(this.target) - DomHandler.getOuterWidth(this.container)) / 2;
+        let top = hostOffset.top + DomHandler.getOuterHeight(this.target);
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
     }
-    
-    preAlign() {
+
+    preAlign(position) {
         this.container.style.left = -999 + 'px';
         this.container.style.top = -999 + 'px';
+
+        let defaultClassName = 'p-tooltip p-component p-tooltip-' + position;
+        this.container.className = this.tooltipStyleClass ? defaultClassName + ' ' + this.tooltipStyleClass : defaultClassName;
     }
-    
+
     isOutOfBounds() {
         let offset = this.container.getBoundingClientRect();
         let targetTop = offset.top;
@@ -273,79 +228,23 @@ export class Tooltip extends Component {
 
         return (targetLeft + width > viewport.width) || (targetLeft < 0) || (targetTop < 0) || (targetTop + height > viewport.height);
     }
-        
-    bindDocumentResizeListener() {
-        this.documentResizeListener = () => {
-            this.hide();
-        };
 
-        window.addEventListener('resize', this.documentResizeListener);
+    bindDocumentResizeListener() {
+        this.resizeListener = this.onWindowResize.bind(this);
+        window.addEventListener('resize', this.resizeListener);
     }
-    
+
     unbindDocumentResizeListener() {
-        if(this.documentResizeListener) {
-            window.removeEventListener('resize', this.documentResizeListener);
-            this.documentResizeListener = null;
-        }
+        window.removeEventListener('resize', this.resizeListener);
+        this.resizeListener = null;
+    }
+
+    onWindowResize() {
+        this.hide();
     }
 
     destroy() {
-        this.unbindDocumentResizeListener();
-        
-        if(this.container && this.container.parentElement) {
-            if(this.props.appendTo === 'body')
-                document.body.removeChild(this.container);
-            else if(this.props.appendTo === 'target')
-                this.element.removeChild(this.container);
-            else
-                DomHandler.removeChild(this.container, this.props.appendTo);
-        }
-        this.container = null;
-    }
-
-    bindMouseEvents(selector) {
-        let elements = document.querySelectorAll(selector);
-        if(!elements) 
-            return;
-
-        if(this.props.tooltipEvent === 'hover') {
-            for (let i = 0; i < elements.length; i++) {
-                elements[i].addEventListener("mouseenter", (e) => {this.element = elements[i];  this.onMouseEnter(e);});
-                elements[i].addEventListener("mouseleave", (e) => this.onMouseLeave(e));
-            }
-        }
-        else if(this.props.tooltipEvent === 'focus') {
-            for (let i = 0; i < elements.length; i++) {
-                elements[i].addEventListener("focus", (e) => {this.element = elements[i]; this.onFocus(e);});
-                elements[i].addEventListener("blur", (e) => this.onBlur(e));
-            }
-        }
-    }
-
-    handleLoad() {
-        var selectors = this.props.for;
-        
-        if(selectors instanceof Array) {
-            for (var i = 0; i < selectors.length; i++) {
-                this.bindMouseEvents(selectors[i]);
-            }
-        }
-        else {
-            this.bindMouseEvents(selectors);
-        }
-            
-        document.body.removeEventListener('mouseover', this.handleLoad);
-    }
-
-    componentDidMount() {
-        document.body.addEventListener('mouseover', this.handleLoad);
-    }
-
-    componentWillUnmount() {
-        this.destroy();
-    }
-
-    render() {
-        return null;
+        this.unbindEvents();
+        this.target = null;
     }
  }

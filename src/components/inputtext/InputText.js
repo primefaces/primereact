@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import KeyFilter from "../keyfilter/KeyFilter";
+import Tooltip from "../tooltip/Tooltip";
 
 export class InputText extends Component {
 
@@ -9,14 +10,18 @@ export class InputText extends Component {
         onInput: null,
         onKeyPress: null,
         keyfilter: null,
-        validateOnly: false
+        validateOnly: false,
+        tooltip: null,
+        tooltipOptions: null
     };
 
     static propTypes = {
         onInput: PropTypes.func,
         onKeyPress: PropTypes.func,
         keyfilter: PropTypes.any,
-        validateOnly: PropTypes.bool
+        validateOnly: PropTypes.bool,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     };
 
     constructor(props) {
@@ -46,6 +51,23 @@ export class InputText extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.tooltip = new Tooltip({
+                target: this.inputEl,
+                content: this.props.tooltip,
+                options: this.props.tooltipOptions
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
     render() {
         const className = classNames('p-inputtext p-component', this.props.className, {
             'p-disabled': this.props.disabled,
@@ -57,6 +79,8 @@ export class InputText extends Component {
         delete inputProps.onKeyPress;
         delete inputProps.keyfilter;
         delete inputProps.validateOnly;
+        delete inputProps.tooltip;
+        delete inputProps.tooltipOptions;
 
         return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
