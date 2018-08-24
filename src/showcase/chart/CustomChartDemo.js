@@ -19,7 +19,7 @@ export class CustomChartDemo extends Component {
 					25,
 					12,
 					48,
-					90,
+					56,
 					76,
 					42
 				]
@@ -118,7 +118,7 @@ export class PieChartDemo extends Component {
 					25,
 					12,
 					48,
-					90,
+					56,
 					76,
 					42
 				]
