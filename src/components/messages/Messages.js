@@ -76,7 +76,7 @@ export class Messages extends Component {
                 <TransitionGroup >
                     {this.state.messages.map((message, index) =>
                         <CSSTransition key={message.id} classNames="p-messages"
-                            transitionEnterTimeout={250} transitionLeaveTimeout={500}>
+                            timeout={{ enter: 250, exit: 500 }}>
                             <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
                         </CSSTransition>
                     )}

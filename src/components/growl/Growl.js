@@ -86,7 +86,7 @@ export class Growl extends Component {
                 <TransitionGroup>
                     {this.state.messages.map((message) =>
                         <CSSTransition key={message.id} classNames="p-growl"
-                            transitionEnterTimeout={250} transitionLeaveTimeout={500}>
+                            timeout={{ enter: 250, exit: 500 }}>
                             <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
                         </CSSTransition>
                     )}
