@@ -189,6 +189,9 @@ export class Calendar extends Component {
     }
 
     componentWillUnmount() {
+        if (this.hideTimeout) {
+            clearTimeout(this.hideTimeout);
+        }
         if (this.mask) {
             this.disableModality();
             this.mask = null;
@@ -685,15 +688,17 @@ export class Calendar extends Component {
     }
 
     hideOverlay() {
-        DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
-        DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
-        this.unbindDocumentClickListener();
-        this.datepickerClick = false;
-
-        setTimeout(() => {
-            this.panel.style.display = 'none';
-            DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
-        }, 150);
+        if (this.panel) {
+            DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
+            DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
+            this.unbindDocumentClickListener();
+            this.datepickerClick = false;
+    
+            this.hideTimeout = setTimeout(() => {
+                this.panel.style.display = 'none';
+                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
+            }, 150);
+        }
     }
 
     bindDocumentClickListener() {
