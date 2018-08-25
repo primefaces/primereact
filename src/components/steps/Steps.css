@@ -4,6 +4,12 @@
     margin: 0;
 }
 
+.p-steps ul:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .p-steps .p-steps-item {
     float: left;
     box-sizing: border-box;
