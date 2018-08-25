@@ -43,7 +43,7 @@ import { SpinnerDemo } from './showcase/spinner/SpinnerDemo';
 import { InputMaskDemo } from './showcase/inputmask/InputMaskDemo';
 import { CalendarDemo } from './showcase/calendar/CalendarDemo';
 import { ChartDemo } from './showcase/chart/ChartDemo';
-import { CustomChartDemo } from './showcase/chart/CustomChartDemo';
+import { ComboChartDemo } from './showcase/chart/ComboChartDemo';
 import { PieChartDemo } from './showcase/chart/PieChartDemo';
 import { BarChartDemo } from './showcase/chart/BarChartDemo';
 import { LineChartDemo } from './showcase/chart/LineChartDemo';
@@ -285,7 +285,7 @@ class AppMenu extends Component {
                                 <Link to="/linechart">&#9679; Line</Link>
                                 <Link to="/polarareachart">&#9679; PolarArea</Link>
                                 <Link to="/radarchart">&#9679; Radar</Link>
-                                <Link to="/customchart">&#9679; Custom</Link>
+                                <Link to="/combochart">&#9679; Combo</Link>
                             </div>
                         </div>
 
@@ -461,7 +461,7 @@ class App extends Component {
                     <Route path="/spinner" component={SpinnerDemo} />
                     <Route path="/calendar" component={CalendarDemo} />
                     <Route path="/chartdemo" component={ChartDemo} />
-                    <Route path="/customchart" component={CustomChartDemo} />
+                    <Route path="/combochart" component={ComboChartDemo} />
                     <Route path="/piechart" component={PieChartDemo} />
                     <Route path="/doughnutchart" component={DoughnutChartDemo} />
                     <Route path="/linechart" component={LineChartDemo} />

@@ -3,7 +3,7 @@ import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {Chart} from '../../components/chart/Chart';
 
-export class CustomChartDemo extends Component {
+export class ComboChartDemo extends Component {
 
     render() {
         const data = {
@@ -70,7 +70,7 @@ export class CustomChartDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Customized</h1>
+                        <h1>Combo Chart</h1>
                         <p>Different chart types can be combined in the same graph.</p>
                     </div>
                 </div>
@@ -80,13 +80,13 @@ export class CustomChartDemo extends Component {
                     <Chart type="bar" data={data} options={options} />
                 </div>
 
-                <CustomChartDemoDoc></CustomChartDemoDoc>
+                <ComboChartDemoDoc></ComboChartDemoDoc>
             </div>
         )
     }
 }
 
-export class CustomChartDemoDoc extends Component {
+export class ComboChartDemoDoc extends Component {
 
     shouldComponentUpdate() {
         return false;
@@ -169,7 +169,7 @@ export class PieChartDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Customized</h1>
+                        <h1>Combo Chart</h1>
                         <p>Different chart types can be combined in the same graph.</p>
                     </div>
                 </div>

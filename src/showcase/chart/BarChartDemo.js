@@ -12,13 +12,11 @@ export class BarChartDemo extends Component {
                 {
                     label: 'My First dataset',
                     backgroundColor: '#42A5F5',
-                    borderColor: '#1E88E5',
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
                     label: 'My Second dataset',
                     backgroundColor: '#9CCC65',
-                    borderColor: '#7CB342',
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]    
@@ -38,7 +36,7 @@ export class BarChartDemo extends Component {
                     '#26A69A'
 				],
 				yAxisID: 'y-axis-1',
-				data: [65, 59, 80, 81, 56, 55, 40]
+				data: [65, 59, 80, 81, 56, 55, 10]
 			}, {
 				label: 'Dataset 2',
 				backgroundColor: '#78909C',
@@ -59,13 +57,22 @@ export class BarChartDemo extends Component {
                     display: true,
                     position: 'left',
                     id: 'y-axis-1',
-                }, {
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }, 
+                {
                     type: 'linear',
                     display: true,
                     position: 'right',
                     id: 'y-axis-2',
                     gridLines: {
                         drawOnChartArea: false
+                    },
+                    ticks: {
+                        min: 0,
+                        max: 100
                     }
                 }]
             }
@@ -136,7 +143,7 @@ export class BarChartDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>BarChart</h1>
-                        <p>A bar chart or bar graph is a chart that presents Grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
+                        <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
                     </div>
                 </div>
 
@@ -185,13 +192,11 @@ export class BarChartDemo extends Component {
                 {
                     label: 'My First dataset',
                     backgroundColor: '#42A5F5',
-                    borderColor: '#1E88E5',
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
                     label: 'My Second dataset',
                     backgroundColor: '#9CCC65',
-                    borderColor: '#7CB342',
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]    
@@ -211,7 +216,7 @@ export class BarChartDemo extends Component {
                     '#26A69A'
 				],
 				yAxisID: 'y-axis-1',
-				data: [65, 59, 80, 81, 56, 55, 40]
+				data: [65, 59, 80, 81, 56, 55, 10]
 			}, {
 				label: 'Dataset 2',
 				backgroundColor: '#78909C',
@@ -232,13 +237,22 @@ export class BarChartDemo extends Component {
                     display: true,
                     position: 'left',
                     id: 'y-axis-1',
-                }, {
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }, 
+                {
                     type: 'linear',
                     display: true,
                     position: 'right',
                     id: 'y-axis-2',
                     gridLines: {
                         drawOnChartArea: false
+                    },
+                    ticks: {
+                        min: 0,
+                        max: 100
                     }
                 }]
             }
@@ -309,7 +323,7 @@ export class BarChartDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>BarChart</h1>
-                        <p>A bar chart or bar graph is a chart that presents Grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
+                        <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
                     </div>
                 </div>
 
