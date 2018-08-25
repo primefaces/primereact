@@ -19,6 +19,14 @@ gulp.task('build-css', function() {
 	.pipe(gulp.dest('resources'));
 });
 
+gulp.task('build-themes', function() {
+    return gulp.src([
+        'public/resources/themes/**/*'
+    ])
+    //.pipe(uglifycss({"uglyComments": true}))
+    .pipe(gulp.dest('resources/themes'));
+})
+
 gulp.task('images', function() {
     return gulp.src(['src/components/**/images/*.png', 'src/components/**/images/*.gif'])
         .pipe(flatten())
@@ -31,6 +39,6 @@ gulp.task('build-exports', function() {
 });
 
 //Building project with run sequence
-gulp.task('prepublish', ['build-css','images']);
+gulp.task('build-resources', ['build-css','images', 'build-themes']);
 
         
