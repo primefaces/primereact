@@ -141,8 +141,8 @@ export class OrganizationChartDemo extends Component {
 
                 <div className="content-section implementation organizationchart-demo">
                     <h3>Advanced</h3>
-                    <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selectionMode="multiple" 
-                        onSelectionChange={event => this.setState({selections: event.data})} className="company"></OrganizationChart>
+                    <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selection={this.state.selection} selectionMode="multiple" 
+                        onSelectionChange={event => this.setState({selection: event.data})} className="company"></OrganizationChart>
 
                     <h3>Basic</h3>
                     <OrganizationChart value={this.state.data2}></OrganizationChart>
@@ -558,8 +558,8 @@ export class OrganizationChartDemo extends Component {
 
                 <div className="content-section implementation organizationchart-demo">
                     <h3>Advanced</h3>
-                    <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selectionMode="multiple" 
-                        onSelectionChange={event => this.setState({selections: event.data})} className="company"></OrganizationChart>
+                    <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selection={this.state.selection} selectionMode="multiple" 
+                        onSelectionChange={event => this.setState({selection: event.data})} className="company"></OrganizationChart>
 
                     <h3>Basic</h3>
                     <OrganizationChart value={this.state.data2}></OrganizationChart>
