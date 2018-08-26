@@ -142,7 +142,7 @@ carTemplate(car) {
             <h3>Lazy Loading</h3>
             <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
              onLazyLoad callback everytime paging happens. To implement lazy loading,
-            enable <p>lazy</p> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
+            enable <i>lazy</i> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
             that contains information about what to load.</p>
 
 <CodeHighlight className="language-jsx">
