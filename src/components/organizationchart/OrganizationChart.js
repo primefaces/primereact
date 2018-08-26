@@ -130,7 +130,7 @@ export class OrganizationChart extends Component {
         selectionMode: null,
         selection: null,
         nodeTemplate: null,
-        selectionChange: null,
+        onSelectionChange: null,
         onNodeSelect: null,
         onNodeUnselect: null
     }
@@ -143,7 +143,7 @@ export class OrganizationChart extends Component {
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
         nodeTemplate: PropTypes.any,
-        selectionChange: PropTypes.func,
+        onSelectionChange: PropTypes.func,
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func
     }
@@ -156,50 +156,54 @@ export class OrganizationChart extends Component {
     }
 
     onNodeClick(event, node) {
-        let eventTarget = (event.target);
+        if (this.props.selectionMode) {
+            let eventTarget = (event.target);
+            if (eventTarget.className && (eventTarget.className.indexOf('p-node-toggler') !== -1 || eventTarget.className.indexOf('p-node-toggler-icon') !== -1)) {
+                return;
+            }
 
-        if(eventTarget.className && (eventTarget.className.indexOf('p-node-toggler') !== -1 || eventTarget.className.indexOf('p-node-toggler-icon') !== -1)) {
-            return;
-        }
-        else if(this.props.selectionMode) {
-            if(node.selectable === false) {
+            if (node.selectable === false) {
                 return;
             }
             
             let index = this.findIndexInSelection(node);
             let selected = (index >= 0);
+            let selection;
             
-            if(this.props.selectionMode === 'single') {
-                if(selected) {
-                    this.selection = null;
-                    if(this.props.onNodeUnselect) {
+            if (this.props.selectionMode === 'single') {
+                if (selected) {
+                    selection = null;
+                    if (this.props.onNodeUnselect) {
                         this.props.onNodeUnselect({originalEvent: event, node: node});
                     }
                 }
                 else {
-                    this.selection = node;
+                    selection = node;
+                    if (this.props.onNodeSelect) {
+                        this.props.onNodeSelect({originalEvent: event, node: node});
+                    }
+                }
+            }
+            else if (this.props.selectionMode === 'multiple') {
+                if (selected) {
+                    selection = this.props.selection.filter((val,i) => i !== index);
+                    if (this.props.onNodeUnselect) {
+                        this.props.onNodeUnselect({originalEvent: event, node: node});
+                    }
+                }
+                else {
+                    selection = [...this.props.selection||[], node];
                     if(this.props.onNodeSelect) {
                         this.props.onNodeSelect({originalEvent: event, node: node});
                     }
                 }
             }
-            else if(this.props.selectionMode === 'multiple') {
-                if(selected) {
-                    this.selection = this.selection.filter((val,i) => i!==index);
-                    if(this.props.onNodeUnselect) {
-                        this.props.onNodeUnselect({originalEvent: event, node: node});
-                    }
-                }
-                else {
-                    this.selection = [...this.selection||[],node];
-                    if(this.props.onNodeSelect) {
-                        this.props.onNodeSelect({originalEvent: event, node: node});
-                    }
-                }
-            }
             
-            if(this.props.selectionChange) {
-                this.props.selectionChange(this.selection);
+            if (this.props.onSelectionChange) {
+                this.props.onSelectionChange({
+                    originalEvent: event,
+                    data: selection
+                });
             }
         }
     }
@@ -207,13 +211,13 @@ export class OrganizationChart extends Component {
     findIndexInSelection(node) {
         let index = -1;
 
-        if(this.props.selectionMode && this.selection) {
+        if(this.props.selectionMode && this.props.selection) {
             if(this.props.selectionMode === 'single') {
-                index = (this.selection === node) ? 0 : - 1;
+                index = (this.props.selection === node) ? 0 : - 1;
             }
             else if(this.props.selectionMode === 'multiple') {
-                for(let i = 0; i  < this.selection.length; i++) {
-                    if(this.selection[i] === node) {
+                for(let i = 0; i  < this.props.selection.length; i++) {
+                    if(this.props.selection[i] === node) {
                         index = i;
                         break;
                     }

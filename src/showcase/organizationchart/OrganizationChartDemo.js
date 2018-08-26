@@ -141,12 +141,10 @@ export class OrganizationChartDemo extends Component {
 
                 <div className="content-section implementation organizationchart-demo">
                     <h3>Advanced</h3>
-                    <p>Organization with advanced customization.</p>
                     <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selectionMode="multiple" 
-                        selectionChange={(data) => this.setState({selections: data})} className="company"></OrganizationChart>
+                        onSelectionChange={event => this.setState({selections: event.data})} className="company"></OrganizationChart>
 
                     <h3>Basic</h3>
-                    <p>Hierarchical data with zero configuration.</p>
                     <OrganizationChart value={this.state.data2}></OrganizationChart>
                 </div>
 
@@ -268,7 +266,7 @@ nodeTemplate(node) {
             <p>OrganizationChart supports two selection methods; single or multiple. Selection is enabled by setting <i>selectionMode</i> property to the corresponding mode, defining <i>selection</i> property along with <i>selectionChange</i> callback.</p>
 <CodeHighlight className="language-jsx">
 {`
-<OrganizationChart value={this.state.data} selectionMode="single" selection={this.state.selectedNode} selectionChange={(node) => this.setState({selectedNode: node})}></OrganizationChart>
+<OrganizationChart value={this.state.data} selectionMode="single" selection={this.state.selectedNode} onSelectionChange={event => this.setState({selectedNode: event.data})}></OrganizationChart>
 
 `}
 </CodeHighlight>
@@ -356,8 +354,9 @@ nodeTemplate(node) {
                             </tr>
                             <tr>
                                 <td>onSelectionChange</td>
-                                <td>selections: selected nodes </td>
-                                <td></td>
+                                <td>event.originalEvent: browser event <br />
+                                    event.data: New selection.</td>
+                                <td>Callback to invoke when node selection changes.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -557,14 +556,12 @@ export class OrganizationChartDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation organizationchart-demo">
                     <h3>Advanced</h3>
-                    <p>Organization with advanced customization.</p>
                     <OrganizationChart value={this.state.data1} nodeTemplate={this.nodeTemplate} selectionMode="multiple" 
-                        selectionChange={(data) => this.setState({selections: data})} className="company"></OrganizationChart>
+                        onSelectionChange={event => this.setState({selections: event.data})} className="company"></OrganizationChart>
 
                     <h3>Basic</h3>
-                    <p>Hierarchical data with zero configuration.</p>
                     <OrganizationChart value={this.state.data2}></OrganizationChart>
                 </div>
             </div>
