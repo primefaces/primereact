@@ -24,13 +24,13 @@ export class GrowlMessage extends Component {
     }
 
     componentWillUnmount() {
-        if(this.timeout) {
+        if (this.timeout) {
             clearTimeout(this.timeout);
         }
     }
 
     componentDidMount() {
-        if(!this.props.message.sticky) {
+        if (!this.props.message.sticky) {
             this.timeout = setTimeout(() => {
                 this.onClose(null);
             }, this.props.message.life||3000);
@@ -38,15 +38,15 @@ export class GrowlMessage extends Component {
     }
 
     onClose(event) {
-        if(this.timeout) {
+        if (this.timeout) {
             clearTimeout(this.timeout);
         }
         
-        if(this.props.onClose) {
+        if (this.props.onClose) {
             this.props.onClose(this.props.message);
         }
 
-        if(event) {
+        if (event) {
             event.preventDefault();
         }
     }
@@ -58,7 +58,7 @@ export class GrowlMessage extends Component {
     }
 
     renderCloseIcon() {
-        if(this.props.message.closable !== false) {
+        if (this.props.message.closable !== false) {
             return (
                 <a className="p-growl-icon-close pi pi-times" onClick={this.onClose}><span></span></a>
             );
