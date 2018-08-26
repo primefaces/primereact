@@ -31,6 +31,12 @@ export class UIMessage extends Component {
         }
     }
 
+    componentWillUnmount() {
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
+    }
+
     onClose(event) {
         if (this.timeout) {
             clearTimeout(this.timeout);
