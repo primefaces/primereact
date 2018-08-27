@@ -383,7 +383,7 @@ class App extends Component {
             <div className='layout-wrapper'>
                 <div id="layout-topbar">
                     <a className="menu-button" onClick={this.openMenu}>
-                        <i className="fa fa-bars"></i>
+                        <i className="pi pi-bars"></i>
                     </a>
                     <Link to="/" className="logo">
                         <img alt="logo" src="showcase/resources/images/primereact-logo.png" />

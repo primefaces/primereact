@@ -70,12 +70,13 @@ body {
         top: 0;
         width: 60px;
         height: 60px;
-        line-height: 58px;
+        line-height: 60px;
         text-align: center;
+        cursor: pointer;
         @include transition(background-color .2s);
 
         &:hover {
-            background-color: #4a4f52;
+            background-color: #363c3f;
         }
 
         i {
@@ -88,7 +89,7 @@ body {
         margin-top: 12px;
         display: inline-block;
 
-        img{
+        img {
             width: 210px;
         }
     }
@@ -905,7 +906,7 @@ body {
         }
 
         .logo {
-            margin: 7px 0 7px 0;
+            margin: 8px 0;
 
             img{
                 width: 180px;
