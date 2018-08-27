@@ -37,7 +37,8 @@ export class Dialog extends Component {
         baseZIndex: 0,
         minX: 0,
         minY: 0,
-        maximizable: false
+        maximizable: false,
+        blockScroll: false
     }
 
     static propTypes = {
@@ -70,7 +71,8 @@ export class Dialog extends Component {
         baseZIndex: PropTypes.number,
         minX: PropTypes.number,
         minY: PropTypes.number,
-        maximizable: PropTypes.bool
+        maximizable: PropTypes.bool,
+        blockScroll: PropTypes.bool
     };
     
     constructor(props) {

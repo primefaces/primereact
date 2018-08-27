@@ -29,6 +29,7 @@ interface DialogProps {
     minX?: number;
     minY?: number;
     maximizable?: boolean;
+    blockScroll?: boolean;
     onHide(): void;
     onShow?(): void;
 }

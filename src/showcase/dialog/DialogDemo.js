@@ -40,7 +40,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true} blockScroll={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -292,6 +292,12 @@ const footer = (
                             <td>false</td>
                             <td>Whether the dialog can be displayed full screen.</td>
                         </tr>
+                        <tr>
+                            <td>blockScroll</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether background scroll should be blocked when dialog is visible.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -410,7 +416,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true} blockScroll={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
