@@ -1117,29 +1117,29 @@ pre[class*="language-"] {
     }
 
     .custombar1 .p-scrollpanel-bar {
-        background-color: #1976d2;
+        background-color: #007ad9;
         opacity: 1;
         @include transition(background-color .2s);
     }
 
     .custombar1 .p-scrollpanel-bar:hover {
-        background-color: #135ba1;
+        background-color: #007ad9;
     }
 
     .custombar2 .p-scrollpanel-wrapper {
-        border-right: 9px solid #757575;
-        border-bottom: 9px solid #757575;
+        border-right: 9px solid #f4f4f4;
+        border-bottom: 9px solid #f4f4f4;
     }
 
     .custombar2 .p-scrollpanel-bar {
-        background-color: #68C77D;
+        background-color: #cce4f7;
         border-radius: 0;
         opacity: 1;
         @include transition(background-color .2s);
     }
 
     .custombar2:hover .p-scrollpanel-bar {
-        background-color: #46A55A;
+        background-color: #99c9ef;
     }
 }
 

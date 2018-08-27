@@ -246,7 +246,7 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                         <CodeHighlight className="language-javascript">
                             {`
 import React, {Component} from 'react';
-import {ScrollPanel} from '../../components/scrollpanel/ScrollPanel';
+import {ScrollPanel} from 'primereact/scrollpanel';
 
 export class ScrollPanelDemo extends Component {
 
