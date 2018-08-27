@@ -235,7 +235,8 @@ export class Tree extends Component {
         className: null,
         metaKeySelection: true,
         propagateSelectionUp: true,
-        propagateSelectionDown: true
+        propagateSelectionDown: true,
+		itemKey: null
     }
 
     static propsTypes = {
@@ -253,7 +254,8 @@ export class Tree extends Component {
         className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
-        propagateSelectionDown: PropTypes.bool
+        propagateSelectionDown: PropTypes.bool,
+		itemKey: PropTypes.string
     }
 
     constructor(props) {
@@ -552,8 +554,20 @@ export class Tree extends Component {
         else {
             container = (<ul className="p-tree-container">
                 {
+					var nodeKey = undefined;
+						
+					if(this.props.itemKey){
+						nodeKey = this.props.itemKey;
+					}
+					
                     this.props.value && this.props.value.map((node, index) => {
-                        return (<TreeNode key={'node_' + index} node={node} index={index} parentNode={this.props.value} isHorizontal={false} selectionMode={this.props.selectionMode}
+						
+						var key = 'node_';
+						if(nodeKey && node[nodeKey]){
+							key = key + node[nodeKey] + '_';
+						}
+						
+                        return (<TreeNode key={key + index} node={node} index={index} parentNode={this.props.value} isHorizontal={false} selectionMode={this.props.selectionMode}
                             onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
                     })
                 }
