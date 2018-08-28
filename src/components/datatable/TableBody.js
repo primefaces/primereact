@@ -56,7 +56,7 @@ export class TableBody extends Component {
                         }
                         
                         if(this.props.onRowUnselect) {
-                            this.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                            this.props.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                         }
                     }
                     else {
@@ -82,7 +82,7 @@ export class TableBody extends Component {
                         if(selected) {
                             selection = null;
                             if(this.props.onRowUnselect) {
-                                this.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
+                                this.props.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'row'});
                             }
                         }
                         else {
