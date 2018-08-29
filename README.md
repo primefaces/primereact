@@ -53,9 +53,9 @@ primeicons/primeicons.css
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
-import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/nova-light/theme.css';
-import 'font-awesome/css/font-awesome.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 ```
 
 ## QuickStart
