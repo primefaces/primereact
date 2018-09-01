@@ -30,6 +30,7 @@
     "nanoscroller": "^0.8.7",
     "prop-types": "^15.5.0",
     "primeicons": "1.0.0-beta.10",
+    "primeflex": "1.0.0-rc.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
@@ -9,9 +10,11 @@ export class GridDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Grid CSS</h1>
+                        <h1>Grid CSS - Deprecated</h1>
                         <p>Grid CSS is a lightweight responsive and fluid layout utility optimized for mobile devices, tablets and desktops. 
                         Grid CSS is used internally in some PrimeReact components and can be used as standalone as well.</p>
+
+                        <p>Grid CSS is deprecated, use <Link to="/flexgrid">FlexGrid</Link> instead.</p>
                     </div>
                 </div>
 

@@ -7,6 +7,7 @@ import './resources/style/primereact.css';
 import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 import 'prismjs/themes/prism-coy.css';
 import './sass/App.css';
 
@@ -20,6 +21,7 @@ import { DialogDemo } from './showcase/dialog/DialogDemo';
 import { DropdownDemo } from './showcase/dropdown/DropdownDemo';
 import { FieldsetDemo } from './showcase/fieldset/FieldsetDemo';
 import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
+import { FlexGridDemo } from './showcase/flexgrid/FlexGridDemo';
 import { GMapDemo } from './showcase/gmap/GMapDemo';
 import { GridDemo } from './showcase/grid/GridDemo';
 import { GrowlDemo } from './showcase/growl/GrowlDemo';
@@ -218,6 +220,7 @@ class AppMenu extends Component {
                                 <Link to="/fieldset">&#9679; Fieldset</Link>
                                 <Link to="/grid">&#9679; Grid</Link>
                                 <Link to="/panel">&#9679; Panel</Link>
+                                <Link to="/flexgrid">&#9679; FlexGrid  <span className="menuitem-badge">NEW</span></Link>
                                 <Link to="/scrollpanel">&#9679; ScrollPanel</Link>
                                 <Link to="/tabview">&#9679; TabView</Link>
                                 <Link to="/toolbar">&#9679; Toolbar</Link>
@@ -440,6 +443,7 @@ class App extends Component {
                     <Route path="/dropdown" component={DropdownDemo} />
                     <Route path="/grid" component={GridDemo} />
                     <Route path="/growl" component={GrowlDemo} />
+                    <Route path="/flexgrid" component={FlexGridDemo} />
                     <Route path="/fieldset" component={FieldsetDemo} />
                     <Route path="/fileupload" component={FileUploadDemo} />
                     <Route path="/inputtext" component={InputTextDemo} />
