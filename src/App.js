@@ -23,7 +23,6 @@ import { FieldsetDemo } from './showcase/fieldset/FieldsetDemo';
 import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
 import { FlexGridDemo } from './showcase/flexgrid/FlexGridDemo';
 import { GMapDemo } from './showcase/gmap/GMapDemo';
-import { GridDemo } from './showcase/grid/GridDemo';
 import { GrowlDemo } from './showcase/growl/GrowlDemo';
 import { InputTextDemo } from './showcase/inputtext/InputTextDemo';
 import { InputTextareaDemo } from './showcase/inputtextarea/InputTextareaDemo';
@@ -218,7 +217,6 @@ class AppMenu extends Component {
                                 <Link to="/accordion">&#9679; Accordion</Link>
                                 <Link to="/card">&#9679; Card</Link>
                                 <Link to="/fieldset">&#9679; Fieldset</Link>
-                                <Link to="/grid">&#9679; Grid</Link>
                                 <Link to="/panel">&#9679; Panel</Link>
                                 <Link to="/flexgrid">&#9679; FlexGrid  <span className="menuitem-badge">NEW</span></Link>
                                 <Link to="/scrollpanel">&#9679; ScrollPanel</Link>
@@ -441,7 +439,6 @@ class App extends Component {
                     <Route path="/chips" component={ChipsDemo} />
                     <Route path="/dialog" component={DialogDemo} />
                     <Route path="/dropdown" component={DropdownDemo} />
-                    <Route path="/grid" component={GridDemo} />
                     <Route path="/growl" component={GrowlDemo} />
                     <Route path="/flexgrid" component={FlexGridDemo} />
                     <Route path="/fieldset" component={FieldsetDemo} />
