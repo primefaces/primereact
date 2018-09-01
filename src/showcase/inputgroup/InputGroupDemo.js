@@ -31,8 +31,8 @@ export class InputGroupDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3 className="first">Addons</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-user"></i>
@@ -41,7 +41,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">$</span>
                                 <InputText placeholder="Price" />
@@ -49,7 +49,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">W</span>
                                 <InputText placeholder="Website" />
@@ -59,8 +59,8 @@ export class InputGroupDemo extends Component {
 
 
                     <h3>Multiple Addons</h3>
-                    <div className="p-g">
-                        <div className="p-g-12">
+                    <div className="p-grid">
+                        <div className="p-col-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-clock"></i>
@@ -76,22 +76,22 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h3>Button Addons</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <Button label="Search"/>
                                 <InputText placeholder="Keyword"/>
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
                                 <Button icon="pi pi-search" className="p-button-warning"/>
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <Button icon="pi pi-check" className="p-button-success"/>
                                 <InputText placeholder="Vote"/>
@@ -101,8 +101,8 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h3>Checkbox and RadioButton</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: !this.state.username})} />
@@ -111,7 +111,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
@@ -120,7 +120,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <Checkbox checked={this.state.website1} onChange={(e) => this.setState({website1: !this.state.website1})} />
@@ -187,8 +187,8 @@ export class InputGroupDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3 className="first">Addons</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-user"></i>
@@ -197,7 +197,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">$</span>
                                 <InputText placeholder="Price" />
@@ -205,7 +205,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">W</span>
                                 <InputText placeholder="Website" />
@@ -215,8 +215,8 @@ export class InputGroupDemo extends Component {
 
 
                     <h3>Multiple Addons</h3>
-                    <div className="p-g">
-                        <div className="p-g-12">
+                    <div className="p-grid">
+                        <div className="p-col-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-clock"></i>
@@ -232,22 +232,22 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h3>Button Addons</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <Button label="Search"/>
                                 <InputText placeholder="Keyword"/>
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
                                 <Button icon="pi pi-search" className="p-button-warning"/>
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <Button icon="pi pi-check" className="p-button-success"/>
                                 <InputText placeholder="Vote"/>
@@ -257,8 +257,8 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h3>Checkbox and RadioButton</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <Checkbox checked={this.state.username} onChange={(e) => this.setState({username: !this.state.username})} />
@@ -267,7 +267,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
@@ -276,7 +276,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <Checkbox checked={this.state.website1} onChange={(e) => this.setState({website1: !this.state.website1})} />

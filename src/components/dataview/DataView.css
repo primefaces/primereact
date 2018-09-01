@@ -32,7 +32,7 @@
     border-top: 0 none;
 }
 
-.p-dataview.p-dataview-list > .p-dataview-content > div.p-g > div {
+.p-dataview.p-dataview-list > .p-dataview-content > div.p-grid > div {
     width: 100%;
 }
 

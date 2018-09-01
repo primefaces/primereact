@@ -17,29 +17,29 @@ export class KeyFilterDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Filtering</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="int" placeholder="Integers"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="num" placeholder="Numbers"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="money" placeholder="Money"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="hex" placeholder="Hex"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="alpha" placeholder="Alphabetic"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter={/[^\s]/} placeholder="Block space key"/>
                         </div>
                     </div>
@@ -130,29 +130,29 @@ export class KeyFilterDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Filtering</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="int" placeholder="Integers"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="num" placeholder="Numbers"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="money" placeholder="Money"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="hex" placeholder="Hex"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="alpha" placeholder="Alphabetic"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <InputText keyfilter={/[^\\s]/} placeholder="Block space key"/>
                         </div>
                     </div>

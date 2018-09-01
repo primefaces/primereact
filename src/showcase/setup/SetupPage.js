@@ -16,6 +16,7 @@ export class SetupPage extends Component {
                 <div className="content-section documentation">
                     <h3 style={{margin:'0'}}>Download</h3>
                     <p>PrimeReact is available at npm, if you have an existing application run the following commands to download PrimeReact and PrimeIcons to your project.</p>
+
 <CodeHighlight className="language-javascript">
 {`
 npm install primereact --save
@@ -24,9 +25,8 @@ npm install primeicons --save
 `}
 </CodeHighlight>
 
-
-                <h3>Import</h3>
-                <p>Path of each component is available at the "import" section of a component documentation.</p>
+                    <h3>Import</h3>
+                    <p>Path of each component is available at the "import" section of a component documentation.</p>
 
 <CodeHighlight className="language-javascript">
 {`
@@ -80,6 +80,10 @@ dependencies: {
                                 <tr>
                                     <td>Schedule</td>
                                     <td>FullCalendar 4.0 Alpha and Moment.</td>
+                                </tr>
+                                <tr>
+                                    <td>PrimeFlex</td>
+                                    <td>DataView and MegaMenu components.</td>
                                 </tr>
                             </tbody>
                         </table>

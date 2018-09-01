@@ -147,23 +147,23 @@ export class MegaMenu extends Component {
 
         switch(length) {
             case 2:
-                columnClass= 'p-g-6';
+                columnClass= 'p-col-6';
             break;
             
             case 3:
-                columnClass= 'p-g-4';
+                columnClass= 'p-col-4';
             break;
             
             case 4:
-                columnClass= 'p-g-3';
+                columnClass= 'p-col-3';
             break;
             
             case 6:
-                columnClass= 'p-g-2';
+                columnClass= 'p-col-2';
             break;
                         
             default:
-                columnClass= 'p-g-12';
+                columnClass= 'p-col-12';
             break;
         }
         
@@ -266,7 +266,7 @@ export class MegaMenu extends Component {
 
             return (
                 <div className="p-megamenu-panel">
-                    <div className="p-g">
+                    <div className="p-grid">
                         {columns}
                     </div>
                 </div>

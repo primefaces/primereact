@@ -221,7 +221,7 @@ export class DataView extends Component {
 
     renderEmptyMessage(){
         return (
-            <div className="p-g-12">{this.props.emptyMessage}</div>
+            <div className="p-col-12">{this.props.emptyMessage}</div>
         );
     }
 
@@ -273,7 +273,7 @@ export class DataView extends Component {
 
         return (
             <div className="p-dataview-content">
-                <div className="p-g">
+                <div className="p-grid">
                     {items}
                 </div>
             </div>

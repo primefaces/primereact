@@ -72,30 +72,30 @@ export class GrowlDemo extends Component {
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3 style={{marginTop: 0}}>Severities</h3>
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="p-button-info" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
                     
                     <h3>Options</h3>
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" className="p-button-warning" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
                         </div>
                     </div>
@@ -499,30 +499,30 @@ export class GrowlDemo extends Component {
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3>Severities</h3>
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="p-button-info" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
                     
                     <h3>Options</h3>
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" className="p-button-warning" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
                         </div>
                     </div>

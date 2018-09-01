@@ -24,16 +24,16 @@ export class RadioButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-g" style={{width:'250px',marginBottom:'10px'}}>
-                        <div className="p-g-12">
+                    <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                        <div className="p-col-12">
                             <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
                             <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
                         </div>
-                        <div className="p-g-12">
+                        <div className="p-col-12">
                             <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
                             <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
                         </div>
-                        <div className="p-g-12">
+                        <div className="p-col-12">
                             <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
                             <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
                         </div>
@@ -237,16 +237,16 @@ export class RadioButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-g" style={{width:'250px',marginBottom:'10px'}}>
-                        <div className="p-g-12">
+                    <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                        <div className="p-col-12">
                             <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
                             <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
                         </div>
-                        <div className="p-g-12">
+                        <div className="p-col-12">
                             <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
                             <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
                         </div>
-                        <div className="p-g-12">
+                        <div className="p-col-12">
                             <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
                             <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
                         </div>

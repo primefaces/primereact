@@ -1170,12 +1170,12 @@ export class DataTableRowExpansionDemo extends Component {
     rowExpansionTemplate(data) {
         var src = "showcase/resources/demo/images/car/" + data.brand + ".png";
 
-        return  <div className="p-g p-fluid">
-                    <div className="p-g-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
+        return  <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
                         <img src={src} alt={data.brand}/>
                     </div>
-                     <div className="p-g-12 p-md-9">
-                       <div className="p-g">
+                     <div className="p-col-12 p-md-9">
+                       <div className="p-grid">
                           <div className="p-md-2">Vin: </div>
                           <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
 

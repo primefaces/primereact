@@ -107,24 +107,24 @@ export class DataTableCrudDemo extends Component {
                         {
                             this.state.car && 
                             
-                            <div className="p-g p-fluid">
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                            <div className="p-grid p-fluid">
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="vin" onChange={(e) => {this.updateProperty('vin', e.target.value)}} value={this.state.car.vin}/>
                                 </div>
 
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="year">Year</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="year">Year</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="year" onChange={(e) => {this.updateProperty('year', e.target.value)}} value={this.state.car.year}/>
                                 </div>
 
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="brand">Brand</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="brand">Brand</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="brand" onChange={(e) => {this.updateProperty('brand', e.target.value)}} value={this.state.car.brand}/>
                                 </div>
                                 
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="color">Color</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="color">Color</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="color" onChange={(e) => {this.updateProperty('color', e.target.value)}} value={this.state.car.color}/>
                                 </div>
                             </div>
@@ -250,24 +250,24 @@ export class DataTableCrudDemo extends Component {
                         {
                             this.state.car && 
                             
-                            <div className="p-g p-fluid">
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                            <div className="p-grid p-fluid">
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="vin" onChange={(e) => {this.updateProperty('vin', e.target.value)}} value={this.state.car.vin}/>
                                 </div>
 
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="year">Year</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="year">Year</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="year" onChange={(e) => {this.updateProperty('year', e.target.value)}} value={this.state.car.year}/>
                                 </div>
 
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="brand">Brand</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="brand">Brand</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="brand" onChange={(e) => {this.updateProperty('brand', e.target.value)}} value={this.state.car.brand}/>
                                 </div>
                                 
-                                <div className="p-g-4" style={{padding:'.75em'}}><label htmlFor="color">Color</label></div>
-                                <div className="p-g-8" style={{padding:'.25em .75em'}}>
+                                <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="color">Color</label></div>
+                                <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="color" onChange={(e) => {this.updateProperty('color', e.target.value)}} value={this.state.car.color}/>
                                 </div>
                             </div>

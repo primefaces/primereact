@@ -18,26 +18,26 @@ export class TooltipDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Positions</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Right" tooltip="Enter your username" />              
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />    
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />    
                         </div>
                     </div>
 
                     <h3>Focus and Blur</h3>
-                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} style={{marginLeft: '.5em'}} />
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
                 
                     <h3>Button</h3>
-                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" style={{marginLeft: '.5em'}} />
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
                 </div>
 
                 <TooltipDoc />
@@ -219,26 +219,26 @@ export class TooltipDemo extends Component {
 
                 <div className="content-section implementation">                    
                     <h3>Positions</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Right" tooltip="Enter your username" />              
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />    
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />    
                         </div>
                     </div>
 
                     <h3>Focus and Blur</h3>
-                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'} style={{marginLeft: '.5em'}}} />
+                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'} />
                 
                     <h3>Button</h3>
-                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" style={{marginLeft: '.5em'}} />
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
                 </div>
             </div>
         )

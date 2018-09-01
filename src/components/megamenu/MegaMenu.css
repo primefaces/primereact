@@ -90,7 +90,7 @@
     margin-top: -.5em;
 }
 
-.p-megamenu .p-g {
+.p-megamenu .p-grid {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }

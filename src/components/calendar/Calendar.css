@@ -151,12 +151,14 @@
 	padding: .5em;
 }
 
-.p-datepicker .p-datepicker-buttonbar > .p-g > div:last-child {
-    text-align: right;
+.p-datepicker .p-datepicker-buttonbar:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-.p-datepicker .p-datepicker-buttonbar > .p-g > div {
-    padding: 0;
+.p-datepicker .p-datepicker-buttonbar > button:last-child {
+    float: right;
 }
 
 .p-calendar.p-calendar-w-btn input {

@@ -417,7 +417,7 @@ body {
                 }
             }
 
-            .p-g-12 > h3 {
+            .p-col-12 > h3 {
                 font-weight: 400;
                 margin-top: 30px;
                 font-size: 18px;
@@ -1079,9 +1079,13 @@ pre[class*="language-"] {
     .filter-container {
         text-align: center;
     }
+
+    .car-data > div {
+        padding: .429em;
+    }
 }
 
-@media (max-width: 40em) {
+@media (max-width: 767px) {
     .dataview-demo {
         .car-details, .search-icon {
             text-align: center;
@@ -1096,13 +1100,6 @@ pre[class*="language-"] {
 
 .inputgrid-demo {
     padding-top: 0 !important;
-}
-
-/* Grid Demos */
-.grid-demo .p-g div {
-    background-color: #ededed;
-    text-align: center;
-    border: 1px solid #fafafa;
 }
 
 /* FlexGrid Demos */
@@ -1144,18 +1141,20 @@ pre[class*="language-"] {
 .datascroll-demo {
     .car-item {
         border-bottom: 1px solid #D5D5D5;
+        margin: 0;
+        padding: 1em;
     }
 
     .car-item .p-md-3 {
         text-align: center;
     }
     
-    .car-item .p-g-10 {
+    .car-item .p-col-10 {
         font-weight: bold;
     }
 }
 
-@media (max-width: 40em) {
+@media (max-width: 767px) {
     .datascroll-demo .car-item {
         text-align: center;
     }

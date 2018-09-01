@@ -66,47 +66,47 @@ export class MessagesDemo extends Component {
                     <Messages ref={(el) => this.messages = el} />
 
                     <h3 style={{marginTop: 0}}>Severities</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="p-button-info" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
 
                     <h3>Options</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
                         </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="info" text="PrimeReact Rocks" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="success" text="Record Saved" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="warn" text="Are you sure?" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="error" text="Field is required" />
                         </div>
                     </div>
@@ -557,47 +557,47 @@ export class MessagesDemo extends Component {
                     <Messages ref={(el) => this.messages = el} />
 
                     <h3>Severities</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showInfo} label="Info" className="p-button-info" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
 
                     <h3>Options</h3>
-                    <div className="p-g p-fluid">
-                        <div className="p-g-12 p-md-4">
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showMultiple} label="Multiple" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.showSticky} label="Sticky" />
                         </div>
-                        <div className="p-g-12 p-md-4">
+                        <div className="p-col-12 p-md-4">
                             <Button onClick={this.clear} icon="pi pi-times" style={{ float: 'right' }} label="Clear" />
                         </div>
                     </div>
 
                     <h3>Inline Message CSS</h3>
                     <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-3">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="info" text="PrimeReact Rocks" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="success" text="Record Saved" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="warn" text="Are you sure?" />
                         </div>
-                        <div className="p-g-12 p-md-3">
+                        <div className="p-col-12 p-md-3">
                             <Message severity="error" text="Field is required" />
                         </div>
                     </div>

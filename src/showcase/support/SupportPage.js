@@ -14,13 +14,13 @@ export class SupportPage extends Component {
 
                 <div className="content-section support documentation">
                     <div className="support-image">
-                        <div className="p-g">
-                            <div className="p-g-12 p-md-6">
+                        <div className="p-grid">
+                            <div className="p-col-12 p-md-6">
                                 <h3>PrimeReact PRO Support</h3>
                                 <p>With PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
                                 <a className="home-button2" href="mailto:PrimeReact@primetek.com.tr">GET A QUOTE</a>
                             </div>
-                            <div className="p-g-12 p-md-6">
+                            <div className="p-col-12 p-md-6">
                                 <img alt="PRO" src="showcase/resources/images/home/icon-pro-white.svg"></img>
                             </div>
                         </div>

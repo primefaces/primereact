@@ -1884,14 +1884,8 @@ export class Calendar extends Component {
         if (this.props.showButtonBar) {
             return (
                 <div className="p-datepicker-buttonbar">
-                    <div className="p-g">
-                        <div className="p-g-6">
-                            <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
-                        </div>
-                        <div className="p-g-6">
-                            <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.todayButtonClassName} />
-                        </div>
-                    </div>
+                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
+                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.todayButtonClassName} />
                 </div>
             );
         }

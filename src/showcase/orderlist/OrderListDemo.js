@@ -43,13 +43,13 @@ export class OrderListDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-6">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-6">
                             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
                                 responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
                                 onChange={(e) => this.setState({cars: e.value})} />
                         </div>
-                        <div className="p-g-12 p-md-6">
+                        <div className="p-col-12 p-md-6">
                             <ul>
                                 {this.state.cars.map(car => <li key={car.vin}>{car.brand} - {car.year} - {car.color}</li>)}
                             </ul>
@@ -291,13 +291,13 @@ export class OrderListDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-g">
-                        <div className="p-g-12 p-md-6">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-6">
                             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
                                 responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
                                 onChange={(e) => this.setState({cars: e.value})} />
                         </div>
-                        <div className="p-g-12 p-md-6">
+                        <div className="p-col-12 p-md-6">
                             <ul>
                                 {this.state.cars.map(car => <li key={car.vin}>{car.brand} - {car.year} - {car.color}</li>)}
                             </ul>
