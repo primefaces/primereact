@@ -475,7 +475,7 @@ export class FlexGridDoc extends Component {
 
                     <h3>Getting Started</h3>
                     <p>FlexGrid is a CSS utility based on flexbox. For more information about Flex, visit <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a>. A basic grid is defined by giving
-                    a container <i>p-grid</i> class and children the <i>p-col</i> class. Children of the grid will have the same width and grow according to the width of the parent.</p>
+                    a container <i>p-grid</i> class and children the <i>p-col</i> class. Children of the grid will have the same width and scale according to the width of the parent.</p>
 <CodeHighlight className="language-jsx">
 {`
 <div className="p-grid">
