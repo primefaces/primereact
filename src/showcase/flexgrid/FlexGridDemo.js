@@ -880,7 +880,7 @@ export class FlexGridDoc extends Component {
                                 <tbody>
                                     <tr>
                                         <td>p-col-align-stretch</td>
-                                        <td> stretch to fill the container.</td>
+                                        <td>Stretch to fill the container.</td>
                                     </tr>
                                     <tr>
                                         <td>p-col-align-start</td>
