@@ -3,218 +3,175 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 
-export class TreeNode extends Component {
+class UITreeNode extends Component {
     
     static defaultProps = {
         node: null,
-        index: null,
-        parentNode: null,
-        root: false,
-        isHorizontal: false,
         selectionMode: null,
-        onNodeTouchEnd: null,
-        onNodeClick: null,
-        isSelected: null,
-        onNodeExpand: null,
-        onNodeCollapse: null
+        expandedKeys: null,
+        onExpand: null,
+        onCollapse: null,
+        onToggle: null
     }
 
     static propsTypes = {
-        node: PropTypes.any,
-        index: PropTypes.string,
-        parentNode: PropTypes.any,
-        root: PropTypes.bool,
-        isHorizontal: PropTypes.bool,
+        node: PropTypes.object,
         selectionMode: PropTypes.string,
-        onNodeTouchEnd: PropTypes.func,
-        onNodeClick: PropTypes.func,
-        isSelected: PropTypes.func,
-        onNodeExpand: PropTypes.func,
-        onNodeCollapse: PropTypes.func
+        expandedKeys: PropTypes.object,
+        onExpand: PropTypes.func,
+        onCollapse: PropTypes.func,
+        onToggle: PropTypes.func
     }
 
     constructor(props) {
         super(props);
-        this.node = this.props.node;
-        this.node.parent = this.props.parentNode;
-        this.state = { expanded: this.node.expanded };
-        this.toggle = this.toggle.bind(this);
-    }
-
-    getIcon() {
-        var icon;
-
-        if (this.node.icon)
-            icon = this.node.icon;
-        else
-            icon = this.state.expanded && this.node.children && this.node.children.length ? this.node.expandedIcon : this.node.collapsedIcon;
-
-        return 'p-treenode-icon ' + icon;
-    }
-
-    isLeaf(node) {
-        return this.node.leaf === false ? false : !(this.node.children && this.node.children.length);
-    }
-
-    toggle(event) {
-        if(this.state.expanded && this.props.onNodeCollapse) {
-            this.props.onNodeCollapse({originalEvent: event, node: this.node});
-        }
-        else if(this.props.onNodeExpand) {
-            this.props.onNodeExpand({originalEvent: event, node: this.node});
-        }
-
-        this.setState({ expanded: !this.state.expanded });
-    }
-
-    renderVerticalTree() {
-        var nodeClass = classNames('p-treenode', this.node.className, {
-            'p-treenode-leaf': this.isLeaf(this.node)
-        });
-
-        var labelClass = classNames('p-treenode-label', { 'p-highlight': this.props.isSelected(this.node) }),
-            label = (<span className={labelClass}>
-                <span>{this.node.label}</span>
-            </span>);
-
-        var togglerClass = classNames('p-tree-toggler pi pi-fw', {
-            'pi-caret-right': !this.state.expanded,
-            'pi-caret-down': this.state.expanded
-        });
-
-        var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
-            iconClass = this.getIcon();
-
-        if (this.props.selectionMode === 'checkbox') {
-            var checkboxIconClass = classNames('p-checkbox-icon p-c pi', {
-                'pi-check': this.props.isSelected(this.node),
-                'pi-minus': this.node.partialSelected
-            }),
-                checkbox = (<div className="p-checkbox">
-                    <div className="p-checkbox-box p-component">
-                        <span className={checkboxIconClass}></span>
-                    </div>
-                </div>);
-        }
-
-        var nodeContentClass = classNames('p-treenode-content', {
-            'p-treenode-selectable': this.props.selectionMode && this.node.selectable !== false
-        }),
-            nodeContent = (
-                <div className={nodeContentClass} onClick={(e) => this.props.onNodeClick(e, this.node)} onTouchEnd={this.props.onNodeTouchEnd}>
-                    <span className={togglerClass} onClick={this.toggle}></span>
-                    {checkbox}
-                    {hasIcon && <span className={iconClass}></span>}
-                    {label}
-                </div>
-            );
-
-        var nodeChildren = (this.node.children && this.state.expanded) && (<ul style={{ 'display': this.state.expanded ? 'block' : 'none' }} className="p-treenode-children">
-            {
-                this.node.children && this.node.children.map((child, i) => {
-                    return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
-                        onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={false} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
-                })
+        if (!this.props.onToggle) {
+            this.state = {
+                expanded: props.node.defaultExpanded
             }
-        </ul>);
+        }
 
-        return (<li className={nodeClass} key={this.props.index}>
-            {nodeContent}
-            {nodeChildren}
-        </li>);
+        this.onTogglerClick = this.onTogglerClick.bind(this);
     }
 
-    renderHorizontalTree() {
-        var isFirstChild = String(this.props.index).slice(-1) === "0",
-            isLastChild = this.node.parent && String(this.props.index).slice(-1) === String(this.node.parent.children.length - 1);
+    isLeaf() {
+        return this.props.node.leaf === false ? false : !(this.props.node.children && this.props.node.children.length);
+    }
 
-        var connector = (!this.props.root && <td className="p-treenode-connector">
-            <table className="p-treenode-connector-table">
-                <tbody>
-                    <tr>
-                        <td className={!isFirstChild ? "p-treenode-connector-line" : ""}></td>
-                    </tr>
-                    <tr>
-                        <td className={!isLastChild ? "p-treenode-connector-line" : ""}></td>
-                    </tr>
-                </tbody>
-            </table>
-        </td>);
-
-        var nodeClass = classNames('p-treenode', this.node.className, {
-            'p-treenode-collapsed': !this.state.expanded
-        });
-
-        var label = (<span className="p-treenode-label">
-            <span>{this.node.label}</span>
-        </span>);
-
-        var togglerClass = classNames('p-tree-toggler pi pi-fw', {
-            'pi-plus': !this.state.expanded,
-            'pi-minus': this.state.expanded
-        });
-
-        var hasIcon = (this.node.icon || this.node.expandedIcon || this.node.collapsedIcon),
-            iconClass = this.getIcon();
-
-        var nodeContentClass = classNames('p-treenode-content', {
-            'p-treenode-selectable': this.props.selectionMode && this.node.selectable !== false,
-            'p-highlight': this.props.isSelected(this.node)
-        }),
-            nodeContent = (
-                <td className={nodeClass}>
-                    <div className={nodeContentClass} onClick={(e) => this.props.onNodeClick(e, this.node)} onTouchEnd={this.props.onNodeTouchEnd}>
-                        {!this.isLeaf() && <span className={togglerClass} onClick={this.toggle}></span>}
-                        {hasIcon && <span className={iconClass}></span>}
-                        {label}
-                    </div>
-                </td>
-            );
-
-        var nodeChildren = (this.node.children && this.state.expanded) && (<td className="p-treenode-children-container" style={{ 'display': this.state.expanded ? 'table-cell' : 'none' }}>
-            <div className="p-treenode-children">
-                {
-                    this.node.children && this.node.children.map((child, i) => {
-                        return (<TreeNode key={this.props.index + '_' + i} node={child} index={this.props.index + '_' + i} parentNode={this.node} selectionMode={this.props.selectionMode} isSelected={this.props.isSelected}
-                            onNodeTouchEnd={this.props.onNodeTouchEnd} onNodeClick={this.props.onNodeClick} isHorizontal={true} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
-                    })
+    onTogglerClick(event) {
+        //uncontrolled
+        if (!this.props.onToggle) {
+            this.setState(prevState => {
+                return {
+                    expanded: !prevState.expanded
                 }
-            </div>
-        </td>);
+            },
+            () => {
+                this.invokeToggleEvents(event, this.state.expanded);
+            });
+        }
+        //controlled
+        else {
+            let expandedKeys = this.props.expandedKeys ? {...this.props.expandedKeys} : {};
+            let expanded = expandedKeys[this.props.node.key] !== undefined;
+            if (expanded)
+                delete expandedKeys[this.props.node.key];
+            else
+                expandedKeys[this.props.node.key] = true;
+            
+            this.props.onToggle({
+                originalEvent: event,
+                value: expandedKeys
+            });
 
-        var tbody = (<tbody>
-            <tr>
-                {connector}
-                {nodeContent}
-                {nodeChildren}
-            </tr>
-        </tbody>);
+            this.invokeToggleEvents(event, !expanded);
+        }
+    }
 
-        if (this.props.root) {
-            return tbody;
+    invokeToggleEvents(event, expanded) {
+        if (expanded) {
+            if (this.props.onExpand) {
+                this.props.onExpand({
+                    originalEvent: event,
+                    node: this.props.node
+                });
+            }
         }
         else {
-            return (<table>{tbody}</table>);
+            if (this.props.onExpand) {
+                this.props.onCollapse({
+                    originalEvent: event,
+                    node: this.props.node
+                });
+            }
         }
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        let nextNode = nextProps.node;
-        if(nextNode.hasOwnProperty("expanded") && prevState.expanded !== nextNode.expanded) {
-            return {
-                expanded: nextNode.expanded
-            };
+    isExpanded() {
+        if (this.props.onToggle)
+            return this.props.expandedKeys && this.props.expandedKeys[this.props.node.key] !== undefined;
+        else
+            return this.state.expanded;
+    }
+
+    renderLabel() {
+        return (
+            <span className="p-treenode-label">
+                {this.props.node.label}
+            </span>
+        );
+    }
+
+    renderIcon(expanded) {
+        let icon = this.props.node.icon || (expanded  ? this.props.node.expandedIcon : this.props.node.collapsedIcon);
+
+        if (icon) {
+            let className = classNames('p-treenode-icon', icon);
+
+            return (
+               <span className={className}></span>
+            );
         }
-        return null;
+        else {
+            return null;
+        }
+    }
+
+    renderToggler(expanded) {
+        const className = classNames('p-tree-toggler p-unselectable-text pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
+
+        return (
+            <span className={className} onClick={this.onTogglerClick}></span>
+        );
+    }
+
+    renderContent() {
+        const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false)});
+        const expanded = this.isExpanded();
+        const toggler = this.renderToggler(expanded);
+        const icon = this.renderIcon(expanded);
+        const label = this.renderLabel();
+
+        return (
+            <div className={className}>
+                {toggler}
+                {icon}
+                {label}
+            </div>
+        );
+    }
+
+    renderChildren() {
+        if (this.props.node.children && this.props.node.children.length && this.isExpanded()) {
+            return (
+                <ul className="p-treenode-children">
+                    {
+                        this.props.node.children.map((childNode, index) => {
+                            return (
+                                <UITreeNode key={childNode.label} node={childNode} selectionMode={this.props.selectionMode} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} 
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} />
+                            );
+                        })
+                    }
+                </ul>
+            )
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
-        if (this.props.isHorizontal) {
-            return this.renderHorizontalTree();
-        }
-        else {
-            return this.renderVerticalTree();
-        }
+        const className = classNames('p-treenode', this.props.node.className, {'p-treenode-leaf': this.isLeaf()})
+        const content = this.renderContent();
+        const children = this.renderChildren();
+
+        return (
+           <li className={className} style={this.props.node.style}>
+                {content}
+                {children}
+           </li>
+        );
     }
 }
 
@@ -225,17 +182,19 @@ export class Tree extends Component {
         value: null,
         selectionMode: null,
         selection: null,
-        selectionChange: null,
+        onSelectionChange: null,
         layout: 'vertical',
-        onNodeSelect: null,
-        onNodeUnselect: null,
-        onNodeExpand: null,
-        onNodeCollapse: null,
+        expandedKeys: null,
         style: null,
         className: null,
         metaKeySelection: true,
         propagateSelectionUp: true,
-        propagateSelectionDown: true
+        propagateSelectionDown: true,
+        onSelect: null,
+        onUnselect: null,
+        onExpand: null,
+        onCollapse: null,
+        onToggle: null
     }
 
     static propsTypes = {
@@ -243,326 +202,74 @@ export class Tree extends Component {
         value: PropTypes.any.isRequired,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
-        selectionChange: PropTypes.func.isRequired,
+        onSelectionChange: PropTypes.func.isRequired,
         layout: PropTypes.string,
-        onNodeSelect: PropTypes.func,
-        onNodeUnselect: PropTypes.func,
-        onNodeExpand: PropTypes.func,
-        onNodeCollapse: PropTypes.func,
+        expandedKeys: PropTypes.object,
         style: PropTypes.object,
         className: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
-        propagateSelectionDown: PropTypes.bool
+        propagateSelectionDown: PropTypes.bool,
+        onSelect: PropTypes.func,
+        onUnselect: PropTypes.func,
+        onExpand: PropTypes.func,
+        onCollapse: PropTypes.func,
+        onToggle: PropTypes.func
     }
 
     constructor(props) {
         super(props);
-        this.onNodeTouchEnd = this.onNodeTouchEnd.bind(this);
-        this.onNodeClick = this.onNodeClick.bind(this);
-        this.isSelected = this.isSelected.bind(this);
+        this.onToggle = this.onToggle.bind(this);
     }
 
-    isSelected(node) {
-        return this.findIndexInSelection(node) !== -1;
-    }
-
-    findIndexInSelection(node) {
-        var index = -1;
-
-        if (this.props.selectionMode && this.selection) {
-            if (this.isSingleSelectionMode()) {
-                index = (ObjectUtils.equals(this.selection, node)) ? 0 : - 1;
+    onToggle(event) {
+        if (event.expanded) {
+            if (this.props.onNodeExpand) {
+                this.props.onNodeExpand(event);
             }
-            else {
-                for (var i = 0; i < this.selection.length; i++) {
-                    if (ObjectUtils.equals(this.selection[i], node)) {
-                        index = i;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return index;
-    }
-
-    propagateUp(node, select) {
-        if (node.children && node.children.length) {
-            var selectedCount = 0;
-            var childPartialSelected = false;
-            for (var child of node.children) {
-                if (this.isSelected(child)) {
-                    selectedCount++;
-                }
-                else if (child.partialSelected) {
-                    childPartialSelected = true;
-                }
-            }
-
-            if (select && selectedCount === node.children.length) {
-                this.selection = [...this.selection || [], node];
-                node.partialSelected = false;
-            }
-            else {
-                if (!select) {
-                    var index = this.findIndexInSelection(node);
-                    if (index >= 0) {
-                        this.selection = this.selection.filter((val, i) => i !== index);
-                    }
-                }
-
-                if (childPartialSelected || (selectedCount > 0 && selectedCount !== node.children.length))
-                    node.partialSelected = true;
-                else
-                    node.partialSelected = false;
-            }
-        }
-
-        var parent = node.parent;
-        if (parent) {
-            this.propagateUp(parent, select);
-        }
-    }
-
-    propagateDown(node, select) {
-        var index = this.findIndexInSelection(node);
-
-        if (select && index === -1) {
-            this.selection = [...this.selection || [], node];
-        }
-        else if (!select && index > -1) {
-            this.selection = this.selection.filter((val, i) => i !== index);
-        }
-
-        node.partialSelected = false;
-
-        if (node.children && node.children.length) {
-            for (var child of node.children) {
-                this.propagateDown(child, select);
-            }
-        }
-    }
-
-    isSingleSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'single';
-    }
-
-    isMultipleSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'multiple';
-    }
-
-    isCheckboxSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'checkbox';
-    }
-
-    onNodeClick(event, node) {
-        var eventTarget = (event.target);
-
-        if (eventTarget.className && eventTarget.className.indexOf('p-tree-toggler') === 0) {
-            return;
-        }
-        else if (this.props.selectionMode) {
-            if (node.selectable === false) {
-                return;
-            }
-
-            var index = this.findIndexInSelection(node);
-            var selected = (index >= 0);
-
-            if (this.isCheckboxSelectionMode()) {
-                if (selected) {
-                    if (this.props.propagateSelectionDown)
-                        this.propagateDown(node, false);
-                    else
-                        this.selection = this.selection.filter((val, i) => i !== index);
-
-                    if (this.props.propagateSelectionUp && node.parent) {
-                        this.propagateUp(node.parent, false);
-                    }
-
-                    this.props.selectionChange({
-                        originalEvent: event,
-                        selection: this.selection
-                    });
-
-                    if (this.props.onNodeUnselect) {
-                        this.props.onNodeUnselect({
-                            originalEvent: event,
-                            node: node
-                        });
-                    }
-                }
-                else {
-                    if (this.props.propagateSelectionDown)
-                        this.propagateDown(node, true);
-                    else
-                        this.selection = [...this.selection || [], node];
-
-                    if (this.props.propagateSelectionUp && node.parent) {
-                        this.propagateUp(node.parent, true);
-                    }
-
-                    this.props.selectionChange({
-                        originalEvent: event,
-                        selection: this.selection
-                    });
-
-                    if (this.props.onNodeSelect) {
-                        this.props.onNodeSelect({
-                            originalEvent: event,
-                            node: node
-                        });
-                    }
-                }
-            }
-            else {
-                var metaSelection = this.nodeTouched ? false : this.props.metaKeySelection;
-
-                if (metaSelection) {
-                    var metaKey = (event.metaKey || event.ctrlKey);
-
-                    if (selected && metaKey) {
-                        if (this.isSingleSelectionMode()) {
-                            this.selection = null;
-                            this.props.selectionChange({
-                                originalEvent: event,
-                                selection: null
-                            });
-                        }
-                        else {
-                            this.selection = this.selection.filter((val, i) => i !== index);
-                            this.props.selectionChange({
-                                originalEvent: event,
-                                selection: this.selection
-                            });
-                        }
-
-                        if (this.props.onNodeUnselect) {
-                            this.props.onNodeUnselect({
-                                originalEvent: event,
-                                node: node
-                            });
-                        }
-                    }
-                    else {
-                        if (this.isSingleSelectionMode()) {
-                            this.selection = node;
-                            this.props.selectionChange({
-                                originalEvent: event,
-                                selection: node
-                            });
-                        }
-                        else if (this.isMultipleSelectionMode()) {
-                            this.selection = (!metaKey) ? [] : this.selection || [];
-                            this.selection = [...this.selection, node];
-                            this.props.selectionChange({
-                                originalEvent: event,
-                                selection: this.selection
-                            });
-                        }
-
-                        if (this.props.onNodeSelect) {
-                            this.props.onNodeSelect({
-                                originalEvent: event,
-                                node: node
-                            });
-                        }
-                    }
-                }
-                else {
-                    if (this.isSingleSelectionMode()) {
-                        if (selected) {
-                            this.selection = null;
-                            if (this.props.onNodeUnselect) {
-                                this.props.onNodeUnselect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
-                        }
-                        else {
-                            this.selection = node;
-                            if (this.props.onNodeSelect) {
-                                this.props.onNodeSelect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
-                        }
-                    }
-                    else {
-                        if (selected) {
-                            this.selection = this.selection.filter((val, i) => i !== index);
-                            if (this.props.onNodeUnselect) {
-                                this.props.onNodeUnselect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
-                        }
-                        else {
-                            this.selection = [...this.selection || [], node];
-                            if (this.props.onNodeSelect) {
-                                this.props.onNodeSelect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
-                        }
-                    }
-
-                    this.props.selectionChange({
-                        originalEvent: event,
-                        selection: this.selection
-                    });
-                }
-            }
-        }
-
-        this.nodeTouched = false;
-    }
-
-    onNodeTouchEnd() {
-        this.nodeTouched = true;
-    }
-
-    isHorizontal() {
-        return this.props.layout === 'horizontal';
-    }
-
-    render() {
-        if(this.props.selection && this.selection !== this.props.selection) {
-            this.selection = this.props.selection;
-        }
-
-        var treeClass = classNames('p-tree p-component', this.props.className, {
-            'p-tree-selectable': this.props.selectionMode,
-            'p-tree-horizontal': this.isHorizontal()
-        });
-
-        var container;
-        if (this.isHorizontal()) {
-            container = this.props.value && this.props.value[0] && (
-                <table>
-                    <TreeNode node={this.props.value[0]} root={true} index={0} isHorizontal={true} selectionMode={this.props.selectionMode} 
-                        onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}></TreeNode>
-                </table>)
         }
         else {
-            container = (<ul className="p-tree-container">
-                {
-                    this.props.value && this.props.value.map((node, index) => {
-                        return (<TreeNode key={'node_' + index} node={node} index={index} parentNode={this.props.value} isHorizontal={false} selectionMode={this.props.selectionMode}
-                            onNodeTouchEnd={this.onNodeTouchEnd} onNodeClick={this.onNodeClick} isSelected={this.isSelected} onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}/>)
-                    })
-                }
-            </ul>);
+            if (this.props.onNodeCollapse) {
+                this.props.onNodeCollapse(event);
+            }
         }
+    }
+
+    renderRootChild(node) {
+        return (
+            <UITreeNode key={node.label} node={node} selectionMode={this.props.selectionMode} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} 
+                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} />
+        );
+    };
+
+    renderRootChildren() {
+        return (
+            this.props.value.map((node) => this.renderRootChild(node))
+        );
+    }
+
+    renderRoot() {
+        if (this.props.value) {
+            const rootNodes = this.renderRootChildren();
+
+            return (
+                <ul className="p-tree-container">
+                    {rootNodes}
+                </ul>
+            );
+        }
+        else {
+            return null;
+        }
+    } 
+
+    render() {
+        const className = classNames('p-tree p-components', {'p-tree-selectable': this.props.selectionMode});
+        const root = this.renderRoot();
 
         return (
-            <div id={this.props.id} className={treeClass} style={this.props.style}>
-                {container}
+            <div id={this.props.id} className={className} style={this.props.style}>
+                {root}
             </div>
         );
     }
