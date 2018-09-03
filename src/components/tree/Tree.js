@@ -12,6 +12,7 @@ class UITreeNode extends Component {
         expandedKeys: null,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
@@ -29,6 +30,7 @@ class UITreeNode extends Component {
         expandedKeys: PropTypes.object,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
@@ -345,9 +347,11 @@ class UITreeNode extends Component {
     }
 
     renderLabel() {
+        const label = this.props.nodeTemplate ? this.props.nodeTemplate(this.props.node) : this.props.node.label;
+        
         return (
             <span className="p-treenode-label">
-                {this.props.node.label}
+                {label}
             </span>
         );
     }
@@ -424,8 +428,7 @@ class UITreeNode extends Component {
                                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} 
-                                    onPropagateUp={this.propagateUp} />
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}/>
                             );
                         })
                     }
@@ -465,6 +468,7 @@ export class Tree extends Component {
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
@@ -484,6 +488,7 @@ export class Tree extends Component {
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
@@ -515,7 +520,7 @@ export class Tree extends Component {
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} />
+                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} nodeTemplate={this.props.nodeTemplate} />
         );
     };
 

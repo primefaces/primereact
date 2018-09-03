@@ -15,7 +15,8 @@ export class TreeDemo extends Component {
             selectedNodeKey: null, 
             selectedNodeKeys1: null, 
             selectedNodeKeys2: null, 
-            selectedNodeKeys3: null           
+            selectedNodeKeys3: null,
+            navigation: this.createNavigation()         
         };
 
         this.nodeService = new NodeService();
@@ -23,6 +24,32 @@ export class TreeDemo extends Component {
         this.onExpand = this.onExpand.bind(this);
         this.onCollapse = this.onCollapse.bind(this);
         this.toggleMovies = this.toggleMovies.bind(this);
+        this.nodeTemplate = this.nodeTemplate.bind(this);
+    }
+
+    createNavigation() {
+        return [
+            {
+                label: 'Insallation',
+                children: [
+                    {label: 'Getting Started', url:'https://reactjs.org/docs/getting-started.html'},
+                    {label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html'},
+                    {label: 'Create an App', url:'https://reactjs.org/docs/create-a-new-react-app.html'},
+                    {label: 'CDN Links', url: 'https://reactjs.org/docs/cdn-links.html'}
+                ]
+            },
+            {
+                label: 'Main Concepts',
+                children: [
+                    {label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html'},
+                    {label: 'Introducing JSX', url: 'https://reactjs.org/docs/introducing-jsx.html'},
+                    {label: 'Rendering Elements', url: 'https://reactjs.org/docs/rendering-elements.html'},
+                    {label: 'Components and Props', url: 'https://reactjs.org/docs/components-and-props.html'},
+                    {label: 'State and LifeCycle', url: 'https://reactjs.org/docs/state-and-lifecycle.html'},
+                    {label: 'Handling Events', url: 'https://reactjs.org/docs/handling-events.html'}
+                ]
+            }
+        ];
     }
 
     onExpand(event) {
@@ -41,6 +68,19 @@ export class TreeDemo extends Component {
             expandedKeys['2'] = true;
 
         this.setState({expandedKeys: expandedKeys});
+    }
+
+    nodeTemplate(node) {
+        if (node.url) {
+            return (
+                <a href={node.url}>{node.label}</a>
+            )
+        }
+        else {
+            return (
+                <b>{node.label}</b>
+            )
+        }
     }
 
     componentDidMount() {
@@ -77,6 +117,9 @@ export class TreeDemo extends Component {
 
                     <h3>Checkbox Selection</h3>
                     <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})} />
+                
+                    <h3>Templating</h3>
+                    <Tree value={this.state.navigation} nodeTemplate={this.nodeTemplate} />
                 </div>
 
                 <TreeDoc />
