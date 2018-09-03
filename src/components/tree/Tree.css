@@ -150,3 +150,31 @@
     vertical-align: bottom;
     margin-right: .25em;
 }
+
+/** Loading **/
+.p-tree.p-tree-loading {
+    position: relative;
+    min-height: 4em;
+}
+
+.p-tree .p-tree-loading-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.p-tree .p-tree-loading-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    margin-top: -1em;
+    margin-left: -1em;
+}
+
+.p-tree .p-tree-loading-content .p-tree-loading-icon {
+    font-size: 2em;
+} 

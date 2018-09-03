@@ -13,8 +13,10 @@ export class TreeDemo extends Component {
         this.state = { 
             nodes: null,
             lazyNodes: this.createLazyNodes(),
+            delayedNodes: null,
             navigation: this.createNavigation(),  
             expandedKeys: {},
+            loading: true,
             selectedNodeKey1: null, 
             selectedNodeKey2: null, 
             selectedNodeKeys1: null, 
@@ -137,6 +139,13 @@ export class TreeDemo extends Component {
 
     componentDidMount() {
         this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+
+        setTimeout(() => {
+            this.nodeService.getTreeNodes().then(data => this.setState({
+                delayedNodes: data,
+                loading: false
+            }));
+        }, 3000);
     }
 
     render() {
@@ -159,6 +168,9 @@ export class TreeDemo extends Component {
                     <Button onClick={this.toggleMovies} label="Toggle Movies" />
                     <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} 
                         onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
+
+                    <h3>Loading Status</h3>
+                    <Tree value={this.state.delayedNodes} loading={this.state.loading} l/>
 
                     <h3>Single Selection</h3>
                     <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})} />

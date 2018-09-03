@@ -468,6 +468,8 @@ export class Tree extends Component {
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        loading: false,
+        loadingIcon: 'pi pi-spinner',
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -488,6 +490,8 @@ export class Tree extends Component {
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        loading: PropTypes.bool,
+        loadingIcon: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -543,15 +547,28 @@ export class Tree extends Component {
         else {
             return null;
         }
-    } 
+    }
+    
+    renderLoader() {
+        let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
+
+        return (
+            <React.Fragment>
+                <div className="p-tree-loading-mask p-component-overlay"></div>
+                <div className="p-tree-loading-content">
+                    <i className={icon} />
+                </div>
+            </React.Fragment>
+        );
+    }
 
     render() {
-        const className = classNames('p-tree p-components', {'p-tree-selectable': this.props.selectionMode});
-        const root = this.renderRoot();
+        const className = classNames('p-tree p-components', {'p-tree-selectable': this.props.selectionMode, 'p-tree-loading': this.props.loading});
+        const content = this.props.loading ? this.renderLoader() : this.renderRoot();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                {root}
+                {content}
             </div>
         );
     }
