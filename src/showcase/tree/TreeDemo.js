@@ -10,12 +10,10 @@ export class TreeDemo extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            data1: null,
-            data2: null,
-            selectedFile1: null, 
-            selectedFile2: null,
-            selectedFiles1: [], 
-            selectedFiles2: [],
+            nodes: null,
+            selectedNodeKey: null, 
+            selectedNodeKeys1: null, 
+            selectedNodeKeys2: null, 
             expandedKeys: {}
         };
 
@@ -45,8 +43,7 @@ export class TreeDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({data1: data}));
-        this.nodeService.getTreeNodes().then(data => this.setState({data2: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
     }
 
     render() {
@@ -61,12 +58,21 @@ export class TreeDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Uncontrolled</h3>
-                    <Tree value={this.state.data1} />
+                    <Tree value={this.state.nodes} />
 
                     <h3>Controlled</h3>
                     <Button onClick={this.toggleMovies} label="Toggle Movies" />
-                    <Tree value={this.state.data2} expandedKeys={this.state.expandedKeys} 
+                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} 
                         onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
+
+                    <h3>Single Selection</h3>
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} />
+
+                    <h3>Multiple Selection with MetaKey</h3>
+                    <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} />
+
+                    <h3>Multiple Selection withoyt MetaKey</h3>
+                    <Tree value={this.state.nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} />
                 </div>
 
                 <TreeDoc />
