@@ -330,7 +330,7 @@ class UITreeNode extends Component {
             }
         }
         else {
-            if (this.props.onExpand) {
+            if (this.props.onCollapse) {
                 this.props.onCollapse({
                     originalEvent: event,
                     node: this.props.node

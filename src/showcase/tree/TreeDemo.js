@@ -12,13 +12,14 @@ export class TreeDemo extends Component {
         super(props);
         this.state = { 
             nodes: null,
+            lazyNodes: this.createLazyNodes(),
+            navigation: this.createNavigation(),  
             expandedKeys: {},
             selectedNodeKey1: null, 
             selectedNodeKey2: null, 
             selectedNodeKeys1: null, 
             selectedNodeKeys2: null, 
-            selectedNodeKeys3: null,
-            navigation: this.createNavigation()         
+            selectedNodeKeys3: null     
         };
 
         this.nodeService = new NodeService();
@@ -27,6 +28,7 @@ export class TreeDemo extends Component {
         this.onCollapse = this.onCollapse.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onUnselect = this.onUnselect.bind(this);
+        this.loadOnExpand = this.loadOnExpand.bind(this);
         this.toggleMovies = this.toggleMovies.bind(this);
         this.nodeTemplate = this.nodeTemplate.bind(this);
     }
@@ -56,6 +58,26 @@ export class TreeDemo extends Component {
         ];
     }
 
+    createLazyNodes() {
+        return [
+            {
+                key: '0',
+                label: 'Node 0',
+                leaf: false
+            },
+            {
+                key: '1',
+                label: 'Node 1',
+                leaf: false
+            },
+            {
+                key: '2',
+                label: 'Node 2',
+                leaf: false
+            }
+        ];
+    }
+
     onExpand(event) {
         this.growl.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
     }
@@ -70,6 +92,24 @@ export class TreeDemo extends Component {
 
     onUnselect(event) {
         this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
+    }
+
+    loadOnExpand(event) {
+        let node = {...event.node};
+        node.children = [];
+
+        for (let i = 0; i < 3; i++) {
+            node.children.push({
+                key: node.key + '-' + i,
+                label: 'Lazy ' + node.label + '-' + i
+            });
+        }
+        
+        let value = [...this.state.lazyNodes];
+        value[parseInt(event.node.key)] = node; 
+        this.setState({
+            lazyNodes: value
+        })
     }
 
     toggleMovies() {
@@ -112,7 +152,7 @@ export class TreeDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el} />
 
-                    <h3>Uncontrolled</h3>
+                    <h3 className="first">Uncontrolled</h3>
                     <Tree value={this.state.nodes} />
 
                     <h3>Controlled</h3>
@@ -135,6 +175,9 @@ export class TreeDemo extends Component {
                     <h3>Events</h3>
                     <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({selectedNodeKey2: e.value})} 
                             onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
+
+                    <h3>Lazy Loading</h3>
+                    <Tree value={this.state.lazyNodes} onExpand={this.loadOnExpand} />
 
                     <h3>Templating</h3>
                     <Tree value={this.state.navigation} nodeTemplate={this.nodeTemplate} />
