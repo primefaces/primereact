@@ -114,8 +114,8 @@ class UITreeNode extends Component {
                         });
                     }
 
-                    if (this.props.onNodeUnselect) {
-                        this.props.onNodeUnselect({
+                    if (this.props.onUnselect) {
+                        this.props.onUnselect({
                             originalEvent: event,
                             node: this.props.node
                         });
@@ -135,8 +135,8 @@ class UITreeNode extends Component {
                             });
                         }
 
-                    if (this.props.onNodeSelect) {
-                        this.props.onNodeSelect({
+                    if (this.props.onSelect) {
+                        this.props.onSelect({
                             originalEvent: event,
                             node: this.props.node
                         });
@@ -159,8 +159,8 @@ class UITreeNode extends Component {
                             delete selectionKeys[this.props.node.key];
                         }
     
-                        if (this.props.onNodeUnselect) {
-                            this.props.onNodeUnselect({
+                        if (this.props.onUnselect) {
+                            this.props.onUnselect({
                                 originalEvent: event,
                                 node: this.props.node
                             });
@@ -175,8 +175,8 @@ class UITreeNode extends Component {
                             selectionKeys[this.props.node.key] = true;
                         }
     
-                        if (this.props.onNodeSelect) {
-                            this.props.onNodeSelect({
+                        if (this.props.onSelect) {
+                            this.props.onSelect({
                                 originalEvent: event,
                                 node: this.props.node
                             });
@@ -188,8 +188,8 @@ class UITreeNode extends Component {
                         if (selected) {
                             selectionKeys = null;
     
-                            if (this.props.onNodeUnselect) {
-                                this.props.onNodeUnselect({
+                            if (this.props.onUnselect) {
+                                this.props.onUnselect({
                                     originalEvent: event,
                                     node: this.props.node
                                 });
@@ -198,8 +198,8 @@ class UITreeNode extends Component {
                         else {
                             selectionKeys = this.props.node.key;
     
-                            if (this.props.onNodeSelect) {
-                                this.props.onNodeSelect({
+                            if (this.props.onSelect) {
+                                this.props.onSelect({
                                     originalEvent: event,
                                     node: this.props.node
                                 });
@@ -211,8 +211,8 @@ class UITreeNode extends Component {
                             selectionKeys = {...this.props.selectionKeys};
                             delete selectionKeys[this.props.node.key];
     
-                            if (this.props.onNodeUnselect) {
-                                this.props.onNodeUnselect({
+                            if (this.props.onUnselect) {
+                                this.props.onUnselect({
                                     originalEvent: event,
                                     node: this.props.node
                                 });
@@ -222,8 +222,8 @@ class UITreeNode extends Component {
                             selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
                             selectionKeys[this.props.node.key] = true;
                             
-                            if (this.props.onNodeSelect) {
-                                this.props.onNodeSelect({
+                            if (this.props.onSelect) {
+                                this.props.onSelect({
                                     originalEvent: event,
                                     node: this.props.node
                                 });

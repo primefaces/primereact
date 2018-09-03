@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Tree} from '../../components/tree/Tree';
 import {Button} from '../../components/button/Button';
+import {Growl} from '../../components/growl/Growl';
 import {NodeService} from '../service/NodeService';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
@@ -12,7 +13,8 @@ export class TreeDemo extends Component {
         this.state = { 
             nodes: null,
             expandedKeys: {},
-            selectedNodeKey: null, 
+            selectedNodeKey1: null, 
+            selectedNodeKey2: null, 
             selectedNodeKeys1: null, 
             selectedNodeKeys2: null, 
             selectedNodeKeys3: null,
@@ -23,6 +25,8 @@ export class TreeDemo extends Component {
 
         this.onExpand = this.onExpand.bind(this);
         this.onCollapse = this.onCollapse.bind(this);
+        this.onSelect = this.onSelect.bind(this);
+        this.onUnselect = this.onUnselect.bind(this);
         this.toggleMovies = this.toggleMovies.bind(this);
         this.nodeTemplate = this.nodeTemplate.bind(this);
     }
@@ -53,11 +57,19 @@ export class TreeDemo extends Component {
     }
 
     onExpand(event) {
-        
+        this.growl.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
     }
 
     onCollapse(event) {
+        this.growl.show({severity: 'success', summary: 'Node Collapsed', detail: event.node.label});
+    }
 
+    onSelect(event) {
+        this.growl.show({severity: 'info', summary: 'Node Selected', detail: event.node.label});
+    }
+
+    onUnselect(event) {
+        this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
     }
 
     toggleMovies() {
@@ -98,6 +110,8 @@ export class TreeDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <Growl ref={(el) => this.growl = el} />
+
                     <h3>Uncontrolled</h3>
                     <Tree value={this.state.nodes} />
 
@@ -107,7 +121,7 @@ export class TreeDemo extends Component {
                         onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
 
                     <h3>Single Selection</h3>
-                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} />
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})} />
 
                     <h3>Multiple Selection with MetaKey</h3>
                     <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} />
@@ -117,7 +131,11 @@ export class TreeDemo extends Component {
 
                     <h3>Checkbox Selection</h3>
                     <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})} />
-                
+
+                    <h3>Events</h3>
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({selectedNodeKey2: e.value})} 
+                            onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
+
                     <h3>Templating</h3>
                     <Tree value={this.state.navigation} nodeTemplate={this.nodeTemplate} />
                 </div>
