@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ObjectUtils from '../utils/ObjectUtils';
 
 class UITreeNode extends Component {
     
@@ -11,12 +10,15 @@ class UITreeNode extends Component {
         selectionKeys: null,
         metaKeySelection: true,
         expandedKeys: null,
+        propagateSelectionUp: true,
+        propagateSelectionDown: true,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
-        onSelectionChange: null
+        onSelectionChange: null,
+        onPropagateUp: null
     }
 
     static propsTypes = {
@@ -25,12 +27,15 @@ class UITreeNode extends Component {
         selectionKeys: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         expandedKeys: PropTypes.object,
+        propagateSelectionUp: PropTypes.bool,
+        propagateSelectionDown: PropTypes.bool,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
-        onSelectionChange: PropTypes.func
+        onSelectionChange: PropTypes.func,
+        onPropagateUp: PropTypes.func
     }
 
     constructor(props) {
@@ -44,6 +49,7 @@ class UITreeNode extends Component {
         this.onClick = this.onClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
+        this.propagateUp = this.propagateUp.bind(this);
     }
 
     isLeaf() {
@@ -86,20 +92,24 @@ class UITreeNode extends Component {
         }
         
         if (this.props.selectionMode && this.props.node.selectable !== false) {
-            const selected = this.isSelected();
-            const metaSelection = this.nodeTouched ? false : this.props.metaKeySelection;
             let selectionKeys;
-            
-            if (metaSelection) {
-                let metaKey = (event.metaKey||event.ctrlKey);
 
-                if (selected && metaKey) {
-                    if (this.isSingleSelectionMode()) {
-                        selectionKeys = null;
-                    }
-                    else {
-                        selectionKeys = {...this.props.selectionKeys};
+            if (this.isCheckboxSelectionMode()) {
+                const checked = this.isChecked();
+                selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};    
+
+                if (checked) {
+                    if (this.props.propagateSelectionDown)
+                        this.propagateDown(this.props.node, false, selectionKeys);
+                    else
                         delete selectionKeys[this.props.node.key];
+
+                    if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
+                        this.props.onPropagateUp({
+                            originalEvent: event,
+                            check: false,
+                            selectionKeys: selectionKeys
+                        });
                     }
 
                     if (this.props.onNodeUnselect) {
@@ -110,13 +120,18 @@ class UITreeNode extends Component {
                     }
                 }
                 else {
-                    if (this.isSingleSelectionMode()) {
-                        selectionKeys = this.props.node.key;
-                    }
-                    else if (this.isMultipleSelectionMode()) {
-                        selectionKeys = !metaKey ? {} : (this.props.selectionKeys ? {...this.props.selectionKeys} : {});
-                        selectionKeys[this.props.node.key] = true;
-                    }
+                    if (this.props.propagateSelectionDown)
+                        this.propagateDown(this.props.node, true, selectionKeys);
+                    else 
+                        selectionKeys[this.props.node.key] = {checked: true};
+ 
+                        if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
+                            this.props.onPropagateUp({
+                                originalEvent: event,
+                                check: true,
+                                selectionKeys: selectionKeys
+                            });
+                        }
 
                     if (this.props.onNodeSelect) {
                         this.props.onNodeSelect({
@@ -127,10 +142,21 @@ class UITreeNode extends Component {
                 }
             }
             else {
-                if (this.isSingleSelectionMode()) {
-                    if (selected) {
-                        selectionKeys = null;
+                const selected = this.isSelected();
+                const metaSelection = this.nodeTouched ? false : this.props.metaKeySelection;
 
+                if (metaSelection) {
+                    let metaKey = (event.metaKey||event.ctrlKey);
+    
+                    if (selected && metaKey) {
+                        if (this.isSingleSelectionMode()) {
+                            selectionKeys = null;
+                        }
+                        else {
+                            selectionKeys = {...this.props.selectionKeys};
+                            delete selectionKeys[this.props.node.key];
+                        }
+    
                         if (this.props.onNodeUnselect) {
                             this.props.onNodeUnselect({
                                 originalEvent: event,
@@ -139,8 +165,14 @@ class UITreeNode extends Component {
                         }
                     }
                     else {
-                        selectionKeys = this.props.node.key;
-
+                        if (this.isSingleSelectionMode()) {
+                            selectionKeys = this.props.node.key;
+                        }
+                        else if (this.isMultipleSelectionMode()) {
+                            selectionKeys = !metaKey ? {} : (this.props.selectionKeys ? {...this.props.selectionKeys} : {});
+                            selectionKeys[this.props.node.key] = true;
+                        }
+    
                         if (this.props.onNodeSelect) {
                             this.props.onNodeSelect({
                                 originalEvent: event,
@@ -150,26 +182,50 @@ class UITreeNode extends Component {
                     }
                 }
                 else {
-                    if (selected) {
-                        selectionKeys = {...this.props.selectionKeys};
-                        delete selectionKeys[this.props.node.key];
-
-                        if (this.props.onNodeUnselect) {
-                            this.props.onNodeUnselect({
-                                originalEvent: event,
-                                node: this.props.node
-                            });
+                    if (this.isSingleSelectionMode()) {
+                        if (selected) {
+                            selectionKeys = null;
+    
+                            if (this.props.onNodeUnselect) {
+                                this.props.onNodeUnselect({
+                                    originalEvent: event,
+                                    node: this.props.node
+                                });
+                            }
+                        }
+                        else {
+                            selectionKeys = this.props.node.key;
+    
+                            if (this.props.onNodeSelect) {
+                                this.props.onNodeSelect({
+                                    originalEvent: event,
+                                    node: this.props.node
+                                });
+                            }
                         }
                     }
                     else {
-                        selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
-                        selectionKeys[this.props.node.key] = true;
-                        
-                        if (this.props.onNodeSelect) {
-                            this.props.onNodeSelect({
-                                originalEvent: event,
-                                node: this.props.node
-                            });
+                        if (selected) {
+                            selectionKeys = {...this.props.selectionKeys};
+                            delete selectionKeys[this.props.node.key];
+    
+                            if (this.props.onNodeUnselect) {
+                                this.props.onNodeUnselect({
+                                    originalEvent: event,
+                                    node: this.props.node
+                                });
+                            }
+                        }
+                        else {
+                            selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
+                            selectionKeys[this.props.node.key] = true;
+                            
+                            if (this.props.onNodeSelect) {
+                                this.props.onNodeSelect({
+                                    originalEvent: event,
+                                    node: this.props.node
+                                });
+                            }
                         }
                     }
                 }
@@ -186,11 +242,64 @@ class UITreeNode extends Component {
         this.nodeTouched = false;
     }
 
+    propagateUp(event) {
+        let check = event.check;
+        let selectionKeys = event.selectionKeys;
+        let checkedChildCount = 0;
+        let childPartialSelected = false;
+        
+        for(let child of this.props.node.children) {
+            if(selectionKeys[child.key] && selectionKeys[child.key].checked)
+                checkedChildCount++;
+            else if(selectionKeys[child.key] && selectionKeys[child.key].partialChecked)
+                childPartialSelected = true;
+        }
+
+        if(check && checkedChildCount === this.props.node.children.length) {
+            selectionKeys[this.props.node.key] = {checked: true, partialChecked: false};
+        }
+        else {
+            if (!check) {
+                delete selectionKeys[this.props.node.key];
+            }
+
+            if(childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== this.props.node.children.length))
+                selectionKeys[this.props.node.key] = {checked: false, partialChecked: true};
+            else
+                selectionKeys[this.props.node.key] = {checked: false, partialChecked: false};
+        }
+
+        if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
+            this.props.onPropagateUp(event);
+        }
+    }
+
+    propagateDown(node, check, selectionKeys) {
+        if(check)
+            selectionKeys[node.key] = {checked: true, partialChecked: false};
+        else
+            delete selectionKeys[node.key];
+
+        if (node.children && node.children.length) {
+            for (let i = 0; i < node.children.length; i++) {
+                this.propagateDown(node.children[i], check, selectionKeys);
+            }
+        }
+    }
+
     isSelected() {
         if (this.props.selectionMode && this.props.selectionKeys)
             return this.isSingleSelectionMode() ? this.props.selectionKeys === this.props.node.key : this.props.selectionKeys[this.props.node.key] !== undefined;
         else
             return false;
+    }
+
+    isChecked() {
+        return this.props.selectionKeys ? this.props.selectionKeys[this.props.node.key] && this.props.selectionKeys[this.props.node.key].checked: false;
+    }
+
+    isPartialChecked() {
+        return this.props.selectionKeys ? this.props.selectionKeys[this.props.node.key] && this.props.selectionKeys[this.props.node.key].partialChecked: false;
     }
 
     isSingleSelectionMode() {
@@ -243,6 +352,26 @@ class UITreeNode extends Component {
         );
     }
 
+    renderCheckbox() {
+        if (this.isCheckboxSelectionMode() && this.props.node.selectable !== false) {
+            const checked = this.isChecked();
+            const partialChecked = this.isPartialChecked();
+            const className = classNames('p-checkbox-box', {'p-highlight': checked});
+            const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
+
+            return (
+                <div className="p-checkbox p-component">
+                    <div className={className}>
+                        <span className={icon}></span>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return null;
+        }
+    }
+
     renderIcon(expanded) {
         let icon = this.props.node.icon || (expanded  ? this.props.node.expandedIcon : this.props.node.collapsedIcon);
 
@@ -267,15 +396,17 @@ class UITreeNode extends Component {
     }
 
     renderContent() {
-        const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 'p-highlight': this.isSelected()});
+        const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 'p-highlight': this.isCheckboxSelectionMode() ? this.isChecked() : this.isSelected()});
         const expanded = this.isExpanded();
         const toggler = this.renderToggler(expanded);
+        const checkbox = this.renderCheckbox();
         const icon = this.renderIcon(expanded);
         const label = this.renderLabel();
 
         return (
             <div className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd}>
                 {toggler}
+                {checkbox}
                 {icon}
                 {label}
             </div>
@@ -291,8 +422,10 @@ class UITreeNode extends Component {
                             return (
                                 <UITreeNode key={childNode.label} node={childNode} selectionMode={this.props.selectionMode}
                                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
+                                    propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} />
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} 
+                                    onPropagateUp={this.propagateUp} />
                             );
                         })
                     }
@@ -326,7 +459,6 @@ export class Tree extends Component {
         selectionMode: null,
         selectionKeys: null,
         onSelectionChange: null,
-        layout: 'vertical',
         expandedKeys: null,
         style: null,
         className: null,
@@ -346,7 +478,6 @@ export class Tree extends Component {
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.null,
         onSelectionChange: PropTypes.func,
-        layout: PropTypes.string,
         expandedKeys: PropTypes.object,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -382,6 +513,7 @@ export class Tree extends Component {
         return (
             <UITreeNode key={node.label} node={node} selectionMode={this.props.selectionMode} 
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
+                    propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} />
         );

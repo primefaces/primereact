@@ -11,16 +11,17 @@ export class TreeDemo extends Component {
         super(props);
         this.state = { 
             nodes: null,
+            expandedKeys: {},
             selectedNodeKey: null, 
             selectedNodeKeys1: null, 
             selectedNodeKeys2: null, 
-            expandedKeys: {}
+            selectedNodeKeys3: null           
         };
 
         this.nodeService = new NodeService();
+
         this.onExpand = this.onExpand.bind(this);
         this.onCollapse = this.onCollapse.bind(this);
-
         this.toggleMovies = this.toggleMovies.bind(this);
     }
 
@@ -71,8 +72,11 @@ export class TreeDemo extends Component {
                     <h3>Multiple Selection with MetaKey</h3>
                     <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} />
 
-                    <h3>Multiple Selection withoyt MetaKey</h3>
+                    <h3>Multiple Selection without MetaKey</h3>
                     <Tree value={this.state.nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} />
+
+                    <h3>Checkbox Selection</h3>
+                    <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})} />
                 </div>
 
                 <TreeDoc />
