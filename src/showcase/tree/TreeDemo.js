@@ -19,7 +19,7 @@ export class TreeDemo extends Component {
             selectedNodeKey2: null, 
             selectedNodeKeys1: null, 
             selectedNodeKeys2: null, 
-            selectedNodeKeys3: null     
+            selectedNodeKeys3: null  
         };
 
         this.nodeService = new NodeService();
