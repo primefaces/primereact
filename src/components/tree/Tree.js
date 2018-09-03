@@ -236,10 +236,8 @@ class UITreeNode extends Component {
     }
 
     renderLabel() {
-        const className = classNames('p-treenode-label', {'p-highlight': this.isSelected()});
-
         return (
-            <span className={className}>
+            <span className="p-treenode-label">
                 {this.props.node.label}
             </span>
         );
@@ -269,7 +267,7 @@ class UITreeNode extends Component {
     }
 
     renderContent() {
-        const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false)});
+        const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 'p-highlight': this.isSelected()});
         const expanded = this.isExpanded();
         const toggler = this.renderToggler(expanded);
         const icon = this.renderIcon(expanded);
