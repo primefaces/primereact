@@ -421,7 +421,6 @@ class UITreeNode extends Component {
         if (this.props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
-                console.log('remove');
                 DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
             }
         }
