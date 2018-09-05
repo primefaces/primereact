@@ -76,6 +76,12 @@ import { OrderListDemo } from './showcase/orderlist/OrderListDemo';
 import { PickListDemo } from './showcase/picklist/PickListDemo';
 import { ScheduleDemo } from './showcase/schedule/ScheduleDemo';
 import { TreeDemo } from './showcase/tree/TreeDemo';
+import { TreeSelectionDemo } from './showcase/tree/TreeSelectionDemo';
+import { TreeEventsDemo } from './showcase/tree/TreeEventsDemo';
+import { TreeLazyDemo } from './showcase/tree/TreeLazyDemo';
+import { TreeTemplatingDemo } from './showcase/tree/TreeTemplatingDemo';
+import { TreeDragDropDemo } from './showcase/tree/TreeDragDropDemo';
+import { TreeContextMenuDemo } from './showcase/tree/TreeContextMenuDemo';
 import { TreeTableDemo } from './showcase/treetable/TreeTableDemo';
 import { TreeTableSortDemo } from './showcase/treetable/TreeTableSortDemo';
 import { TreeTableSelectionDemo } from './showcase/treetable/TreeTableSelectionDemo';
@@ -493,7 +499,13 @@ class App extends Component {
                     <Route path="/orderlist" component={OrderListDemo} />
                     <Route path="/picklist" component={PickListDemo} />
                     <Route path="/schedule" component={ScheduleDemo} />
-                    <Route path="/tree" component={TreeDemo} />
+                    <Route exact path="/tree" component={TreeDemo} />
+                    <Route path="/tree/selection" component={TreeSelectionDemo} />
+                    <Route path="/tree/events" component={TreeEventsDemo} />
+                    <Route path="/tree/lazy" component={TreeLazyDemo} />
+                    <Route path="/tree/templating" component={TreeTemplatingDemo} />
+                    <Route path="/tree/dragdrop" component={TreeDragDropDemo} />
+                    <Route path="/tree/contextmenu" component={TreeContextMenuDemo} />
                     <Route exact path="/treetable" component={TreeTableDemo} />
                     <Route path="/treetable/sort" component={TreeTableSortDemo} />
                     <Route path="/treetable/selection" component={TreeTableSelectionDemo} />
