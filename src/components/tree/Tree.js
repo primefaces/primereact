@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
 
 class UITreeNode extends Component {
     
     static defaultProps = {
         node: null,
+        index: null,
+        last: null,
+        parent: null,
+        path: null,
         selectionMode: null,
         selectionKeys: null,
         metaKeySelection: true,
         expandedKeys: null,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        dragdropScope: null,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -19,17 +25,25 @@ class UITreeNode extends Component {
         onCollapse: null,
         onToggle: null,
         onSelectionChange: null,
-        onPropagateUp: null
+        onPropagateUp: null,
+        onDragStart: null,
+        onDragEnd: null,
+        onDrop: null
     }
 
     static propsTypes = {
         node: PropTypes.object,
+        index: PropTypes.number,
+        last: PropTypes.number,
+        parent: PropTypes.object,
+        path: PropTypes.string,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         expandedKeys: PropTypes.object,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        dragdropScope: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -37,7 +51,10 @@ class UITreeNode extends Component {
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
         onSelectionChange: PropTypes.func,
-        onPropagateUp: PropTypes.func
+        onPropagateUp: PropTypes.func,
+        onDragStart: PropTypes.func,
+        onDragEnd: PropTypes.func,
+        onDrop: PropTypes.func
     }
 
     constructor(props) {
@@ -52,6 +69,13 @@ class UITreeNode extends Component {
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
         this.propagateUp = this.propagateUp.bind(this);
+
+        this.onDrop = this.onDrop.bind(this);
+        this.onDragOver = this.onDragOver.bind(this);
+        this.onDragEnter = this.onDragEnter.bind(this);
+        this.onDragLeave = this.onDragLeave.bind(this);
+        this.onDragStart = this.onDragStart.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
     }
 
     isLeaf() {
@@ -346,6 +370,85 @@ class UITreeNode extends Component {
             return this.state.expanded;
     }
 
+    onDropPoint(event, position) {
+
+    }
+
+    onDropPointDragOver(event) {
+
+    }
+
+    onDropPointDragEnger(event, number) {
+
+    }
+
+    onDropPointDragLeave(event) {
+
+    }
+
+    onDrop(event) {
+        if (this.props.node.droppable !== false) {
+            DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (this.props.onDrop) {
+                this.props.onDrop({
+                    originalEvent: event,
+                    node: this.props.node,
+                    path: this.props.path,
+                    index: this.props.index
+                });
+            }
+        }
+    }
+
+    onDragOver(event) {
+        if (this.props.node.droppable !== false) {
+            event.dataTransfer.dropEffect = 'move';
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }
+
+    onDragEnter() {
+        if (this.props.node.droppable !== false/* && this.tree.allowDrop(this.tree.dragNode, this.node, this.tree.dragNodeScope)*/) {
+            DomHandler.addClass(this.contentElement, 'p-treenode-dragover');
+        }
+    }
+
+    onDragLeave(event) {
+        if (this.props.node.droppable !== false) {
+            let rect = event.currentTarget.getBoundingClientRect();
+            if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
+                console.log('remove');
+                DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
+            }
+        }
+    }
+
+    onDragStart(event) {
+        event.dataTransfer.setData("text", "data");
+
+        if (this.props.onDragStart) {
+            this.props.onDragStart({
+                originalEvent: event,
+                node: this.props.node,
+                path: this.props.path,
+                index: this.props.index,
+                scope: this.props.dragdropScope
+            });
+        }
+    }
+
+    onDragEnd(event) {
+        if (this.props.onDragEnd) {
+            this.props.onDragEnd({
+                originalEvent: event
+            });
+        }
+    }
+
     renderLabel() {
         const label = this.props.nodeTemplate ? this.props.nodeTemplate(this.props.node) : this.props.node.label;
         
@@ -399,6 +502,18 @@ class UITreeNode extends Component {
         );
     }
 
+    renderDropPoint(position) {
+        if (this.props.dragdrop) {
+            return (
+                <li className="p-treenode-droppoint" onDrop={event => this.this.onDropPoint(event, position)} onDragOver={event => this.onDropPointDragOver(event)}
+                        onDragEnter={event => this.onDropPointDragEnger(event, position)} onDragLeave={event => this.onDropPointDragLeave(event)}></li>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     renderContent() {
         const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 'p-highlight': this.isCheckboxSelectionMode() ? this.isChecked() : this.isSelected()});
         const expanded = this.isExpanded();
@@ -408,7 +523,9 @@ class UITreeNode extends Component {
         const label = this.renderLabel();
 
         return (
-            <div className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd}>
+            <div ref={(el) => this.contentElement = el} className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
+                onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
+                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
                 {toggler}
                 {checkbox}
                 {icon}
@@ -424,11 +541,12 @@ class UITreeNode extends Component {
                     {
                         this.props.node.children.map((childNode, index) => {
                             return (
-                                <UITreeNode key={childNode.label} node={childNode} selectionMode={this.props.selectionMode}
+                                <UITreeNode key={childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} selectionMode={this.props.selectionMode}
                                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}/>
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}
+                                    dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} />
                             );
                         })
                     }
@@ -440,17 +558,37 @@ class UITreeNode extends Component {
         }
     }
 
-    render() {
+    renderNode() {
         const className = classNames('p-treenode', this.props.node.className, {'p-treenode-leaf': this.isLeaf()})
         const content = this.renderContent();
         const children = this.renderChildren();
 
         return (
-           <li className={className} style={this.props.node.style}>
+            <li className={className} style={this.props.node.style}>
                 {content}
                 {children}
-           </li>
+            </li>
         );
+    }
+
+    render() {
+        const node = this.renderNode();
+
+        if (this.props.dragdrop) {
+            const beforeDropPoint = this.renderDropPoint(-1);
+            const afterDropPoint = this.props.last ? this.renderDropPoint(1) : null;
+
+            return (
+                <React.Fragment>
+                    {beforeDropPoint}
+                    {node}
+                    {afterDropPoint}
+                </React.Fragment>
+            );
+        }
+        else {
+            return node;
+        }
     }
 }
 
@@ -470,12 +608,14 @@ export class Tree extends Component {
         propagateSelectionDown: true,
         loading: false,
         loadingIcon: 'pi pi-spinner',
+        dragdropScope: null,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
         onCollapse: null,
-        onToggle: null
+        onToggle: null,
+        onDragDrop: null
     }
 
     static propsTypes = {
@@ -492,17 +632,23 @@ export class Tree extends Component {
         propagateSelectionDown: PropTypes.bool,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
+        dragdropScope: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
-        onToggle: PropTypes.func
+        onToggle: PropTypes.func,
+        onDragDrop: PropTypes.func
     }
 
     constructor(props) {
         super(props);
+        
         this.onToggle = this.onToggle.bind(this);
+        this.onDragStart = this.onDragStart.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.onDrop = this.onDrop.bind(this);
     }
 
     onToggle(event) {
@@ -518,19 +664,103 @@ export class Tree extends Component {
         }
     }
 
-    renderRootChild(node) {
+    onDragStart(event) {
+        this.dragState = {
+            dragNode: event.node,
+            dragNodePath: event.path,
+            dragNodeIndex: event.index,
+            dragNodeScope: event.scope
+        }
+    }
+
+    onDragEnd(event) {
+        this.dragState = null;
+    }
+
+    onDrop(event) {
+        if (this.allowDrop()) {
+            let value = [...this.props.value];
+            let dragNodeParentPath = this.dragState.dragNodePath.split('-');
+            dragNodeParentPath.pop();
+            let dropNodeParentPath = event.path.split('-');
+            dropNodeParentPath.pop();
+
+            let dropNodeParent = this.findNode(value, dropNodeParentPath);
+            if (dropNodeParent) {             
+                let dropNodeParentChildren = dropNodeParent.children;
+                let dropNode = {...dropNodeParentChildren[event.index]};
+                let dropNodeChildren = dropNode.children ? [...dropNode.children] : [];
+                dropNodeChildren.push({...this.dragState.dragNode});
+                dropNode.children = dropNodeChildren;
+                dropNodeParentChildren[event.index] = dropNode;
+            }
+            else {
+                let children = value[event.index].children ? [...value[event.index].children] : [];
+                children.push({...this.dragState.dragNode});
+                value[event.index].children = children;
+            }
+
+            let dragNodeParent = this.findNode(value, dragNodeParentPath);
+            if (dragNodeParent) {
+                let children = [...dragNodeParent.children];
+                children.splice(this.dragState.dragNodeIndex, 1),
+                dragNodeParent.children = children;
+            }
+            else {
+                value.splice(this.dragState.dragNodeIndex, 1);
+            }
+
+            if (this.props.onDragDrop) {
+                this.props.onDragDrop({
+                    originalEvent: event.originalEvent,
+                    value: value
+                });
+            }
+        }
+    }
+
+    allowDrop() {
+        return true;
+    }
+
+    findNode(value, path) {
+        if (path.length === 0) {
+            return null;
+        }
+        else {
+            if (path.length === 1) {
+                return value[parseInt(path[0], 10)];
+            }
+            else {
+                return this.findNodeInSubTree(value[parseInt(path.shift(), 10)], path);
+            }
+        }
+    }
+
+    findNodeInSubTree(searchRoot, path) {
+        if (path.length === 1) {
+            return searchRoot.children[parseInt(path, 10)];
+        }
+        else {
+            let nextSearchRoot = searchRoot.children[parseInt(path.shift(), 10)];
+            this.findNode(nextSearchRoot, path);
+        }
+    }
+
+    renderRootChild(node, index, last) {
         return (
-            <UITreeNode key={node.label} node={node} selectionMode={this.props.selectionMode} 
+            <UITreeNode key={node.label} node={node} index={index} last={last} path={String(index)} selectionMode={this.props.selectionMode} 
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} nodeTemplate={this.props.nodeTemplate} />
+                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} nodeTemplate={this.props.nodeTemplate} 
+                    dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} />
         );
     };
 
     renderRootChildren() {
         return (
-            this.props.value.map((node) => this.renderRootChild(node))
+            this.props.value.map((node, index) => this.renderRootChild(node, index, (index === this.props.value.length - 1)))
         );
     }
 

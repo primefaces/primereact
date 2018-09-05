@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Tree} from '../../components/tree/Tree';
 import {Growl} from '../../components/growl/Growl';
 import {NodeService} from '../service/NodeService';

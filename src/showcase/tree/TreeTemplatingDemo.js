@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Tree} from '../../components/tree/Tree';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';

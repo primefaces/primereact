@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Tree} from '../../components/tree/Tree';
-import {Button} from '../../components/button/Button';
-import {Growl} from '../../components/growl/Growl';
 import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
@@ -58,7 +56,7 @@ export class TreeLazyDemo extends Component {
             }
             
             let value = [...this.state.lazyNodes];
-            value[parseInt(event.node.key)] = node; 
+            value[parseInt(event.node.key, 10)] = node; 
             this.setState({
                 nodes: value,
                 loading: false

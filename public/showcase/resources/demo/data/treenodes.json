@@ -23,7 +23,7 @@
         {
             "key": "1",
             "label": "Events",
-            "data": "Videos Folder",
+            "data": "Events Folder",
             "icon": "pi pi-fw pi-calendar",
             "children": [
                 { "key": "1-0", "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },

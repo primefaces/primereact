@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Tree} from '../../components/tree/Tree';
 import {Button} from '../../components/button/Button';
 import {Growl} from '../../components/growl/Growl';
