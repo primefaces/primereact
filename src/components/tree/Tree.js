@@ -577,7 +577,7 @@ class UITreeNode extends Component {
     }
 
     renderContent() {
-        const className = classNames('p-treenode-content', {
+        const className = classNames('p-treenode-content', this.props.node.className, {
                 'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 
                 'p-highlight': this.isCheckboxSelectionMode() ? this.isChecked() : this.isSelected(),
                 'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)});
@@ -588,7 +588,7 @@ class UITreeNode extends Component {
         const label = this.renderLabel();
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
+            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
                 onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
                 {toggler}

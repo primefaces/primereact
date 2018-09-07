@@ -4,8 +4,11 @@ export default interface TreeNode {
     data?: any;
     icon?: string;
     children: TreeNode[];
+    style?: object;
+    className?: string;
     droppable?: boolean;
     draggable?: boolean;
     selectable?: boolean;
+    leaf?: boolean;
     defaultExpanded?: boolean;
 }

@@ -65,7 +65,7 @@ export class TreeContextMenuDemo extends Component {
 
                     <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
                         contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
-                        onContextMenu={event => this.cm.show(event)} />
+                        onContextMenu={event => this.cm.show(event.originalEvent)} />
                 </div>
 
                 <TreeContextMenuDemoDoc />
@@ -150,7 +150,7 @@ export class TreeContextMenuDemo extends Component {
 
                     <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
                         onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
-                        onContextMenu={event => this.cm.show(event)} />
+                        onContextMenu={event => this.cm.show(event.originalEvent)} />
                 </div>
             </div>
         )
