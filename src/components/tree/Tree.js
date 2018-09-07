@@ -17,7 +17,7 @@ class UITreeNode extends Component {
         expandedKeys: null,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
-        dragdropScope: null,
+        dragdrop: null,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -44,7 +44,7 @@ class UITreeNode extends Component {
         expandedKeys: PropTypes.object,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
-        dragdropScope: PropTypes.string,
+        dragdrop: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -376,14 +376,14 @@ class UITreeNode extends Component {
     }
 
     onDropPoint(event, position) {
+        event.preventDefault();
+
         if (this.props.node.droppable !== false) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
-            event.preventDefault();
             
             if (this.props.onDropPoint) {
                 this.props.onDropPoint({
                     originalEvent: event,
-                    node: this.props.node,
                     path: this.props.path,
                     index: this.props.index,
                     position: position
@@ -414,9 +414,7 @@ class UITreeNode extends Component {
             if (this.props.onDrop) {
                 this.props.onDrop({
                     originalEvent: event,
-                    node: this.props.node,
-                    path: this.props.path,
-                    index: this.props.index
+                    path: this.props.path
                 });
             }
         }
@@ -431,7 +429,7 @@ class UITreeNode extends Component {
     }
 
     onDragEnter() {
-        if (this.props.node.droppable !== false/* && this.tree.allowDrop(this.tree.dragNode, this.node, this.tree.dragNodeScope)*/) {
+        if (this.props.node.droppable !== false) {
             DomHandler.addClass(this.contentElement, 'p-treenode-dragover');
         }
     }
@@ -451,10 +449,8 @@ class UITreeNode extends Component {
         if (this.props.onDragStart) {
             this.props.onDragStart({
                 originalEvent: event,
-                node: this.props.node,
                 path: this.props.path,
-                index: this.props.index,
-                scope: this.props.dragdropScope
+                index: this.props.index
             });
         }
     }
@@ -521,7 +517,7 @@ class UITreeNode extends Component {
     }
 
     renderDropPoint(position) {
-        if (this.props.dragdropScope) {
+        if (this.props.dragdrop) {
             return (
                 <li className="p-treenode-droppoint" onDrop={event => this.onDropPoint(event, position)} onDragOver={this.onDropPointDragOver}
                         onDragEnter={this.onDropPointDragEnter} onDragLeave={this.onDropPointDragLeave}></li>
@@ -541,7 +537,7 @@ class UITreeNode extends Component {
         const label = this.renderLabel();
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
+            <div ref={(el) => this.contentElement = el} className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdrop && this.props.node.draggable !== false}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
                 onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
                 {toggler}
@@ -564,7 +560,7 @@ class UITreeNode extends Component {
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}
-                                    dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
+                                    dragdrop={this.props.dragdrop} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
                             );
                         })
                     }
@@ -592,7 +588,7 @@ class UITreeNode extends Component {
     render() {
         const node = this.renderNode();
 
-        if (this.props.dragdropScope) {
+        if (this.props.dragdrop) {
             const beforeDropPoint = this.renderDropPoint(-1);
             const afterDropPoint = this.props.last ? this.renderDropPoint(1) : null;
 
@@ -626,7 +622,7 @@ export class Tree extends Component {
         propagateSelectionDown: true,
         loading: false,
         loadingIcon: 'pi pi-spinner',
-        dragdropScope: null,
+        dragdrop: null,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -650,7 +646,7 @@ export class Tree extends Component {
         propagateSelectionDown: PropTypes.bool,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
-        dragdropScope: PropTypes.string,
+        dragdrop: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -685,10 +681,8 @@ export class Tree extends Component {
 
     onDragStart(event) {
         this.dragState = {
-            dragNode: event.node,
-            dragNodePath: event.path,
-            dragNodeIndex: event.index,
-            dragNodeScope: event.scope
+            path: event.path,
+            index: event.index
         }
     }
 
@@ -698,36 +692,22 @@ export class Tree extends Component {
 
     onDrop(event) {
         if (this.allowDrop()) {
-            let value = [...this.props.value];
-            let dragNodeParentPath = this.dragState.dragNodePath.split('-');
-            dragNodeParentPath.pop();
-            let dropNodeParentPath = event.path.split('-');
-            dropNodeParentPath.pop();
+            let value = JSON.parse(JSON.stringify(this.props.value));
+            let dragPath = this.dragState.path.split('-');
+            dragPath.pop();
+            let dragNodeParent = this.findNode(value, dragPath);
+            let dragNode = dragNodeParent ? dragNodeParent.children[this.dragState.index] : value[this.dragState.index];
+            let dropNode = this.findNode(value, event.path.split('-'));
+            
+            if (dropNode.children)
+                dropNode.children.push(dragNode);
+            else
+                dropNode.children = [dragNode];
 
-            let dropNodeParent = this.findNode(value, dropNodeParentPath);
-            if (dropNodeParent) {
-                let dropNodeParentChildren = dropNodeParent.children;
-                let dropNode = {...dropNodeParentChildren[event.index]};
-                let dropNodeChildren = dropNode.children ? [...dropNode.children] : [];
-                dropNodeChildren.push({...this.dragState.dragNode});
-                dropNode.children = dropNodeChildren;
-                dropNodeParentChildren[event.index] = dropNode;
-            }
-            else {
-                let children = value[event.index].children ? [...value[event.index].children] : [];
-                children.push({...this.dragState.dragNode});
-                value[event.index].children = children;
-            }
-
-            let dragNodeParent = this.findNode(value, dragNodeParentPath);
-            if (dragNodeParent) {
-                let children = [...dragNodeParent.children];
-                children.splice(this.dragState.dragNodeIndex, 1);
-                dragNodeParent.children = children;
-            }
-            else {
-                value.splice(this.dragState.dragNodeIndex, 1);
-            }
+            if (dragNodeParent)
+                dragNodeParent.children.splice(this.dragState.index, 1);
+            else
+                value.splice(this.dragState.index, 1);
 
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
@@ -740,48 +720,36 @@ export class Tree extends Component {
 
     onDropPoint(event) {
         if (this.allowDrop()) {
-            let value = [...this.props.value];
-            let dragNodeParentPath = this.dragState.dragNodePath.split('-');
-            dragNodeParentPath.pop();
-            let dropNodeParentPath = event.path.split('-');
-            dropNodeParentPath.pop();
-            let siblings = this.areSiblings(this.dragState.dragNodePath, event.path);
-            let dropNodeParent = this.findNode(value, dropNodeParentPath);
-            let dragNode = this.dragState.dragNode;
+            let value = JSON.parse(JSON.stringify(this.props.value));
+            let dragPath = this.dragState.path.split('-');
+            dragPath.pop();
+            let dropPath = event.path.split('-');
+            dropPath.pop();
+            let dragNodeParent = this.findNode(value, dragPath);
+            let dropNodeParent = this.findNode(value, dropPath);
+            let dragNode = dragNodeParent ? dragNodeParent.children[this.dragState.index] : value[this.dragState.index];
+            let siblings = this.areSiblings(this.dragState.path, event.path);
 
-            let dragNodeParent = this.findNode(value, dragNodeParentPath);
-            if (dragNodeParent) {
-                let children = [...dragNodeParent.children];
-                children.splice(this.dragState.dragNodeIndex, 1);
-                dragNodeParent.children = children;
-            }
-            else {
-                value.splice(this.dragState.dragNodeIndex, 1);
-            }
+            if (dragNodeParent)
+                dragNodeParent.children.splice(this.dragState.index, 1);
+            else
+                value.splice(this.dragState.index, 1);
 
             if (event.position < 0) {
-                let dropIndex = (siblings) ? (this.dragState.dragNodeIndex > event.index) ? event.index : event.index - 1 : event.index;
+                let dropIndex = (siblings) ? (this.dragState.index > event.index) ? event.index : event.index - 1 : event.index;
 
-                if (dropNodeParent) {
-                    let dropNodeParentChildren = [...dropNodeParent.children];
-                    dropNodeParentChildren.splice(dropIndex, 0, dragNode);
-                    dropNodeParent.children = dropNodeParentChildren;
-                }
-                else {
-                    value.splice(dropIndex, 0, {...dragNode});
-                }
+                if (dropNodeParent)
+                    dropNodeParent.children.splice(dropIndex, 0, dragNode);
+                else
+                    value.splice(dropIndex, 0, dragNode);
             }
             else {
-                if (dropNodeParent) {
-                    let dropNodeParentChildren = [...dropNodeParent.children];
-                    dropNodeParentChildren.push({...dragNode});
-                    dropNodeParent.children = dropNodeParentChildren;
-                }
-                else {
+                if (dropNodeParent)
+                    dropNodeParent.children.push(dragNode);
+                else
                     value.push(dragNode);
-                }
             }
-
+            
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
@@ -807,22 +775,16 @@ export class Tree extends Component {
             return null;
         }
         else {
+            const index = parseInt(path[0], 10);
+            const nextSearchRoot = value.children ? value.children[index] : value[index];
+
             if (path.length === 1) {
-                return value[parseInt(path[0], 10)];
+                return nextSearchRoot;
             }
             else {
-                return this.findNodeInSubTree(value[parseInt(path.shift(), 10)], path);
+                path.shift();
+                return this.findNode(nextSearchRoot, path);
             }
-        }
-    }
-
-    findNodeInSubTree(searchRoot, path) {
-        if (path.length === 1) {
-            return searchRoot.children[parseInt(path, 10)];
-        }
-        else {
-            let nextSearchRoot = searchRoot.children[parseInt(path.shift(), 10)];
-            this.findNode(nextSearchRoot, path);
         }
     }
 
@@ -833,7 +795,7 @@ export class Tree extends Component {
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} nodeTemplate={this.props.nodeTemplate} 
-                    dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}/>
+                    dragdrop={this.props.dragdrop} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}/>
         );
     };
 
