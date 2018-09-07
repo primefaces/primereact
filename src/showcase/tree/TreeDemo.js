@@ -47,8 +47,6 @@ export class TreeDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
-
                     <h3 className="first">Uncontrolled</h3>
                     <Tree value={this.state.nodes} />
 
@@ -445,69 +443,35 @@ render() {
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Tree} from 'primerecat/tree
+import {Tree} from 'primereact/tree';
+import {Button} from 'primereact/button';
+import {NodeService} from '../service/NodeService';
 
 export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = { 
-            data1: this.generateData(),
-            data2: [{
-                label: 'Root',
-                children: this.generateData()
-            }],
-            selectedFile1: null, 
-            selectedFile2: null,
-            selectedFiles1: [], 
-            selectedFiles2: []
+            nodes: null,
+            expandedKeys: {}
         };
+
+        this.nodeService = new NodeService();
+        this.toggleMovies = this.toggleMovies.bind(this);
     }
 
-    generateData() {
-        return [
-            {
-                "label": "Documents",
-                "data": "Documents Folder",
-                "icon": "pi pi-fw pi-inbox",
-                "children": [{
-                    "label": "Work",
-                    "data": "Work Folder",
-                    "icon": "pi pi-fw pi-cog",
-                    "children": [{ "label": "Expenses.doc", "icon": "pi pi-fw pi-file", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "pi pi-fw pi-file", "data": "Resume Document" }]
-                },
-                {
-                    "label": "Home",
-                    "data": "Home Folder",
-                    "icon": "pi pi-fw pi-home",
-                    "children": [{ "label": "Invoices.txt", "icon": "pi pi-fw pi-file", "data": "Invoices for this month" }]
-                }]
-            },
-            {
-                "label": "Events",
-                "data": "Videos Folder",
-                "icon": "pi pi-fw pi-calendar",
-                "children": [
-                    { "label": "Meeting", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },
-                    { "label": "Product Launch", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },
-                    { "label": "Report Review", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]
-            },
-            {
-                "label": "Movies",
-                "data": "Movies Folder",
-                "icon": "pi pi-fw pi-star",
-                "children": [{
-                    "label": "Al Pacino",
-                    "data": "Pacino Movies",
-                    "children": [{ "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]
-                },
-                {
-                    "label": "Robert De Niro",
-                    "data": "De Niro Movies",
-                    "children": [{ "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
-                }]
-            }
-        ];
+    toggleMovies() {
+        let expandedKeys = {...this.state.expandedKeys};
+        if (expandedKeys['2'])
+            delete expandedKeys['2'];
+        else
+            expandedKeys['2'] = true;
+
+        this.setState({expandedKeys: expandedKeys});
+    }
+
+    componentDidMount() {
+        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
     }
 
     render() {
@@ -521,38 +485,13 @@ export class TreeDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Tree value={this.state.data1} />
+                    <h3 className="first">Uncontrolled</h3>
+                    <Tree value={this.state.nodes} />
 
-                    <h3>Single Selection</h3>
-                    <Tree value={this.state.data1} selectionMode="single" selection={this.state.selectedFile1} selectionChange={(e) => this.setState({selectedFile1: e.selection})}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile1 && this.state.selectedFile1.label}</div>
-
-                    <h3>Multiple Selection with Metakey</h3>
-                    <Tree value={this.state.data1} selectionMode="multiple" selection={this.state.selectedFiles1} selectionChange={(e) => this.setState({selectedFiles1: e.selection})}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>
-                        Selected Nodes:
-                            {
-                            this.state.selectedFiles1.map((obj, i) => {
-                                return <span key={i}>{i!==0? ",": ""} {obj.label}</span>
-                            })
-                        }
-                    </div>
-
-                    <h3>Multiple Selection with Checkbox</h3>
-                    <Tree value={this.state.data1} selectionMode="checkbox" selection={this.state.selectedFile} selectionChange={(e) => this.setState({selectedFile: e.selection})}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>
-                        Selected Nodes: 
-                            {
-                            this.state.selectedFiles2.map((obj, i) => {
-                                return <span key={i}>{i!==0? ",": ""} {obj.label}</span>
-                            })
-                        }
-                    </div>
-
-                    <h3>Horizontal Tree</h3>
-                    <Tree value={this.state.data2} layout="horizontal" selectionMode="single" selection={this.state.selectedFile2} selectionChange={(e) => this.setState({selectedFile2: e.selection})}></Tree>
-                    <div style={{ 'marginTop': '8px' }}>Selected Node: {this.state.selectedFile2 && this.state.selectedFile2.label}</div>
+                    <h3>Controlled</h3>
+                    <Button onClick={this.toggleMovies} label="Toggle Movies" />
+                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} 
+                        onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
                 </div>
             </div>
         )
