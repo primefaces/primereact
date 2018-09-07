@@ -1,4 +1,4 @@
-import * as React from 'react';;
+import * as React from 'react';
 import {MenuItem} from '../menuitem/MenuItem';
 
 interface TabMenuProps {
