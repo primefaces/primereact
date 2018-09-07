@@ -1897,6 +1897,8 @@ body .p-tree {
           float: none;
           margin: 0 0.143em 0 0;
           color: #848484; }
+          body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler .p-tree-toggler-icon {
+            line-height: 1.25em; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
           vertical-align: middle;
           display: inline-block;
@@ -1916,6 +1918,12 @@ body .p-tree {
           color: #ffffff; }
           body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler,
           body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
+            color: #ffffff; }
+        body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight-contextmenu {
+          background-color: #005da6;
+          color: #ffffff; }
+          body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight-contextmenu .p-tree-toggler,
+          body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight-contextmenu .p-treenode-icon {
             color: #ffffff; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
           background-color: #eaeaea;
