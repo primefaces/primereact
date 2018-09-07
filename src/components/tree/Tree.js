@@ -13,6 +13,7 @@ class UITreeNode extends Component {
         path: null,
         selectionMode: null,
         selectionKeys: null,
+        contextMenuSelectionKey: null,
         metaKeySelection: true,
         expandedKeys: null,
         propagateSelectionUp: true,
@@ -42,6 +43,7 @@ class UITreeNode extends Component {
         path: PropTypes.string,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
+        contextMenuSelectionKey: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         expandedKeys: PropTypes.object,
         propagateSelectionUp: PropTypes.bool,
@@ -572,7 +574,10 @@ class UITreeNode extends Component {
     }
 
     renderContent() {
-        const className = classNames('p-treenode-content', {'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 'p-highlight': this.isCheckboxSelectionMode() ? this.isChecked() : this.isSelected()});
+        const className = classNames('p-treenode-content', {
+                'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 
+                'p-highlight': this.isCheckboxSelectionMode() ? this.isChecked() : this.isSelected(),
+                'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)});
         const expanded = this.isExpanded();
         const toggler = this.renderToggler(expanded);
         const checkbox = this.renderCheckbox();
@@ -601,7 +606,7 @@ class UITreeNode extends Component {
                                 <UITreeNode key={childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} selectionMode={this.props.selectionMode}
                                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
-                                    onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
+                                    contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}
                                     dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
@@ -658,6 +663,7 @@ export class Tree extends Component {
         selectionMode: null,
         selectionKeys: null,
         onSelectionChange: null,
+        contextMenuSelectionKey: null,
         onContextMenuSelectionChange: null,
         expandedKeys: null,
         style: null,
@@ -682,8 +688,9 @@ export class Tree extends Component {
         id: PropTypes.string,
         value: PropTypes.any.isRequired,
         selectionMode: PropTypes.string,
-        selectionKeys: PropTypes.null,
+        selectionKeys: PropTypes.any,
         onSelectionChange: PropTypes.func,
+        contextMenuSelectionKey: PropTypes.any,
         onContextMenuSelectionChange: PropTypes.func,
         expandedKeys: PropTypes.object,
         style: PropTypes.object,
@@ -885,7 +892,7 @@ export class Tree extends Component {
         return (
             <UITreeNode key={node.label} node={node} index={index} last={last} path={String(index)} selectionMode={this.props.selectionMode} 
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
-                    onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
+                    contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} nodeTemplate={this.props.nodeTemplate} 

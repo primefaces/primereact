@@ -61,10 +61,10 @@ export class TreeContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el} />
 
-                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} />
+                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
 
                     <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
                         onContextMenu={event => this.cm.show(event)} />
                 </div>
 
