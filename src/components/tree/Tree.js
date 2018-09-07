@@ -75,6 +75,7 @@ class UITreeNode extends Component {
         this.onRightClick = this.onRightClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
+        this.onTogglerKeyDown = this.onTogglerKeyDown.bind(this);
         this.propagateUp = this.propagateUp.bind(this);
 
         this.onDrop = this.onDrop.bind(this);
@@ -119,6 +120,15 @@ class UITreeNode extends Component {
             });
 
             this.invokeToggleEvents(event, !expanded);
+        }
+
+        event.preventDefault();
+    }
+
+    onTogglerKeyDown(event) {
+        if (event.which === 32) {
+            this.onTogglerClick(event);
+            event.preventDefault();
         }
     }
 
@@ -536,10 +546,16 @@ class UITreeNode extends Component {
     }
 
     renderToggler(expanded) {
-        const className = classNames('p-tree-toggler p-unselectable-text pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
 
         return (
-            <span className={className} onClick={this.onTogglerClick}></span>
+            /*jshint ignore:start*/
+            /*eslint-disable*/
+            <a href="#" className="p-tree-toggler p-unselectable-text" onClick={this.onTogglerClick} onKeyDown={this.onTogglerKeyDown}>
+                <span className={iconClassName}></span>
+            </a>
+            /*eslint-enable*/
+            /*jshint ignore:end*/
         );
     }
 

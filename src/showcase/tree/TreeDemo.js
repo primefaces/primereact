@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Tree} from '../../components/tree/Tree';
 import {Button} from '../../components/button/Button';
-import {Growl} from '../../components/growl/Growl';
 import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
