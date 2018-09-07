@@ -33,7 +33,7 @@ export class TreeDragDropDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Tree value={this.state.nodes} dragdrop={true} onDragDrop={event => this.setState({nodes: event.value})} />
+                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
                 </div>
 
                 <TreeDragDropDemoDoc />
