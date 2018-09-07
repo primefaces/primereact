@@ -1885,7 +1885,7 @@ body .p-tree {
     padding: 0;
     margin: 0; }
     body .p-tree .p-tree-container .p-treenode {
-      padding: 0.143em 0; }
+      padding: 0.143em 0.286em; }
       body .p-tree .p-tree-container .p-treenode .p-treenode-content {
         padding: 0;
         -moz-border-radius: 3px;

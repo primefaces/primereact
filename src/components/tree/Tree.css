@@ -45,6 +45,10 @@
     vertical-align: middle;
 }
 
+.p-tree .p-tree-toggler .p-tree-toggler-icon {
+    vertical-align: middle;
+}
+
 .p-tree .p-treenode-icon {
     display: inline-block;
     vertical-align: middle;
