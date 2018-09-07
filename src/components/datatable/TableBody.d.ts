@@ -1,4 +1,4 @@
-import React = require("react");
+import * as React from 'react';;
 
 // tslint:disable-next-line:no-empty-interface
 interface TableBodyProps {

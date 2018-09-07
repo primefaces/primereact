@@ -1,4 +1,4 @@
-import React = require("react");
+import * as React from 'react';;
 import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface ToggleButtonProps {

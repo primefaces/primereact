@@ -301,7 +301,10 @@ class UITreeNode extends Component {
         }
 
         if (this.props.onContextMenu) {
-            this.props.onContextMenu(event);
+            this.props.onContextMenu({
+                originalEvent: event,
+                node: this.props.node
+            });
         }
     }
 

@@ -1,4 +1,4 @@
-import React = require("react");
+import * as React from 'react';;
 import {MenuItem} from '../menuitem/MenuItem';
 import {SyntheticEvent} from "react";
 
