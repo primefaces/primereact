@@ -40,28 +40,30 @@ export class TreeLazyDemo extends Component {
     }
 
     loadOnExpand(event) {
-        this.setState({
-            loading: true
-        });
-
-        setTimeout(() => {
-            let node = {...event.node};
-            node.children = [];
-
-            for (let i = 0; i < 3; i++) {
-                node.children.push({
-                    key: node.key + '-' + i,
-                    label: 'Lazy ' + node.label + '-' + i
-                });
-            }
-            
-            let value = [...this.state.lazyNodes];
-            value[parseInt(event.node.key, 10)] = node; 
+        if (!event.node.children) {
             this.setState({
-                nodes: value,
-                loading: false
+                loading: true
             });
-        }, 2000);   
+    
+            setTimeout(() => {
+                let node = {...event.node};
+                node.children = [];
+    
+                for (let i = 0; i < 3; i++) {
+                    node.children.push({
+                        key: node.key + '-' + i,
+                        label: 'Lazy ' + node.label + '-' + i
+                    });
+                }
+                
+                let value = [...this.state.nodes];
+                value[parseInt(event.node.key, 10)] = node; 
+                this.setState({
+                    nodes: value,
+                    loading: false
+                });
+            }, 500);  
+        }
     }
 
     componentDidMount() {
@@ -89,7 +91,7 @@ export class TreeLazyDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Lazy Loading</h3>
-                    <Tree value={this.state.lazyNodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                    <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
                 </div>
 
                 <TreeLazyDemoDoc />
@@ -151,28 +153,30 @@ export class TreeLazyDemo extends Component {
     }
 
     loadOnExpand(event) {
-        this.setState({
-            loading: true
-        });
-
-        setTimeout(() => {
-            let node = {...event.node};
-            node.children = [];
-
-            for (let i = 0; i < 3; i++) {
-                node.children.push({
-                    key: node.key + '-' + i,
-                    label: 'Lazy ' + node.label + '-' + i
-                });
-            }
-            
-            let value = [...this.state.lazyNodes];
-            value[parseInt(event.node.key, 10)] = node; 
+        if (!event.node.children) {
             this.setState({
-                nodes: value,
-                loading: false
+                loading: true
             });
-        }, 2000);   
+    
+            setTimeout(() => {
+                let node = {...event.node};
+                node.children = [];
+    
+                for (let i = 0; i < 3; i++) {
+                    node.children.push({
+                        key: node.key + '-' + i,
+                        label: 'Lazy ' + node.label + '-' + i
+                    });
+                }
+                
+                let value = [...this.state.nodes];
+                value[parseInt(event.node.key, 10)] = node; 
+                this.setState({
+                    nodes: value,
+                    loading: false
+                });
+            }, 500);  
+        }
     }
 
     componentDidMount() {
@@ -188,7 +192,8 @@ export class TreeLazyDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Lazy</h1>
@@ -198,7 +203,7 @@ export class TreeLazyDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Lazy Loading</h3>
-                    <Tree value={this.state.lazyNodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                    <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
                 </div>
             </div>
         )

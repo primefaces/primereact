@@ -906,7 +906,7 @@ export class Tree extends Component {
         );
     }
 
-    renderRoot() {
+    renderModel() {
         if (this.props.value) {
             const rootNodes = this.renderRootChildren();
 
@@ -922,24 +922,31 @@ export class Tree extends Component {
     }
     
     renderLoader() {
-        let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
+        if (this.props.loading) {
+            let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
 
-        return (
-            <React.Fragment>
-                <div className="p-tree-loading-mask p-component-overlay"></div>
-                <div className="p-tree-loading-content">
-                    <i className={icon} />
-                </div>
-            </React.Fragment>
-        );
+            return (
+                <React.Fragment>
+                    <div className="p-tree-loading-mask p-component-overlay"></div>
+                    <div className="p-tree-loading-content">
+                        <i className={icon} />
+                    </div>
+                </React.Fragment>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
         const className = classNames('p-tree p-components', {'p-tree-selectable': this.props.selectionMode, 'p-tree-loading': this.props.loading});
-        const content = this.props.loading ? this.renderLoader() : this.renderRoot();
+        const loader = this.renderLoader();
+        const content = this.renderModel();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
+                {loader}
                 {content}
             </div>
         );
