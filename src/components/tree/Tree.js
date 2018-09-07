@@ -25,11 +25,13 @@ class UITreeNode extends Component {
         onCollapse: null,
         onToggle: null,
         onSelectionChange: null,
+        onContextMenuSelectionChange: PropTypes.func,
         onPropagateUp: null,
         onDragStart: null,
         onDragEnd: null,
         onDrop: null,
-        onDropPoint: null
+        onDropPoint: null,
+        onContextMenu: null
     }
 
     static propsTypes = {
@@ -52,11 +54,13 @@ class UITreeNode extends Component {
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
         onSelectionChange: PropTypes.func,
+        onContextMenuSelectionChange: PropTypes.func,
         onPropagateUp: PropTypes.func,
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
         onDrop: PropTypes.func,
-        onDropPoint: PropTypes.func
+        onDropPoint: PropTypes.func,
+        onContextMenu: PropTypes.func
     }
 
     constructor(props) {
@@ -68,6 +72,7 @@ class UITreeNode extends Component {
         }
 
         this.onClick = this.onClick.bind(this);
+        this.onRightClick = this.onRightClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
         this.propagateUp = this.propagateUp.bind(this);
@@ -271,6 +276,21 @@ class UITreeNode extends Component {
         }
 
         this.nodeTouched = false;
+    }
+
+    onRightClick(event) {
+        DomHandler.clearSelection();
+
+        if (this.props.onContextMenuSelectionChange) {
+            this.props.onContextMenuSelectionChange({
+                originalEvent: event,
+                value: this.props.node.key
+            })
+        }
+
+        if (this.props.onContextMenu) {
+            this.props.onContextMenu(event);
+        }
     }
 
     propagateUp(event) {
@@ -544,7 +564,7 @@ class UITreeNode extends Component {
         const label = this.renderLabel();
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
+            <div ref={(el) => this.contentElement = el} className={className} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
                 onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
                 {toggler}
@@ -565,6 +585,7 @@ class UITreeNode extends Component {
                                 <UITreeNode key={childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} selectionMode={this.props.selectionMode}
                                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
+                                    onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}
                                     dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
@@ -621,6 +642,7 @@ export class Tree extends Component {
         selectionMode: null,
         selectionKeys: null,
         onSelectionChange: null,
+        onContextMenuSelectionChange: null,
         expandedKeys: null,
         style: null,
         className: null,
@@ -636,7 +658,8 @@ export class Tree extends Component {
         onExpand: null,
         onCollapse: null,
         onToggle: null,
-        onDragDrop: null
+        onDragDrop: null,
+        onContextMenu: null
     }
 
     static propsTypes = {
@@ -645,6 +668,7 @@ export class Tree extends Component {
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.null,
         onSelectionChange: PropTypes.func,
+        onContextMenuSelectionChange: PropTypes.func,
         expandedKeys: PropTypes.object,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -660,7 +684,8 @@ export class Tree extends Component {
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
-        onDragDrop: PropTypes.func
+        onDragDrop: PropTypes.func,
+        onContextMenu: PropTypes.func
     }
 
     constructor(props) {
@@ -844,10 +869,11 @@ export class Tree extends Component {
         return (
             <UITreeNode key={node.label} node={node} index={index} last={last} path={String(index)} selectionMode={this.props.selectionMode} 
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
+                    onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                     expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} nodeTemplate={this.props.nodeTemplate} 
-                    dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}/>
+                    dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}  />
         );
     };
 
