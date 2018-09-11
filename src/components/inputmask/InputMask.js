@@ -448,7 +448,10 @@ export class InputMask extends Component {
     }
 
     updateFilledState() {
-        this.filled = this.input && this.input.value !== '';
+        if (this.input && this.input.value && this.input.value.length > 0)
+            DomHandler.addClass(this.input, 'p-filled');
+        else
+            DomHandler.removeClass(this.input, 'p-filled');
     }
 
     updateValue() {
@@ -561,7 +564,7 @@ export class InputMask extends Component {
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
-                onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required}/>
+                onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} />
         );
     }
 

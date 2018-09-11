@@ -71,7 +71,7 @@ export class InputText extends Component {
     render() {
         const className = classNames('p-inputtext p-component', this.props.className, {
             'p-disabled': this.props.disabled,
-            'p-state-filled': this.props.value && this.props.value.length
+            'p-filled': this.props.value && this.props.value.length
         });
 
         let inputProps = Object.assign({}, this.props);

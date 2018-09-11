@@ -79,10 +79,10 @@ import {InputText} from 'primereact/inputtext';
 </CodeHighlight>
 
                         <h3>Float Label</h3>
-                        <p>A floating label is implemented by wrapping the input and the label inside a container having <i>.ui-float-label</i> style class.</p>
+                        <p>A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<span className="ui-float-label">
+<span className="p-float-label">
     <InputText id="in" value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
     <label htmlFor="in">Username</label>
 </span>
