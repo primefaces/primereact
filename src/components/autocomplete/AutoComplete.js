@@ -8,6 +8,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import {AutoCompletePanel} from './AutoCompletePanel';
 import classNames from 'classnames';
 import Tooltip from "../tooltip/Tooltip";
+import { format } from 'util';
 
 export class AutoComplete extends Component {
 
@@ -114,16 +115,6 @@ export class AutoComplete extends Component {
         this.selectItem = this.selectItem.bind(this);
     }
     
-    shouldComponentUpdate(nextProps, nextState) {        
-        if(this.manualModelChange) {
-            this.manualModelChange = false;
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    
     onInputChange(event) {
         //Cancel the search request if user types within the timeout
         if(this.timeout) {
@@ -132,7 +123,6 @@ export class AutoComplete extends Component {
         
         let query = event.target.value;
         if(!this.props.multiple) {
-            this.manualModelChange = true;
             this.updateModel(event, query);
         }
 
@@ -235,7 +225,13 @@ export class AutoComplete extends Component {
     }
 
     updateInputField(value) {
-        this.inputEl.value = this.formatValue(value);
+        const formattedValue = this.formatValue(value);
+        this.inputEl.value = formattedValue;
+
+        /*if (formattedValue && formattedValue.length)
+            DomHandler.addClass(this.container, 'p-inputwrapper-filled');
+        else
+            DomHandler.removeClass(this.container, 'p-inputwrapper-filled');*/
     }
 
     showPanel() {
@@ -410,17 +406,21 @@ export class AutoComplete extends Component {
     onInputFocus(event) {
         this.focus = true;
         
-        if(this.props.onFocus) {
+        if (this.props.onFocus) {
             this.props.onFocus(event);
         }
+
+        DomHandler.addClass(this.container, 'p-inputwrapper-focus');
     }
     
     onInputBlur(event) {
         this.focus = false;
 
-        if(this.props.onBlur) {
+        if (this.props.onBlur) {
             this.props.onBlur(event);
         }
+
+        DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
     }
     
     onMultiContainerClick(event) {
@@ -492,7 +492,7 @@ export class AutoComplete extends Component {
     }
 
     componentDidUpdate() {
-        if(this.searching) {
+        if (this.searching) {
             if (this.props.suggestions && this.props.suggestions.length)
                 this.showPanel();
             else
@@ -502,6 +502,10 @@ export class AutoComplete extends Component {
         }
 
         this.searching = false;
+
+        if (this.input && !this.props.multiple) {
+            this.updateInputField(this.props.value);
+        }
     }
 
     showLoader() {
@@ -617,14 +621,12 @@ export class AutoComplete extends Component {
     }
 
     render() {
-        if(this.input && !this.props.multiple) {
-            this.updateInputField(this.props.value);
-        }
-
         let input, dropdown;
         let className = classNames('p-autocomplete p-component', this.props.className, {
             'p-autocomplete-dd': this.props.dropdown,
-            'p-autocomplete-multiple': this.props.multiple
+            'p-autocomplete-multiple': this.props.multiple,
+            'p-inputwrapper-filled': this.props.value,
+            'p-inputwrapper-focus': this.focus
         });
         let loader = this.renderLoader();
 
