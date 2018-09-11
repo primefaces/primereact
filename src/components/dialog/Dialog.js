@@ -562,7 +562,7 @@ export class Dialog extends Component {
     renderResizer() {
         if(this.props.resizable) {
             return (
-                <div className="p-resizable-handle p-resizable-se p-icon p-icon-gripsmall-diagonal-se" style={{ 'zIndex': '90' }} onMouseDown={this.initResize}></div>
+                <div className="p-resizable-handle" onMouseDown={this.initResize}></div>
             );
         }
         else {
