@@ -1906,14 +1906,14 @@ body .p-tree {
           padding: 0.286em; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
           margin: 0 0.5em 0 0; }
-          body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox .p-checkbox-icon {
-            margin: 1px 0 0 0; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
           background-color: #007ad9;
           color: #ffffff; }
           body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler,
           body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
             color: #ffffff; }
+          body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-checkbox .p-checkbox-box {
+            border-color: #ffffff; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight-contextmenu {
           border: 1px dashed #007ad9; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
