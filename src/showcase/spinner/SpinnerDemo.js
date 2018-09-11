@@ -26,18 +26,19 @@ export class SpinnerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic {this.state.value1}</h3>
-                    <Spinner value={this.state.value} size={30} onChange={(e) => this.setState({value1: e.value})} />
+                    <h3>Basic</h3>
+                    <Spinner value={this.state.value1} size={30} onChange={(e) => this.setState({value1: e.value})} />
 
-                    <h3>Min/Max {this.state.value2}</h3>
+                    <h3>Min/Max</h3>
                     <Spinner value={this.state.value2} size={30} onChange={(e) => this.setState({value2: e.value})} min={0} max={100} />
 
-                    <h3>Step {this.state.value3}</h3>
+                    <h3>Step</h3>
                     <Spinner value={this.state.value3} size={30} onChange={(e) => this.setState({value3: e.value})} step={0.25} />
 
                     <h3>Disabled</h3>
                     <Spinner value={this.state.value4} size={30} disabled={true} />
                 </div>
+
                 <SpinnerDoc></SpinnerDoc>
             </div>
         );
@@ -64,7 +65,7 @@ import {Spinner} from 'primereact/spinner';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>Spinner is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
+            <p>Spinner is used as a controlled input with <i>value</i> and <i>onChange</i> properties. Note that onChange is triggered on blur instead of on key input</p>
                     
 <CodeHighlight className="language-jsx">
 {`
@@ -162,18 +163,6 @@ import {Spinner} from 'primereact/spinner';
                             <td>number</td>
                             <td>null</td>
                             <td>Size of the input field.</td>
-                        </tr>
-                        <tr>
-                            <td>decimalSeparator</td>
-                            <td>numstringber</td>
-                            <td>.</td>
-                            <td>Separator character for decimals.</td>
-                        </tr>
-                        <tr>
-                            <td>thousandSeparator</td>
-                            <td>string</td>
-                            <td>,</td>
-                            <td>Separator character for thousands.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -307,13 +296,13 @@ export class SpinnerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic {this.state.value1}</h3>
-                    <Spinner value={this.state.value} size={30} onChange={(e) => this.setState({value1: e.value})} />
+                    <h3>Basic</h3>
+                    <Spinner value={this.state.value1} size={30} onChange={(e) => this.setState({value1: e.value})} />
 
-                    <h3>Min/Max {this.state.value2}</h3>
+                    <h3>Min/Max</h3>
                     <Spinner value={this.state.value2} size={30} onChange={(e) => this.setState({value2: e.value})} min={0} max={100} />
 
-                    <h3>Step {this.state.value3}</h3>
+                    <h3>Step</h3>
                     <Spinner value={this.state.value3} size={30} onChange={(e) => this.setState({value3: e.value})} step={0.25} />
 
                     <h3>Disabled</h3>

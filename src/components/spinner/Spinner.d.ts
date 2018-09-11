@@ -12,8 +12,6 @@ interface SpinnerProps {
     readonly?: boolean;
     maxlength?: number;
     size?: number;
-    decimalSeparator?: string;
-    thousandSeparator?: string;
     style?: object;
     className?: string;
     inputId?: string;

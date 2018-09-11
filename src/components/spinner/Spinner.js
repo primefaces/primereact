@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
 import Tooltip from "../tooltip/Tooltip";
+import DomHandler from '../utils/DomHandler';
 
 export class Spinner extends Component {
 
@@ -18,8 +19,6 @@ export class Spinner extends Component {
         readonly: false,
         maxlength: null,
         size: null,
-        decimalSeparator: '.',
-        thousandSeparator: ',',
         style: null,
         className: null,
         inputId: null,
@@ -41,8 +40,6 @@ export class Spinner extends Component {
         readonly: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
-        decimalSeparator: PropTypes.string,
-        thousandSeparator: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         inputId: PropTypes.string,
@@ -60,19 +57,10 @@ export class Spinner extends Component {
             this.precision = this.props.step.toString().split(/[,]|[.]/)[1].length;
         }
 
-        let val = this.props.value;
-        if(val !== undefined && val != null) {
-            this.value = this.updateValue(val);
-        }
-
-        this.formatValue();
-        this.updateFilledState();
-
-        this.onInputKeyUp = this.onInputKeyUp.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
-        this.onInputKeyPress = this.onInputKeyPress.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.onInputFocus = this.onInputFocus.bind(this);
 
         this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
         this.onUpButtonMouseDown = this.onUpButtonMouseDown.bind(this);
@@ -87,46 +75,49 @@ export class Spinner extends Component {
         this.onDownButtonKeyUp = this.onDownButtonKeyUp.bind(this);
     }
 
-    repeat(interval, dir) {
+    repeat(event, interval, dir) {
         let i = interval || 500;
 
         this.clearTimer();
         this.timer = setTimeout(() => {
-            this.repeat(40, dir);
+            this.repeat(event, 40, dir);
         }, i);
 
-        this.spin(dir);
+        this.spin(event, dir);
     }
 
-    spin(dir) {
+    spin(event, dir) {
         let step = this.props.step * dir;
-        let currentValue = this.value || 0;
+        let currentValue;
+        let newValue;
+
+        if (this.props.value)
+            currentValue = (typeof this.props.value === 'string') ? this.parseValue(this.props.value) : this.props.value;
+        else
+            currentValue = 0;
 
         if (this.precision)
-            this.value = parseFloat(this.toFixed(currentValue + step, this.precision));
+            newValue = parseFloat(this.toFixed(currentValue + step, this.precision));
         else
-            this.value = currentValue + step;
+            newValue = currentValue + step;
 
         if (this.props.maxlength !== null && this.value.toString().length > this.props.maxlength) {
-            this.value = currentValue;
+            newValue = currentValue;
         }
 
-        if (this.props.min !== null && this.value < this.props.min) {
-            this.value = this.props.min;
+        if (this.props.min !== null && newValue < this.props.min) {
+            newValue = this.props.min;
         }
 
-        if (this.props.max !== null && this.value > this.props.max) {
-            this.value = this.props.max;
+        if (this.props.max !== null && newValue > this.props.max) {
+            newValue= this.props.max;
         }
-
-        this.formatValue();
-
-        this.inputEl.value = this.valueAsString;
         
         if (this.props.onChange) {
             this.props.onChange({
-                value: this.value
-            })
+                originalEvent: event,
+                value: newValue
+            });
         }
     }
 
@@ -135,20 +126,10 @@ export class Spinner extends Component {
         return String(Math.round(value * power) / power);
     }
 
-    updateValue(val) {
-        if(this.precision) {
-            return this.parseValue(parseFloat(val).toFixed(this.precision));
-        }
-        else {
-            return val;
-        }
-    }
-
     onUpButtonMouseDown(event) {
         if (!this.props.disabled) {
             this.inputEl.focus();
-            this.repeat(null, 1);
-            this.updateFilledState();
+            this.repeat(event, null, 1);
             event.preventDefault();
         }
     }
@@ -172,17 +153,15 @@ export class Spinner extends Component {
     }
 
     onUpButtonKeyDown(event) {
-        if (event.which === 32 || event.which === 13) {
-            this.repeat(null, 1);
-            this.updateFilledState();
+        if (event.keyCode === 32 || event.keyCode === 13) {
+            this.repeat(event, null, 1);
         }
     }
 
     onDownButtonMouseDown(event, focusInput) {
         if (!this.props.disabled) {
             this.inputEl.focus();
-            this.repeat(null, -1);
-            this.updateFilledState();
+            this.repeat(event, null, -1);
             
             event.preventDefault();
         }
@@ -207,9 +186,8 @@ export class Spinner extends Component {
     }
     
     onDownButtonKeyDown(event) {
-        if(event.which === 32 || event.which === 13) {
-            this.repeat(null, -1);
-            this.updateFilledState();
+        if (event.keyCode === 32 || event.keyCode === 13) {
+            this.repeat(event, null, -1);
         }
     }
 
@@ -224,66 +202,17 @@ export class Spinner extends Component {
         }
     }
 
-    onInputKeyPress(event) {
-        let inputChar = String.fromCharCode(event.charCode);
-        let keyPattern = /[0-9+-]/;
-        if (!keyPattern.test(inputChar) && inputChar !== this.props.decimalSeparator ) {
-            event.preventDefault();
-        }
-    }
-
-    onInputKeyUp(event) {
-
-        let inputValue = event.target.value;
-        if (event.key === this.props.decimalSeparator  && event.key === this.props.thousandSeparator)
-            this.value = inputValue;
-        else
-            this.value = this.parseValue(inputValue);
-
-        this.formatValue();
-        this.inputEl.value = this.valueAsString;
-
-        if (this.props.onChange) {
-            this.props.onChange({
-                value: this.value
-            })
-        }
-        this.updateFilledState();
-    }
-
-    onInputBlur(event) {
-        let val = this.value;
-        if(val !== undefined && val !== null) {
-            this.value = this.updateValue(val);
-        }
-
-        this.formatValue();
-        this.updateFilledState();
-
-        if(this.inputEl.value !== this.valueAsString) {
-            this.inputEl.value = this.valueAsString;
-
-            if (this.props.onChange) {
-                this.props.onChange({
-                    value: this.value
-                })
-            }
-        }
-    }
-
     parseValue(val) {
-        let value;
-        val = val.split(this.props.thousandSeparator).join('');
-        if (val.trim() === '') {
-            value = this.props.min !== null ? this.props.min : null;
+        let value = val.trim();
+
+        if (val === '') {
+            value = this.props.min != null ? this.props.min : null;
         }
         else {
-            if (this.precision) {
+            if (this.precision)
                 value = parseFloat(val.replace(',', '.'));
-            }
-            else {
+            else
                 value = parseInt(val, 10);
-            }
 
             if (!isNaN(value)) {
                 if (this.props.max !== null && value > this.props.max) {
@@ -302,22 +231,33 @@ export class Spinner extends Component {
         return value;
     }
 
-    formatValue() {
-        if (this.value !== null && this.value !== undefined) {
-            let textValue = String(this.value).replace('.', this.props.decimalSeparator);
-            textValue = textValue.replace(/\B(?=(\d{3})+(?!\d))/g, this.props.thousandSeparator);
-            this.valueAsString = textValue;
-        }
-        else {
-            this.valueAsString = '';
-        }
+    onInputFocus(event) {
+        DomHandler.addClass(this.element, 'p-inputwrapper-focus');
     }
 
-    onChange() {
+    onInputChange(event) {
         if (this.props.onChange) {
             this.props.onChange({
-                value: this.value
-            })
+                originalEvent: event,
+                value: event.target.value
+            });
+        }
+    } 
+
+    onInputBlur(event) {
+        DomHandler.removeClass(this.element, 'p-inputwrapper-focus');
+
+        if (this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event,
+                value: this.parseValue(event.target.value)
+            });
+        }
+
+        if (this.props.onBlur) {
+            this.props.onBlur({
+                event: event
+            });
         }
     }
 
@@ -327,13 +267,7 @@ export class Spinner extends Component {
         }
     }
 
-    updateFilledState() {
-        this.filled = (this.value !== undefined && this.value != null);
-    }
-
     componentDidMount() {
-        this.inputEl.value = this.valueAsString;
-
         if (this.props.tooltip) {
             this.tooltip = new Tooltip({
                 target: this.element,
@@ -354,10 +288,9 @@ export class Spinner extends Component {
         const className = classNames('p-spinner-input', this.props.inputClassName);
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} 
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} value={this.props.value||''}
                 type="text" size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly} name={this.props.name}
-                onKeyDown={this.onInputKeyDown} onKeyUp={this.onInputKeyUp} onKeyPress={this.onInputKeyPress} 
-                onBlur={this.onInputBlur} onChange={this.onChange} onFocus={this.onInputFocus} />
+                onKeyDown={this.onInputKeyDown} onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} />
         );
     }
 
@@ -388,7 +321,7 @@ export class Spinner extends Component {
     }
 
     render() {
-        let className = classNames("p-spinner p-component", this.props.className);
+        let className = classNames("p-spinner p-component", this.props.className, {'p-inputwrapper-filled': this.props.value != null});
         let inputElement = this.renderInputElement();
         let upButton = this.renderUpButton();
         let downButton = this.renderDownButton();
