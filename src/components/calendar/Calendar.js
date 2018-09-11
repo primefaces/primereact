@@ -157,7 +157,7 @@ export class Calendar extends Component {
         }
 
         this.onInputClick = this.onInputClick.bind(this);
-        this.onInput = this.onInput.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
@@ -236,7 +236,7 @@ export class Calendar extends Component {
         }
     }
 
-    onInput(event) {
+    onInputChange(event) {
         // IE 11 Workaround for input placeholder
         if (!this.isKeydown) {
             return;
@@ -1860,7 +1860,7 @@ export class Calendar extends Component {
             return (
                 <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} value={value} type="text" className={className} style={this.props.inputStyle} 
                     readOnly={this.props.readOnlyInput} disabled={this.props.disabled} tabIndex={this.props.tabIndex} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                    onInput={this.onInput} onClick={this.onInputClick} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} />
+                    onChange={this.onInputChange} onClick={this.onInputClick} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} />
             );
         }
         else {
