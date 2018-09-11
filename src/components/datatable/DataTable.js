@@ -419,6 +419,7 @@ export class DataTable extends Component {
     onColumnResizeStart(event) {
         let containerLeft = DomHandler.getOffset(this.container).left;
         this.resizeColumn = event.columnEl;
+        this.resizeColumnProps = event.columnProps;
         this.columnResizing = true;
         this.lastResizerHelperX = (event.originalEvent.pageX - containerLeft + this.container.scrollLeft);
 
@@ -483,6 +484,7 @@ export class DataTable extends Component {
             if(this.props.onColumnResizeEnd) {
                 this.props.onColumnResizeEnd({
                     element: this.resizeColumn,
+                    column: this.resizeColumnProps,
                     delta: delta
                 });
             }
@@ -490,6 +492,7 @@ export class DataTable extends Component {
                 
         this.resizerHelper.style.display = 'none';
         this.resizeColumn = null;
+        this.resizeColumnProps = null;
         DomHandler.removeClass(this.container, 'p-unselectable-text');
 
         this.unbindColumnResizeEvents();

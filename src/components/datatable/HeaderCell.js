@@ -50,7 +50,8 @@ export class HeaderCell extends Component {
         if(this.props.resizableColumns && this.props.onColumnResizeStart) {
             this.props.onColumnResizeStart({
                 originalEvent: event,
-                columnEl: event.target.parentElement
+                columnEl: event.target.parentElement,
+                columnProps: this.props
             });
         }
     }

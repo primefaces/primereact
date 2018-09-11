@@ -1940,7 +1940,8 @@ export class DataTableLazyDemo extends Component {
                         </tr>
                         <tr>
                             <td>onColumnResizeEnd</td>
-                            <td>event.element: DOM element of the resized column.<br />
+                            <td>event.element: DOM element of the resized column.
+                                event.column: Properties of the resized column.<br />
                                 event.delta: Change in column width</td>
                             <td>Callback to invoke when a column is resized.</td>
                         </tr>
