@@ -138,26 +138,14 @@ export class Dropdown extends Component {
     }
 
     onUpKey(event) {
-        if (!this.panel.element.offsetParent && event.altKey) {
-            this.show();
-        }
-        else {
+        if (this.props.options) {
             let selectedItemIndex = this.findOptionIndex(this.props.value);
+            let prevItem = this.findPrevVisibleItem(selectedItemIndex);
 
-            if (selectedItemIndex !== -1) {
-                let nextItemIndex = selectedItemIndex + 1;
-                if (nextItemIndex !== (this.props.options.length)) {
-                    this.selectItem({
-                        originalEvent: event,
-                        option: this.props.options[nextItemIndex]
-                    });
-                }
-            }
-
-            if (selectedItemIndex === -1) {
+            if (prevItem) {
                 this.selectItem({
                     originalEvent: event,
-                    option: this.props.options[0]
+                    option: prevItem
                 });
             }
         }
@@ -166,14 +154,21 @@ export class Dropdown extends Component {
     }
 
     onDownKey(event) {
-        let selectedItemIndex = this.findOptionIndex(this.props.value);
-        
-        if (selectedItemIndex > 0) {
-            let prevItemIndex = selectedItemIndex - 1;
-            this.selectItem({
-                originalEvent: event,
-                option: this.props.options[prevItemIndex]
-            });
+        if (this.props.options) {
+            if (!this.panel.element.offsetParent && event.altKey) {
+                this.show();
+            }
+            else {
+                let selectedItemIndex = this.findOptionIndex(this.props.value);
+                let nextItem = this.findNextVisibleItem(selectedItemIndex);
+
+                if (nextItem) {
+                    this.selectItem({
+                        originalEvent: event,
+                        option: nextItem
+                    });
+                }
+            }
         }
 
         event.preventDefault();
@@ -183,12 +178,13 @@ export class Dropdown extends Component {
         switch(event.which) {
             //down
             case 40:
-                this.onUpKey(event);
+                this.onDownKey(event);
+                
             break;
             
             //up
             case 38:
-                this.onDownKey(event);
+                this.onUpKey(event);
             break;
 
             //space
@@ -215,6 +211,42 @@ export class Dropdown extends Component {
             
             default:
             break;
+        }
+    }
+
+    findNextVisibleItem(index) {
+        let i = index + 1;
+        if (i === this.props.options.length) {
+            return null;
+        }
+
+        let option = this.props.options[i];
+        if (this.hasFilter()) {
+            if (this.filter(option))
+                return option;
+            else
+                return this.findNextVisibleItem(i);
+        }
+        else {
+            return option;
+        }
+    }
+
+    findPrevVisibleItem(index) {
+        let i = index - 1;
+        if (i === -1) {
+            return null;
+        }
+
+        let option = this.props.options[i];
+        if (this.hasFilter()) {
+            if (this.filter(option))
+                return option;
+            else
+                return this.findPrevVisibleItem(i);
+        }
+        else {
+            return option;
         }
     }
     
@@ -251,12 +283,12 @@ export class Dropdown extends Component {
         switch (event.which) {
             //down
             case 40:
-                this.onUpKey(event);
+                this.onDownKey(event);
                 break;
 
             //up
             case 38:
-                this.onDownKey(event);
+                this.onUpKey(event);
                 break;
 
             //enter
