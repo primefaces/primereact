@@ -1876,7 +1876,7 @@ body .p-tree {
   -webkit-border-radius: 3px;
   border-radius: 3px; }
   body .p-tree .p-tree-container {
-    padding: 0;
+    padding: 0.286em;
     margin: 0; }
     body .p-tree .p-tree-container .p-treenode {
       padding: 0.143em 0; }
