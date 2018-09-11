@@ -388,7 +388,7 @@ export class Spinner extends Component {
     }
 
     render() {
-        let className = classNames("p-spinner p-component");
+        let className = classNames("p-spinner p-component", this.props.className);
         let inputElement = this.renderInputElement();
         let upButton = this.renderUpButton();
         let downButton = this.renderDownButton();
