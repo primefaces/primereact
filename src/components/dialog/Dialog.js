@@ -320,7 +320,7 @@ export class Dialog extends Component {
             let deltaY = event.pageY - this.lastPageY;
             let containerWidth = DomHandler.getOuterWidth(this.container);
             let containerHeight = DomHandler.getOuterHeight(this.container);
-            let contentHeight = DomHandler.getOuterHeight(this.content);
+            let contentHeight = DomHandler.getOuterHeight(this.contentElement);
             let newWidth = containerWidth + deltaX;
             let newHeight = containerHeight + deltaY;
 
