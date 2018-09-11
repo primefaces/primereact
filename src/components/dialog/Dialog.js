@@ -87,6 +87,8 @@ export class Dialog extends Component {
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
+        this.onCloseKeyPress = this.onCloseKeyPress.bind(this);
+        this.onMaximizeKeyPress = this.onMaximizeKeyPress.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -128,6 +130,13 @@ export class Dialog extends Component {
         }
     }
 
+    focus() {
+        let focusable = DomHandler.findSingle(this.container, 'button');
+        if (focusable) {
+            focusable.focus();
+        }
+    }
+
     show() {
         this.bindGlobalListeners();
         
@@ -141,6 +150,7 @@ export class Dialog extends Component {
         
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.positionOverlay();
+        this.focus();
         DomHandler.fadeIn(this.container, 250);
 
         if(this.state.maximized) {
@@ -463,6 +473,18 @@ export class Dialog extends Component {
         }
     }
 
+    onCloseKeyPress(event) {
+        if (event.key === 'Enter') {
+            this.onClose(event);
+        }
+    }
+
+    onMaximizeKeyPress(event) {
+        if (event.key === 'Enter') {
+            this.toggleMaximize(event);
+        }
+    }
+
     componentDidMount() {
         if(this.props.visible) {
             this.show();
@@ -497,7 +519,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if(this.props.closable) {
             return (
-                <a role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                <a tabIndex="0" role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close" onClick={this.onClose} onMouseDown={this.onCloseMouseDown} onKeyPress={this.onCloseKeyPress}>
                     <span className="pi pi-times"></span>
                 </a>
             );
@@ -512,7 +534,7 @@ export class Dialog extends Component {
 
         if(this.props.maximizable) {
             return (
-                <a role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize" onClick={this.toggleMaximize}>
+                <a tabIndex="0" role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize" onClick={this.toggleMaximize} onKeyPress={this.onMaximizeKeyPress}>
                     <span className={iconClassName}></span>
                 </a>
             );
@@ -530,8 +552,10 @@ export class Dialog extends Component {
             return (
                 <div ref={(el) => { this.headerElement = el; }} className="p-dialog-titlebar" onMouseDown={this.initDrag}>
                     <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
-                    {closeIcon}
-                    {maximizeIcon}
+                    <div className="p-dialog-titlebar-icons">
+                        {maximizeIcon}
+                        {closeIcon}
+                    </div>
                 </div>
             );
         }

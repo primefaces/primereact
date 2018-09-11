@@ -554,7 +554,7 @@ class UITreeNode extends Component {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
 
         return (
-            <a tabindex="0" className="p-tree-toggler p-unselectable-text" onClick={this.onTogglerClick} onKeyDown={this.onTogglerKeyDown}>
+            <a tabIndex="0" className="p-tree-toggler p-unselectable-text" onClick={this.onTogglerClick} onKeyDown={this.onTogglerKeyDown}>
                 <span className={iconClassName}></span>
             </a>
         );

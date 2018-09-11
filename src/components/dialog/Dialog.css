@@ -7,11 +7,6 @@
     position: relative;
     border: 0;
 }
-.p-dialog .p-dialog-titlebar:after { 
-    content: "";
-    display: table;
-    clear: both;
-}
 .p-dialog .p-dialog-content {
     position: relative;
     border: 0;
@@ -33,12 +28,20 @@
 .p-draggable .p-dialog-titlebar {
     cursor: move;
 }
+.p-dialog .p-dialog-titlebar-icons {
+    float: right;
+}
+.p-dialog .p-dialog-titlebar-icons:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 .p-dialog .p-dialog-titlebar-icon {
     text-decoration: none;
-    float: right;
-    float: right;
     padding: .125em;
     cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
     border: 1px solid transparent;
 }
 
