@@ -716,22 +716,24 @@ body {
       margin: 0.857em 0 0 0; }
       body .p-datepicker table th {
         padding: 0.5em; }
-      body .p-datepicker table td > a, body .p-datepicker table td > span {
-        display: block;
-        text-align: center;
-        color: #333333;
-        padding: 0.5em;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        border-radius: 3px; }
-      body .p-datepicker table td > a {
-        cursor: pointer; }
-        body .p-datepicker table td > a.p-highlight {
-          color: #ffffff;
-          background-color: #007ad9; }
-      body .p-datepicker table td.p-datepicker-today a {
-        background-color: #d0d0d0;
-        color: #333333; }
+      body .p-datepicker table td {
+        padding: 0.5em; }
+        body .p-datepicker table td > a, body .p-datepicker table td > span {
+          display: block;
+          text-align: center;
+          color: #333333;
+          padding: 0.5em;
+          -moz-border-radius: 3px;
+          -webkit-border-radius: 3px;
+          border-radius: 3px; }
+        body .p-datepicker table td > a {
+          cursor: pointer; }
+          body .p-datepicker table td > a.p-highlight {
+            color: #ffffff;
+            background-color: #007ad9; }
+        body .p-datepicker table td.p-datepicker-today a {
+          background-color: #d0d0d0;
+          color: #333333; }
     body .p-datepicker .p-datepicker-buttonbar {
       border-top: 1px solid #d8dae2; }
     body .p-datepicker .p-timepicker {
@@ -1890,22 +1892,22 @@ body .p-tree {
           vertical-align: middle;
           display: inline-block;
           float: none;
-          margin: 0 0.143em 0 0;
+          margin: 0 0.286em 0 0;
           color: #848484; }
           body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler .p-tree-toggler-icon {
             line-height: 1.25em; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
           vertical-align: middle;
           display: inline-block;
-          margin: 0 0.143em 0 0;
+          margin: 0 0.286em 0 0;
           color: #848484; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-label {
           margin: 0;
           vertical-align: middle;
           display: inline-block;
-          padding: 0.286em; }
+          padding: 0.286em 0; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
-          margin: 0 0.5em 0 0; }
+          margin: 0 0.286em 0 0; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
           background-color: #007ad9;
           color: #ffffff; }
