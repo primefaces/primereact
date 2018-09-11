@@ -8,7 +8,6 @@ import ObjectUtils from '../utils/ObjectUtils';
 import {AutoCompletePanel} from './AutoCompletePanel';
 import classNames from 'classnames';
 import Tooltip from "../tooltip/Tooltip";
-import { format } from 'util';
 
 export class AutoComplete extends Component {
 
