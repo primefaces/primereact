@@ -95,11 +95,11 @@ export class Dialog extends Component {
 
     positionOverlay() {
         let viewport = DomHandler.getViewport();
-        if(DomHandler.getOuterHeight(this.container) > viewport.height) {
+        if (DomHandler.getOuterHeight(this.container) > viewport.height) {
              this.contentElement.style.height = (viewport.height * .75) + 'px';
         }
         
-        if(this.props.positionLeft >= 0 && this.props.positionTop >= 0) {
+        if (this.props.positionLeft >= 0 && this.props.positionTop >= 0) {
             this.container.style.left = this.props.positionLeft + 'px';
             this.container.style.top = this.props.positionTop + 'px';
         } 
@@ -121,11 +121,11 @@ export class Dialog extends Component {
         this.unbindMaskClickListener();
         this.unbindGlobalListeners();     
 
-        if(this.props.modal) {
+        if (this.props.modal) {
             this.disableModality();
         }
 
-        if(this.state.maximized) {
+        if (this.state.maximized) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
@@ -140,11 +140,7 @@ export class Dialog extends Component {
     show() {
         this.bindGlobalListeners();
         
-        if(this.props.modal) {
-            this.enableModality();
-        }
-        
-        if(this.props.onShow) {
+        if (this.props.onShow) {
             this.props.onShow();
         }
         
@@ -153,7 +149,11 @@ export class Dialog extends Component {
         this.focus();
         DomHandler.fadeIn(this.container, 250);
 
-        if(this.state.maximized) {
+        if (this.props.modal) {
+            this.enableModality();
+        }
+
+        if (this.state.maximized) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
@@ -198,7 +198,7 @@ export class Dialog extends Component {
     center() {
         var elementWidth = DomHandler.getOuterWidth(this.container);
         var elementHeight = DomHandler.getOuterHeight(this.container);
-        if(elementWidth === 0 && elementHeight === 0) {
+        if (elementWidth === 0 && elementHeight === 0) {
             this.container.style.visibility = 'hidden';
             this.container.style.display = 'block';
             elementWidth = DomHandler.getOuterWidth(this.container);
@@ -215,12 +215,12 @@ export class Dialog extends Component {
     }
 
     enableModality() {
-        if(!this.mask) {
+        if (!this.mask) {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
             DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-dialog-mask');
 
-            if(this.props.closable && this.props.dismissableMask) {
+            if (this.props.closable && this.props.dismissableMask) {
                 this.maskClickListener = (event) => {
                    this.onClose(event);
                 };
@@ -229,18 +229,18 @@ export class Dialog extends Component {
             }
             document.body.appendChild(this.mask);
 
-            if(this.props.blockScroll) {
+            if (this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'p-overflow-hidden');
             }
         }
     }
 
     disableModality() {
-        if(this.mask) {
+        if (this.mask) {
             this.unbindMaskClickListener();
 
             document.body.removeChild(this.mask);
-            if(this.props.blockScroll) {
+            if (this.props.blockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
             this.mask = null;
@@ -248,24 +248,14 @@ export class Dialog extends Component {
     }
 
     unbindMaskClickListener() {
-        if(this.maskClickListener) {
+        if (this.maskClickListener) {
             this.mask.removeEventListener('click', this.maskClickListener);
             this.maskClickListener = null;
 		}
     }
 
     moveOnTop() {
-        let maskIndex = false;
-        for(let prop in this.props.children){
-            if(this.props.children[prop] && this.props.children[prop].props !== undefined){
-                let child = this.props.children[prop].props.appendTo;
-                if(child !==null || child !== undefined) {
-                    maskIndex = true;
-                }
-            }
-        }
-        if(!maskIndex)
-            this.container.style.zIndex = String(DomHandler.generateZIndex());
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
     }
 
     onCloseMouseDown(event) {
@@ -273,12 +263,12 @@ export class Dialog extends Component {
     }
 
     initDrag(event) {
-        if(this.closeIconMouseDown) {
+        if (this.closeIconMouseDown) {
             this.closeIconMouseDown = false;
             return;
         }
 
-        if(this.props.draggable) {
+        if (this.props.draggable) {
             this.dragging = true;
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
@@ -287,17 +277,17 @@ export class Dialog extends Component {
     }
 
     onDrag(event) {
-        if(this.dragging) {
+        if (this.dragging) {
             let deltaX = event.pageX - this.lastPageX;
             let deltaY = event.pageY - this.lastPageY;
             let leftPos = parseFloat(this.container.style.left) + deltaX;
             let topPos = parseFloat(this.container.style.top) + deltaY;
 
-            if(leftPos >= this.props.minX) {
+            if (leftPos >= this.props.minX) {
                 this.container.style.left = leftPos + 'px';
             }
 
-            if(topPos >= this.props.minY) {
+            if (topPos >= this.props.minY) {
                 this.container.style.top = topPos + 'px';
             }
 
@@ -308,14 +298,14 @@ export class Dialog extends Component {
     }
 
     endDrag(event) {
-        if(this.props.draggable) {
+        if (this.props.draggable) {
             this.dragging = false;
             DomHandler.removeClass(document.body, 'p-unselectable-text');
         }
     }
 
     initResize(event) {
-        if(this.props.resizable) {
+        if (this.props.resizable) {
             this.preWidth = null;
             this.resizing = true;
             this.lastPageX = event.pageX;
@@ -325,7 +315,7 @@ export class Dialog extends Component {
     }
     
     onResize(event) {
-        if(this.resizing) {
+        if (this.resizing) {
             let deltaX = event.pageX - this.lastPageX;
             let deltaY = event.pageY - this.lastPageY;
             let containerWidth = DomHandler.getOuterWidth(this.container);
@@ -334,11 +324,11 @@ export class Dialog extends Component {
             let newWidth = containerWidth + deltaX;
             let newHeight = containerHeight + deltaY;
 
-            if(newWidth > this.props.minWidth) {
+            if (newWidth > this.props.minWidth) {
                 this.container.style.width = newWidth + 'px';
             }
                 
-            if(newHeight > this.props.minHeight) {
+            if (newHeight > this.props.minHeight) {
                 this.container.style.height = newHeight + 'px';
                 this.contentElement.style.height = contentHeight + deltaY + 'px';
             }
@@ -349,20 +339,20 @@ export class Dialog extends Component {
     }
     
     bindGlobalListeners() {
-        if(this.props.draggable) {
+        if (this.props.draggable) {
             this.bindDocumentDragListener();
             this.bindDocumentDragEndListener();
         }
         
-        if(this.props.resizable) {
+        if (this.props.resizable) {
             this.bindDocumentResizeListeners();
         }
         
-        if(this.props.responsive) {
+        if (this.props.responsive) {
             this.bindDocumentResponsiveListener();
         }
         
-        if(this.props.closeOnEscape && this.props.closable) {
+        if (this.props.closeOnEscape && this.props.closable) {
             this.bindDocumentEscapeListener();
         }
     }
@@ -383,7 +373,7 @@ export class Dialog extends Component {
     }
     
     unbindDocumentDragListener() {
-        if(this.documentDragListener) {
+        if (this.documentDragListener) {
             document.removeEventListener('mousemove', this.documentDragListener);
             this.documentDragListener = null;
         }
@@ -397,7 +387,7 @@ export class Dialog extends Component {
     }
 
     unbindDocumentDragEndListener() {
-        if(this.documentDragEndListener) {
+        if (this.documentDragEndListener) {
             document.removeEventListener('mouseup', this.documentDragEndListener);
             this.documentDragEndListener = null;
         }
@@ -409,7 +399,7 @@ export class Dialog extends Component {
         };
         
         this.documentResizeEndListener = (event) => {
-            if(this.resizing) {
+            if (this.resizing) {
                 this.resizing = false;
                 DomHandler.removeClass(document.body, 'p-unselectable-text');
             }
@@ -420,7 +410,7 @@ export class Dialog extends Component {
     }
     
     unbindDocumentResizeListeners() {
-        if(this.documentResizeListener && this.documentResizeEndListener) {
+        if (this.documentResizeListener && this.documentResizeEndListener) {
             document.removeEventListener('mousemove', this.documentResizeListener);
             document.removeEventListener('mouseup', this.documentResizeEndListener);
             this.documentResizeListener = null;
@@ -432,8 +422,8 @@ export class Dialog extends Component {
         this.documentResponsiveListener = (event) => {
             let viewport = DomHandler.getViewport();
             let width = DomHandler.getOuterWidth(this.container);
-            if(viewport.width <= this.props.breakpoint) {
-                if(!this.preWidth) {
+            if (viewport.width <= this.props.breakpoint) {
+                if (!this.preWidth) {
                     this.preWidth = width;
                 }
                 this.container.style.left = '0px';
@@ -449,7 +439,7 @@ export class Dialog extends Component {
     }
     
     unbindDocumentResponsiveListener() {
-        if(this.documentResponsiveListener) {
+        if (this.documentResponsiveListener) {
             window.removeEventListener('resize', this.documentResponsiveListener);
             this.documentResponsiveListener = null;
         }
@@ -457,8 +447,8 @@ export class Dialog extends Component {
     
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
-            if(event.which === 27) {
-                if(parseInt(this.container.style.zIndex, 10) === DomHandler.getCurrentZIndex()) {
+            if (event.which === 27) {
+                if (parseInt(this.container.style.zIndex, 10) === DomHandler.getCurrentZIndex()) {
                     this.onClose(event);
                 }
             }
@@ -467,7 +457,7 @@ export class Dialog extends Component {
     }
     
     unbindDocumentEscapeListener() {
-        if(this.documentEscapeListener) {
+        if (this.documentEscapeListener) {
             document.removeEventListener('keydown', this.documentEscapeListener);
             this.documentEscapeListener = null;
         }
@@ -486,22 +476,22 @@ export class Dialog extends Component {
     }
 
     componentDidMount() {
-        if(this.props.visible) {
+        if (this.props.visible) {
             this.show();
             this.currentHeight = DomHandler.getOuterHeight(this.container);
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevProps.visible !== this.props.visible) {
+        if (prevProps.visible !== this.props.visible) {
             if (this.props.visible)
                 this.show();
             else
                 this.hide();
         }
 
-        if(prevState.maximized !== this.state.maximized) {
-            if(this.state.maximized) {
+        if (prevState.maximized !== this.state.maximized) {
+            if (this.state.maximized) {
                 this.maximize();
             }
             else {
@@ -517,7 +507,7 @@ export class Dialog extends Component {
     }
 
     renderCloseIcon() {
-        if(this.props.closable) {
+        if (this.props.closable) {
             return (
                 <a tabIndex="0" role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close" onClick={this.onClose} onMouseDown={this.onCloseMouseDown} onKeyPress={this.onCloseKeyPress}>
                     <span className="pi pi-times"></span>
@@ -532,7 +522,7 @@ export class Dialog extends Component {
     renderMaximizeIcon() {
         const iconClassName = classNames('pi', {'pi-window-maximize': !this.state.maximized, 'pi-window-minimize': this.state.maximized});
 
-        if(this.props.maximizable) {
+        if (this.props.maximizable) {
             return (
                 <a tabIndex="0" role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize" onClick={this.toggleMaximize} onKeyPress={this.onMaximizeKeyPress}>
                     <span className={iconClassName}></span>
@@ -545,7 +535,7 @@ export class Dialog extends Component {
     }
 
     renderHeader() {
-        if(this.props.showHeader) {
+        if (this.props.showHeader) {
             let closeIcon = this.renderCloseIcon();
             let maximizeIcon = this.renderMaximizeIcon();
 
@@ -573,7 +563,7 @@ export class Dialog extends Component {
     }
 
     renderFooter() {
-        if(this.props.footer) {
+        if (this.props.footer) {
             return (
                 <div ref={(el) => { this.footerElement = el; }} className="p-dialog-footer">{this.props.footer}</div>
             );
@@ -584,7 +574,7 @@ export class Dialog extends Component {
     }
 
     renderResizer() {
-        if(this.props.resizable) {
+        if (this.props.resizable) {
             return (
                 <div className="p-resizable-handle" onMouseDown={this.initResize}></div>
             );
@@ -621,12 +611,9 @@ export class Dialog extends Component {
             </div>
         );
 
-        if(this.props.appendTo) {
+        if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
+        else
             return element;
-        }
-        
     }
 }
