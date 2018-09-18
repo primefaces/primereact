@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import KeyFilter from "../keyfilter/KeyFilter";
 import Tooltip from "../tooltip/Tooltip";
+import DomHandler from '../utils/DomHandler';
 
 export class InputText extends Component {
 
@@ -48,6 +49,13 @@ export class InputText extends Component {
 
         if (this.props.onInput) {
             this.props.onInput(event, validatePattern);
+        }
+
+        if (!this.props.onChange) {
+            if (event.target.value.length > 0)
+                DomHandler.addClass(event.target, 'p-filled');
+            else
+                DomHandler.removeClass(event.target, 'p-filled');
         }
     }
 
