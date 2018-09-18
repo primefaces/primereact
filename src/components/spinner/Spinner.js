@@ -278,7 +278,13 @@ export class Spinner extends Component {
 
         if (this.props.onBlur) {
             this.props.onBlur({
-                event: event
+                event: event,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id :  this.props.id,
+                }
             });
         }
     }
