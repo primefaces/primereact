@@ -16,6 +16,7 @@ export class ScrollableView extends Component {
         virtualScroll: false,
         rows: null,
         totalRecords: null,
+        loading: false,
         onVirtualScroll: null
      }
 
@@ -30,6 +31,7 @@ export class ScrollableView extends Component {
         virtualScroll: PropTypes.bool,
         rows: PropTypes.number,
         totalRcords: PropTypes.number,
+        loading: PropTypes.bool,
         onVirtualScroll: PropTypes.func
     }
 
@@ -60,7 +62,7 @@ export class ScrollableView extends Component {
             }
         }
         
-        if(this.virtualScrollCallback) {
+        if(this.virtualScrollCallback && !this.props.loading) {
             this.virtualScrollCallback();
             this.virtualScrollCallback = null;
         }
@@ -178,6 +180,7 @@ export class ScrollableView extends Component {
 
     render() {
         let className = classNames('p-datatable-scrollable-view', {'p-datatable-frozen-view': this.props.frozen, 'p-datatable-unfrozen-view': !this.props.frozen && this.props.frozenWidth});
+        let tableClassName = classNames({'p-datatable-virtual-table': this.props.virtualScroll});
         let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
@@ -193,7 +196,7 @@ export class ScrollableView extends Component {
                     </div>
                 </div>
                 <div className="p-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
-                    <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
+                    <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}} className={tableClassName}>
                         {colGroup}
                         {this.props.body}
                     </table>

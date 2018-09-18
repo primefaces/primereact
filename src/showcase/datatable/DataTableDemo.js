@@ -1830,7 +1830,7 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>virtualScrollDelay</td>
                             <td>number</td>
-                            <td>500</td>
+                            <td>250</td>
                             <td>Delay in virtual scroll before doing a call to lazy load.</td>
                         </tr>
                         <tr>

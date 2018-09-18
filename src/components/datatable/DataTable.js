@@ -59,7 +59,7 @@ export class DataTable extends Component {
         scrollable: false,
         scrollHeight: null,
         virtualScroll: false,
-        virtualScrollDelay: 500,
+        virtualScrollDelay: 250,
         frozenWidth: null,
         frozenValue: null,
         csvSeparator: ',',
@@ -637,7 +637,7 @@ export class DataTable extends Component {
                 this.props.onVirtualScroll({
                     first: (event.page - 1) * this.props.rows,
                     rows: this.props.rows
-                })
+                });
             }
         }, this.props.virtualScrollDelay);
     }
@@ -854,10 +854,10 @@ export class DataTable extends Component {
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
         return <ScrollableView columns={columns} header={this.createTableHeader(columns, headerColumnGroup)} 
                 body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
-                footer={this.createTableFooter(columns, footerColumnGroup)} 
+                footer={this.createTableFooter(columns, footerColumnGroup)}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} rows={this.props.rows} totalRecords={totalRecords}
-                onVirtualScroll={this.onVirtualScroll}></ScrollableView>
+                onVirtualScroll={this.onVirtualScroll} loading={this.props.loading}></ScrollableView>
     }
     
     getColumns() {
