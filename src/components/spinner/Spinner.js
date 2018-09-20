@@ -26,7 +26,8 @@ export class Spinner extends Component {
         inputClassName: null,
         tooltip: null,
         tooltipOptions: null,
-        onChange: null
+        onChange: null,
+        onBlur: null
     }
 
     static propsTypes = {
@@ -47,7 +48,8 @@ export class Spinner extends Component {
         inputClassName: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onBlur: PropTypes.func
     }
 
     constructor(props) {
@@ -277,15 +279,7 @@ export class Spinner extends Component {
         }
 
         if (this.props.onBlur) {
-            this.props.onBlur({
-                event: event,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
-                target: {
-                    name: this.props.name,
-                    id: this.props.id,
-                }
-            });
+            this.props.onBlur(event);
         }
     }
 

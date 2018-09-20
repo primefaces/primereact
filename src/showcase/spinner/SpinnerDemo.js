@@ -226,6 +226,11 @@ import {Spinner} from 'primereact/spinner';
                             <td>event.value: New value</td>
                             <td>Callback to invoke on value change.</td>
                         </tr>
+                        <tr>
+                            <td>onBlur</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke when Spinner loses focus.</td>
+                        </tr> 
                     </tbody>
                 </table>
             </div>
