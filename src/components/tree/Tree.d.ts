@@ -6,9 +6,9 @@ interface TreeProps {
     value?: any;
     selectionMode?: string;
     selectionKeys?: any;
-    onSelectionChange(e: {originalEvent: Event, value: any}): void;
+    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     contextMenuSelectionKey?: any;
-    onContextMenuSelectionChange(e: {originalEvent: Event, value: any}): void;
+    onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
     expandedKeys?: any;
     style?: object;
     className?: string;
@@ -18,7 +18,7 @@ interface TreeProps {
     loading?: boolean;
     loadingIcon?: string;
     dragdropScope?: string;
-    nodeTemplate(node: any): JSX.Element;
+    nodeTemplate?(node: any): JSX.Element;
     onSelect?(e: {originalEvent: Event, value: TreeNode}): void;
     onUnselect?(e: {originalEvent: Event, value: TreeNode}): void;
     onExpand?(e: {originalEvent: Event, value: TreeNode}): void;
