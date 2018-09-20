@@ -90,7 +90,7 @@ export class Chips extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value : values
                 }
             });
@@ -134,7 +134,7 @@ export class Chips extends Component {
                             preventDefault : () =>{},
                             target: {
                                 name: this.props.name,
-                                id :  this.props.id,
+                                id: this.props.id,
                                 value : values
                             }
                         });

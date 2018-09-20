@@ -56,7 +56,7 @@ export class RadioButton extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value:  this.props.value,
                 }
             });

@@ -121,7 +121,7 @@ export class Spinner extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value: newValue
                 }
             });
@@ -251,7 +251,7 @@ export class Spinner extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value: event.target.value
                 }   
             });
@@ -270,7 +270,7 @@ export class Spinner extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value: parsedValue,
                 }
             });
@@ -283,7 +283,7 @@ export class Spinner extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                 }
             });
         }

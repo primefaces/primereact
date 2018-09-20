@@ -125,8 +125,8 @@ export class MultiSelect extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
-                    value
+                    id: this.props.id,
+                    value: value
                 }
             });
         }

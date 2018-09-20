@@ -263,7 +263,7 @@ export class Dropdown extends Component {
             preventDefault : () =>{},
             target: {
                 name: this.props.name,
-                id :  this.props.id,
+                id: this.props.id,
                 value : event.target.value,
             }
         });
@@ -316,7 +316,7 @@ export class Dropdown extends Component {
             preventDefault : () =>{},
             target: {
                 name: this.props.name,
-                id :  this.props.id,
+                id: this.props.id,
                 value : null
             }
         });
@@ -335,7 +335,7 @@ export class Dropdown extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value : this.props.optionLabel ? event.option : event.option.value,
                 }
             });

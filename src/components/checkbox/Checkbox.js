@@ -59,7 +59,7 @@ export class Checkbox extends Component {
                 target: {
                     type: 'checkbox',
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value: this.props.value,
                     checked: !this.props.checked,
                 }

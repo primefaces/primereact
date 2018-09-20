@@ -59,7 +59,7 @@ export class TriStateCheckbox extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id :  this.props.id,
+                    id: this.props.id,
                     value:  newValue,
                 }
             })
