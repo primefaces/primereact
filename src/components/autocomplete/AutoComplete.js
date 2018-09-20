@@ -198,7 +198,6 @@ export class AutoComplete extends Component {
     }
     
     updateModel(event, value) {
-        const resolvedFieldData = this.props.field ? ObjectUtils.resolveFieldData(value, this.props.field) : undefined;
         if(this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
@@ -208,7 +207,7 @@ export class AutoComplete extends Component {
                 target: {
                     name: this.props.name,
                     id: this.props.id,
-                    value: resolvedFieldData ? resolvedFieldData: value
+                    value: value
                 }
             });
         }
@@ -234,11 +233,6 @@ export class AutoComplete extends Component {
     updateInputField(value) {
         const formattedValue = this.formatValue(value);
         this.inputEl.value = formattedValue;
-
-        /*if (formattedValue && formattedValue.length)
-            DomHandler.addClass(this.container, 'p-inputwrapper-filled');
-        else
-            DomHandler.removeClass(this.container, 'p-inputwrapper-filled');*/
     }
 
     showPanel() {
@@ -510,7 +504,7 @@ export class AutoComplete extends Component {
 
         this.searching = false;
 
-        if (this.input && !this.props.multiple) {
+        if (this.inputEl && !this.props.multiple) {
             this.updateInputField(this.props.value);
         }
     }
