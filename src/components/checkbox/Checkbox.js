@@ -53,7 +53,16 @@ export class Checkbox extends Component {
             this.props.onChange({
                 originalEvent: e,
                 value: this.props.value,
-                checked: !this.props.checked
+                checked: !this.props.checked,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    type: 'checkbox',
+                    name: this.props.name,
+                    id :  this.props.id,
+                    value: this.props.value,
+                    checked: !this.props.checked,
+                }
             });
 
             this.input.checked = !this.props.checked;

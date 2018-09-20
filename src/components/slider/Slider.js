@@ -195,7 +195,14 @@ export class Slider extends Component {
             if (this.props.onChange) {
                 this.props.onChange({
                     originalEvent: event,
-                    value: this.values
+                    value: this.values,
+                    stopPropagation : () =>{},
+                    preventDefault : () =>{},
+                    target: {
+                        name: this.props.name,
+                        id :  this.props.id,
+                        value:  this.values,
+                    }
                 })
             }
         }
@@ -219,7 +226,14 @@ export class Slider extends Component {
             if (this.props.onChange) {
                 this.props.onChange({
                     originalEvent: event,
-                    value: this.value
+                    value: this.value,
+                    stopPropagation : () =>{},
+                    preventDefault : () =>{},
+                    target: {
+                        name: this.props.name,
+                        id :  this.props.id,
+                        value:  this.value,
+                    }
                 })
             }
         }
