@@ -358,13 +358,24 @@ class App extends Component {
         this.onSidebarClick = this.onSidebarClick.bind(this);
     }
 
-    changeTheme(event) {
-        var theme = event.currentTarget.dataset.theme;
-        var themeElement = document.getElementById('theme-link');
-        var oldThemeURL = themeElement.getAttribute('href');
-        var newThemeURL = oldThemeURL.replace(this.theme, theme);
+    changeTheme(event, theme, dark) {
+        let themeElement = document.getElementById('theme-link');
+        themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.theme, theme));
         this.theme = theme;
-        themeElement.setAttribute('href', newThemeURL);
+        
+        if (dark) {
+            if (!this.darkDemoStyle) {
+                this.darkDemoStyle = document.createElement('style');
+                this.darkDemoStyle.type = 'text/css';
+                this.darkDemoStyle.innerHTML = '.implementation { background-color: #3f3f3f !important; color: #dedede !important} .implementation > h3, .implementation > h4{ color: #dedede !important}';
+                document.body.appendChild(this.darkDemoStyle);
+            }
+        }
+        else if(this.darkDemoStyle) {
+            document.body.removeChild(this.darkDemoStyle);
+            this.darkDemoStyle = null;
+        }
+
         event.preventDefault();
     }
 
@@ -415,13 +426,13 @@ class App extends Component {
                                 <li className="topbar-submenu-header">FREE TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span></a></li>
                                 <li className="topbar-submenu-header">FREE THEMES</li>
-                                <li><a data-theme="nova-light" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></a></li>
-                                <li><a data-theme="nova-dark" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" /><span>Nova Dark</span></a></li>
-                                <li><a data-theme="nova-colored" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" /><span>Nova Colored</span></a></li>
-                                <li><a data-theme="luna-amber" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-amber.png" alt="Luna Amber" /><span>Luna Amber</span></a></li>
-                                <li><a data-theme="luna-blue" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></a></li>
-                                <li><a data-theme="luna-green" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" /><span>Luna Green</span></a></li>
-                                <li><a data-theme="luna-pink" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'nova-light', false)}><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'nova-dark', false)}><img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" /><span>Nova Dark</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'nova-colored', false)}><img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" /><span>Nova Colored</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'luna-amber', false)}><img src="showcase/resources/images/layouts/themeswitcher-luna-amber.png" alt="Luna Amber" /><span>Luna Amber</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'luna-blue', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'luna-green', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" /><span>Luna Green</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'luna-pink', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></a></li>
                             </ul>
                         </li>
 

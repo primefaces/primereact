@@ -358,7 +358,6 @@ body {
     
     .content-section {
         display: block;
-        border-bottom: solid 1px #dde3e6;
         padding: 30px;
         background-color: #f5f7f8;
 
@@ -425,6 +424,10 @@ body {
 
             h3.first {
                 margin-top: 0px;
+            }
+
+            &.implementation-charts {
+                background-color: #FFFFFF;
             }
         }
 
@@ -733,8 +736,6 @@ body {
             margin-top: 0;
             font-size: 24px;
         }
-
-
 
         > div {
             padding: 100px 100px 0 100px;
