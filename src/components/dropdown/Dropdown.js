@@ -179,7 +179,6 @@ export class Dropdown extends Component {
             //down
             case 40:
                 this.onDownKey(event);
-                
             break;
             
             //up
@@ -210,8 +209,65 @@ export class Dropdown extends Component {
             break;
             
             default:
+                this.search(event);
             break;
         }
+    }
+
+    search(event) {
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
+
+        const char = String.fromCharCode(event.keyCode);
+        this.previousSearchChar = this.currentSearchChar;
+        this.currentSearchChar = char;
+
+        if (this.previousSearchChar === this.currentSearchChar) 
+            this.searchValue = this.currentSearchChar;
+        else
+            this.searchValue = this.searchValue ? this.searchValue + char : char;
+
+        let searchIndex = this.props.value ? this.findOptionIndex(this.props.value) : -1;
+        let newOption = this.searchOption(++searchIndex);
+        
+        if (newOption) {
+            this.selectItem({
+                originalEvent: event,
+                option: newOption
+            });
+            this.selectedOptionUpdated = true;
+        }
+
+        this.searchTimeout = setTimeout(() => {
+            this.searchValue = null;
+        }, 250);
+    }
+
+    searchOption(index) {
+        let option;
+
+        if (this.searchValue) {
+            option = this.searchOptionInRange(index, this.props.options.length);
+
+            if (!option) {
+                option = this.searchOptionInRange(0, index);
+            }
+        }
+
+        return option;
+    }
+
+    searchOptionInRange(start, end) {
+        for (let i = start; i < end; i++) {
+            let opt = this.props.options[i];
+            let label = this.getOptionLabel(opt).toLowerCase();
+            if (label.startsWith(this.searchValue.toLowerCase())) {
+                return opt;
+            }
+        }
+
+        return null;
     }
 
     findNextVisibleItem(index) {
