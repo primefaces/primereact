@@ -418,6 +418,10 @@ class App extends Component {
                                 <li><a data-theme="nova-light" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></a></li>
                                 <li><a data-theme="nova-dark" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" /><span>Nova Dark</span></a></li>
                                 <li><a data-theme="nova-colored" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" /><span>Nova Colored</span></a></li>
+                                <li><a data-theme="luna-amber" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-amber.png" alt="Luna Amber" /><span>Luna Amber</span></a></li>
+                                <li><a data-theme="luna-blue" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></a></li>
+                                <li><a data-theme="luna-green" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" /><span>Luna Green</span></a></li>
+                                <li><a data-theme="luna-pink" onClick={this.changeTheme}><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></a></li>
                             </ul>
                         </li>
 

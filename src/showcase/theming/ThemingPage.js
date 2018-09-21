@@ -15,8 +15,9 @@ export class ThemingPage extends Component {
                 <div className="content-section documentation">
                     <h3 style={{marginTop: 0}}>Theme Designer API</h3>
                     <p><a href="https://www.primefaces.org/designer/primereact">Designer API</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine 
-                        with 500+ variables and a demo application. In addition, PrimeNG only ships the generated CSS of "nova-light", "nova-dark" and "nova-colored" whereas Designer provides
+                        with 500+ variables and a demo application. In addition, PrimeReact only ships the generated CSS of Nova and Luna themes whereas Designer provides
                         full access to the whole SASS structure and the variables of these pre-built themes.</p>
+
                     <p>Whether you have your own style guide or just need a custom theme, Designer API is the right tool to design and bring them to existence.</p>
                     
                     <p>Visit <a href="https://www.primefaces.org/designer/primereact">Designer API HomePage</a> for more information, live demos and access to a trial version.</p>
