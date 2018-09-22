@@ -18,7 +18,7 @@ export class TreeTemplatingDemo extends Component {
     createNavigation() {
         return [
             {
-                label: 'Insallation',
+                label: 'Installation',
                 children: [
                     {label: 'Getting Started', url:'https://reactjs.org/docs/getting-started.html'},
                     {label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html'},
@@ -107,7 +107,7 @@ export class TreeTemplatingDemo extends Component {
     createNavigation() {
         return [
             {
-                label: 'Insallation',
+                label: 'Installation',
                 children: [
                     {label: 'Getting Started', url:'https://reactjs.org/docs/getting-started.html'},
                     {label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html'},
