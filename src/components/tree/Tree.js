@@ -19,6 +19,8 @@ class UITreeNode extends Component {
         propagateSelectionUp: true,
         propagateSelectionDown: true,
         dragdropScope: null,
+        ariaLabel: null,
+        ariaLabelledBy: null,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -49,6 +51,8 @@ class UITreeNode extends Component {
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
         dragdropScope: PropTypes.string,
+        ariaLabel: PropTypes.string,
+        ariaLabelledBy: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -687,9 +691,11 @@ class UITreeNode extends Component {
     }
 
     renderContent() {
+        const selected = this.isSelected();
+        const checked = this.isChecked();
         const className = classNames('p-treenode-content', this.props.node.className, {
                 'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 
-                'p-highlight': this.isCheckboxSelectionMode() ? this.isChecked() : this.isSelected(),
+                'p-highlight': this.isCheckboxSelectionMode() ? checked : selected,
                 'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)});
         const expanded = this.isExpanded();
         const toggler = this.renderToggler(expanded);
@@ -700,7 +706,8 @@ class UITreeNode extends Component {
         return (
             <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
-                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex="0" onKeyDown={this.onNodeKeyDown}>
+                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex="0" onKeyDown={this.onNodeKeyDown} 
+                role="treeitem" aria-posinset={this.props.index + 1} aria-expanded={this.isExpanded()} aria-selected={checked || selected}>
                 {toggler}
                 {checkbox}
                 {icon}
@@ -712,7 +719,7 @@ class UITreeNode extends Component {
     renderChildren() {
         if (this.props.node.children && this.props.node.children.length && this.isExpanded()) {
             return (
-                <ul className="p-treenode-children">
+                <ul className="p-treenode-children" role="group">
                     {
                         this.props.node.children.map((childNode, index) => {
                             return (
@@ -1024,7 +1031,7 @@ export class Tree extends Component {
             const rootNodes = this.renderRootChildren();
 
             return (
-                <ul className="p-tree-container">
+                <ul className="p-tree-container" role="tree" aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}>
                     {rootNodes}
                 </ul>
             );

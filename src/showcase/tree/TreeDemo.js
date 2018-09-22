@@ -686,6 +686,18 @@ export class TreeContextMenuDemo extends Component {
                             <td>Unique key to enable dragdrop functionality.</td>
                         </tr>
                         <tr>
+                            <td>ariaLabel</td>
+                            <td>string</td>
+                            <td>false</td>
+                            <td>Used to define a string that labels the component.</td>
+                        </tr>
+                        <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Contains the element IDs of labels.</td>
+                        </tr>
+                        <tr>
                             <td>nodeTemplate</td>
                             <td>function</td>
                             <td>false</td>
