@@ -77,7 +77,7 @@ class UITreeNode extends Component {
         this.onRightClick = this.onRightClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
-        this.onTogglerKeyDown = this.onTogglerKeyDown.bind(this);
+        this.onNodeKeyDown = this.onNodeKeyDown.bind(this);
         this.propagateUp = this.propagateUp.bind(this);
 
         this.onDrop = this.onDrop.bind(this);
@@ -95,43 +95,164 @@ class UITreeNode extends Component {
         return this.props.node.leaf === false ? false : !(this.props.node.children && this.props.node.children.length);
     }
 
-    onTogglerClick(event) {
+    expand(event) {
         //uncontrolled
         if (!this.props.onToggle) {
-            this.setState(prevState => {
-                return {
-                    expanded: !prevState.expanded
-                }
-            },
-            () => {
-                this.invokeToggleEvents(event, this.state.expanded);
+            this.setState({
+                expanded: true
+            }, () => {
+                this.invokeToggleEvents(event, true);
             });
         }
         //controlled
         else {
             let expandedKeys = this.props.expandedKeys ? {...this.props.expandedKeys} : {};
-            let expanded = expandedKeys[this.props.node.key] !== undefined;
-            if (expanded)
-                delete expandedKeys[this.props.node.key];
-            else
-                expandedKeys[this.props.node.key] = true;
+            expandedKeys[this.props.node.key] = true;
             
             this.props.onToggle({
                 originalEvent: event,
                 value: expandedKeys
             });
 
-            this.invokeToggleEvents(event, !expanded);
+            this.invokeToggleEvents(event, true);
         }
-
-        event.preventDefault();
     }
 
-    onTogglerKeyDown(event) {
-        if (event.which === 32) {
-            this.onTogglerClick(event);
-            event.preventDefault();
+    collapse(event) {
+        //uncontrolled
+        if (!this.props.onToggle) {
+            this.setState({
+                expanded: false
+            }, () => {
+                this.invokeToggleEvents(event, false);
+            });
         }
+        //controlled
+        else {
+            let expandedKeys = {...this.props.expandedKeys};
+            delete expandedKeys[this.props.node.key];
+            
+            this.props.onToggle({
+                originalEvent: event,
+                value: expandedKeys
+            });
+
+            this.invokeToggleEvents(event, false);
+        }
+    }
+ 
+    onTogglerClick(event) {
+        if (this.isExpanded())
+            this.collapse(event);
+        else
+            this.expand(event);
+    }
+
+    isExpanded() {
+        if (!this.props.onToggle)
+            return this.state.expanded;
+        else
+            return this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false;
+    }
+
+    onNodeKeyDown(event) {
+        const nodeElement = event.target.parentElement;
+
+        switch (event.which) {
+            //down arrow
+            case 40:
+                const listElement = nodeElement.children[1];
+                if (listElement) {
+                    this.focusNode(listElement.children[0]);
+                }
+                else {
+                    const nextNodeElement = nodeElement.nextElementSibling;
+                    if (nextNodeElement) {
+                        this.focusNode(nextNodeElement);
+                    }
+                    else {
+                        let nextSiblingAncestor = this.findNextSiblingOfAncestor(nodeElement);
+                        if (nextSiblingAncestor) {
+                            this.focusNode(nextSiblingAncestor);
+                        }
+                    }
+                }
+
+                event.preventDefault();
+            break;
+
+            //up arrow
+            case 38:
+                if (nodeElement.previousElementSibling) {
+                    this.focusNode(this.findLastVisibleDescendant(nodeElement.previousElementSibling));
+                }
+                else {
+                    let parentNodeElement = this.getParentNodeElement(nodeElement);
+                    if (parentNodeElement) {
+                        this.focusNode(parentNodeElement);
+                    }
+                }
+
+                event.preventDefault();
+            break;
+
+            //right arrow
+            case 39:
+                if (!this.isExpanded()) {
+                    this.expand(event);
+                }
+
+                event.preventDefault();
+            break;
+
+            //left arrow
+            case 37:
+                if (this.isExpanded()) {
+                    this.collapse(event);
+                }
+
+                event.preventDefault();
+            break;
+
+            default:
+                //no op
+            break;
+        }
+    }
+
+    findNextSiblingOfAncestor(nodeElement) {
+        let parentNodeElement = this.getParentNodeElement(nodeElement);
+        if (parentNodeElement) {
+            if (parentNodeElement.nextElementSibling)
+                return parentNodeElement.nextElementSibling;
+            else
+                return this.findNextSiblingOfAncestor(parentNodeElement);
+        }
+        else {
+            return null;
+        }
+    }
+
+    findLastVisibleDescendant(nodeElement) {
+        const childrenListElement = nodeElement.children[1];
+        if (childrenListElement) {
+            const lastChildElement = childrenListElement.children[childrenListElement.children.length - 1];
+
+            return this.findLastVisibleDescendant(lastChildElement);
+        }
+        else {
+            return nodeElement;
+        }
+    }
+
+    getParentNodeElement(nodeElement) {
+        const parentNodeElement = nodeElement.parentElement.parentElement;
+
+        return DomHandler.hasClass(parentNodeElement, 'p-treenode') ? parentNodeElement : null;
+    }
+
+    focusNode(element) {
+        element.children[0].focus();
     }
 
     onClick(event) {
@@ -403,13 +524,6 @@ class UITreeNode extends Component {
         }
     }
 
-    isExpanded() {
-        if (this.props.onToggle)
-            return this.props.expandedKeys && this.props.expandedKeys[this.props.node.key] !== undefined;
-        else
-            return this.state.expanded;
-    }
-
     onDropPoint(event, position) {
         event.preventDefault();
 
@@ -554,7 +668,7 @@ class UITreeNode extends Component {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
 
         return (
-            <a tabIndex="0" className="p-tree-toggler p-unselectable-text" onClick={this.onTogglerClick} onKeyDown={this.onTogglerKeyDown}>
+            <a className="p-tree-toggler p-unselectable-text" onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
             </a>
         );
@@ -586,7 +700,7 @@ class UITreeNode extends Component {
         return (
             <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
-                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
+                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex="0" onKeyDown={this.onNodeKeyDown}>
                 {toggler}
                 {checkbox}
                 {icon}

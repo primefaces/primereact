@@ -375,4 +375,8 @@ export default class DomHandler {
             version: match[2] || "0"
         };
     }
+
+    static isVisible(element) {
+        return element.offsetParent != null;
+    } 
 }
