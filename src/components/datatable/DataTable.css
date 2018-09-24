@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 
-.p-datatable .p-datatable-sort-icon {
+.p-datatable .p-sortable-column-icon {
     vertical-align: middle;
 }
 

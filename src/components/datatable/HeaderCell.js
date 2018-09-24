@@ -17,13 +17,16 @@ export class HeaderCell extends Component {
     onClick(e) {
         if(this.props.sortable) {
             let targetNode = e.target;
-            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') || DomHandler.hasClass(targetNode, 'p-sortable-column-icon')) {
+            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') 
+                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
                     sortField: this.props.field,
                     sortFunction: this.props.sortFunction,
                     sortable: this.props.sortable
                 });
+
+                DomHandler.clearSelection();
             }
         }
     }
@@ -83,7 +86,7 @@ export class HeaderCell extends Component {
             let sortIconClassName = classNames('pi pi-fw', sortIcon);
 
             return (
-                <a className="p-datatable-sort-icon">
+                <a className="p-sortable-column-icon">
                     <span className={sortIconClassName}></span>
                 </a>
             );
