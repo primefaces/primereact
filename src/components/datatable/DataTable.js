@@ -401,13 +401,13 @@ export class DataTable extends Component {
             else {
                 if(this.props.children instanceof Array) {
                     for(let i = 0; i < this.props.children.length; i++) {
-                        if(this.props.children[i].footer) {
+                        if(this.props.children[i].props.footer) {
                             return true;
                         }
                     }
                 }
                 else {
-                    return this.props.children.footer !== null;
+                    return this.props.children.props.footer !== null;
                 }
             }
         }
