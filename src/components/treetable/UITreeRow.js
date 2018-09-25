@@ -110,7 +110,7 @@ export class UITreeRow extends Component {
                         this.treeTable.columns && this.treeTable.columns.map((col, i) => {
                             var toggler = null,
                                 checkbox = null;
-
+                            let rowData = null;
                             if (i === 0) {
                                 var togglerClass = classNames('p-treetable-toggler pi pi-fw p-c', {
                                     'pi-caret-down': this.state.expanded,
@@ -134,9 +134,13 @@ export class UITreeRow extends Component {
                                         </div>
                                     );
                                 }
+                                rowData = (<span>{ObjectUtils.resolveFieldData(this.node.data, col.props.field)}</span>);
+                            } else {
+                                if(col.props.body)
+                                    rowData = col.props.body(this.node.data, col.props);
+                                else
+                                    rowData = (<span>{ObjectUtils.resolveFieldData(this.node.data, col.props.field)}</span>);
                             }
-
-                            var rowData = (<span>{ObjectUtils.resolveFieldData(this.node.data, col.props.field)}</span>);
 
                             return (
                                 <td key={'col_' + i} style={col.props.style} className={col.props.className} onClick={this.onRowClick.bind(this)} onTouchEnd={this.onRowTouchEnd.bind(this)}>
