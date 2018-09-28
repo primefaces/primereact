@@ -42,7 +42,7 @@ export class Sidebar extends Component {
 
     componentDidMount() {
         if (this.props.visible) {
-            this.show();
+            this.onShow();
         }
     }
 
