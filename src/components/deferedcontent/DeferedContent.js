@@ -35,7 +35,6 @@ export class DeferedContent extends Component {
     shouldLoad() {
         let rect = this.container.getBoundingClientRect();
         let docElement = document.documentElement;
-        let scrollTop = (window.pageYOffset||document.documentElement.scrollTop);
         let winHeight = docElement.clientHeight;
 
         return (winHeight >= rect.top);
