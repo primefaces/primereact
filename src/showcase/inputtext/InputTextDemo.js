@@ -10,7 +10,7 @@ export class InputTextDemo extends Component {
         super();
         this.state = {
             value1: '',
-            value2: '',
+            value2: 3,
             value3: ''
         };
     }
