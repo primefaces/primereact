@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DeferedContent} from '../../components/deferedcontent/DeferedContent';
+import {DeferredContent} from '../../components/deferredcontent/DeferredContent';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import {CarService} from "../service/CarService";
@@ -7,7 +7,7 @@ import {DataTable} from "../../components/datatable/DataTable";
 import {Column} from "../../components/column/Column";
 import {Growl} from "../../components/growl/Growl";
 
-export class DeferedContentDemo extends Component {
+export class DeferredContentDemo extends Component {
 
     constructor() {
         super();
@@ -15,19 +15,16 @@ export class DeferedContentDemo extends Component {
             cars: []
         };
         this.carservice = new CarService();
-        this.initImage = this.initImage.bind(this);
-        this.initData = this.initData.bind(this);
+        this.onImageLoad = this.onImageLoad.bind(this);
+        this.onDataLoad = this.onDataLoad.bind(this);
     }
 
-    componentDidMount() {
+    onImageLoad() {
+        this.growl.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+    }
+
+    onDataLoad() {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-    }
-
-    initImage() {
-        this.growl.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to see datatable'});
-    }
-
-    initData() {
         this.growl.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
     }
 
@@ -36,41 +33,39 @@ export class DeferedContentDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>DeferedContent</h1>
-                        <p>DeferedContent postpones the loading the content that is initially not in viewport until it becomes visible on scroll. Scroll down to load the DataTable which initiates a query that is not executed on initial page load to speed up load performance.</p>
+                        <h1>DeferredContent</h1>
+                        <p>DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll. </p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el} />
                     <div style={{height:'800px'}}>
-                        Image is not loaded, scroll down to initialize it.
+                        Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
                     </div>
-                    <DeferedContent onLoad={this.initImage}>
+                    <DeferredContent onLoad={this.onImageLoad}>
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="prime"/>
-                    </DeferedContent>
-
+                    </DeferredContent>
 
                     <div style={{height:'500px'}}>
                     </div>
-                    <DeferedContent onLoad={this.initData}>
+                    <DeferredContent onLoad={this.onDataLoad}>
                         <DataTable value={this.state.cars}>
                             <Column field="vin" header="Vin" />
                             <Column field="year" header="Year" />
                             <Column field="brand" header="Brand" />
                             <Column field="color" header="Color" />
                         </DataTable>
-                    </DeferedContent>
+                    </DeferredContent>
                 </div>
 
-                <DeferedContentDoc/>
-
+                <DeferredContentDoc/>
             </div>
         )
     }
 }
 
-export class DeferedContentDoc extends Component {
+export class DeferredContentDoc extends Component {
 
     shouldComponentUpdate(){
         return false;
@@ -83,40 +78,40 @@ export class DeferedContentDoc extends Component {
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
-                            {`
-import {DeferedContent} from 'primereact/deferedcontent';
+{`
+import {DeferredContent} from 'primereact/DeferredContent';
 
 `}
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Defer is applied to a container element where content needs to be placed inside an child component.</p>
+                        <p>DeferredContent is used as a wrapper element of its content.</p>
                         <CodeHighlight className="language-jsx">
-                            {`
-<DeferedContent>
+{`
+<DeferredContent>
     <DataTable value={this.state.cars}>
         <Column field="vin" header="Vin" />
         <Column field="year" header="Year" />
         <Column field="brand" header="Brand" />
         <Column field="color" header="Color" />
     </DataTable>
-</DeferedContent>
+</DeferredContent>
 
 `}
                         </CodeHighlight>
 
                         <h3>Callback</h3>
-                        <p>onLoad callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
+                        <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
                         <CodeHighlight className="language-jsx">
-                            {`
-<DeferedContent onLoad={this.initData}>
+{`
+<DeferredContent onLoad={this.initCars}>
     <DataTable value={this.state.cars}>
         <Column field="vin" header="Vin" />
         <Column field="year" header="Year" />
         <Column field="brand" header="Brand" />
         <Column field="color" header="Color" />
     </DataTable>
-</DeferedContent>
+</DeferredContent>
 
 `}
                         </CodeHighlight>
@@ -137,32 +132,38 @@ import {DeferedContent} from 'primereact/deferedcontent';
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>onLoad</td>
-                                    <td>event: Event object</td>
-                                    <td>Callback to invoke when deferred content is loaded.</td>
-                                </tr>
+                                    <tr>
+                                        <td>onLoad</td>
+                                        <td>event: Event object</td>
+                                        <td>Callback to invoke when deferred content is loaded.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
                         <h3>Styling</h3>
                         <div className="doc-tablewrapper">
-                            Componentdoes not apply any styling to host.
+                            Component does not apply any styling.
                         </div>
 
                         <h3>Dependencies</h3>
                         <p>None.</p>
-
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/deferedcontent" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/DeferredContent" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <span>View on GitHub</span>
                         </a>
                         <CodeHighlight className="language-javascript">
                             {`
-export class DeferedContentDemo extends Component {
+import React, {Component} from 'react';
+import {DeferredContent} from 'primereact/deferredcontent';
+import {CarService} from "../service/CarService";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
+import {Growl} from "../../components/growl/Growl";
+
+export class DeferredContentDemo extends Component {
 
     constructor() {
         super();
@@ -170,19 +171,16 @@ export class DeferedContentDemo extends Component {
             cars: []
         };
         this.carservice = new CarService();
-        this.initImage = this.initImage.bind(this);
-        this.initData = this.initData.bind(this);
+        this.onImageLoad = this.onImageLoad.bind(this);
+        this.onDataLoad = this.onDataLoad.bind(this);
     }
 
-    componentDidMount() {
+    onImageLoad() {
+        this.growl.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+    }
+
+    onDataLoad() {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-    }
-
-    initImage() {
-        this.growl.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to see datatable'});
-    }
-
-    initData() {
         this.growl.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
     }
 
@@ -191,33 +189,31 @@ export class DeferedContentDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>DeferedContent</h1>
-                        <p></p>
+                        <h1>DeferredContent</h1>
+                        <p>DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll. </p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el} />
                     <div style={{height:'800px'}}>
-                        Image is not loaded, scroll down to initialize it.
+                        Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
                     </div>
-                    <DeferedContent onLoad={this.initImage}>
+                    <DeferredContent onLoad={this.onImageLoad}>
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="prime"/>
-                    </DeferedContent>
-
+                    </DeferredContent>
 
                     <div style={{height:'500px'}}>
                     </div>
-                    <DeferedContent onLoad={this.initData}>
+                    <DeferredContent onLoad={this.onDataLoad}>
                         <DataTable value={this.state.cars}>
                             <Column field="vin" header="Vin" />
                             <Column field="year" header="Year" />
                             <Column field="brand" header="Brand" />
                             <Column field="color" header="Color" />
                         </DataTable>
-                    </DeferedContent>
+                    </DeferredContent>
                 </div>
-
             </div>
         )
     }

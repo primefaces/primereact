@@ -18,7 +18,7 @@ import { SplitButtonDemo } from './showcase/splitbutton/SplitButtonDemo';
 import { CheckboxDemo } from './showcase/checkbox/CheckboxDemo';
 import { ChipsDemo } from './showcase/chips/ChipsDemo';
 import { DialogDemo } from './showcase/dialog/DialogDemo';
-import { DeferedContentDemo } from './showcase/deferedcontent/DeferedContentDemo';
+import { DeferredContentDemo } from './showcase/deferredcontent/DeferredContentDemo';
 import { DropdownDemo } from './showcase/dropdown/DropdownDemo';
 import { FieldsetDemo } from './showcase/fieldset/FieldsetDemo';
 import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
@@ -338,7 +338,7 @@ class AppMenu extends Component {
                                 <Link to="/captcha">&#9679; Captcha</Link>
                                 <Link to="/inplace">&#9679; Inplace</Link>
                                 <Link to="/progressspinner">&#9679; ProgressSpinner</Link>
-                                <Link to="/deferedcontent">&#9679; DeferedContent</Link>
+                                <Link to="/deferredcontent">&#9679; Deferred</Link>
                             </div>
                         </div>
                     </div>
@@ -561,7 +561,7 @@ class App extends Component {
                     <Route path="/keyfilter" component={KeyFilterDemo}/>
                     <Route path="/dataview" component={DataViewDemo}/>
                     <Route path="/inplace" component={InplaceDemo}/>
-                    <Route path="/deferedcontent" component={DeferedContentDemo}/>
+                    <Route path="/deferredcontent" component={DeferredContentDemo}/>
 
                     <div className="content-section layout-footer clearfix">
                         <span>Released under the MIT License,  Copyright © 2018 <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
