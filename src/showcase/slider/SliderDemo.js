@@ -69,7 +69,7 @@ export class SliderDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic: {this.state.val1}</h3>
-                    <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}} />
+                    <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}}  />
 
                     <h3>Input: {this.state.val2}</h3>
                     <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
@@ -213,6 +213,12 @@ import {Slider} from 'primereact/slider';
                             <td>null</td>
                             <td>Style class of the element.</td>
                         </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the component should be disabled.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -234,6 +240,13 @@ import {Slider} from 'primereact/slider';
                                 event.value: New value.
                             </td>
                             <td>Callback to invoke on value change via slide.</td>
+                        </tr>
+                        <tr>
+                            <td>onSlideEnd</td>
+                            <td>event.originalEvent: Slide event <br />
+                                event.value: New value.
+                            </td>
+                            <td>Callback to invoke when slide ends.</td>
                         </tr>
                     </tbody>
                 </table>

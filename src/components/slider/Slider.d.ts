@@ -11,7 +11,9 @@ interface SliderProps {
     range?: boolean;
     style?: object;
     className?: string;
+    disabled?: boolean;
     onChange?(e: {originalEvent: Event, value: number|[number, number]}): void;
+    onSlideEnd?(e: {originalEvent: Event, value: number|[number, number]}): void;
 }
 
 export class Slider extends React.Component<SliderProps,any> {}

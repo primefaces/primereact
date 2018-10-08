@@ -15,9 +15,10 @@ export class Slider extends Component {
         step: null,
         range: false,
         style: null,
-        disabled: false,
         className: null,
-        onChange: null
+        disabled: false,
+        onChange: null,
+        onSlideEnd: null
     }
 
     static propsTypes = {
@@ -30,9 +31,10 @@ export class Slider extends Component {
         step: PropTypes.number,
         range: PropTypes.bool,
         style: PropTypes.object,
-        disabled: PropTypes.bool,
         className: PropTypes.string,
-        onChange: PropTypes.func
+        disabled: PropTypes.bool,
+        onChange: PropTypes.func,
+        onSlideEnd: PropTypes.func
     }
 
     constructor(props) {
@@ -93,9 +95,9 @@ export class Slider extends Component {
 
             if (this.props.onSlideEnd) {
                 if (this.props.range)
-                    this.props.onSlideEnd({originalEvent: event, values: this.values});
+                    this.props.onSlideEnd({originalEvent: event, values: this.props.value});
                 else
-                    this.props.onSlideEnd({originalEvent: event, value: this.value});
+                    this.props.onSlideEnd({originalEvent: event, value: this.props.value});
             }
 
             this.unbindDragListeners();
