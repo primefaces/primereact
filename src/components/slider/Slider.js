@@ -42,10 +42,11 @@ export class Slider extends Component {
 
     componentWillUnmount() {
         this.unbindDragListeners();
+        this.unbindTouchListeners();
     }
 
-    onMouseDown(event, index) {
-        if(this.disabled) {
+    onDragStart(event, index) {
+        if (this.disabled) {
             return;
         }
         
@@ -53,8 +54,17 @@ export class Slider extends Component {
         this.updateDomData();
         this.sliderHandleClick = true;
         this.handleIndex = index;
-        this.bindDragListeners();
         event.preventDefault();
+    }
+
+    onMouseDown(event, index) {
+        this.bindDragListeners();
+        this.onDragStart(event, index);
+    }
+
+    onTouchStart(event, index) {
+        this.bindTouchListeners();
+        this.onDragStart(event, index);
     }
 
     onBarClick(event) {
@@ -64,7 +74,7 @@ export class Slider extends Component {
         
         if (!this.sliderHandleClick) {
             this.updateDomData();
-            this.setValueWithMouse(event);
+            this.setValue(event);
         }
 
         this.sliderHandleClick = false;
@@ -72,7 +82,8 @@ export class Slider extends Component {
 
     onDrag(event) {
         if (this.dragging) {
-            this.setValueWithMouse(event);
+            this.setValue(event);
+            event.preventDefault();
         }
     }
 
@@ -88,6 +99,7 @@ export class Slider extends Component {
             }
 
             this.unbindDragListeners();
+            this.unbindTouchListeners();
         }
     }
     
@@ -114,6 +126,30 @@ export class Slider extends Component {
             this.dragEndListener = null;
         }
     }
+
+    bindTouchListeners() {
+        if (!this.dragListener) {
+            this.dragListener = this.onDrag.bind(this);
+            document.addEventListener('touchmove', this.dragListener);
+        }
+
+        if (!this.dragEndListener) {
+            this.dragEndListener = this.onDragEnd.bind(this);
+            document.addEventListener('touchend', this.dragEndListener);
+        }
+    }
+
+    unbindTouchListeners() {
+        if (this.dragListener) {
+            document.removeEventListener('touchmove', this.dragListener);
+            this.dragListener = null;
+        }
+        
+        if (this.dragEndListener) {
+            document.removeEventListener('touchend', this.dragEndListener)
+            this.dragEndListener = null;
+        }
+    }
     
     updateDomData() {
         let rect = this.el.getBoundingClientRect();
@@ -123,11 +159,12 @@ export class Slider extends Component {
         this.barHeight = this.el.offsetHeight;
     }
 
-    setValueWithMouse(event) {
+    setValue(event) {
         let handleValue;
+        let pageX = event.touches ? event.touches[0].pageX : event.pageX;
 
         if(this.props.orientation === 'horizontal')
-            handleValue = ((event.pageX - this.initX) * 100) / (this.barWidth);
+            handleValue = ((pageX - this.initX) * 100) / (this.barWidth);
         else
             handleValue = (((this.initY + this.barHeight) - event.pageY) * 100) / (this.barHeight);
 
@@ -192,8 +229,8 @@ export class Slider extends Component {
 
     renderHandle(leftValue, bottomValue, index) {
         return (
-            <span onMouseDown={event => this.onMouseDown(event, index)}  className="p-slider-handle" 
-                    style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}></span>
+            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)}
+                    className="p-slider-handle"  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}></span>
         );
     }
 
