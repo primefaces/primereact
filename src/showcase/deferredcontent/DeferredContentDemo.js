@@ -161,7 +161,7 @@ import {DeferredContent} from 'primereact/deferredcontent';
 import {CarService} from "../service/CarService";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
-import {Growl} from "../../components/growl/Growl";
+import {Growl} from "primereact/growl";
 
 export class DeferredContentDemo extends Component {
 
