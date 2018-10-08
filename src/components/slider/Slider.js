@@ -40,6 +40,10 @@ export class Slider extends Component {
         this.onBarClick = this.onBarClick.bind(this);
     }
 
+    componentWillUnmount() {
+        this.unbindDragListeners();
+    }
+
     onMouseDown(event, index) {
         if(this.disabled) {
             return;
@@ -82,6 +86,8 @@ export class Slider extends Component {
                 else
                     this.props.onSlideEnd({originalEvent: event, value: this.value});
             }
+
+            this.unbindDragListeners();
         }
     }
     
