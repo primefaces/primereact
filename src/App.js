@@ -223,6 +223,7 @@ class AppMenu extends Component {
                             <div>
                                 <Link to="/accordion">&#9679; Accordion</Link>
                                 <Link to="/card">&#9679; Card</Link>
+                                <Link to="/deferredcontent">&#9679; Deferred</Link>
                                 <Link to="/fieldset">&#9679; Fieldset</Link>
                                 <Link to="/panel">&#9679; Panel</Link>
                                 <Link to="/flexgrid">&#9679; FlexGrid  <span className="menuitem-badge">NEW</span></Link>
@@ -338,7 +339,6 @@ class AppMenu extends Component {
                                 <Link to="/captcha">&#9679; Captcha</Link>
                                 <Link to="/inplace">&#9679; Inplace</Link>
                                 <Link to="/progressspinner">&#9679; ProgressSpinner</Link>
-                                <Link to="/deferredcontent">&#9679; Deferred</Link>
                             </div>
                         </div>
                     </div>
