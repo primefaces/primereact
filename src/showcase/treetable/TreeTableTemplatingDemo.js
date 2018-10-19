@@ -37,7 +37,7 @@ export class TreeTableTemplatingDemo extends Component {
 
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>TreeTable</h1>
+                        <h1>TreeTable - Templating</h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
                     </div>
                 </div>

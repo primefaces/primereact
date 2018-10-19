@@ -85,6 +85,7 @@ import { TreeDragDropDemo } from './showcase/tree/TreeDragDropDemo';
 import { TreeContextMenuDemo } from './showcase/tree/TreeContextMenuDemo';
 import { TreeTableDemo } from './showcase/treetable/TreeTableDemo';
 import { TreeTableTemplatingDemo } from './showcase/treetable/TreeTableTemplatingDemo';
+import { TreeTablePageDemo } from './showcase/treetable/TreeTablePageDemo';
 import { TreeTableSortDemo } from './showcase/treetable/TreeTableSortDemo';
 import { TreeTableSelectionDemo } from './showcase/treetable/TreeTableSelectionDemo';
 import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
@@ -527,6 +528,7 @@ class App extends Component {
                     <Route path="/tree/contextmenu" component={TreeContextMenuDemo} />
                     <Route exact path="/treetable" component={TreeTableDemo} />
                     <Route path="/treetable/templating" component={TreeTableTemplatingDemo} />
+                    <Route path="/treetable/page" component={TreeTablePageDemo} />
                     <Route path="/treetable/sort" component={TreeTableSortDemo} />
                     <Route path="/treetable/selection" component={TreeTableSelectionDemo} />
                     <Route path="/captcha" component={CaptchaDemo} />
