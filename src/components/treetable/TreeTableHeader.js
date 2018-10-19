@@ -15,7 +15,7 @@ export class TreeTableHeader extends Component {
 
     renderHeaderCell(column, index) {
         return (
-            <th key={column.field||index}>
+            <th key={column.field||index} className={column.props.headerClassName||column.props.className} style={column.props.headerStyle||column.props.style}>
                 <span className="p-column-title">{column.props.header}</span>
             </th>
         );

@@ -143,7 +143,7 @@ export class TreeTableRow extends Component {
             content = ObjectUtils.resolveFieldData(this.props.node.data, column.props.field);
 
         return (
-            <td key={column.columnKey||column.field||index}>
+            <td key={column.columnKey||column.field||index}  className={column.props.bodyClassName||column.props.className} style={column.props.bodyStyle||column.props.style}>
                 {toggler}
                 {content}
             </td>
