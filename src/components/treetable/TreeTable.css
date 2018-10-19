@@ -8,6 +8,10 @@
     table-layout: fixed;
 }
 
+.p-treetable-toggler {
+    cursor: pointer;
+}
+
 .p-treetable .p-treetable-thead > tr > th,
 .p-treetable .p-treetable-tbody > tr > td,
 .p-treetable .p-treetable-tfoot > tr > td {
