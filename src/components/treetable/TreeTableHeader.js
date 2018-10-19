@@ -1,22 +1,62 @@
 import React, { Component } from 'react';
-import { TreeTableHeaderCell } from './TreeTableHeaderCell';
+import PropTypes from 'prop-types';
 
 export class TreeTableHeader extends Component {
 
-    createHeaderCell() {
-        return React.Children.map(this.props.columns, (column, i) => {
-            return <TreeTableHeaderCell key={'headerCol_' + i} {...column.props} onSort={this.props.onSort}
-                sortField={this.props.sortField} sortOrder={this.props.sortOrder} multiSortMeta={this.props.multiSortMeta} />;
-        });
+    static defaultProps = {
+        columns: null,
+        columnGroup: null
+    }
+
+    static propsTypes = {
+        columns: PropTypes.array,
+        columnGroup: PropTypes.element
+    }
+
+    renderHeaderCell(column, index) {
+        return (
+            <th key={column.field||index}>
+                <span className="p-column-title">{column.props.header}</span>
+            </th>
+        );
+    }
+
+    renderHeaderRow(row, index) {
+        const rowColumns = React.Children.toArray(row.props.children);
+        const rowHeaderCells = rowColumns.map((col, index) => this.renderHeaderCell(col, index));
+        
+        return (
+            <tr key={index}>{rowHeaderCells}</tr>
+        )
+    }
+
+    renderColumnGroup() {
+        let rows = React.Children.toArray(this.props.columnGroup.props.children);
+
+        return (
+            rows.map((row, i) => this.renderHeaderRow(row, i))
+        );
+    }
+
+    renderColumns(columns) {
+        if (columns) {
+            const headerCells = columns.map((col, index) => this.renderHeaderCell(col, index));
+            return (
+                <tr>{headerCells}</tr>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
-        let content = <tr>{this.createHeaderCell(this)}</tr>;
+        let content = this.props.columnGroup ? this.renderColumnGroup() : this.renderColumns(this.props.columns);
 
         return (
-            <thead>
+            <thead className="p-treetable-thead">
                 {content}
             </thead>
         );
     }
-} 
+}

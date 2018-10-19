@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
+import { Button } from '../../components/button/Button';
 import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -11,13 +12,24 @@ export class TreeTableDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            nodes: []
         };
         this.nodeservice = new NodeService();
+        this.toggleApplications = this.toggleApplications.bind(this);
+    }
+
+    toggleApplications() {
+        let expandedKeys = {...this.state.expandedKeys};
+        if (expandedKeys['0'])
+            delete expandedKeys['0'];
+        else
+            expandedKeys['0'] = true;
+
+        this.setState({expandedKeys: expandedKeys});
     }
 
     componentDidMount() {
-        this.nodeservice.getNodes().then(data => this.setState({data: data}));
+        this.nodeservice.getNodes().then(data => this.setState({nodes: data}));
     }
 
     render() {
@@ -33,8 +45,17 @@ export class TreeTableDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <TreeTable value={this.state.data} header="Basic">
+                    <h3>Uncontrolled</h3>
+                    <TreeTable value={this.state.nodes}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+
+                    <h3>Controlled</h3>
+                    <Button onClick={this.toggleApplications} label="Toggle Applications" />
+                    <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
+                        onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}}>
                         <Column field="name" header="Name"></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
