@@ -12,6 +12,7 @@ export class TreeTableSubmenu extends Component {
                     <li><Link to="/treetable/page">&#9679; Page</Link></li>
                     <li><Link to="/treetable/sort">&#9679; Sort</Link></li>
                     <li><Link to="/treetable/selection">&#9679; Selection</Link></li>
+                    <li><Link to="/treetable/colgroup">&#9679; ColGroup</Link></li>
                 </ul>
             </div>
         );

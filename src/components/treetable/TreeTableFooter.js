@@ -15,7 +15,8 @@ export class TreeTableFooter extends Component {
 
     renderFooterCell(column, index) {
         return (
-            <td key={column.field||index} className={column.props.footerClassName||column.props.className} style={column.props.footerStyle||column.props.style}>
+            <td key={column.field||index} className={column.props.footerClassName||column.props.className} style={column.props.footerStyle||column.props.style}
+                rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
                 {column.props.footer}
             </td>
         );

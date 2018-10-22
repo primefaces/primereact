@@ -91,7 +91,7 @@ export class TreeTableHeader extends Component {
         
         return (
             <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style}
-                onClick={e => this.onHeaderClick(e, column)}>
+                onClick={e => this.onHeaderClick(e, column)} rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
                 <span className="p-column-title">{column.props.header}</span>
                 {sortIconElement}
             </th>
@@ -128,7 +128,7 @@ export class TreeTableHeader extends Component {
     }
 
     render() {
-        let content = this.props.columnGroup ? this.renderColumnGroup() : this.renderColumns(this.props.columns);
+        const content = this.props.columnGroup ? this.renderColumnGroup() : this.renderColumns(this.props.columns);
 
         return (
             <thead className="p-treetable-thead">
