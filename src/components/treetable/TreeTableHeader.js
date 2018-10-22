@@ -1,22 +1,99 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
 
 export class TreeTableHeader extends Component {
 
     static defaultProps = {
         columns: null,
-        columnGroup: null
+        columnGroup: null,
+        sortField: null,
+        sortOrder: null,
+        multiSortMeta: null,
+        onSort: null
     }
 
     static propsTypes = {
         columns: PropTypes.array,
-        columnGroup: PropTypes.element
+        columnGroup: PropTypes.element,
+        sortField: PropTypes.string,
+        sortOrder: PropTypes.number,
+        multiSortMeta: PropTypes.array,
+        onSort: PropTypes.func
+    }
+
+    onHeaderClick(event, column) {
+        if (column.props.sortable) {
+            const targetNode = event.target;
+            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') 
+                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
+                
+                this.props.onSort({
+                    originalEvent: event,
+                    sortField: column.props.field,
+                    sortFunction: column.props.sortFunction,
+                    sortable: column.props.sortable
+                });
+
+                DomHandler.clearSelection();
+            }
+        }
+    }
+
+    getMultiSortMetaData(column) {
+        if(this.props.multiSortMeta) {
+            for(let i = 0; i < this.props.multiSortMeta.length; i++) {
+                if(this.props.multiSortMeta[i].field === column.props.field) {
+                    return this.props.multiSortMeta[i];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    renderSortIcon(column, sorted, sortOrder) {
+        if (column.props.sortable) {
+            const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            const sortIconClassName = classNames('pi pi-fw', sortIcon);
+
+            return (
+                <a className="p-sortable-column-icon">
+                    <span className={sortIconClassName}></span>
+                </a>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     renderHeaderCell(column, index) {
+        const multiSortMetaData = this.getMultiSortMetaData(column);
+        const singleSorted = (column.props.field === this.props.sortField);
+        const multipleSorted = multiSortMetaData !== null;
+        const sorted = column.props.sortable && (singleSorted || multipleSorted);
+        let sortOrder = 0;
+
+        if(singleSorted) 
+            sortOrder = this.props.sortOrder;
+        else if(multipleSorted) 
+            sortOrder = multiSortMetaData.order;
+
+        const sortIconElement = this.renderSortIcon(column, sorted, sortOrder);
+
+        const className = classNames(column.props.headerClassName||column.props.className, {
+            'p-sortable-column': column.props.sortable, 
+            'p-highlight': sorted, 
+            'p-resizable-column': column.props.resizableColumns
+        });
+        
         return (
-            <th key={column.field||index} className={column.props.headerClassName||column.props.className} style={column.props.headerStyle||column.props.style}>
+            <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style}
+                onClick={e => this.onHeaderClick(e, column)}>
                 <span className="p-column-title">{column.props.header}</span>
+                {sortIconElement}
             </th>
         );
     }

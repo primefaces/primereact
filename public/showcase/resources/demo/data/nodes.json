@@ -5,7 +5,7 @@
             "key": "0",
             "data":{  
                 "name":"Applications",
-                "size":"200mb",
+                "size":"100kb",
                 "type":"Folder"
             },
             "children":[  
@@ -13,7 +13,7 @@
                     "key": "0-0",
                     "data":{
                         "name":"React",
-                        "size":"25mb",
+                        "size":"25kb",
                         "type":"Folder"
                     },
                     "children":[  
@@ -21,7 +21,7 @@
                             "key": "0-0-0",
                             "data":{  
                                 "name":"react.app",
-                                "size":"10mb",
+                                "size":"10kb",
                                 "type":"Application"
                             }
                         },
@@ -29,7 +29,7 @@
                             "key": "0-0-1",
                             "data":{  
                                 "name":"native.app",
-                                "size":"10mb",
+                                "size":"10kb",
                                 "type":"Application"
                             }
                         },
@@ -37,7 +37,7 @@
                             "key": "0-0-2",
                             "data":{  
                                 "name":"mobile.app",
-                                "size":"5mb",
+                                "size":"5kb",
                                 "type":"Application"
                             }
                         }
@@ -47,7 +47,7 @@
                     "key": "0-1",
                     "data":{  
                         "name":"editor.app",
-                        "size":"25mb",
+                        "size":"25kb",
                         "type":"Application"
                     }
                 },
@@ -55,7 +55,7 @@
                     "key": "0-2",
                     "data":{  
                         "name":"settings.app",
-                        "size":"50mb",
+                        "size":"50kb",
                         "type":"Application"
                     }
                 }
@@ -65,7 +65,7 @@
             "key": "1",
             "data":{  
                 "name":"Cloud",
-                "size":"20mb",
+                "size":"20kb",
                 "type":"Folder"
             },
             "children":[  
@@ -73,7 +73,7 @@
                     "key": "1-0",
                     "data":{  
                         "name":"backup-1.zip",
-                        "size":"10mb",
+                        "size":"10kb",
                         "type":"Zip"
                     }
                 },
@@ -81,7 +81,7 @@
                     "key": "1-1",
                     "data":{  
                         "name":"backup-2.zip",
-                        "size":"10mb",
+                        "size":"10kb",
                         "type":"Zip"
                     }
                 }
@@ -171,7 +171,7 @@
             "key": "4",
             "data": {  
                 "name":"Downloads",
-                "size":"25mb",
+                "size":"25kb",
                 "type":"Folder"
             },
             "children":[  
@@ -179,7 +179,7 @@
                     "key": "4-0",
                     "data": {  
                         "name":"Spanish",
-                        "size":"10mb",
+                        "size":"10kb",
                         "type":"Folder"
                     },
                     "children":[  
@@ -187,7 +187,7 @@
                             "key": "4-0-0",
                             "data":{  
                                 "name":"tutorial-a1.txt",
-                                "size":"5mb",
+                                "size":"5kb",
                                 "type":"Text"
                             }
                         },
@@ -195,7 +195,7 @@
                             "key": "4-0-1",
                             "data":{  
                                 "name":"tutorial-a2.txt",
-                                "size":"5mb",
+                                "size":"5kb",
                                 "type":"Text"
                             }
                         }
@@ -205,7 +205,7 @@
                     "key": "4-1",
                     "data":{  
                         "name":"Travel",
-                        "size":"15mb",
+                        "size":"15kb",
                         "type":"Text"
                     },
                     "children":[  
@@ -213,7 +213,7 @@
                             "key": "4-1-0",
                             "data":{  
                                 "name":"Hotel.pdf",
-                                "size":"10mb",
+                                "size":"10kb",
                                 "type":"PDF"
                             }
                         },
@@ -221,7 +221,7 @@
                             "key": "4-1-1",
                             "data":{  
                                 "name":"Flight.pdf",
-                                "size":"5mb",
+                                "size":"5kb",
                                 "type":"PDF"
                             }
                         }
@@ -233,7 +233,7 @@
             "key": "5",
             "data": {  
                 "name":"Main",
-                "size":"50mb",
+                "size":"50kb",
                 "type":"Folder"
             },
             "children":[  
@@ -267,7 +267,7 @@
             "key": "6",
             "data":{  
                 "name":"Other",
-                "size":"5mb",
+                "size":"5kb",
                 "type":"Folder"
             },
             "children":[  
@@ -275,7 +275,7 @@
                     "key": "6-0",
                     "data":{  
                         "name":"todo.txt",
-                        "size":"3mb",
+                        "size":"3kb",
                         "type":"Text"
                     }
                 },
@@ -283,7 +283,7 @@
                     "key": "6-1",
                     "data":{  
                         "name":"logo.png",
-                        "size":"2mb",
+                        "size":"2kb",
                         "type":"Picture"
                     }
                 }
@@ -327,7 +327,7 @@
             "key": "8",
             "data":{  
                 "name":"Videos",
-                "size":"1500mb",
+                "size":"1500kb",
                 "type":"Folder"
             },
             "children":[  
@@ -335,7 +335,7 @@
                     "key": "8-0",
                     "data":{  
                         "name":"primefaces.mkv",
-                        "size":"1000mb",
+                        "size":"1000kb",
                         "type":"Video"
                     }
                 },
@@ -343,7 +343,7 @@
                     "key": "8-1",
                     "data":{  
                         "name":"intro.avi",
-                        "size":"500mb",
+                        "size":"500kb",
                         "type":"Video"
                     }
                 }

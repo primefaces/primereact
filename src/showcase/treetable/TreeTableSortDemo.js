@@ -10,40 +10,29 @@ export class TreeTableSortDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [], data2: [] };
+        this.state = { 
+            nodes1: [],
+            nodes2: []
+        };
 
         this.nodeservice = new NodeService();
     }
 
     componentDidMount() {
-        //Single Sort
-        this.nodeservice.getNodes().then(data => this.setState({ data: data }));
-
-        //Multiple Sort
+        this.nodeservice.getNodes().then(data => this.setState({nodes1: data}));
         this.nodeservice.getNodes().then(data => {
-            let _data = [...data];
-            _data[0].children[0].children.push({
-                "data": {
-                    "name": "Expenses.doc",
-                    "size": "40kb",
-                    "type": "Document - 2"
+            let nodes2 = data;
+            nodes2.push({
+                data: {
+                    name: 'Documents',
+                    size: '100kb',
+                    type: 'Link'
                 }
             });
-            _data[0].children[1].children.push({
-                "data": {
-                    "name": "Invoices",
-                    "size": "2kb",
-                    "type": "Text - 2"
-                }
-            });
-            _data[0].children[1].children.push({
-                "data": {
-                    "name": "Invoices",
-                    "size": "20kb",
-                    "type": "Text - 3"
-                }
-            });
-            this.setState({ data2: _data })
+
+            this.setState({
+                nodes2: nodes2
+            });  
         });
     }
 
@@ -55,21 +44,20 @@ export class TreeTableSortDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Sort</h1>
-                        <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
-                            used with metaKey.</p>
+                        <p>TreeTable supports both single column and multiple column sorting.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Single Column</h3>
-                    <TreeTable value={this.state.data}>
+                    <h3>Single Column Sorting</h3>
+                    <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
                         <Column field="name" header="Name" sortable={true}></Column>
                         <Column field="size" header="Size" sortable={true}></Column>
                         <Column field="type" header="Type" sortable={true}></Column>
                     </TreeTable>
 
-                    <h3>Multiple Columns</h3>
-                    <TreeTable value={this.state.data2} sortMode="multiple">
+                    <h3>Multiple Column Sorting</h3>
+                    <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
                         <Column field="name" header="Name" sortable={true}></Column>
                         <Column field="size" header="Size" sortable={true}></Column>
                         <Column field="type" header="Type" sortable={true}></Column>
