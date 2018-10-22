@@ -35,6 +35,11 @@ export class TreeTable extends Component {
         sortMode: 'single',
         sortFunction: null,
         defaultSortOrder: 1,
+        selectionMode: null,
+        selectionKeys: null,
+        metaKeySelection: true,
+        propagateSelectionUp: true,
+        propagateSelectionDown: true,
         scrollable: false,
         virtualScroll: false,
         reorderableColumns: false,
@@ -44,7 +49,11 @@ export class TreeTable extends Component {
         onCollapse: null,
         onToggle: null,
         onPage: null,
-        onSort: null
+        onSort: null,
+        onSelect: null,
+        onUnselect: null,
+        onRowClick: null,
+        onSelectionChange: null
     }
 
     static propsTypes = {
@@ -73,6 +82,11 @@ export class TreeTable extends Component {
         sortMode: PropTypes.string,
         sortFunction: PropTypes.func,
         defaultSortOrder: PropTypes.number,
+        selectionMode: PropTypes.string,
+        selectionKeys: PropTypes.array,
+        metaKeySelection: PropTypes.bool,
+        propagateSelectionUp: PropTypes.bool,
+        propagateSelectionDown: PropTypes.bool,
         scrollable: PropTypes.bool,
         virtualScroll: PropTypes.bool,
         reorderableColumns: PropTypes.bool,
@@ -83,6 +97,10 @@ export class TreeTable extends Component {
         onToggle: PropTypes.func,
         onPage: PropTypes.func,
         onSort: PropTypes.func,
+        onSelect: PropTypes.func,
+        onUnselect: PropTypes.func,
+        onRowClick: PropTypes.func,
+        onSelectionChange: PropTypes.func
     }
 
     constructor(props) {
@@ -301,7 +319,7 @@ export class TreeTable extends Component {
             for(let i = 0; i < this.state.columnOrder.length; i++) {
                 orderedColumns.push(this.findColumnByKey(columns, this.state.columnOrder[i]));
             }
-                        
+
             return orderedColumns;
         }
         else {
@@ -311,6 +329,18 @@ export class TreeTable extends Component {
 
     getTotalRecords(data) {
         return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
+    }
+
+    isSingleSelectionMode() {
+        return this.props.selectionMode && this.props.selectionMode === 'single';
+    }
+
+    isMultipleSelectionMode() {
+        return this.props.selectionMode && this.props.selectionMode === 'multiple';
+    }
+
+    isRowSelectionMode() {
+        return this.isSingleSelectionMode() || this.isMultipleSelectionMode();
     }
 
     processValue() {
@@ -357,6 +387,9 @@ export class TreeTable extends Component {
                     <TreeTableBody value={value} columns={columns} expandedKeys={this.props.expandedKeys} 
                         onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                         paginator={this.props.paginator} first={this.getFirst()} rows={this.getRows()} 
+                        selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
+                        metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
+                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                         lazy={this.props.lazy} virtualScroll={this.props.virtualScroll} />
                 </table>
             </div>
@@ -372,7 +405,7 @@ export class TreeTable extends Component {
 
     render() {
         const value = this.processValue();
-        const className = classNames('p-treetable p-component');
+        const className = classNames('p-treetable p-component', {'p-treetable-hoverable-rows': this.isRowSelectionMode()});
         const table = this.renderTable(value);
         const totalRecords = this.getTotalRecords(value);
         const headerFacet = this.props.header && <div className="p-treetable-header">{this.props.header}</div>;

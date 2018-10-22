@@ -11,11 +11,20 @@ export class TreeTableBody extends Component {
         paginator: false,
         first: null,
         rows: null,
+        selectionMode: null,
+        selectionKeys: null,
+        metaKeySelection: true,
+        propagateSelectionUp: true,
+        propagateSelectionDown: true,
         lazy: false,
         virtualScroll: false,
         onExpand: null,
         onCollapse: null,
-        onToggle: null
+        onToggle: null,
+        onRowClick: null,
+        onSelect: null,
+        onUnselect: null,
+        onSelectionChange: null
     }
 
     static propsTypes = {
@@ -25,18 +34,30 @@ export class TreeTableBody extends Component {
         paginator: PropTypes.bool,
         first: PropTypes.number,
         rows: PropTypes.number,
+        selectionMode: PropTypes.string,
+        selectionKeys: PropTypes.array,
+        metaKeySelection: PropTypes.bool,
+        propagateSelectionUp: PropTypes.bool,
+        propagateSelectionDown: PropTypes.bool,
         lazy: PropTypes.bool,
         virtualScroll: PropTypes.bool,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
-        onToggle: PropTypes.func
+        onToggle: PropTypes.func,
+        onRowClick: PropTypes.func,
+        onSelect: PropTypes.func,
+        onUnselect: PropTypes.func,
+        onSelectionChange: PropTypes.func
     }
 
     createRow(node) {
         return (
             <TreeTableRow key={node.key||JSON.stringify(node.data)} level={0}
                             node={node} columns={this.props.columns} expandedKeys={this.props.expandedKeys} 
-                            onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} />
+                            onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
+                            selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
+                            metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
+                            propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp} />
         );
     }
 

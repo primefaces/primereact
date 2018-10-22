@@ -141,6 +141,12 @@
     display: none;
 }
 
+/* Selection */
+.p-treetable .p-treetable-checkbox {
+    margin: 0 .5em 0 .25em;
+    vertical-align: middle;
+}
+
 /* Edit */
 .p-treetable .p-treetable-tbody > tr > td.p-cell-editing .p-component {
     width: 100%;
