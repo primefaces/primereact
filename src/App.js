@@ -89,6 +89,7 @@ import { TreeTablePageDemo } from './showcase/treetable/TreeTablePageDemo';
 import { TreeTableSortDemo } from './showcase/treetable/TreeTableSortDemo';
 import { TreeTableSelectionDemo } from './showcase/treetable/TreeTableSelectionDemo';
 import { TreeTableColGroupDemo } from './showcase/treetable/TreeTableColGroupDemo';
+import { TreeTableLazyDemo } from './showcase/treetable/TreeTableLazyDemo';
 import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
 import { ColorPickerDemo } from './showcase/colorpicker/ColorPickerDemo';
 import { PasswordDemo } from './showcase/password/PasswordDemo';
@@ -533,6 +534,7 @@ class App extends Component {
                     <Route path="/treetable/sort" component={TreeTableSortDemo} />
                     <Route path="/treetable/selection" component={TreeTableSelectionDemo} />
                     <Route path="/treetable/colgroup" component={TreeTableColGroupDemo} />
+                    <Route path="/treetable/lazy" component={TreeTableLazyDemo} />
                     <Route path="/captcha" component={CaptchaDemo} />
                     <Route path="/colorpicker" component={ColorPickerDemo} />
                     <Route path="/password" component={PasswordDemo} />

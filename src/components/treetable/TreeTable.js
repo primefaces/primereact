@@ -40,6 +40,8 @@ export class TreeTable extends Component {
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        loading: false,
+        loadingIcon: 'pi pi-spinner',
         scrollable: false,
         virtualScroll: false,
         reorderableColumns: false,
@@ -87,6 +89,8 @@ export class TreeTable extends Component {
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        loading: PropTypes.bool,
+        loadingIcon: PropTypes.string,
         scrollable: PropTypes.bool,
         virtualScroll: PropTypes.bool,
         reorderableColumns: PropTypes.bool,
@@ -403,6 +407,24 @@ export class TreeTable extends Component {
             return this.renderRegularTable(value);
     }
 
+    renderLoader() {
+        if (this.props.loading) {
+            const iconClassName = classNames('p-treetable-loading-icon pi-spin', this.props.loadingIcon);
+        
+            return (
+                <div className="p-treetable-loading">
+                    <div className="p-treetable-loading-overlay p-component-overlay"></div>
+                    <div className="p-treetable-loading-content">
+                        <i className={iconClassName}></i>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
         const value = this.processValue();
         const className = classNames('p-treetable p-component', {'p-treetable-hoverable-rows': this.isRowSelectionMode()});
@@ -412,9 +434,11 @@ export class TreeTable extends Component {
         const footerFacet = this.props.footer && <div className="p-treetable-footer">{this.props.footer}</div>;
         const paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         const paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
+        const loader = this.renderLoader();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
+                {loader}
                 {headerFacet}
                 {paginatorTop}
                 {table}
