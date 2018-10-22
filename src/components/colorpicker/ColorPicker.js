@@ -457,16 +457,18 @@ export class ColorPicker extends Component {
         this.updateUI();
 
         if (this.props.tooltip) {
-            this.tooltip = new Tooltip({
-                target: this.container,
-                content: this.props.tooltip,
-                options: this.props.tooltipOptions
-            });
+            this.renderTooltip();
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         this.updateUI();
+        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+            if (this.tooltip)
+                this.tooltip.updateContent(this.props.tooltip);
+            else
+                this.renderTooltip();
+        }
     }
     
     componentWillUnmount() {
@@ -509,6 +511,14 @@ export class ColorPicker extends Component {
         else {
             DomHandler.relativePosition(this.panel.element, this.container);
         }
+    }
+
+    renderTooltip() {
+        this.tooltip = new Tooltip({
+            target: this.element,
+            content: this.props.tooltip,
+            options: this.props.tooltipOptions
+        });
     }
 
     renderColorSelector() {

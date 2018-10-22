@@ -620,11 +620,7 @@ export class Dropdown extends Component {
         }
 
         if (this.props.tooltip) {
-            this.tooltip = new Tooltip({
-                target: this.container,
-                content: this.props.tooltip,
-                options: this.props.tooltipOptions
-            });
+            this.renderTooltip();
         }
     }
     
@@ -648,7 +644,22 @@ export class Dropdown extends Component {
             if (highlightItem) {
                 DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
             }
-        } 
+        }
+
+        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+            if (this.tooltip)
+                this.tooltip.updateContent(this.props.tooltip);
+            else
+                this.renderTooltip();
+        }
+    }
+
+    renderTooltip() {
+        this.tooltip = new Tooltip({
+            target: this.element,
+            content: this.props.tooltip,
+            options: this.props.tooltipOptions
+        });
     }
 
     render() {
