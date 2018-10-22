@@ -71,11 +71,7 @@ export class Checkbox extends Component {
 
     componentDidMount() {
         if (this.props.tooltip) {
-            this.tooltip = new Tooltip({
-                target: this.element,
-                content: this.props.tooltip,
-                options: this.props.tooltipOptions
-            });
+            this.renderTooltip();
         }
     }
 
@@ -88,6 +84,13 @@ export class Checkbox extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.input.checked = this.props.checked;
+
+        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+            if (this.tooltip)
+                this.tooltip.updateContent(this.props.tooltip);
+            else
+                this.renderTooltip();
+        }
     }
 
     onFocus(e) {
@@ -96,6 +99,14 @@ export class Checkbox extends Component {
 
     onBlur(e) {
         DomHandler.removeClass(this.box, 'p-focus');
+    }
+
+    renderTooltip() {
+        this.tooltip = new Tooltip({
+            target: this.element,
+            content: this.props.tooltip,
+            options: this.props.tooltipOptions
+        });
     }
 
     render() {

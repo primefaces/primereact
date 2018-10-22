@@ -475,11 +475,7 @@ export class AutoComplete extends Component {
 
     componentDidMount() {
         if (this.props.tooltip) {
-            this.tooltip = new Tooltip({
-                target: this.container,
-                content: this.props.tooltip,
-                options: this.props.tooltipOptions
-            });
+            this.renderTooltip();
         }
     }
 
@@ -492,7 +488,7 @@ export class AutoComplete extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (this.searching) {
             if (this.props.suggestions && this.props.suggestions.length)
                 this.showPanel();
@@ -507,6 +503,13 @@ export class AutoComplete extends Component {
         if (this.inputEl && !this.props.multiple) {
             this.updateInputField(this.props.value);
         }
+
+        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+            if (this.tooltip)
+                this.tooltip.updateContent(this.props.tooltip);
+            else
+                this.renderTooltip();
+        }
     }
 
     showLoader() {
@@ -515,6 +518,14 @@ export class AutoComplete extends Component {
 
     hideLoader() {
         this.loader.style.visibility = 'hidden';
+    }
+
+    renderTooltip() {
+        this.tooltip = new Tooltip({
+            target: this.element,
+            content: this.props.tooltip,
+            options: this.props.tooltipOptions
+        });
     }
     
     renderSimpleAutoComplete() {

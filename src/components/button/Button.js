@@ -23,10 +23,10 @@ export class Button extends Component {
 
     componentDidMount() {
         if (this.props.tooltip) {
-            this.renderTooltip()
+            this.renderTooltip();
         }
     }
- 
+
     componentDidUpdate(prevProps) {
         if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
