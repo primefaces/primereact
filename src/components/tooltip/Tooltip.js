@@ -102,6 +102,10 @@ export default class Tooltip  {
         this.clearHideTimeout();
     }
 
+    updateContent(content) {
+        this.content = content;
+    }
+
     show() {
         if (!this.content) {
             return;
