@@ -51,16 +51,16 @@ export class TreeTableSortDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Single Column Sorting</h3>
                     <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
-                        <Column field="name" header="Name" sortable={true}></Column>
-                        <Column field="size" header="Size" sortable={true}></Column>
-                        <Column field="type" header="Type" sortable={true}></Column>
+                        <Column field="name" header="Name" expander sortable></Column>
+                        <Column field="size" header="Size" sortable></Column>
+                        <Column field="type" header="Type" sortable></Column>
                     </TreeTable>
 
                     <h3>Multiple Column Sorting</h3>
                     <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
-                        <Column field="name" header="Name" sortable={true}></Column>
-                        <Column field="size" header="Size" sortable={true}></Column>
-                        <Column field="type" header="Type" sortable={true}></Column>
+                        <Column field="name" header="Name" expander sortable></Column>
+                        <Column field="size" header="Size" sortable></Column>
+                        <Column field="type" header="Type" sortable></Column>
                     </TreeTable>
                 </div>
 

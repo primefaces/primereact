@@ -393,7 +393,7 @@ export class TreeTable extends Component {
                         paginator={this.props.paginator} first={this.getFirst()} rows={this.getRows()} 
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
+                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown}
                         lazy={this.props.lazy} virtualScroll={this.props.virtualScroll} />
                 </table>
             </div>

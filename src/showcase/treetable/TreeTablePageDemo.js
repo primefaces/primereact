@@ -60,7 +60,7 @@ export class TreeTablePageDemo extends Component {
                 <div className="content-section implementation">
                     <TreeTable value={this.state.nodes} paginator={true} rows={10}
                         expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}>
-                        <Column field="name" header="Name"></Column>
+                        <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>

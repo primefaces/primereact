@@ -47,7 +47,7 @@ export class TreeTableDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Uncontrolled</h3>
                     <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name"></Column>
+                        <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
@@ -56,7 +56,7 @@ export class TreeTableDemo extends Component {
                     <Button onClick={this.toggleApplications} label="Toggle Applications" />
                     <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
                         onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}}>
-                        <Column field="name" header="Name"></Column>
+                        <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>

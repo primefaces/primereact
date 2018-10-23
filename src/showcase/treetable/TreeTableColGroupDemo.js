@@ -190,7 +190,7 @@ export class TreeTableColGroupDemo extends Component {
 
                 <div className="content-section implementation">
                     <TreeTable value={this.state.nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                        <Column field="brand" />
+                        <Column field="brand" expander />
                         <Column field="lastYearSale" />
                         <Column field="thisYearSale" />
                         <Column field="lastYearProfit" />

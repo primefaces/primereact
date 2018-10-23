@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
+import { TreeTableBodyCell } from './TreeTableBodyCell'; 
 
 export class TreeTableRow extends Component {
 
@@ -27,7 +28,7 @@ export class TreeTableRow extends Component {
     }
 
     static propsTypes = {
-        value: PropTypes.array,
+        node: PropTypes.any,
         level: PropTypes.number,
         columns: PropTypes.array,
         expandedKeys: PropTypes.array,
@@ -436,21 +437,24 @@ export class TreeTableRow extends Component {
     }
 
     renderCell(column, index) {
-        let content;
-        let toggler = index === 0 ? this.renderToggler() : null;
-        let checkbox = index === 0 ? this.renderCheckbox() : null;
+        let content, toggler, checkbox;
 
-        if(column.props.body)
+        if (column.props.expander) {
+            toggler = this.renderToggler();
+            checkbox = this.renderCheckbox();
+        }
+
+        if (column.props.body)
             content = column.props.body(this.props.node, column);
         else
             content = ObjectUtils.resolveFieldData(this.props.node.data, column.props.field);
 
         return (
-            <td key={column.columnKey||column.field||index}  className={column.props.bodyClassName||column.props.className} style={column.props.bodyStyle||column.props.style}>
+            <TreeTableBodyCell key={column.columnKey||column.field||index} className={column.props.bodyClassName||column.props.className} style={column.props.bodyStyle||column.props.style}>
                 {toggler}
                 {checkbox}
                 {content}
-            </td>
+            </TreeTableBodyCell>
         );
     }
 
@@ -463,7 +467,7 @@ export class TreeTableRow extends Component {
                         onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} 
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect} 
-                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp} onPropagateUp={this.propagateUp} /> 
+                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown} onPropagateUp={this.propagateUp} /> 
                 );
             });
         }

@@ -119,7 +119,7 @@ export class TreeTableLazyDemo extends Component {
                 <div className="content-section implementation">
                     <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
                         first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
-                        <Column field="name" header="Name"></Column>
+                        <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
