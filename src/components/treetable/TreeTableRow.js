@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import { TreeTableBodyCell } from './TreeTableBodyCell'; 
 
@@ -436,24 +435,18 @@ export class TreeTableRow extends Component {
         }
     }
 
-    renderCell(column, index) {
-        let content, toggler, checkbox;
+    renderCell(column) {
+        let toggler, checkbox;
 
         if (column.props.expander) {
             toggler = this.renderToggler();
             checkbox = this.renderCheckbox();
         }
 
-        if (column.props.body)
-            content = column.props.body(this.props.node, column);
-        else
-            content = ObjectUtils.resolveFieldData(this.props.node.data, column.props.field);
-
         return (
-            <TreeTableBodyCell key={column.columnKey||column.field||index} className={column.props.bodyClassName||column.props.className} style={column.props.bodyStyle||column.props.style}>
+            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} node={this.props.node}>
                 {toggler}
                 {checkbox}
-                {content}
             </TreeTableBodyCell>
         );
     }
@@ -478,7 +471,7 @@ export class TreeTableRow extends Component {
 
     render() {
         const className = classNames({'p-highlight': this.isSelected()});
-        const cells = this.props.columns.map((col, i) => this.renderCell(col, i));
+        const cells = this.props.columns.map(col => this.renderCell(col));
         const children =  this.renderChildren();
 
         return (
