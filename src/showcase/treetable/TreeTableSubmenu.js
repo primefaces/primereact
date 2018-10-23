@@ -15,6 +15,13 @@ export class TreeTableSubmenu extends Component {
                     <li><Link to="/treetable/colgroup">&#9679; ColGroup</Link></li>
                     <li><Link to="/treetable/lazy">&#9679; Lazy</Link></li>
                     <li><Link to="/treetable/edit">&#9679; Edit</Link></li>
+                    <li><Link to="/treetable/scroll">&#9679; Scroll</Link></li>
+                    <li><Link to="/treetable/resize">&#9679; Resize</Link></li>
+                    <li><Link to="/treetable/reorder">&#9679; Reorder</Link></li>
+                    <li><Link to="/treetable/toggle">&#9679; Toggle</Link></li>
+                    <li><Link to="/treetable/style">&#9679; Style</Link></li>
+                    <li><Link to="/treetable/contextmenu">&#9679; ContextMenu</Link></li>
+                    <li><Link to="/treetable/responsive">&#9679; Responsive</Link></li>
                 </ul>
             </div>
         );
