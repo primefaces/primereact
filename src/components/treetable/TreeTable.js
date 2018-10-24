@@ -6,6 +6,7 @@ import { Paginator } from '../paginator/Paginator';
 import { TreeTableHeader } from './TreeTableHeader'; 
 import { TreeTableBody } from './TreeTableBody'; 
 import { TreeTableFooter } from './TreeTableFooter'; 
+import { TreeTableScrollableView} from './TreeTableScrollableView'; 
 
 export class TreeTable extends Component {
     
@@ -43,10 +44,12 @@ export class TreeTable extends Component {
         loading: false,
         loadingIcon: 'pi pi-spinner',
         scrollable: false,
-        virtualScroll: false,
         reorderableColumns: false,
         headerColumnGroup: null,
         footerColumnGroup: null,
+        frozenHeaderColumnGroup: null,
+        frozenFooterColumnGroup: null,
+        frozenWidth: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -92,10 +95,12 @@ export class TreeTable extends Component {
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
         scrollable: PropTypes.bool,
-        virtualScroll: PropTypes.bool,
         reorderableColumns: PropTypes.bool,
         headerColumnGroup: PropTypes.element,
         footerColumnGroup: PropTypes.element,
+        frozenHeaderColumnGroup: PropTypes.element,
+        frozenFooterColumnGroup: PropTypes.element,
+        frozenWidth: PropTypes.string,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -347,6 +352,32 @@ export class TreeTable extends Component {
         return this.isSingleSelectionMode() || this.isMultipleSelectionMode();
     }
 
+    getFrozenColumns(columns) {
+        let frozenColumns = null;
+        
+        for(let col of columns) {
+            if(col.props.frozen) {
+                frozenColumns = frozenColumns||[];
+                frozenColumns.push(col);
+            }
+        }
+
+        return frozenColumns;
+    }
+
+    getScrollableColumns(columns) {
+        let scrollableColumns = null;
+        
+        for(let col of columns) {
+            if(!col.props.frozen) {
+                scrollableColumns = scrollableColumns||[];
+                scrollableColumns.push(col);
+            }
+        }
+
+        return scrollableColumns;
+    }
+
     processValue() {
         let data = this.props.value;
 
@@ -364,6 +395,31 @@ export class TreeTable extends Component {
         return data;
     }
 
+    createTableHeader(columns, columnGroup) {
+        return (
+            <TreeTableHeader columns={columns} columnGroup={columnGroup} 
+                        onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}/>
+        );
+    }
+
+    createTableFooter(columns, columnGroup) {
+        return (
+            <TreeTableFooter columns={columns} columnGroup={columnGroup} />
+        );
+    }
+
+    createTableBody(value, columns) {
+        return (
+            <TreeTableBody value={value} columns={columns} expandedKeys={this.props.expandedKeys} 
+                        onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
+                        paginator={this.props.paginator} first={this.getFirst()} rows={this.getRows()} 
+                        selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
+                        metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
+                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown}
+                        lazy={this.props.lazy} />
+        );
+    }
+
     createPaginator(position, totalRecords) {
         const className = 'p-paginator-' + position;
 
@@ -375,26 +431,48 @@ export class TreeTable extends Component {
         )
     }
 
-    renderScrollableTable(value) {
+    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup) {
+        const header = this.createTableHeader(columns, headerColumnGroup);
+        const footer = this.createTableFooter(columns, footerColumnGroup);
+        const body = this.createTableBody(value, columns);
 
+        return (
+            <TreeTableScrollableView columns={columns} header={header} body={body} footer={footer}
+                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth} />
+        );
+    }
+
+    renderScrollableTable(value) {
+        const columns = this.getColumns();
+        let frozenColumns = this.getFrozenColumns(columns);
+        let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
+        let frozenView, scrollableView;
+        if (frozenColumns) {
+            frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup);
+        }
+
+        scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup);
+    
+        return (
+            <div className="p-treetable-scrollable-wrapper">
+                {frozenView}
+                {scrollableView}
+            </div>
+        );
     }
 
     renderRegularTable(value) {
         const columns = this.getColumns();
+        const header = this.createTableHeader(columns, this.props.headerColumnGroup);
+        const footer = this.createTableFooter(columns, this.props.footerColumnGroup);
+        const body = this.createTableBody(value, columns);
 
         return (
             <div className="p-treetable-tablewrapper">
                 <table style={this.props.tableStyle} className={this.props.tableClassName}>
-                    <TreeTableHeader columns={columns} columnGroup={this.props.headerColumnGroup} 
-                        onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}/>                
-                    <TreeTableFooter columns={columns} columnGroup={this.props.footerColumnGroup} />
-                    <TreeTableBody value={value} columns={columns} expandedKeys={this.props.expandedKeys} 
-                        onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
-                        paginator={this.props.paginator} first={this.getFirst()} rows={this.getRows()} 
-                        selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
-                        metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown}
-                        lazy={this.props.lazy} virtualScroll={this.props.virtualScroll} />
+                    {header}
+                    {footer}
+                    {body}
                 </table>
             </div>
         );

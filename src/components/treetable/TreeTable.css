@@ -10,6 +10,11 @@
 
 .p-treetable-toggler {
     cursor: pointer;
+    display: inline-block;
+    height: 1em;
+    position: relative;
+    top: 50%;
+    margin-top: -.5em;
 }
 
 .p-treetable .p-treetable-thead > tr > th,

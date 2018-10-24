@@ -44,7 +44,7 @@ export class TreeTableTemplatingDemo extends Component {
 
                 <div className="content-section implementation">
                     <TreeTable value={this.state.nodes} header={header} footer={footer}>
-                        <Column field="name" header="Name"></Column>
+                        <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                         <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>

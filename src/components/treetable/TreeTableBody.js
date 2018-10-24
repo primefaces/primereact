@@ -17,7 +17,6 @@ export class TreeTableBody extends Component {
         propagateSelectionUp: true,
         propagateSelectionDown: true,
         lazy: false,
-        virtualScroll: false,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -40,7 +39,6 @@ export class TreeTableBody extends Component {
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
         lazy: PropTypes.bool,
-        virtualScroll: PropTypes.bool,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -66,7 +64,7 @@ export class TreeTableBody extends Component {
             if (this.props.paginator && !this.props.lazy) {
                 let rpp = this.props.rows||0;
                 let startIndex = this.props.first||0;
-                let endIndex = this.props.virtualScroll ? (startIndex + (rpp * 2)) : (startIndex + rpp);
+                let endIndex = (startIndex + rpp);
                 let rows = [];
 
                 for (let i = startIndex; i < endIndex; i++) {
