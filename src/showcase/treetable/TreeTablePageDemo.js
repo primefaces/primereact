@@ -9,8 +9,7 @@ export class TreeTablePageDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nodes: [],
-            expandedKeys: []
+            nodes: []
         };
         this.nodeservice = new NodeService();
     }
@@ -58,8 +57,7 @@ export class TreeTablePageDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} paginator={true} rows={10}
-                        expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}>
+                    <TreeTable value={this.state.nodes} paginator={true} rows={10}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>

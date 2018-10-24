@@ -48,11 +48,6 @@ export class TreeTableRow extends Component {
 
     constructor(props) {
         super(props);
-        if (!this.props.onToggle) {
-            this.state = {
-                expanded: props.node.defaultExpanded
-            }
-        }
 
         this.onTogglerClick = this.onTogglerClick.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -67,49 +62,55 @@ export class TreeTableRow extends Component {
         return this.props.node.leaf === false ? false : !(this.props.node.children && this.props.node.children.length);
     }
 
-    expand(event) {
-        //uncontrolled
-        if (!this.props.onToggle) {
-            this.setState({
-                expanded: true
-            }, () => {
-                this.invokeToggleEvents(event, true);
-            });
-        }
-        //controlled
-        else {
-            let expandedKeys = this.props.expandedKeys ? {...this.props.expandedKeys} : {};
-            expandedKeys[this.props.node.key] = true;
-            
-            this.props.onToggle({
-                originalEvent: event,
-                value: expandedKeys
-            });
+    onTogglerClick(event) {
+        if (this.isExpanded())
+            this.collapse(event);
+        else
+            this.expand(event);
 
-            this.invokeToggleEvents(event, true);
-        }
+        event.preventDefault();
+    }
+
+    expand(event) {
+        let expandedKeys = this.props.expandedKeys ? {...this.props.expandedKeys} : {};
+        expandedKeys[this.props.node.key] = true;
+
+        this.props.onToggle({
+            originalEvent: event,
+            value: expandedKeys
+        });
+
+        this.invokeToggleEvents(event, true);
     }
 
     collapse(event) {
-        //uncontrolled
-        if (!this.props.onToggle) {
-            this.setState({
-                expanded: false
-            }, () => {
-                this.invokeToggleEvents(event, false);
-            });
-        }
-        //controlled
-        else {
-            let expandedKeys = {...this.props.expandedKeys};
-            delete expandedKeys[this.props.node.key];
-            
-            this.props.onToggle({
-                originalEvent: event,
-                value: expandedKeys
-            });
+        let expandedKeys = {...this.props.expandedKeys};
+        delete expandedKeys[this.props.node.key];
+        
+        this.props.onToggle({
+            originalEvent: event,
+            value: expandedKeys
+        });
 
-            this.invokeToggleEvents(event, false);
+        this.invokeToggleEvents(event, false);
+    }
+
+    invokeToggleEvents(event, expanded) {
+        if (expanded) {
+            if (this.props.onExpand) {
+                this.props.onExpand({
+                    originalEvent: event,
+                    node: this.props.node
+                });
+            }
+        }
+        else {
+            if (this.props.onCollapse) {
+                this.props.onCollapse({
+                    originalEvent: event,
+                    node: this.props.node
+                });
+            }
         }
     }
 
@@ -341,15 +342,6 @@ export class TreeTableRow extends Component {
             }
         }
     }
- 
-    onTogglerClick(event) {
-        if (this.isExpanded())
-            this.collapse(event);
-        else
-            this.expand(event);
-
-        event.preventDefault();
-    }
 
     isSingleSelectionMode() {
         return this.props.selectionMode && this.props.selectionMode === 'single';
@@ -360,29 +352,7 @@ export class TreeTableRow extends Component {
     }
 
     isExpanded() {
-        if (!this.props.onToggle)
-            return this.state.expanded;
-        else
-            return this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false;
-    }
-
-    invokeToggleEvents(event, expanded) {
-        if (expanded) {
-            if (this.props.onExpand) {
-                this.props.onExpand({
-                    originalEvent: event,
-                    node: this.props.node
-                });
-            }
-        }
-        else {
-            if (this.props.onCollapse) {
-                this.props.onCollapse({
-                    originalEvent: event,
-                    node: this.props.node
-                });
-            }
-        }
+        return this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false;
     }
 
     isSelected() {

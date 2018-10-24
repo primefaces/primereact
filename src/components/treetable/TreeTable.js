@@ -116,6 +116,12 @@ export class TreeTable extends Component {
         super(props);
         let state = {};
 
+        if (!this.props.onToggle) {
+            this.state = {
+                expandedKeys: this.props.expandedKeys
+            };
+        }
+
         if (!this.props.onPage) {
             state.first = props.first;
             state.rows = props.rows;
@@ -131,8 +137,20 @@ export class TreeTable extends Component {
             this.state = state;
         }
 
+        this.onToggle = this.onToggle.bind(this);
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
+    }
+
+    onToggle(event) {
+        if (this.props.onToggle) {
+            this.props.onToggle(event);
+        }
+        else {
+            this.setState({
+                expandedKeys: event.value
+            });
+        }
     }
 
     onPageChange(event) {
@@ -300,6 +318,10 @@ export class TreeTable extends Component {
         return (multiSortMeta[index].order * result);
     }
 
+    getExpandedKeys() {
+        return this.props.onToggle ? this.props.expandedKeys : this.state.expandedKeys;
+    }
+
     getFirst() {
         return this.props.onPage ? this.props.first : this.state.first;
     }
@@ -410,8 +432,8 @@ export class TreeTable extends Component {
 
     createTableBody(value, columns) {
         return (
-            <TreeTableBody value={value} columns={columns} expandedKeys={this.props.expandedKeys} 
-                        onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
+            <TreeTableBody value={value} columns={columns} expandedKeys={this.getExpandedKeys()} 
+                        onToggle={this.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                         paginator={this.props.paginator} first={this.getFirst()} rows={this.getRows()} 
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
