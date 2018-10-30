@@ -11,7 +11,9 @@ export class TreeTableHeader extends Component {
         sortField: null,
         sortOrder: null,
         multiSortMeta: null,
-        onSort: null
+        resizableColumns: false,
+        onSort: null,
+        onResizeStart: null
     }
 
     static propsTypes = {
@@ -20,7 +22,9 @@ export class TreeTableHeader extends Component {
         sortField: PropTypes.string,
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
-        onSort: PropTypes.func
+        resizableColumns: PropTypes.bool,
+        onSort: PropTypes.func,
+        onResizeStart: PropTypes.func
     }
 
     onHeaderClick(event, column) {
@@ -53,6 +57,16 @@ export class TreeTableHeader extends Component {
         return null;
     }
 
+    onResizerMouseDown(event, column) {
+        if(this.props.resizableColumns && this.props.onResizeStart) {
+            this.props.onResizeStart({
+                originalEvent: event,
+                columnEl: event.target.parentElement,
+                column: column
+            });
+        }
+    }
+
     renderSortIcon(column, sorted, sortOrder) {
         if (column.props.sortable) {
             const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
@@ -62,6 +76,17 @@ export class TreeTableHeader extends Component {
                 <a className="p-sortable-column-icon">
                     <span className={sortIconClassName}></span>
                 </a>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderResizer(column) {
+        if (this.props.resizableColumns) {
+            return (
+                <span className="p-column-resizer p-clickable" onMouseDown={e => this.onResizerMouseDown(e, column)} />
             );
         }
         else {
@@ -86,12 +111,15 @@ export class TreeTableHeader extends Component {
         const className = classNames(column.props.headerClassName||column.props.className, {
             'p-sortable-column': column.props.sortable, 
             'p-highlight': sorted, 
-            'p-resizable-column': column.props.resizableColumns
+            'p-resizable-column': this.props.resizableColumns
         });
+
+        const resizer = this.renderResizer(column);
         
         return (
             <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style}
                 onClick={e => this.onHeaderClick(e, column)} rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
+                {resizer}
                 <span className="p-column-title">{column.props.header}</span>
                 {sortIconElement}
             </th>

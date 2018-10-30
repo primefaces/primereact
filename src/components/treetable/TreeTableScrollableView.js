@@ -147,21 +147,22 @@ export class TreeTableScrollableView extends Component {
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
                 <div className="p-treetable-scrollable-header" ref={(el) => { this.scrollHeader= el; }} onScroll={this.onHeaderScroll}>
                     <div className="p-treetable-scrollable-header-box" ref={(el) => { this.scrollHeaderBox = el; }}>
-                        <table>
+                        <table className="p-treetable-scrollable-header-table">
+                            {colGroup}
                             {this.props.header}
-                            {this.props.frozenBody}
                         </table>
                     </div>
                 </div>
                 <div className="p-treetable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
-                    <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}}>
+                    <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}} className="p-treetable-scrollable-body-table">
                         {colGroup}
                         {this.props.body}
                     </table>
                 </div>
                 <div className="p-treetable-scrollable-footer" ref={(el) => { this.scrollFooter = el; }}>
                     <div className="p-treetable-scrollable-footer-box" ref={(el) => { this.scrollFooterBox = el; }}>
-                         <table>
+                         <table className="p-treetable-scrollable-footer-table">
+                            {colGroup}
                             {this.props.footer}
                         </table>
                     </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import DomHandler from '../utils/DomHandler';
 import { Paginator } from '../paginator/Paginator';
 import { TreeTableHeader } from './TreeTableHeader'; 
 import { TreeTableBody } from './TreeTableBody'; 
@@ -50,6 +51,8 @@ export class TreeTable extends Component {
         frozenHeaderColumnGroup: null,
         frozenFooterColumnGroup: null,
         frozenWidth: null,
+        resizableColumns: false,
+        columnResizeMode: 'fit',
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -58,7 +61,8 @@ export class TreeTable extends Component {
         onSelect: null,
         onUnselect: null,
         onRowClick: null,
-        onSelectionChange: null
+        onSelectionChange: null,
+        onColumnResizeEnd: null
     }
 
     static propsTypes = {
@@ -101,6 +105,8 @@ export class TreeTable extends Component {
         frozenHeaderColumnGroup: PropTypes.element,
         frozenFooterColumnGroup: PropTypes.element,
         frozenWidth: PropTypes.string,
+        resizableColumns: PropTypes.bool,
+        columnResizeMode: PropTypes.string,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -109,7 +115,8 @@ export class TreeTable extends Component {
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onRowClick: PropTypes.func,
-        onSelectionChange: PropTypes.func
+        onSelectionChange: PropTypes.func,
+        onColumnResizeEnd: PropTypes.func
     }
 
     constructor(props) {
@@ -140,6 +147,7 @@ export class TreeTable extends Component {
         this.onToggle = this.onToggle.bind(this);
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
+        this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
     }
 
     onToggle(event) {
@@ -318,6 +326,150 @@ export class TreeTable extends Component {
         return (multiSortMeta[index].order * result);
     }
 
+    onColumnResizeStart(event) {
+        let containerLeft = DomHandler.getOffset(this.container).left;
+        this.resizeColumn = event.columnEl;
+        this.resizeColumnProps = event.column;
+        this.columnResizing = true;
+        this.lastResizerHelperX = (event.originalEvent.pageX - containerLeft + this.container.scrollLeft);
+
+        this.bindColumnResizeEvents();
+    }
+
+    onColumnResize(event) {
+        let containerLeft = DomHandler.getOffset(this.container).left;
+        DomHandler.addClass(this.container, 'p-unselectable-text');
+        this.resizerHelper.style.height = this.container.offsetHeight + 'px';
+        this.resizerHelper.style.top = 0 + 'px';
+        this.resizerHelper.style.left = (event.pageX - containerLeft + this.container.scrollLeft) + 'px';
+        
+        this.resizerHelper.style.display = 'block';
+    }
+
+    onColumnResizeEnd(event) {
+        let delta = this.resizerHelper.offsetLeft - this.lastResizerHelperX;
+        let columnWidth = this.resizeColumn.offsetWidth;
+        let newColumnWidth = columnWidth + delta;
+        let minWidth = this.resizeColumn.style.minWidth||15;
+
+        if(columnWidth + delta > parseInt(minWidth, 10)) {
+            if(this.props.columnResizeMode === 'fit') {
+                let nextColumn = this.resizeColumn.nextElementSibling;
+                let nextColumnWidth = nextColumn.offsetWidth - delta;
+                
+                if(newColumnWidth > 15 && nextColumnWidth > 15) {
+                    if(this.props.scrollable) {
+                        let scrollableView = this.findParentScrollableView(this.resizeColumn);
+                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
+                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
+                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+                        let resizeColumnIndex = DomHandler.index(this.resizeColumn);
+
+                        this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
+                        this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
+                        this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
+                    }
+                    else {
+                        this.resizeColumn.style.width = newColumnWidth + 'px';
+                        if(nextColumn) {
+                            nextColumn.style.width = nextColumnWidth + 'px';
+                        }
+                    }
+                }
+            }
+            else if(this.props.columnResizeMode === 'expand') {
+                if (this.props.scrollable) {
+                    let scrollableView = this.findParentScrollableView(this.resizeColumn);
+                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
+                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
+                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+                    scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
+                    scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
+                    if(scrollableFooterTable) {
+                        scrollableFooterTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
+                    }
+                    let resizeColumnIndex = DomHandler.index(this.resizeColumn);
+
+                    this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
+                    this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
+                    this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
+                }
+                else {
+                    this.table.style.width = this.table.offsetWidth + delta + 'px';
+                    this.resizeColumn.style.width = newColumnWidth + 'px';
+                }
+            }    
+            
+            if(this.props.onColumnResizeEnd) {
+                this.props.onColumnResizeEnd({
+                    element: this.resizeColumn,
+                    column: this.resizeColumnProps,
+                    delta: delta
+                });
+            }
+        }
+                
+        this.resizerHelper.style.display = 'none';
+        this.resizeColumn = null;
+        this.resizeColumnProps = null;
+        DomHandler.removeClass(this.container, 'p-unselectable-text');
+
+        this.unbindColumnResizeEvents();
+    }
+
+    findParentScrollableView(column) {
+        if (column) {
+            let parent = column.parentElement;
+            while (parent && !DomHandler.hasClass(parent, 'p-treetable-scrollable-view')) {
+                parent = parent.parentElement;
+            }
+
+            return parent;
+        }
+        else {
+            return null;
+        }
+    }
+
+    resizeColGroup(table, resizeColumnIndex, newColumnWidth, nextColumnWidth) {
+        if(table) {
+            let colGroup = table.children[0].nodeName === 'COLGROUP' ? table.children[0] : null;
+
+            if(colGroup) {
+                let col = colGroup.children[resizeColumnIndex];
+                let nextCol = col.nextElementSibling;
+                col.style.width = newColumnWidth + 'px';
+    
+                if (nextCol && nextColumnWidth) {
+                    nextCol.style.width = nextColumnWidth + 'px';
+                }
+            }
+            else {
+                throw "Scrollable tables require a colgroup to support resizable columns";
+            }
+        }
+    }
+
+    bindColumnResizeEvents() {
+        this.documentColumnResizeListener = document.addEventListener('mousemove', (event) => {
+            if(this.columnResizing) {
+                this.onColumnResize(event);
+            }
+        });
+        
+        this.documentColumnResizeEndListener = document.addEventListener('mouseup', (event) => {
+            if(this.columnResizing) {
+                this.columnResizing = false;
+                this.onColumnResizeEnd(event);
+            }
+        });
+    }
+
+    unbindColumnResizeEvents() {
+        document.removeEventListener('document', this.documentColumnResizeListener);
+        document.removeEventListener('document', this.documentColumnResizeEndListener);
+    }
+
     getExpandedKeys() {
         return this.props.onToggle ? this.props.expandedKeys : this.state.expandedKeys;
     }
@@ -420,7 +572,8 @@ export class TreeTable extends Component {
     createTableHeader(columns, columnGroup) {
         return (
             <TreeTableHeader columns={columns} columnGroup={columnGroup} 
-                        onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}/>
+                        onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}
+                        resizableColumns={this.props.resizableColumns} onResizeStart={this.onColumnResizeStart} /> 
         );
     }
 
@@ -491,7 +644,7 @@ export class TreeTable extends Component {
 
         return (
             <div className="p-treetable-tablewrapper">
-                <table style={this.props.tableStyle} className={this.props.tableClassName}>
+                <table style={this.props.tableStyle} className={this.props.tableClassName}  ref={el => this.table = el}>
                     {header}
                     {footer}
                     {body}
@@ -527,7 +680,11 @@ export class TreeTable extends Component {
 
     render() {
         const value = this.processValue();
-        const className = classNames('p-treetable p-component', {'p-treetable-hoverable-rows': this.isRowSelectionMode()});
+        const className = classNames('p-treetable p-component', {
+            'p-treetable-hoverable-rows': this.isRowSelectionMode(),
+            'p-treetable-resizable': this.props.resizableColumns,
+            'p-treetable-resizable-fit': (this.props.resizableColumns && this.props.columnResizeMode === 'fit')
+        });
         const table = this.renderTable(value);
         const totalRecords = this.getTotalRecords(value);
         const headerFacet = this.props.header && <div className="p-treetable-header">{this.props.header}</div>;
@@ -535,15 +692,17 @@ export class TreeTable extends Component {
         const paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         const paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         const loader = this.renderLoader();
+        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="p-column-resizer-helper" style={{display:'none'}}></div>;
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
                 {loader}
                 {headerFacet}
                 {paginatorTop}
                 {table}
                 {paginatorBottom}
                 {footerFacet}
+                {resizeHelper}
             </div>
         );
     }

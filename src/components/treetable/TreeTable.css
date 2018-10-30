@@ -107,7 +107,7 @@
 }
 
 /* Resizable */
-.p-treetable-resizable > .p-treetable-wrapper {
+.p-treetable-resizable > .p-treetable-tablewrapper {
     overflow-x: auto;
 }
 
