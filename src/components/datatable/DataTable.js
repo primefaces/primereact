@@ -241,7 +241,7 @@ export class DataTable extends Component {
 
     onSort(event) {
         let sortField = event.sortField;
-        let sortOrder = (this.getSortField() === event.sortField) ? this.getSortOrder() * -1 : 1;
+        let singleSortOrder = (this.getSortField() === event.sortField) ? this.getSortOrder() * -1 : 1;
         let multiSortMeta;
 
         this.columnSortable = event.sortable;
@@ -250,24 +250,30 @@ export class DataTable extends Component {
         if(this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.getMultiSortMeta();
+            let sortOrder;
+            if (multiSortMeta) {
+              const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
+              sortOrder = sortMeta ? sortMeta.order * -1 : 1;
+            } else {
+              sortOrder = 1;
+            }
             if(!multiSortMeta || !metaKey) {
                 multiSortMeta = [];
             }
-
             this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
         }
         
         if (this.props.onSort) {
             this.props.onSort({
                 sortField: sortField,
-                sortOrder: sortOrder,
+                sortOrder: singleSortOrder,
                 multiSortMeta: multiSortMeta
             });
         }
         else {
             this.setState({
                 sortField: sortField,
-                sortOrder: sortOrder,
+                sortOrder: singleSortOrder,
                 first: 0,
                 multiSortMeta: multiSortMeta
             });

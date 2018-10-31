@@ -21,7 +21,7 @@ export class HeaderCell extends Component {
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
-                    sortField: this.props.field,
+                    sortField: this.props.sortField ? this.props.sortField : this.props.field,
                     sortFunction: this.props.sortFunction,
                     sortable: this.props.sortable
                 });
@@ -71,7 +71,7 @@ export class HeaderCell extends Component {
     getMultiSortMetaData() {
         if(this.props.multiSortMeta) {
             for(let i = 0; i < this.props.multiSortMeta.length; i++) {
-                if(this.props.multiSortMeta[i].field === this.props.field) {
+                if(this.props.multiSortMeta[i].field === (this.props.sortField ? this.props.sortField : this.props.field)) {
                     return this.props.multiSortMeta[i];
                 }
             }
