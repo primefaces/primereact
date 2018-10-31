@@ -12,8 +12,13 @@ export class TreeTableHeader extends Component {
         sortOrder: null,
         multiSortMeta: null,
         resizableColumns: false,
+        reorderableColumns: false,
         onSort: null,
-        onResizeStart: null
+        onResizeStart: null,
+        onDragStart: null,
+        onDragOver: null,
+        onDragLeave: null,
+        onDrop: null
     }
 
     static propsTypes = {
@@ -23,8 +28,19 @@ export class TreeTableHeader extends Component {
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
         resizableColumns: PropTypes.bool,
+        reorderableColumns: PropTypes.bool,
         onSort: PropTypes.func,
-        onResizeStart: PropTypes.func
+        onResizeStart: PropTypes.func,
+        onDragStart: PropTypes.func,
+        onDragOver: PropTypes.func,
+        onDragLeave: PropTypes.func,
+        onDrop: PropTypes.func
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.onHeaderMouseDown = this.onHeaderMouseDown.bind(this);
     }
 
     onHeaderClick(event, column) {
@@ -42,6 +58,15 @@ export class TreeTableHeader extends Component {
 
                 DomHandler.clearSelection();
             }
+        }
+    }
+
+    onHeaderMouseDown(event) {
+        if (this.props.reorderableColumns) {
+            if (event.target.nodeName !== 'INPUT')
+                event.currentTarget.draggable = true;
+            else if (event.target.nodeName === 'INPUT')
+                event.currentTarget.draggable = false;
         }
     }
 
@@ -118,7 +143,8 @@ export class TreeTableHeader extends Component {
         
         return (
             <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style}
-                onClick={e => this.onHeaderClick(e, column)} rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
+                onClick={e => this.onHeaderClick(e, column)} onMouseDown={this.onHeaderMouseDown} rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}
+                onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
                 <span className="p-column-title">{column.props.header}</span>
                 {sortIconElement}

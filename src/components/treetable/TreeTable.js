@@ -62,7 +62,8 @@ export class TreeTable extends Component {
         onUnselect: null,
         onRowClick: null,
         onSelectionChange: null,
-        onColumnResizeEnd: null
+        onColumnResizeEnd: null,
+        onColReorder: null
     }
 
     static propsTypes = {
@@ -116,7 +117,8 @@ export class TreeTable extends Component {
         onUnselect: PropTypes.func,
         onRowClick: PropTypes.func,
         onSelectionChange: PropTypes.func,
-        onColumnResizeEnd: PropTypes.func
+        onColumnResizeEnd: PropTypes.func,
+        onColReorder: PropTypes.func
     }
 
     constructor(props) {
@@ -148,6 +150,10 @@ export class TreeTable extends Component {
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
+        this.onColumnDragStart = this.onColumnDragStart.bind(this);
+        this.onColumnDragOver = this.onColumnDragOver.bind(this);
+        this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
+        this.onColumnDrop = this.onColumnDrop.bind(this);
     }
 
     onToggle(event) {
@@ -445,7 +451,7 @@ export class TreeTable extends Component {
                 }
             }
             else {
-                throw "Scrollable tables require a colgroup to support resizable columns";
+                throw new Error("Scrollable tables require a colgroup to support resizable columns");
             }
         }
     }
@@ -470,6 +476,115 @@ export class TreeTable extends Component {
         document.removeEventListener('document', this.documentColumnResizeEndListener);
     }
 
+    onColumnDragStart(event) {
+        if(this.columnResizing) {
+            event.preventDefault();
+            return;
+        }
+        
+        this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
+        this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
+
+        this.draggedColumn = this.findParentHeader(event.target);
+        event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
+    }
+    
+    onColumnDragOver(event) {
+        let dropHeader = this.findParentHeader(event.target);
+        if(this.props.reorderableColumns && this.draggedColumn && dropHeader) {
+            event.preventDefault();
+            let containerOffset = DomHandler.getOffset(this.container);
+            let dropHeaderOffset = DomHandler.getOffset(dropHeader);
+            
+            if(this.draggedColumn !== dropHeader) {
+                let targetLeft =  dropHeaderOffset.left - containerOffset.left;
+                //let targetTop =  containerOffset.top - dropHeaderOffset.top;
+                let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
+                
+                this.reorderIndicatorUp.style.top = dropHeaderOffset.top - containerOffset.top - (this.iconHeight - 1) + 'px';
+                this.reorderIndicatorDown.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
+
+                if(event.pageX > columnCenter) {
+                    this.reorderIndicatorUp.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2))+ 'px';
+                    this.dropPosition = 1;
+                }
+                else {
+                    this.reorderIndicatorUp.style.left = (targetLeft - Math.ceil(this.iconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft - Math.ceil(this.iconWidth / 2))+ 'px';
+                    this.dropPosition = -1;
+                }
+                                
+                this.reorderIndicatorUp.style.display = 'block';
+                this.reorderIndicatorDown.style.display = 'block';
+            }
+            else {
+                event.dataTransfer.dropEffect = 'none';
+            }
+        }
+    }
+    
+    onColumnDragLeave(event) {
+        if(this.props.reorderableColumns && this.draggedColumn) {
+            event.preventDefault();
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+        }
+    }
+    
+    onColumnDrop(event) {
+        event.preventDefault();
+        if(this.draggedColumn) {
+            let dragIndex = DomHandler.index(this.draggedColumn);
+            let dropIndex = DomHandler.index(this.findParentHeader(event.target));
+            let allowDrop = (dragIndex !== dropIndex);
+            if(allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
+                allowDrop = false;
+            }
+        
+            if(allowDrop) {
+                let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
+                ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
+                let columnOrder = [];
+                for(let column of columns) {
+                    columnOrder.push(column.props.columnKey||column.props.field);
+                }
+                
+                this.setState({
+                    columnOrder: columnOrder
+                });
+    
+                if (this.props.onColReorder) {
+                    this.props.onColReorder({
+                        dragIndex: dragIndex,
+                        dropIndex: dropIndex,
+                        columns: columns
+                    });
+                }
+            }
+            
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+            this.draggedColumn.draggable = false;
+            this.draggedColumn = null;
+            this.dropPosition = null;
+        }
+    }
+
+    findParentHeader(element) {
+        if(element.nodeName === 'TH') {
+            return element;
+        }
+        else {
+            let parent = element.parentElement;
+            while(parent.nodeName !== 'TH') {
+                parent = parent.parentElement;
+                if(!parent) break;
+            }
+            return parent;
+        }
+    }
+
     getExpandedKeys() {
         return this.props.onToggle ? this.props.expandedKeys : this.state.expandedKeys;
     }
@@ -492,6 +607,19 @@ export class TreeTable extends Component {
 
     getMultiSortMeta() {
         return this.props.onSort ? this.props.multiSortMeta : this.state.multiSortMeta;
+    }
+
+    findColumnByKey(columns, key) {
+        if(columns && columns.length) {
+            for(let i = 0; i < columns.length; i++) {
+                let child = columns[i];
+                if(child.props.columnKey === key || child.props.field === key) {
+                    return child;
+                }
+            }
+        }
+        
+        return null;
     }
 
     getColumns() {
@@ -573,7 +701,9 @@ export class TreeTable extends Component {
         return (
             <TreeTableHeader columns={columns} columnGroup={columnGroup} 
                         onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}
-                        resizableColumns={this.props.resizableColumns} onResizeStart={this.onColumnResizeStart} /> 
+                        resizableColumns={this.props.resizableColumns} onResizeStart={this.onColumnResizeStart} 
+                        reorderableColumns={this.props.reorderableColumns} onDragStart={this.onColumnDragStart} 
+                        onDragOver={this.onColumnDragOver} onDragLeave={this.onColumnDragLeave} onDrop={this.onColumnDrop} /> 
         );
     }
 
@@ -692,7 +822,9 @@ export class TreeTable extends Component {
         const paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         const paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         const loader = this.renderLoader();
-        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="p-column-resizer-helper" style={{display:'none'}}></div>;
+        const resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="p-column-resizer-helper" style={{display:'none'}}></div>;
+        const reorderIndicatorUp = this.props.reorderableColumns && <span ref={el => this.reorderIndicatorUp = el} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
+        const reorderIndicatorDown = this.props.reorderableColumns && <span ref={el => this.reorderIndicatorDown = el} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
 
         return (
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
@@ -703,6 +835,8 @@ export class TreeTable extends Component {
                 {paginatorBottom}
                 {footerFacet}
                 {resizeHelper}
+                {reorderIndicatorUp}
+                {reorderIndicatorDown}
             </div>
         );
     }
