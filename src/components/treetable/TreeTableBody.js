@@ -17,6 +17,7 @@ export class TreeTableBody extends Component {
         propagateSelectionUp: true,
         propagateSelectionDown: true,
         lazy: false,
+        rowClassName: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -39,6 +40,7 @@ export class TreeTableBody extends Component {
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
         lazy: PropTypes.bool,
+        rowClassName: PropTypes.func,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -55,7 +57,8 @@ export class TreeTableBody extends Component {
                             onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                             selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                             metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                            propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown} />
+                            propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown} 
+                            rowClassName={this.props.rowClassName} />
         );
     }
 

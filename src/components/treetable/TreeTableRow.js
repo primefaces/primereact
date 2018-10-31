@@ -16,6 +16,7 @@ export class TreeTableRow extends Component {
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        rowClassName: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -36,6 +37,7 @@ export class TreeTableRow extends Component {
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        rowClassName: PropTypes.func,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -440,9 +442,16 @@ export class TreeTableRow extends Component {
     }
 
     render() {
-        const className = classNames({'p-highlight': this.isSelected()});
         const cells = this.props.columns.map(col => this.renderCell(col));
         const children =  this.renderChildren();
+        let className = {'p-highlight': this.isSelected()};
+
+        if (this.props.rowClassName) {
+            let rowClassName = this.props.rowClassName(this.props.node);
+            className = {...className, ...rowClassName};
+        }
+
+        className = classNames(className);
 
         return (
             <React.Fragment>

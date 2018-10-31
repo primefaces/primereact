@@ -20,11 +20,11 @@ export class DataTableStyleDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
     
-    yearTemplate(rowData, column) {
+    yearTemplate(rowData) {
         let year = rowData.year;
-        let bgColor = year > 2010 ? '#5cb85c' : '#ffffff';
+        let fontWeight = year > 2010 ? 'bold' : 'normal';
         
-        return <div style={{backgroundColor: bgColor, padding: '.25em .5em'}}>{year}</div>;
+        return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
     }
     
     rowClassName(rowData) {
@@ -46,10 +46,10 @@ export class DataTableStyleDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <p>This datatable highlights cell whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
+                    <p>This datatable highlights cell with a bolder font weight whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
                     <DataTable value={this.state.cars} rowClassName={this.rowClassName}>
                         <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" body={this.yearTemplate} style={{padding: 0}}/>
+                        <Column field="year" header="Year" body={this.yearTemplate} />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
@@ -95,9 +95,9 @@ export class DataTableStyleDemo extends Component {
     
     yearTemplate(rowData, column) {
         let year = rowData.year;
-        let bgColor = year > 2010 ? '#5cb85c' : '#ffffff';
+        let fontWeight = year > 2010 ? 'bold' : 'normal';
         
-        return <div style={{backgroundColor: bgColor, padding: '.25em .5em'}}>{year}</div>;
+        return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
     }
     
     rowClassName(rowData) {
@@ -119,10 +119,10 @@ export class DataTableStyleDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <p>This datatable highlights cell whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
+                    <p>This datatable highlights cells with a bolder font weight whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
                     <DataTable value={this.state.cars} rowClassName={this.rowClassName}>
                         <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" body={this.yearTemplate} style={{padding: 0}}/>
+                        <Column field="year" header="Year" body={this.yearTemplate} />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>

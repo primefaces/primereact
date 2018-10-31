@@ -42,6 +42,8 @@ export class TreeTable extends Component {
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
+        autoLayout: false,
+        rowClassName: null,
         loading: false,
         loadingIcon: 'pi pi-spinner',
         scrollable: false,
@@ -97,6 +99,8 @@ export class TreeTable extends Component {
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
+        autoLayout: PropTypes.bool,
+        rowClassName: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
         scrollable: PropTypes.bool,
@@ -721,7 +725,7 @@ export class TreeTable extends Component {
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                         propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown}
-                        lazy={this.props.lazy} />
+                        lazy={this.props.lazy} rowClassName={this.props.rowClassName}/>
         );
     }
 
@@ -813,7 +817,8 @@ export class TreeTable extends Component {
         const className = classNames('p-treetable p-component', {
             'p-treetable-hoverable-rows': this.isRowSelectionMode(),
             'p-treetable-resizable': this.props.resizableColumns,
-            'p-treetable-resizable-fit': (this.props.resizableColumns && this.props.columnResizeMode === 'fit')
+            'p-treetable-resizable-fit': (this.props.resizableColumns && this.props.columnResizeMode === 'fit'),
+            'p-treetable-auto-layout': this.props.autoLayout
         });
         const table = this.renderTable(value);
         const totalRecords = this.getTotalRecords(value);
