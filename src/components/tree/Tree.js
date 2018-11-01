@@ -28,7 +28,7 @@ class UITreeNode extends Component {
         onCollapse: null,
         onToggle: null,
         onSelectionChange: null,
-        onContextMenuSelectionChange: PropTypes.func,
+        onContextMenuSelectionChange: null,
         onPropagateUp: null,
         onDragStart: null,
         onDragEnd: null,
