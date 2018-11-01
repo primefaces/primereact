@@ -95,6 +95,7 @@ import { TreeTableScrollDemo } from './showcase/treetable/TreeTableScrollDemo';
 import { TreeTableColResizeDemo } from './showcase/treetable/TreeTableColResizeDemo';
 import { TreeTableColReorderDemo } from './showcase/treetable/TreeTableColReorderDemo';
 import { TreeTableColTogglerDemo } from './showcase/treetable/TreeTableColTogglerDemo';
+import { TreeTableContextMenuDemo } from './showcase/treetable/TreeTableContextMenuDemo';
 import { TreeTableStyleDemo } from './showcase/treetable/TreeTableStyleDemo';
 import { CaptchaDemo } from './showcase/captcha/CaptchaDemo';
 import { ColorPickerDemo } from './showcase/colorpicker/ColorPickerDemo';
@@ -547,6 +548,7 @@ class App extends Component {
                     <Route path="/treetable/reorder" component={TreeTableColReorderDemo} />
                     <Route path="/treetable/toggle" component={TreeTableColTogglerDemo} />
                     <Route path="/treetable/style" component={TreeTableStyleDemo} />
+                    <Route path="/treetable/contextmenu" component={TreeTableContextMenuDemo} />
                     <Route path="/captcha" component={CaptchaDemo} />
                     <Route path="/colorpicker" component={ColorPickerDemo} />
                     <Route path="/password" component={PasswordDemo} />

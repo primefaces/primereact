@@ -11,6 +11,7 @@ export class TreeTableRow extends Component {
         level: null,
         columns: null,
         expandedKeys: null,
+        contextMenuSelectionKey: null,
         selectionMode: null,
         selectionKeys: null,
         metaKeySelection: true,
@@ -24,7 +25,9 @@ export class TreeTableRow extends Component {
         onSelect: null,
         onUnselect: null,
         onSelectionChange: null,
-        onPropagateUp: null
+        onPropagateUp: null,
+        onContextMenuSelectionChange: null,
+        onContextMenu: null
     }
 
     static propsTypes = {
@@ -32,6 +35,7 @@ export class TreeTableRow extends Component {
         level: PropTypes.number,
         columns: PropTypes.array,
         expandedKeys: PropTypes.array,
+        contextMenuSelectionKey: PropTypes.any,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.array,
         metaKeySelection: PropTypes.bool,
@@ -45,7 +49,9 @@ export class TreeTableRow extends Component {
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onSelectionChange: PropTypes.func,
-        onPropagateUp: PropTypes.func
+        onPropagateUp: PropTypes.func,
+        onContextMenuSelectionChange: PropTypes.func,
+        onContextMenu: PropTypes.func,
     }
 
     constructor(props) {
@@ -58,6 +64,7 @@ export class TreeTableRow extends Component {
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onCheckboxFocus = this.onCheckboxFocus.bind(this);
         this.onCheckboxBlur = this.onCheckboxBlur.bind(this);
+        this.onRightClick = this.onRightClick.bind(this);
     }
 
     isLeaf() {
@@ -345,6 +352,24 @@ export class TreeTableRow extends Component {
         }
     }
 
+    onRightClick(event) {
+        DomHandler.clearSelection();
+
+        if (this.props.onContextMenuSelectionChange) {
+            this.props.onContextMenuSelectionChange({
+                originalEvent: event,
+                value: this.props.node.key
+            });
+        }
+
+        if (this.props.onContextMenu) {
+            this.props.onContextMenu({
+                originalEvent: event,
+                node: this.props.node
+            });
+        }
+    }
+
     isSingleSelectionMode() {
         return this.props.selectionMode && this.props.selectionMode === 'single';
     }
@@ -432,7 +457,9 @@ export class TreeTableRow extends Component {
                         onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} 
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect} 
-                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown} onPropagateUp={this.propagateUp} /> 
+                        propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown} onPropagateUp={this.propagateUp}
+                        rowClassName={this.props.rowClassName}
+                        contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} /> 
                 );
             });
         }
@@ -444,7 +471,10 @@ export class TreeTableRow extends Component {
     render() {
         const cells = this.props.columns.map(col => this.renderCell(col));
         const children =  this.renderChildren();
-        let className = {'p-highlight': this.isSelected()};
+        let className = {
+            'p-highlight': this.isSelected(),
+            'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)
+        };
 
         if (this.props.rowClassName) {
             let rowClassName = this.props.rowClassName(this.props.node);
@@ -455,7 +485,7 @@ export class TreeTableRow extends Component {
 
         return (
             <React.Fragment>
-                <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd}>{cells}</tr>
+                <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick}>{cells}</tr>
                 {children}
             </React.Fragment>
         );

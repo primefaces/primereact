@@ -2116,8 +2116,11 @@ body .p-treetable .p-treetable-tbody > tr {
     color: #ffffff; }
     body .p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler {
       color: #ffffff; }
-  body .p-treetable .p-treetable-tbody > tr.p-treetable-dragpoint-bottom > td {
-    box-shadow: inset 0 -2px 0 0 #1f7ed0; }
+  body .p-treetable .p-treetable-tbody > tr.p-highlight-contextmenu {
+    background-color: #82bbec;
+    color: #ffffff; }
+    body .p-treetable .p-treetable-tbody > tr.p-highlight-contextmenu .p-treetable-toggler {
+      color: #ffffff; }
 body .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
   cursor: pointer;
   background-color: #4c4c4c;

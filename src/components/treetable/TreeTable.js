@@ -19,6 +19,7 @@ export class TreeTable extends Component {
         tableStyle: null,
         tableClassName: null,
         expandedKeys: null,
+        contextMenuSelectionKey: null,
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
@@ -64,8 +65,10 @@ export class TreeTable extends Component {
         onUnselect: null,
         onRowClick: null,
         onSelectionChange: null,
+        onContextMenuSelectionChange: null,
         onColumnResizeEnd: null,
-        onColReorder: null
+        onColReorder: null,
+        onContextMenu: null
     }
 
     static propsTypes = {
@@ -76,6 +79,7 @@ export class TreeTable extends Component {
         tableStyle: PropTypes.any,
         tableClassName: PropTypes.string,
         expandedKeys: PropTypes.object,
+        contextMenuSelectionKey: PropTypes.any,
         paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
@@ -121,8 +125,10 @@ export class TreeTable extends Component {
         onUnselect: PropTypes.func,
         onRowClick: PropTypes.func,
         onSelectionChange: PropTypes.func,
+        onContextMenuSelectionChange: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
-        onColReorder: PropTypes.func
+        onColReorder: PropTypes.func,
+        onContextMenu: PropTypes.func
     }
 
     constructor(props) {
@@ -725,7 +731,8 @@ export class TreeTable extends Component {
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                         propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown}
-                        lazy={this.props.lazy} rowClassName={this.props.rowClassName}/>
+                        lazy={this.props.lazy} rowClassName={this.props.rowClassName}
+                        contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}/>
         );
     }
 

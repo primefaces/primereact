@@ -8,6 +8,7 @@ export class TreeTableBody extends Component {
         value: null,
         columns: null,
         expandedKeys: null,
+        contextMenuSelectionKey: null,
         paginator: false,
         first: null,
         rows: null,
@@ -24,13 +25,16 @@ export class TreeTableBody extends Component {
         onRowClick: null,
         onSelect: null,
         onUnselect: null,
-        onSelectionChange: null
+        onSelectionChange: null,
+        onContextMenuSelectionChange: null,
+        onContextMenu: null
     }
 
     static propsTypes = {
         value: PropTypes.array,
         columns: PropTypes.array,
         expandedKeys: PropTypes.array,
+        contextMenuSelectionKey: PropTypes.any,
         paginator: PropTypes.bool,
         first: PropTypes.number,
         rows: PropTypes.number,
@@ -47,7 +51,9 @@ export class TreeTableBody extends Component {
         onRowClick: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
-        onSelectionChange: PropTypes.func
+        onSelectionChange: PropTypes.func,
+        onContextMenuSelectionChange: PropTypes.func,
+        onContextMenu: PropTypes.func
     }
 
     createRow(node) {
@@ -58,7 +64,8 @@ export class TreeTableBody extends Component {
                             selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                             metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                             propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown} 
-                            rowClassName={this.props.rowClassName} />
+                            rowClassName={this.props.rowClassName}
+                            contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} />
         );
     }
 
