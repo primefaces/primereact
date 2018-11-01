@@ -1283,3 +1283,22 @@ pre[class*="language-"] {
         color: #8a0a39 !important;
     }
 }
+
+/* Responsive Tables */
+.p-col-d {
+    display: table-cell;
+}
+
+.p-col-m {
+    display: none;
+}
+
+@media screen and (max-width: 64em) {
+    .p-col-d {
+        display: none;
+    }
+    
+    .p-col-m {
+        display: inline-block;
+    }
+}
