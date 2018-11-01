@@ -65,6 +65,7 @@ export class TreeTableRow extends Component {
         this.onCheckboxFocus = this.onCheckboxFocus.bind(this);
         this.onCheckboxBlur = this.onCheckboxBlur.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     isLeaf() {
@@ -370,6 +371,62 @@ export class TreeTableRow extends Component {
         }
     }
 
+    onKeyDown(event) {
+        if (event.target === this.container) {
+            const rowElement = event.currentTarget;
+
+            switch (event.which) {
+                //down arrow
+                case 40:
+                    const nextRow = rowElement.nextElementSibling;
+                    if (nextRow) {
+                        nextRow.focus();
+                    }
+    
+                    event.preventDefault();
+                break;
+    
+                //up arrow
+                case 38:
+                    const previousRow = rowElement.previousElementSibling;
+                    if (previousRow) {
+                        previousRow.focus();
+                    }
+    
+                    event.preventDefault();
+                break;
+    
+                //right arrow
+                case 39:
+                    if (!this.isExpanded()) {
+                        this.expand(event);
+                    }
+    
+                    event.preventDefault();
+                break;
+    
+                //left arrow
+                case 37:
+                    if (this.isExpanded()) {
+                        this.collapse(event);
+                    }
+    
+                    event.preventDefault();
+                break;
+
+                //enter
+                case 13:
+                    this.onClick(event);
+                    event.preventDefault();
+                break;
+    
+                default:
+                    //no op
+                break;
+            }
+        }
+    }
+
     isSingleSelectionMode() {
         return this.props.selectionMode && this.props.selectionMode === 'single';
     }
@@ -403,7 +460,7 @@ export class TreeTableRow extends Component {
         const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
 
         return (
-            <a className="p-treetable-toggler p-unselectable-text" tabIndex="0" onClick={this.onTogglerClick} style={style}>
+            <a className="p-treetable-toggler p-unselectable-text" onClick={this.onTogglerClick} style={style}>
                 <i className={iconClassName} ></i>
             </a>
         );
@@ -485,7 +542,7 @@ export class TreeTableRow extends Component {
 
         return (
             <React.Fragment>
-                <tr className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick}>{cells}</tr>
+                <tr ref={el => this.container = el} tabIndex="0" className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
                 {children}
             </React.Fragment>
         );
