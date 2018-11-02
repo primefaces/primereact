@@ -75,7 +75,7 @@ import { DataTableRowGroupDemo } from './showcase/datatable/DataTableRowGroupDem
 import { DataTableStyleDemo } from './showcase/datatable/DataTableStyleDemo';
 import { OrderListDemo } from './showcase/orderlist/OrderListDemo';
 import { PickListDemo } from './showcase/picklist/PickListDemo';
-import { ScheduleDemo } from './showcase/schedule/ScheduleDemo';
+import { FullCalendarDemo } from './showcase/fullcalendar/FullCalendarDemo';
 import { TreeDemo } from './showcase/tree/TreeDemo';
 import { TreeSelectionDemo } from './showcase/tree/TreeSelectionDemo';
 import { TreeEventsDemo } from './showcase/tree/TreeEventsDemo';
@@ -220,7 +220,7 @@ class AppMenu extends Component {
                                 <Link to="/organizationchart">&#9679; Org Chart</Link>
                                 <Link to="/paginator">&#9679; Paginator</Link>
                                 <Link to="/picklist">&#9679; PickList</Link>
-                                <Link to="/schedule">&#9679; Schedule</Link>
+                                <Link to="/fullcalendar">&#9679; FullCalendar</Link>
                                 <Link to="/tree">&#9679; Tree</Link>
                                 <Link to="/treetable">&#9679; TreeTable</Link>
                             </div>
@@ -528,7 +528,7 @@ class App extends Component {
                     <Route path="/datatable/style" component={DataTableStyleDemo} />
                     <Route path="/orderlist" component={OrderListDemo} />
                     <Route path="/picklist" component={PickListDemo} />
-                    <Route path="/schedule" component={ScheduleDemo} />
+                    <Route path="/fullcalendar" component={FullCalendarDemo} />
                     <Route exact path="/tree" component={TreeDemo} />
                     <Route path="/tree/selection" component={TreeSelectionDemo} />
                     <Route path="/tree/events" component={TreeEventsDemo} />
