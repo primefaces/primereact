@@ -207,6 +207,12 @@ export class UITreeNode extends Component {
                 event.preventDefault();
             break;
 
+            //enter
+            case 13:
+                this.onClick(event);
+                event.preventDefault();
+            break;
+
             default:
                 //no op
             break;
