@@ -30,7 +30,7 @@ export class TreeTableDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
     }
 
     render() {

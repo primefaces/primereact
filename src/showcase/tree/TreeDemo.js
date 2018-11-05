@@ -161,12 +161,6 @@ import {Tree} from 'primereact/tree';
                             <td>null</td>
                             <td>Specifies if the node has children. Used in lazy loading.</td>
                         </tr>
-                        <tr>
-                            <td>defaultExpanded</td>
-                            <td>boolean</td>
-                            <td>null</td>
-                            <td>Whether the node is in an expanded or collapsed state.</td>
-						</tr>
                     </tbody>
                 </table>
             </div>

@@ -19,8 +19,8 @@ export class TreeTableSortDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getNodes().then(data => this.setState({nodes1: data}));
-        this.nodeservice.getNodes().then(data => {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes1: data}));
+        this.nodeservice.getTreeTableNodes().then(data => {
             let nodes2 = data;
             nodes2.push({
                 data: {

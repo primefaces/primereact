@@ -38,11 +38,11 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getNodes().then(data => this.setState({nodes1: data}));
-        this.nodeservice.getNodes().then(data => this.setState({nodes2: data}));
-        this.nodeservice.getNodes().then(data => this.setState({nodes3: data}));
-        this.nodeservice.getNodes().then(data => this.setState({nodes4: data}));
-        this.nodeservice.getNodes().then(data => this.setState({nodes5: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes1: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes2: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes3: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes4: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes5: data}));
     }
 
     render() {
