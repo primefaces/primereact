@@ -448,36 +448,45 @@ export class DataTable extends Component {
                 let nextColumnWidth = nextColumn.offsetWidth - delta;
                 
                 if(newColumnWidth > 15 && nextColumnWidth > 15) {
-                    this.resizeColumn.style.width = newColumnWidth + 'px';
-                    if(nextColumn) {
-                        nextColumn.style.width = nextColumnWidth + 'px';
-                    }
-                    
                     if(this.props.scrollable) {
-                        let colGroup = DomHandler.findSingle(this.container, 'colgroup.p-datatable-scrollable-colgroup');
+                        let scrollableView = this.findParentScrollableView(this.resizeColumn);
+                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-body-table');
+                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-header-table');
+                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-footer-table');
                         let resizeColumnIndex = DomHandler.index(this.resizeColumn);
-                        colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
-                        
+
+                        this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
+                        this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
+                        this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
+                    }
+                    else {
+                        this.resizeColumn.style.width = newColumnWidth + 'px';
                         if(nextColumn) {
-                            colGroup.children[resizeColumnIndex + 1].style.width = nextColumnWidth + 'px';
+                            nextColumn.style.width = nextColumnWidth + 'px';
                         }
                     }
                 }
             }
             else if(this.props.columnResizeMode === 'expand') {
-                let table = DomHandler.findSingle(this.container, 'tbody.p-datatable-tbody').parentElement;
-                table.style.width = table.offsetWidth + delta + 'px';
-                this.resizeColumn.style.width = newColumnWidth + 'px';
-                let containerWidth = table.style.width;
-                
-                if(this.props.scrollable) {
-                    DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-box').children[0].style.width = containerWidth;
-                    let colGroup = DomHandler.findSingle(this.container, 'colgroup.p-datatable-scrollable-colgroup');
+                if (this.props.scrollable) {
+                    let scrollableView = this.findParentScrollableView(this.resizeColumn);
+                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-body-table');
+                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-header-table');
+                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-footer-table');
+                    scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
+                    scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
+                    if(scrollableFooterTable) {
+                        scrollableFooterTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
+                    }
                     let resizeColumnIndex = DomHandler.index(this.resizeColumn);
-                    colGroup.children[resizeColumnIndex].style.width = newColumnWidth + 'px';
+
+                    this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
+                    this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
+                    this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
                 }
                 else {
-                    this.container.style.width = containerWidth;
+                    this.table.style.width = this.table.offsetWidth + delta + 'px';
+                    this.resizeColumn.style.width = newColumnWidth + 'px';
                 }
             }    
             
@@ -496,6 +505,39 @@ export class DataTable extends Component {
         DomHandler.removeClass(this.container, 'p-unselectable-text');
 
         this.unbindColumnResizeEvents();
+    }
+
+    findParentScrollableView(column) {
+        if (column) {
+            let parent = column.parentElement;
+            while (parent && !DomHandler.hasClass(parent, 'p-datatable-scrollable-view')) {
+                parent = parent.parentElement;
+            }
+
+            return parent;
+        }
+        else {
+            return null;
+        }
+    }
+
+    resizeColGroup(table, resizeColumnIndex, newColumnWidth, nextColumnWidth) {
+        if(table) {
+            let colGroup = table.children[0].nodeName === 'COLGROUP' ? table.children[0] : null;
+
+            if(colGroup) {
+                let col = colGroup.children[resizeColumnIndex];
+                let nextCol = col.nextElementSibling;
+                col.style.width = newColumnWidth + 'px';
+    
+                if (nextCol && nextColumnWidth) {
+                    nextCol.style.width = nextColumnWidth + 'px';
+                }
+            }
+            else {
+                throw new Error("Scrollable tables require a colgroup to support resizable columns");
+            }
+        }
     }
 
     bindColumnResizeEvents() {

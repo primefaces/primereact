@@ -180,7 +180,7 @@ export class ScrollableView extends Component {
 
     render() {
         let className = classNames('p-datatable-scrollable-view', {'p-datatable-frozen-view': this.props.frozen, 'p-datatable-unfrozen-view': !this.props.frozen && this.props.frozenWidth});
-        let tableClassName = classNames({'p-datatable-virtual-table': this.props.virtualScroll});
+        let tableClassName = classNames('p-datatable-scrollable-body-table', {'p-datatable-virtual-table': this.props.virtualScroll});
         let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
@@ -189,7 +189,8 @@ export class ScrollableView extends Component {
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
                 <div className="p-datatable-scrollable-header" ref={(el) => { this.scrollHeader= el; }} onScroll={this.onHeaderScroll}>
                     <div className="p-datatable-scrollable-header-box" ref={(el) => { this.scrollHeaderBox = el; }}>
-                        <table>
+                        <table className="p-datatable-scrollable-header-table">
+                            {colGroup}
                             {this.props.header}
                             {this.props.frozenBody}
                         </table>
@@ -204,7 +205,8 @@ export class ScrollableView extends Component {
                 </div>
                 <div className="p-datatable-scrollable-footer" ref={(el) => { this.scrollFooter = el; }}>
                     <div className="p-datatable-scrollable-footer-box" ref={(el) => { this.scrollFooterBox = el; }}>
-                         <table>
+                         <table className="p-datatable-scrollable-footer-table">
+                            {colGroup}
                             {this.props.footer}
                         </table>
                     </div>
