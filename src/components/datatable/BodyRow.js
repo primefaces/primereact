@@ -101,9 +101,7 @@ export class BodyRow extends Component {
         let columns = React.Children.toArray(this.props.children);
         let conditionalStyles = {
             'p-highlight': this.props.selected, 
-            'p-highlight-contextmenu': this.props.contextMenuSelected,
-            'p-datatable-even': (this.props.rowIndex % 2 === 0), 
-            'p-datatable-odd': (this.props.rowIndex % 2 === 1)
+            'p-highlight-contextmenu': this.props.contextMenuSelected
         };
         
         if(this.props.rowClassName) {
