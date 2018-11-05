@@ -116,7 +116,7 @@ export class PickList extends Component {
                 if(this.props.onMoveToTarget) {
                     this.props.onMoveToTarget({
                         originalEvent: event.originalEvent,
-                        value: this.props.selectedItemsSource
+                        value: this.state.selectedItemsSource
                     })
                 }
             break;
@@ -134,7 +134,7 @@ export class PickList extends Component {
                 if(this.props.onMoveToSource) {
                     this.props.onMoveToSource({
                         originalEvent: event.originalEvent,
-                        value: this.props.selectedItemsTarget
+                        value: this.state.selectedItemsTarget
                     })
                 }
             break;
