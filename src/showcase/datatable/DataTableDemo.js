@@ -1089,14 +1089,20 @@ requiredValidator(props) {
 </CodeHighlight>
 
             <h3>ContextMenu</h3>
-            <p>DataTable provides exclusive integration with ContextMenu by binding the reference of a menu to the <i>contextMenu</i> property.</p>
+            <p>DataTable provides exclusive integration with ContextMenu.  <i>contextMenuSelection</i> and <i>onContextMenuSelectionChange</i> are used to get a reference of the the selected row
+            and <i>onContextMenu</i> callback is utilized to display a particular context menu.</p>
 <CodeHighlight className="language-javascript">
 {`
 export class DataTableContextMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            menu: [
+                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
+                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
+            ]
+        };
         this.carservice = new CarService();
         this.viewCar = this.viewCar.bind(this);
         this.deleteCar = this.deleteCar.bind(this);
@@ -1121,19 +1127,15 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     render() {
-        let items = [
-            {label: 'View', icon: 'pi pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'pi pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-        ];
-
         return (
             <div>
                 <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                <ContextMenu model={items} ref={el => this.cm = el}/>
+                <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
 
-                <DataTable value={this.state.cars} contextMenu={this.cm} selectionMode="single" header="Right Click"
-                    selection={this.state.selectedCar} onSelectionChange={(e) => this.setState({selectedCar: e.data})}>
+                <DataTable value={this.state.cars} header="Right Click"
+                    contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
+                    onContextMenu={e => this.cm.show(e.originalEvent)}>
                     <Column field="vin" header="Vin" />
                     <Column field="year" header="Year" />
                     <Column field="brand" header="Brand" />
@@ -1719,6 +1721,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Selected row in single mode or an array of values in multiple mode.</td>
                         </tr>
                         <tr>
+                            <td>contextMenuSelection</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Selected row in single mode or an array of values in multiple mode.</td>
+                        </tr>
+                        <tr>
                             <td>compareSelectionBy</td>
                             <td>string</td>
                             <td>deepEquals</td>
@@ -1864,12 +1872,6 @@ export class DataTableLazyDemo extends Component {
                             <td>Name of the exported file.</td>
                         </tr>
                         <tr>
-                            <td>contextMenu</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Context menu items.</td>
-                        </tr>
-                        <tr>
                             <td>rowGroupMode</td>
                             <td>string</td>
                             <td>null</td>
@@ -1932,6 +1934,13 @@ export class DataTableLazyDemo extends Component {
                                 event.data: Selection object
                             </td>
                             <td>Callback to invoke when selection changes.</td>
+                        </tr>
+                        <tr>
+                            <td>onContextMenuSelectionChange</td>
+                            <td>event.originalEvent: Browser event <br/>
+                                event.data: Selection object
+                            </td>
+                            <td>Callback to invoke when a row selected with right click.</td>
                         </tr>
                         <tr>
                             <td>onRowToggle</td>
@@ -2017,7 +2026,7 @@ export class DataTableLazyDemo extends Component {
                             <td>Callback to invoke when a row is collapsed.</td>
                         </tr>
                         <tr>
-                            <td>onContextMenuSelect</td>
+                            <td>onContextMenu</td>
                             <td>event.originalEvent: Original event instance. <br />
                                 event.data: Collapsed row data</td>
                             <td>Callback to invoke when a context menu is clicked.</td>

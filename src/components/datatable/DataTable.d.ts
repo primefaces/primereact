@@ -28,6 +28,7 @@ interface DataTableProps {
     emptyMessage?: string;
     selectionMode?: string;
     selection?: any;
+    contextMenuSelection?: any;
     compareSelectionBy?: string;
     dataKey?: string;
     metaKeySelection?: boolean;
@@ -51,13 +52,13 @@ interface DataTableProps {
     frozenValue?: any[];
     csvSeparator?: string;
     exportFilename?: string;
-    contextMenu?: any;
     rowGroupMode?: string;
     autoLayout?:boolean;
     loading?:boolean;
     loadingIcon?:string;
     groupField?:string;
     onSelectionChange?(e: {originalEvent: Event, data: any}): void;
+    onContextMenuSelectionChange?(e: {originalEvent: Event, data: any}): void;
     rowExpansionTemplate?(data: any): JSX.Element | undefined;
     onRowToggle?(e: {data: any[]}): void;
     rowClassName?(rowData: any): object;
@@ -74,7 +75,7 @@ interface DataTableProps {
     onRowUnselect?(e: {originalEvent: Event, data: any, type: string}): void;
     onRowExpand?(e: {originalEvent: Event, data: any}): void;
     onRowCollapse?(e: {originalEvent: Event, data: any}): void;
-    onContextMenuSelect?(e: {originalEvent: Event, data: any}): void;
+    onContextMenu?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
 }

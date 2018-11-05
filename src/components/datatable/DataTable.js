@@ -40,6 +40,8 @@ export class DataTable extends Component {
         selectionMode: null,
         selection: null,
         onSelectionChange: null,
+        contextMenuSelection: null,
+        onContextMenuSelectionChange: null,
         compareSelectionBy: 'deepEquals',
         dataKey: null,
         metaKeySelection: true,
@@ -64,7 +66,6 @@ export class DataTable extends Component {
         frozenValue: null,
         csvSeparator: ',',
         exportFilename: 'download',
-        contextMenu: null,
         rowGroupMode: null,
         autoLayout: false,
         rowClassName: null,
@@ -83,7 +84,7 @@ export class DataTable extends Component {
         onRowUnselect: null,
         onRowExpand: null,
         onRowCollapse: null,
-        onContextMenuSelect: null,
+        onContextMenu: null,
         onColReorder: null,
         onRowReorder: null
     }
@@ -141,7 +142,6 @@ export class DataTable extends Component {
         frozenValue: PropTypes.array,
         csvSeparator: PropTypes.string,
         exportFilename: PropTypes.string,
-        contextMenu: PropTypes.any,
         rowGroupMode: PropTypes.string,
         autoLayout: PropTypes.bool,
         rowClassName: PropTypes.func,
@@ -160,7 +160,7 @@ export class DataTable extends Component {
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
-        onContextMenuSelect: PropTypes.func,
+        onContextMenu: PropTypes.func,
         onColReorder: PropTypes.func,
         onRowReorder: PropTypes.func
     };
@@ -877,9 +877,10 @@ export class DataTable extends Component {
         return <TableBody value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                        contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} 
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
-                        contextMenu={this.props.contextMenu} onContextMenuSelect={this.props.onContextMenuSelect} virtualScroll={this.props.virtualScroll}
+                        virtualScroll={this.props.virtualScroll}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}>
                         {columns}

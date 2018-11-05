@@ -12,7 +12,12 @@ export class DataTableContextMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            menu: [
+                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
+                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
+            ]
+        };
         this.carservice = new CarService();
         this.viewCar = this.viewCar.bind(this);
         this.deleteCar = this.deleteCar.bind(this);
@@ -37,11 +42,6 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     render() {
-        let items = [
-            {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-        ];
-
         return (
             <div>
                 <DataTableSubmenu />
@@ -56,10 +56,11 @@ export class DataTableContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <ContextMenu model={items} ref={el => this.cm = el}/>
+                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
 
-                    <DataTable value={this.state.cars} contextMenu={this.cm} selectionMode="single" header="Right Click"
-                        selection={this.state.selectedCar} onSelectionChange={(e) => this.setState({selectedCar: e.data})}>
+                    <DataTable value={this.state.cars} header="Right Click"
+                        contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
+                        onContextMenu={e => this.cm.show(e.originalEvent)}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -97,7 +98,12 @@ export class DataTableContextMenuDemo extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            menu: [
+                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
+                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
+            ]
+        };
         this.carservice = new CarService();
         this.viewCar = this.viewCar.bind(this);
         this.deleteCar = this.deleteCar.bind(this);
@@ -122,15 +128,8 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     render() {
-        let items = [
-            {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-        ];
-
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - ContextMenu</h1>
@@ -141,10 +140,11 @@ export class DataTableContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <ContextMenu model={items} ref={el => this.cm = el}/>
+                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
 
-                    <DataTable value={this.state.cars} contextMenu={this.cm} selectionMode="single" header="Right Click"
-                        selection={this.state.selectedCar} onSelectionChange={(e) => this.setState({selectedCar: e.data})}>
+                    <DataTable value={this.state.cars} header="Right Click"
+                        contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
+                        onContextMenu={e => this.cm.show(e.originalEvent)}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />

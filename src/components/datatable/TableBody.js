@@ -121,26 +121,23 @@ export class TableBody extends Component {
     }
 
     onRowRightClick(event) {
-        if(this.props.contextMenu) {
-            let selectionIndex = this.findIndexInSelection(event.data);
-            let selected = selectionIndex !== -1;
-            let selection;
+        if (this.props.onContextMenu) {
+            DomHandler.clearSelection();
 
-            if(!selected) {
-                 if(this.isSingleSelectionMode()) {
-                    selection = event.data;
-                 }
-                 else if(this.isMultipleSelectionMode()) {
-                    selection = [event.data];
-                 }
-
-                 this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
+            if (this.props.onContextMenuSelectionChange) {
+                this.props.onContextMenuSelectionChange({
+                    originalEvent: event.originalEvent,
+                    value: event.data
+                });
             }
-
-            this.props.contextMenu.show(event.originalEvent);
-            if(this.props.onContextMenuSelect) {
-                this.props.onContextMenuSelect({originalEvent: event.originalEvent, data: event.data});
+    
+            if (this.props.onContextMenu) {
+                this.props.onContextMenu({
+                    originalEvent: event.originalEvent,
+                    value: this.props.node
+                });
             }
+    
             event.originalEvent.preventDefault();
         }
     }
@@ -200,6 +197,14 @@ export class TableBody extends Component {
                 return this.findIndexInSelection(rowData) > -1;
             else
                 return this.equals(rowData, this.props.selection);
+        }
+        
+        return false;
+    }
+
+    isContextMenuSelected(rowData) { 
+        if(rowData && this.props.contextMenuSelection) {
+            return this.equals(rowData, this.props.contextMenuSelection);
         }
         
         return false;
@@ -399,6 +404,7 @@ export class TableBody extends Component {
                 let rowData = this.props.value[i];
                 let expanded = this.isRowExpanded(rowData);
                 let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
+                let contextMenuSelected = this.isContextMenuSelected(rowData);
                 let groupRowSpan;
                 
                 //header row group
@@ -436,7 +442,7 @@ export class TableBody extends Component {
                 //row content
                 let bodyRow = <BodyRow key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} 
                             onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive}
-                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} rowClassName={this.props.rowClassName}
+                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
                             onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
                             onDrop={this.onRowDrop}>{this.props.children}</BodyRow>

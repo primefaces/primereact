@@ -1594,6 +1594,9 @@ body .p-datatable .p-datatable-tbody > tr {
   body .p-datatable .p-datatable-tbody > tr.p-highlight {
     background-color: #cc285c;
     color: #ffffff; }
+  body .p-datatable .p-datatable-tbody > tr.p-highlight-contextmenu {
+    background-color: #e88ba9;
+    color: #ffffff; }
   body .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
     box-shadow: inset 0 -2px 0 0 #cc285c; }
 body .p-datatable .p-datatable-tbody > tr:nth-child(even) {
@@ -1601,7 +1604,10 @@ body .p-datatable .p-datatable-tbody > tr:nth-child(even) {
   body .p-datatable .p-datatable-tbody > tr:nth-child(even).p-highlight {
     background-color: #cc285c;
     color: #ffffff; }
-body .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+  body .p-datatable .p-datatable-tbody > tr:nth-child(even).p-highlight-contextmenu {
+    background-color: #e88ba9;
+    color: #ffffff; }
+body .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):not(.p-highlight-contextmenu):hover {
   cursor: pointer;
   background-color: #4c4c4c;
   color: #dedede; }
@@ -2121,11 +2127,11 @@ body .p-treetable .p-treetable-tbody > tr {
     color: #ffffff; }
     body .p-treetable .p-treetable-tbody > tr.p-highlight-contextmenu .p-treetable-toggler {
       color: #ffffff; }
-body .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
+body .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):not(.p-highlight-contextmenu):hover {
   cursor: pointer;
   background-color: #4c4c4c;
   color: #dedede; }
-  body .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover .p-treetable-toggler {
+  body .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):not(.p-highlight-contextmenu):hover .p-treetable-toggler {
     color: #dedede; }
 body .p-treetable .p-column-resizer-helper {
   background-color: #cc285c; }
