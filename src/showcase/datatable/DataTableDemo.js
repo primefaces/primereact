@@ -395,7 +395,7 @@ export class DataTableDemo extends Component {
             </div>
 
             <h3>Table Layout</h3>
-            <p>For performance reasons, default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents
+            <p>Default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents
                 set <i>autoLayout</i> property to true.
             </p>
 
