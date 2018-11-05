@@ -56,6 +56,7 @@ export class TreeTable extends Component {
         frozenWidth: null,
         resizableColumns: false,
         columnResizeMode: 'fit',
+        emptyMessage: "No records found",
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -116,6 +117,7 @@ export class TreeTable extends Component {
         frozenWidth: PropTypes.string,
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
+        emptyMessage: PropTypes.string,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -731,7 +733,7 @@ export class TreeTable extends Component {
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                         propagateSelectionUp={this.props.propagateSelectionDown} propagateSelectionDown={this.props.propagateSelectionDown}
-                        lazy={this.props.lazy} rowClassName={this.props.rowClassName}
+                        lazy={this.props.lazy} rowClassName={this.props.rowClassName} emptyMessage={this.props.emptyMessage} loading={this.props.loading}
                         contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}/>
         );
     }

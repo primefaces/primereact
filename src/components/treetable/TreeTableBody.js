@@ -19,6 +19,8 @@ export class TreeTableBody extends Component {
         propagateSelectionDown: true,
         lazy: false,
         rowClassName: null,
+        emptyMessage: "No records found",
+        loading: false,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -45,6 +47,8 @@ export class TreeTableBody extends Component {
         propagateSelectionDown: PropTypes.bool,
         lazy: PropTypes.bool,
         rowClassName: PropTypes.func,
+        emptyMessage: PropTypes.string,
+        loading: PropTypes.boolean,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -70,34 +74,43 @@ export class TreeTableBody extends Component {
     }
 
     renderRows() {
-        if (this.props.value && this.props.value.length) {
-            if (this.props.paginator && !this.props.lazy) {
-                let rpp = this.props.rows||0;
-                let startIndex = this.props.first||0;
-                let endIndex = (startIndex + rpp);
-                let rows = [];
+        if (this.props.paginator && !this.props.lazy) {
+            let rpp = this.props.rows||0;
+            let startIndex = this.props.first||0;
+            let endIndex = (startIndex + rpp);
+            let rows = [];
 
-                for (let i = startIndex; i < endIndex; i++) {
-                    rows.push(this.createRow(this.props.value[i]));
-                }
+            for (let i = startIndex; i < endIndex; i++) {
+                rows.push(this.createRow(this.props.value[i]));
+            }
 
-                return rows;
-            }
-            else {
-                return this.props.value.map(node => this.createRow(node));
-            }
+            return rows;
         }
         else {
+            return this.props.value.map(node => this.createRow(node));
+        } 
+    }
+
+    renderEmptyMessage() {
+        if (this.props.loading) {
             return null;
-        }  
+        }
+        else {
+            const colSpan = this.props.columns ? this.props.columns.length : null;
+            return (
+                <tr>
+                    <td colSpan={colSpan}>{this.props.emptyMessage}</td>
+                </tr>
+            );
+        }
     }
 
     render() {
-        const rows = this.renderRows();
+        const content = (this.props.value && this.props.value.length) ? this.renderRows() : this.renderEmptyMessage();
 
         return (
             <tbody className="p-treetable-tbody">
-                {rows}
+                {content}
             </tbody>
         );
     }
