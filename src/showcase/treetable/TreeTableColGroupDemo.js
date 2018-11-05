@@ -215,8 +215,8 @@ export class TreeTableColGroupDemo extends Component {
 
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>TreeTable</h1>
-                        <p>Columns can be grouped using rowspan and colspan properties.</p>
+                        <h1>TreeTable - Column Grouping</h1>
+                        <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
                     </div>
                 </div>
 
@@ -461,8 +461,8 @@ export class TreeTableColGroupDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>TreeTable</h1>
-                        <p>Columns can be grouped using rowspan and colspan properties.</p>
+                        <h1>TreeTable - Column Grouping</h1>
+                        <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
                     </div>
                 </div>
 

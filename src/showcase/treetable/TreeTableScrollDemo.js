@@ -27,8 +27,8 @@ export class TreeTableScrollDemo extends Component {
 
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>TreeTable</h1>
-                        <p>TreeTable is used to display hierarchical data in tabular format.</p>
+                        <h1>TreeTable - Scroll</h1>
+                        <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
                     </div>
                 </div>
 
@@ -109,8 +109,8 @@ export class TreeTableScrollDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>TreeTable</h1>
-                        <p>TreeTable is used to display hierarchical data in tabular format.</p>
+                        <h1>TreeTable - Scroll</h1>
+                        <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
                     </div>
                 </div>
 
