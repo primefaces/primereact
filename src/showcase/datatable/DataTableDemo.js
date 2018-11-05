@@ -947,7 +947,7 @@ export class DataTableSelectionDemo extends Component {
     render() {
         return (
             <DataTable value={this.state.cars} selectionMode="single"
-                selection={this.state.selectedCar1} onSelectionChange={(e) => this.setState({selectedCar1: e.data})}>
+                selection={this.state.selectedCar1} onSelectionChange={e => this.setState({selectedCar1: e.value})}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
@@ -980,7 +980,7 @@ export class DataTableSelectionDemo extends Component {
     render() {
         return (
             <DataTable value={this.state.cars} selectionMode="multiple"
-                selection={this.state.selectedCars} onSelectionChange={(e) => this.setState({selectedCars: e.data})}>
+                selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
@@ -997,7 +997,7 @@ export class DataTableSelectionDemo extends Component {
                  Following datatable displays a checkbox at the first column of each row and automatically adds a header checkbox to toggle selection of all rows.</p>
 <CodeHighlight className="language-jsx">
 {`
-<DataTable value={this.state.cars} selection={this.state.selectedCars} onSelectionChange={(e) => this.setState({selectedCars: e.data})}>
+<DataTable value={this.state.cars} selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})}>
     <Column selectionMode="multiple" />
     <Column field="vin" header="Vin" />
     <Column field="year" header="Year" />
@@ -1931,14 +1931,14 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>onSelectionChange</td>
                             <td>event.originalEvent: Browser event <br/>
-                                event.data: Selection object
+                                event.value: Selection object
                             </td>
                             <td>Callback to invoke when selection changes.</td>
                         </tr>
                         <tr>
                             <td>onContextMenuSelectionChange</td>
                             <td>event.originalEvent: Browser event <br/>
-                                event.data: Selection object
+                                event.value: Selection object
                             </td>
                             <td>Callback to invoke when a row selected with right click.</td>
                         </tr>

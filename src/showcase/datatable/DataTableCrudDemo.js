@@ -95,7 +95,7 @@ export class DataTableCrudDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} paginator={true} rows={15}  header={header} footer={footer}
-                               selectionMode="single" selection={this.state.selectedCar} onSelectionChange={(e)=>{this.setState({selectedCar:e.data});}}
+                               selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}
                                onRowSelect={this.onCarSelect}>
                         <Column field="vin" header="Vin" sortable={true} />
                         <Column field="year" header="Year" sortable={true} />
@@ -238,7 +238,7 @@ export class DataTableCrudDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} paginator={true} rows={15}  header={header} footer={footer}
-                               selectionMode="single" selection={this.state.selectedCar} onSelectionChange={(e)=>{this.setState({selectedCar:e.data});}}
+                               selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}
                                onRowSelect={this.onCarSelect}>
                         <Column field="vin" header="Vin" sortable={true} />
                         <Column field="year" header="Year" sortable={true} />

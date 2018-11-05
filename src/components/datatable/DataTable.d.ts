@@ -57,8 +57,8 @@ interface DataTableProps {
     loading?:boolean;
     loadingIcon?:string;
     groupField?:string;
-    onSelectionChange?(e: {originalEvent: Event, data: any}): void;
-    onContextMenuSelectionChange?(e: {originalEvent: Event, data: any}): void;
+    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
+    onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
     rowExpansionTemplate?(data: any): JSX.Element | undefined;
     onRowToggle?(e: {data: any[]}): void;
     rowClassName?(rowData: any): object;

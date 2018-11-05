@@ -109,7 +109,7 @@ export class TableBody extends Component {
                     }
                 }
 
-                this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
+                this.props.onSelectionChange({originalEvent: event.originalEvent, value: selection});
             }
         }
         
@@ -159,7 +159,7 @@ export class TableBody extends Component {
             }
         }
 
-        this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
+        this.props.onSelectionChange({originalEvent: event.originalEvent, value: selection});
     }
 
     onCheckboxClick(event) {
@@ -180,7 +180,7 @@ export class TableBody extends Component {
             }
         }
 
-        this.props.onSelectionChange({originalEvent: event.originalEvent, data: selection});
+        this.props.onSelectionChange({originalEvent: event.originalEvent, value: selection});
     }
 
     isSingleSelectionMode() {

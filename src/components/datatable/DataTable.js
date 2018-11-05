@@ -746,7 +746,7 @@ export class DataTable extends Component {
         else
             selection = [];
 
-        this.props.onSelectionChange({originalEvent: event, data: selection});
+        this.props.onSelectionChange({originalEvent: event, value: selection});
     }
 
     filterLocal(value) {
