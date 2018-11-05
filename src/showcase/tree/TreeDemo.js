@@ -231,8 +231,8 @@ const data: [
 </CodeHighlight>
 
             <h3>Controlled vs Uncontrolled</h3>
-            <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>defaultExpanded</i> property whereas in controlled mode <i>expandedKeys</i> 
-            property and <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
+            <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i> 
+            property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
             both cases;</p>
 
 <CodeHighlight className="language-javascript">
