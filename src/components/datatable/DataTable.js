@@ -36,6 +36,7 @@ export class DataTable extends Component {
         sortOrder: null,
         multiSortMeta: null,
         sortMode: 'single',
+        defaultSortOrder: 1,
         emptyMessage: "No records found",
         selectionMode: null,
         selection: null,
@@ -114,6 +115,7 @@ export class DataTable extends Component {
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
+        defaultSortOrder: PropTypes.number,
         emptyMessage: PropTypes.string,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
@@ -241,7 +243,7 @@ export class DataTable extends Component {
 
     onSort(event) {
         let sortField = event.sortField;
-        let sortOrder = (this.getSortField() === event.sortField) ? this.getSortOrder() * -1 : 1;
+        let sortOrder = (this.getSortField() === event.sortField) ? this.getSortOrder() * -1 : this.props.defaultSortOrder;
         let multiSortMeta;
 
         this.columnSortable = event.sortable;

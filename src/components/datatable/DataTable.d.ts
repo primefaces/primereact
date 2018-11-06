@@ -25,6 +25,7 @@ interface DataTableProps {
     sortOrder?: number;
     multiSortMeta?: any[];
     sortMode?: string;
+    defaultSortOrder?: number;
     emptyMessage?: string;
     selectionMode?: string;
     selection?: any;

@@ -1700,6 +1700,12 @@ export class DataTableLazyDemo extends Component {
                             <td>Defines whether sorting works on single column or on multiple columns.</td>
                         </tr>
                         <tr>
+                            <td>defaultSortOrder</td>
+                            <td>number</td>
+                            <td>1</td>
+                            <td>Default sort order of an unsorted column.</td>
+                        </tr>
+                        <tr>
                             <td>emptyMessage</td>
                             <td>string</td>
                             <td>No records found</td>
