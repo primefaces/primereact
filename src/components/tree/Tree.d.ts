@@ -19,13 +19,13 @@ interface TreeProps {
     loadingIcon?: string;
     dragdropScope?: string;
     nodeTemplate?(node: any): JSX.Element;
-    onSelect?(e: {originalEvent: Event, value: TreeNode}): void;
-    onUnselect?(e: {originalEvent: Event, value: TreeNode}): void;
-    onExpand?(e: {originalEvent: Event, value: TreeNode}): void;
-    onCollapse?(e: {originalEvent: Event, value: TreeNode}): void;
-    onToggle?(e: {originalEvent: Event, value: TreeNode}): void;
-    onDragDrop?(e: {originalEvent: Event, value: TreeNode}): void;
-    onContextMenu?(e: {originalEvent: Event, value: TreeNode}): void;
+    onSelect?(e: {originalEvent: Event, node: TreeNode}): void;
+    onUnselect?(e: {originalEvent: Event, node: TreeNode}): void;
+    onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
+    onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
+    onToggle?(e: {originalEvent: Event, value: any}): void;
+    onDragDrop?(e: {originalEvent: Event, value: any}): void;
+    onContextMenu?(e: {originalEvent: Event, node: TreeNode}): void;
 }
 
 export class Tree extends React.Component<TreeProps,any> {}
