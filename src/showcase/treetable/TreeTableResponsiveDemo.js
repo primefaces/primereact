@@ -68,6 +68,29 @@ class TreeTableResponsiveDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
+<CodeHighlight className="language-css">
+{`
+.p-col-d {
+    display: table-cell;
+}
+
+.p-col-m {
+    display: none;
+}
+
+@media screen and (max-width: 64em) {
+    .p-col-d {
+        display: none;
+    }
+    
+    .p-col-m {
+        display: inline-block;
+    }
+}
+
+`}
+</CodeHighlight>
+
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';

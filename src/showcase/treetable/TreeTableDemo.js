@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
 import { Button } from '../../components/button/Button';
@@ -1112,15 +1113,1203 @@ export class TreeTableColGroupDemo extends Component {
 `}
 </CodeHighlight>
 
+                        <h3>Pagination</h3>
+                        <p>Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. 
+                        See <Link to="/paginator">paginator</Link> component for more information about further customization options such as <i>paginatorTemplate</i>.</p>
+
+                        <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
+
 <CodeHighlight className="language-javascript">
 {`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+
+export class TreeTablePageDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: [],
+            first: 0
+        };
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.nodes} paginator={true} rows={10}
+                first={this.state.first} onPage={e => this.setState({first: e.first})}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
+        )
+    }
+}
 
 `}
 </CodeHighlight>
 
+                        <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however 
+                        it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.</p>
+
+<CodeHighlight className="language-javascript">
+{`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+
+export class TreeTablePageDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: []
+        };
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.nodes} paginator={true} rows={10}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} paginator={true} rows={10}
+    paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
+    <Column field="name" header="Name" expander></Column>
+    <Column field="size" header="Size"></Column>
+    <Column field="type" header="Type"></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <h3>Sorting</h3>
+                        <p>Enabling <i>sortable</i> property at column component would be enough to make a column sortable. The property to use when sorting is <i>field</i> by default and can be customized using <i>sortField</i>.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<Column field="vin" header="Vin" sortable />
+
+`}
+</CodeHighlight>
+
+                        <p>By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} sortMode="multiple">
+
+`}
+</CodeHighlight>
+
+                        <p>In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner. 
+                        In controlled mode, <i>sortField</i>, <i>sortOrder</i> and <i>onSort</i> properties need to be defined to control the sorting state.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onSort={(e) => this.setState({sortField: e.sortField, sortOrder: e.sortOrder})}>
+    <Column field="name" header="Name" expander sortable></Column>
+    <Column field="size" header="Size" sortable></Column>
+    <Column field="type" header="Type" sortable></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <p>In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} multiSortMeta={multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+    <Column field="name" header="Name" expander sortable></Column>
+    <Column field="size" header="Size" sortable></Column>
+    <Column field="type" header="Type" sortable></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+<CodeHighlight className="language-javascript">
+{`
+let multiSortMeta = [];
+multiSortMeta.push({field: 'year', order: 1});
+multiSortMeta.push({field: 'brand', order: -1});
+
+`}
+</CodeHighlight>
+
+                        <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however 
+                        it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} sortField="year">
+    <Column field="name" header="Name" expander sortable></Column>
+    <Column field="size" header="Size" sortable></Column>
+    <Column field="type" header="Type" sortable></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <p>To customize sorting algorithm, set sortable option to custom and define a sortFunction that sorts the list.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} sortField="year">
+    <Column field="name" header="Name" expander sortable></Column>
+    <Column field="size" header="Size" sortable="custom" sortFunction={this.mysort}></Column>
+    <Column field="type" header="Type" sortable></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+<CodeHighlight className="language-javascript">
+{`
+mysort(event) {
+    //event.field = Field to sort
+    //event.order = Sort order
+}
+
+`}
+</CodeHighlight>
+                        <h3>Selection</h3>
+                        <p>TreeTable supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should
+                        be a single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
+                        in touch enabled devices, TreeTable does not require metaKey.</p>
+
+                        <p>Example below demonstrates all cases along with the available callbacks to listen events such as node selection.</p>
+
+                        <CodeHighlight className="language-javascript">
+{`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+import { Growl } from 'primereact/growl';
+import { NodeService } from '../service/NodeService';
+
+export class TreeTableSelectionDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { 
+            nodes1: [],
+            nodes2: [], 
+            nodes3: [], 
+            nodes4: [], 
+            nodes5: [], 
+            selectedNodeKey1: null, 
+            selectedNodeKey2: null, 
+            selectedNodeKeys1: [], 
+            selectedNodeKeys2: [], 
+            selectedNodeKeys3: [] 
+        };
+
+        this.nodeservice = new NodeService();
+        this.onSelect = this.onSelect.bind(this);
+        this.onUnselect = this.onUnselect.bind(this);
+    }
+
+    onSelect(event) {
+        this.growl.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+    }
+
+    onUnselect(event) {
+        this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes1: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes2: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes3: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes4: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes5: data}));
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="content-section introduction">
+                    <div className="feature-intro">
+                        <h1>TreeTable - Selection</h1>
+                        <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
+                    </div>
+                </div>
+
+                <div className="content-section implementation">
+                    <Growl ref={(el) => this.growl = el} />
+
+                    <h3 className="first">Single</h3>
+                    <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+
+                    <h3>Multiple</h3>
+                    <TreeTable value={this.state.nodes2} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} metaKeySelection={false}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+
+                    <h3>Multiple with MetaKey</h3>
+                    <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} metaKeySelection={true}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+
+                    <h3>Events</h3>
+                    <TreeTable value={this.state.nodes4} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({selectedNodeKey2: e.value})}
+                        onSelect={this.onSelect} onUnselect={this.onUnselect}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+
+                    <h3>Checkbox</h3>
+                    <TreeTable value={this.state.nodes5} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
+            </div>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <h3>Lazy</h3>
+                        <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
+                        that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
+                        
+                        <CodeHighlight className="language-javascript">
+{`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+
+export class TreeTableLazyDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: [],
+            first: 0,
+            rows: 10,
+            totalRecords: 0,
+            loading: true
+        };
+
+        this.onPage = this.onPage.bind(this);
+        this.onExpand = this.onExpand.bind(this);
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                loading: false,
+                nodes: this.loadNodes(this.state.first, this.state.first + this.state.rows),
+                totalRecords: 1000
+            });
+        }, 1000);
+    }
+
+    loadNodes(start, end) {
+        let nodes = [];
+
+        for(let i = start; i < end; i++) {
+            let node = {
+                key: i,
+                data: { 
+                    name: 'Item ' + (start + i),
+                    size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                    type: 'Type ' + (start + i)
+                },
+                leaf: false
+            };
+
+            nodes.push(node);
+        }
+        
+        return nodes;
+    }
+
+    onExpand(event) {
+        if (!event.node.children) {
+            this.setState({
+                loading: true
+            });
+            
+            setTimeout(() => {
+                this.loading = false;
+                let lazyNode = {...event.node};
+    
+                lazyNode.children = [
+                    {
+                        data: { 
+                            name: lazyNode.data.name + ' - 0',
+                            size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                            type: 'File'
+                        },
+                    },
+                    {
+                        data: {
+                            name: lazyNode.data.name + ' - 1',
+                            size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                            type: 'File'
+                        }
+                    }
+                ];
+
+                let nodes = [...this.state.nodes];
+                nodes[event.node.key] = lazyNode;
+    
+                this.setState({
+                    loading: false,
+                    nodes: nodes
+                });
+            }, 250);
+        }
+    }
+
+    onPage(event) {
+        this.setState({
+            loading: true
+        });
+
+        //imitate delay of a backend call
+        setTimeout(() => {    
+            this.setState({
+                first: event.first,
+                rows: event.rows,
+                nodes: this.loadNodes(event.first, event.first + event.rows),
+                loading: false
+            });
+        }, 1000);
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
+                first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <h3>Incell Editing</h3>
+                        <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the <i>editor</i> property
+                        that refers to a function to return an input element for the editing. Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
+                        to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value.</p>
+
+<CodeHighlight className="language-javascript">
+{`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+import { InputText } from 'primereact/inputtext;
+import { NodeService } from '../service/NodeService';
+
+export class TreeTableEditDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: []
+        };
+        this.nodeservice = new NodeService();
+
+        this.sizeEditor = this.sizeEditor.bind(this);
+        this.typeEditor = this.typeEditor.bind(this);
+        this.requiredValidator = this.requiredValidator.bind(this);
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    onEditorValueChange(props, value) {
+        let newNodes = JSON.parse(JSON.stringify(this.state.nodes));
+        let editedNode = this.findNodeByKey(newNodes, props.node.key);
+        editedNode.data[props.field] = value;
+
+        this.setState({
+            nodes: newNodes
+        });
+    }
+
+    findNodeByKey(nodes, key) {
+        let path = key.split('-');
+        let node;
+
+        while (path.length) {
+            let list = node ? node.children : nodes;
+            node = list[parseInt(path[0], 10)];
+            path.shift();
+        }
+
+        return node;
+    }
+
+    inputTextEditor(props, field, width) {
+        return (
+            <InputText type="text" value={props.node.data[field]} style={{'width': width, 'padding': 0}}
+                    onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
+        );
+    }
+        
+    sizeEditor(props) {
+        return this.inputTextEditor(props, 'size', '100%');
+    }
+
+    typeEditor(props) {
+        return this.inputTextEditor(props, 'type', '100%');
+    }
+
+    requiredValidator(props) {
+        let value = props.node.data[props.field];
+
+        return value && value.length > 0;
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.nodes}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator}></Column>
+                <Column field="type" header="Type" editor={this.typeEditor}></Column>
+            </TreeTable>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <h3>ContextMenu</h3>
+                        <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
+                        right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
+
+<CodeHighlight className="language-javascript">
+{`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+import { ContextMenu } from 'primereact/contextmenu';
+import { Growl } from 'primereact/growl';
+import { NodeService } from '../service/NodeService';
+
+export class TreeTableContextMenuDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: [],
+            expandedKeys: {},
+            selectedNodeKey: null,
+            menu: [
+                {
+                    label: 'View Key',
+                    icon: 'pi pi-search',
+                    command: () => {
+                        this.growl.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
+                    }
+                },
+                {
+                    label: 'Toggle',
+                    icon: 'pi pi-cog',
+                    command: () => {
+                        let expandedKeys = {...this.state.expandedKeys};
+                        if (expandedKeys[this.state.selectedNodeKey])
+                            delete expandedKeys[this.state.selectedNodeKey];
+                        else
+                            expandedKeys[this.state.selectedNodeKey] = true;
+
+                        this.setState({expandedKeys: expandedKeys});
+                    }
+                }
+            ]
+        };
+        this.nodeservice = new NodeService();
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    render() {
+        return (
+            <div>
+                <Growl ref={(el) => this.growl = el} />
+
+                <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
+
+                <TreeTable value={this.state.nodes}  expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
+                    contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                    onContextMenu={event => this.cm.show(event.originalEvent)}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+        </div>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <h3>Column Resize</h3>
+                        <p>Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
+                            In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.</p>
+<CodeHighlight className="language-jsx">
+{`
+<h3>Fit Mode</h3>
+<TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="fit">
+    <Column field="name" header="Name" expander></Column>
+    <Column field="size" header="Size"></Column>
+    <Column field="type" header="Type"></Column>
+</TreeTable>
+
+<h3>Expand Mode</h3>
+<TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="expand">
+    <Column field="name" header="Name" expander></Column>
+    <Column field="size" header="Size"></Column>
+    <Column field="type" header="Type"></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} resizableColumns={true}>
+    <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
+    <Column field="size" header="Size" style={{width:'30%'}}></Column>
+    <Column field="type" header="Type" style={{width:'20%'}}></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <h3>Column Reorder</h3>
+                        <p>Columns can be reordered using drag drop by setting the <i>reorderableColumns</i> to true. <i>onColReorder</i> is a callback that is invoked when a column is reordered.
+                        TreeTable keeps the column order state internally using keys that identifies a column using the <i>field</i> property. If the column has no field, use columnKey instead.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} reorderableColumns>
+    <Column field="name" header="Name" expander></Column>
+    <Column field="size" header="Size"></Column>
+    <Column field="type" header="Type"></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <h3>Scrolling</h3>
+                        <p>TreeTable supports both horizontal and vertical scrolling as well as frozen columns. Vertical scrolling is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} scrollable scrollHeight="200px">
+    <Column field="name" header="Name" expander></Column>
+    <Column field="size" header="Size"></Column>
+    <Column field="type" header="Type"></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} scrollable style={{width: '600px'}}>
+    <Column field="name" header="Name" expander style={{width:'350px'}}></Column>
+    <Column field="size" header="Size" style={{width:'350px'}}></Column>
+    <Column field="type" header="Type" style={{width:'350px'}}></Column>
+</TreeTable>
+
+`}
+</CodeHighlight> 
+
+                        <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} scrollable frozenWidth="200px" scrollHeight="250px">
+    <Column field="name" header="Name" expander frozen style={{width:'250px'}}></Column>
+    <Column field="size" header="Size" style={{width:'250px'}}></Column>
+    <Column field="type" header="Type" style={{width:'250px'}}></Column>
+    <Column field="size" header="Size" style={{width:'250px'}}></Column>
+    <Column field="type" header="Type" style={{width:'250px'}}></Column>
+    <Column field="size" header="Size" style={{width:'250px'}}></Column>
+    <Column field="type" header="Type" style={{width:'250px'}}></Column>
+</TreeTable>
+
+`}
+</CodeHighlight> 
+
+                        <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
+                        <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
+
+                        <h3>Responsive</h3>
+                        <p>TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. Here is a sample implementation;</p>
+
+<CodeHighlight className="language-css">
+{`
+.p-col-d {
+    display: table-cell;
+}
+
+.p-col-m {
+    display: none;
+}
+
+@media screen and (max-width: 64em) {
+    .p-col-d {
+        display: none;
+    }
+    
+    .p-col-m {
+        display: inline-block;
+    }
+}
+
+`}
+</CodeHighlight>
+                        
+                        <CodeHighlight className="language-javascript">
+{`
+import React, { Component } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from "primereact/column";
+import { NodeService } from '../service/NodeService';
+
+export class TreeTableResponsiveDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: []
+        };
+        this.nodeservice = new NodeService();
+        this.nameTemplate = this.nameTemplate.bind(this);
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    nameTemplate(node) {
+        return (
+            <React.Fragment>
+                <span>{node.data.name}</span>
+                <span className="p-col-m">, {node.data.size}</span>
+                <span className="p-col-m">, {node.data.type}</span>
+            </React.Fragment>
+        )
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.nodes} responsive={true} header="Responsive TreeTable"> 
+                <Column field="name" header="Name" body={this.nameTemplate} expander headerClassName="p-col-d"></Column>
+                <Column field="size" header="Size" className="p-col-d"></Column>
+                <Column field="type" header="Type" className="p-col-d"></Column>
+            </TreeTable>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <h3>Properties</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Unique identifier of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>value</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of treenodes to display.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Header content of the table.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Footer content of the table.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Style class of the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tableStyle</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the table element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tableClassName</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Style class of the table element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>expandedKeys</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of keys to represent the state of the tree expansion state in controlled mode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginator</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When specified as true, enables the pagination.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorPosition</td>
+                                        <td>string</td>
+                                        <td>bottom</td>
+                                        <td>Position of the paginator, options are "top","bottom" or "both".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>alwaysShowPaginator</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to show it even there is only one page.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorTemplate</td>
+                                        <td>string</td>
+                                        <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                                        <td>Template of the paginator.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorLeft</td>
+                                        <td>Element</td>
+                                        <td>null</td>
+                                        <td>Content for the left side of the paginator.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorRight</td>
+                                        <td>Element</td>
+                                        <td>null</td>
+                                        <td>Content for the right side of the paginator.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>pageLinkSize</td>
+                                        <td>number</td>
+                                        <td>5</td>
+                                        <td>Number of page links to display.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>rowsPerPageOptions</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>Array of integer values to display inside rows per page dropdown.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>first</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Index of the first row to be displayed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>rows</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Number of rows to display per page.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>totalRecords</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Number of total records, defaults to length of value when not defined.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>lazy</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Defines if data is loaded and interacted with in lazy manner.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortField</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the field to sort data by default.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortOrder</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Order to sort the data by default.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>multiSortMeta</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of SortMeta objects to sort the data by default in multiple sort mode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sortMode</td>
+                                        <td>string</td>
+                                        <td>single</td>
+                                        <td>Defines whether sorting works on single column or on multiple columns.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>defaultSortOrder</td>
+                                        <td>number</td>
+                                        <td>1</td>
+                                        <td>Default sort order of an unsorted column.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectionMode</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Defines the selection mode, valid values "single", "multiple", and "checkbox".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectionKeys</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>A single or an array of keys to control the selection state.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>contextMenuSelectionKey</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>A single key to control the selection with the context menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>metaKeySelection</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
+                                            can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>propagateSelectionUp</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether checkbox selections propagate to ancestor nodes.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>propagateSelectionDown</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether checkbox selections propagate to descendant nodes.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoLayout</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether the cell widths scale according to their content or not.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>rowClassName</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loading</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Displays a loader to indicate data load is in progress.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loadingIcon</td>
+                                        <td>string</td>
+                                        <td>pi pi-spinner</td>
+                                        <td>The icon to show while indicating data load is in progress.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>scrollable</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When specified, enables horizontal and/or vertical scrolling.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>scrollHeight</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Height of the scroll viewport.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>reorderableColumns</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, columns can be reordered using drag and drop.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>headerColumnGroup</td>
+                                        <td>ColumnGroup</td>
+                                        <td>null</td>
+                                        <td>ColumnCroup component for header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footerColumnGroup</td>
+                                        <td>ColumnGroup</td>
+                                        <td>null</td>
+                                        <td>ColumnCroup component for footer.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>frozenHeaderColumnGroup</td>
+                                        <td>ColumnGroup</td>
+                                        <td>null</td>
+                                        <td>ColumnCroup component for header of frozen columns.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>frozenFooterColumnGroup</td>
+                                        <td>ColumnGroup</td>
+                                        <td>null</td>
+                                        <td>ColumnCroup component for footer of frozen columns.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>frozenWidth</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Width of the frozen part in scrollable DataTable.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>resizableColumns</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, columns can be resized using drag and drop.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>columnResizeMode</td>
+                                        <td>string</td>
+                                        <td>fit</td>
+                                        <td>Defines whether the overall table width should change on column resize, valid values are "fit" and "expand".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>emptyMessage</td>
+                                        <td>string</td>
+                                        <td>No records found</td>
+                                        <td>Text to display when there is no data.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Events</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>onExpand</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.node: Expanded node instance.</td>
+                                        <td>Callback to invoke when a node is expanded.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onCollapse</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.node: Collapsed node instance.</td>
+                                        <td>Callback to invoke when a node is collapsed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onToggle</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.node: Toggled node instance.</td>
+                                        <td>Callback to invoke when a node is toggled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onPage</td>
+                                        <td>event.first: Index of the first row. <br />
+                                            event.rows: Rows per page.</td>
+                                        <td>Callback to invoke on pagination.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onSort</td>
+                                        <td>event.sortField: Field to sort against. <br />
+                                            event.sortOrder: Sort order as integer. <br />
+                                            event.multiSortMeta: MultiSort metadata.</td>
+                                        <td>Callback to invoke on sort.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onSelect</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.node: Selected node instance.</td>
+                                        <td>Callback to invoke when a node is selected.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onUnselect</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.node: Unselected node instance.</td>
+                                        <td>Callback to invoke when a node is unselected.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onRowClick</td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.data: Clicked row data</td>
+                                        <td>Callback to invoke when a row is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onSelectionChange</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.value: Selected node key(s).</td>
+                                        <td>Callback to invoke when selection changes.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onContextMenuSelectionChange</td>
+                                        <td>event.originalEvent: browser event <br />
+                                            event.value: Selected node key.</td>
+                                        <td>Callback to invoke when selection changes with a context menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onColumnResizeEnd</td>
+                                        <td>event.element: DOM element of the resized column.
+                                            event.column: Properties of the resized column.<br />
+                                            event.delta: Change in column width</td>
+                                        <td>Callback to invoke when a column is resized.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onColReorder</td>
+                                        <td>event.originalEvent: Browser event <br />
+                                            event.dragIndex: Index of the dragged column <br />
+                                            event.dropIndex: Index of the dropped column <br />
+                                            event.columns: Columns array after reorder.</td>
+                                        <td>Callback to invoke when a column is reordered.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onContextMenu</td>
+                                        <td>event.originalEvent: Original event instance. <br />
+                                            event.data: Collapsed row data</td>
+                                        <td>Callback to invoke when a context menu is clicked.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Styling</h3>
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>p-treetable</td>
+                                        <td>Container element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-header</td>
+                                        <td>Header section.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-footer</td>
+                                        <td>Footer section.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-column-title</td>
+                                        <td>Title of a column.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-sortable-column</td>
+                                        <td>Sortable column header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-scrollable-header</td>
+                                        <td>Container of header in a scrollable table.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-scrollable-body</td>
+                                        <td>Container of body in a scrollable table.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-scrollable-footer</td>
+                                        <td>Container of footer in a scrollable table.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-emptymessage</td>
+                                        <td>Cell containing the empty message.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-treetable-toggler</td>
+                                        <td>Toggler icon.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Dependencies</h3>
+                        <p>None.</p>
+
                     </TabPanel>
+
                     <TabPanel header="Source">
-                        <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
                             {`
 import React, { Component } from 'react';

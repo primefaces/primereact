@@ -99,7 +99,7 @@ export class TreeTableBody extends Component {
             const colSpan = this.props.columns ? this.props.columns.length : null;
             return (
                 <tr>
-                    <td colSpan={colSpan}>{this.props.emptyMessage}</td>
+                    <td className="p-treetable-emptymessage" colSpan={colSpan}>{this.props.emptyMessage}</td>
                 </tr>
             );
         }

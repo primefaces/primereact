@@ -14,12 +14,13 @@ export class TreeTable extends Component {
     static defaultProps = {
         id: null,
         value: null,
+        header: null,
+        footer: null,
         style: null,
         className: null,
         tableStyle: null,
         tableClassName: null,
         expandedKeys: null,
-        contextMenuSelectionKey: null,
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
@@ -36,10 +37,10 @@ export class TreeTable extends Component {
         sortOrder: null,
         multiSortMeta: null,
         sortMode: 'single',
-        sortFunction: null,
         defaultSortOrder: 1,
         selectionMode: null,
         selectionKeys: null,
+        contextMenuSelectionKey: null,
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
@@ -48,6 +49,7 @@ export class TreeTable extends Component {
         loading: false,
         loadingIcon: 'pi pi-spinner',
         scrollable: false,
+        scrollHeight: null,
         reorderableColumns: false,
         headerColumnGroup: null,
         footerColumnGroup: null,
@@ -74,13 +76,14 @@ export class TreeTable extends Component {
 
     static propsTypes = {
         id: PropTypes.string,
-        value: PropTypes.any.isRequired,
+        value: PropTypes.any,
+        header: PropTypes.any,
+        footer: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         tableStyle: PropTypes.any,
         tableClassName: PropTypes.string,
         expandedKeys: PropTypes.object,
-        contextMenuSelectionKey: PropTypes.any,
         paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
@@ -97,10 +100,10 @@ export class TreeTable extends Component {
         sortOrder: PropTypes.number,
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
-        sortFunction: PropTypes.func,
         defaultSortOrder: PropTypes.number,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.array,
+        contextMenuSelectionKey: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
@@ -109,6 +112,7 @@ export class TreeTable extends Component {
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
         scrollable: PropTypes.bool,
+        scrollHeight: PropTypes.string,
         reorderableColumns: PropTypes.bool,
         headerColumnGroup: PropTypes.element,
         footerColumnGroup: PropTypes.element,
@@ -286,21 +290,10 @@ export class TreeTable extends Component {
     sortMultiple(data) {
         let multiSortMeta = this.getMultiSortMeta();
 
-        if (multiSortMeta) {
-            if (this.props.sortFunction) {
-                this.props.sortFunction({
-                    data: data,
-                    mode: this.props.sortMode,
-                    multiSortMeta: multiSortMeta
-                });
-            }
-            else {
-                return this.sortMultipleNodes(data, multiSortMeta);
-            }
-        }
-        else {
+        if (multiSortMeta)
+            return this.sortMultipleNodes(data, multiSortMeta);
+        else
             return data;
-        } 
     }
 
     sortMultipleNodes(data, multiSortMeta) {
