@@ -1065,7 +1065,7 @@ saleDateEditor(props) {
 `}
 </CodeHighlight>
 
-            <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is valid. In order
+            <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
             to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value.</p>
 
 <CodeHighlight className="language-jsx">
@@ -1414,22 +1414,19 @@ export class DataTableRowGroupDemo extends Component {
 `}
 </CodeHighlight> 
 
-            <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen and unfrozen sections are defined with <i>frozenWidth</i> and <i>unfrozenWidth</i> properties where
-                total of these values should equal to the width of the DataTable itself.</p>
+            <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.</p>
 
 <CodeHighlight className="language-jsx">
 {`
-<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
-    <DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
-        <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
-        <Column field="year" header="Year" style={{width:'250px'}} />
-        <Column field="brand" header="Brand" style={{width:'250px'}} />
-        <Column field="color" header="Color" style={{width:'250px'}} />
-        <Column field="owner" header="Owner" style={{width:'250px'}} />
-        <Column field="tyre" header="Tyre" style={{width:'250px'}} />
-        <Column field="capacity" header="Capacity" style={{width:'250px'}} />
-        <Column field="engine" header="Engine" style={{width:'250px'}} />
-    </DataTable>
+<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
+    <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
+    <Column field="year" header="Year" style={{width:'250px'}} />
+    <Column field="brand" header="Brand" style={{width:'250px'}} />
+    <Column field="color" header="Color" style={{width:'250px'}} />
+    <Column field="owner" header="Owner" style={{width:'250px'}} />
+    <Column field="tyre" header="Tyre" style={{width:'250px'}} />
+    <Column field="capacity" header="Capacity" style={{width:'250px'}} />
+    <Column field="engine" header="Engine" style={{width:'250px'}} />
 </DataTable>
 
 `}
@@ -1846,12 +1843,6 @@ export class DataTableLazyDemo extends Component {
                             <td>string</td>
                             <td>null</td>
                             <td>Width of the frozen part in scrollable DataTable.</td>
-                        </tr>
-                        <tr>
-                            <td>unfrozenWidth</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Width of the unfrozen part in scrollable DataTable.</td>
                         </tr>
                         <tr>
                             <td>frozenValue</td>

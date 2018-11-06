@@ -48,7 +48,6 @@ interface DataTableProps {
     virtualScroll?: boolean;
     virtualScrollDelay?: number;
     frozenWidth?: string;
-    unfrozenWidth?: string;
     frozenValue?: any[];
     csvSeparator?: string;
     exportFilename?: string;
