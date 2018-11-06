@@ -222,7 +222,7 @@ class AppMenu extends Component {
                                 <Link to="/picklist">&#9679; PickList</Link>
                                 <Link to="/fullcalendar">&#9679; FullCalendar</Link>
                                 <Link to="/tree">&#9679; Tree</Link>
-                                <Link to="/treetable">&#9679; TreeTable</Link>
+                                <Link to="/treetable">&#9679; TreeTable <span className="menuitem-badge">NEW</span></Link>
                             </div>
                         </div>
 
