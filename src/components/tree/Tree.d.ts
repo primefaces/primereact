@@ -3,7 +3,7 @@ import TreeNode from "../treenode/TreeNode";
 
 interface TreeProps {
     id?: string;
-    value?: any;
+    value?: TreeNode[];
     selectionMode?: string;
     selectionKeys?: any;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
