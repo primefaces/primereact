@@ -24,7 +24,7 @@ export class TabViewDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Uncontrolled</h3>
-                    <TabView>
+                    <TabView renderActiveOnly={false}>
                         <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                             The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war, 
                             but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is 
@@ -235,6 +235,12 @@ import {TabView,TabPanel} from 'primereact/tabview';
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the tabview.</td>
+                        </tr>
+                        <tr>
+                            <td>renderActiveOnly</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to render the contents of the selected tab or all tabs.</td>
                         </tr>
                     </tbody>
                 </table>

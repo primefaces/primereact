@@ -18,6 +18,7 @@ interface TabViewProps {
     activeIndex?: number;
     style?: any;
     className?: string;
+    renderActiveOnly?: boolean;
     onTabChange?(e: {originalEvent: Event, index: number}): void;
 }
 

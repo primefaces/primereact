@@ -118,13 +118,8 @@ export class TabView extends Component {
     
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
-            if(this.props.renderActiveOnly) {
-                if(this.state.activeIndex === index) {
-                   return this.createContent(tab,index);
-                }
-            }
-            else {
-               return this.createContent(tab,index);
+            if (!this.props.renderActiveOnly || this.isSelected(index)) {
+                return this.createContent(tab,index);
             }
         })
 
@@ -144,7 +139,7 @@ export class TabView extends Component {
         return (
             <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className}
                  style={tab.props.contentStyle} role="tabpanel">
-                {selected && tab.props.children}
+                {!this.props.renderActiveOnly ? tab.props.children : (selected && tab.props.children)}
             </div>
         );
     }
