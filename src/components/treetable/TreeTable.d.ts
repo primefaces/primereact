@@ -1,32 +1,67 @@
 import * as React from 'react';
-
-interface Node {
-    data: any,
-    children: Node[]
-}
+import TreeNode from "../treenode/TreeNode";
 
 interface TreeTableProps {
     id?: string;
-    value: Node | Node[];
-    labelExpand?: string;
-    labelCollapse?: string;
-    selectionMode?: string;
-    selection?: any;
+    value?: TreeNode[];
+    header?: any;
+    footer?: any;
     style?: object;
     className?: string;
-    metaKeySelection?: boolean;
-    header?: string;
-    footer?: string;
+    tableStyle?: object;
+    tableClassName?: string;
+    expandedKeys?: any;
+    paginator?: boolean;
+    paginatorPosition?: string;
+    alwaysShowPaginator?: boolean;
+    paginatorTemplate?: string;
+    paginatorLeft?: any;
+    paginatorRight?: any;
+    pageLinkSize?: number;
+    rowsPerPageOptions?: number[];
+    first?: number;
+    rows?: number;
+    totalRecords?: number;
+    lazy?: boolean;
     sortField?: string;
     sortOrder?: number;
-    multiSortMeta?: string;
+    multiSortMeta?: any[];
     sortMode?: string;
-    selectionChange?(e: { originalEvent: Event, selection: any }): void;
-    onSort?(e: { sortField: string, sortOrder: number, multiSortMeta: any }): void;
-    onNodeSelect?(e: { originalEvent: Event, node: any }): void;
-    onNodeUnselect?(e: { originalEvent: Event, node: any }): void;
-    onNodeExpand?(e: { originalEvent: Event, node: any }): void;
-    onNodeCollapse?(e: { originalEvent: Event, node: any }): void;
+    defaultSortOrder?: number;
+    selectionMode?: string;
+    selectionKeys?: any;
+    contextMenuSelectionKey?: any;
+    metaKeySelection?: boolean;
+    propagateSelectionUp?: boolean;
+    propagateSelectionDown?: boolean;
+    autoLayout?:boolean;
+    rowClassName?(rowData: any): object;
+    loading?: boolean;
+    loadingIcon?: string;
+    scrollable?: boolean;
+    scrollHeight?: string;
+    reorderableColumns?: boolean;
+    headerColumnGroup?: JSX.Element;
+    footerColumnGroup?: JSX.Element;
+    frozenHeaderColumnGroup?: JSX.Element;
+    frozenFooterColumnGroup?: JSX.Element;
+    frozenWidth?: string;
+    resizableColumns?: boolean;
+    columnResizeMode?: string;
+    emptyMessage?: string;
+    onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
+    onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
+    onToggle?(e: {originalEvent: Event, node: TreeNode}): void;
+    onPage?(e: {first: number, rows: number}): void;
+    onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
+    onSelect?(e: {originalEvent: Event, node: TreeNode}): void;
+    onUnselect?(e: {originalEvent: Event, node: TreeNode}): void;
+    onRowClick?(e: {originalEvent: Event, node: TreeNode}): void;
+    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
+    onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
+    onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
+    onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
+    onContextMenu?(e: {originalEvent: Event, data: any}): void;
 }
 
 export class TreeTable extends React.Component<TreeTableProps, any> {
