@@ -22,7 +22,6 @@ export class FullCalendar extends Component {
     }
 
     componentDidMount() {
-
         this.config = {
             theme: true
         };
@@ -46,7 +45,7 @@ export class FullCalendar extends Component {
                 this.calendar.addEventSource(this.props.events);
             }
 
-            if(!ObjectUtils.equals(prevProps.options, this.props.options)) {
+            if (!ObjectUtils.equals(prevProps.options, this.props.options)) {
                 for (let prop in this.props.options) {
                     let optionValue = this.props.options[prop];
                     this.config[prop] = optionValue;
@@ -59,6 +58,7 @@ export class FullCalendar extends Component {
     initialize() {
         this.calendar = new Calendar(this.element, this.config);
         this.calendar.render();
+
         if (this.props.events) {
             this.calendar.removeAllEventSources();
             this.calendar.addEventSource(this.props.events);
@@ -75,6 +75,5 @@ export class FullCalendar extends Component {
         return (
             <div id={this.props.id} ref={(el) => this.element = el} style={this.props.style} className={this.props.className}></div>
         );
-
     }
 }
