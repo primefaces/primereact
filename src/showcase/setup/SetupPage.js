@@ -78,8 +78,8 @@ dependencies: {
                                     <td>Quill.js</td>
                                 </tr>
                                 <tr>
-                                    <td>Schedule</td>
-                                    <td>FullCalendar 4.0 Alpha and Moment.</td>
+                                    <td>FullCalendar</td>
+                                    <td>FullCalendar 4.0 Alpha.2+.</td>
                                 </tr>
                                 <tr>
                                     <td>PrimeFlex</td>

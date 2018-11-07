@@ -62,7 +62,7 @@ export class FullCalendarDoc extends Component {
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
-                            {`
+{`
 import {FullCalendar} from 'primereact/fullcalendar';
 
 `}
@@ -72,7 +72,7 @@ import {FullCalendar} from 'primereact/fullcalendar';
                         <p>FullCalendar is a wrapper around on <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.0.alpha.2+</a> so fullcalendar needs to be included in your project. For a complete documentation and samples please refer to the fullcalendar website.</p>
 
                         <CodeHighlight className="language-html">
-                            {`
+{`
 npm install fullcalendar@4.0.0-alpha.2 --save
 
 `}
@@ -81,14 +81,14 @@ npm install fullcalendar@4.0.0-alpha.2 --save
                         <p>Events should be an array and defined using the events property.</p>
 
                         <CodeHighlight className="language-jsx">
-                            {`
+{`
 <FullCalendar events={this.state.events}></FullCalendar>
 
 `}
                         </CodeHighlight>
 
                         <CodeHighlight className="language-javascript">
-                            {`
+{`
 export class FullCalendarDemo extends Component {
 
 	constructor() {
@@ -176,7 +176,7 @@ export class FullCalendarDemo extends Component {
                         <p>In a real application, it is likely to populate the events by making a service call, when the events are updated, the component will detect the change and render them.</p>
 
                         <CodeHighlight className="language-javascript">
-                            {`
+{`
 import axios from 'axios';
 
 export class EventService {
@@ -191,8 +191,7 @@ export class EventService {
                         </CodeHighlight>
 
                         <CodeHighlight className="language-javascript">
-                            {`
-
+{`
 export class FullCalendarDemo extends Component {
 
     constructor() {
@@ -214,22 +213,13 @@ export class FullCalendarDemo extends Component {
                         <h3>Options</h3>
                         <p>FullCalendar has a long list of customization parameters that are defined with the options property. Example below customizes the header property.</p>
                         <CodeHighlight className="language-javascript">
-                            {`
+{`
 export class FullCalendarDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            events: [],
-            options: {
-                defaultDate: '2017-02-01',
-                header: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                editable: true
-            }
+            events: [];
         };
         this.eventService = new EventService();
     }
@@ -237,37 +227,44 @@ export class FullCalendarDemo extends Component {
     componentDidMount() {
         this.eventService.getEvents().then(data => this.setState({events: data}));
     }
+    
+    render() {
+        const options = {
+            defaultDate: '2017-02-01',
+            header: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            editable: true
+        };
+
+		return (
+			<FullCalendar events={this.state.events} options={options} />
+		);
+	}
 }
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<FullCalendar events={this.state.events} options={this.state.options} />
-
-`}
-                        </CodeHighlight>
-
-                        <h3>Events</h3>
-                        <p>Events of the FullCalendar are also defined with the options property.</p>
+                        <h3>Callbacks</h3>
+                        <p>Callbacks of the FullCalendar such as dateClick are also defined with the options property.</p>
 
                         <CodeHighlight className="language-javascript">
-                            {`
-this.state = {
-    options: {
-        defaultDate: '2017-02-01',
-        header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        editable: true,
-        dateClick: (e) =>  {
-            //handle date click
-        }
+{`
+let options: {
+    defaultDate: '2017-02-01',
+    header: {
+        left: 'prev,next',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    editable: true,
+    dateClick: (e) =>  {
+        //handle date click
     }
-};
+}
 
 `}
                         </CodeHighlight>
@@ -276,18 +273,17 @@ this.state = {
                         <p>Methods of the underlying calendar instance is accessible using the reference of the components calendar API.</p>
 
                         <CodeHighlight className="language-jsx">
-                            {`
+{`
 <FullCalendar ref={(el) => this.fc = el} events={this.state.events} options={this.state.options} />
 
 `}
                         </CodeHighlight>
                         <CodeHighlight className="language-javascript">
-                            {`
+{`
 this.fc.calendar.nextYear();
 
 `}
                         </CodeHighlight>
-
 
 
                         <h3>Properties</h3>
@@ -336,7 +332,7 @@ this.fc.calendar.nextYear();
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/schedule" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/fullcalendar" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                             <span>View on GitHub</span>
                         </a>
                         <CodeHighlight className="language-javascript">

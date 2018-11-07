@@ -16,6 +16,7 @@
 @import '../../components/dropdown/Dropdown.css';
 @import '../../components/fieldset/Fieldset.css';
 @import '../../components/fileupload/FileUpload.css';
+@import '../../components/fullcalendar/FullCalendar.css';
 @import '../../components/growl/Growl.css';
 @import '../../components/inplace/Inplace.css';
 @import '../../components/inputswitch/InputSwitch.css';
@@ -42,7 +43,6 @@
 @import '../../components/progressspinner/ProgressSpinner.css';
 @import '../../components/radiobutton/RadioButton.css';
 @import '../../components/rating/Rating.css';
-@import '../../components/schedule/Schedule.css';
 @import '../../components/scrollpanel/ScrollPanel.css';
 @import '../../components/selectbutton/SelectButton.css';
 @import '../../components/sidebar/Sidebar.css';
