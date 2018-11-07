@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface AccordionTabProps {
-    header?: string;
+    header?: any;
     disabled?: boolean;
     headerStyle?: object;
     headerClassName?: string;
