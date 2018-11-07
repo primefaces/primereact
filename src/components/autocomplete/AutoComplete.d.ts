@@ -4,6 +4,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 interface AutoCompleteProps {
     id?: string;
     value?: any;
+    selection?: any;
     name?: string;
     suggestions?: any[];
     field?: string;
@@ -30,7 +31,8 @@ interface AutoCompleteProps {
     completeMethod?(e: {originalEvent: Event, query: string}): void;
     itemTemplate?(data: any): JSX.Element | undefined;
     selectedItemTemplate?(data: any): JSX.Element | undefined;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onValueChange?(e: {originalEvent: Event, value: any}): void;
+    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
     onSelect?(e: {originalEvent: Event, value: any}): void;
