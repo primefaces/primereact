@@ -432,16 +432,18 @@ export class Dropdown extends Component {
     }
 
     hide() {
-        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
-
-        this.unbindDocumentClickListener();
-        this.clearClickState();
-
-        setTimeout(() => {
-            this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
-        }, 150);        
+        if (this.panel.element.offsetParent) {
+            DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
+            DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
+    
+            this.unbindDocumentClickListener();
+            this.clearClickState();
+    
+            this.hideTimeout = setTimeout(() => {
+                this.panel.element.style.display = 'none';
+                DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
+            }, 150);    
+        }
     }
     
     alignPanel() {
@@ -631,6 +633,11 @@ export class Dropdown extends Component {
         if (this.tooltip) {
             this.tooltip.destroy();
             this.tooltip = null;
+        }
+
+        if (this.hideTimeout) {
+            clearTimeout(this.hideTimeout);
+            this.hideTimeout = null;
         }
     }
     
