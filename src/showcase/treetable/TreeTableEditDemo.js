@@ -48,19 +48,19 @@ export class TreeTableEditDemo extends Component {
         return node;
     }
 
-    inputTextEditor(props, field, width) {
+    inputTextEditor(props, field) {
         return (
-            <InputText type="text" value={props.node.data[field]} style={{'width': width, 'padding': 0}}
+            <InputText type="text" value={props.node.data[field]}
                     onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
         
     sizeEditor(props) {
-        return this.inputTextEditor(props, 'size', '100%');
+        return this.inputTextEditor(props, 'size');
     }
 
     typeEditor(props) {
-        return this.inputTextEditor(props, 'type', '100%');
+        return this.inputTextEditor(props, 'type');
     }
 
     requiredValidator(props) {
@@ -83,9 +83,9 @@ export class TreeTableEditDemo extends Component {
 
                 <div className="content-section implementation">
                     <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator}></Column>
-                        <Column field="type" header="Type" editor={this.typeEditor}></Column>
+                        <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
+                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>
+                        <Column field="type" header="Type" editor={this.typeEditor} style={{height: '3.5em'}}></Column>
                     </TreeTable>
                 </div>
 
@@ -155,19 +155,19 @@ export class TreeTableEditDemo extends Component {
         return node;
     }
 
-    inputTextEditor(props, field, width) {
+    inputTextEditor(props, field) {
         return (
-            <InputText type="text" value={props.node.data[field]} style={{'width': width, 'padding': 0}}
+            <InputText type="text" value={props.node.data[field]}}
                     onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
         
     sizeEditor(props) {
-        return this.inputTextEditor(props, 'size', '100%');
+        return this.inputTextEditor(props, 'size');
     }
 
     typeEditor(props) {
-        return this.inputTextEditor(props, 'type', '100%');
+        return this.inputTextEditor(props, 'type');
     }
 
     requiredValidator(props) {
@@ -188,9 +188,9 @@ export class TreeTableEditDemo extends Component {
 
                 <div className="content-section implementation">
                     <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator}></Column>
-                        <Column field="type" header="Type" editor={this.typeEditor}></Column>
+                        <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
+                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>
+                        <Column field="type" header="Type" editor={this.typeEditor} style={{height: '3.5em'}}></Column>
                     </TreeTable>
                 </div>
             </div>

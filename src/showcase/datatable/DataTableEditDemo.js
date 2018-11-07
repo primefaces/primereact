@@ -88,10 +88,10 @@ export class DataTableEditDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
-                        <Column field="year" header="Year" editor={this.yearEditor}/>
-                        <Column field="brand" header="Brand" editor={this.brandEditor}/>
-                        <Column field="color" header="Color" editor={this.colorEditor}/>
+                        <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}/>
+                        <Column field="year" header="Year" editor={this.yearEditor} style={{height: '3.5em'}}/>
+                        <Column field="brand" header="Brand" editor={this.brandEditor} style={{height: '3.5em'}}/>
+                        <Column field="color" header="Color" editor={this.colorEditor} style={{height: '3.5em'}}/>
                     </DataTable>
                     
                 </div>
@@ -206,10 +206,10 @@ export class DataTableEditDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} editable={true}>
-                        <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
-                        <Column field="year" header="Year" editor={this.yearEditor}/>
-                        <Column field="brand" header="Brand" editor={this.brandEditor}/>
-                        <Column field="color" header="Color" editor={this.colorEditor}/>
+                        <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}/>
+                        <Column field="year" header="Year" editor={this.yearEditor} style={{height: '3.5em'}}/>
+                        <Column field="brand" header="Brand" editor={this.brandEditor} style={{height: '3.5em'}}/>
+                        <Column field="color" header="Color" editor={this.colorEditor} style={{height: '3.5em'}}/>
                     </DataTable>
                 </div>
             </div>
