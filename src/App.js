@@ -216,11 +216,11 @@ class AppMenu extends Component {
                                 <Link to="/datatable">&#9679; DataTable</Link>
                                 <Link to="/datascroller">&#9679; DataScroller</Link>
                                 <Link to="/gmap">&#9679; Google Maps</Link>
+                                <Link to="/fullcalendar">&#9679; FullCalendar</Link>
                                 <Link to="/orderlist">&#9679; OrderList</Link>
                                 <Link to="/organizationchart">&#9679; Org Chart</Link>
                                 <Link to="/paginator">&#9679; Paginator</Link>
                                 <Link to="/picklist">&#9679; PickList</Link>
-                                <Link to="/fullcalendar">&#9679; FullCalendar</Link>
                                 <Link to="/tree">&#9679; Tree</Link>
                                 <Link to="/treetable">&#9679; TreeTable <span className="menuitem-badge">NEW</span></Link>
                             </div>

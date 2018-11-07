@@ -72,8 +72,8 @@ export class InputTextarea extends Component {
     }
 
     onInput(e) {
-        if (this.props.onInput) {
-            this.props.onInput();
+        if (this.props.autoResize) {
+            this.resize();
         }
 
         if (this.props.onInput) {
@@ -83,15 +83,26 @@ export class InputTextarea extends Component {
         this.updateFilledState(e);
     }
 
-    resize () {
-        let linesCount = 0,
-        lines = this.element.value.split('\n');
-
-        for(let i = lines.length-1; i >= 0 ; --i) {
-            linesCount += Math.floor((lines[i].length / parseInt(this.props.cols, 10)) + 1);
+    resize() {
+        if (!this.cachedScrollHeight) {
+            this.cachedScrollHeight = this.element.scrollHeight;
+            this.element.style.overflow = "hidden";
         }
 
-        this.element.rows = (linesCount >= parseInt(this.props.rows, 10)) ? (linesCount + 1) : parseInt(this.props.rows, 10);
+        if (this.cachedScrollHeight !== this.element.scrollHeight) {
+            this.element.style.height = ''
+            this.element.style.height = this.element.scrollHeight + 'px';
+
+            if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
+                this.element.style.overflowY = "scroll";
+                this.element.style.height = this.element.style.maxHeight;
+            }
+            else {
+                this.element.style.overflow = "hidden";
+            }
+
+            this.cachedScrollHeight = this.element.scrollHeight;
+        }
     }
 
     updateFilledState(e) {
@@ -108,6 +119,10 @@ export class InputTextarea extends Component {
         if (this.props.tooltip) {
             this.renderTooltip();
         }
+
+        if (this.props.autoResize) {
+            this.resize();
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -116,6 +131,10 @@ export class InputTextarea extends Component {
                 this.tooltip.updateContent(this.props.tooltip);
             else
                 this.renderTooltip();
+        }
+
+        if (this.props.autoResize) {
+            this.resize();
         }
     }
 
