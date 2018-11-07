@@ -1432,6 +1432,19 @@ export class DataTableRowGroupDemo extends Component {
 `}
 </CodeHighlight> 
 
+            <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
+            <CodeHighlight className="language-jsx">
+{`
+<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
+    <Column field="vin" header="Vin" style={{width:'250px', height: '25px'}} frozen={true} />
+    <Column field="year" header="Year" style={{width:'250px', height: '25px'}} />
+    <Column field="brand" header="Brand" style={{width:'250px', height: '25px'}} />
+    <Column field="color" header="Color" style={{width:'250px', height: '25px'}} />
+</DataTable>
+
+`}
+</CodeHighlight> 
+
             <p>One or more rows can be displayed as fixed using the <i>frozenValue</i> property.</p>
 <CodeHighlight className="language-jsx">
 {`

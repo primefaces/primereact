@@ -1778,6 +1778,18 @@ export class TreeTableContextMenuDemo extends Component {
 `}
 </CodeHighlight> 
 
+                        <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
+            <CodeHighlight className="language-jsx">
+{`
+<TreeTable value={this.state.nodes} scrollable frozenWidth="200px" scrollHeight="250px">
+    <Column field="name" header="Name" expander frozen style={{width:'250px', height: '25px'}}></Column>
+    <Column field="size" header="Size" style={{width:'250px', height: '25px'}}></Column>
+    <Column field="type" header="Type" style={{width:'250px', height: '25px'}}></Column>
+</TreeTable>
+
+`}
+</CodeHighlight> 
+
                         <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
                         <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
 
