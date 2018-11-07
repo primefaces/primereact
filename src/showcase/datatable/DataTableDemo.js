@@ -1448,7 +1448,10 @@ export class DataTableRowGroupDemo extends Component {
             <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
             <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
 
-            <p>Virtual scrolling is enabled using <i>virtualScroll</i>, <i>onVirtualScroll</i> properties combined with lazy loading so that data is loaded on the fly during scrolling. View the <Link to="/datatable/scroll">scrolling demo</Link> for a sample implementation.</p>
+            <p>Virtual scrolling is enabled using <i>virtualScroll</i> and <i>onVirtualScroll</i> properties combined with lazy loading so that data is loaded on the fly during scrolling. 
+            For smooth scrolling twice the amount of rows property is loaded on a lazy load event. In addition, to avoid performance problems row height is not calculated automatically and 
+            should be provided using <i>virtualRowHeight</i> property which defaults to 28px. View the <Link to="/datatable/scroll">scrolling demo</Link> for a sample implementation.</p>
+
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
@@ -1843,6 +1846,12 @@ export class DataTableLazyDemo extends Component {
                             <td>number</td>
                             <td>250</td>
                             <td>Delay in virtual scroll before doing a call to lazy load.</td>
+                        </tr>
+                        <tr>
+                            <td>virtualRowHeight</td>
+                            <td>number</td>
+                            <td>28</td>
+                            <td>Height of a row to use in calculations of virtual scrolling.</td>
                         </tr>
                         <tr>
                             <td>frozenWidth</td>

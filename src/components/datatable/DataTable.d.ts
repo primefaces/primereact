@@ -48,6 +48,7 @@ interface DataTableProps {
     scrollHeight?: string;
     virtualScroll?: boolean;
     virtualScrollDelay?: number;
+    virtualRowHeight?: number;
     frozenWidth?: string;
     frozenValue?: any[];
     csvSeparator?: string;

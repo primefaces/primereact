@@ -445,7 +445,7 @@ export class TableBody extends Component {
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
                             onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
-                            onDrop={this.onRowDrop}>{this.props.children}</BodyRow>
+                            onDrop={this.onRowDrop} virtualRowHeight={this.props.virtualRowHeight}>{this.props.children}</BodyRow>
 
                 rows.push(bodyRow);
 

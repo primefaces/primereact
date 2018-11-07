@@ -117,7 +117,7 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" />
                     </DataTable>
                     
-                    <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
+                    <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
                         rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} loading={this.state.loading} style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
@@ -295,7 +295,7 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" />
                     </DataTable>
                     
-                    <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} 
+                    <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
                         rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} loading={this.state.loading} style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />

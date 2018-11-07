@@ -14,6 +14,7 @@ export class ScrollableView extends Component {
         frozenWidth: null,
         frozenBody: null,
         virtualScroll: false,
+        virtualRowHeight: null,
         rows: null,
         totalRecords: null,
         loading: false,
@@ -29,6 +30,7 @@ export class ScrollableView extends Component {
         frozenWidth: PropTypes.string,
         frozenBody: PropTypes.element,
         virtualScroll: PropTypes.bool,
+        virtualRowHeight: PropTypes.number,
         rows: PropTypes.number,
         totalRcords: PropTypes.number,
         loading: PropTypes.bool,
@@ -57,8 +59,7 @@ export class ScrollableView extends Component {
             this.alignScrollBar();
             
             if(this.props.virtualScroll) {
-                this.calculateRowHeight();
-                this.virtualScroller.style.height = this.props.totalRecords * this.rowHeight + 'px';
+                this.virtualScroller.style.height = this.props.totalRecords * this.props.virtualRowHeight + 'px';
             }
         }
         
@@ -126,7 +127,7 @@ export class ScrollableView extends Component {
         if(this.props.virtualScroll) {
             let viewport = DomHandler.getOuterHeight(this.scrollBody);
             let tableHeight = DomHandler.getOuterHeight(this.scrollTable);
-            let pageHeight = this.rowHeight * this.props.rows;
+            let pageHeight = this.props.virtualRowHeight * this.props.rows;
             let virtualTableHeight = DomHandler.getOuterHeight(this.virtualScroller);
             let pageCount = (virtualTableHeight / pageHeight)||1;
             
@@ -155,13 +156,6 @@ export class ScrollableView extends Component {
         this.scrollHeaderBox.style.marginRight = scrollBarWidth + 'px';
         if(this.scrollFooterBox) {
             this.scrollFooterBox.style.marginRight = scrollBarWidth + 'px';
-        }
-    }
-    
-    calculateRowHeight() {
-        let row = DomHandler.findSingle(this.scrollTable, 'tr:not(.p-datatable-emptymessage-row)');
-        if(row) {
-            this.rowHeight = DomHandler.getOuterHeight(row);
         }
     }
 
