@@ -16,6 +16,7 @@ export class BodyRow extends Component {
         this.onDragOver = this.onDragOver.bind(this);
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDrop = this.onDrop.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     onClick(event) {
@@ -97,6 +98,69 @@ export class BodyRow extends Component {
         event.preventDefault();
     }
 
+    onKeyDown(event) {
+        if (this.props.selectionMode) {
+            const row = event.target;
+
+            switch (event.which) {
+                //down arrow
+                case 40:
+                    let nextRow = this.findNextSelectableRow(row);
+                    if (nextRow) {
+                        nextRow.focus();
+                    }
+    
+                    event.preventDefault();
+                break;
+    
+                //up arrow
+                case 38:
+                    let prevRow = this.findPrevSelectableRow(row);
+                    if (prevRow) {
+                        prevRow.focus();
+                    }
+    
+                    event.preventDefault();
+                break;
+    
+                //enter
+                case 13:
+                    this.onClick(event);
+                break;
+    
+                default:
+                    //no op
+                break;
+            }
+        }
+    }
+
+    findNextSelectableRow(row) {
+        let nextRow = row.nextElementSibling;
+        if (nextRow) {
+            if (DomHandler.hasClass(nextRow, 'p-datatable-row'))
+                return nextRow;
+            else
+                return this.findNextSelectableRow(nextRow);
+        }
+        else {
+            return null;
+        }
+    }
+
+    findPrevSelectableRow(row) {
+        let prevRow = row.previousElementSibling;
+        if (prevRow) {
+            if (DomHandler.hasClass(prevRow, 'p-datatable-row'))
+                return prevRow;
+            else
+                return this.findPrevSelectableRow(prevRow);
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalStyles = {
@@ -108,7 +172,7 @@ export class BodyRow extends Component {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
             conditionalStyles = {...conditionalStyles, ...rowClassNameCondition};
         }
-        let className = classNames(conditionalStyles);
+        let className = classNames('p-datatable-row', conditionalStyles);
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
         
@@ -131,8 +195,8 @@ export class BodyRow extends Component {
         }
         
         return (
-            <tr ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
-                onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={{height: this.props.virtualRowHeight}}>
+            <tr tabIndex={this.props.selectionMode ? '0' : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+                onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={{height: this.props.virtualRowHeight}} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>
         );
