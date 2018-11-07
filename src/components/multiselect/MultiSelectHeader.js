@@ -71,7 +71,7 @@ export class MultiSelectHeader extends Component {
                         </div>
                     </div>
                     {filterElement}
-                    <a className="p-multiselect-close" onClick={this.props.onClose}>
+                    <a tabIndex="0" className="p-multiselect-close" onClick={this.props.onClose}>
                         <span className="pi pi-times"></span>
                     </a>
                 </div>
