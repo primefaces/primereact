@@ -157,7 +157,7 @@ export class BodyCell extends Component {
         }
 
         /* eslint-disable */
-        let editorKeyHelper = this.props.editor && <a href="#" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+        let editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
         /* eslint-enable */
                        
         return (
