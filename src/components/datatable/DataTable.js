@@ -649,7 +649,9 @@ export class DataTable extends Component {
                 ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
                 let columnOrder = [];
                 for(let column of columns) {
-                    columnOrder.push(column.props.columnKey||column.props.field);
+                    if(column !== null) {
+                        columnOrder.push(column.props.columnKey || column.props.field);
+                    }
                 }
                 
                 this.setState({

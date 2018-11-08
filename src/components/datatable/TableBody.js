@@ -276,8 +276,10 @@ export class TableBody extends Component {
         else {
             if(Array.isArray(this.props.children)) {
                 for(let i = 0; i < this.props.children.length; i++) {
-                    if(this.props.children[i].props.selectionMode) {
-                        return true;
+                    if(this.props.children[i] !== null) {
+                        if(this.props.children[i].props.selectionMode) {
+                            return true;
+                        }
                     }
                 }
             }
