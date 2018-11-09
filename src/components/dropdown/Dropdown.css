@@ -47,7 +47,8 @@
 
 .p-dropdown .p-dropdown-item-empty,
 .p-dropdown .p-dropdown-label-empty {
-    text-indent: -9999px;   
+    overflow: hidden;
+    visibility: hidden;
 }
 
 .p-dropdown.p-disabled .p-dropdown-trigger,
