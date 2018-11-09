@@ -183,6 +183,12 @@ import {Paginator} from 'primereact/paginator';
                             <td>Template of the paginator.</td>
                         </tr>
                         <tr>
+                            <td>currentPageReportTemplate</td>
+                            <td>string</td>
+                            <td>{'({currentPage} of {totalPages})'}</td>
+                            <td>Template of current page report. Two possible indicators: {'{'}currentPage{'}'} and {'{'}totalPages{'}'}. CurrentPageReport key has to be set in template property. </td>
+                        </tr>
+                        <tr>
                             <td>leftContent</td>
                             <td>any</td>
                             <td>null</td>
