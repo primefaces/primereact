@@ -330,7 +330,7 @@ export class MultiSelect extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.element,
+            target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
@@ -366,7 +366,7 @@ export class MultiSelect extends Component {
         let header = this.renderHeader(items);
 
         return (
-            <div id={this.props.id} className={className} onClick={this.onClick} ref={(el) => {this.container = el;}} style={this.props.style}>
+            <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
                 <div className="p-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={(el) => {this.focusInput = el;}}/>
                 </div>

@@ -663,7 +663,7 @@ export class Dropdown extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.element,
+            target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });

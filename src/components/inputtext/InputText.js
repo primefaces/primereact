@@ -103,6 +103,6 @@ export class InputText extends Component {
         delete inputProps.tooltip;
         delete inputProps.tooltipOptions;
 
-        return <input ref={(el) => this.inputEl = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
+        return <input ref={(el) => this.element = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
 }

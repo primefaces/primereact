@@ -185,7 +185,7 @@ export class Password extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.element,
+            target: this.inputEl,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });

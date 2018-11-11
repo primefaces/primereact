@@ -165,7 +165,7 @@ export class InputTextarea extends Component {
         });
 
         return (
-            <textarea {...this.textareaProps} className={className} ref={(input) => {this.element = input;}} 
+            <textarea {...this.textareaProps} className={className} ref={input => this.element = input} 
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
         );
     }

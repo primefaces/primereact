@@ -129,7 +129,7 @@ export class SplitButton extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.element,
+            target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
@@ -151,7 +151,7 @@ export class SplitButton extends Component {
         let items = this.renderItems(); 
         
         return (
-            <div id={this.props.id} className={className} style={this.props.style}  ref={(el) => { this.container = el; }}>
+            <div id={this.props.id} className={className} style={this.props.style}  ref={el => this.container = el}>
                 <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}></Button>
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}></Button>
                 <SplitButtonPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} 

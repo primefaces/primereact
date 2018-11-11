@@ -62,8 +62,8 @@ export class FlexGridDemo extends Component {
                     <div className="p-grid" style={{marginTop: '.5em'}}>
                         {
                             this.state.columns.map(col => 
-                                <div className="p-col">
-                                    <div key={col} className="box">{col}</div>
+                                <div key={col} className="p-col">
+                                    <div className="box">{col}</div>
                                 </div>
                             )
                         }
@@ -1137,8 +1137,8 @@ export class FlexGridDemo extends Component {
                     <div className="p-grid" style={{marginTop: '.5em'}}>
                         {
                             this.state.columns.map(col => 
-                                <div className="p-col">
-                                    <div key={col} className="box">{col}</div>
+                                <div key={col} className="p-col">
+                                    <div className="box">{col}</div>
                                 </div>
                             )
                         }

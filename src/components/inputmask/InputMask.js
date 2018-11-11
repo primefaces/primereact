@@ -568,7 +568,7 @@ export class InputMask extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.element,
+            target: this.input,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
