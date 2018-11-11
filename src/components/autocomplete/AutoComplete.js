@@ -522,7 +522,7 @@ export class AutoComplete extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.inputEl,
+            target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });

@@ -515,7 +515,7 @@ export class ColorPicker extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.input,
+            target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });

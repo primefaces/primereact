@@ -313,7 +313,7 @@ export class Spinner extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.inputEl,
+            target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
