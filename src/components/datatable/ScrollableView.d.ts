@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 interface ScrollableViewProps {
-    header?: Element;
-    body?: Element;
-    footer?: Element;
+    header?: any;
+    body?: any;
+    footer?: any;
     frozen?: boolean;
     frozenWidth?: string;
     unfrozenWidth?: string;
-    frozenBody?: Element;
+    frozenBody?: any;
     virtualScroll?: boolean;
     rows?: number;
     totalRcords?: number;

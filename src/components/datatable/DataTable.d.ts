@@ -33,10 +33,10 @@ interface DataTableProps {
     compareSelectionBy?: string;
     dataKey?: string;
     metaKeySelection?: boolean;
-    headerColumnGroup?: JSX.Element;
-    footerColumnGroup?: JSX.Element;
-    frozenHeaderColumnGroup?: JSX.Element;
-    frozenFooterColumnGroup?: JSX.Element;
+    headerColumnGroup?: any;
+    footerColumnGroup?: any;
+    frozenHeaderColumnGroup?: any;
+    frozenFooterColumnGroup?: any;
     expandedRows?: any[];
     responsive?: boolean;
     resizableColumns?: boolean;

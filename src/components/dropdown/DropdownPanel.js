@@ -16,7 +16,7 @@ export class DropdownPanel extends Component {
 
     static propTypes = {
         appendTo: PropTypes.object,
-        filter: PropTypes.element,
+        filter: PropTypes.any,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
         panelstyle: PropTypes.object,

@@ -124,10 +124,10 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
-        headerColumnGroup: PropTypes.element,
-        footerColumnGroup: PropTypes.element,
-        frozenHeaderColumnGroup: PropTypes.element,
-        frozenFooterColumnGroup: PropTypes.element,
+        headerColumnGroup: PropTypes.any,
+        footerColumnGroup: PropTypes.any,
+        frozenHeaderColumnGroup: PropTypes.any,
+        frozenFooterColumnGroup: PropTypes.any,
         rowExpansionTemplate: PropTypes.func,
         expandedRows: PropTypes.array,
         onRowToggle: PropTypes.func,
@@ -832,7 +832,7 @@ export class DataTable extends Component {
 
     getFrozenColumns(columns) {
         let frozenColumns = null;
-        
+
         for(let col of columns) {
             if(col.props.frozen) {
                 frozenColumns = frozenColumns||[];
@@ -845,7 +845,7 @@ export class DataTable extends Component {
 
     getScrollableColumns(columns) {
         let scrollableColumns = null;
-        
+
         for(let col of columns) {
             if(!col.props.frozen) {
                 scrollableColumns = scrollableColumns||[];

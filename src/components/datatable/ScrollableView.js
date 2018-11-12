@@ -22,13 +22,13 @@ export class ScrollableView extends Component {
      }
 
     static propTypes = {
-        header: PropTypes.element,
-        body: PropTypes.element,
-        footer: PropTypes.element,
+        header: PropTypes.any,
+        body: PropTypes.any,
+        footer: PropTypes.any,
         columns: PropTypes.array,
         frozen: PropTypes.bool,
         frozenWidth: PropTypes.string,
-        frozenBody: PropTypes.element,
+        frozenBody: PropTypes.any,
         virtualScroll: PropTypes.bool,
         virtualRowHeight: PropTypes.number,
         rows: PropTypes.number,

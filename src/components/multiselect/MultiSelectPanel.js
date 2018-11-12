@@ -13,7 +13,7 @@ export class MultiSelectPanel extends Component {
 
     static propTypes = {
         appendTo: PropTypes.object,
-        header: PropTypes.element,
+        header: PropTypes.any,
         onClick: PropTypes.func,
         scrollHeight: PropTypes.string
     };

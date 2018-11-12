@@ -114,10 +114,10 @@ export class TreeTable extends Component {
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
         reorderableColumns: PropTypes.bool,
-        headerColumnGroup: PropTypes.element,
-        footerColumnGroup: PropTypes.element,
-        frozenHeaderColumnGroup: PropTypes.element,
-        frozenFooterColumnGroup: PropTypes.element,
+        headerColumnGroup: PropTypes.any,
+        footerColumnGroup: PropTypes.any,
+        frozenHeaderColumnGroup: PropTypes.any,
+        frozenFooterColumnGroup: PropTypes.any,
         frozenWidth: PropTypes.string,
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
@@ -661,7 +661,7 @@ export class TreeTable extends Component {
 
     getFrozenColumns(columns) {
         let frozenColumns = null;
-        
+
         for(let col of columns) {
             if(col.props.frozen) {
                 frozenColumns = frozenColumns||[];
@@ -674,7 +674,7 @@ export class TreeTable extends Component {
 
     getScrollableColumns(columns) {
         let scrollableColumns = null;
-        
+
         for(let col of columns) {
             if(!col.props.frozen) {
                 scrollableColumns = scrollableColumns||[];

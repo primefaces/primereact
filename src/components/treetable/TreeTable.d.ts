@@ -41,10 +41,10 @@ interface TreeTableProps {
     scrollable?: boolean;
     scrollHeight?: string;
     reorderableColumns?: boolean;
-    headerColumnGroup?: JSX.Element;
-    footerColumnGroup?: JSX.Element;
-    frozenHeaderColumnGroup?: JSX.Element;
-    frozenFooterColumnGroup?: JSX.Element;
+    headerColumnGroup?: any;
+    footerColumnGroup?: any;
+    frozenHeaderColumnGroup?: any;
+    frozenFooterColumnGroup?: any;
     frozenWidth?: string;
     resizableColumns?: boolean;
     columnResizeMode?: string;

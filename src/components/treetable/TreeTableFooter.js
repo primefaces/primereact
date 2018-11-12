@@ -10,7 +10,7 @@ export class TreeTableFooter extends Component {
 
     static propsTypes = {
         columns: PropTypes.array,
-        columnGroup: PropTypes.element
+        columnGroup: PropTypes.any
     }
 
     renderFooterCell(column, index) {
