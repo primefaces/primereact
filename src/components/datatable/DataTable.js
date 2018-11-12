@@ -620,9 +620,6 @@ export class DataTable extends Component {
                 this.reorderIndicatorUp.style.display = 'block';
                 this.reorderIndicatorDown.style.display = 'block';
             }
-            else {
-                event.dataTransfer.dropEffect = 'none';
-            }
         }
     }
     

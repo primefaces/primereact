@@ -523,9 +523,6 @@ export class TreeTable extends Component {
                 this.reorderIndicatorUp.style.display = 'block';
                 this.reorderIndicatorDown.style.display = 'block';
             }
-            else {
-                event.dataTransfer.dropEffect = 'none';
-            }
         }
     }
     

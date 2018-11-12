@@ -413,16 +413,14 @@ export class InputMask extends Component {
             return;
         }
 
-        setTimeout(() => {
-            var pos = this.checkVal(true);
-            this.caret(pos);
-            this.updateModel(event);
-            if (this.props.onComplete && this.isCompleted()) {
-                this.props.onComplete({
-                    originalEvent: event
-                })
-            }
-        }, 0);
+        var pos = this.checkVal(true);
+        this.caret(pos);
+        this.updateModel(event);
+        if (this.props.onComplete && this.isCompleted()) {
+            this.props.onComplete({
+                originalEvent: event
+            })
+        }
     }
 
     getUnmaskedValue() {
