@@ -40,9 +40,9 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true} blockScroll={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. xw
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
@@ -163,19 +163,19 @@ const footer = (
                         <tr>
                             <td>modal</td>
                             <td>boolean</td>
-                            <td>false</td>
+                            <td>true</td>
                             <td>Defines if background should be blocked when dialog is displayed.</td>
                         </tr>
                         <tr>
                             <td>draggable</td>
                             <td>boolean</td>
-                            <td>true</td>
+                            <td>false</td>
                             <td>Enables dragging to change the position using header.</td>
                         </tr>
                         <tr>
                             <td>resizable</td>
                             <td>boolean</td>
-                            <td>true</td>
+                            <td>false</td>
                             <td>Enables resizing of the content.</td>
                         </tr>
                         <tr>
@@ -295,7 +295,7 @@ const footer = (
                         <tr>
                             <td>blockScroll</td>
                             <td>boolean</td>
-                            <td>false</td>
+                            <td>true</td>
                             <td>Whether background scroll should be blocked when dialog is visible.</td>
                         </tr>
                     </tbody>
@@ -416,7 +416,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} footer={footer} minY={70} onHide={this.onHide} maximizable={true} blockScroll={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 

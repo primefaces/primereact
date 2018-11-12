@@ -14,11 +14,11 @@ export class Dialog extends Component {
         visible: false,
         width: 'auto',
         height: 'auto',
-        modal: false,
+        modal: true,
         onHide: null,
         onShow: null,
-        draggable: true,
-        resizable: true,
+        draggable: false,
+        resizable: false,
         minWidth: 150,
         minHeight: 150,
         contentStyle: null,
@@ -38,7 +38,7 @@ export class Dialog extends Component {
         minX: 0,
         minY: 0,
         maximizable: false,
-        blockScroll: false
+        blockScroll: true
     }
 
     static propTypes = {
@@ -582,7 +582,8 @@ export class Dialog extends Component {
     render() {
         let className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
-            'p-dialog-draggable': this.props.draggable
+            'p-dialog-draggable': this.props.draggable,
+            'p-dialog-resizable': this.props.resizable
         });
 
         let style = Object.assign({
