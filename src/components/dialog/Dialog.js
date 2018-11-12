@@ -83,7 +83,6 @@ export class Dialog extends Component {
         this.onClose = this.onClose.bind(this);
         this.initDrag = this.initDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
-        this.moveOnTop = this.moveOnTop.bind(this);
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
@@ -252,10 +251,6 @@ export class Dialog extends Component {
             this.mask.removeEventListener('click', this.maskClickListener);
             this.maskClickListener = null;
 		}
-    }
-
-    moveOnTop() {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
     }
 
     onCloseMouseDown(event) {
@@ -603,7 +598,7 @@ export class Dialog extends Component {
         let resizer = this.renderResizer();
 
         let element = (
-            <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} onMouseDown={this.moveOnTop} aria-labelledby={this.id + '_label'} role="dialog">
+            <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} aria-labelledby={this.id + '_label'} role="dialog">
                 {header}
                 {content}
                 {footer}
