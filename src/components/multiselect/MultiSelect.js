@@ -26,7 +26,8 @@ export class MultiSelect extends Component {
         tooltip: null,
         tooltipOptions: null,
         itemTemplate: null,
-        onChange: null
+				onChange: null,
+				customLabel: null
     };
 
     static propTypes = {
@@ -45,7 +46,8 @@ export class MultiSelect extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         itemTemplate: PropTypes.func,
-        onChange: PropTypes.func,
+				onChange: PropTypes.func,
+				customLabel: PropTypes.any
     };
 
     constructor(props) {
@@ -206,18 +208,21 @@ export class MultiSelect extends Component {
         let label;
         
         if(this.props.value && this.props.value.length) {
+					if (this.props.customLabel && this.props.customLabel != null) {
+						label = this.props.customLabel;
+					} else {
             label = '';
             for(let i = 0; i < this.props.value.length; i++) {
                 if(i !== 0) {
                     label += ',';
                 }
                 label += this.findLabelByValue(this.props.value[i]);
-            }
+						}
+					}
         }
         else {
             label = this.props.defaultLabel;
         }
-
         return label;
     }
 
