@@ -6,6 +6,9 @@
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
+}
+
+.p-datatable tbody {
     transform: translate3d(0px, 0px, 0px);
 }
 
