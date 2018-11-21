@@ -6,6 +6,7 @@
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
+    transform: translate3d(0px, 0px, 0px);
 }
 
 .p-datatable .p-datatable-thead > tr > th,
