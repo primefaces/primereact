@@ -94,13 +94,6 @@ export class HomeComponent extends Component {
                     </div>
                 </div>
                 <div className="templates">
-                    <div className="ui-g">
-                        <div className="ui-g-12">
-                            <a href="https://www.primefaces.org/store">
-                                <img alt="Black Friday" src="showcase/resources/images/black-friday-2018.png"/>
-                            </a>
-                        </div>
-                    </div>
                     <h3>Premium Application Templates for PrimeReact</h3>
                     <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates
                         of PrimeReact and impress your users.</p>
