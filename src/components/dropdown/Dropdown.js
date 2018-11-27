@@ -356,6 +356,8 @@ export class Dropdown extends Component {
 
             //enter
             case 13:
+                this.hide();
+                this.unbindDocumentClickListener();
                 event.preventDefault();
             break;
 
