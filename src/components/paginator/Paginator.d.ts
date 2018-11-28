@@ -18,6 +18,7 @@ interface PaginatorProps {
     template?: string;
     leftContent?: JSX.Element | undefined;
     rightContent?: JSX.Element | undefined;
+    currentPageReportTemplate?:any;
     onPageChange?(event: PageState): void;
 }
 
