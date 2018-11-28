@@ -396,7 +396,7 @@ export class DataTableDemo extends Component {
 
             <h3>Table Layout</h3>
             <p>Default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents
-                set <i>autoLayout</i> property to true.
+                set <i>autoLayout</i> property to true. Note that Scrollable and/or Resizable tables do not support auto layout due to technical reasons.
             </p>
 
             <h3>Templates</h3>
