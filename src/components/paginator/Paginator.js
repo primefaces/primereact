@@ -22,7 +22,8 @@ export class Paginator extends Component {
         template: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         onPageChange: null,
         leftContent: null,
-        rightContent: null
+        rightContent: null,
+        currentPageReportTemplate: null
     }
 
     static propsTypes = {
@@ -36,7 +37,8 @@ export class Paginator extends Component {
         template: PropTypes.string,
         onPageChange: PropTypes.func,
         leftContent: PropTypes.any,
-        rightContent: PropTypes.any
+        rightContent: PropTypes.any,
+        currentPageReportTemplate: PropTypes.any
     }
     
     constructor(props) {
@@ -172,7 +174,7 @@ export class Paginator extends Component {
                 break;
                 
                 case 'CurrentPageReport':
-                    element = <CurrentPageReport key={key} page={this.getPage()} pageCount={this.getPageCount()} />;
+                    element = <CurrentPageReport currentPageReportTemplate={this.props.currentPageReportTemplate} key={key} page={this.getPage()} pageCount={this.getPageCount()} />;
                 break;
                 
                 default:

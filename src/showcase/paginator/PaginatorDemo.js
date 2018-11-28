@@ -194,6 +194,12 @@ import {Paginator} from 'primereact/paginator';
                             <td>null</td>
                             <td>Content to inject into the right side of the paginator.</td>
                         </tr>
+                        <tr>
+                            <td>currentPageReportTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Content to CurrentPageReport template of the paginator.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
