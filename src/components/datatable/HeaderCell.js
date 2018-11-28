@@ -21,7 +21,7 @@ export class HeaderCell extends Component {
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
-                    sortField: this.props.field,
+                    sortField: this.props.columnSortField !=null ? this.props.columnSortField : this.props.field,
                     sortFunction: this.props.sortFunction,
                     sortable: this.props.sortable
                 });
@@ -98,7 +98,7 @@ export class HeaderCell extends Component {
 
     render() {
         let multiSortMetaData = this.getMultiSortMetaData();
-        let singleSorted = (this.props.field === this.props.sortField);
+        let singleSorted = (this.props.field === this.props.sortField || (this.props.columnSortField != null && this.props.columnSortField === this.props.sortField));
         let multipleSorted = multiSortMetaData !== null;
         let sortOrder = 0;
         let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown}></span>;
