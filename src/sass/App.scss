@@ -1284,6 +1284,29 @@ pre[class*="language-"] {
     }
 }
 
+/*MultiSelect */
+.multiselect-demo {
+    .my-multiselected-item-token, .my-multiselected-empty-token {
+        padding: 2px 4px;
+        margin: 0 0.286em 0 0;
+        display: inline-block;
+        vertical-align:middle;
+        height: 1.857em;
+        border-radius: 3px;
+    }
+
+    .my-multiselected-item-token {
+        background: #007ad9;
+        color: #ffffff;
+    }
+
+    .my-multiselected-empty-token {
+        background: #d95f00;
+        color: #ffffff;
+    }
+
+}
+
 /* Responsive Tables */
 .p-col-d {
     display: table-cell;

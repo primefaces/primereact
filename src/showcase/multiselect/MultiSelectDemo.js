@@ -9,8 +9,36 @@ export class MultiSelectDemo extends Component {
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars1: [],
+            cars2: []
         };
+        this.carTemplate = this.carTemplate.bind(this);
+        this.selectedCarTemplate = this.selectedCarTemplate.bind(this);
+    }
+    carTemplate(option) {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{width:'24px', verticalAlign:'middle'}} />
+                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            </div>
+        );
+    }
+    selectedCarTemplate(option) {
+
+        if(option) {
+            const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+            return (
+                <div className="my-multiselected-item-token">
+                    <img alt={option.label} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
+                    <span>{option.label}</span>
+                </div>
+            );
+        }
+        else {
+            return <span className="my-multiselected-empty-token">Choose</span>
+        }
     }
 
     render() {
@@ -35,9 +63,15 @@ export class MultiSelectDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
-                    <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} 
-                            style={{width:'12em'}} filter={true} />
+                <div className="content-section implementation multiselect-demo">
+                    <h3>Basic</h3>
+                    <MultiSelect value={this.state.cars1} options={cars} onChange={(e) => this.setState({cars1: e.value})}
+                            style={{minWidth:'12em'}} filter={true}/>
+
+
+                    <h3>Templating</h3>
+                    <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
+                                 style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedOptionTemplate={this.selectedCarTemplate}/>
                 </div>
                 
                 <MultiSelectDoc />
@@ -138,6 +172,36 @@ carTemplate(option) {
 
 `}
 </CodeHighlight>
+                        <p>In addition selectedOptionTemplate can be used to customize the selected values display instead of the default comma separated list.</p>
+
+                        <CodeHighlight className="language-jsx">
+                            {`
+<MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} selectedOptionTemplate={this.selectedCarTemplate} />
+
+`}
+                        </CodeHighlight>
+
+                        <CodeHighlight className="language-javascript">
+                            {`
+
+selectedCarTemplate(option) {
+
+    if(option) {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        return (
+            <div className="my-multiselected-item-token">
+                <img alt={option.label} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
+                <span>{option.label}</span>
+            </div>
+        );
+    }
+    else {
+        return <span className="my-multiselected-empty-token">Choose</span>
+    }
+}
+
+`}
+                        </CodeHighlight>
 
             <h3>Filter</h3>
             <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable filter property.</p>
@@ -244,6 +308,12 @@ carTemplate(option) {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
+                        <tr>
+                            <td>selectedOptionTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content for selected option.</td>
                         </tr>
                         <tr>
                             <td>appendTo</td>

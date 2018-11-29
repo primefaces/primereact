@@ -26,6 +26,7 @@ export class MultiSelect extends Component {
         tooltip: null,
         tooltipOptions: null,
         itemTemplate: null,
+        selectedOptionTemplate: null,
         onChange: null
     };
 
@@ -45,6 +46,7 @@ export class MultiSelect extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         itemTemplate: PropTypes.func,
+        selectedOptionTemplate: PropTypes.func,
         onChange: PropTypes.func,
     };
 
@@ -204,7 +206,7 @@ export class MultiSelect extends Component {
 
     getLabel() {
         let label;
-        
+
         if(this.props.value && this.props.value.length) {
             label = '';
             for(let i = 0; i < this.props.value.length; i++) {
@@ -223,35 +225,51 @@ export class MultiSelect extends Component {
 
     findLabelByValue(val) {
         let label = null;
-        
+
         for(let i = 0; i < this.props.options.length; i++) {
             let option = this.props.options[i];
             let optionValue = this.getOptionValue(option);
-            
+
             if(ObjectUtils.equals(optionValue, val)) {
                 label = this.getOptionLabel(option);
-                break; 
+                break;
             }
         }
-        
+
         return label;
+    }
+
+    findOptionByValue(val) {
+        let option = null;
+
+        for(let i = 0; i < this.props.options.length; i++) {
+            let opt = this.props.options[i];
+            let optionValue = this.getOptionValue(opt);
+
+            if(ObjectUtils.equals(optionValue, val)) {
+                option = opt;
+                break;
+            }
+        }
+
+        return option;
     }
 
     onFocus() {
         DomHandler.addClass(this.container, 'p-focus');
     }
-    
+
     onBlur() {
         DomHandler.removeClass(this.container, 'p-focus');
     }
-    
+
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = this.onDocumentClick.bind(this);
             document.addEventListener('click', this.documentClickListener);
         }
     }
-    
+
     unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
@@ -287,43 +305,43 @@ export class MultiSelect extends Component {
         if(!this.selfClick && !this.panelClick && this.panel.element.offsetParent) {
             this.hide();
         }
-        
+
         this.clearClickState();
     }
-    
+
     clearClickState() {
         this.selfClick = false;
         this.panelClick = false;
     }
-    
+
     filterOption(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
         let optionLabel = this.getOptionLabel(option);
-        
+
         return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
     }
-    
+
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
-    
+
     isAllChecked(visibleOptions) {
         if(this.hasFilter())
             return this.props.value && visibleOptions && visibleOptions.length&&(this.props.value.length === visibleOptions.length);
         else
             return this.props.value && this.props.options && (this.props.value.length === this.props.options.length);
-    } 
-    
+    }
+
     filterOptions(options) {
         return options.filter((option) => {
             return this.filterOption(option);
         });
     }
-    
+
     getOptionValue(option) {
         return this.props.optionLabel ? option : option.value;
     }
-    
+
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
@@ -343,11 +361,29 @@ export class MultiSelect extends Component {
         );
     }
 
+    renderLabel() {
+        if(this.props.selectedOptionTemplate) {
+            if(this.props.value && this.props.value.length) {
+                 return this.props.value.map((val, index) => {
+                    return <React.Fragment key={index}>{this.props.selectedOptionTemplate(this.findOptionByValue(val))}</React.Fragment>;
+                });
+            }
+            else {
+                return this.props.selectedOptionTemplate();
+            }
+        }
+        else {
+            return this.getLabel();
+        }
+    }
+
     render() {
         let className = classNames('p-multiselect p-component', this.props.className, {
             'p-disabled': this.props.disabled
         });
-        let label = this.getLabel();
+
+        let label = this.renderLabel();
+
         let items = this.props.options;
         
         if (items) {
