@@ -244,8 +244,10 @@ export class AutoComplete extends Component {
                 this.panel.element.style.display = "block";
                 
                 setTimeout(() => {
-                    DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
-                    DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
+                    if (this.panel && this.panel.element) {
+                        DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
+                        DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
+                    }
                 }, 1);
 
                 this.alignPanel();
@@ -273,8 +275,10 @@ export class AutoComplete extends Component {
         DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
 
         setTimeout(() => {
-            this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
+            if (this.panel && this.panel.element) {
+                this.panel.element.style.display = 'none';
+                DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
+            }
         }, 150);
 
         this.unbindDocumentClickListener();
