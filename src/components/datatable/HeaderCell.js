@@ -21,7 +21,7 @@ export class HeaderCell extends Component {
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: e,
-                    sortField: this.props.columnSortField !=null ? this.props.columnSortField : this.props.field,
+                    sortField: this.props.columnSortField || this.props.field,
                     sortFunction: this.props.sortFunction,
                     sortable: this.props.sortable
                 });
