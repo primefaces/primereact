@@ -151,8 +151,13 @@ export class Calendar extends Component {
         super(props);
 
         if (!this.props.onViewDateChange) {
+            let propValue = this.props.value;
+            if (Array.isArray(propValue)) {
+                propValue = propValue[0];
+            }
+
             this.state = {
-                viewDate: (this.props.viewDate || this.props.value || new Date())
+                viewDate: (this.props.viewDate || propValue || new Date())
             }
         }
 
@@ -1013,8 +1018,11 @@ export class Calendar extends Component {
             else if(this.isRangeSelection()) {
                 if(this.props.value[1])
                     return this.isDateEquals(this.props.value[0], dateMeta) || this.isDateEquals(this.props.value[1], dateMeta) || this.isDateBetween(this.props.value[0], this.props.value[1], dateMeta);
-                else
-                    return this.isDateEquals(this.props.value[0], dateMeta)
+                else {
+                    debugger;
+                    return this.isDateEquals(this.props.value[0], dateMeta);
+                }
+                    
             }
         }
         else {
