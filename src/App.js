@@ -448,6 +448,7 @@ class App extends Component {
                                 <li><a onClick={e => this.changeTheme(e, 'luna-blue', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></a></li>
                                 <li><a onClick={e => this.changeTheme(e, 'luna-green', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" /><span>Luna Green</span></a></li>
                                 <li><a onClick={e => this.changeTheme(e, 'luna-pink', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></a></li>
+                                <li><a onClick={e => this.changeTheme(e, 'rhea', false)}><img src="showcase/resources/images/layouts/themeswitcher-rhea.png" alt="Rhea" /><span>Rhea</span></a></li>
                             </ul>
                         </li>
 
