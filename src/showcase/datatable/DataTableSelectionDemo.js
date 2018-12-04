@@ -90,7 +90,7 @@ export class DataTableSelectionDemo extends Component {
                     <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCars3)}
                         selection={this.state.selectedCars3} onSelectionChange={e => this.setState({selectedCars3: e.value})}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
-                        <Column field="vin" header="Vin" />
+                        <Column field="vin" header="Vin" filter/>
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />

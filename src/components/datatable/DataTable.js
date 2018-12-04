@@ -411,6 +411,12 @@ export class DataTable extends Component {
         }
     }
 
+    hasFilter() {
+        let filters = this.getFilters();
+
+        return filters && Object.keys(filters).length > 0;
+    }
+
     isFilterBlank(filter) {
         if(filter !== null && filter !== undefined) {
             if((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0))
@@ -766,11 +772,14 @@ export class DataTable extends Component {
     onHeaderCheckboxClick(event) {
         let selection;
 
-        if(!event.checked)
-            selection = [...this.props.value];
-        else
+        if(!event.checked) {
+            let visibleData = this.hasFilter() ? this.processData() : this.props.value;
+            selection = [...visibleData];
+        }
+        else {
             selection = [];
-
+        }
+            
         if(this.props.onSelectionChange) {
             this.props.onSelectionChange({
                 originalEvent: event,
@@ -858,7 +867,9 @@ export class DataTable extends Component {
     }
 
     isAllSelected() {
-        return this.props.selection && this.props.value && this.props.selection.length === this.props.value.length;
+        let visibleData = this.hasFilter() ? this.processData() : this.props.value;
+
+        return this.props.selection && visibleData && this.props.selection.length === visibleData.length;
     }
 
     getFrozenColumns(columns) {
