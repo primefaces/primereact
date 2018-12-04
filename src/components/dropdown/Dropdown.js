@@ -197,7 +197,6 @@ export class Dropdown extends Component {
             //enter
             case 13:                                        
                 this.hide();
-                this.unbindDocumentClickListener();
                 event.preventDefault();
             break;
             
@@ -205,7 +204,6 @@ export class Dropdown extends Component {
             case 27:
             case 9:
                 this.hide();
-                this.unbindDocumentClickListener();
             break;
             
             default:
@@ -357,7 +355,6 @@ export class Dropdown extends Component {
             //enter
             case 13:
                 this.hide();
-                this.unbindDocumentClickListener();
                 event.preventDefault();
             break;
 
@@ -461,6 +458,7 @@ export class Dropdown extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = () => {
+                console.log('click');
                 if(!this.selfClick && !this.overlayClick) {
                     this.hide();
                 }
