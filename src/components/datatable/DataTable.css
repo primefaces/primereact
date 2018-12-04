@@ -8,10 +8,6 @@
     table-layout: fixed;
 }
 
-.p-datatable tbody {
-    transform: translate3d(0px, 0px, 0px);
-}
-
 .p-datatable .p-datatable-thead > tr > th,
 .p-datatable .p-datatable-tbody > tr > td,
 .p-datatable .p-datatable-tfoot > tr > td {
