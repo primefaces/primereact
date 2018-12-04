@@ -1980,6 +1980,12 @@ export class TreeTableResponsiveDemo extends Component {
                                         <td>Array of integer values to display inside rows per page dropdown.</td>
                                     </tr>
                                     <tr>
+                                        <td>currentPageReportTemplate</td>
+                                        <td>string</td>
+                                        <td>(&123;currentPage&125; of &123;totalPages&125;)</td>
+                                        <td>Template of the current page report element.</td>
+                                    </tr>
+                                    <tr>
                                         <td>first</td>
                                         <td>number</td>
                                         <td>0</td>
