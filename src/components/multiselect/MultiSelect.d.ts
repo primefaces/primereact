@@ -17,7 +17,7 @@ interface MultiSelectProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     itemTemplate?(item: any): JSX.Element | undefined;
-    selectedOptionTemplate?(item: any): JSX.Element | undefined;
+    selectedItemTemplate?(value: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 

@@ -26,7 +26,7 @@ export class MultiSelect extends Component {
         tooltip: null,
         tooltipOptions: null,
         itemTemplate: null,
-        selectedOptionTemplate: null,
+        selectedItemTemplate: null,
         onChange: null
     };
 
@@ -46,7 +46,7 @@ export class MultiSelect extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         itemTemplate: PropTypes.func,
-        selectedOptionTemplate: PropTypes.func,
+        selectedItemTemplate: PropTypes.func,
         onChange: PropTypes.func,
     };
 
@@ -239,22 +239,6 @@ export class MultiSelect extends Component {
         return label;
     }
 
-    findOptionByValue(val) {
-        let option = null;
-
-        for(let i = 0; i < this.props.options.length; i++) {
-            let opt = this.props.options[i];
-            let optionValue = this.getOptionValue(opt);
-
-            if(ObjectUtils.equals(optionValue, val)) {
-                option = opt;
-                break;
-            }
-        }
-
-        return option;
-    }
-
     onFocus() {
         DomHandler.addClass(this.container, 'p-focus');
     }
@@ -362,14 +346,16 @@ export class MultiSelect extends Component {
     }
 
     renderLabel() {
-        if(this.props.selectedOptionTemplate) {
+        if(this.props.selectedItemTemplate) {
             if(this.props.value && this.props.value.length) {
                  return this.props.value.map((val, index) => {
-                    return <React.Fragment key={index}>{this.props.selectedOptionTemplate(this.findOptionByValue(val))}</React.Fragment>;
+                    return (
+                        <React.Fragment key={index}>{this.props.selectedItemTemplate(val)}</React.Fragment>
+                    );
                 });
             }
             else {
-                return this.props.selectedOptionTemplate();
+                return this.props.selectedItemTemplate();
             }
         }
         else {
