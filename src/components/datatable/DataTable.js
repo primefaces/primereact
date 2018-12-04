@@ -964,7 +964,8 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
-        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive, 'p-datatable-resizable': this.props.resizableColumns, 
+        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive, 
+                        'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit', 
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
                         'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.selectionMode}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
