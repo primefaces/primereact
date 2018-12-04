@@ -16,13 +16,18 @@ interface DataViewProps {
     footer?: JSX.Element | string,
     value?: any[],
     layout?: string,
-    paginator?: boolean,
     rows?: number,
     first?: number,
     totalRecords?: number,
-    pageLinks?: number,
-    rowsPerPageOptions?: any[],
-    paginatorPosition?: string,
+    paginator?: boolean;
+    paginatorPosition?: string;
+    alwaysShowPaginator?: boolean;
+    paginatorTemplate?: string;
+    paginatorLeft?: any;
+    paginatorRight?: any;
+    pageLinkSize?: number;
+    rowsPerPageOptions?: number[];
+    currentPageReportTemplate?: string;
     emptyMessage?: string,
     sortField?: string,
     sortOrder?: number,

@@ -428,12 +428,6 @@ onSortChange(event) {
                                         <td>Layout of the items, valid values are "list" and "grid".</td>
                                     </tr>
                                     <tr>
-                                        <td>paginator</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When specified as true, enables the pagination.</td>
-                                    </tr>
-                                    <tr>
                                         <td>rows</td>
                                         <td>number</td>
                                         <td>null</td>
@@ -452,10 +446,46 @@ onSortChange(event) {
                                         <td>Number of total records, defaults to length of value when not defined.</td>
                                     </tr>
                                     <tr>
-                                        <td>pageLinks</td>
+                                        <td>paginator</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When specified as true, enables the pagination.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorPosition</td>
+                                        <td>string</td>
+                                        <td>bottom</td>
+                                        <td>Position of the paginator, options are "top","bottom" or "both".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>alwaysShowPaginator</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to show it even there is only one page.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorTemplate</td>
+                                        <td>string</td>
+                                        <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                                        <td>Template of the paginator.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorLeft</td>
+                                        <td>Element</td>
+                                        <td>null</td>
+                                        <td>Content for the left side of the paginator.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorRight</td>
+                                        <td>Element</td>
+                                        <td>null</td>
+                                        <td>Content for the right side of the paginator.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>pageLinkSize</td>
                                         <td>number</td>
                                         <td>5</td>
-                                        <td>Number of page links to display in paginator.</td>
+                                        <td>Number of page links to display.</td>
                                     </tr>
                                     <tr>
                                         <td>rowsPerPageOptions</td>
@@ -464,10 +494,10 @@ onSortChange(event) {
                                         <td>Array of integer values to display inside rows per page dropdown.</td>
                                     </tr>
                                     <tr>
-                                        <td>paginatorPosition</td>
+                                        <td>currentPageReportTemplate</td>
                                         <td>string</td>
-                                        <td>bottom</td>
-                                        <td>Position of the paginator, options are "top","bottom" or "both".</td>
+                                        <td>(&123;currentPage&125; of &123;totalPages&125;)</td>
+                                        <td>Template of the current page report element.</td>
                                     </tr>
                                     <tr>
                                         <td>emptyMessage</td>

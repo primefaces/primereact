@@ -83,13 +83,18 @@ export class DataView extends Component {
         footer: null,
         value: null,
         layout: 'list',
-        paginator: false,
         rows: null,
         first: 0,
         totalRecords: null,
-        pageLinks: 5,
+        paginator: false,
+        paginatorPosition: 'bottom',
+        alwaysShowPaginator: true,
+        paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
+        paginatorLeft:null,
+        paginatorRight: null,
+        pageLinkSize: 5,
         rowsPerPageOptions: null,
-        paginatorPosition: "bottom",
+        currentPageReportTemplate: '({currentPage} of {totalPages})',
         emptyMessage: 'No records found',
         sortField: null,
         sortOrder: null,
@@ -105,13 +110,18 @@ export class DataView extends Component {
         footer: PropTypes.string,
         value: PropTypes.array,
         layout: PropTypes.string,
-        paginator: PropTypes.bool,
         rows: PropTypes.number,
         first: PropTypes.number,
         totalRecords: PropTypes.number,
-        pageLinks: PropTypes.number,
-        rowsPerPageOptions: PropTypes.array,
+        paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
+        alwaysShowPaginator: PropTypes.bool,
+        paginatorTemplate: PropTypes.string,
+        paginatorLeft: PropTypes.any,
+        paginatorRight: PropTypes.any,
+        pageLinkSize: PropTypes.number,
+        rowsPerPageOptions: PropTypes.array,
+        currentPageReportTemplate: PropTypes.string,
         emptyMessage: PropTypes.string,
         sortField: PropTypes.string,
         sortOrder: PropTypes.number,
@@ -147,7 +157,9 @@ export class DataView extends Component {
         const totalRecords = this.getTotalRecords();
 
         return (
-            <Paginator first={first} rows={rows} className={className} onPageChange={this.onPageChange} totalRecords={totalRecords}/>
+            <Paginator first={first} rows={rows} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
+                        totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
+                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} />
         );
     }
 
