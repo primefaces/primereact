@@ -16,6 +16,7 @@ export class Sidebar extends Component {
         baseZIndex: 0,
         dismissable: true,
         showCloseIcon: true,
+        modal: true,
         onShow: null,
         onHide: null
     };
@@ -31,6 +32,7 @@ export class Sidebar extends Component {
         baseZIndex: PropTypes.number,
         dismissable: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
+        modal: PropTypes.bool,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
     };
@@ -62,8 +64,11 @@ export class Sidebar extends Component {
 
     onShow() {
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        this.enableModality();
 
+        if (this.props.modal) {
+            this.enableModality();
+        }
+        
         if (this.props.onShow) {
             this.props.onShow();
         }
@@ -104,7 +109,10 @@ export class Sidebar extends Component {
 
     onHide() {
         this.unbindMaskClickListener();
-        this.disableModality();
+
+        if (this.props.modal) {
+            this.disableModality();
+        }
     }
 
     bindMaskClickListener() {

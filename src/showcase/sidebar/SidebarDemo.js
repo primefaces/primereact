@@ -212,6 +212,12 @@ import {Sidebar} from 'primereact/sidebar';
                                         <td>true</td>
                                         <td>Whether to display a close icon inside the panel.</td>
                                     </tr>
+                                    <tr>
+                                        <td>modal</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to a modal layer behind the sidebar.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
