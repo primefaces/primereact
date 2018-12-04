@@ -706,6 +706,19 @@ mysort(event) {
 `}
 </CodeHighlight>
 
+            <p>Getting access to the sorted data is provided by the <i>onValueChange</i> callback.</p>
+            <CodeHighlight className="language-javascript">
+{`
+<DataTable value={this.state.cars} onValueChange={sortedData => console.log(sortedData)}>
+    <Column field="vin" header="Vin" sortable={true} />
+    <Column field="year" header="Year" sortable={true} />
+    <Column field="brand" header="Brand" sortable={true} />
+    <Column field="color" header="Color" sortable={true} />
+</DataTable>
+
+`}
+</CodeHighlight>
+
             <h3>Filtering</h3>
             <p>Filtering is enabled by setting the <i>filter</i> property as true on a column. Default match mode is "startsWith" and this can be configured using <i>filterMatchMode</i> property that also accepts "contains", "endsWith", "equals", "notEquals" and "in" as available modes.</p>
  <CodeHighlight className="language-jsx">
@@ -920,6 +933,19 @@ export class DataTableFilterDemo extends Component {
         );
     }
 }
+
+`}
+</CodeHighlight>
+
+            <p>Getting access to the filtered data is provided by the <i>onValueChange</i> callback.</p>
+            <CodeHighlight className="language-javascript">
+{`
+<DataTable value={this.state.cars} onValueChange={filteredData => console.log(filteredData)}>
+    <Column field="vin" header="Vin" filter={true} />
+    <Column field="year" header="Year" filter={true} />
+    <Column field="brand" header="Brand" filter={true} />
+    <Column field="color" header="Color" filter={true}  />
+</DataTable>
 
 `}
 </CodeHighlight>
@@ -2071,6 +2097,11 @@ export class DataTableLazyDemo extends Component {
                                 event.dragIndex: Index of the dragged row <br />
                                 event.dropIndex: Index of the drop location</td>
                             <td>Callback to invoke when a row is reordered.</td>
+                        </tr>
+                        <tr>
+                            <td>onValueChange</td>
+                            <td>value: Value displayed by the table.</td>
+                            <td>Callback to invoke after filtering and sorting to pass the rendered value.</td>
                         </tr>
                     </tbody>
                 </table>

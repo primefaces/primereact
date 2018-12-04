@@ -89,7 +89,8 @@ export class DataTable extends Component {
         onRowCollapse: null,
         onContextMenu: null,
         onColReorder: null,
-        onRowReorder: null
+        onRowReorder: null,
+        onValueChange: null
     }
 
     static propTypes = {
@@ -168,7 +169,8 @@ export class DataTable extends Component {
         onRowCollapse: PropTypes.func,
         onContextMenu: PropTypes.func,
         onColReorder: PropTypes.func,
-        onRowReorder: PropTypes.func
+        onRowReorder: PropTypes.func,
+        onValueChange: PropTypes.func
     };
 
     constructor(props) {
@@ -236,6 +238,10 @@ export class DataTable extends Component {
             this.props.onPage(event);
         else
             this.setState({first: event.first, rows: event.rows});
+
+        if (this.props.onValueChange) {
+            this.props.onValueChange();
+        }
     }
 
     createPaginator(position, totalRecords, data) {
@@ -281,6 +287,14 @@ export class DataTable extends Component {
                 multiSortMeta: multiSortMeta
             });
         }
+
+        if (this.props.onValueChange) {
+            this.props.onValueChange(this.processData({
+                sortField: sortField,
+                sortOrder: sortOrder,
+                multiSortMeta: multiSortMeta
+            }));
+        }
     }
 
     addSortMeta(meta, multiSortMeta) {
@@ -298,7 +312,7 @@ export class DataTable extends Component {
             multiSortMeta.push(meta);
     }
 
-    sortSingle(data) {
+    sortSingle(data, sortField, sortOrder) {
         let value = [...data];
 
         if(this.columnSortable && this.columnSortable === 'custom' && this.columnSortFunction) {
@@ -309,7 +323,6 @@ export class DataTable extends Component {
         }
         else {
             value.sort((data1, data2) => {
-                const sortField = this.getSortField();
                 const value1 = ObjectUtils.resolveFieldData(data1, sortField);
                 const value2 = ObjectUtils.resolveFieldData(data2, sortField);
                 let result = null;
@@ -325,17 +338,17 @@ export class DataTable extends Component {
                 else
                     result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
-                return (this.getSortOrder() * result);
+                return (sortOrder * result);
             });
         }
 
         return value;
     }
 
-    sortMultiple(data) {
+    sortMultiple(data, multiSortMeta) {
          let value = [...data];
          value.sort((data1, data2) => {
-            return this.multisortField(data1, data2, this.getMultiSortMeta(), 0);
+            return this.multisortField(data1, data2, multiSortMeta, 0);
          });
 
          return value;
@@ -389,6 +402,12 @@ export class DataTable extends Component {
                 first: 0,
                 filters: newFilters
             });
+        }
+
+        if (this.props.onValueChange) {
+            this.props.onValueChange(this.processData({
+                filters: newFilters
+            }));
         }
     }
 
@@ -813,19 +832,24 @@ export class DataTable extends Component {
         return filteredValue;
     }
 
-    processData() {
+    processData(localState) {
         let data = this.props.value;
         if(!this.props.lazy) {
             if(data && data.length) {
-                if(this.getSortField() || this.getMultiSortMeta()) {
+                let sortField = (localState && localState.sortField) || this.getSortField();
+                let sortOrder = (localState && localState.sortOrder) || this.getSortOrder();
+                let multiSortMeta = (localState && localState.multiSortMeta) || this.getMultiSortMeta();
+                
+                if(sortField || multiSortMeta) {
                     if(this.props.sortMode === 'single')
-                        data = this.sortSingle(data);
+                        data = this.sortSingle(data, sortField, sortOrder);
                     else if(this.props.sortMode === 'multiple')
-                        data = this.sortMultiple(data);
+                        data = this.sortMultiple(data, multiSortMeta);
                 }
 
-                if(this.getFilters() || this.props.globalFilter) {
-                    data = this.filterLocal(data);
+                let localFilters = (localState && localState.filters) || this.getFilters();
+                if (localFilters || this.props.globalFilter) {
+                    data = this.filterLocal(data, localFilters);
                 }
             }
         }

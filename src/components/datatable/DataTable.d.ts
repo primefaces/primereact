@@ -80,6 +80,7 @@ interface DataTableProps {
     onContextMenu?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
+    onValueChange?(value: any[]): void;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {
