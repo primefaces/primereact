@@ -23,7 +23,7 @@ export class Paginator extends Component {
         onPageChange: null,
         leftContent: null,
         rightContent: null,
-        currentPageReportTemplate: '({currentPage} of {totalPages})'
+        currentPageReportTemplate: null
     }
 
     static propsTypes = {

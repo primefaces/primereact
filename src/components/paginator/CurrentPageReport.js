@@ -6,13 +6,13 @@ export class CurrentPageReport extends Component {
     static defaultProps = {
         pageCount: null,
         page: null,
-        template: null
+        template: '({currentPage} of {totalPages})'
     }
 
     static propsTypes = {
         pageCount: PropTypes.number,
         page: PropTypes.number,
-        template: PropTypes.any
+        template: PropTypes.string
     }
     
     render() {

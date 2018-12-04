@@ -28,6 +28,7 @@ export class DataTable extends Component {
         paginatorRight: null,
         pageLinkSize: 5,
         rowsPerPageOptions: null,
+        currentPageReportTemplate: '({currentPage} of {totalPages})',
         first: null,
         rows: null,
         totalRecords: null,
@@ -108,6 +109,7 @@ export class DataTable extends Component {
         paginatorRight: PropTypes.any,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
+        currentPageReportTemplate: PropTypes.string,
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
@@ -239,8 +241,11 @@ export class DataTable extends Component {
     createPaginator(position, totalRecords, data) {
         let className = 'p-paginator-' + position;
 
-        return <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                          totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight}/>;
+        return (
+            <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
+                        totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
+                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} />
+        );
     }
 
     onSort(event) {

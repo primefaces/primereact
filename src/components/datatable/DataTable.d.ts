@@ -17,6 +17,7 @@ interface DataTableProps {
     paginatorRight?: any;
     pageLinkSize?: number;
     rowsPerPageOptions?: number[];
+    currentPageReportTemplate?: string;
     first?: number;
     rows?: number;
     totalRecords?: number;
