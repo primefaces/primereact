@@ -458,7 +458,6 @@ export class Dropdown extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = () => {
-                console.log('click');
                 if(!this.selfClick && !this.overlayClick) {
                     this.hide();
                 }
