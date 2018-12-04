@@ -6,18 +6,19 @@ export class CurrentPageReport extends Component {
     static defaultProps = {
         pageCount: null,
         page: null,
-        currentPageReportTemplate: null
+        template: null
     }
 
     static propsTypes = {
         pageCount: PropTypes.number,
         page: PropTypes.number,
-        currentPageReportTemplate: PropTypes.any
+        template: PropTypes.any
     }
     
     render() {
-        let text = this.props.currentPageReportTemplate ? this.props.currentPageReportTemplate :
-            '('+(this.props.page + 1)+' of '+(this.props.pageCount)+')';
+        let text = this.props.template
+            .replace("{currentPage}", this.props.page + 1)
+            .replace("{totalPages}", this.props.pageCount);
             
         return <span className="p-paginator-current">{text}</span>
     }

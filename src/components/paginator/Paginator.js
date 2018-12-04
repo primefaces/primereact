@@ -23,7 +23,7 @@ export class Paginator extends Component {
         onPageChange: null,
         leftContent: null,
         rightContent: null,
-        currentPageReportTemplate: null
+        currentPageReportTemplate: '({currentPage} of {totalPages})'
     }
 
     static propsTypes = {
@@ -174,7 +174,7 @@ export class Paginator extends Component {
                 break;
                 
                 case 'CurrentPageReport':
-                    element = <CurrentPageReport currentPageReportTemplate={this.props.currentPageReportTemplate} key={key} page={this.getPage()} pageCount={this.getPageCount()} />;
+                    element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key} page={this.getPage()} pageCount={this.getPageCount()} />;
                 break;
                 
                 default:
