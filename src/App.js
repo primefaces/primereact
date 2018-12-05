@@ -364,12 +364,16 @@ class App extends Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            activeThemes: false
+        };
         this.theme = 'nova-light';
         this.changeTheme = this.changeTheme.bind(this);
         this.openMenu = this.openMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
         this.onSidebarClick = this.onSidebarClick.bind(this);
+        this.onThemesClick = this.onThemesClick.bind(this);
+        this.onDocumentClick = this.onDocumentClick.bind(this);
     }
 
     changeTheme(event, theme, dark) {
@@ -390,6 +394,8 @@ class App extends Component {
             this.darkDemoStyle = null;
         }
 
+        this.setState({activeThemes: false})
+
         event.preventDefault();
     }
 
@@ -409,10 +415,26 @@ class App extends Component {
         }
     }
 
+    onThemesClick(event) {
+        this.topbarItemClick = true;
+        this.setState({activeThemes: !this.state.activeThemes})
+    }
+
+    onDocumentClick(event) {
+        if(!this.topbarItemClick) {
+            this.setState({
+                activeThemes: false
+            });
+        }
+        
+        this.topbarItemClick = false;
+
+    }
+
     render() {
 
         return (
-            <div className='layout-wrapper'>
+            <div className='layout-wrapper' onClick={this.onDocumentClick}>
                 <div id="layout-topbar">
                     <a className="menu-button" onClick={this.openMenu}>
                         <i className="pi pi-bars"></i>
@@ -427,8 +449,8 @@ class App extends Component {
                         </li>
 
                         <li className="topbar-menu-themes">
-                            <a>THEMES</a>
-                            <ul>
+                            <a onClick={this.onThemesClick}>THEMES</a>
+                            <ul className={classNames({'active-top-menu': this.state.activeThemes})}>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
                                 <li><a href="https://www.primefaces.org/designer/primereact"><i className="pi pi-fw pi-cog" /><span>Designer</span></a></li>
