@@ -62,15 +62,32 @@ export class SplitButton extends Component {
         
     show() {
         this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
-        this.alignPanel();
-        DomHandler.fadeIn(this.panel.element, 250);
         this.panel.element.style.display = 'block';
+
+        setTimeout(() => {
+            DomHandler.addClass(this.panel.element, 'p-menu-overlay-visible');
+            DomHandler.removeClass(this.panel.element, 'p-menu-overlay-hidden');
+        }, 1);
+
+        this.alignPanel();
         this.bindDocumentListener();
     }
     
     hide() {
-        this.panel.element.style.display = 'none';
+        if (this.panel && this.panel.element) {
+            DomHandler.addClass(this.panel.element, 'p-menu-overlay-hidden');
+            DomHandler.removeClass(this.panel.element, 'p-menu-overlay-visible');
+
+            setTimeout(() => {
+                if (this.panel && this.panel.element) {
+                    this.panel.element.style.display = 'none';
+                    DomHandler.removeClass(this.panel.element, 'p-menu-overlay-hidden');
+                }
+            }, 150);
+        }
+
         this.unbindDocumentListener();
+        this.dropdownClick = false;
     }
 
     alignPanel() {
