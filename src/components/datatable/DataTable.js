@@ -955,7 +955,9 @@ export class DataTable extends Component {
         if(this.props.reorderableColumns && this.state.columnOrder) {
             let orderedColumns = [];
             for(let columnKey of this.state.columnOrder) {
-                orderedColumns.push(this.findColumnByKey(columns, columnKey));
+                let column = this.findColumnByKey(columns, columnKey)
+                if(column)
+                    orderedColumns.push();
             }
                         
             return orderedColumns;
