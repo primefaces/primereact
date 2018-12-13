@@ -10,7 +10,8 @@ export class MultiSelectDemo extends Component {
         super();
         this.state = {
             cars1: [],
-            cars2: []
+            cars2: [],
+            cars3: []
         };
         this.carTemplate = this.carTemplate.bind(this);
         this.selectedCarTemplate = this.selectedCarTemplate.bind(this);
@@ -72,7 +73,12 @@ export class MultiSelectDemo extends Component {
 
                     <h3>Templating</h3>
                     <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
-                                 style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate}/>
+                            style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate}/>
+
+                    <h3>Custom label</h3>
+                    <MultiSelect value={this.state.cars3} options={cars} onChange={(e) => this.setState({cars3: e.value})}
+                            label={this.state.cars3.length ? `${this.state.cars3.length} selected` : 'Choose'}
+                            style={{minWidth: '12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
                 </div>
                 
                 <MultiSelectDoc />
@@ -214,6 +220,17 @@ selectedCarTemplate(option) {
 `}
 </CodeHighlight>
 
+            <h3>Custom label</h3>
+            <p>Label allows customize the label text instead of show the default label or the selected items. If label is not present defaultLabel and selections are shown.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})}
+          label={this.state.cars.length ? \`\${this.state.cars.length} selected\` : 'Choose'}/>
+
+`}
+</CodeHighlight>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -267,6 +284,12 @@ selectedCarTemplate(option) {
                             <td>string</td>
                             <td>200px</td>
                             <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
+                        </tr>
+                        <tr>
+                            <td>label</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Label to display instead of defaultLabel or selections.</td>
                         </tr>
                         <tr>
                             <td>defaultLabel</td>
@@ -415,7 +438,8 @@ export class MultiSelectDemo extends Component {
         super();
         this.state = {
             cars1: [],
-            cars2: []
+            cars2: [],
+            cars3: []
         };
         this.carTemplate = this.carTemplate.bind(this);
         this.selectedCarTemplate = this.selectedCarTemplate.bind(this);
@@ -477,7 +501,12 @@ export class MultiSelectDemo extends Component {
 
                     <h3>Templating</h3>
                     <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
-                                 style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate}/>
+                            style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate}/>
+
+                    <h3>Custom label</h3>
+                    <MultiSelect value={this.state.cars3} options={cars} onChange={(e) => this.setState({cars3: e.value})}
+                            label={this.state.cars3.length ? \`\${this.state.cars3.length} selected\` : 'Choose'}
+                            style={{minWidth: '12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
                 </div>
             </div>
         );

@@ -18,6 +18,7 @@ export class MultiSelect extends Component {
         style: null,
         className: null,
         scrollHeight: '200px',
+        label: null,
         defaultLabel: 'Choose',
         disabled: false,
         filter: false,
@@ -38,6 +39,7 @@ export class MultiSelect extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
+        label: PropTypes.string,
         defaultLabel: PropTypes.string,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
@@ -346,7 +348,10 @@ export class MultiSelect extends Component {
     }
 
     renderLabel() {
-        if(this.props.selectedItemTemplate) {
+        if (this.props.label) {
+            return this.props.label;
+        }
+        else if(this.props.selectedItemTemplate) {
             if(this.props.value && this.props.value.length) {
                  return this.props.value.map((val, index) => {
                     return (
