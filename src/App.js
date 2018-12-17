@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import classNames from 'classnames';
-import 'nanoscroller';
-import jQuery from "jquery";
 import './resources/style/primereact.css';
-import 'nanoscroller/bin/css/nanoscroller.css';
 import 'fullcalendar/dist/fullcalendar.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'prismjs/themes/prism-coy.css';
-import './sass/App.css';
+import './sass/App.scss';
 
 import { AccordionDemo } from './showcase/accordion/AccordionDemo';
 import { AutoCompleteDemo } from './showcase/autocomplete/AutoCompleteDemo';
@@ -143,215 +140,213 @@ class AppMenu extends Component {
 
     openMenu(event, val) {
         this.setState({ activeMenu:this.state.activeMenu===val?-1: val });
-        setTimeout(() => jQuery(this.scrollContainer).nanoScroller(), 350);
+        //setTimeout(() => jQuery(this.scrollContainer).nanoScroller(), 350);
         event.preventDefault();
     }
 
     componentDidMount() {
-        jQuery(this.scrollContainer).nanoScroller({ flash: true });
+        //jQuery(this.scrollContainer).nanoScroller({ flash: true });
     }
 
     componentWillUnmount() {
-        jQuery(this.scrollContainer).nanoScroller({ destroy: true });
+        //jQuery(this.scrollContainer).nanoScroller({ destroy: true });
     }
 
     render() {
         return (
-            <div ref={(el) => this.scrollContainer = el} className="nano">
-                <div className="nano-content">
-                    <div className="layout-menu">
-                        <a id="menu_input"  onClick={(event) => this.openMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
-                            <img alt="input" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/input.svg"></img>
-                            <img alt="input" className="layout-menu-icon-active" src="showcase/resources/images/mono/input-active.svg"></img>
-                            <span>Input</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 0, 'submenushow': this.state.activeMenu === 0 })}>
-                            <div>
-                                <Link to="/autocomplete">&#9679; AutoComplete</Link>
-                                <Link to="/calendar">&#9679; Calendar</Link>
-                                <Link to="/checkbox">&#9679; Checkbox</Link>
-                                <Link to="/colorpicker">&#9679; ColorPicker</Link>
-                                <Link to="/chips">&#9679; Chips</Link>
-                                <Link to="/dropdown">&#9679; Dropdown</Link>
-                                <Link to="/editor">&#9679; Editor</Link>
-                                <Link to="/inputmask">&#9679; InputMask</Link>
-                                <Link to="/inputgroup">&#9679; InputGroup</Link>
-                                <Link to="/inputswitch">&#9679; InputSwitch</Link>
-                                <Link to="/inputtext">&#9679; InputText</Link>
-                                <Link to="/inputtextarea">&#9679; InputTextarea</Link>
-                                <Link to="/keyfilter">&#9679; KeyFilter</Link>
-                                <Link to="/listbox">&#9679; Listbox</Link>
-                                <Link to="/multiselect">&#9679; MultiSelect</Link>
-                                <Link to="/password">&#9679; Password</Link>
-                                <Link to="/radiobutton">&#9679; RadioButton</Link>
-                                <Link to="/rating">&#9679; Rating</Link>
-                                <Link to="/selectbutton">&#9679; SelectButton</Link>
-                                <Link to="/slider">&#9679; Slider</Link>
-                                <Link to="/spinner">&#9679; Spinner</Link>
-                                <Link to="/tristatecheckbox">&#9679; TriState</Link>
-                                <Link to="/togglebutton">&#9679; ToggleButton</Link>
-                            </div>
+            <div ref={(el) => this.scrollContainer = el}>
+                <div className="layout-menu">
+                    <a id="menu_input"  onClick={(event) => this.openMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
+                        <img alt="input" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/input.svg"></img>
+                        <img alt="input" className="layout-menu-icon-active" src="showcase/resources/images/mono/input-active.svg"></img>
+                        <span>Input</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 0, 'submenushow': this.state.activeMenu === 0 })}>
+                        <div>
+                            <Link to="/autocomplete">&#9679; AutoComplete</Link>
+                            <Link to="/calendar">&#9679; Calendar</Link>
+                            <Link to="/checkbox">&#9679; Checkbox</Link>
+                            <Link to="/colorpicker">&#9679; ColorPicker</Link>
+                            <Link to="/chips">&#9679; Chips</Link>
+                            <Link to="/dropdown">&#9679; Dropdown</Link>
+                            <Link to="/editor">&#9679; Editor</Link>
+                            <Link to="/inputmask">&#9679; InputMask</Link>
+                            <Link to="/inputgroup">&#9679; InputGroup</Link>
+                            <Link to="/inputswitch">&#9679; InputSwitch</Link>
+                            <Link to="/inputtext">&#9679; InputText</Link>
+                            <Link to="/inputtextarea">&#9679; InputTextarea</Link>
+                            <Link to="/keyfilter">&#9679; KeyFilter</Link>
+                            <Link to="/listbox">&#9679; Listbox</Link>
+                            <Link to="/multiselect">&#9679; MultiSelect</Link>
+                            <Link to="/password">&#9679; Password</Link>
+                            <Link to="/radiobutton">&#9679; RadioButton</Link>
+                            <Link to="/rating">&#9679; Rating</Link>
+                            <Link to="/selectbutton">&#9679; SelectButton</Link>
+                            <Link to="/slider">&#9679; Slider</Link>
+                            <Link to="/spinner">&#9679; Spinner</Link>
+                            <Link to="/tristatecheckbox">&#9679; TriState</Link>
+                            <Link to="/togglebutton">&#9679; ToggleButton</Link>
                         </div>
+                    </div>
 
-                        <a id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
-                            <img alt="button" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/button.svg"></img>
-                            <img alt="button" className="layout-menu-icon-active" src="showcase/resources/images/mono/button-active.svg"></img>
-                            <span>Button</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 1, 'submenushow': this.state.activeMenu === 1 })}>
-                            <div>
-                                <Link to="/button">&#9679; Button</Link>
-                                <Link to="/splitbutton">&#9679; SplitButton</Link>
-                            </div>
+                    <a id="button_menutitle" onClick={(event) => this.openMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
+                        <img alt="button" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/button.svg"></img>
+                        <img alt="button" className="layout-menu-icon-active" src="showcase/resources/images/mono/button-active.svg"></img>
+                        <span>Button</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 1, 'submenushow': this.state.activeMenu === 1 })}>
+                        <div>
+                            <Link to="/button">&#9679; Button</Link>
+                            <Link to="/splitbutton">&#9679; SplitButton</Link>
                         </div>
+                    </div>
 
-                        <a id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
-                            <img alt="data" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/data.svg"></img>
-                            <img alt="data" className="layout-menu-icon-active" src="showcase/resources/images/mono/data-active.svg"></img>
-                            <span>Data</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 2, 'submenushow': this.state.activeMenu === 2 })}>
-                            <div>
-                                <Link to="/dataview">&#9679; DataView</Link>
-                                <Link to="/datatable">&#9679; DataTable</Link>
-                                <Link to="/datascroller">&#9679; DataScroller</Link>
-                                <Link to="/gmap">&#9679; Google Maps</Link>
-                                <Link to="/fullcalendar">&#9679; FullCalendar</Link>
-                                <Link to="/orderlist">&#9679; OrderList</Link>
-                                <Link to="/organizationchart">&#9679; Org Chart</Link>
-                                <Link to="/paginator">&#9679; Paginator</Link>
-                                <Link to="/picklist">&#9679; PickList</Link>
-                                <Link to="/tree">&#9679; Tree</Link>
-                                <Link to="/treetable">&#9679; TreeTable <span className="menuitem-badge">NEW</span></Link>
-                            </div>
+                    <a id="data_menutitle" onClick={(event) => this.openMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
+                        <img alt="data" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/data.svg"></img>
+                        <img alt="data" className="layout-menu-icon-active" src="showcase/resources/images/mono/data-active.svg"></img>
+                        <span>Data</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 2, 'submenushow': this.state.activeMenu === 2 })}>
+                        <div>
+                            <Link to="/dataview">&#9679; DataView</Link>
+                            <Link to="/datatable">&#9679; DataTable</Link>
+                            <Link to="/datascroller">&#9679; DataScroller</Link>
+                            <Link to="/gmap">&#9679; Google Maps</Link>
+                            <Link to="/fullcalendar">&#9679; FullCalendar</Link>
+                            <Link to="/orderlist">&#9679; OrderList</Link>
+                            <Link to="/organizationchart">&#9679; Org Chart</Link>
+                            <Link to="/paginator">&#9679; Paginator</Link>
+                            <Link to="/picklist">&#9679; PickList</Link>
+                            <Link to="/tree">&#9679; Tree</Link>
+                            <Link to="/treetable">&#9679; TreeTable <span className="menuitem-badge">NEW</span></Link>
                         </div>
+                    </div>
 
-                        <a id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
-                            <img alt="panel" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/panel.svg"></img>
-                            <img alt="panel" className="layout-menu-icon-active" src="showcase/resources/images/mono/panel-active.svg"></img>
-                            <span>Panel</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 3, 'submenushow': this.state.activeMenu === 3 })}>
-                            <div>
-                                <Link to="/accordion">&#9679; Accordion</Link>
-                                <Link to="/card">&#9679; Card</Link>
-                                <Link to="/deferredcontent">&#9679; Deferred</Link>
-                                <Link to="/fieldset">&#9679; Fieldset</Link>
-                                <Link to="/panel">&#9679; Panel</Link>
-                                <Link to="/flexgrid">&#9679; FlexGrid  <span className="menuitem-badge">NEW</span></Link>
-                                <Link to="/scrollpanel">&#9679; ScrollPanel</Link>
-                                <Link to="/tabview">&#9679; TabView</Link>
-                                <Link to="/toolbar">&#9679; Toolbar</Link>
-                            </div>
+                    <a id="menu_panel" onClick={(event) => this.openMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
+                        <img alt="panel" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/panel.svg"></img>
+                        <img alt="panel" className="layout-menu-icon-active" src="showcase/resources/images/mono/panel-active.svg"></img>
+                        <span>Panel</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 3, 'submenushow': this.state.activeMenu === 3 })}>
+                        <div>
+                            <Link to="/accordion">&#9679; Accordion</Link>
+                            <Link to="/card">&#9679; Card</Link>
+                            <Link to="/deferredcontent">&#9679; Deferred</Link>
+                            <Link to="/fieldset">&#9679; Fieldset</Link>
+                            <Link to="/panel">&#9679; Panel</Link>
+                            <Link to="/flexgrid">&#9679; FlexGrid  <span className="menuitem-badge">NEW</span></Link>
+                            <Link to="/scrollpanel">&#9679; ScrollPanel</Link>
+                            <Link to="/tabview">&#9679; TabView</Link>
+                            <Link to="/toolbar">&#9679; Toolbar</Link>
                         </div>
+                    </div>
 
-                        <a id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
-                            <img alt="overlay" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/overlay.svg"></img>
-                            <img alt="overlay" className="layout-menu-icon-active" src="showcase/resources/images/mono/overlay-active.svg"></img>
-                            <span>Overlay</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 4, 'submenushow': this.state.activeMenu === 4 })}>
-                            <div>
-                                <Link to="/dialog">&#9679; Dialog</Link>
-                                <Link to="/lightbox">&#9679; Lightbox</Link>
-                                <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
-                                <Link to="/sidebar">&#9679; Sidebar</Link>
-                                <Link to="/tooltip">&#9679; Tooltip</Link>
-                            </div>
+                    <a id="menu_overlay"  onClick={(event) => this.openMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
+                        <img alt="overlay" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/overlay.svg"></img>
+                        <img alt="overlay" className="layout-menu-icon-active" src="showcase/resources/images/mono/overlay-active.svg"></img>
+                        <span>Overlay</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 4, 'submenushow': this.state.activeMenu === 4 })}>
+                        <div>
+                            <Link to="/dialog">&#9679; Dialog</Link>
+                            <Link to="/lightbox">&#9679; Lightbox</Link>
+                            <Link to="/overlaypanel">&#9679; OverlayPanel</Link>
+                            <Link to="/sidebar">&#9679; Sidebar</Link>
+                            <Link to="/tooltip">&#9679; Tooltip</Link>
                         </div>
+                    </div>
 
-                        <a id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
-                            <img alt="file" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/file.svg"></img>
-                            <img alt="file" className="layout-menu-icon-active" src="showcase/resources/images/mono/file-active.svg"></img>
-                            <span>File</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 5, 'submenushow': this.state.activeMenu === 5 })}>
-                            <div>
-                                <Link to="/fileupload">&#9679; Upload</Link>
-                            </div>
+                    <a id="menu_file" onClick={(event) => this.openMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
+                        <img alt="file" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/file.svg"></img>
+                        <img alt="file" className="layout-menu-icon-active" src="showcase/resources/images/mono/file-active.svg"></img>
+                        <span>File</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 5, 'submenushow': this.state.activeMenu === 5 })}>
+                        <div>
+                            <Link to="/fileupload">&#9679; Upload</Link>
                         </div>
+                    </div>
 
-                        <a id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
-                            <img alt="menu" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/menu.svg"></img>
-                            <img alt="menu" className="layout-menu-icon-active" src="showcase/resources/images/mono/menu-active.svg"></img>
-                            <span>Menu</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 6, 'submenushow': this.state.activeMenu === 6 })}>
-                            <div>
-                                <Link to="/menumodel">&#9679; MenuModel</Link>
-                                <Link to="/menu">&#9679; Menu</Link>
-                                <Link to="/tabmenu">&#9679; TabMenu</Link>
-                                <Link to="/breadcrumb">&#9679; Breadcrumb</Link>
-                                <Link to="/tieredmenu">&#9679; TieredMenu</Link>
-                                <Link to="/menubar">&#9679; Menubar</Link>
-                                <Link to="/contextmenu">&#9679; ContextMenu</Link>
-                                <Link to="/panelmenu">&#9679; PanelMenu</Link>
-                                <Link to="/steps">&#9679; Steps</Link>
-                                <Link to="/megamenu">&#9679; MegaMenu</Link>
-                                <Link to="/slidemenu">&#9679; SlideMenu</Link>
-                            </div>
+                    <a id="menu_menu" onClick={(event) => this.openMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
+                        <img alt="menu" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/menu.svg"></img>
+                        <img alt="menu" className="layout-menu-icon-active" src="showcase/resources/images/mono/menu-active.svg"></img>
+                        <span>Menu</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 6, 'submenushow': this.state.activeMenu === 6 })}>
+                        <div>
+                            <Link to="/menumodel">&#9679; MenuModel</Link>
+                            <Link to="/menu">&#9679; Menu</Link>
+                            <Link to="/tabmenu">&#9679; TabMenu</Link>
+                            <Link to="/breadcrumb">&#9679; Breadcrumb</Link>
+                            <Link to="/tieredmenu">&#9679; TieredMenu</Link>
+                            <Link to="/menubar">&#9679; Menubar</Link>
+                            <Link to="/contextmenu">&#9679; ContextMenu</Link>
+                            <Link to="/panelmenu">&#9679; PanelMenu</Link>
+                            <Link to="/steps">&#9679; Steps</Link>
+                            <Link to="/megamenu">&#9679; MegaMenu</Link>
+                            <Link to="/slidemenu">&#9679; SlideMenu</Link>
                         </div>
+                    </div>
 
-                        <a id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
-                            <img alt="charts" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/charts.svg"></img>
-                            <img alt="charts" className="layout-menu-icon-active" src="showcase/resources/images/mono/charts-active.svg"></img>
-                            <span>Chart</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 7, 'submenushow': this.state.activeMenu === 7 })}>
-                            <div>
-                                <Link to="/chartdemo">&#9679; ChartModel</Link>
-                                <Link to="/piechart">&#9679; Pie</Link>
-                                <Link to="/doughnutchart">&#9679; Doughnut</Link>
-                                <Link to="/barchart">&#9679; Bar</Link>
-                                <Link to="/linechart">&#9679; Line</Link>
-                                <Link to="/polarareachart">&#9679; PolarArea</Link>
-                                <Link to="/radarchart">&#9679; Radar</Link>
-                                <Link to="/combochart">&#9679; Combo</Link>
-                            </div>
+                    <a id="menu_chart" onClick={(event) => this.openMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
+                        <img alt="charts" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/charts.svg"></img>
+                        <img alt="charts" className="layout-menu-icon-active" src="showcase/resources/images/mono/charts-active.svg"></img>
+                        <span>Chart</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 7, 'submenushow': this.state.activeMenu === 7 })}>
+                        <div>
+                            <Link to="/chartdemo">&#9679; ChartModel</Link>
+                            <Link to="/piechart">&#9679; Pie</Link>
+                            <Link to="/doughnutchart">&#9679; Doughnut</Link>
+                            <Link to="/barchart">&#9679; Bar</Link>
+                            <Link to="/linechart">&#9679; Line</Link>
+                            <Link to="/polarareachart">&#9679; PolarArea</Link>
+                            <Link to="/radarchart">&#9679; Radar</Link>
+                            <Link to="/combochart">&#9679; Combo</Link>
                         </div>
+                    </div>
 
-                        <a id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
-                            <img alt="message" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/message.svg"></img>
-                            <img alt="message" className="layout-menu-icon-active" src="showcase/resources/images/mono/message-active.svg"></img>
-                            <span>Messages</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 8, 'submenushow': this.state.activeMenu === 8 })}>
-                            <div>
-                                <Link to="/messages">&#9679; Messages</Link>
-                                <Link to="/growl">&#9679; Growl</Link>
-                            </div>
+                    <a id="menu_messages" onClick={(event) => this.openMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
+                        <img alt="message" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/message.svg"></img>
+                        <img alt="message" className="layout-menu-icon-active" src="showcase/resources/images/mono/message-active.svg"></img>
+                        <span>Messages</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 8, 'submenushow': this.state.activeMenu === 8 })}>
+                        <div>
+                            <Link to="/messages">&#9679; Messages</Link>
+                            <Link to="/growl">&#9679; Growl</Link>
                         </div>
+                    </div>
 
-                        <a id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
-                            <img alt="multimedia" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/multimedia.svg"></img>
-                            <img alt="multimedia" className="layout-menu-icon-active" src="showcase/resources/images/mono/multimedia-active.svg"></img>
-                            <span>Multimedia</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 9, 'submenushow': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
+                    <a id="menu_multimedia" onClick={(event) => this.openMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
+                        <img alt="multimedia" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/multimedia.svg"></img>
+                        <img alt="multimedia" className="layout-menu-icon-active" src="showcase/resources/images/mono/multimedia-active.svg"></img>
+                        <span>Multimedia</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 9, 'submenushow': this.state.activeMenu === 9 })} style={{ display: 'none' }}>
 
-                        </div>
+                    </div>
 
-                        <a id="menu_dnd" onClick={(event) => this.openMenu(event, 10)} className={classNames({ 'active-menuitem': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
-                            <img alt="dragdrop" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/dragdrop.svg"></img>
-                            <img alt="dragdrop" className="layout-menu-icon-active" src="showcase/resources/images/mono/dragdrop-active.svg"></img>
-                            <span>DragDrop</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 10, 'submenushow': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
+                    <a id="menu_dnd" onClick={(event) => this.openMenu(event, 10)} className={classNames({ 'active-menuitem': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
+                        <img alt="dragdrop" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/dragdrop.svg"></img>
+                        <img alt="dragdrop" className="layout-menu-icon-active" src="showcase/resources/images/mono/dragdrop-active.svg"></img>
+                        <span>DragDrop</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 10, 'submenushow': this.state.activeMenu === 10 })} style={{ display: 'none' }}>
 
-                        </div>
+                    </div>
 
-                        <a id="menu_misc" onClick={(event) => this.openMenu(event, 11)} className={classNames({ 'active-menuitem': this.state.activeMenu === 11 })}>
-                            <img alt="misc" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/misc.svg"></img>
-                            <img alt="misc" className="layout-menu-icon-active" src="showcase/resources/images/mono/misc-active.svg"></img>
-                            <span>Misc</span>
-                        </a>
-                        <div className={classNames({ 'submenuhide': this.state.activeMenu !== 11, 'submenushow': this.state.activeMenu === 11 })}>
-                            <div>
-                                <Link to="/progressbar">&#9679; ProgressBar</Link>
-                                <Link to="/captcha">&#9679; Captcha</Link>
-                                <Link to="/inplace">&#9679; Inplace</Link>
-                                <Link to="/progressspinner">&#9679; ProgressSpinner</Link>
-                            </div>
+                    <a id="menu_misc" onClick={(event) => this.openMenu(event, 11)} className={classNames({ 'active-menuitem': this.state.activeMenu === 11 })}>
+                        <img alt="misc" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/misc.svg"></img>
+                        <img alt="misc" className="layout-menu-icon-active" src="showcase/resources/images/mono/misc-active.svg"></img>
+                        <span>Misc</span>
+                    </a>
+                    <div className={classNames({ 'submenuhide': this.state.activeMenu !== 11, 'submenushow': this.state.activeMenu === 11 })}>
+                        <div>
+                            <Link to="/progressbar">&#9679; ProgressBar</Link>
+                            <Link to="/captcha">&#9679; Captcha</Link>
+                            <Link to="/inplace">&#9679; Inplace</Link>
+                            <Link to="/progressspinner">&#9679; ProgressSpinner</Link>
                         </div>
                     </div>
                 </div>
