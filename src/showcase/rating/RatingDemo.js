@@ -19,7 +19,7 @@ export class RatingDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Rating</h1>
-                        <p>Rating components is a star based selection input.</p>
+                        <p>Rating componentsis a star based selection input.</p>
                     </div>
                 </div>
 
