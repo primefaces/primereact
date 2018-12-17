@@ -32,8 +32,7 @@ export class IconsPage extends Component {
             this.setState({ filteredIcons : this.icons })
         }
         if(this.state.icons) {
-            let filtered = this.state.icons.filter( it => {
-                return it.icon.tags[0].includes(event.target.value)});
+            let filtered = this.state.icons.filter( it => it.icon.tags[0].indexOf(event.target.value) !== -1);
 
             this.setState({
                 filteredIcons :filtered

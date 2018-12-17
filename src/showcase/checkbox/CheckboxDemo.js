@@ -36,15 +36,15 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="p-col-12">
-                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1}></Checkbox>
                             <label htmlFor="cb1" className="p-checkbox-label">New York</label>
                         </div>
                         <div className="p-col-12">
-                            <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.indexOf('San Francisco') !== -1}></Checkbox>
                             <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
                         </div>
                         <div className="p-col-12">
-                            <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.indexOf('Los Angeles') !== -1}></Checkbox>
                             <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
                         </div>
                     </div>
@@ -317,15 +317,15 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
                         <div className="p-col-12">
-                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
+                            <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1}></Checkbox>
                             <label htmlFor="cb1" className="p-checkbox-label">New York</label>
                         </div>
                         <div className="p-col-12">
-                            <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.includes('San Francisco')}></Checkbox>
+                            <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.indexOf('San Francisco') !== -1}></Checkbox>
                             <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
                         </div>
                         <div className="p-col-12">
-                            <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
+                            <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.indexOf('Los Angeles') !== -1}></Checkbox>
                             <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
                         </div>
                     </div>
