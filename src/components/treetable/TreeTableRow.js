@@ -456,13 +456,13 @@ export class TreeTableRow extends Component {
 
     renderToggler() {
         const expanded = this.isExpanded();
-        const iconClassName = classNames('pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
+        const iconClassName = classNames('"p-treetable-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
         const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
 
         return (
-            <a className="p-treetable-toggler p-unselectable-text" onClick={this.onTogglerClick} style={style}>
+            <button className="p-treetable-toggler p-unselectable-text p-link" onClick={this.onTogglerClick} style={style}>
                 <i className={iconClassName} ></i>
-            </a>
+            </button>
         );
     }
 

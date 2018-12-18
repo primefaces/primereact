@@ -150,9 +150,9 @@ export class Lightbox extends Component {
         var images;
         var contentText,contentFrame;
 
-        var leftButton=classNames('p-lightbox-nav-left',
+        var leftButton=classNames('p-lightbox-nav-left p-link',
             {'p-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
-        var rightButton=classNames('p-lightbox-nav-right',
+        var rightButton=classNames('p-lightbox-nav-right p-link',
             {'p-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
         var containerClassName = classNames('p-lightbox p-component p-hidden', {'p-lightbox-loading':this.state.loading});
 
@@ -187,9 +187,9 @@ export class Lightbox extends Component {
                      style={{transitionProperty:'all',transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing, display:this.state.visible?'block':'none',
                                 zIndex:this.zindex }} ref={el=>this.panel=el } onClick={()=>this.preventDocumentClickListener = true}>
                     <div className="p-lightbox-content-wrapper">
-                        <a className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev.bind(this)}>
+                        <button className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev.bind(this)}>
                             <span className="p-lightbox-nav-icon pi pi-chevron-left"></span>
-                        </a>
+                        </button>
                         <div className="p-lightbox-content" ref={el=>this.content=el}
                              style={{transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing}}>
                             <img ref={el => this.img = el} src={this.state.currentImage ? this.state.currentImage.source : ''}
@@ -197,9 +197,9 @@ export class Lightbox extends Component {
                             {contentFrame}
                         </div>
 
-                        <a className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next.bind(this)}>
+                        <button className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next.bind(this)}>
                             <span className="p-lightbox-nav-icon pi pi-chevron-right"></span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

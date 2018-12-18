@@ -134,3 +134,12 @@ button {
     -webkit-transition: transform .3s, opacity .15s;
     transition: transform .3s, opacity .15s;
 }
+
+.p-link {
+	text-align: left;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+}

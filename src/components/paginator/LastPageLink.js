@@ -15,12 +15,12 @@ export class LastPageLink extends Component {
     }
     
     render() {
-        let className = classNames('p-paginator-last p-paginator-element', {'p-disabled': this.props.disabled});
+        let className = classNames('p-paginator-last p-paginator-element p-link', {'p-disabled': this.props.disabled});
         
         return (
-            <a className={className} onClick={this.props.onClick} tabIndex={this.props.disabled ? -1 : null}>
+            <button className={className} onClick={this.props.onClick} disabled={this.props.disabled}>
                 <span className="p-paginator-icon pi pi-step-forward"></span>
-            </a>
+            </button>
         );
     }
 }

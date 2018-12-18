@@ -1514,17 +1514,17 @@ export class Calendar extends Component {
 
     renderBackwardNavigator() {
         return (
-            <a className="p-datepicker-prev" onClick={this.navBackward}>
-                <span className="pi pi-chevron-left"></span>
-            </a>
+            <button className="p-datepicker-prev p-link" onClick={this.navBackward}>
+                <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
+            </button>
         );
     }
 
     renderForwardNavigator() {
         return (
-            <a className="p-datepicker-next" onClick={this.navForward}>
-                <span className="pi pi-chevron-right"></span>
-            </a>
+            <button className="p-datepicker-next p-link" onClick={this.navForward}>
+                <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
+            </button>
         );
     }
 
@@ -1601,20 +1601,12 @@ export class Calendar extends Component {
 
     renderDateCellContent(date, className) {
         const content = this.props.dateTemplate ? this.props.dateTemplate(date) : date.day;
-        if (date.selectable) {
-            return (
-                <a className={className} onClick={e => this.onDateSelect(e, date)}>
-                    {content}
-                </a>
-            );
-        }
-        else {
-            return (
-                <span className={className}>
-                    {content}
-                </span>
-            );
-        }
+
+        return (
+            <span className={className} onClick={e => this.onDateSelect(e, date)}>
+                {content}
+            </span>
+        );
     }
 
     renderWeek(weekDates) {
@@ -1706,9 +1698,9 @@ export class Calendar extends Component {
         const monthName = this.props.locale.monthNamesShort[index];
 
         return (
-            <a key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)}>
+            <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)}>
                 {monthName}                                
-            </a>
+            </span>
         );
     }
 
@@ -1772,13 +1764,13 @@ export class Calendar extends Component {
         
         return (
             <div className="p-hour-picker">
-                <a onClick={this.incrementHour}>
+                <button className="p-link" onClick={this.incrementHour}>
                     <span className="pi pi-chevron-up"></span>
-                </a>
+                </button>
                 <span>{hourDisplay}</span>
-                <a onClick={this.decrementHour}>
+                <button className="p-link" onClick={this.decrementHour}>
                     <span className="pi pi-chevron-down"></span>
-                </a>
+                </button>
             </div>
         );
     }
@@ -1790,13 +1782,13 @@ export class Calendar extends Component {
         
         return (
             <div className="p-minute-picker">
-                <a onClick={this.incrementMinute}>
+                <button className="p-link" onClick={this.incrementMinute}>
                     <span className="pi pi-chevron-up"></span>
-                </a>
+                </button>
                 <span>{minuteDisplay}</span>
-                <a onClick={this.decrementMinute}>
+                <button className="p-link" onClick={this.decrementMinute}>
                     <span className="pi pi-chevron-down"></span>
-                </a>
+                </button>
             </div>
         );
     }
@@ -1809,13 +1801,13 @@ export class Calendar extends Component {
             
             return (
                 <div className="p-second-picker">
-                    <a onClick={this.incrementSecond}>
+                    <button className="p-link" onClick={this.incrementSecond}>
                         <span className="pi pi-chevron-up"></span>
-                    </a>
+                    </button>
                     <span>{secondDisplay}</span>
-                    <a onClick={this.decrementSecond}>
+                    <button className="p-link" onClick={this.decrementSecond}>
                         <span className="pi pi-chevron-down"></span>
-                    </a>
+                    </button>
                 </div>
             );
         }
@@ -1832,13 +1824,13 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-ampm-picker">
-                    <a onClick={this.toggleAmPm}>
+                    <button className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
-                    </a>
+                    </button>
                     <span>{display}</span>
-                    <a onClick={this.toggleAmPm}>
+                    <button className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
-                    </a>
+                    </button>
                 </div>
             );
         }
@@ -1850,13 +1842,13 @@ export class Calendar extends Component {
     renderSeparator() {
         return (
             <div className="p-separator">
-                <a>
+                <span className="p-separator-spacer">
                     <span className="pi pi-chevron-up"></span>
-                </a>
+                </span>
                 <span>:</span>
-                <a>
+                <span className="p-separator-spacer">
                     <span className="pi pi-chevron-down"></span>
-                </a>
+                </span>
             </div>
         );
     }

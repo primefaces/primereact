@@ -45,9 +45,9 @@ export class LightboxDemo extends Component {
 
                     <h3>Content</h3>
                     <Lightbox type="content">
-                        <a className="group">
+                        <span className="group">
                             Watch Video
-                        </a>
+                        </span>
                         <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>
@@ -273,9 +273,9 @@ export class LightboxDemo extends Component {
 
                     <h3>Content</h3>
                     <Lightbox type="content">
-                        <a className="group">
+                        <span className="group">
                             Watch Video
-                        </a>
+                        </span>
                         <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>

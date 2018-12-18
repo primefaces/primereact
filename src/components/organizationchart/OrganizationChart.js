@@ -69,9 +69,9 @@ export class OrganizationChartNode extends Component {
                     <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
                         {nodeLabel}
                         {
-                            !this.getLeaf() && <a className="p-node-toggler" onClick={(e) => this.toggleNode(e, this.node)}>
+                            !this.getLeaf() && <button className="p-node-toggler p-link" onClick={(e) => this.toggleNode(e, this.node)}>
                                 <i className={toggleIcon}></i>
-                            </a>
+                            </button>
                         }
                     </div>
                 </td>

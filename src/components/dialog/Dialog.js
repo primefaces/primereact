@@ -86,8 +86,6 @@ export class Dialog extends Component {
         this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
         this.initResize = this.initResize.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
-        this.onCloseKeyPress = this.onCloseKeyPress.bind(this);
-        this.onMaximizeKeyPress = this.onMaximizeKeyPress.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -458,18 +456,6 @@ export class Dialog extends Component {
         }
     }
 
-    onCloseKeyPress(event) {
-        if (event.key === 'Enter') {
-            this.onClose(event);
-        }
-    }
-
-    onMaximizeKeyPress(event) {
-        if (event.key === 'Enter') {
-            this.toggleMaximize(event);
-        }
-    }
-
     componentDidMount() {
         if (this.props.visible) {
             this.show();
@@ -504,9 +490,9 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <a tabIndex="0" role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close" onClick={this.onClose} onMouseDown={this.onCloseMouseDown} onKeyPress={this.onCloseKeyPress}>
-                    <span className="pi pi-times"></span>
-                </a>
+                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                    <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
+                </button>
             );
         }
         else {
@@ -515,13 +501,13 @@ export class Dialog extends Component {
     }
 
     renderMaximizeIcon() {
-        const iconClassName = classNames('pi', {'pi-window-maximize': !this.state.maximized, 'pi-window-minimize': this.state.maximized});
+        const iconClassName = classNames('p-dialog-titlebar-maximize-icon pi', {'pi-window-maximize': !this.state.maximized, 'pi-window-minimize': this.state.maximized});
 
         if (this.props.maximizable) {
             return (
-                <a tabIndex="0" role="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize" onClick={this.toggleMaximize} onKeyPress={this.onMaximizeKeyPress}>
+                <button className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
-                </a>
+                </button>
             );
         }
         else {

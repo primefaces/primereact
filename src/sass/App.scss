@@ -239,6 +239,7 @@ body {
     height: 100%;
     background-color: #ffffff;
     width: 300px;
+    overflow: auto;
     -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
@@ -505,6 +506,12 @@ body {
                         &:hover {
                             border: 1px solid #ffffff;
                             color: #ffffff;
+                        }
+
+                        &:focus {
+                            outline: 0 none;
+                            transition: box-shadow .3s;
+                            box-shadow: 0 0 0 0.2em #00c4e8;
                         }
                     }
                 }

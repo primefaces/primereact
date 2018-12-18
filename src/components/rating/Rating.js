@@ -36,6 +36,8 @@ export class Rating extends Component {
     constructor(props) {
         super(props);
         this.clear = this.clear.bind(this);
+        this.onStarKeyDown = this.onStarKeyDown.bind(this);
+        this.onCancelKeyDown = this.onCancelKeyDown.bind(this);
     }
 
     rate(event, i) {
@@ -82,6 +84,18 @@ export class Rating extends Component {
         return true;
     }
 
+    onStarKeyDown(event, value) {
+        if (event.key === 'Enter') {
+            this.rate(event, value);
+        }
+    }
+
+    onCancelKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.clear(event);
+        }
+    }
+
     renderStars() {
         let starsArray = [];
         for (var i = 0; i < this.props.stars; i++) {
@@ -95,9 +109,7 @@ export class Rating extends Component {
             });
             
             return (
-                <a onClick={(e) => this.rate(e, value)} key={value}>
-                    <span className={iconClass}></span>
-                </a>
+                <span className={iconClass} onClick={(e) => this.rate(e, value)} key={value} tabIndex={this.props.disabled||this.props.readonly ? null : '0'} onKeyDown={(e) => this.onStarKeyDown(e, value)}></span>
             );
         });
 
@@ -107,9 +119,7 @@ export class Rating extends Component {
     renderCancelIcon() {
         if (this.props.cancel) {
             return (
-                <a onClick={this.clear} className="p-rating-cancel">
-                    <span className="p-rating-icon pi pi-ban"></span>
-                </a>
+                <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={this.clear} tabIndex={this.props.disabled||this.props.readonly ? null : '0'}   onKeyDown={this.onCancelKeyDown}></span>
             );
         }
         else {

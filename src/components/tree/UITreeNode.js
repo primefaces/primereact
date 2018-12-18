@@ -648,9 +648,9 @@ export class UITreeNode extends Component {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
 
         return (
-            <a className="p-tree-toggler p-unselectable-text" onClick={this.onTogglerClick}>
+            <span className="p-tree-toggler p-unselectable-text p-link" onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
-            </a>
+            </span>
         );
     }
 

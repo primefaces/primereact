@@ -95,12 +95,10 @@ export class TreeTableHeader extends Component {
     renderSortIcon(column, sorted, sortOrder) {
         if (column.props.sortable) {
             const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
-            const sortIconClassName = classNames('pi pi-fw', sortIcon);
+            const sortIconClassName = classNames('p-sortable-column-icon', 'pi pi-fw', sortIcon);
 
             return (
-                <a className="p-sortable-column-icon">
-                    <span className={sortIconClassName}></span>
-                </a>
+                <span className={sortIconClassName}></span>
             );
         }
         else {

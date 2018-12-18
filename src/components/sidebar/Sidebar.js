@@ -134,9 +134,9 @@ export class Sidebar extends Component {
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
-                <a className="p-sidebar-close" role="button" onClick={this.onCloseClick}>
-                    <span className="pi pi-times"/>
-                </a>
+                <button className="p-sidebar-close p-link" onClick={this.onCloseClick}>
+                    <span className="p-sidebar-close-icon pi pi-times"/>
+                </button>
             );
         }
         else {

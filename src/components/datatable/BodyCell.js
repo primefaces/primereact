@@ -119,10 +119,12 @@ export class BodyCell extends Component {
                             });
 
         if(this.props.expander) {
-            let iconClassName = classNames('p-row-toggler pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
-            content = <a onClick={this.onExpanderClick}>
-                        <span className={iconClassName}></span>
-                      </a>;
+            let iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
+            content = (
+                <button onClick={this.onExpanderClick} className="p-row-toggler p-link">
+                    <span className={iconClassName}></span>
+                </button>
+            );
         }
         else if(this.props.selectionMode) {
             if(this.props.selectionMode === 'single')

@@ -29,12 +29,14 @@ export class PageLinks extends Component {
 
     render() {
         let elements = this.props.value.map((pageLink, i) => {
-                            let pageClassName = classNames('p-paginator-page p-paginator-element', {
-                                'p-highlight': ((pageLink - 1) === this.props.page)
-                            });
+            let pageClassName = classNames('p-paginator-page p-paginator-element', {
+                'p-highlight': ((pageLink - 1) === this.props.page)
+            });
 
-                            return <a key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</a>;
-                        });
+            return (
+                <button key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</button>
+            );
+        });
 
         return <span className="p-paginator-pages">{elements}</span>;
     }
