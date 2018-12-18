@@ -207,26 +207,20 @@
     min-width: .75em;
 }
 
-.p-timepicker > .p-separator a {
+.p-timepicker > .p-separator .p-separator-spacer {
     visibility: hidden;
+    display: block;
 }
 
-.p-timepicker > div a {
+.p-timepicker > div button {
     display: block;
-    opacity: 0.7;
-    filter:Alpha(Opacity=70);
     cursor: pointer;
 }
 
-.p-timepicker > div a:last-child {
+.p-timepicker > div button:last-child {
     margin-top: .3em;
 }
 
-.p-timepicker > div a:hover {
-    display: block;
-    opacity: 1;
-    filter:Alpha(Opacity=100);
-}
 input[type=text]::-ms-clear {
     display: none;
 }

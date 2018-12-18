@@ -29,7 +29,7 @@ export class PageLinks extends Component {
 
     render() {
         let elements = this.props.value.map((pageLink, i) => {
-            let pageClassName = classNames('p-paginator-page p-paginator-element', {
+            let pageClassName = classNames('p-paginator-page p-paginator-element p-link', {
                 'p-highlight': ((pageLink - 1) === this.props.page)
             });
 

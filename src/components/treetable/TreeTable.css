@@ -19,6 +19,10 @@
     padding: .25em .5em;
 }
 
+.p-treetable .p-treetable-thead > tr > th .p-column-title {
+    vertical-align: middle;
+}
+
 .p-treetable .p-sortable-column {
     cursor: pointer;
 }
