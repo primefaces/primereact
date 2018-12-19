@@ -47,20 +47,25 @@ export class MultiSelectHeader extends Component {
             });
         }
     }
+
+    renderFilterElement() {
+        if (this.props.filter) {
+            return (
+                <div className="p-multiselect-filter-container">
+                    <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
+                                className="p-inputtext p-component" />
+                    <span className="p-multiselect-filter-icon pi pi-search"></span>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
         
     render() {
-        let filterElement;
-        let checkboxClassName = classNames('p-checkbox-box p-component', {'p-highlight': this.props.allChecked});
-        let checkboxIcon = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.allChecked});
-        
-        if(this.props.filter) {
-            filterElement = <div className="p-multiselect-filter-container">
-                                <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
-                                            className="p-inputtext p-component" />
-                                <span className="p-multiselect-filter-icon pi pi-search"></span>
-                            </div>;
-        }
-        
+        let filterElement = this.renderFilterElement();
+                
         return (
                 <div className="p-multiselect-header">
                     <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} />
