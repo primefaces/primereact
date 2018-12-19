@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
 import Tooltip from "../tooltip/Tooltip";
 
 export class Checkbox extends Component {
@@ -42,14 +41,16 @@ export class Checkbox extends Component {
     
     constructor(props) {
         super(props);
+        this.state = {};
         
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     onClick(e) {
-        if(!this.props.disabled && this.props.onChange && !this.props.readOnly) {
+        if (!this.props.disabled && !this.props.readOnly && this.props.onChange) {
             this.props.onChange({
                 originalEvent: e,
                 value: this.props.value,
@@ -66,6 +67,7 @@ export class Checkbox extends Component {
             });
 
             this.input.checked = !this.props.checked;
+            this.input.focus();
         }
     }
 
@@ -82,7 +84,7 @@ export class Checkbox extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         this.input.checked = this.props.checked;
 
         if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
@@ -93,12 +95,19 @@ export class Checkbox extends Component {
         }
     }
 
-    onFocus(e) {
-        DomHandler.addClass(this.box, 'p-focus');
+    onFocus() {
+        this.setState({focused: true});
     }
 
-    onBlur(e) {
-        DomHandler.removeClass(this.box, 'p-focus');
+    onBlur() {
+        this.setState({focused: false});
+    }
+
+    onKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.onClick(event);
+            event.preventDefault();
+        }
     }
 
     renderTooltip() {
@@ -111,15 +120,16 @@ export class Checkbox extends Component {
 
     render() {
         let containerClass = classNames('p-checkbox p-component', this.props.className);
-        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled});
+        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
         let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.checked});
         
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="p-hidden-accessible">
-                    <input type="checkbox" ref={(el) => { this.input = el; }} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
+                    <input type="checkbox" ref={el => this.input = el} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} 
+                             onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
                 </div>
-                <div className={boxClass} ref={(el) => { this.box = el; }}>
+                <div className={boxClass} ref={el => this.box = el}>
                     <span className={iconClass}></span>
                 </div>
             </div>
