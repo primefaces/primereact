@@ -68,6 +68,10 @@ export class Sidebar extends Component {
         if (this.props.modal) {
             this.enableModality();
         }
+
+        if (this.closeIcon) {
+            this.closeIcon.focus();
+        }
         
         if (this.props.onShow) {
             this.props.onShow();
@@ -134,7 +138,7 @@ export class Sidebar extends Component {
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
-                <button className="p-sidebar-close p-link" onClick={this.onCloseClick}>
+                <button ref={el => this.closeIcon = el} className="p-sidebar-close p-link" onClick={this.onCloseClick}>
                     <span className="p-sidebar-close-icon pi pi-times"/>
                 </button>
             );
