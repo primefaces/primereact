@@ -81,6 +81,9 @@ export class ListBoxItem extends Component {
                 this.onClick(event);
                 event.preventDefault();
             break;
+
+            default:
+            break;
         }
     }
 
