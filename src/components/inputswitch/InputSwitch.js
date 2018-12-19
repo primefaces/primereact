@@ -38,10 +38,12 @@ export class InputSwitch extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {};
         this.onClick = this.onClick.bind(this);
         this.toggle = this.toggle.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     onClick(event) {
@@ -70,7 +72,7 @@ export class InputSwitch extends Component {
     }
 
     onFocus(event) {
-        DomHandler.addClass(this.container, 'p-inputswitch-focus');
+        this.setState({focused: true});
 
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -78,10 +80,16 @@ export class InputSwitch extends Component {
     }
 
     onBlur(event) {  
-        DomHandler.removeClass(this.container, 'p-inputswitch-focus');      
+        this.setState({focused: false});    
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
+        }
+    }
+
+    onKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.onClick(event);
         }
     }
 
@@ -121,13 +129,15 @@ export class InputSwitch extends Component {
             'p-disabled': this.props.disabled
         });
 
+        const sliderClassName = classNames('p-inputswitch-slider', {'p-focus': this.state.focused});
+
         return (
             <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} role="checkbox" aria-checked={this.props.checked}>
                 <div className="p-hidden-accessible">
                     <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
-                        onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} />
+                        onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled} />
                 </div>
-                <span className="p-inputswitch-slider"></span>
+                <span className={sliderClassName}></span>
             </div>
         );
     }
