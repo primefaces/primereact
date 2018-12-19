@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
-import DomHandler from '../utils/DomHandler';
 import Tooltip from "../tooltip/Tooltip";
 
 export class InputSwitch extends Component {
