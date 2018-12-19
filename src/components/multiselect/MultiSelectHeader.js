@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
 import {Checkbox} from '../checkbox/Checkbox';
-import classNames from 'classnames';
 
 export class MultiSelectHeader extends Component {
     
