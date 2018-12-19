@@ -22,6 +22,7 @@ export class ListBox extends Component {
         multiple: false,
         metaKeySelection: false,
         filter: false,
+        tabIndex: '0',
         tooltip: null,
         tooltipOptions: null,
         onChange: null
@@ -40,6 +41,7 @@ export class ListBox extends Component {
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
         filter: PropTypes.bool,
+        tabIndex: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         onChange: PropTypes.func
@@ -264,8 +266,10 @@ export class ListBox extends Component {
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
                 
-                return <ListBoxItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                        onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} />;
+                return (
+                    <ListBoxItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                        onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} tabIndex={this.props.tabIndex} />
+                );
             });
         }
         
