@@ -460,9 +460,9 @@ export class TreeTableRow extends Component {
         const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
 
         return (
-            <button className="p-treetable-toggler p-unselectable-text p-link" onClick={this.onTogglerClick} style={style}>
+            <span className="p-treetable-toggler p-unselectable-text" onClick={this.onTogglerClick} style={style}>
                 <i className={iconClassName} ></i>
-            </button>
+            </span>
         );
     }
 
