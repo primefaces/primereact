@@ -1964,6 +1964,12 @@ export class DataTableLazyDemo extends Component {
                             <td>pi pi-spinner</td>
                             <td>The icon to show while indicating data load is in progress.</td>
                         </tr>
+                        <tr>
+                            <td>tabIndex</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

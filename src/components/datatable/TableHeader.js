@@ -12,7 +12,7 @@ export class TableHeader extends Component {
                         resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart} 
                         onFilter={this.props.onFilter} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected} 
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.props.onColumnDragStart} onDragOver={this.props.onColumnDragOver}
-                        onDragLeave={this.props.onColumnDragLeave} onDrop={this.props.onColumnDrop} filters={this.props.filters}/>;
+                        onDragLeave={this.props.onColumnDragLeave} onDrop={this.props.onColumnDrop} filters={this.props.filters} tabIndex={this.props.tabIndex} />;
         });
     }
 

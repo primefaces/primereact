@@ -70,6 +70,13 @@ export class TreeTableHeader extends Component {
         }
     }
 
+    onHeaderKeyDown(event, column) {
+        if (event.key === 'Enter') {
+            this.onHeaderClick(event, column);
+            event.preventDefault();
+        }
+    }
+
     getMultiSortMetaData(column) {
         if(this.props.multiSortMeta) {
             for(let i = 0; i < this.props.multiSortMeta.length; i++) {
@@ -140,8 +147,9 @@ export class TreeTableHeader extends Component {
         const resizer = this.renderResizer(column);
         
         return (
-            <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style}
-                onClick={e => this.onHeaderClick(e, column)} onMouseDown={this.onHeaderMouseDown} rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}
+            <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style} tabIndex={column.props.sortable ? this.props.tabIndex: null}
+                onClick={e => this.onHeaderClick(e, column)} onMouseDown={this.onHeaderMouseDown} onKeyDown={e => this.onHeaderKeyDown(e, column)} 
+                rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
                 <span className="p-column-title">{column.props.header}</span>

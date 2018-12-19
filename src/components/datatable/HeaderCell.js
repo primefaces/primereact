@@ -12,15 +12,16 @@ export class HeaderCell extends Component {
         this.onFilterInput = this.onFilterInput.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onResizerMouseDown = this.onResizerMouseDown.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
-    onClick(e) {
-        if(this.props.sortable) {
-            let targetNode = e.target;
+    onClick(event) {
+        if (this.props.sortable) {
+            let targetNode = event.target;
             if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') 
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
-                    originalEvent: e,
+                    originalEvent: event,
                     sortField: this.props.columnSortField || this.props.field,
                     sortFunction: this.props.sortFunction,
                     sortable: this.props.sortable
@@ -65,6 +66,13 @@ export class HeaderCell extends Component {
                 this.el.draggable = true;
             else if (event.target.nodeName === 'INPUT')
                 this.el.draggable = false;
+        }
+    }
+
+    onKeyDown(event) {
+        if (event.key === 'Enter' && event.currentTarget === this.el) {
+            this.onClick(event);
+            event.preventDefault();
         }
     }
 
@@ -125,8 +133,8 @@ export class HeaderCell extends Component {
         }
 
         return (
-            <th ref={(el) => this.el = el} 
-                className={className} style={this.props.headerStyle||this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown}
+            <th ref={(el) => this.el = el} tabIndex={this.props.sortable ? this.props.tabIndex: null}
+                className={className} style={this.props.headerStyle||this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}

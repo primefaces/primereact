@@ -76,6 +76,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: null,
         loading: false,
         loadingIcon: 'pi pi-spinner',
+        tabIndex: '0',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -156,6 +157,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
+        tabIndex: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -914,7 +916,7 @@ export class DataTable extends Component {
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
-                            onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop}>
+                            onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop} tabIndex={this.props.tabIndex}>
                             {columns}
                           </TableHeader>;
     }

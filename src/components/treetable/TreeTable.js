@@ -49,6 +49,7 @@ export class TreeTable extends Component {
         rowClassName: null,
         loading: false,
         loadingIcon: 'pi pi-spinner',
+        tabIndex: '0',
         scrollable: false,
         scrollHeight: null,
         reorderableColumns: false,
@@ -113,6 +114,7 @@ export class TreeTable extends Component {
         rowClassName: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
+        tabIndex: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
         reorderableColumns: PropTypes.bool,
@@ -703,7 +705,7 @@ export class TreeTable extends Component {
 
     createTableHeader(columns, columnGroup) {
         return (
-            <TreeTableHeader columns={columns} columnGroup={columnGroup} 
+            <TreeTableHeader columns={columns} columnGroup={columnGroup} tabIndex={this.props.tabIndex}
                         onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}
                         resizableColumns={this.props.resizableColumns} onResizeStart={this.onColumnResizeStart} 
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.onColumnDragStart} 

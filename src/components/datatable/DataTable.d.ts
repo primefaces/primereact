@@ -58,6 +58,7 @@ interface DataTableProps {
     autoLayout?:boolean;
     loading?:boolean;
     loadingIcon?:string;
+    tabIndex?:string;
     groupField?:string;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
