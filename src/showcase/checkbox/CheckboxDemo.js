@@ -328,7 +328,7 @@ export class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <h3 className="first">Single</h3>
                     <Checkbox checked={this.state.checked} onChange={e => this.setState({checked: e.checked})} />
-                    <p>Checked: {this.state.checked}</p>
+                    <p>Checked: <span style={{fontWeight: 'bold'}}>{this.state.checked ? 'true' : 'false'}</span></p>
 
                     <h3>Multiple</h3>
                     <div className="p-grid" style={{width:'250px'}}>
