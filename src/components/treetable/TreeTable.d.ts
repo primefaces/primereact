@@ -39,6 +39,7 @@ interface TreeTableProps {
     rowClassName?(rowData: any): object;
     loading?: boolean;
     loadingIcon?: string;
+    tabIndex?:string;
     scrollable?: boolean;
     scrollHeight?: string;
     reorderableColumns?: boolean;
