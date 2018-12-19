@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
 import Tooltip from "../tooltip/Tooltip";
 
 export class RadioButton extends Component {
@@ -35,6 +34,7 @@ export class RadioButton extends Component {
     
     constructor(props) {
         super(props);
+        this.state = {};
         
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -62,15 +62,16 @@ export class RadioButton extends Component {
             });
 
             this.input.checked = !this.props.checked;
+            this.input.focus();
         }
     }
 
-    onFocus(e) {
-        DomHandler.addClass(this.box, 'p-focus');
+    onFocus() {
+        this.setState({focused: true});
     }
 
-    onBlur(e) {
-        DomHandler.removeClass(this.box, 'p-focus');
+    onBlur() {
+        this.setState({focused: false});
     }
 
     componentDidMount() {
@@ -109,7 +110,7 @@ export class RadioButton extends Component {
         }
         
         let containerClass = classNames('p-radiobutton p-component', this.props.className);
-        let boxClass = classNames('p-radiobutton-box p-component', {'p-highlight': this.props.checked,  'p-disabled': this.props.disabled});
+        let boxClass = classNames('p-radiobutton-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
         let iconClass = classNames('p-radiobutton-icon p-c', { 'pi pi-circle-on': this.props.checked });
         
         return (
