@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
+import {Checkbox} from '../checkbox/Checkbox';
 import classNames from 'classnames';
 
 export class MultiSelectHeader extends Component {
@@ -62,14 +63,7 @@ export class MultiSelectHeader extends Component {
         
         return (
                 <div className="p-multiselect-header">
-                    <div className="p-checkbox p-component" onClick={this.onToggleAll}>
-                        <div className="p-hidden-accessible">
-                            <input type="checkbox" readOnly={true} />
-                        </div>
-                        <div className={checkboxClassName}>
-                            <span className={checkboxIcon}></span>
-                        </div>
-                    </div>
+                    <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} />
                     {filterElement}
                     <button className="p-multiselect-close p-link" onClick={this.props.onClose}>
                         <span className="p-multiselect-close-icon pi pi-times"></span>

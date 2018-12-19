@@ -21,6 +21,7 @@ export class MultiSelect extends Component {
         defaultLabel: 'Choose',
         disabled: false,
         filter: false,
+        tabIndex: '0',
         dataKey: null,
         appendTo: null,
         tooltip: null,
@@ -41,6 +42,7 @@ export class MultiSelect extends Component {
         defaultLabel: PropTypes.string,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
+        tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,
@@ -59,6 +61,7 @@ export class MultiSelect extends Component {
         this.onClick = this.onClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
+        this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onFilter = this.onFilter.bind(this);
@@ -78,6 +81,59 @@ export class MultiSelect extends Component {
         
         this.updateModel(event.originalEvent, newValue);
     }
+
+    onOptionKeyDown(event) {
+        let listItem = event.originalEvent.currentTarget;
+        
+        switch(event.originalEvent.which) {
+            //down
+            case 40:
+                var nextItem = this.findNextItem(listItem);
+                if (nextItem) {
+                    nextItem.focus();
+                }
+                
+                event.originalEvent.preventDefault();
+            break;
+            
+            //up
+            case 38:
+                var prevItem = this.findPrevItem(listItem);
+                if (prevItem) {
+                    prevItem.focus();
+                }
+                
+                event.originalEvent.preventDefault();
+            break;
+            
+            //enter
+            case 13:
+                this.onOptionClick(event);
+                event.originalEvent.preventDefault();
+            break;
+
+            default:
+            break;
+        }
+    }
+
+    findNextItem(item) {
+        let nextItem = item.nextElementSibling;
+
+        if (nextItem)
+            return !DomHandler.hasClass(nextItem, 'p-multiselect-item') ? this.findNextItem(nextItem) : nextItem;
+        else
+            return null;
+    }
+
+    findPrevItem(item) {
+        let prevItem = item.previousElementSibling;
+        
+        if (prevItem)
+            return !DomHandler.hasClass(prevItem, 'p-multiselect-item') ? this.findPrevItem(prevItem) : prevItem;
+        else
+            return null;
+    } 
 
     onClick() {
         if(this.props.disabled) {
@@ -364,12 +420,8 @@ export class MultiSelect extends Component {
     }
 
     render() {
-        let className = classNames('p-multiselect p-component', this.props.className, {
-            'p-disabled': this.props.disabled
-        });
-
+        let className = classNames('p-multiselect p-component', this.props.className, {'p-disabled': this.props.disabled});
         let label = this.renderLabel();
-
         let items = this.props.options;
         
         if (items) {
@@ -380,8 +432,10 @@ export class MultiSelect extends Component {
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
 
-                return <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} template={this.props.itemTemplate}
-                    selected={this.isSelected(option)} onClick={this.onOptionClick} />;
+                return (
+                    <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} template={this.props.itemTemplate}
+                    selected={this.isSelected(option)} onClick={this.onOptionClick} onKeyDown={this.onOptionKeyDown} tabIndex={this.props.tabIndex} />
+                );
             });
         }
 
@@ -390,7 +444,7 @@ export class MultiSelect extends Component {
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
                 <div className="p-hidden-accessible">
-                    <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={(el) => {this.focusInput = el;}}/>
+                    <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} />
                 </div>
                 <div className="p-multiselect-label-container" title="Choose">
                     <label className="p-multiselect-label">{label}</label>
@@ -398,7 +452,7 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
-                <MultiSelectPanel ref={(el) => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
+                <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     scrollHeight={this.props.scrollHeight}>
                     {items}
                 </MultiSelectPanel>
