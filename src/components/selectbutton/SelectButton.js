@@ -76,7 +76,7 @@ export class SelectButton extends Component {
     }
 
     onOptionClick(event) {
-        if(this.props.disabled) {
+        if (this.props.disabled) {
             return;
         }
         
