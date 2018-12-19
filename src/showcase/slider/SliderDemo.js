@@ -219,6 +219,12 @@ import {Slider} from 'primereact/slider';
                             <td>false</td>
                             <td>When present, it specifies that the component should be disabled.</td>
                         </tr>
+                        <tr>
+                            <td>tabIndex</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

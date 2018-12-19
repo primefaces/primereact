@@ -282,6 +282,12 @@ carTemplate(option) {
                             <td>When specified, displays a filter input at header.</td>
                         </tr>
                         <tr>
+                            <td>tabIndex</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
                             <td>tooltip</td>
                             <td>any</td>
                             <td>null</td>

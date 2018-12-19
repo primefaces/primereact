@@ -17,6 +17,7 @@ export class Slider extends Component {
         style: null,
         className: null,
         disabled: false,
+        tabIndex: '0',
         onChange: null,
         onSlideEnd: null
     }
@@ -33,6 +34,7 @@ export class Slider extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
+        tabIndex: PropTypes.string,
         onChange: PropTypes.func,
         onSlideEnd: PropTypes.func
     }
@@ -231,7 +233,7 @@ export class Slider extends Component {
 
     renderHandle(leftValue, bottomValue, index) {
         return (
-            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)}
+            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
                     className="p-slider-handle"  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}></span>
         );
     }
