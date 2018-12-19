@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ObjectUtils from '../utils/ObjectUtils';
 import { PickListItem } from './PickListItem';
+import DomHandler from '../utils/DomHandler';
 
 export class PickListSubList extends Component {
     
@@ -15,6 +16,7 @@ export class PickListSubList extends Component {
         style: null,
         showControls: true,
         metaKeySelection: true,
+        tabIndex: null,
         itemTemplate: null,
         onItemClick: null,
         onSelectionChange: null
@@ -29,6 +31,7 @@ export class PickListSubList extends Component {
         style: PropTypes.object,
         showControls: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
+        tabIndex: PropTypes.string,
         itemTemplate: PropTypes.func,
         onItemClick: PropTypes.func,
         onSelectionChange: PropTypes.func
@@ -37,6 +40,7 @@ export class PickListSubList extends Component {
     constructor() {
         super();
         this.onItemClick = this.onItemClick.bind(this);
+        this.onItemKeyDown = this.onItemKeyDown.bind(this);
     }
     
     onItemClick(event) {
@@ -74,6 +78,59 @@ export class PickListSubList extends Component {
             })
         }
     }
+
+    onItemKeyDown(event) {
+        let listItem = event.originalEvent.currentTarget;
+        
+        switch(event.originalEvent.which) {
+            //down
+            case 40:
+                var nextItem = this.findNextItem(listItem);
+                if (nextItem) {
+                    nextItem.focus();
+                }
+                
+                event.originalEvent.preventDefault();
+            break;
+            
+            //up
+            case 38:
+                var prevItem = this.findPrevItem(listItem);
+                if (prevItem) {
+                    prevItem.focus();
+                }
+                
+                event.originalEvent.preventDefault();
+            break;
+            
+            //enter
+            case 13:
+                this.onItemClick(event);
+                event.originalEvent.preventDefault();
+            break;
+
+            default:
+            break;
+        }
+    }
+
+    findNextItem(item) {
+        let nextItem = item.nextElementSibling;
+
+        if (nextItem)
+            return !DomHandler.hasClass(nextItem, 'p-picklist-item') ? this.findNextItem(nextItem) : nextItem;
+        else
+            return null;
+    }
+
+    findPrevItem(item) {
+        let prevItem = item.previousElementSibling;
+        
+        if (prevItem)
+            return !DomHandler.hasClass(prevItem, 'p-picklist-item') ? this.findPrevItem(prevItem) : prevItem;
+        else
+            return null;
+    } 
         
     isSelected(item) {
         return ObjectUtils.findIndexInList(item, this.props.selection) !== -1;
@@ -93,7 +150,8 @@ export class PickListSubList extends Component {
         
         if(this.props.list) {
             items = this.props.list.map((item, i) => {
-                return <PickListItem key={JSON.stringify(item)} value={item} template={this.props.itemTemplate} selected={this.isSelected(item)} onClick={this.onItemClick} />
+                return <PickListItem key={JSON.stringify(item)} value={item} template={this.props.itemTemplate} 
+                    selected={this.isSelected(item)} onClick={this.onItemClick} onKeyDown={this.onItemKeyDown} tabIndex={this.props.tabIndex} />
             });
         }
         

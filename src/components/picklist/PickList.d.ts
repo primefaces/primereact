@@ -14,6 +14,7 @@ interface PickListProps {
     showSourceControls?: boolean;
     showTargetControls?: boolean;
     metaKeySelection?: boolean;
+    tabIndex?: string;
     itemTemplate?(item: any): JSX.Element | undefined;
     onChange?(e: {event: Event, source: any, target: any}): void;
     onMoveToSource?(e: {originalEvent: Event, value: any}): void;

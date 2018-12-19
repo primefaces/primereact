@@ -9,7 +9,9 @@ export class PickListItem extends Component {
         className: null,
         template: null,
         selected: false,
-        onClick: null
+        tabIndex: null,
+        onClick: null,
+        onKeyDown: null
     }
 
     static propsTypes = {
@@ -17,12 +19,15 @@ export class PickListItem extends Component {
         className: PropTypes.string,
         template: PropTypes.func,
         selected: PropTypes.bool,
-        onClick: PropTypes.func
+        tabIndex: PropTypes.string,
+        onClick: PropTypes.func,
+        onKeyDown: PropTypes.func
     }
     
     constructor() {
         super();
         this.onClick = this.onClick.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
     
     onClick(event) {
@@ -30,7 +35,16 @@ export class PickListItem extends Component {
             this.props.onClick({
                 originalEvent: event,
                 value: this.props.value
-            })
+            });
+        }
+    }
+
+    onKeyDown(event) {
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown({
+                originalEvent: event,
+                value: this.props.value
+            });
         }
     }
     
@@ -38,7 +52,7 @@ export class PickListItem extends Component {
         let content = this.props.template ? this.props.template(this.props.value) : this.props.value;
         let className = classNames('p-picklist-item', this.props.className, {'p-highlight': this.props.selected});
         
-        return <li className={className} onClick={this.onClick}>
+        return <li className={className} onClick={this.onClick} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}>
                   {content}
                </li>;
     }
