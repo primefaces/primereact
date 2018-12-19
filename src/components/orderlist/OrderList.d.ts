@@ -9,6 +9,7 @@ interface OrderListProps {
     listStyle?: object;
     responsive?: boolean;
     dragdrop?: boolean;
+    tabIndex?: string;
     onChange?(e: {originalEvent: Event, value: any}): void;
     itemTemplate?(item: any): JSX.Element | undefined;
 }

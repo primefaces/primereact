@@ -13,7 +13,9 @@ export class OrderListSubList extends Component {
         listStyle: null,
         itemTemplate: null,
         dragdrop: false,
+        tabIndex: null,
         onItemClick: null,
+        onItemKeyDown: null,
         onChange: null
     }
 
@@ -24,7 +26,9 @@ export class OrderListSubList extends Component {
         listStyle: PropTypes.object,
         itemTemplate: PropTypes.func,
         dragdrop: PropTypes.func,
+        tabIndex: PropTypes.string,
         onItemClick: PropTypes.func,
+        onItemKeyDown: PropTypes.func,
         onChange: PropTypes.func
     }
 
@@ -119,7 +123,8 @@ export class OrderListSubList extends Component {
                     let items = [
                         this.renderDropPoint(item, i, key + '_droppoint'),
                         <li key={key} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
-                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd}>{content}</li>
+                            onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})}
+                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>{content}</li>
                     ];
 
                     if(i === this.props.value.length - 1) {
@@ -130,7 +135,10 @@ export class OrderListSubList extends Component {
                 }
                 else {
                     return (
-                        <li key={JSON.stringify(item)} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}>{content}</li>
+                        <li key={JSON.stringify(item)} className={itemClassName} 
+                            onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})} 
+                            onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})}
+                            tabIndex={this.props.tabIndex}>{content}</li>
                     );
                 }
             });

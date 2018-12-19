@@ -185,6 +185,12 @@ import {OrderList} from 'primereact/orderlist';
                             <td>null</td>
                             <td>Function that gets an item in the list and returns the content for it.</td>
                         </tr>
+                        <tr>
+                            <td>tabIndex</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
