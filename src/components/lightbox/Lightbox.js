@@ -27,7 +27,14 @@ export class Lightbox extends Component {
 
     constructor() {
         super();
-        this.state = {visible:false,currentImage:null};
+
+        this.state = {
+            visible:false,
+            currentImage:null
+        };
+
+        this.next = this.next.bind(this);
+        this.prev = this.prev.bind(this);
     }
 
     componentDidMount() {
@@ -37,7 +44,6 @@ export class Lightbox extends Component {
             }
             this.preventDocumentClickListener = false;
         });
-
     }
 
     onImageClick(event,image,i) {
@@ -187,7 +193,7 @@ export class Lightbox extends Component {
                      style={{transitionProperty:'all',transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing, display:this.state.visible?'block':'none',
                                 zIndex:this.zindex }} ref={el=>this.panel=el } onClick={()=>this.preventDocumentClickListener = true}>
                     <div className="p-lightbox-content-wrapper">
-                        <button className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev.bind(this)}>
+                        <button className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev}>
                             <span className="p-lightbox-nav-icon pi pi-chevron-left"></span>
                         </button>
                         <div className="p-lightbox-content" ref={el=>this.content=el}
@@ -197,7 +203,7 @@ export class Lightbox extends Component {
                             {contentFrame}
                         </div>
 
-                        <button className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next.bind(this)}>
+                        <button className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next}>
                             <span className="p-lightbox-nav-icon pi pi-chevron-right"></span>
                         </button>
                     </div>
