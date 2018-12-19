@@ -35,6 +35,7 @@ export class Inplace extends Component {
         active: false,
         closable: false,
         disabled: false,
+        tabIndex: '0',
         onOpen: null,
         onClose: null,
         onToggle: null
@@ -46,6 +47,7 @@ export class Inplace extends Component {
         active: PropTypes.bool,
         closable: PropTypes.bool,
         disabled: PropTypes.bool,
+        tabIndex: PropTypes.string,
         onOpen: PropTypes.func,
         onClose: PropTypes.func,
         onToggle: PropTypes.func,
@@ -59,9 +61,9 @@ export class Inplace extends Component {
             }
         }
         
-        
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
+        this.onDisplayKeyDown = this.onDisplayKeyDown.bind(this);
     }
 
     open(event) {
@@ -103,6 +105,13 @@ export class Inplace extends Component {
         }
     }
 
+    onDisplayKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.open(event);
+            event.preventDefault();
+        }
+    }
+
     isActive() {
         return this.props.onToggle ? this.props.active: this.state.active;
     }
@@ -111,7 +120,7 @@ export class Inplace extends Component {
         const className = classNames('p-inplace-display', {'p-disabled': this.props.disabled});
 
         return (
-            <div className={className} onClick={this.open}>
+            <div className={className} onClick={this.open} onKeyDown={this.onDisplayKeyDown} tabIndex={this.props.tabIndex} >
                 {content}
             </div>
         );

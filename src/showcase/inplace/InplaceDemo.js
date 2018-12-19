@@ -41,7 +41,7 @@ export class InplaceDemo extends Component {
                             Click to Edit
                         </InplaceDisplay>
                         <InplaceContent>
-                            <InputText />
+                            <InputText autoFocus />
                         </InplaceContent>
                     </Inplace>
 
@@ -126,7 +126,7 @@ import {Inplace} from 'primereact/inplace';
         Click to Edit
     </InplaceDisplay>
     <InplaceContent>
-        <InputText />
+        <InputText autoFocus />
     </InplaceContent>
 </Inplace>
 
@@ -142,7 +142,7 @@ import {Inplace} from 'primereact/inplace';
         Click to Edit
     </InplaceDisplay>
     <InplaceContent>
-        <InputText />
+        <InputText autoFocus />
     </InplaceContent>
 </Inplace>
 
@@ -240,7 +240,13 @@ export class InplaceDemo extends Component {
                             <td>boolean</td>
                             <td>false</td>
                             <td>When present, it specifies that the element should be disabled.</td>
-                        </tr> 
+                        </tr>
+                        <tr>
+                            <td>tabIndex</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -355,7 +361,7 @@ export class InplaceDemo extends Component {
                             Click to Edit
                         </InplaceDisplay>
                         <InplaceContent>
-                            <InputText />
+                            <InputText autoFocus />
                         </InplaceContent>
                     </Inplace>
 

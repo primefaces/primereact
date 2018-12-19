@@ -6,6 +6,7 @@ interface InplaceProps {
     active?: boolean;
     closable?: boolean;
     disabled?: boolean;
+    tabIndex?: string;
     onOpen?(event: Event): void;
     onClose?(event: Event): void;
     onToggle?(e:{originalEvent: Event, value: boolean}): void;
