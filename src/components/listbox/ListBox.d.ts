@@ -14,6 +14,7 @@ interface ListBoxProps {
     multiple?: boolean;
     metaKeySelection?: boolean;
     filter?: boolean;
+    tabIndex?:string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     itemTemplate?(item: any): JSX.Element | undefined;
