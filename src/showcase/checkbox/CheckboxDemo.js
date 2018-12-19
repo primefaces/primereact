@@ -8,7 +8,10 @@ export class CheckboxDemo extends Component {
         
     constructor() {
         super();
-        this.state = {cities: []};
+        this.state = {
+            checked: false,
+            cities: []
+        };
         this.onCityChange = this.onCityChange.bind(this);
     }
 
@@ -34,7 +37,12 @@ export class CheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                    <h3 className="first">Single</h3>
+                    <Checkbox checked={this.state.checked} onChange={e => this.setState({checked: e.checked})} />
+                    <p>Checked: <span style={{fontWeight: 'bold'}}>{this.state.checked ? 'true' : 'false'}</span></p>
+
+                    <h3>Multiple</h3>
+                    <div className="p-grid" style={{width:'250px'}}>
                         <div className="p-col-12">
                             <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1}></Checkbox>
                             <label htmlFor="cb1" className="p-checkbox-label">New York</label>
@@ -48,7 +56,7 @@ export class CheckboxDemo extends Component {
                             <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
                         </div>
                     </div>
-                    Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}
+                    <p>Selected Cities : {this.state.cities.map((city) => <span style={{fontWeight: 'bold'}} key={city}>{city} </span>)}</p>
                 </div>
 
                 <CheckboxDoc />
@@ -80,13 +88,13 @@ import {Checkbox} from 'primereact/checkbox';
                         <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Checkbox onChange={this.onChange} checked={this.state.checked}></Checkbox>
+<Checkbox onChange={e => this.setState({checked: e.checked})} checked={this.state.checked}></Checkbox>
 
 `}
 </CodeHighlight>
 
                         <h3>Multiple Values</h3>
-                        <p>Multiple checkboxes can be grouped by controllimng against a list of values.</p>
+                        <p>Multiple checkboxes can be grouped using a list of values.</p>
 <CodeHighlight className="language-jsx">
 {`
 <div className="p-col-12">
@@ -289,7 +297,10 @@ export class CheckboxDemo extends Component {
         
     constructor() {
         super();
-        this.state = {cities: []};
+        this.state = {
+            checked: false,
+            cities: []
+        };
         this.onCityChange = this.onCityChange.bind(this);
     }
 
@@ -315,7 +326,12 @@ export class CheckboxDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                    <h3 className="first">Single</h3>
+                    <Checkbox checked={this.state.checked} onChange={e => this.setState({checked: e.checked})} />
+                    <p>Checked: {this.state.checked}</p>
+
+                    <h3>Multiple</h3>
+                    <div className="p-grid" style={{width:'250px'}}>
                         <div className="p-col-12">
                             <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1}></Checkbox>
                             <label htmlFor="cb1" className="p-checkbox-label">New York</label>
@@ -329,7 +345,7 @@ export class CheckboxDemo extends Component {
                             <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
                         </div>
                     </div>
-                    Selected Cities : {this.state.cities.map((city) => <span key={city}>{city} </span>)}
+                    <p>Selected Cities : {this.state.cities.map((city) => <span style={{fontWeight: 'bold'}} key={city}>{city} </span>)}</p>
                 </div>
             </div>
         )
