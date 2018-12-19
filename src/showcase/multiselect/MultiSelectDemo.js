@@ -287,6 +287,12 @@ selectedCarTemplate(option) {
                             <td>When specified, displays an input field to filter the items on keyup.</td>
                         </tr>
                         <tr>
+                            <td>tabIndex</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
                             <td>dataKey</td>
                             <td>string</td>
                             <td>null</td>

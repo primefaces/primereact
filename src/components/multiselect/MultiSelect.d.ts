@@ -12,6 +12,7 @@ interface MultiSelectProps {
     defaultLabel?: string;
     disabled?: boolean;
     filter?: boolean;
+    tabIndex?: boolean;
     dataKey?: string;
     appendTo?: HTMLElement;
     tooltip?: any;
