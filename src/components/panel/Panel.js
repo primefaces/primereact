@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import DomHandler from '../utils/DomHandler';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from 'react-transition-group';
 
 export class Panel extends Component {
 
@@ -42,19 +42,6 @@ export class Panel extends Component {
         this.id = this.props.id || UniqueComponentId();
     }
     
-    componentDidUpdate() {
-        const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
-
-        if (this.props.toggleable && !collapsed && this.expanding) {
-            DomHandler.addClass(this.contentWrapper, 'p-panel-content-wrapper-expanding');
-            
-            setTimeout(() => {
-                DomHandler.removeClass(this.contentWrapper, 'p-panel-content-wrapper-expanding');
-                this.expanding = false;
-            }, 500);
-        }
-    }
-
     toggle(event) {
         if (this.props.toggleable) {
             const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
@@ -80,8 +67,6 @@ export class Panel extends Component {
             this.setState({collapsed: false});
         }
         
-        this.expanding = true;
-
         if (this.props.onExpand) {
             this.props.onExpand(event);
         }
@@ -95,6 +80,10 @@ export class Panel extends Component {
         if (this.props.onCollapse) {
             this.props.onCollapse(event);
         }
+    }
+
+    isCollapsed() {
+        return this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed): false;
     }
     
     renderToggleIcon(collapsed) {
@@ -131,25 +120,22 @@ export class Panel extends Component {
     }
     
     renderContent(collapsed) {
-        const className = classNames('p-panel-content-wrapper', {
-                                    'p-panel-content-wrapper-collapsed': collapsed, 
-                                    'p-panel-content-wrapper-expanded': !collapsed
-                                });
-        const id = this.id + '_content';
-        const ariaLabelledBy = this.id + '_label';
-        
+        let className = classNames('p-panel-content-wrapper', {'p-panel-content-wrapper-collapsed': collapsed});
+
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-labelledby={ariaLabelledBy} aria-hidden={collapsed}>
-                <div className="p-panel-content">
-                    {this.props.children}
+            <CSSTransition classNames="p-panel-content-wrapper" timeout={{ enter: 400, exit: 400 }} in={!this.isCollapsed()}>
+                <div className={className}>
+                    <div className="p-panel-content">
+                        {this.props.children}
+                    </div>
                 </div>
-            </div>
+            </CSSTransition>
         );
     }
     
     render() {
         const className = classNames('p-panel p-component', this.props.className);
-        const collapsed = this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
+        const collapsed = this.isCollapsed();
         const header = this.renderHeader(collapsed);
         const content = this.renderContent(collapsed);
 
