@@ -588,14 +588,10 @@ body {
                     padding: 4px 4px 0px 4px;
                     @include background-gradient-left2right(#008fba, #03c4e8);
 
-                    li {
-                        margin-right: 4px;
-                        box-shadow: none !important;
-                        border: none;
-                        top: 1px;
-                        @include border-radius-top(3px);
-                            
+                    li {    
                         a {
+                            border: 0 none;
+                            margin-right: 4px;
                             color: #ffffff;
                             text-shadow: none;
                             height: inherit;
