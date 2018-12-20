@@ -492,7 +492,6 @@ export class AutoComplete extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        debugger;
         if (this.searching) {
             if (this.props.suggestions && this.props.suggestions.length)
                 this.showPanel();
