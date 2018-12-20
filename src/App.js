@@ -137,7 +137,8 @@ export class App extends Component {
     constructor() {
         super();
         this.state = {
-            activeThemes: false
+            mobileMenuActive: false,
+            themeMenuActive: false
         };
         this.theme = 'nova-light';
         this.changeTheme = this.changeTheme.bind(this);
@@ -168,13 +169,17 @@ export class App extends Component {
             this.darkDemoStyle = null;
         }
 
-        this.setState({activeThemes: false})
+        this.setState({
+            themeMenuActive: false
+        });
 
         event.preventDefault();
     }
 
     toggleMenu() {
-        this.setState({ menuActive:!this.state.menuActive });
+        this.setState({
+            mobileMenuActive: !this.state.mobileMenuActive
+        });
     }
 
     onMenuButtonClick() {
@@ -194,8 +199,10 @@ export class App extends Component {
     }
 
     onThemesLinkClick() {
-        this.topbarItemClick = true;
-        this.setState({activeThemes: !this.state.activeThemes})
+        this.themeLinkClick = true;
+        this.setState({
+            themeMenuActive: !this.state.themeMenuActive
+        });
     }
 
     onThemesLinkKeyDown(event) {
@@ -211,13 +218,13 @@ export class App extends Component {
     }
 
     onDocumentClick() {
-        if(!this.topbarItemClick) {
+        if (!this.themeLinkClick && this.state.themeMenuActive) {
             this.setState({
                 activeThemes: false
             });
         }
         
-        this.topbarItemClick = false;
+        this.themeLinkClick = false;
     }
 
     render() {
@@ -238,7 +245,7 @@ export class App extends Component {
    
                         <li className="topbar-menu-themes">
                             <span tabIndex="0" onClick={this.onThemesLinkClick} onKeyDown={this.onThemesLinkKeyDown}>THEMES</span>
-                            <ul className={classNames({'active-top-menu': this.state.activeThemes})}>
+                            <ul className={classNames({'active-top-menu': this.state.themeMenuActive})}>
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
                                 <li><a href="https://www.primefaces.org/designer/primereact"><i className="pi pi-fw pi-cog" /><span>Designer</span></a></li>
@@ -268,11 +275,11 @@ export class App extends Component {
                     </ul>
                 </div>
 
-                <div id="layout-sidebar" className={classNames({ 'active': this.state.menuActive === true })} onClick={this.onSidebarClick}>
+                <div id="layout-sidebar" className={classNames({'active': this.state.mobileMenuActive})} onClick={this.onSidebarClick}>
                     <AppMenu />
                 </div>
 
-                <div className={classNames({ 'layout-mask': this.state.menuActive === true })}></div>
+                <div className={classNames({'layout-mask': this.state.mobileMenuActive})}></div>
 
                 <div id="layout-content">
                     <Route exact path="/" component={HomeComponent} />
