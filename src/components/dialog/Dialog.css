@@ -13,6 +13,7 @@
     padding: .5em .75em;
     background: none;
     zoom: 1;
+    overflow: auto;
 }
 .p-dialog-resizable .p-dialog-content {
     overflow: auto;
