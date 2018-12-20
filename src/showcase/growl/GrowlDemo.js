@@ -417,7 +417,9 @@ this.growl.clear();
                 </table>
 
                 <h3>Dependencies</h3>
-                <p>None.</p>
+                <ul>
+                    <li>react-transition-group</li>
+                </ul>
             </div>
             
             </TabPanel>

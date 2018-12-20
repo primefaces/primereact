@@ -480,7 +480,9 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                 </table>
 
                 <h3>Dependencies</h3>
-                <p>None.</p>
+                <ul>
+                    <li>react-transition-group</li>
+                </ul>
             </div>
             
             </TabPanel>
