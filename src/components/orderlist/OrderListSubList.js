@@ -56,14 +56,14 @@ export class OrderListSubList extends Component {
     onDragOver(event, index) {
         if(this.draggedItemIndex !== index && this.draggedItemIndex + 1 !== index) {
             this.dragOverItemIndex = index;
-            DomHandler.addClass(event.target, 'p-highlight');
+            DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
             event.preventDefault();
         }
     }
     
     onDragLeave(event) {
         this.dragOverItemIndex = null;
-        DomHandler.removeClass(event.target, 'p-highlight');
+        DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
     }
     
     onDrop(event) {
@@ -71,7 +71,7 @@ export class OrderListSubList extends Component {
         let value = [...this.props.value];
         ObjectUtils.reorderArray(value, this.draggedItemIndex, dropIndex);
         this.dragOverItemIndex = null;
-        DomHandler.removeClass(event.target, 'p-highlight');
+        DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
 
         if(this.props.onChange) {
             this.props.onChange({
@@ -98,7 +98,7 @@ export class OrderListSubList extends Component {
         }
     }
 
-    renderDropPoint(item, index, key) {
+    renderDropPoint(index, key) {
         return (
             <li key={key} className="p-orderlist-droppoint"
                             onDragOver={(e) => this.onDragOver(e, index + 1)} onDragLeave={this.onDragLeave} onDrop={this.onDrop}></li>
@@ -121,7 +121,7 @@ export class OrderListSubList extends Component {
 
                 if(this.props.dragdrop) {
                     let items = [
-                        this.renderDropPoint(item, i, key + '_droppoint'),
+                        this.renderDropPoint(i, key + '_droppoint'),
                         <li key={key} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
                             onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})}
                             draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>{content}</li>
