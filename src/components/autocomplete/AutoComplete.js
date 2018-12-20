@@ -116,23 +116,23 @@ export class AutoComplete extends Component {
     
     onInputChange(event) {
         //Cancel the search request if user types within the timeout
-        if(this.timeout) {
+        if (this.timeout) {
             clearTimeout(this.timeout);
         }
         
         let query = event.target.value;
-        if(!this.props.multiple) {
+        if (!this.props.multiple) {
             this.updateModel(event, query);
         }
 
-        if(query.length === 0) {
+        if (query.length === 0) {
             this.hidePanel();
-            if(this.props.onClear) {
+            if (this.props.onClear) {
                 this.props.onClear(event);
             }
         }
         else {
-            if(query.length >= this.props.minLength) {
+            if (query.length >= this.props.minLength) {
                 this.timeout = setTimeout(() => {
                     this.search(event, query, 'input');
                 }, this.props.delay);
@@ -144,11 +144,11 @@ export class AutoComplete extends Component {
     }
     
     onInputClick(event) {
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             this.inputClick = true;
         }
         
-        if(this.props.onClick) {
+        if (this.props.onClick) {
             this.props.onClick(event);
         }
     }
@@ -164,7 +164,7 @@ export class AutoComplete extends Component {
             return;
         }
 
-        if(this.props.completeMethod) {
+        if (this.props.completeMethod) {
             this.searching = true;
             this.showLoader();
             this.props.completeMethod({
@@ -175,9 +175,9 @@ export class AutoComplete extends Component {
     }
 
     selectItem(event, option) {
-        if(this.props.multiple) {
+        if (this.props.multiple) {
             this.inputEl.value = '';
-            if(!this.isSelected(option)) {
+            if (!this.isSelected(option)) {
                 let newValue = this.props.value ? [...this.props.value, option] : [option];
                 this.updateModel(event, newValue);
             }
@@ -187,7 +187,7 @@ export class AutoComplete extends Component {
             this.updateModel(event, option);
         }
 
-        if(this.props.onSelect) {
+        if (this.props.onSelect) {
             this.props.onSelect({
                 originalEvent: event,
                 value: option
@@ -198,7 +198,7 @@ export class AutoComplete extends Component {
     }
     
     updateModel(event, value) {
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
@@ -214,7 +214,7 @@ export class AutoComplete extends Component {
     }
 
     formatValue(value) {
-        if(value) {
+        if (value) {
             if (this.props.selectedItemTemplate) {
                 const resolvedFieldData = this.props.selectedItemTemplate(value);
                 return resolvedFieldData ? resolvedFieldData : value;
@@ -236,7 +236,7 @@ export class AutoComplete extends Component {
     }
 
     showPanel() {
-        if(this.focus) {
+        if (this.focus) {
             this.alignPanel();
             
             if (this.panel && this.panel.element && !this.panel.element.offsetParent) {
@@ -260,7 +260,7 @@ export class AutoComplete extends Component {
         if (this.panel.element.offsetParent) {
             let target = this.props.multiple ? this.multiContainer : this.inputEl;
         
-            if(this.props.appendTo) {
+            if (this.props.appendTo) {
                 DomHandler.absolutePosition(this.panel.element, target);
                 this.panel.element.style.minWidth = DomHandler.getWidth(target) + 'px';
             }
@@ -286,17 +286,16 @@ export class AutoComplete extends Component {
 
     onDropdownClick(event) {
         this.inputEl.focus();
-
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             this.dropdownClick = true;
         }
         
-        if(this.props.dropdownMode === 'blank')
+        if (this.props.dropdownMode === 'blank')
             this.search(event, '', 'dropdown');
-        else if(this.props.dropdownMode === 'current')
+        else if (this.props.dropdownMode === 'current')
             this.search(event, this.inputEl.value, 'dropdown');
 
-        if(this.props.onDropdownClick) {
+        if (this.props.onDropdownClick) {
             this.props.onDropdownClick({
                 originalEvent: event,
                 query: this.inputEl.value
@@ -309,7 +308,7 @@ export class AutoComplete extends Component {
         let newValue = this.props.value.filter((val, i) => (index !== i));
         this.updateModel(event, newValue);
         
-        if(this.props.onUnselect) {
+        if (this.props.onUnselect) {
             this.props.onUnselect({
                 originalEvent: event,
                 value: removedValue
@@ -318,15 +317,15 @@ export class AutoComplete extends Component {
     }
 
     onInputKeyDown(event) {
-        if(this.isPanelVisible()) {
+        if (this.isPanelVisible()) {
             let highlightItem = DomHandler.findSingle(this.panel.element, 'li.p-highlight');
 
             switch(event.which) {
                 //down
                 case 40:
-                    if(highlightItem) {
+                    if (highlightItem) {
                         let nextElement = highlightItem.nextElementSibling;
-                        if(nextElement) {
+                        if (nextElement) {
                             DomHandler.addClass(nextElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
                             DomHandler.scrollInView(this.panel.element, nextElement);
@@ -341,9 +340,9 @@ export class AutoComplete extends Component {
 
                 //up
                 case 38:
-                    if(highlightItem) {
+                    if (highlightItem) {
                         let previousElement = highlightItem.previousElementSibling;
-                        if(previousElement) {
+                        if (previousElement) {
                             DomHandler.addClass(previousElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
                             DomHandler.scrollInView(this.panel.element, previousElement);
@@ -355,7 +354,7 @@ export class AutoComplete extends Component {
 
                 //enter,tab
                 case 13:
-                    if(highlightItem) {
+                    if (highlightItem) {
                         this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
                         this.hidePanel();
                     }
@@ -371,7 +370,7 @@ export class AutoComplete extends Component {
 
                 //tab
                 case 9:
-                    if(highlightItem) {
+                    if (highlightItem) {
                         this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
                     }
                     
@@ -383,15 +382,15 @@ export class AutoComplete extends Component {
             }
         } 
 
-        if(this.props.multiple) {
+        if (this.props.multiple) {
             switch(event.which) {
                 //backspace
                 case 8:
-                    if(this.props.value && this.props.value.length && !this.inputEl.value) {
+                    if (this.props.value && this.props.value.length && !this.inputEl.value) {
                         let removedValue = this.props.value[this.props.value.length - 1];
                         let newValue = this.props.value.slice(0, -1);
                         
-                        if(this.props.onUnselect) {
+                        if (this.props.onUnselect) {
                             this.props.onUnselect({
                                 originalEvent: event,
                                 value: removedValue
@@ -430,11 +429,11 @@ export class AutoComplete extends Component {
     
     onMultiContainerClick(event) {
         this.inputEl.focus();
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             this.inputClick = true;
         }
         
-        if(this.props.onClick) {
+        if (this.props.onClick) {
             this.props.onClick(event);
         }
     }
@@ -451,9 +450,9 @@ export class AutoComplete extends Component {
     
     isSelected(val) {
         let selected = false;
-        if(this.props.value && this.props.value.length) {
-            for(let i = 0; i < this.props.value.length; i++) {
-                if(ObjectUtils.equals(this.props.value[i], val)) {
+        if (this.props.value && this.props.value.length) {
+            for (let i = 0; i < this.props.value.length; i++) {
+                if (ObjectUtils.equals(this.props.value[i], val)) {
                     selected = true;
                     break;
                 }
@@ -465,9 +464,9 @@ export class AutoComplete extends Component {
 
     findOptionIndex(option) {
         let index = -1;
-        if(this.suggestions) {
-            for(let i = 0; i < this.suggestions.length; i++) {
-                if(ObjectUtils.equals(option, this.suggestions[i])) {
+        if (this.suggestions) {
+            for (let i = 0; i < this.suggestions.length; i++) {
+                if (ObjectUtils.equals(option, this.suggestions[i])) {
                     index = i;
                     break;
                 }
@@ -493,6 +492,7 @@ export class AutoComplete extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        debugger;
         if (this.searching) {
             if (this.props.suggestions && this.props.suggestions.length)
                 this.showPanel();
@@ -551,7 +551,7 @@ export class AutoComplete extends Component {
     }
     
     renderChips() {
-        if(this.props.value && this.props.value.length) {
+        if (this.props.value && this.props.value.length) {
             return this.props.value.map((val, index) => {
                 return (
                     <li key={index + 'multi-item'} className="p-autocomplete-token p-highlight">
@@ -607,13 +607,13 @@ export class AutoComplete extends Component {
     }
     
     bindDocumentClickListener() {
-        if(!this.documentClickListener) {
+        if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if(event.which === 3) {
+                if (event.which === 3) {
                     return;
                 }
                 
-                if(!this.inputClick && !this.dropdownClick) {
+                if (!this.inputClick && !this.dropdownClick) {
                     this.hidePanel();
                 }
                     
@@ -626,7 +626,7 @@ export class AutoComplete extends Component {
     }
     
     unbindDocumentClickListener() {
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
@@ -646,12 +646,12 @@ export class AutoComplete extends Component {
         });
         let loader = this.renderLoader();
 
-        if(this.props.multiple)
+        if (this.props.multiple)
             input = this.renderMultipleAutoComplete();
         else
             input = this.renderSimpleAutoComplete();
         
-        if(this.props.dropdown) {
+        if (this.props.dropdown) {
             dropdown = this.renderDropdown();
         }
 
