@@ -1154,6 +1154,14 @@ pre[class*="language-"] {
     }
 }
 
+@media (max-width: 767px) {
+    .dialog-demo {
+        .p-dialog {
+            width: 75vw !important;
+        }
+    }
+}
+
 .inputgrid-demo {
     padding-top: 0 !important;
 }
