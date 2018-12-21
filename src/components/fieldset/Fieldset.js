@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from 'react-transition-group';
 
 export class Fieldset extends Component {
 
@@ -44,19 +44,6 @@ export class Fieldset extends Component {
         this.id = this.props.id || UniqueComponentId();
     }
 
-    componentDidUpdate() {
-        const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
-
-        if(this.props.toggleable && !collapsed && this.expanding) {
-            DomHandler.addClass(this.contentWrapper, 'p-fieldset-content-wrapper-expanding');
-
-            setTimeout(() => {
-                DomHandler.removeClass(this.contentWrapper, 'p-fieldset-content-wrapper-expanding');
-                this.expanding = false;
-            }, 500);
-        }
-    }
-
     toggle(event) {
         if (this.props.toggleable) {
             const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
@@ -82,8 +69,6 @@ export class Fieldset extends Component {
             this.setState({collapsed: false});
         }
 
-        this.expanding = true;
-
         if (this.props.onExpand) {
             this.props.onExpand(event);
         }
@@ -99,19 +84,22 @@ export class Fieldset extends Component {
         }
     }
 
+    isCollapsed() {
+        return this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed): false;
+    }
+
     renderContent(collapsed) {
-        const className = classNames('p-fieldset-content-wrapper', {
-            'p-fieldset-content-wrapper-collapsed': (this.props.toggleable && collapsed),
-            'p-fieldset-content-wrapper-expanded': (this.props.toggleable && !collapsed)
-        });
+        const className = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': collapsed});
         const id = this.id + '_content';
 
         return (
-            <div ref={(el) => this.contentWrapper = el} className={className} id={id} aria-hidden={collapsed} role="region">
-                <div className="p-fieldset-content">
-                    {this.props.children}
+            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
+                <div id={id} className={className} aria-hidden={collapsed} role="region">
+                    <div className="p-fieldset-content">
+                        {this.props.children}
+                    </div>
                 </div>
-            </div>
+            </CSSTransition>
         );
     }
 
@@ -159,7 +147,7 @@ export class Fieldset extends Component {
 
     render() {
         const className = classNames('p-fieldset p-component', this.props.className, {'p-fieldset-toggleable': this.props.toggleable});
-        const collapsed = this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
+        const collapsed = this.isCollapsed();
         const legend = this.renderLegend(collapsed);
         const content = this.renderContent(collapsed);
 

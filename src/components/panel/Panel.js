@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 
@@ -120,12 +120,13 @@ export class Panel extends Component {
     }
     
     renderContent(collapsed) {
-        let className = classNames('p-panel-content-wrapper', {'p-toggleable-content-collapsed': collapsed});
+        const className = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': collapsed});
+        const id = this.id + '_content';
 
         return (
             <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
-                <div className={className}>
-                    <div className="p-panel-content">
+                <div className={className} aria-hidden={collapsed} role="region">
+                    <div id={id}  className="p-panel-content">
                         {this.props.children}
                     </div>
                 </div>
