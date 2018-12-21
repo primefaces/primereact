@@ -110,7 +110,7 @@ const footer = (
 </CodeHighlight>
 
             <h3>Dynamic Content</h3>
-            <p>Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via contentStyle so longer content displays a scrollbar.</p>
+            <p>Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via <i>contentStyle</i> so longer content displays a scrollbar.</p>
 
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
@@ -153,18 +153,6 @@ const footer = (
                             <td>boolean</td>
                             <td>true</td>
                             <td>Defines if background should be blocked when dialog is displayed.</td>
-                        </tr>
-                        <tr>
-                            <td>draggable</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Enables dragging to change the position using header.</td>
-                        </tr>
-                        <tr>
-                            <td>resizable</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Enables resizing of the content.</td>
                         </tr>
                         <tr>
                             <td>contentStyle</td>

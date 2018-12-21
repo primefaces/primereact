@@ -6,8 +6,6 @@ interface DialogProps {
     footer?: any;
     visible?: boolean;
     modal?: boolean;
-    draggable?: boolean;
-    resizable?: boolean;
     contentStyle?: object;
     closeOnEscape?: boolean;
     dismissableMask?: boolean;

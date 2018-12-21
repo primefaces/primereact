@@ -16,8 +16,6 @@ export class Dialog extends Component {
         modal: true,
         onHide: null,
         onShow: null,
-        draggable: false,
-        resizable: false,
         contentStyle: null,
         closeOnEscape: true,
         dismissableMask: false,
@@ -44,8 +42,6 @@ export class Dialog extends Component {
         modal: PropTypes.bool,
         onHide: PropTypes.func.isRequired,
         onShow: PropTypes.func,
-        draggable: PropTypes.bool,
-        resizable: PropTypes.bool,
         contentStyle: PropTypes.object,
         closeOnEscape: PropTypes.bool,
         dismissableMask: PropTypes.bool,
@@ -70,10 +66,6 @@ export class Dialog extends Component {
             maximized: false
         };
         this.onClose = this.onClose.bind(this);
-        this.initDrag = this.initDrag.bind(this);
-        this.endDrag = this.endDrag.bind(this);
-        this.onCloseMouseDown = this.onCloseMouseDown.bind(this);
-        this.initResize = this.initResize.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -201,159 +193,14 @@ export class Dialog extends Component {
 		}
     }
 
-    onCloseMouseDown(event) {
-        this.closeIconMouseDown = true;
-    }
-
-    initDrag(event) {
-        if (this.closeIconMouseDown) {
-            this.closeIconMouseDown = false;
-            return;
-        }
-
-        if (this.props.draggable) {
-            this.dragging = true;
-            this.lastPageX = event.pageX;
-            this.lastPageY = event.pageY;
-            DomHandler.addClass(document.body, 'p-unselectable-text');
-        }
-    }
-
-    onDrag(event) {
-        if (this.dragging) {
-            let deltaX = event.pageX - this.lastPageX;
-            let deltaY = event.pageY - this.lastPageY;
-            let leftPos = parseFloat(this.container.style.left) + deltaX;
-            let topPos = parseFloat(this.container.style.top) + deltaY;
-
-            if (leftPos >= this.props.minX) {
-                this.container.style.left = leftPos + 'px';
-            }
-
-            if (topPos >= this.props.minY) {
-                this.container.style.top = topPos + 'px';
-            }
-
-
-            this.lastPageX = event.pageX;
-            this.lastPageY = event.pageY;
-        }
-    }
-
-    endDrag(event) {
-        if (this.props.draggable) {
-            this.dragging = false;
-            DomHandler.removeClass(document.body, 'p-unselectable-text');
-        }
-    }
-
-    initResize(event) {
-        if (this.props.resizable) {
-            this.preWidth = null;
-            this.resizing = true;
-            this.lastPageX = event.pageX;
-            this.lastPageY = event.pageY;
-            DomHandler.addClass(document.body, 'p-unselectable-text');
-        }
-    }
-    
-    onResize(event) {
-        if (this.resizing) {
-            let deltaX = event.pageX - this.lastPageX;
-            let deltaY = event.pageY - this.lastPageY;
-            let containerWidth = DomHandler.getOuterWidth(this.container);
-            let containerHeight = DomHandler.getOuterHeight(this.container);
-            let contentHeight = DomHandler.getOuterHeight(this.contentElement);
-            let newWidth = containerWidth + deltaX;
-            let newHeight = containerHeight + deltaY;
-
-            if (newWidth > this.props.minWidth) {
-                this.container.style.width = newWidth + 'px';
-            }
-                
-            if (newHeight > this.props.minHeight) {
-                this.container.style.height = newHeight + 'px';
-                this.contentElement.style.height = contentHeight + deltaY + 'px';
-            }
-
-            this.lastPageX = event.pageX;
-            this.lastPageY = event.pageY;
-        }
-    }
-    
-    bindGlobalListeners() {
-        if (this.props.draggable) {
-            this.bindDocumentDragListener();
-            this.bindDocumentDragEndListener();
-        }
-        
-        if (this.props.resizable) {
-            this.bindDocumentResizeListeners();
-        }
-                
+    bindGlobalListeners() {     
         if (this.props.closeOnEscape && this.props.closable) {
             this.bindDocumentEscapeListener();
         }
     }
     
     unbindGlobalListeners() {
-        this.unbindDocumentDragListener();
-        this.unbindDocumentDragEndListener();
-        this.unbindDocumentResizeListeners();
         this.unbindDocumentEscapeListener();
-    }
-    
-    bindDocumentDragListener() {
-        this.documentDragListener = (event) => {
-            this.onDrag(event);
-        };
-        document.addEventListener('mousemove', this.documentDragListener);
-    }
-    
-    unbindDocumentDragListener() {
-        if (this.documentDragListener) {
-            document.removeEventListener('mousemove', this.documentDragListener);
-            this.documentDragListener = null;
-        }
-    }
-
-    bindDocumentDragEndListener() {
-        this.documentDragEndListener = (event) => {
-            this.endDrag(event);
-        };
-        document.addEventListener('mouseup', this.documentDragEndListener);
-    }
-
-    unbindDocumentDragEndListener() {
-        if (this.documentDragEndListener) {
-            document.removeEventListener('mouseup', this.documentDragEndListener);
-            this.documentDragEndListener = null;
-        }
-    }
-    
-    bindDocumentResizeListeners() {
-        this.documentResizeListener = (event) => {
-            this.onResize(event);
-        };
-        
-        this.documentResizeEndListener = (event) => {
-            if (this.resizing) {
-                this.resizing = false;
-                DomHandler.removeClass(document.body, 'p-unselectable-text');
-            }
-        };
-
-        document.addEventListener('mousemove', this.documentResizeListener);
-        document.addEventListener('mouseup', this.documentResizeEndListener);
-    }
-    
-    unbindDocumentResizeListeners() {
-        if (this.documentResizeListener && this.documentResizeEndListener) {
-            document.removeEventListener('mousemove', this.documentResizeListener);
-            document.removeEventListener('mouseup', this.documentResizeEndListener);
-            this.documentResizeListener = null;
-            this.documentResizeEndListener = null;
-        }
     }
     
     bindDocumentEscapeListener() {
@@ -408,7 +255,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" onClick={this.onClose} onMouseDown={this.onCloseMouseDown}>
+                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" onClick={this.onClose}>
                     <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
                 </button>
             );
@@ -439,7 +286,7 @@ export class Dialog extends Component {
             let maximizeIcon = this.renderMaximizeIcon();
 
             return (
-                <div ref={el => this.headerElement = el} className="p-dialog-titlebar" onMouseDown={this.initDrag}>
+                <div ref={el => this.headerElement = el} className="p-dialog-titlebar">
                     <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
                     <div className="p-dialog-titlebar-icons">
                         {maximizeIcon}
@@ -472,29 +319,15 @@ export class Dialog extends Component {
         }
     }
 
-    renderResizer() {
-        if (this.props.resizable) {
-            return (
-                <div className="p-resizable-handle" onMouseDown={this.initResize}></div>
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
     renderElement() {
         const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
-            'p-dialog-draggable': this.props.draggable,
-            'p-dialog-resizable': this.props.resizable,
             'p-dialog-visible': this.props.visible
         });
 
         const header = this.renderHeader();
         const content = this.renderContent();
         const footer = this.renderFooter();
-        const resizer = this.renderResizer();
 
         return (
             <CSSTransition classNames="p-dialog" timeout={{enter: 400, exit: 400}} in={this.props.visible}>
@@ -502,7 +335,6 @@ export class Dialog extends Component {
                     {header}
                     {content}
                     {footer}
-                    {resizer}
                 </div>
             </CSSTransition>
         );
