@@ -120,10 +120,10 @@ export class Panel extends Component {
     }
     
     renderContent(collapsed) {
-        let className = classNames('p-panel-content-wrapper', {'p-panel-content-wrapper-collapsed': collapsed});
+        let className = classNames('p-panel-content-wrapper', {'p-toggleable-content-collapsed': collapsed});
 
         return (
-            <CSSTransition classNames="p-panel-content-wrapper" timeout={{ enter: 400, exit: 400 }} in={!this.isCollapsed()}>
+            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
                 <div className={className}>
                     <div className="p-panel-content">
                         {this.props.children}

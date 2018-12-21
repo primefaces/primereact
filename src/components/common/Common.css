@@ -141,3 +141,39 @@ button {
 	border: none;
 	cursor: pointer;
 }
+
+/* Toggleable content with slide animation */
+.p-toggleable-content-collapsed {
+    display: none;
+}
+
+.p-toggleable-content-enter {
+    max-height: 0;
+    display: block;
+}
+
+.p-toggleable-content-enter-active {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height cubic-bezier(0.86, 0, 0.07, 1) 400ms;
+}
+
+.p-toggleable-content-enter-done {
+    display: block;
+}
+
+.p-toggleable-content-exit {
+    max-height: 1000px;
+    display: block;
+}
+
+.p-toggleable-content-exit-active {
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    transition: max-height cubic-bezier(0.86, 0, 0.07, 1) 250ms;
+}
+
+.p-toggleable-content-exit-done {
+    display: none;
+}
