@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from 'react-transition-group';
 
 export class AccordionTab extends Component {
     
@@ -61,21 +62,9 @@ export class Accordion extends Component {
         this.id = this.props.id || UniqueComponentId();
     }
 
-    componentDidUpdate() {
-        if (this.togglingTabIndex != null && this.togglingTabIndex >= 0) {
-            const expandingTabContent = this.container.children[this.togglingTabIndex].children[1];
-            DomHandler.addClass(expandingTabContent, 'p-accordion-content-wrapper-expanding');
-            setTimeout(() => {
-                DomHandler.removeClass(expandingTabContent, 'p-accordion-content-wrapper-expanding');
-                this.togglingTabIndex = null;
-            }, 500);
-        }
-    }
-    
     onTabHeaderClick(event, tab, index) {
         if (!tab.props.disabled) {
             const selected = this.isSelected(index);
-            this.togglingTabIndex = selected ? null : index;
             let newActiveIndex = null;
 
             if(this.props.multiple) {
@@ -134,17 +123,17 @@ export class Accordion extends Component {
     }
     
     renderTabContent(tab, selected, index) {
-        const tabContentWrapperClass = classNames(tab.props.contentClassName, 'p-accordion-content-wrapper',{
-                                    'p-accordion-content-wrapper-collapsed': !selected,
-                                    'p-accordion-content-wrapper-expanded': selected});
+        const className = classNames(tab.props.contentClassName, 'p-toggleable-content', {'p-toggleable-content-collapsed': !selected});
         const id = this.id + '_content_' + index;
 
         return (
-            <div id={id} className={tabContentWrapperClass} style={tab.props.contentStyle}>
-                <div className="p-accordion-content">
-                    {tab.props.children}
+            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={selected}>
+                <div id={id} className={className} style={tab.props.contentStyle}>
+                    <div className="p-accordion-content">
+                        {tab.props.children}
+                    </div>
                 </div>
-            </div>
+            </CSSTransition>
         );
     } 
     
