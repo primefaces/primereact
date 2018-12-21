@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from 'react-transition-group';
 
 export class Dialog extends Component {
 
@@ -12,22 +13,16 @@ export class Dialog extends Component {
         header: null,
         footer: null,
         visible: false,
-        width: 'auto',
-        height: 'auto',
         modal: true,
         onHide: null,
         onShow: null,
         draggable: false,
         resizable: false,
-        minWidth: 150,
-        minHeight: 150,
         contentStyle: null,
         closeOnEscape: true,
         dismissableMask: false,
         rtl: false,
         closable: true,
-        responsive: true,
-        breakpoint: 640,
         style: null,
         className: null,
         showHeader: true,
@@ -46,22 +41,16 @@ export class Dialog extends Component {
         header: PropTypes.any,
         footer: PropTypes.any,
         visible: PropTypes.bool,
-        width: PropTypes.string,
-        height: PropTypes.string,
         modal: PropTypes.bool,
         onHide: PropTypes.func.isRequired,
         onShow: PropTypes.func,
         draggable: PropTypes.bool,
         resizable: PropTypes.bool,
-        minWidth: PropTypes.number,
-        minHeight: PropTypes.number,
         contentStyle: PropTypes.object,
         closeOnEscape: PropTypes.bool,
         dismissableMask: PropTypes.bool,
         rtl: PropTypes.bool,
         closable: PropTypes.bool,
-        responsive: PropTypes.bool,
-        breakpoint: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
         showHeader: PropTypes.bool,
@@ -101,11 +90,7 @@ export class Dialog extends Component {
             this.container.style.top = this.props.positionTop + 'px';
         } 
         else if (this.props.positionTop >= 0) {
-          this.center();
-          this.container.style.top = this.props.positionTop + 'px';
-        }
-        else{
-            this.center();
+            this.container.style.top = this.props.positionTop + 'px';
         }
     }
 
@@ -144,7 +129,7 @@ export class Dialog extends Component {
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.positionOverlay();
         this.focus();
-        DomHandler.fadeIn(this.container, 250);
+        //DomHandler.fadeIn(this.container, 250);
 
         if (this.props.modal) {
             this.enableModality();
@@ -164,53 +149,18 @@ export class Dialog extends Component {
 
     maximize() {
         DomHandler.addClass(this.container, 'p-dialog-maximized');
-        this.preMaximizePageX = parseFloat(this.container.style.top);
-        this.preMaximizePageY = parseFloat(this.container.style.left);
-        this.preMaximizeContainerWidth = DomHandler.getOuterWidth(this.container);
-        this.preMaximizeContainerHeight = DomHandler.getOuterHeight(this.container);
-        this.preMaximizeContentHeight = DomHandler.getOuterHeight(this.contentElement);
-
-        this.container.style.top = '0px';
-        this.container.style.left = '0px';
-        this.container.style.width = '100vw';
-        this.container.style.height = '100vh';
-        const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement) + parseFloat(this.container.style.top);
-        this.contentElement.style.height = 'calc(100vh - ' + diffHeight +'px)';
-
         DomHandler.addClass(document.body, 'p-overflow-hidden');
+
+        const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement);
+        this.contentElement.style.height = 'calc(100vh - ' + diffHeight +'px)';
     }
 
     restoreMaximize() {
-        this.container.style.top = this.preMaximizePageX + 'px';
-        this.container.style.left = this.preMaximizePageY + 'px';
-        this.container.style.width = this.preMaximizeContainerWidth + 'px';
-        this.container.style.height = this.preMaximizeContainerHeight + 'px';
-        this.contentElement.style.height = this.preMaximizeContentHeight + 'px';
-
+        DomHandler.removeClass(this.container, 'p-dialog-maximized');
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
-
-        setTimeout(() => DomHandler.removeClass(this.container, 'p-dialog-maximized'), 300);
+        this.contentElement.style.height = 'auto';
     }
    
-    center() {
-        var elementWidth = DomHandler.getOuterWidth(this.container);
-        var elementHeight = DomHandler.getOuterHeight(this.container);
-        if (elementWidth === 0 && elementHeight === 0) {
-            this.container.style.visibility = 'hidden';
-            this.container.style.display = 'block';
-            elementWidth = DomHandler.getOuterWidth(this.container);
-            elementHeight = DomHandler.getOuterHeight(this.container);
-            this.container.style.display = 'none';
-            this.container.style.visibility = 'visible';
-        }
-        var viewport = DomHandler.getViewport();
-        var x = (viewport.width - elementWidth) / 2;
-        var y = (viewport.height - elementHeight) / 2;
-
-        this.container.style.left = x + 'px';
-        this.container.style.top = y + 'px';
-    }
-
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
@@ -340,11 +290,7 @@ export class Dialog extends Component {
         if (this.props.resizable) {
             this.bindDocumentResizeListeners();
         }
-        
-        if (this.props.responsive) {
-            this.bindDocumentResponsiveListener();
-        }
-        
+                
         if (this.props.closeOnEscape && this.props.closable) {
             this.bindDocumentEscapeListener();
         }
@@ -354,7 +300,6 @@ export class Dialog extends Component {
         this.unbindDocumentDragListener();
         this.unbindDocumentDragEndListener();
         this.unbindDocumentResizeListeners();
-        this.unbindDocumentResponsiveListener();
         this.unbindDocumentEscapeListener();
     }
     
@@ -408,33 +353,6 @@ export class Dialog extends Component {
             document.removeEventListener('mouseup', this.documentResizeEndListener);
             this.documentResizeListener = null;
             this.documentResizeEndListener = null;
-        }
-    }
-    
-    bindDocumentResponsiveListener() {
-        this.documentResponsiveListener = (event) => {
-            let viewport = DomHandler.getViewport();
-            let width = DomHandler.getOuterWidth(this.container);
-            if (viewport.width <= this.props.breakpoint) {
-                if (!this.preWidth) {
-                    this.preWidth = width;
-                }
-                this.container.style.left = '0px';
-                this.container.style.width = '100%';
-            }
-            else {
-                this.container.style.width = this.preWidth + 'px';
-                this.positionOverlay();
-            }
-        };
-
-        window.addEventListener('resize', this.documentResponsiveListener);
-    }
-    
-    unbindDocumentResponsiveListener() {
-        if (this.documentResponsiveListener) {
-            window.removeEventListener('resize', this.documentResponsiveListener);
-            this.documentResponsiveListener = null;
         }
     }
     
@@ -521,7 +439,7 @@ export class Dialog extends Component {
             let maximizeIcon = this.renderMaximizeIcon();
 
             return (
-                <div ref={(el) => { this.headerElement = el; }} className="p-dialog-titlebar" onMouseDown={this.initDrag}>
+                <div ref={el => this.headerElement = el} className="p-dialog-titlebar" onMouseDown={this.initDrag}>
                     <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
                     <div className="p-dialog-titlebar-icons">
                         {maximizeIcon}
@@ -537,7 +455,7 @@ export class Dialog extends Component {
 
     renderContent() {
         return (
-            <div ref={(el) => this.contentElement = el} className="p-dialog-content" style={this.props.contentStyle}>
+            <div ref={el => this.contentElement = el} className="p-dialog-content" style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -546,7 +464,7 @@ export class Dialog extends Component {
     renderFooter() {
         if (this.props.footer) {
             return (
-                <div ref={(el) => { this.footerElement = el; }} className="p-dialog-footer">{this.props.footer}</div>
+                <div ref={el => this.footerElement = el} className="p-dialog-footer">{this.props.footer}</div>
             );
         }
         else {
@@ -569,15 +487,9 @@ export class Dialog extends Component {
         const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
             'p-dialog-draggable': this.props.draggable,
-            'p-dialog-resizable': this.props.resizable
+            'p-dialog-resizable': this.props.resizable,
+            'p-dialog-visible': this.props.visible
         });
-
-        const style = Object.assign({
-            display: this.props.visible ? 'block': 'none',
-            width: this.props.width,
-            height: this.props.height,
-            minWidth: this.props.minWidth
-        }, this.props.style);
 
         const header = this.renderHeader();
         const content = this.renderContent();
@@ -585,26 +497,23 @@ export class Dialog extends Component {
         const resizer = this.renderResizer();
 
         return (
-            <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} aria-labelledby={this.id + '_label'} role="dialog">
-                {header}
-                {content}
-                {footer}
-                {resizer}
-            </div>
+            <CSSTransition classNames="p-dialog" timeout={{enter: 400, exit: 400}} in={this.props.visible}>
+                <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el} aria-labelledby={this.id + '_label'} role="dialog">
+                    {header}
+                    {content}
+                    {footer}
+                    {resizer}
+                </div>
+            </CSSTransition>
         );
     }
 
     render() {
-        if (this.props.visible) {
-            const element = this.renderElement();
+        const element = this.renderElement();
     
-            if (this.props.appendTo)
-                return ReactDOM.createPortal(element, this.props.appendTo);
-            else
-                return element;
-        }
-        else {
-            return null;
-        }
+        if (this.props.appendTo)
+            return ReactDOM.createPortal(element, this.props.appendTo);
+        else
+            return element;
     }
 }

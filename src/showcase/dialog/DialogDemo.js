@@ -40,7 +40,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. xw
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -79,7 +79,7 @@ import {Dialog} from 'primereact/dialog';
             <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Dialog header="Godfather I" visible={this.state.visible} width="350px" modal={true} onHide={(e) => this.setState({visible: false})}>
+<Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={(e) => this.setState({visible: false})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -102,7 +102,7 @@ const footer = (
     </div>
 );
 
-<Dialog header="Header Text" footer={footer} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
+<Dialog header="Header Text" footer={footer} visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={this.onHide}>
     Content
 </Dialog>
 
@@ -149,18 +149,6 @@ const footer = (
                             <td>Specifies the visibility of the dialog.</td>
                         </tr>
                         <tr>
-                            <td>width</td>
-                            <td>string</td>
-                            <td>auto</td>
-                            <td>Width of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>height</td>
-                            <td>string</td>
-                            <td>auto</td>
-                            <td>Height of the dialog.</td>
-                        </tr>
-                        <tr>
                             <td>modal</td>
                             <td>boolean</td>
                             <td>true</td>
@@ -177,18 +165,6 @@ const footer = (
                             <td>boolean</td>
                             <td>false</td>
                             <td>Enables resizing of the content.</td>
-                        </tr>
-                        <tr>
-                            <td>minWidth</td>
-                            <td>number</td>
-                            <td>150</td>
-                            <td>Minimum width of a resizable dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>minHeight</td>
-                            <td>number</td>
-                            <td>150</td>
-                            <td>Minimum width of a resizable dialog.</td>
                         </tr>
                         <tr>
                             <td>contentStyle</td>
@@ -219,18 +195,6 @@ const footer = (
                             <td>boolean</td>
                             <td>true</td>
                             <td>Adds a close icon to the header to hide the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>responsive</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>In responsive mode, dialog adjusts itself to screen width.</td>
-                        </tr>
-                        <tr>
-                            <td>breakpoint</td>
-                            <td>number</td>
-                            <td>640</td>
-                            <td>Maximum screen width to display the dialog with 100% width in responsive mode.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -416,7 +380,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} width="350px" footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}}  footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 

@@ -1,6 +1,13 @@
 .p-dialog {
     position: fixed;
     padding: 0;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.p-dialog-visible {
+    display: block;
 }
 .p-dialog .p-dialog-titlebar {
 	padding: .5em .75em;
@@ -63,11 +70,6 @@
     height: 100%;
 }
 
-.p-dialog-maximized {
-    -webkit-transition: left .3s, top .3s, width .3s,height .3s;
-    transition: left .3s, top .3s, width .3s,height .3s;
-}
-
 /* ConfirmDialog */
 .p-confirmdialog {
     width: 30em;
@@ -103,4 +105,51 @@
     .p-confirmdialog {
         width: 90%;
     }
+}
+
+/* Animation */
+.p-dialog-enter {
+    display: block;
+    opacity: 0;
+    transform: translate3d(-50%, -25%, 0) scale(0.9);
+}
+
+.p-dialog-enter-active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.p-dialog-enter-done {
+    display: block;
+}
+
+.p-dialog-exit {
+    opacity: 1;
+    display: block;
+}
+
+.p-dialog-exit-active {
+    opacity: 0;
+    transform: translate3d(-50%, -25%, 0) scale(0.9);
+    transition: all 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.p-dialog-exit-done {
+    display: none;
+}
+
+/* Maximize */
+.p-dialog-maximized {
+    -webkit-transition: none;
+    transition: none;
+    transform: none;
+    width: 100vw !important;
+    top: 0;
+    left: 0;
+}
+
+.p-dialog-maximized .p-dialog-content {
+    -webkit-transition: height .3s;
+    transition: height .3s;
 }
