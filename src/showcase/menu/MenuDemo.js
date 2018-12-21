@@ -13,12 +13,12 @@ export class MenuDemo extends Component {
             items: [
                 {
                     label: 'Options',
-                    items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                            {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
+                    items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
+                            {label: 'Home', icon: 'pi pi-fw pi-home', url: 'http://primetek.com.tr'}]
                 }, 
                 {
                     label: 'Account',
-                    items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
+                    items: [{label: 'Components', icon: 'pi pi-fw pi-cog', command:()=>{ window.location.hash="/"; }},
                             {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
                 }
             ]
@@ -298,12 +298,12 @@ export class MenuDemo extends Component {
             items: [
                 {
                     label: 'Options',
-                    items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
-                            {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
+                    items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
+                            {label: 'Home', icon: 'pi pi-fw pi-home', url: 'http://primetek.com.tr'}]
                 }, 
                 {
                     label: 'Account',
-                    items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
+                    items: [{label: 'Components', icon: 'pi pi-fw pi-cog', command:()=>{ window.location.hash="/"; }},
                             {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
                 }
             ]

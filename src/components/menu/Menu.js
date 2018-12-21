@@ -33,7 +33,7 @@ export class Menu extends Component {
     };
 
     constructor(props) {
-        super();
+        super(props);
         this.onMenuClick = this.onMenuClick.bind(this);
     }
 
@@ -43,7 +43,7 @@ export class Menu extends Component {
         }
     }
 
-    itemClick(event, item){
+    onItemClick(event, item){
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -63,6 +63,59 @@ export class Menu extends Component {
         if (this.props.popup) {
             this.hide(event);
         }
+    }
+
+    onItemKeyDown(event, item) {
+        let listItem = event.currentTarget.parentElement;
+
+        switch(event.which) {
+            //down
+            case 40:
+                var nextItem = this.findNextItem(listItem);
+                if(nextItem) {
+                    nextItem.children[0].focus();
+                }
+                
+                event.preventDefault();
+            break;
+            
+            //up
+            case 38:
+                var prevItem = this.findPrevItem(listItem);
+                if(prevItem) {
+                    prevItem.children[0].focus();
+                }
+                
+                event.preventDefault();
+            break;
+            
+            //enter
+            case 13:
+                this.onItemClick(event, item);
+                event.preventDefault();
+            break;
+
+            default:
+            break;
+        }
+    }
+
+    findNextItem(item) {
+        let nextItem = item.nextElementSibling;
+
+        if (nextItem)
+            return DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? this.findNextItem(nextItem) : nextItem;
+        else
+            return null;
+    }
+
+    findPrevItem(item) {
+        let prevItem = item.previousElementSibling;
+        
+        if (prevItem)
+            return DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? this.findPrevItem(prevItem) : prevItem;
+        else
+            return null;
     }
 
     toggle(event) {
@@ -182,7 +235,7 @@ export class Menu extends Component {
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style}>
-                <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+                <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={e => this.onItemClick(e, item)} onKeyDown={e => this.onItemKeyDown(e, item)}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                 </a>
