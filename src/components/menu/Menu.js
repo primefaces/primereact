@@ -88,12 +88,6 @@ export class Menu extends Component {
                 
                 event.preventDefault();
             break;
-            
-            //enter
-            case 13:
-                this.onItemClick(event, item);
-                event.preventDefault();
-            break;
 
             default:
             break;
