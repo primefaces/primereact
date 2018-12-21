@@ -565,26 +565,26 @@ export class Dialog extends Component {
         }
     }
 
-    render() {
-        let className = classNames('p-dialog p-component', this.props.className, {
+    renderElement() {
+        const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
             'p-dialog-draggable': this.props.draggable,
             'p-dialog-resizable': this.props.resizable
         });
 
-        let style = Object.assign({
+        const style = Object.assign({
             display: this.props.visible ? 'block': 'none',
             width: this.props.width,
             height: this.props.height,
             minWidth: this.props.minWidth
         }, this.props.style);
 
-        let header = this.renderHeader();
-        let content = this.renderContent();
-        let footer = this.renderFooter();
-        let resizer = this.renderResizer();
+        const header = this.renderHeader();
+        const content = this.renderContent();
+        const footer = this.renderFooter();
+        const resizer = this.renderResizer();
 
-        let element = (
+        return (
             <div id={this.id} className={className} style={style} ref={(el) => { this.container = el; }} aria-labelledby={this.id + '_label'} role="dialog">
                 {header}
                 {content}
@@ -592,10 +592,19 @@ export class Dialog extends Component {
                 {resizer}
             </div>
         );
+    }
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+    render() {
+        if (this.props.visible) {
+            const element = this.renderElement();
+    
+            if (this.props.appendTo)
+                return ReactDOM.createPortal(element, this.props.appendTo);
+            else
+                return element;
+        }
+        else {
+            return null;
+        }
     }
 }
