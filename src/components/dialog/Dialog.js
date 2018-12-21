@@ -24,12 +24,8 @@ export class Dialog extends Component {
         style: null,
         className: null,
         showHeader: true,
-        positionLeft: -1,
-        positionTop: -1,
         appendTo: null,
         baseZIndex: 0,
-        minX: 0,
-        minY: 0,
         maximizable: false,
         blockScroll: true
     }
@@ -50,12 +46,8 @@ export class Dialog extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         showHeader: PropTypes.bool,
-        positionLeft: PropTypes.number,
-        positionTop: PropTypes.number,
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
-        minX: PropTypes.number,
-        minY: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool
     };
@@ -69,21 +61,6 @@ export class Dialog extends Component {
         this.toggleMaximize = this.toggleMaximize.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
-    }
-
-    positionOverlay() {
-        let viewport = DomHandler.getViewport();
-        if (DomHandler.getOuterHeight(this.container) > viewport.height) {
-             this.contentElement.style.height = (viewport.height * .75) + 'px';
-        }
-        
-        if (this.props.positionLeft >= 0 && this.props.positionTop >= 0) {
-            this.container.style.left = this.props.positionLeft + 'px';
-            this.container.style.top = this.props.positionTop + 'px';
-        } 
-        else if (this.props.positionTop >= 0) {
-            this.container.style.top = this.props.positionTop + 'px';
-        }
     }
 
     onClose(event) {
@@ -119,9 +96,7 @@ export class Dialog extends Component {
         }
         
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        this.positionOverlay();
         this.focus();
-        //DomHandler.fadeIn(this.container, 250);
 
         if (this.props.modal) {
             this.enableModality();
@@ -144,13 +119,13 @@ export class Dialog extends Component {
         DomHandler.addClass(document.body, 'p-overflow-hidden');
 
         const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement);
-        this.contentElement.style.height = 'calc(100vh - ' + diffHeight +'px)';
+        this.contentElement.style.minHeight = 'calc(100vh - ' + diffHeight +'px)';
     }
 
     restoreMaximize() {
         DomHandler.removeClass(this.container, 'p-dialog-maximized');
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
-        this.contentElement.style.height = 'auto';
+        this.contentElement.style.minHeight = 'auto';
     }
    
     enableModality() {

@@ -14,12 +14,8 @@ interface DialogProps {
     style?: object;
     className?: string;
     showHeader?: boolean;
-    positionLeft?: number;
-    positionTop?: number;
     appendTo?: HTMLElement;
     baseZIndex?: number;
-    minX?: number;
-    minY?: number;
     maximizable?: boolean;
     blockScroll?: boolean;
     onHide(): void;

@@ -40,7 +40,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation dialog-demo">
-                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -203,18 +203,6 @@ const footer = (
                             <td>Whether to show the header or not.</td>
                         </tr>
                         <tr>
-                            <td>positionLeft</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Left coordinate value of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>positionTop</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Top coordinate value of the dialog.</td>
-                        </tr>
-                        <tr>
                             <td>appendTo</td>
                             <td>DOM element</td>
                             <td>null</td>
@@ -225,18 +213,6 @@ const footer = (
                             <td>number</td>
                             <td>0</td>
                             <td>Base zIndex value to use in layering.</td>
-                        </tr>
-                        <tr>
-                            <td>minX</td>
-                            <td>number</td>
-                            <td>0</td>
-                            <td>Minimum value for the left coordinate of dialog in dragging.</td>
-                        </tr>
-                        <tr>
-                            <td>minY</td>
-                            <td>number</td>
-                            <td>0</td>
-                            <td>Minimum value for the top coordinate of dialog in dragging.</td>
                         </tr>
                         <tr>
                             <td>maximizable</td>
@@ -368,7 +344,7 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}}  footer={footer} minY={70} onHide={this.onHide} maximizable={true}>
+                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
