@@ -1,23 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { CSSTransition } from 'react-transition-group';
 
 class PanelMenuSub extends Component {
 
     static defaultProps = {
-        model: null,
-        className: null
+        model: null
     };
 
     static propTypes = {
-        model: PropTypes.any,
-        className: PropTypes.string
+        model: PropTypes.any
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            activeItem : null
+            activeItem: null
         };
     }
 
@@ -83,11 +82,15 @@ class PanelMenuSub extends Component {
     }
 
     renderSubmenu(item, active) {
-        const className = classNames({'p-panelmenu-content-wrapper-collapsed': !active, 'p-panelmenu-content-wrapper-expanded': active});
+        const submenuWrapperClassName = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': !active});
 
-        if(item.items) {
+        if (item.items) {
             return (
-                <PanelMenuSub model={item.items} className={className}/>
+                <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={active}>
+                    <div className={submenuWrapperClassName}>
+                        <PanelMenuSub model={item.items} />
+                    </div>
+                </CSSTransition>
             );
         }
         else {
@@ -163,7 +166,7 @@ export class PanelMenu extends Component {
     };
 
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             activeItem: null
         }
@@ -230,7 +233,7 @@ export class PanelMenu extends Component {
         const headerClassName = classNames('p-component p-panelmenu-header', {'p-highlight': active});
         const toggleIcon = this.renderPanelToggleIcon(item, active);
         const itemIcon = this.renderPanelIcon(item);
-        const contentWrapperClassName = classNames('p-panelmenu-content-wrapper', {'p-panelmenu-content-wrapper-collapsed': !active, 'p-panelmenu-content-wrapper-expanded': active});
+        const contentWrapperClassName = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': !active});
 
         return (
             <div key={item.label + '_' + index} className={className} style={item.style}>
@@ -241,11 +244,14 @@ export class PanelMenu extends Component {
                         <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </div>
-                <div className={contentWrapperClassName}>
-                    <div className="p-panelmenu-content">
-                        <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" />
+                <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={active}>
+                    <div className={contentWrapperClassName}>
+                        <div className="p-panelmenu-content">
+                            <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" />
+                        </div>
                     </div>
-                </div>
+                </CSSTransition>
+                
             </div>
         );
     }
