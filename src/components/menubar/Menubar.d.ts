@@ -6,8 +6,6 @@ interface MenubarProps {
     model?: MenuItem[];
     style?: object;
     className?: string;
-    autoZIndex?: boolean;
-    bazeZIndex?: number;
 }
 
 export class Menubar extends React.Component<MenubarProps,any> {}

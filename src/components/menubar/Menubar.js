@@ -9,9 +9,7 @@ export class Menubar extends Component {
         id: null,
         model: null,
         style: null,
-        className: null,
-        autoZIndex: true,
-        baseZIndex: 0
+        className: null
     };
 
     static propTypes = {
@@ -19,8 +17,6 @@ export class Menubar extends Component {
         model: PropTypes.array,
         style: PropTypes.object,
         className: PropTypes.string,
-        autoZIndex: PropTypes.bool,
-        baseZIndex: PropTypes.number
     };
 
     renderCustomContent() {
