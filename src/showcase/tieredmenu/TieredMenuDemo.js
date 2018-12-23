@@ -28,7 +28,6 @@ export class TieredMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
                          ]
                       },
                       {
@@ -154,7 +153,7 @@ export class TieredMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
+                    <h3 className="first">Inline</h3>
                     <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>
@@ -669,7 +668,7 @@ export class TieredMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <h3 className="first">Basic</h3>
+                    <h3 className="first">Inline</h3>
                     <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>

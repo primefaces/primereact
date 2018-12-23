@@ -10,8 +10,9 @@ export class TieredMenuSub extends Component {
         root: false,
         className: null,
         popup: false,
-        resetMenu: false,
-        onLeafClick: null
+        onLeafClick: null,
+        onKeyDown: null,
+        parentActive: false
     };
 
     static propTypes = {
@@ -19,25 +20,46 @@ export class TieredMenuSub extends Component {
         root: PropTypes.bool,
         className: PropTypes.string,
         popup: PropTypes.bool,
-        resetMenu: PropTypes.bool,
-        onLeafClick: PropTypes.func
+        onLeafClick: PropTypes.func,
+        onKeyDown: PropTypes.func,
+        parentActive: PropTypes.bool
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            activeItem : null
+            activeItem: null
         };
+
+        this.onLeafClick = this.onLeafClick.bind(this);
+        this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.resetMenu === true) {
-            return {
+    componentDidUpdate(prevProps) {
+        if (prevProps.parentActive && !this.props.parentActive) {
+            this.setState({
                 activeItem: null
-            }
+            });
         }
+    }
 
-        return null;
+    componentDidMount() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.element && !this.element.contains(event.target)) {
+                    this.setState({activeItem: null});
+                }
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
     }
 
     onItemMouseEnter(event, item) {
@@ -79,7 +101,7 @@ export class TieredMenuSub extends Component {
         
         if (this.props.root) {
             if (item.items) {
-                if (this.state.activeItem) {
+                if (this.state.activeItem && item === this.state.activeItem) {
                     this.setState({
                         activeItem: null
                     });
@@ -93,7 +115,7 @@ export class TieredMenuSub extends Component {
         }
 
         if (!item.items) {
-            this.props.onLeafClick(event);
+            this.onLeafClick();
         }
     }
 
@@ -104,7 +126,7 @@ export class TieredMenuSub extends Component {
             //down
             case 40:
                 var nextItem = this.findNextItem(listItem);
-                if(nextItem) {
+                if (nextItem) {
                     nextItem.children[0].focus();
                 }
                 
@@ -114,7 +136,7 @@ export class TieredMenuSub extends Component {
             //up
             case 38:
                 var prevItem = this.findPrevItem(listItem);
-                if(prevItem) {
+                if (prevItem) {
                     prevItem.children[0].focus();
                 }
                 
@@ -130,31 +152,26 @@ export class TieredMenuSub extends Component {
 
                     setTimeout(() => {
                         listItem.children[1].children[0].children[0].focus();
-                    }, 10);
-                    
-                    this.props.onKeyboardNavigation();
+                    }, 50);
                 }
-               
-                event.preventDefault();
-            break;
-
-            //left
-            case 37:
-                this.setState({
-                    activeItem: null
-                });
-
-                setTimeout(() => {
-                    listItem.parentElement.parentElement.children[0].focus();
-                }, 10);
-            
-                this.props.onKeyboardNavigation();
                
                 event.preventDefault();
             break;
             
             default:
             break;
+        }
+
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown(event, listItem);
+        }
+    }
+
+    onChildItemKeyDown(event, childListItem) {
+        //left
+        if (event.which === 37) {
+            this.setState({activeItem: null});
+            childListItem.parentElement.previousElementSibling.focus();
         }
     }
 
@@ -174,6 +191,16 @@ export class TieredMenuSub extends Component {
             return DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? this.findPrevItem(prevItem) : prevItem;
         else
             return null;
+    }
+
+    onLeafClick() {
+        this.setState({
+            activeItem: null
+        });
+
+        if (this.props.onLeafClick) {
+            this.props.onLeafClick();
+        }
     }
 
     renderSeparator(index) {
@@ -209,7 +236,7 @@ export class TieredMenuSub extends Component {
     renderSubmenu(item) {
         if(item.items) {
             return (
-                <TieredMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} popup={this.props.popup} />
+                <TieredMenuSub model={item.items} onLeafClick={this.onLeafClick} popup={this.props.popup} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
             );
         }
         else {
@@ -261,7 +288,7 @@ export class TieredMenuSub extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul className={className}>
+            <ul ref={el => this.element = el} className={className}>
                 {submenu}
             </ul>
         );   

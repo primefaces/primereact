@@ -33,51 +33,13 @@ export class TieredMenu extends Component {
         onHide: PropTypes.func
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            resetMenu: false
-        }
-        this.onMenuClick = this.onMenuClick.bind(this);
-        this.onLeafClick = this.onLeafClick.bind(this);
-        this.onMenuMouseEnter = this.onMenuMouseEnter.bind(this);
-    }
-
-    componentDidMount() {
-        this.bindDocumentClickListener();
-    }
-
     toggle(event) {
         if (this.props.popup) {
-            this.targetClick = true;
-
-            this.setState({
-                resetMenu: true
-            });
-
             if (this.container.offsetParent)
                 this.hide(event);
             else
                 this.show(event);
         }
-    }
-
-    onMenuClick() {
-        this.selfClick = true;
-
-        this.setState({
-            resetMenu: false
-        });
-
-        if (!this.props.popup && this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        }
-    }
-
-    onMenuMouseEnter() {
-        this.setState({
-            resetMenu: false
-        });
     }
 
     show(event) {
@@ -92,7 +54,7 @@ export class TieredMenu extends Component {
         }, 1);
 
         DomHandler.absolutePosition(this.container,  event.currentTarget);
-        this.bindDocumentResizeListener();
+        this.bindDocumentListeners();
         
         if (this.props.onShow) {
             this.props.onShow(event);
@@ -111,59 +73,52 @@ export class TieredMenu extends Component {
                 }
             }, 150);
         }
-            
+
         if (this.props.onHide) {
             this.props.onHide(event);
         }
 
+        this.unbindDocumentListeners();
+    }
+
+    bindDocumentListeners() {
+        this.bindDocumentClickListener();
+        this.bindDocumentResizeListener();
+    }
+    
+    unbindDocumentListeners() {
+        this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
     }
 
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.targetClick && !this.selfClick) {
-                    if (this.props.popup) {
-                        this.hide(event);
-                    }
-                    
-                    this.setState({
-                        resetMenu: true
-                    });
+                if (this.props.popup && !this.container.contains(event.target)) {
+                    this.hide(event);
                 }
-
-                this.selfClick = false;
-                this.targetClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
         }
     }
 
-    onLeafClick(event) {
-        this.setState({
-            resetMenu: true
-        });
-
-        event.stopPropagation();
+    unbindDocumentClickListener() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
     }
 
     bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if(this.container.offsetParent) {
+                if (this.container.offsetParent) {
                     this.hide(event);
                 }
             };
 
             window.addEventListener('resize', this.documentResizeListener);
-        }
-    }
-
-    unbindDocumentClickListener() {
-        if(this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
         }
     }
 
@@ -175,16 +130,15 @@ export class TieredMenu extends Component {
     }
 
     componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindDocumentResizeListener();
+        this.unbindDocumentListeners();
     }
 
     renderElement() {
         const className = classNames('p-tieredmenu p-component', {'p-tieredmenu-dynamic p-menu-overlay': this.props.popup}, this.props.className);
 
         return(
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
-                <TieredMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} popup={this.props.popup} />
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+                <TieredMenuSub model={this.props.model} root={true} popup={this.props.popup} />
             </div>
         );
     }
