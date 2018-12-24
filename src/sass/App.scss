@@ -47,7 +47,7 @@ body {
     font-size: 14px;
 }
 
-#layout-topbar {
+.layout-topbar {
     background-color: #20272a;
     display: block;
     padding: 0;
@@ -925,6 +925,8 @@ body {
 }
 
 .templates-grid {
+    text-align: center;
+    
     a img {
         @include transition(all .5s);
     }
@@ -958,7 +960,7 @@ body {
 }
 
 @media screen and (max-width: 64em) {
-    #layout-topbar {
+    .layout-topbar {
         text-align: center;
 
         .menu-button {

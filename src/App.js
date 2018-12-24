@@ -149,7 +149,6 @@ export class App extends Component {
         this.onThemesLinkClick = this.onThemesLinkClick.bind(this);
         this.onThemesLinkKeyDown = this.onThemesLinkKeyDown.bind(this);
         this.onThemeChangerKeyDown = this.onThemeChangerKeyDown.bind(this);
-        this.onDocumentClick = this.onDocumentClick.bind(this);
     }
 
     changeTheme(event, theme, dark) {
@@ -173,7 +172,7 @@ export class App extends Component {
         this.setState({
             themeMenuActive: false
         });
-
+        this.unbindDocumentClickListener();
         event.preventDefault();
     }
 
@@ -200,9 +199,12 @@ export class App extends Component {
     }
 
     onThemesLinkClick() {
-        this.themeLinkClick = true;
         this.setState({
             themeMenuActive: !this.state.themeMenuActive
+        }, () => {
+            if (this.state.themeMenuActive) {
+                this.bindDocumentClickListener();
+            }
         });
     }
 
@@ -218,20 +220,34 @@ export class App extends Component {
         }
     }
 
-    onDocumentClick() {
-        if (!this.themeLinkClick && this.state.themeMenuActive) {
-            this.setState({
-                activeThemes: false
-            });
+    bindDocumentClickListener() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.themeMenu && !this.themeMenu.contains(event.target)) {
+                    this.setState({themeMenuActive: null});
+                    this.unbindDocumentClickListener();
+                }
+            };
+
+            document.addEventListener('click', this.documentClickListener);
         }
-        
-        this.themeLinkClick = false;
+    }
+    
+    unbindDocumentClickListener() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
     }
 
     render() {
         return (
-            <div className='layout-wrapper' onClick={this.onDocumentClick}>
-                <div id="layout-topbar">
+            <div className="layout-wrapper">
+                <div className="layout-topbar">
                     <span className="menu-button" tabIndex="0" onClick={this.onMenuButtonClick} onKeyDown={this.onMenuButtonKeyDown}>
                         <i className="pi pi-bars"></i>
                     </span>
@@ -244,7 +260,7 @@ export class App extends Component {
                             <Link to="/setup" > GET STARTED </Link>
                         </li>
    
-                        <li className="topbar-menu-themes">
+                        <li ref={el => this.themeMenu = el} className="topbar-menu-themes">
                             <span tabIndex="0" onClick={this.onThemesLinkClick} onKeyDown={this.onThemesLinkKeyDown}>THEMES</span>
                             <ul className={classNames({'active-top-menu': this.state.themeMenuActive})}>
                                 <li className="topbar-submenu-header">THEMING</li>

@@ -369,18 +369,6 @@ const items: [
                                         <td>horizontal</td>
                                         <td>Defines the orientation, valid values are horizontal and vertical.</td>
                                     </tr>
-                                    <tr>
-                                        <td>baseZIndex</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Base zIndex value to use in layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>autoZIndex</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to automatically manage layering.</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
