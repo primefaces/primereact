@@ -57,6 +57,21 @@ export default class DomHandler {
             return 0;
         }
     }
+	
+	static getClientHeight(el, margin) {
+        if (el) {
+            let height = el.clientHeight;
+
+            if (margin) {
+                let style = getComputedStyle(el);
+                height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+            }
+
+            return height;
+        } else {
+            return 0;
+        }
+    }
 
     static getViewport() {
         let win = window,

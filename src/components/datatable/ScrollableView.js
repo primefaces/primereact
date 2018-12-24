@@ -125,7 +125,7 @@ export class ScrollableView extends Component {
         }
         
         if(this.props.virtualScroll) {
-            let viewport = DomHandler.getOuterHeight(this.scrollBody);
+            let viewport = DomHandler.getClientHeight(this.scrollBody);
             let tableHeight = DomHandler.getOuterHeight(this.scrollTable);
             let pageHeight = this.props.virtualRowHeight * this.props.rows;
             let virtualTableHeight = DomHandler.getOuterHeight(this.virtualScroller);
