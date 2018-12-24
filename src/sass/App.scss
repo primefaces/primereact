@@ -925,6 +925,8 @@ body {
 }
 
 .templates-grid {
+    text-align: center;
+    
     a img {
         @include transition(all .5s);
     }

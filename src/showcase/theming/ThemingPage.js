@@ -34,22 +34,28 @@ export class ThemingPage extends Component {
                         premium themes that share the same design language of the layout for a unified look.</p>
 
                     <div className="p-grid templates-grid">
-                        <div className="p-col-12 p-md-4">
+                        <div className="p-col-12 p-md-6">
                             <h4>Serenity with Material Design</h4>
                             <a href="https://www.primefaces.org/layouts/serenity-react">
-                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg" style={{width: '100%'}} />
+                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg"  />
                             </a>
                         </div>
-                        <div className="p-col-12 p-md-4">
+                        <div className="p-col-12 p-md-6">
                             <h4>Ultima with Material Design</h4>
                             <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" style={{width: '100%'}} />
+                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" />
                             </a>
                         </div>
-                        <div className="p-col-12 p-md-4">
+                        <div className="p-col-12 p-md-6">
                             <h4>Avalon with Bootstrap Styling</h4>
                             <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" style={{width: '100%'}} />
+                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-6">
+                            <h4>Apollo with Light&Dark Mode</h4>
+                            <a href="https://www.primefaces.org/layouts/apollo-react">
+                                <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react-sqr.png" />
                             </a>
                         </div>
                     </div>
