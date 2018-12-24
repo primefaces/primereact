@@ -38,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "compile-components": "./node_modules/\\@babel/cli/bin/babel.js src/components --out-dir components --presets=@babel/env,@babel/react --plugins=@babel/plugin-proposal-class-properties",
+    "compile-components": "./node_modules/\\@babel/cli/bin/babel.js src/components --out-dir components --presets=@babel/env,@babel/react --plugins=@babel/plugin-proposal-class-properties --copy-files",
     "build-resources": "gulp build-resources",
     "build-exports": "gulp build-exports"
   },
