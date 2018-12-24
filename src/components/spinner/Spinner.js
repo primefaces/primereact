@@ -323,7 +323,7 @@ export class Spinner extends Component {
         const className = classNames('p-spinner-input', this.props.inputClassName);
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} value={this.props.value||''}
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} value={this.props.value == null ? '' : this.props.value}
                 type="text" size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly} name={this.props.name}
                 onKeyDown={this.onInputKeyDown} onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} />
         );
