@@ -194,8 +194,8 @@ export class Lightbox extends Component {
         return (
             <div style={this.props.style} className={this.props.className}>{
                 this.props.images && this.props.images.map((image,index)=>{
-                    var imageItem=
-                        <a href={image.source} onClick={event=>this.onImageClick(event,image,index)} key={index} ref={el=>this.image=el} style={{marginLeft:4}}>
+                    var imageItem =
+                        <a href={image.source} onClick={event=>this.onImageClick(event,image,index)} key={index} className="p-lightbox-image-target">
                             <img src={image.thumbnail} title={image.title} alt={image.alt}/>
                         </a>
                     ;

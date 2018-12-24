@@ -43,7 +43,7 @@ export class LightboxDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation lightbox-demo">
                     <h3 className="first">Basic</h3>
                     <Lightbox type="images" images={images} />
 
