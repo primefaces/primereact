@@ -61,6 +61,12 @@ export class Lightbox extends Component {
         this.unbindDocumentClickListener();
     }
 
+    componentDidUpdate() {
+        if (this.state.visible) {
+            this.center();
+        }
+    }
+
     onImageClick(event, image, i) {
         this.index = i;
         this.setState({loading:true});
@@ -83,7 +89,6 @@ export class Lightbox extends Component {
         DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-dialog-mask');
         document.body.appendChild(this.mask);
         this.panel.style.zIndex = String(DomHandler.generateZIndex());
-        this.center();
         this.setState({visible:true});
         this.bindDocumentClickListener();
     }
@@ -132,7 +137,6 @@ export class Lightbox extends Component {
 
     prev() {
         this.setState({loading:true});
-        this.img.style.display = 'none';
         if(this.index > 0) {
             this.displayImage(this.props.images[--this.index]);
         }
@@ -140,7 +144,6 @@ export class Lightbox extends Component {
 
     next() {
         this.setState({loading:true});
-        this.img.style.display = 'none';
         if(this.index <= (this.props.images.length - 1)) {
             this.displayImage(this.props.images[++this.index]);
         }
@@ -216,10 +219,18 @@ export class Lightbox extends Component {
     }
 
     renderContent() {
+        let content;
+
+        if (this.state.visible) {
+            if (this.props.target) 
+                content = this.props.children;
+            else
+                content = <img src={this.state.currentImage ? this.state.currentImage.source : null} onLoad={this.onImageLoad} alt="" style={{display: this.state.loading ? 'none': 'inline'}} />;
+        }
+        
         return (
             <div className="p-lightbox-content" ref={el => this.content = el} style={{transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing}}>
-                <img ref={el => this.img = el} src={this.state.currentImage ? this.state.currentImage.source : null} onLoad={this.onImageLoad} alt="" />
-                {this.props.children}
+                {content}
             </div>
         );
     }
