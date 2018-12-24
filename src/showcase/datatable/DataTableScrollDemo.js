@@ -48,7 +48,7 @@ export class DataTableScrollDemo extends Component {
                 lazyCars: this.loadLazyCars(event.first),
                 loading: false
             });
-        }, 250);
+        }, 50);
     }
 
     loadLazyCars(first) {
@@ -228,7 +228,7 @@ export class DataTableScrollDemo extends Component {
                 lazyCars: this.loadLazyCars(event.first),
                 loading: false
             });
-        }, 250);
+        }, 50);
     }
 
     loadLazyCars(first) {
