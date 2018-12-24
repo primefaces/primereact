@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Tooltip from "../tooltip/Tooltip";
+import DomHandler from '../utils/DomHandler';
 
 export class InputTextarea extends Component {
 
@@ -29,16 +30,6 @@ export class InputTextarea extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.onInput = this.onInput.bind(this);
-        this.state = {filled: false};
-
-        this.textareaProps = Object.assign({}, this.props);
-        delete this.textareaProps.autoResize;
-        delete this.textareaProps.onInput;
-        delete this.textareaProps.onBlur;
-        delete this.textareaProps.onKeyUp;
-        delete this.textareaProps.onInput;
-        delete this.textareaProps.tooltip;
-        delete this.textareaProps.tooltipOptions;
     }
 
     onFocus(e) {
@@ -76,11 +67,16 @@ export class InputTextarea extends Component {
             this.resize();
         }
 
+        if (!this.props.onChange) {
+            if (e.target.value.length > 0)
+                DomHandler.addClass(e.target, 'p-filled');
+            else
+                DomHandler.removeClass(e.target, 'p-filled');
+        }
+
         if (this.props.onInput) {
             this.props.onInput(e);
         }
-
-        this.updateFilledState(e);
     }
 
     resize() {
@@ -104,18 +100,8 @@ export class InputTextarea extends Component {
             this.cachedScrollHeight = this.element.scrollHeight;
         }
     }
-
-    updateFilledState(e) {
-        let _filled = (e.target.value && e.target.value.length) ? true : false;
-        this.setState({filled: _filled});
-    }
     
     componentDidMount() {
-        let _value =  this.textareaProps.value||this.textareaProps.defaultValue,
-        _filled = (_value && _value.length) ? true : false;
-        
-        this.setState({filled: _filled});
-
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -154,18 +140,23 @@ export class InputTextarea extends Component {
     }
 
     render() {
-        if(this.props.hasOwnProperty('value')) {
-            this.textareaProps.value = this.props.value;
-        }
-
-        var className = classNames('p-inputtext p-inputtextarea p-component', this.props.className, {
+        const className = classNames('p-inputtext p-inputtextarea p-component', this.props.className, {
             'p-disabled': this.props.disabled,
-            'p-state-filled': this.state.filled,
+            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0),
             'p-inputtextarea-resizable': this.props.autoResize
         });
 
+        let textareaProps = Object.assign({}, this.props);
+        delete textareaProps.autoResize;
+        delete textareaProps.onFocus;
+        delete textareaProps.onBlur;
+        delete textareaProps.onKeyUp;
+        delete textareaProps.onInput;
+        delete textareaProps.tooltip;
+        delete textareaProps.tooltipOptions;
+
         return (
-            <textarea {...this.textareaProps} className={className} ref={input => this.element = input} 
+            <textarea {...textareaProps} className={className} ref={input => this.element = input} 
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
         );
     }
