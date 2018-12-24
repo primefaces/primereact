@@ -22,6 +22,7 @@
    position: absolute;
    top: 50%;
    cursor: pointer;
+   z-index: 1;
 }
 
 .p-lightbox-nav-left {

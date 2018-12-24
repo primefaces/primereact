@@ -30,6 +30,10 @@ export class LightboxDemo extends Component {
             }
         ];
 
+        const videoTarget = (
+            <button className="p-link">Watch a Video</button>
+        );
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -44,10 +48,7 @@ export class LightboxDemo extends Component {
                     <Lightbox type="images" images={images} />
 
                     <h3>Content</h3>
-                    <Lightbox type="content">
-                        <span className="group">
-                            Watch Video
-                        </span>
+                    <Lightbox type="content" target={videoTarget}>
                         <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>
@@ -77,7 +78,7 @@ import {Lightbox} from 'primereact/lightbox';
 `}</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Lightbox has two modes; image and custom content defined using <i>type</i> property. In image mode a collection of images are required to display 
+                        <p>Lightbox has two modes; image and custom content. In image mode a collection of images are required to display 
                         where an image object in the collection defines the source of the original image, thumbnail image and the title.</p>
 
                         <CodeHighlight className="language-javascript">
@@ -99,11 +100,10 @@ var images=[
 `}
                         </CodeHighlight>
                         
-                        <p>Content mode is enabled by setting <i>type</i> property to "content", providing an anchor to open the lightbox and content to display inside lightbox.</p>
+                        <p>Content mode is enabled by defining <i>target</i> property as the trigger to display the lightbox. In this setting, children of the component would be displayed inside the overlay</p>
                         <CodeHighlight className="language-jsx">
                             {`
-<Lightbox type="content">
-    <a>Watch Video</a>
+<Lightbox target={<a>Watch Video</a>}>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
 </Lightbox>
 
@@ -144,10 +144,10 @@ var images=[
                                         <td>An array of images to display.</td>
                                     </tr>
                                     <tr>
-                                        <td>type</td>
-                                        <td>string</td>
-                                        <td>images</td>
-                                        <td>Type of the lightbox, valid values are "image" and "content".</td>
+                                        <td>target</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Target element to show the Lightbox in content mode.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -258,6 +258,10 @@ export class LightboxDemo extends Component {
             }
         ];
 
+        const videoTarget = (
+            <button className="p-link">Watch a Video</button>
+        );
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -272,10 +276,7 @@ export class LightboxDemo extends Component {
                     <Lightbox type="images" images={images} />
 
                     <h3>Content</h3>
-                    <Lightbox type="content">
-                        <span className="group">
-                            Watch Video
-                        </span>
+                    <Lightbox type="content" target={videoTarget}>
                         <iframe title="Video" width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameBorder="0" allowFullScreen></iframe>
                     </Lightbox>
                 </div>

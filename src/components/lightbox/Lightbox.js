@@ -8,45 +8,60 @@ export class Lightbox extends Component {
     static defaultProps = {
         id: null,
         images: null,
-        type: 'images',
+        target: null,
         style: null,
         className: null,
         easing: 'ease-out',
-        effectDuration:'500ms'
+        effectDuration: '500ms'
     };
 
     static propTypes = {
         id: PropTypes.string,
-        images:PropTypes.array,
-        type:PropTypes.string,
-        style:PropTypes.object,
-        className:PropTypes.string,
-        easing:PropTypes.string,
-        effectDuration:PropTypes.string
+        images: PropTypes.array,
+        target: PropTypes.any,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        easing: PropTypes.string,
+        effectDuration: PropTypes.string
     };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            visible:false,
-            currentImage:null
+            visible: false,
+            currentImage: null
         };
 
         this.next = this.next.bind(this);
         this.prev = this.prev.bind(this);
+        this.onImageLoad = this.onImageLoad.bind(this);
+        this.onTargetClick = this.onTargetClick.bind(this);
     }
 
-    componentDidMount() {
-        document.addEventListener('click', (event)=>{
-            if(!this.preventDocumentClickListener && this.state.visible) {
-                this.hide(event);
-            }
-            this.preventDocumentClickListener = false;
-        });
+    bindDocumentClickListener() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.panel && !this.panel.contains(event.target)) {
+                    this.hide();
+                }
+            };
+            document.addEventListener('click', this.documentClickListener);
+        }
     }
 
-    onImageClick(event,image,i) {
+    unbindDocumentClickListener() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    componentWillMount() {
+        this.unbindDocumentClickListener();
+    }
+
+    onImageClick(event, image, i) {
         this.index = i;
         this.setState({loading:true});
         this.content.style.width = 32 + 'px';
@@ -57,20 +72,35 @@ export class Lightbox extends Component {
         event.preventDefault();
     }
 
-    onLinkClick(event){
+    onTargetClick(event) {
         this.show();
-        this.preventDocumentClickListener = true;
         event.preventDefault();
     }
 
-    show(){
+    show() {
         this.mask = document.createElement('div');
         this.mask.style.zIndex = String(DomHandler.generateZIndex());
         DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-dialog-mask');
         document.body.appendChild(this.mask);
-        this.zindex = String(DomHandler.generateZIndex());
+        this.panel.style.zIndex = String(DomHandler.generateZIndex());
         this.center();
         this.setState({visible:true});
+        this.bindDocumentClickListener();
+    }
+
+    hide() {
+        this.index = null;
+        this.setState({currentImage:null})
+        this.panel.style.left = 'auto';
+        this.panel.style.top = 'auto';
+
+        if(this.mask) {
+            document.body.removeChild(this.mask);
+            this.mask = null;
+        }
+
+        this.setState({visible:false});
+        this.unbindDocumentClickListener();
     }
 
     center() {
@@ -91,21 +121,6 @@ export class Lightbox extends Component {
 
         this.panel.style.left = x + 'px';
         this.panel.style.top = y + 'px';
-    }
-
-    hide(event){
-        this.index = null;
-        this.setState({currentImage:null})
-        this.panel.style.left = 'auto';
-        this.panel.style.top = 'auto';
-
-        if(this.mask) {
-            document.body.removeChild(this.mask);
-            this.mask = null;
-        }
-
-        event.preventDefault();
-        this.setState({visible:false})
     }
 
     displayImage(image){
@@ -149,21 +164,32 @@ export class Lightbox extends Component {
             DomHandler.fadeIn(image, 500);
             image.style.display = 'block';
             this.setState({loading:false});
-        }, parseInt(this.props.effectDuration,10));
+        }, parseInt(this.props.effectDuration, 10));
     }
 
-    render() {
-        var images;
-        var contentText,contentFrame;
+    renderLeftNav() {
+        const className = classNames('p-lightbox-nav-left p-link', {'p-hidden': !(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)});
 
-        var leftButton=classNames('p-lightbox-nav-left p-link',
-            {'p-hidden':!(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)} );
-        var rightButton=classNames('p-lightbox-nav-right p-link',
-            {'p-hidden':!(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)} );
-        var containerClassName = classNames('p-lightbox p-component p-hidden', {'p-lightbox-loading':this.state.loading});
+        return (
+            <button className={className} onClick={this.prev}>
+                <span className="p-lightbox-nav-icon pi pi-chevron-left"></span>
+            </button>
+        );
+    }
 
-        if(this.props.type==='images'){
-            images=<div style={this.props.style} className={this.props.className}>{
+    renderRightNav() {
+        const className = classNames('p-lightbox-nav-right p-link', {'p-hidden': !(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)});
+
+        return (
+            <button className={className} onClick={this.next}>
+                <span className="p-lightbox-nav-icon pi pi-chevron-right"></span>
+            </button>
+        )
+    }
+
+    renderImages() {
+        return (
+            <div style={this.props.style} className={this.props.className}>{
                 this.props.images && this.props.images.map((image,index)=>{
                     var imageItem=
                         <a href={image.source} onClick={event=>this.onImageClick(event,image,index)} key={index} ref={el=>this.image=el} style={{marginLeft:4}}>
@@ -171,41 +197,49 @@ export class Lightbox extends Component {
                         </a>
                     ;
                     return imageItem;
-                })}</div>
-        }
-        if(this.props.type==='content'){
-            contentText=this.props.children && this.props.children.map((child,index)=>
-                child.type==='a'&&<span style={this.props.style} className={this.props.className}
-                                                        onClick={this.onLinkClick.bind(this)} key={index}>
-                        {child}
-                </span>)
-            contentFrame=this.props.children && this.props.children.map((child,index)=>
-                child.type!=='a'&&<span key={index}>
-                    {child}
+                })}
+            </div>
+        );
+    }
+
+    renderTarget() {
+        if (this.props.target) {
+            return (
+                <span onClick={this.onTargetClick}>
+                    {this.props.target}
                 </span>
-            )
+            );
         }
+        else {
+            return this.renderImages();
+        }
+    }
+
+    renderContent() {
+        return (
+            <div className="p-lightbox-content" ref={el => this.content = el} style={{transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing}}>
+                <img ref={el => this.img = el} src={this.state.currentImage ? this.state.currentImage.source : null} onLoad={this.onImageLoad} alt="" />
+                {this.props.children}
+            </div>
+        );
+    }
+
+    render() {
+        const leftButton = this.renderLeftNav();
+        const rightButton = this.renderRightNav();
+        const target = this.renderTarget();
+        const content = this.renderContent();
+        const containerClassName = classNames('p-lightbox p-component p-hidden', {'p-lightbox-loading': this.state.loading});
+
         return (
             <div id={this.props.id}>
-                {images}
-                {contentText}
-                <div className={containerClassName}
-                     style={{transitionProperty:'all',transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing, display:this.state.visible?'block':'none',
-                                zIndex:this.zindex }} ref={el=>this.panel=el } onClick={()=>this.preventDocumentClickListener = true}>
+                {target}
+                <div className={containerClassName} style={{transitionProperty:'all', transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing, display: this.state.visible ? 'block': 'none'}} 
+                    ref={el => this.panel = el}>
                     <div className="p-lightbox-content-wrapper">
-                        <button className={leftButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.prev}>
-                            <span className="p-lightbox-nav-icon pi pi-chevron-left"></span>
-                        </button>
-                        <div className="p-lightbox-content" ref={el=>this.content=el}
-                             style={{transitionDuration:this.props.effectDuration, transitionTimingFunction:this.props.easing}}>
-                            <img ref={el => this.img = el} src={this.state.currentImage ? this.state.currentImage.source : ''}
-                                 onLoad={this.onImageLoad.bind(this)} alt=""/>
-                            {contentFrame}
-                        </div>
-
-                        <button className={rightButton} style={{zIndex:this.zindex?this.zindex+1:null}} onClick={this.next}>
-                            <span className="p-lightbox-nav-icon pi pi-chevron-right"></span>
-                        </button>
+                        {leftButton}
+                        {content}
+                        {rightButton}
                     </div>
                 </div>
             </div>
