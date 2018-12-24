@@ -81,7 +81,11 @@ export class TreeTableBody extends Component {
             let rows = [];
 
             for (let i = startIndex; i < endIndex; i++) {
-                rows.push(this.createRow(this.props.value[i]));
+                let rowData = this.props.value[i];
+                if (rowData)
+                    rows.push(this.createRow(this.props.value[i]));
+                else
+                    break;
             }
 
             return rows;
