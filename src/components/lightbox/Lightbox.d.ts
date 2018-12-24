@@ -3,7 +3,7 @@ import * as React from 'react';
 interface LightboxProps {
     id?: string;
     images?: any[];
-    type?: string;
+    target?: string;
     style?: object;
     className?: string;
     easing?: string;
