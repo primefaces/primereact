@@ -49,7 +49,7 @@ dependencies: {
     "react-dom": "^16.0.0",
     "react-transition-group": "^2.2.1",
     "classnames": "^2.2.5",
-    "primeicons": "^1.0.0-beta.10"
+    "primeicons": "^1.0.0"
 }
 
 `}
