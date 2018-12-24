@@ -37,7 +37,7 @@ export class KeyFilterDemo extends Component {
                             <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
                         </div>
                         <div className="p-col-12 p-md-4">
-                            <InputText keyfilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
+                            <InputText keyfilter={/^[^<>*!]+$/} placeholder="Block < > * !"/>
                         </div>
                         <div className="p-col-12 p-md-4">
                             <InputText keyfilter={/[^\s]/} placeholder="Block space key"/>
@@ -150,7 +150,7 @@ export class KeyFilterDemo extends Component {
                             <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
                         </div>
                         <div className="p-col-12 p-md-4">
-                            <InputText keyfilter={/^[^#<>*!]+$/} placeholder="Block # < > * !"/>
+                            <InputText keyfilter={/^[^<>*!]+$/} placeholder="Block < > * !"/>
                         </div>
                         <div className="p-col-12 p-md-4">
                             <InputText keyfilter={/[^\\s]/} placeholder="Block space key"/>

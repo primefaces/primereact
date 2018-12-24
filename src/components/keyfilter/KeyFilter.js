@@ -59,34 +59,31 @@ export default class KeyFilter {
         return e.charCode || e.keyCode || e.which;
     }
 
-    static onKeyPress(e,keyfilter, validateOnly) {
+    static onKeyPress(e, keyfilter, validateOnly) {
         if(validateOnly) {
             return;
         }
 
-        this.regex = KeyFilter.DEFAULT_MASKS[keyfilter]? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
-        let browser = DomHandler.getBrowser();
+        const regex = KeyFilter.DEFAULT_MASKS[keyfilter]? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
+        const browser = DomHandler.getBrowser();
 
         if (e.ctrlKey || e.altKey) {
             return;
         }
 
-        let k = this.getKey(e);
+        const k = this.getKey(e);
         if (browser.mozilla && (this.isNavKeyPress(e) || k === KeyFilter.KEYS.BACKSPACE || (k === KeyFilter.KEYS.DELETE && e.charCode === 0))) {
             return;
         }
 
-        let c = this.getCharCode(e);
-        let cc = String.fromCharCode(c);
-        let ok = true;
+        const c = this.getCharCode(e);
+        const cc = String.fromCharCode(c);
 
         if (browser.mozilla && (this.isSpecialKey(e) || !cc)) {
             return;
         }
 
-        ok = this.regex.test(cc);
-
-        if (!ok) {
+        if (!regex.test(cc)) {
             e.preventDefault();
         }
     }
