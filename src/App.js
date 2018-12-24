@@ -426,7 +426,7 @@ export class App extends Component {
                     <Route path="/deferredcontent" component={DeferredContentDemo}/>
 
                     <div className="content-section layout-footer clearfix">
-                        <span>Released under the MIT License,  Copyright © 2018 <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
+                        <span>PrimeReact 3.0.0-beta.1 by <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
                         <div className="footer-links">
                             <a href="https://github.com/primefaces/primereact"><i className=" icon-github fa fa-github-square"></i></a>
                             <a href="https://twitter.com/primereact"><i className="icon-twitter fa fa-twitter-square"></i></a>
