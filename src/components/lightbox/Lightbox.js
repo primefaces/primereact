@@ -61,12 +61,6 @@ export class Lightbox extends Component {
         this.unbindDocumentClickListener();
     }
 
-    componentDidUpdate() {
-        if (this.state.visible) {
-            this.center();
-        }
-    }
-
     onImageClick(event, image, i) {
         this.index = i;
         this.setState({loading:true});
@@ -96,9 +90,6 @@ export class Lightbox extends Component {
     hide() {
         this.index = null;
         this.setState({currentImage:null})
-        this.panel.style.left = 'auto';
-        this.panel.style.top = 'auto';
-
         if(this.mask) {
             document.body.removeChild(this.mask);
             this.mask = null;
@@ -108,30 +99,10 @@ export class Lightbox extends Component {
         this.unbindDocumentClickListener();
     }
 
-    center() {
-        let elementWidth = DomHandler.getOuterWidth(this.panel);
-        let elementHeight = DomHandler.getOuterHeight(this.panel);
-        let x,y;
-        if(elementWidth === 0 && elementHeight === 0) {
-            this.panel.style.visibility = 'hidden';
-            this.panel.style.display = 'block';
-            elementWidth = DomHandler.getOuterWidth(this.panel);
-            elementHeight = DomHandler.getOuterHeight(this.panel);
-            this.panel.style.display = 'none';
-            this.panel.style.visibility = 'visible';
-        }
-        let viewport = DomHandler.getViewport();
-        x = (viewport.width - elementWidth) / 2;
-        y = (viewport.height - elementHeight) / 2;
-
-        this.panel.style.left = x + 'px';
-        this.panel.style.top = y + 'px';
-    }
 
     displayImage(image){
         setTimeout(() => {
             this.setState({currentImage: image});
-            this.center();
         }, 1000);
     }
 
