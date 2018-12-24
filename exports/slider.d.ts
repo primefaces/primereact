@@ -1,3 +1,1 @@
-'use strict';
-
-module.exports = require('./components/slider/Slider');
+export * from './components/slider/Slider';
