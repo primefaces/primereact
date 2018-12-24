@@ -135,6 +135,16 @@ body {
                 position: relative;
                 cursor: pointer;
 
+                > i {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: #e80056;
+                    position: absolute;
+                    right: 20px;
+                    top: 24px;
+                }
+
                 > ul {
                     position: absolute;
                     top: 65px;

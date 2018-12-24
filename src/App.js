@@ -139,7 +139,8 @@ export class App extends Component {
         super();
         this.state = {
             mobileMenuActive: false,
-            themeMenuActive: false
+            themeMenuActive: false,
+            themeMenuVisited: false
         };
         this.theme = 'nova-light';
         this.changeTheme = this.changeTheme.bind(this);
@@ -200,7 +201,8 @@ export class App extends Component {
 
     onThemesLinkClick() {
         this.setState({
-            themeMenuActive: !this.state.themeMenuActive
+            themeMenuActive: !this.state.themeMenuActive,
+            themeMenuVisited: true
         }, () => {
             if (this.state.themeMenuActive) {
                 this.bindDocumentClickListener();
@@ -261,6 +263,7 @@ export class App extends Component {
                         </li>
    
                         <li ref={el => this.themeMenu = el} className="topbar-menu-themes">
+                            {!this.state.themeMenuVisited && <i class="topbar-menu-badge"></i>}
                             <span tabIndex="0" onClick={this.onThemesLinkClick} onKeyDown={this.onThemesLinkKeyDown}>THEMES</span>
                             <ul className={classNames({'active-top-menu': this.state.themeMenuActive})}>
                                 <li className="topbar-submenu-header">THEMING</li>
