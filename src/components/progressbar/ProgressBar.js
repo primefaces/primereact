@@ -28,13 +28,25 @@ export class ProgressBar extends Component {
         return this.props.value !== nextProps.value;
     }
 
+    renderLabel() {
+        if (this.props.showValue && this.props.value) {
+            return (
+                <div className="p-progressbar-label">{this.props.value + this.props.unit}</div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     renderDeterminate() {
         let className = classNames('p-progressbar p-component p-progressbar-determinate', this.props.className);
+        let label = this.renderLabel();
 
         return (
             <div  role="progressbar" id={this.props.id} className={className} style={this.props.style} aria-valuemin="0" aria-valuenow={this.props.value} aria-valuemax="100" aria-label={this.props.value}>
                 <div className="p-progressbar-value p-progressbar-value-animate" style={{width: this.props.value + '%', display: 'block'}}></div>
-                {this.props.showValue && <div className="p-progressbar-label" style={{display: this.props.value ? 'block' : 'none'}}>{this.props.value + this.props.unit}</div>}
+                {label}
             </div>
         );
     }
