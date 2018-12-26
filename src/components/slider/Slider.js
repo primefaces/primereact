@@ -8,7 +8,6 @@ export class Slider extends Component {
     static defaultProps = {
         id: null,
         value: null,
-        animate: false,
         min: 0,
         max: 100,
         orientation: "horizontal",
@@ -25,7 +24,6 @@ export class Slider extends Component {
     static propsTypes = {
         id: PropTypes.string,
         value: PropTypes.number,
-        animate: PropTypes.bool,
         min: PropTypes.number,
         max: PropTypes.number,
         orientation: PropTypes.string,
@@ -282,8 +280,7 @@ export class Slider extends Component {
         const className = classNames('p-slider p-component', this.props.className, {
             'p-disabled': this.props.disabled,
             'p-slider-horizontal': this.props.orientation === 'horizontal',
-            'p-slider-vertical': this.props.orientation === 'vertical',
-            'p-slider-animate': this.props.animate
+            'p-slider-vertical': this.props.orientation === 'vertical'
         });
 
         const content = this.props.range ? this.renderRangeSlider() : this.renderSingleSlider();

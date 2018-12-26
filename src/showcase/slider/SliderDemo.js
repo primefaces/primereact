@@ -14,7 +14,6 @@ export class SliderDemo extends Component {
             val2: 50, 
             val3: null,
             val4: null,
-            val5: null,
             rangeValues: [20, 80] 
         };
         this.onChangeSlider1 = this.onChangeSlider1.bind(this);
@@ -22,7 +21,6 @@ export class SliderDemo extends Component {
         this.onChangeSlider3 = this.onChangeSlider3.bind(this);
         this.onChangeSlider4 = this.onChangeSlider4.bind(this);
         this.onChangeRangeSlider = this.onChangeRangeSlider.bind(this);
-        this.onChangeSlider5 = this.onChangeSlider5.bind(this);
     }
 
     onChangeSlider1(e) {
@@ -53,10 +51,6 @@ export class SliderDemo extends Component {
         this.setState({ rangeValues: e.value });
     }
 
-    onChangeSlider5(e) {
-        this.setState({ val5: e.value });
-    }
-
     render() {
         return (
             <div>
@@ -75,17 +69,14 @@ export class SliderDemo extends Component {
                     <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
                     <Slider value={this.state.val2} onChange={this.onChangeSlider2} style={{width: '14em'}} />
 
-                    <h3>Animate: {this.state.val3}</h3>
-                    <Slider value={this.state.val3} onChange={this.onChangeSlider3} animate={true} style={{width: '14em'}} />
-
-                    <h3>Step: {this.state.val4}</h3>
-                    <Slider value={this.state.val4} onChange={this.onChangeSlider4} step={20} style={{width: '14em'}} />
+                    <h3>Step: {this.state.val3}</h3>
+                    <Slider value={this.state.val3} onChange={this.onChangeSlider3} step={20} style={{width: '14em'}} />
 
                     <h3>Range: {this.state.rangeValues[0]},{this.state.rangeValues[1]}</h3>
                     <Slider value={this.state.rangeValues} onChange={this.onChangeRangeSlider} range={true} style={{width: '14em'}} />
 
-                    <h3>Vertical: {this.state.val5}</h3>
-                    <Slider value={this.state.val5} onChange={this.onChangeSlider5} orientation="vertical" style={{height: '14em'}} />
+                    <h3>Vertical: {this.state.val4}</h3>
+                    <Slider value={this.state.val4} onChange={this.onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
                 </div>
 
                 <SliderDoc></SliderDoc>
@@ -304,7 +295,6 @@ export class SliderDemo extends Component {
             val2: 50, 
             val3: null,
             val4: null,
-            val5: null,
             rangeValues: [20, 80] 
         };
         this.onChangeSlider1 = this.onChangeSlider1.bind(this);
@@ -312,7 +302,6 @@ export class SliderDemo extends Component {
         this.onChangeSlider3 = this.onChangeSlider3.bind(this);
         this.onChangeSlider4 = this.onChangeSlider4.bind(this);
         this.onChangeRangeSlider = this.onChangeRangeSlider.bind(this);
-        this.onChangeSlider5 = this.onChangeSlider5.bind(this);
     }
 
     onChangeSlider1(e) {
@@ -343,10 +332,6 @@ export class SliderDemo extends Component {
         this.setState({ rangeValues: e.value });
     }
 
-    onChangeSlider5(e) {
-        this.setState({ val5: e.value });
-    }
-
     render() {
         return (
             <div>
@@ -359,23 +344,20 @@ export class SliderDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic: {this.state.val1}</h3>
-                    <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}} />
+                    <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}}  />
 
                     <h3>Input: {this.state.val2}</h3>
                     <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
                     <Slider value={this.state.val2} onChange={this.onChangeSlider2} style={{width: '14em'}} />
 
-                    <h3>Animate: {this.state.val3}</h3>
-                    <Slider value={this.state.val3} onChange={this.onChangeSlider3} animate={true} style={{width: '14em'}} />
-
-                    <h3>Step: {this.state.val4}</h3>
-                    <Slider value={this.state.val4} onChange={this.onChangeSlider4} step={20} style={{width: '14em'}} />
+                    <h3>Step: {this.state.val3}</h3>
+                    <Slider value={this.state.val3} onChange={this.onChangeSlider3} step={20} style={{width: '14em'}} />
 
                     <h3>Range: {this.state.rangeValues[0]},{this.state.rangeValues[1]}</h3>
                     <Slider value={this.state.rangeValues} onChange={this.onChangeRangeSlider} range={true} style={{width: '14em'}} />
 
-                    <h3>Vertical: {this.state.val5}</h3>
-                    <Slider value={this.state.val5} onChange={this.onChangeSlider5} orientation="vertical" style={{height: '14em'}} />
+                    <h3>Vertical: {this.state.val4}</h3>
+                    <Slider value={this.state.val4} onChange={this.onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
                 </div>
             </div>
         );

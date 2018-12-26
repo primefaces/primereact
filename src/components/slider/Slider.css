@@ -9,10 +9,6 @@
 	cursor: default;
 	-ms-touch-action: none;
 	touch-action: none;
-    z-index: 2;
-}
-.p-slider .p-slider-handle.p-slider-handle-active {
-    z-index: 2;
 }
 .p-slider .p-slider-range {
 	position: absolute;
@@ -33,13 +29,6 @@
 	top: 0;
 	height: 100%;
 }
-.p-slider-horizontal .p-slider-range-min {
-	left: 0;
-}
-.p-slider-horizontal .p-slider-range-max {
-	right: 0;
-}
-
 .p-slider-vertical {
 	width: .8em;
 	height: 100px;
@@ -51,15 +40,6 @@
 }
 .p-slider-vertical .p-slider-range {
 	left: 0;
-	width: 100%;
-}
-.p-slider-vertical .p-slider-range-min {
-	bottom: 0;
-}
-.p-slider-vertical .p-slider-range-max {
-	top: 0;
-}
-
-.p-slider-animate .p-slider-handle {
-    transition: left .3s;
+    width: 100%;
+    bottom: 0;
 }

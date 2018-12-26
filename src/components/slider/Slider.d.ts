@@ -3,7 +3,6 @@ import * as React from 'react';
 interface SliderProps {
     id?: string;
     value?: number|[number, number];
-    animate?: boolean;
     min?: number;
     max?: number;
     orientation?: string;
