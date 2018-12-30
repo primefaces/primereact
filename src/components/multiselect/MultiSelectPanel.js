@@ -24,7 +24,7 @@ export class MultiSelectPanel extends Component {
                 ref={(el) => this.element = el} onClick={this.props.onClick}>
                 {this.props.header}
                 <div className="p-multiselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight }}>
-                    <ul className="p-multiselect-items p-multiselect-list p-component p-reset">
+                    <ul className="p-multiselect-items p-multiselect-list p-component">
                         {this.props.children}
                     </ul>
                 </div>

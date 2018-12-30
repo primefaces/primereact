@@ -93,6 +93,8 @@
 .p-dropdown-panel .p-dropdown-list {
     padding: 0.4em;
     border: 0 none;
+    margin: 0;
+    list-style-type: none;
 }
 
 .p-dropdown-panel .p-dropdown-filter {

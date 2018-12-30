@@ -64,6 +64,8 @@
 
 .p-multiselect-panel .p-multiselect-list {
     border: 0 none;
+    margin: 0;
+    list-style-type: none;
 }
 
 .p-multiselect-panel .p-multiselect-item {
@@ -113,7 +115,7 @@
     top: .25em;
     left: .125em;
 }
-            
+
 .p-multiselect-header .p-inputtext {
     padding: .125em .125em .125em 1.25em;
     width: 100%;
