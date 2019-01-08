@@ -7,7 +7,7 @@ interface ColumnProps {
     header?: any;
     body?: any;
     footer?: any;
-    sortable?: boolean;
+    sortable?: boolean | 'custom';
     filter?: boolean;
     filterMatchMode?: string;
     filterPlaceholder?: string;
