@@ -317,7 +317,7 @@ export class DataTable extends Component {
     sortSingle(data, sortField, sortOrder) {
         let value = [...data];
 
-        if(this.columnSortable && this.columnSortable === 'custom' && this.columnSortFunction) {
+        if(this.columnSortable && this.columnSortFunction) {
             value = this.columnSortFunction({
                 field: this.getSortField(),
                 order: this.getSortOrder()

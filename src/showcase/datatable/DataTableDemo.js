@@ -683,12 +683,12 @@ multiSortMeta.push({field: 'brand', order: -1});
 `}
 </CodeHighlight>
 
-            <p>To customize sorting algorithm, set sortable option to custom and define a sortFunction that sorts the list.</p>
+            <p>To customize sorting algorithm, define a sortFunction that sorts the list.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} >
     <Column field="vin" header="Vin" sortable={true}/>
-    <Column field="year" header="Year" sortable="custom" sortFunction={this.mysort}/>
+    <Column field="year" header="Year" sortable={true} sortFunction={this.mysort}/>
     <Column field="brand" header="Brand" sortable={true}/>
     <Column field="color" header="Color" sortable={true}/>
 </DataTable>
