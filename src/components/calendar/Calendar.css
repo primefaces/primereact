@@ -144,10 +144,8 @@
     cursor: pointer;
 }
 
-.p-datepicker .p-datepicker-buttonbar {
-    border-left: 0 none;
-    border-right: 0 none;
-    border-bottom: 0 none;
+.p-datepicker .p-datepicker-buttonbar,
+.p-datepicker .p-datepicker-footer {
 	padding: .5em;
 }
 

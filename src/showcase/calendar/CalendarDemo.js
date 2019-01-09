@@ -347,6 +347,15 @@ dateTemplate(date) {
 `}
 </CodeHighlight>
 
+            <h3>Header and Footer</h3>
+            <p><i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
+<CodeHighlight className="language-jsx">
+{`
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
+
+`}
+</CodeHighlight>
+
             <h3>Month and Year Navigator</h3>
             <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays
             available years. Format of the <i>yearRange</i> is "startYear:endYear".</p>

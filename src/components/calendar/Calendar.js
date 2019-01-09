@@ -73,6 +73,8 @@ export class Calendar extends Component {
         tooltip: null,
         tooltipOptions: null,
         dateTemplate: null,
+        headerTemplate: null,
+        footerTemplate: null,
         onFocus: null,
         onBlur: null,
         onInput: null,
@@ -137,6 +139,8 @@ export class Calendar extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         dateTemplate: PropTypes.func,
+        headerTemplate: PropTypes.func,
+        footerTemplate: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onInput: PropTypes.func,
@@ -1660,10 +1664,12 @@ export class Calendar extends Component {
         const forwardNavigator = (this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1) ? this.renderForwardNavigator(): null;
         const title = this.renderTitle(monthMetaData);
         const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays);
+        const header = this.props.headerTemplate ? this.props.headerTemplate() : null;
 
         return (
             <div key={monthMetaData.month} className="p-datepicker-group">
                 <div className="p-datepicker-header">
+                    {header}
                     {backwardNavigator}
                     {forwardNavigator}
                     {title}
@@ -1913,6 +1919,21 @@ export class Calendar extends Component {
             return null;
         }
     }
+
+    renderFooter() {
+        if (this.props.footerTemplate) {
+            const content = this.props.footerTemplate();
+
+            return (
+                <div className="p-datepicker-footer">
+                    {content}
+                </div>
+            )
+        }
+        else {
+            return null;
+        }
+    }
    
     render() {
         const className = classNames('p-calendar', this.props.className, {
@@ -1935,6 +1956,7 @@ export class Calendar extends Component {
         const datePicker = this.renderDatePicker();
         const timePicker = this.renderTimePicker();
         const buttonBar = this.renderButtonBar();
+        const footer = this.renderFooter();
 
         return (
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
@@ -1945,6 +1967,7 @@ export class Calendar extends Component {
                     {datePicker}
                     {timePicker}
                     {buttonBar}
+                    {footer}
                 </CalendarPanel>
             </span>
         );

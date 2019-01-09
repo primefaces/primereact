@@ -76,6 +76,8 @@ interface CalendarProps {
     tooltipOptions?: TooltipOptions;
     yearRange?: string;
     dateTemplate?(dateMeta:DateMetaData): React.ReactNode;
+    headerTemplate?(): React.ReactNode;
+    footerTemplate?(): React.ReactNode;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
     onInput?(event: Event): void;
