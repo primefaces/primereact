@@ -275,6 +275,12 @@ selectedCarTemplate(option) {
                             <td>Label to display when there are no selections.</td>
                         </tr>
                         <tr>
+                            <td>fixedPlaceholder</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to display selected items in the label section or always display the placeholder as the default label.</td>
+                        </tr>
+                        <tr>
                             <td>disabled</td>
                             <td>boolean</td>
                             <td>false</td>

@@ -19,6 +19,7 @@ export class MultiSelect extends Component {
         className: null,
         scrollHeight: '200px',
         placeholder: null,
+        fixedPlaceholder: false,
         disabled: false,
         filter: false,
         tabIndex: '0',
@@ -40,6 +41,7 @@ export class MultiSelect extends Component {
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
         placeholder: PropTypes.string,
+        fixedPlaceholder: PropTypes.bool,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
         tabIndex: PropTypes.string,
@@ -374,7 +376,7 @@ export class MultiSelect extends Component {
     getLabel() {
         let label;
 
-        if (!this.isEmpty()) {
+        if (!this.isEmpty() && !this.props.fixedPlaceholder) {
             label = '';
             for(let i = 0; i < this.props.value.length; i++) {
                 if(i !== 0) {

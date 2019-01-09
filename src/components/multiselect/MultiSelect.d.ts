@@ -10,6 +10,7 @@ interface MultiSelectProps {
     className?: string;
     scrollHeight?: string;
     placeholder?: string;
+    fixedPlaceholder?: boolean;
     disabled?: boolean;
     filter?: boolean;
     tabIndex?: boolean;
