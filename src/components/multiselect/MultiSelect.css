@@ -41,6 +41,11 @@
     overflow: hidden;
 }
 
+.p-multiselect .p-multiselect-label-empty {
+    overflow: hidden;
+    visibility: hidden;
+}
+
 .p-multiselect.p-disabled .p-multiselect-trigger,
 .p-multiselect.p-disabled .p-multiselect-label {
     cursor: auto

@@ -269,9 +269,9 @@ selectedCarTemplate(option) {
                             <td>Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.</td>
                         </tr>
                         <tr>
-                            <td>defaultLabel</td>
+                            <td>placeholder</td>
                             <td>string</td>
-                            <td>Choose</td>
+                            <td>null</td>
                             <td>Label to display when there are no selections.</td>
                         </tr>
                         <tr>

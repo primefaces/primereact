@@ -9,7 +9,7 @@ interface MultiSelectProps {
     style?: object;
     className?: string;
     scrollHeight?: string;
-    defaultLabel?: string;
+    placeholder?: string;
     disabled?: boolean;
     filter?: boolean;
     tabIndex?: boolean;

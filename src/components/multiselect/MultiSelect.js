@@ -18,7 +18,7 @@ export class MultiSelect extends Component {
         style: null,
         className: null,
         scrollHeight: '200px',
-        defaultLabel: 'Choose',
+        placeholder: null,
         disabled: false,
         filter: false,
         tabIndex: '0',
@@ -39,7 +39,7 @@ export class MultiSelect extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
-        defaultLabel: PropTypes.string,
+        placeholder: PropTypes.string,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
         tabIndex: PropTypes.string,
@@ -260,25 +260,6 @@ export class MultiSelect extends Component {
         return this.findSelectionIndex(this.getOptionValue(option)) !== -1;
     }
 
-    getLabel() {
-        let label;
-
-        if(this.props.value && this.props.value.length) {
-            label = '';
-            for(let i = 0; i < this.props.value.length; i++) {
-                if(i !== 0) {
-                    label += ',';
-                }
-                label += this.findLabelByValue(this.props.value[i]);
-            }
-        }
-        else {
-            label = this.props.defaultLabel;
-        }
-
-        return label;
-    }
-
     findLabelByValue(val) {
         let label = null;
 
@@ -386,6 +367,44 @@ export class MultiSelect extends Component {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
 
+    isEmpty() {
+        return !this.props.value || this.props.value.length === 0;
+    }
+
+    getLabel() {
+        let label;
+
+        if (!this.isEmpty()) {
+            label = '';
+            for(let i = 0; i < this.props.value.length; i++) {
+                if(i !== 0) {
+                    label += ',';
+                }
+                label += this.findLabelByValue(this.props.value[i]);
+            }
+        }
+
+        return label;
+    }
+
+    getLabelContent() {
+        if (this.props.selectedItemTemplate) {
+            if( this.props.value && this.props.value.length) {
+                 return this.props.value.map((val, index) => {
+                    return (
+                        <React.Fragment key={index}>{this.props.selectedItemTemplate(val)}</React.Fragment>
+                    );
+                });
+            }
+            else {
+                return this.props.selectedItemTemplate();
+            }
+        }
+        else {
+            return this.getLabel();
+        }
+    }
+
     renderTooltip() {
         this.tooltip = new Tooltip({
             target: this.container,
@@ -402,21 +421,18 @@ export class MultiSelect extends Component {
     }
 
     renderLabel() {
-        if(this.props.selectedItemTemplate) {
-            if(this.props.value && this.props.value.length) {
-                 return this.props.value.map((val, index) => {
-                    return (
-                        <React.Fragment key={index}>{this.props.selectedItemTemplate(val)}</React.Fragment>
-                    );
-                });
-            }
-            else {
-                return this.props.selectedItemTemplate();
-            }
-        }
-        else {
-            return this.getLabel();
-        }
+        const empty = this.isEmpty();
+        const content = this.getLabelContent();
+        const className = classNames('p-multiselect-label', {
+            'p-placeholder': empty && this.props.placeholder, 
+            'p-multiselect-label-empty': empty && !this.props.placeholder && !this.props.selectedItemTemplate}
+        );
+
+        return (
+            <div className="p-multiselect-label-container">
+                <label className={className}>{content||this.props.placeholder||'empty'}</label>
+            </div>
+        );
     }
 
     render() {
@@ -446,9 +462,7 @@ export class MultiSelect extends Component {
                 <div className="p-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} />
                 </div>
-                <div className="p-multiselect-label-container" title="Choose">
-                    <label className="p-multiselect-label">{label}</label>
-                </div>
+                {label}
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
