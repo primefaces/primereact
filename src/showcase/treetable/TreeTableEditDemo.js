@@ -74,14 +74,14 @@ export class TreeTableEditDemo extends Component {
             <div>
                 <TreeTableSubmenu />
 
-                <div className="content-section introduction">
+                <div className="content-section introduction treetableeditdemo">
                     <div className="feature-intro">
                         <h1>TreeTable - Edit</h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation treetableedit-demo">
                     <TreeTable value={this.state.nodes}>
                         <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
                         <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>

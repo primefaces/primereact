@@ -110,6 +110,10 @@ export class BodyCell extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.unbindDocumentEditListener();
+    }
+
     render() {
         let content, header;
         let cellClassName = classNames(this.props.bodyClassName||this.props.className, {

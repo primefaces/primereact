@@ -1184,6 +1184,12 @@ pre[class*="language-"] {
     padding-top: 0 !important;
 }
 
+.treetableedit-demo {
+    .p-treetable tr {
+        outline: 0 none;
+    }
+}
+
 /* FlexGrid Demos */
 .flexgrid-demo {
     .box,
