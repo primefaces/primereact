@@ -213,8 +213,6 @@ export class InputMask extends Component {
             return;
         }
         
-        this.isKeydownPressed = true;
-
         let k = e.which || e.keyCode,
             pos,
             begin,
@@ -460,14 +458,12 @@ export class InputMask extends Component {
     }
 
     updateValue() {
-        this.value = this.props.value;
-
         if (this.input) {
-            if (this.value === undefined || this.value === null) {
+            if (this.props.value == null) {
                 this.input.value = '';
             }
             else {
-                this.input.value = this.value;
+                this.input.value = this.props.value;
                 this.checkVal();
             }
 
@@ -548,6 +544,10 @@ export class InputMask extends Component {
             else
                 this.renderTooltip();
         }
+
+        if (this.input.value !== this.props.value) {
+            this.updateValue();
+        }
     }
 
     componentWillUnmount() {
@@ -573,11 +573,6 @@ export class InputMask extends Component {
     }
 
     render() {
-        if(this.input && this.input.value !== this.props.value && !this.isKeydownPressed) {
-            this.updateValue();
-        }
-        this.isKeydownPressed = false;
-
         return (
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
