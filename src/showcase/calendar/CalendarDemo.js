@@ -51,7 +51,7 @@ export class CalendarDemo extends Component {
     dateTemplate(date) {
         if (date.day > 10 && date.day < 15) {
             return (
-                <span style={{backgroundColor: '#1d8ccb', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', padding: '.25em'}}>{date.day}</span>
+                <div style={{backgroundColor: '#1dcbb3', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', width: '2em', height: '2em', lineHeight: '2em', padding: 0}}>{date.day}</div>
             );
         }
         else {
@@ -336,7 +336,7 @@ let es = {
 dateTemplate(date) {
     if (date.day > 10 && date.day < 15) {
         return (
-            <span style={{backgroundColor: '#1d8ccb', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', padding: '.25em'}}>{date.day}</span>
+            <div style={{backgroundColor: '#1dcbb3', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', width: '2em', height: '2em', lineHeight: '2em', padding: 0}}>{date.day}</div>
         );
     }
     else {
@@ -891,7 +891,7 @@ export class CalendarDemo extends Component {
     dateTemplate(date) {
         if (date.day > 10 && date.day < 15) {
             return (
-                <span style={{backgroundColor: '#1d8ccb', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', padding: '.25em'}}>{date.day}</span>
+                <div style={{backgroundColor: '#1dcbb3', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', width: '2em', height: '2em', lineHeight: '2em', padding: 0}}>{date.day}</div>
             );
         }
         else {
