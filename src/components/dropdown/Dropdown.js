@@ -379,10 +379,11 @@ export class Dropdown extends Component {
     }
     
     selectItem(event) {
-        let selectedOption = this.findOption(this.props.value);
-        
-        if(selectedOption !== event.option) {                
+        let currentSelectedOption = this.findOption(this.props.value);
+
+        if(currentSelectedOption !== event.option) {              
             this.updateEditableLabel(event.option);
+            this.updateHiddenSelect();
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: this.props.optionLabel ? event.option : event.option.value,
@@ -395,6 +396,11 @@ export class Dropdown extends Component {
                 }
             });
         } 
+    }
+
+    updateHiddenSelect(option) {
+        let selectedOptionIndex = this.findOptionIndex(option);
+        this.nativeSelect.selectedIndex = selectedOptionIndex + 1;
     }
     
     findOptionIndex(value) {    
@@ -416,7 +422,7 @@ export class Dropdown extends Component {
         let index = this.findOptionIndex(value);
         return (index !== -1) ? this.props.options[index] : null;
     }
-    
+     
     show() {        
         this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
         this.panel.element.style.display = 'block';
@@ -501,12 +507,14 @@ export class Dropdown extends Component {
     
     renderHiddenSelect() {
         if(this.props.autoWidth) {
+            let placeHolderOption = <option value="">{this.props.placeholder}</option>;
             let options = this.props.options && this.props.options.map((option, i) => {
                 return <option key={this.getOptionKey(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
             });
             
             return (<div className="p-hidden-accessible">
-                        <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
+                        <select ref={(el) => this.nativeSelect = el} id="xxx" required={this.props.required} tabIndex="-1" aria-hidden="true">
+                            {placeHolderOption}
                             {options}
                         </select>
                     </div>);
@@ -606,6 +614,10 @@ export class Dropdown extends Component {
             window.removeEventListener('load', this.windowLoadListener);
         }
     }
+
+    checkValidity() {
+        return this.nativeSelect.checkValidity;
+    }
     
     componentDidMount() {
         if(this.props.autoWidth) {
@@ -628,6 +640,8 @@ export class Dropdown extends Component {
         if (this.props.tooltip) {
             this.renderTooltip();
         }
+
+        this.updateHiddenSelect(this.findOption(this.props.value));
     }
     
     componentWillUnmount() {
@@ -663,6 +677,8 @@ export class Dropdown extends Component {
             else
                 this.renderTooltip();
         }
+
+        this.updateHiddenSelect(this.findOption(this.props.value));
     }
 
     renderTooltip() {
@@ -678,7 +694,7 @@ export class Dropdown extends Component {
                                     'p-dropdown-clearable': this.props.showClear && !this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
-        
+
         let hiddenSelect = this.renderHiddenSelect();
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);

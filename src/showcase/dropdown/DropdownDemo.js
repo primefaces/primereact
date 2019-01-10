@@ -79,7 +79,7 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City" optionLabel="name"/>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City" optionLabel="name" />
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
@@ -165,6 +165,9 @@ const cities = [
 
 `}
                         </CodeHighlight>
+
+                        <h3>Placeholder</h3>
+                        <p>Common pattern is providing an empty option as the placeholder when using native selects, however Dropdown has built-in support using the placeholder option so it is suggested to use it instead of creating an empty option.</p>
 
                         <h3>Filtering</h3>
                         <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
@@ -399,6 +402,26 @@ carTemplate(option) {
                                         <td>onContextMenu</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke on right-click.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Methods</h3>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>checkValidity</td>
+                                        <td>-</td>
+                                        <td>Checks whether the element has any constraints and whether it satisfies them and returns a boolean for the result.</td>
                                     </tr>
                                 </tbody>
                             </table>
