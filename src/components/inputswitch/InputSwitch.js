@@ -125,18 +125,17 @@ export class InputSwitch extends Component {
     render() {
         const className = classNames('p-inputswitch p-component', this.props.className, {
             'p-inputswitch-checked': this.props.checked,
-            'p-disabled': this.props.disabled
+            'p-disabled': this.props.disabled,
+            'p-inputswitch-focus': this.state.focused
         });
-
-        const sliderClassName = classNames('p-inputswitch-slider', {'p-focus': this.state.focused});
-
+        
         return (
             <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} role="checkbox" aria-checked={this.props.checked}>
                 <div className="p-hidden-accessible">
                     <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
                         onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled} />
                 </div>
-                <span className={sliderClassName}></span>
+                <span className="p-inputswitch-slider"></span>
             </div>
         );
     }
