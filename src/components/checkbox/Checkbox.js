@@ -129,7 +129,7 @@ export class Checkbox extends Component {
                     <input type="checkbox" ref={el => this.input = el} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} 
                              onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
                 </div>
-                <div className={boxClass} ref={el => this.box = el}>
+                <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.props.checked}>
                     <span className={iconClass}></span>
                 </div>
             </div>
