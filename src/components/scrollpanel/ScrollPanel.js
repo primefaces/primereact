@@ -58,7 +58,7 @@ export class ScrollPanel extends Component {
 
         this.scrollYRatio = ownHeight / totalHeight;
 
-        this.requestAnimationFrame(() => {
+        this.frame = this.requestAnimationFrame(() => {
             if (this.scrollXRatio >= 1) {
                 DomHandler.addClass(this.xBar, 'p-scrollpanel-hidden');
             }
@@ -117,7 +117,7 @@ export class ScrollPanel extends Component {
         let deltaX = e.pageX - this.lastPageX;
         this.lastPageX = e.pageX;
 
-        this.requestAnimationFrame(() => {
+        this.frame = this.requestAnimationFrame(() => {
             this.content.scrollLeft += deltaX / this.scrollXRatio;
         });
     }
@@ -126,7 +126,7 @@ export class ScrollPanel extends Component {
         let deltaY = e.pageY - this.lastPageY;
         this.lastPageY = e.pageY;
 
-        this.requestAnimationFrame(() => {
+        this.frame = this.requestAnimationFrame(() => {
             this.content.scrollTop += deltaY / this.scrollYRatio;
         });
     }
@@ -144,7 +144,7 @@ export class ScrollPanel extends Component {
 
     requestAnimationFrame(f) {
         let frame = window.requestAnimationFrame || this.timeoutFrame;
-        frame(f);
+        return frame(f);
     }
 
     refresh() {
@@ -164,6 +164,10 @@ export class ScrollPanel extends Component {
     componentWillUnmount() {
         if (this.initialized) {
             window.removeEventListener('resize', this.moveBar);
+        }
+
+        if (this.frame) {
+            window.cancelAnimationFrame(this.frame);
         }
     }
 
