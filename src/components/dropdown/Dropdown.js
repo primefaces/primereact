@@ -502,7 +502,7 @@ export class Dropdown extends Component {
     renderHiddenSelect() {
         if(this.props.autoWidth) {
             let options = this.props.options && this.props.options.map((option, i) => {
-                return <option key={this.getOptionLabel(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
+                return <option key={this.getOptionKey(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
             });
             
             return (<div className="p-hidden-accessible">
@@ -568,10 +568,11 @@ export class Dropdown extends Component {
         }
 
         if(items) {
-            return items.map((option, index) => {
+            return items.map((option) => {
                 let optionLabel = this.getOptionLabel(option);
-                return <DropdownItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option}
-                    onClick={this.onOptionClick} />;
+                return (
+                    <DropdownItem key={this.getOptionKey(option)} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option} onClick={this.onOptionClick} />
+                );
             });   
         }
         else {
@@ -594,6 +595,10 @@ export class Dropdown extends Component {
     
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+    }
+
+    getOptionKey(option) {
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option.value, this.props.dataKey) : this.getOptionLabel(option);
     }
 
     unbindWindowLoadListener() {
