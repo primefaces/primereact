@@ -44,19 +44,18 @@ export class Editor extends Component {
             formats: this.props.formats
         });
 
-
-        if(this.props.value) {
-            this.value = [...this.props.value];
+        if (this.props.value) {
             this.quill.pasteHTML(this.props.value);
         }
 
-        this.handleTextChange = (delta, source) => {
+        this.quill.on('text-change', (delta, source) => {
             let html = this.editorElement.children[0].innerHTML;
             let text = this.quill.getText();
-            if(html === '<p><br></p>') {
+            if (html === '<p><br></p>') {
                 html = null;
             }
-            if(this.props.onTextChange) {
+
+            if (this.props.onTextChange) {
                 this.props.onTextChange({
                     htmlValue: html,
                     textValue: text,
@@ -64,10 +63,9 @@ export class Editor extends Component {
                     source: source
                 });
             }
-            this.value = html;
-        };
+        });
 
-        this.handleSelectionChange = (range, oldRange, source) => {
+        this.quill.on('selection-change', (range, oldRange, source) => {
             if(this.props.onSelectionChange) {
                 this.props.onSelectionChange({
                     range: range,
@@ -75,33 +73,22 @@ export class Editor extends Component {
                     source: source
                 });
             }
-        };
-
-        this.quill.on('text-change', this.handleTextChange);
-        this.quill.on('selection-change', this.handleSelectionChange);
+        });
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.value !== this.value) {
-            this.value = this.props.value;
-            let sel = this.quill.getSelection();
-            if(sel) {
-                var length = this.quill.getLength();
-                sel.index = Math.max(0, Math.min(sel.index, length-1));
-                sel.length = Math.max(0, Math.min(sel.length, (length-1) - sel.index));
-            }
-            this.quill.setSelection(sel);
-
-            if(this.value === '' || this.value === null) {
-                this.editorElement.children[0].innerHTML = '';
-            }
+    componentDidUpdate(prevProps) {
+        if (this.props.value !== prevProps.value && this.quill && !this.quill.hasFocus()) {
+            if(this.props.value)
+                this.quill.pasteHTML(this.props.value);
+            else
+                this.quill.setText('');
         }
     }
 
     render() {
         let containerClass = classNames('p-component p-editor-container', this.props.className);
-
         let toolbarHeader = null;
+        
         if (this.props.headerTemplate) {
             toolbarHeader = (
                 <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
@@ -111,7 +98,7 @@ export class Editor extends Component {
         }
         else {
             toolbarHeader = (
-                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
+                <div ref={el => this.toolbarElement = el} className="p-editor-toolbar">
                     <span className="ql-formats">
                         <select className="ql-header" defaultValue="0">
                           <option value="1">Heading</option>
