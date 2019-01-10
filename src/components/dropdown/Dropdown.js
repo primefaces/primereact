@@ -506,22 +506,19 @@ export class Dropdown extends Component {
     }
     
     renderHiddenSelect() {
-        if(this.props.autoWidth) {
-            let placeHolderOption = <option value="">{this.props.placeholder}</option>;
-            let options = this.props.options && this.props.options.map((option, i) => {
-                return <option key={this.getOptionKey(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
-            });
+        let placeHolderOption = <option value="">{this.props.placeholder}</option>;
+        let options = this.props.options && this.props.options.map((option, i) => {
+            return <option key={this.getOptionKey(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
+        });
             
-            return (<div className="p-hidden-accessible">
-                        <select ref={(el) => this.nativeSelect = el} id="xxx" required={this.props.required} tabIndex="-1" aria-hidden="true">
-                            {placeHolderOption}
-                            {options}
-                        </select>
-                    </div>);
-        }
-        else {
-            return null;
-        }
+        return (
+            <div className="p-hidden-accessible">
+                <select ref={(el) => this.nativeSelect = el} id="xxx" required={this.props.required} tabIndex="-1" aria-hidden="true">
+                    {placeHolderOption}
+                    {options}
+                </select>
+            </div>
+        );
     }
     
     renderKeyboardHelper() {
