@@ -608,9 +608,10 @@ body {
       color: #333333; }
   body .ui-editor-container .ql-picker.ql-expanded .ql-picker-label {
     color: #ffffff; }
-  body .ui-editor-container .ql-stroke,
-  body .ui-editor-container .ql-fill {
+  body .ui-editor-container .ql-stroke {
     stroke: #ffffff; }
+  body .ui-editor-container .ql-fill {
+    fill: #ffffff; }
   body .ui-editor-container .ql-picker-label {
     color: #ffffff; }
   body .ui-editor-container .ql-snow.ql-toolbar button:hover,
