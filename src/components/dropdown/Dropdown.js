@@ -259,8 +259,8 @@ export class Dropdown extends Component {
     searchOptionInRange(start, end) {
         for (let i = start; i < end; i++) {
             let opt = this.props.options[i];
-            let label = this.getOptionLabel(opt).toLowerCase();
-            if (label.startsWith(this.searchValue.toLowerCase())) {
+            let label = this.getOptionLabel(opt).toString().toLowerCase();
+            if (label.startsWith(this.searchValue.toString().toLowerCase())) {
                 return opt;
             }
         }
