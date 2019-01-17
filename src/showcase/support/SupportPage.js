@@ -60,7 +60,7 @@ export class SupportPage extends Component {
 
                     <h3 style={{marginTop:0}}>Community Support</h3>
                     <p><a href="https://forum.primefaces.org/viewforum.php?f=57">Forum</a> is where the community users gather to seek support, post topics and discuss the technology. PrimeTek does not
-                    guarantee response at forum although it is monitored and maintained by our staff. If you need to secure our response within 4 business hours, you may consider PrimeReact PRO support.</p>
+                    guarantee response at forum although it is monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PrimeReact PRO support.</p>
                 </div>
             </div>
         );
