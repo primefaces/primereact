@@ -166,7 +166,7 @@ export class Lightbox extends Component {
             <div style={this.props.style} className={this.props.className}>{
                 this.props.images && this.props.images.map((image,index)=>{
                     var imageItem =
-                        <a href={image.source} onClick={event=>this.onImageClick(event,image,index)} key={index} className="p-lightbox-image-target">
+                        <a href={image.source} onClick={event=>this.onImageClick(event,image,index)} key={index} className="p-lightbox-image-target" caption={image.caption}>
                             <img src={image.thumbnail} title={image.title} alt={image.alt}/>
                         </a>
                     ;
@@ -200,7 +200,7 @@ export class Lightbox extends Component {
         }
         
         return (
-            <div className="p-lightbox-content" ref={el => this.content = el} style={{transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing}}>
+            <div className="p-lightbox-content" ref={el => this.content = el} style={{transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing}} caption={this.state.visible && this.state.currentImage ? this.state.currentImage.caption : null}>
                 {content}
             </div>
         );
