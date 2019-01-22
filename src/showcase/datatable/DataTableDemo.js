@@ -379,6 +379,12 @@ export class DataTableDemo extends Component {
                             <td>Validator function to validate the cell input value.</td>
                         </tr>
                         <tr>
+                            <td>editorValidatorEvent</td>
+                            <td>string</td>
+                            <td>click</td>
+                            <td>Event to trigger the validation, possible values are "click" and "blur".</td>
+                        </tr>
+                        <tr>
                             <td>rowReorder</td>
                             <td>boolean</td>
                             <td>false</td>

@@ -12,6 +12,7 @@ export class BodyCell extends Component {
         this.state = {};
         this.onExpanderClick = this.onExpanderClick.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onBlur = this.onBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
     }
@@ -34,12 +35,20 @@ export class BodyCell extends Component {
     }
     
     onClick() {
-        if (this.props.editor) {
+        if (this.props.editor && !this.state.editing) {
             this.setState({
                 editing: true
             });
 
-            this.bindDocumentEditListener();
+            if (this.props.editorValidatorEvent === 'click') {
+                this.bindDocumentEditListener();
+            }          
+        }
+    }
+
+    onBlur() {
+        if (this.state.editing && this.props.editorValidatorEvent === 'blur') {
+            this.switchCellToViewMode();
         }
     }
     
@@ -163,7 +172,7 @@ export class BodyCell extends Component {
                        
         return (
             <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.bodyStyle||this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
-                rowSpan={this.props.rowSpan}>
+                rowSpan={this.props.rowSpan} onBlur={this.onBlur}>
                 {header}
                 {editorKeyHelper}
                 {content}

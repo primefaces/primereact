@@ -29,6 +29,7 @@ interface ColumnProps {
     rowSpan?: number;
     rowReorder?: boolean;
     rowReorderIcon?: string;
+    editorValidatorEvent?: string;
     sortFunction?(): void;
     filterFunction?(value: any, filter: any): void;
     editor?(props: any): JSX.Element | undefined;

@@ -34,6 +34,7 @@ export class Column extends Component {
         rowSpan: null,
         editor: null,
         editorValidator: null,
+        editorValidatorEvent: 'click',
         rowReorder: false,
         rowReorderIcon: 'pi pi-bars'
     }
@@ -69,6 +70,7 @@ export class Column extends Component {
         rowSpan: PropTypes.number,
         editor: PropTypes.func,
         editorValidator: PropTypes.func,
+        editorValidatorEvent: PropTypes.string,
         rowReorder: PropTypes.bool,
         rowReorderIcon: PropTypes.string
     }
