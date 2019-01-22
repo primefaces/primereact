@@ -19,7 +19,7 @@ export class RowsPerPageDropdown extends Component {
     render() {
         if(this.props.options) {
             let options = this.props.options.map((opt, i) => {
-                return {label: opt, value: opt};
+                return {label: String(opt), value: opt};
             });
             
             return (
