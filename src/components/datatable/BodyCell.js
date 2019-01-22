@@ -17,7 +17,7 @@ export class BodyCell extends Component {
     }
     
     onExpanderClick(event) {
-        if(this.props.onRowToggle) {
+        if (this.props.onRowToggle) {
             this.props.onRowToggle({
                 originalEvent: event,
                 data: this.props.rowData
@@ -28,21 +28,18 @@ export class BodyCell extends Component {
     }
     
     onKeyDown(event) {
-        if(event.which === 13 || event.which === 9) {
+        if (event.which === 13 || event.which === 9) {
             this.switchCellToViewMode();
         }
     }
     
-    onClick(event) {
-        if(this.props.editor) {
+    onClick() {
+        if (this.props.editor) {
             this.setState({
                 editing: true
             });
-            
-            if(this.documentEditListener)
-                this.cellClick = true;
-            else
-                this.bindDocumentEditListener();
+
+            this.bindDocumentEditListener();
         }
     }
     
@@ -51,13 +48,11 @@ export class BodyCell extends Component {
     }
     
     bindDocumentEditListener() {
-        if(!this.documentEditListener) {
+        if (!this.documentEditListener) {
             this.documentEditListener = (event) => {
-                if(!this.cellClick) {
+                if (!this.container.contains(event.target)) {
                     this.switchCellToViewMode();
                 }
-                
-                this.cellClick = false;
             };
             
             document.addEventListener('click', this.documentEditListener);
@@ -68,13 +63,14 @@ export class BodyCell extends Component {
         this.setState({
             editing: false
         });
+
         this.unbindDocumentEditListener();
     }
     
     switchCellToViewMode() {
-        if(this.props.editorValidator) {
+        if (this.props.editorValidator) {
             let valid = this.props.editorValidator(this.props);
-            if(valid) {
+            if (valid) {
                 this.closeCell();
             }
         }
@@ -84,17 +80,17 @@ export class BodyCell extends Component {
     }
     
     unbindDocumentEditListener() {
-        if(this.documentEditListener) {
+        if (this.documentEditListener) {
             document.removeEventListener('click', this.documentEditListener);
             this.documentEditListener = null;
         }
     }
         
     componentDidUpdate() {
-        if(this.container && this.props.editor) {
-            if(this.state.editing) {
+        if (this.container && this.props.editor) {
+            if (this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
-                if(focusable) {
+                if (focusable) {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
@@ -105,7 +101,6 @@ export class BodyCell extends Component {
                 setTimeout(() => {
                     this.keyHelper.removeAttribute('tabindex');
                 }, 50);
-                
             }    
         }
     }
@@ -122,7 +117,7 @@ export class BodyCell extends Component {
                                 'p-cell-editing': this.state.editing
                             });
 
-        if(this.props.expander) {
+        if (this.props.expander) {
             let iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
             content = (
                 <button onClick={this.onExpanderClick} className="p-row-toggler p-link">
@@ -130,13 +125,13 @@ export class BodyCell extends Component {
                 </button>
             );
         }
-        else if(this.props.selectionMode) {
-            if(this.props.selectionMode === 'single')
+        else if (this.props.selectionMode) {
+            if (this.props.selectionMode === 'single')
                 content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
             else
                 content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
         }
-        else if(this.props.rowReorder) {
+        else if (this.props.rowReorder) {
             let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
 
             content = (
@@ -144,21 +139,21 @@ export class BodyCell extends Component {
             );
         }
         else {
-            if(this.state.editing) {
-                if(this.props.editor)
+            if (this.state.editing) {
+                if (this.props.editor)
                     content = this.props.editor(this.props);
                 else
                     throw new Error("Editor is not found on column.");
             }
             else {
-                if(this.props.body)
+                if (this.props.body)
                     content = this.props.body(this.props.rowData, this.props);
                 else
                     content = ObjectUtils.resolveFieldData(this.props.rowData, this.props.field);
             }
         }
         
-        if(this.props.responsive) {
+        if (this.props.responsive) {
             header = <span className="p-column-title">{this.props.header}</span>;
         }
 
