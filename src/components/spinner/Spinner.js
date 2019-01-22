@@ -202,11 +202,11 @@ export class Spinner extends Component {
 
     onInputKeyDown(event) {
         if (event.which === 38) {
-            this.spin(1);
+            this.spin(event, 1);
             event.preventDefault();
         }
         else if (event.which === 40) {
-            this.spin(-1);
+            this.spin(event, -1);
             event.preventDefault();
         }
     }
