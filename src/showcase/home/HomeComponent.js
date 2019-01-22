@@ -100,6 +100,12 @@ export class HomeComponent extends Component {
                         of PrimeReact and impress your users.</p>
 
                     <div className="p-grid templates-grid">
+						<div className="p-col-12">
+							<h4>Babylon</h4>
+							<a href="https://www.primefaces.org/layouts/babylon-react">
+								<img alt="Babylon" src="showcase/resources/images/layouts/babylon-biggest-react.jpg" />
+							</a>
+						</div>
                         <div className="p-col-12 p-md-6">
                             <h4>Serenity with Material Design</h4>
                             <a href="https://www.primefaces.org/layouts/serenity-react">
