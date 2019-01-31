@@ -275,7 +275,7 @@ export class DataTable extends Component {
             state.multiSortMeta = this.getMultiSortMeta();
         }
 
-        if (this.getFilters()) {
+        if (this.hasFilter()) {
             state.filters = this.getFilters();
         }
 
