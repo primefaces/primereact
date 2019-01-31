@@ -283,6 +283,10 @@ export class DataTable extends Component {
             this.saveColumnWidths(state);
         }
 
+        if (this.props.reorderableColumns) {
+            state.columnOrder = this.state.columnOrder;
+        }
+
         if (this.props.expandedRows) {
             state.expandedRows = this.props.expandedRows;
         }
@@ -353,6 +357,10 @@ export class DataTable extends Component {
             if (this.props.resizableColumns) {
                 this.columnWidthsState = restoredState.columnWidths;
                 this.tableWidthState = restoredState.tableWidth;
+            }
+
+            if (this.props.reorderableColumns) {
+                state.columnOrder = restoredState.columnOrder;
             }
 
             if (restoredState.expandedRows && this.props.onRowToggle) {
