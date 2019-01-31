@@ -283,6 +283,10 @@ export class DataTable extends Component {
             this.saveColumnWidths(state);
         }
 
+        if (this.props.expandedRows) {
+            state.expandedRows = this.props.expandedRows;
+        }
+
         if (this.props.selection && this.props.onSelectionChange) {
             state.selection = this.props.selection;
         }
@@ -349,6 +353,12 @@ export class DataTable extends Component {
             if (this.props.resizableColumns) {
                 this.columnWidthsState = restoredState.columnWidths;
                 this.tableWidthState = restoredState.tableWidth;
+            }
+
+            if (restoredState.expandedRows && this.props.onRowToggle) {
+                this.props.onRowToggle({
+                    data: restoredState.expandedRows
+                });
             }
 
             if (restoredState.selection && this.props.onSelectionChange) {

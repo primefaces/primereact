@@ -271,7 +271,7 @@ export class TableBody extends Component {
         let index = -1;
         if(this.props.expandedRows) {
             for(let i = 0; i < this.props.expandedRows.length; i++) {
-                if(this.props.expandedRows[i] === row) {
+                if(ObjectUtils.equals(this.props.expandedRows[i], row)) {
                     index = i;
                     break;
                 }
