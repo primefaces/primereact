@@ -150,7 +150,7 @@ export default class DomHandler {
     }
 
     static find(element, selector) {
-        return element.querySelectorAll(selector);
+        return Array.from(element.querySelectorAll(selector));
     }
 
     static findSingle(element, selector) {

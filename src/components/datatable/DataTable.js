@@ -279,6 +279,10 @@ export class DataTable extends Component {
             state.filters = this.getFilters();
         }
 
+        if (this.props.resizableColumns) {
+            this.saveColumnWidths(state);
+        }
+
         if (this.props.selection && this.props.onSelectionChange) {
             state.selection = this.props.selection;
         }
@@ -342,12 +346,65 @@ export class DataTable extends Component {
                 }
             }
 
+            if (this.props.resizableColumns) {
+                this.columnWidthsState = restoredState.columnWidths;
+                this.tableWidthState = restoredState.tableWidth;
+            }
+
             if (restoredState.selection && this.props.onSelectionChange) {
                 this.props.onSelectionChange({
                     value: restoredState.selection
                 });
             }
         }
+    }
+
+    saveColumnWidths(state) {
+        let widths = [];
+        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th');
+        headers.map(header => widths.push(DomHandler.getOuterWidth(header)));
+        state.columnWidths = widths.join(',');
+
+        if (this.props.columnResizeMode === 'expand') {
+            state.tableWidth = this.props.scrollable ? DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-table').style.width :
+                                                DomHandler.getOuterWidth(this.table) + 'px';
+        }
+    }
+
+    restoreColumnWidths() {
+        if (this.columnWidthsState) {
+            let widths = this.columnWidthsState.split(',');
+
+            if (this.props.columnResizeMode === 'expand' && this.tableWidthState) {
+                if (this.props.scrollable) {
+                    let scrollableBodyTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-body-table');
+                    let scrollableHeaderTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-table');
+                    let scrollableFooterTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-footer-table');
+                    scrollableBodyTable.style.width = this.tableWidthState;
+                    scrollableHeaderTable.style.width = this.tableWidthState;
+
+                    if (scrollableFooterTable) {
+                        scrollableFooterTable.style.width = this.tableWidthState;
+                    }
+                }
+                else {
+                    this.tableViewChild.nativeElement.style.width = this.tableWidthState;
+                    this.containerViewChild.nativeElement.style.width = this.tableWidthState;
+                }
+            }
+
+            if (this.props.scrollable) {
+                let headerCols = DomHandler.find(this.container, '.p-datatable-scrollable-header-table > colgroup > col');
+                let bodyCols = DomHandler.find(this.container, '.p-datatable-scrollable-body-table > colgroup > col');
+
+                headerCols.map((col, index) => col.style.width = widths[index] + 'px');
+                bodyCols.map((col, index) => col.style.width = widths[index] + 'px');
+            }
+            else {
+                let headers = DomHandler.find(this.table, '.p-datatable-thead > tr > th');
+                headers.map((header, index) => header.style.width = widths[index] + 'px');
+            }
+        } 
     }
 
     onPageChange(event) {
@@ -647,6 +704,10 @@ export class DataTable extends Component {
                     column: this.resizeColumnProps,
                     delta: delta
                 });
+            }
+
+            if (this.isStateful()) {
+                this.saveState();
             }
         }
                 
@@ -1113,6 +1174,12 @@ export class DataTable extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        if (this.isStateful() && this.props.resizableColumns) {
+            this.restoreColumnWidths();
+        }
     }
 
     componentDidUpdate() {
