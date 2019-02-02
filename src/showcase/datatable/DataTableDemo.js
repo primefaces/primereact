@@ -1577,6 +1577,42 @@ export class DataTableLazyDemo extends Component {
 `}
 </CodeHighlight> 
 
+            <h3>TableState</h3>
+            <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again, 
+                table would render the data using its last settings. Enabling state is easy as defining a unique <i>stateKey</i>, the storage to keep the state is defined with the <i>stateStorage</i> property that accepts session for sessionStorage and local for localStorage. 
+                Currently following features are supported by TableState; paging, sorting, filtering, column resizing, column reordering, row expansion and row selection.</p>
+
+<CodeHighlight className="language-javascript">
+{`
+export class DataTableStateDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {};
+        this.carservice = new CarService();
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+    }
+
+    render() {
+        return (
+            <DataTable value={this.state.cars} selectionMode="multiple" resizableColumns={true}
+                        selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})} 
+                        paginator={true} rows={10} stateKey="tablestatedemo-session">
+                <Column field="vin" header="Vin" sortable={true} filter={true}/>
+                <Column field="year" header="Year" sortable={true} filter={true}/>
+                <Column field="brand" header="Brand" sortable={true} filter={true}/>
+                <Column field="color" header="Color" sortable={true} filter={true}/>
+            </DataTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
+
             <h3>Responsive</h3>
             <p>DataTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. This feature is enabled by setting responsive to true.</p>
 <CodeHighlight className="language-jsx">
@@ -1672,7 +1708,7 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>paginatorTemplate</td>
                             <td>string</td>
-                            <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                            <td>FirstPageLink PrevPageLink PageLinks <br /> NextPageLink LastPageLink RowsPerPageDropdown</td>
                             <td>Template of the paginator.</td>
                         </tr>
                         <tr>
@@ -1702,7 +1738,7 @@ export class DataTableLazyDemo extends Component {
                         <tr>
                             <td>currentPageReportTemplate</td>
                             <td>string</td>
-                            <td>(&123;currentPage&125; of &123;totalPages&125;)</td>
+                            <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
                             <td>Template of the current page report element.</td>
                         </tr>
                         <tr>
@@ -1787,7 +1823,7 @@ export class DataTableLazyDemo extends Component {
                             <td>compareSelectionBy</td>
                             <td>string</td>
                             <td>deepEquals</td>
-                            <td>Algorithm to define if a row is selected, valid values are "equals" that compares by reference and "deepEquals" that compares all fields.</td>
+                            <td>Algorithm to define if a row is selected, valid values are "equals" that compares by reference and <br/> "deepEquals" that compares all fields.</td>
                         </tr>
                         <tr>
                             <td>dataKey</td>
@@ -1799,32 +1835,34 @@ export class DataTableLazyDemo extends Component {
                             <td>metaKeySelection</td>
                             <td>boolean</td>
                             <td>true</td>
-                            <td>Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
+                            <td>Defines whether metaKey is requred or not for the selection. <br/>
+                                When true metaKey needs to be pressed to select or unselect an item and <br/>
+                                when set to false selection of each item
                                 can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
                         </tr>
                         <tr>
                             <td>headerColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
-                            <td>ColumnCroup component for header.</td>
+                            <td>ColumnGroup component for header.</td>
                         </tr>
                         <tr>
                             <td>footerColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
-                            <td>ColumnCroup component for footer.</td>
+                            <td>ColumnGroup component for footer.</td>
                         </tr>
                         <tr>
                             <td>frozenHeaderColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
-                            <td>ColumnCroup component for header of frozen columns.</td>
+                            <td>ColumnGroup component for header of frozen columns.</td>
                         </tr>
                         <tr>
                             <td>frozenFooterColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
-                            <td>ColumnCroup component for footer of frozen columns.</td>
+                            <td>ColumnGroup component for footer of frozen columns.</td>
                         </tr>
                         <tr>
                             <td>rowExpansionTemplate</td>
@@ -1854,7 +1892,7 @@ export class DataTableLazyDemo extends Component {
                             <td>columnResizeMode</td>
                             <td>string</td>
                             <td>fit</td>
-                            <td>Defines whether the overall table width should change on column resize, valid values are "fit" and "expand".</td>
+                            <td>Defines whether the overall table width should change on column resize, <br/> valid values are "fit" and "expand".</td>
                         </tr>
                         <tr>
                             <td>reorderableColumns</td>
@@ -1944,7 +1982,7 @@ export class DataTableLazyDemo extends Component {
                             <td>rowClassName</td>
                             <td>function</td>
                             <td>null</td>
-                            <td>Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
+                            <td>Function that takes the row data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
                         </tr>
                         <tr>
                             <td>rowGroupHeaderTemplate</td>
@@ -1975,6 +2013,18 @@ export class DataTableLazyDemo extends Component {
                             <td>string</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
+                            <td>stateKey</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Unique identifier of a stateful table to use in state storage.</td>
+                        </tr>
+                        <tr>
+                            <td>stateStorage</td>
+                            <td>string</td>
+                            <td>session</td>
+                            <td>Defines where a stateful table keeps its state, <br/> valid values are "session" for sessionStorage and "local" for localStorage.</td>
                         </tr>
                     </tbody>
                 </table>
