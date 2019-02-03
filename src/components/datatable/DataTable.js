@@ -77,6 +77,8 @@ export class DataTable extends Component {
         loading: false,
         loadingIcon: 'pi pi-spinner',
         tabIndex: '0',
+        stateKey: null,
+        stateStorage: 'session',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -158,6 +160,8 @@ export class DataTable extends Component {
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
         tabIndex: PropTypes.string,
+        stateKey: PropTypes.string,
+        stateStorage: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -192,6 +196,10 @@ export class DataTable extends Component {
 
         if (!this.props.onFilter) {
             state.filters = props.filters;
+        }
+
+        if (this.isStateful()) {
+            this.restoreState(state);
         }
 
         if (Object.keys(state).length) {
@@ -233,6 +241,188 @@ export class DataTable extends Component {
 
     getFilters() {
         return this.props.onFilter ? this.props.filters : this.state.filters;
+    }
+
+    getStorage() {
+        switch(this.props.stateStorage) {
+            case 'local':
+                return window.localStorage;
+
+            case 'session':
+                return window.sessionStorage;
+
+            default:
+                throw new Error(this.props.stateStorage + ' is not a valid value for the state storage, supported values are "local" and "session".');
+        }
+    }
+
+    isStateful() {
+        return this.props.stateKey != null;
+    }
+
+    saveState() {
+        const storage = this.getStorage();
+        let state = {};
+
+        if (this.props.paginator) {
+            state.first = this.getFirst();
+            state.rows = this.getRows();
+        }
+
+        if (this.getSortField()) {
+            state.sortField = this.getSortField();
+            state.sortOrder = this.getSortOrder();
+            state.multiSortMeta = this.getMultiSortMeta();
+        }
+
+        if (this.hasFilter()) {
+            state.filters = this.getFilters();
+        }
+
+        if (this.props.resizableColumns) {
+            this.saveColumnWidths(state);
+        }
+
+        if (this.props.reorderableColumns) {
+            state.columnOrder = this.state.columnOrder;
+        }
+
+        if (this.props.expandedRows) {
+            state.expandedRows = this.props.expandedRows;
+        }
+
+        if (this.props.selection && this.props.onSelectionChange) {
+            state.selection = this.props.selection;
+        }
+
+        if (Object.keys(state).length) {
+            storage.setItem(this.props.stateKey, JSON.stringify(state));
+        }
+    }
+
+    clearState() {
+        const storage = this.getStorage();
+
+        if (this.props.stateKey) {
+            storage.removeItem(this.props.stateKey);
+        }
+    }
+
+    restoreState(state) {
+        const storage = this.getStorage();
+        const stateString = storage.getItem(this.props.stateKey);
+        
+        if (stateString) {
+            let restoredState = JSON.parse(stateString);
+
+            if (this.props.paginator) {
+                if (this.props.onPage) {
+                    this.props.onPage({
+                        first: restoredState.first,
+                        rows: restoredState.rows
+                    });
+                }
+                else {
+                    state.first = restoredState.first;
+                    state.rows = restoredState.rows;
+                }
+            }
+    
+            if (restoredState.sortField) {
+                if (this.props.onSort) {
+                    this.props.onSort({
+                        sortField: restoredState.sortField,
+                        sortOrder: restoredState.sortOrder,
+                        multiSortMeta: restoredState.multiSortMeta
+                    });
+                }
+                else {
+                    state.sortField = restoredState.sortField;
+                    state.sortOrder = restoredState.sortOrder;
+                    state.multiSortMeta = restoredState.multiSortMeta;
+                }
+            }
+    
+            if (restoredState.filters) {
+                if (this.props.onFilter) {
+                    this.props.onFilter({
+                        filters: restoredState.filters
+                    });
+                }
+                else {
+                    state.filters = restoredState.filters;
+                }
+            }
+
+            if (this.props.resizableColumns) {
+                this.columnWidthsState = restoredState.columnWidths;
+                this.tableWidthState = restoredState.tableWidth;
+            }
+
+            if (this.props.reorderableColumns) {
+                state.columnOrder = restoredState.columnOrder;
+            }
+
+            if (restoredState.expandedRows && this.props.onRowToggle) {
+                this.props.onRowToggle({
+                    data: restoredState.expandedRows
+                });
+            }
+
+            if (restoredState.selection && this.props.onSelectionChange) {
+                this.props.onSelectionChange({
+                    value: restoredState.selection
+                });
+            }
+        }
+    }
+
+    saveColumnWidths(state) {
+        let widths = [];
+        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th');
+        headers.map(header => widths.push(DomHandler.getOuterWidth(header)));
+        state.columnWidths = widths.join(',');
+
+        if (this.props.columnResizeMode === 'expand') {
+            state.tableWidth = this.props.scrollable ? DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-table').style.width :
+                                                DomHandler.getOuterWidth(this.table) + 'px';
+        }
+    }
+
+    restoreColumnWidths() {
+        if (this.columnWidthsState) {
+            let widths = this.columnWidthsState.split(',');
+
+            if (this.props.columnResizeMode === 'expand' && this.tableWidthState) {
+                if (this.props.scrollable) {
+                    let scrollableBodyTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-body-table');
+                    let scrollableHeaderTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-table');
+                    let scrollableFooterTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-footer-table');
+                    scrollableBodyTable.style.width = this.tableWidthState;
+                    scrollableHeaderTable.style.width = this.tableWidthState;
+
+                    if (scrollableFooterTable) {
+                        scrollableFooterTable.style.width = this.tableWidthState;
+                    }
+                }
+                else {
+                    this.tableViewChild.nativeElement.style.width = this.tableWidthState;
+                    this.containerViewChild.nativeElement.style.width = this.tableWidthState;
+                }
+            }
+
+            if (this.props.scrollable) {
+                let headerCols = DomHandler.find(this.container, '.p-datatable-scrollable-header-table > colgroup > col');
+                let bodyCols = DomHandler.find(this.container, '.p-datatable-scrollable-body-table > colgroup > col');
+
+                headerCols.map((col, index) => col.style.width = widths[index] + 'px');
+                bodyCols.map((col, index) => col.style.width = widths[index] + 'px');
+            }
+            else {
+                let headers = DomHandler.find(this.table, '.p-datatable-thead > tr > th');
+                headers.map((header, index) => header.style.width = widths[index] + 'px');
+            }
+        } 
     }
 
     onPageChange(event) {
@@ -532,6 +722,10 @@ export class DataTable extends Component {
                     column: this.resizeColumnProps,
                     delta: delta
                 });
+            }
+
+            if (this.isStateful()) {
+                this.saveState();
             }
         }
                 
@@ -998,6 +1192,18 @@ export class DataTable extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        if (this.isStateful() && this.props.resizableColumns) {
+            this.restoreColumnWidths();
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.isStateful()) {
+            this.saveState();
+        }
     }
 
     render() {

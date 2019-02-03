@@ -27,6 +27,7 @@ export class DataTableSubmenu extends Component {
                     <li><Link to="/datatable/export">&#9679; Export</Link></li>
                     <li><Link to="/datatable/contextmenu">&#9679; ContextMenu</Link></li>
                     <li><Link to="/datatable/crud">&#9679; Crud</Link></li>
+                    <li><Link to="/datatable/state">&#9679; State</Link></li>
                 </ul>
             </div>
         );

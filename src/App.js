@@ -72,6 +72,7 @@ import { DataTableResponsiveDemo } from './showcase/datatable/DataTableResponsiv
 import { DataTableEditDemo } from './showcase/datatable/DataTableEditDemo';
 import { DataTableRowGroupDemo } from './showcase/datatable/DataTableRowGroupDemo';
 import { DataTableStyleDemo } from './showcase/datatable/DataTableStyleDemo';
+import { DataTableStateDemo } from './showcase/datatable/DataTableStateDemo';
 import { OrderListDemo } from './showcase/orderlist/OrderListDemo';
 import { PickListDemo } from './showcase/picklist/PickListDemo';
 import { FullCalendarDemo } from './showcase/fullcalendar/FullCalendarDemo';
@@ -364,6 +365,7 @@ export class App extends Component {
                     <Route path="/datatable/rowgroup" component={DataTableRowGroupDemo} />
                     <Route path="/datatable/crud" component={DataTableCrudDemo} />
                     <Route path="/datatable/style" component={DataTableStyleDemo} />
+                    <Route path="/datatable/state" component={DataTableStateDemo} />
                     <Route path="/orderlist" component={OrderListDemo} />
                     <Route path="/picklist" component={PickListDemo} />
                     <Route path="/fullcalendar" component={FullCalendarDemo} />

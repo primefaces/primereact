@@ -268,6 +268,7 @@ body {
             display: block;
             padding: 0px 24px;
             color: #333333;
+            background-color: transparent;
             cursor: pointer;
             user-select: none;
             text-align: left;
@@ -675,7 +676,6 @@ body {
                 td {
                     padding: 8px 14px;
                     border: 1px solid #d4e1e3;
-                    word-break: break-word;
                 }
 
                 tr{
