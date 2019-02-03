@@ -79,10 +79,10 @@ export class OverlayPanel extends Component {
         if(this.isVisible())
             this.hide();
         else
-            this.show(event, currentTarget);
+            this.show(currentTarget);
     }
 
-    show(event, target) {
+    show(target) {
         if(this.props.dismissable) {
             if(this.documentClickListener) {
                 this.targetEvent = true;
@@ -94,12 +94,20 @@ export class OverlayPanel extends Component {
         this.container.style.zIndex = String(DomHandler.generateZIndex());
 
         if(this.isVisible()) {
-            DomHandler.absolutePosition(this.container, target);
+            this.align(target);
         }
         else {
             this.container.style.display = 'block';
-            DomHandler.absolutePosition(this.container, target);
+            this.align(target);
             DomHandler.fadeIn(this.container, 250);
+        }
+    }
+
+    align(target) {
+        DomHandler.absolutePosition(this.container, target);
+
+        if (DomHandler.getOffset(this.container).top < DomHandler.getOffset(target).top) {
+            DomHandler.addClass(this.container, 'p-overlaypanel-flipped');
         }
     }
 
@@ -133,7 +141,7 @@ export class OverlayPanel extends Component {
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}
-                onClick={this.onPanelClick} ref={(el) => { this.container = el }}>
+                onClick={this.onPanelClick} ref={el => this.container = el}>
                 <div className="p-overlaypanel-content">
                     {this.props.children}
                 </div>
