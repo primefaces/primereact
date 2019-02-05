@@ -35,13 +35,32 @@
     padding-left: .5em;
 }
 
-.p-inputgroup .p-inputtext:not(:first-child) {
+.p-inputgroup > .p-inputtext:not(:first-child),
+.p-inputgroup > .p-inputtextarea:not(:first-child),
+.p-inputgroup > .p-calendar:not(:first-child) > .p-inputtext,
+.p-inputgroup > .p-chips:not(:first-child) > .p-inputtext,
+.p-inputgroup > .p-dropdown:not(:first-child),
+.p-inputgroup > .p-multiselect:not(:first-child),
+.p-inputgroup > .p-selectbutton:not(:first-child) > .p-button,
+.p-inputgroup > .p-autocomplete:not(:first-child) > .p-autocomplete-input,
+.p-inputgroup > .p-spinner:not(:first-child),
+.p-inputgroup > .p-spinner:not(:first-child) > .p-spinner-input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 0 none;
 }
 
-.p-inputgroup .p-inputtext:not(:last-child) {
+.p-inputgroup > .p-inputtext:not(:last-child),
+.p-inputgroup > .p-inputtextarea:not(:last-child),
+.p-inputgroup > .p-calendar:not(:last-child) > .p-inputtext,
+.p-inputgroup > .p-chips:not(:last-child) > .p-inputtext,
+.p-inputgroup > .p-dropdown:not(:last-child),
+.p-inputgroup > .p-multiselect:not(:last-child),
+.p-inputgroup > .p-selectbutton:not(:last-child) > .p-button,
+.p-inputgroup > .p-autocomplete:not(:last-child) > .p-autocomplete-input,
+.p-inputgroup > .p-spinner:not(:last-child),
+.p-inputgroup > .p-spinner:not(:last-child) > .p-spinner-input,
+.p-inputgroup > .p-spinner:not(:last-child) > .p-spinner-button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: 0 none;
