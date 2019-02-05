@@ -41,6 +41,10 @@
     right: 5px;
 }
 
+.p-messages-exit .p-messages-close {
+    display: none;
+}
+
 /* Animations */	
 .p-messages-enter {	
     opacity: 0.01;	
