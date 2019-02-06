@@ -112,8 +112,7 @@
 }
 
 .p-treetable-resizable .p-treetable-thead > tr > th,
-.p-treetable-resizable .p-treetable-tfoot > tr > td,
-.p-treetable-resizable .p-treetable-tbody > tr > td {
+.p-treetable-resizable .p-treetable-tfoot > tr > td{
     overflow: hidden;
 }
 
