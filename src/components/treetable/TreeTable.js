@@ -489,11 +489,8 @@ export class TreeTable extends Component {
         if(this.columnResizing) {
             event.preventDefault();
             return;
-        }
-        
-        this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
-        this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
-
+        }     
+      
         this.draggedColumn = this.findParentHeader(event.target);
         event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
     }
