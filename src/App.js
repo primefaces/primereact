@@ -83,6 +83,7 @@ import { TreeLazyDemo } from './showcase/tree/TreeLazyDemo';
 import { TreeTemplatingDemo } from './showcase/tree/TreeTemplatingDemo';
 import { TreeDragDropDemo } from './showcase/tree/TreeDragDropDemo';
 import { TreeContextMenuDemo } from './showcase/tree/TreeContextMenuDemo';
+import { TreeFilterDemo } from './showcase/tree/TreeFilterDemo';
 import { TreeTableDemo } from './showcase/treetable/TreeTableDemo';
 import { TreeTableTemplatingDemo } from './showcase/treetable/TreeTableTemplatingDemo';
 import { TreeTablePageDemo } from './showcase/treetable/TreeTablePageDemo';
@@ -376,6 +377,7 @@ export class App extends Component {
                     <Route path="/tree/templating" component={TreeTemplatingDemo} />
                     <Route path="/tree/dragdrop" component={TreeDragDropDemo} />
                     <Route path="/tree/contextmenu" component={TreeContextMenuDemo} />
+                    <Route path="/tree/filter" component={TreeFilterDemo} />
                     <Route exact path="/treetable" component={TreeTableDemo} />
                     <Route path="/treetable/templating" component={TreeTableTemplatingDemo} />
                     <Route path="/treetable/page" component={TreeTablePageDemo} />

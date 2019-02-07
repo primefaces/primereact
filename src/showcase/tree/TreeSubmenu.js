@@ -14,6 +14,7 @@ export class TreeSubmenu extends Component {
                     <li><Link to="/tree/templating">&#9679; Templating</Link></li>
                     <li><Link to="/tree/dragdrop">&#9679; DragDrop</Link></li>
                     <li><Link to="/tree/contextmenu">&#9679; ContextMenu</Link></li>
+                    <li><Link to="/tree/filter">&#9679; Filter</Link></li>
                 </ul>
             </div>
         );
