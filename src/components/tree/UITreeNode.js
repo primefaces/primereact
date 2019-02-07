@@ -22,6 +22,7 @@ export class UITreeNode extends Component {
         ariaLabel: null,
         ariaLabelledBy: null,
         nodeTemplate: null,
+        isNodeLeaf: null,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
@@ -54,6 +55,7 @@ export class UITreeNode extends Component {
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         nodeTemplate: PropTypes.func,
+        isNodeLeaf: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
@@ -91,7 +93,7 @@ export class UITreeNode extends Component {
     }
 
     isLeaf() {
-        return this.props.node.leaf === false ? false : !(this.props.node.children && this.props.node.children.length);
+        return this.props.isNodeLeaf(this.props.node);
     }
 
     expand(event) {
@@ -704,7 +706,7 @@ export class UITreeNode extends Component {
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate}
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate} isNodeLeaf={this.props.isNodeLeaf}
                                     dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
                             );
                         })
