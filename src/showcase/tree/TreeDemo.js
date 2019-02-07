@@ -697,6 +697,30 @@ export class TreeContextMenuDemo extends Component {
                             <td>false</td>
                             <td>Function that gets a TreeNode instance and returns the content for it.</td>
                         </tr>
+                        <tr>
+                            <td>filter</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When specified, displays an input field to filter the items.</td>
+                        </tr>
+                        <tr>
+                            <td>filterBy</td>
+                            <td>string</td>
+                            <td>label</td>
+                            <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
+                        </tr>
+                        <tr>
+                            <td>filterMode</td>
+                            <td>string</td>
+                            <td>lenient</td>
+                            <td>Mode for filtering valid values are lenient and strict. Default is lenient. (<a href="https://github.com/primefaces/primereact/issues/769" target="_blank" rel="noopener noreferrer">more</a>)</td>
+                        </tr>
+                        <tr>
+                            <td>filterPlaceholder</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Placeholder text to show when filter input is empty.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
