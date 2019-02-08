@@ -157,6 +157,11 @@
     width: 100%;
 }
 
+/*Edit and Resize */
+.p-treetable-resizable .p-treetable-tbody > tr > td.p-cell-editing {
+    overflow: visible;
+}
+
 /* Reorder */
 .p-treetable-reorder-indicator-up,
 .p-treetable-reorder-indicator-down {
