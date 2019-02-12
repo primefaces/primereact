@@ -62,6 +62,7 @@ export class TreeTable extends Component {
         columnResizeMode: 'fit',
         emptyMessage: "No records found",
         filters: null,
+        globalFilter: null,
         filterMode: 'lenient',
         onFilter: null,
         onExpand: null,
@@ -130,6 +131,7 @@ export class TreeTable extends Component {
         columnResizeMode: PropTypes.string,
         emptyMessage: PropTypes.string,
         filters: PropTypes.object,
+        globalFilter: PropTypes.any,
         filterMode: PropTypes.string,
         onFilter: PropTypes.func,
         onExpand: PropTypes.func,
@@ -379,12 +381,6 @@ export class TreeTable extends Component {
                 first: 0,
                 filters: newFilters
             });
-        }
-
-        if (this.props.onValueChange) {
-            this.props.onValueChange(this.processData({
-                filters: newFilters
-            }));
         }
     }
 
@@ -758,20 +754,22 @@ export class TreeTable extends Component {
         let filters = this.getFilters();
         let columns = React.Children.toArray(this.props.children);
         const isStrictMode = this.props.filterMode === 'strict';
+        let isValueChanged = false;
 
-        for(let node of value) {
+        for (let node of value) {
             let copyNode = {...node};
             let localMatch = true;
+            let globalMatch = false;
 
-            for(let j = 0; j < columns.length; j++) {
+            for (let j = 0; j < columns.length; j++) {
                 let col = columns[j];
                 let filterMeta = filters ? filters[col.props.field] : null;
                 let filterField = col.props.field;
                 let filterValue, filterConstraint, paramsWithoutNode;
                 
                 //local
-                if(filterMeta) {
-                    let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
+                if (filterMeta) {
+                    let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode;
                     filterValue = filterMeta.value;
                     filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : ObjectUtils.filterConstraints[filterMatchMode];
                     paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode};
@@ -780,18 +778,38 @@ export class TreeTable extends Component {
                             localMatch = false;
                     }
 
-                    if(!localMatch) {
+                    if (!localMatch) {
                         break;
+                    }
+                }
+
+                //global
+                if (this.props.globalFilter && !globalMatch) {
+                    let copyNodeForGlobal = {...copyNode};
+                    filterValue = this.props.globalFilter;
+                    filterConstraint = ObjectUtils.filterConstraints['contains'];
+                    paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode};
+                    if ((isStrictMode && (this.findFilteredNodes(copyNodeForGlobal, paramsWithoutNode) || this.isFilterMatched(copyNodeForGlobal, paramsWithoutNode))) ||
+                        (!isStrictMode && (this.isFilterMatched(copyNodeForGlobal, paramsWithoutNode) || this.findFilteredNodes(copyNodeForGlobal, paramsWithoutNode)))) {
+                            globalMatch = true;
+                            copyNode = copyNodeForGlobal;
                     }
                 }
             }
 
-            if(localMatch) {
+            let matches = localMatch;
+            if (this.props.globalFilter) {
+                matches = localMatch && globalMatch;
+            }
+
+            if (matches) {
                 filteredNodes.push(copyNode);
             }
+
+            isValueChanged = isValueChanged || !localMatch || globalMatch;
         }
 
-        return filteredNodes.length ? filteredNodes : value;
+        return isValueChanged ? filteredNodes : value;
     }
 
     findFilteredNodes(node, paramsWithoutNode) {
@@ -818,7 +836,7 @@ export class TreeTable extends Component {
     isFilterMatched(node, {filterField, filterValue, filterConstraint, isStrictMode}) {
         let matched = false;
         let dataFieldValue = ObjectUtils.resolveFieldData(node.data, filterField);
-        if(filterConstraint(dataFieldValue, filterValue)) {
+        if (filterConstraint(dataFieldValue, filterValue)) {
             matched = true;
         }
 
@@ -846,7 +864,7 @@ export class TreeTable extends Component {
                 }
 
                 let localFilters = this.getFilters();
-                if (localFilters) {
+                if (localFilters || this.props.globalFilter) {
                     data = this.filterLocal(data, localFilters);
                 }
             }
