@@ -675,6 +675,48 @@ export class TreeTableDemo extends Component {
                                         <td>Sort function for custom sorting.</td>
                                     </tr>
                                     <tr>
+                                        <td>filter</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Defines if a column can be filtered.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterMatchMode</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Defines filterMatchMode; "startsWith", "contains", "endsWidth", "equals", "notEquals", "in" and "custom".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterType</td>
+                                        <td>string</td>
+                                        <td>text</td>
+                                        <td>Type of the filter input field.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterPlaceholder</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Defines placeholder of the input fields.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterMaxlength</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Specifies the maximum number of characters allowed in the filter element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterElement</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Element for custom filtering.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterFunction</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Custom filter function.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>object</td>
                                         <td>null</td>
@@ -2125,6 +2167,24 @@ export class TreeTableResponsiveDemo extends Component {
                                         <td>When enabled, columns can be reordered using drag and drop.</td>
                                     </tr>
                                     <tr>
+                                        <td>filters</td>
+                                        <td>array</td>
+                                        <td>null</td>
+                                        <td>An array of FilterMetadata objects to provide external filters.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>globalFilter</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Value of the global filter to use in filtering.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterMode</td>
+                                        <td>string</td>
+                                        <td>lenient</td>
+                                        <td>Mode for filtering valid values are lenient and strict. Default is lenient. (<a href="https://github.com/primefaces/primereact/issues/769" target="_blank" rel="noopener noreferrer">more</a>)</td>
+                                    </tr>
+                                    <tr>
                                         <td>headerColumnGroup</td>
                                         <td>ColumnGroup</td>
                                         <td>null</td>
@@ -2217,6 +2277,11 @@ export class TreeTableResponsiveDemo extends Component {
                                             event.sortOrder: Sort order as integer. <br />
                                             event.multiSortMeta: MultiSort metadata.</td>
                                         <td>Callback to invoke on sort.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onFilter</td>
+                                        <td>event.filters: Collection of active filters.</td>
+                                        <td>Callback to invoke on filtering.</td>
                                     </tr>
                                     <tr>
                                         <td>onSelect</td>
