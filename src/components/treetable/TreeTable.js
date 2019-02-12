@@ -61,6 +61,9 @@ export class TreeTable extends Component {
         resizableColumns: false,
         columnResizeMode: 'fit',
         emptyMessage: "No records found",
+        filters: null,
+        filterMode: 'lenient',
+        onFilter: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -126,6 +129,9 @@ export class TreeTable extends Component {
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
         emptyMessage: PropTypes.string,
+        filters: PropTypes.object,
+        filterMode: PropTypes.string,
+        onFilter: PropTypes.func,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -162,6 +168,10 @@ export class TreeTable extends Component {
             state.multiSortMeta = props.multiSortMeta;
         }
 
+        if (!this.props.onFilter) {
+            state.filters = props.filters;
+        }
+
         if (Object.keys(state).length) {
             this.state = state;
         }
@@ -169,6 +179,7 @@ export class TreeTable extends Component {
         this.onToggle = this.onToggle.bind(this);
         this.onPageChange = this.onPageChange.bind(this);
         this.onSort = this.onSort.bind(this);
+        this.onFilter = this.onFilter.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
         this.onColumnDragStart = this.onColumnDragStart.bind(this);
         this.onColumnDragOver = this.onColumnDragOver.bind(this);
@@ -339,6 +350,58 @@ export class TreeTable extends Component {
         }
 
         return (multiSortMeta[index].order * result);
+    }
+
+    filter(value, field, mode) {
+        this.onFilter({
+            value: value,
+            field: field,
+            matchMode: mode
+        });
+    }
+
+    onFilter(event) {
+        let currentFilters = this.getFilters();
+        let newFilters = currentFilters ? {...currentFilters} : {};
+        
+        if(!this.isFilterBlank(event.value))
+            newFilters[event.field] = {value: event.value, matchMode: event.matchMode};
+        else if(newFilters[event.field])
+            delete newFilters[event.field];
+
+        if (this.props.onFilter) {
+            this.props.onFilter({
+                filters: newFilters
+            });
+        }
+        else {
+            this.setState({
+                first: 0,
+                filters: newFilters
+            });
+        }
+
+        if (this.props.onValueChange) {
+            this.props.onValueChange(this.processData({
+                filters: newFilters
+            }));
+        }
+    }
+
+    hasFilter() {
+        let filters = this.getFilters();
+
+        return filters && Object.keys(filters).length > 0;
+    }
+
+    isFilterBlank(filter) {
+        if(filter !== null && filter !== undefined) {
+            if((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0))
+                return true;
+            else
+                return false;
+        } 
+        return true;
     }
 
     onColumnResizeStart(event) {
@@ -615,6 +678,10 @@ export class TreeTable extends Component {
         return this.props.onSort ? this.props.multiSortMeta : this.state.multiSortMeta;
     }
 
+    getFilters() {
+        return this.props.onFilter ? this.props.filters : this.state.filters;
+    }
+
     findColumnByKey(columns, key) {
         if(columns && columns.length) {
             for(let i = 0; i < columns.length; i++) {
@@ -686,6 +753,86 @@ export class TreeTable extends Component {
         return scrollableColumns;
     }
 
+    filterLocal(value) {
+        let filteredNodes = [];
+        let filters = this.getFilters();
+        let columns = React.Children.toArray(this.props.children);
+        const isStrictMode = this.props.filterMode === 'strict';
+
+        for(let node of value) {
+            let copyNode = {...node};
+            let localMatch = true;
+
+            for(let j = 0; j < columns.length; j++) {
+                let col = columns[j];
+                let filterMeta = filters ? filters[col.props.field] : null;
+                let filterField = col.props.field;
+                let filterValue, filterConstraint, paramsWithoutNode;
+                
+                //local
+                if(filterMeta) {
+                    let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
+                    filterValue = filterMeta.value;
+                    filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : ObjectUtils.filterConstraints[filterMatchMode];
+                    paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode};
+                    if ((isStrictMode && !(this.findFilteredNodes(copyNode, paramsWithoutNode) || this.isFilterMatched(copyNode, paramsWithoutNode))) ||
+                        (!isStrictMode && !(this.isFilterMatched(copyNode, paramsWithoutNode) || this.findFilteredNodes(copyNode, paramsWithoutNode)))) {
+                            localMatch = false;
+                    }
+
+                    if(!localMatch) {
+                        break;
+                    }
+                }
+            }
+
+            if(localMatch) {
+                filteredNodes.push(copyNode);
+            }
+        }
+
+        return filteredNodes.length ? filteredNodes : value;
+    }
+
+    findFilteredNodes(node, paramsWithoutNode) {
+        if (node) {
+            let matched = false;
+            if (node.children) {
+                let childNodes = [...node.children];
+                node.children = [];
+                for (let childNode of childNodes) {
+                    let copyChildNode = {...childNode};
+                    if (this.isFilterMatched(copyChildNode, paramsWithoutNode)) {
+                        matched = true;
+                        node.children.push(copyChildNode);
+                    }
+                }
+            }
+            
+            if (matched) {
+                return true;
+            }
+        }
+    }
+
+    isFilterMatched(node, {filterField, filterValue, filterConstraint, isStrictMode}) {
+        let matched = false;
+        let dataFieldValue = ObjectUtils.resolveFieldData(node.data, filterField);
+        if(filterConstraint(dataFieldValue, filterValue)) {
+            matched = true;
+        }
+
+        if (!matched || (isStrictMode && !this.isNodeLeaf(node))) {
+            matched = this.findFilteredNodes(node, {filterField, filterValue, filterConstraint, isStrictMode}) || matched;
+        }
+
+        return matched;
+    }
+
+    isNodeLeaf(node) {
+        return node.leaf === false ? false : !(node.children && node.children.length);
+    }
+
     processValue() {
         let data = this.props.value;
 
@@ -696,6 +843,11 @@ export class TreeTable extends Component {
                         data = this.sortSingle(data);
                     else if(this.props.sortMode === 'multiple')
                         data = this.sortMultiple(data);
+                }
+
+                let localFilters = this.getFilters();
+                if (localFilters) {
+                    data = this.filterLocal(data, localFilters);
                 }
             }
         }
@@ -709,7 +861,8 @@ export class TreeTable extends Component {
                         onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()}
                         resizableColumns={this.props.resizableColumns} onResizeStart={this.onColumnResizeStart} 
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.onColumnDragStart} 
-                        onDragOver={this.onColumnDragOver} onDragLeave={this.onColumnDragLeave} onDrop={this.onColumnDrop} /> 
+                        onDragOver={this.onColumnDragOver} onDragLeave={this.onColumnDragLeave} onDrop={this.onColumnDrop}
+                        onFilter={this.onFilter} filters={this.getFilters()}/> 
         );
     }
 

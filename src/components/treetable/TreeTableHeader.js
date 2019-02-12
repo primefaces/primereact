@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import {InputText} from '../inputtext/InputText';
 
 export class TreeTableHeader extends Component {
 
@@ -18,7 +19,8 @@ export class TreeTableHeader extends Component {
         onDragStart: null,
         onDragOver: null,
         onDragLeave: null,
-        onDrop: null
+        onDrop: null,
+        onFilter: null
     }
 
     static propsTypes = {
@@ -34,13 +36,15 @@ export class TreeTableHeader extends Component {
         onDragStart: PropTypes.func,
         onDragOver: PropTypes.func,
         onDragLeave: PropTypes.func,
-        onDrop: PropTypes.func
+        onDrop: PropTypes.func,
+        onFilter: PropTypes.func
     }
 
     constructor(props) {
         super(props);
 
         this.onHeaderMouseDown = this.onHeaderMouseDown.bind(this);
+        this.onFilterInput = this.onFilterInput.bind(this);
     }
 
     onHeaderClick(event, column) {
@@ -99,6 +103,24 @@ export class TreeTableHeader extends Component {
         }
     }
 
+    onFilterInput(e, column) {
+        if(column.props.filter && this.props.onFilter) {
+            if(this.filterTimeout) {
+                clearTimeout(this.filterTimeout);
+            }
+
+            let filterValue = e.target.value;
+            this.filterTimeout = setTimeout(() => {
+                this.props.onFilter({
+                    value: filterValue,
+                    field: column.props.field,
+                    matchMode: column.props.filterMatchMode
+                });
+                this.filterTimeout = null;            
+            }, this.filterDelay);
+        }
+    }
+
     renderSortIcon(column, sorted, sortOrder) {
         if (column.props.sortable) {
             const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
@@ -130,6 +152,7 @@ export class TreeTableHeader extends Component {
         const multipleSorted = multiSortMetaData !== null;
         const sorted = column.props.sortable && (singleSorted || multipleSorted);
         let sortOrder = 0;
+        let filterElement;
 
         if(singleSorted) 
             sortOrder = this.props.sortOrder;
@@ -144,6 +167,11 @@ export class TreeTableHeader extends Component {
             'p-resizable-column': this.props.resizableColumns
         });
 
+        if(column.props.filter) {
+            filterElement = column.props.filterElement||<InputText onInput={(e) => this.onFilterInput(e, column)} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
+                    className="p-column-filter" placeholder={column.props.filterPlaceholder} maxLength={column.props.filterMaxLength}/>;
+        }
+
         const resizer = this.renderResizer(column);
         
         return (
@@ -154,6 +182,7 @@ export class TreeTableHeader extends Component {
                 {resizer}
                 <span className="p-column-title">{column.props.header}</span>
                 {sortIconElement}
+                {filterElement}
             </th>
         );
     }
