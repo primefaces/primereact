@@ -18,6 +18,10 @@ interface TreeProps {
     loading?: boolean;
     loadingIcon?: string;
     dragdropScope?: string;
+    filter?: boolean,
+    filterBy?: any,
+    filterMode?: string,
+    filterPlaceholder?: string,
     nodeTemplate?(node: any): JSX.Element;
     onSelect?(e: {originalEvent: Event, node: TreeNode}): void;
     onUnselect?(e: {originalEvent: Event, node: TreeNode}): void;
