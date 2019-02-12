@@ -51,6 +51,10 @@ interface TreeTableProps {
     resizableColumns?: boolean;
     columnResizeMode?: string;
     emptyMessage?: string;
+    filters?: object;
+    globalFilter?: any;
+    filterMode?: string;
+    onFilter?(filters: any[]): void;
     onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
     onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
     onToggle?(e: {originalEvent: Event, value: any}): void;
