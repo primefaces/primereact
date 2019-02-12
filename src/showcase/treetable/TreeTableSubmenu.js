@@ -22,6 +22,7 @@ export class TreeTableSubmenu extends Component {
                     <li><Link to="/treetable/style">&#9679; Style</Link></li>
                     <li><Link to="/treetable/contextmenu">&#9679; ContextMenu</Link></li>
                     <li><Link to="/treetable/responsive">&#9679; Responsive</Link></li>
+                    <li><Link to="/treetable/filter">&#9679; Filter</Link></li>
                 </ul>
             </div>
         );
