@@ -1147,21 +1147,27 @@ export class DataTable extends Component {
     
     getColumns() {
         let columns = React.Children.toArray(this.props.children);
-        
-        if(this.props.reorderableColumns && this.state.columnOrder) {
-            let orderedColumns = [];
-            for(let columnKey of this.state.columnOrder) {
-                let column = this.findColumnByKey(columns, columnKey);
-                if (column) {
-                    orderedColumns.push(column);
-                }   
+
+        if(columns && columns.length) {
+            if(this.props.reorderableColumns && this.state.columnOrder) {
+                let orderedColumns = [];
+                for(let columnKey of this.state.columnOrder) {
+                    let column = this.findColumnByKey(columns, columnKey);
+                    if (column) {
+                        orderedColumns.push(column);
+                    }
+                }
+                            
+                return [...orderedColumns, ...columns.filter((item) => {
+                    return orderedColumns.indexOf(item) < 0;
+                })];
             }
-                        
-            return orderedColumns;
+            else {
+                return columns;
+            }
         }
-        else {
-            return columns;
-        }
+
+        return null;
     }
     
     findColumnByKey(columns, key) {
