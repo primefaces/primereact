@@ -108,7 +108,9 @@ export class BodyCell extends Component {
             }
             else {
                 setTimeout(() => {
-                    this.keyHelper.removeAttribute('tabindex');
+                    if (this.keyHelper) {
+                        this.keyHelper.removeAttribute('tabindex');
+                    }
                 }, 50);
             }    
         }
