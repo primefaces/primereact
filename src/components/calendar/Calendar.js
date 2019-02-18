@@ -1023,7 +1023,6 @@ export class Calendar extends Component {
                 if(this.props.value[1])
                     return this.isDateEquals(this.props.value[0], dateMeta) || this.isDateEquals(this.props.value[1], dateMeta) || this.isDateBetween(this.props.value[0], this.props.value[1], dateMeta);
                 else {
-                    debugger;
                     return this.isDateEquals(this.props.value[0], dateMeta);
                 }
                     
