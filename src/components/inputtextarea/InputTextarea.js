@@ -112,6 +112,10 @@ export class InputTextarea extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        if (!DomHandler.isVisible(this.element)) {
+            return;
+        }
+        
         if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
