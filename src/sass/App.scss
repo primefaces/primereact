@@ -1037,6 +1037,14 @@ body {
             &.submenu ul li {
                 width: 50%;
             }
+
+            .doc-table {
+                tbody{
+                    td {
+                        word-break: break-word;
+                    }
+                }
+            }
         }
         
     }
