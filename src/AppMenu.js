@@ -86,7 +86,7 @@ export class AppMenu extends Component {
                             <Link to="/paginator">&#9679; Paginator</Link>
                             <Link to="/picklist">&#9679; PickList</Link>
                             <Link to="/tree">&#9679; Tree</Link>
-                            <Link to="/treetable">&#9679; TreeTable <span className="menuitem-badge">NEW</span></Link>
+                            <Link to="/treetable">&#9679; TreeTable</Link>
                         </div>
                     </div>
                 </CSSTransition>
@@ -104,7 +104,7 @@ export class AppMenu extends Component {
                             <Link to="/deferredcontent">&#9679; Deferred</Link>
                             <Link to="/fieldset">&#9679; Fieldset</Link>
                             <Link to="/panel">&#9679; Panel</Link>
-                            <Link to="/flexgrid">&#9679; FlexGrid  <span className="menuitem-badge">NEW</span></Link>
+                            <Link to="/flexgrid">&#9679; FlexGrid</Link>
                             <Link to="/scrollpanel">&#9679; ScrollPanel</Link>
                             <Link to="/tabview">&#9679; TabView</Link>
                             <Link to="/toolbar">&#9679; Toolbar</Link>

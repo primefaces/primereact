@@ -1332,6 +1332,216 @@ mysort(event) {
 
 `}
 </CodeHighlight>
+
+                        <h3>Filtering</h3>
+                        <p>Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand, 
+                        in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
+            
+<CodeHighlight className="language-javascript">
+{`
+<TreeTable value={this.state.nodes}>
+    <Column field="name" header="Name" expander filter={true}></Column>
+    <Column field="size" header="Size" filter={true}></Column>
+    <Column field="type" header="Type" filter={true}></Column>
+</TreeTable>
+
+`}
+</CodeHighlight>
+
+                        <p>An optional global filter feature is available to search all fields with the same keyword, 
+                                        to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>    
+<CodeHighlight className="language-javascript">
+{`
+export class TreeTableFilterDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: [],
+            globalFilter: null
+        };
+        this.nodeservice = new NodeService();
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    render() {
+        let header = <div style={{'textAlign':'left'}}>
+                        <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
+                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+                    </div>;
+
+        return (
+            <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter} header={header}>
+                <Column field="name" header="Name" expander filter={true}></Column>
+                <Column field="size" header="Size" filter={true}></Column>
+                <Column field="type" header="Type" filter={true}></Column>
+            </TreeTable>
+        )
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <p>By default, input fields are used as filter elements and this can be customized using the <i>filterElement</i> property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.</p>
+<CodeHighlight className="language-javascript">
+{`
+export class TreeTableCustomFilterDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            nodes: [],
+            brand: null,
+            colors: null
+        };
+        this.nodeservice = new NodeService();
+        this.onBrandChange = this.onBrandChange.bind(this);
+        this.onColorChange = this.onColorChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    onBrandChange(event) {
+        this.tt.filter(event.value, 'brand', 'equals');
+        this.setState({brand: event.value});
+    }
+
+    onColorChange(event) {
+        this.tt.filter(event.value, 'color', 'in');
+        this.setState({colors: event.value});
+    }
+
+    render() {
+        let brands = [
+                {label: 'All Brands', value: null},
+                {label: 'Audi', value: 'Audi'},
+                {label: 'BMW', value: 'BMW'},
+                {label: 'Fiat', value: 'Fiat'},
+                {label: 'Honda', value: 'Honda'},
+                {label: 'Jaguar', value: 'Jaguar'},
+                {label: 'Mercedes', value: 'Mercedes'},
+                {label: 'Renault', value: 'Renault'},
+                {label: 'VW', value: 'VW'},
+                {label: 'Volvo', value: 'Volvo'}
+            ];
+
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+                value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
+
+        let colors = [
+            {label: 'White', value: 'White'},
+            {label: 'Green', value: 'Green'},
+            {label: 'Silver', value: 'Silver'},
+            {label: 'Black', value: 'Black'},
+            {label: 'Red', value: 'Red'},
+            {label: 'Maroon', value: 'Maroon'},
+            {label: 'Brown', value: 'Brown'},
+            {label: 'Orange', value: 'Orange'},
+            {label: 'Blue', value: 'Blue'}
+        ];
+
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
+
+        return (
+            <TreeTable ref={(el) => this.tt = el} value={this.state.nodes}>
+                <Column field="vin" header="Vin" filter={true} expander />
+                <Column field="year" header="Year" filter={true} />
+                <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
+                <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
+            </TreeTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
+
+                        <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner. 
+                                    In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to be defined to control the filtering state.</p>
+
+<CodeHighlight className="language-javascript">
+{`
+export class TreeTableDefaultFilteredDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            nodes: [],
+            filters: {
+                'brand': {
+                    value: 'BMW'
+                }
+            }
+        };
+        this.nodeservice = new NodeService();
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.nodes} filters={this.state.filters} onFilter={(e) => this.setState({filters: e.filters})}>
+                <Column field="vin" header="Vin" filter={true} expander />
+                <Column field="year" header="Year" filter={true} />
+                <Column field="brand" header="Brand" filter={true} />
+                <Column field="color" header="Color" filter={true}  />
+            </TreeTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
+                    <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however 
+                                it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.</p>
+
+                    <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
+            <CodeHighlight className="language-javascript">
+{`
+export class TreeTableFilterDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            nodes: []
+        };
+        this.nodeservice = new NodeService();
+        this.yearFilter = this.yearFilter.bind(this);
+    }
+
+    componentDidMount() {
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+    }
+
+    yearFilter(value, filter) {
+        return filter > value;
+    }
+
+    render() {
+        return (
+            <TreeTable value={this.state.cars}>
+                <Column field="vin" header="Vin" filter={true} expander />
+                <Column field="year" header="Year" filter={true} filterMatchMode="custom" filterFunction={this.yearFilter}/>
+                <Column field="brand" header="Brand" filter={true} />
+                <Column field="color" header="Color" filter={true}  />
+            </TreeTable>
+        );
+    }
+}
+
+`}
+</CodeHighlight>
+
+
                         <h3>Selection</h3>
                         <p>TreeTable supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should
                         be a single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
@@ -2182,7 +2392,7 @@ export class TreeTableResponsiveDemo extends Component {
                                         <td>filterMode</td>
                                         <td>string</td>
                                         <td>lenient</td>
-                                        <td>Mode for filtering valid values are lenient and strict. Default is lenient. (<a href="https://github.com/primefaces/primereact/issues/769" target="_blank" rel="noopener noreferrer">more</a>)</td>
+                                        <td>Mode for filtering valid values are lenient and strict. Default is lenient.</td>
                                     </tr>
                                     <tr>
                                         <td>headerColumnGroup</td>
