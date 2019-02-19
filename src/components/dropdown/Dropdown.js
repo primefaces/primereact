@@ -603,7 +603,7 @@ export class Dropdown extends Component {
     }
 
     getOptionKey(option) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option.value, this.props.dataKey) : this.getOptionLabel(option);
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
     }
 
     unbindWindowLoadListener() {
