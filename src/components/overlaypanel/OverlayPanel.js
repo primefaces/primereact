@@ -12,7 +12,8 @@ export class OverlayPanel extends Component {
         showCloseIcon: false,
         style: null,
         className: null,
-        appendTo: null
+        appendTo: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -21,7 +22,8 @@ export class OverlayPanel extends Component {
         showCloseIcon: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
-        appendTo: PropTypes.any
+        appendTo: PropTypes.any,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -112,9 +114,13 @@ export class OverlayPanel extends Component {
     }
 
     hide() {
-        if(this.isVisible()) {
+        if (this.isVisible()) {
             this.container.style.display = 'none';
             this.unbindDocumentClickListener();
+
+            if (this.props.onHide) {
+                this.props.onHide();
+            }
         }
     }
 

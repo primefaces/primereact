@@ -128,6 +128,26 @@ import {OverlayPanel} from 'primereact/overlaypanel';
                 </table>
             </div>
 
+            <h3>Events</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Parameters</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>onHide</td>
+                            <td>-</td>
+                            <td>Callback to invoke when overlay gets hidden.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <h3>Methods</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
