@@ -63,7 +63,9 @@ export default class ObjectUtils {
                 let fields = field.split('.');
                 let value = data;
                 for(var i = 0, len = fields.length; i < len; ++i) {
-                    value = value[fields[i]];
+                    if (value !== null && value !== undefined){
+			      value = value[fields[i]];
+		      }
                 }
                 return value;
             }
