@@ -62,9 +62,8 @@ export class TreeFilterDemoDoc extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {Tree} from '../../components/tree/Tree';
+import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
-import {TreeSubmenu} from './TreeSubmenu';
 
 export class TreeFilterDemo extends Component {
 

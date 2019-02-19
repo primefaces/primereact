@@ -45,10 +45,10 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
 <CodeHighlight className="json">
 {`
 dependencies: {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-transition-group": "^2.2.1",
-    "classnames": "^2.2.5",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-transition-group": "^2.5.1"
+    "classnames": "^2.2.6",
     "primeicons": "^1.0.0"
 }
 
