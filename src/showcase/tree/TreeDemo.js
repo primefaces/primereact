@@ -513,6 +513,24 @@ export class TreeDragDropDemo extends Component {
 `}
 </CodeHighlight>
 
+            <h3>Filtering</h3>
+            <p>Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node 
+            is used to compare against the value in the text field, in order to customize which field(s) should be used during search define <i>filterBy</i> property.</p>
+
+            <p>In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand, 
+                 in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
+            
+<CodeHighlight className="language-javascript">
+{`
+<Tree value={this.state.nodes} filter={true} />
+
+<Tree value={this.state.nodes} filter={true} filterBy="data.name,data.age" />
+
+<Tree value={this.state.nodes} filter={true} filterMode="strict" />
+
+`}
+</CodeHighlight>
+
             <h3>ContextMenu</h3>
             <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
             right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
@@ -713,7 +731,7 @@ export class TreeContextMenuDemo extends Component {
                             <td>filterMode</td>
                             <td>string</td>
                             <td>lenient</td>
-                            <td>Mode for filtering valid values are lenient and strict. Default is lenient. (<a href="https://github.com/primefaces/primereact/issues/769" target="_blank" rel="noopener noreferrer">more</a>)</td>
+                            <td>Mode for filtering valid values are "lenient" and "strict". Default is lenient.</td>
                         </tr>
                         <tr>
                             <td>filterPlaceholder</td>
