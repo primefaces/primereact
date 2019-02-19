@@ -59,12 +59,12 @@ export class SidebarDemo extends Component {
                         <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
 
-                    <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={(e) => this.setState({visibleCustomToolbar: false})} customIcons={() => (
+                    <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={(e) => this.setState({visibleCustomToolbar: false})} iconsTemplate={() => (
                         <React.Fragment>
-                            <button className="p-sidebar-close p-link" onClick={() => {alert('Print sidebar content!')}}>
+                            <button className="p-sidebar-close p-link">
                                 <span className="p-sidebar-close-icon pi pi-print"/>
                             </button>
-                            <button className="p-sidebar-close p-link" onClick={() => this.setState({visibleCustomToolbar: false, visibleRight: true})}>
+                            <button className="p-sidebar-close p-link">
                                 <span className="p-sidebar-close-icon pi pi-arrow-right"/>
                             </button>
                         </React.Fragment>
@@ -158,15 +158,16 @@ import {Sidebar} from 'primereact/sidebar';
                         </CodeHighlight>
 
                         <h3>Custom toolbar</h3>
-                        <p>Provide additional elements to the toolbar.</p>
+                        <p>Additional content can be provided using the <i>iconsTemplate</i> property.</p>
+
                         <CodeHighlight className="language-jsx">
                             {`
-<Sidebar visible={this.state.visibleCustomToolbar} onHide={(e) => this.setState({visibleCustomToolbar: false})} customIcons={() => (
+<Sidebar visible={this.state.visibleCustomToolbar} onHide={(e) => this.setState({visibleCustomToolbar: false})} iconsTemplate={() => (
     <React.Fragment>
-        <button className="p-sidebar-close p-link" onClick={() => {alert('Print sidebar content!')}}>
+        <button className="p-sidebar-close p-link">
             <span className="p-sidebar-close-icon pi pi-print"/>
         </button>
-        <button className="p-sidebar-close p-link" onClick={() => this.setState({visibleCustomToolbar: false, visibleRight: true})}>
+        <button className="p-sidebar-close p-link">
             <span className="p-sidebar-close-icon pi pi-arrow-right"/>
         </button>
     </React.Fragment>
@@ -252,10 +253,10 @@ import {Sidebar} from 'primereact/sidebar';
                                         <td>Whether to display a close icon inside the panel.</td>
                                     </tr>
                                     <tr>
-                                        <td>customIcons</td>
-                                        <td>function</td>
+                                        <td>iconsTemplate</td>
+                                        <td>Element</td>
                                         <td>null</td>
-                                        <td>A function that returns a new set of icons to be placed in the toolbar.</td>
+                                        <td>Custom icons template for the header.</td>
                                     </tr>
                                     <tr>
                                         <td>modal</td>

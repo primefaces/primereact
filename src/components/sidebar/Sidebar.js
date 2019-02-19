@@ -16,6 +16,7 @@ export class Sidebar extends Component {
         baseZIndex: 0,
         dismissable: true,
         showCloseIcon: true,
+        iconsTemplate: null,
         modal: true,
         onShow: null,
         onHide: null
@@ -32,6 +33,7 @@ export class Sidebar extends Component {
         baseZIndex: PropTypes.number,
         dismissable: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
+        iconsTemplate: PropTypes.element,
         modal: PropTypes.bool,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
@@ -148,9 +150,9 @@ export class Sidebar extends Component {
         }
     }
 
-    renderCustomIcons() {
-        if (this.props.customIcons) {
-            return this.props.customIcons(this);
+    renderIconsTemplate() {
+        if (this.props.iconsTemplate) {
+            return this.props.iconsTemplate(this);
         }
         else {
             return null;
@@ -161,12 +163,12 @@ export class Sidebar extends Component {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
                                        {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
         const closeIcon = this.renderCloseIcon();
-        const customIcons = this.renderCustomIcons();
+        const iconsTemplate = this.renderIconsTemplate();
 
         return (
             <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style}>
                 {closeIcon}
-                {customIcons}
+                {iconsTemplate}
                 {this.props.children}
             </div>
         );
