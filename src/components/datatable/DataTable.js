@@ -1065,7 +1065,7 @@ export class DataTable extends Component {
     isAllSelected() {
         let visibleData = this.hasFilter() ? this.processData() : this.props.value;
 
-        return this.props.selection && visibleData && this.props.selection.length === visibleData.length;
+        return this.props.selection && visibleData && visibleData.length && this.props.selection.length === visibleData.length;
     }
 
     getFrozenColumns(columns) {
@@ -1105,8 +1105,8 @@ export class DataTable extends Component {
         return null;
     }
 
-    createTableHeader(columns, columnGroup) {
-        return <TableHeader onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
+    createTableHeader(value, columns, columnGroup) {
+        return <TableHeader value={value} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
@@ -1137,7 +1137,7 @@ export class DataTable extends Component {
     }
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
-        return <ScrollableView columns={columns} header={this.createTableHeader(columns, headerColumnGroup)} 
+        return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)} 
                 body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
                 footer={this.createTableFooter(columns, footerColumnGroup)}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
@@ -1251,7 +1251,7 @@ export class DataTable extends Component {
                           </div>;
         }
         else {
-            let tableHeader = this.createTableHeader(columns, this.props.headerColumnGroup);
+            let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
             let tableBody = this.createTableBody(value, columns);
             let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 

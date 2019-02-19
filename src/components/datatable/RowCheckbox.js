@@ -6,12 +6,14 @@ export class RowCheckbox extends Component {
 
     static defaultProps = {
         rowData: null,
-        onClick: null
+        onClick: null,
+        disabled: false
     }
 
     static propTypes = {
         rowData: PropTypes.object,
-         onClick: PropTypes.func
+        onClick: PropTypes.func,
+        disabled: PropTypes.bool
     }
 
     constructor(props) {
@@ -20,7 +22,7 @@ export class RowCheckbox extends Component {
     }
 
     onClick(event) {
-        if(this.props.onClick) {
+        if(this.props.onClick && !this.props.disabled) {
             this.props.onClick({
                 originalEvent: event,
                 data: this.props.rowData,
@@ -30,7 +32,7 @@ export class RowCheckbox extends Component {
     }
     
     render() {
-        let className = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected});
+        let className = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected, 'p-disabled': this.props.disabled});
         let iconClassName = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.selected});
         
         return <div className="p-checkbox p-component">

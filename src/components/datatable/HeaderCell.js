@@ -129,7 +129,7 @@ export class HeaderCell extends Component {
         }
 
         if(this.props.selectionMode === 'multiple') {
-            headerCheckbox = <RowCheckbox onClick={this.props.onHeaderCheckboxClick} selected={this.props.headerCheckboxSelected}/>;
+            headerCheckbox = <RowCheckbox onClick={this.props.onHeaderCheckboxClick} selected={this.props.headerCheckboxSelected} disabled={!this.props.value || this.props.value.length === 0} />;
         }
 
         return (
