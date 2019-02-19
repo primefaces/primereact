@@ -72,7 +72,7 @@ export class Sidebar extends Component {
         if (this.closeIcon) {
             this.closeIcon.focus();
         }
-        
+
         if (this.props.onShow) {
             this.props.onShow();
         }
@@ -88,7 +88,7 @@ export class Sidebar extends Component {
             }
 
             document.body.appendChild(this.mask);
-            
+
             if (this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'p-overflow-hidden');
             }
@@ -148,14 +148,25 @@ export class Sidebar extends Component {
         }
     }
 
+    renderCustomIcons() {
+        if (this.props.customIcons) {
+            return this.props.customIcons(this);
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
                                        {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
         const closeIcon = this.renderCloseIcon();
+        const customIcons = this.renderCustomIcons();
 
         return (
             <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style}>
                 {closeIcon}
+                {customIcons}
                 {this.props.children}
             </div>
         );

@@ -11,6 +11,7 @@ interface SidebarProps {
     baseZIndex?: number;
     dismissable?: boolean;
     showCloseIcon?: boolean;
+    customIcons?(): JSX.Element;
     modal?: boolean;
     onShow?(): void;
     onHide(): void;

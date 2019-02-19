@@ -11,9 +11,10 @@ export class SidebarDemo extends Component {
         this.state = {
             visibleLeft: false,
             visibleRight: false,
-            visibleTop:false, 
+            visibleTop:false,
             visibleBottom: false,
-            visibleFullScreen: false
+            visibleFullScreen: false,
+            visibleCustomToolbar: false
         };
     }
 
@@ -33,36 +34,52 @@ export class SidebarDemo extends Component {
                         <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={(e) => this.setState({visibleRight: false})}>
                         <h1 style={{fontWeight:'normal'}}>Right Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={(e) => this.setState({visibleTop: false})}>
                         <h1 style={{fontWeight:'normal'}}>Top Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={(e) => this.setState({visibleBottom: false})}>
                         <h1 style={{fontWeight:'normal'}}>Bottom Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={(e) => this.setState({visibleFullScreen: false})}>
                         <h1 style={{fontWeight:'normal'}}>Full Screen Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
+                    <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={(e) => this.setState({visibleCustomToolbar: false})} customIcons={() => (
+                        <React.Fragment>
+                            <button className="p-sidebar-close p-link" onClick={() => {alert('Print sidebar content!')}}>
+                                <span className="p-sidebar-close-icon pi pi-print"/>
+                            </button>
+                            <button className="p-sidebar-close p-link" onClick={() => this.setState({visibleCustomToolbar: false, visibleRight: true})}>
+                                <span className="p-sidebar-close-icon pi pi-arrow-right"/>
+                            </button>
+                        </React.Fragment>
+                    )}>
+                        <h1 style={{fontWeight:'normal'}}>Sidebar with custom icons</h1>
+                        <Button type="button" onClick={(e) => this.setState({visibleCustomToolbar: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+                        <Button type="button" onClick={(e) => this.setState({visibleCustomToolbar: false})} label="Cancel" className="p-button-secondary"/>
+                    </Sidebar>
+
                     <Button icon="pi pi-arrow-right" onClick={(e) => this.setState({visibleLeft:true})}  style={{marginRight:'.25em'}} />
                     <Button icon="pi pi-arrow-left" onClick={(e) => this.setState({visibleRight:true})}  style={{marginRight:'.25em'}} />
                     <Button icon="pi pi-arrow-down" onClick={(e) => this.setState({visibleTop:true})}  style={{marginRight:'.25em'}} />
                     <Button icon="pi pi-arrow-up" onClick={(e) => this.setState({visibleBottom:true})}  style={{marginRight:'.25em'}} />
-                    <Button icon="pi pi-th-large" onClick={(e) => this.setState({visibleFullScreen:true})} />
+                    <Button icon="pi pi-th-large" onClick={(e) => this.setState({visibleFullScreen:true})}  style={{marginRight:'.25em'}} />
+                    <Button icon="pi pi-plus" onClick={(e) => this.setState({visibleCustomToolbar:true})} />
                 </div>
 
                 <SidebarDoc/>
@@ -140,6 +157,28 @@ import {Sidebar} from 'primereact/sidebar';
 `}
                         </CodeHighlight>
 
+                        <h3>Custom toolbar</h3>
+                        <p>Provide additional elements to the toolbar.</p>
+                        <CodeHighlight className="language-jsx">
+                            {`
+<Sidebar visible={this.state.visibleCustomToolbar} onHide={(e) => this.setState({visibleCustomToolbar: false})} customIcons={() => (
+    <React.Fragment>
+        <button className="p-sidebar-close p-link" onClick={() => {alert('Print sidebar content!')}}>
+            <span className="p-sidebar-close-icon pi pi-print"/>
+        </button>
+        <button className="p-sidebar-close p-link" onClick={() => this.setState({visibleCustomToolbar: false, visibleRight: true})}>
+            <span className="p-sidebar-close-icon pi pi-arrow-right"/>
+        </button>
+    </React.Fragment>
+)}>
+    <h1 style={{fontWeight:'normal'}}>Sidebar with custom icons</h1>
+    <Button type="button" onClick={(e) => this.setState({visibleCustomToolbar: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+    <Button type="button" onClick={(e) => this.setState({visibleCustomToolbar: false})} label="Cancel" className="p-button-secondary"/>
+</Sidebar>
+
+`}
+                        </CodeHighlight>
+
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -211,6 +250,12 @@ import {Sidebar} from 'primereact/sidebar';
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Whether to display a close icon inside the panel.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>customIcons</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>A function that returns a new set of icons to be placed in the toolbar.</td>
                                     </tr>
                                     <tr>
                                         <td>modal</td>
@@ -331,7 +376,7 @@ export class SidebarDemo extends Component {
         this.state = {
             visibleLeft: false,
             visibleRight: false,
-            visibleTop:false, 
+            visibleTop:false,
             visibleBottom: false,
             visibleFullScreen: false
         };
@@ -353,31 +398,31 @@ export class SidebarDemo extends Component {
                         <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleLeft: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleRight} position="right" baseZIndex={1000000} onHide={(e) => this.setState({visibleRight: false})}>
                         <h1 style={{fontWeight:'normal'}}>Right Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Save" className="p-button-success"  style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleRight: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleTop} position="top" baseZIndex={1000000} onHide={(e) => this.setState({visibleTop: false})}>
                         <h1 style={{fontWeight:'normal'}}>Top Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleTop: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleBottom} position="bottom" baseZIndex={1000000} onHide={(e) => this.setState({visibleBottom: false})}>
                         <h1 style={{fontWeight:'normal'}}>Bottom Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleBottom: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={(e) => this.setState({visibleFullScreen: false})}>
                         <h1 style={{fontWeight:'normal'}}>Full Screen Sidebar</h1>
                         <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                         <Button type="button" onClick={(e) => this.setState({visibleFullScreen: false})} label="Cancel" className="p-button-secondary"/>
                     </Sidebar>
-                    
+
                     <Button icon="pi pi-arrow-right" onClick={(e) => this.setState({visibleLeft:true})} style={{marginRight:'.25em'}} />
                     <Button icon="pi pi-arrow-left" onClick={(e) => this.setState({visibleRight:true})} style={{marginRight:'.25em'}} />
                     <Button icon="pi pi-arrow-down" onClick={(e) => this.setState({visibleTop:true})} style={{marginRight:'.25em'}} />
