@@ -10,7 +10,7 @@ export class AppMenu extends Component {
         this.state = { activeMenu: -1 };
     }
 
-    toggleMenu(event, val) {
+    toggleMenu(val) {
         let active = this.state.activeMenu === val;
 
         this.setState({ activeMenu: active ? -1 : val });
@@ -19,7 +19,7 @@ export class AppMenu extends Component {
     render() {
         return (
             <div className="layout-menu">
-                <button id="menu_input" onClick={(event) => this.toggleMenu(event, 0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
+                <button id="menu_input" onClick={() => this.toggleMenu(0)} className={classNames({ 'active-menuitem': this.state.activeMenu === 0 })}>
                     <img alt="input" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/input.svg"></img>
                     <img alt="input" className="layout-menu-icon-active" src="showcase/resources/images/mono/input-active.svg"></img>
                     <span>Input</span>
@@ -54,7 +54,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="button_menutitle" onClick={(event) => this.toggleMenu(event, 1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
+                <button id="button_menutitle" onClick={() => this.toggleMenu(1)} className={classNames({ 'active-menuitem': this.state.activeMenu === 1 })}>
                     <img alt="button" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/button.svg"></img>
                     <img alt="button" className="layout-menu-icon-active" src="showcase/resources/images/mono/button-active.svg"></img>
                     <span>Button</span>
@@ -68,7 +68,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="data_menutitle" onClick={(event) => this.toggleMenu(event, 2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
+                <button id="data_menutitle" onClick={() => this.toggleMenu(2)} className={classNames({ 'active-menuitem': this.state.activeMenu === 2 })}>
                     <img alt="data" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/data.svg"></img>
                     <img alt="data" className="layout-menu-icon-active" src="showcase/resources/images/mono/data-active.svg"></img>
                     <span>Data</span>
@@ -91,7 +91,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="menu_panel" onClick={(event) => this.toggleMenu(event, 3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
+                <button id="menu_panel" onClick={() => this.toggleMenu(3)} className={classNames({ 'active-menuitem': this.state.activeMenu === 3 })}>
                     <img alt="panel" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/panel.svg"></img>
                     <img alt="panel" className="layout-menu-icon-active" src="showcase/resources/images/mono/panel-active.svg"></img>
                     <span>Panel</span>
@@ -112,7 +112,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="menu_overlay" onClick={(event) => this.toggleMenu(event, 4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
+                <button id="menu_overlay" onClick={() => this.toggleMenu(4)} className={classNames({ 'active-menuitem': this.state.activeMenu === 4 })}>
                     <img alt="overlay" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/overlay.svg"></img>
                     <img alt="overlay" className="layout-menu-icon-active" src="showcase/resources/images/mono/overlay-active.svg"></img>
                     <span>Overlay</span>
@@ -129,7 +129,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="menu_file" onClick={(event) => this.toggleMenu(event, 5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
+                <button id="menu_file" onClick={() => this.toggleMenu(5)} className={classNames({ 'active-menuitem': this.state.activeMenu === 5 })}>
                     <img alt="file" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/file.svg"></img>
                     <img alt="file" className="layout-menu-icon-active" src="showcase/resources/images/mono/file-active.svg"></img>
                     <span>File</span>
@@ -142,7 +142,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="menu_menu" onClick={(event) => this.toggleMenu(event, 6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
+                <button id="menu_menu" onClick={() => this.toggleMenu(6)} className={classNames({ 'active-menuitem': this.state.activeMenu === 6 })}>
                     <img alt="menu" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/menu.svg"></img>
                     <img alt="menu" className="layout-menu-icon-active" src="showcase/resources/images/mono/menu-active.svg"></img>
                     <span>Menu</span>
@@ -165,7 +165,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
 
-                <button id="menu_chart" onClick={(event) => this.toggleMenu(event, 7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
+                <button id="menu_chart" onClick={() => this.toggleMenu(7)} className={classNames({ 'active-menuitem': this.state.activeMenu === 7 })}>
                     <img alt="charts" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/charts.svg"></img>
                     <img alt="charts" className="layout-menu-icon-active" src="showcase/resources/images/mono/charts-active.svg"></img>
                     <span>Chart</span>
@@ -186,7 +186,7 @@ export class AppMenu extends Component {
                 </CSSTransition>
                     
 
-                <button id="menu_messages" onClick={(event) => this.toggleMenu(event, 8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
+                <button id="menu_messages" onClick={() => this.toggleMenu(8)} className={classNames({ 'active-menuitem': this.state.activeMenu === 8 })}>
                     <img alt="message" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/message.svg"></img>
                     <img alt="message" className="layout-menu-icon-active" src="showcase/resources/images/mono/message-active.svg"></img>
                     <span>Messages</span>
@@ -200,7 +200,7 @@ export class AppMenu extends Component {
                     </div>
                 </CSSTransition>
                    
-                <button id="menu_misc" onClick={(event) => this.toggleMenu(event, 9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })}>
+                <button id="menu_misc" onClick={() => this.toggleMenu(9)} className={classNames({ 'active-menuitem': this.state.activeMenu === 9 })}>
                     <img alt="misc" className="layout-menu-icon-inactive" src="showcase/resources/images/mono/misc.svg"></img>
                     <img alt="misc" className="layout-menu-icon-active" src="showcase/resources/images/mono/misc-active.svg"></img>
                     <span>Misc</span>

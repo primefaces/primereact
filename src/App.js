@@ -145,6 +145,7 @@ export class App extends Component {
             themeMenuActive: false,
             themeMenuVisited: false
         };
+
         this.theme = 'nova-light';
         this.changeTheme = this.changeTheme.bind(this);
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
@@ -153,6 +154,7 @@ export class App extends Component {
         this.onThemesLinkClick = this.onThemesLinkClick.bind(this);
         this.onThemesLinkKeyDown = this.onThemesLinkKeyDown.bind(this);
         this.onThemeChangerKeyDown = this.onThemeChangerKeyDown.bind(this);
+        this.onThemesMenuRouteChange = this.onThemesMenuRouteChange.bind(this);
     }
 
     changeTheme(event, theme, dark) {
@@ -176,13 +178,18 @@ export class App extends Component {
         this.setState({
             themeMenuActive: false
         });
-        this.unbindDocumentClickListener();
+        this.unbindThemesMenuDocumentClickListener();
         event.preventDefault();
     }
 
     toggleMenu() {
         this.setState({
             mobileMenuActive: !this.state.mobileMenuActive
+        }, () => {
+            if (this.state.mobileMenuActive)
+                this.bindMenuDocumentClickListener();
+            else    
+                this.unbindMenuDocumentClickListener();
         });
     }
 
@@ -197,8 +204,8 @@ export class App extends Component {
     }
 
     onSidebarClick(event) {
-        if (event.target.nodeName === 'A' && event.target.parentNode.className.indexOf('layout-menu') === -1) {
-            this.setState({ menuActive:false});
+        if (event.target.nodeName === 'A') {
+            this.setState({ mobileMenuActive: false});
         }
     }
 
@@ -207,9 +214,10 @@ export class App extends Component {
             themeMenuActive: !this.state.themeMenuActive,
             themeMenuVisited: true
         }, () => {
-            if (this.state.themeMenuActive) {
-                this.bindDocumentClickListener();
-            }
+            if (this.state.themeMenuActive)
+                this.bindThemesMenuDocumentClickListener();
+            else    
+                this.unbindThemesMenuDocumentClickListener();
         });
     }
 
@@ -225,35 +233,66 @@ export class App extends Component {
         }
     }
 
-    bindDocumentClickListener() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.themeMenu && !this.themeMenu.contains(event.target)) {
-                    this.setState({themeMenuActive: null});
-                    this.unbindDocumentClickListener();
+    onThemesMenuRouteChange() {
+        this.setState({themeMenuActive: false}, () => {
+            this.unbindThemesMenuDocumentClickListener();
+        });
+    }
+
+    bindMenuDocumentClickListener() {
+        if (!this.menuDocumentClickListener) {
+            this.menuDocumentClickListener = (event) => {
+                if (!this.isMenuButtonClicked(event) && !this.sidebar.contains(event.target)) {
+                    this.setState({mobileMenuActive: false});
+                    this.unbindMenuDocumentClickListener();
                 }
             };
 
-            document.addEventListener('click', this.documentClickListener);
+            document.addEventListener('click', this.menuDocumentClickListener);
         }
     }
     
-    unbindDocumentClickListener() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
+    unbindMenuDocumentClickListener() {
+        if (this.menuDocumentClickListener) {
+            document.removeEventListener('click', this.menuDocumentClickListener);
+            this.menuDocumentClickListener = null;
+        }
+    }
+
+    isMenuButtonClicked(event) {
+        return event.target === this.menuButton || this.menuButton.contains(event.target);
+    }
+
+    bindThemesMenuDocumentClickListener() {
+        if (!this.themesMenuDocumentClickListener) {
+            this.themesMenuDocumentClickListener = (event) => {
+                if (this.themeMenu && event.target !== this.themeMenuLink && !this.themeMenu.contains(event.target)) {
+                    this.setState({themeMenuActive: null});
+                    this.unbindThemesMenuDocumentClickListener();
+                }
+            };
+
+            document.addEventListener('click', this.themesMenuDocumentClickListener);
+        }
+    }
+    
+    unbindThemesMenuDocumentClickListener() {
+        if (this.themesMenuDocumentClickListener) {
+            document.removeEventListener('click', this.themesMenuDocumentClickListener);
+            this.themesMenuDocumentClickListener = null;
         }
     }
 
     componentWillUnmount() {
-        this.unbindDocumentClickListener();
+        this.unbindThemesMenuDocumentClickListener();
+        this.unbindMenuDocumentClickListener();
     }
 
     render() {
         return (
             <div className="layout-wrapper">
                 <div className="layout-topbar">
-                    <span className="menu-button" tabIndex="0" onClick={this.onMenuButtonClick} onKeyDown={this.onMenuButtonKeyDown}>
+                    <span ref={el => this.menuButton = el} className="menu-button" tabIndex="0" onClick={this.onMenuButtonClick} onKeyDown={this.onMenuButtonKeyDown}>
                         <i className="pi pi-bars"></i>
                     </span>
                     <Link to="/" className="logo">
@@ -267,12 +306,12 @@ export class App extends Component {
    
                         <li ref={el => this.themeMenu = el} className="topbar-menu-themes">
                             {!this.state.themeMenuVisited && <i className="topbar-menu-badge"></i>}
-                            <span tabIndex="0" onClick={this.onThemesLinkClick} onKeyDown={this.onThemesLinkKeyDown}>THEMES</span>
+                            <span ref={el => this.themeMenuLink = el} tabIndex="0" onClick={this.onThemesLinkClick} onKeyDown={this.onThemesLinkKeyDown}>THEMES</span>
                             <ul className={classNames({'active-top-menu': this.state.themeMenuActive})}>
                                 <li className="topbar-submenu-header">THEMING</li>
-                                <li><Link to="/theming"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
+                                <li><Link to="/theming" onClick={this.onThemesMenuRouteChange}><i className="pi pi-fw pi-file"/><span>Guide</span></Link></li>
                                 <li><a href="https://www.primefaces.org/designer/primereact"><i className="pi pi-fw pi-cog" /><span>Designer</span></a></li>
-                                <li><Link to="/icons"><i className="pi pi-fw pi-search" /><span>Icons</span></Link></li>
+                                <li><Link to="/icons" onClick={this.onThemesMenuRouteChange}><i className="pi pi-fw pi-search"/><span>Icons</span></Link></li>
                                 <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                 <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">material</span></a></li>
                                 <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">material</span></a></li>
@@ -299,7 +338,7 @@ export class App extends Component {
                     </ul>
                 </div>
 
-                <div id="layout-sidebar" className={classNames({'active': this.state.mobileMenuActive})} onClick={this.onSidebarClick}>
+                <div id="layout-sidebar" ref={el => this.sidebar = el} className={classNames({'active': this.state.mobileMenuActive})} onClick={this.onSidebarClick}>
                     <AppMenu />
                 </div>
 
@@ -433,7 +472,7 @@ export class App extends Component {
                     <Route path="/deferredcontent" component={DeferredContentDemo}/>
 
                     <div className="content-section layout-footer clearfix">
-                        <span>PrimeReact 3.0.0-beta.1 by <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
+                        <span>PrimeReact 3.1.0-rc.1 by <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
                         <div className="footer-links">
                             <a href="https://github.com/primefaces/primereact"><i className=" icon-github fa fa-github-square"></i></a>
                             <a href="https://twitter.com/primereact"><i className="icon-twitter fa fa-twitter-square"></i></a>
