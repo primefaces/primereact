@@ -14,7 +14,7 @@ export class PickListItem extends Component {
         onKeyDown: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         value: PropTypes.any,
         className: PropTypes.string,
         template: PropTypes.func,

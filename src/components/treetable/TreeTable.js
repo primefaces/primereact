@@ -80,7 +80,7 @@ export class TreeTable extends Component {
         onContextMenu: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
         header: PropTypes.any,

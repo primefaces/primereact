@@ -15,7 +15,7 @@ export class OrganizationChartNode extends Component {
         isSelected: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         node: PropTypes.any,
         nodeTemplate: PropTypes.any,
         root: PropTypes.bool,
@@ -135,7 +135,7 @@ export class OrganizationChart extends Component {
         onNodeUnselect: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
         style: PropTypes.object,

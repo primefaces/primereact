@@ -20,7 +20,7 @@ export class InputSwitch extends Component {
         onBlur: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,

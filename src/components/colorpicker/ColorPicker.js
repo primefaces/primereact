@@ -24,7 +24,7 @@ export class ColorPicker extends Component {
         onChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
         style: PropTypes.object,

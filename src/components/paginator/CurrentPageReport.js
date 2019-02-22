@@ -9,7 +9,7 @@ export class CurrentPageReport extends Component {
         template: '({currentPage} of {totalPages})'
     }
 
-    static propsTypes = {
+    static propTypes = {
         pageCount: PropTypes.number,
         page: PropTypes.number,
         template: PropTypes.string

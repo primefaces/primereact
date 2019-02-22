@@ -13,7 +13,7 @@ export class FullCalendar extends Component {
         options: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         events: PropTypes.array,
         style: PropTypes.object,

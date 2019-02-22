@@ -9,7 +9,7 @@ export class PrevPageLink extends Component {
         onClick: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         disabled: PropTypes.bool,
         onClick: PropTypes.func
     }

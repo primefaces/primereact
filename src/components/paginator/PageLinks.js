@@ -10,7 +10,7 @@ export class PageLinks extends Component {
         links: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         value: PropTypes.array,
         page: PropTypes.number,
         onClick: PropTypes.func

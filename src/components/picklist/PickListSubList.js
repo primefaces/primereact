@@ -22,7 +22,7 @@ export class PickListSubList extends Component {
         onSelectionChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         list: PropTypes.array,
         selection: PropTypes.array,
         header: PropTypes.string,

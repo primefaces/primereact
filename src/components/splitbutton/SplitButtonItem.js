@@ -8,7 +8,7 @@ export class SplitButtonItem extends Component {
         menuitem: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         menuitem: PropTypes.any
     }
 

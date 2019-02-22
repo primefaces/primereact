@@ -85,7 +85,7 @@ export class Calendar extends Component {
         onClearButtonClick: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         name: PropTypes.string,
         value: PropTypes.any,

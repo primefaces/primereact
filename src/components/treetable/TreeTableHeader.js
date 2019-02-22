@@ -23,7 +23,7 @@ export class TreeTableHeader extends Component {
         onFilter: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         columns: PropTypes.array,
         columnGroup: PropTypes.any,
         sortField: PropTypes.string,

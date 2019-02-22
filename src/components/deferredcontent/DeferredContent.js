@@ -7,7 +7,7 @@ export class DeferredContent extends Component {
         onload: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         onLoad: PropTypes.func
     }
 

@@ -8,7 +8,7 @@ export class Row extends Component {
         className: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         style: PropTypes.object,
         className: PropTypes.string
     }

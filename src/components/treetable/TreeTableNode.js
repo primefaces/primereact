@@ -9,7 +9,7 @@ export class UITreeTableNode extends Component {
         index: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         node: PropTypes.object,
         index: PropTypes.number
     }

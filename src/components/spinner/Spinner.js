@@ -30,7 +30,7 @@ export class Spinner extends Component {
         onBlur: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.number,
         name: PropTypes.string,

@@ -11,7 +11,7 @@ export class OrderListControls extends Component {
         onReorder: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         value: PropTypes.array,
         selection: PropTypes.array,
         onReorder: PropTypes.func
