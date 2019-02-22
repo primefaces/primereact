@@ -24,10 +24,6 @@ export class ProgressBar extends Component {
         mode: PropTypes.string
     };
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.value !== nextProps.value;
-    }
-
     renderLabel() {
         if (this.props.showValue && this.props.value) {
             return (
