@@ -437,7 +437,7 @@ export class Dropdown extends Component {
     }
 
     hide() {
-        if (this.panel.element.offsetParent) {
+        if (this.panel.element && this.panel.element.offsetParent) {
             DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
             DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
     
