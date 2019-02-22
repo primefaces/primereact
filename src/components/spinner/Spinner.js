@@ -103,7 +103,7 @@ export class Spinner extends Component {
         else
             newValue = currentValue + step;
 
-        if (this.props.maxlength !== null && this.value.toString().length > this.props.maxlength) {
+        if (this.props.maxlength !== null && this.props.value.toString().length > this.props.maxlength) {
             newValue = currentValue;
         }
 
