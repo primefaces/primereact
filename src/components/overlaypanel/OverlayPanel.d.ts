@@ -8,7 +8,7 @@ interface OverlayPanelProps {
     style?: object;
     className?: string;
     appendTo?: any;
-    onHide()?: void;
+    onHide?(): void;
 }
 
 export class OverlayPanel extends React.Component<OverlayPanelProps,any> {
