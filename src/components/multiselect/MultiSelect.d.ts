@@ -21,6 +21,8 @@ interface MultiSelectProps {
     itemTemplate?(item: any): JSX.Element | undefined;
     selectedItemTemplate?(value: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any}): void;
+    onFocus?(event: Event): void;
+    onBlur?(event: Event): void;
 }
 
 export class MultiSelect extends React.Component<MultiSelectProps,any> {}

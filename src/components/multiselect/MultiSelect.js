@@ -29,7 +29,9 @@ export class MultiSelect extends Component {
         tooltipOptions: null,
         itemTemplate: null,
         selectedItemTemplate: null,
-        onChange: null
+        onChange: null,
+        onFocus: null,
+        onBlur: null
     };
 
     static propTypes = {
@@ -52,6 +54,8 @@ export class MultiSelect extends Component {
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
         onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
     };
 
     constructor(props) {
@@ -278,12 +282,20 @@ export class MultiSelect extends Component {
         return label;
     }
 
-    onFocus() {
+    onFocus(event) {
         DomHandler.addClass(this.container, 'p-focus');
+
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
-    onBlur() {
+    onBlur(event) {
         DomHandler.removeClass(this.container, 'p-focus');
+
+        if (this.props.onBlur) {
+            this.props.onBlur(event);
+        }
     }
 
     bindDocumentClickListener() {
