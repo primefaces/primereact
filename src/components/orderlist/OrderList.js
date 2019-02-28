@@ -22,7 +22,7 @@ export class OrderList extends Component {
         itemTemplate: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.array,
         header: PropTypes.string,

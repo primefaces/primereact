@@ -39,7 +39,7 @@ export class Column extends Component {
         rowReorderIcon: 'pi pi-bars'
     }
 
-    static propsTypes = {
+    static propTypes = {
         columnKey: PropTypes.string,
         field: PropTypes.string,
         sortField: PropTypes.string,

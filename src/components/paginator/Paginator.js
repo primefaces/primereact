@@ -26,7 +26,7 @@ export class Paginator extends Component {
         currentPageReportTemplate: '({currentPage} of {totalPages})'
     }
 
-    static propsTypes = {
+    static propTypes = {
         totalRecords: PropTypes.number,
         rows: PropTypes.number,
         first: PropTypes.number,

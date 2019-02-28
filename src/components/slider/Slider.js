@@ -21,7 +21,7 @@ export class Slider extends Component {
         onSlideEnd: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.number,
         min: PropTypes.number,

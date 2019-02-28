@@ -8,7 +8,7 @@ export class TreeTableFooter extends Component {
         columnGroup: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         columns: PropTypes.array,
         columnGroup: PropTypes.any
     }

@@ -22,7 +22,7 @@ export class DataScroller extends Component {
         lazy: false
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.array,
         rows: PropTypes.number,

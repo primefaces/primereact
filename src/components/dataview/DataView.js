@@ -14,7 +14,7 @@ export class DataViewLayoutOptions extends Component {
         onChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -63,7 +63,7 @@ class DataViewItem extends Component {
         layout: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         template: PropTypes.func,
         item: PropTypes.number,
         layout: PropTypes.string
@@ -104,7 +104,7 @@ export class DataView extends Component {
         onPage: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         header: PropTypes.string,
         footer: PropTypes.string,

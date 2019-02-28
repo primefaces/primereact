@@ -13,7 +13,7 @@ export class PickListControls extends Component {
         onReorder: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         className: PropTypes.string,
         list: PropTypes.array,
         selection: PropTypes.array,

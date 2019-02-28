@@ -38,7 +38,7 @@ export class UITreeNode extends Component {
         onContextMenu: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         node: PropTypes.object,
         index: PropTypes.number,
         last: PropTypes.number,

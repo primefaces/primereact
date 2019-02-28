@@ -32,7 +32,7 @@ export class TreeTableBody extends Component {
         onContextMenu: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         value: PropTypes.array,
         columns: PropTypes.array,
         expandedKeys: PropTypes.array,

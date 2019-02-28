@@ -19,7 +19,7 @@ export class Rating extends Component {
         onChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.string,
         disabled: PropTypes.bool,

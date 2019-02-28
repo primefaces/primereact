@@ -10,7 +10,7 @@ export class RowsPerPageDropdown extends Component {
         onChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         options: PropTypes.array,
         value: PropTypes.number,
         onChange: PropTypes.func

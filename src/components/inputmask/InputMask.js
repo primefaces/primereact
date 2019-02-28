@@ -31,7 +31,7 @@ export class InputMask extends Component {
         onChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.string,
         type: PropTypes.string,

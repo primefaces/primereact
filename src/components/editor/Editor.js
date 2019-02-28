@@ -20,7 +20,7 @@ export class Editor extends Component {
         onSelectionChange: null
     };
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         value: PropTypes.string,
         style: PropTypes.object,

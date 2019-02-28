@@ -19,7 +19,7 @@ export class OrderListSubList extends Component {
         onChange: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         value: PropTypes.array,
         selection: PropTypes.array,
         header: PropTypes.string,

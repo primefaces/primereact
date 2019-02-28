@@ -26,7 +26,7 @@ export class SplitButton extends Component {
         tooltipOptions: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         label: PropTypes.string,
         icon: PropTypes.string,

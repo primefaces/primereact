@@ -16,7 +16,7 @@ export class SlideMenuSub extends Component {
         onForward: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         model: PropTypes.any,
         level: PropTypes.number,
         easing: PropTypes.string,
@@ -176,7 +176,7 @@ export class SlideMenu extends Component {
         onHide: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         model: PropTypes.array,
         popup: PropTypes.bool,

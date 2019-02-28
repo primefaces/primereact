@@ -32,7 +32,7 @@ export class PickList extends Component {
         onMoveAllToTarget: null
     }
 
-    static propsTypes = {
+    static propTypes = {
         id: PropTypes.string,
         source: PropTypes.array,
         target: PropTypes.array,
