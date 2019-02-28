@@ -8,9 +8,9 @@
 ```
 
 **Plunkr Case (Bug Reports)**
-Please fork the plunkr below and create a case demonstrating your bug report. Issues without a plunkr have much less possibility to be reviewed.
+Please fork the codesandbox below and create a case demonstrating your bug report. Issues without a codesandbox have much less possibility to be reviewed.
 
-https://plnkr.co/edit/C6qjkdLtbmy92Hogdnjb?p=preview
+https://codesandbox.io/s/qjx332qq4
 
 **Current behavior**
 <!-- Describe how the bug manifests. -->
@@ -22,7 +22,7 @@ https://plnkr.co/edit/C6qjkdLtbmy92Hogdnjb?p=preview
 <!--
 If the current behavior is a bug or you can illustrate your feature request better with an example, 
 please provide the *STEPS TO REPRODUCE* and if possible a *MINIMAL DEMO* of the problem via
-https://plnkr.co or similar (you can use this template as a starting point: http://plnkr.co/edit/tpl:AvJOMERrnz94ekVua0u5).
+https://codesandbox.io or similar (you can use this template as a starting point: https://codesandbox.io/s/qjx332qq4).
 -->
 
 **Please tell us about your environment:**
