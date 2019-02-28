@@ -356,6 +356,16 @@ selectedCarTemplate(option) {
                             </td>
                             <td>Callback to invoke when value changes.</td>
                         </tr>
+                        <tr>
+                            <td>onFocus</td>
+                            <td>event: Browser event.</td>
+                            <td>Callback to invoke when the element receives focus.</td>
+                        </tr>
+                        <tr>
+                            <td>onBlur</td>
+                            <td>event: Browser event.</td>
+                            <td>Callback to invoke when the element loses focus.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
