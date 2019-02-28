@@ -56,13 +56,19 @@ export default class ObjectUtils {
     
     static resolveFieldData(data, field) {
         if(data && field) {
-            if(field.indexOf('.') === -1) {
+            if (this.isFunction(field)) {
+                return field(data);
+            }
+            else if(field.indexOf('.') === -1) {
                 return data[field];
             }
             else {
                 let fields = field.split('.');
                 let value = data;
                 for(var i = 0, len = fields.length; i < len; ++i) {
+                    if (value == null) {
+                        return null;
+                    }
                     value = value[fields[i]];
                 }
                 return value;
@@ -72,6 +78,11 @@ export default class ObjectUtils {
             return null;
         }
     }
+
+    static isFunction(obj) {
+        return !!(obj && obj.constructor && obj.call && obj.apply);
+    }
+
     static filter(value, fields, filterValue) {
         var filteredItems=[];
 
