@@ -7,7 +7,7 @@
 [ ] support request => Please do not submit support request here, instead see https://forum.primefaces.org/viewforum.php?f=57
 ```
 
-**Plunkr Case (Bug Reports)**
+**Codesandbox Case (Bug Reports)**
 Please fork the codesandbox below and create a case demonstrating your bug report. Issues without a codesandbox have much less possibility to be reviewed.
 
 https://codesandbox.io/s/qjx332qq4
