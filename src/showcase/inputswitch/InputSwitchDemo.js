@@ -165,12 +165,12 @@ import {InputSwitch} from 'primereact/inputswitch';
                         </tr>
                         <tr>
                             <td>onFocus</td>
-                            <td>event.originalEvent: Browser event.</td>
+                            <td>event: Browser event.</td>
                             <td>Callback to invoke when the element receives focus.</td>
                         </tr>
                         <tr>
                             <td>onBlur</td>
-                            <td>event.originalEvent: Browser event.</td>
+                            <td>event: Browser event.</td>
                             <td>Callback to invoke when the element loses focus.</td>
                         </tr>
                     </tbody>
