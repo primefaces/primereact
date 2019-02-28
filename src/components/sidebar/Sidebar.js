@@ -33,7 +33,7 @@ export class Sidebar extends Component {
         baseZIndex: PropTypes.number,
         dismissable: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
-        iconsTemplate: PropTypes.element,
+        iconsTemplate: PropTypes.func,
         modal: PropTypes.bool,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
