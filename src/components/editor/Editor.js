@@ -39,7 +39,7 @@ export class Editor extends Component {
                 toolbar: this.toolbarElement
             },
             placeholder: this.props.placeholder,
-            readOnly: this.props.readOnly,
+            readonly: this.props.readonly,
             theme: 'snow',
             formats: this.props.formats
         });
