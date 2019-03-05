@@ -1015,7 +1015,7 @@ export class DataTable extends Component {
                 }
 
                 //global
-                if(this.props.globalFilter && !globalMatch) {
+                if(!col.props.excludeGlobalFilter && this.props.globalFilter && !globalMatch) {
                     globalMatch = ObjectUtils.filterConstraints['contains'](ObjectUtils.resolveFieldData(value[i], col.props.field), this.props.globalFilter);
                 }
             }
