@@ -8,6 +8,13 @@ PrimeReact is a rich set of open source UI Components for React.
 
 See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
 
+
+<p align="center">
+  <a href="https://bitsrc.io/primefaces/primereact"><img src="https://i.imagesup.co/images2/0__05c8233765c505.jpg"></a>
+</p>
+
+[Components demo](https://bitsrc.io/primefaces/primereact)
+
 ## Download
 
 PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.
