@@ -10,7 +10,7 @@ See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showca
 
 
 <p align="center">
-  <a href="https://bitsrc.io/primefaces/primereact"><img src="https://i.imagesup.co/images2/0__05c8233765c505.jpg"></a>
+  <a href="https://bitsrc.io/primefaces/primereact"><img src="https://i.imagesup.co/images2/0__05c8234cb5e0df.jpg"></a>
 </p>
 
 [Components demo](https://bitsrc.io/primefaces/primereact)
