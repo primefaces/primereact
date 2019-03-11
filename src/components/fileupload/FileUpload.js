@@ -121,7 +121,9 @@ export class FileUpload extends Component {
         this.setState({msgs:[]});
         this.files = this.state.files || [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-        for (let file of files) {
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            
             if (!this.isFileSelected(file)) {
                 if (this.validate(file)) {
                     if (this.isImage(file)) {
