@@ -335,6 +335,14 @@ export class SlideMenu extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.model !== prevProps.model) {
+            this.setState({ 
+                level: 0
+            });
+        }
+    }
+
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
