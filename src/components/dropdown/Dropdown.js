@@ -513,7 +513,7 @@ export class Dropdown extends Component {
             
         return (
             <div className="p-hidden-accessible">
-                <select ref={(el) => this.nativeSelect = el} id="xxx" required={this.props.required} tabIndex="-1" aria-hidden="true">
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
                     {placeHolderOption}
                     {options}
                 </select>
