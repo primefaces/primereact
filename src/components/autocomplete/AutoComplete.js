@@ -261,8 +261,8 @@ export class AutoComplete extends Component {
             let target = this.props.multiple ? this.multiContainer : this.inputEl;
         
             if (this.props.appendTo) {
-                DomHandler.absolutePosition(this.panel.element, target);
                 this.panel.element.style.minWidth = DomHandler.getWidth(target) + 'px';
+                DomHandler.absolutePosition(this.panel.element, target);
             }
             else {
                 DomHandler.relativePosition(this.panel.element, target);

@@ -423,7 +423,7 @@ export class Dropdown extends Component {
         return (index !== -1) ? this.props.options[index] : null;
     }
      
-    show() {        
+    show() {
         this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
         this.panel.element.style.display = 'block';
 
@@ -453,8 +453,8 @@ export class Dropdown extends Component {
     
     alignPanel() {
         if(this.props.appendTo) {
-            DomHandler.absolutePosition(this.panel.element, this.container);
             this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+            DomHandler.absolutePosition(this.panel.element, this.container);
         }
         else {
             DomHandler.relativePosition(this.panel.element, this.container);

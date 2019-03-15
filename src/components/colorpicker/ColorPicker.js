@@ -505,8 +505,8 @@ export class ColorPicker extends Component {
 
     alignPanel() {
         if (this.props.appendTo) {
-            DomHandler.absolutePosition(this.panel.element, this.container);
             this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
+            DomHandler.absolutePosition(this.panel.element, this.container);
         }
         else {
             DomHandler.relativePosition(this.panel.element, this.container);
