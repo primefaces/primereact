@@ -216,6 +216,7 @@ export class DataTable extends Component {
         this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
         this.onColumnDrop = this.onColumnDrop.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
+        this.onSelectionChange = this.onSelectionChange.bind(this);
         this.frozenSelectionMode = null;
     }
 
@@ -977,6 +978,8 @@ export class DataTable extends Component {
         }
             
         if(this.props.onSelectionChange) {
+            this.isSelectionChanged = true;
+
             this.props.onSelectionChange({
                 originalEvent: event,
                 value: selection
@@ -1039,7 +1042,8 @@ export class DataTable extends Component {
 
     processData(localState) {
         let data = this.props.value;
-        if(!this.props.lazy) {
+
+        if(!this.props.lazy && !this.isSelectionChanged) {
             if(data && data.length) {
                 let sortField = (localState && localState.sortField) || this.getSortField();
                 let sortOrder = (localState && localState.sortOrder) || this.getSortOrder();
@@ -1058,6 +1062,8 @@ export class DataTable extends Component {
                 }
             }
         }
+
+        this.isSelectionChanged = false;
 
         return data;
     }
@@ -1105,6 +1111,14 @@ export class DataTable extends Component {
         return null;
     }
 
+    onSelectionChange(event) {
+        this.isSelectionChanged = true;
+
+        if (this.props.onSelectionChange) {
+            this.props.onSelectionChange(event);
+        }
+    }
+
     createTableHeader(value, columns, columnGroup) {
         return <TableHeader value={value} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
@@ -1118,7 +1132,7 @@ export class DataTable extends Component {
     createTableBody(value, columns) {
         return <TableBody value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozenSelectionMode={this.frozenSelectionMode}
-                        onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                        onSelectionChange={this.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} 
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
