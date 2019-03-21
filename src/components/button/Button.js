@@ -8,6 +8,7 @@ export class Button extends Component {
     static defaultProps = {
         label: null,
         icon: null,
+        icondata: null,
         iconPos: 'left',
         tooltip: null,
         tooltipOptions: null
@@ -16,6 +17,7 @@ export class Button extends Component {
     static propTypes = {
         label: PropTypes.string,
         icon: PropTypes.string,
+        icondata: PropTypes.string,
         iconPos: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object
@@ -52,14 +54,15 @@ export class Button extends Component {
     }
 
     renderIcon() {
-        if(this.props.icon) {
+        if (this.props.icon) {
             let className = classNames(this.props.icon, 'p-c', {
                 'p-button-icon-left': this.props.iconPos !== 'right',
                 'p-button-icon-right': this.props.iconPos === 'right'
             });
 
             return (
-                <span className={className}></span>
+                <span className={className}>
+                    {this.props.icondata && <img alt='Party symbol' src={this.props.icondata} style={{ 'width': '120px', 'height': '120px' }} />}</span>
             );
         }
         else {
@@ -89,6 +92,7 @@ export class Button extends Component {
         let buttonProps = Object.assign({}, this.props);
         delete buttonProps.iconPos;
         delete buttonProps.icon;
+        delete buttonProps.icondata;
         delete buttonProps.label;
         delete buttonProps.tooltip;
         delete buttonProps.tooltipOptions;
