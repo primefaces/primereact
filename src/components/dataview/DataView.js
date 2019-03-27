@@ -101,7 +101,8 @@ export class DataView extends Component {
         style: null,
         className: null,
         itemTemplate: null,
-        onPage: null
+        onPage: null,
+        lazy: false
     }
 
     static propTypes = {
@@ -128,7 +129,8 @@ export class DataView extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         itemTemplate: PropTypes.func.isRequired,
-        onPage: PropTypes.func
+        onPage: PropTypes.func,
+        lazy: PropTypes.bool
     }
 
     constructor(props) {
@@ -257,7 +259,7 @@ export class DataView extends Component {
         if (value && value.length) {
             if (this.props.paginator) {
                 const rows = this.props.onPage ? this.props.rows : this.state.rows;
-                const first = this.props.onPage ? this.props.first : this.state.first;
+                const first = this.props.lazy ? 0 : this.props.onPage ? this.props.first : this.state.first;
                 const last = rows + first;
                 let items = [];
 
