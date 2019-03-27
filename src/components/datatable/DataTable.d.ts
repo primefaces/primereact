@@ -59,6 +59,7 @@ interface DataTableProps {
     loading?:boolean;
     loadingIcon?:string;
     tabIndex?:string;
+    stateKey?:string;
     groupField?:string;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
