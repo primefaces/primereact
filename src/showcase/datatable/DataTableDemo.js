@@ -2087,13 +2087,6 @@ export class DataTableStateDemo extends Component {
                         </tr>
                         <tr>
                             <td>onVirtualScroll</td>
-                            <td>event.first = First row offset.  <br/>
-                                event.rows = Number of rows per page.
-                            </td>
-                            <td>Callback to invoke to load data on virtual scroll.</td>
-                        </tr>
-                        <tr>
-                            <td>onVirtualScroll</td>
                             <td>event.first: Index of the first row. <br />
                                 event.rows: Rows per page.</td>
                             <td>Callback to invoke during virtual scrolling.</td>
