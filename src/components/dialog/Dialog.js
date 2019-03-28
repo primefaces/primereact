@@ -305,7 +305,7 @@ export class Dialog extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition classNames="p-dialog" timeout={{enter: 400, exit: 400}} in={this.props.visible}>
+            <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
                 <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el} aria-labelledby={this.id + '_label'} role="dialog">
                     {header}
                     {content}
