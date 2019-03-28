@@ -492,6 +492,11 @@ body {
             &.implementation-charts {
                 background-color: #FFFFFF;
             }
+
+            p {
+                margin: 0;
+                line-height: 1.5;
+            }
         }
 
         &.content-submenu {
