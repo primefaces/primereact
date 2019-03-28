@@ -1513,7 +1513,7 @@ body .p-panel .p-panel-titlebar .p-panel-title {
   font-weight: 400;
 }
 body .p-panel .p-panel-titlebar .p-panel-titlebar-icon {
-  margin: 0;
+  margin: 0.143em 0 0 0;
   position: relative;
   font-size: 14px;
   color: #888888;
@@ -1541,7 +1541,6 @@ body .p-panel .p-panel-content {
   border: 1px solid #191919;
   background-color: #323232;
   color: #dedede;
-  padding: 0.571em 1em;
   border-top: 0 none;
   -moz-border-radius-bottomleft: 3px;
   -webkit-border-bottom-left-radius: 3px;
@@ -1571,6 +1570,7 @@ body .p-fieldset .p-fieldset-legend a {
   border: 1px solid #191919;
   color: #dedede;
   background-color: #191919;
+  font-weight: 400;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -2584,17 +2584,6 @@ body .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-treenode-select
   background-color: #4c4c4c;
   color: #dedede;
 }
-body .p-tree .p-tree-filter-container .p-tree-filter {
-  width: 100%;
-  padding-right: 2em; 
-}
-body .p-tree .p-tree-filter-container .p-tree-filter-icon {
-  top: 50%;
-  left: auto;
-  margin-top: -.5em;
-  right: .8em;
-  color: #252525; 
-}
 body .p-organizationchart .p-organizationchart-node-content.p-organizationchart-selectable-node:not(.p-highlight):hover {
   background-color: #4c4c4c;
   color: #dedede;
@@ -2954,42 +2943,59 @@ body .p-growl .p-growl-item-container.p-growl-message-error .p-growl-image,
 body .p-growl .p-growl-item-container.p-growl-message-error .p-growl-icon-close {
   color: #212121;
 }
-body .p-toast .p-toast-message {
+body .p-toast {
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+body .p-toast .p-toast-item-container {
+  margin: 0 0 1em 0;
   -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  margin: 0 0 1em 0;
 }
-body .p-toast .p-toast-message.p-toast-message-info {
+body .p-toast .p-toast-item-container .p-toast-item {
+  padding: 1em;
+}
+body .p-toast .p-toast-item-container .p-toast-item .p-toast-message {
+  margin: 0 0 0 4em;
+}
+body .p-toast .p-toast-item-container .p-toast-item .p-toast-image {
+  font-size: 2.571em;
+}
+body .p-toast .p-toast-item-container.p-toast-message-info {
   background-color: #7fbcec;
   border: 0 none;
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-info .p-toast-close-icon {
+body .p-toast .p-toast-item-container.p-toast-message-info .p-toast-image,
+body .p-toast .p-toast-item-container.p-toast-message-info .p-toast-icon-close {
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-success {
+body .p-toast .p-toast-item-container.p-toast-message-success {
   background-color: #b7d8b7;
   border: 0 none;
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-success .p-toast-close-icon {
+body .p-toast .p-toast-item-container.p-toast-message-success .p-toast-image,
+body .p-toast .p-toast-item-container.p-toast-message-success .p-toast-icon-close {
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-warn {
+body .p-toast .p-toast-item-container.p-toast-message-warn {
   background-color: #ffe399;
   border: 0 none;
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-warn .p-toast-close-icon {
+body .p-toast .p-toast-item-container.p-toast-message-warn .p-toast-image,
+body .p-toast .p-toast-item-container.p-toast-message-warn .p-toast-icon-close {
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-error {
+body .p-toast .p-toast-item-container.p-toast-message-error {
   background-color: #f8b7bd;
   border: 0 none;
   color: #212121;
 }
-body .p-toast .p-toast-message.p-toast-message-error .p-toast-close-icon {
+body .p-toast .p-toast-item-container.p-toast-message-error .p-toast-image,
+body .p-toast .p-toast-item-container.p-toast-message-error .p-toast-icon-close {
   color: #212121;
 }
 
@@ -3009,7 +3015,7 @@ body .p-overlaypanel {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 body .p-overlaypanel .p-overlaypanel-content {
-  padding: 0.571em 1em;
+  padding: 1em;
 }
 body .p-overlaypanel .p-overlaypanel-close {
   background-color: #FFB300;
@@ -3076,6 +3082,7 @@ body .p-dialog .p-dialog-titlebar {
 body .p-dialog .p-dialog-titlebar .p-dialog-title {
   margin: 0;
   float: none;
+  font-weight: 400;
 }
 body .p-dialog .p-dialog-titlebar .p-dialog-titlebar-icon {
   color: #888888;
@@ -3094,7 +3101,7 @@ body .p-dialog .p-dialog-content {
   background-color: #323232;
   color: #dedede;
   border: 1px solid #191919;
-  padding: 0.571em 1em;
+  padding: 1em;
 }
 body .p-dialog .p-dialog-footer {
   border: 1px solid #191919;
