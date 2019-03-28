@@ -148,7 +148,7 @@ const header = (
                                         <td>Placeholder text to show when editor is empty.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>Whether to instantiate the editor to read-only mode.</td>
