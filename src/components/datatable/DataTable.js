@@ -915,7 +915,7 @@ export class DataTable extends Component {
 
     exportCSV() {
         let data = this.processData();
-        let csv = '\ufeff';
+        var csv = `sep=${_this5.props.csvSeparator}\n`;
         let columns = React.Children.toArray(this.props.children);
         
         //headers
@@ -943,7 +943,7 @@ export class DataTable extends Component {
             }
         });
         
-        let blob = new Blob([csv],{
+        var blob = new Blob(['\ufeff', csv], {
             type: 'text/csv;charset=utf-8;'
         });
         
