@@ -297,7 +297,7 @@ export class TableBody extends Component {
                 }
             }
             else {
-                return this.props.children.selectionMode != null;
+                return this.props.children && this.props.children.selectionMode != null;
             }
         }
 
@@ -483,7 +483,7 @@ export class TableBody extends Component {
             }
         }
         else {
-            rows = <tr className="p-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr>;
+            rows = !this.props.loading && this.props.emptyMessage ? <tr className="p-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr> : null;
         }
 
         return (

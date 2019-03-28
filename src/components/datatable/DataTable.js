@@ -6,6 +6,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { ScrollableView } from './ScrollableView';
 import { TableBody } from './TableBody';
+import { TableLoadingBody } from './TableLoadingBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
 
@@ -38,7 +39,7 @@ export class DataTable extends Component {
         multiSortMeta: null,
         sortMode: 'single',
         defaultSortOrder: 1,
-        emptyMessage: "No records found",
+        emptyMessage: null,
         selectionMode: null,
         selection: null,
         onSelectionChange: null,
@@ -63,7 +64,7 @@ export class DataTable extends Component {
         scrollable: false,
         scrollHeight: null,
         virtualScroll: false,
-        virtualScrollDelay: 250,
+        virtualScrollDelay: 150,
         virtualRowHeight: 28,
         frozenWidth: null,
         frozenValue: null,
@@ -906,7 +907,7 @@ export class DataTable extends Component {
             if (this.props.onVirtualScroll) {
                 this.props.onVirtualScroll({
                     first: (event.page - 1) * this.props.rows,
-                    rows: this.props.rows
+                    rows: this.props.virtualScroll ? this.props.rows * 2 : this.props.rows
                 });
             }
         }, this.props.virtualScrollDelay);
@@ -1136,11 +1137,20 @@ export class DataTable extends Component {
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} 
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
-                        virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight}
+                        virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}>
                         {columns}
                 </TableBody>;
+    }
+
+    createTableLoadingBody(columns) {
+        if (this.props.virtualScroll) {
+            return <TableLoadingBody columns={columns} rows={this.getRows()}></TableLoadingBody>;
+        }
+        else {
+            return null;
+        }
     }
 
     createTableFooter(columns, columnGroup) {
@@ -1152,7 +1162,7 @@ export class DataTable extends Component {
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
         return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)} 
-                body={this.createTableBody(value, columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
+                body={this.createTableBody(value, columns)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
                 footer={this.createTableFooter(columns, footerColumnGroup)}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}

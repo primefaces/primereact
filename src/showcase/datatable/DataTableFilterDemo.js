@@ -88,7 +88,7 @@ export class DataTableFilterDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
-                        globalFilter={this.state.globalFilter}>
+                        globalFilter={this.state.globalFilter} emptyMessage="No records found">
                         <Column field="vin" header="Vin" filter={true} />
                         <Column field="year" header="Year" filter={true} />
                         <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
@@ -202,7 +202,7 @@ export class DataTableFilterDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
-                        globalFilter={this.state.globalFilter}>
+                        globalFilter={this.state.globalFilter} emptyMessage="No records found">
                         <Column field="vin" header="Vin" filter={true} />
                         <Column field="year" header="Year" filter={true} />
                         <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />

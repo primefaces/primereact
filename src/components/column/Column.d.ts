@@ -6,6 +6,7 @@ interface ColumnProps {
     sortField?: string;
     header?: any;
     body?: any;
+    loadingBody?: any;
     footer?: any;
     sortable?: boolean;
     filter?: boolean;
