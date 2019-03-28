@@ -1510,7 +1510,7 @@ body .p-panel .p-panel-titlebar {
 }
 body .p-panel .p-panel-titlebar .p-panel-title {
   vertical-align: middle;
-  font-weight: 400;
+  font-weight: 700;
 }
 body .p-panel .p-panel-titlebar .p-panel-titlebar-icon {
   margin: 0.143em 0 0 0;
@@ -1570,7 +1570,7 @@ body .p-fieldset .p-fieldset-legend a {
   border: 1px solid #c8c8c8;
   color: #333333;
   background-color: #f4f4f4;
-  font-weight: 400;
+  font-weight: 700;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1616,7 +1616,7 @@ body .p-accordion .p-accordion-header a {
   color: #333333;
   background-color: #f4f4f4;
   color: #333333;
-  font-weight: 400;
+  font-weight: 700;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1709,7 +1709,7 @@ body .p-tabview.p-tabview-top .p-tabview-nav li a, body .p-tabview.p-tabview-bot
   display: inline-block;
   color: #333333;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   -moz-transition: background-color 0.2s, box-shadow 0.2s;
   -o-transition: background-color 0.2s, box-shadow 0.2s;
   -webkit-transition: background-color 0.2s, box-shadow 0.2s;
@@ -2115,7 +2115,7 @@ body .p-datagrid .p-datagrid-header {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
 }
 body .p-datagrid .p-datagrid-content {
@@ -2137,7 +2137,7 @@ body .p-datalist .p-datalist-header {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
 }
 body .p-datalist .p-datalist-content {
@@ -2159,7 +2159,7 @@ body .p-datascroller .p-datascroller-header {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
 }
 body .p-datascroller .p-datascroller-content {
@@ -2181,7 +2181,7 @@ body .p-dataview .p-dataview-header {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -2307,7 +2307,7 @@ body .p-picklist .p-picklist-caption {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -2396,7 +2396,7 @@ body .p-orderlist .p-orderlist-caption {
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -3070,7 +3070,7 @@ body .p-dialog .p-dialog-titlebar {
   background-color: #f4f4f4;
   color: #333333;
   padding: 1em;
-  font-weight: 400;
+  font-weight: 700;
   border-bottom: 0 none;
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -3082,7 +3082,7 @@ body .p-dialog .p-dialog-titlebar {
 body .p-dialog .p-dialog-titlebar .p-dialog-title {
   margin: 0;
   float: none;
-  font-weight: 400;
+  font-weight: 700;
 }
 body .p-dialog .p-dialog-titlebar .p-dialog-titlebar-icon {
   color: #848484;
@@ -3178,7 +3178,7 @@ body .p-lightbox .p-lightbox-caption {
   background-color: #f4f4f4;
   color: #333333;
   padding: 0.571em 1em;
-  font-weight: 400;
+  font-weight: 700;
 }
 body .p-lightbox .p-lightbox-caption .p-lightbox-caption-text {
   color: #333333;
@@ -3423,7 +3423,7 @@ body .p-menu .p-submenu-header {
   padding: 0.714em 0.857em;
   color: #333333;
   background-color: #f4f4f4;
-  font-weight: 400;
+  font-weight: 700;
   border: 0 none;
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -3586,7 +3586,7 @@ body .p-slidemenu .p-slidemenu-backward {
   padding: 0.571em 1em;
   color: #333333;
   background-color: #f4f4f4;
-  font-weight: 400;
+  font-weight: 700;
   border: 0 none;
 }
 body .p-slidemenu .p-slidemenu-backward:hover {
@@ -3681,7 +3681,7 @@ body .p-megamenu .p-megamenu-submenu-header {
   padding: 0.571em 1em;
   color: #333333;
   background-color: #f4f4f4;
-  font-weight: 400;
+  font-weight: 700;
   border: 0 none;
 }
 body .p-megamenu .p-megamenu-panel {
@@ -3727,7 +3727,7 @@ body .p-panelmenu .p-panelmenu-header > a {
   background-color: #f4f4f4;
   color: #333333;
   padding: 0.714em 0.857em;
-  font-weight: 400;
+  font-weight: 700;
   position: static;
   font-size: 14px;
   -moz-border-radius: 3px;
