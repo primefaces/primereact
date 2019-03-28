@@ -100,6 +100,7 @@ export class DataView extends Component {
         sortOrder: null,
         style: null,
         className: null,
+        lazy: false,
         itemTemplate: null,
         onPage: null
     }
@@ -127,6 +128,7 @@ export class DataView extends Component {
         sortOrder: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
+        lazy: PropTypes.bool,
         itemTemplate: PropTypes.func.isRequired,
         onPage: PropTypes.func
     }
@@ -257,7 +259,7 @@ export class DataView extends Component {
         if (value && value.length) {
             if (this.props.paginator) {
                 const rows = this.props.onPage ? this.props.rows : this.state.rows;
-                const first = this.props.onPage ? this.props.first : this.state.first;
+                const first = this.props.lazy ? 0 : this.props.onPage ? this.props.first : this.state.first;
                 const last = rows + first;
                 let items = [];
 

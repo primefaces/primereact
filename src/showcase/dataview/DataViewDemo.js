@@ -383,7 +383,7 @@ onSortChange(event) {
                         <h3>Lazy Loading</h3>
                         <p>Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPage</i> callback to load your data from the backend.
                         Pagination in this case needs to display the logical number of records so bind this value to the <i>totalRecords</i> property so that paginator can display itself according to the total records although you'd only
-                        need to load the data of the current page.</p>
+                        need to load the data of the current page. Refer to <Link to="/datatable/lazy">DataTable</Link> lazy loading for a sample implementation.</p>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
@@ -528,6 +528,12 @@ onSortChange(event) {
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>lazy</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Defines if data is loaded and interacted with in lazy manner.</td>
                                     </tr>
                                     <tr>
                                         <td>itemTemplate</td>
