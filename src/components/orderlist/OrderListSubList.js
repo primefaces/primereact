@@ -25,7 +25,7 @@ export class OrderListSubList extends Component {
         header: PropTypes.string,
         listStyle: PropTypes.object,
         itemTemplate: PropTypes.func,
-        dragdrop: PropTypes.func,
+        dragdrop: PropTypes.bool,
         tabIndex: PropTypes.string,
         onItemClick: PropTypes.func,
         onItemKeyDown: PropTypes.func,
