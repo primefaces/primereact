@@ -30,7 +30,7 @@ export class OrderList extends Component {
         className: PropTypes.string,
         listStyle: PropTypes.object,
         responsive: PropTypes.bool,
-        dragdrop: PropTypes.func,
+        dragdrop: PropTypes.bool,
         tabIndex: PropTypes.string,
         onChange: PropTypes.func,
         itemTemplate: PropTypes.func
