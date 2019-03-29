@@ -967,6 +967,10 @@ export class DataTable extends Component {
         }
     }
 
+    closeEditingCell() {
+        document.body.click();
+    }
+
     onHeaderCheckboxClick(event) {
         let selection;
 

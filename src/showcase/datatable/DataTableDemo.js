@@ -2174,6 +2174,32 @@ export class DataTableStateDemo extends Component {
                 </table>
             </div>
 
+            <h3>Methods</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>exportCSV</td>
+                            <td>-</td>
+                            <td>Exports the data to CSV format.</td>
+                        </tr>
+                        <tr>
+                            <td>closeEditingCell</td>
+                            <td>-</td>
+                            <td>Closes the current editing cell when incell editing is enabled.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
             <h3>Styling</h3>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
