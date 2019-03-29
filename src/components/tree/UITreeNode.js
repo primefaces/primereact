@@ -41,7 +41,7 @@ export class UITreeNode extends Component {
     static propTypes = {
         node: PropTypes.object,
         index: PropTypes.number,
-        last: PropTypes.number,
+        last: PropTypes.bool,
         parent: PropTypes.object,
         path: PropTypes.string,
         selectionMode: PropTypes.string,
