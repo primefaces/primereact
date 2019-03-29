@@ -18,7 +18,7 @@ export class DataViewLayoutOptions extends Component {
         id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        layout: null,
+        layout: PropTypes.string,
         onChange: PropTypes.func.isRequired
     }
 
@@ -65,7 +65,7 @@ class DataViewItem extends Component {
 
     static propTypes = {
         template: PropTypes.func,
-        item: PropTypes.number,
+        item: PropTypes.any,
         layout: PropTypes.string
     }
 
@@ -107,8 +107,8 @@ export class DataView extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        header: PropTypes.string,
-        footer: PropTypes.string,
+        header: PropTypes.any,
+        footer: PropTypes.any,
         value: PropTypes.array,
         layout: PropTypes.string,
         rows: PropTypes.number,
