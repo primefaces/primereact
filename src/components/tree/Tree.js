@@ -39,7 +39,7 @@ export class Tree extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        value: PropTypes.any.isRequired,
+        value: PropTypes.any,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         onSelectionChange: PropTypes.func,
