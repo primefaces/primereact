@@ -19,7 +19,7 @@ export class PickListTransferControls extends Component {
         target: PropTypes.array,
         sourceSelection: PropTypes.array,
         targetSelection: PropTypes.array,
-        onTransfer: PropTypes.array
+        onTransfer: PropTypes.func
     }
         
     constructor() {
