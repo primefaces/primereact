@@ -5,7 +5,7 @@ interface PickListTransferControlsProps {
     target?: any[];
     sourceSelection?: any[];
     targetSelection?: any[];
-    onTransfer?: any[];
+    onTransfer?(e: {originalEvent: Event, source: any[], target: any[], direction: string}): void;
 }
 
 export class PickListTransferControls extends React.Component<PickListTransferControlsProps,any> {}
