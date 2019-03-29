@@ -265,12 +265,6 @@ carTemplate(option) {
                                         <td>Style class of the element.</td>
                                     </tr>
                                     <tr>
-                                        <td>autoWidth</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Calculates the width based on options width, set to false for custom width.</td>
-                                    </tr>
-                                    <tr>
                                         <td>scrollHeight</td>
                                         <td>string</td>
                                         <td>200px</td>
@@ -570,16 +564,16 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} style={{width:'150px'}} placeholder="Select a City" optionLabel="name"/>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name"/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
                     <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
-                              style={{width:'150px'}} editable={true} placeholder="Select a Brand"/>
+                              editable={true} placeholder="Select a Brand"/>
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width:'150px'}}
+                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}
                               filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
