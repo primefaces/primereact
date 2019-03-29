@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ObjectUtils from '../utils/ObjectUtils';
-import {Calendar} from 'fullcalendar';
+import {Calendar} from '@fullcalendar/core';
 
 export class FullCalendar extends Component {
 

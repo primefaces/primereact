@@ -2232,7 +2232,7 @@ body .fc .fc-event {
   border: 1px solid #b72452;
   color: #ffffff;
 }
-body .fc .fc-toolbar .ui-button {
+body .fc .fc-toolbar .fc-button {
   color: #ffffff;
   background-color: #cc285c;
   border: 1px solid #cc285c;
@@ -2245,38 +2245,38 @@ body .fc .fc-toolbar .ui-button {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-body .fc .fc-toolbar .ui-button:enabled:hover {
+body .fc .fc-toolbar .fc-button:enabled:hover {
   background-color: #b72452;
   color: #ffffff;
   border-color: #b72452;
 }
-body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-w {
-  font-family: "PrimeIcons";
+body .fc .fc-toolbar .fc-button .fc-icon-chevron-left {
+  font-family: "PrimeIcons" !important;
   text-indent: 0;
 }
-body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-w:before {
+body .fc .fc-toolbar .fc-button .fc-icon-chevron-left:before {
   content: "";
 }
-body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-e {
-  font-family: "PrimeIcons";
+body .fc .fc-toolbar .fc-button .fc-icon-chevron-right {
+  font-family: "PrimeIcons" !important;
   text-indent: 0;
 }
-body .fc .fc-toolbar .ui-button .ui-icon-circle-triangle-e:before {
+body .fc .fc-toolbar .fc-button .fc-icon-chevron-right:before {
   content: "";
 }
-body .fc .fc-toolbar .ui-button:focus {
+body .fc .fc-toolbar .fc-button:focus {
   outline: 0 none;
   outline-offset: 0;
   -webkit-box-shadow: 0 0 0 0.2em #f1b6c8;
   -moz-box-shadow: 0 0 0 0.2em #f1b6c8;
   box-shadow: 0 0 0 0.2em #f1b6c8;
 }
-body .fc .fc-toolbar .fc-button-group .ui-button {
+body .fc .fc-toolbar .fc-button-group .fc-button {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-body .fc .fc-toolbar .fc-button-group .ui-button:first-child {
+body .fc .fc-toolbar .fc-button-group .fc-button:first-child {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
   border-top-left-radius: 3px;
@@ -2284,7 +2284,7 @@ body .fc .fc-toolbar .fc-button-group .ui-button:first-child {
   -webkit-border-bottom-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-body .fc .fc-toolbar .fc-button-group .ui-button:last-child {
+body .fc .fc-toolbar .fc-button-group .fc-button:last-child {
   -moz-border-radius-topright: 3px;
   -webkit-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
