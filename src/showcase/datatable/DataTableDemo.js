@@ -295,6 +295,12 @@ export class DataTableDemo extends Component {
                             <td>Custom filter function.</td>
                         </tr>
                         <tr>
+                            <td>excludeGlobalFilter</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to exclude from global filtering or not.</td>
+                        </tr>
+                        <tr>
                             <td>style</td>
                             <td>object</td>
                             <td>null</td>
