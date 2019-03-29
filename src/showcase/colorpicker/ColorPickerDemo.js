@@ -25,7 +25,7 @@ export class ColorPickerDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Inline</h3>
-                    <ColorPicker inline="true" value={this.state.color1} onChange={(e) => this.setState({ color1: e.value })}></ColorPicker>
+                    <ColorPicker inline={true} value={this.state.color1} onChange={(e) => this.setState({ color1: e.value })}></ColorPicker>
                     <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + this.state.color1}}></span> {this.state.color1} </p>
                 
                     <h3>Overlay</h3>
