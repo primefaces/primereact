@@ -3,6 +3,7 @@
     position: relative;
     cursor: pointer;
     vertical-align: middle;
+    min-width: 12.5em;
 }
 
 .p-dropdown .p-dropdown-clear-icon {
@@ -119,4 +120,5 @@
 /** Dropdown **/
 .p-fluid .p-dropdown {
     width: 100%;
+    min-width: 100%;
 }

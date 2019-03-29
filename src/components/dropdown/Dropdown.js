@@ -17,7 +17,6 @@ export class Dropdown extends Component {
         itemTemplate: null,
         style: null,
         className: null,
-        autoWidth: true,
         scrollHeight: '200px',
         filter: false,
         filterPlaceholder: null,
@@ -48,7 +47,6 @@ export class Dropdown extends Component {
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
         className: PropTypes.string,
-        autoWidth: PropTypes.bool,
         scrollHeight: PropTypes.string,
         filter: PropTypes.bool,
         filterPlaceholder: PropTypes.string,
@@ -383,7 +381,6 @@ export class Dropdown extends Component {
 
         if(currentSelectedOption !== event.option) {              
             this.updateEditableLabel(event.option);
-            this.updateHiddenSelect();
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: this.props.optionLabel ? event.option : event.option.value,
@@ -396,11 +393,6 @@ export class Dropdown extends Component {
                 }
             });
         } 
-    }
-
-    updateHiddenSelect(option) {
-        let selectedOptionIndex = this.findOptionIndex(option);
-        this.nativeSelect.selectedIndex = selectedOptionIndex + 1;
     }
     
     findOptionIndex(value) {    
@@ -505,22 +497,6 @@ export class Dropdown extends Component {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
     
-    renderHiddenSelect() {
-        let placeHolderOption = <option value="">{this.props.placeholder}</option>;
-        let options = this.props.options && this.props.options.map((option, i) => {
-            return <option key={this.getOptionKey(option)} value={option.value}>{this.getOptionLabel(option)}</option>;
-        });
-            
-        return (
-            <div className="p-hidden-accessible">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
-                    {placeHolderOption}
-                    {options}
-                </select>
-            </div>
-        );
-    }
-    
     renderKeyboardHelper() {
         return <div className="p-hidden-accessible">
                     <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
@@ -617,15 +593,6 @@ export class Dropdown extends Component {
     }
     
     componentDidMount() {
-        if(this.props.autoWidth) {
-            // Added setTimeout to render it with the correct width value in hidden container components such as TabView and Accordion.
-            setTimeout(() => {
-                if(!this.props.style || (!this.props.style['width'] && !this.props.style['min-width'])) {
-                    this.container.style.width = this.nativeSelect.offsetWidth + 30 + 'px';
-                }
-            }, 0);
-        }
-
         if (this.props.autoFocus && this.focusInput) {
             this.windowLoadListener = () => {
                 this.focusInput.focus();
@@ -637,8 +604,6 @@ export class Dropdown extends Component {
         if (this.props.tooltip) {
             this.renderTooltip();
         }
-
-        this.updateHiddenSelect(this.findOption(this.props.value));
     }
     
     componentWillUnmount() {
@@ -674,8 +639,6 @@ export class Dropdown extends Component {
             else
                 this.renderTooltip();
         }
-
-        this.updateHiddenSelect(this.findOption(this.props.value));
     }
 
     renderTooltip() {
@@ -692,7 +655,6 @@ export class Dropdown extends Component {
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
 
-        let hiddenSelect = this.renderHiddenSelect();
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
@@ -708,7 +670,6 @@ export class Dropdown extends Component {
         return (
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                  onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
-                 {hiddenSelect}
                  {keyboardHelper}
                  {labelElement}
                  {clearIcon}
