@@ -23,7 +23,7 @@ export class Slider extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        value: PropTypes.number,
+        value: PropTypes.any,
         min: PropTypes.number,
         max: PropTypes.number,
         orientation: PropTypes.string,
