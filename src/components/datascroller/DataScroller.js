@@ -34,8 +34,8 @@ export class DataScroller extends Component {
         className: PropTypes.string,
         onLazyLoad: PropTypes.func,
         itemTemplate: PropTypes.func,
-        header: PropTypes.string,
-        footer: PropTypes.string,
+        header: PropTypes.any,
+        footer: PropTypes.any,
         lazy: PropTypes.bool
     }
 
