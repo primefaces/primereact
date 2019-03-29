@@ -21,7 +21,7 @@ export class Rating extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        value: PropTypes.string,
+        value: PropTypes.number,
         disabled: PropTypes.bool,
         readonly: PropTypes.bool,
         stars: PropTypes.number,
