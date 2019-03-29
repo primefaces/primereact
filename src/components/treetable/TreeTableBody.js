@@ -35,7 +35,7 @@ export class TreeTableBody extends Component {
     static propTypes = {
         value: PropTypes.array,
         columns: PropTypes.array,
-        expandedKeys: PropTypes.array,
+        expandedKeys: PropTypes.object,
         contextMenuSelectionKey: PropTypes.any,
         paginator: PropTypes.bool,
         first: PropTypes.number,
@@ -48,7 +48,7 @@ export class TreeTableBody extends Component {
         lazy: PropTypes.bool,
         rowClassName: PropTypes.func,
         emptyMessage: PropTypes.string,
-        loading: PropTypes.boolean,
+        loading: PropTypes.bool,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,

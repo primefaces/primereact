@@ -34,7 +34,7 @@ export class TreeTableRow extends Component {
         node: PropTypes.any,
         level: PropTypes.number,
         columns: PropTypes.array,
-        expandedKeys: PropTypes.array,
+        expandedKeys: PropTypes.object,
         contextMenuSelectionKey: PropTypes.any,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.array,
