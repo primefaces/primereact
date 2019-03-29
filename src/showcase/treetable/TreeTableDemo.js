@@ -14,7 +14,7 @@ export class TreeTableDemo extends Component {
         super(props);
         this.state = {
             nodes: [],
-            expandedKeys: []
+            expandedKeys: {}
         };
         this.nodeservice = new NodeService();
         this.toggleApplications = this.toggleApplications.bind(this);
@@ -2623,7 +2623,7 @@ export class TreeTableDemo extends Component {
         super(props);
         this.state = {
             nodes: [],
-            expandedKeys: []
+            expandedKeys: {}
         };
         this.nodeservice = new NodeService();
         this.toggleApplications = this.toggleApplications.bind(this);
