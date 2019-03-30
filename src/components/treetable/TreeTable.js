@@ -109,7 +109,7 @@ export class TreeTable extends Component {
         sortMode: PropTypes.string,
         defaultSortOrder: PropTypes.number,
         selectionMode: PropTypes.string,
-        selectionKeys: PropTypes.array,
+        selectionKeys: PropTypes.any,
         contextMenuSelectionKey: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,

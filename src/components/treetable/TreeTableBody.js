@@ -41,7 +41,7 @@ export class TreeTableBody extends Component {
         first: PropTypes.number,
         rows: PropTypes.number,
         selectionMode: PropTypes.string,
-        selectionKeys: PropTypes.array,
+        selectionKeys: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
