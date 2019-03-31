@@ -110,10 +110,11 @@ export class Accordion extends Component {
         const tabHeaderClass = classNames(tab.props.headerClassName, 'p-accordion-header', {'p-highlight': selected, 'p-disabled': tab.props.disabled});
         const id = this.id + '_header_' + index;
         const ariaControls = this.id + '_content_' + index;
+        const tabIndex = tab.props.disabled ? -1 : null;
 
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle}>
-                <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)}>
+                <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)} tabIndex={tabIndex}>
                     <span className={classNames('p-accordion-toggle-icon pi pi-fw', { 'pi-caret-right': !selected, 'pi-caret-down': selected })}></span>
                     <span className="p-accordion-header-text">{tab.props.header}</span>
                 </a>
