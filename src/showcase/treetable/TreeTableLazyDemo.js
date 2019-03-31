@@ -78,8 +78,13 @@ export class TreeTableLazyDemo extends Component {
                     }
                 ];
 
-                let nodes = [...this.state.nodes];
-                nodes[event.node.key] = lazyNode;
+                let nodes = this.state.nodes.map(node => {
+                    if (node.key === event.node.key) {
+                        node = lazyNode;
+                    }
+
+                    return node;
+                });
     
                 this.setState({
                     loading: false,
