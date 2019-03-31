@@ -1634,7 +1634,7 @@ body .p-accordion .p-accordion-header a .p-accordion-toggle-icon.pi-caret-right:
 body .p-accordion .p-accordion-header a .p-accordion-toggle-icon.pi-caret-down:before {
   content: "";
 }
-body .p-accordion .p-accordion-header a:not(.p-disabled):focus {
+body .p-accordion .p-accordion-header:not(.p-disabled) a:focus {
   outline: 0 none;
   outline-offset: 0;
   -webkit-box-shadow: 0 0 0 0.2em #8dcdff;
