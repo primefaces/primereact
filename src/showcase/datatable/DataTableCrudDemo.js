@@ -103,7 +103,7 @@ export class DataTableCrudDemo extends Component {
                         <Column field="color" header="Color" sortable={true} />
                     </DataTable>
 
-                    <Dialog visible={this.state.displayDialog} width="300px" header="Car Details" modal={true} footer={dialogFooter} onHide={() => this.setState({displayDialog: false})}
+                    <Dialog visible={this.state.displayDialog} style={{width: '300px'}} header="Car Details" modal={true} footer={dialogFooter} onHide={() => this.setState({displayDialog: false})}
                         blockScroll={false}>
                         {
                             this.state.car && 
