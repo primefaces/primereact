@@ -27,6 +27,7 @@ export class Dialog extends Component {
         appendTo: null,
         baseZIndex: 0,
         maximizable: false,
+        iconsTemplate: null,
         blockScroll: true
     }
 
@@ -49,9 +50,10 @@ export class Dialog extends Component {
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
+        iconsTemplate: PropTypes.func,
         blockScroll: PropTypes.bool
     };
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -70,7 +72,7 @@ export class Dialog extends Component {
 
     hide() {
         this.unbindMaskClickListener();
-        this.unbindGlobalListeners();     
+        this.unbindGlobalListeners();
 
         if (this.props.modal) {
             this.disableModality();
@@ -90,11 +92,11 @@ export class Dialog extends Component {
 
     show() {
         this.bindGlobalListeners();
-        
+
         if (this.props.onShow) {
             this.props.onShow();
         }
-        
+
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         this.focus();
 
@@ -106,7 +108,7 @@ export class Dialog extends Component {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
-    
+
     toggleMaximize(event) {
         this.setState({
             maximized: !this.state.maximized
@@ -127,7 +129,7 @@ export class Dialog extends Component {
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
         this.contentElement.style.minHeight = 'auto';
     }
-   
+
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
@@ -168,16 +170,16 @@ export class Dialog extends Component {
 		}
     }
 
-    bindGlobalListeners() {     
+    bindGlobalListeners() {
         if (this.props.closeOnEscape && this.props.closable) {
             this.bindDocumentEscapeListener();
         }
     }
-    
+
     unbindGlobalListeners() {
         this.unbindDocumentEscapeListener();
     }
-    
+
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
@@ -188,7 +190,7 @@ export class Dialog extends Component {
         };
         document.addEventListener('keydown', this.documentEscapeListener);
     }
-    
+
     unbindDocumentEscapeListener() {
         if (this.documentEscapeListener) {
             document.removeEventListener('keydown', this.documentEscapeListener);
@@ -240,6 +242,15 @@ export class Dialog extends Component {
         }
     }
 
+    renderIconsTemplate() {
+        if (this.props.iconsTemplate) {
+            return this.props.iconsTemplate(this);
+        }
+        else {
+            return null;
+        }
+    }
+
     renderMaximizeIcon() {
         const iconClassName = classNames('p-dialog-titlebar-maximize-icon pi', {'pi-window-maximize': !this.state.maximized, 'pi-window-minimize': this.state.maximized});
 
@@ -259,11 +270,13 @@ export class Dialog extends Component {
         if (this.props.showHeader) {
             let closeIcon = this.renderCloseIcon();
             let maximizeIcon = this.renderMaximizeIcon();
+            const iconsTemplate = this.renderIconsTemplate();
 
             return (
                 <div ref={el => this.headerElement = el} className="p-dialog-titlebar">
                     <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
                     <div className="p-dialog-titlebar-icons">
+                        {iconsTemplate}
                         {maximizeIcon}
                         {closeIcon}
                     </div>
@@ -317,7 +330,7 @@ export class Dialog extends Component {
 
     render() {
         const element = this.renderElement();
-    
+
         if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
         else

@@ -17,6 +17,7 @@ interface DialogProps {
     appendTo?: HTMLElement;
     baseZIndex?: number;
     maximizable?: boolean;
+    iconsTemplate?(): JSX.Element | undefined;
     blockScroll?: boolean;
     onHide(): void;
     onShow?(): void;
