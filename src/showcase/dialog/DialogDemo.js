@@ -249,6 +249,12 @@ const footer = (
                             <td>Whether the dialog can be displayed full screen.</td>
                         </tr>
                         <tr>
+                            <td>iconsTemplate</td>
+                            <td>Element</td>
+                            <td>null</td>
+                            <td>Custom icons template for the header.</td>
+                        </tr>
+                        <tr>
                             <td>blockScroll</td>
                             <td>boolean</td>
                             <td>true</td>
