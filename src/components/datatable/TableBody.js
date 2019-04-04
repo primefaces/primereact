@@ -179,8 +179,8 @@ export class TableBody extends Component {
         if(this.isSelected(rowData)) {
             let selectionIndex = this.findIndexInSelection(rowData);
             selection = this.props.selection.filter((val,i) => i !== selectionIndex);
-            if(this.props.onRowSelect) {
-                this.props.onRowSelect({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
+            if(this.props.onRowUnselect) {
+                this.props.onRowUnselect({originalEvent: event.originalEvent, data: rowData, type: 'checkbox'});
             }
         }
         else {
