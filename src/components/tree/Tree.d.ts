@@ -12,6 +12,8 @@ interface TreeProps {
     expandedKeys?: any;
     style?: object;
     className?: string;
+    contentStyle?: object;
+    contentClassName?: string;
     metaKeySelection?: boolean;
     propagateSelectionUp?: boolean;
     propagateSelectionDown?: boolean;
