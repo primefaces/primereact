@@ -650,7 +650,7 @@ export class TreeContextMenuDemo extends Component {
                         </tr>
                         <tr>
                             <td>style</td>
-                            <td>string</td>
+                            <td>object</td>
                             <td>null</td>
                             <td>Inline style of the component.</td>
                         </tr>
@@ -659,6 +659,18 @@ export class TreeContextMenuDemo extends Component {
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the component.</td>
+                        </tr>
+                        <tr>
+                            <td>contentStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the tree content.</td>
+                        </tr>
+                        <tr>
+                            <td>contentClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the tree content.</td>
                         </tr>
                         <tr>
                             <td>metaKeySelection</td>
