@@ -17,6 +17,8 @@ export class Tree extends Component {
         expandedKeys: null,
         style: null,
         className: null,
+        contentStyle: null,
+        contentClassName: null,
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
@@ -48,6 +50,8 @@ export class Tree extends Component {
         expandedKeys: PropTypes.object,
         style: PropTypes.object,
         className: PropTypes.string,
+        contentStyle: PropTypes.object,
+        contentClassName: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
@@ -366,9 +370,10 @@ export class Tree extends Component {
     renderModel() {
         if (this.props.value) {
             const rootNodes = this.renderRootChildren();
+            let contentClass = classNames('p-tree-container', this.props.contentClassName);
 
             return (
-                <ul className="p-tree-container" role="tree" aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}>
+                <ul className={contentClass} role="tree" aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy} style={this.props.contentStyle}>
                     {rootNodes}
                 </ul>
             );
