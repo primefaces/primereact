@@ -6,9 +6,9 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { ScrollableView } from './ScrollableView';
 import { TableBody } from './TableBody';
-import { TableLoadingBody } from './TableLoadingBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
+import { TableLoadingBody } from './TableLoadingBody';
 
 export class DataTable extends Component {
 
@@ -1154,7 +1154,7 @@ export class DataTable extends Component {
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
         return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)} 
                 body={this.createTableBody(value, columns)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
-                footer={this.createTableFooter(columns, footerColumnGroup)}
+                footer={this.createTableFooter(columns, footerColumnGroup)} tableStyle={this.props.tableStyle} tableClassName={this.props.tableClassName}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll} loading={this.props.loading}></ScrollableView>

@@ -18,6 +18,8 @@ export class ScrollableView extends Component {
         rows: null,
         totalRecords: null,
         loading: false,
+        tableStyle: null,
+        tableClassName: null,
         onVirtualScroll: null
      }
 
@@ -34,6 +36,8 @@ export class ScrollableView extends Component {
         rows: PropTypes.number,
         totalRcords: PropTypes.number,
         loading: PropTypes.bool,
+        tableStyle: PropTypes.any,
+        tableClassName: PropTypes.string,
         onVirtualScroll: PropTypes.func
     }
 
@@ -198,7 +202,10 @@ export class ScrollableView extends Component {
 
     render() {
         let className = classNames('p-datatable-scrollable-view', {'p-datatable-frozen-view': this.props.frozen, 'p-datatable-unfrozen-view': !this.props.frozen && this.props.frozenWidth});
-        let tableClassName = classNames('p-datatable-scrollable-body-table', {'p-datatable-virtual-table': this.props.virtualScroll});
+        let tableBodyClassName = classNames('p-datatable-scrollable-body-table', this.props.tableClassName, {'p-datatable-virtual-table': this.props.virtualScroll});
+        let tableHeaderClassName = classNames('p-datatable-scrollable-header-table', this.props.tableClassName);
+        let tableFooterClassName = classNames('p-datatable-scrollable-footer-table', this.props.tableClassName);
+        let tableBodyStyle = Object.assign({top:'0'}, this.props.tableStyle);
         let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
@@ -208,7 +215,7 @@ export class ScrollableView extends Component {
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
                 <div className="p-datatable-scrollable-header" ref={(el) => { this.scrollHeader= el; }} onScroll={this.onHeaderScroll}>
                     <div className="p-datatable-scrollable-header-box" ref={(el) => { this.scrollHeaderBox = el; }}>
-                        <table className="p-datatable-scrollable-header-table">
+                        <table className={tableHeaderClassName} style={this.props.tableStyle}>
                             {colGroup}
                             {this.props.header}
                             {this.props.frozenBody}
@@ -216,7 +223,7 @@ export class ScrollableView extends Component {
                     </div>
                 </div>
                 <div className="p-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
-                    <table ref={el => this.scrollTable = el} style={{top:'0'}} className={tableClassName}>
+                    <table ref={el => this.scrollTable = el} style={tableBodyStyle} className={tableBodyClassName}>
                         {colGroup}
                         {this.props.body}
                     </table>
@@ -225,7 +232,7 @@ export class ScrollableView extends Component {
                 </div>
                 <div className="p-datatable-scrollable-footer" ref={(el) => { this.scrollFooter = el; }}>
                     <div className="p-datatable-scrollable-footer-box" ref={(el) => { this.scrollFooterBox = el; }}>
-                         <table className="p-datatable-scrollable-footer-table">
+                         <table className={tableFooterClassName} style={this.props.tableStyle}>
                             {colGroup}
                             {this.props.footer}
                         </table>
