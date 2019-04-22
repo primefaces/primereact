@@ -10,15 +10,15 @@ export class DialogDemo extends Component {
     constructor() {
         super();
         this.state = {visible: false};
-        this.show = this.show.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.onHide = this.onHide.bind(this);
     }
 
-    show(event) {
+    onClick() {
         this.setState({visible: true});
     }
 
-    onHide(event) {
+    onHide() {
         this.setState({visible: false});
     }
 
@@ -47,7 +47,7 @@ export class DialogDemo extends Component {
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Dialog>
 
-                    <Button label="Show" icon="pi pi-external-link" onClick={this.show} />
+                    <Button label="Show" icon="pi pi-external-link" onClick={this.onClick} />
                 </div>
 
                 <DialogDoc></DialogDoc>
@@ -79,7 +79,7 @@ import {Dialog} from 'primereact/dialog';
             <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 <CodeHighlight className="language-jsx">
 {`
-<Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={(e) => this.setState({visible: false})}>
+<Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={() => this.setState({visible: false})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
@@ -243,12 +243,12 @@ const footer = (
                     <tbody>
                         <tr>
                             <td>onHide</td>
-                            <td>event: Event object</td>
+                            <td>null</td>
                             <td>Callback to invoke when dialog is hidden (Required).</td>
                         </tr>
                         <tr>
                             <td>onShow</td>
-                            <td>event: Event object</td>
+                            <td>null</td>
                             <td>Callback to invoke when dialog is showed.</td>
                         </tr>
                     </tbody>
@@ -318,11 +318,11 @@ export class DialogDemo extends Component {
         this.onHide = this.onHide.bind(this);
     }
 
-    onClick(event) {
+    onClick() {
         this.setState({visible: true});
     }
 
-    onHide(event) {
+    onHide() {
         this.setState({visible: false});
     }
 
