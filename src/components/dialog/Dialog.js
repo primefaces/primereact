@@ -71,8 +71,6 @@ export class Dialog extends Component {
     hide() {
         this.unbindMaskClickListener();
         this.unbindGlobalListeners();
-        
-        this.props.onHide();
 
         if (this.props.modal) {
             this.disableModality();
