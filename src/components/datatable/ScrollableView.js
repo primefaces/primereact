@@ -58,7 +58,11 @@ export class ScrollableView extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.scrollHeight !== prevProps.scrollHeight) {
+            this.setScrollHeight();
+        }
+
         if(!this.props.frozen) {
             this.alignScrollBar();
             
