@@ -77,13 +77,6 @@ export class Chart extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps){
-        if(nextProps.data === this.props.data) {
-            return false;
-        }
-        return true;
-    }
-
     render() {
         let className = classNames('p-chart', this.props.className),
             style = Object.assign({
