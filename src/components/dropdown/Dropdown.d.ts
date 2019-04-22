@@ -28,6 +28,8 @@ interface DropdownProps {
     showClear?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabel?: string,
+    ariaLabelledBy?: string,
     itemTemplate?(option:any): React.ReactNode;
     onChange?(e: {originalEvent: Event, value: any}): void;
     onMouseDown?(event: Event): void;
