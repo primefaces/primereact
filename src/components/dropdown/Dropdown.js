@@ -34,6 +34,8 @@ export class Dropdown extends Component {
         showClear: false,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabel: null,
+        ariaLabelledBy: null,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -65,6 +67,8 @@ export class Dropdown extends Component {
         showClear: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabel: PropTypes.string,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
@@ -501,7 +505,7 @@ export class Dropdown extends Component {
         return <div className="p-hidden-accessible">
                     <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                        disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
+                        disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}  />
                 </div>;
     }
     
@@ -510,7 +514,7 @@ export class Dropdown extends Component {
             let value = label||this.props.value||'';
             
             return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled} placeholder={this.props.placeholder}
-                        onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} />;
+                        onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}/>;
         }
         else {
             let className = classNames('p-dropdown-label p-inputtext', {
