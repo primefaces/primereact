@@ -79,7 +79,7 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" />
+                    <Dropdown value={this.state.city} options={cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" />
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
@@ -365,6 +365,18 @@ carTemplate(option) {
                                         <td>object</td>
                                         <td>null</td>
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ariaLabel</td>
+                                        <td>string</td>
+                                        <td>false</td>
+                                        <td>Used to define a string that labels the component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ariaLabelledBy</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Contains the element IDs of labels.</td>
                                     </tr>
                                 </tbody>
                             </table>
