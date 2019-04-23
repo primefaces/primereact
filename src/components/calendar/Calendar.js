@@ -240,6 +240,10 @@ export class Calendar extends Component {
             this.props.onFocus(event);
         }
 
+        if (!this.datePickerClick) {
+            this.onInputClick()
+        }
+
         DomHandler.addClass(this.container, 'p-inputwrapper-focus');
     }
 
