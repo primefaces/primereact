@@ -581,6 +581,26 @@ export class Calendar extends Component {
     }
 
     updateViewDate(event, value) {
+        if (this.props.yearNavigator) {
+            let viewYear = value.getFullYear();
+
+            if (this.props.minDate && this.props.minDate.getFullYear() > viewYear) {
+                viewYear = this.props.minDate.getFullYear();
+            }
+            if (this.props.maxDate && this.props.maxDate.getFullYear() < viewYear) {
+                viewYear = this.props.maxDate.getFullYear();
+            }
+
+            value.setFullYear(viewYear);
+        }
+
+        if (this.props.monthNavigator && this.props.view !== 'month') {
+            let viewMonth = value.getMonth();
+            let viewMonthWithMinMax = parseInt((this.isInMinYear(value) && Math.max(this.props.minDate.getMonth(), viewMonth).toString()) || (this.isInMaxYear(value) && Math.min(this.props.maxDate.getMonth(), viewMonth).toString()) || viewMonth);
+
+            value.setMonth(viewMonthWithMinMax);
+        }
+
         if (this.props.onViewDateChange) {
             this.props.onViewDateChange({
                 originalEvent: event,
@@ -1531,6 +1551,14 @@ export class Calendar extends Component {
         );
     }
 
+    isInMinYear(viewDate) {
+        return this.props.minDate && this.props.minDate.getFullYear() === viewDate.getFullYear();
+    }
+
+    isInMaxYear(viewDate) {
+        return this.props.maxDate && this.props.maxDate.getFullYear() === viewDate.getFullYear();
+    }
+
     renderTitleMonthElement(month) {
         if (this.props.monthNavigator && this.props.view !== 'month') {
             let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
@@ -1539,7 +1567,12 @@ export class Calendar extends Component {
             return (
                 <select className="p-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
                     {
-                        this.props.locale.monthNames.map((month, index) => <option key={month} value={index}>{month}</option>)
+                        this.props.locale.monthNames.map((month, index) => {
+                            if ((!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth())) {
+                                return <option key={month} value={index}>{month}</option>
+                            }
+                            return null;
+                        })
                     }
                 </select>
             );
@@ -1568,7 +1601,12 @@ export class Calendar extends Component {
             return (
                 <select className="p-datepicker-year" onChange={this.onYearDropdownChange} value={viewYear}>
                     {
-                        yearOptions.map(year => <option key={year} value={year}>{year}</option>)
+                        yearOptions.map(year => {
+                            if (!(this.props.minDate && this.props.minDate.getFullYear() > year) && !(this.props.maxDate && this.props.maxDate.getFullYear() < year)) {
+                                return <option key={year} value={year}>{year}</option>
+                            }
+                            return null;
+                        })
                     }
                 </select>
             );
