@@ -7,20 +7,18 @@ export class CalendarPanel extends Component {
     static defaultProps = {
         appendTo: null,
         style: null,
-        className: null,
-        onClick: null
+        className: null
     };
 
     static propTypes = {
         appendTo: PropTypes.object,
         style: PropTypes.object,
-        className: PropTypes.string,
-        onClick: PropTypes.func
+        className: PropTypes.string
     };
 
     renderElement() {
         return (
-            <div ref={(el) => this.element = el} className={this.props.className} style={this.props.style} onClick={this.props.onClick}>
+            <div ref={(el) => this.element = el} className={this.props.className} style={this.props.style}>
                 {this.props.children}
             </div>
         );

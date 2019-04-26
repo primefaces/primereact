@@ -165,13 +165,11 @@ export class Calendar extends Component {
             }
         }
 
-        this.onInputClick = this.onInputClick.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onButtonClick = this.onButtonClick.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
         this.navBackward = this.navBackward.bind(this);
         this.navForward = this.navForward.bind(this);
         this.onMonthDropdownChange = this.onMonthDropdownChange.bind(this);
@@ -225,12 +223,6 @@ export class Calendar extends Component {
         });
     }
 
-    onInputClick(event) {
-        if (this.documentClickListener) {
-            this.datepickerClick = true;
-        }
-    }
-
     onInputFocus(event) {
         if (this.props.showOnFocus && !this.panel.offsetParent) {
             this.showOverlay();
@@ -282,18 +274,8 @@ export class Calendar extends Component {
     }
 
     onButtonClick(event) {
-        if (this.documentClickListener) {
-            this.datepickerClick = true;
-        }
-
         if (!this.panel.offsetParent) {
             this.showOverlay();
-        }
-    }
-
-    onPanelClick(event) {
-        if (this.documentClickListener) {
-            this.datepickerClick = true;
         }
     }
 
@@ -734,6 +716,7 @@ export class Calendar extends Component {
         
         this.alignPanel();
         this.bindDocumentClickListener();
+        this.bindDocumentResizeListener();
     }
 
     hideOverlay() {
@@ -741,8 +724,8 @@ export class Calendar extends Component {
             DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
             DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
             this.unbindDocumentClickListener();
-            this.datepickerClick = false;
-    
+            this.unbindDocumentResizeListener();
+
             this.hideTimeout = setTimeout(() => {
                 this.panel.style.display = 'none';
                 DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
@@ -753,11 +736,9 @@ export class Calendar extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.datepickerClick) {
+                if (this.isOutsideClicked(event)) {
                     this.hideOverlay();
                 }
-
-                this.datepickerClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -770,6 +751,36 @@ export class Calendar extends Component {
             this.documentClickListener = null;
         }
     }
+
+    bindDocumentResizeListener() {
+        if (!this.documentResizeListener && !this.props.touchUI) {
+            this.documentResizeListener = this.onWindowResize.bind(this);
+            window.addEventListener('resize', this.documentResizeListener);
+        }
+    }
+    
+    unbindDocumentResizeListener() {
+        if (this.documentResizeListener) {
+            window.removeEventListener('resize', this.documentResizeListener);
+            this.documentResizeListener = null;
+        }
+    }
+
+    isOutsideClicked(event) {
+        return !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) || 
+                this.container.contains(event.target) || (this.panel && this.panel.contains(event.target)));
+    }
+    
+    isNavIconClicked(event) {
+        return (DomHandler.hasClass(event.target, 'p-datepicker-prev') || DomHandler.hasClass(event.target, 'p-datepicker-prev-icon')
+                || DomHandler.hasClass(event.target, 'p-datepicker-next') || DomHandler.hasClass(event.target, 'p-datepicker-next-icon'));
+    }
+
+    onWindowResize() {
+        if (this.panel.offsetParent && !DomHandler.isAndroid()) {
+            this.hideOverlay();
+        }
+    }
     
     alignPanel() {
         if (this.props.touchUI) {
@@ -777,11 +788,11 @@ export class Calendar extends Component {
         }
         else {
             if(this.props.appendTo) {
-                DomHandler.absolutePosition(this.panel, this.container);
+                DomHandler.absolutePosition(this.panel, this.inputElement);
                 this.panel.style.minWidth = DomHandler.getWidth(this.container) + 'px';
             }
             else {
-                DomHandler.relativePosition(this.panel, this.container);
+                DomHandler.relativePosition(this.panel, this.inputElement);
             }   
         }
     }
@@ -1923,7 +1934,7 @@ export class Calendar extends Component {
             return (
                 <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} value={value} type="text" className={className} style={this.props.inputStyle} 
                     readOnly={this.props.readOnlyInput} disabled={this.props.disabled} tabIndex={this.props.tabIndex} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                    onChange={this.onInputChange} onClick={this.onInputClick} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} />
+                    onChange={this.onInputChange} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} />
             );
         }
         else {
@@ -2000,7 +2011,7 @@ export class Calendar extends Component {
                 {input}
                 {button}
                 <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle} 
-                        appendTo={this.props.appendTo} onClick={this.onPanelClick}>
+                        appendTo={this.props.appendTo}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}
