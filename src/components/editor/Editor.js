@@ -36,7 +36,8 @@ export class Editor extends Component {
     componentDidMount() {
         this.quill = new Quill(this.editorElement, {
             modules: {
-                toolbar: this.toolbarElement
+                toolbar: this.toolbarElement,
+                ...this.props.modules
             },
             placeholder: this.props.placeholder,
             readOnly: this.props.readOnly,
