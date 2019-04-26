@@ -116,6 +116,7 @@ export class OverlayPanel extends Component {
     hide() {
         if (this.isVisible()) {
             this.container.style.display = 'none';
+            DomHandler.removeClass(this.container, 'p-overlaypanel-flipped');
             this.unbindDocumentClickListener();
 
             if (this.props.onHide) {
