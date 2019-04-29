@@ -95,6 +95,14 @@ export class HomeComponent extends Component {
                 </div>
                 <div className="templates">
 
+                    <div className="p-grid templates-grid">
+                        <div className="p-col-12">
+                            <a href="https://www.primefaces.org/store" target="_blank">
+                                <img alt="Spring Sale 2019" src="showcase/resources/images/spring-sale-2019.jpg" />
+                            </a>
+                        </div>
+                    </div>
+
                     <h3>Premium Application Templates for PrimeReact</h3>
                     <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates
                         of PrimeReact and impress your users.</p>

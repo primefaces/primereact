@@ -13,4 +13,6 @@ interface OverlayPanelProps {
 
 export class OverlayPanel extends React.Component<OverlayPanelProps,any> {
     public toggle(event:SyntheticEvent):void;
+    public show(event:SyntheticEvent,target:EventTarget):void;
+    public hide():void;
 }
