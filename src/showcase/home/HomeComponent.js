@@ -97,7 +97,7 @@ export class HomeComponent extends Component {
 
                     <div className="p-grid templates-grid">
                         <div className="p-col-12">
-                            <a href="https://www.primefaces.org/store" target="_blank">
+                            <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer">
                                 <img alt="Spring Sale 2019" src="showcase/resources/images/spring-sale-2019.jpg" />
                             </a>
                         </div>
