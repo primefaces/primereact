@@ -35,6 +35,8 @@ export class BodyCell extends Component {
     }
     
     onClick() {
+        this.editingCellClick = true;
+
         if (this.props.editor && !this.state.editing) {
             this.setState({
                 editing: true
@@ -59,10 +61,14 @@ export class BodyCell extends Component {
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
             this.documentEditListener = (event) => {
-                if (!this.container.contains(event.target)) {
+                if (!this.editingCellClick) {
                     this.switchCellToViewMode();
                 }
+
+                this.editingCellClick = false;
             };
+
+            this.editingCellClick = false;
             
             document.addEventListener('click', this.documentEditListener);
         }
