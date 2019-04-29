@@ -767,7 +767,7 @@ export class Calendar extends Component {
     }
 
     isOutsideClicked(event) {
-        return !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) || 
+        return this.container && !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) || 
                 this.container.contains(event.target) || (this.panel && this.panel.contains(event.target)));
     }
     
