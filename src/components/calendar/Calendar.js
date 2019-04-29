@@ -1067,7 +1067,7 @@ export class Calendar extends Component {
     isMonthSelected(month) {
         const viewDate = this.getViewDate();
 
-        if(this.props.value)
+        if(this.props.value && this.props.value instanceof Date)
             return this.props.value.getDate() === 1 && this.props.value.getMonth() === month && this.props.value.getFullYear() === viewDate.getFullYear();
         else
             return false;
@@ -1458,6 +1458,10 @@ export class Calendar extends Component {
             }
             iValue++;
         };
+
+        if (this.props.view === 'month') {
+            day = 1;
+        }
 
         for (iFormat = 0; iFormat < format.length; iFormat++) {
             if(literal) {
