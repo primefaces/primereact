@@ -213,6 +213,9 @@ export class Calendar extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        this.unbindDocumentClickListener();
+        this.unbindDocumentResizeListener();
     }
 
     renderTooltip() {
