@@ -148,6 +148,8 @@ export class App extends Component {
             themeMenuVisited: false
         };
 
+        this.version = require('../package.json') && require('../package.json').version;
+
         this.theme = 'nova-light';
         this.changeTheme = this.changeTheme.bind(this);
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
@@ -474,7 +476,7 @@ export class App extends Component {
                     <Route path="/deferredcontent" component={DeferredContentDemo}/>
 
                     <div className="content-section layout-footer clearfix">
-                        <span>PrimeReact 3.1.3 by <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
+                        <span>PrimeReact {this.version} by <a href="http://www.primetek.com.tr" target="_blank" rel="noopener noreferrer">PrimeTek</a></span>
                         <div className="footer-links">
                             <a href="https://github.com/primefaces/primereact"><i className=" icon-github fa fa-github-square"></i></a>
                             <a href="https://twitter.com/primereact"><i className="icon-twitter fa fa-twitter-square"></i></a>
