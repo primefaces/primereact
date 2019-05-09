@@ -154,7 +154,10 @@ export default class DomHandler {
     }
 
     static findSingle(element, selector) {
-        return element.querySelector(selector);
+        if (element) {
+            return element.querySelector(selector);
+        }
+        return null;
     }
 
     static getHeight(el) {
@@ -365,20 +368,26 @@ export default class DomHandler {
         }
     }
 
-    static calculateScrollbarWidth() {
-        if(this.calculatedScrollbarWidth != null)
-            return this.calculatedScrollbarWidth;
-        
-        let scrollDiv = document.createElement("div");
-        scrollDiv.className = "p-scrollbar-measure";
-        document.body.appendChild(scrollDiv);
+    static calculateScrollbarWidth(el) {
+        if (el) {
+            let style = getComputedStyle(el);
+            return (el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth));
+        }
+        else {
+            if(this.calculatedScrollbarWidth != null)
+                return this.calculatedScrollbarWidth;
+            
+            let scrollDiv = document.createElement("div");
+            scrollDiv.className = "p-scrollbar-measure";
+            document.body.appendChild(scrollDiv);
 
-        let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-        document.body.removeChild(scrollDiv);
+            let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            document.body.removeChild(scrollDiv);
 
-        this.calculatedScrollbarWidth = scrollbarWidth;
-        
-        return scrollbarWidth;
+            this.calculatedScrollbarWidth = scrollbarWidth;
+            
+            return scrollbarWidth;
+        }
     }
 
     static getBrowser() {

@@ -396,15 +396,7 @@ export class DataTable extends Component {
 
             if (this.props.columnResizeMode === 'expand' && this.tableWidthState) {
                 if (this.props.scrollable) {
-                    let scrollableBodyTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-body-table');
-                    let scrollableHeaderTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-table');
-                    let scrollableFooterTable = DomHandler.findSingle(this.container, '.p-datatable-scrollable-footer-table');
-                    scrollableBodyTable.style.width = this.tableWidthState;
-                    scrollableHeaderTable.style.width = this.tableWidthState;
-
-                    if (scrollableFooterTable) {
-                        scrollableFooterTable.style.width = this.tableWidthState;
-                    }
+                    this.setScrollableItemsWidthOnExpandResize(null, this.tableWidthState, 0);
                 }
                 else {
                     this.tableViewChild.nativeElement.style.width = this.tableWidthState;
@@ -696,20 +688,7 @@ export class DataTable extends Component {
             }
             else if(this.props.columnResizeMode === 'expand') {
                 if (this.props.scrollable) {
-                    let scrollableView = this.findParentScrollableView(this.resizeColumn);
-                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-body-table');
-                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-header-table');
-                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-footer-table');
-                    scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
-                    scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
-                    if(scrollableFooterTable) {
-                        scrollableFooterTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
-                    }
-                    let resizeColumnIndex = DomHandler.index(this.resizeColumn);
-
-                    this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
-                    this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
-                    this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
+                    this.setScrollableItemsWidthOnExpandResize(this.resizeColumn, newColumnWidth, delta);
                 }
                 else {
                     this.table.style.width = this.table.offsetWidth + delta + 'px';
@@ -736,6 +715,39 @@ export class DataTable extends Component {
         DomHandler.removeClass(this.container, 'p-unselectable-text');
 
         this.unbindColumnResizeEvents();
+    }
+
+    setScrollableItemsWidthOnExpandResize(column, newColumnWidth, delta) {
+        let scrollableView = column ? this.findParentScrollableView(column) : this.container;
+        let scrollableBody = DomHandler.findSingle(scrollableView, '.p-datatable-scrollable-body');
+        let scrollableHeader = DomHandler.findSingle(scrollableView, '.p-datatable-scrollable-header');
+        let scrollableFooter = DomHandler.findSingle(scrollableView, '.p-datatable-scrollable-footer');
+        let scrollableBodyTable = DomHandler.findSingle(scrollableBody, 'table.p-datatable-scrollable-body-table');
+        let scrollableHeaderTable = DomHandler.findSingle(scrollableHeader, 'table.p-datatable-scrollable-header-table');
+        let scrollableFooterTable = DomHandler.findSingle(scrollableFooter, 'table.p-datatable-scrollable-footer-table');
+
+        const scrollableBodyTableWidth = column ? scrollableBodyTable.offsetWidth + delta : newColumnWidth;
+        const scrollableHeaderTableWidth = column ? scrollableHeaderTable.offsetWidth + delta : newColumnWidth;
+        const isContainerInViewport = this.container.offsetWidth >= scrollableBodyTableWidth;
+
+        let setWidth = (container, table, width, isContainerInViewport) => {
+            if (container && table) {
+                container.style.width = isContainerInViewport ? width + DomHandler.calculateScrollbarWidth(scrollableBody) + 'px' : 'auto'
+                table.style.width = width + 'px';
+            }
+        };
+
+        setWidth(scrollableBody, scrollableBodyTable, scrollableBodyTableWidth, isContainerInViewport);
+        setWidth(scrollableHeader, scrollableHeaderTable, scrollableHeaderTableWidth, isContainerInViewport);
+        setWidth(scrollableFooter, scrollableFooterTable, scrollableHeaderTableWidth, isContainerInViewport);
+    
+        if (column) {
+            let resizeColumnIndex = DomHandler.index(column);
+
+            this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
+            this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
+            this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
+        }
     }
 
     findParentScrollableView(column) {
