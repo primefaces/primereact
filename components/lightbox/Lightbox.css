@@ -1,0 +1,69 @@
+.p-lightbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.p-lightbox-content-wrapper {
+    position: relative;
+}
+
+.p-lightbox-content {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    -webkit-transition-property: width, height;
+    -moz-transition-property: width, height;
+    -ms-transition-property: width, height;
+    -o-transition-property: width, height;
+    transition-property: width, height;
+}
+
+.p-lightbox-nav-right, .p-lightbox-nav-left {
+   position: absolute;
+   top: 50%;
+   cursor: pointer;
+   z-index: 1;
+}
+
+.p-lightbox-nav-left {
+   left: 0;
+}
+
+.p-lightbox-nav-right {
+   right: 0;
+}
+
+.p-lightbox-loading .p-lightbox-content {
+    background: url("./images/loading.gif") #000000 center center no-repeat;
+}
+
+.p-lightbox-caption {
+    padding: 0.2em 0.4em;
+    display: none;
+}
+
+.p-lightbox-caption-text {
+    margin: 0.3em 0 0.1em 0;
+    float:left;
+}
+
+.p-lightbox-close {
+    float:right;
+    margin: 0;
+    padding: .125em;
+}
+
+.p-lightbox-close.p-state-hover {
+    padding: 0;
+}
+
+.p-lightbox-nav-left, .p-lightbox-nav-right {
+    opacity: .5;
+}
+
+.p-lightbox-nav-left:hover, .p-lightbox-nav-right:hover{
+    opacity: 1;
+}

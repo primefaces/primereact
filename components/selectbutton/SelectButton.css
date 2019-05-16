@@ -1,0 +1,11 @@
+.p-selectbutton{
+    display: inline-block;
+}
+            
+.p-selectbutton.p-state-error {
+    padding: 0;
+}
+
+.p-selectbutton .p-button.p-state-focus{
+    outline: none;
+}

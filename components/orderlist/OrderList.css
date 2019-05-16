@@ -1,0 +1,119 @@
+.p-orderlist {
+    display: table;
+}
+
+.p-orderlist .p-orderlist-controls {
+    height: 12.5em;
+    padding: 0 .25em;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.p-orderlist .p-orderlist-controls .p-button {
+    display: block;
+    margin-bottom: 0.25em;
+}
+
+.p-orderlist .p-orderlist-list-container {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.p-orderlist .p-orderlist-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow:auto;
+    height: 12.5em;
+    width: 12.5em;
+}
+
+.p-orderlist .p-orderlist-caption {
+    text-align: center;
+    padding: .5em .75em;
+    border-bottom: 0 none;
+}
+
+.p-orderlist .p-orderlist-list .p-orderlist-item {
+    margin: 1px;
+    padding: .125em;
+    cursor: pointer;
+    border: 0 none;
+    font-weight: inherit;
+}
+
+.p-orderlist .p-orderlist-filter-container {
+    position: relative;
+    width: 100%;
+    padding: .5em .6em;
+    border-bottom: 0 none;
+}
+
+.p-orderlist .p-orderlist-filter-container .p-inputtext {
+    text-indent: 1.1em;
+    width: 100%;
+}
+
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    margin-top: -.6em;
+}
+
+.p-orderlist.p-disabled .p-orderlist-item,
+.p-orderlist.p-disabled .p-button {
+    cursor: default;
+}
+
+.p-orderlist.p-disabled .p-orderlist-list {
+    overflow:hidden;
+}
+
+/* Responsive */
+.p-orderlist.p-orderlist-responsive {
+    width: 100%;
+}
+
+.p-orderlist.p-orderlist-responsive .p-orderlist-controls {
+    width: 16.66666%;
+    padding-right: .5em;
+}
+
+.p-orderlist.p-orderlist-responsive .p-orderlist-list-container {
+    width: 83.33333%;
+}
+
+.p-orderlist.p-orderlist-responsive .p-orderlist-list,
+.p-orderlist.p-orderlist-responsive .p-orderlist-caption {
+    width: 100%;
+}
+
+.p-orderlist.p-orderlist-responsive .p-orderlist-controls > .p-button {
+    width: 100%;
+}
+
+.p-orderlist .p-orderlist-droppoint {
+    height: 6px;
+    list-style-type: none;
+}
+
+@media (max-width: 40em) {
+    .p-orderlist.p-orderlist-responsive .p-orderlist-controls {
+        text-align: center;
+        width: 100%;
+        display: block;
+        height: auto;
+    }
+
+    .p-orderlist.p-orderlist-responsive .p-orderlist-controls .p-button {
+        display: inline-block;
+        width: 20%;
+        margin-right: .25em;
+    }
+
+    .p-orderlist.p-orderlist-responsive .p-orderlist-list-container {
+        width: 100%;
+        display: block;
+    }
+}

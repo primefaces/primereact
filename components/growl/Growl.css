@@ -1,0 +1,92 @@
+.p-growl {
+    position:fixed;
+	width: 20em;
+}
+
+.p-growl.p-growl-topright {
+	top: 20px;
+	right: 20px;
+}
+
+.p-growl.p-growl-topleft {
+	top: 20px;
+	left: 20px;
+}
+
+.p-growl.p-growl-bottomleft {
+	bottom: 20px;
+	left: 20px;
+}
+
+.p-growl.p-growl-bottomright {
+	bottom: 20px;
+	right: 20px;
+}
+
+.p-growl-item-container {
+	position:relative;
+	margin:0 0 10px 0;
+}
+
+.p-growl-item {
+	position: relative;
+	display: block;
+	padding: .5em 1em;
+}
+
+.p-growl-item p {
+	padding: 0;
+	margin: 0;
+}
+
+.p-growl-icon-close {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor: pointer;
+}
+
+.p-growl-title {
+	font-weight: bold;
+	padding: 0 0 .5em 0;
+	display: block;
+}
+
+.p-growl-image {
+    position: absolute;
+    display: inline-block;
+    left: .5em;
+    top: .25em;
+    padding: 0;
+	font-size: 2em;
+}
+
+.p-growl-message {
+	padding: 0 0 .25em 0;
+    margin-left: 2.5em;
+}
+
+.p-growl-message p {
+	font-weight: normal;
+}
+
+/* Animations */
+.p-growl-enter {
+    opacity: 0.01;
+}
+
+.p-growl-enter.p-growl-enter-active {
+    opacity: 1;
+    transition: opacity 250ms ease-in;
+}
+
+.p-growl-exit {
+	max-height: 500px;
+}
+
+.p-growl-exit.p-growl-exit-active {
+	max-height: 0;
+	overflow: hidden;
+	margin-bottom: 0;
+	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), margin-bottom 0.5s cubic-bezier(0, 1, 0, 1);
+}

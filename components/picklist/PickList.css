@@ -1,0 +1,187 @@
+.p-picklist > div {
+    float: left;
+}
+
+.p-picklist .p-picklist-buttons {
+    height: 12.5em;
+    padding: 0 .25em;
+}
+
+.p-picklist .p-picklist-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow:auto;
+    height: 12.5em;
+    width: 12.5em;
+}
+
+.p-picklist .p-picklist-list li {
+    margin: 1px;
+    padding: .125em;
+}
+
+.p-picklist .p-button {
+    display:block;
+    margin-bottom: 0.25em;
+}
+
+.p-picklist .p-button-text-icon-left {
+    width: 100%;
+}
+
+.p-picklist .p-picklist-item {
+    cursor: pointer;
+    border: 0 none;
+    font-weight: inherit;
+}
+
+.p-picklist .p-picklist-caption {
+    text-align: center;
+    padding: .5em .75em;
+    border-bottom:0 none;
+}
+
+.p-picklist table {
+    width: 100%;
+    border-collapse:collapse;
+}
+
+.p-picklist .p-picklist-filter-container {
+    position: relative;
+    width: 100%;
+    padding: .5em .6em;
+    border-bottom: 0 none;
+}
+
+.p-picklist .p-picklist-filter-container .p-picklist-filter {
+    text-indent: 1.1em;
+    width: 100%;
+}
+
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    margin-top: -.6em;
+}
+
+.p-picklist {
+    display: table;
+}
+
+.p-picklist > div {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.p-picklist .p-picklist-buttons {
+    vertical-align: middle;
+}
+
+/* Vertical */
+.p-picklist.p-picklist-vertical {
+    display: table;
+}
+
+.p-picklist.p-picklist-vertical > div {
+    float: none;
+    display: table-row;
+    vertical-align: top;
+}
+
+.p-picklist.p-picklist-vertical .p-picklist-buttons {
+    text-align:center;
+    height: auto;
+}
+
+.p-picklist.p-picklist-vertical .p-picklist-buttons .p-button {
+    display: inline-block;
+}
+
+.p-picklist.p-picklist-vertical .p-button {
+    margin-top: 0.25em;
+}
+
+.p-picklist-outline {
+    outline: 1px dotted black;
+    z-index: 1;
+}
+
+.p-picklist .p-picklist-droppoint {
+    height: 6px;
+    list-style-type: none;
+}
+
+.p-picklist .p-picklist-list .p-picklist-droppoint-empty {
+    height: 100%;
+    list-style-type: none;
+}
+
+.p-picklist-list.p-picklist-source,
+.p-picklist-list.p-picklist-target {
+    outline: none;
+}
+
+/* Responsive */
+.p-picklist.p-picklist-responsive * {
+    box-sizing: border-box;
+}
+
+.p-picklist.p-picklist-responsive {
+    width: 100%;
+}
+
+.p-picklist.p-picklist-responsive .p-picklist-listwrapper {
+    width: 35%;
+}
+
+.p-picklist.p-picklist-responsive .p-picklist-listwrapper.p-picklist-listwrapper-nocontrols {
+    width: 45%;
+}
+
+.p-picklist.p-picklist-responsive .p-picklist-buttons {
+    width: 10%;
+}
+
+.p-picklist.p-picklist-responsive .p-picklist-buttons button {
+    width: 100%;
+}
+
+.p-picklist.p-picklist-responsive .p-picklist-list {
+    width: auto;
+}
+
+/* Responsive */
+@media (max-width: 40em) {
+    .p-picklist.p-picklist-responsive {
+        display: block;
+    }
+
+    .p-picklist.p-picklist-responsive > div {
+        display: block;
+        width: 100% !important;
+    }
+
+    .p-picklist.p-picklist-responsive .p-picklist-buttons {
+        text-align: center;
+        height: auto;
+        padding: .4em 0;
+    }
+
+    .p-picklist.p-picklist-responsive .p-picklist-buttons button {
+        display: inline-block;
+        width: 20%;
+        margin-bottom: 0;
+        margin-right: .25em;
+    }
+
+    .p-picklist.p-picklist-responsive .p-picklist-source-controls.p-picklist-buttons {
+        padding-bottom: .4em;
+    }
+
+    .p-picklist.p-picklist-responsive .p-picklist-target-controls.p-picklist-buttons {
+        padding-top: .4em;
+    }
+}

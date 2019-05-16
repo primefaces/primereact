@@ -1,0 +1,95 @@
+.p-slidemenu {
+    width: 12.5em;
+    padding: .25em;
+}
+
+.p-slidemenu.p-slidemenu-dynamic {
+    position: absolute;
+    display: none;
+}
+
+.p-slidemenu .p-menu-separator {
+    border-width: 1px 0 0 0;
+}
+
+.p-slidemenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.p-slidemenu .p-slidemenu-rootlist {
+    position: absolute;
+    top: 0;
+}
+
+.p-slidemenu .p-submenu-list {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 12.5em;
+    padding: .25em;
+}
+
+.p-slidemenu .p-menuitem-link {
+    padding: .25em;
+    display: block;
+    position: relative;
+    text-decoration: none;
+}
+
+.p-slidemenu .p-menuitem-icon {
+    margin-right: .25em;
+    vertical-align: middle;
+}
+
+.p-slidemenu .p-menuitem-text {
+    vertical-align: middle;
+}
+
+.p-slidemenu .p-menuitem {
+    position: relative;
+    margin: .125em 0;
+}
+
+.p-slidemenu .p-menuitem-link .p-submenu-icon {
+    position: absolute;
+    margin-top: -.5em;
+    right: 0;
+    top: 50%;
+}
+
+.p-slidemenu .p-slidemenu-wrapper {
+    position: relative;
+}
+
+.p-slidemenu .p-slidemenu-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    height: 100%;
+}
+
+.p-slidemenu-backward {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0.25em;
+    cursor: pointer;
+}
+
+.p-slidemenu-backward .p-slidemenu-backward-icon {
+    vertical-align: middle;
+}
+
+.p-slidemenu-backward span {
+    vertical-align: middle;
+}
+
+.p-slidemenu .p-menuitem-active {
+    position: static;
+}
+
+.p-slidemenu .p-menuitem-active > .p-submenu-list {
+    display: block;
+}

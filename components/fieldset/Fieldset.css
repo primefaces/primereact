@@ -1,0 +1,40 @@
+.p-fieldset, 
+.p-fieldset .p-fieldset-legend {
+    padding: 0.5em 1em;
+}
+
+.p-fieldset-toggleable .p-fieldset-legend {
+    padding: 0;
+}
+
+.p-fieldset-toggleable .p-fieldset-legend a {
+    padding: 0.5em 1em;
+    cursor:pointer;
+    white-space: nowrap;
+    display: block;
+}
+
+.p-fieldset .p-fieldset-toggler {
+    margin-right: .1em;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.p-fieldset .p-fieldset-legend-text {
+    vertical-align: middle;
+}
+
+.p-fieldset-content-wrapper-collapsed {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+.p-fieldset-content-wrapper-expanded {
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+}
+
+.p-fieldset-content-wrapper-expanding {
+    overflow: hidden;
+}

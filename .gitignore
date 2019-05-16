@@ -10,8 +10,8 @@
 /idea
 /.idea
 /.sass-cache
-/resources
-/components
+#/resources
+#/components
 /src/sass/App.css
 /src/sass/App.css.map
 package-lock.json

@@ -1,0 +1,64 @@
+.p-messages {
+    position: relative;
+}
+
+.p-messages .p-messages-wrapper {
+    padding: 1em;	
+}
+
+.p-messages .p-messages-icon {
+    display:inline-block;
+    padding: 0;
+    vertical-align: middle;
+    font-size: 2em;
+}
+
+.p-messages .p-messages-summary {
+    font-weight: bold;
+    margin-left: .25em;
+}
+
+.p-messages .p-messages-detail {
+    margin-left: .25em;
+}
+
+.p-messages ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.p-messages.p-messages-noicon ul {
+    margin: 0 1.5em 0 0;
+}
+
+.p-messages .p-messages-close {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.p-messages-exit .p-messages-close {
+    display: none;
+}
+
+/* Animations */	
+.p-messages-enter {	
+    opacity: 0.01;	
+}
+.p-messages-enter-active {	
+    opacity: 1;
+    transition: opacity 250ms ease-in;	
+}	
+.p-messages-exit {	
+    max-height: 500px;	
+}	
+.p-messages-exit.p-messages-exit-active {	
+    max-height: 0;	
+    overflow: hidden;	
+    margin-bottom: 0;	
+    transition: max-height 500ms cubic-bezier(0, 1, 0, 1), margin-bottom 500ms cubic-bezier(0, 1, 0, 1);	
+} 

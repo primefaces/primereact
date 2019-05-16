@@ -1,0 +1,58 @@
+.p-contextmenu {
+    width: 12.5em;
+    padding: .25em;
+    position: absolute;
+    display: none;
+}
+
+.p-contextmenu .p-menu-separator {
+    border-width: 1px 0 0 0;
+}
+
+.p-contextmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.p-contextmenu .p-submenu-list {
+    display: none;
+    position: absolute;
+    width: 12.5em;
+    padding: .25em;
+    z-index: 1;
+}
+
+.p-contextmenu .p-menuitem-active > .p-submenu-list {
+    display: block;
+}
+
+.p-contextmenu .p-menuitem-link {
+    padding: .25em;
+    display: block;
+    position: relative;
+}
+
+.p-contextmenu .p-menuitem-icon {
+    margin-right: .25em;
+    vertical-align: middle;
+}
+
+.p-contextmenu .p-menuitem-text {
+    vertical-align: middle;
+}
+
+.p-contextmenu .p-menuitem {
+    position: relative;
+}
+
+.p-contextmenu .p-menuitem-link .p-submenu-icon {
+    position: absolute;
+    margin-top: -.5em;
+    right: 0;
+    top: 50%;
+}
+
+.p-contextmenu .p-menuitem-active > .p-submenu > .p-submenu-list {
+    display: block !important;
+}
