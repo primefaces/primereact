@@ -14,4 +14,4 @@ interface PanelProps {
     onToggle?(e: {event: Event, value: boolean}): void;
 }
 
-export class Panel extends React.Component<PanelProps, any> {}
+export class Panel extends React.Component<PanelProps,any> {}
