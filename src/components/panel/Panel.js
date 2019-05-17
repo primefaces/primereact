@@ -85,11 +85,11 @@ export class Panel extends Component {
     isCollapsed() {
         return this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
     }
-
+    
     renderToggleIcon(collapsed, iconCollapsed, iconExpanded) {
-        const iCollapsed = iconCollapsed ? iconCollapsed : 'pi pi-plus';
-        const iExpanded = iconExpanded ? iconExpanded : 'pi pi-minus';
-        const panelIcon = collapsed ? iCollapsed : iExpanded;
+      const iCollapsed = iconCollapsed ? iconCollapsed : 'pi pi-plus';
+      const iExpanded = iconExpanded ? iconExpanded : 'pi pi-minus';
+      const panelIcon = collapsed ? iCollapsed : iExpanded;
         if (this.props.toggleable) {
             const id = this.id + '_label';
             const ariaControls = this.id + '_content';
@@ -97,7 +97,7 @@ export class Panel extends Component {
             return (
                 <a href={'#' + ariaControls} className="p-panel-titlebar-icon p-panel-titlebar-toggler" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
-                    <span className={panelIcon}></span>
+                   <span className={panelIcon}></span>
                 </a>
             );
         }
@@ -105,11 +105,11 @@ export class Panel extends Component {
             return null;
         }
     }
-
+    
     renderHeader(collapsed, iconCollapsed, iconExpanded) {
         if (this.props.header || this.props.toggleable) {
-            const toggleIcon = this.renderToggleIcon(collapsed, iconCollapsed, iconExpanded);
-
+          const toggleIcon = this.renderToggleIcon(collapsed, iconCollapsed, iconExpanded);
+            
             return (
                 <div className="p-panel-titlebar">
                     <span className="p-panel-title">{this.props.header}</span>
@@ -140,8 +140,8 @@ export class Panel extends Component {
     render() {
         const className = classNames('p-panel p-component', this.props.className);
         const collapsed = this.isCollapsed();
-        const iconCollapsed = this.iconCollapsed;
-        const iconExpanded = this.iconExpanded;
+        const iconCollapsed = this.props.iconCollapsed;
+        const iconExpanded = this.props.iconExpanded;
         const header = this.renderHeader(collapsed, iconCollapsed, iconExpanded);
         const content = this.renderContent(collapsed);
 
