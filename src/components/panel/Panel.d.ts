@@ -7,9 +7,11 @@ interface PanelProps {
     style?: object;
     className?: string;
     collapsed?: boolean;
+    iconCollapsed?: string;
+    iconExpanded?: string;
     onExpand?(event: Event): void;
     onCollapse?(event: Event): void;
     onToggle?(e: {event: Event, value: boolean}): void;
 }
 
-export class Panel extends React.Component<PanelProps,any> {}
+export class Panel extends React.Component<PanelProps, any> {}

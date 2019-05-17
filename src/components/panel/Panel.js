@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export class Panel extends Component {
 
@@ -29,24 +29,24 @@ export class Panel extends Component {
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func
     };
-    
-    constructor(props) {
+
+    constructor(props) {
         super(props);
         if (!this.props.onToggle) {
             this.state = {
                 collapsed: this.props.collapsed
             };
         }
-        
+
         this.toggle = this.toggle.bind(this);
         this.id = this.props.id || UniqueComponentId();
     }
-    
+
     toggle(event) {
         if (this.props.toggleable) {
             const collapsed = this.props.onToggle ? this.props.collapsed : this.state.collapsed;
 
-            if(collapsed)
+            if (collapsed)
                 this.expand(event);
             else
                 this.collapse(event);
@@ -58,35 +58,38 @@ export class Panel extends Component {
                 });
             }
         }
-        
+
         event.preventDefault();
     }
-    
+
     expand(event) {
         if (!this.props.onToggle) {
             this.setState({collapsed: false});
         }
-        
+
         if (this.props.onExpand) {
             this.props.onExpand(event);
         }
     }
-    
+
     collapse(event) {
         if (!this.props.onToggle) {
             this.setState({collapsed: true});
         }
-        
+
         if (this.props.onCollapse) {
             this.props.onCollapse(event);
         }
     }
 
     isCollapsed() {
-        return this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed): false;
+        return this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
     }
-    
-    renderToggleIcon(collapsed) {
+
+    renderToggleIcon(collapsed, iconCollapsed, iconExpanded) {
+        const iCollapsed = iconCollapsed ? iconCollapsed : 'pi pi-plus';
+        const iExpanded = iconExpanded ? iconExpanded : 'pi pi-minus';
+        const panelIcon = collapsed ? iCollapsed : iExpanded;
         if (this.props.toggleable) {
             const id = this.id + '_label';
             const ariaControls = this.id + '_content';
@@ -94,7 +97,7 @@ export class Panel extends Component {
             return (
                 <a href={'#' + ariaControls} className="p-panel-titlebar-icon p-panel-titlebar-toggler" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
-                   <span className={classNames('pi', {'pi-plus': collapsed, 'pi-minus': !collapsed})}></span>
+                    <span className={panelIcon}></span>
                 </a>
             );
         }
@@ -102,11 +105,11 @@ export class Panel extends Component {
             return null;
         }
     }
-    
-    renderHeader(collapsed) {
+
+    renderHeader(collapsed, iconCollapsed, iconExpanded) {
         if (this.props.header || this.props.toggleable) {
-            const toggleIcon = this.renderToggleIcon(collapsed);
-            
+            const toggleIcon = this.renderToggleIcon(collapsed, iconCollapsed, iconExpanded);
+
             return (
                 <div className="p-panel-titlebar">
                     <span className="p-panel-title">{this.props.header}</span>
@@ -118,7 +121,7 @@ export class Panel extends Component {
             return null;
         }
     }
-    
+
     renderContent(collapsed) {
         const className = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': collapsed});
         const id = this.id + '_content';
@@ -126,18 +129,20 @@ export class Panel extends Component {
         return (
             <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
                 <div className={className} aria-hidden={collapsed} role="region">
-                    <div id={id}  className="p-panel-content">
+                    <div id={id} className="p-panel-content">
                         {this.props.children}
                     </div>
                 </div>
             </CSSTransition>
         );
     }
-    
+
     render() {
         const className = classNames('p-panel p-component', this.props.className);
         const collapsed = this.isCollapsed();
-        const header = this.renderHeader(collapsed);
+        const iconCollapsed = this.iconCollapsed;
+        const iconExpanded = this.iconExpanded;
+        const header = this.renderHeader(collapsed, iconCollapsed, iconExpanded);
         const content = this.renderContent(collapsed);
 
         return (
