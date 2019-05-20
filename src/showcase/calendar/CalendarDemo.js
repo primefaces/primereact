@@ -143,7 +143,7 @@ export class CalendarDemo extends Component {
                     </div>
 
                     <h3>Inline</h3>
-                    <Calendar value={this.state.date14} onChange={(e) => this.setState({date14: e.value})} inline={true} />
+                    <Calendar value={this.state.date14} onChange={(e) => this.setState({date14: e.value})} inline={true} showWeek={true} />
                 </div>
                 
                 <CalendarDoc></CalendarDoc>
@@ -314,7 +314,11 @@ let es = {
     dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
     dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
     monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-    monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+    monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+    today: 'Hoy',
+    clear: 'Limpiar',
+    dateFormat: 'dd/mm/yy',
+    weekHeader: 'Sm'
 };
 
 `}
@@ -577,6 +581,12 @@ dateTemplate(date) {
                             <td>boolean</td>
                             <td>false</td>
                             <td>Whether to hide the overlay on date selection when showTime is enabled.</td>
+                        </tr>
+                        <tr>
+                            <td>showWeek</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, calendar will show week numbers.</td>
                         </tr>
                         <tr>
                             <td>dateFormat</td>
@@ -983,7 +993,7 @@ export class CalendarDemo extends Component {
                     </div>
 
                     <h3>Inline</h3>
-                    <Calendar value={this.state.date14} onChange={(e) => this.setState({date14: e.value})} inline={true} />
+                    <Calendar value={this.state.date14} onChange={(e) => this.setState({date14: e.value})} inline={true} showWeek={true} />
                 </div>
             </div>
         );

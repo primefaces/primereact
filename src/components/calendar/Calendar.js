@@ -42,6 +42,7 @@ export class Calendar extends Component {
         stepSecond: 1,
         shortYearCutoff: '+10',
         hideOnDateTimeSelect: false,
+        showWeek: false,
         locale: {
             firstDayOfWeek: 0,
             dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -50,7 +51,8 @@ export class Calendar extends Component {
             monthNames: [ "January","February","March","April","May","June","July","August","September","October","November","December" ],
             monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
             today: 'Today',
-            clear: 'Clear'
+            clear: 'Clear',
+            weekHeader: 'Wk'
         },
         dateFormat: 'mm/dd/yy',
         panelStyle: null,
@@ -117,6 +119,7 @@ export class Calendar extends Component {
         stepSecond: PropTypes.number,
         shortYearCutoff: PropTypes.string,
         hideOnDateTimeSelect: PropTypes.bool,
+        showWeek: PropTypes.bool,
         locale: PropTypes.object,
         dateFormat: PropTypes.string,
         panelStyle: PropTypes.object,
@@ -938,6 +941,7 @@ export class Calendar extends Component {
         let prevMonthDaysLength = this.getDaysCountInPrevMonth(month, year);
         let dayNo = 1;
         let today = new Date();
+        let weekNumbers = [];
         
         for(let i = 0; i < 6; i++) {
             let week = [];
@@ -972,15 +976,29 @@ export class Calendar extends Component {
                     dayNo++;
                 }
             }
+
+            if (this.props.showWeek) {
+                weekNumbers.push(this.getWeekNumber(new Date(week[0].year, week[0].month, week[0].day))); 
+            }
             
             dates.push(week);
         }
-
+  
         return {
             month: month,
             year: year,
-            dates: dates
+            dates: dates,
+            weekNumbers: weekNumbers
         };
+    }
+
+    getWeekNumber(date) {
+        let checkDate = new Date(date.getTime());
+		checkDate.setDate(checkDate.getDate() + 4 - ( checkDate.getDay() || 7 ));
+		let time = checkDate.getTime();
+		checkDate.setMonth( 0 );
+		checkDate.setDate( 1 );
+		return Math.floor( Math.round((time - checkDate.getTime()) / 86400000 ) / 7 ) + 1;
     }
 
     isSelectable(day, month, year, otherMonth) {
@@ -1649,13 +1667,26 @@ export class Calendar extends Component {
     }
 
     renderDayNames(weekDays) {
-        return weekDays.map(weekDay =>
+        const dayNames = weekDays.map(weekDay =>
             (
                 <th key={weekDay} scope="col">
                     <span>{weekDay}</span>
                 </th>
             )
         );
+
+        if (this.props.showWeek) {
+            const weekHeader = (
+                <th scope="col" key={'wn'} className="p-datepicker-weekheader p-disabled">
+                    <span>{this.props.locale['weekHeader']}</span>
+                </th>
+            );
+
+            return [weekHeader, ...dayNames];
+        }
+        else {
+            return dayNames;
+        }
     }
 
     renderDateCellContent(date, className) {
@@ -1668,8 +1699,8 @@ export class Calendar extends Component {
         );
     }
 
-    renderWeek(weekDates) {
-        return weekDates.map((date) => {
+    renderWeek(weekDates, weekNumber) {
+        const week = weekDates.map((date) => {
             const selected = this.isSelected(date);
             const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today});
             const dateClassName = classNames({'p-highlight': selected, 'p-disabled': !date.selectable});
@@ -1681,13 +1712,28 @@ export class Calendar extends Component {
                 </td>
             );
         });
-    } 
+
+        if (this.props.showWeek) {
+            const weekNumberCell = (               
+                <td key={'wn' + weekNumber} className="p-datepicker-weeknumber">
+                    <span className="p-disabled">
+                        {weekNumber}
+                    </span>
+                </td>
+            );
+
+            return [weekNumberCell, ...week];
+        }
+        else {
+            return week;
+        }
+    }
 
     renderDates(monthMetaData) {
         return monthMetaData.dates.map((weekDates, index) => {
             return (
                 <tr key={index}>
-                    {this.renderWeek(weekDates)}
+                    {this.renderWeek(weekDates, monthMetaData.weekNumbers[index])}
                 </tr>
             );
         });
