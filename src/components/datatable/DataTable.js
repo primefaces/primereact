@@ -1001,9 +1001,9 @@ export class DataTable extends Component {
         }
     }
 
-    filterLocal(value) {
+    filterLocal(value, localFilters) {
         let filteredValue = [];
-        let filters = this.getFilters();
+        let filters = localFilters || this.getFilters();
         let columns = React.Children.toArray(this.props.children);
 
         for(let i = 0; i < value.length; i++) {
