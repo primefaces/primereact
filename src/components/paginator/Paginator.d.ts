@@ -13,6 +13,7 @@ interface PaginatorProps {
     first?: number;
     pageLinkSize?: number;
     rowsPerPageOptions?: any[];
+    alwaysShow?: boolean;
     style?: object;
     className?: string;
     template?: string;
