@@ -32,7 +32,7 @@ interface ColumnProps {
     rowReorderIcon?: string;
     editorValidatorEvent?: string;
     excludeGlobalFilter?: boolean;
-    sortFunction?(): void;
+    sortFunction?(e: {field: string, order: number}): void;
     filterFunction?(value: any, filter: any): void;
     editor?(props: any): JSX.Element | undefined;
     editorValidator?(props: any): boolean;
