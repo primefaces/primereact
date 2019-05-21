@@ -13,6 +13,8 @@ export class Panel extends Component {
         style: null,
         className: null,
         collapsed: null,
+        expandIcon: 'pi pi-plus',
+        collapseIcon: 'pi pi-minus',
         onExpand: null,
         onCollapse: null,
         onToggle: null
@@ -25,6 +27,8 @@ export class Panel extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         collapsed: PropTypes.bool,
+        expandIcon: PropTypes.string,
+        collapseIcon: PropTypes.string,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func
@@ -90,11 +94,12 @@ export class Panel extends Component {
         if (this.props.toggleable) {
             const id = this.id + '_label';
             const ariaControls = this.id + '_content';
+            const toggleIcon = collapsed ? this.props.expandIcon : this.props.collapseIcon;
 
             return (
                 <a href={'#' + ariaControls} className="p-panel-titlebar-icon p-panel-titlebar-toggler" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
-                   <span className={classNames('pi', {'pi-plus': collapsed, 'pi-minus': !collapsed})}></span>
+                   <span className={toggleIcon}></span>
                 </a>
             );
         }
