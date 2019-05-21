@@ -7,6 +7,8 @@ interface PanelProps {
     style?: object;
     className?: string;
     collapsed?: boolean;
+    expandIcon?: string,
+    collapseIcon?: string,
     onExpand?(event: Event): void;
     onCollapse?(event: Event): void;
     onToggle?(e: {event: Event, value: boolean}): void;
