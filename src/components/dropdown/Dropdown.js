@@ -277,6 +277,11 @@ export class Dropdown extends Component {
         }
 
         let option = this.props.options[i];
+
+        if (option.disabled) {
+            return this.findNextVisibleItem(i);
+        }
+
         if (this.hasFilter()) {
             if (this.filter(option))
                 return option;
@@ -295,6 +300,11 @@ export class Dropdown extends Component {
         }
 
         let option = this.props.options[i];
+        
+        if (option.disabled) {
+            return this.findPrevVisibleItem(i);
+        }
+
         if (this.hasFilter()) {
             if (this.filter(option))
                 return option;
@@ -331,8 +341,13 @@ export class Dropdown extends Component {
     }
     
     onOptionClick(event) {
-        this.selectItem(event);
-        this.focusInput.focus();
+        const option = event.option;
+
+        if (!option.disabled) {
+            this.selectItem(event);
+            this.focusInput.focus();
+        }
+
         setTimeout(() => {
             this.hide();
         }, 100);
@@ -556,7 +571,7 @@ export class Dropdown extends Component {
             return items.map((option) => {
                 let optionLabel = this.getOptionLabel(option);
                 return (
-                    <DropdownItem key={this.getOptionKey(option)} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option} onClick={this.onOptionClick} />
+                    <DropdownItem key={this.getOptionKey(option)} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option} disabled={option.disabled} onClick={this.onOptionClick} />
                 );
             });   
         }
