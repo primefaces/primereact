@@ -1216,8 +1216,15 @@ export class DataTable extends Component {
 
     resetColumnOrder() {
         let columns = React.Children.toArray(this.props.children);
+        let columnOrder = [];
 
-        this.setState({columnOrder: columns});
+        for(let column of columns) {
+            columnOrder.push(column.props.columnKey||column.props.field);
+        }
+        
+        this.setState({
+            columnOrder
+        });
     }
     
     renderLoader() {
