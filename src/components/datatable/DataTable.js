@@ -1213,6 +1213,12 @@ export class DataTable extends Component {
     getTotalRecords(data) {
         return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
     }
+
+    resetColumnOrder() {
+        let columns = React.Children.toArray(this.props.children);
+
+        this.setState({columnOrder: columns});
+    }
     
     renderLoader() {
         let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
