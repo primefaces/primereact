@@ -27,7 +27,8 @@ export class Dialog extends Component {
         appendTo: null,
         baseZIndex: 0,
         maximizable: false,
-        blockScroll: true
+        blockScroll: true,
+        iconsTemplate: null
     }
 
     static propTypes = {
@@ -49,7 +50,8 @@ export class Dialog extends Component {
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
-        blockScroll: PropTypes.bool
+        blockScroll: PropTypes.bool,
+        iconsTemplate: PropTypes.func
     };
     
     constructor(props) {
@@ -257,15 +259,26 @@ export class Dialog extends Component {
         }
     }
 
+    renderIconsTemplate() {
+        if (this.props.iconsTemplate) {
+            return this.props.iconsTemplate(this);
+        }
+        else {
+            return null;
+        }
+    }
+
     renderHeader() {
         if (this.props.showHeader) {
-            let closeIcon = this.renderCloseIcon();
-            let maximizeIcon = this.renderMaximizeIcon();
+            const closeIcon = this.renderCloseIcon();
+            const maximizeIcon = this.renderMaximizeIcon();
+            const iconsTemplate = this.renderIconsTemplate();
 
             return (
                 <div ref={el => this.headerElement = el} className="p-dialog-titlebar">
                     <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
                     <div className="p-dialog-titlebar-icons">
+                        {iconsTemplate}
                         {maximizeIcon}
                         {closeIcon}
                     </div>

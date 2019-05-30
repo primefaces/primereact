@@ -20,6 +20,7 @@ interface DialogProps {
     blockScroll?: boolean;
     onHide(): void;
     onShow?(): void;
+    iconsTemplate?(): JSX.Element | undefined;
 }
 
 export class Dialog extends React.Component<DialogProps,any> {}
