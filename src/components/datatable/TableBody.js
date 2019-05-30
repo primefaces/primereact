@@ -244,24 +244,43 @@ export class TableBody extends Component {
     }
 
     onRowToggle(event) {
-        let expandedRowIndex = this.findExpandedRowIndex(event.data);
-        let expandedRows = this.props.expandedRows ? [...this.props.expandedRows] : [];
+        let expandedRows;
 
-        if(expandedRowIndex !== -1) {
-            expandedRows = expandedRows.filter((val,i) => i !== expandedRowIndex);
+        if (this.props.dataKey) {
+            let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, this.props.dataKey));
+            expandedRows = this.props.expandedRows ? {...this.props.expandedRows} : {};
 
-            if(this.props.onRowCollapse) {
-                this.props.onRowCollapse({originalEvent: event, data: event.data});
+            if (expandedRows[dataKeyValue] != null) {
+                delete expandedRows[dataKeyValue];
+                if (this.props.onRowCollapse) {
+                    this.props.onRowCollapse({originalEvent: event, data: event.data});
+                }
+            }
+            else {    
+                expandedRows[dataKeyValue] = true;
+                if (this.props.onRowExpand) {
+                    this.props.onRowExpand({originalEvent: event, data: event.data});
+                }
             }
         }
         else {
-            expandedRows.push(event.data);
-           
-            if(this.props.onRowExpand) {
-                this.props.onRowExpand({originalEvent: event, data: event.data});
+            let expandedRowIndex = this.findExpandedRowIndex(event.data);
+            expandedRows = this.props.expandedRows ? [...this.props.expandedRows] : [];
+
+            if (expandedRowIndex !== -1) {
+                expandedRows = expandedRows.filter((val,i) => i !== expandedRowIndex);
+                if (this.props.onRowCollapse) {
+                    this.props.onRowCollapse({originalEvent: event, data: event.data});
+                }
+            }
+            else {
+                expandedRows.push(event.data);
+                if (this.props.onRowExpand) {
+                    this.props.onRowExpand({originalEvent: event, data: event.data});
+                }
             }
         }
-
+        
         this.props.onRowToggle({
             data: expandedRows
         });
@@ -281,7 +300,14 @@ export class TableBody extends Component {
     }
 
     isRowExpanded(row) {
-        return this.findExpandedRowIndex(row) !== -1;
+        if (this.props.dataKey) {
+            let dataKeyValue = String(ObjectUtils.resolveFieldData(row, this.props.dataKey));
+
+            return this.props.expandedRows && this.props.expandedRows[dataKeyValue] != null;
+        }
+        else {
+            return this.findExpandedRowIndex(row) !== -1
+        }
     }
 
     isSelectionEnabled() {

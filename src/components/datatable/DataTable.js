@@ -136,7 +136,7 @@ export class DataTable extends Component {
         frozenHeaderColumnGroup: PropTypes.any,
         frozenFooterColumnGroup: PropTypes.any,
         rowExpansionTemplate: PropTypes.func,
-        expandedRows: PropTypes.array,
+        expandedRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         onRowToggle: PropTypes.func,
         responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,

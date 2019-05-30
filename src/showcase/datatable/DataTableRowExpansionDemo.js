@@ -11,7 +11,8 @@ export class DataTableRowExpansionDemo extends Component {
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            expandedRows: null
         };
         this.carservice = new CarService();
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
@@ -25,7 +26,7 @@ export class DataTableRowExpansionDemo extends Component {
         const src = "showcase/resources/demo/images/car/" + data.brand + ".png";
 
         return  (
-            <div className="p-grid p-fluid" style={{padding: '1em'}}>
+            <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
                 <div className="p-col-12 p-md-3" style={{textAlign:'center'}}>
                     <img src={src} alt={data.brand}/>
                 </div>
@@ -62,7 +63,7 @@ export class DataTableRowExpansionDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}     
-                            rowExpansionTemplate={this.rowExpansionTemplate}>
+                            rowExpansionTemplate={this.rowExpansionTemplate} dataKey="vin">
                         <Column expander={true} style={{width: '3em'}} />
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
@@ -100,7 +101,8 @@ export class DataTableRowExpansionDemo extends Component {
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            expandedRows: null
         };
         this.carservice = new CarService();
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
@@ -114,7 +116,7 @@ export class DataTableRowExpansionDemo extends Component {
         const src = "showcase/resources/demo/images/car/" + data.brand + ".png";
 
         return  (
-            <div className="p-grid p-fluid" style={{padding: '1em'}}>
+            <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
                 <div className="p-col-12 p-md-3" style={{textAlign:'center'}}>
                     <img src={src} alt={data.brand}/>
                 </div>
@@ -149,7 +151,7 @@ export class DataTableRowExpansionDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}     
-                            rowExpansionTemplate={this.rowExpansionTemplate}>
+                            rowExpansionTemplate={this.rowExpansionTemplate} dataKey="vin">
                         <Column expander={true} style={{width: '2em'}} />
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
