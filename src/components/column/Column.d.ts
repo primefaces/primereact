@@ -31,6 +31,8 @@ interface ColumnProps {
     rowReorder?: boolean;
     rowReorderIcon?: string;
     editorValidatorEvent?: string;
+    onEditorSubmit?(props: any): void;
+    onEditorCancel?(props: any): void;
     excludeGlobalFilter?: boolean;
     sortFunction?(e: {field: string, order: number}): void;
     filterFunction?(value: any, filter: any): void;

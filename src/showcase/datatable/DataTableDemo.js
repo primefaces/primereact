@@ -397,6 +397,18 @@ export class DataTableDemo extends Component {
                             <td>Event to trigger the validation, possible values are "click" and "blur".</td>
                         </tr>
                         <tr>
+                            <td>onEditorSubmit</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to execute when editor is submitted.</td>
+                        </tr>
+                        <tr>
+                            <td>onEditorCancel</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to execute when editor is cancelled.</td>
+                        </tr>
+                        <tr>
                             <td>rowReorder</td>
                             <td>boolean</td>
                             <td>false</td>
@@ -1110,7 +1122,8 @@ saleDateEditor(props) {
 </CodeHighlight>
 
             <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
-            to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value.</p>
+            to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value. Optionally <i>onEditorSubmit</i> and <i>onEditorCancel</i>
+            events are available at the column component to provide callbacks whenever an editor is submitted or cancelled.</p>
 
 <CodeHighlight className="language-jsx">
 {`
