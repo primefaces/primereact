@@ -601,23 +601,13 @@ export class Dropdown extends Component {
         return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
     }
 
-    unbindWindowLoadListener() {
-        if (this.windowLoadListener) {
-            window.removeEventListener('load', this.windowLoadListener);
-        }
-    }
-
     checkValidity() {
         return this.nativeSelect.checkValidity;
     }
     
     componentDidMount() {
         if (this.props.autoFocus && this.focusInput) {
-            this.windowLoadListener = () => {
-                this.focusInput.focus();
-            }
-            
-            window.addEventListener('load', this.windowLoadListener);
+            this.focusInput.focus();
         }
 
         if (this.props.tooltip) {
@@ -627,7 +617,6 @@ export class Dropdown extends Component {
     
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        this.unbindWindowLoadListener();
 
         if (this.tooltip) {
             this.tooltip.destroy();
