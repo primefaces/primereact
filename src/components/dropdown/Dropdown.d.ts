@@ -26,6 +26,7 @@ interface DropdownProps {
     dataKey?: string;
     inputId?: string;
     showClear?: boolean;
+    maxLength?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabel?: string,

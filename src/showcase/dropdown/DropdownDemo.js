@@ -84,7 +84,7 @@ export class DropdownDemo extends Component {
 
                     <h3>Editable</h3>
                     <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
-                              editable={true} placeholder="Select a Brand"/>
+                              editable={true} placeholder="Select a Brand" />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
@@ -353,6 +353,12 @@ carTemplate(option) {
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When enabled, a clear icon is displayed to clear the value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>maxLength</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Maximum number of characters to be typed on an editable input.</td>
                                     </tr>
                                     <tr>
                                         <td>tooltip</td>

@@ -32,6 +32,7 @@ export class Dropdown extends Component {
         dataKey: null,
         inputId: null,
         showClear: false,
+        maxLength: null,
         tooltip: null,
         tooltipOptions: null,
         ariaLabel: null,
@@ -65,6 +66,7 @@ export class Dropdown extends Component {
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         showClear: PropTypes.bool,
+        maxLength: PropTypes.number,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabel: PropTypes.string,
@@ -528,7 +530,7 @@ export class Dropdown extends Component {
         if(this.props.editable) {
             let value = label||this.props.value||'';
             
-            return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled} placeholder={this.props.placeholder}
+            return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled} placeholder={this.props.placeholder} maxLength={this.props.maxLength}
                         onClick={this.onEditableInputClick} onInput={this.onEditableInputChange} onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}/>;
         }
         else {
