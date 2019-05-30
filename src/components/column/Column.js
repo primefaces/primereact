@@ -36,6 +36,8 @@ export class Column extends Component {
         editor: null,
         editorValidator: null,
         editorValidatorEvent: 'click',
+        onEditorSubmit: null,
+        onEditorCancel: null,
         excludeGlobalFilter: false,
         rowReorder: false,
         rowReorderIcon: 'pi pi-bars'
@@ -73,6 +75,8 @@ export class Column extends Component {
         rowSpan: PropTypes.number,
         editor: PropTypes.func,
         editorValidator: PropTypes.func,
+        onEditorSubmit: PropTypes.func,
+        onEditorCancel: PropTypes.func,
         editorValidatorEvent: PropTypes.string,
         excludeGlobalFilter: PropTypes.bool,
         rowReorder: PropTypes.bool,

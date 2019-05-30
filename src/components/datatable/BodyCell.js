@@ -29,8 +29,12 @@ export class BodyCell extends Component {
     }
     
     onKeyDown(event) {
-        if (event.which === 13 || event.which === 9) {
-            this.switchCellToViewMode();
+        if (event.which === 13 || event.which === 9) { // tab || enter
+            this.switchCellToViewMode(true);
+        }
+        if (event.which === 27) // escape
+        {
+            this.switchCellToViewMode(false);
         }
     }
     
@@ -50,7 +54,7 @@ export class BodyCell extends Component {
 
     onBlur() {
         if (this.state.editing && this.props.editorValidatorEvent === 'blur') {
-            this.switchCellToViewMode();
+            this.switchCellToViewMode(true);
         }
     }
     
@@ -62,7 +66,7 @@ export class BodyCell extends Component {
         if (!this.documentEditListener) {
             this.documentEditListener = (event) => {
                 if (!this.editingCellClick) {
-                    this.switchCellToViewMode();
+                    this.switchCellToViewMode(true);
                 }
 
                 this.editingCellClick = false;
@@ -81,15 +85,24 @@ export class BodyCell extends Component {
 
         this.unbindDocumentEditListener();
     }
-    
-    switchCellToViewMode() {
-        if (this.props.editorValidator) {
+
+    switchCellToViewMode(submit) {
+        if (this.props.editorValidator && submit) {
             let valid = this.props.editorValidator(this.props);
             if (valid) {
+                if (this.props.onEditorSubmit) {
+                    this.props.onEditorSubmit(this.props)
+                }
                 this.closeCell();
-            }
+            } // as per previous version if not valid and another editor is open, keep invalid data editor open.
         }
         else {
+            if (submit && this.props.onEditorSubmit) {
+                this.props.onEditorSubmit(this.props)
+            }
+            else if (this.props.onEditorCancel) {
+                this.props.onEditorCancel(this.props);
+            }
             this.closeCell();
         }
     }
@@ -118,7 +131,7 @@ export class BodyCell extends Component {
                         this.keyHelper.removeAttribute('tabindex');
                     }
                 }, 50);
-            }    
+            }
         }
     }
 
