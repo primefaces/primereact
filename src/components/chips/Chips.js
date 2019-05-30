@@ -180,8 +180,8 @@ export class Chips extends Component {
     onBlur(event) {
         DomHandler.removeClass(this.listElement, 'p-focus');
 
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
+        if (this.props.onBlur) {
+            this.props.onBlur(event);
         }
     }
 
