@@ -1386,7 +1386,7 @@ export class Calendar extends Component {
         let tokens = value.split(':');
         let validTokenLength = this.props.showSeconds ? 3 : 2;
         
-        if(tokens.length !== validTokenLength || tokens[0].length !== 2 || tokens[1].length !== 2 || tokens[2].length !== 2) {
+        if(tokens.length !== validTokenLength || tokens[0].length !== 2 || tokens[1].length !== 2 || (this.props.showSeconds && tokens[2].length !== 2)) {
             throw new Error('Invalid time');
         }
         
