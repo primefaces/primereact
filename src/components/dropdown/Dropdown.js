@@ -542,7 +542,7 @@ export class Dropdown extends Component {
     }
 
     renderClearIcon() {
-        if(this.props.value && this.props.showClear && !this.props.disabled) {
+        if(this.props.value != null && this.props.showClear && !this.props.disabled) {
             return (
                 <i className="p-dropdown-clear-icon pi pi-times" onClick={this.clear}></i>
             );
