@@ -23,6 +23,8 @@ export class Chips extends Component {
         onAdd: null,
         onRemove: null,
         onChange: null,
+        onFocus: null,
+        onBlur: null
     }
 
     static propTypes = {
@@ -39,7 +41,9 @@ export class Chips extends Component {
         itemTemplate: PropTypes.func,
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
     }
 
     constructor(props) {
@@ -166,12 +170,19 @@ export class Chips extends Component {
         }
     }
 
-    onFocus() {
+    onFocus(event) {
         DomHandler.addClass(this.listElement, 'p-focus');
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
-    onBlur() {
+    onBlur(event) {
         DomHandler.removeClass(this.listElement, 'p-focus');
+
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
     isMaxedOut() {

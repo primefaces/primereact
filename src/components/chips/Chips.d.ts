@@ -16,6 +16,8 @@ interface ChipsProps {
     onAdd?(e: {originalEvent: Event, value: any}): void;
     onRemove?(e: {originalEvent: Event, value: any}): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
+    onFocus?(event: Event): void;
+    onBlur?(event: Event): void;
 }
 
 export class Chips extends React.Component<ChipsProps,any> {}

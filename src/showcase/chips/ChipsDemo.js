@@ -33,7 +33,7 @@ export class ChipsDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation p-fluid">
                     <h3>Basic</h3>
                     <Chips value={this.state.values1} onChange={(e) => this.setState({values1: e.value})}></Chips>
 
@@ -209,6 +209,16 @@ customChip(item) {
                                 value: Removed item value</td>
                             <td>Callback to invoke when a chip is removed.</td>
                         </tr>
+                        <tr>
+                            <td>onFocus</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke when the component gets focus.</td>
+                        </tr> 
+                        <tr>
+                            <td>onBlur</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke when the component loses focus.</td>
+                        </tr>  
                     </tbody>
                 </table>
             </div>
@@ -290,7 +300,7 @@ export class ChipsDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation p-fluid">
                     <h3>Basic</h3>
                     <Chips value={this.state.values1} onChange={(e) => this.setState({values1: e.value})}></Chips>
 
