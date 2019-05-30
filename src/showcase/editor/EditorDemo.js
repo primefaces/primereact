@@ -154,6 +154,12 @@ const header = (
                                         <td>Whether to instantiate the editor to read-only mode.</td>
                                     </tr>
                                     <tr>
+                                        <td>modules</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Modules configuration, see <a href="http://quilljs.com/docs/modules/">here</a> for available options.</td>
+                                    </tr>
+                                    <tr>
                                         <td>formats</td>
                                         <td>string[]</td>
                                         <td>null</td>

@@ -14,6 +14,7 @@ export class Editor extends Component {
         className: null,
         placeholder: null,
         readOnly: false,
+        modules: null,
         formats: null,
         headerTemplate: null,
         onTextChange: null,
@@ -27,6 +28,7 @@ export class Editor extends Component {
         className: PropTypes.string,
         placeholder: PropTypes.string,
         readOnly: PropTypes.bool,
+        modules: PropTypes.object,
         formats: PropTypes.array,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
@@ -36,7 +38,8 @@ export class Editor extends Component {
     componentDidMount() {
         this.quill = new Quill(this.editorElement, {
             modules: {
-                toolbar: this.toolbarElement
+                toolbar: this.toolbarElement,
+                ...this.props.modules
             },
             placeholder: this.props.placeholder,
             readOnly: this.props.readOnly,
