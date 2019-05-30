@@ -116,6 +116,7 @@ export class BodyCell extends Component {
         
     componentDidUpdate() {
         if (this.container && this.props.editor) {
+            clearTimeout(this.tabindexTimeout);
             if (this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
                 if (focusable) {
@@ -126,9 +127,9 @@ export class BodyCell extends Component {
                 this.keyHelper.tabIndex = -1;
             }
             else {
-                setTimeout(() => {
+                this.tabindexTimeout = setTimeout(() => {
                     if (this.keyHelper) {
-                        this.keyHelper.removeAttribute('tabindex');
+                        this.keyHelper.setAttribute('tabindex', 0);
                     }
                 }, 50);
             }
