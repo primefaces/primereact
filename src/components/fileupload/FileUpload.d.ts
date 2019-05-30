@@ -26,6 +26,7 @@ interface FileUploadProps {
     onClear?(): void;
     onSelect?(e: {originalEvent: Event, files: any}): void;
     onProgress?(e: {originalEvent: Event, progress: any}): void;
+    onValidationFail?(file: File): void;
 }
 
 export class FileUpload extends React.Component<FileUploadProps,any> {}

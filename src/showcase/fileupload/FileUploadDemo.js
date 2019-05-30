@@ -328,6 +328,11 @@ import {FileUpload} from 'primereact/fileupload';
                                 event.progress: Calculated progress value.</td>
                             <td>Callback to invoke when files are selected.</td>
                         </tr>
+                        <tr>
+                            <td>onValidationFail</td>
+                            <td>file: Invalid file.</td>
+                            <td>Callback to invoke when a validation file fails.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -33,7 +33,8 @@ export class FileUpload extends Component {
         onError: null,
         onClear: null,
         onSelect: null,
-        onProgress: null
+        onProgress: null,
+        onValidationFail: null
     }
 
     static propTypes = {
@@ -61,7 +62,8 @@ export class FileUpload extends Component {
         onError: PropTypes.func,
         onClear: PropTypes.func,
         onSelect: PropTypes.func,
-        onProgress: PropTypes.func
+        onProgress: PropTypes.func,
+        onValidationFail: PropTypes.func
     };
     
     constructor(props) {
@@ -161,11 +163,19 @@ export class FileUpload extends Component {
 
     validate(file) {
         if (this.props.maxFileSize && file.size > this.props.maxFileSize) {
-            this.messagesUI.show({
-                    severity: 'error',
-                    summary: this.props.invalidFileSizeMessageSummary.replace('{0}', file.name),
-                    detail: this.props.invalidFileSizeMessageDetail.replace('{0}', this.formatSize(this.props.maxFileSize))
-                });
+            const message = {
+                severity: 'error',
+                summary: this.props.invalidFileSizeMessageSummary.replace('{0}', file.name),
+                detail: this.props.invalidFileSizeMessageDetail.replace('{0}', this.formatSize(this.props.maxFileSize))
+            };
+
+            if (this.props.mode === 'advanced') {
+                this.messagesUI.show(message);
+            }
+            
+            if (this.props.onValidationFail) {
+                this.props.onValidationFail(file);
+            }
 
             return false;
         }
