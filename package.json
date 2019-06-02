@@ -10,7 +10,7 @@
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "babel-polyfill": "6.26.0",
-    "axios": "^0.15.3",
+    "axios": "^0.19.0",
     "chart.js": "2.7.3",
     "classnames": "^2.2.6",
     "del": "^2.2.0",
