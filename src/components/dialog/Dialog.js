@@ -145,7 +145,7 @@ export class Dialog extends Component {
 
                 this.mask.addEventListener('click', this.maskClickListener);
             }
-            document.body.appendChild(this.mask);
+            this.container.parentNode.appendChild(this.mask);
 
             if (this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'p-overflow-hidden');
@@ -157,7 +157,7 @@ export class Dialog extends Component {
         if (this.mask) {
             this.unbindMaskClickListener();
 
-            document.body.removeChild(this.mask);
+            this.container.parentNode.removeChild(this.mask);
             if (this.props.blockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
