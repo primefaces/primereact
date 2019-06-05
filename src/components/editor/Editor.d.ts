@@ -11,7 +11,8 @@ interface EditorProps {
     formats?: any[];
     headerTemplate?: JSX.Element | undefined,
     onTextChange?(e: { htmlValue: string|null, textValue: string, delta: any, source: string }): void;
-    onSelectionChange?(e: { range: any, oldRange: any, source: string }): void;
+	onSelectionChange?(e: { range: any, oldRange: any, source: string }): void;
+	theme?: string;
 }
 
 export class Editor extends React.Component<EditorProps, any> {

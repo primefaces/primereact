@@ -18,7 +18,8 @@ export class Editor extends Component {
         formats: null,
         headerTemplate: null,
         onTextChange: null,
-        onSelectionChange: null
+		onSelectionChange: null,
+		theme: 'snow'
     };
 
     static propTypes = {
@@ -32,7 +33,8 @@ export class Editor extends Component {
         formats: PropTypes.array,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
-        onSelectionChange: PropTypes.func
+		onSelectionChange: PropTypes.func,
+		theme: PropTypes.oneOf(['snow', 'bubble'])
     };
 
     componentDidMount() {
@@ -43,7 +45,7 @@ export class Editor extends Component {
             },
             placeholder: this.props.placeholder,
             readOnly: this.props.readOnly,
-            theme: 'snow',
+            theme: this.props.theme,
             formats: this.props.formats
         });
 
@@ -91,7 +93,7 @@ export class Editor extends Component {
     render() {
         let containerClass = classNames('p-component p-editor-container', this.props.className);
         let toolbarHeader = null;
-        
+
         if (this.props.headerTemplate) {
             toolbarHeader = (
                 <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
