@@ -8,6 +8,9 @@ interface SpinnerProps {
     step?: number;
     min?: number;
     max?: number;
+    formatInput: boolean;
+    decimalSeparator: string;
+    thousandSeparator: string;
     disabled?: boolean;
     required?: boolean;
     pattern?: string;
@@ -23,6 +26,7 @@ interface SpinnerProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     onChange?(e: {value: number}): void;
+    onBlur?(e: Event): void;
 }
 
 export class Spinner extends React.Component<SpinnerProps,any> {}
