@@ -9,6 +9,9 @@ interface SpinnerProps {
     min?: number;
     max?: number;
     disabled?: boolean;
+    required?: boolean;
+    pattern?: string;
+    placeholder?: string;
     readonly?: boolean;
     maxlength?: number;
     size?: number;

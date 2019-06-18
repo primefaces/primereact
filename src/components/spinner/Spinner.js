@@ -16,6 +16,9 @@ export class Spinner extends Component {
         min: null,
         max: null,
         disabled: false,
+        required: false,
+        pattern: null,
+        placeholder: null,
         readonly: false,
         maxlength: null,
         size: null,
@@ -38,6 +41,9 @@ export class Spinner extends Component {
         min: PropTypes.number,
         max: PropTypes.number,
         disabled: PropTypes.bool,
+        required: PropTypes.bool,
+        pattern: PropTypes.string,
+        placeholder: PropTypes.string,
         readonly: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
@@ -321,11 +327,14 @@ export class Spinner extends Component {
 
     renderInputElement() {
         const className = classNames('p-spinner-input', this.props.inputClassName);
-
+                
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} className={className} value={this.props.value == null ? '' : this.props.value}
-                type="text" size={this.props.size} maxLength={this.props.maxlength} disabled={this.props.disabled} readOnly={this.props.readonly} name={this.props.name}
-                onKeyDown={this.onInputKeyDown} onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} />
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} 
+              className={className} value={this.props.value == null ? '' : this.props.value} type="text" size={this.props.size} 
+              maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
+              placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} 
+              onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} 
+            />
         );
     }
 
