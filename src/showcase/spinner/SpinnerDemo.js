@@ -206,6 +206,24 @@ import {Spinner} from 'primereact/spinner';
                             <td>null</td>
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                         </tr>
+                        <tr>
+                            <td>decimalSeparator</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Separator character for decimals, defaults to settings at user locale.</td>
+                        </tr>
+                        <tr>
+                            <td>thousandSeparator</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Separator character for thousands, defaults to settings at user locale.</td>
+                        </tr>
+                        <tr>
+                            <td>formatInput</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, formats the user input at blur event.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
