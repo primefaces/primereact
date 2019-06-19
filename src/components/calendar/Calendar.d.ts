@@ -53,7 +53,7 @@ interface CalendarProps {
     stepSecond?: number;
     shortYearCutoff?: string;
     hideOnDateTimeSelect?: boolean;
-    showWeek: PropTypes.bool,
+    showWeek?: boolean,
     locale?: LocaleSettings;
     dateFormat?: string;
     panelStyle?: object;
