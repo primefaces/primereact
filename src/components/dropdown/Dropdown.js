@@ -519,12 +519,13 @@ export class Dropdown extends Component {
     }
 
     renderHiddenSelect(selectedOption) {
-        let value = selectedOption ? selectedOption.value : null;
-        let option = selectedOption ? <option value={value}>{this.getOptionLabel(selectedOption)}</option> : null;
+        let placeHolderOption = <option value="">{this.props.placeholder}</option>;
+        let option = selectedOption ? <option value={selectedOption.value}>{this.getOptionLabel(selectedOption)}</option> : null;
 
         return (	
             <div className="p-hidden-accessible p-dropdown-hidden-select">	
-                <select defaultValue={value} required={this.props.required} tabIndex="-1" aria-hidden="true">
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
+                    {placeHolderOption}
                     {option}	
                 </select>	
             </div>	
@@ -628,6 +629,8 @@ export class Dropdown extends Component {
         if (this.props.tooltip) {
             this.renderTooltip();
         }
+
+        this.nativeSelect.selectedIndex = 1;
     }
     
     componentWillUnmount() {
@@ -662,6 +665,8 @@ export class Dropdown extends Component {
             else
                 this.renderTooltip();
         }
+
+        this.nativeSelect.selectedIndex = 1;
     }
 
     renderTooltip() {
