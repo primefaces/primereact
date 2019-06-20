@@ -34,7 +34,7 @@ export class Messages extends Component {
 
     show(value) {
         if (value) {
-            let newMessages;
+            let newMessages = [];
 
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
