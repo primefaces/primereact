@@ -59,6 +59,15 @@ export class Messages extends Component {
         })
     }
 
+    replace(messages) {
+        this.setState(
+          {
+            messages: [],
+          },
+          () => this.show(messages)
+        );
+    }
+
     onClose(message) {
         let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
         this.setState({
