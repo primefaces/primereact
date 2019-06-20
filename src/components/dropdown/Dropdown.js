@@ -517,10 +517,23 @@ export class Dropdown extends Component {
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
+
+    renderHiddenSelect(selectedOption) {
+        let value = selectedOption ? selectedOption.value : null;
+        let option = selectedOption ? <option value={value}>{this.getOptionLabel(selectedOption)}</option> : null;
+
+        return (	
+            <div className="p-hidden-accessible p-dropdown-hidden-select">	
+                <select defaultValue={value} required={this.props.required} tabIndex="-1" aria-hidden="true">
+                    {option}	
+                </select>	
+            </div>	
+        );	
+    }
     
     renderKeyboardHelper() {
         return <div className="p-hidden-accessible">
-                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
+                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox" readOnly={true}
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                         disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}  />
                 </div>;
@@ -665,6 +678,7 @@ export class Dropdown extends Component {
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
 
+        let hiddenSelect = this.renderHiddenSelect(selectedOption);
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
@@ -681,6 +695,7 @@ export class Dropdown extends Component {
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                  onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                  {keyboardHelper}
+                 {hiddenSelect}
                  {labelElement}
                  {clearIcon}
                  {dropdownIcon}
