@@ -59,13 +59,10 @@ export class Messages extends Component {
         })
     }
 
-    replace(messages) {
-        this.setState(
-          {
+    replace(value) {
+        this.setState({
             messages: [],
-          },
-          () => this.show(messages)
-        );
+        }, () => this.show(value));
     }
 
     onClose(message) {
