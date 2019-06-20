@@ -61,11 +61,18 @@ export class Chips extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
-            if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
-            else
-                this.renderTooltip();
+        let isValueSame = this.props.value && prevProps.value.length === this.props.value.length;
+        if (this.props.tooltip) {
+            if (prevProps.tooltip !== this.props.tooltip) {
+                if (this.tooltip)
+                    this.tooltip.updateContent(this.props.tooltip);
+                else
+                    this.renderTooltip();
+            }
+            else if (!isValueSame && this.tooltip) {
+                this.tooltip.deactivate();
+                this.tooltip.activate();
+            }
         }
     }
 
@@ -78,7 +85,8 @@ export class Chips extends Component {
 
     renderTooltip() {
         this.tooltip = new Tooltip({
-            target: this.element,
+            target: this.inputElement,
+            targetContainer: this.listElement,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
