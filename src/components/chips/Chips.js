@@ -199,10 +199,11 @@ export class Chips extends Component {
 
     renderItem(value, index) {
         const content = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
+        const icon = this.props.disabled ? null : <span className="p-chips-token-icon pi pi-fw pi-times" onClick={(event) => this.removeItem(event, index)}></span>;
 
         return (
             <li key={index} className="p-chips-token p-highlight">
-                <span className="p-chips-token-icon pi pi-fw pi-times" onClick={(event) => this.removeItem(event, index)}></span>
+                {icon}
                 <span className="p-chips-token-label">{content}</span>
             </li>
         );
