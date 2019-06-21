@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ChartJS from 'chart.js/dist/Chart.js';
+import * as ChartJS from 'chart.js';
 import classNames from 'classnames';
 
 export class Chart extends Component {
