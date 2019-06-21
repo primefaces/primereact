@@ -16,10 +16,10 @@ export class Editor extends Component {
         readOnly: false,
         modules: null,
         formats: null,
+        theme: 'snow',
         headerTemplate: null,
         onTextChange: null,
-		onSelectionChange: null,
-		theme: 'snow'
+		onSelectionChange: null
     };
 
     static propTypes = {
@@ -31,10 +31,10 @@ export class Editor extends Component {
         readOnly: PropTypes.bool,
         modules: PropTypes.object,
         formats: PropTypes.array,
+        theme: PropTypes.string,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
-		onSelectionChange: PropTypes.func,
-		theme: PropTypes.oneOf(['snow', 'bubble'])
+		onSelectionChange: PropTypes.func
     };
 
     componentDidMount() {
