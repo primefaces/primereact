@@ -2,6 +2,7 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputSwitchProps {
+    [key:string]: any;
     id?: string;
     offLabel?: string;
     onLabel?: string;

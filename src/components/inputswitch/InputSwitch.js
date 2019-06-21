@@ -129,10 +129,30 @@ export class InputSwitch extends Component {
             'p-inputswitch-focus': this.state.focused
         });
         
+        let otherProps = Object.assign({}, this.props);
+        delete otherProps.id;
+        delete otherProps.style;
+        delete otherProps.className;
+        delete otherProps.inputId;
+        delete otherProps.name;
+        delete otherProps.checked;
+        delete otherProps.disabled;
+        delete otherProps.tooltip;
+        delete otherProps.tooltipOptions;
+        delete otherProps.onChange;
+        delete otherProps.onFocus;
+        delete otherProps.onBlur;
+
+        let inputProps = {};
+        if (otherProps.hasOwnProperty('aria-label')) {
+          inputProps['aria-label'] = otherProps['aria-label'];
+          delete otherProps['aria-label'];
+        }
+
         return (
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} role="checkbox" aria-checked={this.props.checked}>
+            <div ref={el => this.container = el} {...otherProps} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} role="checkbox" aria-checked={this.props.checked}>
                 <div className="p-hidden-accessible">
-                    <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
+                    <input ref={el => this.input = el} {...inputProps} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
                         onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled} />
                 </div>
                 <span className="p-inputswitch-slider"></span>
