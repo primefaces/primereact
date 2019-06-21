@@ -4,6 +4,7 @@ export default class Tooltip  {
 
     constructor(props) {
         this.target = props.target;
+        this.targetContainer = props.targetContainer;
         this.content = props.content;
         this.options = props.options || {};
         this.options.event = this.options.event || 'hover';
@@ -204,7 +205,8 @@ export default class Tooltip  {
     }
 
     getHostOffset() {
-        let offset = this.target.getBoundingClientRect();
+        let target = this.targetContainer || this.target;
+        let offset = target.getBoundingClientRect();
         let targetLeft = offset.left + DomHandler.getWindowScrollLeft();
         let targetTop = offset.top + DomHandler.getWindowScrollTop();
     
@@ -213,26 +215,29 @@ export default class Tooltip  {
 
     alignRight() {
         this.preAlign('right');
+        let target = this.targetContainer || this.target;
         let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + DomHandler.getOuterWidth(this.target);
-        let top = hostOffset.top + (DomHandler.getOuterHeight(this.target) - DomHandler.getOuterHeight(this.container)) / 2;
+        let left = hostOffset.left + DomHandler.getOuterWidth(target);
+        let top = hostOffset.top + (DomHandler.getOuterHeight(target) - DomHandler.getOuterHeight(this.container)) / 2;
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
     }
 
     alignLeft() {
         this.preAlign('left');
+        let target = this.targetContainer || this.target;
         let hostOffset = this.getHostOffset();
         let left = hostOffset.left - DomHandler.getOuterWidth(this.container);
-        let top = hostOffset.top + (DomHandler.getOuterHeight(this.target) - DomHandler.getOuterHeight(this.container)) / 2;
+        let top = hostOffset.top + (DomHandler.getOuterHeight(target) - DomHandler.getOuterHeight(this.container)) / 2;
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
     }
 
     alignTop() {
         this.preAlign('top');
+        let target = this.targetContainer || this.target;
         let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + (DomHandler.getOuterWidth(this.target) - DomHandler.getOuterWidth(this.container)) / 2;
+        let left = hostOffset.left + (DomHandler.getOuterWidth(target) - DomHandler.getOuterWidth(this.container)) / 2;
         let top = hostOffset.top - DomHandler.getOuterHeight(this.container);
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
@@ -240,9 +245,10 @@ export default class Tooltip  {
 
     alignBottom() {
         this.preAlign('bottom');
+        let target = this.targetContainer || this.target;
         let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + (DomHandler.getOuterWidth(this.target) - DomHandler.getOuterWidth(this.container)) / 2;
-        let top = hostOffset.top + DomHandler.getOuterHeight(this.target);
+        let left = hostOffset.left + (DomHandler.getOuterWidth(target) - DomHandler.getOuterWidth(this.container)) / 2;
+        let top = hostOffset.top + DomHandler.getOuterHeight(target);
         this.container.style.left = left + 'px';
         this.container.style.top = top + 'px';
     }
@@ -286,5 +292,6 @@ export default class Tooltip  {
         this.unbindEvents();
         this.remove();
         this.target = null;
+        this.targetContainer = null;
     }
  }

@@ -450,7 +450,7 @@ export class Dropdown extends Component {
     }
 
     hide() {
-        if (this.panel.element && this.panel.element.offsetParent) {
+        if (this.panel && this.panel.element && this.panel.element.offsetParent) {
             DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
             DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
     
@@ -517,10 +517,24 @@ export class Dropdown extends Component {
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
+
+    renderHiddenSelect(selectedOption) {
+        let placeHolderOption = <option value="">{this.props.placeholder}</option>;
+        let option = selectedOption ? <option value={selectedOption.value}>{this.getOptionLabel(selectedOption)}</option> : null;
+
+        return (	
+            <div className="p-hidden-accessible p-dropdown-hidden-select">	
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
+                    {placeHolderOption}
+                    {option}	
+                </select>	
+            </div>	
+        );	
+    }
     
     renderKeyboardHelper() {
         return <div className="p-hidden-accessible">
-                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox"
+                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox" readOnly={true}
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                         disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}  />
                 </div>;
@@ -615,6 +629,8 @@ export class Dropdown extends Component {
         if (this.props.tooltip) {
             this.renderTooltip();
         }
+
+        this.nativeSelect.selectedIndex = 1;
     }
     
     componentWillUnmount() {
@@ -649,6 +665,8 @@ export class Dropdown extends Component {
             else
                 this.renderTooltip();
         }
+
+        this.nativeSelect.selectedIndex = 1;
     }
 
     renderTooltip() {
@@ -665,6 +683,7 @@ export class Dropdown extends Component {
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;
 
+        let hiddenSelect = this.renderHiddenSelect(selectedOption);
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(label);
         let dropdownIcon = this.renderDropdownIcon();
@@ -681,6 +700,7 @@ export class Dropdown extends Component {
             <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                  onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                  {keyboardHelper}
+                 {hiddenSelect}
                  {labelElement}
                  {clearIcon}
                  {dropdownIcon}

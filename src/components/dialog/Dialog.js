@@ -28,7 +28,8 @@ export class Dialog extends Component {
         baseZIndex: 0,
         maximizable: false,
         blockScroll: true,
-        iconsTemplate: null
+        iconsTemplate: null,
+        ariaCloseIconLabel: 'Close'
     }
 
     static propTypes = {
@@ -51,7 +52,8 @@ export class Dialog extends Component {
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,
-        iconsTemplate: PropTypes.func
+        iconsTemplate: PropTypes.func,
+        ariaCloseIconLabel: PropTypes.string
     };
     
     constructor(props) {
@@ -234,7 +236,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" onClick={this.onClose}>
+                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
                     <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
                 </button>
             );

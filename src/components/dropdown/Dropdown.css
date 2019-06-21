@@ -6,6 +6,21 @@
     min-width: 12.5em;
 }
 
+.p-dropdown .p-dropdown-hidden-select {
+    bottom: 0;
+    clip: auto;
+}
+
+.p-dropdown .p-dropdown-hidden-select select {
+    -webkit-transform: none;
+    transform: none;
+    height: 1px;
+    position: absolute;
+    top: 0;
+    clip: rect(0px, 0px, 0px, 0px);
+    pointer-events: none;
+}
+
 .p-dropdown .p-dropdown-clear-icon {
     position: absolute;
     right: 2em;

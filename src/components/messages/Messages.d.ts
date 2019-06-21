@@ -21,4 +21,5 @@ interface MessagesProps {
 export class Messages extends React.Component<MessagesProps, any> {
     public show(message: Message | Message[]): void;
     public clear(): void;
+    public replace(message: Message | Message[]): void;
 }

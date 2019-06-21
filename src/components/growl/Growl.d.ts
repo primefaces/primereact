@@ -17,6 +17,7 @@ interface GrowlProps {
     position?: string;
     onClick?(message: GrowlMessage): void;
     onClose?(message: GrowlMessage): void;
+    onRemove?(message: GrowlMessage): void;
 }
 
 export class Growl extends React.Component<GrowlProps, any> {

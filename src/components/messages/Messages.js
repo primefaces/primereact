@@ -34,7 +34,7 @@ export class Messages extends Component {
 
     show(value) {
         if (value) {
-            let newMessages;
+            let newMessages = [];
 
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
@@ -57,6 +57,12 @@ export class Messages extends Component {
         this.setState({
             messages: []
         })
+    }
+
+    replace(value) {
+        this.setState({
+            messages: [],
+        }, () => this.show(value));
     }
 
     onClose(message) {

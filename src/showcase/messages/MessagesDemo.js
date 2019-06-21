@@ -284,6 +284,16 @@ this.messages.clear();
 `}
 </CodeHighlight>
 
+                <h3>Replacing Messages</h3>
+                <p><i>replace(newMessages)</i> method adds new messages after removing all old messages.</p>
+
+                <CodeHighlight className="language-jsx">
+{`
+this.messages.replace(newMessages);
+
+`}
+</CodeHighlight>
+
                 <h3>Closable</h3>
                 <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
 

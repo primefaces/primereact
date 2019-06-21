@@ -16,9 +16,10 @@ export class Editor extends Component {
         readOnly: false,
         modules: null,
         formats: null,
+        theme: 'snow',
         headerTemplate: null,
         onTextChange: null,
-        onSelectionChange: null
+		onSelectionChange: null
     };
 
     static propTypes = {
@@ -30,9 +31,10 @@ export class Editor extends Component {
         readOnly: PropTypes.bool,
         modules: PropTypes.object,
         formats: PropTypes.array,
+        theme: PropTypes.string,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
-        onSelectionChange: PropTypes.func
+		onSelectionChange: PropTypes.func
     };
 
     componentDidMount() {
@@ -43,7 +45,7 @@ export class Editor extends Component {
             },
             placeholder: this.props.placeholder,
             readOnly: this.props.readOnly,
-            theme: 'snow',
+            theme: this.props.theme,
             formats: this.props.formats
         });
 
@@ -91,7 +93,7 @@ export class Editor extends Component {
     render() {
         let containerClass = classNames('p-component p-editor-container', this.props.className);
         let toolbarHeader = null;
-        
+
         if (this.props.headerTemplate) {
             toolbarHeader = (
                 <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
