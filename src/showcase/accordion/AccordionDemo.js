@@ -227,7 +227,7 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
                             <td>activeIndex</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Active Index of the element.</td>
+                            <td>Active index or indexes of the element. Use an array of numbers for multiple indexes. the "multiple" prop must be set to true for multiple indexes</td>
                         </tr>
                         <tr>
                             <td>className</td>
@@ -265,7 +265,7 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
                         <tr>
                             <td>onTabOpen</td>
                             <td>event.originalEvent: browser event  <br/>
-                                event.index: Index of the tab
+                                event.index: Index or indexes of the tab (number or array of numbers)
                             </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
                         </tr>
