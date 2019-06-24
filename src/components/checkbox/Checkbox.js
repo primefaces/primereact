@@ -68,6 +68,8 @@ export class Checkbox extends Component {
 
             this.input.checked = !this.props.checked;
             this.input.focus();
+            
+            e.preventDefault();
         }
     }
 
