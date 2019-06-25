@@ -28,7 +28,7 @@ export class Chart extends Component {
     };
 
     initChart() {
-        this.chart = new ChartJS(this.canvas, {
+        this.chart = new ChartJS.Chart(this.canvas, {
             type: this.props.type,
             data: this.props.data,
             options: this.props.options
