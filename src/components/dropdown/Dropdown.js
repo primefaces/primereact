@@ -534,7 +534,7 @@ export class Dropdown extends Component {
     
     renderKeyboardHelper() {
         return <div className="p-hidden-accessible">
-                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" role="listbox" readOnly={true}
+                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="hidden" role="listbox" readOnly={true}
                         onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                         disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}  />
                 </div>;
