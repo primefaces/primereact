@@ -197,6 +197,12 @@ onCityChange(e) {
                                     <td>When present, it specifies that the element value cannot be altered.</td>
                                 </tr>
                                 <tr>
+                                    <td>required</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
+                                </tr>
+                                <tr>
                                     <td>readOnly</td>
                                     <td>boolean</td>
                                     <td>false</td>
