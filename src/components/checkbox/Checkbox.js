@@ -14,6 +14,7 @@ export class Checkbox extends Component {
         style: null,
         className: null,
         disabled: false,
+        required: false,
         readOnly: false,
         tooltip: null,
         tooltipOptions: null,
@@ -31,6 +32,7 @@ export class Checkbox extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
+        required: PropTypes.bool,
         readOnly: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -129,7 +131,7 @@ export class Checkbox extends Component {
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="p-hidden-accessible">
                     <input type="checkbox" ref={el => this.input = el} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} 
-                             onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly}/>
+                             onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} required={this.props.required}/>
                 </div>
                 <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.props.checked}>
                     <span className={iconClass}></span>

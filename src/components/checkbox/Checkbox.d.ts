@@ -10,6 +10,7 @@ interface CheckboxProps {
     style?: object;
     className?: string;
     disabled?: boolean;
+    required?: boolean;
     readOnly?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
