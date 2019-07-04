@@ -62,6 +62,13 @@ export class Chart extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps){	
+        if(nextProps.data === this.props.data) {	
+            return false;	
+        }
+        return true;	
+    }
+
     componentDidMount() {
         this.initChart();
     }
