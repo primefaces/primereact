@@ -142,6 +142,12 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                             <td>Specifies the on/off state of the button.</td>
                         </tr>
                         <tr>
+                            <td>tabIndex</td>
+                            <td>number</td>
+                            <td>0</td>
+                            <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
                             <td>tooltip</td>
                             <td>any</td>
                             <td>null</td>
