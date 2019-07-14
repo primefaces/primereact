@@ -132,6 +132,13 @@ export default class ObjectUtils {
         return index;
     }
 
+    static flattenDeep(list) {
+        if(!list){
+            return [];
+        }
+        return list.reduce((acc, val) => Array.isArray(val) ? acc.concat(this.flattenDeep(val)) : acc.concat(val), []);
+    }
+
     static filterConstraints = {
 
         startsWith(value, filter) {

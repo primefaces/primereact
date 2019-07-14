@@ -619,8 +619,10 @@ export class DataTable extends Component {
             }
             else {
                 if(this.props.children instanceof Array) {
-                    for(let i = 0; i < this.props.children.length; i++) {
-                        if(this.props.children[i].props.footer) {
+                    var flattened =  ObjectUtils.flattenDeep(this.props.children);
+
+                    for(let i = 0; i < flattened.length; i++) {
+                        if(flattened[i].props.footer) {
                             return true;
                         }
                     }
