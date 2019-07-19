@@ -636,7 +636,7 @@ export class DataTable extends Component {
                 }
             }
             else {
-                hasFooter = children.props && children.props.footer !== null;
+                return children.props && children.props.footer !== null;
             }
         }
 
