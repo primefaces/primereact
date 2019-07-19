@@ -630,8 +630,8 @@ export class DataTable extends Component {
         let hasFooter = false;
 
         if (children) {
-            if(children instanceof Array) {
-                for(let i = 0; i < children.length; i++) {
+            if (children instanceof Array) {
+                for (let i = 0; i < children.length; i++) {
                     hasFooter = hasFooter || this.hasChildrenFooter(children[i]);
                 }
             }
