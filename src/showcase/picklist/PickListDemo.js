@@ -262,6 +262,18 @@ import {PickList} from 'primereact/picklist';
                                 event.value: Moved items</td>
                             <td>Callback to invoke when all items are moved from source to target.</td>
                         </tr>
+                        <tr>
+                            <td>onSourceSelect</td>
+                            <td>event.originalEvent: Browser event <br />
+                                items: Selected items array</td>
+                            <td>Callback to invoke when items are selected within source list.</td>
+                        </tr>
+                        <tr>
+                            <td>onTargetSelect</td>
+                            <td>event.originalEvent: Browser event <br />
+                                items: Selected items array</td>
+                            <td>Callback to invoke when items are selected within target list.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
