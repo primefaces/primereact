@@ -35,6 +35,7 @@ export class AutoComplete extends Component {
         size: null,
         appendTo: null,
         tabindex: null,
+        autoFocus: false,
         tooltip: null,
         tooltipOptions: null,
         completeMethod: null,
@@ -79,6 +80,7 @@ export class AutoComplete extends Component {
         size: PropTypes.number,
         appendTo: PropTypes.any,
         tabindex: PropTypes.number,
+        autoFocus: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         completeMethod: PropTypes.func,
@@ -477,6 +479,10 @@ export class AutoComplete extends Component {
     }
 
     componentDidMount() {
+        if (this.props.autoFocus && this.inputEl) {
+            this.inputEl.focus();
+        }
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
