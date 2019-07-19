@@ -620,13 +620,13 @@ export class DataTable extends Component {
             else {
                 if(this.props.children instanceof Array) {
                     for(let i = 0; i < this.props.children.length; i++) {
-                        if(this.props.children[i].props.footer) {
+                        if(this.props.children[i].props && this.props.children[i].props.footer) {
                             return true;
                         }
                     }
                 }
                 else {
-                    return this.props.children.props.footer !== null;
+                    return this.props.children.props && this.props.children.props.footer !== null;
                 }
             }
         }
