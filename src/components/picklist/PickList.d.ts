@@ -21,6 +21,8 @@ interface PickListProps {
     onMoveAllToSource?(e: {originalEvent: Event, value: any}): void;
     onMoveToTarget?(e: {originalEvent: Event, value: any}): void;
     onMoveAllToTarget?(e: {originalEvent: Event, value: any}): void;
+    onSourceSelect?(e: {originalEvent: Event, value: any}): void;
+    onTargetSelect?(e: {originalEvent: Event, value: any}): void;
 }
 
 export class PickList extends React.Component<PickListProps,any> {}

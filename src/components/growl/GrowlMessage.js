@@ -94,7 +94,7 @@ export class GrowlMessage extends Component {
                     <span className={iconClassName}></span>
                     <div className="p-growl-message">
                         <span className="p-growl-title">{this.props.message.summary}</span>
-                        <p>{this.props.message.detail}</p>
+                        <div>{this.props.message.detail}</div>
                     </div>
                 </div>
             </div>

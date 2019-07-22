@@ -10,6 +10,7 @@ interface ToggleButtonProps {
     style?: object;
     className?: string;
     checked?: boolean;
+    tabIndex?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     onChange?(e: {originalEvent: Event, value: boolean}): void;

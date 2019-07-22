@@ -57,6 +57,8 @@ export class HeaderCell extends Component {
                 columnEl: event.target.parentElement,
                 columnProps: this.props
             });
+
+            event.preventDefault();
         }
     }
 

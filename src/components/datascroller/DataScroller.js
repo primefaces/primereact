@@ -146,9 +146,7 @@ export class DataScroller extends Component {
     }
 
     componentDidMount() {
-        if(this.props.lazy) {
-            this.load();
-        }
+        this.load();
 
         if(this.props.loader) {
             this.scrollFunction = () => {

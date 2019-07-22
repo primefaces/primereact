@@ -618,21 +618,29 @@ export class DataTable extends Component {
                 return true;
             }
             else {
-                if(this.props.children instanceof Array) {
-                    for(let i = 0; i < this.props.children.length; i++) {
-                        if(this.props.children[i].props.footer) {
-                            return true;
-                        }
-                    }
-                }
-                else {
-                    return this.props.children.props.footer !== null;
-                }
+                return this.hasChildrenFooter(this.props.children);
             }
         }
         else {
             return false;
         }
+    }
+
+    hasChildrenFooter(children) {
+        let hasFooter = false;
+
+        if (children) {
+            if (children instanceof Array) {
+                for (let i = 0; i < children.length; i++) {
+                    hasFooter = hasFooter || this.hasChildrenFooter(children[i]);
+                }
+            }
+            else {
+                return children.props && children.props.footer !== null;
+            }
+        }
+
+        return hasFooter;
     }
 
     onColumnResizeStart(event) {

@@ -29,7 +29,9 @@ export class PickList extends Component {
         onMoveToSource: null,
         onMoveAllToSource: null,
         onMoveToTarget: null,
-        onMoveAllToTarget: null
+        onMoveAllToTarget: null,
+        onSourceSelect: null,
+        onTargetSelect: null
     }
 
     static propTypes = {
@@ -53,6 +55,8 @@ export class PickList extends Component {
         onMoveAllToSource: PropTypes.func,
         onMoveToTarget: PropTypes.func,
         onMoveAllToTarget: PropTypes.func,
+        onSourceSelect: PropTypes.func,
+        onTargetSelect: PropTypes.func
     }
 
     constructor(props) {
@@ -173,6 +177,14 @@ export class PickList extends Component {
             
         DomHandler.scrollInView(listContainer, listItem);
     }
+
+    onSelectionChange(e, stateKey, callback) {
+        this.setState({[stateKey]: e.value});
+
+        if (callback) {
+            callback(e);
+        }
+    }
     
     componentDidUpdate() {
         if(this.reorderedListElement) {
@@ -192,13 +204,13 @@ export class PickList extends Component {
                 {this.props.showSourceControls && <PickListControls list={this.props.source} selection={this.state.selectedItemsSource} 
                             onReorder={this.onSourceReorder} className="p-picklist-source-controls" />}
                 
-                <PickListSubList ref={(el) => this.sourceListElement = ReactDOM.findDOMNode(el)} list={this.props.source} selection={this.state.selectedItemsSource} onSelectionChange={(e) => this.setState({selectedItemsSource: e.value})} itemTemplate={this.props.itemTemplate} 
-                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} />
+                <PickListSubList ref={(el) => this.sourceListElement = ReactDOM.findDOMNode(el)} list={this.props.source} selection={this.state.selectedItemsSource} onSelectionChange={(e) => this.onSelectionChange(e, 'selectedItemsSource', this.props.onSourceSelect)} itemTemplate={this.props.itemTemplate} 
+                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex}/>
                 
                 <PickListTransferControls onTransfer={this.onTransfer} source={this.props.source} target={this.props.target} 
                     sourceSelection={this.state.selectedItemsSource} targetSelection={this.state.selectedItemsTarget} />
                 
-                <PickListSubList ref={(el) => this.targetListElement = ReactDOM.findDOMNode(el)} list={this.props.target} selection={this.state.selectedItemsTarget} onSelectionChange={(e) => this.setState({selectedItemsTarget: e.value})}  itemTemplate={this.props.itemTemplate} 
+                <PickListSubList ref={(el) => this.targetListElement = ReactDOM.findDOMNode(el)} list={this.props.target} selection={this.state.selectedItemsTarget} onSelectionChange={(e) => this.onSelectionChange(e, 'selectedItemsTarget', this.props.onTargetSelect)}  itemTemplate={this.props.itemTemplate} 
                     header={this.props.targetHeader} style={this.props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-targe" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex}/>
                 
                 {this.props.showTargetControls && <PickListControls list={this.props.target} selection={this.state.selectedItemsTarget} 

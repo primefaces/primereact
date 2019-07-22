@@ -461,7 +461,7 @@ export class TableBody extends Component {
                 if(rowSpanGrouping) {                    
                     let rowSpanIndex = i;
                     let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.sortField);
-                    let shouldCountRowSpan = (i === 0) || ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.sortField) !== currentRowFieldData;
+                    let shouldCountRowSpan = (i === startIndex) || ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.sortField) !== currentRowFieldData ;
                     
                     if(shouldCountRowSpan) {
                         let nextRowFieldData = currentRowFieldData;
