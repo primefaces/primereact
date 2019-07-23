@@ -2013,7 +2013,7 @@ export class Calendar extends Component {
             return (
                 <div className="p-datepicker-buttonbar">
                     <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
-                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.todayButtonClassName} />
+                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.clearButtonStyleClass} />
                 </div>
             );
         }
