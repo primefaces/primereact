@@ -181,10 +181,13 @@ export class BodyRow extends Component {
             let rowSpan;
             if(hasRowSpanGrouping) {
                 if(this.props.sortField === column.props.field) {
-                    if(this.props.groupRowSpan)
+                    if(this.props.groupRowSpan) {
                         rowSpan = this.props.groupRowSpan;
-                    else
+                        className += ' p-datatable-rowspan-group' 
+                    }
+                    else {
                         continue;
+                    }
                 }
             }
             
