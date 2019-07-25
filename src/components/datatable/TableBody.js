@@ -31,17 +31,18 @@ export class TableBody extends Component {
         if(this.props.selectionMode) {
             let rowData = event.data;
             let rowIndex = event.index;
+            let selection;
 
             if(this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
                 DomHandler.clearSelection();
-                //todo: shift key
+                this.rangeRowIndex = rowIndex;
+                selection = this.selectRange(event);
             }
             else {
                 let selected = this.isSelected(rowData);
                 let metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
                 this.anchorRowIndex = rowIndex;
                 this.rangeRowIndex = rowIndex;
-                let selection;
 
                 if(metaSelection) {
                     let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
@@ -108,17 +109,52 @@ export class TableBody extends Component {
                         }
                     }
                 }
+            }
 
-                if(this.props.onSelectionChange) {
-                    this.props.onSelectionChange({
-                        originalEvent: event.originalEvent,
-                        value: selection
-                    });
-                }
+            if(this.props.onSelectionChange) {
+                this.props.onSelectionChange({
+                    originalEvent: event.originalEvent,
+                    value: selection
+                });
             }
         }
         
         this.rowTouched = false;
+    }
+
+    selectRange(event) {
+        let rangeStart, rangeEnd;
+        
+        if (this.rangeRowIndex > this.anchorRowIndex) {
+            rangeStart = this.anchorRowIndex;
+            rangeEnd = this.rangeRowIndex;
+        }
+        else if(this.rangeRowIndex < this.anchorRowIndex) {
+            rangeStart = this.rangeRowIndex;
+            rangeEnd = this.anchorRowIndex;
+        }
+        else {
+            rangeStart = this.rangeRowIndex;
+            rangeEnd = this.rangeRowIndex;
+        }
+        
+        if (this.props.lazy && this.props.paginator) {
+            rangeStart -= this.first;
+            rangeEnd -= this.first;
+        }
+
+        const value = this.props.value;
+        let selection = [];
+        for(let i = rangeStart; i <= rangeEnd; i++) {
+            let rangeRowData = value[i];
+            selection.push(rangeRowData);
+
+            if(this.props.onRowSelect) {
+                this.props.onRowSelect({originalEvent: event.originalEvent, data: rangeRowData, type: 'row'});
+            }
+        }
+
+        return selection;
     }
 
     onRowTouchEnd(event) {
