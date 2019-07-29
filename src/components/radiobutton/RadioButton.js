@@ -15,6 +15,7 @@ export class RadioButton extends Component {
         className: null,
         disabled: false,
         required: false,
+        tabIndex: null,
         tooltip: null,
         tooltipOptions: null,
         onChange: null
@@ -29,6 +30,7 @@ export class RadioButton extends Component {
         className: PropTypes.string,
         disabled: PropTypes.bool,
         required: PropTypes.bool,
+        tabIndex: PropTypes.number,
         onChange: PropTypes.func,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object
@@ -119,7 +121,7 @@ export class RadioButton extends Component {
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} defaultChecked={this.props.checked} 
-                        onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} required={this.props.required}/>
+                        onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} required={this.props.required} tabIndex={this.props.tabIndex}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }}>
                     <span className={iconClass}></span>
