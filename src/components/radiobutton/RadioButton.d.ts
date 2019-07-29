@@ -11,6 +11,7 @@ interface RadioButtonProps {
     className?: string;
     disabled?: boolean;
     required?: boolean;
+    tabIndex?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     onChange(e: {originalEvent: Event, value: any, checked: boolean}): void;
