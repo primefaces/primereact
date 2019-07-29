@@ -13,6 +13,7 @@ interface SpinnerProps {
     thousandSeparator: string;
     disabled?: boolean;
     required?: boolean;
+    tabIndex?: number;
     pattern?: string;
     placeholder?: string;
     readonly?: boolean;
