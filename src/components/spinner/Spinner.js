@@ -20,6 +20,7 @@ export class Spinner extends Component {
         thousandSeparator: null,
         disabled: false,
         required: false,
+        tabIndex: null,
         pattern: null,
         placeholder: null,
         readonly: false,
@@ -48,6 +49,7 @@ export class Spinner extends Component {
         thousandSeparator: PropTypes.string,
         disabled: PropTypes.bool,
         required: PropTypes.bool,
+        tabIndex: PropTypes.number,
         pattern: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
@@ -391,7 +393,7 @@ export class Spinner extends Component {
         
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} 
-              className={className} value={this.formattedValue||''} type="text" size={this.props.size} 
+              className={className} value={this.formattedValue||''} type="text" size={this.props.size} tabIndex={this.props.tabIndex}
               maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
               placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} 
               onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} 
@@ -406,7 +408,7 @@ export class Spinner extends Component {
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
-                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled}>
+                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
                 <span className="p-spinner-button-icon pi pi-caret-up"></span>
             </button>
         );
@@ -419,7 +421,7 @@ export class Spinner extends Component {
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp} 
-                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled}>
+                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
                 <span className="p-spinner-button-icon pi pi-caret-down"></span>
             </button>
         );
