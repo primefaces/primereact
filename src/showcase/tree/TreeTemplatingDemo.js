@@ -109,23 +109,25 @@ export class TreeTemplatingDemo extends Component {
     createNavigation() {
         return [
             {
+                key: "0",
                 label: 'Installation',
                 children: [
-                    {label: 'Getting Started', url:'https://reactjs.org/docs/getting-started.html'},
-                    {label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html'},
-                    {label: 'Create an App', url:'https://reactjs.org/docs/create-a-new-react-app.html'},
-                    {label: 'CDN Links', url: 'https://reactjs.org/docs/cdn-links.html'}
+                    {key: "0-0", label: 'Getting Started', url:'https://reactjs.org/docs/getting-started.html'},
+                    {key: "0-1", label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html'},
+                    {key: "0-2", label: 'Create an App', url:'https://reactjs.org/docs/create-a-new-react-app.html'},
+                    {key: "0-3", label: 'CDN Links', url: 'https://reactjs.org/docs/cdn-links.html'}
                 ]
             },
             {
+                key: "1", 
                 label: 'Main Concepts',
                 children: [
-                    {label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html'},
-                    {label: 'Introducing JSX', url: 'https://reactjs.org/docs/introducing-jsx.html'},
-                    {label: 'Rendering Elements', url: 'https://reactjs.org/docs/rendering-elements.html'},
-                    {label: 'Components and Props', url: 'https://reactjs.org/docs/components-and-props.html'},
-                    {label: 'State and LifeCycle', url: 'https://reactjs.org/docs/state-and-lifecycle.html'},
-                    {label: 'Handling Events', url: 'https://reactjs.org/docs/handling-events.html'}
+                    {key: "1-0", label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html'},
+                    {key: "1-1", label: 'Introducing JSX', url: 'https://reactjs.org/docs/introducing-jsx.html'},
+                    {key: "1-2", label: 'Rendering Elements', url: 'https://reactjs.org/docs/rendering-elements.html'},
+                    {key: "1-3", label: 'Components and Props', url: 'https://reactjs.org/docs/components-and-props.html'},
+                    {key: "1-4", label: 'State and LifeCycle', url: 'https://reactjs.org/docs/state-and-lifecycle.html'},
+                    {key: "1-5", label: 'Handling Events', url: 'https://reactjs.org/docs/handling-events.html'}
                 ]
             }
         ];
