@@ -25,22 +25,22 @@ export class TreeTableLazyDemo extends Component {
         setTimeout(() => {
             this.setState({
                 loading: false,
-                nodes: this.loadNodes(this.state.first, this.state.first + this.state.rows),
+                nodes: this.loadNodes(this.state.first, this.state.rows),
                 totalRecords: 1000
             });
         }, 1000);
     }
 
-    loadNodes(start, end) {
+    loadNodes(first, rows) {
         let nodes = [];
 
-        for(let i = start; i < end; i++) {
+        for(let i = 0; i < rows; i++) {
             let node = {
-                key: i,
+                key: (first + i),
                 data: { 
-                    name: 'Item ' + (start + i),
+                    name: 'Item ' + (first + i),
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
-                    type: 'Type ' + (start + i)
+                    type: 'Type ' + (first + i)
                 },
                 leaf: false
             };
@@ -104,7 +104,7 @@ export class TreeTableLazyDemo extends Component {
             this.setState({
                 first: event.first,
                 rows: event.rows,
-                nodes: this.loadNodes(event.first, event.first + event.rows),
+                nodes: this.loadNodes(event.first, event.rows),
                 loading: false
             });
         }, 1000);
