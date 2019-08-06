@@ -102,7 +102,7 @@ export class HomeComponent extends Component {
                     <div className="p-grid templates-grid">
                         <div className="p-col-12">
 							<a href="https://www.primefaces.org/layouts/sapphire-react">
-								<img alt="Babylon" src="showcase/resources/images/layouts/sapphire-biggest-react.jpg" />
+								<img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-biggest-react.jpg" />
 							</a>
 						</div>
 						<div className="p-col-12">
