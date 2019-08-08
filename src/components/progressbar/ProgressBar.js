@@ -6,7 +6,6 @@ export class ProgressBar extends Component {
 
     static defaultProps = {
         id: null,
-        value: null,
         showValue: true,
         unit: '%',
         style: null,
@@ -31,7 +30,7 @@ export class ProgressBar extends Component {
                 <div className="p-progressbar-label">{this.props.displayValue}</div>
             );
         }
-        else if (this.props.showValue && this.props.value) {
+        else if (this.props.showValue && 'value' in this.props) {
             return (
                 <div className="p-progressbar-label">{this.props.value + this.props.unit}</div>
             );
