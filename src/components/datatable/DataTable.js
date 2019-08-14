@@ -1002,9 +1002,12 @@ export class DataTable extends Component {
         }
             
         if(this.props.onSelectionChange) {
+            const { originalEvent, ...rest } = event;
+
             this.props.onSelectionChange({
-                originalEvent: event,
-                value: selection
+                originalEvent,
+                value: selection,
+                ...rest
             });
         }
     }
