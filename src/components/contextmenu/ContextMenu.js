@@ -277,8 +277,9 @@ export class ContextMenu extends Component {
 
     position(event) {
         if(event) {
-            let left = event.pageX + 1;
-            let top = event.pageY + 1;
+            const rect = this.container.parentNode.getBoundingClientRect();
+            let left = event.pageX + 1 - rect.left;
+            let top = event.pageY + 1 - rect.top;
             let width = this.container.offsetParent ? this.container.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.container);
             let height = this.container.offsetParent ? this.container.offsetHeight : DomHandler.getHiddenElementOuterHeight(this.container);
             let viewport = DomHandler.getViewport();
