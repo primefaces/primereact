@@ -9,6 +9,7 @@ interface ScrollableViewProps {
     unfrozenWidth?: string;
     frozenBody?: any;
     virtualScroll?: boolean;
+    virtualScrollHeightOverride?: number;
     rows?: number;
     totalRcords?: number;
     onVirtualScroll?(page: number): void;
