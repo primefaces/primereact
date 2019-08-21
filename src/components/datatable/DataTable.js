@@ -65,6 +65,7 @@ export class DataTable extends Component {
         scrollHeight: null,
         virtualScroll: false,
         virtualScrollDelay: 150,
+        virtualScrollHeightOverride: null,
         virtualRowHeight: 28,
         frozenWidth: null,
         frozenValue: null,
@@ -148,6 +149,7 @@ export class DataTable extends Component {
         scrollHeight: PropTypes.string,
         virtualScroll: PropTypes.bool,
         virtualScrollDelay: PropTypes.number,
+        virtualScrollHeightOverride: PropTypes.number,
         virtualRowHeight: PropTypes.number,
         frozenWidth: PropTypes.string,
         frozenValue: PropTypes.array,
@@ -1176,7 +1178,7 @@ export class DataTable extends Component {
                 body={this.createTableBody(value, columns)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
                 footer={this.createTableFooter(columns, footerColumnGroup)} tableStyle={this.props.tableStyle} tableClassName={this.props.tableClassName}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
-                virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
+                virtualScroll={this.props.virtualScroll} virtualScrollHeightOverride={this.props.virtualScrollHeightOverride} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll} loading={this.props.loading}></ScrollableView>
     }
     

@@ -14,6 +14,7 @@ export class ScrollableView extends Component {
         frozenWidth: null,
         frozenBody: null,
         virtualScroll: false,
+        virtualScrollHeightOverride: null,
         virtualRowHeight: null,
         rows: null,
         totalRecords: null,
@@ -32,6 +33,7 @@ export class ScrollableView extends Component {
         frozenWidth: PropTypes.string,
         frozenBody: PropTypes.any,
         virtualScroll: PropTypes.bool,
+        virtualScrollHeightOverride: PropTypes.number,
         virtualRowHeight: PropTypes.number,
         rows: PropTypes.number,
         totalRcords: PropTypes.number,
@@ -67,7 +69,12 @@ export class ScrollableView extends Component {
             this.alignScrollBar();
             
             if(this.props.virtualScroll) {
-                this.virtualScroller.style.height = this.props.totalRecords * this.props.virtualRowHeight + 'px';
+                if (this.props.virtualScrollHeightOverride) {
+                    this.virtualScroller.style.height = this.props.virtualScrollHeightOverride + 'px'
+                }
+                else {
+                    this.virtualScroller.style.height = this.props.totalRecords * this.props.virtualRowHeight + 'px';
+                }
             }
         }
         
