@@ -11,7 +11,10 @@ export class ProgressBarDemo extends Component {
         super();
         this.state = {
             value1: 0, 
-            value2: 50
+            value2: 50,
+            value3: 40,
+            totalItems: 5,
+            completedItems: 2
         };
     }
 
@@ -57,6 +60,9 @@ export class ProgressBarDemo extends Component {
 
                     <h3>Static</h3>
                     <ProgressBar value={this.state.value2}></ProgressBar>
+
+                    <h3>Custom display value</h3>
+                    <ProgressBar value={this.state.value3} displayValue={`${this.state.completedItems}/${this.state.totalItems}`}></ProgressBar>
 
                     <h3>Indeterminate</h3>
                     <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
@@ -131,6 +137,12 @@ import {ProgressBar} from 'primereact/progressbar';
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Show or hide progress bar value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>displayValue</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Custom display value</td>
                                     </tr>
                                     <tr>
                                         <td>unit</td>
@@ -215,7 +227,10 @@ export class ProgressBarDemo extends Component {
         super();
         this.state = {
             value1: 0, 
-            value2: 50
+            value2: 50,
+            value3: 40,
+            totalItems: 5,
+            completedItems: 2
         };
     }
 
@@ -261,6 +276,9 @@ export class ProgressBarDemo extends Component {
 
                     <h3>Static</h3>
                     <ProgressBar value={this.state.value2}></ProgressBar>
+
+                    <h3>Custom display value</h3>
+                    <ProgressBar value={this.state.value3} displayValue={\`\${this.state.completedItems}/\${this.state.totalItems}\`}></ProgressBar>
 
                     <h3>Indeterminate</h3>
                     <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
