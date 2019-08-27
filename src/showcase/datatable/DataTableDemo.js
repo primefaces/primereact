@@ -2212,6 +2212,11 @@ export class DataTableStateDemo extends Component {
                             <td>-</td>
                             <td>Closes the current editing cell when incell editing is enabled.</td>
                         </tr>
+                        <tr>
+                            <td>resetColumnOrder</td>
+                            <td>-</td>
+                            <td>Resets column order when reorderableColumns is enabled.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
