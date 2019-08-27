@@ -557,13 +557,6 @@ export class InputMask extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if(nextProps.value === this.props.value) {
-            return false;
-        }
-        return true;
-    }
-
     renderTooltip() {
         this.tooltip = new Tooltip({
             target: this.input,
