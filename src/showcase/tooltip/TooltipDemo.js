@@ -128,10 +128,16 @@ class TooltipDoc extends Component {
                                 </tr>
                                 <tr>
                                     <td>showDelay</td>
-                                    <td>null</td>
                                     <td>number</td>
+                                    <td>null</td>
                                     <td>Delay to show the tooltip in milliseconds.</td>
-                                </tr>                   
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tooltip.</td>
+                                </tr>               
                             </tbody>
                         </table>
                     </div>
