@@ -2208,6 +2208,14 @@ export class DataTableStateDemo extends Component {
                             <td>Exports the data to CSV format.</td>
                         </tr>
                         <tr>
+                            <td>filter</td>
+                            <td>value: the filter value <br />
+                                field: the filter field <br />
+                                mode: "startsWith", "contains", "endsWidth", "equals", "notEquals", "in" and "custom".
+                            </td>
+                            <td>Filters the data.</td>
+                        </tr>
+                        <tr>
                             <td>closeEditingCell</td>
                             <td>-</td>
                             <td>Closes the current editing cell when incell editing is enabled.</td>

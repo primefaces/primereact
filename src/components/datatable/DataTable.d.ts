@@ -90,4 +90,5 @@ export class DataTable extends React.Component<DataTableProps,any> {
     public exportCSV():void;
     public filter<T>(value:T, field:string, mode:string):void;
     public resetColumnOrder():void;
+    public closeEditingCell():void;
 }
