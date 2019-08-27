@@ -109,7 +109,7 @@ class TooltipDoc extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>posiiton</td>
+                                    <td>position</td>
                                     <td>string</td>
                                     <td>right</td>
                                     <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
