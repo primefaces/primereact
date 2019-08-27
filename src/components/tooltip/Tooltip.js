@@ -258,7 +258,7 @@ export default class Tooltip  {
         this.container.style.top = -999 + 'px';
 
         let defaultClassName = 'p-tooltip p-component p-tooltip-' + position;
-        this.container.className = this.tooltipStyleClass ? defaultClassName + ' ' + this.tooltipStyleClass : defaultClassName;
+        this.container.className = this.options.className ? defaultClassName + ' ' + this.options.className : defaultClassName;
     }
 
     isOutOfBounds() {
