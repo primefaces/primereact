@@ -7,7 +7,8 @@ interface ProgressBarProps {
     unit?: string;
     style?: object;
     className?: string;
-    mode?: string
+    mode?: string;
+    displayValueTemplate?(value: any): JSX.Element;
 }
 
 export class ProgressBar extends React.Component<ProgressBarProps,any> {}

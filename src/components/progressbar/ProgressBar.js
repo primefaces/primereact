@@ -6,6 +6,7 @@ export class ProgressBar extends Component {
 
     static defaultProps = {
         id: null,
+        value: null,
         showValue: true,
         unit: '%',
         style: null,
