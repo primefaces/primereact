@@ -29,7 +29,8 @@ export class Dialog extends Component {
         maximizable: false,
         blockScroll: true,
         iconsTemplate: null,
-        ariaCloseIconLabel: 'Close'
+        ariaCloseIconLabel: 'Close',
+        focusOnShow: true
     }
 
     static propTypes = {
@@ -53,7 +54,8 @@ export class Dialog extends Component {
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,
         iconsTemplate: PropTypes.func,
-        ariaCloseIconLabel: PropTypes.string
+        ariaCloseIconLabel: PropTypes.string,
+        focusOnShow: PropTypes.bool
     };
     
     constructor(props) {
@@ -102,7 +104,10 @@ export class Dialog extends Component {
         }
         
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        this.focus();
+        
+        if (this.props.focusOnShow) {
+            this.focus();
+        }
 
         if (this.props.modal) {
             this.enableModality();
