@@ -12,10 +12,18 @@ export class ProgressBarDemo extends Component {
         this.state = {
             value1: 0, 
             value2: 50,
-            value3: 40,
-            totalItems: 5,
-            completedItems: 2
+            value3: 40
         };
+
+        this.displayValueTemplate = this.displayValueTemplate.bind(this);
+    }
+
+    displayValueTemplate(value) {
+        return (
+            <React.Fragment>
+                {value}/<b>100</b>
+            </React.Fragment>
+        );
     }
 
     componentDidMount() {
@@ -62,7 +70,7 @@ export class ProgressBarDemo extends Component {
                     <ProgressBar value={this.state.value2}></ProgressBar>
 
                     <h3>Custom display value</h3>
-                    <ProgressBar value={this.state.value3} displayValue={`${this.state.completedItems}/${this.state.totalItems}`}></ProgressBar>
+                    <ProgressBar value={this.state.value3} displayValueTemplate={this.displayValueTemplate}></ProgressBar>
 
                     <h3>Indeterminate</h3>
                     <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
@@ -139,12 +147,6 @@ import {ProgressBar} from 'primereact/progressbar';
                                         <td>Show or hide progress bar value.</td>
                                     </tr>
                                     <tr>
-                                        <td>displayValue</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Custom display value</td>
-                                    </tr>
-                                    <tr>
                                         <td>unit</td>
                                         <td>string</td>
                                         <td>%</td>
@@ -167,6 +169,12 @@ import {ProgressBar} from 'primereact/progressbar';
                                         <td>string</td>
                                         <td>determinate</td>
                                         <td>Defines the mode of the progress, valid values are "determinate" and "indeterminate".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>displayValueTemplate</td>
+                                        <td>Element</td>
+                                        <td>null</td>
+                                        <td>Custom display value template</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -228,10 +236,18 @@ export class ProgressBarDemo extends Component {
         this.state = {
             value1: 0, 
             value2: 50,
-            value3: 40,
-            totalItems: 5,
-            completedItems: 2
+            value3: 40
         };
+
+        this.displayValueTemplate = this.displayValueTemplate.bind(this);
+    }
+
+    displayValueTemplate(value) {
+        return (
+            <React.Fragment>
+                {value}/<b>100</b>
+            </React.Fragment>
+        );
     }
 
     componentDidMount() {
@@ -278,7 +294,7 @@ export class ProgressBarDemo extends Component {
                     <ProgressBar value={this.state.value2}></ProgressBar>
 
                     <h3>Custom display value</h3>
-                    <ProgressBar value={this.state.value3} displayValue={\`\${this.state.completedItems}/\${this.state.totalItems}\`}></ProgressBar>
+                    <ProgressBar value={this.state.value3} displayValueTemplate={this.props.displayValueTemplate}></ProgressBar>
 
                     <h3>Indeterminate</h3>
                     <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
