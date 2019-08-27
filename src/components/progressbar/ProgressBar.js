@@ -10,29 +10,26 @@ export class ProgressBar extends Component {
         unit: '%',
         style: null,
         className: null,
-        mode: 'determinate'
+        mode: 'determinate',
+        displayValueTemplate: null
     }
 
     static propTypes = {
         id: PropTypes.string,
         value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         showValue: PropTypes.bool,
-        displayValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         unit: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        mode: PropTypes.string
+        mode: PropTypes.string,
+        displayValueTemplate: PropTypes.func
     };
 
     renderLabel() {
-        if (this.props.showValue && 'displayValue' in this.props) {
+        if (this.props.showValue && this.props.value) {
+            let label = this.props.displayValueTemplate ? this.props.displayValueTemplate(this.props.value) : this.props.value + this.props.unit;
             return (
-                <div className="p-progressbar-label">{this.props.displayValue}</div>
-            );
-        }
-        else if (this.props.showValue && 'value' in this.props) {
-            return (
-                <div className="p-progressbar-label">{this.props.value + this.props.unit}</div>
+                <div className="p-progressbar-label">{label}</div>
             );
         }
         else {
