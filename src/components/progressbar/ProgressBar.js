@@ -27,7 +27,7 @@ export class ProgressBar extends Component {
     };
 
     renderLabel() {
-        if (this.props.showValue && this.props.value) {
+        if (this.props.showValue && this.props.value != null) {
             let label = this.props.displayValueTemplate ? this.props.displayValueTemplate(this.props.value) : this.props.value + this.props.unit;
             return (
                 <div className="p-progressbar-label">{label}</div>
