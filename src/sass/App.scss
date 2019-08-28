@@ -252,7 +252,7 @@ body {
     position: fixed;
     left: 0;
     top: 70px;
-    height: 100%;
+    height: calc(100% - 70px);
     background-color: #ffffff;
     width: 300px;
     overflow: auto;
@@ -1034,6 +1034,7 @@ body {
     #layout-sidebar {
         top: 98px;
         left: -300px;
+        height: calc(100% - 98px);
         @include transition(left .2s);
         z-index: 999;
 
