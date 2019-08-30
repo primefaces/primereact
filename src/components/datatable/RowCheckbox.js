@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { Checkbox } from "../checkbox/Checkbox";
 
 export class RowCheckbox extends Component {
 
@@ -32,16 +32,6 @@ export class RowCheckbox extends Component {
     }
     
     render() {
-        let className = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected, 'p-disabled': this.props.disabled});
-        let iconClassName = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.selected});
-        
-        return <div className="p-checkbox p-component">
-                 <div className="p-hidden-accessible">
-                    <input type="checkbox" />
-                </div>
-                <div className={className} onClick={this.onClick}>
-                    <span className={iconClassName}></span>
-                </div>
-            </div>;
+        return <Checkbox onChange={this.onClick} checked={this.props.selected} disabled={this.props.disabled} />;
     }
 }
