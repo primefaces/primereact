@@ -67,13 +67,13 @@ export class ScrollableView extends Component {
 
         if(!this.props.frozen) {
             this.alignScrollBar();
-            
-            if(this.props.virtualScroll) {
+
+            if (this.props.virtualScroll) {
+                const collapsedHeight = this.props.totalRecords * this.props.virtualRowHeight;
                 if (this.props.virtualScrollHeightOverride) {
-                    this.virtualScroller.style.height = this.props.virtualScrollHeightOverride + 'px'
-                }
-                else {
-                    this.virtualScroller.style.height = this.props.totalRecords * this.props.virtualRowHeight + 'px';
+                    this.virtualScroller.style.height = Math.max(collapsedHeight, this.props.virtualScrollHeightOverride) + 'px';
+                } else {
+                    this.virtualScroller.style.height = collapsedHeight + 'px';
                 }
             }
         }
