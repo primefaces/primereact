@@ -545,7 +545,8 @@ export class InputMask extends Component {
                 this.renderTooltip();
         }
 
-        if (this.input.value !== this.props.value) {
+        let isValueUpdated = this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.input.value !== this.props.value;
+        if (isValueUpdated) {
             this.updateValue();
         }
     }
