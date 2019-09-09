@@ -7,6 +7,10 @@ export class BodyRow extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            editing: false
+        };
+
         this.onClick = this.onClick.bind(this);
         this.onDoubleClick = this.onDoubleClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
@@ -17,6 +21,9 @@ export class BodyRow extends Component {
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.onRowEditInit = this.onRowEditInit.bind(this);
+        this.onRowEditSave = this.onRowEditSave.bind(this);
+        this.onRowEditCancel = this.onRowEditCancel.bind(this);
     }
 
     onClick(event) {
@@ -161,6 +168,58 @@ export class BodyRow extends Component {
         }
     }
 
+    onRowEditInit(event) {
+        if (this.props.onRowEditInit) {
+            this.props.onRowEditInit({
+                originalEvent: event,
+                data: this.props.rowData
+            });
+        }
+
+        this.setState({
+            editing: true
+        });
+
+        event.preventDefault();
+    }
+
+    onRowEditSave(event) {
+        let valid = true;
+
+        if (this.props.rowEditorValidator) {
+            valid = this.props.rowEditorValidator(this.props.rowData);
+        }
+
+        if (this.props.onRowEditSave) {
+            this.props.onRowEditSave({
+                originalEvent: event,
+                data: this.props.rowData
+            });
+        }
+
+        this.setState({
+            editing: !valid
+        });
+
+        event.preventDefault();
+    }
+
+    onRowEditCancel(event) {
+        if (this.props.onRowEditCancel) {
+            this.props.onRowEditCancel({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
+
+        this.setState({
+            editing: false
+        });
+
+        event.preventDefault();
+    }
+
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalStyles = {
@@ -176,7 +235,7 @@ export class BodyRow extends Component {
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
         
-        for(let i = 0; i < columns.length; i++) {
+        for (let i = 0; i < columns.length; i++) {
             let column = columns[i];
             let rowSpan;
             if(hasRowSpanGrouping) {
@@ -192,7 +251,8 @@ export class BodyRow extends Component {
             }
             
             let cell = <BodyCell key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} 
-                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected} />;
+                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected} 
+                        editMode={this.props.editMode} editing={this.state.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} />;
                         
             cells.push(cell);
         }

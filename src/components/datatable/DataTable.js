@@ -80,6 +80,7 @@ export class DataTable extends Component {
         tabIndex: '0',
         stateKey: null,
         stateStorage: 'session',
+        editMode: 'cell',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -94,7 +95,11 @@ export class DataTable extends Component {
         onContextMenu: null,
         onColReorder: null,
         onRowReorder: null,
-        onValueChange: null
+        onValueChange: null,
+        rowEditorValidator: null,
+        onRowEditInit: null,
+        onRowEditSave: null,
+        onRowEditCancel: null
     }
 
     static propTypes = {
@@ -163,6 +168,7 @@ export class DataTable extends Component {
         tabIndex: PropTypes.string,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
+        editMode: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -177,7 +183,11 @@ export class DataTable extends Component {
         onContextMenu: PropTypes.func,
         onColReorder: PropTypes.func,
         onRowReorder: PropTypes.func,
-        onValueChange: PropTypes.func
+        onValueChange: PropTypes.func,
+        rowEditorValidator: PropTypes.func,
+        onRowEditInit: PropTypes.func,
+        onRowEditSave: PropTypes.func,
+        onRowEditCancel: PropTypes.func
     };
 
     constructor(props) {
@@ -987,7 +997,9 @@ export class DataTable extends Component {
     }
 
     closeEditingCell() {
-        document.body.click();
+        if (this.props.editMode !== "row") {
+            document.body.click();
+        }
     }
 
     onHeaderCheckboxClick(event) {
@@ -1153,7 +1165,8 @@ export class DataTable extends Component {
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}>
+                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder} 
+                        editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}>
                         {columns}
                 </TableBody>;
     }
