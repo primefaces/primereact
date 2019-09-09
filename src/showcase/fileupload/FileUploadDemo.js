@@ -150,6 +150,23 @@ import {FileUpload} from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
+            <h3>Custom Upload</h3>
+            <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
+<CodeHighlight className="language-jsx">
+{`
+<FileUpload name="demo[]" url="./upload" customUpload={true} uploadHandler={this.myUploader} />
+
+`}
+</CodeHighlight>
+<CodeHighlight className="language-javascript">
+{`
+myUploader(event) {
+    //event.files == files to upload
+}
+
+`}
+</CodeHighlight>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -270,6 +287,12 @@ import {FileUpload} from 'primereact/fileupload';
                             <td>Cancel</td>
                             <td>Label of the cancel button.</td>
                         </tr>
+                        <tr>
+                            <td>customUpload</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to use the default upload or a manual implementation defined in uploadHandler callback.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -332,6 +355,11 @@ import {FileUpload} from 'primereact/fileupload';
                             <td>onValidationFail</td>
                             <td>file: Invalid file.</td>
                             <td>Callback to invoke when a validation file fails.</td>
+                        </tr>
+                        <tr>
+                            <td>uploadHandler</td>
+                            <td>event.files: List of selected files.</td>
+                            <td>Callback to invoke in custom upload mode to upload the files manually.</td>
                         </tr>
                     </tbody>
                 </table>
