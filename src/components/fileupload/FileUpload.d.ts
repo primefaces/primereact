@@ -31,4 +31,7 @@ interface FileUploadProps {
     uploadHandler?(e: {files: any}): void;
 }
 
-export class FileUpload extends React.Component<FileUploadProps,any> {}
+export class FileUpload extends React.Component<FileUploadProps,any> {
+    public upload():void;
+    public clear():void;
+}

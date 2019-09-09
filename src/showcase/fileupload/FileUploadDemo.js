@@ -365,6 +365,31 @@ myUploader(event) {
                 </table>
             </div>
 
+            <h3>Methods</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>upload</td>
+                            <td>-</td>
+                            <td>Uploads the selected files.</td>
+                        </tr>
+                        <tr>
+                            <td>clear</td>
+                            <td>-</td>
+                            <td>Clears the files list.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <h3>Styling</h3>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
