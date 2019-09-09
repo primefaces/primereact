@@ -62,6 +62,7 @@ interface DataTableProps {
     stateKey?:string;
     stateStorage?:string;
     groupField?:string;
+    editMode?:string;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
     rowExpansionTemplate?(data: any): JSX.Element | undefined;
@@ -84,6 +85,10 @@ interface DataTableProps {
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
     onValueChange?(value: any[]): void;
+    rowEditorValidator?(rowData: any): boolean;
+    onRowEditInit?(e: {originalEvent: Event, data: any}): void;
+    onRowEditSave?(e: {originalEvent: Event, data: any}): void;
+    onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {
