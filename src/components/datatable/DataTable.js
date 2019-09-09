@@ -192,29 +192,25 @@ export class DataTable extends Component {
 
     constructor(props) {
         super(props);
-        let state = {};
+        this.state = {};
 
         if (!this.props.onPage) {
-            state.first = props.first;
-            state.rows = props.rows;
+            this.state.first = props.first;
+            this.state.rows = props.rows;
         }
 
         if (!this.props.onSort) {
-            state.sortField = props.sortField;
-            state.sortOrder = props.sortOrder;
-            state.multiSortMeta = props.multiSortMeta;
+            this.state.sortField = props.sortField;
+            this.state.sortOrder = props.sortOrder;
+            this.state.multiSortMeta = props.multiSortMeta;
         }
 
         if (!this.props.onFilter) {
-            state.filters = props.filters;
+            this.state.filters = props.filters;
         }
 
         if (this.isStateful()) {
-            this.restoreState(state);
-        }
-
-        if (Object.keys(state).length) {
-            this.state = state;
+            this.restoreState(this.state);
         }
 
         this.onPageChange = this.onPageChange.bind(this);
@@ -1200,6 +1196,7 @@ export class DataTable extends Component {
         let columns = React.Children.toArray(this.props.children);
 
         if(columns && columns.length) {
+            debugger;
             if(this.props.reorderableColumns && this.state.columnOrder) {
                 let orderedColumns = [];
                 for(let columnKey of this.state.columnOrder) {
