@@ -122,7 +122,7 @@ export class BodyCell extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.editing !== prevState.editing) {
+        if (nextProps.editMode === 'row' && nextProps.editing !== prevState.editing) {
             return {
                 editing: nextProps.editing
             }
