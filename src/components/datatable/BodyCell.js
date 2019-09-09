@@ -162,7 +162,7 @@ export class BodyCell extends Component {
         let cellClassName = classNames(this.props.bodyClassName||this.props.className, {
                                 'p-selection-column': this.props.selectionMode,
                                 'p-editable-column': this.props.editor,
-                                'p-cell-editing': this.state.editing
+                                'p-cell-editing': this.state.editing && this.props.editor
                             });
 
         if (this.props.expander) {
@@ -208,11 +208,8 @@ export class BodyCell extends Component {
             }
         }
         else {
-            if (this.state.editing) {
-                if (this.props.editor)
-                    content = this.props.editor(this.props);
-                else
-                    throw new Error("Editor is not found on column.");
+            if (this.state.editing && this.props.editor) {
+                content = this.props.editor(this.props);
             }
             else {
                 if (this.props.body)
