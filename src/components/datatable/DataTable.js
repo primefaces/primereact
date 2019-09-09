@@ -1196,7 +1196,6 @@ export class DataTable extends Component {
         let columns = React.Children.toArray(this.props.children);
 
         if(columns && columns.length) {
-            debugger;
             if(this.props.reorderableColumns && this.state.columnOrder) {
                 let orderedColumns = [];
                 for(let columnKey of this.state.columnOrder) {
