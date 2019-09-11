@@ -15,6 +15,7 @@ export class AutoComplete extends Component {
         id: null,
         value: null,
         name: null,
+        type: 'text',
         suggestions: null,
         field: null,
         scrollHeight: '200px',
@@ -60,6 +61,7 @@ export class AutoComplete extends Component {
         id: PropTypes.string,
         value: PropTypes.any,
         name: PropTypes.string,
+        type: PropTypes.string,
         suggestions: PropTypes.array,
         field: PropTypes.string,
         scrollHeight: PropTypes.string,
@@ -543,7 +545,7 @@ export class AutoComplete extends Component {
         });
             
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} type="text" name={this.props.name} 
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} type={this.props.type} name={this.props.name} 
                         defaultValue={this.formatValue(this.props.value)}
                         className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                         readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
@@ -574,7 +576,7 @@ export class AutoComplete extends Component {
     renderMultiInput() {
         return (
             <li className="p-autocomplete-input-token">
-                <input ref={(el) => this.inputEl = el} type="text" disabled={this.props.disabled} placeholder={this.props.placeholder}
+                <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
                        autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
                        style={this.props.inputStyle} className={this.props.inputClassName}
                        onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
