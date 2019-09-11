@@ -603,7 +603,7 @@ export class DataTable extends Component {
     }
 
     hasFilter() {
-        let filters = this.getFilters();
+        let filters = this.getFilters() || this.props.globalFilter;
 
         return filters && Object.keys(filters).length > 0;
     }
