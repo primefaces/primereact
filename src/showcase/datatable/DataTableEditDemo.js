@@ -98,7 +98,7 @@ export class DataTableEditDemo extends Component {
     }
 
     onRowEditorValidator(rowData) {
-        let value = rowData['year'];
+        let value = rowData['brand'];
         return value.length > 0;
     }
 
@@ -112,7 +112,7 @@ export class DataTableEditDemo extends Component {
             this.growl.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
         }
         else {
-            this.growl.show({severity: 'error', summary: 'Error', detail: 'Year is required'});
+            this.growl.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
         }
     }
 
@@ -274,7 +274,7 @@ export class DataTableEditDemo extends Component {
     }
 
     onRowEditorValidator(rowData) {
-        let value = rowData['year'];
+        let value = rowData['brand'];
         return value.length > 0;
     }
 
@@ -288,7 +288,7 @@ export class DataTableEditDemo extends Component {
             this.growl.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
         }
         else {
-            this.growl.show({severity: 'error', summary: 'Error', detail: 'Year is required'});
+            this.growl.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
         }
     }
 
