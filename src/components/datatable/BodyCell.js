@@ -34,7 +34,7 @@ export class BodyCell extends Component {
     onKeyDown(event) {
         if (this.props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
-                this.switchCellToViewMode(true);
+                this.switchCellToViewMode(true, event);
             }
             if (event.which === 27) // escape
             {
@@ -59,9 +59,9 @@ export class BodyCell extends Component {
         }
     }
 
-    onBlur() {
+    onBlur(event) {
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
-            this.switchCellToViewMode(true);
+            this.switchCellToViewMode(true, event);
         }
     }
     
@@ -73,7 +73,7 @@ export class BodyCell extends Component {
         if (!this.documentEditListener) {
             this.documentEditListener = (event) => {
                 if (!this.editingCellClick) {
-                    this.switchCellToViewMode(true);
+                    this.switchCellToViewMode(true, event);
                 }
 
                 this.editingCellClick = false;
@@ -93,7 +93,7 @@ export class BodyCell extends Component {
         this.unbindDocumentEditListener();
     }
 
-    switchCellToViewMode(submit) {
+    switchCellToViewMode(submit, event = {}) {
         if (this.props.editorValidator && submit) {
             let valid = this.props.editorValidator(this.props);
             if (valid) {
@@ -102,6 +102,9 @@ export class BodyCell extends Component {
                 }
                 this.closeCell();
             } // as per previous version if not valid and another editor is open, keep invalid data editor open.
+            else {
+                event.preventDefault();
+            }
         }
         else {
             if (submit && this.props.onEditorSubmit) {
