@@ -17,7 +17,8 @@ export class Panel extends Component {
         collapseIcon: 'pi pi-minus',
         onExpand: null,
         onCollapse: null,
-        onToggle: null
+        onToggle: null,
+        flex: false
     }
 
     static propTypes = {
@@ -31,7 +32,8 @@ export class Panel extends Component {
         collapseIcon: PropTypes.string,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
-        onToggle: PropTypes.func
+        onToggle: PropTypes.func,
+        flex: PropTypes.bool
     };
     
     constructor(props) {
@@ -140,7 +142,7 @@ export class Panel extends Component {
     }
     
     render() {
-        const className = classNames('p-panel p-component', this.props.className);
+        const className = classNames('p-panel p-component', this.props.className, this.props.flex ? 'p-flex' : '');
         const collapsed = this.isCollapsed();
         const header = this.renderHeader(collapsed);
         const content = this.renderContent(collapsed);

@@ -30,6 +30,15 @@ export class PanelDemo extends Component {
                         Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Panel>
+
+                    <div style={{height: 512, display: 'flex'}}>
+                      <Panel header="Godfather I" style={{marginTop: '2em'}} toggleable={true} flex={true}>
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                          His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                          Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                          kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+                      </Panel>
+                    </div>
                 </div>
 
                 <PanelDoc></PanelDoc>
@@ -96,6 +105,24 @@ import {Panel} from 'primereact/panel';
             <CodeHighlight className="language-jsx">
 {`
 <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
+    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
+    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+</Panel>
+
+`}
+</CodeHighlight>
+
+            <h3>Flex</h3>
+            <p>Content of the panel will expand or contract to fit into its parent container.</p>
+
+            <p>More than one card or cards mixed with other elements are supported.</p>
+            <p><b>Note: </b>A <i>display: flex</i> parent is needed for the properly work of the card.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<Panel header="Godfather I" style={{marginTop:'2em'}} flex={true}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
