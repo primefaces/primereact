@@ -11,6 +11,7 @@ export class Dropdown extends Component {
 
     static defaultProps = {
         id: null,
+        name: null,
         value: null,
         options: null,
         optionLabel: null,
@@ -44,6 +45,7 @@ export class Dropdown extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        name: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
