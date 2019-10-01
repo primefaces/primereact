@@ -142,7 +142,7 @@ export class Panel extends Component {
     }
     
     render() {
-        const className = classNames('p-panel p-component', this.props.className, this.props.flex ? 'p-flex' : '');
+        const className = classNames('p-panel p-component', this.props.className, this.props.flex && !this.isCollapsed() ? 'p-flex' : '');
         const collapsed = this.isCollapsed();
         const header = this.renderHeader(collapsed);
         const content = this.renderContent(collapsed);
