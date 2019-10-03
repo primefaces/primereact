@@ -1467,3 +1467,40 @@ pre[class*="language-"] {
         display: inline-block;
     }
 }
+
+/* Carousel Demo */
+body {
+    .carousel-demo {
+        .p-carousel {
+            .p-carousel-content {
+                .p-carousel-item {
+                    .car-details {
+                        > .p-grid {
+                            border: 1px solid #b3c2ca;
+                            border-radius: 3px;
+                            margin: .3em;
+                            text-align: center;
+                            padding: 0.65em 0 .75em 0;
+                        }
+                    }
+
+                    &.p-carousel-item-start {
+                        .car-details {
+                            > .p-grid {
+                                margin-left: .6em;
+                            }
+                        }
+                    }
+
+                    &.p-carousel-item-end {
+                        .car-details {
+                            > .p-grid {
+                                margin-right: .6em;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
