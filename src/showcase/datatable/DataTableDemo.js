@@ -426,6 +426,16 @@ export class DataTableDemo extends Component {
                             <td>false</td>
                             <td>Displays icons to edit row.</td>
                         </tr>
+                        <tr>
+                            <td>display</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>
+                                Valid when using `selectionMode` or `rowReorder` on column. <br />
+                                Function returning a boolean to determine if row should display selection element/row reorder icon.
+                                If prop left out, this will act as truthy and therefore render.
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -95,6 +95,22 @@ export class DataTableSelectionDemo extends Component {
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
+
+                    <h3>Conditional display</h3>
+                    <p>Conditional render of single or multiple selection can be applied when having selectionMode on column.</p>
+
+                    <CodeHighlight className="language-javascript">
+{`
+    <DataTable>
+        <Column selectionMode="multiple" style={{width:'3em'}} display={rowData => rowData.year > '2012'}/>
+        <Column field="vin" header="Vin" />
+        <Column field="year" header="Year" />
+        <Column field="brand" header="Brand" />
+        <Column field="color" header="Color" />
+    </DataTable>
+
+`}
+                    </CodeHighlight>
                 </div>
 
                 <DataTableSelectionDemoDoc></DataTableSelectionDemoDoc>

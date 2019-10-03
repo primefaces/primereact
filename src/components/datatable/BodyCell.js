@@ -158,6 +158,7 @@ export class BodyCell extends Component {
     }
 
     render() {
+        const display = !this.props.display || this.props.display && this.props.display(this.props.rowData);
         let content, header, editorKeyHelper;
         let cellClassName = classNames(this.props.bodyClassName||this.props.className, {
                                 'p-selection-column': this.props.selectionMode,
@@ -174,17 +175,21 @@ export class BodyCell extends Component {
             );
         }
         else if (this.props.selectionMode) {
-            if (this.props.selectionMode === 'single')
-                content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
-            else
-                content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+            if(display) {
+                if (this.props.selectionMode === 'single')
+                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+                else
+                    content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+            }
         }
         else if (this.props.rowReorder) {
-            let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
+            if(display) {
+                let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
 
-            content = (
-                <i className={reorderIcon}></i>
-            );
+                content = (
+                    <i className={reorderIcon}></i>
+                );
+            }
         }
         else if (this.props.rowEditor) {
             if (this.state.editing) {
