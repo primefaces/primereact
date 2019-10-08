@@ -374,15 +374,37 @@ export class Carousel extends Component {
             let totalShiftedItems = this.state.totalShiftedItems;
             let activeIndex = this.getActiveIndex();
 
+            if (this.totalDots !== 0 && activeIndex >= this.totalDots) {
+                activeIndex = this.totalDots - 1;
+
+                if (this.props.onPageChange) {
+                    this.props.onPageChange({
+                        index: activeIndex
+                    })
+                }
+                else {
+                    this.setState({
+                        activeIndex
+                    });
+                }
+            } 
+
+            if (prevProps.value.length !== this.props.value.length) {
+                totalShiftedItems = (this.state.numScroll * activeIndex) * -1;
+            }
+
             if (activeIndex === (this.totalDots - 1) && this.remainingItems > 0) {
                 totalShiftedItems += (-1 * this.remainingItems) + this.state.numScroll;
-                this.setState({
-                    totalShiftedItems
-                })
                 this.isRemainingItemsAdded = true;
             }
             else {
                 this.isRemainingItemsAdded = false;
+            }
+
+            if (totalShiftedItems !== this.state.totalShiftedItems) {
+                this.setState({
+                    totalShiftedItems
+                })
             }
 
             this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
@@ -451,7 +473,7 @@ export class Carousel extends Component {
     }
 
     renderForwardNavigator() {
-        let isDisabled = this.getActiveIndex() === (this.totalDots - 1);
+        let isDisabled = this.getActiveIndex() === (this.totalDots - 1) || this.totalDots === 0;
         let buttonClassName = classNames('p-carousel-next p-link', {
             'p-disabled': isDisabled
         });
