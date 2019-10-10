@@ -138,7 +138,7 @@ import {Panel} from 'primereact/panel';
             <p>Content of the panel will expand or contract to fit into its parent container.</p>
 
             <p>More than one card or cards mixed with other elements are supported.</p>
-            <p><b>Note: </b>A <i>display: flex</i> parent is needed for the properly work of the card.</p>
+            <p><b>Note: </b>A <i>display: flex</i> parent is needed for the properly work of the panel.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -200,6 +200,12 @@ import {Panel} from 'primereact/panel';
                             <td>false</td>
                             <td>Defines the initial state of panel content, supports one or two-way binding as well.</td>
                         </tr>
+                      <tr>
+                        <td>flex</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Defines a flexible panel.</td>
+                      </tr>
                     </tbody>
                 </table>
             </div>
@@ -250,6 +256,10 @@ import {Panel} from 'primereact/panel';
                         <tr>
                             <td>p-panel</td>
                             <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-flex</td>
+                            <td>Flexible panel.</td>
                         </tr>
                         <tr>
                             <td>p-panel-titlebar</td>
