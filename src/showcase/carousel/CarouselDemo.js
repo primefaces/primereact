@@ -204,6 +204,27 @@ const responsiveOptions = [
             <h3>AutoPlay and Circular</h3>
             <p>When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be enabled. Note that in autoplay mode, circular is enabled by default.</p>
 
+            <h3>Controlled vs Uncontrolled</h3>
+            <p>In controlled mode, <i>page</i> and <i>onPageChange</i> properties need to be defined to control the first visible item.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate} page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}></Carousel>
+
+`}
+</CodeHighlight>
+
+            <h3>Uncontrolled</h3>
+            <p>In uncontrolled mode, no additional properties are required. Initial page can be provided using the <i>page</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
+                need to update the first visible item index, prefer to use the component as controlled.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate}></Carousel>
+
+`}
+</CodeHighlight>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -229,34 +250,22 @@ const responsiveOptions = [
                             <td>An array of objects to display.</td>
                         </tr>
                         <tr>
-                            <td>rows</td>
+                            <td>page</td>
                             <td>number</td>
                             <td>null</td>
-                            <td>Number of rows to fetch in a load event.</td>
+                            <td>Index of the first item.</td>
                         </tr>
                         <tr>
-                            <td>inline</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Defines if the event target to listen the scroll event is the element itself.</td>
-                        </tr>
-                        <tr>
-                            <td>scrollHeight</td>
+                            <td>header</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Max height of the content area in inline mode.</td>
+                            <td>Label of header.</td>
                         </tr>
                         <tr>
-                            <td>loader</td>
+                            <td>footer</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Reference of the target element whose click event loads the data instead of scrolling.</td>
-                        </tr>
-                        <tr>
-                            <td>buffer</td>
-                            <td>number</td>
-                            <td>0.9</td>
-                            <td>Number of buffer size.</td>
+                            <td>Label of footer.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -277,16 +286,58 @@ const responsiveOptions = [
                             <td>Function that gets an item in the value and returns the content for it.</td>
                         </tr>
                         <tr>
-                            <td>header</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Label of header.</td>
+                            <td>circular</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Defines if scrolling would be infinite.</td>
                         </tr>
                         <tr>
-                            <td>footer</td>
+                            <td>autoplayInterval</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Time in milliseconds to scroll items automatically.</td>
+                        </tr>
+                        <tr>
+                            <td>numVisible</td>
+                            <td>number</td>
+                            <td>1</td>
+                            <td>Number of items per page.</td>
+                        </tr>
+                        <tr>
+                            <td>numScroll</td>
+                            <td>number</td>
+                            <td>1</td>
+                            <td>Number of items to scroll.</td>
+                        </tr>
+                        <tr>
+                            <td>responsiveOptions</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>Label of footer.</td>
+                            <td>An array of options for responsive design.</td>
+                        </tr>
+                        <tr>
+                            <td>orientation</td>
+                            <td>string</td>
+                            <td>horizontal</td>
+                            <td>Specifies the layout of the component, valid values are "horizontal" and "vertical".</td>
+                        </tr>
+                        <tr>
+                            <td>verticalContentHeight</td>
+                            <td>string</td>
+                            <td>300px</td>
+                            <td>Height of the viewport in vertical layout.</td>
+                        </tr>
+                        <tr>
+                            <td>contentClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the viewport.</td>
+                        </tr>
+                        <tr>
+                            <td>dotsContentClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the paginator items.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -304,10 +355,9 @@ const responsiveOptions = [
                     </thead>
                     <tbody>
                         <tr>
-                            <td>onLazyLoad</td>
-                            <td>event.first = First row offset <br />
-                                event.rows = Number of rows per page <br /></td>
-                            <td>Callback to invoke in lazy mode to load new data.</td>
+                            <td>onPageChange</td>
+                            <td>event.page = Value of the new page.</td>
+                            <td>Callback to invoke after scroll.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -325,24 +375,32 @@ const responsiveOptions = [
                     </thead>
                     <tbody>
                         <tr>
-                            <td>p-datascroller</td>
+                            <td>p-carousel</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>p-datascroller-header</td>
+                            <td>p-carousel-header</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
-                            <td>p-datascroller-footer</td>
+                            <td>p-carousel-footer</td>
                             <td>Footer section.</td>
                         </tr>
                         <tr>
-                            <td>p-datascroller-content</td>
-                            <td>Wrapper of item container.</td>
+                            <td>p-carousel-content</td>
+                            <td>Viewport.</td>
                         </tr>
                         <tr>
-                            <td>p-datascroller-list</td>
-                            <td>Item container element.</td>
+                            <td>p-carousel-dots-content</td>
+                            <td>Container of the paginator.</td>
+                        </tr>
+                        <tr>
+                            <td>p-carousel-dot-item</td>
+                            <td>Paginator element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-carousel-dot-icon</td>
+                            <td>Paginator element icon.</td>
                         </tr>
                     </tbody>
                 </table>
