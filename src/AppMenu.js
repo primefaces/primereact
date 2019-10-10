@@ -76,6 +76,7 @@ export class AppMenu extends Component {
                 <CSSTransition classNames="layout-submenu" timeout={{ enter: 400, exit: 400 }} in={this.state.activeMenu === 2}>
                     <div className="layout-submenu">
                         <div>
+                            <Link to="/carousel">&#9679; Carousel</Link>
                             <Link to="/dataview">&#9679; DataView</Link>
                             <Link to="/datatable">&#9679; DataTable</Link>
                             <Link to="/datascroller">&#9679; DataScroller</Link>
