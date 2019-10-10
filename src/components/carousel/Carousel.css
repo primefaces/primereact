@@ -61,18 +61,13 @@
     width: 100%;
     box-sizing: border-box;
     overflow: auto;
-    visibility: hidden;
-    transition: visibility 1s;
-}
-
-.p-carousel-items .p-carousel-item.p-carousel-item-active {
-    visibility: visible;
 }
 
 .p-carousel-dots-content {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
     margin: .5em;
 }
 

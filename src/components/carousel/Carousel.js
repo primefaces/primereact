@@ -10,7 +10,8 @@ class CarouselItem extends Component {
         item: null,
         active: false,
         start: false,
-        end: false
+        end: false,
+        className: null
     }
 
     static propTypes = {
@@ -18,12 +19,13 @@ class CarouselItem extends Component {
         item: PropTypes.any,
         active: PropTypes.bool,
         start: PropTypes.bool,
-        end: PropTypes.bool
+        end: PropTypes.bool,
+        className: PropTypes.string
     }
 
     render() {
         const content = this.props.template(this.props.item);
-        const itemClassName = classNames('p-carousel-item', {
+        const itemClassName = classNames(this.props.className, 'p-carousel-item', {
             'p-carousel-item-active': this.props.active,
             'p-carousel-item-start': this.props.start,
             'p-carousel-item-end': this.props.end
@@ -42,12 +44,14 @@ export class Carousel extends Component {
     static defaultProps = {
         id: null,
         value: null,
-        activeIndex: 0,
+        page: 0,
         header: null,
         footer: null,
         style: null,
         className: null,
         itemTemplate: null,
+        circular: false,
+        autoplayInterval: 0,
         numVisible: 1,
         numScroll: 1,
         responsive: null,
@@ -61,12 +65,14 @@ export class Carousel extends Component {
     static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
-        activeIndex: PropTypes.number,
+        page: PropTypes.number,
         header: PropTypes.any,
         footer: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         itemTemplate: PropTypes.any,
+        circular: PropTypes.bool,
+        autoplayInterval: PropTypes.number,
         numVisible: PropTypes.number,
         numScroll: PropTypes.number,
         responsive: PropTypes.array,
@@ -83,13 +89,13 @@ export class Carousel extends Component {
         this.state = {
             numVisible: props.numVisible,
             numScroll: props.numScroll,
-            totalShiftedItems: (props.activeIndex * props.numScroll) * -1
+            totalShiftedItems: (props.page * props.numScroll) * -1
         }
 
         if (!this.props.onPageChange) {
             this.state = {
                 ...this.state,
-                activeIndex: props.activeIndex
+                page: props.page
             }
         }
 
@@ -100,15 +106,22 @@ export class Carousel extends Component {
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.totalDots = 0;
         this.remainingItems = 0;
+        this.circular = this.props.circular;
 
         this.id = this.props.id || UniqueComponentId();
     }
 
-    step(event, dir, index) {
+    step(dir, index) {
         let totalShiftedItems = this.state.totalShiftedItems;
+        const isCircular = this.isCircular();
 
         if (index != null) {
             totalShiftedItems = (this.state.numScroll * index) * -1;
+
+            if (isCircular) {
+                totalShiftedItems -= this.state.numVisible;
+            }
+
             this.isRemainingItemsAdded = false;
         }
         else {
@@ -118,10 +131,19 @@ export class Carousel extends Component {
                 this.isRemainingItemsAdded = false;
             }
 
-            index = Math.abs(parseInt(totalShiftedItems / this.state.numScroll, 10));
+            let originalShiftedItems = isCircular ? (totalShiftedItems + this.state.numVisible) : totalShiftedItems;
+            index = Math.abs(Math.floor(originalShiftedItems / this.state.numScroll));
         }
 
-        if (index === (this.totalDots - 1) && this.remainingItems > 0) {
+        if (isCircular && this.state.page === (this.totalDots - 1) && dir === -1) {
+            totalShiftedItems = -1 * (this.props.value.length + this.state.numVisible);
+            index = 0;
+        }
+        else if (isCircular && this.state.page === 0 && dir === 1) {
+            totalShiftedItems = 0;
+            index = (this.totalDots - 1);
+        }
+        else if (index === (this.totalDots - 1) && this.remainingItems > 0) {
             totalShiftedItems += ((this.remainingItems * -1) - (this.state.numScroll * dir));
             this.isRemainingItemsAdded = true;
         }
@@ -147,18 +169,17 @@ export class Carousel extends Component {
 
         if (this.props.onPageChange) {
             this.props.onPageChange({
-                originalEvent: event,
                 index
             })
         }
         else {
             this.setState({
-                activeIndex: index
+                page: index
             });
         }
     }
 
-    calculatePosition(event) {
+    calculatePosition() {
         if (this.itemsContainer && this.responsive) {
             let windowWidth = window.innerWidth;
             let matchedResponsiveData = {
@@ -176,10 +197,14 @@ export class Carousel extends Component {
 
             let state = {};
             if (this.state.numScroll !== matchedResponsiveData.numScroll) {
-                let activeIndex = this.getActiveIndex();
-                activeIndex = parseInt((activeIndex * this.state.numScroll) / matchedResponsiveData.numScroll);
+                let page = this.getPage();
+                page = Math.floor((page * this.state.numScroll) / matchedResponsiveData.numScroll);
                 
-                let totalShiftedItems = (matchedResponsiveData.numScroll * activeIndex) * -1;
+                let totalShiftedItems = (matchedResponsiveData.numScroll * page) * -1;
+
+                if (this.isCircular()) {
+                    totalShiftedItems -= matchedResponsiveData.numVisible;
+                }
 
                 state = {
                     totalShiftedItems,
@@ -188,14 +213,13 @@ export class Carousel extends Component {
 
                 if (this.props.onPageChange) {
                     this.props.onPageChange({
-                        originalEvent: event,
-                        index: activeIndex
+                        index: page
                     })
                 }
                 else {
                     state = {
                         ...state,
-                        activeIndex
+                        page
                     };
                 }
             }
@@ -214,8 +238,8 @@ export class Carousel extends Component {
     }
 
     navBackward(e, index) {
-        if (this.getActiveIndex() !== 0) {
-            this.step(e, 1, index);
+        if (this.circular || this.getPage() !== 0) {
+            this.step(1, index);
         }
 
         if (e.cancelable) {
@@ -224,8 +248,8 @@ export class Carousel extends Component {
     }
 
     navForward(e, index) {
-        if (this.getActiveIndex() < (this.totalDots - 1)) {
-            this.step(e, -1, index);
+        if (this.circular || this.getPage() < (this.totalDots - 1)) {
+            this.step(-1, index);
         }
 
         if (e.cancelable) {
@@ -234,12 +258,12 @@ export class Carousel extends Component {
     }
 
     onDotClick(e, index) {
-        let activeIndex = this.getActiveIndex();
+        let page = this.getPage();
 
-        if (index > activeIndex) {
+        if (index > page) {
             this.navForward(e, index);
         }
-        else if (index < activeIndex) {
+        else if (index < page) {
             this.navBackward(e, index);
         }
     }
@@ -270,19 +294,19 @@ export class Carousel extends Component {
         }
     }
 
-    changePageOnTouch(e, diff) {
+    changePageOnTouch(diff) {
         if (diff < 0) {           // left
-            this.navForward(e);
+            this.navForward();
         }
         else {                    // right
-            this.navBackward(e);
+            this.navBackward();
         }
     }
 
     bindDocumentListeners() {
         if (!this.documentResizeListener) {
-            this.documentResizeListener = (e) => {
-                this.calculatePosition(e);
+            this.documentResizeListener = () => {
+                this.calculatePosition();
             };
 
             window.addEventListener('resize', this.documentResizeListener);
@@ -300,12 +324,30 @@ export class Carousel extends Component {
         return this.props.orientation === 'vertical';
     }
 
-    getActiveIndex() {
-        return this.props.onPageChange ? this.props.activeIndex : this.state.activeIndex;
+    isCircular() {
+        return this.circular && this.props.value.length >= this.state.numVisible;
+    }
+
+    getPage() {
+        return this.props.onPageChange ? this.props.page : this.state.page;
     }
 
     getTotalDots() {
         return this.props.value ? Math.ceil((this.props.value.length - this.state.numVisible) / this.state.numScroll) + 1 : 0;
+    }
+
+    startAutoplay() {
+        this.interval = setInterval(() => {
+            if(this.state.page === (this.totalPages - 1))
+                this.step(-1, 0);
+            else
+                this.step(-1, this.state.page + 1);
+        }, 
+        this.props.autoplayInterval);
+    }
+
+    stopAutoplay() {
+        clearInterval(this.interval);
     }
     
     createStyle() {
@@ -368,32 +410,45 @@ export class Carousel extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        const isCircular = this.isCircular();
+        let stateChanged = false;
+
+        if(this.props.autoplayInterval) {
+            this.stopAutoplay();
+        }
+
         if (prevState.numScroll !== this.state.numScroll || prevProps.value.length !== this.props.value.length) {
             this.remainingItems = (this.props.value.length - this.state.numVisible) % this.state.numScroll;
 
             let totalShiftedItems = this.state.totalShiftedItems;
-            let activeIndex = this.getActiveIndex();
+            let page = this.getPage();
 
-            if (this.totalDots !== 0 && activeIndex >= this.totalDots) {
-                activeIndex = this.totalDots - 1;
+            if (this.totalDots !== 0 && page >= this.totalDots) {
+                page = this.totalDots - 1;
 
                 if (this.props.onPageChange) {
                     this.props.onPageChange({
-                        index: activeIndex
+                        index: page
                     })
                 }
                 else {
                     this.setState({
-                        activeIndex
+                        page
                     });
                 }
+
+                stateChanged = true;
             } 
 
             if (prevProps.value.length !== this.props.value.length) {
-                totalShiftedItems = (this.state.numScroll * activeIndex) * -1;
+                totalShiftedItems = (this.state.numScroll * page) * -1;
+
+                if (isCircular) {
+                    totalShiftedItems -= this.state.numVisible;
+                }
             }
 
-            if (activeIndex === (this.totalDots - 1) && this.remainingItems > 0) {
+            if (page === (this.totalDots - 1) && this.remainingItems > 0) {
                 totalShiftedItems += (-1 * this.remainingItems) + this.state.numScroll;
                 this.isRemainingItemsAdded = true;
             }
@@ -405,9 +460,48 @@ export class Carousel extends Component {
                 this.setState({
                     totalShiftedItems
                 })
+
+                stateChanged = true;
             }
 
             this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+        }
+
+        if (isCircular) {
+            let totalShiftedItems = this.state.totalShiftedItems;
+
+            if (this.state.page === 0) {
+                totalShiftedItems = -1 * this.state.numVisible;
+            }
+            else if (totalShiftedItems === 0) {
+                totalShiftedItems = -1 * this.props.value.length;
+                if (this.remainingItems > 0) {
+                    this.isRemainingItemsAdded = true;
+                }
+            }
+
+            if (totalShiftedItems !== this.state.totalShiftedItems) {
+                this.setState({
+                    totalShiftedItems
+                });
+                stateChanged = true;
+                
+                let delay = this.props.autoplayInterval ? this.props.autoplayInterval - 1 : 501;
+                if (this.translateTimeout) {
+                    clearTimeout(this.translateTimeout);
+                }
+    
+                this.translateTimeout = setTimeout(() => {
+                    if (this.itemsContainer) {
+                        this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+                    }
+                }, delay);
+            }
+        }
+
+        if(!stateChanged && this.props.autoplayInterval) {
+            this.circular = true;
+            this.startAutoplay();
         }
     }
 
@@ -419,16 +513,48 @@ export class Carousel extends Component {
 
     renderItems() {
         if (this.props.value && this.props.value.length) {
+            const isCircular = this.isCircular();
+            let clonedItemsForStarting = null;
+            let clonedItemsForFinishing = null;
+
+            if (isCircular) {
+                let clonedElements = null;
+
+                clonedElements = this.props.value.slice(-1 * this.state.numVisible);
+                clonedItemsForStarting = clonedElements.map((item, index) => {
+                    let isActive = this.state.totalShiftedItems === 0,
+                    start = index === 0,
+                    end = index === (clonedElements.length - 1);
+
+                    return <CarouselItem key={index + '_scloned'} className="p-carousel-item-cloned" template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}/>
+                });
+
+                clonedElements = this.props.value.slice(0, this.state.numVisible);
+                clonedItemsForFinishing = clonedElements.map((item, index) => {
+                    let isActive = (this.state.totalShiftedItems * -1) === (this.props.value.length + this.state.numVisible),
+                    start = index === 0,
+                    end = index === (clonedElements.length - 1);
+
+                    return <CarouselItem key={index + '_fcloned'} className="p-carousel-item-cloned" template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}/>
+                });
+            }
+
+            let items = this.props.value.map((item, index) => {
+                            let firstIndex = isCircular ? (-1 * (this.state.totalShiftedItems + this.state.numVisible)) : (this.state.totalShiftedItems * -1),
+                            lastIndex = firstIndex + this.state.numVisible - 1,
+                            isActive = firstIndex <= index && lastIndex >= index,
+                            start = firstIndex === index,
+                            end = lastIndex === index;
+                            
+                            return <CarouselItem key={index} template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}/>
+                        });
+
             return (
-                this.props.value.map((item, index) => {
-                    let firstIndex = (this.state.totalShiftedItems * -1),
-                    lastIndex = firstIndex + this.state.numVisible - 1,
-                    isActive = firstIndex <= index && lastIndex >= index,
-                    start = firstIndex === index,
-                    end = lastIndex === index;
-                    
-                    return <CarouselItem key={index} template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}/>
-                })
+                <React.Fragment>
+                    {clonedItemsForStarting}
+                    {items}
+                    {clonedItemsForFinishing}
+                </React.Fragment>
             );
         }
     }
@@ -460,7 +586,7 @@ export class Carousel extends Component {
     }
 
     renderBackwardNavigator() {
-        let isDisabled = this.getActiveIndex() === 0;
+        let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && this.getPage() === 0;
         let buttonClassName = classNames('p-carousel-prev p-link', {
             'p-disabled': isDisabled
         });
@@ -473,7 +599,7 @@ export class Carousel extends Component {
     }
 
     renderForwardNavigator() {
-        let isDisabled = this.getActiveIndex() === (this.totalDots - 1) || this.totalDots === 0;
+        let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && (this.getPage() === (this.totalDots - 1) || this.totalDots === 0);
         let buttonClassName = classNames('p-carousel-next p-link', {
             'p-disabled': isDisabled
         });
@@ -486,7 +612,7 @@ export class Carousel extends Component {
     }
 
     renderDot(index) {
-        let isActive = this.getActiveIndex() === index,
+        let isActive = this.getPage() === index,
         dotItemClassName = classNames('p-carousel-dot-item', {
             'p-highlight': isActive
         }),
