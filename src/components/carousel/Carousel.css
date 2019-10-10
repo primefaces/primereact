@@ -77,11 +77,6 @@
     width: 100%;
 }
 
-.p-carousel-vertical .p-carousel-prev, 
-.p-carousel-vertical .p-carousel-next {
-    transform: rotate(90deg);
-}
-
 .p-carousel-vertical .p-carousel-items {
     flex-direction: column;
     height: 100%;

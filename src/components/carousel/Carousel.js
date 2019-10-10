@@ -612,11 +612,15 @@ export class Carousel extends Component {
         let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && this.getPage() === 0;
         let buttonClassName = classNames('p-carousel-prev p-link', {
             'p-disabled': isDisabled
+        }),
+        iconClassName = classNames('p-carousel-prev-icon pi', {
+            'pi-chevron-left': !this.isVertical(),
+            'pi-chevron-up': this.isVertical()
         });
 
         return (
             <button className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
-                <span className="p-carousel-prev-icon pi pi-chevron-left"></span>
+                <span className={iconClassName}></span>
             </button>
         );
     }
@@ -625,11 +629,15 @@ export class Carousel extends Component {
         let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && (this.getPage() === (this.totalDots - 1) || this.totalDots === 0);
         let buttonClassName = classNames('p-carousel-next p-link', {
             'p-disabled': isDisabled
+        }),
+        iconClassName = classNames('p-carousel-prev-icon pi', {
+            'pi-chevron-right': !this.isVertical(),
+            'pi-chevron-down': this.isVertical()
         });
 
         return (
             <button className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
-                <span className="p-carousel-next-icon pi pi-chevron-right"></span>
+                <span className={iconClassName}></span>
             </button>
         );
     }
