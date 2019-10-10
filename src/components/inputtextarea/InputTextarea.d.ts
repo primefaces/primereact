@@ -8,6 +8,7 @@ interface InputTextareaProps extends React.HTMLProps<HTMLTextAreaElement> {
     onBlur?(event: React.FocusEvent<HTMLTextAreaElement>): void;
     onKeyUp?(event: React.KeyboardEvent<HTMLTextAreaElement>): void; 
     onFocus?(event: React.FocusEvent<HTMLTextAreaElement>): void; 
+    onInput?(event: React.FormEvent<HTMLTextAreaElement>): void;
     [key: string]: any;
 }
 
