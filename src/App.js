@@ -15,6 +15,7 @@ import './sass/App.scss';
 import { AccordionDemo } from './showcase/accordion/AccordionDemo';
 import { AutoCompleteDemo } from './showcase/autocomplete/AutoCompleteDemo';
 import { ButtonDemo } from './showcase/button/ButtonDemo';
+import { CarouselDemo } from './showcase/carousel/CarouselDemo';
 import { SplitButtonDemo } from './showcase/splitbutton/SplitButtonDemo';
 import { CheckboxDemo } from './showcase/checkbox/CheckboxDemo';
 import { ChipsDemo } from './showcase/chips/ChipsDemo';
@@ -382,6 +383,7 @@ export class App extends Component {
                     <Route path="/slider" component={SliderDemo} />
                     <Route path="/spinner" component={SpinnerDemo} />
                     <Route path="/calendar" component={CalendarDemo} />
+                    <Route path="/carousel" component={CarouselDemo} />
                     <Route path="/chartdemo" component={ChartDemo} />
                     <Route path="/combochart" component={ComboChartDemo} />
                     <Route path="/piechart" component={PieChartDemo} />
