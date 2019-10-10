@@ -169,7 +169,7 @@ export class Carousel extends Component {
 
         if (this.props.onPageChange) {
             this.props.onPageChange({
-                index
+                page: index
             })
         }
         else {
@@ -213,7 +213,7 @@ export class Carousel extends Component {
 
                 if (this.props.onPageChange) {
                     this.props.onPageChange({
-                        index: page
+                        page
                     })
                 }
                 else {

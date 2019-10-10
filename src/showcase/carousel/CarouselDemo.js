@@ -14,9 +14,6 @@ export class CarouselDemo extends Component {
         };
         this.carservice = new CarService();
         this.carTemplate = this.carTemplate.bind(this);
-        this.headerTemplate = (
-            <h3>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h3>
-        );
 
         this.responsiveSettings = [
             {
@@ -25,12 +22,12 @@ export class CarouselDemo extends Component {
                 numScroll: 3
             },
             {
-                breakpoint: '600px',
+                breakpoint: '768px',
                 numVisible: 2,
                 numScroll: 2
             },
             {
-                breakpoint: '480px',
+                breakpoint: '560px',
                 numVisible: 1,
                 numScroll: 1
             }
@@ -64,6 +61,10 @@ export class CarouselDemo extends Component {
     }
 
     render() {
+        const basicHeader = <h2>Basic</h2>;
+        const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
+        const verticalHeader = <h2>Vertical</h2>
+
         return (
             <div className="carousel-demo">
                 <div className="content-section introduction">
@@ -74,16 +75,14 @@ export class CarouselDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3} responsive={this.responsiveSettings}></Carousel>
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3} 
+                        header={basicHeader} responsive={this.responsiveSettings}></Carousel>
 
-                    <h3>Customized</h3>
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                        responsive={this.responsiveSettings} header={this.headerTemplate}></Carousel>
+                        responsive={this.responsiveSettings} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
 
-                    <h3>Vertical</h3>
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px'}}
-                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalContentHeight="330px"></Carousel>
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px', marginTop: '2em'}}
+                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalContentHeight="330px" header={verticalHeader}></Carousel>
                 </div>
 
                 <CarouselDoc />                
@@ -106,17 +105,17 @@ export class CarouselDoc extends Component {
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
 {`
-import {DataScroller} from 'primereact/datascroller';
+import {Carousel} from 'primereact/carousel';
 
 `}
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a 
-                list of cars where each load event adds 10 more rows if available.</p>
+            <p>Carousel requires a collection of items as its value along with a template to render each item.</p>
+
 <CodeHighlight className="language-jsx">
 {`
-<DataScroller value={this.state.cars} itemTemplate={carTemplate} rows={10}></DataScroller>
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate}></Carousel>
 
 `}
 </CodeHighlight>
@@ -142,39 +141,68 @@ carTemplate(car) {
 `}
 </CodeHighlight>
 
-
-            <h3>Inline</h3>
-            <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
-<CodeHighlight className="language-jsx">
+            <h3>Items per page and Scroll Items</h3>
+            <p>Number of items per page is defined using the <i>numVisible</i> property whereas number of items to scroll is defined with the <i>numScroll</i> property.</p>
+            <CodeHighlight className="language-jsx">
 {`
-<DataScroller value={this.state.cars} itemTemplate={carTemplate} rows={10} inline={true}></DataScroller>
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1}></Carousel>
 
 `}
 </CodeHighlight>
 
-            <h3>Lazy Loading</h3>
-            <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
-             onLazyLoad callback everytime paging happens. To implement lazy loading,
-            enable <i>lazy</i> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
-            that contains information about what to load.</p>
-
-<CodeHighlight className="language-jsx">
+            <h3>Responsive</h3>
+            <p>For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of 
+            objects whose breakpoint defines the max-width to apply the settings.</p>
+            <CodeHighlight className="language-jsx">
 {`
-<DataScroller value={this.state.cars} itemTemplate={carTemplate} rows={10} lazy={true} onLazyLoad={this.loadData}></DataScroller>
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="language-javascript">
 {`
-loadData(event) {
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //add more records to the cars array
-}
+const responsiveOptions = [
+    {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+    },
+    {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+    },
+    {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+    }
+];
 
 `}
 </CodeHighlight>
+
+            <h3>Header and Footer</h3>
+            <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
+            <CodeHighlight className="language-jsx">
+{`
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate} header={<h1>Header</h1>}></Carousel>
+
+`}
+</CodeHighlight>
+
+            <h3>Orientation</h3>
+            <p>Default layout of the Carousel is horizontal, other possible option is the vertical mode that is configured with the <i>orientation</i> property.</p>
+            <CodeHighlight className="language-jsx">
+{`
+<Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical"></Carousel>
+
+`}
+</CodeHighlight>
+
+            <h3>AutoPlay and Circular</h3>
+            <p>When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be enabled. Note that in autoplay mode, circular is enabled by default.</p>
 
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
@@ -332,49 +360,59 @@ loadData(event) {
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {DataScroller} from 'primereact/datascroller';
+import {Carousel} from 'primereact/carousel';
+import {Button} from 'primereact/button';
 import {CarService} from '../service/CarService';
 
-export class DataScrollerDemo extends Component {
+export class CarouselDemo extends Component {
 
     constructor() {
         super();
         this.state = { 
-            cars: [] 
+            cars: []
         };
         this.carservice = new CarService();
         this.carTemplate = this.carTemplate.bind(this);
+
+        this.responsiveSettings = [
+            {
+                breakpoint: '1024px',
+                numVisible: 3,
+                numScroll: 3
+            },
+            {
+                breakpoint: '768px',
+                numVisible: 2,
+                numScroll: 2
+            },
+            {
+                breakpoint: '560px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ];
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
     carTemplate(car) {
-        if (!car) {
-            return;
-        }
-
-        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
-
         return (
-            <div className="p-grid car-item">
-                <div className="p-col-12 p-md-3">
-                    <img src={src} alt="Car" />
-                </div>
-                <div className="p-col-12 p-md-9">
-                    <div className="p-grid">
-                        <div className="p-col-2 p-sm-6">Vin: </div>
-                        <div className="p-col-10 p-sm-6">{car.vin}</div>
-            
-                        <div className="p-col-2 p-sm-6">Year: </div>
-                        <div className="p-col-10 p-sm-6">{car.year}</div>
-            
-                        <div className="p-col-2 p-sm-6">Brand: </div>
-                        <div className="p-col-10 p-sm-6">{car.brand}</div>
-            
-                        <div className="p-col-2 p-sm-6">Color: </div>
-                        <div className="p-col-10 p-sm-6">{car.color}</div>
+            <div className="car-details">
+                <div className="p-grid p-nogutter">
+                    <div className="p-col-12">
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    </div>
+                    <div className="p-col-12 car-data">
+                        <div className="car-title">{car.brand}</div>
+                        <div className="car-subtitle">{car.year} | {car.color}</div>
+
+                        <div className="car-buttons">
+                            <Button icon="pi pi-search" className="p-button-secondary" />
+                            <Button icon="pi pi-star" className="p-button-secondary" />
+                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -382,26 +420,29 @@ export class DataScrollerDemo extends Component {
     }
 
     render() {
-        return (
-            <div className="datascroll-demo">
-                <DataScrollerSubmenu />
+        const basicHeader = <h2>Basic</h2>;
+        const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
+        const verticalHeader = <h2>Vertical</h2>
 
+        return (
+            <div className="carousel-demo">
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>DataScroller</h1>
-                        <p>DataScroller displays data with on demand loading using scroll.</p>
+                        <h1>Carousel</h1>
+                        <p>Carousel is a content slider featuring various customization options.</p>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    Demo is at the bottom of this page.
-                </div>
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3} 
+                        header={basicHeader} responsive={this.responsiveSettings}></Carousel>
 
-                <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} 
-                            rows={10} buffer={0.4} header="List of Cars" />
-                </div>
-                
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
+                        responsive={this.responsiveSettings} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px', marginTop: '2em'}}
+                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalContentHeight="330px" header={verticalHeader}></Carousel>
+                </div>             
             </div>
         );
     }
