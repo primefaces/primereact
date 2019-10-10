@@ -106,17 +106,18 @@ export class Carousel extends Component {
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.totalDots = 0;
         this.remainingItems = 0;
-        this.circular = this.props.circular;
-
+        this.allowAutoplay = !!this.props.autoplayInterval;
+        this.circular = this.props.circular || this.allowAutoplay;
+        
         this.id = this.props.id || UniqueComponentId();
     }
 
-    step(dir, index) {
+    step(dir, page) {
         let totalShiftedItems = this.state.totalShiftedItems;
         const isCircular = this.isCircular();
 
-        if (index != null) {
-            totalShiftedItems = (this.state.numScroll * index) * -1;
+        if (page != null) {
+            totalShiftedItems = (this.state.numScroll * page) * -1;
 
             if (isCircular) {
                 totalShiftedItems -= this.state.numVisible;
@@ -132,18 +133,18 @@ export class Carousel extends Component {
             }
 
             let originalShiftedItems = isCircular ? (totalShiftedItems + this.state.numVisible) : totalShiftedItems;
-            index = Math.abs(Math.floor(originalShiftedItems / this.state.numScroll));
+            page = Math.abs(Math.floor(originalShiftedItems / this.state.numScroll));
         }
 
         if (isCircular && this.state.page === (this.totalDots - 1) && dir === -1) {
             totalShiftedItems = -1 * (this.props.value.length + this.state.numVisible);
-            index = 0;
+            page = 0;
         }
         else if (isCircular && this.state.page === 0 && dir === 1) {
             totalShiftedItems = 0;
-            index = (this.totalDots - 1);
+            page = (this.totalDots - 1);
         }
-        else if (index === (this.totalDots - 1) && this.remainingItems > 0) {
+        else if (page === (this.totalDots - 1) && this.remainingItems > 0) {
             totalShiftedItems += ((this.remainingItems * -1) - (this.state.numScroll * dir));
             this.isRemainingItemsAdded = true;
         }
@@ -169,12 +170,12 @@ export class Carousel extends Component {
 
         if (this.props.onPageChange) {
             this.props.onPageChange({
-                page: index
+                page
             })
         }
         else {
             this.setState({
-                page: index
+                page
             });
         }
     }
@@ -237,34 +238,36 @@ export class Carousel extends Component {
         }
     }
 
-    navBackward(e, index) {
+    navBackward(e, page) {
         if (this.circular || this.getPage() !== 0) {
-            this.step(1, index);
+            this.step(1, page);
         }
 
+        this.allowAutoplay = false;
         if (e.cancelable) {
             e.preventDefault();
         }
     }
 
-    navForward(e, index) {
+    navForward(e, page) {
         if (this.circular || this.getPage() < (this.totalDots - 1)) {
-            this.step(-1, index);
+            this.step(-1, page);
         }
 
+        this.allowAutoplay = false;
         if (e.cancelable) {
             e.preventDefault();
         }
     }
 
-    onDotClick(e, index) {
-        let page = this.getPage();
+    onDotClick(e, page) {
+        let currentPage = this.getPage();
 
-        if (index > page) {
-            this.navForward(e, index);
+        if (page > currentPage) {
+            this.navForward(e, page);
         }
-        else if (index < page) {
-            this.navBackward(e, index);
+        else if (page < currentPage) {
+            this.navBackward(e, page);
         }
     }
 
@@ -336,18 +339,26 @@ export class Carousel extends Component {
         return this.props.value ? Math.ceil((this.props.value.length - this.state.numVisible) / this.state.numScroll) + 1 : 0;
     }
 
+    isAutoplay() {
+        return this.props.autoplayInterval && this.allowAutoplay;
+    }
+
     startAutoplay() {
         this.interval = setInterval(() => {
-            if(this.state.page === (this.totalPages - 1))
+            if(this.state.page === (this.totalDots - 1)) {
                 this.step(-1, 0);
-            else
+            }
+            else {
                 this.step(-1, this.state.page + 1);
+            }
         }, 
         this.props.autoplayInterval);
     }
 
     stopAutoplay() {
-        clearInterval(this.interval);
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
     }
     
     createStyle() {
@@ -428,7 +439,7 @@ export class Carousel extends Component {
 
                 if (this.props.onPageChange) {
                     this.props.onPageChange({
-                        index: page
+                        page
                     })
                 }
                 else {
@@ -486,21 +497,21 @@ export class Carousel extends Component {
                 });
                 stateChanged = true;
                 
-                let delay = this.props.autoplayInterval ? this.props.autoplayInterval - 1 : 501;
+                let delay = this.isAutoplay() ? this.props.autoplayInterval - 1 : 501;
                 if (this.translateTimeout) {
                     clearTimeout(this.translateTimeout);
                 }
     
                 this.translateTimeout = setTimeout(() => {
-                    if (this.itemsContainer) {
+                    let isTransformChange = this.props.autoplayInterval ? (this.itemsContainer && prevState.page > this.state.page) : this.itemsContainer;
+                    if (isTransformChange) {
                         this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
                     }
                 }, delay);
             }
         }
 
-        if(!stateChanged && this.props.autoplayInterval) {
-            this.circular = true;
+        if(!stateChanged && this.isAutoplay()) {
             this.startAutoplay();
         }
     }
