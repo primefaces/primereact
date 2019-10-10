@@ -2299,14 +2299,14 @@ body .p-carousel .p-carousel-content .p-carousel-next {
   body .p-carousel .p-carousel-content .p-carousel-prev:not(.p-disabled):hover,
   body .p-carousel .p-carousel-content .p-carousel-next:not(.p-disabled):hover {
     color: #cc285c; }
-body .p-carousel .p-carousel-dots-content .p-carousel-dot-item .p-carousel-dot-icon {
+body .p-carousel .p-carousel-dots-container .p-carousel-dot-item .p-carousel-dot-icon {
   width: 20px;
   height: 6px;
   background-color: #b2c1cd;
   margin: 0 0.2em; }
-  body .p-carousel .p-carousel-dots-content .p-carousel-dot-item .p-carousel-dot-icon::before {
+  body .p-carousel .p-carousel-dots-container .p-carousel-dot-item .p-carousel-dot-icon::before {
     content: ' '; }
-body .p-carousel .p-carousel-dots-content .p-carousel-dot-item.p-highlight .p-carousel-dot-icon {
+body .p-carousel .p-carousel-dots-container .p-carousel-dot-item.p-highlight .p-carousel-dot-icon {
   background-color: #cc285c; }
 
 body .p-messages {

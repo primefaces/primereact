@@ -6,10 +6,10 @@
 
 .p-carousel-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     overflow: auto;
-    padding: .5em;
+    padding: 0 .5em;
 }
 
 .p-carousel-prev.p-link,
@@ -39,31 +39,34 @@
 
 .p-carousel-container {
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    flex-direction: row;
     padding: 0 .1em;
+}
+
+.p-carousel-items-content {
+    overflow: hidden;
     width: 100%;
 }
 
 .p-carousel-header,
 .p-carousel-footer {
-    padding: .5em;
+    padding: 0 .5em;
     z-index: 1;
 }
 
-.p-carousel-items {
+.p-carousel-items-container {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
 }
 
-.p-carousel-items .p-carousel-item {
+.p-carousel-items-container .p-carousel-item {
     width: 100%;
     box-sizing: border-box;
     overflow: auto;
 }
 
-.p-carousel-dots-content {
+.p-carousel-dots-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -72,16 +75,16 @@
 }
 
 /* Vertical */
-.p-carousel-vertical .p-carousel-content {
+.p-carousel-vertical .p-carousel-container {
     flex-direction: column;
     width: 100%;
 }
 
-.p-carousel-vertical .p-carousel-items {
+.p-carousel-vertical .p-carousel-items-container {
     flex-direction: column;
     height: 100%;
 }
 
-.p-carousel-vertical .p-carousel-dots-content {
+.p-carousel-vertical .p-carousel-dots-container {
     margin: .75em 0;
 }

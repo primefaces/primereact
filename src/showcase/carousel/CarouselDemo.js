@@ -82,7 +82,7 @@ export class CarouselDemo extends Component {
                         responsiveOptions={this.responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
-                        numVisible={1} numScroll={1} responsiveOptions={this.responsiveOptions} verticalContentHeight="330px" header={verticalHeader}></Carousel>
+                        numVisible={1} numScroll={1} responsiveOptions={this.responsiveOptions} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
                 </div>
 
                 <CarouselDoc />                
@@ -322,7 +322,7 @@ const responsiveOptions = [
                             <td>Specifies the layout of the component, valid values are "horizontal" and "vertical".</td>
                         </tr>
                         <tr>
-                            <td>verticalContentHeight</td>
+                            <td>verticalViewPortHeight</td>
                             <td>string</td>
                             <td>300px</td>
                             <td>Height of the viewport in vertical layout.</td>
@@ -331,10 +331,16 @@ const responsiveOptions = [
                             <td>contentClassName</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Style class of the viewport.</td>
+                            <td>Style class of main content.</td>
                         </tr>
                         <tr>
-                            <td>dotsContentClassName</td>
+                            <td>containerClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the viewport container.</td>
+                        </tr>
+                        <tr>
+                            <td>dotsContainerClassName</td>
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the paginator items.</td>
@@ -388,10 +394,18 @@ const responsiveOptions = [
                         </tr>
                         <tr>
                             <td>p-carousel-content</td>
+                            <td>Main content element. It contains the container of the viewport.</td>
+                        </tr>
+                        <tr>
+                            <td>p-carousel-container</td>
+                            <td>Container of the viewport. It contains navigation buttons and viewport.</td>
+                        </tr>
+                        <tr>
+                            <td>p-carousel-items-content</td>
                             <td>Viewport.</td>
                         </tr>
                         <tr>
-                            <td>p-carousel-dots-content</td>
+                            <td>p-carousel-dots-container</td>
                             <td>Container of the paginator.</td>
                         </tr>
                         <tr>
@@ -499,7 +513,7 @@ export class CarouselDemo extends Component {
                         responsive={this.responsiveSettings} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px', marginTop: '2em'}}
-                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalContentHeight="330px" header={verticalHeader}></Carousel>
+                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
                 </div>             
             </div>
         );

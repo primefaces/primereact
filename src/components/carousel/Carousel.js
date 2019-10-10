@@ -56,9 +56,10 @@ export class Carousel extends Component {
         numScroll: 1,
         responsiveOptions: null,
         orientation: "horizontal",
-        verticalContentHeight: "300px",
+        verticalViewPortHeight: "300px",
         contentClassName: null,
-        dotsContentClassName: null,
+        containerClassName: null,
+        dotsContainerClassName: null,
         onPageChange: null
     }
 
@@ -77,9 +78,10 @@ export class Carousel extends Component {
         numScroll: PropTypes.number,
         responsiveOptions: PropTypes.array,
         orientation: PropTypes.string,
-        verticalContentHeight: PropTypes.string,
+        verticalViewPortHeight: PropTypes.string,
         contentClassName: PropTypes.string,
-        dotsContentClassName: PropTypes.string,
+        containerClassName: PropTypes.string,
+        dotsContainerClassName: PropTypes.string,
         onPageChange: PropTypes.func
     };
 
@@ -592,18 +594,21 @@ export class Carousel extends Component {
 
     renderContent() {
         const items = this.renderItems();
-        const height = this.isVertical() ? this.props.verticalContentHeight : 'auto';
-        const header = !this.isVertical() && this.renderHeader();
-        const footer = !this.isVertical() && this.renderFooter();
+        const height = this.isVertical() ? this.props.verticalViewPortHeight : 'auto';
+        const backwardNavigator = this.renderBackwardNavigator();
+        const forwardNavigator = this.renderForwardNavigator();
+        const containerClassName = classNames('p-carousel-container', this.props.containerClassName);
 
         return (
-            <div className="p-carousel-container" style={{'height': height}}>
-                {header}
-                <div ref={(el) => this.itemsContainer = el} className="p-carousel-items"
-                    onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
-                    {items}
+            <div className={containerClassName}>
+                {backwardNavigator}
+                <div className="p-carousel-items-content" style={{'height': height}}>
+                    <div ref={(el) => this.itemsContainer = el} className="p-carousel-items-container"
+                        onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
+                        {items}
+                    </div>
                 </div>
-                {footer}
+                {forwardNavigator}
             </div>
         );
     }
@@ -662,7 +667,7 @@ export class Carousel extends Component {
     }
 
     renderDots() {
-        const dotsContentClassName = classNames('p-carousel-dots-content p-reset', this.props.dotsContentClassName);
+        const dotsContainerClassName = classNames('p-carousel-dots-container p-reset', this.props.dotsContainerClassName);
         let dots = [];
 
         for (let i = 0; i < this.totalDots; i++) {
@@ -670,7 +675,7 @@ export class Carousel extends Component {
         }
 
         return (
-            <ul className={dotsContentClassName}>
+            <ul className={dotsContainerClassName}>
                 {dots}
             </ul>
         );
@@ -684,23 +689,18 @@ export class Carousel extends Component {
 
         this.totalDots = this.getTotalDots();
         const content = this.renderContent();
-        const backwardNavigator = this.renderBackwardNavigator();
-        const forwardNavigator = this.renderForwardNavigator();
         const dots = this.renderDots();
-        const header = this.isVertical() && this.renderHeader();
-        const footer = this.isVertical() && this.renderFooter();
+        const header = this.renderHeader();
+        const footer = this.renderFooter();
 
         return (
             <div id={this.id} className={className} style={this.props.style}>
+                {header}
                 <div className={contentClassName}>
-                    {header}
-                    {backwardNavigator}
                     {content}
-                    {forwardNavigator}
-                    {footer}
+                    {dots}
                 </div>
-
-                {dots}
+                {footer}
             </div>
         );
     }

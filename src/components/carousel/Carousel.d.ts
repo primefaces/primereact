@@ -15,9 +15,10 @@ interface CarouselProps {
     numScroll?: number;
     responsiveOptions?: any;
     orientation?: string;
-    verticalContentHeight?: string;
+    verticalViewPortHeight?: string;
     contentClassName?: string;
-    dotsContentClassName?: string;
+    containerClassName?: string;
+    dotsContainerClassName?: string;
     onPageChange(e: {page: number}): void;
 }
 
