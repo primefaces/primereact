@@ -297,12 +297,12 @@ export class Carousel extends Component {
         }
     }
 
-    changePageOnTouch(diff) {
+    changePageOnTouch(e, diff) {
         if (diff < 0) {           // left
-            this.navForward();
+            this.navForward(e);
         }
         else {                    // right
-            this.navBackward();
+            this.navBackward(e);
         }
     }
 

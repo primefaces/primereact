@@ -15,7 +15,7 @@ export class CarouselDemo extends Component {
         this.carservice = new CarService();
         this.carTemplate = this.carTemplate.bind(this);
 
-        this.responsiveSettings = [
+        this.responsiveOptions = [
             {
                 breakpoint: '1024px',
                 numVisible: 3,
@@ -76,13 +76,13 @@ export class CarouselDemo extends Component {
 
                 <div className="content-section implementation">
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3} 
-                        header={basicHeader} responsive={this.responsiveSettings}></Carousel>
+                        header={basicHeader} responsiveOptions={this.responsiveOptions}></Carousel>
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                        responsive={this.responsiveSettings} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                        responsiveOptions={this.responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
 
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px', marginTop: '2em'}}
-                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalContentHeight="330px" header={verticalHeader}></Carousel>
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
+                        numVisible={1} numScroll={1} responsiveOptions={this.responsiveOptions} verticalContentHeight="330px" header={verticalHeader}></Carousel>
                 </div>
 
                 <CarouselDoc />                
