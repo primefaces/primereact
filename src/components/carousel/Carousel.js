@@ -54,7 +54,7 @@ export class Carousel extends Component {
         autoplayInterval: 0,
         numVisible: 1,
         numScroll: 1,
-        responsive: null,
+        responsiveOptions: null,
         orientation: "horizontal",
         verticalContentHeight: "300px",
         contentClassName: null,
@@ -75,7 +75,7 @@ export class Carousel extends Component {
         autoplayInterval: PropTypes.number,
         numVisible: PropTypes.number,
         numScroll: PropTypes.number,
-        responsive: PropTypes.array,
+        responsiveOptions: PropTypes.array,
         orientation: PropTypes.string,
         verticalContentHeight: PropTypes.string,
         contentClassName: PropTypes.string,
@@ -180,15 +180,15 @@ export class Carousel extends Component {
     }
 
     calculatePosition() {
-        if (this.itemsContainer && this.responsive) {
+        if (this.itemsContainer && this.responsiveOptions) {
             let windowWidth = window.innerWidth;
             let matchedResponsiveData = {
                 numVisible: this.props.numVisible,
                 numScroll: this.props.numScroll
             };
 
-            for (let i = 0; i < this.responsive.length; i++) {
-                let res = this.responsive[i];
+            for (let i = 0; i < this.responsiveOptions.length; i++) {
+                let res = this.responsiveOptions[i];
 
                 if (parseInt(res.breakpoint, 10) >= windowWidth) {
                     matchedResponsiveData = res;
@@ -363,9 +363,9 @@ export class Carousel extends Component {
             }
         `;
         
-        if (this.props.responsive) {
-            this.responsive = [...this.props.responsive];
-            this.responsive.sort((data1, data2) => {
+        if (this.props.responsiveOptions) {
+            this.responsiveOptions = [...this.props.responsiveOptions];
+            this.responsiveOptions.sort((data1, data2) => {
                 const value1 = data1.breakpoint;
                 const value2 = data2.breakpoint;
                 let result = null;
@@ -384,8 +384,8 @@ export class Carousel extends Component {
                 return -1 * result;
             });
 
-            for (let i = 0; i < this.responsive.length; i++) {
-                let res = this.responsive[i];
+            for (let i = 0; i < this.responsiveOptions.length; i++) {
+                let res = this.responsiveOptions[i];
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
@@ -404,7 +404,7 @@ export class Carousel extends Component {
         this.createStyle();
         this.calculatePosition();
 
-        if (this.props.responsive) {
+        if (this.props.responsiveOptions) {
             this.bindDocumentListeners();
         }
     }
@@ -506,7 +506,7 @@ export class Carousel extends Component {
     }
 
     componentWillUnmount() {
-        if (this.props.responsive) {
+        if (this.props.responsiveOptions) {
             this.unbindDocumentListeners();
         }
     }
@@ -559,19 +559,31 @@ export class Carousel extends Component {
         }
     }
 
+    renderHeader() {
+        if (this.props.header) {
+            return (<div className="p-carousel-header">
+                        {this.props.header}
+                    </div>);
+        }
+
+        return null;
+    }
+
+    renderFooter() {
+        if (this.props.footer) {
+            return (<div className="p-carousel-footer">
+                        {this.props.footer}
+                    </div>);
+        }
+
+        return null;
+    }
+
     renderContent() {
         const items = this.renderItems();
         const height = this.isVertical() ? this.props.verticalContentHeight : 'auto';
-        const header = this.props.header && (
-            <div className="p-carousel-header">
-                {this.props.header}
-            </div>
-        );
-        const footer = this.props.footer && (
-            <div className="p-carousel-footer">
-                {this.props.footer}
-            </div>
-        );
+        const header = !this.isVertical() && this.renderHeader();
+        const footer = !this.isVertical() && this.renderFooter();
 
         return (
             <div className="p-carousel-container" style={{'height': height}}>
@@ -656,13 +668,17 @@ export class Carousel extends Component {
         const backwardNavigator = this.renderBackwardNavigator();
         const forwardNavigator = this.renderForwardNavigator();
         const dots = this.renderDots();
+        const header = this.isVertical() && this.renderHeader();
+        const footer = this.isVertical() && this.renderFooter();
 
         return (
             <div id={this.id} className={className} style={this.props.style}>
                 <div className={contentClassName}>
+                    {header}
                     {backwardNavigator}
                     {content}
                     {forwardNavigator}
+                    {footer}
                 </div>
 
                 {dots}
