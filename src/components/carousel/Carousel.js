@@ -103,6 +103,7 @@ export class Carousel extends Component {
 
         this.navBackward = this.navBackward.bind(this);
         this.navForward = this.navForward.bind(this);
+        this.onTransitionEnd = this.onTransitionEnd.bind(this);
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
@@ -154,16 +155,6 @@ export class Carousel extends Component {
         if (this.itemsContainer) {
             this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
             this.itemsContainer.style.transition = 'transform 500ms ease 0s';
-            
-            if (this.animationTimeout) {
-                clearTimeout(this.animationTimeout);
-            }
-
-            this.animationTimeout = setTimeout(() => {
-                if (this.itemsContainer) {
-                    this.itemsContainer.style.transition = '';
-                }
-            }, 500);
         }
 
         this.setState({
@@ -270,6 +261,16 @@ export class Carousel extends Component {
         }
         else if (page < currentPage) {
             this.navBackward(e, page);
+        }
+    }
+
+    onTransitionEnd() {
+        if (this.itemsContainer) {
+            this.itemsContainer.style.transition = '';
+
+            if ((this.state.page === 0 || this.state.page === (this.totalDots - 1)) && this.isCircular()) {
+                this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+            }
         }
     }
 
@@ -425,17 +426,16 @@ export class Carousel extends Component {
     componentDidUpdate(prevProps, prevState) {
         const isCircular = this.isCircular();
         let stateChanged = false;
+        let totalShiftedItems = this.state.totalShiftedItems;
 
         if(this.props.autoplayInterval) {
             this.stopAutoplay();
         }
 
-        if (prevState.numScroll !== this.state.numScroll || prevProps.value.length !== this.props.value.length) {
+        if (prevState.numScroll !== this.state.numScroll || prevState.numVisible !== this.state.numVisible || prevProps.value.length !== this.props.value.length) {
             this.remainingItems = (this.props.value.length - this.state.numVisible) % this.state.numScroll;
 
-            let totalShiftedItems = this.state.totalShiftedItems;
             let page = this.getPage();
-
             if (this.totalDots !== 0 && page >= this.totalDots) {
                 page = this.totalDots - 1;
 
@@ -451,14 +451,11 @@ export class Carousel extends Component {
                 }
 
                 stateChanged = true;
-            } 
+            }
 
-            if (prevProps.value.length !== this.props.value.length) {
-                totalShiftedItems = (this.state.numScroll * page) * -1;
-
-                if (isCircular) {
-                    totalShiftedItems -= this.state.numVisible;
-                }
+            totalShiftedItems = (page * this.state.numScroll) * -1;
+            if (isCircular) {
+                totalShiftedItems -= this.state.numVisible;
             }
 
             if (page === (this.totalDots - 1) && this.remainingItems > 0) {
@@ -479,10 +476,8 @@ export class Carousel extends Component {
 
             this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
         }
-
+        
         if (isCircular) {
-            let totalShiftedItems = this.state.totalShiftedItems;
-
             if (this.state.page === 0) {
                 totalShiftedItems = -1 * this.state.numVisible;
             }
@@ -498,18 +493,6 @@ export class Carousel extends Component {
                     totalShiftedItems
                 });
                 stateChanged = true;
-                
-                let delay = this.isAutoplay() ? this.props.autoplayInterval - 1 : 501;
-                if (this.translateTimeout) {
-                    clearTimeout(this.translateTimeout);
-                }
-    
-                this.translateTimeout = setTimeout(() => {
-                    let isTransformChange = this.isAutoplay() ? (this.itemsContainer && prevState.page > this.state.page) : this.itemsContainer;
-                    if (isTransformChange) {
-                        this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
-                    }
-                }, delay);
             }
         }
 
@@ -603,7 +586,7 @@ export class Carousel extends Component {
             <div className={containerClassName}>
                 {backwardNavigator}
                 <div className="p-carousel-items-content" style={{'height': height}}>
-                    <div ref={(el) => this.itemsContainer = el} className="p-carousel-items-container"
+                    <div ref={(el) => this.itemsContainer = el} className="p-carousel-items-container" onTransitionEnd={this.onTransitionEnd}
                         onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
                         {items}
                     </div>
