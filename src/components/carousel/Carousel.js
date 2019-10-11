@@ -505,7 +505,7 @@ export class Carousel extends Component {
                 }
     
                 this.translateTimeout = setTimeout(() => {
-                    let isTransformChange = this.props.autoplayInterval ? (this.itemsContainer && prevState.page > this.state.page) : this.itemsContainer;
+                    let isTransformChange = this.isAutoplay() ? (this.itemsContainer && prevState.page > this.state.page) : this.itemsContainer;
                     if (isTransformChange) {
                         this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
                     }
