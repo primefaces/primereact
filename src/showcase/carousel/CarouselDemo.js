@@ -82,7 +82,7 @@ export class CarouselDemo extends Component {
                         responsiveOptions={this.responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
-                        numVisible={1} numScroll={1} responsiveOptions={this.responsiveOptions} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+                        numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
                 </div>
 
                 <CarouselDoc />                
