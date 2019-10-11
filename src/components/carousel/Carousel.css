@@ -20,21 +20,14 @@
     flex-shrink: 0;
     width: 2.5em;
     height: 2.5em;
-    position: relative;
 }
 
 .p-carousel-prev span,
 .p-carousel-next span {
-	display: block;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-    margin-top: -.45em;
-    margin-left: -.45em;
-}
-
-.p-carousel-prev span {
-    margin-left: -.5em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .p-carousel-container {

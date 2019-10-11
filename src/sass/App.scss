@@ -1248,22 +1248,6 @@ pre[class*="language-"] {
                     }
                 }
 
-                &.p-carousel-item-start {
-                    .car-details {
-                        > .p-grid {
-                            margin-left: .6em;
-                        }
-                    }
-                }
-
-                &.p-carousel-item-end {
-                    .car-details {
-                        > .p-grid {
-                            margin-right: .6em;
-                        }
-                    }
-                }
-
                 .car-data {
                     .car-title {
                         font-weight: 700;
@@ -1291,6 +1275,28 @@ pre[class*="language-"] {
                 width: 16px !important;
                 height: 16px !important;
                 border-radius: 50%;
+            }
+        }
+
+        &.p-carousel-horizontal {
+            .p-carousel-content {
+                .p-carousel-item {    
+                    &.p-carousel-item-start {
+                        .car-details {
+                            > .p-grid {
+                                margin-left: .6em;
+                            }
+                        }
+                    }
+    
+                    &.p-carousel-item-end {
+                        .car-details {
+                            > .p-grid {
+                                margin-right: .6em;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

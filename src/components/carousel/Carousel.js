@@ -683,7 +683,8 @@ export class Carousel extends Component {
 
     render() {
         const className = classNames('p-carousel p-component', {
-            'p-carousel-vertical': this.isVertical()
+            'p-carousel-vertical': this.isVertical(),
+            'p-carousel-horizontal': !this.isVertical()
         }, this.props.className);
         const contentClassName = classNames('p-carousel-content', this.props.contentClassName);
 
