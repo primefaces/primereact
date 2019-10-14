@@ -1214,7 +1214,7 @@ export class DataTable extends Component {
             }
         }
 
-        return null;
+        return [];
     }
     
     findColumnByKey(columns, key) {
