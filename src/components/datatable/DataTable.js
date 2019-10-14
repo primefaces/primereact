@@ -1294,34 +1294,36 @@ export class DataTable extends Component {
             loader = this.renderLoader();
         }
 
-        if(this.props.scrollable) {
-            this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
-            let frozenColumns = this.getFrozenColumns(columns);
-            let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
-            let frozenView, scrollableView;
-            if(frozenColumns) {
-                frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
+        if (Array.isArray(columns)) {
+            if (this.props.scrollable) {
+                this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
+                let frozenColumns = this.getFrozenColumns(columns);
+                let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
+                let frozenView, scrollableView;
+                if (frozenColumns) {
+                    frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
+                }
+
+                scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
+
+                tableContent = <div className="p-datatable-scrollable-wrapper">
+                                    {frozenView}
+                                    {scrollableView}
+                            </div>;
             }
+            else {
+                let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
+                let tableBody = this.createTableBody(value, columns);
+                let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
-            scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
-
-            tableContent = <div className="p-datatable-scrollable-wrapper">
-                                {frozenView}
-                                {scrollableView}
-                          </div>;
-        }
-        else {
-            let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
-            let tableBody = this.createTableBody(value, columns);
-            let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
-
-            tableContent = <div className="p-datatable-wrapper">
-                    <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
-                        {tableHeader}                        
-                        {tableFooter}
-                        {tableBody}
-                    </table>
-                </div>;
+                tableContent = <div className="p-datatable-wrapper">
+                        <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
+                            {tableHeader}                        
+                            {tableFooter}
+                            {tableBody}
+                        </table>
+                    </div>;
+            }
         }
 
         return (
