@@ -7,6 +7,7 @@ export class SelectButtonItem extends Component {
     static defaultProps = {
         option: null,
         label: null,
+        className: null,
         selected: null,
         tabIndex: null,
         onClick: null
@@ -15,6 +16,7 @@ export class SelectButtonItem extends Component {
     static propTypes = {
         option: PropTypes.object,
         label: PropTypes.string,
+        className: PropTypes.string,
         selected: PropTypes.bool,
         tabIndex: PropTypes.number,
         onClick: PropTypes.func
@@ -60,7 +62,7 @@ export class SelectButtonItem extends Component {
     }
 
     render() {
-        let className = classNames('p-button p-component p-button-text-only', {
+        let className = classNames('p-button p-component p-button-text-only', this.props.className, {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
