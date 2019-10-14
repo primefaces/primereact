@@ -184,7 +184,7 @@ button {
     position:relative; 
 }
 
-.p-float-label label {
+.p-float-label > label {
   font-weight:normal;
   position:absolute;
   pointer-events:none;

@@ -8,15 +8,18 @@
 }
 
 /* Floating Label */
-.p-float-label textarea:focus ~ label,
-.p-float-label textarea.p-filled ~ label,
-.p-float-label .p-inputwrapper-focus ~ label,
-.p-float-label .p-inputwrapper-filled ~ label {
+.p-float-label > textarea ~ label {
+  left: .25em;
+  top: .75em;
+}
+
+.p-float-label > textarea:focus ~ label,
+.p-float-label > textarea.p-filled ~ label {
   top:-.75em;
   font-size:12px;
 }
 
-.p-float-label .textarea:-webkit-autofill ~ label {
-  top:-20px;
+.p-float-label > textarea:-webkit-autofill ~ label {
+  top:-.75em;
   font-size:12px;
 }
