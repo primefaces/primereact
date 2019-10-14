@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface DropdownProps {
     id?: string;
+    name?: string;
     value?: any;
     options?: any[];
     optionLabel?: string;
