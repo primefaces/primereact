@@ -28,6 +28,7 @@ export class Dropdown extends Component {
         appendTo: null,
         tabIndex: null,
         autoFocus: false,
+        filterInputAutoFocus: true,
         panelClassName: null,
         panelStyle: null,
         dataKey: null,
@@ -62,6 +63,7 @@ export class Dropdown extends Component {
         appendTo: PropTypes.any,
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
+        filterInputAutoFocus: PropTypes.bool,
         lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
         panelstyle: PropTypes.object,
@@ -118,7 +120,7 @@ export class Dropdown extends Component {
             else {
                 this.show();
 
-                if (this.props.filter) {
+                if (this.props.filter && this.props.filterInputAutoFocus) {
                     setTimeout(() => {
                         this.filterInput.focus();
                     }, 200);
