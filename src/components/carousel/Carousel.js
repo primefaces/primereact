@@ -157,18 +157,19 @@ export class Carousel extends Component {
             this.itemsContainer.style.transition = 'transform 500ms ease 0s';
         }
 
-        this.setState({
-            totalShiftedItems
-        });
-
         if (this.props.onPageChange) {
+            this.setState({
+                totalShiftedItems
+            });
+
             this.props.onPageChange({
                 page
             })
         }
         else {
             this.setState({
-                page
+                page,
+                totalShiftedItems
             });
         }
     }
@@ -518,7 +519,7 @@ export class Carousel extends Component {
 
                 clonedElements = this.props.value.slice(-1 * this.state.numVisible);
                 clonedItemsForStarting = clonedElements.map((item, index) => {
-                    let isActive = this.state.totalShiftedItems === 0,
+                    let isActive = (this.state.totalShiftedItems * -1) === (this.props.value.length + this.state.numVisible),
                     start = index === 0,
                     end = index === (clonedElements.length - 1);
 
@@ -527,7 +528,7 @@ export class Carousel extends Component {
 
                 clonedElements = this.props.value.slice(0, this.state.numVisible);
                 clonedItemsForFinishing = clonedElements.map((item, index) => {
-                    let isActive = (this.state.totalShiftedItems * -1) === (this.props.value.length + this.state.numVisible),
+                    let isActive = this.state.totalShiftedItems === 0,
                     start = index === 0,
                     end = index === (clonedElements.length - 1);
 
