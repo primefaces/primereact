@@ -21,6 +21,7 @@ interface DropdownProps {
     appendTo?: any;
     tabIndex?: number;
     autoFocus?: boolean;
+    filterInputAutoFocus?: boolean;
     lazy?: boolean;
     panelClassName?: string;
     panelStyle?: object;
