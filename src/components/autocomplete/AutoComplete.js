@@ -578,7 +578,7 @@ export class AutoComplete extends Component {
             <li className="p-autocomplete-input-token">
                 <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
                        autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
-                       style={this.props.inputStyle} className={this.props.inputClassName}
+                       style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
                        onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                        onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
             </li>
