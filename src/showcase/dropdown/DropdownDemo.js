@@ -325,6 +325,12 @@ carTemplate(option) {
                                         <td>When present, it specifies that the component should automatically get focus on load.</td>
                                     </tr>
                                     <tr>
+                                        <td>filterInputAutoFocus</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>When the panel is opened, it specifies that the filter input should focus automatically.</td>
+                                    </tr>
+                                    <tr>
                                         <td>panelClassName</td>
                                         <td>string</td>
                                         <td>null</td>
