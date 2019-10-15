@@ -432,7 +432,7 @@ export class Carousel extends Component {
         let stateChanged = false;
         let totalShiftedItems = this.state.totalShiftedItems;
 
-        if(this.props.autoplayInterval) {
+        if (this.props.autoplayInterval) {
             this.stopAutoplay();
         }
 
@@ -500,7 +500,7 @@ export class Carousel extends Component {
             }
         }
 
-        if(!stateChanged && this.isAutoplay()) {
+        if (!stateChanged && this.isAutoplay()) {
             this.startAutoplay();
         }
     }
@@ -508,6 +508,10 @@ export class Carousel extends Component {
     componentWillUnmount() {
         if (this.props.responsiveOptions) {
             this.unbindDocumentListeners();
+        }
+
+        if (this.props.autoplayInterval) {
+            this.stopAutoplay();
         }
     }
 
