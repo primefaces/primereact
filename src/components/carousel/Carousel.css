@@ -81,3 +81,12 @@
 .p-carousel-vertical .p-carousel-dots-container {
     margin: .75em 0;
 }
+
+/* Keyboard Support */
+.p-items-hidden .p-carousel-item {
+    visibility: hidden;
+}
+
+.p-items-hidden .p-carousel-item.p-carousel-item-active {
+    visibility: visible;
+}

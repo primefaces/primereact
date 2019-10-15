@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import DomHandler from '../utils/DomHandler';
 
 class CarouselItem extends Component {
 
@@ -153,6 +154,7 @@ export class Carousel extends Component {
         }
 
         if (this.itemsContainer) {
+            DomHandler.removeClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
             this.itemsContainer.style.transition = 'transform 500ms ease 0s';
         }
@@ -267,6 +269,7 @@ export class Carousel extends Component {
 
     onTransitionEnd() {
         if (this.itemsContainer) {
+            DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transition = '';
 
             if ((this.state.page === 0 || this.state.page === (this.totalDots - 1)) && this.isCircular()) {
