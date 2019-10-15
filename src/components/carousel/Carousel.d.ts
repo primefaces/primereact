@@ -10,7 +10,7 @@ interface CarouselProps {
     className?: string;
     itemTemplate?: any;
     circular?: boolean;
-    autoplayInterval: number;
+    autoplayInterval?: number;
     numVisible?: number;
     numScroll?: number;
     responsiveOptions?: any;
@@ -19,7 +19,7 @@ interface CarouselProps {
     contentClassName?: string;
     containerClassName?: string;
     dotsContainerClassName?: string;
-    onPageChange(e: {page: number}): void;
+    onPageChange?(e: {page: number}): void;
 }
 
 export class Carousel extends React.Component<CarouselProps,any> {}
