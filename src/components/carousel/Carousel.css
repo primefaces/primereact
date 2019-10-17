@@ -12,8 +12,8 @@
     padding: 0 .5em;
 }
 
-.p-carousel-prev.p-link,
-.p-carousel-next.p-link {
+.p-carousel-prev,
+.p-carousel-next {
     align-self: center;
     text-align: center;
     flex-grow: 0;
