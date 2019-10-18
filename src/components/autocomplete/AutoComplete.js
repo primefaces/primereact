@@ -361,6 +361,8 @@ export class AutoComplete extends Component {
                     if (highlightItem) {
                         this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
                         this.hidePanel();
+                    } else {
+                        event.stopPropagation();
                     }
                     
                     event.preventDefault();
