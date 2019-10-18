@@ -606,7 +606,7 @@ export class Carousel extends Component {
 
     renderBackwardNavigator() {
         let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && this.getPage() === 0;
-        let buttonClassName = classNames('p-carousel-prev p-link', {
+        let buttonClassName = classNames('p-carousel-prev p-button', {
             'p-disabled': isDisabled
         }),
         iconClassName = classNames('p-carousel-prev-icon pi', {
@@ -623,7 +623,7 @@ export class Carousel extends Component {
 
     renderForwardNavigator() {
         let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && (this.getPage() === (this.totalDots - 1) || this.totalDots === 0);
-        let buttonClassName = classNames('p-carousel-next p-link', {
+        let buttonClassName = classNames('p-carousel-next p-button', {
             'p-disabled': isDisabled
         }),
         iconClassName = classNames('p-carousel-prev-icon pi', {
