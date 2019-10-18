@@ -645,6 +645,7 @@ body {
                 .p-tabview-panels {
                     background: transparent;
                     border: 0 none;
+                    color: #333333;
                 }
             }
         }
@@ -1537,5 +1538,37 @@ pre[class*="language-"] {
     
     .p-col-m {
         display: inline-block;
+    }
+}
+
+/* Dark Theme such as luna-amber, luna-blue, luna-green and luna-pink */
+.dark-theme {
+    #layout-content {        
+        .content-section {
+            &.implementation {
+                background-color: #3f3f3f !important; 
+                color: #dedede !important;
+
+                > h3,
+                > h4 {
+                    color: #dedede !important
+                }
+            }
+        }
+
+        .carousel-demo {
+            .p-carousel {
+                .p-carousel-content {
+                    .p-carousel-item {
+                        .car-details {
+                            > .p-grid {
+                                border: 1px solid #191919;
+                                background-color: #323232;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
