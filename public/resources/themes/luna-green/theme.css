@@ -1705,6 +1705,8 @@ body .p-datatable .p-datatable-tbody > tr {
   body .p-datatable .p-datatable-tbody > tr.p-highlight-contextmenu {
     background-color: #5de18c;
     color: #ffffff; }
+  body .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
+    box-shadow: inset 0 2px 0 0 #1ea04c; }
   body .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
     box-shadow: inset 0 -2px 0 0 #1ea04c; }
 body .p-datatable .p-datatable-tbody > tr:nth-child(even) {
@@ -2281,28 +2283,28 @@ body .p-treetable .p-column-resizer-helper {
 body .p-treetable .p-treetable-scrollable-header,
 body .p-treetable .p-treetable-scrollable-footer {
   background-color: #191919; }
-body .p-carousel .p-carousel-content .p-carousel-container {
-  background-color: #ffffff; }
 body .p-carousel .p-carousel-content .p-carousel-prev,
 body .p-carousel .p-carousel-content .p-carousel-next {
-  background-color: #ffffff;
-  border: solid 1px rgba(178, 193, 205, 0.64);
+  background-color: #1ea04c;
+  border: 1px solid #1ea04c;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   margin: 0.2em;
-  color: #dedede;
-  -moz-transition: color 0.2s;
-  -o-transition: color 0.2s;
-  -webkit-transition: color 0.2s;
-  transition: color 0.2s; }
+  color: #ffffff;
+  -moz-transition: background-color 0.2s, box-shadow 0.2s;
+  -o-transition: background-color 0.2s, box-shadow 0.2s;
+  -webkit-transition: background-color 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s; }
   body .p-carousel .p-carousel-content .p-carousel-prev:not(.p-disabled):hover,
   body .p-carousel .p-carousel-content .p-carousel-next:not(.p-disabled):hover {
-    color: #1ea04c; }
+    background-color: #1b9044;
+    color: #ffffff;
+    border-color: #1b9044; }
 body .p-carousel .p-carousel-dots-container .p-carousel-dot-item .p-carousel-dot-icon {
   width: 20px;
   height: 6px;
-  background-color: #b2c1cd;
+  background-color: #252525;
   margin: 0 0.2em; }
   body .p-carousel .p-carousel-dots-container .p-carousel-dot-item .p-carousel-dot-icon::before {
     content: ' '; }
