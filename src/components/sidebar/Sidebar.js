@@ -16,6 +16,7 @@ export class Sidebar extends Component {
         baseZIndex: 0,
         dismissable: true,
         showCloseIcon: true,
+        closeOnEscape: true,
         iconsTemplate: null,
         modal: true,
         onShow: null,
@@ -33,6 +34,7 @@ export class Sidebar extends Component {
         baseZIndex: PropTypes.number,
         dismissable: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
+        closeOnEscape: PropTypes.bool,
         iconsTemplate: PropTypes.func,
         modal: PropTypes.bool,
         onShow: PropTypes.func,
@@ -69,6 +71,10 @@ export class Sidebar extends Component {
 
         if (this.props.modal) {
             this.enableModality();
+        }
+
+        if (this.props.closeOnEscape) {
+            this.bindDocumentEscapeListener();
         }
 
         if (this.closeIcon) {
@@ -133,9 +139,28 @@ export class Sidebar extends Component {
 
     onHide() {
         this.unbindMaskClickListener();
+        this.unbindDocumentEscapeListener();
 
         if (this.props.modal) {
             this.disableModality();
+        }
+    }
+
+    bindDocumentEscapeListener() {
+        this.documentEscapeListener = (event) => {
+            if (event.which === 27) {
+                if (parseInt(this.container.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
+                    this.onCloseClick(event);
+                }
+            }
+        };
+        document.addEventListener('keydown', this.documentEscapeListener);
+    }
+    
+    unbindDocumentEscapeListener() {
+        if (this.documentEscapeListener) {
+            document.removeEventListener('keydown', this.documentEscapeListener);
+            this.documentEscapeListener = null;
         }
     }
 

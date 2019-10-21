@@ -27,6 +27,7 @@ export class FileUpload extends Component {
         chooseLabel: 'Choose',
         uploadLabel: 'Upload',
         cancelLabel: 'Cancel',
+        customUpload: false,
         onBeforeUpload: null,
         onBeforeSend: null,
         onUpload: null,
@@ -34,7 +35,8 @@ export class FileUpload extends Component {
         onClear: null,
         onSelect: null,
         onProgress: null,
-        onValidationFail: null
+        onValidationFail: null,
+        uploadHandler: null
     }
 
     static propTypes = {
@@ -56,6 +58,7 @@ export class FileUpload extends Component {
         chooseLabel: PropTypes.string,
         uploadLabel: PropTypes.string,
         cancelLabel: PropTypes.string,
+        customUpload: PropTypes.bool,
         onBeforeUpload: PropTypes.func,
         onBeforeSend: PropTypes.func,
         onUpload: PropTypes.func,
@@ -63,7 +66,8 @@ export class FileUpload extends Component {
         onClear: PropTypes.func,
         onSelect: PropTypes.func,
         onProgress: PropTypes.func,
-        onValidationFail: PropTypes.func
+        onValidationFail: PropTypes.func,
+        uploadHandler: PropTypes.func
     };
     
     constructor(props) {
@@ -184,65 +188,74 @@ export class FileUpload extends Component {
     }
 
     upload() {
-        this.setState({msgs:[]});
-        let xhr = new XMLHttpRequest();
-        let formData = new FormData();
-
-        if (this.props.onBeforeUpload) {
-            this.props.onBeforeUpload({
-                'xhr': xhr,
-                'formData': formData 
-            });
+        if (this.props.customUpload) {
+            if (this.props.uploadHandler) {
+                this.props.uploadHandler({
+                    files: this.state.files
+                })
+            }
         }
-		
-        for (let file of this.state.files) {
-            formData.append(this.props.name, file, file.name);
-        }
+        else {
+            this.setState({msgs:[]});
+            let xhr = new XMLHttpRequest();
+            let formData = new FormData();
 
-        xhr.upload.addEventListener('progress', (event) => {
-            if (event.lengthComputable) {
-                this.setState({progress: Math.round((event.loaded * 100) / event.total)});
+            if (this.props.onBeforeUpload) {
+                this.props.onBeforeUpload({
+                    'xhr': xhr,
+                    'formData': formData 
+                });
             }
             
-            if (this.props.onProgress) {
-                this.props.onProgress({
-                    originalEvent: event, 
-                    progress: this.progress
-                });    
-            };
-        });
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-               this.setState({progress: 0});
-                
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    if (this.props.onUpload) {
-                        this.props.onUpload({xhr: xhr, files: this.files});
-                    }
-                }
-                else {
-                    if (this.props.onError) {
-                        this.props.onError({xhr: xhr, files: this.files});
-                    }
-                }
-
-                this.clear();
+            for (let file of this.state.files) {
+                formData.append(this.props.name, file, file.name);
             }
-        };
-        
-        xhr.open('POST', this.props.url, true);
-		
-        if(this.props.onBeforeSend) {
-            this.props.onBeforeSend({
-                'xhr': xhr,
-                'formData': formData 
+
+            xhr.upload.addEventListener('progress', (event) => {
+                if (event.lengthComputable) {
+                    this.setState({progress: Math.round((event.loaded * 100) / event.total)});
+                }
+                
+                if (this.props.onProgress) {
+                    this.props.onProgress({
+                        originalEvent: event, 
+                        progress: this.progress
+                    });    
+                };
             });
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                this.setState({progress: 0});
+                    
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        if (this.props.onUpload) {
+                            this.props.onUpload({xhr: xhr, files: this.files});
+                        }
+                    }
+                    else {
+                        if (this.props.onError) {
+                            this.props.onError({xhr: xhr, files: this.files});
+                        }
+                    }
+
+                    this.clear();
+                }
+            };
+            
+            xhr.open('POST', this.props.url, true);
+            
+            if(this.props.onBeforeSend) {
+                this.props.onBeforeSend({
+                    'xhr': xhr,
+                    'formData': formData 
+                });
+            }
+            
+            xhr.withCredentials = this.props.withCredentials;
+            
+            xhr.send(formData);
         }
-        
-        xhr.withCredentials = this.props.withCredentials;
-        
-        xhr.send(formData);
     }
 
     clear() {

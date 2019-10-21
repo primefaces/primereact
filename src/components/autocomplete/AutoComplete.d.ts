@@ -5,6 +5,7 @@ interface AutoCompleteProps {
     id?: string;
     value?: any;
     name?: string;
+    type?: string;
     suggestions?: any[];
     field?: string;
     scrollHeight?: string;

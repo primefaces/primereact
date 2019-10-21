@@ -8,9 +8,9 @@ interface SpinnerProps {
     step?: number;
     min?: number;
     max?: number;
-    formatInput: boolean;
-    decimalSeparator: string;
-    thousandSeparator: string;
+    formatInput?: boolean;
+    decimalSeparator?: string;
+    thousandSeparator?: string;
     disabled?: boolean;
     required?: boolean;
     tabIndex?: number;

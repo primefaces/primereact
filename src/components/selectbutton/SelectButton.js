@@ -52,7 +52,7 @@ export class SelectButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
             else
@@ -148,7 +148,7 @@ export class SelectButton extends Component {
             return this.props.options.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
                 
-                return <SelectButtonItem key={optionLabel} label={optionLabel} option={option} onClick={this.onOptionClick}
+                return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick}
                             selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} />;
             });
         }

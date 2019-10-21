@@ -126,6 +126,9 @@ import {MenuItem} from 'primereact/api';
 
 `}
 </CodeHighlight>
+
+					<h3>Next.js</h3>
+					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart">github</a>.</p>
                 </div>        
             </div>
         );

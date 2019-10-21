@@ -17,4 +17,5 @@ interface ContextMenuProps {
 
 export class ContextMenu extends React.Component<ContextMenuProps,any> {
     public show(event:SyntheticEvent):void;
+    public hide(event:SyntheticEvent):void;
 }

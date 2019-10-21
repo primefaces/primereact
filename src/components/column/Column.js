@@ -40,7 +40,8 @@ export class Column extends Component {
         onEditorCancel: null,
         excludeGlobalFilter: false,
         rowReorder: false,
-        rowReorderIcon: 'pi pi-bars'
+        rowReorderIcon: 'pi pi-bars',
+        rowEditor: false
     }
 
     static propTypes = {
@@ -80,6 +81,7 @@ export class Column extends Component {
         editorValidatorEvent: PropTypes.string,
         excludeGlobalFilter: PropTypes.bool,
         rowReorder: PropTypes.bool,
-        rowReorderIcon: PropTypes.string
+        rowReorderIcon: PropTypes.string,
+        rowEditor: PropTypes.bool
     }
 }

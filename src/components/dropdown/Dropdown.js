@@ -11,6 +11,7 @@ export class Dropdown extends Component {
 
     static defaultProps = {
         id: null,
+        name: null,
         value: null,
         options: null,
         optionLabel: null,
@@ -27,6 +28,7 @@ export class Dropdown extends Component {
         appendTo: null,
         tabIndex: null,
         autoFocus: false,
+        filterInputAutoFocus: true,
         panelClassName: null,
         panelStyle: null,
         dataKey: null,
@@ -44,6 +46,7 @@ export class Dropdown extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        name: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
@@ -60,6 +63,7 @@ export class Dropdown extends Component {
         appendTo: PropTypes.any,
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
+        filterInputAutoFocus: PropTypes.bool,
         lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
         panelstyle: PropTypes.object,
@@ -116,7 +120,7 @@ export class Dropdown extends Component {
             else {
                 this.show();
 
-                if (this.props.filter) {
+                if (this.props.filter && this.props.filterInputAutoFocus) {
                     setTimeout(() => {
                         this.filterInput.focus();
                     }, 200);
@@ -524,7 +528,7 @@ export class Dropdown extends Component {
 
         return (	
             <div className="p-hidden-accessible p-dropdown-hidden-select">	
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} tabIndex="-1" aria-hidden="true">
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex="-1" aria-hidden="true">
                     {placeHolderOption}
                     {option}	
                 </select>	
@@ -659,7 +663,7 @@ export class Dropdown extends Component {
             }
         }
 
-        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
             else

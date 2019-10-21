@@ -85,7 +85,7 @@ export class RadioButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
             else

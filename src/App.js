@@ -15,6 +15,7 @@ import './sass/App.scss';
 import { AccordionDemo } from './showcase/accordion/AccordionDemo';
 import { AutoCompleteDemo } from './showcase/autocomplete/AutoCompleteDemo';
 import { ButtonDemo } from './showcase/button/ButtonDemo';
+import { CarouselDemo } from './showcase/carousel/CarouselDemo';
 import { SplitButtonDemo } from './showcase/splitbutton/SplitButtonDemo';
 import { CheckboxDemo } from './showcase/checkbox/CheckboxDemo';
 import { ChipsDemo } from './showcase/chips/ChipsDemo';
@@ -165,18 +166,15 @@ export class App extends Component {
         let themeElement = document.getElementById('theme-link');
         themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.theme, theme));
         this.theme = theme;
+        const hasBodyDarkTheme = this.hasClass(document.body, 'dark-theme');
         
         if (dark) {
-            if (!this.darkDemoStyle) {
-                this.darkDemoStyle = document.createElement('style');
-                this.darkDemoStyle.type = 'text/css';
-                this.darkDemoStyle.innerHTML = '.implementation { background-color: #3f3f3f !important; color: #dedede !important} .implementation > h3, .implementation > h4{ color: #dedede !important}';
-                document.body.appendChild(this.darkDemoStyle);
+            if (!hasBodyDarkTheme) {
+                this.addClass(document.body, 'dark-theme');
             }
         }
-        else if(this.darkDemoStyle) {
-            document.body.removeChild(this.darkDemoStyle);
-            this.darkDemoStyle = null;
+        else if(hasBodyDarkTheme) {
+            this.removeClass(document.body, 'dark-theme');
         }
 
         this.setState({
@@ -184,6 +182,27 @@ export class App extends Component {
         });
         this.unbindThemesMenuDocumentClickListener();
         event.preventDefault();
+    }
+
+    addClass(element, className) {
+        if (element.classList)
+            element.classList.add(className);
+        else
+            element.className += ' ' + className;
+    }
+
+    removeClass(element, className) {
+        if (element.classList)
+            element.classList.remove(className);
+        else
+            element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+
+    hasClass(element, className) {
+        if (element.classList)
+            return element.classList.contains(className);
+        else
+            return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
     }
 
     toggleMenu() {
@@ -382,6 +401,7 @@ export class App extends Component {
                     <Route path="/slider" component={SliderDemo} />
                     <Route path="/spinner" component={SpinnerDemo} />
                     <Route path="/calendar" component={CalendarDemo} />
+                    <Route path="/carousel" component={CarouselDemo} />
                     <Route path="/chartdemo" component={ChartDemo} />
                     <Route path="/combochart" component={ComboChartDemo} />
                     <Route path="/piechart" component={PieChartDemo} />

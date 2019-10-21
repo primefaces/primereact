@@ -195,11 +195,29 @@ export class Calendar extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.tooltip && prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
             else
                 this.renderTooltip();
+        }
+
+        if (!this.props.onViewDateChange && !this.viewStateChanged) {            
+            let propValue = this.props.value;
+            if (Array.isArray(propValue)) {
+                propValue = propValue[0];
+            }
+
+            let prevPropValue = prevProps.value;
+            if (Array.isArray(prevPropValue)) {
+                prevPropValue = prevPropValue[0];
+            }
+
+            if ((!prevPropValue && propValue) || (propValue && propValue.getTime() !== prevPropValue.getTime())) {
+                this.setState({
+                    viewDate: (this.props.viewDate || propValue || new Date())
+                });
+            }
         }
     }
 
@@ -596,6 +614,7 @@ export class Calendar extends Component {
             });
         }
         else {
+            this.viewStateChanged = true;
             this.setState({
                 viewDate: value
             });

@@ -252,7 +252,7 @@ body {
     position: fixed;
     left: 0;
     top: 70px;
-    height: 100%;
+    height: calc(100% - 70px);
     background-color: #ffffff;
     width: 300px;
     overflow: auto;
@@ -479,6 +479,10 @@ body {
                 }
             }
 
+            h2 {
+                font-weight: 400;
+            }
+
             .p-col-12 > h3 {
                 font-weight: 400;
                 margin-top: 30px;
@@ -641,6 +645,7 @@ body {
                 .p-tabview-panels {
                     background: transparent;
                     border: 0 none;
+                    color: #333333;
                 }
             }
         }
@@ -1034,6 +1039,7 @@ body {
     #layout-sidebar {
         top: 98px;
         left: -300px;
+        height: calc(100% - 98px);
         @include transition(left .2s);
         z-index: 999;
 
@@ -1227,6 +1233,74 @@ pre[class*="language-"] {
     animation: pulse 1s infinite ease-in-out;
     text-indent: -99999px;
     overflow: hidden;
+}
+
+.carousel-demo {
+    .p-carousel {
+        .p-carousel-content {
+            .p-carousel-item {
+                .car-details {
+                    > .p-grid {
+                        border: 1px solid #b3c2ca;
+                        border-radius: 3px;
+                        margin: .3em;
+                        text-align: center;
+                        padding: 2em 0 2.25em 0;
+                    }
+                }
+
+                .car-data {
+                    .car-title {
+                        font-weight: 700;
+                        font-size: 20px;
+                        margin-top: 24px;
+                    }
+
+                    .car-subtitle {
+                        margin: .25em 0 2em 0;
+                    }
+
+                    button {
+                        margin-left: .5em;
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.custom-carousel {
+            .p-carousel-dot-icon  {
+                width: 16px !important;
+                height: 16px !important;
+                border-radius: 50%;
+            }
+        }
+
+        &.p-carousel-horizontal {
+            .p-carousel-content {
+                .p-carousel-item {    
+                    &.p-carousel-item-start {
+                        .car-details {
+                            > .p-grid {
+                                margin-left: .6em;
+                            }
+                        }
+                    }
+    
+                    &.p-carousel-item-end {
+                        .car-details {
+                            > .p-grid {
+                                margin-right: .6em;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 767px) {
@@ -1464,5 +1538,37 @@ pre[class*="language-"] {
     
     .p-col-m {
         display: inline-block;
+    }
+}
+
+/* Dark Theme such as luna-amber, luna-blue, luna-green and luna-pink */
+.dark-theme {
+    #layout-content {        
+        .content-section {
+            &.implementation {
+                background-color: #3f3f3f !important; 
+                color: #dedede !important;
+
+                > h3,
+                > h4 {
+                    color: #dedede !important
+                }
+            }
+        }
+
+        .carousel-demo {
+            .p-carousel {
+                .p-carousel-content {
+                    .p-carousel-item {
+                        .car-details {
+                            > .p-grid {
+                                border: 1px solid #191919;
+                                background-color: #323232;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

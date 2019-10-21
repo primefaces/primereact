@@ -81,6 +81,7 @@ export class DataTable extends Component {
         tabIndex: '0',
         stateKey: null,
         stateStorage: 'session',
+        editMode: 'cell',
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -95,7 +96,11 @@ export class DataTable extends Component {
         onContextMenu: null,
         onColReorder: null,
         onRowReorder: null,
-        onValueChange: null
+        onValueChange: null,
+        rowEditorValidator: null,
+        onRowEditInit: null,
+        onRowEditSave: null,
+        onRowEditCancel: null
     }
 
     static propTypes = {
@@ -165,6 +170,7 @@ export class DataTable extends Component {
         tabIndex: PropTypes.string,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
+        editMode: PropTypes.string,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -179,34 +185,34 @@ export class DataTable extends Component {
         onContextMenu: PropTypes.func,
         onColReorder: PropTypes.func,
         onRowReorder: PropTypes.func,
-        onValueChange: PropTypes.func
+        onValueChange: PropTypes.func,
+        rowEditorValidator: PropTypes.func,
+        onRowEditInit: PropTypes.func,
+        onRowEditSave: PropTypes.func,
+        onRowEditCancel: PropTypes.func
     };
 
     constructor(props) {
         super(props);
-        let state = {};
+        this.state = {};
 
         if (!this.props.onPage) {
-            state.first = props.first;
-            state.rows = props.rows;
+            this.state.first = props.first;
+            this.state.rows = props.rows;
         }
 
         if (!this.props.onSort) {
-            state.sortField = props.sortField;
-            state.sortOrder = props.sortOrder;
-            state.multiSortMeta = props.multiSortMeta;
+            this.state.sortField = props.sortField;
+            this.state.sortOrder = props.sortOrder;
+            this.state.multiSortMeta = props.multiSortMeta;
         }
 
         if (!this.props.onFilter) {
-            state.filters = props.filters;
+            this.state.filters = props.filters;
         }
 
         if (this.isStateful()) {
-            this.restoreState(state);
-        }
-
-        if (Object.keys(state).length) {
-            this.state = state;
+            this.restoreState(this.state);
         }
 
         this.onPageChange = this.onPageChange.bind(this);
@@ -599,7 +605,7 @@ export class DataTable extends Component {
     }
 
     hasFilter() {
-        let filters = this.getFilters();
+        let filters = this.getFilters() || this.props.globalFilter;
 
         return filters && Object.keys(filters).length > 0;
     }
@@ -989,7 +995,9 @@ export class DataTable extends Component {
     }
 
     closeEditingCell() {
-        document.body.click();
+        if (this.props.editMode !== "row") {
+            document.body.click();
+        }
     }
 
     onHeaderCheckboxClick(event) {
@@ -1004,9 +1012,12 @@ export class DataTable extends Component {
         }
             
         if(this.props.onSelectionChange) {
+            const { originalEvent, ...rest } = event;
+
             this.props.onSelectionChange({
-                originalEvent: event,
-                value: selection
+                originalEvent,
+                value: selection,
+                ...rest
             });
         }
     }
@@ -1152,7 +1163,8 @@ export class DataTable extends Component {
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}>
+                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder} 
+                        editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}>
                         {columns}
                 </TableBody>;
     }
@@ -1284,34 +1296,36 @@ export class DataTable extends Component {
             loader = this.renderLoader();
         }
 
-        if(this.props.scrollable) {
-            this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
-            let frozenColumns = this.getFrozenColumns(columns);
-            let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
-            let frozenView, scrollableView;
-            if(frozenColumns) {
-                frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
+        if (Array.isArray(columns)) {
+            if (this.props.scrollable) {
+                this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
+                let frozenColumns = this.getFrozenColumns(columns);
+                let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
+                let frozenView, scrollableView;
+                if (frozenColumns) {
+                    frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
+                }
+
+                scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
+
+                tableContent = <div className="p-datatable-scrollable-wrapper">
+                                    {frozenView}
+                                    {scrollableView}
+                            </div>;
             }
+            else {
+                let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
+                let tableBody = this.createTableBody(value, columns);
+                let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
-            scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
-
-            tableContent = <div className="p-datatable-scrollable-wrapper">
-                                {frozenView}
-                                {scrollableView}
-                          </div>;
-        }
-        else {
-            let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
-            let tableBody = this.createTableBody(value, columns);
-            let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
-
-            tableContent = <div className="p-datatable-wrapper">
-                    <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
-                        {tableHeader}                        
-                        {tableFooter}
-                        {tableBody}
-                    </table>
-                </div>;
+                tableContent = <div className="p-datatable-wrapper">
+                        <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
+                            {tableHeader}                        
+                            {tableFooter}
+                            {tableBody}
+                        </table>
+                    </div>;
+            }
         }
 
         return (
