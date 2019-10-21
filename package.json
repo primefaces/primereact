@@ -1,10 +1,15 @@
 {
-  "name": "primereact",
-  "version": "3.3.2-SNAPSHOT",
+  "name": "primereact-fork",
+  "version": "3.1.9-fork-1.0.6",
   "homepage": "/primereact",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eirikaho/primereact.git"
+    "url": "ssh://git@git.spk.no:7999/inc/primereact-fork.git"
+  },
+  "always-auth": true,
+  "user": "sa-npm",
+  "publishConfig": {
+    "registry": "http://nexus/content/repositories/spk-npm/"
   },
   "license": "MIT",
   "devDependencies": {
