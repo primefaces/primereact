@@ -4,7 +4,7 @@
   "homepage": "/primereact",
   "repository": {
     "type": "git",
-    "url": "https://github.com/primefaces/primereact.git"
+    "url": "https://github.com/eirikaho/primereact.git"
   },
   "license": "MIT",
   "devDependencies": {
