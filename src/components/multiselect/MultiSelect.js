@@ -390,11 +390,16 @@ export class MultiSelect extends Component {
 
         if (!this.isEmpty() && !this.props.fixedPlaceholder) {
             label = '';
-            for(let i = 0; i < this.props.value.length; i++) {
-                if(i !== 0) {
-                    label += ',';
+            let length = this.props.value.length;
+            if (length > 3) {
+                label = `${length} items selected`;
+            } else {
+                for (let i = 0; i < length; i++) {
+                    if(i !== 0) {
+                        label += ',';
+                    }
+                    label += this.findLabelByValue(this.props.value[i]);
                 }
-                label += this.findLabelByValue(this.props.value[i]);
             }
         }
 
