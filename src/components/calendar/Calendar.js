@@ -213,7 +213,7 @@ export class Calendar extends Component {
                 prevPropValue = prevPropValue[0];
             }
 
-            if ((!prevPropValue && propValue) || (propValue && propValue.getTime() !== prevPropValue.getTime())) {
+            if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
                 this.setState({
                     viewDate: (this.props.viewDate || propValue || new Date())
                 });
@@ -725,6 +725,8 @@ export class Calendar extends Component {
                     value: value
                 }
             });
+
+            this.viewStateChanged = true;
         }
     }
 
