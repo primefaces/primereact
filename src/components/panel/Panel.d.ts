@@ -7,6 +7,7 @@ interface PanelProps {
     style?: object;
     className?: string;
     collapsed?: boolean;
+    flex?: boolean;
     expandIcon?: string,
     collapseIcon?: string,
     onExpand?(event: Event): void;
