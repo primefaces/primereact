@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox } from "../checkbox/Checkbox";
+import classNames from 'classnames';
 
 export class RowCheckbox extends Component {
 
@@ -18,7 +18,12 @@ export class RowCheckbox extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {};
+        
         this.onClick = this.onClick.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     onClick(event) {
@@ -30,8 +35,34 @@ export class RowCheckbox extends Component {
             })
         }
     }
+
+    onFocus() {
+        this.setState({focused: true});
+    }
+
+    onBlur() {
+        this.setState({focused: false});
+    }
+
+    onKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.onClick(event);
+            event.preventDefault();
+        }
+    }
     
     render() {
-        return <Checkbox onChange={this.onClick} checked={this.props.selected} disabled={this.props.disabled} />;
+        let className = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
+        let iconClassName = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.selected});
+        
+        return <div className="p-checkbox p-component" onClick={this.onClick}>
+                 <div className="p-hidden-accessible">
+                    <input type="checkbox" defaultChecked={this.props.selected} disabled={this.props.disabled} 
+                        aria-checked={this.props.selected} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur}/>
+                </div>
+                <div className={className}>
+                    <span className={iconClassName}></span>
+                </div>
+            </div>;
     }
 }
