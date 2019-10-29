@@ -407,8 +407,8 @@ export class DataTable extends Component {
                     this.setScrollableItemsWidthOnExpandResize(null, this.tableWidthState, 0);
                 }
                 else {
-                    this.tableViewChild.nativeElement.style.width = this.tableWidthState;
-                    this.containerViewChild.nativeElement.style.width = this.tableWidthState;
+                    this.table.style.width = this.tableWidthState;
+                    this.container.style.width = this.tableWidthState;
                 }
             }
 

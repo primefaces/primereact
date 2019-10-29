@@ -51,21 +51,18 @@ export class DataViewDemo extends Component {
 
     renderListItem(car) {
         return (
-            <div className="p-col-12 car-details" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
-                <div className="p-grid">
-                    <div className="p-col-12 p-md-3">
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
                         <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
+                        <div class="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
                     </div>
-                    <div className="p-col-12 p-md-8 car-data">
-                        <div>Vin: <b>{car.vin}</b></div>
-                        <div>Year: <b>{car.year}</b></div>
-                        <div>Brand: <b>{car.brand}</b></div>
-                        <div>Color: <b>{car.color}</b></div>
-                    </div>
-
-                    <div className="p-col-12 p-md-1 search-icon" style={{marginTop:'40px'}}>
-                        <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
-                    </div>
+                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </div>
             </div>
         );
@@ -77,7 +74,6 @@ export class DataViewDemo extends Component {
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
                     <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
-                    <hr className="ui-widget-content" style={{ borderTop: 0 }} />
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </Panel>
             </div>
@@ -667,27 +663,17 @@ export class DataViewDemo extends Component {
 
     renderListItem(car) {
         return (
-            <div className="p-col-12" style={{padding: '2em', borderBottom: '1px solid #d9d9d9'}}>
-                <div className="p-col-12 p-md-3">
-                    <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand}/>
-                </div>
-                <div className="p-col-12 p-md-8 car-details">
-                    <div className="p-grid">
-                        <div className="p-col-2 p-sm-6">Vin:</div>
-                        <div className="p-col-10 p-sm-6">{car.vin}</div>
-
-                        <div className="p-col-2 p-sm-6">Year:</div>
-                        <div className="p-col-10 p-sm-6">{car.year}</div>
-
-                        <div className="p-col-2 p-sm-6">Brand:</div>
-                        <div className="p-col-10 p-sm-6">{car.brand}</div>
-
-                        <div className="p-col-2 p-sm-6">Color:</div>
-                        <div className="p-col-10 p-sm-6">{car.color}</div>
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
+                        <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand}/>
+                        <div class="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
                     </div>
-                </div>
-
-                <div className="p-col-12 p-md-1 search-icon" style={{marginTop:'40px'}}>
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </div>
             </div>
@@ -700,7 +686,6 @@ export class DataViewDemo extends Component {
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
                     <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
-                    <hr className="ui-widget-content" style={{ borderTop: 0 }} />
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </Panel>
             </div>
