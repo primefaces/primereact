@@ -178,7 +178,6 @@ class TooltipDoc extends Component {
 {`
 import React, {Component} from 'react';
 import {InputText} from 'primereact/inputtext';
-import {Tooltip} from 'primereact/tooltip';
 
 export class TooltipDemo extends Component {
         
