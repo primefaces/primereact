@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import KeyFilter from "../keyfilter/KeyFilter";
 import Tooltip from "../tooltip/Tooltip";
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class InputText extends Component {
 
@@ -95,13 +96,7 @@ export class InputText extends Component {
             'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
         });
 
-        let inputProps = Object.assign({}, this.props);
-        delete inputProps.onInput;
-        delete inputProps.onKeyPress;
-        delete inputProps.keyfilter;
-        delete inputProps.validateOnly;
-        delete inputProps.tooltip;
-        delete inputProps.tooltipOptions;
+        let inputProps = ObjectUtils.findDiffKeys(this.props, InputText.defaultProps);
 
         return <input ref={(el) => this.element = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }

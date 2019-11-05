@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Tooltip from "../tooltip/Tooltip";
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class InputTextarea extends Component {
 
@@ -150,14 +151,7 @@ export class InputTextarea extends Component {
             'p-inputtextarea-resizable': this.props.autoResize
         });
 
-        let textareaProps = Object.assign({}, this.props);
-        delete textareaProps.autoResize;
-        delete textareaProps.onFocus;
-        delete textareaProps.onBlur;
-        delete textareaProps.onKeyUp;
-        delete textareaProps.onInput;
-        delete textareaProps.tooltip;
-        delete textareaProps.tooltipOptions;
+        let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextarea.defaultProps);
 
         return (
             <textarea {...textareaProps} className={className} ref={input => this.element = input} 

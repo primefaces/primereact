@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
 import Tooltip from "../tooltip/Tooltip";
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class InputSwitch extends Component {
 
@@ -128,9 +129,12 @@ export class InputSwitch extends Component {
             'p-disabled': this.props.disabled,
             'p-inputswitch-focus': this.state.focused
         });
-        
+
+        let inputSwitchProps = ObjectUtils.findDiffKeys(this.props, InputSwitch.defaultProps);
+
         return (
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} role="checkbox" aria-checked={this.props.checked}>
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} 
+                role="checkbox" aria-checked={this.props.checked} {...inputSwitchProps}>
                 <div className="p-hidden-accessible">
                     <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
                         onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled} />

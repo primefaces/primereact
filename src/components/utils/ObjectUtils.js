@@ -87,6 +87,17 @@ export default class ObjectUtils {
         return !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
+    static findDiffKeys(obj1, obj2) {
+        if (!obj1 || !obj2) {
+            return {};
+        }
+
+        return Object.keys(obj1).filter(key => !obj2.hasOwnProperty(key)).reduce((result, current) => {
+            result[current] = obj1[current];
+            return result;
+        }, {});
+    }
+
     static filter(value, fields, filterValue) {
         var filteredItems=[];
 
