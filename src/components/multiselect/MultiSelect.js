@@ -27,6 +27,8 @@ export class MultiSelect extends Component {
         appendTo: null,
         tooltip: null,
         tooltipOptions: null,
+        maxSelectedLabels: 3,
+        selectedItemsLabel: '{0} items selected',
         itemTemplate: null,
         selectedItemTemplate: null,
         onChange: null,
@@ -51,6 +53,8 @@ export class MultiSelect extends Component {
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        maxSelectedLabels: PropTypes.number,
+        selectedItemsLabel: PropTypes.string,
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
         onChange: PropTypes.func,
@@ -385,6 +389,15 @@ export class MultiSelect extends Component {
         return !this.props.value || this.props.value.length === 0;
     }
 
+    getSelectedItemsLabel() {
+        let pattern = /{(.*?)}/;
+        if (pattern.test(this.props.selectedItemsLabel)) {
+            return this.props.selectedItemsLabel.replace(this.props.selectedItemsLabel.match(pattern)[0], this.props.value.length + '');
+        }
+
+        return this.props.selectedItemsLabel;
+    }
+
     getLabel() {
         let label;
 
@@ -396,6 +409,13 @@ export class MultiSelect extends Component {
                 }
                 label += this.findLabelByValue(this.props.value[i]);
             }
+
+            if (this.props.value.length <= this.props.maxSelectedLabels) {
+                return label;
+            }
+            else {
+                return this.getSelectedItemsLabel();
+            }
         }
 
         return label;
@@ -403,12 +423,17 @@ export class MultiSelect extends Component {
 
     getLabelContent() {
         if (this.props.selectedItemTemplate) {
-            if( this.props.value && this.props.value.length) {
-                 return this.props.value.map((val, index) => {
-                    return (
-                        <React.Fragment key={index}>{this.props.selectedItemTemplate(val)}</React.Fragment>
-                    );
-                });
+            if (!this.isEmpty()) {
+                if (this.props.value.length <= this.props.maxSelectedLabels) {
+                    return this.props.value.map((val, index) => {
+                        return (
+                            <React.Fragment key={index}>{this.props.selectedItemTemplate(val)}</React.Fragment>
+                        );
+                    });
+                }
+                else {
+                    return this.getSelectedItemsLabel();
+                }
             }
             else {
                 return this.props.selectedItemTemplate();
