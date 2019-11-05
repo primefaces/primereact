@@ -666,11 +666,11 @@ export class Calendar extends Component {
         }
         
         if(this.props.minDate && this.props.minDate > date) {
-            date = this.minDate;
+            date = this.props.minDate;
         }
         
-        if(this.maxDate && this.maxDate < date) {
-            date = this.maxDate;
+        if(this.props.maxDate && this.props.maxDate < date) {
+            date = this.props.maxDate;
         }
         
         if (this.isSingleSelection()) {
