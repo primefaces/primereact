@@ -64,6 +64,15 @@ export class Sidebar extends Component {
             else
                 this.onHide();
         }
+
+        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
+            if (this.props.dismissable) {
+                this.bindMaskClickListener();
+            }
+            else {
+                this.unbindMaskClickListener();
+            }
+        }
     }
 
     onShow() {
