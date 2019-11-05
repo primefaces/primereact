@@ -334,6 +334,18 @@ selectedCarTemplate(option) {
                             <td>null</td>
                             <td>DOM element instance where the dialog should be mounted.</td>
                         </tr>
+                        <tr>
+                            <td>maxSelectedLabels</td>
+                            <td>number</td>
+                            <td>3</td>
+                            <td>Decides how many selected item labels to show at most.</td>
+                        </tr>
+                        <tr>
+                            <td>selectedItemsLabel</td>
+                            <td>string</td>
+                            <td>&#123;0&#125; items selected</td>
+                            <td>Label to display after exceeding max selected labels.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
