@@ -415,7 +415,7 @@ export class Tree extends Component {
     }
 
     render() {
-        const className = classNames('p-tree p-component', {'p-tree-selectable': this.props.selectionMode, 'p-tree-loading': this.props.loading});
+        const className = classNames('p-tree p-component', {'p-tree-selectable': this.props.selectionMode, 'p-tree-loading': this.props.loading}, this.props.className);
         const loader = this.renderLoader();
         const content = this.renderModel();
         const filter = this.renderFilter();
