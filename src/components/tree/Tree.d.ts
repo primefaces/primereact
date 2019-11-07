@@ -4,6 +4,7 @@ import TreeNode from "../treenode/TreeNode";
 interface TreeProps {
     id?: string;
     value?: TreeNode[];
+    disabled?: boolean;
     selectionMode?: string;
     selectionKeys?: any;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
