@@ -751,6 +751,12 @@ export class TreeContextMenuDemo extends Component {
                             <td>null</td>
                             <td>Placeholder text to show when filter input is empty.</td>
                         </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the component should be disabled.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
