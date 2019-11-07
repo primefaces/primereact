@@ -2102,10 +2102,10 @@ body .p-tree {
             border-color: #ffffff; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight-contextmenu {
           border: 1px dashed #e02365; }
-        body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+        body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):not(.p-disabled):hover {
           background-color: #eaeaea;
           color: #333333; }
-          body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover .p-treenode-icon {
+          body .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):not(.p-disabled):hover .p-treenode-icon {
             color: #333333; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content > span {
           line-height: inherit; }
@@ -2130,10 +2130,10 @@ body .p-tree {
         color: #ffffff; }
       body .p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-checkbox .p-icon {
         color: #007ad9; }
-      body .p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-treenode-label:not(.p-highlight):hover {
+      body .p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-treenode-label:not(.p-highlight):not(.p-disabled):hover {
         background-color: inherit;
         color: inherit; }
-      body .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+      body .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):not(.p-disabled):hover {
         background-color: #eaeaea;
         color: #333333; }
   body .p-tree .p-tree-filter-container .p-tree-filter {
