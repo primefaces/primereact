@@ -11,6 +11,7 @@ export class UITreeNode extends Component {
         last: null,
         parent: null,
         path: null,
+        disabled: false,
         selectionMode: null,
         selectionKeys: null,
         contextMenuSelectionKey: null,
@@ -44,6 +45,7 @@ export class UITreeNode extends Component {
         last: PropTypes.bool,
         parent: PropTypes.object,
         path: PropTypes.string,
+        disabled: PropTypes.bool,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         contextMenuSelectionKey: PropTypes.any,
@@ -121,6 +123,10 @@ export class UITreeNode extends Component {
     }
  
     onTogglerClick(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         if (this.isExpanded())
             this.collapse(event);
         else
@@ -151,6 +157,10 @@ export class UITreeNode extends Component {
     }
 
     onNodeKeyDown(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         const nodeElement = event.target.parentElement;
 
         switch (event.which) {
@@ -257,7 +267,7 @@ export class UITreeNode extends Component {
     }
 
     onClick(event) {
-        if (event.target.className && event.target.className.indexOf('p-tree-toggler') === 0) {
+        if ((event.target.className && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
             return;
         }
         
@@ -413,6 +423,10 @@ export class UITreeNode extends Component {
     }
 
     onRightClick(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         DomHandler.clearSelection();
 
         if (this.props.onContextMenuSelectionChange) {
@@ -615,7 +629,7 @@ export class UITreeNode extends Component {
         if (this.isCheckboxSelectionMode() && this.props.node.selectable !== false) {
             const checked = this.isChecked();
             const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked});
+            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-disabled': this.props.disabled});
             const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
 
             return (
@@ -674,17 +688,20 @@ export class UITreeNode extends Component {
         const className = classNames('p-treenode-content', this.props.node.className, {
                 'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 
                 'p-highlight': this.isCheckboxSelectionMode() ? checked : selected,
-                'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)});
+                'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key),
+                'p-disabled': this.props.disabled
+            });
         const expanded = this.isExpanded();
         const toggler = this.renderToggler(expanded);
         const checkbox = this.renderCheckbox();
         const icon = this.renderIcon(expanded);
         const label = this.renderLabel();
+        const tabIndex = this.props.disabled ? undefined : '0';
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
+            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
-                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex="0" onKeyDown={this.onNodeKeyDown} 
+                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex={tabIndex} onKeyDown={this.onNodeKeyDown} 
                 role="treeitem" aria-posinset={this.props.index + 1} aria-expanded={this.isExpanded()} aria-selected={checked || selected}>
                 {toggler}
                 {checkbox}
@@ -701,8 +718,8 @@ export class UITreeNode extends Component {
                     {
                         this.props.node.children.map((childNode, index) => {
                             return (
-                                <UITreeNode key={childNode.key||childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} selectionMode={this.props.selectionMode}
-                                    selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
+                                <UITreeNode key={childNode.key||childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} disabled={this.props.disabled}
+                                    selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
@@ -735,7 +752,7 @@ export class UITreeNode extends Component {
     render() {
         const node = this.renderNode();
 
-        if (this.props.dragdropScope) {
+        if (this.props.dragdropScope && !this.props.disabled) {
             const beforeDropPoint = this.renderDropPoint(-1);
             const afterDropPoint = this.props.last ? this.renderDropPoint(1) : null;
 

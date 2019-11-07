@@ -97,6 +97,12 @@
     right: 1em;
 }
 
+.p-tree.p-disabled .p-treenode-selectable.p-treenode-content,
+.p-tree.p-disabled .p-tree-toggler,
+.p-tree.p-disabled .p-checkbox-box {
+    cursor: default;
+}
+
 /** Fluid **/
 .p-fluid .p-tree {
     width: 100%;

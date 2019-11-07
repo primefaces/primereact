@@ -9,6 +9,7 @@ export class Tree extends Component {
     static defaultProps = {
         id: null,
         value: null,
+        disabled: false,
         selectionMode: null,
         selectionKeys: null,
         onSelectionChange: null,
@@ -42,6 +43,7 @@ export class Tree extends Component {
     static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
+        disabled: PropTypes.bool,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         onSelectionChange: PropTypes.func,
@@ -346,7 +348,7 @@ export class Tree extends Component {
 
     renderRootChild(node, index, last) {
         return (
-            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} selectionMode={this.props.selectionMode} 
+            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} disabled={this.props.disabled} selectionMode={this.props.selectionMode} 
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
@@ -405,7 +407,7 @@ export class Tree extends Component {
         if (this.props.filter) {
             return <div className="p-tree-filter-container">
                         <input type="text" autoComplete="off" className="p-tree-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
+                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} disabled={this.props.disabled}/>
                         <span className="p-tree-filter-icon pi pi-search"></span>
                    </div>;
         }
@@ -417,7 +419,8 @@ export class Tree extends Component {
     render() {
         const className = classNames('p-tree p-component', this.props.className, {
             'p-tree-selectable': this.props.selectionMode, 
-            'p-tree-loading': this.props.loading
+            'p-tree-loading': this.props.loading,
+            'p-disabled': this.props.disabled
         });
         const loader = this.renderLoader();
         const content = this.renderModel();
