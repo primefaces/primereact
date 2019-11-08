@@ -82,7 +82,7 @@ interface DataTableProps {
     onRowExpand?(e: {originalEvent: Event, data: any}): void;
     onRowCollapse?(e: {originalEvent: Event, data: any}): void;
     onContextMenu?(e: {originalEvent: Event, data: any}): void;
-    onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
+    onColReorder?(e: {originalEvent: Event, dragIndex: number, dropIndex: number, columns: any}): void;
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
     onValueChange?(value: any[]): void;
     rowEditorValidator?(rowData: any): boolean;
