@@ -1667,8 +1667,8 @@ export class Calendar extends Component {
 
         return (
             <div key={monthMetaData.month} className="p-datepicker-group">
+                {header}
                 <div className="p-datepicker-header">
-                    {header}
                     {backwardNavigator}
                     {forwardNavigator}
                     {title}
