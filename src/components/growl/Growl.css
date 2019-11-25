@@ -14,11 +14,13 @@
 }
 
 .p-growl.p-growl-bottomleft {
+	top: unset;
 	bottom: 20px;
 	left: 20px;
 }
 
 .p-growl.p-growl-bottomright {
+	top: unset;
 	bottom: 20px;
 	right: 20px;
 }
