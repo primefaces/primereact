@@ -98,7 +98,7 @@ export class HomeComponent extends Component {
                     <div className="p-grid templates-grid">
                         <div className="p-col-12">
                             <a href="https://www.primefaces.org/store">
-                                <img alt="Sapphire" src="showcase/resources/images/black-friday-2019.jpg" />
+                                <img alt="Black Friday 2019" src="showcase/resources/images/black-friday-2019.jpg" />
                             </a>
                         </div>
                     </div>
