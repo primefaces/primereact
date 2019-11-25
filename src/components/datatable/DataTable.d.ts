@@ -63,6 +63,7 @@ interface DataTableProps {
     stateStorage?:string;
     groupField?:string;
     editMode?:string;
+    disableDefaultSort?: boolean;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
     rowExpansionTemplate?(data: any): JSX.Element | undefined;

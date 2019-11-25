@@ -41,6 +41,7 @@ export class DataTable extends Component {
         defaultSortOrder: 1,
         emptyMessage: null,
         selectionMode: null,
+	disableDefaultSort: false,
         selection: null,
         onSelectionChange: null,
         contextMenuSelection: null,
@@ -136,6 +137,7 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
+	disableDefaultSort: PropTypes.bool,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
         frozenHeaderColumnGroup: PropTypes.any,
@@ -1084,11 +1086,16 @@ export class DataTable extends Component {
                 let multiSortMeta = (localState && localState.multiSortMeta) || this.getMultiSortMeta();
                 
                 if(sortField || multiSortMeta) {
-                    if(this.props.sortMode === 'single')
-                        data = this.sortSingle(data, sortField, sortOrder);
-                    else if(this.props.sortMode === 'multiple')
-                        data = this.sortMultiple(data, multiSortMeta);
-                }
+                  if(this.props.sortMode === 'single'){
+                    if (!this.props.disableDefaultSort) {
+                      data = this.sortSingle(data, sortField, sortOrder);
+                    }
+                  }  
+                  else if(this.props.sortMode === 'multiple') {
+                    if (!this.props.disableDefaultSort) {
+                      data = this.sortMultiple(data, multiSortMeta);
+                    }
+                  }
 
                 let localFilters = (localState && localState.filters) || this.getFilters();
                 if (localFilters || this.props.globalFilter) {
