@@ -41,7 +41,7 @@ export class DataTable extends Component {
         defaultSortOrder: 1,
         emptyMessage: null,
         selectionMode: null,
-	disableDefaultSort: false,
+	      disableDefaultSort: false,
         selection: null,
         onSelectionChange: null,
         contextMenuSelection: null,
@@ -137,7 +137,7 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
-	disableDefaultSort: PropTypes.bool,
+	      disableDefaultSort: PropTypes.bool,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
         frozenHeaderColumnGroup: PropTypes.any,
@@ -1102,6 +1102,7 @@ export class DataTable extends Component {
                     data = this.filterLocal(data, localFilters);
                 }
             }
+          }
         }
 
         return data;
