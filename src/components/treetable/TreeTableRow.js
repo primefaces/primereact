@@ -538,11 +538,11 @@ export class TreeTableRow extends Component {
             className = {...className, ...rowClassName};
         }
 
-        className = classNames(className);
+        className = classNames(className, this.props.node.className);
 
         return (
             <React.Fragment>
-                <tr ref={el => this.container = el} tabIndex="0" className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
+                <tr ref={el => this.container = el} tabIndex="0" className={className} style={this.props.node.style} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
                 {children}
             </React.Fragment>
         );
