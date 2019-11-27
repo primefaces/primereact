@@ -186,6 +186,9 @@ export class Calendar extends Component {
         this.incrementSecond = this.incrementSecond.bind(this);
         this.decrementSecond= this.decrementSecond.bind(this);
         this.toggleAmPm = this.toggleAmPm.bind(this);
+        this.onTimePickerElementMouseDown = this.onTimePickerElementMouseDown.bind(this);
+        this.onTimePickerElementMouseUp = this.onTimePickerElementMouseUp.bind(this);
+        this.onTimePickerElementMouseLeave = this.onTimePickerElementMouseLeave.bind(this);
     }
 
     componentDidMount() {
@@ -410,6 +413,68 @@ export class Calendar extends Component {
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
+        }
+    }
+
+    onTimePickerElementMouseDown(event, type, direction) {
+        if (!this.props.disabled) {
+            this.repeat(event, null, type, direction);
+            event.preventDefault();
+        }
+    }
+
+    onTimePickerElementMouseUp() {
+        if (!this.props.disabled) {
+            this.clearTimePickerTimer();
+        }
+    }
+
+    onTimePickerElementMouseLeave() {
+        if (!this.props.disabled) {
+            this.clearTimePickerTimer();
+        }
+    }
+
+    repeat(event, interval, type, direction) {
+        event.persist();
+        
+        let i = interval||500;
+
+        this.clearTimePickerTimer();
+        this.timePickerTimer = setTimeout(() => {
+            this.repeat(event, 100, type, direction);
+        }, i);
+
+        switch(type) {
+            case 0:
+                if (direction === 1)
+                    this.incrementHour(event);
+                else
+                    this.decrementHour(event);
+            break;
+
+            case 1:
+                if (direction === 1)
+                    this.incrementMinute(event);
+                else
+                    this.decrementMinute(event);
+            break;
+
+            case 2:
+                if (direction === 1)
+                    this.incrementSecond(event);
+                else
+                    this.decrementSecond(event);
+            break;
+
+            default:
+                break;
+        }
+    }
+
+    clearTimePickerTimer() {
+        if (this.timePickerTimer) {
+            clearTimeout(this.timePickerTimer);
         }
     }
 
@@ -1893,11 +1958,11 @@ export class Calendar extends Component {
         
         return (
             <div className="p-hour-picker">
-                <button className="p-link" onClick={this.incrementHour}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{hourDisplay}</span>
-                <button className="p-link" onClick={this.decrementHour}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
             </div>
@@ -1911,11 +1976,11 @@ export class Calendar extends Component {
         
         return (
             <div className="p-minute-picker">
-                <button className="p-link" onClick={this.incrementMinute}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{minuteDisplay}</span>
-                <button className="p-link" onClick={this.decrementMinute}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
             </div>
@@ -1930,11 +1995,11 @@ export class Calendar extends Component {
             
             return (
                 <div className="p-second-picker">
-                    <button className="p-link" onClick={this.incrementSecond}>
+                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{secondDisplay}</span>
-                    <button className="p-link" onClick={this.decrementSecond}>
+                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
                 </div>
