@@ -99,7 +99,8 @@ export class DataTable extends Component {
         rowEditorValidator: null,
         onRowEditInit: null,
         onRowEditSave: null,
-        onRowEditCancel: null
+        onRowEditCancel: null,
+        exportFunction: null
     }
 
     static propTypes = {
@@ -187,7 +188,8 @@ export class DataTable extends Component {
         rowEditorValidator: PropTypes.func,
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
-        onRowEditCancel: PropTypes.func
+        onRowEditCancel: PropTypes.func,
+        exportFunction: PropTypes.func
     };
 
     constructor(props) {
@@ -959,8 +961,26 @@ export class DataTable extends Component {
         data.forEach((record, i) => {
             csv += '\n';
             for(let i = 0; i < columns.length; i++) {
-                if(columns[i].props.field) {
-                    csv += '"' + ObjectUtils.resolveFieldData(record, columns[i].props.field) + '"';
+                let column = columns[i],
+                field = column.props.field;
+
+                if (column.props.exportable && field) {
+                    let cellData = ObjectUtils.resolveFieldData(record, field);
+                    
+                    if (cellData != null) {
+                        if (this.props.exportFunction) {
+                            cellData = this.props.exportFunction({
+                                data: cellData,
+                                field: field
+                            });
+                        }
+                        else
+                            cellData = String(cellData).replace(/"/g, '""');
+                    }
+                    else
+                        cellData = '';
+
+                    csv += '"' + cellData + '"';
                     
                     if(i < (columns.length - 1)) {
                         csv += this.props.csvSeparator;
