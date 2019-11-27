@@ -1255,6 +1255,30 @@ export class DataTable extends Component {
         return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
     }
 
+    reset() {
+        let state = {};
+        if (!this.props.onPage) {
+            state.first = this.props.first;
+            state.rows = this.props.rows;
+        }
+
+        if (!this.props.onSort) {
+            state.sortField = this.props.sortField;
+            state.sortOrder = this.props.sortOrder;
+            state.multiSortMeta = this.props.multiSortMeta;
+        }
+
+        if (!this.props.onFilter) {
+            state.filters = this.props.filters;
+        }
+
+        this.resetColumnOrder();
+
+        if (Object.keys(state).length) {
+            this.setState(state);
+        }
+    }
+
     resetColumnOrder() {
         let columns = React.Children.toArray(this.props.children);
         let columnOrder = [];
