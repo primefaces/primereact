@@ -32,6 +32,7 @@ interface ColumnProps {
     rowReorderIcon?: string;
     editorValidatorEvent?: string;
     rowEditor?: boolean;
+    exportable?: boolean;
     onEditorSubmit?(props: any): void;
     onEditorCancel?(props: any): void;
     excludeGlobalFilter?: boolean;

@@ -89,6 +89,7 @@ interface DataTableProps {
     onRowEditInit?(e: {originalEvent: Event, data: any}): void;
     onRowEditSave?(e: {originalEvent: Event, data: any}): void;
     onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
+    exportFunction?(e: {data: any, field: string}): any;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {
