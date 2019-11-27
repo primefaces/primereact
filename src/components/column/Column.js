@@ -41,7 +41,8 @@ export class Column extends Component {
         excludeGlobalFilter: false,
         rowReorder: false,
         rowReorderIcon: 'pi pi-bars',
-        rowEditor: false
+        rowEditor: false,
+        exportable: true
     }
 
     static propTypes = {
@@ -82,6 +83,7 @@ export class Column extends Component {
         excludeGlobalFilter: PropTypes.bool,
         rowReorder: PropTypes.bool,
         rowReorderIcon: PropTypes.string,
-        rowEditor: PropTypes.bool
+        rowEditor: PropTypes.bool,
+        exportable: PropTypes.bool
     }
 }
