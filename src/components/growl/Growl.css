@@ -5,20 +5,24 @@
 
 .p-growl.p-growl-topright {
 	top: 20px;
+	bottom: auto;
 	right: 20px;
 }
 
 .p-growl.p-growl-topleft {
 	top: 20px;
+	bottom: auto;
 	left: 20px;
 }
 
 .p-growl.p-growl-bottomleft {
+	top: auto;
 	bottom: 20px;
 	left: 20px;
 }
 
 .p-growl.p-growl-bottomright {
+	top: auto;
 	bottom: 20px;
 	right: 20px;
 }
