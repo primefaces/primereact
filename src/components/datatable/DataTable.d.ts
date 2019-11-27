@@ -93,6 +93,7 @@ interface DataTableProps {
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {
+    public reset():void;
     public exportCSV():void;
     public filter<T>(value:T, field:string, mode:string):void;
     public resetColumnOrder():void;
