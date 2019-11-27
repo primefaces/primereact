@@ -2334,6 +2334,11 @@ export class DataTableStateDemo extends Component {
                     </thead>
                     <tbody>
                         <tr>
+                            <td>reset</td>
+                            <td>-</td>
+                            <td>Resets sort, filter, paginator and columnorder state.</td>
+                        </tr>
+                        <tr>
                             <td>exportCSV</td>
                             <td>-</td>
                             <td>Exports the data to CSV format.</td>
