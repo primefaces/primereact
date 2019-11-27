@@ -27,7 +27,7 @@ export class Message extends Component {
             'p-message-error': this.props.severity === 'error',
             'p-message-success': this.props.severity === 'success',
             'p-message-icon-only': !this.props.text
-        });
+        }, this.props.className);
 
         let icon = classNames('p-message-icon pi pi-fw', {
             'pi-info-circle': this.props.severity === 'info',
