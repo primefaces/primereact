@@ -426,7 +426,7 @@ const responsiveOptions = [
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datascroller" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/carousel" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <span>View on GitHub</span>
                 </a>
 <CodeHighlight className="language-javascript">
