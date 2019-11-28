@@ -449,7 +449,7 @@ export class DataTable extends Component {
 
     onSort(event) {
         let sortField = event.sortField;
-        let sortOrder = (this.getSortField() === event.sortField) ? this.getSortOrder() * -1 : this.props.defaultSortOrder;
+        let sortOrder;
         let multiSortMeta;
 
         this.columnSortable = event.sortable;
@@ -458,11 +458,18 @@ export class DataTable extends Component {
         if(this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.getMultiSortMeta();
+
+            const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
+            sortOrder = sortMeta ? sortMeta.order * -1 : this.props.defaultSortOrder;
+
             if(!multiSortMeta || !metaKey) {
                 multiSortMeta = [];
             }
 
             this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
+        }
+        else {
+            sortOrder = (this.getSortField() === sortField) ? this.getSortOrder() * -1 : this.props.defaultSortOrder;
         }
         
         if (this.props.onSort) {
