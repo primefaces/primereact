@@ -113,11 +113,6 @@ export class HomeComponent extends Component {
 								<img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-biggest-react.jpg" />
 							</a>
 						</div>
-						<div className="p-col-12">
-							<a href="https://www.primefaces.org/layouts/babylon-react">
-								<img alt="Babylon" src="showcase/resources/images/layouts/babylon-biggest-react.jpg" />
-							</a>
-						</div>
                         <div className="p-col-12 p-md-6">
                             <a href="https://www.primefaces.org/layouts/serenity-react">
                                 <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg" />
@@ -128,6 +123,11 @@ export class HomeComponent extends Component {
                                 <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" />
                             </a>
                         </div>
+                        <div className="p-col-12">
+							<a href="https://www.primefaces.org/layouts/babylon-react">
+								<img alt="Babylon" src="showcase/resources/images/layouts/babylon-biggest-react.jpg" />
+							</a>
+						</div>
                         <div className="p-col-12 p-md-6">
                             <a href="https://www.primefaces.org/layouts/avalon-react">
                                 <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" />
@@ -138,6 +138,11 @@ export class HomeComponent extends Component {
                                 <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react-sqr.png" />
                             </a>
                         </div>
+                        <div className="p-col-12">
+							<a href="https://www.primefaces.org/layouts/roma-react">
+								<img alt="Roma" src="showcase/resources/images/layouts/roma-biggest-react.jpg" />
+							</a>
+						</div>
                     </div>
                 </div>
                 <div className="prosupport">
