@@ -314,14 +314,6 @@ export class App extends Component {
     render() {
         return (
             <div className="layout-wrapper">
-                <div className="layout-notification">
-                    <a href="https://www.primefaces.org/store">
-                        <img src="showcase/resources/images/blackfriday-70.png" alt="Black Friday"/>
-                        <span className="layout-notification-details">
-                            SAVE UP TO <span className="rate">60%</span> ON EVERYTHING AT PRIMESTORE!
-                        </span>
-                    </a>
-                </div>
 
                 <div className="layout-topbar">
                     <span ref={el => this.menuButton = el} className="menu-button" tabIndex="0" onClick={this.onMenuButtonClick} onKeyDown={this.onMenuButtonKeyDown}>
