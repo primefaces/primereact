@@ -52,7 +52,7 @@ export class TreeTablePageDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Page</h1>
-                        <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page..</p>
+                        <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
                     </div>
                 </div>
 
@@ -132,7 +132,7 @@ export class TreeTablePageDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Page</h1>
-                        <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page..</p>
+                        <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
                     </div>
                 </div>
 

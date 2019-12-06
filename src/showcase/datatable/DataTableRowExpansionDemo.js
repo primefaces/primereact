@@ -57,7 +57,7 @@ export class DataTableRowExpansionDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Row Expansion</h1>
-                        <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template..</p>
+                        <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template.</p>
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@ export class DataTableRowExpansionDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Row Expansion</h1>
-                        <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template..</p>
+                        <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template.</p>
                     </div>
                 </div>
 

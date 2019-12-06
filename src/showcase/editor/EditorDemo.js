@@ -197,7 +197,7 @@ const header = (
                                 <tr>
                                     <td>onSelectionChange</td>
                                     <td>event.range: Object with index and length keys indicating where the selection exists.<br/>
-                                        event.oldRange: Object with index and length keys indicating where the previous selection was..<br/>
+                                        event.oldRange: Object with index and length keys indicating where the previous selection was.<br/>
                                         event.source: Source of change. Will be either "user" or "api".</td>
                                     <td>Callback to invoke when selected text of editor changes.</td>
                                 </tr>
