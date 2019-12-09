@@ -120,7 +120,7 @@ class PanelMenuSub extends Component {
     renderItem(item, index) {
         if (item.separator)
             return this.renderSeparator(index);
-        else 
+        else
             return this.renderMenuitem(item, index);
     }
 
@@ -139,13 +139,13 @@ class PanelMenuSub extends Component {
 
     render() {
         const className = classNames('p-submenu-list', this.props.className);
-        const menu = this.renderMenu(); 
+        const menu = this.renderMenu();
 
         return (
             <ul className={className}>
                {menu}
             </ul>
-        );   
+        );
     }
  }
 
@@ -238,7 +238,7 @@ export class PanelMenu extends Component {
         return (
             <div key={item.label + '_' + index} className={className} style={item.style}>
                 <div className={headerClassName} style={item.style}>
-                    <a href={item.url || '#'} className="p-panelmenu-header-link ng-tns-c2-1 ng-star-inserted" onClick={(e) => this.onItemClick(e, item)}>
+                    <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)}>
                         {toggleIcon}
                         {itemIcon}
                         <span className="p-menuitem-text">{item.label}</span>
@@ -251,7 +251,7 @@ export class PanelMenu extends Component {
                         </div>
                     </div>
                 </CSSTransition>
-                
+
             </div>
         );
     }
@@ -267,7 +267,7 @@ export class PanelMenu extends Component {
         else {
             return null;
         }
-    } 
+    }
 
     render() {
         const className = classNames('p-panelmenu p-component', this.props.className);

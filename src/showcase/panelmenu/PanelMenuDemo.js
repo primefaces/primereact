@@ -25,8 +25,7 @@ export class PanelMenuDemo extends Component {
                             {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
-                            },
-             
+                            }
                          ]
                       },
                       {
@@ -58,8 +57,7 @@ export class PanelMenuDemo extends Component {
                       {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
-                      },
-             
+                      }
                    ]
                 },
                 {
@@ -68,13 +66,11 @@ export class PanelMenuDemo extends Component {
                    items:[
                       {
                          label:'New',
-                         icon:'pi pi-fw pi-user-plus',
-             
+                         icon:'pi pi-fw pi-user-plus'
                       },
                       {
                          label:'Delete',
-                         icon:'pi pi-fw pi-user-minus',
-             
+                         icon:'pi pi-fw pi-user-minus'
                       },
                       {
                          label:'Search',
@@ -199,8 +195,7 @@ const items:[
                 {
                    label:'Video',
                    icon:'pi pi-fw pi-video'
-                },
- 
+                }
              ]
           },
           {
@@ -233,7 +228,7 @@ const items:[
              label:'Justify',
              icon:'pi pi-fw pi-align-justify'
           },
- 
+
        ]
     },
     {
@@ -242,13 +237,11 @@ const items:[
        items:[
           {
              label:'New',
-             icon:'pi pi-fw pi-user-plus',
- 
+             icon:'pi pi-fw pi-user-plus'
           },
           {
              label:'Delete',
-             icon:'pi pi-fw pi-user-minus',
- 
+             icon:'pi pi-fw pi-user-minus'
           },
           {
              label:'Search',
@@ -429,7 +422,7 @@ export class PanelMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -462,7 +455,7 @@ export class PanelMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -472,12 +465,12 @@ export class PanelMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
