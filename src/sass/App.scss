@@ -459,6 +459,21 @@ body {
                 }
             }
         }
+        >div.layout-menu-search {
+			padding: 1.5em;
+			overflow: visible;
+			position: relative;
+        }
+        .layout-menu-search {
+            i {
+                position: absolute;
+                left: 1.6em;
+                top: 1.65em;
+            }
+            input {
+                text-indent: 1.7em;
+            }
+        }
     }
 
     .nano {
