@@ -204,7 +204,7 @@ export class PanelMenu extends Component {
     renderPanelIcon(item) {
         const className = classNames('p-menuitem-icon', item.icon);
 
-        if (item.items) {
+        if (item.icon) {
             return (
                 <span className={className}></span>
             );
