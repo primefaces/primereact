@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { AppMenu } from './AppMenu';
+import AppMenu from './AppMenu';
 import classNames from 'classnames';
 import 'babel-polyfill';
 import './resources/style/primereact.css';
