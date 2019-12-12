@@ -50,6 +50,7 @@ body {
     font-weight: normal;
     color: #333333;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-size: 14px;
 }
 
@@ -65,20 +66,20 @@ body {
     background: -webkit-linear-gradient(45deg,  #2f002e 0%,#6a0062 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(45deg,  #2f002e 0%,#6a0062 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f002e', endColorstr='#6a0062',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    
+
     + .layout-topbar {
-        top: 70px; 
-        
+        top: 70px;
+
         + #layout-sidebar {
             top: 140px;
             height: calc(100% - 140px);
-            
+
             + #layout-content {
                 padding-top: 140px;
             }
         }
     }
-    
+
     a {
         width: 100%;
         height: 100%;
@@ -97,10 +98,10 @@ body {
         &:hover {
             color: #f0b6ff;
         }
-        
+
         .layout-notification-details {
             margin-left: 2em;
-            
+
             .rate {
                 color: #f2b837;
                 font-size: 25px;
@@ -156,7 +157,7 @@ body {
             width: 210px;
         }
     }
-    
+
     .topbar-menu {
         list-style-type: none;
         float: right;
@@ -246,7 +247,7 @@ body {
                             padding: 6px 12px;
                             display: block;
                             @include transition(all .5s ease);
-    
+
                             &:hover {
                                 background-color: #eeeeee;
                                 cursor: pointer;
@@ -258,24 +259,24 @@ body {
                                 transition: box-shadow .3s;
                                 box-shadow: inset 0 0 0 0.2em #00c4e8;
                             }
-    
+
                             img {
                                 width: 32px;
                                 vertical-align: middle;
                                 margin-right: 4px;
                             }
-    
+
                             span {
                                 margin-left: 8px;
                             }
-    
+
                             i {
                                 vertical-align: middle;
                                 font-size: 24px;
                                 margin-right: 4px;
                             }
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -290,17 +291,17 @@ body {
             position: relative;
             top: -1px;
         }
-        
+
         .theme-badge.material {
             background: #00b09b;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to bottom, #202124, #404147);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to bottom, #202124, #404147); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+            background: linear-gradient(to bottom, #202124, #404147); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
-        
+
         .theme-badge.bootstrap {
             background: #563D7C;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to bottom, #563D7C, #966BD8);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to bottom, #563D7C, #966BD8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+            background: linear-gradient(to bottom, #563D7C, #966BD8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
 
         .theme-badge.new {
@@ -366,16 +367,16 @@ body {
                 &.layout-menu-icon-active {
                     display: none;
                 }
-                
+
                 &.layout-menu-icon-inactive {
                     display: inline;
                 }
             }
-            
+
             &.active-menuitem {
                 background-color: #ffffff;
                 color: #03c4e8;
-                
+
                 img {
                     &.layout-menu-icon-active {
                         display: inline;
@@ -386,13 +387,13 @@ body {
                 }
             }
         }
-        
+
         > .layout-submenu {
             width: auto;
             overflow: hidden;
             display: none;
             background-color: #ffffff;
-            
+
             > div {
                 overflow: hidden;
                 padding: 20px 15px;
@@ -447,7 +448,7 @@ body {
                 .menuitem-badge {
                     background: #00b09b;  /* fallback for old browsers */
                     background: -webkit-linear-gradient(to bottom, #96c93d, #00b09b);  /* Chrome 10-25, Safari 5.1-6 */
-                    background: linear-gradient(to bottom, #96c93d, #00b09b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+                    background: linear-gradient(to bottom, #96c93d, #00b09b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
                     padding: 2px 4px;
                     vertical-align: middle;
                     border-radius: 3px;
@@ -481,7 +482,7 @@ body {
 #layout-content {
     margin-left: 300px;
     padding-top: 70px;
-    
+
     .content-section {
         display: block;
         padding: 30px;
@@ -490,15 +491,15 @@ body {
         &:first-of-type > div > span {
             line-height: 1.5em;
         }
-        
+
         h2 {
             margin-top: 0;
         }
-        
+
         &.introduction {
             @include background-gradient-left2right(#008fba, #03c4e8);
             color: #ffffff;
-            
+
             .feature-intro {
                 h1 {
                     font-size: 28px;
@@ -528,7 +529,7 @@ body {
                 }
             }
         }
-        
+
         &.implementation {
             background-color: #ffffff;
 
@@ -606,7 +607,7 @@ body {
                 }
             }
         }
-        
+
         &.documentation {
             h3 {
                 color:  #333333;
@@ -636,7 +637,7 @@ body {
             a {
                 color: #03c4e8;
             }
-            
+
             .btn-viewsource {
                 background-color: #444;
                 padding: .5em;
@@ -646,7 +647,7 @@ body {
                 margin: .5em 0;
                 display: inline-block;
                 @include transition(background-color .2s);
-                
+
                 &:hover {
                     background-color: #595959;
                 }
@@ -677,7 +678,7 @@ body {
                     padding: 4px 4px 0px 4px;
                     @include background-gradient-left2right(#008fba, #03c4e8);
 
-                    li {    
+                    li {
                         a {
                             border: 0 none;
                             margin-right: 4px;
@@ -698,7 +699,7 @@ body {
                             background: #f5f7f8;
                             color: #333333;
                         }
-                        
+
                         &:not(.p-highlight) a:hover {
                             background-color: #007294;
                         }
@@ -728,7 +729,7 @@ body {
                     color: #ffffff;
                 }
             }
-                    
+
             li {
                 line-height: 1.5;
             }
@@ -776,11 +777,11 @@ body {
         float: right;
         font-size: 24px;
     }
-    
+
     a {
         margin-left: 16px;
     }
-    
+
     .icon-github {
         width: 29.1px;
         height: 29.1px;
@@ -848,7 +849,7 @@ body {
     p {
         line-height: 22px;
     }
-    
+
     /* Introduction */
     .introduction {
         background-color: #1976d2;
@@ -964,13 +965,13 @@ body {
             }
         }
     }
-    
+
     .templates {
         background-color: #f5f7f8;
         text-align: center;
         padding: 30px;
         border-bottom: 1px solid #c4c5c6;
-        
+
         h3 {
              font-size:24px;
              color: #333333;
@@ -981,7 +982,7 @@ body {
             font-size: 16px;
             font-weight: 700;
         }
-        
+
         img {
             width: 100%;
         }
@@ -1015,7 +1016,7 @@ body {
 
 .templates-grid {
     text-align: center;
-    
+
     a img {
         @include transition(all .5s);
     }
@@ -1063,7 +1064,7 @@ body {
                 width: 180px;
             }
         }
-        
+
         .topbar-menu {
             background-color: #327187;
             float: none;
@@ -1093,7 +1094,7 @@ body {
                         top: 40px;
                         text-align: left;
                     }
-                   
+
                 }
             }
         }
@@ -1114,7 +1115,7 @@ body {
     #layout-content {
         margin-left: 0;
         padding-top: 96px;
-        
+
         .content-section {
             &.submenu ul li {
                 width: 50%;
@@ -1128,7 +1129,7 @@ body {
                 }
             }
         }
-        
+
     }
 
     .layout-mask {
@@ -1168,7 +1169,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .layout-notification {        
+    .layout-notification {
         a {
             font-size: 16px;
 
@@ -1297,11 +1298,11 @@ pre[class*="language-"] {
             align-items: center;
             padding: 2em;
             border-bottom: 1px solid #d9dad9;
-    
+
             & > div {
                 display: flex;
                 align-items: center;
-    
+
                 img {
                     margin-right: 14px;
                 }
@@ -1324,7 +1325,7 @@ pre[class*="language-"] {
     .dataview-demo {
         .p-dataview {
             .car-details {
-    
+
                 img {
                     width: 75px;
                 }
@@ -1389,7 +1390,7 @@ pre[class*="language-"] {
 
         &.p-carousel-horizontal {
             .p-carousel-content {
-                .p-carousel-item {    
+                .p-carousel-item {
                     &.p-carousel-item-start {
                         .car-details {
                             > .p-grid {
@@ -1397,7 +1398,7 @@ pre[class*="language-"] {
                             }
                         }
                     }
-    
+
                     &.p-carousel-item-end {
                         .car-details {
                             > .p-grid {
@@ -1417,7 +1418,7 @@ pre[class*="language-"] {
             text-align: center;
             margin-top: 0;
         }
-    
+
         .filter-container {
             text-align: left;
         }
@@ -1494,7 +1495,7 @@ pre[class*="language-"] {
     .car-item .p-md-3 {
         text-align: center;
     }
-    
+
     .car-item .p-col-10 {
         font-weight: bold;
     }
@@ -1559,48 +1560,48 @@ pre[class*="language-"] {
         padding: 0;
         border: 0 none;
     }
-    
+
     .node-header, .node-content {
         padding: .5em .7em;
     }
-    
+
     .node-header {
         background-color: #495ebb;
         color: #ffffff;
     }
-    
+
     .node-content {
         text-align: center;
         border: 1px solid #495ebb;
     }
-    
+
     .node-content img {
         border-radius: 50%;
     }
-    
+
     .department-cfo {
         background-color: #7247bc;
         color: #ffffff;
     }
-    
+
     .department-coo {
         background-color: #a534b6;
         color: #ffffff;
     }
-    
+
     .department-cto {
         background-color: #e9286f;
         color: #ffffff;
     }
-    
+
     .p-organizationchart .p-highlight {
         background-color: orange;
     }
-    
+
     .p-person .p-node-toggler {
         color: #495ebb !important;
     }
-    
+
     .department-cto .p-node-toggler {
         color: #8a0a39 !important;
     }
@@ -1643,7 +1644,7 @@ pre[class*="language-"] {
     .p-col-d {
         display: none;
     }
-    
+
     .p-col-m {
         display: inline-block;
     }
@@ -1651,10 +1652,10 @@ pre[class*="language-"] {
 
 /* Dark Theme such as luna-amber, luna-blue, luna-green and luna-pink */
 .dark-theme {
-    #layout-content {        
+    #layout-content {
         .content-section {
             &.implementation {
-                background-color: #3f3f3f !important; 
+                background-color: #3f3f3f !important;
                 color: #dedede !important;
 
                 > h3,
