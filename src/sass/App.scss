@@ -54,33 +54,43 @@ body {
     font-size: 14px;
 }
 
-.layout-notification {
+.layout-wrapper {
+    &.layout-news-active {
+        .layout-topbar {
+            top: 70px;
+        }
+
+        .layout-sidebar {
+            top: 140px;
+            height: calc(100% - 140px);
+        }
+
+        .layout-content {
+            padding-top: 140px;
+        }
+    }
+}
+
+.layout-news {
     position: fixed;
     top: 0;
+    overflow: hidden;
     left: 0;
     z-index: 1000;
     height: 70px;
     width: 100%;
-    background: #2f002e; /* Old browsers */
-    background: -moz-linear-gradient(45deg,  #2f002e 0%, #6a0062 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(45deg,  #2f002e 0%,#6a0062 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg,  #2f002e 0%,#6a0062 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f002e', endColorstr='#6a0062',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background-image: url("../resources/images/news/bg-endofyear-2019.jpg");
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 
-    + .layout-topbar {
-        top: 70px;
-
-        + #layout-sidebar {
-            top: 140px;
-            height: calc(100% - 140px);
-
-            + #layout-content {
-                padding-top: 140px;
-            }
-        }
-    }
-
-    a {
+    .layout-news-container {
         width: 100%;
         height: 100%;
         display: -webkit-box;
@@ -92,21 +102,98 @@ body {
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
-        color: #f0b6ff;
+        color: #ffffff;
+        font-weight: bold;
         font-size: 20px;
+        background-image: url("../resources/images/news/snow.png");
+        -webkit-animation: snowSlide 20s linear infinite;
+        animation: snowSlide 20s linear infinite;
 
-        &:hover {
-            color: #f0b6ff;
-        }
-
-        .layout-notification-details {
-            margin-left: 2em;
+        .layout-news-details {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            z-index: 1;
 
             .rate {
                 color: #f2b837;
                 font-size: 25px;
                 font-weight: bold;
+                margin: 0 .25em;
             }
+
+            .helper-text {
+                background-color: #f2b837;
+                color: #212121;
+                padding: 0 0.2em;
+                margin-right: 0.3em;
+            }
+        }
+
+        img {
+            height: 70px;
+            position: absolute;
+            -webkit-animation: customSlide 20s linear infinite;
+            animation: customSlide 20s linear infinite;
+        }
+    }
+
+    .layout-news-button {
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        font-size: 15px;
+        padding: .3em .3em .5em 1em;
+        font-weight: bold;
+        border-radius: 3px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        flex-shrink: 0;
+        transition: background-color .15s;
+        margin-left: 2em;
+        position: relative;
+        z-index: 1;
+
+        i {
+            font-size: 1.5em;
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .25);
+        }
+    }
+
+    .layout-news-close {
+        color: #ffffff;
+        position: absolute;
+        z-index: 2;
+        right: 28px;
+        background-color: rgba(0,0,0,.3);
+        border-radius: 50%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 23px;
+        height: 23px;
+        cursor: pointer;
+
+        i {
+            font-size: 1.5em;
         }
     }
 }
@@ -312,7 +399,7 @@ body {
     }
 }
 
-#layout-sidebar {
+.layout-sidebar {
     position: fixed;
     left: 0;
     top: 70px;
@@ -479,7 +566,7 @@ body {
     }
 }
 
-#layout-content {
+.layout-content {
     margin-left: 300px;
     padding-top: 70px;
 
@@ -1050,6 +1137,54 @@ body {
 }
 
 @media screen and (max-width: 64em) {
+    .layout-wrapper {
+        .layout-news {
+            display: block;
+
+            .layout-news-details {
+                display: block;
+                font-size: 16px;
+                padding: 0 55px;
+
+                .rate {
+                    margin: 0;
+                    font-size: 21px;
+                }
+            }
+
+            img {
+                margin-left: 14px;
+            }
+
+            .layout-news-button {
+                opacity: 0;
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                top: 0;
+                left: 0;
+            }
+
+            .layout-news-close {
+                top: 50%;
+                margin-top: -.65em;
+            }
+        }
+
+        &.layout-news-active {
+            .layout-sidebar {
+                top: 170px;
+                height: calc(100% - 170px);
+            }
+
+            .layout-mask {
+                top: 170px;
+            }
+        }
+    }
+
     .layout-topbar {
         text-align: center;
 
@@ -1100,7 +1235,7 @@ body {
         }
     }
 
-    #layout-sidebar {
+    .layout-sidebar {
         top: 98px;
         left: -300px;
         height: calc(100% - 98px);
@@ -1112,7 +1247,7 @@ body {
         }
     }
 
-    #layout-content {
+    .layout-content {
         margin-left: 0;
         padding-top: 96px;
 
@@ -1163,7 +1298,7 @@ body {
         }
     }
 
-    #layout-content .content-section.content-submenu ul li {
+    .layout-content .content-section.content-submenu ul li {
         width: 50%;
     }
 }
@@ -1258,6 +1393,69 @@ a{
     100% {
         background-color: rgba(165, 165, 165, 0.1)
     }
+}
+
+/* Animations */
+@-webkit-keyframes customSlide {
+    0% {
+        left: 0;
+        bottom:-40%;
+    }
+    20% {
+        left: 20%;
+        bottom:-20%;
+    }
+    40% {
+        left: 40%;
+        bottom:0%;
+    }
+    60% {
+        left: 60%;
+        bottom:20%;
+    }
+    80% {
+        left: 80%;
+        bottom:40%;
+    }
+    100% {
+        left: 100%;
+        bottom: 60%;
+    }
+}
+@keyframes customSlide {
+    0% {
+        left: 0;
+        bottom:-40%;
+    }
+    20% {
+        left: 20%;
+        bottom:-20%;
+    }
+    40% {
+        left: 40%;
+        bottom:0%;
+    }
+    60% {
+        left: 60%;
+        bottom:20%;
+    }
+    80% {
+        left: 80%;
+        bottom:40%;
+    }
+    100% {
+        left: 100%;
+        bottom: 60%;
+    }
+}
+
+@-webkit-keyframes snowSlide {
+    from { background-position: 0 0; }
+    to { background-position: 0 400px; }
+}
+@keyframes snowSlide {
+    from { background-position: 0 0; }
+    to { background-position: 0 400px; }
 }
 
 pre[class*="language-"] {
@@ -1543,6 +1741,12 @@ pre[class*="language-"] {
     top:100px !important;
 }
 
+.layout-news-active {
+    .p-growl {
+        top: 170px !important;
+    }
+}
+
 .button-demo {
     button {
         margin-right: .5em;
@@ -1652,7 +1856,7 @@ pre[class*="language-"] {
 
 /* Dark Theme such as luna-amber, luna-blue, luna-green and luna-pink */
 .dark-theme {
-    #layout-content {
+    .layout-content {
         .content-section {
             &.implementation {
                 background-color: #3f3f3f !important;

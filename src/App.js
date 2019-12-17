@@ -146,7 +146,8 @@ export class App extends Component {
         this.state = {
             mobileMenuActive: false,
             themeMenuActive: false,
-            themeMenuVisited: false
+            themeMenuVisited: false,
+            newsActive: sessionStorage.getItem('primenews-hidden') ? false: true
         };
 
         this.version = require('../package.json') && require('../package.json').version;
@@ -160,6 +161,7 @@ export class App extends Component {
         this.onThemesLinkKeyDown = this.onThemesLinkKeyDown.bind(this);
         this.onThemeChangerKeyDown = this.onThemeChangerKeyDown.bind(this);
         this.onThemesMenuRouteChange = this.onThemesMenuRouteChange.bind(this);
+        this.hideNews = this.hideNews.bind(this);
     }
 
     changeTheme(event, theme, dark) {
@@ -311,9 +313,29 @@ export class App extends Component {
         this.unbindMenuDocumentClickListener();
     }
 
+    hideNews() {
+        this.setState({newsActive: false});
+        sessionStorage.setItem('primenews-hidden', "true");
+    } 
+
     render() {
         return (
-            <div className="layout-wrapper">
+            <div className={classNames('layout-wrapper', {'layout-news-active': this.state.newsActive})}>
+
+                {this.state.newsActive && <div className="layout-news">
+                    <div className="layout-news-container">
+                        <img src="showcase/resources/images/news/asset-1-endofyear-2019.png" alt="New Year"/>
+                        <span className="layout-news-details">
+                            <span className="helper-text">NEW YEAR SALE</span> SAVE UP TO <span className="rate">60%</span> AT PRIMESTORE
+                        </span>
+                        <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer" className="layout-news-button">
+                            SHOP NOW<i className="pi pi-angle-right"></i>
+                        </a>
+                        <button className="p-link layout-news-close" onClick={this.hideNews}>
+                            <i className="pi pi-times"></i>
+                        </button>
+                    </div>
+                </div>}
 
                 <div className="layout-topbar">
                     <span ref={el => this.menuButton = el} className="menu-button" tabIndex="0" onClick={this.onMenuButtonClick} onKeyDown={this.onMenuButtonKeyDown}>
@@ -364,11 +386,11 @@ export class App extends Component {
                     </ul>
                 </div>
 
-                <div id="layout-sidebar" ref={el => this.sidebar = el} className={classNames({'active': this.state.mobileMenuActive})} onClick={this.onSidebarClick}>
+                <div ref={el => this.sidebar = el} className={classNames('layout-sidebar', {'active': this.state.mobileMenuActive})} onClick={this.onSidebarClick}>
                     <AppMenu />
                 </div>
 
-                <div id="layout-content">
+                <div className="layout-content">
                     <Route exact path="/" component={HomeComponent} />
                     <Route path="/icons" component={IconsPage} />
                     <Route path="/support" component={SupportPage} />
