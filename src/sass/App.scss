@@ -756,7 +756,7 @@ body {
             }
 
             /* Demo Tabs Source */
-            .p-tabview {
+            .p-tabview.p-tabview-top {
                 background: none;
                 border: 0 none;
 
@@ -772,7 +772,7 @@ body {
                             color: #ffffff;
                             text-shadow: none;
                             height: inherit;
-                            background-color: #0080a7;
+                            background-color: transparent;
                             padding-top: 8px;
                             @include border-radius-top(3px);
                             @include transition(background-color .2s);
@@ -788,8 +788,16 @@ body {
                         }
 
                         &:not(.p-highlight) a:hover {
-                            background-color: #007294;
+                            background-color: #0080a7;
+                            color: #ffffff;
+                            border: 0 none;
                         }
+
+                        &:hover {
+                            a {
+                                border: 0 none;
+                            }
+                        }                            
                     }
                 }
 
