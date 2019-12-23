@@ -40,6 +40,12 @@
     display: flex;
 }
 
+@mixin shadow($value...) {
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    box-shadow: $value;
+}
+
 body {
     margin: 0px;
     height: 100%;
@@ -979,22 +985,33 @@ body {
         text-align: center;
         padding: 30px;
 
+        .feature-card {
+            background-color: #ffffff;
+            @include shadow(0 0.8px 1.7px rgba(0, 0, 0, 0.008), 0 1.9px 4.2px rgba(0, 0, 0, 0.012),0 3.6px 7.9px rgba(0, 0, 0, 0.015),0 6.5px 14.1px rgba(0, 0, 0, 0.018),0 12.1px 26.3px rgba(0, 0, 0, 0.022),0 29px 63px rgba(0, 0, 0, 0.03));
+            height: 100%;
+            border-radius: 4px;
+            
+            .feature-card-detail {
+                padding: 0 16px 16px 16px;
+            }
+        }
+
         h3 {
              font-size:24px;
              color: #333333;
              margin-bottom: 25px;
         }
 
-        img {
-            width: 57px;
-        }
-
         .feature-name {
             display: block;
             font-weight: bold;
             font-size: 16px;
-            margin-top: 4px;
+            margin-top: 1em;
             color: #20272a;
+        }
+
+        img {
+            width: 100%;;
         }
 
         .p-g{
