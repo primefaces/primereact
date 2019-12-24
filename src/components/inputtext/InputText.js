@@ -97,6 +97,9 @@ export class InputText extends Component {
         });
 
         let inputProps = ObjectUtils.findDiffKeys(this.props, InputText.defaultProps);
+        if (typeof inputProps.value === 'undefined' || inputProps.value === null) {
+          inputProps.value = '';
+        }
 
         return <input ref={(el) => this.element = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
