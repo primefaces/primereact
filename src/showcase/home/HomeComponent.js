@@ -39,7 +39,7 @@ export class HomeComponent extends Component {
                             </div>
                         </div>
                         <div className="p-col-12 p-md-4">
-                            <div class="feature-card">
+                            <div className="feature-card">
                                 <img alt="themes" src="showcase/resources/images/home/react-themes.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">THEMES</span>

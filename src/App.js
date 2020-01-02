@@ -527,7 +527,7 @@ export class App extends Component {
                     </div>
                 </div>
 
-                <div className={classNames({'layout-mask': this.state.mobileMenuActive})}></div>
+                { this.state.mobileMenuActive && <div className="layout-mask"></div> }
             </div>
         );
     }
