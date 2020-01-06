@@ -90,12 +90,12 @@ export class AppMenu extends Component {
     renderSubmenu(menuitem, menuitemIndex) {
         if (menuitem.children) {
             return (
-                <ul className="layout-submenu">
+                <ul className="layout-submenu" role="menu" aria-expanded={true}>
                     {
                         menuitem.children.map((item, index) => {
                             return (
-                                <li key={`menuitem_${menuitemIndex}_${index}`}>
-                                    <Link to={item.to}>{item.name}</Link>
+                                <li key={`menuitem_${menuitemIndex}_${index}`} role="presentation">
+                                    <Link to={item.to} role="menuitem">{item.name}</Link>
                                 </li>
                             )
                         })
@@ -115,8 +115,8 @@ export class AppMenu extends Component {
                         this.state.filteredMenu && this.state.filteredMenu.map((menuitem, index) => {
                             const submenus = this.renderSubmenu(menuitem, index);
                             return (
-                                <li key={`menuitem_${index}`}>
-                                    <span className="layout-menu-header">
+                                <li key={`menuitem_${index}`} role="presentation">
+                                    <span className="layout-menu-header" role="menuitem">
                                         <img alt={menuitem.name} className="layout-menu-icon" src={menuitem['icon']}></img>
                                         <span className="layout-menu-text">{menuitem.name}</span>
                                     </span>
@@ -136,13 +136,13 @@ export class AppMenu extends Component {
         const menuItems = this.renderRootMenuItems();
 
         return (
-            <div className="layout-sidebar" onClick={this.props.onSidebarClick}>
+            <div className="layout-sidebar" role="navigation" onClick={this.props.onSidebarClick}>
                 <div className="layout-sidebar-search-wrapper">
                     <i className="pi pi-search layout-sidebar-search-icon"></i>
-                    <input type="text" onChange={this.onSearchInputChange} placeholder="Search..."/>
+                    <input type="text" onChange={this.onSearchInputChange} placeholder="Search..." aria-label="Search input"/>
                 </div>
 
-                <ul className="layout-menu">
+                <ul className="layout-menu" role="menubar">
                     { menuItems }
                 </ul>
             </div>
