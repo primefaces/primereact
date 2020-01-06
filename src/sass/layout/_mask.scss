@@ -1,0 +1,36 @@
+.layout-wrapper {
+    .layout-mask {
+        display: none;
+        z-index: 998;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 110px;
+        left: 0;
+        opacity: .7;
+        background-color: #333333;
+        @include animation(layoutMaskFade .3s);
+    }
+
+    @media screen and (max-width: $tabletBreakpoint) {
+        &.layout-sidebar-mobile-active {
+            .layout-mask {
+                display: block;
+            }
+        }
+    }
+}
+
+@include keyframes(layoutMaskFade) {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -20px, 0);
+        transform: translate3d(0, -20px, 0);
+    }
+
+    to {
+        opacity: .7;
+        -webkit-transform: none;
+        transform: none;
+    }
+}

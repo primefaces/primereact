@@ -1,0 +1,643 @@
+{
+    "data": [
+        {
+            "name": "Input",
+            "icon": "showcase/resources/images/mono/input.svg",
+            "meta": [
+                "input"
+            ],
+            "children": [
+                {
+                    "name": "AutoComplete",
+                    "to": "/autocomplete",
+                    "meta": [
+                        "autocomplete"
+                    ]
+                },
+                {
+                    "name": "Calendar",
+                    "to": "/calendar",
+                    "meta": [
+                        "calendar",
+                        "datepicker"
+                    ]
+                },
+                {
+                    "name": "Checkbox",
+                    "to": "/checkbox",
+                    "meta": [
+                        "checkbox"
+                    ]
+                },
+                {
+                    "name": "ColorPicker",
+                    "to": "/colorpicker",
+                    "meta": [
+                        "colorpicker"
+                    ]
+                },
+                {
+                    "name": "Chips",
+                    "to": "/chips",
+                    "meta": [
+                        "chips"
+                    ]
+                },
+                {
+                    "name": "Dropdown",
+                    "to": "/dropdown",
+                    "meta": [
+                        "dropdown",
+                        "selectOneMenu"
+                    ]
+                },
+                {
+                    "name": "Editor",
+                    "to": "/editor",
+                    "meta": [
+                        "editor"
+                    ]
+                },
+                {
+                    "name": "InputMask",
+                    "to": "/inputmask",
+                    "meta": [
+                        "inputmask"
+                    ]
+                },
+                {
+                    "name": "InputGroup",
+                    "to": "/inputgroup",
+                    "meta": [
+                        "inputgroup"
+                    ]
+                },
+                {
+                    "name": "InputSwitch",
+                    "to": "/inputswitch",
+                    "meta": [
+                        "inputswitch"
+                    ]
+                },
+                {
+                    "name": "InputText",
+                    "to": "/inputtext",
+                    "meta": [
+                        "inputtext"
+                    ]
+                },
+                {
+                    "name": "InputTextarea",
+                    "to": "/inputswitch",
+                    "meta": [
+                        "inputswitch"
+                    ]
+                },
+                {
+                    "name": "KeyFilter",
+                    "to": "/keyfilter",
+                    "meta": [
+                        "keyfilter"
+                    ]
+                },
+                {
+                    "name": "Listbox",
+                    "to": "/listbox",
+                    "meta": [
+                        "listbox"
+                    ]
+                },
+                {
+                    "name": "MultiSelect",
+                    "to": "/multiselect",
+                    "meta": [
+                        "multiselect",
+                        "selectCheckboxMenu"
+                    ]
+                },
+                {
+                    "name": "Password",
+                    "to": "/password",
+                    "meta": [
+                        "password"
+                    ]
+                },
+                {
+                    "name": "RadioButton",
+                    "to": "/radiobutton",
+                    "meta": [
+                        "radiobutton"
+                    ]
+                },
+                {
+                    "name": "Rating",
+                    "to": "/rating",
+                    "meta": [
+                        "rating"
+                    ]
+                },
+                {
+                    "name": "SelectButton",
+                    "to": "/selectbutton",
+                    "meta": [
+                        "selectbutton",
+                        "selectOneButton",
+                        "selectManyButton"
+                    ]
+                },
+                {
+                    "name": "Slider",
+                    "to": "/slider",
+                    "meta": [
+                        "slider"
+                    ]
+                },
+                {
+                    "name": "Spinner",
+                    "to": "/spinner",
+                    "meta": [
+                        "spinner"
+                    ]
+                },
+                {
+                    "name": "TriStateCheckbox",
+                    "to": "/tristate",
+                    "meta": [
+                        "tristateCheckbox"
+                    ]
+                },
+                {
+                    "name": "ToggleButton",
+                    "to": "/togglebutton",
+                    "meta": [
+                        "togglebutton"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Button",
+            "icon": "showcase/resources/images/mono/button.svg",
+            "meta": [
+                "button"
+            ],
+            "children": [
+                {
+                    "name": "Button",
+                    "to": "/button",
+                    "meta": [
+                        "button"
+                    ]
+                },
+                {
+                    "name": "SplitButton",
+                    "to": "/splitbutton",
+                    "meta": [
+                        "splitbutton"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Data",
+            "icon": "showcase/resources/images/mono/data.svg",
+            "meta": [
+                "data"
+            ],
+            "children": [
+                {
+                    "name": "Carousel",
+                    "to": "/carousel",
+                    "meta": [
+                        "carousel"
+                    ]
+                },
+                {
+                    "name": "DataView",
+                    "to": "/dataview",
+                    "meta": [
+                        "dataview"
+                    ]
+                },
+                {
+                    "name": "DataTable",
+                    "to": "/datatable",
+                    "meta": [
+                        "datatable"
+                    ]
+                },
+                {
+                    "name": "DataScroller",
+                    "to": "/datascroller",
+                    "meta": [
+                        "datascroller"
+                    ]
+                },
+                {
+                    "name": "Google Maps",
+                    "to": "/gmap",
+                    "meta": [
+                        "Google Maps",
+                        "gmap"
+                    ]
+                },
+                {
+                    "name": "FullCalendar",
+                    "to": "/fullcalendar",
+                    "meta": [
+                        "fullcalendar",
+                        "schedule"
+                    ]
+                },
+                {
+                    "name": "OrderList",
+                    "to": "/orderlist",
+                    "meta": [
+                        "orderlist"
+                    ]
+                },
+                {
+                    "name": "Org Chart",
+                    "to": "/organizationchart",
+                    "meta": [
+                        "Org Chart",
+                        "organizationchart"
+                    ]
+                },
+                {
+                    "name": "Paginator",
+                    "to": "/paginator",
+                    "meta": [
+                        "paginator"
+                    ]
+                },
+                {
+                    "name": "PickList",
+                    "to": "/picklist",
+                    "meta": [
+                        "picklist"
+                    ]
+                },
+                {
+                    "name": "Tree",
+                    "to": "/tree",
+                    "meta": [
+                        "tree"
+                    ]
+                },
+                {
+                    "name": "TreeTable",
+                    "to": "/treetable",
+                    "meta": [
+                        "treetable"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Panel",
+            "icon": "showcase/resources/images/mono/panel.svg",
+            "meta": [
+                "panel"
+            ],
+            "children": [
+                {
+                    "name": "Accordion",
+                    "to": "/accordion",
+                    "meta": [
+                        "accordion"
+                    ]
+                },
+                {
+                    "name": "Card",
+                    "to": "/card",
+                    "meta": [
+                        "card"
+                    ]
+                },
+                {
+                    "name": "Deferred",
+                    "to": "/deferredcontent",
+                    "meta": [
+                        "deferredcontent"
+                    ]
+                },
+                {
+                    "name": "Fieldset",
+                    "to": "/fieldset",
+                    "meta": [
+                        "fieldset"
+                    ]
+                },
+                {
+                    "name": "Panel",
+                    "to": "/panel",
+                    "meta": [
+                        "panel"
+                    ]
+                },
+                {
+                    "name": "FlexGrid",
+                    "to": "/flexgrid",
+                    "meta": [
+                        "flexgrid"
+                    ]
+                },
+                {
+                    "name": "ScrollPanel",
+                    "to": "/scrollPanel",
+                    "meta": [
+                        "scrollpanel"
+                    ]
+                },
+                {
+                    "name": "TabView",
+                    "to": "/tabview",
+                    "meta": [
+                        "tabview"
+                    ]
+                },
+                {
+                    "name": "Toolbar",
+                    "to": "/toolbar",
+                    "meta": [
+                        "toolbar"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Overlay",
+            "icon": "showcase/resources/images/mono/overlay.svg",
+            "meta": [
+                "overlay"
+            ],
+            "children": [
+                {
+                    "name": "Dialog",
+                    "to": "/dialog",
+                    "meta": [
+                        "dialog"
+                    ]
+                },
+                {
+                    "name": "Lightbox",
+                    "to": "/lightbox",
+                    "meta": [
+                        "lightbox"
+                    ]
+                },
+                {
+                    "name": "OverlayPanel",
+                    "to": "/overlaypanel",
+                    "meta": [
+                        "overlaypanel"
+                    ]
+                },
+                {
+                    "name": "Sidebar",
+                    "to": "/sidebar",
+                    "meta": [
+                        "sidebar"
+                    ]
+                },
+                {
+                    "name": "Tooltip",
+                    "to": "/tooltip",
+                    "meta": [
+                        "tooltip"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "File",
+            "icon": "showcase/resources/images/mono/file.svg",
+            "meta": [
+                "file"
+            ],
+            "children": [
+                {
+                    "name": "Upload",
+                    "to": "/fileupload",
+                    "meta": [
+                        "fileupload"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Menu",
+            "icon": "showcase/resources/images/mono/menu.svg",
+            "meta": [
+                "menu"
+            ],
+            "children": [
+                {
+                    "name": "MenuModel",
+                    "to": "/menumodel",
+                    "meta": [
+                        "menumodel"
+                    ]
+                },
+                {
+                    "name": "Menu",
+                    "to": "/menu",
+                    "meta": [
+                        "menu"
+                    ]
+                },
+                {
+                    "name": "TabMenu",
+                    "to": "/tabmenu",
+                    "meta": [
+                        "tabmenu"
+                    ]
+                },
+                {
+                    "name": "Breadcrumb",
+                    "to": "/breadcrumb",
+                    "meta": [
+                        "breadcrumb"
+                    ]
+                },
+                {
+                    "name": "TieredMenu",
+                    "to": "/tieredmenu",
+                    "meta": [
+                        "tieredMenu"
+                    ]
+                },
+                {
+                    "name": "Menubar",
+                    "to": "/menubar",
+                    "meta": [
+                        "menubar"
+                    ]
+                },
+                {
+                    "name": "ContextMenu",
+                    "to": "/contextmenu",
+                    "meta": [
+                        "contextmenu"
+                    ]
+                },
+                {
+                    "name": "PanelMenu",
+                    "to": "/panelmenu",
+                    "meta": [
+                        "panelmenu"
+                    ]
+                },
+                {
+                    "name": "Steps",
+                    "to": "/steps",
+                    "meta": [
+                        "steps",
+                        "wizard"
+                    ]
+                },
+                {
+                    "name": "MegaMenu",
+                    "to": "/megamenu",
+                    "meta": [
+                        "megamenu"
+                    ]
+                },
+                {
+                    "name": "SlideMenu",
+                    "to": "/slidemenu",
+                    "meta": [
+                        "slidemenu"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Chart",
+            "icon": "showcase/resources/images/mono/charts.svg",
+            "meta": [
+                "chart"
+            ],
+            "children": [
+                {
+                    "name": "ChartModel",
+                    "to": "/chartdemo",
+                    "meta": [
+                        "chartdemo",
+                        "chartmodel"
+                    ]
+                },
+                {
+                    "name": "Pie",
+                    "to": "/piechart",
+                    "meta": [
+                        "piechart"
+                    ]
+                },
+                {
+                    "name": "Doughnut",
+                    "to": "/doughnutchart",
+                    "meta": [
+                        "doughnutchart"
+                    ]
+                },
+                {
+                    "name": "Bar",
+                    "to": "/barchart",
+                    "meta": [
+                        "barchart"
+                    ]
+                },
+                {
+                    "name": "Line",
+                    "to": "/linechart",
+                    "meta": [
+                        "linechart"
+                    ]
+                },
+                {
+                    "name": "PolarArea",
+                    "to": "/polarareachart",
+                    "meta": [
+                        "polarareachart"
+                    ]
+                },
+                {
+                    "name": "Radar",
+                    "to": "/radarchart",
+                    "meta": [
+                        "radarchart"
+                    ]
+                },
+                {
+                    "name": "Combo",
+                    "to": "/combochart",
+                    "meta": [
+                        "combochart"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Messages",
+            "icon": "showcase/resources/images/mono/message.svg",
+            "meta": [
+                "message"
+            ],
+            "children": [
+                {
+                    "name": "Messages",
+                    "to": "/messages",
+                    "meta": [
+                        "messages"
+                    ]
+                },
+                {
+                    "name": "Growl",
+                    "to": "/growl",
+                    "meta": [
+                        "growl"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Misc",
+            "icon": "showcase/resources/images/mono/misc.svg",
+            "meta": [
+                "misc"
+            ],
+            "children": [
+                {
+                    "name": "ProgressBar",
+                    "to": "/progressbar",
+                    "meta": [
+                        "progressbar"
+                    ]
+                },
+                {
+                    "name": "Captcha",
+                    "to": "/captcha",
+                    "meta": [
+                        "captcha"
+                    ]
+                },
+                {
+                    "name": "Inplace",
+                    "to": "/inplace",
+                    "meta": [
+                        "inplace"
+                    ]
+                },
+                {
+                    "name": "ProgressSpinner",
+                    "to": "/progressspinner",
+                    "meta": [
+                        "progressspinner"
+                    ]
+                }
+            ]
+        }
+    ]
+}
