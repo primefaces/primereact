@@ -9,6 +9,32 @@
         overflow: auto;
         @include shadow(0 0 10px 0 rgba(0,0,0,.2));
 
+        .layout-sidebar-search-wrapper {
+            padding: 24px;
+            position: relative;
+
+            .layout-sidebar-search-icon {
+                position: absolute;
+                color: #484848;
+                top: 50%;
+                left: 28px;
+                font-size: 16px;
+                margin-top: -8px;
+            }
+
+            input {
+                color: #484848;
+                padding: 8px 0 8px 24px;
+                width: 100%;
+                border-radius: 2px;
+                font-size: 14px;
+                background-color: #ffffff;
+                border: solid 1px #cfd4d5;
+
+                @include focus();
+            }
+        }
+
         .layout-menu {
             margin: 0;
             padding: 0;

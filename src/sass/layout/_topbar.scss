@@ -80,7 +80,6 @@
                     }
 
                     > ul {
-                        display: none;
                         position: absolute;
                         top: 70px;
                         right: 0;
@@ -93,6 +92,37 @@
                         margin: 0;
                         border-radius: 3px;
                         @include shadow(0 0 10px 0 rgba(0,0,0,.3));
+                        opacity: 0;
+                        @include transform(translateY(5%));
+                        @include transition(transform .3s, opacity .15s);
+                        display: none;
+
+                        &.topbar-submenu-enter {
+                            display: block;
+                            opacity: 0;
+                            @include transform(translateY(5%));
+                        }
+
+                        &.topbar-submenu-enter-active {
+                            @include transition(transform .3s, opacity .15s);
+                        }
+
+                        &.topbar-submenu-enter-done {
+                            display: block;
+                            opacity: 1;
+                            @include transform(translateY(0%));
+                        }
+
+                        &.topbar-submenu-exit {
+                            display: none;
+                            opacity: 0;
+                            @include transform(translateY(5%));
+                            @include transition(transform .3s, opacity .15s);
+                        }
+
+                        &.topbar-submenu-exit-active {
+                            @include transition(transform .3s, opacity .15s);
+                        }
 
                         > li {
                             &.topbar-submenu-header {
@@ -153,12 +183,6 @@
                                     margin-right: 8px;
                                 }
                             }
-                        }
-                    }
-
-                    &.topbar-menuitem-active {
-                        > ul {
-                            display: block;
                         }
                     }
                 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types'
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { CSSTransition } from 'react-transition-group';
 
 export class AppTopbar extends Component {
 
@@ -73,8 +74,8 @@ export class AppTopbar extends Component {
                         <li className={classNames({'topbar-menuitem-active': this.props.activeTopbarItem === 'themes'})}
                             onClick={(e) => this.onTopbarItemClick(e, 'themes')}>
                             <button className="p-link">Themes</button>
-
-                            <ul>
+                            <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'themes'}>
+                                <ul className="topbar-submenu">
                                 <li className="topbar-submenu-header">THEMING</li>
                                 <li><Link to="/theming" onClick={this.onThemesMenuRouteChange}><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
                                 <li><a href="https://www.primefaces.org/designer/primereact"><i className="pi pi-fw pi-cog" /><span>Designer</span></a></li>
@@ -90,40 +91,43 @@ export class AppTopbar extends Component {
                                 <li><button className="p-link" onClick={e => this.onThemeChange(e, 'luna-pink', true)}><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></button></li>
                                 <li><button className="p-link" onClick={e => this.onThemeChange(e, 'rhea', false)}><img src="showcase/resources/images/layouts/themeswitcher-rhea.png" alt="Rhea" /><span>Rhea</span></button></li>
                             </ul>
+                            </CSSTransition>
                         </li>
 
                         <li className={classNames({'topbar-menuitem-active': this.props.activeTopbarItem === 'templates'})}
                             onClick={(e) => this.onTopbarItemClick(e, 'templates')}>
                             <button className="p-link">Templates</button>
+                            <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'templates'}>
+                                <ul className="topbar-submenu">
+                                    <li className="topbar-submenu-header">FREE TEMPLATES</li>
+                                    <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span></a></li>
 
-                            <ul>
-                                <li className="topbar-submenu-header">FREE TEMPLATES</li>
-                                <li><a href="https://www.primefaces.org/sigma-react"><img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span></a></li>
-
-                                <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
-                                <li><a href="https://www.primefaces.org/layouts/roma-react"><img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">new</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/sapphire-react"><img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">material</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">material</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">material</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">bootstrap</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/babylon-react"><img src="showcase/resources/images/layouts/themeswitcher-babylon.png" alt="Babylon" /><span>Babylon</span></a></li>
-                                <li><a href="https://www.primefaces.org/layouts/apollo-react"><img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">dark mode</span></a></li>
-                            </ul>
+                                    <li className="topbar-submenu-header">PREMIUM TEMPLATES</li>
+                                    <li><a href="https://www.primefaces.org/layouts/roma-react"><img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">new</span></a></li>
+                                    <li><a href="https://www.primefaces.org/layouts/sapphire-react"><img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">material</span></a></li>
+                                    <li><a href="https://www.primefaces.org/layouts/serenity-react"><img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">material</span></a></li>
+                                    <li><a href="https://www.primefaces.org/layouts/ultima-react"><img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">material</span></a></li>
+                                    <li><a href="https://www.primefaces.org/layouts/avalon-react"><img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">bootstrap</span></a></li>
+                                    <li><a href="https://www.primefaces.org/layouts/babylon-react"><img src="showcase/resources/images/layouts/themeswitcher-babylon.png" alt="Babylon" /><span>Babylon</span></a></li>
+                                    <li><a href="https://www.primefaces.org/layouts/apollo-react"><img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">dark mode</span></a></li>
+                                </ul>
+                            </CSSTransition>
                         </li>
 
                         <li className={classNames('topbar-resources-submenu', {'topbar-menuitem-active': this.props.activeTopbarItem === 'resources'})}
                             onClick={(e) => this.onTopbarItemClick(e, 'resources')}>
                             <button className="p-link">Resources</button>
-
-                            <ul>
-                                <li><Link to="/support"><span>Support</span></Link></li>
-                                <li><a href="https://github.com/primefaces/primereact" target="_blank" rel="noopener noreferrer"><span>Source Code</span></a></li>
-                                <li><a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer"><span>PrimeStore</span></a></li>
-                                <li><a href="https://www.primefaces.org/category/primereact/" target="_blank" rel="noopener noreferrer"><span>Blog</span></a></li>
-                                <li><a href="https://twitter.com/primereact?lang=en" target="_blank" rel="noopener noreferrer"><span>Twitter</span></a></li>
-                                <li><a href="https://www.primefaces.org/whouses/" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
-                                <li><a href="https://www.primetek.com.tr/" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
-                            </ul>
+                            <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'resources'}>
+                                <ul className="topbar-submenu">
+                                    <li><Link to="/support"><span>Support</span></Link></li>
+                                    <li><a href="https://github.com/primefaces/primereact" target="_blank" rel="noopener noreferrer"><span>Source Code</span></a></li>
+                                    <li><a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer"><span>PrimeStore</span></a></li>
+                                    <li><a href="https://www.primefaces.org/category/primereact/" target="_blank" rel="noopener noreferrer"><span>Blog</span></a></li>
+                                    <li><a href="https://twitter.com/primereact?lang=en" target="_blank" rel="noopener noreferrer"><span>Twitter</span></a></li>
+                                    <li><a href="https://www.primefaces.org/whouses/" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
+                                    <li><a href="https://www.primetek.com.tr/" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
+                                </ul>
+                            </CSSTransition>
                         </li>
                     </ul>
                 </div>

@@ -58,6 +58,12 @@
     transition:         $transition;
 }
 
+@mixin transform($transform...) {
+    -webkit-transform: $transform;
+    -ms-transform:     $transform;
+    transform:         $transform;
+}
+
 @mixin animation($animation...) {
   -webkit-animation: $animation;
   animation: $animation;
