@@ -172,7 +172,7 @@ export class App extends Component {
                 {/*<AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/>*/}
 
                 <AppTopbar activeTopbarItem={this.state.activeTopbarItem} onMenuButtonClick={this.onMenuButtonClick}
-                    onTopbarItemClick={this.onTopbarItemClick} onThemeChange={this.onThemeChange}/>
+                    onTopbarItemClick={this.onTopbarItemClick} onThemeChange={this.onThemeChange} menuActive={this.state.mobileMenuActive}/>
 
                 <AppMenu onSidebarClick={this.onSidebarClick}/>
 

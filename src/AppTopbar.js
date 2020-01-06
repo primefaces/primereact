@@ -8,13 +8,15 @@ export class AppTopbar extends Component {
 
     static defaultProps = {
         activeTopbarItem: null,
+        menuActive: false,
         onMenuButtonClick: null,
         onTopbarItemClick: null,
-        onThemeChange: null
+        onThemeChange: null,
     }
 
     static propTypes = {
         activeTopbarItem: PropTypes.string,
+        menuActive: PropTypes.bool,
         onMenuButtonClick: PropTypes.func,
         onTopbarItemClick: PropTypes.func,
         onThemeChange: PropTypes.func
@@ -57,10 +59,10 @@ export class AppTopbar extends Component {
         return (
             <div className="layout-topbar">
                 <div className="layout-topbar-left">
-                    <button className="p-link menu-button" onClick={this.onMenuButtonClick}>
+                    <button className="p-link menu-button" onClick={this.onMenuButtonClick} aria-expanded={this.props.menuActive} aria-haspopup={true} aria-label="Menu">
                         <i className="pi pi-bars"></i>
                     </button>
-                    <Link to="/" className="logo">
+                    <Link to="/" className="logo" aria-label="PrimeReact logo">
                         <img alt="logo" src="showcase/resources/images/primereact-logo.png" />
                     </Link>
                 </div>
