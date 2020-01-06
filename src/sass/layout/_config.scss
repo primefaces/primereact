@@ -128,6 +128,7 @@
                 text-align: center;
                 position: relative;
                 @include transition(box-shadow .2s);
+                overflow: visible;
 
                 i {
                     line-height: inherit;
