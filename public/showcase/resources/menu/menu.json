@@ -378,7 +378,8 @@
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Lightbox",

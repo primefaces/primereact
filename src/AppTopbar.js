@@ -112,25 +112,25 @@ export class AppTopbar extends Component {
 
                                     <li role="none" className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">new</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">NEW</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/sapphire-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">material</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">MATERIAL</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">material</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">material</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/avalon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">bootstrap</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">BOOTSTRAP</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/babylon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/resources/images/layouts/themeswitcher-babylon.png" alt="Babylon" /><span>Babylon</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">dark mode</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">DARK MODE</span></a>
                                     </li>
                                 </ul>
                             </CSSTransition>
