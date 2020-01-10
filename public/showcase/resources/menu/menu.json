@@ -224,7 +224,8 @@
                     "to": "/datatable",
                     "meta": [
                         "datatable"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "DataScroller",
