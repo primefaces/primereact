@@ -18,7 +18,7 @@ export class HeaderCell extends Component {
     onClick(event) {
         if (this.props.sortable) {
             let targetNode = event.target;
-            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') 
+            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: event,
@@ -45,7 +45,7 @@ export class HeaderCell extends Component {
                     field: this.props.field,
                     matchMode: this.props.filterMatchMode
                 });
-                this.filterTimeout = null;            
+                this.filterTimeout = null;
             }, this.filterDelay);
         }
     }
@@ -112,14 +112,14 @@ export class HeaderCell extends Component {
         let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown}></span>;
         let filterElement, headerCheckbox;
 
-        if(singleSorted) 
+        if(singleSorted)
             sortOrder = this.props.sortOrder;
-        else if(multipleSorted) 
+        else if(multipleSorted)
             sortOrder = multiSortMetaData.order;
 
         let sorted = this.props.sortable && (singleSorted || multipleSorted);
-        let className = classNames({'p-sortable-column': this.props.sortable, 
-                        'p-highlight': sorted, 
+        let className = classNames({'p-sortable-column': this.props.sortable,
+                        'p-highlight': sorted,
                         'p-resizable-column': this.props.resizableColumns,
                         'p-selection-column': this.props.selectionMode}, this.props.headerClassName||this.props.className);
 
