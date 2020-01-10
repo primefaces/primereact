@@ -39,6 +39,7 @@ export class DataTable extends Component {
         multiSortMeta: null,
         sortMode: 'single',
         defaultSortOrder: 1,
+        removableSort: false,
         emptyMessage: null,
         selectionMode: null,
         selection: null,
@@ -130,6 +131,7 @@ export class DataTable extends Component {
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
         defaultSortOrder: PropTypes.number,
+        removableSort: PropTypes.bool,
         emptyMessage: PropTypes.string,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
@@ -320,7 +322,7 @@ export class DataTable extends Component {
     restoreState(state) {
         const storage = this.getStorage();
         const stateString = storage.getItem(this.props.stateKey);
-        
+
         if (stateString) {
             let restoredState = JSON.parse(stateString);
 
@@ -336,7 +338,7 @@ export class DataTable extends Component {
                     state.rows = restoredState.rows;
                 }
             }
-    
+
             if (restoredState.sortField) {
                 if (this.props.onSort) {
                     this.props.onSort({
@@ -351,7 +353,7 @@ export class DataTable extends Component {
                     state.multiSortMeta = restoredState.multiSortMeta;
                 }
             }
-    
+
             if (restoredState.filters) {
                 if (this.props.onFilter) {
                     this.props.onFilter({
@@ -423,7 +425,7 @@ export class DataTable extends Component {
                 let headers = DomHandler.find(this.table, '.p-datatable-thead > tr > th');
                 headers.map((header, index) => header.style.width = widths[index] + 'px');
             }
-        } 
+        }
     }
 
     onPageChange(event) {
@@ -461,19 +463,30 @@ export class DataTable extends Component {
 
             if (multiSortMeta && multiSortMeta instanceof Array) {
                 const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
-                sortOrder = sortMeta ? sortMeta.order * -1 : sortOrder;
+                sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
             }
 
-            if(!multiSortMeta || !metaKey) {
-                multiSortMeta = [];
-            }
+            const newMetaData = {field: sortField, order: sortOrder};
 
-            this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
+            if (sortOrder) {
+                if(!multiSortMeta || !metaKey) {
+                    multiSortMeta = [];
+                }
+
+                this.addSortMeta(newMetaData, multiSortMeta);
+            }
+            else if (this.props.removableSort && multiSortMeta) {
+                this.removeSortMeta(newMetaData, multiSortMeta);
+            }
         }
         else {
-            sortOrder = (this.getSortField() === sortField) ? this.getSortOrder() * -1 : sortOrder;
+            sortOrder = (this.getSortField() === sortField) ? this.getCalculatedSortOrder(this.getSortOrder()) : sortOrder;
         }
-        
+
+        if (this.props.removableSort) {
+            sortField = sortOrder ? sortField : null;
+        }
+
         if (this.props.onSort) {
             this.props.onSort({
                 sortField: sortField,
@@ -499,6 +512,10 @@ export class DataTable extends Component {
         }
     }
 
+    getCalculatedSortOrder(currentOrder) {
+        return this.props.removableSort ? (currentOrder ? (currentOrder < 0 ? 0 : -1) : 1) : currentOrder * -1;
+    }
+
     addSortMeta(meta, multiSortMeta) {
         let index = -1;
         for(let i = 0; i < multiSortMeta.length; i++) {
@@ -512,6 +529,22 @@ export class DataTable extends Component {
             multiSortMeta[index] = meta;
         else
             multiSortMeta.push(meta);
+    }
+
+    removeSortMeta(meta, multiSortMeta) {
+        let index = -1;
+        for(let i = 0; i < multiSortMeta.length; i++) {
+            if(multiSortMeta[i].field === meta.field) {
+                index = i;
+                break;
+            }
+        }
+
+        if(index >= 0) {
+            multiSortMeta.splice(index, 1);
+        }
+
+        multiSortMeta = multiSortMeta.length > 0 ? multiSortMeta : null;
     }
 
     sortSingle(data, sortField, sortOrder) {
@@ -588,7 +621,7 @@ export class DataTable extends Component {
     onFilter(event) {
         let currentFilters = this.getFilters();
         let newFilters = currentFilters ? {...currentFilters} : {};
-        
+
         if(!this.isFilterBlank(event.value))
             newFilters[event.field] = {value: event.value, matchMode: event.matchMode};
         else if(newFilters[event.field])
@@ -625,7 +658,7 @@ export class DataTable extends Component {
                 return true;
             else
                 return false;
-        } 
+        }
         return true;
     }
 
@@ -676,7 +709,7 @@ export class DataTable extends Component {
         this.resizerHelper.style.height = this.container.offsetHeight + 'px';
         this.resizerHelper.style.top = 0 + 'px';
         this.resizerHelper.style.left = (event.pageX - containerLeft + this.container.scrollLeft) + 'px';
-        
+
         this.resizerHelper.style.display = 'block';
     }
 
@@ -690,7 +723,7 @@ export class DataTable extends Component {
             if(this.props.columnResizeMode === 'fit') {
                 let nextColumn = this.resizeColumn.nextElementSibling;
                 let nextColumnWidth = nextColumn.offsetWidth - delta;
-                
+
                 if(newColumnWidth > 15 && nextColumnWidth > 15) {
                     if(this.props.scrollable) {
                         let scrollableView = this.findParentScrollableView(this.resizeColumn);
@@ -719,8 +752,8 @@ export class DataTable extends Component {
                     this.table.style.width = this.table.offsetWidth + delta + 'px';
                     this.resizeColumn.style.width = newColumnWidth + 'px';
                 }
-            }    
-            
+            }
+
             if(this.props.onColumnResizeEnd) {
                 this.props.onColumnResizeEnd({
                     element: this.resizeColumn,
@@ -733,7 +766,7 @@ export class DataTable extends Component {
                 this.saveState();
             }
         }
-                
+
         this.resizerHelper.style.display = 'none';
         this.resizeColumn = null;
         this.resizeColumnProps = null;
@@ -765,7 +798,7 @@ export class DataTable extends Component {
         setWidth(scrollableBody, scrollableBodyTable, scrollableBodyTableWidth, isContainerInViewport);
         setWidth(scrollableHeader, scrollableHeaderTable, scrollableHeaderTableWidth, isContainerInViewport);
         setWidth(scrollableFooter, scrollableFooterTable, scrollableHeaderTableWidth, isContainerInViewport);
-    
+
         if (column) {
             let resizeColumnIndex = DomHandler.index(column);
 
@@ -797,7 +830,7 @@ export class DataTable extends Component {
                 let col = colGroup.children[resizeColumnIndex];
                 let nextCol = col.nextElementSibling;
                 col.style.width = newColumnWidth + 'px';
-    
+
                 if (nextCol && nextColumnWidth) {
                     nextCol.style.width = nextColumnWidth + 'px';
                 }
@@ -814,7 +847,7 @@ export class DataTable extends Component {
                 this.onColumnResize(event);
             }
         });
-        
+
         this.documentColumnResizeEndListener = document.addEventListener('mouseup', (event) => {
             if(this.columnResizing) {
                 this.columnResizing = false;
@@ -827,7 +860,7 @@ export class DataTable extends Component {
         document.removeEventListener('document', this.documentColumnResizeListener);
         document.removeEventListener('document', this.documentColumnResizeEndListener);
     }
-    
+
     findParentHeader(element) {
         if(element.nodeName === 'TH') {
             return element;
@@ -841,32 +874,32 @@ export class DataTable extends Component {
             return parent;
         }
     }
-    
+
     onColumnDragStart(event) {
         if(this.columnResizing) {
             event.preventDefault();
             return;
         }
-        
+
         this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
         this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
 
         this.draggedColumn = this.findParentHeader(event.target);
         event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
     }
-    
+
     onColumnDragOver(event) {
         let dropHeader = this.findParentHeader(event.target);
         if(this.props.reorderableColumns && this.draggedColumn && dropHeader) {
             event.preventDefault();
             let containerOffset = DomHandler.getOffset(this.container);
             let dropHeaderOffset = DomHandler.getOffset(dropHeader);
-            
+
             if(this.draggedColumn !== dropHeader) {
                 let targetLeft =  dropHeaderOffset.left - containerOffset.left;
                 //let targetTop =  containerOffset.top - dropHeaderOffset.top;
                 let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
-                
+
                 this.reorderIndicatorUp.style.top = dropHeaderOffset.top - containerOffset.top - (this.iconHeight - 1) + 'px';
                 this.reorderIndicatorDown.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
 
@@ -880,13 +913,13 @@ export class DataTable extends Component {
                     this.reorderIndicatorDown.style.left = (targetLeft - Math.ceil(this.iconWidth / 2))+ 'px';
                     this.dropPosition = -1;
                 }
-                                
+
                 this.reorderIndicatorUp.style.display = 'block';
                 this.reorderIndicatorDown.style.display = 'block';
             }
         }
     }
-    
+
     onColumnDragLeave(event) {
         if(this.props.reorderableColumns && this.draggedColumn) {
             event.preventDefault();
@@ -894,7 +927,7 @@ export class DataTable extends Component {
             this.reorderIndicatorDown.style.display = 'none';
         }
     }
-    
+
     onColumnDrop(event) {
         event.preventDefault();
         if(this.draggedColumn) {
@@ -904,7 +937,7 @@ export class DataTable extends Component {
             if(allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
                 allowDrop = false;
             }
-        
+
             if(allowDrop) {
                 let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
                 ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
@@ -912,11 +945,11 @@ export class DataTable extends Component {
                 for(let column of columns) {
                     columnOrder.push(column.props.columnKey||column.props.field);
                 }
-                
+
                 this.setState({
                     columnOrder: columnOrder
                 });
-    
+
                 if (this.props.onColReorder) {
                     this.props.onColReorder({
                         originalEvent: event,
@@ -926,7 +959,7 @@ export class DataTable extends Component {
                     });
                 }
             }
-            
+
             this.reorderIndicatorUp.style.display = 'none';
             this.reorderIndicatorDown.style.display = 'none';
             this.draggedColumn.draggable = false;
@@ -934,12 +967,12 @@ export class DataTable extends Component {
             this.dropPosition = null;
         }
     }
-    
+
     onVirtualScroll(event) {
         if(this.virtualScrollTimer) {
             clearTimeout(this.virtualScrollTimer);
         }
-                
+
         this.virtualScrollTimer = setTimeout(() => {
             if (this.props.onVirtualScroll) {
                 this.props.onVirtualScroll({
@@ -954,19 +987,19 @@ export class DataTable extends Component {
         let data = this.processData();
         let csv = '\ufeff';
         let columns = React.Children.toArray(this.props.children);
-        
+
         //headers
         for(let i = 0; i < columns.length; i++) {
             if(columns[i].props.field) {
                 csv += '"' + (columns[i].props.header || columns[i].props.field) + '"';
-                
+
                 if(i < (columns.length - 1)) {
                     csv += this.props.csvSeparator;
                 }
             }
         }
-        
-        //body        
+
+        //body
         data.forEach((record, i) => {
             csv += '\n';
             for(let i = 0; i < columns.length; i++) {
@@ -975,7 +1008,7 @@ export class DataTable extends Component {
 
                 if (column.props.exportable && field) {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
-                    
+
                     if (cellData != null) {
                         if (this.props.exportFunction) {
                             cellData = this.props.exportFunction({
@@ -990,18 +1023,18 @@ export class DataTable extends Component {
                         cellData = '';
 
                     csv += '"' + cellData + '"';
-                    
+
                     if(i < (columns.length - 1)) {
                         csv += this.props.csvSeparator;
                     }
                 }
             }
         });
-        
+
         let blob = new Blob([csv],{
             type: 'text/csv;charset=utf-8;'
         });
-        
+
         if(window.navigator.msSaveOrOpenBlob) {
             navigator.msSaveOrOpenBlob(blob, this.props.exportFilename + '.csv');
         }
@@ -1038,7 +1071,7 @@ export class DataTable extends Component {
         else {
             selection = [];
         }
-            
+
         if(this.props.onSelectionChange) {
             const { originalEvent, ...rest } = event;
 
@@ -1062,7 +1095,7 @@ export class DataTable extends Component {
             for(let j = 0; j < columns.length; j++) {
                 let col = columns[j];
                 let filterMeta = filters ? filters[col.props.field] : null;
-                
+
                 //local
                 if(filterMeta) {
                     let filterValue = filterMeta.value;
@@ -1111,8 +1144,8 @@ export class DataTable extends Component {
                 let sortField = (localState && localState.sortField) || this.getSortField();
                 let sortOrder = (localState && localState.sortOrder) || this.getSortOrder();
                 let multiSortMeta = (localState && localState.multiSortMeta) || this.getMultiSortMeta();
-                
-                if(sortField || multiSortMeta) {
+
+                if(sortField || (multiSortMeta && multiSortMeta.length)) {
                     if(this.props.sortMode === 'single')
                         data = this.sortSingle(data, sortField, sortOrder);
                     else if(this.props.sortMode === 'multiple')
@@ -1174,7 +1207,7 @@ export class DataTable extends Component {
 
     createTableHeader(value, columns, columnGroup) {
         return <TableHeader value={value} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} 
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter}
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
                             onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop} tabIndex={this.props.tabIndex}>
@@ -1186,12 +1219,12 @@ export class DataTable extends Component {
         return <TableBody value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
-                        contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} 
+                        contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage} 
+                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage}
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder} 
+                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
                         editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}>
                         {columns}
                 </TableBody>;
@@ -1214,14 +1247,14 @@ export class DataTable extends Component {
     }
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
-        return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)} 
-                body={this.createTableBody(value, columns)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null} 
+        return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)}
+                body={this.createTableBody(value, columns)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null}
                 footer={this.createTableFooter(columns, footerColumnGroup)} tableStyle={this.props.tableStyle} tableClassName={this.props.tableClassName}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
                 onVirtualScroll={this.onVirtualScroll} loading={this.props.loading}></ScrollableView>
     }
-    
+
     getColumns() {
         let columns = React.Children.toArray(this.props.children);
 
@@ -1234,7 +1267,7 @@ export class DataTable extends Component {
                         orderedColumns.push(column);
                     }
                 }
-                            
+
                 return [...orderedColumns, ...columns.filter((item) => {
                     return orderedColumns.indexOf(item) < 0;
                 })];
@@ -1246,7 +1279,7 @@ export class DataTable extends Component {
 
         return null;
     }
-    
+
     findColumnByKey(columns, key) {
         if(columns && columns.length) {
             for(let i = 0; i < columns.length; i++) {
@@ -1256,10 +1289,10 @@ export class DataTable extends Component {
                 }
             }
         }
-        
+
         return null;
     }
-    
+
     getTotalRecords(data) {
         return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
     }
@@ -1295,15 +1328,15 @@ export class DataTable extends Component {
         for(let column of columns) {
             columnOrder.push(column.props.columnKey||column.props.field);
         }
-        
+
         this.setState({
             columnOrder
         });
     }
-    
+
     renderLoader() {
         let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
-        
+
         return (
             <div className="p-datatable-loading">
                 <div className="p-datatable-loading-overlay p-component-overlay"></div>
@@ -1330,8 +1363,8 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
-        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive, 
-                        'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit', 
+        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive,
+                        'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
                         'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.selectionMode}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
@@ -1343,7 +1376,7 @@ export class DataTable extends Component {
         let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
         let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
         let loader;
-        
+
         if(this.props.loading) {
             loader = this.renderLoader();
         }
@@ -1372,7 +1405,7 @@ export class DataTable extends Component {
 
                 tableContent = <div className="p-datatable-wrapper">
                         <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
-                            {tableHeader}                        
+                            {tableHeader}
                             {tableFooter}
                             {tableBody}
                         </table>
