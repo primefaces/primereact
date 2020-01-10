@@ -77,7 +77,7 @@ export class AppMenu extends Component {
 
     onFilterOnMeta(item, searchVal) {
         if (item && item.meta) {
-            return item.meta.filter(meta => meta.indexOf(searchVal) !== -1).length > 0
+            return item.meta.filter(meta => meta.toLowerCase().indexOf(searchVal) > -1).length > 0
         }
 
         return false;
