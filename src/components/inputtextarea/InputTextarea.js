@@ -154,8 +154,17 @@ export class InputTextarea extends Component {
         let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextarea.defaultProps);
 
         return (
-            <textarea {...textareaProps} className={className} ref={input => this.element = input} 
-                onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
+            <textarea
+                {...textareaProps}
+                rows={this.props.rows}
+                cols={this.props.cols}
+                className={className}
+                ref={input => (this.element = input)}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onKeyUp={this.onKeyUp}
+                onInput={this.onInput}
+            ></textarea>
         );
     }
 }
