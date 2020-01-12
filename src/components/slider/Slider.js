@@ -51,7 +51,7 @@ export class Slider extends Component {
         if (this.disabled) {
             return;
         }
-        
+
         this.dragging = true;
         this.updateDomData();
         this.sliderHandleClick = true;
@@ -73,7 +73,7 @@ export class Slider extends Component {
         if (this.props.disabled) {
             return;
         }
-        
+
         if (!this.sliderHandleClick) {
             this.updateDomData();
             this.setValue(event);
@@ -104,7 +104,7 @@ export class Slider extends Component {
             this.unbindTouchListeners();
         }
     }
-    
+
     bindDragListeners() {
         if (!this.dragListener) {
             this.dragListener = this.onDrag.bind(this);
@@ -116,13 +116,13 @@ export class Slider extends Component {
             document.addEventListener('mouseup', this.dragEndListener);
         }
     }
-    
+
     unbindDragListeners() {
         if (this.dragListener) {
             document.removeEventListener('mousemove', this.dragListener);
             this.dragListener = null;
         }
-        
+
         if (this.dragEndListener) {
             document.removeEventListener('mouseup', this.dragEndListener)
             this.dragEndListener = null;
@@ -146,13 +146,13 @@ export class Slider extends Component {
             document.removeEventListener('touchmove', this.dragListener);
             this.dragListener = null;
         }
-        
+
         if (this.dragEndListener) {
             document.removeEventListener('touchend', this.dragEndListener)
             this.dragEndListener = null;
         }
     }
-    
+
     updateDomData() {
         let rect = this.el.getBoundingClientRect();
         this.initX = rect.left + DomHandler.getWindowScrollLeft();
@@ -175,20 +175,20 @@ export class Slider extends Component {
         if(this.props.step) {
             const oldValue = this.props.range ? this.props.value[this.handleIndex] : this.props.value;
             const diff = (newValue - oldValue);
-            
+
             if(diff < 0)
                 newValue = oldValue + Math.ceil(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
             else if(diff > 0)
                 newValue = oldValue + Math.floor(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
         }
- 
-        this.updateValue(event, newValue);            
+
+        this.updateValue(event, newValue);
     }
 
     updateValue(event, value) {
         if(this.props.range) {
             let newValue = value;
-            
+
             if (this.handleIndex === 0) {
                 if (newValue < this.props.min)
                     newValue = this.props.min;
@@ -230,12 +230,25 @@ export class Slider extends Component {
     }
 
     renderHandle(leftValue, bottomValue, index) {
+      if(index === 0){
         return (
-            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
-                    className="p-slider-handle"  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}></span>
-        );
+            <span
+              onMouseDown={event => this.onMouseDown(event, index)}
+              onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
+              className={`p-slider-handle ${leftValue > 90 ? 'p-slider-rock' : ''} `}
+              style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}>
+            </span>
+          )
+      }
+      return (
+        <span
+          onMouseDown={event => this.onMouseDown(event, index)}
+          onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
+          className="p-slider-handle"
+          style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}>
+        </span>
+      )
     }
-
     renderRangeSlider() {
         let values = this.props.value||[0,0];
         let horizontal = (this.props.orientation === 'horizontal');

@@ -10,6 +10,9 @@
 	-ms-touch-action: none;
 	touch-action: none;
 }
+.p-slider-rock {
+	z-index: 2
+}
 .p-slider .p-slider-range {
 	position: absolute;
 	font-size: .7em;
