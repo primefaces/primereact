@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {PanelMenu} from '../../components/panelmenu/PanelMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class PanelMenuDemo extends Component {
 
@@ -135,6 +136,10 @@ export class PanelMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>PanelMenu</h1>
                         <p>PanelMenu is a hybrid of accordion-tree components.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("panelMenu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
