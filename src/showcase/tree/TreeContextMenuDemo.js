@@ -6,12 +6,13 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeContextMenuDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             expandedKeys: {},
             selectedNodeKey: null,
@@ -50,11 +51,15 @@ export class TreeContextMenuDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - ContextMenu</h1>
                         <p>Tree has exclusive integration with the ContextMenu component with support for different menus depending on the node.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -64,7 +69,7 @@ export class TreeContextMenuDemo extends Component {
                     <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
 
                     <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
                         onContextMenu={event => this.cm.show(event.originalEvent)} />
                 </div>
 
@@ -79,7 +84,7 @@ export class TreeContextMenuDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -98,7 +103,7 @@ export class TreeContextMenuDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             expandedKeys: {},
             selectedNodeKey: null,
@@ -135,7 +140,7 @@ export class TreeContextMenuDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - ContextMenu</h1>
@@ -149,7 +154,7 @@ export class TreeContextMenuDemo extends Component {
                     <ContextMenu model={this.state.menu} ref={el => this.cm = el} />
 
                     <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                        onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
                         onContextMenu={event => this.cm.show(event.originalEvent)} />
                 </div>
             </div>
