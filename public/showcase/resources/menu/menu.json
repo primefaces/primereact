@@ -638,6 +638,13 @@
                     "meta": [
                         "progressspinner"
                     ]
+                },
+                {
+                    "name": "PrimeIcons",
+                    "to": "/icons",
+                    "meta": [
+                        "primeicons"
+                    ]
                 }
             ]
         }
