@@ -83,7 +83,7 @@ export class AppTopbar extends Component {
                                     <li role="none" className="topbar-submenu-header">THEMING</li>
                                     <li role="none"><Link to="/theming" onClick={this.onThemesMenuRouteChange} role="menuitem"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
                                     <li role="none"><a href="https://www.primefaces.org/designer/primereact" role="menuitem"><i className="pi pi-fw pi-cog" /><span>Designer</span></a></li>
-                                    <li role="none"><Link to="/icons" onClick={this.onThemesMenuRouteChange} role="menuitem"><i className="pi pi-fw pi-search" /><span>Icons</span></Link></li>
+                                    <li role="none"><Link to="/icons" onClick={this.onThemesMenuRouteChange} role="menuitem" className="no-border"><i className="pi pi-fw pi-search" /><span>Icons</span></Link></li>
 
                                     <li role="none" className="topbar-submenu-header">FREE COMPONENT THEMES</li>
                                     <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-light', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></button></li>
@@ -106,31 +106,47 @@ export class AppTopbar extends Component {
                             <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'templates'}>
                                 <ul role="menu" aria-label="Templates" className="topbar-submenu">
                                     <li role="none" className="topbar-submenu-header">FREE TEMPLATES</li>
-                                    <li role="none"><a href="https://www.primefaces.org/sigma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/sigma-react" role="menuitem" rel="noopener noreferrer" target="_blank" className="no-border">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span>
+                                        </a>
                                     </li>
 
                                     <li role="none" className="topbar-submenu-header">PREMIUM TEMPLATES</li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">NEW</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">NEW</span>
+                                        </a>
                                     </li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/sapphire-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">MATERIAL</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/sapphire-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">MATERIAL</span>
+                                        </a>
                                     </li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span>
+                                        </a>
                                     </li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span>
+                                        </a>
                                     </li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/avalon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">BOOTSTRAP</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/avalon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">BOOTSTRAP</span>
+                                        </a>
                                     </li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/babylon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-babylon.png" alt="Babylon" /><span>Babylon</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/babylon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-babylon.png" alt="Babylon" /><span>Babylon</span>
+                                        </a>
                                     </li>
-                                    <li role="none"><a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">DARK MODE</span></a>
+                                    <li role="none">
+                                        <a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                            <img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">DARK MODE</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </CSSTransition>
