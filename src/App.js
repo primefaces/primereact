@@ -279,7 +279,7 @@ export class App extends Component {
                                         <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
                                         { this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span> }
                                     </span>
-                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">Full Changelog</a>
+                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
                                 </div>
                         }
                         <ul className="layout-changelog-container">
