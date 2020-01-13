@@ -3,12 +3,13 @@ import {Tree} from '../../components/tree/Tree';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTemplatingDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: this.createNavigation()
         };
 
@@ -28,7 +29,7 @@ export class TreeTemplatingDemo extends Component {
                 ]
             },
             {
-                key: "1", 
+                key: "1",
                 label: 'Main Concepts',
                 children: [
                     {key: "1-0", label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html'},
@@ -59,11 +60,15 @@ export class TreeTemplatingDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Templating</h1>
                         <p>Tree nodes can be customized to display custom content.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -83,7 +88,7 @@ export class TreeTemplatingDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -99,7 +104,7 @@ export class TreeTemplatingDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: this.createNavigation()
         };
 
@@ -119,7 +124,7 @@ export class TreeTemplatingDemo extends Component {
                 ]
             },
             {
-                key: "1", 
+                key: "1",
                 label: 'Main Concepts',
                 children: [
                     {key: "1-0", label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html'},
@@ -148,7 +153,7 @@ export class TreeTemplatingDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Templating</h1>
