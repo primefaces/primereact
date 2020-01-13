@@ -3,13 +3,14 @@ import {Link} from 'react-router-dom';
 import {Inplace,InplaceDisplay,InplaceContent} from '../../components/inplace/Inplace';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {InputText} from '../../components/inputtext/InputText';
 import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {CarService} from '../service/CarService';
 
 export class InplaceDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -31,6 +32,10 @@ export class InplaceDemo extends Component {
                     <div className="feature-intro">
                         <h1>Inplace</h1>
                         <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inplace")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -83,7 +88,7 @@ export class InplaceDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -116,7 +121,7 @@ import {Inplace} from 'primereact/inplace';
 `}
 </CodeHighlight>
 
-                <p>In uncontrolled mode, no additional properties are required. Initial state can be still be provided using the <i>active</i> property in uncontrolled mode however 
+                <p>In uncontrolled mode, no additional properties are required. Initial state can be still be provided using the <i>active</i> property in uncontrolled mode however
                 it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the active state, prefer to use the component as controlled.</p>
 
 <CodeHighlight className="language-jsx">
@@ -162,7 +167,7 @@ import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
 
 export class InplaceDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -275,7 +280,7 @@ export class InplaceDemo extends Component {
                         <tr>
                             <td>onToggle</td>
                             <td>event.originalEvent: browser event <br />
-                                event.value: active state as a boolean    
+                                event.value: active state as a boolean
                             </td>
                             <td>Callback to invoke when inplace is opened or closed.</td>
                         </tr>
@@ -312,7 +317,7 @@ export class InplaceDemo extends Component {
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -329,7 +334,7 @@ import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
 
 export class InplaceDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {

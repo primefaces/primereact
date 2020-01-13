@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {InputMask} from '../../components/inputmask/InputMask';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class InputMaskDemo extends Component {
 
@@ -25,6 +26,10 @@ export class InputMaskDemo extends Component {
                     <div className="feature-intro">
                         <h1>InputMask</h1>
                         <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputMask")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -98,7 +103,7 @@ import {InputMask} from 'primereact/inputmask';
 
             <h3>Mask</h3>
             <p>Mask format can be a combination of the the following built-in definitions.</p>
-            
+
             <ul>
                 <li>
                     a - Alpha character (A-Z,a-z)
@@ -133,7 +138,7 @@ import {InputMask} from 'primereact/inputmask';
                Use <i>autoClear</i> property to control this behavior. In addition, certain part of
                a mask can be made optional by using ? symbol where anything after the question
                mark becomes optional.</p>
-               
+
 <CodeHighlight className="language-jsx">
 {`
 <InputMask mask="(999) 999-9999? x99999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>

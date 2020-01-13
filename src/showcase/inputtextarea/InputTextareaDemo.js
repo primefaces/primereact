@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {InputTextarea} from '../../components/inputtextarea/InputTextarea';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class InputTextareaDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -24,6 +25,10 @@ export class InputTextareaDemo extends Component {
                     <div className="feature-intro">
                         <h1>InputTextarea</h1>
                         <p>Inputtextarea add styling and autoResize functionality to standard textarea element.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputTextarea")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -147,7 +152,7 @@ import React, {Component} from 'react';
 import {InputTextarea} from 'primereact/inputtextarea';
 
 export class InputTextareaDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {

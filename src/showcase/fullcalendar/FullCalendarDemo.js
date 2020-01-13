@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {FullCalendar} from '../../components/fullcalendar/FullCalendar';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {EventService} from '../service/EventService';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -40,6 +41,10 @@ export class FullCalendarDemo extends Component {
                     <div className="feature-intro">
                         <h1>FullCalendar</h1>
                         <p>An event calendar based on the <a href="https://fullcalendar.io/">FullCalendar</a> library.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("fullCalendar")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -73,7 +78,7 @@ import {FullCalendar} from 'primereact/fullcalendar';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>FullCalendar is a wrapper around on <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a> so fullcalendar core needs to be included in your project. 
+                        <p>FullCalendar is a wrapper around on <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a> so fullcalendar core needs to be included in your project.
                         For a complete documentation and samples please refer to the <a href="https://fullcalendar.io/">fullcalendar website</a>.</p>
 
                         <CodeHighlight className="language-javascript">
@@ -92,7 +97,7 @@ npm install @fullcalendar/interaction --save
 
 `}
 </CodeHighlight>
-                        
+
                         <p>FullCalendar properties are defined with the <i>options</i> property and the events to display with the <i>events</i> property which should be an array and defined using the events property. Refer to <a href="https://fullcalendar.io/docs/event-object">Event API</a> for more information.</p>
 
                         <CodeHighlight className="language-javascript">
@@ -214,7 +219,7 @@ this.fc.calendar.nextYear();
                         <p>
                             <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a>
                         </p>
-                        
+
 
                     </TabPanel>
 
