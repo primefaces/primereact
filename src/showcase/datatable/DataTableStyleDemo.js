@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableStyleDemo extends Component {
 
@@ -19,17 +20,17 @@ export class DataTableStyleDemo extends Component {
     componentDidMount() {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
-    
+
     yearTemplate(rowData) {
         let year = rowData.year;
         let fontWeight = year > 2010 ? 'bold' : 'normal';
-        
+
         return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
     }
-    
+
     rowClassName(rowData) {
         let brand = rowData.brand;
-        
+
         return {'p-highlight' : (brand === 'Jaguar')};
     }
 
@@ -42,6 +43,10 @@ export class DataTableStyleDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Styling</h1>
                         <p>Particular rows and cells can be styled based on data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -66,7 +71,7 @@ export class DataTableStyleDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -92,17 +97,17 @@ export class DataTableStyleDemo extends Component {
     componentDidMount() {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
-    
+
     yearTemplate(rowData, column) {
         let year = rowData.year;
         let fontWeight = year > 2010 ? 'bold' : 'normal';
-        
+
         return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
     }
-    
+
     rowClassName(rowData) {
         let brand = rowData.brand;
-        
+
         return {'p-highlight' : (brand === 'Jaguar')};
     }
 
