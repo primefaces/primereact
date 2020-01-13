@@ -3,6 +3,7 @@ import {Sidebar} from "../../components/sidebar/Sidebar";
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class SidebarDemo extends Component {
 
@@ -25,6 +26,10 @@ export class SidebarDemo extends Component {
                     <div className="feature-intro">
                         <h1>Sidebar</h1>
                         <p>Sidebar is a panel component displayed as an overlay.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("sidebar")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

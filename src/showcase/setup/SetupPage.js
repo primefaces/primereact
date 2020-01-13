@@ -36,10 +36,10 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
 
 `}
 </CodeHighlight>
-                
+
                     <h3>Dependencies</h3>
                     <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
-                    <p>In addition, components require PrimeIcons library for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and 
+                    <p>In addition, components require PrimeIcons library for icons, <a href="https://www.npmjs.com/package/classnames">classNames</a> package to manage style classes and
                         <a href="react transition group">react-transition-group</a> for animations.</p>
 
 <CodeHighlight className="json">
@@ -88,10 +88,10 @@ dependencies: {
                             </tbody>
                         </table>
                     </div>
-                        
+
                     <h3>Styles</h3>
                     <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
-                    
+
 <CodeHighlight className="language-javascript">
 {`
 primereact/resources/themes/nova-light/theme.css
@@ -113,9 +113,9 @@ import 'primeicons/primeicons.css';
 
                     <h3>Quickstart</h3>
                     <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart">github</a>.</p>
-                    
+
                     <h3>Typescript</h3>
-                    <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample typescript-primereact application 
+                    <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample typescript-primereact application
                     is available as well at <a href="https://github.com/primefaces/primereact-typescript-quickstart">github</a>.</p>
 
                     <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
@@ -129,7 +129,7 @@ import {MenuItem} from 'primereact/api';
 
 					<h3>Next.js</h3>
 					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart">github</a>.</p>
-                </div>        
+                </div>
             </div>
         );
     }
