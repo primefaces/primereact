@@ -4,6 +4,7 @@ import {Dialog} from '../../components/dialog/Dialog';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DialogDemo extends Component {
 
@@ -36,6 +37,10 @@ export class DialogDemo extends Component {
                     <div className="feature-intro">
                         <h1>Dialog</h1>
                         <p>Dialog is a container to display content in an overlay window.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dialog")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
