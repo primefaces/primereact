@@ -1962,7 +1962,7 @@ export class DataTableStateDemo extends Component {
                             <td>dataKey</td>
                             <td>string</td>
                             <td>null</td>
-                            <td> </td>
+                            <td>A property to uniquely identify a record in data.</td>
                         </tr>
                         <tr>
                             <td>metaKeySelection</td>
@@ -2172,6 +2172,12 @@ export class DataTableStateDemo extends Component {
                             <td>A function to implement custom export. Need to return string value. <br />
                                 event.data: Field data. <br />
                                 event.rows: Column field.</td>
+                        </tr>
+                        <tr>
+                            <td>expandableRowGroups</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Makes row groups toggleable, default is false.</td>
                         </tr>
                     </tbody>
                 </table>
