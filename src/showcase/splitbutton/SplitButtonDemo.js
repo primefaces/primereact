@@ -4,36 +4,37 @@ import {SplitButton} from '../../components/splitbutton/SplitButton';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class SplitButtonDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
             items: [
                 {
-                    label: 'Update', 
-                    icon: 'pi pi-refresh', 
+                    label: 'Update',
+                    icon: 'pi pi-refresh',
                     command: (e) => {
                         this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
                     }
                 },
                 {
-                    label: 'Delete', 
+                    label: 'Delete',
                     icon: 'pi pi-times',
                     command: (e) => {
                         this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
                     }
                 },
                 {
-                    label: 'React Website', 
+                    label: 'React Website',
                     icon: 'pi pi-external-link',
                     command:(e) => {
                         window.location.href = 'https://facebook.github.io/react/'
                     }
                 },
-                {   label: 'Upload', 
-                    icon: 'pi pi-upload', 
+                {   label: 'Upload',
+                    icon: 'pi pi-upload',
                     command:(e) => {
                         window.location.hash = "/fileupload"
                     }
@@ -43,7 +44,7 @@ export class SplitButtonDemo extends Component {
 
         this.save = this.save.bind(this);
     }
-    
+
     save() {
         this.growl.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
@@ -55,6 +56,10 @@ export class SplitButtonDemo extends Component {
                     <div className="feature-intro">
                         <h1>SplitButton</h1>
                         <p>SplitButton groups a set of commands in an overlay with a default command.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("splitButton")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -98,38 +103,38 @@ import {SplitButton} from 'primereact/splitbutton';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p> 
+                        <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p>
                         <CodeHighlight className="language-javascript">
 {`
 export class SplitButtonDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
             items: [
                 {
-                    label: 'Update', 
-                    icon: 'pi pi-refresh', 
+                    label: 'Update',
+                    icon: 'pi pi-refresh',
                     command: (e) => {
                         this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
                     }
                 },
                 {
-                    label: 'Delete', 
+                    label: 'Delete',
                     icon: 'pi pi-times',
                     command: (e) => {
                         this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
                     }
                 },
                 {
-                    label: 'React Website', 
+                    label: 'React Website',
                     icon: 'pi pi-external-link',
                     command:(e) => {
                         window.location.href = 'https://facebook.github.io/react/'
                     }
                 },
-                {   label: 'Upload', 
-                    icon: 'pi pi-upload', 
+                {   label: 'Upload',
+                    icon: 'pi pi-upload',
                     command:(e) => {
                         window.location.hash = "/fileupload"
                     }
@@ -139,7 +144,7 @@ export class SplitButtonDemo extends Component {
 
         this.save = this.save.bind(this);
     }
-    
+
     save() {
         this.growl.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
@@ -150,7 +155,7 @@ export class SplitButtonDemo extends Component {
         )
     }
 }
-    
+
 `}
 </CodeHighlight>
 
@@ -159,7 +164,7 @@ export class SplitButtonDemo extends Component {
 
                         <h3>Severity</h3>
                         <p>Different color options are available as severity levels.</p>
-                        
+
                         <ul>
                             <li>.p-button-secondary</li>
                             <li>.p-button-success</li>
@@ -273,7 +278,7 @@ export class SplitButtonDemo extends Component {
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <h3>Events</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -333,34 +338,34 @@ import {SplitButton} from 'primereact/splitbutton';
 import {Growl} from 'primereact/growl';
 
 export class SplitButtonDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
             items: [
                 {
-                    label: 'Update', 
-                    icon: 'pi pi-refresh', 
+                    label: 'Update',
+                    icon: 'pi pi-refresh',
                     command: (e) => {
                         this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
                     }
                 },
                 {
-                    label: 'Delete', 
+                    label: 'Delete',
                     icon: 'pi pi-times',
                     command: (e) => {
                         this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
                     }
                 },
                 {
-                    label: 'React Website', 
+                    label: 'React Website',
                     icon: 'pi pi-external-link',
                     command:(e) => {
                         window.location.href = 'https://facebook.github.io/react/'
                     }
                 },
-                {   label: 'Upload', 
-                    icon: 'pi pi-upload', 
+                {   label: 'Upload',
+                    icon: 'pi pi-upload',
                     command:(e) => {
                         window.location.hash = "/fileupload"
                     }
@@ -370,7 +375,7 @@ export class SplitButtonDemo extends Component {
 
         this.save = this.save.bind(this);
     }
-    
+
     save() {
         this.growl.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
@@ -402,7 +407,7 @@ export class SplitButtonDemo extends Component {
         )
     }
 }
-    
+
 `}
 </CodeHighlight>
                     </TabPanel>

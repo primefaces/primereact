@@ -4,17 +4,18 @@ import { Slider } from '../../components/slider/Slider';
 import { InputText } from '../../components/inputtext/InputText';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class SliderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             val1: null,
-            val2: 50, 
+            val2: 50,
             val3: null,
             val4: null,
-            rangeValues: [20, 80] 
+            rangeValues: [20, 80]
         };
         this.onChangeSlider1 = this.onChangeSlider1.bind(this);
         this.onChangeSlider2 = this.onChangeSlider2.bind(this);
@@ -58,6 +59,10 @@ export class SliderDemo extends Component {
                     <div className="feature-intro">
                         <h1>Slider</h1>
                         <p>Slider is a component to provide input using dragging of a handle.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("slider")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -106,7 +111,7 @@ import {Slider} from 'primereact/slider';
 
             <h3>Getting Started</h3>
             <p>Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
-                    
+
 <CodeHighlight className="language-jsx">
 {`
 <Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
@@ -290,12 +295,12 @@ export class SliderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             val1: null,
-            val2: 50, 
+            val2: 50,
             val3: null,
             val4: null,
-            rangeValues: [20, 80] 
+            rangeValues: [20, 80]
         };
         this.onChangeSlider1 = this.onChangeSlider1.bind(this);
         this.onChangeSlider2 = this.onChangeSlider2.bind(this);
