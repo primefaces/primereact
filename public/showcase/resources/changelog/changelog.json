@@ -789,7 +789,7 @@
             },
             {
                 "number": 896,
-                "title": "DataTable: alwaysShowPaginator prop not used",
+                "title": "Data*: alwaysShowPaginator prop not used",
                 "url": "https://github.com/primefaces/primereact/issues/896"
             }
         ],
@@ -865,21 +865,21 @@
         "dataview": [
             {
                 "number": 896,
-                "title": "DataTable: alwaysShowPaginator prop not used",
+                "title": "Data*: alwaysShowPaginator prop not used",
                 "url": "https://github.com/primefaces/primereact/issues/896"
             }
         ],
         "paginator": [
             {
                 "number": 896,
-                "title": "DataTable: alwaysShowPaginator prop not used",
+                "title": "Data*: alwaysShowPaginator prop not used",
                 "url": "https://github.com/primefaces/primereact/issues/896"
             }
         ],
         "treetable": [
             {
                 "number": 896,
-                "title": "DataTable: alwaysShowPaginator prop not used",
+                "title": "Data*: alwaysShowPaginator prop not used",
                 "url": "https://github.com/primefaces/primereact/issues/896"
             }
         ],
