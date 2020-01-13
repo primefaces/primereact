@@ -17,7 +17,7 @@ export class HomeComponent extends Component {
                     <p className="features-tagline">Congratulations! <span role="img" aria-label="celebrate">🎉</span> Your quest to find the UI library for React is complete.</p>
 
                     <p className="features-description">PrimeReact is a collection of rich UI components for React. All widgets are open source and free to use under MIT License. PrimeReact is developed by PrimeTek Informatics,
-                        a vendor with years of expertise in developing open source UI solutions. For project news and updates, please <a href="https://twitter.com/primereact">follow us on twitter</a> and <a href="https://www.primefaces.org/category/primereact/">visit our blog</a>.</p>
+                        a vendor with years of expertise in developing open source UI solutions. For project news and updates, please <a href="https://twitter.com/primereact" className="layout-content-link">follow us on twitter</a> and <a href="https://www.primefaces.org/category/primereact/" className="layout-content-link">visit our blog</a>.</p>
 
                     <div className="p-grid">
                         <div className="p-col-12 p-md-4">
@@ -34,7 +34,7 @@ export class HomeComponent extends Component {
                                 <img alt="opensource" src="showcase/resources/images/home/react-opensource.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">OPEN SOURCE</span>
-                                    <p>Hosted at <a href="https://github.com/primefaces/primereact">GitHub</a>, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
+                                    <p>Hosted at <a href="https://github.com/primefaces/primereact" className="layout-content-link">GitHub</a>, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ export class HomeComponent extends Component {
                 </div>
                 <div className="templates">
                     <h3>Free Application Template for PrimeReact</h3>
-                    <p>Sigma is a free and open source admin template based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>.</p>
+                    <p>Sigma is a free and open source admin template based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>.</p>
 
                     <div className="p-grid">
                         <div className="p-col-12">
@@ -137,7 +137,7 @@ export class HomeComponent extends Component {
                 <div className="templates">
 
                     <h3>Premium Application Templates for PrimeReact</h3>
-                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates
+                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>, develop awesome applications in no time using the premium templates
                         of PrimeReact and impress your users.</p>
 
                     <div className="p-grid templates-grid">
