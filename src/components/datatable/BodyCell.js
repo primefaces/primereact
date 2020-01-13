@@ -19,7 +19,7 @@ export class BodyCell extends Component {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
     }
-    
+
     onExpanderClick(event) {
         if (this.props.onRowToggle) {
             this.props.onRowToggle({
@@ -27,10 +27,10 @@ export class BodyCell extends Component {
                 data: this.props.rowData
             });
         }
-        
+
         event.preventDefault();
     }
-    
+
     onKeyDown(event) {
         if (this.props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
@@ -42,7 +42,7 @@ export class BodyCell extends Component {
             }
         }
     }
-    
+
     onClick() {
         if (this.props.editMode !== 'row') {
             this.editingCellClick = true;
@@ -54,7 +54,7 @@ export class BodyCell extends Component {
 
                 if (this.props.editorValidatorEvent === 'click') {
                     this.bindDocumentEditListener();
-                }          
+                }
             }
         }
     }
@@ -64,11 +64,11 @@ export class BodyCell extends Component {
             this.switchCellToViewMode(true);
         }
     }
-    
+
     onEditorFocus(event) {
         this.onClick(event);
     }
-    
+
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
             this.documentEditListener = (event) => {
@@ -80,11 +80,11 @@ export class BodyCell extends Component {
             };
 
             this.editingCellClick = false;
-            
+
             document.addEventListener('click', this.documentEditListener);
         }
     }
-    
+
     closeCell() {
         this.setState({
             editing: false
@@ -113,7 +113,7 @@ export class BodyCell extends Component {
             this.closeCell();
         }
     }
-    
+
     unbindDocumentEditListener() {
         if (this.documentEditListener) {
             document.removeEventListener('click', this.documentEditListener);
@@ -130,7 +130,7 @@ export class BodyCell extends Component {
 
         return null;
     }
-        
+
     componentDidUpdate() {
         if (this.props.editMode !== 'row' && this.container && this.props.editor) {
             clearTimeout(this.tabindexTimeout);
@@ -140,7 +140,7 @@ export class BodyCell extends Component {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
-                
+
                 this.keyHelper.tabIndex = -1;
             }
             else {
@@ -218,7 +218,7 @@ export class BodyCell extends Component {
                     content = ObjectUtils.resolveFieldData(this.props.rowData, this.props.field);
             }
         }
-        
+
         if (this.props.responsive) {
             header = <span className="p-column-title">{this.props.header}</span>;
         }
@@ -228,7 +228,7 @@ export class BodyCell extends Component {
             editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
             /* eslint-enable */
         }
-                       
+
         return (
             <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.bodyStyle||this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan} onBlur={this.onBlur}>
