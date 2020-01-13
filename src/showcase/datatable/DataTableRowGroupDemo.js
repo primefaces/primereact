@@ -12,10 +12,11 @@ export class DataTableRowGroupDemo extends Component {
     constructor() {
         super();
         this.state = {
-            car: null
+            car: null,
+            expandedRows: null
         };
 
-        this.carservice = new CarService()
+        this.carservice = new CarService();
         this.headerTemplate = this.headerTemplate.bind(this);
         this.footerTemplate = this.footerTemplate.bind(this);
     }
@@ -29,10 +30,11 @@ export class DataTableRowGroupDemo extends Component {
     }
 
     footerTemplate(data, index) {
-        return ([
-                    <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>,
-                    <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
-            ]
+        return (
+            <React.Fragment>
+                <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>
+                <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
+            </React.Fragment>
         );
     }
 
@@ -67,8 +69,17 @@ export class DataTableRowGroupDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <DataTable header="Toggleable Row Groups" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
+                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}
+                        expandableRowGroups={true} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}>
+                        <Column field="vin" header="Vin" />
+                        <Column field="year" header="Year" />
+                        <Column field="color" header="Color" />
+                        <Column field="price" header="Price" />
+                    </DataTable>
+
                     <DataTable header="SubHeader" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
-                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
+                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="color" header="Color" />
@@ -113,7 +124,8 @@ export class DataTableRowGroupDemo extends Component {
     constructor() {
         super();
         this.state = {
-            car: null
+            car: null,
+            expandedRows: null
         };
 
         this.carservice = new CarService()
@@ -130,10 +142,11 @@ export class DataTableRowGroupDemo extends Component {
     }
 
     footerTemplate(data, index) {
-        return ([
-                    <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>,
-                    <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
-            ]
+        return (
+            <React.Fragment>
+                <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>
+                <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
+            </React.Fragment>
         );
     }
 
@@ -164,8 +177,17 @@ export class DataTableRowGroupDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
+                    <DataTable header="Toggleable Row Groups" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
+                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}
+                        expandableRowGroups={true} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}>
+                        <Column field="vin" header="Vin" />
+                        <Column field="year" header="Year" />
+                        <Column field="color" header="Color" />
+                        <Column field="price" header="Price" />
+                    </DataTable>
+
                     <DataTable header="SubHeader" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
-                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
+                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} style={{marginTop:'30px'}}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="color" header="Color" />
