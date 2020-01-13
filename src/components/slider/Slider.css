@@ -10,7 +10,7 @@
 	-ms-touch-action: none;
 	touch-action: none;
 }
-.p-slider-rock {
+.p-slider-min-handle {
 	z-index: 2
 }
 .p-slider .p-slider-range {
