@@ -235,7 +235,7 @@ export class Slider extends Component {
             <span
               onMouseDown={event => this.onMouseDown(event, index)}
               onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
-              className={`p-slider-handle ${leftValue > 85 ? 'p-slider-min-handle' : ''} `}
+              className={`p-slider-handle ${leftValue > 50 ? 'p-slider-min-handle' : ''} `}
               style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}>
             </span>
           )
