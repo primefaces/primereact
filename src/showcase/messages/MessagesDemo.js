@@ -6,9 +6,10 @@ import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class MessagesDemo extends Component {
-        
+
     constructor() {
         super();
         this.showSuccess = this.showSuccess.bind(this);
@@ -59,6 +60,10 @@ export class MessagesDemo extends Component {
                     <div className="feature-intro">
                         <h1>Messages</h1>
                         <p>Messages is used to display inline messages with various severities.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("messages")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -132,7 +137,7 @@ export class MessagesDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -494,7 +499,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                     <li>react-transition-group</li>
                 </ul>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -511,7 +516,7 @@ import {InputText} from 'primereact/components/inputtext';
 import {Button} from 'primereact/components/button';
 
 export class MessagesDemo extends Component {
-        
+
     constructor() {
         super();
         this.showSuccess = this.showSuccess.bind(this);
@@ -613,7 +618,7 @@ export class MessagesDemo extends Component {
                             <Message severity="error" text="Field is required" />
                         </div>
                     </div>
-                    
+
                     <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
                         <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
                         <Message severity="error" text="Field is required" />
