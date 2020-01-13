@@ -5,6 +5,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableColReorderDemo extends Component {
 
@@ -29,6 +30,10 @@ export class TreeTableColReorderDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Column Reorder</h1>
                         <p>Order of the columns can be changed using drag and drop.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -51,7 +56,7 @@ class TreeTableColReorderDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">

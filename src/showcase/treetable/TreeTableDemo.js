@@ -7,6 +7,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableDemo extends Component {
 
@@ -43,6 +44,10 @@ export class TreeTableDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable</h1>
                         <p>TreeTable is used to display hierarchical data in tabular format.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -157,42 +162,42 @@ import {TreeTable} from 'primereact/treetable';
 {`
 {
     "root":
-    [  
+    [
         {
             "key": "0",
-            "data":{  
+            "data":{
                 "name":"Applications",
                 "size":"100kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "0-0",
                     "data":{
                         "name":"React",
                         "size":"25kb",
                         "type":"Folder"
                     },
-                    "children":[  
-                        {  
+                    "children":[
+                        {
                             "key": "0-0-0",
-                            "data":{  
+                            "data":{
                                 "name":"react.app",
                                 "size":"10kb",
                                 "type":"Application"
                             }
                         },
-                        {  
+                        {
                             "key": "0-0-1",
-                            "data":{  
+                            "data":{
                                 "name":"native.app",
                                 "size":"10kb",
                                 "type":"Application"
                             }
                         },
-                        {  
+                        {
                             "key": "0-0-2",
-                            "data":{  
+                            "data":{
                                 "name":"mobile.app",
                                 "size":"5kb",
                                 "type":"Application"
@@ -200,17 +205,17 @@ import {TreeTable} from 'primereact/treetable';
                         }
                     ]
                 },
-                {  
+                {
                     "key": "0-1",
-                    "data":{  
+                    "data":{
                         "name":"editor.app",
                         "size":"25kb",
                         "type":"Application"
                     }
                 },
-                {  
+                {
                     "key": "0-2",
-                    "data":{  
+                    "data":{
                         "name":"settings.app",
                         "size":"50kb",
                         "type":"Application"
@@ -218,25 +223,25 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "1",
-            "data":{  
+            "data":{
                 "name":"Cloud",
                 "size":"20kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "1-0",
-                    "data":{  
+                    "data":{
                         "name":"backup-1.zip",
                         "size":"10kb",
                         "type":"Zip"
                     }
                 },
-                {  
+                {
                     "key": "1-1",
-                    "data":{  
+                    "data":{
                         "name":"backup-2.zip",
                         "size":"10kb",
                         "type":"Zip"
@@ -244,25 +249,25 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "2",
-            "data": {  
+            "data": {
                 "name":"Desktop",
                 "size":"150kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "2-0",
-                    "data":{  
+                    "data":{
                         "name":"note-meeting.txt",
                         "size":"50kb",
                         "type":"Text"
                     }
                 },
-                {  
+                {
                     "key": "2-1",
-                    "data":{  
+                    "data":{
                         "name":"note-todo.txt",
                         "size":"100kb",
                         "type":"Text"
@@ -270,33 +275,33 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "3",
-            "data":{  
+            "data":{
                 "name":"Documents",
                 "size":"75kb",
                 "type":"Folder"
             },
             "children":[
-                {  
+                {
                     "key": "3-0",
-                    "data":{  
+                    "data":{
                         "name":"Work",
                         "size":"55kb",
                         "type":"Folder"
                     },
-                    "children":[  
-                        {  
+                    "children":[
+                        {
                             "key": "3-0-0",
-                            "data":{  
+                            "data":{
                                 "name":"Expenses.doc",
                                 "size":"30kb",
                                 "type":"Document"
                             }
                         },
-                        {  
+                        {
                             "key": "3-0-1",
-                            "data":{  
+                            "data":{
                                 "name":"Resume.doc",
                                 "size":"25kb",
                                 "type":"Resume"
@@ -304,17 +309,17 @@ import {TreeTable} from 'primereact/treetable';
                         }
                     ]
                 },
-                {  
+                {
                     "key": "3-1",
-                    "data":{  
+                    "data":{
                         "name":"Home",
                         "size":"20kb",
                         "type":"Folder"
                     },
-                    "children":[  
-                        {  
+                    "children":[
+                        {
                             "key": "3-1-0",
-                            "data":{  
+                            "data":{
                                 "name":"Invoices",
                                 "size":"20kb",
                                 "type":"Text"
@@ -324,33 +329,33 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "4",
-            "data": {  
+            "data": {
                 "name":"Downloads",
                 "size":"25kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "4-0",
-                    "data": {  
+                    "data": {
                         "name":"Spanish",
                         "size":"10kb",
                         "type":"Folder"
                     },
-                    "children":[  
-                        {  
+                    "children":[
+                        {
                             "key": "4-0-0",
-                            "data":{  
+                            "data":{
                                 "name":"tutorial-a1.txt",
                                 "size":"5kb",
                                 "type":"Text"
                             }
                         },
-                        {  
+                        {
                             "key": "4-0-1",
-                            "data":{  
+                            "data":{
                                 "name":"tutorial-a2.txt",
                                 "size":"5kb",
                                 "type":"Text"
@@ -358,25 +363,25 @@ import {TreeTable} from 'primereact/treetable';
                         }
                     ]
                 },
-                {  
+                {
                     "key": "4-1",
-                    "data":{  
+                    "data":{
                         "name":"Travel",
                         "size":"15kb",
                         "type":"Text"
                     },
-                    "children":[  
-                        {  
+                    "children":[
+                        {
                             "key": "4-1-0",
-                            "data":{  
+                            "data":{
                                 "name":"Hotel.pdf",
                                 "size":"10kb",
                                 "type":"PDF"
                             }
                         },
-                        {  
+                        {
                             "key": "4-1-1",
-                            "data":{  
+                            "data":{
                                 "name":"Flight.pdf",
                                 "size":"5kb",
                                 "type":"PDF"
@@ -386,33 +391,33 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "5",
-            "data": {  
+            "data": {
                 "name":"Main",
                 "size":"50kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "5-0",
-                    "data":{  
+                    "data":{
                         "name":"bin",
                         "size":"50kb",
                         "type":"Link"
                     }
                 },
-                { 
-                    "key": "5-1", 
-                    "data":{  
+                {
+                    "key": "5-1",
+                    "data":{
                         "name":"etc",
                         "size":"100kb",
                         "type":"Link"
                     }
                 },
-                {  
+                {
                     "key": "5-2",
-                    "data":{  
+                    "data":{
                         "name":"var",
                         "size":"100kb",
                         "type":"Link"
@@ -420,25 +425,25 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "6",
-            "data":{  
+            "data":{
                 "name":"Other",
                 "size":"5kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "6-0",
-                    "data":{  
+                    "data":{
                         "name":"todo.txt",
                         "size":"3kb",
                         "type":"Text"
                     }
                 },
-                {  
+                {
                     "key": "6-1",
-                    "data":{  
+                    "data":{
                         "name":"logo.png",
                         "size":"2kb",
                         "type":"Picture"
@@ -446,33 +451,33 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "7",
-            "data":{  
+            "data":{
                 "name":"Pictures",
                 "size":"150kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "7-0",
-                    "data":{  
+                    "data":{
                         "name":"barcelona.jpg",
                         "size":"90kb",
                         "type":"Picture"
                     }
                 },
-                {  
+                {
                     "key": "7-1",
-                    "data":{  
+                    "data":{
                         "name":"primeng.png",
                         "size":"30kb",
                         "type":"Picture"
                     }
                 },
-                {  
+                {
                     "key": "7-2",
-                    "data":{  
+                    "data":{
                         "name":"prime.jpg",
                         "size":"30kb",
                         "type":"Picture"
@@ -480,25 +485,25 @@ import {TreeTable} from 'primereact/treetable';
                 }
             ]
         },
-        {  
+        {
             "key": "8",
-            "data":{  
+            "data":{
                 "name":"Videos",
                 "size":"1500kb",
                 "type":"Folder"
             },
-            "children":[  
-                {  
+            "children":[
+                {
                     "key": "8-0",
-                    "data":{  
+                    "data":{
                         "name":"primefaces.mkv",
                         "size":"1000kb",
                         "type":"Video"
                     }
                 },
-                {  
+                {
                     "key": "8-1",
-                    "data":{  
+                    "data":{
                         "name":"intro.avi",
                         "size":"500kb",
                         "type":"Video"
@@ -521,7 +526,7 @@ import {TreeTable} from 'primereact/treetable';
 import axios from 'axios';
 
 export class NodeService {
-    
+
     getTreeTableNodes() {
         return axios.get('showcase/resources/demo/data/treetablenodes.json')
                 .then(res => res.data.root);
@@ -596,7 +601,7 @@ export class TreeTableDemo extends Component {
             {field: 'name', header: 'Name'},
             {field: 'size', header: 'Size'},
             {field: 'type', header: 'Type'}
-        ]; 
+        ];
 
         let dynamicColumns = cols.map((col,i) => {
             return <Column key={col.field} field={col.field} header={col.header} />;
@@ -614,7 +619,7 @@ export class TreeTableDemo extends Component {
 </CodeHighlight>
                         <h3>Column Component</h3>
                         <p>Column component defines various options that are utilized by the TreeTable to specify corresponding features.</p>
-                        
+
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -805,10 +810,10 @@ export class TreeTableDemo extends Component {
                         </div>
 
                         <h3>Controlled vs Uncontrolled</h3>
-                        <p>Expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i> 
+                        <p>Expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
                         property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
                         both cases;</p>
-                    
+
                     <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
@@ -875,10 +880,10 @@ export class TreeTableDemo extends Component {
                         </p>
 
                         <h3>Templates</h3>
-                        <p>Field data of a corresponding row is displayed as the cell content by default, this can be customized using templating where current row data and column properties are passed to the body template. 
+                        <p>Field data of a corresponding row is displayed as the cell content by default, this can be customized using templating where current row data and column properties are passed to the body template.
                             On the other hand, <i>header</i> and <i>footer</i> properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly TreeTable itself
                             also provides <i>header</i> and <i>footer</i> properties for the main header and footer of the table.</p>
-                            
+
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
@@ -912,7 +917,7 @@ export class TreeTableTemplatingDemo extends Component {
     render() {
         const header = "File Viewer";
         const footer = <div style={{textAlign:'left'}}><Button icon="pi pi-refresh" tooltip="Reload"/></div>;
-        
+
         return (
             <TreeTable value={this.state.nodes} header={header} footer={footer}>
                 <Column field="name" header="Name" expander></Column>
@@ -961,17 +966,17 @@ export class TreeTableColGroupDemo extends Component {
                         children: [
                             {
                                 key: '0-0-0',
-                                data: { brand: 'Product A-1', lastYearSale: '20%', thisYearSale: '10%', lastYearProfit: '$24,406.00', thisYearProfit: '$13,342' }, 
+                                data: { brand: 'Product A-1', lastYearSale: '20%', thisYearSale: '10%', lastYearProfit: '$24,406.00', thisYearProfit: '$13,342' },
                             },
                             {
                                 key: '0-0-1',
-                                data: { brand: 'Product A-2', lastYearSale: '5%', thisYearSale: '10%', lastYearProfit: '$10,000.00', thisYearProfit: '$10,000' }, 
+                                data: { brand: 'Product A-2', lastYearSale: '5%', thisYearSale: '10%', lastYearProfit: '$10,000.00', thisYearProfit: '$10,000' },
                             }
                         ]
                     },
                     {
                         key: '0-1',
-                        data: { brand: 'Product B', lastYearSale: '26%', thisYearSale: '20%', lastYearProfit: '$24,000.00', thisYearProfit: '$23,000' }, 
+                        data: { brand: 'Product B', lastYearSale: '26%', thisYearSale: '20%', lastYearProfit: '$24,000.00', thisYearProfit: '$23,000' },
                     }
                 ]
             },
@@ -981,11 +986,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '1-0',
-                        data: { brand: 'Product X', lastYearSale: '50%', thisYearSale: '40%', lastYearProfit: '$223,132', thisYearProfit: '$156,061' }, 
+                        data: { brand: 'Product X', lastYearSale: '50%', thisYearSale: '40%', lastYearProfit: '$223,132', thisYearProfit: '$156,061' },
                     },
                     {
                         key: '1-1',
-                        data: { brand: 'Product Y', lastYearSale: '33%', thisYearSale: '56%', lastYearProfit: '$200,000', thisYearProfit: '$156,061' }, 
+                        data: { brand: 'Product Y', lastYearSale: '33%', thisYearSale: '56%', lastYearProfit: '$200,000', thisYearProfit: '$156,061' },
                     }
                 ]
             },
@@ -995,11 +1000,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '2-0',
-                        data: { brand: 'Product M', lastYearSale: '18%', thisYearSale: '2%', lastYearProfit: '$10,300', thisYearProfit: '$5,500' }, 
+                        data: { brand: 'Product M', lastYearSale: '18%', thisYearSale: '2%', lastYearProfit: '$10,300', thisYearProfit: '$5,500' },
                     },
                     {
                         key: '2-1',
-                        data: { brand: 'Product N', lastYearSale: '20%', thisYearSale: '3%', lastYearProfit: '$2,021', thisYearProfit: '$3,000' }, 
+                        data: { brand: 'Product N', lastYearSale: '20%', thisYearSale: '3%', lastYearProfit: '$2,021', thisYearProfit: '$3,000' },
                     }
                 ]
             },
@@ -1009,11 +1014,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '3-0',
-                        data: { brand: 'Product P', lastYearSale: '20%', thisYearSale: '16%', lastYearProfit: '$345,232', thisYearProfit: '$350,000' }, 
+                        data: { brand: 'Product P', lastYearSale: '20%', thisYearSale: '16%', lastYearProfit: '$345,232', thisYearProfit: '$350,000' },
                     },
                     {
                         key: '3-1',
-                        data: { brand: 'Product R', lastYearSale: '29%', thisYearSale: '6%', lastYearProfit: '$400,009', thisYearProfit: '$300,323' }, 
+                        data: { brand: 'Product R', lastYearSale: '29%', thisYearSale: '6%', lastYearProfit: '$400,009', thisYearProfit: '$300,323' },
                     }
                 ]
             },
@@ -1023,11 +1028,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '4-0',
-                        data: { brand: 'Product S', lastYearSale: '10%', thisYearSale: '40%', lastYearProfit: '$243,242', thisYearProfit: '$100,000' }, 
+                        data: { brand: 'Product S', lastYearSale: '10%', thisYearSale: '40%', lastYearProfit: '$243,242', thisYearProfit: '$100,000' },
                     },
                     {
                         key: '4-1',
-                        data: { brand: 'Product T', lastYearSale: '7%', thisYearSale: '39%', lastYearProfit: '$400,00', thisYearProfit: '$400,332' }, 
+                        data: { brand: 'Product T', lastYearSale: '7%', thisYearSale: '39%', lastYearProfit: '$400,00', thisYearProfit: '$400,332' },
                     }
                 ]
             },
@@ -1037,11 +1042,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '5-0',
-                        data: { brand: 'Product L', lastYearSale: '20%', thisYearSale: '40%', lastYearProfit: '$121,132', thisYearProfit: '$100,000' }, 
+                        data: { brand: 'Product L', lastYearSale: '20%', thisYearSale: '40%', lastYearProfit: '$121,132', thisYearProfit: '$100,000' },
                     },
                     {
                         key: '5-1',
-                        data: { brand: 'Product G', lastYearSale: '32%', thisYearSale: '25%', lastYearProfit: '$300,000', thisYearProfit: '$50,005' }, 
+                        data: { brand: 'Product G', lastYearSale: '32%', thisYearSale: '25%', lastYearProfit: '$300,000', thisYearProfit: '$50,005' },
                     }
                 ]
             },
@@ -1051,11 +1056,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '6-0',
-                        data: { brand: 'Product SH1', lastYearSale: '30%', thisYearSale: '6%', lastYearProfit: '$101,211', thisYearProfit: '$30,214' }, 
+                        data: { brand: 'Product SH1', lastYearSale: '30%', thisYearSale: '6%', lastYearProfit: '$101,211', thisYearProfit: '$30,214' },
                     },
                     {
                         key: '6-1',
-                        data: { brand: 'Product SH2', lastYearSale: '52%', thisYearSale: '6%', lastYearProfit: '$30,000', thisYearProfit: '$70,000' }, 
+                        data: { brand: 'Product SH2', lastYearSale: '52%', thisYearSale: '6%', lastYearProfit: '$30,000', thisYearProfit: '$70,000' },
                     }
                 ]
             },
@@ -1065,11 +1070,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '7-0',
-                        data: { brand: 'Product PN1', lastYearSale: '22%', thisYearSale: '25%', lastYearProfit: '$33,221', thisYearProfit: '$20,000' }, 
+                        data: { brand: 'Product PN1', lastYearSale: '22%', thisYearSale: '25%', lastYearProfit: '$33,221', thisYearProfit: '$20,000' },
                     },
                     {
                         key: '7-1',
-                        data: { brand: 'Product PN2', lastYearSale: '22%', thisYearSale: '25%', lastYearProfit: '$33,221', thisYearProfit: '$33,322' }, 
+                        data: { brand: 'Product PN2', lastYearSale: '22%', thisYearSale: '25%', lastYearProfit: '$33,221', thisYearProfit: '$33,322' },
                     }
                 ]
             },
@@ -1079,11 +1084,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '8-0',
-                        data: { brand: 'Product HT1', lastYearSale: '60%', thisYearSale: '36%', lastYearProfit: '$465,000', thisYearProfit: '$150,653' }, 
+                        data: { brand: 'Product HT1', lastYearSale: '60%', thisYearSale: '36%', lastYearProfit: '$465,000', thisYearProfit: '$150,653' },
                     },
                     {
                         key: '8-1',
-                        data: { brand: 'Product HT2', lastYearSale: '30%', thisYearSale: '20%', lastYearProfit: '$300,442', thisYearProfit: '$145,579' }, 
+                        data: { brand: 'Product HT2', lastYearSale: '30%', thisYearSale: '20%', lastYearProfit: '$300,442', thisYearProfit: '$145,579' },
                     }
                 ]
             },
@@ -1093,11 +1098,11 @@ export class TreeTableColGroupDemo extends Component {
                 children: [
                     {
                         key: '9-0',
-                        data: { brand: 'Product TS1', lastYearSale: '50%', thisYearSale: '34%', lastYearProfit: '$11,000', thisYearProfit: '$8,562' }, 
+                        data: { brand: 'Product TS1', lastYearSale: '50%', thisYearSale: '34%', lastYearProfit: '$11,000', thisYearProfit: '$8,562' },
                     },
                     {
                         key: '9-1',
-                        data: { brand: 'Product TS2', lastYearSale: '25%', thisYearSale: '20%', lastYearProfit: '$11,212', thisYearProfit: '$3,971' }, 
+                        data: { brand: 'Product TS2', lastYearSale: '25%', thisYearSale: '20%', lastYearProfit: '$11,212', thisYearProfit: '$3,971' },
                     }
                 ]
             }
@@ -1156,7 +1161,7 @@ export class TreeTableColGroupDemo extends Component {
 </CodeHighlight>
 
                         <h3>Pagination</h3>
-                        <p>Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. 
+                        <p>Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display.
                         See <Link to="/paginator">paginator</Link> component for more information about further customization options such as <i>paginatorTemplate</i>.</p>
 
                         <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
@@ -1196,7 +1201,7 @@ export class TreeTablePageDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however 
+                        <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.</p>
 
 <CodeHighlight className="language-javascript">
@@ -1263,7 +1268,7 @@ export class TreeTablePageDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <p>In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner. 
+                        <p>In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner.
                         In controlled mode, <i>sortField</i>, <i>sortOrder</i> and <i>onSort</i> properties need to be defined to control the sorting state.</p>
 
 <CodeHighlight className="language-jsx">
@@ -1298,7 +1303,7 @@ multiSortMeta.push({field: 'brand', order: -1});
 `}
 </CodeHighlight>
 
-                        <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however 
+                        <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
 <CodeHighlight className="language-jsx">
 {`
@@ -1334,9 +1339,9 @@ mysort(event) {
 </CodeHighlight>
 
                         <h3>Filtering</h3>
-                        <p>Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand, 
+                        <p>Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
                         in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
-            
+
 <CodeHighlight className="language-javascript">
 {`
 <TreeTable value={this.state.nodes}>
@@ -1348,8 +1353,8 @@ mysort(event) {
 `}
 </CodeHighlight>
 
-                        <p>An optional global filter feature is available to search all fields with the same keyword, 
-                                        to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>    
+                        <p>An optional global filter feature is available to search all fields with the same keyword,
+                                        to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>
 <CodeHighlight className="language-javascript">
 {`
 export class TreeTableFilterDemo extends Component {
@@ -1431,7 +1436,7 @@ export class TreeTableCustomFilterDemo extends Component {
                 {label: 'Volvo', value: 'Volvo'}
             ];
 
-        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter" 
+        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter"
                 value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
 
         let colors = [
@@ -1446,7 +1451,7 @@ export class TreeTableCustomFilterDemo extends Component {
             {label: 'Blue', value: 'Blue'}
         ];
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter" 
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter"
             value={this.state.colors} options={colors} onChange={this.onColorChange}/>
 
         return (
@@ -1463,7 +1468,7 @@ export class TreeTableCustomFilterDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner. 
+                        <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner.
                                     In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to be defined to control the filtering state.</p>
 
 <CodeHighlight className="language-javascript">
@@ -1501,7 +1506,7 @@ export class TreeTableDefaultFilteredDemo extends Component {
 
 `}
 </CodeHighlight>
-                    <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however 
+                    <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however
                                 it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.</p>
 
                     <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
@@ -1561,17 +1566,17 @@ export class TreeTableSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes1: [],
-            nodes2: [], 
-            nodes3: [], 
-            nodes4: [], 
-            nodes5: [], 
-            selectedNodeKey1: null, 
-            selectedNodeKey2: null, 
-            selectedNodeKeys1: [], 
-            selectedNodeKeys2: [], 
-            selectedNodeKeys3: [] 
+            nodes2: [],
+            nodes3: [],
+            nodes4: [],
+            nodes5: [],
+            selectedNodeKey1: null,
+            selectedNodeKey2: null,
+            selectedNodeKeys1: [],
+            selectedNodeKeys2: [],
+            selectedNodeKeys3: []
         };
 
         this.nodeservice = new NodeService();
@@ -1655,7 +1660,7 @@ export class TreeTableSelectionDemo extends Component {
                         <h3>Lazy</h3>
                         <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
                         that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
-                        
+
                         <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
@@ -1694,7 +1699,7 @@ export class TreeTableLazyDemo extends Component {
         for(let i = start; i < end; i++) {
             let node = {
                 key: i,
-                data: { 
+                data: {
                     name: 'Item ' + (start + i),
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + (start + i)
@@ -1704,7 +1709,7 @@ export class TreeTableLazyDemo extends Component {
 
             nodes.push(node);
         }
-        
+
         return nodes;
     }
 
@@ -1713,14 +1718,14 @@ export class TreeTableLazyDemo extends Component {
             this.setState({
                 loading: true
             });
-            
+
             setTimeout(() => {
                 this.loading = false;
                 let lazyNode = {...event.node};
-    
+
                 lazyNode.children = [
                     {
-                        data: { 
+                        data: {
                             name: lazyNode.data.name + ' - 0',
                             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                             type: 'File'
@@ -1737,7 +1742,7 @@ export class TreeTableLazyDemo extends Component {
 
                 let nodes = [...this.state.nodes];
                 nodes[event.node.key] = lazyNode;
-    
+
                 this.setState({
                     loading: false,
                     nodes: nodes
@@ -1752,7 +1757,7 @@ export class TreeTableLazyDemo extends Component {
         });
 
         //imitate delay of a backend call
-        setTimeout(() => {    
+        setTimeout(() => {
             this.setState({
                 first: event.first,
                 rows: event.rows,
@@ -1837,7 +1842,7 @@ export class TreeTableEditDemo extends Component {
                     onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
-        
+
     sizeEditor(props) {
         return this.inputTextEditor(props, 'size', '100%');
     }
@@ -1925,7 +1930,7 @@ export class TreeTableContextMenuDemo extends Component {
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
 
                 <TreeTable value={this.state.nodes}  expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                    contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                    contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
                     onContextMenu={event => this.cm.show(event.originalEvent)}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
@@ -1940,7 +1945,7 @@ export class TreeTableContextMenuDemo extends Component {
 </CodeHighlight>
 
                         <h3>Column Resize</h3>
-                        <p>Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
+                        <p>Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized.
                             In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.</p>
 <CodeHighlight className="language-jsx">
 {`
@@ -2011,7 +2016,7 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight> 
+</CodeHighlight>
 
                         <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.</p>
 
@@ -2028,7 +2033,7 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight> 
+</CodeHighlight>
 
                         <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
             <CodeHighlight className="language-jsx">
@@ -2040,7 +2045,7 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight> 
+</CodeHighlight>
 
                         <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
                         <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
@@ -2062,7 +2067,7 @@ export class TreeTableContextMenuDemo extends Component {
     .p-col-d {
         display: none;
     }
-    
+
     .p-col-m {
         display: inline-block;
     }
@@ -2070,7 +2075,7 @@ export class TreeTableContextMenuDemo extends Component {
 
 `}
 </CodeHighlight>
-                        
+
                         <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
@@ -2105,7 +2110,7 @@ export class TreeTableResponsiveDemo extends Component {
 
     render() {
         return (
-            <TreeTable value={this.state.nodes} responsive={true} header="Responsive TreeTable"> 
+            <TreeTable value={this.state.nodes} responsive={true} header="Responsive TreeTable">
                 <Column field="name" header="Name" body={this.nameTemplate} expander headerClassName="p-col-d"></Column>
                 <Column field="size" header="Size" className="p-col-d"></Column>
                 <Column field="type" header="Type" className="p-col-d"></Column>
