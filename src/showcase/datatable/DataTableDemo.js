@@ -5,6 +5,7 @@ import {Column} from '../../components/column/Column';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 
 export class DataTableDemo extends Component {
@@ -41,6 +42,10 @@ export class DataTableDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable</h1>
                         <p>DataTable displays data in tabular format.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

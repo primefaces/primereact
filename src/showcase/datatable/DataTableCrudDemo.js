@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Button} from "../../components/button/Button";
 import {Dialog} from "../../components/dialog/Dialog";
 import {InputText} from "../../components/inputtext/InputText";
@@ -90,6 +91,10 @@ export class DataTableCrudDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable</h1>
                         <p>This samples demonstrates a CRUD implementation using various PrimeReact components.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -106,8 +111,8 @@ export class DataTableCrudDemo extends Component {
                     <Dialog visible={this.state.displayDialog} style={{width: '300px'}} header="Car Details" modal={true} footer={dialogFooter} onHide={() => this.setState({displayDialog: false})}
                         blockScroll={false}>
                         {
-                            this.state.car && 
-                            
+                            this.state.car &&
+
                             <div className="p-grid p-fluid">
                                 <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
                                 <div className="p-col-8" style={{padding:'.5em'}}>
@@ -123,7 +128,7 @@ export class DataTableCrudDemo extends Component {
                                 <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="brand" onChange={(e) => {this.updateProperty('brand', e.target.value)}} value={this.state.car.brand}/>
                                 </div>
-                                
+
                                 <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="color">Color</label></div>
                                 <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="color" onChange={(e) => {this.updateProperty('color', e.target.value)}} value={this.state.car.color}/>
@@ -249,8 +254,8 @@ export class DataTableCrudDemo extends Component {
 
                     <Dialog visible={this.state.displayDialog} width="300px" header="Car Details" modal={true} footer={dialogFooter} onHide={() => this.setState({displayDialog: false})}>
                         {
-                            this.state.car && 
-                            
+                            this.state.car &&
+
                             <div className="p-grid p-fluid">
                                 <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="vin">Vin</label></div>
                                 <div className="p-col-8" style={{padding:'.5em'}}>
@@ -266,7 +271,7 @@ export class DataTableCrudDemo extends Component {
                                 <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="brand" onChange={(e) => {this.updateProperty('brand', e.target.value)}} value={this.state.car.brand}/>
                                 </div>
-                                
+
                                 <div className="p-col-4" style={{padding:'.75em'}}><label htmlFor="color">Color</label></div>
                                 <div className="p-col-8" style={{padding:'.5em'}}>
                                     <InputText id="color" onChange={(e) => {this.updateProperty('color', e.target.value)}} value={this.state.car.color}/>
