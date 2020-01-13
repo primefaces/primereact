@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class PolarAreaChartDemo extends Component {
@@ -39,6 +40,10 @@ export class PolarAreaChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>PolarAreaChart</h1>
                         <p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

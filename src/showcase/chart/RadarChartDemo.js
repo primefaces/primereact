@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class RadarChartDemo extends Component {
@@ -38,6 +39,10 @@ export class RadarChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>RadarChart</h1>
                         <p>A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

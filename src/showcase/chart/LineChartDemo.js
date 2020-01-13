@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class LineChartDemo extends Component {
@@ -23,7 +24,7 @@ export class LineChartDemo extends Component {
                     backgroundColor: '#66BB6A',
                     borderColor: '#66BB6A'
                 }
-            ]   
+            ]
         };
 
         const multiAxisData = {
@@ -90,7 +91,7 @@ export class LineChartDemo extends Component {
                     borderColor: '#FFA726',
                     backgroundColor: '#FFCC80'
                 }
-            ]   
+            ]
         };
 
         return (
@@ -99,6 +100,10 @@ export class LineChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>LineChart</h1>
                         <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -155,7 +160,7 @@ export class LineChartDemo extends Component {
                     backgroundColor: '#66BB6A',
                     borderColor: '#66BB6A'
                 }
-            ]   
+            ]
         };
 
         const multiAxisData = {
@@ -222,7 +227,7 @@ export class LineChartDemo extends Component {
                     borderColor: '#FFA726',
                     backgroundColor: '#FFCC80'
                 }
-            ]   
+            ]
         };
 
         return (
