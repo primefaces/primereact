@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableRowExpansionDemo extends Component {
 
@@ -58,11 +59,15 @@ export class DataTableRowExpansionDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Row Expansion</h1>
                         <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}     
+                    <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}
                             rowExpansionTemplate={this.rowExpansionTemplate} dataKey="vin">
                         <Column expander={true} style={{width: '3em'}} />
                         <Column field="vin" header="Vin" />
@@ -83,7 +88,7 @@ export class DataTableRowExpansionDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -150,7 +155,7 @@ export class DataTableRowExpansionDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}     
+                    <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}
                             rowExpansionTemplate={this.rowExpansionTemplate} dataKey="vin">
                         <Column expander={true} style={{width: '2em'}} />
                         <Column field="vin" header="Vin" />
