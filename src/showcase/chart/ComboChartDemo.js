@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class ComboChartDemo extends Component {
@@ -53,7 +54,7 @@ export class ComboChartDemo extends Component {
 				]
             }]
         };
-  
+
         const options = {
             responsive: true,
             title: {
@@ -72,6 +73,10 @@ export class ComboChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>Combo Chart</h1>
                         <p>Different chart types can be combined in the same graph.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -152,7 +157,7 @@ export class PieChartDemo extends Component {
 				]
             }]
         };
-  
+
         const options = {
             responsive: true,
             title: {
