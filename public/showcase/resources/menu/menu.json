@@ -224,7 +224,8 @@
                     "to": "/datatable",
                     "meta": [
                         "datatable"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "DataScroller",
@@ -378,7 +379,8 @@
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Lightbox",

@@ -59,7 +59,7 @@ export class AppTopbar extends Component {
         return (
             <div className="layout-topbar">
                 <div className="layout-topbar-left">
-                    <button className="p-link menu-button" onClick={this.onMenuButtonClick} aria-expanded={this.props.menuActive} aria-haspopup={true} aria-label="Menu">
+                    <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-expanded={this.props.menuActive} aria-haspopup={true} aria-label="Menu">
                         <i className="pi pi-bars"></i>
                     </button>
                     <Link to="/" className="logo" aria-label="PrimeReact logo">
@@ -76,7 +76,7 @@ export class AppTopbar extends Component {
                         <li role="none" className={classNames({ 'topbar-menuitem-active': this.props.activeTopbarItem === 'themes' })}
                             onClick={(e) => this.onTopbarItemClick(e, 'themes')}>
                             {/* eslint-disable */}
-                            <button role="menuitem" aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 'themes'} className="p-link">Themes</button>
+                            <button type="button" role="menuitem" aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 'themes'} className="p-link">Themes</button>
                             {/* eslint-enable */}
                             <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'themes'}>
                                 <ul role="menu" aria-label="Themes" className="topbar-submenu">
@@ -86,14 +86,14 @@ export class AppTopbar extends Component {
                                     <li role="none"><Link to="/icons" onClick={this.onThemesMenuRouteChange} role="menuitem"><i className="pi pi-fw pi-search" /><span>Icons</span></Link></li>
 
                                     <li role="none" className="topbar-submenu-header">FREE COMPONENT THEMES</li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'nova-light', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'nova-dark', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" /><span>Nova Dark</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'nova-colored', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" /><span>Nova Colored</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'luna-amber', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-amber.png" alt="Luna Amber" /><span>Luna Amber</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'luna-blue', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'luna-green', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" /><span>Luna Green</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'luna-pink', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></button></li>
-                                    <li role="none"><button className="p-link" onClick={e => this.onThemeChange(e, 'rhea', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-rhea.png" alt="Rhea" /><span>Rhea</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-light', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" /><span>Nova Light</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-dark', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" /><span>Nova Dark</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-colored', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" /><span>Nova Colored</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-amber', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-amber.png" alt="Luna Amber" /><span>Luna Amber</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-blue', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-green', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" /><span>Luna Green</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-pink', true)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" /><span>Luna Pink</span></button></li>
+                                    <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'rhea', false)} role="menuitem"><img src="showcase/resources/images/layouts/themeswitcher-rhea.png" alt="Rhea" /><span>Rhea</span></button></li>
                                 </ul>
                             </CSSTransition>
                         </li>
@@ -101,7 +101,7 @@ export class AppTopbar extends Component {
                         <li role="none" className={classNames({ 'topbar-menuitem-active': this.props.activeTopbarItem === 'templates' })}
                             onClick={(e) => this.onTopbarItemClick(e, 'templates')}>
                             {/* eslint-disable */}
-                            <button role="menuitem" aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 'templates'} className="p-link">Templates</button>
+                            <button type="button" role="menuitem" aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 'templates'} className="p-link">Templates</button>
                             {/* eslint-enable */}
                             <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'templates'}>
                                 <ul role="menu" aria-label="Templates" className="topbar-submenu">
@@ -112,25 +112,25 @@ export class AppTopbar extends Component {
 
                                     <li role="none" className="topbar-submenu-header">PREMIUM TEMPLATES</li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">new</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">NEW</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/sapphire-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">material</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">MATERIAL</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">material</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">material</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/avalon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">bootstrap</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">BOOTSTRAP</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/babylon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/resources/images/layouts/themeswitcher-babylon.png" alt="Babylon" /><span>Babylon</span></a>
                                     </li>
                                     <li role="none"><a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">dark mode</span></a>
+                                        <img src="showcase/resources/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">DARK MODE</span></a>
                                     </li>
                                 </ul>
                             </CSSTransition>
@@ -139,7 +139,7 @@ export class AppTopbar extends Component {
                         <li role="none" className={classNames('topbar-resources-submenu', { 'topbar-menuitem-active': this.props.activeTopbarItem === 'resources' })}
                             onClick={(e) => this.onTopbarItemClick(e, 'resources')}>
                             {/* eslint-disable */}
-                            <button role="menuitem" aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 'resources'} className="p-link">Resources</button>
+                            <button type="button" role="menuitem" aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 'resources'} className="p-link">Resources</button>
                             {/* eslint-enable */}
                             <CSSTransition classNames="topbar-submenu" timeout={{ enter: 0, exit: 0 }} in={this.props.activeTopbarItem === 'resources'}>
                                 <ul role="menu" aria-label="Resources" className="topbar-submenu">

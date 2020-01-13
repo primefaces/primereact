@@ -86,6 +86,17 @@
                             &:hover {
                                 background-color: #eeeeee;
                             }
+
+                            .layout-menuitem-badge {
+                                padding: 2px 4px;
+                                border-radius: 3px;
+                                color: #ffffff;
+                                font-weight: 700;
+                                font-size: 11px;
+                                margin-left: 8px;
+                                background-color: #484848;
+                                letter-spacing: 0.2px;
+                            }
                         }
                     }
                 }

@@ -28,7 +28,7 @@ export class DataTableSortDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Sort</h1>
-                        <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and 
+                        <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
                             used with metaKey.</p>
                     </div>
                 </div>
@@ -49,6 +49,14 @@ export class DataTableSortDemo extends Component {
                         <Column field="brand" header="Brand" sortable={true}/>
                         <Column field="color" header="Color" sortable={true}/>
                     </DataTable>
+
+                    <h3>Removable Sort</h3>
+                    <DataTable value={this.state.cars} removableSort={true}>
+                        <Column field="vin" header="Vin" sortable={true}/>
+                        <Column field="year" header="Year" sortable={true}/>
+                        <Column field="brand" header="Brand" sortable={true}/>
+                        <Column field="color" header="Color" sortable={true}/>
+                    </DataTable>
                 </div>
 
                 <DataTableSortDemoDoc></DataTableSortDemoDoc>
@@ -62,7 +70,7 @@ export class DataTableSortDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -95,7 +103,7 @@ export class DataTableSortDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Sort</h1>
-                        <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and 
+                        <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
                             used with metaKey.</p>
                     </div>
                 </div>

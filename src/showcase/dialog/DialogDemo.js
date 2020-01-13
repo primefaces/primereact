@@ -6,7 +6,7 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class DialogDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {visible: false};
@@ -40,10 +40,10 @@ export class DialogDemo extends Component {
                 </div>
 
                 <div className="content-section implementation dialog-demo">
-                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} blockScroll={true} footer={footer} onHide={this.onHide} maximizable>
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
                         His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Dialog>
 
@@ -61,7 +61,7 @@ export class DialogDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -80,9 +80,9 @@ import {Dialog} from 'primereact/dialog';
 <CodeHighlight className="language-jsx">
 {`
 <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={() => this.setState({visible: false})}>
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </Dialog>
 
@@ -230,7 +230,7 @@ const myIcon = (
                         <tr>
                             <td>blockScroll</td>
                             <td>boolean</td>
-                            <td>true</td>
+                            <td>false</td>
                             <td>Whether background scroll should be blocked when dialog is visible.</td>
                         </tr>
                         <tr>
@@ -321,7 +321,7 @@ const myIcon = (
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -335,7 +335,7 @@ import {Dialog} from 'primereact/dialog';
 import {Button} from 'primereact/button';
 
 export class DialogDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {visible: false};
@@ -370,9 +370,9 @@ export class DialogDemo extends Component {
 
                 <div className="content-section implementation">
                     <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
-                        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+                        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
                     </Dialog>
 

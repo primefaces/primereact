@@ -49,7 +49,7 @@ export class App extends Component {
         else
             this.setState({activeTopbarItem: event.item});
 
-        event.originalEvent.preventDefault();
+        //event.originalEvent.preventDefault();
     }
 
     onThemeChange(event) {

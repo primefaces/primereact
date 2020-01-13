@@ -194,6 +194,7 @@
                     font-weight: 700;
                     font-size: 11px;
                     margin-left: 8px;
+                    letter-spacing: 0.2px;
 
                     &.new {
                         @include background-gradient-top2bottom(#96c93d, #00b09b);
