@@ -6,6 +6,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableTemplatingDemo extends Component {
 
@@ -32,7 +33,7 @@ export class TreeTableTemplatingDemo extends Component {
     render() {
         const header = "File Viewer";
         const footer = <div style={{textAlign:'left'}}><Button icon="pi pi-refresh" tooltip="Reload"/></div>;
-        
+
         return (
             <div>
                 <TreeTableSubmenu />
@@ -41,6 +42,10 @@ export class TreeTableTemplatingDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Templating</h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -64,7 +69,7 @@ class TreeTableTemplatingDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -103,7 +108,7 @@ export class TreeTableTemplatingDemo extends Component {
     render() {
         const header = "File Viewer";
         const footer = <div style={{textAlign:'left'}}><Button icon="pi pi-refresh" tooltip="Reload"/></div>;
-        
+
         return (
             <div>
                 <div className="content-section introduction">
