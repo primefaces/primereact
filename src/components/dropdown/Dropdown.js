@@ -513,9 +513,21 @@ export class Dropdown extends Component {
     
     filter(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
-        let optionLabel = this.getOptionLabel(option);
+        let filterElements = this.props.filterBy.split(",");
+        let hasFilterElement;
+
+        for (let filter of filterElements) {
+            hasFilterElement = hasFilterElement
+                ? hasFilterElement ||
+                  option[filter]
+                      .toLowerCase()
+                      .indexOf(filterValue.toLowerCase()) > -1
+                : option[filter]
+                      .toLowerCase()
+                      .indexOf(filterValue.toLowerCase()) > -1;
+        }
         
-        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+        return hasFilterElement;
     }
     
     hasFilter() {
