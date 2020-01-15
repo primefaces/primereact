@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Rating } from '../../components/rating/Rating'
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class RatingDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
-            val1: null, 
+        this.state = {
+            val1: null,
             val2: null
         };
     }
@@ -20,20 +21,24 @@ export class RatingDemo extends Component {
                     <div className="feature-intro">
                         <h1>Rating</h1>
                         <p>Rating componentsis a star based selection input.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("rating")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <h3 className="first">Basic {this.state.val1}</h3>
                     <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
-    
-                    <h3>No Cancel {this.state.val2}</h3> 
+
+                    <h3>No Cancel {this.state.val2}</h3>
                     <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
-                    <h3>ReadOnly</h3> 
+                    <h3>ReadOnly</h3>
                     <Rating value={5} readonly={true} stars={10} cancel={false} />
 
-                    <h3>Disabled</h3> 
+                    <h3>Disabled</h3>
                     <Rating value={8} disabled={true} stars={10} />
                 </div>
 
@@ -64,7 +69,7 @@ import {Rating} from 'primereact/rating';
 
                         <h3>Getting Started</h3>
                         <p>Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
-                        
+
                         <CodeHighlight className="language-jsx">
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
@@ -74,7 +79,7 @@ import {Rating} from 'primereact/rating';
 
                         <h3>Number of Stars</h3>
                         <p>Number of stars to display is defined with <i>stars</i> property, default is 5.</p>
-                        
+
                         <CodeHighlight className="language-jsx">
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} stars={5} />
@@ -84,7 +89,7 @@ import {Rating} from 'primereact/rating';
 
                         <h3>Cancel</h3>
                         <p>A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.</p>
-                        
+
                         <CodeHighlight className="language-jsx">
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} cancel={5} />
@@ -167,7 +172,7 @@ import {Rating} from 'primereact/rating';
                                 </tbody>
                             </table>
                         </div>
-                            
+
                         <h3>Events</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -238,8 +243,8 @@ export class RatingDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
-            val1: null, 
+        this.state = {
+            val1: null,
             val2: null
         };
     }
@@ -257,21 +262,21 @@ export class RatingDemo extends Component {
                 <div className="content-section implementation">
                     <h3 className="first">Basic {this.state.val1}</h3>
                     <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
-    
-                    <h3>No Cancel {this.state.val2}</h3> 
+
+                    <h3>No Cancel {this.state.val2}</h3>
                     <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
-                    <h3>ReadOnly</h3> 
+                    <h3>ReadOnly</h3>
                     <Rating value={5} readonly={true} stars={10} cancel={false} />
 
-                    <h3>Disabled</h3> 
+                    <h3>Disabled</h3>
                     <Rating value={8} disabled={true} stars={10} />
                 </div>
             </div>
         )
     }
 }
-                                
+
 `}
                         </CodeHighlight>
                     </TabPanel>

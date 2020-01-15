@@ -188,7 +188,7 @@
 
 @mixin link($hasChildSelector: false) {
     @if $hasChildSelector {
-        > a, .p-link {
+        > a, > .p-link {
             @content;
         }
     } @else {

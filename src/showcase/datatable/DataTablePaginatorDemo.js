@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Button} from "../../components/button/Button";
 
 export class DataTablePaginatorDemo extends Component {
@@ -32,6 +33,10 @@ export class DataTablePaginatorDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Paginator</h1>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -55,7 +60,7 @@ export class DataTablePaginatorDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class MultiSelectDemo extends Component {
 
@@ -62,6 +63,10 @@ export class MultiSelectDemo extends Component {
                     <div className="feature-intro">
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("multiSelect")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -450,7 +455,7 @@ import React, {Component} from 'react';
 import {MultiSelect} from 'primereact/multiselect';
 
 export class MultiSelectDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {

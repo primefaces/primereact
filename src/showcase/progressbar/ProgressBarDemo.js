@@ -4,13 +4,14 @@ import {ProgressBar} from '../../components/progressbar/ProgressBar';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ProgressBarDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            value1: 0, 
+            value1: 0,
             value2: 50,
             value3: 40
         };
@@ -57,6 +58,10 @@ export class ProgressBarDemo extends Component {
                     <div className="feature-intro">
                         <h1>ProgressBar</h1>
                         <p>ProgressBar is a process status indicator</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("progressBar")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -86,7 +91,7 @@ export class ProgressBarDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -234,7 +239,7 @@ export class ProgressBarDemo extends Component {
     constructor() {
         super();
         this.state = {
-            value1: 0, 
+            value1: 0,
             value2: 50,
             value3: 40
         };

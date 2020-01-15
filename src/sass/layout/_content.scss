@@ -145,7 +145,6 @@
 
                 p {
                     color:  #333333;
-                    font-size: 16px;
                     line-height: 24px;
                     margin: 10px 0;
                 }
@@ -155,7 +154,8 @@
                 }
 
                 a {
-                    color: #03c4e8;
+                    color: #2f4054;
+                    font-weight: bold;
                 }
 
                 .btn-viewsource {
@@ -292,6 +292,11 @@
             }
         }
 
+        .layout-content-link {
+            color: #2f4054;
+            font-weight: bold;
+        }
+
         /* Home Component */
         .home {
             p {
@@ -419,9 +424,8 @@
 
                     }
 
-                    > a{
+                    > a {
                         font-weight: bold;
-                        color: #03c4e8;
                     }
                 }
             }
@@ -465,7 +469,7 @@
                 h3 {
                     font-size:24px;
                     color: #333333;
-                    margin-bottom: 25px;
+                    margin-bottom: 14px;
                 }
 
                 h4 {
@@ -475,6 +479,10 @@
 
                 img {
                     width: 100%;
+                }
+
+                p {
+                    margin-bottom: 25px;
                 }
             }
 

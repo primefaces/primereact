@@ -8,6 +8,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableEditDemo extends Component {
 
@@ -19,7 +20,7 @@ export class DataTableEditDemo extends Component {
         };
         this.clonedCars = {};
         this.carservice = new CarService();
-        
+
         this.vinEditor = this.vinEditor.bind(this);
         this.yearEditor = this.yearEditor.bind(this);
         this.brandEditor = this.brandEditor.bind(this);
@@ -37,26 +38,26 @@ export class DataTableEditDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars1: data}));
         this.carservice.getCarsSmall().then(data => this.setState({cars2: data}));
     }
-    
+
     /* Cell Editing */
     onEditorValueChange(props, value) {
         let updatedCars = [...props.value];
         updatedCars[props.rowIndex][props.field] = value;
         this.setState({cars1: updatedCars});
     }
-    
+
     inputTextEditor(props, field) {
         return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
-    
+
     vinEditor(props) {
         return this.inputTextEditor(props, 'vin');
     }
-    
+
     yearEditor(props) {
         return this.inputTextEditor(props, 'year');
     }
-    
+
     brandEditor(props) {
         let brands = [
             {label: 'Audi', value: 'Audi'},
@@ -70,17 +71,17 @@ export class DataTableEditDemo extends Component {
             {label: 'VW', value: 'VW'},
             {label: 'Volvo', value: 'Volvo'}
         ];
-        
+
         return (
-            <Dropdown value={props.value[props.rowIndex].brand} options={brands} 
+            <Dropdown value={props.value[props.rowIndex].brand} options={brands}
                     onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
         );
     }
-    
+
     colorEditor(props) {
         return this.inputTextEditor(props, 'color');
     }
-        
+
     requiredValidator(props) {
         let value = props.rowData[props.field];
         return value && value.length > 0;
@@ -92,7 +93,7 @@ export class DataTableEditDemo extends Component {
         updatedCars[props.rowIndex][props.field] = value;
         this.setState({cars2: updatedCars});
     }
-    
+
     editorForRowEditing(props, field) {
         return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChangeForRowEditing(props, e.target.value)} />;
     }
@@ -134,6 +135,10 @@ export class DataTableEditDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Edit</h1>
                         <p>Cell and Row editing provides a rapid and user friendly way to manipulate data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -169,7 +174,7 @@ export class DataTableEditDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -195,7 +200,7 @@ export class DataTableEditDemo extends Component {
         };
         this.clonedCars = {};
         this.carservice = new CarService();
-        
+
         this.vinEditor = this.vinEditor.bind(this);
         this.yearEditor = this.yearEditor.bind(this);
         this.brandEditor = this.brandEditor.bind(this);
@@ -213,26 +218,26 @@ export class DataTableEditDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars1: data}));
         this.carservice.getCarsSmall().then(data => this.setState({cars2: data}));
     }
-    
+
     /* Cell Editing */
     onEditorValueChange(props, value) {
         let updatedCars = [...props.value];
         updatedCars[props.rowIndex][props.field] = value;
         this.setState({cars1: updatedCars});
     }
-    
+
     inputTextEditor(props, field) {
         return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
-    
+
     vinEditor(props) {
         return this.inputTextEditor(props, 'vin');
     }
-    
+
     yearEditor(props) {
         return this.inputTextEditor(props, 'year');
     }
-    
+
     brandEditor(props) {
         let brands = [
             {label: 'Audi', value: 'Audi'},
@@ -246,17 +251,17 @@ export class DataTableEditDemo extends Component {
             {label: 'VW', value: 'VW'},
             {label: 'Volvo', value: 'Volvo'}
         ];
-        
+
         return (
-            <Dropdown value={props.value[props.rowIndex].brand} options={brands} 
+            <Dropdown value={props.value[props.rowIndex].brand} options={brands}
                     onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
         );
     }
-    
+
     colorEditor(props) {
         return this.inputTextEditor(props, 'color');
     }
-        
+
     requiredValidator(props) {
         let value = props.rowData[props.field];
         return value && value.length > 0;
@@ -268,7 +273,7 @@ export class DataTableEditDemo extends Component {
         updatedCars[props.rowIndex][props.field] = value;
         this.setState({cars2: updatedCars});
     }
-    
+
     editorForRowEditing(props, field) {
         return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChangeForRowEditing(props, e.target.value)} />;
     }

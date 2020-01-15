@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {InputSwitch} from '../../components/inputswitch/InputSwitch';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class InputSwitchDemo extends Component {
 
@@ -21,6 +22,10 @@ export class InputSwitchDemo extends Component {
                     <div className="feature-intro">
                         <h1>InputSwitch</h1>
                         <p>InputSwitch is used to select a boolean value.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputSwitch")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

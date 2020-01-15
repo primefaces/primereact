@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableStateDemo extends Component {
 
@@ -38,8 +39,12 @@ export class DataTableStateDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - State</h1>
-                        <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again, 
+                        <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again,
                             table would render the data using its last settings.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -61,7 +66,7 @@ export class DataTableStateDemo extends Component {
                         <Column field="brand" header="Brand" sortable={true} filter={true}/>
                         <Column field="color" header="Color" sortable={true} filter={true}/>
                     </DataTable>
-                    
+
                 </div>
 
                 <DataTableStateDemoDoc></DataTableStateDemoDoc>
@@ -75,7 +80,7 @@ export class DataTableStateDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -90,6 +95,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableStateDemo extends Component {
 
@@ -123,7 +129,7 @@ export class DataTableStateDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - State</h1>
-                        <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again, 
+                        <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again,
                             table would render the data using its last settings.</p>
                     </div>
                 </div>
@@ -146,7 +152,7 @@ export class DataTableStateDemo extends Component {
                         <Column field="brand" header="Brand" sortable={true} filter={true}/>
                         <Column field="color" header="Color" sortable={true} filter={true}/>
                     </DataTable>
-                    
+
                 </div>
             </div>
         );

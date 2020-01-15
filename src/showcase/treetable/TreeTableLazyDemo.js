@@ -4,6 +4,7 @@ import { Column } from "../../components/column/Column";
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableLazyDemo extends Component {
 
@@ -37,7 +38,7 @@ export class TreeTableLazyDemo extends Component {
         for(let i = 0; i < rows; i++) {
             let node = {
                 key: (first + i),
-                data: { 
+                data: {
                     name: 'Item ' + (first + i),
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + (first + i)
@@ -47,7 +48,7 @@ export class TreeTableLazyDemo extends Component {
 
             nodes.push(node);
         }
-        
+
         return nodes;
     }
 
@@ -56,14 +57,14 @@ export class TreeTableLazyDemo extends Component {
             this.setState({
                 loading: true
             });
-            
+
             setTimeout(() => {
                 this.loading = false;
                 let lazyNode = {...event.node};
-    
+
                 lazyNode.children = [
                     {
-                        data: { 
+                        data: {
                             name: lazyNode.data.name + ' - 0',
                             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                             type: 'File'
@@ -85,7 +86,7 @@ export class TreeTableLazyDemo extends Component {
 
                     return node;
                 });
-    
+
                 this.setState({
                     loading: false,
                     nodes: nodes
@@ -100,7 +101,7 @@ export class TreeTableLazyDemo extends Component {
         });
 
         //imitate delay of a backend call
-        setTimeout(() => {    
+        setTimeout(() => {
             this.setState({
                 first: event.first,
                 rows: event.rows,
@@ -118,8 +119,12 @@ export class TreeTableLazyDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Lazy</h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting. 
+                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting.
                             In addition, children of a node can be loaded on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -143,7 +148,7 @@ class TreeTableLazyDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -187,7 +192,7 @@ export class TreeTableLazyDemo extends Component {
         for(let i = 0; i < rows; i++) {
             let node = {
                 key: (first + i),
-                data: { 
+                data: {
                     name: 'Item ' + (first + i),
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + (first + i)
@@ -197,7 +202,7 @@ export class TreeTableLazyDemo extends Component {
 
             nodes.push(node);
         }
-        
+
         return nodes;
     }
 
@@ -206,14 +211,14 @@ export class TreeTableLazyDemo extends Component {
             this.setState({
                 loading: true
             });
-            
+
             setTimeout(() => {
                 this.loading = false;
                 let lazyNode = {...event.node};
-    
+
                 lazyNode.children = [
                     {
-                        data: { 
+                        data: {
                             name: lazyNode.data.name + ' - 0',
                             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                             type: 'File'
@@ -235,7 +240,7 @@ export class TreeTableLazyDemo extends Component {
 
                     return node;
                 });
-    
+
                 this.setState({
                     loading: false,
                     nodes: nodes
@@ -250,7 +255,7 @@ export class TreeTableLazyDemo extends Component {
         });
 
         //imitate delay of a backend call
-        setTimeout(() => {    
+        setTimeout(() => {
             this.setState({
                 first: event.first,
                 rows: event.rows,
@@ -266,7 +271,7 @@ export class TreeTableLazyDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Lazy</h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting. 
+                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting.
                             In addition, children of a node can be loaded on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.</p>
                     </div>
                 </div>

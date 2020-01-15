@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {TabMenu} from '../../components/tabmenu/TabMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TabMenuDemo extends Component {
 
@@ -26,6 +27,10 @@ export class TabMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>TabMenu</h1>
                         <p>Menu is a navigation/command component that displays items as tab headers.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tabMenu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

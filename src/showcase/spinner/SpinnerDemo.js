@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Spinner} from '../../components/spinner/Spinner';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class SpinnerDemo extends Component {
 
@@ -22,6 +23,10 @@ export class SpinnerDemo extends Component {
                     <div className="feature-intro">
                         <h1>Spinner</h1>
                         <p>Spinner is an input component to provide a numerical input.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("spinner")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

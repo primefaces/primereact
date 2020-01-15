@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableColResizeDemo extends Component {
 
@@ -30,8 +31,12 @@ export class DataTableColResizeDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Column Resize</h1>
-                        <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. 
+                        <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized.
                             In "expand" mode, table width also changes along with the column width. onColumnResize is a callback that passes the resized column header as a parameter.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -72,7 +77,7 @@ export class DataTableColResizeDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">

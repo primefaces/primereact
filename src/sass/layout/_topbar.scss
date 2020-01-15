@@ -149,9 +149,12 @@
                             color: #484848;
                             padding: 6px 12px;
                             width: 100%;
-                            border-bottom: 1px solid #f4f4f4;
                             @include transition(background-color .2s);
                             @include user-select(none);
+
+                            &:not(.no-border) {
+                                border-bottom: 1px solid #f4f4f4;
+                            }
 
                             i {
                                 vertical-align: middle;

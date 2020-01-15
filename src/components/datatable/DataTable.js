@@ -101,7 +101,8 @@ export class DataTable extends Component {
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
-        exportFunction: null
+        exportFunction: null,
+        expandableRowGroups: false
     }
 
     static propTypes = {
@@ -191,7 +192,8 @@ export class DataTable extends Component {
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
-        exportFunction: PropTypes.func
+        exportFunction: PropTypes.func,
+        expandableRowGroups: PropTypes.bool
     };
 
     constructor(props) {
@@ -1225,7 +1227,8 @@ export class DataTable extends Component {
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
-                        editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}>
+                        editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
+                        expandableRowGroups={this.props.expandableRowGroups}>
                         {columns}
                 </TableBody>;
     }

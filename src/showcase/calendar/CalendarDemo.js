@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Calendar} from '../../components/calendar/Calendar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class CalendarDemo extends Component {
 
@@ -75,6 +76,10 @@ export class CalendarDemo extends Component {
                     <div className="feature-intro">
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("calendar")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -872,7 +877,7 @@ export class CalendarDemo extends Component {
         let prevYear = (prevMonth === 11) ? year - 1 : year;
         let nextMonth = (month === 11) ? 0 : month + 1;
         let nextYear = (nextMonth === 0) ? year + 1 : year;
-        
+
         let minDate = new Date();
         minDate.setMonth(prevMonth);
         minDate.setFullYear(prevYear);

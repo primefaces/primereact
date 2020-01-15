@@ -7,6 +7,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableContextMenuDemo extends Component {
 
@@ -55,6 +56,10 @@ export class TreeTableContextMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - ContextMenu</h1>
                         <p>TreeTable has exclusive integration with ContextMenu.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -64,7 +69,7 @@ export class TreeTableContextMenuDemo extends Component {
                     <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
 
                     <TreeTable value={this.state.nodes}  expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
                         onContextMenu={event => this.cm.show(event.originalEvent)}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
@@ -83,7 +88,7 @@ class TreeTableContextMenuDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -152,7 +157,7 @@ export class TreeTableContextMenuDemo extends Component {
                     <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
 
                     <TreeTable value={this.state.nodes}  expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
                         onContextMenu={event => this.cm.show(event.originalEvent)}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>

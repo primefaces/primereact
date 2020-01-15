@@ -4,6 +4,7 @@ import {PickList} from '../../components/picklist/PickList';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class PickListDemo extends Component {
 
@@ -47,6 +48,10 @@ export class PickListDemo extends Component {
                     <div className="feature-intro">
                         <h1>PickList</h1>
                         <p>PickList is used to reorder items between different lists.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("pickList")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

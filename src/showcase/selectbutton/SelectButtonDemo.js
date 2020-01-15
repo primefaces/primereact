@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {SelectButton} from '../../components/selectbutton/SelectButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class SelectButtonDemo extends Component {
 
@@ -26,6 +27,10 @@ export class SelectButtonDemo extends Component {
                     <div className="feature-intro">
                         <h1>SelectButton</h1>
                         <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("selectButton")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -250,7 +255,7 @@ import React, {Component} from 'react';
 import {SelectButton} from 'primereact/selectbutton';
 
 export class SelectButtonDemo extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -258,7 +263,7 @@ export class SelectButtonDemo extends Component {
             value2: null
         };
     }
-    
+
     render() {
         const options = [
             {label: 'Apartment', value: 'Apartment'},

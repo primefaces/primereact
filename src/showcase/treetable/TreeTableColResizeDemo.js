@@ -5,6 +5,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableColResizeDemo extends Component {
 
@@ -29,8 +30,12 @@ export class TreeTableColResizeDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Column Resize</h1>
-                        <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". 
+                        <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand".
                             Fit is the default one and the overall table width does not change when a column is resized whereas in "expand" mode, table width also changes along with the column width.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -75,7 +80,7 @@ class TreeTableColResizeDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -109,7 +114,7 @@ export class TreeTableColResizeDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>TreeTable - Column Resize</h1>
-                        <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". 
+                        <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand".
                             Fit is the default one and the overall table width does not change when a column is resized whereas in "expand" mode, table width also changes along with the column width.</p>
                     </div>
                 </div>

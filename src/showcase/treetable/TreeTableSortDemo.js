@@ -5,12 +5,13 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableSortDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes1: [],
             nodes2: []
         };
@@ -32,7 +33,7 @@ export class TreeTableSortDemo extends Component {
 
             this.setState({
                 nodes2: nodes2
-            });  
+            });
         });
     }
 
@@ -45,6 +46,10 @@ export class TreeTableSortDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Sort</h1>
                         <p>TreeTable supports both single column and multiple column sorting.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -75,7 +80,7 @@ class TreeTableSortDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -92,7 +97,7 @@ export class TreeTableSortDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes1: [],
             nodes2: []
         };
@@ -114,7 +119,7 @@ export class TreeTableSortDemo extends Component {
 
             this.setState({
                 nodes2: nodes2
-            });  
+            });
         });
     }
 

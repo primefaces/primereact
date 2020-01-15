@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Chips} from '../../components/chips/Chips';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ChipsDemo extends Component {
 
@@ -30,6 +31,10 @@ export class ChipsDemo extends Component {
                     <div className="feature-intro">
                         <h1>Chips</h1>
                         <p>Chips is used to enter multiple values on an input field.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chips")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -282,7 +287,7 @@ export class ChipsDemo extends Component {
     constructor() {
         super();
         this.state = {
-            values1: [], 
+            values1: [],
             values2: []
         };
     }

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Toolbar} from '../../components/toolbar/Toolbar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Button} from "../../components/button/Button";
 
 export class ToolbarDemo extends Component {
@@ -19,6 +20,10 @@ export class ToolbarDemo extends Component {
                     <div className="feature-intro">
                         <h1>Toolbar</h1>
                         <p>Toolbar is a grouping component for buttons and other content.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("toolbar")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
                 <div className="content-section implementation">

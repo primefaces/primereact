@@ -4,6 +4,7 @@ import {OverlayPanel} from '../../components/overlaypanel/OverlayPanel';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class OverlayPanelDemo extends Component {
 
@@ -14,6 +15,10 @@ export class OverlayPanelDemo extends Component {
                     <div className="feature-intro">
                         <h1>OverlayPanel</h1>
                         <p>OverlayPanel is a container component that can overlay other components on page.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("overlayPanel")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -227,7 +232,7 @@ import React, {Component} from 'react';
 import {OverlayPanel} from 'primereact/overlaypanel';
 
 export class OverlayPanelDemo extends Component {
-        
+
     render() {
         return (
             <div>

@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {InputText} from '../../components/inputtext/InputText';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class InputTextDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -26,6 +27,10 @@ export class InputTextDemo extends Component {
                     <div className="feature-intro">
                         <h1>InputText</h1>
                         <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputText")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -134,7 +139,7 @@ import {InputText} from 'primereact/inputtext';
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                         <div className="doc-tablewrapper">
@@ -169,7 +174,7 @@ import {Link} from 'react-router-dom';
 import {InputText} from 'primereact/inputtext';
 
 export class InputTextDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {

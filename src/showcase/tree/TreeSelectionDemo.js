@@ -4,17 +4,18 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             selectedNodeKey: null,
-            selectedNodeKeys1: null, 
-            selectedNodeKeys2: null, 
-            selectedNodeKeys3: null  
+            selectedNodeKeys1: null,
+            selectedNodeKeys2: null,
+            selectedNodeKeys3: null
         };
 
         this.nodeService = new NodeService();
@@ -28,11 +29,15 @@ export class TreeSelectionDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Selection</h1>
                         <p>Tree supports "single", "multiple" and "checkbox" as selection modes.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -61,7 +66,7 @@ export class TreeSelectionDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -78,12 +83,12 @@ export class TreeSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             selectedNodeKey: null,
-            selectedNodeKeys1: null, 
-            selectedNodeKeys2: null, 
-            selectedNodeKeys3: null  
+            selectedNodeKeys1: null,
+            selectedNodeKeys2: null,
+            selectedNodeKeys3: null
         };
 
         this.nodeService = new NodeService();
@@ -95,7 +100,7 @@ export class TreeSelectionDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Selection</h1>

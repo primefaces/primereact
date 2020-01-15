@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {InputText} from "../../components/inputtext/InputText";
 import {Button} from "../../components/button/Button";
 import {Checkbox} from "../../components/checkbox/Checkbox";
@@ -26,6 +27,10 @@ export class InputGroupDemo extends Component {
                         <h1>InputGroup</h1>
                         <p>Text, icon, buttons and other content can be grouped next to an input by wrapping the addons and input inside
                             .p-inputgroup element. Multiple addons can be used within the same group as well.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputGroup")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -115,7 +120,7 @@ export class InputGroupDemo extends Component {
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton checked={this.state.price} value="price" onChange={(e) => this.setState({price: e.value})} />    
+                                    <RadioButton checked={this.state.price} value="price" onChange={(e) => this.setState({price: e.value})} />
                                 </span>
                             </div>
                         </div>
@@ -127,7 +132,7 @@ export class InputGroupDemo extends Component {
                                 </span>
                                 <InputText placeholder="Website"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton checked={this.state.website2} value="price" onChange={(e) => this.setState({website2: e.value})} />    
+                                    <RadioButton checked={this.state.website2} value="price" onChange={(e) => this.setState({website2: e.value})} />
                                 </span>
                             </div>
                         </div>
@@ -271,7 +276,7 @@ export class InputGroupDemo extends Component {
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton checked={this.state.price} value="price" onChange={(e) => this.setState({price: e.value})} />    
+                                    <RadioButton checked={this.state.price} value="price" onChange={(e) => this.setState({price: e.value})} />
                                 </span>
                             </div>
                         </div>
@@ -283,7 +288,7 @@ export class InputGroupDemo extends Component {
                                 </span>
                                 <InputText placeholder="Website"/>
                                 <span className="p-inputgroup-addon">
-                                    <RadioButton checked={this.state.website2} value="price" onChange={(e) => this.setState({website2: e.value})} />    
+                                    <RadioButton checked={this.state.website2} value="price" onChange={(e) => this.setState({website2: e.value})} />
                                 </span>
                             </div>
                         </div>

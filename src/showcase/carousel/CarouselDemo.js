@@ -3,13 +3,14 @@ import {Carousel} from '../../components/carousel/Carousel';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Button} from '../../components/button/Button';
 
 export class CarouselDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: []
         };
         this.carservice = new CarService();
@@ -71,11 +72,15 @@ export class CarouselDemo extends Component {
                     <div className="feature-intro">
                         <h1>Carousel</h1>
                         <p>Carousel is a content slider featuring various customization options.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("carousel")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3} 
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3}
                         header={basicHeader} responsiveOptions={this.responsiveOptions}></Carousel>
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
@@ -85,7 +90,7 @@ export class CarouselDemo extends Component {
                         numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
                 </div>
 
-                <CarouselDoc />                
+                <CarouselDoc />
             </div>
         );
     }
@@ -96,7 +101,7 @@ export class CarouselDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -123,7 +128,7 @@ import {Carousel} from 'primereact/carousel';
 {`
 constructor() {
     super();
-    this.state = { 
+    this.state = {
         cars: []
     };
     this.carservice = new CarService();
@@ -151,7 +156,7 @@ carTemplate(car) {
 </CodeHighlight>
 
             <h3>Responsive</h3>
-            <p>For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of 
+            <p>For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of
             objects whose breakpoint defines the max-width to apply the settings.</p>
             <CodeHighlight className="language-jsx">
 {`
@@ -422,7 +427,7 @@ const responsiveOptions = [
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -440,7 +445,7 @@ export class CarouselDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: []
         };
         this.carservice = new CarService();
@@ -506,7 +511,7 @@ export class CarouselDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3} 
+                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3}
                         header={basicHeader} responsive={this.responsiveSettings}></Carousel>
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
@@ -514,7 +519,7 @@ export class CarouselDemo extends Component {
 
                     <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px', marginTop: '2em'}}
                         numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
-                </div>             
+                </div>
             </div>
         );
     }

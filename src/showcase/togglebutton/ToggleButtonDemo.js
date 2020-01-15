@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {ToggleButton} from '../../components/togglebutton/ToggleButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ToggleButtonDemo extends Component {
 
@@ -21,6 +22,10 @@ export class ToggleButtonDemo extends Component {
                     <div className="feature-intro">
                         <h1>ToggleButton</h1>
                         <p>ToggleButton is used to select a boolean value using a button.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("toggleButton")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

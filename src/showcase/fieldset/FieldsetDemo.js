@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {Fieldset} from '../../components/fieldset/Fieldset';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class FieldsetDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -13,23 +14,27 @@ export class FieldsetDemo extends Component {
                     <div className="feature-intro">
                         <h1>Fieldset</h1>
                         <p>Fieldset is a grouping component with a content toggle feature.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("fieldset")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <Fieldset legend="Godfather I">
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Fieldset>
 
                     <br />
 
                     <Fieldset legend="Godfather I" toggleable={true}>
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Fieldset>
                 </div>
@@ -44,7 +49,7 @@ export class FieldsetDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -63,9 +68,9 @@ import {Fieldset} from 'primereact/fieldset';
 <CodeHighlight className="language-jsx">
 {`
 <Fieldset legend="Godfather I">
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </Fieldset>
 
@@ -76,29 +81,29 @@ import {Fieldset} from 'primereact/fieldset';
 
              <h3>Toggleable</h3>
              <p>Content of the fieldset can be expanded and collapsed using <i>toggleable</i> option. A toggleable fieldset can either be used as a Controlled or Uncontrolled component.</p>
-             
+
              <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties need to be defined to control the collapsed state.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Fieldset legend="Godfather I" toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </Fieldset>
 
 `}
 </CodeHighlight>
 
- <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however 
+ <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
 
             <CodeHighlight className="language-jsx">
 {`
 <Fieldset legend="Godfather I" toggleable={true} >
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </Fieldset>
 
@@ -181,7 +186,7 @@ import {Fieldset} from 'primereact/fieldset';
                         <tr>
                             <td>onToggle</td>
                             <td>event.originalEvent: browser event <br />
-                                event.value: Collapsed state as a boolean    
+                                event.value: Collapsed state as a boolean
                             </td>
                             <td>Callback to invoke when a tab gets expanded.</td>
                         </tr>
@@ -227,7 +232,7 @@ import {Fieldset} from 'primereact/fieldset';
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -240,7 +245,7 @@ import React, {Component} from 'react';
 import {Fieldset} from 'primereact/fieldset';
 
 export class FieldsetDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -253,16 +258,16 @@ export class FieldsetDemo extends Component {
 
                 <div className="content-section implementation">
                     <Fieldset legend="Godfather I">
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Fieldset>
- 
+
                    <Fieldset legend="Godfather I" toggleable={true}>
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
                         kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
                     </Fieldset>
                 </div>

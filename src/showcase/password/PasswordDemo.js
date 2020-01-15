@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Password} from '../../components/password/Password';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class PasswordDemo extends Component {
 
@@ -13,6 +14,10 @@ export class PasswordDemo extends Component {
                     <div className="feature-intro">
                         <h1>Password</h1>
                         <p>Password displays strength indicator for password fields.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("password")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -56,7 +61,7 @@ import {Password} from 'primereact/password';
 
                         <h3>Properties</h3>
                         <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
-                        
+
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>

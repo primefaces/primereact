@@ -5,6 +5,7 @@ import { Panel } from '../../components/panel/Panel';
 import { CarService } from '../service/CarService';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import { DataView, DataViewLayoutOptions } from "../../components/dataview/DataView";
 import { Button } from "../../components/button/Button";
 import { Dropdown } from "../../components/dropdown/Dropdown";
@@ -146,6 +147,10 @@ export class DataViewDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataView</h1>
                         <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataView")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@ import {AutoComplete} from '../../components/autocomplete/AutoComplete';
 import {CountryService} from '../service/CountryService';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class AutoCompleteDemo extends Component {
 
@@ -78,6 +79,10 @@ export class AutoCompleteDemo extends Component {
                     <div className="feature-intro">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("autocomplete")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -150,7 +155,7 @@ suggestBrands(event) {
     let results = this.brands.filter((brand) => {
          return brand.toLowerCase().startsWith(event.query.toLowerCase());
     });
-    
+
     this.setState({ brandSuggestions: results });
 }
 
@@ -574,13 +579,13 @@ export class AutoCompleteDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             countriesData: [],
             filteredCountriesSingle: null,
             filteredBrands: null,
             filteredCountriesMultiple: null
         };
-        
+
         this.filterCountrySingle = this.filterCountrySingle.bind(this);
         this.filterBrands = this.filterBrands.bind(this);
         this.filterCountryMultiple = this.filterCountryMultiple.bind(this);

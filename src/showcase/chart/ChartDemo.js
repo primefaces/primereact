@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ChartDemo extends Component {
 
@@ -10,6 +11,10 @@ export class ChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>Charts</h1>
                         <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Charts.js</a>, an open source HTML5 based charting library.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -66,14 +71,14 @@ const data = {
             fill: false,
             borderColor: '#565656'
         }
-    ]   
+    ]
 };
 
 `}
 </CodeHighlight>
 
 <h3>Options</h3>
-<p>While a series can be customized per dataset, general chart options are defined with options property. 
+<p>While a series can be customized per dataset, general chart options are defined with options property.
     Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js documentation.</p>
 
     <CodeHighlight className="language-jsx">

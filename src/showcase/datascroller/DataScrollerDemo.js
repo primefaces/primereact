@@ -3,13 +3,14 @@ import {DataScroller} from '../../components/datascroller/DataScroller';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
 
 export class DataScrollerDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: []
         };
         this.carservice = new CarService();
@@ -36,13 +37,13 @@ export class DataScrollerDemo extends Component {
                     <div className="p-grid">
                         <div className="p-col-2 p-sm-6">Vin: </div>
                         <div className="p-col-10 p-sm-6">{car.vin}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Year: </div>
                         <div className="p-col-10 p-sm-6">{car.year}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Brand: </div>
                         <div className="p-col-10 p-sm-6">{car.brand}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Color: </div>
                         <div className="p-col-10 p-sm-6">{car.color}</div>
                     </div>
@@ -60,6 +61,10 @@ export class DataScrollerDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataScroller</h1>
                         <p>DataScroller displays data with on demand loading using scroll.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataScroller")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -70,10 +75,10 @@ export class DataScrollerDemo extends Component {
                 <DataScrollerDoc />
 
                 <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} 
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate}
                             rows={10} buffer={0.4} header="List of Cars" />
                 </div>
-                
+
             </div>
         );
     }
@@ -84,7 +89,7 @@ export class DataScrollerDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -99,7 +104,7 @@ import {DataScroller} from 'primereact/datascroller';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a 
+            <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a
                 list of cars where each load event adds 10 more rows if available.</p>
 <CodeHighlight className="language-jsx">
 {`
@@ -111,7 +116,7 @@ import {DataScroller} from 'primereact/datascroller';
 {`
 constructor() {
     super();
-    this.state = { 
+    this.state = {
         cars: []
     };
     this.carservice = new CarService();
@@ -309,7 +314,7 @@ loadData(event) {
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -326,8 +331,8 @@ export class DataScrollerDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
-            cars: [] 
+        this.state = {
+            cars: []
         };
         this.carservice = new CarService();
         this.carTemplate = this.carTemplate.bind(this);
@@ -353,13 +358,13 @@ export class DataScrollerDemo extends Component {
                     <div className="p-grid">
                         <div className="p-col-2 p-sm-6">Vin: </div>
                         <div className="p-col-10 p-sm-6">{car.vin}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Year: </div>
                         <div className="p-col-10 p-sm-6">{car.year}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Brand: </div>
                         <div className="p-col-10 p-sm-6">{car.brand}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Color: </div>
                         <div className="p-col-10 p-sm-6">{car.color}</div>
                     </div>
@@ -385,10 +390,10 @@ export class DataScrollerDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} 
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate}
                             rows={10} buffer={0.4} header="List of Cars" />
                 </div>
-                
+
             </div>
         );
     }

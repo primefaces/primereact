@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {RadioButton} from '../../components/radiobutton/RadioButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class RadioButtonDemo extends Component {
 
@@ -20,6 +21,10 @@ export class RadioButtonDemo extends Component {
                     <div className="feature-intro">
                         <h1>RadioButton</h1>
                         <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("radioButton")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -230,7 +235,7 @@ import React, {Component} from 'react';
 import {RadioButton} from 'primereact/radiobutton';
 
 export class RadioButtonDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
