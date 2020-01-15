@@ -12,6 +12,7 @@ interface SliderProps {
     className?: string;
     disabled?: boolean;
     tabIndex?:string;
+    ariaLabelledBy?: string;
     onChange?(e: {originalEvent: Event, value: number|[number, number]}): void;
     onSlideEnd?(e: {originalEvent: Event, value: number|[number, number]}): void;
 }

@@ -41,7 +41,7 @@ export class GrowlMessage extends Component {
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
-        
+
         if (this.props.onClose) {
             this.props.onClose(this.props.message);
         }
@@ -89,7 +89,7 @@ export class GrowlMessage extends Component {
 
         return (
             <div ref={(el) => { this.element = el; }} className={className} aria-live="polite" onClick={this.onClick}>
-                <div className="p-growl-item">
+                <div className="p-growl-item" role="alert" aria-live="assertive" aria-atomic="true">
                     {closeIcon}
                     <span className={iconClassName}></span>
                     <div className="p-growl-message">

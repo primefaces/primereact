@@ -7,7 +7,7 @@ import {ListBoxHeader} from './ListBoxHeader';
 import Tooltip from "../tooltip/Tooltip";
 
 export class ListBox extends Component {
-    
+
     static defaultProps = {
         id: null,
         value: null,
@@ -25,9 +25,10 @@ export class ListBox extends Component {
         tabIndex: '0',
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null
     }
-    
+
     static propTypes = {
         id: PropTypes.string,
         value: PropTypes.any,
@@ -44,15 +45,16 @@ export class ListBox extends Component {
         tabIndex: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func
     };
-    
+
     constructor() {
         super();
         this.state = {
             filter: ''
         }
-        
+
         this.onFilter = this.onFilter.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
     }
@@ -86,29 +88,29 @@ export class ListBox extends Component {
             options: this.props.tooltipOptions
         });
     }
-    
+
     onOptionClick(event) {
         if(this.props.disabled) {
             return;
         }
-        
+
         if(this.props.multiple)
             this.onOptionClickMultiple(event.originalEvent, event.option);
         else
             this.onOptionClickSingle(event.originalEvent, event.option);
-            
+
         this.optionTouched = false;
     }
-    
+
     onOptionTouchEnd(event, option) {
         if(this.props.disabled) {
             return;
         }
-        
+
         this.optionTouched = true;
     }
-    
-    onOptionClickSingle(event, option) {        
+
+    onOptionClickSingle(event, option) {
         let selected = this.isSelected(option);
         let valueChanged = false;
         let value = null;
@@ -116,7 +118,7 @@ export class ListBox extends Component {
 
         if(metaSelection) {
             let metaKey = (event.metaKey || event.ctrlKey);
-            
+
             if(selected) {
                 if(metaKey) {
                     value = null;
@@ -138,7 +140,7 @@ export class ListBox extends Component {
         }
     }
 
-    onOptionClickMultiple(event, option) {        
+    onOptionClickMultiple(event, option) {
         let selected = this.isSelected(option);
         let valueChanged = false;
         let value = null;
@@ -146,13 +148,13 @@ export class ListBox extends Component {
 
         if(metaSelection) {
             let metaKey = (event.metaKey || event.ctrlKey);
-            
+
             if(selected) {
                 if(metaKey)
                     value = this.removeOption(option);
                 else
                     value = [this.getOptionValue(option)];
-                
+
                 valueChanged = true;
             }
             else {
@@ -166,7 +168,7 @@ export class ListBox extends Component {
                 value = this.removeOption(option);
             else
                 value = [...this.props.value || [], this.getOptionValue(option)];
-            
+
             valueChanged = true;
         }
 
@@ -184,11 +186,11 @@ export class ListBox extends Component {
             });
         }
     }
-    
+
     onFilter(event) {
         this.setState({filter: event.query});
     }
-    
+
     updateModel(event, value) {
         if(this.props.onChange) {
             this.props.onChange({
@@ -204,11 +206,11 @@ export class ListBox extends Component {
             });
         }
     }
-    
+
     removeOption(option) {
         return this.props.value.filter(val => !ObjectUtils.equals(val, this.getOptionValue(option), this.props.dataKey));
     }
-    
+
     isSelected(option) {
         let selected = false;
         let optionValue = this.getOptionValue(option);
@@ -229,22 +231,22 @@ export class ListBox extends Component {
 
         return selected;
     }
-    
+
     filter(option) {
         let filterValue = this.state.filter.trim().toLowerCase();
         let optionLabel = this.getOptionLabel(option);
-        
+
         return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
     }
-    
+
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
-    
+
     getOptionValue(option) {
         return this.props.optionLabel ? option : option.value;
     }
-    
+
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
@@ -255,7 +257,7 @@ export class ListBox extends Component {
         });
         let items = this.props.options;
         let header;
-        
+
         if(this.props.options) {
             if(this.hasFilter()) {
                 items = items.filter((option) => {
@@ -265,23 +267,23 @@ export class ListBox extends Component {
 
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
-                
+
                 return (
                     <ListBoxItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
                         onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} tabIndex={this.props.tabIndex} />
                 );
             });
         }
-        
+
         if(this.props.filter) {
             header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} disabled={this.props.disabled} />
         }
-        
+
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
                 <div className="p-listbox-list-wrapper">
-                    <ul className="p-listbox-list" style={this.props.listStyle}>
+                    <ul className="p-listbox-list" style={this.props.listStyle} role="listbox" aria-multiselectable={this.props.multiple}>
                         {items}
                     </ul>
                 </div>

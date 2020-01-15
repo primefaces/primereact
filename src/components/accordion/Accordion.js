@@ -5,7 +5,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 
 export class AccordionTab extends Component {
-    
+
     static defaultProps = {
         header: null,
         disabled: false,
@@ -14,7 +14,7 @@ export class AccordionTab extends Component {
         contentStyle: null,
         contentClassName: null
     }
-    
+
     static propTypes = {
         header: PropTypes.any,
         disabled: PropTypes.bool,
@@ -48,7 +48,7 @@ export class Accordion extends Component {
         onTabClose: PropTypes.func,
         onTabChange: PropTypes.func
     };
-    
+
     constructor(props) {
         super(props);
         if (!this.props.onTabChange) {
@@ -56,7 +56,7 @@ export class Accordion extends Component {
                 activeIndex: props.activeIndex
             };
         }
-        
+
         this.contentWrappers = [];
         this.id = this.props.id || UniqueComponentId();
     }
@@ -103,9 +103,9 @@ export class Accordion extends Component {
     isSelected(index) {
         const activeIndex = this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex;
 
-        return this.props.multiple ? (activeIndex && activeIndex.indexOf(index) >= 0) : activeIndex === index;        
+        return this.props.multiple ? (activeIndex && activeIndex.indexOf(index) >= 0) : activeIndex === index;
     }
-    
+
     renderTabHeader(tab, selected, index) {
         const tabHeaderClass = classNames(tab.props.headerClassName, 'p-accordion-header', {'p-highlight': selected, 'p-disabled': tab.props.disabled});
         const id = this.id + '_header_' + index;
@@ -121,22 +121,22 @@ export class Accordion extends Component {
             </div>
         );
     }
-    
+
     renderTabContent(tab, selected, index) {
         const className = classNames(tab.props.contentClassName, 'p-toggleable-content', {'p-toggleable-content-collapsed': !selected});
         const id = this.id + '_content_' + index;
 
         return (
             <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={selected}>
-                <div id={id} className={className} style={tab.props.contentStyle}>
+                <div id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.id + '_header_' +index}>
                     <div className="p-accordion-content">
                         {tab.props.children}
                     </div>
                 </div>
             </CSSTransition>
         );
-    } 
-    
+    }
+
     renderTab(tab, index) {
         const selected = this.isSelected(index);
         const tabHeader = this.renderTabHeader(tab, selected, index);
@@ -157,7 +157,7 @@ export class Accordion extends Component {
             })
         )
     }
-         
+
     render() {
         const className = classNames('p-accordion p-component p-reset', this.props.className);
         const tabs = this.renderTabs();

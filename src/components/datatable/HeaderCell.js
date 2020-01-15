@@ -90,6 +90,21 @@ export class HeaderCell extends Component {
         return null;
     }
 
+    getAriaSort(sorted, sortOrder) {
+        if (this.props.sortable) {
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            if (sortIcon === 'pi-sort-down')
+                return 'descending';
+            else if (sortIcon === 'pi-sort-up')
+                return 'ascending';
+            else
+                return 'none';
+        }
+        else {
+            return null;
+        }
+    }
+
     renderSortIcon(sorted, sortOrder) {
         if (this.props.sortable) {
             let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
@@ -125,6 +140,8 @@ export class HeaderCell extends Component {
 
         let sortIconElement = this.renderSortIcon(sorted, sortOrder);
 
+        let ariaSortData = this.getAriaSort(sorted, sortOrder);
+
         if(this.props.filter) {
             filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
                         className="p-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
@@ -135,9 +152,9 @@ export class HeaderCell extends Component {
         }
 
         return (
-            <th ref={(el) => this.el = el} tabIndex={this.props.sortable ? this.props.tabIndex: null}
+            <th ref={(el) => this.el = el} tabIndex={this.props.sortable ? this.props.tabIndex: -1}
                 className={className} style={this.props.headerStyle||this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
-                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}
+                colSpan={this.props.colSpan} rowSpan={this.props.rowSpan} aria-sort={ariaSortData}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
                 <span className="p-column-title">{this.props.header}</span>

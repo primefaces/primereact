@@ -122,6 +122,12 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -140,7 +146,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                                 <tr>
                                     <td>onChange</td>
                                     <td>event.originalEvent: Browser event <br />
-                                        event.value: Current Value 
+                                        event.value: Current Value
                                     </td>
                                     <td>Callback to invoke on value change</td>
                                 </tr>

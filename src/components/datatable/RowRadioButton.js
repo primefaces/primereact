@@ -29,7 +29,7 @@ export class RowRadioButton extends Component {
             })
         }
     }
-    
+
     render() {
         let className = classNames('p-radiobutton-box p-component p-radiobutton-relative', {'p-highlight': this.props.selected});
         let iconClassName = classNames('p-radiobutton-icon p-clickable', {'pi pi-circle-on': this.props.selected});
@@ -38,7 +38,7 @@ export class RowRadioButton extends Component {
                     <div className="p-hidden-accessible">
                         <input type="radio" />
                     </div>
-                    <div className={className} onClick={this.onClick}>
+                    <div className={className} onClick={this.onClick} role="checkbox" aria-checked={this.props.selected}>
                         <span className={iconClassName}></span>
                     </div>
                 </div>

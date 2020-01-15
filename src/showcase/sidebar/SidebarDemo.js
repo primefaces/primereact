@@ -253,6 +253,12 @@ import {Sidebar} from 'primereact/sidebar';
                                         <td>Whether to display a close icon inside the panel.</td>
                                     </tr>
                                     <tr>
+                                        <td>ariaCloseLabel</td>
+                                        <td>string</td>
+                                        <td>close</td>
+                                        <td>Aria label of the close icon.</td>
+                                    </tr>
+                                    <tr>
                                         <td>iconsTemplate</td>
                                         <td>Element</td>
                                         <td>null</td>

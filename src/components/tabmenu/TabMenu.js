@@ -68,8 +68,8 @@ export class TabMenu extends Component {
         const icon = item.icon ? <span className={iconClassName}></span>: null;
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style}>
-                 <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)}>
+            <li key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={activeItem ? activeItem === item : index === 0} aria-expanded={activeItem ? activeItem === item : index === 0}>
+                 <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)} role="presentation">
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                 </a>

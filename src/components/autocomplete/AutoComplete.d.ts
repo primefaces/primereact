@@ -29,6 +29,7 @@ interface AutoCompleteProps {
     autoFocus?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     completeMethod?(e: {originalEvent: Event, query: string}): void;
     itemTemplate?(data: any): JSX.Element | undefined;
     selectedItemTemplate?(data: any): JSX.Element | undefined;

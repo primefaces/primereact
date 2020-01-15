@@ -1404,7 +1404,7 @@ export class DataTable extends Component {
                 let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
                 tableContent = <div className="p-datatable-wrapper">
-                        <table style={this.props.tableStyle} className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
+                        <table style={this.props.tableStyle} role="grid" className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
                             {tableHeader}
                             {tableFooter}
                             {tableBody}

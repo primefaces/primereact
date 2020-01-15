@@ -44,7 +44,7 @@ class ContextMenuSub extends Component {
             event.preventDefault();
             return;
         }
-        
+
         this.setState({
             activeItem: item
         });
@@ -66,12 +66,12 @@ class ContextMenuSub extends Component {
                 item: item
             });
         }
-        
+
         if (!item.items) {
             this.props.onLeafClick(event);
         }
     }
-    
+
     componentDidUpdate() {
         if (this.element.offsetParent) {
             this.position();
@@ -97,10 +97,10 @@ class ContextMenuSub extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="p-menu-separator"></li>
+            <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
         );
     }
-    
+
     renderIcon(item) {
         const className = classNames('p-menuitem-icon', item.icon);
         if (item.icon) {
@@ -142,8 +142,9 @@ class ContextMenuSub extends Component {
         const submenu = this.renderSubmenu(item);
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+            <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
+                   aria-haspopup={item.items != null} aria-expanded={this.state.activeItem === item}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
@@ -156,7 +157,7 @@ class ContextMenuSub extends Component {
     renderItem(item, index) {
         if (item.separator)
             return this.renderSeparator(index);
-        else 
+        else
             return this.renderMenuitem(item, index);
     }
 
@@ -181,7 +182,7 @@ class ContextMenuSub extends Component {
             <ul ref={el => this.element = el} className={className}>
                 {submenu}
             </ul>
-        );   
+        );
     }
  }
 
@@ -252,9 +253,9 @@ export class ContextMenu extends Component {
             this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
         DomHandler.fadeIn(this.container, 250);
-      
+
         this.bindDocumentResizeListener();
-        
+
         if (this.props.onShow) {
             this.props.onShow(event);
         }
@@ -267,7 +268,7 @@ export class ContextMenu extends Component {
         if (this.container) {
             this.container.style.display = 'none';
         }
-            
+
         if (this.props.onHide) {
             this.props.onHide(event);
         }
@@ -321,7 +322,7 @@ export class ContextMenu extends Component {
             this.documentClickListener = (event) => {
                 if (!this.selfClick && event.button !== 2) {
                     this.hide(event);
-                    
+
                     this.setState({
                         resetMenu: true
                     });
@@ -382,7 +383,7 @@ export class ContextMenu extends Component {
         this.unbindDocumentResizeListener();
         this.unbindDocumentContextMenuListener();
     }
-    
+
     renderContextMenu() {
         const className = classNames('p-contextmenu p-component', this.props.className);
 

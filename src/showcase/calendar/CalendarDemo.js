@@ -16,7 +16,7 @@ export class CalendarDemo extends Component {
         let prevYear = (prevMonth === 11) ? year - 1 : year;
         let nextMonth = (month === 11) ? 0 : month + 1;
         let nextYear = (nextMonth === 0) ? year + 1 : year;
-        
+
         let minDate = new Date();
         minDate.setMonth(prevMonth);
         minDate.setFullYear(prevYear);
@@ -145,7 +145,7 @@ export class CalendarDemo extends Component {
                     <h3>Inline</h3>
                     <Calendar value={this.state.date14} onChange={(e) => this.setState({date14: e.value})} inline={true} showWeek={true} />
                 </div>
-                
+
                 <CalendarDoc></CalendarDoc>
             </div>
         );
@@ -157,7 +157,7 @@ export class CalendarDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -173,7 +173,7 @@ import {Calendar} from 'primereact/calendar';
 
             <h3>Getting Started</h3>
             <p>Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
-            
+
 <CodeHighlight className="language-jsx">
 {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
@@ -183,7 +183,7 @@ import {Calendar} from 'primereact/calendar';
 
             <h3>Popup and Inline</h3>
             <p>Calendar is displayed in a popup by default whereas <i>inline</i> property needs to be enabled for inline mode.</p>
-               
+
 <CodeHighlight className="language-jsx">
 {`
 <Calendar inline={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
@@ -193,7 +193,7 @@ import {Calendar} from 'primereact/calendar';
 
             <h3>View Date</h3>
             <p><i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like
-            to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in 
+            to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in
             uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the viewChange in controlled mode.</p>
             <CodeHighlight className="language-jsx">
 {`
@@ -327,7 +327,7 @@ let es = {
             <h3>Date Template</h3>
             <p>Date cell contents can be templated using the <i>dateTemplate</i> property that returns the content of a cell. This is a handy feature to highlight specific dates. Note that the
             variable passed to the template is not a date instance but a metadata object to represent a Date with "day", "month", "year", "otherMonth", "today" and "selectable" properties to represent the date. Example below changes the styling of dates between 10 and 15.</p>
-            
+
             <CodeHighlight className="language-jsx">
 {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} dateTemplate={this.dateTemplate} />
@@ -363,7 +363,7 @@ dateTemplate(date) {
             <h3>Month and Year Navigator</h3>
             <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays
             available years. Format of the <i>yearRange</i> is "startYear:endYear".</p>
-            
+
             <CodeHighlight className="language-jsx">
 {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
@@ -709,6 +709,12 @@ dateTemplate(date) {
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                         </tr>
                         <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                        </tr>
+                        <tr>
                             <td>dateTemplate</td>
                             <td>function</td>
                             <td>null</td>
@@ -841,7 +847,7 @@ dateTemplate(date) {
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">

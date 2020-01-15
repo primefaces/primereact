@@ -4,7 +4,7 @@ import {InputText} from '../inputtext/InputText';
 import {Checkbox} from '../checkbox/Checkbox';
 
 export class MultiSelectHeader extends Component {
-    
+
     static defaultProps = {
         filter: false,
         filterValue: null,
@@ -13,7 +13,7 @@ export class MultiSelectHeader extends Component {
         onToggleAll: null,
         allChecked: false
     }
-    
+
     static propTypes = {
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
@@ -22,13 +22,13 @@ export class MultiSelectHeader extends Component {
         onClose: PropTypes.func,
         onToggleAll: PropTypes.func
     }
-    
+
     constructor() {
         super();
         this.onFilter = this.onFilter.bind(this);
         this.onToggleAll = this.onToggleAll.bind(this);
     }
-    
+
     onFilter(event) {
         if(this.props.onFilter) {
             this.props.onFilter({
@@ -37,7 +37,7 @@ export class MultiSelectHeader extends Component {
             });
         }
     }
-    
+
     onToggleAll(event) {
         if(this.props.onToggleAll) {
             this.props.onToggleAll({
@@ -61,13 +61,13 @@ export class MultiSelectHeader extends Component {
             return null;
         }
     }
-        
+
     render() {
         let filterElement = this.renderFilterElement();
-                
+
         return (
                 <div className="p-multiselect-header">
-                    <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} />
+                    <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} role="checkbox" aria-checked={this.props.allChecked}/>
                     {filterElement}
                     <button className="p-multiselect-close p-link" onClick={this.props.onClose}>
                         <span className="p-multiselect-close-icon pi pi-times"></span>

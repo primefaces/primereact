@@ -106,8 +106,9 @@ class PanelMenuSub extends Component {
         const submenu = this.renderSubmenu(item, active);
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+            <li key={item.label + '_' + index} className={className} style={item.style} role="none">
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}
+                   role="menuitem" aria-expanded={this.state.activeItem === item}>
                     {submenuIcon}
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
@@ -142,7 +143,7 @@ class PanelMenuSub extends Component {
         const menu = this.renderMenu();
 
         return (
-            <ul className={className}>
+            <ul className={className} role="tree">
                {menu}
             </ul>
         );
@@ -238,14 +239,15 @@ export class PanelMenu extends Component {
         return (
             <div key={item.label + '_' + index} className={className} style={item.style}>
                 <div className={headerClassName} style={item.style}>
-                    <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)}>
+                    <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)} aria-expanded={this.state.activeItem === item}
+                       id={this.id + '_header'} aria-controls={this.id + 'content'}>
                         {toggleIcon}
                         {itemIcon}
                         <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </div>
                 <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={active}>
-                    <div className={contentWrapperClassName}>
+                    <div className={contentWrapperClassName} role="region" id={this.id + '_content'} aria-labelledby={this.id + '_header'}>
                         <div className="p-panelmenu-content">
                             <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" />
                         </div>

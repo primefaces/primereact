@@ -9,12 +9,12 @@ export class SliderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             val1: null,
-            val2: 50, 
+            val2: 50,
             val3: null,
             val4: null,
-            rangeValues: [20, 80] 
+            rangeValues: [20, 80]
         };
         this.onChangeSlider1 = this.onChangeSlider1.bind(this);
         this.onChangeSlider2 = this.onChangeSlider2.bind(this);
@@ -106,7 +106,7 @@ import {Slider} from 'primereact/slider';
 
             <h3>Getting Started</h3>
             <p>Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
-                    
+
 <CodeHighlight className="language-jsx">
 {`
 <Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
@@ -215,6 +215,12 @@ import {Slider} from 'primereact/slider';
                             <td>string</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                         </tr>
                     </tbody>
                 </table>

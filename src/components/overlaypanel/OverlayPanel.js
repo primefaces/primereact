@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
 export class OverlayPanel extends Component {
-    
+
     static defaultProps = {
         id: null,
         dismissable: true,
@@ -13,6 +13,7 @@ export class OverlayPanel extends Component {
         style: null,
         className: null,
         appendTo: null,
+        ariaCloseLabel: 'close',
         onHide: null
     }
 
@@ -23,6 +24,7 @@ export class OverlayPanel extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         appendTo: PropTypes.any,
+        ariaCloseLabel: PropTypes.string,
         onHide: PropTypes.func
     }
 
@@ -30,14 +32,14 @@ export class OverlayPanel extends Component {
         super(props);
         this.onCloseClick = this.onCloseClick.bind(this);
     }
-    
+
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = this.onDocumentClick.bind(this);
             document.addEventListener('click', this.documentClickListener);
         }
     }
-    
+
     unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
@@ -57,11 +59,11 @@ export class OverlayPanel extends Component {
 
     onCloseClick(event) {
         this.hide();
-        
+
         event.preventDefault();
     }
 
-    toggle(event, target) {                                
+    toggle(event, target) {
         if (this.isVisible()) {
             this.hide();
 
@@ -82,7 +84,7 @@ export class OverlayPanel extends Component {
         this.target = target||event.currentTarget||event.target;
 
         this.bindDocumentClickListener();
-        
+
         this.container.style.zIndex = String(DomHandler.generateZIndex());
 
         if(this.isVisible()) {
@@ -128,7 +130,7 @@ export class OverlayPanel extends Component {
     renderCloseIcon() {
         if(this.props.showCloseIcon) {
             return (
-                <button className="p-overlaypanel-close p-link" onClick={this.onCloseClick}>
+                <button className="p-overlaypanel-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
                     <span className="p-overlaypanel-close-icon pi pi-times"></span>
                 </button>
             );

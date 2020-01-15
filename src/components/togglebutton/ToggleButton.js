@@ -17,6 +17,7 @@ export class ToggleButton extends Component {
         tabIndex: 0,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null
     };
 
@@ -32,6 +33,7 @@ export class ToggleButton extends Component {
         tabIndex: PropTypes.number,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func
     };
 
@@ -127,7 +129,8 @@ export class ToggleButton extends Component {
         return (
            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="p-hidden-accessible">
-                    <input ref={(el) => this.input = el} type="checkbox" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}/>
+                    <input ref={(el) => this.input = el} type="checkbox" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
+                           role="button" aria-pressed={this.props.checked} aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>
                 {(this.props.onIcon && this.props.offIcon) && <span className={iconStyleClass}></span>}
                 <span className="p-button-text p-unselectable-text">{this.props.checked ? this.props.onLabel : this.props.offLabel}</span>

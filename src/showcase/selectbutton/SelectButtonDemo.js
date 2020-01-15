@@ -4,7 +4,7 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class SelectButtonDemo extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,7 @@ export class SelectButtonDemo extends Component {
             value2: ['Apartment', 'Studio']
         };
     }
-    
+
     render() {
         const options = [
             {label: 'Apartment', value: 'Apartment'},
@@ -65,11 +65,11 @@ import {SelectButton} from 'primereact/selectbutton';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+            <p>SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more 
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
-                    
+
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">
                 {`
@@ -83,7 +83,7 @@ const citySelectItems = [
 
 `}
             </CodeHighlight>
-                    
+
 <CodeHighlight className="language-jsx">
 {`
 <SelectButton value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})}></SelectButton>
@@ -104,7 +104,7 @@ const cities = [
 
 `}
 </CodeHighlight>
-                    
+
             <CodeHighlight className="language-jsx">
 {`
 <SelectButton optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
@@ -204,6 +204,12 @@ const cities = [
                             <td>object</td>
                             <td>null</td>
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                        </tr>
+                        <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                         </tr>
                     </tbody>
                 </table>

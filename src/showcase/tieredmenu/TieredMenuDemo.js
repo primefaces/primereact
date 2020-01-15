@@ -63,7 +63,7 @@ export class TieredMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -73,12 +73,12 @@ export class TieredMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -157,8 +157,8 @@ export class TieredMenuDemo extends Component {
                     <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el}/>
-                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
+                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
                 </div>
 
                 <TieredMenuDoc/>
@@ -672,8 +672,8 @@ export class TieredMenuDemo extends Component {
                     <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el}/>
-                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
+                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
                 </div>
             </div>
         );

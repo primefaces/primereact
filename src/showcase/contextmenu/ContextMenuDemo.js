@@ -26,7 +26,7 @@ export class ContextMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -62,7 +62,7 @@ export class ContextMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -72,12 +72,12 @@ export class ContextMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -154,7 +154,7 @@ export class ContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <ContextMenu model={this.state.items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
                 </div>
 
                 <ContextMenuDoc/>
@@ -671,7 +671,7 @@ export class ContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <ContextMenu model={this.state.items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}  aria-haspopup={true}/>
                 </div>
             </div>
         );

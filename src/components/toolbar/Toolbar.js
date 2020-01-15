@@ -20,9 +20,9 @@ export class Toolbar extends Component {
     render() {
         let toolbarClass = classNames('p-toolbar p-component', this.props.className)
         return (
-            <div id={this.props.id} className={toolbarClass} style={this.props.style}>
+            <div id={this.props.id} className={toolbarClass} style={this.props.style} role="toolbar">
                 {this.props.children}
             </div>
         );
     }
-} 
+}

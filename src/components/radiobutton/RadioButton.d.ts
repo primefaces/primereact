@@ -14,6 +14,7 @@ interface RadioButtonProps {
     tabIndex?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     onChange(e: {originalEvent: Event, value: any, checked: boolean}): void;
 }
 

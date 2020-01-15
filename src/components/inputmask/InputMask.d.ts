@@ -21,6 +21,7 @@ interface InputMaskProps {
     required?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     onComplete?(e: Event): void;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }

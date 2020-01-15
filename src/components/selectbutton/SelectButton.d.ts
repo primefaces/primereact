@@ -14,6 +14,7 @@ interface SelectButtonProps {
     dataKey?: string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 

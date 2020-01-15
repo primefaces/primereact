@@ -15,6 +15,7 @@ export class TriStateCheckbox extends Component {
         className: null,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null
     };
 
@@ -27,9 +28,10 @@ export class TriStateCheckbox extends Component {
         className: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func
     }
-    
+
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
@@ -50,7 +52,7 @@ export class TriStateCheckbox extends Component {
             newValue = false;
         else if(this.props.value === false)
             newValue = null;
-            
+
         if(this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
@@ -112,9 +114,10 @@ export class TriStateCheckbox extends Component {
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
-                    <input ref={(el) => this.inputEL = el} type="checkbox" id={this.props.inputId} name={this.props.name} onFocus={this.onFocus} onBlur={this.onBlur}/>
+                    <input ref={(el) => this.inputEL = el} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name}
+                           onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
-                <div className={boxClass} ref={(el) => { this.box = el; }}>
+                <div className={boxClass} ref={(el) => { this.box = el; }} role="checkbox" aria-checked={this.props.value === true}>
                     <span className={iconClass}></span>
                 </div>
             </div>

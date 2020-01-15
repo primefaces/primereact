@@ -5,7 +5,7 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 
 export class CheckboxDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -219,6 +219,12 @@ onCityChange(e) {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                                 </tr>
                             </tbody>
                         </table>

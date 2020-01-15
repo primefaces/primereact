@@ -62,7 +62,7 @@ import {ToggleButton} from 'primereact/togglebutton';
 
             <h3>Getting Started</h3>
             <p>ToggleButton is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
-                    
+
 <CodeHighlight className="language-jsx">
 {`
 <ToggleButton checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
@@ -158,6 +158,12 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                             <td>object</td>
                             <td>null</td>
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                        </tr>
+                        <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                         </tr>
                     </tbody>
                 </table>
