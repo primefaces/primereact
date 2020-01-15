@@ -3,17 +3,18 @@ import {Link} from 'react-router-dom';
 import {Dropdown} from '../../components/dropdown/Dropdown';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DropdownDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            city: null, 
-            car: null, 
+            city: null,
+            car: null,
             car2: 'BMW'
         };
-        
+
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
@@ -57,11 +58,11 @@ export class DropdownDemo extends Component {
         ];
 
         const cars = [
-            {label: 'Audi', value: 'Audi'},
+            {label: 'Audi', value: 'Audi', color: 'red'},
             {label: 'BMW', value: 'BMW'},
             {label: 'Fiat', value: 'Fiat'},
             {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Jaguar', value: 'Jaguar', color: 'red'},
             {label: 'Mercedes', value: 'Mercedes'},
             {label: 'Renault', value: 'Renault'},
             {label: 'VW', value: 'VW'},
@@ -74,6 +75,10 @@ export class DropdownDemo extends Component {
                     <div className="feature-intro">
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dropdown")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -88,8 +93,16 @@ export class DropdownDemo extends Component {
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}
-                              filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+                    <Dropdown
+                      value={this.state.car2}
+                      options={cars}
+                      onChange={this.onCarChange2}
+                      itemTemplate={this.carTemplate}
+                      filter={true}
+                      filterPlaceholder="Select Car"
+                      filterBy="label,value,color"
+                      showClear={true}
+                    />
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
 
@@ -119,9 +132,9 @@ import {Dropdown} from 'primereact/dropdown';
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+                        <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
                         of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more 
+                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more
                         control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
 
                         <p><b>Options as SelectItems</b></p>
@@ -137,14 +150,14 @@ const citySelectItems = [
 
 `}
                         </CodeHighlight>
-                        
+
                         <CodeHighlight className="language-jsx">
                             {`
 <Dropdown value={this.state.city} options={citySelectItems} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
 
 `}
                         </CodeHighlight>
-                        
+
                         <p><b>Options as any type</b></p>
                         <CodeHighlight className="language-javascript">
                             {`
@@ -158,7 +171,7 @@ const cities = [
 
 `}
                         </CodeHighlight>
-                        
+
                         <CodeHighlight className="language-jsx">
                             {`
 <Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
@@ -518,11 +531,11 @@ export class DropdownDemo extends Component {
     constructor() {
         super();
         this.state = {
-            city: null, 
-            car: null, 
+            city: null,
+            car: null,
             car2: 'BMW'
         };
-        
+
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
         this.onCarChange2 = this.onCarChange2.bind(this);
@@ -597,8 +610,16 @@ export class DropdownDemo extends Component {
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}
-                              filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+                    <Dropdown
+                      value={this.state.car2}
+                      options={cars}
+                      onChange={this.onCarChange2}
+                      itemTemplate={this.carTemplate}
+                      filter={true}
+                      filterPlaceholder="Select Car"
+                      filterBy="label,value"
+                      showClear={true}
+                    />
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
             </div>
