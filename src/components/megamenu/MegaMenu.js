@@ -365,7 +365,7 @@ export class MegaMenu extends Component {
         return (
             <li key={category.label + '_' + index} className={className} style={category.style} onMouseEnter={e => this.onCategoryMouseEnter(e, category)} role="none">
                 <a href={category.url || '#'} className="p-menuitem-link" target={category.target} onClick={e => this.onCategoryClick(e, category)} onKeyDown={e => this.onCategoryKeyDown(e, category)}
-                   role="menuitem" aria-haspopup={category.items != null} aria-expanded={category === this.state.activeItem}>
+                   role="menuitem" aria-haspopup={category.items != null}>
                     {icon}
                     <span className="p-menuitem-text">{category.label}</span>
                     {submenuIcon}

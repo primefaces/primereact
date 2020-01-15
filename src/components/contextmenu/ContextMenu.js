@@ -144,7 +144,7 @@ class ContextMenuSub extends Component {
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
                 <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
-                   aria-haspopup={item.items != null} aria-expanded={this.state.activeItem === item}>
+                   aria-haspopup={item.items != null}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}

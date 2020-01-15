@@ -542,7 +542,7 @@ export class Dropdown extends Component {
     renderKeyboardHelper() {
         return <div className="p-hidden-accessible">
                     <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" readOnly={true} aria-haspopup="listbox"
-                        onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-expanded={this.state.overlayVisible}
+                        onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                         disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>;
     }
@@ -554,7 +554,7 @@ export class Dropdown extends Component {
             return <input ref={(el) => this.editableInput = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled}
                           placeholder={this.props.placeholder} maxLength={this.props.maxLength} onClick={this.onEditableInputClick} onInput={this.onEditableInputChange}
                           onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}
-                          aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}/>;
+                          aria-haspopup="listbox"/>;
         }
         else {
             let className = classNames('p-dropdown-label p-inputtext', {

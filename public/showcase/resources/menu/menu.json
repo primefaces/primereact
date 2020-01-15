@@ -161,7 +161,7 @@
                 },
                 {
                     "name": "TriStateCheckbox",
-                    "to": "/tristate",
+                    "to": "/tristatecheckbox",
                     "meta": [
                         "tristateCheckbox"
                     ]

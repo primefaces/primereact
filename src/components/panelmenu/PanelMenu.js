@@ -107,8 +107,7 @@ class PanelMenuSub extends Component {
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}
-                   role="menuitem" aria-expanded={this.state.activeItem === item}>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem">
                     {submenuIcon}
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>

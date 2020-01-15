@@ -252,7 +252,7 @@ export class TieredMenuSub extends Component {
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)} role="none">
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} role="menuitem" aria-haspopup={item.items != null} aria-expanded={this.state.activeItem === item}
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} role="menuitem" aria-haspopup={item.items != null}
                     onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>

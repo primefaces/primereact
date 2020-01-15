@@ -220,7 +220,7 @@ export class Sidebar extends Component {
         const iconsTemplate = this.renderIconsTemplate();
 
         return (
-            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary" aria-modal={this.props.modal}>
+            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
                 {closeIcon}
                 {iconsTemplate}
                 {this.props.children}

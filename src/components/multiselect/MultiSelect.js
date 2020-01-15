@@ -67,8 +67,7 @@ export class MultiSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: '',
-            overlayVisible: null
+            filter: ''
         };
 
         this.onClick = this.onClick.bind(this);
@@ -223,7 +222,6 @@ export class MultiSelect extends Component {
 
             this.alignPanel();
             this.bindDocumentClickListener();
-            this.setState({overlayVisible: true})
         }
     }
 
@@ -237,7 +235,6 @@ export class MultiSelect extends Component {
             this.panel.element.style.display = 'none';
             DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 150);
-        this.setState({overlayVisible: false})
     }
 
     alignPanel() {
@@ -505,7 +502,7 @@ export class MultiSelect extends Component {
             <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
                 <div className="p-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} aria-haspopup="listbox"
-                           aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible}/>
+                           aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>
                 {label}
                 <div className="p-multiselect-trigger">
