@@ -239,12 +239,19 @@ export class Slider extends Component {
     renderRangeSlider() {
         let values = this.props.value||[0,0];
         let horizontal = (this.props.orientation === 'horizontal');
+        let rangeEndHandle;
+        let rangeStartHandle;
         const handleValueStart = (values[0] < this.props.min ? 0 : values[0] - this.props.min) * 100 / (this.props.max - this.props.min);
         const handleValueEnd = (values[1] > this.props.max ? 100 : values[1] - this.props.min) * 100 / (this.props.max - this.props.min);
-        const rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, 'auto', 0) : this.renderHandle('auto', handleValueStart, 0);
-        const rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, 'auto', 1) : this.renderHandle('auto', handleValueEnd, 1);
-        const rangeStyle = horizontal ? {left: handleValueStart + '%', width: (handleValueEnd - handleValueStart) + '%'} : {bottom: handleValueStart + '%', height: (handleValueEnd - handleValueStart) + '%'};
-
+        const rangeStyle = horizontal ? { left: handleValueStart + "%", width: handleValueEnd - handleValueStart + "%"} : { bottom: handleValueStart + "%", height: handleValueEnd - handleValueStart + "%"};
+        
+        if (handleValueStart === handleValueEnd && handleValueStart === this.props.max) {
+            rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, "auto", 0) : this.renderHandle("auto", handleValueStart, 0);
+        } else {
+           rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, "auto", 0) : this.renderHandle("auto", handleValueStart, 0);
+            rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, "auto", 1) : this.renderHandle("auto", handleValueEnd, 1);
+        }
+        
         return (
             <React.Fragment>
                 <span className="p-slider-range" style={rangeStyle}></span>
