@@ -10,7 +10,7 @@ export class HomeComponent extends Component {
                     <h1>The Most Complete UI Framework</h1>
                     <h2>for REACT</h2>
 
-                    <Link to="/setup" className="home-button">Get Started</Link>
+                    <Link to="/setup" className="link-button">Get Started</Link>
                 </div>
                 <div className="features">
                     <h3>Why PrimeReact?</h3>
@@ -184,7 +184,7 @@ export class HomeComponent extends Component {
                             <h3>PrimeReact PRO Support</h3>
                             <p>With PrimeReact PRO, it is easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
                             <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
-                            <a className="home-button2" href="mailto:contact@primetek.com.tr">
+                            <a className="link-button2" href="mailto:contact@primetek.com.tr">
                                 Get a Quote
                             </a>
                         </div>

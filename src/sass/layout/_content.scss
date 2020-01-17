@@ -3,6 +3,37 @@
         margin-left: 300px;
         padding-top: 70px;
 
+        .link-button {
+            font-weight: bold;
+            text-align: center;
+            color: #ffffff;
+            background-color: #fe8702;
+            padding: 10px 24px 9px 24px;
+            border-radius: 3px;
+            @include transition(background-color .2s);
+
+            &:hover {
+                background-color: #C56A05;
+                color: #ffffff;
+            }
+        }
+
+        .link-button2 {
+            font-weight: bold;
+            text-align: center;
+            color: #8C6816 !important;;
+            background-color: #FFCB54;
+            padding: 10px 24px 9px 24px;
+            border-radius: 3px;
+            @include transition(background-color .2s);
+            display: inline-block;
+
+            &:hover {
+                background-color: #E5AF36;
+                color: #8C6816 !important;
+            }
+        }
+
         .content-section {
             display: block;
             padding: 30px;
@@ -301,37 +332,6 @@
         .home {
             p {
                 line-height: 22px;
-            }
-
-            .home-button {
-                font-weight: bold;
-                text-align: center;
-                color: #ffffff;
-                background-color: #fe8702;
-                padding: 10px 24px 9px 24px;
-                border-radius: 3px;
-                @include transition(background-color .2s);
-
-                &:hover {
-                    background-color: #C56A05;
-                    color: #ffffff;
-                }
-            }
-
-            .home-button2 {
-                font-weight: bold;
-                text-align: center;
-                color: #8C6816 !important;;
-                background-color: #FFCB54;
-                padding: 10px 24px 9px 24px;
-                border-radius: 3px;
-                @include transition(background-color .2s);
-                display: inline-block;
-
-                &:hover {
-                    background-color: #E5AF36;
-                    color: #8C6816 !important;
-                }
             }
 
             /* Introduction */
