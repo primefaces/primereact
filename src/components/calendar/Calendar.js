@@ -2356,12 +2356,12 @@ export class Calendar extends Component {
 
         return (
             <div className="p-hour-picker">
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{hourDisplay}</span>
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
@@ -2376,12 +2376,12 @@ export class Calendar extends Component {
 
         return (
             <div className="p-minute-picker">
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{minuteDisplay}</span>
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
@@ -2397,12 +2397,12 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-second-picker">
-                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{secondDisplay}</span>
-                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
@@ -2422,11 +2422,11 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-ampm-picker">
-                    <button className="p-link" onClick={this.toggleAmPm}>
+                    <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{display}</span>
-                    <button className="p-link" onClick={this.toggleAmPm}>
+                    <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
                 </div>
