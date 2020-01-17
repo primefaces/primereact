@@ -232,9 +232,14 @@ export class Slider extends Component {
     }
 
     renderHandle(leftValue, bottomValue, index) {
+        const handleClassName = classNames('p-slider-handle', {
+            'p-slider-handle-start': index === 0,
+            'p-slider-handle-end': index === 1
+        });
+
         return (
             <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
-                  className="p-slider-handle"  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}
+                  className={handleClassName}  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}
                   role="slider" aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy}></span>
         );
     }
