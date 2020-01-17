@@ -5,14 +5,15 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeEventsDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
-            selectedNodeKey: null 
+            selectedNodeKey: null
         };
 
         this.nodeService = new NodeService();
@@ -47,11 +48,15 @@ export class TreeEventsDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Events</h1>
                         <p>An event is provided each type of user interaction such as expand, collapse and selection.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -59,7 +64,7 @@ export class TreeEventsDemo extends Component {
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3 className="first">Events</h3>
-                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} 
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})}
                             onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
                 </div>
 
@@ -74,7 +79,7 @@ export class TreeEventsDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -92,9 +97,9 @@ export class TreeEventsDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
-            selectedNodeKey: null 
+            selectedNodeKey: null
         };
 
         this.nodeService = new NodeService();
@@ -127,7 +132,7 @@ export class TreeEventsDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Events</h1>
@@ -139,7 +144,7 @@ export class TreeEventsDemo extends Component {
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3 className="first">Events</h3>
-                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} 
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})}
                             onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
                 </div>
             </div>

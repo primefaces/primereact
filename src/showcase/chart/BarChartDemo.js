@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class BarChartDemo extends Component {
@@ -19,7 +20,7 @@ export class BarChartDemo extends Component {
                     backgroundColor: '#9CCC65',
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
-            ]    
+            ]
         };
 
         const multiAxisData = {
@@ -44,7 +45,7 @@ export class BarChartDemo extends Component {
 				data: [28, 48, 40, 19, 86, 27, 90]
 			}]
         };
-        
+
         const multiAxisOptions = {
             responsive: true,
             tooltips: {
@@ -61,7 +62,7 @@ export class BarChartDemo extends Component {
                         min: 0,
                         max: 100
                     }
-                }, 
+                },
                 {
                     type: 'linear',
                     display: true,
@@ -144,6 +145,10 @@ export class BarChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>BarChart</h1>
                         <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -184,7 +189,7 @@ import React, {Component} from 'react';
 import {Chart} from 'primereact/chart';
 
 export class BarChartDemo extends Component {
-    
+
     render() {
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -199,7 +204,7 @@ export class BarChartDemo extends Component {
                     backgroundColor: '#9CCC65',
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
-            ]    
+            ]
         };
 
         const multiAxisData = {
@@ -224,7 +229,7 @@ export class BarChartDemo extends Component {
 				data: [28, 48, 40, 19, 86, 27, 90]
 			}]
         };
-        
+
         const multiAxisOptions = {
             responsive: true,
             tooltips: {
@@ -241,7 +246,7 @@ export class BarChartDemo extends Component {
                         min: 0,
                         max: 100
                     }
-                }, 
+                },
                 {
                     type: 'linear',
                     display: true,

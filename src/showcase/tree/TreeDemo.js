@@ -5,12 +5,13 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             expandedKeys: {}
         };
@@ -42,6 +43,10 @@ export class TreeDemo extends Component {
                     <div className="feature-intro">
                         <h1>Tree</h1>
                         <p>Tree is used to display hierarchical data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -51,7 +56,7 @@ export class TreeDemo extends Component {
 
                     <h3>Controlled</h3>
                     <Button onClick={this.toggleMovies} label="Toggle Movies" />
-                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} 
+                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
                         onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
                 </div>
 
@@ -66,7 +71,7 @@ export class TreeDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -231,7 +236,7 @@ const data: [
 </CodeHighlight>
 
             <h3>Controlled vs Uncontrolled</h3>
-            <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i> 
+            <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
             property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
             both cases;</p>
 
@@ -246,7 +251,7 @@ export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             expandedKeys: {}
         };
@@ -277,7 +282,7 @@ export class TreeDemo extends Component {
 
                 <h3>Controlled</h3>
                 <Button onClick={this.toggleMovies} label="Toggle Movies" />
-                <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} 
+                <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
                     onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
             </div>
         )
@@ -301,12 +306,12 @@ export class TreeSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             selectedNodeKey: null,
-            selectedNodeKeys1: null, 
-            selectedNodeKeys2: null, 
-            selectedNodeKeys3: null  
+            selectedNodeKeys1: null,
+            selectedNodeKeys2: null,
+            selectedNodeKeys3: null
         };
 
         this.nodeService = new NodeService();
@@ -318,7 +323,7 @@ export class TreeSelectionDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
                 <h3>Single Selection</h3>
                 <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} />
 
@@ -352,7 +357,7 @@ export class TreeLazyDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             loading: true,
         };
@@ -367,25 +372,25 @@ export class TreeLazyDemo extends Component {
             this.setState({
                 loading: true
             });
-    
+
             setTimeout(() => {
                 let node = {...event.node};
                 node.children = [];
-    
+
                 for (let i = 0; i < 3; i++) {
                     node.children.push({
                         key: node.key + '-' + i,
                         label: 'Lazy ' + node.label + '-' + i
                     });
                 }
-                
+
                 let value = [...this.state.nodes];
-                value[parseInt(event.node.key, 10)] = node; 
+                value[parseInt(event.node.key, 10)] = node;
                 this.setState({
                     nodes: value,
                     loading: false
                 });
-            }, 500);  
+            }, 500);
         }
     }
 
@@ -422,7 +427,7 @@ export class TreeTemplatingDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: this.createNavigation()
         };
 
@@ -490,7 +495,7 @@ export class TreeDragDropDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null
         };
 
@@ -503,7 +508,7 @@ export class TreeDragDropDemo extends Component {
 
     render() {
         return (
-            <div>              
+            <div>
                 <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
             </div>
         )
@@ -514,12 +519,12 @@ export class TreeDragDropDemo extends Component {
 </CodeHighlight>
 
             <h3>Filtering</h3>
-            <p>Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node 
+            <p>Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node
             is used to compare against the value in the text field, in order to customize which field(s) should be used during search define <i>filterBy</i> property.</p>
 
-            <p>In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand, 
+            <p>In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
                  in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
-            
+
 <CodeHighlight className="language-javascript">
 {`
 <Tree value={this.state.nodes} filter={true} />
@@ -547,7 +552,7 @@ export class TreeContextMenuDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             expandedKeys: {},
             selectedNodeKey: null,
@@ -584,13 +589,13 @@ export class TreeContextMenuDemo extends Component {
 
     render() {
         return (
-            <div>                
+            <div>
                 <Growl ref={(el) => this.growl = el} />
 
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} />
 
                 <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                    onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})} 
+                    onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
                     onContextMenu={event => this.cm.show(event.originalEvent)} />
             </div>
         )
@@ -887,7 +892,7 @@ export class TreeContextMenuDemo extends Component {
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -905,7 +910,7 @@ export class TreeDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             expandedKeys: {}
         };
@@ -944,7 +949,7 @@ export class TreeDemo extends Component {
 
                     <h3>Controlled</h3>
                     <Button onClick={this.toggleMovies} label="Toggle Movies" />
-                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} 
+                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
                         onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
                 </div>
             </div>

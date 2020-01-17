@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Menu} from '../../components/menu/Menu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Button} from "../../components/button/Button";
 
 export class MenuDemo extends Component {
@@ -15,7 +16,7 @@ export class MenuDemo extends Component {
                     label: 'Options',
                     items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
                             {label: 'Home', icon: 'pi pi-fw pi-home', url: 'http://primetek.com.tr'}]
-                }, 
+                },
                 {
                     label: 'Account',
                     items: [{label: 'Components', icon: 'pi pi-fw pi-cog', command:()=>{ window.location.hash="/"; }},
@@ -32,6 +33,10 @@ export class MenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>Menu</h1>
                         <p>Menu is a navigation/command component that supports dynamic and static positioning.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("menu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -40,8 +45,8 @@ export class MenuDemo extends Component {
                     <Menu model={this.state.items}/>
 
                     <h3>Popup</h3>
-                    <Menu model={this.state.items} popup={true} ref={el => this.menu = el} />
-                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+                    <Menu model={this.state.items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
+                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
                 </div>
 
                 <MenuDoc/>
@@ -101,7 +106,7 @@ let items: [
         label: 'Options',
         items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
                 {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
-    }, 
+    },
     {
         label: 'Account',
         items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
@@ -140,7 +145,7 @@ let items: [
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Unique identifier of the element.</td>
-                                    </tr>      
+                                    </tr>
                                     <tr>
                                         <td>model</td>
                                         <td>array</td>
@@ -300,7 +305,7 @@ export class MenuDemo extends Component {
                     label: 'Options',
                     items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
                             {label: 'Home', icon: 'pi pi-fw pi-home', url: 'http://primetek.com.tr'}]
-                }, 
+                },
                 {
                     label: 'Account',
                     items: [{label: 'Components', icon: 'pi pi-fw pi-cog', command:()=>{ window.location.hash="/"; }},
@@ -325,8 +330,8 @@ export class MenuDemo extends Component {
                     <Menu model={this.state.items}/>
 
                     <h3>Popup</h3>
-                    <Menu model={this.state.items} popup={true} ref={el => this.menu = el}/>
-                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+                    <Menu model={this.state.items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
+                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
                 </div>
 
                 <MenuDoc/>

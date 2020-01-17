@@ -3,6 +3,7 @@ import {Captcha} from '../../components/captcha/Captcha';
 import {Growl} from '../../components/growl/Growl';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class CaptchaDemo extends Component {
 
@@ -22,6 +23,10 @@ export class CaptchaDemo extends Component {
                     <div className="feature-intro">
                         <h1>Captcha</h1>
                         <p>Captcha is a form validation component based on Recaptcha.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("captcha")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -208,6 +213,7 @@ import {Captcha} from '../../components/captcha/Captcha';
 import {Growl} from '../../components/growl/Growl';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class CaptchaDemo extends Component {
 

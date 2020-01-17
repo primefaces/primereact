@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {Checkbox} from '../../components/checkbox/Checkbox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class CheckboxDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -33,6 +34,10 @@ export class CheckboxDemo extends Component {
                     <div className="feature-intro">
                         <h1>Checkbox</h1>
                         <p>Checkbox is an extension to standard checkbox element with skinning capabilities.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("checkbox")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -220,6 +225,12 @@ onCityChange(e) {
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -300,7 +311,7 @@ import React, {Component} from 'react';
 import {Checkbox} from 'primereact/checkbox';
 
 export class CheckboxDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -312,7 +323,7 @@ export class CheckboxDemo extends Component {
 
     onCityChange(e) {
         let selectedCities = [...this.state.cities];
-        
+
         if(e.checked)
             selectedCities.push(e.value);
         else

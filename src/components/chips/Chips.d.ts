@@ -12,6 +12,7 @@ interface ChipsProps {
     className?: string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     itemTemplate?(item: any): JSX.Element | undefined;
     onAdd?(e: {originalEvent: Event, value: any}): void;
     onRemove?(e: {originalEvent: Event, value: any}): void;

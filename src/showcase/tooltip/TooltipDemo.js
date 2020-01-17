@@ -3,9 +3,10 @@ import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TooltipDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -13,6 +14,10 @@ export class TooltipDemo extends Component {
                     <div className="feature-intro">
                         <h1>Tooltip</h1>
                         <p>Tooltip functionality is integrated within various PrimeReact components.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tooltip")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -20,22 +25,22 @@ export class TooltipDemo extends Component {
                     <h3>Positions</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />              
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />    
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />    
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
                         </div>
                     </div>
 
                     <h3>Focus and Blur</h3>
                     <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
-                
+
                     <h3>Button</h3>
                     <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
                 </div>
@@ -59,7 +64,7 @@ class TooltipDoc extends Component {
                     <TabPanel header="Documentation">
                         <h3>Getting Started</h3>
                         <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
-                        
+
 <CodeHighlight className="language-jsx">
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
@@ -69,7 +74,7 @@ class TooltipDoc extends Component {
 </CodeHighlight>
 
                         <h3>Position</h3>
-                        <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is 
+                        <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is
                         specified using <i>tooltipOptions</i> property.</p>
 <CodeHighlight className="language-jsx">
 {`
@@ -137,11 +142,11 @@ class TooltipDoc extends Component {
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Style class of the tooltip.</td>
-                                </tr>               
+                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <h3>Styling</h3>
                     <p>Following is the list of structural style classes</p>
                     <div className="doc-tablewrapper">
@@ -180,7 +185,7 @@ import React, {Component} from 'react';
 import {InputText} from 'primereact/inputtext';
 
 export class TooltipDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {title: null, tooltipPosition: 'right'};
@@ -222,26 +227,26 @@ export class TooltipDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">                    
+                <div className="content-section implementation">
                     <h3>Positions</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />              
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />    
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />    
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />    
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
                         </div>
                     </div>
 
                     <h3>Focus and Blur</h3>
                     <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'} />
-                
+
                     <h3>Button</h3>
                     <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
                 </div>

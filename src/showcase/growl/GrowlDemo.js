@@ -4,9 +4,10 @@ import {Growl} from '../../components/growl/Growl';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class GrowlDemo extends Component {
-        
+
     constructor() {
         super();
         this.showSuccess = this.showSuccess.bind(this);
@@ -41,7 +42,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" /> 
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" />
 
         this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -65,6 +66,10 @@ export class GrowlDemo extends Component {
                     <div className="feature-intro">
                         <h1>Growl</h1>
                         <p>Growl is used to display messages in an overlay.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("growl")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -86,7 +91,7 @@ export class GrowlDemo extends Component {
                             <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
-                    
+
                     <h3>Options</h3>
                     <div className="p-grid">
                         <div className="p-col-12 p-md-4">
@@ -99,11 +104,11 @@ export class GrowlDemo extends Component {
                             <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
                         </div>
                     </div>
-                    
+
                     <h3>Remove All</h3>
                     <Button onClick={this.clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
                 </div>
-                
+
                 <GrowlDoc></GrowlDoc>
             </div>
         )
@@ -115,7 +120,7 @@ export class GrowlDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -203,14 +208,14 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
 
             <h3>Severities</h3>
             <p>There are four possible values for the severity of a message.</p>
-            
+
             <ul>
                 <li>success</li>
                 <li>info</li>
                 <li>warn</li>
                 <li>error</li>
             </ul>
-            
+
             <h3>Showing Messages</h3>
             <p>Show method accepts either a single message or an array of messages.</p>
 
@@ -282,7 +287,7 @@ this.growl.show({life: 5000, severity: 'error', summary: 'Error Message', detail
 </CodeHighlight>
 
             <h3>Position</h3>
-            <p>There are four positions available for the growl container defined by the <i>position</i> property that defaults to "topright". Other 
+            <p>There are four positions available for the growl container defined by the <i>position</i> property that defaults to "topright". Other
                 valid values are "topleft", "bottomleft" and "bottomright"
             </p>
 
@@ -421,7 +426,7 @@ this.growl.clear();
                     <li>react-transition-group</li>
                 </ul>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -435,7 +440,7 @@ import {Growl} from 'primereact/growl';
 import {Button} from 'primereact/button';
 
 export class GrowlDemo extends Component {
-        
+
     constructor() {
         super();
         this.showSuccess = this.showSuccess.bind(this);
@@ -470,7 +475,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" /> 
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" />
 
         this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -515,7 +520,7 @@ export class GrowlDemo extends Component {
                             <Button onClick={this.showError} label="Error" className="p-button-danger" />
                         </div>
                     </div>
-                    
+
                     <h3>Options</h3>
                     <div className="p-grid">
                         <div className="p-col-12 p-md-4">
@@ -528,7 +533,7 @@ export class GrowlDemo extends Component {
                             <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
                         </div>
                     </div>
-                    
+
                     <h3>Remove All</h3>
                     <Button onClick={this.clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
                 </div>

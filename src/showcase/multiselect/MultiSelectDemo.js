@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class MultiSelectDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -62,6 +63,10 @@ export class MultiSelectDemo extends Component {
                     <div className="feature-intro">
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("multiSelect")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -74,7 +79,7 @@ export class MultiSelectDemo extends Component {
                     <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
                                  style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
                 </div>
-                
+
                 <MultiSelectDoc />
             </div>
         );
@@ -86,7 +91,7 @@ export class MultiSelectDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -101,11 +106,11 @@ import {MultiSelect} from 'primereact/multiselect';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+            <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more 
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
-        
+
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">
 {`
@@ -119,7 +124,7 @@ const citySelectItems = [
 
 `}
             </CodeHighlight>
-        
+
             <CodeHighlight className="language-jsx">
 {`
 <MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} />
@@ -346,6 +351,12 @@ selectedCarTemplate(option) {
                             <td>&#123;0&#125; items selected</td>
                             <td>Label to display after exceeding max selected labels.</td>
                         </tr>
+                        <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -431,7 +442,7 @@ selectedCarTemplate(option) {
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -444,7 +455,7 @@ import React, {Component} from 'react';
 import {MultiSelect} from 'primereact/multiselect';
 
 export class MultiSelectDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {

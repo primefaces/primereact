@@ -61,7 +61,7 @@ export class UIMessage extends Component {
     renderCloseIcon() {
         if (this.props.message.closable !== false) {
             return (
-                <button className="p-messages-close p-link" onClick={this.onClose}>
+                <button type="button" className="p-messages-close p-link" onClick={this.onClose}>
                     <i className="p-messages-close-icon pi pi-times"></i>
                 </button>
             );

@@ -16,6 +16,7 @@ export class Sidebar extends Component {
         baseZIndex: 0,
         dismissable: true,
         showCloseIcon: true,
+        ariaCloseLabel: 'close',
         closeOnEscape: true,
         iconsTemplate: null,
         modal: true,
@@ -34,6 +35,7 @@ export class Sidebar extends Component {
         baseZIndex: PropTypes.number,
         dismissable: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
+        ariaCloseLabel: PropTypes.string,
         closeOnEscape: PropTypes.bool,
         iconsTemplate: PropTypes.func,
         modal: PropTypes.bool,
@@ -132,7 +134,7 @@ export class Sidebar extends Component {
                         break;
                     }
                 }
-                
+
                 if (!hasBlockerMasks) {
                     DomHandler.removeClass(document.body, 'p-overflow-hidden');
                 }
@@ -165,7 +167,7 @@ export class Sidebar extends Component {
         };
         document.addEventListener('keydown', this.documentEscapeListener);
     }
-    
+
     unbindDocumentEscapeListener() {
         if (this.documentEscapeListener) {
             document.removeEventListener('keydown', this.documentEscapeListener);
@@ -192,7 +194,7 @@ export class Sidebar extends Component {
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
-                <button ref={el => this.closeIcon = el} className="p-sidebar-close p-link" onClick={this.onCloseClick}>
+                <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
                     <span className="p-sidebar-close-icon pi pi-times"/>
                 </button>
             );
@@ -218,7 +220,7 @@ export class Sidebar extends Component {
         const iconsTemplate = this.renderIconsTemplate();
 
         return (
-            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
                 {closeIcon}
                 {iconsTemplate}
                 {this.props.children}

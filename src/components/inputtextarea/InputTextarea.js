@@ -10,8 +10,6 @@ export class InputTextarea extends Component {
     static defaultProps = {
         autoResize: false,
         onInput: null,
-        cols: 20,
-        rows: 2,
         tooltip: null,
         tooltipOptions: null
     };
@@ -19,12 +17,10 @@ export class InputTextarea extends Component {
     static propTypes = {
         autoResize: PropTypes.bool,
         onInput: PropTypes.func,
-        cols: PropTypes.number,
-        rows: PropTypes.number,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object
     };
-    
+
     constructor(props) {
         super(props);
         this.onFocus = this.onFocus.bind(this);
@@ -101,7 +97,7 @@ export class InputTextarea extends Component {
             this.cachedScrollHeight = this.element.scrollHeight;
         }
     }
-    
+
     componentDidMount() {
         if (this.props.tooltip) {
             this.renderTooltip();
@@ -116,7 +112,7 @@ export class InputTextarea extends Component {
         if (!DomHandler.isVisible(this.element)) {
             return;
         }
-        
+
         if (prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
@@ -154,7 +150,7 @@ export class InputTextarea extends Component {
         let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextarea.defaultProps);
 
         return (
-            <textarea {...textareaProps} className={className} ref={input => this.element = input} 
+            <textarea {...textareaProps} className={className} ref={input => this.element = input}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
         );
     }

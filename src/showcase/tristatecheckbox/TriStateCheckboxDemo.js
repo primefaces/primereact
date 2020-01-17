@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {TriStateCheckbox} from '../../components/tristatecheckbox/TriStateCheckbox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TriStateCheckboxDemo extends Component {
 
@@ -20,6 +21,10 @@ export class TriStateCheckboxDemo extends Component {
                     <div className="feature-intro">
                         <h1>TriStateCheckbox</h1>
                         <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("triStateCheckbox")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -122,6 +127,12 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -140,7 +151,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                                 <tr>
                                     <td>onChange</td>
                                     <td>event.originalEvent: Browser event <br />
-                                        event.value: Current Value 
+                                        event.value: Current Value
                                     </td>
                                     <td>Callback to invoke on value change</td>
                                 </tr>

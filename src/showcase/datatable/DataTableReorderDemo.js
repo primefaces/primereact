@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableReorderDemo extends Component {
 
@@ -29,6 +30,10 @@ export class DataTableReorderDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Reorder</h1>
                         <p>Order of the columns and rows can be changed using drag and drop.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -53,7 +58,7 @@ export class DataTableColReorderDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -93,7 +98,7 @@ export class DataTableColReorderDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} reorderableColumns={true} 
+                    <DataTable value={this.state.cars} reorderableColumns={true}
                         reorderableRows={true} onRowReorder={(e) => this.setState({cars: e.value})}>
                         <Column rowReorder={true} style={{width: '3em'}} />
                         <Column columnKey="vin" field="vin" header="Vin"/>

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {ContextMenu} from '../../components/contextmenu/ContextMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ContextMenuDemo extends Component {
 
@@ -26,7 +27,7 @@ export class ContextMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -62,7 +63,7 @@ export class ContextMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -72,12 +73,12 @@ export class ContextMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -149,12 +150,16 @@ export class ContextMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>ContextMenu</h1>
                         <p>ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("contextMenu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
                 <div className="content-section implementation">
                     <ContextMenu model={this.state.items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
                 </div>
 
                 <ContextMenuDoc/>
@@ -204,7 +209,7 @@ const items:[
                    label:'Video',
                    icon:'pi pi-fw pi-video'
                 },
- 
+
              ]
           },
           {
@@ -240,7 +245,7 @@ const items:[
              label:'Justify',
              icon:'pi pi-fw pi-align-justify'
           },
- 
+
        ]
     },
     {
@@ -250,12 +255,12 @@ const items:[
           {
              label:'New',
              icon:'pi pi-fw pi-user-plus',
- 
+
           },
           {
              label:'Delete',
              icon:'pi pi-fw pi-user-minus',
- 
+
           },
           {
              label:'Search',
@@ -295,7 +300,7 @@ const items:[
                    label:'Delete',
                    icon:'pi pi-fw pi-calendar-minus'
                 },
- 
+
              ]
           },
           {
@@ -542,7 +547,7 @@ export class ContextMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -578,7 +583,7 @@ export class ContextMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -588,12 +593,12 @@ export class ContextMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -633,7 +638,7 @@ export class ContextMenuDemo extends Component {
                                label:'Delete',
                                icon:'pi pi-fw pi-calendar-minus'
                             },
-             
+
                          ]
                       },
                       {
@@ -671,7 +676,7 @@ export class ContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <ContextMenu model={this.state.items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}  aria-haspopup={true}/>
                 </div>
             </div>
         );

@@ -18,6 +18,7 @@ export class RadioButton extends Component {
         tabIndex: null,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null
     };
 
@@ -33,13 +34,14 @@ export class RadioButton extends Component {
         tabIndex: PropTypes.number,
         onChange: PropTypes.func,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string
     };
-    
+
     constructor(props) {
         super(props);
         this.state = {};
-        
+
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -112,18 +114,18 @@ export class RadioButton extends Component {
         if(this.input) {
             this.input.checked = this.props.checked;
         }
-        
+
         let containerClass = classNames('p-radiobutton p-component', this.props.className);
         let boxClass = classNames('p-radiobutton-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
         let iconClass = classNames('p-radiobutton-icon p-c', { 'pi pi-circle-on': this.props.checked });
-        
+
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
-                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" name={this.props.name} defaultChecked={this.props.checked} 
+                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" aria-labelledby={this.props.ariaLabelledBy} name={this.props.name} defaultChecked={this.props.checked}
                         onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} required={this.props.required} tabIndex={this.props.tabIndex}/>
                 </div>
-                <div className={boxClass} ref={(el) => { this.box = el; }}>
+                <div className={boxClass} ref={(el) => { this.box = el; }} role="radio" aria-checked={this.props.checked}>
                     <span className={iconClass}></span>
                 </div>
             </div>

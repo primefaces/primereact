@@ -4,12 +4,13 @@ import {Growl} from '../../components/growl/Growl';
 import {FileUpload} from '../../components/fileupload/FileUpload';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class FileUploadDemo extends Component {
-        
+
     constructor() {
         super();
-        
+
         this.onUpload = this.onUpload.bind(this);
         this.onBasicUpload = this.onBasicUpload.bind(this);
         this.onBasicUploadAuto = this.onBasicUploadAuto.bind(this);
@@ -18,12 +19,12 @@ export class FileUploadDemo extends Component {
     onUpload(event) {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
-    
+
     onBasicUpload(event) {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
-    
-    onBasicUploadAuto(event) {   
+
+    onBasicUploadAuto(event) {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
@@ -34,23 +35,27 @@ export class FileUploadDemo extends Component {
                     <div className="feature-intro">
                         <h1>FileUpload</h1>
                         <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("fileUpload")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <h3>Advanced</h3>
-                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} 
+                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
                                 multiple={true} accept="image/*" maxFileSize={1000000} />
-                                
+
                     <h3>Basic</h3>
                     <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
-                    
+
                     <h3>Basic with Auto</h3>
                     <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
-                    
+
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
                 </div>
-                
+
                 <FileUploadDoc></FileUploadDoc>
             </div>
         )
@@ -62,7 +67,7 @@ export class FileUploadDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -87,7 +92,7 @@ import {FileUpload} from 'primereact/fileupload';
 
             <h3>Multiple Uploads</h3>
             <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable <i>multiple</i> option.</p>
-               
+
 <CodeHighlight className="language-jsx">
 {`
 <FileUpload name="demo[]" url="./upload" multiple={true} />
@@ -419,7 +424,7 @@ myUploader(event) {
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -433,10 +438,10 @@ import {Growl} from 'primereact/growl';
 import {FileUpload} from 'primereact/fileupload';;
 
 export class FileUploadDemo extends Component {
-        
+
     constructor() {
         super();
-        
+
         this.onUpload = this.onUpload.bind(this);
         this.onBasicUpload = this.onBasicUpload.bind(this);
         this.onBasicUploadAuto = this.onBasicUploadAuto.bind(this);
@@ -445,12 +450,12 @@ export class FileUploadDemo extends Component {
     onUpload(event) {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
-    
+
     onBasicUpload(event) {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
-    
-    onBasicUploadAuto(event) {   
+
+    onBasicUploadAuto(event) {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
@@ -466,15 +471,15 @@ export class FileUploadDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Advanced</h3>
-                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} 
+                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
                                 multiple={true} accept="image/*" maxFileSize={1000000} />
-                                
+
                     <h3>Basic</h3>
                     <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
-                    
+
                     <h3>Basic with Auto</h3>
                     <FileUpload mode="basic" name="demo[]" uurl="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
-                    
+
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
                 </div>
             </div>

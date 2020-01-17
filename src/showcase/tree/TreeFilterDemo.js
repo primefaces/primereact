@@ -4,12 +4,13 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeFilterDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes1: null,
             nodes2: null
         };
@@ -25,18 +26,22 @@ export class TreeFilterDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Filter</h1>
                         <p>Filtering updates the node based on the constraints.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <h3 className="first">Lenient Filter Mode</h3>
                     <Tree value={this.state.nodes1} filter={true} />
-                    
+
                     <h3>Strict Filter Mode</h3>
                     <Tree value={this.state.nodes2} filter={true} filterMode="strict" />
                 </div>
@@ -52,7 +57,7 @@ export class TreeFilterDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -69,7 +74,7 @@ export class TreeFilterDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes1: null,
             nodes2: null
         };
@@ -94,7 +99,7 @@ export class TreeFilterDemo extends Component {
                 <div className="content-section implementation">
                     <h3 className="first">Lenient Filter Mode</h3>
                     <Tree value={this.state.nodes1} filter={true} />
-                    
+
                     <h3>Strict Filter Mode</h3>
                     <Tree value={this.state.nodes2} filter={true} filterMode="strict" />
                 </div>

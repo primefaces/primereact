@@ -4,6 +4,7 @@ import {Card} from '../../components/card/Card';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class CardDemo extends Component {
 
@@ -24,6 +25,10 @@ export class CardDemo extends Component {
                     <div className="feature-intro">
                         <h1>Card</h1>
                         <p>Card is a flexible container component.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("card")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

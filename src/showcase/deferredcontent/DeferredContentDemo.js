@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {DeferredContent} from '../../components/deferredcontent/DeferredContent';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {CarService} from "../service/CarService";
 import {DataTable} from "../../components/datatable/DataTable";
 import {Column} from "../../components/column/Column";
@@ -35,6 +36,10 @@ export class DeferredContentDemo extends Component {
                     <div className="feature-intro">
                         <h1>DeferredContent</h1>
                         <p>DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll. </p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("deferredContent")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

@@ -18,6 +18,10 @@
 	background-position: 0 0;
 }
 
+.p-slider .p-slider-handle-start {
+    z-index: 1;
+}
+
 .p-slider-horizontal {
 	height: .8em;
 }

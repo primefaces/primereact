@@ -5,6 +5,7 @@ import { Panel } from '../../components/panel/Panel';
 import { CarService } from '../service/CarService';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import { DataView, DataViewLayoutOptions } from "../../components/dataview/DataView";
 import { Button } from "../../components/button/Button";
 import { Dropdown } from "../../components/dropdown/Dropdown";
@@ -13,10 +14,10 @@ export class DataViewDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: [],
             layout: 'list',
-            selectedCar: null, 
+            selectedCar: null,
             visible: false,
             sortKey: null,
             sortOrder: null
@@ -35,15 +36,15 @@ export class DataViewDemo extends Component {
 
         if (value.indexOf('!') === 0) {
             this.setState({
-                sortOrder: -1, 
-                sortField: value.substring(1, value.length), 
+                sortOrder: -1,
+                sortField: value.substring(1, value.length),
                 sortKey: value
             });
         }
         else {
             this.setState({
-                sortOrder: 1, 
-                sortField: value, 
+                sortOrder: 1,
+                sortField: value,
                 sortKey: value
             });
         }
@@ -55,7 +56,7 @@ export class DataViewDemo extends Component {
                 <div className="car-details">
                     <div>
                         <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
-                        <div class="p-grid">
+                        <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
                             <div className="p-col-12">Brand: <b>{car.brand}</b></div>
@@ -98,16 +99,16 @@ export class DataViewDemo extends Component {
                     <div className="p-col-12" style={{textAlign: 'center'}}>
                         <img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} />
                     </div>
-                    
+
                     <div className="p-col-4">Vin: </div>
                     <div className="p-col-8">{this.state.selectedCar.vin}</div>
 
                     <div className="p-col-4">Year: </div>
                     <div className="p-col-8">{this.state.selectedCar.year}</div>
-                        
+
                     <div className="p-col-4">Brand: </div>
                     <div className="p-col-8">{this.state.selectedCar.brand}</div>
-                    
+
                     <div className="p-col-4">Color: </div>
                     <div className="p-col-8">{this.state.selectedCar.color}</div>
                 </div>
@@ -146,12 +147,16 @@ export class DataViewDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataView</h1>
                         <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataView")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation dataview-demo">
-                    <DataView value={this.state.cars} layout={this.state.layout} header={header} 
-                            itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20} 
+                    <DataView value={this.state.cars} layout={this.state.layout} header={header}
+                            itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
                             sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
@@ -194,7 +199,7 @@ npm install primeflex --save
 `}
 </CodeHighlight>
 
-                        <p>DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. <i>list</i> and <i>grid</i>. Throughout the samples, a car interface having vin, brand, year and color properties are used to define an object to be displayed by the dataview. 
+                        <p>DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. <i>list</i> and <i>grid</i>. Throughout the samples, a car interface having vin, brand, year and color properties are used to define an object to be displayed by the dataview.
                             Cars are loaded by a CarService that connects to a server to fetch the cars.</p>
 
                         <p>DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.</p>
@@ -202,7 +207,7 @@ npm install primeflex --save
 {`
 constructor() {
     super();
-    this.state = { 
+    this.state = {
         cars: [],
         layout: 'list'
     };
@@ -326,7 +331,7 @@ itemTemplate(car, layout) {
 `}
                         </CodeHighlight>
 
-                        <p>In uncontrolled mode, only <i>paginator</i> property needs to be enabled. Initial page state can be still be provided using the <i>first</i> property in uncontrolled mode however 
+                        <p>In uncontrolled mode, only <i>paginator</i> property needs to be enabled. Initial page state can be still be provided using the <i>first</i> property in uncontrolled mode however
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator, prefer to use the component as controlled.</p>
                         <CodeHighlight className="language-jsx">
                             {`
@@ -625,10 +630,10 @@ export class DataViewDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: [],
             layout: 'list',
-            selectedCar: null, 
+            selectedCar: null,
             visible: false,
             sortKey: null,
             sortOrder: null
@@ -647,15 +652,15 @@ export class DataViewDemo extends Component {
 
         if (value.indexOf('!') === 0) {
             this.setState({
-                sortOrder: -1, 
-                sortField: value.substring(1, value.length), 
+                sortOrder: -1,
+                sortField: value.substring(1, value.length),
                 sortKey: value
             });
         }
         else {
             this.setState({
-                sortOrder: 1, 
-                sortField: value, 
+                sortOrder: 1,
+                sortField: value,
                 sortKey: value
             });
         }
@@ -667,7 +672,7 @@ export class DataViewDemo extends Component {
                 <div className="car-details">
                     <div>
                         <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand}/>
-                        <div class="p-grid">
+                        <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
                             <div className="p-col-12">Brand: <b>{car.brand}</b></div>
@@ -710,16 +715,16 @@ export class DataViewDemo extends Component {
                     <div className="p-col-12" style={{textAlign: 'center'}}>
                         <img src={'showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png'} alt={this.state.selectedCar.brand} />
                     </div>
-                    
+
                     <div className="p-col-4">Vin: </div>
                     <div className="p-col-8">{this.state.selectedCar.vin}</div>
 
                     <div className="p-col-4">Year: </div>
                     <div className="p-col-8">{this.state.selectedCar.year}</div>
-                        
+
                     <div className="p-col-4">Brand: </div>
                     <div className="p-col-8">{this.state.selectedCar.brand}</div>
-                    
+
                     <div className="p-col-4">Color: </div>
                     <div className="p-col-8">{this.state.selectedCar.color}</div>
                 </div>
@@ -762,8 +767,8 @@ export class DataViewDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataView value={this.state.cars} layout={this.state.layout} header={header} 
-                            itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20} 
+                    <DataView value={this.state.cars} layout={this.state.layout} header={header}
+                            itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
                             sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
 
                     <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>

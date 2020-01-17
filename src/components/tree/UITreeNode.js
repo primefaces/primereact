@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
 export class UITreeNode extends Component {
-    
+
     static defaultProps = {
         node: null,
         index: null,
@@ -113,7 +113,7 @@ export class UITreeNode extends Component {
     collapse(event) {
         let expandedKeys = {...this.props.expandedKeys};
         delete expandedKeys[this.props.node.key];
-        
+
         this.props.onToggle({
             originalEvent: event,
             value: expandedKeys
@@ -121,7 +121,7 @@ export class UITreeNode extends Component {
 
         this.invokeToggleEvents(event, false);
     }
- 
+
     onTogglerClick(event) {
         if (this.props.disabled) {
             return;
@@ -270,13 +270,13 @@ export class UITreeNode extends Component {
         if ((event.target.className && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
             return;
         }
-        
+
         if (this.props.selectionMode && this.props.node.selectable !== false) {
             let selectionKeys;
 
             if (this.isCheckboxSelectionMode()) {
                 const checked = this.isChecked();
-                selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};    
+                selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
 
                 if (checked) {
                     if (this.props.propagateSelectionDown)
@@ -302,9 +302,9 @@ export class UITreeNode extends Component {
                 else {
                     if (this.props.propagateSelectionDown)
                         this.propagateDown(this.props.node, true, selectionKeys);
-                    else 
+                    else
                         selectionKeys[this.props.node.key] = {checked: true};
- 
+
                         if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
                             this.props.onPropagateUp({
                                 originalEvent: event,
@@ -327,7 +327,7 @@ export class UITreeNode extends Component {
 
                 if (metaSelection) {
                     let metaKey = (event.metaKey||event.ctrlKey);
-    
+
                     if (selected && metaKey) {
                         if (this.isSingleSelectionMode()) {
                             selectionKeys = null;
@@ -336,7 +336,7 @@ export class UITreeNode extends Component {
                             selectionKeys = {...this.props.selectionKeys};
                             delete selectionKeys[this.props.node.key];
                         }
-    
+
                         if (this.props.onUnselect) {
                             this.props.onUnselect({
                                 originalEvent: event,
@@ -352,7 +352,7 @@ export class UITreeNode extends Component {
                             selectionKeys = !metaKey ? {} : (this.props.selectionKeys ? {...this.props.selectionKeys} : {});
                             selectionKeys[this.props.node.key] = true;
                         }
-    
+
                         if (this.props.onSelect) {
                             this.props.onSelect({
                                 originalEvent: event,
@@ -365,7 +365,7 @@ export class UITreeNode extends Component {
                     if (this.isSingleSelectionMode()) {
                         if (selected) {
                             selectionKeys = null;
-    
+
                             if (this.props.onUnselect) {
                                 this.props.onUnselect({
                                     originalEvent: event,
@@ -375,7 +375,7 @@ export class UITreeNode extends Component {
                         }
                         else {
                             selectionKeys = this.props.node.key;
-    
+
                             if (this.props.onSelect) {
                                 this.props.onSelect({
                                     originalEvent: event,
@@ -388,7 +388,7 @@ export class UITreeNode extends Component {
                         if (selected) {
                             selectionKeys = {...this.props.selectionKeys};
                             delete selectionKeys[this.props.node.key];
-    
+
                             if (this.props.onUnselect) {
                                 this.props.onUnselect({
                                     originalEvent: event,
@@ -399,7 +399,7 @@ export class UITreeNode extends Component {
                         else {
                             selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
                             selectionKeys[this.props.node.key] = true;
-                            
+
                             if (this.props.onSelect) {
                                 this.props.onSelect({
                                     originalEvent: event,
@@ -449,7 +449,7 @@ export class UITreeNode extends Component {
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
         let childPartialSelected = false;
-        
+
         for(let child of this.props.node.children) {
             if(selectionKeys[child.key] && selectionKeys[child.key].checked)
                 checkedChildCount++;
@@ -525,7 +525,7 @@ export class UITreeNode extends Component {
 
         if (this.props.node.droppable !== false) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
-            
+
             if (this.props.onDropPoint) {
                 this.props.onDropPoint({
                     originalEvent: event,
@@ -561,7 +561,7 @@ export class UITreeNode extends Component {
             DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
             event.preventDefault();
             event.stopPropagation();
-            
+
             if (this.props.onDrop) {
                 this.props.onDrop({
                     originalEvent: event,
@@ -617,7 +617,7 @@ export class UITreeNode extends Component {
 
     renderLabel() {
         const label = this.props.nodeTemplate ? this.props.nodeTemplate(this.props.node) : this.props.node.label;
-        
+
         return (
             <span className="p-treenode-label">
                 {label}
@@ -634,7 +634,7 @@ export class UITreeNode extends Component {
 
             return (
                 <div className="p-checkbox p-component">
-                    <div className={className}>
+                    <div className={className} role="checkbox" aria-checked={checked}>
                         <span className={icon}></span>
                     </div>
                 </div>
@@ -686,7 +686,7 @@ export class UITreeNode extends Component {
         const selected = this.isSelected();
         const checked = this.isChecked();
         const className = classNames('p-treenode-content', this.props.node.className, {
-                'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 
+                'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false),
                 'p-highlight': this.isCheckboxSelectionMode() ? checked : selected,
                 'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key),
                 'p-disabled': this.props.disabled
@@ -701,7 +701,7 @@ export class UITreeNode extends Component {
         return (
             <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
-                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex={tabIndex} onKeyDown={this.onNodeKeyDown} 
+                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex={tabIndex} onKeyDown={this.onNodeKeyDown}
                 role="treeitem" aria-posinset={this.props.index + 1} aria-expanded={this.isExpanded()} aria-selected={checked || selected}>
                 {toggler}
                 {checkbox}

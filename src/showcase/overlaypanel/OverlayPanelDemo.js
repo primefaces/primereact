@@ -4,9 +4,10 @@ import {OverlayPanel} from '../../components/overlaypanel/OverlayPanel';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class OverlayPanelDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -14,17 +15,21 @@ export class OverlayPanelDemo extends Component {
                     <div className="feature-intro">
                         <h1>OverlayPanel</h1>
                         <p>OverlayPanel is a container component that can overlay other components on page.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("overlayPanel")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation" aria-controls="overlay_panel" aria-haspopup={true}>
                     <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)} />
 
-                    <OverlayPanel ref={(el) => this.op = el}>
+                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel">
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
-                
+
                 <OverlayPanelDoc></OverlayPanelDoc>
             </div>
         )
@@ -36,7 +41,7 @@ export class OverlayPanelDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -66,7 +71,7 @@ import {OverlayPanel} from 'primereact/overlaypanel';
             <h3>Dismissable and CloseIcon</h3>
             <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior.
                Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
-               
+
 <CodeHighlight className="language-jsx">
 {`
 <OverlayPanel ref={(el) => {this.op = el;}} showCloseIcon={true} dismissable={true}>
@@ -123,6 +128,12 @@ import {OverlayPanel} from 'primereact/overlaypanel';
                             <td>DOM element</td>
                             <td>null</td>
                             <td>DOM element instance where the dialog should be mounted.</td>
+                        </tr>
+                        <tr>
+                            <td>ariaCloseLabel</td>
+                            <td>string</td>
+                            <td>close</td>
+                            <td>Aria label of the close icon.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -208,7 +219,7 @@ import {OverlayPanel} from 'primereact/overlaypanel';
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -221,7 +232,7 @@ import React, {Component} from 'react';
 import {OverlayPanel} from 'primereact/overlaypanel';
 
 export class OverlayPanelDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -233,9 +244,9 @@ export class OverlayPanelDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)} />
+                    <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)} aria-controls="overlay_panel" aria-haspopup={true}/>
 
-                    <OverlayPanel ref={(el) => this.op = el}>
+                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel">
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>

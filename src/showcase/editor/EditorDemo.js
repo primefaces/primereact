@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Editor} from "../../components/editor/Editor";
 import {Button} from "../../components/button/Button";
 
@@ -34,6 +35,10 @@ export class EditorDemo extends Component {
                     <div className="feature-intro">
                         <h1>Editor</h1>
                         <p>Editor is rich text editor component based on Quill.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("editor")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -99,7 +104,7 @@ const header = (
         <button className="ql-underline" aria-label="Underline"></button>
     </span>
 );
-    
+
 <Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} headerTemplate={header}/>
 
 `}

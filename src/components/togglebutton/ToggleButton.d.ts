@@ -13,6 +13,7 @@ interface ToggleButtonProps {
     tabIndex?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?:string;
     onChange?(e: {originalEvent: Event, value: boolean}): void;
 }
 

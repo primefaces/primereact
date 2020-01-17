@@ -9,7 +9,7 @@ interface ContextMenuProps {
     className?: string;
     global?: boolean;
     autoZIndex?: boolean;
-    bazeZIndex?: number;
+    baseZIndex?: number;
     appendTo?: any;
     onShow?(e: Event): void;
     onHide?(e: Event): void;

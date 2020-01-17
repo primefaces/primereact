@@ -27,6 +27,7 @@ export class InputMask extends Component {
         required: false,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onComplete: null,
         onChange: null
     }
@@ -51,13 +52,14 @@ export class InputMask extends Component {
         required: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onComplete: PropTypes.func,
         onChange: PropTypes.func
     }
 
     constructor(props) {
         super(props);
-        
+
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
@@ -212,7 +214,7 @@ export class InputMask extends Component {
         if (this.props.readonly) {
             return;
         }
-        
+
         let k = e.which || e.keyCode,
             pos,
             begin,
@@ -435,7 +437,7 @@ export class InputMask extends Component {
 
     updateModel(e) {
         if (this.props.onChange) {
-            var val = this.props.unmask ? this.getUnmaskedValue() : e.target.value;
+            var val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
             this.props.onChange({
                 originalEvent: e,
                 value: (this.defaultBuffer !== val) ? val : '',
@@ -476,7 +478,7 @@ export class InputMask extends Component {
 
             this.focusText = this.input.value;
         }
-        
+
         this.updateFilledState();
     }
 
@@ -525,7 +527,7 @@ export class InputMask extends Component {
                     this.buffer.push(c);
             }
         }
-        this.defaultBuffer = this.buffer.join('');        
+        this.defaultBuffer = this.buffer.join('');
     }
 
     componentDidMount() {
@@ -545,9 +547,15 @@ export class InputMask extends Component {
                 this.renderTooltip();
         }
 
-        let isValueUpdated = this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.input.value !== this.props.value;
+        let isValueUpdated = this.props.value && (this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.props.value.length && this.input.value !== this.props.value);
         if (isValueUpdated) {
             this.updateValue();
+        }
+
+        if (prevProps.mask !== this.props.mask) {
+            this.init();
+            this.updateValue();
+            this.updateModel();
         }
     }
 
@@ -571,7 +579,7 @@ export class InputMask extends Component {
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
-                onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} />
+                onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />
         );
     }
 

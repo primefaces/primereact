@@ -6,6 +6,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableEditDemo extends Component {
 
@@ -54,7 +55,7 @@ export class TreeTableEditDemo extends Component {
                     onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
-        
+
     sizeEditor(props) {
         return this.inputTextEditor(props, 'size');
     }
@@ -78,6 +79,10 @@ export class TreeTableEditDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Edit</h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -100,7 +105,7 @@ class TreeTableEditDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -161,7 +166,7 @@ export class TreeTableEditDemo extends Component {
                     onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
-        
+
     sizeEditor(props) {
         return this.inputTextEditor(props, 'size');
     }

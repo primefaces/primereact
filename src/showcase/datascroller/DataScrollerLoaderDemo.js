@@ -4,13 +4,14 @@ import {Button} from '../../components/button/Button';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
 
 export class DataScrollerLoaderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: []
         };
         this.carservice = new CarService();
@@ -37,13 +38,13 @@ export class DataScrollerLoaderDemo extends Component {
                     <div className="p-grid">
                         <div className="p-col-2 p-sm-6">Vin: </div>
                         <div className="p-col-10 p-sm-6">{car.vin}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Year: </div>
                         <div className="p-col-10 p-sm-6">{car.year}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Brand: </div>
                         <div className="p-col-10 p-sm-6">{car.brand}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Color: </div>
                         <div className="p-col-10 p-sm-6">{car.color}</div>
                     </div>
@@ -63,11 +64,15 @@ export class DataScrollerLoaderDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataScroller - Loader</h1>
                         <p>Instead of scrolling, a custom element can be used to load data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataScroller")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5} 
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5}
                         loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More"/>
                 </div>
 
@@ -78,7 +83,7 @@ export class DataScrollerLoaderDemo extends Component {
 }
 
 export class DataScrollerLoaderDoc extends Component {
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -95,7 +100,7 @@ export class DataScrollerLoaderDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             cars: []
         };
         this.carservice = new CarService();
@@ -122,13 +127,13 @@ export class DataScrollerLoaderDemo extends Component {
                     <div className="p-grid">
                         <div className="p-col-2 p-sm-6">Vin: </div>
                         <div className="p-col-10 p-sm-6">{car.vin}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Year: </div>
                         <div className="p-col-10 p-sm-6">{car.year}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Brand: </div>
                         <div className="p-col-10 p-sm-6">{car.brand}</div>
-            
+
                         <div className="p-col-2 p-sm-6">Color: </div>
                         <div className="p-col-10 p-sm-6">{car.color}</div>
                     </div>
@@ -150,7 +155,7 @@ export class DataScrollerLoaderDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5} 
+                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5}
                         loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More"/>
                 </div>
             </div>

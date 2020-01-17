@@ -5,6 +5,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from './TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableScrollDemo extends Component {
 
@@ -29,6 +30,10 @@ export class TreeTableScrollDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Scroll</h1>
                         <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -77,7 +82,7 @@ class TreeTableScrollDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">

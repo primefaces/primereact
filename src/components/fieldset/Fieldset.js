@@ -31,7 +31,7 @@ export class Fieldset extends Component {
         onToggle: PropTypes.func,
         onClick: PropTypes.func
     };
-    
+
     constructor(props) {
         super(props);
         if (!this.props.onToggle) {
@@ -60,7 +60,7 @@ export class Fieldset extends Component {
                 });
             }
         }
-        
+
         event.preventDefault();
     }
 
@@ -78,7 +78,7 @@ export class Fieldset extends Component {
         if (!this.props.onToggle) {
             this.setState({collapsed: true});
         }
-        
+
         if (this.props.onCollapse) {
             this.props.onCollapse(event);
         }
@@ -94,7 +94,7 @@ export class Fieldset extends Component {
 
         return (
             <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
-                <div id={id} className={className} aria-hidden={collapsed} role="region">
+                <div id={id} className={className} aria-hidden={collapsed} role="region" aria-labelledby={this.id + '_header'}>
                     <div className="p-fieldset-content">
                         {this.props.children}
                     </div>
@@ -122,7 +122,7 @@ export class Fieldset extends Component {
             const ariaControls = this.id + '_content';
 
             return (
-                <a href={'#' + ariaControls} aria-controls={ariaControls} aria-expanded={!collapsed} tabIndex={this.props.toggleable ? null  : -1}>
+                <a href={'#' + ariaControls} aria-controls={ariaControls} id={this.id + '_header'} aria-expanded={!collapsed} tabIndex={this.props.toggleable ? null  : -1}>
                     {toggleIcon}
                     <span className="p-fieldset-legend-text">{this.props.legend}</span>
                  </a>
@@ -130,7 +130,7 @@ export class Fieldset extends Component {
         }
         else {
             return (
-                <span className="p-fieldset-legend-text">{this.props.legend}</span>
+                <span className="p-fieldset-legend-text" id={this.id + '_header'}>{this.props.legend}</span>
             );
         }
     }

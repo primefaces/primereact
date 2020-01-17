@@ -8,6 +8,7 @@ interface OverlayPanelProps {
     style?: object;
     className?: string;
     appendTo?: any;
+    ariaCloseLabel?: string;
     onHide?(): void;
 }
 

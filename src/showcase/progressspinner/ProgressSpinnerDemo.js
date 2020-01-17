@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {ProgressSpinner} from '../../components/progressspinner/ProgressSpinner';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ProgressSpinnerDemo extends Component {
 
@@ -13,6 +14,10 @@ export class ProgressSpinnerDemo extends Component {
                     <div className="feature-intro">
                         <h1>ProgressSpinner</h1>
                         <p>ProgressSpinner is a process status indicator.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("progressSpinner")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

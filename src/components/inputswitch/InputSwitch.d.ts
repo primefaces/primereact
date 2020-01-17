@@ -11,6 +11,7 @@ interface InputSwitchProps {
     disabled?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string,
     onChange?(e: {originalEvent: Event, value: boolean}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;

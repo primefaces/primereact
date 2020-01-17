@@ -4,9 +4,10 @@ import {SlideMenu} from '../../components/slidemenu/SlideMenu';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class SlideMenuDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -27,7 +28,7 @@ export class SlideMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -63,7 +64,7 @@ export class SlideMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -73,12 +74,12 @@ export class SlideMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -150,6 +151,10 @@ export class SlideMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>Slide Menu</h1>
                         <p>SlideMenu displays submenus with a slide animation.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("slideMenu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -212,7 +217,7 @@ const items:[
                    label:'Video',
                    icon:'pi pi-fw pi-video'
                 },
- 
+
              ]
           },
           {
@@ -248,7 +253,7 @@ const items:[
              label:'Justify',
              icon:'pi pi-fw pi-align-justify'
           },
- 
+
        ]
     },
     {
@@ -258,12 +263,12 @@ const items:[
           {
              label:'New',
              icon:'pi pi-fw pi-user-plus',
- 
+
           },
           {
              label:'Delete',
              icon:'pi pi-fw pi-user-minus',
- 
+
           },
           {
              label:'Search',
@@ -303,7 +308,7 @@ const items:[
                    label:'Delete',
                    icon:'pi pi-fw pi-calendar-minus'
                 },
- 
+
              ]
           },
           {
@@ -350,7 +355,7 @@ const items:[
 </CodeHighlight>
 
                         <h3>Effects</h3>
-                        <p>The easing function to use is "ease-out" by default which can be customized using easing property. 
+                        <p>The easing function to use is "ease-out" by default which can be customized using easing property.
                             See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values.</p>
 
 <CodeHighlight className="language-jsx">
@@ -508,7 +513,7 @@ const items:[
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <h3>Styling</h3>
                         <p>Following is the list of structural style classes.</p>
                         <div className="doc-tablewrapper">
@@ -575,7 +580,7 @@ import {SlideMenu} from 'primereact/slidemenu';
 import {Button} from 'primereact/button';
 
 export class SlideMenuDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -596,7 +601,7 @@ export class SlideMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -632,7 +637,7 @@ export class SlideMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -642,12 +647,12 @@ export class SlideMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -687,7 +692,7 @@ export class SlideMenuDemo extends Component {
                                label:'Delete',
                                icon:'pi pi-fw pi-calendar-minus'
                             },
-             
+
                          ]
                       },
                       {

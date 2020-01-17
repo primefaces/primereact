@@ -18,6 +18,7 @@ export class Checkbox extends Component {
         readOnly: false,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -36,15 +37,16 @@ export class Checkbox extends Component {
         readOnly: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
     };
-    
+
     constructor(props) {
         super(props);
         this.state = {};
-        
+
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -70,7 +72,7 @@ export class Checkbox extends Component {
 
             this.input.checked = !this.props.checked;
             this.input.focus();
-            
+
             e.preventDefault();
         }
     }
@@ -126,11 +128,11 @@ export class Checkbox extends Component {
         let containerClass = classNames('p-checkbox p-component', this.props.className);
         let boxClass = classNames('p-checkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
         let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.checked});
-        
+
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="p-hidden-accessible">
-                    <input type="checkbox" ref={el => this.input = el} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked} 
+                    <input type="checkbox" aria-labelledby={this.props.ariaLabelledBy} ref={el => this.input = el} id={this.props.inputId} name={this.props.name} defaultChecked={this.props.checked}
                              onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} required={this.props.required}/>
                 </div>
                 <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.props.checked}>

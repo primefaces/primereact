@@ -3,15 +3,16 @@ import {Button} from '../../components/button/Button';
 import {Panel} from '../../components/panel/Panel';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class FlexGridDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
             columns: [0, 1, 2, 3, 4, 5]
         };
-        
+
         this.addColumn = this.addColumn.bind(this);
         this.removeColumn = this.removeColumn.bind(this);
     }
@@ -38,6 +39,10 @@ export class FlexGridDemo extends Component {
                         <h1>Flex Grid</h1>
                         <p>Flex Grid CSS is a lightweight flex based responsive layout utility optimized for mobile phones, tablets and desktops. Flex Grid CSS is not included
                             in PrimeReact as it is provided by <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> , a shared grid library between PrimeFaces, PrimeNG and PrimeReact projects.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("flexGrid")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -54,14 +59,14 @@ export class FlexGridDemo extends Component {
                             <div className="box">3</div>
                         </div>
                     </div>
-            
+
                     <h3>Dynamic</h3>
                     <Button type="button" icon="pi pi-plus" title="Add Column" onClick={this.addColumn} disabled={this.state.columns.length === 20} style={{marginRight: '.5em'}} />
                     <Button type="button" icon="pi pi-minus" title="Remove Column" onClick={this.removeColumn} disabled={this.state.columns.length === 1} />
 
                     <div className="p-grid" style={{marginTop: '.5em'}}>
                         {
-                            this.state.columns.map(col => 
+                            this.state.columns.map(col =>
                                 <div key={col} className="p-col">
                                     <div className="box">{col}</div>
                                 </div>
@@ -439,14 +444,14 @@ export class FlexGridDemo extends Component {
                                     <div className="p-col-6 p-md-3"><img alt="Galleria 2" src="showcase/resources/demo/images/galleria/galleria2.jpg" style={{width:'100%'}} /></div>
                                     <div className="p-col-6 p-md-3"><img alt="Galleria 3" src="showcase/resources/demo/images/galleria/galleria3.jpg" style={{width:'100%'}} /></div>
                                     <div className="p-col-6 p-md-3"><img alt="Galleria 4" src="showcase/resources/demo/images/galleria/galleria4.jpg" style={{width:'100%'}} /></div>
-                
+
                                     <div className="p-col-12 p-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien
                                         facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque
                                         neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.</div>
                                     <div className="p-col-12 p-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas. Lorem
                                         ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat dapibus. Aliquam
                                         pretium leo et egestas luctus. Nunc facilisis gravida tellus.</div>
-                                </div>     
+                                </div>
                             </div>
                         </div>
                         <div className="p-col-12">
@@ -466,7 +471,7 @@ export class FlexGridDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation flexgrid-demo">
@@ -1080,13 +1085,13 @@ import {Button} from 'primereact/button';
 import {Panel} from 'primereact/panel';
 
 export class FlexGridDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
             columns: [0, 1, 2, 3, 4, 5]
         };
-        
+
         this.addColumn = this.addColumn.bind(this);
         this.removeColumn = this.removeColumn.bind(this);
     }
@@ -1129,14 +1134,14 @@ export class FlexGridDemo extends Component {
                             <div className="box">3</div>
                         </div>
                     </div>
-            
+
                     <h3>Dynamic</h3>
                     <Button type="button" icon="pi pi-plus" title="Add Column" onClick={this.addColumn} disabled={this.state.columns.length === 20} style={{marginRight: '.5em'}} />
                     <Button type="button" icon="pi pi-minus" title="Remove Column" onClick={this.removeColumn} disabled={this.state.columns.length === 1} />
 
                     <div className="p-grid" style={{marginTop: '.5em'}}>
                         {
-                            this.state.columns.map(col => 
+                            this.state.columns.map(col =>
                                 <div key={col} className="p-col">
                                     <div className="box">{col}</div>
                                 </div>
@@ -1514,14 +1519,14 @@ export class FlexGridDemo extends Component {
                                     <div className="p-col-6 p-md-3"><img alt="Galleria 2" src="showcase/resources/demo/images/galleria/galleria2.jpg" style={{width:'100%'}} /></div>
                                     <div className="p-col-6 p-md-3"><img alt="Galleria 3" src="showcase/resources/demo/images/galleria/galleria3.jpg" style={{width:'100%'}} /></div>
                                     <div className="p-col-6 p-md-3"><img alt="Galleria 4" src="showcase/resources/demo/images/galleria/galleria4.jpg" style={{width:'100%'}} /></div>
-                
+
                                     <div className="p-col-12 p-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien
                                         facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque
                                         neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.</div>
                                     <div className="p-col-12 p-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas. Lorem
                                         ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat dapibus. Aliquam
                                         pretium leo et egestas luctus. Nunc facilisis gravida tellus.</div>
-                                </div>     
+                                </div>
                             </div>
                         </div>
                         <div className="p-col-12">

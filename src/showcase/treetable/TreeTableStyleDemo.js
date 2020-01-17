@@ -5,6 +5,7 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableStyleDemo extends Component {
 
@@ -25,11 +26,11 @@ export class TreeTableStyleDemo extends Component {
     sizeTemplate(node) {
         let size = node.data.size;
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
-        
+
         return <span style={{fontWeight: fontWeight}}>{size}</span>;
     }
-    
-    rowClassName(node) {        
+
+    rowClassName(node) {
         return {'p-highlight' : (node.children && node.children.length === 3)};
     }
 
@@ -42,6 +43,10 @@ export class TreeTableStyleDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Styling</h1>
                         <p>Particular rows and cells can be styled based on data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -65,7 +70,7 @@ class TreeTableStyleDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -97,11 +102,11 @@ export class TreeTableStyleDemo extends Component {
     sizeTemplate(node) {
         let size = node.data.size;
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
-        
+
         return <span style={{fontWeight: fontWeight}}>{size}</span>;
     }
-    
-    rowClassName(node) {        
+
+    rowClassName(node) {
         return {'p-highlight' : (node.children && node.children.length === 3)};
     }
 
