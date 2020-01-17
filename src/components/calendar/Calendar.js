@@ -472,7 +472,7 @@ export class Calendar extends Component {
             if (!cell) {
                 let todayCell = DomHandler.findSingle(this.panel, 'td.p-datepicker-today span:not(.p-disabled)');
                 if (todayCell)
-                    cell = todayCell.children[0];
+                    cell = todayCell;
                 else
                     cell = DomHandler.findSingle(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
             }
