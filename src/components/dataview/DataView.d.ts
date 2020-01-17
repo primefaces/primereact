@@ -33,6 +33,7 @@ interface DataViewProps {
     sortOrder?: number,
     style?: string,
     className?: string,
+    lazy: boolean,
     onPage?(e: {originalEvent: Event, first: number, rows: number}): void,
     itemTemplate?(item: any, layout: "grid" | "list"): JSX.Element | undefined
 }
