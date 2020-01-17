@@ -135,7 +135,8 @@ export class Dropdown extends Component {
     }
 
     panelClick() {
-        this.overlayClick = true;
+        if (this.state.overlayVisible)
+            this.overlayClick = true;
     }
 
     onInputFocus(event) {
