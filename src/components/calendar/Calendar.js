@@ -1662,7 +1662,7 @@ export class Calendar extends Component {
 
     renderBackwardNavigator() {
         return (
-            <button className="p-datepicker-prev p-link" onClick={this.navBackward}>
+            <button type="button" className="p-datepicker-prev p-link" onClick={this.navBackward}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
             </button>
         );
@@ -1670,7 +1670,7 @@ export class Calendar extends Component {
 
     renderForwardNavigator() {
         return (
-            <button className="p-datepicker-next p-link" onClick={this.navForward}>
+            <button type="button" className="p-datepicker-next p-link" onClick={this.navForward}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
             </button>
         );
@@ -1960,11 +1960,11 @@ export class Calendar extends Component {
 
         return (
             <div className="p-hour-picker">
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{hourDisplay}</span>
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
             </div>
@@ -1978,11 +1978,11 @@ export class Calendar extends Component {
 
         return (
             <div className="p-minute-picker">
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{minuteDisplay}</span>
-                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
             </div>
@@ -1997,11 +1997,11 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-second-picker">
-                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{secondDisplay}</span>
-                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
                 </div>
@@ -2020,11 +2020,11 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-ampm-picker">
-                    <button className="p-link" onClick={this.toggleAmPm}>
+                    <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{display}</span>
-                    <button className="p-link" onClick={this.toggleAmPm}>
+                    <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
                 </div>

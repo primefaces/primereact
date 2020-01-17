@@ -42,11 +42,11 @@ export class DataViewLayoutOptions extends Component {
 
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
-                <button className={buttonListClass} onClick={(event) => this.changeLayout(event, 'list')}>
+                <button type="button" className={buttonListClass} onClick={(event) => this.changeLayout(event, 'list')}>
                     <i className="pi pi-bars p-button-icon-left"></i>
                     <span className="p-button-text p-clickable">p-btn</span>
                 </button>
-                <button className={buttonGridClass} onClick={(event) => this.changeLayout(event, 'grid')}>
+                <button type="button" className={buttonGridClass} onClick={(event) => this.changeLayout(event, 'grid')}>
                     <i className="pi pi-th-large p-button-icon-left"></i>
                     <span className="p-button-text p-clickable">p-btn</span>
                 </button>
@@ -175,7 +175,7 @@ export class DataView extends Component {
         }
         else {
             this.setState({
-                first:event.first, 
+                first:event.first,
                 rows:event.rows
             });
         }
@@ -296,7 +296,7 @@ export class DataView extends Component {
 
     processData() {
         let data = this.props.value;
-        
+
         if (data && data.length) {
             if (this.props.sortField) {
                 data = this.sort();
@@ -325,5 +325,5 @@ export class DataView extends Component {
             </div>
         );
     }
-    
+
 }

@@ -168,7 +168,7 @@ export class BodyCell extends Component {
         if (this.props.expander) {
             let iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
             content = (
-                <button onClick={this.onExpanderClick} className="p-row-toggler p-link">
+                <button type="button" onClick={this.onExpanderClick} className="p-row-toggler p-link">
                     <span className={iconClassName}></span>
                 </button>
             );
@@ -190,10 +190,10 @@ export class BodyCell extends Component {
             if (this.state.editing) {
                 content = (
                     <React.Fragment>
-                        <button onClick={this.props.onRowEditSave} className="p-row-editor-save p-link">
+                        <button type="button" onClick={this.props.onRowEditSave} className="p-row-editor-save p-link">
                             <span className="p-row-editor-save-icon pi pi-fw pi-check p-clickable"></span>
                         </button>
-                        <button onClick={this.props.onRowEditCancel} className="p-row-editor-cancel p-link">
+                        <button type="button" onClick={this.props.onRowEditCancel} className="p-row-editor-cancel p-link">
                             <span className="p-row-editor-cancel-icon pi pi-fw pi-times p-clickable"></span>
                         </button>
                     </React.Fragment>
@@ -201,7 +201,7 @@ export class BodyCell extends Component {
             }
             else {
                 content = (
-                    <button onClick={this.props.onRowEditInit} className="p-row-editor-init p-link">
+                    <button type="button" onClick={this.props.onRowEditInit} className="p-row-editor-init p-link">
                         <span className="p-row-editor-init-icon pi pi-fw pi-pencil p-clickable"></span>
                     </button>
                 );

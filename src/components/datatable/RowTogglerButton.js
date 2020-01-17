@@ -36,7 +36,7 @@ export class RowTogglerButton extends Component {
             'pi-chevron-right': !this.props.expanded
         });
 
-        return  <button onClick={this.onClick} className="p-row-toggler p-link">
+        return  <button type="button" onClick={this.onClick} className="p-row-toggler p-link">
                     <span className={iconClassName}></span>
                 </button>
     }

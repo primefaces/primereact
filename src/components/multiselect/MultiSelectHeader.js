@@ -69,7 +69,7 @@ export class MultiSelectHeader extends Component {
                 <div className="p-multiselect-header">
                     <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} role="checkbox" aria-checked={this.props.allChecked}/>
                     {filterElement}
-                    <button className="p-multiselect-close p-link" onClick={this.props.onClose}>
+                    <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
                         <span className="p-multiselect-close-icon pi pi-times"></span>
                     </button>
                 </div>

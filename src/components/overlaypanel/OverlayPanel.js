@@ -130,7 +130,7 @@ export class OverlayPanel extends Component {
     renderCloseIcon() {
         if(this.props.showCloseIcon) {
             return (
-                <button className="p-overlaypanel-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
+                <button type="button" className="p-overlaypanel-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
                     <span className="p-overlaypanel-close-icon pi pi-times"></span>
                 </button>
             );

@@ -60,7 +60,7 @@ export class GrowlMessage extends Component {
     renderCloseIcon() {
         if (this.props.message.closable !== false) {
             return (
-                <button className="p-growl-icon-close p-link" onClick={this.onClose}>
+                <button type="button" className="p-growl-icon-close p-link" onClick={this.onClose}>
                     <span className="p-growl-icon-close-icon pi pi-times"></span>
                 </button>
             );

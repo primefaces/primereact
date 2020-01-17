@@ -615,7 +615,7 @@ export class Carousel extends Component {
         });
 
         return (
-            <button className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
+            <button type="button" className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
                 <span className={iconClassName}></span>
             </button>
         );
@@ -632,7 +632,7 @@ export class Carousel extends Component {
         });
 
         return (
-            <button className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
+            <button type="button" className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
                 <span className={iconClassName}></span>
             </button>
         );
@@ -650,7 +650,7 @@ export class Carousel extends Component {
 
         return (
             <li className={dotItemClassName} key={'p-carousel-dot-' + index}>
-                <button className="p-link" onClick={(e) => this.onDotClick(e, index)}>
+                <button type="button" className="p-link" onClick={(e) => this.onDotClick(e, index)}>
                     <span className={iconClassName}></span>
                 </button>
             </li>

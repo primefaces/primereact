@@ -218,7 +218,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
+                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
                     <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
                 </button>
             );
@@ -233,7 +233,7 @@ export class Dialog extends Component {
 
         if (this.props.maximizable) {
             return (
-                <button className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
+                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
                 </button>
             );
