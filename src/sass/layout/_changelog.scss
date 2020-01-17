@@ -6,7 +6,7 @@ body {
         margin-top: 8px;
         background-color: rgba(255,255,255,0.16);
         color: white;
-        border-color: white;
+        border: 1px solid #fff;
         letter-spacing: 0.2px;
         cursor: pointer;
         @include transition(background-color .2s);
