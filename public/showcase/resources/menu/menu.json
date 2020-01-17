@@ -88,9 +88,9 @@
                 },
                 {
                     "name": "InputTextarea",
-                    "to": "/inputswitch",
+                    "to": "/inputtextarea",
                     "meta": [
-                        "inputswitch"
+                        "inputtextarea"
                     ]
                 },
                 {
