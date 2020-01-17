@@ -3,13 +3,14 @@ import {Link} from 'react-router-dom';
 import {Chips} from '../../components/chips/Chips';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ChipsDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            values1: [], 
+            values1: [],
             values2: []
         };
     }
@@ -30,6 +31,10 @@ export class ChipsDemo extends Component {
                     <div className="feature-intro">
                         <h1>Chips</h1>
                         <p>Chips is used to enter multiple values on an input field.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chips")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -40,7 +45,7 @@ export class ChipsDemo extends Component {
                     <h3>Template</h3>
                     <Chips value={this.state.values2} onChange={(e) => this.setState({values2: e.value})} max={5} itemTemplate={this.customChip}></Chips>
                 </div>
-                
+
                 <ChipsDoc/>
             </div>
         )
@@ -52,7 +57,7 @@ class ChipsDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -68,7 +73,7 @@ import {Chips} from 'primereact/chips';
 
             <h3>Getting Started</h3>
             <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
-                    
+
 <CodeHighlight className="language-jsx">
 {`
 <Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})}></Chips>
@@ -171,6 +176,12 @@ customChip(item) {
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                         </tr>
                         <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                        </tr>
+                        <tr>
                             <td>itemTemplate</td>
                             <td>function</td>
                             <td>null</td>
@@ -213,12 +224,12 @@ customChip(item) {
                             <td>onFocus</td>
                             <td>event: Browser event</td>
                             <td>Callback to invoke when the component gets focus.</td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <td>onBlur</td>
                             <td>event: Browser event</td>
                             <td>Callback to invoke when the component loses focus.</td>
-                        </tr>  
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -276,7 +287,7 @@ export class ChipsDemo extends Component {
     constructor() {
         super();
         this.state = {
-            values1: [], 
+            values1: [],
             values2: []
         };
     }

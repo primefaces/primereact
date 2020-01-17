@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {Accordion,AccordionTab} from '../../components/accordion/Accordion';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class AccordionDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -13,6 +14,10 @@ export class AccordionDemo extends Component {
                     <div className="feature-intro">
                         <h1>Accordion</h1>
                         <p>Accordion groups a collection of contents in tabs.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("accordion")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -64,7 +69,7 @@ export class AccordionDemo extends Component {
                         <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
                     </Accordion>
                 </div>
-                
+
                 <AccordionDoc></AccordionDoc>
             </div>
         )
@@ -76,7 +81,7 @@ export class AccordionDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -272,14 +277,14 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
                         <tr>
                             <td>onTabClose</td>
                             <td>event.originalEvent: browser event  <br/>
-                                event.index: Index of the tab 
+                                event.index: Index of the tab
                             </td>
                             <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
                         </tr>
                         <tr>
                             <td>onTabChange</td>
                             <td>event.originalEvent: browser event  <br/>
-                                event.index: Index of the tab 
+                                event.index: Index of the tab
                             </td>
                             <td>Callback to invoke when state of the accordion changes.</td>
                         </tr>
@@ -316,7 +321,7 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
@@ -329,7 +334,7 @@ import React, {Component} from 'react';
 import {Accordion,AccordionTab} from 'accordion/accordion';
 
 export class AccordionDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -388,7 +393,7 @@ export class AccordionDemo extends Component {
                         <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
                     </Accordion>
                 </div>
-                
+
                 <AccordionDoc></AccordionDoc>
             </div>
         )

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Lightbox} from '../../components/lightbox/Lightbox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class LightboxDemo extends Component {
 
@@ -40,6 +41,10 @@ export class LightboxDemo extends Component {
                     <div className="feature-intro">
                         <h1>Lightbox</h1>
                         <p>LightBox is a modal overlay component to display images, videos and inline content.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("lightbox")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -78,7 +83,7 @@ import {Lightbox} from 'primereact/lightbox';
 `}</CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Lightbox has two modes; image and custom content. In image mode a collection of images are required to display 
+                        <p>Lightbox has two modes; image and custom content. In image mode a collection of images are required to display
                         where an image object in the collection defines the source of the original image, thumbnail image and the title.</p>
 
                         <CodeHighlight className="language-javascript">
@@ -99,7 +104,7 @@ var images=[
 
 `}
                         </CodeHighlight>
-                        
+
                         <p>Content mode is enabled by defining <i>target</i> property as the trigger to display the lightbox. In this setting, children of the component would be displayed inside the overlay</p>
                         <CodeHighlight className="language-jsx">
                             {`

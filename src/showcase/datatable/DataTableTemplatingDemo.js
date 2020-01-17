@@ -6,6 +6,7 @@ import {Button} from '../../components/button/Button';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableTemplatingDemo extends Component {
 
@@ -53,6 +54,10 @@ export class DataTableTemplatingDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Templating</h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -77,7 +82,7 @@ export class DataTableTemplatingDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">

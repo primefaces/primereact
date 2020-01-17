@@ -63,8 +63,8 @@ export class IconsPage extends Component {
                     A standalone icon can be displayed using an element such as <i>i</i> or <i>span</i></p>
 
 <CodeHighlight className="language-jsx">
-{`<i class="pi pi-check"></i>
-<i class="pi pi-times"></i>
+{`<i className="pi pi-check"></i>
+<i className="pi pi-times"></i>
 `}
 </CodeHighlight>
 
@@ -75,14 +75,14 @@ export class IconsPage extends Component {
                     <p>Size of the icons can easily be changed using font-size property.</p>
 
 <CodeHighlight className="language-jsx">
-{`<i class="pi pi-check"></i>
+{`<i className="pi pi-check"></i>
 `}
 </CodeHighlight>
 
                     <i className="pi pi-check"></i>
 
 <CodeHighlight className="language-jsx">
-{`<i class="pi pi-check" style={{'fontSize': '3em'}}></i>
+{`<i className="pi pi-check" style={{'fontSize': '3em'}}></i>
 `}
 </CodeHighlight>
 
@@ -91,7 +91,7 @@ export class IconsPage extends Component {
                     <h3>Spinning Animation</h3>
                     <p>Special pi-spin class applies infinite rotate to an icon.</p>
 <CodeHighlight className="language-jsx">
-{`<i class="pi pi-spin pi-spinner" style={{'fontSize': '3em'}}></i>
+{`<i className="pi pi-spin pi-spinner" style={{'fontSize': '3em'}}></i>
 `}
 </CodeHighlight>
 

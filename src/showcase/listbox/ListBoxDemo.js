@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {ListBox} from '../../components/listbox/ListBox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ListBoxDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -53,18 +54,22 @@ export class ListBoxDemo extends Component {
                     <div className="feature-intro">
                         <h1>ListBox</h1>
                         <p>ListBox is used to select one or more values from a list of items.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("listBox")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <h3 className="first">Single</h3>
                     <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
-                    
+
                     <h3>Multiple</h3>
                     <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
 
                     <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate} 
+                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
                                     style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
                 </div>
 
@@ -79,7 +84,7 @@ class ListboxDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -95,11 +100,11 @@ import {ListBox} from 'primereact/listbox';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>ListBox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives 
+            <p>ListBox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the <i>optionLabe</i> property to specify the field name of the option. SelectItem API is designed to have more 
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabe</i> property to specify the field name of the option. SelectItem API is designed to have more
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
-        
+
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">
 {`
@@ -374,7 +379,7 @@ import React, {Component} from 'react';
 import {ListBox} from 'primereact/listbox';
 
 export class ListBoxDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {
@@ -428,12 +433,12 @@ export class ListBoxDemo extends Component {
                 <div className="content-section implementation">
                     <h3 className="first">Single</h3>
                     <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
-                    
+
                     <h3>Multiple</h3>
                     <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
 
                     <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate} 
+                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
                                     style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
                 </div>
             </div>

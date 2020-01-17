@@ -43,7 +43,7 @@ const items: [
         label: 'Options',
         items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
                 {label: 'Delete', icon: 'pi pi-fw pi-trash', url: 'http://primetek.com.tr'}]
-    }, 
+    },
     {
         label: 'Account',
         items: [{label: 'Options', icon: 'pi pi-fw pi-cog',command:()=>{ window.location.hash="/"; }},
@@ -135,11 +135,11 @@ const items: [
                 <p>The function to invoke when an item is clicked is defined using the command property.</p>
 <CodeHighlight className="language-javascript">
     {`
-const items = 
+const items =
 [
     {
-        label: 'New', 
-        icon: 'pi pi-plus', 
+        label: 'New',
+        icon: 'pi pi-plus',
         command: (event) => {
             // event.originalEvent: Browser event
             // event.item: MenuItem instance
@@ -154,17 +154,17 @@ const items =
                 <p>Navigation is specified using url property for external links or using command function for internal router.</p>
                 <CodeHighlight className="language-javascript">
                     {`
-const items = 
+const items =
 [
     {
-        label: 'New', 
-        icon: 'pi pi-plus', 
+        label: 'New',
+        icon: 'pi pi-plus',
         command: (event) => {
             window.location.hash = "/fileupload";
         }
     },
     {
-        label: 'Link', 
+        label: 'Link',
         icon: 'pi pi-check',
         url: 'https://www.primefaces.org/primereact'
     }

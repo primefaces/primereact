@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {MegaMenu} from '../../components/megamenu/MegaMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class MegaMenuDemo extends Component {
 
@@ -131,6 +132,10 @@ export class MegaMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>MegaMenu</h1>
                         <p>MegaMenu is navigation component that displays submenus together.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("megaMenu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

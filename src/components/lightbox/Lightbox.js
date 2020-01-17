@@ -145,7 +145,7 @@ export class Lightbox extends Component {
         const className = classNames('p-lightbox-nav-left p-link', {'p-hidden': !(this.props.images && this.props.images.length && this.index !== 0 && this.state.currentImage)});
 
         return (
-            <button className={className} onClick={this.prev}>
+            <button type="button" className={className} onClick={this.prev}>
                 <span className="p-lightbox-nav-icon pi pi-chevron-left"></span>
             </button>
         );
@@ -155,7 +155,7 @@ export class Lightbox extends Component {
         const className = classNames('p-lightbox-nav-right p-link', {'p-hidden': !(this.props.images && this.props.images.length && this.index < (this.props.images.length - 1) && this.state.currentImage)});
 
         return (
-            <button className={className} onClick={this.next}>
+            <button type="button" className={className} onClick={this.next}>
                 <span className="p-lightbox-nav-icon pi pi-chevron-right"></span>
             </button>
         )
@@ -193,12 +193,12 @@ export class Lightbox extends Component {
         let content;
 
         if (this.state.visible) {
-            if (this.props.target) 
+            if (this.props.target)
                 content = this.props.children;
             else
                 content = <img src={this.state.currentImage ? this.state.currentImage.source : null} onLoad={this.onImageLoad} alt="" style={{display: this.state.loading ? 'none': 'inline'}} />;
         }
-        
+
         return (
             <div className="p-lightbox-content" ref={el => this.content = el} style={{transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing}}>
                 {content}
@@ -216,7 +216,7 @@ export class Lightbox extends Component {
         return (
             <div id={this.props.id}>
                 {target}
-                <div className={containerClassName} style={{transitionProperty:'all', transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing, display: this.state.visible ? 'block': 'none'}} 
+                <div className={containerClassName} style={{transitionProperty:'all', transitionDuration:this.props.effectDuration, transitionTimingFunction: this.props.easing, display: this.state.visible ? 'block': 'none'}}
                     ref={el => this.panel = el}>
                     <div className="p-lightbox-content-wrapper">
                         {leftButton}
@@ -227,4 +227,4 @@ export class Lightbox extends Component {
             </div>
         );
     }
-} 
+}

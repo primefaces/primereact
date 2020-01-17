@@ -19,7 +19,7 @@ export class DropdownPanel extends Component {
         filter: PropTypes.any,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
-        panelstyle: PropTypes.object,
+        panelStyle: PropTypes.object,
         onClick: PropTypes.func
     };
 
@@ -30,7 +30,7 @@ export class DropdownPanel extends Component {
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
                 {this.props.filter}
                 <div ref={(el) => this.itemsWrapper = el} className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
-                    <ul className="p-dropdown-items p-dropdown-list p-component">
+                    <ul className="p-dropdown-items p-dropdown-list p-component" role="listbox">
                         {this.props.children}
                     </ul>
                 </div>

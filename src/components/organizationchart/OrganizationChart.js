@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class OrganizationChartNode extends Component {
-    
+
     static defaultProps = {
         node: null,
         nodeTemplate: null,
@@ -35,7 +35,7 @@ export class OrganizationChartNode extends Component {
     getLeaf() {
         return this.node.leaf === false ? false : !(this.node.children&&this.node.children.length);
     }
-    
+
     getColspan() {
         return (this.node.children && this.node.children.length) ? this.node.children.length * 2: null;
     }
@@ -43,13 +43,13 @@ export class OrganizationChartNode extends Component {
     onNodeClick(event, node) {
         this.props.onNodeClick(event, node)
     }
-    
+
     toggleNode(event, node) {
         let _expanded = !this.state.expanded;
         this.setState({expanded: _expanded});
         event.preventDefault();
     }
-    
+
     isSelected() {
         return this.props.isSelected(this.node);
     }
@@ -69,7 +69,7 @@ export class OrganizationChartNode extends Component {
                     <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
                         {nodeLabel}
                         {
-                            !this.getLeaf() && <button className="p-node-toggler p-link" onClick={(e) => this.toggleNode(e, this.node)}>
+                            !this.getLeaf() && <button type="button" className="p-node-toggler p-link" onClick={(e) => this.toggleNode(e, this.node)}>
                                 <i className={toggleIcon}></i>
                             </button>
                         }
@@ -165,11 +165,11 @@ export class OrganizationChart extends Component {
             if (node.selectable === false) {
                 return;
             }
-            
+
             let index = this.findIndexInSelection(node);
             let selected = (index >= 0);
             let selection;
-            
+
             if (this.props.selectionMode === 'single') {
                 if (selected) {
                     selection = null;
@@ -198,7 +198,7 @@ export class OrganizationChart extends Component {
                     }
                 }
             }
-            
+
             if (this.props.onSelectionChange) {
                 this.props.onSelectionChange({
                     originalEvent: event,
@@ -207,7 +207,7 @@ export class OrganizationChart extends Component {
             }
         }
     }
-    
+
     findIndexInSelection(node) {
         let index = -1;
 
@@ -227,9 +227,9 @@ export class OrganizationChart extends Component {
 
         return index;
     }
-    
+
     isSelected(node) {
-        return this.findIndexInSelection(node) !== -1;         
+        return this.findIndexInSelection(node) !== -1;
     }
 
     render() {

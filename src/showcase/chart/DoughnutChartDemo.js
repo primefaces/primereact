@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight } from '../codehighlight/CodeHighlight';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class DoughnutChartDemo extends Component {
@@ -21,7 +22,7 @@ export class DoughnutChartDemo extends Component {
                         "#36A2EB",
                         "#FFCE56"
                     ]
-                }]    
+                }]
             };
 
         return (
@@ -30,6 +31,10 @@ export class DoughnutChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>DoughnutChart</h1>
                         <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -77,7 +82,7 @@ export class DoughnutChartDemo extends Component {
                         "#36A2EB",
                         "#FFCE56"
                     ]
-                }]    
+                }]
             };
 
         return (

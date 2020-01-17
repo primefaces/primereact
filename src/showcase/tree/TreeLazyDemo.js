@@ -4,12 +4,13 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeLazyDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             loading: true,
         };
@@ -44,25 +45,25 @@ export class TreeLazyDemo extends Component {
             this.setState({
                 loading: true
             });
-    
+
             setTimeout(() => {
                 let node = {...event.node};
                 node.children = [];
-    
+
                 for (let i = 0; i < 3; i++) {
                     node.children.push({
                         key: node.key + '-' + i,
                         label: 'Lazy ' + node.label + '-' + i
                     });
                 }
-                
+
                 let value = [...this.state.nodes];
-                value[parseInt(event.node.key, 10)] = node; 
+                value[parseInt(event.node.key, 10)] = node;
                 this.setState({
                     nodes: value,
                     loading: false
                 });
-            }, 500);  
+            }, 500);
         }
     }
 
@@ -81,11 +82,15 @@ export class TreeLazyDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - Lazy</h1>
                         <p>Lazy loading is useful when dealing with huge datasets.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -105,7 +110,7 @@ export class TreeLazyDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -122,7 +127,7 @@ export class TreeLazyDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null,
             loading: true,
         };
@@ -157,25 +162,25 @@ export class TreeLazyDemo extends Component {
             this.setState({
                 loading: true
             });
-    
+
             setTimeout(() => {
                 let node = {...event.node};
                 node.children = [];
-    
+
                 for (let i = 0; i < 3; i++) {
                     node.children.push({
                         key: node.key + '-' + i,
                         label: 'Lazy ' + node.label + '-' + i
                     });
                 }
-                
+
                 let value = [...this.state.nodes];
-                value[parseInt(event.node.key, 10)] = node; 
+                value[parseInt(event.node.key, 10)] = node;
                 this.setState({
                     nodes: value,
                     loading: false
                 });
-            }, 500);  
+            }, 500);
         }
     }
 

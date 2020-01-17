@@ -50,9 +50,9 @@ export class TreeTableHeader extends Component {
     onHeaderClick(event, column) {
         if (column.props.sortable) {
             const targetNode = event.target;
-            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') 
+            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
-                
+
                 this.props.onSort({
                     originalEvent: event,
                     sortField: column.props.field,
@@ -116,7 +116,7 @@ export class TreeTableHeader extends Component {
                     field: column.props.field,
                     matchMode: column.props.filterMatchMode
                 });
-                this.filterTimeout = null;            
+                this.filterTimeout = null;
             }, this.filterDelay);
         }
     }
@@ -146,6 +146,21 @@ export class TreeTableHeader extends Component {
         }
     }
 
+    getAriaSort(column, sorted, sortOrder) {
+        if (column.props.sortable) {
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            if (sortIcon === 'pi-sort-down')
+                return 'descending';
+            else if (sortIcon === 'pi-sort-up')
+                return 'ascending';
+            else
+                return 'none';
+        }
+        else {
+            return null;
+        }
+    }
+
     renderHeaderCell(column, index) {
         const multiSortMetaData = this.getMultiSortMetaData(column);
         const singleSorted = (column.props.field === this.props.sortField);
@@ -154,30 +169,32 @@ export class TreeTableHeader extends Component {
         let sortOrder = 0;
         let filterElement;
 
-        if(singleSorted) 
+        if(singleSorted)
             sortOrder = this.props.sortOrder;
-        else if(multipleSorted) 
+        else if(multipleSorted)
             sortOrder = multiSortMetaData.order;
 
         const sortIconElement = this.renderSortIcon(column, sorted, sortOrder);
 
+        let ariaSortData = this.getAriaSort(column, sorted, sortOrder);
+
         const className = classNames(column.props.headerClassName||column.props.className, {
-            'p-sortable-column': column.props.sortable, 
-            'p-highlight': sorted, 
+            'p-sortable-column': column.props.sortable,
+            'p-highlight': sorted,
             'p-resizable-column': this.props.resizableColumns
         });
 
         if(column.props.filter) {
-            filterElement = column.props.filterElement||<InputText onInput={(e) => this.onFilterInput(e, column)} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
+            filterElement = column.props.filterElement||<InputText onInput={(e) => this.onFilterInput(e, column)} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[column.props.field] ? this.props.filters[column.props.field].value : null}
                     className="p-column-filter" placeholder={column.props.filterPlaceholder} maxLength={column.props.filterMaxLength}/>;
         }
 
         const resizer = this.renderResizer(column);
-        
+
         return (
             <th key={column.field||index} className={className} style={column.props.headerStyle||column.props.style} tabIndex={column.props.sortable ? this.props.tabIndex: null}
-                onClick={e => this.onHeaderClick(e, column)} onMouseDown={this.onHeaderMouseDown} onKeyDown={e => this.onHeaderKeyDown(e, column)} 
-                rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}
+                onClick={e => this.onHeaderClick(e, column)} onMouseDown={this.onHeaderMouseDown} onKeyDown={e => this.onHeaderKeyDown(e, column)}
+                rowSpan={column.props.rowSpan} colSpan={column.props.colSpan} aria-sort={ariaSortData}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                 {resizer}
                 <span className="p-column-title">{column.props.header}</span>
@@ -190,7 +207,7 @@ export class TreeTableHeader extends Component {
     renderHeaderRow(row, index) {
         const rowColumns = React.Children.toArray(row.props.children);
         const rowHeaderCells = rowColumns.map((col, index) => this.renderHeaderCell(col, index));
-        
+
         return (
             <tr key={index}>{rowHeaderCells}</tr>
         )

@@ -15,7 +15,7 @@ export class PageLinks extends Component {
         page: PropTypes.number,
         onClick: PropTypes.func
     }
-    
+
     onPageLinkClick(event, pageLink) {
         if(this.props.onClick) {
             this.props.onClick({
@@ -23,7 +23,7 @@ export class PageLinks extends Component {
                 value: pageLink
             });
         }
-        
+
         event.preventDefault();
     }
 
@@ -34,7 +34,7 @@ export class PageLinks extends Component {
             });
 
             return (
-                <button key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</button>
+                <button type="button" key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</button>
             );
         });
 

@@ -19,6 +19,7 @@ export class Chips extends Component {
         className: null,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         itemTemplate: null,
         onAdd: null,
         onRemove: null,
@@ -38,6 +39,7 @@ export class Chips extends Component {
         className: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         itemTemplate: PropTypes.func,
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
@@ -96,7 +98,7 @@ export class Chips extends Component {
         if (this.props.disabled) {
             return;
         }
-        
+
         let values = [...this.props.value];
         const removedItem = values.splice(index, 1);
 
@@ -136,14 +138,14 @@ export class Chips extends Component {
                     this.removeItem(event, this.props.value.length - 1);
                 }
             break;
-            
+
             //enter
             case 13:
                 if (inputValue && inputValue.trim().length && (!this.props.max || this.props.max > this.props.value.length)) {
                     let values = [...this.props.value];
                     values.push(inputValue);
                     this.setState({values: values});
-                    
+
                     if (this.props.onAdd) {
                         this.props.onAdd({
                             originalEvent: event,
@@ -169,7 +171,7 @@ export class Chips extends Component {
                 this.inputElement.value = '';
                 event.preventDefault();
             break;
-            
+
             default:
                 if (this.isMaxedOut()) {
                     event.preventDefault();
@@ -213,7 +215,7 @@ export class Chips extends Component {
         return (
             <li className="p-chips-input-token">
                 <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
-                            onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} />
+                            onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}/>
             </li>
         );
     }

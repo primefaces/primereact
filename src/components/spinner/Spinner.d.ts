@@ -26,6 +26,7 @@ interface SpinnerProps {
     inputClassName?: string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     onChange?(e: {value: number}): void;
     onBlur?(e: Event): void;
 }

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {InputSwitch} from '../../components/inputswitch/InputSwitch';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class InputSwitchDemo extends Component {
 
@@ -21,6 +22,10 @@ export class InputSwitchDemo extends Component {
                     <div className="feature-intro">
                         <h1>InputSwitch</h1>
                         <p>InputSwitch is used to select a boolean value.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputSwitch")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -59,7 +64,7 @@ import {InputSwitch} from 'primereact/inputswitch';
 
             <h3>Getting Started</h3>
             <p>InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
-                    
+
 <CodeHighlight className="language-jsx">
 {`
 <InputSwitch checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
@@ -141,6 +146,12 @@ import {InputSwitch} from 'primereact/inputswitch';
                             <td>object</td>
                             <td>null</td>
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                        </tr>
+                        <tr>
+                            <td>ariaLabelledBy</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                         </tr>
                     </tbody>
                 </table>

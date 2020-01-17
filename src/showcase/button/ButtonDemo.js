@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class ButtonDemo extends Component {
-        
+
     render() {
         return (
             <div>
@@ -13,6 +14,10 @@ export class ButtonDemo extends Component {
                     <div className="feature-intro">
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("button")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -75,7 +80,7 @@ import {Button} from 'primereact/button';
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
-                        <p>Button is created using the Button element.</p>    
+                        <p>Button is created using the Button element.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Button />
@@ -84,7 +89,7 @@ import {Button} from 'primereact/button';
 </CodeHighlight>
 
                         <h3>Label</h3>
-                        <p>Text of the button is defined using the <i>label</i> property.</p>    
+                        <p>Text of the button is defined using the <i>label</i> property.</p>
 <CodeHighlight className="language-jsx">
 {`
 <Button label="Save" />
@@ -118,7 +123,7 @@ import {Button} from 'primereact/button';
 
                         <h3>Severity</h3>
                         <p>Different color options are available as severity levels.</p>
-                        
+
                         <ul>
                             <li>.p-button-secondary</li>
                             <li>.p-button-success</li>
@@ -236,7 +241,7 @@ import React, {Component} from 'react';
 import {Button} from 'primereact/button';
 
 export class ButtonDemo extends Component {
-        
+
     constructor() {
         super();
         this.state = {

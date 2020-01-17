@@ -67,7 +67,7 @@ export class TieredMenuSub extends Component {
             event.preventDefault();
             return;
         }
-        
+
         if (this.props.root) {
             if (this.state.activeItem || this.props.popup) {
                 this.setState({
@@ -98,7 +98,7 @@ export class TieredMenuSub extends Component {
                 item: item
             });
         }
-        
+
         if (this.props.root) {
             if (item.items) {
                 if (this.state.activeItem && item === this.state.activeItem) {
@@ -129,7 +129,7 @@ export class TieredMenuSub extends Component {
                 if (nextItem) {
                     nextItem.children[0].focus();
                 }
-                
+
                 event.preventDefault();
             break;
 
@@ -139,7 +139,7 @@ export class TieredMenuSub extends Component {
                 if (prevItem) {
                     prevItem.children[0].focus();
                 }
-                
+
                 event.preventDefault();
             break;
 
@@ -154,10 +154,10 @@ export class TieredMenuSub extends Component {
                         listItem.children[1].children[0].children[0].focus();
                     }, 50);
                 }
-               
+
                 event.preventDefault();
             break;
-            
+
             default:
             break;
         }
@@ -186,7 +186,7 @@ export class TieredMenuSub extends Component {
 
     findPrevItem(item) {
         let prevItem = item.previousElementSibling;
-        
+
         if (prevItem)
             return DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? this.findPrevItem(prevItem) : prevItem;
         else
@@ -205,13 +205,13 @@ export class TieredMenuSub extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="p-menu-separator"></li>
+            <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
         );
     }
-    
+
     renderIcon(item) {
         const className = classNames('p-menuitem-icon', item.icon);
-        
+
         if (item.icon) {
             return (
                 <span className={className}></span>
@@ -251,8 +251,8 @@ export class TieredMenuSub extends Component {
         const submenu = this.renderSubmenu(item);
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target}
+            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)} role="none">
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} role="menuitem" aria-haspopup={item.items != null}
                     onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
@@ -266,7 +266,7 @@ export class TieredMenuSub extends Component {
     renderItem(item, index) {
         if (item.separator)
             return this.renderSeparator(index);
-        else 
+        else
             return this.renderMenuitem(item, index);
     }
 
@@ -288,9 +288,9 @@ export class TieredMenuSub extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul ref={el => this.element = el} className={className}>
+            <ul ref={el => this.element = el} className={className} role={this.props.root ? 'menubar' : 'menu'} aria-orientation="horizontal">
                 {submenu}
             </ul>
-        );   
+        );
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Chart} from '../../components/chart/Chart';
 
 export class PieChartDemo extends Component {
@@ -21,7 +22,7 @@ export class PieChartDemo extends Component {
                         "#36A2EB",
                         "#FFCE56"
                     ]
-                }]    
+                }]
             };
 
         return (
@@ -30,6 +31,10 @@ export class PieChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>PieChart</h1>
                         <p>A pie chart is a circular statistical graphic, which is divided into slices to illustrate numerical proportion.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -77,7 +82,7 @@ export class PieChartDemo extends Component {
                         "#36A2EB",
                         "#FFCE56"
                     ]
-                }]    
+                }]
             };
 
         return (

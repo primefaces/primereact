@@ -27,7 +27,7 @@ export class Dialog extends Component {
         appendTo: null,
         baseZIndex: 0,
         maximizable: false,
-        blockScroll: true,
+        blockScroll: false,
         iconsTemplate: null,
         ariaCloseIconLabel: 'Close',
         focusOnShow: true
@@ -57,7 +57,7 @@ export class Dialog extends Component {
         ariaCloseIconLabel: PropTypes.string,
         focusOnShow: PropTypes.bool
     };
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -65,6 +65,7 @@ export class Dialog extends Component {
         };
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
+        this.onMaskClick = this.onMaskClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -75,14 +76,11 @@ export class Dialog extends Component {
     }
 
     hide() {
-        this.unbindMaskClickListener();
         this.unbindGlobalListeners();
-        
+
         this.props.onHide();
 
-        if (this.props.modal) {
-            this.disableModality();
-        }
+        this.disableModality();
 
         if (this.state.maximized) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
@@ -98,26 +96,24 @@ export class Dialog extends Component {
 
     show() {
         this.bindGlobalListeners();
-        
+
         if (this.props.onShow) {
             this.props.onShow();
         }
-        
+
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        
+
         if (this.props.focusOnShow) {
             this.focus();
         }
 
-        if (this.props.modal) {
-            this.enableModality();
-        }
+        this.enableModality();
 
         if (this.state.maximized) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
-    
+
     toggleMaximize(event) {
         this.setState({
             maximized: !this.state.maximized
@@ -138,21 +134,10 @@ export class Dialog extends Component {
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
         this.contentElement.style.minHeight = 'auto';
     }
-   
+
     enableModality() {
-        if (!this.mask) {
-            this.mask = document.createElement('div');
+        if (this.mask) {
             this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-dialog-mask');
-
-            if (this.props.closable && this.props.dismissableMask) {
-                this.maskClickListener = (event) => {
-                   this.onClose(event);
-                };
-
-                this.mask.addEventListener('click', this.maskClickListener);
-            }
-            document.body.appendChild(this.mask);
 
             if (this.props.blockScroll) {
                 DomHandler.addClass(document.body, 'p-overflow-hidden');
@@ -161,34 +146,27 @@ export class Dialog extends Component {
     }
 
     disableModality() {
-        if (this.mask) {
-            this.unbindMaskClickListener();
-
-            document.body.removeChild(this.mask);
-            if (this.props.blockScroll) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            }
-            this.mask = null;
+        if (this.props.blockScroll) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
 
-    unbindMaskClickListener() {
-        if (this.maskClickListener) {
-            this.mask.removeEventListener('click', this.maskClickListener);
-            this.maskClickListener = null;
-		}
+    onMaskClick(event) {
+        if (this.props.modal && this.props.closable && this.props.dismissableMask) {
+            this.onClose(event);
+        }
     }
 
-    bindGlobalListeners() {     
+    bindGlobalListeners() {
         if (this.props.closeOnEscape && this.props.closable) {
             this.bindDocumentEscapeListener();
         }
     }
-    
+
     unbindGlobalListeners() {
         this.unbindDocumentEscapeListener();
     }
-    
+
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
@@ -199,7 +177,7 @@ export class Dialog extends Component {
         };
         document.addEventListener('keydown', this.documentEscapeListener);
     }
-    
+
     unbindDocumentEscapeListener() {
         if (this.documentEscapeListener) {
             document.removeEventListener('keydown', this.documentEscapeListener);
@@ -235,13 +213,12 @@ export class Dialog extends Component {
     componentWillUnmount() {
         this.disableModality();
         this.unbindGlobalListeners();
-		this.unbindMaskClickListener();
     }
 
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
+                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
                     <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
                 </button>
             );
@@ -256,7 +233,7 @@ export class Dialog extends Component {
 
         if (this.props.maximizable) {
             return (
-                <button className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
+                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
                 </button>
             );
@@ -283,7 +260,7 @@ export class Dialog extends Component {
 
             return (
                 <div ref={el => this.headerElement = el} className="p-dialog-titlebar">
-                    <span id={this.id + '_label'} className="p-dialog-title">{this.props.header}</span>
+                    <span id={this.id + '_header'} className="p-dialog-title">{this.props.header}</span>
                     <div className="p-dialog-titlebar-icons">
                         {iconsTemplate}
                         {maximizeIcon}
@@ -327,19 +304,22 @@ export class Dialog extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
-                <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el} aria-labelledby={this.id + '_label'} role="dialog">
-                    {header}
-                    {content}
-                    {footer}
-                </div>
-            </CSSTransition>
+            <div ref={(el) => this.mask = el} className={classNames('p-dialog-wrapper', { 'p-component-overlay p-dialog-mask': this.props.modal, 'p-dialog-wrapper-visible': this.props.visible })} onClick={this.onMaskClick}>
+                <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
+                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}
+                         aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
+                        {header}
+                        {content}
+                        {footer}
+                    </div>
+                </CSSTransition>
+            </div>
         );
     }
 
     render() {
         const element = this.renderElement();
-    
+
         if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
         else

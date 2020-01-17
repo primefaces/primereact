@@ -36,7 +36,7 @@ export class Message extends Component {
             'pi-check': this.props.severity === 'success',
         });
 
-        return <div id={this.props.id} aria-live="polite" className={className} style={this.props.style}>
+        return <div id={this.props.id} aria-live="polite" className={className} style={this.props.style} role="alert">
             <span className={icon}></span>
             <span className="p-message-text">{this.props.text}</span>
         </div>;

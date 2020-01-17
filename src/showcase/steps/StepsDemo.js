@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Steps} from '../../components/steps/Steps';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {Growl} from "../../components/growl/Growl";
 import "./StepsDemo.css"
 
@@ -48,6 +49,10 @@ export class StepsDemo extends Component {
                     <div className="feature-intro">
                         <h1>Steps</h1>
                         <p>Steps component is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("steps")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

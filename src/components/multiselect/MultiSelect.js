@@ -9,7 +9,7 @@ import { MultiSelectHeader } from './MultiSelectHeader';
 import Tooltip from "../tooltip/Tooltip";
 
 export class MultiSelect extends Component {
-    
+
     static defaultProps = {
         id: null,
         value: null,
@@ -29,6 +29,7 @@ export class MultiSelect extends Component {
         tooltipOptions: null,
         maxSelectedLabels: 3,
         selectedItemsLabel: '{0} items selected',
+        ariaLabelledBy: null,
         itemTemplate: null,
         selectedItemTemplate: null,
         onChange: null,
@@ -55,6 +56,7 @@ export class MultiSelect extends Component {
         tooltipOptions: PropTypes.object,
         maxSelectedLabels: PropTypes.number,
         selectedItemsLabel: PropTypes.string,
+        ariaLabelledBy: PropTypes.string,
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
         onChange: PropTypes.func,
@@ -83,18 +85,18 @@ export class MultiSelect extends Component {
         let optionValue = this.getOptionValue(event.option);
         let selectionIndex = this.findSelectionIndex(optionValue);
         let newValue;
-        
+
         if(selectionIndex !== -1)
             newValue = this.props.value.filter((val, i) => i !== selectionIndex);
         else
             newValue = [...this.props.value || [], optionValue];
-        
+
         this.updateModel(event.originalEvent, newValue);
     }
 
     onOptionKeyDown(event) {
         let listItem = event.originalEvent.currentTarget;
-        
+
         switch(event.originalEvent.which) {
             //down
             case 40:
@@ -102,20 +104,20 @@ export class MultiSelect extends Component {
                 if (nextItem) {
                     nextItem.focus();
                 }
-                
+
                 event.originalEvent.preventDefault();
             break;
-            
+
             //up
             case 38:
                 var prevItem = this.findPrevItem(listItem);
                 if (prevItem) {
                     prevItem.focus();
                 }
-                
+
                 event.originalEvent.preventDefault();
             break;
-            
+
             //enter
             case 13:
                 this.onOptionClick(event);
@@ -138,18 +140,18 @@ export class MultiSelect extends Component {
 
     findPrevItem(item) {
         let prevItem = item.previousElementSibling;
-        
+
         if (prevItem)
             return !DomHandler.hasClass(prevItem, 'p-multiselect-item') ? this.findPrevItem(prevItem) : prevItem;
         else
             return null;
-    } 
+    }
 
     onClick() {
         if(this.props.disabled) {
             return;
         }
-        
+
         if(this.documentClickListener) {
             this.selfClick = true;
         }
@@ -164,10 +166,10 @@ export class MultiSelect extends Component {
             }
         }
     }
-    
+
     onToggleAll(event) {
         let newValue;
-        
+
         if(event.checked) {
             newValue = [];
         }
@@ -177,13 +179,13 @@ export class MultiSelect extends Component {
                 newValue = [];
                 for(let option of options) {
                     newValue.push(this.getOptionValue(option));
-                } 
+                }
             }
         }
-        
+
         this.updateModel(event.originalEvent, newValue);
     }
-    
+
     updateModel(event, value) {
         if(this.props.onChange) {
             this.props.onChange({
@@ -199,11 +201,11 @@ export class MultiSelect extends Component {
             });
         }
     }
-    
+
     onFilter(event) {
         this.setState({filter: event.query});
     }
-    
+
     onPanelClick() {
         this.panelClick = true;
     }
@@ -218,7 +220,7 @@ export class MultiSelect extends Component {
                 DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
             }, 1);
 
-            this.alignPanel();            
+            this.alignPanel();
             this.bindDocumentClickListener();
         }
     }
@@ -242,18 +244,18 @@ export class MultiSelect extends Component {
         }
         else {
             DomHandler.relativePosition(this.panel.element, this.container);
-        }            
+        }
     }
-    
+
     onCloseClick(event) {
         this.hide();
         event.preventDefault();
         event.stopPropagation();
     }
-    
+
     findSelectionIndex(value) {
         let index = -1;
-        
+
         if(this.props.value) {
             for(let i = 0; i < this.props.value.length; i++) {
                 if(ObjectUtils.equals(this.props.value[i], value, this.props.dataKey)) {
@@ -262,7 +264,7 @@ export class MultiSelect extends Component {
                 }
             }
         }
-        
+
         return index;
     }
 
@@ -463,7 +465,7 @@ export class MultiSelect extends Component {
         const empty = this.isEmpty();
         const content = this.getLabelContent();
         const className = classNames('p-multiselect-label', {
-            'p-placeholder': empty && this.props.placeholder, 
+            'p-placeholder': empty && this.props.placeholder,
             'p-multiselect-label-empty': empty && !this.props.placeholder && !this.props.selectedItemTemplate}
         );
 
@@ -478,7 +480,7 @@ export class MultiSelect extends Component {
         let className = classNames('p-multiselect p-component', this.props.className, {'p-disabled': this.props.disabled});
         let label = this.renderLabel();
         let items = this.props.options;
-        
+
         if (items) {
             if (this.hasFilter()) {
                 items = this.filterOptions(items);
@@ -499,7 +501,8 @@ export class MultiSelect extends Component {
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
                 <div className="p-hidden-accessible">
-                    <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} />
+                    <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} aria-haspopup="listbox"
+                           aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>
                 {label}
                 <div className="p-multiselect-trigger">

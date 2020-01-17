@@ -75,6 +75,7 @@ interface CalendarProps {
     appendTo?: any;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     yearRange?: string;
     dateTemplate?(dateMeta:DateMetaData): React.ReactNode;
     headerTemplate?(): React.ReactNode;

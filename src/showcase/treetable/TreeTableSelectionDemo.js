@@ -6,22 +6,23 @@ import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
-            nodes1: [], 
-            nodes2: [], 
-            nodes3: [], 
-            nodes4: [], 
-            nodes5: [], 
-            selectedNodeKey1: null, 
-            selectedNodeKey2: null, 
-            selectedNodeKeys1: [], 
-            selectedNodeKeys2: [], 
-            selectedNodeKeys3: [] 
+        this.state = {
+            nodes1: [],
+            nodes2: [],
+            nodes3: [],
+            nodes4: [],
+            nodes5: [],
+            selectedNodeKey1: null,
+            selectedNodeKey2: null,
+            selectedNodeKeys1: [],
+            selectedNodeKeys2: [],
+            selectedNodeKeys3: []
         };
 
         this.nodeservice = new NodeService();
@@ -54,6 +55,10 @@ export class TreeTableSelectionDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Selection</h1>
                         <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -108,7 +113,7 @@ class TreeTableSelectionDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -126,17 +131,17 @@ export class TreeTableSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
-            nodes1: [], 
-            nodes2: [], 
-            nodes3: [], 
-            nodes4: [], 
-            nodes5: [], 
-            selectedNodeKey1: null, 
-            selectedNodeKey2: null, 
-            selectedNodeKeys1: [], 
-            selectedNodeKeys2: [], 
-            selectedNodeKeys3: [] 
+        this.state = {
+            nodes1: [],
+            nodes2: [],
+            nodes3: [],
+            nodes4: [],
+            nodes5: [],
+            selectedNodeKey1: null,
+            selectedNodeKey2: null,
+            selectedNodeKeys1: [],
+            selectedNodeKeys2: [],
+            selectedNodeKeys3: []
         };
 
         this.nodeservice = new NodeService();

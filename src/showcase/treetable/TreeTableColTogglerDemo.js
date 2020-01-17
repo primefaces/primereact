@@ -6,6 +6,7 @@ import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTableColTogglerDemo extends Component {
 
@@ -42,7 +43,7 @@ export class TreeTableColTogglerDemo extends Component {
     render() {
         const header = (
             <div style={{textAlign:'left'}}>
-                <MultiSelect value={this.state.cols} options={this.state.colOptions} onChange={this.onColumnToggle} 
+                <MultiSelect value={this.state.cols} options={this.state.colOptions} onChange={this.onColumnToggle}
                         style={{width:'250px'}}/>
             </div>
         );
@@ -59,6 +60,10 @@ export class TreeTableColTogglerDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Column Toggler</h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -80,7 +85,7 @@ class TreeTableColTogglerDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -129,7 +134,7 @@ export class TreeTableColTogglerDemo extends Component {
     render() {
         const header = (
             <div style={{textAlign:'left'}}>
-                <MultiSelect value={this.state.cols} options={this.state.colOptions} onChange={this.onColumnToggle} 
+                <MultiSelect value={this.state.cols} options={this.state.colOptions} onChange={this.onColumnToggle}
                         style={{width:'250px'}}/>
             </div>
         );

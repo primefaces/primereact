@@ -16,6 +16,7 @@ export class InputSwitch extends Component {
         disabled: false,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null,
         onFocus: null,
         onBlur: null
@@ -31,6 +32,7 @@ export class InputSwitch extends Component {
         disabled: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func
@@ -55,7 +57,7 @@ export class InputSwitch extends Component {
         this.input.focus();
     }
 
-    toggle(event) {        
+    toggle(event) {
         if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
@@ -79,8 +81,8 @@ export class InputSwitch extends Component {
         }
     }
 
-    onBlur(event) {  
-        this.setState({focused: false});    
+    onBlur(event) {
+        this.setState({focused: false});
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
@@ -133,11 +135,12 @@ export class InputSwitch extends Component {
         let inputSwitchProps = ObjectUtils.findDiffKeys(this.props, InputSwitch.defaultProps);
 
         return (
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick} 
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick}
                 role="checkbox" aria-checked={this.props.checked} {...inputSwitchProps}>
                 <div className="p-hidden-accessible">
-                    <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle} 
-                        onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled} />
+                    <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle}
+                        onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled}  role="switch" aria-checked={this.props.checked}
+                        aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>
                 <span className="p-inputswitch-slider"></span>
             </div>

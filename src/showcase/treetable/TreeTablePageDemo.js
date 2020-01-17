@@ -4,6 +4,7 @@ import { Column } from "../../components/column/Column";
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeTablePageDemo extends Component {
 
@@ -19,7 +20,7 @@ export class TreeTablePageDemo extends Component {
         for(let i = 0; i < 50; i++) {
             let node = {
                 key: i,
-                data: {  
+                data: {
                     name: 'Item ' + i,
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + i
@@ -27,7 +28,7 @@ export class TreeTablePageDemo extends Component {
                 children: [
                     {
                         key: i + ' - 0',
-                        data: {  
+                        data: {
                             name: 'Item ' + i + ' - 0',
                             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                             type: 'Type ' + i
@@ -53,6 +54,10 @@ export class TreeTablePageDemo extends Component {
                     <div className="feature-intro">
                         <h1>TreeTable - Page</h1>
                         <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -75,7 +80,7 @@ class TreeTablePageDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -101,7 +106,7 @@ export class TreeTablePageDemo extends Component {
         for(let i = 0; i < 50; i++) {
             let node = {
                 key: i,
-                data: {  
+                data: {
                     name: 'Item ' + i,
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + i
@@ -109,7 +114,7 @@ export class TreeTablePageDemo extends Component {
                 children: [
                     {
                         key: i + ' - 0',
-                        data: {  
+                        data: {
                             name: 'Item ' + i + ' - 0',
                             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                             type: 'Type ' + i

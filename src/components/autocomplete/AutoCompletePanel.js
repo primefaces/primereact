@@ -11,7 +11,9 @@ export class AutoCompletePanel extends Component {
         appendTo: null,
         itemTemplate: null,
         onItemClick: null,
-        scrollHeight: '200px'
+        scrollHeight: '200px',
+        listId: null,
+        ariaSelected: null
     }
 
     static propTypes = {
@@ -20,7 +22,9 @@ export class AutoCompletePanel extends Component {
         appendTo: PropTypes.any,
         itemTemplate: PropTypes.func,
         onItemClick: PropTypes.func,
-        scrollHeight: PropTypes.string
+        scrollHeight: PropTypes.string,
+        listId: PropTypes.any,
+        ariaSelected: PropTypes.any
     };
 
     renderElement() {
@@ -31,14 +35,14 @@ export class AutoCompletePanel extends Component {
                 let itemContent = this.props.itemTemplate ? this.props.itemTemplate(suggestion) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
 
                 return (
-                    <li key={index + '_item'} className="p-autocomplete-list-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>{itemContent}</li>
+                    <li key={index + '_item'} role="option" aria-selected={this.props.ariaSelected === suggestion} className="p-autocomplete-list-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>{itemContent}</li>
                 );
             });
         }
 
         return (
             <div ref={(el) => this.element = el} className="p-autocomplete-panel p-input-overlay" style={{ maxHeight: this.props.scrollHeight }}>
-                <ul className="p-autocomplete-items p-autocomplete-list p-component p-reset">
+                <ul className="p-autocomplete-items p-autocomplete-list p-component p-reset" role="listbox" id={this.props.listId}>
                     {items}
                 </ul>
             </div>

@@ -18,6 +18,7 @@ interface MultiSelectProps {
     appendTo?: HTMLElement;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
     maxSelectedLabels?: number;
     selectedItemsLabel?: string;
     itemTemplate?(item: any): JSX.Element | undefined;

@@ -116,25 +116,25 @@ export class BodyRow extends Component {
                     if (nextRow) {
                         nextRow.focus();
                     }
-    
+
                     event.preventDefault();
                 break;
-    
+
                 //up arrow
                 case 38:
                     let prevRow = this.findPrevSelectableRow(row);
                     if (prevRow) {
                         prevRow.focus();
                     }
-    
+
                     event.preventDefault();
                 break;
-    
+
                 //enter
                 case 13:
                     this.onClick(event);
                 break;
-    
+
                 default:
                     //no op
                 break;
@@ -223,10 +223,10 @@ export class BodyRow extends Component {
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalStyles = {
-            'p-highlight': this.props.selected, 
+            'p-highlight': this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected
         };
-        
+
         if(this.props.rowClassName) {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
             conditionalStyles = {...conditionalStyles, ...rowClassNameCondition};
@@ -234,7 +234,7 @@ export class BodyRow extends Component {
         let className = classNames('p-datatable-row', conditionalStyles);
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
-        
+
         for (let i = 0; i < columns.length; i++) {
             let column = columns[i];
             let rowSpan;
@@ -242,21 +242,21 @@ export class BodyRow extends Component {
                 if(this.props.sortField === column.props.field) {
                     if(this.props.groupRowSpan) {
                         rowSpan = this.props.groupRowSpan;
-                        className += ' p-datatable-rowspan-group' 
+                        className += ' p-datatable-rowspan-group'
                     }
                     else {
                         continue;
                     }
                 }
             }
-            
-            let cell = <BodyCell key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded} 
-                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected} 
+
+            let cell = <BodyCell key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
+                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected}
                         editMode={this.props.editMode} editing={this.state.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} />;
-                        
+
             cells.push(cell);
         }
-        
+
         return (
             <tr tabIndex={this.props.selectionMode ? '0' : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={{height: this.props.virtualRowHeight}} onKeyDown={this.onKeyDown}>

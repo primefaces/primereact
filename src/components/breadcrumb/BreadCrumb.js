@@ -65,7 +65,7 @@ export class BreadCrumb extends Component {
         const className = classNames(item.className, {'p-disabled': item.disabled});
 
         return (
-            <li role="menuitem" className={className} style={item.style}>
+            <li className={className} style={item.style}>
                 <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
                     <span className="p-menuitem-text">{item.label}</span>
                 </a>
@@ -99,15 +99,15 @@ export class BreadCrumb extends Component {
         const home = this.renderHome();
         const items = this.renderMenuitems();
         const separator = this.renderSeparator();
-    
+
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <nav id={this.props.id} className={className} style={this.props.style} aria-label="Breadcrumb">
                 <ul>
                     {home}
                     {separator}
                     {items}
                 </ul>
-            </div>
+            </nav>
         );
     }
 }

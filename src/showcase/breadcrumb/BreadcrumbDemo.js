@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 import {BreadCrumb} from '../../components/breadcrumb/BreadCrumb';
 
 export class BreadcrumbDemo extends Component {
@@ -26,6 +27,10 @@ export class BreadcrumbDemo extends Component {
                     <div className="feature-intro">
                         <h1>Breadcrumb</h1>
                         <p>Breadcrumb provides contextual information about page hierarchy.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("breadcrumb")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

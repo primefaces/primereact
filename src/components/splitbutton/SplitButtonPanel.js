@@ -8,21 +8,23 @@ export class SplitButtonPanel extends Component {
     static defaultProps = {
         appendTo: null,
         menuStyle: null,
-        menuClassName: null
+        menuClassName: null,
+        id: null
     };
 
     static propTypes = {
         appendTo: PropTypes.object,
         menustyle: PropTypes.object,
-        menuClassName: PropTypes.string
+        menuClassName: PropTypes.string,
+        id: PropTypes.any
     };
 
     renderElement() {
         let className = classNames('p-menu p-menu-dynamic p-menu-overlay p-component', this.props.menuClassName);
 
         return (
-            <div className={className} style={this.props.menuStyle} ref={(el) => { this.element = el; }}>
-                <ul className="p-menu-list p-reset">
+            <div className={className} style={this.props.menuStyle} id={this.props.id} ref={(el) => { this.element = el; }}>
+                <ul className="p-menu-list p-reset" role="menu">
                     {this.props.children}
                 </ul>
             </div>

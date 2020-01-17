@@ -6,6 +6,7 @@ import {Row} from '../../components/row/Row';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class DataTableColGroupDemo extends Component {
 
@@ -60,12 +61,16 @@ export class DataTableColGroupDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Column Grouping</h1>
                         <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.sales} headerColumnGroup={headerGroup}
-                                                        footerColumnGroup={footerGroup}>                        
+                                                        footerColumnGroup={footerGroup}>
                         <Column field="brand" />
                         <Column field="lastYearSale" />
                         <Column field="thisYearSale" />
@@ -85,7 +90,7 @@ export class DataTableColGroupDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -155,7 +160,7 @@ export class DataTableColGroupDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.sales} headerColumnGroup={headerGroup}
-                                                        footerColumnGroup={footerGroup}>                        
+                                                        footerColumnGroup={footerGroup}>
                         <Column field="brand" />
                         <Column field="lastYearSale" />
                         <Column field="thisYearSale" />

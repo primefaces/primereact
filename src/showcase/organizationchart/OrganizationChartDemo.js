@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {OrganizationChart} from '../../components/organizationchart/OrganizationChart';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class OrganizationChartDemo extends Component {
 
@@ -136,6 +137,10 @@ export class OrganizationChartDemo extends Component {
                     <div className="feature-intro">
                         <h1>OrganizationChart</h1>
                         <p>OrganizationChart visualizes hierarchical organization data.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("organizationChart")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 

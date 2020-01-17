@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 
 export class ListBoxItem extends Component {
-    
+
     static defaultProps = {
         option: null,
         label: null,
@@ -14,7 +14,7 @@ export class ListBoxItem extends Component {
         onTouchEnd: null,
         template: null,
     }
-    
+
     static propTypes = {
         option: PropTypes.any,
         label: PropTypes.string,
@@ -24,14 +24,14 @@ export class ListBoxItem extends Component {
         onTouchEnd: PropTypes.func,
         template: PropTypes.func
     }
-    
+
     constructor() {
         super();
         this.onClick = this.onClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
     }
-    
+
     onClick(event) {
         if(this.props.onClick) {
             this.props.onClick({
@@ -39,10 +39,10 @@ export class ListBoxItem extends Component {
                 option: this.props.option
             });
         }
-        
+
         event.preventDefault();
     }
-    
+
     onTouchEnd(event) {
         if(this.props.onTouchEnd) {
             this.props.onTouchEnd({
@@ -62,20 +62,20 @@ export class ListBoxItem extends Component {
                 if(nextItem) {
                     nextItem.focus();
                 }
-                
+
                 event.preventDefault();
             break;
-            
+
             //up
             case 38:
                 var prevItem = this.findPrevItem(item);
                 if(prevItem) {
                     prevItem.focus();
                 }
-                
+
                 event.preventDefault();
             break;
-            
+
             //enter
             case 13:
                 this.onClick(event);
@@ -98,19 +98,20 @@ export class ListBoxItem extends Component {
 
     findPrevItem(item) {
         let prevItem = item.previousElementSibling;
-        
+
         if (prevItem)
             return DomHandler.hasClass(prevItem, 'p-disabled') ? this.findPrevItem(prevItem) : prevItem;
         else
             return null;
     }
-    
+
     render() {
         let className = classNames('p-listbox-item', {'p-highlight': this.props.selected});
         let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
-        
+
         return (
-            <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}>
+            <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
+                aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
                 {content}
             </li>
         );

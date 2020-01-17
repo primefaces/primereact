@@ -1,0 +1,33 @@
+.layout-wrapper {
+    .layout-footer {
+        font-size: 14px;
+        color: #84939f;
+
+        span a {
+            margin-left: 0;
+        }
+
+        .footer-links {
+            float: right;
+            font-size: 24px;
+        }
+
+        a {
+            margin-left: 16px;
+            color: #2f4054;
+            font-weight: bold;
+        }
+
+        .icon-github {
+            width: 29.1px;
+            height: 29.1px;
+            color:#20272a
+        }
+
+        .icon-twitter {
+            width: 29.1px;
+            height: 29.1px;
+            color:#20272a
+        }
+    }
+}

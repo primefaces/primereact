@@ -4,6 +4,7 @@ import {TieredMenu} from '../../components/tieredmenu/TieredMenu';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TieredMenuDemo extends Component {
 
@@ -63,7 +64,7 @@ export class TieredMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -73,12 +74,12 @@ export class TieredMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -150,6 +151,10 @@ export class TieredMenuDemo extends Component {
                     <div className="feature-intro">
                         <h1>Tiered Menu</h1>
                         <p>TieredMenu displays submenus in nested overlays.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tieredMenu")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
                 <div className="content-section implementation">
@@ -157,8 +162,8 @@ export class TieredMenuDemo extends Component {
                     <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el}/>
-                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
+                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
                 </div>
 
                 <TieredMenuDoc/>
@@ -209,7 +214,7 @@ const items:[
                    label:'Video',
                    icon:'pi pi-fw pi-video'
                 },
- 
+
              ]
           },
           {
@@ -245,7 +250,7 @@ const items:[
              label:'Justify',
              icon:'pi pi-fw pi-align-justify'
           },
- 
+
        ]
     },
     {
@@ -255,12 +260,12 @@ const items:[
           {
              label:'New',
              icon:'pi pi-fw pi-user-plus',
- 
+
           },
           {
              label:'Delete',
              icon:'pi pi-fw pi-user-minus',
- 
+
           },
           {
              label:'Search',
@@ -300,7 +305,7 @@ const items:[
                    label:'Delete',
                    icon:'pi pi-fw pi-calendar-minus'
                 },
- 
+
              ]
           },
           {
@@ -522,7 +527,7 @@ export class TieredMenuDemo extends Component {
 
     constructor() {
         super();
-        
+
         this.state = {
             items:[
                 {
@@ -541,7 +546,7 @@ export class TieredMenuDemo extends Component {
                                label:'Video',
                                icon:'pi pi-fw pi-video'
                             },
-             
+
                          ]
                       },
                       {
@@ -577,7 +582,7 @@ export class TieredMenuDemo extends Component {
                          label:'Justify',
                          icon:'pi pi-fw pi-align-justify'
                       },
-             
+
                    ]
                 },
                 {
@@ -587,12 +592,12 @@ export class TieredMenuDemo extends Component {
                       {
                          label:'New',
                          icon:'pi pi-fw pi-user-plus',
-             
+
                       },
                       {
                          label:'Delete',
                          icon:'pi pi-fw pi-user-minus',
-             
+
                       },
                       {
                          label:'Search',
@@ -632,7 +637,7 @@ export class TieredMenuDemo extends Component {
                                label:'Delete',
                                icon:'pi pi-fw pi-calendar-minus'
                             },
-             
+
                          ]
                       },
                       {
@@ -672,8 +677,8 @@ export class TieredMenuDemo extends Component {
                     <TieredMenu model={this.state.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el}/>
-                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
+                    <TieredMenu model={this.state.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
                 </div>
             </div>
         );

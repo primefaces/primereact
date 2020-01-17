@@ -4,6 +4,7 @@ import {OrderList} from '../../components/orderlist/OrderList';
 import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class OrderListDemo extends Component {
 
@@ -21,9 +22,9 @@ export class OrderListDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
-    carTemplate(car) {        
+    carTemplate(car) {
         const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
-        
+
         return (
             <div className="p-clearfix">
                 <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px', width:48 }} />
@@ -39,6 +40,10 @@ export class OrderListDemo extends Component {
                     <div className="feature-intro">
                         <h1>OrderList</h1>
                         <p>OrderList is used to sort a collection.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("orderList")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -46,7 +51,7 @@ export class OrderListDemo extends Component {
                     <div className="p-grid">
                         <div className="p-col-12 p-md-6">
                             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
-                                responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
+                                responsive={true} header="List of Cars" listStyle={{height: '20em'}}
                                 onChange={(e) => this.setState({cars: e.value})} />
                         </div>
                         <div className="p-col-12 p-md-6">
@@ -56,7 +61,7 @@ export class OrderListDemo extends Component {
                         </div>
                     </div>
                 </div>
-                
+
                 <OrderListDoc></OrderListDoc>
             </div>
         );
@@ -68,7 +73,7 @@ export class OrderListDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -83,7 +88,7 @@ import {OrderList} from 'primereact/orderlist';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i> 
+            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i>
                     callback to update the value after reorder.
             </p>
 <CodeHighlight className="language-jsx">
@@ -95,7 +100,7 @@ import {OrderList} from 'primereact/orderlist';
 
             <h3>DragDrop</h3>
             <p>Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.</p>
-            
+
 <CodeHighlight className="language-jsx">
 {`
 <OrderList value={this.state.cars} itemTemplate={this.carTemplate} dragdrop={true} onChange={(e) => this.setState({cars: e.value})}></OrderList>
@@ -107,7 +112,7 @@ import {OrderList} from 'primereact/orderlist';
             <p>In responsive mode, orderlist adjusts its controls based on screen size. To activate this mode, set responsive as true.</p>
 <CodeHighlight className="language-jsx">
 {`
-<OrderList value={this.state.cars} itemTemplate={this.carTemplate} responsive={true} 
+<OrderList value={this.state.cars} itemTemplate={this.carTemplate} responsive={true}
         onChange={(e) => this.setState({cars: e.value})}></OrderList>
 
 `}
@@ -245,14 +250,14 @@ import {OrderList} from 'primereact/orderlist';
                 <h3>Dependencies</h3>
                 <p>None.</p>
             </div>
-            
+
             </TabPanel>
 
             <TabPanel header="Source">
                 <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/orderlist" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <span>View on GitHub</span>
                 </a>
-                
+
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
@@ -275,9 +280,9 @@ export class OrderListDemo extends Component {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
     }
 
-    carTemplate(car) {        
+    carTemplate(car) {
         const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
-        
+
         return (
             <div className="p-clearfix">
                 <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px', width:48 }} />
@@ -300,7 +305,7 @@ export class OrderListDemo extends Component {
                     <div className="p-grid">
                         <div className="p-col-12 p-md-6">
                             <OrderList value={this.state.cars} dragdrop={true} itemTemplate={this.carTemplate}
-                                responsive={true} header="List of Cars" listStyle={{height: '20em'}} 
+                                responsive={true} header="List of Cars" listStyle={{height: '20em'}}
                                 onChange={(e) => this.setState({cars: e.value})} />
                         </div>
                         <div className="p-col-12 p-md-6">
@@ -314,7 +319,7 @@ export class OrderListDemo extends Component {
         );
     }
 }
-    
+
 `}
 </CodeHighlight>
                     </TabPanel>

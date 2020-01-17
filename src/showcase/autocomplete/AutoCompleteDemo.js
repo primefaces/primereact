@@ -3,18 +3,19 @@ import {AutoComplete} from '../../components/autocomplete/AutoComplete';
 import {CountryService} from '../service/CountryService';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class AutoCompleteDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             countriesData: [],
             filteredCountriesSingle: null,
             filteredBrands: null,
             filteredCountriesMultiple: null
         };
-        
+
         this.filterCountrySingle = this.filterCountrySingle.bind(this);
         this.filterBrands = this.filterBrands.bind(this);
         this.filterCountryMultiple = this.filterCountryMultiple.bind(this);
@@ -78,6 +79,10 @@ export class AutoCompleteDemo extends Component {
                     <div className="feature-intro">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("autocomplete")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -127,7 +132,7 @@ import {AutoComplete} from 'primereact/autocomplete';
                         <h3>Getting Started</h3>
                         <p>AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component
                             requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.</p>
-                        
+
                         <CodeHighlight className="language-jsx">
                             {`
 <AutoComplete value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
@@ -150,7 +155,7 @@ suggestBrands(event) {
     let results = this.brands.filter((brand) => {
          return brand.toLowerCase().startsWith(event.query.toLowerCase());
     });
-    
+
     this.setState({ brandSuggestions: results });
 }
 
@@ -163,13 +168,13 @@ render() {
 
 `}
                         </CodeHighlight>
-                        
+
                         <h3>Dropdown</h3>
-                        <p>Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using 
-                            dropdownMode property that takes "blank" or "current" as possible values. 
-                            "blank" is the default mode to send a query with an empty string whereas 
+                        <p>Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using
+                            dropdownMode property that takes "blank" or "current" as possible values.
+                            "blank" is the default mode to send a query with an empty string whereas
                             "current" setting sends a query with the current value of the input.</p>
-                        
+
                         <CodeHighlight className="language-jsx">
 {`
 <AutoComplete dropdown={true} value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
@@ -177,7 +182,7 @@ render() {
 
 `}
                         </CodeHighlight>
-                        
+
                         <h3>Multiple Mode</h3>
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
                         <CodeHighlight className="language-jsx">
@@ -187,10 +192,10 @@ render() {
 
 `}
                         </CodeHighlight>
-                        
+
                         <h3>Objects</h3>
-                        <p>AutoComplete can also work with objects using the  <i>field</i> property that defines the label to display 
-                        as a suggestion. The value passed to the model would still be the object instance of a suggestion. 
+                        <p>AutoComplete can also work with objects using the  <i>field</i> property that defines the label to display
+                        as a suggestion. The value passed to the model would still be the object instance of a suggestion.
                         Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
 
                         <CodeHighlight className="language-jsx">
@@ -200,12 +205,12 @@ render() {
 
 `}
                         </CodeHighlight>
-                        
+
                         <h3>Templating</h3>
                         <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function which gets
                         the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
                         to customize the chips in multiple mode using the same approach.</p>
-                        
+
                         <CodeHighlight className="language-jsx">
 {`
 <AutoComplete itemTemplate="this.brandTemplate" value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
@@ -213,7 +218,7 @@ render() {
 
 `}
                         </CodeHighlight>
-                        
+
                         <CodeHighlight className="language-javascript">
 {`
 brandTemplate(brand) {
@@ -222,7 +227,7 @@ brandTemplate(brand) {
 
 `}
                         </CodeHighlight>
-                        
+
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -398,6 +403,12 @@ brandTemplate(brand) {
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                     </tr>
                                     <tr>
+                                        <td>ariaLabelledBy</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                    </tr>
+                                    <tr>
                                         <td>itemTemplate</td>
                                         <td>function</td>
                                         <td>null</td>
@@ -412,7 +423,7 @@ brandTemplate(brand) {
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <h3>Events</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -437,17 +448,17 @@ brandTemplate(brand) {
                                         <td>event.originalEvent: Browser event <br />
                                             event.value: Value of the component</td>
                                         <td>Callback to invoke when autocomplete value changes.</td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <td>onFocus</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when autocomplete gets focus.</td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <td>onBlur</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when autocomplete loses focus.</td>
-                                    </tr>                        
+                                    </tr>
                                     <tr>
                                         <td>onSelect</td>
                                         <td>event.originalEvent: Browser event <br />
@@ -568,13 +579,13 @@ export class AutoCompleteDemo extends Component {
 
     constructor() {
         super();
-        this.state = { 
+        this.state = {
             countriesData: [],
             filteredCountriesSingle: null,
             filteredBrands: null,
             filteredCountriesMultiple: null
         };
-        
+
         this.filterCountrySingle = this.filterCountrySingle.bind(this);
         this.filterBrands = this.filterBrands.bind(this);
         this.filterCountryMultiple = this.filterCountryMultiple.bind(this);

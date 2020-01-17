@@ -117,17 +117,17 @@ export class Editor extends Component {
                         </select>
                     </span>
                     <span className="ql-formats">
-                        <button className="ql-bold" aria-label="Bold"></button>
-                        <button className="ql-italic" aria-label="Italic"></button>
-                        <button className="ql-underline" aria-label="Underline"></button>
+                        <button type="button" className="ql-bold" aria-label="Bold"></button>
+                        <button type="button" className="ql-italic" aria-label="Italic"></button>
+                        <button type="button" className="ql-underline" aria-label="Underline"></button>
                     </span>
                     <span className="ql-formats">
                         <select className="ql-color"></select>
                         <select className="ql-background"></select>
                     </span>
                     <span className="ql-formats">
-                        <button className="ql-list" value="ordered" aria-label="Ordered List"></button>
-                        <button className="ql-list" value="bullet" aria-label="Unordered List"></button>
+                        <button type="button" className="ql-list" value="ordered" aria-label="Ordered List"></button>
+                        <button type="button" className="ql-list" value="bullet" aria-label="Unordered List"></button>
                         <select className="ql-align">
                             <option defaultValue></option>
                             <option value="center"></option>
@@ -136,12 +136,12 @@ export class Editor extends Component {
                         </select>
                     </span>
                     <span className="ql-formats">
-                        <button className="ql-link" aria-label="Insert Link"></button>
-                        <button className="ql-image" aria-label="Insert Image"></button>
-                        <button className="ql-code-block" aria-label="Insert Code Block"></button>
+                        <button type="button" className="ql-link" aria-label="Insert Link"></button>
+                        <button type="button" className="ql-image" aria-label="Insert Image"></button>
+                        <button type="button" className="ql-code-block" aria-label="Insert Code Block"></button>
                     </span>
                     <span className="ql-formats">
-                        <button className="ql-clean" aria-label="Remove Styles"></button>
+                        <button type="button" className="ql-clean" aria-label="Remove Styles"></button>
                     </span>
                 </div>
             );

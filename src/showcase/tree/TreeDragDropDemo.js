@@ -4,12 +4,13 @@ import {NodeService} from '../service/NodeService';
 import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
 
 export class TreeDragDropDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null
         };
 
@@ -24,11 +25,15 @@ export class TreeDragDropDemo extends Component {
         return (
             <div>
                 <TreeSubmenu />
-                
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - DragDrop</h1>
                         <p>Nodes can be reordered using drag and drop.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
@@ -47,7 +52,7 @@ export class TreeDragDropDemoDoc extends Component {
     shouldComponentUpdate(){
         return false;
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -64,7 +69,7 @@ export class TreeDragDropDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null
         };
 
@@ -77,7 +82,7 @@ export class TreeDragDropDemo extends Component {
 
     render() {
         return (
-            <div>              
+            <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Tree - DragDrop</h1>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class DropdownItem extends Component {
-    
+
     static defaultProps = {
         option: null,
         label: null,
@@ -21,13 +21,13 @@ export class DropdownItem extends Component {
         disabled: PropTypes.bool,
         onClick: PropTypes.func
     };
-    
+
     constructor(props) {
         super(props);
-        
+
         this.onClick = this.onClick.bind(this);
     }
-    
+
     onClick(event) {
         if(this.props.onClick) {
             this.props.onClick({
@@ -36,7 +36,7 @@ export class DropdownItem extends Component {
             })
         }
     }
-    
+
     render() {
         let className = classNames('p-dropdown-item', {
             'p-highlight': this.props.selected,
@@ -44,9 +44,9 @@ export class DropdownItem extends Component {
             'p-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)
         });
         let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
-        
+
         return (
-            <li className={className} onClick={this.onClick}>
+            <li className={className} onClick={this.onClick} aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
                 {content}
             </li>
         );

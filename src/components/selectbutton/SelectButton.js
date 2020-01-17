@@ -20,6 +20,7 @@ export class SelectButton extends Component {
         dataKey: null,
         tooltip: null,
         tooltipOptions: null,
+        ariaLabelledBy: null,
         onChange: null
     };
 
@@ -36,6 +37,7 @@ export class SelectButton extends Component {
         dataKey: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func
     };
 
@@ -79,14 +81,14 @@ export class SelectButton extends Component {
         if (this.props.disabled) {
             return;
         }
-        
+
         let selected = this.isSelected(event.option);
         let optionValue = this.getOptionValue(event.option);
         let newValue;
 
         if(this.props.multiple) {
             let currentValue = this.props.value ? [...this.props.value] : [];
-    
+
             if(selected)
                 newValue = currentValue.filter((val) => !ObjectUtils.equals(val, optionValue, this.props.dataKey));
             else
@@ -98,7 +100,7 @@ export class SelectButton extends Component {
             else
                 newValue = optionValue;
         }
-        
+
         if(this.props.onChange) {
             this.props.onChange({
                 originalEvent: event.originalEvent,
@@ -113,11 +115,11 @@ export class SelectButton extends Component {
             });
         }
     }
-    
+
     getOptionValue(option) {
         return this.props.optionLabel ? option : option.value;
     }
-    
+
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
@@ -125,7 +127,7 @@ export class SelectButton extends Component {
     isSelected(option) {
         let selected = false;
         let optionValue = this.getOptionValue(option);
-        
+
         if(this.props.multiple) {
             if(this.props.value && this.props.value.length) {
                 for(let val of this.props.value) {
@@ -139,17 +141,17 @@ export class SelectButton extends Component {
         else {
             selected = ObjectUtils.equals(this.props.value, optionValue, this.props.dataKey);
         }
-        
+
         return selected;
     }
-    
+
     renderItems() {
         if(this.props.options && this.props.options.length) {
             return this.props.options.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
-                
+
                 return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick}
-                            selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} />;
+                            selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy}/>;
             });
         }
         else {
@@ -162,7 +164,7 @@ export class SelectButton extends Component {
         let items = this.renderItems();
 
         return (
-            <div id={this.props.id} ref={(el) => this.element = el}>
+            <div id={this.props.id} ref={(el) => this.element = el} role="group">
                 <div className={className} style={this.props.style}>
                     {items}
                 </div>
