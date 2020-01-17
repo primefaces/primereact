@@ -437,7 +437,7 @@ export class InputMask extends Component {
 
     updateModel(e) {
         if (this.props.onChange) {
-            var val = this.props.unmask ? this.getUnmaskedValue() : e.target.value;
+            var val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
             this.props.onChange({
                 originalEvent: e,
                 value: (this.defaultBuffer !== val) ? val : '',
@@ -550,6 +550,12 @@ export class InputMask extends Component {
         let isValueUpdated = this.props.value && (this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.props.value.length && this.input.value !== this.props.value);
         if (isValueUpdated) {
             this.updateValue();
+        }
+
+        if (prevProps.mask !== this.props.mask) {
+            this.init();
+            this.updateValue();
+            this.updateModel();
         }
     }
 
