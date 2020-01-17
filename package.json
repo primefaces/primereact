@@ -54,5 +54,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "@types/react": "^16.9.17",
+    "typescript": "^3.7.5"
+  }
 }

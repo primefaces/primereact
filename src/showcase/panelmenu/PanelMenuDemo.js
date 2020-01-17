@@ -29,6 +29,20 @@ export class PanelMenuDemo extends Component {
                          ]
                       },
                       {
+                        label:'New2',
+                        icon:'pi pi-fw pi-plus',
+                        items:[
+                           {
+                              label:'Bookmark',
+                              icon:'pi pi-fw pi-bookmark'
+                           },
+                           {
+                              label:'Video',
+                              icon:'pi pi-fw pi-video'
+                           }
+                        ]
+                     },
+                      {
                          label:'Delete',
                          icon:'pi pi-fw pi-trash'
                       },
@@ -40,7 +54,7 @@ export class PanelMenuDemo extends Component {
                 },
                 {
                    label:'Edit',
-                   icon:'pi pi-fw pi-pencil',
+                   icon:'pi pi-fw pi-pencil',                   
                    items:[
                       {
                          label:'Left',
