@@ -1,4 +1,208 @@
 {
+    "3.4.0": {
+        "datatable": [
+            {
+                "number": 1148,
+                "title": "Add expandableRowGroups property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1148"
+            },
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            },
+            {
+                "number": 1142,
+                "title": "Add removableSort property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1142"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1127,
+                "title": "InputTextarea does not render props like cols and rows",
+                "url": "https://github.com/primefaces/primereact/issues/1127"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1121,
+                "title": "PanelMenu Icon does not show for entries without sub children",
+                "url": "https://github.com/primefaces/primereact/issues/1121"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1156,
+                "title": "When the InputMask is focused, the mask disappears",
+                "url": "https://github.com/primefaces/primereact/issues/1156"
+            },
+            {
+                "number": 1021,
+                "title": "InputMask is not changing the mask at runtime.",
+                "url": "https://github.com/primefaces/primereact/issues/1021"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1158,
+                "title": "Wrong property name on the propTypes definition of Dropdown ",
+                "url": "https://github.com/primefaces/primereact/issues/1158"
+            },
+            {
+                "number": 1053,
+                "title": "Dropdown cannot open the panel after double clicking an option",
+                "url": "https://github.com/primefaces/primereact/issues/1053"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1131,
+                "title": "Some DataView lazy and loading types missing",
+                "url": "https://github.com/primefaces/primereact/issues/1131"
+            },
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1094,
+                "title": "Deadlock situation in range slider",
+                "url": "https://github.com/primefaces/primereact/issues/1094"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1118,
+                "title": "ContextMenu.d.ts has wrong property name",
+                "url": "https://github.com/primefaces/primereact/issues/1118"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            },
+            {
+                "number": 1157,
+                "title": "Calendar component keyboard support",
+                "url": "https://github.com/primefaces/primereact/issues/1157"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            },
+            {
+                "number": 1154,
+                "title": "The icon of the next button has wrong class name on Carousel",
+                "url": "https://github.com/primefaces/primereact/issues/1154"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            },
+            {
+                "number": 1138,
+                "title": "Enhance Dialog Positioning",
+                "url": "https://github.com/primefaces/primereact/issues/1138"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "growl": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "lightbox": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1155,
+                "title": "When the buttons inside the components are clicked, they submit the form",
+                "url": "https://github.com/primefaces/primereact/issues/1155"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1157,
+                "title": "Calendar component keyboard support",
+                "url": "https://github.com/primefaces/primereact/issues/1157"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1129,
+                "title": "TreeTable default filter value is not showing in the filter widget ",
+                "url": "https://github.com/primefaces/primereact/issues/1129"
+            }
+        ]
+    },
+
     "3.3.3": {
         "multiselect": [
             {
