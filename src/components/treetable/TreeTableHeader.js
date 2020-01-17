@@ -185,7 +185,7 @@ export class TreeTableHeader extends Component {
         });
 
         if(column.props.filter) {
-            filterElement = column.props.filterElement||<InputText onInput={(e) => this.onFilterInput(e, column)} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
+            filterElement = column.props.filterElement||<InputText onInput={(e) => this.onFilterInput(e, column)} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[column.props.field] ? this.props.filters[column.props.field].value : null}
                     className="p-column-filter" placeholder={column.props.filterPlaceholder} maxLength={column.props.filterMaxLength}/>;
         }
 
