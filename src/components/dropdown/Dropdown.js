@@ -66,7 +66,7 @@ export class Dropdown extends Component {
         filterInputAutoFocus: PropTypes.bool,
         lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
-        panelstyle: PropTypes.object,
+        panelStyle: PropTypes.object,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         showClear: PropTypes.bool,

@@ -19,7 +19,7 @@ export class DropdownPanel extends Component {
         filter: PropTypes.any,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
-        panelstyle: PropTypes.object,
+        panelStyle: PropTypes.object,
         onClick: PropTypes.func
     };
 
