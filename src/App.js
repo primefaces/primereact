@@ -293,8 +293,8 @@ export class App extends Component {
                             }
                         </ul>
                         <div className="layout-changelog-actions">
-                            { this.state.prevChangelog && <Button label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" /> }
-                            { this.state.nextChangelog && <Button label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" /> }
+                            { this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" /> }
+                            { this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" /> }
                         </div>
                     </Dialog>
 

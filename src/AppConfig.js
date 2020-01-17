@@ -22,10 +22,10 @@ export class AppConfig extends Component {
         return (
             <div className="layout-config" onClick={this.props.onConfiguratorClick}>
                 <div className="layout-config-content-wrapper">
-                    <button className="p-link layout-config-button" onClick={this.props.toggleConfigurator}>
+                    <button type="button" className="p-link layout-config-button" onClick={this.props.toggleConfigurator}>
                         <i className="pi pi-cog"></i>
                     </button>
-                    <button className="p-link layout-config-close" onClick={this.props.hideConfigurator}>
+                    <button type="button" className="p-link layout-config-close" onClick={this.props.hideConfigurator}>
                         <i className="pi pi-times"></i>
                     </button>
 
@@ -35,56 +35,56 @@ export class AppConfig extends Component {
                             <p>Built-in component themes created by the <a href="https://www.primefaces.org/designer/primereact">PrimeReact Theme Designer</a>.</p>
                             <div className="p-grid">
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-nova-light.png" alt="Nova Light" onClick={e => this.onThemeChange(e, 'nova-light', false)} />
                                         {this.props.activeTheme === 'nova-light' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Nova-Light</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-nova-dark.png" alt="Nova Dark" onClick={e => this.onThemeChange(e, 'nova-dark', false)} />
                                         {this.props.activeTheme === 'nova-dark' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Nova-Dark</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-nova-colored.png" alt="Nova Colored" onClick={e => this.onThemeChange(e, 'nova-colored', false)} />
                                         {this.props.activeTheme === 'nova-colored' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Nova-Colored</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-luna-amber.png" alt="Luna Amber" onClick={e => this.onThemeChange(e, 'luna-amber', true)} />
                                         {this.props.activeTheme === 'luna-amber' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Luna-Amber</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-luna-blue.png" alt="Luna Blue" onClick={e => this.onThemeChange(e, 'luna-blue', true)} />
                                         {this.props.activeTheme === 'luna-blue' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Luna-Blue</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-luna-green.png" alt="Luna Green" onClick={e => this.onThemeChange(e, 'luna-green', true)} />
                                         {this.props.activeTheme === 'luna-green' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Luna-Green</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-luna-pink.png" alt="Luna Pink" onClick={e => this.onThemeChange(e, 'luna-pink', true)} />
                                         {this.props.activeTheme === 'luna-pink' && <i className="pi pi-check" />}
                                     </button>
                                     <span>Luna-Pink</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
+                                    <button type="button" className="p-link">
                                         <img src="showcase/resources/images/layouts/themeswitcher-rhea.png" alt="Rhea" onClick={e => this.onThemeChange(e, 'rhea', false)} />
                                         {this.props.activeTheme === 'rhea' && <i className="pi pi-check" />}
                                     </button>
