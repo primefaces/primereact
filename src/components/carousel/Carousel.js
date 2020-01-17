@@ -112,7 +112,7 @@ export class Carousel extends Component {
         this.remainingItems = 0;
         this.allowAutoplay = !!this.props.autoplayInterval;
         this.circular = this.props.circular || this.allowAutoplay;
-        
+
         this.id = this.props.id || UniqueComponentId();
     }
 
@@ -196,7 +196,7 @@ export class Carousel extends Component {
             if (this.state.numScroll !== matchedResponsiveData.numScroll) {
                 let page = this.getPage();
                 page = Math.floor((page * this.state.numScroll) / matchedResponsiveData.numScroll);
-                
+
                 let totalShiftedItems = (matchedResponsiveData.numScroll * page) * -1;
 
                 if (this.isCircular()) {
@@ -222,9 +222,9 @@ export class Carousel extends Component {
             }
 
             if (this.state.numVisible !== matchedResponsiveData.numVisible) {
-                state = { 
-                    ...state, 
-                    numVisible: matchedResponsiveData.numVisible 
+                state = {
+                    ...state,
+                    numVisible: matchedResponsiveData.numVisible
                 };
             }
 
@@ -280,7 +280,7 @@ export class Carousel extends Component {
 
     onTouchStart(e) {
         let touchobj = e.changedTouches[0];
-        
+
         this.startPos = {
             x: touchobj.pageX,
             y: touchobj.pageY
@@ -295,7 +295,7 @@ export class Carousel extends Component {
 
     onTouchEnd(e) {
         let touchobj = e.changedTouches[0];
-        
+
         if (this.isVertical()) {
             this.changePageOnTouch(e, (touchobj.pageY - this.startPos.y));
         }
@@ -358,7 +358,7 @@ export class Carousel extends Component {
             else {
                 this.step(-1, this.state.page + 1);
             }
-        }, 
+        },
         this.props.autoplayInterval);
     }
 
@@ -367,7 +367,7 @@ export class Carousel extends Component {
             clearInterval(this.interval);
         }
     }
-    
+
     createStyle() {
         if (!this.carouselStyle) {
             this.carouselStyle = document.createElement('style');
@@ -380,7 +380,7 @@ export class Carousel extends Component {
                 flex: 1 0 ${ (100/ this.state.numVisible) }%
             }
         `;
-        
+
         if (this.props.responsiveOptions) {
             this.responsiveOptions = [...this.props.responsiveOptions];
             this.responsiveOptions.sort((data1, data2) => {
@@ -410,7 +410,7 @@ export class Carousel extends Component {
                         #${this.id} .p-carousel-item {
                             flex: 1 0 ${ (100/ res.numVisible) }%
                         }
-                    } 
+                    }
                 `
             }
         }
@@ -480,7 +480,7 @@ export class Carousel extends Component {
 
             this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
         }
-        
+
         if (isCircular) {
             if (this.state.page === 0) {
                 totalShiftedItems = -1 * this.state.numVisible;
@@ -549,7 +549,7 @@ export class Carousel extends Component {
                             isActive = firstIndex <= index && lastIndex >= index,
                             start = firstIndex === index,
                             end = lastIndex === index;
-                            
+
                             return <CarouselItem key={index} template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}/>
                         });
 
@@ -626,7 +626,7 @@ export class Carousel extends Component {
         let buttonClassName = classNames('p-carousel-next p-button', {
             'p-disabled': isDisabled
         }),
-        iconClassName = classNames('p-carousel-prev-icon pi', {
+        iconClassName = classNames('p-carousel-next-icon pi', {
             'pi-chevron-right': !this.isVertical(),
             'pi-chevron-down': this.isVertical()
         });
