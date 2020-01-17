@@ -170,13 +170,15 @@ export class Calendar extends Component {
             }
         }
 
+        this.navigation = null;
+
         this.onInputChange = this.onInputChange.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onButtonClick = this.onButtonClick.bind(this);
-        this.navBackward = this.navBackward.bind(this);
-        this.navForward = this.navForward.bind(this);
+        this.onPrevButtonClick = this.onPrevButtonClick.bind(this);
+        this.onNextButtonClick = this.onNextButtonClick.bind(this);
         this.onMonthDropdownChange = this.onMonthDropdownChange.bind(this);
         this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
@@ -196,6 +198,10 @@ export class Calendar extends Component {
     componentDidMount() {
         if (this.props.tooltip) {
             this.renderTooltip();
+        }
+
+        if(this.props.inline) {
+            this.initFocusableCell();
         }
     }
 
@@ -223,6 +229,10 @@ export class Calendar extends Component {
                     viewDate: (this.props.viewDate || propValue || new Date())
                 });
             }
+        }
+
+        if(this.panel) {
+            this.updateFocus();
         }
     }
 
@@ -265,6 +275,18 @@ export class Calendar extends Component {
     }
 
     onInputBlur(event) {
+        let rawValue = event.target.value;
+
+        try {
+            let value = this.parseValueFromString(rawValue);
+            if(this.isValidSelection(value)) {
+                this.updateModel(event, value);
+            }
+        }
+        catch(err) {
+            this.updateModel(event, null);
+        }
+
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
@@ -274,8 +296,29 @@ export class Calendar extends Component {
 
     onInputKeyDown(event) {
         this.isKeydown = true;
-        if (event.keyCode === 9) {
-            this.hideOverlay();
+
+        switch (event.which) {
+            //escape
+            case 27: {
+                this.hideOverlay();
+                break;
+            }
+
+            //tab
+            case 9: {
+                if(this.props.touchUI) {
+                    this.disableModality();
+                }
+
+                if (event.shiftKey) {
+                    this.hideOverlay();
+                }
+                break;
+            }
+
+            default:
+                //no op
+                break;
         }
     }
 
@@ -290,8 +333,10 @@ export class Calendar extends Component {
 
         try {
             let value = this.parseValueFromString(rawValue);
-            this.updateModel(event, value);
-            this.updateViewDate(event, value.length ? value[0] : value);
+            if(this.isValidSelection(value)) {
+                this.updateModel(event, value);
+                this.updateViewDate(event, value.length ? value[0] : value);
+            }
         }
         catch(err) {
             this.updateModel(event, rawValue);
@@ -302,9 +347,139 @@ export class Calendar extends Component {
         }
     }
 
+    isValidSelection(value) {
+        let isValid = true;
+        if (this.isSingleSelection()) {
+            if (!this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false)) {
+                isValid = false;
+            }
+        } else if (value.every(v => this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false))) {
+            if (this.isRangeSelection()) {
+                isValid = value.length > 1 && value[1] > value[0] ? true : false;
+            }
+        }
+        return isValid;
+    }
+
     onButtonClick(event) {
         if (!this.panel.offsetParent) {
             this.showOverlay();
+        }
+        else {
+            this.hideOverlay();
+        }
+    }
+
+    onPrevButtonClick(event) {
+        this.navigation = {backward: true, button: true};
+        this.navBackward(event);
+    }
+
+    onNextButtonClick(event) {
+        this.navigation = {backward: false, button: true};
+        this.navForward(event);
+    }
+
+    onContainerButtonKeydown(event) {
+        switch (event.which) {
+            //tab
+            case 9:
+                this.trapFocus(event);
+                break;
+
+            //escape
+            case 27:
+                this.hideOverlay();
+                event.preventDefault();
+                break;
+
+            default:
+                //Noop
+                break;
+        }
+    }
+
+    trapFocus(event) {
+        event.preventDefault();
+        let focusableElements = DomHandler.getFocusableElements(this.panel);
+
+        if (focusableElements && focusableElements.length > 0) {
+            if (!document.activeElement) {
+                focusableElements[0].focus();
+            }
+            else {
+                let focusedIndex = focusableElements.indexOf(document.activeElement);
+
+                if (event.shiftKey) {
+                    if (focusedIndex === -1 || focusedIndex === 0)
+                        focusableElements[focusableElements.length - 1].focus();
+                    else
+                        focusableElements[focusedIndex - 1].focus();
+                }
+                else {
+                    if (focusedIndex === -1 || focusedIndex === (focusableElements.length - 1))
+                        focusableElements[0].focus();
+                    else
+                        focusableElements[focusedIndex + 1].focus();
+                }
+            }
+        }
+    }
+
+    updateFocus() {
+        let cell;
+        if (this.navigation) {
+            if (this.navigation.button) {
+                this.initFocusableCell();
+
+                if (this.navigation.backward)
+                    DomHandler.findSingle(this.panel, '.p-datepicker-prev').focus();
+                else
+                    DomHandler.findSingle(this.panel, '.p-datepicker-next').focus();
+            }
+            else {
+                if (this.navigation.backward) {
+                    let cells = DomHandler.find(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    cell = cells[cells.length - 1];
+                }
+                else {
+                    cell = DomHandler.findSingle(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
+                }
+
+                if (cell) {
+                    cell.tabIndex = '0';
+                    cell.focus();
+                }
+            }
+
+            this.navigation = null;
+        }
+        else {
+            this.initFocusableCell();
+        }
+    }
+
+    initFocusableCell() {
+        let cell;
+        if (this.view === 'month') {
+            let cells = DomHandler.find(this.panel, '.p-monthpicker .p-monthpicker-month');
+            let selectedCell= DomHandler.findSingle(this.panel, '.p-monthpicker .p-monthpicker-month.p-highlight');
+            cells.forEach(cell => cell.tabIndex = -1);
+            cell = selectedCell || cells[0];
+        }
+        else {
+            cell = DomHandler.findSingle(this.panel, 'span.p-highlight');
+            if (!cell) {
+                let todayCell = DomHandler.findSingle(this.panel, 'td.p-datepicker-today');
+                if (todayCell)
+                    cell = todayCell.children[0];
+                else
+                    cell = DomHandler.findSingle(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
+            }
+        }
+
+        if (cell) {
+            cell.tabIndex = '0';
         }
     }
 
@@ -453,21 +628,21 @@ export class Calendar extends Component {
                     this.incrementHour(event);
                 else
                     this.decrementHour(event);
-            break;
+                break;
 
             case 1:
                 if (direction === 1)
                     this.incrementMinute(event);
                 else
                     this.decrementMinute(event);
-            break;
+                break;
 
             case 2:
                 if (direction === 1)
                     this.incrementSecond(event);
                 else
                     this.decrementSecond(event);
-            break;
+                break;
 
             default:
                 break;
@@ -688,11 +863,232 @@ export class Calendar extends Component {
         }
     }
 
+    onDateCellKeydown(event, date, groupIndex) {
+        const cellContent = event.currentTarget;
+        const cell = cellContent.parentElement;
+
+        switch (event.which) {
+            //down arrow
+            case 40: {
+                cellContent.tabIndex = '-1';
+                let cellIndex = DomHandler.index(cell);
+                let nextRow = cell.parentElement.nextElementSibling;
+                if (nextRow) {
+                    let focusCell = nextRow.children[cellIndex].children[0];
+                    if (DomHandler.hasClass(focusCell, 'p-disabled')) {
+                        this.navigation = {backward: false};
+                        this.navForward(event);
+                    }
+                    else {
+                        nextRow.children[cellIndex].children[0].tabIndex = '0';
+                        nextRow.children[cellIndex].children[0].focus();
+                    }
+                }
+                else {
+                    this.navigation = {backward: false};
+                    this.navForward(event);
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //up arrow
+            case 38: {
+                cellContent.tabIndex = '-1';
+                let cellIndex = DomHandler.index(cell);
+                let prevRow = cell.parentElement.previousElementSibling;
+                if (prevRow) {
+                    let focusCell = prevRow.children[cellIndex].children[0];
+                    if (DomHandler.hasClass(focusCell, 'p-disabled')) {
+                        this.navigation = {backward: true};
+                        this.navBackward(event);
+                    }
+                    else {
+                        focusCell.tabIndex = '0';
+                        focusCell.focus();
+                    }
+                }
+                else {
+                    this.navigation = {backward: true};
+                    this.navBackward(event);
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //left arrow
+            case 37: {
+                cellContent.tabIndex = '-1';
+                let prevCell = cell.previousElementSibling;
+                if (prevCell) {
+                    let focusCell = prevCell.children[0];
+                    if (DomHandler.hasClass(focusCell, 'p-disabled')) {
+                        this.navigateToMonth(true, groupIndex, event);
+                    }
+                    else {
+                        focusCell.tabIndex = '0';
+                        focusCell.focus();
+                    }
+                }
+                else {
+                    this.navigateToMonth(true, groupIndex, event);
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //right arrow
+            case 39: {
+                cellContent.tabIndex = '-1';
+                let nextCell = cell.nextElementSibling;
+                if (nextCell) {
+                    let focusCell = nextCell.children[0];
+                    if (DomHandler.hasClass(focusCell, 'p-disabled')) {
+                        this.navigateToMonth(false, groupIndex, event);
+                    }
+                    else {
+                        focusCell.tabIndex = '0';
+                        focusCell.focus();
+                    }
+                }
+                else {
+                    this.navigateToMonth(false, groupIndex,event);
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //enter
+            case 13: {
+                this.onDateSelect(event, date);
+                event.preventDefault();
+                break;
+            }
+
+            //escape
+            case 27: {
+                this.hideOverlay()
+                event.preventDefault();
+                break;
+            }
+
+            //tab
+            case 9: {
+                this.trapFocus(event);
+                break;
+            }
+
+            default:
+                //no op
+                break;
+        }
+    }
+
+    navigateToMonth(prev, groupIndex, event) {
+        if (prev) {
+            if (this.props.numberOfMonths === 1 || (groupIndex === 0)) {
+                this.navigation = {backward: true};
+                this.navBackward(event);
+            }
+            else {
+                let prevMonthContainer = this.panel.children[groupIndex - 1];
+                let cells = DomHandler.find(prevMonthContainer, '.p-datepicker-calendar td span:not(.p-disabled)');
+                let focusCell = cells[cells.length - 1];
+                focusCell.tabIndex = '0';
+                focusCell.focus();
+            }
+        }
+        else {
+            if (this.props.numberOfMonths === 1 || (groupIndex === this.props.numberOfMonths - 1)) {
+                this.navigation = {backward: false};
+                this.navForward(event);
+            }
+            else {
+                let nextMonthContainer = this.panel.children[groupIndex + 1];
+                let focusCell = DomHandler.findSingle(nextMonthContainer, '.p-datepicker-calendar td span:not(.p-disabled)');
+                focusCell.tabIndex = '0';
+                focusCell.focus();
+            }
+        }
+    }
+
+    onMonthCellKeydown(event, index) {
+        const cell = event.currentTarget;
+
+        switch (event.which) {
+            //arrows
+            case 38:
+            case 40: {
+                cell.tabIndex = '-1';
+                var cells = cell.parentElement.children;
+                var cellIndex = DomHandler.index(cell);
+                let nextCell = cells[event.which === 40 ? cellIndex + 3 : cellIndex -3];
+                if (nextCell) {
+                    nextCell.tabIndex = '0';
+                    nextCell.focus();
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //left arrow
+            case 37: {
+                cell.tabIndex = '-1';
+                let prevCell = cell.previousElementSibling;
+                if (prevCell) {
+                    prevCell.tabIndex = '0';
+                    prevCell.focus();
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //right arrow
+            case 39: {
+                cell.tabIndex = '-1';
+                let nextCell = cell.nextElementSibling;
+                if (nextCell) {
+                    nextCell.tabIndex = '0';
+                    nextCell.focus();
+                }
+                event.preventDefault();
+                break;
+            }
+
+            //enter
+            case 13: {
+                this.onMonthSelect(event, index);
+                event.preventDefault();
+                break;
+            }
+
+            //escape
+            case 27: {
+                this.hideOverlay();
+                event.preventDefault();
+                break;
+            }
+
+            //tab
+            case 9: {
+                this.trapFocus(event);
+                break;
+            }
+
+            default:
+                //no op
+                break;
+        }
+    }
+
     onDateSelect(event, dateMeta) {
         if(this.props.disabled || !dateMeta.selectable) {
             event.preventDefault();
             return;
         }
+
+        DomHandler.find(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)').forEach(cell => cell.tabIndex = -1);
+        event.currentTarget.focus();
 
         if (this.isMultipleSelection()) {
             if (this.isSelected(dateMeta)) {
@@ -861,13 +1257,13 @@ export class Calendar extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) || 
-                this.container.contains(event.target) || (this.panel && this.panel.contains(event.target)));
+        return this.container && !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) ||
+            this.container.contains(event.target) || (this.panel && this.panel.contains(event.target)));
     }
 
     isNavIconClicked(event) {
         return (DomHandler.hasClass(event.target, 'p-datepicker-prev') || DomHandler.hasClass(event.target, 'p-datepicker-prev-icon')
-                || DomHandler.hasClass(event.target, 'p-datepicker-next') || DomHandler.hasClass(event.target, 'p-datepicker-next-icon'));
+            || DomHandler.hasClass(event.target, 'p-datepicker-next') || DomHandler.hasClass(event.target, 'p-datepicker-next-icon'));
     }
 
     onWindowResize() {
@@ -1039,13 +1435,13 @@ export class Calendar extends Component {
                 for(let j = (prevMonthDaysLength - firstDay + 1); j <= prevMonthDaysLength; j++) {
                     let prev = this.getPreviousMonthAndYear(month, year);
                     week.push({day: j, month: prev.month, year: prev.year, otherMonth: true,
-                            today: this.isToday(today, j, prev.month, prev.year), selectable: this.isSelectable(j, prev.month, prev.year, true)});
+                        today: this.isToday(today, j, prev.month, prev.year), selectable: this.isSelectable(j, prev.month, prev.year, true)});
                 }
 
                 let remainingDaysLength = 7 - week.length;
                 for(let j = 0; j < remainingDaysLength; j++) {
                     week.push({day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
-                            selectable: this.isSelectable(dayNo, month, year, false)});
+                        selectable: this.isSelectable(dayNo, month, year, false)});
                     dayNo++;
                 }
             }
@@ -1054,8 +1450,8 @@ export class Calendar extends Component {
                     if(dayNo > daysLength) {
                         let next = this.getNextMonthAndYear(month, year);
                         week.push({day: dayNo - daysLength, month: next.month, year: next.year, otherMonth:true,
-                                    today: this.isToday(today, dayNo - daysLength, next.month, next.year),
-                                    selectable: this.isSelectable((dayNo - daysLength), next.month, next.year, true)});
+                            today: this.isToday(today, dayNo - daysLength, next.month, next.year),
+                            selectable: this.isSelectable((dayNo - daysLength), next.month, next.year, true)});
                     }
                     else {
                         week.push({day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
@@ -1083,11 +1479,11 @@ export class Calendar extends Component {
 
     getWeekNumber(date) {
         let checkDate = new Date(date.getTime());
-		checkDate.setDate(checkDate.getDate() + 4 - ( checkDate.getDay() || 7 ));
-		let time = checkDate.getTime();
-		checkDate.setMonth( 0 );
-		checkDate.setDate( 1 );
-		return Math.floor( Math.round((time - checkDate.getTime()) / 86400000 ) / 7 ) + 1;
+        checkDate.setDate(checkDate.getDate() + 4 - ( checkDate.getDay() || 7 ));
+        let time = checkDate.getTime();
+        checkDate.setMonth( 0 );
+        checkDate.setDate( 1 );
+        return Math.floor( Math.round((time - checkDate.getTime()) / 86400000 ) / 7 ) + 1;
     }
 
     isSelectable(day, month, year, otherMonth) {
@@ -1098,43 +1494,43 @@ export class Calendar extends Component {
         let validMonth = true;
 
         if (this.props.minDate) {
-             if(this.props.minDate.getFullYear() > year) {
-                 validMin = false;
-             }
-             else if(this.props.minDate.getFullYear() === year) {
-                 if(this.props.minDate.getMonth() > month) {
-                     validMin = false;
-                 }
-                 else if(this.props.minDate.getMonth() === month) {
-                     if(this.props.minDate.getDate() > day) {
-                         validMin = false;
-                     }
-                 }
-             }
+            if(this.props.minDate.getFullYear() > year) {
+                validMin = false;
+            }
+            else if(this.props.minDate.getFullYear() === year) {
+                if(this.props.minDate.getMonth() > month) {
+                    validMin = false;
+                }
+                else if(this.props.minDate.getMonth() === month) {
+                    if(this.props.minDate.getDate() > day) {
+                        validMin = false;
+                    }
+                }
+            }
         }
 
         if (this.props.maxDate) {
-             if(this.props.maxDate.getFullYear() < year) {
-                 validMax = false;
-             }
-             else if(this.props.maxDate.getFullYear() === year) {
-                 if(this.props.maxDate.getMonth() < month) {
-                     validMax = false;
-                 }
-                 else if(this.props.maxDate.getMonth() === month) {
-                     if(this.props.maxDate.getDate() < day) {
-                         validMax = false;
-                     }
-                 }
-             }
+            if(this.props.maxDate.getFullYear() < year) {
+                validMax = false;
+            }
+            else if(this.props.maxDate.getFullYear() === year) {
+                if(this.props.maxDate.getMonth() < month) {
+                    validMax = false;
+                }
+                else if(this.props.maxDate.getMonth() === month) {
+                    if(this.props.maxDate.getDate() < day) {
+                        validMax = false;
+                    }
+                }
+            }
         }
 
         if (this.props.disabledDates) {
-           validDate = !this.isDateDisabled(day, month, year);
+            validDate = !this.isDateDisabled(day, month, year);
         }
 
         if (this.props.disabledDays) {
-           validDay = !this.isDayDisabled(day, month, year)
+            validDay = !this.isDayDisabled(day, month, year)
         }
 
         if (this.props.selectOtherMonths === false && otherMonth) {
@@ -1302,12 +1698,12 @@ export class Calendar extends Component {
 
         let iFormat;
         const lookAhead = (match) => {
-            const matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
-            if (matches) {
-                iFormat++;
-            }
-            return matches;
-        },
+                const matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
+                if (matches) {
+                    iFormat++;
+                }
+                return matches;
+            },
             formatNumber = (match, value, len) => {
                 let num = '' + value;
                 if (lookAhead(match)) {
@@ -1341,9 +1737,9 @@ export class Calendar extends Component {
                             break;
                         case 'o':
                             output += formatNumber('o',
-                            Math.round((
-                                new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() -
-                                new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
+                                Math.round((
+                                    new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() -
+                                    new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
                             break;
                         case 'm':
                             output += formatNumber('m', date.getMonth() + 1, 2);
@@ -1453,7 +1849,7 @@ export class Calendar extends Component {
                 this.populateTime(date, parts[1], parts[2]);
             }
             else {
-                 date = this.parseDate(text, this.props.dateFormat);
+                date = this.parseDate(text, this.props.dateFormat);
             }
         }
 
@@ -1507,67 +1903,67 @@ export class Calendar extends Component {
         }
 
         let iFormat, dim, extra,
-        iValue = 0,
-        shortYearCutoff = (typeof this.props.shortYearCutoff !== "string" ? this.props.shortYearCutoff : new Date().getFullYear() % 100 + parseInt(this.props.shortYearCutoff, 10)),
-        year = -1,
-        month = -1,
-        day = -1,
-        doy = -1,
-        literal = false,
-        date,
-        lookAhead = (match) => {
-            let matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
-            if(matches) {
-                iFormat++;
-            }
-            return matches;
-        },
-        getNumber = (match) => {
-            let isDoubled = lookAhead(match),
-                size = (match === "@" ? 14 : (match === "!" ? 20 :
-                (match === "y" && isDoubled ? 4 : (match === "o" ? 3 : 2)))),
-                minSize = (match === "y" ? size : 1),
-                digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
-                num = value.substring(iValue).match(digits);
-            if(!num) {
-                throw new Error('Missing number at position ' + iValue);
-            }
-            iValue += num[ 0 ].length;
-            return parseInt(num[ 0 ], 10);
-        },
-        getName = (match, shortNames, longNames) => {
-            let index = -1;
-            let arr = lookAhead(match) ? longNames : shortNames;
-            let names = [];
-
-            for(let i = 0; i < arr.length; i++) {
-                names.push([i,arr[i]]);
-            }
-            names.sort((a,b) => {
-                return -(a[ 1 ].length - b[ 1 ].length);
-            });
-
-            for(let i = 0; i < names.length; i++) {
-                let name = names[i][1];
-                if(value.substr(iValue, name.length).toLowerCase() === name.toLowerCase()) {
-                    index = names[i][0];
-                    iValue += name.length;
-                    break;
+            iValue = 0,
+            shortYearCutoff = (typeof this.props.shortYearCutoff !== "string" ? this.props.shortYearCutoff : new Date().getFullYear() % 100 + parseInt(this.props.shortYearCutoff, 10)),
+            year = -1,
+            month = -1,
+            day = -1,
+            doy = -1,
+            literal = false,
+            date,
+            lookAhead = (match) => {
+                let matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
+                if(matches) {
+                    iFormat++;
                 }
-            }
+                return matches;
+            },
+            getNumber = (match) => {
+                let isDoubled = lookAhead(match),
+                    size = (match === "@" ? 14 : (match === "!" ? 20 :
+                        (match === "y" && isDoubled ? 4 : (match === "o" ? 3 : 2)))),
+                    minSize = (match === "y" ? size : 1),
+                    digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
+                    num = value.substring(iValue).match(digits);
+                if(!num) {
+                    throw new Error('Missing number at position ' + iValue);
+                }
+                iValue += num[ 0 ].length;
+                return parseInt(num[ 0 ], 10);
+            },
+            getName = (match, shortNames, longNames) => {
+                let index = -1;
+                let arr = lookAhead(match) ? longNames : shortNames;
+                let names = [];
 
-            if(index !== -1) {
-                return index + 1;
-            } else {
-                throw new Error('Unknown name at position ' + iValue);
-            }
-        },
-        checkLiteral = () => {
-            if(value.charAt(iValue) !== format.charAt(iFormat)) {
-                throw new Error('Unexpected literal at position ' + iValue);
-            }
-            iValue++;
-        };
+                for(let i = 0; i < arr.length; i++) {
+                    names.push([i,arr[i]]);
+                }
+                names.sort((a,b) => {
+                    return -(a[ 1 ].length - b[ 1 ].length);
+                });
+
+                for(let i = 0; i < names.length; i++) {
+                    let name = names[i][1];
+                    if(value.substr(iValue, name.length).toLowerCase() === name.toLowerCase()) {
+                        index = names[i][0];
+                        iValue += name.length;
+                        break;
+                    }
+                }
+
+                if(index !== -1) {
+                    return index + 1;
+                } else {
+                    throw new Error('Unknown name at position ' + iValue);
+                }
+            },
+            checkLiteral = () => {
+                if(value.charAt(iValue) !== format.charAt(iFormat)) {
+                    throw new Error('Unexpected literal at position ' + iValue);
+                }
+                iValue++;
+            };
 
         if (this.props.view === 'month') {
             day = 1;
@@ -1653,16 +2049,16 @@ export class Calendar extends Component {
         }
 
         date = this.daylightSavingAdjust(new Date(year, month - 1, day));
-                if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
-                    throw new Error('Invalid date'); // E.g. 31/02/00
-                }
+        if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
+            throw new Error('Invalid date'); // E.g. 31/02/00
+        }
 
         return date;
     }
 
     renderBackwardNavigator() {
         return (
-            <button type="button" className="p-datepicker-prev p-link" onClick={this.navBackward}>
+            <button type="button" className="p-datepicker-prev p-link" onClick={this.onPrevButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
             </button>
         );
@@ -1670,7 +2066,7 @@ export class Calendar extends Component {
 
     renderForwardNavigator() {
         return (
-            <button type="button" className="p-datepicker-next p-link" onClick={this.navForward}>
+            <button type="button" className="p-datepicker-next p-link" onClick={this.onNextButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
             </button>
         );
@@ -1778,22 +2174,22 @@ export class Calendar extends Component {
         }
     }
 
-    renderDateCellContent(date, className) {
+    renderDateCellContent(date, className, groupIndex) {
         const content = this.props.dateTemplate ? this.props.dateTemplate(date) : date.day;
 
         return (
-            <span className={className} onClick={e => this.onDateSelect(e, date)}>
+            <span className={className} onClick={e => this.onDateSelect(e, date)} onKeyDown={e => this.onDateCellKeydown(e, date, groupIndex)}>
                 {content}
             </span>
         );
     }
 
-    renderWeek(weekDates, weekNumber) {
+    renderWeek(weekDates, weekNumber, groupIndex) {
         const week = weekDates.map((date) => {
             const selected = this.isSelected(date);
             const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today});
             const dateClassName = classNames({'p-highlight': selected, 'p-disabled': !date.selectable});
-            const content = this.renderDateCellContent(date, dateClassName);
+            const content = this.renderDateCellContent(date, dateClassName, groupIndex);
 
             return (
                 <td key={date.day} className={cellClassName}>
@@ -1818,30 +2214,30 @@ export class Calendar extends Component {
         }
     }
 
-    renderDates(monthMetaData) {
+    renderDates(monthMetaData, groupIndex) {
         return monthMetaData.dates.map((weekDates, index) => {
             return (
                 <tr key={index}>
-                    {this.renderWeek(weekDates, monthMetaData.weekNumbers[index])}
+                    {this.renderWeek(weekDates, monthMetaData.weekNumbers[index], groupIndex)}
                 </tr>
             );
         });
     }
 
-    renderDateViewGrid(monthMetaData, weekDays) {
+    renderDateViewGrid(monthMetaData, weekDays, groupIndex) {
         const dayNames = this.renderDayNames(weekDays);
-        const dates = this.renderDates(monthMetaData);
+        const dates = this.renderDates(monthMetaData, groupIndex);
 
         return (
             <div className="p-datepicker-calendar-container">
                 <table className="p-datepicker-calendar">
                     <thead>
-                        <tr>
-                            {dayNames}
-                        </tr>
+                    <tr>
+                        {dayNames}
+                    </tr>
                     </thead>
                     <tbody>
-                        {dates}
+                    {dates}
                     </tbody>
                 </table>
             </div>
@@ -1853,7 +2249,7 @@ export class Calendar extends Component {
         const backwardNavigator = (index === 0) ? this.renderBackwardNavigator(): null;
         const forwardNavigator = (this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1) ? this.renderForwardNavigator(): null;
         const title = this.renderTitle(monthMetaData);
-        const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays);
+        const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays, index);
         const header = this.props.headerTemplate ? this.props.headerTemplate() : null;
 
         return (
@@ -1884,7 +2280,7 @@ export class Calendar extends Component {
 
         return (
             <React.Fragment>
-               {months}
+                {months}
             </React.Fragment>
         );
     }
@@ -1894,7 +2290,7 @@ export class Calendar extends Component {
         const monthName = this.props.locale.monthNamesShort[index];
 
         return (
-            <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)}>
+            <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)} onKeyDown={event => this.onMonthCellKeydown(event, index)}>
                 {monthName}
             </span>
         );
@@ -1960,11 +2356,13 @@ export class Calendar extends Component {
 
         return (
             <div className="p-hour-picker">
-                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{hourDisplay}</span>
-                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
             </div>
@@ -1978,11 +2376,13 @@ export class Calendar extends Component {
 
         return (
             <div className="p-minute-picker">
-                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
                 </button>
                 <span>{minuteDisplay}</span>
-                <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
                 </button>
             </div>
@@ -1997,11 +2397,13 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-second-picker">
-                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                            onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{secondDisplay}</span>
-                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp} onMouseLeave={this.onTimePickerElementMouseLeave}>
+                    <button className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                            onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
                 </div>
@@ -2020,11 +2422,11 @@ export class Calendar extends Component {
 
             return (
                 <div className="p-ampm-picker">
-                    <button type="button" className="p-link" onClick={this.toggleAmPm}>
+                    <button className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
                     </button>
                     <span>{display}</span>
-                    <button type="button" className="p-link" onClick={this.toggleAmPm}>
+                    <button className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
                     </button>
                 </div>
@@ -2053,13 +2455,13 @@ export class Calendar extends Component {
         if (this.props.showTime || this.props.timeOnly) {
             return (
                 <div className="p-timepicker">
-                     {this.renderHourPicker()}
-                     {this.renderSeparator()}
-                     {this.renderMinutePicker()}
-                     {this.props.showSeconds && this.renderSeparator()}
-                     {this.renderSecondPicker()}
-                     {this.props.hourFormat === '12' && this.renderSeparator()}
-                     {this.renderAmPmPicker()}
+                    {this.renderHourPicker()}
+                    {this.renderSeparator()}
+                    {this.renderMinutePicker()}
+                    {this.props.showSeconds && this.renderSeparator()}
+                    {this.renderSecondPicker()}
+                    {this.props.hourFormat === '12' && this.renderSeparator()}
+                    {this.renderAmPmPicker()}
                 </div>
             )
         }
@@ -2075,8 +2477,8 @@ export class Calendar extends Component {
 
             return (
                 <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} value={value} type="text" className={className} style={this.props.inputStyle}
-                    readOnly={this.props.readOnlyInput} disabled={this.props.disabled} tabIndex={this.props.tabIndex} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                    onChange={this.onInputChange} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy}/>
+                           readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
+                           onChange={this.onInputChange} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy}/>
             );
         }
         else {
@@ -2088,7 +2490,7 @@ export class Calendar extends Component {
         if (this.props.showIcon) {
             return (
                 <Button type="button" icon={this.props.icon} onClick={this.onButtonClick} tabIndex="-1"
-                    disabled={this.props.disabled} className="p-datepicker-trigger p-calendar-button" />
+                        disabled={this.props.disabled} className="p-datepicker-trigger p-calendar-button" />
             );
         }
         else {
@@ -2100,8 +2502,8 @@ export class Calendar extends Component {
         if (this.props.showButtonBar) {
             return (
                 <div className="p-datepicker-buttonbar">
-                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} className={this.props.todayButtonClassName} />
-                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} className={this.props.clearButtonStyleClass} />
+                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.todayButtonClassName} />
+                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.clearButtonStyleClass} />
                 </div>
             );
         }
@@ -2153,7 +2555,7 @@ export class Calendar extends Component {
                 {input}
                 {button}
                 <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle}
-                        appendTo={this.props.appendTo}>
+                               appendTo={this.props.appendTo}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}
@@ -2163,3 +2565,4 @@ export class Calendar extends Component {
         );
     }
 }
+

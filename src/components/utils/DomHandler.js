@@ -1,5 +1,5 @@
 export default class DomHandler {
-    
+
     static innerWidth(el) {
         if (el) {
             let width = el.offsetWidth;
@@ -54,12 +54,12 @@ export default class DomHandler {
                 let style = getComputedStyle(el);
                 height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
             }
-    
+
             return height;
         }
         return 0;
     }
-	
+
 	static getClientHeight(el, margin) {
         if (el) {
             let height = el.clientHeight;
@@ -108,7 +108,7 @@ export default class DomHandler {
     static getCurrentZIndex() {
         return this.zindex;
     }
-    
+
     static index(element) {
         if (element) {
             let children = element.parentNode.childNodes;
@@ -219,7 +219,7 @@ export default class DomHandler {
                 if(top < 0) {
                     top = windowScrollTop;
                 }
-            } 
+            }
             else {
                 top = targetOuterHeight + targetOffset.top + windowScrollTop;
             }
@@ -343,7 +343,7 @@ export default class DomHandler {
                     opacity = 0;
                     clearInterval(fading);
                 }
-                
+
                 element.style.opacity = opacity;
             }, interval);
         }
@@ -415,7 +415,7 @@ export default class DomHandler {
         else {
             if(this.calculatedScrollbarWidth != null)
                 return this.calculatedScrollbarWidth;
-            
+
             let scrollDiv = document.createElement("div");
             scrollDiv.className = "p-scrollbar-measure";
             document.body.appendChild(scrollDiv);
@@ -424,7 +424,7 @@ export default class DomHandler {
             document.body.removeChild(scrollDiv);
 
             this.calculatedScrollbarWidth = scrollbarWidth;
-            
+
             return scrollbarWidth;
         }
     }
@@ -466,5 +466,22 @@ export default class DomHandler {
 
     static isVisible(element) {
         return element && element.offsetParent != null;
-    } 
+    }
+
+    static getFocusableElements(element) {
+        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
+                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
+                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
+                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
+                [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])`
+        );
+
+        let visibleFocusableElements = [];
+        for (let focusableElement of focusableElements) {
+            if (getComputedStyle(focusableElement).display !== "none" && getComputedStyle(focusableElement).visibility !== "hidden")
+                visibleFocusableElements.push(focusableElement);
+        }
+
+        return visibleFocusableElements;
+    }
 }
