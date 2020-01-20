@@ -37,6 +37,7 @@ export class Lightbox extends Component {
         this.prev = this.prev.bind(this);
         this.onImageLoad = this.onImageLoad.bind(this);
         this.onTargetClick = this.onTargetClick.bind(this);
+        this.unbindDocumentClickListener();
     }
 
     bindDocumentClickListener() {
@@ -55,10 +56,6 @@ export class Lightbox extends Component {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
-    }
-
-    componentWillMount() {
-        this.unbindDocumentClickListener();
     }
 
     onImageClick(event, image, i) {
