@@ -61,7 +61,7 @@ export class HomeComponent extends Component {
                                 <img alt="accesibility" src="showcase/resources/images/home/react-accesibility.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">ACCESSIBILITY</span>
-                                    <p>Fully accessible and in complaince with Section 508 standards.</p>
+                                    <p>Fully accessible and in compliance with Section 508 standards.</p>
                                 </div>
                             </div>
                         </div>
