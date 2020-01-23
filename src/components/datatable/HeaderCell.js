@@ -8,6 +8,11 @@ export class HeaderCell extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            badgeVisible: false
+        }
+
         this.onClick = this.onClick.bind(this);
         this.onFilterInput = this.onFilterInput.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -78,16 +83,22 @@ export class HeaderCell extends Component {
         }
     }
 
-    getMultiSortMetaData() {
+    getMultiSortMetaDataIndex() {
         if(this.props.multiSortMeta) {
             for(let i = 0; i < this.props.multiSortMeta.length; i++) {
                 if(this.props.multiSortMeta[i].field === this.props.field) {
-                    return this.props.multiSortMeta[i];
+                    return i;
                 }
             }
         }
 
-        return null;
+        return -1;
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return {
+            badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
+        }
     }
 
     getAriaSort(sorted, sortOrder) {
@@ -119,8 +130,17 @@ export class HeaderCell extends Component {
         }
     }
 
+    renderSortBadge(sortMetaDataIndex) {
+        if (sortMetaDataIndex !== -1 && this.state.badgeVisible) {
+            return <span className="p-column-sort-badge">{sortMetaDataIndex + 1}</span>;
+        }
+
+        return null;
+    }
+
     render() {
-        let multiSortMetaData = this.getMultiSortMetaData();
+        let sortMetaDataIndex = this.getMultiSortMetaDataIndex();
+        let multiSortMetaData = sortMetaDataIndex !== -1 ? this.props.multiSortMeta[sortMetaDataIndex] : null;
         let singleSorted = (this.props.field === this.props.sortField || (this.props.columnSortField != null && this.props.columnSortField === this.props.sortField));
         let multipleSorted = multiSortMetaData !== null;
         let sortOrder = 0;
@@ -142,6 +162,8 @@ export class HeaderCell extends Component {
 
         let ariaSortData = this.getAriaSort(sorted, sortOrder);
 
+        let sortBadge = this.renderSortBadge(sortMetaDataIndex);
+
         if(this.props.filter) {
             filterElement = this.props.filterElement||<InputText onInput={this.onFilterInput} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[this.props.field] ? this.props.filters[this.props.field].value : null}
                         className="p-column-filter" placeholder={this.props.filterPlaceholder} maxLength={this.props.filterMaxLength} />;
@@ -159,6 +181,7 @@ export class HeaderCell extends Component {
                 {resizer}
                 <span className="p-column-title">{this.props.header}</span>
                 {sortIconElement}
+                {sortBadge}
                 {filterElement}
                 {headerCheckbox}
             </th>
