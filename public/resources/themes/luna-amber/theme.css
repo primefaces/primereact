@@ -783,6 +783,8 @@ body {
       margin: 0.857em 0 0 0; }
       body .p-datepicker table th {
         padding: 0.5em; }
+        body .p-datepicker table th.p-datepicker-weekheader {
+          border-right: 1px solid #191919; }
       body .p-datepicker table td {
         padding: 0.5em; }
         body .p-datepicker table td > span {
@@ -803,6 +805,8 @@ body {
           body .p-datepicker table td.p-datepicker-today > span.p-highlight {
             color: #212121;
             background-color: #FFB300; }
+        body .p-datepicker table td.p-datepicker-weeknumber {
+          border-right: 1px solid #191919; }
     body .p-datepicker .p-datepicker-buttonbar {
       border-top: 1px solid #3f3f3f; }
     body .p-datepicker .p-timepicker {
@@ -1657,6 +1661,14 @@ body .p-datatable .p-sortable-column {
   transition: background-color 0.2s, box-shadow 0.2s; }
   body .p-datatable .p-sortable-column .p-sortable-column-icon {
     color: #888888; }
+  body .p-datatable .p-sortable-column .p-sortable-column-badge {
+    border-radius: 50%;
+    height: 18px;
+    min-width: 18px;
+    line-height: 18px;
+    display: inline-block;
+    color: #FFB300;
+    background-color: #212121; }
   body .p-datatable .p-sortable-column:not(.p-highlight):hover {
     background-color: #4c4c4c;
     color: #dedede; }
@@ -1709,6 +1721,9 @@ body .p-datatable .p-datatable-tbody > tr {
     box-shadow: inset 0 2px 0 0 #FFB300; }
   body .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
     box-shadow: inset 0 -2px 0 0 #FFB300; }
+  body .p-datatable .p-datatable-tbody > tr.p-rowgroup-header
+  body .p-datatable .p-datatable-tbody > tr.p-rowgroup-footer {
+    font-weight: 700; }
 body .p-datatable .p-datatable-tbody > tr:nth-child(even) {
   background-color: #323232; }
   body .p-datatable .p-datatable-tbody > tr:nth-child(even).p-highlight {
@@ -2071,8 +2086,7 @@ body .p-tree {
           float: none;
           margin: 0 0.286em 0 0;
           color: #888888; }
-          body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler b
-          .p-tree-toggler-icon {
+          body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler .p-tree-toggler-icon {
             line-height: 1.25em; }
         body .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
           vertical-align: middle;
@@ -2229,6 +2243,14 @@ body .p-treetable .p-sortable-column {
   transition: background-color 0.2s, box-shadow 0.2s; }
   body .p-treetable .p-sortable-column .p-sortable-column-icon {
     color: #888888; }
+  body .p-treetable .p-sortable-column .p-sortable-column-badge {
+    border-radius: 50%;
+    height: 18px;
+    min-width: 18px;
+    line-height: 18px;
+    display: inline-block;
+    color: #FFB300;
+    background-color: #212121; }
   body .p-treetable .p-sortable-column:not(.p-highlight):hover {
     background-color: #4c4c4c;
     color: #dedede; }
