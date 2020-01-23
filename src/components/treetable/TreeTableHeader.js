@@ -173,7 +173,7 @@ export class TreeTableHeader extends Component {
 
     renderSortBadge(sortMetaDataIndex) {
         if (sortMetaDataIndex !== -1 && this.state.badgeVisible) {
-            return <span className="p-column-sort-badge">{sortMetaDataIndex + 1}</span>;
+            return <span className="p-sortable-column-badge">{sortMetaDataIndex + 1}</span>;
         }
 
         return null;
