@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
@@ -16,7 +16,7 @@ class PanelMenuSub extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeItem: null
+            model: [...props.model]
         };
     }
 
@@ -37,15 +37,21 @@ class PanelMenuSub extends Component {
             });
         }
 
-        if (this.state.activeItem && this.state.activeItem === item) {
-            this.setState({
-                activeItem: null
-            });
+        let items = [...this.state.model];
+        this.collapseAll(items);
+        if (!item.expanded) {
+            let expandItem = { ...this.state.model[this.state.model.indexOf(item)] }
+            expandItem.expanded = !item.expanded;
+            items[this.state.model.indexOf(item)] = expandItem;
         }
-        else {
-            this.setState({
-                activeItem: item
-            });
+        this.setState({ model: items });
+    }
+
+    collapseAll(items) {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].expanded) {
+                items[i] = { ...items[i], expanded: false }
+            }
         }
     }
 
@@ -99,8 +105,8 @@ class PanelMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const active = this.state.activeItem === item;
-        const className = classNames('p-menuitem', item.className, {'p-disabled': item.disabled});
+        const active = item.expanded;
+        const className = classNames('p-menuitem', item.className, { 'p-disabled': item.disabled });
         const icon = this.renderIcon(item, active);
         const submenuIcon = this.renderSubmenuIcon(item, active);
         const submenu = this.renderSubmenu(item, active);
@@ -125,9 +131,9 @@ class PanelMenuSub extends Component {
     }
 
     renderMenu() {
-        if (this.props.model) {
+        if (this.state.model) {
             return (
-                this.props.model.map((item, index) => {
+                this.state.model.map((item, index) => {
                     return this.renderItem(item, index);
                 })
             );
@@ -147,7 +153,7 @@ class PanelMenuSub extends Component {
             </ul>
         );
     }
- }
+}
 
 export class PanelMenu extends Component {
 
@@ -168,7 +174,7 @@ export class PanelMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeItem: null
+            model: [...props.model]
         }
     }
 
@@ -188,16 +194,21 @@ export class PanelMenu extends Component {
                 item: item
             });
         }
-
-        if (this.state.activeItem && this.state.activeItem === item) {
-            this.setState({
-                activeItem: null
-            });
+        let items = [...this.state.model];
+        this.collapseAll(items);
+        if (!item.expanded) {
+            let expandItem = { ...this.state.model[this.state.model.indexOf(item)] }
+            expandItem.expanded = !item.expanded;
+            items[this.state.model.indexOf(item)] = expandItem;
         }
-        else {
-            this.setState({
-                activeItem: item
-            });
+        this.setState({ model: items });
+    }
+
+    collapseAll(items) {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].expanded) {
+                items[i] = { ...items[i], expanded: false }
+            }
         }
     }
 
@@ -228,9 +239,9 @@ export class PanelMenu extends Component {
     }
 
     renderPanel(item, index) {
-        const active = this.state.activeItem === item;
-        const className = classNames('p-panelmenu-panel', item.className, {'p-disabled': item.disabled});
-        const headerClassName = classNames('p-component p-panelmenu-header', {'p-highlight': active});
+        const active = item.expanded;
+        const className = classNames('p-panelmenu-panel', item.className, { 'p-disabled': item.disabled });
+        const headerClassName = classNames('p-component p-panelmenu-header', { 'p-highlight': active });
         const toggleIcon = this.renderPanelToggleIcon(item, active);
         const itemIcon = this.renderPanelIcon(item);
         const contentWrapperClassName = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': !active});
@@ -258,9 +269,9 @@ export class PanelMenu extends Component {
     }
 
     renderPanels() {
-        if (this.props.model) {
+        if (this.state.model) {
             return (
-                this.props.model.map((item, index) => {
+                this.state.model.map((item, index) => {
                     return this.renderPanel(item, index);
                 })
             );
