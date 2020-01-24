@@ -83,7 +83,7 @@ export class Dialog extends Component {
 
         this.disableModality();
 
-        if (this.state.maximized) {
+        if (this.state.maximized && !this.props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
@@ -110,8 +110,8 @@ export class Dialog extends Component {
 
         this.enableModality();
 
-        if (this.state.maximized) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        if (this.state.maximized && !this.props.blockScroll) {
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
 
@@ -123,16 +123,19 @@ export class Dialog extends Component {
     }
 
     maximize() {
-        DomHandler.addClass(this.container, 'p-dialog-maximized');
-        DomHandler.addClass(document.body, 'p-overflow-hidden');
+        if (!this.props.blockScroll) {
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
+        }
 
         const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement);
         this.contentElement.style.minHeight = 'calc(100vh - ' + diffHeight +'px)';
     }
 
     restoreMaximize() {
-        DomHandler.removeClass(this.container, 'p-dialog-maximized');
-        DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        if (!this.props.blockScroll) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        }
+
         this.contentElement.style.minHeight = 'auto';
     }
 
@@ -193,7 +196,6 @@ export class Dialog extends Component {
     componentDidMount() {
         if (this.props.visible) {
             this.show();
-            this.currentHeight = DomHandler.getOuterHeight(this.container);
         }
     }
 
@@ -301,7 +303,8 @@ export class Dialog extends Component {
     renderElement() {
         const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
-            'p-dialog-visible': this.props.visible
+            'p-dialog-visible': this.props.visible,
+            'p-dialog-maximized': this.state.maximized
         });
 
         const header = this.renderHeader();
