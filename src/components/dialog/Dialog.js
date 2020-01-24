@@ -305,7 +305,7 @@ export class Dialog extends Component {
 
         return (
             <div ref={(el) => this.mask = el} className={classNames('p-dialog-wrapper', { 'p-component-overlay p-dialog-mask': this.props.modal, 'p-dialog-wrapper-visible': this.props.visible })} onClick={this.onMaskClick}>
-                <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
+                <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible} onClick={event => event.stopPropagation()}>
                     <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}
                          aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
                         {header}
