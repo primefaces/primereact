@@ -27,16 +27,17 @@
     position: absolute;
 }
 
-.p-multiselect .p-multiselect-label-container  {
+.p-multiselect .p-multiselect-label-container {
     overflow: hidden;
 }
 
-.p-multiselect .p-multiselect-label  {
+.p-multiselect .p-multiselect-label {
     display: block;
     padding: .25em 2em .25em .25em;
     width: auto;
     border: none;
     cursor: pointer;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
