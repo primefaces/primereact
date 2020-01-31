@@ -69,15 +69,27 @@ export class SelectButtonItem extends Component {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
         });
-
-        return (
-            <div ref={(el) => this.el = el} className={className} onClick={this.onClick} role="button" aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}>
-                <span className="p-button-text p-c">{this.props.label}</span>
-                <div className="p-hidden-accessible">
-                    <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
-                        tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
+        if (this.props.option.icon) {
+            return (
+                <div ref={(el) => this.el = el} className={className} onClick={this.onClick} role="button" aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}>
+                    <i className={this.props.option.icon}></i>
+                    <span className="p-button-text p-c">{this.props.label}</span>
+                    <div className="p-hidden-accessible">
+                        <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
+                            tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label} />
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div ref={(el) => this.el = el} className={className} onClick={this.onClick} role="button" aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}>
+                    <span className="p-button-text p-c">{this.props.label}</span>
+                    <div className="p-hidden-accessible">
+                        <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
+                            tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label} />
+                    </div>
+                </div>
+            );
+        }
     }
 }
