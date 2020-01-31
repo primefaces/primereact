@@ -32,6 +32,7 @@ export class MultiSelect extends Component {
         ariaLabelledBy: null,
         itemTemplate: null,
         selectedItemTemplate: null,
+        optionClassName: null,
         onChange: null,
         onFocus: null,
         onBlur: null
@@ -59,6 +60,7 @@ export class MultiSelect extends Component {
         ariaLabelledBy: PropTypes.string,
         itemTemplate: PropTypes.func,
         selectedItemTemplate: PropTypes.func,
+        optionClassName: PropTypes.string,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func
@@ -387,6 +389,10 @@ export class MultiSelect extends Component {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
     }
 
+    getOptionClassName(option) {
+        return this.props.optionClassName ? ObjectUtils.resolveFieldData(option, this.props.optionClassName) : option.className;
+    }
+
     isEmpty() {
         return !this.props.value || this.props.value.length === 0;
     }
@@ -488,9 +494,10 @@ export class MultiSelect extends Component {
 
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
+                let optionClassName = this.getOptionClassName(option);
 
                 return (
-                    <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} template={this.props.itemTemplate}
+                    <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} template={this.props.itemTemplate} className={optionClassName}
                     selected={this.isSelected(option)} onClick={this.onOptionClick} onKeyDown={this.onOptionKeyDown} tabIndex={this.props.tabIndex} />
                 );
             });

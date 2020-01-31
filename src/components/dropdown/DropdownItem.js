@@ -10,6 +10,7 @@ export class DropdownItem extends Component {
         template: null,
         selected: false,
         disabled: false,
+        className: null,
         onClick: null
     };
 
@@ -19,6 +20,7 @@ export class DropdownItem extends Component {
         template: PropTypes.func,
         selected: PropTypes.bool,
         disabled: PropTypes.bool,
+        className: PropTypes.string,
         onClick: PropTypes.func
     };
 
@@ -38,7 +40,7 @@ export class DropdownItem extends Component {
     }
 
     render() {
-        let className = classNames('p-dropdown-item', {
+        let className = classNames(this.props.className, 'p-dropdown-item', {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)

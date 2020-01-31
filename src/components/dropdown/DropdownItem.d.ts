@@ -4,6 +4,7 @@ interface DropdownItemProps {
     option?: object;
     selected?: boolean;
     template?(option:any): JSX.Element | undefined;
+    className?:  string;
     onClick?(e: {originalEvent: Event, option: object}): void;
 }
 

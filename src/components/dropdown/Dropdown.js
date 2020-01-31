@@ -39,6 +39,7 @@ export class Dropdown extends Component {
         tooltipOptions: null,
         ariaLabel: null,
         ariaLabelledBy: null,
+        optionClassName: null,
         onChange: null,
         onMouseDown: null,
         onContextMenu: null
@@ -75,6 +76,7 @@ export class Dropdown extends Component {
         tooltipOptions: PropTypes.object,
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
+        optionClassName: PropTypes.string,
         onChange: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
@@ -596,8 +598,9 @@ export class Dropdown extends Component {
         if(items) {
             return items.map((option) => {
                 let optionLabel = this.getOptionLabel(option);
+                let optionClassName = this.getOptionClassName(option);
                 return (
-                    <DropdownItem key={this.getOptionKey(option)} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option} disabled={option.disabled} onClick={this.onOptionClick} />
+                    <DropdownItem key={this.getOptionKey(option)} label={optionLabel} option={option} template={this.props.itemTemplate} className={optionClassName} selected={selectedOption === option} disabled={option.disabled} onClick={this.onOptionClick} />
                 );
             });
         }
@@ -625,6 +628,10 @@ export class Dropdown extends Component {
 
     getOptionKey(option) {
         return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
+    }
+
+    getOptionClassName(option) {
+        return this.props.optionClassName ? ObjectUtils.resolveFieldData(option, this.props.optionClassName) : option.className;
     }
 
     checkValidity() {
