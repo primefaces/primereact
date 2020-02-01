@@ -7,6 +7,7 @@ export class MultiSelectItem extends Component {
     static defaultProps = {
         option: null,
         label: null,
+        className: null,
         selected: false,
         tabIndex: null,
         template: null,
@@ -17,6 +18,7 @@ export class MultiSelectItem extends Component {
     static propTypes = {
         option: PropTypes.object,
         label: PropTypes.string,
+        className: PropTypes.string,
         selected: PropTypes.bool,
         tabIndex: PropTypes.string,
         template: PropTypes.func,
@@ -51,7 +53,7 @@ export class MultiSelectItem extends Component {
     }
 
     render() {
-        const className = classNames('p-multiselect-item', {'p-highlight': this.props.selected});
+        const className = classNames('p-multiselect-item', {'p-highlight': this.props.selected}, this.props.className);
         const checkboxClassName = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected});
         const checkboxIcon = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.selected});
         const content = this.props.template ? this.props.template(this.props.option) : this.props.label;
