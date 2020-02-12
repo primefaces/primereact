@@ -2446,8 +2446,6 @@ body .p-growl {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); }
     body .p-growl .p-growl-item-container .p-growl-item {
       padding: 1em; }
-      body .p-growl .p-growl-item-container .p-growl-item .p-growl-message {
-        margin: 0 0 0 4em; }
       body .p-growl .p-growl-item-container .p-growl-item .p-growl-image {
         font-size: 2.571em; }
     body .p-growl .p-growl-item-container.p-growl-message-info {
