@@ -36,7 +36,8 @@ export class FileUpload extends Component {
         onSelect: null,
         onProgress: null,
         onValidationFail: null,
-        uploadHandler: null
+        uploadHandler: null,
+        onRemove: null
     }
 
     static propTypes = {
@@ -67,7 +68,8 @@ export class FileUpload extends Component {
         onSelect: PropTypes.func,
         onProgress: PropTypes.func,
         onValidationFail: PropTypes.func,
-        uploadHandler: PropTypes.func
+        uploadHandler: PropTypes.func,
+        onRemove: PropTypes.func
     };
 
     constructor(props) {
@@ -97,11 +99,20 @@ export class FileUpload extends Component {
         return /^image\//.test(file.type);
     }
 
-    remove(index) {
+    remove(event, index) {
         this.clearInputElement();
         let currentFiles = [...this.state.files];
+        let removedFile = this.state.files[index];
+
         currentFiles.splice(index, 1);
-        this.setState({files: currentFiles});
+        this.setState({ files: currentFiles });
+
+        if (this.props.onRemove) {
+            this.props.onRemove({
+                originalEvent: event,
+                file: removedFile
+            })
+        }
     }
 
     clearInputElement() {
@@ -337,7 +348,7 @@ export class FileUpload extends Component {
                         let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
                         let fileName = <div>{file.name}</div>;
                         let size = <div>{this.formatSize(file.size)}</div>;
-                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={() => this.remove(index)} /></div>
+                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} /></div>
 
                         return <div className="p-fileupload-row" key={file.name + file.type + file.size}>
                                  {preview}

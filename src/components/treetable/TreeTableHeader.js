@@ -43,8 +43,18 @@ export class TreeTableHeader extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            badgeVisible: false
+        }
+
         this.onHeaderMouseDown = this.onHeaderMouseDown.bind(this);
         this.onFilterInput = this.onFilterInput.bind(this);
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return {
+            badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
+        }
     }
 
     onHeaderClick(event, column) {
@@ -81,16 +91,16 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    getMultiSortMetaData(column) {
+    getMultiSortMetaDataIndex(column) {
         if(this.props.multiSortMeta) {
             for(let i = 0; i < this.props.multiSortMeta.length; i++) {
                 if(this.props.multiSortMeta[i].field === column.props.field) {
-                    return this.props.multiSortMeta[i];
+                    return i;
                 }
             }
         }
 
-        return null;
+        return -1;
     }
 
     onResizerMouseDown(event, column) {
@@ -161,8 +171,17 @@ export class TreeTableHeader extends Component {
         }
     }
 
+    renderSortBadge(sortMetaDataIndex) {
+        if (sortMetaDataIndex !== -1 && this.state.badgeVisible) {
+            return <span className="p-sortable-column-badge">{sortMetaDataIndex + 1}</span>;
+        }
+
+        return null;
+    }
+
     renderHeaderCell(column, index) {
-        const multiSortMetaData = this.getMultiSortMetaData(column);
+        const sortMetaDataIndex = this.getMultiSortMetaDataIndex(column);
+        const multiSortMetaData = sortMetaDataIndex !== -1 ? this.props.multiSortMeta[sortMetaDataIndex] : null;
         const singleSorted = (column.props.field === this.props.sortField);
         const multipleSorted = multiSortMetaData !== null;
         const sorted = column.props.sortable && (singleSorted || multipleSorted);
@@ -177,6 +196,8 @@ export class TreeTableHeader extends Component {
         const sortIconElement = this.renderSortIcon(column, sorted, sortOrder);
 
         let ariaSortData = this.getAriaSort(column, sorted, sortOrder);
+
+        let sortBadge = this.renderSortBadge(sortMetaDataIndex);
 
         const className = classNames(column.props.headerClassName||column.props.className, {
             'p-sortable-column': column.props.sortable,
@@ -199,6 +220,7 @@ export class TreeTableHeader extends Component {
                 {resizer}
                 <span className="p-column-title">{column.props.header}</span>
                 {sortIconElement}
+                {sortBadge}
                 {filterElement}
             </th>
         );

@@ -66,6 +66,7 @@ export class Dialog extends Component {
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
+        this.onDialogClick = this.onDialogClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -82,7 +83,7 @@ export class Dialog extends Component {
 
         this.disableModality();
 
-        if (this.state.maximized) {
+        if (this.state.maximized && !this.props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
@@ -109,8 +110,8 @@ export class Dialog extends Component {
 
         this.enableModality();
 
-        if (this.state.maximized) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        if (this.state.maximized && !this.props.blockScroll) {
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
 
@@ -122,16 +123,19 @@ export class Dialog extends Component {
     }
 
     maximize() {
-        DomHandler.addClass(this.container, 'p-dialog-maximized');
-        DomHandler.addClass(document.body, 'p-overflow-hidden');
+        if (!this.props.blockScroll) {
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
+        }
 
         const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement);
         this.contentElement.style.minHeight = 'calc(100vh - ' + diffHeight +'px)';
     }
 
     restoreMaximize() {
-        DomHandler.removeClass(this.container, 'p-dialog-maximized');
-        DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        if (!this.props.blockScroll) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        }
+
         this.contentElement.style.minHeight = 'auto';
     }
 
@@ -155,6 +159,10 @@ export class Dialog extends Component {
         if (this.props.modal && this.props.closable && this.props.dismissableMask) {
             this.onClose(event);
         }
+    }
+
+    onDialogClick(event) {
+        event.stopPropagation();
     }
 
     bindGlobalListeners() {
@@ -188,7 +196,6 @@ export class Dialog extends Component {
     componentDidMount() {
         if (this.props.visible) {
             this.show();
-            this.currentHeight = DomHandler.getOuterHeight(this.container);
         }
     }
 
@@ -296,7 +303,8 @@ export class Dialog extends Component {
     renderElement() {
         const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
-            'p-dialog-visible': this.props.visible
+            'p-dialog-visible': this.props.visible,
+            'p-dialog-maximized': this.state.maximized
         });
 
         const header = this.renderHeader();
@@ -306,7 +314,7 @@ export class Dialog extends Component {
         return (
             <div ref={(el) => this.mask = el} className={classNames('p-dialog-wrapper', { 'p-component-overlay p-dialog-mask': this.props.modal, 'p-dialog-wrapper-visible': this.props.visible })} onClick={this.onMaskClick}>
                 <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
-                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}
+                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onDialogClick}
                          aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}

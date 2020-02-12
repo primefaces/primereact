@@ -29,6 +29,7 @@ interface FileUploadProps {
     onProgress?(e: {originalEvent: Event, progress: any}): void;
     onValidationFail?(file: File): void;
     uploadHandler?(e: {files: any}): void;
+    onRemove?(e: {originalEvent: Event, file: any}): void;
 }
 
 export class FileUpload extends React.Component<FileUploadProps,any> {

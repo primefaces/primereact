@@ -1,4 +1,30 @@
-# Change Log
+# Changelog
+
+## [3.4.0](https://github.com/primefaces/primereact/tree/3.4.0) (2020-01-17)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/3.3.3...3.4.0)
+
+**Implemented New Features and Enhancements:**
+
+- Calendar component keyboard support [\#1157](https://github.com/primefaces/primereact/issues/1157)
+- Add expandableRowGroups property to DataTable [\#1148](https://github.com/primefaces/primereact/issues/1148)
+- Add removableSort property to DataTable [\#1142](https://github.com/primefaces/primereact/issues/1142)
+- Enhance Dialog Positioning [\#1138](https://github.com/primefaces/primereact/issues/1138)
+
+**Fixed bugs:**
+
+- Wrong property name on the propTypes definition of Dropdown  [\#1158](https://github.com/primefaces/primereact/issues/1158)
+- When the InputMask is focused, the mask disappears [\#1156](https://github.com/primefaces/primereact/issues/1156)
+- When the buttons inside the components are clicked, they submit the form [\#1155](https://github.com/primefaces/primereact/issues/1155)
+- The icon of the next button has wrong class name on Carousel [\#1154](https://github.com/primefaces/primereact/issues/1154)
+- Some DataView lazy and loading types missing [\#1131](https://github.com/primefaces/primereact/issues/1131)
+- TreeTable default filter value is not showing in the filter widget  [\#1129](https://github.com/primefaces/primereact/issues/1129)
+- InputTextarea does not render props like cols and rows [\#1127](https://github.com/primefaces/primereact/issues/1127)
+- PanelMenu Icon does not show for entries without sub children [\#1121](https://github.com/primefaces/primereact/issues/1121)
+- ContextMenu.d.ts has wrong property name [\#1118](https://github.com/primefaces/primereact/issues/1118)
+- Deadlock situation in range slider [\#1094](https://github.com/primefaces/primereact/issues/1094)
+- Dropdown cannot open the panel after double clicking an option [\#1053](https://github.com/primefaces/primereact/issues/1053)
+- InputMask is not changing the mask at runtime. [\#1021](https://github.com/primefaces/primereact/issues/1021)
 
 ## [3.3.3](https://github.com/primefaces/primereact/tree/3.3.3) (2019-11-29)
 
@@ -202,7 +228,7 @@
 - Not able to set focus on Dropdown component [\#903](https://github.com/primefaces/primereact/issues/903)
 - Calendar time parsing broken for showSeconds == false [\#901](https://github.com/primefaces/primereact/issues/901)
 - DataTable sortFunction Typescript definition wrong [\#898](https://github.com/primefaces/primereact/issues/898)
-- DataTable: alwaysShowPaginator prop not used [\#896](https://github.com/primefaces/primereact/issues/896)
+- Data\*: alwaysShowPaginator prop not used [\#896](https://github.com/primefaces/primereact/issues/896)
 - DataTable expanded rows collapse when modifying one property of a record [\#884](https://github.com/primefaces/primereact/issues/884)
 - The scroll bar is not moving correctly on the DataTable with resizeMode="expand" [\#881](https://github.com/primefaces/primereact/issues/881)
 - Dropdown showClear not always displayed [\#875](https://github.com/primefaces/primereact/issues/875)

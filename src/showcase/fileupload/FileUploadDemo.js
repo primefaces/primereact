@@ -366,6 +366,12 @@ myUploader(event) {
                             <td>event.files: List of selected files.</td>
                             <td>Callback to invoke in custom upload mode to upload the files manually.</td>
                         </tr>
+                        <tr>
+                            <td>onRemove</td>
+                            <td>event.originalEvent: Original browser event. <br />
+                                event.file: Selected file.</td>
+                            <td>Callback to invoke when a file is removed without uploading using clear button of a file.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
