@@ -23,6 +23,7 @@ export class Dialog extends Component {
         closable: true,
         style: null,
         className: null,
+        maskClassName: null,
         showHeader: true,
         appendTo: null,
         baseZIndex: 0,
@@ -48,6 +49,7 @@ export class Dialog extends Component {
         closable: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        maskClassName: PropTypes.string,
         showHeader: PropTypes.bool,
         appendTo: PropTypes.object,
         baseZIndex: PropTypes.number,
@@ -307,12 +309,17 @@ export class Dialog extends Component {
             'p-dialog-maximized': this.state.maximized
         });
 
+        const maskClassName = classNames('p-dialog-wrapper', {
+            'p-component-overlay p-dialog-mask': this.props.modal,
+            'p-dialog-wrapper-visible': this.props.visible
+        }, this.props.maskClassName);
+
         const header = this.renderHeader();
         const content = this.renderContent();
         const footer = this.renderFooter();
 
         return (
-            <div ref={(el) => this.mask = el} className={classNames('p-dialog-wrapper', { 'p-component-overlay p-dialog-mask': this.props.modal, 'p-dialog-wrapper-visible': this.props.visible })} onClick={this.onMaskClick}>
+            <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
                     <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onDialogClick}
                          aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
