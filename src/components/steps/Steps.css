@@ -15,8 +15,10 @@
     justify-content: center;
 }
 
-.p-steps.p-steps-readonly .p-steps-item {
+.p-steps.p-steps-readonly .p-steps-item,
+.p-steps .p-steps-item.p-disabled {
     cursor: auto;
+    pointer-events: none;
 }
 
 .p-steps .p-steps-item .p-menuitem-link {
