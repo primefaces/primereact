@@ -14,10 +14,9 @@ export class StepsDemo extends Component {
         this.state = {
             activeIndex: 1
         };
-    }
 
-    render() {
-        const items = [{
+        this.items = [
+            {
                 label: 'Personal',
                 command: (event) => {
                     this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
@@ -42,7 +41,9 @@ export class StepsDemo extends Component {
                 }
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -60,13 +61,13 @@ export class StepsDemo extends Component {
                     <Growl ref={(el) => {this.growl = el}}></Growl>
 
                     <h3>Basic</h3>
-                    <Steps model={items} />
+                    <Steps model={this.items} />
 
                     <h3>Interactive</h3>
-                    <Steps model={items} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
+                    <Steps model={this.items} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
 
                     <h3>Custom Style</h3>
-                    <Steps model={items} className="steps-custom" />
+                    <Steps model={this.items} className="steps-custom" />
                 </div>
 
                 <StepsDoc/>
@@ -316,10 +317,9 @@ export class StepsDemo extends Component {
         this.state = {
             activeIndex: 1
         };
-    }
 
-    render() {
-        const items = [{
+        this.items = [
+            {
                 label: 'Personal',
                 command: (event) => {
                     this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
@@ -344,7 +344,9 @@ export class StepsDemo extends Component {
                 }
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
