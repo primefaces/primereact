@@ -13,6 +13,7 @@ interface DialogProps {
     closable?: boolean;
     style?: object;
     className?: string;
+    maskClassName?: string;
     showHeader?: boolean;
     appendTo?: HTMLElement;
     baseZIndex?: number;
