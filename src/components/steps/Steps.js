@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Steps extends Component {
 
@@ -23,6 +24,12 @@ export class Steps extends Component {
         className: PropTypes.string,
         onSelect: PropTypes.func
     };
+
+    constructor(props) {
+        super(props);
+
+        this.id = this.props.id || UniqueComponentId();
+    }
 
     itemClick(event, item, index) {
         if (this.props.readOnly || item.disabled) {
@@ -48,6 +55,32 @@ export class Steps extends Component {
                 item: item,
                 index: index
             });
+        }
+    }
+
+    createStyle() {
+        if (!this.stepsStyle) {
+            this.stepsStyle = document.createElement('style');
+            this.stepsStyle.type = 'text/css';
+            document.body.appendChild(this.stepsStyle);
+        }
+
+        let innerHTML = `
+            #${this.id} .p-steps-item {
+                flex: 1 0 ${ (100/ this.props.model.length) }%
+            }
+        `;
+
+        this.stepsStyle.innerHTML = innerHTML;
+    }
+
+    componentDidMount() {
+        this.createStyle();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.model !== this.props.model) {
+            this.createStyle();
         }
     }
 
@@ -89,7 +122,7 @@ export class Steps extends Component {
         const items = this.renderItems();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
+            <div id={this.id} className={className} style={this.props.style}>
                 {items}
             </div>
         );
