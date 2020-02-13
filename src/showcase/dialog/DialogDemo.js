@@ -209,6 +209,12 @@ const myIcon = (
                             <td>Style class of the component.</td>
                         </tr>
                         <tr>
+                            <td>maskClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the mask.</td>
+                        </tr>
+                        <tr>
                             <td>showHeader</td>
                             <td>boolean</td>
                             <td>true</td>
