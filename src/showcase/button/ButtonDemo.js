@@ -152,8 +152,8 @@ import {Button} from 'primereact/button';
 `}
 </CodeHighlight>
 
-                        <h3>Raised and Rounded Buttons</h3>
-                        <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
+                        <h3>Raised, Rounded and Outlined Buttons</h3>
+                        <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class. There are also outlined buttons that can be made by adding the class "p-button-outlined".</p>
                         <CodeHighlight className="language-jsx">
 {`
 <Button label="Proceed" className="p-button-raised p-button-rounded" />
@@ -305,6 +305,14 @@ export class ButtonDemo extends Component {
                     <Button label="Info" className="p-button-rounded p-button-info" />
                     <Button label="Warning" className="p-button-rounded p-button-warning" />
                     <Button label="Danger" className="p-button-rounded p-button-danger" />
+
+                    <h3>Outlined Buttons</h3>
+                    <Button label="Primary" className="p-button-outlined" />
+                    <Button label="Secondary" className="p-button-outlined p-button-secondary" />
+                    <Button label="Success" className="p-button-outlined p-button-success" />
+                    <Button label="Info" className="p-button-outlined p-button-info" />
+                    <Button label="Warning" className="p-button-outlined p-button-warning" />
+                    <Button label="Danger" className="p-button-outlined p-button-danger" />
                 </div>
             </div>
         )
