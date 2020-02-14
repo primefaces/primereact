@@ -3,7 +3,6 @@
     position: relative;
     cursor: pointer;
     vertical-align: middle;
-    min-width: 12.5em;
 }
 
 .p-dropdown .p-dropdown-hidden-select {
