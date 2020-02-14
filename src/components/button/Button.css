@@ -116,5 +116,4 @@ button.p-button::-moz-focus-inner {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     background-color: transparent !important;
-    color: black !important;
 }

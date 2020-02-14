@@ -6,6 +6,11 @@ import ObjectUtils from '../utils/ObjectUtils';
 
 export class Button extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
     static defaultProps = {
         label: null,
         icon: null,
@@ -35,15 +40,25 @@ export class Button extends Component {
             else
                 this.renderTooltip();
         }
+
+        if (
+            !this.element.style.color &&
+            this.element.classList.contains('p-button-outlined')
+        ) {
+            const borderColor = getComputedStyle(this.element).borderColor;
+            if (borderColor && this.state.textColor !== borderColor) {
+                this.setState({ textColor: borderColor })
+            }
+        }
     }
- 
+
     componentWillUnmount() {
         if (this.tooltip) {
             this.tooltip.destroy();
             this.tooltip = null;
         }
     }
- 
+
     renderTooltip() {
         this.tooltip = new Tooltip({
             target: this.element,
@@ -88,6 +103,10 @@ export class Button extends Component {
         let label = this.renderLabel();
 
         let buttonProps = ObjectUtils.findDiffKeys(this.props, Button.defaultProps);
+
+        if (this.state.textColor) {
+            buttonProps.style = { ...buttonProps.style, color: this.state.textColor }
+        }
 
         return (
             <button ref={(el) => this.element = el} {...buttonProps} className={className}>
