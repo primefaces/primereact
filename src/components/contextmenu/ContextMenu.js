@@ -217,7 +217,8 @@ export class ContextMenu extends Component {
     constructor(props) {
         super();
         this.state = {
-            resetMenu: false
+            resetMenu: false,
+            hidden: true
         }
         this.onMenuClick = this.onMenuClick.bind(this);
         this.onLeafClick = this.onLeafClick.bind(this);
@@ -247,17 +248,21 @@ export class ContextMenu extends Component {
     }
 
     show(event) {
-        this.container.style.display = 'block';
-        this.position(event);
-        if (this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        }
-        DomHandler.fadeIn(this.container, 250);
+        if (this.state.hidden) {
+            const { pageX, pageY } = event;
+            this.setState({ hidden: false }, () => {
+                this.position({ pageX, pageY });
+                if (this.props.autoZIndex) {
+                    this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+                }
+                DomHandler.fadeIn(this.container, 250);
 
-        this.bindDocumentResizeListener();
+                this.bindDocumentResizeListener();
 
-        if (this.props.onShow) {
-            this.props.onShow(event);
+                if (this.props.onShow) {
+                    this.props.onShow(event);
+                }
+            });
         }
 
         event.stopPropagation();
@@ -265,12 +270,12 @@ export class ContextMenu extends Component {
     }
 
     hide(event) {
-        if (this.container) {
-            this.container.style.display = 'none';
-        }
-
-        if (this.props.onHide) {
-            this.props.onHide(event);
+        if (this.container && !this.state.hidden) {
+            this.setState({ hidden: true }, () => {
+                if (this.props.onHide) {
+                    this.props.onHide(event);
+                }
+            });
         }
 
         this.unbindDocumentResizeListener();
@@ -386,9 +391,10 @@ export class ContextMenu extends Component {
 
     renderContextMenu() {
         const className = classNames('p-contextmenu p-component', this.props.className);
+        const style = { ...this.props.style, display: this.state.hidden ? 'none' : 'block' };
 
         return(
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
+            <div id={this.props.id} className={className} style={style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
                 <ContextMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
             </div>
         );
