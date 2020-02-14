@@ -2543,6 +2543,53 @@ export class DataTableStateDemo extends Component {
                     <span>View on GitHub</span>
                 </a>
 
+                <p>DataTableDemo.css</p>
+<CodeHighlight className="language-javascript">
+{`
+.datatable-doc-demo .p-column-filter {
+    margin-top: 1em;
+}
+.datatable-doc-demo .p-dropdown-car-option {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.datatable-doc-demo .p-dropdown-car-option img {
+    margin-right: .5em;
+    width: 24px;
+}
+.datatable-doc-demo .p-dropdown-car-option span {
+    margin-top: .125em;
+}
+.datatable-doc-demo .p-datatable-globalfilter-container {
+    float: right;
+}
+.datatable-doc-demo .p-datatable-globalfilter-container input {
+    width: 250px;
+}
+.datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-header {
+    border: 0 none;
+    padding: 12px;
+    text-align: left;
+    font-size: 20px;
+}
+.datatable-doc-demo .p-datatable.p-datatable-cars .p-paginator {
+    border: 0 none;
+    padding: 1em;
+}
+.datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-thead > tr > th {
+    border: 0 none;
+    text-align: left;
+}
+.datatable-doc-demo .p-datatable.p-datatable-cars .p-column-title {
+    font-size: 16px;
+}
+.datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-tbody > tr > td {
+    border: 0 none;
+}
+`}
+</CodeHighlight>
+
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
