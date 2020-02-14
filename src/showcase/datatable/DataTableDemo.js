@@ -2,40 +2,127 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
+import {InputText} from '../../components/inputtext/InputText';
+import {Button} from '../../components/button/Button';
 import {CarService} from '../service/CarService';
+import {Dropdown} from '../../components/dropdown/Dropdown';
+import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
+import "./DataTableDemo.css"
 
 export class DataTableDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            brand: null,
+            colors: null,
+            selectedCar: null
         };
         this.carservice = new CarService();
+        this.onBrandChange = this.onBrandChange.bind(this);
+        this.onColorChange = this.onColorChange.bind(this);
+        this.brandTemplate = this.brandTemplate.bind(this);
+        this.actionTemplate = this.actionTemplate.bind(this);
+        this.filterBrandTemplate = this.filterBrandTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    }
+
+    brandTemplate(rowData, column) {
+        var src = 'showcase/resources/demo/images/car/' + rowData.brand + '.png';
+        return (
+            <React.Fragment>
+                <img src={src} alt={rowData.brand} width="50px" style={{'verticalAlign': 'middle', 'marginRight': '1em'}} />
+                <span style={{'verticalAlign': 'middle'}}>{rowData.brand}</span>
+            </React.Fragment>
+        );
+    }
+
+    actionTemplate(rowData, column) {
+        return <React.Fragment>
+            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
+            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+        </React.Fragment>;
+    }
+
+    filterBrandTemplate(option) {
+        if(!option.value) {
+            return option.label;
+        }
+        else {
+            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+            return (
+                <div className="p-clearfix p-dropdown-car-option">
+                    <img alt={option.label} src={logoPath} width="24"/>
+                    <span>{option.label}</span>
+                </div>
+            );
+        }
+    }
+
+    onBrandChange(event) {
+        this.dt.filter(event.value, 'brand', 'equals');
+        this.setState({brand: event.value});
+    }
+
+    onColorChange(event) {
+        this.dt.filter(event.value, 'color', 'in');
+        this.setState({colors: event.value});
     }
 
     render() {
-        const columns = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
+        var header = (
+            <div style={{'textAlign': 'left'}}>
+                List of Cars
+                <div  className="p-datatable-globalfilter-container">
+                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+                </div>
+            </div>
+        );
+
+        let brands = [
+                {label: 'All Brands', value: null},
+                {label: 'Audi', value: 'Audi'},
+                {label: 'BMW', value: 'BMW'},
+                {label: 'Fiat', value: 'Fiat'},
+                {label: 'Honda', value: 'Honda'},
+                {label: 'Jaguar', value: 'Jaguar'},
+                {label: 'Mercedes', value: 'Mercedes'},
+                {label: 'Renault', value: 'Renault'},
+                {label: 'VW', value: 'VW'},
+                {label: 'Volvo', value: 'Volvo'}
+            ];
+
+        let brandFilter = <Dropdown style={{width: '100%'}} className="p-column-filter"
+                value={this.state.brand} options={brands} onChange={this.onBrandChange} itemTemplate={this.filterBrandTemplate}/>
+
+        let colors = [
+            {label: 'White', value: 'White'},
+            {label: 'Green', value: 'Green'},
+            {label: 'Silver', value: 'Silver'},
+            {label: 'Black', value: 'Black'},
+            {label: 'Red', value: 'Red'},
+            {label: 'Maroon', value: 'Maroon'},
+            {label: 'Brown', value: 'Brown'},
+            {label: 'Orange', value: 'Orange'},
+            {label: 'Blue', value: 'Blue'}
         ];
 
-        const dynamicColumns = columns.map((col,i) => {
-            return <Column key={col.field} field={col.field} header={col.header} />;
-        });
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="p-column-filter"
+            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
+
+        let actionHeader = <Button type="button" icon="pi pi-cog"></Button>
 
         return (
-            <div>
+            <div className="datatable-doc-demo">
                 <DataTableSubmenu />
 
                 <div className="content-section introduction">
@@ -50,19 +137,15 @@ export class DataTableDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
+                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
+                            globalFilter={this.state.globalFilter} emptyMessage="No records found" className="p-datatable-cars"
+                            selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}>
+                        <Column field="vin" header="Vin" filter sortable />
+                        <Column field="year" header="Year" filter sortable />
+                        <Column field="brand" header="Brand" filter filterElement={brandFilter} sortable body={this.brandTemplate}/>
+                        <Column field="color" header="Color" filter filterElement={colorFilter} sortable />
+                        <Column header={actionHeader} body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
                     </DataTable>
-
-                    <h3>Dynamic Columns</h3>
-                    <DataTable value={this.state.cars}>
-                        {dynamicColumns}
-                    </DataTable>
-
                 </div>
 
                 <DataTableDoc></DataTableDoc>
@@ -2463,40 +2546,126 @@ export class DataTableStateDemo extends Component {
 <CodeHighlight className="language-javascript">
 {`
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service';
+import {Link} from 'react-router-dom';
+import {DataTable} from '../../components/datatable/DataTable';
+import {Column} from '../../components/column/Column';
+import {InputText} from '../../components/inputtext/InputText';
+import {Button} from '../../components/button/Button';
+import {CarService} from '../service/CarService';
+import {Dropdown} from '../../components/dropdown/Dropdown';
+import {MultiSelect} from '../../components/multiselect/MultiSelect';
+import "./DataTableDemo.css"
 
 export class DataTableDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            cars: []
+            cars: [],
+            brand: null,
+            colors: null,
+            selectedCar: null
         };
         this.carservice = new CarService();
+        this.onBrandChange = this.onBrandChange.bind(this);
+        this.onColorChange = this.onColorChange.bind(this);
+        this.brandTemplate = this.brandTemplate.bind(this);
+        this.actionTemplate = this.actionTemplate.bind(this);
+        this.filterBrandTemplate = this.filterBrandTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    }
+
+    brandTemplate(rowData, column) {
+        var src = 'showcase/resources/demo/images/car/' + rowData.brand + '.png';
+        return (
+            <React.Fragment>
+                <img src={src} alt={rowData.brand} width="50px" style={{'verticalAlign': 'middle', 'marginRight': '1em'}} />
+                <span style={{'verticalAlign': 'middle'}}>{rowData.brand}</span>
+            </React.Fragment>
+        );
+    }
+
+    actionTemplate(rowData, column) {
+        return <React.Fragment>
+            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
+            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+        </React.Fragment>;
+    }
+
+    filterBrandTemplate(option) {
+        if(!option.value) {
+            return option.label;
+        }
+        else {
+            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+            return (
+                <div className="p-clearfix p-dropdown-car-option">
+                    <img alt={option.label} src={logoPath} width="24"/>
+                    <span>{option.label}</span>
+                </div>
+            );
+        }
+    }
+
+    onBrandChange(event) {
+        this.dt.filter(event.value, 'brand', 'equals');
+        this.setState({brand: event.value});
+    }
+
+    onColorChange(event) {
+        this.dt.filter(event.value, 'color', 'in');
+        this.setState({colors: event.value});
     }
 
     render() {
-        const columns = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
+        var header = (
+            <div style={{'textAlign': 'left'}}>
+                List of Cars
+                <div  className="p-datatable-globalfilter-container">
+                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+                </div>
+            </div>
+        );
+
+        let brands = [
+                {label: 'All Brands', value: null},
+                {label: 'Audi', value: 'Audi'},
+                {label: 'BMW', value: 'BMW'},
+                {label: 'Fiat', value: 'Fiat'},
+                {label: 'Honda', value: 'Honda'},
+                {label: 'Jaguar', value: 'Jaguar'},
+                {label: 'Mercedes', value: 'Mercedes'},
+                {label: 'Renault', value: 'Renault'},
+                {label: 'VW', value: 'VW'},
+                {label: 'Volvo', value: 'Volvo'}
+            ];
+
+        let brandFilter = <Dropdown style={{width: '100%'}} className="p-column-filter"
+                value={this.state.brand} options={brands} onChange={this.onBrandChange} itemTemplate={this.filterBrandTemplate}/>
+
+        let colors = [
+            {label: 'White', value: 'White'},
+            {label: 'Green', value: 'Green'},
+            {label: 'Silver', value: 'Silver'},
+            {label: 'Black', value: 'Black'},
+            {label: 'Red', value: 'Red'},
+            {label: 'Maroon', value: 'Maroon'},
+            {label: 'Brown', value: 'Brown'},
+            {label: 'Orange', value: 'Orange'},
+            {label: 'Blue', value: 'Blue'}
         ];
 
-        const dynamicColumns = columns.map((col,i) => {
-            return <Column key={col.field} field={col.field} header={col.header} />;
-        });
+        let colorFilter = <MultiSelect style={{width:'100%'}} className="p-column-filter"
+            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
+
+        let actionHeader = <Button type="button" icon="pi pi-cog"></Button>
 
         return (
-            <div>
-                <DataTableSubmenu />
-
+            <div className="datatable-doc-demo">
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable</h1>
@@ -2505,22 +2674,16 @@ export class DataTableDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
+                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
+                            globalFilter={this.state.globalFilter} emptyMessage="No records found" className="p-datatable-cars"
+                            selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}>
+                        <Column field="vin" header="Vin" filter sortable />
+                        <Column field="year" header="Year" filter sortable />
+                        <Column field="brand" header="Brand" filter filterElement={brandFilter} sortable body={this.brandTemplate}/>
+                        <Column field="color" header="Color" filter filterElement={colorFilter} sortable />
+                        <Column header={actionHeader} body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
                     </DataTable>
-
-                    <h3>Dynamic Columns</h3>
-                    <DataTable value={this.state.cars}>
-                        {dynamicColumns}
-                    </DataTable>
-
                 </div>
-
-                <DataTableDoc></DataTableDoc>
             </div>
         );
     }

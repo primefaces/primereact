@@ -8,6 +8,8 @@ export class DataTableSubmenu extends Component {
             <div className="content-section content-submenu p-clearfix">
                 <ul>
                     <li><Link to="/datatable">&#9679; Documentation</Link></li>
+                    <li><Link to="/datatable/basic">&#9679; Basic</Link></li>
+                    <li><Link to="/datatable/dynamiccolumns">&#9679; Dynamic</Link></li>
                     <li><Link to="/datatable/templating">&#9679; Templating</Link></li>
                     <li><Link to="/datatable/paginator">&#9679; Paginator</Link></li>
                     <li><Link to="/datatable/sort">&#9679; Sort</Link></li>

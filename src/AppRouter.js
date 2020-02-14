@@ -45,6 +45,8 @@ import { RadarChartDemo } from './showcase/chart/RadarChartDemo';
 import { PolarAreaChartDemo } from './showcase/chart/PolarAreaChartDemo';
 import { PaginatorDemo } from './showcase/paginator/PaginatorDemo';
 import { DataTableDemo } from './showcase/datatable/DataTableDemo';
+import { DataTableBasicDemo } from './showcase/datatable/DataTableBasicDemo';
+import { DataTableDynamicDemo } from './showcase/datatable/DataTableDynamicDemo';
 import { DataTableLazyDemo } from './showcase/datatable/DataTableLazyDemo';
 import { DataTableExportDemo } from './showcase/datatable/DataTableExportDemo';
 import { DataTableCrudDemo } from './showcase/datatable/DataTableCrudDemo';
@@ -175,6 +177,8 @@ export class AppRouter extends Component {
                 <Route path="/radarchart" component={RadarChartDemo} />
                 <Route path="/paginator" component={PaginatorDemo} />
                 <Route exact path="/datatable" component={DataTableDemo} />
+                <Route path="/datatable/basic" component={DataTableBasicDemo} />
+                <Route path="/datatable/dynamiccolumns" component={DataTableDynamicDemo} />
                 <Route path="/datatable/templating" component={DataTableTemplatingDemo} />
                 <Route path="/datatable/paginator" component={DataTablePaginatorDemo} />
                 <Route path="/datatable/sort" component={DataTableSortDemo} />
