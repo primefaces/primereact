@@ -109,3 +109,12 @@ button.p-button::-moz-focus-inner {
         width: 100%;
     }
 }
+
+/** Outlined **/
+.p-button.p-button-outlined {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: transparent !important;
+    color: black !important;
+}
