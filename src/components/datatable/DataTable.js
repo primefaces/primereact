@@ -230,6 +230,10 @@ export class DataTable extends Component {
         this.onColumnDrop = this.onColumnDrop.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
         this.frozenSelectionMode = null;
+
+        if (this.props.reorderableColumns && !this.props.children.every(it => it.columnKey)) {
+            console.warn('Omitting columnKey property of Column child in a column reorderable DataTable may imply in duplication of the Columns if they have the same field.')
+        }
     }
 
     getFirst() {
