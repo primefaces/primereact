@@ -129,6 +129,15 @@ import { ProgressSpinnerDemo } from "./showcase/progressspinner/ProgressSpinnerD
 import { CardDemo } from "./showcase/card/CardDemo";
 import { KeyFilterDemo } from "./showcase/keyfilter/KeyFilterDemo";
 import { DataViewDemo } from "./showcase/dataview/DataViewDemo";
+import { GalleriaDemo } from './showcase/galleria/GalleriaDemo';
+import { GalleriaBasicDemo } from './showcase/galleria/GalleriaBasicDemo';
+import { GalleriaCaptionDemo } from './showcase/galleria/GalleriaCaptionDemo';
+import { GalleriaIndicatorDemo } from './showcase/galleria/GalleriaIndicatorDemo';
+import { GalleriaCircularDemo } from './showcase/galleria/GalleriaCircularDemo';
+import { GalleriaResponsiveDemo } from './showcase/galleria/GalleriaResponsiveDemo';
+import { GalleriaThumbnailDemo } from './showcase/galleria/GalleriaThumbnailDemo';
+import { GalleriaPreviewDemo } from './showcase/galleria/GalleriaPreviewDemo';
+import { GalleriaFullScreenDemo } from './showcase/galleria/GalleriaFullScreenDemo';
 
 export class AppRouter extends Component {
     render() {
@@ -176,6 +185,18 @@ export class AppRouter extends Component {
                 <Route path="/polarareachart" component={PolarAreaChartDemo} />
                 <Route path="/radarchart" component={RadarChartDemo} />
                 <Route path="/paginator" component={PaginatorDemo} />
+                <Route exact path="/galleria" component={GalleriaDemo} />
+                <Route path="/galleria/basic" component={GalleriaBasicDemo} />
+                <Route path="/galleria/caption" component={GalleriaCaptionDemo} />
+                <Route path="/galleria/indicator" component={GalleriaIndicatorDemo} />
+                <Route path="/galleria/circular" component={GalleriaCircularDemo} />
+                <Route path="/galleria/responsive" component={GalleriaResponsiveDemo} />
+                <Route path="/galleria/thumbnail" component={GalleriaThumbnailDemo} />
+                <Route path="/galleria/preview" component={GalleriaPreviewDemo} />
+                <Route path="/galleria/fullscreen" component={GalleriaFullScreenDemo} />
+
+
+
                 <Route exact path="/datatable" component={DataTableDemo} />
                 <Route path="/datatable/basic" component={DataTableBasicDemo} />
                 <Route path="/datatable/dynamiccolumns" component={DataTableDynamicDemo} />

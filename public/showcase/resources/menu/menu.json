@@ -599,8 +599,26 @@
                     "name": "Growl",
                     "to": "/growl",
                     "meta": [
-                        "growl"
+                        "growl",
+                        "toast"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Multimedia",
+            "icon": "showcase/resources/images/mono/multimedia.svg",
+            "meta": [
+                "multimedia"
+            ],
+            "children": [
+                {
+                    "name": "Galleria",
+                    "to": "/galleria",
+                    "meta": [
+                        "galleria"
+                    ],
+                    "badge": "NEW"
                 }
             ]
         },
