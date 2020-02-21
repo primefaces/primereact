@@ -57,7 +57,7 @@ export class Lightbox extends Component {
         }
     }
 
-    componentWillMount() {
+    componentWillUnmount() {
         this.unbindDocumentClickListener();
     }
 
