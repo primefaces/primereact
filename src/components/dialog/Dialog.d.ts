@@ -5,6 +5,7 @@ interface DialogProps {
     header?: any;
     footer?: any;
     visible?: boolean;
+    position?: string;
     modal?: boolean;
     contentStyle?: object;
     closeOnEscape?: boolean;
