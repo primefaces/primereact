@@ -8,11 +8,11 @@
     pointer-events: none;
 }
 
-.p-dialog-mask.p-component-overlay {
+.p-component-overlay {
     pointer-events: auto;
 }
 
-.p-dialog-mask.p-dialog-visible {
+.p-dialog-visible {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,11 +128,6 @@
     transform: none;
 }
 
-.p-dialog-exit {
-    opacity: 1;
-    transform: scale(1);
-}
-
 .p-dialog-exit-active {
     opacity: 0;
     transform: scale(0.7);
@@ -149,50 +144,48 @@
 .p-dialog-bottomleft .p-dialog,
 .p-dialog-bottomright .p-dialog {
     margin: .75em;
-    transform: translate3d(0px, 0px, 0px);
-}
-.p-dialog-top .p-dialog-enter-active,
-.p-dialog-top .p-dialog-leave-active,
-.p-dialog-bottom .p-dialog-enter-active,
-.p-dialog-bottom .p-dialog-leave-active,
-.p-dialog-left .p-dialog-enter-active,
-.p-dialog-left .p-dialog-leave-active,
-.p-dialog-right .p-dialog-enter-active,
-.p-dialog-right .p-dialog-leave-active,
-.p-dialog-topleft .p-dialog-enter-active,
-.p-dialog-topleft .p-dialog-leave-active,
-.p-dialog-topright .p-dialog-enter-active,
-.p-dialog-topright .p-dialog-leave-active,
-.p-dialog-bottomleft .p-dialog-enter-active,
-.p-dialog-bottomleft .p-dialog-leave-active,
-.p-dialog-bottomright .p-dialog-enter-active,
-.p-dialog-bottomright .p-dialog-leave-active {
     transition: all .3s ease-out;
 }
+
 .p-dialog-top .p-dialog-enter,
-.p-dialog-top .p-dialog-leave-to {
+.p-dialog-top .p-dialog-exit-active  {
     transform: translate3d(0px, -100%, 0px);
 }
+
 .p-dialog-bottom .p-dialog-enter,
-.p-dialog-bottom .p-dialog-leave-to {
+.p-dialog-bottom .p-dialog-exit-active {
     transform: translate3d(0px, 100%, 0px);
 }
+
 .p-dialog-left .p-dialog-enter,
-.p-dialog-left .p-dialog-leave-to,
+.p-dialog-left .p-dialog-exit-active,
 .p-dialog-topleft .p-dialog-enter,
-.p-dialog-topleft .p-dialog-leave-to,
+.p-dialog-topleft .p-dialog-exit-active,
 .p-dialog-bottomleft .p-dialog-enter,
-.p-dialog-bottomleft .p-dialog-leave-to {
+.p-dialog-bottomleft .p-dialog-exit-active {
     transform: translate3d(-100%, 0px, 0px);
 }
+
 .p-dialog-right .p-dialog-enter,
-.p-dialog-right .p-dialog-leave-to,
+.p-dialog-right .p-dialog-exit-active,
 .p-dialog-topright .p-dialog-enter,
-.p-dialog-topright .p-dialog-leave-to,
+.p-dialog-topright .p-dialog-exit-active,
 .p-dialog-bottomright .p-dialog-enter,
-.p-dialog-bottomright .p-dialog-leave-to {
+.p-dialog-bottomright .p-dialog-exit-active {
     transform: translate3d(100%, 0px, 0px);
 }
+
+.p-dialog-top .p-dialog-enter-active,
+.p-dialog-bottom .p-dialog-enter-active,
+.p-dialog-left .p-dialog-enter-active,
+.p-dialog-topleft .p-dialog-enter-active,
+.p-dialog-bottomleft .p-dialog-enter-active,
+.p-dialog-right .p-dialog-enter-active,
+.p-dialog-topright .p-dialog-enter-active,
+.p-dialog-bottomright .p-dialog-enter-active {
+    transform: translate3d(0px, 0px, 0px);
+}
+
 /* Maximize */
 .p-dialog-maximized {
     -webkit-transition: none;

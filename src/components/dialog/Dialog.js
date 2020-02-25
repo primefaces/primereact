@@ -13,6 +13,7 @@ export class Dialog extends Component {
         header: null,
         footer: null,
         visible: false,
+        position: 'center',
         modal: true,
         onHide: null,
         onShow: null,
@@ -39,6 +40,7 @@ export class Dialog extends Component {
         header: PropTypes.any,
         footer: PropTypes.any,
         visible: PropTypes.bool,
+        position: PropTypes.string,
         modal: PropTypes.bool,
         onHide: PropTypes.func.isRequired,
         onShow: PropTypes.func,
@@ -109,6 +111,13 @@ export class Dialog extends Component {
             }
         });
         event.preventDefault();
+    }
+
+    getPositionClass() {
+        const positions = ['center', 'left', 'right', 'top', 'topleft', 'topright', 'bottom', 'bottomleft', 'bottomright'];
+        const pos = positions.find(item => item === this.props.position);
+
+        return pos ? `p-dialog-${pos}` : '';
     }
 
     get zIndex() {
@@ -336,15 +345,20 @@ export class Dialog extends Component {
         const maskClassName = classNames('p-dialog-mask', {
             'p-component-overlay': this.props.modal,
             'p-dialog-visible': this.state.maskVisible
-        }, this.props.maskClassName);
+        }, this.props.maskClassName, this.getPositionClass());
 
         const header = this.renderHeader();
         const content = this.renderContent();
         const footer = this.renderFooter();
 
+        let transitionTimeout = {
+            enter: this.props.position === 'center' ? 150 : 300,
+            exit: this.props.position === 'center' ? 150 : 300,
+        };
+
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
-                <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 150}} in={this.props.visible} unmountOnExit
+                <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.props.visible} unmountOnExit
                     onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                     <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style} onClick={this.onDialogClick}
                          aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
