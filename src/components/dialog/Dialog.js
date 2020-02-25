@@ -198,13 +198,13 @@ export class Dialog extends Component {
                             else {
                                 let focusedIndex = focusableElements.indexOf(document.activeElement);
                                 if (event.shiftKey) {
-                                    if (focusedIndex == -1 || focusedIndex === 0)
+                                    if (focusedIndex === -1 || focusedIndex === 0)
                                         focusableElements[focusableElements.length - 1].focus();
                                     else
                                         focusableElements[focusedIndex - 1].focus();
                                 }
                                 else {
-                                    if (focusedIndex == -1 || focusedIndex === (focusableElements.length - 1))
+                                    if (focusedIndex === -1 || focusedIndex === (focusableElements.length - 1))
                                         focusableElements[0].focus();
                                     else
                                         focusableElements[focusedIndex + 1].focus();
