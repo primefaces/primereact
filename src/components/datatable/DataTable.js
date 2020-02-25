@@ -458,6 +458,7 @@ export class DataTable extends Component {
 
         this.columnSortable = event.sortable;
         this.columnSortFunction = event.sortFunction;
+        this.columnField = event.sortField;
 
         if(this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
@@ -583,12 +584,25 @@ export class DataTable extends Component {
     }
 
     sortMultiple(data, multiSortMeta) {
-         let value = [...data];
-         value.sort((data1, data2) => {
-            return this.multisortField(data1, data2, multiSortMeta, 0);
-         });
+        let value = [...data];
 
-         return value;
+        if (this.columnSortable && this.columnSortFunction) {
+            const meta = multiSortMeta.find(meta => meta.field === this.columnField);
+            const field = this.columnField;
+            const order = meta ? meta.order : this.defaultSortOrder;
+
+            value = this.columnSortFunction({
+                field,
+                order
+            });
+        }
+        else {
+            value.sort((data1, data2) => {
+                return this.multisortField(data1, data2, multiSortMeta, 0);
+            });
+        }
+
+        return value;
     }
 
     multisortField(data1, data2, multiSortMeta, index) {
