@@ -63,12 +63,16 @@ export class Dialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            maximized: false
+            maximized: false,
+            maskVisible: props.visible
         };
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
         this.onDialogClick = this.onDialogClick.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -78,82 +82,10 @@ export class Dialog extends Component {
         event.preventDefault();
     }
 
-    hide() {
-        this.unbindGlobalListeners();
-
-        this.props.onHide();
-
-        this.disableModality();
-
-        if (this.state.maximized && !this.props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-        }
-    }
-
     focus() {
-        let focusable = DomHandler.findSingle(this.container, 'button');
+        let focusable = DomHandler.findSingle(this.dialog, 'button');
         if (focusable) {
             focusable.focus();
-        }
-    }
-
-    show() {
-        this.bindGlobalListeners();
-
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
-
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-
-        if (this.props.focusOnShow) {
-            this.focus();
-        }
-
-        this.enableModality();
-
-        if (this.state.maximized && !this.props.blockScroll) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-        }
-    }
-
-    toggleMaximize(event) {
-        this.setState({
-            maximized: !this.state.maximized
-        });
-        event.preventDefault();
-    }
-
-    maximize() {
-        if (!this.props.blockScroll) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-        }
-
-        const diffHeight = DomHandler.getOuterHeight(this.headerElement) + DomHandler.getOuterHeight(this.footerElement);
-        this.contentElement.style.minHeight = 'calc(100vh - ' + diffHeight +'px)';
-    }
-
-    restoreMaximize() {
-        if (!this.props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-        }
-
-        this.contentElement.style.minHeight = 'auto';
-    }
-
-    enableModality() {
-        if (this.mask) {
-            this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
-
-            if (this.props.blockScroll) {
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
-            }
-        }
-    }
-
-    disableModality() {
-        if (this.props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
 
@@ -167,61 +99,154 @@ export class Dialog extends Component {
         event.stopPropagation();
     }
 
+    toggleMaximize(event) {
+        this.setState({
+            maximized: !this.state.maximized
+        }, () => {
+            if (!this.props.blockScroll) {
+                let funcName = this.state.maximized ? 'addClass' : 'removeClass';
+                DomHandler[funcName](document.body, 'p-overflow-hidden');
+            }
+        });
+        event.preventDefault();
+    }
+
+    get zIndex() {
+        return this.props.baseZIndex + DomHandler.generateZIndex();
+    }
+
+    onEntered() {
+        if (this.props.onShow) {
+            this.props.onShow();
+        }
+
+        if (this.props.focusOnShow) {
+            this.focus();
+        }
+
+        this.enableDocumentSettings();
+    }
+
+    onExit() {
+        this.props.onHide();
+    }
+
+    onExited() {
+        this.setState({ maskVisible: false });
+        this.disableDocumentSettings();
+    }
+
+    enableDocumentSettings() {
+        if (this.props.modal) {
+            this.bindGlobalListeners();
+        }
+
+        if (this.props.blockScroll || (this.props.maximizable && this.state.maximized)) {
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
+        }
+    }
+
+    disableDocumentSettings() {
+        if (this.props.modal) {
+            this.unbindGlobalListeners();
+
+            let hasBlockScroll = document.primeDialogParams.some(param => param.hasBlockScroll);
+            if (!hasBlockScroll) {
+                DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            }
+        }
+        else if (this.props.blockScroll || (this.props.maximizable && this.state.maximized)) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        }
+    }
+
     bindGlobalListeners() {
         if (this.props.closeOnEscape && this.props.closable) {
-            this.bindDocumentEscapeListener();
+            this.bindDocumentKeyDownListener();
         }
     }
 
     unbindGlobalListeners() {
-        this.unbindDocumentEscapeListener();
+        this.unbindDocumentKeyDownListener();
     }
 
-    bindDocumentEscapeListener() {
-        this.documentEscapeListener = (event) => {
-            if (event.which === 27) {
-                if (parseInt(this.container.style.zIndex, 10) === DomHandler.getCurrentZIndex()) {
-                    this.onClose(event);
+    bindDocumentKeyDownListener() {
+        this.documentKeyDownListener = (event) => {
+            let currentTarget = event.currentTarget;
+
+            if (currentTarget && currentTarget.primeDialogParams) {
+                let params = currentTarget.primeDialogParams;
+                let paramLength = params.length;
+                let dialogId = params[paramLength - 1].id;
+
+                if (dialogId === this.id) {
+                    let dialog = document.getElementById(dialogId);
+
+                    if (event.which === 27) {
+                        this.onClose(event);
+                        event.stopImmediatePropagation();
+
+                        params.splice(paramLength - 1, 1);
+                    }
+                    else if (event.which === 9) {
+                        event.preventDefault();
+                        let focusableElements = DomHandler.getFocusableElements(dialog);
+                        if (focusableElements && focusableElements.length > 0) {
+                            if (!document.activeElement) {
+                                focusableElements[0].focus();
+                            }
+                            else {
+                                let focusedIndex = focusableElements.indexOf(document.activeElement);
+                                if (event.shiftKey) {
+                                    if (focusedIndex == -1 || focusedIndex === 0)
+                                        focusableElements[focusableElements.length - 1].focus();
+                                    else
+                                        focusableElements[focusedIndex - 1].focus();
+                                }
+                                else {
+                                    if (focusedIndex == -1 || focusedIndex === (focusableElements.length - 1))
+                                        focusableElements[0].focus();
+                                    else
+                                        focusableElements[focusedIndex + 1].focus();
+                                }
+                            }
+                        }
+                    }
                 }
             }
         };
-        document.addEventListener('keydown', this.documentEscapeListener);
+
+        let newParam = { id: this.id, hasBlockScroll: this.props.blockScroll };
+        document.primeDialogParams = document.primeDialogParams ? [ ...document.primeDialogParams, newParam ] : [ newParam ];
+
+        document.addEventListener('keydown', this.documentKeyDownListener);
     }
 
-    unbindDocumentEscapeListener() {
-        if (this.documentEscapeListener) {
-            document.removeEventListener('keydown', this.documentEscapeListener);
-            this.documentEscapeListener = null;
+    unbindDocumentKeyDownListener() {
+        if (this.documentKeyDownListener) {
+            document.removeEventListener('keydown', this.documentKeyDownListener);
+            document.primeDialogParams = document.primeDialogParams.filter(param => param.id !== this.id);
+            this.documentKeyDownListener = null;
         }
     }
 
     componentDidMount() {
         if (this.props.visible) {
-            this.show();
+            this.mask.style.zIndex = String(this.zIndex);
+            this.onEntered();
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.visible !== this.props.visible) {
-            if (this.props.visible)
-                this.show();
-            else
-                this.hide();
-        }
-
-        if (prevState.maximized !== this.state.maximized) {
-            if (this.state.maximized) {
-                this.maximize();
-            }
-            else {
-                this.restoreMaximize();
-            }
+    componentDidUpdate() {
+        if (this.props.visible && !this.state.maskVisible) {
+            this.setState({ maskVisible: true }, () => {
+                this.mask.style.zIndex = String(this.zIndex);
+            });
         }
     }
 
     componentWillUnmount() {
-        this.disableModality();
-        this.unbindGlobalListeners();
+        this.disableDocumentSettings();
     }
 
     renderCloseIcon() {
@@ -305,13 +330,12 @@ export class Dialog extends Component {
     renderElement() {
         const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
-            'p-dialog-visible': this.props.visible,
             'p-dialog-maximized': this.state.maximized
         });
 
-        const maskClassName = classNames('p-dialog-wrapper', {
-            'p-component-overlay p-dialog-mask': this.props.modal,
-            'p-dialog-wrapper-visible': this.props.visible
+        const maskClassName = classNames('p-dialog-mask', {
+            'p-component-overlay': this.props.modal,
+            'p-dialog-visible': this.state.maskVisible
         }, this.props.maskClassName);
 
         const header = this.renderHeader();
@@ -320,8 +344,9 @@ export class Dialog extends Component {
 
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
-                <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 75}} in={this.props.visible}>
-                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onDialogClick}
+                <CSSTransition classNames="p-dialog" timeout={{enter: 150, exit: 150}} in={this.props.visible} unmountOnExit
+                    onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style} onClick={this.onDialogClick}
                          aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}
