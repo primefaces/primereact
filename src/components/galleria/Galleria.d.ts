@@ -15,7 +15,7 @@ interface GalleriaProps {
     numVisible?: number;
     responsiveOptions?: any;
     showPreviewNavButtons?: boolean;
-    showIndicatorNavButtons?: boolean;
+    showThumbnailNavButtons?: boolean;
     showNavButtonsOnPreviewHover?: boolean;
     changePreviewOnIndicatorHover?: boolean;
     circular?: boolean;

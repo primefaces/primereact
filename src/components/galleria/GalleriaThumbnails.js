@@ -398,7 +398,7 @@ export class GalleriaThumbnails extends Component {
     }
 
     renderBackwardNavigator() {
-        if (this.props.showIndicatorNavButtons) {
+        if (this.props.showThumbnailNavButtons) {
             let isDisabled = (!this.props.circular && this.props.activeItemIndex === 0) || (this.props.value.length <= this.state.numVisible);
             let buttonClassName = classNames('p-galleria-thumbnail-prev p-button', {
                 'p-disabled': isDisabled
@@ -419,7 +419,7 @@ export class GalleriaThumbnails extends Component {
     }
 
     renderForwardNavigator() {
-        if (this.props.showIndicatorNavButtons) {
+        if (this.props.showThumbnailNavButtons) {
             let isDisabled = (!this.props.circular && this.props.activeItemIndex === (this.props.value.length - 1)) || (this.props.value.length <= this.state.numVisible);
             let buttonClassName = classNames('p-galleria-thumbnail-next p-button', {
                 'p-disabled': isDisabled

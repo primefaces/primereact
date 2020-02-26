@@ -24,7 +24,7 @@ export class Galleria extends Component {
         numVisible: 3,
         responsiveOptions: null,
         showPreviewNavButtons: false,
-        showIndicatorNavButtons: true,
+        showThumbnailNavButtons: true,
         showNavButtonsOnPreviewHover: false,
         changePreviewOnIndicatorHover: false,
         circular: false,
@@ -56,7 +56,7 @@ export class Galleria extends Component {
         numVisible: PropTypes.number,
         responsiveOptions: PropTypes.array,
         showPreviewNavButtons: PropTypes.bool,
-        showIndicatorNavButtons: PropTypes.bool,
+        showThumbnailNavButtons: PropTypes.bool,
         showNavButtonsOnPreviewHover: PropTypes.bool,
         changePreviewOnIndicatorHover: PropTypes.bool,
         circular: PropTypes.bool,
@@ -222,7 +222,7 @@ export class Galleria extends Component {
                     {
                         this.props.showThumbnails && <GalleriaThumbnails containerId={this.id} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
                             itemTemplate={this.props.thumbnailItemTemplate} numVisible={this.props.numVisible} responsiveOptions={this.props.responsiveOptions} circular={this.props.circular}
-                            isVertical={isVertical} contentHeight={this.props.verticalThumbnailViewPortHeight} showIndicatorNavButtons={this.props.showIndicatorNavButtons}
+                            isVertical={isVertical} contentHeight={this.props.verticalThumbnailViewPortHeight} showThumbnailNavButtons={this.props.showThumbnailNavButtons}
                             autoPlay={this.props.autoPlay} slideShowActive={this.state.slideShowActive} stopSlideShow={this.stopSlideShow} />
                     }
                 </div>
