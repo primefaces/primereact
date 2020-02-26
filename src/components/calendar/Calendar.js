@@ -24,6 +24,7 @@ export class Calendar extends Component {
         inputClassName: null,
         required: false,
         readOnlyInput: false,
+        keepInvalid: false,
         disabled: false,
         tabIndex: null,
         placeholder: null,
@@ -102,6 +103,7 @@ export class Calendar extends Component {
         inputClassName: PropTypes.string,
         required: PropTypes.bool,
         readOnlyInput: PropTypes.bool,
+        keepInvalid: PropTypes.bool,
         disabled: PropTypes.bool,
         tabIndex: PropTypes.string,
         placeholder: PropTypes.string,
@@ -285,6 +287,10 @@ export class Calendar extends Component {
     onInputBlur(event) {
         if (this.props.onBlur) {
             this.props.onBlur(event);
+        }
+
+        if (!this.props.keepInvalid) {
+            this.updateInputfield(this.props.value);
         }
 
         DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
