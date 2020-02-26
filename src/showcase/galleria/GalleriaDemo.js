@@ -115,10 +115,8 @@ export class GalleriaDemo extends Component {
 
     itemTemplate(item) {
         return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter p-justify-center">
-                    <img src={`${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
-                </div>
+            <div className="p-grid p-nogutter p-justify-center">
+                <img src={`${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
@@ -718,10 +716,8 @@ export class GalleriaDemo extends Component {
 
     itemTemplate(item) {
         return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter p-justify-center">
-                    <img src={\`\${item.thumbnailImageSrc}\`} alt={item.alt} style={{ display: 'block' }} />
-                </div>
+            <div className="p-grid p-nogutter p-justify-center">
+                <img src={\`\${item.thumbnailImageSrc}\`} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
