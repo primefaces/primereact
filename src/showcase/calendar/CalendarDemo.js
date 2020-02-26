@@ -480,6 +480,12 @@ dateTemplate(date) {
                             <td>When specified, prevents entering the date manually with keyboard.</td>
                         </tr>
                         <tr>
+                            <td>keepInvalid</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Keep invalid value when input blur.</td>
+                        </tr>
+                        <tr>
                             <td>disabled</td>
                             <td>boolean</td>
                             <td>false</td>
