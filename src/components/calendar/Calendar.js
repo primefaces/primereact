@@ -172,7 +172,7 @@ export class Calendar extends Component {
 
         this.navigation = null;
 
-        this.onInputChange = this.onInputChange.bind(this);
+        this.onUserInput = this.onUserInput.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
@@ -202,6 +202,10 @@ export class Calendar extends Component {
 
         if(this.props.inline) {
             this.initFocusableCell();
+        }
+
+        if (this.props.value) {
+            this.updateInputfield(this.props.value);
         }
     }
 
@@ -233,6 +237,10 @@ export class Calendar extends Component {
 
         if(this.panel) {
             this.updateFocus();
+        }
+
+        if (prevProps.value !== this.props.value && !this.viewStateChanged) {
+            this.updateInputfield(this.props.value);
         }
     }
 
@@ -275,18 +283,6 @@ export class Calendar extends Component {
     }
 
     onInputBlur(event) {
-        let rawValue = event.target.value;
-
-        try {
-            let value = this.parseValueFromString(rawValue);
-            if(this.isValidSelection(value)) {
-                this.updateModel(event, value);
-            }
-        }
-        catch(err) {
-            this.updateModel(event, null);
-        }
-
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
@@ -322,7 +318,7 @@ export class Calendar extends Component {
         }
     }
 
-    onInputChange(event) {
+    onUserInput(event) {
         // IE 11 Workaround for input placeholder
         if (!this.isKeydown) {
             return;
@@ -339,7 +335,9 @@ export class Calendar extends Component {
             }
         }
         catch(err) {
-            this.updateModel(event, rawValue);
+            //this.updateModel(event, rawValue);
+            //invalid date
+            this.updateModel(event, null);
         }
 
         if (this.props.onInput) {
@@ -826,6 +824,8 @@ export class Calendar extends Component {
                 value: newDateTime
             });
         }
+
+        this.updateInputfield(newDateTime);
     }
 
     updateViewDate(event, value) {
@@ -1136,11 +1136,14 @@ export class Calendar extends Component {
             date = this.props.maxDate;
         }
 
+        let selectedValues = date;
+
         if (this.isSingleSelection()) {
             this.updateModel(event, date);
         }
         else if(this.isMultipleSelection()) {
-            this.updateModel(event, this.props.value ? [...this.props.value, date] : [date]);
+            selectedValues = this.props.value ? [...this.props.value, date] : [date];
+            this.updateModel(event, selectedValues);
         }
         else if (this.isRangeSelection()) {
             if (this.props.value && this.props.value.length) {
@@ -1155,10 +1158,12 @@ export class Calendar extends Component {
                     endDate = null;
                 }
 
-                this.updateModel(event, [startDate, endDate]);
+                selectedValues = [startDate, endDate];
+                this.updateModel(event, selectedValues);
             }
             else {
-                this.updateModel(event, [date, null]);
+                selectedValues = [date, null];
+                this.updateModel(event, selectedValues);
             }
         }
 
@@ -1168,6 +1173,8 @@ export class Calendar extends Component {
                 value: date
             });
         }
+
+        this.updateInputfield(selectedValues);
     }
 
     onMonthSelect(event, month) {
@@ -1637,27 +1644,31 @@ export class Calendar extends Component {
         return false;
     }
 
-    getValueToRender() {
+    updateInputfield(value) {
+        if (!this.inputElement) {
+            return;
+        }
+
         let formattedValue = '';
 
-        if(this.props.value) {
+        if(value) {
             try {
                 if(this.isSingleSelection()) {
-                    formattedValue = this.formatDateTime(this.props.value);
+                    formattedValue = this.formatDateTime(value);
                 }
                 else if(this.isMultipleSelection()) {
-                    for(let i = 0; i < this.props.value.length; i++) {
-                        let dateAsString = this.formatDateTime(this.props.value[i]);
+                    for(let i = 0; i < value.length; i++) {
+                        let dateAsString = this.formatDateTime(value[i]);
                         formattedValue += dateAsString;
-                        if(i !== (this.props.value.length - 1)) {
+                        if(i !== (value.length - 1)) {
                             formattedValue += ', ';
                         }
                     }
                 }
                 else if(this.isRangeSelection()) {
-                    if(this.props.value && this.props.value.length) {
-                        let startDate = this.props.value[0];
-                        let endDate = this.props.value[1];
+                    if(value && value.length) {
+                        let startDate = value[0];
+                        let endDate = value[1];
 
                         formattedValue = this.formatDateTime(startDate);
                         if(endDate) {
@@ -1667,11 +1678,11 @@ export class Calendar extends Component {
                 }
             }
             catch(err) {
-                formattedValue = this.props.value;
+                formattedValue = value;
             }
         }
 
-        return formattedValue;
+        this.inputElement.value = formattedValue;
     }
 
     formatDateTime(date) {
@@ -2473,12 +2484,11 @@ export class Calendar extends Component {
     renderInputElement() {
         if (!this.props.inline) {
             const className = classNames('p-inputtext p-component', this.props.inputClassName);
-            const value = this.getValueToRender();
 
             return (
-                <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} value={value} type="text" className={className} style={this.props.inputStyle}
+                <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} type="text" className={className} style={this.props.inputStyle}
                            readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                           onChange={this.onInputChange} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy}/>
+                           onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy}/>
             );
         }
         else {
