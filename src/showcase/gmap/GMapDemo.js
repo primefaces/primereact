@@ -9,12 +9,14 @@ import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import {loadGoogleMaps, removeGoogleMaps} from '../load/GoogleMaps';
 
 export class GMapDemo extends Component {
 
     constructor() {
         super();
         this.state = {
+            googleMapsReady: false,
             dialogVisible: false,
             markerTitle: '',
             draggableMarker: false,
@@ -28,6 +30,16 @@ export class GMapDemo extends Component {
         this.onMapReady = this.onMapReady.bind(this);
         this.onHide = this.onHide.bind(this);
         this.addMarker = this.addMarker.bind(this);
+    }
+
+    componentDidMount() {
+        loadGoogleMaps(() => {
+            this.setState({ googleMapsReady: true });
+        });
+    }
+
+    componentWillUnmount() {
+        removeGoogleMaps();
     }
 
     onMapClick(event) {
@@ -124,8 +136,10 @@ export class GMapDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <GMap overlays={this.state.overlays} options={options} style={{width: '100%', minHeight: '320px'}} onMapReady={this.onMapReady}
-                        onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
+                    {
+                        this.state.googleMapsReady && <GMap overlays={this.state.overlays} options={options} style={{width: '100%', minHeight: '320px'}} onMapReady={this.onMapReady}
+                                                            onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
+                    }
 
                     <Dialog header="New Location" visible={this.state.dialogVisible} width="300px" modal={true} footer={footer} onHide={this.onHide}>
                         <div className="p-grid p-fluid">
