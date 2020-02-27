@@ -973,7 +973,7 @@
 
             .custom-galleria {
                 .p-galleria-content {
-                    max-height: 95%;
+                    height: 95%;
                     overflow: hidden;
                     position: relative;
 
@@ -1053,7 +1053,7 @@
                 &.preview-fullscreen {
                     .p-galleria-preview-container {
                         .p-galleria-preview-nav-button {
-                            top: 40%;
+                            top: 50%;
                             height: 20em;
                             width: 4em;
                             margin-top: -10em;

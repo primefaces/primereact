@@ -110,7 +110,7 @@ export class GalleriaThumbnailDemo extends Component {
                         thumbnailsPosition="top"
                         style={{maxWidth: '520px', marginTop: '2em'}} header="Top" />
 
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={4}
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
                         previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
                         thumbnailsPosition="bottom"
                         style={{maxWidth: '520px', marginTop: '2em'}} header="Bottom" />

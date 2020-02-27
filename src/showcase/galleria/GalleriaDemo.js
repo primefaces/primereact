@@ -122,6 +122,10 @@ export class GalleriaDemo extends Component {
     }
 
     previewTemplate(item) {
+        if (this.state.isPreviewFullScreen) {
+            return <img src={`${item.previewImageSrc}`} alt={item.alt} />
+        }
+
         return <img src={`${item.previewImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
@@ -723,6 +727,10 @@ export class GalleriaDemo extends Component {
     }
 
     previewTemplate(item) {
+        if (this.state.isPreviewFullScreen) {
+            return <img src={\`\${item.previewImageSrc}\`} alt={item.alt} />
+        }
+
         return <img src={\`\${item.previewImageSrc}\`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
@@ -797,6 +805,103 @@ export class GalleriaDemo extends Component {
 
 `}
 </CodeHighlight>
+
+<CodeHighlight className="language-javascript">
+{`
+// SCSS codes
+
+.custom-galleria {
+    .p-galleria-content {
+        height: 95%;
+        overflow: hidden;
+        position: relative;
+
+        .p-galleria-thumbnail-content {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.50) 70%);
+
+            .p-galleria-thumbnail-container {
+                .p-galleria-thumbnail-prev,
+                .p-galleria-thumbnail-next {
+                    background-color: transparent;
+                    color: #ffffff;
+                    border: 0 none;
+                    font-size: 1.2em;
+
+                    &:hover {
+                        color: var(--primaryColor);
+                    }
+                }
+
+                .p-galleria-thumbnail-items-content {
+                    .p-galleria-thumbnail-items-container {
+                        .p-galleria-thumbnail-item {
+                            opacity: .6;
+
+                            &.p-galleria-thumbnail-item-current {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .p-galleria-footer {
+        padding: 0;
+        background-color: rgba(0, 0, 0, .9);
+        border: rgba(0, 0, 0, .9);
+
+        .custom-galleria-footer {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: stretch;
+            color: #ffffff;
+
+            > button {
+                background-color: transparent;
+                padding: .1em .4em;
+                border: 0 none;
+                border-radius: 0;
+                color: #ffffff;
+
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+
+            > span {
+                flex-grow: 1;
+
+                > span {
+                    font-size: .9em;
+                    padding-left: .829em;
+
+                    &.title {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    &.preview-fullscreen {
+        .p-galleria-preview-container {
+            .p-galleria-preview-nav-button {
+                top: 50%;
+                height: 20em;
+                width: 4em;
+                margin-top: -10em;
+            }
+        }
+    }
+}
+                        `}
+                        </CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>
