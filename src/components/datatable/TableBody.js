@@ -65,13 +65,16 @@ export class TableBody extends Component {
                         if(this.isSingleSelectionMode()) {
                             selection = rowData;
                         }
-                        else if(this.isMultipleSelectionMode()) {
+                        else if(this.isMultipleSelectionMode() && !this.props.expandableRowGroups) {
                             if(metaKey)
                                 selection = this.props.selection ? [...this.props.selection] : [];
                             else
                                 selection = [];
-
                             selection = [...selection, rowData];
+                        }
+                        else if(this.isMultipleSelectionMode() && this.props.expandableRowGroups)
+                        {
+                            selection = this.props.selection.length > 0 ? [...this.props.selection, rowData] : [rowData];
                         }
 
                         if(this.props.onRowSelect) {
@@ -264,7 +267,13 @@ export class TableBody extends Component {
 
     equals(data1, data2) {
         let dataKey = this.getDataKeyOnRowToggle();
+
+        if(this.props.expandableRowGroups && this.props.selectionMode)
+            return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.deepEquals(data1, data2);
+        else
         return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, dataKey);
+
+      
     }
 
     findIndexInSelection(rowData) {
