@@ -159,7 +159,7 @@ export class Dialog extends Component {
         if (this.props.modal) {
             this.unbindGlobalListeners();
 
-            let hasBlockScroll = document.primeDialogParams.some(param => param.hasBlockScroll);
+            let hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some(param => param.hasBlockScroll);
             if (!hasBlockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
@@ -234,7 +234,7 @@ export class Dialog extends Component {
     unbindDocumentKeyDownListener() {
         if (this.documentKeyDownListener) {
             document.removeEventListener('keydown', this.documentKeyDownListener);
-            document.primeDialogParams = document.primeDialogParams.filter(param => param.id !== this.id);
+            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(param => param.id !== this.id);
             this.documentKeyDownListener = null;
         }
     }
