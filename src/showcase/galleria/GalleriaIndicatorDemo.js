@@ -154,7 +154,7 @@ export class GalleriaIndicatorDemo extends Component {
                         previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
                         indicatorItemTemplate={this.indicatorItemTemplate2} showThumbnails={false}
                         showIndicators={true} changePreviewOnIndicatorHover={true} indicatorsPosition="left"
-                        style={{width: '520px', marginTop: '2em'}} className="custom-indicator-galleria2" />
+                        style={{maxWidth: '520px', marginTop: '2em'}} className="custom-indicator-galleria2" />
                 </div>
 
                 <GalleriaIndicatorDemoDoc></GalleriaIndicatorDemoDoc>
