@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import { AccordionDemo } from './showcase/accordion/AccordionDemo';
 import { AutoCompleteDemo } from './showcase/autocomplete/AutoCompleteDemo';
@@ -139,7 +139,28 @@ import { GalleriaThumbnailDemo } from './showcase/galleria/GalleriaThumbnailDemo
 import { GalleriaPreviewDemo } from './showcase/galleria/GalleriaPreviewDemo';
 import { GalleriaFullScreenDemo } from './showcase/galleria/GalleriaFullScreenDemo';
 
-export class AppRouter extends Component {
+class AppRouter extends Component {
+
+    addPagePath(path) {
+        window['gtag']('config', 'UA-93461466-1', {
+            'page_path': '/primereact' + path
+        });
+    }
+
+    componentDidMount() {
+        this.addPagePath(this.props.location.pathname);
+
+        this.unlisten = this.props.history.listen((location) => {
+            if (this.props.location.pathname !== location.pathname) {
+                this.addPagePath(location.pathname);
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.unlisten();
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -194,9 +215,6 @@ export class AppRouter extends Component {
                 <Route path="/galleria/thumbnail" component={GalleriaThumbnailDemo} />
                 <Route path="/galleria/preview" component={GalleriaPreviewDemo} />
                 <Route path="/galleria/fullscreen" component={GalleriaFullScreenDemo} />
-
-
-
                 <Route exact path="/datatable" component={DataTableDemo} />
                 <Route path="/datatable/basic" component={DataTableBasicDemo} />
                 <Route path="/datatable/dynamiccolumns" component={DataTableDynamicDemo} />
@@ -288,4 +306,4 @@ export class AppRouter extends Component {
     }
 }
 
-export default AppRouter;
+export default withRouter(AppRouter);
