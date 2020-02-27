@@ -39,3 +39,9 @@
 .datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-tbody > tr > td {
     border: 0 none;
 }
+
+@media screen and (max-width: 40em) {
+    .datatable-doc-demo .p-datatable-globalfilter-container {
+        float: none;
+    }
+}

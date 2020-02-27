@@ -137,7 +137,7 @@ export class DataTableDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
+                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator rows={10} header={header} responsive
                             globalFilter={this.state.globalFilter} emptyMessage="No records found" className="p-datatable-cars"
                             selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}>
                         <Column field="vin" header="Vin" filter sortable />
