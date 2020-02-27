@@ -219,7 +219,7 @@ export class GalleriaThumbnails extends Component {
     onTouchEnd(e) {
         let touchobj = e.changedTouches[0];
 
-        if (this.isVertical()) {
+        if (this.props.isVertical) {
             this.changePageOnTouch(e, (touchobj.pageY - this.startPos.y));
         }
         else {
