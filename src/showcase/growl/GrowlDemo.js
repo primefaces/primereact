@@ -42,7 +42,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" />
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
         this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -475,7 +475,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" />
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
         this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }

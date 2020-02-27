@@ -26,9 +26,9 @@
                 width: 52px;
                 height: 52px;
                 line-height: 52px;
-                background-color: #20272b;
+                background-color: #fe8702;
                 text-align: center;
-                color: #fafafa;
+                color: #ffffff;
                 top: 200px;
                 left: -51px;
                 z-index: -1;
@@ -49,7 +49,7 @@
                 }
 
                 &:hover {
-                    background-color: lighten(#20272b, 15%);
+                    background-color: #C56A05;
                 }
             }
         }
