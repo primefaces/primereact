@@ -99,11 +99,11 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Min-Max</h3>
-                            <Calendar value={this.state.date4} onChange={(e) => this.setState({date4: e.value})} minDate={this.state.minDate} maxDate={this.state.maxDate} readonlyInput={true}/>
+                            <Calendar value={this.state.date4} onChange={(e) => this.setState({date4: e.value})} minDate={this.state.minDate} maxDate={this.state.maxDate} readOnlyInput={true}/>
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Disabled Days</h3>
-                            <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readonlyInput={true} />
+                            <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readOnlyInput={true} />
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Navigators</h3>
@@ -111,11 +111,11 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Multiple Selection</h3>
-                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readonlyInput={true} />
+                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readOnlyInput={true} />
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Range Selection</h3>
-                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readonlyInput={true} />
+                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readOnlyInput={true} />
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Button Bar</h3>
@@ -273,7 +273,7 @@ import {Calendar} from 'primereact/calendar';
 </CodeHighlight>
 
             <h3>Disable specific dates and/or days</h3>
-            <p>Specific dates or days can be disabled as well, in this case set <i>readonlyInput</i> to true and to restrict selectable dates use <i>disabledDates</i> and/or <i>disabledDays</i> options. <i>disabledDates</i>
+            <p>Specific dates or days can be disabled as well, in this case set <i>readOnlyInput</i> to true and to restrict selectable dates use <i>disabledDates</i> and/or <i>disabledDays</i> options. <i>disabledDates</i>
             property should be an array of dates and <i>disabledDays</i> should be an array of disabled weekdays.</p>
 
 <CodeHighlight className="language-jsx">
@@ -961,11 +961,11 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Min-Max</h3>
-                            <Calendar value={this.state.date4} onChange={(e) => this.setState({date4: e.value})} minDate={this.state.minDate} maxDate={this.state.maxDate} readonlyInput={true}/>
+                            <Calendar value={this.state.date4} onChange={(e) => this.setState({date4: e.value})} minDate={this.state.minDate} maxDate={this.state.maxDate} readOnlyInput={true}/>
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Disabled Days</h3>
-                            <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readonlyInput={true} />
+                            <Calendar value={this.state.date5} onChange={(e) => this.setState({date5: e.value})} disabledDates={this.state.invalidDates} disabledDays={[0,6]} readOnlyInput={true} />
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Navigators</h3>
@@ -973,11 +973,11 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Multiple Selection</h3>
-                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readonlyInput={true} />
+                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({dates1: e.value})} selectionMode="multiple" readOnlyInput={true} />
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Range Selection</h3>
-                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readonlyInput={true} />
+                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({dates2: e.value})} selectionMode="range" readOnlyInput={true} />
                         </div>
                         <div className="p-col-12 p-md-4">
                             <h3>Button Bar</h3>
