@@ -1,5 +1,35 @@
 # Changelog
 
+## [4.0.0](https://github.com/primefaces/primereact/tree/4.0.0) (2020-02-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/3.4.0...4.0.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add keepInvalid property to Calendar [\#1204](https://github.com/primefaces/primereact/issues/1204)
+- Add position property to Dialog [\#1203](https://github.com/primefaces/primereact/issues/1203)
+- Add FocusTrap support to Dialog [\#1202](https://github.com/primefaces/primereact/issues/1202)
+- Add sortFunction support to DataTable with multiple column sorting [\#1201](https://github.com/primefaces/primereact/issues/1201)
+- Remove min-width style from Dropdown [\#1196](https://github.com/primefaces/primereact/issues/1196)
+- Add maskClassName property to Dialog [\#1194](https://github.com/primefaces/primereact/issues/1194)
+- ReImplemented Steps styles [\#1191](https://github.com/primefaces/primereact/issues/1191)
+- Leave animation for Dialog [\#1181](https://github.com/primefaces/primereact/issues/1181)
+- Dialog header not visible [\#1174](https://github.com/primefaces/primereact/issues/1174)
+- Dialog is not displayed correctly in mobile view [\#1165](https://github.com/primefaces/primereact/issues/1165)
+- Add sort number feature to sortable columns on DataTable and TreeTable with multi sorting [\#1164](https://github.com/primefaces/primereact/issues/1164)
+- Add onRemove callback to FileUpload [\#1152](https://github.com/primefaces/primereact/issues/1152)
+- Add editing support to the input field on Calendar [\#1141](https://github.com/primefaces/primereact/issues/1141)
+- New Component: Galleria [\#1105](https://github.com/primefaces/primereact/issues/1105)
+
+**Fixed bugs:**
+
+- Remove the legacy lifecycle method from Lightbox component [\#1200](https://github.com/primefaces/primereact/issues/1200)
+- The  disabled items can be focused in the Steps [\#1192](https://github.com/primefaces/primereact/issues/1192)
+- Alignment problem on Growl message without details [\#1190](https://github.com/primefaces/primereact/issues/1190)
+- Maximizable property is not working correctly on dialog [\#1169](https://github.com/primefaces/primereact/issues/1169)
+- Dismissable mask behaves over dialog [\#1167](https://github.com/primefaces/primereact/issues/1167)
+- Typedefinition for DataTable OnFilter is wrong. [\#1163](https://github.com/primefaces/primereact/issues/1163)
+
 ## [3.4.0](https://github.com/primefaces/primereact/tree/3.4.0) (2020-01-17)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/3.3.3...3.4.0)
