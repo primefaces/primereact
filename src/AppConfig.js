@@ -98,39 +98,39 @@ export class AppConfig extends Component {
                             <p>Based on <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>, develop awesome applications in no time using the premium templates
                                 of PrimeReact and impress your users.</p>
                             <div className="p-grid">
-                                <div className="p-col-12">
+                                <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/sapphire-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-biggest-react.jpg" />
+                                        <img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-react.jpg" />
                                     </a>
                                 </div>
                                 <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/serenity-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg" />
+                                        <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react.jpg" />
                                     </a>
                                 </div>
                                 <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/ultima-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" />
+                                        <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react.jpg" />
                                     </a>
                                 </div>
-                                <div className="p-col-12">
+                                <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/babylon-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Babylon" src="showcase/resources/images/layouts/babylon-biggest-react.jpg" />
+                                        <img alt="Babylon" src="showcase/resources/images/layouts/babylon-react.jpg" />
                                     </a>
                                 </div>
                                 <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/avalon-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" />
+                                        <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react.jpg" />
                                     </a>
                                 </div>
                                 <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/apollo-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react-sqr.png" />
+                                        <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react.jpg" />
                                     </a>
                                 </div>
-                                <div className="p-col-12">
+                                <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/roma-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Roma" src="showcase/resources/images/layouts/roma-biggest-react.jpg" />
+                                        <img alt="Roma" src="showcase/resources/images/layouts/roma-react.jpg" />
                                     </a>
                                 </div>
                             </div>
