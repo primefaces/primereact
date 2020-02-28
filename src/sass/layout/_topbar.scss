@@ -68,6 +68,7 @@
                     @include link(true) {
                         height: 100%;
                         color: #ffffff;
+                        background-color: transparent;
                         padding: 1em;
                         font-size: 16px;
                         @include flex-center();
