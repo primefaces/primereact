@@ -141,39 +141,39 @@ export class HomeComponent extends Component {
                         of PrimeReact and impress your users.</p>
 
                     <div className="p-grid templates-grid">
-                        <div className="p-col-12">
+                        <div className="p-col-12 p-md-4">
 							<a href="https://www.primefaces.org/layouts/sapphire-react">
-								<img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-biggest-react.jpg" />
+								<img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-react.jpg" />
 							</a>
 						</div>
-                        <div className="p-col-12 p-md-6">
+                        <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/serenity-react">
-                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg" />
+                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react.jpg" />
                             </a>
                         </div>
-                        <div className="p-col-12 p-md-6">
+                        <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" />
+                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react.jpg" />
                             </a>
                         </div>
-                        <div className="p-col-12">
+                        <div className="p-col-12 p-md-4">
 							<a href="https://www.primefaces.org/layouts/babylon-react">
-								<img alt="Babylon" src="showcase/resources/images/layouts/babylon-biggest-react.jpg" />
+								<img alt="Babylon" src="showcase/resources/images/layouts/babylon-react.jpg" />
 							</a>
 						</div>
-                        <div className="p-col-12 p-md-6">
+                        <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" />
+                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react.jpg" />
                             </a>
                         </div>
-                        <div className="p-col-12 p-md-6">
+                        <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/apollo-react">
-                                <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react-sqr.png" />
+                                <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react.jpg" />
                             </a>
                         </div>
-                        <div className="p-col-12">
+                        <div className="p-col-12 p-md-4">
 							<a href="https://www.primefaces.org/layouts/roma-react">
-								<img alt="Roma" src="showcase/resources/images/layouts/roma-biggest-react.jpg" />
+								<img alt="Roma" src="showcase/resources/images/layouts/roma-react.jpg" />
 							</a>
 						</div>
                     </div>
