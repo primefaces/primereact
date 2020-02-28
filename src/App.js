@@ -179,7 +179,7 @@ export class App extends Component {
     }
 
     getChangelog() {
-        axios.get('showcase/resources/changelog/changelog.json')
+        axios.get('showcase/resources/changelog/changelog.json', { headers: { 'Cache-Control' : 'no-cache' } })
             .then(res => res.data)
             .then(data => this.setState({ changelog: data }));
     }

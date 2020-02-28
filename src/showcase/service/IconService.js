@@ -8,7 +8,7 @@ export class IconService {
     }
 
     getIcons() {
-        return axios.get('showcase/resources/demo/data/icons.json')
+        return axios.get('showcase/resources/demo/data/icons.json', { headers: { 'Cache-Control' : 'no-cache' } })
             .then(res => res.data.icons);
     }
 

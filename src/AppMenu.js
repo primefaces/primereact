@@ -15,7 +15,7 @@ export class AppMenu extends Component {
     }
 
     getMenu() {
-        axios.get('showcase/resources/menu/menu.json')
+        axios.get('showcase/resources/menu/menu.json', { headers: { 'Cache-Control' : 'no-cache' } })
             .then(res => res.data.data)
             .then(data => this.setState({ menu: data, filteredMenu: data }));
     }
