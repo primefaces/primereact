@@ -134,7 +134,8 @@ button {
 }
 
 .p-link {
-	text-align: left;
+    text-align: left;
+    background: transparent;
 	background-color: transparent;
 	margin: 0;
 	padding: 0;
@@ -181,7 +182,7 @@ button {
 /* Floating Label */
 .p-float-label {
     display: block;
-    position:relative; 
+    position:relative;
 }
 
 .p-float-label > label {
@@ -191,8 +192,8 @@ button {
   left: .25em;
   top: 50%;
   margin-top: -.5em;
-  transition: 0.3s ease all; 
-  -moz-transition: 0.3s ease all; 
+  transition: 0.3s ease all;
+  -moz-transition: 0.3s ease all;
   -webkit-transition: 0.3s ease all;
   color: #898989;
   line-height: 1;
