@@ -663,9 +663,9 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentHour = currentTime.getHours();
         let newHour = currentHour + this.props.stepHour;
-        newHour = (newHour >= 24) ? (newHour - 24) : newHour;
 
         if (this.validateHour(newHour, currentTime)) {
+            newHour = (newHour >= 24) ? (newHour - 24) : newHour;
             this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
         }
 
@@ -676,9 +676,9 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentHour = currentTime.getHours();
         let newHour = currentHour - this.props.stepHour;
-        newHour = (newHour < 0) ? (newHour + 24) : newHour;
 
         if (this.validateHour(newHour, currentTime)) {
+            newHour = (newHour < 0) ? (newHour + 24) : newHour;
             this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
         }
 
@@ -689,9 +689,9 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentMinute = currentTime.getMinutes();
         let newMinute = currentMinute + this.props.stepMinute;
-        newMinute = (newMinute > 59) ? (newMinute - 60) : newMinute;
 
         if (this.validateMinute(newMinute, currentTime)) {
+            newMinute = (newMinute > 59) ? (newMinute - 60) : newMinute;
             this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
         }
 
@@ -702,9 +702,9 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentMinute = currentTime.getMinutes();
         let newMinute = currentMinute - this.props.stepMinute;
-        newMinute = (newMinute < 0) ? (newMinute + 60) : newMinute;
 
         if (this.validateMinute(newMinute, currentTime)) {
+            newMinute = (newMinute < 0) ? (newMinute + 60) : newMinute;
             this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
         }
 
@@ -715,9 +715,9 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentSecond = currentTime.getSeconds();
         let newSecond = currentSecond + this.props.stepSecond;
-        newSecond = (newSecond > 59) ? (newSecond - 60) : newSecond;
 
         if (this.validateSecond(newSecond, currentTime)) {
+            newSecond = (newSecond > 59) ? (newSecond - 60) : newSecond;
             this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
         }
 
@@ -728,9 +728,9 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentSecond = currentTime.getSeconds();
         let newSecond = currentSecond - this.props.stepSecond;
-        newSecond = (newSecond < 0) ? (newSecond + 60) : newSecond;
 
         if (this.validateSecond(newSecond, currentTime)) {
+            newSecond = (newSecond < 0) ? (newSecond + 60) : newSecond;
             this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
         }
 
@@ -798,7 +798,7 @@ export class Calendar extends Component {
 
         if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
             if(value.getHours() === this.props.minDate.getHours() && value.getMinutes() === this.props.minDate.getMinutes()) {
-                if(this.props.minDate.getMinutes() > second) {
+                if(this.props.minDate.getSeconds() > second) {
                     valid = false;
                 }
             }
@@ -806,7 +806,7 @@ export class Calendar extends Component {
 
         if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
             if(value.getHours() === this.props.maxDate.getHours() && value.getMinutes() === this.props.maxDate.getMinutes()){
-                if(this.props.maxDate.getMinutes() < second) {
+                if(this.props.maxDate.getSeconds() < second) {
                     valid = false;
                 }
             }
