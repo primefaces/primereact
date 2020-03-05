@@ -4,122 +4,109 @@ import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
-import {CarService} from '../service/CarService';
+import {CustomerService} from '../service/CustomerService';
 import {Dropdown} from '../../components/dropdown/Dropdown';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
+import {ProgressBar} from '../../components/progressbar/ProgressBar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
 import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import "./DataTableDemo.css"
+import classNames from 'classnames';
+import "./DataTableDemo.scss"
 
 export class DataTableDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            cars: [],
-            brand: null,
-            colors: null,
-            selectedCar: null
+            customers: null,
+            selectedCustomers: null,
+            globalFilter: null,
+            representatives: [
+                {name: "Amy Elsner", image: 'amyelsner.png'},
+                {name: "Anna Fali", image: 'annafali.png'},
+                {name: "Asiya Javayant", image: 'asiyajavayant.png'},
+                {name: "Bernardo Dominic", image: 'bernardodominic.png'},
+                {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
+                {name: "Ioni Bowcher", image: 'ionibowcher.png'},
+                {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
+                {name: "Onyama Limba", image: 'onyamalimba.png'},
+                {name: "Stephen Shaw", image: 'stephenshaw.png'},
+                {name: "XuXue Feng", image: 'xuxuefeng.png'}
+            ],
+            statuses: [
+                'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
+            ]
         };
-        this.carservice = new CarService();
-        this.onBrandChange = this.onBrandChange.bind(this);
-        this.onColorChange = this.onColorChange.bind(this);
-        this.brandTemplate = this.brandTemplate.bind(this);
+
+        this.customerService = new CustomerService();
+        this.countryTemplate = this.countryTemplate.bind(this);
+        this.representativeTemplate = this.representativeTemplate.bind(this);
+        this.statusTemplate = this.statusTemplate.bind(this);
+        this.activityTemplate = this.activityTemplate.bind(this);
         this.actionTemplate = this.actionTemplate.bind(this);
-        this.filterBrandTemplate = this.filterBrandTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.customerService.getCustomersLarge().then(data => this.setState({customers: data}));
+    }
+    
+    activityTemplate(rowData) {
+        return (
+            <>
+                <span className="p-column-title">Activity</span>
+                <ProgressBar value={rowData.activity} showValue={false} />
+            </>
+        )
     }
 
-    brandTemplate(rowData, column) {
-        var src = 'showcase/resources/demo/images/car/' + rowData.brand + '.png';
+    actionTemplate() {
         return (
-            <React.Fragment>
-                <img src={src} alt={rowData.brand} width="50px" style={{'verticalAlign': 'middle', 'marginRight': '1em'}} />
-                <span style={{'verticalAlign': 'middle'}}>{rowData.brand}</span>
-            </React.Fragment>
+            <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
         );
     }
 
-    actionTemplate(rowData, column) {
-        return <React.Fragment>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </React.Fragment>;
+    statusTemplate(rowData) {
+        return (
+            <>
+                <span className="p-column-title">Status</span>
+                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
+            </>
+        );
     }
 
-    filterBrandTemplate(option) {
-        if(!option.value) {
-            return option.label;
-        }
-        else {
-            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
-
-            return (
-                <div className="p-clearfix p-dropdown-car-option">
-                    <img alt={option.label} src={logoPath} width="24"/>
-                    <span>{option.label}</span>
-                </div>
-            );
-        }
+    countryTemplate(rowData) {        
+        return (
+            <>
+                <span className="p-column-title">Country</span>
+                <img src="showcase/resources/demo/images/flag_placeholder.png" className={classNames('flag', 'flag-' + rowData.country.code)} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.country.name}</span>
+            </>
+        );
     }
 
-    onBrandChange(event) {
-        this.dt.filter(event.value, 'brand', 'equals');
-        this.setState({brand: event.value});
-    }
+    representativeTemplate(rowData) {
+        var src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
 
-    onColorChange(event) {
-        this.dt.filter(event.value, 'color', 'in');
-        this.setState({colors: event.value});
+        return (
+            <>
+                <span className="p-column-title">Representative</span>
+                <img alt={rowData.representative.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+            </>
+        );
     }
 
     render() {
         var header = (
-            <div style={{'textAlign': 'left'}}>
-                List of Cars
+            <div>
+                List of Customers
                 <div  className="p-datatable-globalfilter-container">
-                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" />
                 </div>
             </div>
         );
-
-        let brands = [
-                {label: 'All Brands', value: null},
-                {label: 'Audi', value: 'Audi'},
-                {label: 'BMW', value: 'BMW'},
-                {label: 'Fiat', value: 'Fiat'},
-                {label: 'Honda', value: 'Honda'},
-                {label: 'Jaguar', value: 'Jaguar'},
-                {label: 'Mercedes', value: 'Mercedes'},
-                {label: 'Renault', value: 'Renault'},
-                {label: 'VW', value: 'VW'},
-                {label: 'Volvo', value: 'Volvo'}
-            ];
-
-        let brandFilter = <Dropdown style={{width: '100%'}} className="p-column-filter"
-                value={this.state.brand} options={brands} onChange={this.onBrandChange} itemTemplate={this.filterBrandTemplate}/>
-
-        let colors = [
-            {label: 'White', value: 'White'},
-            {label: 'Green', value: 'Green'},
-            {label: 'Silver', value: 'Silver'},
-            {label: 'Black', value: 'Black'},
-            {label: 'Red', value: 'Red'},
-            {label: 'Maroon', value: 'Maroon'},
-            {label: 'Brown', value: 'Brown'},
-            {label: 'Orange', value: 'Orange'},
-            {label: 'Blue', value: 'Blue'}
-        ];
-
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="p-column-filter"
-            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
-
-        let actionHeader = <Button type="button" icon="pi pi-cog"></Button>
 
         return (
             <div className="datatable-doc-demo">
@@ -137,14 +124,19 @@ export class DataTableDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator rows={10} header={header} responsive
-                            globalFilter={this.state.globalFilter} emptyMessage="No records found" className="p-datatable-cars"
-                            selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}>
-                        <Column field="vin" header="Vin" filter sortable />
-                        <Column field="year" header="Year" filter sortable />
-                        <Column field="brand" header="Brand" filter filterElement={brandFilter} sortable body={this.brandTemplate}/>
-                        <Column field="color" header="Color" filter filterElement={colorFilter} sortable />
-                        <Column header={actionHeader} body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
+                    <DataTable ref={(el) => this.dt = el} value={this.state.customers} 
+                        header={header} responsive className="p-datatable-customers" dataKey="id"
+                        selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
+                        paginator rows={10} 
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
+                        <Column selectionMode="multiple" style={{width:'3em'}}/>
+                        <Column field="name" header="Name" />
+                        <Column field="country.name" header="Country" body={this.countryTemplate} />
+                        <Column field="representative.name" header="Representative" body={this.representativeTemplate} />
+                        <Column field="date" header="Date" />
+                        <Column field="status" header="Status" body={this.statusTemplate} />
+                        <Column field="activity" header="Activity" body={this.activityTemplate}/>
+                        <Column body={this.actionTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
                     </DataTable>
                 </div>
 
@@ -156,7 +148,7 @@ export class DataTableDemo extends Component {
 
 export class DataTableDoc extends Component {
 
-    shouldComponentUpdate(){
+    shouldComponentUpdate() {
         return false;
     }
 

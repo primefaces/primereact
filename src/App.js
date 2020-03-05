@@ -11,6 +11,7 @@ import '@fullcalendar/timegrid/main.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'prismjs/themes/prism-coy.css';
+import './resources/style/flags.css';
 import './sass/App.scss';
 
 import AppRouter from './AppRouter';
