@@ -181,7 +181,7 @@ export class HomeComponent extends Component {
 
                 <div className="primereact-designer">
                     <h3>PrimeReact Designer API</h3>
-                    <div class="p-grid">
+                    <div className="p-grid">
                         <div className="p-col-12">
                             <img alt="PrimeReact Designer" src="showcase/resources/images/primereact-designer.jpg" />
                             <p><a href="https://www.primefaces.org/designer/primereact">Designer API</a> is a SASS based theme engine to create PrimeReact themes easily featuring over 500 variables,
