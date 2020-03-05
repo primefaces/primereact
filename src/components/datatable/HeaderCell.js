@@ -174,7 +174,7 @@ export class HeaderCell extends Component {
         }
 
         return (
-            <th ref={(el) => this.el = el} tabIndex={this.props.sortable ? this.props.tabIndex: -1}
+            <th ref={(el) => this.el = el} tabIndex={this.props.sortable ? this.props.tabIndex : null}
                 className={className} style={this.props.headerStyle||this.props.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan} aria-sort={ariaSortData}
                 onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
