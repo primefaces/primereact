@@ -130,12 +130,12 @@ export class DataTableDemo extends Component {
                         paginator rows={10} 
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
-                        <Column field="name" header="Name" />
-                        <Column field="country.name" header="Country" body={this.countryTemplate} />
-                        <Column field="representative.name" header="Representative" body={this.representativeTemplate} />
-                        <Column field="date" header="Date" />
-                        <Column field="status" header="Status" body={this.statusTemplate} />
-                        <Column field="activity" header="Activity" body={this.activityTemplate}/>
+                        <Column field="name" header="Name" sortable />
+                        <Column field="country.name" header="Country" body={this.countryTemplate} sortable />
+                        <Column field="representative.name" header="Representative" body={this.representativeTemplate} sortable />
+                        <Column field="date" header="Date" sortable />
+                        <Column field="status" header="Status" body={this.statusTemplate} sortable />
+                        <Column field="activity" header="Activity" body={this.activityTemplate} sortable/>
                         <Column body={this.actionTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
                     </DataTable>
                 </div>
