@@ -354,10 +354,10 @@ export class Calendar extends Component {
     isValidSelection(value) {
         let isValid = true;
         if (this.isSingleSelection()) {
-            if (!this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false)) {
+            if (!(this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false) && this.isSelectableTime(value))) {
                 isValid = false;
             }
-        } else if (value.every(v => this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false))) {
+        } else if (value.every(v => (this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && this.isSelectableTime(value)))) {
             if (this.isRangeSelection()) {
                 isValid = value.length > 1 && value[1] > value[0] ? true : false;
             }
@@ -1618,6 +1618,45 @@ export class Calendar extends Component {
         }
 
         return validMin && validMax && validDate && validDay && validMonth;
+    }
+
+    isSelectableTime(value){
+        let validMin = true;
+        let validMax = true;
+
+        if (this.props.minDate && this.props.minDate.toDateString() === value.toDateString()) {
+            if(this.props.minDate.getHours() > value.getHours()) {
+                validMin = false;
+            }
+            else if(this.props.minDate.getHours() === value.getHours()) {
+                if(this.props.minDate.getMinutes() > value.getMinutes()) {
+                    validMin = false;
+                }
+                else if(this.props.minDate.getMinutes() === value.getMinutes()) {
+                    if(this.props.minDate.getSeconds() > value.getSeconds()) {
+                        validMin = false;
+                    }
+                }
+            }
+        }
+
+        if (this.props.maxDate && this.props.maxDate.toDateString() === value.toDateString()) {
+            if(this.props.maxDate.getHours() < value.getHours()) {
+                validMax = false;
+            }
+            else if(this.props.maxDate.getHours() === value.getHours()) {
+                if(this.props.maxDate.getMinutes() < value.getMinutes()) {
+                    validMax = false;
+                }
+                else if(this.props.maxDate.getMinutes() === value.getMinutes()) {
+                    if(this.props.maxDate.getSeconds() < value.getSeconds()) {
+                        validMax = false;
+                    }
+                }
+            }
+        }
+
+        return validMin && validMax;
     }
 
     isSelected(dateMeta) {
