@@ -222,16 +222,17 @@ export class BodyRow extends Component {
 
     render() {
         let columns = React.Children.toArray(this.props.children);
-        let conditionalStyles = {
+        let conditionalClassNames = {
             'p-highlight': this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected
         };
 
         if(this.props.rowClassName) {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
-            conditionalStyles = {...conditionalStyles, ...rowClassNameCondition};
+            conditionalClassNames = {...conditionalClassNames, ...rowClassNameCondition};
         }
-        let className = classNames('p-datatable-row', conditionalStyles);
+        let className = classNames('p-datatable-row', conditionalClassNames);
+        let style = this.props.virtualScroll ? {height: this.props.virtualRowHeight} : {};
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
 
@@ -259,7 +260,7 @@ export class BodyRow extends Component {
 
         return (
             <tr tabIndex={this.props.selectionMode ? '0' : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
-                onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={{height: this.props.virtualRowHeight}} onKeyDown={this.onKeyDown}>
+                onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={style} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>
         );
