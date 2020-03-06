@@ -12,6 +12,7 @@ export class SelectButton extends Component {
         value: null,
         options: null,
         optionLabel: null,
+        optionValue: null,
         tabIndex: null,
         multiple: null,
         disabled: null,
@@ -29,6 +30,7 @@ export class SelectButton extends Component {
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
+        optionValue: PropTypes.string,
         tabIndex: PropTypes.string,
         multiple: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -86,22 +88,22 @@ export class SelectButton extends Component {
         let optionValue = this.getOptionValue(event.option);
         let newValue;
 
-        if(this.props.multiple) {
+        if (this.props.multiple) {
             let currentValue = this.props.value ? [...this.props.value] : [];
 
-            if(selected)
+            if (selected)
                 newValue = currentValue.filter((val) => !ObjectUtils.equals(val, optionValue, this.props.dataKey));
             else
                 newValue = [...currentValue, optionValue];
         }
         else {
-            if(selected)
+            if (selected)
                 newValue = null;
             else
                 newValue = optionValue;
         }
 
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: newValue,
@@ -116,22 +118,22 @@ export class SelectButton extends Component {
         }
     }
 
-    getOptionValue(option) {
-        return this.props.optionLabel ? option : option.value;
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label || option;
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+    getOptionValue(option) {
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option.value || option;
     }
 
     isSelected(option) {
         let selected = false;
         let optionValue = this.getOptionValue(option);
 
-        if(this.props.multiple) {
-            if(this.props.value && this.props.value.length) {
-                for(let val of this.props.value) {
-                    if(ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
+        if (this.props.multiple) {
+            if (this.props.value && this.props.value.length) {
+                for (let val of this.props.value) {
+                    if (ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
                         selected = true;
                         break;
                     }
@@ -146,7 +148,7 @@ export class SelectButton extends Component {
     }
 
     renderItems() {
-        if(this.props.options && this.props.options.length) {
+        if (this.props.options && this.props.options.length) {
             return this.props.options.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
 

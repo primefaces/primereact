@@ -102,8 +102,8 @@ import {ListBox} from 'primereact/listbox';
             <h3>Getting Started</h3>
             <p>Listbox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
                 of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. SelectItem API is designed to have more
-                control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
+                whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair.
+                In addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">

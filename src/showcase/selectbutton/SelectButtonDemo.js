@@ -37,11 +37,13 @@ export class SelectButtonDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Single</h3>
                     <SelectButton value={this.state.value1} options={options} onChange={(e) => this.setState({value1: e.value})} />
-                    <p>Selected Value: {this.state.value1}</p>
+                    <br />
+                    <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value1}</span></p>
 
                     <h3>Multiple</h3>
                     <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(e) => this.setState({value2: e.value})} />
-                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val + " ")}</p>
+                    <br />
+                    <p>Selected Values: <span style={{fontWeight: 'bold'}}>{this.state.value2 && this.state.value2.map((val) => val + " ")}</span></p>
                 </div>
 
                 <SelectButtonDoc></SelectButtonDoc>
@@ -70,10 +72,10 @@ import {SelectButton} from 'primereact/selectbutton';
 </CodeHighlight>
 
             <h3>Getting Started</h3>
-            <p>SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
+            <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more
-            control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition, 
+            options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
             <CodeHighlight className="language-javascript">
@@ -113,9 +115,11 @@ const cities = [
             <CodeHighlight className="language-jsx">
 {`
 <SelectButton optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
+<SelectButton optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
 
 `}
             </CodeHighlight>
+            <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
             <h3>Multiple</h3>
             <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.</p>
@@ -161,6 +165,12 @@ const cities = [
                             <td>string</td>
                             <td>null</td>
                             <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
+                        </tr>
+                        <tr>
+                            <td>optionValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                         </tr>
                         <tr>
                             <td>tabIndex</td>
@@ -283,11 +293,13 @@ export class SelectButtonDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Single</h3>
                     <SelectButton value={this.state.value1} options={options} onChange={(e) => this.setState({value1: e.value})} />
-                    <p>Selected Value: {this.state.value1}</p>
+                    <br />
+                    <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value1}</span></p>
 
                     <h3>Multiple</h3>
                     <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(e) => this.setState({value2: e.value})} />
-                    <p>Selected Values: {this.state.value2 && this.state.value2.map((val) => val + " ")}</p>
+                    <br />
+                    <p>Selected Values: <span style={{fontWeight: 'bold'}}>{this.state.value2 && this.state.value2.map((val) => val + " ")}</span></p>
                 </div>
             </div>
         );
