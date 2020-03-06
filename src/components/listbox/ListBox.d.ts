@@ -6,6 +6,7 @@ interface ListBoxProps {
     value?: any;
     options?: any[];
     optionLabel?: string;
+    optionValue?: string;
     style?: object;
     listStyle?: object;
     className?: string;

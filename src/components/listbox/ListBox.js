@@ -13,6 +13,7 @@ export class ListBox extends Component {
         value: null,
         options: null,
         optionLabel: null,
+        optionValue: null,
         itemTemplate: null,
         style: null,
         listStyle: null,
@@ -34,6 +35,7 @@ export class ListBox extends Component {
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
+        optionValue: PropTypes.string,
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
         listStyle: PropTypes.object,
@@ -90,11 +92,11 @@ export class ListBox extends Component {
     }
 
     onOptionClick(event) {
-        if(this.props.disabled) {
+        if (this.props.disabled) {
             return;
         }
 
-        if(this.props.multiple)
+        if (this.props.multiple)
             this.onOptionClickMultiple(event.originalEvent, event.option);
         else
             this.onOptionClickSingle(event.originalEvent, event.option);
@@ -102,7 +104,7 @@ export class ListBox extends Component {
         this.optionTouched = false;
     }
 
-    onOptionTouchEnd(event, option) {
+    onOptionTouchEnd() {
         if(this.props.disabled) {
             return;
         }
@@ -215,10 +217,10 @@ export class ListBox extends Component {
         let selected = false;
         let optionValue = this.getOptionValue(option);
 
-        if(this.props.multiple) {
-            if(this.props.value) {
-                for(let val of this.props.value) {
-                    if(ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
+        if (this.props.multiple) {
+            if (this.props.value) {
+                for (let val of this.props.value) {
+                    if (ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
                         selected = true;
                         break;
                     }
@@ -243,12 +245,12 @@ export class ListBox extends Component {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
 
-    getOptionValue(option) {
-        return this.props.optionLabel ? option : option.value;
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label || option;
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+    getOptionValue(option) {
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option.value || option;
     }
 
     render() {
@@ -282,8 +284,8 @@ export class ListBox extends Component {
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
-                <div className="p-listbox-list-wrapper">
-                    <ul className="p-listbox-list" style={this.props.listStyle} role="listbox" aria-multiselectable={this.props.multiple}>
+                <div className="p-listbox-list-wrapper" style={this.props.listStyle}>
+                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={this.props.multiple}>
                         {items}
                     </ul>
                 </div>
