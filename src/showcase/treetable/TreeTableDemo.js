@@ -722,6 +722,18 @@ export class TreeTableDemo extends Component {
                                         <td>Custom filter function.</td>
                                     </tr>
                                     <tr>
+                                        <td>filterHeaderStyle</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the filter column header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterHeaderClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the filter header column.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>object</td>
                                         <td>null</td>

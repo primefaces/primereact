@@ -16,6 +16,8 @@ interface ColumnProps {
     filterType?: string;
     filterMaxLength?: number;
     filterElement?: object;
+    filterHeaderStyle?: object;
+    filterHeaderClassName?: string;
     style?: object;
     className?: string;
     headerStyle?: object;
