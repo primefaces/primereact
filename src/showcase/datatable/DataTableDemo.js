@@ -452,7 +452,7 @@ export class DataTableDemo extends Component {
                             <td>filterMatchMode</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Defines filterMatchMode; "startsWith", "contains", "endsWidth", "equals", "notEquals", "in" and "custom".</td>
+                            <td>Defines filterMatchMode; "startsWith", "contains", "endsWidth", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".</td>
                         </tr>
                         <tr>
                             <td>filterType</td>
@@ -952,7 +952,7 @@ mysort(event) {
 </CodeHighlight>
 
             <h3>Filtering</h3>
-            <p>Filtering is enabled by setting the <i>filter</i> property as true on a column. Default match mode is "startsWith" and this can be configured using <i>filterMatchMode</i> property that also accepts "contains", "endsWith", "equals", "notEquals" and "in" as available modes.</p>
+            <p>Filtering is enabled by setting the <i>filter</i> property as true on a column. Default match mode is "startsWith" and this can be configured using <i>filterMatchMode</i> property that also accepts                 "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom" as available modes.</p>
  <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars}>
@@ -2556,7 +2556,7 @@ export class DataTableStateDemo extends Component {
                             <td>filter</td>
                             <td>value: the filter value <br />
                                 field: the filter field <br />
-                                mode: "startsWith", "contains", "endsWidth", "equals", "notEquals", "in" and "custom".
+                                mode: filter match mode.
                             </td>
                             <td>Filters the data.</td>
                         </tr>
