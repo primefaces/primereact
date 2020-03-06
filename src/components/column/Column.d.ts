@@ -4,6 +4,7 @@ interface ColumnProps {
     columnKey?: string;
     field?: string;
     sortField?: string;
+    filterField?: string;
     header?: any;
     body?: any;
     loadingBody?: any;

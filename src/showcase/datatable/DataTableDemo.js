@@ -6,6 +6,7 @@ import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
 import {CustomerService} from '../service/CustomerService';
 import {Dropdown} from '../../components/dropdown/Dropdown';
+import {Calendar} from '../../components/calendar/Calendar';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {ProgressBar} from '../../components/progressbar/ProgressBar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
@@ -23,6 +24,7 @@ export class DataTableDemo extends Component {
             customers: null,
             selectedCustomers: null,
             globalFilter: null,
+            selectedRepresentatives: null,
             representatives: [
                 {name: "Amy Elsner", image: 'amyelsner.png'},
                 {name: "Anna Fali", image: 'annafali.png'},
@@ -35,24 +37,47 @@ export class DataTableDemo extends Component {
                 {name: "Stephen Shaw", image: 'stephenshaw.png'},
                 {name: "XuXue Feng", image: 'xuxuefeng.png'}
             ],
+            dateFilter: null,
+            selectedStatus: null,
             statuses: [
                 'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
             ]
         };
 
         this.customerService = new CustomerService();
-        this.countryTemplate = this.countryTemplate.bind(this);
-        this.representativeTemplate = this.representativeTemplate.bind(this);
-        this.statusTemplate = this.statusTemplate.bind(this);
-        this.activityTemplate = this.activityTemplate.bind(this);
-        this.actionTemplate = this.actionTemplate.bind(this);
+
+        //body cells
+        this.countryBodyTemplate = this.countryBodyTemplate.bind(this);
+        this.representativeBodyTemplate = this.representativeBodyTemplate.bind(this);
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
+        this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
+        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
+
+        //filters
+        this.representativeItemTemplate = this.representativeItemTemplate.bind(this);
+        this.onRepresentativeFilterChange = this.onRepresentativeFilterChange.bind(this);
+        this.onDateFilterChange = this.onDateFilterChange.bind(this);
+        this.filterDate = this.filterDate.bind(this);       //custom filter function
+        this.statusItemTemplate = this.statusItemTemplate.bind(this);
+        this.onStatusFilterChange = this.onStatusFilterChange.bind(this);
     }
 
     componentDidMount() {
         this.customerService.getCustomersLarge().then(data => this.setState({customers: data}));
     }
+
+    renderHeader() {
+        return (
+            <div>
+                List of Customers
+                <div  className="p-datatable-globalfilter-container">
+                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" />
+                </div>
+            </div>
+        );
+    }
     
-    activityTemplate(rowData) {
+    activityBodyTemplate(rowData) {
         return (
             <>
                 <span className="p-column-title">Activity</span>
@@ -61,13 +86,13 @@ export class DataTableDemo extends Component {
         )
     }
 
-    actionTemplate() {
+    actionBodyTemplate() {
         return (
             <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
         );
     }
 
-    statusTemplate(rowData) {
+    statusBodyTemplate(rowData) {
         return (
             <>
                 <span className="p-column-title">Status</span>
@@ -76,7 +101,7 @@ export class DataTableDemo extends Component {
         );
     }
 
-    countryTemplate(rowData) {        
+    countryBodyTemplate(rowData) {        
         return (
             <>
                 <span className="p-column-title">Country</span>
@@ -86,8 +111,8 @@ export class DataTableDemo extends Component {
         );
     }
 
-    representativeTemplate(rowData) {
-        var src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
+    representativeBodyTemplate(rowData) {
+        const src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
 
         return (
             <>
@@ -98,15 +123,94 @@ export class DataTableDemo extends Component {
         );
     }
 
-    render() {
-        var header = (
-            <div>
-                List of Customers
-                <div  className="p-datatable-globalfilter-container">
-                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" />
-                </div>
+    renderRepresentativeFilter() {
+        return (
+            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives} 
+                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" />
+        );
+    }
+
+    representativeItemTemplate(option) {
+        const src = "showcase/resources/demo/images/avatar/" + option.image;
+
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
             </div>
         );
+    }
+
+    onRepresentativeFilterChange(event) {
+        this.dt.filter(event.value, 'representative', 'in');
+        this.setState({selectedRepresentatives: event.value});
+    }
+
+    renderDateFilter() {
+        return (
+            <Calendar value={this.state.dateFilter} onChange={this.onDateFilterChange} placeholder="Registration Date" dateFormat="yy-mm-dd" className="p-column-filter" />
+        );
+    }
+
+    onDateFilterChange(event) {
+        if (event.value !== null)
+            this.dt.filter(this.formatDate(event.value), 'date', 'equals');   
+        else
+            this.dt.filter(null, 'date', 'equals');
+
+        this.setState({dateFilter: event.value});
+    }
+
+    filterDate(value, filter) {
+        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return value === this.formatDate(filter);
+    }
+
+    formatDate(date) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        return date.getFullYear() + '-' + month + '-' + day;
+    }
+
+    renderStatusFilter() {
+        return (
+            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange} 
+                        itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
+        );
+    }
+
+    statusItemTemplate(option) {
+        return (
+            <span className={classNames('customer-badge', 'status-' + option)}>{option}</span>
+        );
+    }
+
+    onStatusFilterChange(event) {
+        this.dt.filter(event.value, 'status', 'equals');
+        this.setState({selectedStatus: event.value});
+    }
+
+    render() {
+        const header = this.renderHeader();
+        const representativeFilter = this.renderRepresentativeFilter();
+        const dateFilter = this.renderDateFilter();
+        const statusFilter = this.renderStatusFilter();
 
         return (
             <div className="datatable-doc-demo">
@@ -124,18 +228,18 @@ export class DataTableDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable ref={(el) => this.dt = el} value={this.state.customers} 
-                        header={header} responsive className="p-datatable-customers" dataKey="id"
+                    <DataTable ref={(el) => this.dt = el} value={this.state.customers}
+                        header={header} responsive className="p-datatable-customers" dataKey="id" rowHover
                         selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
-                        paginator rows={10} 
+                        paginator rows={10} emptyMessage="No customers found"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
-                        <Column field="name" header="Name" sortable />
-                        <Column field="country.name" header="Country" body={this.countryTemplate} sortable />
-                        <Column field="representative.name" header="Representative" body={this.representativeTemplate} sortable />
-                        <Column field="date" header="Date" sortable />
-                        <Column field="status" header="Status" body={this.statusTemplate} sortable />
-                        <Column field="activity" header="Activity" body={this.activityTemplate} sortable/>
+                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
+                        <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
+                        <Column field="representative" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
+                        <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
+                        <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
                         <Column body={this.actionTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
                     </DataTable>
                 </div>
@@ -295,6 +399,12 @@ export class DataTableDemo extends Component {
                             <td>string</td>
                             <td>null</td>
                             <td>Property of a row data used for sorting, defaults to field.</td>
+                        </tr>
+                        <tr>
+                            <td>filterField</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property of a row data used for filtering, defaults to field.</td>
                         </tr>
                         <tr>
                             <td>header</td>
@@ -2254,6 +2364,13 @@ export class DataTableStateDemo extends Component {
                             <td>false</td>
                             <td>Makes row groups toggleable, default is false.</td>
                         </tr>
+                        <tr>
+                            <td>rowHover</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, background of the rows change on hover..</td>
+                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
@@ -2538,46 +2655,135 @@ export class DataTableStateDemo extends Component {
                 <p>DataTableDemo.css</p>
 <CodeHighlight className="language-javascript">
 {`
-.datatable-doc-demo .p-column-filter {
-    margin-top: 1em;
-}
-.datatable-doc-demo .p-dropdown-car-option {
-    display: flex;
-    align-items: center;
-    text-align: left;
-}
-.datatable-doc-demo .p-dropdown-car-option img {
-    margin-right: .5em;
-    width: 24px;
-}
-.datatable-doc-demo .p-dropdown-car-option span {
-    margin-top: .125em;
-}
-.datatable-doc-demo .p-datatable-globalfilter-container {
-    float: right;
-}
-.datatable-doc-demo .p-datatable-globalfilter-container input {
-    width: 250px;
-}
-.datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-header {
-    border: 0 none;
-    padding: 12px;
-    text-align: left;
-    font-size: 20px;
-}
-.datatable-doc-demo .p-datatable.p-datatable-cars .p-paginator {
-    border: 0 none;
-    padding: 1em;
-}
-.datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-thead > tr > th {
-    border: 0 none;
-    text-align: left;
-}
-.datatable-doc-demo .p-datatable.p-datatable-cars .p-column-title {
-    font-size: 16px;
-}
-.datatable-doc-demo .p-datatable.p-datatable-cars .p-datatable-tbody > tr > td {
-    border: 0 none;
+.datatable-doc-demo {
+    .customer-badge {
+        border-radius: 2px;
+        padding: .25em .5em;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;
+    
+        &.status-qualified {
+            background-color: #C8E6C9;
+            color: #256029;
+        }
+    
+        &.status-unqualified {
+            background-color: #FFCDD2;
+            color: #C63737;
+        }
+    
+        &.status-negotiation {
+            background-color: #FEEDAF;
+            color: #8A5340;
+        }
+    
+        &.status-new {
+            background-color: #B3E5FC;
+            color: #23547B;
+        }
+    
+        &.status-renewal {
+            background-color: #ECCFFF;
+            color: #694382;
+        }
+    
+        &.status-proposal {
+            background-color: #FFD8B2;
+            color: #805B36;
+        }
+    }
+    
+    .p-multiselect-representative-option {
+        display: inline-block;
+        vertical-align: middle;
+    
+        img {
+            vertical-align: middle;
+            width: 24px;
+        }
+    
+        span {
+            margin-top: .125em;
+        }
+    }
+    
+    .p-paginator {
+        .p-dropdown {
+            float: left;
+        }
+    
+        .p-paginator-current {
+            float: right;
+        }
+    }
+    
+    .p-progressbar {
+        height: 8px;
+        background-color: #D8DADC;
+    
+        .p-progressbar-value {
+            background-color: #00ACAD;
+            transition: none;
+        }
+    }
+    
+    .p-column-filter {
+        display: block;
+    
+        input {
+            width: 100%;
+        }
+    }
+    
+    .p-datatable-globalfilter-container {
+        float: right;
+    
+        input {
+            width: 200px;
+        }
+    }
+    
+    .p-datepicker {
+        min-width: 25em;
+    
+        td {
+            font-weight: 400;
+        }
+    }
+    
+    .p-datatable.p-datatable-customers {
+        .p-datatable-header {
+            border: 0 none;
+            padding: 12px;
+            text-align: left;
+            font-size: 20px;
+        }
+    
+        .p-paginator {
+            border: 0 none;
+            padding: 1em;
+        }
+    
+        .p-datatable-thead > tr > th {
+            border: 0 none;
+            text-align: left;
+    
+            &.p-filter-column {
+                border-top: 1px solid #c8c8c8;
+            }
+        }
+    
+        .p-datatable-tbody > tr > td {
+            border: 0 none;
+            cursor: auto;
+        }
+
+        .p-dropdown-label:not(.p-placeholder) {
+            text-transform: uppercase;
+        }
+    }
 }
 `}
 </CodeHighlight>
@@ -2590,118 +2796,212 @@ import {DataTable} from '../../components/datatable/DataTable';
 import {Column} from '../../components/column/Column';
 import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
-import {CarService} from '../service/CarService';
+import {CustomerService} from '../service/CustomerService';
 import {Dropdown} from '../../components/dropdown/Dropdown';
+import {Calendar} from '../../components/calendar/Calendar';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
-import "./DataTableDemo.css"
+import {ProgressBar} from '../../components/progressbar/ProgressBar';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
+import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import AppContentContext from '../../AppContentContext';
+import classNames from 'classnames';
+import "./DataTableDemo.scss"
 
 export class DataTableDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            cars: [],
-            brand: null,
-            colors: null,
-            selectedCar: null
+            customers: null,
+            selectedCustomers: null,
+            globalFilter: null,
+            selectedRepresentatives: null,
+            representatives: [
+                {name: "Amy Elsner", image: 'amyelsner.png'},
+                {name: "Anna Fali", image: 'annafali.png'},
+                {name: "Asiya Javayant", image: 'asiyajavayant.png'},
+                {name: "Bernardo Dominic", image: 'bernardodominic.png'},
+                {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
+                {name: "Ioni Bowcher", image: 'ionibowcher.png'},
+                {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
+                {name: "Onyama Limba", image: 'onyamalimba.png'},
+                {name: "Stephen Shaw", image: 'stephenshaw.png'},
+                {name: "XuXue Feng", image: 'xuxuefeng.png'}
+            ],
+            dateFilter: null,
+            selectedStatus: null,
+            statuses: [
+                'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
+            ]
         };
-        this.carservice = new CarService();
-        this.onBrandChange = this.onBrandChange.bind(this);
-        this.onColorChange = this.onColorChange.bind(this);
-        this.brandTemplate = this.brandTemplate.bind(this);
-        this.actionTemplate = this.actionTemplate.bind(this);
-        this.filterBrandTemplate = this.filterBrandTemplate.bind(this);
+
+        this.customerService = new CustomerService();
+
+        //body cells
+        this.countryBodyTemplate = this.countryBodyTemplate.bind(this);
+        this.representativeBodyTemplate = this.representativeBodyTemplate.bind(this);
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
+        this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
+        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
+
+        //filters
+        this.representativeItemTemplate = this.representativeItemTemplate.bind(this);
+        this.onRepresentativeFilterChange = this.onRepresentativeFilterChange.bind(this);
+        this.onDateFilterChange = this.onDateFilterChange.bind(this);
+        this.filterDate = this.filterDate.bind(this);       //custom filter function
+        this.statusItemTemplate = this.statusItemTemplate.bind(this);
+        this.onStatusFilterChange = this.onStatusFilterChange.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.customerService.getCustomersLarge().then(data => this.setState({customers: data}));
     }
 
-    brandTemplate(rowData, column) {
-        var src = 'showcase/resources/demo/images/car/' + rowData.brand + '.png';
+    renderHeader() {
         return (
-            <React.Fragment>
-                <img src={src} alt={rowData.brand} width="50px" style={{'verticalAlign': 'middle', 'marginRight': '1em'}} />
-                <span style={{'verticalAlign': 'middle'}}>{rowData.brand}</span>
-            </React.Fragment>
-        );
-    }
-
-    actionTemplate(rowData, column) {
-        return <React.Fragment>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </React.Fragment>;
-    }
-
-    filterBrandTemplate(option) {
-        if(!option.value) {
-            return option.label;
-        }
-        else {
-            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
-
-            return (
-                <div className="p-clearfix p-dropdown-car-option">
-                    <img alt={option.label} src={logoPath} width="24"/>
-                    <span>{option.label}</span>
-                </div>
-            );
-        }
-    }
-
-    onBrandChange(event) {
-        this.dt.filter(event.value, 'brand', 'equals');
-        this.setState({brand: event.value});
-    }
-
-    onColorChange(event) {
-        this.dt.filter(event.value, 'color', 'in');
-        this.setState({colors: event.value});
-    }
-
-    render() {
-        var header = (
-            <div style={{'textAlign': 'left'}}>
-                List of Cars
+            <div>
+                List of Customers
                 <div  className="p-datatable-globalfilter-container">
-                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
+                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" />
                 </div>
             </div>
         );
+    }
+    
+    activityBodyTemplate(rowData) {
+        return (
+            <>
+                <span className="p-column-title">Activity</span>
+                <ProgressBar value={rowData.activity} showValue={false} />
+            </>
+        )
+    }
 
-        let brands = [
-                {label: 'All Brands', value: null},
-                {label: 'Audi', value: 'Audi'},
-                {label: 'BMW', value: 'BMW'},
-                {label: 'Fiat', value: 'Fiat'},
-                {label: 'Honda', value: 'Honda'},
-                {label: 'Jaguar', value: 'Jaguar'},
-                {label: 'Mercedes', value: 'Mercedes'},
-                {label: 'Renault', value: 'Renault'},
-                {label: 'VW', value: 'VW'},
-                {label: 'Volvo', value: 'Volvo'}
-            ];
+    actionBodyTemplate() {
+        return (
+            <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
+        );
+    }
 
-        let brandFilter = <Dropdown style={{width: '100%'}} className="p-column-filter"
-                value={this.state.brand} options={brands} onChange={this.onBrandChange} itemTemplate={this.filterBrandTemplate}/>
+    statusBodyTemplate(rowData) {
+        return (
+            <>
+                <span className="p-column-title">Status</span>
+                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
+            </>
+        );
+    }
 
-        let colors = [
-            {label: 'White', value: 'White'},
-            {label: 'Green', value: 'Green'},
-            {label: 'Silver', value: 'Silver'},
-            {label: 'Black', value: 'Black'},
-            {label: 'Red', value: 'Red'},
-            {label: 'Maroon', value: 'Maroon'},
-            {label: 'Brown', value: 'Brown'},
-            {label: 'Orange', value: 'Orange'},
-            {label: 'Blue', value: 'Blue'}
-        ];
+    countryBodyTemplate(rowData) {        
+        return (
+            <>
+                <span className="p-column-title">Country</span>
+                <img src="showcase/resources/demo/images/flag_placeholder.png" className={classNames('flag', 'flag-' + rowData.country.code)} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.country.name}</span>
+            </>
+        );
+    }
 
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="p-column-filter"
-            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
+    representativeBodyTemplate(rowData) {
+        const src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
 
-        let actionHeader = <Button type="button" icon="pi pi-cog"></Button>
+        return (
+            <>
+                <span className="p-column-title">Representative</span>
+                <img alt={rowData.representative.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+            </>
+        );
+    }
+
+    renderRepresentativeFilter() {
+        return (
+            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives} 
+                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" />
+        );
+    }
+
+    representativeItemTemplate(option) {
+        const src = "showcase/resources/demo/images/avatar/" + option.image;
+
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
+            </div>
+        );
+    }
+
+    onRepresentativeFilterChange(event) {
+        this.dt.filter(event.value, 'representative', 'in');
+        this.setState({selectedRepresentatives: event.value});
+    }
+
+    renderDateFilter() {
+        return (
+            <Calendar value={this.state.dateFilter} onChange={this.onDateFilterChange} placeholder="Registration Date" dateFormat="yy-mm-dd" className="p-column-filter" />
+        );
+    }
+
+    onDateFilterChange(event) {
+        if (event.value !== null)
+            this.dt.filter(this.formatDate(event.value), 'date', 'equals');   
+        else
+            this.dt.filter(null, 'date', 'equals');
+
+        this.setState({dateFilter: event.value});
+    }
+
+    filterDate(value, filter) {
+        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return value === this.formatDate(filter);
+    }
+
+    formatDate(date) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        return date.getFullYear() + '-' + month + '-' + day;
+    }
+
+    renderStatusFilter() {
+        return (
+            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange} 
+                        itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
+        );
+    }
+
+    statusItemTemplate(option) {
+        return (
+            <span className={classNames('customer-badge', 'status-' + option)}>{option}</span>
+        );
+    }
+
+    onStatusFilterChange(event) {
+        this.dt.filter(event.value, 'status', 'equals');
+        this.setState({selectedStatus: event.value});
+    }
+
+    render() {
+        const header = this.renderHeader();
+        const representativeFilter = this.renderRepresentativeFilter();
+        const dateFilter = this.renderDateFilter();
+        const statusFilter = this.renderStatusFilter();
 
         return (
             <div className="datatable-doc-demo">
@@ -2709,18 +3009,27 @@ export class DataTableDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable</h1>
                         <p>DataTable displays data in tabular format.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable ref={(el) => this.dt = el} value={this.state.cars} paginator={true} rows={10} header={header}
-                            globalFilter={this.state.globalFilter} emptyMessage="No records found" className="p-datatable-cars"
-                            selectionMode="single" selection={this.state.selectedCar} onSelectionChange={e => this.setState({selectedCar: e.value})}>
-                        <Column field="vin" header="Vin" filter sortable />
-                        <Column field="year" header="Year" filter sortable />
-                        <Column field="brand" header="Brand" filter filterElement={brandFilter} sortable body={this.brandTemplate}/>
-                        <Column field="color" header="Color" filter filterElement={colorFilter} sortable />
-                        <Column header={actionHeader} body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
+                    <DataTable ref={(el) => this.dt = el} value={this.state.customers}
+                        header={header} responsive className="p-datatable-customers" dataKey="id" rowHover
+                        selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
+                        paginator rows={10} emptyMessage="No customers found"
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
+                        <Column selectionMode="multiple" style={{width:'3em'}}/>
+                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
+                        <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
+                        <Column field="representative" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
+                        <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
+                        <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
+                        <Column body={this.actionTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
                     </DataTable>
                 </div>
             </div>

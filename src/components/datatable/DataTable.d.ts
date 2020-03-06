@@ -65,6 +65,7 @@ interface DataTableProps {
     groupField?:string;
     editMode?:string;
     expandableRowGroups?:boolean;
+    rowHover?:boolean;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
     rowExpansionTemplate?(data: any): JSX.Element | undefined;

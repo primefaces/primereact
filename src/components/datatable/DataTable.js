@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Paginator } from '../paginator/Paginator';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import FilterUtils from '../utils/FilterUtils';
 import { ScrollableView } from './ScrollableView';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
@@ -82,6 +83,8 @@ export class DataTable extends Component {
         stateKey: null,
         stateStorage: 'session',
         editMode: 'cell',
+        expandableRowGroups: false,
+        rowHover: false,
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -101,8 +104,7 @@ export class DataTable extends Component {
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
-        exportFunction: null,
-        expandableRowGroups: false
+        exportFunction: null
     }
 
     static propTypes = {
@@ -173,6 +175,8 @@ export class DataTable extends Component {
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
         editMode: PropTypes.string,
+        expandableRowGroups: PropTypes.bool,
+        rowHover: PropTypes.bool,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -192,8 +196,7 @@ export class DataTable extends Component {
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
-        exportFunction: PropTypes.func,
-        expandableRowGroups: PropTypes.bool
+        exportFunction: PropTypes.func
     };
 
     constructor(props) {
@@ -1110,15 +1113,15 @@ export class DataTable extends Component {
 
             for(let j = 0; j < columns.length; j++) {
                 let col = columns[j];
-                let filterMeta = filters ? filters[col.props.field] : null;
+                let columnField = col.props.filterField || col.props.field;
+                let filterMeta = filters ? filters[columnField] : null;
 
                 //local
-                if(filterMeta) {
+                if (filterMeta) {
                     let filterValue = filterMeta.value;
-                    let filterField = col.props.field;
+                    let dataFieldValue = ObjectUtils.resolveFieldData(value[i], columnField);
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
-                    let dataFieldValue = ObjectUtils.resolveFieldData(value[i], filterField);
-                    let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : ObjectUtils.filterConstraints[filterMatchMode];
+                    let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
 
                     if(!filterConstraint(dataFieldValue, filterValue)) {
                         localMatch = false;
@@ -1129,10 +1132,7 @@ export class DataTable extends Component {
                     }
                 }
 
-                //global
-                if(!col.props.excludeGlobalFilter && this.props.globalFilter && !globalMatch) {
-                    globalMatch = ObjectUtils.filterConstraints['contains'](ObjectUtils.resolveFieldData(value[i], col.props.field), this.props.globalFilter);
-                }
+
             }
 
             let matches = localMatch;
@@ -1383,7 +1383,7 @@ export class DataTable extends Component {
         let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive,
                         'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
-                        'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.selectionMode}, this.props.className);
+                        'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="p-datatable-header">{this.props.header}</div>;

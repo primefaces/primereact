@@ -410,7 +410,7 @@ export class Dropdown extends Component {
             this.updateEditableLabel(event.option);
             this.props.onChange({
                 originalEvent: event.originalEvent,
-                value: this.props.optionLabel ? event.option : event.option.value,
+                value: this.props.optionLabel ? event.option : event.option.value || event.option,
                 stopPropagation : () =>{},
                 preventDefault : () =>{},
                 target: {
@@ -426,7 +426,7 @@ export class Dropdown extends Component {
         let index = -1;
         if(this.props.options) {
             for(let i = 0; i < this.props.options.length; i++) {
-                let optionValue = this.props.optionLabel ? this.props.options[i] : this.props.options[i].value;
+                let optionValue = this.props.optionLabel ? this.props.options[i] : this.props.options[i].value || this.props.options[i];
                 if((value === null && optionValue == null) || ObjectUtils.equals(value, optionValue, this.props.dataKey)) {
                     index = i;
                     break;
@@ -620,7 +620,7 @@ export class Dropdown extends Component {
     }
 
     getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label || option;
     }
 
     getOptionKey(option) {

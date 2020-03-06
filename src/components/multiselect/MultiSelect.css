@@ -39,6 +39,7 @@
     cursor: pointer;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .p-multiselect .p-multiselect-label-empty {
