@@ -142,7 +142,7 @@ export class AppMenu extends Component {
             <div className="layout-sidebar" role="navigation" onClick={this.props.onSidebarClick}>
                 <div className="layout-sidebar-search-wrapper">
                     <i className="pi pi-search layout-sidebar-search-icon"></i>
-                    <input type="text" onChange={this.onSearchInputChange} placeholder="Search..." aria-label="Search input"/>
+                    <input type="text" onChange={this.onSearchInputChange} placeholder="Search..." aria-label="Search input" autoComplete="off"/>
                 </div>
 
                 <ul className="layout-menu" role="menubar">

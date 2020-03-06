@@ -76,7 +76,7 @@ export class DataTableDemo extends Component {
             </div>
         );
     }
-    
+
     activityBodyTemplate(rowData) {
         return (
             <>
@@ -101,12 +101,14 @@ export class DataTableDemo extends Component {
         );
     }
 
-    countryBodyTemplate(rowData) {        
+    countryBodyTemplate(rowData) {
+        let { name, code } = rowData.country;
+
         return (
             <>
                 <span className="p-column-title">Country</span>
-                <img src="showcase/resources/demo/images/flag_placeholder.png" className={classNames('flag', 'flag-' + rowData.country.code)} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.country.name}</span>
+                <img src="showcase/resources/demo/images/flag_placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </>
         );
     }
@@ -125,7 +127,7 @@ export class DataTableDemo extends Component {
 
     renderRepresentativeFilter() {
         return (
-            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives} 
+            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives}
                 onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" />
         );
     }
@@ -154,7 +156,7 @@ export class DataTableDemo extends Component {
 
     onDateFilterChange(event) {
         if (event.value !== null)
-            this.dt.filter(this.formatDate(event.value), 'date', 'equals');   
+            this.dt.filter(this.formatDate(event.value), 'date', 'equals');
         else
             this.dt.filter(null, 'date', 'equals');
 
@@ -190,7 +192,7 @@ export class DataTableDemo extends Component {
 
     renderStatusFilter() {
         return (
-            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange} 
+            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange}
                         itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
         );
     }
@@ -2382,7 +2384,7 @@ export class DataTableStateDemo extends Component {
                             <td>false</td>
                             <td>When enabled, background of the rows change on hover..</td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -2675,96 +2677,96 @@ export class DataTableStateDemo extends Component {
         font-weight: 700;
         font-size: 12px;
         letter-spacing: .3px;
-    
+
         &.status-qualified {
             background-color: #C8E6C9;
             color: #256029;
         }
-    
+
         &.status-unqualified {
             background-color: #FFCDD2;
             color: #C63737;
         }
-    
+
         &.status-negotiation {
             background-color: #FEEDAF;
             color: #8A5340;
         }
-    
+
         &.status-new {
             background-color: #B3E5FC;
             color: #23547B;
         }
-    
+
         &.status-renewal {
             background-color: #ECCFFF;
             color: #694382;
         }
-    
+
         &.status-proposal {
             background-color: #FFD8B2;
             color: #805B36;
         }
     }
-    
+
     .p-multiselect-representative-option {
         display: inline-block;
         vertical-align: middle;
-    
+
         img {
             vertical-align: middle;
             width: 24px;
         }
-    
+
         span {
             margin-top: .125em;
         }
     }
-    
+
     .p-paginator {
         .p-dropdown {
             float: left;
         }
-    
+
         .p-paginator-current {
             float: right;
         }
     }
-    
+
     .p-progressbar {
         height: 8px;
         background-color: #D8DADC;
-    
+
         .p-progressbar-value {
             background-color: #00ACAD;
             transition: none;
         }
     }
-    
+
     .p-column-filter {
         display: block;
-    
+
         input {
             width: 100%;
         }
     }
-    
+
     .p-datatable-globalfilter-container {
         float: right;
-    
+
         input {
             width: 200px;
         }
     }
-    
+
     .p-datepicker {
         min-width: 25em;
-    
+
         td {
             font-weight: 400;
         }
     }
-    
+
     .p-datatable.p-datatable-customers {
         .p-datatable-header {
             border: 0 none;
@@ -2772,21 +2774,21 @@ export class DataTableStateDemo extends Component {
             text-align: left;
             font-size: 20px;
         }
-    
+
         .p-paginator {
             border: 0 none;
             padding: 1em;
         }
-    
+
         .p-datatable-thead > tr > th {
             border: 0 none;
             text-align: left;
-    
+
             &.p-filter-column {
                 border-top: 1px solid #c8c8c8;
             }
         }
-    
+
         .p-datatable-tbody > tr > td {
             border: 0 none;
             cursor: auto;
@@ -2879,7 +2881,7 @@ export class DataTableDemo extends Component {
             </div>
         );
     }
-    
+
     activityBodyTemplate(rowData) {
         return (
             <>
@@ -2904,7 +2906,7 @@ export class DataTableDemo extends Component {
         );
     }
 
-    countryBodyTemplate(rowData) {        
+    countryBodyTemplate(rowData) {
         return (
             <>
                 <span className="p-column-title">Country</span>
@@ -2928,7 +2930,7 @@ export class DataTableDemo extends Component {
 
     renderRepresentativeFilter() {
         return (
-            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives} 
+            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives}
                 onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" />
         );
     }
@@ -2957,7 +2959,7 @@ export class DataTableDemo extends Component {
 
     onDateFilterChange(event) {
         if (event.value !== null)
-            this.dt.filter(this.formatDate(event.value), 'date', 'equals');   
+            this.dt.filter(this.formatDate(event.value), 'date', 'equals');
         else
             this.dt.filter(null, 'date', 'equals');
 
@@ -2993,7 +2995,7 @@ export class DataTableDemo extends Component {
 
     renderStatusFilter() {
         return (
-            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange} 
+            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange}
                         itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
         );
     }
