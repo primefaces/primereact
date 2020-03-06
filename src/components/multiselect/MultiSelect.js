@@ -15,6 +15,7 @@ export class MultiSelect extends Component {
         value: null,
         options: null,
         optionLabel: null,
+        optionValue: null,
         style: null,
         className: null,
         scrollHeight: '200px',
@@ -42,6 +43,7 @@ export class MultiSelect extends Component {
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
+        optionValue: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
@@ -256,9 +258,9 @@ export class MultiSelect extends Component {
     findSelectionIndex(value) {
         let index = -1;
 
-        if(this.props.value) {
-            for(let i = 0; i < this.props.value.length; i++) {
-                if(ObjectUtils.equals(this.props.value[i], value, this.props.dataKey)) {
+        if (this.props.value) {
+            for (let i = 0; i < this.props.value.length; i++) {
+                if (ObjectUtils.equals(this.props.value[i], value, this.props.dataKey)) {
                     index = i;
                     break;
                 }
@@ -275,11 +277,11 @@ export class MultiSelect extends Component {
     findLabelByValue(val) {
         let label = null;
 
-        for(let i = 0; i < this.props.options.length; i++) {
+        for (let i = 0; i < this.props.options.length; i++) {
             let option = this.props.options[i];
             let optionValue = this.getOptionValue(option);
 
-            if(ObjectUtils.equals(optionValue, val)) {
+            if (ObjectUtils.equals(optionValue, val)) {
                 label = this.getOptionLabel(option);
                 break;
             }
@@ -379,12 +381,12 @@ export class MultiSelect extends Component {
         });
     }
 
-    getOptionValue(option) {
-        return this.props.optionLabel ? option : option.value;
+    getOptionLabel(option) {
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) :  option.label || option;
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label;
+    getOptionValue(option) {
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option.value || option;
     }
 
     isEmpty() {

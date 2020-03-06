@@ -108,7 +108,7 @@ import {MultiSelect} from 'primereact/multiselect';
             <h3>Getting Started</h3>
             <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. SelectItem API is designed to have more
             control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
 
             <p><b>Options as SelectItems</b></p>
@@ -149,9 +149,11 @@ const cities = [
 <CodeHighlight className="language-jsx">
 {`
 <MultiSelect optionLabel="name" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
+<MultiSelect optionLabel="name" optionValue="code" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
 
 `}
 </CodeHighlight>
+            <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
             <h3>Custom Content</h3>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
