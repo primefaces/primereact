@@ -154,7 +154,7 @@ export class HeaderCell extends Component {
 
         if (this.props.renderOptions.filterOnly) {
             return (
-                <th ref={(el) => this.el = el} className={classNames('p-filter-column', this.props.columnProps.filterClass)} style={this.props.columnProps.filterStyle||this.props.columnProps.style}
+                <th ref={(el) => this.el = el} className={classNames('p-filter-column', this.props.columnProps.filterHeaderClassName)} style={this.props.columnProps.filterHeaderStyle||this.props.columnProps.style}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan}>
                     {filterElement}
                     {headerCheckbox}
