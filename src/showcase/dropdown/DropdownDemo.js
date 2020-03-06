@@ -84,16 +84,16 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" />
+                    <Dropdown value={this.state.city} options={cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
+                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}  style={{width: '12em'}}
                               editable={true} placeholder="Select a Brand" />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}
+                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
                               filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
@@ -126,7 +126,7 @@ import {Dropdown} from 'primereact/dropdown';
                         <h3>Getting Started</h3>
                         <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
                         of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> property to specify the field name of the option. SelectItem API is designed to have more
+                        whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the field name of the option. SelectItem API is designed to have more
                         control on how the options are displayed such as grouping and disabling however in most cases an arbitrary object collection will suffice.</p>
 
                         <p><b>Options as SelectItems</b></p>
@@ -167,9 +167,11 @@ const cities = [
                         <CodeHighlight className="language-jsx">
                             {`
 <Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
+<Dropdown optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
 
 `}
                         </CodeHighlight>
+                        <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
                         <h3>Placeholder</h3>
                         <p>Common pattern is providing an empty option as the placeholder when using native selects, however Dropdown has built-in support using the placeholder option so it is suggested to use it instead of creating an empty option.</p>
@@ -249,7 +251,13 @@ carTemplate(option) {
                                         <td>optionLabel</td>
                                         <td>string</td>
                                         <td>null</td>
-                                        <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
+                                        <td>Name of the label field of an option when arbitrary objects are used as options instead of SelectItems.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionValue</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                                     </tr>
                                     <tr>
                                         <td>itemTemplate</td>
@@ -593,16 +601,16 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name"/>
+                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name"  style={{width: '12em'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}
+                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}  style={{width: '12em'}}
                               editable={true} placeholder="Select a Brand"/>
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}
+                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width: '12em'}}
                               filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>

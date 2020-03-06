@@ -15,6 +15,7 @@ export class Dropdown extends Component {
         value: null,
         options: null,
         optionLabel: null,
+        optionValue: null,
         itemTemplate: null,
         style: null,
         className: null,
@@ -50,6 +51,7 @@ export class Dropdown extends Component {
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
+        optionValue: PropTypes.string,
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -408,15 +410,17 @@ export class Dropdown extends Component {
 
         if(currentSelectedOption !== event.option) {
             this.updateEditableLabel(event.option);
+            const optionValue = this.getOptionValue(event.option);
+            
             this.props.onChange({
                 originalEvent: event.originalEvent,
-                value: this.props.optionLabel ? event.option : event.option.value || event.option,
+                value: optionValue,
                 stopPropagation : () =>{},
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
                     id: this.props.id,
-                    value : this.props.optionLabel ? event.option : event.option.value,
+                    value: optionValue
                 }
             });
         }
@@ -424,10 +428,10 @@ export class Dropdown extends Component {
 
     findOptionIndex(value) {
         let index = -1;
-        if(this.props.options) {
-            for(let i = 0; i < this.props.options.length; i++) {
-                let optionValue = this.props.optionLabel ? this.props.options[i] : this.props.options[i].value || this.props.options[i];
-                if((value === null && optionValue == null) || ObjectUtils.equals(value, optionValue, this.props.dataKey)) {
+        if (this.props.options) {
+            for (let i = 0; i < this.props.options.length; i++) {
+                let optionValue = this.getOptionValue(this.props.options[i]);
+                if ((value === null && optionValue == null) || ObjectUtils.equals(value, optionValue, this.props.dataKey)) {
                     index = i;
                     break;
                 }
@@ -621,6 +625,10 @@ export class Dropdown extends Component {
 
     getOptionLabel(option) {
         return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label || option;
+    }
+
+    getOptionValue(option) {
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option.value || option;
     }
 
     getOptionKey(option) {
