@@ -1132,7 +1132,9 @@ export class DataTable extends Component {
                     }
                 }
 
-
+                if (!col.props.excludeGlobalFilter && this.props.globalFilter && !globalMatch) {
+                    globalMatch = FilterUtils['contains'](ObjectUtils.resolveFieldData(value[i], columnField), this.props.globalFilter);
+                }
             }
 
             let matches = localMatch;

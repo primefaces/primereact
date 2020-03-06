@@ -128,7 +128,7 @@ export class DataTableDemo extends Component {
     renderRepresentativeFilter() {
         return (
             <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives}
-                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" />
+                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
         );
     }
 
@@ -144,7 +144,7 @@ export class DataTableDemo extends Component {
     }
 
     onRepresentativeFilterChange(event) {
-        this.dt.filter(event.value, 'representative', 'in');
+        this.dt.filter(event.value, 'representative.name', 'in');
         this.setState({selectedRepresentatives: event.value});
     }
 
@@ -231,14 +231,14 @@ export class DataTableDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable ref={(el) => this.dt = el} value={this.state.customers}
-                        header={header} responsive className="p-datatable-customers" dataKey="id" rowHover
+                        header={header} responsive className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
                         selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
                         paginator rows={10} emptyMessage="No customers found"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
                         <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                        <Column field="representative" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
+                        <Column sortField="representative.name" filterField="representative.name" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
                         <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
                         <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
                         <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
@@ -2931,7 +2931,7 @@ export class DataTableDemo extends Component {
     renderRepresentativeFilter() {
         return (
             <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives}
-                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" />
+                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
         );
     }
 
@@ -2947,7 +2947,7 @@ export class DataTableDemo extends Component {
     }
 
     onRepresentativeFilterChange(event) {
-        this.dt.filter(event.value, 'representative', 'in');
+        this.dt.filter(event.value, 'representative.name', 'in');
         this.setState({selectedRepresentatives: event.value});
     }
 
@@ -3032,14 +3032,14 @@ export class DataTableDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable ref={(el) => this.dt = el} value={this.state.customers}
-                        header={header} responsive className="p-datatable-customers" dataKey="id" rowHover
+                        header={header} responsive className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
                         selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
                         paginator rows={10} emptyMessage="No customers found"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
                         <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                        <Column field="representative" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
+                        <Column sortField="representative.name" filterField="representative.name" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
                         <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
                         <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
                         <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
