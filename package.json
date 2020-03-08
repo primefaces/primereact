@@ -1,7 +1,7 @@
 {
   "name": "primereact",
   "version": "4.1.0-SNAPSHOT",
-  "homepage": "/primereact",
+  "homepage": "/primereact/showcase",
   "repository": {
     "type": "git",
     "url": "https://github.com/primefaces/primereact.git"
