@@ -2664,7 +2664,7 @@ export class DataTableStateDemo extends Component {
             </TabPanel>
 
             <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datalist" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datatable" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
                     <span>View on GitHub</span>
                 </a>
 
