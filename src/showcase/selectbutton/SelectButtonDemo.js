@@ -130,6 +130,58 @@ const cities = [
 `}
 </CodeHighlight>
 
+            <h3>SelectItem API</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>label</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Label of the option.</td>
+                        </tr>
+                        <tr>
+                            <td>value</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Value of the option.</td>
+                        </tr>
+                        <tr>
+                            <td>className</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>ClassName of the option.</td>
+                        </tr>
+                        <tr>
+                            <td>icon</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Icon of the option. (Not supported)</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Tooltip text of the option. (Not supported)</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the option is disabled or not. (Not supported)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
