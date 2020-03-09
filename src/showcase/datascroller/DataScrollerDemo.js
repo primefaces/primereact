@@ -26,26 +26,15 @@ export class DataScrollerDemo extends Component {
             return;
         }
 
-        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
-
         return (
-            <div className="p-grid car-item">
-                <div className="p-col-12 p-md-3">
-                    <img src={src} alt="Car" />
-                </div>
-                <div className="p-col-12 p-md-9">
+            <div className="car-details">
+                <div>
+                    <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
                     <div className="p-grid">
-                        <div className="p-col-2 p-sm-6">Vin: </div>
-                        <div className="p-col-10 p-sm-6">{car.vin}</div>
-
-                        <div className="p-col-2 p-sm-6">Year: </div>
-                        <div className="p-col-10 p-sm-6">{car.year}</div>
-
-                        <div className="p-col-2 p-sm-6">Brand: </div>
-                        <div className="p-col-10 p-sm-6">{car.brand}</div>
-
-                        <div className="p-col-2 p-sm-6">Color: </div>
-                        <div className="p-col-10 p-sm-6">{car.color}</div>
+                        <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                        <div className="p-col-12">Year: <b>{car.year}</b></div>
+                        <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                        <div className="p-col-12">Color: <b>{car.color}</b></div>
                     </div>
                 </div>
             </div>
@@ -54,7 +43,7 @@ export class DataScrollerDemo extends Component {
 
     render() {
         return (
-            <div className="datascroll-demo">
+            <div className="dataview-demo">
                 <DataScrollerSubmenu />
 
                 <div className="content-section introduction">
@@ -347,26 +336,15 @@ export class DataScrollerDemo extends Component {
             return;
         }
 
-        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
-
         return (
-            <div className="p-grid car-item">
-                <div className="p-col-12 p-md-3">
-                    <img src={src} alt="Car" />
-                </div>
-                <div className="p-col-12 p-md-9">
+            <div className="car-details">
+                <div>
+                    <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand}/>
                     <div className="p-grid">
-                        <div className="p-col-2 p-sm-6">Vin: </div>
-                        <div className="p-col-10 p-sm-6">{car.vin}</div>
-
-                        <div className="p-col-2 p-sm-6">Year: </div>
-                        <div className="p-col-10 p-sm-6">{car.year}</div>
-
-                        <div className="p-col-2 p-sm-6">Brand: </div>
-                        <div className="p-col-10 p-sm-6">{car.brand}</div>
-
-                        <div className="p-col-2 p-sm-6">Color: </div>
-                        <div className="p-col-10 p-sm-6">{car.color}</div>
+                        <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                        <div className="p-col-12">Year: <b>{car.year}</b></div>
+                        <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                        <div className="p-col-12">Color: <b>{car.color}</b></div>
                     </div>
                 </div>
             </div>
@@ -375,7 +353,7 @@ export class DataScrollerDemo extends Component {
 
     render() {
         return (
-            <div className="datascroll-demo">
+            <div className="dataview-demo">
                 <DataScrollerSubmenu />
 
                 <div className="content-section introduction">

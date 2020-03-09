@@ -23,9 +23,9 @@ export class OverlayPanelDemo extends Component {
                 </div>
 
                 <div className="content-section implementation" aria-controls="overlay_panel" aria-haspopup={true}>
-                    <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)} />
+                    <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)}/>
 
-                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel">
+                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel" showCloseIcon={true} >
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
@@ -246,7 +246,7 @@ export class OverlayPanelDemo extends Component {
                 <div className="content-section implementation">
                     <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)} aria-controls="overlay_panel" aria-haspopup={true}/>
 
-                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel">
+                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel" showCloseIcon={true} >
                         <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
