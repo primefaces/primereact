@@ -28,7 +28,7 @@ export class CurrentPageReport extends Component {
             .replace("{first}", this.props.first + 1)
             .replace("{last}", this.props.first + this.props.rows)
             .replace("{rows}", this.props.rows)
-            .replace("{totalRecords}", this.props.pageCount);
+            .replace("{totalRecords}", this.props.totalRecords);
             
         return <span className="p-paginator-current">{text}</span>
     }

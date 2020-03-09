@@ -23,10 +23,10 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     render() {
-        let paginatorLeft = <Button icon="pi pi-refresh"/>;
-        let paginatorRight = <Button icon="pi pi-cloud-upload"/>;
+        const paginatorLeft = <Button icon="pi pi-refresh"/>;
+
         return (
-            <div>
+            <div className="datatable-paginator-demo">
                 <DataTableSubmenu />
 
                 <div className="content-section introduction">
@@ -41,7 +41,9 @@ export class DataTablePaginatorDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} rows={10} rowsPerPageOptions={[5,10,20]} >
+                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft}  
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -88,19 +90,25 @@ export class DataTablePaginatorDemo extends Component {
     }
 
     render() {
-        let paginatorLeft = <Button icon="pi pi-refresh"/>;
-        let paginatorRight = <Button icon="pi pi-cloud-upload"/>;
+        const paginatorLeft = <Button icon="pi pi-refresh"/>;
+
         return (
-            <div>
+            <div className="datatable-paginator-demo">
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Paginator</h1>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} rows={10} rowsPerPageOptions={[5,10,20]}>
+                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft}  
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />

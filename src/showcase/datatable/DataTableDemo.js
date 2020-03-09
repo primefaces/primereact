@@ -233,7 +233,7 @@ export class DataTableDemo extends Component {
                     <DataTable ref={(el) => this.dt = el} value={this.state.customers}
                         header={header} responsive className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
                         selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
-                        paginator rows={10} emptyMessage="No customers found"
+                        paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
@@ -3036,7 +3036,7 @@ export class DataTableDemo extends Component {
                     <DataTable ref={(el) => this.dt = el} value={this.state.customers}
                         header={header} responsive className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
                         selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
-                        paginator rows={10} emptyMessage="No customers found"
+                        paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
                         <Column selectionMode="multiple" style={{width:'3em'}}/>
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />

@@ -713,6 +713,12 @@
             }
         }
 
+        .datatable-paginator-demo {
+            .p-paginator-current {
+                float: right
+            }
+        }
+
         .lightbox-demo {
             .p-lightbox-image-target {
                 margin-right: .5em;
