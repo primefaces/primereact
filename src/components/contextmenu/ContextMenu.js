@@ -125,7 +125,7 @@ class ContextMenuSub extends Component {
     }
 
     renderSubmenu(item) {
-        if(item.items) {
+        if (item.items) {
             return (
                 <ContextMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} />
             );
@@ -225,16 +225,12 @@ export class ContextMenu extends Component {
     }
 
     componentDidMount() {
-        this.bindDocumentClickListener();
-
         if (this.props.global) {
             this.bindDocumentContextMenuListener();
         }
     }
 
     onMenuClick() {
-        this.selfClick = true;
-
         this.setState({
             resetMenu: false
         });
@@ -254,6 +250,7 @@ export class ContextMenu extends Component {
         }
         DomHandler.fadeIn(this.container, 250);
 
+        this.bindDocumentClickListener();
         this.bindDocumentResizeListener();
 
         if (this.props.onShow) {
@@ -274,10 +271,11 @@ export class ContextMenu extends Component {
         }
 
         this.unbindDocumentResizeListener();
+        this.unbindDocumentClickListener();
     }
 
     position(event) {
-        if(event) {
+        if (event) {
             let left = event.pageX + 1;
             let top = event.pageY + 1;
             let width = this.container.offsetParent ? this.container.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.container);
@@ -285,22 +283,22 @@ export class ContextMenu extends Component {
             let viewport = DomHandler.getViewport();
 
             //flip
-            if(left + width - document.body.scrollLeft > viewport.width) {
+            if (left + width - document.body.scrollLeft > viewport.width) {
                 left -= width;
             }
 
             //flip
-            if(top + height - document.body.scrollTop > viewport.height) {
+            if (top + height - document.body.scrollTop > viewport.height) {
                 top -= height;
             }
 
             //fit
-            if(left < document.body.scrollLeft) {
+            if (left < document.body.scrollLeft) {
                 left = document.body.scrollLeft;
             }
 
             //fit
-            if(top < document.body.scrollTop) {
+            if (top < document.body.scrollTop) {
                 top = document.body.scrollTop;
             }
 
@@ -314,21 +312,25 @@ export class ContextMenu extends Component {
             resetMenu: true
         });
 
+        this.hide(event);
+
         event.stopPropagation();
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.selfClick && event.button !== 2) {
+                if (this.isOutsideClicked(event) && event.button !== 2) {
                     this.hide(event);
 
                     this.setState({
                         resetMenu: true
                     });
                 }
-
-                this.selfClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -348,7 +350,7 @@ export class ContextMenu extends Component {
     bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if(this.container.offsetParent) {
+                if (this.container.offsetParent) {
                     this.hide(event);
                 }
             };
@@ -358,21 +360,21 @@ export class ContextMenu extends Component {
     }
 
     unbindDocumentClickListener() {
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
     }
 
     unbindDocumentContextMenuListener() {
-        if(this.documentContextMenuListener) {
+        if (this.documentContextMenuListener) {
             document.removeEventListener('contextmenu', this.documentContextMenuListener);
             this.documentContextMenuListener = null;
         }
     }
 
     unbindDocumentResizeListener() {
-        if(this.documentResizeListener) {
+        if (this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
         }
