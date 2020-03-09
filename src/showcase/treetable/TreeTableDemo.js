@@ -2252,7 +2252,9 @@ export class TreeTableResponsiveDemo extends Component {
                                         <td>currentPageReportTemplate</td>
                                         <td>string</td>
                                         <td>(&123;currentPage&125; of &123;totalPages&125;)</td>
-                                        <td>Template of the current page report element.</td>
+                                        <td>Template of the current page report element. Available placeholders are
+                                        &123;currentPage&125;,&123;totalPages&125;,&123;rows&125;,&123;first&125;,&123;last&125; and &123;totalRecords&125;
+                                    </td>
                                     </tr>
                                     <tr>
                                         <td>first</td>

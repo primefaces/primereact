@@ -186,7 +186,9 @@ export class Paginator extends Component {
                     break;
 
                     case 'CurrentPageReport':
-                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key} page={this.getPage()} pageCount={this.getPageCount()} />;
+                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key} 
+                                page={this.getPage()} pageCount={this.getPageCount()} first={this.props.first}
+                                rows={this.props.rows} totalRecords={this.props.totalRecords} />;
                     break;
 
                     default:
