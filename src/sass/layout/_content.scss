@@ -608,33 +608,31 @@
 
         /* Demos */
         .dataview-demo {
-            .p-dataview {
-                .car-details {
-                    @include flex();
-                    justify-content: space-between;
+            .car-details {
+                @include flex();
+                justify-content: space-between;
+                align-items: center;
+                padding: 2em;
+                border-bottom: 1px solid #d9dad9;
+
+                & > div {
+                    display: flex;
                     align-items: center;
-                    padding: 2em;
-                    border-bottom: 1px solid #d9dad9;
 
-                    & > div {
-                        display: flex;
-                        align-items: center;
-
-                        img {
-                            margin-right: 14px;
-                        }
+                    img {
+                        margin-right: 14px;
                     }
                 }
+            }
 
-                .car-detail {
-                    padding: 0 1em 1em 1em;
-                    border-bottom: 1px solid #d9dad9;
-                    margin: 1em;
-                }
+            .car-detail {
+                padding: 0 1em 1em 1em;
+                border-bottom: 1px solid #d9dad9;
+                margin: 1em;
+            }
 
-                .p-panel-content {
-                    padding: 1em;
-                }
+            .p-panel-content {
+                padding: 1em;
             }
         }
 
@@ -762,22 +760,6 @@
 
             .nested-grid .p-col-4 {
                 padding-bottom: 1em;
-            }
-        }
-
-        .datascroll-demo {
-            .car-item {
-                border-bottom: 1px solid #D5D5D5;
-                margin: 0;
-                padding: 1em;
-            }
-
-            .car-item .p-md-3 {
-                text-align: center;
-            }
-
-            .car-item .p-col-10 {
-                font-weight: bold;
             }
         }
 
