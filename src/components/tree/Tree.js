@@ -83,7 +83,7 @@ export class Tree extends Component {
                 filter: ''
             };
         }
-        
+
         this.isNodeLeaf = this.isNodeLeaf.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.onDragStart = this.onDragStart.bind(this);
@@ -132,7 +132,7 @@ export class Tree extends Component {
             let dragNodeParent = this.findNode(value, dragPaths);
             let dragNode = dragNodeParent ? dragNodeParent.children[this.dragState.index] : value[this.dragState.index];
             let dropNode = this.findNode(value, event.path.split('-'));
-            
+
             if (dropNode.children)
                 dropNode.children.push(dragNode);
             else
@@ -183,7 +183,7 @@ export class Tree extends Component {
                 else
                     value.push(dragNode);
             }
-            
+
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
@@ -197,7 +197,7 @@ export class Tree extends Component {
         if (!dragPath) {
             return false;
         }
-        else {   
+        else {
             //same node
             if (dragPath === dropPath) {
                 return false;
@@ -305,7 +305,7 @@ export class Tree extends Component {
                 }
             }
         }
-        
+
         this.filterChanged = false;
     }
 
@@ -323,7 +323,7 @@ export class Tree extends Component {
                     }
                 }
             }
-            
+
             if (matched) {
                 return true;
             }
@@ -348,7 +348,7 @@ export class Tree extends Component {
 
     renderRootChild(node, index, last) {
         return (
-            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} disabled={this.props.disabled} selectionMode={this.props.selectionMode} 
+            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} disabled={this.props.disabled} selectionMode={this.props.selectionMode}
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
@@ -360,6 +360,7 @@ export class Tree extends Component {
 
     renderRootChildren() {
         if (this.props.filter) {
+            this.filterChanged = true;
             this.filter();
         }
 
@@ -384,7 +385,7 @@ export class Tree extends Component {
             return null;
         }
     }
-    
+
     renderLoader() {
         if (this.props.loading) {
             let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
@@ -418,7 +419,7 @@ export class Tree extends Component {
 
     render() {
         const className = classNames('p-tree p-component', this.props.className, {
-            'p-tree-selectable': this.props.selectionMode, 
+            'p-tree-selectable': this.props.selectionMode,
             'p-tree-loading': this.props.loading,
             'p-disabled': this.props.disabled
         });
