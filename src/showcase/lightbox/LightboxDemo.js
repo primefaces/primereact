@@ -39,7 +39,7 @@ export class LightboxDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Lightbox</h1>
+                        <h1>Lightbox - (Deprecated in favor of Galleria)</h1>
                         <p>LightBox is a modal overlay component to display images, videos and inline content.</p>
 
                         <AppContentContext.Consumer>
