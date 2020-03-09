@@ -38,7 +38,7 @@ export class DropdownItem extends Component {
     }
 
     render() {
-        let className = classNames('p-dropdown-item', {
+        let className = classNames(this.props.option.className, 'p-dropdown-item', {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)

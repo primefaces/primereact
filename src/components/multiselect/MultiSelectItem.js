@@ -51,7 +51,7 @@ export class MultiSelectItem extends Component {
     }
 
     render() {
-        const className = classNames('p-multiselect-item', {'p-highlight': this.props.selected});
+        const className = classNames(this.props.option.className, 'p-multiselect-item', {'p-highlight': this.props.selected});
         const checkboxClassName = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected});
         const checkboxIcon = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.selected});
         const content = this.props.template ? this.props.template(this.props.option) : this.props.label;
