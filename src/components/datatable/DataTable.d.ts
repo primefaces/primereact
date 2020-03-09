@@ -28,7 +28,7 @@ interface DataTableProps {
     sortMode?: string;
     defaultSortOrder?: number;
     removableSort?: boolean;
-    emptyMessage?: string;
+    emptyMessage?: any;
     selectionMode?: string;
     selection?: any;
     contextMenuSelection?: any;
