@@ -2129,7 +2129,7 @@ export class DataTableStateDemo extends Component {
                         </tr>
                         <tr>
                             <td>emptyMessage</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>No records found</td>
                             <td>Text to display when there is no data.</td>
                         </tr>

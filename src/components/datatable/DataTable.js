@@ -135,7 +135,7 @@ export class DataTable extends Component {
         sortMode: PropTypes.string,
         defaultSortOrder: PropTypes.number,
         removableSort: PropTypes.bool,
-        emptyMessage: PropTypes.string,
+        emptyMessage: PropTypes.any,
         selectionMode: PropTypes.string,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
@@ -1233,9 +1233,9 @@ export class DataTable extends Component {
                           </TableHeader>;
     }
 
-    createTableBody(value, columns) {
+    createTableBody(value, columns, frozen) {
         return <TableBody value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozenSelectionMode={this.frozenSelectionMode}
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
@@ -1267,7 +1267,7 @@ export class DataTable extends Component {
 
     createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
         return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)}
-                body={this.createTableBody(value, columns)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns): null}
+                body={this.createTableBody(value, columns, frozen)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns, true): null}
                 footer={this.createTableFooter(columns, footerColumnGroup)} tableStyle={this.props.tableStyle} tableClassName={this.props.tableClassName}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
@@ -1419,7 +1419,7 @@ export class DataTable extends Component {
             }
             else {
                 let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
-                let tableBody = this.createTableBody(value, columns);
+                let tableBody = this.createTableBody(value, columns, false);
                 let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
                 tableContent = <div className="p-datatable-wrapper">

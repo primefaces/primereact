@@ -571,7 +571,16 @@ export class TableBody extends Component {
             }
         }
         else {
-            rows = !this.props.loading && this.props.emptyMessage ? <tr className="p-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr> : null;
+            let emptyMessage = this.props.emptyMessage;
+
+            rows = !this.props.loading && emptyMessage ?
+                <tr className="p-datatable-emptymessage">
+                    <td colSpan={this.props.children.length}>
+                        {
+                            (typeof emptyMessage === 'function') ? emptyMessage(this.props.frozen) : emptyMessage
+                        }
+                        </td>
+                </tr> : null;
         }
 
         return (
