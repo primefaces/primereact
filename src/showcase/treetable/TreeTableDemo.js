@@ -817,6 +817,12 @@ export class TreeTableDemo extends Component {
                                         <td>null</td>
                                         <td>Validator function to validate the cell input value.</td>
                                     </tr>
+                                    <tr>
+                                        <td>reorderable</td>
+                                        <td>boolean</td>
+                                        <td>null</td>
+                                        <td>Used to defined reorderableColumns per column when reorderableColumns of table is enabled, defaults to value of reorderableColumns.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
