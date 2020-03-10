@@ -10,17 +10,33 @@ export class SelectButtonDemo extends Component {
         super(props);
         this.state = {
             value1: null,
-            value2: ['Apartment', 'Studio']
+            value2: ['Apartment', 'Studio'],
+            value3: null,
+            options: [
+                {label: 'Apartment', value: 'Apartment'},
+                {label: 'House', value: 'House'},
+                {label: 'Studio', value: 'Studio'}
+            ],
+            cars: [
+				{brand: 'Audi', key: 'A'},
+				{brand: 'BMW', key: 'B'},
+				{brand: 'Mercedes', key: 'M'}
+			]
         };
     }
 
-    render() {
-        const options = [
-            {label: 'Apartment', value: 'Apartment'},
-            {label: 'House', value: 'House'},
-            {label: 'Studio', value: 'Studio'}
-        ];
+    carTemplate(option) {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
 
+        return (
+            <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
+                <img alt={option.brand} src={logoPath} style={{width: '48px'}} />
+                <div style={{marginTop: '1em'}}>{option.brand}</div>
+            </div>
+        )
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -36,14 +52,19 @@ export class SelectButtonDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Single</h3>
-                    <SelectButton value={this.state.value1} options={options} onChange={(e) => this.setState({value1: e.value})} />
+                    <SelectButton value={this.state.value1} options={this.state.options} onChange={(e) => this.setState({value1: e.value})} />
                     <br />
                     <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value1}</span></p>
 
                     <h3>Multiple</h3>
-                    <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(e) => this.setState({value2: e.value})} />
+                    <SelectButton value={this.state.value2} multiple={true} options={this.state.options} onChange={(e) => this.setState({value2: e.value})} />
                     <br />
                     <p>Selected Values: <span style={{fontWeight: 'bold'}}>{this.state.value2 && this.state.value2.map((val) => val + " ")}</span></p>
+
+                    <h3>Custom Content</h3>
+                    <SelectButton value={this.state.value3} options={this.state.cars} onChange={(e) => this.setState({value3: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
+                    <br />
+                    <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value3}</span></p>
                 </div>
 
                 <SelectButtonDoc></SelectButtonDoc>
@@ -122,13 +143,34 @@ const cities = [
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
             <h3>Multiple</h3>
-            <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.</p>
+            <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array. Notice
+            the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list key.</p>
+            
 <CodeHighlight className="language-jsx">
 {`
-<SelectButton value={this.state.values} options={options} onChange={(e) => this.setState({values: e.value})}></SelectButton>
+<SelectButton value={this.state.value3} options={this.state.cars} onChange={(e) => this.setState({value3: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
 
 `}
 </CodeHighlight>
+
+<CodeHighlight className="language-javascript">
+{`
+carTemplate(option) {
+    const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
+
+    return (
+        <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
+            <img alt={option.brand} src={logoPath} style={{width: '48px'}} />
+            <div style={{marginTop: '1em'}}>{option.brand}</div>
+        </div>
+    )
+}
+
+`}
+</CodeHighlight>
+
+            <h3>Custom Content</h3>
+            <p>Options support templating using the <i>itemTemplate</i> property that references a function to render the content.</p>
 
             <h3>SelectItem API</h3>
             <div className="doc-tablewrapper">
@@ -278,6 +320,12 @@ const cities = [
                             <td>null</td>
                             <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                         </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that gets the option and returns the content.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -314,7 +362,7 @@ const cities = [
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {SelectButton} from 'primereact/selectbutton';
+import {SelectButton} from '../../components/selectbutton/SelectButton';
 
 export class SelectButtonDemo extends Component {
 
@@ -322,17 +370,33 @@ export class SelectButtonDemo extends Component {
         super(props);
         this.state = {
             value1: null,
-            value2: null
+            value2: ['Apartment', 'Studio'],
+            value3: null,
+            options: [
+                {label: 'Apartment', value: 'Apartment'},
+                {label: 'House', value: 'House'},
+                {label: 'Studio', value: 'Studio'}
+            ],
+            cars: [
+				{brand: 'Audi', key: 'A'},
+				{brand: 'BMW', key: 'B'},
+				{brand: 'Mercedes', key: 'M'}
+			]
         };
     }
 
-    render() {
-        const options = [
-            {label: 'Apartment', value: 'Apartment'},
-            {label: 'House', value: 'House'},
-            {label: 'Studio', value: 'Studio'}
-        ];
+    carTemplate(option) {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
 
+        return (
+            <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
+                <img alt={option.brand} src={logoPath} style={{width: '48px'}} />
+                <div style={{marginTop: '1em'}}>{option.brand}</div>
+            </div>
+        )
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -344,14 +408,19 @@ export class SelectButtonDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Single</h3>
-                    <SelectButton value={this.state.value1} options={options} onChange={(e) => this.setState({value1: e.value})} />
+                    <SelectButton value={this.state.value1} options={this.state.options} onChange={(e) => this.setState({value1: e.value})} />
                     <br />
                     <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value1}</span></p>
 
                     <h3>Multiple</h3>
-                    <SelectButton value={this.state.value2} multiple={true} options={options} onChange={(e) => this.setState({value2: e.value})} />
+                    <SelectButton value={this.state.value2} multiple={true} options={this.state.options} onChange={(e) => this.setState({value2: e.value})} />
                     <br />
                     <p>Selected Values: <span style={{fontWeight: 'bold'}}>{this.state.value2 && this.state.value2.map((val) => val + " ")}</span></p>
+
+                    <h3>Custom Content</h3>
+                    <SelectButton value={this.state.value3} options={this.state.cars} onChange={(e) => this.setState({value3: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
+                    <br />
+                    <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value3}</span></p>
                 </div>
             </div>
         );

@@ -22,6 +22,7 @@ export class SelectButton extends Component {
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
+        itemTemplate: null,
         onChange: null
     };
 
@@ -40,6 +41,7 @@ export class SelectButton extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
+        itemTemplate: PropTypes.func,
         onChange: PropTypes.func
     };
 
@@ -152,7 +154,7 @@ export class SelectButton extends Component {
             return this.props.options.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
 
-                return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick}
+                return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
                             selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy}/>;
             });
         }

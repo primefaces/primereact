@@ -10,7 +10,8 @@ export class SelectButtonItem extends Component {
         className: null,
         selected: null,
         tabIndex: null,
-        ariaLabelledBy:null,
+        ariaLabelledBy: null,
+        template: null,
         onClick: null
     };
 
@@ -21,6 +22,7 @@ export class SelectButtonItem extends Component {
         selected: PropTypes.bool,
         tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
+        template: PropTypes.func,
         onClick: PropTypes.func
     };
 
@@ -63,16 +65,28 @@ export class SelectButtonItem extends Component {
         this.input.checked = this.props.selected;
     }
 
+    renderContent() {
+        if (this.props.template) {
+            return this.props.template(this.props.option);
+        }
+        else {
+            return (
+                <span className="p-button-text p-c">{this.props.label}</span>
+            );
+        }
+    }
+
     render() {
-        let className = classNames(this.props.option.className, 'p-button p-component p-button-text-only', this.props.className, {
+        const className = classNames(this.props.option.className, 'p-button p-component p-button-text-only', this.props.className, {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
         });
+        const content = this.renderContent();
 
         return (
             <div ref={(el) => this.el = el} className={className} onClick={this.onClick} role="button" aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}>
-                <span className="p-button-text p-c">{this.props.label}</span>
+                {content}
                 <div className="p-hidden-accessible">
                     <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
                         tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
