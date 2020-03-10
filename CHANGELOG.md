@@ -1,5 +1,54 @@
 # Changelog
 
+## [4.1.0](https://github.com/primefaces/primereact/tree/4.1.0) (2020-03-10)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.0.0...4.1.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add reorderable to Column [\#1246](https://github.com/primefaces/primereact/issues/1246)
+- Implement filterBy and filterMatchMode for ListBox [\#1245](https://github.com/primefaces/primereact/issues/1245)
+- Implement filterBy and filterMatchMode for MultiSelect [\#1244](https://github.com/primefaces/primereact/issues/1244)
+- Add filterPlaceholder to MultiSelect [\#1242](https://github.com/primefaces/primereact/issues/1242)
+- Deprecate icon of SelectItem API [\#1239](https://github.com/primefaces/primereact/issues/1239)
+- Templating support to SelectButton [\#1238](https://github.com/primefaces/primereact/issues/1238)
+- Document SelectItem [\#1237](https://github.com/primefaces/primereact/issues/1237)
+- Change the type of emptyMessage property on DataTable [\#1236](https://github.com/primefaces/primereact/issues/1236)
+- Deprecate Lightbox [\#1235](https://github.com/primefaces/primereact/issues/1235)
+- Add optionValue to Select components [\#1230](https://github.com/primefaces/primereact/issues/1230)
+- Placeholder colors are not same [\#1229](https://github.com/primefaces/primereact/issues/1229)
+- Primitive values support in Select components [\#1228](https://github.com/primefaces/primereact/issues/1228)
+- Add filterHeaderStyle and filterHeaderClassName to Column [\#1227](https://github.com/primefaces/primereact/issues/1227)
+- Add rowHover to DataTable [\#1226](https://github.com/primefaces/primereact/issues/1226)
+- New options for CurrentPageReport [\#1225](https://github.com/primefaces/primereact/issues/1225)
+- New DataTable Customer Demo [\#1224](https://github.com/primefaces/primereact/issues/1224)
+- New filtering modes for Table [\#1223](https://github.com/primefaces/primereact/issues/1223)
+- Accents support in Table filtering [\#1222](https://github.com/primefaces/primereact/issues/1222)
+- Add filterField to column [\#1221](https://github.com/primefaces/primereact/issues/1221)
+- Move column filters to their own row [\#1220](https://github.com/primefaces/primereact/issues/1220)
+- Time support for min date or max date in calendar component [\#1217](https://github.com/primefaces/primereact/issues/1217)
+- Add filterPlaceholder to Listbox [\#1215](https://github.com/primefaces/primereact/issues/1215)
+- Improve style of p-link component [\#1213](https://github.com/primefaces/primereact/issues/1213)
+- Implement className in MultiSelect, Dropdown, SelectButton, ListBox options [\#1175](https://github.com/primefaces/primereact/issues/1175)
+- Allow Dialogs already maximized  [\#1170](https://github.com/primefaces/primereact/issues/1170)
+- Implement filterBy and filterMatchMode for Dropdown [\#1149](https://github.com/primefaces/primereact/issues/1149)
+- Change the type of the 'header' property on TabPanel [\#1079](https://github.com/primefaces/primereact/issues/1079)
+- DataTable Columns: Conditional reorder [\#1032](https://github.com/primefaces/primereact/issues/1032)
+- Datatable Columns: Conditional select [\#1031](https://github.com/primefaces/primereact/issues/1031)
+
+**Fixed bugs:**
+
+- Chips cover 100% although input is visually smaller [\#1241](https://github.com/primefaces/primereact/issues/1241)
+- Datatable doesn't change page when the last element on a page is removed. [\#1233](https://github.com/primefaces/primereact/issues/1233)
+- Filter does not work after adding a new node to the root node on Tree [\#1232](https://github.com/primefaces/primereact/issues/1232)
+- Clear Button does not clear the input value on Calendar [\#1231](https://github.com/primefaces/primereact/issues/1231)
+-  Remove tabIndex from the headers of the non-sortable dataTable. [\#1219](https://github.com/primefaces/primereact/issues/1219)
+- The virtualScroll height is always added to rows on DataTable [\#1218](https://github.com/primefaces/primereact/issues/1218)
+- ContextMenu hide/onHide triggers even though already hidden [\#1189](https://github.com/primefaces/primereact/issues/1189)
+- Tree does not support Font Awesome icons [\#1187](https://github.com/primefaces/primereact/issues/1187)
+- Reset filter textbox of dropdown if options changes [\#1179](https://github.com/primefaces/primereact/issues/1179)
+- Deadlock situation in range slider [\#1094](https://github.com/primefaces/primereact/issues/1094)
+
 ## [4.0.0](https://github.com/primefaces/primereact/tree/4.0.0) (2020-02-27)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/3.4.0...4.0.0)
@@ -52,7 +101,6 @@
 - InputTextarea does not render props like cols and rows [\#1127](https://github.com/primefaces/primereact/issues/1127)
 - PanelMenu Icon does not show for entries without sub children [\#1121](https://github.com/primefaces/primereact/issues/1121)
 - ContextMenu.d.ts has wrong property name [\#1118](https://github.com/primefaces/primereact/issues/1118)
-- Deadlock situation in range slider [\#1094](https://github.com/primefaces/primereact/issues/1094)
 - Dropdown cannot open the panel after double clicking an option [\#1053](https://github.com/primefaces/primereact/issues/1053)
 - InputMask is not changing the mask at runtime. [\#1021](https://github.com/primefaces/primereact/issues/1021)
 
@@ -1212,3 +1260,7 @@
 ## [1.0.0-alpha.1](https://github.com/primefaces/primereact/tree/1.0.0-alpha.1) (2017-03-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/2eb760f17382a3b3a47d70f6f6076e21f5c90cfb...1.0.0-alpha.1)
+
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
