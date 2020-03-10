@@ -1623,7 +1623,7 @@ export class DataTableRowExpansionDemo extends Component {
             <h3>Row Reorder</h3>
             <p>Data can be reordered using drag drop by adding a reorder column that will display an icon as a drag handle. <i>onRowReorder</i> is a callback that is invoked when a column is reordered, use
                 this callback to update the new order. The reorder icon can be customized using <i>rowReorderIcon</i> of the column component.</p>
-            <p>Tip: Use <i>showRowReorderElement</i> function in case you need to hide selection element for a particular row.
+            <p>Tip: Use <i>showRowReorderElement</i> function in case you need to hide selection element for a particular row.</p>
 
 <CodeHighlight className="language-jsx">
 {`
