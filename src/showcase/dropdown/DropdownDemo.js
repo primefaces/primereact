@@ -12,7 +12,25 @@ export class DropdownDemo extends Component {
         this.state = {
             city: null,
             car: null,
-            car2: 'BMW'
+            car2: 'BMW',
+            cities: [
+                {name: 'New York', code: 'NY'},
+                {name: 'Rome', code: 'RM'},
+                {name: 'London', code: 'LDN'},
+                {name: 'Istanbul', code: 'IST'},
+                {name: 'Paris', code: 'PRS'}
+            ],
+            cars: [
+                {label: 'Audi', value: 'Audi'},
+                {label: 'BMW', value: 'BMW'},
+                {label: 'Fiat', value: 'Fiat'},
+                {label: 'Honda', value: 'Honda'},
+                {label: 'Jaguar', value: 'Jaguar'},
+                {label: 'Mercedes', value: 'Mercedes'},
+                {label: 'Renault', value: 'Renault'},
+                {label: 'VW', value: 'VW'},
+                {label: 'Volvo', value: 'Volvo'}
+            ]
         };
 
         this.onCityChange = this.onCityChange.bind(this);
@@ -49,26 +67,6 @@ export class DropdownDemo extends Component {
     }
 
     render() {
-        const cities = [
-            {name: 'New York', code: 'NY'},
-            {name: 'Rome', code: 'RM'},
-            {name: 'London', code: 'LDN'},
-            {name: 'Istanbul', code: 'IST'},
-            {name: 'Paris', code: 'PRS'}
-        ];
-
-        const cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
         return (
             <div>
                 <div className="content-section introduction">
@@ -84,16 +82,16 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
+                    <Dropdown value={this.state.city} options={this.state.cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}  style={{width: '12em'}}
+                    <Dropdown value={this.state.car} options={this.state.cars} onChange={this.onCarChange}  style={{width: '12em'}}
                               editable={true} placeholder="Select a Brand" />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
+                    <Dropdown value={this.state.car2} options={this.state.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
                               filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
@@ -579,7 +577,25 @@ export class DropdownDemo extends Component {
         this.state = {
             city: null,
             car: null,
-            car2: 'BMW'
+            car2: 'BMW',
+            cities: [
+                {name: 'New York', code: 'NY'},
+                {name: 'Rome', code: 'RM'},
+                {name: 'London', code: 'LDN'},
+                {name: 'Istanbul', code: 'IST'},
+                {name: 'Paris', code: 'PRS'}
+            ],
+            cars: [
+                {label: 'Audi', value: 'Audi'},
+                {label: 'BMW', value: 'BMW'},
+                {label: 'Fiat', value: 'Fiat'},
+                {label: 'Honda', value: 'Honda'},
+                {label: 'Jaguar', value: 'Jaguar'},
+                {label: 'Mercedes', value: 'Mercedes'},
+                {label: 'Renault', value: 'Renault'},
+                {label: 'VW', value: 'VW'},
+                {label: 'Volvo', value: 'Volvo'}
+            ]
         };
 
         this.onCityChange = this.onCityChange.bind(this);
@@ -616,26 +632,6 @@ export class DropdownDemo extends Component {
     }
 
     render() {
-        const cities = [
-            {name: 'New York', code: 'NY'},
-            {name: 'Rome', code: 'RM'},
-            {name: 'London', code: 'LDN'},
-            {name: 'Istanbul', code: 'IST'},
-            {name: 'Paris', code: 'PRS'}
-        ];
-
-        const cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
         return (
             <div>
                 <div className="content-section introduction">
@@ -647,16 +643,16 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name"  style={{width: '12em'}}/>
+                    <Dropdown value={this.state.city} options={this.state.cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={cars} onChange={this.onCarChange}  style={{width: '12em'}}
-                              editable={true} placeholder="Select a Brand"/>
+                    <Dropdown value={this.state.car} options={this.state.cars} onChange={this.onCarChange}  style={{width: '12em'}}
+                              editable={true} placeholder="Select a Brand" />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{width: '12em'}}
+                    <Dropdown value={this.state.car2} options={this.state.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
                               filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>

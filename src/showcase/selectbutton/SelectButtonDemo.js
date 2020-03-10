@@ -356,7 +356,7 @@ carTemplate(option) {
 <CodeHighlight className="language-javascript">
 {`
 import React, {Component} from 'react';
-import {SelectButton} from '../../components/selectbutton/SelectButton';
+import {SelectButton} from 'primereact/selectbutton';
 
 export class SelectButtonDemo extends Component {
 
