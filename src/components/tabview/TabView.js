@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class TabPanel extends Component {
-    
+
     static defaultProps = {
         header: null,
         leftIcon: null,
@@ -17,7 +17,7 @@ export class TabPanel extends Component {
     }
 
     static propTypes = {
-        header: PropTypes.string,
+        header: PropTypes.any,
         leftIcon: PropTypes.string,
         rightIcon: PropTypes.string,
         disabled: PropTypes.bool,
@@ -26,7 +26,7 @@ export class TabPanel extends Component {
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string
     };
-    
+
 }
 
 export class TabView extends Component {
@@ -48,7 +48,7 @@ export class TabView extends Component {
         renderActiveOnly: PropTypes.bool,
         onTabChange: PropTypes.func
     };
-    
+
     constructor(props) {
         super(props);
         if (!this.props.onTabChange) {
@@ -65,7 +65,7 @@ export class TabView extends Component {
 
         return (activeIndex === index);
     }
-    
+
     onTabHeaderClick(event, tab, index) {
         if (!tab.props.disabled) {
             if (this.props.onTabChange) {
@@ -80,7 +80,7 @@ export class TabView extends Component {
 
         event.preventDefault();
     }
-             
+
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
         const className = classNames(tab.props.headerClassName, 'p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled});
@@ -105,17 +105,17 @@ export class TabView extends Component {
             })
         );
     }
-    
+
     renderNavigator() {
         const headers = this.renderTabHeaders();
-            
+
         return (
             <ul className="p-tabview-nav p-reset" role="tablist">
                 {headers}
             </ul>
         );
     }
-    
+
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
             if (!this.props.renderActiveOnly || this.isSelected(index)) {
@@ -148,7 +148,7 @@ export class TabView extends Component {
         const className = classNames('p-tabview p-component p-tabview-top', this.props.className)
         const navigator = this.renderNavigator();
         const content = this.renderContent();
-        
+
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {navigator}
