@@ -12,6 +12,7 @@ export class DataTableScrollDemo extends Component {
     constructor() {
         super();
         this.state = {
+            loading: true,
             cars: null,
             lazyCars: null,
             lazyTotalRecords: 0,
@@ -74,7 +75,8 @@ export class DataTableScrollDemo extends Component {
                 frozenCars: [
                     {"brand": "BMW", "year": 2013, "color": "Grey", "vin": "fh2uf23"},
                     {"brand": "Chevrolet", "year": 2011, "color": "Black", "vin": "4525g23"}
-                ]
+                ],
+                loading: false
             });
         });
     }
@@ -128,7 +130,7 @@ export class DataTableScrollDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                   <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px">
+                   <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -136,28 +138,28 @@ export class DataTableScrollDemo extends Component {
                     </DataTable>
 
                     <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
-                        rows={20} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} style={{marginTop:'30px'}}>
+                        rows={20} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} style={{marginTop:'30px'}} loading={this.state.loading}>
                         <Column field="vin" header="Vin" loadingBody={this.loadingText} />
                         <Column field="year" header="Year" loadingBody={this.loadingText} />
-                        <Column field="brand" header="Brand"loadingBody={this.loadingText} />
+                        <Column field="brand" header="Brand" loadingBody={this.loadingText} />
                         <Column field="color" header="Color" loadingBody={this.loadingText} />
                     </DataTable>
 
-                    <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
+                    <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={this.state.loading}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
 
-                    <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
+                    <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}} loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
 
-                    <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px" loading={this.state.loading}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
@@ -168,7 +170,8 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
 
-                    <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} 
+                        frozenWidth="200px" unfrozenWidth="600px" loading={this.state.loading}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
@@ -209,6 +212,7 @@ export class DataTableScrollDemo extends Component {
     constructor() {
         super();
         this.state = {
+            loading: true,
             cars: null,
             lazyCars: null,
             lazyTotalRecords: 0,
@@ -271,7 +275,8 @@ export class DataTableScrollDemo extends Component {
                 frozenCars: [
                     {"brand": "BMW", "year": 2013, "color": "Grey", "vin": "fh2uf23"},
                     {"brand": "Chevrolet", "year": 2011, "color": "Black", "vin": "4525g23"}
-                ]
+                ],
+                loading: true
             });
         });
     }
@@ -321,7 +326,7 @@ export class DataTableScrollDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                   <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px">
+                   <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
@@ -329,28 +334,28 @@ export class DataTableScrollDemo extends Component {
                     </DataTable>
 
                     <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
-                        rows={20} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} style={{marginTop:'30px'}}>
+                        rows={20} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} style={{marginTop:'30px'}} loading={this.state.loading}>
                         <Column field="vin" header="Vin" loadingBody={this.loadingText} />
                         <Column field="year" header="Year" loadingBody={this.loadingText} />
-                        <Column field="brand" header="Brand"loadingBody={this.loadingText} />
+                        <Column field="brand" header="Brand" loadingBody={this.loadingText} />
                         <Column field="color" header="Color" loadingBody={this.loadingText} />
                     </DataTable>
 
-                    <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}}>
+                    <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={this.state.loading}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
 
-                    <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
+                    <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}} loading={this.state.loading}>
                         <Column field="vin" header="Vin" />
                         <Column field="year" header="Year" />
                         <Column field="brand" header="Brand" />
                         <Column field="color" header="Color" />
                     </DataTable>
 
-                    <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px" loading={this.state.loading}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
@@ -361,7 +366,8 @@ export class DataTableScrollDemo extends Component {
                         <Column field="color" header="Color" style={{width:'250px'}} />
                     </DataTable>
 
-                    <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" unfrozenWidth="600px">
+                    <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} 
+                        frozenWidth="200px" unfrozenWidth="600px" loading={this.state.loading}>
                         <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
                         <Column field="year" header="Year" style={{width:'250px'}} />
                         <Column field="brand" header="Brand" style={{width:'250px'}} />
