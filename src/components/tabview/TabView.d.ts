@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface TabPanelProps {
-    header?: string;
+    header?: any;
     leftIcon?: string;
     rightIcon?: string;
     disabled?: boolean;
