@@ -155,7 +155,7 @@ import {TabView,TabPanel} from 'primereact/tabview';
                     <tbody>
                         <tr>
                             <td>header</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
                             <td>Orientation of tab headers.</td>
                         </tr>
