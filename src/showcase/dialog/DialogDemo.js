@@ -396,11 +396,11 @@ const myIcon = (
                             <td>Callback to invoke when dialog is showed.</td>
                         </tr>
                         <tr>
-                            <td>onMaximized</td>
+                            <td>onMaximize</td>
                             <td>event.originalEvent: Browser event  <br/>
                                 event.maximized: Whether to show the dialog or not on fullscreen.
                             </td>
-                            <td>Callback to invoke when maximizable icons are clicked.</td>
+                            <td>Callback to invoke when toggle maximize icon is clicked.</td>
                         </tr>
                     </tbody>
                 </table>

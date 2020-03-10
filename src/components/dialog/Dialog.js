@@ -34,7 +34,7 @@ export class Dialog extends Component {
         ariaCloseIconLabel: 'Close',
         focusOnShow: true,
         maximized: false,
-        onMaximized: null
+        onMaximize: null
     }
 
     static propTypes = {
@@ -63,7 +63,7 @@ export class Dialog extends Component {
         ariaCloseIconLabel: PropTypes.string,
         focusOnShow: PropTypes.bool,
         maximized: PropTypes.bool,
-        onMaximized: PropTypes.func
+        onMaximize: PropTypes.func
     };
 
     constructor(props) {
@@ -72,7 +72,7 @@ export class Dialog extends Component {
             maskVisible: props.visible
         };
 
-        if (!this.props.onMaximized) {
+        if (!this.props.onMaximize) {
             this.state.maximized = props.maximized;
         }
 
@@ -112,8 +112,8 @@ export class Dialog extends Component {
     toggleMaximize(event) {
         let maximized = !this.maximized;
 
-        if (this.props.onMaximized) {
-            this.props.onMaximized({
+        if (this.props.onMaximize) {
+            this.props.onMaximize({
                 originalEvent: event,
                 maximized
             });
@@ -139,7 +139,7 @@ export class Dialog extends Component {
     }
 
     get maximized() {
-        return this.props.onMaximized ? this.props.maximized : this.state.maximized;
+        return this.props.onMaximize ? this.props.maximized : this.state.maximized;
     }
 
     onEntered() {
@@ -271,7 +271,7 @@ export class Dialog extends Component {
             });
         }
 
-        if (prevProps.maximized !== this.props.maximized && this.props.onMaximized) {
+        if (prevProps.maximized !== this.props.maximized && this.props.onMaximize) {
             this.changeScrollOnMaximizable();
         }
     }
