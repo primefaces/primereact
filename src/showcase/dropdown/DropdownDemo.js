@@ -248,12 +248,6 @@ carTemplate(option) {
                                         <td>ClassName of the option.</td>
                                     </tr>
                                     <tr>
-                                        <td>icon</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Icon of the option. (Not supported)</td>
-                                    </tr>
-                                    <tr>
                                         <td>title</td>
                                         <td>string</td>
                                         <td>null</td>
