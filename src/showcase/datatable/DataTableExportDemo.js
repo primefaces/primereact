@@ -26,7 +26,7 @@ export class DataTableExportDemo extends Component {
     }
 
     render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        let header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
 
         return (
             <div>
