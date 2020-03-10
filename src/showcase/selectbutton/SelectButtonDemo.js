@@ -143,12 +143,15 @@ const cities = [
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
             <h3>Multiple</h3>
-            <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array. Notice
+            <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.</p>
+
+            <h3>Custom Content</h3>
+            <p>Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice
             the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list key.</p>
-            
+
 <CodeHighlight className="language-jsx">
 {`
-<SelectButton value={this.state.value3} options={this.state.cars} onChange={(e) => this.setState({value3: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
+<SelectButton value={this.state.value} options={this.state.cars} onChange={(e) => this.setState({value: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
 
 `}
 </CodeHighlight>
@@ -168,9 +171,6 @@ carTemplate(option) {
 
 `}
 </CodeHighlight>
-
-            <h3>Custom Content</h3>
-            <p>Options support templating using the <i>itemTemplate</i> property that references a function to render the content.</p>
 
             <h3>SelectItem API</h3>
             <div className="doc-tablewrapper">
