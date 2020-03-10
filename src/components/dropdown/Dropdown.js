@@ -614,7 +614,7 @@ export class Dropdown extends Component {
         if(this.props.filter) {
             return <div className="p-dropdown-filter-container">
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
+                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.state.filter} />
                         <span className="p-dropdown-filter-icon pi pi-search"></span>
                    </div>;
         }
@@ -682,6 +682,10 @@ export class Dropdown extends Component {
                 this.tooltip.updateContent(this.props.tooltip);
             else
                 this.renderTooltip();
+        }
+
+        if (this.state.filter && (!this.props.options || this.props.options.length === 0)) {
+            this.setState({filter: ''});
         }
 
         this.nativeSelect.selectedIndex = 1;
