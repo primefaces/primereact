@@ -176,7 +176,8 @@ const cities = [
 
                         <h3>Filtering</h3>
                         <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
-                            label of the SelectItem and <i>filterBy</i> property is available to choose one or more properties of the options.</p>
+                            label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
+                            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
@@ -343,7 +344,7 @@ carTemplate(option) {
                                         <td>filterMatchMode</td>
                                         <td>string</td>
                                         <td>contains</td>
-                                        <td>Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals" and "notEquals".</td>
+                                        <td>Defines how the items are filtered, valid values are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</td>
                                     </tr>
                                     <tr>
                                         <td>filterPlaceholder</td>

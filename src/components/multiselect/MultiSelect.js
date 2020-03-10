@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import FilterUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import { MultiSelectItem } from './MultiSelectItem';
@@ -23,6 +24,8 @@ export class MultiSelect extends Component {
         fixedPlaceholder: false,
         disabled: false,
         filter: false,
+        filterBy: null,
+        filterMatchMode: 'contains',
         filterPlaceholder: null,
         tabIndex: '0',
         dataKey: null,
@@ -52,6 +55,8 @@ export class MultiSelect extends Component {
         fixedPlaceholder: PropTypes.bool,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
+        filterBy: PropTypes.string,
+        filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
@@ -359,13 +364,6 @@ export class MultiSelect extends Component {
         this.panelClick = false;
     }
 
-    filterOption(option) {
-        let filterValue = this.state.filter.trim().toLowerCase();
-        let optionLabel = this.getOptionLabel(option);
-
-        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
-    }
-
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
@@ -378,9 +376,9 @@ export class MultiSelect extends Component {
     }
 
     filterOptions(options) {
-        return options.filter((option) => {
-            return this.filterOption(option);
-        });
+        let filterValue = this.state.filter.trim().toLowerCase();
+        let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+        return FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode);
     }
 
     getOptionLabel(option) {
