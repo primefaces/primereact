@@ -16,6 +16,7 @@ interface SelectButtonProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
+    itemTemplate?(option:any): React.ReactNode;
     onChange?(e: {originalEvent: Event, value: any}): void;
 }
 
