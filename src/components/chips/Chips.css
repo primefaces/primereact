@@ -61,3 +61,7 @@
     -webkit-border-radius: 0;
     border-radius: 0;
 }
+
+.p-fluid .p-chips {
+    display: block;
+}
