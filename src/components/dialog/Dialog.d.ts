@@ -22,6 +22,8 @@ interface DialogProps {
     blockScroll?: boolean;
     ariaCloseIconLabel?: string;
     focusOnShow?: boolean;
+    maximized?: boolean;
+    onMaximized?(e: {originalEvent: Event, maximized: boolean}): void;
     onHide(): void;
     onShow?(): void;
     iconsTemplate?(): JSX.Element | undefined;

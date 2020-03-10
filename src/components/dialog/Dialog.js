@@ -32,7 +32,9 @@ export class Dialog extends Component {
         blockScroll: false,
         iconsTemplate: null,
         ariaCloseIconLabel: 'Close',
-        focusOnShow: true
+        focusOnShow: true,
+        maximized: false,
+        onMaximized: null
     }
 
     static propTypes = {
@@ -59,15 +61,21 @@ export class Dialog extends Component {
         blockScroll: PropTypes.bool,
         iconsTemplate: PropTypes.func,
         ariaCloseIconLabel: PropTypes.string,
-        focusOnShow: PropTypes.bool
+        focusOnShow: PropTypes.bool,
+        maximized: PropTypes.bool,
+        onMaximized: PropTypes.func
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            maximized: false,
             maskVisible: props.visible
         };
+
+        if (!this.props.onMaximized) {
+            this.state.maximized = props.maximized;
+        }
+
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
@@ -102,14 +110,20 @@ export class Dialog extends Component {
     }
 
     toggleMaximize(event) {
-        this.setState({
-            maximized: !this.state.maximized
-        }, () => {
-            if (!this.props.blockScroll) {
-                let funcName = this.state.maximized ? 'addClass' : 'removeClass';
-                DomHandler[funcName](document.body, 'p-overflow-hidden');
-            }
-        });
+        let maximized = !this.maximized;
+
+        if (this.props.onMaximized) {
+            this.props.onMaximized({
+                originalEvent: event,
+                maximized
+            });
+        }
+        else {
+            this.setState({
+                maximized
+            }, this.changeScrollOnMaximizable);
+        }
+
         event.preventDefault();
     }
 
@@ -122,6 +136,10 @@ export class Dialog extends Component {
 
     get zIndex() {
         return this.props.baseZIndex + DomHandler.generateZIndex();
+    }
+
+    get maximized() {
+        return this.props.onMaximized ? this.props.maximized : this.state.maximized;
     }
 
     onEntered() {
@@ -150,7 +168,7 @@ export class Dialog extends Component {
             this.bindGlobalListeners();
         }
 
-        if (this.props.blockScroll || (this.props.maximizable && this.state.maximized)) {
+        if (this.props.blockScroll || (this.props.maximizable && this.maximized)) {
             DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
@@ -164,7 +182,7 @@ export class Dialog extends Component {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
         }
-        else if (this.props.blockScroll || (this.props.maximizable && this.state.maximized)) {
+        else if (this.props.blockScroll || (this.props.maximizable && this.maximized)) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
@@ -246,11 +264,22 @@ export class Dialog extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
                 this.mask.style.zIndex = String(this.zIndex);
             });
+        }
+
+        if (prevProps.maximized !== this.props.maximized && this.props.onMaximized) {
+            this.changeScrollOnMaximizable();
+        }
+    }
+
+    changeScrollOnMaximizable() {
+        if (!this.props.blockScroll) {
+            let funcName = this.maximized ? 'addClass' : 'removeClass';
+            DomHandler[funcName](document.body, 'p-overflow-hidden');
         }
     }
 
@@ -272,7 +301,7 @@ export class Dialog extends Component {
     }
 
     renderMaximizeIcon() {
-        const iconClassName = classNames('p-dialog-titlebar-maximize-icon pi', {'pi-window-maximize': !this.state.maximized, 'pi-window-minimize': this.state.maximized});
+        const iconClassName = classNames('p-dialog-titlebar-maximize-icon pi', {'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized});
 
         if (this.props.maximizable) {
             return (
@@ -339,7 +368,7 @@ export class Dialog extends Component {
     renderElement() {
         const className = classNames('p-dialog p-component', this.props.className, {
             'p-dialog-rtl': this.props.rtl,
-            'p-dialog-maximized': this.state.maximized
+            'p-dialog-maximized': this.maximized
         });
 
         const maskClassName = classNames('p-dialog-mask', {

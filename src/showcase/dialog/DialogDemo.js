@@ -364,6 +364,12 @@ const myIcon = (
                             <td>true</td>
                             <td>When enabled, first button receives focus on show.</td>
                         </tr>
+                        <tr>
+                            <td>maximized</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, the dialog is initially displayed full screen.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -388,6 +394,13 @@ const myIcon = (
                             <td>onShow</td>
                             <td>null</td>
                             <td>Callback to invoke when dialog is showed.</td>
+                        </tr>
+                        <tr>
+                            <td>onMaximized</td>
+                            <td>event.originalEvent: Browser event  <br/>
+                                event.maximized: Whether to show the dialog or not on fullscreen.
+                            </td>
+                            <td>Callback to invoke when maximizable icons are clicked.</td>
                         </tr>
                     </tbody>
                 </table>
