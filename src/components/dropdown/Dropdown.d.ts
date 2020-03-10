@@ -14,6 +14,7 @@ interface DropdownProps {
     scrollHeight?: string;
     filter?: boolean;
     filterBy?: string;
+    filterMatchMode?: string;
     filterPlaceholder?: string;
     editable?:boolean;
     placeholder?: string;

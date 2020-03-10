@@ -211,8 +211,10 @@ selectedCarTemplate(option) {
 `}
                         </CodeHighlight>
 
-            <h3>Filter</h3>
-            <p>Filtering allows searching items in the list using an input field at the header. In order to use filtering, enable filter property.</p>
+            <h3>Filtering</h3>
+            <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
+                label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
+                to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -344,6 +346,18 @@ selectedCarTemplate(option) {
                             <td>boolean</td>
                             <td>true</td>
                             <td>When specified, displays an input field to filter the items on keyup.</td>
+                        </tr>
+                        <tr>
+                            <td>filterBy</td>
+                            <td>string</td>
+                            <td>label</td>
+                            <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
+                        </tr>
+                        <tr>
+                            <td>filterMatchMode</td>
+                            <td>string</td>
+                            <td>contains</td>
+                            <td>Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".</td>
                         </tr>
                         <tr>
                             <td>filterPlaceholder</td>
