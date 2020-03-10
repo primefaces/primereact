@@ -1,42 +1,10 @@
 {
     "4.1.0": {
-        "listbox": [
+        "column": [
             {
-                "number": 1242,
-                "title": "Add filterPlaceholder to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1242"
-            },
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
-            },
-            {
-                "number": 1215,
-                "title": "Add filterPlaceholder to Listbox",
-                "url": "https://github.com/primefaces/primereact/issues/1215"
-            },
-            {
-                "number": 1245,
-                "title": "Implement filterBy and filterMatchMode for ListBox",
-                "url": "https://github.com/primefaces/primereact/issues/1245"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 1242,
-                "title": "Add filterPlaceholder to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1242"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
+                "number": 1246,
+                "title": "Add reorderable to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1246"
             },
             {
                 "number": 1221,
@@ -44,24 +12,19 @@
                 "url": "https://github.com/primefaces/primereact/issues/1221"
             },
             {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
                 "number": 1223,
                 "title": "New filtering modes for Table",
                 "url": "https://github.com/primefaces/primereact/issues/1223"
             },
             {
-                "number": 1215,
-                "title": "Add filterPlaceholder to Listbox",
-                "url": "https://github.com/primefaces/primereact/issues/1215"
+                "number": 1222,
+                "title": "Accents support in Table filtering",
+                "url": "https://github.com/primefaces/primereact/issues/1222"
+            },
+            {
+                "number": 1032,
+                "title": "DataTable Columns: Conditional reorder",
+                "url": "https://github.com/primefaces/primereact/issues/1032"
             },
             {
                 "number": 1224,
@@ -69,35 +32,14 @@
                 "url": "https://github.com/primefaces/primereact/issues/1224"
             },
             {
-                "number": 1244,
-                "title": "Implement filterBy and filterMatchMode for MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1244"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1231,
-                "title": "Clear Button does not clear the input value on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1231"
+                "number": 1220,
+                "title": "Move column filters to their own row",
+                "url": "https://github.com/primefaces/primereact/issues/1220"
             },
             {
-                "number": 1217,
-                "title": "Time support for min date or max date in calendar component",
-                "url": "https://github.com/primefaces/primereact/issues/1217"
-            }
-        ],
-        "tree": [
-            {
-                "number": 1232,
-                "title": "Filter does not work after adding a new node to the root node on Tree",
-                "url": "https://github.com/primefaces/primereact/issues/1232"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
+                "number": 1031,
+                "title": "Datatable Columns: Conditional select",
+                "url": "https://github.com/primefaces/primereact/issues/1031"
             },
             {
                 "number": 1226,
@@ -105,19 +47,41 @@
                 "url": "https://github.com/primefaces/primereact/issues/1226"
             },
             {
+                "number": 1227,
+                "title": "Add filterHeaderStyle and filterHeaderClassName to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1227"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1246,
+                "title": "Add reorderable to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1246"
+            },
+            {
+                "number": 1219,
+                "title": " Remove tabIndex from the headers of the non-sortable dataTable.",
+                "url": "https://github.com/primefaces/primereact/issues/1219"
+            },
+            {
+                "number": 1236,
+                "title": "Change the type of emptyMessage property on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1236"
+            },
+            {
+                "number": 1218,
+                "title": "The virtualScroll height is always added to rows on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1218"
+            },
+            {
+                "number": 1198,
+                "title": "Added warnings to columnKeys in reorderable DataTables",
+                "url": "https://github.com/primefaces/primereact/pull/1198"
+            },
+            {
                 "number": 1221,
                 "title": "Add filterField to column",
                 "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
             },
             {
                 "number": 1223,
@@ -125,21 +89,76 @@
                 "url": "https://github.com/primefaces/primereact/issues/1223"
             },
             {
+                "number": 1222,
+                "title": "Accents support in Table filtering",
+                "url": "https://github.com/primefaces/primereact/issues/1222"
+            },
+            {
+                "number": 1032,
+                "title": "DataTable Columns: Conditional reorder",
+                "url": "https://github.com/primefaces/primereact/issues/1032"
+            },
+            {
                 "number": 1224,
                 "title": "New DataTable Customer Demo",
                 "url": "https://github.com/primefaces/primereact/issues/1224"
-            }
-        ],
-        "selectbutton": [
-            {
-                "number": 1238,
-                "title": "Templating support to SelectButton",
-                "url": "https://github.com/primefaces/primereact/issues/1238"
             },
             {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
+                "number": 1220,
+                "title": "Move column filters to their own row",
+                "url": "https://github.com/primefaces/primereact/issues/1220"
+            },
+            {
+                "number": 1031,
+                "title": "Datatable Columns: Conditional select",
+                "url": "https://github.com/primefaces/primereact/issues/1031"
+            },
+            {
+                "number": 1226,
+                "title": "Add rowHover to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1226"
+            },
+            {
+                "number": 1227,
+                "title": "Add filterHeaderStyle and filterHeaderClassName to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1227"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1246,
+                "title": "Add reorderable to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1246"
+            },
+            {
+                "number": 1220,
+                "title": "Move column filters to their own row",
+                "url": "https://github.com/primefaces/primereact/issues/1220"
+            },
+            {
+                "number": 1221,
+                "title": "Add filterField to column",
+                "url": "https://github.com/primefaces/primereact/issues/1221"
+            },
+            {
+                "number": 1223,
+                "title": "New filtering modes for Table",
+                "url": "https://github.com/primefaces/primereact/issues/1223"
+            },
+            {
+                "number": 1222,
+                "title": "Accents support in Table filtering",
+                "url": "https://github.com/primefaces/primereact/issues/1222"
+            },
+            {
+                "number": 1224,
+                "title": "New DataTable Customer Demo",
+                "url": "https://github.com/primefaces/primereact/issues/1224"
+            },
+            {
+                "number": 1226,
+                "title": "Add rowHover to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1226"
             }
         ],
         "paginator": [
@@ -154,110 +173,57 @@
                 "url": "https://github.com/primefaces/primereact/issues/1225"
             }
         ],
-        "treetable": [
+        "listbox": [
             {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
+                "number": 1245,
+                "title": "Implement filterBy and filterMatchMode for ListBox",
+                "url": "https://github.com/primefaces/primereact/issues/1245"
             },
             {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
+                "number": 1230,
+                "title": "Add optionValue to Select components",
+                "url": "https://github.com/primefaces/primereact/issues/1230"
             },
             {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
+                "number": 1175,
+                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
+                "url": "https://github.com/primefaces/primereact/issues/1175"
             },
             {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
+                "number": 1242,
+                "title": "Add filterPlaceholder to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1242"
             },
             {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1246,
-                "title": "Add reorderable to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1246"
+                "number": 1215,
+                "title": "Add filterPlaceholder to Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/1215"
             }
         ],
-        "column": [
+        "tree": [
             {
-                "number": 1227,
-                "title": "Add filterHeaderStyle and filterHeaderClassName to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1227"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1246,
-                "title": "Add reorderable to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1246"
+                "number": 1232,
+                "title": "Filter does not work after adding a new node to the root node on Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1232"
             }
         ],
-        "datatable": [
+        "calendar": [
             {
-                "number": 1227,
-                "title": "Add filterHeaderStyle and filterHeaderClassName to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1227"
+                "number": 1231,
+                "title": "Clear Button does not clear the input value on Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/1231"
             },
             {
-                "number": 1219,
-                "title": " Remove tabIndex from the headers of the non-sortable dataTable.",
-                "url": "https://github.com/primefaces/primereact/issues/1219"
-            },
+                "number": 1217,
+                "title": "Time support for min date or max date in calendar component",
+                "url": "https://github.com/primefaces/primereact/issues/1217"
+            }
+        ],
+        "multiselect": [
             {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1236,
-                "title": "Change the type of emptyMessage property on DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1236"
-            },
-            {
-                "number": 1218,
-                "title": "The virtualScroll height is always added to rows on DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1218"
+                "number": 1230,
+                "title": "Add optionValue to Select components",
+                "url": "https://github.com/primefaces/primereact/issues/1230"
             },
             {
                 "number": 1221,
@@ -265,9 +231,9 @@
                 "url": "https://github.com/primefaces/primereact/issues/1221"
             },
             {
-                "number": 1198,
-                "title": "Added warnings to columnKeys in reorderable DataTables",
-                "url": "https://github.com/primefaces/primereact/pull/1198"
+                "number": 1223,
+                "title": "New filtering modes for Table",
+                "url": "https://github.com/primefaces/primereact/issues/1223"
             },
             {
                 "number": 1222,
@@ -275,9 +241,51 @@
                 "url": "https://github.com/primefaces/primereact/issues/1222"
             },
             {
+                "number": 1224,
+                "title": "New DataTable Customer Demo",
+                "url": "https://github.com/primefaces/primereact/issues/1224"
+            },
+            {
                 "number": 1220,
                 "title": "Move column filters to their own row",
                 "url": "https://github.com/primefaces/primereact/issues/1220"
+            },
+            {
+                "number": 1175,
+                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
+                "url": "https://github.com/primefaces/primereact/issues/1175"
+            },
+            {
+                "number": 1242,
+                "title": "Add filterPlaceholder to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1242"
+            },
+            {
+                "number": 1215,
+                "title": "Add filterPlaceholder to Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/1215"
+            },
+            {
+                "number": 1226,
+                "title": "Add rowHover to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1226"
+            },
+            {
+                "number": 1244,
+                "title": "Implement filterBy and filterMatchMode for MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1244"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1230,
+                "title": "Add optionValue to Select components",
+                "url": "https://github.com/primefaces/primereact/issues/1230"
+            },
+            {
+                "number": 1221,
+                "title": "Add filterField to column",
+                "url": "https://github.com/primefaces/primereact/issues/1221"
             },
             {
                 "number": 1223,
@@ -285,14 +293,121 @@
                 "url": "https://github.com/primefaces/primereact/issues/1223"
             },
             {
+                "number": 1222,
+                "title": "Accents support in Table filtering",
+                "url": "https://github.com/primefaces/primereact/issues/1222"
+            },
+            {
+                "number": 1179,
+                "title": "Reset filter textbox of dropdown if options changes",
+                "url": "https://github.com/primefaces/primereact/issues/1179"
+            },
+            {
                 "number": 1224,
                 "title": "New DataTable Customer Demo",
                 "url": "https://github.com/primefaces/primereact/issues/1224"
             },
             {
-                "number": 1246,
-                "title": "Add reorderable to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1246"
+                "number": 1220,
+                "title": "Move column filters to their own row",
+                "url": "https://github.com/primefaces/primereact/issues/1220"
+            },
+            {
+                "number": 1149,
+                "title": "Implement filterBy and filterMatchMode for Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1149"
+            },
+            {
+                "number": 1175,
+                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
+                "url": "https://github.com/primefaces/primereact/issues/1175"
+            },
+            {
+                "number": 1226,
+                "title": "Add rowHover to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1226"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1221,
+                "title": "Add filterField to column",
+                "url": "https://github.com/primefaces/primereact/issues/1221"
+            },
+            {
+                "number": 1223,
+                "title": "New filtering modes for Table",
+                "url": "https://github.com/primefaces/primereact/issues/1223"
+            },
+            {
+                "number": 1222,
+                "title": "Accents support in Table filtering",
+                "url": "https://github.com/primefaces/primereact/issues/1222"
+            },
+            {
+                "number": 1224,
+                "title": "New DataTable Customer Demo",
+                "url": "https://github.com/primefaces/primereact/issues/1224"
+            },
+            {
+                "number": 1220,
+                "title": "Move column filters to their own row",
+                "url": "https://github.com/primefaces/primereact/issues/1220"
+            },
+            {
+                "number": 1149,
+                "title": "Implement filterBy and filterMatchMode for Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1149"
+            },
+            {
+                "number": 1226,
+                "title": "Add rowHover to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1226"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1170,
+                "title": "Allow Dialogs already maximized ",
+                "url": "https://github.com/primefaces/primereact/issues/1170"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1079,
+                "title": "Change the type of the 'header' property on TabPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1079"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1094,
+                "title": "Deadlock situation in range slider",
+                "url": "https://github.com/primefaces/primereact/issues/1094"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1175,
+                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
+                "url": "https://github.com/primefaces/primereact/issues/1175"
+            },
+            {
+                "number": 1230,
+                "title": "Add optionValue to Select components",
+                "url": "https://github.com/primefaces/primereact/issues/1230"
+            },
+            {
+                "number": 1238,
+                "title": "Templating support to SelectButton",
+                "url": "https://github.com/primefaces/primereact/issues/1238"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1189,
+                "title": "ContextMenu hide/onHide triggers even though already hidden",
+                "url": "https://github.com/primefaces/primereact/issues/1189"
             }
         ],
         "common": [
@@ -300,38 +415,6 @@
                 "number": 1213,
                 "title": "Improve style of p-link component",
                 "url": "https://github.com/primefaces/primereact/issues/1213"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
             }
         ],
         "chips": [
