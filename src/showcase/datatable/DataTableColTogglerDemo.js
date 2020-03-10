@@ -12,44 +12,38 @@ export class DataTableColTogglerDemo extends Component {
 
     constructor() {
         super();
-        this.carservice = new CarService();
-        let columns = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
-
         this.state = {
-            cols: columns
-        };
-
-        this.colOptions = [];
-        for(let col of columns) {
-            this.colOptions.push({label: col.header, value: col});
+            columns: [
+                {field: 'vin', header: 'Vin'},
+                {field: 'year', header: 'Year'},
+                {field: 'brand', header: 'Brand'},
+                {field: 'color', header: 'Color'}
+            ],
+            selectedColumns: []
         }
-
+        this.carservice = new CarService();
         this.onColumnToggle = this.onColumnToggle.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.setState({selectedColumns: this.state.columns});
     }
 
     onColumnToggle(event) {
-        this.setState({cols: event.value});
-    }
-
-    export() {
-        this.dt.exportCSV();
+        let selectedColumns = event.value;
+        let orderedSelectedColumns = this.state.columns.filter(col => selectedColumns.includes(col));
+        this.setState({selectedColumns: orderedSelectedColumns});
     }
 
     render() {
-        let header = <div style={{textAlign:'left'}}>
-                        <MultiSelect value={this.state.cols} options={this.colOptions} onChange={this.onColumnToggle} style={{width:'250px'}}/>
-                     </div>;
+        const header = (
+            <div style={{textAlign:'left'}}>
+                <MultiSelect value={this.state.selectedColumns} options={this.state.columns} optionLabel="field" onChange={this.onColumnToggle} style={{width:'250px'}}/>
+            </div>
+        );
 
-        let columns = this.state.cols.map((col,i) => {
+        const columnComponents = this.state.selectedColumns.map(col=> {
             return <Column key={col.field} field={col.field} header={col.header} />;
         });
 
@@ -70,7 +64,7 @@ export class DataTableColTogglerDemo extends Component {
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} header={header}>
-                        {columns}
+                        {columnComponents}
                     </DataTable>
                 </div>
 
@@ -103,59 +97,57 @@ export class DataTableColTogglerDemo extends Component {
 
     constructor() {
         super();
-        this.carservice = new CarService();
-        let columns = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
-
         this.state = {
-            cols: columns
-        };
-
-        this.colOptions = [];
-        for(let col of columns) {
-            this.colOptions.push({label: col.header, value: col});
+            columns: [
+                {field: 'vin', header: 'Vin'},
+                {field: 'year', header: 'Year'},
+                {field: 'brand', header: 'Brand'},
+                {field: 'color', header: 'Color'}
+            ],
+            selectedColumns: []
         }
-
+        this.carservice = new CarService();
         this.onColumnToggle = this.onColumnToggle.bind(this);
     }
 
     componentDidMount() {
         this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.setState({selectedColumns: this.state.columns});
     }
 
     onColumnToggle(event) {
-        this.setState({cols: event.value});
-    }
-
-    export() {
-        this.dt.exportCSV();
+        let selectedColumns = event.value;
+        let orderedSelectedColumns = this.state.columns.filter(col => selectedColumns.includes(col));
+        this.setState({selectedColumns: orderedSelectedColumns});
     }
 
     render() {
-        let header = <div style={{textAlign:'left'}}>
-                        <MultiSelect value={this.state.cols} options={this.colOptions} onChange={this.onColumnToggle} style={{width:'250px'}}/>
-                     </div>;
+        const header = (
+            <div style={{textAlign:'left'}}>
+                <MultiSelect value={this.state.selectedColumns} options={this.state.columns} optionLabel="field" onChange={this.onColumnToggle} style={{width:'250px'}}/>
+            </div>
+        );
 
-        let columns = this.state.cols.map((col,i) => {
+        const columnComponents = this.state.selectedColumns.map(col=> {
             return <Column key={col.field} field={col.field} header={col.header} />;
         });
 
         return (
             <div>
-                <div className="content-section">
+                <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataTable - Column Toggler</h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
+
+                        <AppContentContext.Consumer>
+                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
                 <div className="content-section implementation">
                     <DataTable value={this.state.cars} header={header}>
-                        {columns}
+                        {columnComponents}
                     </DataTable>
                 </div>
             </div>
