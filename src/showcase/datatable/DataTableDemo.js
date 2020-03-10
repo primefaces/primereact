@@ -78,12 +78,7 @@ export class DataTableDemo extends Component {
     }
 
     activityBodyTemplate(rowData) {
-        return (
-            <>
-                <span className="p-column-title">Activity</span>
-                <ProgressBar value={rowData.activity} showValue={false} />
-            </>
-        )
+        return <ProgressBar value={rowData.activity} showValue={false} />;
     }
 
     actionBodyTemplate() {
@@ -93,12 +88,7 @@ export class DataTableDemo extends Component {
     }
 
     statusBodyTemplate(rowData) {
-        return (
-            <>
-                <span className="p-column-title">Status</span>
-                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </>
-        );
+        return <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>;
     }
 
     countryBodyTemplate(rowData) {
@@ -106,7 +96,6 @@ export class DataTableDemo extends Component {
 
         return (
             <>
-                <span className="p-column-title">Country</span>
                 <img src="showcase/resources/demo/images/flag_placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </>
@@ -118,7 +107,6 @@ export class DataTableDemo extends Component {
 
         return (
             <>
-                <span className="p-column-title">Representative</span>
                 <img alt={rowData.representative.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
             </>
@@ -2904,12 +2892,7 @@ export class DataTableDemo extends Component {
     }
 
     activityBodyTemplate(rowData) {
-        return (
-            <>
-                <span className="p-column-title">Activity</span>
-                <ProgressBar value={rowData.activity} showValue={false} />
-            </>
-        )
+        return <ProgressBar value={rowData.activity} showValue={false} />;
     }
 
     actionBodyTemplate() {
@@ -2919,18 +2902,12 @@ export class DataTableDemo extends Component {
     }
 
     statusBodyTemplate(rowData) {
-        return (
-            <>
-                <span className="p-column-title">Status</span>
-                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </>
-        );
+        return <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>;
     }
 
     countryBodyTemplate(rowData) {
         return (
             <>
-                <span className="p-column-title">Country</span>
                 <img src="showcase/resources/demo/images/flag_placeholder.png" className={classNames('flag', 'flag-' + rowData.country.code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.country.name}</span>
             </>
@@ -2942,7 +2919,6 @@ export class DataTableDemo extends Component {
 
         return (
             <>
-                <span className="p-column-title">Representative</span>
                 <img alt={rowData.representative.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
             </>
