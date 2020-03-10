@@ -204,7 +204,7 @@ import {PickList} from 'primereact/picklist';
                         </tr>
                         <tr>
                             <td>itemTemplate</td>
-                            <td>func</td>
+                            <td>function</td>
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
                         </tr>

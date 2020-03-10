@@ -326,7 +326,7 @@ nodeTemplate(node) {
                             </tr>
                             <tr>
                                 <td>nodeTemplate</td>
-                                <td>func</td>
+                                <td>function</td>
                                 <td>null</td>
                                 <td>Template function that gets a node as a parameter and returns a content.</td>
                             </tr>

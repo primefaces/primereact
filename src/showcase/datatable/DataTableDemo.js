@@ -1273,6 +1273,7 @@ export class DataTableSelectionDemo extends Component {
 
             <p>If you prefer a radioButton or a checkbox instead of a row click, use the <i>selectionMode</i> of a column instead.
                  Following datatable displays a checkbox at the first column of each row and automatically adds a header checkbox to toggle selection of all rows.</p>
+            <p>Tip: Use <i>showSelectionElement</i> function in case you need to hide selection element for a particular row.</p>
 <CodeHighlight className="language-jsx">
 {`
 <DataTable value={this.state.cars} selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})}>
@@ -1622,6 +1623,7 @@ export class DataTableRowExpansionDemo extends Component {
             <h3>Row Reorder</h3>
             <p>Data can be reordered using drag drop by adding a reorder column that will display an icon as a drag handle. <i>onRowReorder</i> is a callback that is invoked when a column is reordered, use
                 this callback to update the new order. The reorder icon can be customized using <i>rowReorderIcon</i> of the column component.</p>
+            <p>Tip: Use <i>showRowReorderElement</i> function in case you need to hide selection element for a particular row.</p>
 
 <CodeHighlight className="language-jsx">
 {`
@@ -2206,7 +2208,7 @@ export class DataTableStateDemo extends Component {
                         </tr>
                         <tr>
                             <td>rowExpansionTemplate</td>
-                            <td>func</td>
+                            <td>function</td>
                             <td>null</td>
                             <td>Function that receives the row data as the parameter and returns the expanded row content.</td>
                         </tr>
@@ -2391,6 +2393,18 @@ export class DataTableStateDemo extends Component {
                             <td>boolean</td>
                             <td>false</td>
                             <td>When enabled, background of the rows change on hover..</td>
+                        </tr>
+                        <tr>
+                            <td>showSelectionElement</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row.</td>
+                        </tr>
+                        <tr>
+                            <td>showRowReorderElement</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row.</td>
                         </tr>
                     </tbody>
                 </table>
