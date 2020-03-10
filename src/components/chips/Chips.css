@@ -1,3 +1,7 @@
+.p-chips {
+    display: inline-block;
+}
+
 .p-chips > ul.p-inputtext {
     clear: left;
     cursor: text;
