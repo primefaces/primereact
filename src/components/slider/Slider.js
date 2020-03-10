@@ -42,6 +42,8 @@ export class Slider extends Component {
     constructor(props) {
         super(props);
         this.onBarClick = this.onBarClick.bind(this);
+
+        this.handleIndex = 0;
     }
 
     componentWillUnmount() {
@@ -234,7 +236,8 @@ export class Slider extends Component {
     renderHandle(leftValue, bottomValue, index) {
         const handleClassName = classNames('p-slider-handle', {
             'p-slider-handle-start': index === 0,
-            'p-slider-handle-end': index === 1
+            'p-slider-handle-end': index === 1,
+            'p-slider-handle-active': this.handleIndex === index
         });
 
         return (
