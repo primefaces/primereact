@@ -267,7 +267,7 @@ export class UITreeNode extends Component {
     }
 
     onClick(event) {
-        if ((event.target.className && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
+        if ((event.target.className && event.target.className.constructor === String && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
             return;
         }
 
