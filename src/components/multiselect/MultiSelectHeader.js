@@ -8,6 +8,7 @@ export class MultiSelectHeader extends Component {
     static defaultProps = {
         filter: false,
         filterValue: null,
+        filterPlaceholder: null,
         onFilter: null,
         onClose: null,
         onToggleAll: null,
@@ -17,6 +18,7 @@ export class MultiSelectHeader extends Component {
     static propTypes = {
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
+        filterPlaceholder: PropTypes.string,
         allChecked: PropTypes.bool,
         onFilter: PropTypes.func,
         onClose: PropTypes.func,
@@ -52,7 +54,7 @@ export class MultiSelectHeader extends Component {
             return (
                 <div className="p-multiselect-filter-container">
                     <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
-                                className="p-inputtext p-component" />
+                                className="p-inputtext p-component" placeholder={this.props.filterPlaceholder}/>
                     <span className="p-multiselect-filter-icon pi pi-search"></span>
                 </div>
             );

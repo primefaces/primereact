@@ -23,6 +23,7 @@ export class MultiSelect extends Component {
         fixedPlaceholder: false,
         disabled: false,
         filter: false,
+        filterPlaceholder: null,
         tabIndex: '0',
         dataKey: null,
         appendTo: null,
@@ -51,6 +52,7 @@ export class MultiSelect extends Component {
         fixedPlaceholder: PropTypes.bool,
         disabled: PropTypes.bool,
         filter: PropTypes.bool,
+        filterPlaceholder: PropTypes.string,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
         appendTo: PropTypes.object,
@@ -458,7 +460,7 @@ export class MultiSelect extends Component {
 
     renderHeader(items) {
         return (
-            <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter}
+            <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} filterPlaceholder={this.props.filterPlaceholder} 
                 onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} />
         );
     }

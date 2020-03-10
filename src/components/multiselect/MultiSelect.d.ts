@@ -14,6 +14,7 @@ interface MultiSelectProps {
     fixedPlaceholder?: boolean;
     disabled?: boolean;
     filter?: boolean;
+    filterPlaceholder?: string;
     tabIndex?: boolean;
     dataKey?: string;
     appendTo?: HTMLElement;

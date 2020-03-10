@@ -69,8 +69,8 @@ export class ListBoxDemo extends Component {
                     <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
 
                     <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
-                                    style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
+                    <ListBox value={this.state.car} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
+                                    style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
                 </div>
 
                 <ListboxDoc></ListboxDoc>
@@ -342,6 +342,12 @@ carTemplate(option) {
                             <td>When specified, displays a filter input at header.</td>
                         </tr>
                         <tr>
+                            <td>filterPlaceholder</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Placeholder text to show when filter input is empty.</td>
+                        </tr>
+                        <tr>
                             <td>tabIndex</td>
                             <td>string</td>
                             <td>null</td>
@@ -493,7 +499,7 @@ export class ListBoxDemo extends Component {
                     <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
 
                     <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
+                    <ListBox value={this.state.car} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
                                     style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
                 </div>
             </div>

@@ -15,6 +15,7 @@ interface ListBoxProps {
     multiple?: boolean;
     metaKeySelection?: boolean;
     filter?: boolean;
+    filterPlaceholder?: string;
     tabIndex?:string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;

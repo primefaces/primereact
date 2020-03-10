@@ -73,11 +73,11 @@ export class MultiSelectDemo extends Component {
                 <div className="content-section implementation multiselect-demo">
                     <h3>Basic</h3>
                     <MultiSelect value={this.state.cars1} options={cars} onChange={(e) => this.setState({cars1: e.value})}
-                            style={{minWidth:'12em'}} filter={true} placeholder="Choose" />
+                            style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
 
                     <h3>Templating</h3>
                     <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
-                                 style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
+                                 style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
                 </div>
 
                 <MultiSelectDoc />
@@ -346,6 +346,12 @@ selectedCarTemplate(option) {
                             <td>When specified, displays an input field to filter the items on keyup.</td>
                         </tr>
                         <tr>
+                            <td>filterPlaceholder</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Placeholder text to show when filter input is empty.</td>
+                        </tr>
+                        <tr>
                             <td>tabIndex</td>
                             <td>string</td>
                             <td>null</td>
@@ -566,11 +572,11 @@ export class MultiSelectDemo extends Component {
                 <div className="content-section implementation multiselect-demo">
                     <h3>Basic</h3>
                     <MultiSelect value={this.state.cars1} options={cars} onChange={(e) => this.setState({cars1: e.value})}
-                            style={{minWidth:'12em'}} filter={true} placeholder="Choose" />
+                            style={{minWidth:'12em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
 
                     <h3>Templating</h3>
                     <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
-                                 style={{minWidth:'12em'}} filter={true} itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
+                                 style={{minWidth:'12em'}} filter={true} filterPlaceholder="Search" itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
                 </div>
             </div>
         );

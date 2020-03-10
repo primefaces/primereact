@@ -23,6 +23,7 @@ export class ListBox extends Component {
         multiple: false,
         metaKeySelection: false,
         filter: false,
+        filterPlaceholder: null,
         tabIndex: '0',
         tooltip: null,
         tooltipOptions: null,
@@ -44,6 +45,7 @@ export class ListBox extends Component {
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
         filter: PropTypes.bool,
+        filterPlaceholder: PropTypes.string,
         tabIndex: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -278,7 +280,7 @@ export class ListBox extends Component {
         }
 
         if(this.props.filter) {
-            header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} disabled={this.props.disabled} />
+            header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} disabled={this.props.disabled} filterPlaceholder={this.props.filterPlaceholder} />
         }
 
         return (
