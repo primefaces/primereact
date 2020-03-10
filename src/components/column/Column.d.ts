@@ -36,6 +36,7 @@ interface ColumnProps {
     editorValidatorEvent?: string;
     rowEditor?: boolean;
     exportable?: boolean;
+    reorderable?: boolean;
     onEditorSubmit?(props: any): void;
     onEditorCancel?(props: any): void;
     excludeGlobalFilter?: boolean;

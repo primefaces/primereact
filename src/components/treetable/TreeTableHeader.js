@@ -47,7 +47,6 @@ export class TreeTableHeader extends Component {
             badgeVisible: false
         }
 
-        this.onHeaderMouseDown = this.onHeaderMouseDown.bind(this);
         this.onFilterInput = this.onFilterInput.bind(this);
     }
 
@@ -75,8 +74,8 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    onHeaderMouseDown(event) {
-        if (this.props.reorderableColumns) {
+    onHeaderMouseDown(event, column) {
+        if (this.props.reorderableColumns && column.props.reorderable) {
             if (event.target.nodeName !== 'INPUT')
                 event.currentTarget.draggable = true;
             else if (event.target.nodeName === 'INPUT')
@@ -234,7 +233,7 @@ export class TreeTableHeader extends Component {
 
             return (
                 <th key={column.columnKey||column.field||options.index} className={className} style={column.props.headerStyle||column.props.style} tabIndex={column.props.sortable ? this.props.tabIndex: null}
-                    onClick={e => this.onHeaderClick(e, column)} onMouseDown={this.onHeaderMouseDown} onKeyDown={e => this.onHeaderKeyDown(e, column)}
+                    onClick={e => this.onHeaderClick(e, column)} onMouseDown={e => this.onHeaderMouseDown(e, column)} onKeyDown={e => this.onHeaderKeyDown(e, column)}
                     rowSpan={column.props.rowSpan} colSpan={column.props.colSpan} aria-sort={ariaSortData}
                     onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
                     {resizer}

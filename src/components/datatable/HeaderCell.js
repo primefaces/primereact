@@ -68,7 +68,7 @@ export class HeaderCell extends Component {
     }
 
     onMouseDown(event) {
-        if (this.props.reorderableColumns) {
+        if (this.props.reorderableColumns && this.props.columnProps.reorderable) {
             if (event.target.nodeName !== 'INPUT')
                 this.el.draggable = true;
             else if (event.target.nodeName === 'INPUT')

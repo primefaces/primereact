@@ -636,6 +636,12 @@ export class DataTableDemo extends Component {
                             <td>true</td>
                             <td>Defines whether the column is exported or not.</td>
                         </tr>
+                        <tr>
+                            <td>reorderable</td>
+                            <td>boolean</td>
+                            <td>null</td>
+                            <td>Used to defined reorderableColumns per column when reorderableColumns of table is enabled, defaults to value of reorderableColumns.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -2386,7 +2392,6 @@ export class DataTableStateDemo extends Component {
                             <td>false</td>
                             <td>When enabled, background of the rows change on hover..</td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
