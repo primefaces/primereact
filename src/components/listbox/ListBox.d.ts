@@ -15,6 +15,8 @@ interface ListBoxProps {
     multiple?: boolean;
     metaKeySelection?: boolean;
     filter?: boolean;
+    filterBy?: string;
+    filterMatchMode?: string;
     filterPlaceholder?: string;
     tabIndex?:string;
     tooltip?: any;

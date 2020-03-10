@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import FilterUtils from '../utils/ObjectUtils';
 import {ListBoxItem} from './ListBoxItem';
 import {ListBoxHeader} from './ListBoxHeader';
 import Tooltip from "../tooltip/Tooltip";
@@ -23,6 +24,8 @@ export class ListBox extends Component {
         multiple: false,
         metaKeySelection: false,
         filter: false,
+        filterBy: null,
+        filterMatchMode: 'contains',
         filterPlaceholder: null,
         tabIndex: '0',
         tooltip: null,
@@ -45,6 +48,8 @@ export class ListBox extends Component {
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
         filter: PropTypes.bool,
+        filterBy: PropTypes.string,
+        filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         tabIndex: PropTypes.string,
         tooltip: PropTypes.string,
@@ -107,7 +112,7 @@ export class ListBox extends Component {
     }
 
     onOptionTouchEnd() {
-        if(this.props.disabled) {
+        if (this.props.disabled) {
             return;
         }
 
@@ -120,11 +125,11 @@ export class ListBox extends Component {
         let value = null;
         let metaSelection = this.optionTouched ? false : this.props.metaKeySelection;
 
-        if(metaSelection) {
+        if (metaSelection) {
             let metaKey = (event.metaKey || event.ctrlKey);
 
-            if(selected) {
-                if(metaKey) {
+            if (selected) {
+                if (metaKey) {
                     value = null;
                     valueChanged = true;
                 }
@@ -139,7 +144,7 @@ export class ListBox extends Component {
             valueChanged = true;
         }
 
-        if(valueChanged) {
+        if (valueChanged) {
             this.updateModel(event, value);
         }
     }
@@ -150,11 +155,11 @@ export class ListBox extends Component {
         let value = null;
         let metaSelection = this.optionTouched ? false : this.props.metaKeySelection;
 
-        if(metaSelection) {
+        if (metaSelection) {
             let metaKey = (event.metaKey || event.ctrlKey);
 
-            if(selected) {
-                if(metaKey)
+            if (selected) {
+                if (metaKey)
                     value = this.removeOption(option);
                 else
                     value = [this.getOptionValue(option)];
@@ -168,7 +173,7 @@ export class ListBox extends Component {
             }
         }
         else {
-            if(selected)
+            if (selected)
                 value = this.removeOption(option);
             else
                 value = [...this.props.value || [], this.getOptionValue(option)];
@@ -176,7 +181,7 @@ export class ListBox extends Component {
             valueChanged = true;
         }
 
-        if(valueChanged) {
+        if (valueChanged) {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
@@ -196,7 +201,7 @@ export class ListBox extends Component {
     }
 
     updateModel(event, value) {
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
@@ -262,11 +267,11 @@ export class ListBox extends Component {
         let items = this.props.options;
         let header;
 
-        if(this.props.options) {
-            if(this.hasFilter()) {
-                items = items.filter((option) => {
-                    return this.filter(option);
-                });
+        if (this.props.options) {
+            if (this.hasFilter()) {
+                let filterValue = this.state.filter.trim().toLowerCase();
+                let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+                items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode);
             }
 
             items = items.map((option, index) => {
@@ -279,7 +284,7 @@ export class ListBox extends Component {
             });
         }
 
-        if(this.props.filter) {
+        if (this.props.filter) {
             header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} disabled={this.props.disabled} filterPlaceholder={this.props.filterPlaceholder} />
         }
 
