@@ -129,7 +129,7 @@ export class DataViewDemo extends Component {
         return (
             <div className="p-grid">
                 <div className="p-col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
+                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} style={{width: '12em'}} />
                 </div>
                 <div className="p-col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
