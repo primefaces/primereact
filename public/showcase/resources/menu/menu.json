@@ -20,7 +20,8 @@
                     "meta": [
                         "calendar",
                         "datepicker"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Checkbox",
