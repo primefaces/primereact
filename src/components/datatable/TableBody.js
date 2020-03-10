@@ -263,8 +263,7 @@ export class TableBody extends Component {
     }
 
     equals(data1, data2) {
-        let dataKey = this.getDataKeyOnRowToggle();
-        return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, dataKey);
+        return this.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
     }
 
     findIndexInSelection(rowData) {
@@ -281,13 +280,9 @@ export class TableBody extends Component {
         return index;
     }
 
-    getDataKeyOnRowToggle() {
-        return (this.props.rowGroupMode === 'subheader' && this.props.expandableRowGroups) ? this.props.groupField : this.props.dataKey;
-    }
-
     onRowToggle(event) {
         let expandedRows;
-        let dataKey = this.getDataKeyOnRowToggle();
+        let dataKey = this.props.dataKey;
 
         if (dataKey) {
             let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, dataKey));
@@ -345,7 +340,7 @@ export class TableBody extends Component {
     }
 
     isRowExpanded(row) {
-        let dataKey = this.getDataKeyOnRowToggle();
+        let dataKey = this.props.dataKey;
 
         if (dataKey) {
             let dataKeyValue = String(ObjectUtils.resolveFieldData(row, dataKey));
