@@ -8,7 +8,8 @@
 	height: 1.2em;
 	cursor: default;
 	-ms-touch-action: none;
-	touch-action: none;
+    touch-action: none;
+    z-index: 1;
 }
 .p-slider .p-slider-range {
 	position: absolute;
@@ -18,8 +19,8 @@
 	background-position: 0 0;
 }
 
-.p-slider .p-slider-handle-start {
-    z-index: 1;
+.p-slider .p-slider-handle.p-slider-handle-active {
+    z-index: 2;
 }
 
 .p-slider-horizontal {
