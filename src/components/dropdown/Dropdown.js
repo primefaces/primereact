@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import FilterUtils from '../utils/ObjectUtils';
 import classNames from 'classnames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
@@ -21,6 +22,8 @@ export class Dropdown extends Component {
         className: null,
         scrollHeight: '200px',
         filter: false,
+        filterBy: null,
+        filterMatchMode: 'contains',
         filterPlaceholder: null,
         editable: false,
         placeholder:null,
@@ -57,6 +60,8 @@ export class Dropdown extends Component {
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
         filter: PropTypes.bool,
+        filterBy: PropTypes.string,
+        filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         editable:PropTypes.bool,
         placeholder: PropTypes.string,
@@ -519,13 +524,6 @@ export class Dropdown extends Component {
         }
     }
 
-    filter(option) {
-        let filterValue = this.state.filter.trim().toLowerCase();
-        let optionLabel = this.getOptionLabel(option);
-
-        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
-    }
-
     hasFilter() {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
@@ -592,9 +590,9 @@ export class Dropdown extends Component {
         let items = this.props.options;
 
         if (items && this.hasFilter()) {
-            items = items && items.filter((option) => {
-                return this.filter(option);
-            });
+            let filterValue = this.state.filter.trim().toLowerCase();
+            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+            items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode);
         }
 
         if(items) {

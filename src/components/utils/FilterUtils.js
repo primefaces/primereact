@@ -2,6 +2,26 @@ import ObjectUtils from './ObjectUtils';
 
 export default class FilterUtils {
 
+    static filter(value, fields, filterValue, filterMatchMode) {
+        let filteredItems  = [];
+        let filterText = ObjectUtils.removeAccents(filterValue).toLowerCase();
+
+        if (value) {
+            for (let item of value) {
+                for (let field of fields) {
+                    let fieldValue = ObjectUtils.removeAccents(String(ObjectUtils.resolveFieldData(item, field))).toLowerCase();
+                    
+                    if (FilterUtils[filterMatchMode](fieldValue,filterText)) {
+                        filteredItems.push(item);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return filteredItems;
+    }
+
     static startsWith(value, filter) {
         if (filter === undefined || filter === null || filter.trim() === '') {
             return true;

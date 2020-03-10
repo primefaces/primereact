@@ -176,7 +176,7 @@ const cities = [
 
                         <h3>Filtering</h3>
                         <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
-                            label of the SelectItem and <i>filterBy</i> property is available to choose one or more properties of the SelectItem API.</p>
+                            label of the SelectItem and <i>filterBy</i> property is available to choose one or more properties of the options.</p>
 
                         <CodeHighlight className="language-jsx">
                             {`
@@ -332,6 +332,18 @@ carTemplate(option) {
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When specified, displays an input field to filter the items on keyup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterBy</td>
+                                        <td>string</td>
+                                        <td>label</td>
+                                        <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterMatchMode</td>
+                                        <td>string</td>
+                                        <td>contains</td>
+                                        <td>Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals" and "notEquals".</td>
                                     </tr>
                                     <tr>
                                         <td>filterPlaceholder</td>
