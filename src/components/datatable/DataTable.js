@@ -85,6 +85,8 @@ export class DataTable extends Component {
         editMode: 'cell',
         expandableRowGroups: false,
         rowHover: false,
+        showSelectionElement: null,
+        showRowReorderElement: null,
         onColumnResizeEnd: null,
         onSort: null,
         onPage: null,
@@ -177,6 +179,8 @@ export class DataTable extends Component {
         editMode: PropTypes.string,
         expandableRowGroups: PropTypes.bool,
         rowHover: PropTypes.bool,
+        showSelectionElement: PropTypes.func,
+        showRowReorderElement: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
@@ -1248,7 +1252,7 @@ export class DataTable extends Component {
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
                         editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
-                        expandableRowGroups={this.props.expandableRowGroups}>
+                        expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
                         {columns}
                 </TableBody>;
     }

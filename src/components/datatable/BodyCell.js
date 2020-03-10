@@ -174,17 +174,30 @@ export class BodyCell extends Component {
             );
         }
         else if (this.props.selectionMode) {
-            if (this.props.selectionMode === 'single')
-                content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
-            else
-                content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+            let showSelection = true;
+            if (this.props.showSelectionElement) {
+                showSelection = this.props.showSelectionElement(this.props.rowData);
+            }
+
+            if (showSelection) {
+                if (this.props.selectionMode === 'single')
+                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+                else
+                    content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+            }
         }
         else if (this.props.rowReorder) {
-            let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
+            let showReorder = true;
+            if (this.props.showRowReorderElement) {
+                showReorder = this.props.showRowReorderElement(this.props.rowData);
+            }
 
-            content = (
-                <i className={reorderIcon}></i>
-            );
+            if (showReorder) {
+                let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
+                content = (
+                    <i className={reorderIcon}></i>
+                );
+            }
         }
         else if (this.props.rowEditor) {
             if (this.state.editing) {

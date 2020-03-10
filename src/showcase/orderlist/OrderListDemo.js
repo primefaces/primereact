@@ -186,7 +186,7 @@ import {OrderList} from 'primereact/orderlist';
                         </tr>
                         <tr>
                             <td>itemTemplate</td>
-                            <td>func</td>
+                            <td>function</td>
                             <td>null</td>
                             <td>Function that gets an item in the list and returns the content for it.</td>
                         </tr>

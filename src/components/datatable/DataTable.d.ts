@@ -66,6 +66,8 @@ interface DataTableProps {
     editMode?:string;
     expandableRowGroups?:boolean;
     rowHover?:boolean;
+    showSelectionElement?(e: {data: any}): boolean;
+    showReorderElement?(e: {data: any}): boolean;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
     rowExpansionTemplate?(data: any): JSX.Element | undefined;
