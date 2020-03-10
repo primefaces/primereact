@@ -20,8 +20,7 @@
                     "meta": [
                         "calendar",
                         "datepicker"
-                    ],
-                    "badge": "UPDATED"
+                    ]
                 },
                 {
                     "name": "Checkbox",
@@ -50,7 +49,8 @@
                     "meta": [
                         "dropdown",
                         "selectOneMenu"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Editor",
@@ -106,7 +106,8 @@
                     "to": "/listbox",
                     "meta": [
                         "listbox"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "MultiSelect",
@@ -114,7 +115,8 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Password",
@@ -144,7 +146,8 @@
                         "selectbutton",
                         "selectOneButton",
                         "selectManyButton"
-                    ]
+                    ],
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Slider",
