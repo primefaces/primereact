@@ -20,16 +20,16 @@ export class CurrentPageReport extends Component {
         totalRecords: PropTypes.number,
         template: PropTypes.string
     }
-    
+
     render() {
         let text = this.props.template
             .replace("{currentPage}", this.props.page + 1)
             .replace("{totalPages}", this.props.pageCount)
             .replace("{first}", this.props.first + 1)
-            .replace("{last}", this.props.first + this.props.rows)
+            .replace("{last}", Math.min(this.props.first + this.props.rows, this.props.totalRecords))
             .replace("{rows}", this.props.rows)
             .replace("{totalRecords}", this.props.totalRecords);
-            
+
         return <span className="p-paginator-current">{text}</span>
     }
 }
