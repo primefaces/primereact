@@ -1,4 +1,189 @@
 {
+    "4.1.1": {
+        "paginator": [
+            {
+                "number": 1251,
+                "title": "currentPageReport should check for {last} boundary",
+                "url": "https://github.com/primefaces/primereact/issues/1251"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1254,
+                "title": "Disabled TabPanel focussable with TAB-Key",
+                "url": "https://github.com/primefaces/primereact/issues/1254"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1253,
+                "title": "Error on TreeTable docs about responsive",
+                "url": "https://github.com/primefaces/primereact/issues/1253"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1252,
+                "title": "Select components don't correctly return value",
+                "url": "https://github.com/primefaces/primereact/issues/1252"
+            },
+            {
+                "number": 1249,
+                "title": "resetFilter function for Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1249"
+            },
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            },
+            {
+                "number": 1260,
+                "title": "Add onFocus-onBlur to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1260"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1252,
+                "title": "Select components don't correctly return value",
+                "url": "https://github.com/primefaces/primereact/issues/1252"
+            },
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1252,
+                "title": "Select components don't correctly return value",
+                "url": "https://github.com/primefaces/primereact/issues/1252"
+            },
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1252,
+                "title": "Select components don't correctly return value",
+                "url": "https://github.com/primefaces/primereact/issues/1252"
+            },
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "growl": [
+            {
+                "number": 1248,
+                "title": "onClose of GrowlMessage is also allowing onClick to fire.",
+                "url": "https://github.com/primefaces/primereact/issues/1248"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1255,
+                "title": "InputMask OnComplete does not contain the new value",
+                "url": "https://github.com/primefaces/primereact/issues/1255"
+            },
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "spinner": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1199,
+                "title": "Improve type definition for onChange of form components",
+                "url": "https://github.com/primefaces/primereact/issues/1199"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1261,
+                "title": "DataTable scrollHeight doesn't calculate correctly with frozen columns and header groups",
+                "url": "https://github.com/primefaces/primereact/issues/1261"
+            }
+        ]
+    },
+
     "4.1.0": {
         "column": [
             {
