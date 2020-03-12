@@ -389,7 +389,7 @@ export class Dropdown extends Component {
     }
 
     resetFilter() {
-        this.setState({filter: null});
+        this.setState({filter: ''});
     }
 
     onFilterInputKeyDown(event) {
