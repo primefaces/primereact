@@ -87,7 +87,7 @@ export class DropdownDemo extends Component {
 
                     <h3>Editable</h3>
                     <Dropdown value={this.state.car} options={this.state.cars} onChange={this.onCarChange}  style={{width: '12em'}}
-                              editable={true} placeholder="Select a Brand" appendTo={document.body} />
+                              editable={true} placeholder="Select a Brand" />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
