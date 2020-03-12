@@ -388,6 +388,10 @@ export class Dropdown extends Component {
         this.setState({filter: event.target.value});
     }
 
+    resetFilter() {
+        this.setState({filter: null});
+    }
+
     onFilterInputKeyDown(event) {
         switch (event.which) {
             //down

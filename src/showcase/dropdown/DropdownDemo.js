@@ -87,7 +87,7 @@ export class DropdownDemo extends Component {
 
                     <h3>Editable</h3>
                     <Dropdown value={this.state.car} options={this.state.cars} onChange={this.onCarChange}  style={{width: '12em'}}
-                              editable={true} placeholder="Select a Brand" />
+                              editable={true} placeholder="Select a Brand" appendTo={document.body} />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
@@ -519,7 +519,12 @@ carTemplate(option) {
                                     <tr>
                                         <td>checkValidity</td>
                                         <td>-</td>
-                                        <td>Checks whether the element has any constraints and whether it satisfies them and returns a boolean for the result.</td>
+                                        <td>Checks whether the native hidden select element has any constraints and returns a boolean for the result.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>resetFilter</td>
+                                        <td>-</td>
+                                        <td>Reset the options filter.</td>
                                     </tr>
                                 </tbody>
                             </table>
