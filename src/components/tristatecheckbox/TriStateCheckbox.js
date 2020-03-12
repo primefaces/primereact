@@ -62,7 +62,7 @@ export class TriStateCheckbox extends Component {
                 target: {
                     name: this.props.name,
                     id: this.props.id,
-                    value:  newValue,
+                    value: newValue
                 }
             })
         }

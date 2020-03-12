@@ -23,7 +23,7 @@ interface InputMaskProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onComplete?(e: Event): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
 }
 
 export class InputMask extends React.Component<InputMaskProps,any> {}

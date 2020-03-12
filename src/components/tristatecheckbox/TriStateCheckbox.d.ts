@@ -11,7 +11,7 @@ interface TriStateCheckboxProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: {originalEvent: Event, value: boolean}): void;
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
 }
 
 export class TriStateCheckbox extends React.Component<TriStateCheckboxProps,any> {}

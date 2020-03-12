@@ -23,7 +23,7 @@ interface ListBoxProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string,
     itemTemplate?(item: any): JSX.Element | undefined;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
 }
 
 export class ListBox extends React.Component<ListBoxProps,any> {}

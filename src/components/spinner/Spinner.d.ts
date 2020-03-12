@@ -27,7 +27,7 @@ interface SpinnerProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: {value: number}): void;
+    onChange?(e: {originalEvent: Event, value: number, target: {name: string, id: string, value: number}}): void;
     onBlur?(e: Event): void;
 }
 

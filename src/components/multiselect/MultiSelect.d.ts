@@ -27,7 +27,7 @@ interface MultiSelectProps {
     selectedItemsLabel?: string;
     itemTemplate?(item: any): JSX.Element | undefined;
     selectedItemTemplate?(value: any): JSX.Element | undefined;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
 }

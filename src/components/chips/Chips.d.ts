@@ -16,7 +16,7 @@ interface ChipsProps {
     itemTemplate?(item: any): JSX.Element | undefined;
     onAdd?(e: {originalEvent: Event, value: any}): void;
     onRemove?(e: {originalEvent: Event, value: any}): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
 }

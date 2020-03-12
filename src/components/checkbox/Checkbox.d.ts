@@ -17,7 +17,7 @@ interface CheckboxProps {
     ariaLabelledBy?: string;
     onMouseDown?(event: Event): void;
     onContextMenu?(event: Event): void;
-    onChange(e: { originalEvent: Event, value: any, checked: boolean}): void;
+    onChange?(e: {originalEvent: Event, value: any, checked: boolean, target: {type: string, name: string, id: string, value: any, checked: boolean}}): void;
 }
 
 export class Checkbox extends React.Component<CheckboxProps,any> {}

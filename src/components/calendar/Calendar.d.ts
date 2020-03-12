@@ -85,7 +85,7 @@ interface CalendarProps {
     onBlur?(event: Event): void;
     onInput?(event: Event): void;
     onSelect?(e: {originalEvent: Event, value: Date}): void;
-    onChange?(e: {originalEvent: Event, value: Date|Date[]}): void;
+    onChange?(e: {originalEvent: Event, value: Date|Date[], target: {name: string, id: string, value: Date|Date[]}}): void;
     onTodayButtonClick?(event: Event): void;
     onClearButtonClick?(event: Event): void;
     onViewDateChange?(e: {originalEvent: Event, value: Date}): void;
