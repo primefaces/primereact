@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.1.1](https://github.com/primefaces/primereact/tree/4.1.1) (2020-03-12)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.1.0...4.1.1)
+
+**Implemented New Features and Enhancements:**
+
+- Add onFocus-onBlur to Dropdown [\#1260](https://github.com/primefaces/primereact/issues/1260)
+- InputMask OnComplete does not contain the new value [\#1255](https://github.com/primefaces/primereact/issues/1255)
+- resetFilter function for Dropdown [\#1249](https://github.com/primefaces/primereact/issues/1249)
+- Improve type definition for onChange of form components [\#1199](https://github.com/primefaces/primereact/issues/1199)
+
+**Fixed bugs:**
+
+- DataTable scrollHeight doesn't calculate correctly with frozen columns and header groups [\#1261](https://github.com/primefaces/primereact/issues/1261)
+- Disabled TabPanel focussable with TAB-Key [\#1254](https://github.com/primefaces/primereact/issues/1254)
+- Error on TreeTable docs about responsive [\#1253](https://github.com/primefaces/primereact/issues/1253)
+- Select components don't correctly return value [\#1252](https://github.com/primefaces/primereact/issues/1252)
+- currentPageReport should check for {last} boundary [\#1251](https://github.com/primefaces/primereact/issues/1251)
+- onClose of GrowlMessage is also allowing onClick to fire. [\#1248](https://github.com/primefaces/primereact/issues/1248)
+- loadingBody type is different to Documentation [\#1111](https://github.com/primefaces/primereact/issues/1111)
+
 ## [4.1.0](https://github.com/primefaces/primereact/tree/4.1.0) (2020-03-10)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.0.0...4.1.0)
