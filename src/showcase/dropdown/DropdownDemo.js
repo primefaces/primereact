@@ -491,6 +491,16 @@ carTemplate(option) {
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke on right-click.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onFocus</td>
+                                        <td>event: Browser event.</td>
+                                        <td>Callback to invoke when the element receives focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onBlur</td>
+                                        <td>event: Browser event.</td>
+                                        <td>Callback to invoke when the element loses focus.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

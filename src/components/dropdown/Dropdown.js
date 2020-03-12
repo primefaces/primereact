@@ -44,6 +44,8 @@ export class Dropdown extends Component {
         ariaLabel: null,
         ariaLabelledBy: null,
         onChange: null,
+        onFocus: null,
+        onBlur: null,
         onMouseDown: null,
         onContextMenu: null
     };
@@ -83,6 +85,8 @@ export class Dropdown extends Component {
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func
     };
@@ -148,10 +152,18 @@ export class Dropdown extends Component {
 
     onInputFocus(event) {
         DomHandler.addClass(this.container, 'p-focus');
+
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
     onInputBlur(event) {
         DomHandler.removeClass(this.container, 'p-focus');
+
+        if (this.props.onBlur) {
+            this.props.onBlur(event);
+        }
     }
 
     onUpKey(event) {
@@ -353,6 +365,10 @@ export class Dropdown extends Component {
     onEditableInputFocus(event) {
         DomHandler.addClass(this.container, 'p-focus');
         this.hide();
+
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
     onOptionClick(event) {

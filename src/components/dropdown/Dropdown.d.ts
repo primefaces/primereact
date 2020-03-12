@@ -37,6 +37,8 @@ interface DropdownProps {
     ariaLabelledBy?: string,
     itemTemplate?(option:any): React.ReactNode;
     onChange?(e: {originalEvent: Event, value: any}): void;
+    onFocus?(e: Event): void;
+    onBlur?(e: Event): void;
     onMouseDown?(event: Event): void;
     onContextMenu?(event: Event): void;
 }
