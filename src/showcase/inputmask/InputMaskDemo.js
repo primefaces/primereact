@@ -289,7 +289,8 @@ import {InputMask} from 'primereact/inputmask';
                     <tbody>
                         <tr>
                             <td>onComplete</td>
-                            <td>event: Browser event</td>
+                            <td>event: Browser event<br/>
+                                value: New value of the component</td>
                             <td>Callback to invoke on when user completes the mask pattern.</td>
                         </tr>
                         <tr>

@@ -6,118 +6,143 @@
         font-weight: 700;
         font-size: 12px;
         letter-spacing: .3px;
-    
+
         &.status-qualified {
             background-color: #C8E6C9;
             color: #256029;
         }
-    
+
         &.status-unqualified {
             background-color: #FFCDD2;
             color: #C63737;
         }
-    
+
         &.status-negotiation {
             background-color: #FEEDAF;
             color: #8A5340;
         }
-    
+
         &.status-new {
             background-color: #B3E5FC;
             color: #23547B;
         }
-    
+
         &.status-renewal {
             background-color: #ECCFFF;
             color: #694382;
         }
-    
+
         &.status-proposal {
             background-color: #FFD8B2;
             color: #805B36;
         }
     }
-    
+
     .p-multiselect-representative-option {
         display: inline-block;
         vertical-align: middle;
-    
+
         img {
             vertical-align: middle;
             width: 24px;
         }
-    
+
         span {
             margin-top: .125em;
         }
     }
-    
+
     .p-paginator {
         .p-dropdown {
             float: left;
         }
-    
+
         .p-paginator-current {
             float: right;
         }
     }
-    
+
     .p-progressbar {
         height: 8px;
         background-color: #D8DADC;
-    
+
         .p-progressbar-value {
             background-color: #00ACAD;
             transition: none;
         }
     }
-    
+
     .p-column-filter {
         display: block;
-    
+
         input {
             width: 100%;
         }
     }
-    
+
     .p-datatable-globalfilter-container {
         float: right;
-    
+
         input {
             width: 200px;
         }
     }
-    
+
     .p-datepicker {
         min-width: 25em;
-    
+
         td {
             font-weight: 400;
         }
     }
-    
+
     .p-datatable.p-datatable-customers {
         .p-datatable-header {
             border: 0 none;
             padding: 12px;
-            text-align: left;
             font-size: 20px;
+
+            > div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .p-datatable-globalfilter-container {
+                    float: none;
+                }
+            }
+
+            @media screen and (max-width: 40em) {
+              > div {
+                justify-content: center;
+
+                .p-datatable-globalfilter-container {
+                    margin-top: .5em;
+                    width: 100%;
+
+                    .p-inputtext {
+                        width: 100%;
+                    }
+                }
+              }
+            }
         }
-    
+
         .p-paginator {
             border: 0 none;
             padding: 1em;
         }
-    
+
         .p-datatable-thead > tr > th {
             border: 0 none;
             text-align: left;
-    
+
             &.p-filter-column {
                 border-top: 1px solid #c8c8c8;
             }
         }
-    
+
         .p-datatable-tbody > tr > td {
             border: 0 none;
             cursor: auto;

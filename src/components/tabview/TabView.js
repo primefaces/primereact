@@ -86,10 +86,12 @@ export class TabView extends Component {
         const className = classNames(tab.props.headerClassName, 'p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled});
         const id = this.id + '_header_' + index;
         const ariaControls = this.id + '_content_' + index;
+        const tabIndex = tab.props.disabled ? '-1' : null;
 
         return (
             <li className={className} style={tab.props.headerStyle} role="presentation" >
-                <a role="tab" href={'#' + ariaControls} onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected}>
+                <a role="tab" href={'#' + ariaControls} onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id}
+                    aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
                     {tab.props.leftIcon && <span className={classNames('p-tabview-left-icon ', tab.props.leftIcon)}></span>}
                     <span className="p-tabview-title">{tab.props.header}</span>
                     {tab.props.rightIcon && <span className={classNames('p-tabview-right-icon ', tab.props.rightIcon)}></span>}

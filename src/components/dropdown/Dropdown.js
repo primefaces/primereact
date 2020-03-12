@@ -432,7 +432,7 @@ export class Dropdown extends Component {
         if(currentSelectedOption !== event.option) {
             this.updateEditableLabel(event.option);
             const optionValue = this.getOptionValue(event.option);
-            
+
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: optionValue,
@@ -638,11 +638,11 @@ export class Dropdown extends Component {
     }
 
     getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option.label || option;
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option['label'] !== undefined ? option['label'] : option);
     }
 
     getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option.value || option;
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
     }
 
     getOptionKey(option) {

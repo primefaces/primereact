@@ -121,6 +121,10 @@ export class InputMask extends Component {
         return this.props.slotChar.charAt(0);
     }
 
+    getValue() {
+        return this.props.unmask ? this.getUnmaskedValue() : this.input && this.input.value;
+    }
+
     seekNext(pos) {
         while (++pos < this.len && !this.tests[pos]);
         return pos;
@@ -193,7 +197,10 @@ export class InputMask extends Component {
         }
 
         if (this.props.onComplete && this.isCompleted()) {
-            this.props.onComplete(e);
+            this.props.onComplete({
+                originalEvent: e,
+                value: this.getValue()
+            });
         }
     }
 
@@ -302,8 +309,9 @@ export class InputMask extends Component {
 
         if (this.props.onComplete && completed) {
             this.props.onComplete({
-                originalEvent: e
-            })
+                originalEvent: e,
+                value: this.getValue()
+            });
         }
     }
 
@@ -408,18 +416,19 @@ export class InputMask extends Component {
             this.handleInputChange(event);
     }
 
-    handleInputChange(event) {
+    handleInputChange(e) {
         if (this.props.readonly) {
             return;
         }
 
         var pos = this.checkVal(true);
         this.caret(pos);
-        this.updateModel(event);
+        this.updateModel(e);
         if (this.props.onComplete && this.isCompleted()) {
             this.props.onComplete({
-                originalEvent: event
-            })
+                originalEvent: e,
+                value: this.getValue()
+            });
         }
     }
 
