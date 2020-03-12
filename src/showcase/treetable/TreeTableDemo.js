@@ -2128,7 +2128,7 @@ export class TreeTableResponsiveDemo extends Component {
 
     render() {
         return (
-            <TreeTable value={this.state.nodes} responsive={true} header="Responsive TreeTable">
+            <TreeTable value={this.state.nodes} header="Responsive TreeTable">
                 <Column field="name" header="Name" body={this.nameTemplate} expander headerClassName="p-col-d"></Column>
                 <Column field="size" header="Size" className="p-col-d"></Column>
                 <Column field="type" header="Type" className="p-col-d"></Column>
