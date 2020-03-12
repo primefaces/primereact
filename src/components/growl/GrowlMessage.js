@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
 
 export class GrowlMessage extends Component {
 
@@ -37,7 +38,7 @@ export class GrowlMessage extends Component {
         }
     }
 
-    onClose(event) {
+    onClose() {
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
@@ -45,14 +46,10 @@ export class GrowlMessage extends Component {
         if (this.props.onClose) {
             this.props.onClose(this.props.message);
         }
-
-        if (event) {
-            event.preventDefault();
-        }
     }
 
-    onClick() {
-        if (this.props.onClick) {
+    onClick(event) {
+        if (this.props.onClick && !(DomHandler.hasClass(event.target, 'p-growl-icon-close') || DomHandler.hasClass(event.target, 'p-growl-icon-close-icon'))) {
             this.props.onClick(this.props.message);
         }
     }

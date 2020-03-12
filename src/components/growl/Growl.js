@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {GrowlMessage} from './GrowlMessage';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 var messageIdx = 0;
 
