@@ -79,21 +79,32 @@ export class ScrollableView extends Component {
     
     setScrollHeight() {
         if(this.props.scrollHeight) {
-            if(this.props.scrollHeight.indexOf('%') !== -1) {
-                let datatableContainer = this.findDataTableContainer(this.container);
-                this.scrollBody.style.visibility = 'hidden';
-                this.scrollBody.style.height = '100px';         //temporary height to calculate static height
-                let containerHeight = DomHandler.getOuterHeight(datatableContainer);
-                let relativeHeight = DomHandler.getOuterHeight(datatableContainer.parentElement) * parseInt(this.props.scrollHeight, 10) / 100;
-                let staticHeight = containerHeight - 100;       //total height of headers, footers, paginators
-                let scrollBodyHeight = (relativeHeight - staticHeight);
-                
-                this.scrollBody.style.height = 'auto';
-                this.scrollBody.style.maxHeight = scrollBodyHeight + 'px';
-                this.scrollBody.style.visibility = 'visible';
+            let frozenView = this.container.previousElementSibling;
+            if(frozenView) {
+                let frozenScrollBody = DomHandler.findSingle(frozenView, '.p-datatable-scrollable-body');
+                this.scrollBody.style.maxHeight = frozenScrollBody.style.maxHeight;
             }
             else {
-                this.scrollBody.style.maxHeight = this.props.scrollHeight;
+                if(this.props.scrollHeight.indexOf('%') !== -1) {
+                    let datatableContainer = this.findDataTableContainer(this.container);
+                    this.scrollBody.style.visibility = 'hidden';
+                    this.scrollBody.style.height = '100px';         //temporary height to calculate static height
+                    let containerHeight = DomHandler.getOuterHeight(datatableContainer);
+                    let relativeHeight = DomHandler.getOuterHeight(datatableContainer.parentElement) * parseInt(this.props.scrollHeight, 10) / 100;
+                    let staticHeight = containerHeight - 100;       //total height of headers, footers, paginators
+                    let scrollBodyHeight = (relativeHeight - staticHeight);
+                    
+                    if (this.props.frozen) {
+                        scrollBodyHeight -= DomHandler.calculateScrollbarWidth();
+                    }
+                    
+                    this.scrollBody.style.height = 'auto';
+                    this.scrollBody.style.maxHeight = scrollBodyHeight + 'px';
+                    this.scrollBody.style.visibility = 'visible';
+                }
+                else {
+                    this.scrollBody.style.maxHeight = this.props.scrollHeight;
+                }
             }
         }
     }
