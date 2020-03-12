@@ -72,15 +72,6 @@ import {InputSwitch} from 'primereact/inputswitch';
 `}
 </CodeHighlight>
 
-            <h3>Customization</h3>
-            <p>Labels can be customized with <i>onLabel</i> and <i>offLabel</i> properties.</p>
-<CodeHighlight className="language-jsx">
-{`
-<InputSwitch onLabel="Yes" offLabel="No" checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
-
-`}
-</CodeHighlight>
-
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
