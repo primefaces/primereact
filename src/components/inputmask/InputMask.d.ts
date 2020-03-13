@@ -22,7 +22,7 @@ interface InputMaskProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onComplete?(e: Event): void;
+    onComplete?(e: {originalEvent: Event, value: any}): void;
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
 }
 
