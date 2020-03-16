@@ -507,16 +507,16 @@ export class AutoComplete extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.searching) {
+        if (prevProps.suggestions !== this.props.suggestions && this.searching) {
             if (this.props.suggestions && this.props.suggestions.length)
                 this.showPanel();
             else
                 this.hidePanel();
 
             this.hideLoader();
-        }
 
-        this.searching = false;
+            this.searching = false;
+        }
 
         if (this.inputEl && !this.props.multiple) {
             this.updateInputField(this.props.value);
