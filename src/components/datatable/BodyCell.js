@@ -86,9 +86,12 @@ export class BodyCell extends Component {
     }
 
     closeCell() {
-        this.setState({
-            editing: false
-        });
+        /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
+        setTimeout(() => {
+            this.setState({
+                editing: false
+            });
+        }, 1);
 
         this.unbindDocumentEditListener();
     }
