@@ -167,8 +167,10 @@ export class Calendar extends Component {
                 propValue = propValue[0];
             }
 
+            let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
+                            this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
             this.state = {
-                viewDate: (this.props.viewDate || propValue || new Date())
+                viewDate
             }
         }
 
@@ -231,8 +233,13 @@ export class Calendar extends Component {
             }
 
             if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
+                let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
+                            this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+
                 this.setState({
-                    viewDate: (this.props.viewDate || propValue || new Date())
+                    viewDate
+                }, () => {
+                    this.viewStateChanged = true;
                 });
             }
         }
@@ -562,7 +569,7 @@ export class Calendar extends Component {
     }
 
     onMonthDropdownChange(event) {
-        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.getViewDate();
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setMonth(parseInt(event.target.value, 10));
 
@@ -570,7 +577,7 @@ export class Calendar extends Component {
     }
 
     onYearDropdownChange(event) {
-        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.getViewDate();
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setFullYear(parseInt(event.target.value, 10));
 
@@ -815,7 +822,11 @@ export class Calendar extends Component {
     }
 
     getViewDate() {
-        return this.props.onViewDateChange ? this.props.viewDate: this.state.viewDate;
+        return this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+    }
+
+    isValidDate(date) {
+        return date instanceof Date && !isNaN(date);
     }
 
     validateHour(hour, value) {
@@ -1764,14 +1775,15 @@ export class Calendar extends Component {
 
         let formattedValue = '';
 
-        if(value) {
+        if (value) {
             try {
                 if(this.isSingleSelection()) {
-                    formattedValue = this.formatDateTime(value);
+                    formattedValue = this.isValidDate(value) ? this.formatDateTime(value) : '';
                 }
                 else if(this.isMultipleSelection()) {
                     for(let i = 0; i < value.length; i++) {
-                        let dateAsString = this.formatDateTime(value[i]);
+                        let selectedValue = value[i];
+                        let dateAsString = this.isValidDate(selectedValue) ? this.formatDateTime(selectedValue) : '';
                         formattedValue += dateAsString;
                         if(i !== (value.length - 1)) {
                             formattedValue += ', ';
@@ -1783,9 +1795,9 @@ export class Calendar extends Component {
                         let startDate = value[0];
                         let endDate = value[1];
 
-                        formattedValue = this.formatDateTime(startDate);
+                        formattedValue = this.isValidDate(startDate) ? this.formatDateTime(startDate) : '';
                         if(endDate) {
-                            formattedValue += ' - ' + this.formatDateTime(endDate);
+                            formattedValue += (this.isValidDate(endDate) ? ' - ' + this.formatDateTime(endDate) : '');
                         }
                     }
                 }
@@ -2206,7 +2218,7 @@ export class Calendar extends Component {
 
     renderTitleMonthElement(month) {
         if (this.props.monthNavigator && this.props.view !== 'month') {
-            let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewDate = this.getViewDate();
             let viewMonth = viewDate.getMonth();
 
             return (
@@ -2240,7 +2252,7 @@ export class Calendar extends Component {
                 yearOptions.push(i);
             }
 
-            let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewDate = this.getViewDate();
             let viewYear = viewDate.getFullYear();
 
             return (
@@ -2398,7 +2410,7 @@ export class Calendar extends Component {
     }
 
     renderDateView() {
-        let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        let viewDate = this.getViewDate();
         const monthsMetaData = this.createMonths(viewDate.getMonth(), viewDate.getFullYear());
         const months = this.renderMonths(monthsMetaData);
 
