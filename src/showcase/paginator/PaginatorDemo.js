@@ -127,6 +127,18 @@ import {Paginator} from 'primereact/paginator';
                 <li>CurrentPageReport</li>
             </ul>
 
+            <h3>CurrentPageReport</h3>
+            <p>Current page report item in the itemplate displays information about the pagination state. Default value is (&#123;currentPage&#125; of &#123;totalPages&#125;)
+                whereas available placeholders are the following;</p>
+            <ul>
+                <li>&#123;currentPage&#125;</li>
+                <li>&#123;totalPages&#125;</li>
+                <li>&#123;rows&#125;</li>
+                <li>&#123;first&#125;</li>
+                <li>&#123;last&#125;</li>
+                <li>&#123;totalRecords&#125;</li>
+            </ul>
+
             <h3>Properties</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -202,9 +214,9 @@ import {Paginator} from 'primereact/paginator';
                         <tr>
                             <td>currentPageReportTemplate</td>
                             <td>string</td>
-                            <td>(&123;currentPage&125; of &123;totalPages&125;)</td>
+                            <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
                             <td>Template of the current page report element. Available placeholders are
-                                &123;currentPage&125;,&123;totalPages&125;,&123;rows&125;,&123;first&125;,&123;last&125; and &123;totalRecords&125;
+                                &#123;currentPage&#125;,&#123;totalPages&#125;,&#123;rows&#125;,&#123;first&#125;,&#123;last&#125; and &#123;totalRecords&#125;
                             </td>
                         </tr>
                     </tbody>
