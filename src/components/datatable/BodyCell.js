@@ -139,7 +139,7 @@ export class BodyCell extends Component {
             clearTimeout(this.tabindexTimeout);
             if (this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
-                if (focusable) {
+                if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
