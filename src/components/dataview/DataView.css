@@ -1,3 +1,7 @@
+.p-dataview {
+    position: relative;
+}
+
 .p-dataview .p-paginator {
     text-align: center;
 }
@@ -36,6 +40,25 @@
     width: 100%;
 }
 
-.p-dataview-loading-icon {
+/* Loader */
+.p-dataview-loading-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.p-dataview-loading-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    margin-top: -1em;
+    margin-left: -1em;
+}
+
+.p-dataview .p-dataview-loading-icon {
     font-size: 2em;
 }
