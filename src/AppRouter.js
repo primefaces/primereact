@@ -129,6 +129,7 @@ import { ProgressSpinnerDemo } from "./showcase/progressspinner/ProgressSpinnerD
 import { CardDemo } from "./showcase/card/CardDemo";
 import { KeyFilterDemo } from "./showcase/keyfilter/KeyFilterDemo";
 import { DataViewDemo } from "./showcase/dataview/DataViewDemo";
+import { DataViewLazyDemo } from "./showcase/dataview/DataViewLazyDemo";
 import { GalleriaDemo } from './showcase/galleria/GalleriaDemo';
 import { GalleriaBasicDemo } from './showcase/galleria/GalleriaBasicDemo';
 import { GalleriaCaptionDemo } from './showcase/galleria/GalleriaCaptionDemo';
@@ -274,6 +275,8 @@ class AppRouter extends Component {
                 <Route exact path="/datascroller" component={DataScrollerDemo} />
                 <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
                 <Route path="/datascroller/loader" component={DataScrollerLoaderDemo} />
+                <Route exact path="/dataview" component={DataViewDemo} />
+                <Route path="/dataview/lazy" component={DataViewLazyDemo} />
                 <Route path="/menumodel" component={MenuModelDemo} />
                 <Route path="/menu" component={MenuDemo} />
                 <Route path="/tabmenu" component={TabMenuDemo} />
@@ -298,7 +301,6 @@ class AppRouter extends Component {
                 <Route path="/scrollpanel" component={ScrollPanelDemo} />
                 <Route path="/card" component={CardDemo} />
                 <Route path="/keyfilter" component={KeyFilterDemo} />
-                <Route path="/dataview" component={DataViewDemo} />
                 <Route path="/inplace" component={InplaceDemo} />
                 <Route path="/deferredcontent" component={DeferredContentDemo} />
             </React.Fragment>

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Dialog } from '../../components/dialog/Dialog';
 import { Panel } from '../../components/panel/Panel';
 import { CarService } from '../service/CarService';
+import { DataViewSubmenu } from '../../showcase/dataview/DataViewSubmenu';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
@@ -143,6 +144,8 @@ export class DataViewDemo extends Component {
 
         return (
             <div>
+                <DataViewSubmenu />
+
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>DataView</h1>
