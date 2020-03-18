@@ -138,10 +138,6 @@ export class DataTableColTogglerDemo extends Component {
                     <div className="feature-intro">
                         <h1>DataTable - Column Toggler</h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
                     </div>
                 </div>
 
