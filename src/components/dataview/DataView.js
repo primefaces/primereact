@@ -101,6 +101,8 @@ export class DataView extends Component {
         style: null,
         className: null,
         lazy: false,
+        loading: false,
+        loadingIcon: 'pi pi-spinner',
         itemTemplate: null,
         onPage: null
     }
@@ -129,6 +131,8 @@ export class DataView extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         lazy: PropTypes.bool,
+        loading: PropTypes.bool,
+        loadingIcon: PropTypes.string,
         itemTemplate: PropTypes.func.isRequired,
         onPage: PropTypes.func
     }
@@ -215,44 +219,61 @@ export class DataView extends Component {
         }
     }
 
+    renderLoader() {
+        if (this.props.loading) {
+            let iconClassName = classNames('p-dataview-loading-icon pi-spin', this.props.loadingIcon);
+
+            return (
+                <div className="p-dataview-loading">
+                    <div className="p-dataview-loading-overlay p-component-overlay"></div>
+                    <div className="p-dataview-loading-content">
+                        <i className={iconClassName}></i>
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
+    }
+
     renderTopPaginator() {
-        if(this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')){
+        if (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')){
             return this.createPaginator('top');
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderBottomPaginator(){
-        if(this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) {
+    renderBottomPaginator() {
+        if (this.props.paginator && (this.props.paginatorPosition !== 'top' || this.props.paginatorPosition === 'both')) {
             return this.createPaginator('bottom');
         }
-        else {
-            return null;
+
+        return null;
+    }
+
+    renderEmptyMessage() {
+        if (!this.props.loading) {
+            return <div className="p-col-12">{this.props.emptyMessage}</div>;
         }
+
+        return null;
     }
 
-    renderEmptyMessage(){
-        return (
-            <div className="p-col-12">{this.props.emptyMessage}</div>
-        );
-    }
-
-    renderHeader(){
-        if(this.props.header) {
+    renderHeader() {
+        if (this.props.header) {
             return <div className="p-dataview-header">{this.props.header}</div>;
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderFooter(){
-        if (this.props.footer)
+    renderFooter() {
+        if (this.props.footer) {
             return <div className="p-dataview-footer"> {this.props.footer}</div>;
-        else
-            return null;
+        }
+
+        return null;
     }
 
     renderItems(value) {
@@ -309,6 +330,7 @@ export class DataView extends Component {
     render() {
         const value = this.processData();
         const className = classNames('p-dataview p-component', {'p-dataview-list': (this.props.layout === 'list'), 'p-dataview-grid': (this.props.layout === 'grid')}, this.props.className);
+        const loader = this.renderLoader();
         const topPaginator = this.renderTopPaginator();
         const bottomPaginator = this.renderBottomPaginator() ;
         const header =  this.renderHeader();
@@ -317,6 +339,7 @@ export class DataView extends Component {
 
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
+                {loader}
                 {header}
                 {topPaginator}
                 {content}
