@@ -84,10 +84,10 @@ export class HeaderCell extends Component {
     }
 
     getMultiSortMetaDataIndex() {
-        if(this.props.multiSortMeta) {
-            let columnSortField = this.props.columnProps.field || this.props.columnProps.sortField;
-            for(let i = 0; i < this.props.multiSortMeta.length; i++) {
-                if(this.props.multiSortMeta[i].field === columnSortField) {
+        if (this.props.multiSortMeta) {
+            let columnSortField = this.props.columnProps.sortField || this.props.columnProps.field;
+            for (let i = 0; i < this.props.multiSortMeta.length; i++) {
+                if (this.props.multiSortMeta[i].field === columnSortField) {
                     return i;
                 }
             }
