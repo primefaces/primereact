@@ -569,7 +569,7 @@ export class AutoComplete extends Component {
             return this.props.value.map((val, index) => {
                 return (
                     <li key={index + 'multi-item'} className="p-autocomplete-token p-highlight">
-                        <span className="p-autocomplete-token-icon pi pi-fw pi-times" onClick={(e) => this.removeItem(e, index)}></span>
+                        {!this.props.disabled && <span className="p-autocomplete-token-icon pi pi-fw pi-times" onClick={(e) => this.removeItem(e, index)}></span>}
                         <span className="p-autocomplete-token-label">{this.formatValue(val)}</span>
                     </li>
                 );
