@@ -248,7 +248,7 @@ export class Calendar extends Component {
             this.updateFocus();
         }
 
-        if (prevProps.value !== this.props.value && !this.viewStateChanged) {
+        if (prevProps.value !== this.props.value && (!this.viewStateChanged || !this.panel.offsetParent)) {
             this.updateInputfield(this.props.value);
         }
     }
