@@ -1,4 +1,67 @@
 {
+    "4.1.2": {
+        "datatable": [
+            {
+                "number": 1279,
+                "title": "Multiple Sort doesn't work as expected in the DataTable if a sortable column has sortField and field properties",
+                "url": "https://github.com/primefaces/primereact/issues/1279"
+            },
+            {
+                "number": 1269,
+                "title": "Tab-Key doesn't work in Datatable with cell editing on IE11 and Edge",
+                "url": "https://github.com/primefaces/primereact/issues/1269"
+            },
+            {
+                "number": 1271,
+                "title": "Setting state in onFocus of Datatable Editors crashes app",
+                "url": "https://github.com/primefaces/primereact/issues/1271"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1278,
+                "title": "Chips in disabled Autocomplete are not disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1278"
+            },
+            {
+                "number": 1267,
+                "title": "IE11: Autocomplete with dropdown requires doubleclick",
+                "url": "https://github.com/primefaces/primereact/issues/1267"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1277,
+                "title": "Calendar display not update when value change.",
+                "url": "https://github.com/primefaces/primereact/issues/1277"
+            },
+            {
+                "number": 1272,
+                "title": "Calendar closes right away in Chrome when it has showTime={true}",
+                "url": "https://github.com/primefaces/primereact/issues/1272"
+            },
+            {
+                "number": 1270,
+                "title": "Invalid Date in Calendar in IE11 crashes the app",
+                "url": "https://github.com/primefaces/primereact/issues/1270"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1265,
+                "title": "OnComplete callback has wrong property params on InputMask.d.ts",
+                "url": "https://github.com/primefaces/primereact/issues/1265"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1264,
+                "title": "DataView: lazy loading implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1264"
+            }
+        ]
+    },
+
     "4.1.1": {
         "paginator": [
             {
