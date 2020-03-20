@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.1.2](https://github.com/primefaces/primereact/tree/4.1.2) (2020-03-20)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.1.1...4.1.2)
+
+**Implemented New Features and Enhancements:**
+
+- DataView: lazy loading implementation [\#1264](https://github.com/primefaces/primereact/issues/1264)
+
+**Fixed bugs:**
+
+- Multiple Sort doesn't work as expected in the DataTable if a sortable column has sortField and field properties [\#1279](https://github.com/primefaces/primereact/issues/1279)
+- Chips in disabled Autocomplete are not disabled [\#1278](https://github.com/primefaces/primereact/issues/1278)
+- Calendar display not update when value change. [\#1277](https://github.com/primefaces/primereact/issues/1277)
+- Calendar closes right away in Chrome when it has showTime={true} [\#1272](https://github.com/primefaces/primereact/issues/1272)
+- Setting state in onFocus of Datatable Editors crashes app [\#1271](https://github.com/primefaces/primereact/issues/1271)
+- Invalid Date in Calendar in IE11 crashes the app [\#1270](https://github.com/primefaces/primereact/issues/1270)
+- Tab-Key doesn't work in Datatable with cell editing on IE11 and Edge [\#1269](https://github.com/primefaces/primereact/issues/1269)
+- IE11: Autocomplete with dropdown requires doubleclick [\#1267](https://github.com/primefaces/primereact/issues/1267)
+- OnComplete callback has wrong property params on InputMask.d.ts [\#1265](https://github.com/primefaces/primereact/issues/1265)
+- Fix InputSwitch documentation for onLabel-offLabel [\#1263](https://github.com/primefaces/primereact/issues/1263)
+
 ## [4.1.1](https://github.com/primefaces/primereact/tree/4.1.1) (2020-03-12)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.1.0...4.1.1)
