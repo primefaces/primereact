@@ -587,9 +587,10 @@ export class Calendar extends Component {
     onTodayButtonClick(event) {
         const today = new Date();
         const dateMeta = {day: today.getDate(), month: today.getMonth(), year: today.getFullYear(), today: true, selectable: true};
+        const timeMeta = {hours: today.getHours(), minutes: today.getMinutes(), seconds: today.getSeconds()};
 
         this.updateViewDate(event, today);
-        this.onDateSelect(event, dateMeta);
+        this.onDateSelect(event, dateMeta, timeMeta);
 
         if (this.props.onTodayButtonClick) {
             this.props.onTodayButtonClick(event);
@@ -1166,7 +1167,7 @@ export class Calendar extends Component {
         }
     }
 
-    onDateSelect(event, dateMeta) {
+    onDateSelect(event, dateMeta, timeMeta) {
         if(this.props.disabled || !dateMeta.selectable) {
             event.preventDefault();
             return;
@@ -1183,11 +1184,11 @@ export class Calendar extends Component {
                 this.updateModel(event, value);
             }
             else if(!this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length) {
-                this.selectDate(event, dateMeta);
+                this.selectDate(event, dateMeta, timeMeta);
             }
         }
         else {
-            this.selectDate(event, dateMeta);
+            this.selectDate(event, dateMeta, timeMeta);
         }
 
         if(!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
@@ -1203,15 +1204,28 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
-    selectDate(event, dateMeta) {
+    selectTime(date, timeMeta) {
+        if (this.props.showTime) {
+            let hours, minutes, seconds;
+
+            if (timeMeta) {
+                ({hours, minutes, seconds} = timeMeta);
+            }
+            else {
+                let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
+                [hours, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()];
+            }
+
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            date.setSeconds(seconds);
+        }
+    }
+
+    selectDate(event, dateMeta, timeMeta) {
         let date = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
 
-        if(this.props.showTime) {
-            let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
-            date.setHours(time.getHours());
-            date.setMinutes(time.getMinutes());
-            date.setSeconds(time.getSeconds());
-        }
+        this.selectTime(date, timeMeta);
 
         if(this.props.minDate && this.props.minDate > date) {
             date = this.props.minDate;
