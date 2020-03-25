@@ -62,6 +62,7 @@ interface DataTableProps {
     tabIndex?:string;
     stateKey?:string;
     stateStorage?:string;
+    stateFeatures?:string | string[];
     groupField?:string;
     editMode?:string;
     expandableRowGroups?:boolean;

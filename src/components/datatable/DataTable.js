@@ -82,6 +82,7 @@ export class DataTable extends Component {
         tabIndex: '0',
         stateKey: null,
         stateStorage: 'session',
+        stateFeatures: null,
         editMode: 'cell',
         expandableRowGroups: false,
         rowHover: false,
@@ -176,6 +177,7 @@ export class DataTable extends Component {
         tabIndex: PropTypes.string,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
+        stateFeatures: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
         editMode: PropTypes.string,
         expandableRowGroups: PropTypes.bool,
         rowHover: PropTypes.bool,
@@ -281,42 +283,68 @@ export class DataTable extends Component {
     }
 
     saveState() {
-        const storage = this.getStorage();
         let state = {};
+        const { stateFeatures } = this.props;
+        const allFeatures = {
+            columns: () => {
+                if (this.props.resizableColumns) {
+                    this.saveColumnWidths(state);
+                }
 
-        if (this.props.paginator) {
-            state.first = this.getFirst();
-            state.rows = this.getRows();
+                if (this.props.reorderableColumns) {
+                    state.columnOrder = this.state.columnOrder;
+                }
+            },
+            filters: () => {
+                if (this.hasFilter()) {
+                    state.filters = this.getFilters();
+                }
+            },
+            paginator: () => {
+                if (this.props.paginator) {
+                    state.first = this.getFirst();
+                    state.rows = this.getRows();
+                }
+            },
+            rows: () => {
+                if (this.props.expandedRows) {
+                    state.expandedRows = this.props.expandedRows;
+                }
+            },
+            selection: () => {
+                if (this.props.selection && this.props.onSelectionChange) {
+                    state.selection = this.props.selection;
+                }
+            },
+            sort: () => {
+                if (this.getSortField()) {
+                    state.sortField = this.getSortField();
+                    state.sortOrder = this.getSortOrder();
+                    state.multiSortMeta = this.getMultiSortMeta();
+                }
+            }
+        };
+
+        // Check the type of the 'stateFeatures'
+        // If it's a mere string, implies that user wants to store only that feature.
+        if (typeof stateFeatures === 'string' && allFeatures[stateFeatures] instanceof Function) {
+            allFeatures[stateFeatures]();
         }
-
-        if (this.getSortField()) {
-            state.sortField = this.getSortField();
-            state.sortOrder = this.getSortOrder();
-            state.multiSortMeta = this.getMultiSortMeta();
+        // If it's an array of strings, implies that user wants to store a collecton of features.
+        else if (Array.isArray(stateFeatures)) {
+            stateFeatures.forEach(feature => {
+                if (allFeatures[feature] instanceof Function) {
+                    allFeatures[feature]();
+                }
+            });
         }
-
-        if (this.hasFilter()) {
-            state.filters = this.getFilters();
-        }
-
-        if (this.props.resizableColumns) {
-            this.saveColumnWidths(state);
-        }
-
-        if (this.props.reorderableColumns) {
-            state.columnOrder = this.state.columnOrder;
-        }
-
-        if (this.props.expandedRows) {
-            state.expandedRows = this.props.expandedRows;
-        }
-
-        if (this.props.selection && this.props.onSelectionChange) {
-            state.selection = this.props.selection;
+        // If none above is fullfilled, then store all the possible features (default).
+        else {
+            Object.values(allFeatures).forEach(featureToStore => featureToStore());
         }
 
         if (Object.keys(state).length) {
-            storage.setItem(this.props.stateKey, JSON.stringify(state));
+            this.getStorage().setItem(this.props.stateKey, JSON.stringify(state));
         }
     }
 
