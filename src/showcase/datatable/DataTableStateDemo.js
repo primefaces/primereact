@@ -51,7 +51,7 @@ export class DataTableStateDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Session Storage</h3>
                     <DataTable value={this.state.cars1} selectionMode="multiple" resizableColumns={true} footer={this.displaySelection(this.state.selectedCars1)}
-                        selection={this.state.selectedCars1} onSelectionChange={e => this.setState({selectedCars1: e.value})} paginator={true} rows={10} stateKey="tablestatedemo-session">
+                        selection={this.state.selectedCars1} onSelectionChange={e => this.setState({selectedCars1: e.value})} paginator={true} rows={10} stateKey="tablestatedemo-session" stateStorage='local' stateFeatures='filters'>
                         <Column field="vin" header="Vin" sortable={true} filter={true}/>
                         <Column field="year" header="Year" sortable={true} filter={true}/>
                         <Column field="brand" header="Brand" sortable={true} filter={true}/>
