@@ -89,6 +89,8 @@ export class FileUpload extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onSimpleUploaderClick = this.onSimpleUploaderClick.bind(this);
+
+        this.duplicateIEEvent = false;
     }
 
     hasFiles() {
@@ -122,6 +124,13 @@ export class FileUpload extends Component {
         }
     }
 
+    clearIEInput() {
+        if (this.fileInput) {
+            this.duplicateIEEvent = true; //IE11 fix to prevent onFileChange trigger again
+            this.fileInput.value = '';
+        }
+    }
+
     formatSize(bytes) {
         if(bytes === 0) {
             return '0 B';
@@ -135,6 +144,11 @@ export class FileUpload extends Component {
     }
 
     onFileSelect(event) {
+        if (event.type !== 'drop' && this.isIE11() && this.duplicateIEEvent) {
+            this.duplicateIEEvent = false;
+            return;
+        }
+
         this.setState({msgs:[]});
         this.files = this.state.files || [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
@@ -161,7 +175,12 @@ export class FileUpload extends Component {
             this.props.onSelect({originalEvent: event, files: files});
         }
 
-        this.clearInputElement();
+        if (event.type !== 'drop' && this.isIE11()) {
+            this.clearIEInput();
+        }
+        else {
+            this.clearInputElement();
+        }
 
         if(this.props.mode === 'basic') {
             this.fileInput.style.display = 'none';
@@ -174,6 +193,10 @@ export class FileUpload extends Component {
                 return true;
         }
         return false;
+    }
+
+    isIE11() {
+        return !!window['MSInputMethodContext'] && !!document['documentMode'];
     }
 
     validate(file) {

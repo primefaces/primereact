@@ -1,6 +1,6 @@
 {
   "name": "primereact",
-  "version": "4.1.2",
+  "version": "4.2.0-SNAPSHOT",
   "homepage": "/primereact/showcase",
   "repository": {
     "type": "git",
@@ -36,6 +36,9 @@
     "react-scripts": "2.1.1",
     "react-transition-group": "^2.5.1",
     "react-app-polyfill": "^0.2.1"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6"
   },
   "scripts": {
     "start": "react-scripts start",

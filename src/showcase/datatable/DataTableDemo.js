@@ -230,7 +230,7 @@ export class DataTableDemo extends Component {
                         <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
                         <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
                         <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                        <Column body={this.actionTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                        <Column body={this.actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
                     </DataTable>
                 </div>
 
@@ -654,7 +654,7 @@ export class DataTableTemplatingDemo extends Component {
         this.carservice = new CarService();
         this.brandTemplate = this.brandTemplate.bind(this);
         this.colorTemplate = this.colorTemplate.bind(this);
-        this.actionTemplate = this.actionTemplate.bind(this);
+        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
     }
 
     colorTemplate(rowData, column) {
@@ -3042,7 +3042,7 @@ export class DataTableDemo extends Component {
                         <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
                         <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
                         <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                        <Column body={this.actionTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                        <Column body={this.actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
                     </DataTable>
                 </div>
             </div>
