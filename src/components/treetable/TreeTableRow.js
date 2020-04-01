@@ -79,6 +79,7 @@ export class TreeTableRow extends Component {
             this.expand(event);
 
         event.preventDefault();
+        event.stopPropagation();
     }
 
     expand(event) {
