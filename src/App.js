@@ -49,6 +49,7 @@ export class App extends Component {
         this.onThemeChange = this.onThemeChange.bind(this);
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
         this.onSidebarClick = this.onSidebarClick.bind(this);
+        this.onMenuItemClick = this.onMenuItemClick.bind(this);
         this.onHideNews = this.onHideNews.bind(this);
         this.bindDocumentClick = this.bindDocumentClick.bind(this);
         this.onConfiguratorClick = this.onConfiguratorClick.bind(this)
@@ -138,6 +139,10 @@ export class App extends Component {
 
     onSidebarClick() {
         this.menuClick = true;
+    }
+
+    onMenuItemClick() {
+        this.setState({ mobileMenuActive: false });
     }
 
     bindDocumentClick() {
@@ -262,7 +267,7 @@ export class App extends Component {
                 <AppTopbar activeTopbarItem={this.state.activeTopbarItem} onMenuButtonClick={this.onMenuButtonClick}
                     onTopbarItemClick={this.onTopbarItemClick} onThemeChange={this.onThemeChange} menuActive={this.state.mobileMenuActive}/>
 
-                <AppMenu onSidebarClick={this.onSidebarClick}/>
+                <AppMenu onSidebarClick={this.onSidebarClick} onMenuItemClick={this.onMenuItemClick}/>
 
                 <div className="layout-content">
                     <AppContentContext.Provider value={{

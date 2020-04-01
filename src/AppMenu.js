@@ -95,7 +95,7 @@ export class AppMenu extends Component {
                         menuitem.children.map((item, index) => {
                             return (
                                 <li key={`menuitem_${menuitemIndex}_${index}`} role="presentation">
-                                    <Link to={item.to} role="menuitem">
+                                    <Link to={item.to} role="menuitem" onClick={this.props.onMenuItemClick}>
                                         {item.name}
                                         { item.badge && <span className="layout-menuitem-badge">{item.badge}</span> }
                                     </Link>
