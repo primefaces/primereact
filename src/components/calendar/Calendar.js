@@ -37,10 +37,12 @@ export class Calendar extends Component {
         showTime: false,
         timeOnly: false,
         showSeconds: false,
+        showMillisec: false,
         hourFormat: '24',
         stepHour: 1,
         stepMinute: 1,
         stepSecond: 1,
+        stepMillisec: 1,
         shortYearCutoff: '+10',
         hideOnDateTimeSelect: false,
         showWeek: false,
@@ -116,10 +118,12 @@ export class Calendar extends Component {
         showTime: PropTypes.bool,
         timeOnly: PropTypes.bool,
         showSeconds: PropTypes.bool,
+        showMillisec: PropTypes.bool,
         hourFormat: PropTypes.string,
         stepHour: PropTypes.number,
         stepMinute: PropTypes.number,
         stepSecond: PropTypes.number,
+        stepMillisec: PropTypes.number,
         shortYearCutoff: PropTypes.string,
         hideOnDateTimeSelect: PropTypes.bool,
         showWeek: PropTypes.bool,
@@ -587,7 +591,7 @@ export class Calendar extends Component {
     onTodayButtonClick(event) {
         const today = new Date();
         const dateMeta = {day: today.getDate(), month: today.getMonth(), year: today.getFullYear(), today: true, selectable: true};
-        const timeMeta = {hours: today.getHours(), minutes: today.getMinutes(), seconds: today.getSeconds()};
+        const timeMeta = {hours: today.getHours(), minutes: today.getMinutes(), seconds: today.getSeconds(), milliseconds: today.getMilliseconds()};
 
         this.updateViewDate(event, today);
         this.onDateSelect(event, dateMeta, timeMeta);
@@ -657,6 +661,13 @@ export class Calendar extends Component {
                     this.decrementSecond(event);
                 break;
 
+            case 3:
+                if (direction === 1)
+                    this.incrementMilliSecond(event);
+                else
+                    this.decrementMilliSecond(event);
+                break;
+
             default:
                 break;
         }
@@ -679,26 +690,36 @@ export class Calendar extends Component {
             if(this.props.maxDate && this.props.maxDate.toDateString() === currentTime.toDateString() && this.props.maxDate.getHours() === newHour) {
                 if(this.props.maxDate.getMinutes() < currentTime.getMinutes()) {
                     if(this.props.maxDate.getSeconds() < currentTime.getSeconds()) {
-                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds());
+                        if(this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), this.props.maxDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), currentTime.getMilliseconds());
+                        }
                     }
                     else {
-                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), currentTime.getSeconds());
+                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 }
                 else if(this.props.maxDate.getMinutes() === currentTime.getMinutes()) {
                     if(this.props.maxDate.getSeconds() < currentTime.getSeconds()) {
-                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds());
+                        if(this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), this.props.maxDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), currentTime.getMilliseconds());
+                        }
                     }
                     else {
-                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), currentTime.getSeconds());
+                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 }
                 else {
-                    this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+                    this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
             else {
-                this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+                this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
             }
         }
 
@@ -715,26 +736,36 @@ export class Calendar extends Component {
             if(this.props.minDate && this.props.minDate.toDateString() === currentTime.toDateString() && this.props.minDate.getHours() === newHour) {
                 if(this.props.minDate.getMinutes() > currentTime.getMinutes()) {
                     if(this.props.minDate.getSeconds() > currentTime.getSeconds()) {
-                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds());
+                        if(this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), this.props.minDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), currentTime.getMilliseconds());
+                        }
                     }
                     else {
-                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), currentTime.getSeconds());
+                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 }
                 else if(this.props.minDate.getMinutes() === currentTime.getMinutes()) {
                     if(this.props.minDate.getSeconds() > currentTime.getSeconds()) {
-                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds());
+                        if(this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), this.props.minDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), currentTime.getMilliseconds());
+                        }
                     }
                     else {
-                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), currentTime.getSeconds());
+                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 }
                 else {
-                    this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+                    this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
             else {
-                this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+                this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
             }
         }
 
@@ -750,14 +781,19 @@ export class Calendar extends Component {
         if (this.validateMinute(newMinute, currentTime)) {
             if(this.props.maxDate && this.props.maxDate.toDateString() === currentTime.toDateString() && this.props.maxDate.getMinutes() === newMinute) {
                 if(this.props.maxDate.getSeconds() < currentTime.getSeconds()) {
-                    this.updateTime(event, currentTime.getHours(), newMinute, this.props.maxDate.getSeconds());
+                    if(this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.maxDate.getSeconds(), this.props.maxDate.getMilliseconds());
+                    }
+                    else {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.maxDate.getSeconds(), currentTime.getMilliseconds());
+                    }
                 }
                 else {
-                    this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+                    this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
             else {
-                this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+                this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
             }
         }
 
@@ -773,14 +809,19 @@ export class Calendar extends Component {
         if (this.validateMinute(newMinute, currentTime)) {
             if(this.props.minDate && this.props.minDate.toDateString() === currentTime.toDateString() && this.props.minDate.getMinutes() === newMinute) {
                 if(this.props.minDate.getSeconds() > currentTime.getSeconds()) {
-                    this.updateTime(event, currentTime.getHours(), newMinute, this.props.minDate.getSeconds());
+                    if(this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.minDate.getSeconds(), this.props.minDate.getMilliseconds());
+                    }
+                    else {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.minDate.getSeconds(), currentTime.getMilliseconds());
+                    }
                 }
                 else {
-                    this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+                    this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
             else {
-                this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+                this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
             }
         }
 
@@ -794,7 +835,17 @@ export class Calendar extends Component {
         newSecond = (newSecond > 59) ? (newSecond - 60) : newSecond;
 
         if (this.validateSecond(newSecond, currentTime)) {
-            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
+            if(this.props.maxDate && this.props.maxDate.toDateString() === currentTime.toDateString() && this.props.maxDate.getSeconds() === newSecond) {
+                if(this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, this.props.maxDate.getMilliseconds());
+                }
+                else {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+            }
         }
 
         event.preventDefault();
@@ -807,7 +858,43 @@ export class Calendar extends Component {
         newSecond = (newSecond < 0) ? (newSecond + 60) : newSecond;
 
         if (this.validateSecond(newSecond, currentTime)) {
-            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
+            if(this.props.minDate && this.props.minDate.toDateString() === currentTime.toDateString() && this.props.minDate.getSeconds() === newSecond) {
+                if(this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, this.props.minDate.getMilliseconds());
+                }
+                else {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+            }
+        }
+
+        event.preventDefault();
+    }
+
+    incrementMilliSecond(event) {
+        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentMillisecond = currentTime.getMilliseconds();
+        let newMillisecond = currentMillisecond + this.props.stepMillisec;
+        newMillisecond = (newMillisecond > 999) ? (newMillisecond - 1000) : newMillisecond;
+
+        if (this.validateMillisecond(newMillisecond, currentTime)) {
+            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), newMillisecond);
+        }
+
+        event.preventDefault();
+    }
+
+    decrementMilliSecond(event) {
+        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentMillisecond = currentTime.getMilliseconds();
+        let newMillisecond = currentMillisecond - this.props.stepMillisec;
+        newMillisecond = (newMillisecond < 0) ? (newMillisecond + 200) : newMillisecond;
+
+        if (this.validateMillisecond(newMillisecond, currentTime)) {
+            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), newMillisecond);
         }
 
         event.preventDefault();
@@ -818,7 +905,7 @@ export class Calendar extends Component {
         const currentHour = currentTime.getHours();
         const newHour = (currentHour >= 12) ? currentHour - 12: currentHour + 12;
 
-        this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+        this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
         event.preventDefault();
     }
 
@@ -895,12 +982,36 @@ export class Calendar extends Component {
         return valid;
     }
 
-    updateTime(event, hour, minute, second) {
+    validateMillisecond(millisecond, value) {
+        let valid = true;
+        let valueDateString = value ? value.toDateString() : null;
+
+        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if(value.getHours() === this.props.minDate.getHours() && value.getSeconds() === this.props.minDate.getSeconds() && value.getMinutes() === this.props.minDate.getMinutes()) {
+                if(this.props.minDate.getMilliseconds() > millisecond) {
+                    valid = false;
+                }
+            }
+        }
+
+        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if(value.getHours() === this.props.maxDate.getHours() && value.getSeconds() === this.props.maxDate.getSeconds() && value.getMinutes() === this.props.maxDate.getMinutes()){
+                if(this.props.maxDate.getMilliseconds() < millisecond) {
+                    valid = false;
+                }
+            }
+        }
+
+        return valid;
+    }
+
+    updateTime(event, hour, minute, second, millisecond) {
         let newDateTime = (this.props.value && this.props.value instanceof Date) ? new Date(this.props.value) : new Date();
 
         newDateTime.setHours(hour);
         newDateTime.setMinutes(minute);
         newDateTime.setSeconds(second);
+        newDateTime.setMilliseconds(millisecond);
 
         this.updateModel(event, newDateTime);
 
@@ -1206,19 +1317,20 @@ export class Calendar extends Component {
 
     selectTime(date, timeMeta) {
         if (this.props.showTime) {
-            let hours, minutes, seconds;
+            let hours, minutes, seconds, milliseconds;
 
             if (timeMeta) {
-                ({hours, minutes, seconds} = timeMeta);
+                ({hours, minutes, seconds, milliseconds} = timeMeta);
             }
             else {
                 let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
-                [hours, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()];
+                [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()];
             }
 
             date.setHours(hours);
             date.setMinutes(minutes);
             date.setSeconds(seconds);
+            date.setMilliseconds(milliseconds);
         }
     }
 
@@ -1662,6 +1774,11 @@ export class Calendar extends Component {
                     if(this.props.minDate.getSeconds() > value.getSeconds()) {
                         validMin = false;
                     }
+                    else if(this.props.minDate.getSeconds() === value.getSeconds()) {
+                        if(this.props.minDate.getMilliseconds() > value.getMilliseconds()) {
+                            validMin = false;
+                        }
+                    }
                 }
             }
         }
@@ -1677,6 +1794,11 @@ export class Calendar extends Component {
                 else if(this.props.maxDate.getMinutes() === value.getMinutes()) {
                     if(this.props.maxDate.getSeconds() < value.getSeconds()) {
                         validMax = false;
+                    }
+                    else if(this.props.maxDate.getSeconds() === value.getSeconds()) {
+                        if(this.props.maxDate.getMilliseconds() < value.getMilliseconds()) {
+                            validMax = false;
+                        }
                     }
                 }
             }
@@ -1931,6 +2053,7 @@ export class Calendar extends Component {
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let seconds = date.getSeconds();
+        let milliseconds = date.getMilliseconds();
 
         if (this.props.hourFormat === '12' && hours > 11 && hours !== 12) {
             hours -= 12;
@@ -1948,6 +2071,11 @@ export class Calendar extends Component {
         if (this.props.showSeconds) {
             output += ':';
             output += (seconds < 10) ? '0' + seconds : seconds;
+        }
+
+        if (this.props.showMillisec) {
+            output += ':';
+            output += milliseconds < 100 ? (milliseconds < 10 ? '00' : '0') + milliseconds : milliseconds;
         }
 
         if (this.props.hourFormat === '12') {
@@ -2015,21 +2143,28 @@ export class Calendar extends Component {
         value.setHours(time.hour);
         value.setMinutes(time.minute);
         value.setSeconds(time.second);
+        value.setMilliseconds(time.millisecond);
     }
 
     parseTime(value, ampm) {
         let tokens = value.split(':');
         let validTokenLength = this.props.showSeconds ? 3 : 2;
+        validTokenLength = this.props.showMillisec ? validTokenLength + 1 : validTokenLength;
 
-        if(tokens.length !== validTokenLength || tokens[0].length !== 2 || tokens[1].length !== 2 || (this.props.showSeconds && tokens[2].length !== 2)) {
+        if(tokens.length !== validTokenLength || tokens[0].length !== 2 || tokens[1].length !== 2 ||
+            (this.props.showSeconds && tokens[2].length !== 2) ||
+            (this.props.showMillisec && tokens[3].length !== 3)) {
             throw new Error('Invalid time');
         }
 
         let h = parseInt(tokens[0], 10);
         let m = parseInt(tokens[1], 10);
         let s = this.props.showSeconds ? parseInt(tokens[2], 10) : null;
+        let ms = this.props.showMillisec ? parseInt(tokens[3], 10) : null;
 
-        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.props.hourFormat === '12' && h > 12) || (this.props.showSeconds && (isNaN(s) || s > 59))) {
+        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.props.hourFormat === '12' && h > 12) ||
+            (this.props.showSeconds && (isNaN(s) || s > 59)) ||
+            (this.props.showMillisec && (isNaN(s) || s > 1000))) {
             throw new Error('Invalid time');
         }
         else {
@@ -2037,7 +2172,7 @@ export class Calendar extends Component {
                 h+= 12;
             }
 
-            return {hour: h, minute: m, second: s};
+            return {hour: h, minute: m, second: s, millisecond: ms};
         }
     }
 
@@ -2559,9 +2694,32 @@ export class Calendar extends Component {
                 </div>
             );
         }
-        else {
-            return null;
+
+        return null;
+    }
+
+    renderMiliSecondPicker() {
+        if (this.props.showMillisec) {
+            let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+            let millisecond = currentTime.getMilliseconds();
+            let millisecondDisplay = millisecond < 100 ? (millisecond < 10 ? '00' : '0') + millisecond : millisecond;
+
+            return (
+                <div className="p-millisecond-picker">
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                            onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                        <span className="pi pi-chevron-up"></span>
+                    </button>
+                    <span>{millisecondDisplay}</span>
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                            onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                        <span className="pi pi-chevron-down"></span>
+                    </button>
+                </div>
+            );
         }
+
+        return null;
     }
 
     renderAmPmPicker() {
@@ -2610,14 +2768,15 @@ export class Calendar extends Component {
                     {this.renderMinutePicker()}
                     {this.props.showSeconds && this.renderSeparator()}
                     {this.renderSecondPicker()}
+                    {this.props.showMillisec && this.renderSeparator()}
+                    {this.renderMiliSecondPicker()}
                     {this.props.hourFormat === '12' && this.renderSeparator()}
                     {this.renderAmPmPicker()}
                 </div>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderInputElement() {
