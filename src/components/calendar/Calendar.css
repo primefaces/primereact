@@ -185,18 +185,25 @@
 
 /* Time Picker */
 .p-timepicker {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: .5em 0;
 }
 
 .p-timepicker > div {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-left: .5em;
     min-width: 1.5em;
 }
 
 .p-timepicker > .p-minute-picker,
-.p-timepicker > .p-second-picker {
+.p-timepicker > .p-second-picker,
+.p-timepicker > .p-millisecond-picker {
     margin-left: 0;
 }
 
@@ -208,6 +215,10 @@
 .p-timepicker > .p-separator .p-separator-spacer {
     visibility: hidden;
     display: block;
+}
+
+.p-timepicker > .p-separator .p-separator-spacer:last-child {
+    margin-top: .3em;
 }
 
 .p-timepicker > div button {
