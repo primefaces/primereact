@@ -48,10 +48,12 @@ interface CalendarProps {
     showTime?: boolean;
     timeOnly?: boolean;
     showSeconds?: boolean;
+    showMillisec?: boolean;
     hourFormat?: string;
     stepHour?: number;
     stepMinute?: number;
     stepSecond?: number;
+    stepMillisec?: number;
     shortYearCutoff?: string;
     hideOnDateTimeSelect?: boolean;
     showWeek?: boolean;
