@@ -558,6 +558,12 @@ dateTemplate(date) {
                             <td>Whether to show the seconds in time picker.</td>
                         </tr>
                         <tr>
+                            <td>showMillisec</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to show the milliseconds in time picker.</td>
+                        </tr>
+                        <tr>
                             <td>hourFormat</td>
                             <td>string</td>
                             <td>24</td>
@@ -580,6 +586,12 @@ dateTemplate(date) {
                             <td>number</td>
                             <td>1</td>
                             <td>Seconds to change per step.</td>
+                        </tr>
+                        <tr>
+                            <td>stepMillisec</td>
+                            <td>number</td>
+                            <td>1</td>
+                            <td>Milliseconds to change per step.</td>
                         </tr>
                         <tr>
                             <td>shortYearCutoff</td>
