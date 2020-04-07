@@ -112,6 +112,7 @@ export class Carousel extends Component {
         this.remainingItems = 0;
         this.allowAutoplay = !!this.props.autoplayInterval;
         this.circular = this.props.circular || this.allowAutoplay;
+        this.swipeThreshold = 20;
 
         this.id = this.props.id || UniqueComponentId();
     }
@@ -305,11 +306,13 @@ export class Carousel extends Component {
     }
 
     changePageOnTouch(e, diff) {
-        if (diff < 0) {           // left
-            this.navForward(e);
-        }
-        else {                    // right
-            this.navBackward(e);
+        if (Math.abs(diff) > this.swipeThreshold) {
+            if (diff < 0) {           // left
+                this.navForward(e);
+            }
+            else {                    // right
+                this.navBackward(e);
+            }
         }
     }
 
