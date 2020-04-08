@@ -60,7 +60,8 @@ export class DataTableStateDemo extends Component {
 
                     <h3>Local Storage</h3>
                     <DataTable value={this.state.cars2} selectionMode="multiple" resizableColumns={true} footer={this.displaySelection(this.state.selectedCars2)}
-                        selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} paginator={true} rows={10} stateKey="tablestatedemo-local">
+                        selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} paginator={true} rows={10}
+                        stateStorage="local" stateKey="tablestatedemo-local">
                         <Column field="vin" header="Vin" sortable={true} filter={true}/>
                         <Column field="year" header="Year" sortable={true} filter={true}/>
                         <Column field="brand" header="Brand" sortable={true} filter={true}/>
@@ -146,7 +147,8 @@ export class DataTableStateDemo extends Component {
 
                     <h3>Local Storage</h3>
                     <DataTable value={this.state.cars2} selectionMode="multiple" resizableColumns={true} footer={this.displaySelection(this.state.selectedCars2)}
-                        selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} paginator={true} rows={10} stateKey="tablestatedemo-local">
+                        selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} paginator={true} rows={10}
+                        stateStorage="local" stateKey="tablestatedemo-local">
                         <Column field="vin" header="Vin" sortable={true} filter={true}/>
                         <Column field="year" header="Year" sortable={true} filter={true}/>
                         <Column field="brand" header="Brand" sortable={true} filter={true}/>
