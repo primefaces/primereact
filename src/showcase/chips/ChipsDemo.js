@@ -11,7 +11,8 @@ export class ChipsDemo extends Component {
         super();
         this.state = {
             values1: [],
-            values2: []
+            values2: [],
+            values3: []
         };
     }
 
@@ -42,8 +43,11 @@ export class ChipsDemo extends Component {
                     <h3>Basic</h3>
                     <Chips value={this.state.values1} onChange={(e) => this.setState({values1: e.value})}></Chips>
 
+                    <h3>Comma Separator</h3>
+                    <Chips value={this.state.values2} onChange={(e) =>{ this.setState({values2: e.value});}} separator=','></Chips>
+
                     <h3>Template</h3>
-                    <Chips value={this.state.values2} onChange={(e) => this.setState({values2: e.value})} max={5} itemTemplate={this.customChip}></Chips>
+                    <Chips value={this.state.values3} onChange={(e) => this.setState({values3: e.value})} max={5} itemTemplate={this.customChip}></Chips>
                 </div>
 
                 <ChipsDoc/>
@@ -180,6 +184,18 @@ customChip(item) {
                             <td>string</td>
                             <td>null</td>
                             <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                        </tr>
+                        <tr>
+                            <td>allowDuplicate</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to allow duplicate values or not.</td>
+                        </tr>
+                        <tr>
+                            <td>separator</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Separator char to add an item when pressed in addition to the enter key. Currently only possible value is ","</td>
                         </tr>
                         <tr>
                             <td>itemTemplate</td>

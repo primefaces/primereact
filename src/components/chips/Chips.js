@@ -20,6 +20,8 @@ export class Chips extends Component {
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
+        separator: null,
+        allowDuplicate: true,
         itemTemplate: null,
         onAdd: null,
         onRemove: null,
@@ -40,6 +42,8 @@ export class Chips extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
+        separator: PropTypes.string,
+        allowDuplicate: PropTypes.bool,
         itemTemplate: PropTypes.func,
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
@@ -52,6 +56,7 @@ export class Chips extends Component {
         super(props);
         this.focusInput = this.focusInput.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.onPaste = this.onPaste.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
     }
@@ -124,6 +129,25 @@ export class Chips extends Component {
         }
     }
 
+    addItem(event, item, preventDefault) {
+        if (item && item.trim().length) {
+            let values = this.props.value ? [...this.props.value] : [];
+
+            if (this.props.allowDuplicate || values.indexOf(item) === -1) {
+                values.push(item);
+
+                if (this.props.onAdd) {
+                    this.props.onAdd({
+                        originalEvent: event,
+                        value: item
+                    });
+                }
+            }
+            this.updateInput(event, values, preventDefault)
+        }
+
+    }
+
     focusInput() {
         this.inputElement.focus();
     }
@@ -142,41 +166,58 @@ export class Chips extends Component {
             //enter
             case 13:
                 if (inputValue && inputValue.trim().length && (!this.props.max || this.props.max > this.props.value.length)) {
-                    let values = [...this.props.value];
-                    values.push(inputValue);
-                    this.setState({values: values});
-
-                    if (this.props.onAdd) {
-                        this.props.onAdd({
-                            originalEvent: event,
-                            value: inputValue
-                        });
-                    }
-
-                    if (this.props.onChange) {
-                        this.props.onChange({
-                            originalEvent: event,
-                            value: values,
-                            stopPropagation : () =>{},
-                            preventDefault : () =>{},
-                            target: {
-                                name: this.props.name,
-                                id: this.props.id,
-                                value : values
-                            }
-                        });
-                    }
+                    this.addItem(event, inputValue, true);
                 }
-
-                this.inputElement.value = '';
-                event.preventDefault();
             break;
 
             default:
                 if (this.isMaxedOut()) {
                     event.preventDefault();
                 }
+                else if (this.props.separator) {
+                    if (this.props.separator === ',' && event.which === 188) {
+                        this.addItem(event, inputValue, true);
+                    }
+                }
             break;
+        }
+    }
+
+    updateInput(event, items, preventDefault) {
+        if (this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event,
+                value: items,
+                stopPropagation : () =>{},
+                preventDefault : () =>{},
+                target: {
+                    name: this.props.name,
+                    id: this.props.id,
+                    value : items
+                }
+            });
+        }
+
+        this.inputElement.value = '';
+
+        if (preventDefault) {
+            event.preventDefault();
+        }
+    }
+
+    onPaste(event) {
+        if (this.props.separator) {
+            let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
+
+            if (pastedData) {
+                let values = this.props.value || [];
+                let pastedValues = pastedData.split(this.props.separator);
+                pastedValues = pastedValues.filter(val => ((this.props.allowDuplicate || values.indexOf(val) === -1) && val.trim().length));
+                values = [...values, ...pastedValues];
+
+                this.updateInput(event, values, true)
+            }
+
         }
     }
 
@@ -215,7 +256,7 @@ export class Chips extends Component {
         return (
             <li className="p-chips-input-token">
                 <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
-                            onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}/>
+                            onKeyDown={this.onKeyDown} onPaste={this.onPaste} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}/>
             </li>
         );
     }
