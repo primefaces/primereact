@@ -296,21 +296,27 @@ export class AutoComplete extends Component {
     }
 
     onDropdownClick(event) {
-        this.inputEl.focus();
-        if (this.documentClickListener) {
-            this.dropdownClick = true;
+        if (this.panel && this.panel.element && !this.panel.element.offsetParent) {
+            this.inputEl.focus();
+            if (this.documentClickListener) {
+                this.dropdownClick = true;
+            }
+
+            if (this.props.dropdownMode === 'blank')
+                this.search(event, '', 'dropdown');
+            else if (this.props.dropdownMode === 'current')
+                this.search(event, this.inputEl.value, 'dropdown');
+
+            if (this.props.onDropdownClick) {
+                this.props.onDropdownClick({
+                    originalEvent: event,
+                    query: this.inputEl.value
+                });
+            }
         }
-
-        if (this.props.dropdownMode === 'blank')
-            this.search(event, '', 'dropdown');
-        else if (this.props.dropdownMode === 'current')
-            this.search(event, this.inputEl.value, 'dropdown');
-
-        if (this.props.onDropdownClick) {
-            this.props.onDropdownClick({
-                originalEvent: event,
-                query: this.inputEl.value
-            });
+        else {
+            this.hidePanel();
+            this.dropdownClick = false;
         }
     }
 
