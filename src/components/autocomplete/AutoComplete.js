@@ -153,10 +153,6 @@ export class AutoComplete extends Component {
     }
 
     onInputClick(event) {
-        if (this.documentClickListener) {
-            this.inputClick = true;
-        }
-
         if (this.props.onClick) {
             this.props.onClick(event);
         }
@@ -204,6 +200,7 @@ export class AutoComplete extends Component {
         }
 
         this.inputEl.focus();
+        this.hidePanel();
     }
 
     updateModel(event, value) {
@@ -298,9 +295,6 @@ export class AutoComplete extends Component {
     onDropdownClick(event) {
         if (this.panel && this.panel.element && !this.panel.element.offsetParent) {
             this.inputEl.focus();
-            if (this.documentClickListener) {
-                this.dropdownClick = true;
-            }
 
             if (this.props.dropdownMode === 'blank')
                 this.search(event, '', 'dropdown');
@@ -316,7 +310,6 @@ export class AutoComplete extends Component {
         }
         else {
             this.hidePanel();
-            this.dropdownClick = false;
         }
     }
 
@@ -446,9 +439,6 @@ export class AutoComplete extends Component {
 
     onMultiContainerClick(event) {
         this.inputEl.focus();
-        if (this.documentClickListener) {
-            this.inputClick = true;
-        }
 
         if (this.props.onClick) {
             this.props.onClick(event);
@@ -634,12 +624,9 @@ export class AutoComplete extends Component {
                     return;
                 }
 
-                if (!this.inputClick && !this.dropdownClick) {
+                if (this.isOutsideClicked(event)) {
                     this.hidePanel();
                 }
-
-                this.inputClick = false;
-                this.dropdownClick = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -655,6 +642,11 @@ export class AutoComplete extends Component {
 
     isPanelVisible() {
         return this.panel.element.offsetParent != null;
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target) 
+                    || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
     }
 
     render() {
