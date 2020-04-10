@@ -16,6 +16,7 @@ import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
 import { FlexGridDemo } from './showcase/flexgrid/FlexGridDemo';
 import { GMapDemo } from './showcase/gmap/GMapDemo';
 import { GrowlDemo } from './showcase/growl/GrowlDemo';
+import { InputNumberDemo } from './showcase/inputnumber/InputNumberDemo';
 import { InputTextDemo } from './showcase/inputtext/InputTextDemo';
 import { InputTextareaDemo } from './showcase/inputtextarea/InputTextareaDemo';
 import { ListBoxDemo } from './showcase/listbox/ListBoxDemo';
@@ -179,6 +180,7 @@ class AppRouter extends Component {
                 <Route path="/flexgrid" component={FlexGridDemo} />
                 <Route path="/fieldset" component={FieldsetDemo} />
                 <Route path="/fileupload" component={FileUploadDemo} />
+                <Route path="/inputnumber" component={InputNumberDemo} />
                 <Route path="/inputtext" component={InputTextDemo} />
                 <Route path="/inputtextarea" component={InputTextareaDemo} />
                 <Route path="/listbox" component={ListBoxDemo} />

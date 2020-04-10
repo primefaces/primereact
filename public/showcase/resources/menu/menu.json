@@ -75,6 +75,13 @@
                     ]
                 },
                 {
+                    "name": "InputNumber",
+                    "to": "/inputnumber",
+                    "meta": [
+                        "inputnumber"
+                    ]
+                },
+                {
                     "name": "InputSwitch",
                     "to": "/inputswitch",
                     "meta": [
