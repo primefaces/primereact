@@ -108,7 +108,6 @@ export class Dropdown extends Component {
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onFilterInputChange = this.onFilterInputChange.bind(this);
         this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
-        this.panelClick = this.panelClick.bind(this);
         this.clear = this.clear.bind(this);
     }
 
@@ -117,13 +116,9 @@ export class Dropdown extends Component {
             return;
         }
 
-        if(this.documentClickListener) {
-            this.selfClick = true;
-        }
-
         let clearClick = DomHandler.hasClass(event.target, 'p-dropdown-clear-icon');
 
-        if(!this.overlayClick && !this.editableInputClick && !clearClick) {
+        if(!clearClick) {
             this.focusInput.focus();
 
             if(this.panel.element.offsetParent) {
@@ -139,15 +134,6 @@ export class Dropdown extends Component {
                 }
             }
         }
-
-        if(this.editableInputClick) {
-            this.expeditableInputClick = false;
-        }
-    }
-
-    panelClick() {
-        if (this.state.overlayVisible)
-            this.overlayClick = true;
     }
 
     onInputFocus(event) {
@@ -344,7 +330,6 @@ export class Dropdown extends Component {
     }
 
     onEditableInputClick(event) {
-        this.editableInputClick = true;
         this.bindDocumentClickListener();
     }
 
@@ -491,7 +476,6 @@ export class Dropdown extends Component {
             DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
 
             this.unbindDocumentClickListener();
-            this.clearClickState();
 
             this.hideTimeout = setTimeout(() => {
                 this.panel.element.style.display = 'none';
@@ -513,12 +497,10 @@ export class Dropdown extends Component {
 
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
-            this.documentClickListener = () => {
-                if(!this.selfClick && !this.overlayClick) {
+            this.documentClickListener = (event) => {
+                if(this.isOutsideClicked(event)) {
                     this.hide();
                 }
-
-                this.clearClickState();
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -532,10 +514,9 @@ export class Dropdown extends Component {
         }
     }
 
-    clearClickState() {
-        this.selfClick = false;
-        this.editableInputClick = false;
-        this.overlayClick = false;
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
+            || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
     }
 
     updateEditableLabel(option) {
@@ -746,7 +727,7 @@ export class Dropdown extends Component {
                  {dropdownIcon}
                  <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo}
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    scrollHeight={this.props.scrollHeight} onClick={this.panelClick} filter={filterElement}>
+                    scrollHeight={this.props.scrollHeight} filter={filterElement}>
                     {items}
                  </DropdownPanel>
             </div>
