@@ -289,10 +289,15 @@ export class DataTable extends Component {
             state.rows = this.getRows();
         }
 
-        if (this.getSortField()) {
-            state.sortField = this.getSortField();
+        let sortField = this.getSortField();
+        if (sortField) {
+            state.sortField = sortField;
             state.sortOrder = this.getSortOrder();
-            state.multiSortMeta = this.getMultiSortMeta();
+        }
+
+        let multiSortMeta = this.getMultiSortMeta();
+        if (multiSortMeta) {
+            state.multiSortMeta = multiSortMeta;
         }
 
         if (this.hasFilter()) {
@@ -352,13 +357,22 @@ export class DataTable extends Component {
                 if (this.props.onSort) {
                     this.props.onSort({
                         sortField: restoredState.sortField,
-                        sortOrder: restoredState.sortOrder,
-                        multiSortMeta: restoredState.multiSortMeta
+                        sortOrder: restoredState.sortOrder
                     });
                 }
                 else {
                     state.sortField = restoredState.sortField;
                     state.sortOrder = restoredState.sortOrder;
+                }
+            }
+
+            if (restoredState.multiSortMeta) {
+                if (this.props.onSort) {
+                    this.props.onSort({
+                        multiSortMeta: restoredState.multiSortMeta
+                    });
+                }
+                else {
                     state.multiSortMeta = restoredState.multiSortMeta;
                 }
             }
@@ -462,12 +476,13 @@ export class DataTable extends Component {
         let sortField = event.sortField;
         let sortOrder = this.props.defaultSortOrder;
         let multiSortMeta;
+        let eventMeta;
 
         this.columnSortable = event.sortable;
         this.columnSortFunction = event.sortFunction;
         this.columnField = event.sortField;
 
-        if(this.props.sortMode === 'multiple') {
+        if (this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.getMultiSortMeta();
 
@@ -488,29 +503,29 @@ export class DataTable extends Component {
             else if (this.props.removableSort && multiSortMeta) {
                 this.removeSortMeta(newMetaData, multiSortMeta);
             }
+
+            eventMeta = {
+                multiSortMeta: multiSortMeta
+            };
         }
         else {
             sortOrder = (this.getSortField() === sortField) ? this.getCalculatedSortOrder(this.getSortOrder()) : sortOrder;
-        }
+            if (this.props.removableSort) {
+                sortField = sortOrder ? sortField : null;
+            }
 
-        if (this.props.removableSort) {
-            sortField = sortOrder ? sortField : null;
+            eventMeta = {
+                sortField: sortField,
+                sortOrder: sortOrder
+            };
         }
 
         if (this.props.onSort) {
-            this.props.onSort({
-                sortField: sortField,
-                sortOrder: sortOrder,
-                multiSortMeta: multiSortMeta
-            });
+            this.props.onSort(eventMeta);
         }
         else {
-            this.setState({
-                sortField: sortField,
-                sortOrder: sortOrder,
-                first: 0,
-                multiSortMeta: multiSortMeta
-            });
+            eventMeta.first = 0;
+            this.setState(eventMeta);
         }
 
         if (this.props.onValueChange) {
