@@ -116,9 +116,7 @@ export class Dropdown extends Component {
             return;
         }
 
-        let clearClick = DomHandler.hasClass(event.target, 'p-dropdown-clear-icon');
-
-        if(!clearClick) {
+        if(!this.isClearClicked(event)) {
             this.focusInput.focus();
 
             if(this.panel.element.offsetParent) {
@@ -515,8 +513,12 @@ export class Dropdown extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
+        return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target)
             || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
+    }
+
+    isClearClicked(event) {
+        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon')
     }
 
     updateEditableLabel(option) {
