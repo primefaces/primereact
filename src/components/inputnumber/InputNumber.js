@@ -98,13 +98,14 @@ export class InputNumber extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this.constructParser();
 
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
+        this.onInputMouseDown = this.onInputMouseDown.bind(this);
 
         this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
         this.onUpButtonMouseDown = this.onUpButtonMouseDown.bind(this);
@@ -118,20 +119,68 @@ export class InputNumber extends Component {
         this.onDownButtonKeyDown = this.onDownButtonKeyDown.bind(this);
         this.onDownButtonKeyUp = this.onDownButtonKeyUp.bind(this);
     }
-    
+
+    getOptions() {
+        return {
+            localeMatcher: this.props.localeMatcher,
+            style: this.props.type,
+            numberingSystem: this.props.numberingSystem,
+            unit: this.props.unit,
+            unitDisplay: this.props.unitDisplay,
+            currency: this.props.currency,
+            currencyDisplay: this.props.currencyDisplay,
+            useGrouping: this.props.useGrouping,
+            minimumIntegerDigits: this.props.minimumIntegerDigits,
+            minimumFractionDigits: this.props.minimumFractionDigits,
+            maximumFractionDigits: this.props.maximumFractionDigits,
+            minimumSignificantDigits: this.props.minimumSignificantDigits,
+            maximumSignificantDigits: this.props.maximumSignificantDigits,
+            notation: this.props.notation
+        };
+    }
+
     constructParser() {
-        const parts = new Intl.NumberFormat(this.props.locale).formatToParts(12345.6);
+        const parts = new Intl.NumberFormat(this.props.locale, this.getOptions()).formatToParts(12345.6);
         const numerals = [...new Intl.NumberFormat(this.props.locale, {useGrouping: false}).format(9876543210)].reverse();
-        if (this.props.type === 'currency') {
-            const currencyParts = [...new Intl.NumberFormat(this.props.locale, {style: "currency", currency: this.props.currency, currencyDisplay: this.props.currencyDisplay}).formatToParts(99)]; //$3.50
-            this._currency = new RegExp(`[${currencyParts.find(d => d.type === "currency").value}]`, "g");
-        }
-        
         const index = new Map(numerals.map((d, i) => [d, i]));
-        this._group = new RegExp(`[${parts.find(d => d.type === "group").value}]`, "g");
-        this._decimal = new RegExp(`[${parts.find(d => d.type === "decimal").value}]`);
-        this._numeral = new RegExp(`[${numerals.join("")}]`, "g");
+        this._currency = new RegExp(`[${this.getRegExpPattern(parts, 'currency')}]`);
+        this._decimal = new RegExp(`[${this.getRegExpPattern(parts, 'decimal')}]`);
+        this._group = new RegExp(`[${this.getRegExpPattern(parts, 'group')}]`, 'g');
+        this._literal = new RegExp(`[${this.getRegExpPattern(parts, 'literal')}]`, 'g');
+        this._nan = new RegExp(`[${this.getRegExpPattern(parts, 'nan')}]`, 'g');
+        this._percentSign = new RegExp(`[${this.getRegExpPattern(parts, 'percentSign')}]`, 'g');
+        this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
         this._index = d => index.get(d);
+    }
+
+    getRegExpPattern(parts, type) {
+        let part = parts.find(d => d.type === type);
+        return part ? part.value : '';
+    }
+
+    formatValue() {
+        let value = this.props.value;
+        if (value != null) {
+            if (this.props.format) {
+                let formatter = new Intl.NumberFormat(this.props.locale, this.getOptions());
+                return formatter.format(value);
+            }
+
+            return value;
+        }
+
+        return '';
+    }
+
+    parseValue(value) {
+        return (value = value.trim().replace(/\s/g, '')
+            .replace(this._currency, '')
+            .replace(this._group, '')
+            .replace(this._literal, '')
+            .replace(this._nan, '')
+            .replace(this._percentSign, '')
+            .replace(this._decimal, '.')
+            .replace(this._numeral, this._index)) ? +value : NaN;
     }
 
     repeat(event, interval, dir) {
@@ -265,22 +314,18 @@ export class InputNumber extends Component {
         }
     }
 
-    parseValue(string) {
-        return (string = string.replace(/\s/g, "")
-            .replace(this._group, "")
-            .replace(this._decimal, ".")
-            .replace(this._currency, "")
-            .replace(this._numeral, this._index)) ? +string : NaN;
-    }
-
     onInputFocus() {
         DomHandler.addClass(this.element, 'p-inputwrapper-focus');
     }
 
     onInputChange(event) {
         if (this.props.onChange) {
-            const parsedValue =  this.parseValue(event.target.value);
-            console.log(parsedValue);
+            let {value, selectionStart} = event.target;
+            this.cursor = {
+                prevText: value.substr(0, selectionStart),
+                selectionStart
+            }
+            const parsedValue =  this.parseValue(value);
             this.props.onChange({
                 originalEvent: event,
                 value: parsedValue,
@@ -289,7 +334,7 @@ export class InputNumber extends Component {
                 target: {
                     name: this.props.name,
                     id: this.props.id,
-                    value: event.target.value
+                    value
                 }
             });
         }
@@ -297,6 +342,7 @@ export class InputNumber extends Component {
 
     onInputBlur(event) {
         DomHandler.removeClass(this.element, 'p-inputwrapper-focus');
+        this.cursor = null;
 
         if (this.props.onChange) {
             const parsedValue =  this.parseValue(event.target.value);
@@ -318,31 +364,8 @@ export class InputNumber extends Component {
         }
     }
 
-    formatValue() {
-        let value = this.props.value;
-        if (value != null && this.props.format) {
-            let formatter = new Intl.NumberFormat(this.props.locale, {
-                localeMatcher: this.props.localeMatcher,
-                style: this.props.type,
-                numberingSystem: this.props.numberingSystem,
-                unit: this.props.unit,
-                unitDisplay: this.props.unitDisplay,
-                currency: this.props.currency,
-                currencyDisplay: this.props.currencyDisplay,
-                useGrouping: this.props.useGrouping,
-                minimumIntegerDigits: this.props.minimumIntegerDigits,
-                minimumFractionDigits: this.props.minimumFractionDigits,
-                maximumFractionDigits: this.props.maximumFractionDigits,
-                minimumSignificantDigits: this.props.minimumSignificantDigits,
-                maximumSignificantDigits: this.props.maximumSignificantDigits,
-                notation: this.props.notation
-            });
-
-            return formatter.format(value);
-        }
-        else {
-            return value || '';
-        }
+    onInputMouseDown() {
+        this.cursor = null;
     }
 
     clearTimer() {
@@ -363,6 +386,25 @@ export class InputNumber extends Component {
                 this.tooltip.updateContent(this.props.tooltip);
             else
                 this.renderTooltip();
+        }
+
+        this.setCursorPosition();
+    }
+
+    setCursorPosition() {
+        if (!!this.cursor) {
+            let value = this.inputEl.value || '';
+            let {selectionStart, prevText:cursorPrevText} = this.cursor;
+            let prevText = value.substr(0, selectionStart);
+            while (this.parseValue(prevText) !== this.parseValue(cursorPrevText)) {
+                selectionStart++;
+                prevText = value.substr(0, selectionStart);
+                if (value.length - 1 === selectionStart) {
+                    break;
+                }
+            }
+
+            this.inputEl.setSelectionRange(selectionStart, selectionStart);
         }
     }
 
@@ -389,7 +431,7 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
                        className={className} value={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown}
+                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} onMouseDown={this.onInputMouseDown}
                        onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} aria-valuemin={this.props.min} aria-valuemax={this.props.max}
                        aria-valuenow={valueToRender} aria-labelledby={this.props.ariaLabelledBy}
             />
