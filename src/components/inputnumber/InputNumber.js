@@ -102,6 +102,7 @@ export class InputNumber extends Component {
         this.constructParser();
 
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
+        this.onInputClick = this.onInputClick.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
@@ -180,7 +181,7 @@ export class InputNumber extends Component {
             .replace(this._nan, '')
             .replace(this._percentSign, '')
             .replace(this._decimal, '.')
-            .replace(this._numeral, this._index)) ? +value : NaN;
+            .replace(this._numeral, this._index)) ? +value : null;
     }
 
     repeat(event, interval, dir) {
@@ -302,16 +303,84 @@ export class InputNumber extends Component {
     }
 
     onInputKeyDown(event) {
-        if (this.props.spinner) {
-            if (event.which === 38) {
+        let selectionStart = event.target.selectionStart;
+        let inputValue = event.target.value;
+
+        switch (event.which) {
+            /*case 38:
                 this.spin(event, 1);
                 event.preventDefault();
-            }
-            else if (event.which === 40) {
-                this.spin(event, -1);
+            break;
+
+            case 40:
+                this.spin(event, 1);
+                event.preventDefault();
+            break;*/
+
+            //left
+            case 37:
+                
+                //event.preventDefault();
+            break;
+
+            //right
+            case 39:    
+                for (let i = selectionStart; i < inputValue.length; i++) {
+                    let char = inputValue.charAt(i);
+                    if (this.isFormatPart(char)) {
+                        event.preventDefault();
+                    }
+                    else {
+                        event.target.setSelectionRange(i, i);
+                        break;
+                    }
+                }
+                //event.preventDefault();
+            break;
+
+            //backspace
+            case 8:              
+                for (let i = (selectionStart - 1); i >= 0; i--) {
+                    let char = inputValue.charAt(i);
+                    if (this.isFormatPart(char)) {
+                        event.preventDefault();
+                    }
+                    else {
+                        event.target.setSelectionRange(i + 1, i + 1);
+                        break;
+                    }
+                }
+            break;
+
+            default:
+            break;
+        }
+    }
+
+    onInputClick(event) {
+        let selectionStart = event.target.selectionStart;
+        let inputValue = event.target.value;
+
+        for (let i = (selectionStart - 1); i >= 0; i--) {
+            let char = inputValue.charAt(i);
+            if (this.isFormatPart(char)) {
                 event.preventDefault();
             }
+            else {
+                event.target.setSelectionRange(i + 1, i + 1);
+                break;
+            }
         }
+    }
+
+    isFormatPart(char) {
+        return char.trim().length === 0 ||
+                this._currency.test(char) ||
+                this._group.test(char) ||
+                this._literal.test(char) ||
+                this._nan.test(char) ||
+                this._percentSign.test(char) ||
+                this._decimal.test(char);
     }
 
     onInputFocus() {
@@ -319,6 +388,7 @@ export class InputNumber extends Component {
     }
 
     onInputChange(event) {
+        console.log('change');
         if (this.props.onChange) {
             let {value, selectionStart} = event.target;
             this.cursor = {
@@ -344,7 +414,7 @@ export class InputNumber extends Component {
         DomHandler.removeClass(this.element, 'p-inputwrapper-focus');
         this.cursor = null;
 
-        if (this.props.onChange) {
+        /*if (this.props.onChange) {
             const parsedValue =  this.parseValue(event.target.value);
             this.props.onChange({
                 originalEvent: event,
@@ -357,7 +427,7 @@ export class InputNumber extends Component {
                     value: parsedValue,
                 }
             });
-        }
+        }*/
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
@@ -388,14 +458,15 @@ export class InputNumber extends Component {
                 this.renderTooltip();
         }
 
-        this.setCursorPosition();
+        //this.restoreCursorPosition();
     }
 
-    setCursorPosition() {
-        if (!!this.cursor) {
+    restoreCursorPosition() {
+        if (this.cursor) {
             let value = this.inputEl.value || '';
-            let {selectionStart, prevText:cursorPrevText} = this.cursor;
+            let {selectionStart, prevText: cursorPrevText} = this.cursor;
             let prevText = value.substr(0, selectionStart);
+            
             while (this.parseValue(prevText) !== this.parseValue(cursorPrevText)) {
                 selectionStart++;
                 prevText = value.substr(0, selectionStart);
@@ -431,8 +502,8 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
                        className={className} value={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} onMouseDown={this.onInputMouseDown}
-                       onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} aria-valuemin={this.props.min} aria-valuemax={this.props.max}
+                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} onClick={this.onInputClick} 
+                       onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onChange={this.onInputChange} onFocus={this.onInputFocus} aria-valuemin={this.props.min} aria-valuemax={this.props.max}
                        aria-valuenow={valueToRender} aria-labelledby={this.props.ariaLabelledBy}
             />
         );

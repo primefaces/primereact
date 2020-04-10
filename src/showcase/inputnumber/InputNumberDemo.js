@@ -35,8 +35,10 @@ export class InputNumberDemo extends Component {
                     {this.state.value1}
                     <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} type="decimal" locale="de-DE" />
 
+                    
                     <h3>Spinner</h3>
-                    <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} type="currency" currency="EUR" locale="de-DE" spinner />
+                    {this.state.value2}<br />
+                    <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} type="currency" currency="EUR" locale="de-DE"  />
                 </div>
 
                 <InputNumberDoc />
