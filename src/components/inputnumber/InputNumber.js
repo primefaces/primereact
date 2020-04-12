@@ -141,15 +141,15 @@ export class InputNumber extends Component {
     }
 
     constructParser() {
-        const parts = new Intl.NumberFormat(this.props.locale, this.getOptions()).formatToParts(12345.6);
+        const parts = new Intl.NumberFormat(this.props.locale, this.getOptions()).formatToParts(-12345.6);
         const numerals = [...new Intl.NumberFormat(this.props.locale, {useGrouping: false}).format(9876543210)].reverse();
         const index = new Map(numerals.map((d, i) => [d, i]));
         this._currency = new RegExp(`[${this.getRegExpPattern(parts, 'currency')}]`);
         this._decimal = new RegExp(`[${this.getRegExpPattern(parts, 'decimal')}]`);
         this._group = new RegExp(`[${this.getRegExpPattern(parts, 'group')}]`, 'g');
         this._literal = new RegExp(`[${this.getRegExpPattern(parts, 'literal')}]`, 'g');
-        this._nan = new RegExp(`[${this.getRegExpPattern(parts, 'nan')}]`, 'g');
         this._percentSign = new RegExp(`[${this.getRegExpPattern(parts, 'percentSign')}]`, 'g');
+        this._minusSign = new RegExp(`[${this.getRegExpPattern(parts, 'minusSign')}]`, 'g');
         this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
         this._index = d => index.get(d);
     }
@@ -174,14 +174,17 @@ export class InputNumber extends Component {
     }
 
     parseValue(value) {
-        return (value = value.trim().replace(/\s/g, '')
-            .replace(this._currency, '')
-            .replace(this._group, '')
-            .replace(this._literal, '')
-            .replace(this._nan, '')
-            .replace(this._percentSign, '')
-            .replace(this._decimal, '.')
-            .replace(this._numeral, this._index)) ? +value : null;
+        let filteredValue = value.trim()
+                            .replace(/\s/g, '')
+                            .replace(this._currency, '')
+                            .replace(this._group, '')
+                            .replace(this._literal, '')
+                            .replace(this._percentSign, '')
+                            .replace(this._minusSign, '-')
+                            .replace(this._decimal, '.')
+                            .replace(this._numeral, this._index);
+            
+        return filteredValue ? +filteredValue : null;
     }
 
     repeat(event, interval, dir) {
@@ -319,28 +322,23 @@ export class InputNumber extends Component {
 
             //left
             case 37:
-                
-                //event.preventDefault();
+                let prevChar = inputValue.charAt(selectionStart - 1);
+                if (!this.isNumeralChar(prevChar)) {
+                    event.preventDefault();
+                }
             break;
 
             //right
-            case 39:    
-                for (let i = selectionStart; i < inputValue.length; i++) {
-                    let char = inputValue.charAt(i);
-                    if (this.isFormatPart(char)) {
-                        event.preventDefault();
-                    }
-                    else {
-                        event.target.setSelectionRange(i, i);
-                        break;
-                    }
+            case 39:
+                let currentChar = inputValue.charAt(selectionStart);
+                if (!this.isNumeralChar(currentChar)) {
+                    event.preventDefault();
                 }
-                //event.preventDefault();
             break;
 
             //backspace
-            case 8:              
-                for (let i = (selectionStart - 1); i >= 0; i--) {
+            case 8:    
+                /*for (let i = (selectionStart - 1); i >= 0; i--) {
                     let char = inputValue.charAt(i);
                     if (this.isFormatPart(char)) {
                         event.preventDefault();
@@ -349,7 +347,7 @@ export class InputNumber extends Component {
                         event.target.setSelectionRange(i + 1, i + 1);
                         break;
                     }
-                }
+                }*/
             break;
 
             default:
@@ -357,33 +355,75 @@ export class InputNumber extends Component {
         }
     }
 
-    onInputClick(event) {
+    initCursor(event) {
         let selectionStart = event.target.selectionStart;
         let inputValue = event.target.value;
+        let valueLength = inputValue.length;
+        let index = null;
 
-        for (let i = (selectionStart - 1); i >= 0; i--) {
-            let char = inputValue.charAt(i);
-            if (this.isFormatPart(char)) {
-                event.preventDefault();
+        let char = inputValue.charAt(selectionStart);
+        if (this.isNumeralChar(char)) {
+            return;
+        }
+
+        //left
+        let i = selectionStart - 1;
+        while (i >= 0) {
+            char = inputValue.charAt(i);
+            if (this.isNumeralChar(char)) {
+                index = i;
+                break;
             }
             else {
-                event.target.setSelectionRange(i + 1, i + 1);
-                break;
+                i--;
+            }
+        }
+
+
+        if (index !== null) {
+            event.target.setSelectionRange(index + 1, index + 1);
+        }
+        else {
+            i = selectionStart + 1;
+            while (i < valueLength) {
+                char = inputValue.charAt(i);
+                if (this.isNumeralChar(char)) {
+                    index = i;
+                    break;
+                }
+                else {
+                    i++;
+                }
+            }
+
+            if (index !== null) {
+                event.target.setSelectionRange(index, index);
             }
         }
     }
 
-    isFormatPart(char) {
-        return char.trim().length === 0 ||
-                this._currency.test(char) ||
-                this._group.test(char) ||
-                this._literal.test(char) ||
-                this._nan.test(char) ||
-                this._percentSign.test(char) ||
-                this._decimal.test(char);
+    onInputClick(event) {
+        this.initCursor(event);
     }
 
-    onInputFocus() {
+    isNumeralChar(char) {
+        if (char.length === 1 && (this._numeral.test(char) || this._decimal.test(char) || this._group.test(char) || this._minusSign.test(char))) {
+            this.resetRegex();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    resetRegex() {
+        this._numeral.lastIndex =  0;
+        this._decimal.lastIndex =  0;
+        this._group.lastIndex =  0;
+        this._minusSign.lastIndex =  0;
+    }
+
+    onInputFocus(event) {
         DomHandler.addClass(this.element, 'p-inputwrapper-focus');
     }
 
