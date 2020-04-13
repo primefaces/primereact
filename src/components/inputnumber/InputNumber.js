@@ -280,15 +280,15 @@ export class InputNumber extends Component {
         let inputValue = event.target.value;
 
         switch (event.which) {
-            /*case 38:
+            case 38:
                 this.spin(event, 1);
                 event.preventDefault();
             break;
 
             case 40:
-                this.spin(event, 1);
+                this.spin(event, -1);
                 event.preventDefault();
-            break;*/
+            break;
 
             //left
             case 37:
