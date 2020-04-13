@@ -151,19 +151,21 @@ export class InputNumberDemo extends Component {
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
                             {this.state.value21}
-                            <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} type="decimal" spinner placeholder="Standard" />
+                            <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} type="decimal" showButtons placeholder="Standard" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value22}
-                            <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} type="decimal" spinner placeholder="Horizontal" spinnerMode="horizontal" />
+                            <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} type="decimal" showButtons buttonLayout="horizontal" placeholder="Horizontal" spinnerMode="horizontal" 
+                                decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value23}
-                            <InputNumber value={this.state.value23} onChange={(e) => this.setState({value23: e.value})} type="decimal" spinner placeholder="Vertical" spinnerMode="vertical"/>
+                            <InputNumber value={this.state.value23} onChange={(e) => this.setState({value23: e.value})} type="decimal" showButtons buttonLayout="vertical" placeholder="Vertical" spinnerMode="vertical" style={{width: '6em'}}
+                                decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value24}
-                            <InputNumber value={this.state.value24} onChange={(e) => this.setState({value24: e.value})} type="decimal" spinner placeholder="Min/Max" min={0} max={100} />
+                            <InputNumber value={this.state.value24} onChange={(e) => this.setState({value24: e.value})} type="decimal" showButtons placeholder="Min/Max" min={0} max={100} />
                         </div>
                     </div>
                 

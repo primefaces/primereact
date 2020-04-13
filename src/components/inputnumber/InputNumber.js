@@ -16,7 +16,12 @@ export class InputNumber extends Component {
         min: null,
         max: null,
         format: true,
-        spinner: false,
+        showButtons: false,
+        buttonLayout: 'stacked',
+        incrementButtonClassName: null,
+        decrementButtonClassName: null,
+        incrementButtonIcon: 'pi pi-caret-up',
+        decrementButtonIcon: 'pi pi-caret-down',
         locale: undefined,
         localeMatcher: undefined,
         type: 'decimal',
@@ -55,7 +60,10 @@ export class InputNumber extends Component {
         min: PropTypes.number,
         max: PropTypes.number,
         format: PropTypes.bool,
-        spinner: PropTypes.bool,
+        showButtons: PropTypes.bool,
+        buttonLayout: PropTypes.string,
+        incrementButtonClassName: PropTypes.string,
+        decrementButtonClassName: PropTypes.string,
         locale: PropTypes.string,
         localeMatcher: PropTypes.string,
         type: PropTypes.string,
@@ -522,7 +530,7 @@ export class InputNumber extends Component {
     }
 
     renderInputElement() {
-        const className = classNames('p-spinner-input', this.props.inputClassName);
+        const className = classNames('p-inputnumber-input', this.props.inputClassName);
         const valueToRender = this.formatValue(this.props.value);
 
         return (
@@ -537,36 +545,43 @@ export class InputNumber extends Component {
     }
 
     renderUpButton() {
-        let className = classNames("p-spinner-button p-spinner-button-up p-button p-component", {
+        let className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-component", this.props.incrementButtonClassName, {
             'p-disabled': this.props.disabled
         });
+        let icon = classNames('p-inputnumber-button-icon', this.props.incrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
                 onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
-                <span className="p-spinner-button-icon pi pi-caret-up"></span>
+                <span className={icon}></span>
             </button>
         );
     }
 
     renderDownButton() {
-        let className = classNames("p-spinner-button p-spinner-button-down p-button p-component", {
+        let className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-component", this.props.decrementButtonClassName, {
             'p-disabled': this.props.disabled
         });
+        let icon = classNames('p-inputnumber-button-icon', this.props.decrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
                 onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
-                <span className="p-spinner-button-icon pi pi-caret-down"></span>
+                <span className={icon}></span>
             </button>
         );
     }
 
     render() {
-        let className = classNames("p-spinner p-component", this.props.className, {'p-inputwrapper-filled': this.props.value != null});
+        let className = classNames("p-inputnumber p-component", this.props.className, {
+                'p-inputwrapper-filled': this.props.value != null, 
+                'p-inputnumber-buttons-stacked': this.props.showButtons && this.props.buttonLayout === 'stacked',
+                'p-inputnumber-buttons-horizontal': this.props.showButtons && this.props.buttonLayout === 'horizontal',
+                'p-inputnumber-buttons-vertical': this.props.showButtons && this.props.buttonLayout === 'vertical'
+        });
         let inputElement = this.renderInputElement();
-        let upButton = this.props.spinner && this.renderUpButton();
-        let downButton = this.props.spinner && this.renderDownButton();
+        let upButton = this.props.showButtons && this.renderUpButton();
+        let downButton = this.props.showButtons && this.renderDownButton();
 
         return (
             <span ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>

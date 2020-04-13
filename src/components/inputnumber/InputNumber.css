@@ -1,53 +1,97 @@
-.p-spinner {
-    display: inline-block;
-    overflow: visible;
-    padding: 0;
-    position: relative;
-    vertical-align: middle;
-}
-.p-spinner-input {
-    vertical-align: middle;
-    padding-right: 1.5em;
-}
-.p-spinner-button {
-    cursor: default;
-    display: block;
-    height: 50%;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    vertical-align: middle;
-    width: 1.5em;
-}
-.p-spinner .p-spinner-button-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -.5em;
-    margin-left: -.5em;
-    width: 1em;
-}
-.p-spinner-button-up {
-    top: 0;
-}
-.p-spinner-button-down {
-    bottom: 0;
+.p-inputnumber {
+    display: inline-flex;
 }
 
-/* Fluid */
-.p-fluid .p-spinner {
-    width: 100%;
+.p-inputnumber-button-up,
+.p-inputnumber-button-down {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
 }
-.p-fluid .p-spinner .p-spinner-input {
-    padding-right: 2em;
-    width: 100%;
+
+.p-inputnumber-input {
+    flex: 1 1 auto;
 }
-.p-fluid .p-spinner .p-spinner-button {
-    width: 1.5em;
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-up {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    align-self: flex-start;
 }
-.p-fluid .p-spinner .p-spinner-button .p-spinner-button-icon {
-    left: .375em;
+
+.p-inputnumber-buttons-stacked .p-inputnumber-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-down {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    align-self: flex-end;
+    transform: translateX(-100%);
+}
+
+.p-inputnumber-buttons-horizontal .p-inputnumber-button-up {
+    order: 3;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    order: 2;
+    border-radius: 0;
+}
+
+.p-inputnumber-buttons-horizontal .p-inputnumber-button-down {
+    order: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.p-inputnumber-buttons-vertical {
+    flex-direction: column;
+    width: 6em;
+}
+
+.p-inputnumber-buttons-vertical .p-inputnumber-button-up {
+    order: 1;
+    flex: 1 1 auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: auto;
+}
+
+.p-inputnumber-buttons-vertical .p-inputnumber-input {
+    order: 2;
+    border-radius: 0;
+}
+
+.p-inputnumber-buttons-vertical .p-inputnumber-button-down {
+    order: 3;
+    flex: 1 1 auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    width: auto;
+}
+
+.p-fluid .p-inputnumber-button {
+    width: 2em;
+}
+
+.p-fluid .p-inputnumber {
+    display: flex;
+}
+
+.p-fluid .p-inputnumber-buttons-stacked .p-inputnumber-input,
+.p-fluid .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    width: auto;
+}
+
+.p-fluid .p-inputnumber-buttons-vertical {
+    width: auto;
+}
+
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-button {
+    width: auto;
 }
