@@ -52,99 +52,118 @@ export class InputNumberDemo extends Component {
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
                             {this.state.value1}
-                            <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} type="decimal" placeholder="User Locale" />
+                            <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} placeholder="Zero Config" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value2}
-                            <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} type="decimal" placeholder="United States Locale" locale="en-US" />
+                            <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} type="decimal" placeholder="Without Grouping" useGrouping={false} />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value3}
-                            <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} type="decimal" placeholder="German Locale" locale="de-DE"/>
+                            <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} type="decimal" placeholder="Min-Max Boundaries" 
+                                min={0} max={100} />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value4}
-                            <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} type="decimal" placeholder="Indian Locale" locale="en-IN"/>
+                            <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} type="decimal" placeholder="Min-Max Fraction Digits" 
+                                minFractionDigits={2} maxFractionDigits={5} />
+                        </div>
+
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value5}
+                            <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} type="decimal" placeholder="User Locale" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value6}
+                            <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} type="decimal" placeholder="United States Locale" locale="en-US" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value7}
+                            <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} type="decimal" placeholder="German Locale" locale="de-DE" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value8}
+                            <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} type="decimal" placeholder="Indian Locale" locale="en-IN" />
                         </div>
                     </div>
 
                     <h3>Currency</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value5}
-                            <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} type="currency" currency="USD" placeholder="United States" locale="en-US" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value6}
-                            <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} type="currency" currency="EUR" placeholder="Germany" locale="de-DE" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value7}
-                            <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} type="currency" currency="INR" currencyDisplay="code" placeholder="India" locale="en-IN"/>
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value8}
-                            <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} type="currency" currency="JPY" placeholder="Japan" locale="jp-JP"/>
-                        </div>
-                    </div>
-
-                    <h3>Percent</h3>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-3">
                             {this.state.value9}
-                            <InputNumber value={this.state.value9} onChange={(e) => this.setState({value9: e.value})} type="percent" placeholder="User Locale" />
+                            <InputNumber value={this.state.value9} onChange={(e) => this.setState({value9: e.value})} type="currency" currency="USD" placeholder="United States" locale="en-US" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value10}
-                            <InputNumber value={this.state.value10} onChange={(e) => this.setState({value10: e.value})} type="percent" placeholder="France" locale="fr-FR" />
+                            <InputNumber value={this.state.value10} onChange={(e) => this.setState({value10: e.value})} type="currency" currency="EUR" placeholder="Germany" locale="de-DE" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value11}
-                            <InputNumber value={this.state.value11} onChange={(e) => this.setState({value11: e.value})} type="percent" placeholder="Italy" locale="it-IT" />
+                            <InputNumber value={this.state.value11} onChange={(e) => this.setState({value11: e.value})} type="currency" currency="INR" currencyDisplay="code" placeholder="India" locale="en-IN"/>
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value12}
-                            <InputNumber value={this.state.value12} onChange={(e) => this.setState({value12: e.value})} type="percent" placeholder="Turkish" locale="tr-TR"/>
+                            <InputNumber value={this.state.value12} onChange={(e) => this.setState({value12: e.value})} type="currency" currency="JPY" placeholder="Japan" locale="jp-JP"/>
                         </div>
                     </div>
 
                     <h3>Unit</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value13}
-                            <InputNumber value={this.state.value13} onChange={(e) => this.setState({value13: e.value})} type="unit" unit="mile" placeholder="Mile" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value14}
-                            <InputNumber value={this.state.value14} onChange={(e) => this.setState({value14: e.value})} type="unit" unit="kilometer" placeholder="Kilometer" unitDisplay="short" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value15}
-                            <InputNumber value={this.state.value15} onChange={(e) => this.setState({value15: e.value})} type="unit" unit="kilogram" placeholder="Kilogram" unitDisplay="short" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value16}
-                            <InputNumber value={this.state.value16} onChange={(e) => this.setState({value16: e.value})} type="unit" unit="megabyte" placeholder="Megabyte" unitDisplay="short"/>
-                        </div>
-                    </div>
-
-                    <h3>Spinner</h3>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-3">
                             {this.state.value17}
-                            <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} type="decimal" spinner placeholder="Standard" />
+                            <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} type="unit" unit="mile" placeholder="Mile" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value18}
-                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} type="decimal" spinner placeholder="Horizontal" spinnerMode="horizontal" />
+                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} type="unit" unit="kilometer" placeholder="Kilometer" unitDisplay="short" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value19}
-                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} type="decimal" spinner placeholder="Vertical" spinnerMode="vertical"/>
+                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} type="unit" unit="kilogram" placeholder="Kilogram" unitDisplay="short" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             {this.state.value20}
-                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} type="decimal" spinner placeholder="Min/Max" min={0} max={100} />
+                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} type="unit" unit="megabyte" placeholder="Megabyte" unitDisplay="short"/>
+                        </div>
+                    </div>
+
+                    <h3>Percent</h3>
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value13}
+                            <InputNumber value={this.state.value13} onChange={(e) => this.setState({value13: e.value})} type="unit" unit="percent" placeholder="User Locale" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value14}
+                            <InputNumber value={this.state.value14} onChange={(e) => this.setState({value14: e.value})} type="unit" unit="percent" placeholder="France" locale="fr-FR" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value15}
+                            <InputNumber value={this.state.value15} onChange={(e) => this.setState({value15: e.value})} type="unit" unit="percent" placeholder="Italy" locale="it-IT" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value16}
+                            <InputNumber value={this.state.value16} onChange={(e) => this.setState({value16: e.value})} type="unit" unit="percent" placeholder="Turkish" locale="tr-TR"/>
+                        </div>
+                    </div>
+
+                    <h3>Buttons</h3>
+                    <div className="p-grid p-fluid">
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value21}
+                            <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} type="decimal" spinner placeholder="Standard" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value22}
+                            <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} type="decimal" spinner placeholder="Horizontal" spinnerMode="horizontal" />
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value23}
+                            <InputNumber value={this.state.value23} onChange={(e) => this.setState({value23: e.value})} type="decimal" spinner placeholder="Vertical" spinnerMode="vertical"/>
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            {this.state.value24}
+                            <InputNumber value={this.state.value24} onChange={(e) => this.setState({value24: e.value})} type="decimal" spinner placeholder="Min/Max" min={0} max={100} />
                         </div>
                     </div>
                 
