@@ -47,62 +47,62 @@ export class InputNumberDemo extends Component {
                     </div>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation inputnumber-demo">
                     <h3>Numerals</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value1}
-                            <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} placeholder="Zero Config" />
+                            Integer Only {this.state.value1}
+                            <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} placeholder="Integer Only" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value2}
+                            Without Grouping {this.state.value2}
                             <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} type="decimal" placeholder="Without Grouping" useGrouping={false} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value3}
-                            <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} type="decimal" placeholder="Min-Max Boundaries" 
-                                min={0} max={100} />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            {this.state.value4}
-                            <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} type="decimal" placeholder="Min-Max Fraction Digits" 
+                            Min-Max Fraction Digits {this.state.value3}
+                            <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} type="decimal" placeholder="Min-Max Fraction Digits" 
                                 minFractionDigits={2} maxFractionDigits={5} />
                         </div>
-
                         <div className="p-col-12 p-md-3">
-                            {this.state.value5}
-                            <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} type="decimal" placeholder="User Locale" />
+                            Min-Max Boundaries {this.state.value4}
+                            <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} type="decimal" placeholder="Min-Max Boundaries" 
+                                min={0} max={100} />
+                        </div>
+                        
+                        <div className="p-col-12 p-md-3">
+                            User Locale {this.state.value5}
+                            <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} type="decimal" placeholder="User Locale" minFractionDigits={2} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value6}
-                            <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} type="decimal" placeholder="United States Locale" locale="en-US" />
+                            United State Locale {this.state.value6}
+                            <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} type="decimal" placeholder="United States Locale" locale="en-US" minFractionDigits={2}/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value7}
-                            <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} type="decimal" placeholder="German Locale" locale="de-DE" />
+                            German Locale {this.state.value7}
+                            <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} type="decimal" placeholder="German Locale" locale="de-DE" minFractionDigits={2}/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value8}
-                            <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} type="decimal" placeholder="Indian Locale" locale="en-IN" />
+                            Indian Locale {this.state.value8}
+                            <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} type="decimal" placeholder="Indian Locale" locale="en-IN" minFractionDigits={2} />
                         </div>
                     </div>
 
                     <h3>Currency</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value9}
+                            United States {this.state.value9}
                             <InputNumber value={this.state.value9} onChange={(e) => this.setState({value9: e.value})} type="currency" currency="USD" placeholder="United States" locale="en-US" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value10}
+                            Germany {this.state.value10}
                             <InputNumber value={this.state.value10} onChange={(e) => this.setState({value10: e.value})} type="currency" currency="EUR" placeholder="Germany" locale="de-DE" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value11}
+                            India {this.state.value11}
                             <InputNumber value={this.state.value11} onChange={(e) => this.setState({value11: e.value})} type="currency" currency="INR" currencyDisplay="code" placeholder="India" locale="en-IN"/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value12}
+                            Japan {this.state.value12}
                             <InputNumber value={this.state.value12} onChange={(e) => this.setState({value12: e.value})} type="currency" currency="JPY" placeholder="Japan" locale="jp-JP"/>
                         </div>
                     </div>
@@ -110,19 +110,19 @@ export class InputNumberDemo extends Component {
                     <h3>Unit</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value17}
+                            Mile {this.state.value17}
                             <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} type="unit" unit="mile" placeholder="Mile" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value18}
+                            Kilometer {this.state.value18}
                             <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} type="unit" unit="kilometer" placeholder="Kilometer" unitDisplay="short" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value19}
+                            Kilogram {this.state.value19}
                             <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} type="unit" unit="kilogram" placeholder="Kilogram" unitDisplay="short" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value20}
+                            Megabyte {this.state.value20}
                             <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} type="unit" unit="megabyte" placeholder="Megabyte" unitDisplay="short"/>
                         </div>
                     </div>
@@ -130,19 +130,19 @@ export class InputNumberDemo extends Component {
                     <h3>Percent</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value13}
+                            User Locale {this.state.value13}
                             <InputNumber value={this.state.value13} onChange={(e) => this.setState({value13: e.value})} type="unit" unit="percent" placeholder="User Locale" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value14}
+                            France {this.state.value14}
                             <InputNumber value={this.state.value14} onChange={(e) => this.setState({value14: e.value})} type="unit" unit="percent" placeholder="France" locale="fr-FR" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value15}
+                            Italy {this.state.value15}
                             <InputNumber value={this.state.value15} onChange={(e) => this.setState({value15: e.value})} type="unit" unit="percent" placeholder="Italy" locale="it-IT" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value16}
+                            Turkey {this.state.value16}
                             <InputNumber value={this.state.value16} onChange={(e) => this.setState({value16: e.value})} type="unit" unit="percent" placeholder="Turkish" locale="tr-TR"/>
                         </div>
                     </div>
@@ -150,21 +150,21 @@ export class InputNumberDemo extends Component {
                     <h3>Buttons</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            {this.state.value21}
+                            Stacked {this.state.value21}
                             <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} type="decimal" showButtons placeholder="Standard" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value22}
+                            Horizontal {this.state.value22}
                             <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} type="decimal" showButtons buttonLayout="horizontal" placeholder="Horizontal" spinnerMode="horizontal" 
                                 decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value23}
+                            Vertical {this.state.value23}
                             <InputNumber value={this.state.value23} onChange={(e) => this.setState({value23: e.value})} type="decimal" showButtons buttonLayout="vertical" placeholder="Vertical" spinnerMode="vertical" style={{width: '6em'}}
                                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            {this.state.value24}
+                            Min-Max Boundaries {this.state.value24}
                             <InputNumber value={this.state.value24} onChange={(e) => this.setState({value24: e.value})} type="decimal" showButtons placeholder="Min/Max" min={0} max={100} />
                         </div>
                     </div>

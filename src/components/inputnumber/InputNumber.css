@@ -65,6 +65,7 @@
 .p-inputnumber-buttons-vertical .p-inputnumber-input {
     order: 2;
     border-radius: 0;
+    text-align: center;
 }
 
 .p-inputnumber-buttons-vertical .p-inputnumber-button-down {
