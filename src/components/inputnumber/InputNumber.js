@@ -195,23 +195,9 @@ export class InputNumber extends Component {
     }
 
     spin(event, dir) {
-        /*let step = this.props.step * dir;
-        let currentValue;
-        let newValue;
-
-        if (this.props.value)
-            currentValue = (typeof this.props.value === 'string') ? this.parseValue(this.props.value) : this.props.value;
-        else
-            currentValue = 0;
-
-        if (this.precision)
-            newValue = parseFloat(this.toFixed(currentValue + step, this.precision));
-        else
-            newValue = currentValue + step;
-
-        if (this.props.maxlength !== null && this.props.value.toString().length > this.props.maxlength) {
-            newValue = currentValue;
-        }
+        let step = this.props.step * dir;
+        let currentValue = this.props.value || 0;
+        let newValue = currentValue + step;
 
         if (this.props.min !== null && newValue < this.props.min) {
             newValue = this.props.min;
@@ -221,19 +207,7 @@ export class InputNumber extends Component {
             newValue= this.props.max;
         }
 
-        if (this.props.onChange) {
-            this.props.onChange({
-                originalEvent: event,
-                value: newValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
-                target: {
-                    name: this.props.name,
-                    id: this.props.id,
-                    value: newValue
-                }
-            });
-        }*/
+        this.updateModel(event, newValue);
     }
 
     onUpButtonMouseDown(event) {
