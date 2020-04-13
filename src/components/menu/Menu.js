@@ -32,17 +32,6 @@ export class Menu extends Component {
         onHide: PropTypes.func
     };
 
-    constructor(props) {
-        super(props);
-        this.onMenuClick = this.onMenuClick.bind(this);
-    }
-
-    onMenuClick() {
-        if (this.documentClickListener) {
-            this.selfClick = true;
-        }
-    }
-
     onItemClick(event, item){
         if (item.disabled) {
             event.preventDefault();
@@ -114,10 +103,6 @@ export class Menu extends Component {
 
     toggle(event) {
         if (this.props.popup) {
-            if (this.documentClickListener) {
-                this.selfClick = true;
-            }
-
             if (this.container.offsetParent)
                 this.hide(event);
             else
@@ -160,16 +145,14 @@ export class Menu extends Component {
         }
 
         this.unbindDocumentListeners();
-        this.selfClick = false;
     }
 
     bindDocumentListeners() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.selfClick)
-                    this.selfClick = false;
-                else
-                    this.hide(event);
+                if(this.isOutsideClicked(event)) {
+                    this.hide();
+                }
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -184,6 +167,10 @@ export class Menu extends Component {
 
             window.addEventListener('resize', this.documentResizeListener);
         }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
     unbindDocumentListeners() {
@@ -263,7 +250,7 @@ export class Menu extends Component {
             const menuitems = this.renderMenu();
 
             return (
-                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
+                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
                     <ul className="p-menu-list p-reset" role="menu">
                         {menuitems}
                     </ul>
