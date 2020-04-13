@@ -294,6 +294,7 @@ export class AutoComplete extends Component {
 
     onDropdownClick(event) {
         if (this.panel && this.panel.element && !this.panel.element.offsetParent) {
+            this.focus = true;
             this.inputEl.focus();
 
             if (this.props.dropdownMode === 'blank')
@@ -645,7 +646,7 @@ export class AutoComplete extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target) 
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
                     || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
     }
 
