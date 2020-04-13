@@ -6,7 +6,7 @@ import {ColorPickerPanel} from './ColorPickerPanel';
 import Tooltip from "../tooltip/Tooltip";
 
 export class ColorPicker extends Component {
-    
+
     static defaultProps = {
         id: null,
         value: null,
@@ -44,7 +44,6 @@ export class ColorPicker extends Component {
     constructor(props) {
         super(props);
 
-        this.onPanelClick = this.onPanelClick.bind(this);
         this.onInputClick = this.onInputClick.bind(this);
         this.onInputKeydown = this.onInputKeydown.bind(this);
     }
@@ -53,14 +52,14 @@ export class ColorPicker extends Component {
         if(this.props.disabled) {
             return;
         }
-        
+
         this.hueDragging = true;
         this.bindDocumentMouseMoveListener();
         this.bindDocumentMouseUpListener();
         this.pickHue(event);
         DomHandler.addClass(this.container, 'p-colorpicker-dragging');
     }
-    
+
     pickHue(event) {
         let top = this.hueView.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         this.hsbValue = this.validateHSB({
@@ -68,24 +67,24 @@ export class ColorPicker extends Component {
             s: 100,
             b: 100
         });
-        
+
         this.updateColorSelector();
         this.updateHue();
         this.updateModel();
     }
-    
+
     onColorMousedown(event) {
         if(this.props.disabled) {
             return;
         }
-        
+
         this.colorDragging = true;
         this.bindDocumentMouseMoveListener();
         this.bindDocumentMouseUpListener();
         this.pickColor(event);
         DomHandler.addClass(this.container, 'p-colorpicker-dragging');
     }
-    
+
     pickColor(event) {
         let rect = this.colorSelector.getBoundingClientRect();
         let top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
@@ -97,22 +96,22 @@ export class ColorPicker extends Component {
             s: saturation,
             b: brightness
         });
-        
+
         this.updateColorHandle();
         this.updateInput();
         this.updateModel();
     }
-    
+
     updateModel() {
         switch(this.props.format) {
             case 'hex':
                 this.onChange(this.HSBtoHEX(this.hsbValue));
             break;
-            
+
             case 'rgb':
                 this.onChange(this.HSBtoRGB(this.hsbValue));
             break;
-            
+
             case 'hsb':
                 this.onChange(this.hsbValue);
             break;
@@ -172,7 +171,7 @@ export class ColorPicker extends Component {
             })
         }
     }
-    
+
     updateColorSelector() {
         var hsbValue = this.validateHSB({
             h: this.hsbValue.h,
@@ -190,13 +189,13 @@ export class ColorPicker extends Component {
     updateHue() {
         this.hueHandle.style.top = Math.floor(150 - (150 * this.hsbValue.h / 360)) + 'px';
     }
-        
+
     updateInput() {
         if(this.input) {
             this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
         }
     }
-    
+
     show() {
         this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
         this.panel.element.style.display = 'block';
@@ -207,10 +206,10 @@ export class ColorPicker extends Component {
         }, 1);
 
         this.alignPanel();
-        
+
         this.bindDocumentClickListener();
     }
-    
+
     hide() {
         DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
         DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
@@ -220,24 +219,20 @@ export class ColorPicker extends Component {
             this.panel.element.style.display = 'none';
             DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
         }, 150);
-        
+
     }
-         
+
     onInputClick() {
-        if(this.documentClickListener) {
-            this.selfClick = true;
-        }
-       
         this.togglePanel();
     }
-    
+
     togglePanel() {
         if(!this.panel.element.offsetParent)
             this.show();
         else
             this.hide();
     }
-    
+
     onInputKeydown(event) {
         switch(event.which) {
             //space
@@ -245,7 +240,7 @@ export class ColorPicker extends Component {
                 this.togglePanel();
                 event.preventDefault();
             break;
-                        
+
             //escape and tab
             case 27:
             case 9:
@@ -256,34 +251,31 @@ export class ColorPicker extends Component {
             break;
         }
     }
-        
-    onPanelClick() {
-        this.selfClick = true;
-    }
-    
+
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
-            this.documentClickListener = this.onDocumentClick.bind(this);
+            this.documentClickListener = (event) => {
+                if(this.isOutsideClicked(event)) {
+                    this.hide();
+                    this.unbindDocumentClickListener();
+                }
+            };
             document.addEventListener('click', this.documentClickListener);
-        }    
+        }
     }
 
-    onDocumentClick() {
-        if(!this.selfClick) {
-            this.hide();
-            this.unbindDocumentClickListener();
-        }
-                
-        this.selfClick = false;
-    }
-    
     unbindDocumentClickListener() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
     }
-    
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
+            || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
+    }
+
     bindDocumentMouseMoveListener() {
         if(!this.documentMouseMoveListener) {
             this.documentMouseMoveListener = this.onDocumentMouseMove.bind(this);
@@ -300,14 +292,14 @@ export class ColorPicker extends Component {
             this.pickHue(event);
         }
     }
-    
+
     unbindDocumentMouseMoveListener() {
         if (this.documentMouseMoveListener) {
             document.removeEventListener('mousemove', this.documentMouseMoveListener);
             this.documentMouseMoveListener = null;
         }
     }
-    
+
     bindDocumentMouseUpListener() {
         if(!this.documentMouseUpListener) {
             this.documentMouseUpListener = this.onDocumentMouseUp.bind(this);
@@ -322,7 +314,7 @@ export class ColorPicker extends Component {
         this.unbindDocumentMouseMoveListener();
         this.unbindDocumentMouseUpListener();
     }
-    
+
     unbindDocumentMouseUpListener() {
         if (this.documentMouseUpListener) {
             document.removeEventListener('mouseup', this.documentMouseUpListener);
@@ -337,7 +329,7 @@ export class ColorPicker extends Component {
             b: Math.min(100, Math.max(0, hsb.b))
         };
     }
-    
+
     validateRGB(rgb) {
         return {
             r: Math.min(255, Math.max(0, rgb.r)),
@@ -345,7 +337,7 @@ export class ColorPicker extends Component {
             b: Math.min(255, Math.max(0, rgb.b))
         };
     }
-    
+
     validateHEX(hex) {
         var len = 6 - hex.length;
         if (len > 0) {
@@ -358,16 +350,16 @@ export class ColorPicker extends Component {
         }
         return hex;
     }
-    
+
     HEXtoRGB(hex) {
         let hexValue = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
         return {r: hexValue >> 16, g: (hexValue & 0x00FF00) >> 8, b: (hexValue & 0x0000FF)};
     }
-    
+
     HEXtoHSB(hex) {
         return this.RGBtoHSB(this.HEXtoRGB(hex));
     }
-    
+
     RGBtoHSB(rgb) {
         var hsb = {
             h: 0,
@@ -398,7 +390,7 @@ export class ColorPicker extends Component {
         hsb.b *= 100/255;
         return hsb;
     }
-    
+
     HSBtoRGB(hsb) {
         var rgb = {
             r: null, g: null, b: null
@@ -412,7 +404,7 @@ export class ColorPicker extends Component {
                 g: v,
                 b: v
             }
-        } 
+        }
         else {
             var t1 = v;
             var t2 = (255-s)*v/255;
@@ -428,23 +420,23 @@ export class ColorPicker extends Component {
         }
         return {r:Math.round(rgb.r), g:Math.round(rgb.g), b:Math.round(rgb.b)};
     }
-    
+
     RGBtoHEX(rgb) {
         var hex = [
             rgb.r.toString(16),
             rgb.g.toString(16),
             rgb.b.toString(16)
         ];
-        
+
         for(var key in hex) {
             if(hex[key].length === 1) {
                 hex[key] = '0' + hex[key];
             }
-        }        
+        }
 
         return hex.join('');
     }
-    
+
     HSBtoHEX(hsb) {
         return this.RGBtoHEX(this.HSBtoRGB(hsb));
     }
@@ -467,7 +459,7 @@ export class ColorPicker extends Component {
                 this.renderTooltip();
         }
     }
-    
+
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindDocumentMouseMoveListener();
@@ -488,7 +480,7 @@ export class ColorPicker extends Component {
             this.updateHSBValue(nextProps.value);
             let newValue = this.toHSB(nextProps.value);
             let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
-            
+
             return !equals;
         }
     }
@@ -572,8 +564,7 @@ export class ColorPicker extends Component {
         return (
             <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={className}>
                 {input}
-                <ColorPickerPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} onClick={this.onPanelClick}
-                        inline={this.props.inline} disabled={this.props.disabled}>
+                <ColorPickerPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled}>
                     {content}
                 </ColorPickerPanel>
             </div>
