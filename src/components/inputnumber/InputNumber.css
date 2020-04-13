@@ -29,7 +29,7 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     align-self: flex-end;
-    transform: translateX(-100%);
+    margin-left: -2em;
 }
 
 .p-inputnumber-buttons-horizontal .p-inputnumber-button-up {
