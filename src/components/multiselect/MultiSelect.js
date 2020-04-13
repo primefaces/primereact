@@ -80,7 +80,6 @@ export class MultiSelect extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -156,16 +155,12 @@ export class MultiSelect extends Component {
             return null;
     }
 
-    onClick() {
+    onClick(event) {
         if(this.props.disabled) {
             return;
         }
 
-        if(this.documentClickListener) {
-            this.selfClick = true;
-        }
-
-        if(!this.panelClick) {
+        if(!this.isPanelClicked(event)) {
             if(this.panel.element.offsetParent) {
                 this.hide();
             }
@@ -215,10 +210,6 @@ export class MultiSelect extends Component {
         this.setState({filter: event.query});
     }
 
-    onPanelClick() {
-        this.panelClick = true;
-    }
-
     show() {
         if(this.props.options && this.props.options.length) {
             this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
@@ -238,7 +229,6 @@ export class MultiSelect extends Component {
         DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
         DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
         this.unbindDocumentClickListener();
-        this.clearClickState();
 
         setTimeout(() => {
             this.panel.element.style.display = 'none';
@@ -315,9 +305,23 @@ export class MultiSelect extends Component {
 
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
-            this.documentClickListener = this.onDocumentClick.bind(this);
+            this.documentClickListener = (event) => {
+                if(this.isOutsideClicked(event)) {
+                    this.hide();
+                }
+            };
+
             document.addEventListener('click', this.documentClickListener);
         }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
+            || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
+    }
+
+    isPanelClicked(event) {
+        return this.panel && this.panel.element && this.panel.element.contains(event.target);
     }
 
     unbindDocumentClickListener() {
@@ -349,19 +353,6 @@ export class MultiSelect extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
-    }
-
-    onDocumentClick() {
-        if(!this.selfClick && !this.panelClick && this.panel.element.offsetParent) {
-            this.hide();
-        }
-
-        this.clearClickState();
-    }
-
-    clearClickState() {
-        this.selfClick = false;
-        this.panelClick = false;
     }
 
     hasFilter() {
@@ -510,7 +501,7 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
-                <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
+                <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo}
                     scrollHeight={this.props.scrollHeight}>
                     {items}
                 </MultiSelectPanel>

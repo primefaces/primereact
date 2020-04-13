@@ -35,7 +35,12 @@ export class OverlayPanel extends Component {
 
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
-            this.documentClickListener = this.onDocumentClick.bind(this);
+            this.documentClickListener = (event) => {
+                if(this.isOutsideClicked(event)) {
+                    this.hide();
+                }
+            };
+
             document.addEventListener('click', this.documentClickListener);
         }
     }
@@ -47,14 +52,12 @@ export class OverlayPanel extends Component {
         }
     }
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
-    onDocumentClick(event) {
-        if(!this.container.contains(event.target) && this.target && this.target !== event.target && !this.target.contains(event.target)) {
-            this.hide();
-        }
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
     }
 
     onCloseClick(event) {
