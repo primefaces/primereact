@@ -384,9 +384,10 @@ export class InputNumber extends Component {
     onInputKeyPress(event) {
         event.preventDefault();
         let code = event.which || event.keyCode;
+        let char = String.fromCharCode(code);
 
-        if ((48 <= code && code <= 57)) {
-            this.insert(event, String.fromCharCode(code));
+        if ((48 <= code && code <= 57) || this.isMinusSign(char)) {
+            this.insert(event, char);
         }
     }
 
@@ -399,6 +400,15 @@ export class InputNumber extends Component {
                 this.insert(event, filteredData.toString());
             }
         }
+    }
+
+    isMinusSign(char) {
+        if (this._minusSign.test(char)) {
+            this._minusSign.lastIndex = 0;
+            return true;
+        }
+
+        return false;
     }
 
     insert(event, text) {
