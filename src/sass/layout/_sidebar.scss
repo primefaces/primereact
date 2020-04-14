@@ -91,12 +91,18 @@
                             .layout-menuitem-badge {
                                 padding: 2px 4px;
                                 border-radius: 3px;
-                                color: #ffffff;
                                 font-weight: 700;
                                 font-size: 11px;
                                 margin-left: 8px;
-                                background-color: #484848;
+                                background-color: #dee2e6;
+                                color: #6c757d;
                                 letter-spacing: 0.2px;
+                                text-transform: uppercase;
+
+                                &.layout-menuitem-badge-new {
+                                    background-color: #008fba;
+                                    color: #ffffff;
+                                }
                             }
                         }
                     }

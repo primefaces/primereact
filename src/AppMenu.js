@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import classNames from 'classnames';
 
 export class AppMenu extends Component {
 
@@ -97,7 +98,7 @@ export class AppMenu extends Component {
                                 <li key={`menuitem_${menuitemIndex}_${index}`} role="presentation">
                                     <Link to={item.to} role="menuitem" onClick={this.props.onMenuItemClick}>
                                         {item.name}
-                                        { item.badge && <span className="layout-menuitem-badge">{item.badge}</span> }
+                                        {item.badge && <span className={classNames('layout-menuitem-badge', 'layout-menuitem-badge-' + item.badge)}>{item.badge}</span> }
                                     </Link>
                                 </li>
                             )

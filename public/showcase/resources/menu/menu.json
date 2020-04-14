@@ -21,7 +21,7 @@
                         "calendar",
                         "datepicker"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "Checkbox",
@@ -51,7 +51,7 @@
                         "dropdown",
                         "selectOneMenu"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "Editor",
@@ -79,7 +79,8 @@
                     "to": "/inputnumber",
                     "meta": [
                         "inputnumber"
-                    ]
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "InputSwitch",
@@ -115,7 +116,7 @@
                     "meta": [
                         "listbox"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "MultiSelect",
@@ -124,7 +125,7 @@
                         "multiselect",
                         "selectCheckboxMenu"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "Password",
@@ -155,7 +156,7 @@
                         "selectOneButton",
                         "selectManyButton"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "Slider",
@@ -237,7 +238,7 @@
                     "meta": [
                         "datatable"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "DataScroller",
@@ -392,7 +393,7 @@
                     "meta": [
                         "dialog"
                     ],
-                    "badge": "UPDATED"
+                    "badge": "updated"
                 },
                 {
                     "name": "Lightbox",
@@ -630,7 +631,7 @@
                     "meta": [
                         "galleria"
                     ],
-                    "badge": "NEW"
+                    "badge": "new"
                 }
             ]
         },
