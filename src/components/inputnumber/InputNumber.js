@@ -9,12 +9,7 @@ import DomHandler from '../utils/DomHandler';
 export class InputNumber extends Component {
 
     static defaultProps = {
-        id: null,
         value: null,
-        name: null,
-        step: 1,
-        min: null,
-        max: null,
         format: true,
         showButtons: false,
         buttonLayout: 'stacked',
@@ -32,10 +27,16 @@ export class InputNumber extends Component {
         useGrouping: true,
         minFractionDigits: undefined,
         maxFractionDigits: undefined,
+        id: null,
+        name: null,
+        step: 1,
+        min: null,
+        max: null,
         disabled: false,
         required: false,
         tabIndex: null,
         pattern: null,
+        inputMode: null,
         placeholder: null,
         readonly: false,
         maxlength: null,
@@ -49,16 +50,12 @@ export class InputNumber extends Component {
         tooltipOptions: null,
         ariaLabelledBy: null,
         onChange: null,
-        onBlur: null
+        onBlur: null,
+        onFocus: null
     }
 
     static propTypes = {
-        id: PropTypes.string,
         value: PropTypes.any,
-        name: PropTypes.string,
-        step: PropTypes.number,
-        min: PropTypes.number,
-        max: PropTypes.number,
         format: PropTypes.bool,
         showButtons: PropTypes.bool,
         buttonLayout: PropTypes.string,
@@ -74,10 +71,16 @@ export class InputNumber extends Component {
         useGrouping: PropTypes.bool,
         minFractionDigits: PropTypes.number,
         maxFractionDigits: PropTypes.number,
+        id: PropTypes.string,
+        name: PropTypes.string,
+        step: PropTypes.number,
+        min: PropTypes.number,
+        max: PropTypes.number,
         disabled: PropTypes.bool,
         required: PropTypes.bool,
         tabIndex: PropTypes.number,
         pattern: PropTypes.string,
+        inputMode: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
         maxlength: PropTypes.number,
@@ -91,7 +94,8 @@ export class InputNumber extends Component {
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
-        onBlur: PropTypes.func
+        onBlur: PropTypes.func,
+        onFocus: PropTypes.func
     }
 
     constructor(props) {
@@ -475,6 +479,10 @@ export class InputNumber extends Component {
 
     onInputFocus() {
         DomHandler.addClass(this.element, 'p-inputwrapper-focus');
+
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
     onInputBlur(event) {
@@ -538,12 +546,11 @@ export class InputNumber extends Component {
 
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
-                       className={className} defaultValue={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex}
+                       className={className} defaultValue={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onClick={this.onInputClick} 
                        onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} aria-valuemin={this.props.min} aria-valuemax={this.props.max}
-                       aria-valuenow={valueToRender} aria-labelledby={this.props.ariaLabelledBy}
-            />
+                       aria-valuenow={valueToRender} aria-labelledby={this.props.ariaLabelledBy} />
         );
     }
 
