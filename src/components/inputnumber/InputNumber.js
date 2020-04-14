@@ -19,7 +19,9 @@ export class InputNumber extends Component {
         decrementButtonIcon: 'pi pi-caret-down',
         locale: undefined,
         localeMatcher: undefined,
-        type: 'decimal',
+        mode: 'decimal',
+        suffix: null,
+        prefix: null,
         unit: undefined,
         unitDisplay: undefined,
         currency: undefined,
@@ -29,6 +31,7 @@ export class InputNumber extends Component {
         maxFractionDigits: undefined,
         id: null,
         name: null,
+        type: 'text',
         step: 1,
         min: null,
         max: null,
@@ -39,7 +42,6 @@ export class InputNumber extends Component {
         inputMode: null,
         placeholder: null,
         readonly: false,
-        maxlength: null,
         size: null,
         style: null,
         className: null,
@@ -64,6 +66,8 @@ export class InputNumber extends Component {
         locale: PropTypes.string,
         localeMatcher: PropTypes.string,
         type: PropTypes.string,
+        suffix: PropTypes.string,
+        prefix: PropTypes.string,
         unit: PropTypes.string,
         unitDisplay: PropTypes.string,
         currency: PropTypes.string,
@@ -73,6 +77,7 @@ export class InputNumber extends Component {
         maxFractionDigits: PropTypes.number,
         id: PropTypes.string,
         name: PropTypes.string,
+        type: PropTypes.string,
         step: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
@@ -83,7 +88,6 @@ export class InputNumber extends Component {
         inputMode: PropTypes.string,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
-        maxlength: PropTypes.number,
         size: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -128,15 +132,12 @@ export class InputNumber extends Component {
     getOptions() {
         return {
             localeMatcher: this.props.localeMatcher,
-            style: this.props.type,
-            unit: this.props.unit,
-            unitDisplay: this.props.unitDisplay,
+            style: this.props.mode,
             currency: this.props.currency,
             currencyDisplay: this.props.currencyDisplay,
             useGrouping: this.props.useGrouping,
             minimumFractionDigits: this.props.minFractionDigits,
             maximumFractionDigits: this.props.maxFractionDigits,
-            notation: this.props.notation
         };
     }
 
@@ -153,6 +154,8 @@ export class InputNumber extends Component {
         this._minusSign = new RegExp(`[${this.getRegExpPattern(parts, 'minusSign')}]`, 'g');
         this._unit = new RegExp(`[${this.getRegExpPattern(parts, 'unit')}]`, 'g');
         this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
+        this._suffix = new RegExp(`[${this.props.suffix}]`, 'g');
+        this._prefix = new RegExp(`[${this.props.prefix}]`, 'g');
         this._index = d => index.get(d);
     }
 
@@ -165,7 +168,16 @@ export class InputNumber extends Component {
         if (value != null) {
             if (this.props.format) {
                 let formatter = new Intl.NumberFormat(this.props.locale, this.getOptions());
-                return formatter.format(value);
+                let formattedValue = formatter.format(value);
+                if (this.props.prefix) {
+                    formattedValue = this.props.prefix + formattedValue;
+                }
+
+                if (this.props.suffix) {
+                    formattedValue = formattedValue + this.props.suffix;
+                }
+
+                return formattedValue;
             }
 
             return value;
@@ -182,10 +194,13 @@ export class InputNumber extends Component {
                             .replace(this._literal, '')
                             .replace(this._percentSign, '')
                             .replace(this._unit, '')
+                            .replace(this._suffix, '')
+                            .replace(this._prefix, '')
                             .replace(this._minusSign, '-')
                             .replace(this._decimal, '.')
                             .replace(this._numeral, this._index);
 
+        console.log(filteredText);
         if (filteredText) {
             let parsedValue = +filteredText;
             return isNaN(parsedValue) ? null : parsedValue;
@@ -666,7 +681,7 @@ export class InputNumber extends Component {
 
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
-                       className={className} defaultValue={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
+                       className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
