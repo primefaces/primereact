@@ -329,12 +329,12 @@ export class InputNumber extends Component {
 
                         newValueStr = inputValue.slice(0, removeCharIndex) + inputValue.slice(removeCharIndex + 1);
                     }
+                    this.updateValue(event, newValueStr, 'delete-single');
                 }
                 else {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
+                    this.updateValue(event, newValueStr, 'delete-range');
                 }
-
-                this.updateValue(event, newValueStr);
             break;
 
             default:
@@ -351,7 +351,7 @@ export class InputNumber extends Component {
             let selectionEnd = event.target.selectionEnd;
             if (selectionStart !== selectionEnd) {
                 let newValueStr = this.deleteRange(event.target.value, selectionStart, selectionEnd);
-                this.updateValue(event, newValueStr);
+                this.updateValue(event, newValueStr, 'delete-range');
             }
 
             let inputValue = event.target.value.trim();
@@ -364,13 +364,13 @@ export class InputNumber extends Component {
                 let fractionDigitsLength = selectionStart - (decimalCharIndex + 1);
                 if (fractionDigitsLength < maxFractionDigits) {
                     newValueStr = inputValue.slice(0, selectionStart) + char + inputValue.slice(selectionStart + 1);
+                    this.updateValue(event, newValueStr, 'insert');
                 }
             }
             else {
                 newValueStr = inputValue.slice(0, selectionStart) + char + inputValue.slice(selectionStart);
+                this.updateValue(event, newValueStr, 'insert');
             }
-
-            this.updateValue(event, newValueStr);
         }
 
         this._decimal.lastIndex = 0;
@@ -458,15 +458,15 @@ export class InputNumber extends Component {
         this._minusSign.lastIndex =  0;
     }
 
-    updateValue(event, valueStr) {
+    updateValue(event, valueStr, operation) {
         if (valueStr != null) {
             let newValue = this.parseValue(valueStr);
-            this.updateInput(newValue);
+            this.updateInput(newValue, operation);
             this.updateModel(event, newValue);
         }
     }
 
-    updateInput(value) {
+    updateInput(value, operation) {
         let currentLength = this.inputEl.value.length;
         
         if (currentLength === 0) {
@@ -476,11 +476,23 @@ export class InputNumber extends Component {
             this.inputEl.setSelectionRange(this.inputEl.selectionStart + 1, this.inputEl.selectionStart + 1);
         }
         else {
-            let cursorPos = this.inputEl.selectionEnd;
+            let selectionStart = this.inputEl.selectionEnd;
+            let selectionEnd = this.inputEl.selectionEnd;
             this.inputEl.value = this.formatValue(value);
             let newLength = this.inputEl.value.length;
-            cursorPos = cursorPos + (newLength - currentLength);
-            this.inputEl.setSelectionRange(cursorPos, cursorPos);
+
+            if (newLength === currentLength) {
+                if (operation === 'insert')
+                    this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+                else if (operation === 'delete-single')
+                    this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
+                else if (operation === 'delete-range')
+                    this.inputEl.setSelectionRange(selectionStart, selectionStart);
+            }
+            else {
+                selectionEnd = selectionEnd + (newLength - currentLength);
+                this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+            }
         }
     }
 
