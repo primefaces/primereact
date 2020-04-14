@@ -103,6 +103,7 @@ export class InputNumber extends Component {
 
         this.constructParser();
 
+        this.onInput = this.onInput.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
         this.onInputKeyPress = this.onInputKeyPress.bind(this);
         this.onInputClick = this.onInputClick.bind(this);
@@ -287,17 +288,36 @@ export class InputNumber extends Component {
         }
     }
 
+    onInput(event) {
+        if (this.isSpecialChar) {
+            event.target.value = this.lastValue;
+        }
+        this.isSpecialChar = false;
+    }
+
     onInputKeyDown(event) {
         let selectionStart = event.target.selectionStart;
         let selectionEnd = event.target.selectionEnd;
         let inputValue = event.target.value;
 
+        if (event.shiftKey || event.altKey) {
+            this.isSpecialChar = true;
+        }
+        this.lastValue = event.target.value;
+
+        if (event.altKey) {
+            debugger;
+            event.preventDefault();
+        }
+
         switch (event.which) {
+            //up
             case 38:
                 this.spin(event, 1);
                 event.preventDefault();
             break;
 
+            //down
             case 40:
                 this.spin(event, -1);
                 event.preventDefault();
@@ -608,7 +628,8 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
                        className={className} defaultValue={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onClick={this.onInputClick} 
+                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} 
+                       onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick} 
                        onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-labelledby={this.props.ariaLabelledBy} />
         );
