@@ -252,19 +252,19 @@ export class InputNumber extends Component {
         }
     }
 
-    onDownButtonMouseUp(event) {
+    onDownButtonMouseUp() {
         if (!this.props.disabled) {
             this.clearTimer();
         }
     }
 
-    onDownButtonMouseLeave(event) {
+    onDownButtonMouseLeave() {
         if (!this.props.disabled) {
             this.clearTimer();
         }
     }
 
-    onDownButtonKeyUp(event) {
+    onDownButtonKeyUp() {
         if (!this.props.disabled) {
             this.clearTimer();
         }
@@ -278,6 +278,7 @@ export class InputNumber extends Component {
 
     onInputKeyDown(event) {
         let selectionStart = event.target.selectionStart;
+        let selectionEnd = event.target.selectionEnd;
         let inputValue = event.target.value;
 
         switch (event.which) {
@@ -309,22 +310,37 @@ export class InputNumber extends Component {
 
             //backspace
             case 8:
-                let removeCharIndex = selectionStart - 1;
-                let deleteChar = inputValue.charAt(removeCharIndex);
+                event.preventDefault();
+                let newValueStr;
 
-                if (this.isNumeralChar(deleteChar)) {
-                    if (this._group.test(deleteChar)) {
-                        this._group.lastIndex = 0;
-                        removeCharIndex = selectionStart - 2;
+                if (selectionStart === selectionEnd) {
+                    let removeCharIndex = selectionStart - 1;
+                    let deleteChar = inputValue.charAt(removeCharIndex);
+
+                    if (this.isNumeralChar(deleteChar)) {
+                        if (this._group.test(deleteChar)) {
+                            this._group.lastIndex = 0;
+                            removeCharIndex = selectionStart - 2;
+                        }
+
+                        newValueStr = inputValue.slice(0, removeCharIndex) + inputValue.slice(removeCharIndex + 1);
                     }
-
-                    let newValue = this.parseValue(inputValue.slice(0, removeCharIndex) + inputValue.slice(removeCharIndex + 1));
-                    this.inputEl.value = this.formatValue(newValue);
-                    this.updateModel(event, newValue);
-                    event.preventDefault();
                 }
                 else {
-                    event.preventDefault();
+                    if ((selectionEnd - selectionStart) === inputValue.length)
+                        newValueStr = '';
+                    else if (selectionStart === 0)
+                        newValueStr = inputValue.slice(selectionEnd)
+                    else if (selectionEnd === inputValue.length)
+                        newValueStr = inputValue.slice(0, selectionStart)
+                    else
+                        newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionEnd);
+                }
+
+                if (newValueStr != null) {
+                    let newValue = this.parseValue(newValueStr);
+                    this.inputEl.value = this.formatValue(newValue);
+                    this.updateModel(event, newValue);
                 }
             break;
 
