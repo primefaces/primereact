@@ -207,6 +207,7 @@ export class InputNumber extends Component {
             newValue= this.props.max;
         }
 
+        this.inputEl.value = this.formatValue(newValue);
         this.updateModel(event, newValue);
     }
 
@@ -326,6 +327,9 @@ export class InputNumber extends Component {
                     event.preventDefault();
                 }
             break;
+
+            default:
+            break;
         }
     }
 
@@ -337,7 +341,7 @@ export class InputNumber extends Component {
         let char = String.fromCharCode(code);
         let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
 
-        if (!event.shiftKey && (48 <= code && code <= 57)) {
+        if ((48 <= code && code <= 57)) {
             let newValueStr;
             let decimalCharIndex = inputValue.search(this._decimal);
 

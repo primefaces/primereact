@@ -151,12 +151,12 @@ export class InputNumberDemo extends Component {
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
                             Stacked {this.state.value21}
-                            <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} type="decimal" showButtons placeholder="Standard" />
+                            <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} showButtons placeholder="Standard" type="currency" currency="USD" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             Horizontal {this.state.value22}
-                            <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} type="decimal" showButtons buttonLayout="horizontal" placeholder="Horizontal" spinnerMode="horizontal" 
-                                decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                            <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} showButtons buttonLayout="horizontal" placeholder="Horizontal" spinnerMode="horizontal" 
+                                decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" type="currency" currency="EUR"/>
                         </div>
                         <div className="p-col-12 p-md-3">
                             Vertical {this.state.value23}
