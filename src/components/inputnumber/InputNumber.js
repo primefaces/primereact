@@ -301,13 +301,12 @@ export class InputNumber extends Component {
             this.isSpecialChar = true;
             return;
         }
-        
+
         let selectionStart = event.target.selectionStart;
         let selectionEnd = event.target.selectionEnd;
         let inputValue = event.target.value;
 
         if (event.altKey) {
-            debugger;
             event.preventDefault();
         }
 
@@ -366,7 +365,7 @@ export class InputNumber extends Component {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                         }
                     }
-                    
+
                     if (newValueStr != null) {
                         this.updateValue(event, newValueStr, 'delete-single');
                     }
@@ -520,7 +519,7 @@ export class InputNumber extends Component {
 
     updateInput(value, operation) {
         let currentLength = this.inputEl.value.length;
-        
+
         if (currentLength === 0) {
             this.inputEl.value = this.formatValue(value);
             this.inputEl.setSelectionRange(0, 0);
@@ -629,8 +628,8 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
                        className={className} defaultValue={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} 
-                       onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick} 
+                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
+                       onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-labelledby={this.props.ariaLabelledBy} />
         );
@@ -666,7 +665,7 @@ export class InputNumber extends Component {
 
     render() {
         let className = classNames("p-inputnumber p-component", this.props.className, {
-                'p-inputwrapper-filled': this.props.value != null, 
+                'p-inputwrapper-filled': this.props.value != null,
                 'p-inputnumber-buttons-stacked': this.props.showButtons && this.props.buttonLayout === 'stacked',
                 'p-inputnumber-buttons-horizontal': this.props.showButtons && this.props.buttonLayout === 'horizontal',
                 'p-inputnumber-buttons-vertical': this.props.showButtons && this.props.buttonLayout === 'vertical'
