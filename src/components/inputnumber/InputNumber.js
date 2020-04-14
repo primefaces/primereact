@@ -296,14 +296,15 @@ export class InputNumber extends Component {
     }
 
     onInputKeyDown(event) {
+        this.lastValue = event.target.value;
+        if (event.shiftKey || event.altKey) {
+            this.isSpecialChar = true;
+            return;
+        }
+        
         let selectionStart = event.target.selectionStart;
         let selectionEnd = event.target.selectionEnd;
         let inputValue = event.target.value;
-
-        if (event.shiftKey || event.altKey) {
-            this.isSpecialChar = true;
-        }
-        this.lastValue = event.target.value;
 
         if (event.altKey) {
             debugger;
