@@ -207,7 +207,7 @@ export class InputNumber extends Component {
             newValue= this.props.max;
         }
 
-        this.inputEl.value = this.formatValue(newValue);
+        this.updateInput(newValue);
         this.updateModel(event, newValue);
     }
 
@@ -339,7 +339,7 @@ export class InputNumber extends Component {
 
                 if (newValueStr != null) {
                     let newValue = this.parseValue(newValueStr);
-                    this.inputEl.value = this.formatValue(newValue);
+                    this.updateInput(newValue);
                     this.updateModel(event, newValue);
                 }
             break;
@@ -373,7 +373,7 @@ export class InputNumber extends Component {
 
             if (newValueStr) {
                 let newValue = this.parseValue(newValueStr);
-                this.inputEl.value = this.formatValue(newValue);
+                this.updateInput(newValue);
                 this.updateModel(event, newValue);
             }
         }
@@ -446,6 +446,15 @@ export class InputNumber extends Component {
         this._decimal.lastIndex =  0;
         this._group.lastIndex =  0;
         this._minusSign.lastIndex =  0;
+    }
+
+    updateInput(value) {
+        let cursorPos = this.inputEl.selectionEnd;
+        let currentLength = this.inputEl.value.length;
+        this.inputEl.value = this.formatValue(value);
+        let newLength = this.inputEl.value.length;
+        cursorPos = cursorPos + (newLength - currentLength);
+        this.inputEl.setSelectionRange(cursorPos, cursorPos);
     }
 
     updateModel(event, value) {
