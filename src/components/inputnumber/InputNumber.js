@@ -477,7 +477,7 @@ export class InputNumber extends Component {
         }
     }
 
-    onInputFocus() {
+    onInputFocus(event) {
         DomHandler.addClass(this.element, 'p-inputwrapper-focus');
 
         if (this.props.onFocus) {
