@@ -517,12 +517,6 @@ export class InputNumber extends Component {
             else
                 this.renderTooltip();
         }
-
-        //this.restoreCursorPosition();
-    }
-
-    restoreCursorPosition() {
-        
     }
 
     componentWillUnmount() {
