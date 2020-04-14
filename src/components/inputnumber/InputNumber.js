@@ -315,21 +315,33 @@ export class InputNumber extends Component {
             //backspace
             case 8:
                 event.preventDefault();
-                let newValueStr;
+                let newValueStr = null;
 
                 if (selectionStart === selectionEnd) {
-                    let removeCharIndex = selectionStart - 1;
-                    let deleteChar = inputValue.charAt(removeCharIndex);
+                    let deleteChar = inputValue.charAt(selectionStart - 1);
+                    let decimalCharIndex = inputValue.search(this._decimal);
+                    this._decimal.lastIndex = 0;
 
                     if (this.isNumeralChar(deleteChar)) {
                         if (this._group.test(deleteChar)) {
                             this._group.lastIndex = 0;
-                            removeCharIndex = selectionStart - 2;
+                            newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
                         }
-
-                        newValueStr = inputValue.slice(0, removeCharIndex) + inputValue.slice(removeCharIndex + 1);
+                        else if (this._decimal.test(deleteChar)) {
+                            this._decimal.lastIndex = 0;
+                            this.inputEl.setSelectionRange(selectionStart - 1, selectionStart - 1);
+                        }
+                        else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
+                        }
+                        else {
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
+                        }
                     }
-                    this.updateValue(event, newValueStr, 'delete-single');
+                    
+                    if (newValueStr != null) {
+                        this.updateValue(event, newValueStr, 'delete-single');
+                    }
                 }
                 else {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
