@@ -331,21 +331,10 @@ export class InputNumber extends Component {
                     }
                 }
                 else {
-                    if ((selectionEnd - selectionStart) === inputValue.length)
-                        newValueStr = '';
-                    else if (selectionStart === 0)
-                        newValueStr = inputValue.slice(selectionEnd)
-                    else if (selectionEnd === inputValue.length)
-                        newValueStr = inputValue.slice(0, selectionStart)
-                    else
-                        newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionEnd);
+                    newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
                 }
 
-                if (newValueStr != null) {
-                    let newValue = this.parseValue(newValueStr);
-                    this.updateInput(newValue);
-                    this.updateModel(event, newValue);
-                }
+                this.updateValue(event, newValueStr);
             break;
 
             default:
@@ -355,13 +344,19 @@ export class InputNumber extends Component {
 
     onInputKeyPress(event) {
         event.preventDefault();
-        let selectionStart = event.target.selectionStart;
-        let inputValue = event.target.value.trim();
         let code = event.which || event.keyCode;
-        let char = String.fromCharCode(code);
-        let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
 
         if ((48 <= code && code <= 57)) {
+            let selectionStart = event.target.selectionStart;
+            let selectionEnd = event.target.selectionEnd;
+            if (selectionStart !== selectionEnd) {
+                let newValueStr = this.deleteRange(event.target.value, selectionStart, selectionEnd);
+                this.updateValue(event, newValueStr);
+            }
+
+            let inputValue = event.target.value.trim();
+            let char = String.fromCharCode(code);
+            let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
             let newValueStr;
             let decimalCharIndex = inputValue.search(this._decimal);
 
@@ -375,14 +370,25 @@ export class InputNumber extends Component {
                 newValueStr = inputValue.slice(0, selectionStart) + char + inputValue.slice(selectionStart);
             }
 
-            if (newValueStr) {
-                let newValue = this.parseValue(newValueStr);
-                this.updateInput(newValue);
-                this.updateModel(event, newValue);
-            }
+            this.updateValue(event, newValueStr);
         }
 
         this._decimal.lastIndex = 0;
+    }
+
+    deleteRange(value, start, end) {
+        let newValueStr;
+
+        if ((end - start) === value.length)
+            newValueStr = '';
+        else if (start === 0)
+            newValueStr = value.slice(end);
+        else if (end === value.length)
+            newValueStr = value.slice(0, start);
+        else
+            newValueStr = value.slice(0, start) + value.slice(end);
+
+        return newValueStr;
     }
 
     initCursor(event) {
@@ -450,6 +456,14 @@ export class InputNumber extends Component {
         this._decimal.lastIndex =  0;
         this._group.lastIndex =  0;
         this._minusSign.lastIndex =  0;
+    }
+
+    updateValue(event, valueStr) {
+        if (valueStr != null) {
+            let newValue = this.parseValue(valueStr);
+            this.updateInput(newValue);
+            this.updateModel(event, newValue);
+        }
     }
 
     updateInput(value) {
