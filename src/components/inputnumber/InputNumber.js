@@ -404,11 +404,6 @@ export class InputNumber extends Component {
     insert(event, text) {
         let selectionStart = this.inputEl.selectionStart;
         let selectionEnd = this.inputEl.selectionEnd;
-        if (selectionStart !== selectionEnd) {
-            let newValueStr = this.deleteRange(this.inputEl.value, selectionStart, selectionEnd);
-            this.updateValue(event, newValueStr, 'delete-range');
-        }
-
         let inputValue = this.inputEl.value.trim();
         let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
         let newValueStr;
@@ -417,14 +412,29 @@ export class InputNumber extends Component {
 
         if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
             if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
-                newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
-                this.updateValue(event, newValueStr, 'insert');
+                newValueStr = value.slice(0, start) + text + value.slice(start + text.length);
+                this.updateValue(event, newValueStr, 'insert'); 
             }
         }
         else {
-            newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart);
+            newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
             this.updateValue(event, newValueStr, 'insert');
         }
+    }
+
+    insertText(value, text, start, end) {
+        let newValueStr;
+
+        if ((end - start) === value.length)
+            newValueStr = text;
+        else if (start === 0)
+            newValueStr = text + value.slice(end);
+        else if (end === value.length)
+            newValueStr = value.slice(0, start) + text;
+        else
+            newValueStr = value.slice(0, start) + text + value.slice(end);
+
+        return newValueStr;
     }
 
     deleteRange(value, start, end) {
