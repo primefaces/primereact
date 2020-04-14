@@ -412,7 +412,7 @@ export class InputNumber extends Component {
 
         if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
             if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
-                newValueStr = value.slice(0, start) + text + value.slice(start + text.length);
+                newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
                 this.updateValue(event, newValueStr, 'insert'); 
             }
         }
