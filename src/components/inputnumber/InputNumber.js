@@ -590,6 +590,18 @@ export class InputNumber extends Component {
         }
     }
 
+    isStacked() {
+        return this.props.showButtons && this.props.buttonLayout === 'stacked';
+    }
+
+    isHorizontal() {
+        return this.props.showButtons && this.props.buttonLayout === 'horizontal';
+    }
+
+    isVertical() {
+        return this.props.showButtons && this.props.buttonLayout === 'vertical';
+    }
+
     componentDidMount() {
         if (this.props.tooltip) {
             this.renderTooltip();
@@ -663,22 +675,41 @@ export class InputNumber extends Component {
         );
     }
 
+    renderButtonGroup() {
+        const upButton = this.props.showButtons && this.renderUpButton();
+        const downButton = this.props.showButtons && this.renderDownButton();
+
+        if (this.isStacked()) {
+            return (
+                <span className="p-inputnumber-button-group">
+                    {upButton}
+                    {downButton}
+                </span>
+            )
+        }
+
+        return (
+            <React.Fragment>
+                {upButton}
+                {downButton}
+            </React.Fragment>
+        )
+    }
+
     render() {
         let className = classNames("p-inputnumber p-component", this.props.className, {
                 'p-inputwrapper-filled': this.props.value != null,
-                'p-inputnumber-buttons-stacked': this.props.showButtons && this.props.buttonLayout === 'stacked',
-                'p-inputnumber-buttons-horizontal': this.props.showButtons && this.props.buttonLayout === 'horizontal',
-                'p-inputnumber-buttons-vertical': this.props.showButtons && this.props.buttonLayout === 'vertical'
+                'p-inputnumber-buttons-stacked': this.isStacked(),
+                'p-inputnumber-buttons-horizontal': this.isHorizontal(),
+                'p-inputnumber-buttons-vertical': this.isVertical()
         });
         let inputElement = this.renderInputElement();
-        let upButton = this.props.showButtons && this.renderUpButton();
-        let downButton = this.props.showButtons && this.renderDownButton();
+        let buttonGroup = this.renderButtonGroup();
 
         return (
             <span ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {inputElement}
-                {upButton}
-                {downButton}
+                {buttonGroup}
             </span>
         );
     }

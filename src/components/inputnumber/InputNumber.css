@@ -17,7 +17,7 @@
 .p-inputnumber-buttons-stacked .p-inputnumber-button-up {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    align-self: flex-start;
+    border-bottom-right-radius: 0;
 }
 
 .p-inputnumber-buttons-stacked .p-inputnumber-input {
@@ -27,9 +27,13 @@
 
 .p-inputnumber-buttons-stacked .p-inputnumber-button-down {
     border-top-left-radius: 0;
+    border-top-right-radius: 0;
     border-bottom-left-radius: 0;
-    align-self: flex-end;
-    margin-left: -2em;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .p-inputnumber-buttons-horizontal .p-inputnumber-button-up {
