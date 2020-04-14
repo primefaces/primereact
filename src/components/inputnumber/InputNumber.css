@@ -36,6 +36,14 @@
     flex-direction: column;
 }
 
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-inputnumber-button {
+    flex: 1 1 auto;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-inputnumber-button .p-inputnumber-button-icon {
+    font-size: inherit;
+}
+
 .p-inputnumber-buttons-horizontal .p-inputnumber-button-up {
     order: 3;
     border-top-left-radius: 0;
