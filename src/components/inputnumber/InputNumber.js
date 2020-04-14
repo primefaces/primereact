@@ -109,6 +109,7 @@ export class InputNumber extends Component {
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputMouseDown = this.onInputMouseDown.bind(this);
+        this.onPaste = this.onPaste.bind(this);
 
         this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
         this.onUpButtonMouseDown = this.onUpButtonMouseDown.bind(this);
@@ -172,8 +173,8 @@ export class InputNumber extends Component {
         return '';
     }
 
-    parseValue(value) {
-        let filteredValue = value.trim()
+    parseValue(text) {
+        let filteredText = text.trim()
                             .replace(/\s/g, '')
                             .replace(this._currency, '')
                             .replace(this._group, '')
@@ -183,8 +184,14 @@ export class InputNumber extends Component {
                             .replace(this._minusSign, '-')
                             .replace(this._decimal, '.')
                             .replace(this._numeral, this._index);
-            
-        return filteredValue ? +filteredValue : null;
+
+        if (filteredText) {
+            let parsedValue = +filteredText;
+            return isNaN(parsedValue) ? null : parsedValue;
+        }
+        else {
+            return null;
+        }
     }
 
     repeat(event, interval, dir) {
@@ -359,33 +366,45 @@ export class InputNumber extends Component {
         let code = event.which || event.keyCode;
 
         if ((48 <= code && code <= 57)) {
-            let selectionStart = event.target.selectionStart;
-            let selectionEnd = event.target.selectionEnd;
-            if (selectionStart !== selectionEnd) {
-                let newValueStr = this.deleteRange(event.target.value, selectionStart, selectionEnd);
-                this.updateValue(event, newValueStr, 'delete-range');
-            }
+            this.insert(event, String.fromCharCode(code));
+        }
+    }
 
-            let inputValue = event.target.value.trim();
-            let char = String.fromCharCode(code);
-            let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
-            let newValueStr;
-            let decimalCharIndex = inputValue.search(this._decimal);
-
-            if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                let fractionDigitsLength = selectionStart - (decimalCharIndex + 1);
-                if (fractionDigitsLength < maxFractionDigits) {
-                    newValueStr = inputValue.slice(0, selectionStart) + char + inputValue.slice(selectionStart + 1);
-                    this.updateValue(event, newValueStr, 'insert');
-                }
+    onPaste(event) {
+        event.preventDefault();
+        let data = (event.clipboardData || window['clipboardData']).getData('Text');
+        if (data) {
+            let filteredData = this.parseValue(data);
+            if (filteredData != null) {
+                this.insert(event, filteredData.toString());
             }
-            else {
-                newValueStr = inputValue.slice(0, selectionStart) + char + inputValue.slice(selectionStart);
+        }
+    }
+
+    insert(event, text) {
+        let selectionStart = this.inputEl.selectionStart;
+        let selectionEnd = this.inputEl.selectionEnd;
+        if (selectionStart !== selectionEnd) {
+            let newValueStr = this.deleteRange(this.inputEl.value, selectionStart, selectionEnd);
+            this.updateValue(event, newValueStr, 'delete-range');
+        }
+
+        let inputValue = this.inputEl.value.trim();
+        let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
+        let newValueStr;
+        let decimalCharIndex = inputValue.search(this._decimal);
+        this._decimal.lastIndex = 0;
+
+        if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+            if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
+                newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
                 this.updateValue(event, newValueStr, 'insert');
             }
         }
-
-        this._decimal.lastIndex = 0;
+        else {
+            newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart);
+            this.updateValue(event, newValueStr, 'insert');
+        }
     }
 
     deleteRange(value, start, end) {
@@ -590,8 +609,8 @@ export class InputNumber extends Component {
                        className={className} defaultValue={valueToRender} type="text" size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name} onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onClick={this.onInputClick} 
-                       onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} aria-valuemin={this.props.min} aria-valuemax={this.props.max}
-                       aria-valuenow={valueToRender} aria-labelledby={this.props.ariaLabelledBy} />
+                       onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
+                       aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-labelledby={this.props.ariaLabelledBy} />
         );
     }
 
