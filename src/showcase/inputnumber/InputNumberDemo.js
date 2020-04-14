@@ -121,7 +121,7 @@ export class InputNumberDemo extends Component {
                         </div>
                         <div className="p-col-12 p-md-3">
                             Temperature {this.state.value20}
-                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} prefix="&uarr; " suffix="℃" min="0" max="40"/>
+                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
                         </div>
                     </div>
 
