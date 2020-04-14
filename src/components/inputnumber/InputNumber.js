@@ -391,9 +391,9 @@ export class InputNumber extends Component {
         return newValueStr;
     }
 
-    initCursor(event) {
-        let selectionStart = event.target.selectionStart;
-        let inputValue = event.target.value;
+    initCursor() {
+        let selectionStart = this.inputEl.selectionStart;
+        let inputValue = this.inputEl.value;
         let valueLength = inputValue.length;
         let index = null;
 
@@ -416,7 +416,7 @@ export class InputNumber extends Component {
         }
 
         if (index !== null) {
-            event.target.setSelectionRange(index + 1, index + 1);
+            this.inputEl.setSelectionRange(index + 1, index + 1);
         }
         else {
             i = selectionStart + 1;
@@ -432,13 +432,13 @@ export class InputNumber extends Component {
             }
 
             if (index !== null) {
-                event.target.setSelectionRange(index, index);
+                this.inputEl.setSelectionRange(index, index);
             }
         }
     }
 
-    onInputClick(event) {
-        this.initCursor(event);
+    onInputClick() {
+        this.initCursor();
     }
 
     isNumeralChar(char) {
@@ -467,12 +467,21 @@ export class InputNumber extends Component {
     }
 
     updateInput(value) {
-        let cursorPos = this.inputEl.selectionEnd;
         let currentLength = this.inputEl.value.length;
-        this.inputEl.value = this.formatValue(value);
-        let newLength = this.inputEl.value.length;
-        cursorPos = cursorPos + (newLength - currentLength);
-        this.inputEl.setSelectionRange(cursorPos, cursorPos);
+        
+        if (currentLength === 0) {
+            this.inputEl.value = this.formatValue(value);
+            this.inputEl.setSelectionRange(0, 0);
+            this.initCursor();
+            this.inputEl.setSelectionRange(this.inputEl.selectionStart + 1, this.inputEl.selectionStart + 1);
+        }
+        else {
+            let cursorPos = this.inputEl.selectionEnd;
+            this.inputEl.value = this.formatValue(value);
+            let newLength = this.inputEl.value.length;
+            cursorPos = cursorPos + (newLength - currentLength);
+            this.inputEl.setSelectionRange(cursorPos, cursorPos);
+        }
     }
 
     updateModel(event, value) {
