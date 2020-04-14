@@ -522,9 +522,17 @@ export class InputNumber extends Component {
     updateValue(event, valueStr, operation) {
         if (valueStr != null) {
             let newValue = this.parseValue(valueStr);
-            this.updateInput(newValue, operation);
-            this.updateModel(event, newValue);
+            let valid = this.isWithinRange(newValue);
+
+            if (valid) {
+                this.updateInput(newValue, operation);
+                this.updateModel(event, newValue);
+            }
         }
+    }
+
+    isWithinRange(value) {
+        return value == null || ((this.props.min == null || value > this.props.min) && (this.props.max == null || value < this.props.max));
     }
 
     updateInput(value, operation) {
