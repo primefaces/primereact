@@ -42,7 +42,7 @@ export class InputNumberDemo extends Component {
                         <p>InputNumber is an input component to provide a numerical input.</p>
 
                         <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("spinner")} className="layout-changelog-button">{context.changelogText}</button> }
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputNumber")} className="layout-changelog-button">{context.changelogText}</button> }
                         </AppContentContext.Consumer>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ export class InputNumberDemo extends Component {
                             Min-Max Boundaries
                             <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} mode="decimal" min={0} max={100} />
                         </div>
-                        
+
                         <div className="p-col-12 p-md-3">
                             User Locale
                             <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} mode="decimal" minFractionDigits={2} />
@@ -146,7 +146,7 @@ export class InputNumberDemo extends Component {
                             <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} mode="decimal" showButtons min={0} max={100} />
                         </div>
                     </div>
-                
+
                 </div>
 
                 <InputNumberDoc />
