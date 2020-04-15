@@ -65,7 +65,7 @@ export class InputNumber extends Component {
         decrementButtonClassName: PropTypes.string,
         locale: PropTypes.string,
         localeMatcher: PropTypes.string,
-        type: PropTypes.string,
+        mode: PropTypes.string,
         suffix: PropTypes.string,
         prefix: PropTypes.string,
         unit: PropTypes.string,
@@ -437,7 +437,7 @@ export class InputNumber extends Component {
         if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
             if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
                 newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
-                this.updateValue(event, newValueStr, 'insert'); 
+                this.updateValue(event, newValueStr, 'insert');
             }
         }
         else {
@@ -681,7 +681,7 @@ export class InputNumber extends Component {
     renderInputElement() {
         const className = classNames('p-inputnumber-input', this.props.inputClassName);
         const valueToRender = this.formatValue(this.props.value);
-        
+
 
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
