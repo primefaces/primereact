@@ -135,30 +135,49 @@ export class InputNumber extends Component {
             currencyDisplay: this.props.currencyDisplay,
             useGrouping: this.props.useGrouping,
             minimumFractionDigits: this.props.minFractionDigits,
-            maximumFractionDigits: this.props.maxFractionDigits,
+            maximumFractionDigits: this.props.maxFractionDigits
         };
     }
 
     constructParser() {
         this.numberFormat = new Intl.NumberFormat(this.props.locale, this.getOptions());
-        const parts = this.numberFormat.formatToParts(-12345.6);
         const numerals = [...new Intl.NumberFormat(this.props.locale, {useGrouping: false}).format(9876543210)].reverse();
         const index = new Map(numerals.map((d, i) => [d, i]));
-        this._currency = new RegExp(`[${this.getRegExpPattern(parts, 'currency')}]`, 'g');
-        this._decimal = new RegExp(`[${this.getRegExpPattern(parts, 'decimal')}]`);
-        this._group = new RegExp(`[${this.getRegExpPattern(parts, 'group')}]`, 'g');
-        this._literal = new RegExp(`[${this.getRegExpPattern(parts, 'literal')}]`, 'g');
-        this._minusSign = new RegExp(`[${this.getRegExpPattern(parts, 'minusSign')}]`, 'g');
         this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
-        this._suffix = new RegExp(`[${this.props.suffix}]`, 'g');
-        this._prefix = new RegExp(`[${this.props.prefix}]`, 'g');
+        this._decimal = this.getDecimalExpression();
+        this._group = this.getGroupingExpression();
+        this._minusSign = this.getMinusSignExpression();
+        this._currency = this.getCurrencyExpression();
+        this._suffix = new RegExp(`[${this.props.suffix||''}]`, 'g');
+        this._prefix = new RegExp(`[${this.props.prefix||''}]`, 'g');
         this._index = d => index.get(d);
     }
 
-    getRegExpPattern(parts, type) {
-        let part = parts.find(d => d.type === type);
-        return part ? part.value : '';
+    getDecimalExpression() {
+        const formatter = new Intl.NumberFormat(this.props.locale, {useGrouping: false});
+        return new RegExp(`[${formatter.format(1.1).trim().replace(this._numeral, '')}]`, 'g');
     }
+
+    getGroupingExpression() {
+        const formatter = new Intl.NumberFormat(this.props.locale, {useGrouping: true});
+        return new RegExp(`[${formatter.format(1000).trim().replace(this._numeral, '')}]`, 'g');
+    }
+
+    getMinusSignExpression() {
+        const formatter = new Intl.NumberFormat(this.props.locale, {useGrouping: false});
+        return new RegExp(`[${formatter.format(-1).trim().replace(this._numeral, '')}]`, 'g');
+    }
+
+    getCurrencyExpression() {
+        if (this.props.currency) {
+            const formatter = new Intl.NumberFormat(this.props.locale, {style: 'currency', currency: this.props.currency, currencyDisplay: this.props.currencyDisplay});
+            return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(this._numeral, '').replace(this._decimal, '').replace(this._group, '')}]`, "g");
+        }
+        else {
+            return new RegExp(`[]`,'g');
+        }
+    }
+
 
     formatValue(value) {
         if (value != null) {
@@ -187,7 +206,6 @@ export class InputNumber extends Component {
                             .replace(/\s/g, '')
                             .replace(this._currency, '')
                             .replace(this._group, '')
-                            .replace(this._literal, '')
                             .replace(this._suffix, '')
                             .replace(this._prefix, '')
                             .replace(this._minusSign, '-')
