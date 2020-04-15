@@ -55,7 +55,7 @@ export class InputNumber extends Component {
     }
 
     static propTypes = {
-        value: PropTypes.any,
+        value: PropTypes.number,
         format: PropTypes.bool,
         showButtons: PropTypes.bool,
         buttonLayout: PropTypes.string,
