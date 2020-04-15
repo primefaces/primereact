@@ -200,7 +200,6 @@ export class InputNumber extends Component {
                             .replace(this._decimal, '.')
                             .replace(this._numeral, this._index);
 
-        console.log(filteredText);
         if (filteredText) {
             let parsedValue = +filteredText;
             return isNaN(parsedValue) ? null : parsedValue;
@@ -645,6 +644,10 @@ export class InputNumber extends Component {
         return this.props.showButtons && this.props.buttonLayout === 'vertical';
     }
 
+    getInputMode() {
+        return this.props.inputMode || ((this.props.mode === 'decimal' && !this.props.minFractionDigits) ? 'numeric' : 'decimal');
+    }
+
     componentDidMount() {
         if (this.props.tooltip) {
             this.renderTooltip();
@@ -678,23 +681,24 @@ export class InputNumber extends Component {
     renderInputElement() {
         const className = classNames('p-inputnumber-input', this.props.inputClassName);
         const valueToRender = this.formatValue(this.props.value);
+        
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle}
-                       className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.props.inputMode}
+            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
+                       className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
-                       aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-labelledby={this.props.ariaLabelledBy} />
+                       aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />
         );
     }
 
     renderUpButton() {
-        let className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-component", this.props.incrementButtonClassName, {
+        const className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-component", this.props.incrementButtonClassName, {
             'p-disabled': this.props.disabled
         });
-        let icon = classNames('p-inputnumber-button-icon', this.props.incrementButtonIcon);
+        const icon = classNames('p-inputnumber-button-icon', this.props.incrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
@@ -705,10 +709,10 @@ export class InputNumber extends Component {
     }
 
     renderDownButton() {
-        let className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-component", this.props.decrementButtonClassName, {
+        const className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-component", this.props.decrementButtonClassName, {
             'p-disabled': this.props.disabled
         });
-        let icon = classNames('p-inputnumber-button-icon', this.props.decrementButtonIcon);
+        const icon = classNames('p-inputnumber-button-icon', this.props.decrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
@@ -740,14 +744,14 @@ export class InputNumber extends Component {
     }
 
     render() {
-        let className = classNames("p-inputnumber p-component", this.props.className, {
+        const className = classNames("p-inputnumber p-component", this.props.className, {
                 'p-inputwrapper-filled': this.props.value != null,
                 'p-inputnumber-buttons-stacked': this.isStacked(),
                 'p-inputnumber-buttons-horizontal': this.isHorizontal(),
                 'p-inputnumber-buttons-vertical': this.isVertical()
         });
-        let inputElement = this.renderInputElement();
-        let buttonGroup = this.renderButtonGroup();
+        const inputElement = this.renderInputElement();
+        const buttonGroup = this.renderButtonGroup();
 
         return (
             <span ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
