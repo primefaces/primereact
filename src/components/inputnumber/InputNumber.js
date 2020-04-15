@@ -171,13 +171,12 @@ export class InputNumber extends Component {
     getCurrencyExpression() {
         if (this.props.currency) {
             const formatter = new Intl.NumberFormat(this.props.locale, {style: 'currency', currency: this.props.currency, currencyDisplay: this.props.currencyDisplay});
-            return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(this._numeral, '').replace(this._decimal, '').replace(this._group, '')}]`, "g");
+            return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(this._numeral, '').replace(this._decimal, '').replace(this._group, '')}]`, 'g');
         }
         else {
             return new RegExp(`[]`,'g');
         }
     }
-
 
     formatValue(value) {
         if (value != null) {
@@ -242,7 +241,7 @@ export class InputNumber extends Component {
         }
 
         if (this.props.max !== null && newValue > this.props.max) {
-            newValue= this.props.max;
+            newValue = this.props.max;
         }
 
         this.updateModel(event, newValue);
@@ -676,6 +675,21 @@ export class InputNumber extends Component {
         const formattedValue = this.formatValue(this.props.value);
         if (this.inputEl.value !== formattedValue) {
             this.inputEl.value = formattedValue;
+
+            if (formattedValue) {
+                let index = null;
+                for (let i = formattedValue.length - 1; i >= 0; i--) {
+                    let char = formattedValue.charAt(i);
+                    if (this.isNumeralChar(char)) {
+                        index = i;
+                        break;
+                    }
+                }
+
+                if (index !== null) {
+                    this.inputEl.setSelectionRange(index + 1, index + 1);
+                }
+            }
         }
     }
 
@@ -697,7 +711,6 @@ export class InputNumber extends Component {
     renderInputElement() {
         const className = classNames('p-inputnumber-input', this.props.inputClassName);
         const valueToRender = this.formatValue(this.props.value);
-
 
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
@@ -760,7 +773,7 @@ export class InputNumber extends Component {
     }
 
     render() {
-        const className = classNames("p-inputnumber p-component", this.props.className, {
+        const className = classNames('p-inputnumber p-component', this.props.className, {
                 'p-inputwrapper-filled': this.props.value != null,
                 'p-inputnumber-buttons-stacked': this.isStacked(),
                 'p-inputnumber-buttons-horizontal': this.isHorizontal(),
