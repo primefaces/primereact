@@ -148,9 +148,7 @@ export class InputNumber extends Component {
         this._decimal = new RegExp(`[${this.getRegExpPattern(parts, 'decimal')}]`);
         this._group = new RegExp(`[${this.getRegExpPattern(parts, 'group')}]`, 'g');
         this._literal = new RegExp(`[${this.getRegExpPattern(parts, 'literal')}]`, 'g');
-        this._percentSign = new RegExp(`[${this.getRegExpPattern(parts, 'percentSign')}]`, 'g');
         this._minusSign = new RegExp(`[${this.getRegExpPattern(parts, 'minusSign')}]`, 'g');
-        this._unit = new RegExp(`[${this.getRegExpPattern(parts, 'unit')}]`, 'g');
         this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
         this._suffix = new RegExp(`[${this.props.suffix}]`, 'g');
         this._prefix = new RegExp(`[${this.props.prefix}]`, 'g');
@@ -190,8 +188,6 @@ export class InputNumber extends Component {
                             .replace(this._currency, '')
                             .replace(this._group, '')
                             .replace(this._literal, '')
-                            .replace(this._percentSign, '')
-                            .replace(this._unit, '')
                             .replace(this._suffix, '')
                             .replace(this._prefix, '')
                             .replace(this._minusSign, '-')
