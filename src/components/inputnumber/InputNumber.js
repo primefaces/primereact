@@ -22,8 +22,6 @@ export class InputNumber extends Component {
         mode: 'decimal',
         suffix: null,
         prefix: null,
-        unit: undefined,
-        unitDisplay: undefined,
         currency: undefined,
         currencyDisplay: undefined,
         useGrouping: true,
@@ -63,12 +61,13 @@ export class InputNumber extends Component {
         buttonLayout: PropTypes.string,
         incrementButtonClassName: PropTypes.string,
         decrementButtonClassName: PropTypes.string,
+        incrementButtonIcon: PropTypes.string,
+        decrementButtonIcon: PropTypes.string,
         locale: PropTypes.string,
         localeMatcher: PropTypes.string,
+        mode: PropTypes.string,
         suffix: PropTypes.string,
         prefix: PropTypes.string,
-        unit: PropTypes.string,
-        unitDisplay: PropTypes.string,
         currency: PropTypes.string,
         currencyDisplay: PropTypes.string,
         useGrouping: PropTypes.bool,
@@ -232,7 +231,6 @@ export class InputNumber extends Component {
             newValue= this.props.max;
         }
 
-        this.updateInput(newValue);
         this.updateModel(event, newValue);
     }
 
@@ -436,7 +434,7 @@ export class InputNumber extends Component {
         if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
             if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
                 newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
-                this.updateValue(event, newValueStr, 'insert'); 
+                this.updateValue(event, newValueStr, 'insert');
             }
         }
         else {
@@ -685,7 +683,7 @@ export class InputNumber extends Component {
     renderInputElement() {
         const className = classNames('p-inputnumber-input', this.props.inputClassName);
         const valueToRender = this.formatValue(this.props.value);
-        
+
 
         return (
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
