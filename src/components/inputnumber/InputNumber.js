@@ -65,7 +65,6 @@ export class InputNumber extends Component {
         decrementButtonClassName: PropTypes.string,
         locale: PropTypes.string,
         localeMatcher: PropTypes.string,
-        type: PropTypes.string,
         suffix: PropTypes.string,
         prefix: PropTypes.string,
         unit: PropTypes.string,
@@ -660,6 +659,11 @@ export class InputNumber extends Component {
                 this.tooltip.updateContent(this.props.tooltip);
             else
                 this.renderTooltip();
+        }
+
+        const formattedValue = this.formatValue(this.props.value);
+        if (this.inputEl.value !== formattedValue) {
+            this.inputEl.value = formattedValue;
         }
     }
 
