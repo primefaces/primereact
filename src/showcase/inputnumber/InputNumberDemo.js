@@ -42,7 +42,7 @@ export class InputNumberDemo extends Component {
                         <p>InputNumber is an input component to provide numerical input.</p>
 
                         <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("spinner")} className="layout-changelog-button">{context.changelogText}</button> }
+                            { context => <button onClick={() => context.onChangelogBtnClick("inputNumber")} className="layout-changelog-button">{context.changelogText}</button> }
                         </AppContentContext.Consumer>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ export class InputNumberDemo extends Component {
                             Min-Max Boundaries
                             <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} mode="decimal" min={0} max={100} />
                         </div>
-                        
+
                         <div className="p-col-12 p-md-3">
                             User Locale
                             <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} mode="decimal" minFractionDigits={2} />
@@ -109,19 +109,19 @@ export class InputNumberDemo extends Component {
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
                             Mile
-                            <InputNumber value={this.state.value13} onChange={(e) => this.setState({value17: e.value})} suffix=" mi" />
+                            <InputNumber value={this.state.value13} onChange={(e) => this.setState({value13: e.value})} suffix=" mi" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             Percent
-                            <InputNumber value={this.state.value14} onChange={(e) => this.setState({value18: e.value})} prefix="%" />
+                            <InputNumber value={this.state.value14} onChange={(e) => this.setState({value14: e.value})} prefix="%" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             Expiry
-                            <InputNumber value={this.state.value15} onChange={(e) => this.setState({value19: e.value})}  prefix="Expires in " suffix=" days" />
+                            <InputNumber value={this.state.value15} onChange={(e) => this.setState({value15: e.value})}  prefix="Expires in " suffix=" days" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             Temperature
-                            <InputNumber value={this.state.value16} onChange={(e) => this.setState({value20: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
+                            <InputNumber value={this.state.value16} onChange={(e) => this.setState({value16: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
                         </div>
                     </div>
 
@@ -146,7 +146,7 @@ export class InputNumberDemo extends Component {
                             <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} mode="decimal" showButtons min={0} max={100} />
                         </div>
                     </div>
-                
+
                 </div>
 
                 <InputNumberDoc />
