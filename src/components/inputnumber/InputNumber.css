@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     width: 2em;
+    flex: 0 0 auto;
 }
 
 .p-inputnumber-input {
@@ -88,24 +89,19 @@
     width: auto;
 }
 
-.p-fluid .p-inputnumber-button {
-    width: 2em;
-    flex-shrink: 0;
-}
-
 .p-fluid .p-inputnumber {
-    display: flex;
+    width: 100%;
 }
 
-.p-fluid .p-inputnumber-buttons-stacked .p-inputnumber-input,
-.p-fluid .p-inputnumber-buttons-horizontal .p-inputnumber-input {
-    min-width: 2em;
+.p-fluid .p-inputnumber .p-inputnumber-input {
+    width: 1%;
 }
 
-.p-fluid .p-inputnumber-buttons-vertical {
-    width: auto;
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-input {
+    width: 100%;
 }
 
-.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-button {
-    width: auto;
+.p-fluid .p-inputnumber-buttons-stacked .p-inputnumber-button,
+.p-fluid .p-inputnumber-buttons-horizontal .p-inputnumber-button {
+    width: 2em;
 }

@@ -137,7 +137,7 @@ export class InputNumberDemo extends Component {
                                 decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Vertical
+                            <div>Vertical</div>
                             <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
                                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
@@ -785,7 +785,7 @@ export class InputNumberDemo extends Component {
                             decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
                     </div>
                     <div className="p-col-12 p-md-3">
-                        Vertical
+                        <div>Vertical</div>
                         <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
                             decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                     </div>
