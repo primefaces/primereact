@@ -129,21 +129,21 @@ export class InputNumberDemo extends Component {
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
                             Stacked
-                            <InputNumber value={this.state.value17} onChange={(e) => this.setState({value21: e.value})} showButtons mode="currency" currency="USD" />
+                            <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} showButtons mode="currency" currency="USD" />
                         </div>
                         <div className="p-col-12 p-md-3">
                             Horizontal with Step
-                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value22: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal" step={0.25}
+                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal" step={0.25}
                                 decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
                         </div>
                         <div className="p-col-12 p-md-3">
                             Vertical
-                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value23: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
+                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
                                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
                              Min-Max Boundaries
-                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value24: e.value})} mode="decimal" showButtons min={0} max={100} />
+                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} mode="decimal" showButtons min={0} max={100} />
                         </div>
                     </div>
                 
