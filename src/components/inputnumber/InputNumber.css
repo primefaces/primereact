@@ -7,7 +7,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2em;
     flex: 0 0 auto;
 }
 
@@ -64,7 +63,6 @@
 
 .p-inputnumber-buttons-vertical {
     flex-direction: column;
-    width: 6em;
 }
 
 .p-inputnumber-buttons-vertical .p-inputnumber-button-up {
@@ -97,11 +95,7 @@
     width: 1%;
 }
 
-.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-input {
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-input,
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-button {
     width: 100%;
-}
-
-.p-fluid .p-inputnumber-buttons-stacked .p-inputnumber-button,
-.p-fluid .p-inputnumber-buttons-horizontal .p-inputnumber-button {
-    width: 2em;
 }

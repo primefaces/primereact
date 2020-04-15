@@ -712,7 +712,7 @@ export class InputNumber extends Component {
     }
 
     renderUpButton() {
-        const className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-component", this.props.incrementButtonClassName, {
+        const className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component", this.props.incrementButtonClassName, {
             'p-disabled': this.props.disabled
         });
         const icon = classNames('p-inputnumber-button-icon', this.props.incrementButtonIcon);
@@ -726,7 +726,7 @@ export class InputNumber extends Component {
     }
 
     renderDownButton() {
-        const className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-component", this.props.decrementButtonClassName, {
+        const className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component", this.props.decrementButtonClassName, {
             'p-disabled': this.props.disabled
         });
         const icon = classNames('p-inputnumber-button-icon', this.props.decrementButtonIcon);
