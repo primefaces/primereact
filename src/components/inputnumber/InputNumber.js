@@ -55,7 +55,7 @@ export class InputNumber extends Component {
     }
 
     static propTypes = {
-        value: PropTypes.any,
+        value: PropTypes.number,
         format: PropTypes.bool,
         showButtons: PropTypes.bool,
         buttonLayout: PropTypes.string,
@@ -231,7 +231,6 @@ export class InputNumber extends Component {
             newValue= this.props.max;
         }
 
-        this.updateInput(newValue);
         this.updateModel(event, newValue);
     }
 
@@ -658,6 +657,11 @@ export class InputNumber extends Component {
                 this.tooltip.updateContent(this.props.tooltip);
             else
                 this.renderTooltip();
+        }
+
+        const formattedValue = this.formatValue(this.props.value);
+        if (this.inputEl.value !== formattedValue) {
+            this.inputEl.value = formattedValue;
         }
     }
 

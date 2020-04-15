@@ -10,26 +10,26 @@ export class InputNumberDemo extends Component {
     constructor() {
         super();
         this.state = {
-            value1: null,
-            value2: null,
-            value3: null,
-            value4: null,
-            value5: null,
-            value6: null,
-            value7: null,
-            value8: null,
-            value9: null,
-            value10: null,
-            value11: null,
-            value12: null,
-            value13: null,
-            value14: null,
-            value15: null,
-            value16: null,
-            value17: null,
-            value18: null,
-            value19: null,
-            value20: null
+            value1: 42723,
+            value2: 58151,
+            value3: 2351.35,
+            value4: 50,
+            value5: 151351,
+            value6: 115744,
+            value7: 635524,
+            value8: 732762,
+            value9: 1500,
+            value10: 2500,
+            value11: 4250,
+            value12: 5002,
+            value13: 20,
+            value14: 50,
+            value15: 10,
+            value16: 20,
+            value17: 20,
+            value18: 10.50,
+            value19: 25,
+            value20: 50
         };
     }
 
@@ -51,36 +51,36 @@ export class InputNumberDemo extends Component {
                     <h3>Numerals</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            Integer Only {this.state.value1}
+                            Integer Only
                             <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Without Grouping {this.state.value2}
+                            Without Grouping
                             <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} mode="decimal" useGrouping={false} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Min-Max Fraction Digits {this.state.value3}
+                            Min-Max Fraction Digits
                             <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Min-Max Boundaries {this.state.value4}
+                            Min-Max Boundaries
                             <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} mode="decimal" min={0} max={100} />
                         </div>
                         
                         <div className="p-col-12 p-md-3">
-                            User Locale {this.state.value5}
+                            User Locale
                             <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} mode="decimal" minFractionDigits={2} />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            United State Locale {this.state.value6}
+                            United State Locale
                             <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} mode="decimal" locale="en-US" minFractionDigits={2}/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            German Locale {this.state.value7}
+                            German Locale
                             <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} mode="decimal" locale="de-DE" minFractionDigits={2}/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Indian Locale {this.state.value8}
+                            Indian Locale
                             <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} mode="decimal" locale="en-IN" minFractionDigits={2} />
                         </div>
                     </div>
@@ -88,19 +88,19 @@ export class InputNumberDemo extends Component {
                     <h3>Currency</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            United States {this.state.value9}
+                            United States
                             <InputNumber value={this.state.value9} onChange={(e) => this.setState({value9: e.value})} mode="currency" currency="USD" locale="en-US" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Germany {this.state.value10}
+                            Germany
                             <InputNumber value={this.state.value10} onChange={(e) => this.setState({value10: e.value})} mode="currency" currency="EUR" locale="de-DE" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            India {this.state.value11}
+                            India
                             <InputNumber value={this.state.value11} onChange={(e) => this.setState({value11: e.value})} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Japan {this.state.value12}
+                            Japan
                             <InputNumber value={this.state.value12} onChange={(e) => this.setState({value12: e.value})} mode="currency" currency="JPY" locale="jp-JP"/>
                         </div>
                     </div>
@@ -108,42 +108,42 @@ export class InputNumberDemo extends Component {
                     <h3>Prefix and Suffix</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            Mile {this.state.value17}
-                            <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} suffix=" mi" />
+                            Mile
+                            <InputNumber value={this.state.value13} onChange={(e) => this.setState({value17: e.value})} suffix=" mi" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Percent {this.state.value18}
-                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} prefix="%" />
+                            Percent
+                            <InputNumber value={this.state.value14} onChange={(e) => this.setState({value18: e.value})} prefix="%" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Expiry {this.state.value19}
-                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})}  prefix="Expires in " suffix=" days" />
+                            Expiry
+                            <InputNumber value={this.state.value15} onChange={(e) => this.setState({value19: e.value})}  prefix="Expires in " suffix=" days" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Temperature {this.state.value20}
-                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
+                            Temperature
+                            <InputNumber value={this.state.value16} onChange={(e) => this.setState({value20: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
                         </div>
                     </div>
 
                     <h3>Buttons</h3>
                     <div className="p-grid p-fluid">
                         <div className="p-col-12 p-md-3">
-                            Stacked {this.state.value21}
-                            <InputNumber value={this.state.value21} onChange={(e) => this.setState({value21: e.value})} showButtons mode="currency" currency="USD" />
+                            Stacked
+                            <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} showButtons mode="currency" currency="USD" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Horizontal {this.state.value22}
-                            <InputNumber value={this.state.value22} onChange={(e) => this.setState({value22: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal" 
+                            Horizontal with Step
+                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal" step={0.25}
                                 decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Vertical {this.state.value23}
-                            <InputNumber value={this.state.value23} onChange={(e) => this.setState({value23: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
+                            Vertical
+                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
                                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
-                            Min-Max Boundaries {this.state.value24}
-                            <InputNumber value={this.state.value24} onChange={(e) => this.setState({value24: e.value})} mode="decimal" showButtons min={0} max={100} />
+                             Min-Max Boundaries
+                            <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} mode="decimal" showButtons min={0} max={100} />
                         </div>
                     </div>
                 
