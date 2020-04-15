@@ -244,6 +244,7 @@ export class InputNumber extends Component {
             newValue = this.props.max;
         }
 
+        this.updateInput(newValue, 'spin');
         this.updateModel(event, newValue);
     }
 
@@ -591,6 +592,8 @@ export class InputNumber extends Component {
                     this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
                 else if (operation === 'delete-range')
                     this.inputEl.setSelectionRange(selectionStart, selectionStart);
+                else if (operation === 'spin')
+                    this.inputEl.setSelectionRange(selectionStart, selectionEnd);
             }
             else {
                 selectionEnd = selectionEnd + (newLength - currentLength);
@@ -675,21 +678,6 @@ export class InputNumber extends Component {
         const formattedValue = this.formatValue(this.props.value);
         if (this.inputEl.value !== formattedValue) {
             this.inputEl.value = formattedValue;
-
-            if (formattedValue) {
-                let index = null;
-                for (let i = formattedValue.length - 1; i >= 0; i--) {
-                    let char = formattedValue.charAt(i);
-                    if (this.isNumeralChar(char)) {
-                        index = i;
-                        break;
-                    }
-                }
-
-                if (index !== null) {
-                    this.inputEl.setSelectionRange(index + 1, index + 1);
-                }
-            }
         }
     }
 
