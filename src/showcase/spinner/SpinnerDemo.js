@@ -21,8 +21,8 @@ export class SpinnerDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Spinner</h1>
-                        <p>Spinner is an input component to provide a numerical input.</p>
+                        <h1>Spinner - Deprecated</h1>
+                        <p>Spinner is deprecated in favor of <Link to="/inputnumber">InputNumber</Link>.</p>
 
                         <AppContentContext.Consumer>
                             { context => <button onClick={() => context.onChangelogBtnClick("spinner")} className="layout-changelog-button">{context.changelogText}</button> }
