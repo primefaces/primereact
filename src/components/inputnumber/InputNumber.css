@@ -90,6 +90,7 @@
 
 .p-fluid .p-inputnumber-button {
     width: 2em;
+    flex-shrink: 0;
 }
 
 .p-fluid .p-inputnumber {
@@ -98,7 +99,7 @@
 
 .p-fluid .p-inputnumber-buttons-stacked .p-inputnumber-input,
 .p-fluid .p-inputnumber-buttons-horizontal .p-inputnumber-input {
-    width: auto;
+    min-width: 2em;
 }
 
 .p-fluid .p-inputnumber-buttons-vertical {
