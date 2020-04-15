@@ -538,20 +538,20 @@ export class UITreeNode extends Component {
     }
 
     onDropPointDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
     }
 
     onDropPointDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
     }
 
     onDropPointDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
     }
@@ -572,7 +572,7 @@ export class UITreeNode extends Component {
     }
 
     onDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
             event.stopPropagation();
@@ -580,13 +580,13 @@ export class UITreeNode extends Component {
     }
 
     onDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             DomHandler.addClass(this.contentElement, 'p-treenode-dragover');
         }
     }
 
     onDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
                 DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
