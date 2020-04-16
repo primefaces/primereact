@@ -104,7 +104,7 @@ export class HeaderCell extends Component {
 
     getAriaSort(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
             if (sortIcon === 'pi-sort-down')
                 return 'descending';
             else if (sortIcon === 'pi-sort-up')
@@ -119,7 +119,7 @@ export class HeaderCell extends Component {
 
     renderSortIcon(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
             let sortIconClassName = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
 
             return (

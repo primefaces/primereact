@@ -144,7 +144,7 @@ export class TreeTableHeader extends Component {
 
     renderSortIcon(column, sorted, sortOrder) {
         if (column.props.sortable) {
-            const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
             const sortIconClassName = classNames('p-sortable-column-icon', 'pi pi-fw', sortIcon);
 
             return (
