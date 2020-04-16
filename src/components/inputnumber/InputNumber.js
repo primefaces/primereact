@@ -600,6 +600,8 @@ export class InputNumber extends Component {
                 this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
         }
+
+        this.inputEl.setAttribute('aria-valuenow', value);
     }
 
     updateModel(event, value) {
@@ -678,6 +680,7 @@ export class InputNumber extends Component {
         const formattedValue = this.formatValue(this.props.value);
         if (this.inputEl.value !== formattedValue) {
             this.inputEl.value = formattedValue;
+            this.inputEl.setAttribute('aria-valuenow', this.props.value);
         }
     }
 
