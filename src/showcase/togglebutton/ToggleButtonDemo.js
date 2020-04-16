@@ -31,7 +31,7 @@ export class ToggleButtonDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} disabled/>
+                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Custom</h3>
