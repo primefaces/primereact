@@ -116,6 +116,12 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                                     <td>Style class of the element.</td>
                                 </tr>
                                 <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element value cannot be altered.</td>
+                                </tr>
+                                <tr>
                                     <td>tooltip</td>
                                     <td>any</td>
                                     <td>null</td>

@@ -13,6 +13,7 @@ export class TriStateCheckbox extends Component {
         name: null,
         style: null,
         className: null,
+        disabled: false,
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
@@ -26,6 +27,7 @@ export class TriStateCheckbox extends Component {
         name: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
+        disabled: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
@@ -40,8 +42,10 @@ export class TriStateCheckbox extends Component {
     }
 
     onClick(event) {
-        this.toggle(event);
-        this.inputEL.focus();
+        if (!this.props.disabled) {
+            this.toggle(event);
+            this.inputEL.focus();
+        }
     }
 
     toggle(event) {
@@ -68,16 +72,16 @@ export class TriStateCheckbox extends Component {
         }
     }
 
-    onFocus(e) {
+    onFocus(event) {
         DomHandler.addClass(this.box, 'p-focus');
     }
 
-    onBlur(e) {
+    onBlur(event) {
         DomHandler.removeClass(this.box, 'p-focus');
     }
 
     componentDidMount() {
-        if (this.props.tooltip) {
+        if (this.props.tooltip && !this.props.disabled) {
             this.renderTooltip();
         }
     }
@@ -108,16 +112,16 @@ export class TriStateCheckbox extends Component {
 
     render() {
         let containerClass = classNames('p-checkbox p-tristatecheckbox p-component', this.props.className);
-        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null});
+        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null, 'p-disabled': this.props.disabled});
         let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
 
         return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
+            <div ref={el => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={(el) => this.inputEL = el} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name}
-                           onFocus={this.onFocus} onBlur={this.onBlur}/>
+                           onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} />
                 </div>
-                <div className={boxClass} ref={(el) => { this.box = el; }} role="checkbox" aria-checked={this.props.value === true}>
+                <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.props.value === true}>
                     <span className={iconClass}></span>
                 </div>
             </div>
