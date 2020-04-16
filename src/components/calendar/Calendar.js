@@ -2474,7 +2474,7 @@ export class Calendar extends Component {
             const selected = this.isSelected(date);
             const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today});
             const dateClassName = classNames({'p-highlight': selected, 'p-disabled': !date.selectable});
-            const content = this.renderDateCellContent(date, dateClassName, groupIndex);
+            const content = (date.otherMonth && !this.props.showOtherMonths) ? null : this.renderDateCellContent(date, dateClassName, groupIndex);
 
             return (
                 <td key={date.day} className={cellClassName}>
