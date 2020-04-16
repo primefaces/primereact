@@ -18,7 +18,9 @@ export class ToggleButton extends Component {
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
-        onChange: null
+        onChange: null,
+        onFocus: null,
+        onBlur: null
     };
 
     static propTypes = {
@@ -34,20 +36,22 @@ export class ToggleButton extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
     };
 
     constructor(props) {
         super(props);
         this.state = {};
         this.toggle = this.toggle.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
+        this.onInputFocus = this.onInputFocus.bind(this);
+        this.onInputBlur = this.onInputBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     toggle(e) {
-        if (this.props.onChange) {
+        if (!this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: e,
                 value: !this.props.checked,
@@ -64,12 +68,20 @@ export class ToggleButton extends Component {
         }
     }
 
-    onFocus() {
+    onInputFocus(event) {
         this.setState({focused: true});
+
+        if (this.props.onFocus) {
+            this.props.onFocus(event);
+        }
     }
 
-    onBlur() {
+    onInputBlur(event) {
         this.setState({focused: false});
+
+        if (this.props.onBlur) {
+            this.props.onBlur(event);
+        }
     }
 
     onKeyDown(event) {
@@ -110,7 +122,7 @@ export class ToggleButton extends Component {
     }
 
     render() {
-        var className = classNames('p-button p-togglebutton p-component', this.props.className, {
+        let className = classNames('p-button p-togglebutton p-component', this.props.className, {
             'p-button-text-icon-left': (this.props.onIcon && this.props.offIcon),
             'p-button-text-only': (!this.props.onIcon && !this.props.offIcon) && (this.props.onLabel || this.props.offLabel),
             'p-highlight': this.props.checked,
@@ -119,7 +131,7 @@ export class ToggleButton extends Component {
         }),
         iconStyleClass = null;
 
-        if(this.props.onIcon || this.props.offIcon) {
+        if (this.props.onIcon || this.props.offIcon) {
             iconStyleClass = classNames('p-c' , this.props.checked ? this.props.onIcon : this.props.offIcon , {
                 'p-button-icon-only': (this.props.onIcon && this.props.offIcon) && (!this.props.onLabel || !this.props.offLabel),
                 'p-button-icon-left': (this.props.onIcon && this.props.offIcon)
@@ -129,8 +141,8 @@ export class ToggleButton extends Component {
         return (
            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.toggle}>
                 <div className="p-hidden-accessible">
-                    <input ref={(el) => this.input = el} type="checkbox" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
-                           role="button" aria-pressed={this.props.checked} aria-labelledby={this.props.ariaLabelledBy}/>
+                    <input ref={(el) => this.input = el} type="checkbox" onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
+                           role="button" aria-pressed={this.props.checked} aria-labelledby={this.props.ariaLabelledBy} disabled={this.props.disabled} />
                 </div>
                 {(this.props.onIcon && this.props.offIcon) && <span className={iconStyleClass}></span>}
                 <span className="p-button-text p-unselectable-text">{this.props.checked ? this.props.onLabel : this.props.offLabel}</span>

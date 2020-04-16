@@ -31,7 +31,7 @@ export class ToggleButtonDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
+                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} disabled/>
                     <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
 
                     <h3>Custom</h3>
@@ -190,6 +190,16 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                             <td>event.originalEvent: Browser event <br />
                                 event.value: Value as the checked state.</td>
                             <td>Callback to invoke on value change.</td>
+                        </tr>
+                        <tr>
+                            <td>onFocus</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke when autocomplete gets focus.</td>
+                        </tr>
+                        <tr>
+                            <td>onBlur</td>
+                            <td>event: Browser event</td>
+                            <td>Callback to invoke when autocomplete loses focus.</td>
                         </tr>
                     </tbody>
                 </table>
