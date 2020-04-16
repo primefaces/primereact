@@ -637,7 +637,7 @@ export class Dropdown extends Component {
     }
 
     checkValidity() {
-        return this.nativeSelect.checkValidity;
+        return this.nativeSelect.checkValidity();
     }
 
     componentDidMount() {

@@ -13,6 +13,7 @@ export class MultiSelect extends Component {
 
     static defaultProps = {
         id: null,
+        name: null,
         value: null,
         options: null,
         optionLabel: null,
@@ -29,6 +30,8 @@ export class MultiSelect extends Component {
         filterPlaceholder: null,
         tabIndex: '0',
         dataKey: null,
+        inputId: null,
+        required: false,
         appendTo: null,
         tooltip: null,
         tooltipOptions: null,
@@ -44,6 +47,7 @@ export class MultiSelect extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        name: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
@@ -60,6 +64,8 @@ export class MultiSelect extends Component {
         filterPlaceholder: PropTypes.string,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
+        inputId: PropTypes.string,
+        required: PropTypes.bool,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -384,6 +390,10 @@ export class MultiSelect extends Component {
         return !this.props.value || this.props.value.length === 0;
     }
 
+    checkValidity() {
+        return this.nativeSelect.checkValidity();
+    }
+
     getSelectedItemsLabel() {
         let pattern = /{(.*?)}/;
         if (pattern.test(this.props.selectedItemsLabel)) {
@@ -469,9 +479,22 @@ export class MultiSelect extends Component {
         );
     }
 
+    renderHiddenSelect() {
+        let selectedOptions = this.props.value ? this.props.value.map((option,index) => <option key={this.getOptionLabel(option) + '_' + index} selected value={this.getOptionValue(option)}></option>): null;
+
+        return (
+            <div className="p-hidden-accessible p-multiselect-hidden-select">
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex="-1" aria-hidden="true" multiple>
+                    {selectedOptions}
+                </select>
+            </div>
+        );
+    }
+
     render() {
         let className = classNames('p-multiselect p-component', this.props.className, {'p-disabled': this.props.disabled});
         let label = this.renderLabel();
+        let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
 
         if (items) {
@@ -493,9 +516,10 @@ export class MultiSelect extends Component {
 
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
+                {hiddenSelect}
                 <div className="p-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} aria-haspopup="listbox"
-                           aria-labelledby={this.props.ariaLabelledBy}/>
+                           aria-labelledby={this.props.ariaLabelledBy} inputId={this.props.inputId} />
                 </div>
                 {label}
                 <div className="p-multiselect-trigger">

@@ -288,6 +288,12 @@ selectedCarTemplate(option) {
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
+                            <td>name</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the input element.</td>
+                        </tr>
+                        <tr>
                             <td>value</td>
                             <td>array</td>
                             <td>null</td>
@@ -378,6 +384,18 @@ selectedCarTemplate(option) {
                             <td>A property to uniquely match the value in options for better performance.</td>
                         </tr>
                         <tr>
+                            <td>required</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
+                        </tr>
+                        <tr>
+                            <td>inputId</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Identifier of the focusable input.</td>
+                        </tr>
+                        <tr>
                             <td>tooltip</td>
                             <td>any</td>
                             <td>null</td>
@@ -456,6 +474,26 @@ selectedCarTemplate(option) {
                             <td>onBlur</td>
                             <td>event: Browser event.</td>
                             <td>Callback to invoke when the element loses focus.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Methods</h3>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Parameters</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>checkValidity</td>
+                            <td>-</td>
+                            <td>Checks whether the native hidden select element has any constraints and returns a boolean for the result.</td>
                         </tr>
                     </tbody>
                 </table>
