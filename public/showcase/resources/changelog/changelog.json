@@ -1,4 +1,240 @@
 {
+    "4.2.0": {
+        "multiselect": [
+            {
+                "number": 1336,
+                "title": "Add filterLocale property to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1336"
+            },
+            {
+                "number": 1332,
+                "title": "Add checkValidity method to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1332"
+            },
+            {
+                "number": 1319,
+                "title": "Refactor MultiSelect outside click detection",
+                "url": "https://github.com/primefaces/primereact/issues/1319"
+            },
+            {
+                "number": 1306,
+                "title": "MultiSelect/Dropdown expose input attributes for labeling and validation purposes",
+                "url": "https://github.com/primefaces/primereact/issues/1306"
+            },
+            {
+                "number": 1331,
+                "title": "Dropdown checkValidity fails",
+                "url": "https://github.com/primefaces/primereact/issues/1331"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1335,
+                "title": "Add filterLocale property to ListBox",
+                "url": "https://github.com/primefaces/primereact/issues/1335"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1334,
+                "title": "Add filterLocale property to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1334"
+            },
+            {
+                "number": 1332,
+                "title": "Add checkValidity method to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1332"
+            },
+            {
+                "number": 1310,
+                "title": "Refactor Dropdown outside click detection ",
+                "url": "https://github.com/primefaces/primereact/issues/1310"
+            },
+            {
+                "number": 1306,
+                "title": "MultiSelect/Dropdown expose input attributes for labeling and validation purposes",
+                "url": "https://github.com/primefaces/primereact/issues/1306"
+            },
+            {
+                "number": 1331,
+                "title": "Dropdown checkValidity fails",
+                "url": "https://github.com/primefaces/primereact/issues/1331"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1338,
+                "title": "Add filterLocale property to Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1338"
+            },
+            {
+                "number": 1182,
+                "title": "Tree drag&drop not working if dragdropScope contains upper case letter",
+                "url": "https://github.com/primefaces/primereact/issues/1182"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1300,
+                "title": "Carousel  - Button inside carousel-item is not clickable in mobile phones",
+                "url": "https://github.com/primefaces/primereact/issues/1300"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1293,
+                "title": "Add milliseconds support to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/1293"
+            },
+            {
+                "number": 1281,
+                "title": "Today Button doesn't work on prefilled Calendar with timeonly",
+                "url": "https://github.com/primefaces/primereact/issues/1281"
+            },
+            {
+                "number": 1294,
+                "title": "Improve timepicker style on Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/1294"
+            },
+            {
+                "number": 1328,
+                "title": "Calendar.showOtherMonths property not being used",
+                "url": "https://github.com/primefaces/primereact/issues/1328"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1305,
+                "title": "Autocomplete dropdown button close behavior enhancement",
+                "url": "https://github.com/primefaces/primereact/issues/1305"
+            },
+            {
+                "number": 1308,
+                "title": "Refactor AutoComplete outside click detection",
+                "url": "https://github.com/primefaces/primereact/issues/1308"
+            },
+            {
+                "number": 1316,
+                "title": "IE11: Autocomplete with dropdown and multiple selection requires doubleclick",
+                "url": "https://github.com/primefaces/primereact/issues/1316"
+            },
+            {
+                "number": 1297,
+                "title": "AutoComplete: selectedItemTemplate ts binding claims to expect JSX.Element in return, but at runtime a string is expected",
+                "url": "https://github.com/primefaces/primereact/issues/1297"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1286,
+                "title": "Not nullable `dataKey` in DropDown break `selectedOption` property",
+                "url": "https://github.com/primefaces/primereact/issues/1286"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1333,
+                "title": "Add filterLocale property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1333"
+            },
+            {
+                "number": 1307,
+                "title": "multiSortMeta depends on single sort",
+                "url": "https://github.com/primefaces/primereact/issues/1307"
+            },
+            {
+                "number": 1329,
+                "title": "Update sortIcons",
+                "url": "https://github.com/primefaces/primereact/issues/1329"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1321,
+                "title": "Disable prop on ToggleButton not working",
+                "url": "https://github.com/primefaces/primereact/issues/1321"
+            },
+            {
+                "number": 1330,
+                "title": "onFocus - onBlur for ToggleButton",
+                "url": "https://github.com/primefaces/primereact/issues/1330"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1337,
+                "title": "Add filterLocale property to TreeTable",
+                "url": "https://github.com/primefaces/primereact/issues/1337"
+            },
+            {
+                "number": 1276,
+                "title": "TreeTable goes to edit mode when expanded",
+                "url": "https://github.com/primefaces/primereact/issues/1276"
+            },
+            {
+                "number": 1329,
+                "title": "Update sortIcons",
+                "url": "https://github.com/primefaces/primereact/issues/1329"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1309,
+                "title": "InputMask displayed value does not change when value changes to undefined or null",
+                "url": "https://github.com/primefaces/primereact/issues/1309"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1318,
+                "title": "Refactor Menu outside click detection ",
+                "url": "https://github.com/primefaces/primereact/issues/1318"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1327,
+                "title": "Adding missing type definition className to ToolTipOptions",
+                "url": "https://github.com/primefaces/primereact/pull/1327"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1317,
+                "title": "Refactor ColorPicker outside click detection",
+                "url": "https://github.com/primefaces/primereact/issues/1317"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1320,
+                "title": "Refactor OverlayPanel outside click detection",
+                "url": "https://github.com/primefaces/primereact/issues/1320"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1282,
+                "title": "FileUpload in auto mode sends two post requests in IE11",
+                "url": "https://github.com/primefaces/primereact/issues/1282"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1285,
+                "title": "Separator for Chips",
+                "url": "https://github.com/primefaces/primereact/issues/1285"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1325,
+                "title": "Disabled prop for TriStateCheckbox",
+                "url": "https://github.com/primefaces/primereact/issues/1325"
+            }
+        ]
+    },
+
     "4.1.2": {
         "datatable": [
             {
