@@ -25,6 +25,7 @@ export class Dropdown extends Component {
         filterBy: null,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
+        filterLocale: undefined,
         editable: false,
         placeholder:null,
         required: false,
@@ -65,6 +66,7 @@ export class Dropdown extends Component {
         filterBy: PropTypes.string,
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         editable:PropTypes.bool,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
@@ -272,8 +274,8 @@ export class Dropdown extends Component {
     searchOptionInRange(start, end) {
         for (let i = start; i < end; i++) {
             let opt = this.props.options[i];
-            let label = this.getOptionLabel(opt).toString().toLowerCase();
-            if (label.startsWith(this.searchValue.toLowerCase())) {
+            let label = this.getOptionLabel(opt).toString().toLocaleLowerCase(this.props.filterLocale)
+            if (label.startsWith(this.searchValue.toLocaleLowerCase(this.props.filterLocale))) {
                 return opt;
             }
         }
@@ -593,9 +595,9 @@ export class Dropdown extends Component {
         let items = this.props.options;
 
         if (items && this.hasFilter()) {
-            let filterValue = this.state.filter.trim().toLowerCase();
+            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
             let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-            items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode);
+            items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
         }
 
         if(items) {

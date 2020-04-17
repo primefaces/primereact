@@ -16,6 +16,7 @@ interface DropdownProps {
     filterBy?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
+    filterLocale?: string;
     editable?:boolean;
     placeholder?: string;
     required?: boolean;
