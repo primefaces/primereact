@@ -46,6 +46,7 @@ interface DataTableProps {
     reorderableColumns?: boolean;
     filters?: object;
     globalFilter?: any;
+    filterLocale?: string;
     scrollable?: boolean;
     scrollHeight?: string;
     virtualScroll?: boolean;

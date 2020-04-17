@@ -63,6 +63,7 @@ export class DataTable extends Component {
         reorderableColumns: false,
         filters: null,
         globalFilter: null,
+        filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
         virtualScroll: false,
@@ -157,6 +158,7 @@ export class DataTable extends Component {
         reorderableColumns: PropTypes.bool,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
+        filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
         virtualScroll: PropTypes.bool,
@@ -1142,7 +1144,7 @@ export class DataTable extends Component {
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
 
-                    if(!filterConstraint(dataFieldValue, filterValue)) {
+                    if(!filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
                         localMatch = false;
                     }
 
@@ -1152,7 +1154,7 @@ export class DataTable extends Component {
                 }
 
                 if (!col.props.excludeGlobalFilter && this.props.globalFilter && !globalMatch) {
-                    globalMatch = FilterUtils['contains'](ObjectUtils.resolveFieldData(value[i], columnField), this.props.globalFilter);
+                    globalMatch = FilterUtils['contains'](ObjectUtils.resolveFieldData(value[i], columnField), this.props.globalFilter, this.props.filterLocale);
                 }
             }
 
