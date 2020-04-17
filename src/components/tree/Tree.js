@@ -30,6 +30,7 @@ export class Tree extends Component {
         filterBy: 'label',
         filterMode: 'lenient',
         filterPlaceholder: null,
+        filterLocale: undefined,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -64,6 +65,7 @@ export class Tree extends Component {
         filterBy: PropTypes.any,
         filterMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -294,7 +296,7 @@ export class Tree extends Component {
         else {
             this.filteredNodes = [];
             const searchFields = this.props.filterBy.split(',');
-            const filterText = this.state.filter.toLowerCase();
+            const filterText = this.state.filter.toLocaleLowerCase(this.props.filterLocale);
             const isStrictMode = this.props.filterMode === 'strict';
             for(let node of this.props.value) {
                 let copyNode = {...node};
@@ -333,7 +335,7 @@ export class Tree extends Component {
     isFilterMatched(node, {searchFields, filterText, isStrictMode}) {
         let matched = false;
         for(let field of searchFields) {
-            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLowerCase();
+            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLocaleLowerCase(this.props.filterLocale);
             if(fieldValue.indexOf(filterText) > -1) {
                 matched = true;
             }
