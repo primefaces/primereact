@@ -27,6 +27,7 @@ export class ListBox extends Component {
         filterBy: null,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
+        filterLocale: undefined,
         tabIndex: '0',
         tooltip: null,
         tooltipOptions: null,
@@ -51,6 +52,7 @@ export class ListBox extends Component {
         filterBy: PropTypes.string,
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         tabIndex: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -242,10 +244,10 @@ export class ListBox extends Component {
     }
 
     filter(option) {
-        let filterValue = this.state.filter.trim().toLowerCase();
-        let optionLabel = this.getOptionLabel(option);
+        let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+        let optionLabel = this.getOptionLabel(option).toLocaleLowerCase(this.props.filterLocale);
 
-        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+        return optionLabel.indexOf(filterValue) > -1;
     }
 
     hasFilter() {
@@ -269,9 +271,9 @@ export class ListBox extends Component {
 
         if (this.props.options) {
             if (this.hasFilter()) {
-                let filterValue = this.state.filter.trim().toLowerCase();
+                let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale)
                 let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-                items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode);
+                items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
             }
 
             items = items.map((option, index) => {

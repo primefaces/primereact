@@ -18,6 +18,7 @@ interface ListBoxProps {
     filterBy?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
+    filterLocale?: string;
     tabIndex?:string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
