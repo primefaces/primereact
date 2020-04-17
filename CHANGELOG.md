@@ -1,5 +1,47 @@
 # Changelog
 
+## [4.2.0](https://github.com/primefaces/primereact/tree/4.2.0) (2020-04-17)
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.1.2...4.2.0)
+
+**Implemented New Features and Enhancements:**
+- Add filterLocale property to Tree [\#1338](https://github.com/primefaces/primereact/issues/1338)
+- Add filterLocale property to TreeTable [\#1337](https://github.com/primefaces/primereact/issues/1337)
+- Add filterLocale property to MultiSelect [\#1336](https://github.com/primefaces/primereact/issues/1336)
+- Add filterLocale property to ListBox [\#1335](https://github.com/primefaces/primereact/issues/1335)
+- Add filterLocale property to Dropdown [\#1334](https://github.com/primefaces/primereact/issues/1334)
+- Add filterLocale property to DataTable [\#1333](https://github.com/primefaces/primereact/issues/1333)
+- Add checkValidity method to MultiSelect [\#1332](https://github.com/primefaces/primereact/issues/1332)
+- onFocus - onBlur for ToggleButton [\#1330](https://github.com/primefaces/primereact/issues/1330)
+- Update sortIcons [\#1329](https://github.com/primefaces/primereact/issues/1329)
+- Disabled prop for TriStateCheckbox [\#1325](https://github.com/primefaces/primereact/issues/1325)
+- Refactor OverlayPanel outside click detection [\#1320](https://github.com/primefaces/primereact/issues/1320)
+- Refactor MultiSelect outside click detection [\#1319](https://github.com/primefaces/primereact/issues/1319)
+- Refactor Menu outside click detection  [\#1318](https://github.com/primefaces/primereact/issues/1318)
+- Refactor ColorPicker outside click detection [\#1317](https://github.com/primefaces/primereact/issues/1317)
+- New Component: InputNumber [\#1311](https://github.com/primefaces/primereact/issues/1311)
+- Refactor Dropdown outside click detection  [\#1310](https://github.com/primefaces/primereact/issues/1310)
+- Refactor AutoComplete outside click detection [\#1308](https://github.com/primefaces/primereact/issues/1308)
+- MultiSelect/Dropdown expose input attributes for labeling and validation purposes [\#1306](https://github.com/primefaces/primereact/issues/1306)
+- Autocomplete dropdown button close behavior enhancement [\#1305](https://github.com/primefaces/primereact/issues/1305)
+- Improve timepicker style on Calendar [\#1294](https://github.com/primefaces/primereact/issues/1294)
+- Add milliseconds support to Calendar [\#1293](https://github.com/primefaces/primereact/issues/1293)
+- Not nullable `dataKey` in DropDown break `selectedOption` property [\#1286](https://github.com/primefaces/primereact/issues/1286)
+- Separator for Chips [\#1285](https://github.com/primefaces/primereact/issues/1285)
+
+**Fixed bugs:**
+- Dropdown checkValidity fails [\#1331](https://github.com/primefaces/primereact/issues/1331)
+- Calendar.showOtherMonths property not being used [\#1328](https://github.com/primefaces/primereact/issues/1328)
+- Disable prop on ToggleButton not working [\#1321](https://github.com/primefaces/primereact/issues/1321)
+- IE11: Autocomplete with dropdown and multiple selection requires doubleclick [\#1316](https://github.com/primefaces/primereact/issues/1316)
+- InputMask displayed value does not change when value changes to undefined or null [\#1309](https://github.com/primefaces/primereact/issues/1309)
+- multiSortMeta depends on single sort [\#1307](https://github.com/primefaces/primereact/issues/1307)
+- Carousel  - Button inside carousel-item is not clickable in mobile phones [\#1300](https://github.com/primefaces/primereact/issues/1300)
+- AutoComplete: selectedItemTemplate ts binding claims to expect JSX.Element in return, but at runtime a string is expected [\#1297](https://github.com/primefaces/primereact/issues/1297)
+- FileUpload in auto mode sends two post requests in IE11 [\#1282](https://github.com/primefaces/primereact/issues/1282)
+- Today Button doesn't work on prefilled Calendar with timeonly [\#1281](https://github.com/primefaces/primereact/issues/1281)
+- TreeTable goes to edit mode when expanded [\#1276](https://github.com/primefaces/primereact/issues/1276)
+- Tree drag&drop not working if dragdropScope contains upper case letter [\#1182](https://github.com/primefaces/primereact/issues/1182)
+
 ## [4.1.2](https://github.com/primefaces/primereact/tree/4.1.2) (2020-03-20)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.1.1...4.1.2)
