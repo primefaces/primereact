@@ -757,6 +757,12 @@ export class TreeContextMenuDemo extends Component {
                             <td>Placeholder text to show when filter input is empty.</td>
                         </tr>
                         <tr>
+                            <td>filterLocale</td>
+                            <td>string</td>
+                            <td>undefined</td>
+                            <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
+                        </tr>
+                        <tr>
                             <td>disabled</td>
                             <td>boolean</td>
                             <td>false</td>

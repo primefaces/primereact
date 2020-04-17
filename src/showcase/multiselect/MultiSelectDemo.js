@@ -108,7 +108,7 @@ import {MultiSelect} from 'primereact/multiselect';
             <h3>Getting Started</h3>
             <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition, 
+            whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
             options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
@@ -370,6 +370,12 @@ selectedCarTemplate(option) {
                             <td>string</td>
                             <td>null</td>
                             <td>Placeholder text to show when filter input is empty.</td>
+                        </tr>
+                        <tr>
+                            <td>filterLocale</td>
+                            <td>string</td>
+                            <td>undefined</td>
+                            <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
                         </tr>
                         <tr>
                             <td>tabIndex</td>

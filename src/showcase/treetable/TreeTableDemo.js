@@ -704,6 +704,12 @@ export class TreeTableDemo extends Component {
                                         <td>Defines placeholder of the input fields.</td>
                                     </tr>
                                     <tr>
+                                        <td>filterLocale</td>
+                                        <td>string</td>
+                                        <td>undefined</td>
+                                        <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
+                                    </tr>
+                                    <tr>
                                         <td>filterMaxlength</td>
                                         <td>number</td>
                                         <td>null</td>
