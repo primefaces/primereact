@@ -519,7 +519,7 @@ export class MultiSelect extends Component {
                 {hiddenSelect}
                 <div className="p-hidden-accessible">
                     <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} aria-haspopup="listbox"
-                           aria-labelledby={this.props.ariaLabelledBy} inputId={this.props.inputId} />
+                           aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} />
                 </div>
                 {label}
                 <div className="p-multiselect-trigger">
