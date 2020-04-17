@@ -28,6 +28,7 @@ export class MultiSelect extends Component {
         filterBy: null,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
+        filterLocale: undefined,
         tabIndex: '0',
         dataKey: null,
         inputId: null,
@@ -62,6 +63,7 @@ export class MultiSelect extends Component {
         filterBy: PropTypes.string,
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
@@ -373,9 +375,9 @@ export class MultiSelect extends Component {
     }
 
     filterOptions(options) {
-        let filterValue = this.state.filter.trim().toLowerCase();
+        let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
         let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-        return FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode);
+        return FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
     }
 
     getOptionLabel(option) {
