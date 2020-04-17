@@ -1,5 +1,12 @@
 {
     "4.2.0": {
+        "inputnumber": [
+            {
+                "number": 1311,
+                "title": "New Component: InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1311"
+            }
+        ],
         "multiselect": [
             {
                 "number": 1336,
