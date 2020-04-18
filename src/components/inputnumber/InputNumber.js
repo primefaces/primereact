@@ -111,7 +111,6 @@ export class InputNumber extends Component {
         this.onInputClick = this.onInputClick.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
-        this.onInputMouseDown = this.onInputMouseDown.bind(this);
         this.onPaste = this.onPaste.bind(this);
 
         this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
@@ -630,15 +629,10 @@ export class InputNumber extends Component {
 
     onInputBlur(event) {
         DomHandler.removeClass(this.element, 'p-inputwrapper-focus');
-        this.cursor = null;
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
-    }
-
-    onInputMouseDown() {
-        this.cursor = null;
     }
 
     clearTimer() {
@@ -709,7 +703,7 @@ export class InputNumber extends Component {
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
-                       onMouseDown={this.onInputMouseDown} onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
+                       onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />
         );
     }
