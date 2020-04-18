@@ -4,6 +4,7 @@
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.1.2...4.2.0)
 
 **Implemented New Features and Enhancements:**
+- New Component: InputNumber [\#1311](https://github.com/primefaces/primereact/issues/1311)
 - Add filterLocale property to Tree [\#1338](https://github.com/primefaces/primereact/issues/1338)
 - Add filterLocale property to TreeTable [\#1337](https://github.com/primefaces/primereact/issues/1337)
 - Add filterLocale property to MultiSelect [\#1336](https://github.com/primefaces/primereact/issues/1336)
@@ -18,7 +19,6 @@
 - Refactor MultiSelect outside click detection [\#1319](https://github.com/primefaces/primereact/issues/1319)
 - Refactor Menu outside click detection  [\#1318](https://github.com/primefaces/primereact/issues/1318)
 - Refactor ColorPicker outside click detection [\#1317](https://github.com/primefaces/primereact/issues/1317)
-- New Component: InputNumber [\#1311](https://github.com/primefaces/primereact/issues/1311)
 - Refactor Dropdown outside click detection  [\#1310](https://github.com/primefaces/primereact/issues/1310)
 - Refactor AutoComplete outside click detection [\#1308](https://github.com/primefaces/primereact/issues/1308)
 - MultiSelect/Dropdown expose input attributes for labeling and validation purposes [\#1306](https://github.com/primefaces/primereact/issues/1306)
