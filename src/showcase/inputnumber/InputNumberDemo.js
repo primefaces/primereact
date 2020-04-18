@@ -196,8 +196,8 @@ import {InputNumber} from 'primereact/inputnumber';
             <p>Fractions are configured with the <i>minFractionDigits</i> property. Optionally <i>maxFractionDigits</i> can be used to defined a boundary for the maximum digits.</p>
 <CodeHighlight className="language-jsx">
 {`
-<InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} mode="decimal" minFracionDigits={2} />
-<InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} mode="decimal" minFracionDigits={2} maxFracionDigits={2} />
+<InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} mode="decimal" minFractionDigits={2} />
+<InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} mode="decimal" minFractionDigits={2} maxFracionDigits={2} />
 
 `}
 </CodeHighlight>
