@@ -476,19 +476,25 @@ export class InputMask extends Component {
             else {
                 this.input.value = this.props.value;
                 this.checkVal();
-            }
 
-            setTimeout(() => {
-                if(this.input) {
-                    this.writeBuffer();
-                    this.checkVal();
-                }
-            }, 10);
+                setTimeout(() => {
+                    if(this.input) {
+                        this.writeBuffer();
+                        this.checkVal();
+                    }
+                }, 10);
+            }
 
             this.focusText = this.input.value;
         }
 
         this.updateFilledState();
+    }
+
+    isValueUpdated() {
+        return this.props.unmask ?
+                        (this.props.value !== this.getUnmaskedValue()) :
+                        (this.defaultBuffer !== this.input.value && this.input.value !== this.props.value);
     }
 
     init() {
@@ -556,8 +562,7 @@ export class InputMask extends Component {
                 this.renderTooltip();
         }
 
-        let isValueUpdated = prevProps.value !== this.props.value && (this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.props.value.length && this.input.value !== this.props.value);
-        if (isValueUpdated) {
+        if (this.isValueUpdated()) {
             this.updateValue();
         }
 
