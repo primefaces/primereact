@@ -7,48 +7,27 @@
         overflow: hidden;
         width: 100%;
         height: 70px;
-        background-image: url("../resources/images/news/bg-endofyear-2019.jpg");
+        background-image: url("../resources/images/news/topbar-easter-2020-bg.jpg");
         @include flex();
         @include flex-justify-center();
         @include flex-align-center();
+        cursor: pointer;
 
         .layout-news-container {
-            width: 100%;
-            height: 100%;
-            color: #ffffff;
-            font-weight: 700;
-            font-weight: bold;
-            font-size: 20px;
-            background-image: url("../resources/images/news/snow.png");
-            @include animation(snowSlide 20s linear infinite);
             @include flex();
             @include flex-align-center();
             @include flex-justify-center();
+            height: 100%;
 
-            img {
-                height: 70px;
-                position: absolute;
-                @include animation(customSlide 20s linear infinite);
+            .layout-news-text {
+                height: 60px;
+                z-index: 1;
             }
 
-            .layout-news-details {
-                @include flex();
-                @include flex-align-center();
-                z-index: 1;
-
-                .rate {
-                    color: #f2b837;
-                    font-size: 25px;
-                    font-weight: bold;
-                    margin: 0 .25em;
-                }
-
-                .helper-text {
-                    background-color: #f2b837;
-                    color: #212121;
-                    padding: 0 0.2em;
-                    margin-right: 0.3em;
-                }
+            .layout-news-helper-image {
+                height: 70px;
+                position: absolute;
+                right: 52px;
             }
 
             .layout-news-button {
@@ -126,19 +105,10 @@
             display: block;
 
             .layout-news-container {
-                img {
-                    margin-left: 14px;
-                }
+                background-image: linear-gradient(180deg, rgba(255,255,255,0.30) 0%, #FFFFFF 100%);
 
-                .layout-news-details {
-                    display: block;
-                    font-size: 16px;
-                    padding: 0 55px;
-
-                    .rate {
-                        margin: 0;
-                        font-size: 21px;
-                    }
+                .layout-news-helper-image {
+                    display: none;
                 }
 
                 .layout-news-button {
