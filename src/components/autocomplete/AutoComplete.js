@@ -223,7 +223,7 @@ export class AutoComplete extends Component {
 
     formatValue(value) {
         if (value) {
-            if (this.props.selectedItemTemplate) {
+            if (this.props.selectedItemTemplate && (this.props.multiple ? this.isSelected(value) : this.findOptionIndex(value) > -1)) {
                 const resolvedFieldData = this.props.selectedItemTemplate(value);
                 return resolvedFieldData ? resolvedFieldData : value;
             }
@@ -472,9 +472,9 @@ export class AutoComplete extends Component {
 
     findOptionIndex(option) {
         let index = -1;
-        if (this.suggestions) {
-            for (let i = 0; i < this.suggestions.length; i++) {
-                if (ObjectUtils.equals(option, this.suggestions[i])) {
+        if (this.props.suggestions) {
+            for (let i = 0; i < this.props.suggestions.length; i++) {
+                if (ObjectUtils.equals(option, this.props.suggestions[i])) {
                     index = i;
                     break;
                 }
