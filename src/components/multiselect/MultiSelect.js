@@ -482,7 +482,7 @@ export class MultiSelect extends Component {
     }
 
     renderHiddenSelect() {
-        let selectedOptions = this.props.value ? this.props.value.map((option,index) => <option key={this.getOptionLabel(option) + '_' + index} selected value={this.getOptionValue(option)}></option>): null;
+        let selectedOptions = this.props.value ? this.props.value.map((option,index) => <option key={this.getOptionLabel(option) + '_' + index} value={this.getOptionValue(option)}></option>): null;
 
         return (
             <div className="p-hidden-accessible p-multiselect-hidden-select">
