@@ -52,7 +52,7 @@ export class InputText extends Component {
             this.props.onInput(event, validatePattern);
         }
 
-        if (!this.props.onChange) {
+        if (!this.props.onChange || !this.props.value) {
             if (event.target.value.length > 0)
                 DomHandler.addClass(event.target, 'p-filled');
             else
