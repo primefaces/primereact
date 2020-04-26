@@ -93,7 +93,7 @@ export class InputText extends Component {
     render() {
         const className = classNames('p-inputtext p-component', this.props.className, {
             'p-disabled': this.props.disabled,
-            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
+            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) || (this.element && this.element.current && this.element.current.value !== "")
         });
 
         let inputProps = ObjectUtils.findDiffKeys(this.props, InputText.defaultProps);
