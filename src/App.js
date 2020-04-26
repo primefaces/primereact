@@ -15,7 +15,7 @@ import './resources/style/flags.css';
 import './sass/App.scss';
 
 import AppRouter from './AppRouter';
-import AppNews from './AppNews';
+/*import AppNews from './AppNews';*/
 import AppTopbar from './AppTopbar';
 import AppFooter from './AppFooter';
 import AppConfig from './AppConfig';
@@ -255,7 +255,7 @@ export class App extends Component {
 
     render() {
         const wrapperClassName = classNames('layout-wrapper', {
-            'layout-news-active': this.state.newsActive,
+            /*'layout-news-active': this.state.newsActive,*/
             'layout-sidebar-mobile-active': this.state.mobileMenuActive,
             'layout-config-active': this.state.configuratorActive
         });
@@ -263,7 +263,7 @@ export class App extends Component {
         return (
             <div className={wrapperClassName} onClick={this.bindDocumentClick}>
 
-                <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/>
+                {/* <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/> */}
 
                 <AppTopbar activeTopbarItem={this.state.activeTopbarItem} onMenuButtonClick={this.onMenuButtonClick}
                     onTopbarItemClick={this.onTopbarItemClick} onThemeChange={this.onThemeChange} menuActive={this.state.mobileMenuActive}/>
