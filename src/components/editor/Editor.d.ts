@@ -6,7 +6,7 @@ interface EditorProps {
     style?: object;
     className?: string;
     placeholder?: string;
-    readonly?: boolean;
+    readOnly?: boolean;
     modules?: any;
     formats?: any[];
     theme?: string;
