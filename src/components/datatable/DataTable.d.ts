@@ -79,7 +79,7 @@ interface DataTableProps {
     onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
     onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
     onPage?(e: {first: number, rows: number}): void;
-    onFilter?(filters: object): void;
+    onFilter?(e: {filters: any}): void;
     onVirtualScroll?(e: {first: number, rows: number}): void;
     onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowDoubleClick?(e: {originalEvent: Event, data: any, index: number}): void;
