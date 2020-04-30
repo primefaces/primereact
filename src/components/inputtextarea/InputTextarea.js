@@ -77,24 +77,26 @@ export class InputTextarea extends Component {
     }
 
     resize() {
-        if (!this.cachedScrollHeight) {
-            this.cachedScrollHeight = this.element.scrollHeight;
-            this.element.style.overflow = "hidden";
-        }
-
-        if (this.cachedScrollHeight !== this.element.scrollHeight) {
-            this.element.style.height = ''
-            this.element.style.height = this.element.scrollHeight + 'px';
-
-            if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
-                this.element.style.overflowY = "scroll";
-                this.element.style.height = this.element.style.maxHeight;
-            }
-            else {
+        if (DomHandler.isVisible(this.element)) {
+            if (!this.cachedScrollHeight) {
+                this.cachedScrollHeight = this.element.scrollHeight;
                 this.element.style.overflow = "hidden";
             }
 
-            this.cachedScrollHeight = this.element.scrollHeight;
+            if (this.cachedScrollHeight !== this.element.scrollHeight) {
+                this.element.style.height = ''
+                this.element.style.height = this.element.scrollHeight + 'px';
+
+                if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
+                    this.element.style.overflowY = "scroll";
+                    this.element.style.height = this.element.style.maxHeight;
+                }
+                else {
+                    this.element.style.overflow = "hidden";
+                }
+
+                this.cachedScrollHeight = this.element.scrollHeight;
+            }
         }
     }
 
@@ -109,10 +111,6 @@ export class InputTextarea extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (!DomHandler.isVisible(this.element)) {
-            return;
-        }
-
         if (prevProps.tooltip !== this.props.tooltip) {
             if (this.tooltip)
                 this.tooltip.updateContent(this.props.tooltip);
