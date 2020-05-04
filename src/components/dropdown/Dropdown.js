@@ -339,6 +339,7 @@ export class Dropdown extends Component {
 
     onEditableInputClick(event) {
         this.bindDocumentClickListener();
+        event.stopPropagation();
     }
 
     onEditableInputChange(event) {
