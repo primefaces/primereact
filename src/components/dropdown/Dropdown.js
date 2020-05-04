@@ -283,6 +283,14 @@ export class Dropdown extends Component {
         return null;
     }
 
+    filter(options) {
+        let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+        let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+        let items = FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+
+        return (items && items.length) ? items : null;
+    }
+
     findNextVisibleItem(index) {
         let i = index + 1;
         if (i === this.props.options.length) {
@@ -296,7 +304,7 @@ export class Dropdown extends Component {
         }
 
         if (this.hasFilter()) {
-            if (this.filter(option))
+            if (this.filter([option]))
                 return option;
             else
                 return this.findNextVisibleItem(i);
@@ -319,7 +327,7 @@ export class Dropdown extends Component {
         }
 
         if (this.hasFilter()) {
-            if (this.filter(option))
+            if (this.filter([option]))
                 return option;
             else
                 return this.findPrevVisibleItem(i);
@@ -595,12 +603,10 @@ export class Dropdown extends Component {
         let items = this.props.options;
 
         if (items && this.hasFilter()) {
-            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
-            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-            items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+            items = this.filter(items);
         }
 
-        if(items) {
+        if (items) {
             return items.map((option) => {
                 let optionLabel = this.getOptionLabel(option);
                 return (
