@@ -149,6 +149,7 @@ export class Chips extends Component {
     }
 
     focusInput() {
+        this.focus = true;
         this.inputElement.focus();
     }
 
@@ -222,6 +223,8 @@ export class Chips extends Component {
     }
 
     onFocus(event) {
+        this.focus = true;
+
         DomHandler.addClass(this.listElement, 'p-focus');
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -229,8 +232,9 @@ export class Chips extends Component {
     }
 
     onBlur(event) {
-        DomHandler.removeClass(this.listElement, 'p-focus');
+        this.focus = false;
 
+        DomHandler.removeClass(this.listElement, 'p-focus');
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
@@ -291,7 +295,9 @@ export class Chips extends Component {
     }
 
     render() {
-        const className = classNames('p-chips p-component', this.props.className);
+        const className = classNames('p-chips p-component', this.props.className, {
+            'p-inputwrapper-filled': this.props.value.length > 0 || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
+            'p-inputwrapper-focus': this.focus});
         const list = this.renderList();
 
         return (

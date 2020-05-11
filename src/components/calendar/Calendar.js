@@ -2839,7 +2839,7 @@ export class Calendar extends Component {
         const className = classNames('p-calendar', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
             'p-calendar-timeonly': this.props.timeOnly,
-            'p-inputwrapper-filled': this.props.value
+            'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
         });
         const panelClassName = classNames('p-datepicker p-component', this.props.panelClassName, {
             'p-datepicker-inline': this.props.inline,

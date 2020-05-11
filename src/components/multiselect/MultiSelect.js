@@ -494,7 +494,9 @@ export class MultiSelect extends Component {
     }
 
     render() {
-        let className = classNames('p-multiselect p-component', this.props.className, {'p-disabled': this.props.disabled});
+        let className = classNames('p-multiselect p-component', this.props.className, {
+            'p-disabled': this.props.disabled,
+            'p-inputwrapper-filled': this.props.value && this.props.value.length > 0});
         let label = this.renderLabel();
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;

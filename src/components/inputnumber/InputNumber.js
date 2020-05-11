@@ -620,7 +620,7 @@ export class InputNumber extends Component {
     }
 
     onInputFocus(event) {
-        DomHandler.addClass(this.element, 'p-inputwrapper-focus');
+        this.focus = true;
 
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -628,7 +628,7 @@ export class InputNumber extends Component {
     }
 
     onInputBlur(event) {
-        DomHandler.removeClass(this.element, 'p-inputwrapper-focus');
+        this.focus = false;
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
@@ -760,6 +760,7 @@ export class InputNumber extends Component {
     render() {
         const className = classNames('p-inputnumber p-component', this.props.className, {
                 'p-inputwrapper-filled': this.props.value != null,
+                'p-inputwrapper-focus': this.focus,
                 'p-inputnumber-buttons-stacked': this.isStacked(),
                 'p-inputnumber-buttons-horizontal': this.isHorizontal(),
                 'p-inputnumber-buttons-vertical': this.isVertical()

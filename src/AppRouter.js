@@ -140,6 +140,7 @@ import { GalleriaResponsiveDemo } from './showcase/galleria/GalleriaResponsiveDe
 import { GalleriaThumbnailDemo } from './showcase/galleria/GalleriaThumbnailDemo';
 import { GalleriaPreviewDemo } from './showcase/galleria/GalleriaPreviewDemo';
 import { GalleriaFullScreenDemo } from './showcase/galleria/GalleriaFullScreenDemo';
+import { FloatLabelDemo } from './showcase/floatlabel/FloatLabelDemo';
 
 class AppRouter extends Component {
 
@@ -305,6 +306,7 @@ class AppRouter extends Component {
                 <Route path="/keyfilter" component={KeyFilterDemo} />
                 <Route path="/inplace" component={InplaceDemo} />
                 <Route path="/deferredcontent" component={DeferredContentDemo} />
+                <Route path="/floatlabel" component={FloatLabelDemo} />
             </React.Fragment>
         );
     }

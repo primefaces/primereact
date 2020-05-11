@@ -676,6 +676,13 @@
                     "meta": [
                         "primeicons"
                     ]
+                },
+                {
+                    "name": "FloatLabel",
+                    "to": "/floatlabel",
+                    "meta": [
+                        "floatlabel"
+                    ]
                 }
             ]
         }
