@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.2.1](https://github.com/primefaces/primereact/tree/4.2.1) (2020-05-11)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.2.0...4.2.1)
+
+**Implemented New Features and Enhancements:**
+
+- Remove filter method from ObjectUtils [\#1343](https://github.com/primefaces/primereact/issues/1343)
+- AutoComplete: selectedItemTemplate gets called for query [\#1296](https://github.com/primefaces/primereact/issues/1296)
+
+**Fixed bugs:**
+
+- Editable Dropdown is not working as expected  [\#1359](https://github.com/primefaces/primereact/issues/1359)
+- Dropdown throws an exception on console after filtering and keyboard navigation [\#1358](https://github.com/primefaces/primereact/issues/1358)
+- DataTable: filters are not rerendered when their state is changed [\#1352](https://github.com/primefaces/primereact/issues/1352)
+- DataTable: wrong type definition for onFilter [\#1351](https://github.com/primefaces/primereact/issues/1351)
+- Autofocus property doesn't work as expected on Textarea [\#1350](https://github.com/primefaces/primereact/issues/1350)
+- Editor Component readOnly property name wrong [\#1346](https://github.com/primefaces/primereact/issues/1346)
+- React multiselect defaultValue warning [\#1344](https://github.com/primefaces/primereact/issues/1344)
+- InputMask displayed value does not change when value changes to undefined or null [\#1342](https://github.com/primefaces/primereact/issues/1342)
+- Wrong import for FilterUtils [\#1339](https://github.com/primefaces/primereact/issues/1339)
+
 ## [4.2.0](https://github.com/primefaces/primereact/tree/4.2.0) (2020-04-17)
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.1.2...4.2.0)
 
