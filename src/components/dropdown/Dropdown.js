@@ -145,7 +145,6 @@ export class Dropdown extends Component {
     }
 
     onInputBlur(event) {
-        console.log("input blur")
         DomHandler.removeClass(this.container, 'p-focus');
         DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
 
