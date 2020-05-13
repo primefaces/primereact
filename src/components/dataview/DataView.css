@@ -1,5 +1,6 @@
 .p-dataview {
     position: relative;
+    width: 100%;
 }
 
 .p-dataview .p-paginator {
@@ -34,6 +35,10 @@
 
 .p-dataview .p-paginator-bottom {
     border-top: 0 none;
+}
+
+.p-dataview.p-dataview-list {
+    width: 100%;
 }
 
 .p-dataview.p-dataview-list > .p-dataview-content > div.p-grid > div {
