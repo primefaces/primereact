@@ -339,6 +339,43 @@ const CarouselDemo = () => {
                 `
             }
         }
+
+        this.extFiles = {
+            'index.css': `
+.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-details > .p-grid {
+    border: 1px solid #b3c2ca;
+    border-radius: 3px;
+    margin: 0.3em;
+    text-align: center;
+    padding: 2em 0 2.25em 0;
+}
+.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data .car-title {
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 24px;
+}
+.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data .car-subtitle {
+    margin: 0.25em 0 2em 0;
+}
+.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data button {
+    margin-left: 0.5em;
+}
+.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data button:first-child {
+    margin-left: 0;
+}
+.carousel-demo .p-carousel.custom-carousel .p-carousel-dot-icon {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50%;
+}
+.carousel-demo .p-carousel.p-carousel-horizontal .p-carousel-content .p-carousel-item.p-carousel-item-start .car-details > .p-grid {
+    margin-left: 0.6em;
+}
+.carousel-demo .p-carousel.p-carousel-horizontal .p-carousel-content .p-carousel-item.p-carousel-item-end .car-details > .p-grid {
+    margin-right: 0.6em;
+}
+            `
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -356,7 +393,7 @@ const CarouselDemo = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     <span>View on GitHub</span>
                 </a>
-                <LiveEditor name="CarouselDemo" sources={this.sources} service="CarService" data="cars-small" activeButtonIndex={this.state.activeIndex - 1} />
+                <LiveEditor name="CarouselDemo" sources={this.sources} service="CarService" data="cars-small" extFiles={this.extFiles} activeButtonIndex={this.state.activeIndex - 1} />
             </div>
         )
     }
