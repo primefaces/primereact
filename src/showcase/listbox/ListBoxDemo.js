@@ -4,15 +4,16 @@ import {ListBox} from '../../components/listbox/ListBox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class ListBoxDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            city: null,
-            cities: null,
-            car: 'BMW'
+            selectedCity: null,
+            selectedCities: null,
+            selectedCar: 'BMW'
         };
     }
 
@@ -63,13 +64,13 @@ export class ListBoxDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3 className="first">Single</h3>
-                    <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
+                    <ListBox value={this.state.selectedCity} options={cities} onChange={(e) => this.setState({selectedCity: e.value})} optionLabel="name"/>
 
                     <h3>Multiple</h3>
-                    <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
+                    <ListBox value={this.state.selectedCities} options={cities} onChange={(e) => this.setState({selectedCities: e.value})} multiple={true} optionLabel="name"/>
 
                     <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
+                    <ListBox value={this.state.selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({selectedCar: e.value})} itemTemplate={this.carTemplate}
                                     style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
                 </div>
 
@@ -81,11 +82,211 @@ export class ListBoxDemo extends Component {
 
 class ListboxDoc extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {ListBox} from 'primereact/listbox';
+
+export class ListBoxDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            selectedCity: null,
+            selectedCities: null,
+            selectedCar: 'BMW'
+        };
+    }
+
+    carTemplate(option) {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
+                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
+            </div>
+        );
+    }
+
+    render() {
+        const cities = [
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
+        ];
+
+        const cars = [
+            {label: 'Audi', value: 'Audi'},
+            {label: 'BMW', value: 'BMW'},
+            {label: 'Fiat', value: 'Fiat'},
+            {label: 'Honda', value: 'Honda'},
+            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Mercedes', value: 'Mercedes'},
+            {label: 'Renault', value: 'Renault'},
+            {label: 'VW', value: 'VW'},
+            {label: 'Volvo', value: 'Volvo'}
+        ];
+
+        return (
+            <div>
+                <h3 className="first">Single</h3>
+                <ListBox value={this.state.selectedCity} options={cities} onChange={(e) => this.setState({selectedCity: e.value})} optionLabel="name"/>
+
+                <h3>Multiple</h3>
+                <ListBox value={this.state.selectedCities} options={cities} onChange={(e) => this.setState({selectedCities: e.value})} multiple={true} optionLabel="name"/>
+
+                <h3>Advanced</h3>
+                <ListBox value={this.state.selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({selectedCar: e.value})} itemTemplate={this.carTemplate}
+                                style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, {useState} from 'react';
+import {ListBox} from 'primereact/listbox';
+
+const ListBoxDemo = () => {
+    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCar, setSelectedCar] = useState('BMW');
+
+    const carTemplate = (option) => {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
+                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
+            </div>
+        );
+    }
+
+    const cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
+
+    const cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
+    return (
+        <div>
+            <h3 className="first">Single</h3>
+            <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
+
+            <h3>Multiple</h3>
+            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple={true} optionLabel="name"/>
+
+            <h3>Advanced</h3>
+            <ListBox value={selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
+                            style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, {useState} from 'react';
+import {ListBox} from 'primereact/listbox';
+
+const ListBoxDemo = () => {
+    const [selectedCity, setSelectedCity] = useState<string|undefined>(undefined);
+    const [selectedCities, setSelectedCities] = useState<any[]|undefined>(undefined);
+    const [selectedCar, setSelectedCar] = useState('BMW');
+
+    const carTemplate = (option: { label: string }) => {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
+                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
+            </div>
+        );
+    }
+
+    const cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
+
+    const cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
+    return (
+        <div>
+            <h3 className="first">Single</h3>
+            <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
+
+            <h3>Multiple</h3>
+            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple={true} optionLabel="name"/>
+
+            <h3>Advanced</h3>
+            <ListBox value={selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
+                            style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
     shouldComponentUpdate(){
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/listbox" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="ListBoxDemo" sources={this.sources} service="NodeService" data="treenodes" />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
     <TabView effect="fade">
@@ -449,86 +650,20 @@ carTemplate(option) {
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/listbox" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                <span>View on GitHub</span>
-            </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {ListBox} from 'primereact/listbox';
+        {
+            this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                const header = key === 'app' ? 'Source' : `${key} Source`;
+                return (
+                    <TabPanel key={`source_${index}`} header={header}>
+                        {sourceButtons}
 
-export class ListBoxDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            city: null,
-            cities: null,
-            car: 'BMW'
-        };
-    }
-
-    carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
-
-        return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
-                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
-            </div>
-        );
-    }
-
-    render() {
-        const cities = [
-            {name: 'New York', code: 'NY'},
-            {name: 'Rome', code: 'RM'},
-            {name: 'London', code: 'LDN'},
-            {name: 'Istanbul', code: 'IST'},
-            {name: 'Paris', code: 'PRS'}
-        ];
-
-        const cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>ListBox</h1>
-                        <p>ListBox is used to select one or more values from a list of items.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3 className="first">Single</h3>
-                    <ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} optionLabel="name"/>
-
-                    <h3>Multiple</h3>
-                    <ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} multiple={true} optionLabel="name"/>
-
-                    <h3>Advanced</h3>
-                    <ListBox value={this.state.car} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({car: e.value})} itemTemplate={this.carTemplate}
-                                    style={{width: '15em'}} listStyle={{maxHeight: '250px'}}/>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-        </TabPanel>
+                        <CodeHighlight className="language-javascript">
+                            {value.content}
+                        </CodeHighlight>
+                    </TabPanel>
+                );
+            })
+        }
     </TabView>
 </div>
         );
