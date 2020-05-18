@@ -7,6 +7,7 @@ import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class MessagesDemo extends Component {
 
@@ -134,11 +135,362 @@ export class MessagesDemo extends Component {
 
 export class MessagesDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Messages} from 'primereact/messages';
+import {Message} from 'primereact/message';
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+
+export class MessagesDemo extends Component {
+
+    constructor() {
+        super();
+        this.showSuccess = this.showSuccess.bind(this);
+        this.showInfo = this.showInfo.bind(this);
+        this.showWarn = this.showWarn.bind(this);
+        this.showError = this.showError.bind(this);
+        this.showMultiple = this.showMultiple.bind(this);
+        this.showSticky = this.showSticky.bind(this);
+        this.clear = this.clear.bind(this);
+    }
+
+    showSuccess() {
+        this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    }
+
+    showInfo() {
+        this.messages.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    }
+
+    showWarn() {
+        this.messages.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    }
+
+    showError() {
+        this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    }
+
+    showSticky() {
+        this.messages.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+    }
+
+    showMultiple() {
+        this.messages.show([
+            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
+        ]);
+    }
+
+    clear() {
+        this.messages.clear();
     }
 
     render() {
+        return (
+            <div>
+                <Messages ref={(el) => this.messages = el} />
+
+                <h3 style={{marginTop: 0}}>Severities</h3>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showInfo} label="Info" className="p-button-info" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showError} label="Error" className="p-button-danger" />
+                    </div>
+                </div>
+
+                <h3>Options</h3>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-4">
+                        <Button onClick={this.showMultiple} label="Multiple" />
+                    </div>
+                    <div className="p-col-12 p-md-4">
+                        <Button onClick={this.showSticky} label="Sticky" />
+                    </div>
+                    <div className="p-col-12 p-md-4">
+                        <Button onClick={this.clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
+                    </div>
+                </div>
+
+                <h3>Inline Message CSS</h3>
+                <p>CSS helpers to display inline messages mostly within forms.</p>
+                <div className="p-grid">
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="info" text="PrimeReact Rocks" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="success" text="Record Saved" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="warn" text="Are you sure?" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="error" text="Field is required" />
+                    </div>
+                </div>
+
+                <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                    <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
+                    <Message severity="error" text="Field is required" />
+                </div>
+                <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                    <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
+                    <Message severity="error" />
+                </div>
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useRef } from 'react';
+import {Messages} from 'primereact/messages';
+import {Message} from 'primereact/message';
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+
+const MessagesDemo = () => {
+    let messages = useRef(null);
+
+    const showSuccess = () => {
+        messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    };
+
+    const showInfo = () => {
+        messages.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    };
+
+    const showWarn = () => {
+        messages.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    };
+
+    const showError = () => {
+        messages.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    };
+
+    const showSticky = () => {
+        messages.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+    };
+
+    const showMultiple = () => {
+        messages.current.show([
+            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
+        ]);
+    }
+
+    const clear = () => {
+        messages.current.clear();
+    }
+
+    return (
+        <div>
+            <Messages ref={messages} />
+
+            <h3 style={{marginTop: 0}}>Severities</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showSuccess} label="Success" className="p-button-success" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showInfo} label="Info" className="p-button-info" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showWarn} label="Warn" className="p-button-warning" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showError} label="Error" className="p-button-danger" />
+                </div>
+            </div>
+
+            <h3>Options</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showMultiple} label="Multiple" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showSticky} label="Sticky" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
+                </div>
+            </div>
+
+            <h3>Inline Message CSS</h3>
+            <p>CSS helpers to display inline messages mostly within forms.</p>
+            <div className="p-grid">
+                <div className="p-col-12 p-md-3">
+                    <Message severity="info" text="PrimeReact Rocks" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Message severity="success" text="Record Saved" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Message severity="warn" text="Are you sure?" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Message severity="error" text="Field is required" />
+                </div>
+            </div>
+
+            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
+                <Message severity="error" text="Field is required" />
+            </div>
+            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
+                <Message severity="error" />
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useRef } from 'react';
+import {Messages} from 'primereact/messages';
+import {Message} from 'primereact/message';
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+
+const MessagesDemo = () => {
+    let messages = useRef<any>(null);
+
+    const showSuccess = () => {
+        messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    };
+
+    const showInfo = () => {
+        messages.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    };
+
+    const showWarn = () => {
+        messages.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    };
+
+    const showError = () => {
+        messages.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    };
+
+    const showSticky = () => {
+        messages.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+    };
+
+    const showMultiple = () => {
+        messages.current.show([
+            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
+            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
+        ]);
+    }
+
+    const clear = () => {
+        messages.current.clear();
+    }
+
+    return (
+        <div>
+            <Messages ref={messages} />
+
+            <h3 style={{marginTop: 0}}>Severities</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showSuccess} label="Success" className="p-button-success" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showInfo} label="Info" className="p-button-info" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showWarn} label="Warn" className="p-button-warning" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showError} label="Error" className="p-button-danger" />
+                </div>
+            </div>
+
+            <h3>Options</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showMultiple} label="Multiple" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showSticky} label="Sticky" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
+                </div>
+            </div>
+
+            <h3>Inline Message CSS</h3>
+            <p>CSS helpers to display inline messages mostly within forms.</p>
+            <div className="p-grid">
+                <div className="p-col-12 p-md-3">
+                    <Message severity="info" text="PrimeReact Rocks" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Message severity="success" text="Record Saved" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Message severity="warn" text="Are you sure?" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Message severity="error" text="Field is required" />
+                </div>
+            </div>
+
+            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
+                <Message severity="error" text="Field is required" />
+            </div>
+            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
+                <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
+                <Message severity="error" />
+            </div>
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/messages" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="MessagesDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -502,140 +854,20 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/messages" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Messages} from 'primereact/messages';
-import {Message} from 'primereact/components/message';
-import {InputText} from 'primereact/components/inputtext';
-import {Button} from 'primereact/components/button';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class MessagesDemo extends Component {
-
-    constructor() {
-        super();
-        this.showSuccess = this.showSuccess.bind(this);
-        this.showInfo = this.showInfo.bind(this);
-        this.showWarn = this.showWarn.bind(this);
-        this.showError = this.showError.bind(this);
-        this.showMultiple = this.showMultiple.bind(this);
-        this.showSticky = this.showSticky.bind(this);
-        this.clear = this.clear.bind(this);
-    }
-
-    showSuccess() {
-        this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
-    }
-
-    showInfo() {
-        this.messages.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
-    }
-
-    showWarn() {
-        this.messages.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-    }
-
-    showError() {
-        this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
-    }
-
-    showSticky() {
-        this.messages.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
-    }
-
-    showMultiple() {
-        this.messages.show([
-            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
-            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
-            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
-        ]);
-    }
-
-    clear() {
-        this.messages.clear();
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Messages</h1>
-                        <p>Messages is used to display inline messages with various severities.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Messages ref={(el) => this.messages = el} />
-
-                    <h3>Severities</h3>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showInfo} label="Info" className="p-button-info" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showError} label="Error" className="p-button-danger" />
-                        </div>
-                    </div>
-
-                    <h3>Options</h3>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-4">
-                            <Button onClick={this.showMultiple} label="Multiple" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <Button onClick={this.showSticky} label="Sticky" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <Button onClick={this.clear} icon="pi pi-times" style={{ float: 'right' }} label="Clear" />
-                        </div>
-                    </div>
-
-                    <h3>Inline Message CSS</h3>
-                    <p>CSS helpers to display inline messages mostly within forms.</p>
-                    <div className="p-grid">
-                        <div className="p-col-12 p-md-3">
-                            <Message severity="info" text="PrimeReact Rocks" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Message severity="success" text="Record Saved" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Message severity="warn" text="Are you sure?" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Message severity="error" text="Field is required" />
-                        </div>
-                    </div>
-
-                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
-                        <Message severity="error" text="Field is required" />
-                    </div>
-                    <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                        <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
-                        <Message severity="error" />
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

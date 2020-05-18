@@ -4,128 +4,124 @@ import {MegaMenu} from '../../components/megamenu/MegaMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class MegaMenuDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            items: [
-                {
-                    label: 'Videos', icon: 'pi pi-fw pi-video',
-                    items: [
-                        [
-                            {
-                                label: 'Video 1',
-                                items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
-                            },
-                            {
-                                label: 'Video 2',
-                                items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'Video 3',
-                                items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
-                            },
-                            {
-                                label: 'Video 4',
-                                items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
-                            }
-                        ]
-                    ]
-                },
-                {
-                    label: 'Users', icon: 'pi pi-fw pi-users',
-                    items: [
-                        [
-                            {
-                                label: 'User 1',
-                                items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
-                            },
-                            {
-                                label: 'User 2',
-                                items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
-                            },
-                        ],
-                        [
-                            {
-                                label: 'User 3',
-                                items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
-                            },
-                            {
-                                label: 'User 4',
-                                items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'User 5',
-                                items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
-                            },
-                            {
-                                label: 'User 6',
-                                items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
-                            }
-                        ]
-                    ]
-                },
-                {
-                    label: 'Events', icon: 'pi pi-fw pi-calendar',
-                    items: [
-                        [
-                            {
-                                label: 'Event 1',
-                                items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
-                            },
-                            {
-                                label: 'Event 2',
-                                items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'Event 3',
-                                items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
-                            },
-                            {
-                                label: 'Event 4',
-                                items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
-                            }
-                        ]
-                    ]
-                },
-                {
-                    label: 'Settings', icon: 'pi pi-fw pi-cog',
-                    items: [
-                        [
-                            {
-                                label: 'Setting 1',
-                                items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
-                            },
-                            {
-                                label: 'Setting 2',
-                                items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
-                            },
-                            {
-                                label: 'Setting 3',
-                                items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'Technology 4',
-                                items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
-                            }
-                        ]
-                    ]
-                }
-            ]
-        };
-    }
-
     render() {
+        const items = [
+            {
+                label: 'Videos', icon: 'pi pi-fw pi-video',
+                items: [
+                    [
+                        {
+                            label: 'Video 1',
+                            items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
+                        },
+                        {
+                            label: 'Video 2',
+                            items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'Video 3',
+                            items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
+                        },
+                        {
+                            label: 'Video 4',
+                            items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
+                        }
+                    ]
+                ]
+            },
+            {
+                label: 'Users', icon: 'pi pi-fw pi-users',
+                items: [
+                    [
+                        {
+                            label: 'User 1',
+                            items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
+                        },
+                        {
+                            label: 'User 2',
+                            items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
+                        },
+                    ],
+                    [
+                        {
+                            label: 'User 3',
+                            items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
+                        },
+                        {
+                            label: 'User 4',
+                            items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'User 5',
+                            items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
+                        },
+                        {
+                            label: 'User 6',
+                            items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
+                        }
+                    ]
+                ]
+            },
+            {
+                label: 'Events', icon: 'pi pi-fw pi-calendar',
+                items: [
+                    [
+                        {
+                            label: 'Event 1',
+                            items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
+                        },
+                        {
+                            label: 'Event 2',
+                            items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'Event 3',
+                            items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
+                        },
+                        {
+                            label: 'Event 4',
+                            items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
+                        }
+                    ]
+                ]
+            },
+            {
+                label: 'Settings', icon: 'pi pi-fw pi-cog',
+                items: [
+                    [
+                        {
+                            label: 'Setting 1',
+                            items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
+                        },
+                        {
+                            label: 'Setting 2',
+                            items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
+                        },
+                        {
+                            label: 'Setting 3',
+                            items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'Technology 4',
+                            items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
+                        }
+                    ]
+                ]
+            }
+        ];
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -141,10 +137,10 @@ export class MegaMenuDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Horizontal</h3>
-                    <MegaMenu model={this.state.items}/>
+                    <MegaMenu model={items}/>
 
                     <h3>Vertical</h3>
-                    <MegaMenu model={this.state.items} orientation="vertical"/>
+                    <MegaMenu model={items} orientation="vertical"/>
                 </div>
 
                 <MegaMenuDoc/>
@@ -155,11 +151,430 @@ export class MegaMenuDemo extends Component {
 
 class MegaMenuDoc extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {MegaMenu} from 'primereact/megamenu';
+
+export class MegaMenuDemo extends Component {
+
+    render() {
+        const items = [
+            {
+                label: 'Videos', icon: 'pi pi-fw pi-video',
+                items: [
+                    [
+                        {
+                            label: 'Video 1',
+                            items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
+                        },
+                        {
+                            label: 'Video 2',
+                            items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'Video 3',
+                            items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
+                        },
+                        {
+                            label: 'Video 4',
+                            items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
+                        }
+                    ]
+                ]
+            },
+            {
+                label: 'Users', icon: 'pi pi-fw pi-users',
+                items: [
+                    [
+                        {
+                            label: 'User 1',
+                            items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
+                        },
+                        {
+                            label: 'User 2',
+                            items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
+                        },
+                    ],
+                    [
+                        {
+                            label: 'User 3',
+                            items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
+                        },
+                        {
+                            label: 'User 4',
+                            items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'User 5',
+                            items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
+                        },
+                        {
+                            label: 'User 6',
+                            items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
+                        }
+                    ]
+                ]
+            },
+            {
+                label: 'Events', icon: 'pi pi-fw pi-calendar',
+                items: [
+                    [
+                        {
+                            label: 'Event 1',
+                            items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
+                        },
+                        {
+                            label: 'Event 2',
+                            items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'Event 3',
+                            items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
+                        },
+                        {
+                            label: 'Event 4',
+                            items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
+                        }
+                    ]
+                ]
+            },
+            {
+                label: 'Settings', icon: 'pi pi-fw pi-cog',
+                items: [
+                    [
+                        {
+                            label: 'Setting 1',
+                            items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
+                        },
+                        {
+                            label: 'Setting 2',
+                            items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
+                        },
+                        {
+                            label: 'Setting 3',
+                            items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
+                        }
+                    ],
+                    [
+                        {
+                            label: 'Technology 4',
+                            items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
+                        }
+                    ]
+                ]
+            }
+        ];
+
+        return (
+            <div>
+                <h3>Horizontal</h3>
+                <MegaMenu model={items}/>
+
+                <h3>Vertical</h3>
+                <MegaMenu model={items} orientation="vertical"/>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React from 'react';
+import {MegaMenu} from 'primereact/megamenu';
+
+const MegaMenuDemo = () => {
+
+    const items = [
+        {
+            label: 'Videos', icon: 'pi pi-fw pi-video',
+            items: [
+                [
+                    {
+                        label: 'Video 1',
+                        items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
+                    },
+                    {
+                        label: 'Video 2',
+                        items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'Video 3',
+                        items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
+                    },
+                    {
+                        label: 'Video 4',
+                        items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
+                    }
+                ]
+            ]
+        },
+        {
+            label: 'Users', icon: 'pi pi-fw pi-users',
+            items: [
+                [
+                    {
+                        label: 'User 1',
+                        items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
+                    },
+                    {
+                        label: 'User 2',
+                        items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
+                    },
+                ],
+                [
+                    {
+                        label: 'User 3',
+                        items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
+                    },
+                    {
+                        label: 'User 4',
+                        items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'User 5',
+                        items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
+                    },
+                    {
+                        label: 'User 6',
+                        items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
+                    }
+                ]
+            ]
+        },
+        {
+            label: 'Events', icon: 'pi pi-fw pi-calendar',
+            items: [
+                [
+                    {
+                        label: 'Event 1',
+                        items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
+                    },
+                    {
+                        label: 'Event 2',
+                        items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'Event 3',
+                        items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
+                    },
+                    {
+                        label: 'Event 4',
+                        items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
+                    }
+                ]
+            ]
+        },
+        {
+            label: 'Settings', icon: 'pi pi-fw pi-cog',
+            items: [
+                [
+                    {
+                        label: 'Setting 1',
+                        items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
+                    },
+                    {
+                        label: 'Setting 2',
+                        items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
+                    },
+                    {
+                        label: 'Setting 3',
+                        items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'Technology 4',
+                        items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
+                    }
+                ]
+            ]
+        }
+    ];
+
+    return (
+        <div>
+            <h3>Horizontal</h3>
+            <MegaMenu model={items}/>
+
+            <h3>Vertical</h3>
+            <MegaMenu model={items} orientation="vertical"/>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React from 'react';
+import {MegaMenu} from 'primereact/megamenu';
+
+const MegaMenuDemo = () => {
+
+    const items = [
+        {
+            label: 'Videos', icon: 'pi pi-fw pi-video',
+            items: [
+                [
+                    {
+                        label: 'Video 1',
+                        items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
+                    },
+                    {
+                        label: 'Video 2',
+                        items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'Video 3',
+                        items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
+                    },
+                    {
+                        label: 'Video 4',
+                        items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
+                    }
+                ]
+            ]
+        },
+        {
+            label: 'Users', icon: 'pi pi-fw pi-users',
+            items: [
+                [
+                    {
+                        label: 'User 1',
+                        items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
+                    },
+                    {
+                        label: 'User 2',
+                        items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
+                    },
+                ],
+                [
+                    {
+                        label: 'User 3',
+                        items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
+                    },
+                    {
+                        label: 'User 4',
+                        items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'User 5',
+                        items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
+                    },
+                    {
+                        label: 'User 6',
+                        items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
+                    }
+                ]
+            ]
+        },
+        {
+            label: 'Events', icon: 'pi pi-fw pi-calendar',
+            items: [
+                [
+                    {
+                        label: 'Event 1',
+                        items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
+                    },
+                    {
+                        label: 'Event 2',
+                        items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'Event 3',
+                        items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
+                    },
+                    {
+                        label: 'Event 4',
+                        items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
+                    }
+                ]
+            ]
+        },
+        {
+            label: 'Settings', icon: 'pi pi-fw pi-cog',
+            items: [
+                [
+                    {
+                        label: 'Setting 1',
+                        items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
+                    },
+                    {
+                        label: 'Setting 2',
+                        items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
+                    },
+                    {
+                        label: 'Setting 3',
+                        items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
+                    }
+                ],
+                [
+                    {
+                        label: 'Technology 4',
+                        items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
+                    }
+                ]
+            ]
+        }
+    ];
+
+    return (
+        <div>
+            <h3>Horizontal</h3>
+            <MegaMenu model={items}/>
+
+            <h3>Vertical</h3>
+            <MegaMenu model={items} orientation="vertical"/>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/megamenu" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="MegaMenuDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView effect="fade">
@@ -421,160 +836,20 @@ const items: [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/megamenu" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <span>View on GitHub</span>
-                        </a>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {MegaMenu} from 'primereact/megamenu';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class MegaMenuDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            items: [
-                {
-                    label: 'Videos', icon: 'pi pi-fw pi-video',
-                    items: [
-                        [
-                            {
-                                label: 'Video 1',
-                                items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
-                            },
-                            {
-                                label: 'Video 2',
-                                items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'Video 3',
-                                items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
-                            },
-                            {
-                                label: 'Video 4',
-                                items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
-                            }
-                        ]
-                    ]
-                },
-                {
-                    label: 'Users', icon: 'pi pi-fw pi-users',
-                    items: [
-                        [
-                            {
-                                label: 'User 1',
-                                items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
-                            },
-                            {
-                                label: 'User 2',
-                                items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
-                            },
-                        ],
-                        [
-                            {
-                                label: 'User 3',
-                                items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
-                            },
-                            {
-                                label: 'User 4',
-                                items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'User 5',
-                                items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
-                            },
-                            {
-                                label: 'User 6',
-                                items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
-                            }
-                        ]
-                    ]
-                },
-                {
-                    label: 'Events', icon: 'pi pi-fw pi-calendar',
-                    items: [
-                        [
-                            {
-                                label: 'Event 1',
-                                items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
-                            },
-                            {
-                                label: 'Event 2',
-                                items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'Event 3',
-                                items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
-                            },
-                            {
-                                label: 'Event 4',
-                                items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
-                            }
-                        ]
-                    ]
-                },
-                {
-                    label: 'Settings', icon: 'pi pi-fw pi-cog',
-                    items: [
-                        [
-                            {
-                                label: 'Setting 1',
-                                items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
-                            },
-                            {
-                                label: 'Setting 2',
-                                items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
-                            },
-                            {
-                                label: 'Setting 3',
-                                items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
-                            }
-                        ],
-                        [
-                            {
-                                label: 'Technology 4',
-                                items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
-                            }
-                        ]
-                    ]
-                }
-            ]
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>MegaMenu</h1>
-                        <p>MegaMenu is navigation component that displays submenus together.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Horizontal</h3>
-                    <MegaMenu model={this.state.items}/>
-
-                    <h3>Vertical</h3>
-                    <MegaMenu model={this.state.items} orientation="vertical"/>
-                </div>
-            </div>
-        );
-    }
-}
-                        `}
-                        </CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         )
