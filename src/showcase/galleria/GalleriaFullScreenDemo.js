@@ -215,13 +215,13 @@ export class GalleriaFullScreenDemo extends Component {
     itemTemplate(item) {
         return (
             <div className="p-grid p-nogutter p-justify-center">
-                <img src={\`\${item.thumbnailImageSrc}\`} alt={item.alt} style={{ display: 'block' }} />
+                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
 
     previewTemplate(item) {
-        return <img src={\`\${item.previewImageSrc}\`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={\`\${item.previewImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
     render() {
@@ -263,7 +263,7 @@ export class GalleriaFullScreenDemo extends Component {
                     <div className="p-grid" style={{maxWidth: '400px'}}>
                     {
                         this.state.images && this.state.images.map((image, index) => {
-                            let imgEl = <img src={\`\${image.thumbnailImageSrc}\`} alt={image.alt} style={{cursor: 'pointer'}} onClick={() => {
+                            let imgEl = <img src={\`\${image.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={image.alt} style={{cursor: 'pointer'}} onClick={() => {
                                 this.setState({ activeIndex: index }, () => this.galleria3.show());
                             }}/>
 

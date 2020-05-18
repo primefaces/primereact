@@ -159,14 +159,14 @@ export class GalleriaPreviewDemo extends Component {
         return (
             <div className="car-details">
                 <div className="p-grid p-nogutter p-justify-center">
-                    <img src={\`\${item.thumbnailImageSrc}\`} alt={item.alt} style={{ display: 'block' }} />
+                    <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ display: 'block' }} />
                 </div>
             </div>
         );
     }
 
     previewTemplate(item) {
-        return <img src={\`\${item.previewImageSrc}\`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={\`\${item.previewImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
     render() {
