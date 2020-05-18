@@ -75,9 +75,13 @@ export class DeferredContentDoc extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            activeIndex: 0
+        };
 
         this.sources = {
             'app': {
+                tabName: 'Source',
                 content: `
 import React, { Component } from 'react';
 import {DeferredContent} from 'primereact/deferredcontent';
@@ -115,7 +119,7 @@ export class DeferredContentDemo extends Component {
                     Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
                 </div>
                 <DeferredContent onLoad={this.onImageLoad}>
-                    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="prime"/>
+                    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
                 </DeferredContent>
 
                 <div style={{height:'500px'}}>
@@ -135,6 +139,7 @@ export class DeferredContentDemo extends Component {
                 `
             },
             'hooks': {
+                tabName: 'Hooks Source',
                 content: `
 import React, { useState, useRef } from 'react';
 import {DeferredContent} from 'primereact/deferredcontent';
@@ -164,7 +169,7 @@ const DeferredContentDemo = () => {
                 Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
             </div>
             <DeferredContent onLoad={onImageLoad}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="prime"/>
+                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
             </DeferredContent>
 
             <div style={{height:'500px'}}>
@@ -183,6 +188,7 @@ const DeferredContentDemo = () => {
                 `
             },
             'ts': {
+                tabName: 'TS Source',
                 content: `
 import React, { useState, useRef } from 'react';
 import {DeferredContent} from 'primereact/deferredcontent';
@@ -212,7 +218,7 @@ const DeferredContentDemo = () => {
                 Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
             </div>
             <DeferredContent onLoad={onImageLoad}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="prime"/>
+                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
             </DeferredContent>
 
             <div style={{height:'500px'}}>
@@ -233,7 +239,11 @@ const DeferredContentDemo = () => {
         }
     }
 
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.activeIndex !== nextState.activeIndex) {
+            return true;
+        }
+
         return false;
     }
 
@@ -244,7 +254,7 @@ const DeferredContentDemo = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     <span>View on GitHub</span>
                 </a>
-                <LiveEditor name="DeferredContentDemo" sources={this.sources} service="CarService" data="cars-small" />
+                <LiveEditor name="DeferredContentDemo" sources={this.sources} service="CarService" data="cars-small" activeButtonIndex={this.state.activeIndex - 1} />
             </div>
         )
     }
@@ -254,7 +264,7 @@ const DeferredContentDemo = () => {
 
         return (
             <div className="content-section documentation">
-                <TabView>
+                <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
                         <CodeHighlight className="language-javascript">
@@ -332,9 +342,8 @@ import {DeferredContent} from 'primereact/DeferredContent';
 
                     {
                         this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            const header = key === 'app' ? 'Source' : `${key} Source`;
                             return (
-                                <TabPanel key={`source_${index}`} header={header}>
+                                <TabPanel key={`source_${index}`} header={value.tabName}>
                                     {sourceButtons}
 
                                     <CodeHighlight className="language-javascript">
