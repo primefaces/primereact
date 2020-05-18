@@ -1,5 +1,5 @@
 const services = {
-    "CarService": `
+    'CarService': `
 import axios from 'axios';
 
 export class CarService {
@@ -20,7 +20,7 @@ export class CarService {
     }
 }
     `,
-    "CountryService": `
+    'CountryService': `
 import axios from 'axios'
 
 export class CountryService {
@@ -31,7 +31,7 @@ export class CountryService {
     }
 }
     `,
-    "EventService": `
+    'EventService': `
 import axios from 'axios';
 
 export class EventService {
@@ -42,7 +42,7 @@ export class EventService {
     }
 }
     `,
-    "NodeService": `
+    'NodeService': `
 import axios from 'axios';
 
 export class NodeService {
@@ -58,7 +58,7 @@ export class NodeService {
     }
 }
     `,
-    "CustomerService": `
+    'CustomerService': `
 import axios from 'axios';
 
 export class CustomerService {
@@ -87,7 +87,7 @@ export class CustomerService {
 }
 
 const data = {
-    "cars-large": `
+    'cars-large': `
 {
     "data":[
         {"vin":"ee8a89d8","brand":"Fiat","year":1987,"color":"Maroon"},
