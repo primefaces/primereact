@@ -5,6 +5,7 @@ import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
 import {Button} from '../../components/button/Button';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class CarouselDemo extends Component {
 
@@ -98,11 +99,261 @@ export class CarouselDemo extends Component {
 
 export class CarouselDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {Carousel} from 'primereact/carousel';
+import {CarService} from '../service/CarService';
+import {Button} from 'primereact/button';
+
+export class CarouselDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            cars: []
+        };
+        this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
+
+        this.responsiveOptions = [
+            {
+                breakpoint: '1024px',
+                numVisible: 3,
+                numScroll: 3
+            },
+            {
+                breakpoint: '768px',
+                numVisible: 2,
+                numScroll: 2
+            },
+            {
+                breakpoint: '560px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ];
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+    }
+
+    carTemplate(car) {
+        return (
+            <div className="car-details">
+                <div className="p-grid p-nogutter">
+                    <div className="p-col-12">
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    </div>
+                    <div className="p-col-12 car-data">
+                        <div className="car-title">{car.brand}</div>
+                        <div className="car-subtitle">{car.year} | {car.color}</div>
+
+                        <div className="car-buttons">
+                            <Button icon="pi pi-search" className="p-button-secondary" />
+                            <Button icon="pi pi-star" className="p-button-secondary" />
+                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     render() {
+        const basicHeader = <h2>Basic</h2>;
+        const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
+        const verticalHeader = <h2>Vertical</h2>
+
+        return (
+            <div className="carousel-demo">
+                <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3}
+                    header={basicHeader} responsiveOptions={this.responsiveOptions}></Carousel>
+
+                <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
+                    responsiveOptions={this.responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+
+                <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
+                    numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import {Carousel} from 'primereact/carousel';
+import {CarService} from '../service/CarService';
+import {Button} from 'primereact/button';
+
+const CarouselDemo = () => {
+    const [cars, setCars] = useState([]);
+    const carservice = new CarService();
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3,
+            numScroll: 3
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 2,
+            numScroll: 2
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
+
+    useEffect(() => {
+        carservice.getCarsSmall().then(data => setCars(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const carTemplate = (car) => {
+        return (
+            <div className="car-details">
+                <div className="p-grid p-nogutter">
+                    <div className="p-col-12">
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    </div>
+                    <div className="p-col-12 car-data">
+                        <div className="car-title">{car.brand}</div>
+                        <div className="car-subtitle">{car.year} | {car.color}</div>
+
+                        <div className="car-buttons">
+                            <Button icon="pi pi-search" className="p-button-secondary" />
+                            <Button icon="pi pi-star" className="p-button-secondary" />
+                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const basicHeader = <h2>Basic</h2>;
+    const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
+    const verticalHeader = <h2>Vertical</h2>
+
+    return (
+        <div className="carousel-demo">
+            <Carousel value={cars} itemTemplate={carTemplate} numVisible={4} numScroll={3}
+                header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
+
+            <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
+                responsiveOptions={responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+
+            <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
+                numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import {Carousel} from 'primereact/carousel';
+import {CarService} from '../service/CarService';
+import {Button} from 'primereact/button';
+
+const CarouselDemo = () => {
+    const [cars, setCars] = useState<any>([]);
+    const carservice = new CarService();
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3,
+            numScroll: 3
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 2,
+            numScroll: 2
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
+
+    useEffect(() => {
+        carservice.getCarsSmall().then(data => setCars(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const carTemplate = (car: { brand: string, year: string, color: string }) => {
+        return (
+            <div className="car-details">
+                <div className="p-grid p-nogutter">
+                    <div className="p-col-12">
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    </div>
+                    <div className="p-col-12 car-data">
+                        <div className="car-title">{car.brand}</div>
+                        <div className="car-subtitle">{car.year} | {car.color}</div>
+
+                        <div className="car-buttons">
+                            <Button icon="pi pi-search" className="p-button-secondary" />
+                            <Button icon="pi pi-star" className="p-button-secondary" />
+                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const basicHeader = <h2>Basic</h2>;
+    const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
+    const verticalHeader = <h2>Vertical</h2>
+
+    return (
+        <div className="carousel-demo">
+            <Carousel value={cars} itemTemplate={carTemplate} numVisible={4} numScroll={3}
+                header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
+
+            <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
+                responsiveOptions={responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+
+            <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
+                numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/carousel" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="CarouselDemo" sources={this.sources} service="CarService" data="cars-small" />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -430,104 +681,20 @@ const responsiveOptions = [
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/carousel" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Carousel} from 'primereact/carousel';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class CarouselDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            cars: []
-        };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
-
-        this.responsiveSettings = [
-            {
-                breakpoint: '1024px',
-                numVisible: 3,
-                numScroll: 3
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 2,
-                numScroll: 2
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1,
-                numScroll: 1
-            }
-        ];
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-    }
-
-    carTemplate(car) {
-        return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter">
-                    <div className="p-col-12">
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
-                    </div>
-                    <div className="p-col-12 car-data">
-                        <div className="car-title">{car.brand}</div>
-                        <div className="car-subtitle">{car.year} | {car.color}</div>
-
-                        <div className="car-buttons">
-                            <Button icon="pi pi-search" className="p-button-secondary" />
-                            <Button icon="pi pi-star" className="p-button-secondary" />
-                            <Button icon="pi pi-cog" className="p-button-secondary" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    render() {
-        const basicHeader = <h2>Basic</h2>;
-        const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
-        const verticalHeader = <h2>Vertical</h2>
-
-        return (
-            <div className="carousel-demo">
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Carousel</h1>
-                        <p>Carousel is a content slider featuring various customization options.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3}
-                        header={basicHeader} responsive={this.responsiveSettings}></Carousel>
-
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                        responsive={this.responsiveSettings} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
-
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{width: '400px', marginTop: '2em'}}
-                        numVisible={1} numScroll={1} responsive={this.responsiveSettings} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );
