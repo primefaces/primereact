@@ -6,6 +6,7 @@ import {TreeSubmenu} from './TreeSubmenu';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class TreeDemo extends Component {
 
@@ -68,11 +69,163 @@ export class TreeDemo extends Component {
 
 export class TreeDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import { Tree } from 'primereact/tree';
+import { Button } from 'primereact/button';
+import { NodeService } from '../service/NodeService';
+
+export class TreeDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodes: null,
+            expandedKeys: {}
+        };
+
+        this.nodeService = new NodeService();
+        this.toggleMovies = this.toggleMovies.bind(this);
+    }
+
+    toggleMovies() {
+        let expandedKeys = {...this.state.expandedKeys};
+        if (expandedKeys['2'])
+            delete expandedKeys['2'];
+        else
+            expandedKeys['2'] = true;
+
+        this.setState({expandedKeys: expandedKeys});
+    }
+
+    componentDidMount() {
+        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
     }
 
     render() {
+        return (
+            <div>
+                <h3 className="first">Uncontrolled</h3>
+                <Tree value={this.state.nodes} />
+
+                <h3>Controlled</h3>
+                <Button onClick={this.toggleMovies} label="Toggle Movies" />
+                <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
+                    onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Tree } from 'primereact/tree';
+import { Button } from 'primereact/button';
+import { NodeService } from '../service/NodeService';
+
+const TreeDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const toggleMovies = () => {
+        let _expandedKeys = {...expandedKeys};
+        if (_expandedKeys['2'])
+            delete _expandedKeys['2'];
+        else
+            _expandedKeys['2'] = true;
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    return (
+        <div>
+            <h3 className="first">Uncontrolled</h3>
+            <Tree value={nodes} />
+
+            <h3>Controlled</h3>
+            <Button onClick={toggleMovies} label="Toggle Movies" />
+            <Tree value={nodes} expandedKeys={expandedKeys}
+                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Tree } from 'primereact/tree';
+import { Button } from 'primereact/button';
+import { NodeService } from '../service/NodeService';
+import TreeNode from 'primereact/components/treenode/TreeNode';
+
+const TreeDemo = () => {
+    const [nodes, setNodes] = useState<TreeNode[] | undefined>(undefined);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const toggleMovies = () => {
+        let _expandedKeys: any = {...expandedKeys};
+        if (_expandedKeys['2'])
+            delete _expandedKeys['2'];
+        else
+            _expandedKeys['2'] = true;
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    return (
+        <div>
+            <h3 className="first">Uncontrolled</h3>
+            <Tree value={nodes} />
+
+            <h3>Controlled</h3>
+            <Button onClick={toggleMovies} label="Toggle Movies" />
+            <Tree value={nodes} expandedKeys={expandedKeys}
+                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/tree" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="TreeDemo" sources={this.sources} service="NodeService" data="treenodes" />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -899,73 +1052,22 @@ export class TreeContextMenuDemo extends Component {
                 <p>None.</p>
             </div>
 
-            </TabPanel>
-
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/tree" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Tree} from 'primereact/tree';
-import {Button} from 'primereact/button';
-import {NodeService} from '../service/NodeService';
-
-export class TreeDemo extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null,
-            expandedKeys: {}
-        };
-
-        this.nodeService = new NodeService();
-        this.toggleMovies = this.toggleMovies.bind(this);
-    }
-
-    toggleMovies() {
-        let expandedKeys = {...this.state.expandedKeys};
-        if (expandedKeys['2'])
-            delete expandedKeys['2'];
-        else
-            expandedKeys['2'] = true;
-
-        this.setState({expandedKeys: expandedKeys});
-    }
-
-    componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree</h1>
-                        <p>Tree is used to display hierarchical data.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3 className="first">Uncontrolled</h3>
-                    <Tree value={this.state.nodes} />
-
-                    <h3>Controlled</h3>
-                    <Button onClick={this.toggleMovies} label="Toggle Movies" />
-                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
-                        onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
                     </TabPanel>
+
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
+
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );
