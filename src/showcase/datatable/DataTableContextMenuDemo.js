@@ -8,17 +8,22 @@ import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class DataTableContextMenuDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            menu: [
-                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-            ]
+            cars: [],
+            selectedCar: null
         };
+
+        this.menu = [
+            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteCar(this.state.selectedCar)}
+        ];
+
         this.carservice = new CarService();
         this.viewCar = this.viewCar.bind(this);
         this.deleteCar = this.deleteCar.bind(this);
@@ -61,7 +66,7 @@ export class DataTableContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
+                    <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
 
                     <DataTable value={this.state.cars} header="Right Click"
                         contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
@@ -81,17 +86,12 @@ export class DataTableContextMenuDemo extends Component {
 
 export class DataTableContextMenuDemoDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
-    }
+    constructor(props) {
+        super(props);
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
+        this.sources = {
+            'app': {
+                content: `
 import React, { Component } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
@@ -104,11 +104,15 @@ export class DataTableContextMenuDemo extends Component {
     constructor() {
         super();
         this.state = {
-            menu: [
-                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-            ]
+            cars: [],
+            selectedCar: null
         };
+
+        this.menu = [
+            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewCar(this.state.selectedCar)},
+            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteCar(this.state.selectedCar)}
+        ];
+
         this.carservice = new CarService();
         this.viewCar = this.viewCar.bind(this);
         this.deleteCar = this.deleteCar.bind(this);
@@ -135,35 +139,175 @@ export class DataTableContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - ContextMenu</h1>
-                        <p>DataTable has exclusive integration with ContextMenu.</p>
-                    </div>
-                </div>
+                <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
 
-                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
-
-                    <DataTable value={this.state.cars} header="Right Click"
-                        contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
-                        onContextMenu={e => this.cm.show(e.originalEvent)}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </div>
+                <DataTable value={this.state.cars} header="Right Click"
+                    contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
+                    onContextMenu={e => this.cm.show(e.originalEvent)}>
+                    <Column field="vin" header="Vin" />
+                    <Column field="year" header="Year" />
+                    <Column field="brand" header="Brand" />
+                    <Column field="color" header="Color" />
+                </DataTable>
             </div>
         );
     }
 }
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {ContextMenu} from 'primereact/contextmenu';
+import {Growl} from 'primereact/growl';
+import {CarService} from '../service/CarService';
 
-`}
-</CodeHighlight>
-                    </TabPanel>
+const DataTableContextMenuDemo = () => {
+    const [cars, setCars] = useState([]);
+    const [selectedCar, setSelectedCar] = useState(null);
+    const menu = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewCar(selectedCar)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteCar(selectedCar)}
+    ];
+
+    const carservice = new CarService();
+    let growl = useRef(null);
+    let cm = useRef(null);
+
+    useEffect(() => {
+        carservice.getCarsSmall().then(data => setCars(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const viewCar = (car) => {
+        growl.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+    };
+
+    const deleteCar = (car) => {
+        let carsList = [...cars];
+        carsList = carsList.filter((c) => c.vin !== car.vin);
+
+        growl.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
+        setCars(carsList);
+    };
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedCar(null)}/>
+
+            <DataTable value={cars} header="Right Click"
+                contextMenuSelection={selectedCar} onContextMenuSelectionChange={e => setSelectedCar(e.value)}
+                onContextMenu={e => cm.current.show(e.originalEvent)}>
+                <Column field="vin" header="Vin" />
+                <Column field="year" header="Year" />
+                <Column field="brand" header="Brand" />
+                <Column field="color" header="Color" />
+            </DataTable>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {ContextMenu} from 'primereact/contextmenu';
+import {Growl} from 'primereact/growl';
+import {CarService} from '../service/CarService';
+
+const DataTableContextMenuDemo = () => {
+    const [cars, setCars] = useState([]);
+    const [selectedCar, setSelectedCar] = useState(null);
+    const menu = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewCar(selectedCar)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteCar(selectedCar)}
+    ];
+
+    const carservice = new CarService();
+    let growl = useRef<any>(null);
+    let cm = useRef<any>(null);
+
+    useEffect(() => {
+        carservice.getCarsSmall().then(data => setCars(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const viewCar = (car: any) => {
+        growl.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+    };
+
+    const deleteCar = (car: any) => {
+        let carsList: any = [...cars];
+        carsList = carsList.filter((c) => c.vin !== car.vin);
+
+        growl.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
+        setCars(carsList);
+    };
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedCar(null)}/>
+
+            <DataTable value={cars} header="Right Click"
+                contextMenuSelection={selectedCar} onContextMenuSelectionChange={e => setSelectedCar(e.value)}
+                onContextMenu={e => cm.current.show(e.originalEvent)}>
+                <Column field="vin" header="Vin" />
+                <Column field="year" header="Year" />
+                <Column field="brand" header="Brand" />
+                <Column field="color" header="Color" />
+            </DataTable>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/datatable" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="DataTableContextMenuDemo" sources={this.sources} service="CarService" data="cars-small" />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
+        return (
+            <div className="content-section documentation">
+                <TabView>
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
+
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         )
