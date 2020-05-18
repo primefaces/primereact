@@ -4,6 +4,7 @@ import {Paginator} from '../../components/paginator/Paginator';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class PaginatorDemo extends Component {
 
@@ -65,11 +66,149 @@ export class PaginatorDemo extends Component {
 
 export class PaginatorDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {Paginator} from 'primereact/paginator';
+
+export class PaginatorDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            first: 0,
+            rows: 10,
+            first2: 0,
+            rows2: 10
+        };
+
+        this.onPageChange = this.onPageChange.bind(this);
+        this.onPageChange2 = this.onPageChange2.bind(this);
+    }
+
+    onPageChange(event) {
+        this.setState({
+            first: event.first,
+            rows: event.rows
+        });
+    }
+
+    onPageChange2(event) {
+        this.setState({
+            first2: event.first,
+            rows2: event.rows
+        });
     }
 
     render() {
+        return (
+            <div>
+                <h3>Default</h3>
+                <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
+
+                <h3>Custom Template</h3>
+                <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
+                    template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState } from 'react';
+import {Paginator} from 'primereact/paginator';
+
+const PaginatorDemo = () => {
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
+    const [first2, setFirst2] = useState(0);
+    const [rows2, setRows2] = useState(10);
+
+    const onPageChange = (event) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    const onPageChange2 = (event) => {
+        setFirst2(event.first);
+        setRows2(event.rows);
+    };
+
+    return (
+        <div>
+            <h3>Default</h3>
+            <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
+
+            <h3>Custom Template</h3>
+            <Paginator first={first2} rows={rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange2}
+                template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState } from 'react';
+import {Paginator} from 'primereact/paginator';
+
+const PaginatorDemo = () => {
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
+    const [first2, setFirst2] = useState(0);
+    const [rows2, setRows2] = useState(10);
+
+    const onPageChange = (event: { first: number, rows: number }) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    const onPageChange2 = (event: { first: number, rows: number }) => {
+        setFirst2(event.first);
+        setRows2(event.rows);
+    };
+
+    return (
+        <div>
+            <h3>Default</h3>
+            <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
+
+            <h3>Custom Template</h3>
+            <Paginator first={first2} rows={rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange2}
+                template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/paginator" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="PaginatorDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -300,70 +439,20 @@ import {Paginator} from 'primereact/paginator';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/paginator" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Paginator} from 'primereact/paginator';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class PaginatorDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            first: 0,
-            rows: 10,
-            first2: 0,
-            rows2: 10
-        };
-
-        this.onPageChange = this.onPageChange.bind(this);
-        this.onPageChange2 = this.onPageChange2.bind(this);
-    }
-
-    onPageChange(event) {
-        this.setState({
-            first: event.first,
-            rows: event.rows
-        });
-    }
-
-    onPageChange2(event) {
-        this.setState({
-            first2: event.first,
-            rows2: event.rows
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Paginator</h1>
-                        <p>Paginator is a generic widget to display content in paged format.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Default</h3>
-                    <Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange}></Paginator>
-
-                    <h3>Custom Template</h3>
-                    <Paginator first={this.state.first2} rows={this.state.rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={this.onPageChange2}
-                        template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

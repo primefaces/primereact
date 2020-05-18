@@ -4,6 +4,7 @@ import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class MultiSelectDemo extends Component {
 
@@ -88,11 +89,228 @@ export class MultiSelectDemo extends Component {
 
 export class MultiSelectDoc extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {MultiSelect} from 'primereact/multiselect';
+
+export class MultiSelectDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            cars1: [],
+            cars2: []
+        };
+        this.carTemplate = this.carTemplate.bind(this);
+        this.selectedCarTemplate = this.selectedCarTemplate.bind(this);
+    }
+
+    carTemplate(option) {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{width:'24px', verticalAlign:'middle'}} />
+                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            </div>
+        );
+    }
+
+    selectedCarTemplate(value) {
+        if (value) {
+            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+
+            return (
+                <div className="my-multiselected-item-token">
+                    <img alt={value} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
+                    <span>{value}</span>
+                </div>
+            );
+        }
+        else {
+            return <span className="my-multiselected-empty-token">Choose</span>
+        }
+    }
+
+    render() {
+        const cars = [
+            {label: 'Audi', value: 'Audi'},
+            {label: 'BMW', value: 'BMW'},
+            {label: 'Fiat', value: 'Fiat'},
+            {label: 'Honda', value: 'Honda'},
+            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Mercedes', value: 'Mercedes'},
+            {label: 'Renault', value: 'Renault'},
+            {label: 'VW', value: 'VW'},
+            {label: 'Volvo', value: 'Volvo'}
+        ];
+
+        return (
+            <div>
+                <h3>Basic</h3>
+                <MultiSelect value={this.state.cars1} options={cars} onChange={(e) => this.setState({cars1: e.value})}
+                        style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
+
+                <h3>Templating</h3>
+                <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
+                                style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState } from 'react';
+import {MultiSelect} from 'primereact/multiselect';
+
+const MultiSelectDemo = () => {
+    const [cars1, setCars1] = useState([]);
+    const [cars2, setCars2] = useState([]);
+
+    const carTemplate = (option) => {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{width:'24px', verticalAlign:'middle'}} />
+                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            </div>
+        );
+    }
+
+    const selectedCarTemplate = (value) => {
+        if (value) {
+            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+
+            return (
+                <div className="my-multiselected-item-token">
+                    <img alt={value} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
+                    <span>{value}</span>
+                </div>
+            );
+        }
+        else {
+            return <span className="my-multiselected-empty-token">Choose</span>
+        }
+    }
+
+    const cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
+    return (
+        <div>
+            <h3>Basic</h3>
+            <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
+                    style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
+
+            <h3>Templating</h3>
+            <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
+                            style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState } from 'react';
+import {MultiSelect} from 'primereact/multiselect';
+
+const MultiSelectDemo = () => {
+    const [cars1, setCars1] = useState([]);
+    const [cars2, setCars2] = useState([]);
+
+    const carTemplate = (option: { label: string }) => {
+        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img alt={option.label} src={logoPath} style={{width:'24px', verticalAlign:'middle'}} />
+                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            </div>
+        );
+    }
+
+    const selectedCarTemplate = (value: string) => {
+        if (value) {
+            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+
+            return (
+                <div className="my-multiselected-item-token">
+                    <img alt={value} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
+                    <span>{value}</span>
+                </div>
+            );
+        }
+        else {
+            return <span className="my-multiselected-empty-token">Choose</span>
+        }
+    }
+
+    const cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
+    return (
+        <div>
+            <h3>Basic</h3>
+            <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
+                    style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
+
+            <h3>Templating</h3>
+            <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
+                            style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
     shouldComponentUpdate(){
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/multiselect" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="MultiSelectDemo" sources={this.sources} service="NodeService" data="treenodes" />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -557,93 +775,20 @@ selectedCarTemplate(option) {
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/multiselect" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {MultiSelect} from 'primereact/multiselect';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class MultiSelectDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            cars1: [],
-            cars2: []
-        };
-        this.carTemplate = this.carTemplate.bind(this);
-        this.selectedCarTemplate = this.selectedCarTemplate.bind(this);
-    }
-
-    carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
-
-        return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} style={{width:'24px', verticalAlign:'middle'}} />
-                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
-            </div>
-        );
-    }
-
-    selectedCarTemplate(value) {
-        if (value) {
-            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
-
-            return (
-                <div className="my-multiselected-item-token">
-                    <img alt={value} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
-                    <span>{value}</span>
-                </div>
-            );
-        }
-        else {
-            return <span className="my-multiselected-empty-token">Choose</span>
-        }
-    }
-
-    render() {
-        const cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>MultiSelect</h1>
-                        <p>MultiSelect is used to select multiple items from a collection.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation multiselect-demo">
-                    <h3>Basic</h3>
-                    <MultiSelect value={this.state.cars1} options={cars} onChange={(e) => this.setState({cars1: e.value})}
-                            style={{minWidth:'12em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
-
-                    <h3>Templating</h3>
-                    <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
-                                 style={{minWidth:'12em'}} filter={true} filterPlaceholder="Search" itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );
