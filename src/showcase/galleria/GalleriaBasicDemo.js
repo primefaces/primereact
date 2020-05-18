@@ -149,13 +149,13 @@ export class GalleriaBasicDemo extends Component {
     itemTemplate(item) {
         return (
             <div className="p-grid p-nogutter p-justify-center">
-                <img src={\`\${item.thumbnailImageSrc}\`} alt={item.alt} />
+                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} />
             </div>
         );
     }
 
     previewTemplate(item) {
-        return <img src={\`\${item.previewImageSrc}\`} alt={item.alt} style={{ width: '100%' }} />
+        return <img src={\`\${item.previewImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%' }} />
     }
 
     render() {
