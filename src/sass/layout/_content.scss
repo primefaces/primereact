@@ -194,25 +194,48 @@
                     font-weight: bold;
                 }
 
-                .btn-viewsource {
-                    background-color: #444;
-                    padding: .5em;
+                @mixin source-button {
+                    padding: .572em;
+                    margin: 0 .5em;
+                    border: 1px solid #c8c8c8;
                     border-radius: 2px;
-                    color: #fff;
+                    cursor: pointer;
+                    color: #333333;
                     font-weight: 700;
-                    margin: .5em 0;
-                    display: inline-block;
+                    font-size: 14px;
+                    display: inline-flex;
+                    align-items: center;
+                    background-color: #ffffff;
+                    user-select: none;
                     @include transition(background-color .2s);
 
                     &:hover {
-                        background-color: #595959;
+                        background-color: rgba(255, 255, 255, 0.4);
                     }
 
-                    i {
+                    svg {
                         margin-right: .25em;
-                        background-color: transparent;
-                        font-family: 'FontAwesome';
+                        width: 15px;
+                        height: 15px;
                     }
+                }
+
+                .source-button-group {
+                    display: flex;
+                    align-items: center;
+                    margin: 1em 0;
+
+                    > form {
+                        .live-editor-button {
+                            @include source-button;
+                        }
+                    }
+                }
+
+                .btn-viewsource {
+                    @include source-button;
+                    padding: .5em;
+                    margin-left: 0;
                 }
 
                 i:not([class~="pi"]) {
@@ -245,6 +268,10 @@
                                 padding-top: 8px;
                                 @include border-radius-top(3px);
                                 @include transition(background-color .2s);
+
+                                .p-tabview-title {
+                                    text-transform: capitalize;
+                                }
                             }
 
                             &.tab-doc {
