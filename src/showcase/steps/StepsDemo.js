@@ -6,6 +6,7 @@ import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
 import {Growl} from "../../components/growl/Growl";
 import "./StepsDemo.css"
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class StepsDemo extends Component {
 
@@ -79,11 +80,201 @@ export class StepsDemo extends Component {
 
 class StepsDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Steps} from 'primereact/steps';
+import {Growl} from "primereact/growl";
+
+export class StepsDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeIndex: 1
+        };
+
+        this.items = [
+            {
+                label: 'Personal',
+                command: (event) => {
+                    this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
+                }
+            },
+            {
+                label: 'Seat',
+                command: (event) => {
+                    this.growl.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                }
+            },
+            {
+                label: 'Payment',
+                command: (event) => {
+                    this.growl.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                }
+            },
+            {
+                label: 'Confirmation',
+                command: (event) => {
+                    this.growl.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                }
+            }
+        ];
     }
 
     render() {
+        return (
+            <div>
+                <Growl ref={(el) => {this.growl = el}}></Growl>
+
+                <h3>Basic</h3>
+                <Steps model={this.items} />
+
+                <h3>Interactive</h3>
+                <Steps model={this.items} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
+
+                <h3>Custom Style</h3>
+                <Steps model={this.items} className="steps-custom" />
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useRef } from 'react';
+import {Steps} from 'primereact/steps';
+import {Growl} from "primereact/growl";
+
+const StepsDemo = () => {
+    const [activeIndex, setActiveIndex] = useState(1);
+    let growl = useRef(null);
+
+    const items = [
+        {
+            label: 'Personal',
+            command: (event) => {
+                growl.current.show({severity:'info', summary:'First Step', detail: event.item.label});
+            }
+        },
+        {
+            label: 'Seat',
+            command: (event) => {
+                growl.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+            }
+        },
+        {
+            label: 'Payment',
+            command: (event) => {
+                growl.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+            }
+        },
+        {
+            label: 'Confirmation',
+            command: (event) => {
+                growl.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
+            }
+        }
+    ];
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <h3>Basic</h3>
+            <Steps model={items} />
+
+            <h3>Interactive</h3>
+            <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
+
+            <h3>Custom Style</h3>
+            <Steps model={items} className="steps-custom" />
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useRef } from 'react';
+import {Steps} from 'primereact/steps';
+import {Growl} from "primereact/growl";
+
+const StepsDemo = () => {
+    const [activeIndex, setActiveIndex] = useState(1);
+    let growl = useRef<any>(null);
+
+    const items = [
+        {
+            label: 'Personal',
+            command: (event: any) => {
+                growl.current.show({severity:'info', summary:'First Step', detail: event.item.label});
+            }
+        },
+        {
+            label: 'Seat',
+            command: (event: any) => {
+                growl.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+            }
+        },
+        {
+            label: 'Payment',
+            command: (event: any) => {
+                growl.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+            }
+        },
+        {
+            label: 'Confirmation',
+            command: (event: any) => {
+                growl.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
+            }
+        }
+    ];
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <h3>Basic</h3>
+            <Steps model={items} />
+
+            <h3>Interactive</h3>
+            <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
+
+            <h3>Custom Style</h3>
+            <Steps model={items} className="steps-custom" />
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/steps" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="StepsDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView effect="fade">
@@ -270,114 +461,20 @@ const interactiveItems = [{
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/steps" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <span>View on GitHub</span>
-                        </a>
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-                        <p>StepsDemo.css</p>
-                        <CodeHighlight className="language-javascript">
-                            {`
-.ui-steps.steps-custom {
-    margin-bottom: 30px;
-}
-
-.ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
-    height: 10px;
-    padding: 0 1em;
-    overflow: visible;
-}
-
-.ui-steps.steps-custom .ui-steps-item .ui-steps-number {
-    background-color: #0081c2;
-    color: #FFFFFF;
-    display: inline-block;
-    width: 36px;
-    border-radius: 50%;
-    margin-top: -14px;
-    margin-bottom: 10px;
-}
-
-.ui-steps.steps-custom .ui-steps-item .ui-steps-title {
-    color: #555555;
-}
-                        `}
-                        </CodeHighlight>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import React, {Component} from 'react';
-import {Steps} from 'primereact/steps';
-import {Growl} from "primereact/growl";
-import "./StepsDemo.css"
-
-export class StepsDemo extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeIndex: 1
-        };
-
-        this.items = [
-            {
-                label: 'Personal',
-                command: (event) => {
-                    this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
-                }
-            },
-            {
-                label: 'Seat',
-                command: (event) => {
-                    this.growl.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
-                }
-            },
-            {
-                label: 'Payment',
-                command: (event) => {
-                    this.growl.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
-                }
-            },
-            {
-                label: 'Confirmation',
-                command: (event) => {
-                    this.growl.show({severity:'info', summary:'Last Step', detail: event.item.label});
-                }
-            }
-        ];
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Steps</h1>
-                        <p>Steps component is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Growl ref={(el) => {this.growl = el}}></Growl>
-
-                    <h3>Basic</h3>
-                    <Steps model={items} />
-
-                    <h3>Clickable</h3>
-                    <Steps model={items} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
-
-                    <h3>Custom Style</h3>
-                    <Steps model={items} className="steps-custom" />
-                </div>
-
-                <StepsDoc/>
-
-            </div>
-        );
-    }
-}
-                        `}
-                        </CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         )
