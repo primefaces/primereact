@@ -5,6 +5,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class SliderDemo extends Component {
 
@@ -29,7 +30,7 @@ export class SliderDemo extends Component {
     }
 
     onChangeSlider2(e) {
-        var newValue;
+        let newValue;
         if (e.target && e.target.nodeName === "INPUT") {
             newValue = e.target.value;
         }
@@ -92,11 +93,235 @@ export class SliderDemo extends Component {
 
 class SliderDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import { Slider } from 'primereact/slider';
+import { InputText } from 'primereact/inputtext';
+
+export class SliderDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            val1: null,
+            val2: 50,
+            val3: null,
+            val4: null,
+            rangeValues: [20, 80]
+        };
+        this.onChangeSlider1 = this.onChangeSlider1.bind(this);
+        this.onChangeSlider2 = this.onChangeSlider2.bind(this);
+        this.onChangeSlider3 = this.onChangeSlider3.bind(this);
+        this.onChangeSlider4 = this.onChangeSlider4.bind(this);
+        this.onChangeRangeSlider = this.onChangeRangeSlider.bind(this);
+    }
+
+    onChangeSlider1(e) {
+        this.setState({ val1: e.value });
+    }
+
+    onChangeSlider2(e) {
+        let newValue;
+        if (e.target && e.target.nodeName === "INPUT") {
+            newValue = e.target.value;
+        }
+        else {
+            newValue = e.value;
+        }
+
+        this.setState({ val2: newValue });
+    }
+
+    onChangeSlider3(e) {
+        this.setState({ val3: e.value });
+    }
+
+    onChangeSlider4(e) {
+        this.setState({ val4: e.value });
+    }
+
+    onChangeRangeSlider(e) {
+        this.setState({ rangeValues: e.value });
     }
 
     render() {
+        return (
+            <div>
+                <h3>Basic: {this.state.val1}</h3>
+                <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}}  />
+
+                <h3>Input: {this.state.val2}</h3>
+                <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
+                <Slider value={this.state.val2} onChange={this.onChangeSlider2} style={{width: '14em'}} />
+
+                <h3>Step: {this.state.val3}</h3>
+                <Slider value={this.state.val3} onChange={this.onChangeSlider3} step={20} style={{width: '14em'}} />
+
+                <h3>Range: {this.state.rangeValues[0]},{this.state.rangeValues[1]}</h3>
+                <Slider value={this.state.rangeValues} onChange={this.onChangeRangeSlider} range={true} style={{width: '14em'}} />
+
+                <h3>Vertical: {this.state.val4}</h3>
+                <Slider value={this.state.val4} onChange={this.onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState } from 'react';
+import { Slider } from 'primereact/slider';
+import { InputText } from 'primereact/inputtext';
+
+const SliderDemo = () => {
+    const [val1, setVal1] = useState(null);
+    const [val2, setVal2] = useState(50);
+    const [val3, setVal3] = useState(null);
+    const [val4, setVal4] = useState(null);
+    const [rangeValues, setRangeValues] = useState([20, 80]);
+
+    const onChangeSlider1 = (e) => {
+        setVal1(e.value);
+    };
+
+    const onChangeSlider2 = (e) => {
+        let newValue;
+        if (e.target && e.target.nodeName === "INPUT") {
+            newValue = e.target.value;
+        }
+        else {
+            newValue = e.value;
+        }
+
+        setVal2(newValue);
+    };
+
+    const onChangeSlider3 = (e) => {
+        setVal3(e.value);
+    };
+
+    const onChangeSlider4 = (e) => {
+        setVal4(e.value);
+    };
+
+    const onChangeRangeSlider = (e) => {
+        setRangeValues(e.value);
+    };
+
+    return (
+        <div>
+            <h3>Basic: {val1}</h3>
+            <Slider value={val1} onChange={onChangeSlider1} style={{width: '14em'}}  />
+
+            <h3>Input: {val2}</h3>
+            <InputText value={val2} style={{width: '14em'}} type="number" onChange={onChangeSlider2} />
+            <Slider value={val2} onChange={onChangeSlider2} style={{width: '14em'}} />
+
+            <h3>Step: {val3}</h3>
+            <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
+
+            <h3>Range: {rangeValues[0]},{rangeValues[1]}</h3>
+            <Slider value={rangeValues} onChange={onChangeRangeSlider} range={true} style={{width: '14em'}} />
+
+            <h3>Vertical: {val4}</h3>
+            <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState } from 'react';
+import { Slider } from 'primereact/slider';
+import { InputText } from 'primereact/inputtext';
+
+const SliderDemo = () => {
+    const [val1, setVal1] = useState<number|undefined>(undefined);
+    const [val2, setVal2] = useState<number|undefined>(50);
+    const [val3, setVal3] = useState<number|undefined>(undefined);
+    const [val4, setVal4] = useState<number|undefined>(undefined);
+    const [rangeValues, setRangeValues] = useState<[number, number]>([20, 80]);
+
+    const onChangeSlider1 = (e: { value: any }) => {
+        setVal1(e.value);
+    };
+
+    const onChangeSlider2 = (e: any) => {
+        let newValue;
+        const target = ((e as React.FormEvent).target as HTMLInputElement);
+        if (target && target.nodeName === "INPUT") {
+            newValue = target.value;
+        }
+        else {
+            newValue = e.value;
+        }
+
+        setVal2(newValue);
+    };
+
+    const onChangeSlider3 = (e: { value: any }) => {
+        setVal3(e.value);
+    };
+
+    const onChangeSlider4 = (e: { value: any }) => {
+        setVal4(e.value);
+    };
+
+    const onChangeRangeSlider = (e: { value: any }) => {
+        setRangeValues(e.value);
+    };
+
+    return (
+        <div>
+            <h3>Basic: {val1}</h3>
+            <Slider value={val1} onChange={onChangeSlider1} style={{width: '14em'}}  />
+
+            <h3>Input: {val2}</h3>
+            <InputText value={val2} style={{width: '14em'}} type="number" onChange={onChangeSlider2} />
+            <Slider value={val2} onChange={onChangeSlider2} style={{width: '14em'}} />
+
+            <h3>Step: {val3}</h3>
+            <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
+
+            <h3>Range: {rangeValues[0]},{rangeValues[1]}</h3>
+            <Slider value={rangeValues} onChange={onChangeRangeSlider} range={true} style={{width: '14em'}} />
+
+            <h3>Vertical: {val4}</h3>
+            <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/slider" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="SliderDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
     <TabView effect="fade">
@@ -287,97 +512,20 @@ import {Slider} from 'primereact/slider';
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/slider" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                <span>View on GitHub</span>
-            </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Slider} from 'primereact/slider';
-import {InputText} from 'primereact/inputtext';
+        {
+            this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                const header = key === 'app' ? 'Source' : `${key} Source`;
+                return (
+                    <TabPanel key={`source_${index}`} header={header}>
+                        {sourceButtons}
 
-export class SliderDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            val1: null,
-            val2: 50,
-            val3: null,
-            val4: null,
-            rangeValues: [20, 80]
-        };
-        this.onChangeSlider1 = this.onChangeSlider1.bind(this);
-        this.onChangeSlider2 = this.onChangeSlider2.bind(this);
-        this.onChangeSlider3 = this.onChangeSlider3.bind(this);
-        this.onChangeSlider4 = this.onChangeSlider4.bind(this);
-        this.onChangeRangeSlider = this.onChangeRangeSlider.bind(this);
-    }
-
-    onChangeSlider1(e) {
-        this.setState({ val1: e.value });
-    }
-
-    onChangeSlider2(e) {
-        var newValue;
-        if (e.target && e.target.nodeName === "INPUT") {
-            newValue = e.target.value;
+                        <CodeHighlight className="language-javascript">
+                            {value.content}
+                        </CodeHighlight>
+                    </TabPanel>
+                );
+            })
         }
-        else {
-            newValue = e.value;
-        }
-
-        this.setState({ val2: newValue });
-    }
-
-    onChangeSlider3(e) {
-        this.setState({ val3: e.value });
-    }
-
-    onChangeSlider4(e) {
-        this.setState({ val4: e.value });
-    }
-
-    onChangeRangeSlider(e) {
-        this.setState({ rangeValues: e.value });
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Slider</h1>
-                        <p>Slider is a component to provide input using dragging of a handle.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Basic: {this.state.val1}</h3>
-                    <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}}  />
-
-                    <h3>Input: {this.state.val2}</h3>
-                    <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
-                    <Slider value={this.state.val2} onChange={this.onChangeSlider2} style={{width: '14em'}} />
-
-                    <h3>Step: {this.state.val3}</h3>
-                    <Slider value={this.state.val3} onChange={this.onChangeSlider3} step={20} style={{width: '14em'}} />
-
-                    <h3>Range: {this.state.rangeValues[0]},{this.state.rangeValues[1]}</h3>
-                    <Slider value={this.state.rangeValues} onChange={this.onChangeRangeSlider} range={true} style={{width: '14em'}} />
-
-                    <h3>Vertical: {this.state.val4}</h3>
-                    <Slider value={this.state.val4} onChange={this.onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-        </TabPanel>
     </TabView>
 </div>
         );
