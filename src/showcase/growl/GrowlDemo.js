@@ -5,6 +5,7 @@ import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class GrowlDemo extends Component {
 
@@ -117,11 +118,309 @@ export class GrowlDemo extends Component {
 
 export class GrowlDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Growl} from 'primereact/growl';
+import {Button} from 'primereact/button';
+
+export class GrowlDemo extends Component {
+
+    constructor() {
+        super();
+        this.showSuccess = this.showSuccess.bind(this);
+        this.showInfo = this.showInfo.bind(this);
+        this.showWarn = this.showWarn.bind(this);
+        this.showError = this.showError.bind(this);
+        this.showMultiple = this.showMultiple.bind(this);
+        this.showSticky = this.showSticky.bind(this);
+        this.showCustom = this.showCustom.bind(this);
+        this.clear = this.clear.bind(this);
+    }
+
+    showSuccess() {
+        this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    }
+
+    showInfo() {
+        this.growl.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    }
+
+    showWarn() {
+        this.growl.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    }
+
+    showError() {
+        this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    }
+
+    showSticky() {
+        this.growl.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+    }
+
+    showCustom() {
+        const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+
+        this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
+    }
+
+    showMultiple() {
+        this.growl.show([
+            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
+            {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
+            {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
+        ]);
+    }
+
+    clear() {
+        this.growl.clear();
     }
 
     render() {
+        return (
+            <div className="p-fluid">
+                <Growl ref={(el) => this.growl = el} />
+
+                <h3 style={{marginTop: 0}}>Severities</h3>
+                <div className="p-grid">
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showInfo} label="Info" className="p-button-info" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Button onClick={this.showError} label="Error" className="p-button-danger" />
+                    </div>
+                </div>
+
+                <h3>Options</h3>
+                <div className="p-grid">
+                    <div className="p-col-12 p-md-4">
+                        <Button onClick={this.showMultiple} label="Multiple" className="p-button-warning" />
+                    </div>
+                    <div className="p-col-12 p-md-4">
+                        <Button onClick={this.showSticky} label="Sticky" />
+                    </div>
+                    <div className="p-col-12 p-md-4">
+                        <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
+                    </div>
+                </div>
+
+                <h3>Remove All</h3>
+                <Button onClick={this.clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useRef } from 'react';
+import {Growl} from 'primereact/growl';
+import {Button} from 'primereact/button';
+
+const GrowlDemo = () => {
+    let growl = useRef(null);
+
+    const showSuccess = () => {
+        growl.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    }
+
+    const showInfo = () => {
+        growl.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    }
+
+    const showWarn = () => {
+        growl.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    }
+
+    const showError = () => {
+        growl.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    }
+
+    const showSticky = () => {
+        growl.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+    }
+
+    const showCustom = () => {
+        const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+
+        growl.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
+    }
+
+    const showMultiple = () => {
+        growl.current.show([
+            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
+            {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
+            {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
+        ]);
+    }
+
+    const clear = () => {
+        growl.current.clear();
+    }
+
+    return (
+        <div className="p-fluid">
+            <Growl ref={growl} />
+
+            <h3 style={{marginTop: 0}}>Severities</h3>
+            <div className="p-grid">
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showSuccess} label="Success" className="p-button-success" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showInfo} label="Info" className="p-button-info" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showWarn} label="Warn" className="p-button-warning" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showError} label="Error" className="p-button-danger" />
+                </div>
+            </div>
+
+            <h3>Options</h3>
+            <div className="p-grid">
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showSticky} label="Sticky" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showCustom} label="Custom" className="p-button-success" />
+                </div>
+            </div>
+
+            <h3>Remove All</h3>
+            <Button onClick={clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useRef } from 'react';
+import {Growl} from 'primereact/growl';
+import {Button} from 'primereact/button';
+
+const GrowlDemo = () => {
+    let growl = useRef<any>(null);
+
+    const showSuccess = () => {
+        growl.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    }
+
+    const showInfo = () => {
+        growl.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    }
+
+    const showWarn = () => {
+        growl.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    }
+
+    const showError = () => {
+        growl.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    }
+
+    const showSticky = () => {
+        growl.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+    }
+
+    const showCustom = () => {
+        const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+
+        growl.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
+    }
+
+    const showMultiple = () => {
+        growl.current.show([
+            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
+            {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
+            {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
+        ]);
+    }
+
+    const clear = () => {
+        growl.current.clear();
+    }
+
+    return (
+        <div className="p-fluid">
+            <Growl ref={growl} />
+
+            <h3 style={{marginTop: 0}}>Severities</h3>
+            <div className="p-grid">
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showSuccess} label="Success" className="p-button-success" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showInfo} label="Info" className="p-button-info" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showWarn} label="Warn" className="p-button-warning" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <Button onClick={showError} label="Error" className="p-button-danger" />
+                </div>
+            </div>
+
+            <h3>Options</h3>
+            <div className="p-grid">
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showSticky} label="Sticky" />
+                </div>
+                <div className="p-col-12 p-md-4">
+                    <Button onClick={showCustom} label="Custom" className="p-button-success" />
+                </div>
+            </div>
+
+            <h3>Remove All</h3>
+            <Button onClick={clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/growl" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="GrowlDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -429,122 +728,20 @@ this.growl.clear();
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/growl" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Growl} from 'primereact/growl';
-import {Button} from 'primereact/button';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class GrowlDemo extends Component {
-
-    constructor() {
-        super();
-        this.showSuccess = this.showSuccess.bind(this);
-        this.showInfo = this.showInfo.bind(this);
-        this.showWarn = this.showWarn.bind(this);
-        this.showError = this.showError.bind(this);
-        this.showMultiple = this.showMultiple.bind(this);
-        this.showSticky = this.showSticky.bind(this);
-        this.showCustom = this.showCustom.bind(this);
-        this.clear = this.clear.bind(this);
-    }
-
-    showSuccess() {
-        this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
-    }
-
-    showInfo() {
-        this.growl.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
-    }
-
-    showWarn() {
-        this.growl.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-    }
-
-    showError() {
-        this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
-    }
-
-    showSticky() {
-        this.growl.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
-    }
-
-    showCustom() {
-        const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
-
-        this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
-    }
-
-    showMultiple() {
-        this.growl.show([
-            {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
-            {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
-            {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
-        ]);
-    }
-
-    clear() {
-        this.growl.clear();
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction growl-demo">
-                    <div className="feature-intro">
-                        <h1>Growl</h1>
-                        <p>Growl is used to display messages in an overlay.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation p-fluid">
-                    <Growl ref={(el) => this.growl = el} />
-
-                    <h3>Severities</h3>
-                    <div className="p-grid">
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showInfo} label="Info" className="p-button-info" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <Button onClick={this.showError} label="Error" className="p-button-danger" />
-                        </div>
-                    </div>
-
-                    <h3>Options</h3>
-                    <div className="p-grid">
-                        <div className="p-col-12 p-md-4">
-                            <Button onClick={this.showMultiple} label="Multiple" className="p-button-warning" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <Button onClick={this.showSticky} label="Sticky" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <Button onClick={this.showCustom} label="Custom" className="p-button-success" />
-                        </div>
-                    </div>
-
-                    <h3>Remove All</h3>
-                    <Button onClick={this.clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

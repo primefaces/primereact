@@ -5,6 +5,7 @@ import {FileUpload} from '../../components/fileupload/FileUpload';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class FileUploadDemo extends Component {
 
@@ -64,11 +65,166 @@ export class FileUploadDemo extends Component {
 
 export class FileUploadDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Growl} from 'primereact/growl';
+import {FileUpload} from 'primereact/fileupload';
+
+export class FileUploadDemo extends Component {
+
+    constructor() {
+        super();
+
+        this.onUpload = this.onUpload.bind(this);
+        this.onBasicUpload = this.onBasicUpload.bind(this);
+        this.onBasicUploadAuto = this.onBasicUploadAuto.bind(this);
+    }
+
+    onUpload(event) {
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+    }
+
+    onBasicUpload(event) {
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+    }
+
+    onBasicUploadAuto(event) {
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     render() {
+        return (
+            <div>
+                <h3>Advanced</h3>
+                <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
+                            multiple={true} accept="image/*" maxFileSize={1000000} />
+
+                <h3>Basic</h3>
+                <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
+
+                <h3>Basic with Auto</h3>
+                <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+
+                <Growl ref={(el) => { this.growl = el; }}></Growl>
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useRef } from 'react';
+import {Growl} from 'primereact/growl';
+import {FileUpload} from 'primereact/fileupload';
+
+const FileUploadDemo = () => {
+    let growl = useRef(null);
+
+    const onUpload = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+    }
+
+    const onBasicUpload = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+    }
+
+    const onBasicUploadAuto = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
+    }
+
+    return (
+        <div>
+            <h3>Advanced</h3>
+            <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload}
+                        multiple={true} accept="image/*" maxFileSize={1000000} />
+
+            <h3>Basic</h3>
+            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+
+            <h3>Basic with Auto</h3>
+            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+
+            <Growl ref={growl}></Growl>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useRef } from 'react';
+import {Growl} from 'primereact/growl';
+import {FileUpload} from 'primereact/fileupload';
+
+const FileUploadDemo = () => {
+    let growl = useRef<any>(null);
+
+    const onUpload = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+    }
+
+    const onBasicUpload = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+    }
+
+    const onBasicUploadAuto = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
+    }
+
+    return (
+        <div>
+            <h3>Advanced</h3>
+            <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload}
+                        multiple={true} accept="image/*" maxFileSize={1000000} />
+
+            <h3>Basic</h3>
+            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+
+            <h3>Basic with Auto</h3>
+            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+
+            <Growl ref={growl}></Growl>
+        </div>
+    )
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'public/upload.php': {
+                content: `
+<?php echo '<p>Fake Upload Process</p>'; ?>
+                `
+            }
+        };
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/fileupload" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="FileUploadDemo" sources={this.sources} extFiles={this.extFiles}/>
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -433,69 +589,20 @@ myUploader(event) {
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                 <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/fileupload" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                     <span>View on GitHub</span>
-                 </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Growl} from 'primereact/growl';
-import {FileUpload} from 'primereact/fileupload';;
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class FileUploadDemo extends Component {
-
-    constructor() {
-        super();
-
-        this.onUpload = this.onUpload.bind(this);
-        this.onBasicUpload = this.onBasicUpload.bind(this);
-        this.onBasicUploadAuto = this.onBasicUploadAuto.bind(this);
-    }
-
-    onUpload(event) {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
-    }
-
-    onBasicUpload(event) {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
-    }
-
-    onBasicUploadAuto(event) {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>FileUpload</h1>
-                        <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Advanced</h3>
-                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
-                                multiple={true} accept="image/*" maxFileSize={1000000} />
-
-                    <h3>Basic</h3>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
-
-                    <h3>Basic with Auto</h3>
-                    <FileUpload mode="basic" name="demo[]" uurl="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
-
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );
