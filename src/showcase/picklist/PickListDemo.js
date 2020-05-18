@@ -5,6 +5,7 @@ import {CarService} from '../service/CarService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class PickListDemo extends Component {
 
@@ -31,7 +32,7 @@ export class PickListDemo extends Component {
     }
 
     carTemplate(car) {
-        var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -70,11 +71,170 @@ export class PickListDemo extends Component {
 
 export class PickListDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {PickList} from 'primereact/picklist';
+import {CarService} from '../service/CarService';
+
+export class PickListDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            source: [],
+            target: []
+        };
+        this.carservice = new CarService();
+        this.carTemplate = this.carTemplate.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsSmall().then(data => this.setState({source: data}));
+    }
+
+    onChange(event) {
+        this.setState({
+            source: event.source,
+            target: event.target
+        });
+    }
+
+    carTemplate(car) {
+        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img src={imageSource} alt={car.brand} style={{display: 'inline-block', margin: '2px 0 2px 2px',width:48}} />
+                <div style={{fontSize: '14px', float: 'right', margin: '15px 5px 0 0'}}>{car.brand} - {car.year} - {car.color}</div>
+            </div>
+        );
     }
 
     render() {
+        return (
+            <div>
+                <PickList source={this.state.source} target={this.state.target} itemTemplate={this.carTemplate}
+                    sourceHeader="Available" targetHeader="Selected" responsive={true}
+                    sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
+                    onChange={this.onChange}></PickList>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import {PickList} from 'primereact/picklist';
+import {CarService} from '../service/CarService';
+
+const PickListDemo = () => {
+    const [source, setSource] = useState([]);
+    const [target, setTarget] = useState([]);
+    const carservice = new CarService();
+
+    useEffect(() => {
+        carservice.getCarsSmall().then(data => setSource(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onChange = (event) => {
+        setSource(event.source);
+        setTarget(event.target);
+    };
+
+    const carTemplate = (car) => {
+        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img src={imageSource} alt={car.brand} style={{display: 'inline-block', margin: '2px 0 2px 2px',width:48}} />
+                <div style={{fontSize: '14px', float: 'right', margin: '15px 5px 0 0'}}>{car.brand} - {car.year} - {car.color}</div>
+            </div>
+        );
+    };
+
+    return (
+        <div>
+            <PickList source={source} target={target} itemTemplate={carTemplate}
+                sourceHeader="Available" targetHeader="Selected" responsive={true}
+                sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
+                onChange={onChange}></PickList>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import {PickList} from 'primereact/picklist';
+import {CarService} from '../service/CarService';
+
+const PickListDemo = () => {
+    const [source, setSource] = useState([]);
+    const [target, setTarget] = useState([]);
+    const carservice = new CarService();
+
+    useEffect(() => {
+        carservice.getCarsSmall().then(data => setSource(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onChange = (event: any) => {
+        setSource(event.source);
+        setTarget(event.target);
+    };
+
+    const carTemplate = (car: any) => {
+        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+
+        return (
+            <div className="p-clearfix">
+                <img src={imageSource} alt={car.brand} style={{display: 'inline-block', margin: '2px 0 2px 2px',width:48}} />
+                <div style={{fontSize: '14px', float: 'right', margin: '15px 5px 0 0'}}>{car.brand} - {car.year} - {car.color}</div>
+            </div>
+        );
+    };
+
+    return (
+        <div>
+            <PickList source={source} target={target} itemTemplate={carTemplate}
+                sourceHeader="Available" targetHeader="Selected" responsive={true}
+                sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
+                onChange={onChange}></PickList>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/picklist" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="PickListDemo" sources={this.sources} service="CarService" data="cars-small" />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -331,75 +491,20 @@ import {PickList} from 'primereact/picklist';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/picklist" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {PickList} from 'primereact/picklist';
-import {CarService} from '../service/CarService';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class PickListDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            source: [],
-            target: []
-        };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
-        this.onChange = this.onChange.bind(this);
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({source: data}));
-    }
-
-    onChange(event) {
-        this.setState({
-            source: event.source,
-            target: event.target
-        });
-    }
-
-    carTemplate(car) {
-        var imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
-
-        return (
-            <div className="p-clearfix">
-                <img src={imageSource} alt={car.brand} style={{ display: 'inline-block', margin: '2px 0 2px 2px',width:48 }} />
-                <div style={{ fontSize: '14px', float: 'right', margin: '15px 5px 0 0' }}>{car.brand} - {car.year} - {car.color}</div>
-            </div>
-        );
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>PickList</h1>
-                        <p>PickList is used to reorder items between differents lists.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <PickList source={this.state.source} target={this.state.target} itemTemplate={this.carTemplate}
-                    sourceHeader="Available" targetHeader="Selected" responsive={true}
-                    sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
-                    onChange={this.onChange}></PickList>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

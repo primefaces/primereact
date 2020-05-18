@@ -5,15 +5,14 @@ import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class ProgressBarDemo extends Component {
 
     constructor() {
         super();
         this.state = {
-            value1: 0,
-            value2: 50,
-            value3: 40
+            value1: 0
         };
 
         this.displayValueTemplate = this.displayValueTemplate.bind(this);
@@ -72,10 +71,10 @@ export class ProgressBarDemo extends Component {
                     <ProgressBar value={this.state.value1}></ProgressBar>
 
                     <h3>Static</h3>
-                    <ProgressBar value={this.state.value2}></ProgressBar>
+                    <ProgressBar value={50}></ProgressBar>
 
                     <h3>Custom display value</h3>
-                    <ProgressBar value={this.state.value3} displayValueTemplate={this.displayValueTemplate}></ProgressBar>
+                    <ProgressBar value={40} displayValueTemplate={this.displayValueTemplate}></ProgressBar>
 
                     <h3>Indeterminate</h3>
                     <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
@@ -88,11 +87,219 @@ export class ProgressBarDemo extends Component {
 
 export class ProgressBarDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {ProgressBar} from 'primereact/progressbar';
+import {Growl} from 'primereact/growl';
+
+export class ProgressBarDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            value1: 0
+        };
+
+        this.displayValueTemplate = this.displayValueTemplate.bind(this);
+    }
+
+    displayValueTemplate(value) {
+        return (
+            <React.Fragment>
+                {value}/<b>100</b>
+            </React.Fragment>
+        );
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            let val = this.state.value1;
+            val += Math.floor(Math.random() * 10) + 1;
+
+            if(val >= 100) {
+                val = 100;
+                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+                clearInterval(this.interval);
+            }
+
+            this.setState({
+                value1: val
+            });
+        }, 2000);
+    }
+
+    componentWillUnmount () {
+        if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = null;
+        }
     }
 
     render() {
+        return (
+            <div>
+                <Growl ref={(el) => this.growl = el}></Growl>
+
+                <h3 className="first">Dynamic</h3>
+                <ProgressBar value={this.state.value1}></ProgressBar>
+
+                <h3>Static</h3>
+                <ProgressBar value={50}></ProgressBar>
+
+                <h3>Custom display value</h3>
+                <ProgressBar value={40} displayValueTemplate={this.displayValueTemplate}></ProgressBar>
+
+                <h3>Indeterminate</h3>
+                <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import {ProgressBar} from 'primereact/progressbar';
+import {Growl} from 'primereact/growl';
+
+const ProgressBarDemo = () => {
+    const [value1, setValue1] = useState(0);
+    let growl = useRef(null);
+    let interval = setInterval(() => {
+        let val = value1;
+        val += Math.floor(Math.random() * 10) + 1;
+
+        if(val >= 100) {
+            val = 100;
+            growl.current.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+            clearInterval(interval);
+        }
+
+        setValue1(val);
+    }, 2000);
+
+    const displayValueTemplate = (value) => {
+        return (
+            <React.Fragment>
+                {value}/<b>100</b>
+            </React.Fragment>
+        );
+    }
+
+    useEffect(() => {
+        return (() => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <h3 className="first">Dynamic</h3>
+            <ProgressBar value={value1}></ProgressBar>
+
+            <h3>Static</h3>
+            <ProgressBar value={50}></ProgressBar>
+
+            <h3>Custom display value</h3>
+            <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
+
+            <h3>Indeterminate</h3>
+            <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import {ProgressBar} from 'primereact/progressbar';
+import {Growl} from 'primereact/growl';
+
+const ProgressBarDemo = () => {
+    const [value1, setValue1] = useState(0);
+    let growl = useRef<any>(null);
+    let interval: any = setInterval(() => {
+        let val = value1;
+        val += Math.floor(Math.random() * 10) + 1;
+
+        if (val >= 100) {
+            val = 100;
+            growl.current.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+            clearInterval(interval);
+        }
+
+        setValue1(val);
+    }, 2000);
+
+    const displayValueTemplate = (value: number) => {
+        return (
+            <React.Fragment>
+                {value}/<b>100</b>
+            </React.Fragment>
+        );
+    }
+
+    useEffect(() => {
+        return (() => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <h3 className="first">Dynamic</h3>
+            <ProgressBar value={value1}></ProgressBar>
+
+            <h3>Static</h3>
+            <ProgressBar value={50}></ProgressBar>
+
+            <h3>Custom display value</h3>
+            <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
+
+            <h3>Indeterminate</h3>
+            <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/progressbar" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="ProgressBarDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -224,94 +431,20 @@ import {ProgressBar} from 'primereact/progressbar';
                         </div>
                 </TabPanel>
 
-                <TabPanel header="Source">
-                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/progressbar" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                        <span>View on GitHub</span>
-                    </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {ProgressBar} from 'primereact/progressbar';
-import {Growl} from 'primereact/growl';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class ProgressBarDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            value1: 0,
-            value2: 50,
-            value3: 40
-        };
-
-        this.displayValueTemplate = this.displayValueTemplate.bind(this);
-    }
-
-    displayValueTemplate(value) {
-        return (
-            <React.Fragment>
-                {value}/<b>100</b>
-            </React.Fragment>
-        );
-    }
-
-    componentDidMount() {
-        this.interval = setInterval(() => {
-            let val = this.state.value1;
-            val += Math.floor(Math.random() * 10) + 1;
-
-            if(val >= 100) {
-                val = 100;
-                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
-                clearInterval(this.interval);
-            }
-
-            this.setState({
-                value1: val
-            });
-        }, 2000);
-    }
-
-    componentWillUnmount () {
-        if (this.interval) {
-            clearInterval(this.interval);
-            this.interval = null;
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>ProgressBar</h1>
-                        <p>ProgressBar is a process status indicator</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el}></Growl>
-
-                    <h3>Dynamic</h3>
-                    <ProgressBar value={this.state.value1}></ProgressBar>
-
-                    <h3>Static</h3>
-                    <ProgressBar value={this.state.value2}></ProgressBar>
-
-                    <h3>Custom display value</h3>
-                    <ProgressBar value={this.state.value3} displayValueTemplate={this.props.displayValueTemplate}></ProgressBar>
-
-                    <h3>Indeterminate</h3>
-                    <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

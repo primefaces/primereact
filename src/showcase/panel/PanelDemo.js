@@ -4,6 +4,7 @@ import {Panel} from '../../components/panel/Panel';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class PanelDemo extends Component {
 
@@ -45,11 +46,116 @@ export class PanelDemo extends Component {
 
 export class PanelDoc extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Panel} from 'primereact/panel';
+
+export class PanelDemo extends Component {
+
+    render() {
+        return (
+            <div>
+                <Panel header="Godfather I">
+                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+                </Panel>
+
+                    <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
+                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+                </Panel>
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React from 'react';
+import {Panel} from 'primereact/panel';
+
+const PanelDemo = () => {
+
+    return (
+        <div>
+            <Panel header="Godfather I">
+                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            </Panel>
+
+                <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
+                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            </Panel>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React from 'react';
+import {Panel} from 'primereact/panel';
+
+const PanelDemo = () => {
+
+    return (
+        <div>
+            <Panel header="Godfather I">
+                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            </Panel>
+
+                <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
+                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            </Panel>
+        </div>
+    )
+}
+
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/panel" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="PanelDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -236,50 +342,20 @@ import {Panel} from 'primereact/panel';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/panel" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Panel} from 'primereact/panel';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class PanelDemo extends Component {
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Panel</h1>
-                        <p>Panel is a grouping component providing with content toggle feature.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Panel header="Godfather I">
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                    </Panel>
-
-                     <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                    </Panel>
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );
