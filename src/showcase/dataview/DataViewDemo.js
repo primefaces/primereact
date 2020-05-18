@@ -10,6 +10,7 @@ import AppContentContext from '../../AppContentContext';
 import { DataView, DataViewLayoutOptions } from "../../components/dataview/DataView";
 import { Button } from "../../components/button/Button";
 import { Dropdown } from "../../components/dropdown/Dropdown";
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class DataViewDemo extends Component {
 
@@ -21,7 +22,8 @@ export class DataViewDemo extends Component {
             selectedCar: null,
             visible: false,
             sortKey: null,
-            sortOrder: null
+            sortOrder: null,
+            sortField: null
         };
         this.carservice = new CarService();
         this.itemTemplate = this.itemTemplate.bind(this);
@@ -162,7 +164,7 @@ export class DataViewDemo extends Component {
                             itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
                             sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
 
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
+                    <Dialog header="Car Details" visible={this.state.visible} modal={true} onHide={() => this.setState({visible: false})}>
                         {this.renderCarDialogContent()}
                     </Dialog>
                 </div>
@@ -175,11 +177,485 @@ export class DataViewDemo extends Component {
 
 export class DataViewDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import { Dialog } from 'primereact/dialog';
+import { Panel } from 'primereact/panel';
+import { CarService } from '../service/CarService';
+import { DataView, DataViewLayoutOptions } from "primereact/dataview";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+
+export class DataViewDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            cars: [],
+            layout: 'list',
+            selectedCar: null,
+            visible: false,
+            sortKey: null,
+            sortOrder: null,
+            sortField: null
+        };
+        this.carservice = new CarService();
+        this.itemTemplate = this.itemTemplate.bind(this);
+        this.onSortChange = this.onSortChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+    }
+
+    onSortChange(event) {
+        const value = event.value;
+
+        if (value.indexOf('!') === 0) {
+            this.setState({
+                sortOrder: -1,
+                sortField: value.substring(1, value.length),
+                sortKey: value
+            });
+        }
+        else {
+            this.setState({
+                sortOrder: 1,
+                sortField: value,
+                sortKey: value
+            });
+        }
+    }
+
+    renderListItem(car) {
+        return (
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand}/>
+                        <div className="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
+                    </div>
+                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
+                </div>
+            </div>
+        );
+    }
+
+    renderGridItem(car) {
+        return (
+            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
+                <Panel header={car.vin} style={{ textAlign: 'center' }}>
+                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    <div className="car-detail">{car.year} - {car.color}</div>
+                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
+                </Panel>
+            </div>
+        );
+    }
+
+    itemTemplate(car, layout) {
+        if (!car) {
+            return;
+        }
+
+        if (layout === 'list')
+            return this.renderListItem(car);
+        else if (layout === 'grid')
+            return this.renderGridItem(car);
+    }
+
+    renderCarDialogContent() {
+        if (this.state.selectedCar) {
+            return (
+                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
+                    <div className="p-col-12" style={{textAlign: 'center'}}>
+                        <img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} alt={this.state.selectedCar.brand} />
+                    </div>
+
+                    <div className="p-col-4">Vin: </div>
+                    <div className="p-col-8">{this.state.selectedCar.vin}</div>
+
+                    <div className="p-col-4">Year: </div>
+                    <div className="p-col-8">{this.state.selectedCar.year}</div>
+
+                    <div className="p-col-4">Brand: </div>
+                    <div className="p-col-8">{this.state.selectedCar.brand}</div>
+
+                    <div className="p-col-4">Color: </div>
+                    <div className="p-col-8">{this.state.selectedCar.color}</div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    renderHeader() {
+        const sortOptions = [
+            {label: 'Newest First', value: '!year'},
+            {label: 'Oldest First', value: 'year'},
+            {label: 'Brand', value: 'brand'}
+        ];
+
+        return (
+            <div className="p-grid">
+                <div className="p-col-6" style={{textAlign: 'left'}}>
+                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} style={{width: '12em'}} />
+                </div>
+                <div className="p-col-6" style={{textAlign: 'right'}}>
+                    <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
+                </div>
+                </div>
+        );
     }
 
     render() {
+        const header = this.renderHeader();
+
+        return (
+            <div>
+                <DataView value={this.state.cars} layout={this.state.layout} header={header}
+                        itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
+                        sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
+
+                <Dialog header="Car Details" visible={this.state.visible} modal={true} onHide={() => this.setState({visible: false})}>
+                    {this.renderCarDialogContent()}
+                </Dialog>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Dialog } from 'primereact/dialog';
+import { Panel } from 'primereact/panel';
+import { CarService } from '../service/CarService';
+import { DataView, DataViewLayoutOptions } from "primereact/dataview";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+
+const DataViewDemo = () => {
+    const [cars, setCars] = useState([]);
+    const [layout, setLayout] = useState('list');
+    const [selectedCar, setSelectedCar] = useState(null);
+    const [visible, setVisible] = useState(false);
+    const [sortKey, setSortKey] = useState(null);
+    const [sortOrder, setSortOrder] = useState(null);
+    const [sortField, setSortField] = useState(null);
+    const carservice = new CarService();
+
+    useEffect(() => {
+        carservice.getCarsLarge().then(data => setCars(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onSortChange = (event) => {
+        const value = event.value;
+        let _sortOrder,
+        let _sortField,
+        let _sortKey = value;
+
+        if (value.indexOf('!') === 0) {
+            _sortOrder = -1;
+            _sortField = value.substring(1, value.length);
+        }
+        else {
+            _sortOrder = 1;
+            _sortField = value;
+        }
+
+        setSortOrder(_sortOrder);
+        setSortField(_sortField);
+        setSortKey(_sortKey);
+    };
+
+    const renderListItem = (car) => {
+        return (
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand}/>
+                        <div className="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
+                    </div>
+                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
+                </div>
+            </div>
+        );
+    };
+
+    const renderGridItem = (car) => {
+        return (
+            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
+                <Panel header={car.vin} style={{ textAlign: 'center' }}>
+                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    <div className="car-detail">{car.year} - {car.color}</div>
+                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
+                </Panel>
+            </div>
+        );
+    };
+
+    const itemTemplate = (car, layout) => {
+        if (!car) {
+            return;
+        }
+
+        if (layout === 'list')
+            return renderListItem(car);
+        else if (layout === 'grid')
+            return renderGridItem(car);
+    };
+
+    const renderCarDialogContent = () => {
+        if (selectedCar) {
+            return (
+                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
+                    <div className="p-col-12" style={{textAlign: 'center'}}>
+                        <img src={\`showcase/resources/demo/images/car/\${selectedCar.brand}.png\`} alt={selectedCar.brand} />
+                    </div>
+
+                    <div className="p-col-4">Vin: </div>
+                    <div className="p-col-8">{selectedCar.vin}</div>
+
+                    <div className="p-col-4">Year: </div>
+                    <div className="p-col-8">{selectedCar.year}</div>
+
+                    <div className="p-col-4">Brand: </div>
+                    <div className="p-col-8">{selectedCar.brand}</div>
+
+                    <div className="p-col-4">Color: </div>
+                    <div className="p-col-8">{selectedCar.color}</div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    };
+
+    const renderHeader = () => {
+        const sortOptions = [
+            {label: 'Newest First', value: '!year'},
+            {label: 'Oldest First', value: 'year'},
+            {label: 'Brand', value: 'brand'}
+        ];
+
+        return (
+            <div className="p-grid">
+                <div className="p-col-6" style={{textAlign: 'left'}}>
+                    <Dropdown options={sortOptions} value={sortKey} placeholder="Sort By" onChange={onSortChange} style={{width: '12em'}} />
+                </div>
+                <div className="p-col-6" style={{textAlign: 'right'}}>
+                    <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
+                </div>
+            </div>
+        );
+    };
+
+    const header = renderHeader();
+
+    return (
+        <div>
+            <DataView value={cars} layout={layout} header={header}
+                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
+                    sortOrder={sortOrder} sortField={sortField} />
+
+            <Dialog header="Car Details" visible={visible} modal={true} onHide={() => setVisible(false)}>
+                {renderCarDialogContent()}
+            </Dialog>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Dialog } from 'primereact/dialog';
+import { Panel } from 'primereact/panel';
+import { CarService } from '../service/CarService';
+import { DataView, DataViewLayoutOptions } from "primereact/dataview";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+
+const DataViewDemo = () => {
+    const [cars, setCars] = useState<any>([]);
+    const [layout, setLayout] = useState<string>('list');
+    const [selectedCar, setSelectedCar] = useState<any>(null);
+    const [visible, setVisible] = useState(false);
+    const [sortKey, setSortKey] = useState<string|undefined>(undefined);
+    const [sortOrder, setSortOrder] = useState<number|undefined>(undefined);
+    const [sortField, setSortField] = useState<string|undefined>(undefined);
+    const carservice = new CarService();
+
+    useEffect(() => {
+        carservice.getCarsLarge().then(data => setCars(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onSortChange = (event: { value: string }) => {
+        const value = event.value;
+        let _sortOrder;
+        let _sortField;
+        let _sortKey = value;
+
+        if (value.indexOf('!') === 0) {
+            _sortOrder = -1;
+            _sortField = value.substring(1, value.length);
+        }
+        else {
+            _sortOrder = 1;
+            _sortField = value;
+        }
+
+        setSortOrder(_sortOrder);
+        setSortField(_sortField);
+        setSortKey(_sortKey);
+    };
+
+    const renderListItem = (car: any) => {
+        return (
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand}/>
+                        <div className="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
+                    </div>
+                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
+                </div>
+            </div>
+        );
+    };
+
+    const renderGridItem = (car: any) => {
+        return (
+            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
+                <Panel header={car.vin} style={{ textAlign: 'center' }}>
+                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    <div className="car-detail">{car.year} - {car.color}</div>
+                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
+                </Panel>
+            </div>
+        );
+    };
+
+    const itemTemplate = (car: any, layout: string) => {
+        if (!car) {
+            return;
+        }
+
+        if (layout === 'list')
+            return renderListItem(car);
+        else if (layout === 'grid')
+            return renderGridItem(car);
+    };
+
+    const renderCarDialogContent = () => {
+        if (selectedCar) {
+            return (
+                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
+                    <div className="p-col-12" style={{textAlign: 'center'}}>
+                        <img src={\`showcase/resources/demo/images/car/\${selectedCar.brand}.png\`} alt={selectedCar.brand} />
+                    </div>
+
+                    <div className="p-col-4">Vin: </div>
+                    <div className="p-col-8">{selectedCar.vin}</div>
+
+                    <div className="p-col-4">Year: </div>
+                    <div className="p-col-8">{selectedCar.year}</div>
+
+                    <div className="p-col-4">Brand: </div>
+                    <div className="p-col-8">{selectedCar.brand}</div>
+
+                    <div className="p-col-4">Color: </div>
+                    <div className="p-col-8">{selectedCar.color}</div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
+    };
+
+    const renderHeader = () => {
+        const sortOptions = [
+            {label: 'Newest First', value: '!year'},
+            {label: 'Oldest First', value: 'year'},
+            {label: 'Brand', value: 'brand'}
+        ];
+
+        return (
+            <div className="p-grid">
+                <div className="p-col-6" style={{textAlign: 'left'}}>
+                    <Dropdown options={sortOptions} value={sortKey} placeholder="Sort By" onChange={onSortChange} style={{width: '12em'}} />
+                </div>
+                <div className="p-col-6" style={{textAlign: 'right'}}>
+                    <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
+                </div>
+            </div>
+        );
+    };
+
+    const header = renderHeader();
+
+    return (
+        <div>
+            <DataView value={cars} layout={layout} header={header}
+                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
+                    sortOrder={sortOrder} sortField={sortField} />
+
+            <Dialog header="Car Details" visible={visible} modal={true} onHide={() => setVisible(false)}>
+                {renderCarDialogContent()}
+            </Dialog>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/dataview" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="DataViewDemo" sources={this.sources} service="CarService" data="cars-large" />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -615,179 +1091,20 @@ onSortChange(event) {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/dataview" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <span>View on GitHub</span>
-                        </a>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import React, {Component} from 'react';
-import {Dialog} from 'primereact/dialog';
-import {Panel} from 'primereact/panel';
-import {CarService} from '../service/CarService';
-import {DataView, DataViewLayoutOptions} from "primereact/dataview";
-import {Button} from "primereact/button";
-import {Dropdown} from "primereact/dropdown";
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class DataViewDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            cars: [],
-            layout: 'list',
-            selectedCar: null,
-            visible: false,
-            sortKey: null,
-            sortOrder: null
-        };
-        this.carservice = new CarService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.onSortChange = this.onSortChange.bind(this);
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
-    }
-
-    onSortChange(event) {
-        const value = event.value;
-
-        if (value.indexOf('!') === 0) {
-            this.setState({
-                sortOrder: -1,
-                sortField: value.substring(1, value.length),
-                sortKey: value
-            });
-        }
-        else {
-            this.setState({
-                sortOrder: 1,
-                sortField: value,
-                sortKey: value
-            });
-        }
-    }
-
-    renderListItem(car) {
-        return (
-            <div className="p-col-12">
-                <div className="car-details">
-                    <div>
-                        <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand}/>
-                        <div className="p-grid">
-                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                            <div className="p-col-12">Year: <b>{car.year}</b></div>
-                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                            <div className="p-col-12">Color: <b>{car.color}</b></div>
-                        </div>
-                    </div>
-                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
-                </div>
-            </div>
-        );
-    }
-
-    renderGridItem(car) {
-        return (
-            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
-                <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={'showcase/resources/demo/images/car/\${car.brand}.png'} alt={car.brand} />
-                    <div className="car-detail">{car.year} - {car.color}</div>
-                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
-                </Panel>
-            </div>
-        );
-    }
-
-    itemTemplate(car, layout) {
-        if (!car) {
-            return;
-        }
-
-        if (layout === 'list')
-            return this.renderListItem(car);
-        else if (layout === 'grid')
-            return this.renderGridItem(car);
-    }
-
-    renderCarDialogContent() {
-        if (this.state.selectedCar) {
-            return (
-                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
-                    <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={'showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png'} alt={this.state.selectedCar.brand} />
-                    </div>
-
-                    <div className="p-col-4">Vin: </div>
-                    <div className="p-col-8">{this.state.selectedCar.vin}</div>
-
-                    <div className="p-col-4">Year: </div>
-                    <div className="p-col-8">{this.state.selectedCar.year}</div>
-
-                    <div className="p-col-4">Brand: </div>
-                    <div className="p-col-8">{this.state.selectedCar.brand}</div>
-
-                    <div className="p-col-4">Color: </div>
-                    <div className="p-col-8">{this.state.selectedCar.color}</div>
-                </div>
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
-    renderHeader() {
-        const sortOptions = [
-            {label: 'Newest First', value: '!year'},
-            {label: 'Oldest First', value: 'year'},
-            {label: 'Brand', value: 'brand'}
-        ];
-
-        return (
-            <div className="p-grid">
-                <div className="p-col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
-                </div>
-                <div className="p-col-6" style={{textAlign: 'right'}}>
-                    <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
-                </div>
-            </div>
-        );
-    }
-
-    render() {
-        const header = this.renderHeader();
-
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataView</h1>
-                        <p>DataView displays data in grid or list layout with pagination, sorting and filtering features.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <DataView value={this.state.cars} layout={this.state.layout} header={header}
-                            itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
-                            sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
-
-                    <Dialog header="Car Details" visible={this.state.visible} width="225px" modal={true} onHide={() => this.setState({visible: false})}>
-                        {this.renderCarDialogContent()}
-                    </Dialog>
-                </div>
-
-                <DataViewDoc/>
-            </div>
-        );
-    }
-}
-
-`}
-                        </CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

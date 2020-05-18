@@ -6,6 +6,7 @@ import { DataViewSubmenu } from '../../showcase/dataview/DataViewSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class DataViewLazyDemo extends Component {
 
@@ -16,9 +17,10 @@ export class DataViewLazyDemo extends Component {
             layout: 'list',
             loading: true,
             first: 0,
-            rows: 6,
             totalRecords: 0
         };
+        this.rows = 6;
+
         this.carservice = new CarService();
         this.itemTemplate = this.itemTemplate.bind(this);
         this.onPage = this.onPage.bind(this);
@@ -30,7 +32,7 @@ export class DataViewLazyDemo extends Component {
                 this.datasource = data;
                 this.setState({
                     totalRecords: data.length,
-                    cars: this.datasource.slice(0, this.state.rows),
+                    cars: this.datasource.slice(0, this.rows),
                     loading: false
                 });
             });
@@ -45,7 +47,7 @@ export class DataViewLazyDemo extends Component {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = event.first + this.state.rows;
+            const endIndex = event.first + this.rows;
 
             this.setState({
                 first: startIndex,
@@ -136,7 +138,7 @@ export class DataViewLazyDemo extends Component {
 
                 <div className="content-section implementation dataview-demo">
                     <DataView value={this.state.cars} layout={this.state.layout} header={header} itemTemplate={this.itemTemplate}
-                        lazy paginator paginatorPosition={'both'} rows={this.state.rows} totalRecords={this.state.totalRecords}
+                        lazy paginator paginatorPosition={'both'} rows={this.rows} totalRecords={this.state.totalRecords}
                         first={this.state.first} onPage={this.onPage} loading={this.state.loading} />
                 </div>
 
@@ -148,18 +150,12 @@ export class DataViewLazyDemo extends Component {
 
 export class DataViewLazyDemoDoc extends Component {
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    constructor(props) {
+        super(props);
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-                        <CodeHighlight className="language-javascript">
-{`
-
+        this.sources = {
+            'app': {
+                content: `
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Panel } from 'primereact/panel';
@@ -174,9 +170,10 @@ export class DataViewLazyDemo extends Component {
             layout: 'list',
             loading: true,
             first: 0,
-            rows: 6,
             totalRecords: 0
         };
+        this.rows = 6;
+
         this.carservice = new CarService();
         this.itemTemplate = this.itemTemplate.bind(this);
         this.onPage = this.onPage.bind(this);
@@ -188,7 +185,7 @@ export class DataViewLazyDemo extends Component {
                 this.datasource = data;
                 this.setState({
                     totalRecords: data.length,
-                    cars: this.datasource.slice(0, this.state.rows),
+                    cars: this.datasource.slice(0, this.rows),
                     loading: false
                 });
             });
@@ -203,7 +200,7 @@ export class DataViewLazyDemo extends Component {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = event.first + this.state.rows;
+            const endIndex = event.first + this.rows;
 
             this.setState({
                 first: startIndex,
@@ -276,29 +273,277 @@ export class DataViewLazyDemo extends Component {
         const header = this.renderHeader();
 
         return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataView - Lazy</h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates
-                        lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
-                            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation dataview-demo">
-                    <DataView value={this.state.cars} layout={this.state.layout} header={header} itemTemplate={this.itemTemplate}
-                        lazy paginator paginatorPosition={'both'} rows={this.state.rows} totalRecords={this.state.totalRecords}
-                        first={this.state.first} onPage={this.onPage} loading={this.state.loading} />
-                </div>
+            <div className="dataview-demo">
+                <DataView value={this.state.cars} layout={this.state.layout} header={header} itemTemplate={this.itemTemplate}
+                    lazy paginator paginatorPosition={'both'} rows={this.rows} totalRecords={this.state.totalRecords}
+                    first={this.state.first} onPage={this.onPage} loading={this.state.loading} />
             </div>
         );
     }
 }
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import { Panel } from 'primereact/panel';
+import { CarService } from '../service/CarService';
 
-`}
-                        </CodeHighlight>
-                    </TabPanel>
+const DataViewLazyDemo = () => {
+    const [datasource, setDatasource] = useState<any>([]);
+    const [cars, setCars] = useState([]);
+    const [layout, setLayout] = useState('list');
+    const [loading, setLoading] = useState(true);
+    const [first, setFirst] = useState(0);
+    const [totalRecords, setTotalRecords] = useState(0);
+    const rows = 6;
+    const carservice = new CarService();
+
+    useEffect(() => {
+        setTimeout(() => {
+            carservice.getCarsLarge().then(data => {
+                setDatasource(data);
+                setTotalRecords(data.length);
+                setCars(datasource.slice(0, this.rows));
+                setLoading(false);
+            });
+        }, 1000);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onPage = (event) => {
+        setLoading(true);
+
+        //imitate delay of a backend call
+        setTimeout(() => {
+            const startIndex = event.first;
+            const endIndex = event.first + this.rows;
+
+            setFirst(startIndex);
+            setCars(datasource.slice(startIndex, endIndex));
+            setLoading(false);
+        }, 1000);
+    }
+
+    const renderListItem = (car) => {
+        return (
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                        <div className="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const renderGridItem = (car) => {
+        return (
+            <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
+                <Panel header={car.vin} style={{ textAlign: 'center' }}>
+                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    <div className="car-detail">{car.year} - {car.color}</div>
+                </Panel>
+            </div>
+        );
+    }
+
+    const itemTemplate = (car, layout) => {
+        if (!car) {
+            return;
+        }
+
+        if (layout === 'list')
+            return renderListItem(car);
+        else if (layout === 'grid')
+            return renderGridItem(car);
+    }
+
+    const renderHeader = () => {
+        let onOptionChange = (e) => {
+            setLoading(true);
+
+            setTimeout(() => {
+                setLoading(false);
+                setLayout(e.value);
+            }, 1000);
+        };
+
+        return (
+            <div style={{textAlign: 'left'}}>
+                <DataViewLayoutOptions layout={layout} onChange={onOptionChange} />
+            </div>
+        );
+    }
+
+    const header = renderHeader();
+
+    return (
+        <div className="dataview-demo">
+            <DataView value={cars} layout={layout} header={header} itemTemplate={itemTemplate}
+                lazy paginator paginatorPosition={'both'} rows={rows} totalRecords={totalRecords}
+                first={first} onPage={onPage} loading={loading} />
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState, useEffect } from 'react';
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import { Panel } from 'primereact/panel';
+import { CarService } from '../service/CarService';
+
+const DataViewLazyDemo = () => {
+    const [datasource, setDatasource] = useState<any>([]);
+    const [cars, setCars] = useState<any>([]);
+    const [layout, setLayout] = useState<string>('list');
+    const [loading, setLoading] = useState<boolean>(true);
+    const [first, setFirst] = useState<number>(0);
+    const [totalRecords, setTotalRecords] = useState<number>(0);
+    const rows: number = 6;
+    const carservice = new CarService();
+
+    useEffect(() => {
+        setTimeout(() => {
+            carservice.getCarsLarge().then(data => {
+                setDatasource(data);
+                setTotalRecords(data.length);
+                setCars(datasource.slice(0, rows));
+                setLoading(false);
+            });
+        }, 1000);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onPage = (event: { first: number }) => {
+        setLoading(true);
+
+        //imitate delay of a backend call
+        setTimeout(() => {
+            const startIndex = event.first;
+            const endIndex = event.first + rows;
+
+            setFirst(startIndex);
+            setCars(datasource.slice(startIndex, endIndex));
+            setLoading(false);
+        }, 1000);
+    }
+
+    const renderListItem = (car: any) => {
+        return (
+            <div className="p-col-12">
+                <div className="car-details">
+                    <div>
+                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                        <div className="p-grid">
+                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
+                            <div className="p-col-12">Year: <b>{car.year}</b></div>
+                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
+                            <div className="p-col-12">Color: <b>{car.color}</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const renderGridItem = (car: any) => {
+        return (
+            <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
+                <Panel header={car.vin} style={{ textAlign: 'center' }}>
+                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} alt={car.brand} />
+                    <div className="car-detail">{car.year} - {car.color}</div>
+                </Panel>
+            </div>
+        );
+    }
+
+    const itemTemplate = (car: any, layout: string) => {
+        if (!car) {
+            return;
+        }
+
+        if (layout === 'list')
+            return renderListItem(car);
+        else if (layout === 'grid')
+            return renderGridItem(car);
+    }
+
+    const renderHeader = () => {
+        let onOptionChange = (e: { value: string }) => {
+            setLoading(true);
+
+            setTimeout(() => {
+                setLoading(false);
+                setLayout(e.value);
+            }, 1000);
+        };
+
+        return (
+            <div style={{textAlign: 'left'}}>
+                <DataViewLayoutOptions layout={layout} onChange={onOptionChange} />
+            </div>
+        );
+    }
+
+    const header = renderHeader();
+
+    return (
+        <div className="dataview-demo">
+            <DataView value={cars} layout={layout} header={header} itemTemplate={itemTemplate}
+                lazy paginator paginatorPosition={'both'} rows={rows} totalRecords={totalRecords}
+                first={first} onPage={onPage} loading={loading} />
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/dataview" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="DataViewLazyDemo" sources={this.sources} service="CarService" data="cars-large" />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
+        return (
+            <div className="content-section documentation">
+                <TabView>
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
+
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         )

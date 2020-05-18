@@ -4,6 +4,7 @@ import {Dropdown} from '../../components/dropdown/Dropdown';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class DropdownDemo extends Component {
 
@@ -12,26 +13,28 @@ export class DropdownDemo extends Component {
         this.state = {
             city: null,
             car: null,
-            car2: 'BMW',
-            cities: [
-                {name: 'New York', code: 'NY'},
-                {name: 'Rome', code: 'RM'},
-                {name: 'London', code: 'LDN'},
-                {name: 'Istanbul', code: 'IST'},
-                {name: 'Paris', code: 'PRS'}
-            ],
-            cars: [
-                {label: 'Audi', value: 'Audi'},
-                {label: 'BMW', value: 'BMW'},
-                {label: 'Fiat', value: 'Fiat'},
-                {label: 'Honda', value: 'Honda'},
-                {label: 'Jaguar', value: 'Jaguar'},
-                {label: 'Mercedes', value: 'Mercedes'},
-                {label: 'Renault', value: 'Renault'},
-                {label: 'VW', value: 'VW'},
-                {label: 'Volvo', value: 'Volvo'}
-            ]
+            car2: 'BMW'
         };
+
+        this.cities = [
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
+        ];
+
+        this.cars = [
+            {label: 'Audi', value: 'Audi'},
+            {label: 'BMW', value: 'BMW'},
+            {label: 'Fiat', value: 'Fiat'},
+            {label: 'Honda', value: 'Honda'},
+            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Mercedes', value: 'Mercedes'},
+            {label: 'Renault', value: 'Renault'},
+            {label: 'VW', value: 'VW'},
+            {label: 'Volvo', value: 'Volvo'}
+        ];
 
         this.onCityChange = this.onCityChange.bind(this);
         this.onCarChange = this.onCarChange.bind(this);
@@ -55,7 +58,7 @@ export class DropdownDemo extends Component {
             return option.label;
         }
         else {
-            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="p-clearfix">
@@ -82,16 +85,16 @@ export class DropdownDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={this.state.cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
+                    <Dropdown value={this.state.city} options={this.cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
                     <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
 
                     <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={this.state.cars} onChange={this.onCarChange}  style={{width: '12em'}}
+                    <Dropdown value={this.state.car} options={this.cars} onChange={this.onCarChange}  style={{width: '12em'}}
                               editable={true} placeholder="Select a Brand" />
                     <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
 
                     <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={this.state.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
+                    <Dropdown value={this.state.car2} options={this.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
                               filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
                     <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
                 </div>
@@ -104,11 +107,276 @@ export class DropdownDemo extends Component {
 
 class DropdownDoc extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {Dropdown} from 'primereact/dropdown';
+
+export class DropdownDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            city: null,
+            car: null,
+            car2: 'BMW'
+        };
+
+        this.cities = [
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
+        ];
+
+        this.cars = [
+            {label: 'Audi', value: 'Audi'},
+            {label: 'BMW', value: 'BMW'},
+            {label: 'Fiat', value: 'Fiat'},
+            {label: 'Honda', value: 'Honda'},
+            {label: 'Jaguar', value: 'Jaguar'},
+            {label: 'Mercedes', value: 'Mercedes'},
+            {label: 'Renault', value: 'Renault'},
+            {label: 'VW', value: 'VW'},
+            {label: 'Volvo', value: 'Volvo'}
+        ];
+
+        this.onCityChange = this.onCityChange.bind(this);
+        this.onCarChange = this.onCarChange.bind(this);
+        this.onCarChange2 = this.onCarChange2.bind(this);
+    }
+
+    onCityChange(e) {
+        this.setState({city: e.value});
+    }
+
+    onCarChange(e) {
+        this.setState({car: e.value});
+    }
+
+    onCarChange2(e) {
+        this.setState({car2: e.value});
+    }
+
+    carTemplate(option) {
+        if(!option.value) {
+            return option.label;
+        }
+        else {
+            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+            return (
+                <div className="p-clearfix">
+                    <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
+                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                </div>
+            );
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <h3>Basic</h3>
+                <Dropdown value={this.state.city} options={this.cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
+                <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
+
+                <h3>Editable</h3>
+                <Dropdown value={this.state.car} options={this.cars} onChange={this.onCarChange} style={{width: '12em'}}
+                            editable={true} placeholder="Select a Brand" />
+                <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
+
+                <h3>Advanced</h3>
+                <Dropdown value={this.state.car2} options={this.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
+                            filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+                <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState } from 'react';
+import {Dropdown} from 'primereact/dropdown';
+
+const DropdownDemo = () => {
+    const [city, setCity] = useState(null);
+    const [car, setCar] = useState(null);
+    const [car2, setCar2] = useState('BMW');
+
+    let cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
+    let cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
+    const onCityChange = (e) => {
+        setCity(e.value);
+    };
+
+    const onCarChange = (e) => {
+        setCar(e.value);
+    };
+
+    const onCarChange2 = (e) => {
+        setCar2(e.value);
+    };
+
+    const carTemplate = (option) => {
+        if(!option.value) {
+            return option.label;
+        }
+        else {
+            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+            return (
+                <div className="p-clearfix">
+                    <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
+                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                </div>
+            );
+        }
+    };
+
+    return (
+        <div>
+            <h3>Basic</h3>
+            <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
+            <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
+
+            <h3>Editable</h3>
+            <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
+                        editable={true} placeholder="Select a Brand" />
+            <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
+
+            <h3>Advanced</h3>
+            <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
+                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+            <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState } from 'react';
+import {Dropdown} from 'primereact/dropdown';
+
+const DropdownDemo = () => {
+    const [city, setCity] = useState<any>(null);
+    const [car, setCar] = useState<string | null>(null);
+    const [car2, setCar2] = useState<string>('BMW');
+
+    let cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
+    let cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
+    const onCityChange = (e: { value: any }) => {
+        setCity(e.value);
+    };
+
+    const onCarChange = (e: { value: any }) => {
+        setCar(e.value);
+    };
+
+    const onCarChange2 = (e: { value: any }) => {
+        setCar2(e.value);
+    };
+
+    const carTemplate = (option: any) => {
+        if(!option.value) {
+            return option.label;
+        }
+        else {
+            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+
+            return (
+                <div className="p-clearfix">
+                    <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
+                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                </div>
+            );
+        }
+    };
+
+    return (
+        <div>
+            <h3>Basic</h3>
+            <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
+            <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
+
+            <h3>Editable</h3>
+            <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
+                        editable={true} placeholder="Select a Brand" />
+            <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
+
+            <h3>Advanced</h3>
+            <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
+                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+            <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
     shouldComponentUpdate(){
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/dropdown" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="DropdownDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView effect="fade">
@@ -601,109 +869,20 @@ carTemplate(option) {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/dropdown" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <span>View on GitHub</span>
-                        </a>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import React, {Component} from 'react';
-import {Dropdown} from 'primereact/dropdown';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class DropdownDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            city: null,
-            car: null,
-            car2: 'BMW',
-            cities: [
-                {name: 'New York', code: 'NY'},
-                {name: 'Rome', code: 'RM'},
-                {name: 'London', code: 'LDN'},
-                {name: 'Istanbul', code: 'IST'},
-                {name: 'Paris', code: 'PRS'}
-            ],
-            cars: [
-                {label: 'Audi', value: 'Audi'},
-                {label: 'BMW', value: 'BMW'},
-                {label: 'Fiat', value: 'Fiat'},
-                {label: 'Honda', value: 'Honda'},
-                {label: 'Jaguar', value: 'Jaguar'},
-                {label: 'Mercedes', value: 'Mercedes'},
-                {label: 'Renault', value: 'Renault'},
-                {label: 'VW', value: 'VW'},
-                {label: 'Volvo', value: 'Volvo'}
-            ]
-        };
-
-        this.onCityChange = this.onCityChange.bind(this);
-        this.onCarChange = this.onCarChange.bind(this);
-        this.onCarChange2 = this.onCarChange2.bind(this);
-    }
-
-    onCityChange(e) {
-        this.setState({city: e.value});
-    }
-
-    onCarChange(e) {
-        this.setState({car: e.value});
-    }
-
-    onCarChange2(e) {
-        this.setState({car2: e.value});
-    }
-
-    carTemplate(option) {
-        if(!option.value) {
-            return option.label;
-        }
-        else {
-            var logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
-
-            return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
-                </div>
-            );
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Dropdown</h1>
-                        <p>Dropdown is used to select an item from a collection of options.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={this.state.cities} ariaLabel="Test" onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
-                    <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
-
-                    <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={this.state.cars} onChange={this.onCarChange}  style={{width: '12em'}}
-                              editable={true} placeholder="Select a Brand" />
-                    <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
-
-                    <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={this.state.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
-                              filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
-                    <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-                        </CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         )
