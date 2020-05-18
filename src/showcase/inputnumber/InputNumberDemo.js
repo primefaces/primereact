@@ -4,6 +4,7 @@ import {InputNumber} from '../../components/inputnumber/InputNumber';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class InputNumberDemo extends Component {
 
@@ -133,12 +134,12 @@ export class InputNumberDemo extends Component {
                         </div>
                         <div className="p-col-12 p-md-3">
                             Horizontal with Step
-                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal" step={0.25}
+                            <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} showButtons buttonLayout="horizontal" step={0.25}
                                 decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
                         </div>
                         <div className="p-col-12 p-md-3">
                             <div>Vertical</div>
-                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical"
+                            <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical"
                                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
                         </div>
                         <div className="p-col-12 p-md-3">
@@ -157,11 +158,436 @@ export class InputNumberDemo extends Component {
 
 class InputNumberDoc extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {InputNumber} from 'primereact/inputnumber';
+
+export class InputNumberDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            value1: 42723,
+            value2: 58151,
+            value3: 2351.35,
+            value4: 50,
+            value5: 151351,
+            value6: 115744,
+            value7: 635524,
+            value8: 732762,
+            value9: 1500,
+            value10: 2500,
+            value11: 4250,
+            value12: 5002,
+            value13: 20,
+            value14: 50,
+            value15: 10,
+            value16: 20,
+            value17: 20,
+            value18: 10.50,
+            value19: 25,
+            value20: 50
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <h3>Numerals</h3>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        Integer Only
+                        <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Without Grouping
+                        <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} mode="decimal" useGrouping={false} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Min-Max Fraction Digits
+                        <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Min-Max Boundaries
+                        <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} mode="decimal" min={0} max={100} />
+                    </div>
+
+                    <div className="p-col-12 p-md-3">
+                        User Locale
+                        <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} mode="decimal" minFractionDigits={2} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        United State Locale
+                        <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} mode="decimal" locale="en-US" minFractionDigits={2}/>
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        German Locale
+                        <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} mode="decimal" locale="de-DE" minFractionDigits={2}/>
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Indian Locale
+                        <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} mode="decimal" locale="en-IN" minFractionDigits={2} />
+                    </div>
+                </div>
+
+                <h3>Currency</h3>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        United States
+                        <InputNumber value={this.state.value9} onChange={(e) => this.setState({value9: e.value})} mode="currency" currency="USD" locale="en-US" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Germany
+                        <InputNumber value={this.state.value10} onChange={(e) => this.setState({value10: e.value})} mode="currency" currency="EUR" locale="de-DE" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        India
+                        <InputNumber value={this.state.value11} onChange={(e) => this.setState({value11: e.value})} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Japan
+                        <InputNumber value={this.state.value12} onChange={(e) => this.setState({value12: e.value})} mode="currency" currency="JPY" locale="jp-JP"/>
+                    </div>
+                </div>
+
+                <h3>Prefix and Suffix</h3>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        Mile
+                        <InputNumber value={this.state.value13} onChange={(e) => this.setState({value13: e.value})} suffix=" mi" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Percent
+                        <InputNumber value={this.state.value14} onChange={(e) => this.setState({value14: e.value})} prefix="%" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Expiry
+                        <InputNumber value={this.state.value15} onChange={(e) => this.setState({value15: e.value})}  prefix="Expires in " suffix=" days" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Temperature
+                        <InputNumber value={this.state.value16} onChange={(e) => this.setState({value16: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
+                    </div>
+                </div>
+
+                <h3>Buttons</h3>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        Stacked
+                        <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} showButtons mode="currency" currency="USD" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        Horizontal with Step
+                        <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} showButtons buttonLayout="horizontal" step={0.25}
+                            decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <div>Vertical</div>
+                        <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical"
+                            decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                            Min-Max Boundaries
+                        <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} mode="decimal" showButtons min={0} max={100} />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState } from 'react';
+import {InputNumber} from 'primereact/inputnumber';
+
+const InputNumberDemo = () => {
+    const [value1, setValue1] = useState(42723);
+    const [value2, setValue2] = useState(58151);
+    const [value3, setValue3] = useState(2351.35);
+    const [value4, setValue4] = useState(50);
+    const [value5, setValue5] = useState(151351);
+    const [value6, setValue6] = useState(115744);
+    const [value7, setValue7] = useState(635524);
+    const [value8, setValue8] = useState(732762);
+    const [value9, setValue9] = useState(1500);
+    const [value10, setValue10] = useState(2500);
+    const [value11, setValue11] = useState(4250);
+    const [value12, setValue12] = useState(5002);
+    const [value13, setValue13] = useState(20);
+    const [value14, setValue14] = useState(50);
+    const [value15, setValue15] = useState(10);
+    const [value16, setValue16] = useState(20);
+    const [value17, setValue17] = useState(20);
+    const [value18, setValue18] = useState(10.50);
+    const [value19, setValue19] = useState(25);
+    const [value20, setValue20] = useState(50);
+
+    return (
+        <div>
+            <h3>Numerals</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    Integer Only
+                    <InputNumber value={value1} onChange={(e) => setValue1(e.value)} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Without Grouping
+                    <InputNumber value={value2} onChange={(e) => setValue2(e.value)} mode="decimal" useGrouping={false} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Min-Max Fraction Digits
+                    <InputNumber value={value3} onChange={(e) => setValue3(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Min-Max Boundaries
+                    <InputNumber value={value4} onChange={(e) => setValue4(e.value)} mode="decimal" min={0} max={100} />
+                </div>
+
+                <div className="p-col-12 p-md-3">
+                    User Locale
+                    <InputNumber value={value5} onChange={(e) => setValue5(e.value)} mode="decimal" minFractionDigits={2} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    United State Locale
+                    <InputNumber value={value6} onChange={(e) => setValue6(e.value)} mode="decimal" locale="en-US" minFractionDigits={2}/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    German Locale
+                    <InputNumber value={value7} onChange={(e) => setValue7(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2}/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Indian Locale
+                    <InputNumber value={value8} onChange={(e) => setValue8(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
+                </div>
+            </div>
+
+            <h3>Currency</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    United States
+                    <InputNumber value={value9} onChange={(e) => setValue9(e.value)} mode="currency" currency="USD" locale="en-US" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Germany
+                    <InputNumber value={value10} onChange={(e) => setValue10(e.value)} mode="currency" currency="EUR" locale="de-DE" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    India
+                    <InputNumber value={value11} onChange={(e) => setValue11(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Japan
+                    <InputNumber value={value12} onChange={(e) => setValue12(e.value)} mode="currency" currency="JPY" locale="jp-JP"/>
+                </div>
+            </div>
+
+            <h3>Prefix and Suffix</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    Mile
+                    <InputNumber value={value13} onChange={(e) => setValue13(e.value)} suffix=" mi" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Percent
+                    <InputNumber value={value14} onChange={(e) => setValue14(e.value)} prefix="%" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Expiry
+                    <InputNumber value={value15} onChange={(e) => setValue15(e.value)}  prefix="Expires in " suffix=" days" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Temperature
+                    <InputNumber value={value16} onChange={(e) => setValue16(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
+                </div>
+            </div>
+
+            <h3>Buttons</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    Stacked
+                    <InputNumber value={value17} onChange={(e) => setValue17(e.value)} showButtons mode="currency" currency="USD" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Horizontal with Step
+                    <InputNumber value={value18} onChange={(e) => setValue18(e.value)} showButtons buttonLayout="horizontal" step={0.25}
+                        decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <div>Vertical</div>
+                    <InputNumber value={value19} onChange={(e) => setValue19(e.value)} mode="decimal" showButtons buttonLayout="vertical"
+                        decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                        Min-Max Boundaries
+                    <InputNumber value={value20} onChange={(e) => setValue20(e.value)} mode="decimal" showButtons min={0} max={100} />
+                </div>
+            </div>
+        </div>
+    );
+}
+                    `
+            },
+            'ts': {
+                content: `
+import React, { useState } from 'react';
+import {InputNumber} from 'primereact/inputnumber';
+
+const InputNumberDemo = () => {
+    const [value1, setValue1] = useState(42723);
+    const [value2, setValue2] = useState(58151);
+    const [value3, setValue3] = useState(2351.35);
+    const [value4, setValue4] = useState(50);
+    const [value5, setValue5] = useState(151351);
+    const [value6, setValue6] = useState(115744);
+    const [value7, setValue7] = useState(635524);
+    const [value8, setValue8] = useState(732762);
+    const [value9, setValue9] = useState(1500);
+    const [value10, setValue10] = useState(2500);
+    const [value11, setValue11] = useState(4250);
+    const [value12, setValue12] = useState(5002);
+    const [value13, setValue13] = useState(20);
+    const [value14, setValue14] = useState(50);
+    const [value15, setValue15] = useState(10);
+    const [value16, setValue16] = useState(20);
+    const [value17, setValue17] = useState(20);
+    const [value18, setValue18] = useState(10.50);
+    const [value19, setValue19] = useState(25);
+    const [value20, setValue20] = useState(50);
+
+    return (
+        <div>
+            <h3>Numerals</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    Integer Only
+                    <InputNumber value={value1} onChange={(e) => setValue1(e.value)} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Without Grouping
+                    <InputNumber value={value2} onChange={(e) => setValue2(e.value)} mode="decimal" useGrouping={false} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Min-Max Fraction Digits
+                    <InputNumber value={value3} onChange={(e) => setValue3(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Min-Max Boundaries
+                    <InputNumber value={value4} onChange={(e) => setValue4(e.value)} mode="decimal" min={0} max={100} />
+                </div>
+
+                <div className="p-col-12 p-md-3">
+                    User Locale
+                    <InputNumber value={value5} onChange={(e) => setValue5(e.value)} mode="decimal" minFractionDigits={2} />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    United State Locale
+                    <InputNumber value={value6} onChange={(e) => setValue6(e.value)} mode="decimal" locale="en-US" minFractionDigits={2}/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    German Locale
+                    <InputNumber value={value7} onChange={(e) => setValue7(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2}/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Indian Locale
+                    <InputNumber value={value8} onChange={(e) => setValue8(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
+                </div>
+            </div>
+
+            <h3>Currency</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    United States
+                    <InputNumber value={value9} onChange={(e) => setValue9(e.value)} mode="currency" currency="USD" locale="en-US" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Germany
+                    <InputNumber value={value10} onChange={(e) => setValue10(e.value)} mode="currency" currency="EUR" locale="de-DE" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    India
+                    <InputNumber value={value11} onChange={(e) => setValue11(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Japan
+                    <InputNumber value={value12} onChange={(e) => setValue12(e.value)} mode="currency" currency="JPY" locale="jp-JP"/>
+                </div>
+            </div>
+
+            <h3>Prefix and Suffix</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    Mile
+                    <InputNumber value={value13} onChange={(e) => setValue13(e.value)} suffix=" mi" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Percent
+                    <InputNumber value={value14} onChange={(e) => setValue14(e.value)} prefix="%" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Expiry
+                    <InputNumber value={value15} onChange={(e) => setValue15(e.value)}  prefix="Expires in " suffix=" days" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Temperature
+                    <InputNumber value={value16} onChange={(e) => setValue16(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
+                </div>
+            </div>
+
+            <h3>Buttons</h3>
+            <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-3">
+                    Stacked
+                    <InputNumber value={value17} onChange={(e) => setValue17(e.value)} showButtons mode="currency" currency="USD" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                    Horizontal with Step
+                    <InputNumber value={value18} onChange={(e) => setValue18(e.value)} showButtons buttonLayout="horizontal" step={0.25}
+                        decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
+                </div>
+                <div className="p-col-12 p-md-3">
+                    <div>Vertical</div>
+                    <InputNumber value={value19} onChange={(e) => setValue19(e.value)} mode="decimal" showButtons buttonLayout="vertical"
+                        decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                </div>
+                <div className="p-col-12 p-md-3">
+                        Min-Max Boundaries
+                    <InputNumber value={value20} onChange={(e) => setValue20(e.value)} mode="decimal" showButtons min={0} max={100} />
+                </div>
+            </div>
+        </div>
+    );
+}
+                        `
+            }
+        }
+    }
+
     shouldComponentUpdate(){
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputnumber" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="InputNumberDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
     <TabView effect="fade">
@@ -265,11 +691,11 @@ Stacked
 <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} showButtons mode="currency" currency="USD" />
 
 Horizontal
-<InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal"
+<InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} showButtons buttonLayout="horizontal"
     decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
 
 Vertical
-<InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical" style={{width: '6em'}}
+<InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} mode="decimal" showButtons buttonLayout="vertical" style={{width: '6em'}}
     decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
 
 `}
@@ -390,7 +816,7 @@ Vertical
                             <td>currency</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>The currency to use in currency formatting. Possible values are the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency codes</a>, 
+                            <td>The currency to use in currency formatting. Possible values are the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency codes</a>,
                                 such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB.
                                 There is no default value; if the style is "currency", the currency property must be provided.</td>
                         </tr>
@@ -398,7 +824,7 @@ Vertical
                             <td>currencyDisplay</td>
                             <td>string</td>
                             <td>symbol</td>
-                            <td>How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €, 
+                            <td>How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €,
                                 ü"code" to use the ISO currency code, "name" to use a localized currency name such as "dollar"; the default is "symbol".</td>
                         </tr>
                         <tr>
@@ -411,16 +837,16 @@ Vertical
                             <td>minFractionDigits</td>
                             <td>number</td>
                             <td>null</td>
-                            <td>The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of 
+                            <td>The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of
                                 minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a> (2 if the list doesn't provide that information).</td>
                         </tr>
                         <tr>
                             <td>maxFractionDigits</td>
                             <td>number</td>
                             <td>null</td>
-                            <td>The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain 
-                                number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting 
-                                is the larger of minimumFractionDigits and the number of minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a> 
+                            <td>The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain
+                                number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting
+                                is the larger of minimumFractionDigits and the number of minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a>
                                  (2 if the list doesn't provide that information).</td>
                         </tr>
                         <tr>
@@ -643,7 +1069,7 @@ Vertical
                             <td>p-inputnumber-button-icon</td>
                             <td>Button icon</td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -652,156 +1078,20 @@ Vertical
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/inputnumber" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                <span>View on GitHub</span>
-            </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import {InputNumber} from '../../components/inputnumber/InputNumber';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+        {
+            this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                const header = key === 'app' ? 'Source' : `${key} Source`;
+                return (
+                    <TabPanel key={`source_${index}`} header={header}>
+                        {sourceButtons}
 
-export class InputNumberDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            value1: 42723,
-            value2: 58151,
-            value3: 2351.35,
-            value4: 50,
-            value5: 151351,
-            value6: 115744,
-            value7: 635524,
-            value8: 732762,
-            value9: 1500,
-            value10: 2500,
-            value11: 4250,
-            value12: 5002,
-            value13: 20,
-            value14: 50,
-            value15: 10,
-            value16: 20,
-            value17: 20,
-            value18: 10.50,
-            value19: 25,
-            value20: 50
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Numerals</h3>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-3">
-                        Integer Only
-                        <InputNumber value={this.state.value1} onChange={(e) => this.setState({value1: e.value})} />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Without Grouping
-                        <InputNumber value={this.state.value2} onChange={(e) => this.setState({value2: e.value})} mode="decimal" useGrouping={false} />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Min-Max Fraction Digits
-                        <InputNumber value={this.state.value3} onChange={(e) => this.setState({value3: e.value})} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Min-Max Boundaries
-                        <InputNumber value={this.state.value4} onChange={(e) => this.setState({value4: e.value})} mode="decimal" min={0} max={100} />
-                    </div>
-                    
-                    <div className="p-col-12 p-md-3">
-                        User Locale
-                        <InputNumber value={this.state.value5} onChange={(e) => this.setState({value5: e.value})} mode="decimal" minFractionDigits={2} />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        United State Locale
-                        <InputNumber value={this.state.value6} onChange={(e) => this.setState({value6: e.value})} mode="decimal" locale="en-US" minFractionDigits={2}/>
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        German Locale
-                        <InputNumber value={this.state.value7} onChange={(e) => this.setState({value7: e.value})} mode="decimal" locale="de-DE" minFractionDigits={2}/>
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Indian Locale
-                        <InputNumber value={this.state.value8} onChange={(e) => this.setState({value8: e.value})} mode="decimal" locale="en-IN" minFractionDigits={2} />
-                    </div>
-                </div>
-
-                <h3>Currency</h3>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-3">
-                        United States
-                        <InputNumber value={this.state.value9} onChange={(e) => this.setState({value9: e.value})} mode="currency" currency="USD" locale="en-US" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Germany
-                        <InputNumber value={this.state.value10} onChange={(e) => this.setState({value10: e.value})} mode="currency" currency="EUR" locale="de-DE" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        India
-                        <InputNumber value={this.state.value11} onChange={(e) => this.setState({value11: e.value})} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Japan
-                        <InputNumber value={this.state.value12} onChange={(e) => this.setState({value12: e.value})} mode="currency" currency="JPY" locale="jp-JP"/>
-                    </div>
-                </div>
-
-                <h3>Prefix and Suffix</h3>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-3">
-                        Mile
-                        <InputNumber value={this.state.value13} onChange={(e) => this.setState({value17: e.value})} suffix=" mi" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Percent
-                        <InputNumber value={this.state.value14} onChange={(e) => this.setState({value18: e.value})} prefix="%" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Expiry
-                        <InputNumber value={this.state.value15} onChange={(e) => this.setState({value19: e.value})}  prefix="Expires in " suffix=" days" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Temperature
-                        <InputNumber value={this.state.value16} onChange={(e) => this.setState({value20: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
-                    </div>
-                </div>
-
-                <h3>Buttons</h3>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-3">
-                        Stacked
-                        <InputNumber value={this.state.value17} onChange={(e) => this.setState({value17: e.value})} showButtons mode="currency" currency="USD" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        Horizontal with Step
-                        <InputNumber value={this.state.value18} onChange={(e) => this.setState({value18: e.value})} showButtons buttonLayout="horizontal" spinnerMode="horizontal" step={0.25}
-                            decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                        <div>Vertical</div>
-                        <InputNumber value={this.state.value19} onChange={(e) => this.setState({value19: e.value})} mode="decimal" showButtons buttonLayout="vertical" spinnerMode="vertical"
-                            decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
-                    </div>
-                    <div className="p-col-12 p-md-3">
-                            Min-Max Boundaries
-                        <InputNumber value={this.state.value20} onChange={(e) => this.setState({value20: e.value})} mode="decimal" showButtons min={0} max={100} />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-        </TabPanel>
+                        <CodeHighlight className="language-javascript">
+                            {value.content}
+                        </CodeHighlight>
+                    </TabPanel>
+                );
+            })
+        }
     </TabView>
 </div>
         );
