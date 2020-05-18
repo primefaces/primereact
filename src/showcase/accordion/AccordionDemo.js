@@ -4,6 +4,7 @@ import {Accordion,AccordionTab} from '../../components/accordion/Accordion';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class AccordionDemo extends Component {
 
@@ -78,11 +79,214 @@ export class AccordionDemo extends Component {
 
 export class AccordionDoc extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Accordion,AccordionTab} from 'primereact/accordion';
+
+export class AccordionDemo extends Component {
+
+    render() {
+        return (
+            <div>
+                <h3>Default</h3>
+                <Accordion>
+                    <AccordionTab header="Godfather I">
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
+                        Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
+                        of the family, kind and benevolent to those who give respect,
+                        but given to ruthless violence whenever anything stands against the good of the family.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Godfather II">
+                        <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
+                        Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
+                        the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
+                        Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
+                        Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Godfather III">
+                        <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
+                        third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+                        now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
+                    </AccordionTab>
+                </Accordion>
+
+                <h3>Multiple</h3>
+                <Accordion multiple={true}>
+                    <AccordionTab header="Godfather I">
+                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
+                        His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
+                        Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
+                        of the family, kind and benevolent to those who give respect,
+                        but given to ruthless violence whenever anything stands against the good of the family.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Godfather II">
+                        <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
+                        Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
+                        the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
+                        Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
+                        Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Godfather III">
+                        <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
+                        third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+                        now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
+                </Accordion>
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React from 'react';
+import {Accordion,AccordionTab} from 'primereact/accordion';
+
+const AccordionDemo = () => {
+
+    return (
+        <div>
+            <h3>Default</h3>
+            <Accordion>
+                <AccordionTab header="Godfather I">
+                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
+                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
+                    of the family, kind and benevolent to those who give respect,
+                    but given to ruthless violence whenever anything stands against the good of the family.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather II">
+                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
+                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
+                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
+                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
+                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather III">
+                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
+                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
+                </AccordionTab>
+            </Accordion>
+
+            <h3>Multiple</h3>
+            <Accordion multiple={true}>
+                <AccordionTab header="Godfather I">
+                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
+                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
+                    of the family, kind and benevolent to those who give respect,
+                    but given to ruthless violence whenever anything stands against the good of the family.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather II">
+                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
+                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
+                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
+                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
+                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather III">
+                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
+                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
+            </Accordion>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React from 'react';
+import {Accordion,AccordionTab} from 'primereact/accordion';
+
+const AccordionDemo = () => {
+
+    return (
+        <div>
+            <h3>Default</h3>
+            <Accordion>
+                <AccordionTab header="Godfather I">
+                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
+                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
+                    of the family, kind and benevolent to those who give respect,
+                    but given to ruthless violence whenever anything stands against the good of the family.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather II">
+                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
+                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
+                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
+                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
+                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather III">
+                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
+                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
+                </AccordionTab>
+            </Accordion>
+
+            <h3>Multiple</h3>
+            <Accordion multiple={true}>
+                <AccordionTab header="Godfather I">
+                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
+                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
+                    of the family, kind and benevolent to those who give respect,
+                    but given to ruthless violence whenever anything stands against the good of the family.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather II">
+                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
+                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
+                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
+                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
+                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather III">
+                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
+                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
+                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
+                </AccordionTab>
+                <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
+            </Accordion>
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
 
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/accordion" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="AccordionDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
     render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -324,85 +528,20 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/accordion" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Accordion,AccordionTab} from 'accordion/accordion';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class AccordionDemo extends Component {
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Accordion</h1>
-                        <p>Accordion groups a collection of contents in tabs.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Default</h3>
-                    <Accordion>
-                        <AccordionTab header="Godfather I">
-                            <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
-                            His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
-                            Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
-                            of the family, kind and benevolent to those who give respect,
-                            but given to ruthless violence whenever anything stands against the good of the family.</p>
-                        </AccordionTab>
-                        <AccordionTab header="Godfather II">
-                            <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
-                            Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
-                            the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
-                            Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
-                            Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
-                        </AccordionTab>
-                        <AccordionTab header="Godfather III">
-                            <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
-                            third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-                            now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
-                        </AccordionTab>
-                    </Accordion>
-
-                    <h3>Multiple</h3>
-                    <Accordion multiple={true}>
-                        <AccordionTab header="Godfather I">
-                            <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
-                            His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
-                            Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
-                            of the family, kind and benevolent to those who give respect,
-                            but given to ruthless violence whenever anything stands against the good of the family.</p>
-                        </AccordionTab>
-                        <AccordionTab header="Godfather II">
-                            <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
-                            Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
-                            the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
-                            Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
-                            Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
-                        </AccordionTab>
-                        <AccordionTab header="Godfather III">
-                            <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
-                            third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-                            now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
-                        </AccordionTab>
-                        <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
-                    </Accordion>
-                </div>
-
-                <AccordionDoc></AccordionDoc>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         );

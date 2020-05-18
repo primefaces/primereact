@@ -4,6 +4,7 @@ import {Growl} from '../../components/growl/Growl';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class CaptchaDemo extends Component {
 
@@ -44,11 +45,107 @@ export class CaptchaDemo extends Component {
 
 class CaptchaDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, { Component } from 'react';
+import {Captcha} from 'primereact/captcha';
+import {Growl} from 'primereact/growl';
+
+export class CaptchaDemo extends Component {
+
+    constructor() {
+        super();
+        this.showResponse = this.showResponse.bind(this);
+    }
+
+    showResponse() {
+        this.growl.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
     }
 
     render() {
+        return (
+            <div>
+                <Growl ref={(el) => this.growl = el}></Growl>
+
+                <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse} />
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useRef } from 'react';
+import {Captcha} from 'primereact/captcha';
+import {Growl} from 'primereact/growl';
+
+const CaptchaDemo = () => {
+    let growl = useRef(null);
+
+    const showResponse = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+    }
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useRef } from 'react';
+import {Captcha} from 'primereact/captcha';
+import {Growl} from 'primereact/growl';
+
+const CaptchaDemo = () => {
+    let growl = useRef<any>(null);
+
+    const showResponse = () => {
+        growl.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+    }
+
+    return (
+        <div>
+            <Growl ref={growl}></Growl>
+
+            <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/captcha" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="CaptchaDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -202,53 +299,20 @@ showResponse(response) {
                         <p>Google Recaptcha V2</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/captcha" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <span>View on GitHub</span>
-                        </a>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import React, {Component} from 'react';
-import {Captcha} from '../../components/captcha/Captcha';
-import {Growl} from '../../components/growl/Growl';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-export class CaptchaDemo extends Component {
-
-    constructor() {
-        super();
-        this.showResponse = this.showResponse.bind(this);
-    }
-
-    showResponse() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Captcha</h1>
-                        <p>Captcha is a form validation component based on Recaptcha.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation button-demo">
-                    <Growl ref={(el) => this.growl = el}></Growl>
-
-                    <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse} />
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-                        </CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView >
             </div>
         )
