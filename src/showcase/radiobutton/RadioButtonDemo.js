@@ -4,6 +4,7 @@ import {RadioButton} from '../../components/radiobutton/RadioButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class RadioButtonDemo extends Component {
 
@@ -54,11 +55,130 @@ export class RadioButtonDemo extends Component {
 
 class RadioButtonDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'app': {
+                content: `
+import React, {Component} from 'react';
+import {RadioButton} from 'primereact/radiobutton';
+
+export class RadioButtonDemo extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            city: null
+        };
     }
 
     render() {
+        return (
+            <div>
+                <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                    <div className="p-col-12">
+                        <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
+                        <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                    </div>
+                    <div className="p-col-12">
+                        <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
+                        <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                    </div>
+                    <div className="p-col-12">
+                        <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
+                        <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                    </div>
+                </div>
+                Selected City : {this.state.city}
+            </div>
+        )
+    }
+}
+                `
+            },
+            'hooks': {
+                content: `
+import React, { useState } from 'react';
+import {RadioButton} from 'primereact/radiobutton';
+
+const RadioButtonDemo = () => {
+    const [city, setCity] = useState(null);
+
+    return (
+        <div>
+            <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                <div className="p-col-12">
+                    <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
+                    <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                </div>
+                <div className="p-col-12">
+                    <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
+                    <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                </div>
+                <div className="p-col-12">
+                    <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
+                    <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                </div>
+            </div>
+            Selected City : {city}
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                content: `
+import React, { useState } from 'react';
+import {RadioButton} from 'primereact/radiobutton';
+
+const RadioButtonDemo = () => {
+    const [city, setCity] = useState<string|undefined>(undefined);
+
+    return (
+        <div>
+            <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
+                <div className="p-col-12">
+                    <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
+                    <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                </div>
+                <div className="p-col-12">
+                    <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
+                    <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                </div>
+                <div className="p-col-12">
+                    <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
+                    <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                </div>
+            </div>
+            Selected City : {city}
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    renderSourceButtons() {
+        return (
+            <div className="source-button-group">
+                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/radiobutton" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>View on GitHub</span>
+                </a>
+                <LiveEditor name="RadioButtonDemo" sources={this.sources} />
+            </div>
+        )
+    }
+
+    render() {
+        const sourceButtons = this.renderSourceButtons();
+
         return (
             <div className="content-section documentation">
                 <TabView>
@@ -225,59 +345,21 @@ import {RadioButton} from 'primereact/radiobutton';
                     <h3>Dependencies</h3>
                     <p>None.</p>
                 </TabPanel>
-                <TabPanel header="Source">
-                    <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/radiobutton" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                        <span>View on GitHub</span>
-                    </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {RadioButton} from 'primereact/radiobutton';
 
-export class RadioButtonDemo extends Component {
+                    {
+                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
+                            const header = key === 'app' ? 'Source' : `${key} Source`;
+                            return (
+                                <TabPanel key={`source_${index}`} header={header}>
+                                    {sourceButtons}
 
-    constructor() {
-        super();
-        this.state = {
-            city: null
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>RadioButton</h1>
-                        <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
-                        <div className="p-col-12">
-                            <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
-                            <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
-                        </div>
-                        <div className="p-col-12">
-                            <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
-                            <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
-                        </div>
-                        <div className="p-col-12">
-                            <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
-                            <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
-                        </div>
-                    </div>
-                    Selected City : {this.state.city}
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                                    <CodeHighlight className="language-javascript">
+                                        {value.content}
+                                    </CodeHighlight>
+                                </TabPanel>
+                            );
+                        })
+                    }
                 </TabView>
             </div>
         )
