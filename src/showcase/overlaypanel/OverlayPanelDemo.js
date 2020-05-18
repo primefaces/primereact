@@ -41,9 +41,13 @@ export class OverlayPanelDoc extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            activeIndex: 0
+        };
 
         this.sources = {
             'app': {
+                tabName: 'Source',
                 content: `
 import React, { Component } from 'react';
 import {OverlayPanel} from 'primereact/overlaypanel';
@@ -57,7 +61,7 @@ export class OverlayPanelDemo extends Component {
                 <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)}/>
 
                 <OverlayPanel ref={(el) => this.op = el} id="overlay_panel" showCloseIcon={true}>
-                    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+                    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
                 </OverlayPanel>
             </div>
         )
@@ -66,6 +70,7 @@ export class OverlayPanelDemo extends Component {
                 `
             },
             'hooks': {
+                tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
 import {OverlayPanel} from 'primereact/overlaypanel';
@@ -79,7 +84,7 @@ const OverlayPanelDemo = () => {
             <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
 
             <OverlayPanel ref={op} id="overlay_panel" showCloseIcon={true}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
             </OverlayPanel>
         </div>
     )
@@ -87,6 +92,7 @@ const OverlayPanelDemo = () => {
                 `
             },
             'ts': {
+                tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
 import {OverlayPanel} from 'primereact/overlaypanel';
@@ -100,7 +106,7 @@ const OverlayPanelDemo = () => {
             <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
 
             <OverlayPanel ref={op} id="overlay_panel" showCloseIcon={true}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
             </OverlayPanel>
         </div>
     )
@@ -110,7 +116,11 @@ const OverlayPanelDemo = () => {
         }
     }
 
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.activeIndex !== nextState.activeIndex) {
+            return true;
+        }
+
         return false;
     }
 
@@ -121,7 +131,7 @@ const OverlayPanelDemo = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     <span>View on GitHub</span>
                 </a>
-                <LiveEditor name="OverlayPanelDemo" sources={this.sources} />
+                <LiveEditor name="OverlayPanelDemo" sources={this.sources} activeButtonIndex={this.state.activeIndex - 1} />
             </div>
         )
     }
@@ -131,7 +141,7 @@ const OverlayPanelDemo = () => {
 
         return (
             <div className="content-section documentation">
-                <TabView>
+                <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
 <CodeHighlight className="language-javascript">
@@ -310,9 +320,8 @@ import {OverlayPanel} from 'primereact/overlaypanel';
 
                     {
                         this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            const header = key === 'app' ? 'Source' : `${key} Source`;
                             return (
-                                <TabPanel key={`source_${index}`} header={header}>
+                                <TabPanel key={`source_${index}`} header={value.tabName}>
                                     {sourceButtons}
 
                                     <CodeHighlight className="language-javascript">
