@@ -882,6 +882,119 @@ const DataTableDemo = () => {
                 `
             }
         }
+
+        this.extFiles = {
+            'index.css': `
+.datatable-doc-demo .customer-badge {
+    border-radius: 2px;
+    padding: 0.25em 0.5em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+.datatable-doc-demo .customer-badge.status-qualified {
+    background-color: #C8E6C9;
+    color: #256029;
+}
+.datatable-doc-demo .customer-badge.status-unqualified {
+    background-color: #FFCDD2;
+    color: #C63737;
+}
+.datatable-doc-demo .customer-badge.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+}
+.datatable-doc-demo .customer-badge.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+}
+.datatable-doc-demo .customer-badge.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+}
+.datatable-doc-demo .customer-badge.status-proposal {
+    background-color: #FFD8B2;
+    color: #805B36;
+}
+.datatable-doc-demo .p-multiselect-representative-option {
+    display: inline-block;
+    vertical-align: middle;
+}
+.datatable-doc-demo .p-multiselect-representative-option img {
+    vertical-align: middle;
+    width: 24px;
+}
+.datatable-doc-demo .p-multiselect-representative-option span {
+    margin-top: 0.125em;
+}
+.datatable-doc-demo .flag {
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.datatable-doc-demo .p-paginator .p-dropdown {
+    float: left;
+}
+.datatable-doc-demo .p-paginator .p-paginator-current {
+    float: right;
+}
+.datatable-doc-demo .p-progressbar {
+    height: 8px;
+    background-color: #D8DADC;
+}
+.datatable-doc-demo .p-progressbar .p-progressbar-value {
+    background-color: #00ACAD;
+    transition: none;
+}
+.datatable-doc-demo .p-column-filter {
+    display: block;
+}
+.datatable-doc-demo .p-column-filter input {
+    width: 100%;
+}
+.datatable-doc-demo .p-datatable-globalfilter-container {
+    float: right;
+}
+.datatable-doc-demo .p-datatable-globalfilter-container input {
+    width: 200px;
+}
+.datatable-doc-demo .p-datepicker {
+    min-width: 25em;
+}
+.datatable-doc-demo .p-datepicker td {
+    font-weight: 400;
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-header {
+    border: 0 none;
+    padding: 12px;
+    text-align: left;
+    font-size: 20px;
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers .p-paginator {
+    border: 0 none;
+    padding: 1em;
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th {
+    border: 0 none;
+    text-align: left;
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th.p-filter-column {
+    border-top: 1px solid #c8c8c8;
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
+    border: 0 none;
+    cursor: auto;
+}
+.datatable-doc-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
+    text-transform: uppercase;
+}
+            `
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -899,7 +1012,7 @@ const DataTableDemo = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     <span>View on GitHub</span>
                 </a>
-                <LiveEditor name="DataTableDemo" sources={this.sources} service="CustomerService" data="customers-large" activeButtonIndex={this.state.activeIndex - 1} />
+                <LiveEditor name="DataTableDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} activeButtonIndex={this.state.activeIndex - 1} />
             </div>
         )
     }
@@ -909,140 +1022,7 @@ const DataTableDemo = () => {
             <React.Fragment>
                 <p>DataTableDemo.css</p>
 <CodeHighlight className="language-javascript">
-{`
-.datatable-doc-demo {
-    .customer-badge {
-        border-radius: 2px;
-        padding: .25em .5em;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: .3px;
-
-        &.status-qualified {
-            background-color: #C8E6C9;
-            color: #256029;
-        }
-
-        &.status-unqualified {
-            background-color: #FFCDD2;
-            color: #C63737;
-        }
-
-        &.status-negotiation {
-            background-color: #FEEDAF;
-            color: #8A5340;
-        }
-
-        &.status-new {
-            background-color: #B3E5FC;
-            color: #23547B;
-        }
-
-        &.status-renewal {
-            background-color: #ECCFFF;
-            color: #694382;
-        }
-
-        &.status-proposal {
-            background-color: #FFD8B2;
-            color: #805B36;
-        }
-    }
-
-    .p-multiselect-representative-option {
-        display: inline-block;
-        vertical-align: middle;
-
-        img {
-            vertical-align: middle;
-            width: 24px;
-        }
-
-        span {
-            margin-top: .125em;
-        }
-    }
-
-    .p-paginator {
-        .p-dropdown {
-            float: left;
-        }
-
-        .p-paginator-current {
-            float: right;
-        }
-    }
-
-    .p-progressbar {
-        height: 8px;
-        background-color: #D8DADC;
-
-        .p-progressbar-value {
-            background-color: #00ACAD;
-            transition: none;
-        }
-    }
-
-    .p-column-filter {
-        display: block;
-
-        input {
-            width: 100%;
-        }
-    }
-
-    .p-datatable-globalfilter-container {
-        float: right;
-
-        input {
-            width: 200px;
-        }
-    }
-
-    .p-datepicker {
-        min-width: 25em;
-
-        td {
-            font-weight: 400;
-        }
-    }
-
-    .p-datatable.p-datatable-customers {
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
-
-        .p-datatable-header {
-            border: 0 none;
-            padding: 12px;
-            text-align: left;
-            font-size: 20px;
-        }
-
-        .p-paginator {
-            border: 0 none;
-            padding: 1em;
-        }
-
-        .p-datatable-thead > tr > th {
-            border: 0 none;
-            text-align: left;
-
-            &.p-filter-column {
-                border-top: 1px solid #c8c8c8;
-            }
-        }
-
-        .p-datatable-tbody > tr > td {
-            border: 0 none;
-            cursor: auto;
-        }
-
-        .p-dropdown-label:not(.p-placeholder) {
-            text-transform: uppercase;
-        }
-    }
-}
-`}
+{ this.extFiles['index.css'] }
 </CodeHighlight>
 
             </React.Fragment>
