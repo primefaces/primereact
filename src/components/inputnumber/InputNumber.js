@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
 import Tooltip from "../tooltip/Tooltip";
-import DomHandler from '../utils/DomHandler';
 
 export class InputNumber extends Component {
 
