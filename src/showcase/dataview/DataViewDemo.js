@@ -328,7 +328,7 @@ export class DataViewDemo extends Component {
         const header = this.renderHeader();
 
         return (
-            <div>
+            <div className="dataview-demo">
                 <DataView value={this.state.cars} layout={this.state.layout} header={header}
                         itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
                         sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
@@ -369,8 +369,8 @@ const DataViewDemo = () => {
 
     const onSortChange = (event) => {
         const value = event.value;
-        let _sortOrder,
-        let _sortField,
+        let _sortOrder;
+        let _sortField;
         let _sortKey = value;
 
         if (value.indexOf('!') === 0) {
@@ -478,7 +478,7 @@ const DataViewDemo = () => {
     const header = renderHeader();
 
     return (
-        <div>
+        <div className="dataview-demo">
             <DataView value={cars} layout={layout} header={header}
                     itemTemplate={itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
                     sortOrder={sortOrder} sortField={sortField} />
@@ -627,7 +627,7 @@ const DataViewDemo = () => {
     const header = renderHeader();
 
     return (
-        <div>
+        <div className="dataview-demo">
             <DataView value={cars} layout={layout} header={header}
                     itemTemplate={itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
                     sortOrder={sortOrder} sortField={sortField} />
@@ -640,6 +640,52 @@ const DataViewDemo = () => {
 }
                 `
             }
+        }
+
+        this.extFiles = {
+            'index.css': `
+.dataview-demo .car-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+    border-bottom: 1px solid #d9dad9;
+}
+.dataview-demo .car-details > div {
+    display: flex;
+    align-items: center;
+}
+.dataview-demo .car-details > div img {
+    margin-right: 14px;
+}
+.dataview-demo .car-detail {
+    padding: 0 1em 1em 1em;
+    border-bottom: 1px solid #d9dad9;
+    margin: 1em;
+}
+.dataview-demo .p-panel-content {
+    padding: 1em;
+}
+@media screen and (max-width: 1024px) {
+    .dataview-demo .p-dataview .car-details img {
+        width: 75px;
+    }
+}
+@media screen and (max-width: 640px) {
+    .dataview-demo .car-details, .dataview-demo .search-icon {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .dataview-demo .filter-container {
+        text-align: left;
+    }
+
+    .datascroll-demo .car-item {
+        text-align: center;
+    }
+}
+            `
         }
     }
 
@@ -658,7 +704,7 @@ const DataViewDemo = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     <span>View on GitHub</span>
                 </a>
-                <LiveEditor name="DataViewDemo" sources={this.sources} service="CarService" data="cars-large" activeButtonIndex={this.state.activeIndex - 1} />
+                <LiveEditor name="DataViewDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} activeButtonIndex={this.state.activeIndex - 1} />
             </div>
         )
     }
