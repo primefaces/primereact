@@ -54,11 +54,13 @@ export class LiveEditor extends Component {
                 'index.css': {
                     content: `
 body {
-    font-size: 14px;
     padding: .5em;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: normal;
     color: #333333;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
 }
 .center-demo {
     display: flex;
