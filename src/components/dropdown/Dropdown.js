@@ -138,6 +138,7 @@ export class Dropdown extends Component {
 
     onInputFocus(event) {
         DomHandler.addClass(this.container, 'p-focus');
+        this.focus = true;
 
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -146,7 +147,7 @@ export class Dropdown extends Component {
 
     onInputBlur(event) {
         DomHandler.removeClass(this.container, 'p-focus');
-        DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
+        this.focus = false;
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
@@ -359,7 +360,7 @@ export class Dropdown extends Component {
 
     onEditableInputFocus(event) {
         DomHandler.addClass(this.container, 'p-focus');
-        DomHandler.addClass(this.container, 'p-inputwrapper-focus');
+        this.focus = true;
         this.hide();
 
         if (this.props.onFocus) {
@@ -714,6 +715,7 @@ export class Dropdown extends Component {
     render() {
         let className = classNames('p-dropdown p-component', this.props.className, {'p-disabled': this.props.disabled,
             'p-inputwrapper-filled': this.props.value,
+            'p-inputwrapper-focus': this.focus,
             'p-dropdown-clearable': this.props.showClear && !this.props.disabled});
         let selectedOption = this.findOption(this.props.value);
         let label = selectedOption ? this.getOptionLabel(selectedOption) : null;

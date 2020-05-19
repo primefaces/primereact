@@ -84,10 +84,12 @@ export class MultiSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: ''
+            filter: '',
+            panelClick: false
         };
 
         this.onClick = this.onClick.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -179,6 +181,10 @@ export class MultiSelect extends Component {
         }
     }
 
+    onPanelClick(event) {
+        this.setState({panelClick : true});
+    }
+
     onToggleAll(event) {
         let newValue;
 
@@ -255,6 +261,7 @@ export class MultiSelect extends Component {
     }
 
     onCloseClick(event) {
+        this.setState({panelClick : false});
         this.hide();
         event.preventDefault();
         event.stopPropagation();
@@ -297,6 +304,7 @@ export class MultiSelect extends Component {
 
     onFocus(event) {
         DomHandler.addClass(this.container, 'p-focus');
+        this.focus = true;
 
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -305,6 +313,7 @@ export class MultiSelect extends Component {
 
     onBlur(event) {
         DomHandler.removeClass(this.container, 'p-focus');
+        this.focus = false;
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
@@ -315,6 +324,7 @@ export class MultiSelect extends Component {
         if(!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if(this.isOutsideClicked(event)) {
+                    this.setState({panelClick : false});
                     this.hide();
                 }
             };
@@ -496,7 +506,8 @@ export class MultiSelect extends Component {
     render() {
         let className = classNames('p-multiselect p-component', this.props.className, {
             'p-disabled': this.props.disabled,
-            'p-inputwrapper-filled': this.props.value && this.props.value.length > 0});
+            'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
+            'p-inputwrapper-focus': this.focus || (this.props.filter && this.state.panelClick)});
         let label = this.renderLabel();
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
@@ -529,7 +540,7 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
-                <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo}
+                <MultiSelectPanel ref={el => this.panel = el} onClick={this.onPanelClick} header={header} appendTo={this.props.appendTo}
                     scrollHeight={this.props.scrollHeight}>
                     {items}
                 </MultiSelectPanel>
