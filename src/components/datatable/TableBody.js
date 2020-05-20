@@ -140,8 +140,8 @@ export class TableBody extends Component {
         }
 
         if (this.props.lazy && this.props.paginator) {
-            rangeStart -= this.first;
-            rangeEnd -= this.first;
+            rangeStart -= this.props.first;
+            rangeEnd -= this.props.first;
         }
 
         const value = this.props.value;
