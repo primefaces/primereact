@@ -1,4 +1,90 @@
 {
+    "4.2.1": {
+        "autocomplete": [
+            {
+                "number": 1296,
+                "title": "AutoComplete: selectedItemTemplate gets called for query",
+                "url": "https://github.com/primefaces/primereact/issues/1296"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1342,
+                "title": "InputMask displayed value does not change when value changes to undefined or null",
+                "url": "https://github.com/primefaces/primereact/issues/1342"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1352,
+                "title": "DataTable: filters are not rerendered when their state is changed",
+                "url": "https://github.com/primefaces/primereact/issues/1352"
+            },
+            {
+                "number": 1351,
+                "title": "DataTable: wrong type definition for onFilter",
+                "url": "https://github.com/primefaces/primereact/issues/1351"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1343,
+                "title": "Remove filter method from ObjectUtils",
+                "url": "https://github.com/primefaces/primereact/issues/1343"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1359,
+                "title": "Editable Dropdown is not working as expected ",
+                "url": "https://github.com/primefaces/primereact/issues/1359"
+            },
+            {
+                "number": 1358,
+                "title": "Dropdown throws an exception on console after filtering and keyboard navigation",
+                "url": "https://github.com/primefaces/primereact/issues/1358"
+            },
+            {
+                "number": 1339,
+                "title": "Wrong import for FilterUtils",
+                "url": "https://github.com/primefaces/primereact/issues/1339"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1346,
+                "title": "Editor Component readOnly property name wrong",
+                "url": "https://github.com/primefaces/primereact/issues/1346"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1344,
+                "title": "React multiselect defaultValue warning",
+                "url": "https://github.com/primefaces/primereact/issues/1344"
+            },
+            {
+                "number": 1339,
+                "title": "Wrong import for FilterUtils",
+                "url": "https://github.com/primefaces/primereact/issues/1339"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1350,
+                "title": "Autofocus property doesn't work as expected on Textarea",
+                "url": "https://github.com/primefaces/primereact/issues/1350"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1339,
+                "title": "Wrong import for FilterUtils",
+                "url": "https://github.com/primefaces/primereact/issues/1339"
+            }
+        ]
+    },
+    
     "4.2.0": {
         "inputnumber": [
             {
