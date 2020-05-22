@@ -58,7 +58,7 @@ export class DropdownDemo extends Component {
             return option.label;
         }
         else {
-            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="p-clearfix">
@@ -172,7 +172,7 @@ export class DropdownDemo extends Component {
             return option.label;
         }
         else {
-            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="p-clearfix">
@@ -252,7 +252,7 @@ const DropdownDemo = () => {
             return option.label;
         }
         else {
-            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="p-clearfix">
@@ -330,7 +330,7 @@ const DropdownDemo = () => {
             return option.label;
         }
         else {
-            let logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
             return (
                 <div className="p-clearfix">
@@ -480,7 +480,7 @@ carTemplate(option) {
         return option.label;
     }
     else {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">

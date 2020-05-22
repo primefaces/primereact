@@ -84,7 +84,7 @@ export class AutoCompleteDemo extends Component {
     itemTemplate(brand) {
         return (
             <div className="p-clearfix">
-                <img alt={brand} src={\`showcase/resources/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
+                <img alt={brand} src={\`showcase/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
                 <div style={{ fontSize: '16px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
             </div>
         );
@@ -175,7 +175,7 @@ const AutoCompleteDemo = () => {
     const itemTemplate = (brand) => {
         return (
             <div className="p-clearfix">
-                <img alt={brand} src={\`showcase/resources/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
+                <img alt={brand} src={\`showcase/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
                 <div style={{ fontSize: '16px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
             </div>
         );
@@ -264,7 +264,7 @@ const AutoCompleteDemo = () => {
     const itemTemplate = (brand: string) => {
         return (
             <div className="p-clearfix">
-                <img alt={brand} src={\`showcase/resources/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
+                <img alt={brand} src={\`showcase/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
                 <div style={{ fontSize: '16px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
             </div>
         );

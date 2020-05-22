@@ -121,7 +121,7 @@ export class OrganizationChartDemo extends Component {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={`showcase/resources/demo/images/organization/${node.data.avatar}`} style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={`showcase/demo/images/organization/${node.data.avatar}`} style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -293,7 +293,7 @@ export class OrganizationChartDemo extends Component {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/resources/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@ const OrganizationChartDemo = () => {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/resources/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -571,7 +571,7 @@ const OrganizationChartDemo = () => {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/resources/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -750,7 +750,7 @@ nodeTemplate(node) {
             <div>
                 <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/resources/demo/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }}/>
                     <div>{node.data.name}</div>
                 </div>
             </div>

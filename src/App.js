@@ -3,16 +3,17 @@ import { AppMenu } from './AppMenu';
 import {Dialog} from './components/dialog/Dialog';
 import {Button} from './components/button/Button';
 import classNames from 'classnames';
-import 'babel-polyfill';
-import './resources/style/primereact.css';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import './assets/style/primereact.css';
+import './assets/style/flags.css';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'prismjs/themes/prism-coy.css';
-import './resources/style/flags.css';
-import './sass/App.scss';
+import './assets/style/app/App.scss';
 
 import AppRouter from './AppRouter';
 /*import AppNews from './AppNews';*/
@@ -186,7 +187,7 @@ export class App extends Component {
     }
 
     getChangelog() {
-        axios.get('showcase/resources/changelog/changelog.json', { headers: { 'Cache-Control' : 'no-cache' } })
+        axios.get('showcase/changelog/changelog.json', { headers: { 'Cache-Control' : 'no-cache' } })
             .then(res => res.data)
             .then(data => this.setState({ changelog: data }));
     }

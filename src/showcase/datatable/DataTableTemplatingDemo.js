@@ -27,7 +27,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     brandTemplate(rowData, column) {
-        var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
+        var src = "showcase/demo/images/car/" + rowData.brand + ".png";
         return <img src={src} alt={rowData.brand} width="48px" />;
     }
 
@@ -114,7 +114,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     brandTemplate(rowData, column) {
-        var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
+        var src = "showcase/demo/images/car/" + rowData.brand + ".png";
         return <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={rowData.brand} width="48px" />;
     }
 
@@ -167,7 +167,7 @@ const DataTableTemplatingDemo = () => {
     };
 
     const brandTemplate = (rowData, column) => {
-        let src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
+        let src = "showcase/demo/images/car/" + rowData.brand + ".png";
         return <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={rowData.brand} width="48px" />;
     };
 
@@ -218,7 +218,7 @@ const DataTableTemplatingDemo = () => {
     };
 
     const brandTemplate = (rowData: any, column: any) => {
-        let src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
+        let src = "showcase/demo/images/car/" + rowData.brand + ".png";
         return <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={rowData.brand} width="48px" />;
     };
 

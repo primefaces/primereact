@@ -58,7 +58,7 @@ export class InplaceDemo extends Component {
                             <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
                         </InplaceDisplay>
                         <InplaceContent>
-                            <img src="showcase/resources/demo/images/galleria/galleria5.jpg" alt="Nature" />
+                            <img src="showcase/demo/images/galleria/galleria5.jpg" alt="Nature" />
                         </InplaceContent>
                     </Inplace>
 
@@ -139,7 +139,7 @@ export class InplaceDemo extends Component {
                         <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
                     </InplaceDisplay>
                     <InplaceContent>
-                        <img src="showcase/resources/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
+                        <img src="showcase/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
                     </InplaceContent>
                 </Inplace>
 
@@ -200,7 +200,7 @@ const InplaceDemo = () => {
                     <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
                 </InplaceDisplay>
                 <InplaceContent>
-                    <img src="showcase/resources/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
+                    <img src="showcase/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
                 </InplaceContent>
             </Inplace>
 
@@ -260,7 +260,7 @@ const InplaceDemo = () => {
                     <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
                 </InplaceDisplay>
                 <InplaceContent>
-                    <img src="showcase/resources/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
+                    <img src="showcase/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
                 </InplaceContent>
             </Inplace>
 

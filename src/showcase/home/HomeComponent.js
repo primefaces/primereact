@@ -22,7 +22,7 @@ export class HomeComponent extends Component {
                     <div className="p-grid">
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="components" src="showcase/resources/images/home/react-components.png" />
+                                <img alt="components" src="showcase/images/home/react-components.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">70+ COMPONENTS</span>
                                     <p>The most complete set of native widgets featuring 70+ easy to use components for all your UI requirements.</p>
@@ -31,7 +31,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="opensource" src="showcase/resources/images/home/react-opensource.png" />
+                                <img alt="opensource" src="showcase/images/home/react-opensource.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">OPEN SOURCE</span>
                                     <p>Hosted at <a href="https://github.com/primefaces/primereact" className="layout-content-link">GitHub</a>, all widgets are open source and free to use under MIT license. Feel the power of open source.</p>
@@ -40,7 +40,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="themes" src="showcase/resources/images/home/react-themes.png" />
+                                <img alt="themes" src="showcase/images/home/react-themes.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">THEMES</span>
                                     <p>Don’t get tied up in just one look&feel. Choose from a variety of options including material and bootstrap design.</p>
@@ -49,7 +49,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="templates" src="showcase/resources/images/home/react-templates.png" />
+                                <img alt="templates" src="showcase/images/home/react-templates.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">TEMPLATES</span>
                                     <p>Professionally designed highly customizable PrimeReact application templates to get started in no time.</p>
@@ -58,7 +58,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="accesibility" src="showcase/resources/images/home/react-accesibility.png" />
+                                <img alt="accesibility" src="showcase/images/home/react-accesibility.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">ACCESSIBILITY</span>
                                     <p>Fully accessible and in compliance with Section 508 standards.</p>
@@ -67,7 +67,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="pro" src="showcase/resources/images/home/react-pro.png" />
+                                <img alt="pro" src="showcase/images/home/react-pro.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">PRO SUPPORT</span>
                                     <p>With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
@@ -76,7 +76,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="productivity" src="showcase/resources/images/home/react-productivity.png" />
+                                <img alt="productivity" src="showcase/images/home/react-productivity.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">PRODUCTIVITY</span>
                                     <p>Allocate your valuable time on business logic rather than dealing with the complex user interface requirements.</p>
@@ -85,7 +85,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="community" src="showcase/resources/images/home/react-community.png" />
+                                <img alt="community" src="showcase/images/home/react-community.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">COMMUNITY</span>
                                     <p>Join PrimeReact community to become a part of an active, vibrant and growing open source foundation.</p>
@@ -94,7 +94,7 @@ export class HomeComponent extends Component {
                         </div>
                         <div className="p-col-12 p-md-4">
                             <div className="feature-card">
-                                <img alt="mobile" src="showcase/resources/images/home/react-mobile.png" />
+                                <img alt="mobile" src="showcase/images/home/react-mobile.png" />
                                 <div className="feature-card-detail">
                                     <span className="feature-name">MOBILE</span>
                                     <p>Enhanced mobile user experience with touch optimized responsive design elements.</p>
@@ -108,18 +108,18 @@ export class HomeComponent extends Component {
                     <p>Open source products of <a href="http://www.primetek.com.tr">PrimeTek</a> are used all around the world by 1M+ developers in Fortune 500 companies, corporations, government and educational
                         institutions.</p>
                     <div className="p-grid">
-                        <div className="p-col-6 p-md-2"><img alt="airbus" src="showcase/resources/images/home/airbus.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="amex" src="showcase/resources/images/home/amex.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="bmw" src="showcase/resources/images/home/bmw.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="ebay" src="showcase/resources/images/home/ebay.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="ford" src="showcase/resources/images/home/ford.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="fox" src="showcase/resources/images/home/fox.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="lufthansa" src="showcase/resources/images/home/lufthansa.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="mercedes" src="showcase/resources/images/home/mercedes.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="sap" src="showcase/resources/images/home/sap.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="unicredit" src="showcase/resources/images/home/unicredit.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="verizon" src="showcase/resources/images/home/verizon.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="viacom" src="showcase/resources/images/home/viacom.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="airbus" src="showcase/images/home/airbus.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="amex" src="showcase/images/home/amex.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="bmw" src="showcase/images/home/bmw.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="ebay" src="showcase/images/home/ebay.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="ford" src="showcase/images/home/ford.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="fox" src="showcase/images/home/fox.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="lufthansa" src="showcase/images/home/lufthansa.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="mercedes" src="showcase/images/home/mercedes.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="sap" src="showcase/images/home/sap.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="unicredit" src="showcase/images/home/unicredit.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="verizon" src="showcase/images/home/verizon.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="viacom" src="showcase/images/home/viacom.svg"/></div>
                     </div>
                 </div>
                 <div className="templates">
@@ -129,7 +129,7 @@ export class HomeComponent extends Component {
                     <div className="p-grid">
                         <div className="p-col-12">
                             <a href="https://www.primefaces.org/sigma-react">
-                                <img alt="Sigma" src="showcase/resources/images/layouts/sigma-biggest.jpg" />
+                                <img alt="Sigma" src="showcase/images/layouts/sigma-biggest.jpg" />
                             </a>
                         </div>
                     </div>
@@ -143,37 +143,37 @@ export class HomeComponent extends Component {
                     <div className="p-grid templates-grid">
                         <div className="p-col-12 p-md-4">
 							<a href="https://www.primefaces.org/layouts/sapphire-react">
-								<img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-react.jpg" />
+								<img alt="Sapphire" src="showcase/images/layouts/sapphire-react.jpg" />
 							</a>
 						</div>
                         <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/serenity-react">
-                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react.jpg" />
+                                <img alt="Serenity" src="showcase/images/layouts/serenity-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react.jpg" />
+                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-4">
 							<a href="https://www.primefaces.org/layouts/babylon-react">
-								<img alt="Babylon" src="showcase/resources/images/layouts/babylon-react.jpg" />
+								<img alt="Babylon" src="showcase/images/layouts/babylon-react.jpg" />
 							</a>
 						</div>
                         <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react.jpg" />
+                                <img alt="Avalon" src="showcase/images/layouts/avalon-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-4">
                             <a href="https://www.primefaces.org/layouts/apollo-react">
-                                <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react.jpg" />
+                                <img alt="Apollo" src="showcase/images/layouts/apollo-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-4">
 							<a href="https://www.primefaces.org/layouts/roma-react">
-								<img alt="Roma" src="showcase/resources/images/layouts/roma-react.jpg" />
+								<img alt="Roma" src="showcase/images/layouts/roma-react.jpg" />
 							</a>
 						</div>
                     </div>
@@ -183,7 +183,7 @@ export class HomeComponent extends Component {
                     <h3>PrimeReact Designer API</h3>
                     <div className="p-grid">
                         <div className="p-col-12">
-                            <img alt="PrimeReact Designer" src="showcase/resources/images/primereact-designer.jpg" />
+                            <img alt="PrimeReact Designer" src="showcase/images/primereact-designer.jpg" />
                             <p><a href="https://www.primefaces.org/designer/primereact">Designer API</a> is a SASS based theme engine to create PrimeReact themes easily featuring over 500 variables,
                                 a demo application and a base sample theme. Whether you have your own style guide or just need a custom theme, Designer API is the right tool to design and bring them to existence.</p>
 
@@ -203,7 +203,7 @@ export class HomeComponent extends Component {
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
-                            <img alt="PRO" src="showcase/resources/images/home/icon-pro.svg"></img>
+                            <img alt="PRO" src="showcase/images/home/icon-pro.svg"></img>
                         </div>
                     </div>
                 </div>

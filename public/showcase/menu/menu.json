@@ -2,7 +2,7 @@
     "data": [
         {
             "name": "Input",
-            "icon": "showcase/resources/images/mono/input.svg",
+            "icon": "showcase/images/mono/input.svg",
             "meta": [
                 "input"
             ],
@@ -190,7 +190,7 @@
         },
         {
             "name": "Button",
-            "icon": "showcase/resources/images/mono/button.svg",
+            "icon": "showcase/images/mono/button.svg",
             "meta": [
                 "button"
             ],
@@ -213,7 +213,7 @@
         },
         {
             "name": "Data",
-            "icon": "showcase/resources/images/mono/data.svg",
+            "icon": "showcase/images/mono/data.svg",
             "meta": [
                 "data"
             ],
@@ -310,7 +310,7 @@
         },
         {
             "name": "Panel",
-            "icon": "showcase/resources/images/mono/panel.svg",
+            "icon": "showcase/images/mono/panel.svg",
             "meta": [
                 "panel"
             ],
@@ -382,7 +382,7 @@
         },
         {
             "name": "Overlay",
-            "icon": "showcase/resources/images/mono/overlay.svg",
+            "icon": "showcase/images/mono/overlay.svg",
             "meta": [
                 "overlay"
             ],
@@ -427,7 +427,7 @@
         },
         {
             "name": "File",
-            "icon": "showcase/resources/images/mono/file.svg",
+            "icon": "showcase/images/mono/file.svg",
             "meta": [
                 "file"
             ],
@@ -443,7 +443,7 @@
         },
         {
             "name": "Menu",
-            "icon": "showcase/resources/images/mono/menu.svg",
+            "icon": "showcase/images/mono/menu.svg",
             "meta": [
                 "menu"
             ],
@@ -530,7 +530,7 @@
         },
         {
             "name": "Chart",
-            "icon": "showcase/resources/images/mono/charts.svg",
+            "icon": "showcase/images/mono/charts.svg",
             "meta": [
                 "chart"
             ],
@@ -596,7 +596,7 @@
         },
         {
             "name": "Messages",
-            "icon": "showcase/resources/images/mono/message.svg",
+            "icon": "showcase/images/mono/message.svg",
             "meta": [
                 "message"
             ],
@@ -620,7 +620,7 @@
         },
         {
             "name": "Multimedia",
-            "icon": "showcase/resources/images/mono/multimedia.svg",
+            "icon": "showcase/images/mono/multimedia.svg",
             "meta": [
                 "multimedia"
             ],
@@ -637,7 +637,7 @@
         },
         {
             "name": "Misc",
-            "icon": "showcase/resources/images/mono/misc.svg",
+            "icon": "showcase/images/mono/misc.svg",
             "meta": [
                 "misc"
             ],

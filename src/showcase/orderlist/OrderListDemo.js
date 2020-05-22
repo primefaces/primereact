@@ -24,7 +24,7 @@ export class OrderListDemo extends Component {
     }
 
     carTemplate(car) {
-        const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        const imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -102,7 +102,7 @@ export class OrderListDemo extends Component {
     }
 
     carTemplate(car) {
-        const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        const imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -149,7 +149,7 @@ const OrderListDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const carTemplate = (car) => {
-        const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        const imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -194,7 +194,7 @@ const OrderListDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const carTemplate = (car: any) => {
-        const imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        const imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">

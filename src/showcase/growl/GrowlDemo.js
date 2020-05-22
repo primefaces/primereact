@@ -43,7 +43,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+        const detail = <img alt="PrimeReact" src="showcase/images/logo.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
         this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -168,7 +168,7 @@ export class GrowlDemo extends Component {
 
     showCustom() {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+        const detail = <img alt="PrimeReact" src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
         this.growl.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -259,7 +259,7 @@ const GrowlDemo = () => {
 
     const showCustom = () => {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+        const detail = <img alt="PrimeReact" src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
         growl.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
@@ -348,7 +348,7 @@ const GrowlDemo = () => {
 
     const showCustom = () => {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
-        const detail = <img alt="PrimeReact" src="showcase/resources/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
+        const detail = <img alt="PrimeReact" src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
         growl.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }

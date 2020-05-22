@@ -19,7 +19,7 @@ export class MultiSelectDemo extends Component {
     }
 
     carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -31,7 +31,7 @@ export class MultiSelectDemo extends Component {
 
     selectedCarTemplate(value) {
         if (value) {
-            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+            const logoPath = 'showcase/demo/images/car/' + value + '.png';
 
             return (
                 <div className="my-multiselected-item-token">
@@ -115,7 +115,7 @@ export class MultiSelectDemo extends Component {
     }
 
     carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -127,7 +127,7 @@ export class MultiSelectDemo extends Component {
 
     selectedCarTemplate(value) {
         if (value) {
-            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+            const logoPath = 'showcase/demo/images/car/' + value + '.png';
 
             return (
                 <div className="my-multiselected-item-token">
@@ -180,7 +180,7 @@ const MultiSelectDemo = () => {
     const [cars2, setCars2] = useState([]);
 
     const carTemplate = (option) => {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -192,7 +192,7 @@ const MultiSelectDemo = () => {
 
     const selectedCarTemplate = (value) => {
         if (value) {
-            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+            const logoPath = 'showcase/demo/images/car/' + value + '.png';
 
             return (
                 <div className="my-multiselected-item-token">
@@ -243,7 +243,7 @@ const MultiSelectDemo = () => {
     const [cars2, setCars2] = useState([]);
 
     const carTemplate = (option: { label: string }) => {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -255,7 +255,7 @@ const MultiSelectDemo = () => {
 
     const selectedCarTemplate = (value: string) => {
         if (value) {
-            const logoPath = 'showcase/resources/demo/images/car/' + value + '.png';
+            const logoPath = 'showcase/demo/images/car/' + value + '.png';
 
             return (
                 <div className="my-multiselected-item-token">
@@ -418,7 +418,7 @@ const cities = [
 <CodeHighlight className="language-javascript">
 {`
 carTemplate(option) {
-    const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+    const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
     return (
         <div className="p-clearfix">
@@ -445,7 +445,7 @@ carTemplate(option) {
 selectedCarTemplate(option) {
 
     if(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
         return (
             <div className="my-multiselected-item-token">
                 <img alt={option.label} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />

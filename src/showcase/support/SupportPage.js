@@ -21,7 +21,7 @@ export class SupportPage extends Component {
                                 <a className="link-button2" href="mailto:PrimeReact@primetek.com.tr">GET A QUOTE</a>
                             </div>
                             <div className="p-col-12 p-md-6">
-                                <img alt="PRO" src="showcase/resources/images/home/icon-pro-white.svg"></img>
+                                <img alt="PRO" src="showcase/images/home/icon-pro-white.svg"></img>
                             </div>
                         </div>
                     </div>

@@ -99,14 +99,14 @@ export class DataTableDemo extends Component {
 
         return (
             <React.Fragment>
-                <img src="showcase/resources/demo/images/flag_placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <img src="showcase/demo/images/flag_placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </React.Fragment>
         );
     }
 
     representativeBodyTemplate(rowData) {
-        const src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
+        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
 
         return (
             <React.Fragment>
@@ -124,7 +124,7 @@ export class DataTableDemo extends Component {
     }
 
     representativeItemTemplate(option) {
-        const src = "showcase/resources/demo/images/avatar/" + option.image;
+        const src = "showcase/demo/images/avatar/" + option.image;
 
         return (
             <div className="p-multiselect-representative-option">
@@ -349,14 +349,14 @@ export class DataTableDemo extends Component {
 
         return (
             <React.Fragment>
-                <img src="showcase/resources/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <img src="showcase/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </React.Fragment>
         );
     }
 
     representativeBodyTemplate(rowData) {
-        const src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
+        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
 
         return (
             <React.Fragment>
@@ -374,7 +374,7 @@ export class DataTableDemo extends Component {
     }
 
     representativeItemTemplate(option) {
-        const src = "showcase/resources/demo/images/avatar/" + option.image;
+        const src = "showcase/demo/images/avatar/" + option.image;
 
         return (
             <div className="p-multiselect-representative-option">
@@ -553,14 +553,14 @@ const DataTableDemo = () => {
 
         return (
             <React.Fragment>
-                <img src="showcase/resources/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <img src="showcase/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </React.Fragment>
         );
     };
 
     const representativeBodyTemplate = (rowData) => {
-        const src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
+        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
 
         return (
             <React.Fragment>
@@ -578,7 +578,7 @@ const DataTableDemo = () => {
     };
 
     const representativeItemTemplate = (option) => {
-        const src = "showcase/resources/demo/images/avatar/" + option.image;
+        const src = "showcase/demo/images/avatar/" + option.image;
 
         return (
             <div className="p-multiselect-representative-option">
@@ -755,14 +755,14 @@ const DataTableDemo = () => {
 
         return (
             <React.Fragment>
-                <img src="showcase/resources/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <img src="showcase/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </React.Fragment>
         );
     };
 
     const representativeBodyTemplate = (rowData: any) => {
-        const src = "showcase/resources/demo/images/avatar/" + rowData.representative.image;
+        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
 
         return (
             <React.Fragment>
@@ -780,7 +780,7 @@ const DataTableDemo = () => {
     };
 
     const representativeItemTemplate = (option: any) => {
-        const src = "showcase/resources/demo/images/avatar/" + option.image;
+        const src = "showcase/demo/images/avatar/" + option.image;
 
         return (
             <div className="p-multiselect-representative-option">
@@ -1057,17 +1057,17 @@ import axios from 'axios';
 export class CarService {
 
     getCarsSmall() {
-        return axios.get('showcase/resources/demo/data/cars-small.json')
+        return axios.get('showcase/demo/data/cars-small.json')
                 .then(res => res.data.data);
     }
 
     getCarsMedium() {
-        return axios.get('showcase/resources/demo/data/cars-medium.json')
+        return axios.get('showcase/demo/data/cars-medium.json')
                 .then(res => res.data.data);
     }
 
     getCarsLarge() {
-        return axios.get('showcase/resources/demo/data/cars-large.json')
+        return axios.get('showcase/demo/data/cars-large.json')
                 .then(res => res.data.data);
     }
 }
@@ -1448,7 +1448,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     brandTemplate(rowData, column) {
-        var src = "showcase/resources/demo/images/car/" + rowData.brand + ".png";
+        var src = "showcase/demo/images/car/" + rowData.brand + ".png";
         return <img src={src} alt={rowData.brand}/>;
     }
 
@@ -2309,7 +2309,7 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     rowExpansionTemplate(data) {
-        var src = "showcase/resources/demo/images/car/" + data.brand + ".png";
+        var src = "showcase/demo/images/car/" + data.brand + ".png";
 
         return  <div className="p-grid p-fluid">
                     <div className="p-col-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>

@@ -45,7 +45,7 @@ export class CarouselDemo extends Component {
             <div className="car-details">
                 <div className="p-grid p-nogutter">
                     <div className="p-col-12">
-                        <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
+                        <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     </div>
                     <div className="p-col-12 car-data">
                         <div className="car-title">{car.brand}</div>
@@ -152,7 +152,7 @@ export class CarouselDemo extends Component {
             <div className="car-details">
                 <div className="p-grid p-nogutter">
                     <div className="p-col-12">
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     </div>
                     <div className="p-col-12 car-data">
                         <div className="car-title">{car.brand}</div>
@@ -228,7 +228,7 @@ const CarouselDemo = () => {
             <div className="car-details">
                 <div className="p-grid p-nogutter">
                     <div className="p-col-12">
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     </div>
                     <div className="p-col-12 car-data">
                         <div className="car-title">{car.brand}</div>
@@ -302,7 +302,7 @@ const CarouselDemo = () => {
             <div className="car-details">
                 <div className="p-grid p-nogutter">
                     <div className="p-col-12">
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     </div>
                     <div className="p-col-12 car-data">
                         <div className="car-title">{car.brand}</div>

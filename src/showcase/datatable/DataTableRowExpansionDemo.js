@@ -25,7 +25,7 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     rowExpansionTemplate(data) {
-        const src = "showcase/resources/demo/images/car/" + data.brand + ".png";
+        const src = "showcase/demo/images/car/" + data.brand + ".png";
 
         return  (
             <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
@@ -118,7 +118,7 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     rowExpansionTemplate(data) {
-        const src = "showcase/resources/demo/images/car/" + data.brand + ".png";
+        const src = "showcase/demo/images/car/" + data.brand + ".png";
 
         return  (
             <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
@@ -180,7 +180,7 @@ const DataTableRowExpansionDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowExpansionTemplate = (data) => {
-        const src = "showcase/resources/demo/images/car/" + data.brand + ".png";
+        const src = "showcase/demo/images/car/" + data.brand + ".png";
 
         return  (
             <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
@@ -240,7 +240,7 @@ const DataTableRowExpansionDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowExpansionTemplate = (data: any) => {
-        const src = "showcase/resources/demo/images/car/" + data.brand + ".png";
+        const src = "showcase/demo/images/car/" + data.brand + ".png";
 
         return  (
             <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>

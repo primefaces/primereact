@@ -440,10 +440,10 @@ export class FlexGridDemo extends Component {
                                         Curabitur vel sodales purus. Vestibulum interdum facilisis nulla imperdiet suscipit. Quisque lectus felis,
                                         condimentum eget hendrerit sit amet.</div>
 
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 1" src="showcase/resources/demo/images/galleria/galleria1.jpg" style={{width:'100%'}} /></div>
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 2" src="showcase/resources/demo/images/galleria/galleria2.jpg" style={{width:'100%'}} /></div>
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 3" src="showcase/resources/demo/images/galleria/galleria3.jpg" style={{width:'100%'}} /></div>
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 4" src="showcase/resources/demo/images/galleria/galleria4.jpg" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 1" src="showcase/demo/images/galleria/galleria1.jpg" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 2" src="showcase/demo/images/galleria/galleria2.jpg" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 3" src="showcase/demo/images/galleria/galleria3.jpg" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 4" src="showcase/demo/images/galleria/galleria4.jpg" style={{width:'100%'}} /></div>
 
                                     <div className="p-col-12 p-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien
                                         facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque
@@ -1516,10 +1516,10 @@ export class FlexGridDemo extends Component {
                                         Curabitur vel sodales purus. Vestibulum interdum facilisis nulla imperdiet suscipit. Quisque lectus felis,
                                         condimentum eget hendrerit sit amet.</div>
 
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 1" src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 2" src="showcase/resources/demo/images/galleria/galleria2.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 3" src="showcase/resources/demo/images/galleria/galleria3.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
-                                    <div className="p-col-6 p-md-3"><img alt="Galleria 4" src="showcase/resources/demo/images/galleria/galleria4.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 1" src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 2" src="showcase/demo/images/galleria/galleria2.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 3" src="showcase/demo/images/galleria/galleria3.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
+                                    <div className="p-col-6 p-md-3"><img alt="Galleria 4" src="showcase/demo/images/galleria/galleria4.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'100%'}} /></div>
 
                                     <div className="p-col-12 p-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien
                                         facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque

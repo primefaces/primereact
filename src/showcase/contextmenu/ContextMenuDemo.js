@@ -155,7 +155,7 @@ export class ContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <ContextMenu model={items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
+                    <img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
                 </div>
 
                 <ContextMenuDoc/>
@@ -317,7 +317,7 @@ export class ContextMenuDemo extends Component {
             <div>
                 <ContextMenu model={items} ref={el => this.cm = el}></ContextMenu>
 
-                <img src="showcase/resources/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
+                <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
             </div>
         );
     }
@@ -468,7 +468,7 @@ const ContextMenuDemo = () => {
         <div>
             <ContextMenu model={items} ref={cm}></ContextMenu>
 
-            <img src="showcase/resources/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
+            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
         </div>
     );
 }
@@ -618,7 +618,7 @@ const ContextMenuDemo = () => {
         <div>
             <ContextMenu model={items} ref={cm}></ContextMenu>
 
-            <img src="showcase/resources/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
+            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
         </div>
     );
 }
@@ -827,7 +827,7 @@ const items:[
                         <CodeHighlight className="language-jsx">
                             {`
 <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
-<img src="showcase/resources/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
 
 `}
                         </CodeHighlight>

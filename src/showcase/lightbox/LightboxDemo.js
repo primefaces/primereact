@@ -11,23 +11,23 @@ export class LightboxDemo extends Component {
     render() {
         const images = [
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos1.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos1_small.jpg',
                 title:'Sopranos 1'
             },
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos2.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos2_small.jpg',
                 title:'Sopranos 2'
             },
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos3.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos3_small.jpg',
                 title:'Sopranos 3'
             },
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos4.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos4_small.jpg',
                 title:'Sopranos 4'
             }
         ];
@@ -85,23 +85,23 @@ export class LightboxDemo extends Component {
     render() {
         const images = [
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos1.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos1_small.jpg',
                 title:'Sopranos 1'
             },
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos2.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos2_small.jpg',
                 title:'Sopranos 2'
             },
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos3.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos3_small.jpg',
                 title:'Sopranos 3'
             },
             {
-                source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
-                thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg',
+                source:'showcase/demo/images/sopranos/sopranos4.jpg',
+                thumbnail:'showcase/demo/images/sopranos/sopranos4_small.jpg',
                 title:'Sopranos 4'
             }
         ];
@@ -135,23 +135,23 @@ const LightboxDemo = () => {
 
     const images = [
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos1.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos1_small.jpg',
             title:'Sopranos 1'
         },
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos2.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos2_small.jpg',
             title:'Sopranos 2'
         },
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos3.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos3_small.jpg',
             title:'Sopranos 3'
         },
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos4.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos4_small.jpg',
             title:'Sopranos 4'
         }
     ];
@@ -184,23 +184,23 @@ const LightboxDemo = () => {
 
     const images = [
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos1.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos1.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos1_small.jpg',
             title:'Sopranos 1'
         },
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos2.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos2.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos2_small.jpg',
             title:'Sopranos 2'
         },
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos3.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos3.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos3_small.jpg',
             title:'Sopranos 3'
         },
         {
-            source:'showcase/resources/demo/images/sopranos/sopranos4.jpg',
-            thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg',
+            source:'showcase/demo/images/sopranos/sopranos4.jpg',
+            thumbnail:'showcase/demo/images/sopranos/sopranos4_small.jpg',
             title:'Sopranos 4'
         }
     ];
@@ -275,10 +275,10 @@ import {Lightbox} from 'primereact/lightbox';
                         <CodeHighlight className="language-javascript">
 {`
 var images=[
-    {source:'showcase/resources/demo/images/sopranos/sopranos1.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos1_small.jpg', title:'Sopranos 1'},
-    {source:'showcase/resources/demo/images/sopranos/sopranos2.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos2_small.jpg', title:'Sopranos 2'},
-    {source:'showcase/resources/demo/images/sopranos/sopranos3.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos3_small.jpg', title:'Sopranos 3'},
-    {source:'showcase/resources/demo/images/sopranos/sopranos4.jpg', thumbnail:'showcase/resources/demo/images/sopranos/sopranos4_small.jpg', title:'Sopranos 4'}
+    {source:'showcase/demo/images/sopranos/sopranos1.jpg', thumbnail:'showcase/demo/images/sopranos/sopranos1_small.jpg', title:'Sopranos 1'},
+    {source:'showcase/demo/images/sopranos/sopranos2.jpg', thumbnail:'showcase/demo/images/sopranos/sopranos2_small.jpg', title:'Sopranos 2'},
+    {source:'showcase/demo/images/sopranos/sopranos3.jpg', thumbnail:'showcase/demo/images/sopranos/sopranos3_small.jpg', title:'Sopranos 3'},
+    {source:'showcase/demo/images/sopranos/sopranos4.jpg', thumbnail:'showcase/demo/images/sopranos/sopranos4_small.jpg', title:'Sopranos 4'}
 ];
 
 `}

@@ -58,7 +58,7 @@ export class DataViewDemo extends Component {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
+                        <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand}/>
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -76,7 +76,7 @@ export class DataViewDemo extends Component {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
+                    <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </Panel>
@@ -100,7 +100,7 @@ export class DataViewDemo extends Component {
             return (
                 <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
                     <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={`showcase/resources/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} />
+                        <img src={`showcase/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} />
                     </div>
 
                     <div className="p-col-4">Vin: </div>
@@ -241,7 +241,7 @@ export class DataViewDemo extends Component {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -259,7 +259,7 @@ export class DataViewDemo extends Component {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
                 </Panel>
@@ -283,7 +283,7 @@ export class DataViewDemo extends Component {
             return (
                 <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
                     <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={\`showcase/resources/demo/images/car/\${this.state.selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={this.state.selectedCar.brand} />
+                        <img src={\`showcase/demo/images/car/\${this.state.selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={this.state.selectedCar.brand} />
                     </div>
 
                     <div className="p-col-4">Vin: </div>
@@ -392,7 +392,7 @@ const DataViewDemo = () => {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -410,7 +410,7 @@ const DataViewDemo = () => {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
                 </Panel>
@@ -434,7 +434,7 @@ const DataViewDemo = () => {
             return (
                 <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
                     <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={\`showcase/resources/demo/images/car/\${selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={selectedCar.brand} />
+                        <img src={\`showcase/demo/images/car/\${selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={selectedCar.brand} />
                     </div>
 
                     <div className="p-col-4">Vin: </div>
@@ -541,7 +541,7 @@ const DataViewDemo = () => {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -559,7 +559,7 @@ const DataViewDemo = () => {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                     <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
                 </Panel>
@@ -583,7 +583,7 @@ const DataViewDemo = () => {
             return (
                 <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
                     <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={\`showcase/resources/demo/images/car/\${selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={selectedCar.brand} />
+                        <img src={\`showcase/demo/images/car/\${selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={selectedCar.brand} />
                     </div>
 
                     <div className="p-col-4">Vin: </div>

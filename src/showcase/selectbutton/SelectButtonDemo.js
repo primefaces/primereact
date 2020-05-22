@@ -29,7 +29,7 @@ export class SelectButtonDemo extends Component {
     }
 
     carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
 
         return (
             <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
@@ -115,7 +115,7 @@ export class SelectButtonDemo extends Component {
     }
 
     carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
 
         return (
             <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
@@ -172,7 +172,7 @@ const SelectButtonDemo  = () => {
     ];
 
     const carTemplate = (option) => {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
 
         return (
             <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
@@ -227,7 +227,7 @@ const SelectButtonDemo  = () => {
     ];
 
     const carTemplate = (option: { brand: string }) => {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
 
         return (
             <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
@@ -363,7 +363,7 @@ const cities = [
 <CodeHighlight className="language-javascript">
 {`
 carTemplate(option) {
-    const logoPath = 'showcase/resources/demo/images/car/' + option.brand + '.png';
+    const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
 
     return (
         <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>

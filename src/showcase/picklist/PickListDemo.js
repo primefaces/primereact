@@ -32,7 +32,7 @@ export class PickListDemo extends Component {
     }
 
     carTemplate(car) {
-        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        let imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -110,7 +110,7 @@ export class PickListDemo extends Component {
     }
 
     carTemplate(car) {
-        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        let imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -155,7 +155,7 @@ const PickListDemo = () => {
     };
 
     const carTemplate = (car) => {
-        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        let imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">
@@ -198,7 +198,7 @@ const PickListDemo = () => {
     };
 
     const carTemplate = (car: any) => {
-        let imageSource = 'showcase/resources/demo/images/car/' + car.brand + '.png';
+        let imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
 
         return (
             <div className="p-clearfix">

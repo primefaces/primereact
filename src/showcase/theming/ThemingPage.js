@@ -22,7 +22,7 @@ export class ThemingPage extends Component {
 
                     <p>Visit <a href="https://www.primefaces.org/designer/primereact">Designer API HomePage</a> for more information, live demos and access to a trial version.</p>
                     <a href="http://www.primefaces.org/designer/primereact">
-                        <img alt="PrimeReact Designer" src="showcase/resources/images/primereact-designer.jpg" style={{width: '100%'}} />
+                        <img alt="PrimeReact Designer" src="showcase/images/primereact-designer.jpg" style={{width: '100%'}} />
                     </a>
 
                     <h3>Styled Components</h3>
@@ -36,37 +36,37 @@ export class ThemingPage extends Component {
                     <div className="p-grid theming">
                         <div className="p-col-12">
                             <a href="https://www.primefaces.org/layouts/sapphire-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Sapphire" src="showcase/resources/images/layouts/sapphire-biggest-react.jpg" />
+                                <img alt="Sapphire" src="showcase/images/layouts/sapphire-biggest-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
                             <a href="https://www.primefaces.org/layouts/serenity-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Serenity" src="showcase/resources/images/layouts/serenity-react-sqr.jpg" />
+                                <img alt="Serenity" src="showcase/images/layouts/serenity-react-sqr.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
                             <a href="https://www.primefaces.org/layouts/ultima-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Ultima" src="showcase/resources/images/layouts/ultima-react-sqr.jpg" />
+                                <img alt="Ultima" src="showcase/images/layouts/ultima-react-sqr.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12">
                             <a href="https://www.primefaces.org/layouts/babylon-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Babylon" src="showcase/resources/images/layouts/babylon-biggest-react.jpg" />
+                                <img alt="Babylon" src="showcase/images/layouts/babylon-biggest-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
                             <a href="https://www.primefaces.org/layouts/avalon-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Avalon" src="showcase/resources/images/layouts/avalon-react-sqr.jpg" />
+                                <img alt="Avalon" src="showcase/images/layouts/avalon-react-sqr.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
                             <a href="https://www.primefaces.org/layouts/apollo-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Apollo" src="showcase/resources/images/layouts/apollo-react-sqr.png" />
+                                <img alt="Apollo" src="showcase/images/layouts/apollo-react-sqr.png" />
                             </a>
                         </div>
                         <div className="p-col-12">
                             <a href="https://www.primefaces.org/layouts/roma-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Roma" src="showcase/resources/images/layouts/roma-biggest-react.jpg" />
+                                <img alt="Roma" src="showcase/images/layouts/roma-biggest-react.jpg" />
                             </a>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ export class ListBoxDemo extends Component {
     }
 
     carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -107,7 +107,7 @@ export class ListBoxDemo extends Component {
     }
 
     carTemplate(option) {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -167,7 +167,7 @@ const ListBoxDemo = () => {
     const [selectedCar, setSelectedCar] = useState('BMW');
 
     const carTemplate = (option) => {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -225,7 +225,7 @@ const ListBoxDemo = () => {
     const [selectedCar, setSelectedCar] = useState('BMW');
 
     const carTemplate = (option: { label: string }) => {
-        const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
         return (
             <div className="p-clearfix">
@@ -386,7 +386,7 @@ const cities = [
 <CodeHighlight className="language-javascript">
 {`
 carTemplate(option) {
-    const logoPath = 'showcase/resources/demo/images/car/' + option.label + '.png';
+    const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
     return (
         <div className="p-clearfix">

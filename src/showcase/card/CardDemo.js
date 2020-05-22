@@ -11,7 +11,7 @@ export class CardDemo extends Component {
 
     render() {
         const header = (
-            <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>
+            <img alt="Card" src='showcase/demo/images/usercard.png'/>
         );
         const footer = (
             <span>
@@ -73,7 +73,7 @@ export class CardDemo extends Component {
 
     render() {
         const header = (
-            <img alt="Card" src='showcase/resources/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
+            <img alt="Card" src='showcase/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
         );
         const footer = (
             <span>
@@ -111,7 +111,7 @@ import {Button} from 'primereact/button';
 const CardDemo = () => {
 
     const header = (
-        <img alt="Card" src='showcase/resources/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
+        <img alt="Card" src='showcase/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
     );
     const footer = (
         <span>
@@ -148,7 +148,7 @@ import {Button} from 'primereact/button';
 const CardDemo = () => {
 
     const header = (
-        <img alt="Card" src='showcase/resources/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
+        <img alt="Card" src='showcase/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
     );
     const footer = (
         <span>
@@ -239,7 +239,7 @@ import {Card} from 'primereact/card';
 
                         <CodeHighlight className="language-jsx">
                             {`
-const header = <img alt="Card" src='showcase/resources/demo/images/usercard.png'/>;
+const header = <img alt="Card" src='showcase/demo/images/usercard.png'/>;
 const footer = <span>
                 <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>
                 <Button label="Cancel" icon="pi pi-times" className="p-button-secondary"/>

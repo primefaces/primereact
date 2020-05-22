@@ -27,7 +27,7 @@ export class OverlayPanelDemo extends Component {
                     <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)}/>
 
                     <OverlayPanel ref={(el) => this.op = el} id="overlay_panel" showCloseIcon={true}>
-                        <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+                        <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
                     </OverlayPanel>
                 </div>
 
@@ -61,7 +61,7 @@ export class OverlayPanelDemo extends Component {
                 <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)}/>
 
                 <OverlayPanel ref={(el) => this.op = el} id="overlay_panel" showCloseIcon={true}>
-                    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
+                    <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
                 </OverlayPanel>
             </div>
         )
@@ -84,7 +84,7 @@ const OverlayPanelDemo = () => {
             <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
 
             <OverlayPanel ref={op} id="overlay_panel" showCloseIcon={true}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
+                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
             </OverlayPanel>
         </div>
     )
@@ -106,7 +106,7 @@ const OverlayPanelDemo = () => {
             <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
 
             <OverlayPanel ref={op} id="overlay_panel" showCloseIcon={true}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
+                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
             </OverlayPanel>
         </div>
     )
@@ -158,7 +158,7 @@ import {OverlayPanel} from 'primereact/overlaypanel';
 <Button type="button" label="Basic" onClick={(e) => this.op.toggle(e)} />
 
 <OverlayPanel ref={(el) => this.op = el}>
-    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+    <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
 </OverlayPanel>
 
 `}
@@ -171,7 +171,7 @@ import {OverlayPanel} from 'primereact/overlaypanel';
 <CodeHighlight className="language-jsx">
 {`
 <OverlayPanel ref={(el) => {this.op = el;}} showCloseIcon={true} dismissable={true}>
-    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
+    <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
 </OverlayPanel>
 
 `}

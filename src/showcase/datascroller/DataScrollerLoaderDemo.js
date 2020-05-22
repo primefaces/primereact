@@ -31,7 +31,7 @@ export class DataScrollerLoaderDemo extends Component {
         return (
             <div className="car-details">
                 <div>
-                    <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand}/>
+                    <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand}/>
                     <div className="p-grid">
                         <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                         <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -112,7 +112,7 @@ export class DataScrollerLoaderDemo extends Component {
         return (
             <div className="car-details">
                 <div>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
                     <div className="p-grid">
                         <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                         <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -162,7 +162,7 @@ const DataScrollerLoaderDemo = () => {
         return (
             <div className="car-details">
                 <div>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
                     <div className="p-grid">
                         <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                         <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -210,7 +210,7 @@ const DataScrollerLoaderDemo = () => {
         return (
             <div className="car-details">
                 <div>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
                     <div className="p-grid">
                         <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                         <div className="p-col-12">Year: <b>{car.year}</b></div>

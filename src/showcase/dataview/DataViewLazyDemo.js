@@ -62,7 +62,7 @@ export class DataViewLazyDemo extends Component {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
+                        <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -79,7 +79,7 @@ export class DataViewLazyDemo extends Component {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={`showcase/resources/demo/images/car/${car.brand}.png`} alt={car.brand} />
+                    <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                 </Panel>
             </div>
@@ -219,7 +219,7 @@ export class DataViewLazyDemo extends Component {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -236,7 +236,7 @@ export class DataViewLazyDemo extends Component {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                 </Panel>
             </div>
@@ -335,7 +335,7 @@ const DataViewLazyDemo = () => {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -352,7 +352,7 @@ const DataViewLazyDemo = () => {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                 </Panel>
             </div>
@@ -447,7 +447,7 @@ const DataViewLazyDemo = () => {
             <div className="p-col-12">
                 <div className="car-details">
                     <div>
-                        <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                         <div className="p-grid">
                             <div className="p-col-12">Vin: <b>{car.vin}</b></div>
                             <div className="p-col-12">Year: <b>{car.year}</b></div>
@@ -464,7 +464,7 @@ const DataViewLazyDemo = () => {
         return (
             <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
                 <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/resources/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
                     <div className="car-detail">{car.year} - {car.color}</div>
                 </Panel>
             </div>

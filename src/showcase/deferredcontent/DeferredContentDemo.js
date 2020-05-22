@@ -50,7 +50,7 @@ export class DeferredContentDemo extends Component {
                         Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
                     </div>
                     <DeferredContent onLoad={this.onImageLoad}>
-                        <img src="showcase/resources/demo/images/galleria/galleria1.jpg" alt="prime"/>
+                        <img src="showcase/demo/images/galleria/galleria1.jpg" alt="prime"/>
                     </DeferredContent>
 
                     <div style={{height:'500px'}}>
@@ -119,7 +119,7 @@ export class DeferredContentDemo extends Component {
                     Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
                 </div>
                 <DeferredContent onLoad={this.onImageLoad}>
-                    <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
+                    <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
                 </DeferredContent>
 
                 <div style={{height:'500px'}}>
@@ -169,7 +169,7 @@ const DeferredContentDemo = () => {
                 Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
             </div>
             <DeferredContent onLoad={onImageLoad}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
+                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
             </DeferredContent>
 
             <div style={{height:'500px'}}>
@@ -218,7 +218,7 @@ const DeferredContentDemo = () => {
                 Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
             </div>
             <DeferredContent onLoad={onImageLoad}>
-                <img src="showcase/resources/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
+                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
             </DeferredContent>
 
             <div style={{height:'500px'}}>

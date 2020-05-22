@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 #root, body, html {
     height: 100%;
 }
@@ -8,7 +10,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f6f6f6;
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: normal;
     color: #333333;
     -webkit-font-smoothing: antialiased;
@@ -25,12 +27,12 @@ $tabletBreakpoint: 1024px;
 $mobileBreakpoint: 640px;
 
 /* Styles */
-@import "_mixins";
-@import "_news";
-@import "_topbar";
-@import "_sidebar";
-@import "_content";
-@import "_footer";
-@import "_mask";
-@import "_config";
-@import "_changelog";
+@import '_mixins';
+@import '_news';
+@import '_topbar';
+@import '_sidebar';
+@import '_content';
+@import '_footer';
+@import '_mask';
+@import '_config';
+@import '_changelog';
