@@ -24,13 +24,11 @@
 @include keyframes(layoutMaskFade) {
     from {
         opacity: 0;
-        -webkit-transform: translate3d(0, -20px, 0);
         transform: translate3d(0, -20px, 0);
     }
 
     to {
         opacity: .7;
-        -webkit-transform: none;
         transform: none;
     }
 }
