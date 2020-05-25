@@ -9,8 +9,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class MenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                 label: 'Options',
                 items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
@@ -22,7 +24,9 @@ export class MenuDemo extends Component {
                         {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -38,10 +42,10 @@ export class MenuDemo extends Component {
 
                 <div className="content-section implementation button-demo">
                     <h3 className="first">Basic</h3>
-                    <Menu model={items}/>
+                    <Menu model={this.items}/>
 
                     <h3>Popup</h3>
-                    <Menu model={items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
+                    <Menu model={this.items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
                     <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
                 </div>
 
@@ -70,8 +74,10 @@ import {Button} from "primereact/button";
 
 export class MenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                 label: 'Options',
                 items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
@@ -83,14 +89,16 @@ export class MenuDemo extends Component {
                         {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
             }
         ];
+    }
 
+    render() {
         return (
             <div className="button-demo">
                 <h3 className="first">Basic</h3>
-                <Menu model={items}/>
+                <Menu model={this.items}/>
 
                 <h3>Popup</h3>
-                <Menu model={items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
+                <Menu model={this.items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
                 <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
             </div>
         )

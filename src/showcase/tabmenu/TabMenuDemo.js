@@ -8,15 +8,19 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class TabMenuDemo extends Component {
 
-    render() {
-        const items =  [
+    constructor(props) {
+        super(props);
+
+        this.items =  [
             {label: 'Home', icon: 'pi pi-fw pi-home'},
             {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
             {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
             {label: 'Documentation', icon: 'pi pi-fw pi-file'},
             {label: 'Settings', icon: 'pi pi-fw pi-cog'}
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -31,7 +35,7 @@ export class TabMenuDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <TabMenu model={items} />
+                    <TabMenu model={this.items} />
                 </div>
 
                 <TabMenuDoc/>
@@ -57,18 +61,22 @@ import {TabMenu} from 'primereact/tabmenu';
 
 export class TabMenuDemo extends Component {
 
-    render() {
-        const items =  [
+    constructor(props) {
+        super(props);
+
+        this.items =  [
             {label: 'Home', icon: 'pi pi-fw pi-home'},
             {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
             {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
             {label: 'Documentation', icon: 'pi pi-fw pi-file'},
             {label: 'Settings', icon: 'pi pi-fw pi-cog'}
         ];
+    }
 
+    render() {
         return (
             <div>
-                <TabMenu model={items} />
+                <TabMenu model={this.items} />
             </div>
         );
     }

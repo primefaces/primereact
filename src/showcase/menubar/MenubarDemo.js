@@ -10,8 +10,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class MenubarDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -138,7 +140,9 @@ export class MenubarDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -152,7 +156,7 @@ export class MenubarDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <Menubar model={items}>
+                    <Menubar model={this.items}>
                         <InputText placeholder="Search" type="text"/>
                         <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
                     </Menubar>
@@ -184,8 +188,10 @@ import {InputText} from "primereact/inputtext";
 
 export class MenubarDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -312,10 +318,12 @@ export class MenubarDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
-                <Menubar model={items}>
+                <Menubar model={this.items}>
                     <InputText placeholder="Search" type="text"/>
                     <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
                 </Menubar>

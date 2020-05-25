@@ -8,8 +8,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class MegaMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                 label: 'Videos', icon: 'pi pi-fw pi-video',
                 items: [
@@ -121,7 +123,9 @@ export class MegaMenuDemo extends Component {
                 ]
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -137,10 +141,10 @@ export class MegaMenuDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Horizontal</h3>
-                    <MegaMenu model={items}/>
+                    <MegaMenu model={this.items}/>
 
                     <h3>Vertical</h3>
-                    <MegaMenu model={items} orientation="vertical"/>
+                    <MegaMenu model={this.items} orientation="vertical"/>
                 </div>
 
                 <MegaMenuDoc/>
@@ -166,8 +170,10 @@ import {MegaMenu} from 'primereact/megamenu';
 
 export class MegaMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                 label: 'Videos', icon: 'pi pi-fw pi-video',
                 items: [
@@ -279,14 +285,16 @@ export class MegaMenuDemo extends Component {
                 ]
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <h3>Horizontal</h3>
-                <MegaMenu model={items}/>
+                <MegaMenu model={this.items}/>
 
                 <h3>Vertical</h3>
-                <MegaMenu model={items} orientation="vertical"/>
+                <MegaMenu model={this.items} orientation="vertical"/>
             </div>
         );
     }

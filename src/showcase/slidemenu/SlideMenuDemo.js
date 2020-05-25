@@ -9,8 +9,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class SlideMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -140,7 +142,9 @@ export class SlideMenuDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -156,10 +160,10 @@ export class SlideMenuDemo extends Component {
 
                 <div className="content-section implementation">
                     <h3>Basic</h3>
-                    <SlideMenu model={items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                    <SlideMenu model={this.items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
                     <h3>Popup</h3>
-                    <SlideMenu ref={(el) => this.menu = el} model={items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                    <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
                     <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                 </div>
 
@@ -187,8 +191,10 @@ import {Button} from 'primereact/button';
 
 export class SlideMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -318,14 +324,16 @@ export class SlideMenuDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <h3>Basic</h3>
-                <SlideMenu model={items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                <SlideMenu model={this.items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
                 <h3>Popup</h3>
-                <SlideMenu ref={(el) => this.menu = el} model={items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
                 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
             </div>
         )

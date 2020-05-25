@@ -9,8 +9,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class TieredMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -139,7 +141,9 @@ export class TieredMenuDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -154,10 +158,10 @@ export class TieredMenuDemo extends Component {
                 </div>
                 <div className="content-section implementation">
                     <h3 className="first">Inline</h3>
-                    <TieredMenu model={items} />
+                    <TieredMenu model={this.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <TieredMenu model={this.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
                     <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
                 </div>
 
@@ -186,8 +190,10 @@ import {Button} from 'primereact/button';
 
 export class TieredMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -316,7 +322,9 @@ export class TieredMenuDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -331,10 +339,10 @@ export class TieredMenuDemo extends Component {
                 </div>
                 <div className="content-section implementation">
                     <h3 className="first">Inline</h3>
-                    <TieredMenu model={items} />
+                    <TieredMenu model={this.items} />
 
                     <h3>Popup</h3>
-                    <TieredMenu model={items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <TieredMenu model={this.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
                     <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
                 </div>
 

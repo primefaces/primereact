@@ -8,8 +8,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class ContextMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -139,7 +141,9 @@ export class ContextMenuDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -153,7 +157,7 @@ export class ContextMenuDemo extends Component {
                     </div>
                 </div>
                 <div className="content-section implementation">
-                    <ContextMenu model={items} ref={el => this.cm = el}></ContextMenu>
+                    <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
                     <img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
                 </div>
@@ -181,8 +185,10 @@ import {ContextMenu} from 'primereact/contextmenu';
 
 export class ContextMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -312,10 +318,12 @@ export class ContextMenuDemo extends Component {
                icon:'pi pi-fw pi-power-off'
             }
         ];
+    }
 
+    render() {
         return (
             <div>
-                <ContextMenu model={items} ref={el => this.cm = el}></ContextMenu>
+                <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
                 <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
             </div>

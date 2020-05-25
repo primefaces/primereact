@@ -42,7 +42,7 @@ export class LiveEditor extends Component {
                             ...extDependencies,
                             "classnames": "^2.2.6",
                             "primeflex": "latest",
-                            "primeicons": "latest",
+                            "primeicons": "2.0.0",
                             "react": "^16.8.1",
                             "react-dom": "^16.8.1",
                             "react-transition-group": "^2.5.1",
@@ -91,7 +91,7 @@ ${extIndexCSS}
 <div id="root"></div>
 
 <!-- Added to show icons in the editor -->
-<link rel="stylesheet" href="https://unpkg.com/primeicons@latest/primeicons.css">
+<link rel="stylesheet" href="https://unpkg.com/primeicons@2.0.0/primeicons.css">
                   `
                 }
             }

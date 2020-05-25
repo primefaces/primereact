@@ -8,8 +8,10 @@ import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class PanelMenuDemo extends Component {
 
-    render() {
-        const items = [
+    constructor(props) {
+        super(props);
+
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -125,7 +127,9 @@ export class PanelMenuDemo extends Component {
                ]
             }
         ];
+    }
 
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
@@ -140,7 +144,7 @@ export class PanelMenuDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <PanelMenu model={items} style={{width:'300px'}}/>
+                    <PanelMenu model={this.items} style={{width:'300px'}}/>
                 </div>
 
                 <PanelMenuDoc/>
@@ -165,9 +169,10 @@ import React, { Component } from 'react';
 import {PanelMenu} from 'primereact/panelmenu';
 
 export class PanelMenuDemo extends Component {
+    constructor(props) {
+        super(props);
 
-    render() {
-        const items = [
+        this.items = [
             {
                label:'File',
                icon:'pi pi-fw pi-file',
@@ -283,10 +288,12 @@ export class PanelMenuDemo extends Component {
                ]
             }
         ];
+    }
 
+    render() {
         return (
             <div>
-                <PanelMenu model={items} style={{width:'300px'}}/>
+                <PanelMenu model={this.items} style={{width:'300px'}}/>
             </div>
         );
     }
@@ -838,5 +845,4 @@ const items:[
             </div>
         )
     }
-
 }
