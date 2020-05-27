@@ -108,7 +108,8 @@
                     "to": "/formlayout",
                     "meta": [
                         "formlayout"
-                    ]
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "KeyFilter",
