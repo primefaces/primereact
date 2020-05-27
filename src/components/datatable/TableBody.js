@@ -569,7 +569,7 @@ export class TableBody extends Component {
         else {
             let emptyMessage = this.props.emptyMessage;
 
-            rows = !this.props.loading && emptyMessage ?
+            rows = !this.props.loading && emptyMessage !== null ?
                 <tr className="p-datatable-emptymessage">
                     <td colSpan={this.props.children.length}>
                         {
