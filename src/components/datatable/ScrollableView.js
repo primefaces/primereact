@@ -192,7 +192,7 @@ export class ScrollableView extends Component {
         if(this.props.columns && this.props.columns.length) {
             return (
                 <colgroup className="p-datatable-scrollable-colgroup">
-                    {this.props.columns.map((col, i) => <col key={col.props.field + '_' + i}  style={col.props.headerStyle || col.props.style}/>)}
+                    {this.props.columns.map((col, i) => <col key={col.props.field + '_' + i} style={col.props.headerStyle || col.props.style} className={col.props.headerClassName || col.props.className}/>)}
                 </colgroup>
             );
         }
