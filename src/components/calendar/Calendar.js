@@ -2074,7 +2074,7 @@ export class Calendar extends Component {
         }
 
         if (this.props.showMillisec) {
-            output += ':';
+            output += '.';
             output += milliseconds < 100 ? (milliseconds < 10 ? '00' : '0') + milliseconds : milliseconds;
         }
 
@@ -2147,6 +2147,7 @@ export class Calendar extends Component {
     }
 
     parseTime(value, ampm) {
+        value = this.props.showMillisec ? value.replace('.', ':') : value;
         let tokens = value.split(':');
         let validTokenLength = this.props.showSeconds ? 3 : 2;
         validTokenLength = this.props.showMillisec ? validTokenLength + 1 : validTokenLength;
@@ -2745,13 +2746,13 @@ export class Calendar extends Component {
         }
     }
 
-    renderSeparator() {
+    renderSeparator(separator) {
         return (
             <div className="p-separator">
                 <span className="p-separator-spacer">
                     <span className="pi pi-chevron-up"></span>
                 </span>
-                <span>:</span>
+                <span>{separator}</span>
                 <span className="p-separator-spacer">
                     <span className="pi pi-chevron-down"></span>
                 </span>
@@ -2764,13 +2765,13 @@ export class Calendar extends Component {
             return (
                 <div className="p-timepicker">
                     {this.renderHourPicker()}
-                    {this.renderSeparator()}
+                    {this.renderSeparator(':')}
                     {this.renderMinutePicker()}
-                    {this.props.showSeconds && this.renderSeparator()}
+                    {this.props.showSeconds && this.renderSeparator(':')}
                     {this.renderSecondPicker()}
-                    {this.props.showMillisec && this.renderSeparator()}
+                    {this.props.showMillisec && this.renderSeparator('.')}
                     {this.renderMiliSecondPicker()}
-                    {this.props.hourFormat === '12' && this.renderSeparator()}
+                    {this.props.hourFormat === '12' && this.renderSeparator(':')}
                     {this.renderAmPmPicker()}
                 </div>
             )
