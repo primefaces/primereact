@@ -1192,6 +1192,18 @@
             }
         }
     }
+
+    @media screen and (max-width: 489px) {
+        .layout-content {
+            .formlayout-demo {
+                .p-formgroup-inline {
+                    .p-field {
+                        margin-bottom: 1em !important;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /* Dark Theme such as luna-amber, luna-blue, luna-green and luna-pink */

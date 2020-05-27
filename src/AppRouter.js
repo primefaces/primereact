@@ -141,6 +141,7 @@ import { GalleriaThumbnailDemo } from './showcase/galleria/GalleriaThumbnailDemo
 import { GalleriaPreviewDemo } from './showcase/galleria/GalleriaPreviewDemo';
 import { GalleriaFullScreenDemo } from './showcase/galleria/GalleriaFullScreenDemo';
 import { FloatLabelDemo } from './showcase/floatlabel/FloatLabelDemo';
+import { FormLayoutDemo } from './showcase/formlayout/FormLayoutDemo';
 
 class AppRouter extends Component {
 
@@ -307,6 +308,7 @@ class AppRouter extends Component {
                 <Route path="/inplace" component={InplaceDemo} />
                 <Route path="/deferredcontent" component={DeferredContentDemo} />
                 <Route path="/floatlabel" component={FloatLabelDemo} />
+                <Route path="/formlayout" component={FormLayoutDemo} />
             </React.Fragment>
         );
     }

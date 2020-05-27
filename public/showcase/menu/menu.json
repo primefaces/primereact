@@ -104,6 +104,13 @@
                     ]
                 },
                 {
+                    "name": "FormLayout",
+                    "to": "/formlayout",
+                    "meta": [
+                        "formlayout"
+                    ]
+                },
+                {
                     "name": "KeyFilter",
                     "to": "/keyfilter",
                     "meta": [
