@@ -110,7 +110,7 @@ export class HomeComponent extends Component {
                     <div className="p-grid">
                         <div className="p-col-6 p-md-2"><img alt="airbus" src="showcase/images/home/airbus.svg"/></div>
                         <div className="p-col-6 p-md-2"><img alt="amex" src="showcase/images/home/amex.svg"/></div>
-                        <div className="p-col-6 p-md-2"><img alt="bmw" src="showcase/images/home/bmw.svg"/></div>
+                        <div className="p-col-6 p-md-2"><img alt="bmw" src="showcase/images/home/nvidia.svg"/></div>
                         <div className="p-col-6 p-md-2"><img alt="ebay" src="showcase/images/home/ebay.svg"/></div>
                         <div className="p-col-6 p-md-2"><img alt="ford" src="showcase/images/home/ford.svg"/></div>
                         <div className="p-col-6 p-md-2"><img alt="fox" src="showcase/images/home/fox.svg"/></div>
