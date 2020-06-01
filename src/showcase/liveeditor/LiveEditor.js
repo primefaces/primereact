@@ -33,6 +33,8 @@ export class LiveEditor extends Component {
         let extIndexCSS = extFiles['index.css'] || '';
         delete extFiles['index.css'];
 
+        const dependencies = require('../../../package.json') ? require('../../../package.json').devDependencies : {};
+
         const parameters = getParameters({
             files: {
                 'package.json': {
@@ -40,14 +42,14 @@ export class LiveEditor extends Component {
                         main: `src/demo/${nameWithExt}`,
                         dependencies: {
                             ...extDependencies,
-                            "classnames": "^2.2.6",
-                            "primeflex": "latest",
-                            "primeicons": "2.0.0",
-                            "react": "^16.8.1",
-                            "react-dom": "^16.8.1",
-                            "react-transition-group": "^2.5.1",
-                            "primereact": "latest",
-                            "axios": "^0.19.0"
+                            'react': dependencies['react'],
+                            'react-dom': dependencies['react-dom'],
+                            'react-transition-group': dependencies['react-transition-group'],
+                            'classnames': dependencies['classnames'],
+                            'axios': dependencies['axios'],
+                            'primereact': 'latest',
+                            'primeflex': dependencies['primeflex'],
+                            'primeicons': dependencies['primeicons']
                         }
                     }
                 },
@@ -91,7 +93,7 @@ ${extIndexCSS}
 <div id="root"></div>
 
 <!-- Added to show icons in the editor -->
-<link rel="stylesheet" href="https://unpkg.com/primeicons@2.0.0/primeicons.css">
+<link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">
                   `
                 }
             }
