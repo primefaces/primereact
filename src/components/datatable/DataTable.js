@@ -109,7 +109,9 @@ export class DataTable extends Component {
         onRowEditCancel: null,
         exportFunction: null,
         customSaveState: null,
-        customRestoreState: null
+        customRestoreState: null,
+        onStateSave: null,
+        onStateRestore: null,
     }
 
     static propTypes = {
@@ -206,7 +208,9 @@ export class DataTable extends Component {
         onRowEditCancel: PropTypes.func,
         exportFunction: PropTypes.func,
         customSaveState: PropTypes.func,
-        customRestoreState: PropTypes.func
+        customRestoreState: PropTypes.func,
+        onStateSave: PropTypes.func,
+        onStateRestore: PropTypes.func
     };
 
     constructor(props) {
@@ -343,6 +347,10 @@ export class DataTable extends Component {
                 storage.setItem(this.props.stateKey, JSON.stringify(state));
             }
         }
+
+        if (this.props.onStateSave) {
+            this.props.onStateSave(state);
+        }
     }
 
     clearState() {
@@ -438,6 +446,10 @@ export class DataTable extends Component {
                 this.props.onSelectionChange({
                     value: restoredState.selection
                 });
+            }
+
+            if (this.props.onStateRestore) {
+                this.props.onStateRestore(restoredState);
             }
         }
     }
