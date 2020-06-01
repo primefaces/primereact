@@ -2688,7 +2688,7 @@ export class DataTableLazyDemo extends Component {
             <h3>TableState</h3>
             <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again,
                 table would render the data using its last settings. Enabling state is easy as defining a unique <i>stateKey</i>, the storage to keep the state is defined with the <i>stateStorage</i> property that accepts session for sessionStorage and local for localStorage.
-                Also, a special storage implementation can be made with <i>customSaveState</i> and <i>customRestoreState</i> callbacks using <i>stateStorage="custom"</i>.
+                Also, a special storage implementation can be made with <i>customSaveState</i> and <i>customRestoreState</i> methods using <i>stateStorage="custom"</i>.
                 Currently following features are supported by TableState; paging, sorting, filtering, column resizing, column reordering, row expansion and row selection.</p>
 
 <CodeHighlight className="language-javascript">
@@ -3355,6 +3355,16 @@ export class DataTableStateDemo extends Component {
                                 event.data: Editing row data <br />
                                 event.index: Editing row data index</td>
                             <td>Callback to invoke when the cancel icon is clicked on row editing mode.</td>
+                        </tr>
+                        <tr>
+                            <td>onStateSave</td>
+                            <td>state: Table state</td>
+                            <td>Callback to invoke table state is saved.</td>
+                        </tr>
+                        <tr>
+                            <td>onStateRestore</td>
+                            <td>state: Table state</td>
+                            <td>Callback to invoke table state is restored.</td>
                         </tr>
                     </tbody>
                 </table>
