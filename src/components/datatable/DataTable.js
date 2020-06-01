@@ -107,7 +107,9 @@ export class DataTable extends Component {
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
-        exportFunction: null
+        exportFunction: null,
+        customSaveState: null,
+        customRestoreState: null
     }
 
     static propTypes = {
@@ -202,7 +204,9 @@ export class DataTable extends Component {
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
-        exportFunction: PropTypes.func
+        exportFunction: PropTypes.func,
+        customSaveState: PropTypes.func,
+        customRestoreState: PropTypes.func
     };
 
     constructor(props) {
@@ -266,24 +270,30 @@ export class DataTable extends Component {
     }
 
     getStorage() {
-        switch(this.props.stateStorage) {
+        switch (this.props.stateStorage) {
             case 'local':
                 return window.localStorage;
 
             case 'session':
                 return window.sessionStorage;
 
+            case 'custom':
+                return null;
+
             default:
-                throw new Error(this.props.stateStorage + ' is not a valid value for the state storage, supported values are "local" and "session".');
+                throw new Error(this.props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
         }
     }
 
+    isCustomStateStorage() {
+        return this.props.stateStorage === 'custom';
+    }
+
     isStateful() {
-        return this.props.stateKey != null;
+        return this.props.stateKey != null || this.isCustomStateStorage();
     }
 
     saveState() {
-        const storage = this.getStorage();
         let state = {};
 
         if (this.props.paginator) {
@@ -322,26 +332,45 @@ export class DataTable extends Component {
             state.selection = this.props.selection;
         }
 
-        if (Object.keys(state).length) {
-            storage.setItem(this.props.stateKey, JSON.stringify(state));
+        if (this.isCustomStateStorage()) {
+            if (this.props.customSaveState) {
+                this.props.customSaveState(state);
+            }
+        }
+        else {
+            const storage = this.getStorage();
+            if (Object.keys(state).length) {
+                storage.setItem(this.props.stateKey, JSON.stringify(state));
+            }
         }
     }
 
     clearState() {
         const storage = this.getStorage();
 
-        if (this.props.stateKey) {
+        if (storage && this.props.stateKey) {
             storage.removeItem(this.props.stateKey);
         }
     }
 
     restoreState(state) {
-        const storage = this.getStorage();
-        const stateString = storage.getItem(this.props.stateKey);
+        let restoredState = {};
 
-        if (stateString) {
-            let restoredState = JSON.parse(stateString);
+        if (this.isCustomStateStorage()) {
+            if (this.props.customRestoreState) {
+                restoredState = this.props.customRestoreState();
+            }
+        }
+        else {
+            const storage = this.getStorage();
+            const stateString = storage.getItem(this.props.stateKey);
 
+            if (stateString) {
+                restoredState = JSON.parse(stateString);
+            }
+        }
+
+        if (restoredState && Object.keys(restoredState).length) {
             if (this.props.paginator) {
                 if (this.props.onPage) {
                     this.props.onPage({
