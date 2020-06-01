@@ -2688,6 +2688,7 @@ export class DataTableLazyDemo extends Component {
             <h3>TableState</h3>
             <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again,
                 table would render the data using its last settings. Enabling state is easy as defining a unique <i>stateKey</i>, the storage to keep the state is defined with the <i>stateStorage</i> property that accepts session for sessionStorage and local for localStorage.
+                Also, a special storage implementation can be made with <i>customSaveState</i> and <i>customRestoreState</i> callbacks using <i>stateStorage="custom"</i>.
                 Currently following features are supported by TableState; paging, sorting, filtering, column resizing, column reordering, row expansion and row selection.</p>
 
 <CodeHighlight className="language-javascript">
@@ -3146,7 +3147,7 @@ export class DataTableStateDemo extends Component {
                             <td>stateStorage</td>
                             <td>string</td>
                             <td>session</td>
-                            <td>Defines where a stateful table keeps its state, <br/> valid values are "session" for sessionStorage and "local" for localStorage.</td>
+                            <td>Defines where a stateful table keeps its state, <br/> valid values are "session" for sessionStorage, "local" for localStorage and "custom".</td>
                         </tr>
                         <tr>
                             <td>editMode</td>
@@ -3185,6 +3186,19 @@ export class DataTableStateDemo extends Component {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row.</td>
+                        </tr>
+                        <tr>
+                            <td>customSaveState</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>A function to implement custom saveState with stateStorage="custom". <br />
+                                state: the object to be stored. </td>
+                        </tr>
+                        <tr>
+                            <td>customRestoreState</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>A function to implement custom restoreState with stateStorage="custom". Need to return state object.</td>
                         </tr>
                     </tbody>
                 </table>

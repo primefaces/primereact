@@ -15,14 +15,19 @@ export class DataTableStateDemo extends Component {
         this.state = {
             cars1: [],
             cars2: [],
+            cars3: [],
             selectedCars1: null,
-            selectedCars2: null
+            selectedCars2: null,
+            selectedCars3: null
         };
         this.carservice = new CarService();
+
+        this.onCustomSaveState = this.onCustomSaveState.bind(this);
+        this.onCustomRestoreState = this.onCustomRestoreState.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsMedium().then(data => this.setState({cars1: data, cars2: data}));
+        this.carservice.getCarsMedium().then(data => this.setState({cars1: data, cars2: data, cars3: data}));
     }
 
     displaySelection(data) {
@@ -35,6 +40,14 @@ export class DataTableStateDemo extends Component {
             else
                 return <div style={{textAlign: 'left'}}>Selected Car: {data.vin + ' - ' + data.year + ' - ' + data.brand + ' - ' + data.color}</div>
         }
+    }
+
+    onCustomSaveState(state) {
+        window.sessionStorage.setItem('tablestatedemo-custom', JSON.stringify(state));
+    }
+
+    onCustomRestoreState() {
+        return JSON.parse(window.sessionStorage.getItem('tablestatedemo-custom'));
     }
 
     render() {
@@ -68,6 +81,16 @@ export class DataTableStateDemo extends Component {
                     <DataTable value={this.state.cars2} selectionMode="multiple" resizableColumns={true} footer={this.displaySelection(this.state.selectedCars2)}
                         selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} paginator={true} rows={10}
                         stateStorage="local" stateKey="tablestatedemo-local">
+                        <Column field="vin" header="Vin" sortable={true} filter={true}/>
+                        <Column field="year" header="Year" sortable={true} filter={true}/>
+                        <Column field="brand" header="Brand" sortable={true} filter={true}/>
+                        <Column field="color" header="Color" sortable={true} filter={true}/>
+                    </DataTable>
+
+                    <h3>Custom Storage</h3>
+                    <DataTable value={this.state.cars3} selectionMode="multiple" resizableColumns={true} footer={this.displaySelection(this.state.selectedCars3)}
+                        selection={this.state.selectedCars3} onSelectionChange={e => this.setState({selectedCars3: e.value})} paginator={true} rows={10}
+                        stateStorage="custom" customSaveState={this.onCustomSaveState} customRestoreState={this.onCustomRestoreState}>
                         <Column field="vin" header="Vin" sortable={true} filter={true}/>
                         <Column field="year" header="Year" sortable={true} filter={true}/>
                         <Column field="brand" header="Brand" sortable={true} filter={true}/>
