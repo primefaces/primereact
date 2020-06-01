@@ -126,6 +126,10 @@ export default class ObjectUtils {
         return index;
     }
 
+    static getJSXElement(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
     static removeAccents(str) {
         if (str && str.search(/[\xC0-\xFF]/g) > -1) {
             str = str

@@ -23,10 +23,10 @@ interface DialogProps {
     ariaCloseIconLabel?: string;
     focusOnShow?: boolean;
     maximized?: boolean;
+    iconsTemplate?: any;
     onMaximize?(e: {originalEvent: Event, maximized: boolean}): void;
     onHide(): void;
     onShow?(): void;
-    iconsTemplate?(): JSX.Element | undefined;
 }
 
 export class Dialog extends React.Component<DialogProps,any> {}

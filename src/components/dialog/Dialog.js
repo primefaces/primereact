@@ -5,6 +5,7 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class Dialog extends Component {
 
@@ -59,7 +60,7 @@ export class Dialog extends Component {
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,
-        iconsTemplate: PropTypes.func,
+        iconsTemplate: PropTypes.any,
         ariaCloseIconLabel: PropTypes.string,
         focusOnShow: PropTypes.bool,
         maximized: PropTypes.bool,
@@ -295,9 +296,8 @@ export class Dialog extends Component {
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMaximizeIcon() {
@@ -310,18 +310,16 @@ export class Dialog extends Component {
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderIconsTemplate() {
         if (this.props.iconsTemplate) {
-            return this.props.iconsTemplate(this);
+            return ObjectUtils.getJSXElement(this.props.iconsTemplate, this);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderHeader() {
@@ -341,9 +339,8 @@ export class Dialog extends Component {
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent() {
@@ -360,9 +357,8 @@ export class Dialog extends Component {
                 <div ref={el => this.footerElement = el} className="p-dialog-footer">{this.props.footer}</div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderElement() {
