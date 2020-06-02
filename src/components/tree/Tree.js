@@ -79,11 +79,12 @@ export class Tree extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            filter: ''
+        };
+
         if (!this.props.onToggle) {
-            this.state = {
-                expandedKeys: this.props.expandedKeys,
-                filter: ''
-            };
+            this.state['expandedKeys'] = this.props.expandedKeys;
         }
 
         this.isNodeLeaf = this.isNodeLeaf.bind(this);
