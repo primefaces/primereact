@@ -31,14 +31,17 @@ export class OverlayPanel extends Component {
     constructor(props) {
         super(props);
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
     }
 
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = (event) => {
-                if(this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isOutsideClicked(event)) {
                     this.hide();
                 }
+
+                this.isPanelClicked = false;
             };
 
             document.addEventListener('click', this.documentClickListener);
@@ -64,6 +67,10 @@ export class OverlayPanel extends Component {
         this.hide();
 
         event.preventDefault();
+    }
+
+    onPanelClick() {
+        this.isPanelClicked = true;
     }
 
     toggle(event, target) {
@@ -148,7 +155,7 @@ export class OverlayPanel extends Component {
         let closeIcon = this.renderCloseIcon();
 
         return (
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                 <div className="p-overlaypanel-content">
                     {this.props.children}
                 </div>
