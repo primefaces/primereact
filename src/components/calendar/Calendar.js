@@ -505,6 +505,7 @@ export class Calendar extends Component {
         }
 
         let newViewDate = new Date(this.getViewDate().getTime());
+        newViewDate.setDate(1);
 
         if (this.props.view === 'date') {
             if(newViewDate.getMonth() === 0) {
@@ -542,6 +543,7 @@ export class Calendar extends Component {
         }
 
         let newViewDate = new Date(this.getViewDate().getTime());
+        newViewDate.setDate(1);
 
         if (this.props.view === 'date') {
             if(newViewDate.getMonth() === 11) {
