@@ -471,7 +471,7 @@ export class SplitButtonDemo extends Component {
                                         <td>Inline style of the overlay menu.</td>
                                     </tr>
                                     <tr>
-                                        <td>menuStyleClass</td>
+                                        <td>menuClassName</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>ClassName class of the overlay menu.</td>

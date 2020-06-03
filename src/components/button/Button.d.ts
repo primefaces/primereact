@@ -6,7 +6,6 @@ interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref'> {
     label?: string;
     icon?: string;
     iconPos?: string;
-    cornerStyleClass?: string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     [key: string]: any;

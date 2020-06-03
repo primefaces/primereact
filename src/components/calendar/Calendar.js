@@ -71,7 +71,7 @@ export class Calendar extends Component {
         selectOtherMonths: false,
         showButtonBar: false,
         todayButtonClassName: 'p-button-secondary',
-        clearButtonStyleClass: 'p-button-secondary',
+        clearButtonClassName: 'p-button-secondary',
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
@@ -142,7 +142,7 @@ export class Calendar extends Component {
         selectOtherMonths: PropTypes.bool,
         showButtonBar: PropTypes.bool,
         todayButtonClassName: PropTypes.string,
-        clearButtonStyleClass: PropTypes.string,
+        clearButtonClassName: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         appendTo: PropTypes.any,
@@ -2812,7 +2812,7 @@ export class Calendar extends Component {
             return (
                 <div className="p-datepicker-buttonbar">
                     <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.todayButtonClassName} />
-                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.clearButtonStyleClass} />
+                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.clearButtonClassName} />
                 </div>
             );
         }

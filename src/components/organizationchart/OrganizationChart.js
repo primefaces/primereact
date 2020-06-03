@@ -58,7 +58,7 @@ export class OrganizationChartNode extends Component {
         this.node = this.props.node;
 
         var colspan = this.getColspan();
-        let nodeStyleClass = classNames('p-organizationchart-node-content', this.node.className, {
+        let nodeClassName = classNames('p-organizationchart-node-content', this.node.className, {
                 'p-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
                 'p-highlight': this.isSelected()
             }),
@@ -66,7 +66,7 @@ export class OrganizationChartNode extends Component {
             toggleIcon = classNames('p-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
-                    <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
+                    <div className={nodeClassName} onClick={(e) => this.onNodeClick(e,this.node)}>
                         {nodeLabel}
                         {
                             !this.getLeaf() && <button type="button" className="p-node-toggler p-link" onClick={(e) => this.toggleNode(e, this.node)}>

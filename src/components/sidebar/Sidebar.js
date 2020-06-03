@@ -101,11 +101,11 @@ export class Sidebar extends Component {
         if (!this.mask) {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
-            let maskStyleClass = 'p-component-overlay p-sidebar-mask';
+            let maskClassName = 'p-component-overlay p-sidebar-mask';
             if(this.props.blockScroll) {
-                maskStyleClass += ' p-sidebar-mask-scrollblocker';
+                maskClassName += ' p-sidebar-mask-scrollblocker';
             }
-            DomHandler.addMultipleClasses(this.mask, maskStyleClass);
+            DomHandler.addMultipleClasses(this.mask, maskClassName);
 
             if (this.props.dismissable) {
                 this.bindMaskClickListener();

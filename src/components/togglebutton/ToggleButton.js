@@ -129,10 +129,10 @@ export class ToggleButton extends Component {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
         }),
-        iconStyleClass = null;
+        iconClassName = null;
 
         if (this.props.onIcon || this.props.offIcon) {
-            iconStyleClass = classNames('p-c' , this.props.checked ? this.props.onIcon : this.props.offIcon , {
+            iconClassName = classNames('p-c' , this.props.checked ? this.props.onIcon : this.props.offIcon , {
                 'p-button-icon-only': (this.props.onIcon && this.props.offIcon) && (!this.props.onLabel || !this.props.offLabel),
                 'p-button-icon-left': (this.props.onIcon && this.props.offIcon)
             });
@@ -144,7 +144,7 @@ export class ToggleButton extends Component {
                     <input ref={(el) => this.input = el} type="checkbox" onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
                            role="button" aria-pressed={this.props.checked} aria-labelledby={this.props.ariaLabelledBy} disabled={this.props.disabled} />
                 </div>
-                {(this.props.onIcon && this.props.offIcon) && <span className={iconStyleClass}></span>}
+                {(this.props.onIcon && this.props.offIcon) && <span className={iconClassName}></span>}
                 <span className="p-button-text p-unselectable-text">{this.props.checked ? this.props.onLabel : this.props.offLabel}</span>
             </div>
         );
