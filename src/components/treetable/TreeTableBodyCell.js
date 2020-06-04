@@ -4,7 +4,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 
 export class TreeTableBodyCell extends Component {
-    
+
     constructor(props) {
         super(props);
 
@@ -22,7 +22,7 @@ export class TreeTableBodyCell extends Component {
             this.setState({
                 editing: true
             });
-            
+
             if(this.documentEditListener)
                 this.cellClick = true;
             else
@@ -42,10 +42,10 @@ export class TreeTableBodyCell extends Component {
                 if(!this.cellClick) {
                     this.switchCellToViewMode();
                 }
-                
+
                 this.cellClick = false;
             };
-            
+
             document.addEventListener('click', this.documentEditListener);
         }
     }
@@ -88,7 +88,7 @@ export class TreeTableBodyCell extends Component {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
-                
+
                 this.keyHelper.tabIndex = -1;
             }
             else {
@@ -97,7 +97,7 @@ export class TreeTableBodyCell extends Component {
                         this.keyHelper.removeAttribute('tabindex');
                     }
                 }, 50);
-            }    
+            }
         }
     }
 
@@ -117,7 +117,7 @@ export class TreeTableBodyCell extends Component {
         }
         else {
             if (this.props.body)
-                content = this.props.body(this.props.node, this.props.column);
+                content = this.props.body(this.props.node, this.props);
             else
                 content = ObjectUtils.resolveFieldData(this.props.node.data, this.props.field);
         }
