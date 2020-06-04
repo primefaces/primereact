@@ -110,6 +110,7 @@ export class Dropdown extends Component {
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onFilterInputChange = this.onFilterInputChange.bind(this);
         this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
         this.clear = this.clear.bind(this);
     }
 
@@ -152,6 +153,10 @@ export class Dropdown extends Component {
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
+    }
+
+    onPanelClick(event) {
+        event.stopPropagation();
     }
 
     onUpKey(event) {
@@ -743,7 +748,7 @@ export class Dropdown extends Component {
                  {dropdownIcon}
                  <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo}
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    scrollHeight={this.props.scrollHeight} filter={filterElement}>
+                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick}>
                     {items}
                  </DropdownPanel>
             </div>
