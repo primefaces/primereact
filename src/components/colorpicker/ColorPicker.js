@@ -4,6 +4,7 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {ColorPickerPanel} from './ColorPickerPanel';
 import Tooltip from "../tooltip/Tooltip";
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class ColorPicker extends Component {
 
@@ -546,9 +547,11 @@ export class ColorPicker extends Component {
                 'p-disabled': this.props.disabled
             });
 
+            let inputProps = ObjectUtils.findDiffKeys(this.props, ColorPicker.defaultProps);
+
             return (
                 <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly="readonly" id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
-                    onClick={this.onInputClick} onKeyDown={this.onInputKeydown} />
+                    onClick={this.onInputClick} onKeyDown={this.onInputKeydown} {...inputProps}/>
             );
         }
         else {
