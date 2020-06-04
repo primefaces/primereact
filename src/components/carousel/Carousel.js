@@ -156,7 +156,7 @@ export class Carousel extends Component {
 
         if (this.itemsContainer) {
             DomHandler.removeClass(this.itemsContainer, 'p-items-hidden');
-            this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+            this.changePosition(totalShiftedItems);
             this.itemsContainer.style.transition = 'transform 500ms ease 0s';
         }
 
@@ -274,7 +274,7 @@ export class Carousel extends Component {
             this.itemsContainer.style.transition = '';
 
             if ((this.state.page === 0 || this.state.page === (this.totalDots - 1)) && this.isCircular()) {
-                this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${this.state.totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+                this.changePosition(this.state.totalShiftedItems);
             }
         }
     }
@@ -421,9 +421,16 @@ export class Carousel extends Component {
         this.carouselStyle.innerHTML = innerHTML;
     }
 
+    changePosition(totalShiftedItems) {
+        if (this.itemsContainer) {
+            this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+        }
+    }
+
     componentDidMount() {
         this.createStyle();
         this.calculatePosition();
+        this.changePosition(this.state.totalShiftedItems);
 
         if (this.props.responsiveOptions) {
             this.bindDocumentListeners();
@@ -481,7 +488,7 @@ export class Carousel extends Component {
                 stateChanged = true;
             }
 
-            this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+            this.changePosition(totalShiftedItems);
         }
 
         if (isCircular) {
