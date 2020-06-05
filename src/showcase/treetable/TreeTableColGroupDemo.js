@@ -245,7 +245,7 @@ class TreeTableColGroupDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 
@@ -458,7 +458,7 @@ export class TreeTableColGroupDemo extends Component {
                 content: `
 import React from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 
@@ -667,7 +667,7 @@ const TreeTableColGroupDemo = () => {
                 content: `
 import React from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 

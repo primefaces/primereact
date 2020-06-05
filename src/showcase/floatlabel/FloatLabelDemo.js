@@ -199,16 +199,16 @@ class FloatLabelDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {InputText} from "primereact/inputtext";
-import {AutoComplete} from "primereact/autocomplete";
-import {Calendar} from "primereact/calendar";
-import {Chips} from "primereact/chips";
-import {Dropdown} from "primereact/dropdown";
-import {InputMask} from "primereact/inputmask";
-import {InputNumber} from "primereact/inputnumber";
-import {InputTextarea} from "primereact/inputtextarea";
-import {MultiSelect} from "primereact/multiselect";
-import {Password} from "primereact/password";
+import {InputText} from 'primereact/inputtext';
+import {AutoComplete} from 'primereact/autocomplete';
+import {Calendar} from 'primereact/calendar';
+import {Chips} from 'primereact/chips';
+import {Dropdown} from 'primereact/dropdown';
+import {InputMask} from 'primereact/inputmask';
+import {InputNumber} from 'primereact/inputnumber';
+import {InputTextarea} from 'primereact/inputtextarea';
+import {MultiSelect} from 'primereact/multiselect';
+import {Password} from 'primereact/password';
 import {CountryService} from "../service/CountryService";
 
 export class FloatLabelDemo extends Component {
@@ -374,16 +374,16 @@ export class FloatLabelDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {InputText} from "primereact/inputtext";
-import {AutoComplete} from "primereact/autocomplete";
-import {Calendar} from "primereact/calendar";
-import {Chips} from "primereact/chips";
-import {Dropdown} from "primereact/dropdown";
-import {InputMask} from "primereact/inputmask";
-import {InputNumber} from "primereact/inputnumber";
-import {InputTextarea} from "primereact/inputtextarea";
-import {MultiSelect} from "primereact/multiselect";
-import {Password} from "primereact/password";
+import {InputText} from 'primereact/inputtext';
+import {AutoComplete} from 'primereact/autocomplete';
+import {Calendar} from 'primereact/calendar';
+import {Chips} from 'primereact/chips';
+import {Dropdown} from 'primereact/dropdown';
+import {InputMask} from 'primereact/inputmask';
+import {InputNumber} from 'primereact/inputnumber';
+import {InputTextarea} from 'primereact/inputtextarea';
+import {MultiSelect} from 'primereact/multiselect';
+import {Password} from 'primereact/password';
 import {CountryService} from "../service/CountryService";
 
 const FloatLabelDemo = () => {
@@ -539,16 +539,16 @@ const FloatLabelDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {InputText} from "primereact/inputtext";
-import {AutoComplete} from "primereact/autocomplete";
-import {Calendar} from "primereact/calendar";
-import {Chips} from "primereact/chips";
-import {Dropdown} from "primereact/dropdown";
-import {InputMask} from "primereact/inputmask";
-import {InputNumber} from "primereact/inputnumber";
-import {InputTextarea} from "primereact/inputtextarea";
-import {MultiSelect} from "primereact/multiselect";
-import {Password} from "primereact/password";
+import {InputText} from 'primereact/inputtext';
+import {AutoComplete} from 'primereact/autocomplete';
+import {Calendar} from 'primereact/calendar';
+import {Chips} from 'primereact/chips';
+import {Dropdown} from 'primereact/dropdown';
+import {InputMask} from 'primereact/inputmask';
+import {InputNumber} from 'primereact/inputnumber';
+import {InputTextarea} from 'primereact/inputtextarea';
+import {MultiSelect} from 'primereact/multiselect';
+import {Password} from 'primereact/password';
 import {CountryService} from "../service/CountryService";
 
 const FloatLabelDemo = () => {

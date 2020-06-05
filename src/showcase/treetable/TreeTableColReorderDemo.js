@@ -62,7 +62,7 @@ class TreeTableColReorderDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 export class TreeTableColReorderDemo extends Component {
@@ -98,7 +98,7 @@ export class TreeTableColReorderDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableColReorderDemo = () => {
@@ -126,7 +126,7 @@ const TreeTableColReorderDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableColReorderDemo = () => {

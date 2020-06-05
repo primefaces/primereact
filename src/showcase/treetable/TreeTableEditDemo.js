@@ -111,7 +111,7 @@ class TreeTableEditDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { NodeService } from '../service/NodeService';
 
@@ -196,7 +196,7 @@ export class TreeTableEditDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { NodeService } from '../service/NodeService';
 
@@ -267,7 +267,7 @@ const TreeTableEditDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { NodeService } from '../service/NodeService';
 

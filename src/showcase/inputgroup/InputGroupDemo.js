@@ -154,10 +154,10 @@ class InputGroupDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {InputText} from "primereact/inputtext";
-import {Button} from "primereact/button";
-import {Checkbox} from "primereact/checkbox";
-import {RadioButton} from "primereact/radiobutton";
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {RadioButton} from 'primereact/radiobutton';
 
 export class InputGroupDemo extends Component {
 
@@ -285,10 +285,10 @@ export class InputGroupDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {InputText} from "primereact/inputtext";
-import {Button} from "primereact/button";
-import {Checkbox} from "primereact/checkbox";
-import {RadioButton} from "primereact/radiobutton";
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {RadioButton} from 'primereact/radiobutton';
 
 const InputGroupDemo = () => {
     const [usernameChecked, setUsernameChecked] = useState(false);
@@ -408,10 +408,10 @@ const InputGroupDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {InputText} from "primereact/inputtext";
-import {Button} from "primereact/button";
-import {Checkbox} from "primereact/checkbox";
-import {RadioButton} from "primereact/radiobutton";
+import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {RadioButton} from 'primereact/radiobutton';
 
 const InputGroupDemo = () => {
     const [usernameChecked, setUsernameChecked] = useState<boolean>(false);

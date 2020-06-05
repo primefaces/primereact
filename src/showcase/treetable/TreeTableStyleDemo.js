@@ -76,7 +76,7 @@ class TreeTableStyleDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 export class TreeTableStyleDemo extends Component {
@@ -126,7 +126,7 @@ export class TreeTableStyleDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableStyleDemo = () => {
@@ -166,7 +166,7 @@ const TreeTableStyleDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableStyleDemo = () => {

@@ -75,7 +75,7 @@ class TreeTableTemplatingDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 
@@ -124,7 +124,7 @@ export class TreeTableTemplatingDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 
@@ -164,7 +164,7 @@ const TreeTableTemplatingDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 

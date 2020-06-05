@@ -89,7 +89,7 @@ class StepsDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import {Steps} from 'primereact/steps';
-import {Growl} from "primereact/growl";
+import {Growl} from 'primereact/growl';
 
 export class StepsDemo extends Component {
 
@@ -151,7 +151,7 @@ export class StepsDemo extends Component {
                 content: `
 import React, { useState, useRef } from 'react';
 import {Steps} from 'primereact/steps';
-import {Growl} from "primereact/growl";
+import {Growl} from 'primereact/growl';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -206,7 +206,7 @@ const StepsDemo = () => {
                 content: `
 import React, { useState, useRef } from 'react';
 import {Steps} from 'primereact/steps';
-import {Growl} from "primereact/growl";
+import {Growl} from 'primereact/growl';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);

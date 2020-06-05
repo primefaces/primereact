@@ -98,7 +98,7 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Growl } from 'primereact/growl';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 export class TreeTableContextMenuDemo extends Component {
@@ -168,7 +168,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Growl } from 'primereact/growl';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableContextMenuDemo = () => {
@@ -232,7 +232,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Growl } from 'primereact/growl';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableContextMenuDemo = () => {

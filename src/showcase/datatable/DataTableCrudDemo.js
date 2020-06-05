@@ -163,9 +163,9 @@ import React, { Component } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {Button} from "primereact/button";
-import {Dialog} from "primereact/dialog";
-import {InputText} from "primereact/inputtext";
+import {Button} from 'primereact/button';
+import {Dialog} from 'primereact/dialog';
+import {InputText} from 'primereact/inputtext';
 
 export class DataTableCrudDemo extends Component {
 
@@ -297,9 +297,9 @@ import React, { useState, useEffect } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {Button} from "primereact/button";
-import {Dialog} from "primereact/dialog";
-import {InputText} from "primereact/inputtext";
+import {Button} from 'primereact/button';
+import {Dialog} from 'primereact/dialog';
+import {InputText} from 'primereact/inputtext';
 
 const DataTableCrudDemo = () => {
     const [cars, setCars] = useState([]);
@@ -420,9 +420,9 @@ import React, { useState, useEffect } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {Button} from "primereact/button";
-import {Dialog} from "primereact/dialog";
-import {InputText} from "primereact/inputtext";
+import {Button} from 'primereact/button';
+import {Dialog} from 'primereact/dialog';
+import {InputText} from 'primereact/inputtext';
 
 const DataTableCrudDemo = () => {
     const [cars, setCars] = useState<any>([]);

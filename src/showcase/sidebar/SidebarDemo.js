@@ -105,7 +105,7 @@ class SidebarDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Sidebar} from "primereact/sidebar";
+import {Sidebar} from 'primereact/sidebar';
 import {Button} from 'primereact/button';
 
 export class SidebarDemo extends Component {
@@ -186,7 +186,7 @@ export class SidebarDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Sidebar} from "primereact/sidebar";
+import {Sidebar} from 'primereact/sidebar';
 import {Button} from 'primereact/button';
 
 const SidebarDemo = () => {
@@ -259,7 +259,7 @@ const SidebarDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Sidebar} from "primereact/sidebar";
+import {Sidebar} from 'primereact/sidebar';
 import {Button} from 'primereact/button';
 
 const SidebarDemo = () => {

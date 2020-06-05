@@ -67,7 +67,7 @@ class MenuDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import {Menu} from 'primereact/menu';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 export class MenuDemo extends Component {
 
@@ -108,7 +108,7 @@ export class MenuDemo extends Component {
                 content: `
 import React, { useRef } from 'react';
 import {Menu} from 'primereact/menu';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 const MenuDemo = () => {
     let menu = useRef(null);
@@ -144,7 +144,7 @@ const MenuDemo = () => {
                 content: `
 import React, { useRef } from 'react';
 import {Menu} from 'primereact/menu';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 const MenuDemo = () => {
     let menu = useRef<any>(null);

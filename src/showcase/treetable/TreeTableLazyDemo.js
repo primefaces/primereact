@@ -154,7 +154,7 @@ class TreeTableLazyDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 
 export class TreeTableLazyDemo extends Component {
 
@@ -281,7 +281,7 @@ export class TreeTableLazyDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 
 const TreeTableLazyDemo = () => {
     const [nodes, setNodes] = useState([]);
@@ -386,7 +386,7 @@ const TreeTableLazyDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 
 const TreeTableLazyDemo = () => {
     const [nodes, setNodes] = useState<any>([]);

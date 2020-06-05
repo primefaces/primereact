@@ -181,7 +181,7 @@ class MenubarDoc extends Component {
 import React, { Component } from 'react';
 import {Menubar} from 'primereact/menubar';
 import {Button} from 'primereact/button';
-import {InputText} from "primereact/inputtext";
+import {InputText} from 'primereact/inputtext';
 
 export class MenubarDemo extends Component {
 
@@ -336,7 +336,7 @@ export class MenubarDemo extends Component {
 import React from 'react';
 import {Menubar} from 'primereact/menubar';
 import {Button} from 'primereact/button';
-import {InputText} from "primereact/inputtext";
+import {InputText} from 'primereact/inputtext';
 
 const MenubarDemo = () => {
 
@@ -485,7 +485,7 @@ const MenubarDemo = () => {
 import React from 'react';
 import {Menubar} from 'primereact/menubar';
 import {Button} from 'primereact/button';
-import {InputText} from "primereact/inputtext";
+import {InputText} from 'primereact/inputtext';
 
 const MenubarDemo = () => {
 

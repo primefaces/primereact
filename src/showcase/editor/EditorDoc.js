@@ -14,8 +14,8 @@ export class EditorDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, {Component} from 'react';
-import {Editor} from "primereact/editor";
-import {Button} from "primereact/button";
+import {Editor} from 'primereact/editor';
+import {Button} from 'primereact/button';
 
 export class EditorDemo extends Component {
 
@@ -63,8 +63,8 @@ export class EditorDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Editor} from "primereact/editor";
-import {Button} from "primereact/button";
+import {Editor} from 'primereact/editor';
+import {Button} from 'primereact/button';
 
 const EditorDemo = () => {
     const [text1, setText1] = useState('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
@@ -100,8 +100,8 @@ const EditorDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Editor} from "primereact/editor";
-import {Button} from "primereact/button";
+import {Editor} from 'primereact/editor';
+import {Button} from 'primereact/button';
 
 const EditorDemo = () => {
     const [text1, setText1] = useState<any>('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');

@@ -124,7 +124,7 @@ class TreeTableSelectionDemoDoc extends Component {
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Growl } from 'primereact/growl';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 export class TreeTableSelectionDemo extends Component {
@@ -221,7 +221,7 @@ export class TreeTableSelectionDemo extends Component {
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Growl } from 'primereact/growl';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableSelectionDemo = () => {
@@ -306,7 +306,7 @@ const TreeTableSelectionDemo = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Growl } from 'primereact/growl';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableSelectionDemo = () => {

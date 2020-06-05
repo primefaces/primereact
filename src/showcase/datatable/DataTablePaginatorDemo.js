@@ -70,7 +70,7 @@ import React, { Component } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -112,7 +112,7 @@ import React, { useState, useEffect } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 const DataTablePaginatorDemo = () => {
     const [cars, setCars] = useState([]);
@@ -146,7 +146,7 @@ import React, { useState, useEffect } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {CarService} from '../service/CarService';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 const DataTablePaginatorDemo = () => {
     const [cars, setCars] = useState([]);

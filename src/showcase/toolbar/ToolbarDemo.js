@@ -56,7 +56,7 @@ class ToolbarDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import {Toolbar} from 'primereact/toolbar';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 export class ToolbarDemo extends Component {
 
@@ -87,7 +87,7 @@ export class ToolbarDemo extends Component {
                 content: `
 import React from 'react';
 import {Toolbar} from 'primereact/toolbar';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 const ToolbarDemo = () => {
 
@@ -116,7 +116,7 @@ const ToolbarDemo = () => {
                 content: `
 import React from 'react';
 import {Toolbar} from 'primereact/toolbar';
-import {Button} from "primereact/button";
+import {Button} from 'primereact/button';
 
 const ToolbarDemo = () => {
 

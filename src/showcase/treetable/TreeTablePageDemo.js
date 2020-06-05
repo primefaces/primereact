@@ -86,7 +86,7 @@ class TreeTablePageDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 
 export class TreeTablePageDemo extends Component {
 
@@ -146,7 +146,7 @@ export class TreeTablePageDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 
 const TreeTablePageDemo = () => {
     const [nodes, setNodes] = useState([]);
@@ -196,7 +196,7 @@ const TreeTablePageDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 
 const TreeTablePageDemo = () => {
     const [nodes, setNodes] = useState<any>([]);

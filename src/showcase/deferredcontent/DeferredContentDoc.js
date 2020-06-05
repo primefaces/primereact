@@ -15,9 +15,9 @@ export class DeferredContentDoc extends Component {
 import React, { Component } from 'react';
 import {DeferredContent} from 'primereact/deferredcontent';
 import {CarService} from "../service/CarService";
-import {DataTable} from "primereact/datatable";
-import {Column} from "primereact/column";
-import {Growl} from "primereact/growl";
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Growl} from 'primereact/growl';
 
 export class DeferredContentDemo extends Component {
 
@@ -73,9 +73,9 @@ export class DeferredContentDemo extends Component {
 import React, { useState, useRef } from 'react';
 import {DeferredContent} from 'primereact/deferredcontent';
 import {CarService} from "../service/CarService";
-import {DataTable} from "primereact/datatable";
-import {Column} from "primereact/column";
-import {Growl} from "primereact/growl";
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Growl} from 'primereact/growl';
 
 const DeferredContentDemo = () => {
     const [cars, setCars] = useState([]);
@@ -122,9 +122,9 @@ const DeferredContentDemo = () => {
 import React, { useState, useRef } from 'react';
 import {DeferredContent} from 'primereact/deferredcontent';
 import {CarService} from "../service/CarService";
-import {DataTable} from "primereact/datatable";
-import {Column} from "primereact/column";
-import {Growl} from "primereact/growl";
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Growl} from 'primereact/growl';
 
 const DeferredContentDemo = () => {
     const [cars, setCars] = useState([]);

@@ -188,9 +188,9 @@ import React, { Component } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Panel } from 'primereact/panel';
 import { CarService } from '../service/CarService';
-import { DataView, DataViewLayoutOptions } from "primereact/dataview";
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
 
 export class DataViewDemo extends Component {
 
@@ -346,9 +346,9 @@ import React, { useState, useEffect } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Panel } from 'primereact/panel';
 import { CarService } from '../service/CarService';
-import { DataView, DataViewLayoutOptions } from "primereact/dataview";
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
 
 const DataViewDemo = () => {
     const [cars, setCars] = useState([]);
@@ -495,9 +495,9 @@ import React, { useState, useEffect } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Panel } from 'primereact/panel';
 import { CarService } from '../service/CarService';
-import { DataView, DataViewLayoutOptions } from "primereact/dataview";
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
 
 const DataViewDemo = () => {
     const [cars, setCars] = useState<any>([]);

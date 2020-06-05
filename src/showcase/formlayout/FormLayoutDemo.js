@@ -238,11 +238,11 @@ class FormLayoutDoc extends Component {
                 content: `
 import React, {Component} from 'react';
 import {InputText} from 'primereact/inputtext';
-import {Button} from "primereact/button";
-import {Checkbox} from "primereact/checkbox";
-import {RadioButton} from "primereact/radiobutton";
-import {Dropdown} from "primereact/dropdown";
-import {InputTextarea} from "primereact/inputtextarea";
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {RadioButton} from 'primereact/radiobutton';
+import {Dropdown} from 'primereact/dropdown';
+import {InputTextarea} from 'primereact/inputtextarea';
 
 export class FormLayoutDemo extends Component {
 
@@ -450,11 +450,11 @@ export class FormLayoutDemo extends Component {
                 content: `
 import React, { useState } from 'react';
 import {InputText} from 'primereact/inputtext';
-import {Button} from "primereact/button";
-import {Checkbox} from "primereact/checkbox";
-import {RadioButton} from "primereact/radiobutton";
-import {Dropdown} from "primereact/dropdown";
-import {InputTextarea} from "primereact/inputtextarea";
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {RadioButton} from 'primereact/radiobutton';
+import {Dropdown} from 'primereact/dropdown';
+import {InputTextarea} from 'primereact/inputtextarea';
 
 const FormLayoutDemo = () => {
     const [cities1, setCities1] = useState([]);
@@ -654,11 +654,11 @@ const FormLayoutDemo = () => {
                 content: `
 import React, { useState } from 'react';
 import {InputText} from 'primereact/inputtext';
-import {Button} from "primereact/button";
-import {Checkbox} from "primereact/checkbox";
-import {RadioButton} from "primereact/radiobutton";
-import {Dropdown} from "primereact/dropdown";
-import {InputTextarea} from "primereact/inputtextarea";
+import {Button} from 'primereact/button';
+import {Checkbox} from 'primereact/checkbox';
+import {RadioButton} from 'primereact/radiobutton';
+import {Dropdown} from 'primereact/dropdown';
+import {InputTextarea} from 'primereact/inputtextarea';
 
 const FormLayoutDemo = () => {
     const [cities1, setCities1] = useState([]);
