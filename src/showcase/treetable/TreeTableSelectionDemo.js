@@ -5,7 +5,6 @@ import { Column } from "../../components/column/Column";
 import { NodeService } from '../service/NodeService';
 import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 
@@ -32,11 +31,11 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     onSelect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
     }
 
     onUnselect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
     }
 
     componentDidMount() {
@@ -62,7 +61,7 @@ export class TreeTableSelectionDemo extends Component {
                         <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
 
                         <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
+                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
                         </AppContentContext.Consumer>
                     </div>
                 </div>
@@ -71,28 +70,28 @@ export class TreeTableSelectionDemo extends Component {
                     <Growl ref={(el) => this.growl = el} />
 
                     <h3 className="first">Single</h3>
-                    <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})}>
+                    <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({ selectedNodeKey1: e.value })}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Multiple</h3>
-                    <TreeTable value={this.state.nodes2} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} metaKeySelection={false}>
+                    <TreeTable value={this.state.nodes2} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({ selectedNodeKeys1: e.value })} metaKeySelection={false}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Multiple with MetaKey</h3>
-                    <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} metaKeySelection={true}>
+                    <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection={true}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
                     </TreeTable>
 
                     <h3>Events</h3>
-                    <TreeTable value={this.state.nodes4} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({selectedNodeKey2: e.value})}
+                    <TreeTable value={this.state.nodes4} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({ selectedNodeKey2: e.value })}
                         onSelect={this.onSelect} onUnselect={this.onUnselect}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
@@ -100,7 +99,7 @@ export class TreeTableSelectionDemo extends Component {
                     </TreeTable>
 
                     <h3>Checkbox</h3>
-                    <TreeTable value={this.state.nodes5} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})}>
+                    <TreeTable value={this.state.nodes5} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({ selectedNodeKeys3: e.value })}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -117,13 +116,10 @@ class TreeTableSelectionDemoDoc extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            activeIndex: 0
-        };
 
         this.sources = {
-            'app': {
-                tabName: 'Source',
+            'class': {
+                tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -392,41 +388,19 @@ const TreeTableSelectionDemo = () => {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.activeIndex !== nextState.activeIndex) {
-            return true;
-        }
-
+    shouldComponentUpdate() {
         return false;
     }
 
-    renderSourceButtons() {
-        return (
-            <div className="source-button-group">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/treetable" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    <span>View on GitHub</span>
-                </a>
-                <LiveEditor name="TreeTableSelectionDemo" sources={this.sources} service="NodeService" data="treetablenodes" activeButtonIndex={this.state.activeIndex} />
-            </div>
-        )
-    }
-
     render() {
-        const sourceButtons = this.renderSourceButtons();
-
         return (
             <div className="content-section documentation">
-                <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
+                <TabView>
                     {
                         this.sources && Object.entries(this.sources).map(([key, value], index) => {
                             return (
-                                <TabPanel key={`source_${index}`} header={value.tabName}>
-                                    {sourceButtons}
-
-                                    <CodeHighlight className="language-javascript">
-                                        {value.content}
-                                    </CodeHighlight>
+                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
+                                    <LiveEditor name="TreeTableSelectionDemo" sources={[key, value]} service="NodeService" data="treetablenodes" />
                                 </TabPanel>
                             );
                         })

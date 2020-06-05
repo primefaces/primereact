@@ -220,24 +220,6 @@
                     }
                 }
 
-                .source-button-group {
-                    display: flex;
-                    align-items: center;
-                    margin: 1em 0;
-
-                    > form {
-                        .live-editor-button {
-                            @include source-button;
-                        }
-                    }
-                }
-
-                .btn-viewsource {
-                    @include source-button;
-                    padding: .5em;
-                    margin-left: 0;
-                }
-
                 i:not([class~="pi"]) {
                     background-color: #fcf2a7;
                     font-family: monaco, Consolas, Lucida Console, monospace;
@@ -300,7 +282,12 @@
                     .p-tabview-panels {
                         background: transparent;
                         border: 0 none;
+                        padding: 0;
                         color: #333333;
+
+                        .p-tabview-panel:not(.source-content) {
+                            padding: 0.571em 1em;
+                        }
                     }
                 }
             }
