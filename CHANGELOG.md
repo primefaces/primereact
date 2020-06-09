@@ -1,5 +1,29 @@
 # Changelog
 
+## [4.2.2](https://github.com/primefaces/primereact/tree/4.2.2) (2020-06-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.2.1...4.2.2)
+
+**Implemented New Features and Enhancements:**
+
+- Add onStateSave and onStateRestore callbacks to DataTable with stateStorage [\#1389](https://github.com/primefaces/primereact/issues/1389)
+- Change the type of iconsTemplate property on Dialog [\#1386](https://github.com/primefaces/primereact/issues/1386)
+- Calendar uses : instead of . as seperator for milliseconds [\#1385](https://github.com/primefaces/primereact/issues/1385)
+- Add custom mode to stateStorage [\#1382](https://github.com/primefaces/primereact/issues/1382)
+- ColorPicker: add missing input attributes [\#1323](https://github.com/primefaces/primereact/issues/1323)
+- Deprecate \*styleClass props in favor of \*className [\#1262](https://github.com/primefaces/primereact/issues/1262)
+
+**Fixed bugs:**
+
+- Tree filter with onToggle method doesn't work as expected [\#1390](https://github.com/primefaces/primereact/issues/1390)
+- Calendar navigator skips one month [\#1388](https://github.com/primefaces/primereact/issues/1388)
+- Incorrect work page parameter in carousel [\#1387](https://github.com/primefaces/primereact/issues/1387)
+- The className property of Column is not set to \<col\> element [\#1384](https://github.com/primefaces/primereact/issues/1384)
+- EmptyMessage property is not working with empty string on DataTable [\#1383](https://github.com/primefaces/primereact/issues/1383)
+- When the month is changed in Calendar inside OverlayPanel, the panel automatically closes. [\#1381](https://github.com/primefaces/primereact/issues/1381)
+- TreeTable column body prop function does not contain column argument [\#1366](https://github.com/primefaces/primereact/issues/1366)
+- When the input filter element is clicked, the panel closes on DropDown [\#1360](https://github.com/primefaces/primereact/issues/1360)
+
 ## [4.2.1](https://github.com/primefaces/primereact/tree/4.2.1) (2020-05-11)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.2.0...4.2.1)
