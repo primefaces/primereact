@@ -72,8 +72,8 @@ export class DataTableFilterDemo extends Component {
             </div>
         );
 
-        const brandFilter = <Dropdown style={{width: '100%'}} placeholder="Select a Brand" value={this.state.selectedBrand} options={this.state.brands} onChange={this.onBrandChange} showClear />;
-        const colorFilter = <MultiSelect style={{width:'100%'}} placeholder="Select Colors" value={this.state.selectedColors} options={this.state.colors} onChange={this.onColorChange} />;
+        const brandFilter = <Dropdown style={{width: '100%'}} placeholder="Select a Brand" value={this.state.selectedBrand} options={this.brands} onChange={this.onBrandChange} showClear />;
+        const colorFilter = <MultiSelect style={{width:'100%'}} placeholder="Select Colors" value={this.state.selectedColors} options={this.colors} onChange={this.onColorChange} />;
 
         return (
             <div>
@@ -187,8 +187,8 @@ export class DataTableFilterDemo extends Component {
             </div>
         );
 
-        const brandFilter = <Dropdown style={{width: '100%'}} placeholder="Select a Brand" value={this.state.selectedBrand} options={this.state.brands} onChange={this.onBrandChange} showClear />;
-        const colorFilter = <MultiSelect style={{width:'100%'}} placeholder="Select Colors" value={this.state.selectedColors} options={this.state.colors} onChange={this.onColorChange} />;
+        const brandFilter = <Dropdown style={{width: '100%'}} placeholder="Select a Brand" value={this.state.selectedBrand} options={this.brands} onChange={this.onBrandChange} showClear />;
+        const colorFilter = <MultiSelect style={{width:'100%'}} placeholder="Select Colors" value={this.state.selectedColors} options={this.colors} onChange={this.onColorChange} />;
 
         return (
             <div>

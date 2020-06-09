@@ -118,7 +118,7 @@ export class DataTableDemo extends Component {
 
     renderRepresentativeFilter() {
         return (
-            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives}
+            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.representatives}
                 onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
         );
     }
@@ -183,7 +183,7 @@ export class DataTableDemo extends Component {
 
     renderStatusFilter() {
         return (
-            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange}
+            <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusFilterChange}
                         itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
         );
     }
@@ -365,7 +365,7 @@ export class DataTableDemo extends Component {
 
     renderRepresentativeFilter() {
         return (
-            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.state.representatives}
+            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.representatives}
                 onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
         );
     }
@@ -430,7 +430,7 @@ export class DataTableDemo extends Component {
 
     renderStatusFilter() {
         return (
-            <Dropdown value={this.state.selectedStatus} options={this.state.statuses} onChange={this.onStatusFilterChange}
+            <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusFilterChange}
                         itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
         );
     }
