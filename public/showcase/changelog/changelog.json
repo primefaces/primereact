@@ -1,4 +1,130 @@
 {
+    "4.2.2": {
+        "dialog": [
+            {
+                "number": 1386,
+                "title": "Change the type of iconsTemplate property on Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1386"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1386,
+                "title": "Change the type of iconsTemplate property on Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1386"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1387,
+                "title": "Incorrect work page parameter in carousel",
+                "url": "https://github.com/primefaces/primereact/issues/1387"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1384,
+                "title": "The className property of Column is not set to <col> element",
+                "url": "https://github.com/primefaces/primereact/issues/1384"
+            },
+            {
+                "number": 1389,
+                "title": "Add onStateSave and onStateRestore callbacks to DataTable with stateStorage",
+                "url": "https://github.com/primefaces/primereact/issues/1389"
+            },
+            {
+                "number": 1383,
+                "title": "EmptyMessage property is not working with empty string on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1383"
+            },
+            {
+                "number": 1382,
+                "title": "Add custom mode to stateStorage",
+                "url": "https://github.com/primefaces/primereact/issues/1382"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1360,
+                "title": "When the input filter element is clicked, the panel closes on DropDown",
+                "url": "https://github.com/primefaces/primereact/issues/1360"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1381,
+                "title": "When the month is changed in Calendar inside OverlayPanel, the panel automatically closes.",
+                "url": "https://github.com/primefaces/primereact/issues/1381"
+            }
+        ],
+        "button": [
+            {
+                "number": 1262,
+                "title": "Deprecate *styleClass props in favor of *className",
+                "url": "https://github.com/primefaces/primereact/issues/1262"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1262,
+                "title": "Deprecate *styleClass props in favor of *className",
+                "url": "https://github.com/primefaces/primereact/issues/1262"
+            },
+            {
+                "number": 1388,
+                "title": "Calendar navigator skips one month",
+                "url": "https://github.com/primefaces/primereact/issues/1388"
+            },
+            {
+                "number": 1385,
+                "title": "Calendar uses : instead of . as seperator for milliseconds",
+                "url": "https://github.com/primefaces/primereact/issues/1385"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 1262,
+                "title": "Deprecate *styleClass props in favor of *className",
+                "url": "https://github.com/primefaces/primereact/issues/1262"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1262,
+                "title": "Deprecate *styleClass props in favor of *className",
+                "url": "https://github.com/primefaces/primereact/issues/1262"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1262,
+                "title": "Deprecate *styleClass props in favor of *className",
+                "url": "https://github.com/primefaces/primereact/issues/1262"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1366,
+                "title": "TreeTable column body prop function does not contain column argument",
+                "url": "https://github.com/primefaces/primereact/issues/1366"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1323,
+                "title": "ColorPicker: add missing input attributes",
+                "url": "https://github.com/primefaces/primereact/issues/1323"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1390,
+                "title": "Tree filter with onToggle method doesn't work as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1390"
+            }
+        ]
+    },
+
     "4.2.1": {
         "autocomplete": [
             {
@@ -84,7 +210,7 @@
             }
         ]
     },
-    
+
     "4.2.0": {
         "inputnumber": [
             {
