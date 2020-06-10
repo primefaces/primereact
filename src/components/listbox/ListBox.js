@@ -278,9 +278,10 @@ export class ListBox extends Component {
 
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
+                let optionKey = `pr_id__${optionLabel}-${index}`;
 
                 return (
-                    <ListBoxItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
                         onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} tabIndex={this.props.tabIndex} />
                 );
             });
