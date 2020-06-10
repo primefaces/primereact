@@ -616,10 +616,12 @@ export class Dropdown extends Component {
         }
 
         if (items) {
-            return items.map((option) => {
+            return items.map((option, i) => {
                 let optionLabel = this.getOptionLabel(option);
+                let optionKey = this.getOptionKey(option, i);
+
                 return (
-                    <DropdownItem key={this.getOptionKey(option)} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option} disabled={option.disabled} onClick={this.onOptionClick} />
+                    <DropdownItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={selectedOption === option} disabled={option.disabled} onClick={this.onOptionClick} />
                 );
             });
         }
@@ -649,8 +651,8 @@ export class Dropdown extends Component {
         return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
     }
 
-    getOptionKey(option) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
+    getOptionKey(option, i) {
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : `${this.getOptionLabel(option)}-${i}`;
     }
 
     checkValidity() {
