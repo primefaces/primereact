@@ -182,7 +182,7 @@ export class FileUpload extends Component {
             this.clearInputElement();
         }
 
-        if(this.props.mode === 'basic') {
+        if(this.props.mode === 'basic' && this.files.length > 0) {
             this.fileInput.style.display = 'none';
         }
     }
