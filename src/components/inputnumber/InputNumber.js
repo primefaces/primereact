@@ -555,12 +555,7 @@ export class InputNumber extends Component {
     updateValue(event, valueStr, operation) {
         if (valueStr != null) {
             let newValue = this.parseValue(valueStr);
-            let valid = this.isWithinRange(newValue);
-
-            if (valid) {
-                this.updateInput(newValue, operation);
-                this.updateModel(event, newValue);
-            }
+            this.updateInput(newValue, operation);
         }
     }
 
@@ -628,6 +623,17 @@ export class InputNumber extends Component {
 
     onInputBlur(event) {
         this.focus = false;
+
+        let newValue = this.parseValue(this.inputEl.value);
+        if (this.props.min !== null && newValue < this.props.min) {
+            newValue = this.props.min;
+        }
+
+        if (this.props.max !== null && newValue > this.props.max) {
+            newValue = this.props.max;
+        }
+
+        this.updateModel(event, newValue);
 
         if (this.props.onBlur) {
             this.props.onBlur(event);
