@@ -559,10 +559,6 @@ export class InputNumber extends Component {
         }
     }
 
-    isWithinRange(value) {
-        return value == null || ((this.props.min == null || value > this.props.min) && (this.props.max == null || value < this.props.max));
-    }
-
     updateInput(value, operation) {
         let currentLength = this.inputEl.value.length;
 
