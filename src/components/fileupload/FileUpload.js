@@ -100,7 +100,7 @@ export class FileUpload extends Component {
     isImage(file) {
         return /^image\//.test(file.type);
     }
- 
+ 　　　
     remove(event, index) {
         this.clearInputElement();
         let currentFiles = [...this.state.files];
