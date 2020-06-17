@@ -231,16 +231,8 @@ export class InputNumber extends Component {
 
     spin(event, dir) {
         let step = this.props.step * dir;
-        let currentValue = this.props.value || 0;
-        let newValue = currentValue + step;
-
-        if (this.props.min !== null && newValue < this.props.min) {
-            newValue = this.props.min;
-        }
-
-        if (this.props.max !== null && newValue > this.props.max) {
-            newValue = this.props.max;
-        }
+        let currentValue = this.parseValue(this.inputEl.value) || 0;
+        let newValue = this.validateValue(currentValue + step);
 
         this.updateInput(newValue, 'spin');
         this.updateModel(event, newValue);
@@ -559,6 +551,18 @@ export class InputNumber extends Component {
         }
     }
 
+    validateValue(value) {
+        if (this.props.min !== null && value < this.props.min) {
+            return this.props.min;
+        }
+
+        if (this.props.max !== null && value > this.props.max) {
+            return this.props.max;
+        }
+
+        return value;
+    }
+
     updateInput(value, operation) {
         let currentLength = this.inputEl.value.length;
 
@@ -620,15 +624,7 @@ export class InputNumber extends Component {
     onInputBlur(event) {
         this.focus = false;
 
-        let newValue = this.parseValue(this.inputEl.value);
-        if (this.props.min !== null && newValue < this.props.min) {
-            newValue = this.props.min;
-        }
-
-        if (this.props.max !== null && newValue > this.props.max) {
-            newValue = this.props.max;
-        }
-
+        let newValue = this.validateValue(this.parseValue(this.inputEl.value));
         this.updateModel(event, newValue);
 
         if (this.props.onBlur) {
