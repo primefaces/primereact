@@ -48,6 +48,7 @@ export class InputNumber extends Component {
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
+        onValueChange: null,
         onChange: null,
         onBlur: null,
         onFocus: null
@@ -94,6 +95,7 @@ export class InputNumber extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
+        onValueChange: PropTypes.func,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
         onFocus: PropTypes.func
@@ -236,6 +238,8 @@ export class InputNumber extends Component {
 
         this.updateInput(newValue, 'spin');
         this.updateModel(event, newValue);
+
+        this.handleOnChange(event, currentValue, newValue);
     }
 
     onUpButtonMouseDown(event) {
@@ -320,6 +324,7 @@ export class InputNumber extends Component {
         let selectionStart = event.target.selectionStart;
         let selectionEnd = event.target.selectionEnd;
         let inputValue = event.target.value;
+        let newValueStr = null;
 
         if (event.altKey) {
             event.preventDefault();
@@ -357,7 +362,6 @@ export class InputNumber extends Component {
             //backspace
             case 8:
                 event.preventDefault();
-                let newValueStr = null;
 
                 if (selectionStart === selectionEnd) {
                     let deleteChar = inputValue.charAt(selectionStart - 1);
@@ -383,6 +387,42 @@ export class InputNumber extends Component {
 
                     if (newValueStr != null) {
                         this.updateValue(event, newValueStr, 'delete-single');
+                    }
+                }
+                else {
+                    newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
+                    this.updateValue(event, newValueStr, 'delete-range');
+                }
+            break;
+
+            // del
+            case 46:
+                event.preventDefault();
+
+                if (selectionStart === selectionEnd) {
+                    let deleteChar = inputValue.charAt(selectionStart);
+                    let decimalCharIndex = inputValue.search(this._decimal);
+                    this._decimal.lastIndex = 0;
+
+                    if (this.isNumeralChar(deleteChar)) {
+                        if (this._group.test(deleteChar)) {
+                            this._group.lastIndex = 0;
+                            newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
+                        }
+                        else if (this._decimal.test(deleteChar)) {
+                            this._decimal.lastIndex = 0;
+                            this.inputEl.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                        }
+                        else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                            newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
+                        }
+                        else {
+                            newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
+                        }
+                    }
+
+                    if (newValueStr != null) {
+                        this.updateValue(event, newValueStr, 'delete-back-single');
                     }
                 }
                 else {
@@ -545,10 +585,33 @@ export class InputNumber extends Component {
     }
 
     updateValue(event, valueStr, operation) {
+        let currentValue = this.inputEl.value;
+        let newValue = null;
+
         if (valueStr != null) {
-            let newValue = this.parseValue(valueStr);
+            newValue = this.parseValue(valueStr);
             this.updateInput(newValue, operation);
         }
+
+        this.handleOnChange(event, currentValue, newValue);
+    }
+
+    handleOnChange(event, currentValue, newValue) {
+        if (this.props.onChange && this.isValueChanged(currentValue, newValue)) {
+            this.props.onChange({
+                originalEvent: event,
+                value: newValue
+            });
+        }
+    }
+
+    isValueChanged(currentValue, newValue) {
+        if (newValue != null) {
+            let parsedCurrentValue = (typeof value1 === 'string') ? this.parseValue(currentValue) : currentValue;
+            return newValue !== parsedCurrentValue;
+        }
+
+        return false;
     }
 
     validateValue(value) {
@@ -564,10 +627,12 @@ export class InputNumber extends Component {
     }
 
     updateInput(value, operation) {
-        let currentLength = this.inputEl.value.length;
+        let inputValue = this.inputEl.value;
+        let newValue = this.formatValue(value);
+        let currentLength = inputValue.length;
 
         if (currentLength === 0) {
-            this.inputEl.value = this.formatValue(value);
+            this.inputEl.value = newValue;
             this.inputEl.setSelectionRange(0, 0);
             this.initCursor();
             this.inputEl.setSelectionRange(this.inputEl.selectionStart + 1, this.inputEl.selectionStart + 1);
@@ -575,11 +640,11 @@ export class InputNumber extends Component {
         else {
             let selectionStart = this.inputEl.selectionEnd;
             let selectionEnd = this.inputEl.selectionEnd;
-            this.inputEl.value = this.formatValue(value);
-            let newLength = this.inputEl.value.length;
+            this.inputEl.value = newValue;
+            let newLength = newValue.length;
 
             if (newLength === currentLength) {
-                if (operation === 'insert')
+                if (operation === 'insert' || operation === 'delete-back-single')
                     this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
                 else if (operation === 'delete-single')
                     this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
@@ -587,6 +652,22 @@ export class InputNumber extends Component {
                     this.inputEl.setSelectionRange(selectionStart, selectionStart);
                 else if (operation === 'spin')
                     this.inputEl.setSelectionRange(selectionStart, selectionEnd);
+            }
+            else if (operation === 'delete-back-single') {
+                let prevChar = inputValue.charAt(selectionStart - 1);
+                let nextChar = inputValue.charAt(selectionStart);
+                let diff = currentLength - newLength;
+                let isGroupChar = this._group.test(nextChar);
+
+                if (isGroupChar && diff === 1) {
+                    selectionEnd += 1;
+                }
+                else if (!isGroupChar && this.isNumeralChar(prevChar)) {
+                    selectionEnd += (-1 * diff) + 1;
+                }
+
+                this._group.lastIndex = 0;
+                this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
             else {
                 selectionEnd = selectionEnd + (newLength - currentLength);
@@ -597,9 +678,14 @@ export class InputNumber extends Component {
         this.inputEl.setAttribute('aria-valuenow', value);
     }
 
+    updateInputValue(newValue) {
+        this.inputEl.value = this.formatValue(newValue);
+        this.inputEl.setAttribute('aria-valuenow', newValue);
+    }
+
     updateModel(event, value) {
-        if (this.props.onChange) {
-            this.props.onChange({
+        if (this.props.onValueChange) {
+            this.props.onValueChange({
                 originalEvent: event,
                 value: value,
                 stopPropagation : () =>{},
@@ -625,6 +711,7 @@ export class InputNumber extends Component {
         this.focus = false;
 
         let newValue = this.validateValue(this.parseValue(this.inputEl.value));
+        this.updateInputValue(newValue);
         this.updateModel(event, newValue);
 
         if (this.props.onBlur) {
@@ -658,6 +745,11 @@ export class InputNumber extends Component {
         if (this.props.tooltip) {
             this.renderTooltip();
         }
+
+        const newValue = this.validateValue(this.props.value);
+        if (this.props.value !== newValue) {
+            this.updateModel(null, newValue);
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -668,10 +760,13 @@ export class InputNumber extends Component {
                 this.renderTooltip();
         }
 
-        const formattedValue = this.formatValue(this.props.value);
-        if (this.inputEl.value !== formattedValue) {
-            this.inputEl.value = formattedValue;
-            this.inputEl.setAttribute('aria-valuenow', this.props.value);
+        if (prevProps.value !== this.props.value) {
+            const newValue = this.validateValue(this.props.value);
+            this.updateInputValue(newValue);
+
+            if (this.props.value !== newValue) {
+                this.updateModel(null, newValue);
+            }
         }
     }
 
