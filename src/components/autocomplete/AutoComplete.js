@@ -501,6 +501,10 @@ export class AutoComplete extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
     }
 
     componentDidUpdate(prevProps) {
