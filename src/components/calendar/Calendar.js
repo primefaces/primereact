@@ -352,9 +352,9 @@ export class Calendar extends Component {
             }
         }
         catch(err) {
-            //this.updateModel(event, rawValue);
             //invalid date
-            this.updateModel(event, null);
+            let value = this.props.keepInvalid ? rawValue : null;
+            this.updateModel(event, value);
         }
 
         if (this.props.onInput) {
