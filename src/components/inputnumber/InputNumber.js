@@ -606,6 +606,10 @@ export class InputNumber extends Component {
     }
 
     isValueChanged(currentValue, newValue) {
+        if (newValue === null && currentValue !== null) {
+            return true;
+        }
+
         if (newValue != null) {
             let parsedCurrentValue = (typeof value1 === 'string') ? this.parseValue(currentValue) : currentValue;
             return newValue !== parsedCurrentValue;
