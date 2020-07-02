@@ -596,7 +596,7 @@ brandTemplate(brand) {
                                     </tr>
                                     <tr>
                                         <td>selectedItemTemplate</td>
-                                        <td>function</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Template function to return the content of a selected item.</td>
                                     </tr>
