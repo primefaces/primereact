@@ -180,6 +180,10 @@ export class InputNumber extends Component {
 
     formatValue(value) {
         if (value != null) {
+            if (value === '-') { // Minus sign
+                return value;
+            }
+
             if (this.props.format) {
                 let formatter = new Intl.NumberFormat(this.props.locale, this.getOptions());
                 let formattedValue = formatter.format(value);
@@ -212,6 +216,9 @@ export class InputNumber extends Component {
                             .replace(this._numeral, this._index);
 
         if (filteredText) {
+            if (filteredText === '-') // Minus sign
+                return filteredText;
+
             let parsedValue = +filteredText;
             return isNaN(parsedValue) ? null : parsedValue;
         }
