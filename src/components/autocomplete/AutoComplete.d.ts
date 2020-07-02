@@ -32,7 +32,7 @@ interface AutoCompleteProps {
     ariaLabelledBy?: string;
     completeMethod?(e: {originalEvent: Event, query: string}): void;
     itemTemplate?(data: any): JSX.Element | undefined;
-    selectedItemTemplate?(data: any): string;
+    selectedItemTemplate?(data: any): any;
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;

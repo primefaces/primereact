@@ -90,7 +90,7 @@ export class AutoComplete extends Component {
         ariaLabelledBy: PropTypes.string,
         completeMethod: PropTypes.func,
         itemTemplate: PropTypes.func,
-        selectedItemTemplate: PropTypes.func,
+        selectedItemTemplate: PropTypes.any,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -224,7 +224,7 @@ export class AutoComplete extends Component {
     formatValue(value) {
         if (value) {
             if (this.props.selectedItemTemplate && (this.props.multiple ? this.isSelected(value) : this.findOptionIndex(value) > -1)) {
-                const resolvedFieldData = this.props.selectedItemTemplate(value);
+                const resolvedFieldData = ObjectUtils.getJSXElement(this.props.selectedItemTemplate, value);
                 return resolvedFieldData ? resolvedFieldData : value;
             }
             else if (this.props.field) {
