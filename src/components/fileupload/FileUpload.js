@@ -150,7 +150,7 @@ export class FileUpload extends Component {
         }
 
         this.setState({msgs:[]});
-        this.files = this.state.files || [];
+        this.files = this.state.files ? [...this.state.files] : [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
