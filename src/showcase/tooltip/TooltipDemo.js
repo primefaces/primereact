@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import {InputText} from '../../components/inputtext/InputText';
 import {Button} from '../../components/button/Button';
+import {Tooltip} from '../../components/tooltip/Tooltip';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
 import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class TooltipDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            saveBtnTooltipText: 'Click to proceed'
+        }
+    }
 
     render() {
         return (
@@ -43,7 +51,15 @@ export class TooltipDemo extends Component {
                     <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
 
                     <h3>Button</h3>
-                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip={this.state.saveBtnTooltipText} onClick={() => this.setState({saveBtnTooltipText: 'Completed'})} />
+
+                    <h3>MouseTrack</h3>
+                    <div className="p-d-flex p-ai-center">
+                        <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
+
+                        <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
+                        <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px"/>
+                    </div>
                 </div>
 
                 <TooltipDoc />
