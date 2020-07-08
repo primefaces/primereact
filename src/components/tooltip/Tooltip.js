@@ -44,7 +44,7 @@ export class Tooltip extends Component {
         autoZIndex: true,
         baseZIndex: 0,
         mouseTrack: false,
-        mouseTrackTop: 15,
+        mouseTrackTop: 5,
         mouseTrackLeft: 5,
         showDelay: 0,
         updateDelay: 0,
@@ -188,8 +188,34 @@ export class Tooltip extends Component {
         let left = 0, top = 0;
 
         if (this.props.mouseTrack && coordinate) {
-            left = coordinate.x - (DomHandler.getOuterWidth(this.containerEl) / 2) + this.props.mouseTrackLeft;
-            top = coordinate.y + this.props.mouseTrackTop;
+            const container = {
+                width: DomHandler.getOuterWidth(this.containerEl),
+                height: DomHandler.getOuterHeight(this.containerEl)
+            };
+
+            left = coordinate.x;
+            top = coordinate.y;
+            switch (this.state.position) {
+                case 'left':
+                    left -= (container.width + this.props.mouseTrackLeft);
+                    top -= (container.height / 2) - this.props.mouseTrackTop;
+                    break;
+                case 'right':
+                    left += this.props.mouseTrackLeft;
+                    top -= (container.height / 2) - this.props.mouseTrackTop;
+                    break;
+                case 'top':
+                    left -= (container.width / 2) - this.props.mouseTrackLeft;
+                    top -= (container.height + this.props.mouseTrackTop);
+                    break;
+                case 'bottom':
+                    left -= (container.width / 2) - this.props.mouseTrackLeft;
+                    top += this.props.mouseTrackTop;
+                    break;
+                default:
+                    break;
+            }
+
             this.containerEl.style.left = left + 'px';
             this.containerEl.style.top = top + 'px';
             DomHandler.addClass(this.containerEl, 'p-tooltip-active');
