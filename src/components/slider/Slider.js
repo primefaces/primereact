@@ -98,10 +98,7 @@ export class Slider extends Component {
             this.dragging = false;
 
             if (this.props.onSlideEnd) {
-                if (this.props.range)
-                    this.props.onSlideEnd({originalEvent: event, values: this.props.value});
-                else
-                    this.props.onSlideEnd({originalEvent: event, value: this.props.value});
+                this.props.onSlideEnd({originalEvent: event, value: this.props.value});
             }
 
             this.unbindDragListeners();
