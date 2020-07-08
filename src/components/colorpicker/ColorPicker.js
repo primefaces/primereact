@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {ColorPickerPanel} from './ColorPickerPanel';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class ColorPicker extends Component {
@@ -504,7 +504,7 @@ export class ColorPicker extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

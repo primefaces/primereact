@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 import UniqueComponentId from "../utils/UniqueComponentId";
 
 export class SplitButton extends Component {
@@ -152,7 +152,7 @@ export class SplitButton extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

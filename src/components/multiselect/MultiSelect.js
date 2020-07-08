@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import { MultiSelectItem } from './MultiSelectItem';
 import { MultiSelectHeader } from './MultiSelectHeader';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class MultiSelect extends Component {
 
@@ -462,7 +462,7 @@ export class MultiSelect extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

@@ -5,7 +5,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
 import {ListBoxItem} from './ListBoxItem';
 import {ListBoxHeader} from './ListBoxHeader';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class ListBox extends Component {
 
@@ -93,7 +93,7 @@ export class ListBox extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

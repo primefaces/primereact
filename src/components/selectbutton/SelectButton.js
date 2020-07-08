@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import {SelectButtonItem} from './SelectButtonItem';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class SelectButton extends Component {
 
@@ -74,7 +74,7 @@ export class SelectButton extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

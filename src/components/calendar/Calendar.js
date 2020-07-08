@@ -6,7 +6,7 @@ import {Button} from '../button/Button';
 import {CalendarPanel} from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class Calendar extends Component {
 
@@ -276,7 +276,7 @@ export class Calendar extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.inputElement,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

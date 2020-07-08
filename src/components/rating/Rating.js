@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class Rating extends Component {
 
@@ -54,10 +54,10 @@ export class Rating extends Component {
                 }
             });
         }
-        
-        event.preventDefault();        
+
+        event.preventDefault();
     }
-    
+
     clear(event) {
         if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
@@ -72,7 +72,7 @@ export class Rating extends Component {
                 }
             });
         }
-        
+
         event.preventDefault();
     }
 
@@ -107,7 +107,7 @@ export class Rating extends Component {
                 'pi-star-o': (!this.props.value || value > this.props.value),
                 'pi-star': (value <= this.props.value)
             });
-            
+
             return (
                 <span className={iconClass} onClick={(e) => this.rate(e, value)} key={value} tabIndex={this.props.disabled||this.props.readonly ? null : '0'} onKeyDown={(e) => this.onStarKeyDown(e, value)}></span>
             );
@@ -150,7 +150,7 @@ export class Rating extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -159,9 +159,9 @@ export class Rating extends Component {
 
     render() {
         let className = classNames('p-rating', this.props.className, {'p-disabled': this.props.disabled, 'p-rating-readonly': this.props.readonly});
-        let cancelIcon = this.renderCancelIcon();        
+        let cancelIcon = this.renderCancelIcon();
         let stars = this.renderStars();
-                        
+
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {cancelIcon}

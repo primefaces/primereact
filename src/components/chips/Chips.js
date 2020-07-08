@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class Chips extends Component {
 
@@ -91,7 +91,7 @@ export class Chips extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.inputElement,
             targetContainer: this.listElement,
             content: this.props.tooltip,

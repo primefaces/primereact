@@ -7,7 +7,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import {AutoCompletePanel} from './AutoCompletePanel';
 import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 import UniqueComponentId from "../utils/UniqueComponentId";
 
 export class AutoComplete extends Component {
@@ -540,7 +540,7 @@ export class AutoComplete extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

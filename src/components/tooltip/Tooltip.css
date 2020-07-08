@@ -1,8 +1,14 @@
 .p-tooltip {
-    position:absolute;
-    display:none;
+    position: absolute;
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
     padding: .25em .5em;
     max-width: 12.5em;
+}
+
+.p-tooltip-active {
+    opacity: 1;
 }
 
 .p-tooltip.p-tooltip-right,
@@ -19,7 +25,7 @@
    padding: .125em .5em;
    background-color: rgb(76, 76, 76);
    color: #ffffff;
-   white-space: pre-line;
+   white-space: nowrap;
 }
 
 .p-tooltip-arrow {

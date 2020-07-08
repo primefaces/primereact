@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { InputText } from '../inputtext/InputText';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class InputMask extends Component {
 
@@ -581,7 +581,7 @@ export class InputMask extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.input,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

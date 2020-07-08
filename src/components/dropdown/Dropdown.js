@@ -6,7 +6,7 @@ import FilterUtils from '../utils/FilterUtils';
 import classNames from 'classnames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class Dropdown extends Component {
 
@@ -712,7 +712,7 @@ export class Dropdown extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions

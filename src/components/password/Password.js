@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 import ObjectUtils from '../utils/ObjectUtils';
- 
+
 export class Password extends Component {
- 
+
     static defaultProps = {
         promptLabel: 'Enter a password',
         weakLabel: 'Weak',
@@ -41,7 +41,7 @@ export class Password extends Component {
             if (!this.panel) {
                 this.createPanel();
             }
-            
+
             this.panel.style.zIndex = String(DomHandler.generateZIndex());
             this.panel.style.display = 'block';
             setTimeout(() => {
@@ -50,12 +50,12 @@ export class Password extends Component {
             }, 1);
             DomHandler.absolutePosition(this.panel, this.inputEl);
         }
-        
+
         if (this.props.onFocus) {
             this.props.onFocus(e);
         }
     }
-  
+
     onBlur(e) {
         if (this.props.feedback) {
             DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
@@ -92,7 +92,7 @@ export class Password extends Component {
                 else if(score >= 30 && score < 80) {
                     label = this.props.mediumLabel;
                     meterPos = '0px -20px';
-                } 
+                }
                 else if(score >= 80) {
                     label = this.props.strongLabel;
                     meterPos = '0px -30px';
@@ -107,7 +107,7 @@ export class Password extends Component {
             this.props.onKeyUp(e);
         }
     }
-    
+
     testStrength(str) {
         let grade = 0;
         let val;
@@ -128,7 +128,7 @@ export class Password extends Component {
 
         return grade > 100 ? 100 : grade;
     }
-    
+
     normalize(x, y) {
         let diff = x - y;
 
@@ -185,7 +185,7 @@ export class Password extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.inputEl,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -199,4 +199,4 @@ export class Password extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
         );
     }
-} 
+}
