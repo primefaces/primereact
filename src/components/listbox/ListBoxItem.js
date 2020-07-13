@@ -107,7 +107,12 @@ export class ListBoxItem extends Component {
 
     render() {
         let className = classNames(this.props.option.className, 'p-listbox-item', {'p-highlight': this.props.selected});
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
+        let content = this.props.label;
+
+        if (this.props.template) {
+            const Template = this.props.template;
+            content = <Template {...this.props.option} />;
+        }
 
         return (
             <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
