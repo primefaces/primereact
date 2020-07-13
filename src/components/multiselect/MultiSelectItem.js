@@ -15,7 +15,10 @@ export class MultiSelectItem extends Component {
     };
 
     static propTypes = {
-        option: PropTypes.object,
+        option: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.string
+        ]),
         label: PropTypes.string,
         selected: PropTypes.bool,
         tabIndex: PropTypes.string,
