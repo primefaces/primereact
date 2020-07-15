@@ -491,9 +491,15 @@ carTemplate(option) {
                         </tr>
                         <tr>
                             <td>listStyle</td>
-                            <td>string</td>
+                            <td>object</td>
                             <td>null</td>
                             <td>Inline style of inner list element.</td>
+                        </tr>
+                        <tr>
+                            <td>listClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style class of inner list element.</td>
                         </tr>
                         <tr>
                             <td>className</td>
