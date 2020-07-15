@@ -9,6 +9,7 @@ interface ListBoxProps {
     optionValue?: string;
     style?: object;
     listStyle?: object;
+    listClassName?: string;
     className?: string;
     disabled?: boolean;
     dataKey?: string;
