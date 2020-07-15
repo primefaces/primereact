@@ -8,6 +8,7 @@ interface DialogProps {
     position?: string;
     modal?: boolean;
     contentStyle?: object;
+    contentClassName?: string;
     closeOnEscape?: boolean;
     dismissableMask?: boolean;
     rtl?: boolean;
