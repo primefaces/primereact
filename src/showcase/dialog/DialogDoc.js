@@ -533,6 +533,12 @@ const myIcon = (
                                         <td>Style of the content section.</td>
                                     </tr>
                                     <tr>
+                                        <td>contentClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the content section.</td>
+                                    </tr>
+                                    <tr>
                                         <td>closeOnEscape</td>
                                         <td>boolean</td>
                                         <td>true</td>
