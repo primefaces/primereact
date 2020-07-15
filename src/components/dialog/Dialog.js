@@ -19,6 +19,7 @@ export class Dialog extends Component {
         onHide: null,
         onShow: null,
         contentStyle: null,
+        contentClassName: null,
         closeOnEscape: true,
         dismissableMask: false,
         rtl: false,
@@ -48,6 +49,7 @@ export class Dialog extends Component {
         onHide: PropTypes.func.isRequired,
         onShow: PropTypes.func,
         contentStyle: PropTypes.object,
+        contentClassName: PropTypes.string,
         closeOnEscape: PropTypes.bool,
         dismissableMask: PropTypes.bool,
         rtl: PropTypes.bool,
@@ -344,8 +346,9 @@ export class Dialog extends Component {
     }
 
     renderContent() {
+        let contentClassName = classNames('p-dialog-content', this.props.contentClassName)
         return (
-            <div ref={el => this.contentElement = el} className="p-dialog-content" style={this.props.contentStyle}>
+            <div ref={el => this.contentElement = el} className={contentClassName} style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
