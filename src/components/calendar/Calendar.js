@@ -894,7 +894,7 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentMillisecond = currentTime.getMilliseconds();
         let newMillisecond = currentMillisecond - this.props.stepMillisec;
-        newMillisecond = (newMillisecond < 0) ? (newMillisecond + 200) : newMillisecond;
+        newMillisecond = (newMillisecond < 0) ? (newMillisecond + 999) : newMillisecond;
 
         if (this.validateMillisecond(newMillisecond, currentTime)) {
             this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), newMillisecond);
