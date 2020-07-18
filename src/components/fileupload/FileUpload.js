@@ -76,7 +76,8 @@ export class FileUpload extends Component {
         super(props);
         this.state = {
             files:[],
-            msgs: []
+            msgs: [],
+            uploading: false
         };
 
         this.upload = this.upload.bind(this);
@@ -260,7 +261,10 @@ export class FileUpload extends Component {
 
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
-                this.setState({progress: 0});
+                    this.setState({
+                        progress: 0,
+                        uploading: false
+                    });
 
                     if (xhr.status >= 200 && xhr.status < 300) {
                         if (this.props.onUpload) {
@@ -289,6 +293,8 @@ export class FileUpload extends Component {
             xhr.withCredentials = this.props.withCredentials;
 
             xhr.send(formData);
+
+            this.setState({uploading: true});
         }
     }
 
@@ -309,14 +315,14 @@ export class FileUpload extends Component {
     }
 
     onDragEnter(event) {
-        if(!this.props.disabled) {
+        if(!this.props.disabled && !this.state.uploading) {
             event.stopPropagation();
             event.preventDefault();
         }
     }
 
     onDragOver(event) {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.state.uploading) {
             DomHandler.addClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -324,13 +330,13 @@ export class FileUpload extends Component {
     }
 
     onDragLeave(event) {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.state.uploading) {
             DomHandler.removeClass(this.content, 'p-fileupload-highlight');
         }
     }
 
     onDrop(event) {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.state.uploading) {
             DomHandler.removeClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -345,7 +351,7 @@ export class FileUpload extends Component {
     }
 
     onSimpleUploaderClick() {
-        if (this.hasFiles()) {
+        if (this.hasFiles() && !this.state.uploading) {
             this.upload();
         }
     }
@@ -356,7 +362,7 @@ export class FileUpload extends Component {
         return (
             <span icon="pi pi-plus" className={className}>
                 <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur}
-                    multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
+                    multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled || this.state.uploading} />
                 <span className="p-button-icon p-button-icon-left p-clickable pi pi-fw pi-plus"></span>
                 <span className="p-button-text p-clickable">{this.props.chooseLabel}</span>
             </span>
@@ -371,7 +377,7 @@ export class FileUpload extends Component {
                         let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
                         let fileName = <div>{file.name}</div>;
                         let size = <div>{this.formatSize(file.size)}</div>;
-                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} /></div>
+                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} disabled={this.state.uploading} /></div>
 
                         return <div className="p-fileupload-row" key={file.name + file.type + file.size}>
                                  {preview}
@@ -391,8 +397,8 @@ export class FileUpload extends Component {
         let chooseButton = this.renderChooseButton();
 
         if (!this.props.auto) {
-            uploadButton = <Button type="button" label={this.props.uploadLabel} icon="pi pi-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
-            cancelButton = <Button type="button" label={this.props.cancelLabel} icon="pi pi-times" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
+            uploadButton = <Button type="button" label={this.props.uploadLabel} icon="pi pi-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles() || this.state.uploading} />;
+            cancelButton = <Button type="button" label={this.props.cancelLabel} icon="pi pi-times" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles() || this.state.uploading} />;
         }
 
         if (this.hasFiles()) {
@@ -425,7 +431,7 @@ export class FileUpload extends Component {
             <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick}>
                 <span className={iconClassName}></span>
                 <span className="p-button-text p-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
-                <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}
+                <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled || this.state.uploading}
                     onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} />
              </span>
         );
