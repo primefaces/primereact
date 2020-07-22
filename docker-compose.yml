@@ -1,0 +1,16 @@
+version: '2.1'
+
+networks:
+  default:
+  verdaccio_default:
+    external: true
+
+services:
+  node:
+    environment:
+      npm_config_registry: http://verdaccio:4873
+    image: node
+    networks:
+      - default
+      - verdaccio_default
+    working_dir: /app

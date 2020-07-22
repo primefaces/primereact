@@ -23,7 +23,7 @@ interface ListBoxProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string,
-    itemTemplate?(item: any): JSX.Element | undefined;
+    itemTemplate?: React.JSXElementConstructor;
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
 }
 

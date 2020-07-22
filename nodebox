@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Configure and mount the node container.
+#
+docker-compose \
+  run \
+  -v $PWD:/app \
+  -p 3000 \
+  -u $(id -u):$(id -g) \
+  --rm \
+  node \
+  bash \
+  -l
+
