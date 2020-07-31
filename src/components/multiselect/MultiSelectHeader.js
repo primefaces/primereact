@@ -6,6 +6,7 @@ import {Checkbox} from '../checkbox/Checkbox';
 export class MultiSelectHeader extends Component {
 
     static defaultProps = {
+        title: null,
         filter: false,
         filterValue: null,
         filterPlaceholder: null,
@@ -16,6 +17,7 @@ export class MultiSelectHeader extends Component {
     }
 
     static propTypes = {
+        title: PropTypes.string,
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
         filterPlaceholder: PropTypes.string,
@@ -59,9 +61,12 @@ export class MultiSelectHeader extends Component {
                 </div>
             );
         }
-        else {
-            return null;
+        if (this.props.title) {
+            return (
+                <label>{this.props.title}</label>
+            );
         }
+        return null;
     }
 
     render() {

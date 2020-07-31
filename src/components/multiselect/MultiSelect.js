@@ -18,6 +18,7 @@ export class MultiSelect extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        optionHeader: null,
         style: null,
         className: null,
         scrollHeight: '200px',
@@ -53,6 +54,7 @@ export class MultiSelect extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
+        optionHeader: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         scrollHeight: PropTypes.string,
@@ -471,7 +473,7 @@ export class MultiSelect extends Component {
 
     renderHeader(items) {
         return (
-            <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} filterPlaceholder={this.props.filterPlaceholder}
+            <MultiSelectHeader title={this.props.optionHeader} filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} filterPlaceholder={this.props.filterPlaceholder}
                 onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} />
         );
     }
