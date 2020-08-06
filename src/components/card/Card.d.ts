@@ -4,8 +4,8 @@ interface CardProps {
     id?: string;
     header?: any;
     footer?: any;
-    title?: string;
-    subTitle?: string;
+    title?: string|React.ReactNode;
+    subTitle?: string|React.ReactNode;
     style?: object;
     className?: string;
 }

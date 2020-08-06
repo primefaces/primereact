@@ -18,8 +18,8 @@ export class Card extends Component {
         id: PropTypes.string,
         header: PropTypes.any,
         footer: PropTypes.any,
-        title: PropTypes.string,
-        subTitle: PropTypes.string,
+        title: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
+        subTitle: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
         style: PropTypes.object,
         className: PropTypes.string
     };
@@ -29,7 +29,7 @@ export class Card extends Component {
                     {this.props.header}
                 </div>;
     }
-    
+
     renderBody(){
         let title, subTitle, footer, children;
 
