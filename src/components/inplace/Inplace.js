@@ -6,11 +6,7 @@ import {Button} from '../button/Button';
 export class InplaceDisplay extends Component {
 
     render() {
-        return (
-            <React.Fragment>
-                {this.props.children}
-            </React.Fragment>
-        )
+        return this.props.children;
     }
 
 }
@@ -18,11 +14,7 @@ export class InplaceDisplay extends Component {
 export class InplaceContent extends Component {
 
     render() {
-        return (
-            <React.Fragment>
-                {this.props.children}
-            </React.Fragment>
-        )
+        return this.props.children;
     }
 
 }
@@ -52,7 +44,7 @@ export class Inplace extends Component {
         onClose: PropTypes.func,
         onToggle: PropTypes.func,
     };
-    
+
     constructor(props) {
         super(props);
         if (!this.props.onToggle) {
@@ -60,7 +52,7 @@ export class Inplace extends Component {
                 active: false
             }
         }
-        
+
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
         this.onDisplayKeyDown = this.onDisplayKeyDown.bind(this);
@@ -125,16 +117,15 @@ export class Inplace extends Component {
             </div>
         );
     }
-    
+
     renderCloseButton() {
         if (this.props.closable) {
             return (
                 <Button type="button" icon="pi pi-times" onClick={this.close} />
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent(content) {
