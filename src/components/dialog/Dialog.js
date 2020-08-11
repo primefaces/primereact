@@ -293,8 +293,8 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
-                    <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
+                <button type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
+                    <span className="p-dialog-header-close-icon pi pi-times"></span>
                 </button>
             );
         }
@@ -303,11 +303,11 @@ export class Dialog extends Component {
     }
 
     renderMaximizeIcon() {
-        const iconClassName = classNames('p-dialog-titlebar-maximize-icon pi', {'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized});
+        const iconClassName = classNames('p-dialog-header-maximize-icon pi', {'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized});
 
         if (this.props.maximizable) {
             return (
-                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
+                <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
                 </button>
             );
@@ -331,9 +331,9 @@ export class Dialog extends Component {
             const iconsTemplate = this.renderIconsTemplate();
 
             return (
-                <div ref={el => this.headerElement = el} className="p-dialog-titlebar">
+                <div ref={el => this.headerElement = el} className="p-dialog-header">
                     <span id={this.id + '_header'} className="p-dialog-title">{this.props.header}</span>
-                    <div className="p-dialog-titlebar-icons">
+                    <div className="p-dialog-header-icons">
                         {iconsTemplate}
                         {maximizeIcon}
                         {closeIcon}
@@ -381,7 +381,7 @@ export class Dialog extends Component {
 
         let transitionTimeout = {
             enter: this.props.position === 'center' ? 150 : 300,
-            exit: this.props.position === 'center' ? 150 : 300,
+            exit: this.props.position === 'center' ? 150 : 300
         };
 
         return (
