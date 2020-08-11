@@ -14,8 +14,8 @@ export class InputNumber extends Component {
         buttonLayout: 'stacked',
         incrementButtonClassName: null,
         decrementButtonClassName: null,
-        incrementButtonIcon: 'pi pi-caret-up',
-        decrementButtonIcon: 'pi pi-caret-down',
+        incrementButtonIcon: 'pi pi-angle-up',
+        decrementButtonIcon: 'pi pi-angle-down',
         locale: undefined,
         localeMatcher: undefined,
         mode: 'decimal',
@@ -103,6 +103,10 @@ export class InputNumber extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            focused: false
+        };
 
         this.constructParser();
 
@@ -711,23 +715,25 @@ export class InputNumber extends Component {
     }
 
     onInputFocus(event) {
-        this.focus = true;
-
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
-        }
+        event.persist();
+        this.setState({ focused: true }, () => {
+            if (this.props.onFocus) {
+                this.props.onFocus(event);
+            }
+        });
     }
 
     onInputBlur(event) {
-        this.focus = false;
+        event.persist();
+        this.setState({ focused: false }, () => {
+            let newValue = this.validateValue(this.parseValue(this.inputEl.value));
+            this.updateInputValue(newValue);
+            this.updateModel(event, newValue);
 
-        let newValue = this.validateValue(this.parseValue(this.inputEl.value));
-        this.updateInputValue(newValue);
-        this.updateModel(event, newValue);
-
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
+            if (this.props.onBlur) {
+                this.props.onBlur(event);
+            }
+        });
     }
 
     clearTimer() {
@@ -812,10 +818,10 @@ export class InputNumber extends Component {
     }
 
     renderUpButton() {
-        const className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component", this.props.incrementButtonClassName, {
+        const className = classNames('p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component', {
             'p-disabled': this.props.disabled
-        });
-        const icon = classNames('p-inputnumber-button-icon', this.props.incrementButtonIcon);
+        }, this.props.incrementButtonClassName);
+        const icon = classNames('p-button-icon', this.props.incrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
@@ -826,10 +832,10 @@ export class InputNumber extends Component {
     }
 
     renderDownButton() {
-        const className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component", this.props.decrementButtonClassName, {
+        const className = classNames('p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component', {
             'p-disabled': this.props.disabled
-        });
-        const icon = classNames('p-inputnumber-button-icon', this.props.decrementButtonIcon);
+        }, this.props.decrementButtonClassName);
+        const icon = classNames('p-button-icon', this.props.decrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
@@ -853,17 +859,17 @@ export class InputNumber extends Component {
         }
 
         return (
-            <React.Fragment>
+            <>
                 {upButton}
                 {downButton}
-            </React.Fragment>
+            </>
         )
     }
 
     render() {
         const className = classNames('p-inputnumber p-component', this.props.className, {
-                'p-inputwrapper-filled': this.props.value != null,
-                'p-inputwrapper-focus': this.focus,
+                'p-inputwrapper-filled': this.props.value != null && this.props.value.toString().length > 0,
+                'p-inputwrapper-focus': this.state.focused,
                 'p-inputnumber-buttons-stacked': this.isStacked(),
                 'p-inputnumber-buttons-horizontal': this.isHorizontal(),
                 'p-inputnumber-buttons-vertical': this.isVertical()
