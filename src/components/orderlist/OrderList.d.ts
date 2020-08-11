@@ -7,7 +7,6 @@ interface OrderListProps {
     style?: object;
     className?: string;
     listStyle?: object;
-    responsive?: boolean;
     dragdrop?: boolean;
     tabIndex?: string;
     onChange?(e: {originalEvent: Event, value: any}): void;
