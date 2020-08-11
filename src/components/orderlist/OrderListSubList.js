@@ -116,10 +116,10 @@ export class OrderListSubList extends Component {
         if (this.props.value) {
             items = this.props.value.map((item, i) => {
                 let content = this.props.itemTemplate ? this.props.itemTemplate(item) : item;
-                let itemClassName = classNames('p-orderlist-item', this.props.className, {'p-highlight': this.isSelected(item)});
+                let itemClassName = classNames('p-orderlist-item', {'p-highlight': this.isSelected(item)}, this.props.className);
                 let key = JSON.stringify(item);
 
-                if(this.props.dragdrop) {
+                if (this.props.dragdrop) {
                     let items = [
                         this.renderDropPoint(i, key + '_droppoint'),
                         <li key={key} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
@@ -127,7 +127,7 @@ export class OrderListSubList extends Component {
                             draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>{content}</li>
                     ];
 
-                    if(i === this.props.value.length - 1) {
+                    if (i === this.props.value.length - 1) {
                         items.push(this.renderDropPoint(item, i, key + '_droppoint_end'));
                     }
 
