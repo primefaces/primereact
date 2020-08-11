@@ -1,8 +1,5 @@
 .p-overlaypanel {
-    padding: 0;
-    margin: 0;
     position: absolute;
-    display: none;
     margin-top: 10px;
 }
 
@@ -11,31 +8,42 @@
     margin-bottom: 10px;
 }
 
-.p-overlaypanel-content {
-    padding: 0.5em 1em;
-}
-
 .p-overlaypanel-close {
-    position: absolute;
-    top: -1em;
-    right: -1em;
-    width: 2em;
-    height: 2em;
-    line-height: 2em;
-    text-align: center;
-    -moz-border-radius: 100%;
-    -webkit-border-radius: 100%;
-    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
 }
 
-.p-overlaypanel-close-icon {
-    line-height: inherit;
+/* Animation */
+.p-overlaypanel-enter {
+    opacity: 0;
+    transform: scaleY(0.8);
+}
+
+.p-overlaypanel-enter-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.p-overlaypanel-enter-done {
+    transform: none;
+}
+
+.p-overlaypanel-exit {
+    opacity: 1;
+}
+
+.p-overlaypanel-exit-active {
+    opacity: 0;
+    transition: opacity .1s linear;
 }
 
 .p-overlaypanel:after, .p-overlaypanel:before {
 	bottom: 100%;
-	left: 1.25em;
-	border: solid transparent;
+	left: 1.25rem;
 	content: " ";
 	height: 0;
 	width: 0;
