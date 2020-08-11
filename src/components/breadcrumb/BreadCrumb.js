@@ -40,19 +40,19 @@ export class BreadCrumb extends Component {
 
     renderHome() {
         if(this.props.home) {
-            const className = classNames('p-breadcrumb-home', this.props.home.className,  {'p-disabled': this.props.home.disabled});
+            const className = classNames('p-breadcrumb-home',  {'p-disabled': this.props.home.disabled}, this.props.home.className);
+            const iconClassName = classNames('p-menuitem-icon', this.props.home.icon);
 
             return (
                 <li className={className} style={this.props.home.style}>
                     <a href={this.props.home.url || '#'} className="p-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
-                        <span className={this.props.home.icon}></span>
+                        <span className={iconClassName}></span>
                     </a>
                 </li>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSeparator() {
@@ -89,9 +89,8 @@ export class BreadCrumb extends Component {
 
             return items;
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
