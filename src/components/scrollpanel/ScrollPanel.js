@@ -110,7 +110,7 @@ export class ScrollPanel extends Component {
             this.onMouseMoveForXBar(e);
             this.onMouseMoveForYBar(e);
         }
-        
+
     }
 
     onMouseMoveForXBar(e) {
@@ -156,7 +156,7 @@ export class ScrollPanel extends Component {
         this.moveBar = this.moveBar.bind(this);
 
         window.addEventListener('resize', this.moveBar);
-        
+
         this.calculateContainerHeight();
         this.initialized = true;
     }
@@ -175,14 +175,14 @@ export class ScrollPanel extends Component {
         let className = classNames('p-scrollpanel p-component', this.props.className);
 
         return (
-            <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 <div className="p-scrollpanel-wrapper">
-                    <div ref={(el) => { this.content = el; }} className="p-scrollpanel-content" onScroll={this.moveBar} onMouseEnter={this.moveBar}>
+                    <div ref={(el) => this.content = el} className="p-scrollpanel-content" onScroll={this.moveBar} onMouseEnter={this.moveBar}>
                         {this.props.children}
                     </div>
                 </div>
-                <div ref={(el) => { this.xBar = el; }} className="p-scrollpanel-bar p-scrollpanel-bar-x" onMouseDown={this.onXBarMouseDown}></div>
-                <div ref={(el) => { this.yBar = el; }} className="p-scrollpanel-bar p-scrollpanel-bar-y" onMouseDown={this.onYBarMouseDown}></div>
+                <div ref={(el) => this.xBar = el} className="p-scrollpanel-bar p-scrollpanel-bar-x" onMouseDown={this.onXBarMouseDown}></div>
+                <div ref={(el) => this.yBar = el} className="p-scrollpanel-bar p-scrollpanel-bar-y" onMouseDown={this.onYBarMouseDown}></div>
             </div>
         );
     }
