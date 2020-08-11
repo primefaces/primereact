@@ -6,7 +6,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class Steps extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         model: null,
         activeIndex: 0,
         readOnly: true,
@@ -24,12 +24,6 @@ export class Steps extends Component {
         className: PropTypes.string,
         onSelect: PropTypes.func
     };
-
-    constructor(props) {
-        super(props);
-
-        this.id = this.props.id || UniqueComponentId();
-    }
 
     itemClick(event, item, index) {
         if (this.props.readOnly || item.disabled) {
@@ -58,39 +52,12 @@ export class Steps extends Component {
         }
     }
 
-    createStyle() {
-        if (!this.stepsStyle) {
-            this.stepsStyle = document.createElement('style');
-            this.stepsStyle.type = 'text/css';
-            document.body.appendChild(this.stepsStyle);
-        }
-
-        let innerHTML = `
-            #${this.id} .p-steps-item {
-                flex: 1 0 ${ (100/ this.props.model.length) }%
-            }
-        `;
-
-        this.stepsStyle.innerHTML = innerHTML;
-    }
-
-    componentDidMount() {
-        this.createStyle();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.model !== this.props.model) {
-            this.createStyle();
-        }
-    }
-
     renderItem(item, index) {
         const isDisabled = (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))
         const className = classNames('p-steps-item', item.className, {
-                'p-highlight p-steps-current': (index === this.props.activeIndex),
-                'p-state-default': (index !== this.props.activeIndex),
-                'p-disabled': isDisabled
-            });
+            'p-highlight p-steps-current': (index === this.props.activeIndex),
+            'p-disabled': isDisabled
+        });
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={index === this.props.activeIndex} aria-expanded={index === this.props.activeIndex}>
@@ -114,13 +81,12 @@ export class Steps extends Component {
                 </ul>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        const className = classNames('p-steps p-component', this.props.className, {'p-steps-readonly': this.props.readonly});
+        const className = classNames('p-steps p-component', this.props.className, {'p-readonly': this.props.readonly});
         const items = this.renderItems();
 
         return (
