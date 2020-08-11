@@ -97,15 +97,14 @@ export class Panel extends Component {
             const toggleIcon = collapsed ? this.props.expandIcon : this.props.collapseIcon;
 
             return (
-                <a href={'#' + ariaControls} className="p-panel-titlebar-icon p-panel-titlebar-toggler" onClick={this.toggle}
+                <button className="p-panel-header-icon p-panel-toggler p-link" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
                    <span className={toggleIcon}></span>
-                </a>
+                </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderHeader(collapsed) {
@@ -113,24 +112,24 @@ export class Panel extends Component {
             const toggleIcon = this.renderToggleIcon(collapsed);
 
             return (
-                <div className="p-panel-titlebar">
+                <div className="p-panel-header">
                     <span className="p-panel-title" aria-label={this.id + '_header'}>{this.props.header}</span>
-                    {toggleIcon}
+                    <div className="p-panel-icons">
+                        {toggleIcon}
+                    </div>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent(collapsed) {
-        const className = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': collapsed});
         const id = this.id + '_content';
 
         return (
-            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
-                <div className={className} aria-hidden={collapsed} role="region" id={id} aria-labelledby={this.id + '_header'}>
+            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={!collapsed} unmountOnExit>
+                <div className="p-toggleable-content" aria-hidden={collapsed} role="region" id={id} aria-labelledby={this.id + '_header'}>
                     <div className="p-panel-content">
                         {this.props.children}
                     </div>
@@ -140,7 +139,7 @@ export class Panel extends Component {
     }
 
     render() {
-        const className = classNames('p-panel p-component', this.props.className);
+        const className = classNames('p-panel p-component', {'p-panel-toggleable': this.props.toggleable}, this.props.className);
         const collapsed = this.isCollapsed();
         const header = this.renderHeader(collapsed);
         const content = this.renderContent(collapsed);
