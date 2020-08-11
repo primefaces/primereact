@@ -45,8 +45,8 @@ export class Password extends Component {
             this.panel.style.zIndex = String(DomHandler.generateZIndex());
             this.panel.style.display = 'block';
             setTimeout(() => {
-                DomHandler.addClass(this.panel, 'p-input-overlay-visible');
-                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
+                DomHandler.addClass(this.panel, 'p-connected-overlay-visible');
+                DomHandler.removeClass(this.panel, 'p-connected-overlay-hidden');
             }, 1);
             DomHandler.absolutePosition(this.panel, this.inputEl);
         }
@@ -58,12 +58,12 @@ export class Password extends Component {
 
     onBlur(e) {
         if (this.props.feedback) {
-            DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
-            DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
+            DomHandler.addClass(this.panel, 'p-connected-overlay-hidden');
+            DomHandler.removeClass(this.panel, 'p-connected-overlay-visible');
 
             setTimeout(() => {
                 this.panel.style.display = 'none';
-                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
+                DomHandler.removeClass(this.panel, 'p-connected-overlay-hidden');
             }, 150);
         }
 
@@ -140,7 +140,7 @@ export class Password extends Component {
 
     createPanel() {
         this.panel = document.createElement('div');
-        this.panel.className = 'p-password-panel p-component p-highlight p-hidden p-password-panel-overlay p-input-overlay';
+        this.panel.className = 'p-password-panel p-component p-password-panel-overlay p-connected-overlay';
         this.meter = document.createElement('div');
         this.meter.className = 'p-password-meter';
         this.info = document.createElement('div');
