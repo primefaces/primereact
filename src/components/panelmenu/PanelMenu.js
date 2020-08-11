@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 
 class PanelMenuSub extends Component {
@@ -63,22 +64,20 @@ class PanelMenuSub extends Component {
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenuIcon(item, active) {
-        const className = classNames('p-panelmenu-icon pi pi-fw', {'pi-caret-right': !active, 'pi-caret-down': active});
+        const className = classNames('p-panelmenu-icon pi pi-fw', {'pi-angle-right': !active, 'pi-angle-down': active});
 
         if (item.items) {
             return (
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenu(item, active) {
@@ -86,28 +85,28 @@ class PanelMenuSub extends Component {
 
         if (item.items) {
             return (
-                <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={active}>
+                <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={active} unmountOnExit>
                     <div className={submenuWrapperClassName}>
                         <PanelMenuSub model={item.items} />
                     </div>
                 </CSSTransition>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMenuitem(item, index) {
         const active = this.state.activeItem === item;
-        const className = classNames('p-menuitem', item.className, {'p-disabled': item.disabled});
+        const className = classNames('p-menuitem', item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
         const icon = this.renderIcon(item, active);
         const submenuIcon = this.renderSubmenuIcon(item, active);
         const submenu = this.renderSubmenu(item, active);
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem">
+                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem">
                     {submenuIcon}
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
@@ -132,9 +131,8 @@ class PanelMenuSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
@@ -169,7 +167,9 @@ export class PanelMenu extends Component {
         super(props);
         this.state = {
             activeItem: null
-        }
+        };
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     onItemClick(event, item) {
@@ -209,28 +209,26 @@ export class PanelMenu extends Component {
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderPanelToggleIcon(item, active) {
-        const className = classNames('p-panelmenu-icon pi pi-fw', {'pi-caret-right': !active,' pi-caret-down': active});
+        const className = classNames('p-panelmenu-icon pi', {'pi-chevron-right': !active,' pi-chevron-down': active});
 
         if (item.items) {
             return (
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderPanel(item, index) {
         const active = this.state.activeItem === item;
-        const className = classNames('p-panelmenu-panel', item.className, {'p-disabled': item.disabled});
-        const headerClassName = classNames('p-component p-panelmenu-header', {'p-highlight': active});
+        const className = classNames('p-panelmenu-panel', item.className);
+        const headerClassName = classNames('p-component p-panelmenu-header', {'p-highlight': active, 'p-disabled': item.disabled});
         const toggleIcon = this.renderPanelToggleIcon(item, active);
         const itemIcon = this.renderPanelIcon(item);
         const contentWrapperClassName = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': !active});
@@ -245,7 +243,7 @@ export class PanelMenu extends Component {
                         <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </div>
-                <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={active}>
+                <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={active} unmountOnExit>
                     <div className={contentWrapperClassName} role="region" id={this.id + '_content'} aria-labelledby={this.id + '_header'}>
                         <div className="p-panelmenu-content">
                             <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" />
@@ -265,9 +263,8 @@ export class PanelMenu extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
