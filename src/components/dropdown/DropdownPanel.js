@@ -24,13 +24,13 @@ export class DropdownPanel extends Component {
     };
 
     renderElement() {
-        let className = classNames('p-dropdown-panel p-hidden p-input-overlay', this.props.panelClassName);
+        let className = classNames('p-dropdown-panel p-component', this.props.panelClassName);
 
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
                 {this.props.filter}
                 <div ref={(el) => this.itemsWrapper = el} className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
-                    <ul className="p-dropdown-items p-dropdown-list p-component" role="listbox">
+                    <ul className="p-dropdown-items" role="listbox">
                         {this.props.children}
                     </ul>
                 </div>
