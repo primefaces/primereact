@@ -217,20 +217,18 @@ export class TieredMenuSub extends Component {
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenuIcon(item) {
         if (item.items) {
             return (
-                <span className="p-submenu-icon pi pi-fw pi-caret-right"></span>
+                <span className="p-submenu-icon pi pi-angle-right"></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenu(item) {
@@ -239,20 +237,20 @@ export class TieredMenuSub extends Component {
                 <TieredMenuSub model={item.items} onLeafClick={this.onLeafClick} popup={this.props.popup} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled})
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)} role="none">
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} role="menuitem" aria-haspopup={item.items != null}
+                <a href={item.url || '#'} className={linkClassName} target={item.target} role="menuitem" aria-haspopup={item.items != null}
                     onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
@@ -278,9 +276,8 @@ export class TieredMenuSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
