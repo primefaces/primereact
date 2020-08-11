@@ -6,7 +6,7 @@ import DomHandler from '../utils/DomHandler';
 
 export class SlideMenuSub extends Component {
 
-    static defaultProps = {     
+    static defaultProps = {
         model: null,
         level: 0,
         easing: 'ease-out',
@@ -63,17 +63,17 @@ export class SlideMenuSub extends Component {
             <li key={'separator_' + index} className="p-menu-separator"></li>
         );
     }
-    
+
     renderIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
         if (item.icon) {
+            const className = classNames('p-menuitem-icon', item.icon);
+
             return (
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenuIcon(item) {
@@ -82,9 +82,8 @@ export class SlideMenuSub extends Component {
                 <span className="p-submenu-icon pi pi-fw pi-caret-right"></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenu(item) {
@@ -94,9 +93,8 @@ export class SlideMenuSub extends Component {
                     onForward={this.props.onForward} parentActive={item === this.state.activeItem} />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMenuitem(item, index) {
@@ -120,7 +118,7 @@ export class SlideMenuSub extends Component {
     renderItem(item, index) {
         if (item.separator)
             return this.renderSeparator(index);
-        else 
+        else
             return this.renderMenuitem(item, index);
     }
 
@@ -132,11 +130,10 @@ export class SlideMenuSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
-    
+
     render() {
         const className = classNames({'p-slidemenu-rootlist': this.props.root, 'p-submenu-list': !this.props.root, 'p-active-submenu': this.props.parentActive});
         const style = {
@@ -152,7 +149,7 @@ export class SlideMenuSub extends Component {
             <ul className={className} style={style}>
                 {items}
             </ul>
-        );   
+        );
     }
 }
 
@@ -210,13 +207,13 @@ export class SlideMenu extends Component {
 
     navigateForward() {
         this.setState({
-            level: this.state.level + 1 
+            level: this.state.level + 1
         });
     }
 
     navigateBack() {
         this.setState({
-            level: this.state.level - 1 
+            level: this.state.level - 1
         });
     }
 
@@ -261,7 +258,7 @@ export class SlideMenu extends Component {
 
         DomHandler.absolutePosition(this.container,  event.currentTarget);
         this.bindDocumentResizeListener();
-        
+
         if (this.props.onShow) {
             this.props.onShow(event);
         }
@@ -279,7 +276,7 @@ export class SlideMenu extends Component {
                 }
             }, 150);
         }
-            
+
         if (this.props.onHide) {
             this.props.onHide(event);
         }
@@ -337,7 +334,7 @@ export class SlideMenu extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.model !== prevProps.model) {
-            this.setState({ 
+            this.setState({
                 level: 0
             });
         }
@@ -347,16 +344,16 @@ export class SlideMenu extends Component {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
     }
-    
+
     renderElement() {
-        const className = classNames('p-slidemenu p-component', {'p-slidemenu-dynamic p-menu-overlay': this.props.popup});
+        const className = classNames('p-slidemenu p-component', {'p-slidemenu-overlay': this.props.popup});
         const backward = this.renderBackward();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
                 <div className="p-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
                     <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
-                        <SlideMenuSub model={this.props.model} root={true} index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration} 
+                        <SlideMenuSub model={this.props.model} root={true} index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
                                 level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
                     </div>
                     {backward}
@@ -367,7 +364,7 @@ export class SlideMenu extends Component {
 
     render() {
         const element = this.renderElement();
-        
+
         if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
         else
