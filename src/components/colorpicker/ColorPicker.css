@@ -1,30 +1,26 @@
 .p-colorpicker {
     display: inline-block;
-} 
+}
 
 .p-colorpicker-dragging {
     cursor: pointer;
-} 
+}
 
 .p-colorpicker-overlay {
     position: relative;
-} 
+}
 
 .p-colorpicker-panel {
     position: relative;
     width: 193px;
     height: 166px;
-    background-color: #323232;
-    border-color: #191919;
 }
 
 .p-colorpicker-overlay-panel {
-    display: none;
     position: absolute;
 }
 
 .p-colorpicker-preview {
-    width: 2em;
     cursor: pointer;
 }
 
@@ -43,7 +39,6 @@
 .p-colorpicker-panel .p-colorpicker-color {
      width: 150px;
      height: 150px;
-     background: transparent url("./images/color.png") no-repeat left top; 
 }
 
 .p-colorpicker-panel .p-colorpicker-color-handle {
@@ -53,13 +48,14 @@
      border-radius: 100%;
      width: 10px;
      height: 10px;
-     border: 1px solid #ffffff;
+     border-width: 1px;
+     border-style: solid;
      margin: -5px 0 0 -5px;
      cursor: pointer;
+     opacity: .85;
 }
 
 .p-colorpicker-panel .p-colorpicker-hue {
-    background: transparent url("./images/hue.png") no-repeat left top; 
     width: 17px;
     height: 150px;
     top: 8px;
@@ -76,12 +72,16 @@
      margin-left: -2px;
      margin-top: -5px;
      height: 10px;
-     border: 2px solid #ffffff;
+     border-width: 2px;
+     border-style: solid;
      opacity: .85;
      cursor: pointer;
- }
- 
- .p-colorpicker-panel.p-disabled .p-colorpicker-hue-handle,
- .p-colorpicker-panel.p-disabled .p-colorpicker-color-handle  {
-      opacity: .5;
- }
+}
+
+.p-colorpicker-panel .p-colorpicker-color {
+    background: transparent url("./images/color.png") no-repeat left top;
+}
+
+.p-colorpicker-panel .p-colorpicker-hue {
+   background: transparent url("./images/hue.png") no-repeat left top;
+}
