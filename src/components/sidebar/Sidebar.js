@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { CSSTransition } from 'react-transition-group';
 
 export class Sidebar extends Component {
 
@@ -45,45 +46,26 @@ export class Sidebar extends Component {
 
     constructor(props) {
         super(props);
+
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
-    componentDidMount() {
-        if (this.props.visible) {
-            this.onShow();
-        }
+    onCloseClick(event) {
+        this.props.onHide();
+        event.preventDefault();
     }
 
-    componentWillUnmount() {
-        this.unbindMaskClickListener();
-        this.disableModality();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.visible !== this.props.visible) {
-            if (this.props.visible)
-                this.onShow();
-            else
-                this.onHide();
-        }
-
-        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
-            if (this.props.dismissable) {
-                this.bindMaskClickListener();
-            }
-            else {
-                this.unbindMaskClickListener();
-            }
-        }
-    }
-
-    onShow() {
+    onEnter() {
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-
         if (this.props.modal) {
             this.enableModality();
         }
+    }
 
+    onEntered() {
         if (this.props.closeOnEscape) {
             this.bindDocumentEscapeListener();
         }
@@ -94,6 +76,15 @@ export class Sidebar extends Component {
 
         if (this.props.onShow) {
             this.props.onShow();
+        }
+    }
+
+    onExit() {
+        this.unbindMaskClickListener();
+        this.unbindDocumentEscapeListener();
+
+        if (this.props.modal) {
+            this.disableModality();
         }
     }
 
@@ -143,20 +134,6 @@ export class Sidebar extends Component {
         }
     }
 
-    onCloseClick(event) {
-        this.props.onHide();
-        event.preventDefault();
-    }
-
-    onHide() {
-        this.unbindMaskClickListener();
-        this.unbindDocumentEscapeListener();
-
-        if (this.props.modal) {
-            this.disableModality();
-        }
-    }
-
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
@@ -191,6 +168,22 @@ export class Sidebar extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
+            if (this.props.dismissable) {
+                this.bindMaskClickListener();
+            }
+            else {
+                this.unbindMaskClickListener();
+            }
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindMaskClickListener();
+        this.disableModality();
+    }
+
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
@@ -199,18 +192,16 @@ export class Sidebar extends Component {
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderIconsTemplate() {
         if (this.props.iconsTemplate) {
             return this.props.iconsTemplate(this);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
@@ -219,12 +210,22 @@ export class Sidebar extends Component {
         const closeIcon = this.renderCloseIcon();
         const iconsTemplate = this.renderIconsTemplate();
 
+        const transitionTimeout = {
+            enter: this.props.fullScreen ? 400 : 300,
+            exit: this.props.fullScreen ? 400 : 300
+        };
+
         return (
-            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
-                {closeIcon}
-                {iconsTemplate}
-                {this.props.children}
-            </div>
+            <CSSTransition classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
+                    <div className="p-sidebar-content">
+                        {closeIcon}
+                        {iconsTemplate}
+                        {this.props.children}
+                    </div>
+                </div>
+            </CSSTransition>
         );
     }
 }
