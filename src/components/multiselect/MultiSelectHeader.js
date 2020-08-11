@@ -54,14 +54,13 @@ export class MultiSelectHeader extends Component {
             return (
                 <div className="p-multiselect-filter-container">
                     <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
-                                className="p-inputtext p-component" placeholder={this.props.filterPlaceholder}/>
+                                className="p-multiselect-filter" placeholder={this.props.filterPlaceholder}/>
                     <span className="p-multiselect-filter-icon pi pi-search"></span>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
