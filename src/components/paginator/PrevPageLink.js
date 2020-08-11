@@ -19,7 +19,7 @@ export class PrevPageLink extends Component {
 
         return (
             <button type="button" className={className} onClick={this.props.onClick} disabled={this.props.disabled}>
-                <span className="p-paginator-icon pi pi-caret-left"></span>
+                <span className="p-paginator-icon pi pi-angle-left"></span>
             </button>
         );
     }
