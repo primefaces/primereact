@@ -33,9 +33,8 @@ export class ProgressBar extends Component {
                 <div className="p-progressbar-label">{label}</div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderDeterminate() {
