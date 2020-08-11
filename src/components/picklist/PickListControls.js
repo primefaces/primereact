@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class PickListControls extends Component {
-    
+
     static defaultProps = {
         className: null,
         list: null,
@@ -19,7 +19,7 @@ export class PickListControls extends Component {
         selection: PropTypes.array,
         onReorder: PropTypes.func
     }
-    
+
     constructor() {
         super();
         this.moveUp = this.moveUp.bind(this);
@@ -27,10 +27,10 @@ export class PickListControls extends Component {
         this.moveDown = this.moveDown.bind(this);
         this.moveBottom = this.moveBottom.bind(this);
     }
-    
+
     moveUp(event) {
         let selectedItems = this.props.selection;
-        
+
         if(selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
@@ -48,7 +48,7 @@ export class PickListControls extends Component {
                     break;
                 }
             }
-            
+
             if(this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
@@ -61,7 +61,7 @@ export class PickListControls extends Component {
 
     moveTop(event) {
         let selectedItems = this.props.selection;
-        
+
         if(selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
@@ -90,7 +90,7 @@ export class PickListControls extends Component {
 
     moveDown(event) {
         let selectedItems = this.props.selection;
-        
+
         if(selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
@@ -116,14 +116,14 @@ export class PickListControls extends Component {
                     direction: 'down'
                 });
             }
-            
+
             this.movedDown = true;
         }
     }
 
     moveBottom(event) {
         let selectedItems = this.props.selection;
-        
+
         if(selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
@@ -149,17 +149,15 @@ export class PickListControls extends Component {
             }
         }
     }
-    
+
     render() {
         let className = classNames('p-picklist-buttons', this.props.className);
-        
+
         return <div className={className}>
-                    <div className="p-picklist-buttons-cell">
-                        <Button type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>
-                        <Button type="button" icon="pi pi-angle-double-up" onClick={this.moveTop}></Button>
-                        <Button type="button" icon="pi pi-angle-down" onClick={this.moveDown}></Button>
-                        <Button type="button" icon="pi pi-angle-double-down" onClick={this.moveBottom}></Button>
-                    </div>
+                    <Button type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>
+                    <Button type="button" icon="pi pi-angle-double-up" onClick={this.moveTop}></Button>
+                    <Button type="button" icon="pi pi-angle-down" onClick={this.moveDown}></Button>
+                    <Button type="button" icon="pi pi-angle-double-down" onClick={this.moveBottom}></Button>
                 </div>;
     }
 }

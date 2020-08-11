@@ -139,9 +139,7 @@ export class PickListSubList extends Component {
     render() {
         let header = null;
         let items = null;
-        let wrapperClassName = classNames('p-picklist-listwrapper', this.props.className, {
-            'p-picklist-listwrapper-nocontrols': !this.props.showControls
-        });
+        let wrapperClassName = classNames('p-picklist-list-wrapper', this.props.className);
         let listClassName = classNames('p-picklist-list', this.props.listClassName);
 
         if(this.props.header) {

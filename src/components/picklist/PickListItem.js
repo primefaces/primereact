@@ -24,8 +24,8 @@ export class PickListItem extends Component {
         onKeyDown: PropTypes.func
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onClick = this.onClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
     }
@@ -50,7 +50,7 @@ export class PickListItem extends Component {
 
     render() {
         let content = this.props.template ? this.props.template(this.props.value) : this.props.value;
-        let className = classNames('p-picklist-item', this.props.className, {'p-highlight': this.props.selected});
+        let className = classNames('p-picklist-item', {'p-highlight': this.props.selected}, this.props.className);
 
         return <li className={className} onClick={this.onClick} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex} role="option" aria-selected={this.props.selected}>
                   {content}
