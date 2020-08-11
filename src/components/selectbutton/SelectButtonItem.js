@@ -28,7 +28,11 @@ export class SelectButtonItem extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
+        this.state = {
+            focused: false
+        };
+
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -47,11 +51,11 @@ export class SelectButtonItem extends Component {
     }
 
     onFocus() {
-        this.setState({focused: true});
+        this.setState({ focused: true });
     }
 
     onBlur() {
-        this.setState({focused: false});
+        this.setState({ focused: false });
     }
 
     onKeyDown(event) {
@@ -71,17 +75,17 @@ export class SelectButtonItem extends Component {
         }
         else {
             return (
-                <span className="p-button-text p-c">{this.props.label}</span>
+                <span className="p-button-label p-c">{this.props.label}</span>
             );
         }
     }
 
     render() {
-        const className = classNames(this.props.option.className, 'p-button p-component p-button-text-only', this.props.className, {
+        const className = classNames('p-button p-component', {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
-        });
+        }, this.props.className);
         const content = this.renderContent();
 
         return (
