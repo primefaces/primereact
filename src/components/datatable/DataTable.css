@@ -8,19 +8,21 @@
     table-layout: fixed;
 }
 
-.p-datatable .p-datatable-thead > tr > th,
-.p-datatable .p-datatable-tbody > tr > td,
-.p-datatable .p-datatable-tfoot > tr > td {
-    padding: .25em .5em;
-}
-
 .p-datatable .p-sortable-column {
     cursor: pointer;
     user-select: none;
 }
 
-.p-datatable .p-sortable-column-icon {
+.p-datatable .p-sortable-column .p-column-title,
+.p-datatable .p-sortable-column .p-sortable-column-icon,
+.p-datatable .p-sortable-column .p-sortable-column-badge {
     vertical-align: middle;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .p-datatable-auto-layout > .p-datatable-wrapper {
@@ -31,39 +33,18 @@
     table-layout: auto;
 }
 
-/* Sections */
-.p-datatable-header,
-.p-datatable-footer {
-    padding: .25em .5em;
-    text-align: center;
-    font-weight: bold;
-}
-
-.p-datatable-header {
-    border-bottom: 0 none;
-}
-
-.p-datatable-footer {
-    border-top: 0 none;
-}
-
-/* Paginator */
-.p-datatable .p-paginator-top {
-    border-bottom: 0 none;
-}
-
-.p-datatable .p-paginator-bottom {
-    border-top: 0 none;
+.p-datatable-hoverable-rows .p-selectable-row {
+    cursor: pointer;
 }
 
 /* Scrollable */
 .p-datatable-scrollable-wrapper {
     position: relative;
 }
+
 .p-datatable-scrollable-header,
 .p-datatable-scrollable-footer {
     overflow: hidden;
-    border: 0 none;
 }
 
 .p-datatable-scrollable-body {
@@ -90,12 +71,27 @@
 
 .p-datatable-unfrozen-view {
     position: absolute;
-    top: 0px;
+    top: 0;
 }
 
-/* Filter */
-.p-column-filter {
-    width: 100%;
+/* Flex Scrollable */
+.p-datatable-flex-scrollable {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+.p-datatable-flex-scrollable .p-datatable-scrollable-wrapper,
+.p-datatable-flex-scrollable .p-datatable-scrollable-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+.p-datatable-flex-scrollable .p-datatable-scrollable-body {
+    flex: 1;
 }
 
 /* Resizable */
@@ -124,7 +120,7 @@
     top: 0;
     right: 0;
     margin: 0;
-    width: .5em;
+    width: .5rem;
     height: 100%;
     padding: 0px;
     cursor:col-resize;
@@ -138,9 +134,23 @@
     display: none;
 }
 
-/* Edit */
-.p-datatable .p-datatable-tbody > tr > td.p-cell-editing .p-component {
-    width: 100%;
+.p-datatable .p-row-editor-init,
+.p-datatable .p-row-editor-save,
+.p-datatable .p-row-editor-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Expand */
+.p-datatable .p-row-toggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
 }
 
 /* Reorder */
@@ -150,59 +160,11 @@
     display: none;
 }
 
-/* Toggleable RowGroup */
-.p-datatable .p-rowgroup-header .p-row-toggler .p-row-toggler-icon {
-    vertical-align: text-bottom;
-}
-
-/* Responsive */
-.p-datatable-responsive .p-datatable-tbody > tr.p-datatable-row > td .p-column-title {
-    display: none;
-}
-
-@media screen and (max-width: 40em) {
-    .p-datatable-responsive .p-datatable-thead > tr > th,
-    .p-datatable-responsive .p-datatable-tfoot > tr > td {
-        display: none !important;
-    }
-
-    .p-datatable-responsive .p-datatable-tbody > tr.p-datatable-row > td {
-        text-align: left;
-        display: block;
-        border: 0 none;
-        width: 100% !important;
-		float: left;
-		clear: left;
-    }
-
-    .p-datatable-responsive .p-datatable-tbody > tr.p-datatable-row > td .p-column-title {
-        padding: .4em;
-        min-width: 30%;
-        display: inline-block;
-        margin: -.4em 1em -.4em -.4em;
-        font-weight: bold;
-    }
-}
-
 /* Loader */
-.p-datatable-loading-overlay {
+.p-datatable .p-datatable-loading-overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    opacity: 0.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1;
-}
-
-.p-datatable-loading-content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 2;
-    margin-top: -1em;
-    margin-left: -1em;
-}
-
-.p-datatable .p-datatable-loading-icon {
-    font-size: 2em;
 }
