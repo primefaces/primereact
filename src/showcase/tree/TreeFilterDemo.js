@@ -1,49 +1,43 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TreeSubmenu } from './TreeSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeFilterDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            nodes1: null,
-            nodes2: null
+            nodes: null
         };
 
         this.nodeService = new NodeService();
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({ nodes1: data, nodes2: data }));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Filter</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>Filter</span></h1>
                         <p>Filtering updates the node based on the constraints.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Lenient Filter Mode</h3>
-                    <Tree value={this.state.nodes1} filter={true} />
+                    <div className="card">
+                        <h5>Lenient Filter</h5>
+                        <Tree value={this.state.nodes} filter filterMode="lenient"></Tree>
 
-                    <h3>Strict Filter Mode</h3>
-                    <Tree value={this.state.nodes2} filter={true} filterMode="strict" />
+                        <h5>Strict Filter</h5>
+                        <Tree value={this.state.nodes} filter filterMode="strict"></Tree>
+                    </div>
                 </div>
 
                 <TreeFilterDemoDoc />

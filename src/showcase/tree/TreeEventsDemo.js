@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { Growl } from '../../components/growl/Growl';
 import { NodeService } from '../service/NodeService';
-import { TreeSubmenu } from './TreeSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeEventsDemo extends Component {
 
@@ -47,25 +46,20 @@ export class TreeEventsDemo extends Component {
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Events</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>Events</span></h1>
                         <p>An event is provided each type of user interaction such as expand, collapse and selection.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el} />
 
-                    <h3 className="first">Events</h3>
-                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({ selectedNodeKey: e.value })}
-                        onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
+                    <div className="card">
+                        <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({ selectedNodeKey: e.value })}
+                            onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
+                    </div>
                 </div>
 
                 <TreeEventsDemoDoc />

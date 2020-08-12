@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
-import { TreeSubmenu } from './TreeSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTemplatingDemo extends Component {
 
@@ -53,22 +52,17 @@ export class TreeTemplatingDemo extends Component {
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Templating</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>Templating</span></h1>
                         <p>Tree nodes can be customized to display custom content.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Navigation</h3>
-                    <Tree value={this.nodes} nodeTemplate={this.nodeTemplate} />
+                    <div className="card">
+                        <Tree value={this.nodes} nodeTemplate={this.nodeTemplate} />
+                    </div>
                 </div>
 
                 <TreeTemplatingDemoDoc />

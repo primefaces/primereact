@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
-import { TreeSubmenu } from './TreeSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeLazyDemo extends Component {
 
@@ -76,22 +75,17 @@ export class TreeLazyDemo extends Component {
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Lazy</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>Lazy</span></h1>
                         <p>Lazy loading is useful when dealing with huge datasets.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Lazy Loading</h3>
-                    <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                    <div className="card">
+                        <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                    </div>
                 </div>
 
                 <TreeLazyDemoDoc />
