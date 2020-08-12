@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { PhotoService } from '../service/PhotoService';
 import { Galleria } from '../../components/galleria/Galleria';
-
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
-export class GalleriaThumbnailDemo extends Component {
+export class GalleriaNavigatorDemo extends Component {
 
     constructor(props) {
         super(props);
@@ -33,17 +32,6 @@ export class GalleriaThumbnailDemo extends Component {
                 numVisible: 1
             }
         ];
-
-        this.responsiveOptions2 = [
-            {
-                breakpoint: '768px',
-                numVisible: 3
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1
-            }
-        ];
     }
 
     componentDidMount() {
@@ -51,11 +39,11 @@ export class GalleriaThumbnailDemo extends Component {
     }
 
     itemTemplate(item) {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     thumbnailTemplate(item) {
-        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     render() {
@@ -63,44 +51,44 @@ export class GalleriaThumbnailDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="galleria">
-                        <h1>Galleria <span>Thumbnail</span></h1>
-                        <p>Thumbnails represent a smaller version of the actual content.</p>
+                        <h1>Galleria <span>Navigator</span></h1>
+                        <p>Combining item navigators, thumbnails and indicators provide various UI alternatives.</p>
                     </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <h5>Positioned at Bottom</h5>
-                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                        <h5>Item Navigators and Thumbnails</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                            showItemNavigators item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
                     </div>
 
                     <div className="card">
-                        <h5>Positioned at Left</h5>
-                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4} thumbnailsPosition="left" style={{ maxWidth: '640px' }}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                        <h5>Item Navigators without Thumbnails</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                            showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
                     </div>
 
                     <div className="card">
-                        <h5>Positioned at Right</h5>
-                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                        <h5>Item Navigators on Hover</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                            showItemNavigators showItemNavigatorsOnHover item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
                     </div>
 
                     <div className="card">
-                        <h5>Positioned at Top</h5>
-                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                        <h5>Item Navigators and Indicators</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                            showItemNavigators showThumbnails={false} showItemNavigatorsOnHover showIndicators item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
                     </div>
                 </div>
 
-                <GalleriaThumbnailDemoDoc></GalleriaThumbnailDemoDoc>
+                <GalleriaNavigatorDemoDoc />
             </div>
         );
     }
 }
 
-export class GalleriaThumbnailDemoDoc extends Component {
+export class GalleriaNavigatorDemoDoc extends Component {
 
     shouldComponentUpdate() {
         return false;
@@ -117,7 +105,7 @@ import React, { Component } from 'react';
 import { PhotoService } from '../service/PhotoService';
 import { Galleria } from '../../components/galleria/Galleria';
 
-export class GalleriaThumbnailDemo extends Component {
+export class GalleriaCaptionDemo extends Component {
 
     constructor() {
         super();
@@ -145,17 +133,6 @@ export class GalleriaThumbnailDemo extends Component {
                 numVisible: 1
             }
         ];
-
-        this.responsiveOptions2 = [
-            {
-                breakpoint: '768px',
-                numVisible: 3
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1
-            }
-        ];
     }
 
     componentDidMount() {
@@ -165,7 +142,7 @@ export class GalleriaThumbnailDemo extends Component {
     itemTemplate(item) {
         return (
             <div className="p-grid p-nogutter p-justify-center">
-                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }}/>
+                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
@@ -177,7 +154,7 @@ export class GalleriaThumbnailDemo extends Component {
     caption(item) {
         return (
             <>
-                <h4>{item.title}</h4>
+                <h4 style={{marginBottom: '.5em'}}>{item.title}</h4>
                 <p>{item.alt}</p>
             </>
         );
@@ -188,7 +165,7 @@ export class GalleriaThumbnailDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Galleria - Thumbnail</h1>
+                        <h1>Galleria - Caption</h1>
                         <p></p>
 
                         <AppContentContext.Consumer>
@@ -198,31 +175,9 @@ export class GalleriaThumbnailDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
                     <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
                         item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        style={{maxWidth: '520px'}} />
-
-                    <h3>Position</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        thumbnailsPosition="left"
-                        style={{maxWidth: '610px', marginTop: '2em'}} header="Left" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        thumbnailsPosition="right"
-                        style={{maxWidth: '610px', marginTop: '2em'}} header="Right" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        thumbnailsPosition="top"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Top" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={4}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        thumbnailsPosition="bottom"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Bottom" />
+                        caption={this.caption} style={{maxWidth: '520px'}} />
                 </div>
             </div>
         );
