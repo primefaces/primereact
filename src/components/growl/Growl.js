@@ -14,7 +14,7 @@ export class Growl extends Component {
         className: null,
         style: null,
         baseZIndex: 0,
-        position: 'topright',
+        position: 'top-right',
         onClick: null,
         onRemove: null
     }
@@ -30,9 +30,10 @@ export class Growl extends Component {
     };
 
     constructor(props) {
-        super(props)
+        super(props);
+
         this.state = {
-            messages: [] 
+            messages: []
         };
 
         this.onClose = this.onClose.bind(this);
@@ -66,7 +67,7 @@ export class Growl extends Component {
             messages: []
         })
     }
-    
+
     onClose(message) {
         let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
         this.setState({
@@ -77,21 +78,22 @@ export class Growl extends Component {
             this.props.onRemove(message);
         }
     }
- 
+
     render() {
-        let className = classNames('p-growl p-component p-growl-' + this.props.position, this.props.className);
+        let className = classNames('p-toast p-component p-toast-' + this.props.position, this.props.className);
 
         return (
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
                 <TransitionGroup>
-                    {this.state.messages.map((message) =>
-                        <CSSTransition key={message.id} classNames="p-growl"
-                            timeout={{ enter: 250, exit: 500 }}>
-                            <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                        </CSSTransition>
-                    )}
+                    {
+                        this.state.messages.map((message) =>
+                            <CSSTransition key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
+                                <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                            </CSSTransition>
+                        )
+                    }
                 </TransitionGroup>
             </div>
-        );  
+        );
     }
 }
