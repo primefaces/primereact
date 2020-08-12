@@ -1,0 +1,25 @@
+.multiselect-demo {
+    .p-multiselect {
+        min-width: 15rem;
+    }
+
+    .multiselect-custom {
+        .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
+            padding-top: .25rem;
+            padding-bottom: .25rem;
+        }
+
+        .country-item-value {
+            padding: .25rem .5rem;
+            border-radius: 3px;
+            display: inline-flex;
+            margin-right: .5rem;
+            background-color: var(--primary-color);
+            color: var(--primary-color-text);
+
+            img.flag {
+                width: 17px;
+            }
+        }
+    }
+}

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { OrganizationChart } from '../../components/organizationchart/OrganizationChart';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './OrganizationChartDemo.scss';
 
 export class OrganizationChartDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             selection: []
         };
@@ -137,23 +139,21 @@ export class OrganizationChartDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="organizationChart">
                         <h1>OrganizationChart</h1>
                         <p>OrganizationChart visualizes hierarchical organization data.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("organizationChart")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation organizationchart-demo">
-                    <h3>Advanced</h3>
-                    <OrganizationChart value={this.data1} nodeTemplate={this.nodeTemplate} selection={this.state.selection} selectionMode="multiple"
-                        onSelectionChange={event => this.setState({ selection: event.data })} className="company"></OrganizationChart>
+                    <div className="card">
+                        <h5>Advanced</h5>
+                        <OrganizationChart value={this.data1} nodeTemplate={this.nodeTemplate} selection={this.state.selection} selectionMode="multiple"
+                            onSelectionChange={event => this.setState({ selection: event.data })} className="company"></OrganizationChart>
 
-                    <h3>Basic</h3>
-                    <OrganizationChart value={this.data2}></OrganizationChart>
+                        <h5>Basic</h5>
+                        <OrganizationChart value={this.data2}></OrganizationChart>
+                    </div>
                 </div>
 
                 <OrganizationChartDoc></OrganizationChartDoc>
@@ -650,7 +650,7 @@ body .organizationchart-demo .department-cto .p-node-toggler {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {OrganizationChart} from 'primereact/organizationchart';
 
@@ -660,7 +660,7 @@ import {OrganizationChart} from 'primereact/organizationchart';
 
                         <h3>Getting Started</h3>
                         <p>OrganizationChart requires a model of TreeNode as its value.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 export class OrganizationChartDemo extends Component {
 
@@ -713,14 +713,14 @@ export class OrganizationChartDemo extends Component {
                         <h3>Templating</h3>
                         <p>Label of the treenode is displayed inside the node content by default and templating enables further customization.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <OrganizationChart value={this.state.data} nodeTemplate={this.nodeTemplate}></OrganizationChart>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 
 nodeTemplate(node) {
@@ -748,7 +748,7 @@ nodeTemplate(node) {
 
                         <h3>Selection</h3>
                         <p>OrganizationChart supports two selection methods; single or multiple. Selection is enabled by setting <i>selectionMode</i> property to the corresponding mode, defining <i>selection</i> property along with <i>selectionChange</i> callback.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <OrganizationChart value={this.state.data} selectionMode="single" selection={this.state.selectedNode} onSelectionChange={event => this.setState({selectedNode: event.data})}></OrganizationChart>
 
