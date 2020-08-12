@@ -113,7 +113,7 @@ const ColorPickerDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {ColorPicker} from 'primereact/colorpicker';
 
@@ -123,7 +123,7 @@ import {ColorPicker} from 'primereact/colorpicker';
                         <h3>Getting Started</h3>
                         <p>ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ColorPicker value={this.state.color} onChange={(e) => this.setState({color: e.value})} />
 
@@ -133,7 +133,7 @@ import {ColorPicker} from 'primereact/colorpicker';
                         <h3>Formats</h3>
                         <p>Default color format to use in value binding is "hex" and other possible values are "rgb" and "hsb". Example below has 3 colorpickers having default values with different formats.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ColorPicker value={this.state.color1} onChange={(e) => this.setState({color1: e.value})} />
 
