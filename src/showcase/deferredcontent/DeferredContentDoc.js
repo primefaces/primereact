@@ -178,7 +178,7 @@ const DeferredContentDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {DeferredContent} from 'primereact/DeferredContent';
 
@@ -187,7 +187,7 @@ import {DeferredContent} from 'primereact/DeferredContent';
 
                         <h3>Getting Started</h3>
                         <p>DeferredContent is used as a wrapper element of its content.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <DeferredContent>
     <DataTable value={this.state.cars}>
@@ -203,7 +203,7 @@ import {DeferredContent} from 'primereact/DeferredContent';
 
                         <h3>Callback</h3>
                         <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <DeferredContent onLoad={this.initCars}>
     <DataTable value={this.state.cars}>
