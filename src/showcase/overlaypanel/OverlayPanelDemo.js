@@ -4,31 +4,78 @@ import {OverlayPanel} from '../../components/overlaypanel/OverlayPanel';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import ProductService from '../service/ProductService';
+import { Growl } from '../../components/growl/Growl';
+import { Column } from '../../components/column/Column';
+import { DataTable } from '../../components/datatable/DataTable';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './OverlayPanelDemo.scss';
 
 export class OverlayPanelDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: null,
+            selectedProduct: null
+        };
+
+        this.productService = new ProductService();
+        this.onProductSelect = this.onProductSelect.bind(this);
+        this.imageBody = this.imageBody.bind(this);
+        this.priceBody = this.priceBody.bind(this);
+    }
+
+    componentDidMount() {
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    onProductSelect(e) {
+        this.setState({ selectedProduct: e.value }, () => {
+            this.op.hide();
+            this.growl.show({severity:'info', summary: 'Product Selected', detail: this.state.selectedProduct.name, life: 3000});
+        });
+    }
+
+    imageBody(rowData) {
+        return <img src={`showcase/demo/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />
+    }
+
+    priceBody(rowData) {
+        return this.formatCurrency(rowData.price);
+    }
 
     render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="overlayPanel">
                         <h1>OverlayPanel</h1>
                         <p>OverlayPanel is a container component that can overlay other components on page.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("overlayPanel")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation" aria-controls="overlay_panel" aria-haspopup={true}>
-                    <Button type="button" label="Toggle" onClick={(e) => this.op.toggle(e)}/>
+                <div className="content-section implementation overlaypanel-demo">
+                    <Growl ref={(el) => this.growl = el} />
 
-                    <OverlayPanel ref={(el) => this.op = el} id="overlay_panel" showCloseIcon={true}>
-                        <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />
-                    </OverlayPanel>
+                    <div className="card">
+                        <Button type="button" icon="pi pi-search" label={this.state.selectedProduct ? this.state.selectedProduct.name : 'Select a Product'} onClick={(e) => this.op.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
+
+                        <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                            <DataTable value={this.state.products} selectionMode="single" paginator rows={5}
+                                selection={this.state.selectedProduct} onSelectionChange={this.onProductSelect}>
+                                <Column field="name" header="Name" sortable />
+                                <Column header="Image" body={this.imageBody} />
+                                <Column field="price" header="Price" sortable body={this.priceBody} />
+                            </DataTable>
+                        </OverlayPanel>
+                    </div>
                 </div>
 
                 <OverlayPanelDoc></OverlayPanelDoc>
@@ -123,7 +170,7 @@ const OverlayPanelDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {OverlayPanel} from 'primereact/overlaypanel';
 
@@ -132,7 +179,7 @@ import {OverlayPanel} from 'primereact/overlaypanel';
 
             <h3>Getting Started</h3>
             <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Button type="button" label="Basic" onClick={(e) => this.op.toggle(e)} />
 
@@ -147,7 +194,7 @@ import {OverlayPanel} from 'primereact/overlaypanel';
             <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior.
                Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <OverlayPanel ref={(el) => {this.op = el;}} showCloseIcon={true} dismissable={true}>
     <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Galleria 1" />

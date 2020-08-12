@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {Panel} from '../../components/panel/Panel';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class PanelDemo extends Component {
 
@@ -12,29 +12,27 @@ export class PanelDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="panel" showInputStyle>
                         <h1>Panel</h1>
                         <p>Panel is a grouping component providing with content toggle feature.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("panel")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Panel header="Godfather I">
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+                    <h5>Regular</h5>
+                    <Panel header="Header">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </Panel>
 
-                     <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+                    <h5>Advanced</h5>
+                    <Panel header="Header" toggleable>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </Panel>
                 </div>
 
@@ -150,7 +148,7 @@ const PanelDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {Panel} from 'primereact/panel';
 
@@ -159,7 +157,7 @@ import {Panel} from 'primereact/panel';
 
             <h3>Getting Started</h3>
             <p>Panel is a container component that accepts content as its children.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Panel header="Godfather I">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -178,7 +176,7 @@ import {Panel} from 'primereact/panel';
 
             <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -193,7 +191,7 @@ import {Panel} from 'primereact/panel';
             <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
 
-            <CodeHighlight className="language-jsx">
+            <CodeHighlight>
 {`
 <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable={true}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
