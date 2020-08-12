@@ -4,8 +4,8 @@ import {SlideMenu} from '../../components/slidemenu/SlideMenu';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class SlideMenuDemo extends Component {
 
@@ -148,23 +148,21 @@ export class SlideMenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="slideMenu">
                         <h1>Slide Menu</h1>
                         <p>SlideMenu displays submenus with a slide animation.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("slideMenu")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <SlideMenu model={this.items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <SlideMenu model={this.items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
-                    <h3>Popup</h3>
-                    <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
-                    <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
+                        <h5>Popup</h5>
+                        <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                        <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
+                    </div>
                 </div>
 
                 <SlideMenuDoc />
@@ -659,7 +657,7 @@ const SlideMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {SlideMenu} from 'primereact/slidemenu';
 
@@ -672,7 +670,7 @@ import {SlideMenu} from 'primereact/slidemenu';
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 const items:[
     {
@@ -809,7 +807,7 @@ const items:[
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <SlideMenu model={items} />
 
@@ -819,7 +817,7 @@ const items:[
 
                         <h3>Popup Mode</h3>
                         <p>SlideMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <SlideMenu ref={(el) => this.menu = el} model={items} popup={true} />
 
@@ -832,7 +830,7 @@ const items:[
                         <p>The easing function to use is "ease-out" by default which can be customized using easing property.
                             See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <SlideMenu model={this.items} effectDuration={1000} easing="ease-in" />
 

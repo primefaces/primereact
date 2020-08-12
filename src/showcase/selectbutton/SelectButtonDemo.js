@@ -2,75 +2,63 @@ import React, {Component} from 'react';
 import {SelectButton} from '../../components/selectbutton/SelectButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class SelectButtonDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value1: null,
-            value2: ['Apartment', 'Studio'],
-            value3: null
+            value1: 'Off',
+            value2: null,
+            value3: null,
         };
 
-        this.options = [
-            {label: 'Apartment', value: 'Apartment'},
-            {label: 'House', value: 'House'},
-            {label: 'Studio', value: 'Studio'}
+        this.options = ['Off', 'On'];
+        this.paymentOptions = [
+            {name: 'Option 1', value: 1},
+            {name: 'Option 2', value: 2},
+            {name: 'Option 3', value: 3}
+        ];
+        this.justifyOptions = [
+            {icon: 'pi pi-align-left', value: 'left'},
+            {icon: 'pi pi-align-right', value: 'Right'},
+            {icon: 'pi pi-align-center', value: 'Center'},
+            {icon: 'pi pi-align-justify', value: 'Justify'}
         ];
 
-        this.cars = [
-            {brand: 'Audi', key: 'A'},
-            {brand: 'BMW', key: 'B'},
-            {brand: 'Mercedes', key: 'M'}
-        ];
+        this.justifyTemplate = this.justifyTemplate.bind(this);
     }
 
-    carTemplate(option) {
-        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
-
-        return (
-            <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
-                <img alt={option.brand} src={logoPath} style={{width: '48px'}} />
-                <div style={{marginTop: '1em'}}>{option.brand}</div>
-            </div>
-        )
+    justifyTemplate(option) {
+        return <i className={option.icon}></i>;
     }
 
     render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="selectButton" showInputStyle>
                         <h1>SelectButton</h1>
                         <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("selectButton")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Single</h3>
-                    <SelectButton value={this.state.value1} options={this.options} onChange={(e) => this.setState({value1: e.value})} />
-                    <br />
-                    <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value1}</span></p>
+                    <div className="card">
+                        <h5>Single Selection</h5>
+                        <SelectButton value={this.state.value1} options={this.options} onChange={(e) => this.setState({ value1: e.value })} />
 
-                    <h3>Multiple</h3>
-                    <SelectButton value={this.state.value2} multiple={true} options={this.options} onChange={(e) => this.setState({value2: e.value})} />
-                    <br />
-                    <p>Selected Values: <span style={{fontWeight: 'bold'}}>{this.state.value2 && this.state.value2.map((val) => val + " ")}</span></p>
+                        <h5>Multiple Selection</h5>
+                        <SelectButton value={this.state.value2} options={this.paymentOptions} onChange={(e) => this.setState({ value2: e.value })} optionLabel="name" multiple />
 
-                    <h3>Custom Content</h3>
-                    <SelectButton value={this.state.value3} options={this.cars} onChange={(e) => this.setState({value3: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
-                    <br />
-                    <p>Selected Value: <span style={{fontWeight: 'bold'}}>{this.state.value3}</span></p>
+                        <h5>Custom Content</h5>
+                        <SelectButton value={this.state.value3} options={this.justifyOptions} onChange={(e) => this.setState({ value3: e.value })} itemTemplate={this.justifyTemplate} />
+                    </div>
                 </div>
 
-                <SelectButtonDoc></SelectButtonDoc>
+                <SelectButtonDoc />
             </div>
         );
     }
@@ -268,7 +256,7 @@ const SelectButtonDemo  = () => {
     <TabView>
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {SelectButton} from 'primereact/selectbutton';
 
@@ -282,7 +270,7 @@ import {SelectButton} from 'primereact/selectbutton';
             options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
-            <CodeHighlight className="language-javascript">
+            <CodeHighlight lang="javascript">
                 {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -295,7 +283,7 @@ const citySelectItems = [
 `}
             </CodeHighlight>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <SelectButton value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})}></SelectButton>
 
@@ -303,7 +291,7 @@ const citySelectItems = [
 </CodeHighlight>
 
             <p><b>Options as any type</b></p>
-            <CodeHighlight className="language-javascript">
+            <CodeHighlight lang="javascript">
 {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -316,7 +304,7 @@ const cities = [
 `}
 </CodeHighlight>
 
-            <CodeHighlight className="language-jsx">
+            <CodeHighlight>
 {`
 <SelectButton optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
 <SelectButton optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
@@ -332,14 +320,14 @@ const cities = [
             <p>Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice
             the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list key.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <SelectButton value={this.state.value} options={this.state.cars} onChange={(e) => this.setState({value: e.value})} itemTemplate={this.carTemplate} optionLabel="brand" optionValue="brand" />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 carTemplate(option) {
     const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';

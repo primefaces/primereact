@@ -4,88 +4,55 @@ import { Slider } from '../../components/slider/Slider';
 import { InputText } from '../../components/inputtext/InputText';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import './SliderDemo.scss';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class SliderDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            val1: null,
-            val2: 50,
-            val3: null,
-            val4: null,
-            rangeValues: [20, 80]
+            value1: null,
+            value2: 50,
+            value3: 20,
+            value4: [20,80],
+            value5: 50
         };
-        this.onChangeSlider1 = this.onChangeSlider1.bind(this);
-        this.onChangeSlider2 = this.onChangeSlider2.bind(this);
-        this.onChangeSlider3 = this.onChangeSlider3.bind(this);
-        this.onChangeSlider4 = this.onChangeSlider4.bind(this);
-        this.onChangeRangeSlider = this.onChangeRangeSlider.bind(this);
-    }
-
-    onChangeSlider1(e) {
-        this.setState({ val1: e.value });
-    }
-
-    onChangeSlider2(e) {
-        let newValue;
-        if (e.target && e.target.nodeName === "INPUT") {
-            newValue = e.target.value;
-        }
-        else {
-            newValue = e.value;
-        }
-
-        this.setState({ val2: newValue });
-    }
-
-    onChangeSlider3(e) {
-        this.setState({ val3: e.value });
-    }
-
-    onChangeSlider4(e) {
-        this.setState({ val4: e.value });
-    }
-
-    onChangeRangeSlider(e) {
-        this.setState({ rangeValues: e.value });
     }
 
     render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="slider" showInputStyle>
                         <h1>Slider</h1>
                         <p>Slider is a component to provide input using dragging of a handle.</p>
+                    </AppInlineHeader>
+                </div>
 
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("slider")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
+                <div className="content-section implementation slider-demo">
+                    <div className="card">
+                        <h5>Basic: {this.state.value1}</h5>
+                        <Slider value={this.state.value1} onChange={(e) => this.setState({ value1: e.value })} />
+
+                        <h5>Input: {this.state.value2}</h5>
+                        <InputText value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
+                        <Slider value={this.state.value2} onChange={(e) => this.setState({ value2: e.value })} />
+
+                        <h5>Step: {this.state.value3}</h5>
+                        <Slider value={this.state.value3} onChange={(e) => this.setState({ value3: e.value })} step={20} />
+
+                        <h5>Range: [{this.state.value4[0]}, {this.state.value4[1]}]</h5>
+                        <Slider value={this.state.value4} onChange={(e) => this.setState({ value4: e.value })} range />
+
+                        <h5>Vertical: {this.state.value5}</h5>
+                        <Slider value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} orientation="vertical" />
                     </div>
                 </div>
 
-                <div className="content-section implementation">
-                    <h3>Basic: {this.state.val1}</h3>
-                    <Slider value={this.state.val1} onChange={this.onChangeSlider1} style={{width: '14em'}}  />
-
-                    <h3>Input: {this.state.val2}</h3>
-                    <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
-                    <Slider value={this.state.val2} onChange={this.onChangeSlider2} style={{width: '14em'}} />
-
-                    <h3>Step: {this.state.val3}</h3>
-                    <Slider value={this.state.val3} onChange={this.onChangeSlider3} step={20} style={{width: '14em'}} />
-
-                    <h3>Range: {this.state.rangeValues[0]},{this.state.rangeValues[1]}</h3>
-                    <Slider value={this.state.rangeValues} onChange={this.onChangeRangeSlider} range={true} style={{width: '14em'}} />
-
-                    <h3>Vertical: {this.state.val4}</h3>
-                    <Slider value={this.state.val4} onChange={this.onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
-                </div>
-
-                <SliderDoc></SliderDoc>
+                <SliderDoc />
             </div>
         );
     }
@@ -316,7 +283,7 @@ const SliderDemo = () => {
     <TabView>
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {Slider} from 'primereact/slider';
 
@@ -326,7 +293,7 @@ import {Slider} from 'primereact/slider';
             <h3>Getting Started</h3>
             <p>Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
@@ -335,7 +302,7 @@ import {Slider} from 'primereact/slider';
 
             <h3>Range</h3>
             <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Slider value={this.state.rangeValues} onChange={(e) => this.setState({rangeValues: e.value})} range={true} />
 
@@ -344,7 +311,7 @@ import {Slider} from 'primereact/slider';
 
             <h3>Orientation</h3>
             <p>Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.</p>
-            <CodeHighlight className="language-jsx">
+            <CodeHighlight>
 {`
 <Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} orientation="vertical" />
 
