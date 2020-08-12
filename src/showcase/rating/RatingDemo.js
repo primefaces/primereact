@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Rating } from '../../components/rating/Rating'
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class RatingDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             val1: null,
             val2: null
@@ -19,28 +20,26 @@ export class RatingDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="rating" showInputStyle>
                         <h1>Rating</h1>
                         <p>Rating componentsis a star based selection input.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("rating")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Basic {this.state.val1}</h3>
-                    <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
+                    <div className="card">
+                        <h5>Basic {this.state.val1}</h5>
+                        <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
 
-                    <h3>No Cancel {this.state.val2}</h3>
-                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
+                        <h5>Without Cancel</h5>
+                        <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
-                    <h3>ReadOnly</h3>
-                    <Rating value={5} readonly={true} stars={10} cancel={false} />
+                        <h5>ReadOnly</h5>
+                        <Rating value={5} readonly stars={10} cancel={false} />
 
-                    <h3>Disabled</h3>
-                    <Rating value={8} disabled={true} stars={10} />
+                        <h5>Disabled</h5>
+                        <Rating value={8} disabled stars={10} />
+                    </div>
                 </div>
 
                 <RatingDoc />
@@ -160,7 +159,7 @@ const RatingDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Rating} from 'primereact/rating';
 
@@ -170,7 +169,7 @@ import {Rating} from 'primereact/rating';
                         <h3>Getting Started</h3>
                         <p>Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
@@ -180,7 +179,7 @@ import {Rating} from 'primereact/rating';
                         <h3>Number of Stars</h3>
                         <p>Number of stars to display is defined with <i>stars</i> property, default is 5.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} stars={5} />
 
@@ -190,7 +189,7 @@ import {Rating} from 'primereact/rating';
                         <h3>Cancel</h3>
                         <p>A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
 {`
 <Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} cancel={5} />
 
