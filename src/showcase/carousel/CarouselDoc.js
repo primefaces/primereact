@@ -291,7 +291,7 @@ const CarouselDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Carousel} from 'primereact/carousel';
 
@@ -301,13 +301,13 @@ import {Carousel} from 'primereact/carousel';
                         <h3>Getting Started</h3>
                         <p>Carousel requires a collection of items as its value along with a template to render each item.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate}></Carousel>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 constructor() {
     super();
@@ -331,7 +331,7 @@ carTemplate(car) {
 
                         <h3>Items per page and Scroll Items</h3>
                         <p>Number of items per page is defined using the <i>numVisible</i> property whereas number of items to scroll is defined with the <i>numScroll</i> property.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1}></Carousel>
 
@@ -341,14 +341,14 @@ carTemplate(car) {
                         <h3>Responsive</h3>
                         <p>For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of
             objects whose breakpoint defines the max-width to apply the settings.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const responsiveOptions = [
     {
@@ -373,7 +373,7 @@ const responsiveOptions = [
 
                         <h3>Header and Footer</h3>
                         <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate} header={<h1>Header</h1>}></Carousel>
 
@@ -382,7 +382,7 @@ const responsiveOptions = [
 
                         <h3>Orientation</h3>
                         <p>Default layout of the Carousel is horizontal, other possible option is the vertical mode that is configured with the <i>orientation</i> property.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical"></Carousel>
 
@@ -395,7 +395,7 @@ const responsiveOptions = [
                         <h3>Controlled vs Uncontrolled</h3>
                         <p>In controlled mode, <i>page</i> and <i>onPageChange</i> properties need to be defined to control the first visible item.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate} page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}></Carousel>
 
@@ -406,7 +406,7 @@ const responsiveOptions = [
                         <p>In uncontrolled mode, no additional properties are required. Initial page can be provided using the <i>page</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                 need to update the first visible item index, prefer to use the component as controlled.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Carousel value={this.state.cars} itemTemplate={this.carTemplate}></Carousel>
 
@@ -528,7 +528,7 @@ const responsiveOptions = [
                                         <td>Style class of the viewport container.</td>
                                     </tr>
                                     <tr>
-                                        <td>dotsContainerClassName</td>
+                                        <td>indicatorsContentClassName</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the paginator items.</td>
