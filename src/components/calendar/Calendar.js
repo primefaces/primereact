@@ -211,6 +211,7 @@ export class Calendar extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.reFocusInputField = this.reFocusInputField.bind(this);
     }
 
     componentDidMount() {
@@ -294,17 +295,24 @@ export class Calendar extends Component {
     }
 
     onInputFocus(event) {
-        event.persist();
-
-        if (this.props.showOnFocus && !this.state.overlayVisible) {
-            this.showOverlay();
+        if (this.ignoreFocusFunctionality) {
+            this.setState({ focused: true }, () => {
+                this.ignoreFocusFunctionality = false;
+            });
         }
+        else {
+            event.persist();
 
-        this.setState({ focused: true }, () => {
-            if (this.props.onFocus) {
-                this.props.onFocus(event);
+            if (this.props.showOnFocus && !this.state.overlayVisible) {
+                this.showOverlay();
             }
-        });
+
+            this.setState({ focused: true }, () => {
+                if (this.props.onFocus) {
+                    this.props.onFocus(event);
+                }
+            });
+        }
     }
 
     onInputBlur(event) {
@@ -333,12 +341,12 @@ export class Calendar extends Component {
 
             //tab
             case 9: {
-                if(this.props.touchUI) {
-                    this.disableModality();
+                if (this.state.overlayVisible) {
+                    this.trapFocus(event);
                 }
 
-                if (event.shiftKey) {
-                    this.hideOverlay();
+                if (this.props.touchUI) {
+                    this.disableModality();
                 }
                 break;
             }
@@ -373,6 +381,13 @@ export class Calendar extends Component {
 
         if (this.props.onInput) {
             this.props.onInput(event);
+        }
+    }
+
+    reFocusInputField() {
+        if (!this.props.inline && this.inputElement) {
+            this.ignoreFocusFunctionality = true;
+            this.inputElement.focus();
         }
     }
 
@@ -418,7 +433,7 @@ export class Calendar extends Component {
 
             //escape
             case 27:
-                this.hideOverlay();
+                this.hideOverlay(this.reFocusInputField);
                 event.preventDefault();
                 break;
 
@@ -620,7 +635,7 @@ export class Calendar extends Component {
     onClearButtonClick(event) {
         this.updateModel(event, null);
         this.updateInputfield(null);
-        this.hideOverlay();
+        this.hideOverlay(this.reFocusInputField);
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
@@ -1181,7 +1196,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay()
+                this.hideOverlay(this.reFocusInputField)
                 event.preventDefault();
                 break;
             }
@@ -1278,7 +1293,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay();
+                this.hideOverlay(this.reFocusInputField);
                 event.preventDefault();
                 break;
             }
@@ -1432,8 +1447,13 @@ export class Calendar extends Component {
         this.setState({ overlayVisible: true });
     }
 
-    hideOverlay() {
-        this.setState({ overlayVisible: false });
+    hideOverlay(callback) {
+        this.setState({ overlayVisible: false }, () => {
+            this.ignoreFocusFunctionality = false;
+            if (callback) {
+                callback();
+            }
+        });
     }
 
     onOverlayEnter() {
