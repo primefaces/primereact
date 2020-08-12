@@ -166,7 +166,7 @@ const ButtonDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import { Button } from 'primereact/button';
 
@@ -175,7 +175,7 @@ import { Button } from 'primereact/button';
 
                         <h3>Getting Started</h3>
                         <p>Button is created using the Button element.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Button />
 
@@ -184,7 +184,7 @@ import { Button } from 'primereact/button';
 
                         <h3>Label</h3>
                         <p>Text of the button is defined using the <i>label</i> property.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Button label="Save" />
 
@@ -195,7 +195,7 @@ import { Button } from 'primereact/button';
                         <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
                         icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Button label="Click" icon="pi pi-check" />
 <Button label="Click" icon="pi pi-check" iconPos="right" />
@@ -206,7 +206,7 @@ import { Button } from 'primereact/button';
 
                         <h3>Events</h3>
                         <p>Events are defined with the standard notation.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Button label="Click" onClick={this.handleClick} />
 
@@ -226,7 +226,7 @@ import { Button } from 'primereact/button';
                             <li>.p-button-danger</li>
                         </ul>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Button label="Primary" />
 <Button label="Secondary" className="p-button-secondary" />
@@ -240,7 +240,7 @@ import { Button } from 'primereact/button';
 
                         <h3>Raised and Rounded Buttons</h3>
                         <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Button label="Proceed" className="p-button-raised p-button-rounded" />
 
@@ -275,6 +275,18 @@ import { Button } from 'primereact/button';
                                         <td>string</td>
                                         <td>left</td>
                                         <td>Position of the icon, valid values are "left" and "right".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>badge</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Value of the badge.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>badgeClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the badge.</td>
                                     </tr>
                                     <tr>
                                         <td>tooltip</td>
