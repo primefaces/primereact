@@ -3,13 +3,14 @@ import {Link} from 'react-router-dom';
 import {ToggleButton} from '../../components/togglebutton/ToggleButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ToggleButtonDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             checked1: false,
             checked2: false
@@ -20,25 +21,20 @@ export class ToggleButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="toggleButton" showInputStyle>
                         <h1>ToggleButton</h1>
                         <p>ToggleButton is used to select a boolean value using a button.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("toggleButton")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <ToggleButton style={{width:'150px'}} checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
-                    <p>Selected Value: {this.state.checked1 ? 'true' : 'false'}</p>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <ToggleButton checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} onIcon="pi pi-check" offIcon="pi pi-times" />
 
-                    <h3>Custom</h3>
-                    <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                                checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
-                    <p>Selected Value: {this.state.checked2 ? 'true' : 'false'}</p>
+                        <h5>Customized</h5>
+                        <ToggleButton checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" style={{width: '10em'}} />
+                    </div>
                 </div>
 
                 <ToggleButtonDoc />
@@ -149,7 +145,7 @@ const ToggleButtonDemo = () => {
     <TabView>
         <TabPanel header="Documentation">
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {ToggleButton} from 'primereact/togglebutton';
 
@@ -159,7 +155,7 @@ import {ToggleButton} from 'primereact/togglebutton';
             <h3>Getting Started</h3>
             <p>ToggleButton is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <ToggleButton checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
 
@@ -169,7 +165,7 @@ import {ToggleButton} from 'primereact/togglebutton';
             <h3>Labels and Icons</h3>
             <p>Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                                 checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
@@ -242,6 +238,12 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                             <td>number</td>
                             <td>0</td>
                             <td>Index of the element in tabbing order.</td>
+                        </tr>
+                        <tr>
+                            <td>iconPos</td>
+                            <td>string</td>
+                            <td>left</td>
+                            <td>Position of the icon, valid values are "left" and "right".</td>
                         </tr>
                         <tr>
                             <td>tooltip</td>

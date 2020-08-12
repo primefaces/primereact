@@ -4,8 +4,8 @@ import {Button} from '../../components/button/Button';
 import {Tooltip} from '../../components/tooltip/Tooltip';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TooltipDemo extends Component {
 
@@ -20,45 +20,43 @@ export class TooltipDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="tooltip">
                         <h1>Tooltip</h1>
                         <p>Tooltip functionality is integrated within various PrimeReact components.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("tooltip")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Positions</h3>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                    <div className="card">
+                        <h5>Positions</h5>
+                        <div className="p-grid p-fluid">
+                            <div className="p-col-12 p-md-3">
+                                <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                            </div>
+                            <div className="p-col-12 p-md-3">
+                                <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+                            </div>
+                            <div className="p-col-12 p-md-3">
+                                <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
+                            </div>
+                            <div className="p-col-12 p-md-3">
+                                <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                            </div>
                         </div>
-                        <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+
+                        <h5>Focus and Blur</h5>
+                        <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+
+                        <h5>Button</h5>
+                        <Button type="button" label="Save" icon="pi pi-check" tooltip={this.state.saveBtnTooltipText} onClick={() => this.setState({saveBtnTooltipText: 'Completed'})} />
+
+                        <h5>MouseTrack</h5>
+                        <div className="p-d-flex p-ai-center">
+                            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
+
+                            <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
+                            <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                         </div>
-                        <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
-                        </div>
-                    </div>
-
-                    <h3>Focus and Blur</h3>
-                    <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
-
-                    <h3>Button</h3>
-                    <Button type="button" label="Save" icon="pi pi-check" tooltip={this.state.saveBtnTooltipText} onClick={() => this.setState({saveBtnTooltipText: 'Completed'})} />
-
-                    <h3>MouseTrack</h3>
-                    <div className="p-d-flex p-ai-center">
-                        <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
-
-                        <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
-                        <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                     </div>
                 </div>
 
@@ -202,7 +200,7 @@ const TooltipDemo = () => {
                         <h3>Getting Started</h3>
                         <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
 <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
@@ -213,7 +211,7 @@ const TooltipDemo = () => {
                         <h3>Position</h3>
                         <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is
                         specified using <i>tooltipOptions</i> property.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{position: 'right'}}/>
 
@@ -222,7 +220,7 @@ const TooltipDemo = () => {
 
                         <h3>Events</h3>
                         <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{event: 'right'}}/>
 
@@ -231,7 +229,7 @@ const TooltipDemo = () => {
 
                         <h3>Delay</h3>
                         <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
 

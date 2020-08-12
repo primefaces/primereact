@@ -4,8 +4,8 @@ import {TieredMenu} from '../../components/tieredmenu/TieredMenu';
 import {Button} from '../../components/button/Button';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TieredMenuDemo extends Component {
 
@@ -147,22 +147,20 @@ export class TieredMenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tiered Menu</h1>
+                    <AppInlineHeader changelogText="tieredMenu">
+                        <h1>TieredMenu</h1>
                         <p>TieredMenu displays submenus in nested overlays.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("tieredMenu")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
                 <div className="content-section implementation">
-                    <h3 className="first">Inline</h3>
-                    <TieredMenu model={this.items} />
+                    <div className="card">
+                        <h5>Inline</h5>
+                        <TieredMenu model={this.items} />
 
-                    <h3>Popup</h3>
-                    <TieredMenu model={this.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
-                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
+                        <h5>Overlay</h5>
+                        <TieredMenu model={this.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                        <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
+                    </div>
                 </div>
 
                 <TieredMenuDoc/>
@@ -670,7 +668,7 @@ const TieredMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {TieredMenu} from 'primereact/tieredmenu';
 
@@ -680,7 +678,7 @@ import {TieredMenu} from 'primereact/tieredmenu';
 
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const items:[
     {
@@ -817,7 +815,7 @@ const items:[
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <TieredMenu model={items} />
 
@@ -827,7 +825,7 @@ const items:[
                         <h3>Popup Mode</h3>
                         <p>TieredMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <TieredMenu model={items} popup={true} ref={el => this.menu = el} />
 <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>

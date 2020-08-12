@@ -3,39 +3,70 @@ import {Link} from 'react-router-dom';
 import {Toolbar} from '../../components/toolbar/Toolbar';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import {Button} from "../../components/button/Button";
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import { SplitButton } from '../../components/splitbutton/SplitButton';
 
 export class ToolbarDemo extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.items = [
+            {
+                label: 'Update',
+                icon: 'pi pi-refresh'
+            },
+            {
+                label: 'Delete',
+                icon: 'pi pi-times'
+            },
+            {
+                label: 'React Website',
+                icon: 'pi pi-external-link',
+                command: () => {
+                    window.location.href = 'https://reactjs.org/'
+                }
+            },
+            {   label: 'Upload',
+                icon: 'pi pi-upload',
+                command: () => {
+                    window.location.hash = "/fileupload"
+                }
+            }
+        ];
+    }
+
     render() {
+        const leftContents = (
+            <>
+                <Button label="New" icon="pi pi-plus" className="p-mr-2" />
+                <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
+                <i className="pi pi-bars p-toolbar-separator p-mr-2" />
+                <SplitButton label="Save" icon="pi pi-check" model={this.items} className="p-button-warning"></SplitButton>
+            </>
+        );
+
+        const rightContents = (
+            <>
+                <Button icon="pi pi-search" className="p-mr-2" />
+                <Button icon="pi pi-calendar" className="p-button-success p-mr-2" />
+                <Button icon="pi pi-times" className="p-button-danger" />
+            </>
+        );
+
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="toolbar" showInputStyle>
                         <h1>Toolbar</h1>
                         <p>Toolbar is a grouping component for buttons and other content.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("toolbar")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
+
                 <div className="content-section implementation">
-                    <Toolbar>
-                        <div className="p-toolbar-group-left">
-                            <Button label="New" icon="pi pi-plus" style={{marginRight:'.25em'}} />
-                            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-                            <i className="pi pi-bars p-toolbar-separator" style={{marginRight:'.25em'}} />
-                            <Button label="Save" icon="pi pi-check" className="p-button-warning" />
-                        </div>
-                        <div className="p-toolbar-group-right">
-                            <Button icon="pi pi-search" style={{marginRight:'.25em'}} />
-                            <Button icon="pi pi-calendar" className="p-button-success" style={{marginRight:'.25em'}} />
-                            <Button icon="pi pi-times" className="p-button-danger" />
-                        </div>
-                    </Toolbar>
+                    <Toolbar left={leftContents} right={rightContents} />
                 </div>
 
                 <ToolbarDoc/>
@@ -153,7 +184,7 @@ const ToolbarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Toolbar} from 'primereact/toolbar';
 
@@ -161,7 +192,7 @@ import {Toolbar} from 'primereact/toolbar';
 
                         <h3>Getting Started</h3>
                         <p>Toolbar is a container component defined using Toolbar element. Left aligned content is placed inside a div having .p-toolbar-group-left class and similarly .p-toolbar-group-right for right alignment.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
  <Toolbar>
     <div className="p-toolbar-group-left">

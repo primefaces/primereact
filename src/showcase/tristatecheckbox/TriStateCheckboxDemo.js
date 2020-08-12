@@ -3,13 +3,14 @@ import {Link} from 'react-router-dom';
 import {TriStateCheckbox} from '../../components/tristatecheckbox/TriStateCheckbox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TriStateCheckboxDemo extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             value: null
         };
@@ -19,22 +20,22 @@ export class TriStateCheckboxDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="triStateCheckbox" showInputStyle>
                         <h1>TriStateCheckbox</h1>
                         <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("triStateCheckbox")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Value: {this.state.value + ''}</h3>
-                    <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+                    <div className="card">
+                        <div className="p-field-checkbox p-m-0">
+                            <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+                            <label>{String(this.state.value)}</label>
+                        </div>
+                    </div>
                 </div>
 
-                <TriStateCheckboxDoc></TriStateCheckboxDoc>
+                <TriStateCheckboxDoc />
             </div>
         );
     }
@@ -121,7 +122,7 @@ const TriStateCheckboxDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {TriStateCheckbox} from 'primereact/tristatecheckbox';
 
@@ -130,7 +131,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
 
                         <h3>Getting Started</h3>
                         <p>TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
