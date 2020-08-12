@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Dropdown } from '../../components/dropdown/Dropdown';
-import AppContentContext from '../../AppContentContext';
 import { DropdownDoc } from './DropdownDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './DropdownDemo.scss';
 
 export class DropdownDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            city: null,
-            car: null,
-            car2: 'BMW'
+            selectedCity1: null,
+            selectedCity2: null,
+            selectedCountry: null
         };
 
         this.cities = [
@@ -21,79 +22,84 @@ export class DropdownDemo extends Component {
             { name: 'Paris', code: 'PRS' }
         ];
 
-        this.cars = [
-            { label: 'Audi', value: 'Audi' },
-            { label: 'BMW', value: 'BMW' },
-            { label: 'Fiat', value: 'Fiat' },
-            { label: 'Honda', value: 'Honda' },
-            { label: 'Jaguar', value: 'Jaguar' },
-            { label: 'Mercedes', value: 'Mercedes' },
-            { label: 'Renault', value: 'Renault' },
-            { label: 'VW', value: 'VW' },
-            { label: 'Volvo', value: 'Volvo' }
+        this.countries = [
+            {name: 'Australia', code: 'AU'},
+            {name: 'Brazil', code: 'BR'},
+            {name: 'China', code: 'CN'},
+            {name: 'Egypt', code: 'EG'},
+            {name: 'France', code: 'FR'},
+            {name: 'Germany', code: 'DE'},
+            {name: 'India', code: 'IN'},
+            {name: 'Japan', code: 'JP'},
+            {name: 'Spain', code: 'ES'},
+            {name: 'United States', code: 'US'}
         ];
 
         this.onCityChange = this.onCityChange.bind(this);
-        this.onCarChange = this.onCarChange.bind(this);
-        this.onCarChange2 = this.onCarChange2.bind(this);
+        this.onCityChange2 = this.onCityChange2.bind(this);
+        this.onCountryChange = this.onCountryChange.bind(this);
     }
 
     onCityChange(e) {
-        this.setState({ city: e.value });
+        this.setState({ selectedCity1: e.value });
     }
 
-    onCarChange(e) {
-        this.setState({ car: e.value });
+    onCityChange2(e) {
+        this.setState({ selectedCity2: e.value });
     }
 
-    onCarChange2(e) {
-        this.setState({ car2: e.value });
+    onCountryChange(e) {
+        this.setState({ selectedCountry: e.value });
     }
 
-    carTemplate(option) {
-        if (!option.value) {
-            return option.label;
-        }
-        else {
-            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+    selectedCountryTemplate(option, props) {
+        if (option) {
             return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} style={{ display: 'inline-block', margin: '5px 0 0 5px' }} width="24" />
-                    <span style={{ float: 'right', margin: '.5em .25em 0 0' }}>{option.label}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    countryOptionTemplate(option) {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                <div>{option.name}</div>
+            </div>
+        );
     }
 
     render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="dropdown" showInputStyle>
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("dropdown")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Dropdown value={this.state.city} options={this.cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{ width: '12em' }} />
-                    <div style={{ marginTop: '.5em' }}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
+                <div className="content-section implementation dropdown-demo">
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <Dropdown value={this.state.selectedCity1} options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
 
-                    <h3>Editable</h3>
-                    <Dropdown value={this.state.car} options={this.cars} onChange={this.onCarChange} style={{ width: '12em' }}
-                        editable={true} placeholder="Select a Brand" />
-                    <div style={{ marginTop: '.5em' }}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
+                        <h5>Editable</h5>
+                        <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
 
-                    <h3>Advanced</h3>
-                    <Dropdown value={this.state.car2} options={this.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate} style={{ width: '12em' }}
-                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true} />
-                    <div style={{ marginTop: '.5em' }}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
+                        <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                        <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                            valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
+                    </div>
                 </div>
 
                 <DropdownDoc />

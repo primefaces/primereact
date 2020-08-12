@@ -270,7 +270,7 @@ const DropdownDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Dropdown} from 'primereact/dropdown';
 
@@ -284,7 +284,7 @@ import {Dropdown} from 'primereact/dropdown';
                         options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
                         <p><b>Options as SelectItems</b></p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -297,7 +297,7 @@ const citySelectItems = [
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Dropdown value={this.state.city} options={citySelectItems} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
 
@@ -305,7 +305,7 @@ const citySelectItems = [
                         </CodeHighlight>
 
                         <p><b>Options as any type</b></p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -318,7 +318,7 @@ const cities = [
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
 <Dropdown optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
@@ -335,7 +335,7 @@ const cities = [
                             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
                             to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Dropdown value={this.state.car} options={cars} onChange={(e) => {this.setState({city: e.value})}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" placeholder="Select a Car"/>
 
@@ -344,14 +344,14 @@ const cities = [
 
                         <h3>Custom Content</h3>
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Dropdown value={this.state.car} options={cars} onChange={(e) => {this.setState({city: e.value})}} itemTemplate={this.carTemplate} placeholder="Select a Car"/>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 carTemplate(option) {
     if (!option.value) {
@@ -467,10 +467,16 @@ carTemplate(option) {
                                         <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                                     </tr>
                                     <tr>
-                                        <td>itemTemplate</td>
-                                        <td>function</td>
+                                        <td>valueTemplate</td>
+                                        <td>any</td>
                                         <td>null</td>
-                                        <td>Function that gets the option and returns the content.</td>
+                                        <td>The template of selected item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>itemTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of items.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
