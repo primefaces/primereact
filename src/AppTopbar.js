@@ -54,7 +54,6 @@ export class AppTopbar extends Component {
             'nova': 'nova.png',
             'nova-alt': 'nova-alt.png',
             'nova-accent': 'nova-accent.png',
-            'nova-vue': 'nova-vue.png',
             'luna-blue': 'luna-blue.png',
             'luna-green': 'luna-green.png',
             'luna-pink': 'luna-pink.png',
@@ -197,7 +196,6 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova')} role="menuitem"><img src="showcase/images/themes/nova.png" alt="Nova" /><span>Nova</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-alt')} role="menuitem"><img src="showcase/images/themes/nova-alt.png" alt="Nova Alt" /><span>Nova Alt</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-accent')} role="menuitem"><img src="showcase/images/themes/nova-accent.png" alt="Nova Accent" /><span>Nova Accent</span></button></li>
-                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova-vue')} role="menuitem"><img src="showcase/images/themes/nova-vue.png" alt="Nova Vue" /><span>Nova Vue</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-amber', true)} role="menuitem"><img src="showcase/images/themes/luna-amber.png" alt="Luna Amber" /><span>Luna Amber</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-blue', true)} role="menuitem"><img src="showcase/images/themes/luna-blue.png" alt="Luna Blue" /><span>Luna Blue</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'luna-green', true)} role="menuitem"><img src="showcase/images/themes/luna-green.png" alt="Luna Green" /><span>Luna Green</span></button></li>

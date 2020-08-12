@@ -313,12 +313,6 @@ export class AppConfig extends Component {
                                 </div>
                                 <div className="p-col-3">
                                     <button className="p-link">
-                                        <img src="showcase/images/themes/nova-vue.png" alt="Nova Colored" onClick={(e) => this.onThemeChange(e, 'nova-vue')}/>
-                                    </button>
-                                    <span>Nova Vue</span>
-                                </div>
-                                <div className="p-col-3">
-                                    <button className="p-link">
                                         <img src="showcase/images/themes/luna-blue.png" alt="Luna Blue" onClick={(e) => this.onThemeChange(e, 'luna-blue', true)}/>
                                     </button>
                                     <span>Luna Blue</span>
