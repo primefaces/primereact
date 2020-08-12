@@ -36,7 +36,8 @@ interface DropdownProps {
     tooltipOptions?: TooltipOptions;
     ariaLabel?: string,
     ariaLabelledBy?: string,
-    itemTemplate?(option:any): React.ReactNode;
+    valueTemplate?:((option: any, props: object) => any | any);
+    itemTemplate?:((option: any) => any | any);
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(e: Event): void;
     onBlur?(e: Event): void;
