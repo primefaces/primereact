@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {ProgressSpinner} from '../../components/progressspinner/ProgressSpinner';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ProgressSpinnerDemo extends Component {
 
@@ -12,22 +12,20 @@ export class ProgressSpinnerDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="progressSpinner">
                         <h1>ProgressSpinner</h1>
                         <p>ProgressSpinner is a process status indicator.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("progressSpinner")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <ProgressSpinner/>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <ProgressSpinner/>
 
-                    <h3>Custom</h3>
-                    <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                        <h5>Custom</h5>
+                        <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                    </div>
                 </div>
 
                 <ProgressSpinnerDoc/>
@@ -117,7 +115,7 @@ const ProgressSpinnerDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {ProgressSpinner} from 'primereact/progressspinner';
 
@@ -125,7 +123,7 @@ import {ProgressSpinner} from 'primereact/progressspinner';
 
                         <h3>Getting Started</h3>
                         <p>ProgressSpinner is defined using ProgressSpinner element.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ProgressSpinner/>
 
@@ -134,7 +132,7 @@ import {ProgressSpinner} from 'primereact/progressspinner';
 
                         <h3>Colors</h3>
                         <p>Colors of the spinner can be changed by overriding the keyframes animation</p>
-                        <CodeHighlight className="language-markup">
+                        <CodeHighlight lang="markup">
                             {`
 @keyframes ui-progress-spinner-color {
     100%,

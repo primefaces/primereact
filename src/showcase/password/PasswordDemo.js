@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {Password} from '../../components/password/Password';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class PasswordDemo extends Component {
 
@@ -12,19 +12,16 @@ export class PasswordDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="password" showInputStyle>
                         <h1>Password</h1>
                         <p>Password displays strength indicator for password fields.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("password")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Password</h3>
-                    <Password/>
+                    <div className="card">
+                        <Password />
+                    </div>
                 </div>
 
                 <PasswordDoc />
@@ -113,7 +110,7 @@ const PasswordDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                         {`
 import {Password} from 'primereact/password';
 
@@ -121,7 +118,7 @@ import {Password} from 'primereact/password';
 
                         <h3>Getting Started</h3>
                         <p>Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                         {`
 <Password value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
 

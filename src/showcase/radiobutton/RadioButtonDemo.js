@@ -3,15 +3,19 @@ import {Link} from 'react-router-dom';
 import {RadioButton} from '../../components/radiobutton/RadioButton';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class RadioButtonDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        this.categories = [{name: 'Accounting', key: 'A'}, {name: 'Marketing', key: 'M'}, {name: 'Production', key: 'P'}, {name: 'Research', key: 'R'}];
+
         this.state = {
-            city: null
+            city: null,
+            selectedCategory: this.categories[1]
         };
     }
 
@@ -19,35 +23,47 @@ export class RadioButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="radioButton" showInputStyle>
                         <h1>RadioButton</h1>
                         <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("radioButton")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
-                        <div className="p-col-12">
-                            <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
-                            <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <div className="p-field-radiobutton">
+                            <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Chicago'} />
+                            <label htmlFor="city1">Chicago</label>
                         </div>
-                        <div className="p-col-12">
-                            <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
-                            <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                        <div className="p-field-radiobutton">
+                            <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
+                            <label htmlFor="city2">Los Angeles</label>
                         </div>
-                        <div className="p-col-12">
-                            <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
-                            <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                        <div className="p-field-radiobutton">
+                            <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
+                            <label htmlFor="city3">New York</label>
                         </div>
+                        <div className="p-field-radiobutton">
+                            <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
+                            <label htmlFor="city4">San Francisco</label>
+                        </div>
+
+                        <h5>Dynamic Values, Preselection, Value Binding and Disabled Option</h5>
+                        {
+                            this.categories.map((category) => {
+                                return (
+                                    <div key={category.key} className="p-field-radiobutton">
+                                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => this.setState({selectedCategory: e.value})}  checked={this.state.selectedCategory.key === category.key} disabled={category.key === 'R'} />
+                                        <label htmlFor={category.key}>{category.name}</label>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                    Selected City : {this.state.city}
                 </div>
 
-                <RadioButtonDoc></RadioButtonDoc>
+                <RadioButtonDoc />
             </div>
         )
     }
@@ -80,15 +96,15 @@ export class RadioButtonDemo extends Component {
                 <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
                     <div className="p-col-12">
                         <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
-                        <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                        <label htmlhtmlFor=""rb1" className="p-radiobutton-label">New York</label>
                     </div>
                     <div className="p-col-12">
                         <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
-                        <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                        <label htmlhtmlFor=""rb2" className="p-radiobutton-label">San Francisco</label>
                     </div>
                     <div className="p-col-12">
                         <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
-                        <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                        <label htmlhtmlFor=""rb3" className="p-radiobutton-label">Los Angeles</label>
                     </div>
                 </div>
                 Selected City : {this.state.city}
@@ -112,15 +128,15 @@ const RadioButtonDemo = () => {
             <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
                 <div className="p-col-12">
                     <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
-                    <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                    <label htmlhtmlFor=""rb1" className="p-radiobutton-label">New York</label>
                 </div>
                 <div className="p-col-12">
                     <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
-                    <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                    <label htmlhtmlFor=""rb2" className="p-radiobutton-label">San Francisco</label>
                 </div>
                 <div className="p-col-12">
                     <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
-                    <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                    <label htmlhtmlFor=""rb3" className="p-radiobutton-label">Los Angeles</label>
                 </div>
             </div>
             Selected City : {city}
@@ -143,15 +159,15 @@ const RadioButtonDemo = () => {
             <div className="p-grid" style={{width:'250px',marginBottom:'10px'}}>
                 <div className="p-col-12">
                     <RadioButton inputId="rb1" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
-                    <label htmlFor="rb1" className="p-radiobutton-label">New York</label>
+                    <label htmlhtmlFor=""rb1" className="p-radiobutton-label">New York</label>
                 </div>
                 <div className="p-col-12">
                     <RadioButton inputId="rb2" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
-                    <label htmlFor="rb2" className="p-radiobutton-label">San Francisco</label>
+                    <label htmlhtmlFor=""rb2" className="p-radiobutton-label">San Francisco</label>
                 </div>
                 <div className="p-col-12">
                     <RadioButton inputId="rb3" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
-                    <label htmlFor="rb3" className="p-radiobutton-label">Los Angeles</label>
+                    <label htmlhtmlFor=""rb3" className="p-radiobutton-label">Los Angeles</label>
                 </div>
             </div>
             Selected City : {city}
@@ -173,16 +189,17 @@ const RadioButtonDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {RadioButton} from 'primereact/radiobutton';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 `}
 </CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <RadioButton value="val1" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val1'} />
 <RadioButton value="val2" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val1'} />

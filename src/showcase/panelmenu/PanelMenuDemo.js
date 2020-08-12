@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {PanelMenu} from '../../components/panelmenu/PanelMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class PanelMenuDemo extends Component {
 
@@ -133,18 +133,16 @@ export class PanelMenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="panelMenu">
                         <h1>PanelMenu</h1>
                         <p>PanelMenu is a hybrid of accordion-tree components.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("panelMenu")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <PanelMenu model={this.items} style={{width:'300px'}}/>
+                    <div className="card">
+                        <PanelMenu model={this.items} style={{ width: '22rem' }}/>
+                    </div>
                 </div>
 
                 <PanelMenuDoc/>
@@ -576,7 +574,7 @@ const PanelMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {PanelMenu} from 'primereact/panelmenu';
 
@@ -586,14 +584,14 @@ import {PanelMenu} from 'primereact/panelmenu';
 
                         <h3>Getting Started</h3>
                         <p>PanelMenu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <PanelMenu model={items} style={{width:'300px'}}/>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const items:[
     {

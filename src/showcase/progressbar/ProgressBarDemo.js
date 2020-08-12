@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {ProgressBar} from '../../components/progressbar/ProgressBar';
-import {Growl} from '../../components/growl/Growl';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { ProgressBar } from '../../components/progressbar/ProgressBar';
+import { Growl } from '../../components/growl/Growl';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ProgressBarDemo extends Component {
 
@@ -20,9 +20,9 @@ export class ProgressBarDemo extends Component {
 
     displayValueTemplate(value) {
         return (
-            <React.Fragment>
+            <>
                 {value}/<b>100</b>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -31,9 +31,9 @@ export class ProgressBarDemo extends Component {
             let val = this.state.value1;
             val += Math.floor(Math.random() * 10) + 1;
 
-            if(val >= 100) {
+            if (val >= 100) {
                 val = 100;
-                this.growl.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+                this.growl.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
                 clearInterval(this.interval);
             }
 
@@ -43,7 +43,7 @@ export class ProgressBarDemo extends Component {
         }, 2000);
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         if (this.interval) {
             clearInterval(this.interval);
             this.interval = null;
@@ -54,32 +54,30 @@ export class ProgressBarDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="progressBar">
                         <h1>ProgressBar</h1>
                         <p>ProgressBar is a process status indicator</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("progressBar")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el}></Growl>
 
-                    <h3 className="first">Dynamic</h3>
-                    <ProgressBar value={this.state.value1}></ProgressBar>
+                    <div className="card">
+                        <h5>Dynamic</h5>
+                        <ProgressBar value={this.state.value1}></ProgressBar>
 
-                    <h3>Static</h3>
-                    <ProgressBar value={50}></ProgressBar>
+                        <h5>Static</h5>
+                        <ProgressBar value={50}></ProgressBar>
 
-                    <h3>Custom display value</h3>
-                    <ProgressBar value={40} displayValueTemplate={this.displayValueTemplate}></ProgressBar>
+                        <h5>Custom display value</h5>
+                        <ProgressBar value={40} displayValueTemplate={this.displayValueTemplate}></ProgressBar>
 
-                    <h3>Indeterminate</h3>
-                    <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
+                        <h5>Indeterminate</h5>
+                        <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
+                    </div>
                 </div>
-                <ProgressBarDoc></ProgressBarDoc>
+                <ProgressBarDoc />
             </div>
         );
     }
@@ -111,9 +109,9 @@ export class ProgressBarDemo extends Component {
 
     displayValueTemplate(value) {
         return (
-            <React.Fragment>
+            <>
                 {value}/<b>100</b>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -188,9 +186,9 @@ const ProgressBarDemo = () => {
 
     const displayValueTemplate = (value) => {
         return (
-            <React.Fragment>
+            <>
                 {value}/<b>100</b>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -247,9 +245,9 @@ const ProgressBarDemo = () => {
 
     const displayValueTemplate = (value: number) => {
         return (
-            <React.Fragment>
+            <>
                 {value}/<b>100</b>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -294,39 +292,39 @@ const ProgressBarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import {ProgressBar} from 'primereact/progressbar';
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>ProgressBar has two modes; "determinate" (default) and "indeterminate". In determinate mode, a value between 0 and 100 is required to display the progress.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <ProgressBar value={this.state.value} />
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
                         <p>Indeterminate is simplly enabled using <i>mode</i> property.</p>
-            <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ProgressBar mode="indeterminate" />
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -418,7 +416,7 @@ import {ProgressBar} from 'primereact/progressbar';
                             <h3>Dependencies</h3>
                             <p>None.</p>
                         </div>
-                </TabPanel>
+                    </TabPanel>
 
                     {
                         this.sources && Object.entries(this.sources).map(([key, value], index) => {
