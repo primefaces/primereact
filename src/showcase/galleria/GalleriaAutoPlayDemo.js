@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import { GalleriaService } from '../service/GalleriaService';
+import { PhotoService } from '../service/PhotoService';
 import { Galleria } from '../../components/galleria/Galleria';
-import { GalleriaSubmenu } from './GalleriaSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
-export class GalleriaCircularDemo extends Component {
+export class GalleriaAutoPlayDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             images: null
         };
 
-        this.galleriaService = new GalleriaService();
+        this.galleriaService = new PhotoService();
         this.itemTemplate = this.itemTemplate.bind(this);
-        this.previewTemplate = this.previewTemplate.bind(this);
+        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
 
         this.responsiveOptions = [
             {
@@ -40,46 +39,31 @@ export class GalleriaCircularDemo extends Component {
     }
 
     itemTemplate(item) {
-        return (
-            <div className="p-grid p-nogutter p-justify-center">
-                <img src={`${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
-            </div>
-        );
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
-    previewTemplate(item) {
-        return <img src={`${item.previewImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+    thumbnailTemplate(item) {
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     render() {
         return (
             <div>
-                <GalleriaSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria - Circular</h1>
-                        <p></p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("galleria")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    <AppInlineHeader changelogText="galleria">
+                        <h1>Galleria <span>AutoPlay</span></h1>
+                        <p>AutoPlay mode is used to implement slideshows.</p>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        circular={true} style={{maxWidth: '520px'}} />
-
-                    <h3>AutoPlay</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        circular={true} autoPlay={true} transitionInterval={2000} style={{maxWidth: '520px'}} />
+                    <div className="card">
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+                    </div>
                 </div>
 
-                <GalleriaCircularDemoDoc></GalleriaCircularDemoDoc>
+                <GalleriaCircularDemoDoc />
             </div>
         );
     }
@@ -96,10 +80,10 @@ export class GalleriaCircularDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import React, { Component } from 'react';
-import { GalleriaService } from '../service/GalleriaService';
+import { PhotoService } from '../service/PhotoService';
 import { Galleria } from '../../components/galleria/Galleria';
 
 export class GalleriaCircularDemo extends Component {
@@ -111,7 +95,7 @@ export class GalleriaCircularDemo extends Component {
             images: null
         };
 
-        this.galleriaService = new GalleriaService();
+        this.galleriaService = new PhotoService();
         this.itemTemplate = this.itemTemplate.bind(this);
         this.previewTemplate = this.previewTemplate.bind(this);
 
@@ -164,12 +148,12 @@ export class GalleriaCircularDemo extends Component {
                 <div className="content-section implementation">
                     <h3>Basic</h3>
                     <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
+                        item={this.previewTemplate} thumbnail={this.itemTemplate}
                         circular={true} style={{maxWidth: '520px'}} />
 
                     <h3>AutoPlay</h3>
                     <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
+                        item={this.previewTemplate} thumbnail={this.itemTemplate}
                         circular={true} autoPlay={true} transitionInterval={2000} style={{maxWidth: '520px'}} />
                 </div>
             </div>
