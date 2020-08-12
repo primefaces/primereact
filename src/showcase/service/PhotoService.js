@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export class GalleriaService {
+export class PhotoService {
 
     getImages() {
-        return axios.get('showcase/demo/data/galleria.json')
+        return axios.get('showcase/demo/data/photos.json')
                 .then(res => res.data.data);
     }
 }

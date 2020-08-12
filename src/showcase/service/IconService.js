@@ -14,7 +14,7 @@ export class IconService {
 
     getIcon(id){
         if (this.icons) {
-            this.selectedIcon=this.icons.find(x => x.properties.id === id);
+            this.selectedIcon = this.icons.find(x => x.properties.id === id);
             return this.selectedIcon;
         }
     }
