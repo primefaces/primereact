@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {InputSwitch} from '../../components/inputswitch/InputSwitch';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class InputSwitchDemo extends Component {
 
@@ -20,22 +20,20 @@ export class InputSwitchDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="inputSwitch" showInputStyle>
                         <h1>InputSwitch</h1>
                         <p>InputSwitch is used to select a boolean value.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("inputSwitch")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <InputSwitch checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <InputSwitch checked={this.state.checked1} onChange={(e) => this.setState({ checked1: e.value })} />
 
-                    <h3>Default Value</h3>
-                    <InputSwitch checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
+                        <h5>Preselection</h5>
+                        <InputSwitch checked={this.state.checked2} onChange={(e) => this.setState({ checked2: e.value })} />
+                    </div>
                 </div>
 
                 <InputSwitchDoc></InputSwitchDoc>
@@ -137,7 +135,7 @@ const InputSwitchDemo = () => {
             <TabView>
                 <TabPanel header="Documentation">
                     <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {InputSwitch} from 'primereact/inputswitch';
 
@@ -147,7 +145,7 @@ import {InputSwitch} from 'primereact/inputswitch';
                     <h3>Getting Started</h3>
                     <p>InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputSwitch checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
 
