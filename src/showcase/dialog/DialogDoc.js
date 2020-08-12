@@ -427,7 +427,7 @@ const DialogDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Dialog} from 'primereact/dialog';
 
@@ -436,7 +436,7 @@ import {Dialog} from 'primereact/dialog';
 
                         <h3>Getting Started</h3>
                         <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={() => this.setState({visible: false})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -453,7 +453,7 @@ import {Dialog} from 'primereact/dialog';
                         <h3>Header and Footer</h3>
                         <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>iconsTemplate</i> property enables
             adding more icons at the header section.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 const footer = (
     <div>
