@@ -4,10 +4,9 @@ import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { Growl } from '../../components/growl/Growl';
 import { Column } from "../../components/column/Column";
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableContextMenuDemo extends Component {
 
@@ -24,20 +23,20 @@ export class TreeTableContextMenuDemo extends Component {
                 label: 'View Key',
                 icon: 'pi pi-search',
                 command: () => {
-                    this.growl.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
+                    this.growl.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
                 }
             },
             {
                 label: 'Toggle',
                 icon: 'pi pi-cog',
                 command: () => {
-                    let expandedKeys = {...this.state.expandedKeys};
+                    let expandedKeys = { ...this.state.expandedKeys };
                     if (expandedKeys[this.state.selectedNodeKey])
                         delete expandedKeys[this.state.selectedNodeKey];
                     else
                         expandedKeys[this.state.selectedNodeKey] = true;
 
-                    this.setState({expandedKeys: expandedKeys});
+                    this.setState({ expandedKeys: expandedKeys });
                 }
             }
         ];
@@ -46,37 +45,33 @@ export class TreeTableContextMenuDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - ContextMenu</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>ContextMenu</span></h1>
                         <p>TreeTable has exclusive integration with ContextMenu.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el} />
 
-                    <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
+                    <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({ selectedNodeKey: null })} />
 
-                    <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
-                        onContextMenu={event => this.cm.show(event.originalEvent)}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({ expandedKeys: e.value })}
+                            contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({ selectedNodeKey: event.value })}
+                            onContextMenu={event => this.cm.show(event.originalEvent)}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableContextMenuDemoDoc />

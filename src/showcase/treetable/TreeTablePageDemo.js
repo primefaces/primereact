@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTablePageDemo extends Component {
 
@@ -48,25 +47,21 @@ export class TreeTablePageDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Page</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Page</span></h1>
                         <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} paginator={true} rows={10}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} paginator={true} rows={10}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTablePageDemoDoc />

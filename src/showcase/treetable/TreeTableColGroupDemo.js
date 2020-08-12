@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { ColumnGroup } from '../../components/columngroup/ColumnGroup';
 import { Row } from '../../components/row/Row';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableColGroupDemo extends Component {
 
-    getSales() {
-        return [
+    constructor(props) {
+        super(props);
+
+        this.nodes = [
             {
                 key: '0',
                 data: { brand: 'Bliss', lastYearSale: '51%', thisYearSale: '40%', lastYearProfit: '$54,406.00', thisYearProfit: '$43,342' },
@@ -165,12 +166,6 @@ export class TreeTableColGroupDemo extends Component {
         ];
     }
 
-    componentDidMount() {
-        this.setState({
-            nodes: this.getSales()
-        });
-    }
-
     render() {
         const headerGroup = (
             <ColumnGroup>
@@ -201,31 +196,25 @@ export class TreeTableColGroupDemo extends Component {
             </ColumnGroup>
         );
 
-        const nodes = this.getSales();
-
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Column Grouping</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Column Grouping</span></h1>
                         <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                        <Column field="brand" expander />
-                        <Column field="lastYearSale" />
-                        <Column field="thisYearSale" />
-                        <Column field="lastYearProfit" />
-                        <Column field="thisYearProfit" />
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                            <Column field="brand" expander />
+                            <Column field="lastYearSale" />
+                            <Column field="thisYearSale" />
+                            <Column field="lastYearProfit" />
+                            <Column field="thisYearProfit" />
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableColGroupDemoDoc />

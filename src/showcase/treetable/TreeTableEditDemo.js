@@ -3,10 +3,9 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableEditDemo extends Component {
 
@@ -73,25 +72,21 @@ export class TreeTableEditDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
-                <div className="content-section introduction treetableeditdemo">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Edit</h1>
+                <div className="content-section introduction">
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Edit</span></h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation treetableedit-demo">
-                    <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
-                        <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
-                    </TreeTable>
+                <div className="content-section implementation">
+                    <div className="card">
+                        <TreeTable value={this.state.nodes}>
+                            <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                            <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                            <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableEditDemoDoc />

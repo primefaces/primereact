@@ -4,11 +4,10 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
 import { Button } from '../../components/button/Button';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableDemo extends Component {
 
@@ -23,51 +22,49 @@ export class TreeTableDemo extends Component {
     }
 
     toggleApplications() {
-        let expandedKeys = {...this.state.expandedKeys};
+        let expandedKeys = { ...this.state.expandedKeys };
         if (expandedKeys['0'])
             delete expandedKeys['0'];
         else
             expandedKeys['0'] = true;
 
-        this.setState({expandedKeys: expandedKeys});
+        this.setState({ expandedKeys: expandedKeys });
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable</h1>
                         <p>TreeTable is used to display hierarchical data in tabular format.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Uncontrolled</h3>
-                    <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <TreeTable value={this.state.nodes}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
 
-                    <h3>Controlled</h3>
-                    <Button onClick={this.toggleApplications} label="Toggle Applications" />
-                    <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
-                        onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Programmatic</h5>
+                        <Button onClick={this.toggleApplications} label="Toggle Applications" />
+                        <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
+                            onToggle={e => this.setState({ expandedKeys: e.value })} style={{ marginTop: '.5em' }}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableDoc />
@@ -254,7 +251,7 @@ const TreeTableDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {TreeTable} from 'primereact/treetable';
 
@@ -324,9 +321,9 @@ import {TreeTable} from 'primereact/treetable';
                         </div>
 
                         <p>Here is a sample json response to serve as the datasource of the TreeTable.</p>
-<div style={{height: '400px', overflow: 'auto'}}>
-<CodeHighlight className="language-javascript">
-{`
+                        <div style={{ height: '400px', overflow: 'auto' }}>
+                            <CodeHighlight lang="javascript">
+                                {`
 {
     "root":
     [
@@ -682,14 +679,14 @@ import {TreeTable} from 'primereact/treetable';
 }
 
 `}
-</CodeHighlight>
-</div>
+                            </CodeHighlight>
+                        </div>
 
                         <p>Throughout the samples, a NodeService would be used to connect to a server to fetch the nodes with axios.
                         Note that this is only for demo purposes, TreeTable does not have any restrictions on how data is provided.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import axios from 'axios';
 
 export class NodeService {
@@ -702,12 +699,12 @@ export class NodeService {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>Following sample TreeTable has 3 columns and retrieves the data from the service on componentDidMount. Notice the <i>expander</i> property
                         in the name column to indicate that this column displays an icon to toggle the child nodes.</p>
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -739,11 +736,11 @@ export class TreeTableDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>Dynamic columns are also possible by creating the column component dynamically.</p>
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -783,7 +780,7 @@ export class TreeTableDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
                         <h3>Column Component</h3>
                         <p>Column component defines various options that are utilized by the TreeTable to specify corresponding features.</p>
 
@@ -1005,8 +1002,8 @@ export class TreeTableDemo extends Component {
                         property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
                         both cases;</p>
 
-                    <CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1063,7 +1060,7 @@ export class TreeTableDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Table Layout</h3>
                         <p>Default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents
@@ -1075,8 +1072,8 @@ export class TreeTableDemo extends Component {
                             On the other hand, <i>header</i> and <i>footer</i> properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly TreeTable itself
                             also provides <i>header</i> and <i>footer</i> properties for the main header and footer of the table.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1121,13 +1118,13 @@ export class TreeTableTemplatingDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Column Group</h3>
                         <p>Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1349,7 +1346,7 @@ export class TreeTableColGroupDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Pagination</h3>
                         <p>Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display.
@@ -1357,8 +1354,8 @@ export class TreeTableColGroupDemo extends Component {
 
                         <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1390,13 +1387,13 @@ export class TreeTablePageDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1426,11 +1423,11 @@ export class TreeTablePageDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} paginator={true} rows={10}
     paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
     <Column field="name" header="Name" expander></Column>
@@ -1439,31 +1436,31 @@ export class TreeTablePageDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Sorting</h3>
                         <p>Enabling <i>sortable</i> property at column component would be enough to make a column sortable. The property to use when sorting is <i>field</i> by default and can be customized using <i>sortField</i>.</p>
 
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <Column field="vin" header="Vin" sortable />
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} sortMode="multiple">
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner.
                         In controlled mode, <i>sortField</i>, <i>sortOrder</i> and <i>onSort</i> properties need to be defined to control the sorting state.</p>
 
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onSort={(e) => this.setState({sortField: e.sortField, sortOrder: e.sortOrder})}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
@@ -1471,11 +1468,11 @@ export class TreeTablePageDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} multiSortMeta={multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
@@ -1483,21 +1480,21 @@ export class TreeTablePageDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 let multiSortMeta = [];
 multiSortMeta.push({field: 'year', order: 1});
 multiSortMeta.push({field: 'brand', order: -1});
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} sortField="year">
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
@@ -1505,11 +1502,11 @@ multiSortMeta.push({field: 'brand', order: -1});
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>To customize sorting algorithm, set sortable option to custom and define a sortFunction that sorts the list.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} sortField="year">
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable="custom" sortFunction={this.mysort}></Column>
@@ -1517,24 +1514,24 @@ multiSortMeta.push({field: 'brand', order: -1});
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 mysort(event) {
     //event.field = Field to sort
     //event.order = Sort order
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Filtering</h3>
                         <p>Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
                         in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 <TreeTable value={this.state.nodes}>
     <Column field="name" header="Name" expander filter={true}></Column>
     <Column field="size" header="Size" filter={true}></Column>
@@ -1542,12 +1539,12 @@ mysort(event) {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>An optional global filter feature is available to search all fields with the same keyword,
                                         to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 export class TreeTableFilterDemo extends Component {
 
     constructor(props) {
@@ -1580,11 +1577,11 @@ export class TreeTableFilterDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>By default, input fields are used as filter elements and this can be customized using the <i>filterElement</i> property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.</p>
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 export class TreeTableCustomFilterDemo extends Component {
 
     constructor() {
@@ -1657,13 +1654,13 @@ export class TreeTableCustomFilterDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner.
                                     In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to be defined to control the filtering state.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 export class TreeTableDefaultFilteredDemo extends Component {
 
     constructor() {
@@ -1696,13 +1693,13 @@ export class TreeTableDefaultFilteredDemo extends Component {
 }
 
 `}
-</CodeHighlight>
-                    <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however
+                        </CodeHighlight>
+                        <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however
                                 it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.</p>
 
-                    <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
-            <CodeHighlight className="language-javascript">
-{`
+                        <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
+                        <CodeHighlight lang="javascript">
+                            {`
 export class TreeTableFilterDemo extends Component {
 
     constructor() {
@@ -1735,7 +1732,7 @@ export class TreeTableFilterDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
 
                         <h3>Selection</h3>
@@ -1745,8 +1742,8 @@ export class TreeTableFilterDemo extends Component {
 
                         <p>Example below demonstrates all cases along with the available callbacks to listen events such as node selection.</p>
 
-                        <CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1846,14 +1843,14 @@ export class TreeTableSelectionDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Lazy</h3>
                         <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
                         that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
 
-                        <CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1971,15 +1968,15 @@ export class TreeTableLazyDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Incell Editing</h3>
                         <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the <i>editor</i> property
                         that refers to a function to return an input element for the editing. Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
                         to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -2060,14 +2057,14 @@ export class TreeTableEditDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>ContextMenu</h3>
                         <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
                         right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -2133,13 +2130,13 @@ export class TreeTableContextMenuDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Column Resize</h3>
                         <p>Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized.
                             In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <h3>Fit Mode</h3>
 <TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="fit">
     <Column field="name" header="Name" expander></Column>
@@ -2155,11 +2152,11 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} resizableColumns={true}>
     <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
     <Column field="size" header="Size" style={{width:'30%'}}></Column>
@@ -2167,14 +2164,14 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Column Reorder</h3>
                         <p>Columns can be reordered using drag drop by setting the <i>reorderableColumns</i> to true. <i>onColReorder</i> is a callback that is invoked when a column is reordered.
                         TreeTable keeps the column order state internally using keys that identifies a column using the <i>field</i> property. If the column has no field, use columnKey instead.</p>
 
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} reorderableColumns>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
@@ -2182,12 +2179,12 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Scrolling</h3>
                         <p>TreeTable supports both horizontal and vertical scrolling as well as frozen columns. Vertical scrolling is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} scrollable scrollHeight="200px">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
@@ -2195,11 +2192,11 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} scrollable style={{width: '600px'}}>
     <Column field="name" header="Name" expander style={{width:'350px'}}></Column>
     <Column field="size" header="Size" style={{width:'350px'}}></Column>
@@ -2207,12 +2204,12 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.</p>
 
-<CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} scrollable frozenWidth="200px" scrollHeight="250px">
     <Column field="name" header="Name" expander frozen style={{width:'250px'}}></Column>
     <Column field="size" header="Size" style={{width:'250px'}}></Column>
@@ -2224,11 +2221,11 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
-            <CodeHighlight className="language-jsx">
-{`
+                        <CodeHighlight>
+                            {`
 <TreeTable value={this.state.nodes} scrollable frozenWidth="200px" scrollHeight="250px">
     <Column field="name" header="Name" expander frozen style={{width:'250px', height: '25px'}}></Column>
     <Column field="size" header="Size" style={{width:'250px', height: '25px'}}></Column>
@@ -2236,7 +2233,7 @@ export class TreeTableContextMenuDemo extends Component {
 </TreeTable>
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
                         <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
@@ -2244,8 +2241,8 @@ export class TreeTableContextMenuDemo extends Component {
                         <h3>Responsive</h3>
                         <p>TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. Here is a sample implementation;</p>
 
-<CodeHighlight className="language-css">
-{`
+                        <CodeHighlight lang="css">
+                            {`
 .p-col-d {
     display: table-cell;
 }
@@ -2265,10 +2262,10 @@ export class TreeTableContextMenuDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -2291,11 +2288,11 @@ export class TreeTableResponsiveDemo extends Component {
 
     nameTemplate(node) {
         return (
-            <React.Fragment>
+            <>
                 <span>{node.data.name}</span>
                 <span className="p-col-m">, {node.data.size}</span>
                 <span className="p-col-m">, {node.data.type}</span>
-            </React.Fragment>
+            </>
         )
     }
 
@@ -2311,18 +2308,18 @@ export class TreeTableResponsiveDemo extends Component {
 }
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>

@@ -3,10 +3,9 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
 import { NodeService } from '../service/NodeService';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableColTogglerDemo extends Component {
 
@@ -53,24 +52,20 @@ export class TreeTableColTogglerDemo extends Component {
 
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Column Toggler</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Column Toggler</span></h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} header={header}>
-                        <Column key="name" field="name" header="Name" expander />
-                        {columns}
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} header={header}>
+                            <Column key="name" field="name" header="Name" expander />
+                            {columns}
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableColTogglerDemoDoc />
