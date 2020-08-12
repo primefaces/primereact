@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Menu} from '../../components/menu/Menu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
-import {Button} from "../../components/button/Button";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu } from '../../components/menu/Menu';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { Button } from "../../components/button/Button";
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import { Growl } from '../../components/growl/Growl';
 
 export class MenuDemo extends Component {
 
@@ -15,13 +16,39 @@ export class MenuDemo extends Component {
         this.items = [
             {
                 label: 'Options',
-                items: [{label: 'Upload', icon: 'pi pi-fw pi-upload', command:()=>{ window.location.hash="/fileupload"; }},
-                        {label: 'Home', icon: 'pi pi-fw pi-home', url: 'http://primetek.com.tr'}]
+                items: [
+                    {
+                        label: 'Update',
+                        icon: 'pi pi-refresh',
+                        command: () => {
+                            this.growl.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
+                        }
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-times',
+                        command: () => {
+                            this.growl.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+                        }
+                    }
+                ]
             },
             {
-                label: 'Account',
-                items: [{label: 'Components', icon: 'pi pi-fw pi-cog', command:()=>{ window.location.hash="/"; }},
-                        {label: 'Sign Out', icon: 'pi pi-fw pi-power-off'} ]
+                label: 'Navigate',
+                items: [
+                    {
+                        label: 'React Website',
+                        icon: 'pi pi-external-link',
+                        url: 'https://reactjs.org/'
+                    },
+                    {
+                        label: 'Router',
+                        icon: 'pi pi-upload',
+                        command:(e) => {
+                            window.location.hash = "/fileupload"
+                        }
+                    }
+                ]
             }
         ];
     }
@@ -30,27 +57,26 @@ export class MenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="menu">
                         <h1>Menu</h1>
                         <p>Menu is a navigation/command component that supports dynamic and static positioning.</p>
+                    </AppInlineHeader>
+                </div>
 
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("menu")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
+                <div className="content-section implementation">
+                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+
+                    <div className="card">
+                        <h5>Inline</h5>
+                        <Menu model={this.items} />
+
+                        <h5>Overlay</h5>
+                        <Menu model={this.items} popup ref={el => this.menu = el} id="popup_menu" />
+                        <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-controls="popup_menu" aria-haspopup />
                     </div>
                 </div>
 
-                <div className="content-section implementation button-demo">
-                    <h3 className="first">Basic</h3>
-                    <Menu model={this.items}/>
-
-                    <h3>Popup</h3>
-                    <Menu model={this.items} popup={true} ref={el => this.menu = el} id="popup_menu"/>
-                    <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
-                </div>
-
-                <MenuDoc/>
-
+                <MenuDoc />
             </div>
         )
     }
@@ -196,7 +222,7 @@ const MenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Menu} from 'primereact/menu';
 
@@ -208,14 +234,14 @@ import {Menu} from 'primereact/menu';
 
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Menu model={items} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 let items = [
     {label: 'New', icon: 'pi pi-fw pi-plus'},
@@ -227,7 +253,7 @@ let items = [
 
                         <h3>SubMenus</h3>
                         <p>Menu supports one level of nesting via subitems of an item.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 let items: [
     {
@@ -248,7 +274,7 @@ let items: [
                         <h3>Popup Mode</h3>
                         <p>Menu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Menu model={items} popup={true} ref={el => this.menu=el} />
 <Button label="Show" icon="pi pi-bars" onClick={(event)=>this.menu.toggle(event)}/>
@@ -329,7 +355,7 @@ let items: [
                                         <th>Parameters</th>
                                         <th>Description</th>
                                     </tr>
-                                    </thead>
+                                </thead>
                                 <tbody>
                                     <tr>
                                         <td>toggle</td>

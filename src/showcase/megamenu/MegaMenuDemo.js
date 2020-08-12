@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {MegaMenu} from '../../components/megamenu/MegaMenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { MegaMenu } from '../../components/megamenu/MegaMenu';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class MegaMenuDemo extends Component {
 
@@ -18,21 +18,21 @@ export class MegaMenuDemo extends Component {
                     [
                         {
                             label: 'Video 1',
-                            items: [{label: 'Video 1.1'}, {label: 'Video 1.2'}]
+                            items: [{ label: 'Video 1.1' }, { label: 'Video 1.2' }]
                         },
                         {
                             label: 'Video 2',
-                            items: [{label: 'Video 2.1'}, {label: 'Video 2.2'}]
+                            items: [{ label: 'Video 2.1' }, { label: 'Video 2.2' }]
                         }
                     ],
                     [
                         {
                             label: 'Video 3',
-                            items: [{label: 'Video 3.1'}, {label: 'Video 3.2'}]
+                            items: [{ label: 'Video 3.1' }, { label: 'Video 3.2' }]
                         },
                         {
                             label: 'Video 4',
-                            items: [{label: 'Video 4.1'}, {label: 'Video 4.2'}]
+                            items: [{ label: 'Video 4.1' }, { label: 'Video 4.2' }]
                         }
                     ]
                 ]
@@ -43,31 +43,31 @@ export class MegaMenuDemo extends Component {
                     [
                         {
                             label: 'User 1',
-                            items: [{label: 'User 1.1'}, {label: 'User 1.2'}]
+                            items: [{ label: 'User 1.1' }, { label: 'User 1.2' }]
                         },
                         {
                             label: 'User 2',
-                            items: [{label: 'User 2.1'}, {label: 'User 2.2'}]
+                            items: [{ label: 'User 2.1' }, { label: 'User 2.2' }]
                         },
                     ],
                     [
                         {
                             label: 'User 3',
-                            items: [{label: 'User 3.1'}, {label: 'User 3.2'}]
+                            items: [{ label: 'User 3.1' }, { label: 'User 3.2' }]
                         },
                         {
                             label: 'User 4',
-                            items: [{label: 'User 4.1'}, {label: 'User 4.2'}]
+                            items: [{ label: 'User 4.1' }, { label: 'User 4.2' }]
                         }
                     ],
                     [
                         {
                             label: 'User 5',
-                            items: [{label: 'User 5.1'}, {label: 'User 5.2'}]
+                            items: [{ label: 'User 5.1' }, { label: 'User 5.2' }]
                         },
                         {
                             label: 'User 6',
-                            items: [{label: 'User 6.1'}, {label: 'User 6.2'}]
+                            items: [{ label: 'User 6.1' }, { label: 'User 6.2' }]
                         }
                     ]
                 ]
@@ -78,21 +78,21 @@ export class MegaMenuDemo extends Component {
                     [
                         {
                             label: 'Event 1',
-                            items: [{label: 'Event 1.1'}, {label: 'Event 1.2'}]
+                            items: [{ label: 'Event 1.1' }, { label: 'Event 1.2' }]
                         },
                         {
                             label: 'Event 2',
-                            items: [{label: 'Event 2.1'}, {label: 'Event 2.2'}]
+                            items: [{ label: 'Event 2.1' }, { label: 'Event 2.2' }]
                         }
                     ],
                     [
                         {
                             label: 'Event 3',
-                            items: [{label: 'Event 3.1'}, {label: 'Event 3.2'}]
+                            items: [{ label: 'Event 3.1' }, { label: 'Event 3.2' }]
                         },
                         {
                             label: 'Event 4',
-                            items: [{label: 'Event 4.1'}, {label: 'Event 4.2'}]
+                            items: [{ label: 'Event 4.1' }, { label: 'Event 4.2' }]
                         }
                     ]
                 ]
@@ -103,21 +103,21 @@ export class MegaMenuDemo extends Component {
                     [
                         {
                             label: 'Setting 1',
-                            items: [{label: 'Setting 1.1'}, {label: 'Setting 1.2'}]
+                            items: [{ label: 'Setting 1.1' }, { label: 'Setting 1.2' }]
                         },
                         {
                             label: 'Setting 2',
-                            items: [{label: 'Setting 2.1'}, {label: 'Setting 2.2'}]
+                            items: [{ label: 'Setting 2.1' }, { label: 'Setting 2.2' }]
                         },
                         {
                             label: 'Setting 3',
-                            items: [{label: 'Setting 3.1'}, {label: 'Setting 3.2'}]
+                            items: [{ label: 'Setting 3.1' }, { label: 'Setting 3.2' }]
                         }
                     ],
                     [
                         {
                             label: 'Technology 4',
-                            items: [{label: 'Setting 4.1'}, {label: 'Setting 4.2'}]
+                            items: [{ label: 'Setting 4.1' }, { label: 'Setting 4.2' }]
                         }
                     ]
                 ]
@@ -129,25 +129,23 @@ export class MegaMenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="megaMenu">
                         <h1>MegaMenu</h1>
                         <p>MegaMenu is navigation component that displays submenus together.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("megaMenu")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Horizontal</h3>
-                    <MegaMenu model={this.items}/>
+                    <div className="card">
+                        <h5>Horizontal</h5>
+                        <MegaMenu model={this.items} />
 
-                    <h3>Vertical</h3>
-                    <MegaMenu model={this.items} orientation="vertical"/>
+                        <h5>Vertical</h5>
+                        <MegaMenu model={this.items} orientation="vertical" />
+                    </div>
                 </div>
 
-                <MegaMenuDoc/>
+                <MegaMenuDoc />
             </div>
         );
     }
@@ -577,7 +575,7 @@ const MegaMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {MegaMenu} from 'primereact/megamenu';
 
@@ -589,16 +587,16 @@ import {MegaMenu} from 'primereact/megamenu';
                         <h3>Getting Started</h3>
                         <p>Layout of the MegaMenu is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
 
-<CodeHighlight className="language-javascript">
-{`
+                        <CodeHighlight lang="javascript">
+                            {`
 npm install primeflex --save
 
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <p>MegaMenu requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const items: [
     {
@@ -716,7 +714,7 @@ const items: [
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <MegaMenu model={items} />
 
@@ -725,7 +723,7 @@ const items: [
 
                         <h3>Orientation</h3>
                         <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <MegaMenu model={items} orientation="vertical"/>
 
@@ -734,7 +732,7 @@ const items: [
 
                         <h3>Custom Content</h3>
                         <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <MegaMenu model={items}>
     <InputText placeholder="Search" type="text"/>

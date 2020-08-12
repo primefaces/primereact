@@ -3,82 +3,85 @@ import {Link} from 'react-router-dom';
 import {MultiSelect} from '../../components/multiselect/MultiSelect';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { AppInlineHeader } from '../../AppInlineHeader';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import './MultiSelectDemo.scss';
 
 export class MultiSelectDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars1: [],
-            cars2: []
+            selectedCities: null,
+            selectedCountries: null
         };
-        this.carTemplate = this.carTemplate.bind(this);
-        this.selectedCarTemplate = this.selectedCarTemplate.bind(this);
+
+        this.cities = [
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
+        ];
+
+        this.countries = [
+            {name: 'Australia', code: 'AU'},
+            {name: 'Brazil', code: 'BR'},
+            {name: 'China', code: 'CN'},
+            {name: 'Egypt', code: 'EG'},
+            {name: 'France', code: 'FR'},
+            {name: 'Germany', code: 'DE'},
+            {name: 'India', code: 'IN'},
+            {name: 'Japan', code: 'JP'},
+            {name: 'Spain', code: 'ES'},
+            {name: 'United States', code: 'US'}
+        ];
+
+        this.countryTemplate = this.countryTemplate.bind(this);
+        this.selectedCountriesTemplate = this.selectedCountriesTemplate.bind(this);
     }
 
-    carTemplate(option) {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+    countryTemplate(option) {
         return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} style={{width:'24px', verticalAlign:'middle'}} />
-                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                <div>{option.name}</div>
             </div>
         );
     }
 
-    selectedCarTemplate(value) {
-        if (value) {
-            const logoPath = 'showcase/demo/images/car/' + value + '.png';
-
+    selectedCountriesTemplate(option) {
+        if (option) {
             return (
-                <div className="my-multiselected-item-token">
-                    <img alt={value} src={logoPath} style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
-                    <span>{value}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-        else {
-            return <span className="my-multiselected-empty-token">Choose</span>
-        }
+
+        return "Select Countries";
     }
 
     render() {
-        const cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="multiSelect" showInputStyle>
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("multiSelect")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation multiselect-demo">
-                    <h3>Basic</h3>
-                    <MultiSelect value={this.state.cars1} options={cars} onChange={(e) => this.setState({cars1: e.value})}
-                            style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <MultiSelect value={this.state.selectedCities} options={this.cities} onChange={(e) => this.setState({ selectedCities: e.value })} optionLabel="name" placeholder="Select a City" />
 
-                    <h3>Templating</h3>
-                    <MultiSelect value={this.state.cars2} options={cars} onChange={(e) => this.setState({cars2: e.value})}
-                                 style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={this.carTemplate} selectedItemTemplate={this.selectedCarTemplate} />
+                        <h5>Advanced with Templating and Filtering</h5>
+                        <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
+                            itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} />
+                    </div>
                 </div>
 
                 <MultiSelectDoc />
@@ -327,7 +330,7 @@ const MultiSelectDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {MultiSelect} from 'primereact/multiselect';
 
@@ -341,7 +344,7 @@ import {MultiSelect} from 'primereact/multiselect';
             options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
-            <CodeHighlight className="language-javascript">
+            <CodeHighlight lang="javascript">
 {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -354,7 +357,7 @@ const citySelectItems = [
 `}
             </CodeHighlight>
 
-            <CodeHighlight className="language-jsx">
+            <CodeHighlight>
 {`
 <MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} />
 
@@ -362,7 +365,7 @@ const citySelectItems = [
             </CodeHighlight>
 
             <p><b>Options as any type</b></p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -375,7 +378,7 @@ const cities = [
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <MultiSelect optionLabel="name" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
 <MultiSelect optionLabel="name" optionValue="code" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
@@ -387,14 +390,14 @@ const cities = [
             <h3>Custom Content</h3>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} itemTemplate={this.carTemplate} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 carTemplate(option) {
     const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
@@ -411,14 +414,14 @@ carTemplate(option) {
 </CodeHighlight>
                         <p>In addition <i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} selectedItemTemplate={this.selectedCarTemplate} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 
 selectedCarTemplate(option) {
@@ -445,7 +448,7 @@ selectedCarTemplate(option) {
                 label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
                 to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <MultiSelect value={this.state.cars} options={cars} onChange={(e) => this.setState({cars: e.value})} filter={true}/>
 
