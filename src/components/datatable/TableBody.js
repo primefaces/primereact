@@ -328,9 +328,9 @@ export class TableBody extends Component {
 
     findExpandedRowIndex(row) {
         let index = -1;
-        if(this.props.expandedRows) {
-            for(let i = 0; i < this.props.expandedRows.length; i++) {
-                if(ObjectUtils.equals(this.props.expandedRows[i], row)) {
+        if (this.props.expandedRows) {
+            for (let i = 0; i < this.props.expandedRows.length; i++) {
+                if (ObjectUtils.equals(this.props.expandedRows[i], row)) {
                     index = i;
                     break;
                 }
