@@ -3,15 +3,17 @@ import {Link} from 'react-router-dom';
 import {InputTextarea} from '../../components/inputtextarea/InputTextarea';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class InputTextareaDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            value: 'Welcome to PrimeLand!'
+            value1: '',
+            value2: '',
+            value3: ''
         };
     }
 
@@ -19,23 +21,23 @@ export class InputTextareaDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="inputTextarea" showInputStyle>
                         <h1>InputTextarea</h1>
                         <p>Inputtextarea add styling and autoResize functionality to standard textarea element.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("inputTextarea")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Default</h3>
-                    <InputTextarea value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} rows={5} cols={30}></InputTextarea>
-                    <div>{this.state.value}</div>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <InputTextarea value={this.state.value1} onChange={(e) => this.setState({value1: e.target.value})} rows={5} cols={30} />
 
-                    <h3>AutoResize</h3>
-                    <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
+                        <h5>Auto Resize</h5>
+                        <InputTextarea value={this.state.value2} onChange={(e) => this.setState({value2: e.target.value})} rows={5} cols={30} autoResize />
+
+                        <h5>Disabled</h5>
+                        <InputTextarea value={this.state.value3} rows={5} cols={30} disabled />
+                    </div>
                 </div>
 
                 <InputTextareaDoc />
@@ -137,7 +139,7 @@ const InputTextareaDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {InputTextarea} from 'primereact/inputtextarea';
 
@@ -146,7 +148,7 @@ import {InputTextarea} from 'primereact/inputtextarea';
 
                         <h3>Getting Started</h3>
                         <p>Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
 
@@ -155,7 +157,7 @@ import {InputTextarea} from 'primereact/inputtextarea';
 
                         <h3>AutoResize</h3>
                         <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} autoResize={true} />
 

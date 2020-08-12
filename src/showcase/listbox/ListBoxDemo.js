@@ -3,33 +3,20 @@ import {Link} from 'react-router-dom';
 import {ListBox} from '../../components/listbox/ListBox';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ListBoxDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             selectedCity: null,
-            selectedCities: null,
-            selectedCar: 'BMW'
+            selectedCountries: null
         };
-    }
 
-    carTemplate(option) {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
-        return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
-                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
-            </div>
-        );
-    }
-
-    render() {
-        const cities = [
+        this.cities = [
             {name: 'New York', code: 'NY'},
             {name: 'Rome', code: 'RM'},
             {name: 'London', code: 'LDN'},
@@ -37,44 +24,53 @@ export class ListBoxDemo extends Component {
             {name: 'Paris', code: 'PRS'}
         ];
 
-        const cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
+        this.countries = [
+            {name: 'Australia', code: 'AU'},
+            {name: 'Brazil', code: 'BR'},
+            {name: 'China', code: 'CN'},
+            {name: 'Egypt', code: 'EG'},
+            {name: 'France', code: 'FR'},
+            {name: 'Germany', code: 'DE'},
+            {name: 'India', code: 'IN'},
+            {name: 'Japan', code: 'JP'},
+            {name: 'Spain', code: 'ES'},
+            {name: 'United States', code: 'US'}
         ];
 
+        this.countryTemplate = this.countryTemplate.bind(this);
+    }
+
+    countryTemplate(option) {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="listBox" showInputStyle>
                         <h1>ListBox</h1>
                         <p>ListBox is used to select one or more values from a list of items.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("listBox")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Single</h3>
-                    <ListBox value={this.state.selectedCity} options={cities} onChange={(e) => this.setState({selectedCity: e.value})} optionLabel="name"/>
+                    <div className="card">
+                        <h5>Single</h5>
+                        <ListBox value={this.state.selectedCity} options={this.cities} onChange={(e) => this.setState({selectedCity: e.value})} optionLabel="name" style={{width: '15rem'}} />
 
-                    <h3>Multiple</h3>
-                    <ListBox value={this.state.selectedCities} options={cities} onChange={(e) => this.setState({selectedCities: e.value})} multiple={true} optionLabel="name"/>
-
-                    <h3>Advanced</h3>
-                    <ListBox value={this.state.selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => this.setState({selectedCar: e.value})} itemTemplate={this.carTemplate}
-                                    style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
+                        <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
+                        <ListBox value={this.state.selectedCountries} options={this.countries} onChange={(e) => this.setState({selectedCountries: e.value})} multiple filter optionLabel="name"
+                            itemTemplate={this.countryTemplate} style={{width: '15rem'}} listStyle={{maxHeight: '250px'}} />
+                    </div>
                 </div>
 
-                <ListboxDoc></ListboxDoc>
+                <ListboxDoc />
             </div>
         );
     }
@@ -282,7 +278,7 @@ const ListBoxDemo = () => {
         <TabPanel header="Documentation">
 
             <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {ListBox} from 'primereact/listbox';
 
@@ -296,7 +292,7 @@ import {ListBox} from 'primereact/listbox';
                 In addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
-            <CodeHighlight className="language-javascript">
+            <CodeHighlight lang="javascript">
 {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -309,7 +305,7 @@ const citySelectItems = [
 `}
             </CodeHighlight>
 
-            <CodeHighlight className="language-jsx">
+            <CodeHighlight>
 {`
 <Listbox value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})} />
 
@@ -317,7 +313,7 @@ const citySelectItems = [
             </CodeHighlight>
 
             <p><b>Options as any type</b></p>
-            <CodeHighlight className="language-javascript">
+            <CodeHighlight lang="javascript">
 {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -330,7 +326,7 @@ const cities = [
 `}
             </CodeHighlight>
 
-            <CodeHighlight className="language-jsx">
+            <CodeHighlight>
 {`
 <Listbox optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
 <Listbox optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
@@ -345,7 +341,7 @@ const cities = [
                 using metaKey or toggled individually depending on the value of <i>metaKeySelection</i> property value which is true by default. On touch enabled
                 devices metaKeySelection is turned off automatically.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Listbox value={this.state.cities} options={cities} onChange={(e) => this.setState({city: e.value})} multiple={true}/>
 
@@ -355,14 +351,14 @@ const cities = [
             <h3>Custom Content</h3>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.carTemplate} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 carTemplate(option) {
     const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
@@ -382,7 +378,7 @@ carTemplate(option) {
             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
             to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} filter={true} />
 
