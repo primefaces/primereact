@@ -450,7 +450,7 @@ const CalendarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import { Calendar } from 'primereact/calendar';
 
@@ -460,7 +460,7 @@ import { Calendar } from 'primereact/calendar';
                         <h3>Getting Started</h3>
                         <p>Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
@@ -470,7 +470,7 @@ import { Calendar } from 'primereact/calendar';
                         <h3>Popup and Inline</h3>
                         <p>Calendar is displayed in a popup by default whereas <i>inline</i> property needs to be enabled for inline mode.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar inline={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
@@ -481,7 +481,7 @@ import { Calendar } from 'primereact/calendar';
                         <p><i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like
             to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in
             uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the viewChange in controlled mode.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.dates} onChange={(e) => this.setState({date: e.value})} viewDate={this.state.viewDate} onViewDateChange={(e) => this.setState({viewDate: e.value})}></Calendar>
 
@@ -492,7 +492,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple
             case an array is required. Third alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value
             is the end date. Note that time picker is not currently supported in multiple and range modes.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar selectionMode="multiple" value={this.state.dates} onChange={(e) => this.setState({dates: e.value})}></Calendar>
 
@@ -502,7 +502,7 @@ import { Calendar } from 'primereact/calendar';
                         <h3>DateFormat</h3>
                         <p>Default date format is "mm/dd/yy" which can be customized using the <i>dateFormat</i> property.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
@@ -534,7 +534,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
                 displays a calendare with time controls only.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar showTime={true} hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
 <Calendar showTime={true} hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
@@ -546,7 +546,7 @@ import { Calendar } from 'primereact/calendar';
                         <h3>Date Restriction</h3>
                         <p>To disable entering dates manually, set <i>readOnlyInput</i> to true and to restrict selectable date ranges use <i>minDate</i> and <i>maxDate</i> options.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar minDate={minDate} maxDate={maxDate} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
@@ -557,7 +557,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Specific dates or days can be disabled as well, in this case set <i>readOnlyInput</i> to true and to restrict selectable dates use <i>disabledDates</i> and/or <i>disabledDays</i> options. <i>disabledDates</i>
             property should be an array of dates and <i>disabledDays</i> should be an array of disabled weekdays.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar disabledDates={invalidDates}" disabledDays={[0,6]} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
@@ -566,7 +566,7 @@ import { Calendar } from 'primereact/calendar';
 
                         <h3>Button Bar</h3>
                         <p>Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar={true}></Calendar>
 
@@ -575,7 +575,7 @@ import { Calendar } from 'primereact/calendar';
 
                         <h3>Multiple Months</h3>
                         <p>Displaying multiple months is enabled by setting <i>numberOfMonths</i> property to a value greater than 1.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} numberOfMonths={3}></Calendar>
 
@@ -585,14 +585,14 @@ import { Calendar } from 'primereact/calendar';
                         <h3>Localization</h3>
                         <p>Localization for different languages and formats is defined by binding the locale settings object to the <i>locale</i> property. Following is a Spanish calendar.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar locale={es} dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 let es = {
     firstDayOfWeek: 1,
@@ -614,14 +614,14 @@ let es = {
                         <p>Date cell contents can be templated using the <i>dateTemplate</i> property that returns the content of a cell. This is a handy feature to highlight specific dates. Note that the
             variable passed to the template is not a date instance but a metadata object to represent a Date with "day", "month", "year", "otherMonth", "today" and "selectable" properties to represent the date. Example below changes the styling of dates between 10 and 15.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} dateTemplate={this.dateTemplate} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 dateTemplate(date) {
     if (date.day > 10 && date.day < 15) {
@@ -639,7 +639,7 @@ dateTemplate(date) {
 
                         <h3>Header and Footer</h3>
                         <p><i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
 
@@ -650,7 +650,7 @@ dateTemplate(date) {
                         <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays
             available years. Format of the <i>yearRange</i> is "startYear:endYear".</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
 
@@ -659,7 +659,7 @@ dateTemplate(date) {
 
                         <h3>Month Picker</h3>
                         <p>Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030"/>
 
@@ -668,7 +668,7 @@ dateTemplate(date) {
 
                         <h3>Touch UI</h3>
                         <p>Touch UI mode displays the calendar overlay at the center of the screen as optimized for touch devices.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} touchUI={true} />
 
