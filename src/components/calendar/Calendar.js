@@ -2374,17 +2374,19 @@ export class Calendar extends Component {
         return date;
     }
 
-    renderBackwardNavigator() {
+    renderBackwardNavigator(isVisible) {
+        let navigatorProps = isVisible ? { 'onClick': this.onPrevButtonClick, 'onKeyDown': e => this.onContainerButtonKeydown(e) } : { 'style': {visibility: 'hidden'} };
         return (
-            <button type="button" className="p-datepicker-prev p-link" onClick={this.onPrevButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+            <button type="button" className="p-datepicker-prev p-link" {...navigatorProps}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
             </button>
         );
     }
 
-    renderForwardNavigator() {
+    renderForwardNavigator(isVisible) {
+        let navigatorProps = isVisible ? { 'onClick': this.onNextButtonClick, 'onKeyDown': e => this.onContainerButtonKeydown(e) } : { 'style': {visibility: 'hidden'} };
         return (
-            <button type="button" className="p-datepicker-next p-link" onClick={this.onNextButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+            <button type="button" className="p-datepicker-next p-link" {...navigatorProps}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
             </button>
         );
@@ -2564,8 +2566,8 @@ export class Calendar extends Component {
 
     renderMonth(monthMetaData, index) {
         const weekDays = this.createWeekDays();
-        const backwardNavigator = (index === 0) ? this.renderBackwardNavigator(): null;
-        const forwardNavigator = (this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1) ? this.renderForwardNavigator(): null;
+        const backwardNavigator = this.renderBackwardNavigator((index === 0));
+        const forwardNavigator = this.renderForwardNavigator((this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1));
         const title = this.renderTitle(monthMetaData);
         const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays, index);
         const header = this.props.headerTemplate ? this.props.headerTemplate() : null;
@@ -2575,8 +2577,8 @@ export class Calendar extends Component {
                 <div className="p-datepicker-header">
                     {header}
                     {backwardNavigator}
-                    {forwardNavigator}
                     {title}
+                    {forwardNavigator}
                 </div>
                 {dateViewGrid}
             </div>
