@@ -378,7 +378,7 @@ export class GalleriaThumbnails extends Component {
     }
 
     renderItems() {
-        let items = this.props.value.map((item, index) => {
+        return this.props.value.map((item, index) => {
                         let firstIndex = this.state.totalShiftedItems * -1,
                         lastIndex = firstIndex + this.state.numVisible - 1,
                         isActive = firstIndex <= index && lastIndex >= index,
@@ -389,18 +389,12 @@ export class GalleriaThumbnails extends Component {
                         return <GalleriaThumbnailItem key={index} index={index} template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}
                             onItemClick={this.onItemClick} current={current}/>
                     });
-
-        return (
-            <React.Fragment>
-                { items }
-            </React.Fragment>
-        );
     }
 
     renderBackwardNavigator() {
-        if (this.props.showThumbnailNavButtons) {
+        if (this.props.showThumbnailNavigators) {
             let isDisabled = (!this.props.circular && this.props.activeItemIndex === 0) || (this.props.value.length <= this.state.numVisible);
-            let buttonClassName = classNames('p-galleria-thumbnail-prev p-button', {
+            let buttonClassName = classNames('p-galleria-thumbnail-prev p-link', {
                 'p-disabled': isDisabled
             }),
             iconClassName = classNames('p-galleria-thumbnail-prev-icon pi', {
@@ -419,9 +413,9 @@ export class GalleriaThumbnails extends Component {
     }
 
     renderForwardNavigator() {
-        if (this.props.showThumbnailNavButtons) {
+        if (this.props.showThumbnailNavigators) {
             let isDisabled = (!this.props.circular && this.props.activeItemIndex === (this.props.value.length - 1)) || (this.props.value.length <= this.state.numVisible);
-            let buttonClassName = classNames('p-galleria-thumbnail-next p-button', {
+            let buttonClassName = classNames('p-galleria-thumbnail-next p-link', {
                 'p-disabled': isDisabled
             }),
             iconClassName = classNames('p-galleria-thumbnail-next-icon pi', {
@@ -448,8 +442,8 @@ export class GalleriaThumbnails extends Component {
         return (
             <div className="p-galleria-thumbnail-container">
                 { backwardNavigator }
-                <div className="p-galleria-thumbnail-items-content" style={{'height': height}}>
-                    <div ref={(el) => this.itemsContainer = el} className="p-galleria-thumbnail-items-container" onTransitionEnd={this.onTransitionEnd}
+                <div className="p-galleria-thumbnail-items-container" style={{'height': height}}>
+                    <div ref={(el) => this.itemsContainer = el} className="p-galleria-thumbnail-items" onTransitionEnd={this.onTransitionEnd}
                         onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
                         { items }
                     </div>
@@ -463,7 +457,7 @@ export class GalleriaThumbnails extends Component {
         const content = this.renderContent();
 
         return (
-            <div className="p-galleria-thumbnail-content">
+            <div className="p-galleria-thumbnail-wrapper">
                 { content }
             </div>
         );

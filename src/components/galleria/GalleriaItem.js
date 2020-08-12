@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-export class GalleriaPreview extends Component {
+export class GalleriaItem extends Component {
 
     constructor(props) {
         super(props);
@@ -67,7 +67,7 @@ export class GalleriaPreview extends Component {
     }
 
     onIndicatorMouseEnter(index) {
-        if (this.props.changePreviewOnIndicatorHover) {
+        if (this.props.changeItemOnIndicatorHover) {
             this.stopSlideShow();
 
             this.props.onActiveItemChange({
@@ -93,15 +93,15 @@ export class GalleriaPreview extends Component {
     }
 
     renderBackwardNavigator() {
-        if (this.props.showPreviewNavButtons) {
+        if (this.props.showItemNavigators) {
             let isDisabled = !this.props.circular && this.props.activeItemIndex === 0;
-            let buttonClassName = classNames('p-galleria-preview-prev p-galleria-preview-nav-button p-button', {
+            let buttonClassName = classNames('p-galleria-item-prev p-galleria-item-nav p-link', {
                 'p-disabled': isDisabled
             });
 
             return (
                 <button type="button" className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
-                    <span className="p-galleria-preview-prev-icon pi pi-chevron-left"></span>
+                    <span className="p-galleria-item-prev-icon pi pi-chevron-left"></span>
                 </button>
             );
         }
@@ -110,15 +110,15 @@ export class GalleriaPreview extends Component {
     }
 
     renderForwardNavigator() {
-        if (this.props.showPreviewNavButtons) {
+        if (this.props.showItemNavigators) {
             let isDisabled = !this.props.circular && this.props.activeItemIndex === (this.props.value.length - 1);
-            let buttonClassName = classNames('p-galleria-preview-next p-galleria-preview-nav-button p-button', {
+            let buttonClassName = classNames('p-galleria-item-next p-galleria-item-nav p-link', {
                 'p-disabled': isDisabled
             });
 
             return (
                 <button type="button" className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
-                    <span className="p-galleria-preview-next-icon pi pi-chevron-right"></span>
+                    <span className="p-galleria-item-next-icon pi pi-chevron-right"></span>
                 </button>
             );
         }
@@ -127,10 +127,10 @@ export class GalleriaPreview extends Component {
     }
 
     renderCaption() {
-        if (this.props.captionTemplate) {
-            const content = this.props.captionTemplate(this.props.value[this.props.activeItemIndex]);
+        if (this.props.caption) {
+            const content = this.props.caption(this.props.value[this.props.activeItemIndex]);
             return (
-                <div className="p-galleria-preview-caption">
+                <div className="p-galleria-caption">
                     { content }
                 </div>
             );
@@ -140,22 +140,15 @@ export class GalleriaPreview extends Component {
     }
 
     renderIndicator(index) {
-        let indicator = this.props.indicatorItemTemplate && this.props.indicatorItemTemplate(index);
+        let indicator = this.props.indicator && this.props.indicator(index);
         let isActive = this.props.activeItemIndex === index;
-        let indicatorItemClassName = classNames('p-galleria-indicator-item', {
+        let indicatorItemClassName = classNames('p-galleria-indicator', {
             'p-highlight': isActive
         });
 
         if (!indicator) {
-            let iconClassName = classNames('p-galleria-indicator-icon pi', {
-                'pi-circle-on': isActive,
-                'pi-circle-off': !isActive
-            });
-
             indicator = (
-                <button type="button" tabIndex="-1" className="p-link">
-                    <span className={iconClassName}></span>
-                </button>
+                <button type="button" tabIndex="-1" className="p-link"></button>
             );
         }
 
@@ -169,7 +162,7 @@ export class GalleriaPreview extends Component {
 
     renderIndicators() {
         if (this.props.showIndicators) {
-            const dotsContainerClassName = classNames('p-galleria-indicator-container p-reset', this.props.dotsContainerClassName);
+            const indicatorsContentClassName = classNames('p-galleria-indicators p-reset', this.props.indicatorsContentClassName);
             let indicators = [];
 
             for (let i = 0; i < this.props.value.length; i++) {
@@ -177,7 +170,7 @@ export class GalleriaPreview extends Component {
             }
 
             return (
-                <ul className={dotsContainerClassName}>
+                <ul className={indicatorsContentClassName}>
                     { indicators }
                 </ul>
             );
@@ -194,10 +187,10 @@ export class GalleriaPreview extends Component {
         const indicators = this.renderIndicators();
 
         return (
-            <div className="p-galleria-preview-content">
-                <div className="p-galleria-preview-container">
+            <div className="p-galleria-item-wrapper">
+                <div className="p-galleria-item-container">
                     { backwardNavigator }
-                    <div className="p-galleria-preview-items-content">
+                    <div className="p-galleria-item">
                         { content }
                     </div>
                     { forwardNavigator }
