@@ -4,13 +4,14 @@ import {SplitButton} from '../../components/splitbutton/SplitButton';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class SplitButtonDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.items = [
             {
                 label: 'Update',
@@ -52,28 +53,28 @@ export class SplitButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="splitButton" showInputStyle>
                         <h1>SplitButton</h1>
                         <p>SplitButton groups a set of commands in an overlay with a default command.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("splitButton")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation splitbutton-demo">
+                <div className="content-section implementation">
                     <Growl ref={(el) => this.growl = el}></Growl>
 
-                    <h3 className="first">Basic</h3>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items}></SplitButton>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items}></SplitButton>
 
-                    <h3>Severities</h3>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items} className="p-button-secondary"></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items} className="p-button-info" style={{marginRight: '.25em'}}></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items} className="p-button-warning" style={{marginRight: '.25em'}}></SplitButton>
-                    <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items} className="p-button-danger" style={{marginRight: '.25em'}}></SplitButton>
+                        <h5>Severities</h5>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-secondary p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-success p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-info p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-warning p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-help p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-danger p-mr-2"></SplitButton>
+                    </div>
                 </div>
 
                 <SplitButtonDoc />
@@ -299,7 +300,7 @@ const SplitButtonDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {SplitButton} from 'primereact/splitbutton';
 
@@ -308,7 +309,7 @@ import {SplitButton} from 'primereact/splitbutton';
 
                         <h3>Getting Started</h3>
                         <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
 {`
 export class SplitButtonDemo extends Component {
 
@@ -377,7 +378,7 @@ export class SplitButtonDemo extends Component {
                             <li>.p-button-danger</li>
                         </ul>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <SplitButton label="Primary" />
 <SplitButton label="Secondary" className="p-button-secondary" model={this.state.items} />

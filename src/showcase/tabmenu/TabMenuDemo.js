@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {TabMenu} from '../../components/tabmenu/TabMenu';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TabMenuDemo extends Component {
 
@@ -24,18 +24,16 @@ export class TabMenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="tabMenu">
                         <h1>TabMenu</h1>
                         <p>Menu is a navigation/command component that displays items as tab headers.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("tabMenu")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <TabMenu model={this.items} />
+                    <div className="card">
+                        <TabMenu model={this.items} />
+                    </div>
                 </div>
 
                 <TabMenuDoc/>
@@ -139,7 +137,7 @@ const TabMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {TabMenu} from 'primereact/tabmenu';
 
@@ -150,7 +148,7 @@ import {TabMenu} from 'primereact/tabmenu';
                         <h3>Getting Started</h3>
                         <p>TabMenu requires a collection of menuitems as its model and can either be used as a Controlled or Uncontrolled component.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 constructor() {
     super();
@@ -171,7 +169,7 @@ constructor() {
                         <h3>Controlled Component</h3>
                         <p>In controlled mode, <i>activeItem</i> and <i>onTabChange</i> properties must be defined along with the model.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})}/>
 
@@ -182,7 +180,7 @@ constructor() {
                         <p>In uncontrolled mode, only <i>model</i> is required. Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                             need to update the active item, prefer to use the component as controlled.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <TabMenu model={this.state.items} />
 

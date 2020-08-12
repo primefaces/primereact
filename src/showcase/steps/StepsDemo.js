@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Steps} from '../../components/steps/Steps';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
-import {Growl} from "../../components/growl/Growl";
-import "./StepsDemo.css"
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Steps } from '../../components/steps/Steps';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { Growl } from "../../components/growl/Growl";
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class StepsDemo extends Component {
 
@@ -20,25 +19,25 @@ export class StepsDemo extends Component {
             {
                 label: 'Personal',
                 command: (event) => {
-                    this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
+                    this.growl.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
                 }
             },
             {
                 label: 'Seat',
                 command: (event) => {
-                    this.growl.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                    this.growl.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
                 }
             },
             {
                 label: 'Payment',
                 command: (event) => {
-                    this.growl.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                    this.growl.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
                 }
             },
             {
                 label: 'Confirmation',
                 command: (event) => {
-                    this.growl.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                    this.growl.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
                 }
             }
         ];
@@ -48,30 +47,25 @@ export class StepsDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="steps">
                         <h1>Steps</h1>
                         <p>Steps component is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("steps")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => {this.growl = el}}></Growl>
+                    <Growl ref={(el) => { this.growl = el }}></Growl>
 
-                    <h3>Basic</h3>
-                    <Steps model={this.items} />
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <Steps model={this.items} />
 
-                    <h3>Interactive</h3>
-                    <Steps model={this.items} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
-
-                    <h3>Custom Style</h3>
-                    <Steps model={this.items} className="steps-custom" />
+                        <h5>Interactive</h5>
+                        <Steps model={this.items} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({ activeIndex: e.index })} readOnly={false} />
+                    </div>
                 </div>
 
-                <StepsDoc/>
+                <StepsDoc />
 
             </div>
         );
@@ -269,7 +263,7 @@ const StepsDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Steps} from 'primereact/steps';
 
@@ -280,7 +274,7 @@ import {Steps} from 'primereact/steps';
                         <h3>Getting Started</h3>
                         <p>TabMenu requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const items = [
     {label: 'Personal'},
@@ -292,7 +286,7 @@ const items = [
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Steps model={items} />
 
@@ -303,14 +297,14 @@ const items = [
                         <p>Items are readonly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
                             onSelect event to use it as a controlled component.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Steps model={interactiveItems} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
 
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const interactiveItems = [{
     label: 'Personal',
@@ -397,20 +391,20 @@ const interactiveItems = [{
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>onSelect</td>
-                                    <td>event.originalEvent: Browser event<br/>
-                                        event.item: Selected item instance<br/>
+                                    <tr>
+                                        <td>onSelect</td>
+                                        <td>event.originalEvent: Browser event<br />
+                                        event.item: Selected item instance<br />
                                         event.index: Index of selected item instance</td>
-                                    <td>Callback to invoke when the new step is selected.</td>
-                                </tr>
+                                        <td>Callback to invoke when the new step is selected.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -420,28 +414,28 @@ const interactiveItems = [{
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Element</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>p-steps</td>
-                                    <td>Container element.</td>
-                                </tr>
-                                <tr>
-                                    <td>p-steps-item</td>
-                                    <td>Menuitem element.</td>
-                                </tr>
-                                <tr>
-                                    <td>p-steps-number</td>
-                                    <td>Number of menuitem.</td>
-                                </tr>
-                                <tr>
-                                    <td>p-steps-title</td>
-                                    <td>Label of menuitem.</td>
-                                </tr>
+                                    <tr>
+                                        <td>p-steps</td>
+                                        <td>Container element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-steps-item</td>
+                                        <td>Menuitem element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-steps-number</td>
+                                        <td>Number of menuitem.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-steps-title</td>
+                                        <td>Label of menuitem.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
