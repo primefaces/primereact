@@ -478,7 +478,7 @@ const ContextMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {ContextMenu} from 'primereact/contextmenu';
 
@@ -488,7 +488,7 @@ import {ContextMenu} from 'primereact/contextmenu';
 
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 const items:[
     {
@@ -625,7 +625,7 @@ const items:[
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ContextMenu model={items}/>
 
@@ -637,7 +637,7 @@ const items:[
                         </p>
 
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ContextMenu global={true} model={items}/>
 
@@ -647,7 +647,7 @@ const items:[
                         <h3>Element Menu</h3>
                         <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
 <img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
