@@ -302,7 +302,7 @@ const AutoCompleteDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import { AutoComplete } from 'primereact/autocomplete';
 
@@ -313,7 +313,7 @@ import { AutoComplete } from 'primereact/autocomplete';
                         <p>AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component
                             requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <AutoComplete value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -321,7 +321,7 @@ import { AutoComplete } from 'primereact/autocomplete';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 constructor() {
     super();
@@ -355,7 +355,7 @@ render() {
                             "blank" is the default mode to send a query with an empty string whereas
                             "current" setting sends a query with the current value of the input.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <AutoComplete dropdown={true} value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -365,7 +365,7 @@ render() {
 
                         <h3>Multiple Mode</h3>
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <AutoComplete multiple={true} value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -378,7 +378,7 @@ render() {
                         as a suggestion. The value passed to the model would still be the object instance of a suggestion.
                         Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <AutoComplete field="name" value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -391,7 +391,7 @@ render() {
                         the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
                         to customize the chips in multiple mode using the same approach.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <AutoComplete itemTemplate="this.brandTemplate" value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
             suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
@@ -399,7 +399,7 @@ render() {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 brandTemplate(brand) {
     //return custom element
