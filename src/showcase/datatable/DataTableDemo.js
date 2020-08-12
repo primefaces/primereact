@@ -1381,6 +1381,12 @@ export class DataTableDemo extends Component {
                             <td>Event to trigger the validation, possible values are "click" and "blur".</td>
                         </tr>
                         <tr>
+                            <td>onEditorInit</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when cell edit is initiated.</td>
+                        </tr>
+                        <tr>
                             <td>onEditorSubmit</td>
                             <td>function</td>
                             <td>null</td>
