@@ -2,17 +2,18 @@ import React, {Component} from 'react';
 import {FullCalendar} from '../../components/fullcalendar/FullCalendar';
 import {TabView, TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import {EventService} from '../service/EventService';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class FullCalendarDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             events: []
         };
@@ -41,18 +42,16 @@ export class FullCalendarDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="fullCalendar">
                         <h1>FullCalendar</h1>
                         <p>An event calendar based on the <a href="https://fullcalendar.io/">FullCalendar</a> library.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("fullCalendar")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <FullCalendar events={this.state.events} options={this.options} />
+                    <div className="card">
+                        <FullCalendar events={this.state.events} options={this.options} />
+                    </div>
                 </div>
 
                 <FullCalendarDoc/>
@@ -220,7 +219,7 @@ const FullCalendarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
 {`
 import {FullCalendar} from 'primereact/fullcalendar';
 
@@ -231,7 +230,7 @@ import {FullCalendar} from 'primereact/fullcalendar';
                         <p>FullCalendar is a wrapper around on <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a> so fullcalendar core needs to be included in your project.
                         For a complete documentation and samples please refer to the <a href="https://fullcalendar.io/">fullcalendar website</a>.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
 {`
 npm install @fullcalendar/core --save
 
@@ -239,7 +238,7 @@ npm install @fullcalendar/core --save
                         </CodeHighlight>
 
                         <p>FullCalendar is plugin based so install the plugins you require and define them with the options property.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 npm install @fullcalendar/daygrid --save
 npm install @fullcalendar/timegrid --save
@@ -250,7 +249,7 @@ npm install @fullcalendar/interaction --save
 
                         <p>FullCalendar properties are defined with the <i>options</i> property and the events to display with the <i>events</i> property which should be an array and defined using the events property. Refer to <a href="https://fullcalendar.io/docs/event-object">Event API</a> for more information.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
 {`
 export class FullCalendarDemo extends Component {
 
@@ -290,7 +289,7 @@ export class FullCalendarDemo extends Component {
                         <h3>Callbacks</h3>
                         <p>Callbacks of the FullCalendar such as dateClick are also defined with the options property.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
 {`
 let options: {
     defaultDate: '2017-02-01',
@@ -311,13 +310,13 @@ let options: {
                         <h3>Methods</h3>
                         <p>Methods of the underlying calendar instance is accessible using the reference of the components calendar API.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
 {`
 <FullCalendar ref={(el) => this.fc = el} events={this.state.events} options={this.state.options} />
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
 {`
 this.fc.calendar.nextYear();
 
