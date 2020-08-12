@@ -136,7 +136,7 @@ const ChipsDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Chips} from 'primereact/chips';
 
@@ -146,7 +146,7 @@ import {Chips} from 'primereact/chips';
                         <h3>Getting Started</h3>
                         <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})}></Chips>
 
@@ -155,13 +155,13 @@ import {Chips} from 'primereact/chips';
 
                         <h3>Custom Content</h3>
                         <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})} itemTemplate={this.customChip}></Chips>
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 customChip(item) {
     return (
