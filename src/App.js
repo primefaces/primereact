@@ -27,14 +27,19 @@ import AppContentContext from './AppContentContext';
 
 export class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            activeTheme: 'nova-light',
-            mobileMenuActive: false,
+            theme: 'saga-blue',
+            inputStyle: 'outlined',
+            ripple: false,
+            darkTheme: false,
+            sidebarActive: false,
+            /*mobileMenuActive: false,
             themeMenuActive: false,
-            themeMenuVisited: false,
-            newsActive: sessionStorage.getItem('primenews-hidden') ? false: true,
+            themeMenuVisited: false,*/
+
+            newsActive: sessionStorage.getItem('primenews-hidden') ? false : true,
             configuratorActive: false,
             changelog: null,
             changelogActive: false,
@@ -56,6 +61,8 @@ export class App extends Component {
         this.onConfiguratorClick = this.onConfiguratorClick.bind(this)
         this.toggleConfigurator = this.toggleConfigurator.bind(this);
         this.hideConfigurator = this.hideConfigurator.bind(this);
+        this.onMaskClick = this.onMaskClick.bind(this);
+        this.onInputStyleChange = this.onInputStyleChange.bind(this);
 
         this.showChangelogDialog = this.showChangelogDialog.bind(this);
         this.hideChangelogDialog = this.hideChangelogDialog.bind(this);
@@ -76,40 +83,13 @@ export class App extends Component {
 
     onThemeChange(event) {
         let themeElement = document.getElementById('theme-link');
-        let urlTokens = themeElement.getAttribute('href').split('/');
-        urlTokens[urlTokens.length - 2] = event.theme;
-        let newURL = urlTokens.join('/');
-
-        this.replaceLink(themeElement, newURL);
-
-        const hasBodyDarkTheme = this.hasClass(document.body, 'dark-theme');
-        if (event.dark) {
-            if (!hasBodyDarkTheme) {
-                this.addClass(document.body, 'dark-theme');
-            }
-        }
-        else if (hasBodyDarkTheme) {
-            this.removeClass(document.body, 'dark-theme');
-        }
-
+        themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.state.theme, event.theme));
         this.setState({
-            themeMenuActive: false,
-            activeTheme: event.theme
-        });
+            theme: event.theme,
+            darkTheme: event.dark
+         });
+
         event.originalEvent.preventDefault();
-    }
-
-    replaceLink(linkElement, href) {
-        const id = linkElement.getAttribute('id');
-        const cloneLinkElement = linkElement.cloneNode(true);
-        cloneLinkElement.setAttribute('href', href);
-        cloneLinkElement.setAttribute('id', id + '-clone');
-        linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
-
-        cloneLinkElement.addEventListener('load', () => {
-            linkElement.remove();
-            cloneLinkElement.setAttribute('id', id);
-        });
     }
 
     addClass(element, className) {
@@ -133,9 +113,31 @@ export class App extends Component {
             return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
     }
 
+    isOutdatedIE() {
+        let ua = window.navigator.userAgent;
+        if (ua.indexOf('MSIE ') > 0 || ua.indexOf('Trident/') > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     onMenuButtonClick() {
         this.menuClick = true;
-        this.setState({ mobileMenuActive: !this.state.mobileMenuActive });
+
+        if (this.sidebarActive) {
+            this.setState({ sidebarActive: false });
+            this.removeClass(document.body, 'blocked-scroll');
+        }
+        else {
+            this.setState({ sidebarActive: true });
+            this.addClass(document.body, 'blocked-scroll');
+        }
+    }
+
+    onMaskClick() {
+        this.setState({ sidebarActive: false });
+        this.removeClass(document.body, 'blocked-scroll');
     }
 
     onSidebarClick() {
@@ -184,6 +186,10 @@ export class App extends Component {
 
     hideConfigurator() {
         this.setState({ configuratorActive: false });
+    }
+
+    onInputStyleChange(inputStyle) {
+        this.setState({ inputStyle });
     }
 
     getChangelog() {
@@ -252,67 +258,75 @@ export class App extends Component {
 
     componentDidMount() {
         this.getChangelog();
+
+        if (this.isOutdatedIE()) {
+            //this.growl.show({severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.'});
+        }
     }
 
     render() {
         const wrapperClassName = classNames('layout-wrapper', {
             /*'layout-news-active': this.state.newsActive,*/
-            'layout-sidebar-mobile-active': this.state.mobileMenuActive,
-            'layout-config-active': this.state.configuratorActive
+            'p-input-filled': this.state.inputStyle === 'filled',
+            'p-ripple-disabled': this.state.ripple === false
+        });
+        const maskClassName = classNames('layout-mask', {
+            'layout-mask-active': this.state.sidebarActive
         });
 
         return (
-            <div className={wrapperClassName} onClick={this.bindDocumentClick}>
+            <div className={wrapperClassName}>
 
                 {/* <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/> */}
 
-                <AppTopbar activeTopbarItem={this.state.activeTopbarItem} onMenuButtonClick={this.onMenuButtonClick}
-                    onTopbarItemClick={this.onTopbarItemClick} onThemeChange={this.onThemeChange} menuActive={this.state.mobileMenuActive}/>
+                <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme}/>
 
-                <AppMenu onSidebarClick={this.onSidebarClick} onMenuItemClick={this.onMenuItemClick}/>
+                <AppMenu active={this.state.sidebarActive} />
 
-                <div className="layout-content">
-                    <AppContentContext.Provider value={{
+                <AppContentContext.Provider value={{
+                        inputStyle: this.state.inputStyle,
+                        darkTheme: this.state.darkTheme,
                         changelogText: "VIEW CHANGELOG",
-                        onChangelogBtnClick: this.showChangelogDialog
+                        onChangelogBtnClick: this.showChangelogDialog,
+                        onInputStyleChange: this.onInputStyleChange
                     }}>
+                    <div className="layout-content">
+
                         <AppRouter />
 
-                    </AppContentContext.Provider>
-
-                    <Dialog header={`${this.state.searchVal} changelog`} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{width: '50vw'}} onHide={this.hideChangelogDialog}>
-                        {
-                            this.state.currentChangelog && <div className="layout-changelog-current-header">
-                                    <span>
-                                        <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
-                                        { this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span> }
-                                    </span>
-                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
-                                </div>
-                        }
-                        <ul className="layout-changelog-container">
+                        <Dialog header={`${this.state.searchVal} changelog`} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{width: '50vw'}} onHide={this.hideChangelogDialog}>
                             {
-                                this.state.filteredChangelog ?
-                                    this.state.filteredChangelog.map((item, index) => {
-                                        return <li key={index}>&#9679; {item.title} <a href={item.url} target="_blank" rel="noopener noreferrer" className="layout-changelog-issue-no">#{item.number}</a></li>
-                                    })
-                                    :
-                                    <li>No Change</li>
+                                this.state.currentChangelog && <div className="layout-changelog-current-header">
+                                        <span>
+                                            <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
+                                            { this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span> }
+                                        </span>
+                                        <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
+                                    </div>
                             }
-                        </ul>
-                        <div className="layout-changelog-actions">
-                            { this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" /> }
-                            { this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" /> }
-                        </div>
-                    </Dialog>
+                            <ul className="layout-changelog-container">
+                                {
+                                    this.state.filteredChangelog ?
+                                        this.state.filteredChangelog.map((item, index) => {
+                                            return <li key={index}>&#9679; {item.title} <a href={item.url} target="_blank" rel="noopener noreferrer" className="layout-changelog-issue-no">#{item.number}</a></li>
+                                        })
+                                        :
+                                        <li>No Change</li>
+                                }
+                            </ul>
+                            <div className="layout-changelog-actions">
+                                { this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" /> }
+                                { this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" /> }
+                            </div>
+                        </Dialog>
 
-                    <AppFooter />
-                </div>
+                        <AppFooter />
+                    </div>
 
-                <AppConfig onConfiguratorClick={this.onConfiguratorClick} toggleConfigurator={this.toggleConfigurator}
-                    hideConfigurator={this.hideConfigurator} onThemeChange={this.onThemeChange} activeTheme={this.state.activeTheme}/>
+                    <AppConfig onThemeChange={this.onThemeChange} theme={this.state.theme}/>
+                </AppContentContext.Provider>
 
-                { this.state.mobileMenuActive && <div className="layout-mask"></div> }
+                <div className={maskClassName} onClick={this.onMaskClick}></div>
             </div>
         );
     }

@@ -13,7 +13,7 @@ export class AppNews extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 {
                     this.props.newsActive && <div className="layout-news" onClick={() => window.open('https://www.primefaces.org/store', '_blank')}>
                         <div className="layout-news-container">
@@ -26,7 +26,7 @@ export class AppNews extends Component {
                         </div>
                     </div>
                 }
-            </React.Fragment>
+            </>
         );
     }
 }
