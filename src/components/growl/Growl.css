@@ -1,80 +1,98 @@
-.p-growl {
-    position:fixed;
-	width: 20em;
+.p-toast {
+    position: fixed;
+    width: 25rem;
 }
 
-.p-growl.p-growl-topright {
-	top: 20px;
-	bottom: auto;
-	right: 20px;
-}
-
-.p-growl.p-growl-topleft {
-	top: 20px;
-	bottom: auto;
-	left: 20px;
-}
-
-.p-growl.p-growl-bottomleft {
-	top: auto;
-	bottom: 20px;
-	left: 20px;
-}
-
-.p-growl.p-growl-bottomright {
-	top: auto;
-	bottom: 20px;
-	right: 20px;
-}
-
-.p-growl-item-container {
-	position:relative;
-	margin:0 0 10px 0;
-}
-
-.p-growl-item {
-	position: relative;
-    padding: .5em 1em;
+.p-toast-message-content {
     display: flex;
-    flex-direction: row;
     align-items: flex-start;
 }
 
-.p-growl-item p {
-	padding: 0;
-	margin: 0;
+.p-toast-message-text {
+    flex: 1 1 auto;
 }
 
-.p-growl-icon-close {
-	position: absolute;
-	top: 4px;
-	right: 4px;
+.p-toast-top-right {
+	top: 20px;
+	right: 20px;
+}
+
+.p-toast-top-left {
+	top: 20px;
+	left: 20px;
+}
+
+.p-toast-bottom-left {
+	bottom: 20px;
+	left: 20px;
+}
+
+.p-toast-bottom-right {
+	bottom: 20px;
+	right: 20px;
+}
+
+.p-toast-top-center {
+	top: 20px;
+    left: 50%;
+    margin-left: -10em;
+}
+
+.p-toast-bottom-center {
+	bottom: 20px;
+	left: 50%;
+    margin-left: -10em;
+}
+
+.p-toast-center {
+	left: 50%;
+	top: 50%;
+    min-width: 20vw;
+    transform: translate(-50%, -50%);
+}
+
+.p-toast-icon-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.p-toast-icon-close.p-link {
 	cursor: pointer;
 }
 
-.p-growl-title {
-	font-weight: bold;
-	display: block;
-}
-
-.p-growl-details {
-    margin-top: .5em;
-}
-
-.p-growl-image {
-	font-size: 2em;
-}
-
-.p-growl-message {
-    margin-left: 1em;
-    align-self: center;
-}
-
-.p-growl-message p {
-	font-weight: normal;
-}
-
 /* Animations */
+.p-toast-message-enter {
+    opacity: 0;
+    transform: translateY(50%);
+}
+
+.p-toast-message-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform .3s, opacity .3s;
+}
+
+.p-toast-message-enter-done {
+    transform: none;
+}
+
+.p-toast-message-exit {
+    opacity: 1;
+    max-height: 1000px;
+}
+
+.p-toast-message-exit-active {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;
+}
+
+/* Animations
 .p-growl-enter {
     opacity: 0.01;
 }
@@ -93,4 +111,4 @@
 	overflow: hidden;
 	margin-bottom: 0;
 	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), margin-bottom 0.5s cubic-bezier(0, 1, 0, 1);
-}
+}*/
