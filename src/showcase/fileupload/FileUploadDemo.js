@@ -4,28 +4,28 @@ import {Growl} from '../../components/growl/Growl';
 import {FileUpload} from '../../components/fileupload/FileUpload';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class FileUploadDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.onUpload = this.onUpload.bind(this);
         this.onBasicUpload = this.onBasicUpload.bind(this);
         this.onBasicUploadAuto = this.onBasicUploadAuto.bind(this);
     }
 
-    onUpload(event) {
+    onUpload() {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
 
-    onBasicUpload(event) {
+    onBasicUpload() {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
 
-    onBasicUploadAuto(event) {
+    onBasicUploadAuto() {
         this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
@@ -33,31 +33,29 @@ export class FileUploadDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="fileUpload">
                         <h1>FileUpload</h1>
                         <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("fileUpload")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Advanced</h3>
-                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
-                                multiple={true} accept="image/*" maxFileSize={1000000} />
-
-                    <h3>Basic</h3>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
-
-                    <h3>Basic with Auto</h3>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
-
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
+
+                    <div className="card">
+                        <h5>Advanced</h5>
+                        <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
+                                    multiple={true} accept="image/*" maxFileSize={1000000} />
+
+                        <h5>Basic</h5>
+                        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
+
+                        <h5>Basic with Auto</h5>
+                        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+                    </div>
                 </div>
 
-                <FileUploadDoc></FileUploadDoc>
+                <FileUploadDoc />
             </div>
         )
     }
@@ -220,7 +218,7 @@ const FileUploadDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {FileUpload} from 'primereact/fileupload';
 
@@ -229,7 +227,7 @@ import {FileUpload} from 'primereact/fileupload';
 
             <h3>Getting Started</h3>
             <p>FileUpload requires a <i>url</i> property as the upload target and a <i>name</i> to identify the files at backend.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo" url="./upload"></FileUpload>
 
@@ -239,7 +237,7 @@ import {FileUpload} from 'primereact/fileupload';
             <h3>Multiple Uploads</h3>
             <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable <i>multiple</i> option.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo[]" url="./upload" multiple={true} />
 
@@ -252,7 +250,7 @@ import {FileUpload} from 'primereact/fileupload';
             <h3>Auto Uploads</h3>
             <p>When <i>auto</i> property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo" url="./upload" auto={true} />
 
@@ -261,7 +259,7 @@ import {FileUpload} from 'primereact/fileupload';
 
             <h3>File Types</h3>
             <p>Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo[]" url="./upload" multiple={true} accept="image/*" />
 
@@ -271,7 +269,7 @@ import {FileUpload} from 'primereact/fileupload';
             <h3>File Size</h3>
             <p>Maximium file size can be restricted using <i>maxFileSize</i> property defined in bytes.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo" url="./upload" maxFileSize="1000000" />
 
@@ -294,7 +292,7 @@ import {FileUpload} from 'primereact/fileupload';
             <h3>Basic UI</h3>
             <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo" url="./upload" mode="basic" />
 
@@ -303,13 +301,13 @@ import {FileUpload} from 'primereact/fileupload';
 
             <h3>Custom Upload</h3>
             <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <FileUpload name="demo[]" url="./upload" customUpload={true} uploadHandler={this.myUploader} />
 
 `}
 </CodeHighlight>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 myUploader(event) {
     //event.files == files to upload
