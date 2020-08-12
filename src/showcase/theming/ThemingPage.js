@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './ThemingPage.scss';
 
 export class ThemingPage extends Component {
 
@@ -8,69 +10,107 @@ export class ThemingPage extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Theming</h1>
-                        <p>Choose from a variety of premium themes or develop your own theme using PrimeReact Theme Designer API.</p>
+                        <p>Choose from a variety of themes or develop your own theme easily.</p>
                     </div>
                 </div>
 
-                <div className="content-section documentation">
-                    <h3 style={{marginTop: 0}}>Theme Designer API</h3>
-                    <p><a href="https://www.primefaces.org/designer/primereact">Designer API</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine
-                        with 500+ variables and a demo application. In addition, PrimeReact only ships the generated CSS of Nova, Luna and Rhea themes whereas Designer provides
-                        full access to the whole SASS structure and the variables of these pre-built themes.</p>
+                <div className="content-section documentation theming-page">
+                    <h5>Architecture</h5>
+                    <img alt="Architecture" src="showcase/images/architecture.jpg" className="architecture-image"/>
+                    <p>PrimeReact is a design agnostic library so unlike other UI libraries it does not enforce a certain styling such as material or bootstrap. In order to achieve this, styling has been
+                        separated into core and theme. Core resides inside PrimeReact to implement the structure of the components such as positioning whereas theme brings the colors, paddings
+                        and margins.</p>
+
+                    <h5>Themes</h5>
+                    <p>PrimeReact offers various free themes and premium themes along with premium templates that provide an application layout as well. All the free themes are built with
+                        the <a href="https://www.primefaces.org/designer/primereact">Theme Designer</a> and the npm package brings the CSS output of the theme whereas SCSS is kept as a premium feature
+                        in the designer. This means free themes are open source and for customization with SASS, a designer license needs to be acquired.</p>
+
+                    <h5>Customization</h5>
+                    <p>CSS of the themes share the same license as PrimeReact which is MIT, this means the generated CSS can be customized per your needs however this should be avoided if your customizations
+                        are not simple. For instance even to change a primary color, since there is no variable a find and replace should be performed various times. On the other hand, this can be achieved
+                        by changing a single variable e.g. $primaryColor. Visit the <a href="https://www.primefaces.org/designer/api/primereact/5.0.0">SASS API</a> for the documentation of available customization options.</p>
+
+                    <p><a href="https://www.primefaces.org/designer/primereact">Designer</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine
+                        with 500+ variables and a Visual Designer. PrimeReact only ships the generated CSS of <b>Material</b>, <b>Bootstrap</b>, <b>Saga</b>, <b>Vela</b>, <b>Arya</b> and legacy themes whereas Designer provides
+                        full access to the whole SASS structure and the variables of these pre-built themes for easier customization.</p>
 
                     <p>Whether you have your own style guide or just need a custom theme, Designer API is the right tool to design and bring them to existence.</p>
 
-                    <p>Visit <a href="https://www.primefaces.org/designer/primereact">Designer API HomePage</a> for more information, live demos and access to a trial version.</p>
-                    <a href="http://www.primefaces.org/designer/primereact">
-                        <img alt="PrimeReact Designer" src="showcase/images/primereact-designer.jpg" style={{width: '100%'}} />
+                    <p>Visit <a href="https://www.primefaces.org/designer/primereact">Designer API HomePage</a> for more information and live demos.</p>
+                    <a href="http://www.primefaces.org/designer/primereact" className="designer-image">
+                        <img alt="PrimeReact Designer" src="showcase/images/primereact-designer.jpg" style={{ width: '100%' }} />
                     </a>
 
-                    <h3>Styled Components</h3>
-                    <p>All PrimeReact components support className property and are compatible with Styled Components.</p>
+                    <h5>Scaling</h5>
+                    <p>PrimeReact utilizes rem units to make sure the components blend in with the rest of your UI perfectly. This also enables scaling, for example changing the size of the components
+                        is easy as configuring the font size of your document. Code below sets the scale of the components based on 16px. If you reqire bigger or smaller components, just
+                        change this variable and components will scale accordingly.</p>
 
-                    <h3>Premium Templates</h3>
-                    <p>Powered by create-react-app, create awesome applications in no time using the premium templates of PrimeReact and impress your users.</p>
-                    <p>Premium Templates are advanced create-react-app based applications featuring a full application layout with various menu orientations, templates pages such as landing, login and
-                        premium themes that share the same design language of the layout for a unified look.</p>
+<CodeHighlight lang="css">
+{`
+html {
+    font-size: 16px;
+}
+`}
+</CodeHighlight>
 
-                    <div className="p-grid theming">
-                        <div className="p-col-12">
-                            <a href="https://www.primefaces.org/layouts/sapphire-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Sapphire" src="showcase/images/layouts/sapphire-biggest-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-6">
-                            <a href="https://www.primefaces.org/layouts/serenity-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Serenity" src="showcase/images/layouts/serenity-react-sqr.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-6">
-                            <a href="https://www.primefaces.org/layouts/ultima-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Ultima" src="showcase/images/layouts/ultima-react-sqr.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12">
-                            <a href="https://www.primefaces.org/layouts/babylon-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Babylon" src="showcase/images/layouts/babylon-biggest-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-6">
-                            <a href="https://www.primefaces.org/layouts/avalon-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Avalon" src="showcase/images/layouts/avalon-react-sqr.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-6">
-                            <a href="https://www.primefaces.org/layouts/apollo-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Apollo" src="showcase/images/layouts/apollo-react-sqr.png" />
-                            </a>
-                        </div>
-                        <div className="p-col-12">
-                            <a href="https://www.primefaces.org/layouts/roma-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Roma" src="showcase/images/layouts/roma-biggest-react.jpg" />
-                            </a>
-                        </div>
-                    </div>
+                    <p>Some commonly used components such as inputs, buttons and datatable also provide per component scaling with special classes. Components with specific scaling options
+                        are documented in their own documentation.</p>
+<CodeHighlight>
+{`
+<InputText type="text" className="p-inputtext-sm" />;
+<Button label="Button" className="p-button-lg" />;
+`}
+</CodeHighlight>
 
+                    <h5>Utility Classes</h5>
+                    <p>A couple of utility classes are provided as a solution to common requirements.</p>
+
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-component</td>
+                                    <td>Applies component theming such as font-family and font-size to an element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-disabled</td>
+                                    <td>Applies an opacity to display as disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-sr-only</td>
+                                    <td>Element becomes visually hidden however accessibility is still available.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-reset</td>
+                                    <td>Resets the browsers defaults.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-link</td>
+                                    <td>Renders a button as a link.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-error</td>
+                                    <td>Applies the invalid theme color to a text.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-invalid</td>
+                                    <td>Alias to p-error.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-text-secondary</td>
+                                    <td>Applies the text color of the theme with the secondary priority.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+				    </div>
                 </div>
             </div>
         );
