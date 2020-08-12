@@ -8,13 +8,14 @@ import {Checkbox} from '../../components/checkbox/Checkbox';
 import {Growl} from '../../components/growl/Growl';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import {loadGoogleMaps, removeGoogleMaps} from '../load/GoogleMaps';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class GMapDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             googleMapsReady: false,
             dialogVisible: false,
@@ -122,23 +123,23 @@ export class GMapDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="gMap">
                         <h1>GMap</h1>
                         <p>GMap component provides integration with Google Maps API. This sample demontrates
                         various uses cases like binding, overlays and events. Click the map to add a new item.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("gMap")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
                     <Growl ref={(el) => { this.growl = el; }}></Growl>
 
                     {
-                        this.state.googleMapsReady && <GMap overlays={this.state.overlays} options={options} style={{width: '100%', minHeight: '320px'}} onMapReady={this.onMapReady}
-                                                            onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
+                        this.state.googleMapsReady && (
+                            <div className="card">
+                                <GMap overlays={this.state.overlays} options={options} style={{width: '100%', minHeight: '320px'}} onMapReady={this.onMapReady}
+                                    onMapClick={this.onMapClick} onOverlayClick={this.onOverlayClick} onOverlayDragEnd={this.handleDragEnd} />
+                            </div>
+                        )
                     }
 
                     <Dialog header="New Location" visible={this.state.dialogVisible} width="300px" modal={true} footer={footer} onHide={this.onHide}>
@@ -177,7 +178,7 @@ export class GMapDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {GMap} from 'primereact/gmap';
 
@@ -187,7 +188,7 @@ import {GMap} from 'primereact/gmap';
             <h3>Getting Started</h3>
             <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 render() {
     const options = {
@@ -207,7 +208,7 @@ render() {
             <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
             of binding so whenever the array changes, gmap updates itself.</p>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 render() {
     const options = {
@@ -237,7 +238,7 @@ render() {
 
             <h3>Events</h3>
             <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 
 constructor() {
@@ -284,7 +285,7 @@ render() {
             <p>In case you need to access the map instance directly, use the getMap() method. In the following example, this.gmap.getMap() will provide the map instance. Alternative
             is using onMapReady event as it passes the map instance as a parameter.</p>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 render() {
     const options = {
@@ -408,7 +409,7 @@ render() {
             </TabPanel>
 
             <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 /*global google*/
 import React, {Component} from 'react';
