@@ -146,7 +146,7 @@ const EditorDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Editor} from 'primereact/editor';
 
@@ -156,7 +156,7 @@ import {Editor} from 'primereact/editor';
                         <h3>Getting Started</h3>
                         <p>Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} />
 
@@ -166,7 +166,7 @@ import {Editor} from 'primereact/editor';
                         <h3>Toolbar</h3>
                         <p>Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 const header = (
     <span className="ql-formats">
@@ -314,7 +314,7 @@ const header = (
                         <h3>Dependencies</h3>
                         <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>
                         <p>Resources of quill needs to be added to your application.</p>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 npm install quill --save
 
