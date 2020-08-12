@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableStyleDemo extends Component {
 
@@ -37,26 +36,22 @@ export class TreeTableStyleDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Styling</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-                    <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size" body={this.sizeTemplate}></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                        <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size" body={this.sizeTemplate}></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableStyleDemoDoc />

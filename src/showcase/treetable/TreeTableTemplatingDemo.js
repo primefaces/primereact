@@ -3,10 +3,9 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from "../../components/column/Column";
 import { Button } from '../../components/button/Button';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableTemplatingDemo extends Component {
 
@@ -36,26 +35,22 @@ export class TreeTableTemplatingDemo extends Component {
 
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Templating</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Templating</span></h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} header={header} footer={footer}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                        <Column body={this.actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} header={header} footer={footer}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                            <Column body={this.actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableTemplatingDemoDoc />
