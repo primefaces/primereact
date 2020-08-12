@@ -1,41 +1,44 @@
-import React, { Component } from 'react';
-import { DataScroller } from '../../components/datascroller/DataScroller';
-import { CarService } from '../service/CarService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { DataScrollerSubmenu } from '../../showcase/datascroller/DataScrollerSubmenu';
+import React, {Component} from 'react';
+import {DataScroller} from '../../components/datascroller/DataScroller';
+import {Button} from '../../components/button/Button';
+import {Rating} from '../../components/rating/Rating';
+import ProductService from '../service/ProductService';
+import {TabView,TabPanel} from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './DataScrollerDemo.scss';
 
 export class DataScrollerInlineDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
+
+        this.productService = new ProductService();
+        this.itemTemplate = this.itemTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({ cars: data }));
+        this.productService.getProducts().then(data => this.setState({ products: data }));
     }
 
-    carTemplate(car) {
-        if (!car) {
-            return;
-        }
-
+    itemTemplate(data) {
         return (
-            <div className="car-details">
-                <div>
-                    <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
-                    <div className="p-grid">
-                        <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                        <div className="p-col-12">Year: <b>{car.year}</b></div>
-                        <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                        <div className="p-col-12">Color: <b>{car.color}</b></div>
-                    </div>
+            <div className="product-item">
+                <img src={`showcase/demo/images/product/${data.image}`} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                </div>
+                <div className="product-action">
+                    <span className="product-price">${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                 </div>
             </div>
         );
@@ -43,22 +46,18 @@ export class DataScrollerInlineDemo extends Component {
 
     render() {
         return (
-            <div className="dataview-demo">
-                <DataScrollerSubmenu />
-
+            <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataScroller - Inline</h1>
+                    <AppInlineHeader changelogText="dataScroller">
+                        <h1>DataScroller <span>Inline</span></h1>
                         <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("dataScroller")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More" />
+                <div className="content-section implementation datascroller-demo">
+                    <div className="card">
+                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5} inline={true} scrollHeight="500px" header="Scroll Down to Load More" />
+                    </div>
                 </div>
 
                 <DataScrollerInlineDoc></DataScrollerInlineDoc>
