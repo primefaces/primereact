@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types'
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { Tooltip } from './components/tooltip/Tooltip';
 
 export class AppTopbar extends Component {
 
@@ -132,13 +133,15 @@ export class AppTopbar extends Component {
     render() {
         return (
             <div className="layout-topbar">
+                <Tooltip target=".app-theme" position="bottom" />
+
                 <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-haspopup={true} aria-label="Menu">
                     <i className="pi pi-bars"></i>
                 </button>
                 <Link to="/" className="logo" aria-label="PrimeReact logo">
                     <img alt="logo" src={`showcase/images/primereact-logo${this.props.darkTheme ? '' : '-dark'}.png`} />
                 </Link>
-                <div className="app-theme">
+                <div className="app-theme" data-pr-tooltip={this.props.theme}>
                     <img alt={this.props.theme} src={`showcase/images/themes/${this.logoMap[this.props.theme]}`} />
                 </div>
 

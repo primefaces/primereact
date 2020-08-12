@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppMenu } from './AppMenu';
-import {Dialog} from './components/dialog/Dialog';
-import {Button} from './components/button/Button';
+import { Dialog } from './components/dialog/Dialog';
+import { Button } from './components/button/Button';
 import classNames from 'classnames';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -24,6 +24,7 @@ import AppConfig from './AppConfig';
 import axios from 'axios';
 
 import AppContentContext from './AppContentContext';
+import { Growl } from './components/growl/Growl';
 
 export class App extends Component {
 
@@ -73,10 +74,10 @@ export class App extends Component {
     onTopbarItemClick(event) {
         this.topbarItemClick = true;
 
-        if(this.state.activeTopbarItem === event.item)
-            this.setState({activeTopbarItem: null});
+        if (this.state.activeTopbarItem === event.item)
+            this.setState({ activeTopbarItem: null });
         else
-            this.setState({activeTopbarItem: event.item});
+            this.setState({ activeTopbarItem: event.item });
 
         //event.originalEvent.preventDefault();
     }
@@ -87,7 +88,7 @@ export class App extends Component {
         this.setState({
             theme: event.theme,
             darkTheme: event.dark
-         });
+        });
 
         event.originalEvent.preventDefault();
     }
@@ -193,7 +194,7 @@ export class App extends Component {
     }
 
     getChangelog() {
-        axios.get('showcase/changelog/changelog.json', { headers: { 'Cache-Control' : 'no-cache' } })
+        axios.get('showcase/changelog/changelog.json', { headers: { 'Cache-Control': 'no-cache' } })
             .then(res => res.data)
             .then(data => this.setState({ changelog: data }));
     }
@@ -260,7 +261,7 @@ export class App extends Component {
         this.getChangelog();
 
         if (this.isOutdatedIE()) {
-            //this.growl.show({severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.'});
+            this.showcaseGrowl.show({ severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.' });
         }
     }
 
@@ -276,33 +277,34 @@ export class App extends Component {
 
         return (
             <div className={wrapperClassName}>
+                <Growl ref={(el) => this.showcaseGrowl = el} />
 
                 {/* <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/> */}
 
-                <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme}/>
+                <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} />
 
                 <AppMenu active={this.state.sidebarActive} />
 
                 <AppContentContext.Provider value={{
-                        inputStyle: this.state.inputStyle,
-                        darkTheme: this.state.darkTheme,
-                        changelogText: "VIEW CHANGELOG",
-                        onChangelogBtnClick: this.showChangelogDialog,
-                        onInputStyleChange: this.onInputStyleChange
-                    }}>
+                    inputStyle: this.state.inputStyle,
+                    darkTheme: this.state.darkTheme,
+                    changelogText: "VIEW CHANGELOG",
+                    onChangelogBtnClick: this.showChangelogDialog,
+                    onInputStyleChange: this.onInputStyleChange
+                }}>
                     <div className="layout-content">
 
                         <AppRouter />
 
-                        <Dialog header={`${this.state.searchVal} changelog`} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{width: '50vw'}} onHide={this.hideChangelogDialog}>
+                        <Dialog header={`${this.state.searchVal} changelog`} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{ width: '50vw' }} onHide={this.hideChangelogDialog}>
                             {
                                 this.state.currentChangelog && <div className="layout-changelog-current-header">
-                                        <span>
-                                            <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
-                                            { this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span> }
-                                        </span>
-                                        <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
-                                    </div>
+                                    <span>
+                                        <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
+                                        {this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span>}
+                                    </span>
+                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
+                                </div>
                             }
                             <ul className="layout-changelog-container">
                                 {
@@ -315,15 +317,15 @@ export class App extends Component {
                                 }
                             </ul>
                             <div className="layout-changelog-actions">
-                                { this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" /> }
-                                { this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" /> }
+                                {this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" />}
+                                {this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" />}
                             </div>
                         </Dialog>
 
                         <AppFooter />
                     </div>
 
-                    <AppConfig onThemeChange={this.onThemeChange} theme={this.state.theme}/>
+                    <AppConfig onThemeChange={this.onThemeChange} theme={this.state.theme} />
                 </AppContentContext.Provider>
 
                 <div className={maskClassName} onClick={this.onMaskClick}></div>
