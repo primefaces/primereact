@@ -92,8 +92,8 @@ interface DataTableProps {
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
     onValueChange?(value: any[]): void;
     rowEditorValidator?(rowData: any): boolean;
-    onRowEditInit?(e: {originalEvent: Event, data: any}): void;
-    onRowEditSave?(e: {originalEvent: Event, data: any}): void;
+    onRowEditInit?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowEditSave?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
     exportFunction?(e: {data: any, field: string}): any;
     customSaveState?(state: any): void;
