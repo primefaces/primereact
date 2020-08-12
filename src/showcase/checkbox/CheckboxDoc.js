@@ -176,7 +176,7 @@ const CheckboxDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Checkbox} from 'primereact/checkbox';
 
@@ -185,7 +185,7 @@ import {Checkbox} from 'primereact/checkbox';
 
                         <h3>Getting Started</h3>
                         <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Checkbox onChange={e => this.setState({checked: e.checked})} checked={this.state.checked}></Checkbox>
 
@@ -194,7 +194,7 @@ import {Checkbox} from 'primereact/checkbox';
 
                         <h3>Multiple Values</h3>
                         <p>Multiple checkboxes can be grouped using a list of values.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <div className="p-col-12">
     <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
@@ -212,7 +212,7 @@ import {Checkbox} from 'primereact/checkbox';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 constructor() {
     super();
