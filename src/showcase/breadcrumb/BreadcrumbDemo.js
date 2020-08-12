@@ -1,43 +1,37 @@
 import React, { Component } from 'react';
-import AppContentContext from '../../AppContentContext';
 import { BreadCrumb } from '../../components/breadcrumb/BreadCrumb';
 import { BreadCrumbDoc } from './BreadCrumbDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class BreadcrumbDemo extends Component {
 
     render() {
         const items = [
-            { label: 'Categories' },
-            { label: 'Sports' },
-            { label: 'Football' },
-            { label: 'Countries' },
-            { label: 'Spain' },
-            { label: 'F.C. Barcelona' },
-            { label: 'Squad' },
-            { label: 'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+            {label: 'Computer'},
+            {label: 'Notebook'},
+            {label: 'Accessories'},
+            {label: 'Backpacks'},
+            {label: 'Item'}
         ];
 
-        const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+        const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="breadcrumb">
                         <h1>Breadcrumb</h1>
                         <p>Breadcrumb provides contextual information about page hierarchy.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("breadcrumb")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <BreadCrumb model={items} home={home} />
+                    <div className="card">
+                        <BreadCrumb model={items} home={home} />
+                    </div>
                 </div>
 
-                <BreadCrumbDoc></BreadCrumbDoc>
-
+                <BreadCrumbDoc />
             </div>
         );
     }
