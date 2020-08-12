@@ -8,15 +8,15 @@
         width: 100%;
         height: 70px;
         background-image: url("../../images/news/topbar-easter-2020-bg.jpg");
-        @include flex();
+        /*@include flex();
         @include flex-justify-center();
-        @include flex-align-center();
+        @include flex-align-center();*/
         cursor: pointer;
 
         .layout-news-container {
-            @include flex();
+            /*@include flex();
             @include flex-align-center();
-            @include flex-justify-center();
+            @include flex-justify-center();*/
             height: 100%;
 
             .layout-news-text {
@@ -41,9 +41,9 @@
                 margin-left: 2em;
                 position: relative;
                 z-index: 1;
-                @include flex();
+                /*@include flex();
                 @include flex-align-center();
-                @include flex-justify-center();
+                @include flex-justify-center();*/
                 flex-shrink: 0;
 
                 i {
@@ -65,9 +65,9 @@
                 width: 23px;
                 height: 23px;
                 cursor: pointer;
-                @include flex();
+                /*@include flex();
                 @include flex-align-center();
-                @include flex-justify-center();
+                @include flex-justify-center();*/
 
                 i {
                     font-size: 1.5em;
@@ -100,7 +100,7 @@
         }
     }
 
-    @media screen and (max-width: $tabletBreakpoint) {
+   /* @media screen and (max-width: $tabletBreakpoint) {
         .layout-news {
             display: block;
 
@@ -164,19 +164,5 @@
                 }
             }
         }
-    }
-}
-
-@include keyframes(snowSlide) {
-    from { background-position: 0 0; }
-    to { background-position: 0 400px; }
-}
-
-@include keyframes(customSlide) {
-    0% { left: 0; bottom:-40%; }
-    20% { left: 20%; bottom:-20%; }
-    40% { left: 40%; bottom:0%; }
-    60% { left: 60%; bottom:20%; }
-    80% { left: 80%; bottom:40%; }
-    100% { left: 100%; bottom: 60%; }
+    }*/
 }
