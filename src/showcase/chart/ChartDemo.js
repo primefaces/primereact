@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import React, { Component } from 'react';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ChartDemo extends Component {
 
@@ -8,14 +8,10 @@ export class ChartDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="chart">
                         <h1>Charts</h1>
                         <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Charts.js</a>, an open source HTML5 based charting library.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <ChartDoc />
@@ -34,7 +30,7 @@ class ChartDoc extends Component {
         return (
             <div className="content-section documentation">
                 <h3>Import</h3>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 import {Chart} from 'primereact/chart';
 
@@ -47,14 +43,14 @@ import {Chart} from 'primereact/chart';
                 <h3>Data</h3>
                 <p>Data of a chart is provided using a binding to the <i>data</i> property, each type has its own format of data. Here is an example of a line chart.</p>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 <Chart type="line" data={data} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-jsx">
+<CodeHighlight>
 {`
 const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -81,14 +77,14 @@ const data = {
 <p>While a series can be customized per dataset, general chart options are defined with options property.
     Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js documentation.</p>
 
-    <CodeHighlight className="language-jsx">
+    <CodeHighlight>
 {`
 <Chart type="line" data={data} options={options} />
 
 `}
 </CodeHighlight>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 const options = {
         title: {

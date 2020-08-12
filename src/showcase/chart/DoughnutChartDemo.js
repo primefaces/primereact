@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import {Chart} from '../../components/chart/Chart';
+import React, { Component } from 'react';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { Chart } from '../../components/chart/Chart';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppContentContext from '../../AppContentContext';
 
 export class DoughnutChartDemo extends Component {
 
-    render() {
-        const data = {
-            labels: ['A','B','C'],
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
@@ -23,23 +26,47 @@ export class DoughnutChartDemo extends Component {
                         "#FFCE56"
                     ]
                 }]
-            };
+        };
 
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            }
+        };
+
+        this.darkOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#ebedef'
+                }
+            }
+        };
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="chart">
                         <h1>DoughnutChart</h1>
                         <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Chart type="doughnut" data={data} />
+                    <div className="card">
+                        <AppContentContext.Consumer>
+                            {
+                                context => {
+                                    let options = context.darkTheme ? this.darkOptions : this.lightOptions;
+
+                                    return <Chart type="doughnut" data={this.chartData} options={options} />
+                                }
+                            }
+                        </AppContentContext.Consumer>
+                    </div>
                 </div>
 
                 <DoughnutChartDemoDoc></DoughnutChartDemoDoc>
@@ -171,7 +198,7 @@ const DoughnutChartDemo = () => {
                         this.sources && Object.entries(this.sources).map(([key, value], index) => {
                             return (
                                 <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DoughnutChartDemo" sources={[key, value]} dependencies={{'chart.js': '2.7.3'}} />
+                                    <LiveEditor name="DoughnutChartDemo" sources={[key, value]} dependencies={{ 'chart.js': '2.7.3' }} />
                                 </TabPanel>
                             );
                         })
