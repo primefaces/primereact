@@ -115,7 +115,7 @@ const FieldsetDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Fieldset} from 'primereact/fieldset';
 
@@ -124,7 +124,7 @@ import {Fieldset} from 'primereact/fieldset';
 
                         <h3>Getting Started</h3>
                         <p>Panel is a container component that accepts content as its children.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Fieldset legend="Godfather I">
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -142,7 +142,7 @@ import {Fieldset} from 'primereact/fieldset';
                         <p>Content of the fieldset can be expanded and collapsed using <i>toggleable</i> option. A toggleable fieldset can either be used as a Controlled or Uncontrolled component.</p>
 
                         <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties need to be defined to control the collapsed state.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Fieldset legend="Godfather I" toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -157,7 +157,7 @@ import {Fieldset} from 'primereact/fieldset';
                         <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Fieldset legend="Godfather I" toggleable={true} >
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
