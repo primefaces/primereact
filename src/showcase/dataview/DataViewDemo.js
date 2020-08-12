@@ -1,37 +1,40 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { Dialog } from '../../components/dialog/Dialog';
-import { Panel } from '../../components/panel/Panel';
-import { CarService } from '../service/CarService';
-import { DataViewSubmenu } from '../../showcase/dataview/DataViewSubmenu';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
 import { DataView, DataViewLayoutOptions } from "../../components/dataview/DataView";
 import { Button } from "../../components/button/Button";
 import { Dropdown } from "../../components/dropdown/Dropdown";
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import ProductService from '../service/ProductService';
+import { Rating } from '../../components/rating/Rating';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './DataViewDemo.scss';
 
 export class DataViewDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: [],
-            layout: 'list',
-            selectedCar: null,
-            visible: false,
+            products: null,
+            layout: 'grid',
             sortKey: null,
             sortOrder: null,
             sortField: null
         };
-        this.carservice = new CarService();
+
+        this.sortOptions = [
+            {label: 'Price High to Low', value: '!price'},
+            {label: 'Price Low to High', value: 'price'},
+        ];
+
+        this.productService = new ProductService();
         this.itemTemplate = this.itemTemplate.bind(this);
         this.onSortChange = this.onSortChange.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProducts().then(data => this.setState({ products: data }));
     }
 
     onSortChange(event) {
@@ -53,91 +56,74 @@ export class DataViewDemo extends Component {
         }
     }
 
-    renderListItem(car) {
+    renderListItem(data) {
         return (
             <div className="p-col-12">
-                <div className="car-details">
-                    <div>
-                        <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand}/>
-                        <div className="p-grid">
-                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                            <div className="p-col-12">Year: <b>{car.year}</b></div>
-                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                            <div className="p-col-12">Color: <b>{car.color}</b></div>
-                        </div>
+                <div className="product-list-item">
+                    <img src={`showcase/demo/images/product/${data.image}`} alt={data.name} />
+                    <div className="product-list-detail">
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
-                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
+                    <div className="product-list-action">
+                        <span className="product-price">${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
+                    </div>
                 </div>
             </div>
         );
     }
 
-    renderGridItem(car) {
+    renderGridItem(data) {
         return (
-            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
-                <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
-                    <div className="car-detail">{car.year} - {car.color}</div>
-                    <Button icon="pi pi-search" onClick={(e) => this.setState({ selectedCar: car, visible: true })}></Button>
-                </Panel>
+            <div className="p-col-12 p-md-4">
+                <div className="product-grid-item card">
+                    <div className="product-grid-item-top">
+                        <div>
+                            <i className="pi pi-tag product-category-icon"></i>
+                            <span className="product-category">{data.category}</span>
+                        </div>
+                        <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
+                    </div>
+                    <div className="product-grid-item-content">
+                    <img src={`showcase/demo/images/product/${data.image}`} alt={data.name} />
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                    </div>
+                    <div className="product-grid-item-bottom">
+                        <span className="product-price">${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    </div>
+                </div>
             </div>
         );
     }
 
-    itemTemplate(car, layout) {
-        if (!car) {
+    itemTemplate(product, layout) {
+        if (!product) {
             return;
         }
 
         if (layout === 'list')
-            return this.renderListItem(car);
+            return this.renderListItem(product);
         else if (layout === 'grid')
-            return this.renderGridItem(car);
-    }
-
-    renderCarDialogContent() {
-        if (this.state.selectedCar) {
-            return (
-                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
-                    <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={`showcase/demo/images/car/${this.state.selectedCar.brand}.png`} alt={this.state.selectedCar.brand} />
-                    </div>
-
-                    <div className="p-col-4">Vin: </div>
-                    <div className="p-col-8">{this.state.selectedCar.vin}</div>
-
-                    <div className="p-col-4">Year: </div>
-                    <div className="p-col-8">{this.state.selectedCar.year}</div>
-
-                    <div className="p-col-4">Brand: </div>
-                    <div className="p-col-8">{this.state.selectedCar.brand}</div>
-
-                    <div className="p-col-4">Color: </div>
-                    <div className="p-col-8">{this.state.selectedCar.color}</div>
-                </div>
-            );
-        }
-        else {
-            return null;
-        }
+            return this.renderGridItem(product);
     }
 
     renderHeader() {
-        const sortOptions = [
-            {label: 'Newest First', value: '!year'},
-            {label: 'Oldest First', value: 'year'},
-            {label: 'Brand', value: 'brand'}
-        ];
-
         return (
-            <div className="p-grid">
+            <div className="p-grid p-nogutter">
                 <div className="p-col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} style={{width: '12em'}} />
+                    <Dropdown options={this.sortOptions} value={this.state.sortKey} optionLabel="label" placeholder="Sort By Price" onChange={this.onSortChange}/>
                 </div>
                 <div className="p-col-6" style={{textAlign: 'right'}}>
-                    <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
+                    <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({ layout: e.value })} />
                 </div>
-             </div>
+            </div>
         );
     }
 
@@ -146,27 +132,19 @@ export class DataViewDemo extends Component {
 
         return (
             <div>
-                <DataViewSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="dataView">
                         <h1>DataView</h1>
                         <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataView")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation dataview-demo">
-                    <DataView value={this.state.cars} layout={this.state.layout} header={header}
-                            itemTemplate={this.itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
-                            sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
-
-                    <Dialog header="Car Details" visible={this.state.visible} modal={true} onHide={() => this.setState({visible: false})}>
-                        {this.renderCarDialogContent()}
-                    </Dialog>
+                    <div className="card">
+                        <DataView value={this.state.products} layout={this.state.layout} header={header}
+                                itemTemplate={this.itemTemplate} paginator rows={9}
+                                sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
+                    </div>
                 </div>
 
                 <DataViewDoc/>
@@ -696,7 +674,7 @@ const DataViewDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {DataView, DataViewLayoutOptions} from 'primereact/dataview';
 
@@ -706,7 +684,7 @@ import {DataView, DataViewLayoutOptions} from 'primereact/dataview';
                         <h3>Getting Started</h3>
                         <p>Layout of the DataView is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
 
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="javascript">
 {`
 npm install primeflex --save
 
@@ -717,7 +695,7 @@ npm install primeflex --save
                             Cars are loaded by a CarService that connects to a server to fetch the cars.</p>
 
                         <p>DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.</p>
-                            <CodeHighlight className="language-javascript">
+                            <CodeHighlight lang="javascript">
 {`
 constructor() {
     super();
@@ -753,7 +731,7 @@ itemTemplate(car, layout) {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <DataView value={this.state.cars} layout={this.state.layout} itemTemplate={this.itemTemplate}></DataView>
 
@@ -763,7 +741,7 @@ itemTemplate(car, layout) {
                         <h3>DataViewLayoutOptions</h3>
                         <p>DataViewLayoutOptions is a helper component to choose between layout modes. This component is used in controlled manner to manage the state of layout orientation.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
 
@@ -838,7 +816,7 @@ itemTemplate(car, layout) {
 
                         <p>Pagination can either be used in Controlled or Uncontrolled manner. In controlled mode, <i>first</i> and <i>onPage</i> properties needs to be defined to control the pagination state.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <DataView value={this.state.cars} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}></DataView>
 
@@ -847,7 +825,7 @@ itemTemplate(car, layout) {
 
                         <p>In uncontrolled mode, only <i>paginator</i> property needs to be enabled. Initial page state can be still be provided using the <i>first</i> property in uncontrolled mode however
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator, prefer to use the component as controlled.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <DataView value={this.state.cars} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator={true} rows={10}></DataView>
 
@@ -858,7 +836,7 @@ itemTemplate(car, layout) {
                         <p><i>sortField</i> and <i>sortOrder</i> properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element.
                             Here is an example that uses a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.</p>
 
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                         {`
 const sortOptions = [
     {label: 'Newest First', value: '!year'},
