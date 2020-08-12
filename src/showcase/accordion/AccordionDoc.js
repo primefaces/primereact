@@ -208,7 +208,7 @@ const AccordionDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
@@ -221,7 +221,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                         <h3>Controlled Component</h3>
                         <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
     <AccordionTab header="Header I">
@@ -242,7 +242,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                         <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                 need to update the active tab, prefer to use the component as controlled.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Accordion>
     <AccordionTab header="Header I">
@@ -261,7 +261,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
                         <h3>Multiple</h3>
                         <p>By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Accordion multiple={true}>
     <AccordionTab header="Header I">

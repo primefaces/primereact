@@ -1,0 +1,16 @@
+.accordion-demo {
+    .accordion-custom {
+        i, span {
+            vertical-align: middle;
+        }
+
+        span {
+            margin: 0 .5rem;
+        }
+    }
+
+    .p-accordion p {
+        line-height: 1.5;
+        margin: 0;
+    }
+}
