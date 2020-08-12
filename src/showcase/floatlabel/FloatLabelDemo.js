@@ -59,7 +59,7 @@ export class FloatLabelDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="floatLabel">
+                    <AppInlineHeader changelogText="floatLabel" showInputStyle>
                         <h1>Float Label</h1>
                         <p>A floating label is implemented by wrapping the input and the label inside a container having .p-float-label style class.</p>
                     </AppInlineHeader>

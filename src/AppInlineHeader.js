@@ -9,7 +9,7 @@ export class AppInlineHeader extends Component {
     static defaultProps = {
         changelogText: '',
         showChangelog: true,
-        showInputStyle: true
+        showInputStyle: false
     }
 
     static propTypes = {
