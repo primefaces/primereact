@@ -1,65 +1,70 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
+import classNames from 'classnames';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import ProductService from '../service/ProductService';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './DataTableDemo.scss';
 
 export class DataTableStyleDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.yearTemplate = this.yearTemplate.bind(this);
-        this.rowClassName = this.rowClassName.bind(this);
+
+        this.productService = new ProductService();
+        this.stockBodyTemplate = this.stockBodyTemplate.bind(this);
+        this.rowClass = this.rowClass.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    yearTemplate(rowData) {
-        let year = rowData.year;
-        let fontWeight = year > 2010 ? 'bold' : 'normal';
-
-        return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
+    rowClass(data) {
+        return {
+            'row-accessories': data.category === 'Accessories'
+        }
     }
 
-    rowClassName(rowData) {
-        let brand = rowData.brand;
+    stockBodyTemplate(rowData) {
+        const stockClassName = classNames({
+            'outofstock': rowData.quantity === 0,
+            'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
+            'instock': rowData.quantity > 10
+        });
 
-        return {'p-highlight' : (brand === 'Jaguar')};
+        return (
+            <div className={stockClassName}>
+                {rowData.quantity}
+            </div>
+        );
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Styling</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
-                    <p>This datatable highlights cell with a bolder font weight whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
-                    <DataTable value={this.state.cars} rowClassName={this.rowClassName}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" body={this.yearTemplate} />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                <div className="content-section implementation datatable-style-demo">
+                    <div className="card">
+                        <DataTable value={this.state.products} rowClassName={this.rowClass}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity" body={this.stockBodyTemplate}></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableStyleDemoDoc></DataTableStyleDemoDoc>
