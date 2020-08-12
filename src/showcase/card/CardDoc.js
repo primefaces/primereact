@@ -136,7 +136,7 @@ const CardDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
+                        <CodeHighlight lang="javascript">
                             {`
 import {Card} from 'primereact/card';
 
@@ -145,7 +145,7 @@ import {Card} from 'primereact/card';
 
                         <h3>Getting Started</h3>
                         <p>Card is used as a container.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Card>
     Content
@@ -156,7 +156,7 @@ import {Card} from 'primereact/card';
 
                         <h3>Title</h3>
                         <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 <Card title="Title" subTitle="SubTitle">
     Content
@@ -167,7 +167,7 @@ import {Card} from 'primereact/card';
                         <h3>Header and Footer</h3>
                         <p>Header and Footer sections are defined using the properties of the same name.</p>
 
-                        <CodeHighlight className="language-jsx">
+                        <CodeHighlight>
                             {`
 const header = <img alt="Card" src='showcase/demo/images/usercard.png'/>;
 const footer = <span>
