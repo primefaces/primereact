@@ -48,8 +48,8 @@ export class DialogDemo extends Component {
     renderFooter(name) {
         return (
             <div>
+                <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-text" />
                 <Button label="Yes" icon="pi pi-check" onClick={() => this.onHide(name)} autoFocus />
-                <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-secondary" />
             </div>
         );
     }

@@ -306,29 +306,35 @@ export class App extends Component {
 
                         <AppRouter />
 
-                        <Dialog header={`${this.state.searchVal} changelog`} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{ width: '50vw' }} onHide={this.hideChangelogDialog}>
+                        <Dialog header={<span className="p-text-capitalize">{this.state.searchVal} changelog</span>} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{ width: '50vw' }} onHide={this.hideChangelogDialog}>
                             {
-                                this.state.currentChangelog && <div className="layout-changelog-current-header">
-                                    <span>
-                                        <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
-                                        {this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span>}
-                                    </span>
-                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
+                                this.state.currentChangelog && <div className="p-d-flex">
+                                    <span className="p-text-bold" style={{ fontSize: '1.1rem'}}>{this.state.currentChangelog.version}</span>
+                                    {this.state.currentChangelog.index === 0 && <span className="p-tag p-tag-rounded p-tag-info p-ml-2">current</span>}
+                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="p-ml-auto">View Full Changelog</a>
                                 </div>
                             }
-                            <ul className="layout-changelog-container">
+                            <ul className="p-reset p-my-4">
                                 {
                                     this.state.filteredChangelog ?
                                         this.state.filteredChangelog.map((item, index) => {
-                                            return <li key={index}>&#9679; {item.title} <a href={item.url} target="_blank" rel="noopener noreferrer" className="layout-changelog-issue-no">#{item.number}</a></li>
+                                            return (
+                                                <li key={index} className="p-mt-2 p-mb-4">
+                                                    <span className="p-d-flex p-ai-center">
+                                                        <i className="pi pi-circle-on p-mr-2" style={{ fontSize: '.5rem' }}></i>
+                                                        {item.title}
+                                                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="p-ml-auto">#{item.number}</a>
+                                                    </span>
+                                                </li>
+                                            )
                                         })
                                         :
                                         <li>No Change</li>
                                 }
                             </ul>
-                            <div className="layout-changelog-actions">
-                                {this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" />}
-                                {this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" />}
+                            <div className="p-d-flex p-ai-center p-jc-between p-mb-3">
+                                {this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-text" icon="pi pi-chevron-left" />}
+                                {this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-text" icon="pi pi-chevron-right" iconPos="right" />}
                             </div>
                         </Dialog>
 

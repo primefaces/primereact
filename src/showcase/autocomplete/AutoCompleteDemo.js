@@ -6,8 +6,8 @@ import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class AutoCompleteDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             countries: [],
             selectedCountry1: null,
@@ -54,7 +54,7 @@ export class AutoCompleteDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="autocomplete" showInputStyle>
+                    <AppInlineHeader changelogText="autoComplete" showInputStyle>
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
                     </AppInlineHeader>
