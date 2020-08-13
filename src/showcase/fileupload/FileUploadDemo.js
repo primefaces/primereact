@@ -44,8 +44,8 @@ export class FileUploadDemo extends Component {
 
                     <div className="card">
                         <h5>Advanced</h5>
-                        <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload}
-                                    multiple={true} accept="image/*" maxFileSize={1000000} />
+                        <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} multiple={true} accept="image/*" maxFileSize={1000000}
+                            emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
 
                         <h5>Basic</h5>
                         <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
@@ -441,6 +441,12 @@ myUploader(event) {
                             <td>boolean</td>
                             <td>false</td>
                             <td>Whether to use the default upload or a manual implementation defined in uploadHandler callback.</td>
+                        </tr>
+                        <tr>
+                            <td>emptyTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>The template of empty container.</td>
                         </tr>
                     </tbody>
                 </table>
