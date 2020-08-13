@@ -66,7 +66,7 @@ export class CheckboxDemo extends Component {
                     <div className="card">
                         <h5>Basic</h5>
                         <div className="p-field-checkbox">
-                            <Checkbox id="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
+                            <Checkbox inputId="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
                             <label htmlFor="binary">{this.state.checked ? 'true' : 'false'}</label>
                         </div>
 

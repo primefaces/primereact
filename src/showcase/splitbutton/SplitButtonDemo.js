@@ -53,7 +53,7 @@ export class SplitButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="splitButton" showInputStyle>
+                    <AppInlineHeader changelogText="splitButton">
                         <h1>SplitButton</h1>
                         <p>SplitButton groups a set of commands in an overlay with a default command.</p>
                     </AppInlineHeader>

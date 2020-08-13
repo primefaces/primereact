@@ -10,7 +10,7 @@ export class ButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="button" showInputStyle>
+                    <AppInlineHeader changelogText="button">
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
                     </AppInlineHeader>
