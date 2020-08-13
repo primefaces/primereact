@@ -446,7 +446,7 @@ myUploader(event) {
                             <td>emptyTemplate</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>The template of empty container.</td>
+                            <td>The template of empty content in container.</td>
                         </tr>
                     </tbody>
                 </table>
